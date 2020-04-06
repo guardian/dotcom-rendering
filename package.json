@@ -14,8 +14,8 @@
         "cypress:open": "cypress open",
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
-        "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
-        "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes",
+        "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
+        "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
         "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config scripts/webpack/frontend"
     },
     "bundlesize": [
@@ -26,9 +26,9 @@
     ],
     "dependencies": {
         "@emotion/core": "^10.0.5",
-        "@guardian/consent-management-platform": "^2.0.10",
-        "@guardian/discussion-rendering": "^0.6.0",
         "@guardian/automat-client": "^0.2.14",
+        "@guardian/consent-management-platform": "^2.0.10",
+        "@guardian/discussion-rendering": "^0.8.0",
         "@guardian/src-foundations": "^0.16.1",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
@@ -136,7 +136,7 @@
         "doctoc": "^1.4.0",
         "eslint": "^5.16.0",
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
-        "fetch-mock": "^8.0.0-alpha.14",
+        "fetch-mock": "^9.3.1",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "husky": "^4.2.2",
         "jest": "^24.8.0",

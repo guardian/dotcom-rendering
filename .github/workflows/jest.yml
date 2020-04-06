@@ -1,0 +1,13 @@
+name: jest 🤔
+on: [push]
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '10.x'
+            - run: yarn
+            - run: CI=true yarn test
