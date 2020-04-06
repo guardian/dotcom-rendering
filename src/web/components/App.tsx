@@ -25,6 +25,7 @@ import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
+import { FocusStyleManager } from '@guardian/src-foundations/utils';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -131,6 +132,13 @@ export const App = ({ CAPI, NAV }: Props) => {
             setOpenComments(true);
         }
     }, [hasCommentsHash]);
+
+    // Ensure the focus state of any buttons/inputs in any of the Source
+    // components are only applied when navigating via keyboard.
+    // READ: https://www.theguardian.design/2a1e5182b/p/6691bb-accessibility/t/32e9fb
+    useEffect(() => {
+        // FocusStyleManager.onlyShowFocusOnTabs();
+    }, []);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
