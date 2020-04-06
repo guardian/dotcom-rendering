@@ -28,7 +28,7 @@
         "@emotion/core": "^10.0.5",
         "@guardian/automat-client": "^0.2.14",
         "@guardian/consent-management-platform": "^2.0.10",
-        "@guardian/discussion-rendering": "^0.6.0",
+        "@guardian/discussion-rendering": "^0.8.0",
         "@guardian/src-foundations": "^0.16.1",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
