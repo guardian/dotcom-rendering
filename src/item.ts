@@ -246,82 +246,110 @@ const parseIframe = (docParser: DocParser) =>
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
-        case ElementType.TEXT:
+
+        case ElementType.TEXT: {
             const html = element?.textTypeData?.html;
+
             if (!html) {
-                return new Err('No html field on textTypeData')
+                return new Err('No html field on textTypeData');
             }
+
             return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
+        }
 
         case ElementType.IMAGE:
             return parseImage(docParser)(element)
                 .fmap<Result<string, Image>>(image => new Ok(image))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
-        case ElementType.PULLQUOTE:
+        case ElementType.PULLQUOTE: {
             const { html: quote, attribution } = element.pullquoteTypeData ?? {};
+
             if (!quote) {
-                return new Err('No quote field on pullquoteTypeData')
+                return new Err('No quote field on pullquoteTypeData');
             }
+
             return new Ok({
                 kind: ElementKind.Pullquote,
                 quote,
                 attribution: fromNullable(attribution),
             });
+        }
 
-        case ElementType.INTERACTIVE:
+        case ElementType.INTERACTIVE: {
             const { iframeUrl } = element.interactiveTypeData ?? {};
-            if (!iframeUrl) {
-                return new Err('No iframeUrl field on interactiveTypeData')
-            }
-            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
-        case ElementType.RICH_LINK:
+            if (!iframeUrl) {
+                return new Err('No iframeUrl field on interactiveTypeData');
+            }
+
+            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
+        }
+
+        case ElementType.RICH_LINK: {
             const { url, linkText } = element.richLinkTypeData ?? {};
+
             if (!url) {
                 return new Err('No "url" field on richLinkTypeData');
             } else if (!linkText) {
                 return new Err('No "linkText" field on richLinkTypeData');
             }
-            return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
-        case ElementType.TWEET:
+            return new Ok({ kind: ElementKind.RichLink, url, linkText });
+        }
+
+        case ElementType.TWEET: {
             const { id, html: h } = element.tweetTypeData ?? {};
+
             if (!id) {
                 return new Err('No "id" field on tweetTypeData')
             } else if (!h) {
                 return new Err('No "html" field on tweetTypeData')
             }
+
             return tweetContent(id, docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
+        }
 
-        case ElementType.EMBED:
+        case ElementType.EMBED: {
             const { html: embedHtml } = element.embedTypeData ?? {};
+
             if (!embedHtml) {
                 return new Err('No html field on embedTypeData')
             }
-            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
 
-        case ElementType.INSTAGRAM:
+            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
+        }
+
+        case ElementType.INSTAGRAM: {
             const { html: instagramHtml } = element.instagramTypeData ?? {};
+
             if (!instagramHtml) {
                 return new Err('No html field on instagramTypeData')
             }
-            return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
 
-        case ElementType.AUDIO:
+            return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
+        }
+
+        case ElementType.AUDIO: {
             const { html: audioHtml } = element.audioTypeData ?? {};
+
             if (!audioHtml) {
                 return new Err('No html field on audioTypeData')
             }
-            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
 
-        case ElementType.VIDEO:
+            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
+        }
+
+        case ElementType.VIDEO: {
             const { html: videoHtml } = element.videoTypeData ?? {};
+
             if (!videoHtml) {
                 return new Err('No html field on videoTypeData')
             }
+
             return parseIframe(docParser)(videoHtml, ElementKind.Video);
+        }
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
