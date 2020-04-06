@@ -24,7 +24,7 @@ type Props = {
     expanded: boolean;
     commentPage?: number;
     commentPageSize?: 25 | 50 | 100;
-    commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
+    commentOrderBy?: 'newest' | 'oldest' | 'recommendations';
     commentToScrollTo?: number;
 };
 
@@ -38,6 +38,7 @@ const containerStyles = css`
 
     padding-top: ${space[3]}px;
     padding-bottom: ${space[6]}px;
+    padding-right: ${space[5]}px;
 `;
 
 const bottomPadding = css`
@@ -87,10 +88,9 @@ export const CommentsLayout = ({
                 pillar={pillar}
                 initialPage={commentPage}
                 pageSizeOverride={commentPageSize}
-                // TODO: Disabled pending discussion publishing a version supporting this prop
-                // isClosedForComments={
-                //     isClosedForComments || !enableDiscussionSwitch
-                // }
+                isClosedForComments={
+                    isClosedForComments || !enableDiscussionSwitch
+                }
                 orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{

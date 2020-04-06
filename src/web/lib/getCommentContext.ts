@@ -27,7 +27,7 @@ type CommentContextType = {
     page: number;
 };
 
-type OrderByType = 'newest' | 'oldest' | 'mostrecommended';
+type OrderByType = 'newest' | 'oldest' | 'recommendations';
 type ThreadsType = 'collapsed' | 'expanded' | 'unthreaded';
 type PageSizeType = 25 | 50 | 100;
 
