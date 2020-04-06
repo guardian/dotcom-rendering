@@ -24,20 +24,20 @@ import { DecideLayout } from './DecideLayout';
 mockRESTCalls();
 
 export default {
-    title: 'Layouts/Showcase',
+    title: 'Layouts/Immersive',
     parameters: {
         chromatic: { viewports: [1300], delay: 800 },
     },
 };
 
-const convertToShowcase = (CAPI: CAPIType) => {
+const convertToImmersive = (CAPI: CAPIType) => {
     return {
         ...CAPI,
         pageType: {
             ...CAPI.pageType,
             hasShowcaseMainElement: true,
         },
-        isImmersive: false,
+        isImmersive: true,
     };
 };
 
@@ -53,73 +53,73 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 };
 
 export const ArticleStory = () => {
-    const ServerCAPI = convertToShowcase(Article);
+    const ServerCAPI = convertToImmersive(Article);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
 export const ReviewStory = () => {
-    const ServerCAPI = convertToShowcase(Review);
+    const ServerCAPI = convertToImmersive(Review);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
 export const CommentStory = () => {
-    const ServerCAPI = convertToShowcase(Comment);
+    const ServerCAPI = convertToImmersive(Comment);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
 export const AdvertisementFeatureStory = () => {
-    const ServerCAPI = convertToShowcase(AdvertisementFeature);
+    const ServerCAPI = convertToImmersive(AdvertisementFeature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
 
 export const AnalysisStory = () => {
-    const ServerCAPI = convertToShowcase(Analysis);
+    const ServerCAPI = convertToImmersive(Analysis);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
 export const FeatureStory = () => {
-    const ServerCAPI = convertToShowcase(Feature);
+    const ServerCAPI = convertToImmersive(Feature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const GuardianViewStory = () => {
-    const ServerCAPI = convertToShowcase(GuardianView);
+    const ServerCAPI = convertToImmersive(GuardianView);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
 export const ImmersiveStory = () => {
-    const ServerCAPI = convertToShowcase(Immersive);
+    const ServerCAPI = convertToImmersive(Immersive);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
-    const ServerCAPI = convertToShowcase(Interview);
+    const ServerCAPI = convertToImmersive(Interview);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const QuizStory = () => {
-    const ServerCAPI = convertToShowcase(Quiz);
+    const ServerCAPI = convertToImmersive(Quiz);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
 export const RecipeStory = () => {
-    const ServerCAPI = convertToShowcase(Recipe);
+    const ServerCAPI = convertToImmersive(Recipe);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
 export const MatchReportStory = () => {
-    const ServerCAPI = convertToShowcase(MatchReport);
+    const ServerCAPI = convertToImmersive(MatchReport);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
