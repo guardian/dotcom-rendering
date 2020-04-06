@@ -63,7 +63,7 @@ const BodyImageThumbnail: FC<Props> = ({ image, figcaption, pillar }: Props) =>
                     </svg>
                     {caption}
                 </figcaption>
-            ).withDefault(null)
+            ).withDefault(<></>)
         }
     </figure>
 
