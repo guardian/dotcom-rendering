@@ -11,7 +11,6 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
-import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -195,13 +194,6 @@ const MemoisedInner = ({
             }
         }
     }, [data]);
-
-    // Call helper function to only show focus states when the user is
-    // navigation via keyboard.
-    // This should run once per component mounting
-    useEffect(() => {
-        FocusStyleManager.onlyShowFocusOnTabs();
-    }, []);
 
     if (data && data.slot) {
         return (
