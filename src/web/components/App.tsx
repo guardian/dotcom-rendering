@@ -52,7 +52,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [commentPage, setCommentPage] = useState<number>();
     const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
     const [commentOrderBy, setCommentOrderBy] = useState<
-        'newest' | 'oldest' | 'mostrecommended'
+        'newest' | 'oldest' | 'recommendations'
     >();
     const [openComments, setOpenComments] = useState<boolean>(false);
 
