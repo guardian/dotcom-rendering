@@ -57,7 +57,7 @@ const BodyImage: FC<Props> = ({ figcaption, image, pillar }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} />
         {
-            figcaption.fmap<ReactNode | null>(caption =>
+            figcaption.fmap<ReactNode>(caption =>
                 <figcaption css={captionStyles}>
                     <svg
                         css={triangleStyles(getPillarStyles(pillar))}
