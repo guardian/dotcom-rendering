@@ -85,6 +85,10 @@ const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     text-decoration: none;
     border-bottom: 0.0625rem solid ${neutral[86]};
+
+    ${darkModeCss`
+        color: ${neutral[86]};
+    `}
 `;
 
 const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
@@ -120,6 +124,12 @@ const listItemStyles: SerializedStyles = css`
         display: inline;
         padding: 0;
     }
+
+    ${darkModeCss`
+        &::before {
+            background-color: ${neutral[60]};
+        }
+    `}
 `
 
 const HeadingTwoStyles = css`
@@ -206,6 +216,10 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
+
+    ${darkModeCss`
+        background: ${neutral[20]};
+    `}
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
@@ -307,12 +321,9 @@ const richLinkStyles = css`
     }
 
     ${darkModeCss`
-        border-top: 1px solid ${neutral[60]};
-        border-bottom: 1px solid ${neutral[60]};
+        background: ${neutral[0]};
         a {
-            &::before {
-                color: ${neutral[60]};
-            }
+            border-bottom: 0.0625rem solid ${neutral[60]};
         }
     `}
 `;

@@ -7,7 +7,7 @@ import {
 } from 'styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { Pillar } from 'pillar';
 
 const richLinkWidth = '8.75rem';
 
@@ -43,13 +43,9 @@ const ArticleBodyStyles = css`
     }
 `;
 
-const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     background: ${background.inverse};
     color: ${neutral[86]};
-
-    a {
-        color: ${inverted};
-    }
 
     figcaption {
         color: ${neutral[60]};
@@ -83,7 +79,7 @@ const ArticleBody = ({
     className,
     children,
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles(getPillarStyles(pillar)), ...className]}>
+    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles, ...className]}>
         {children}
     </div>
 
