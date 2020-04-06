@@ -29,5 +29,7 @@ const YARN_VERSION = '>=1.13.0';
                 process.exit(1);
             }
         }
-    } catch (e) {}
+    } catch (e) {
+        console.log(e);
+    }
 })();
