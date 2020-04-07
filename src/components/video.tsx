@@ -27,7 +27,7 @@ const videoStyles = css`
 
 const Video: FC<VideoProps> = ({ src, width, height }: VideoProps): ReactElement =>
     <div css={videoStyles}>
-        <iframe src={src} height={height} width={width} title="Video element"/>
+        <iframe src={src} height={height} width={width} allowFullScreen title="Video element"/>
     </div>
 
 export default Video;

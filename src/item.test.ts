@@ -1,5 +1,5 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind, Image, Review, Audio } from 'item';
+import { fromCapi, Design, Standard, ElementKind, Image, Review, Audio, Video } from 'item';
 import { JSDOM } from "jsdom";
 import { None } from "types/option";
 
@@ -521,6 +521,63 @@ describe('audio elements', () => {
             }
         }
         const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+});
+
+
+describe('video elements', () => {
+    test('filters out video elements with no src attributes on iframe', () => {
+        const videoElement = {
+            type: ElementType.VIDEO,
+            assets: [],
+            videoTypeData: {
+                html: "<iframe></iframe>",
+            }
+        }
+        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+
+    test('filters video elements without videoTypeData html', () => {
+        const videoElement = {
+            type: ElementType.VIDEO,
+            assets: [],
+            videoTypeData: {}
+        }
+        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+
+    test('strips and sets attributes on iframe', () => {
+        const videoElement = {
+            type: ElementType.VIDEO,
+            assets: [],
+            videoTypeData: {
+                html: "<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>"
+            }
+        }
+        const item = f(articleContentWithElement(videoElement)) as Standard;
+        item.body[0].fmap<Video>(element => element as Video)
+            .fmap(({ src, width, height }) => {
+                expect(src).toBe('https://www.youtube-nocookie.com/embed/');
+                expect(width).toBe('460');
+                expect(height).toBe('259');
+            });
+    });
+
+    test('does not render if no iframe inside the html', () => {
+        const videoElement = {
+            type: ElementType.VIDEO,
+            assets: [],
+            videoTypeData: {
+                html: "<p>YouTube video<p>",
+            }
+        }
+        const item = f(articleContentWithElement(videoElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });

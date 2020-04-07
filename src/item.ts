@@ -106,6 +106,8 @@ type Video = {
     width: string;
 }
 
+type MediaKind = ElementKind.Audio | ElementKind.Video;
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -224,20 +226,21 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
-const parseIframe = (docParser: DocParser) => (html: string, kind: ElementKind.Audio | ElementKind.Video): Result<string, Audio | Video> => {
-    const iframe = docParser(html).querySelector('iframe');
-    const src = iframe?.getAttribute('src');
+const parseIframe = (docParser: DocParser) =>
+    (html: string, kind: MediaKind): Result<string, Audio | Video> => {
+        const iframe = docParser(html).querySelector('iframe');
+        const src = iframe?.getAttribute('src');
 
-    if (!iframe || !src) {
-        return new Err('No iframe within html');
-    }
+        if (!iframe || !src) {
+            return new Err('No iframe within html');
+        }
 
-    return new Ok({
-        kind,
-        src,
-        width: iframe.getAttribute('width') ?? "380",
-        height: iframe.getAttribute('height') ?? "300",
-    });
+        return new Ok({
+            kind,
+            src,
+            width: iframe.getAttribute('width') ?? "380",
+            height: iframe.getAttribute('height') ?? "300",
+        });
 }
 
 const parseElement =
@@ -564,6 +567,7 @@ export {
     ElementKind,
     BodyElement,
     Audio,
+    Video,
     Role,
     Image,
     Format,
