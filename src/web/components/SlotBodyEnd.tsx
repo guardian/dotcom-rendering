@@ -55,7 +55,6 @@ const sendOphanReminderEvent = (componentId: string): void => {
         action: 'CLICK',
     };
 
-    console.log('sendOphanReminderEvent: ', componentEvent);
     window.guardian.ophan.record({ componentEvent });
 };
 
@@ -161,7 +160,7 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
-        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
+        getBodyEnd(contributionsPayload)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
