@@ -17,6 +17,12 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## High level diagram
+
+This high level diagram shows the difference between the data flow when DCR is used in production, driven by the frontend backend, and when DCR is used as a local server. The arrows are labelled in the order they happen. The bold arrow is the JSON data object that DCR uses to generate the HTML document.
+
+![](detailed-setup-guide-pics/high-level-diagram.png)
+
 ## Developing
 
 ### Setup
