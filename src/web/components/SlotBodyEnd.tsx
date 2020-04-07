@@ -160,7 +160,7 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
