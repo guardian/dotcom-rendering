@@ -9,27 +9,25 @@ const YARN_VERSION = '>=1.13.0';
 
 (async () => {
     try {
+        // This will fail if yarn isn't installed, and force into the catch, where we install yarn
+        // for CI
         const { stdout: version } = await exec('yarn', ['-v']);
 
-        if (!version) {
-            require('./log').log(`Installing yarn@${YARN_VERSION}`);
-            await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`]);
-        } else {
-            const [semver] = await ensure('semver');
+        const [semver] = await ensure('semver');
 
-            if (!semver.satisfies(version, YARN_VERSION)) {
-                const { warn, prompt, log } = require('./log');
-                warn(
-                    `dotcom-rendering requires Yarn ${YARN_VERSION}`,
-                    `You are using v${version}`,
-                );
-                prompt('Please upgrade yarn');
-                log('https://classic.yarnpkg.com/en/docs/install');
+        if (!semver.satisfies(version, YARN_VERSION)) {
+            const { warn, prompt, log } = require('./log');
+            warn(
+                `dotcom-rendering requires Yarn ${YARN_VERSION}`,
+                `You are using v${version}`,
+            );
+            prompt('Please upgrade yarn');
+            log('https://classic.yarnpkg.com/en/docs/install');
 
-                process.exit(1);
-            }
+            process.exit(1);
         }
-    } catch (e) {
-        console.log(e);
+    } catch {
+        require('./log').log(`Installing yarn@${YARN_VERSION}`);
+        await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`]);
     }
 })();
