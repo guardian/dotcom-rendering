@@ -15,7 +15,7 @@ import {
     AssetType,
     IAsset as Asset,
 } from 'mapiThriftModels';
-import {logger} from "logger";
+import { logger } from "logger";
 
 // ----- Item Type ----- //
 
@@ -52,7 +52,8 @@ const enum ElementKind {
     Tweet,
     Instagram,
     Audio,
-    Embed
+    Embed,
+    Video
 }
 
 enum Role {
@@ -98,6 +99,15 @@ type Audio = {
     width: string;
 }
 
+type Video = {
+    kind: ElementKind.Video;
+    src: string;
+    height: string;
+    width: string;
+}
+
+type MediaKind = ElementKind.Audio | ElementKind.Video;
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -121,7 +131,7 @@ type BodyElement = {
 } | Audio | {
     kind: ElementKind.Embed;
     html: string;
-};
+} | Video;
 
 type Body =
     Result<string, BodyElement>[];
@@ -216,20 +226,21 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
-const parseIframe = (docParser: DocParser) => (html: string): Result<string, Audio> => {
-    const iframe = docParser(html).querySelector('iframe');
-    const src = iframe?.getAttribute('src');
+const parseIframe = (docParser: DocParser) =>
+    (html: string, kind: MediaKind): Result<string, Audio | Video> => {
+        const iframe = docParser(html).querySelector('iframe');
+        const src = iframe?.getAttribute('src');
 
-    if (!iframe || !src) {
-        return new Err('No iframe within audioTypeData.html');
-    }
+        if (!iframe || !src) {
+            return new Err('No iframe within html');
+        }
 
-    return new Ok({
-        kind: ElementKind.Audio,
-        src,
-        width: iframe.getAttribute('width') ?? "300",
-        height: iframe.getAttribute('height') ?? "380",
-    });
+        return new Ok({
+            kind,
+            src,
+            width: iframe.getAttribute('width') ?? "380",
+            height: iframe.getAttribute('height') ?? "300",
+        });
 }
 
 const parseElement =
@@ -303,7 +314,14 @@ const parseElement =
             if (!audioHtml) {
                 return new Err('No html field on audioTypeData')
             }
-            return parseIframe(docParser)(audioHtml);
+            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
+
+        case ElementType.VIDEO:
+            const { html: videoHtml } = element.videoTypeData ?? {};
+            if (!videoHtml) {
+                return new Err('No html field on videoTypeData')
+            }
+            return parseIframe(docParser)(videoHtml, ElementKind.Video);
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -549,6 +567,7 @@ export {
     ElementKind,
     BodyElement,
     Audio,
+    Video,
     Role,
     Image,
     Format,

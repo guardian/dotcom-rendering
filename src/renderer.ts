@@ -13,6 +13,7 @@ import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
 import Audio from 'components/audio';
+import Video from 'components/video';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
@@ -444,6 +445,9 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
 
         case ElementKind.Audio:
             return h(Audio, { src: element.src, width: element.width, height: element.height });
+
+        case ElementKind.Video:
+            return h(Video, { src: element.src, width: element.width, height: element.height })
 
         case ElementKind.Embed:
         case ElementKind.Instagram:
