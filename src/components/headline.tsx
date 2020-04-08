@@ -53,6 +53,16 @@ const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
+const mediaStyles = css `
+    ${styles}
+    color: ${neutral[100]};
+    ${headline.medium({ fontWeight: 'medium' })}
+    
+    ${darkMode`
+        color: ${neutral[86]};
+    `}
+`
+
 const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => css`
     ${styles}
     ${headline.medium({ fontWeight: 'bold' })}
@@ -79,6 +89,8 @@ const getStyles = (item: Item): SerializedStyles => {
             return featureStyles(pillarStyles);
         case Design.Comment:
             return commentStyles;
+        case Design.Media:
+            return mediaStyles;
         default:
             return styles;
     }
