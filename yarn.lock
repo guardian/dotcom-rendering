@@ -2084,10 +2084,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.14.tgz#eed3a79609d57aeac81be80473f8fc34e76bc88d"
   integrity sha512-A4K+rH0cag/yvHk8bR5X/anPIZbP8PqUFkV8o1fXS1s4cpe23KWx60XKrc+cZAPdCws6uIjsqWey19bzB/LUwg==
 
-"@guardian/consent-management-platform@^3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.0.0-beta.0.tgz#98da6c44210daa00968a748ee51e68d41d63ad52"
-  integrity sha512-cVCh5N/5Gu+lc2Oy2NnTDNJi3JGlNADyamqOfZnsPpdjys7D8l+5PUOhcKrgc40M346WQGr7T+0xNg9+aeJG8g==
+"@guardian/consent-management-platform@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.0.0.tgz#6e91aca0330ce8cd8653124287f51a99d0ea727a"
+  integrity sha512-Vu0Q2n/gJew35AxxsEse50f29cAGfcywc7+6FPG7HLMeyS1BymsFxUQAEcem3rM4j6Uq6F/pdtmfsxeXAQJfsA==
   dependencies:
     consent-string "^1.5.1"
     js-cookie "^2.2.1"
