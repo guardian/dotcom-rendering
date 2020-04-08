@@ -406,7 +406,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Text:
             return text(element.doc, pillar);
 
-        case ElementKind.Image:
+        case ElementKind.Image: {
             const { file, alt, caption, captionString, credit, width, height, role } = element;
             const ImageComponent = role
                 .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
@@ -428,14 +428,19 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                 text: text(caption, pillar)
             })
             );
+        }
 
-        case ElementKind.Pullquote:
+        case ElementKind.Pullquote: {
             const { quote, attribution } = element;
-            return h(Pullquote, { quote, attribution, pillar, key });
 
-        case ElementKind.RichLink:
+            return h(Pullquote, { quote, attribution, pillar, key });
+        }
+
+        case ElementKind.RichLink: {
             const { url, linkText } = element;
+
             return h(RichLink, { url, linkText, pillar, key });
+        }
 
         case ElementKind.Interactive:
             return h(Interactive, { url: element.url, key });
@@ -450,13 +455,15 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
             return h(Video, { src: element.src, width: element.width, height: element.height })
 
         case ElementKind.Embed:
-        case ElementKind.Instagram:
+        case ElementKind.Instagram: {
             const props = {
                 dangerouslySetInnerHTML: {
                   __html: element.html,
                 },
             };
+
             return h('div', props);
+        }
     }
 };
 
