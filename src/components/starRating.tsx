@@ -5,8 +5,9 @@ import { css } from '@emotion/core';
 import { brandAltBackground, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
-import { Item, Design } from 'item';
+import { Item } from 'item';
 import { icons } from 'styles';
+import { Design } from 'format';
 
 
 // ----- Subcomponents ----- //

@@ -4,7 +4,7 @@ import React, { FC, ReactElement, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 
-import { Design, Format } from 'item';
+import { Design, Format } from 'format';
 import { Option } from 'types/option';
 import { neutral } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillar';

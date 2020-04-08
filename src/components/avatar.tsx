@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 
 import { srcsetWithWidths, src } from 'image';
 import { Contributor, isSingleContributor } from 'contributor';
-import { Format } from 'item';
+import { Format } from 'format';
 import { getPillarStyles } from 'pillar';
 import { ImageMappings } from 'components/shared/page';
 

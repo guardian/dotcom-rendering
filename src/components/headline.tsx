@@ -6,10 +6,11 @@ import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
-import { Item, Design, Display } from 'item';
+import { Item } from 'item';
 import { darkModeCss as darkMode } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillar';
 import StarRating from './starRating';
+import { Display, Design } from 'format';
 
 
 // ----- Component ----- //

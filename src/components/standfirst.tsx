@@ -7,10 +7,11 @@ import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
-import { Item, Design, Display } from 'item';
+import { Item } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
 import { PillarStyles, getPillarStyles } from 'pillar';
+import { Display, Design } from 'format';
 
 
 // ----- Component ----- //
