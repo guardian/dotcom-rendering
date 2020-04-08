@@ -9,7 +9,7 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 
-import { CommentsLayout } from './CommentsLayout';
+import CommentsLayout from './CommentsLayout';
 
 /* tslint:disable */
 export default {

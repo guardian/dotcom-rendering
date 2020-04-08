@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import loadable from '@loadable/component';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -13,7 +14,6 @@ import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -27,6 +27,10 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
+
+const CommentsLayout = loadable(() =>
+    import('@frontend/web/components/CommentsLayout'),
+);
 
 const commentIdFromUrl = () => {
     const { hash } = window.location;

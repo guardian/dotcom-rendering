@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const { promisify } = require('util');
-const glob = promisify(require('glob'));
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('./plugins/report-bundle-size');

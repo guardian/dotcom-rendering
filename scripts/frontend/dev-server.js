@@ -41,6 +41,7 @@ const go = async () => {
             logLevel: 'silent',
             publicPath: '/assets/javascript/',
             ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
+            writeToDisk: true,
         }),
     );
 

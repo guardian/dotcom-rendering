@@ -45,7 +45,7 @@ const bottomPadding = css`
     padding-bottom: ${space[2]}px;
 `;
 
-export const CommentsLayout = ({
+const CommentsLayout = ({
     user,
     pillar,
     baseUrl,
@@ -103,3 +103,5 @@ export const CommentsLayout = ({
         </div>
     </Flex>
 );
+
+export default CommentsLayout;
