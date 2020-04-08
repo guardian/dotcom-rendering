@@ -1,4 +1,4 @@
-import { ImageElement, renderStandfirstText, renderText } from './renderer';
+import {ImageElement, renderCaption, renderStandfirstText, renderText} from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { ReactNode, createElement as h } from 'react';
@@ -126,6 +126,16 @@ describe('renderer returns expected content', () => {
 
         expect(text.flat().length).toBe(7);
     });
+
+    test ('Renders caption node types', () => {
+        const text = renderCaption(JSDOM.fragment('this caption contains <em>html</em>, <br>html, <strong>html</strong>'),  Pillar.news);
+        expect(shallow(text.flat()[0]).html()).toContain('<p');
+    });
+
+    test ('Removes unsupported caption node types', () => {
+        const text = renderCaption(JSDOM.fragment('this caption contains <blockquote>html</blockquote>'),  Pillar.news);
+        text.flatMap(element => expect(element).not.toContain("blockquote"))
+    });
 });
 
 describe('Transforms text nodes', () => {
@@ -209,3 +219,4 @@ describe('Paragraph tags rendered correctly', () => {
         expect(html).not.toBe('<p>Parapraph tag</p>')
     });
 });
+
