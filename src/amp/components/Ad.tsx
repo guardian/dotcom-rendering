@@ -6,7 +6,40 @@ import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
-const adStyle = css`
+const picnicAdContainerStyle = css`
+    background: ${palette.neutral[93]};
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…AsMy45LTAuOCw3LjMtMi40LDEwLjNDODEsNjIuNSw4Niw1MS42LDg2LDM5LjYiLz48L3N2Zz4=);
+    background-size: 105px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top: 1px solid ${palette.neutral[86]};
+    min-height: 272px;
+    min-width: 300px;
+    clear: both;
+    text-align: center;
+    margin: 0 auto 12px;
+
+    :before {
+        content: 'Advertisement';
+        background: ${palette.neutral[93]};
+        display: block;
+        ${textSans.xsmall()};
+        /* Adverts specifcally don't use the GU font branding. */
+        /* stylelint-disable-next-line property-blacklist */
+        font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+            sans-serif;
+        padding: 3px 10px;
+        color: ${text.supporting};
+        text-align: right;
+    }
+`;
+
+const picnicAdSlotStyle = css`
+    display: none;
+    margin: auto;
+`;
+
+const adContainerStyle = css`
     background: ${palette.neutral[93]};
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…AsMy45LTAuOCw3LjMtMi40LDEwLjNDODEsNjIuNSw4Niw1MS42LDg2LDM5LjYiLz48L3N2Zz4=);
     background-size: 105px;
@@ -33,7 +66,7 @@ const adStyle = css`
     }
 `;
 
-const adClass = css`
+const adSlotStyle = css`
     display: none;
 `;
 
@@ -139,7 +172,36 @@ const ampAdElem = (
 ) => {
     return (
         <amp-ad
-            class={cx(adClass, adRegionClasses[adRegion])}
+            class={cx(adSlotStyle, adRegionClasses[adRegion])}
+            data-block-on-consent=""
+            width={300}
+            height={250}
+            data-npa-on-unknown-consent={true}
+            data-loading-strategy="prefer-viewability-over-views"
+            layout="responsive"
+            type="doubleclick"
+            json={stringify(adJson(commercialProperties[edition].adTargeting))}
+            data-slot={ampData(section, contentType)}
+            rtc-config={realTimeConfig(
+                adRegion,
+                config.usePrebid,
+                config.usePermutive,
+            )}
+        />
+    );
+};
+
+const picnicAmpAdElem = (
+    adRegion: AdRegion,
+    edition: Edition,
+    section: string,
+    contentType: string,
+    config: CommercialConfig,
+    commercialProperties: CommercialProperties,
+) => {
+    return (
+        <amp-ad
+            class={cx(picnicAdSlotStyle, adRegionClasses[adRegion])}
             data-block-on-consent=""
             width={320}
             height={480}
@@ -175,30 +237,63 @@ export const Ad: React.SFC<{
     commercialProperties,
     className,
 }) => (
-    <div className={cx(adStyle, className)}>
-        {ampAdElem(
-            'US',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
-        {ampAdElem(
-            'AU',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
-        {ampAdElem(
-            'ROW',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
-    </div>
+    <>
+        <div className={`control-ad-style ${cx(adContainerStyle, className)}`}>
+            {ampAdElem(
+                'US',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+            {ampAdElem(
+                'AU',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+            {ampAdElem(
+                'ROW',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+        </div>
+        <div
+            className={`picnic-ad-style ${cx(
+                picnicAdContainerStyle,
+                className,
+            )}`}
+        >
+            {picnicAmpAdElem(
+                'US',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+            {picnicAmpAdElem(
+                'AU',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+            {picnicAmpAdElem(
+                'ROW',
+                edition,
+                section || '',
+                contentType,
+                config,
+                commercialProperties,
+            )}
+        </div>
+    </>
 );
