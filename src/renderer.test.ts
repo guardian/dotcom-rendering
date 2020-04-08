@@ -128,7 +128,7 @@ describe('renderer returns expected content', () => {
     });
 
     test ('Renders caption node types', () => {
-        const text = renderCaption(JSDOM.fragment('this caption contains <em>html</em>, <br>html, <strong>html</strong>'),  Pillar.news);
+        const text = renderCaption(JSDOM.fragment('this caption contains'),  Pillar.news);
         expect(shallow(text.flat()[0]).html()).toContain('<p');
     });
 
