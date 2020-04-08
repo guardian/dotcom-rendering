@@ -44,7 +44,7 @@ interface LeftColumnProps {
     children: React.ReactNode;
     columnContent?: JSX.Element | null;
     className?: SerializedStyles | null;
-};
+}
 
 
 // ----- Component ----- //

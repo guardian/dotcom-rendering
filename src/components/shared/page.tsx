@@ -165,7 +165,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
 
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
-    const item = fromCapi(JSDOM.fragment)(capi);
+    const item = fromCapi(JSDOM.fragment.bind(null))(capi);
     const imageMappings = getImageMappings(imageSalt, capi);
 
     const articleScript = getAssetLocation('article.js');

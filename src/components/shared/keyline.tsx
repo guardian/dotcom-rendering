@@ -35,7 +35,7 @@ const KeylineNewsStyles = css`
 const KeylineOpinionStyles = css`
     background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
     height: 24px;
-    margin-top: 84px;
+    margin-top: 90px;
 `;
 
 const KeylineDarkStyles = darkModeCss`

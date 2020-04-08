@@ -10,7 +10,7 @@ import { ImageMappings } from 'components/shared/page';
 
 // ----- Constants ----- //
 
-const imageWidth = 68;
+const imageWidth = 100;
 
 
 // ----- Styles ----- //
@@ -23,7 +23,7 @@ const ImageStyles = css`
     position: absolute;
     height: 160px;
     right: 0;
-    top: -54px;
+    top: -48px;
 `;
 
 

@@ -1,23 +1,31 @@
 module.exports =  {
-    parser:  '@typescript-eslint/parser',  // Specifies the ESLint parser
-    extends:  [
-        'plugin:react/recommended',  // Uses the recommended rules from @eslint-plugin-react
-        'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from @typescript-eslint/eslint-plugin
-        'plugin:jsx-a11y/recommended'
+    parser: '@typescript-eslint/parser',
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:react/recommended',
+        'plugin:jsx-a11y/recommended',
     ],
-    parserOptions:  {
-        ecmaVersion:  2018,  // Allows for the parsing of modern ECMAScript features
-        sourceType:  'module',  // Allows for the use of imports
-        ecmaFeatures:  {
-            jsx:  true,  // Allows for the parsing of JSX
+    parserOptions: {
+        // Allows for the parsing of modern ECMAScript features
+        ecmaVersion: 2018,
+        // Allows for the use of imports
+        sourceType: 'module',
+        ecmaFeatures: {
+            // Allows for the parsing of JSX
+            jsx:  true,
         },
+        project: 'tsconfig.json',
     },
-    rules:  {
-        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-        // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-unused-vars": "off",
+    rules: {
+        // Triple-equals equality in JS
+        'eqeqeq': 'error',
+        // Avoid let when variable is never re-assigned
+        'prefer-const': 'error',
         'max-len': [
-            "error",
+            'error',
             {
                 code: 100,
                 ignoreStrings: true,
@@ -25,14 +33,13 @@ module.exports =  {
                 ignoreUrls: true,
             },
         ],
-        '@typescript-eslint/explicit-function-return-type': 2,
-        'eqeqeq': 2,
-        'prefer-const': 2,
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'error',
     },
-    settings:  {
-        react:  {
-            version:  'detect',  // Tells eslint-plugin-react to automatically detect the version of React to use
+    settings: {
+        react: {
+            // Tells eslint-plugin-react to automatically detect the version of React to use
+            version: 'detect',
         },
     },
 };
-  
