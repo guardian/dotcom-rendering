@@ -4,7 +4,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
+- [High level diagram](#high-level-diagram)
 - [Developing](#developing)
   - [Setup](#setup)
   - [Start](#start)
