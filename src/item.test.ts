@@ -1,7 +1,8 @@
-import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind, Image, Review, Audio, Video } from 'item';
-import { JSDOM } from "jsdom";
-import { None } from "types/option";
+import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from 'mapiThriftModels';
+import { fromCapi, Standard, ElementKind, Image, Review, Audio, Video } from 'item';
+import { Design } from 'format';
+import { JSDOM } from 'jsdom';
+import { None } from 'types/option';
 
 const articleContent = {
     id: "",
