@@ -15,33 +15,11 @@ import {
     AssetType,
     IAsset as Asset,
 } from 'mapiThriftModels';
-import { logger } from "logger";
+import { logger } from 'logger';
+import { Format, Design, Display } from 'format';
+
 
 // ----- Item Type ----- //
-
-const enum Design {
-    Article,
-    Media,
-    Review,
-    Analysis,
-    Comment,
-    Feature,
-    Live,
-    SpecialReport, // Not used?
-    Recipe,
-    MatchReport,
-    Interview,
-    GuardianView,
-    GuardianLabs, // Not used?
-    Quiz,
-    AdvertisementFeature,
-}
-
-const enum Display {
-    Standard,
-    Immersive,
-    Showcase,
-}
 
 const enum ElementKind {
     Text,
@@ -58,12 +36,6 @@ const enum ElementKind {
 
 enum Role {
     Thumbnail,
-}
-
-interface Format {
-    pillar: Pillar;
-    design: Design;
-    display: Display;
 }
 
 interface Fields extends Format {
@@ -584,8 +556,6 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
 // ----- Exports ----- //
 
 export {
-    Design,
-    Display,
     Item,
     Comment,
     Liveblog,
@@ -598,7 +568,6 @@ export {
     Video,
     Role,
     Image,
-    Format,
     fromCapi,
     fromCapiLiveBlog
 };

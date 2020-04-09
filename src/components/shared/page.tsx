@@ -8,7 +8,6 @@ import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Immersive from 'components/immersive/article';
 import Media from 'components/media/article';
-
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
@@ -17,6 +16,7 @@ import { renderAll, renderMedia } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
+import { fromCapi } from 'item';
 import { sign } from 'components/image';
 import {
     ElementType,
@@ -25,7 +25,7 @@ import {
     IBlock as Block,
     IBlockElement as BlockElement
 } from 'mapiThriftModels';
-import { Design, Display, fromCapi } from 'item';
+import { Design, Display } from 'format';
 
 
 // ----- Components ----- //

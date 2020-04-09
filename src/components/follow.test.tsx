@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
 import { Pillar } from 'pillar';
-import { Design, Display } from 'item';
+import { Design, Display } from 'format';
 
 
 // ----- Setup ----- //
