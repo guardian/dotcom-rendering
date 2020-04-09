@@ -94,18 +94,24 @@ export const htmlTemplate = ({
             )}" as="font" crossorigin>`,
     );
 
-    const generateMetaTags = (dataObject: { [key: string]: string }) => {
+    const generateMetaTags = (
+        dataObject: { [key: string]: string },
+        attributeName: 'name' | 'property',
+    ) => {
         if (dataObject) {
             return Object.entries(dataObject)
-                .map(([id, value]) => `<meta name="${id}" content="${value}"/>`)
+                .map(
+                    ([id, value]) =>
+                        `<meta ${attributeName}="${id}" content="${value}"/>`,
+                )
                 .join('\n');
         }
         return '';
     };
 
-    const openGraphMetaTags = generateMetaTags(openGraphData);
+    const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
 
-    const twitterMetaTags = generateMetaTags(twitterData);
+    const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
     return `<!doctype html>
         <html lang="en">

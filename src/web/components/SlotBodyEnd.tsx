@@ -121,7 +121,8 @@ const MemoisedInner = ({
     }>();
 
     const [hasBeenSeen, setNode] = useHasBeenSeen({
-        threshold: 0.5,
+        rootMargin: '-18px',
+        threshold: 0,
     }) as HasBeenSeen;
 
     const slotRoot = useRef<HTMLDivElement>(null);

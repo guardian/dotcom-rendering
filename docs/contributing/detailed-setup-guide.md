@@ -4,7 +4,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
+- [High level diagram](#high-level-diagram)
 - [Developing](#developing)
   - [Setup](#setup)
   - [Start](#start)
@@ -17,9 +17,11 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Chat
+## High level diagram
 
-Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
+This high level diagram shows the difference between the data flow when DCR is used in production, driven by the frontend backend, and when DCR is used as a local server. The arrows are labelled in the order they happen. The bold arrow is the JSON data object that DCR uses to generate the HTML document.
+
+![](detailed-setup-guide-pics/high-level-diagram.png)
 
 ## Developing
 
