@@ -506,6 +506,5 @@ export {
     standfirstText as renderStandfirstText,
     ImageElement,
     getHref,
-    renderMedia,
-    renderCaption,
+    renderMedia
 };
