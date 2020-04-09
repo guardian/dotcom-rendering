@@ -40,7 +40,7 @@ test('that the most important opengraph meta tags exist', () => {
     );
 });
 
-test('that all some of the most important twitter meta tags exist', () => {
+test('that the most important twitter meta tags exist', () => {
     const names = ['card', 'image', 'site'];
 
     names.map(name =>
