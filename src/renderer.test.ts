@@ -75,7 +75,7 @@ const instagramElement = (): BodyElement =>
 const render = (element: BodyElement): ReactNode[] =>
     renderAll({})(Pillar.news, [element]);
 
-const renderCaption= (element: BodyElement): ReactNode[] =>
+const renderCaption = (element: BodyElement): ReactNode[] =>
     renderMedia({})(Pillar.news, [element]);
 
 const renderTextElement = compose(render, textElement);
@@ -224,4 +224,3 @@ describe('Paragraph tags rendered correctly', () => {
         expect(html).not.toBe('<p>Parapraph tag</p>')
     });
 });
-
