@@ -121,7 +121,7 @@ const MemoisedInner = ({
     }>();
 
     const [hasBeenSeen, setNode] = useHasBeenSeen({
-        rootMargin: '-10px',
+        rootMargin: '-18px',
         threshold: 0,
     }) as HasBeenSeen;
 
