@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import loadable from '@loadable/component';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
@@ -249,51 +249,67 @@ export const App = ({ CAPI, NAV }: Props) => {
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
                 these cases we will be scrolling to comments and want them loaded */}
+            {console.log('Helll yeah man')}
+            {console.log(CommentsLayout)}
             <Portal root="comments-root">
-                {openComments ? (
-                    <CommentsLayout
-                        user={user}
-                        pillar={CAPI.pillar}
-                        baseUrl={CAPI.config.discussionApiUrl}
-                        shortUrl={CAPI.config.shortUrlId}
-                        commentCount={commentCount}
-                        commentPage={commentPage}
-                        commentPageSize={commentPageSize}
-                        commentOrderBy={commentOrderBy}
-                        isClosedForComments={isClosedForComments}
-                        discussionD2Uid={CAPI.config.discussionD2Uid}
-                        discussionApiClientHeader={
-                            CAPI.config.discussionApiClientHeader
-                        }
-                        enableDiscussionSwitch={
-                            CAPI.config.enableDiscussionSwitch
-                        }
-                        expanded={true}
-                        commentToScrollTo={hashCommentId}
-                    />
-                ) : (
-                    <Lazy margin={300}>
-                        <CommentsLayout
-                            user={user}
-                            pillar={CAPI.pillar}
-                            baseUrl={CAPI.config.discussionApiUrl}
-                            shortUrl={CAPI.config.shortUrlId}
-                            commentCount={commentCount}
-                            commentPage={commentPage}
-                            commentPageSize={commentPageSize}
-                            commentOrderBy={commentOrderBy}
-                            isClosedForComments={isClosedForComments}
-                            discussionD2Uid={CAPI.config.discussionD2Uid}
-                            discussionApiClientHeader={
-                                CAPI.config.discussionApiClientHeader
-                            }
-                            enableDiscussionSwitch={
-                                CAPI.config.enableDiscussionSwitch
-                            }
-                            expanded={false}
-                        />
-                    </Lazy>
-                )}
+                <>
+                    {CAPI.isCommentable &&
+                        (openComments ? (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <CommentsLayout
+                                    user={user}
+                                    pillar={CAPI.pillar}
+                                    baseUrl={CAPI.config.discussionApiUrl}
+                                    shortUrl={CAPI.config.shortUrlId}
+                                    commentCount={commentCount}
+                                    commentPage={commentPage}
+                                    commentPageSize={commentPageSize}
+                                    commentOrderBy={commentOrderBy}
+                                    isClosedForComments={isClosedForComments}
+                                    discussionD2Uid={
+                                        CAPI.config.discussionD2Uid
+                                    }
+                                    discussionApiClientHeader={
+                                        CAPI.config.discussionApiClientHeader
+                                    }
+                                    enableDiscussionSwitch={
+                                        CAPI.config.enableDiscussionSwitch
+                                    }
+                                    expanded={true}
+                                    commentToScrollTo={hashCommentId}
+                                />
+                            </Suspense>
+                        ) : (
+                            <Lazy margin={300}>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <CommentsLayout
+                                        user={user}
+                                        pillar={CAPI.pillar}
+                                        baseUrl={CAPI.config.discussionApiUrl}
+                                        shortUrl={CAPI.config.shortUrlId}
+                                        commentCount={commentCount}
+                                        commentPage={commentPage}
+                                        commentPageSize={commentPageSize}
+                                        commentOrderBy={commentOrderBy}
+                                        isClosedForComments={
+                                            isClosedForComments
+                                        }
+                                        discussionD2Uid={
+                                            CAPI.config.discussionD2Uid
+                                        }
+                                        discussionApiClientHeader={
+                                            CAPI.config
+                                                .discussionApiClientHeader
+                                        }
+                                        enableDiscussionSwitch={
+                                            CAPI.config.enableDiscussionSwitch
+                                        }
+                                        expanded={false}
+                                    />
+                                </Suspense>
+                            </Lazy>
+                        ))}
+                </>
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter

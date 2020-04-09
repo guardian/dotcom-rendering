@@ -51,7 +51,9 @@ module.exports = ({ isLegacyJS }) => ({
     },
     plugins: [
         new LoadablePlugin({
-            filename: isLegacyJS ? 'loadable-stats.legacy.json' : 'loadable-stats.json',
+            filename: isLegacyJS
+                ? 'loadable-stats.browser.legacy.json'
+                : 'loadable-stats.browser.json',
         }),
         PROD &&
             new AssetsManifest({

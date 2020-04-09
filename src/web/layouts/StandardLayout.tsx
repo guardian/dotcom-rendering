@@ -213,7 +213,7 @@ interface Props {
     NAV: NavType;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+const StandardLayout = ({ CAPI, NAV }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -498,3 +498,5 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
         </>
     );
 };
+
+export default StandardLayout;

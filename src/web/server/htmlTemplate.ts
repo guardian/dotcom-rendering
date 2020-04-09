@@ -9,12 +9,17 @@ export const htmlTemplate = ({
     title = 'The Guardian',
     description,
     linkedData,
+
     priorityScripts,
     priorityLegacyScripts,
     priorityNonLegacyScripts,
+
     lowPriorityScripts,
     lowPriorityLegacyScripts,
     lowPriorityNonLegacyScripts,
+
+    extractedScriptTags,
+
     css,
     html,
     windowGuardian,
@@ -27,12 +32,17 @@ export const htmlTemplate = ({
     title?: string;
     description: string;
     linkedData: object;
+
     priorityScripts: string[];
     priorityLegacyScripts: string[];
     priorityNonLegacyScripts: string[];
+
     lowPriorityScripts: string[];
     lowPriorityLegacyScripts: string[];
     lowPriorityNonLegacyScripts: string[];
+
+    extractedScriptTags: string;
+
     css: string;
     html: string;
     fontFiles?: string[];
@@ -111,6 +121,9 @@ export const htmlTemplate = ({
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
+
+                <!-- extracted from loadable-components -->
+                ${extractedScriptTags}
 
                 <!-- TODO make this conditional when we support more content types -->
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
