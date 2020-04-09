@@ -2120,7 +2120,7 @@
   dependencies:
     "@guardian/src-foundations" "^0.16.1"
 
-"@guardian/src-svgs@0.16.1", "@guardian/src-svgs@^0.16.1":
+"@guardian/src-svgs@^0.16.1":
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.16.1.tgz#331d6bb30513c45b09e5b4807832eb4a146a27ea"
   integrity sha512-OudfWJaKpTTP0J1QckqX0NmfneXgQ5YieZ/4em2lNXGZFEfYyxHnIXrAQE5LjmIGR8eJQoIikkwWiAFt4ziHXQ==
