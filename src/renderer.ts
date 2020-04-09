@@ -412,6 +412,9 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                 .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
                 .withDefault(BodyImage);
 
+            const figcaption = captionString
+                ? h(FigCaption, { pillar, text: text(caption, pillar) }) : null;
+            
             return h(ImageComponent, {
                 image: {
                     url: file,
@@ -422,12 +425,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                     caption: captionString,
                     credit,
                 },
-            },
-            h(FigCaption, {
-                pillar,
-                text: text(caption, pillar)
-            })
-            );
+            }, figcaption);
         }
 
         case ElementKind.Pullquote: {
@@ -479,6 +477,10 @@ const renderMedia = (imageMappings: ImageMappings) =>
         elements.map((element) => {
             if(element.kind === ElementKind.Image) {
                 const { file, alt, caption, captionString, credit, width, height } = element;
+
+                const figcaption = captionString
+                    ? h(MediaFigCaption, { text: renderCaption(caption, pillar) }) : null;
+
                 return h(BodyImage, {
                         image: {
                             url: file,
@@ -489,11 +491,7 @@ const renderMedia = (imageMappings: ImageMappings) =>
                             caption: captionString,
                             credit,
                         },
-                    },
-                    h(MediaFigCaption, {
-                        text: renderCaption(caption, pillar)
-                    })
-                )
+                    }, figcaption);
             }
             return null;
             });

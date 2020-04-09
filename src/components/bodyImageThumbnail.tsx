@@ -38,7 +38,6 @@ const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
         {children}
     </figure>;
 
-
 // ----- Exports ----- //
 
 export default BodyImageThumbnail;

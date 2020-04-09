@@ -7,7 +7,6 @@ import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 import Image, { Props as ImageProps } from 'components/image';
 
-
 // ----- Setup ----- //
 
 const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
