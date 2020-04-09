@@ -23,7 +23,7 @@ test('that all the required meta SEO fields exist', () => {
     );
 });
 
-test('that all some of the most important opengraph meta tags exist', () => {
+test('that the most important opengraph meta tags exist', () => {
     const names = [
         'og:url',
         'og:description',
