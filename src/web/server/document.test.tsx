@@ -23,6 +23,33 @@ test('that all the required meta SEO fields exist', () => {
     );
 });
 
+test('that all some of the most important opengraph meta tags exist', () => {
+    const names = [
+        'og:url',
+        'og:description',
+        'og:title',
+        'og:type',
+        'og:image',
+        'article:author',
+    ];
+
+    names.map(name =>
+        expect(result).toEqual(
+            expect.stringContaining(`<meta property="${name}"`),
+        ),
+    );
+});
+
+test('that all some of the most important twitter meta tags exist', () => {
+    const names = ['card', 'image', 'site'];
+
+    names.map(name =>
+        expect(result).toEqual(
+            expect.stringContaining(`<meta name="twitter:${name}"`),
+        ),
+    );
+});
+
 test('that all the required links exist', () => {
     const names = ['amphtml'];
 
