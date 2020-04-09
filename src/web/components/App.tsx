@@ -249,8 +249,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
                 these cases we will be scrolling to comments and want them loaded */}
-            {console.log('Helll yeah man')}
-            {console.log(CommentsLayout)}
             <Portal root="comments-root">
                 <>
                     {CAPI.isCommentable &&
