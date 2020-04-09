@@ -16,7 +16,7 @@ import { darkModeCss } from 'styles';
 
 interface Props extends Format {
     bylineHtml: Option<DocumentFragment>;
-};
+}
 
 const styles = (kicker: string): SerializedStyles => css`
     ${headline.xxxsmall()}
@@ -53,6 +53,7 @@ const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css
 
 const getStyles = (format: Format): SerializedStyles => {
     const { kicker } = getPillarStyles(format.pillar);
+
     switch (format.design) {
         case Design.Comment:
             return commentStyles;
@@ -62,17 +63,23 @@ const getStyles = (format: Format): SerializedStyles => {
     }
 }
 
-const toReact = (format: Format) => (node: Node): ReactNode => {
+const getAnchorStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
 
+    switch (format.design) {
+        case Design.Comment:
+            return commentAnchorStyles(kicker, inverted);
+        
+        default:
+            return anchorStyles(kicker, inverted);
+    }
+}
+
+const toReact = (format: Format) => (node: Node): ReactNode => {
     switch (node.nodeName) {
         case 'A':
-            const anchor = format.design === Design.Comment
-                ? commentAnchorStyles
-                : anchorStyles
-
             return (
-                <a href={getHref(node).withDefault('')} css={anchor(kicker, inverted)}>
+                <a href={getHref(node).withDefault('')} css={getAnchorStyles(format)}>
                     {node.textContent ?? ''}
                 </a>
             );

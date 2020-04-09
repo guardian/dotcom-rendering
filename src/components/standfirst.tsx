@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
+import React, {FC, ReactElement, ReactNode} from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
@@ -68,6 +68,24 @@ const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
     }
 `;
 
+const media = css`
+    color: ${neutral[86]};
+    p, ul, li {
+        ${headline.xxxsmall({ lineHeight: 'loose' })}
+        margin: 0;
+    }
+    
+    li:before {
+        height: 0.7rem;
+        width: 0.7rem;
+    }
+   
+    a {
+        color: ${neutral[86]};
+        box-shadow: inset 0 -0.1rem ${neutral[46]};
+    }
+`;
+
 const getStyles = (item: Item): SerializedStyles => {
     const pillarStyles = getPillarStyles(item.pillar);
 
@@ -80,6 +98,9 @@ const getStyles = (item: Item): SerializedStyles => {
         case Design.Feature:
         case Design.Comment:
             return css(styles, thinHeadline);
+
+        case Design.Media:
+            return css(media);
 
         default:
             return css(styles, normalHeadline);

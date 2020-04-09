@@ -1,22 +1,22 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, ReactElement } from 'react';
-import { css } from '@emotion/core';
+import React, {ReactElement, ReactNode} from 'react';
+import {css} from '@emotion/core';
 
 import Standard from 'components/standard/article';
 import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Immersive from 'components/immersive/article';
+import Media from 'components/media/article';
 
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';
-import { renderAll } from 'renderer';
+import { renderAll, renderMedia } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi, Design, Display } from 'item';
 import { sign } from 'components/image';
 import {
     ElementType,
@@ -25,6 +25,8 @@ import {
     IBlock as Block,
     IBlockElement as BlockElement
 } from 'mapiThriftModels';
+import { Design, Display, fromCapi } from 'item';
+
 
 // ----- Components ----- //
 
@@ -100,7 +102,7 @@ export interface ImageMappings {
 const mappingsWithUrl = (mappings: ImageMappings, url: string, salt: string): ImageMappings => {
     const { pathname } = new URL(url);
     return { ...mappings, [pathname]: sign(salt, pathname) }
-}
+};
 
 const getContributorMappings = (tags: Tag[], salt: string): ImageMappings => tags
     .filter(tag => tag.type === TagType.CONTRIBUTOR)
@@ -132,12 +134,12 @@ const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
         }, {});
 
         return { ...blockMappings, ...getContributorMappings(capi.tags, imageSalt) }
-}
+};
 
 const filterBlocks = (block: Block): Block => {
     const { createdBy, lastModifiedBy, ...blocks } = block;
     return blocks;
-}
+};
 
 const liveblogProps = (capi: Content): Content => {
     const { id, type, webTitle, webUrl, apiUrl, fields, tags, references, isHosted, blocks } = capi;
@@ -151,23 +153,24 @@ const liveblogProps = (capi: Content): Content => {
             body: blocks?.body ? blocks.body.map(filterBlocks) : undefined
         }
     }
-}
+};
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
     <>
         {props.children}
         <script src={props.src}></script>
-    </>
+    </>;
 
 function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementWithResources {
 
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
-    const item = fromCapi(JSDOM.fragment)(capi);
+    const item = fromCapi(JSDOM.fragment.bind(null))(capi);
     const imageMappings = getImageMappings(imageSalt, capi);
 
     const articleScript = getAssetLocation('article.js');
     const liveblogScript = getAssetLocation('liveblog.js');
+    const mediaScript = getAssetLocation('media.js');
 
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
@@ -205,6 +208,19 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         ), resources: [articleScript], hydrationProps: {} };
     }
 
+    if (item.design === Design.Media) {
+        const body = partition(item.body).oks;
+        const mediaContent =
+            insertAdPlaceholders(renderMedia(imageMappings)(item.pillar, body));
+        return { element: (
+                <WithScript src={mediaScript}>
+                    <Media imageMappings={imageMappings} item={item}>
+                        {mediaContent}
+                    </Media>
+                </WithScript>
+            ), resources: [mediaScript], hydrationProps: {} };
+    }
+
     if (
         item.design === Design.Feature ||
         item.design === Design.Analysis ||
@@ -223,7 +239,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         ), resources: [articleScript], hydrationProps: {} };
     }
 
-    const element = <p>Content format not implemented yet</p>
+    const element = <p>Content format not implemented yet</p>;
     return { element, resources: [], hydrationProps: {} };
 }
 
@@ -236,13 +252,13 @@ interface Props {
 function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResources {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
-        : null
+        : null;
 
     const {
         element,
         resources,
         hydrationProps
-    } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
+    } = ArticleBody({ imageSalt, capi: content, getAssetLocation });
 
     return { element: (
         <html lang="en" css={PageStyles}>

@@ -9,13 +9,17 @@ import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement, Role } from 'item';
-import { headline, body } from '@guardian/src-foundations/typography';
+import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
 import Audio from 'components/audio';
+import Video from 'components/video';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
+import FigCaption from 'components/figCaption';
+import MediaFigCaption from 'components/media/mediaFigCaption';
+
 
 // ----- Renderer ----- //
 
@@ -66,10 +70,10 @@ const HorizontalRuleStyles = css`
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
     background-color: ${neutral[93]};
-`
+`;
 
 const HorizontalRule = (): ReactElement =>
-    styledH('hr', { css: HorizontalRuleStyles }, null)
+    styledH('hr', { css: HorizontalRuleStyles }, null);
 
 
 const transform = (text: string, pillar: Pillar): ReactElement | string => {
@@ -79,7 +83,7 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
         return h(HorizontalRule, null, null);
     }
     return text;
-}
+};
 
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
@@ -102,7 +106,7 @@ const listStyles: SerializedStyles = css`
     list-style: none;
     margin: ${remSpace[2]} 0;
     padding-left: 0;
-`
+`;
 
 const listItemStyles: SerializedStyles = css`
     padding-left: ${remSpace[6]};
@@ -130,7 +134,7 @@ const listItemStyles: SerializedStyles = css`
             background-color: ${neutral[60]};
         }
     `}
-`
+`;
 
 const HeadingTwoStyles = css`
     ${headline.xxsmall({ fontWeight: 'bold' })}
@@ -139,7 +143,7 @@ const HeadingTwoStyles = css`
     & + p {
         margin-top: 0;
     }
-`
+`;
 
 const TweetStyles = css`
     ${until.wide} {
@@ -178,6 +182,57 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         default:
             return null;
     }
+};
+
+const captionHeadingStyles = css`
+    ${headline.xxxsmall()}
+    color: ${neutral[86]};
+    padding-bottom: ${remSpace[2]};
+    padding-top: ${remSpace[2]};
+    margin: 0;
+    
+    em {
+        ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
+    }
+`;
+
+const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement =>
+    styledH(
+        'p',
+        { css: css`
+              ${body.small()}
+              color: ${neutral[86]};
+              margin: 0;
+        ` },
+        props.text,
+    );
+
+const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElement =>
+    styledH(
+        'span',
+        { css: css`
+              ${textSans.xsmall({ italic: true })}
+               ${textSans.xsmall({ fontWeight: 'bold' })}
+               color: ${neutral[86]};
+        ` },
+        props.text,
+    );
+
+const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'STRONG':
+            return styledH('p', {css: captionHeadingStyles, key}, children);
+        case 'BR':
+            return null;
+        case 'EM':
+            return h(CaptionItalicStyles, {text, pillar, key}, children);
+        case '#text':
+            return h(MediaCaptionText, { text, pillar, key }, children);
+        default:
+            return textElement(pillar)(node, key);
+    }
 }
 
 const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
@@ -188,7 +243,7 @@ const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): Rea
         default:
             return textElement(pillar)(node, key);
     }
-}
+};
 
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
@@ -239,7 +294,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         caption: captionString,
         credit,
     });
-}
+};
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
@@ -342,7 +397,7 @@ const Interactive = (props: { url: string }): ReactElement =>
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
     // twitter script relies on twitter-tweet class being present
     return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
-}
+};
 
 const render = (pillar: Pillar, imageMappings: ImageMappings) =>
     (element: BodyElement, key: number): ReactNode => {
@@ -351,12 +406,13 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Text:
             return text(element.doc, pillar);
 
-        case ElementKind.Image:
+        case ElementKind.Image: {
             const { file, alt, caption, captionString, credit, width, height, role } = element;
             const ImageComponent = role
                 .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
-                .withDefault(BodyImage)
-
+                .withDefault(BodyImage);
+            const figcaption = captionString ? h(FigCaption, { pillar, text: text(caption, pillar) }) : null;
+            
             return h(ImageComponent, {
                 image: {
                     url: file,
@@ -365,19 +421,22 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                     width,
                     height,
                     caption: captionString,
-                    credit
+                    credit,
                 },
-                figcaption: captionString ? new Some(text(caption, pillar)) : new None<ReactNode>(),
-                pillar,
-            });
+            }, figcaption);
+        }
 
-        case ElementKind.Pullquote:
+        case ElementKind.Pullquote: {
             const { quote, attribution } = element;
-            return h(Pullquote, { quote, attribution, pillar, key });
 
-        case ElementKind.RichLink:
+            return h(Pullquote, { quote, attribution, pillar, key });
+        }
+
+        case ElementKind.RichLink: {
             const { url, linkText } = element;
+
             return h(RichLink, { url, linkText, pillar, key });
+        }
 
         case ElementKind.Interactive:
             return h(Interactive, { url: element.url, key });
@@ -388,20 +447,49 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Audio:
             return h(Audio, { src: element.src, width: element.width, height: element.height });
 
+        case ElementKind.Video:
+            return h(Video, { src: element.src, width: element.width, height: element.height })
+
         case ElementKind.Embed:
-        case ElementKind.Instagram:
+        case ElementKind.Instagram: {
             const props = {
                 dangerouslySetInnerHTML: {
                   __html: element.html,
                 },
             };
+
             return h('div', props);
+        }
     }
-}
+};
 
 const renderAll = (imageMappings: ImageMappings) =>
     (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
         elements.map(render(pillar, imageMappings));
+
+const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(captionElement(pillar));
+
+const renderMedia = (imageMappings: ImageMappings) =>
+    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+        elements.map((element) => {
+            if(element.kind === ElementKind.Image) {
+                const { file, alt, caption, captionString, credit, width, height } = element;
+                const figcaption = captionString ? h(MediaFigCaption, { text: renderCaption(caption, pillar) }) : null;
+                return h(BodyImage, {
+                        image: {
+                            url: file,
+                            alt,
+                            imageMappings,
+                            width,
+                            height,
+                            caption: captionString,
+                            credit,
+                        },
+                    }, figcaption);
+            }
+            return null;
+            });
 
 // ----- Exports ----- //
 
@@ -411,4 +499,5 @@ export {
     standfirstText as renderStandfirstText,
     ImageElement,
     getHref,
+    renderMedia,
 };

@@ -30,7 +30,7 @@ const getSubdomain = (domain: string): string =>
     domain.split('.')[0];
 
 const sign = (salt: string, path: string): string =>
-    createHash('md5').update(salt + path).digest('hex')    
+    createHash('md5').update(salt + path).digest('hex')
 
 function src(imageMappings: ImageMappings, input: string, width: number): string {
     const url = new URL(input);
