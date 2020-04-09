@@ -220,7 +220,7 @@ const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElem
 
 const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
-    const children = Array.from(node.childNodes).map(textElement(pillar));
+    const children = Array.from(node.childNodes).map(captionElement(pillar));
     switch (node.nodeName) {
         case 'STRONG':
             return styledH('p', {css: captionHeadingStyles, key}, children);
@@ -504,5 +504,5 @@ export {
     standfirstText as renderStandfirstText,
     ImageElement,
     getHref,
-    renderMedia,
+    renderMedia
 };

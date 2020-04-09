@@ -1,11 +1,11 @@
-import { ImageElement, renderStandfirstText, renderText } from './renderer';
+import { ImageElement, renderMedia, renderStandfirstText, renderText } from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
-import { ReactNode, createElement as h } from 'react';
+import { createElement as h, ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
-import { ElementKind, BodyElement, Role } from 'item';
-import { shallow, configure } from 'enzyme';
+import { BodyElement, ElementKind, Role } from 'item';
+import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -75,7 +75,12 @@ const instagramElement = (): BodyElement =>
 const render = (element: BodyElement): ReactNode[] =>
     renderAll({})(Pillar.news, [element]);
 
+const renderCaption = (element: BodyElement): ReactNode[] =>
+    renderMedia({})(Pillar.news, [element]);
+
 const renderTextElement = compose(render, textElement);
+
+const renderCaptionElement = compose(renderCaption, imageElement)
 
 describe('renderer returns expected content', () => {
     test('ImageElement returns null for no url', () => {
@@ -125,6 +130,16 @@ describe('renderer returns expected content', () => {
         ]);
 
         expect(text.flat().length).toBe(7);
+    });
+
+    test ('Renders caption node types', () => {
+        const text = renderCaptionElement(JSDOM.fragment('this caption contains'));
+        expect(shallow(text.flat()[0]).html()).toContain('<p');
+    });
+
+    test ('Removes unsupported caption node types', () => {
+        const text = renderCaptionElement(JSDOM.fragment('this caption contains <blockquote>html</blockquote>'));
+        text.flatMap(element => expect(element).not.toContain("blockquote"))
     });
 });
 
