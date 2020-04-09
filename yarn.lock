@@ -2096,10 +2096,10 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/discussion-rendering@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-0.8.0.tgz#8f0e421126ceefd84c28a84d3d8ab97010f461ca"
-  integrity sha512-xJj4NRBKfa/fn35SjZzbiHE6zdop22CYpertvff1ba6OvLHO5ZQYHio3krgMKssH1YdEDMEkORbMpXA9DdwzPw==
+"@guardian/discussion-rendering@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-1.0.0.tgz#d7a527e73276d81f2495b3637ed710ba336ecd66"
+  integrity sha512-aSoZeIIQR5yb4R1EMSEL3l4TmaEYBRyKaKY9V7yCZ7H9jdl9615j1w1EH25UeeaIFQZ15xiWkA8JAPAaqMQF3g==
   dependencies:
     timeago.js "^4.0.2"
 
