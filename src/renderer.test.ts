@@ -1,11 +1,11 @@
-import {ImageElement, renderCaption, renderStandfirstText, renderText} from './renderer';
+import { ImageElement, renderMedia, renderStandfirstText, renderText } from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
-import { ReactNode, createElement as h } from 'react';
+import { createElement as h, ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
-import { ElementKind, BodyElement, Role } from 'item';
-import { shallow, configure } from 'enzyme';
+import { BodyElement, ElementKind, Role } from 'item';
+import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
 
