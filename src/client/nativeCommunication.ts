@@ -1,7 +1,7 @@
-import {AdSlot} from "bridget-typescript/AdSlot";
-import {commercialClient, galleryClient, userClient} from "../native/nativeApi";
-import {logger} from "../logger";
-import {Image} from "bridget-typescript/Image";
+import { AdSlot } from "@guardian/bridget/AdSlot";
+import { Image } from "@guardian/bridget/Image";
+import { commercialClient, galleryClient, userClient } from "../native/nativeApi";
+import { logger } from "../logger";
 
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');

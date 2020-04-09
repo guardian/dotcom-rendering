@@ -1,9 +1,7 @@
 // ----- Imports ----- //
 
-import { commercialClient, userClient, notificationsClient, galleryClient, acquisitionsClient } from 'native/nativeApi';
-import { AdSlot } from '@guardian/bridget/AdSlot'
+import { notificationsClient, acquisitionsClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
-import { Image } from '@guardian/bridget/Image';
 import { IMaybeEpic as MaybeEpic } from '@guardian/bridget/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
