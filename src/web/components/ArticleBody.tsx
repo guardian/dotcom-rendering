@@ -117,14 +117,26 @@ const linkColour = pillarMap(
 );
 
 export const ArticleBody: React.FC<{
-    CAPI: CAPIType;
-    isShowcase?: boolean;
-    adTargeting?: AdTargeting;
-}> = ({ CAPI, isShowcase, adTargeting }) => {
+    pillar: Pillar;
+    isImmersive: boolean;
+    standfirst: string;
+    blocks: Block[];
+    designType: DesignType;
+    isShowcase: boolean;
+    adTargeting: AdTargeting;
+}> = ({
+    pillar,
+    isImmersive,
+    standfirst,
+    blocks,
+    designType,
+    isShowcase,
+    adTargeting,
+}) => {
     return (
         <div
-            className={cx(bodyStyle, linkColour[CAPI.pillar], {
-                [immersiveBodyStyle]: CAPI.isImmersive,
+            className={cx(bodyStyle, linkColour[pillar], {
+                [immersiveBodyStyle]: isImmersive,
             })}
         >
             {isShowcase && (
@@ -132,16 +144,16 @@ export const ArticleBody: React.FC<{
                 // sits inside here so that the right column advert does not get pushed down
                 <Hide when="below" breakpoint="leftCol">
                     <ArticleStandfirst
-                        designType={CAPI.designType}
-                        pillar={CAPI.pillar}
-                        standfirst={CAPI.standfirst}
+                        designType={designType}
+                        pillar={pillar}
+                        standfirst={standfirst}
                     />
                 </Hide>
             )}
             <ArticleRenderer
-                elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
-                pillar={CAPI.pillar}
-                designType={CAPI.designType}
+                elements={blocks[0] ? blocks[0].elements : []}
+                pillar={pillar}
+                designType={designType}
                 adTargeting={adTargeting}
             />
         </div>
