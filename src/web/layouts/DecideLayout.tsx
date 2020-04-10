@@ -10,7 +10,7 @@ type Props = {
     NAV: NavType;
 };
 
-export const DecideLayout = ({CAPI, NAV }: Props) => {
+export const DecideLayout = ({ CAPI, NAV }: Props) => {
     if (CAPI.pageType.hasShowcaseMainElement) {
         return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
     }
@@ -21,6 +21,7 @@ export const DecideLayout = ({CAPI, NAV }: Props) => {
     );
 
     designTypeContent.Comment = <CommentLayout CAPI={CAPI} NAV={NAV} />;
+    designTypeContent.GuardianView = <CommentLayout CAPI={CAPI} NAV={NAV} />;
 
     return designTypeContent[CAPI.designType];
 };

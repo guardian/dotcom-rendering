@@ -52,7 +52,7 @@ const opinionStyles = (pillar: Pillar) => css`
 `;
 
 type Props = {
-    designType: 'Interview' | 'Comment';
+    designType: DesignType;
     pillar: Pillar;
     byline: string;
     tags: TagType[];
@@ -68,12 +68,27 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
                     </div>
                 </div>
             );
+        case 'GuardianView':
         case 'Comment':
             return (
                 <div className={opinionStyles(pillar)}>
                     <BylineLink byline={byline} tags={tags} />
                 </div>
             );
+
+        case 'Analysis':
+        case 'Feature':
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Immersive':
         default:
             return null;
     }

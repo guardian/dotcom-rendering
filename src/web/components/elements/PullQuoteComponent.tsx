@@ -15,6 +15,7 @@ const gsSpan = (nColumns: number) => nColumns * 60 + gutter * (nColumns - 1);
 
 const commonStyles = (pillar: Pillar, designType: DesignType) => {
     switch (designType) {
+        case 'GuardianView':
         case 'Comment':
             return css`
                 ${headline.xxsmall({ fontWeight: 'light' })};

@@ -37,6 +37,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
     `;
 
     switch (designType) {
+        case 'GuardianView':
         case 'Comment':
             return css`
                 ${baseLinkStyles}
@@ -72,7 +73,6 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
