@@ -6,16 +6,12 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-import { Hide } from '@root/src/web/components/Hide';
 
 type Props = {
     pillar: Pillar;
     isImmersive: boolean;
-    standfirst: string;
     blocks: Block[];
     designType: DesignType;
-    isShowcase: boolean;
     adTargeting: AdTargeting;
 };
 
@@ -129,10 +125,8 @@ const linkColour = pillarMap(
 export const ArticleBody = ({
     pillar,
     isImmersive,
-    standfirst,
     blocks,
     designType,
-    isShowcase,
     adTargeting,
 }: Props) => {
     return (
@@ -141,17 +135,6 @@ export const ArticleBody = ({
                 [immersiveBodyStyle]: isImmersive,
             })}
         >
-            {isShowcase && (
-                // For articles with main media set as showcase, the standfirst sometimes
-                // sits inside here so that the right column advert does not get pushed down
-                <Hide when="below" breakpoint="leftCol">
-                    <ArticleStandfirst
-                        designType={designType}
-                        pillar={pillar}
-                        standfirst={standfirst}
-                    />
-                </Hide>
-            )}
             <ArticleRenderer
                 elements={blocks[0] ? blocks[0].elements : []}
                 pillar={pillar}

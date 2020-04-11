@@ -368,9 +368,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                     pillar={CAPI.pillar}
                                     blocks={CAPI.blocks}
                                     isImmersive={CAPI.isImmersive}
-                                    standfirst={CAPI.standfirst}
                                     designType={CAPI.designType}
-                                    isShowcase={false}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
