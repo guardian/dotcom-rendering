@@ -9,6 +9,16 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Hide } from '@root/src/web/components/Hide';
 
+type Props = {
+    pillar: Pillar;
+    isImmersive: boolean;
+    standfirst: string;
+    blocks: Block[];
+    designType: DesignType;
+    isShowcase: boolean;
+    adTargeting: AdTargeting;
+};
+
 const pillarColours = pillarMap(
     pillar =>
         css`
@@ -116,15 +126,7 @@ const linkColour = pillarMap(
     `,
 );
 
-export const ArticleBody: React.FC<{
-    pillar: Pillar;
-    isImmersive: boolean;
-    standfirst: string;
-    blocks: Block[];
-    designType: DesignType;
-    isShowcase: boolean;
-    adTargeting: AdTargeting;
-}> = ({
+export const ArticleBody = ({
     pillar,
     isImmersive,
     standfirst,
@@ -132,7 +134,7 @@ export const ArticleBody: React.FC<{
     designType,
     isShowcase,
     adTargeting,
-}) => {
+}: Props) => {
     return (
         <div
             className={cx(bodyStyle, linkColour[pillar], {
