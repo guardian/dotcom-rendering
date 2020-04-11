@@ -397,7 +397,6 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                     designType={CAPI.designType}
                                     isShowcase={false}
                                     adTargeting={adTargeting}
-                                    ß={true}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
