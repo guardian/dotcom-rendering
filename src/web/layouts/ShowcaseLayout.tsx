@@ -93,11 +93,11 @@ const ShowcaseGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column'
+                        'title  border  headline    headline'
+                        'lines  border  media       media'
+                        'meta   border  media       media'
+                        'meta   border  standfirst  right-column'
+                        '.      border  body        right-column'
                         '.      border  .           right-column';
                 }
 
