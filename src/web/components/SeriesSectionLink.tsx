@@ -1,8 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 
@@ -10,6 +12,14 @@ const sectionLabelLink = css`
     text-decoration: none;
     :hover {
         text-decoration: underline;
+    }
+`;
+
+const rowBelowLeftCol = css`
+    display: flex;
+    flex-direction: column;
+    ${until.leftCol} {
+        flex-direction: row;
     }
 `;
 
@@ -26,6 +36,8 @@ const primaryStyle = css`
     ${from.leftCol} {
         ${headline.xxsmall({ fontWeight: 'bold' })};
     }
+
+    padding-right: ${space[2]}px;
 `;
 
 const secondaryStyle = css`
@@ -73,6 +85,7 @@ export const SeriesSectionLink: React.FC<{
     guardianBaseURL: string;
     pillar: Pillar;
     fallbackToSection?: boolean;
+    badge?: BadgeType;
 }> = ({
     tags,
     sectionLabel,
@@ -80,6 +93,7 @@ export const SeriesSectionLink: React.FC<{
     guardianBaseURL,
     pillar,
     fallbackToSection,
+    badge,
 }) => {
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
@@ -94,7 +108,7 @@ export const SeriesSectionLink: React.FC<{
         const tag = blogTag || seriesTag || publicationTag;
 
         return tag ? (
-            <>
+            <div className={cx(!badge && rowBelowLeftCol)}>
                 <TagLink
                     pillar={pillar}
                     guardianBaseURL={guardianBaseURL}
