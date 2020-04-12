@@ -20,7 +20,6 @@ type Props = {
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
-    fallbackToSection?: boolean;
     badge?: BadgeType;
 };
 
@@ -49,7 +48,6 @@ export const ArticleTitle = ({
     sectionUrl,
     guardianBaseURL,
     pillar,
-    fallbackToSection = true,
     badge,
 }: Props) => (
     <div className={cx(sectionStyles, badge && badgeContainer)}>
@@ -65,7 +63,7 @@ export const ArticleTitle = ({
                 sectionUrl={sectionUrl}
                 guardianBaseURL={guardianBaseURL}
                 pillar={pillar}
-                fallbackToSection={fallbackToSection}
+                fallbackToSection={true}
             />
         </div>
     </div>
