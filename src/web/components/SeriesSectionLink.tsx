@@ -86,6 +86,7 @@ export const SeriesSectionLink: React.FC<{
     pillar: Pillar;
     badge?: BadgeType;
 }> = ({ tags, sectionLabel, sectionUrl, guardianBaseURL, pillar, badge }) => {
+    // If we have a tag, use it to show 2 section titles
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
     const publicationTag = tags.find(tag => tag.type === 'Publication');
@@ -99,6 +100,7 @@ export const SeriesSectionLink: React.FC<{
         const tag = blogTag || seriesTag || publicationTag;
 
         return tag ? (
+            // Sometimes the tags/titles are shown inline, sometimes stacked
             <div className={cx(!badge && rowBelowLeftCol)}>
                 <TagLink
                     pillar={pillar}
@@ -125,6 +127,7 @@ export const SeriesSectionLink: React.FC<{
         ) : null;
     }
 
+    // Otherwise, there was no tag so just show 1 title
     return (
         <TagLink
             pillar={pillar}
