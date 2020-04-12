@@ -63,7 +63,6 @@ export const ArticleTitle = ({
                 sectionUrl={sectionUrl}
                 guardianBaseURL={guardianBaseURL}
                 pillar={pillar}
-                fallbackToSection={true}
                 badge={badge}
             />
         </div>

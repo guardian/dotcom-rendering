@@ -84,17 +84,8 @@ export const SeriesSectionLink: React.FC<{
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
-    fallbackToSection?: boolean;
     badge?: BadgeType;
-}> = ({
-    tags,
-    sectionLabel,
-    sectionUrl,
-    guardianBaseURL,
-    pillar,
-    fallbackToSection,
-    badge,
-}) => {
+}> = ({ tags, sectionLabel, sectionUrl, guardianBaseURL, pillar, badge }) => {
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
     const publicationTag = tags.find(tag => tag.type === 'Publication');
@@ -134,19 +125,15 @@ export const SeriesSectionLink: React.FC<{
         ) : null;
     }
 
-    if (fallbackToSection) {
-        return (
-            <TagLink
-                pillar={pillar}
-                guardianBaseURL={guardianBaseURL}
-                tagTitle={sectionLabel}
-                tagUrl={sectionUrl}
-                dataComponentName="Section"
-                dataLinkName="article section"
-                weightingClass={primaryStyle}
-            />
-        );
-    }
-
-    return null;
+    return (
+        <TagLink
+            pillar={pillar}
+            guardianBaseURL={guardianBaseURL}
+            tagTitle={sectionLabel}
+            tagUrl={sectionUrl}
+            dataComponentName="Section"
+            dataLinkName="article section"
+            weightingClass={primaryStyle}
+        />
+    );
 };
