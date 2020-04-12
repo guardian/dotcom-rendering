@@ -134,7 +134,7 @@ export const SeriesSectionLink: React.FC<{
         ) : null;
     }
 
-    if (fallbackToSection && (sectionLabel && sectionUrl)) {
+    if (fallbackToSection) {
         return (
             <TagLink
                 pillar={pillar}
