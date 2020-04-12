@@ -4,6 +4,8 @@ import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+import { Hide } from '@frontend/web/components/Hide';
+
 const sectionLabelLink = css`
     text-decoration: none;
     :hover {
@@ -102,16 +104,19 @@ export const SeriesSectionLink: React.FC<{
                     dataLinkName="article series"
                     weightingClass={primaryStyle}
                 />
-                <TagLink
-                    pillar={pillar}
-                    guardianBaseURL={guardianBaseURL}
-                    tagTitle={sectionLabel}
-                    tagUrl={sectionUrl}
-                    dataComponentName="section"
-                    dataLinkName="article section"
-                    weightingClass={secondaryStyle}
-                />
-            </>
+
+                <Hide when="below" breakpoint="tablet">
+                    <TagLink
+                        pillar={pillar}
+                        guardianBaseURL={guardianBaseURL}
+                        tagTitle={sectionLabel}
+                        tagUrl={sectionUrl}
+                        dataComponentName="section"
+                        dataLinkName="article section"
+                        weightingClass={secondaryStyle}
+                    />
+                </Hide>
+            </div>
         ) : null;
     }
 
