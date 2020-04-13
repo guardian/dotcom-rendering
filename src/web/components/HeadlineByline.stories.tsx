@@ -30,3 +30,21 @@ export const commentStory = () => {
     );
 };
 commentStory.story = { name: 'Comment' };
+
+export const immersiveStory = () => {
+    return (
+        <HeadlineByline
+            designType="Immersive"
+            pillar="lifestyle"
+            byline="Jane Smith"
+            tags={[
+                {
+                    id: '1',
+                    type: 'Contributor',
+                    title: 'Jane Smith',
+                },
+            ]}
+        />
+    );
+};
+immersiveStory.story = { name: 'Immersive' };
