@@ -39,7 +39,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <StandardLayout CAPI={CAPI} NAV={NAV} />;
+                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
             }
             break;
         }
