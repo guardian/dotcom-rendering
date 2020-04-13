@@ -29,8 +29,28 @@ const imageCss = {
         }
     `,
 
-    // TODO: immersive is pending review of different article types
-    immersive: css``,
+    immersive: css`
+        ${from.mobileMedium} {
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        ${from.tablet} {
+            margin-left: -20px;
+            margin-right: -120px;
+        }
+        ${from.desktop} {
+            margin-left: -20px;
+            margin-right: -340px;
+        }
+        ${from.leftCol} {
+            margin-left: -180px;
+            margin-right: -340px;
+        }
+        ${from.wide} {
+            margin-left: -260px;
+            margin-right: -420px;
+        }
+    `,
 
     showcase: css`
         position: relative;
