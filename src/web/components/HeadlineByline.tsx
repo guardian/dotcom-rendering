@@ -59,14 +59,13 @@ const immersiveStyles = css`
 `;
 
 const immersiveLinkStyles = (pillar: Pillar) => css`
-    color: ${pillarPalette[pillar].main};
-
     a {
+        color: ${pillarPalette[pillar].main};
         border-bottom: 1px solid ${pillarPalette[pillar].main};
-        color: inherit;
         text-decoration: none;
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
+            color: ${pillarPalette[pillar].dark};
             text-decoration: none;
         }
     }

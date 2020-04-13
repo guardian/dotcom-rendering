@@ -48,3 +48,31 @@ export const immersiveStory = () => {
     );
 };
 immersiveStory.story = { name: 'Immersive' };
+
+export const MultipleStory = () => {
+    return (
+        <HeadlineByline
+            designType="Immersive"
+            pillar="lifestyle"
+            byline="Jane Smith, John Doe and Nae Bevan"
+            tags={[
+                {
+                    id: '1',
+                    type: 'Contributor',
+                    title: 'Jane Smith',
+                },
+                {
+                    id: '2',
+                    type: 'Contributor',
+                    title: 'John Doe',
+                },
+                {
+                    id: '3',
+                    type: 'Contributor',
+                    title: 'Nae Bevan',
+                },
+            ]}
+        />
+    );
+};
+MultipleStory.story = { name: 'Immersive with multiple contributors' };
