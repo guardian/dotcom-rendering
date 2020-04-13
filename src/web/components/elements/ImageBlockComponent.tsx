@@ -30,25 +30,21 @@ const imageCss = {
     `,
 
     immersive: css`
-        ${from.mobileMedium} {
-            margin-left: -20px;
-            margin-right: -20px;
-        }
         ${from.tablet} {
-            margin-left: -20px;
-            margin-right: -120px;
+            margin-left: 0px;
+            margin-right: -100px;
         }
         ${from.desktop} {
-            margin-left: -20px;
-            margin-right: -340px;
+            margin-left: 0px;
+            margin-right: -320px;
         }
         ${from.leftCol} {
-            margin-left: -180px;
-            margin-right: -340px;
+            margin-left: -160px;
+            margin-right: -320px;
         }
         ${from.wide} {
-            margin-left: -260px;
-            margin-right: -420px;
+            margin-left: -240px;
+            margin-right: -400px;
         }
     `,
 
