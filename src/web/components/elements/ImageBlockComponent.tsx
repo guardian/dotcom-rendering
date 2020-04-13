@@ -37,7 +37,6 @@ const imageCss = {
         margin-top: 16px;
         margin-bottom: 12px;
         ${from.leftCol} {
-            position: relative;
             margin-bottom: 16px;
             margin-left: -160px;
         }
@@ -54,22 +53,14 @@ const imageCss = {
         margin-right: 20px;
         margin-top: 6px;
         ${from.tablet} {
-            margin-right: 20px;
-        }
-        ${from.wide} {
-            margin-left: -160px;
+            width: 140px;
         }
         ${from.wide} {
             margin-left: -240px;
         }
         ${from.leftCol} {
-            margin-left: -160px;
-        }
-        ${from.leftCol} {
             position: relative;
-        }
-        ${from.tablet} {
-            width: 140px;
+            margin-left: -160px;
         }
     `,
 
