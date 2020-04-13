@@ -9,6 +9,33 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
+type Display = 'standard' | 'immersive' | 'showcase';
+
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type DesignType =
+    | 'Article'
+    | 'Immersive'
+    | 'Media'
+    | 'Review'
+    | 'Analysis'
+    | 'Comment'
+    | 'Feature'
+    | 'Live'
+    | 'SpecialReport'
+    | 'Recipe'
+    | 'MatchReport'
+    | 'Interview'
+    | 'GuardianView'
+    | 'GuardianLabs'
+    | 'Quiz'
+    | 'AdvertisementFeature';
+
+// This is an object that allows you Type defaults of the designTypes.
+// The return type looks like: { Feature: any, Live: any, ...}
+// and can be used to add TypeSafety when needing to override a style in a designType
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DesignTypesObj = { [key in DesignType]: any };
+
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
 type SharePlatform =
@@ -509,31 +536,6 @@ interface GADataType {
     edition: Edition;
     beaconUrl: string;
 }
-
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
-type DesignType =
-    | 'Article'
-    | 'Immersive'
-    | 'Media'
-    | 'Review'
-    | 'Analysis'
-    | 'Comment'
-    | 'Feature'
-    | 'Live'
-    | 'SpecialReport'
-    | 'Recipe'
-    | 'MatchReport'
-    | 'Interview'
-    | 'GuardianView'
-    | 'GuardianLabs'
-    | 'Quiz'
-    | 'AdvertisementFeature';
-
-// This is an object that allows you Type defaults of the designTypes.
-// The return type looks like: { Feature: any, Live: any, ...}
-// and can be used to add TypeSafety when needing to override a style in a designType
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DesignTypesObj = { [key in DesignType]: any };
 
 // ----------------- //
 // General DataTypes //
