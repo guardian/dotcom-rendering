@@ -414,7 +414,13 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="body">
                         <ArticleContainer>
                             <main className={maxWidth}>
-                                <ArticleBody CAPI={CAPI} />
+                                <ArticleBody
+                                    pillar={CAPI.pillar}
+                                    blocks={CAPI.blocks}
+                                    isImmersive={CAPI.isImmersive}
+                                    designType={CAPI.designType}
+                                    adTargeting={adTargeting}
+                                />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta

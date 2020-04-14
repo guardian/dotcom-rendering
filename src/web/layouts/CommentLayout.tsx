@@ -210,6 +210,9 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
     const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
     const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
 
+    // We override the pillar to be opinion on Comment news pieces
+    const pillar = CAPI.pillar === 'news' ? 'opinion' : CAPI.pillar;
+
     return (
         <>
             <Section
@@ -251,7 +254,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                     />
                 </Section>
             )}
@@ -261,7 +264,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 showTopBorder={false}
             >
-                <GuardianLines pillar={CAPI.pillar} />
+                <GuardianLines pillar={pillar} />
             </Section>
 
             <Section showTopBorder={false} backgroundColour={opinion[800]}>
@@ -272,7 +275,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             badge={CAPI.badge}
                             inLeftCol={true}
                         />
@@ -297,7 +300,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                     <ArticleHeadline
                                         headlineString={CAPI.headline}
                                         designType={CAPI.designType}
-                                        pillar={CAPI.pillar}
+                                        pillar={pillar}
                                         webPublicationDate={
                                             CAPI.webPublicationDate
                                         }
@@ -317,23 +320,20 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                             />
                                         </div>
                                     )}
-                                    <GuardianLines
-                                        count={8}
-                                        pillar={CAPI.pillar}
-                                    />
+                                    <GuardianLines count={8} pillar={pillar} />
                                 </div>
                             </div>
                         </div>
                     </GridItem>
                     <GridItem area="lines">
                         <div className={pushToBottom}>
-                            <GuardianLines count={8} pillar={CAPI.pillar} />
+                            <GuardianLines count={8} pillar={pillar} />
                         </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
                             designType={CAPI.designType}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
@@ -341,7 +341,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <MainMedia
                                 elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 adTargeting={adTargeting}
                             />
                         </div>
@@ -350,7 +350,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <ArticleMeta
                                 designType={CAPI.designType}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
@@ -364,11 +364,17 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="body">
                         <ArticleContainer>
                             <main className={maxWidth}>
-                                <ArticleBody CAPI={CAPI} />
+                                <ArticleBody
+                                    pillar={pillar}
+                                    blocks={CAPI.blocks}
+                                    isImmersive={CAPI.isImmersive}
+                                    designType={CAPI.designType}
+                                    adTargeting={adTargeting}
+                                />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={CAPI.pillar} />
+                                <GuardianLines pillar={pillar} />
                                 <SubMeta
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     subMetaKeywordLinks={
                                         CAPI.subMetaKeywordLinks
                                     }
@@ -450,9 +456,9 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                     />
-                    <GuardianLines pillar={CAPI.pillar} />
+                    <GuardianLines pillar={pillar} />
                 </Section>
             )}
 
@@ -463,7 +469,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
             >
                 <Footer
                     pageFooter={CAPI.pageFooter}
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     pillars={NAV.pillars}
                 />
             </Section>
