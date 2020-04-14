@@ -88,12 +88,14 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
                     </div>
                 </div>
             );
+        case 'GuardianView':
         case 'Comment':
             return (
                 <div className={opinionStyles(pillar)}>
                     <BylineLink byline={byline} tags={tags} />
                 </div>
             );
+
         case 'Immersive':
             return (
                 <div className={immersiveStyles}>
@@ -112,7 +114,6 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':

@@ -190,7 +190,6 @@ const renderHeadline = ({
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
@@ -209,6 +208,7 @@ const renderHeadline = ({
                 </h1>
             );
 
+        case 'GuardianView':
         case 'Comment':
             return (
                 <>

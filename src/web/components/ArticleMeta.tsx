@@ -125,6 +125,7 @@ const shouldShowContributor = (
 
     switch (designType) {
         case 'Comment':
+        case 'GuardianView':
             return false;
         case 'Feature':
         case 'Review':
@@ -136,7 +137,6 @@ const shouldShowContributor = (
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
