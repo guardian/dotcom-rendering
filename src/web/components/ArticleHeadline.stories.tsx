@@ -385,7 +385,7 @@ export const Live = () => (
 );
 Live.story = { name: 'Live' };
 
-export const Immersive = () => (
+export const LongImmersive = () => (
     <>
         <MainMedia
             hideCaption={true}
@@ -421,4 +421,42 @@ export const Immersive = () => (
         </Section>
     </>
 );
-Immersive.story = { name: 'Immersive' };
+LongImmersive.story = { name: 'Immersive with a long headline' };
+
+export const ShortImmersive = () => (
+    <>
+        <MainMedia
+            hideCaption={true}
+            elements={mainMediaElements}
+            pillar="news"
+        />
+        <Section
+            showTopBorder={false}
+            showSideBorders={false}
+            padded={false}
+            shouldCenter={false}
+        >
+            <Flex>
+                <LeftColumn showRightBorder={false}>
+                    <></>
+                </LeftColumn>
+                <ArticleContainer>
+                    <div
+                        className={css`
+                            margin-top: -100px;
+                        `}
+                    >
+                        <ArticleHeadline
+                            headlineString="Ken Loach – all his films ranked!"
+                            designType="Immersive"
+                            pillar="culture"
+                            webPublicationDate=""
+                            tags={[]}
+                        />
+                    </div>
+                </ArticleContainer>
+            </Flex>
+        </Section>
+    </>
+);
+ShortImmersive.story = { name: 'Immersive with a short headline' };
