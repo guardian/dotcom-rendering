@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import loadable from '@loadable/component';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -7,7 +8,6 @@ import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/Most
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { CMP } from '@frontend/web/components/CMP';
 import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
 import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
@@ -26,6 +26,8 @@ import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+
+const CMP = loadable(() => import('@frontend/web/components/CMP'));
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -317,7 +319,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.cmpUi} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CMP cmpUi={CAPI.config.cmpUi} />
+                </Suspense>
             </Portal>
         </>
     );

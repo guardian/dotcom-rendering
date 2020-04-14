@@ -2,7 +2,6 @@ module.exports = {
     plugins: [
         '@babel/plugin-transform-react-jsx',
         'babel-plugin-preval',
-        'babel-plugin-dynamic-import-node',
         [
             '@babel/plugin-proposal-object-rest-spread',
             {
@@ -22,6 +21,7 @@ module.exports = {
             },
         ],
         'babel-plugin-px-to-rem',
+        '@loadable/babel-plugin',
     ],
 
     env: {

@@ -9,7 +9,7 @@ type Props = {
     cmpUi: boolean; // A switch to decide if we show CMP or not
 };
 
-export const CMP = ({ cmpUi }: Props) => {
+const CMP = ({ cmpUi }: Props) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -33,3 +33,5 @@ export const CMP = ({ cmpUi }: Props) => {
 
     return <ConsentManagementPlatform source="dcr" onClose={onClose} />;
 };
+
+export default CMP;

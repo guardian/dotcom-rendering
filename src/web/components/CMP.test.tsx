@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { shouldShow as shouldShow_ } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform as ConsentManagementPlatform_ } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
-import { CMP } from './CMP';
+import CMP from './CMP';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const shouldShow: any = shouldShow_;
