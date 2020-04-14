@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import React from 'react';
 import { css } from 'emotion';
 
@@ -8,8 +11,6 @@ import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
-
-import { App as Comments } from '@guardian/discussion-rendering';
 
 type Props = {
     user?: UserProfile;
@@ -82,24 +83,6 @@ export const CommentsLayout = ({
                     />
                 </div>
             </Hide>
-            <Comments
-                user={user}
-                baseUrl={baseUrl}
-                pillar={pillar}
-                initialPage={commentPage}
-                pageSizeOverride={commentPageSize}
-                isClosedForComments={
-                    isClosedForComments || !enableDiscussionSwitch
-                }
-                orderByOverride={commentOrderBy}
-                shortUrl={shortUrl}
-                additionalHeaders={{
-                    'D2-X-UID': discussionD2Uid,
-                    'GU-Client': discussionApiClientHeader,
-                }}
-                expanded={expanded}
-                commentToScrollTo={commentToScrollTo}
-            />
         </div>
     </Flex>
 );
