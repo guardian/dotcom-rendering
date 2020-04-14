@@ -336,7 +336,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={CAPI.pillar}
                             badge={CAPI.badge}
-                            inLeftCol={true}
                         />
                     </GridItem>
                     <GridItem area="border">

@@ -281,7 +281,6 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={pillar}
                             badge={CAPI.badge}
-                            inLeftCol={true}
                         />
                     </GridItem>
                     <GridItem area="border">

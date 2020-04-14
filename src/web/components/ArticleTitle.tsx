@@ -20,8 +20,6 @@ type Props = {
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
-    inLeftCol?: boolean;
-    fallbackToSection?: boolean;
     badge?: BadgeType;
 };
 
@@ -50,11 +48,9 @@ export const ArticleTitle = ({
     sectionUrl,
     guardianBaseURL,
     pillar,
-    inLeftCol,
-    fallbackToSection = true,
     badge,
 }: Props) => (
-    <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
+    <div className={cx(sectionStyles, badge && badgeContainer)}>
         {badge && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
@@ -67,7 +63,7 @@ export const ArticleTitle = ({
                 sectionUrl={sectionUrl}
                 guardianBaseURL={guardianBaseURL}
                 pillar={pillar}
-                fallbackToSection={fallbackToSection}
+                badge={badge}
             />
         </div>
     </div>
