@@ -28,7 +28,7 @@ type OphanAction = 'INSERT' | 'VIEW';
 const testName = 'FrontendDotcomRenderingEpic';
 const campaignCode = 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr';
 
-const sendOphanEvent = (action: OphanAction): void => {
+const sendOphanEpicEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
@@ -41,6 +41,18 @@ const sendOphanEvent = (action: OphanAction): void => {
             variant: 'dcr',
         },
         action,
+    };
+
+    window.guardian.ophan.record({ componentEvent });
+};
+
+const sendOphanReminderEvent = (componentId: string): void => {
+    const componentEvent = {
+        component: {
+            componentType: 'ACQUISITIONS_OTHER',
+            id: componentId,
+        },
+        action: 'CLICK',
     };
 
     window.guardian.ophan.record({ componentEvent });
@@ -62,6 +74,15 @@ type Props = {
     tags: TagType[];
     contributionsServiceUrl: string;
 };
+
+interface InitAutomatJsConfig {
+    epicRoot: HTMLElement | null;
+    onReminderOpen?: Function;
+}
+
+interface AutomatJsCallback {
+    buttonCopyAsString: string;
+}
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: Props) => {
@@ -152,7 +173,7 @@ const MemoisedInner = ({
                     },
                 }),
             )
-            .then(() => sendOphanEvent('INSERT'))
+            .then(() => sendOphanEpicEvent('INSERT'))
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -170,7 +191,7 @@ const MemoisedInner = ({
         if (hasBeenSeen) {
             // Add a new entry to the view log when we know an Epic is viewed
             logView(testName);
-            sendOphanEvent('VIEW');
+            sendOphanEpicEvent('VIEW');
         }
     }, [hasBeenSeen]);
 
@@ -183,7 +204,21 @@ const MemoisedInner = ({
                 // eslint-disable-next-line no-eval
                 window.eval(data.slot.js);
                 if (typeof window.initAutomatJs === 'function') {
-                    window.initAutomatJs(slotRoot.current);
+                    const initAutomatJsConfig: InitAutomatJsConfig = {
+                        epicRoot: slotRoot.current,
+                        onReminderOpen: (callbackParams: AutomatJsCallback) => {
+                            const { buttonCopyAsString } = callbackParams;
+                            // Track two separate Open events when the Reminder
+                            // button is clicked
+                            sendOphanReminderEvent(
+                                'precontribution-reminder-prompt-clicked',
+                            );
+                            sendOphanReminderEvent(
+                                `precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
+                            );
+                        },
+                    };
+                    window.initAutomatJs(initAutomatJsConfig);
                 }
             } catch (error) {
                 // eslint-disable-next-line no-console
