@@ -1,5 +1,4 @@
 import React from 'react';
-import { designTypeDefault } from '@root/src/lib/designTypes';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -10,18 +9,85 @@ type Props = {
     NAV: NavType;
 };
 
+const decideDisplay = (CAPI: CAPIType): Display => {
+    if (CAPI.isImmersive) return 'immersive';
+    if (CAPI.pageType.hasShowcaseMainElement) return 'showcase';
+    return 'standard';
+};
+
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
-    if (CAPI.pageType.hasShowcaseMainElement) {
-        return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+    const display: Display = decideDisplay(CAPI);
+    const { designType } = CAPI;
+
+    switch (display) {
+        case 'immersive': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                case 'Feature':
+                case 'Review':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+            }
+            break;
+        }
+        case 'showcase': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                case 'Feature':
+                case 'Review':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+            }
+            break;
+        }
+        case 'standard': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                case 'Feature':
+                case 'Review':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                    return <StandardLayout CAPI={CAPI} NAV={NAV} />;
+            }
+            break;
+        }
     }
-
-    // Otherwise, switch based on designType
-    const designTypeContent: DesignTypesObj = designTypeDefault(
-        <StandardLayout CAPI={CAPI} NAV={NAV} />,
-    );
-
-    designTypeContent.Comment = <CommentLayout CAPI={CAPI} NAV={NAV} />;
-    designTypeContent.GuardianView = <CommentLayout CAPI={CAPI} NAV={NAV} />;
-
-    return designTypeContent[CAPI.designType];
 };

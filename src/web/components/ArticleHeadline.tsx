@@ -6,8 +6,10 @@ import { getAgeWarning } from '@root/src/lib/age-warning';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
+
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
     headlineString: string;
@@ -110,11 +112,17 @@ const invertedStyles = css`
     position: relative;
     color: white;
     white-space: pre-wrap;
-    padding-bottom: 5px;
-    padding-right: 5px;
+    padding-bottom: ${space[1]}px;
+    padding-right: ${space[1]}px;
     box-shadow: -6px 0 0 black;
     /* Box decoration is required to push the box shadow out on Firefox */
     box-decoration-break: clone;
+`;
+
+const immersiveStyles = css`
+    min-height: 112px;
+    padding-bottom: ${space[9]}px;
+    padding-left: ${space[3]}px;
 `;
 
 const blackBackground = css`
@@ -261,6 +269,7 @@ const renderHeadline = ({
                             jumboFont,
                             maxWidth,
                             invertedStyles,
+                            immersiveStyles,
                             displayBlock,
                         )}
                     >
