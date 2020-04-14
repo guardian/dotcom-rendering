@@ -15,8 +15,16 @@ const decideDisplay = (CAPI: CAPIType): Display => {
     return 'standard';
 };
 
+const decidePillar = (CAPI: CAPIType): Pillar => {
+    // We override the pillar to be opinion on Comment news pieces
+    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
+        return 'opinion';
+    return CAPI.pillar;
+};
+
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
+    const pillar: Pillar = decidePillar(CAPI);
     const { designType } = CAPI;
 
     switch (display) {
@@ -30,6 +38,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="immersive"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
                 case 'Feature':
@@ -52,6 +61,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="immersive"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
             }
@@ -67,6 +77,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="showcase"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
                 case 'Feature':
@@ -89,6 +100,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="showcase"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
             }
@@ -104,6 +116,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="standard"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
                 case 'Feature':
@@ -126,6 +139,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                             NAV={NAV}
                             display="standard"
                             designType={designType}
+                            pillar={pillar}
                         />
                     );
             }

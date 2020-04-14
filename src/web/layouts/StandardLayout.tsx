@@ -213,9 +213,10 @@ interface Props {
     NAV: NavType;
     display: Display;
     designType: DesignType;
+    pillar: Pillar;
 }
 
-export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -286,7 +287,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                             <SubNav
                                 subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                             />
                         </Section>
                     )}
@@ -296,7 +297,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={CAPI.pillar} />
+                        <GuardianLines pillar={pillar} />
                     </Section>
                 </div>
             </div>
@@ -309,7 +310,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             badge={CAPI.badge}
                         />
                     </GridItem>
@@ -322,7 +323,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
                                     designType={designType}
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     webPublicationDate={CAPI.webPublicationDate}
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
@@ -343,7 +344,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                     <GridItem area="standfirst">
                         <ArticleStandfirst
                             designType={designType}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
@@ -351,7 +352,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                         <div className={maxWidth}>
                             <MainMedia
                                 elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 adTargeting={adTargeting}
                             />
                         </div>
@@ -360,7 +361,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     effect={decideLineEffect(
                                         designType,
                                         CAPI.pillar,
@@ -374,7 +375,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                         <div className={maxWidth}>
                             <ArticleMeta
                                 designType={designType}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
@@ -389,16 +390,16 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                         <ArticleContainer>
                             <main className={articleWidth}>
                                 <ArticleBody
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     blocks={CAPI.blocks}
                                     isImmersive={CAPI.isImmersive}
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={CAPI.pillar} />
+                                <GuardianLines pillar={pillar} />
                                 <SubMeta
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     subMetaKeywordLinks={
                                         CAPI.subMetaKeywordLinks
                                     }
@@ -480,9 +481,9 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                     />
-                    <GuardianLines pillar={CAPI.pillar} />
+                    <GuardianLines pillar={pillar} />
                 </Section>
             )}
 
@@ -493,7 +494,7 @@ export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
             >
                 <Footer
                     pageFooter={CAPI.pageFooter}
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     pillars={NAV.pillars}
                 />
             </Section>

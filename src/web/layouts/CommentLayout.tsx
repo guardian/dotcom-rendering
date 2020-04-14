@@ -181,9 +181,10 @@ interface Props {
     NAV: NavType;
     display: Display;
     designType: DesignType;
+    pillar: Pillar;
 }
 
-export const CommentLayout = ({ CAPI, NAV, designType }: Props) => {
+export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -215,9 +216,6 @@ export const CommentLayout = ({ CAPI, NAV, designType }: Props) => {
         CAPI.tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar = avatarUrl && onlyOneContributor;
-
-    // We override the pillar to be opinion on Comment news pieces
-    const pillar = CAPI.pillar === 'news' ? 'opinion' : CAPI.pillar;
 
     return (
         <>
