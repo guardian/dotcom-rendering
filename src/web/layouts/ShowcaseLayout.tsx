@@ -93,11 +93,11 @@ const ShowcaseGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column'
+                        'title  border  headline    headline'
+                        'lines  border  media       media'
+                        'meta   border  media       media'
+                        'meta   border  standfirst  right-column'
+                        '.      border  body        right-column'
                         '.      border  .           right-column';
                 }
 
@@ -336,7 +336,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={CAPI.pillar}
                             badge={CAPI.badge}
-                            inLeftCol={true}
                         />
                     </GridItem>
                     <GridItem area="border">
@@ -414,7 +413,13 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="body">
                         <ArticleContainer>
                             <main className={maxWidth}>
-                                <ArticleBody CAPI={CAPI} />
+                                <ArticleBody
+                                    pillar={CAPI.pillar}
+                                    blocks={CAPI.blocks}
+                                    isImmersive={CAPI.isImmersive}
+                                    designType={CAPI.designType}
+                                    adTargeting={adTargeting}
+                                />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta

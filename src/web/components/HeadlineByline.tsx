@@ -51,8 +51,28 @@ const opinionStyles = (pillar: Pillar) => css`
     }
 `;
 
+const immersiveStyles = css`
+    ${headline.medium({
+        fontWeight: 'light',
+    })}
+    line-height: 38px;
+`;
+
+const immersiveLinkStyles = (pillar: Pillar) => css`
+    a {
+        color: ${pillarPalette[pillar].main};
+        border-bottom: 1px solid ${pillarPalette[pillar].main};
+        text-decoration: none;
+        :hover {
+            border-bottom: 1px solid ${pillarPalette[pillar].dark};
+            color: ${pillarPalette[pillar].dark};
+            text-decoration: none;
+        }
+    }
+`;
+
 type Props = {
-    designType: 'Interview' | 'Comment';
+    designType: DesignType;
     pillar: Pillar;
     byline: string;
     tags: TagType[];
@@ -68,12 +88,35 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
                     </div>
                 </div>
             );
+        case 'GuardianView':
         case 'Comment':
             return (
                 <div className={opinionStyles(pillar)}>
                     <BylineLink byline={byline} tags={tags} />
                 </div>
             );
+
+        case 'Immersive':
+            return (
+                <div className={immersiveStyles}>
+                    by{' '}
+                    <span className={immersiveLinkStyles(pillar)}>
+                        <BylineLink byline={byline} tags={tags} />
+                    </span>
+                </div>
+            );
+        case 'Analysis':
+        case 'Feature':
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
         default:
             return null;
     }

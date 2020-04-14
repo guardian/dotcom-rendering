@@ -309,7 +309,6 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={CAPI.pillar}
                             badge={CAPI.badge}
-                            inLeftCol={true}
                         />
                     </GridItem>
                     <GridItem area="border">
@@ -389,7 +388,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="body">
                         <ArticleContainer>
                             <main className={articleWidth}>
-                                <ArticleBody CAPI={CAPI} />
+                                <ArticleBody
+                                    pillar={CAPI.pillar}
+                                    blocks={CAPI.blocks}
+                                    isImmersive={CAPI.isImmersive}
+                                    designType={CAPI.designType}
+                                    adTargeting={adTargeting}
+                                />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
