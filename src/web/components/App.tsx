@@ -318,11 +318,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="cmp">
-                <Suspense fallback={<div>Loading...</div>}>
-                    <CMP cmpUi={CAPI.config.cmpUi} />
-                </Suspense>
-            </Portal>
+            {!CAPI.config.cmpUi && (
+                <Portal root="cmp">
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <CMP />
+                    </Suspense>
+                </Portal>
+            )}
         </>
     );
 };
