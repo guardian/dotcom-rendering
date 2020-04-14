@@ -2100,30 +2100,30 @@
   dependencies:
     timeago.js "^4.0.2"
 
-"@guardian/src-button@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-0.16.1.tgz#f8833c8906f00a9f36295901282529220452d647"
-  integrity sha512-2wRywzccYNDG7WmVOL/ISQ0zoDCFbgHKrAMtBVx8C09kHRxcYRj4zvH20+psvL5u8ZrLYFB3Pm+GwX9Y8VgndQ==
+"@guardian/src-button@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-0.17.0.tgz#c18c0a0abcc0d968c5b725eed4c02008fccae67b"
+  integrity sha512-mlJ9dOypR1AKYIX23aORa4Wh0fdCKuD/JlXTPf6YMVWYlEEZzxV5UzdNziyAmfgCU5pv8Fjv4wiTfUHXTSK9Tw==
   dependencies:
-    "@guardian/src-helpers" "^0.16.1"
-    "@guardian/src-svgs" "^0.16.1"
+    "@guardian/src-helpers" "^0.17.0"
+    "@guardian/src-svgs" "^0.17.0"
 
-"@guardian/src-foundations@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.16.1.tgz#d5e52a57012c588d146b05ded7f9fbc4a9af40d5"
-  integrity sha512-E6YDqq53gy5CoO8xFPWDBjiYiI0o+4BE1/mFcwkpWGwtpkSnxi21LhkaQ63r+KRxoDB29clc86ChbNHXw9keFA==
+"@guardian/src-foundations@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.17.0.tgz#ea189b370fb222ef52686998fab8d8673d496a54"
+  integrity sha512-Dgm/i1J3JjxZeADT6+EgT6rz3hL0OrB4KEiNerxycL2saCBS9HqtmK18io95s7eg9pUZVINq+3KwrFeB8czY3g==
 
-"@guardian/src-helpers@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-0.16.1.tgz#cf1e5e6a2c36bb1d91c9785cbfe7f48b735644aa"
-  integrity sha512-SYWrWK5tm+axqRFRY9QjfFt/CS8v1ROh6o1/oy8hQxgiJExXsgLkbv0R8lgKkZaC8luO1dEgQYYXgQiqM+dsIA==
+"@guardian/src-helpers@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-0.17.0.tgz#94aca933a5fa9c8f4666378eddf1ec144700f78b"
+  integrity sha512-DGcF1gB+eqE/dksG4qHWTkrFV3D3dTXqtq/uX2lZnWfy/vvyxmxvvmKZKQ7zBAtxvmnrQFoTx6FWk7lFQv2C8w==
   dependencies:
-    "@guardian/src-foundations" "^0.16.1"
+    "@guardian/src-foundations" "^0.17.0"
 
-"@guardian/src-svgs@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.16.1.tgz#331d6bb30513c45b09e5b4807832eb4a146a27ea"
-  integrity sha512-OudfWJaKpTTP0J1QckqX0NmfneXgQ5YieZ/4em2lNXGZFEfYyxHnIXrAQE5LjmIGR8eJQoIikkwWiAFt4ziHXQ==
+"@guardian/src-svgs@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.17.0.tgz#7fc944a0d4708d2b3102144fa8ae66c9987e4657"
+  integrity sha512-8913E5P9xEUs7zktJxx5vJBqJOw4fb4AagbAG1lWwGYqLhvSx8xw3u0U/zFydEyx/+IOGfp0xWmLaulv7o7pzw==
 
 "@hapi/address@2.x.x":
   version "2.1.2"
