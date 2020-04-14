@@ -24,7 +24,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="immersive"
+                            designType={designType}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -39,7 +46,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <ShowcaseLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="immersive"
+                            designType={designType}
+                        />
+                    );
             }
             break;
         }
@@ -47,7 +61,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="showcase"
+                            designType={designType}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -62,7 +83,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <ShowcaseLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="showcase"
+                            designType={designType}
+                        />
+                    );
             }
             break;
         }
@@ -70,7 +98,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="standard"
+                            designType={designType}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -85,7 +120,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <StandardLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <StandardLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="standard"
+                            designType={designType}
+                        />
+                    );
             }
             break;
         }

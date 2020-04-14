@@ -211,9 +211,11 @@ const headerWrapper = css`
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, designType }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -316,12 +318,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
-                            >
+                            <ArticleHeadlinePadding designType={designType}>
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
+                                    designType={designType}
                                     pillar={CAPI.pillar}
                                     webPublicationDate={CAPI.webPublicationDate}
                                     tags={CAPI.tags}
@@ -342,7 +342,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
+                            designType={designType}
                             pillar={CAPI.pillar}
                             standfirst={CAPI.standfirst}
                         />
@@ -362,10 +362,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 <GuardianLines
                                     pillar={CAPI.pillar}
                                     effect={decideLineEffect(
-                                        CAPI.designType,
+                                        designType,
                                         CAPI.pillar,
                                     )}
-                                    count={decideLineCount(CAPI.designType)}
+                                    count={decideLineCount(designType)}
                                 />
                             </div>
                         </div>
@@ -373,7 +373,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
+                                designType={designType}
                                 pillar={CAPI.pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
@@ -392,7 +392,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                     pillar={CAPI.pillar}
                                     blocks={CAPI.blocks}
                                     isImmersive={CAPI.isImmersive}
-                                    designType={CAPI.designType}
+                                    designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}

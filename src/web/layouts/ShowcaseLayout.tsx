@@ -238,9 +238,11 @@ const headerWrapper = css`
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
+export const ShowcaseLayout = ({ CAPI, NAV, designType }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -342,7 +344,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <PositionHeadline designType={CAPI.designType}>
+                        <PositionHeadline designType={designType}>
                             <div
                                 className={css`
                                     padding-bottom: 24px;
@@ -350,7 +352,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             >
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
+                                    designType={designType}
                                     pillar={CAPI.pillar}
                                     webPublicationDate={CAPI.webPublicationDate}
                                     tags={CAPI.tags}
@@ -366,8 +368,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 pillar={CAPI.pillar}
                                 adTargeting={adTargeting}
                                 starRating={
-                                    CAPI.designType === 'Review' &&
-                                    CAPI.starRating
+                                    designType === 'Review' && CAPI.starRating
                                         ? CAPI.starRating
                                         : undefined
                                 }
@@ -376,7 +377,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
+                            designType={designType}
                             pillar={CAPI.pillar}
                             standfirst={CAPI.standfirst}
                         />
@@ -387,10 +388,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 <GuardianLines
                                     pillar={CAPI.pillar}
                                     effect={decideLineEffect(
-                                        CAPI.designType,
+                                        designType,
                                         CAPI.pillar,
                                     )}
-                                    count={decideLineCount(CAPI.designType)}
+                                    count={decideLineCount(designType)}
                                 />
                             </div>
                         </div>
@@ -398,7 +399,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
+                                designType={designType}
                                 pillar={CAPI.pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
@@ -417,7 +418,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     pillar={CAPI.pillar}
                                     blocks={CAPI.blocks}
                                     isImmersive={CAPI.isImmersive}
-                                    designType={CAPI.designType}
+                                    designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
