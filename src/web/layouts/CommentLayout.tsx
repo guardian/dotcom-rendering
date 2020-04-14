@@ -209,6 +209,10 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
 
     const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
     const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
+    const onlyOneContributor: boolean =
+        CAPI.tags.filter(tag => tag.type === 'Contributor').length === 1;
+
+    const showAvatar = avatarUrl && onlyOneContributor;
 
     // We override the pillar to be opinion on Comment news pieces
     const pillar = CAPI.pillar === 'news' ? 'opinion' : CAPI.pillar;
@@ -288,13 +292,13 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             <div
                                 className={cx(
                                     avatarHeadlineWrapper,
-                                    avatarUrl && minHeightWithAvatar,
+                                    showAvatar && minHeightWithAvatar,
                                 )}
                             >
                                 {/* TOP - we use divs here to position content in groups using flex */}
                                 <div
                                     className={cx(
-                                        !avatarUrl && headlinePadding,
+                                        !showAvatar && headlinePadding,
                                     )}
                                 >
                                     <ArticleHeadline
@@ -310,7 +314,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                 </div>
                                 {/* BOTTOM */}
                                 <div>
-                                    {avatarUrl && (
+                                    {showAvatar && avatarUrl && (
                                         <div className={avatarPositionStyles}>
                                             <ContributorAvatar
                                                 imageSrc={avatarUrl}
