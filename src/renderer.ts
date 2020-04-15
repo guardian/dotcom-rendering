@@ -389,9 +389,9 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
         h(Anchor, { href: props.url, pillar: props.pillar, text: 'Read more' }),
     );
 
-const Interactive = (props: { url: string }): ReactElement =>
+const Interactive = (props: { url: string; title?: string }): ReactElement =>
     styledH('figure', { className: 'interactive' },
-        h('iframe', { src: props.url, height: 500 }, null)
+        h('iframe', { src: props.url, height: 500, title: props.title ?? "" }, null)
     );
 
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
@@ -441,7 +441,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         }
 
         case ElementKind.Interactive:
-            return h(Interactive, { url: element.url, key });
+            return h(Interactive, { url: element.url, key, title: element.alt });
 
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
