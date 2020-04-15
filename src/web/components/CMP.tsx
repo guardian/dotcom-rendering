@@ -1,33 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import {
-    shouldShow,
-    setErrorHandler,
-} from '@guardian/consent-management-platform';
-import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
+import loadable from '@loadable/component';
 
-const CMP = () => {
-    const [show, setShow] = useState(false);
+const ConsentManagementFunctions = loadable.lib(() =>
+    import('@guardian/consent-management-platform'),
+);
+const ConsentManagementComponent = loadable.lib(() =>
+    import(
+        '@guardian/consent-management-platform/lib/ConsentManagementPlatform'
+    ),
+);
 
-    useEffect(() => {
-        if (shouldShow()) {
-            setShow(true);
+const CMP = () => (
+    <ConsentManagementFunctions>
+        {({ shouldShow, setErrorHandler }) => {
+            const [show, setShow] = useState(false);
 
-            // setErrorHandler takes function to be called on errors in the CMP UI
-            setErrorHandler((errMsg: string): void => {
-                const err = new Error(errMsg);
+            useEffect(() => {
+                if (shouldShow()) {
+                    setShow(true);
 
-                window.guardian.modules.sentry.reportError(err, 'cmp');
-            });
-        }
-    }, []);
+                    // setErrorHandler takes function to be called on errors in the CMP UI
+                    setErrorHandler((errMsg: string): void => {
+                        const err = new Error(errMsg);
 
-    const onClose = () => setShow(false);
+                        window.guardian.modules.sentry.reportError(err, 'cmp');
+                    });
+                }
+            }, []);
 
-    if (!show) {
-        return null;
-    }
+            const onClose = () => setShow(false);
 
-    return <ConsentManagementPlatform source="dcr" onClose={onClose} />;
-};
+            if (!show) {
+                return null;
+            }
+            return (
+                <ConsentManagementComponent>
+                    {({ ConsentManagementPlatform }) => (
+                        <ConsentManagementPlatform
+                            source="dcr"
+                            onClose={onClose}
+                        />
+                    )}
+                </ConsentManagementComponent>
+            );
+        }}
+    </ConsentManagementFunctions>
+);
 
 export default CMP;
