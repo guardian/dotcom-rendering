@@ -1,6 +1,7 @@
 module.exports = {
     plugins: [
         '@babel/plugin-transform-react-jsx',
+        'babel-plugin-syntax-dynamic-import',
         'babel-plugin-preval',
         [
             '@babel/plugin-proposal-object-rest-spread',
@@ -45,6 +46,9 @@ module.exports = {
                     },
                 ],
             ],
+        },
+        test: {
+            plugins: ['babel-plugin-dynamic-import-node'],
         },
     },
     ignore: ['**/*.json'],

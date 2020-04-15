@@ -106,6 +106,7 @@
         "@storybook/addon-viewport": "^5.2.5",
         "@storybook/addons": "^5.2.5",
         "@storybook/react": "^5.2.5",
+        "@testing-library/dom": "^7.2.1",
         "@testing-library/react": "8.0.7",
         "@types/amphtml-validator": "^1.0.0",
         "@types/compose-function": "^0.0.30",
@@ -134,10 +135,12 @@
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^24.8.0",
         "babel-loader": "^8.0.6",
+        "babel-plugin-dynamic-import-node": "^2.3.0",
         "babel-plugin-emotion": "^10.0.14",
         "babel-plugin-module-resolver": "^3.2.0",
         "babel-plugin-preval": "^3.0.0",
         "babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
+        "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "bundlesize": "^0.17.0",
         "cypress": "^3.8.3",
         "desvg-loader": "^0.1.0",
@@ -149,6 +152,7 @@
         "husky": "^4.2.2",
         "jest": "^24.8.0",
         "jest-dom": "^2.1.0",
+        "jest-environment-jsdom-sixteen": "^1.0.3",
         "jest-teamcity-reporter": "^0.9.0",
         "lighthouse": "^5.2.0",
         "lodash.clonedeep": "^4.5.0",
@@ -187,6 +191,7 @@
         "webpack-sources": "^1.1.0"
     },
     "jest": {
+      "testEnvironment": "jest-environment-jsdom-sixteen",
         "moduleFileExtensions": [
             "ts",
             "tsx",
