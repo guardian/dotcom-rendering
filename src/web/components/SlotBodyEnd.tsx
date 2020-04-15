@@ -92,13 +92,7 @@ const buildPayload = (props: Props) => {
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
-            campaignCode,
-            abTestName: testName,
-            abTestVariant: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
-        },
-        localisation: {
-            countryCode: props.countryCode,
         },
         targeting: {
             contentType: props.contentType,

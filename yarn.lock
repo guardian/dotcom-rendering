@@ -2135,10 +2135,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/automat-client@^0.2.14":
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.14.tgz#eed3a79609d57aeac81be80473f8fc34e76bc88d"
-  integrity sha512-A4K+rH0cag/yvHk8bR5X/anPIZbP8PqUFkV8o1fXS1s4cpe23KWx60XKrc+cZAPdCws6uIjsqWey19bzB/LUwg==
+"@guardian/automat-client@^0.2.16":
+  version "0.2.16"
+  resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
+  integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
 "@guardian/consent-management-platform@^3.0.0":
   version "3.0.0"
