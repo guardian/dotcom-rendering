@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
@@ -320,9 +320,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             {!CAPI.config.cmpUi && (
                 <Portal root="cmp">
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <CMP />
-                    </Suspense>
+                    <CMP />
                 </Portal>
             )}
         </>
