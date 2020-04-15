@@ -193,7 +193,7 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Interactive', () => {
         const nodes = render(interactiveElement())
         const interactive = shallow(nodes.flat()[0]);
-        expect(interactive.html()).toContain('<iframe src="https://gu.com/interactive" height="500"></iframe>');
+        expect(interactive.html()).toContain('<iframe src="https://gu.com/interactive" height="500" title=""></iframe>');
     })
 
     test('ElementKind.Tweet', () => {
