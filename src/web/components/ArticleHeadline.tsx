@@ -239,6 +239,7 @@ const renderHeadline = ({
                     <h1 className={lightFont}>{curly(headlineString)}</h1>
                     {byline && (
                         <HeadlineByline
+                            display={display}
                             designType={designType}
                             pillar={pillar}
                             byline={byline}
@@ -274,6 +275,7 @@ const renderHeadline = ({
                     </h1>
                     {byline && (
                         <HeadlineByline
+                            display={display}
                             designType={designType}
                             pillar={pillar}
                             byline={byline}

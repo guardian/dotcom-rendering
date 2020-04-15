@@ -10,6 +10,7 @@ export default {
 export const interviewStory = () => {
     return (
         <HeadlineByline
+            display="standard"
             designType="Interview"
             pillar="culture"
             byline="Jane Smith"
@@ -22,6 +23,7 @@ interviewStory.story = { name: 'Interview' };
 export const commentStory = () => {
     return (
         <HeadlineByline
+            display="standard"
             designType="Comment"
             pillar="sport"
             byline="Jane Smith"
@@ -34,6 +36,7 @@ commentStory.story = { name: 'Comment' };
 export const immersiveStory = () => {
     return (
         <HeadlineByline
+            display="immersive"
             designType="Immersive"
             pillar="lifestyle"
             byline="Jane Smith"
@@ -52,6 +55,7 @@ immersiveStory.story = { name: 'Immersive' };
 export const MultipleStory = () => {
     return (
         <HeadlineByline
+            display="immersive"
             designType="Immersive"
             pillar="lifestyle"
             byline="Jane Smith, John Doe and Nae Bevan"
