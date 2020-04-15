@@ -7,7 +7,6 @@ import { Review } from '@root/fixtures/articles/Review';
 import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
-import { Immersive } from '@root/fixtures/articles/Immersive';
 import { Interview } from '@root/fixtures/articles/Interview';
 import { Quiz } from '@root/fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
@@ -93,12 +92,6 @@ export const GuardianViewStory = () => {
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
-
-export const ImmersiveStory = () => {
-    const ServerCAPI = convertToStandard(Immersive);
-    return <HydratedLayout ServerCAPI={ServerCAPI} />;
-};
-ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
     const ServerCAPI = convertToStandard(Interview);
