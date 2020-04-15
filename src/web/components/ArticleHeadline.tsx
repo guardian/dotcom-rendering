@@ -13,6 +13,7 @@ import { space } from '@guardian/src-foundations';
 
 type Props = {
     headlineString: string;
+    display: Display;
     designType: DesignType; // Decides headline appearance
     pillar: Pillar; // Decides headline colour when relevant
     webPublicationDate: string; // Used for age warning
@@ -167,6 +168,7 @@ const ageWarningMargins = css`
 `;
 
 const renderHeadline = ({
+    display,
     designType,
     pillar,
     headlineString,
@@ -174,6 +176,7 @@ const renderHeadline = ({
     tags,
     options,
 }: {
+    display: Display;
     designType: DesignType;
     pillar: Pillar;
     headlineString: string;
@@ -183,7 +186,28 @@ const renderHeadline = ({
         colour?: string;
     };
 }) => {
+    if (display === 'immersive') {
+        return (
+            // Immersive headlines are large and inverted and have their black background
+            // extended to the right
+            <h1 className={cx(invertedWrapper, blackBackground)}>
+                <span
+                    className={cx(
+                        jumboFont,
+                        maxWidth,
+                        invertedStyles,
+                        immersiveStyles,
+                        displayBlock,
+                    )}
+                >
+                    {curly(headlineString)}
+                </span>
+            </h1>
+        );
+    }
+
     switch (designType) {
+        case 'Immersive':
         case 'Article':
         case 'Media':
         case 'Live':
@@ -258,30 +282,12 @@ const renderHeadline = ({
                     )}
                 </div>
             );
-
-        case 'Immersive':
-            return (
-                // Immersive headlines are large and inverted and have their black background
-                // extended to the right
-                <h1 className={cx(invertedWrapper, blackBackground)}>
-                    <span
-                        className={cx(
-                            jumboFont,
-                            maxWidth,
-                            invertedStyles,
-                            immersiveStyles,
-                            displayBlock,
-                        )}
-                    >
-                        {curly(headlineString)}
-                    </span>
-                </h1>
-            );
     }
 };
 
 export const ArticleHeadline = ({
     headlineString,
+    display,
     designType,
     pillar,
     webPublicationDate,
@@ -297,6 +303,7 @@ export const ArticleHeadline = ({
                 </div>
             )}
             {renderHeadline({
+                display,
                 designType,
                 pillar,
                 headlineString,

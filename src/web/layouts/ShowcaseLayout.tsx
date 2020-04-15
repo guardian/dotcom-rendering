@@ -243,7 +243,13 @@ interface Props {
     pillar: Pillar;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
+export const ShowcaseLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -352,6 +358,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                 `}
                             >
                                 <ArticleHeadline
+                                    display={display}
                                     headlineString={CAPI.headline}
                                     designType={designType}
                                     pillar={pillar}

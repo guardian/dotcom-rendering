@@ -216,7 +216,13 @@ interface Props {
     pillar: Pillar;
 }
 
-export const StandardLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
+export const StandardLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -321,6 +327,7 @@ export const StandardLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                         <div className={maxWidth}>
                             <ArticleHeadlinePadding designType={designType}>
                                 <ArticleHeadline
+                                    display={display}
                                     headlineString={CAPI.headline}
                                     designType={designType}
                                     pillar={pillar}

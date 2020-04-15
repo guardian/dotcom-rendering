@@ -184,7 +184,13 @@ interface Props {
     pillar: Pillar;
 }
 
-export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
+export const CommentLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -301,6 +307,7 @@ export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                     )}
                                 >
                                     <ArticleHeadline
+                                        display={display}
                                         headlineString={CAPI.headline}
                                         designType={designType}
                                         pillar={pillar}
