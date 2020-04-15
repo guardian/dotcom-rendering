@@ -466,7 +466,7 @@ export const ShortImmersive = () => (
                     >
                         <ArticleHeadline
                             headlineString="Ken Loach – all his films ranked!"
-                            display="standard"
+                            display="immersive"
                             designType="Immersive"
                             pillar="culture"
                             webPublicationDate=""
