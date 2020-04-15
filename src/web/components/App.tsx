@@ -316,11 +316,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            {!CAPI.config.cmpUi && (
-                <Portal root="cmp">
-                    <CMP />
-                </Portal>
-            )}
+            <Portal root="cmp">
+                <>
+                    {/* need to assure cmpUi is false and not undefined for storybook */}
+                    {CAPI.config.cmpUi === false && <CMP />}
+                </>
+            </Portal>
         </>
     );
 };
