@@ -45,39 +45,6 @@ const secondaryStyle = css`
     display: block;
 `;
 
-const TagLink: React.FC<{
-    pillar: Pillar;
-    guardianBaseURL: string;
-    tagTitle: string;
-    tagUrl: string;
-    dataComponentName: string;
-    dataLinkName: string;
-    weightingClass: string;
-}> = ({
-    pillar,
-    guardianBaseURL,
-    tagTitle,
-    tagUrl,
-    dataComponentName,
-    dataLinkName,
-    weightingClass,
-}) => {
-    return (
-        <a
-            href={`${guardianBaseURL}/${tagUrl}`}
-            className={cx(
-                sectionLabelLink,
-                pillarColours[pillar],
-                weightingClass,
-            )}
-            data-component={dataComponentName}
-            data-link-name={dataLinkName}
-        >
-            <span>{tagTitle}</span>
-        </a>
-    );
-};
-
 export const SeriesSectionLink: React.FC<{
     tags: TagType[];
     sectionLabel: string;
@@ -102,26 +69,32 @@ export const SeriesSectionLink: React.FC<{
         return tag ? (
             // Sometimes the tags/titles are shown inline, sometimes stacked
             <div className={cx(!badge && rowBelowLeftCol)}>
-                <TagLink
-                    pillar={pillar}
-                    guardianBaseURL={guardianBaseURL}
-                    tagTitle={tag.title}
-                    tagUrl={tag.id}
-                    dataComponentName="series"
-                    dataLinkName="article series"
-                    weightingClass={primaryStyle}
-                />
+                <a
+                    href={`${guardianBaseURL}/${tag.id}`}
+                    className={cx(
+                        sectionLabelLink,
+                        pillarColours[pillar],
+                        primaryStyle,
+                    )}
+                    data-component="series"
+                    data-link-name="article series"
+                >
+                    <span>{tag.title}</span>
+                </a>
 
                 <Hide when="below" breakpoint="tablet">
-                    <TagLink
-                        pillar={pillar}
-                        guardianBaseURL={guardianBaseURL}
-                        tagTitle={sectionLabel}
-                        tagUrl={sectionUrl}
-                        dataComponentName="section"
-                        dataLinkName="article section"
-                        weightingClass={secondaryStyle}
-                    />
+                    <a
+                        href={`${guardianBaseURL}/${sectionUrl}`}
+                        className={cx(
+                            sectionLabelLink,
+                            pillarColours[pillar],
+                            secondaryStyle,
+                        )}
+                        data-component="section"
+                        data-link-name="article section"
+                    >
+                        <span>{sectionLabel}</span>
+                    </a>
                 </Hide>
             </div>
         ) : null;
@@ -129,14 +102,17 @@ export const SeriesSectionLink: React.FC<{
 
     // Otherwise, there was no tag so just show 1 title
     return (
-        <TagLink
-            pillar={pillar}
-            guardianBaseURL={guardianBaseURL}
-            tagTitle={sectionLabel}
-            tagUrl={sectionUrl}
-            dataComponentName="Section"
-            dataLinkName="article section"
-            weightingClass={primaryStyle}
-        />
+        <a
+            href={`${guardianBaseURL}/${sectionUrl}`}
+            className={cx(
+                sectionLabelLink,
+                pillarColours[pillar],
+                primaryStyle,
+            )}
+            data-component="section"
+            data-link-name="article section"
+        >
+            <span>{sectionLabel}</span>
+        </a>
     );
 };
