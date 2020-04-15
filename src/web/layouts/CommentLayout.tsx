@@ -179,9 +179,12 @@ const headlinePadding = css`
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
+    pillar: Pillar;
 }
 
-export const CommentLayout = ({ CAPI, NAV }: Props) => {
+export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -213,9 +216,6 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
         CAPI.tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar = avatarUrl && onlyOneContributor;
-
-    // We override the pillar to be opinion on Comment news pieces
-    const pillar = CAPI.pillar === 'news' ? 'opinion' : CAPI.pillar;
 
     return (
         <>
@@ -302,7 +302,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                 >
                                     <ArticleHeadline
                                         headlineString={CAPI.headline}
-                                        designType={CAPI.designType}
+                                        designType={designType}
                                         pillar={pillar}
                                         webPublicationDate={
                                             CAPI.webPublicationDate
@@ -335,7 +335,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
+                            designType={designType}
                             pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
@@ -352,7 +352,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
+                                designType={designType}
                                 pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
@@ -371,7 +371,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
                                     isImmersive={CAPI.isImmersive}
-                                    designType={CAPI.designType}
+                                    designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
