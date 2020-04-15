@@ -25,7 +25,7 @@
         }
     ],
     "dependencies": {
-        "@emotion/core": "^10.0.5",
+        "@emotion/core": "^10.0.28",
         "@guardian/automat-client": "^0.2.14",
         "@guardian/consent-management-platform": "^3.0.0",
         "@guardian/discussion-rendering": "^1.0.0",
