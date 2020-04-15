@@ -4,11 +4,12 @@ import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
+import { space, neutral } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 
 type Props = {
+    display: Display;
     tags: TagType[];
     sectionLabel: string;
     sectionUrl: string;
@@ -49,12 +50,28 @@ const primaryStyle = css`
     padding-right: ${space[2]}px;
 `;
 
+const invertedStyle = (pillar: Pillar) => css`
+    font-weight: 700;
+    ${headline.xxxsmall({ fontWeight: 'bold' })};
+    ${from.leftCol} {
+        ${headline.xxsmall({ fontWeight: 'bold' })};
+    }
+    color: ${neutral[100]};
+    background-color: ${pillarPalette[pillar].main};
+
+    padding-left: ${space[2]}px;
+    padding-right: ${space[2]}px;
+    padding-top: ${space[1]}px;
+    padding-bottom: ${space[1]}px;
+`;
+
 const secondaryStyle = css`
     ${headline.xxxsmall({ fontWeight: 'regular' })};
     display: block;
 `;
 
 export const SeriesSectionLink = ({
+    display,
     tags,
     sectionLabel,
     sectionUrl,
@@ -83,7 +100,9 @@ export const SeriesSectionLink = ({
                     className={cx(
                         sectionLabelLink,
                         pillarColours[pillar],
-                        primaryStyle,
+                        display === 'immersive'
+                            ? invertedStyle(pillar)
+                            : primaryStyle,
                     )}
                     data-component="series"
                     data-link-name="article series"
@@ -91,20 +110,22 @@ export const SeriesSectionLink = ({
                     <span>{tag.title}</span>
                 </a>
 
-                <Hide when="below" breakpoint="tablet">
-                    <a
-                        href={`${guardianBaseURL}/${sectionUrl}`}
-                        className={cx(
-                            sectionLabelLink,
-                            pillarColours[pillar],
-                            secondaryStyle,
-                        )}
-                        data-component="section"
-                        data-link-name="article section"
-                    >
-                        <span>{sectionLabel}</span>
-                    </a>
-                </Hide>
+                {display !== 'immersive' && (
+                    <Hide when="below" breakpoint="tablet">
+                        <a
+                            href={`${guardianBaseURL}/${sectionUrl}`}
+                            className={cx(
+                                sectionLabelLink,
+                                pillarColours[pillar],
+                                secondaryStyle,
+                            )}
+                            data-component="section"
+                            data-link-name="article section"
+                        >
+                            <span>{sectionLabel}</span>
+                        </a>
+                    </Hide>
+                )}
             </div>
         ) : null;
     }
@@ -116,7 +137,7 @@ export const SeriesSectionLink = ({
             className={cx(
                 sectionLabelLink,
                 pillarColours[pillar],
-                primaryStyle,
+                display === 'immersive' ? invertedStyle(pillar) : primaryStyle,
             )}
             data-component="section"
             data-link-name="article section"

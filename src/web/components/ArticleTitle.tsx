@@ -6,6 +6,7 @@ import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
+    display: Display;
     tags: TagType[];
     sectionLabel: string;
     sectionUrl: string;
@@ -43,6 +44,7 @@ const marginTop = css`
 `;
 
 export const ArticleTitle = ({
+    display,
     tags,
     sectionLabel,
     sectionUrl,
@@ -51,13 +53,14 @@ export const ArticleTitle = ({
     badge,
 }: Props) => (
     <div className={cx(sectionStyles, badge && badgeContainer)}>
-        {badge && (
+        {badge && display !== 'immersive' && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
         <div className={badge && marginTop}>
             <SeriesSectionLink
+                display={display}
                 tags={tags}
                 sectionLabel={sectionLabel}
                 sectionUrl={sectionUrl}

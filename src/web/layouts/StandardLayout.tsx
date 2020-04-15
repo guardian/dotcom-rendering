@@ -312,6 +312,7 @@ export const StandardLayout = ({
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
+                            display={display}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
