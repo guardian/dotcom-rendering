@@ -94,7 +94,11 @@ export const SeriesSectionLink = ({
 
         return tag ? (
             // Sometimes the tags/titles are shown inline, sometimes stacked
-            <div className={cx(!badge && rowBelowLeftCol)}>
+            <div
+                className={cx(
+                    !badge && display !== 'immersive' && rowBelowLeftCol,
+                )}
+            >
                 <a
                     href={`${guardianBaseURL}/${tag.id}`}
                     className={cx(
