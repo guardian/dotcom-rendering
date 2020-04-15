@@ -5,15 +5,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
-const sectionStyles = css`
-    padding-top: 8px;
-    display: flex;
-    flex-direction: row;
-    ${from.leftCol} {
-        flex-direction: column;
-    }
-`;
-
 type Props = {
     tags: TagType[];
     sectionLabel: string;
@@ -22,6 +13,15 @@ type Props = {
     pillar: Pillar;
     badge?: BadgeType;
 };
+
+const sectionStyles = css`
+    padding-top: 8px;
+    display: flex;
+    flex-direction: row;
+    ${from.leftCol} {
+        flex-direction: column;
+    }
+`;
 
 const titleBadgeWrapper = css`
     margin-bottom: 6px;

@@ -8,6 +8,15 @@ import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 
+type Props = {
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    badge?: BadgeType;
+};
+
 const sectionLabelLink = css`
     text-decoration: none;
     :hover {
@@ -45,14 +54,14 @@ const secondaryStyle = css`
     display: block;
 `;
 
-export const SeriesSectionLink: React.FC<{
-    tags: TagType[];
-    sectionLabel: string;
-    sectionUrl: string;
-    guardianBaseURL: string;
-    pillar: Pillar;
-    badge?: BadgeType;
-}> = ({ tags, sectionLabel, sectionUrl, guardianBaseURL, pillar, badge }) => {
+export const SeriesSectionLink = ({
+    tags,
+    sectionLabel,
+    sectionUrl,
+    guardianBaseURL,
+    pillar,
+    badge,
+}: Props) => {
     // If we have a tag, use it to show 2 section titles
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
