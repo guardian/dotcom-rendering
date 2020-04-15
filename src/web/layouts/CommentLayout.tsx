@@ -359,6 +359,7 @@ export const CommentLayout = ({
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                display={display}
                                 designType={designType}
                                 pillar={pillar}
                                 pageId={CAPI.pageId}

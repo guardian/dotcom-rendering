@@ -10,6 +10,7 @@ import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
+    display: Display;
     designType: DesignType;
     pillar: Pillar;
     pageId: string;
@@ -17,7 +18,6 @@ type Props = {
     author: AuthorType;
     tags: TagType[];
     webPublicationDateDisplay: string;
-    isImmersive?: boolean;
 };
 
 const meta = css`
@@ -87,8 +87,8 @@ const getAuthorName = (tags: TagType[]) => {
     return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
-    if (isImmersive) {
+const shouldShowAvatar = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
         return false;
     }
 
@@ -115,11 +115,8 @@ const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
     }
 };
 
-const shouldShowContributor = (
-    designType: DesignType,
-    isImmersive?: boolean,
-) => {
-    if (isImmersive) {
+const shouldShowContributor = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
         return false;
     }
 
@@ -194,6 +191,7 @@ const RowBelowLeftCol = ({
 );
 
 export const ArticleMeta = ({
+    display,
     designType,
     pillar,
     pageId,
@@ -201,7 +199,6 @@ export const ArticleMeta = ({
     author,
     tags,
     webPublicationDateDisplay,
-    isImmersive,
 }: Props) => {
     const sharingUrls = getSharingUrls(pageId, webTitle);
     const bylineImageUrl = getBylineImageUrl(tags);
@@ -211,7 +208,7 @@ export const ArticleMeta = ({
         tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar =
-        onlyOneContributor && shouldShowAvatar(designType, isImmersive);
+        onlyOneContributor && shouldShowAvatar(designType, display);
 
     return (
         <div className={metaContainer}>
@@ -228,7 +225,7 @@ export const ArticleMeta = ({
                             </AvatarContainer>
                         )}
                         <div>
-                            {shouldShowContributor(designType, isImmersive) && (
+                            {shouldShowContributor(designType, display) && (
                                 <Contributor
                                     designType={designType}
                                     author={author}
