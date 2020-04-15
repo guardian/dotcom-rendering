@@ -13,6 +13,7 @@ export const Article = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Article"
                 standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -25,6 +26,7 @@ export const Comment = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Comment"
                 standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -37,6 +39,7 @@ export const Feature = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Feature"
                 standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -49,6 +52,7 @@ export const Immersive = () => {
     return (
         <Section>
             <Standfirst
+                display="immersive"
                 designType="Immersive"
                 standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -61,6 +65,7 @@ export const Review = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Review"
                 standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -73,6 +78,7 @@ export const Live = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Live"
                 standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -85,6 +91,7 @@ export const Interview = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Interview"
                 standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -97,6 +104,7 @@ export const Analysis = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Analysis"
                 standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -109,6 +117,7 @@ export const Media = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Media"
                 standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -121,6 +130,7 @@ export const Recipe = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Recipe"
                 standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -133,6 +143,7 @@ export const MatchReport = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="MatchReport"
                 standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -145,6 +156,7 @@ export const Quiz = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="Quiz"
                 standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -157,6 +169,7 @@ export const SpecialReport = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="SpecialReport"
                 standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -169,6 +182,7 @@ export const GuardianView = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="GuardianView"
                 standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -181,6 +195,7 @@ export const GuardianLabs = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="GuardianLabs"
                 standfirst="This is how GuardianLabs standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -193,6 +208,7 @@ export const AdvertisementFeature = () => {
     return (
         <Section>
             <Standfirst
+                display="standard"
                 designType="AdvertisementFeature"
                 standfirst="This is how AdvertisementFeature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />

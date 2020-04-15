@@ -136,6 +136,7 @@ export const Interview = () => (
                     byline="Byline text"
                 />
                 <Standfirst
+                    display="standard"
                     designType="Interview"
                     standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
                 />

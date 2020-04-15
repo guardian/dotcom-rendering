@@ -350,6 +350,7 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
+                            display={display}
                             designType={designType}
                             pillar={pillar}
                             standfirst={CAPI.standfirst}
