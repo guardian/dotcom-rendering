@@ -186,17 +186,6 @@ const PositionHeadline = ({
                 </div>
             );
         case 'Immersive':
-            return (
-                <div
-                    className={css`
-                        ${from.leftCol} {
-                            margin-top: -100px;
-                        }
-                    `}
-                >
-                    {children}
-                </div>
-            );
         case 'Article':
         case 'Media':
         case 'Review':
