@@ -7,7 +7,7 @@ const ConsentManagementComponent = loadable.lib(() =>
     ),
 );
 
-const CMP = () => {
+export const CMP = () => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -41,5 +41,3 @@ const CMP = () => {
         </ConsentManagementComponent>
     );
 };
-
-export default CMP;
