@@ -3,8 +3,9 @@ export const getAgeWarning = (
     webPublicationDate: string,
 ): string | undefined => {
     const isNews = tags.some(t => t.id === 'tone/news');
+    const isOpinion = tags.some(t => t.id === 'commentisfree/commentisfree');
 
-    if (!isNews) {
+    if (!isNews && !isOpinion) {
         return;
     }
 
