@@ -40,7 +40,15 @@ const nestedStyles = css`
     }
 `;
 
-const standfirstStyles = (designType: DesignType) => {
+const standfirstStyles = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
+        return css`
+            ${headline.xsmall({
+                fontWeight: 'light',
+            })};
+        `;
+    }
+
     switch (designType) {
         case 'Comment':
         case 'GuardianView':
@@ -53,11 +61,6 @@ const standfirstStyles = (designType: DesignType) => {
                 })};
             `;
         case 'Immersive':
-            return css`
-                ${headline.xsmall({
-                    fontWeight: 'light',
-                })};
-            `;
         case 'Media':
         case 'SpecialReport':
         case 'MatchReport':
@@ -79,14 +82,15 @@ const standfirstStyles = (designType: DesignType) => {
 };
 
 type Props = {
+    display: Display;
     designType: DesignType;
     standfirst: string;
 };
 
-export const Standfirst = ({ designType = 'Article', standfirst }: Props) => {
+export const Standfirst = ({ display, designType, standfirst }: Props) => {
     return (
         <div
-            className={cx(nestedStyles, standfirstStyles(designType))}
+            className={cx(nestedStyles, standfirstStyles(designType, display))}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
                 __html: standfirst,

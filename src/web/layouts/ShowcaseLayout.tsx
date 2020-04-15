@@ -186,17 +186,6 @@ const PositionHeadline = ({
                 </div>
             );
         case 'Immersive':
-            return (
-                <div
-                    className={css`
-                        ${from.leftCol} {
-                            margin-top: -100px;
-                        }
-                    `}
-                >
-                    {children}
-                </div>
-            );
         case 'Article':
         case 'Media':
         case 'Review':
@@ -243,7 +232,13 @@ interface Props {
     pillar: Pillar;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
+export const ShowcaseLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -352,6 +347,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                 `}
                             >
                                 <ArticleHeadline
+                                    display={display}
                                     headlineString={CAPI.headline}
                                     designType={designType}
                                     pillar={pillar}
@@ -378,6 +374,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
+                            display={display}
                             designType={designType}
                             pillar={pillar}
                             standfirst={CAPI.standfirst}
@@ -400,6 +397,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                display={display}
                                 designType={designType}
                                 pillar={pillar}
                                 pageId={CAPI.pageId}
@@ -418,7 +416,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                 <ArticleBody
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
+                                    display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />

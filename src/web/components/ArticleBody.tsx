@@ -9,7 +9,7 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 
 type Props = {
     pillar: Pillar;
-    isImmersive: boolean;
+    display: Display;
     blocks: Block[];
     designType: DesignType;
     adTargeting: AdTargeting;
@@ -42,13 +42,15 @@ const captionFont = css`
     color: ${text.supporting};
 `;
 
-const bodyStyle = css`
+const bodyStyle = (display: Display) => css`
     ${between.tablet.and.desktop} {
         padding-right: 80px;
     }
 
     h2 {
-        ${headline.xxsmall({ fontWeight: 'bold' })};
+        ${display === 'immersive'
+            ? headline.medium({ fontWeight: 'light' })
+            : headline.xxsmall({ fontWeight: 'bold' })};
     }
 
     strong {
@@ -101,13 +103,6 @@ const bodyStyle = css`
     }
 `;
 
-const immersiveBodyStyle = css`
-    h2 {
-        ${headline.medium()};
-        font-weight: 200;
-    }
-`;
-
 const linkColour = pillarMap(
     pillar => css`
         a {
@@ -124,17 +119,13 @@ const linkColour = pillarMap(
 
 export const ArticleBody = ({
     pillar,
-    isImmersive,
+    display,
     blocks,
     designType,
     adTargeting,
 }: Props) => {
     return (
-        <div
-            className={cx(bodyStyle, linkColour[pillar], {
-                [immersiveBodyStyle]: isImmersive,
-            })}
-        >
+        <div className={cx(bodyStyle(display), linkColour[pillar])}>
             <ArticleRenderer
                 elements={blocks[0] ? blocks[0].elements : []}
                 pillar={pillar}

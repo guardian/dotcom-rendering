@@ -184,7 +184,13 @@ interface Props {
     pillar: Pillar;
 }
 
-export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
+export const CommentLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -301,6 +307,7 @@ export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                     )}
                                 >
                                     <ArticleHeadline
+                                        display={display}
                                         headlineString={CAPI.headline}
                                         designType={designType}
                                         pillar={pillar}
@@ -335,6 +342,7 @@ export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
+                            display={display}
                             designType={designType}
                             pillar={pillar}
                             standfirst={CAPI.standfirst}
@@ -352,6 +360,7 @@ export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                display={display}
                                 designType={designType}
                                 pillar={pillar}
                                 pageId={CAPI.pageId}
@@ -370,7 +379,7 @@ export const CommentLayout = ({ CAPI, NAV, designType, pillar }: Props) => {
                                 <ArticleBody
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
+                                    display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />

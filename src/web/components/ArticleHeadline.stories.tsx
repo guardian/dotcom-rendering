@@ -24,6 +24,7 @@ export const ArticleStory = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is how the default headline looks"
+                    display="standard"
                     designType="Article"
                     pillar="news"
                     webPublicationDate=""
@@ -44,6 +45,7 @@ export const oldHeadline = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an old headline"
+                    display="standard"
                     designType="Article"
                     pillar="news"
                     webPublicationDate="2014-07-13T18:46:01.933Z"
@@ -71,6 +73,7 @@ export const Feature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is a Feature headline, it has colour applied based on pillar"
+                    display="standard"
                     designType="Feature"
                     pillar="lifestyle"
                     webPublicationDate=""
@@ -96,6 +99,7 @@ export const ShowcaseInterview = () => (
                 >
                     <ArticleHeadline
                         headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                        display="showcase"
                         designType="Interview"
                         pillar="culture"
                         webPublicationDate=""
@@ -124,6 +128,7 @@ export const Interview = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                    display="standard"
                     designType="Interview"
                     pillar="culture"
                     webPublicationDate=""
@@ -131,6 +136,7 @@ export const Interview = () => (
                     byline="Byline text"
                 />
                 <Standfirst
+                    display="standard"
                     designType="Interview"
                     standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
                 />
@@ -154,6 +160,7 @@ export const Comment = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="Yes, the billionaire club is one we really need to shut down"
+                    display="standard"
                     designType="Comment"
                     pillar="opinion"
                     webPublicationDate=""
@@ -174,6 +181,7 @@ export const Analysis = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                    display="standard"
                     designType="Analysis"
                     pillar="news"
                     webPublicationDate=""
@@ -194,6 +202,7 @@ export const Media = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Media"
+                    display="standard"
                     designType="Media"
                     pillar="news"
                     webPublicationDate=""
@@ -214,6 +223,7 @@ export const Review = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Review"
+                    display="standard"
                     designType="Review"
                     pillar="news"
                     webPublicationDate=""
@@ -234,6 +244,7 @@ export const AdvertisementFeature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is AdvertisementFeature"
+                    display="standard"
                     designType="AdvertisementFeature"
                     pillar="news"
                     webPublicationDate=""
@@ -254,6 +265,7 @@ export const Quiz = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Quiz"
+                    display="standard"
                     designType="Quiz"
                     pillar="news"
                     webPublicationDate=""
@@ -274,6 +286,7 @@ export const GuardianLabs = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianLabs"
+                    display="standard"
                     designType="GuardianLabs"
                     pillar="news"
                     webPublicationDate=""
@@ -294,6 +307,7 @@ export const Recipe = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Recipe"
+                    display="standard"
                     designType="Recipe"
                     pillar="news"
                     webPublicationDate=""
@@ -314,6 +328,7 @@ export const GuardianView = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianView"
+                    display="standard"
                     designType="GuardianView"
                     pillar="news"
                     webPublicationDate=""
@@ -334,6 +349,7 @@ export const MatchReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is MatchReport"
+                    display="standard"
                     designType="MatchReport"
                     pillar="news"
                     webPublicationDate=""
@@ -354,6 +370,7 @@ export const SpecialReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is SpecialReport"
+                    display="standard"
                     designType="SpecialReport"
                     pillar="news"
                     webPublicationDate=""
@@ -374,6 +391,7 @@ export const Live = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Live"
+                    display="standard"
                     designType="Live"
                     pillar="news"
                     webPublicationDate=""
@@ -410,6 +428,7 @@ export const LongImmersive = () => (
                     >
                         <ArticleHeadline
                             headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
+                            display="immersive"
                             designType="Immersive"
                             pillar="culture"
                             webPublicationDate=""
@@ -448,6 +467,7 @@ export const ShortImmersive = () => (
                     >
                         <ArticleHeadline
                             headlineString="Ken Loach – all his films ranked!"
+                            display="immersive"
                             designType="Immersive"
                             pillar="culture"
                             webPublicationDate=""
