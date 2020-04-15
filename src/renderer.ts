@@ -389,7 +389,7 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
         h(Anchor, { href: props.url, pillar: props.pillar, text: 'Read more' }),
     );
 
-const Interactive = (props: { url: string, title?: string }): ReactElement =>
+const Interactive = (props: { url: string; title?: string }): ReactElement =>
     styledH('figure', { className: 'interactive' },
         h('iframe', { src: props.url, height: 500, title: props.title ?? "" }, null)
     );
