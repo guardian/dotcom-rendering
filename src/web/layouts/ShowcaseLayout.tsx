@@ -425,7 +425,7 @@ export const ShowcaseLayout = ({
                                 <ArticleBody
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
+                                    display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />

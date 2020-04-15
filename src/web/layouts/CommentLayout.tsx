@@ -377,7 +377,7 @@ export const CommentLayout = ({
                                 <ArticleBody
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
+                                    display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />
