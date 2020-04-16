@@ -61,10 +61,10 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@guardian/bridget": "^0.52.0",
     "@guardian/node-riffraff-artifact": "^0.1.7",
     "@guardian/src-button": "^0.13.0",
     "@guardian/src-foundations": "^0.14.1",
-    "@guardian/bridget": "^0.52.0",
     "@types/jsdom": "^12.2.4",
     "@types/uuid": "^3.4.6",
     "aws-sdk": "^2.604.0",
@@ -75,7 +75,7 @@
     "node-fetch": "^2.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
