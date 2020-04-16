@@ -7,6 +7,16 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
+type Props = {
+    captionText?: string;
+    pillar: Pillar;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    role?: RoleType;
+    isMainMedia?: boolean;
+};
+
 const figureStyle = css`
     margin-bottom: 6px;
 `;
@@ -31,15 +41,7 @@ const captionPadding = css`
     padding-right: 8px;
 `;
 
-export const Caption: React.FC<{
-    captionText?: string;
-    pillar: Pillar;
-    padCaption?: boolean;
-    credit?: string;
-    displayCredit?: boolean;
-    role?: RoleType;
-    isMainMedia?: boolean;
-}> = ({
+export const Caption = ({
     captionText,
     pillar,
     padCaption = false,
@@ -48,7 +50,7 @@ export const Caption: React.FC<{
     children,
     role,
     isMainMedia,
-}) => {
+}: Props) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
