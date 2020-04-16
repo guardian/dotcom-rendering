@@ -76,6 +76,7 @@ export const ArticleRenderer: React.FC<{
                             // eslint-disable-next-line jsx-a11y/aria-role
                             role="inline"
                             adTargeting={adTargeting}
+                            isMainMedia={false}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
