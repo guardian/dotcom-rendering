@@ -113,7 +113,12 @@ export const ImageComponent: React.FC<{
     isMainMedia?: boolean;
     starRating?: number;
 }> = ({ element, pillar, hideCaption, role, isMainMedia, starRating }) => {
-    const sources = makeSources(element.imageSources, element.role);
+    const { imageSources } = element;
+    const sources = makeSources(imageSources, role);
+    const shouldLimitWidth =
+        !isMainMedia &&
+        (role === 'showcase' || role === 'supporting' || role === 'immersive');
+
     if (hideCaption) {
         return (
             <div
@@ -136,8 +141,7 @@ export const ImageComponent: React.FC<{
             pillar={pillar}
             credit={element.data.credit}
             displayCredit={true}
-            role={role}
-            isMainMedia={isMainMedia}
+            shouldLimitWidth={shouldLimitWidth}
         >
             <div
                 className={css`

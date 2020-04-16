@@ -10,11 +10,11 @@ import TriangleIcon from '@frontend/static/icons/triangle.svg';
 type Props = {
     captionText?: string;
     pillar: Pillar;
+    children: React.ReactNode;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
-    role?: RoleType;
-    isMainMedia?: boolean;
+    shouldLimitWidth?: boolean;
 };
 
 const figureStyle = css`
@@ -48,8 +48,7 @@ export const Caption = ({
     credit,
     displayCredit = true,
     children,
-    role,
-    isMainMedia,
+    shouldLimitWidth = false,
 }: Props) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
@@ -81,10 +80,6 @@ export const Caption = ({
             />
         );
     };
-
-    const shouldLimitWidth =
-        !isMainMedia &&
-        (role === 'showcase' || role === 'supporting' || role === 'immersive');
 
     return (
         <figure className={figureStyle}>
