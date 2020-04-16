@@ -10,7 +10,9 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { Lines } from '@guardian/src-ed-lines';
 
+import { linesCssOverwrite } from '@root/src/web/lib/linesCssOverwrite';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
@@ -19,7 +21,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
@@ -322,7 +323,9 @@ export const StandardLayout = ({
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={pillar} />
+                        <div className={linesCssOverwrite(pillar)}>
+                            <Lines count={4} />
+                        </div>
                     </Section>
                 </div>
             </div>
@@ -398,14 +401,15 @@ export const StandardLayout = ({
                     <GridItem area="lines">
                         <div className={maxWidth}>
                             <div className={stretchLines}>
-                                <GuardianLines
-                                    pillar={pillar}
-                                    effect={decideLineEffect(
-                                        designType,
-                                        CAPI.pillar,
-                                    )}
-                                    count={decideLineCount(designType)}
-                                />
+                                <div className={linesCssOverwrite(pillar)}>
+                                    <Lines
+                                        effect={decideLineEffect(
+                                            designType,
+                                            CAPI.pillar,
+                                        )}
+                                        count={decideLineCount(designType)}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </GridItem>
@@ -436,7 +440,9 @@ export const StandardLayout = ({
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={pillar} />
+                                <div className={linesCssOverwrite(pillar)}>
+                                    <Lines count={4} />
+                                </div>
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -522,7 +528,9 @@ export const StandardLayout = ({
                         currentNavLink={NAV.currentNavLink}
                         pillar={pillar}
                     />
-                    <GuardianLines pillar={pillar} />
+                    <div className={linesCssOverwrite(pillar)}>
+                        <Lines count={4} />
+                    </div>
                 </Section>
             )}
 

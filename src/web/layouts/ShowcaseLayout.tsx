@@ -9,14 +9,15 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { Lines } from '@guardian/src-ed-lines';
 
+import { linesCssOverwrite } from '@root/src/web/lib/linesCssOverwrite';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
@@ -337,7 +338,9 @@ export const ShowcaseLayout = ({
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={pillar} />
+                        <div className={linesCssOverwrite(pillar)}>
+                            <Lines count={4} />
+                        </div>
                     </Section>
                 </div>
             </div>
@@ -412,14 +415,15 @@ export const ShowcaseLayout = ({
                     <GridItem area="lines">
                         <div className={maxWidth}>
                             <div className={stretchLines}>
-                                <GuardianLines
-                                    pillar={pillar}
-                                    effect={decideLineEffect(
-                                        designType,
-                                        pillar,
-                                    )}
-                                    count={decideLineCount(designType)}
-                                />
+                                <div className={linesCssOverwrite(pillar)}>
+                                    <Lines
+                                        effect={decideLineEffect(
+                                            designType,
+                                            pillar,
+                                        )}
+                                        count={decideLineCount(designType)}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </GridItem>
@@ -450,7 +454,9 @@ export const ShowcaseLayout = ({
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={pillar} />
+                                <div className={linesCssOverwrite(pillar)}>
+                                    <Lines count={4} />
+                                </div>
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -536,7 +542,9 @@ export const ShowcaseLayout = ({
                         currentNavLink={NAV.currentNavLink}
                         pillar={pillar}
                     />
-                    <GuardianLines pillar={pillar} />
+                    <div className={linesCssOverwrite(pillar)}>
+                        <Lines count={4} />
+                    </div>
                 </Section>
             )}
 

@@ -2182,6 +2182,13 @@
     "@guardian/src-helpers" "^0.17.0"
     "@guardian/src-svgs" "^0.17.0"
 
+"@guardian/src-ed-lines@^0.18.0-rc.0":
+  version "0.18.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-0.18.0-rc.0.tgz#c3e2c01ae0f8594af212ce42aa3f8f3f4f1a0c8b"
+  integrity sha512-gzRfgaroN/vpiBYQChvmJZh8n/6CfTCqO8Fc0NnbbKcqjx+cGhJMpw6orGS+gumP6jErDFa3xH0Nde+d673rPA==
+  dependencies:
+    "@guardian/src-helpers" "^0.18.0-rc.0"
+
 "@guardian/src-foundations@^0.17.0":
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.17.0.tgz#ea189b370fb222ef52686998fab8d8673d496a54"
