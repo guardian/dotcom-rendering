@@ -390,12 +390,18 @@ Live.story = { name: 'Live' };
 
 export const LongImmersive = () => (
     <>
-        <MainMedia
-            display="immersive"
-            hideCaption={true}
-            elements={mainMediaElements}
-            pillar="news"
-        />
+        <div
+            className={css`
+                height: 100vh;
+            `}
+        >
+            <MainMedia
+                display="immersive"
+                hideCaption={true}
+                elements={mainMediaElements}
+                pillar="news"
+            />
+        </div>
         <Section
             showTopBorder={false}
             showSideBorders={false}
@@ -429,12 +435,18 @@ LongImmersive.story = { name: 'Immersive with a long headline' };
 
 export const ShortImmersive = () => (
     <>
-        <MainMedia
-            display="immersive"
-            hideCaption={true}
-            elements={mainMediaElements}
-            pillar="news"
-        />
+        <div
+            className={css`
+                height: 100vh;
+            `}
+        >
+            <MainMedia
+                display="immersive"
+                hideCaption={true}
+                elements={mainMediaElements}
+                pillar="news"
+            />
+        </div>
         <Section
             showTopBorder={false}
             showSideBorders={false}
