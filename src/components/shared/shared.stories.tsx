@@ -2,7 +2,7 @@ import React from 'react';
 import Tags from './tags';
 import { Keyline } from './keyline';
 import { withKnobs } from "@storybook/addon-knobs";
-import { Design } from 'item';
+import { Design } from 'format';
 export default { title: 'Shared', decorators: [withKnobs] };
 
 export const OpinionKeyline = (): JSX.Element =>
