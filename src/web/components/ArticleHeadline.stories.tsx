@@ -27,7 +27,6 @@ export const ArticleStory = () => (
                     display="standard"
                     designType="Article"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -48,7 +47,6 @@ export const oldHeadline = () => (
                     display="standard"
                     designType="Article"
                     pillar="news"
-                    webPublicationDate="2014-07-13T18:46:01.933Z"
                     tags={[
                         // Age warnings only show for old articles when the tone/news tag is present
                         {
@@ -76,7 +74,6 @@ export const Feature = () => (
                     display="standard"
                     designType="Feature"
                     pillar="lifestyle"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -102,7 +99,6 @@ export const ShowcaseInterview = () => (
                         display="showcase"
                         designType="Interview"
                         pillar="culture"
-                        webPublicationDate=""
                         tags={[]}
                         isShowcase={true}
                         byline="Byline text"
@@ -131,7 +127,6 @@ export const Interview = () => (
                     display="standard"
                     designType="Interview"
                     pillar="culture"
-                    webPublicationDate=""
                     tags={[]}
                     byline="Byline text"
                 />
@@ -163,7 +158,6 @@ export const Comment = () => (
                     display="standard"
                     designType="Comment"
                     pillar="opinion"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -184,7 +178,6 @@ export const Analysis = () => (
                     display="standard"
                     designType="Analysis"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -205,7 +198,6 @@ export const Media = () => (
                     display="standard"
                     designType="Media"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -226,7 +218,6 @@ export const Review = () => (
                     display="standard"
                     designType="Review"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -247,7 +238,6 @@ export const AdvertisementFeature = () => (
                     display="standard"
                     designType="AdvertisementFeature"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -268,7 +258,6 @@ export const Quiz = () => (
                     display="standard"
                     designType="Quiz"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -289,7 +278,6 @@ export const GuardianLabs = () => (
                     display="standard"
                     designType="GuardianLabs"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -310,7 +298,6 @@ export const Recipe = () => (
                     display="standard"
                     designType="Recipe"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -331,7 +318,6 @@ export const GuardianView = () => (
                     display="standard"
                     designType="GuardianView"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -352,7 +338,6 @@ export const MatchReport = () => (
                     display="standard"
                     designType="MatchReport"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -373,7 +358,6 @@ export const SpecialReport = () => (
                     display="standard"
                     designType="SpecialReport"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -394,7 +378,6 @@ export const Live = () => (
                     display="standard"
                     designType="Live"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -431,7 +414,6 @@ export const LongImmersive = () => (
                             display="immersive"
                             designType="Immersive"
                             pillar="culture"
-                            webPublicationDate=""
                             tags={[]}
                         />
                     </div>
@@ -470,7 +452,6 @@ export const ShortImmersive = () => (
                             display="immersive"
                             designType="Immersive"
                             pillar="culture"
-                            webPublicationDate=""
                             tags={[]}
                         />
                     </div>

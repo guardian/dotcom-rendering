@@ -33,7 +33,6 @@ export const defaultStory = () => {
                         <ArticleHeadline
                             display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -65,7 +64,6 @@ export const eightLines = () => {
                         <ArticleHeadline
                             display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -104,7 +102,6 @@ export const paddedLines = () => {
                         <ArticleHeadline
                             display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -143,7 +140,6 @@ export const squigglyLines = () => {
                         <ArticleHeadline
                             display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -182,7 +178,6 @@ export const dottedLines = () => {
                         <ArticleHeadline
                             display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"

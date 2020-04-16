@@ -2,8 +2,6 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { pillarPalette } from '@root/src/lib/pillars';
-import { getAgeWarning } from '@root/src/lib/age-warning';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
@@ -16,9 +14,8 @@ type Props = {
     display: Display;
     designType: DesignType; // Decides headline appearance
     pillar: Pillar; // Decides headline colour when relevant
-    webPublicationDate: string; // Used for age warning
-    tags: TagType[]; // Used for age warning
     byline?: string;
+    tags: TagType[];
     isShowcase?: boolean; // Used for Interviews to change headline position
 };
 
@@ -152,40 +149,14 @@ const zIndex = css`
     z-index: 1;
 `;
 
-const ageWarningMargins = css`
-    margin-top: 12px;
-    margin-left: -10px;
-    margin-bottom: 6px;
-
-    ${from.tablet} {
-        margin-left: -20px;
-    }
-
-    ${from.leftCol} {
-        margin-left: -10px;
-        margin-top: 0;
-    }
-`;
-
-const renderHeadline = ({
+export const ArticleHeadline = ({
+    headlineString,
     display,
     designType,
     pillar,
-    headlineString,
-    byline,
     tags,
-    options,
-}: {
-    display: Display;
-    designType: DesignType;
-    pillar: Pillar;
-    headlineString: string;
-    byline?: string;
-    tags: TagType[];
-    options?: {
-        colour?: string;
-    };
-}) => {
+    byline,
+}: Props) => {
     if (display === 'immersive') {
         return (
             // Immersive headlines are large and inverted and have their black background
@@ -225,7 +196,7 @@ const renderHeadline = ({
                 <h1
                     className={cx(
                         boldFont,
-                        colourStyles(options && options.colour),
+                        colourStyles(pillarPalette[pillar].dark),
                     )}
                 >
                     {curly(headlineString)}
@@ -285,37 +256,4 @@ const renderHeadline = ({
                 </div>
             );
     }
-};
-
-export const ArticleHeadline = ({
-    headlineString,
-    display,
-    designType,
-    pillar,
-    webPublicationDate,
-    byline,
-    tags,
-}: Props) => {
-    const age = getAgeWarning(tags, webPublicationDate);
-    return (
-        <>
-            {age && (
-                <div className={ageWarningMargins}>
-                    <AgeWarning age={age} />
-                </div>
-            )}
-            {renderHeadline({
-                display,
-                designType,
-                pillar,
-                headlineString,
-                byline,
-                tags,
-                options: {
-                    colour: pillarPalette[pillar].dark,
-                },
-            })}
-            {age && <AgeWarning age={age} isScreenReader={true} />}
-        </>
-    );
 };
