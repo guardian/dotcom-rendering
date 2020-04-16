@@ -37,7 +37,8 @@ class Some<A> implements OptionInterface<A> {
      * @returns {Option<B>} A new `Option`
      * @example
      * const creditOne = new Some('Nicéphore Niépce');
-     * creditOne.fmap(name => `Photograph: ${name}`); // Returns Some('Photograph: Nicéphore Niépce')
+     * // Returns Some('Photograph: Nicéphore Niépce')
+     * creditOne.fmap(name => `Photograph: ${name}`);
      * 
      * const creditTwo = new None();
      * creditTwo.fmap(name => `Photograph: ${name}`); // Returns None()
