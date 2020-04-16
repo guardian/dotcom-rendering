@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 import { selectPillar } from 'storybookHelpers';
 import Byline from './byline';
-import { Design, Display } from 'item';
+import { Design, Display } from 'format';
 import { Option } from 'types/option';
 import { parse } from 'client/parser';
 import { Pillar } from 'pillar';

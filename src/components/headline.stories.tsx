@@ -4,7 +4,8 @@ import React, { ReactElement } from 'react';
 import { withKnobs, select, boolean, radios } from '@storybook/addon-knobs';
 
 import Headline from './headline';
-import { Item, Design, Display } from 'item';
+import { Item } from 'item';
+import { Design, Display } from 'format';
 import { Pillar } from 'pillar';
 import { None } from 'types/option';
 

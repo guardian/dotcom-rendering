@@ -4,7 +4,8 @@ import { select, withKnobs, boolean } from '@storybook/addon-knobs';
 import React, { ReactElement } from 'react';
 
 import Standfirst from './standfirst';
-import { Item, Design, Display } from 'item';
+import { Item } from 'item';
+import { Design, Display } from 'format';
 import { Pillar } from 'pillar';
 import { Option, None } from 'types/option';
 import { parse } from 'client/parser';
