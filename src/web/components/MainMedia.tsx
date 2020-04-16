@@ -62,8 +62,8 @@ function renderElement(
                     element={element}
                     pillar={pillar}
                     hideCaption={hideCaption}
-                    role={element.role}
                     isMainMedia={true}
+                    role={element.role}
                     starRating={starRating}
                 />
             );
@@ -77,6 +77,7 @@ function renderElement(
                     // eslint-disable-next-line jsx-a11y/aria-role
                     role="inline"
                     adTargeting={adTargeting}
+                    isMainMedia={true}
                 />
             );
         default:

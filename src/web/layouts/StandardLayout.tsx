@@ -37,10 +37,12 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Flex } from '@root/src/web/components/Flex';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
     decideLineCount,
     decideLineEffect,
@@ -208,12 +210,36 @@ const headerWrapper = css`
     ${getZIndex('headerWrapper')}
 `;
 
+const ageWarningMargins = css`
+    margin-top: 12px;
+    margin-left: -10px;
+    margin-bottom: 6px;
+
+    ${from.tablet} {
+        margin-left: -20px;
+    }
+
+    ${from.leftCol} {
+        margin-left: -10px;
+        margin-top: 0;
+    }
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
+    pillar: Pillar;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+export const StandardLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -238,6 +264,8 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
     const showComments = CAPI.isCommentable;
+
+    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     return (
         <>
@@ -284,7 +312,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             <SubNav
                                 subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                             />
                         </Section>
                     )}
@@ -294,7 +322,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={CAPI.pillar} />
+                        <GuardianLines pillar={pillar} />
                     </Section>
                 </div>
             </div>
@@ -303,11 +331,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
+                            display={display}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             badge={CAPI.badge}
                         />
                     </GridItem>
@@ -316,17 +345,26 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
-                            >
+                            <ArticleHeadlinePadding designType={designType}>
+                                {age && (
+                                    <div className={ageWarningMargins}>
+                                        <AgeWarning age={age} />
+                                    </div>
+                                )}
                                 <ArticleHeadline
+                                    display={display}
                                     headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
-                                    pillar={CAPI.pillar}
-                                    webPublicationDate={CAPI.webPublicationDate}
+                                    designType={designType}
+                                    pillar={pillar}
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
+                                {age && (
+                                    <AgeWarning
+                                        age={age}
+                                        isScreenReader={true}
+                                    />
+                                )}
                             </ArticleHeadlinePadding>
                         </div>
                         {CAPI.starRating || CAPI.starRating === 0 ? (
@@ -342,8 +380,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
+                            display={display}
+                            designType={designType}
+                            pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
@@ -351,7 +390,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <MainMedia
                                 elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 adTargeting={adTargeting}
                             />
                         </div>
@@ -360,12 +399,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     effect={decideLineEffect(
-                                        CAPI.designType,
+                                        designType,
                                         CAPI.pillar,
                                     )}
-                                    count={decideLineCount(CAPI.designType)}
+                                    count={decideLineCount(designType)}
                                 />
                             </div>
                         </div>
@@ -373,8 +412,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
-                                pillar={CAPI.pillar}
+                                display={display}
+                                designType={designType}
+                                pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
@@ -389,16 +429,16 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <ArticleContainer>
                             <main className={articleWidth}>
                                 <ArticleBody
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
-                                    designType={CAPI.designType}
+                                    display={display}
+                                    designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={CAPI.pillar} />
+                                <GuardianLines pillar={pillar} />
                                 <SubMeta
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     subMetaKeywordLinks={
                                         CAPI.subMetaKeywordLinks
                                     }
@@ -480,9 +520,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                     />
-                    <GuardianLines pillar={CAPI.pillar} />
+                    <GuardianLines pillar={pillar} />
                 </Section>
             )}
 
@@ -493,7 +533,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             >
                 <Footer
                     pageFooter={CAPI.pageFooter}
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     pillars={NAV.pillars}
                 />
             </Section>

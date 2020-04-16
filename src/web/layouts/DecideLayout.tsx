@@ -15,8 +15,16 @@ const decideDisplay = (CAPI: CAPIType): Display => {
     return 'standard';
 };
 
+const decidePillar = (CAPI: CAPIType): Pillar => {
+    // We override the pillar to be opinion on Comment news pieces
+    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
+        return 'opinion';
+    return CAPI.pillar;
+};
+
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
+    const pillar: Pillar = decidePillar(CAPI);
     const { designType } = CAPI;
 
     switch (display) {
@@ -24,7 +32,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="immersive"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -39,7 +55,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <ShowcaseLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="immersive"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
             }
             break;
         }
@@ -47,7 +71,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="showcase"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -62,7 +94,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <ShowcaseLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="showcase"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
             }
             break;
         }
@@ -70,7 +110,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
-                    return <CommentLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <CommentLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="standard"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
                 case 'Feature':
                 case 'Review':
                 case 'Interview':
@@ -85,7 +133,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Immersive':
-                    return <StandardLayout CAPI={CAPI} NAV={NAV} />;
+                    return (
+                        <StandardLayout
+                            CAPI={CAPI}
+                            NAV={NAV}
+                            display="standard"
+                            designType={designType}
+                            pillar={pillar}
+                        />
+                    );
             }
             break;
         }

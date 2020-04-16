@@ -31,8 +31,8 @@ export const defaultStory = () => {
                     </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
+                            display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -62,8 +62,8 @@ export const eightLines = () => {
                     </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
+                            display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -100,8 +100,8 @@ export const paddedLines = () => {
                     </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
+                            display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -138,8 +138,8 @@ export const squigglyLines = () => {
                     </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
+                            display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"
@@ -176,8 +176,8 @@ export const dottedLines = () => {
                     </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
+                            display="standard"
                             headlineString="Headline text"
-                            webPublicationDate=""
                             tags={[]}
                             designType="Article"
                             pillar="news"

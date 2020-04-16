@@ -9,6 +9,7 @@ type Props = {
     hideCaption?: boolean;
     role: RoleType;
     adTargeting?: AdTargeting;
+    isMainMedia?: boolean;
     children?: JSX.Element | JSX.Element[];
 };
 
@@ -18,7 +19,12 @@ export const YouTubeComponent = ({
     hideCaption,
     role,
     adTargeting,
+    isMainMedia,
 }: Props) => {
+    const shouldLimitWidth =
+        !isMainMedia &&
+        (role === 'showcase' || role === 'supporting' || role === 'immersive');
+
     if (hideCaption) {
         return (
             <YouTubeEmbed
@@ -35,7 +41,7 @@ export const YouTubeComponent = ({
             captionText={element.mediaTitle || ''}
             pillar={pillar}
             displayCredit={false}
-            role={role}
+            shouldLimitWidth={shouldLimitWidth}
         >
             <YouTubeEmbed
                 assetId={element.assetId}

@@ -72,13 +72,31 @@ const immersiveLinkStyles = (pillar: Pillar) => css`
 `;
 
 type Props = {
+    display: Display;
     designType: DesignType;
     pillar: Pillar;
     byline: string;
     tags: TagType[];
 };
 
-export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
+export const HeadlineByline = ({
+    display,
+    designType,
+    pillar,
+    byline,
+    tags,
+}: Props) => {
+    if (display === 'immersive') {
+        return (
+            <div className={immersiveStyles}>
+                by{' '}
+                <span className={immersiveLinkStyles(pillar)}>
+                    <BylineLink byline={byline} tags={tags} />
+                </span>
+            </div>
+        );
+    }
+
     switch (designType) {
         case 'Interview':
             return (
@@ -97,14 +115,6 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
             );
 
         case 'Immersive':
-            return (
-                <div className={immersiveStyles}>
-                    by{' '}
-                    <span className={immersiveLinkStyles(pillar)}>
-                        <BylineLink byline={byline} tags={tags} />
-                    </span>
-                </div>
-            );
         case 'Analysis':
         case 'Feature':
         case 'Article':

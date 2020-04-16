@@ -4,9 +4,19 @@ import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
+import { space, neutral } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
+
+type Props = {
+    display: Display;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    badge?: BadgeType;
+};
 
 const sectionLabelLink = css`
     text-decoration: none;
@@ -40,52 +50,35 @@ const primaryStyle = css`
     padding-right: ${space[2]}px;
 `;
 
+const invertedStyle = (pillar: Pillar) => css`
+    font-weight: 700;
+    ${headline.xxxsmall({ fontWeight: 'bold' })};
+    ${from.leftCol} {
+        ${headline.xxsmall({ fontWeight: 'bold' })};
+    }
+    color: ${neutral[100]};
+    background-color: ${pillarPalette[pillar].main};
+
+    padding-left: ${space[2]}px;
+    padding-right: ${space[2]}px;
+    padding-top: ${space[1]}px;
+    padding-bottom: ${space[1]}px;
+`;
+
 const secondaryStyle = css`
     ${headline.xxxsmall({ fontWeight: 'regular' })};
     display: block;
 `;
 
-const TagLink: React.FC<{
-    pillar: Pillar;
-    guardianBaseURL: string;
-    tagTitle: string;
-    tagUrl: string;
-    dataComponentName: string;
-    dataLinkName: string;
-    weightingClass: string;
-}> = ({
-    pillar,
+export const SeriesSectionLink = ({
+    display,
+    tags,
+    sectionLabel,
+    sectionUrl,
     guardianBaseURL,
-    tagTitle,
-    tagUrl,
-    dataComponentName,
-    dataLinkName,
-    weightingClass,
-}) => {
-    return (
-        <a
-            href={`${guardianBaseURL}/${tagUrl}`}
-            className={cx(
-                sectionLabelLink,
-                pillarColours[pillar],
-                weightingClass,
-            )}
-            data-component={dataComponentName}
-            data-link-name={dataLinkName}
-        >
-            <span>{tagTitle}</span>
-        </a>
-    );
-};
-
-export const SeriesSectionLink: React.FC<{
-    tags: TagType[];
-    sectionLabel: string;
-    sectionUrl: string;
-    guardianBaseURL: string;
-    pillar: Pillar;
-    badge?: BadgeType;
-}> = ({ tags, sectionLabel, sectionUrl, guardianBaseURL, pillar, badge }) => {
+    pillar,
+    badge,
+}: Props) => {
     // If we have a tag, use it to show 2 section titles
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
@@ -101,42 +94,59 @@ export const SeriesSectionLink: React.FC<{
 
         return tag ? (
             // Sometimes the tags/titles are shown inline, sometimes stacked
-            <div className={cx(!badge && rowBelowLeftCol)}>
-                <TagLink
-                    pillar={pillar}
-                    guardianBaseURL={guardianBaseURL}
-                    tagTitle={tag.title}
-                    tagUrl={tag.id}
-                    dataComponentName="series"
-                    dataLinkName="article series"
-                    weightingClass={primaryStyle}
-                />
+            <div
+                className={cx(
+                    !badge && display !== 'immersive' && rowBelowLeftCol,
+                )}
+            >
+                <a
+                    href={`${guardianBaseURL}/${tag.id}`}
+                    className={cx(
+                        sectionLabelLink,
+                        pillarColours[pillar],
+                        display === 'immersive'
+                            ? invertedStyle(pillar)
+                            : primaryStyle,
+                    )}
+                    data-component="series"
+                    data-link-name="article series"
+                >
+                    <span>{tag.title}</span>
+                </a>
 
-                <Hide when="below" breakpoint="tablet">
-                    <TagLink
-                        pillar={pillar}
-                        guardianBaseURL={guardianBaseURL}
-                        tagTitle={sectionLabel}
-                        tagUrl={sectionUrl}
-                        dataComponentName="section"
-                        dataLinkName="article section"
-                        weightingClass={secondaryStyle}
-                    />
-                </Hide>
+                {display !== 'immersive' && (
+                    <Hide when="below" breakpoint="tablet">
+                        <a
+                            href={`${guardianBaseURL}/${sectionUrl}`}
+                            className={cx(
+                                sectionLabelLink,
+                                pillarColours[pillar],
+                                secondaryStyle,
+                            )}
+                            data-component="section"
+                            data-link-name="article section"
+                        >
+                            <span>{sectionLabel}</span>
+                        </a>
+                    </Hide>
+                )}
             </div>
         ) : null;
     }
 
     // Otherwise, there was no tag so just show 1 title
     return (
-        <TagLink
-            pillar={pillar}
-            guardianBaseURL={guardianBaseURL}
-            tagTitle={sectionLabel}
-            tagUrl={sectionUrl}
-            dataComponentName="Section"
-            dataLinkName="article section"
-            weightingClass={primaryStyle}
-        />
+        <a
+            href={`${guardianBaseURL}/${sectionUrl}`}
+            className={cx(
+                sectionLabelLink,
+                pillarColours[pillar],
+                display === 'immersive' ? invertedStyle(pillar) : primaryStyle,
+            )}
+            data-component="section"
+            data-link-name="article section"
+        >
+            <span>{sectionLabel}</span>
+        </a>
     );
 };

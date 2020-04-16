@@ -34,10 +34,11 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Flex } from '@root/src/web/components/Flex';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
+import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
 const StandardGrid = ({
@@ -176,12 +177,36 @@ const headlinePadding = css`
     padding-bottom: 43px;
 `;
 
+const ageWarningMargins = css`
+    margin-top: 12px;
+    margin-left: -10px;
+    margin-bottom: 6px;
+
+    ${from.tablet} {
+        margin-left: -20px;
+    }
+
+    ${from.leftCol} {
+        margin-left: -10px;
+        margin-top: 0;
+    }
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
+    pillar: Pillar;
 }
 
-export const CommentLayout = ({ CAPI, NAV }: Props) => {
+export const CommentLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
         pageType: { isSensitive },
@@ -214,8 +239,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
 
     const showAvatar = avatarUrl && onlyOneContributor;
 
-    // We override the pillar to be opinion on Comment news pieces
-    const pillar = CAPI.pillar === 'news' ? 'opinion' : CAPI.pillar;
+    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     return (
         <>
@@ -275,6 +299,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
+                            display={display}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
@@ -300,16 +325,25 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                         !showAvatar && headlinePadding,
                                     )}
                                 >
+                                    {age && (
+                                        <div className={ageWarningMargins}>
+                                            <AgeWarning age={age} />
+                                        </div>
+                                    )}
                                     <ArticleHeadline
+                                        display={display}
                                         headlineString={CAPI.headline}
-                                        designType={CAPI.designType}
+                                        designType={designType}
                                         pillar={pillar}
-                                        webPublicationDate={
-                                            CAPI.webPublicationDate
-                                        }
                                         tags={CAPI.tags}
                                         byline={CAPI.author.byline}
                                     />
+                                    {age && (
+                                        <AgeWarning
+                                            age={age}
+                                            isScreenReader={true}
+                                        />
+                                    )}
                                 </div>
                                 {/* BOTTOM */}
                                 <div>
@@ -335,7 +369,8 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
+                            display={display}
+                            designType={designType}
                             pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
@@ -352,7 +387,8 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
+                                display={display}
+                                designType={designType}
                                 pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
@@ -370,8 +406,8 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                 <ArticleBody
                                     pillar={pillar}
                                     blocks={CAPI.blocks}
-                                    isImmersive={CAPI.isImmersive}
-                                    designType={CAPI.designType}
+                                    display={display}
+                                    designType={designType}
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}

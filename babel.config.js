@@ -23,6 +23,7 @@ module.exports = {
         ],
         'babel-plugin-px-to-rem',
         '@loadable/babel-plugin',
+        '@babel/plugin-transform-runtime',
     ],
 
     env: {
