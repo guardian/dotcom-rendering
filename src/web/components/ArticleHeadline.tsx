@@ -149,25 +149,14 @@ const zIndex = css`
     z-index: 1;
 `;
 
-const renderHeadline = ({
+export const ArticleHeadline = ({
+    headlineString,
     display,
     designType,
     pillar,
-    headlineString,
-    byline,
     tags,
-    options,
-}: {
-    display: Display;
-    designType: DesignType;
-    pillar: Pillar;
-    headlineString: string;
-    byline?: string;
-    tags: TagType[];
-    options?: {
-        colour?: string;
-    };
-}) => {
+    byline,
+}: Props) => {
     if (display === 'immersive') {
         return (
             // Immersive headlines are large and inverted and have their black background
@@ -207,7 +196,7 @@ const renderHeadline = ({
                 <h1
                     className={cx(
                         boldFont,
-                        colourStyles(options && options.colour),
+                        colourStyles(pillarPalette[pillar].dark),
                     )}
                 >
                     {curly(headlineString)}
@@ -267,29 +256,4 @@ const renderHeadline = ({
                 </div>
             );
     }
-};
-
-export const ArticleHeadline = ({
-    headlineString,
-    display,
-    designType,
-    pillar,
-    tags,
-    byline,
-}: Props) => {
-    return (
-        <>
-            {renderHeadline({
-                display,
-                designType,
-                pillar,
-                headlineString,
-                byline,
-                tags,
-                options: {
-                    colour: pillarPalette[pillar].dark,
-                },
-            })}
-        </>
-    );
 };
