@@ -54,7 +54,7 @@ export const defaultStory = () => {
     return (
         <Container>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <ArticleTitle {...brexitCAPI} pillar="sport" />
+            <ArticleTitle {...brexitCAPI} display="standard" pillar="sport" />
         </Container>
     );
 };
@@ -63,8 +63,12 @@ defaultStory.story = { name: 'Brexit badge' };
 export const beyondTheBlade = () => {
     return (
         <Container>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <ArticleTitle {...beyondTheBladeCAPI} pillar="news" />
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...beyondTheBladeCAPI}
+                display="standard"
+                pillar="news"
+            />
         </Container>
     );
 };

@@ -5,6 +5,16 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
+type Props = {
+    display: Display;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    badge?: BadgeType;
+};
+
 const sectionStyles = css`
     padding-top: 8px;
     display: flex;
@@ -13,15 +23,6 @@ const sectionStyles = css`
         flex-direction: column;
     }
 `;
-
-type Props = {
-    tags: TagType[];
-    sectionLabel: string;
-    sectionUrl: string;
-    guardianBaseURL: string;
-    pillar: Pillar;
-    badge?: BadgeType;
-};
 
 const titleBadgeWrapper = css`
     margin-bottom: 6px;
@@ -43,6 +44,7 @@ const marginTop = css`
 `;
 
 export const ArticleTitle = ({
+    display,
     tags,
     sectionLabel,
     sectionUrl,
@@ -51,13 +53,14 @@ export const ArticleTitle = ({
     badge,
 }: Props) => (
     <div className={cx(sectionStyles, badge && badgeContainer)}>
-        {badge && (
+        {badge && display !== 'immersive' && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
         <div className={badge && marginTop}>
             <SeriesSectionLink
+                display={display}
                 tags={tags}
                 sectionLabel={sectionLabel}
                 sectionUrl={sectionUrl}
