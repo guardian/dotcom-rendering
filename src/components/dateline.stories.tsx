@@ -10,7 +10,7 @@ import Dateline from './dateline';
 // ----- Stories ----- //
 
 const Default: FC = () =>
-    <Dateline date={new Some(new Date(date('Publish Date', new Date())))} />
+    <Dateline date={new Some(new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))))} />
 
 
 // ----- Exports ----- //
