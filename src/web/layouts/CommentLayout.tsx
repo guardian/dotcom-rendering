@@ -34,10 +34,11 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Flex } from '@root/src/web/components/Flex';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
+import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
 const StandardGrid = ({
@@ -176,6 +177,21 @@ const headlinePadding = css`
     padding-bottom: 43px;
 `;
 
+const ageWarningMargins = css`
+    margin-top: 12px;
+    margin-left: -10px;
+    margin-bottom: 6px;
+
+    ${from.tablet} {
+        margin-left: -20px;
+    }
+
+    ${from.leftCol} {
+        margin-left: -10px;
+        margin-top: 0;
+    }
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -222,6 +238,8 @@ export const CommentLayout = ({
         CAPI.tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar = avatarUrl && onlyOneContributor;
+
+    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     return (
         <>
@@ -306,17 +324,25 @@ export const CommentLayout = ({
                                         !showAvatar && headlinePadding,
                                     )}
                                 >
+                                    {age && (
+                                        <div className={ageWarningMargins}>
+                                            <AgeWarning age={age} />
+                                        </div>
+                                    )}
                                     <ArticleHeadline
                                         display={display}
                                         headlineString={CAPI.headline}
                                         designType={designType}
                                         pillar={pillar}
-                                        webPublicationDate={
-                                            CAPI.webPublicationDate
-                                        }
                                         tags={CAPI.tags}
                                         byline={CAPI.author.byline}
                                     />
+                                    {age && (
+                                        <AgeWarning
+                                            age={age}
+                                            isScreenReader={true}
+                                        />
+                                    )}
                                 </div>
                                 {/* BOTTOM */}
                                 <div>
