@@ -7,6 +7,16 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
+type Props = {
+    display: Display;
+    element: ImageBlockElement;
+    pillar: Pillar;
+    hideCaption?: boolean;
+    role: RoleType;
+    isMainMedia?: boolean;
+    starRating?: number;
+};
+
 const widths = [1020, 660, 480, 0];
 
 const bestFor = (
@@ -105,19 +115,44 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
     </div>
 );
 
-export const ImageComponent: React.FC<{
-    element: ImageBlockElement;
-    pillar: Pillar;
-    hideCaption?: boolean;
-    role: RoleType;
-    isMainMedia?: boolean;
-    starRating?: number;
-}> = ({ element, pillar, hideCaption, role, isMainMedia, starRating }) => {
+export const ImageComponent = ({
+    display,
+    element,
+    pillar,
+    hideCaption,
+    role,
+    isMainMedia,
+    starRating,
+}: Props) => {
     const { imageSources } = element;
     const sources = makeSources(imageSources, role);
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
+
+    if (isMainMedia && display === 'immersive') {
+        return (
+            <div
+                className={css`
+                    position: absolute;
+                    top: 0;
+                    height: 100%;
+                    width: 100%;
+
+                    img {
+                        object-fit: cover;
+                    }
+                `}
+            >
+                <Picture
+                    sources={sources}
+                    alt={element.data.alt || ''}
+                    src={getFallback(element.imageSources)}
+                />
+                {starRating && <StarRatingComponent rating={starRating} />}
+            </div>
+        );
+    }
 
     if (hideCaption) {
         return (

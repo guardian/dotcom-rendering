@@ -47,6 +47,7 @@ const mainMedia = css`
 `;
 
 function renderElement(
+    display: Display,
     element: CAPIElement,
     pillar: Pillar,
     i: number,
@@ -58,6 +59,7 @@ function renderElement(
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return (
                 <ImageComponent
+                    display={display}
                     key={i}
                     element={element}
                     pillar={pillar}
@@ -90,15 +92,17 @@ function renderElement(
 }
 
 export const MainMedia: React.FC<{
+    display: Display;
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
     adTargeting?: AdTargeting;
     starRating?: number;
-}> = ({ elements, pillar, hideCaption, adTargeting, starRating }) => (
+}> = ({ display, elements, pillar, hideCaption, adTargeting, starRating }) => (
     <div className={mainMedia}>
         {elements.map((element, i) =>
             renderElement(
+                display,
                 element,
                 pillar,
                 i,
