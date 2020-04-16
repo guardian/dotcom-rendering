@@ -23,6 +23,7 @@
     "build:server:prod": "webpack --config webpack.config.js --config-name server --env.production",
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
     "storybook": "start-storybook -s ./ -p 8181 --ci",
+    "build-storybook": "build-storybook -o dist",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
   "jest": {
@@ -101,6 +102,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.0",
     "jest": "^25.1.0",
+    "storybook-chromatic": "^3.5.3",
     "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.5",
