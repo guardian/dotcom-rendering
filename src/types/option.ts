@@ -6,10 +6,6 @@ import { Monad } from './monad';
 // ----- Classes ----- //
 
 interface OptionInterface<A> extends Monad<A> {
-    /**
-     * Returns the value if `Some`, otherwise returns `a`. You can think of it
-     * as "unwrapping" the `Option`, getting you back a plain value
-     */
     withDefault(a: A): A;
 }
 
