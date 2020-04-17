@@ -27,17 +27,14 @@ export const CMP = () => {
         });
     }, []);
 
-    const onClose = () => setShow(false);
-
-    if (!show) {
-        return null;
-    }
-
-    return (
+    return show ? (
         <ConsentManagementComponent>
             {({ ConsentManagementPlatform }) => (
-                <ConsentManagementPlatform source="dcr" onClose={onClose} />
+                <ConsentManagementPlatform
+                    source="dcr"
+                    onClose={() => setShow(false)}
+                />
             )}
         </ConsentManagementComponent>
-    );
+    ) : null;
 };
