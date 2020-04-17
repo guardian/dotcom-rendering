@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Pillar, pillarFromString } from 'pillar';
+import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
@@ -16,7 +16,7 @@ import {
     IAsset as Asset,
 } from 'mapiThriftModels';
 import { logger } from 'logger';
-import { Format, Design, Display } from 'format';
+import { Format, Pillar, Design, Display } from 'format';
 
 
 // ----- Item Type ----- //

@@ -3,7 +3,8 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     background: ${kicker};

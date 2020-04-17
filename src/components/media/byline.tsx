@@ -3,7 +3,8 @@
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
-import { getPillarStyles, Pillar, PillarStyles } from 'pillar';
+import { getPillarStyles, PillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { Option } from 'types/option';
 import Dateline from 'components/dateline';
 import { Item } from 'item';

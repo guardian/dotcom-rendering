@@ -1,5 +1,6 @@
 import { basePx, baseMultiply, darkModeCss } from './styles';
-import { getPillarStyles, Pillar } from 'pillar';
+import { getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 
 describe('helper functions return correct styles', () => {
     test('Calculates base pixels', () => {

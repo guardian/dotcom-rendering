@@ -7,7 +7,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { Design, Format } from 'format';
 import { Option } from 'types/option';
 import { neutral } from '@guardian/src-foundations';
-import { getPillarStyles } from 'pillar';
+import { getPillarStyles } from 'pillarStyles';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 

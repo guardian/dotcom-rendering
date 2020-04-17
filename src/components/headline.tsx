@@ -8,7 +8,7 @@ import { remSpace } from '@guardian/src-foundations';
 
 import { Item } from 'item';
 import { darkModeCss as darkMode } from 'styles';
-import { getPillarStyles, PillarStyles } from 'pillar';
+import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import StarRating from './starRating';
 import { Display, Design } from 'format';
 

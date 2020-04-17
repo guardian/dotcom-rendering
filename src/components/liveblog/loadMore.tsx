@@ -1,5 +1,6 @@
 import React from 'react';
-import { Pillar, pillarColours } from 'pillar';
+import { pillarColours } from 'pillarStyles';
+import { Pillar } from 'format';
 import { SvgPlus } from "@guardian/src-svgs"
 import { ThemeProvider } from 'emotion-theming'
 import { Button } from '@guardian/src-button'

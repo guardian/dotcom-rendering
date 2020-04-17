@@ -1,9 +1,12 @@
-// ----- Imports ----- //
-
-import { Pillar } from 'pillar';
-
-
 // ----- Types ----- //
+
+const enum Pillar {
+    News,
+    Opinion,
+    Sport,
+    Culture,
+    Lifestyle,
+}
 
 const enum Design {
     Article,
@@ -37,7 +40,8 @@ interface Format {
 // ----- Exports ----- //
 
 export {
-    Format,
+    Pillar,
     Design,
     Display,
+    Format,
 }

@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import Avatar from './avatar';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { CommentCount } from './commentCount';
 import { Liveblog } from 'item';
 import { renderText } from 'renderer';

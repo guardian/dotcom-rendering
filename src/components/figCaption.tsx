@@ -4,7 +4,8 @@ import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
-import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { remSpace } from '@guardian/src-foundations';
 
 // ----- Component ----- //

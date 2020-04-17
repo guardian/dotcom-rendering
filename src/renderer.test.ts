@@ -1,6 +1,6 @@
 import { ImageElement, renderMedia, renderStandfirstText, renderText } from './renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from 'pillar';
+import { Pillar } from 'format';
 import { createElement as h, ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';

@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Format } from 'format';
-import { getPillarStyles } from 'pillar';
+import { getPillarStyles } from 'pillarStyles';
 import { Contributor, isSingleContributor } from 'contributor';
 import { darkModeCss } from 'styles';
 

@@ -12,7 +12,7 @@ import { wideColumnWidth, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import { PillarStyles, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog } from 'item';
 import { ImageMappings } from 'components/shared/page';
 

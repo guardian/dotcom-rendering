@@ -2,7 +2,8 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { renderText } from 'renderer';
 import { Option } from 'types/option';
 

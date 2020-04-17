@@ -7,7 +7,7 @@ import {
 } from 'styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import { Pillar } from 'pillar';
+import { Pillar } from 'format';
 
 const richLinkWidth = '8.75rem';
 

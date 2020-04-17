@@ -5,8 +5,7 @@ import { withKnobs, select, boolean, radios } from '@storybook/addon-knobs';
 
 import Headline from './headline';
 import { Item } from 'item';
-import { Design, Display } from 'format';
-import { Pillar } from 'pillar';
+import { Pillar, Design, Display } from 'format';
 import { None } from 'types/option';
 
 

@@ -4,8 +4,7 @@ import React, { FC } from 'react';
 import { withKnobs, number, boolean } from '@storybook/addon-knobs';
 
 import CommentCount from './commentCount';
-import { Pillar } from 'pillar';
-import { Design, Display } from 'format';
+import { Pillar, Design, Display } from 'format';
 import { selectPillar } from 'storybookHelpers';
 
 

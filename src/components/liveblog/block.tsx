@@ -5,7 +5,8 @@ import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { until, from } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { Option } from 'types/option';
 import { remSpace } from '@guardian/src-foundations';
 

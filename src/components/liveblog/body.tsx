@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';

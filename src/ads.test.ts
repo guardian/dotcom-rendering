@@ -2,7 +2,7 @@ import { getAdPlaceholderInserter } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from 'pillar';
+import { Pillar } from 'format';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'item';
 
