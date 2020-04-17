@@ -316,9 +316,11 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="cmp">
-                <>{CAPI.config.cmpUi && <CMP />}</>
-            </Portal>
+            {CAPI.config.cmpUi && (
+                <Portal root="cmp">
+                    <CMP />
+                </Portal>
+            )}
         </>
     );
 };
