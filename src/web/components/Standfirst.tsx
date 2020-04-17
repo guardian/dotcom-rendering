@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { neutral } from '@guardian/src-foundations/palette';
+import { space } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const nestedStyles = css`
@@ -18,9 +19,9 @@ const nestedStyles = css`
         display: inline-block;
         content: '';
         border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
+        height: ${space[3]}px;
+        width: ${space[3]}px;
+        margin-right: ${space[2]}px;
         background-color: ${neutral[86]};
         margin-left: -20px;
     }
@@ -59,6 +60,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                 ${headline.xxsmall({
                     fontWeight: 'light',
                 })};
+                margin-bottom: ${space[3]}px;
             `;
         case 'Immersive':
         case 'Media':
@@ -77,6 +79,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                     fontWeight: 'bold',
                 })};
                 line-height: 20px;
+                margin-bottom: ${space[3]}px;
             `;
     }
 };

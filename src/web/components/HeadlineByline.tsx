@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
+import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
@@ -52,10 +53,10 @@ const opinionStyles = (pillar: Pillar) => css`
 `;
 
 const immersiveStyles = css`
-    ${headline.medium({
+    ${headline.xsmall({
         fontWeight: 'light',
     })}
-    line-height: 38px;
+    margin-bottom: ${space[6]}px;
 `;
 
 const immersiveLinkStyles = (pillar: Pillar) => css`

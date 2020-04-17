@@ -34,6 +34,10 @@ const rowBelowLeftCol = css`
     }
 `;
 
+const marginBottom = css`
+    margin-bottom: 5px;
+`;
+
 const yellowBackground = css`
     background-color: ${brandAltBackground.primary};
     padding-left: 2px;
@@ -100,6 +104,7 @@ export const SeriesSectionLink = ({
             <div
                 className={cx(
                     !badge && display !== 'immersive' && rowBelowLeftCol,
+                    display === 'immersive' && marginBottom,
                 )}
             >
                 <a
