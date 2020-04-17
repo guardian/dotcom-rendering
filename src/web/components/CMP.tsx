@@ -12,7 +12,7 @@ export const CMP = () => {
 
     useEffect(() => {
         import(
-            /* webpackChunkName: "consent-management-platform" */ '@guardian/consent-management-platform'
+            /* webpackChunkName: "CMP-api-calls" */ '@guardian/consent-management-platform'
         ).then(({ shouldShow, setErrorHandler }) => {
             if (shouldShow()) {
                 setShow(true);
