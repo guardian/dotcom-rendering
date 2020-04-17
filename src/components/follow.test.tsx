@@ -14,7 +14,7 @@ import { Design, Display } from 'format';
 configure({ adapter: new Adapter() });
 
 const followFormat = {
-    pillar: Pillar.news,
+    pillar: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };

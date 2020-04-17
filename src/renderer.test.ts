@@ -73,10 +73,10 @@ const instagramElement = (): BodyElement =>
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(Pillar.news, [element]);
+    renderAll({})(Pillar.News, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
-    renderMedia({})(Pillar.news, [element]);
+    renderMedia({})(Pillar.News, [element]);
 
 const renderTextElement = compose(render, textElement);
 
@@ -94,7 +94,7 @@ describe('renderer returns expected content', () => {
             captionString: "caption",
             caption: JSDOM.fragment('this caption contains <em>html</em>'),
             credit: "credit",
-            pillar: Pillar.news,
+            pillar: Pillar.News,
         };
         expect(ImageElement(imageProps)).toBe(null);
     });
@@ -110,7 +110,7 @@ describe('renderer returns expected content', () => {
             captionString: "caption",
             caption: JSDOM.fragment('this caption contains <em>html</em>'),
             credit: "credit",
-            pillar: Pillar.news,
+            pillar: Pillar.News,
         };
         const image = shallow(h(ImageElement, imageProps));
 
@@ -212,14 +212,14 @@ describe('Renders different types of elements', () => {
 describe('Paragraph tags rendered correctly', () => {
     test('Contains no styles in standfirsts', () => {
         const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
-        const nodes = renderStandfirstText(fragment, Pillar.news);
+        const nodes = renderStandfirstText(fragment, Pillar.News);
         const html = shallow(nodes.flat()[0]).html();
         expect(html).toBe('<p>Parapraph tag</p>')
     });
 
     test('Contains styles in article body', () => {
         const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
-        const nodes = renderText(fragment, Pillar.news);
+        const nodes = renderText(fragment, Pillar.News);
         const html = shallow(nodes.flat()[0]).html();
         expect(html).not.toBe('<p>Parapraph tag</p>')
     });

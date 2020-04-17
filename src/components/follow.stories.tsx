@@ -20,7 +20,7 @@ const Default: FC = () =>
                 webTitle: 'Jane Smith',
             }
         ]}
-        pillar={selectPillar(Pillar.news)}
+        pillar={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
     />
