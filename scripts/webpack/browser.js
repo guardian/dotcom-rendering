@@ -69,7 +69,7 @@ module.exports = ({
     module: {
         rules: [{
                 test: /(\.tsx)|(\.js)|(\.ts)$/,
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)\/).*/,
                 use: [{
                     loader: 'babel-loader',
                     options: {
