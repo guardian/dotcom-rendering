@@ -16,6 +16,7 @@ type Props = {
     guardianBaseURL: string;
     pillar: Pillar;
     badge?: BadgeType;
+    isSpecial?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -83,6 +84,7 @@ export const SeriesSectionLink = ({
     guardianBaseURL,
     pillar,
     badge,
+    isSpecial,
 }: Props) => {
     // If we have a tag, use it to show 2 section titles
     const tag = tags.find(
@@ -108,10 +110,7 @@ export const SeriesSectionLink = ({
                         display === 'immersive'
                             ? invertedStyle(pillar)
                             : primaryStyle,
-                        badge &&
-                            display !== 'immersive' &&
-                            tag.type === 'Series' &&
-                            yellowBackground,
+                        isSpecial && yellowBackground,
                     )}
                     data-component="series"
                     data-link-name="article series"
