@@ -2,7 +2,7 @@
 
 import { select } from '@storybook/addon-knobs';
 
-import { Pillar } from 'pillar';
+import { Pillar } from 'format';
 
 
 // ----- Helpers ----- //

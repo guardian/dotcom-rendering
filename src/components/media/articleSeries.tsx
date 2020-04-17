@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from 'capi';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
 
 const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => css`    

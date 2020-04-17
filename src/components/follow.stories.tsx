@@ -4,8 +4,7 @@ import React, { FC } from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import Follow from './follow';
-import { Design, Display } from 'format';
-import { Pillar } from 'pillar';
+import { Pillar, Design, Display } from 'format';
 import { selectPillar } from 'storybookHelpers';
 
 

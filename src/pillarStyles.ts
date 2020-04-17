@@ -2,18 +2,10 @@
 
 import * as palette from '@guardian/src-foundations/palette';
 
-import { compose } from 'lib';
+import { Pillar } from 'format';
 
 
 // ----- Types ----- //
-
-const enum Pillar {
-    News,
-    Opinion,
-    Sport,
-    Culture,
-    Lifestyle,
-}
 
 interface PillarStyles {
     kicker: string;
@@ -83,15 +75,11 @@ function pillarFromString(pillar: string | undefined): Pillar {
     }
 }
 
-const pillarStylesFromString = compose(getPillarStyles, pillarFromString);
-
 
 // ----- Exports ----- //
 
 export {
-    Pillar,
     PillarStyles,
     getPillarStyles,
     pillarFromString,
-    pillarStylesFromString,
 };

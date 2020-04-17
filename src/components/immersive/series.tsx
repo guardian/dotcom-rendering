@@ -5,7 +5,8 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { basePx } from 'styles';
 import { Series } from 'capi';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
 
 

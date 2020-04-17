@@ -7,7 +7,7 @@ import { wideContentWidth, basePx } from 'styles';
 import { Option } from 'types/option';
 import { Image } from 'item';
 import { ImageElement } from 'renderer';
-import { Pillar } from 'pillar';
+import { Pillar } from 'format';
 import { ImageMappings } from './page';
 
 const Styles = (width: number, height: number): SerializedStyles => css`

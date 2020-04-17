@@ -10,7 +10,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { Item } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
-import { PillarStyles, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Display, Design } from 'format';
 
 

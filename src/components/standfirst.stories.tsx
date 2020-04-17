@@ -5,8 +5,7 @@ import React, { ReactElement } from 'react';
 
 import Standfirst from './standfirst';
 import { Item } from 'item';
-import { Design, Display } from 'format';
-import { Pillar } from 'pillar';
+import { Pillar, Design, Display } from 'format';
 import { Option, None } from 'types/option';
 import { parse } from 'client/parser';
 

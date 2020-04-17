@@ -7,7 +7,7 @@ import { border } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Format } from 'format';
-import { getPillarStyles } from 'pillar';
+import { getPillarStyles } from 'pillarStyles';
 
 
 // ----- Component ----- //
