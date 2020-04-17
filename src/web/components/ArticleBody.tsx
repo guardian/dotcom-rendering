@@ -127,6 +127,7 @@ export const ArticleBody = ({
     return (
         <div className={cx(bodyStyle(display), linkColour[pillar])}>
             <ArticleRenderer
+                display={display}
                 elements={blocks[0] ? blocks[0].elements : []}
                 pillar={pillar}
                 designType={designType}

@@ -389,6 +389,7 @@ export const StandardLayout = ({
                     <GridItem area="media">
                         <div className={maxWidth}>
                             <MainMedia
+                                display={display}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}

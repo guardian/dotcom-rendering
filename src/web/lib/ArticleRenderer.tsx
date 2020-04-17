@@ -15,11 +15,12 @@ const commercialPosition = css`
 `;
 
 export const ArticleRenderer: React.FC<{
+    display: Display;
     elements: CAPIElement[];
     pillar: Pillar;
     designType: DesignType;
     adTargeting?: AdTargeting;
-}> = ({ elements, pillar, designType, adTargeting }) => {
+}> = ({ display, elements, pillar, designType, adTargeting }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -46,6 +47,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
+                            display={display}
                             key={i}
                             element={element}
                             pillar={pillar}

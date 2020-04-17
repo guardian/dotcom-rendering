@@ -105,6 +105,7 @@ export const ShowcaseInterview = () => (
                     />
                 </div>
                 <MainMedia
+                    display="standard"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"
@@ -136,6 +137,7 @@ export const Interview = () => (
                     standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
                 />
                 <MainMedia
+                    display="standard"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"
@@ -388,11 +390,18 @@ Live.story = { name: 'Live' };
 
 export const LongImmersive = () => (
     <>
-        <MainMedia
-            hideCaption={true}
-            elements={mainMediaElements}
-            pillar="news"
-        />
+        <div
+            className={css`
+                height: 100vh;
+            `}
+        >
+            <MainMedia
+                display="immersive"
+                hideCaption={true}
+                elements={mainMediaElements}
+                pillar="news"
+            />
+        </div>
         <Section
             showTopBorder={false}
             showSideBorders={false}
@@ -426,11 +435,18 @@ LongImmersive.story = { name: 'Immersive with a long headline' };
 
 export const ShortImmersive = () => (
     <>
-        <MainMedia
-            hideCaption={true}
-            elements={mainMediaElements}
-            pillar="news"
-        />
+        <div
+            className={css`
+                height: 100vh;
+            `}
+        >
+            <MainMedia
+                display="immersive"
+                hideCaption={true}
+                elements={mainMediaElements}
+                pillar="news"
+            />
+        </div>
         <Section
             showTopBorder={false}
             showSideBorders={false}

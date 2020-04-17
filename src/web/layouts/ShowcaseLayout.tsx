@@ -390,6 +390,7 @@ export const ShowcaseLayout = ({
                     <GridItem area="media">
                         <div className={mainMediaWrapper}>
                             <MainMedia
+                                display={display}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
