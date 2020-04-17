@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space, neutral } from '@guardian/src-foundations';
+import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 
@@ -16,6 +16,7 @@ type Props = {
     guardianBaseURL: string;
     pillar: Pillar;
     badge?: BadgeType;
+    isSpecial?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -31,6 +32,11 @@ const rowBelowLeftCol = css`
     ${until.leftCol} {
         flex-direction: row;
     }
+`;
+
+const yellowBackground = css`
+    background-color: ${brandAltBackground.primary};
+    padding-left: 2px;
 `;
 
 const pillarColours = pillarMap(
@@ -78,21 +84,18 @@ export const SeriesSectionLink = ({
     guardianBaseURL,
     pillar,
     badge,
+    isSpecial,
 }: Props) => {
     // If we have a tag, use it to show 2 section titles
-    const blogTag = tags.find(tag => tag.type === 'Blog');
-    const seriesTag = tags.find(tag => tag.type === 'Series');
-    const publicationTag = tags.find(tag => tag.type === 'Publication');
+    const tag = tags.find(
+        thisTag =>
+            thisTag.type === 'Blog' ||
+            thisTag.type === 'Series' ||
+            thisTag.title === 'The Observer',
+    );
 
-    if (
-        blogTag ||
-        seriesTag ||
-        (publicationTag && publicationTag.title === 'The Observer')
-    ) {
-        // Chose tag to use based on this order of importance
-        const tag = blogTag || seriesTag || publicationTag;
-
-        return tag ? (
+    if (tag) {
+        return (
             // Sometimes the tags/titles are shown inline, sometimes stacked
             <div
                 className={cx(
@@ -107,6 +110,7 @@ export const SeriesSectionLink = ({
                         display === 'immersive'
                             ? invertedStyle(pillar)
                             : primaryStyle,
+                        isSpecial && yellowBackground,
                     )}
                     data-component="series"
                     data-link-name="article series"
@@ -131,7 +135,7 @@ export const SeriesSectionLink = ({
                     </Hide>
                 )}
             </div>
-        ) : null;
+        );
     }
 
     // Otherwise, there was no tag so just show 1 title
