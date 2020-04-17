@@ -10,9 +10,8 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Lines } from '@guardian/src-ed-lines';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { linesCssOverwrite } from '@root/src/web/lib/linesCssOverwrite';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
@@ -323,9 +322,7 @@ export const StandardLayout = ({
                         padded={false}
                         showTopBorder={false}
                     >
-                        <div className={linesCssOverwrite(pillar)}>
-                            <Lines count={4} />
-                        </div>
+                        <GuardianLines count={4} pillar={pillar} />
                     </Section>
                 </div>
             </div>
@@ -401,15 +398,14 @@ export const StandardLayout = ({
                     <GridItem area="lines">
                         <div className={maxWidth}>
                             <div className={stretchLines}>
-                                <div className={linesCssOverwrite(pillar)}>
-                                    <Lines
-                                        effect={decideLineEffect(
-                                            designType,
-                                            CAPI.pillar,
-                                        )}
-                                        count={decideLineCount(designType)}
-                                    />
-                                </div>
+                                <GuardianLines
+                                    count={decideLineCount(designType)}
+                                    pillar={pillar}
+                                    effect={decideLineEffect(
+                                        designType,
+                                        pillar,
+                                    )}
+                                />
                             </div>
                         </div>
                     </GridItem>
@@ -440,9 +436,7 @@ export const StandardLayout = ({
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <div className={linesCssOverwrite(pillar)}>
-                                    <Lines count={4} />
-                                </div>
+                                <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -528,9 +522,7 @@ export const StandardLayout = ({
                         currentNavLink={NAV.currentNavLink}
                         pillar={pillar}
                     />
-                    <div className={linesCssOverwrite(pillar)}>
-                        <Lines count={4} />
-                    </div>
+                    <GuardianLines count={4} pillar={pillar} />
                 </Section>
             )}
 

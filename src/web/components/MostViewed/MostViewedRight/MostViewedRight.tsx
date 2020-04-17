@@ -1,11 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { useApi } from '@root/src/web/lib/api';
-import { Lines } from '@guardian/src-ed-lines';
 import { headline } from '@guardian/src-foundations/typography';
-import { linesCssOverwrite } from '@root/src/web/lib/linesCssOverwrite';
 
+import { useApi } from '@root/src/web/lib/api';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
@@ -37,9 +36,7 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
         // Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
         return (
             <div className={wrapperStyles} data-component="geo-most-popular">
-                <div className={linesCssOverwrite(pillar)}>
-                    <Lines count={4} />
-                </div>
+                <GuardianLines count={4} pillar={pillar} />
                 <h3 className={headingStyles}>most viewed</h3>
                 <ul data-link-name="Right hand most popular geo GB">
                     {(data.trails || [])
