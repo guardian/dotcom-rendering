@@ -10,7 +10,7 @@ import TriangleIcon from '@frontend/static/icons/triangle.svg';
 type Props = {
     captionText?: string;
     pillar: Pillar;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
