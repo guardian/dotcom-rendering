@@ -8,8 +8,8 @@ export default { title: 'Liveblog', decorators: [withKnobs] };
 export const LoadMore = (): JSX.Element => <LiveblogLoadMore
   pillar={select(
     "Pillar",
-    [ Pillar.news, Pillar.opinion, Pillar.sport, Pillar.arts, Pillar.lifestyle ],
-    Pillar.news,
+    [ Pillar.News, Pillar.Opinion, Pillar.Sport, Pillar.Culture, Pillar.Lifestyle ],
+    Pillar.News,
   )}
   onLoadMore={(): Promise<void>=>Promise.resolve()}
 />

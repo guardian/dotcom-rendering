@@ -14,7 +14,7 @@ import { selectPillar } from 'storybookHelpers';
 const Default: FC = () =>
     <CommentCount
         count={number('Count', 1234, { min: 0 })}
-        pillar={selectPillar(Pillar.news)}
+        pillar={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
         commentable={boolean('Commentable', true)}

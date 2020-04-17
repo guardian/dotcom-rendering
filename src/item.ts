@@ -506,7 +506,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
         return {
             design: Design.Comment,
             ...item,
-            pillar: item.pillar === Pillar.news ? Pillar.opinion : item.pillar
+            pillar: item.pillar === Pillar.News ? Pillar.Opinion : item.pillar
         };
     } else if (isFeature(tags)) {
         return {

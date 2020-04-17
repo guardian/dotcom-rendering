@@ -19,7 +19,7 @@ const generateParas = (paras: number): BodyElement =>
     textElement(Array(paras).fill('<p>foo</p>'));
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(Pillar.news, [element]);
+    renderAll({})(Pillar.News, [element]);
 
 const renderParagraphs = compose(render, generateParas);
 

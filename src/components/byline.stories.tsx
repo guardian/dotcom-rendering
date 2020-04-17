@@ -34,7 +34,7 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 
 const Default: FC = () =>
     <Byline
-        pillar={selectPillar(Pillar.news)}
+        pillar={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
         bylineHtml={mockBylineHtml()}
@@ -42,7 +42,7 @@ const Default: FC = () =>
 
 const Comment: FC = () =>
     <Byline
-        pillar={selectPillar(Pillar.opinion)}
+        pillar={selectPillar(Pillar.Opinion)}
         design={Design.Comment}
         display={Display.Standard}
         bylineHtml={mockBylineHtml()}

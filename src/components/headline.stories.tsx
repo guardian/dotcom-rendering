@@ -13,7 +13,7 @@ import { None } from 'types/option';
 // ----- Setup ----- //
 
 const item: Item = {
-    pillar: Pillar.news,
+    pillar: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
     body: [],
@@ -38,11 +38,11 @@ const item: Item = {
 };
 
 const pillarOptions = {
-    News: Pillar.news,
-    Opinion: Pillar.opinion,
-    Sport: Pillar.sport,
-    Culture: Pillar.arts,
-    Lifestyle: Pillar.lifestyle,
+    News: Pillar.News,
+    Opinion: Pillar.Opinion,
+    Sport: Pillar.Sport,
+    Culture: Pillar.Culture,
+    Lifestyle: Pillar.Lifestyle,
 };
 
 const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
@@ -54,7 +54,7 @@ const Default = (): ReactElement =>
     <Headline item={{
         ...item,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.news),
+        pillar: select('Pillar', pillarOptions, Pillar.News),
     }} />
 
 const Analysis = (): ReactElement =>
@@ -62,7 +62,7 @@ const Analysis = (): ReactElement =>
         ...item,
         design: Design.Analysis,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.news),
+        pillar: select('Pillar', pillarOptions, Pillar.News),
     }} />
 
 const Feature = (): ReactElement =>
@@ -70,7 +70,7 @@ const Feature = (): ReactElement =>
         ...item,
         design: Design.Feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.news),
+        pillar: select('Pillar', pillarOptions, Pillar.News),
     }} />
 
 const Review = (): ReactElement =>

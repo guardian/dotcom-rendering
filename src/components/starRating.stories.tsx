@@ -13,7 +13,7 @@ import { None } from 'types/option';
 // ----- Setup ----- //
 
 const item: Item = {
-    pillar: Pillar.news,
+    pillar: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
     body: [],
