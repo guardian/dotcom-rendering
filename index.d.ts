@@ -277,6 +277,8 @@ interface CAPIType {
 }
 
 type CAPIBrowserType = {
+    designType: DesignType;
+    pillar: Pillar;
     config: {
         isDev: boolean;
         ajaxUrl: string;
@@ -305,13 +307,13 @@ type CAPIBrowserType = {
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
-    pillar: Pillar;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
     pageType: {
         isMinuteArticle: boolean;
         isPaidContent: boolean;
+        hasShowcaseMainElement: boolean;
     };
     hasRelated: boolean;
     hasStoryPackage: boolean;
@@ -326,6 +328,7 @@ type CAPIBrowserType = {
         };
     };
     contributionsServiceUrl: string;
+    isImmersive: boolean;
 };
 
 interface TagType {

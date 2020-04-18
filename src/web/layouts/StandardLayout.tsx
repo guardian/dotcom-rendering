@@ -300,7 +300,11 @@ export const StandardLayout = ({
                         padded={false}
                         backgroundColour={brandBackground.primary}
                     >
-                        <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
+                        <Nav
+                            pillar={getCurrentPillar(CAPI)}
+                            nav={NAV}
+                            display={display}
+                        />
                     </Section>
 
                     {NAV.subNavSections && (

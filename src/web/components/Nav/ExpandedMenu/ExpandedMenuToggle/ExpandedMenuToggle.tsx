@@ -9,7 +9,7 @@ import { VeggieBurger } from './VeggieBurger';
 const screenReadable = css`
     ${visuallyHidden};
 `;
-const openExpandedMenu = css`
+const openExpandedMenu = (display: Display) => css`
     ${headline.xsmall()};
     font-weight: 300;
     color: ${brandText.primary};
@@ -24,7 +24,7 @@ const openExpandedMenu = css`
     padding-right: 20px;
     ${from.desktop} {
         display: block;
-        padding-top: 5px;
+        padding-top: ${display === 'immersive' ? '9px' : '5px'};
         height: 42px;
     }
     :hover,
@@ -65,6 +65,7 @@ const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
 `;
 
 interface Props {
+    display: Display;
     showExpandedMenu: boolean;
     toggleExpandedMenu: (value: boolean) => void;
     ariaControls: string;
@@ -97,6 +98,7 @@ export class ExpandedMenuToggle extends Component<
 
     public render() {
         const {
+            display,
             toggleExpandedMenu,
             ariaControls,
             showExpandedMenu,
@@ -107,6 +109,7 @@ export class ExpandedMenuToggle extends Component<
         if (enhanceCheckbox) {
             return [
                 <VeggieBurger
+                    display={display}
                     showExpandedMenu={showExpandedMenu}
                     toggleExpandedMenu={toggleExpandedMenu}
                     enhanceCheckbox={enhanceCheckbox}
@@ -115,7 +118,7 @@ export class ExpandedMenuToggle extends Component<
                     key="VeggieBurger"
                 />,
                 <button
-                    className={openExpandedMenu}
+                    className={openExpandedMenu(display)}
                     onClick={() => toggleExpandedMenu(!showExpandedMenu)}
                     aria-controls={ariaControls}
                     key="OpenExpandedMenuButton"
@@ -131,6 +134,7 @@ export class ExpandedMenuToggle extends Component<
 
         return [
             <VeggieBurger
+                display={display}
                 showExpandedMenu={showExpandedMenu}
                 toggleExpandedMenu={toggleExpandedMenu}
                 enhanceCheckbox={enhanceCheckbox}
@@ -141,7 +145,7 @@ export class ExpandedMenuToggle extends Component<
             // We can't nest the input inside the label because the structure is important for CSS reasons
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <label
-                className={openExpandedMenu}
+                className={openExpandedMenu(display)}
                 htmlFor={CHECKBOX_ID}
                 key="OpenExpandedMenuLabel"
             >

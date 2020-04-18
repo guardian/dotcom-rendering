@@ -5,8 +5,10 @@ import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 const veggieBurger = ({
+    display,
     showExpandedMenu,
 }: {
+    display: Display;
     showExpandedMenu: boolean;
 }) => css`
     background-color: ${brandAlt[400]};
@@ -27,7 +29,7 @@ const veggieBurger = ({
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
-        bottom: -3px;
+        bottom: ${display === 'immersive' ? '3px' : '-3px'};
         right: 5px;
     }
     ${from.mobileLandscape} {
@@ -87,12 +89,14 @@ const veggieBurgerIcon = ({
 };
 
 export const VeggieBurger: React.FC<{
+    display: Display;
     toggleExpandedMenu: (value: boolean) => void;
     showExpandedMenu: boolean;
     enhanceCheckbox: boolean;
     htmlFor: string;
     ariaControls: string;
 }> = ({
+    display,
     toggleExpandedMenu,
     showExpandedMenu,
     enhanceCheckbox,
@@ -102,7 +106,7 @@ export const VeggieBurger: React.FC<{
     if (enhanceCheckbox) {
         return (
             <button
-                className={veggieBurger({ showExpandedMenu })}
+                className={veggieBurger({ display, showExpandedMenu })}
                 onClick={() => toggleExpandedMenu(!showExpandedMenu)}
                 aria-controls={ariaControls}
                 aria-label="Toggle main menu"
@@ -120,7 +124,7 @@ export const VeggieBurger: React.FC<{
         // means working and accessible
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
         <label
-            className={veggieBurger({ showExpandedMenu })}
+            className={veggieBurger({ display, showExpandedMenu })}
             onClick={() => toggleExpandedMenu(!showExpandedMenu)}
             htmlFor={htmlFor}
             tabIndex={0}
