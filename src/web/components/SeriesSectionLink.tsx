@@ -94,7 +94,53 @@ export const SeriesSectionLink = ({
             thisTag.title === 'The Observer',
     );
 
+    const hasSeriesTag = tag && tag.type === 'Series';
+    const isImmersive = display === 'immersive';
+
+    if (isImmersive && !hasSeriesTag) {
+        // Immersives show nothing at all if there's no series tag
+        return null;
+    }
+
+    if (isImmersive && hasSeriesTag) {
+        // If it is immersive and has a series tag, show this
+        if (!tag) return null;
+        return (
+            <a
+                href={`${guardianBaseURL}/${tag.id}`}
+                className={cx(
+                    sectionLabelLink,
+                    pillarColours[pillar],
+                    invertedStyle(pillar),
+                )}
+                data-component="series"
+                data-link-name="article series"
+            >
+                <span>{tag.title}</span>
+            </a>
+        );
+    }
+
+    if (!tag) {
+        // There's no tag so fallback to section title
+        return (
+            <a
+                href={`${guardianBaseURL}/${sectionUrl}`}
+                className={cx(
+                    sectionLabelLink,
+                    pillarColours[pillar],
+                    primaryStyle,
+                )}
+                data-component="section"
+                data-link-name="article section"
+            >
+                <span>{sectionLabel}</span>
+            </a>
+        );
+    }
+
     if (tag) {
+        // We have a tag, we're not immersive, show both series and section titles
         return (
             // Sometimes the tags/titles are shown inline, sometimes stacked
             <div
@@ -107,9 +153,7 @@ export const SeriesSectionLink = ({
                     className={cx(
                         sectionLabelLink,
                         pillarColours[pillar],
-                        display === 'immersive'
-                            ? invertedStyle(pillar)
-                            : primaryStyle,
+                        primaryStyle,
                         isSpecial && yellowBackground,
                     )}
                     data-component="series"
@@ -138,19 +182,5 @@ export const SeriesSectionLink = ({
         );
     }
 
-    // Otherwise, there was no tag so just show 1 title
-    return (
-        <a
-            href={`${guardianBaseURL}/${sectionUrl}`}
-            className={cx(
-                sectionLabelLink,
-                pillarColours[pillar],
-                display === 'immersive' ? invertedStyle(pillar) : primaryStyle,
-            )}
-            data-component="section"
-            data-link-name="article section"
-        >
-            <span>{sectionLabel}</span>
-        </a>
-    );
+    return null;
 };
