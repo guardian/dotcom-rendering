@@ -60,8 +60,8 @@ Mappings:
       Value: rendering
   StageMap:
     PROD:
-      MinCapacity: 4
-      MaxCapacity: 16
+      MinCapacity: 8
+      MaxCapacity: 32
     CODE:
       MinCapacity: 1
       MaxCapacity: 4
