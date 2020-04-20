@@ -164,6 +164,9 @@ type ItemFieldsWithBody =
 
 // ----- Functions ----- //
 
+const getFormat = (item: Item): Format =>
+    ({ design: item.design, display: item.display, pillar: item.pillar });
+
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
 
@@ -570,5 +573,6 @@ export {
     Role,
     Image,
     fromCapi,
-    fromCapiLiveBlog
+    fromCapiLiveBlog,
+    getFormat,
 };

@@ -5,7 +5,6 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
-import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
@@ -252,51 +251,6 @@ const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
 const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(standfirstTextElement(pillar));
 
-interface ImageProps {
-    url: string;
-    alt: string;
-    imageMappings: ImageMappings;
-    sizes: string;
-    width: number;
-    height: number;
-    captionString: string;
-    caption: DocumentFragment;
-    credit: string;
-    pillar: Pillar;
-}
-
-const imageStyles = (width: number, height: number): SerializedStyles => css`
-    height: calc(100vw * ${height / width});
-    background: ${neutral[97]};
-
-    ${from.phablet} {
-        height: calc(620px * ${height / width});
-    }
-
-    ${darkModeCss`
-        background: ${neutral[20]};
-    `}
-`;
-
-const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, alt, width, height, credit, captionString, imageMappings } = props;
-
-    if (!url) {
-        return null;
-    }
-
-    return styledH('img', {
-        sizes,
-        srcSet: srcset(url, imageMappings),
-        alt,
-        className: 'js-launch-slideshow',
-        src: src(imageMappings, url, width),
-        css: imageStyles(width, height),
-        caption: captionString,
-        credit,
-    });
-};
-
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     margin: 0;
@@ -503,7 +457,6 @@ export {
     renderAll,
     text as renderText,
     standfirstText as renderStandfirstText,
-    ImageElement,
     getHref,
     renderMedia
 };

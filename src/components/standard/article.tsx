@@ -5,7 +5,7 @@ import { css } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/shared/headerImage';
+import HeaderImage from 'components/headerImage';
 import Series from 'components/shared/articleSeries';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
@@ -13,7 +13,7 @@ import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review } from 'item';
+import { Standard, Review, getFormat } from 'item';
 import { ImageMappings } from 'components/shared/page';
 import Metadata from './metadata';
 
@@ -38,16 +38,6 @@ const BorderStyles = css`
     }
 `;
 
-const HeaderImageStyles = css`
-    figure {
-        margin: 0;
-
-        ${from.wide} {
-            margin: 0 auto;
-        }
-    }
-`;
-
 
 // ----- Component ----- //
 
@@ -69,8 +59,7 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                 <HeaderImage
                     image={item.mainImage}
                     imageMappings={imageMappings}
-                    className={HeaderImageStyles}
-                    pillar={item.pillar}
+                    format={getFormat(item)}
                 />
                 <div css={articleWidthStyles}>
                     <Series series={item.series} pillar={item.pillar} />

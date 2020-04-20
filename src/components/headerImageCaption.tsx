@@ -56,6 +56,7 @@ const HeaderImageCaptionStyles = css`
 		z-index: 1;
 		color: ${neutral[100]};
 		${textSans.small()};
+		box-sizing: border-box;
 
 		${darkModeCss`
 			color: ${neutral[60]};

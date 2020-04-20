@@ -5,7 +5,7 @@ import { css } from '@emotion/core';
 import { neutral, opinion, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/shared/headerImage';
+import HeaderImage from 'components/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
@@ -14,7 +14,7 @@ import Tags from 'components/shared/tags';
 import Cutout from 'components/opinion/cutout';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Comment } from 'item';
+import { Comment, getFormat } from 'item';
 import { ImageMappings } from 'components/shared/page';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
@@ -37,16 +37,6 @@ const BorderStyles = css`
     ${from.wide} {
         width: ${breakpoints.wide}px;
         margin: 0 auto;
-    }
-`;
-
-const HeaderImageStyles = css`
-    figure {
-        margin: 0;
-
-        ${from.wide} {
-            margin: 0 auto;
-        }
     }
 `;
 
@@ -94,8 +84,7 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
                 <HeaderImage
                     image={item.mainImage}
                     imageMappings={imageMappings}
-                    className={HeaderImageStyles}
-                    pillar={item.pillar}
+                    format={getFormat(item)}
                 />
             </header>
             <ArticleBody pillar={item.pillar} className={[articleWidthStyles]}>

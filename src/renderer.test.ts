@@ -1,7 +1,7 @@
-import { ImageElement, renderMedia, renderStandfirstText, renderText } from './renderer';
+import { renderMedia, renderStandfirstText, renderText } from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
-import { createElement as h, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
 import { BodyElement, ElementKind, Role } from 'item';
@@ -83,41 +83,6 @@ const renderTextElement = compose(render, textElement);
 const renderCaptionElement = compose(renderCaption, imageElement)
 
 describe('renderer returns expected content', () => {
-    test('ImageElement returns null for no url', () => {
-        const imageProps = {
-            url: '',
-            alt: "alt",
-            imageMappings: {},
-            sizes: "sizes",
-            width: 500,
-            height: 500,
-            captionString: "caption",
-            caption: JSDOM.fragment('this caption contains <em>html</em>'),
-            credit: "credit",
-            pillar: Pillar.News,
-        };
-        expect(ImageElement(imageProps)).toBe(null);
-    });
-
-    test('ImageElement returns image', () => {
-        const imageProps = {
-            url: 'https://media.guim.co.uk/image.jpg',
-            alt: "alt",
-            imageMappings: {},
-            sizes: "sizes",
-            width: 500,
-            height: 500,
-            captionString: "caption",
-            caption: JSDOM.fragment('this caption contains <em>html</em>'),
-            credit: "credit",
-            pillar: Pillar.News,
-        };
-        const image = shallow(h(ImageElement, imageProps));
-
-        expect(image.html()).toContain('img');
-        expect(image.prop('alt')).toBe('alt');
-    });
-
     test('Renders supported node types for text elements', () => {
         const text = renderTextElement([
             '<h2></h2>',
