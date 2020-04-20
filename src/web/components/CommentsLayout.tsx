@@ -1,12 +1,9 @@
-// @ts-nocheck
-/* eslint-disable */
-
 import React from 'react';
 import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-
+import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
@@ -83,6 +80,25 @@ export const CommentsLayout = ({
                     />
                 </div>
             </Hide>
+
+            <Comments
+                user={user}
+                baseUrl={baseUrl}
+                pillar={pillar}
+                initialPage={commentPage}
+                pageSizeOverride={commentPageSize}
+                isClosedForComments={
+                    isClosedForComments || !enableDiscussionSwitch
+                }
+                orderByOverride={commentOrderBy}
+                shortUrl={shortUrl}
+                additionalHeaders={{
+                    'D2-X-UID': discussionD2Uid,
+                    'GU-Client': discussionApiClientHeader,
+                }}
+                expanded={expanded}
+                commentToScrollTo={commentToScrollTo}
+            />
         </div>
     </Flex>
 );
