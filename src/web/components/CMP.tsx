@@ -7,15 +7,23 @@ import { ConsentManagementPlatform } from '@guardian/consent-management-platform
 
 let variant: string | undefined;
 
-const participations = localStorage.getItem('gu.ab.participations');
+if (
+    window &&
+    window.guardian &&
+    window.guardian.config &&
+    window.guardian.config.switches &&
+    window.guardian.config.switches.abCommercialCmpCopy
+) {
+    const participations = localStorage.getItem('gu.ab.participations');
 
-if (participations) {
-    try {
-        variant = `commercialCmpCopy-${JSON.parse(
-            participations,
-        ).value.commercialCmpCopy.variant.toLocaleLowerCase()}`;
-    } catch (e) {
-        // do nothing
+    if (participations) {
+        try {
+            variant = `commercialCmpCopy-${JSON.parse(
+                participations,
+            ).value.commercialCmpCopy.variant.toLocaleLowerCase()}`;
+        } catch (e) {
+            // do nothing
+        }
     }
 }
 
