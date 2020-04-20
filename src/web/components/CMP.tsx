@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import {
     shouldShow,
     setErrorHandler,
 } from '@guardian/consent-management-platform';
-import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
+
+const ConsentManagementPlatform = React.lazy(() =>
+    import(
+        /* webpackChunkName: "ConsentManagementPlatform" */ '@guardian/consent-management-platform/lib/ConsentManagementPlatform'
+    ).then(module => ({ default: module.ConsentManagementPlatform })),
+);
 
 export const CMP = () => {
     const [show, setShow] = useState(false);
@@ -24,10 +29,12 @@ export const CMP = () => {
     return (
         <>
             {show && (
-                <ConsentManagementPlatform
-                    source="dcr"
-                    onClose={() => setShow(false)}
-                />
+                <Suspense fallback={<></>}>
+                    <ConsentManagementPlatform
+                        source="dcr"
+                        onClose={() => setShow(false)}
+                    />
+                </Suspense>
             )}
         </>
     );

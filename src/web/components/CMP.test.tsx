@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { waitFor } from '@testing-library/dom';
 import { shouldShow as shouldShow_ } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform as ConsentManagementPlatform_ } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
@@ -32,19 +33,19 @@ describe('CMP', () => {
         shouldShow.mockReset();
     });
 
-    it('It should render null if shouldShow returns false', () => {
+    it('It should render null if shouldShow returns false', async () => {
         shouldShow.mockImplementation(() => false);
 
         const { container } = render(<CMP />);
 
-        expect(container.firstChild).toBeNull();
+        await waitFor(() => expect(container.firstChild).toBeNull());
     });
 
-    it('It should not render null if shouldShow returns true', () => {
+    it('It should not render null if shouldShow returns true', async () => {
         shouldShow.mockImplementation(() => true);
 
         const { container } = render(<CMP />);
 
-        expect(container.firstChild).not.toBeNull();
+        await waitFor(() => expect(container.firstChild).not.toBeNull());
     });
 });
