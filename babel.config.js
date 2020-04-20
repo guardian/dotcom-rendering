@@ -47,9 +47,6 @@ module.exports = {
                 ],
             ],
         },
-        test: {
-            plugins: ['babel-plugin-dynamic-import-node'],
-        },
     },
     ignore: ['**/*.json'],
     sourceType: 'unambiguous',
