@@ -217,5 +217,9 @@
         "collectCoverageFrom": [
             "src/**/*.{ts,tsx}"
         ]
+    },
+    "optionalDependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
     }
 }
