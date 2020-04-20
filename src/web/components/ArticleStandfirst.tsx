@@ -7,7 +7,6 @@ import { Standfirst } from '@frontend/web/components/Standfirst';
 
 const standfirstStyles = css`
     max-width: 540px;
-    margin-bottom: 12px;
 `;
 
 const standfirstLinks = pillarMap(
