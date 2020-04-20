@@ -1,8 +1,19 @@
 import { createElement as h, ReactNode, ReactElement } from 'react';
 import Paragraph from 'components/paragraph';
 
+function getAdIndices(): number[] {
+    const adEveryNParagraphs = 6;
+    const firstAdIndex = 3;
+    const totalAds = 15;
+
+    const indiciesAfterFirstAd = [...Array(totalAds-1).keys()]
+        .map(index => firstAdIndex + (adEveryNParagraphs * ++index))
+    return [firstAdIndex, ...indiciesAfterFirstAd];
+}
+
 function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
-    const adIndices = [3, 9];
+    const adIndices = getAdIndices();
+
     const flattenedNodes = reactNodes.flat();
 
     const isPara = (node: ReactElement): boolean =>

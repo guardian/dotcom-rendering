@@ -44,10 +44,22 @@ describe('Adds the correct number of ad placeholders', () => {
         expect(nineParagraphsAndTwoAds.length).toBe(11)
     });
 
-    test('Adds two placeholders for 50 paragraphs', () => {
+    test('Adds eight placeholders for 50 paragraphs', () => {
         const fiftyParagraphs = renderParagraphs(50)
-        const fiftyParagraphsAndTwoAd = insertAdPlaceholders(fiftyParagraphs);
-        expect(fiftyParagraphsAndTwoAd.length).toBe(52)
+        const fiftyParagraphsAndEightAds = insertAdPlaceholders(fiftyParagraphs);
+        expect(fiftyParagraphsAndEightAds.length).toBe(58)
+    });
+
+    test('Adds fifteen placeholders for 90 paragraphs', () => {
+        const ninetyParagraphs = renderParagraphs(90)
+        const ninetyParagraphsAndFifteenAds = insertAdPlaceholders(ninetyParagraphs);
+        expect(ninetyParagraphsAndFifteenAds.length).toBe(105)
+    });
+
+    test('Adds fifteen placeholders for 150 paragraphs', () => {
+        const hundredFifty = renderParagraphs(150)
+        const hundredFiftyAndFifteenAds = insertAdPlaceholders(hundredFifty);
+        expect(hundredFiftyAndFifteenAds.length).toBe(165)
     });
 });
 

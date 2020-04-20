@@ -139,6 +139,7 @@ export const adStyles = css`
             position: absolute;
             margin-left: calc(${wideContentWidth}px + ${basePx(2)});
             min-width: 300px;
+            margin-bottom: ${remSpace[6]}
         }
     }
 
