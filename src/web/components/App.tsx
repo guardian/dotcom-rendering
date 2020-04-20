@@ -42,6 +42,19 @@ const hasCommentsHashInUrl = () => {
     return hash && hash === '#comments';
 };
 
+const decideDisplay = (CAPI: CAPIBrowserType): Display => {
+    if (CAPI.isImmersive) return 'immersive';
+    if (CAPI.pageType.hasShowcaseMainElement) return 'showcase';
+    return 'standard';
+};
+
+const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
+    // We override the pillar to be opinion on Comment news pieces
+    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
+        return 'opinion';
+    return CAPI.pillar;
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
@@ -140,6 +153,9 @@ export const App = ({ CAPI, NAV }: Props) => {
         FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
 
+    const pillar = decidePillar(CAPI);
+    const display = decideDisplay(CAPI);
+
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -170,7 +186,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
             <Hydrate root="nav-root">
-                <Nav pillar={CAPI.pillar} nav={NAV} />
+                <Nav pillar={pillar} nav={NAV} display={display} />
             </Hydrate>
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
@@ -178,7 +194,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         <SubNav
                             subNavSections={NAV.subNavSections}
                             currentNavLink={NAV.currentNavLink}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                         />
                     </>
                 </Hydrate>
@@ -191,7 +207,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 >
                     <RichLinkComponent
                         element={link}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                         ajaxEndpoint={CAPI.config.ajaxUrl}
                         richLinkIndex={index}
                     />
@@ -202,13 +218,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     ajaxUrl={CAPI.config.ajaxUrl}
                     pageId={CAPI.config.pageId}
                     commentCount={commentCount}
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     setOpenComments={setOpenComments}
                 />
             </Portal>
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>
-                    <MostViewedRightWrapper pillar={CAPI.pillar} />
+                    <MostViewedRightWrapper pillar={pillar} />
                 </Lazy>
             </Portal>
             <Portal root="slot-body-end">
@@ -257,7 +273,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 {openComments ? (
                     <CommentsLayout
                         user={user}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                         baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
@@ -279,7 +295,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <Lazy margin={300}>
                         <CommentsLayout
                             user={user}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             baseUrl={CAPI.config.discussionApiUrl}
                             shortUrl={CAPI.config.shortUrlId}
                             commentCount={commentCount}
@@ -301,7 +317,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     sectionName={CAPI.sectionName}
                     ajaxUrl={CAPI.config.ajaxUrl}
                 />
