@@ -5,6 +5,20 @@ import {
 } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
+let variant: string | undefined;
+
+const participations = localStorage.getItem('gu.ab.participations');
+
+if (participations) {
+    try {
+        variant = `commercialCmpCopy-${JSON.parse(
+            participations,
+        ).value.commercialCmpCopy.variant.toLocaleLowerCase()}`;
+    } catch (e) {
+        // do nothing
+    }
+}
+
 export const CMP = () => {
     const [show, setShow] = useState(false);
 
@@ -27,6 +41,7 @@ export const CMP = () => {
                 <ConsentManagementPlatform
                     source="dcr"
                     onClose={() => setShow(false)}
+                    variant={variant}
                 />
             )}
         </>
