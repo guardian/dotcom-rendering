@@ -52,7 +52,7 @@
         "dateformat": "^3.0.3",
         "diskusage": "^0.2.5",
         "dompurify": "^1.0.3",
-        "emotion": "^10.0.5",
+        "emotion": "^10.0.27",
         "emotion-server": "^10.0.5",
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-airbnb-base": "^14.0.0",
