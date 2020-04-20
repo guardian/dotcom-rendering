@@ -266,6 +266,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
                 <title>{content.id}</title>
                 <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
                 <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
+                <link rel="stylesheet" href="native://fontSize.css" />
             </head>
             <body>
                 { element }
