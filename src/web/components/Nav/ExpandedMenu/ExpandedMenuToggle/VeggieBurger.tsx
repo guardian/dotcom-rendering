@@ -65,6 +65,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
         ${`#${CHECKBOX_ID}:checked ~ label & {
             background-color: transparent;
         }`}
+
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
