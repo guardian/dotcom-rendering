@@ -53,7 +53,7 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        ${`#${CHECKBOX_ID}`}:checked ~ & {
+        ${'#' + CHECKBOX_ID}:checked ~ & {
             transform: translateY(1px) rotate(-135deg);
         }
         transition: transform 250ms ease-out;
@@ -68,7 +68,7 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        ${`#${CHECKBOX_ID}`}:checked ~ & {
+        ${'#' + CHECKBOX_ID}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
         }
     }
