@@ -62,10 +62,9 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        /* eslint-disable-next-line prefer-template */
-        ${'#' + CHECKBOX_ID}:checked ~ label & {
+        ${`#${CHECKBOX_ID}:checked ~ label & {
             background-color: transparent;
-        }
+        }`}
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
@@ -77,11 +76,10 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to apply styles to the nested tabs due to the face we use ~
                 to support NoJS
             */
-            /* eslint-disable-next-line prefer-template */
-            ${'#' + CHECKBOX_ID}:checked ~ label & {
+            ${`#${CHECKBOX_ID}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
-            }
+            }`}
         }
         :after {
             ${lineStyles};
@@ -94,11 +92,10 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to apply styles to the nested tabs due to the face we use ~
                 to support NoJS
             */
-            /* eslint-disable-next-line prefer-template */
-            ${'#' + CHECKBOX_ID}:checked ~ label & {
+            ${`#${CHECKBOX_ID}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
-            }
+            }`}
         }
     `;
 };

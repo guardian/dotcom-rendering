@@ -58,8 +58,7 @@ const mainMenuStyles = (CHECKBOX_ID: string) => css`
     }
 
     /* override transform on input checked */
-    /* eslint-disable-next-line prefer-template */
-    ${'#' + CHECKBOX_ID}:checked ~ & {
+    ${`#${CHECKBOX_ID}:checked ~ & {
         ${from.desktop} {
             display: block;
             overflow: visible;
@@ -67,7 +66,7 @@ const mainMenuStyles = (CHECKBOX_ID: string) => css`
         ${until.desktop} {
             transform: translateX(0%);
         }
-    }
+    }`}
 `;
 
 export const ExpandedMenu: React.FC<{
