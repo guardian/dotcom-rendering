@@ -1,6 +1,11 @@
 // ----- Imports ----- //
 
+import { createHash } from 'crypto';
+
 import { ImageMappings } from 'components/shared/page';
+import { Option, Some, None, fromNullable } from 'types/option';
+import { IBlockElement as BlockElement } from 'mapiThriftModels';
+
 
 // ----- Setup ----- //
 
@@ -18,10 +23,31 @@ const defaultWidths = [
 const defaultQuality = 85;
 
 
+// ----- Types ----- //
+
+enum Role {
+    Thumbnail,
+}
+
+interface Image {
+    src: string;
+    alt: Option<string>;
+    width: number;
+    height: number;
+    caption: Option<DocumentFragment>;
+    credit: Option<string>;
+    nativeCaption: Option<string>;
+    role: Option<Role>;
+}
+
+
 // ----- Functions ----- //
 
 const getSubdomain = (domain: string): string =>
     domain.split('.')[0];
+
+const sign = (salt: string, path: string): string =>
+    createHash('md5').update(salt + path).digest('hex');
 
 function src(imageMappings: ImageMappings, input: string, width: number): string {
     const url = new URL(input);
@@ -46,11 +72,47 @@ const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMapp
 const srcset: (url: string, mappings: ImageMappings) => string =
     srcsetWithWidths(defaultWidths)
 
+const parseImage = (docParser: (html: string) => DocumentFragment) =>
+    (element: BlockElement): Option<Image> => {
+    const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
+    const data = element.imageTypeData;
+    
+    return fromNullable(masterAsset).andThen(asset => {
+        if (
+            asset?.file === undefined ||
+            asset.file === '' ||
+            asset?.typeData?.width === undefined ||
+            asset?.typeData?.height === undefined
+        ) {
+            return new None();
+        }
+
+        return new Some({
+            src: asset.file,
+            alt: fromNullable(data?.alt),
+            width: asset.typeData.width,
+            height: asset.typeData.height,
+            caption: fromNullable(data?.caption).fmap(docParser),
+            credit: fromNullable(data?.credit).andThen<string>(
+                c => data?.displayCredit ? new Some(c) : new None()
+            ),
+            nativeCaption: fromNullable(data?.caption),
+            role: fromNullable(data?.role).andThen<Role>(
+                r => r === 'thumbnail' ? new Some(Role.Thumbnail) : new None()
+            ),
+        });
+    });
+}
+
 
 // ----- Exports ----- //
 
 export {
+    Image,
+    Role,
     src,
     srcset,
     srcsetWithWidths,
+    sign,
+    parseImage,
 };

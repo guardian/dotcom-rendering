@@ -4,12 +4,16 @@ import React, { FC, ReactNode } from 'react';
 import { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations';
+
 import { darkModeCss } from 'styles';
+import { Option } from 'types/option';
+
 
 // ----- Component ----- //
 
 interface Props {
     text: ReactNode;
+    credit: Option<string>;
 }
 
 const captionStyles = css`
@@ -26,9 +30,9 @@ const captionStyles = css`
     `}
 `;
 
-const MediaFigcaption: FC<Props> = ({ text }: Props) =>
+const MediaFigcaption: FC<Props> = ({ text, credit }: Props) =>
     <figcaption css={captionStyles}>
-        {text}
+        {text} {credit.withDefault('')}
     </figcaption>;
 
 

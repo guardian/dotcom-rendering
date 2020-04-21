@@ -8,7 +8,8 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { ElementKind, BodyElement, Role } from 'item';
+import { ElementKind, BodyElement } from 'item';
+import { Role } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
@@ -362,25 +363,16 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
             return text(element.doc, pillar);
 
         case ElementKind.Image: {
-            const { file, alt, caption, captionString, credit, width, height, role } = element;
+            const { caption, credit, role } = element;
             const ImageComponent = role
                 .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
                 .withDefault(BodyImage);
 
-            const figcaption = captionString
-                ? h(FigCaption, { pillar, text: text(caption, pillar) }) : null;
+            const figcaption = caption.fmap<ReactNode>(c =>
+                h(FigCaption, { pillar, text: text(c, pillar), credit })
+            ).withDefault(null);
             
-            return h(ImageComponent, {
-                image: {
-                    url: file,
-                    alt,
-                    imageMappings,
-                    width,
-                    height,
-                    caption: captionString,
-                    credit,
-                },
-            }, figcaption);
+            return h(ImageComponent, { image: element, imageMappings }, figcaption);
         }
 
         case ElementKind.Pullquote: {
@@ -430,26 +422,24 @@ const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
 const renderMedia = (imageMappings: ImageMappings) =>
     (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
         elements.map((element) => {
-            if(element.kind === ElementKind.Image) {
-                const { file, alt, caption, captionString, credit, width, height } = element;
 
-                const figcaption = captionString
-                    ? h(MediaFigCaption, { text: renderCaption(caption, pillar) }) : null;
+            if (element.kind === ElementKind.Image) {
+                const { caption, credit } = element;
+
+                const figcaption = caption.fmap<ReactNode>(c => 
+                    h(MediaFigCaption, { text: renderCaption(c, pillar), credit })
+                ).withDefault(null);
 
                 return h(BodyImage, {
-                        image: {
-                            url: file,
-                            alt,
-                            imageMappings,
-                            width,
-                            height,
-                            caption: captionString,
-                            credit,
-                        },
-                    }, figcaption);
+                    image: element,
+                    imageMappings,
+                }, figcaption);
+
             }
+
             return null;
-            });
+
+        });
 
 // ----- Exports ----- //
 

@@ -4,7 +4,8 @@ import { Pillar } from 'format';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
-import { BodyElement, ElementKind, Role } from 'item';
+import { BodyElement, ElementKind } from 'item';
+import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
@@ -24,11 +25,11 @@ const textElement = (nodes: string[]): BodyElement =>
 const imageElement = (): BodyElement =>
     ({
         kind: ElementKind.Image,
-        file: "https://gu.com/img.png",
-        alt: "alt tag",
-        caption: JSDOM.fragment('this caption contains <em>html</em>'),
-        captionString: "caption",
-        credit: "credit",
+        src: 'https://gu.com/img.png',
+        alt: new Some("alt tag"),
+        caption: new Some(JSDOM.fragment('this caption contains <em>html</em>')),
+        nativeCaption: new Some('caption'),
+        credit: new Some('credit'),
         width: 500,
         height: 500,
         role: new None()

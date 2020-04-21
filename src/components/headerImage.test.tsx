@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import { None, Option } from 'types/option';
 import HeaderImage from 'components/headerImage';
-import { Image } from 'item';
+import { Image } from 'image';
 import { Pillar, Design, Display } from 'format';
 
 

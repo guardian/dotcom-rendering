@@ -8,7 +8,7 @@ import { remSpace } from '@guardian/src-foundations';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
-import { Image } from 'item';
+import { Image } from 'image';
 import Img from 'components/img';
 import { ImageMappings } from 'components/shared/page';
 import { Format, Display, Design } from 'format';
@@ -28,7 +28,7 @@ const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
         default:
             return (
                 <HeaderImageCaption
-                    caption={image.captionString}
+                    caption={image.nativeCaption}
                     credit={image.credit}
                 />
             );
@@ -116,14 +116,9 @@ const HeaderImage: FC<Props> = ({ className, image, imageMappings, format }) =>
     image.fmap<ReactElement | null>(imageData =>
         <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
             <Img
-                alt={imageData.alt}
-                url={imageData.file}
-                height={imageData.height}
-                width={imageData.width}
+                image={imageData}
                 sizes={getSizes(format, imageData)}
                 imageMappings={imageMappings}
-                caption={imageData.captionString}
-                credit={imageData.credit}
                 className={getImgStyles(format, imageData)}
             />
             <Caption format={format} image={imageData} />

@@ -5,20 +5,15 @@ import { jsx as styledH, SerializedStyles, css } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { ImageMappings } from 'components/shared/page';
-import { srcset, src } from 'image';
+import { Image, srcset, src } from 'image';
 
 
 // ----- Component ----- //
 
 interface Props {
-    url: string;
-    alt: string;
-    width: number;
-    height: number;
+    image: Image;
     imageMappings: ImageMappings;
     sizes: string;
-    caption: string;
-    credit: string;
     className?: SerializedStyles;
 }
 
@@ -26,18 +21,16 @@ const styles = css`
     background-color: ${neutral[97]};
 `;
 
-const Img: FC<Props> = ({
-    sizes, url, imageMappings, alt, className, caption, credit,
-}) =>
+const Img: FC<Props> = ({ image, sizes, imageMappings, className }) =>
     styledH('img', {
         sizes,
-        srcSet: srcset(url, imageMappings),
-        src: src(imageMappings, url, 500),
-        alt,
+        srcSet: srcset(image.src, imageMappings),
+        src: src(imageMappings, image.src, 500),
+        alt: image.alt,
         className: 'js-launch-slideshow',
         css: [styles, className],
-        'data-caption': caption,
-        'data-credit': credit,
+        'data-caption': image.nativeCaption.withDefault(''),
+        'data-credit': image.credit.withDefault(''),
     });
 
 

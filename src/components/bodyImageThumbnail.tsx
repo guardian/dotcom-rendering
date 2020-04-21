@@ -1,20 +1,25 @@
 // ----- Imports ----- //
 
-import React, {FC, ReactNode} from 'react';
-import { css } from '@emotion/core';
-import Image, { Props as ImageProps } from 'components/image';
+import React, { FC, ReactNode } from 'react';
+import { css, SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
+import { Image } from 'image';
+import Img from 'components/img';
+import { ImageMappings } from 'components/shared/page';
+
+
 // ----- Setup ----- //
 
-const sizes = `(min-width: 140px)`;
+const size = '8.75rem';
 
 
 // ----- Component ----- //
 
 interface Props {
-    image: Omit<ImageProps, 'sizes'>;
+    image: Image;
+    imageMappings: ImageMappings;
     children?: ReactNode;
 }
 
@@ -22,21 +27,31 @@ const styles = css`
     display: block;
     float: left;
     clear: left;
-    width: 8.75rem;
+    width: ${size};
     margin: 0 ${remSpace[3]} 0 0;
 
     ${from.wide} {
-        margin-left: calc(-8.75rem - ${remSpace[3]} - ${remSpace[2]});
+        margin-left: calc(-${size} - ${remSpace[3]} - ${remSpace[2]});
         margin-right: 0;
         padding: 0;
     }
 `;
 
-const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
+const imgStyles = (width: number, height: number): SerializedStyles => css`
+    height: calc(${size} * ${height / width});
+`;
+
+const BodyImageThumbnail: FC<Props> = ({ image, imageMappings, children }: Props) =>
     <figure css={styles}>
-        <Image {...image} sizes={sizes} thumbnail={true} />
+        <Img
+            image={image}
+            imageMappings={imageMappings}
+            sizes={size}
+            className={imgStyles(image.width, image.height)}
+        />
         {children}
     </figure>;
+
 
 // ----- Exports ----- //
 

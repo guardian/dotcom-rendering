@@ -1,8 +1,7 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from 'mapiThriftModels';
-import { fromCapi, Standard, ElementKind, Image, Review, Audio, Video } from 'item';
+import { fromCapi, Standard, ElementKind, Review, Audio, Video } from 'item';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
-import { None } from 'types/option';
 
 const articleContent = {
     id: "",
@@ -220,22 +219,6 @@ describe('image elements', () => {
         const item = f(articleContentWithImageWithoutFile) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
-    })
-
-    test('uses displayCredit', () => {
-        const item = f(articleContentWithImage) as Standard;
-        const element = item.body[0].toOption().withDefault({
-            kind: ElementKind.Image,
-            alt: "",
-            caption: JSDOM.fragment("caption"),
-            credit: "",
-            file: "",
-            width: 500,
-            height: 500,
-            captionString: "",
-            role: new None()
-        }) as Image;
-        expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"));
     })
 });
 

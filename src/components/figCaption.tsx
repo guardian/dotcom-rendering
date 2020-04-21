@@ -4,15 +4,19 @@ import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
+
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { remSpace } from '@guardian/src-foundations';
+import { Option } from 'types/option';
+
 
 // ----- Component ----- //
 
 interface Props {
     pillar: Pillar;
     text: ReactNode;
+    credit: Option<string>;
 }
 
 const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
@@ -27,7 +31,7 @@ const captionStyles = css`
     color: ${text.supporting};
 `;
 
-const FigCaption: FC<Props> = ({ pillar, text }: Props) =>
+const FigCaption: FC<Props> = ({ pillar, text, credit }: Props) =>
     <figcaption css={captionStyles}>
         <svg
             css={triangleStyles(getPillarStyles(pillar))}
@@ -36,7 +40,7 @@ const FigCaption: FC<Props> = ({ pillar, text }: Props) =>
         >
             <polygon points="0,9 5,0 10,9 0,9" />
         </svg>
-        {text}
+        {text} {credit.withDefault('')}
     </figcaption>;
 
 

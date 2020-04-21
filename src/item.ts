@@ -17,6 +17,7 @@ import {
 } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { Format, Pillar, Design, Display } from 'format';
+import { Image as ImageData, parseImage } from 'image';
 
 
 // ----- Item Type ----- //
@@ -34,17 +35,13 @@ const enum ElementKind {
     Video
 }
 
-enum Role {
-    Thumbnail,
-}
-
 interface Fields extends Format {
     headline: string;
     standfirst: Option<DocumentFragment>;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: Option<Date>;
-    mainImage: Option<Image>;
+    mainImage: Option<ImageData>;
     contributors: Tag[];
     series: Tag;
     commentable: boolean;
@@ -52,16 +49,8 @@ interface Fields extends Format {
     shouldHideReaderRevenue: boolean;
 }
 
-type Image = {
+type Image = ImageData & {
     kind: ElementKind.Image;
-    alt: string;
-    caption: DocumentFragment;
-    captionString: string;
-    credit: string;
-    file: string;
-    width: number;
-    height: number;
-    role: Option<Role>;
 }
 
 type Audio = {
@@ -177,31 +166,6 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Image> => {
-    const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "", role: roleString } = element.imageTypeData ?? {};
-    const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
-    const parsedCaption = docParser(fullCaption);
-    const role = roleString === 'thumbnail' ? new Some(Role.Thumbnail) : new None<Role>();
-    return fromNullable(masterAsset).andThen(asset => {
-        if (!asset?.file || !asset?.typeData?.width || !asset?.typeData?.height) {
-            return new None();
-        }
-
-        return new Some({
-            kind: ElementKind.Image,
-            alt,
-            caption: parsedCaption,
-            credit,
-            file: asset.file,
-            width: asset.typeData.width,
-            height: asset.typeData.height,
-            captionString: caption,
-            role
-        });
-    });
-}
-
 const parseIframe = (docParser: DocParser) =>
     (html: string, kind: MediaKind): Result<string, Audio | Video> => {
         const iframe = docParser(html).querySelector('iframe');
@@ -235,7 +199,10 @@ const parseElement =
 
         case ElementType.IMAGE:
             return parseImage(docParser)(element)
-                .fmap<Result<string, Image>>(image => new Ok(image))
+                .fmap<Result<string, Image>>(image => new Ok({
+                    kind: ElementKind.Image,
+                    ...image
+                }))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
         case ElementType.PULLQUOTE: {
@@ -570,8 +537,6 @@ export {
     BodyElement,
     Audio,
     Video,
-    Role,
-    Image,
     fromCapi,
     fromCapiLiveBlog,
     getFormat,
