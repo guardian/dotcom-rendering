@@ -53,7 +53,7 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        ${'#' + CHECKBOX_ID}:checked ~ & {
+        ${`#${CHECKBOX_ID}`}:checked ~ & {
             transform: translateY(1px) rotate(-135deg);
         }
         transition: transform 250ms ease-out;
@@ -68,7 +68,7 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        ${'#' + CHECKBOX_ID}:checked ~ & {
+        ${`#${CHECKBOX_ID}`}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
         }
     }
@@ -92,10 +92,15 @@ export const ExpandedMenuToggle = ({
             ariaControls={ariaControls}
             key="VeggieBurger"
         />
+        {/* TODO: accessible */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control */}
         <label
             className={openExpandedMenu(display)}
             htmlFor={CHECKBOX_ID}
+            aria-label="Toggle main menu"
             key="OpenExpandedMenuLabel"
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+            role="button"
         >
             <span className={screenReadable}>Show</span>
             <span className={showMoreTextStyles(CHECKBOX_ID)}>More</span>

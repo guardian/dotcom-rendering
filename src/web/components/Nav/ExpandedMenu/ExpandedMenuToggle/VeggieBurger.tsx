@@ -62,7 +62,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
             to support NoJS
         */
         background-color: currentColor;
-        ${'#' + CHECKBOX_ID}:checked ~ label & {
+        ${`#${CHECKBOX_ID}`}:checked ~ label & {
             background-color: transparent;
         }
         :before {
@@ -76,7 +76,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to support NoJS
             */
             top: -6px;
-            ${'#' + CHECKBOX_ID}:checked ~ label & {
+            ${`#${CHECKBOX_ID}`}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
             }
@@ -92,7 +92,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to apply styles to the nested tabs due to the face we use ~
                 to support NoJS
             */
-            ${'#' + CHECKBOX_ID}:checked ~ label & {
+            ${`#${CHECKBOX_ID}`}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }
@@ -113,7 +113,6 @@ export const VeggieBurger: React.FC<{
         htmlFor={CHECKBOX_ID}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
         role="button"
-        aria-label="Toggle main menu"
     >
         <span className={veggieBurgerIconStyles(CHECKBOX_ID)} />
     </label>
