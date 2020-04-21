@@ -10,6 +10,7 @@ import { partition } from 'types/result';
 import { BufferedTransport, CompactProtocol } from '@creditkarma/thrift-server-core';
 import { Blocks } from 'mapiThriftModels';
 import { ImageMappings } from 'components/shared/page';
+import { remSpace } from '@guardian/src-foundations';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -19,7 +20,7 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     }
 
     figure {
-        margin: 1rem 0;
+        margin: ${remSpace[4]} 0;
     }
 `;
 

@@ -25,10 +25,10 @@ interface Props {
 }
 
 const styles = css`
-    margin: 1rem 0 ${remSpace[3]};
+    margin: ${remSpace[4]} 0 ${remSpace[3]};
 
     ${from.wide} {
-        margin-bottom: 1rem;
+        margin-bottom: ${remSpace[4]};
     }
 `;
 

@@ -41,7 +41,6 @@ function resolve(loggerName) {
 // ----- Configs ----- //
 
 const serverConfig = env => {
-    const isTest = env && env.test;
     const isProd = env && env.production;
     const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
@@ -86,7 +85,7 @@ const serverConfig = env => {
                         },
                         {
                             loader: 'ts-loader',
-                            options: { configFile: isTest ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
+                            options: { configFile: 'config/tsconfig.server.json' }
                         }
                     ],
                 }

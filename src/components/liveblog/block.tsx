@@ -25,12 +25,12 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     }
 
     time {
-        margin-top: 1rem;
+        margin-top: ${remSpace[4]};
     }
 
     time:nth-child(1) {
         margin-top: 0;
-        margin-bottom: 1rem;
+        margin-bottom: ${remSpace[4]};
         padding-left: ${remSpace[2]};
     }
 

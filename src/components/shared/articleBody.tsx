@@ -8,6 +8,7 @@ import {
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { Pillar } from 'format';
+import { remSpace } from '@guardian/src-foundations';
 
 const richLinkWidth = '8.75rem';
 
@@ -28,7 +29,7 @@ const ArticleBodyStyles = css`
     }
 
     .interactive {
-        margin: 1rem 0;
+        margin: ${remSpace[4]} 0;
     }
 
     iframe {
@@ -39,7 +40,7 @@ const ArticleBodyStyles = css`
     ${adStyles}
 
     twitter-widget {
-        margin: 1rem 0;
+        margin: ${remSpace[4]} 0;
     }
 `;
 

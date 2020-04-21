@@ -139,7 +139,7 @@ const listItemStyles: SerializedStyles = css`
 
 const HeadingTwoStyles = css`
     ${headline.xxsmall({ fontWeight: 'bold' })}
-    margin: 1rem 0 4px 0;
+    margin: ${remSpace[4]} 0 4px 0;
 
     & + p {
         margin-top: 0;
