@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -8,17 +8,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
-const showExpandedMenuStyles = css`
-    ${from.desktop} {
-        display: block;
-        overflow: visible;
-    }
-    ${until.desktop} {
-        transform: translateX(0%);
-    }
-`;
-
-const mainMenu = css`
+const mainMenuStyles = (CHECKBOX_ID: string) => css`
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -66,33 +56,37 @@ const mainMenu = css`
             margin-right: -50vw;
         }
     }
+
+    /* override transform on input checked */
+    ${'#' + CHECKBOX_ID}:checked ~ & {
+        ${from.desktop} {
+            display: block;
+            overflow: visible;
+        }
+        ${until.desktop} {
+            transform: translateX(0%);
+        }
+    }
 `;
 
 export const ExpandedMenu: React.FC<{
     display: Display;
     id: string;
     nav: NavType;
-    showExpandedMenu: boolean;
-    toggleExpandedMenu: (value: boolean) => void;
-}> = ({ display, id, nav, showExpandedMenu, toggleExpandedMenu }) => {
-    return (
-        <>
-            <ExpandedMenuToggle
-                display={display}
-                showExpandedMenu={showExpandedMenu}
-                toggleExpandedMenu={toggleExpandedMenu}
-                ariaControls={id}
-            />
-            <div
-                className={cx(mainMenu, {
-                    [showExpandedMenuStyles]: showExpandedMenu,
-                })}
-                aria-hidden={!showExpandedMenu}
-                id={id}
-                data-testid="expanded-menu"
-            >
-                {showExpandedMenu && <Columns nav={nav} />}
-            </div>
-        </>
-    );
-};
+    CHECKBOX_ID: string;
+}> = ({ display, id, nav, CHECKBOX_ID }) => (
+    <>
+        <ExpandedMenuToggle
+            display={display}
+            ariaControls={id}
+            CHECKBOX_ID={CHECKBOX_ID}
+        />
+        <div
+            className={mainMenuStyles(CHECKBOX_ID)}
+            id={id}
+            data-testid="expanded-menu"
+        >
+            <Columns nav={nav} />
+        </div>
+    </>
+);

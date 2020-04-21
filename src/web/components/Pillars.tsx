@@ -57,19 +57,27 @@ const pillarsStyles = (display: Display) => css`
     }
 `;
 
-const showMenuUnderline = css`
-    ${from.desktop} {
-        :before {
-            bottom: 0;
+const showMenuUnderlineStyles = (CHECKBOX_ID: string) => css`
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the face we use ~
+        to support NoJS
+    */
+    ${'#' + CHECKBOX_ID}:checked ~ ul li & {
+        ${from.desktop} {
+            :before {
+                bottom: 0;
+            }
         }
-    }
 
-    :hover {
-        text-decoration: underline;
-    }
+        :hover {
+            text-decoration: underline;
+        }
 
-    :after {
-        transform: translateY(4px);
+        :after {
+            transform: translateY(4px);
+        }
     }
 `;
 
@@ -212,14 +220,14 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 
 export const Pillars: React.FC<{
     display: Display;
-    mainMenuOpen: boolean;
+    CHECKBOX_ID?: string;
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
     dataLinkName: string;
 }> = ({
     display,
-    mainMenuOpen,
+    CHECKBOX_ID,
     pillars,
     pillar,
     showLastPillarDivider = true,
@@ -236,9 +244,9 @@ export const Pillars: React.FC<{
                             [pillarDivider]:
                                 showLastPillarDivider ||
                                 isNotLastPillar(i, pillars.length),
-                            [showMenuUnderline]: mainMenuOpen,
                             [forceUnderline]: p.pillar === pillar,
                         },
+                        CHECKBOX_ID && showMenuUnderlineStyles(CHECKBOX_ID),
                     )}
                     href={p.url}
                     data-link-name={`${dataLinkName} : primary : ${p.title}`}

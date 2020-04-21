@@ -7,8 +7,8 @@ const indices = [
     'bodyArea',
 
     // Header
-    'headerWrapper',
     'stickyAdWrapper',
+    'headerWrapper',
 
     // Modals will go here at the top
 ] as const;
