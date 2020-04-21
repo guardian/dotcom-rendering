@@ -58,7 +58,8 @@ const mainMenuStyles = (CHECKBOX_ID: string) => css`
     }
 
     /* override transform on input checked */
-    ${`#${CHECKBOX_ID}`}:checked ~ & {
+    /* eslint-disable-next-line prefer-template */
+    ${'#' + CHECKBOX_ID}:checked ~ & {
         ${from.desktop} {
             display: block;
             overflow: visible;

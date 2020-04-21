@@ -64,7 +64,7 @@ const showMenuUnderlineStyles = (CHECKBOX_ID: string) => css`
         to apply styles to the nested tabs due to the face we use ~
         to support NoJS
     */
-    ${`#${CHECKBOX_ID}`}:checked ~ ul li & {
+    ${'#' +CHECKBOX_ID}:checked ~ ul li & {
         ${from.desktop} {
             :before {
                 bottom: 0;
