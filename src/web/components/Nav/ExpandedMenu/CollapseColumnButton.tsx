@@ -11,12 +11,15 @@ const hideDesktop = css`
     }
 `;
 
-const showColumnLinksStyle = css`
-    :before {
-        margin-top: 8px;
-        transform: rotate(-135deg);
-    }
+const showColumnLinksStyle = (CHECKBOX_ID: string) => css`
+    ${`#${CHECKBOX_ID}:checked ~ & {
+        :before {
+            margin-top: 8px;
+            transform: rotate(-135deg);
+        }
+    }`}
 `;
+
 const collapseColumnButton = css`
     background-color: transparent;
     border: 0;
@@ -52,25 +55,26 @@ const collapseColumnButton = css`
 
 export const CollapseColumnButton: React.FC<{
     title: string;
-    showColumnLinks: boolean;
-    toggleColumnLinks: () => void;
+    CHECKBOX_ID: string;
     ariaControls: string;
-}> = ({ title, showColumnLinks, toggleColumnLinks, ariaControls }) => (
-    <button
+}> = ({ title, CHECKBOX_ID, ariaControls }) => (
+    // TODO: accessible
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
+    <label
         className={cx(
             collapseColumnButton,
-            {
-                [showColumnLinksStyle]: showColumnLinks,
-            },
+            showColumnLinksStyle(CHECKBOX_ID),
             hideDesktop,
         )}
-        onClick={() => {
-            toggleColumnLinks();
-        }}
-        aria-haspopup="true"
-        aria-controls={ariaControls}
+        htmlFor={CHECKBOX_ID}
+        aria-label="Toggle main menu"
+        key="OpenExpandedMenuLabel"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
         role="menuitem"
+        // TODO:
+        // aria-haspopup="true"
+        aria-controls={ariaControls}
     >
-        {title}
-    </button>
+        <span>{title}</span>
+    </label>
 );

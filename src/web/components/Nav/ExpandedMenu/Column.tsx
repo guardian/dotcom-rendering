@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
+
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
+
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars
 const pillarHeight = 42;
 
 // CSS
-
 export const hideDesktop = css`
     ${from.desktop} {
         display: none;
@@ -138,27 +140,27 @@ const pillarColumnLinks = css`
     }
 `;
 
-const hide = css`
-    display: none;
+const hideStyles = (CHECKBOX_ID: string) => css`
+    ${`#${CHECKBOX_ID}:not(:checked) ~ & {
+        display: none;
+    }`}
 `;
 
 const ColumnLinks: React.FC<{
     column: LinkType;
-    showColumnLinks: boolean;
+    CHECKBOX_ID?: string;
     id: string;
     index?: number;
-}> = ({ column, showColumnLinks, id, index }) => {
+}> = ({ column, CHECKBOX_ID, id, index }) => {
     return (
         <ul
             className={cx(
                 columnLinks,
                 { [firstColumnLinks]: index === 0 },
                 { [pillarColumnLinks]: !!column.pillar },
-                {
-                    [hide]: !showColumnLinks,
-                },
+                CHECKBOX_ID && hideStyles(CHECKBOX_ID),
             )}
-            aria-expanded={showColumnLinks}
+            // aria-expanded={showColumnLinks}
             role="menu"
             id={id}
         >
@@ -262,50 +264,51 @@ export const More: React.FC<{
             className={cx(columnStyle, pillarDivider, pillarDividerExtended)}
             role="none"
         >
-            <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
+            <ColumnLinks column={more} id={subNavId} />
         </li>
     );
 };
 
-export class Column extends Component<
-    {
-        column: PillarType;
-        index: number;
-    },
-    { showColumnLinks: boolean }
-> {
-    public state = {
-        showColumnLinks: false,
-    };
+export const Column = ({
+    column,
+    index,
+}: {
+    column: PillarType;
+    index: number;
+}) => {
+    const CHECKBOX_ID = `${column.title}-input`;
+    return (
+        <li className={cx(columnStyle, pillarDivider)} role="none">
+            {/*
+                IMPORTANT NOTE:
+                It is important to have the input as the 1st sibling for NoJS to work
+                as we use ~ to apply certain styles on checkbox checked and ~ can only
+                apply to styles with elements that are preceded
+            */}
+            <input
+                type="checkbox"
+                className={css`
+                    ${visuallyHidden};
+                `}
+                id={CHECKBOX_ID}
+                // aria-controls={ariaControls}
+                tabIndex={-1}
+                key="OpenExpandedMenuCheckbox"
+                role="menuitemcheckbox"
+                aria-checked="false"
+            />
+            <CollapseColumnButton
+                title={column.title}
+                CHECKBOX_ID={CHECKBOX_ID}
+                ariaControls={`${column.title.toLowerCase()}Links`}
+            />
 
-    public toggleColumnLinks() {
-        this.setState(state => ({
-            showColumnLinks: !state.showColumnLinks,
-        }));
-    }
-
-    public render() {
-        const { showColumnLinks } = this.state;
-        const { column, index } = this.props;
-        const subNavId = `${column.title.toLowerCase()}Links`;
-        return (
-            <li className={cx(columnStyle, pillarDivider)} role="none">
-                <CollapseColumnButton
-                    title={column.title}
-                    showColumnLinks={showColumnLinks}
-                    toggleColumnLinks={() => {
-                        this.toggleColumnLinks();
-                    }}
-                    ariaControls={subNavId}
-                />
-
-                <ColumnLinks
-                    column={column}
-                    showColumnLinks={showColumnLinks}
-                    id={subNavId}
-                    index={index}
-                />
-            </li>
-        );
-    }
-}
+            <ColumnLinks
+                column={column}
+                CHECKBOX_ID={CHECKBOX_ID}
+                id={`${column.title.toLowerCase()}Links`}
+                index={index}
+            />
+        </li>
+    );
+};
