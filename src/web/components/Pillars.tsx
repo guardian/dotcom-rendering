@@ -233,7 +233,7 @@ export const Pillars: React.FC<{
     showLastPillarDivider = true,
     dataLinkName,
 }) => (
-    <ul className={pillarsStyles(display)}>
+    <ul data-testid="pillar-list" className={pillarsStyles(display)}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
                 <a

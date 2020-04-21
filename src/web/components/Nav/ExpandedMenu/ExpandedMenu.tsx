@@ -57,7 +57,12 @@ const mainMenuStyles = (CHECKBOX_ID: string) => css`
         }
     }
 
-    /* override transform on input checked */
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the face we use ~
+        to support NoJS
+    */
     ${`#${CHECKBOX_ID}:checked ~ & {
         ${from.desktop} {
             display: block;

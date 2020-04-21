@@ -48,13 +48,6 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
     `;
 
     return css`
-        top: 50%;
-        right: 0;
-        margin-top: -1px;
-        margin-left: auto;
-        margin-right: auto;
-        ${lineStyles};
-
         background-color: currentColor;
         /*
             IMPORTANT NOTE:
@@ -65,6 +58,13 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
         ${`#${CHECKBOX_ID}:checked ~ label & {
             background-color: transparent;
         }`}
+
+        top: 50%;
+        right: 0;
+        margin-top: -1px;
+        margin-left: auto;
+        margin-right: auto;
+        ${lineStyles};
 
         :before {
             ${lineStyles};
