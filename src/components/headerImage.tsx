@@ -59,7 +59,7 @@ const liveStyles = css`
 const imgStyles = (width: number, height: number): SerializedStyles => css`
     display: block;
     width: 100%;
-    height: calc(100% * ${height / width});
+    height: calc(100vw * ${height / width});
 
     ${from.wide} {
         width: ${wideContentWidth}px;
