@@ -23,7 +23,7 @@ export const pillarColours: PillarColours = {
     [Pillar.News]: {
         kicker: palette.news[400],
         featureHeadline: palette.news[300],
-        soft: palette.neutral[97],
+        soft: palette.news[800],
         inverted: palette.news[500],
         liveblogBackground: palette.news[300],
     },
