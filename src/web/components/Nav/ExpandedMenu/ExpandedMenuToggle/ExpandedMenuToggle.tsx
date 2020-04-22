@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { css, cx } from 'emotion';
+import React from 'react';
+import { css } from 'emotion';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -32,13 +32,7 @@ const openExpandedMenu = (display: Display) => css`
         color: ${brandAlt[400]};
     }
 `;
-const checkbox = css`
-    :checked {
-        + div {
-            display: block;
-        }
-    }
-`;
+
 const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
     display: block;
     height: 100%;
@@ -71,97 +65,31 @@ interface Props {
     ariaControls: string;
 }
 
-export class ExpandedMenuToggle extends Component<
-    Props,
-    { enhanceCheckbox: boolean }
-> {
-    constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            enhanceCheckbox: false,
-        };
-    }
-
-    public componentDidMount() {
-        /*
-            componentDidMount is only executed in the browser therefore if
-            enhanceCheckbox is set to true it indicates that JS is running
-            in the browser and we should re-render without the NO JS fallback.
-            https://reactjs.org/docs/react-component.html#componentdidmount
-
-         */
-        this.setState({
-            enhanceCheckbox: true,
-        });
-    }
-
-    public render() {
-        const {
-            display,
-            toggleExpandedMenu,
-            ariaControls,
-            showExpandedMenu,
-        } = this.props;
-        const { enhanceCheckbox } = this.state;
-        const CHECKBOX_ID = 'main-menu-toggle';
-
-        if (enhanceCheckbox) {
-            return [
-                <VeggieBurger
-                    display={display}
-                    showExpandedMenu={showExpandedMenu}
-                    toggleExpandedMenu={toggleExpandedMenu}
-                    enhanceCheckbox={enhanceCheckbox}
-                    htmlFor={CHECKBOX_ID}
-                    ariaControls={ariaControls}
-                    key="VeggieBurger"
-                />,
-                <button
-                    className={openExpandedMenu(display)}
-                    onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-                    aria-controls={ariaControls}
-                    key="OpenExpandedMenuButton"
-                    data-link-name={`nav2 : veggie-burger : ${
-                        showExpandedMenu ? 'show' : 'hide'
-                    }`}
-                >
-                    <span className={screenReadable}>Show</span>
-                    <span className={text({ showExpandedMenu })}>More</span>
-                </button>,
-            ];
-        }
-
-        return [
-            <VeggieBurger
-                display={display}
-                showExpandedMenu={showExpandedMenu}
-                toggleExpandedMenu={toggleExpandedMenu}
-                enhanceCheckbox={enhanceCheckbox}
-                htmlFor={CHECKBOX_ID}
-                ariaControls={ariaControls}
-                key="VeggieBurger"
-            />,
-            // We can't nest the input inside the label because the structure is important for CSS reasons
-            // eslint-disable-next-line jsx-a11y/label-has-associated-control
-            <label
-                className={openExpandedMenu(display)}
-                htmlFor={CHECKBOX_ID}
-                key="OpenExpandedMenuLabel"
-            >
-                <span className={screenReadable}>Show</span>
-                <span className={text({ showExpandedMenu })}>More</span>
-            </label>,
-            <input
-                type="checkbox"
-                className={cx(screenReadable, checkbox)}
-                id={CHECKBOX_ID}
-                aria-controls={ariaControls}
-                tabIndex={-1}
-                key="OpenExpandedMenuCheckbox"
-                role="menuitemcheckbox"
-                aria-checked="false"
-            />,
-        ];
-    }
-}
+export const ExpandedMenuToggle = ({
+    display,
+    toggleExpandedMenu,
+    ariaControls,
+    showExpandedMenu,
+}: Props) => (
+    <>
+        <VeggieBurger
+            display={display}
+            showExpandedMenu={showExpandedMenu}
+            toggleExpandedMenu={toggleExpandedMenu}
+            ariaControls={ariaControls}
+            key="VeggieBurger"
+        />
+        <button
+            className={openExpandedMenu(display)}
+            onClick={() => toggleExpandedMenu(!showExpandedMenu)}
+            aria-controls={ariaControls}
+            key="OpenExpandedMenuButton"
+            data-link-name={`nav2 : veggie-burger : ${
+                showExpandedMenu ? 'show' : 'hide'
+            }`}
+        >
+            <span className={screenReadable}>Show</span>
+            <span className={text({ showExpandedMenu })}>More</span>
+        </button>
+    </>
+);
