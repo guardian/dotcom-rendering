@@ -62,6 +62,10 @@ You can preview an AMP page similarly to an article, as follows
 
 http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
+or, connecting to a locally running instance of frontend,
+
+http://localhost:3030/AMPArticle?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+
 ### Note on rebasing vs merging
 
 The dotcom-rendering github account is set up to merge PRs into master instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
