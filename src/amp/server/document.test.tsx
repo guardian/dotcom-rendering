@@ -4,6 +4,7 @@ import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
+import { ExperimentModel } from '@root/src/amp/components/Experiment';
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
@@ -56,12 +57,23 @@ test('produces valid AMP doc', async () => {
         },
     };
 
+    const experiment: ExperimentModel = {
+        testExperiment: {
+            sticky: true,
+            consentNotificationId: 'the-adconsent-element',
+            variants: {
+                treatment1: 10.0,
+            },
+        },
+    };
+
     const body = (
         <Article
             nav={nav}
             articleData={CAPI}
             config={config}
             analytics={analytics}
+            experiment={experiment}
         />
     );
     const result = v.validateString(

@@ -9,6 +9,10 @@ import { AdConsent } from '@root/src/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
+import {
+    Experiment,
+    ExperimentModel,
+} from '@root/src/amp/components/Experiment';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { getPillar } from '@root/src/lib/pillars';
@@ -40,11 +44,13 @@ export const Article: React.FC<{
     articleData: ArticleModel;
     config: ConfigType;
     analytics: AnalyticsModel;
-}> = ({ nav, articleData, config, analytics }) => (
+    experiment: ExperimentModel;
+}> = ({ nav, articleData, config, analytics, experiment }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
         <AnalyticsIframe url={config.ampIframeUrl} />
         <AdConsent />
+        <Experiment experiment={experiment} />
 
         {/* /TODO change to gray bgcolor */}
         <div key="main" className={backgroundColour}>

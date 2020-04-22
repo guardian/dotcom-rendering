@@ -5,6 +5,7 @@ import { Article } from '@root/src/amp/pages/Article';
 import { extractScripts } from '@root/src/amp/lib/scripts';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
+import { ExperimentModel } from '@root/src/amp/components/Experiment';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
@@ -43,6 +44,16 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             },
         };
 
+        const experiment: ExperimentModel = {
+            testExperiment: {
+                sticky: true,
+                consentNotificationId: 'the-adconsent-element',
+                variants: {
+                    treatment1: 10.0,
+                },
+            },
+        };
+
         const metadata = {
             description: CAPI.trailText,
             canonicalURL: CAPI.webURL,
@@ -58,6 +69,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     articleData={CAPI}
                     nav={extractNAV(CAPI.nav)}
                     analytics={analytics}
+                    experiment={experiment}
                     config={config}
                 />
             ),
