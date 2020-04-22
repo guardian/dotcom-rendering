@@ -10,7 +10,6 @@ import { remSpace } from '@guardian/src-foundations';
 import { Item } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
-import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Display, Design } from 'format';
 
 
@@ -58,15 +57,10 @@ const thinHeadline = css`
     }
 `;
 
-const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
+const immersive: SerializedStyles = css`
     ${styles}
     ${headline.xsmall({ fontWeight: 'light' })}
     margin-top: ${remSpace[3]};
-
-    a {
-        box-shadow: inset 0 -0.1rem ${pillarStyles.kicker};
-        padding-bottom: 0.2rem;
-    }
 `;
 
 const media = css`
@@ -80,18 +74,11 @@ const media = css`
         height: 0.7rem;
         width: 0.7rem;
     }
-   
-    a {
-        color: ${neutral[86]};
-        box-shadow: inset 0 -0.1rem ${neutral[46]};
-    }
 `;
 
 const getStyles = (item: Item): SerializedStyles => {
-    const pillarStyles = getPillarStyles(item.pillar);
-
     if (item.display === Display.Immersive) {
-        return immersive(pillarStyles);
+        return immersive;
     }
 
     switch (item.design) {

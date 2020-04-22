@@ -2,38 +2,41 @@
 
 import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import Img from 'components/img';
 import { BodyImageProps } from 'image';
+import { remSpace } from '@guardian/src-foundations';
 
 // ----- Setup ----- //
 
-const size = '8.75rem';
-
+const size = `calc(50% - ${remSpace[1]})`;
 
 // ----- Component ----- //
 
 const styles = css`
-    display: block;
-    float: left;
-    clear: left;
+    margin: ${remSpace[1]} 0 0 0;
+    display: inline-block;
     width: ${size};
-    margin: 0 ${remSpace[3]} 0 0;
 
-    ${from.wide} {
-        margin-left: calc(-${size} - ${remSpace[3]} - ${remSpace[2]});
-        margin-right: 0;
-        padding: 0;
+    figcaption {
+        display: none;
+    }
+
+    + .halfWidth, + .halfWidth + .halfWidth + .halfWidth {
+        margin-left: ${remSpace[2]};
+    }
+
+    + .halfWidth + .halfWidth  {
+        margin-left: 0;
     }
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(${size} * ${height / width});
+    width: 100%;
 `;
 
-const BodyImageThumbnail: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
-    <figure css={styles}>
+const BodyImageHalfWidth: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
+    <figure css={styles} className="halfWidth">
         <Img
             image={image}
             imageMappings={imageMappings}
@@ -46,4 +49,4 @@ const BodyImageThumbnail: FC<BodyImageProps> = ({ image, imageMappings, children
 
 // ----- Exports ----- //
 
-export default BodyImageThumbnail;
+export default BodyImageHalfWidth;

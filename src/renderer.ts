@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, ReactElement } from 'react';
+import { ReactNode, createElement as h, ReactElement, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -9,7 +9,7 @@ import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { ElementKind, BodyElement } from 'item';
-import { Role } from 'image';
+import { Role, BodyImageProps } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
@@ -20,6 +20,7 @@ import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import MediaFigCaption from 'components/media/mediaFigCaption';
+import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 
 
 // ----- Renderer ----- //
@@ -355,6 +356,16 @@ const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): React
     return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
 };
 
+const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
+    if (role === Role.Thumbnail) {
+        return BodyImageThumbnail;
+    } else if (role === Role.HalfWidth) {
+        return BodyImageHalfWidth;
+    } else {
+        return BodyImage;
+    }
+}
+
 const render = (pillar: Pillar, imageMappings: ImageMappings) =>
     (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
@@ -365,7 +376,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Image: {
             const { caption, credit, role } = element;
             const ImageComponent = role
-                .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
+                .fmap(imageComponentFromRole)
                 .withDefault(BodyImage);
 
             const figcaption = caption.fmap<ReactNode>(c =>

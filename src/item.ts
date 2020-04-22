@@ -4,7 +4,7 @@ import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { articleMainImage, articleContributors, articleSeries } from 'capi';
+import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive } from 'capi';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 import {
@@ -359,7 +359,7 @@ const isShowcaseEmbed = (content: Content): boolean =>
 
 function getDisplay(content: Content): Display {
 
-    if (content.fields?.displayHint === 'immersive') {
+    if (isImmersive(content) || isPhotoEssay(content)) {
         return Display.Immersive;
     // This is meant to replicate the current logic in frontend:
     // https://github.com/guardian/frontend/blob/88cfa609c73545085c3e5f3921631ec344a3eb83/common/app/model/meta.scala#L586

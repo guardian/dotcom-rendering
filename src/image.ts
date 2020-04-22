@@ -5,6 +5,7 @@ import { createHash } from 'crypto';
 import { ImageMappings } from 'components/shared/page';
 import { Option, Some, None, fromNullable } from 'types/option';
 import { IBlockElement as BlockElement } from 'mapiThriftModels';
+import { ReactNode } from 'react';
 
 
 // ----- Setup ----- //
@@ -27,6 +28,7 @@ const defaultQuality = 85;
 
 enum Role {
     Thumbnail,
+    HalfWidth
 }
 
 interface Image {
@@ -40,6 +42,11 @@ interface Image {
     role: Option<Role>;
 }
 
+interface BodyImageProps {
+    image: Image;
+    imageMappings: ImageMappings;
+    children?: ReactNode;
+}
 
 // ----- Functions ----- //
 
@@ -98,7 +105,16 @@ const parseImage = (docParser: (html: string) => DocumentFragment) =>
             ),
             nativeCaption: fromNullable(data?.caption),
             role: fromNullable(data?.role).andThen<Role>(
-                r => r === 'thumbnail' ? new Some(Role.Thumbnail) : new None()
+                role => {
+                    switch(role) {
+                        case 'thumbnail':
+                            return new Some(Role.Thumbnail)
+                        case 'halfWidth':
+                            return new Some(Role.HalfWidth)
+                        default:
+                            return new None()
+                    }
+                }
             ),
         });
     });
@@ -115,4 +131,5 @@ export {
     srcsetWithWidths,
     sign,
     parseImage,
+    BodyImageProps
 };
