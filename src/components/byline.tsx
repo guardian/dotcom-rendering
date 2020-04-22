@@ -27,7 +27,8 @@ const styles = (kicker: string): SerializedStyles => css`
     `}
 `;
 
-const commentStyles = css`
+const commentStyles = (kicker: string): SerializedStyles => css`
+    color: ${kicker};
     ${headline.medium({ fontWeight: 'light', italic: true })}
 `;
 
@@ -56,7 +57,7 @@ const getStyles = (format: Format): SerializedStyles => {
 
     switch (format.design) {
         case Design.Comment:
-            return commentStyles;
+            return commentStyles(kicker);
 
         default:
             return styles(kicker);
