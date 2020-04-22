@@ -10,6 +10,7 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -19,7 +20,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
@@ -326,7 +326,7 @@ export const StandardLayout = ({
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={pillar} />
+                        <GuardianLines count={4} pillar={pillar} />
                     </Section>
                 </div>
             </div>
@@ -404,12 +404,12 @@ export const StandardLayout = ({
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
+                                    count={decideLineCount(designType)}
                                     pillar={pillar}
                                     effect={decideLineEffect(
                                         designType,
-                                        CAPI.pillar,
+                                        pillar,
                                     )}
-                                    count={decideLineCount(designType)}
                                 />
                             </div>
                         </div>
@@ -441,7 +441,7 @@ export const StandardLayout = ({
                                     adTargeting={adTargeting}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={pillar} />
+                                <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -527,7 +527,7 @@ export const StandardLayout = ({
                         currentNavLink={NAV.currentNavLink}
                         pillar={pillar}
                     />
-                    <GuardianLines pillar={pillar} />
+                    <GuardianLines count={4} pillar={pillar} />
                 </Section>
             )}
 
