@@ -24,6 +24,7 @@ type Props = {
     commentPageSize?: 25 | 50 | 100;
     commentOrderBy?: 'newest' | 'oldest' | 'recommendations';
     commentToScrollTo?: number;
+    onPermalinkClick: (commentId: number) => void;
 };
 
 const containerStyles = css`
@@ -58,6 +59,7 @@ export const CommentsLayout = ({
     discussionD2Uid,
     discussionApiClientHeader,
     commentToScrollTo,
+    onPermalinkClick,
 }: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
@@ -98,6 +100,7 @@ export const CommentsLayout = ({
                 }}
                 expanded={expanded}
                 commentToScrollTo={commentToScrollTo}
+                onPermalinkClick={onPermalinkClick}
             />
         </div>
     </Flex>
