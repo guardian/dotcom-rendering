@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { select, withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import React, { ReactElement } from 'react';
 
 import Standfirst from './standfirst';
@@ -8,6 +8,7 @@ import { Item } from 'item';
 import { Pillar, Design, Display } from 'format';
 import { Option, None } from 'types/option';
 import { parse } from 'client/parser';
+import { selectPillar } from 'storybookHelpers';
 
 
 // ----- Setup ----- //
@@ -44,14 +45,6 @@ const item: Item = {
     shouldHideReaderRevenue: false,
 };
 
-const pillarOptions = {
-    News: Pillar.News,
-    Opinion: Pillar.Opinion,
-    Sport: Pillar.Sport,
-    Culture: Pillar.Culture,
-    Lifestyle: Pillar.Lifestyle,
-};
-
 
 // ----- Stories ----- //
 
@@ -59,7 +52,7 @@ const Default = (): ReactElement =>
     <Standfirst item={{
         ...item,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.News),
+        pillar: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>
@@ -68,7 +61,7 @@ const Review = (): ReactElement =>
         design: Design.Review,
         starRating: 4,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.Culture),
+        pillar: selectPillar(Pillar.Culture),
     }} />
 
 const Feature = (): ReactElement =>
@@ -76,7 +69,7 @@ const Feature = (): ReactElement =>
         ...item,
         design: Design.Feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.Sport),
+        pillar: selectPillar(Pillar.Sport),
     }} />
 
 const Comment = (): ReactElement =>
@@ -84,7 +77,7 @@ const Comment = (): ReactElement =>
         ...item,
         design: Design.Comment,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.Opinion),
+        pillar: selectPillar(Pillar.Opinion),
     }} />
 
 

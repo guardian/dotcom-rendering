@@ -1,12 +1,13 @@
 // ----- Imports ----- //
 
 import React, { ReactElement } from 'react';
-import { withKnobs, select, boolean, radios } from '@storybook/addon-knobs';
+import { withKnobs, boolean, radios } from '@storybook/addon-knobs';
 
 import Headline from './headline';
 import { Item } from 'item';
 import { Pillar, Design, Display } from 'format';
 import { None } from 'types/option';
+import { selectPillar } from 'storybookHelpers';
 
 
 // ----- Setup ----- //
@@ -36,14 +37,6 @@ const item: Item = {
     shouldHideReaderRevenue: false,
 };
 
-const pillarOptions = {
-    News: Pillar.News,
-    Opinion: Pillar.Opinion,
-    Sport: Pillar.Sport,
-    Culture: Pillar.Culture,
-    Lifestyle: Pillar.Lifestyle,
-};
-
 const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
 
 
@@ -53,7 +46,6 @@ const Default = (): ReactElement =>
     <Headline item={{
         ...item,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.News),
     }} />
 
 const Analysis = (): ReactElement =>
@@ -61,7 +53,7 @@ const Analysis = (): ReactElement =>
         ...item,
         design: Design.Analysis,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.News),
+        pillar: selectPillar(Pillar.News),
     }} />
 
 const Feature = (): ReactElement =>
@@ -69,7 +61,7 @@ const Feature = (): ReactElement =>
         ...item,
         design: Design.Feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.News),
+        pillar: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>
