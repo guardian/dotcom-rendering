@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import Img from 'components/img';
-import { BodyImageProps } from 'image';
+import { BodyImageProps as Props } from 'image';
 import { remSpace } from '@guardian/src-foundations';
 
 // ----- Setup ----- //
@@ -35,7 +35,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     width: 100%;
 `;
 
-const BodyImageHalfWidth: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
+const BodyImageHalfWidth: FC<Props> = ({ image, imageMappings, children }: Props) =>
     <figure css={styles} className="halfWidth">
         <Img
             image={image}

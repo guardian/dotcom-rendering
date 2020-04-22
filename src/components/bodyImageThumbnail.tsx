@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import Img from 'components/img';
-import { BodyImageProps } from 'image';
+import { BodyImageProps as Props } from 'image';
 
 // ----- Setup ----- //
 
@@ -32,7 +32,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(${size} * ${height / width});
 `;
 
-const BodyImageThumbnail: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
+const BodyImageThumbnail: FC<Props> = ({ image, imageMappings, children }: Props) =>
     <figure css={styles}>
         <Img
             image={image}
