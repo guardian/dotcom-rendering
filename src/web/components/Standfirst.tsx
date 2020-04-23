@@ -2,7 +2,14 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+
+type Props = {
+    display: Display;
+    designType: DesignType;
+    standfirst: string;
+};
 
 const nestedStyles = css`
     li {
@@ -48,6 +55,14 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                 fontWeight: 'light',
             })};
             padding-top: ${space[4]}px;
+
+            max-width: 280px;
+            ${from.tablet} {
+                max-width: 400px;
+            }
+            ${from.tablet} {
+                max-width: 460px;
+            }
         `;
     }
 
@@ -83,12 +98,6 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                 margin-bottom: ${space[3]}px;
             `;
     }
-};
-
-type Props = {
-    display: Display;
-    designType: DesignType;
-    standfirst: string;
 };
 
 export const Standfirst = ({ display, designType, standfirst }: Props) => {
