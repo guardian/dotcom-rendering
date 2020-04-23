@@ -47,6 +47,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
             ${headline.xsmall({
                 fontWeight: 'light',
             })};
+            padding-top: ${space[4]}px;
         `;
     }
 
