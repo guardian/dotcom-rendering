@@ -74,6 +74,7 @@ function renderElement(
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
                 <YouTubeComponent
+                    display={display}
                     key={i}
                     element={element}
                     pillar={pillar}
