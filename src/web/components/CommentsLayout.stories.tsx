@@ -33,6 +33,7 @@ export const Default = () => (
                 discussionD2Uid="testD2Header"
                 discussionApiClientHeader="testClientHeader"
                 expanded={false}
+                onPermalinkClick={() => {}}
             />
             <RightColumn>
                 <AdSlot asps={namedAdSlotParameters('comments')} />
