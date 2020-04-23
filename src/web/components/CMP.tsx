@@ -4,11 +4,18 @@ import {
     setErrorHandler,
 } from '@guardian/consent-management-platform';
 
-const ConsentManagementPlatform = React.lazy(() =>
-    import(
+import { initPerf } from '@root/src/web/browser/startup';
+
+const ConsentManagementPlatform = React.lazy(() => {
+    const { start, end } = initPerf('ConsentManagementPlatform');
+    start();
+    return import(
         /* webpackChunkName: "ConsentManagementPlatform" */ '@guardian/consent-management-platform/lib/ConsentManagementPlatform'
-    ).then(module => ({ default: module.ConsentManagementPlatform })),
-);
+    ).then(module => {
+        end();
+        return { default: module.ConsentManagementPlatform };
+    });
+});
 
 export const CMP = () => {
     const [show, setShow] = useState(false);
