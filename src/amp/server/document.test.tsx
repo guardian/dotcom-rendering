@@ -5,6 +5,7 @@ import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { ExperimentModel } from '@root/src/amp/components/Experiment';
+import {abTests, getActiveTests} from "@root/src/amp/abTests";
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
@@ -57,15 +58,7 @@ test('produces valid AMP doc', async () => {
         },
     };
 
-    const experiment: ExperimentModel = {
-        testExperiment: {
-            sticky: true,
-            consentNotificationId: 'the-adconsent-element',
-            variants: {
-                treatment1: 10.0,
-            },
-        },
-    };
+    const activeTests: ExperimentModel = getActiveTests(abTests, config.switches)
 
     const body = (
         <Article
@@ -73,7 +66,7 @@ test('produces valid AMP doc', async () => {
             articleData={CAPI}
             config={config}
             analytics={analytics}
-            experiment={experiment}
+            experiment={activeTests}
         />
     );
     const result = v.validateString(
