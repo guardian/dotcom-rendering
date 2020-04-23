@@ -17,10 +17,6 @@ const styles = css`
     display: inline-block;
     width: ${size};
 
-    figcaption {
-        display: none;
-    }
-
     + .halfWidth, + .halfWidth + .halfWidth + .halfWidth {
         margin-left: ${remSpace[2]};
     }
@@ -35,7 +31,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     width: 100%;
 `;
 
-const BodyImageHalfWidth: FC<Props> = ({ image, imageMappings, children }: Props) =>
+const BodyImageHalfWidth: FC<Props> = ({ image, imageMappings }: Props) =>
     <figure css={styles} className="halfWidth">
         <Img
             image={image}
@@ -43,7 +39,6 @@ const BodyImageHalfWidth: FC<Props> = ({ image, imageMappings, children }: Props
             sizes={size}
             className={imgStyles(image.width, image.height)}
         />
-        {children}
     </figure>;
 
 

@@ -379,9 +379,11 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                 .fmap(imageComponentFromRole)
                 .withDefault(BodyImage);
 
-            const figcaption = caption.fmap<ReactNode>(c =>
-                h(FigCaption, { pillar, text: text(c, pillar), credit })
-            ).withDefault(null);
+            const figcaption = role.withDefault(Role.Thumbnail) === Role.HalfWidth
+                ? caption.fmap<ReactNode>(c =>
+                    h(FigCaption, { pillar, text: text(c, pillar), credit })
+                  ).withDefault(null)
+                : null;
             
             return h(ImageComponent, { image: element, imageMappings }, figcaption);
         }
