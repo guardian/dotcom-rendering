@@ -1,6 +1,4 @@
-const {
-    siteName
-} = require('../frontend/config');
+const { siteName } = require('../frontend/config');
 
 module.exports = () => ({
     entry: {
@@ -23,39 +21,42 @@ module.exports = () => ({
             whitelist: [/^@guardian/],
         }),
         (context, request, callback) => {
-            return request.endsWith('manifest.json') ?
-                callback(null, `commonjs ${request}`) :
-                callback()
+            return request.endsWith('manifest.json')
+                ? callback(null, `commonjs ${request}`)
+                : callback();
         },
         (context, request, callback) => {
-            return request.endsWith('manifest.legacy.json') ?
-                callback(null, `commonjs ${request}`) :
-                callback()
+            return request.endsWith('manifest.legacy.json')
+                ? callback(null, `commonjs ${request}`)
+                : callback();
         },
     ],
 
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /(\.tsx)|(\.js)|(\.ts)$/,
                 exclude: /node_modules/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-typescript',
-                            // TODO: remove @babel/preset-react once we stop using JSX in server folder
-                            '@babel/preset-react',
-                            [
-                                '@babel/preset-env',
-                                {
-                                    targets: {
-                                        node: 'current',
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-typescript',
+                                // TODO: remove @babel/preset-react once we stop using JSX in server folder
+                                '@babel/preset-react',
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        targets: {
+                                            node: 'current',
+                                        },
                                     },
-                                },
-                            ]
-                        ],
+                                ],
+                            ],
+                        },
                     },
-                }, ],
+                ],
             },
             // TODO: find a way to remove
             {
@@ -63,5 +64,5 @@ module.exports = () => ({
                 use: ['desvg-loader/react', 'svg-loader'],
             },
         ],
-    }
+    },
 });
