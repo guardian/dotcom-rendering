@@ -319,6 +319,10 @@ export const ShowcaseLayout = ({
                             pillar={getCurrentPillar(CAPI)}
                             nav={NAV}
                             display={display}
+                            subscribeUrl={
+                                CAPI.nav.readerRevenueLinks.header.subscribe
+                            }
+                            edition={CAPI.editionId}
                         />
                     </Section>
 

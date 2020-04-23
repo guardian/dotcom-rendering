@@ -8,7 +8,13 @@ import { nav } from './Nav.mock';
 describe('Nav', () => {
     it('should display pillar titles', () => {
         const { getByText } = render(
-            <Nav pillar="news" nav={nav} display="standard" />,
+            <Nav
+                pillar="news"
+                nav={nav}
+                display="standard"
+                subscribeUrl=""
+                edition="UK"
+            />,
         );
 
         expect(getByText('News')).toBeInTheDocument();
@@ -19,7 +25,13 @@ describe('Nav', () => {
 
     it('should render the correct number of pillar items', () => {
         const { container } = render(
-            <Nav pillar="news" nav={nav} display="standard" />,
+            <Nav
+                pillar="news"
+                nav={nav}
+                display="standard"
+                subscribeUrl=""
+                edition="UK"
+            />,
         );
 
         const listItems = container.querySelectorAll('li');
@@ -29,7 +41,13 @@ describe('Nav', () => {
 
     it('should open and close the expanded menu by clicking More', () => {
         const { getByTestId, getByText, queryAllByRole } = render(
-            <Nav pillar="news" nav={nav} display="standard" />,
+            <Nav
+                pillar="news"
+                nav={nav}
+                display="standard"
+                subscribeUrl=""
+                edition="UK"
+            />,
         );
 
         const expandedMenu = getByTestId('expanded-menu');
