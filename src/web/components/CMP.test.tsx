@@ -27,6 +27,14 @@ describe('CMP', () => {
                 return <div />;
             },
         }));
+        // stub window.performace as it is not defined on Node
+        Object.defineProperty(window, 'performance', {
+            value: {
+                mark: () => {},
+                measure: () => {},
+                getEntriesByName: () => {},
+            },
+        });
     });
 
     beforeEach(() => {
