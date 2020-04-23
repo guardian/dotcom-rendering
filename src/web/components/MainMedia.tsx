@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -30,11 +30,6 @@ const mainMedia = css`
         }
     }
 
-    ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-
     img {
         flex: 0 0 auto; /* IE */
         width: 100%;
@@ -43,6 +38,13 @@ const mainMedia = css`
 
     figcaption {
         ${captionFont};
+    }
+`;
+
+const noGutters = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -99,7 +101,7 @@ export const MainMedia: React.FC<{
     adTargeting?: AdTargeting;
     starRating?: number;
 }> = ({ display, elements, pillar, hideCaption, adTargeting, starRating }) => (
-    <div className={mainMedia}>
+    <div className={cx(mainMedia, display !== 'immersive' && noGutters)}>
         {elements.map((element, i) =>
             renderElement(
                 display,
