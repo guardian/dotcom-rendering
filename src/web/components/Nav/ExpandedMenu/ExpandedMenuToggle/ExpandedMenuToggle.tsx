@@ -109,22 +109,28 @@ export const ExpandedMenuToggle = ({
             But in JSX this can be sometimes a little difficult
             https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685 */}
         {/*
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore */}
         <label
             className={openExpandedMenu(display)}
             aria-controls={ariaControls}
+            aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
             htmlFor={CHECKBOX_ID}
             onClick={() =>
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 document && document.getElementById(CHECKBOX_ID).click()
             }
             onKeyDown={() =>
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 document && document.getElementById(CHECKBOX_ID).click()
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             tabindex={0}
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
             role="button"
         >
             <span className={screenReadable}>Show</span>
