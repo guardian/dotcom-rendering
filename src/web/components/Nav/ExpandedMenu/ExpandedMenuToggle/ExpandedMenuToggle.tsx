@@ -9,6 +9,7 @@ import { VeggieBurger } from './VeggieBurger';
 const screenReadable = css`
     ${visuallyHidden};
 `;
+
 const openExpandedMenu = (display: Display) => css`
     ${headline.xsmall()};
     font-weight: 300;
@@ -33,7 +34,7 @@ const openExpandedMenu = (display: Display) => css`
     }
 `;
 
-const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
+const showMoreTextStyles = (CHECKBOX_ID: string) => css`
     display: block;
     height: 100%;
     :after {
@@ -44,52 +45,87 @@ const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
         display: inline-block;
         height: 8px;
         margin-left: 6px;
-        transform: ${showExpandedMenu
-            ? 'translateY(1px) rotate(-135deg)'
-            : 'translateY(-3px) rotate(45deg)'};
+
+        /*
+            IMPORTANT NOTE:
+            we need to specify the adjacent path to the a (current) tag
+            to apply styles to the nested tabs due to the face we use ~
+            to support NoJS
+        */
+        transform: translateY(-3px) rotate(45deg);
+        ${`#${CHECKBOX_ID}:checked ~ & {
+            transform: translateY(1px) rotate(-135deg);
+        }`}
+
         transition: transform 250ms ease-out;
         vertical-align: middle;
         width: 8px;
     }
     :hover:after {
-        transform: ${showExpandedMenu
-            ? 'translateY(-2px) rotate(-135deg)'
-            : 'translateY(0) rotate(45deg)'};
+        /*
+            IMPORTANT NOTE:
+            we need to specify the adjacent path to the a (current) tag
+            to apply styles to the nested tabs due to the face we use ~
+            to support NoJS
+        */
+        transform: translateY(0) rotate(45deg);
+        ${`#${CHECKBOX_ID}:checked ~ & {
+            transform: translateY(-2px) rotate(-135deg);
+        }`}
     }
 `;
 
 interface Props {
     display: Display;
-    showExpandedMenu: boolean;
-    toggleExpandedMenu: (value: boolean) => void;
     ariaControls: string;
+    CHECKBOX_ID: string;
 }
 
 export const ExpandedMenuToggle = ({
     display,
-    toggleExpandedMenu,
     ariaControls,
-    showExpandedMenu,
+    CHECKBOX_ID,
 }: Props) => (
     <>
         <VeggieBurger
             display={display}
-            showExpandedMenu={showExpandedMenu}
-            toggleExpandedMenu={toggleExpandedMenu}
+            CHECKBOX_ID={CHECKBOX_ID}
             ariaControls={ariaControls}
             key="VeggieBurger"
         />
-        <button
+
+        {/*
+            Supporting NoJS and accessibility is hard.
+            We are using label and `htmlFor` prop to be able to toggle an input checkbox
+            However this means that we are using a label as a button and lose out on
+            browser accessiblity.
+
+            We have defined a JS onClick and onKeyDown as a fall back to help accessiblity.
+            This is not perfect solution, as some screen readers have NoJS enabled
+            https://webaim.org/projects/screenreadersurvey8/#javascript
+        */}
+        {/*
+            We need Typescript to ignore the abnormal props we have added to the label
+            But in JSX this can be sometimes a little difficult
+            https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685 */}
+        {/*
+  // @ts-ignore */}
+        <label
             className={openExpandedMenu(display)}
-            onClick={() => toggleExpandedMenu(!showExpandedMenu)}
             aria-controls={ariaControls}
             key="OpenExpandedMenuButton"
-            data-link-name={`nav2 : veggie-burger : ${
-                showExpandedMenu ? 'show' : 'hide'
-            }`}
+            htmlFor={CHECKBOX_ID}
+            onClick={() =>
+                document && document.getElementById(CHECKBOX_ID).click()
+            }
+            onKeyDown={() =>
+                document && document.getElementById(CHECKBOX_ID).click()
+            }
+            tabindex={0}
+            role="button"
         >
             <span className={screenReadable}>Show</span>
-            <span className={text({ showExpandedMenu })}>More</span>
-        </button>
+            <span className={showMoreTextStyles(CHECKBOX_ID)}>More</span>
+        </label>
     </>
 );

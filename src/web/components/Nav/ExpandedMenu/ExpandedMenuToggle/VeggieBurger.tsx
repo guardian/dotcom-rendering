@@ -2,15 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 
-const veggieBurger = ({
-    display,
-    showExpandedMenu,
-}: {
-    display: Display;
-    showExpandedMenu: boolean;
-}) => css`
+const veggieBurgerStyles = (display: Display) => css`
     background-color: ${brandAlt[400]};
     color: ${neutral[7]};
     cursor: pointer;
@@ -20,12 +14,10 @@ const veggieBurger = ({
     border: 0;
     border-radius: 50%;
     outline: none;
-    ${until.tablet} {
-        z-index: 1;
-    }
-    ${from.tablet} {
-        z-index: ${showExpandedMenu ? 1071 : 0};
-    }
+
+    /* TODO: we should not use such a hight z-index number  */
+    z-index: 1071;
+
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
@@ -43,11 +35,7 @@ const veggieBurger = ({
     }
 `;
 
-const veggieBurgerIcon = ({
-    showExpandedMenu,
-}: {
-    showExpandedMenu: boolean;
-}) => {
+const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -60,51 +48,70 @@ const veggieBurgerIcon = ({
     `;
 
     return css`
+        background-color: currentColor;
+        /*
+            IMPORTANT NOTE:
+            we need to specify the adjacent path to the a (current) tag
+            to apply styles to the nested tabs due to the face we use ~
+            to support NoJS
+        */
+        ${`#${CHECKBOX_ID}:checked ~ label & {
+            background-color: transparent;
+        }`}
+
         top: 50%;
         right: 0;
         margin-top: -1px;
         margin-left: auto;
         margin-right: auto;
         ${lineStyles};
-        background-color: ${showExpandedMenu ? 'transparent' : 'currentColor'};
+
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
-            ${showExpandedMenu
-                ? `top: 0;
-            transform: rotate(-45deg);
-            `
-                : 'top: -6px;'};
+            /*
+                IMPORTANT NOTE:
+                we need to specify the adjacent path to the a (current) tag
+                to apply styles to the nested tabs due to the face we use ~
+                to support NoJS
+            */
+            top: -6px;
+            ${`#${CHECKBOX_ID}:checked ~ label & {
+                top: 0;
+                transform: rotate(-45deg);
+            }`}
         }
         :after {
             ${lineStyles};
             ${beforeAfterStyles};
-            ${showExpandedMenu
-                ? `bottom: 0;
-            transform: rotate(45deg);
-            `
-                : 'bottom: -6px;'};
+            /*
+                IMPORTANT NOTE:
+                we need to specify the adjacent path to the a (current) tag
+                to apply styles to the nested tabs due to the face we use ~
+                to support NoJS
+            */
+            bottom: -6px;
+            ${`#${CHECKBOX_ID}:checked ~ label & {
+                bottom: 0;
+                transform: rotate(45deg);
+            }`}
         }
     `;
 };
 
 export const VeggieBurger: React.FC<{
     display: Display;
-    toggleExpandedMenu: (value: boolean) => void;
-    showExpandedMenu: boolean;
+    CHECKBOX_ID: string;
     ariaControls: string;
-}> = ({ display, toggleExpandedMenu, showExpandedMenu, ariaControls }) => {
+}> = ({ display, CHECKBOX_ID, ariaControls }) => {
     return (
-        <button
-            className={veggieBurger({ display, showExpandedMenu })}
-            onClick={() => toggleExpandedMenu(!showExpandedMenu)}
+        <label
+            className={veggieBurgerStyles(display)}
+            htmlFor={CHECKBOX_ID}
             aria-controls={ariaControls}
             aria-label="Toggle main menu"
-            data-link-name={`nav2 : veggie-burger : ${
-                showExpandedMenu ? 'hide' : 'show'
-            }`}
         >
-            <span className={veggieBurgerIcon({ showExpandedMenu })} />
-        </button>
+            <span className={veggieBurgerIconStyles(CHECKBOX_ID)} />
+        </label>
     );
 };
