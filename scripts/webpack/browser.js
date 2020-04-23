@@ -50,13 +50,12 @@ module.exports = ({ isLegacyJS }) => ({
         chunkFilename: generateName(isLegacyJS),
     },
     plugins: [
-        PROD &&
-            new AssetsManifest({
-                writeToDisk: true,
-                assets: isLegacyJS ? legacyManifestData : manifestData,
-                // Need to explicitly define output file names to avoid overwrites
-                output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
-            }),
+        new AssetsManifest({
+            writeToDisk: true,
+            assets: isLegacyJS ? legacyManifestData : manifestData,
+            // Need to explicitly define output file names to avoid overwrites
+            output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+        }),
         DEV && new webpack.HotModuleReplacementPlugin(),
         DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin(),
