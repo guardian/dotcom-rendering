@@ -1,10 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
+
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+
 import { VeggieBurger } from './VeggieBurger';
+import { LabelButton } from './LabelButton';
 
 const screenReadable = css`
     ${visuallyHidden};
@@ -93,48 +96,13 @@ export const ExpandedMenuToggle = ({
             ariaControls={ariaControls}
             key="VeggieBurger"
         />
-
-        {/*
-            Supporting NoJS and accessibility is hard.
-            We are using label and `htmlFor` prop to be able to toggle an input checkbox
-            However this means that we are using a label as a button and lose out on
-            browser accessiblity.
-
-            We have defined a JS onClick and onKeyDown as a fall back to help accessiblity.
-            This is not perfect solution, as some screen readers have NoJS enabled
-            https://webaim.org/projects/screenreadersurvey8/#javascript
-        */}
-        {/*
-            We need Typescript to ignore the abnormal props we have added to the label
-            But in JSX this can be sometimes a little difficult
-            https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685 */}
-        {/*
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore */}
-        <label
+        <LabelButton
             className={openExpandedMenu(display)}
-            aria-controls={ariaControls}
-            aria-label="Toggle main menu"
-            key="OpenExpandedMenuButton"
-            htmlFor={CHECKBOX_ID}
-            onClick={() =>
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                // @ts-ignore
-                document && document.getElementById(CHECKBOX_ID).click()
-            }
-            onKeyDown={() =>
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                // @ts-ignore
-                document && document.getElementById(CHECKBOX_ID).click()
-            }
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            tabindex={0}
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-            role="button"
+            ariaControls={ariaControls}
+            CHECKBOX_ID={CHECKBOX_ID}
         >
             <span className={screenReadable}>Show</span>
             <span className={showMoreTextStyles(CHECKBOX_ID)}>More</span>
-        </label>
+        </LabelButton>
     </>
 );
