@@ -116,11 +116,14 @@ export const ExpandedMenuToggle = ({
             key="OpenExpandedMenuButton"
             htmlFor={CHECKBOX_ID}
             onClick={() =>
+                // @ts-ignore
                 document && document.getElementById(CHECKBOX_ID).click()
             }
             onKeyDown={() =>
+                // @ts-ignore
                 document && document.getElementById(CHECKBOX_ID).click()
             }
+            // @ts-ignore
             tabindex={0}
             role="button"
         >
