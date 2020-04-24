@@ -7,6 +7,7 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { Flex } from '@root/src/web/components/Flex';
+import { Caption } from '@root/src/web/components/Caption';
 
 type Props = {
     display: Display;
@@ -18,6 +19,7 @@ type Props = {
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
+    captionText?: string;
     badge?: BadgeType;
 };
 
@@ -103,6 +105,7 @@ export const ImmersiveHeadline = ({
     sectionUrl,
     guardianBaseURL,
     pillar,
+    captionText,
     badge,
 }: Props) => (
     <div className={cx(postionRelative)}>
@@ -110,7 +113,12 @@ export const ImmersiveHeadline = ({
             <div className={cx(center, padding)}>
                 <Flex>
                     <LeftColumn showRightBorder={false}>
-                        <></>
+                        <Caption
+                            display={display}
+                            captionText={captionText}
+                            pillar={pillar}
+                            shouldLimitWidth={true}
+                        />
                     </LeftColumn>
                     <PositionHeadline>
                         <ArticleTitle

@@ -38,6 +38,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
     children,
@@ -89,7 +90,7 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'caption    border      standfirst  right-column'
+                        '.          border      standfirst  right-column'
                         '.          border      byline      right-column'
                         'lines      border      body        right-column'
                         'meta       border      body        right-column'
@@ -245,26 +246,24 @@ export const ImmersiveLayout = ({
                 sectionUrl={CAPI.sectionUrl}
                 guardianBaseURL={CAPI.guardianBaseURL}
                 pillar={CAPI.pillar}
+                captionText={captionText}
                 badge={CAPI.badge}
             />
 
             <Section showTopBorder={false} showSideBorders={false}>
                 <ImmersiveGrid>
+                    {/* Above leftCol, the Caption is controled by ImmersiveHeadline because the
+                    headline stretches all the way right it can't be inside a Section so that
+                    top area of the page is rendered outside the grid */}
                     <GridItem area="caption">
-                        <div
-                            className={css`
-                                ${from.leftCol} {
-                                    margin-top: -80px;
-                                }
-                            `}
-                        >
+                        <Hide when="above" breakpoint="leftCol">
                             <Caption
                                 display={display}
                                 captionText={captionText}
                                 pillar={pillar}
-                                shouldLimitWidth={true}
+                                shouldLimitWidth={false}
                             />
-                        </div>
+                        </Hide>
                     </GridItem>
                     <GridItem area="border">
                         <Border />
