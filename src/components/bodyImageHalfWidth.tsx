@@ -4,18 +4,19 @@ import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import Img from 'components/img';
 import { BodyImageProps as Props } from 'image';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 // ----- Setup ----- //
 
-const size = `calc(50% - ${remSpace[1]})`;
+const figureWidth = `calc(50% - ${remSpace[1]})`;
+const size = `(min-width: ${breakpoints.phablet}px) 310px, 50vw`;
 
 // ----- Component ----- //
 
 const styles = css`
     margin: ${remSpace[1]} 0 0 0;
     display: inline-block;
-    width: ${size};
+    width: ${figureWidth};
 
     + .halfWidth, + .halfWidth + .halfWidth + .halfWidth {
         margin-left: ${remSpace[2]};
@@ -27,7 +28,7 @@ const styles = css`
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
-    height: calc(${size} * ${height / width});
+    height: calc(${figureWidth} * ${height / width});
     width: 100%;
 `;
 
