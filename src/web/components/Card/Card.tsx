@@ -122,7 +122,7 @@ export const Card = ({
 
     return (
         <CardLink linkTo={linkTo} designType={designType} pillar={pillarToUse}>
-            <TopBar topBarColour={pillarPalette[pillar].main}>
+            <TopBar topBarColour={pillarPalette[pillarToUse].main}>
                 <CardLayout imagePosition={imagePosition}>
                     <>
                         {imageUrl && (
