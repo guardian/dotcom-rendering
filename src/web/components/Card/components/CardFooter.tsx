@@ -1,9 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { GuardianLines } from '@frontend/web/components/GuardianLines';
-
-import { LinesWrapper } from './LinesWrapper';
+import { Lines } from '@guardian/src-ed-lines';
 
 type Props = {
     designType: DesignType;
@@ -23,6 +21,13 @@ const flexEnd = css`
     justify-content: flex-end;
 `;
 
+const linesWrapperStyles = css`
+    /* Fill the container */
+    flex-grow: 1;
+    /* Push the lines down to align with the bottom of the card */
+    margin-top: 5px;
+`;
+
 export const CardFooter = ({
     designType,
     age,
@@ -33,9 +38,9 @@ export const CardFooter = ({
         return (
             <footer className={spaceBetween}>
                 {age}
-                <LinesWrapper>
-                    <GuardianLines pillar="opinion" count={4} />
-                </LinesWrapper>
+                <div className={linesWrapperStyles}>
+                    <Lines count={4} />
+                </div>
                 {commentCount}
             </footer>
         );

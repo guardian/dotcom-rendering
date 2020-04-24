@@ -62,6 +62,10 @@ You can preview an AMP page similarly to an article, as follows
 
 http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
+or, connecting to a locally running instance of frontend,
+
+http://localhost:3030/AMPArticle?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+
 ### Note on rebasing vs merging
 
 The dotcom-rendering github account is set up to merge PRs into master instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
@@ -91,4 +95,10 @@ You may need to run these with `sudo`
 
 Production environment uses `pm2`. More scripts can be found in the `makefile` [scripts](https://github.com/guardian/dotcom-rendering/blob/e2c020f7e0ed24751ea729eec93f1271d37e3b50/makefile#L31)
 
-The production port default is 9000 for deployment, but to run locally alongside frontend, you will need to manually override in `scripts/frontend/config.js`. To hit the server, add `rendering.endpoint = "http://localhost:${port}/Article"` with the overide port number to `frontend.conf` and run frontend locally.
+The production port default is 9000 for deployment, but to run locally alongside frontend, you will need to manually override in `scripts/frontend/config.js`. To hit the server, add 
+
+```
+rendering.endpoint = "http://localhost:${port}/Article"
+``` 
+
+with the overide port number to `frontend.conf` and run frontend locally.

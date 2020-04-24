@@ -69,8 +69,10 @@ export const App = ({ CAPI, NAV }: Props) => {
         'newest' | 'oldest' | 'recommendations'
     >();
     const [openComments, setOpenComments] = useState<boolean>(false);
+    const [hashCommentId, sethashCommentId] = useState<number | undefined>(
+        commentIdFromUrl(),
+    );
 
-    const hashCommentId = commentIdFromUrl();
     const hasCommentsHash = hasCommentsHashInUrl();
 
     useEffect(() => {
@@ -155,6 +157,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const pillar = decidePillar(CAPI);
     const display = decideDisplay(CAPI);
+
+    const handlePermalink = (commentId: number) => {
+        window.location.hash = `#comments-${commentId}`;
+        sethashCommentId(commentId);
+        return false;
+    };
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -290,6 +298,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         }
                         expanded={true}
                         commentToScrollTo={hashCommentId}
+                        onPermalinkClick={handlePermalink}
                     />
                 ) : (
                     <Lazy margin={300}>
@@ -311,6 +320,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                                 CAPI.config.enableDiscussionSwitch
                             }
                             expanded={false}
+                            commentToScrollTo={hashCommentId}
+                            onPermalinkClick={handlePermalink}
                         />
                     </Lazy>
                 )}

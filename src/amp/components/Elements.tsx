@@ -20,9 +20,12 @@ import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 import { InteractiveUrl } from '@root/src/amp/components/elements/InteractiveUrl';
+import { AtomEmbedUrl } from '@root/src/amp/components/elements/AtomEmbedUrl';
 import { InteractiveMarkup } from '@root/src/amp/components/elements/InteractiveMarkup';
+import { AtomEmbedMarkup } from '@root/src/amp/components/elements/AtomEmbedMarkup';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
+import { ContentAtom } from '@root/src/amp/components/elements/ContentAtom';
 
 export const Elements = (
     elements: CAPIElement[],
@@ -151,10 +154,22 @@ export const Elements = (
                         js={element.js}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
+                return (
+                    <AtomEmbedMarkup
+                        html={element.html}
+                        styles={element.css}
+                        js={element.js}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
                 return <InteractiveUrl url={element.url} />;
+            case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
+                return <AtomEmbedUrl url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtom element={element} />;
+            case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
+                return <ContentAtom element={element} />;
             default:
                 // eslint-disable-next-line no-console
                 console.log('Unsupported Element', JSON.stringify(element));

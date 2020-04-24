@@ -2151,10 +2151,10 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/discussion-rendering@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.4.tgz#47dbdf2b598aa76e3fa70badcb54745253d4c5df"
-  integrity sha512-v/MGFVNg29Pg41HOxkE/T15kOk3sUakwb4K/Nv8nDdC4u6W/RYhIfBOT06RNOXA45BXwQAwglKnjtZYQYfECDA==
+"@guardian/discussion-rendering@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.5.tgz#88114f5e58ac9e37b0d272baef259cb0997bf103"
+  integrity sha512-Uibd0G2ccm+zOCscAjBe3uQBlI8QBu6YW5BEhzpATdFYmN64WfV3RWBqId2Cb9p0LVCzTDrU+unpOr5SDnm8CQ==
   dependencies:
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
@@ -2166,6 +2166,13 @@
   dependencies:
     "@guardian/src-helpers" "^0.17.0"
     "@guardian/src-svgs" "^0.17.0"
+
+"@guardian/src-ed-lines@^0.18.0-rc.0":
+  version "0.18.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-0.18.0-rc.0.tgz#c3e2c01ae0f8594af212ce42aa3f8f3f4f1a0c8b"
+  integrity sha512-gzRfgaroN/vpiBYQChvmJZh8n/6CfTCqO8Fc0NnbbKcqjx+cGhJMpw6orGS+gumP6jErDFa3xH0Nde+d673rPA==
+  dependencies:
+    "@guardian/src-helpers" "^0.18.0-rc.0"
 
 "@guardian/src-foundations@^0.17.0":
   version "0.17.0"

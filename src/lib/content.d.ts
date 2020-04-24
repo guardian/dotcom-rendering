@@ -232,8 +232,21 @@ interface InteractiveMarkupBlockElement {
     js?: string;
 }
 
+interface AtomEmbedMarkupBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+    id?: string;
+    html?: string;
+    css?: string;
+    js?: string;
+}
+
 interface InteractiveUrlElement {
     _type: 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement';
+    url: string;
+}
+
+interface AtomEmbedUrlElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
     url: string;
 }
 
@@ -253,6 +266,11 @@ interface AudioAtomElement {
     trackUrl: string;
     duration: number;
     coverUrl: string;
+}
+
+interface ContentAtomElement {
+    _type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
+    atomId: string;
 }
 
 interface AudioBlockElement {
@@ -291,9 +309,12 @@ type CAPIElement =
     | ProfileBlockElement
     | TimelineBlockElement
     | InteractiveMarkupBlockElement
+    | AtomEmbedMarkupBlockElement
     | InteractiveUrlElement
+    | AtomEmbedUrlElement
     | MapBlockElement
     | AudioAtomElement
+    | ContentAtomElement
     | AudioBlockElement
     | VideoBlockElement
     | CodeBlockElement;
