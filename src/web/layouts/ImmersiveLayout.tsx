@@ -7,6 +7,7 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -350,7 +351,13 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <AdSlot asps={namedAdSlotParameters('right')} />
+                            <div
+                                className={css`
+                                    margin-top: ${space[4]}px;
+                                `}
+                            >
+                                <AdSlot asps={namedAdSlotParameters('right')} />
+                            </div>
                         </RightColumn>
                     </GridItem>
                 </ImmersiveGrid>
