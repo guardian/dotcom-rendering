@@ -1,15 +1,13 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { Image } from 'image';
 import Img from 'components/img';
-import { ImageMappings } from 'components/shared/page';
-
+import { BodyImageProps } from 'image';
 
 // ----- Setup ----- //
 
@@ -18,18 +16,8 @@ const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 
 // ----- Component ----- //
 
-interface Props {
-    image: Image;
-    imageMappings: ImageMappings;
-    children?: ReactNode;
-}
-
 const styles = css`
-    margin: ${remSpace[4]} 0 ${remSpace[3]};
-
-    ${from.wide} {
-        margin-bottom: ${remSpace[4]};
-    }
+    margin: ${remSpace[4]} 0;
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
@@ -43,7 +31,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     }
 `;
 
-const BodyImage: FC<Props> = ({ image, imageMappings, children }: Props) =>
+const BodyImage: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
     <figure css={styles}>
         <Img
             image={image}

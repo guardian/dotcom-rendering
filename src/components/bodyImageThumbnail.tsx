@@ -1,14 +1,11 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-
-import { Image } from 'image';
 import Img from 'components/img';
-import { ImageMappings } from 'components/shared/page';
-
+import { BodyImageProps as Props } from 'image';
 
 // ----- Setup ----- //
 
@@ -16,12 +13,6 @@ const size = '8.75rem';
 
 
 // ----- Component ----- //
-
-interface Props {
-    image: Image;
-    imageMappings: ImageMappings;
-    children?: ReactNode;
-}
 
 const styles = css`
     display: block;

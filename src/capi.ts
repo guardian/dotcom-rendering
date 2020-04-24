@@ -50,8 +50,12 @@ interface Series {
 const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === tagType);
 
+
 const isImmersive = (content: Content): boolean =>
     content?.fields?.displayHint === 'immersive';
+
+const isPhotoEssay = (content: Content): boolean =>
+    content?.fields?.displayHint === 'photoEssay';
 
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
@@ -121,6 +125,7 @@ export {
     Series,
     ErrorStatus as CapiError,
     getContent,
+    isPhotoEssay,
     isImmersive,
     isFeature,
     isReview,
