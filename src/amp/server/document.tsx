@@ -6,6 +6,12 @@ import { cache } from 'emotion';
 import escape from 'lodash.escape';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
+import {abTestsFullConfig} from "@root/src/amp/abTests";
+import {
+    buildExperimentStyle,
+    extractModelAndStyle,
+    getActiveTests
+} from "@root/src/amp/components/Experiment";
 
 interface RenderToStringResult {
     html: string;
@@ -30,6 +36,11 @@ export const document = ({
     scripts: string[];
     metadata: Metadata;
 }) => {
+    const testCss = buildExperimentStyle(
+        extractModelAndStyle(
+            getActiveTests(abTestsFullConfig, {abZeroTestExperiment: true})
+    )[1]);
+
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
         renderToStaticMarkup(
@@ -84,7 +95,7 @@ export const document = ({
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}
 
-    <style amp-custom>${getFontsCss()}${resetCSS}${css}</style>
+    <style amp-custom>${testCss}${getFontsCss()}${resetCSS}${css}</style>
     </head>
     <body>
     ${html}

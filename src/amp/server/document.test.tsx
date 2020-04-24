@@ -4,8 +4,8 @@ import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { ExperimentModel } from '@root/src/amp/components/Experiment';
-import {abTests, getActiveTests} from "@root/src/amp/abTests";
+import {extractModelAndStyle, getActiveTests} from '@root/src/amp/components/Experiment';
+import {abTestsFullConfig} from "@root/src/amp/abTests";
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
@@ -30,6 +30,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
     const { config } = CAPI;
+    config.switches.abZeroTestExperiment = true;
     const nav = extractNAV(CAPI.nav);
     const { linkedData } = CAPI;
 
@@ -58,7 +59,9 @@ test('produces valid AMP doc', async () => {
         },
     };
 
-    const activeTests: ExperimentModel = getActiveTests(abTests, config.switches)
+    const activeTests = extractModelAndStyle(
+        getActiveTests(abTestsFullConfig, {"ab-zero-test-experiment": true})
+    )[0];
 
     const body = (
         <Article
