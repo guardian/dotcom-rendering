@@ -34,7 +34,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Comment':
                 case 'GuardianView':
                     return (
-                        <CommentLayout
+                        <ImmersiveLayout
                             CAPI={CAPI}
                             NAV={NAV}
                             display="immersive"
