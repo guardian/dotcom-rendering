@@ -7,7 +7,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Format } from 'format';
 import { ElementKind, BodyElement } from 'item';
 import { Role, BodyImageProps } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
@@ -56,10 +56,15 @@ const bulletStyles = (colour: string): SerializedStyles => css`
     }
 `;
 
-const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
+interface BulletProps {
+    format: Format;
+    text: string;
+}
+
+const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
-        props.text.replace(/•/g, ''),
+        styledH('span', { css: bulletStyles(getPillarStyles(format.pillar).kicker) }, '•'),
+        text.replace(/•/g, ''),
         null
     );
 
@@ -78,9 +83,9 @@ const HorizontalRule = (): ReactElement =>
     styledH('hr', { css: HorizontalRuleStyles }, null);
 
 
-const transform = (text: string, pillar: Pillar): ReactElement | string => {
+const transform = (text: string, format: Format): ReactElement | string => {
     if (text.includes('•')) {
-        return h(Bullet, { pillar, text });
+        return h(Bullet, { format, text });
     } else if (text.includes('* * *')) {
         return h(HorizontalRule, null, null);
     }
@@ -97,11 +102,17 @@ const anchorStyles = (colour: string): SerializedStyles => css`
     `}
 `;
 
-const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
+interface AnchorProps {
+    href: string;
+    text: string;
+    format: Format;
+}
+
+const Anchor: FC<AnchorProps> = ({ format, text, href }): ReactElement =>
     styledH(
         'a',
-        { css: anchorStyles(getPillarStyles(props.pillar).kicker), href: props.href },
-        transform(props.text, props.pillar),
+        { css: anchorStyles(getPillarStyles(format.pillar).kicker), href },
+        transform(text, format),
     );
 
 const listStyles: SerializedStyles = css`
@@ -153,18 +164,18 @@ const TweetStyles = css`
     }
 `;
 
-const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+const textElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
-    const children = Array.from(node.childNodes).map(textElement(pillar));
+    const children = Array.from(node.childNodes).map(textElement(format));
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, children);
         case '#text':
-            return transform(text, pillar);
+            return transform(text, format);
         case 'SPAN':
             return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
+            return h(Anchor, { href: getHref(node).withDefault(''), text, format, key }, children);
         case 'H2':
             return styledH('h2', { css: HeadingTwoStyles, key }, children );
         case 'BLOCKQUOTE':
@@ -198,7 +209,7 @@ const captionHeadingStyles = css`
     }
 `;
 
-const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement =>
+const MediaCaptionText = (props: { text: string }): ReactElement =>
     styledH(
         'p',
         { css: css`
@@ -209,49 +220,46 @@ const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement
         props.text,
     );
 
-const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElement =>
-    styledH(
-        'span',
-        { css: css`
-              ${textSans.xsmall({ italic: true })}
-               ${textSans.xsmall({ fontWeight: 'bold' })}
-               color: ${neutral[86]};
-        ` },
-        props.text,
-    );
+const emphasisStyles = css`
+    ${textSans.xsmall({ italic: true, fontWeight: 'bold' })}
+    color: ${neutral[86]};
+`;
 
-const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+const Emphasis = ({ text }: { text: string }): ReactElement =>
+    styledH('span', { css: emphasisStyles }, text);
+
+const captionElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
-    const children = Array.from(node.childNodes).map(captionElement(pillar));
+    const children = Array.from(node.childNodes).map(captionElement(format));
     switch (node.nodeName) {
         case 'STRONG':
             return styledH('p', {css: captionHeadingStyles, key}, children);
         case 'BR':
             return null;
         case 'EM':
-            return h(CaptionItalicStyles, {text, pillar, key}, children);
+            return h(Emphasis, { text, key }, children);
         case '#text':
-            return h(MediaCaptionText, { text, pillar, key }, children);
+            return h(MediaCaptionText, { text, key }, children);
         default:
-            return textElement(pillar)(node, key);
+            return textElement(format)(node, key);
     }
 }
 
-const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const children = Array.from(node.childNodes).map(standfirstTextElement(pillar));
+const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
+    const children = Array.from(node.childNodes).map(standfirstTextElement(format));
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
         default:
-            return textElement(pillar)(node, key);
+            return textElement(format)(node, key);
     }
 };
 
-const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
-    Array.from(doc.childNodes).map(textElement(pillar));
+const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
+    Array.from(doc.childNodes).map(textElement(format));
 
-const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
-    Array.from(doc.childNodes).map(standfirstTextElement(pillar));
+const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
+    Array.from(doc.childNodes).map(standfirstTextElement(format));
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
@@ -288,15 +296,15 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
 
 type PullquoteProps = {
     quote: string;
-    attribution: Option<string>;
-    pillar: Pillar;
+    format: Format;
 };
 
-const Pullquote = (props: PullquoteProps): ReactElement =>
-    styledH('aside', { css: pullquoteStyles(getPillarStyles(props.pillar).kicker) },
+const Pullquote: FC<PullquoteProps> = ({ quote, format }: PullquoteProps) =>
+    styledH('aside',
+        { css: pullquoteStyles(getPillarStyles(format.pillar).kicker) },
         h('blockquote', null,
-            h('p', null, props.quote)
-        )
+            h('p', null, quote)
+        ),
     );
 
 const richLinkWidth = '8.75rem';
@@ -340,10 +348,10 @@ const richLinkStyles = css`
     `}
 `;
 
-const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): ReactElement =>
+const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
         h('h1', null, props.linkText),
-        h(Anchor, { href: props.url, pillar: props.pillar, text: 'Read more' }),
+        h(Anchor, { href: props.url, format: props.format, text: 'Read more' }),
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement =>
@@ -351,10 +359,13 @@ const Interactive = (props: { url: string; title?: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500, title: props.title ?? "" }, null)
     );
 
-const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
+const Tweet = (props: { content: NodeList; format: Format; key: number }): ReactElement =>
     // twitter script relies on twitter-tweet class being present
-    return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
-};
+    styledH(
+        'blockquote',
+        { key: props.key, className: 'twitter-tweet', css: TweetStyles },
+        ...Array.from(props.content).map(textElement(props.format)),
+    );
 
 const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
     if (role === Role.Thumbnail) {
@@ -366,12 +377,12 @@ const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
     }
 }
 
-const render = (pillar: Pillar, imageMappings: ImageMappings) =>
+const render = (format: Format, imageMappings: ImageMappings) =>
     (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
-            return text(element.doc, pillar);
+            return text(element.doc, format);
 
         case ElementKind.Image: {
             const { caption, credit, role } = element;
@@ -381,30 +392,27 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
 
             const figcaption = role.withDefault(Role.Thumbnail) !== Role.HalfWidth
                 ? caption.fmap<ReactNode>(c =>
-                    h(FigCaption, { pillar, text: text(c, pillar), credit })
+                    h(FigCaption, { pillar: format.pillar, text: text(c, format), credit })
                   ).withDefault(null)
                 : null;
             
             return h(ImageComponent, { image: element, imageMappings }, figcaption);
         }
 
-        case ElementKind.Pullquote: {
-            const { quote, attribution } = element;
-
-            return h(Pullquote, { quote, attribution, pillar, key });
-        }
+        case ElementKind.Pullquote:
+            return h(Pullquote, { quote: element.quote, format, key });
 
         case ElementKind.RichLink: {
             const { url, linkText } = element;
 
-            return h(RichLink, { url, linkText, pillar, key });
+            return h(RichLink, { url, linkText, format, key });
         }
 
         case ElementKind.Interactive:
             return h(Interactive, { url: element.url, key, title: element.alt });
 
         case ElementKind.Tweet:
-            return h(Tweet, { content: element.content, pillar, key });
+            return h(Tweet, { content: element.content, format, key });
 
         case ElementKind.Audio:
             return h(Audio, { src: element.src, width: element.width, height: element.height });
@@ -426,21 +434,21 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
 };
 
 const renderAll = (imageMappings: ImageMappings) =>
-    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-        elements.map(render(pillar, imageMappings));
+    (format: Format, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(format, imageMappings));
 
-const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
-    Array.from(doc.childNodes).map(captionElement(pillar));
+const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
+    Array.from(doc.childNodes).map(captionElement(format));
 
 const renderMedia = (imageMappings: ImageMappings) =>
-    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+    (format: Format, elements: BodyElement[]): ReactNode[] =>
         elements.map((element) => {
 
             if (element.kind === ElementKind.Image) {
                 const { caption, credit } = element;
 
                 const figcaption = caption.fmap<ReactNode>(c => 
-                    h(MediaFigCaption, { text: renderCaption(c, pillar), credit })
+                    h(MediaFigCaption, { text: renderCaption(c, format), credit })
                 ).withDefault(null);
 
                 return h(BodyImage, {

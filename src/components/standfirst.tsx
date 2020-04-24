@@ -7,7 +7,7 @@ import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
-import { Item } from 'item';
+import { Item, getFormat } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
 import { Display, Design } from 'format';
@@ -96,7 +96,8 @@ const getStyles = (item: Item): SerializedStyles => {
 }
 
 function content(standfirst: DocumentFragment, item: Item): ReactNode {
-    const rendered = renderStandfirstText(standfirst, item.pillar);
+    const format = getFormat(item);
+    const rendered = renderStandfirstText(standfirst, format);
 
     // Immersives append the byline to the standfirst.
     // Sometimes CAPI includes this within the standfirst HTML,
@@ -108,7 +109,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
             <>
                 {rendered}
                 <address>
-                    <p>By {renderText(byline, item.pillar)}</p>
+                    <p>By {renderText(byline, format)}</p>
                 </address>
             </>
         ).withDefault(rendered);

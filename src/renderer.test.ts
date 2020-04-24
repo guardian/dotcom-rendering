@@ -9,8 +9,14 @@ import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
+import { Format, Design, Display } from '@guardian/types/Format';
 
 configure({ adapter: new Adapter() });
+const mockFormat: Format = {
+    pillar: Pillar.News,
+    design: Design.Article,
+    display: Display.Standard,
+};
 
 beforeEach(() => {
     console.error = jest.fn()
@@ -74,10 +80,10 @@ const instagramElement = (): BodyElement =>
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(Pillar.News, [element]);
+    renderAll({})(mockFormat, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
-    renderMedia({})(Pillar.News, [element]);
+    renderMedia({})(mockFormat, [element]);
 
 const renderTextElement = compose(render, textElement);
 
@@ -178,14 +184,14 @@ describe('Renders different types of elements', () => {
 describe('Paragraph tags rendered correctly', () => {
     test('Contains no styles in standfirsts', () => {
         const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
-        const nodes = renderStandfirstText(fragment, Pillar.News);
+        const nodes = renderStandfirstText(fragment, mockFormat);
         const html = shallow(nodes.flat()[0]).html();
         expect(html).toBe('<p>Parapraph tag</p>')
     });
 
     test('Contains styles in article body', () => {
         const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
-        const nodes = renderText(fragment, Pillar.News);
+        const nodes = renderText(fragment, mockFormat);
         const html = shallow(nodes.flat()[0]).html();
         expect(html).not.toBe('<p>Parapraph tag</p>')
     });

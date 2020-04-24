@@ -16,7 +16,7 @@ import { renderAll, renderMedia } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi } from 'item';
+import { fromCapi, getFormat } from 'item';
 import { sign } from 'image';
 import {
     ElementType,
@@ -166,6 +166,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment.bind(null))(capi);
+    const format = getFormat(item);
     const imageMappings = getImageMappings(imageSalt, capi);
 
     const articleScript = getAssetLocation('article.js');
@@ -175,7 +176,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
         const commentContent =
-            insertAdPlaceholders(renderAll(imageMappings)(item.pillar, commentBody));
+            insertAdPlaceholders(renderAll(imageMappings)(format, commentBody));
 
         return { element: (
             <WithScript src={articleScript}>
@@ -197,7 +198,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.display === Display.Immersive) {
         const immersiveBody = partition(item.body).oks;
         const immersiveContent =
-            insertAdPlaceholders(renderAll(imageMappings)(item.pillar, immersiveBody));
+            insertAdPlaceholders(renderAll(imageMappings)(format, immersiveBody));
 
         return { element: (
             <WithScript src={articleScript}>
@@ -211,7 +212,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.design === Design.Media) {
         const body = partition(item.body).oks;
         const mediaContent =
-            insertAdPlaceholders(renderMedia(imageMappings)(item.pillar, body));
+            insertAdPlaceholders(renderMedia(imageMappings)(format, body));
         return { element: (
                 <WithScript src={mediaScript}>
                     <Media imageMappings={imageMappings} item={item}>
@@ -228,7 +229,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         item.design === Design.Article
     ) {
         const body = partition(item.body).oks;
-        const content = insertAdPlaceholders(renderAll(imageMappings)(item.pillar, body));
+        const content = insertAdPlaceholders(renderAll(imageMappings)(format, body));
 
         return { element: (
             <WithScript src={articleScript}>
