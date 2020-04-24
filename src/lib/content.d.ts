@@ -232,8 +232,21 @@ interface InteractiveMarkupBlockElement {
     js?: string;
 }
 
+interface AtomEmbedMarkupBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+    id?: string;
+    html?: string;
+    css?: string;
+    js?: string;
+}
+
 interface InteractiveUrlElement {
     _type: 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement';
+    url: string;
+}
+
+interface AtomEmbedUrlElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
     url: string;
 }
 
@@ -296,7 +309,9 @@ type CAPIElement =
     | ProfileBlockElement
     | TimelineBlockElement
     | InteractiveMarkupBlockElement
+    | AtomEmbedMarkupBlockElement
     | InteractiveUrlElement
+    | AtomEmbedUrlElement
     | MapBlockElement
     | AudioAtomElement
     | ContentAtomElement

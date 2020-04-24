@@ -81,7 +81,13 @@
                         "$ref": "#/definitions/InteractiveMarkupBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/InteractiveUrlElement"
+                    },
+                    {
+                        "$ref": "#/definitions/AtomEmbedUrlElement"
                     },
                     {
                         "$ref": "#/definitions/MapBlockElement"
@@ -1015,6 +1021,30 @@
             },
             "required": ["_type"]
         },
+        "AtomEmbedMarkupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type"]
+        },
         "InteractiveUrlElement": {
             "type": "object",
             "properties": {
@@ -1022,6 +1052,21 @@
                     "type": "string",
                     "enum": [
                         "model.dotcomrendering.pageElements.InteractiveUrlBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type", "url"]
+        },
+        "AtomEmbedUrlElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement"
                     ]
                 },
                 "url": {
@@ -1229,7 +1274,13 @@
                                 "$ref": "#/definitions/InteractiveMarkupBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/InteractiveUrlElement"
+                            },
+                            {
+                                "$ref": "#/definitions/AtomEmbedUrlElement"
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
