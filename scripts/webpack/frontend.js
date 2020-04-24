@@ -16,14 +16,14 @@ const stage =
         : process.env.GU_STAGE;
 
 const CDN = stage
-    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
+    ? `https://assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
     : '/';
 
 const commonConfigs = ({ platform }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
-        publicPath: `${CDN}/assets/`,
+        publicPath: `${CDN}assets/`,
         path: dist,
     },
     stats: 'errors-only',
