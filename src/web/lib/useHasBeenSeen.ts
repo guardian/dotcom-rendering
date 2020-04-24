@@ -7,19 +7,24 @@ const useHasBeenSeen = (options: IntersectionObserverInit) => {
 
     const observer = useRef<IntersectionObserver | null>(null);
 
+    // Enabling debouncing ensures the target element intersects for at least
+    // 200ms before the callback is executed
+    const intersectionFn: IntersectionObserverCallback = ([entry]) => {
+        if (entry.isIntersecting) {
+            setHasBeenSeen(true);
+        }
+    };
+    const intersectionCallback = options.debounce
+        ? debounce(intersectionFn, 200)
+        : intersectionFn;
+
     useEffect(() => {
         if (observer.current) {
             observer.current.disconnect();
         }
 
-        // Debounce to ensure the node is seen for at least 200ms before the
-        // boolean is set to true
         observer.current = new window.IntersectionObserver(
-            debounce(([entry]) => {
-                if (entry.isIntersecting) {
-                    setHasBeenSeen(true);
-                }
-            }, 200),
+            intersectionCallback,
             options,
         );
 
@@ -30,7 +35,7 @@ const useHasBeenSeen = (options: IntersectionObserverInit) => {
         }
 
         return () => currentObserver.disconnect();
-    }, [node, options]);
+    }, [node, options, intersectionCallback]);
 
     return [hasBeenSeen, setNode];
 };

@@ -18,6 +18,7 @@ const flexGrowStyles = css`
 export const Lazy = ({ children, margin }: Props) => {
     const [hasBeenSeen, setRef] = useHasBeenSeen({
         rootMargin: `${margin}px`,
+        debounce: false,
     });
 
     // Without this check below typescript complains because it thinks

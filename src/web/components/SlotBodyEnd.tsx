@@ -14,7 +14,7 @@ import {
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
-type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void, boolean];
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -138,6 +138,7 @@ const MemoisedInner = ({
     const [hasBeenSeen, setNode] = useHasBeenSeen({
         rootMargin: '-18px',
         threshold: 0,
+        debounce: true,
     }) as HasBeenSeen;
 
     const slotRoot = useRef<HTMLDivElement>(null);
