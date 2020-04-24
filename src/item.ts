@@ -197,8 +197,8 @@ const parseIframe = (docParser: DocParser) =>
         });
 }
 
-const parseElement =
-    (docParser: DocParser, atoms?: Atoms) => (element: BlockElement, ): Result<string, BodyElement> => {
+const parseElement = (docParser: DocParser, atoms?: Atoms) =>
+    (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
 
         case ElementType.TEXT: {
@@ -332,8 +332,8 @@ const parseElement =
 
 type Elements = BlockElement[] | undefined;
 
-const parseElements =
-    (docParser: DocParser, atoms?: Atoms) => (elements: Elements): Result<string, BodyElement>[] => {
+const parseElements = (docParser: DocParser, atoms?: Atoms) =>
+    (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [new Err('No body elements available')];
         }
