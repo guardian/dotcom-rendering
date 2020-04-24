@@ -34,10 +34,6 @@ export const LabelButton = ({
         aria-label="Toggle main menu"
         key="OpenExpandedMenuButton"
         htmlFor={CHECKBOX_ID}
-        onClick={() => {
-            // @ts-ignore
-            document && document.getElementById(CHECKBOX_ID).click();
-        }}
         onKeyDown={() => {
             // @ts-ignore
             document && document.getElementById(CHECKBOX_ID).click();
