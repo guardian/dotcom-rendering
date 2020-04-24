@@ -19,7 +19,6 @@ import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
-import MediaFigCaption from 'components/media/mediaFigCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 
 
@@ -392,7 +391,7 @@ const render = (format: Format, imageMappings: ImageMappings) =>
 
             const figcaption = role.withDefault(Role.Thumbnail) !== Role.HalfWidth
                 ? caption.fmap<ReactNode>(c =>
-                    h(FigCaption, { pillar: format.pillar, text: text(c, format), credit })
+                    h(FigCaption, { format, text: text(c, format), credit })
                   ).withDefault(null)
                 : null;
             
@@ -448,7 +447,7 @@ const renderMedia = (imageMappings: ImageMappings) =>
                 const { caption, credit } = element;
 
                 const figcaption = caption.fmap<ReactNode>(c => 
-                    h(MediaFigCaption, { text: renderCaption(c, format), credit })
+                    h(FigCaption, { text: renderCaption(c, format), credit, format })
                 ).withDefault(null);
 
                 return h(BodyImage, {
