@@ -14,14 +14,14 @@ import {
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+
 const checkForErrors = (response: any) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
 };
-
-type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type OphanAction = 'INSERT' | 'VIEW';
 
