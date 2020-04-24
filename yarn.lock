@@ -2142,19 +2142,19 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/consent-management-platform@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.0.0.tgz#6e91aca0330ce8cd8653124287f51a99d0ea727a"
-  integrity sha512-Vu0Q2n/gJew35AxxsEse50f29cAGfcywc7+6FPG7HLMeyS1BymsFxUQAEcem3rM4j6Uq6F/pdtmfsxeXAQJfsA==
+"@guardian/consent-management-platform@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.0.4.tgz#8e64bf1c2d92e124c60f0869f2e3b59be786dcaa"
+  integrity sha512-QOd2NbTFWGhh9qhd6wQOU0xyF0dqB9yIFT3W2fZI529Qie+NqPDFU3yVKrvsSQvYpW0ITTZhzCtULQ8rf2kc8w==
   dependencies:
     consent-string "^1.5.1"
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/discussion-rendering@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.4.tgz#47dbdf2b598aa76e3fa70badcb54745253d4c5df"
-  integrity sha512-v/MGFVNg29Pg41HOxkE/T15kOk3sUakwb4K/Nv8nDdC4u6W/RYhIfBOT06RNOXA45BXwQAwglKnjtZYQYfECDA==
+"@guardian/discussion-rendering@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.5.tgz#88114f5e58ac9e37b0d272baef259cb0997bf103"
+  integrity sha512-Uibd0G2ccm+zOCscAjBe3uQBlI8QBu6YW5BEhzpATdFYmN64WfV3RWBqId2Cb9p0LVCzTDrU+unpOr5SDnm8CQ==
   dependencies:
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
@@ -2166,6 +2166,13 @@
   dependencies:
     "@guardian/src-helpers" "^0.17.0"
     "@guardian/src-svgs" "^0.17.0"
+
+"@guardian/src-ed-lines@^0.18.0-rc.0":
+  version "0.18.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-0.18.0-rc.0.tgz#c3e2c01ae0f8594af212ce42aa3f8f3f4f1a0c8b"
+  integrity sha512-gzRfgaroN/vpiBYQChvmJZh8n/6CfTCqO8Fc0NnbbKcqjx+cGhJMpw6orGS+gumP6jErDFa3xH0Nde+d673rPA==
+  dependencies:
+    "@guardian/src-helpers" "^0.18.0-rc.0"
 
 "@guardian/src-foundations@^0.17.0":
   version "0.17.0"

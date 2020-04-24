@@ -3,12 +3,10 @@ export const getAgeWarning = (
     webPublicationDate: string,
 ): string | undefined => {
     const isNews = tags.some(t => t.id === 'tone/news');
-    // TODO: Enable age warnings on opinion pieces once the same logic is active on
-    // frontend
-    // const isOpinion = tags.some(t => t.id === 'commentisfree/commentisfree');
+    const isOpinion = tags.some(t => t.id === 'tone/comment');
 
     // Only show an age warning for news or opinion pieces
-    if (isNews) {
+    if (isNews || isOpinion) {
         const warnLimitDays = 30;
         const currentDate = new Date();
         const dateThreshold = new Date();

@@ -92,47 +92,19 @@ export const VeggieBurger: React.FC<{
     display: Display;
     toggleExpandedMenu: (value: boolean) => void;
     showExpandedMenu: boolean;
-    enhanceCheckbox: boolean;
-    htmlFor: string;
     ariaControls: string;
-}> = ({
-    display,
-    toggleExpandedMenu,
-    showExpandedMenu,
-    enhanceCheckbox,
-    htmlFor,
-    ariaControls,
-}) => {
-    if (enhanceCheckbox) {
-        return (
-            <button
-                className={veggieBurger({ display, showExpandedMenu })}
-                onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-                aria-controls={ariaControls}
-                aria-label="Toggle main menu"
-                data-link-name={`nav2 : veggie-burger : ${
-                    showExpandedMenu ? 'hide' : 'show'
-                }`}
-            >
-                <span className={veggieBurgerIcon({ showExpandedMenu })} />
-            </button>
-        );
-    }
-
+}> = ({ display, toggleExpandedMenu, showExpandedMenu, ariaControls }) => {
     return (
-        // TODO: Refactor this component to work better without js. Where better
-        // means working and accessible
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
-        <label
+        <button
             className={veggieBurger({ display, showExpandedMenu })}
             onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-            htmlFor={htmlFor}
-            tabIndex={0}
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-            role="button"
+            aria-controls={ariaControls}
             aria-label="Toggle main menu"
+            data-link-name={`nav2 : veggie-burger : ${
+                showExpandedMenu ? 'hide' : 'show'
+            }`}
         >
             <span className={veggieBurgerIcon({ showExpandedMenu })} />
-        </label>
+        </button>
     );
 };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -9,7 +9,6 @@ import { CollapseColumnButton } from './CollapseColumnButton';
 const pillarHeight = 42;
 
 // CSS
-
 export const hideDesktop = css`
     ${from.desktop} {
         display: none;
@@ -138,7 +137,7 @@ const pillarColumnLinks = css`
     }
 `;
 
-const hide = css`
+const hideStyles = css`
     display: none;
 `;
 
@@ -155,7 +154,7 @@ const ColumnLinks: React.FC<{
                 { [firstColumnLinks]: index === 0 },
                 { [pillarColumnLinks]: !!column.pillar },
                 {
-                    [hide]: !showColumnLinks,
+                    [hideStyles]: !showColumnLinks,
                 },
             )}
             aria-expanded={showColumnLinks}
@@ -267,45 +266,30 @@ export const More: React.FC<{
     );
 };
 
-export class Column extends Component<
-    {
-        column: PillarType;
-        index: number;
-    },
-    { showColumnLinks: boolean }
-> {
-    public state = {
-        showColumnLinks: false,
-    };
+export const Column = ({
+    column,
+    index,
+}: {
+    column: PillarType;
+    index: number;
+}) => {
+    const [showColumnLinks, setShowColumnLinks] = useState(false);
+    const subNavId = `${column.title.toLowerCase()}Links`;
+    return (
+        <li className={cx(columnStyle, pillarDivider)} role="none">
+            <CollapseColumnButton
+                title={column.title}
+                showColumnLinks={showColumnLinks}
+                toggleColumnLinks={() => setShowColumnLinks(!showColumnLinks)}
+                ariaControls={subNavId}
+            />
 
-    public toggleColumnLinks() {
-        this.setState(state => ({
-            showColumnLinks: !state.showColumnLinks,
-        }));
-    }
-
-    public render() {
-        const { showColumnLinks } = this.state;
-        const { column, index } = this.props;
-        const subNavId = `${column.title.toLowerCase()}Links`;
-        return (
-            <li className={cx(columnStyle, pillarDivider)} role="none">
-                <CollapseColumnButton
-                    title={column.title}
-                    showColumnLinks={showColumnLinks}
-                    toggleColumnLinks={() => {
-                        this.toggleColumnLinks();
-                    }}
-                    ariaControls={subNavId}
-                />
-
-                <ColumnLinks
-                    column={column}
-                    showColumnLinks={showColumnLinks}
-                    id={subNavId}
-                    index={index}
-                />
-            </li>
-        );
-    }
-}
+            <ColumnLinks
+                column={column}
+                showColumnLinks={showColumnLinks}
+                id={subNavId}
+                index={index}
+            />
+        </li>
+    );
+};
