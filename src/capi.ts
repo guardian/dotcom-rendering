@@ -6,7 +6,7 @@ import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { IBlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
 import { Option, fromNullable } from 'types/option';
-import { TagType } from 'mapiThriftModels';
+import { TagType, ContentType } from 'mapiThriftModels';
 
 // ----- Parsing ----- //
 
@@ -50,9 +50,11 @@ interface Series {
 const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === tagType);
 
-
 const isImmersive = (content: Content): boolean =>
     content?.fields?.displayHint === 'immersive';
+
+const isInteractive = (content: Content): boolean =>
+    content.type === ContentType.INTERACTIVE;
 
 const isPhotoEssay = (content: Content): boolean =>
     content?.fields?.displayHint === 'photoEssay';
@@ -127,6 +129,7 @@ export {
     getContent,
     isPhotoEssay,
     isImmersive,
+    isInteractive,
     isFeature,
     isReview,
     isAnalysis,

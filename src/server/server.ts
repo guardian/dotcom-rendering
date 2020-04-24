@@ -11,11 +11,11 @@ import {
 } from '@creditkarma/thrift-server-core'
 import fetch from 'node-fetch';
 
+import Page from 'components/shared/page';
 import { Response as CapiResponse } from 'mapiThriftModels/Response';
 import { Content as MapiContent } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
-import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';

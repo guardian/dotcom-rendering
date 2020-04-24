@@ -21,6 +21,7 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import MediaFigCaption from 'components/media/mediaFigCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
+import { AtomType } from 'mapiThriftModels';
 
 
 // ----- Renderer ----- //
@@ -163,6 +164,39 @@ const TweetStyles = css`
         clear: both;
     }
 `;
+
+const plainTextElement = (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(plainTextElement);
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        case '#text':
+            return text;
+        case 'SPAN':
+            return text;
+        case 'A':
+            return h('a', { href: getHref(node).withDefault(''), key }, children);
+        case 'H2':
+            return h('h2', { key }, children);
+        case 'BLOCKQUOTE':
+            return h('blockquote', { key }, children);
+        case 'STRONG':
+            return h('strong', { key }, children);
+        case 'EM':
+            return h('em', { key }, children);
+        case 'BR':
+            return h('br', { key }, null);
+        case 'UL':
+            return h('ul', { key }, children);
+        case 'LI':
+            return h('li', { key }, children);
+        case 'MARK':
+            return styledH('mark', { key }, children);
+        default:
+            return null;
+    }
+}
 
 const textElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
@@ -377,12 +411,14 @@ const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
     }
 }
 
-const render = (format: Format, imageMappings: ImageMappings) =>
+const render = (format: Format, imageMappings: ImageMappings, excludeStyles = false) =>
     (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
-            return text(element.doc, format);
+            return excludeStyles
+                ? Array.from(element.doc.childNodes).map(plainTextElement)
+                : text(element.doc, format)
 
         case ElementKind.Image: {
             const { caption, credit, role } = element;
@@ -430,12 +466,30 @@ const render = (format: Format, imageMappings: ImageMappings) =>
 
             return h('div', props);
         }
-    }
+
+        case ElementKind.ContentAtom:
+            if (element.atom.atomType === AtomType.INTERACTIVE) {
+                const html = element.atom.data.interactive?.html
+                const styles = element.atom.data.interactive?.css
+                const js = element.atom.data.interactive?.mainJS
+
+                const style = h('style', { dangerouslySetInnerHTML: { __html: styles } })
+                const script = h('script', { dangerouslySetInnerHTML: { __html: js } })
+                const markup = styledH('figure', { css: css`margin: 0`, dangerouslySetInnerHTML: { __html: html } })
+
+                return [style, markup, script];
+            }
+
+            return null;
+        }
 };
 
 const renderAll = (imageMappings: ImageMappings) =>
     (format: Format, elements: BodyElement[]): ReactNode[] =>
         elements.map(render(format, imageMappings));
+
+const renderAllWithoutStyles = (format: Format, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(format, {}, true));
 
 const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(captionElement(format));
@@ -466,6 +520,7 @@ const renderMedia = (imageMappings: ImageMappings) =>
 
 export {
     renderAll,
+    renderAllWithoutStyles,
     text as renderText,
     standfirstText as renderStandfirstText,
     getHref,

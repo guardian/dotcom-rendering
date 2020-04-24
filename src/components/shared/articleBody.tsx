@@ -76,7 +76,6 @@ interface ArticleBodyProps {
 }
 
 const ArticleBody = ({
-    pillar,
     className,
     children,
 }: ArticleBodyProps): JSX.Element =>

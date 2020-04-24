@@ -4,7 +4,7 @@ import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive } from 'capi';
+import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive } from 'capi';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 import {
@@ -14,6 +14,8 @@ import {
     IElement as Element,
     AssetType,
     IAsset as Asset,
+    IAtoms as Atoms,
+    IAtom as Atom,
 } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { Format, Pillar, Design, Display } from 'format';
@@ -32,7 +34,8 @@ const enum ElementKind {
     Instagram,
     Audio,
     Embed,
-    Video
+    Video,
+    ContentAtom
 }
 
 interface Fields extends Format {
@@ -67,6 +70,11 @@ type Video = {
     width: string;
 }
 
+type ContentAtom = {
+    kind: ElementKind.ContentAtom;
+    atom: Atom;
+}
+
 type MediaKind = ElementKind.Audio | ElementKind.Video;
 
 type BodyElement = {
@@ -93,7 +101,7 @@ type BodyElement = {
 } | Audio | {
     kind: ElementKind.Embed;
     html: string;
-} | Video;
+} | Video | ContentAtom;
 
 type Body =
     Result<string, BodyElement>[];
@@ -124,6 +132,11 @@ interface Comment extends Fields {
     body: Body;
 }
 
+interface Interactive extends Fields {
+    design: Design.Interactive;
+    body: Body;
+}
+
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
@@ -137,6 +150,7 @@ type Item
     | Review
     | Comment
     | Standard
+    | Interactive
     ;
 
 
@@ -184,7 +198,7 @@ const parseIframe = (docParser: DocParser) =>
 }
 
 const parseElement =
-    (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+    (docParser: DocParser, atoms?: Atoms) => (element: BlockElement, ): Result<string, BodyElement> => {
     switch (element.type) {
 
         case ElementType.TEXT: {
@@ -294,6 +308,22 @@ const parseElement =
             return parseIframe(docParser)(videoHtml, ElementKind.Video);
         }
 
+        case ElementType.CONTENTATOM: {
+
+            if (!atoms) {
+                return new Err('No atom data returned by capi')
+            }
+
+            const id = element.contentAtomTypeData?.atomId
+            const atom = atoms.interactives?.find(interactive => interactive.id === id);
+
+            if (!atom) {
+                return new Err('No atom matched')
+            }
+
+            return new Ok({ kind: ElementKind.ContentAtom, atom });
+        }
+
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
     }
@@ -303,11 +333,11 @@ const parseElement =
 type Elements = BlockElement[] | undefined;
 
 const parseElements =
-    (docParser: DocParser) => (elements: Elements): Result<string, BodyElement>[] => {
+    (docParser: DocParser, atoms?: Atoms) => (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [new Err('No body elements available')];
         }
-        return elements.map(parseElement(docParser));
+        return elements.map(parseElement(docParser, atoms));
     }
 
 const capiDateTimeToDate = (date: CapiDateTime | undefined): Option<Date> => {
@@ -368,7 +398,6 @@ function getDisplay(content: Content): Display {
     }
 
     return Display.Standard;
-
 }
 
 const itemFields = (docParser: DocParser, content: Content): ItemFields =>
@@ -390,10 +419,11 @@ const itemFields = (docParser: DocParser, content: Content): ItemFields =>
 
 const itemFieldsWithBody = (docParser: DocParser, content: Content): ItemFieldsWithBody => {
     const body = content?.blocks?.body ?? [];
+    const atoms = content?.atoms;
     const elements = body[0]?.elements;
     return ({
         ...itemFields(docParser, content),
-        body: elements !== undefined ? parseElements(docParser)(elements): [],
+        body: elements !== undefined ? parseElements(docParser, atoms)(elements): [],
     });
 }
 
@@ -455,7 +485,12 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
 
     // These checks aim for parity with the CAPI Scala client:
     // https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
-    if (isMedia(tags)) {
+    if (isImmersive(content) && isInteractive(content)) {
+        return {
+            design: Design.Interactive,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isMedia(tags)) {
         return {
             design: Design.Media,
             ...itemFieldsWithBody(docParser, content),
