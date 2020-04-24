@@ -33,7 +33,7 @@ export const getDist = ({
     legacy: boolean;
 }): string => {
     const selectedAssetHash = legacy ? assetHashLegacy : assetHash;
-    return `${CDN}assets/${selectedAssetHash[path] || path}`;
+    return selectedAssetHash[path] || path;
 };
 
 // TODO: Do static files ever appear in the manifest.json?
