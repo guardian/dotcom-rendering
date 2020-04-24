@@ -7,7 +7,7 @@ import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { Option } from 'types/option';
 import Dateline from 'components/dateline';
-import { Item } from 'item';
+import { Item, getFormat } from 'item';
 import { textSans } from "@guardian/src-foundations/typography";
 import { renderText } from "../../renderer";
 import { remSpace } from "@guardian/src-foundations";
@@ -48,7 +48,7 @@ interface Props {
 function Byline({ pillar, publicationDate, className, item }: Props): JSX.Element {
 
     const byline = item.bylineHtml.fmap<ReactNode>(html =>
-        <address>{ renderText(html, item.pillar) }</address>
+        <address>{ renderText(html, getFormat(item)) }</address>
     ).withDefault(null);
 
     return (

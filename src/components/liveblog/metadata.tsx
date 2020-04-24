@@ -7,7 +7,7 @@ import Avatar from './avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { CommentCount } from './commentCount';
-import { Liveblog } from 'item';
+import { Liveblog, getFormat } from 'item';
 import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
 import { ImageMappings } from 'components/shared/page';
@@ -75,7 +75,7 @@ const Metadata = ({ item, imageMappings}: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(item.pillar);
 
     const byline = item.bylineHtml.fmap<ReactNode>(html =>
-        <address>{ renderText(html, item.pillar) }</address>
+        <address>{ renderText(html, getFormat(item)) }</address>
     ).withDefault(null);
 
     return (

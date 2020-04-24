@@ -2,7 +2,7 @@
 
 
 import setup from 'client/setup';
-import { fromCapiLiveBlog } from 'item';
+import { fromCapiLiveBlog, getFormat } from 'item';
 import ReactDOM from 'react-dom';
 import LiveblogBody from 'components/liveblog/body';
 import { createElement as h } from 'react';
@@ -32,14 +32,14 @@ try {
     const hydrationProps = JSON.parse(document.getElementById('hydrationProps')?.textContent ?? "");
 
     if (hydrationProps) {
-        const {
-            pillar,
-            blocks,
-            totalBodyBlocks
-        } = fromCapiLiveBlog(browserParser)(hydrationProps);
+        const item = fromCapiLiveBlog(browserParser)(hydrationProps);
+        const { blocks, totalBodyBlocks } = item;
 
         const { imageMappings } = hydrationProps;
-        ReactDOM.hydrate(h(LiveblogBody, { pillar, blocks, imageMappings, totalBodyBlocks }), document.querySelector('#blocks'))
+        ReactDOM.hydrate(
+            h(LiveblogBody, { format: getFormat(item), blocks, imageMappings, totalBodyBlocks }),
+            document.querySelector('#blocks'),
+        );
     }
 } catch (e) {
     console.error(`Unable to hydrate LiveblogBody: ${e}`)

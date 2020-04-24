@@ -2,12 +2,17 @@ import { getAdPlaceholderInserter } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from 'format';
+import { Pillar, Format, Design, Display } from 'format';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'item';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
+const mockFormat: Format = {
+    pillar: Pillar.News,
+    design: Design.Article,
+    display: Display.Standard,
+};
 
 const textElement = (nodes: string[]): BodyElement =>
     ({
@@ -19,7 +24,7 @@ const generateParas = (paras: number): BodyElement =>
     textElement(Array(paras).fill('<p>foo</p>'));
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(Pillar.News, [element]);
+    renderAll({})(mockFormat, [element]);
 
 const renderParagraphs = compose(render, generateParas);
 

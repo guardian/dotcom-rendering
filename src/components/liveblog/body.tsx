@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
-import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { css } from '@emotion/core'
+import { Pillar, Format } from 'format';
 import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
@@ -12,7 +11,7 @@ import { Blocks } from 'mapiThriftModels';
 import { ImageMappings } from 'components/shared/page';
 import { remSpace } from '@guardian/src-foundations';
 
-const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+const LiveBodyStyles = css`
     .rich-link,
     .element-membership {
         width: calc(100% - 16px);
@@ -25,7 +24,7 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 interface LiveblogBodyProps {
-    pillar: Pillar;
+    format: Format;
     blocks: LiveBlock[];
     totalBodyBlocks: number;
     imageMappings: ImageMappings;
@@ -46,25 +45,25 @@ const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Ele
         : null;
 
 const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
-    const { pillar, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;
+    const { format, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;
     const [blocks] = useState(initialBlocks);
 
     return (
-        <article id="blocks" css={LiveBodyStyles(getPillarStyles(pillar))}>
+        <article id="blocks" css={LiveBodyStyles}>
             {
                 blocks.map((block: LiveBlock) => {
                     return <LiveblogBlock
                         key={block.id}
-                        pillar={pillar} 
+                        pillar={format.pillar} 
                         highlighted={block.isKeyEvent}
                         title={block.title}
                         firstPublishedDate={block.firstPublished}
                         lastModifiedDate={block.lastModified}>
-                            <>{ renderAll(imageMappings)(pillar, partition(block.body).oks) }</>
+                            <>{ renderAll(imageMappings)(format, partition(block.body).oks) }</>
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={totalBodyBlocks} pillar={pillar}/>
+            <LoadMore total={totalBodyBlocks} pillar={format.pillar}/>
         </article>
     );
 

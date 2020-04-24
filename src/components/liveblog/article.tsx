@@ -44,24 +44,26 @@ interface LiveblogArticleProps {
 }
 
 const LiveblogArticle = ({ item, imageMappings }: LiveblogArticleProps): JSX.Element => {
+    const format = getFormat(item);
+
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
                 <LiveblogSeries series={item.series} pillar={item.pillar} />
                 <LiveblogHeadline headline={item.headline} pillar={item.pillar} />
-                <LiveblogStandfirst standfirst={item.standfirst} pillar={item.pillar} />
+                <LiveblogStandfirst standfirst={item.standfirst} format={format} />
                 <Metadata item={item} imageMappings={imageMappings} />
                 <div css={headerImageStyles(getPillarStyles(item.pillar))}>
                     <HeaderImage
                         image={item.mainImage}
                         imageMappings={imageMappings}
-                        format={getFormat(item)}
+                        format={format}
                     />
                 </div>
                 <LiveblogKeyEvents blocks={item.blocks} pillar={item.pillar} />
                 <LiveblogBody
                     blocks={item.blocks}
-                    pillar={item.pillar}
+                    format={format}
                     imageMappings={imageMappings}
                     totalBodyBlocks={item.totalBodyBlocks}
                 />
