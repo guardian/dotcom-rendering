@@ -186,7 +186,7 @@ export const ImmersiveLayout = ({
     const showComments = CAPI.isCommentable;
 
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
-    const captionText = mainMedia.data.caption;
+    const captionText = mainMedia && mainMedia.data && mainMedia.data.caption;
 
     return (
         <>
