@@ -14,14 +14,14 @@ import {
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
-type HasBeenSeen = [boolean, (el: HTMLDivElement) => void, boolean];
-
 const checkForErrors = (response: any) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
 };
+
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type OphanAction = 'INSERT' | 'VIEW';
 
@@ -135,11 +135,16 @@ const MemoisedInner = ({
         };
     }>();
 
-    const [hasBeenSeen, setNode] = useHasBeenSeen({
-        rootMargin: '-18px',
-        threshold: 0,
-        debounce: true,
-    }) as HasBeenSeen;
+    // Debounce the IntersectionObserver callback
+    // to ensure the Slot is seen for at least 200ms before registering the view
+    const debounce = true;
+    const [hasBeenSeen, setNode] = useHasBeenSeen(
+        {
+            rootMargin: '-18px',
+            threshold: 0,
+        },
+        debounce,
+    ) as HasBeenSeen;
 
     const slotRoot = useRef<HTMLDivElement>(null);
 

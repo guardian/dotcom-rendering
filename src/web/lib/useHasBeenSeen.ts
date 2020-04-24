@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import debounce from 'lodash.debounce';
+import libDebounce from 'lodash.debounce';
 
-interface IntersectionObserverOptions extends IntersectionObserverInit {
-    debounce?: boolean;
-}
-
-const useHasBeenSeen = (options: IntersectionObserverOptions) => {
+const useHasBeenSeen = (
+    options: IntersectionObserverInit,
+    debounce?: boolean,
+) => {
     const [hasBeenSeen, setHasBeenSeen] = useState<boolean>(false);
     const [node, setNode] = useState<HTMLElement | null>(null);
 
@@ -18,8 +17,8 @@ const useHasBeenSeen = (options: IntersectionObserverOptions) => {
             setHasBeenSeen(true);
         }
     };
-    const intersectionCallback = options.debounce
-        ? debounce(intersectionFn, 200)
+    const intersectionCallback = debounce
+        ? libDebounce(intersectionFn, 200)
         : intersectionFn;
 
     useEffect(() => {
