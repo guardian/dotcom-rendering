@@ -10,7 +10,7 @@ import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { ElementKind, BodyElement } from 'item';
 import { Role, BodyImageProps } from 'image';
-import { body, headline, textSans } from '@guardian/src-foundations/typography';
+import { body, headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
 import Audio from 'components/audio';
@@ -20,6 +20,7 @@ import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
+import Anchor from 'components/anchor';
 
 
 // ----- Renderer ----- //
@@ -91,28 +92,7 @@ const transform = (text: string, format: Format): ReactElement | string => {
     return text;
 };
 
-const anchorStyles = (colour: string): SerializedStyles => css`
-    color: ${colour};
-    text-decoration: none;
-    border-bottom: 0.0625rem solid ${neutral[86]};
 
-    ${darkModeCss`
-        color: ${neutral[86]};
-    `}
-`;
-
-interface AnchorProps {
-    href: string;
-    text: string;
-    format: Format;
-}
-
-const Anchor: FC<AnchorProps> = ({ format, text, href }): ReactElement =>
-    styledH(
-        'a',
-        { css: anchorStyles(getPillarStyles(format.pillar).kicker), href },
-        transform(text, format),
-    );
 
 const listStyles: SerializedStyles = css`
     list-style: none;
@@ -174,7 +154,11 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
         case 'SPAN':
             return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text, format, key }, children);
+            return h(Anchor, {
+                href: getHref(node).withDefault(''),
+                format,
+                key,
+            }, transform(text, format));
         case 'H2':
             return styledH('h2', { css: HeadingTwoStyles, key }, children );
         case 'BLOCKQUOTE':
@@ -195,54 +179,6 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
             return null;
     }
 };
-
-const captionHeadingStyles = css`
-    ${headline.xxxsmall()}
-    color: ${neutral[86]};
-    padding-bottom: ${remSpace[2]};
-    padding-top: ${remSpace[2]};
-    margin: 0;
-    
-    em {
-        ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
-    }
-`;
-
-const MediaCaptionText = (props: { text: string }): ReactElement =>
-    styledH(
-        'p',
-        { css: css`
-              ${body.small()}
-              color: ${neutral[86]};
-              margin: 0;
-        ` },
-        props.text,
-    );
-
-const emphasisStyles = css`
-    ${textSans.xsmall({ italic: true, fontWeight: 'bold' })}
-    color: ${neutral[86]};
-`;
-
-const Emphasis = ({ text }: { text: string }): ReactElement =>
-    styledH('span', { css: emphasisStyles }, text);
-
-const captionElement = (format: Format) => (node: Node, key: number): ReactNode => {
-    const text = node.textContent ?? '';
-    const children = Array.from(node.childNodes).map(captionElement(format));
-    switch (node.nodeName) {
-        case 'STRONG':
-            return styledH('p', {css: captionHeadingStyles, key}, children);
-        case 'BR':
-            return null;
-        case 'EM':
-            return h(Emphasis, { text, key }, children);
-        case '#text':
-            return h(MediaCaptionText, { text, key }, children);
-        default:
-            return textElement(format)(node, key);
-    }
-}
 
 const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(standfirstTextElement(format));
@@ -350,7 +286,7 @@ const richLinkStyles = css`
 const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
         h('h1', null, props.linkText),
-        h(Anchor, { href: props.url, format: props.format, text: 'Read more' }),
+        h(Anchor, { href: props.url, format: props.format }, 'Read more'),
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement =>
@@ -390,11 +326,9 @@ const render = (format: Format, imageMappings: ImageMappings) =>
                 .withDefault(BodyImage);
 
             const figcaption = role.withDefault(Role.Thumbnail) !== Role.HalfWidth
-                ? caption.fmap<ReactNode>(c =>
-                    h(FigCaption, { format, text: text(c, format), credit })
-                  ).withDefault(null)
+                ? h(FigCaption, { format, caption, credit })
                 : null;
-            
+
             return h(ImageComponent, { image: element, imageMappings }, figcaption);
         }
 
@@ -436,37 +370,13 @@ const renderAll = (imageMappings: ImageMappings) =>
     (format: Format, elements: BodyElement[]): ReactNode[] =>
         elements.map(render(format, imageMappings));
 
-const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
-    Array.from(doc.childNodes).map(captionElement(format));
-
-const renderMedia = (imageMappings: ImageMappings) =>
-    (format: Format, elements: BodyElement[]): ReactNode[] =>
-        elements.map((element) => {
-
-            if (element.kind === ElementKind.Image) {
-                const { caption, credit } = element;
-
-                const figcaption = caption.fmap<ReactNode>(c => 
-                    h(FigCaption, { text: renderCaption(c, format), credit, format })
-                ).withDefault(null);
-
-                return h(BodyImage, {
-                    image: element,
-                    imageMappings,
-                }, figcaption);
-
-            }
-
-            return null;
-
-        });
 
 // ----- Exports ----- //
 
 export {
     renderAll,
     text as renderText,
+    textElement as renderTextElement,
     standfirstText as renderStandfirstText,
     getHref,
-    renderMedia
 };

@@ -26,7 +26,16 @@ const credit = (): Option<string> => {
     return new None();
 }
 
-const caption = 'A generic caption for an image on the page';
+const caption = (): Option<DocumentFragment> => {
+    const fragment = document.createDocumentFragment();
+    const node = document.createTextNode(
+        text('Copy', 'A generic caption for an image on the page'),
+    );
+
+    fragment.appendChild(node);
+
+    return new Some(fragment);
+}
 
 
 // ----- Stories ----- //
@@ -34,7 +43,7 @@ const caption = 'A generic caption for an image on the page';
 const Default: FC = () =>
     <FigCaption
         format={format}
-        text={text('Copy', caption)}
+        caption={caption()}
         credit={credit()}
     />
 
@@ -42,7 +51,7 @@ const Media: FC = () =>
     <div css={css`background-color: ${background.inverse};`}>
         <FigCaption
             format={{ ...format, design: Design.Media }}
-            text={text('Copy', caption)}
+            caption={caption()}
             credit={credit()}
         />
     </div>

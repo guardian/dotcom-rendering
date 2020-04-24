@@ -1,8 +1,7 @@
-import { renderMedia, renderStandfirstText, renderText } from './renderer';
+import { renderAll, renderStandfirstText, renderText } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
 import { ReactNode } from 'react';
-import { renderAll } from 'renderer';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'item';
 import { Role } from 'image';
@@ -83,7 +82,7 @@ const render = (element: BodyElement): ReactNode[] =>
     renderAll({})(mockFormat, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
-    renderMedia({})(mockFormat, [element]);
+    renderAll({})(mockFormat, [element]);
 
 const renderTextElement = compose(render, textElement);
 

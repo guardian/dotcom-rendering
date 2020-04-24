@@ -12,11 +12,11 @@ import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';
-import { renderAll, renderMedia } from 'renderer';
+import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi, getFormat } from 'item';
+import { fromCapi, getFormat, ElementKind } from 'item';
 import { sign } from 'image';
 import {
     ElementType,
@@ -210,9 +210,9 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     }
 
     if (item.design === Design.Media) {
-        const body = partition(item.body).oks;
+        const body = partition(item.body).oks.filter(elem => elem.kind === ElementKind.Image);
         const mediaContent =
-            insertAdPlaceholders(renderMedia(imageMappings)(format, body));
+            insertAdPlaceholders(renderAll(imageMappings)(format, body));
         return { element: (
                 <WithScript src={mediaScript}>
                     <Media imageMappings={imageMappings} item={item}>
