@@ -9,15 +9,6 @@ const articleUrl =
     'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
 
 describe('Interactivity', function() {
-    describe('For Interactives', function() {
-        it('should render the corona embed', function() {
-            cy.visit(
-                'Article?url=https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
-            );
-            cy.contains('Confirmed UK');
-        });
-    });
-
     describe('Verify elements have been hydrated', function() {
         it('should open the edition dropdown menu when clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
