@@ -175,7 +175,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and/or you want to access global application state, you want to use a Portal.
         //
         // Note: Both require a 'root' element that needs to be server rendered.
-        <>
+        <React.StrictMode>
             <Portal root="reader-revenue-links-header">
                 <ReaderRevenueLinks
                     urls={CAPI.nav.readerRevenueLinks.footer}
@@ -348,6 +348,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <CMP />
                 </Portal>
             )}
-        </>
+        </React.StrictMode>
     );
 };
