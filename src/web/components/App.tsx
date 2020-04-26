@@ -249,7 +249,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
             </Portal>
-            <Portal root="onwards-upper">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-upper-whensignedin'
+                        : 'onwards-upper-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsUpper
                         ajaxUrl={CAPI.config.ajaxUrl}
@@ -265,7 +271,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="onwards-lower">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-lower-whensignedin'
+                        : 'onwards-lower-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsLower
                         ajaxUrl={CAPI.config.ajaxUrl}
