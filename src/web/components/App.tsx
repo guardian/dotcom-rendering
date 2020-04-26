@@ -159,8 +159,8 @@ export const App = ({ CAPI, NAV }: Props) => {
     const display = decideDisplay(CAPI);
 
     const handlePermalink = (commentId: number) => {
-        window.location.hash = `#comments-${commentId}`;
         sethashCommentId(commentId);
+        window.location.hash = `#comment-${commentId}`;
         return false;
     };
 
