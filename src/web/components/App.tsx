@@ -185,7 +185,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Hydrate root="links-root">
-                <Links isSignedIn={isSignedIn} />
+                <Links userId={user ? user.userId : undefined} />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown

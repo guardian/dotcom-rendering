@@ -11,7 +11,7 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 
 type Props = {
-    isSignedIn?: boolean;
+    userId?: string;
 };
 
 const search = css`
@@ -142,96 +142,97 @@ const linksStyles = css`
     }
 `;
 
-const identityLinks: DropdownLinkType[] = [
-    {
-        url: `https://profile.theguardian.com/user/id/123`, // TODO use actual user ID once we have a user model
-        title: 'Comments and replies',
-        dataLinkName: 'nav2 : topbar : comment activity',
-    },
-    {
-        url: `https://profile.theguardian.com/public/edit`,
-        title: 'Public profile',
-        dataLinkName: 'nav2 : topbar : edit profile',
-    },
-    {
-        url: `https://profile.theguardian.com/account/edit`,
-        title: 'Account details',
-        dataLinkName: 'nav2 : topbar : account details',
-    },
-    {
-        url: `https://profile.theguardian.com/email-prefs`,
-        title: 'Emails and marketing',
-        dataLinkName: 'nav2 : topbar : email prefs',
-    },
-    {
-        url: `https://profile.theguardian.com/membership/edit`,
-        title: 'Membership',
-        dataLinkName: 'nav2 : topbar : membership',
-    },
-    {
-        url: `https://profile.theguardian.com/contribution/recurring/edit`,
-        title: 'Contributions',
-        dataLinkName: 'nav2 : topbar : contributions',
-    },
-    {
-        url: `https://profile.theguardian.com/digitalpack/edit`,
-        title: 'Digital pack',
-        dataLinkName: 'nav2 : topbar : subscriptions',
-    },
-    {
-        url: `https://profile.theguardian.com/signout`,
-        title: 'Sign out',
-        dataLinkName: 'nav2 : topbar : sign out',
-    },
-];
-
-export const Links = ({ isSignedIn }: Props) => (
-    <div className={linksStyles}>
-        <div className={seperatorStyles} />
-        <a
-            href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
-            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
-            data-link-name="nav2 : job-cta"
-        >
-            Search jobs
-        </a>
-
-        <a
-            href="https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader"
-            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
-            data-link-name="nav2 : soulmates-cta"
-        >
-            Dating
-        </a>
-        <div className={seperatorHideStyles} />
-
-        {isSignedIn ? (
-            <div className={linkStyles}>
-                <ProfileIcon />
-                <Dropdown
-                    label="My account"
-                    links={identityLinks}
-                    id="my-account"
-                    dataLinkName="nav2 : topbar: my account"
-                />
-            </div>
-        ) : (
+export const Links = ({ userId }: Props) => {
+    const identityLinks: DropdownLinkType[] = [
+        {
+            url: `https://profile.theguardian.com/user/id/${userId}`, // TODO use actual user ID once we have a user model
+            title: 'Comments and replies',
+            dataLinkName: 'nav2 : topbar : comment activity',
+        },
+        {
+            url: `https://profile.theguardian.com/public/edit`,
+            title: 'Public profile',
+            dataLinkName: 'nav2 : topbar : edit profile',
+        },
+        {
+            url: `https://profile.theguardian.com/account/edit`,
+            title: 'Account details',
+            dataLinkName: 'nav2 : topbar : account details',
+        },
+        {
+            url: `https://profile.theguardian.com/email-prefs`,
+            title: 'Emails and marketing',
+            dataLinkName: 'nav2 : topbar : email prefs',
+        },
+        {
+            url: `https://profile.theguardian.com/membership/edit`,
+            title: 'Membership',
+            dataLinkName: 'nav2 : topbar : membership',
+        },
+        {
+            url: `https://profile.theguardian.com/contribution/recurring/edit`,
+            title: 'Contributions',
+            dataLinkName: 'nav2 : topbar : contributions',
+        },
+        {
+            url: `https://profile.theguardian.com/digitalpack/edit`,
+            title: 'Digital pack',
+            dataLinkName: 'nav2 : topbar : subscriptions',
+        },
+        {
+            url: `https://profile.theguardian.com/signout`,
+            title: 'Sign out',
+            dataLinkName: 'nav2 : topbar : sign out',
+        },
+    ];
+    return (
+        <div className={linksStyles}>
+            <div className={seperatorStyles} />
             <a
-                className={linkStyles}
-                href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in"
-                data-link-name="nav2 : topbar : signin"
+                href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
+                className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+                data-link-name="nav2 : job-cta"
             >
-                <ProfileIcon /> Sign in
+                Search jobs
             </a>
-        )}
 
-        <Search
-            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
-            href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-            dataLinkName="nav2 : search"
-        >
-            <SearchIcon />
-            <>Search</>
-        </Search>
-    </div>
-);
+            <a
+                href="https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader"
+                className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+                data-link-name="nav2 : soulmates-cta"
+            >
+                Dating
+            </a>
+            <div className={seperatorHideStyles} />
+
+            {userId ? (
+                <div className={linkStyles}>
+                    <ProfileIcon />
+                    <Dropdown
+                        label="My account"
+                        links={identityLinks}
+                        id="my-account"
+                        dataLinkName="nav2 : topbar: my account"
+                    />
+                </div>
+            ) : (
+                <a
+                    className={linkStyles}
+                    href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in"
+                    data-link-name="nav2 : topbar : signin"
+                >
+                    <ProfileIcon /> Sign in
+                </a>
+            )}
+
+            <Search
+                className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+                href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+                dataLinkName="nav2 : search"
+            >
+                <SearchIcon />
+                <>Search</>
+            </Search>
+        </div>
+    );
+};
