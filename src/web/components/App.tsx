@@ -69,7 +69,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         'newest' | 'oldest' | 'recommendations'
     >();
     const [openComments, setOpenComments] = useState<boolean>(false);
-    const [hashCommentId, sethashCommentId] = useState<number | undefined>(
+    const [hashCommentId, setHashCommentId] = useState<number | undefined>(
         commentIdFromUrl(),
     );
 
@@ -159,8 +159,13 @@ export const App = ({ CAPI, NAV }: Props) => {
     const display = decideDisplay(CAPI);
 
     const handlePermalink = (commentId: number) => {
-        sethashCommentId(commentId);
         window.location.hash = `#comment-${commentId}`;
+        const comment = window.document.getElementById(`comment-${commentId}`);
+        if (comment) {
+            // The comment was already on the page so just scroll to it
+            comment.scrollIntoView();
+        }
+        setHashCommentId(commentId);
         return false;
     };
 
