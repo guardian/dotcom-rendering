@@ -77,7 +77,6 @@ export const VeggieBurger: React.FC<{
         <NoJSButton
             display={display}
             isVeggieBurger={true}
-            dataLinkName="nav2 : veggie-burger"
             menuCheckboxId={menuCheckboxId}
         >
             <span className={screenReadable}>Show More</span>

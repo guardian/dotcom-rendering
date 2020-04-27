@@ -13,7 +13,6 @@ type Props = {
     menuCheckboxId: string;
     display: Display;
     isVeggieBurger: boolean;
-    dataLinkName: string;
     children: JSX.Element | JSX.Element[];
 };
 
@@ -76,7 +75,6 @@ export const NoJSButton = ({
     menuCheckboxId,
     display,
     isVeggieBurger,
-    dataLinkName,
     children,
 }: Props) => {
     // Supporting NoJS and accessibility is hard.
@@ -108,7 +106,7 @@ export const NoJSButton = ({
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
             htmlFor={menuCheckboxId}
-            data-link-name={dataLinkName}
+            data-link-name="nav2 : veggie-burger"
             onKeyDown={e => {
                 // keyCode: 13 => Enter key
                 // keyCode: 32 => Space key

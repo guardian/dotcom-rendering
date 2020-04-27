@@ -65,7 +65,6 @@ export const ExpandedMenuToggle = ({ display, menuCheckboxId }: Props) => (
         <NoJSButton
             isVeggieBurger={false}
             display={display}
-            dataLinkName="nav2"
             menuCheckboxId={menuCheckboxId}
         >
             <span className={screenReadable}>Show</span>
