@@ -6,7 +6,7 @@ type Props = {
     children: JSX.Element | JSX.Element[];
 };
 
-export const NavLabelButton = ({ CHECKBOX_ID, className, children }: Props) => (
+export const NoJSButton = ({ CHECKBOX_ID, className, children }: Props) => (
     // Supporting NoJS and accessibility is hard.
     // We are using label and `htmlFor` prop to be able to toggle an input checkbox
     // However this means that we are using a label as a button and lose out on
