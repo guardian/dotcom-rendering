@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
-import { LabelButton } from './LabelButton';
+import { NavLabelButton } from './NavLabelButton';
 
 const veggieBurgerStyles = (display: Display) => css`
     background-color: ${brandAlt[400]};
@@ -106,11 +106,11 @@ export const VeggieBurger: React.FC<{
     CHECKBOX_ID: string;
 }> = ({ display, CHECKBOX_ID }) => {
     return (
-        <LabelButton
+        <NavLabelButton
             className={veggieBurgerStyles(display)}
             CHECKBOX_ID={CHECKBOX_ID}
         >
             <span className={veggieBurgerIconStyles(CHECKBOX_ID)} />
-        </LabelButton>
+        </NavLabelButton>
     );
 };

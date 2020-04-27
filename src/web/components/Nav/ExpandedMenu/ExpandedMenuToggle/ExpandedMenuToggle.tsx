@@ -7,7 +7,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { VeggieBurger } from './VeggieBurger';
-import { LabelButton } from './LabelButton';
+import { NavLabelButton } from './NavLabelButton';
 
 const screenReadable = css`
     ${visuallyHidden};
@@ -85,12 +85,12 @@ export const ExpandedMenuToggle = ({ display, CHECKBOX_ID }: Props) => (
             CHECKBOX_ID={CHECKBOX_ID}
             key="VeggieBurger"
         />
-        <LabelButton
+        <NavLabelButton
             className={openExpandedMenu(display)}
             CHECKBOX_ID={CHECKBOX_ID}
         >
             <span className={screenReadable}>Show</span>
             <span className={showMoreTextStyles(CHECKBOX_ID)}>More</span>
-        </LabelButton>
+        </NavLabelButton>
     </>
 );
