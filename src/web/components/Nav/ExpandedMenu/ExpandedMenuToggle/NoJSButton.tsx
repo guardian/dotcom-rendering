@@ -3,10 +3,16 @@ import React from 'react';
 type Props = {
     menuCheckboxId: string;
     className: string;
+    dataLinkName: string;
     children: JSX.Element | JSX.Element[];
 };
 
-export const NoJSButton = ({ menuCheckboxId, className, children }: Props) => (
+export const NoJSButton = ({
+    menuCheckboxId,
+    className,
+    dataLinkName,
+    children,
+}: Props) => (
     // Supporting NoJS and accessibility is hard.
     // We are using label and `htmlFor` prop to be able to toggle an input checkbox
     // However this means that we are using a label as a button and lose out on
@@ -27,6 +33,7 @@ export const NoJSButton = ({ menuCheckboxId, className, children }: Props) => (
         aria-label="Toggle main menu"
         key="OpenExpandedMenuButton"
         htmlFor={menuCheckboxId}
+        data-link-name={dataLinkName}
         onKeyDown={() => {
             // @ts-ignore
             document && document.getElementById(menuCheckboxId).click();
