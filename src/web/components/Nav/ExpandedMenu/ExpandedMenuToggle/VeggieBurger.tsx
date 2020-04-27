@@ -29,9 +29,9 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
-        ${`#${menuCheckboxId}:checked ~ label & {
+        ${`#${menuCheckboxId}`}:checked ~ label & {
             background-color: transparent;
-        }`}
+        }
 
         top: 50%;
         right: 0;
@@ -43,32 +43,22 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
-            /*
-                IMPORTANT NOTE:
-                we need to specify the adjacent path to the a (current) tag
-                to apply styles to the nested tabs due to the fact we use ~
-                to support NoJS
-            */
+            /* refer to comment above */
             top: -6px;
-            ${`#${menuCheckboxId}:checked ~ label & {
+            ${`#${menuCheckboxId}`}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
-            }`}
+            }
         }
         :after {
             ${lineStyles};
             ${beforeAfterStyles};
-            /*
-                IMPORTANT NOTE:
-                we need to specify the adjacent path to the a (current) tag
-                to apply styles to the nested tabs due to the fact we use ~
-                to support NoJS
-            */
+            /* refer to comment above */
             bottom: -6px;
-            ${`#${menuCheckboxId}:checked ~ label & {
+            ${`#${menuCheckboxId}`}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
-            }`}
+            }
         }
     `;
 };

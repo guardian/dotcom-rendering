@@ -25,12 +25,12 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    ${`#${menuCheckboxId}:checked ~ & {
+    ${`#${menuCheckboxId}`}:checked ~ & {
         ${from.desktop} {
             display: block;
             overflow: visible;
         }
-    }`}
+    }
     ${from.desktop} {
         display: none;
         position: absolute;
@@ -50,11 +50,13 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
     }
 
     /* refer to comment above */
-    ${`#${menuCheckboxId}:checked ~ & {
+    ${`#${menuCheckboxId}`}:checked ~ & {
         ${until.desktop} {
-            transform: translateX(0%); /* when translateX is set to 0% it reapears on the screen */
+            transform: translateX(
+                0%
+            ); /* when translateX is set to 0% it reapears on the screen */
         }
-    }`}
+    }
     ${until.desktop} {
         transform: translateX(
             -110%

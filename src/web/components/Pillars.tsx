@@ -66,7 +66,7 @@ const showMenuUnderlineStyles = (menuCheckboxId: string) => css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    ${`#${menuCheckboxId}:checked ~ ul li & {
+    ${`#${menuCheckboxId}`}:checked ~ ul li & {
         ${from.desktop} {
             :before {
                 bottom: 0;
@@ -80,7 +80,7 @@ const showMenuUnderlineStyles = (menuCheckboxId: string) => css`
         :after {
             transform: translateY(4px);
         }
-    }`}
+    }
 `;
 
 const pillarStyle = css`
@@ -244,7 +244,8 @@ export const Pillars: React.FC<{
                         pillarUnderline[p.pillar],
                         // if menuCheckboxId we assume that the pillars are being rendered in Nav
                         // the pillars need to display theme colours when the drop down is selected
-                        menuCheckboxId && showMenuUnderlineStyles(menuCheckboxId),
+                        menuCheckboxId &&
+                            showMenuUnderlineStyles(menuCheckboxId),
                         {
                             [pillarDivider]:
                                 showLastPillarDivider ||

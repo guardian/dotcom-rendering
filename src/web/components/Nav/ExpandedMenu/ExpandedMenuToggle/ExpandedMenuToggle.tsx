@@ -29,9 +29,9 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
             to support NoJS
         */
         transform: translateY(-3px) rotate(45deg);
-        ${`#${menuCheckboxId}:checked ~ & {
+        ${`#${menuCheckboxId}`}:checked ~ & {
             transform: translateY(1px) rotate(-135deg);
-        }`}
+        }
 
         transition: transform 250ms ease-out;
         vertical-align: middle;
@@ -40,9 +40,9 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
     :hover:after {
         /* refer to comment above */
         transform: translateY(0) rotate(45deg);
-        ${`#${menuCheckboxId}:checked ~ & {
+        ${`#${menuCheckboxId}`}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
-        }`}
+        }
     }
 `;
 
