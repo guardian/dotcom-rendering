@@ -8,7 +8,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
-const mainMenuStyles = (navCheckboxId: string) => css`
+const mainMenuStyles = (menuCheckboxId: string) => css`
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -25,7 +25,7 @@ const mainMenuStyles = (navCheckboxId: string) => css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    ${`#${navCheckboxId}:checked ~ & {
+    ${`#${menuCheckboxId}:checked ~ & {
         ${from.desktop} {
             display: block;
             overflow: visible;
@@ -50,7 +50,7 @@ const mainMenuStyles = (navCheckboxId: string) => css`
     }
 
     /* refer to comment above */
-    ${`#${navCheckboxId}:checked ~ & {
+    ${`#${menuCheckboxId}:checked ~ & {
         ${until.desktop} {
             transform: translateX(0%); /* when translateX is set to 0% it reapears on the screen */
         }
@@ -85,16 +85,16 @@ export const ExpandedMenu: React.FC<{
     display: Display;
     id: string;
     nav: NavType;
-    navCheckboxId: string;
-}> = ({ display, id, nav, navCheckboxId }) => {
+    menuCheckboxId: string;
+}> = ({ display, id, nav, menuCheckboxId }) => {
     return (
         <>
             <ExpandedMenuToggle
                 display={display}
-                navCheckboxId={navCheckboxId}
+                menuCheckboxId={menuCheckboxId}
             />
             <div
-                className={mainMenuStyles(navCheckboxId)}
+                className={mainMenuStyles(menuCheckboxId)}
                 id={id}
                 data-testid="expanded-menu"
             >

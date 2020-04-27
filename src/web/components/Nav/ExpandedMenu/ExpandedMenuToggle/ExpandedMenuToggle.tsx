@@ -37,7 +37,7 @@ const openExpandedMenu = (display: Display) => css`
     }
 `;
 
-const showMoreTextStyles = (navCheckboxId: string) => css`
+const showMoreTextStyles = (menuCheckboxId: string) => css`
     display: block;
     height: 100%;
     :after {
@@ -56,7 +56,7 @@ const showMoreTextStyles = (navCheckboxId: string) => css`
             to support NoJS
         */
         transform: translateY(-3px) rotate(45deg);
-        ${`#${navCheckboxId}:checked ~ & {
+        ${`#${menuCheckboxId}:checked ~ & {
             transform: translateY(1px) rotate(-135deg);
         }`}
 
@@ -67,7 +67,7 @@ const showMoreTextStyles = (navCheckboxId: string) => css`
     :hover:after {
         /* refer to comment above */
         transform: translateY(0) rotate(45deg);
-        ${`#${navCheckboxId}:checked ~ & {
+        ${`#${menuCheckboxId}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
         }`}
     }
@@ -75,22 +75,22 @@ const showMoreTextStyles = (navCheckboxId: string) => css`
 
 interface Props {
     display: Display;
-    navCheckboxId: string;
+    menuCheckboxId: string;
 }
 
-export const ExpandedMenuToggle = ({ display, navCheckboxId }: Props) => (
+export const ExpandedMenuToggle = ({ display, menuCheckboxId }: Props) => (
     <>
         <VeggieBurger
             display={display}
-            navCheckboxId={navCheckboxId}
+            menuCheckboxId={menuCheckboxId}
             key="VeggieBurger"
         />
         <NoJSButton
             className={openExpandedMenu(display)}
-            navCheckboxId={navCheckboxId}
+            menuCheckboxId={menuCheckboxId}
         >
             <span className={screenReadable}>Show</span>
-            <span className={showMoreTextStyles(navCheckboxId)}>More</span>
+            <span className={showMoreTextStyles(menuCheckboxId)}>More</span>
         </NoJSButton>
     </>
 );

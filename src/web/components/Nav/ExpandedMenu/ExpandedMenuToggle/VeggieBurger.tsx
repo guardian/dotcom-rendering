@@ -42,7 +42,7 @@ const veggieBurgerStyles = (display: Display) => css`
     }
 `;
 
-const veggieBurgerIconStyles = (navCheckboxId: string) => {
+const veggieBurgerIconStyles = (menuCheckboxId: string) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -62,7 +62,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
-        ${`#${navCheckboxId}:checked ~ label & {
+        ${`#${menuCheckboxId}:checked ~ label & {
             background-color: transparent;
         }`}
 
@@ -83,7 +83,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
                 to support NoJS
             */
             top: -6px;
-            ${`#${navCheckboxId}:checked ~ label & {
+            ${`#${menuCheckboxId}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
             }`}
@@ -98,7 +98,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
                 to support NoJS
             */
             bottom: -6px;
-            ${`#${navCheckboxId}:checked ~ label & {
+            ${`#${menuCheckboxId}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }`}
@@ -108,15 +108,15 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
 
 export const VeggieBurger: React.FC<{
     display: Display;
-    navCheckboxId: string;
-}> = ({ display, navCheckboxId }) => {
+    menuCheckboxId: string;
+}> = ({ display, menuCheckboxId }) => {
     return (
         <NoJSButton
             className={veggieBurgerStyles(display)}
-            navCheckboxId={navCheckboxId}
+            menuCheckboxId={menuCheckboxId}
         >
             <span className={screenReadable}>Show More</span>
-            <span className={veggieBurgerIconStyles(navCheckboxId)} />
+            <span className={veggieBurgerIconStyles(menuCheckboxId)} />
         </NoJSButton>
     );
 };
