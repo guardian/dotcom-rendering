@@ -81,26 +81,28 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 aria-label="Guardian sections"
                 data-component="nav2"
             >
-                <Hide when="above" breakpoint="tablet">
-                    <ThemeProvider theme={buttonReaderRevenueBrand}>
-                        <PositionButton>
-                            <Button
-                                priority="primary"
-                                size="small"
-                                iconSide="right"
-                                icon={<SvgArrowRightStraight />}
-                                data-link-name="nav2 : support-cta"
-                                data-edition={edition}
-                                onClick={() => {
-                                    window.location.href = subscribeUrl;
-                                    return false;
-                                }}
-                            >
-                                Subscribe
-                            </Button>
-                        </PositionButton>
-                    </ThemeProvider>
-                </Hide>
+                {display === 'immersive' && (
+                    <Hide when="above" breakpoint="tablet">
+                        <ThemeProvider theme={buttonReaderRevenueBrand}>
+                            <PositionButton>
+                                <Button
+                                    priority="primary"
+                                    size="small"
+                                    iconSide="right"
+                                    icon={<SvgArrowRightStraight />}
+                                    data-link-name="nav2 : support-cta"
+                                    data-edition={edition}
+                                    onClick={() => {
+                                        window.location.href = subscribeUrl;
+                                        return false;
+                                    }}
+                                >
+                                    Subscribe
+                                </Button>
+                            </PositionButton>
+                        </ThemeProvider>
+                    </Hide>
+                )}
                 <Pillars
                     display={display}
                     mainMenuOpen={showExpandedMenu}
