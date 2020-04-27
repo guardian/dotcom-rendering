@@ -223,26 +223,12 @@ interface TimelineBlockElement {
     description?: string;
     events: TimelineEvent[];
 }
-
-interface InteractiveMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement';
-    id?: string;
-    html?: string;
-    css?: string;
-    js?: string;
-}
-
 interface AtomEmbedMarkupBlockElement {
     _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
     id?: string;
     html?: string;
     css?: string;
     js?: string;
-}
-
-interface InteractiveUrlElement {
-    _type: 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement';
-    url: string;
 }
 
 interface AtomEmbedUrlElement {
@@ -308,9 +294,7 @@ type CAPIElement =
     | GuideBlockElement
     | ProfileBlockElement
     | TimelineBlockElement
-    | InteractiveMarkupBlockElement
     | AtomEmbedMarkupBlockElement
-    | InteractiveUrlElement
     | AtomEmbedUrlElement
     | MapBlockElement
     | AudioAtomElement

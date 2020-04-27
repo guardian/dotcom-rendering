@@ -19,9 +19,7 @@ import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
-import { InteractiveUrl } from '@root/src/amp/components/elements/InteractiveUrl';
 import { AtomEmbedUrl } from '@root/src/amp/components/elements/AtomEmbedUrl';
-import { InteractiveMarkup } from '@root/src/amp/components/elements/InteractiveMarkup';
 import { AtomEmbedMarkup } from '@root/src/amp/components/elements/AtomEmbedMarkup';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
@@ -146,14 +144,6 @@ export const Elements = (
                         adTargeting={adTargeting}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
-                return (
-                    <InteractiveMarkup
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
             case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
                 return (
                     <AtomEmbedMarkup
@@ -162,8 +152,6 @@ export const Elements = (
                         js={element.js}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
-                return <InteractiveUrl url={element.url} />;
             case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
                 return <AtomEmbedUrl url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
