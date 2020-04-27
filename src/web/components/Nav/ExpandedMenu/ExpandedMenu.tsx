@@ -25,6 +25,7 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
+    /* stylelint-disable-line */
     ${`#${menuCheckboxId}`}:checked ~ & {
         ${from.desktop} {
             display: block;
@@ -50,6 +51,7 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
     }
 
     /* refer to comment above */
+    /* stylelint-disable-line */
     ${`#${menuCheckboxId}`}:checked ~ & {
         ${until.desktop} {
             transform: translateX(

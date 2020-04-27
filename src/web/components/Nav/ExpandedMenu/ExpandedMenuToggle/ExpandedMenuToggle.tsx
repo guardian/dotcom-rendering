@@ -29,6 +29,7 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
             to support NoJS
         */
         transform: translateY(-3px) rotate(45deg);
+        /* stylelint-disable-line */
         ${`#${menuCheckboxId}`}:checked ~ & {
             transform: translateY(1px) rotate(-135deg);
         }
@@ -40,6 +41,7 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
     :hover:after {
         /* refer to comment above */
         transform: translateY(0) rotate(45deg);
+        /* stylelint-disable-line */
         ${`#${menuCheckboxId}`}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
         }
