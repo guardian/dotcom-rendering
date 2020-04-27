@@ -174,7 +174,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         // Portal: If your component is not server rendered but a pure client-side component
         // and/or you want to access global application state, you want to use a Portal.
         //
-        // Note: Both require a 'root' element that needs to be server rendered.
+        // Note. Both require a 'root' element that needs to be server rendered.
         <>
             <Portal root="reader-revenue-links-header">
                 <ReaderRevenueLinks
