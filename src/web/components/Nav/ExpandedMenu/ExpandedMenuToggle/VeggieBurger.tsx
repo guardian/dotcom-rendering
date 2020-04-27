@@ -3,8 +3,13 @@ import { css } from 'emotion';
 
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { NoJSButton } from './NoJSButton';
+
+const screenReadable = css`
+    ${visuallyHidden};
+`;
 
 const veggieBurgerStyles = (display: Display) => css`
     background-color: ${brandAlt[400]};
@@ -110,6 +115,7 @@ export const VeggieBurger: React.FC<{
             className={veggieBurgerStyles(display)}
             navCheckboxId={navCheckboxId}
         >
+            <span className={screenReadable}>Show More</span>
             <span className={veggieBurgerIconStyles(navCheckboxId)} />
         </NoJSButton>
     );
