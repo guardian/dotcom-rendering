@@ -7,7 +7,7 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { Flex } from '@root/src/web/components/Flex';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
+import { Caption } from '@root/src/web/components/Caption';
 
 type Props = {
     display: Display;
@@ -19,6 +19,7 @@ type Props = {
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
+    captionText?: string;
     badge?: BadgeType;
 };
 
@@ -48,7 +49,13 @@ const blackBlock = css`
         background-color: black;
         position: absolute;
         content: '';
-        width: 20%;
+        width: 0%;
+        ${from.phablet} {
+            width: 15%;
+        }
+        ${from.wide} {
+            width: 20%;
+        }
         right: 0;
         bottom: 0;
         display: block;
@@ -62,10 +69,10 @@ const blackBlock = css`
 `;
 
 const padding = css`
-    padding: 0 10px;
+    padding-left: 0px;
 
-    ${from.mobileLandscape} {
-        padding: 0 20px;
+    ${from.phablet} {
+        padding-left: 20px;
     }
 `;
 
@@ -81,6 +88,7 @@ const PositionHeadline = ({
     <div
         className={css`
             margin-top: -100px;
+            flex-grow: 1;
         `}
     >
         {children}
@@ -97,6 +105,7 @@ export const ImmersiveHeadline = ({
     sectionUrl,
     guardianBaseURL,
     pillar,
+    captionText,
     badge,
 }: Props) => (
     <div className={cx(postionRelative)}>
@@ -104,29 +113,32 @@ export const ImmersiveHeadline = ({
             <div className={cx(center, padding)}>
                 <Flex>
                     <LeftColumn showRightBorder={false}>
-                        <></>
+                        <Caption
+                            display={display}
+                            captionText={captionText}
+                            pillar={pillar}
+                            shouldLimitWidth={true}
+                        />
                     </LeftColumn>
-                    <ArticleContainer>
-                        <PositionHeadline>
-                            <ArticleTitle
-                                display={display}
-                                tags={tags}
-                                sectionLabel={sectionLabel}
-                                sectionUrl={sectionUrl}
-                                guardianBaseURL={guardianBaseURL}
-                                pillar={pillar}
-                                badge={badge}
-                            />
-                            <ArticleHeadline
-                                display={display}
-                                headlineString={headline}
-                                designType={designType}
-                                pillar={pillar}
-                                tags={tags}
-                                byline={author.byline}
-                            />
-                        </PositionHeadline>
-                    </ArticleContainer>
+                    <PositionHeadline>
+                        <ArticleTitle
+                            display={display}
+                            tags={tags}
+                            sectionLabel={sectionLabel}
+                            sectionUrl={sectionUrl}
+                            guardianBaseURL={guardianBaseURL}
+                            pillar={pillar}
+                            badge={badge}
+                        />
+                        <ArticleHeadline
+                            display={display}
+                            headlineString={headline}
+                            designType={designType}
+                            pillar={pillar}
+                            tags={tags}
+                            byline={author.byline}
+                        />
+                    </PositionHeadline>
                 </Flex>
             </div>
         </div>

@@ -25,7 +25,6 @@ import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
@@ -257,7 +256,6 @@ export const ShowcaseLayout = ({
 }: Props) => {
     const {
         config: { isPaidContent },
-        pageType: { isSensitive },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -319,6 +317,10 @@ export const ShowcaseLayout = ({
                             pillar={getCurrentPillar(CAPI)}
                             nav={NAV}
                             display={display}
+                            subscribeUrl={
+                                CAPI.nav.readerRevenueLinks.header.subscribe
+                            }
+                            edition={CAPI.editionId}
                         />
                     </Section>
 
@@ -493,20 +495,13 @@ export const ShowcaseLayout = ({
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section sectionId="onwards-upper" />
-
             {!isPaidContent && (
                 <>
-                    {!isSensitive && (
-                        <Section
-                            showTopBorder={false}
-                            backgroundColour={neutral[97]}
-                        >
-                            <OutbrainContainer />
-                        </Section>
+                    {/* Onwards (when signed IN) */}
+                    <Section sectionId="onwards-upper-whensignedin" />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedin" />
                     )}
-
-                    {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (
                         <Section sectionId="comments">
@@ -519,6 +514,15 @@ export const ShowcaseLayout = ({
                                 </RightColumn>
                             </Flex>
                         </Section>
+                    )}
+
+                    {/* Onwards (when signed OUT) */}
+                    <Section
+                        sectionId="onwards-upper-whensignedout"
+                        showTopBorder={false}
+                    />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />

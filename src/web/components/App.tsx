@@ -180,7 +180,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and/or you want to access global application state, you want to use a Portal.
         //
         // Note: Both require a 'root' element that needs to be server rendered.
-        <>
+        <React.StrictMode>
             <Portal root="reader-revenue-links-header">
                 <ReaderRevenueLinks
                     urls={CAPI.nav.readerRevenueLinks.footer}
@@ -199,7 +199,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
             <Hydrate root="nav-root">
-                <Nav pillar={pillar} nav={NAV} display={display} />
+                <Nav
+                    pillar={pillar}
+                    nav={NAV}
+                    display={display}
+                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+                    edition={CAPI.editionId}
+                />
             </Hydrate>
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
@@ -254,7 +260,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
             </Portal>
-            <Portal root="onwards-upper">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-upper-whensignedin'
+                        : 'onwards-upper-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsUpper
                         ajaxUrl={CAPI.config.ajaxUrl}
@@ -270,7 +282,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="onwards-lower">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-lower-whensignedin'
+                        : 'onwards-lower-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsLower
                         ajaxUrl={CAPI.config.ajaxUrl}
@@ -353,6 +371,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <CMP />
                 </Portal>
             )}
-        </>
+        </React.StrictMode>
     );
 };

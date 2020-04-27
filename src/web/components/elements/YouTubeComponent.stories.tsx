@@ -23,6 +23,7 @@ export const noOverlay = () => {
     return (
         <Container>
             <YouTubeComponent
+                display="standard"
                 element={{
                     mediaTitle:
                         "Prince Harry and Meghan's 'bombshell' plans explained – video",
