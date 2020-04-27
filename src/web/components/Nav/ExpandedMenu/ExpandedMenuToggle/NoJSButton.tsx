@@ -1,15 +1,81 @@
 import React from 'react';
+import { css } from 'emotion';
+
+import { from } from '@guardian/src-foundations/mq';
+import { headline } from '@guardian/src-foundations/typography';
+import {
+    brandText,
+    brandAlt,
+    neutral,
+} from '@guardian/src-foundations/palette';
 
 type Props = {
     menuCheckboxId: string;
-    className: string;
+    display: Display;
+    isVeggieBurger: boolean;
     dataLinkName: string;
     children: JSX.Element | JSX.Element[];
 };
 
+const veggieBurgerStyles = (display: Display) => css`
+    background-color: ${brandAlt[400]};
+    color: ${neutral[7]};
+    cursor: pointer;
+    height: 42px;
+    min-width: 42px;
+    position: absolute;
+    border: 0;
+    border-radius: 50%;
+    outline: none;
+
+    /* TODO: we should not use such a hight z-index number  */
+    z-index: 1071;
+
+    right: 5px;
+    bottom: 48px;
+    ${from.mobileMedium} {
+        bottom: ${display === 'immersive' ? '3px' : '-3px'};
+        right: 5px;
+    }
+    ${from.mobileLandscape} {
+        right: 18px;
+    }
+    ${from.tablet} {
+        bottom: 3px;
+    }
+    ${from.desktop} {
+        display: none;
+    }
+`;
+
+const openExpandedMenu = (display: Display) => css`
+    ${headline.xsmall()};
+    font-weight: 300;
+    color: ${brandText.primary};
+    cursor: pointer;
+    display: none;
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    height: 48px;
+    padding-left: 9px;
+    padding-right: 20px;
+    ${from.desktop} {
+        display: block;
+        padding-top: ${display === 'immersive' ? '9px' : '5px'};
+        height: 42px;
+    }
+    :hover,
+    :focus {
+        color: ${brandAlt[400]};
+    }
+`;
+
 export const NoJSButton = ({
     menuCheckboxId,
-    className,
+    display,
+    isVeggieBurger,
     dataLinkName,
     children,
 }: Props) => (
@@ -29,7 +95,11 @@ export const NoJSButton = ({
     // @ts-ignore
 
     <label
-        className={className}
+        className={
+            isVeggieBurger
+                ? veggieBurgerStyles(display)
+                : openExpandedMenu(display)
+        }
         aria-label="Toggle main menu"
         key="OpenExpandedMenuButton"
         htmlFor={menuCheckboxId}

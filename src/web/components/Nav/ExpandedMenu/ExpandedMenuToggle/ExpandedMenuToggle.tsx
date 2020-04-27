@@ -1,9 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { brandText, brandAlt } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { VeggieBurger } from './VeggieBurger';
@@ -11,30 +8,6 @@ import { NoJSButton } from './NoJSButton';
 
 const screenReadable = css`
     ${visuallyHidden};
-`;
-
-const openExpandedMenu = (display: Display) => css`
-    ${headline.xsmall()};
-    font-weight: 300;
-    color: ${brandText.primary};
-    cursor: pointer;
-    display: none;
-    position: relative;
-    overflow: hidden;
-    border: 0;
-    background-color: transparent;
-    height: 48px;
-    padding-left: 9px;
-    padding-right: 20px;
-    ${from.desktop} {
-        display: block;
-        padding-top: ${display === 'immersive' ? '9px' : '5px'};
-        height: 42px;
-    }
-    :hover,
-    :focus {
-        color: ${brandAlt[400]};
-    }
 `;
 
 const showMoreTextStyles = (menuCheckboxId: string) => css`
@@ -86,7 +59,8 @@ export const ExpandedMenuToggle = ({ display, menuCheckboxId }: Props) => (
             key="VeggieBurger"
         />
         <NoJSButton
-            className={openExpandedMenu(display)}
+            isVeggieBurger={false}
+            display={display}
             dataLinkName="nav2"
             menuCheckboxId={menuCheckboxId}
         >

@@ -1,45 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { brandAlt, neutral } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { NoJSButton } from './NoJSButton';
 
 const screenReadable = css`
     ${visuallyHidden};
-`;
-
-const veggieBurgerStyles = (display: Display) => css`
-    background-color: ${brandAlt[400]};
-    color: ${neutral[7]};
-    cursor: pointer;
-    height: 42px;
-    min-width: 42px;
-    position: absolute;
-    border: 0;
-    border-radius: 50%;
-    outline: none;
-
-    /* TODO: we should not use such a hight z-index number  */
-    z-index: 1071;
-
-    right: 5px;
-    bottom: 48px;
-    ${from.mobileMedium} {
-        bottom: ${display === 'immersive' ? '3px' : '-3px'};
-        right: 5px;
-    }
-    ${from.mobileLandscape} {
-        right: 18px;
-    }
-    ${from.tablet} {
-        bottom: 3px;
-    }
-    ${from.desktop} {
-        display: none;
-    }
 `;
 
 const veggieBurgerIconStyles = (menuCheckboxId: string) => {
@@ -112,7 +79,8 @@ export const VeggieBurger: React.FC<{
 }> = ({ display, menuCheckboxId }) => {
     return (
         <NoJSButton
-            className={veggieBurgerStyles(display)}
+            display={display}
+            isVeggieBurger={true}
             dataLinkName="nav2 : veggie-burger"
             menuCheckboxId={menuCheckboxId}
         >
