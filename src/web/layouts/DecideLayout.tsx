@@ -3,6 +3,7 @@ import React from 'react';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
+import { ImmersiveLayout } from './ImmersiveLayout';
 
 type Props = {
     CAPI: CAPIType;
@@ -33,7 +34,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Comment':
                 case 'GuardianView':
                     return (
-                        <CommentLayout
+                        <ImmersiveLayout
                             CAPI={CAPI}
                             NAV={NAV}
                             display="immersive"
@@ -56,7 +57,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'AdvertisementFeature':
                 case 'Immersive':
                     return (
-                        <ShowcaseLayout
+                        <ImmersiveLayout
                             CAPI={CAPI}
                             NAV={NAV}
                             display="immersive"

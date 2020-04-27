@@ -17,6 +17,9 @@ export const preDesktopPillarWidth = 'auto';
 
 // CSS
 const pillarsStyles = (display: Display) => css`
+    ${until.tablet} {
+        display: ${display === 'immersive' && 'none'};
+    }
     clear: right;
     margin: 0;
     list-style: none;

@@ -14,11 +14,10 @@ const headerStyles = css`
 `;
 
 type Props = {
-    isSignedIn?: boolean;
     edition: Edition;
 };
 
-export const Header = ({ isSignedIn, edition }: Props) => (
+export const Header = ({ edition }: Props) => (
     <header className={headerStyles}>
         <Hide when="below" breakpoint="desktop">
             <div id="edition-root">
@@ -31,7 +30,7 @@ export const Header = ({ isSignedIn, edition }: Props) => (
         <Logo />
         <div id="reader-revenue-links-header" />
         <div id="links-root">
-            <Links isSignedIn={isSignedIn} />
+            <Links />
         </div>
     </header>
 );

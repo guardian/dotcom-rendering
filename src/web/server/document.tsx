@@ -24,7 +24,9 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <DecideLayout CAPI={CAPI} NAV={NAV} />
+                <React.StrictMode>
+                    <DecideLayout CAPI={CAPI} NAV={NAV} />
+                </React.StrictMode>
             </CacheProvider>,
         ),
     );
