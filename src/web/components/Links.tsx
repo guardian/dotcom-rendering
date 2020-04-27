@@ -145,7 +145,7 @@ const linksStyles = css`
 export const Links = ({ userId }: Props) => {
     const identityLinks: DropdownLinkType[] = [
         {
-            url: `https://profile.theguardian.com/user/id/${userId}`, // TODO use actual user ID once we have a user model
+            url: `https://profile.theguardian.com/user/id/${userId}`,
             title: 'Comments and replies',
             dataLinkName: 'nav2 : topbar : comment activity',
         },
