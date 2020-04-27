@@ -78,41 +78,50 @@ export const NoJSButton = ({
     isVeggieBurger,
     dataLinkName,
     children,
-}: Props) => (
+}: Props) => {
     // Supporting NoJS and accessibility is hard.
-    // We are using label and `htmlFor` prop to be able to toggle an input checkbox
-    // However this means that we are using a label as a button and lose out on
-    // browser accessiblity.
 
-    // We have defined a JS onClick and onKeyDown as a fall back to help accessiblity.
-    // This is not perfect solution, as some screen readers have NoJS enabled
+    // We have therefore have added JS to help us make the page accessibile.
+    // Adding JS to onKeyDown as a fall back to replace onClick input checkbox
+    // helps us keep some accessiblity for keyboard only users.
+    // This is not a perfect solution as not all screen readers support JS
     // https://webaim.org/projects/screenreadersurvey8/#javascript
-    // We need Typescript to ignore the abnormal props we have added to the label
-    // But in JSX this can be sometimes a little difficult
-    // https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685
 
-    /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
-    // @ts-ignore
+    return (
+        // We are using label and `htmlFor` prop to be able to toggle an input checkbox
+        // However this means that we are using a label as a button and lose out on
+        // browser accessiblity.
 
-    <label
-        className={
-            isVeggieBurger
-                ? veggieBurgerStyles(display)
-                : openExpandedMenu(display)
-        }
-        aria-label="Toggle main menu"
-        key="OpenExpandedMenuButton"
-        htmlFor={menuCheckboxId}
-        data-link-name={dataLinkName}
-        onKeyDown={() => {
-            // @ts-ignore
-            document && document.getElementById(menuCheckboxId).click();
-        }}
+        // We need Typescript to ignore the abnormal props we have added to the label
+        // But in JSX this can be sometimes a little difficult
+        // https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685
+
+        /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
         // @ts-ignore
-        tabindex={0}
-        role="button"
-    >
-        {children}
-    </label>
-    /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
-);
+
+        <label
+            className={
+                isVeggieBurger
+                    ? veggieBurgerStyles(display)
+                    : openExpandedMenu(display)
+            }
+            aria-label="Toggle main menu"
+            key="OpenExpandedMenuButton"
+            htmlFor={menuCheckboxId}
+            data-link-name={dataLinkName}
+            onKeyDown={e => {
+                // keyCode: 13 is the Enter key
+                if (e.keyCode === 13) {
+                    // @ts-ignore
+                    document && document.getElementById(menuCheckboxId).click();
+                }
+            }}
+            // @ts-ignore
+            tabindex={0}
+            role="button"
+        >
+            {children}
+        </label>
+        /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
+    );
+};

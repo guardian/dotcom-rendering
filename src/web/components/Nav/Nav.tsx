@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -71,74 +71,95 @@ const menuCheckboxId = 'main-menu-toggle';
 
 const mainMenuId = 'main-menu';
 
-export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => (
-    <div className={rowStyles}>
-        <nav
-            className={cx(
-                clearFixStyle,
-                rowStyles,
-                display === 'immersive' && minHeight,
-            )}
-            role="navigation"
-            aria-label="Guardian sections"
-            data-component="nav2"
-        >
-            <Hide when="above" breakpoint="tablet">
-                <ThemeProvider theme={buttonReaderRevenueBrand}>
-                    <PositionButton>
-                        <Button
-                            priority="primary"
-                            size="small"
-                            iconSide="right"
-                            icon={<SvgArrowRightStraight />}
-                            data-link-name="nav2 : support-cta"
-                            data-edition={edition}
-                            onClick={() => {
-                                window.location.href = subscribeUrl;
-                                return false;
-                            }}
-                        >
-                            Subscribe
-                        </Button>
-                    </PositionButton>
-                </ThemeProvider>
-            </Hide>
-            {/*
+export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
+    // Accessibility to hide Nav when pressing escape key
+    useEffect(() => {
+        const hideNavOnEscape = (e: KeyboardEvent) => {
+            if (e.keyCode === 27) {
+                const menuCheckbox =
+                    document &&
+                    (document.getElementById(
+                        menuCheckboxId,
+                    ) as HTMLInputElement);
+                // Need to check if the menuCheckbox is checked before clicking
+                menuCheckbox && menuCheckbox.checked && menuCheckbox.click();
+            }
+        };
+        document && document.addEventListener('keydown', hideNavOnEscape);
+        return () =>
+            document &&
+            document.removeEventListener('keydown', hideNavOnEscape);
+    });
+
+    return (
+        <div className={rowStyles}>
+            <nav
+                className={cx(
+                    clearFixStyle,
+                    rowStyles,
+                    display === 'immersive' && minHeight,
+                )}
+                role="navigation"
+                aria-label="Guardian sections"
+                data-component="nav2"
+            >
+                <Hide when="above" breakpoint="tablet">
+                    <ThemeProvider theme={buttonReaderRevenueBrand}>
+                        <PositionButton>
+                            <Button
+                                priority="primary"
+                                size="small"
+                                iconSide="right"
+                                icon={<SvgArrowRightStraight />}
+                                data-link-name="nav2 : support-cta"
+                                data-edition={edition}
+                                onClick={() => {
+                                    window.location.href = subscribeUrl;
+                                    return false;
+                                }}
+                            >
+                                Subscribe
+                            </Button>
+                        </PositionButton>
+                    </ThemeProvider>
+                </Hide>
+                {/*
                 IMPORTANT NOTE:
                 It is important to have the input as the 1st sibling for NoJS to work
                 as we use ~ to apply certain styles on checkbox checked and ~ can only
                 apply to styles with elements that are preceded
             */}
-            <input
-                type="checkbox"
-                className={css`
-                    ${visuallyHidden};
-                `}
-                id={menuCheckboxId}
-                name="more"
-                tabIndex={-1}
-                key="OpenExpandedMenuCheckbox"
-                role="menuitemcheckbox"
-                aria-checked="false"
-            />
-            <Pillars
-                display={display}
-                menuCheckboxId={menuCheckboxId}
-                pillars={nav.pillars}
-                pillar={pillar}
-                dataLinkName="nav2"
-            />
-            <ExpandedMenu
-                display={display}
-                id={mainMenuId}
-                nav={nav}
-                menuCheckboxId={menuCheckboxId}
-            />
-        </nav>
-        {display === 'immersive' && (
-            <PositionRoundel>
-                <GuardianRoundel />
-            </PositionRoundel>
-        )}
-    </div>
-);
+                <input
+                    type="checkbox"
+                    className={css`
+                        ${visuallyHidden};
+                    `}
+                    id={menuCheckboxId}
+                    name="more"
+                    tabIndex={-1}
+                    key="OpenExpandedMenuCheckbox"
+                    role="menuitemcheckbox"
+                    aria-checked="false"
+                />
+                <Pillars
+                    display={display}
+                    menuCheckboxId={menuCheckboxId}
+                    pillars={nav.pillars}
+                    pillar={pillar}
+                    dataLinkName="nav2"
+                />
+                <ExpandedMenu
+                    display={display}
+                    mainMenuId={mainMenuId}
+                    nav={nav}
+                    menuCheckboxId={menuCheckboxId}
+                />
+            </nav>
+            {display === 'immersive' && (
+                <PositionRoundel>
+                    <GuardianRoundel />
+                </PositionRoundel>
+            )}
+        </div>
+    );
+};

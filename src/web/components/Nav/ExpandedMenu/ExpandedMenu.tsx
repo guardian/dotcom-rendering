@@ -83,10 +83,10 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
 
 export const ExpandedMenu: React.FC<{
     display: Display;
-    id: string;
+    mainMenuId: string;
     nav: NavType;
     menuCheckboxId: string;
-}> = ({ display, id, nav, menuCheckboxId }) => {
+}> = ({ display, mainMenuId, nav, menuCheckboxId }) => {
     return (
         <>
             <ExpandedMenuToggle
@@ -95,7 +95,7 @@ export const ExpandedMenu: React.FC<{
             />
             <div
                 className={mainMenuStyles(menuCheckboxId)}
-                id={id}
+                id={mainMenuId}
                 data-testid="expanded-menu"
             >
                 <Columns nav={nav} />
