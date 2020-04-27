@@ -29,22 +29,24 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
             to support NoJS
         */
         transform: translateY(-3px) rotate(45deg);
-        /* stylelint-disable-line */
-        ${`#${menuCheckboxId}`}:checked ~ & {
+        /* stylelint-disable */
+        ${`#${menuCheckboxId}`}:checked ~ label & {
             transform: translateY(1px) rotate(-135deg);
         }
+        /* stylelint-enable */
 
         transition: transform 250ms ease-out;
         vertical-align: middle;
         width: 8px;
     }
     :hover:after {
-        /* refer to comment above */
         transform: translateY(0) rotate(45deg);
-        /* stylelint-disable-line */
-        ${`#${menuCheckboxId}`}:checked ~ & {
+        /* refer to comment above */
+        /* stylelint-disable */
+        ${`#${menuCheckboxId}`}:checked ~ label & {
             transform: translateY(-2px) rotate(-135deg);
         }
+        /* stylelint-enable */
     }
 `;
 

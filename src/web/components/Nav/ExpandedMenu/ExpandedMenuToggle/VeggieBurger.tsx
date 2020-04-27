@@ -29,10 +29,11 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
-        /* stylelint-disable-line */
+        /* stylelint-disable */
         ${`#${menuCheckboxId}`}:checked ~ label & {
             background-color: transparent;
         }
+        /* stylelint-enable */
 
         top: 50%;
         right: 0;
@@ -44,24 +45,26 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
-            /* refer to comment above */
             top: -6px;
-            /* stylelint-disable-line */
+            /* refer to comment above */
+            /* stylelint-disable */
             ${`#${menuCheckboxId}`}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
             }
+            /* stylelint-enable */
         }
         :after {
             ${lineStyles};
             ${beforeAfterStyles};
-            /* refer to comment above */
             bottom: -6px;
-            /* stylelint-disable-line */
+            /* refer to comment above */
+            /* stylelint-disable */
             ${`#${menuCheckboxId}`}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }
+            /* stylelint-enable */
         }
     `;
 };
