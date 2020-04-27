@@ -579,8 +579,10 @@ type IslandType =
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
     | 'cmp'
-    | 'onwards-upper'
-    | 'onwards-lower'
+    | 'onwards-upper-whensignedin'
+    | 'onwards-upper-whensignedout'
+    | 'onwards-lower-whensignedin'
+    | 'onwards-lower-whensignedout'
     | 'rich-link'
     | 'links-root'
     | 'comments-root';
