@@ -65,12 +65,7 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
         width: 8px;
     }
     :hover:after {
-        /*
-            IMPORTANT NOTE:
-            we need to specify the adjacent path to the a (current) tag
-            to apply styles to the nested tabs due to the face we use ~
-            to support NoJS
-        */
+        /* refer to comment above */
         transform: translateY(0) rotate(45deg);
         ${`#${CHECKBOX_ID}:checked ~ & {
             transform: translateY(-2px) rotate(-135deg);
