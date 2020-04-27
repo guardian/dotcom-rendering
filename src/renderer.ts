@@ -22,6 +22,7 @@ import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import { AtomType } from 'mapiThriftModels';
 import Anchor from 'components/anchor';
+import InteractiveAtom from 'components/atoms/interactiveAtom';
 
 // ----- Renderer ----- //
 
@@ -405,11 +406,11 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                 const styles = element.atom.data.interactive?.css
                 const js = element.atom.data.interactive?.mainJS
 
-                const style = h('style', { dangerouslySetInnerHTML: { __html: styles } })
-                const script = h('script', { dangerouslySetInnerHTML: { __html: js } })
-                const markup = styledH('figure', { css: css`margin: 0`, dangerouslySetInnerHTML: { __html: html } })
+                if (!html || !styles || !js) {
+                    return null;
+                }
 
-                return [style, markup, script];
+                return h(InteractiveAtom, { html, styles, js, format })
             }
 
             return null;

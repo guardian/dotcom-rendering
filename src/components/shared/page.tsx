@@ -27,6 +27,7 @@ import {
 } from 'mapiThriftModels';
 import { Design, Display } from 'format';
 import Interactive from 'components/interactive/article';
+import { neutral } from '@guardian/src-foundations/palette';
 
 
 // ----- Components ----- //
@@ -63,6 +64,7 @@ const PageStyles = css`
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
+        line-height: 1.5;
     }
 
     figure.element-embed {

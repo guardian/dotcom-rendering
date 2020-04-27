@@ -1,0 +1,37 @@
+import React, { FC, ReactElement, createElement as h } from 'react';
+import { css, jsx as styledH } from '@emotion/core';
+import { neutral } from '@guardian/src-foundations/palette';
+import { Format } from '@guardian/types/Format';
+import { getPillarStyles, PillarStyles } from 'pillarStyles';
+
+
+export interface InteractiveAtomProps {
+    html: string;
+    styles: string;
+    js: string;
+    format: Format;
+}
+
+const InteractiveAtomStyles = (pillarStyles: PillarStyles) => css`
+    margin: 0;
+
+    a {
+        color: ${pillarStyles.kicker};
+        text-decoration: none;
+        border-bottom: 0.0625rem solid ${neutral[86]};
+    }
+`;
+
+const InteractiveAtom: FC<InteractiveAtomProps> = ({ html, styles, js, format }: InteractiveAtomProps): ReactElement => {
+    const pillarStyles = getPillarStyles(format.pillar);
+    const style = h('style', { dangerouslySetInnerHTML: { __html: styles } })
+    const script = h('script', { dangerouslySetInnerHTML: { __html: js } })
+    const markup = styledH('figure', { css: InteractiveAtomStyles(pillarStyles), dangerouslySetInnerHTML: { __html: html } })
+    return <>
+        {style}
+        {script}
+        {markup}
+    </>
+}
+
+export default InteractiveAtom;
