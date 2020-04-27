@@ -72,7 +72,7 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                     <Metadata imageMappings={imageMappings} item={item} />
                 </section>
             </header>
-            <Body pillar={item.pillar} className={[articleWidthStyles]}>
+            <Body className={[articleWidthStyles]}>
                 {children}
             </Body>
             {epicContainer}

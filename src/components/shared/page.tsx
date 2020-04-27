@@ -173,16 +173,19 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     const articleScript = getAssetLocation('article.js');
     const liveblogScript = getAssetLocation('liveblog.js');
     const mediaScript = getAssetLocation('media.js');
+    const interactiveScript = getAssetLocation('interactive.js');
 
     if (item.design === Design.Interactive) {
         const interactiveBody = partition(item.body).oks;
         const interactiveContent = renderAllWithoutStyles(format, interactiveBody);
 
         return { element: (
-            <Interactive>
-                {interactiveContent}
-            </Interactive>
-        ), resources: [], hydrationProps: {} };
+            <WithScript src={interactiveScript}>
+                <Interactive>
+                    {interactiveContent}
+                </Interactive>
+            </WithScript>
+        ), resources: [interactiveScript], hydrationProps: {} };
     }
 
     if (item.design === Design.Comment) {
@@ -281,7 +284,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
                 <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
                 <link rel="stylesheet" href="native://fontSize.css" />
             </head>
-            <body>
+            <body className="ios">
                 { element }
                 { twitterScript }
             </body>
