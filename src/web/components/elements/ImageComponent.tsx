@@ -175,6 +175,7 @@ export const ImageComponent = ({
     }
     return (
         <Caption
+            display={display}
             captionText={element.data.caption || ''}
             pillar={pillar}
             credit={element.data.credit}

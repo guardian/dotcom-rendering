@@ -78,13 +78,7 @@
                         "$ref": "#/definitions/TimelineBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/InteractiveMarkupBlockElement"
-                    },
-                    {
                         "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InteractiveUrlElement"
                     },
                     {
                         "$ref": "#/definitions/AtomEmbedUrlElement"
@@ -997,30 +991,6 @@
             },
             "required": ["date", "title"]
         },
-        "InteractiveMarkupBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.InteractiveMarkupBlockElement"
-                    ]
-                },
-                "id": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
-                }
-            },
-            "required": ["_type"]
-        },
         "AtomEmbedMarkupBlockElement": {
             "type": "object",
             "properties": {
@@ -1044,21 +1014,6 @@
                 }
             },
             "required": ["_type"]
-        },
-        "InteractiveUrlElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.InteractiveUrlBlockElement"
-                    ]
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": ["_type", "url"]
         },
         "AtomEmbedUrlElement": {
             "type": "object",
@@ -1271,13 +1226,7 @@
                                 "$ref": "#/definitions/TimelineBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/InteractiveMarkupBlockElement"
-                            },
-                            {
                                 "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InteractiveUrlElement"
                             },
                             {
                                 "$ref": "#/definitions/AtomEmbedUrlElement"
