@@ -9,22 +9,6 @@ import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
 const mainMenuStyles = (navCheckboxId: string) => css`
-        /*
-        IMPORTANT NOTE:
-        we need to specify the adjacent path to the a (current) tag
-        to apply styles to the nested tabs due to the face we use ~
-        to support NoJS
-    */
-   ${`#${navCheckboxId}:checked ~ & {
-        ${from.desktop} {
-            display: block;
-            overflow: visible;
-        }
-        ${until.desktop} {
-            transform: translateX(0%);
-        }
-    }`}
-
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -34,27 +18,19 @@ const mainMenuStyles = (navCheckboxId: string) => css`
     top: 0;
     z-index: 1070;
     overflow: hidden;
-    ${until.desktop} {
-        transform: translateX(-110%);
-        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
-        bottom: 0;
-        height: 100%;
-        overflow: auto;
-        padding-top: 6px;
-        position: fixed;
-        right: 0;
-        will-change: transform;
-    }
-    ${from.mobileMedium} {
-        margin-right: 29px;
-    }
-    ${from.mobileLandscape} {
-        margin-right: 70px;
-    }
-    ${from.tablet} {
-        margin-right: 100px;
-    }
+
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the face we use ~
+        to support NoJS
+    */
+    ${`#${navCheckboxId}:checked ~ & {
+        ${from.desktop} {
+            display: block;
+            overflow: visible;
+        }
+    }`}
     ${from.desktop} {
         display: none;
         position: absolute;
@@ -72,6 +48,37 @@ const mainMenuStyles = (navCheckboxId: string) => css`
             margin-right: -50vw;
         }
     }
+
+    /* refer to comment above */
+    ${`#${navCheckboxId}:checked ~ & {
+        ${until.desktop} {
+            transform: translateX(0%); /* when translateX is set to 0% it reapears on the screen */
+        }
+    }`}
+    ${until.desktop} {
+        transform: translateX(
+            -110%
+        ); /* the negative translateX makes the nav hide to the side */
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+        bottom: 0;
+        height: 100%;
+        overflow: auto;
+        padding-top: 6px;
+        position: fixed;
+        right: 0;
+        will-change: transform;
+    }
+
+    ${from.mobileMedium} {
+        margin-right: 29px;
+    }
+    ${from.mobileLandscape} {
+        margin-right: 70px;
+    }
+    ${from.tablet} {
+        margin-right: 100px;
+    }
 `;
 
 export const ExpandedMenu: React.FC<{
@@ -82,7 +89,10 @@ export const ExpandedMenu: React.FC<{
 }> = ({ display, id, nav, navCheckboxId }) => {
     return (
         <>
-            <ExpandedMenuToggle display={display} navCheckboxId={navCheckboxId} />
+            <ExpandedMenuToggle
+                display={display}
+                navCheckboxId={navCheckboxId}
+            />
             <div
                 className={mainMenuStyles(navCheckboxId)}
                 id={id}
