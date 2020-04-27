@@ -38,9 +38,9 @@ export const document = ({
 }) => {
     const testCss = buildExperimentStyle(
         extractModelAndStyle(
-            getActiveTests(abTestsFullConfig, {abZeroTestExperiment: true})
+            getActiveTests(abTestsFullConfig, {"ab-zero-test-experiment": true})
     )[1]);
-
+    
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
         renderToStaticMarkup(

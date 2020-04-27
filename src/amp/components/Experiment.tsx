@@ -3,7 +3,7 @@ import React from 'react';
 export interface ExperimentModel {
     [key: string]: {
         sticky: boolean;
-        consentNotificationId: string;
+        consentNotificationId?: string;
         variants: {
             [key: string]: number; // We do this for compatibility with ExperimentModel via ExperimentConfig
         };
@@ -15,7 +15,7 @@ interface StyledVariants { [key: string]: { proportion: number; style: string;};
 export interface ExperimentFullConfig {
     [key: string]: {
         sticky: boolean;
-        consentNotificationId: string;
+        consentNotificationId?: string;
         variants: StyledVariants;
     };
 }
