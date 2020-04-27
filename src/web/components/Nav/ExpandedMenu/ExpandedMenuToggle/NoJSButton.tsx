@@ -118,6 +118,7 @@ export const NoJSButton = ({
             // @ts-ignore
             tabindex={0}
             role="button"
+            data-cy={isVeggieBurger ? 'veggie-burger' : 'show-more-button'}
         >
             {children}
         </label>
