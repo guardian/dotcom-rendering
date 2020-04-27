@@ -37,7 +37,7 @@ const veggieBurgerStyles = (display: Display) => css`
     }
 `;
 
-const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
+const veggieBurgerIconStyles = (navCheckboxId: string) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -57,7 +57,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
             to apply styles to the nested tabs due to the face we use ~
             to support NoJS
         */
-        ${`#${CHECKBOX_ID}:checked ~ label & {
+        ${`#${navCheckboxId}:checked ~ label & {
             background-color: transparent;
         }`}
 
@@ -78,7 +78,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to support NoJS
             */
             top: -6px;
-            ${`#${CHECKBOX_ID}:checked ~ label & {
+            ${`#${navCheckboxId}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
             }`}
@@ -93,7 +93,7 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
                 to support NoJS
             */
             bottom: -6px;
-            ${`#${CHECKBOX_ID}:checked ~ label & {
+            ${`#${navCheckboxId}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }`}
@@ -103,14 +103,14 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
 
 export const VeggieBurger: React.FC<{
     display: Display;
-    CHECKBOX_ID: string;
-}> = ({ display, CHECKBOX_ID }) => {
+    navCheckboxId: string;
+}> = ({ display, navCheckboxId }) => {
     return (
         <NoJSButton
             className={veggieBurgerStyles(display)}
-            CHECKBOX_ID={CHECKBOX_ID}
+            navCheckboxId={navCheckboxId}
         >
-            <span className={veggieBurgerIconStyles(CHECKBOX_ID)} />
+            <span className={veggieBurgerIconStyles(navCheckboxId)} />
         </NoJSButton>
     );
 };

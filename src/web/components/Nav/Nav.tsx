@@ -44,7 +44,7 @@ type Props = {
 };
 
 // The checkbox ID is used as a CSS selector to enable NoJS support
-const CHECKBOX_ID = 'main-menu-toggle';
+const navCheckboxId = 'main-menu-toggle';
 
 const mainMenuId = 'main-menu';
 
@@ -67,7 +67,7 @@ export const Nav = ({ display, pillar, nav }: Props) => (
                 className={css`
                     ${visuallyHidden};
                 `}
-                id={CHECKBOX_ID}
+                id={navCheckboxId}
                 name="more"
                 tabIndex={-1}
                 key="OpenExpandedMenuCheckbox"
@@ -76,7 +76,7 @@ export const Nav = ({ display, pillar, nav }: Props) => (
             />
             <Pillars
                 display={display}
-                CHECKBOX_ID={CHECKBOX_ID}
+                navCheckboxId={navCheckboxId}
                 pillars={nav.pillars}
                 pillar={pillar}
                 dataLinkName="nav2"
@@ -85,7 +85,7 @@ export const Nav = ({ display, pillar, nav }: Props) => (
                 display={display}
                 id={mainMenuId}
                 nav={nav}
-                CHECKBOX_ID={CHECKBOX_ID}
+                navCheckboxId={navCheckboxId}
             />
         </nav>
         {display === 'immersive' && (
