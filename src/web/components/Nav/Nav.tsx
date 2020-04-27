@@ -73,6 +73,7 @@ const mainMenuId = 'main-menu';
 
 export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
     // Accessibility to hide Nav when pressing escape key
+    /* eslint-disable @typescript-eslint/no-unused-expressions*/
     useEffect(() => {
         const hideNavOnEscape = (e: KeyboardEvent) => {
             if (e.keyCode === 27) {
@@ -82,7 +83,10 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                         menuCheckboxId,
                     ) as HTMLInputElement);
                 // Need to check if the menuCheckbox is checked before clicking
-                menuCheckbox && menuCheckbox.checked && menuCheckbox.click();
+                menuCheckbox &&
+                    menuCheckbox.checked &&
+                    menuCheckbox.click &&
+                    menuCheckbox.click();
             }
         };
         document && document.addEventListener('keydown', hideNavOnEscape);
@@ -90,6 +94,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
             document &&
             document.removeEventListener('keydown', hideNavOnEscape);
     });
+    /* eslint-enable @typescript-eslint/no-unused-expressions */
 
     return (
         <div className={rowStyles}>
