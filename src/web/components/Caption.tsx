@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { text } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 type Props = {
+    display: Display;
     captionText?: string;
     pillar: Pillar;
     children?: React.ReactNode;
@@ -41,7 +42,14 @@ const captionPadding = css`
     padding-right: 8px;
 `;
 
+const hideIconBelowLeftCol = css`
+    ${until.leftCol} {
+        display: none;
+    }
+`;
+
 export const Caption = ({
+    display,
     captionText,
     pillar,
     padCaption = false,
@@ -93,7 +101,12 @@ export const Caption = ({
                             { [captionPadding]: padCaption },
                         )}
                     >
-                        <span className={iconStyle}>
+                        <span
+                            className={cx(
+                                iconStyle,
+                                display === 'immersive' && hideIconBelowLeftCol,
+                            )}
+                        >
                             <TriangleIcon />
                         </span>
                         {getCaptionHtml()} {displayCredit && credit}

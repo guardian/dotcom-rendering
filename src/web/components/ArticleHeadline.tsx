@@ -121,6 +121,10 @@ const immersiveStyles = css`
     min-height: 112px;
     padding-bottom: ${space[9]}px;
     padding-left: ${space[3]}px;
+    ${from.phablet} {
+        padding-left: ${space[1]}px;
+    }
+    margin-right: ${space[5]}px;
 `;
 
 const blackBackground = css`

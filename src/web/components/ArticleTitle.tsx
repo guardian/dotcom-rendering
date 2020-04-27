@@ -43,6 +43,10 @@ const marginTop = css`
     margin-top: 6px;
 `;
 
+const marginBottom = css`
+    margin-bottom: 5px;
+`;
+
 export const ArticleTitle = ({
     display,
     tags,
@@ -58,7 +62,12 @@ export const ArticleTitle = ({
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
-        <div className={badge && marginTop}>
+        <div
+            className={cx(
+                badge && marginTop,
+                display === 'immersive' && marginBottom,
+            )}
+        >
             <SeriesSectionLink
                 display={display}
                 tags={tags}

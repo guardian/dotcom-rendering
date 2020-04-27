@@ -194,7 +194,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
             <Hydrate root="nav-root">
-                <Nav pillar={pillar} nav={NAV} display={display} />
+                <Nav
+                    pillar={pillar}
+                    nav={NAV}
+                    display={display}
+                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+                    edition={CAPI.editionId}
+                />
             </Hydrate>
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
