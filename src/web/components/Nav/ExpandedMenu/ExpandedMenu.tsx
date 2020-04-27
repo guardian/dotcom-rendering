@@ -82,11 +82,7 @@ export const ExpandedMenu: React.FC<{
 }> = ({ display, id, nav, CHECKBOX_ID }) => {
     return (
         <>
-            <ExpandedMenuToggle
-                display={display}
-                CHECKBOX_ID={CHECKBOX_ID}
-                ariaControls={id}
-            />
+            <ExpandedMenuToggle display={display} CHECKBOX_ID={CHECKBOX_ID} />
             <div
                 className={mainMenuStyles(CHECKBOX_ID)}
                 id={id}

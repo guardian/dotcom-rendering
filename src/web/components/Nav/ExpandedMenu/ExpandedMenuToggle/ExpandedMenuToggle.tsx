@@ -75,25 +75,18 @@ const showMoreTextStyles = (CHECKBOX_ID: string) => css`
 
 interface Props {
     display: Display;
-    ariaControls: string;
     CHECKBOX_ID: string;
 }
 
-export const ExpandedMenuToggle = ({
-    display,
-    ariaControls,
-    CHECKBOX_ID,
-}: Props) => (
+export const ExpandedMenuToggle = ({ display, CHECKBOX_ID }: Props) => (
     <>
         <VeggieBurger
             display={display}
             CHECKBOX_ID={CHECKBOX_ID}
-            ariaControls={ariaControls}
             key="VeggieBurger"
         />
         <LabelButton
             className={openExpandedMenu(display)}
-            ariaControls={ariaControls}
             CHECKBOX_ID={CHECKBOX_ID}
         >
             <span className={screenReadable}>Show</span>

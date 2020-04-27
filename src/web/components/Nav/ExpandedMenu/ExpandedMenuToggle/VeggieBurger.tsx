@@ -104,12 +104,10 @@ const veggieBurgerIconStyles = (CHECKBOX_ID: string) => {
 export const VeggieBurger: React.FC<{
     display: Display;
     CHECKBOX_ID: string;
-    ariaControls: string;
-}> = ({ display, CHECKBOX_ID, ariaControls }) => {
+}> = ({ display, CHECKBOX_ID }) => {
     return (
         <LabelButton
             className={veggieBurgerStyles(display)}
-            ariaControls={ariaControls}
             CHECKBOX_ID={CHECKBOX_ID}
         >
             <span className={veggieBurgerIconStyles(CHECKBOX_ID)} />
