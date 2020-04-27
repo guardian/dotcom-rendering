@@ -162,7 +162,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         window.location.hash = `#comment-${commentId}`;
         const comment = window.document.getElementById(`comment-${commentId}`);
         if (comment) {
-            // The comment was already on the page so just scroll to it
+            // The comment was already on the page so just scroll to it.
             comment.scrollIntoView();
         }
         setHashCommentId(commentId);
