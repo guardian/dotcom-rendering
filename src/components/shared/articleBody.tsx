@@ -70,7 +70,6 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
 `;
 
 interface ArticleBodyProps {
-    pillar: Pillar;
     className: SerializedStyles[];
     children: ReactNode[];
 }
