@@ -59,7 +59,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
         /*
             IMPORTANT NOTE:
             we need to specify the adjacent path to the a (current) tag
-            to apply styles to the nested tabs due to the face we use ~
+            to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
         ${`#${navCheckboxId}:checked ~ label & {
@@ -79,7 +79,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
             /*
                 IMPORTANT NOTE:
                 we need to specify the adjacent path to the a (current) tag
-                to apply styles to the nested tabs due to the face we use ~
+                to apply styles to the nested tabs due to the fact we use ~
                 to support NoJS
             */
             top: -6px;
@@ -94,7 +94,7 @@ const veggieBurgerIconStyles = (navCheckboxId: string) => {
             /*
                 IMPORTANT NOTE:
                 we need to specify the adjacent path to the a (current) tag
-                to apply styles to the nested tabs due to the face we use ~
+                to apply styles to the nested tabs due to the fact we use ~
                 to support NoJS
             */
             bottom: -6px;
