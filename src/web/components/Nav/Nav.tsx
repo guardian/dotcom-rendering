@@ -55,26 +55,54 @@ const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
     </div>
 );
 
-<<<<<<< HEAD
-type Props = {
-    pillar: Pillar;
-    nav: NavType;
-    display: Display;
-};
+const PositionButton = ({ children }: { children: React.ReactNode }) => (
+    <div
+        className={css`
+            margin-top: ${space[1]}px;
+            margin-left: ${space[2]}px;
+        `}
+    >
+        {children}
+    </div>
+);
 
 // The checkbox ID is used as a CSS selector to enable NoJS support
 const menuCheckboxId = 'main-menu-toggle';
 
 const mainMenuId = 'main-menu';
 
-export const Nav = ({ display, pillar, nav }: Props) => (
+export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => (
     <div className={rowStyles}>
         <nav
-            className={cx(clearFixStyle, rowStyles)}
+            className={cx(
+                clearFixStyle,
+                rowStyles,
+                display === 'immersive' && minHeight,
+            )}
             role="navigation"
             aria-label="Guardian sections"
             data-component="nav2"
         >
+            <Hide when="above" breakpoint="tablet">
+                <ThemeProvider theme={buttonReaderRevenueBrand}>
+                    <PositionButton>
+                        <Button
+                            priority="primary"
+                            size="small"
+                            iconSide="right"
+                            icon={<SvgArrowRightStraight />}
+                            data-link-name="nav2 : support-cta"
+                            data-edition={edition}
+                            onClick={() => {
+                                window.location.href = subscribeUrl;
+                                return false;
+                            }}
+                        >
+                            Subscribe
+                        </Button>
+                    </PositionButton>
+                </ThemeProvider>
+            </Hide>
             {/*
                 IMPORTANT NOTE:
                 It is important to have the input as the 1st sibling for NoJS to work
@@ -114,75 +142,3 @@ export const Nav = ({ display, pillar, nav }: Props) => (
         )}
     </div>
 );
-=======
-const PositionButton = ({ children }: { children: React.ReactNode }) => (
-    <div
-        className={css`
-            margin-top: ${space[1]}px;
-            margin-left: ${space[2]}px;
-        `}
-    >
-        {children}
-    </div>
-);
-
-export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
-    const [showExpandedMenu, toggleExpandedMenu] = useState<boolean>(false);
-    const mainMenuId = 'main-menu';
-
-    return (
-        <div className={rowStyles}>
-            <nav
-                className={cx(
-                    clearFixStyle,
-                    rowStyles,
-                    display === 'immersive' && minHeight,
-                )}
-                role="navigation"
-                aria-label="Guardian sections"
-                data-component="nav2"
-            >
-                <Hide when="above" breakpoint="tablet">
-                    <ThemeProvider theme={buttonReaderRevenueBrand}>
-                        <PositionButton>
-                            <Button
-                                priority="primary"
-                                size="small"
-                                iconSide="right"
-                                icon={<SvgArrowRightStraight />}
-                                data-link-name="nav2 : support-cta"
-                                data-edition={edition}
-                                onClick={() => {
-                                    window.location.href = subscribeUrl;
-                                    return false;
-                                }}
-                            >
-                                Subscribe
-                            </Button>
-                        </PositionButton>
-                    </ThemeProvider>
-                </Hide>
-                <Pillars
-                    display={display}
-                    mainMenuOpen={showExpandedMenu}
-                    pillars={nav.pillars}
-                    pillar={pillar}
-                    dataLinkName="nav2"
-                />
-                <ExpandedMenu
-                    display={display}
-                    id={mainMenuId}
-                    nav={nav}
-                    showExpandedMenu={showExpandedMenu}
-                    toggleExpandedMenu={toggleExpandedMenu}
-                />
-            </nav>
-            {display === 'immersive' && (
-                <PositionRoundel>
-                    <GuardianRoundel />
-                </PositionRoundel>
-            )}
-        </div>
-    );
-};
->>>>>>> ca6676aecc9479837d49506b7daa4836f4df219e
