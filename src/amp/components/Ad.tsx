@@ -38,35 +38,35 @@ const picnicAdSlotStyle = css`
     margin: auto;
 `;
 
-const adContainerStyle = css`
-    background: ${palette.neutral[93]};
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…AsMy45LTAuOCw3LjMtMi40LDEwLjNDODEsNjIuNSw4Niw1MS42LDg2LDM5LjYiLz48L3N2Zz4=);
-    background-size: 105px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-top: 1px solid ${palette.neutral[86]};
-    height: 272px;
-    width: 300px;
-    clear: both;
-    text-align: center;
-    margin: 0 auto 12px;
-    :before {
-        content: 'Advertisement';
-        display: block;
-        ${textSans.xsmall()};
-        /* Adverts specifcally don't use the GU font branding. */
-        /* stylelint-disable-next-line property-blacklist */
-        font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-            sans-serif;
-        padding: 3px 10px;
-        color: ${text.supporting};
-        text-align: right;
-    }
-`;
+// const adContainerStyle = css`
+//     background: ${palette.neutral[93]};
+//     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…AsMy45LTAuOCw3LjMtMi40LDEwLjNDODEsNjIuNSw4Niw1MS42LDg2LDM5LjYiLz48L3N2Zz4=);
+//     background-size: 105px;
+//     background-repeat: no-repeat;
+//     background-position: center;
+//     border-top: 1px solid ${palette.neutral[86]};
+//     height: 272px;
+//     width: 300px;
+//     clear: both;
+//     text-align: center;
+//     margin: 0 auto 12px;
+//     :before {
+//         content: 'Advertisement';
+//         display: block;
+//         ${textSans.xsmall()};
+//         /* Adverts specifcally don't use the GU font branding. */
+//         /* stylelint-disable-next-line property-blacklist */
+//         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+//             sans-serif;
+//         padding: 3px 10px;
+//         color: ${text.supporting};
+//         text-align: right;
+//     }
+// `;
 
-const adSlotStyle = css`
-    display: none;
-`;
+// const adSlotStyle = css`
+//     display: none;
+// `;
 
 const usAdRegionClass = css`
     .amp-geo-group-us & {
@@ -160,34 +160,34 @@ interface CommercialConfig {
     usePermutive: boolean;
 }
 
-const ampAdElem = (
-    adRegion: AdRegion,
-    edition: Edition,
-    section: string,
-    contentType: string,
-    config: CommercialConfig,
-    commercialProperties: CommercialProperties,
-) => {
-    return (
-        <amp-ad
-            class={cx(adSlotStyle, adRegionClasses[adRegion])}
-            data-block-on-consent=""
-            width={300}
-            height={250}
-            data-npa-on-unknown-consent={true}
-            data-loading-strategy="prefer-viewability-over-views"
-            layout="responsive"
-            type="doubleclick"
-            json={stringify(adJson(commercialProperties[edition].adTargeting))}
-            data-slot={ampData(section, contentType)}
-            rtc-config={realTimeConfig(
-                adRegion,
-                config.usePrebid,
-                config.usePermutive,
-            )}
-        />
-    );
-};
+// const ampAdElem = (
+//     adRegion: AdRegion,
+//     edition: Edition,
+//     section: string,
+//     contentType: string,
+//     config: CommercialConfig,
+//     commercialProperties: CommercialProperties,
+// ) => {
+//     return (
+//         <amp-ad
+//             class={cx(adSlotStyle, adRegionClasses[adRegion])}
+//             data-block-on-consent=""
+//             width={300}
+//             height={250}
+//             data-npa-on-unknown-consent={true}
+//             data-loading-strategy="prefer-viewability-over-views"
+//             layout="responsive"
+//             type="doubleclick"
+//             json={stringify(adJson(commercialProperties[edition].adTargeting))}
+//             data-slot={ampData(section, contentType)}
+//             rtc-config={realTimeConfig(
+//                 adRegion,
+//                 config.usePrebid,
+//                 config.usePermutive,
+//             )}
+//         />
+//     );
+// };
 
 const picnicAmpAdElem = (
     adRegion: AdRegion,
@@ -235,8 +235,8 @@ export const Ad: React.SFC<{
     commercialProperties,
     className,
 }) => (
-    <div className={cx(adContainerStyle, className)}>
-        {ampAdElem(
+    <div className={cx(picnicAdContainerStyle, className)}>
+        {picnicAmpAdElem(
             'US',
             edition,
             section || '',
@@ -244,7 +244,7 @@ export const Ad: React.SFC<{
             config,
             commercialProperties,
         )}
-        {ampAdElem(
+        {picnicAmpAdElem(
             'AU',
             edition,
             section || '',
@@ -252,7 +252,7 @@ export const Ad: React.SFC<{
             config,
             commercialProperties,
         )}
-        {ampAdElem(
+        {picnicAmpAdElem(
             'ROW',
             edition,
             section || '',
