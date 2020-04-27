@@ -100,7 +100,12 @@ You can also find these extensions by searching for `@recommended` in the extens
 
 We recommend you update your workspace settings to automatically fix formatting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
 
-1. Open the Command Palette (`shift + cmd + P`) and type `>Preferences: Open Settings (JSON)`
+1. Open the Command Palette (`shift + cmd + P`) and type 
+
+	```
+	>Preferences: Open Settings (JSON)
+	```
+
 2. Add the key value `"tslint.autoFixOnSave": true,`
 
 ## Thanks
