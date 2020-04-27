@@ -110,8 +110,9 @@ export const NoJSButton = ({
             htmlFor={menuCheckboxId}
             data-link-name={dataLinkName}
             onKeyDown={e => {
-                // keyCode: 13 is the Enter key
-                if (e.keyCode === 13) {
+                // keyCode: 13 => Enter key
+                // keyCode: 32 => Space key
+                if (e.keyCode === 13 || e.keyCode === 32) {
                     // @ts-ignore
                     document && document.getElementById(menuCheckboxId).click();
                 }
