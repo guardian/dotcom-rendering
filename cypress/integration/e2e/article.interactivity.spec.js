@@ -22,15 +22,15 @@ describe('Interactivity', function() {
             cy.viewport('iphone-x');
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
-            cy.get('#veggie-burger').click();
-            cy.get('#main-menu').should('be.visible'); // TODO: should select menu item when AD z-index fixed
+            cy.get('[data-cy=veggie-burger]').click();
+            cy.get('[data-cy=expanded-menu]').should('be.visible'); // TODO: should select menu item when AD z-index fixed
         });
 
         // Mobile
-        it('should display the expanded pillar menu when More is clicked', function() {
+        it('should display the expanded pillar menu when veggies burger is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
-            cy.get('#nav-show-more-button').click();
+            cy.get('[data-cy=nav-show-more-button]').click();
             cy.contains('Crosswords').should('be.visible');
         });
 

@@ -109,6 +109,7 @@ export const ExpandedMenuToggle = ({
             // @ts-ignore
             tabindex={0}
             role="button"
+            data-cy="nav-show-more-button"
         >
             <span className={screenReadable}>Show</span>
             <span className={showMoreTextStyles(navInputCheckboxId)}>More</span>

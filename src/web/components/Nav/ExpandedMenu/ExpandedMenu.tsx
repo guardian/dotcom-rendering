@@ -111,6 +111,7 @@ export const ExpandedMenu: React.FC<{
             <div
                 className={mainMenuStyles(navInputCheckboxId)}
                 data-testid="expanded-menu"
+                data-cy="expanded-menu"
             >
                 <Columns nav={nav} />
             </div>

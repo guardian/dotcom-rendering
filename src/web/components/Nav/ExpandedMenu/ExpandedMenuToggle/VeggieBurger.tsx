@@ -118,6 +118,7 @@ export const VeggieBurger: React.FC<{
             // @ts-ignore
             tabindex={0}
             role="button"
+            data-cy="veggie-burger"
         >
             <span className={screenReadable}>Show More</span>
             <span className={veggieBurgerIconStyles(navInputCheckboxId)} />
