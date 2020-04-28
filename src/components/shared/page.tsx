@@ -27,8 +27,6 @@ import {
 } from 'mapiThriftModels';
 import { Design, Display } from 'format';
 import Interactive from 'components/interactive/article';
-import { neutral } from '@guardian/src-foundations/palette';
-
 
 // ----- Components ----- //
 
