@@ -29,4 +29,23 @@ describe('Elements', function() {
             getAmpIframeBody().contains('Data from Public Health England');
         });
     });
+
+    describe('WEB', function() {
+        // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
+        const getIframeBody = () => {
+            return cy
+                .get('div[data-cy="instagram-embed"] > iframe')
+                .its('0.contentDocument.body')
+                .should('not.be.empty')
+                .then(cy.wrap);
+        };
+
+        it('should render the instagram embed', function() {
+            cy.visit(
+                'Article?url=https://www.theguardian.com/lifeandstyle/2020/apr/28/caroline-calloway-survived-being-cancelled',
+            );
+
+            getIframeBody().contains('View More on Instagram');
+        });
+    });
 });

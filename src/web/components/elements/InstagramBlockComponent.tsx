@@ -16,6 +16,7 @@ export const InstagramBlockComponent: React.FC<{
     return (
         <div className={widthOverride}>
             <div
+                data-cy="instagram-embed"
                 dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
             />
         </div>
