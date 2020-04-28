@@ -5,12 +5,16 @@ import { Article } from '@root/src/amp/pages/Article';
 import { extractScripts } from '@root/src/amp/lib/scripts';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import {abTestsFullConfig} from '@root/src/amp/abTests';
+import { experimentFullConfig } from '@root/src/amp/experiments';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import {ExperimentModel, extractModelAndStyle, getActiveTests} from "@root/src/amp/components/Experiment";
+import {
+    ExperimentModel,
+    extractModelAndStyle,
+    getActiveExperiments,
+} from '@root/src/amp/components/Experiment';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -18,7 +22,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const CAPI = validateV2(body);
         const { linkedData } = CAPI;
         const { config } = CAPI;
-        config.switches.abZeroTestExperiment = true;
+        config.switches['ab-zero-test-experiment'] = true;
         const blockElements = CAPI.blocks.map(block => block.elements);
 
         // This is simply to flatten the elements
@@ -47,7 +51,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         };
 
         const activeTests: ExperimentModel = extractModelAndStyle(
-            getActiveTests(abTestsFullConfig, {"ab-zero-test-experiment": true})
+            getActiveExperiments(experimentFullConfig, config.switches),
         )[0];
         const metadata = {
             description: CAPI.trailText,
