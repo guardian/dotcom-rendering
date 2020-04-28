@@ -2,14 +2,14 @@ export const decideLineEffect = (
     designType: DesignType,
     pillar: Pillar,
 ): LineEffectType => {
+    if (pillar === 'sport') {
+        return 'dotted';
+    }
     if (designType === 'Comment') {
         return 'straight';
     }
     if (designType === 'Feature') {
         return 'squiggly';
-    }
-    if (pillar === 'sport') {
-        return 'dotted';
     }
     return 'straight';
 };
