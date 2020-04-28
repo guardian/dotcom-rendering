@@ -40,31 +40,4 @@ describe('Nav', () => {
 
         expect(listItems.length).toEqual(nav.pillars.length);
     });
-
-    // TODO: fix test
-    // As the Nav bar now is rendered in NoJS we should be using `toHaveStyle`
-    // to determin if the css display variable is hidden or not.
-    // However, JSDOM (which is used to render the componet in @testing-library/react)
-    // defaults to a very small width. On a smaller window size the Nav bar always displays
-    // and instead uses a property called transform to jump into that page.
-    // I have been unable to `toHaveStyle` to extract this changing property
-    // nor have I been able to increase the width of the JSDOM being used to render
-
-    // it('should open and close the expanded menu by clicking More', () => {
-    //     const { getByTestId, getByText } = render(
-    //         <Nav
-    //             pillar="news"
-    //             nav={nav}
-    //             display="standard"
-    //             subscribeUrl=""
-    //             edition="UK"
-    //         />,
-    //     );
-    //     const expandedMenu = getByTestId('expanded-menu');
-    //     expect(expandedMenu).toHaveStyle('display: none');
-    //     fireEvent.click(getByText('More'));
-    //     expect(expandedMenu).toHaveStyle('display: block');
-    //     fireEvent.click(getByText('More'));
-    //     expect(expandedMenu).toHaveStyle('display: none');
-    // });
 });
