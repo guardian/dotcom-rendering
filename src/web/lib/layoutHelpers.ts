@@ -5,13 +5,28 @@ export const decideLineEffect = (
     if (pillar === 'sport') {
         return 'dotted';
     }
-    if (designType === 'Comment') {
-        return 'straight';
+
+    switch (designType) {
+        case 'Feature':
+        case 'Recipe':
+            return 'squiggly';
+        case 'Comment':
+        case 'GuardianView':
+        case 'Review':
+        case 'Interview':
+        case 'Live':
+        case 'Media':
+        case 'Analysis':
+        case 'Article':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Immersive':
+        default:
+            return 'straight';
     }
-    if (designType === 'Feature' || designType === 'Recipe') {
-        return 'squiggly';
-    }
-    return 'straight';
 };
 
 export const decideLineCount = (designType?: DesignType): 8 | 4 => {
