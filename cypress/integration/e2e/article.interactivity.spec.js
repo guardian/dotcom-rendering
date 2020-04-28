@@ -17,6 +17,16 @@ describe('Interactivity', function() {
             cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
 
+        // Desktop
+        it('should display the expanded pillar menu when More is clicked', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.contains('Crosswords').should('not.be.visible');
+            cy.get('#veggie-burger').click();
+            cy.get('#main-menu').should('be.visible'); // TODO: should select menu item when AD z-index fixed
+        });
+
+        // Mobile
         it('should display the expanded pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
