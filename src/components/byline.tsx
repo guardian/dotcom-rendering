@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'format';
 import { Option } from 'types/option';
-import { neutral } from '@guardian/src-foundations';
+import { neutral, palette } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillarStyles';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -27,6 +27,17 @@ const styles = (kicker: string): SerializedStyles => css`
     `}
 `;
 
+const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
+    ${headline.xxxsmall({ fontWeight: 'bold' })}
+    font-style: normal;
+    color: ${kicker};
+    text-decoration: none;
+
+    ${darkModeCss`
+        color: ${inverted};
+    `}
+`;
+
 const commentStyles = (kicker: string): SerializedStyles => css`
     color: ${kicker};
     ${headline.medium({ fontWeight: 'light', italic: true })}
@@ -41,14 +52,23 @@ const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles
     `}
 `;
 
-const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
+const advertisementFeatureStyles = css`
+    ${headline.xxxsmall()}
+    color: ${palette.labs[300]};
+
+    ${darkModeCss`
+        color: ${palette.labs[400]};
+    `}
+`;
+
+const advertisementFeatureAnchorStyles = css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
+    color: ${palette.labs[300]};
     font-style: normal;
-    color: ${kicker};
     text-decoration: none;
 
     ${darkModeCss`
-        color: ${inverted};
+        color: ${palette.labs[400]};
     `}
 `;
 
@@ -58,6 +78,9 @@ const getStyles = (format: Format): SerializedStyles => {
     switch (format.design) {
         case Design.Comment:
             return commentStyles(kicker);
+
+        case Design.AdvertisementFeature:
+            return advertisementFeatureStyles;
 
         default:
             return styles(kicker);
@@ -70,6 +93,9 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
     switch (format.design) {
         case Design.Comment:
             return commentAnchorStyles(kicker, inverted);
+
+        case Design.AdvertisementFeature:
+            return advertisementFeatureAnchorStyles;
         
         default:
             return anchorStyles(kicker, inverted);

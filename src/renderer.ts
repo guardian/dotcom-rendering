@@ -148,7 +148,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
     const children = Array.from(node.childNodes).map(textElement(format));
     switch (node.nodeName) {
         case 'P':
-            return h(Paragraph, { key }, children);
+            return h(Paragraph, { key, format }, children);
         case '#text':
             return transform(text, format);
         case 'SPAN':

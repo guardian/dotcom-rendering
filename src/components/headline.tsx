@@ -7,7 +7,7 @@ import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item } from 'item';
-import { darkModeCss as darkMode } from 'styles';
+import { darkModeCss as darkMode, textSans } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import StarRating from './starRating';
 import { Display, Design } from 'format';
@@ -76,6 +76,11 @@ const commentStyles = css`
     padding-bottom: ${remSpace[1]};
 `;
 
+const advertisementFeatureStyles = css`
+    ${styles}
+    ${textSans}
+`;
+
 const getStyles = (item: Item): SerializedStyles => {
     const pillarStyles = getPillarStyles(item.pillar);
 
@@ -92,6 +97,8 @@ const getStyles = (item: Item): SerializedStyles => {
             return commentStyles;
         case Design.Media:
             return mediaStyles;
+        case Design.AdvertisementFeature:
+            return advertisementFeatureStyles;
         default:
             return styles;
     }
