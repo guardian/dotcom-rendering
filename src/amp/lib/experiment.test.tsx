@@ -1,9 +1,10 @@
 import {
-    ExperimentFullConfig,
+    StyledModelCollection,
     getActiveExperiments,
-    extractModelAndStyle,
+    extractExperimentModels,
+    extractExperimentStyles,
     buildExperimentStyle,
-} from '@root/src/amp/components/Experiment';
+} from '@root/src/amp/lib/experiment';
 
 describe('Experiment Component', () => {
     const commercialConfig = {
@@ -13,7 +14,7 @@ describe('Experiment Component', () => {
         },
     };
 
-    const testFullConfig: ExperimentFullConfig = {
+    const testFullConfig: StyledModelCollection = {
         experiment1: {
             sticky: false,
             variants: {
@@ -58,7 +59,7 @@ describe('Experiment Component', () => {
 
     it('extracts the correct ExperimentModel from the FullConfig', () => {
         const testConfig = { experiment1: testFullConfig.experiment1 };
-        expect(extractModelAndStyle(testConfig)[0]).toMatchObject({
+        expect(extractExperimentModels(testConfig)).toMatchObject({
             experiment1: {
                 sticky: false,
                 variants: {
@@ -70,7 +71,7 @@ describe('Experiment Component', () => {
     });
     it('extracts the correct ExperimentStyle from the FullConfig', () => {
         const testConfig = { experiment1: testFullConfig.experiment1 };
-        const testStyle = extractModelAndStyle(testConfig)[1];
+        const testStyle = extractExperimentStyles(testConfig);
         expect(testStyle).toMatchObject({
             experiment1: {
                 treatment1: `.test-header { background-color: yellow;}`,
