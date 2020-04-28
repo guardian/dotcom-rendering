@@ -20,7 +20,7 @@ export const sidePadding = css`
         padding-right: 0;
     }`;
 
-export const textSans = "font-family: 'Guardian Text Sans Web';";
+export const textSans = "font-family: 'Guardian Text Sans Web, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';";
 
 export const icons = "font-family: 'Guardian Icons';";
 

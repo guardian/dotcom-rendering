@@ -9,7 +9,7 @@ import { Option } from 'types/option';
 import { neutral, palette } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillarStyles';
 import { getHref } from 'renderer';
-import { darkModeCss } from 'styles';
+import { darkModeCss, textSans } from 'styles';
 
 
 // ----- Component ----- //
@@ -54,6 +54,7 @@ const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles
 
 const advertisementFeatureStyles = css`
     ${headline.xxxsmall()}
+    ${textSans}
     color: ${palette.labs[300]};
 
     ${darkModeCss`
@@ -62,7 +63,7 @@ const advertisementFeatureStyles = css`
 `;
 
 const advertisementFeatureAnchorStyles = css`
-    ${headline.xxxsmall({ fontWeight: 'bold' })}
+    font-weight: bold;
     color: ${palette.labs[300]};
     font-style: normal;
     text-decoration: none;
