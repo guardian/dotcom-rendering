@@ -8,7 +8,7 @@ export const decideLineEffect = (
     if (designType === 'Comment') {
         return 'straight';
     }
-    if (designType === 'Feature') {
+    if (designType === 'Feature' || designType === 'Recipe') {
         return 'squiggly';
     }
     return 'straight';
