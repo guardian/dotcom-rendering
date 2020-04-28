@@ -4,6 +4,7 @@ import { Caption } from '@root/src/web/components/Caption';
 import { YouTubeEmbed } from '@root/src/web/components/YouTubeEmbed';
 
 type Props = {
+    display: Display;
     element: YoutubeBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const YouTubeComponent = ({
+    display,
     element,
     pillar,
     hideCaption,
@@ -38,6 +40,7 @@ export const YouTubeComponent = ({
     }
     return (
         <Caption
+            display={display}
             captionText={element.mediaTitle || ''}
             pillar={pillar}
             displayCredit={false}

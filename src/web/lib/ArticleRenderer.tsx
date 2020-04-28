@@ -76,6 +76,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
+                            display={display}
                             key={i}
                             element={element}
                             pillar={pillar}

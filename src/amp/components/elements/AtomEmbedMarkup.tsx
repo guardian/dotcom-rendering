@@ -53,6 +53,7 @@ export const AtomEmbedMarkup: React.SFC<{
             sandbox="allow-scripts"
             srcdoc={body}
             resizable=""
+            data-cy="atom-embed-markup"
         >
             <div overflow="" className={showMore}>
                 <ShowMoreButton />
