@@ -50,7 +50,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             },
         };
 
-        const activeTests: ExperimentModel = extractModelAndStyle(
+        const activeExperiments: ExperimentModel = extractModelAndStyle(
             getActiveExperiments(experimentFullConfig, config.switches),
         )[0];
         const metadata = {
@@ -68,7 +68,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     articleData={CAPI}
                     nav={extractNAV(CAPI.nav)}
                     analytics={analytics}
-                    experiment={activeTests}
+                    experiments={activeExperiments}
                     config={config}
                 />
             ),

@@ -62,7 +62,7 @@ test('produces valid AMP doc', async () => {
         },
     };
 
-    const activeTests = extractModelAndStyle(
+    const activeExperiments = extractModelAndStyle(
         getActiveExperiments(experimentFullConfig, config.switches),
     )[0];
 
@@ -72,7 +72,7 @@ test('produces valid AMP doc', async () => {
             articleData={CAPI}
             config={config}
             analytics={analytics}
-            experiment={activeTests}
+            experiments={activeExperiments}
         />
     );
     const result = v.validateString(

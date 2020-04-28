@@ -92,11 +92,11 @@ export const buildExperimentStyle = (experiments: ExperimentStyle): string => {
 };
 
 export const Experiment: React.FC<{
-    experiment: ExperimentModel;
-}> = experiment => {
+    experiments: ExperimentModel;
+}> = ({ experiments }) => {
     const script: string = `<amp-experiment>
         <script type="application/json">
-        ${JSON.stringify(experiment.experiment)}
+        ${JSON.stringify(experiments)}
         </script>
     </amp-experiment>`;
 

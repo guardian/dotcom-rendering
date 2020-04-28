@@ -44,13 +44,13 @@ export const Article: React.FC<{
     articleData: ArticleModel;
     config: ConfigType;
     analytics: AnalyticsModel;
-    experiment: ExperimentModel;
-}> = ({ nav, articleData, config, analytics, experiment }) => (
+    experiments: ExperimentModel;
+}> = ({ nav, articleData, config, analytics, experiments }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
         <AnalyticsIframe url={config.ampIframeUrl} />
         <AdConsent />
-        <Experiment experiment={experiment} />
+        <Experiment experiments={experiments} />
 
         {/* /TODO change to gray bgcolor */}
         <div key="main" className={backgroundColour}>
