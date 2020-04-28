@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
-
-import { NoJSButton } from './NoJSButton';
+import { from } from '@guardian/src-foundations/mq';
+import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
 const screenReadable = css`
     ${visuallyHidden};
@@ -69,18 +69,66 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
     `;
 };
 
+const veggieBurgerStyles = (display: Display) => css`
+    background-color: ${brandAlt[400]};
+    color: ${neutral[7]};
+    cursor: pointer;
+    height: 42px;
+    min-width: 42px;
+    position: absolute;
+    border: 0;
+    border-radius: 50%;
+    outline: none;
+
+    /* TODO: we should not use such a hight z-index number  */
+    z-index: 1071;
+
+    right: 5px;
+    bottom: 48px;
+    ${from.mobileMedium} {
+        bottom: ${display === 'immersive' ? '3px' : '-3px'};
+        right: 5px;
+    }
+    ${from.mobileLandscape} {
+        right: 18px;
+    }
+    ${from.tablet} {
+        bottom: 3px;
+    }
+    ${from.desktop} {
+        display: none;
+    }
+`;
+
 export const VeggieBurger: React.FC<{
     display: Display;
     menuCheckboxId: string;
 }> = ({ display, menuCheckboxId }) => {
     return (
-        <NoJSButton
-            display={display}
-            isVeggieBurger={true}
-            menuCheckboxId={menuCheckboxId}
+        /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
+        // @ts-ignore
+        <label
+            className={veggieBurgerStyles(display)}
+            aria-label="Toggle main menu"
+            key="OpenExpandedMenuButton"
+            htmlFor={menuCheckboxId}
+            data-link-name="nav2 : veggie-burger"
+            onKeyDown={e => {
+                // keyCode: 13 => Enter key
+                // keyCode: 32 => Space key
+                if (e.keyCode === 13 || e.keyCode === 32) {
+                    // @ts-ignore
+                    document && document.getElementById(menuCheckboxId).click();
+                }
+            }}
+            // @ts-ignore
+            tabindex={0}
+            role="button"
+            data-cy="veggie-burger"
         >
             <span className={screenReadable}>Show More</span>
             <span className={veggieBurgerIconStyles(menuCheckboxId)} />
-        </NoJSButton>
+        </label>
+        /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
     );
 };
