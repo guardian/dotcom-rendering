@@ -13,7 +13,7 @@ import Body from 'components/shared/articleBody';
 import Metadata from 'components/standard/metadata';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review, getFormat } from 'item';
+import { Standard, getFormat } from 'item';
 import { ImageMappings } from 'components/shared/page';
 
 
@@ -42,7 +42,7 @@ const BorderStyles = css`
 
 interface Props {
     imageMappings: ImageMappings;
-    item: Standard | Review;
+    item: Standard;
     children: ReactNode[];
 }
 
