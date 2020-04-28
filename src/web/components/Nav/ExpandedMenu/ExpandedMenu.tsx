@@ -8,7 +8,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
-const mainMenuStyles = (menuCheckboxId: string) => css`
+const mainMenuStyles = (navInputCheckboxId: string) => css`
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -26,7 +26,7 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
         to support NoJS
     */
     /* stylelint-disable */
-    ${`#${menuCheckboxId}`}:checked ~ & {
+    ${`#${navInputCheckboxId}`}:checked ~ & {
         ${from.desktop} {
             display: block;
             overflow: visible;
@@ -53,7 +53,7 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
 
     /* refer to comment above */
     /* stylelint-disable */
-    ${`#${menuCheckboxId}`}:checked ~ & {
+    ${`#${navInputCheckboxId}`}:checked ~ & {
         ${until.desktop} {
             transform: translateX(
                 0%
@@ -89,30 +89,27 @@ const mainMenuStyles = (menuCheckboxId: string) => css`
 
 export const ExpandedMenu: React.FC<{
     display: Display;
-    mainMenuId: string;
     nav: NavType;
-    menuCheckboxId: string;
+    navInputCheckboxId: string;
+    showMoreButtonId: string;
     veggieBurgerId: string;
-    showMoreNavId: string;
 }> = ({
     display,
-    mainMenuId,
     nav,
-    menuCheckboxId,
+    navInputCheckboxId,
+    showMoreButtonId,
     veggieBurgerId,
-    showMoreNavId,
 }) => {
     return (
         <>
             <ExpandedMenuToggle
                 display={display}
-                menuCheckboxId={menuCheckboxId}
+                navInputCheckboxId={navInputCheckboxId}
                 veggieBurgerId={veggieBurgerId}
-                showMoreNavId={showMoreNavId}
+                showMoreButtonId={showMoreButtonId}
             />
             <div
-                className={mainMenuStyles(menuCheckboxId)}
-                id={mainMenuId}
+                className={mainMenuStyles(navInputCheckboxId)}
                 data-testid="expanded-menu"
             >
                 <Columns nav={nav} />

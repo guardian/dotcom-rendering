@@ -67,11 +67,10 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 );
 
 // The checkbox ID is used as a CSS selector to enable NoJS support
-const menuCheckboxId = 'main-menu-toggle';
+const navInputCheckboxId = 'top-nav-input-checkbox';
 
-const mainMenuId = 'main-menu';
+const showMoreButtonId = 'show-more-button';
 const veggieBurgerId = 'veggie-burger';
-const showMoreNavId = 'nav-show-more-button';
 
 export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
     return (
@@ -87,27 +86,44 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
             */}
             <script
                 dangerouslySetInnerHTML={{
-                    __html: `document.addEventListener('DOMContentLoaded', function () {
-                            // Close hide menu on press enter
-                            var toggleMainMenu = function(e){
-                                // keyCode: 13 => Enter key | keyCode: 32 => Space key
-                                if (e.keyCode === 13 || e.keyCode === 32) {
-                                    e.preventDefault()
-                                    document && document.getElementById('${menuCheckboxId}').click();
+                    __html: `document.addEventListener('DOMContentLoaded', function(){
+                        // Used to toggle data-link-name on label buttons
+                        var dataLinkNameShow = true
+                        var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
+                        var showMoreButton = document.getElementById('${showMoreButtonId}')
+                        var veggieBurger = document.getElementById('${veggieBurgerId}')
+
+                        navInputCheckbox.addEventListener('click',function(){
+                            if(dataLinkNameShow) {
+                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                                dataLinkNameShow = false
+                            } else {
+                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
+                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
+                                dataLinkNameShow = true
+                            }
+                        })
+                        // Close hide menu on press enter
+                        var toggleMainMenu = function(e){
+                            // keyCode: 13 => Enter key | keyCode: 32 => Space key
+                            if (e.keyCode === 13 || e.keyCode === 32) {
+                                e.preventDefault()
+                                navInputCheckbox.click();
+                            }
+                        }
+                        showMoreButton.addEventListener('keydown', toggleMainMenu)
+                        veggieBurger.addEventListener('keydown', toggleMainMenu)
+                        // Accessibility to hide Nav when pressing escape key
+                        var hideNavOnEscape = function(e){
+                            if (e.keyCode === 27) {
+                                if(navInputCheckbox.checked) {
+                                    navInputCheckbox.click()
                                 }
                             }
-                            document.getElementById('${showMoreNavId}').addEventListener('keydown', toggleMainMenu)
-                            document.getElementById('${veggieBurgerId}').addEventListener('keydown', toggleMainMenu)
-                            // Accessibility to hide Nav when pressing escape key
-                            var hideNavOnEscape = function(e){
-                                if (e.keyCode === 27) {
-                                    if(document.getElementById('${menuCheckboxId}').checked) {
-                                        document.getElementById('${menuCheckboxId}').click()
-                                    }
-                                }
-                            }
-                            document.addEventListener('keydown', hideNavOnEscape)
-                        })`,
+                        }
+                        document.addEventListener('keydown', hideNavOnEscape)
+                    })`,
                 }}
             />
             <nav
@@ -153,7 +169,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                     className={css`
                         ${visuallyHidden};
                     `}
-                    id={menuCheckboxId}
+                    id={navInputCheckboxId}
                     name="more"
                     tabIndex={-1}
                     key="OpenExpandedMenuCheckbox"
@@ -162,18 +178,17 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 />
                 <Pillars
                     display={display}
-                    menuCheckboxId={menuCheckboxId}
+                    navInputCheckboxId={navInputCheckboxId}
                     pillars={nav.pillars}
                     pillar={pillar}
                     dataLinkName="nav2"
                 />
                 <ExpandedMenu
                     display={display}
-                    mainMenuId={mainMenuId}
+                    showMoreButtonId={showMoreButtonId}
                     nav={nav}
-                    menuCheckboxId={menuCheckboxId}
+                    navInputCheckboxId={navInputCheckboxId}
                     veggieBurgerId={veggieBurgerId}
-                    showMoreNavId={showMoreNavId}
                 />
             </nav>
             {display === 'immersive' && (

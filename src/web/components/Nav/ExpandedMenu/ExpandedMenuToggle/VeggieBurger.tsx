@@ -9,7 +9,7 @@ const screenReadable = css`
     ${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = (menuCheckboxId: string) => {
+const veggieBurgerIconStyles = (navInputCheckboxId: string) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -30,7 +30,7 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
             to support NoJS
         */
         /* stylelint-disable */
-        ${`#${menuCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ label & {
             background-color: transparent;
         }
         /* stylelint-enable */
@@ -48,7 +48,7 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
             top: -6px;
             /* refer to comment above */
             /* stylelint-disable */
-            ${`#${menuCheckboxId}`}:checked ~ label & {
+            ${`#${navInputCheckboxId}`}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
             }
@@ -60,7 +60,7 @@ const veggieBurgerIconStyles = (menuCheckboxId: string) => {
             bottom: -6px;
             /* refer to comment above */
             /* stylelint-disable */
-            ${`#${menuCheckboxId}`}:checked ~ label & {
+            ${`#${navInputCheckboxId}`}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }
@@ -102,9 +102,9 @@ const veggieBurgerStyles = (display: Display) => css`
 
 export const VeggieBurger: React.FC<{
     display: Display;
-    menuCheckboxId: string;
+    navInputCheckboxId: string;
     id: string;
-}> = ({ display, menuCheckboxId, id }) => {
+}> = ({ display, navInputCheckboxId, id }) => {
     return (
         /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
         // @ts-ignore
@@ -113,14 +113,14 @@ export const VeggieBurger: React.FC<{
             className={veggieBurgerStyles(display)}
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
-            htmlFor={menuCheckboxId}
-            data-link-name="nav2 : veggie-burger"
+            htmlFor={navInputCheckboxId}
+            data-link-name="nav2 : veggie-burger: show"
             // @ts-ignore
             tabindex={0}
             role="button"
         >
             <span className={screenReadable}>Show More</span>
-            <span className={veggieBurgerIconStyles(menuCheckboxId)} />
+            <span className={veggieBurgerIconStyles(navInputCheckboxId)} />
         </label>
         /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
     );

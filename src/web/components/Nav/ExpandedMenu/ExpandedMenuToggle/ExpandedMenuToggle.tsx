@@ -12,7 +12,7 @@ const screenReadable = css`
     ${visuallyHidden};
 `;
 
-const showMoreTextStyles = (menuCheckboxId: string) => css`
+const showMoreTextStyles = (navInputCheckboxId: string) => css`
     display: block;
     height: 100%;
     :after {
@@ -32,7 +32,7 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
         */
         transform: translateY(-3px) rotate(45deg);
         /* stylelint-disable */
-        ${`#${menuCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ label & {
             transform: translateY(1px) rotate(-135deg);
         }
         /* stylelint-enable */
@@ -45,7 +45,7 @@ const showMoreTextStyles = (menuCheckboxId: string) => css`
         transform: translateY(0) rotate(45deg);
         /* refer to comment above */
         /* stylelint-disable */
-        ${`#${menuCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ label & {
             transform: translateY(-2px) rotate(-135deg);
         }
         /* stylelint-enable */
@@ -78,21 +78,21 @@ const openExpandedMenuStyles = (display: Display) => css`
 
 interface Props {
     display: Display;
-    menuCheckboxId: string;
+    navInputCheckboxId: string;
     veggieBurgerId: string;
-    showMoreNavId: string;
+    showMoreButtonId: string;
 }
 
 export const ExpandedMenuToggle = ({
     display,
-    menuCheckboxId,
+    navInputCheckboxId,
     veggieBurgerId,
-    showMoreNavId,
+    showMoreButtonId,
 }: Props) => (
     <>
         <VeggieBurger
             display={display}
-            menuCheckboxId={menuCheckboxId}
+            navInputCheckboxId={navInputCheckboxId}
             key="VeggieBurger"
             id={veggieBurgerId}
         />
@@ -100,18 +100,18 @@ export const ExpandedMenuToggle = ({
         {/*
         // @ts-ignore */}
         <label
-            id={showMoreNavId}
+            id={showMoreButtonId}
             className={openExpandedMenuStyles(display)}
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
-            htmlFor={menuCheckboxId}
-            data-link-name="nav2 : veggie-burger"
+            htmlFor={navInputCheckboxId}
+            data-link-name="nav2 : veggie-burger: show"
             // @ts-ignore
             tabindex={0}
             role="button"
         >
             <span className={screenReadable}>Show</span>
-            <span className={showMoreTextStyles(menuCheckboxId)}>More</span>
+            <span className={showMoreTextStyles(navInputCheckboxId)}>More</span>
         </label>
         {/* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
     </>
