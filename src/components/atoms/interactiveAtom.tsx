@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, createElement as h } from 'react';
-import { css, jsx as styledH } from '@emotion/core';
+import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Format } from '@guardian/types/Format';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
@@ -12,7 +12,7 @@ export interface InteractiveAtomProps {
     format: Format;
 }
 
-const InteractiveAtomStyles = (pillarStyles: PillarStyles) => css`
+const InteractiveAtomStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     margin: 0;
 
     a {
@@ -22,7 +22,8 @@ const InteractiveAtomStyles = (pillarStyles: PillarStyles) => css`
     }
 `;
 
-const InteractiveAtom: FC<InteractiveAtomProps> = ({ html, styles, js, format }: InteractiveAtomProps): ReactElement => {
+const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
+    const { html, styles, js, format } = props;
     const pillarStyles = getPillarStyles(format.pillar);
     const style = h('style', { dangerouslySetInnerHTML: { __html: styles } })
     const script = h('script', { dangerouslySetInnerHTML: { __html: js } })
