@@ -5,10 +5,10 @@ import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import {
-    extractModelAndStyle,
+    extractExperimentModels,
     getActiveExperiments,
-} from '@root/src/amp/components/Experiment';
-import { experimentFullConfig } from '@root/src/amp/experiments';
+} from '@root/src/amp/lib/experiment';
+import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
@@ -62,9 +62,9 @@ test('produces valid AMP doc', async () => {
         },
     };
 
-    const activeExperiments = extractModelAndStyle(
-        getActiveExperiments(experimentFullConfig, config.switches),
-    )[0];
+    const activeExperiments = extractExperimentModels(
+        getActiveExperiments(experimentFullConfig, config.switches)
+    );
 
     const body = (
         <Article
