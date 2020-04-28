@@ -25,7 +25,7 @@ const triangleStyles = (colour: string): SerializedStyles => css`
     padding-right: ${remSpace[1]};
 `;
 
-const triangleSvg = (colour: string) =>
+const triangleSvg = (colour: string): ReactElement =>
     <svg
         css={triangleStyles(colour)}
         viewBox="0 0 10 9"
@@ -41,8 +41,7 @@ const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
         case Design.AdvertisementFeature:
             return triangleSvg(palette.labs[300]);
         default:
-            const colour = getPillarStyles(format.pillar).kicker;
-            return triangleSvg(colour);
+            return triangleSvg(getPillarStyles(format.pillar).kicker);
     }
 }
 
