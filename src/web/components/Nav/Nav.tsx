@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -70,34 +70,46 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 const menuCheckboxId = 'main-menu-toggle';
 
 const mainMenuId = 'main-menu';
+const veggieBurgerId = 'veggie-burger';
+const showMoreNavId = 'nav-show-more-button';
 
 export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
-    // Accessibility to hide Nav when pressing escape key
-    useEffect(() => {
-        const hideNavOnEscape = (e: KeyboardEvent) => {
-            if (e.keyCode === 27) {
-                const menuCheckbox =
-                    document &&
-                    (document.getElementById(
-                        menuCheckboxId,
-                    ) as HTMLInputElement);
-                // Need to check if the menuCheckbox is checked before clicking
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                menuCheckbox &&
-                    menuCheckbox.checked &&
-                    menuCheckbox.click &&
-                    menuCheckbox.click();
-            }
-        };
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        document && document.addEventListener('keydown', hideNavOnEscape);
-        return () =>
-            document &&
-            document.removeEventListener('keydown', hideNavOnEscape);
-    });
-
     return (
         <div className={rowStyles}>
+            {/*
+                IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
+
+                We therefore use JS to make the Nav elements more accessibile. We add a
+                keydown `addEventListener` to both the veggie burger button and the show
+                more menu buttons. We also listen to escape key presses to close the Nav menu.
+                This is not a perfect solution as not all screen readers support JS
+                https://webaim.org/projects/screenreadersurvey8/#javascript
+            */}
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `document.addEventListener('DOMContentLoaded', function () {
+                            // Close hide menu on press enter
+                            var toggleMainMenu = function(e){
+                                // keyCode: 13 => Enter key | keyCode: 32 => Space key
+                                if (e.keyCode === 13 || e.keyCode === 32) {
+                                    e.preventDefault()
+                                    document && document.getElementById('${menuCheckboxId}').click();
+                                }
+                            }
+                            document.getElementById('${showMoreNavId}').addEventListener('keydown', toggleMainMenu)
+                            document.getElementById('${veggieBurgerId}').addEventListener('keydown', toggleMainMenu)
+                            // Accessibility to hide Nav when pressing escape key
+                            var hideNavOnEscape = function(e){
+                                if (e.keyCode === 27) {
+                                    if(document.getElementById('${menuCheckboxId}').checked) {
+                                        document.getElementById('${menuCheckboxId}').click()
+                                    }
+                                }
+                            }
+                            document.addEventListener('keydown', hideNavOnEscape)
+                        })`,
+                }}
+            />
             <nav
                 className={cx(
                     clearFixStyle,
@@ -158,6 +170,8 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                     mainMenuId={mainMenuId}
                     nav={nav}
                     menuCheckboxId={menuCheckboxId}
+                    veggieBurgerId={veggieBurgerId}
+                    showMoreNavId={showMoreNavId}
                 />
             </nav>
             {display === 'immersive' && (

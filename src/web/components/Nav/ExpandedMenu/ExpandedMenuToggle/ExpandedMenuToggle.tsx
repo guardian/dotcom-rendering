@@ -79,55 +79,36 @@ const openExpandedMenuStyles = (display: Display) => css`
 interface Props {
     display: Display;
     menuCheckboxId: string;
+    veggieBurgerId: string;
+    showMoreNavId: string;
 }
 
-export const ExpandedMenuToggle = ({ display, menuCheckboxId }: Props) => (
+export const ExpandedMenuToggle = ({
+    display,
+    menuCheckboxId,
+    veggieBurgerId,
+    showMoreNavId,
+}: Props) => (
     <>
         <VeggieBurger
             display={display}
             menuCheckboxId={menuCheckboxId}
             key="VeggieBurger"
+            id={veggieBurgerId}
         />
-
-        {/*
-            Supporting NoJS and accessibility is hard.
-
-            We have therefore have added JS to help us make the page accessibile.
-            Adding JS to onKeyDown as a fall back to replace onClick input checkbox
-            helps us keep some accessiblity for keyboard only users.
-            This is not a perfect solution as not all screen readers support JS
-            https://webaim.org/projects/screenreadersurvey8/#javascript
-
-            We are using label and `htmlFor` prop to be able to toggle an input checkbox
-            However this means that we are using a label as a button and lose out on
-            browser accessiblity.
-
-            We need Typescript to ignore the abnormal props we have added to the label
-            But in JSX this can be sometimes a little difficult
-            https://github.com/microsoft/TypeScript/issues/27552#issuecomment-427928685
-        */}
-
         {/* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
         {/*
         // @ts-ignore */}
         <label
+            id={showMoreNavId}
             className={openExpandedMenuStyles(display)}
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
             htmlFor={menuCheckboxId}
             data-link-name="nav2 : veggie-burger"
-            onKeyDown={e => {
-                // keyCode: 13 => Enter key
-                // keyCode: 32 => Space key
-                if (e.keyCode === 13 || e.keyCode === 32) {
-                    // @ts-ignore
-                    document && document.getElementById(menuCheckboxId).click();
-                }
-            }}
             // @ts-ignore
             tabindex={0}
             role="button"
-            data-cy="show-more-button"
         >
             <span className={screenReadable}>Show</span>
             <span className={showMoreTextStyles(menuCheckboxId)}>More</span>

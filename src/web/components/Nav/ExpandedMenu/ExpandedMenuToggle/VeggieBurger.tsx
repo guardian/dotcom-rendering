@@ -103,28 +103,21 @@ const veggieBurgerStyles = (display: Display) => css`
 export const VeggieBurger: React.FC<{
     display: Display;
     menuCheckboxId: string;
-}> = ({ display, menuCheckboxId }) => {
+    id: string;
+}> = ({ display, menuCheckboxId, id }) => {
     return (
         /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
         // @ts-ignore
         <label
+            id={id}
             className={veggieBurgerStyles(display)}
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
             htmlFor={menuCheckboxId}
             data-link-name="nav2 : veggie-burger"
-            onKeyDown={e => {
-                // keyCode: 13 => Enter key
-                // keyCode: 32 => Space key
-                if (e.keyCode === 13 || e.keyCode === 32) {
-                    // @ts-ignore
-                    document && document.getElementById(menuCheckboxId).click();
-                }
-            }}
             // @ts-ignore
             tabindex={0}
             role="button"
-            data-cy="veggie-burger"
         >
             <span className={screenReadable}>Show More</span>
             <span className={veggieBurgerIconStyles(menuCheckboxId)} />

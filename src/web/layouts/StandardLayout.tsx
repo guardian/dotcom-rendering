@@ -291,7 +291,6 @@ export const StandardLayout = ({
                     </Section>
 
                     <Section
-                        sectionId="nav-root"
                         showSideBorders={true}
                         borderColour={brandBorder.primary}
                         showTopBorder={false}

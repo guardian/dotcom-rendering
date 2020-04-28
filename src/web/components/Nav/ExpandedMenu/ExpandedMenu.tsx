@@ -92,12 +92,23 @@ export const ExpandedMenu: React.FC<{
     mainMenuId: string;
     nav: NavType;
     menuCheckboxId: string;
-}> = ({ display, mainMenuId, nav, menuCheckboxId }) => {
+    veggieBurgerId: string;
+    showMoreNavId: string;
+}> = ({
+    display,
+    mainMenuId,
+    nav,
+    menuCheckboxId,
+    veggieBurgerId,
+    showMoreNavId,
+}) => {
     return (
         <>
             <ExpandedMenuToggle
                 display={display}
                 menuCheckboxId={menuCheckboxId}
+                veggieBurgerId={veggieBurgerId}
+                showMoreNavId={showMoreNavId}
             />
             <div
                 className={mainMenuStyles(menuCheckboxId)}

@@ -20,7 +20,7 @@ describe('Interactivity', function() {
         it('should display the expanded pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
-            cy.get('[data-cy=show-more-button]').click();
+            cy.get('#nav-show-more-button').click();
             cy.contains('Crosswords').should('be.visible');
         });
 
