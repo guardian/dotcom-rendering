@@ -27,7 +27,7 @@ describe('Interactivity', function() {
         });
 
         // Mobile
-        it('should display the expanded pillar menu when veggies burger is clicked', function() {
+        it('should display the expanded pillar menu when the VeggieBurger is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
