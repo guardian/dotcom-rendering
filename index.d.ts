@@ -575,7 +575,6 @@ type JSXElements = JSX.Element | JSX.Element[];
 
 type IslandType =
     | 'reader-revenue-links-header'
-    | 'nav-root'
     | 'sub-nav-root'
     | 'edition-root'
     | 'most-viewed-right'
