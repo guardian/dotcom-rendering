@@ -96,16 +96,16 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                             if(hasMenuButtonBeenClicked) {
                                 showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                                 veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                                expandedMenuClickableTags.forEach(function($aTag){
-                                    $aTag.setAttribute('tabindex','-1')
+                                expandedMenuClickableTags.forEach(function($selectableElement){
+                                    $selectableElement.setAttribute('tabindex','-1')
                                 })
                                 hasMenuButtonBeenClicked = false
                             } else {
                                 showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                                 veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                                 console.log(expandedMenuClickableTags)
-                                expandedMenuClickableTags.forEach(function($aTag){
-                                    $aTag.setAttribute('tabindex','0')
+                                expandedMenuClickableTags.forEach(function($selectableElement){
+                                    $selectableElement.setAttribute('tabindex','0')
                                 })
                                 hasMenuButtonBeenClicked = true
                             }
