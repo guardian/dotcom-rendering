@@ -12,6 +12,7 @@ export const Flex = ({
     direction = 'row',
     justify = 'space-between',
 }: Props) => (
+    /* eslint-disable property-no-vendor-prefix */
     <div
         className={css`
             display: flex;
@@ -19,11 +20,10 @@ export const Flex = ({
             justify-content: ${justify};
 
             /* Fixes IE 10/11 bug that collapses this container by default: */
-            /* eslint-disable property-no-vendor-prefix */
             -ms-flex-positive: 1;
-            /* eslint-enable property-no-vendor-prefix */
         `}
     >
         {children}
     </div>
+    /* eslint-enable property-no-vendor-prefix */
 );
