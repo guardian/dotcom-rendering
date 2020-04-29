@@ -75,6 +75,7 @@ export const CollapseColumnButton: React.FC<{
     <label
         id={collapseColumnInputId}
         className={cx(
+            'selectableMenuItem',
             collapseColumnButton,
             showColumnLinksStyle(columnInputId),
             hideDesktop,
@@ -84,7 +85,7 @@ export const CollapseColumnButton: React.FC<{
         aria-haspopup="true"
         aria-controls={ariaControls}
         // @ts-ignore
-        tabIndex={0}
+        tabIndex={-1}
         role="menuitem"
         data-cy={`column-collapse-${title}`}
     >

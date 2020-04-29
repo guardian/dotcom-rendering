@@ -27,7 +27,7 @@ const mainMenuStyles = css`
         to support NoJS
     */
     /* stylelint-disable */
-    ${`#${navInputCheckboxId}`}:checked ~ & {
+    ${`#${navInputCheckboxId}`}:checked ~ div & {
         ${from.desktop} {
             display: block;
             overflow: visible;
@@ -54,7 +54,7 @@ const mainMenuStyles = css`
 
     /* refer to comment above */
     /* stylelint-disable */
-    ${`#${navInputCheckboxId}`}:checked ~ & {
+    ${`#${navInputCheckboxId}`}:checked ~ div & {
         ${until.desktop} {
             transform: translateX(
                 0%
@@ -93,7 +93,7 @@ export const ExpandedMenu: React.FC<{
     nav: NavType;
 }> = ({ display, nav }) => {
     return (
-        <>
+        <div id="expanded-menu">
             <ExpandedMenuToggle display={display} />
             <div
                 className={mainMenuStyles}
@@ -102,6 +102,6 @@ export const ExpandedMenu: React.FC<{
             >
                 <Columns nav={nav} />
             </div>
-        </>
+        </div>
     );
 };

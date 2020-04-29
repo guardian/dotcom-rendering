@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -99,7 +99,7 @@ const brandExtensionLink = css`
 export const Columns: React.FC<{
     nav: NavType;
 }> = ({ nav }) => (
-    <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
+    <ul className={ColumnsStyle} role="menubar">
         {nav.pillars.map((column, i) => (
             <Column
                 column={column}
@@ -121,11 +121,15 @@ export const Columns: React.FC<{
                         key={brandExtension.title}
                     >
                         <a
-                            className={brandExtensionLink}
+                            className={cx(
+                                'selectableMenuItem',
+                                brandExtensionLink,
+                            )}
                             href={brandExtension.url}
                             key={brandExtension.title}
                             role="menuitem"
                             data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+                            tabIndex={-1}
                         >
                             {brandExtension.longTitle}
                         </a>

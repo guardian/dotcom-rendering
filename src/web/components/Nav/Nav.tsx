@@ -83,20 +83,28 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 dangerouslySetInnerHTML={{
                     __html: `document.addEventListener('DOMContentLoaded', function(){
                         // Used to toggle data-link-name on label buttons
-                        var dataLinkNameShow = true
+                        var hasMenuButtonBeenClicked = false
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var showMoreButton = document.getElementById('${showMoreButtonId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
+                        var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
 
                         navInputCheckbox.addEventListener('click',function(){
-                            if(dataLinkNameShow) {
-                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                                dataLinkNameShow = false
-                            } else {
+                            if(hasMenuButtonBeenClicked) {
                                 showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                                 veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                                dataLinkNameShow = true
+                                expandedMenuClickableTags.forEach(function($aTag){
+                                    $aTag.setAttribute('tabindex','-1')
+                                })
+                                hasMenuButtonBeenClicked = false
+                            } else {
+                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                                console.log(expandedMenuClickableTags)
+                                expandedMenuClickableTags.forEach(function($aTag){
+                                    $aTag.setAttribute('tabindex','0')
+                                })
+                                hasMenuButtonBeenClicked = true
                             }
                         })
                         // Close hide menu on press enter

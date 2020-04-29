@@ -98,10 +98,11 @@ const ColumnLink: React.FC<{
         role="none"
     >
         <a
-            className={cx(columnLinkTitle)}
+            className={cx('selectableMenuItem', columnLinkTitle)}
             href={link.url}
             role="menuitem"
             data-link-name={`nav2 : secondary : ${link.longTitle}`}
+            tabIndex={-1}
         >
             {link.longTitle}
         </a>

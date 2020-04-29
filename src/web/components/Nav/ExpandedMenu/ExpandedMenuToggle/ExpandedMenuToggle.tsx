@@ -33,7 +33,7 @@ const showMoreTextStyles = css`
         */
         transform: translateY(-3px) rotate(45deg);
         /* stylelint-disable */
-        ${`#${navInputCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ div label & {
             transform: translateY(1px) rotate(-135deg);
         }
         /* stylelint-enable */
@@ -46,7 +46,7 @@ const showMoreTextStyles = css`
         transform: translateY(0) rotate(45deg);
         /* refer to comment above */
         /* stylelint-disable */
-        ${`#${navInputCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ div label & {
             transform: translateY(-2px) rotate(-135deg);
         }
         /* stylelint-enable */
