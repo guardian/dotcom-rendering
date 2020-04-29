@@ -66,6 +66,7 @@ const captionHeadingStyles = css`
     ${headline.xxxsmall()}
     color: ${neutral[86]};
     margin: 0 0 ${remSpace[3]};
+    display: inline;
 `;
 
 const anchorStyles = css`
@@ -77,7 +78,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
     const children = Array.from(node.childNodes).map(captionElement(format));
     switch (node.nodeName) {
         case 'STRONG':
-            return <strong css={captionHeadingStyles} key={key}>{children}</strong>;
+            return <h2 css={captionHeadingStyles} key={key}>{children}</h2>;
         case 'BR':
             return null;
         case 'EM':
@@ -120,7 +121,7 @@ const styles = css`
 const mediaStyles = css`
     color: ${neutral[86]};
 
-    strong + span {
+    h2 + span {
         display: block;
         ${textSans.xsmall()}
         margin: ${remSpace[1]} 0;
