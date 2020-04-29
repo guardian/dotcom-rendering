@@ -9,22 +9,16 @@ import express, {
 import compression from 'compression';
 import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
-import {
-    BufferedTransport,
-    CompactProtocol
-} from '@creditkarma/thrift-server-core'
 import fetch from 'node-fetch';
 
-import { Response as CapiResponse } from 'mapiThriftModels/Response';
-import { Content as MapiContent } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
-import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { response } from './liveblogResponse';
+import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 
 
 // ----- Setup ----- //
@@ -47,9 +41,7 @@ async function serveArticlePost(
     next: NextFunction,
 ): Promise<void> {
     try {
-        const transport = new BufferedTransport(body);
-        const protocol = new CompactProtocol(transport);
-        const content: MapiContent = MapiContent.read(protocol);
+        const content = mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
         const { resources, element } = Page({ content, imageSalt, getAssetLocation });
@@ -75,11 +67,9 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
         const imageSalt = await getConfigValue<string>('apis.img.salt');
         const capiResponse = await fetch(capiEndpoint(articleId, key));
         const buffer = await capiResponse.buffer();
-        const transport = new BufferedTransport(buffer);
-        const protocol = new CompactProtocol(transport);
-
+        
         if (capiResponse.status === 200) {
-            const response: CapiResponse = CapiResponse.read(protocol);
+            const response = capiDecoder(buffer);
 
             if (response.content) {
                 getContent(capiResponse.status, articleId, response.content).either(
@@ -108,7 +98,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                 )
             }
         } else {
-            const response: ErrorResponse = ErrorResponse.read(protocol);
+            const response = errorDecoder(buffer);
             logger.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message} for resource ${articleId}`);
             res.sendStatus(500);
         }
