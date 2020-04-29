@@ -35,7 +35,6 @@ const veggieBurgerIconStyles = () => {
         ${`#${navInputCheckboxId}`}:checked ~ label & {
             background-color: transparent;
         }
-        /* stylelint-enable */
 
         top: 50%;
         right: 0;
