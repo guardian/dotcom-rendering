@@ -23,7 +23,9 @@ describe('Interactivity', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=veggie-burger]').click();
-            cy.get('[data-cy=expanded-menu]').should('be.visible'); // TODO: should select menu item when AD z-index fixed
+            cy.get('[data-cy=expanded-menu]').should('be.visible');
+            // TODO: should also include assertion to select menu item when AD z-index fixed
+            // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
         });
 
         // Mobile
