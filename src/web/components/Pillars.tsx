@@ -6,6 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
+import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
 
@@ -59,7 +60,7 @@ const pillarsStyles = (display: Display) => css`
     }
 `;
 
-const showMenuUnderlineStyles = (navInputCheckboxId: string) => css`
+const showMenuUnderlineStyles = css`
     /*
         IMPORTANT NOTE:
         we need to specify the adjacent path to the a (current) tag
@@ -224,14 +225,14 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 
 export const Pillars: React.FC<{
     display: Display;
-    navInputCheckboxId?: string;
+    isTopNav?: boolean;
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
     dataLinkName: string;
 }> = ({
     display,
-    navInputCheckboxId,
+    isTopNav,
     pillars,
     pillar,
     showLastPillarDivider = true,
@@ -244,10 +245,7 @@ export const Pillars: React.FC<{
                     className={cx(
                         linkStyle(display),
                         pillarUnderline[p.pillar],
-                        // if navInputCheckboxId we assume that the pillars are being rendered in Nav
-                        // the pillars need to display theme colours when the drop down is selected
-                        navInputCheckboxId &&
-                            showMenuUnderlineStyles(navInputCheckboxId),
+                        isTopNav && showMenuUnderlineStyles,
                         {
                             [pillarDivider]:
                                 showLastPillarDivider ||

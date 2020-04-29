@@ -5,11 +5,13 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
+import { navInputCheckboxId, veggieBurgerId } from '../../config';
+
 const screenReadable = css`
     ${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = (navInputCheckboxId: string) => {
+const veggieBurgerIconStyles = () => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -102,14 +104,12 @@ const veggieBurgerStyles = (display: Display) => css`
 
 export const VeggieBurger: React.FC<{
     display: Display;
-    navInputCheckboxId: string;
-    id: string;
-}> = ({ display, navInputCheckboxId, id }) => {
+}> = ({ display }) => {
     return (
         /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
         // @ts-ignore
         <label
-            id={id}
+            id={veggieBurgerId}
             className={veggieBurgerStyles(display)}
             aria-label="Toggle main menu"
             key="OpenExpandedMenuButton"
@@ -121,7 +121,7 @@ export const VeggieBurger: React.FC<{
             data-cy="veggie-burger"
         >
             <span className={screenReadable}>Show More</span>
-            <span className={veggieBurgerIconStyles(navInputCheckboxId)} />
+            <span className={veggieBurgerIconStyles()} />
         </label>
         /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
     );

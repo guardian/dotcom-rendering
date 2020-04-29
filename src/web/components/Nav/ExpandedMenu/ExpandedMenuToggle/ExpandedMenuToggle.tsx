@@ -7,12 +7,13 @@ import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
 import { VeggieBurger } from './VeggieBurger';
+import { navInputCheckboxId, showMoreButtonId } from '../../config';
 
 const screenReadable = css`
     ${visuallyHidden};
 `;
 
-const showMoreTextStyles = (navInputCheckboxId: string) => css`
+const showMoreTextStyles = css`
     display: block;
     height: 100%;
     :after {
@@ -76,26 +77,9 @@ const openExpandedMenuStyles = (display: Display) => css`
     }
 `;
 
-interface Props {
-    display: Display;
-    navInputCheckboxId: string;
-    veggieBurgerId: string;
-    showMoreButtonId: string;
-}
-
-export const ExpandedMenuToggle = ({
-    display,
-    navInputCheckboxId,
-    veggieBurgerId,
-    showMoreButtonId,
-}: Props) => (
+export const ExpandedMenuToggle = ({ display }: { display: Display }) => (
     <>
-        <VeggieBurger
-            display={display}
-            navInputCheckboxId={navInputCheckboxId}
-            key="VeggieBurger"
-            id={veggieBurgerId}
-        />
+        <VeggieBurger display={display} key="VeggieBurger" />
         {/* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
         {/*
         // @ts-ignore */}
@@ -112,7 +96,7 @@ export const ExpandedMenuToggle = ({
             data-cy="nav-show-more-button"
         >
             <span className={screenReadable}>Show</span>
-            <span className={showMoreTextStyles(navInputCheckboxId)}>More</span>
+            <span className={showMoreTextStyles}>More</span>
         </label>
         {/* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
     </>

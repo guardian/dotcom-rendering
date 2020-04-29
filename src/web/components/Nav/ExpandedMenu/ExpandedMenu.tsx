@@ -7,8 +7,9 @@ import { from, until } from '@guardian/src-foundations/mq';
 
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
+import { navInputCheckboxId } from '../config';
 
-const mainMenuStyles = (navInputCheckboxId: string) => css`
+const mainMenuStyles = css`
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -90,26 +91,12 @@ const mainMenuStyles = (navInputCheckboxId: string) => css`
 export const ExpandedMenu: React.FC<{
     display: Display;
     nav: NavType;
-    navInputCheckboxId: string;
-    showMoreButtonId: string;
-    veggieBurgerId: string;
-}> = ({
-    display,
-    nav,
-    navInputCheckboxId,
-    showMoreButtonId,
-    veggieBurgerId,
-}) => {
+}> = ({ display, nav }) => {
     return (
         <>
-            <ExpandedMenuToggle
-                display={display}
-                navInputCheckboxId={navInputCheckboxId}
-                veggieBurgerId={veggieBurgerId}
-                showMoreButtonId={showMoreButtonId}
-            />
+            <ExpandedMenuToggle display={display} />
             <div
-                className={mainMenuStyles(navInputCheckboxId)}
+                className={mainMenuStyles}
                 data-testid="expanded-menu"
                 data-cy="expanded-menu"
             >

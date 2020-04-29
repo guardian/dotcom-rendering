@@ -14,6 +14,7 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
+import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
@@ -65,12 +66,6 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
         {children}
     </div>
 );
-
-// The checkbox ID is used as a CSS selector to enable NoJS support
-const navInputCheckboxId = 'top-nav-input-checkbox';
-
-const showMoreButtonId = 'show-more-button';
-const veggieBurgerId = 'veggie-burger';
 
 export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
     return (
@@ -178,18 +173,12 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 />
                 <Pillars
                     display={display}
-                    navInputCheckboxId={navInputCheckboxId}
                     pillars={nav.pillars}
                     pillar={pillar}
                     dataLinkName="nav2"
+                    isTopNav={true}
                 />
-                <ExpandedMenu
-                    display={display}
-                    showMoreButtonId={showMoreButtonId}
-                    nav={nav}
-                    navInputCheckboxId={navInputCheckboxId}
-                    veggieBurgerId={veggieBurgerId}
-                />
+                <ExpandedMenu nav={nav} display={display} />
             </nav>
             {display === 'immersive' && (
                 <PositionRoundel>
