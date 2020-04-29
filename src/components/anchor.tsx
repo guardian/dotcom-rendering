@@ -43,7 +43,7 @@ const colour = (format: Format): SerializedStyles => {
 }
 
 const Anchor: FC<Props> = ({ format, children, href, className }: Props) =>
-    <a css={[styles, className, colour(format)]} href={href}>
+    <a css={[styles, colour(format), className]} href={href}>
         {children}
     </a>
 
