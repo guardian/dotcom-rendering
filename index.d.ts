@@ -141,7 +141,7 @@ interface NavType {
     readerRevenueLinks: ReaderRevenuePositions;
 }
 
-interface NavBrowserType {
+interface SubNavBrowserType {
     currentNavLink: string;
     subNavSections?: SubNavType;
 }
@@ -562,7 +562,7 @@ interface DCRBrowserDocumentData {
     page: string;
     site: string;
     CAPI: CAPIBrowserType;
-    NAV: NavBrowserType;
+    NAV: SubNavBrowserType;
     GA: GADataType;
     linkedData: object;
 }
