@@ -76,7 +76,7 @@ describe('Interactivity', function() {
             cy.get('[data-cy=veggie-burger]').click();
             cy.contains('Crosswords');
             cy.contains('Columnists').should('not.be.visible');
-            cy.contains('[data-cy=column-collapse-Opinion').click();
+            cy.get('[data-cy=column-collapse-Opinion]').click();
             cy.contains('Columnists').should('be.visible');
         });
     });
