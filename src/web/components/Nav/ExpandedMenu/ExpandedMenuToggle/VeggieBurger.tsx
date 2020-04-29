@@ -117,7 +117,7 @@ export const VeggieBurger: React.FC<{
             htmlFor={navInputCheckboxId}
             data-link-name="nav2 : veggie-burger: show"
             // @ts-ignore
-            tabindex={0}
+            tabIndex={0}
             role="button"
             data-cy="veggie-burger"
         >
