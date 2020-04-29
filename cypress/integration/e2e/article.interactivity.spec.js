@@ -17,23 +17,6 @@ describe('Interactivity', function() {
             cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
 
-        // Desktop
-        it('should display the expanded pillar menu when More is clicked', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Crosswords').should('not.be.visible');
-            cy.get('[data-cy=veggie-burger]').click();
-            cy.get('[data-cy=expanded-menu]').should('be.visible'); // TODO: should select menu item when AD z-index fixed
-        });
-
-        // Mobile
-        it('should display the expanded pillar menu when veggies burger is clicked', function() {
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Crosswords').should('not.be.visible');
-            cy.get('[data-cy=nav-show-more-button]').click();
-            cy.contains('Crosswords').should('be.visible');
-        });
-
         it('should display the share count for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=share-counts]').should('exist');
@@ -71,6 +54,30 @@ describe('Interactivity', function() {
             cy.get('header')
                 .contains(READER_REVENUE_TITLE_TEXT)
                 .should('be.visible');
+        });
+    });
+
+    describe('for Pillar menu on Desktop', function() {
+        it('should display the expanded pillar menu when More is clicked', function() {
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.contains('Crosswords').should('not.be.visible');
+            cy.get('[data-cy=nav-show-more-button]').click();
+            cy.get('[data-cy=expanded-menu]').should('be.visible');
+            // TODO: should also include assertion to select menu item when AD z-index fixed
+            // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
+        });
+    });
+
+    describe('for Pillar menu on Mobile', function() {
+        it('should display the expanded pillar menu when the VeggieBurger is clicked', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.contains('Crosswords').should('not.be.visible');
+            cy.get('[data-cy=veggie-burger]').click();
+            cy.contains('Crosswords');
+            cy.contains('Columnists').should('not.be.visible');
+            cy.contains('[data-cy=column-collapse-Opinion').click();
+            cy.contains('Columnists').should('be.visible');
         });
     });
 });
