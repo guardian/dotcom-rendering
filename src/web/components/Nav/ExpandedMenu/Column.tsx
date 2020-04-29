@@ -141,9 +141,11 @@ const pillarColumnLinks = css`
 `;
 
 const hideStyles = (columnInputId: string) => css`
-    /* stylelint-disable-next-line selector-type-no-unknown */
-    ${`#${columnInputId}`}:not(:checked) ~ & {
-        display: none;
+    ${until.desktop} {
+        /* stylelint-disable-next-line selector-type-no-unknown */
+        ${`#${columnInputId}`}:not(:checked) ~ & {
+            display: none;
+        }
     }
 `;
 
