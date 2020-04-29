@@ -59,12 +59,11 @@ const veggieBurgerIconStyles = () => {
             ${beforeAfterStyles};
             bottom: -6px;
             /* refer to comment above */
-            /* stylelint-disable */
+            /* stylelint-disable-next-line selector-type-no-unknown */
             ${`#${navInputCheckboxId}`}:checked ~ label & {
                 bottom: 0;
                 transform: rotate(45deg);
             }
-            /* stylelint-enable */
         }
     `;
 };
