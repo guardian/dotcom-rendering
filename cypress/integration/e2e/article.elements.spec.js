@@ -42,7 +42,7 @@ describe('Elements', function() {
 
         it('should render the instagram embed', function() {
             cy.visit(
-                'Article?url=https://www.theguardian.com/lifeandstyle/2020/apr/28/caroline-calloway-survived-being-cancelled',
+                'Article?url=https://www.theguardian.com/media/2018/aug/29/flat-tummy-instagram-women-appetite-suppressant-lollipops',
             );
 
             getIframeBody().contains('View More on Instagram');
