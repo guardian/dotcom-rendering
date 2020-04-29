@@ -73,11 +73,21 @@ const linkStyle = css`
         text-decoration: underline;
     }
 `;
+
 const selected = css`
     font-weight: 700;
 `;
+
+const spaceBetween = css`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const showMoreStyle = css`
     ${fontStyle};
+
+    padding-left: 10px;
+    padding-right: 10px;
 
     cursor: pointer;
     border: none;
@@ -152,7 +162,12 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
     const expandSubNav = !showMore || isExpanded;
 
     return (
-        <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
+        <div
+            className={cx(
+                { [wrapperCollapsed]: collapseWrapper },
+                spaceBetween,
+            )}
+        >
             <ul
                 ref={ulRef}
                 className={cx({
