@@ -67,7 +67,7 @@ const showMenuUnderlineStyles = css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    /* stylelint-disable */
+    /* stylelint-disable-next-line selector-type-no-unknown */
     ${`#${navInputCheckboxId}`}:checked ~ ul li & {
         ${from.desktop} {
             :before {
@@ -83,7 +83,6 @@ const showMenuUnderlineStyles = css`
             transform: translateY(4px);
         }
     }
-    /* stylelint-enable */
 `;
 
 const pillarStyle = css`
