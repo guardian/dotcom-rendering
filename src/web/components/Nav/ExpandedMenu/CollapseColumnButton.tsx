@@ -70,6 +70,7 @@ export const CollapseColumnButton: React.FC<{
         aria-haspopup="true"
         aria-controls={ariaControls}
         role="menuitem"
+        data-cy={`column-collapse-${title}`}
     >
         {title}
     </button>
