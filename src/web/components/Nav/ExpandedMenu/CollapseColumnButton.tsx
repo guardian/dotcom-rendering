@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
 const hideDesktop = css`
@@ -11,12 +11,22 @@ const hideDesktop = css`
     }
 `;
 
-const showColumnLinksStyle = css`
-    :before {
-        margin-top: 8px;
-        transform: rotate(-135deg);
+const showColumnLinksStyle = (columnInputId: string) => css`
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the fact we use ~
+        to support NoJS
+    */
+    /* stylelint-disable */
+    ${`#${columnInputId}`}:checked ~ & {
+        :before {
+            margin-top: 8px;
+            transform: rotate(-135deg);
+        }
     }
 `;
+
 const collapseColumnButton = css`
     background-color: transparent;
     border: 0;
@@ -48,29 +58,36 @@ const collapseColumnButton = css`
         transform: rotate(45deg);
         width: 10px;
     }
+    :hover,
+    :focus {
+        color: ${brandAlt[400]};
+    }
 `;
 
 export const CollapseColumnButton: React.FC<{
     title: string;
-    showColumnLinks: boolean;
-    toggleColumnLinks: () => void;
+    columnInputId: string;
+    collapseColumnInputId: string;
     ariaControls: string;
-}> = ({ title, showColumnLinks, toggleColumnLinks, ariaControls }) => (
-    <button
+}> = ({ title, columnInputId, collapseColumnInputId, ariaControls }) => (
+    /* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
+    // @ts-ignore
+    <label
+        id={collapseColumnInputId}
         className={cx(
             collapseColumnButton,
-            {
-                [showColumnLinksStyle]: showColumnLinks,
-            },
+            showColumnLinksStyle(columnInputId),
             hideDesktop,
         )}
-        onClick={() => {
-            toggleColumnLinks();
-        }}
+        aria-label={`Toggle ${title}`}
+        htmlFor={columnInputId}
         aria-haspopup="true"
         aria-controls={ariaControls}
+        // @ts-ignore
+        tabIndex={0}
         role="menuitem"
     >
         {title}
-    </button>
+    </label>
+    /* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 );

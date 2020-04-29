@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
+
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars
@@ -137,27 +140,26 @@ const pillarColumnLinks = css`
     }
 `;
 
-const hideStyles = css`
-    display: none;
+const hideStyles = (columnInputId: string) => css`
+    ${`#${columnInputId}`}:not(:checked) ~ & {
+        display: none;
+    }
 `;
 
 const ColumnLinks: React.FC<{
     column: LinkType;
-    showColumnLinks: boolean;
+    columnInputId?: string;
     id: string;
     index?: number;
-}> = ({ column, showColumnLinks, id, index }) => {
+}> = ({ column, columnInputId, id, index }) => {
     return (
         <ul
             className={cx(
                 columnLinks,
                 { [firstColumnLinks]: index === 0 },
                 { [pillarColumnLinks]: !!column.pillar },
-                {
-                    [hideStyles]: !showColumnLinks,
-                },
+                columnInputId && hideStyles(columnInputId),
             )}
-            aria-expanded={showColumnLinks}
             role="menu"
             id={id}
         >
@@ -261,7 +263,7 @@ export const More: React.FC<{
             className={cx(columnStyle, pillarDivider, pillarDividerExtended)}
             role="none"
         >
-            <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
+            <ColumnLinks column={more} id={subNavId} />
         </li>
     );
 };
@@ -273,21 +275,63 @@ export const Column = ({
     column: PillarType;
     index: number;
 }) => {
-    const [showColumnLinks, setShowColumnLinks] = useState(false);
-    const subNavId = `${column.title.toLowerCase()}Links`;
+    // As the elements are dynamic we need to specify the IDs here
+    const columnInputId = `${column.title}-checkbox-input`;
+    const collapseColumnInputId = `${column.title}-button`;
+
     return (
         <li className={cx(columnStyle, pillarDivider)} role="none">
+            {/*
+                IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
+
+                We therefore use JS to make the Nav elements more accessibile. We add a
+                keydown `addEventListener` to toggle the column drop down.
+                This is not a perfect solution as not all screen readers support JS
+                https://webaim.org/projects/screenreadersurvey8/#javascript
+            */}
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `document.addEventListener('DOMContentLoaded', function(){
+                        document.getElementById('${collapseColumnInputId}').addEventListener('keydown', function(e){
+                            // keyCode: 13 => Enter key | keyCode: 32 => Space key
+                            if (e.keyCode === 13 || e.keyCode === 32) {
+                                e.preventDefault()
+                                document.getElementById('${columnInputId}').click();
+                            }
+                        })
+                    })`,
+                }}
+            />
+
+            {/*
+                IMPORTANT NOTE:
+                It is important to have the input as the 1st sibling for NoJS to work
+                as we use ~ to apply certain styles on checkbox checked and ~ can only
+                apply to styles with elements that are preceded
+            */}
+            <input
+                type="checkbox"
+                className={css`
+                    ${visuallyHidden};
+                `}
+                id={columnInputId}
+                // aria-controls={ariaControls}
+                tabIndex={-1}
+                key="OpenExpandedMenuCheckbox"
+                role="menuitemcheckbox"
+                aria-checked="false"
+            />
             <CollapseColumnButton
+                collapseColumnInputId={collapseColumnInputId}
                 title={column.title}
-                showColumnLinks={showColumnLinks}
-                toggleColumnLinks={() => setShowColumnLinks(!showColumnLinks)}
-                ariaControls={subNavId}
+                columnInputId={columnInputId}
+                ariaControls={`${column.title.toLowerCase()}Links`}
             />
 
             <ColumnLinks
                 column={column}
-                showColumnLinks={showColumnLinks}
-                id={subNavId}
+                columnInputId={columnInputId}
+                id={`${column.title.toLowerCase()}Links`}
                 index={index}
             />
         </li>
