@@ -76,6 +76,9 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 We therefore use JS to make the Nav elements more accessibile. We add a
                 keydown `addEventListener` to both the veggie burger button and the show
                 more menu buttons. We also listen to escape key presses to close the Nav menu.
+                We also toggle the tabindex of clickable items to make sure that even when we
+                are displaying the menu on mobile and tablet, that it doesnt get highlighted
+                when tabbing though the page.
                 This is not a perfect solution as not all screen readers support JS
                 https://webaim.org/projects/screenreadersurvey8/#javascript
             */}
