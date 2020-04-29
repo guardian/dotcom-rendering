@@ -100,6 +100,10 @@ const veggieBurgerStyles = (display: Display) => css`
     ${from.desktop} {
         display: none;
     }
+
+    :focus {
+        outline: 5px auto -webkit-focus-ring-color;
+    }
 `;
 
 export const VeggieBurger: React.FC<{
