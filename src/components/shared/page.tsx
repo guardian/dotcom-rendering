@@ -175,7 +175,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     const mediaScript = getAssetLocation('media.js');
     const interactiveScript = getAssetLocation('interactive.js');
 
-    if (item.design === Design.Interactive) {
+    if (item.design === Design.Interactive && item.display === Display.Immersive) {
         const interactiveBody = partition(item.body).oks;
         const interactiveContent = renderAllWithoutStyles(format, interactiveBody);
 
@@ -241,7 +241,8 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         item.design === Design.Feature ||
         item.design === Design.Analysis ||
         item.design === Design.Review ||
-        item.design === Design.Article
+        item.design === Design.Article ||
+        item.design === Design.Interactive
     ) {
         const body = partition(item.body).oks;
         const content = insertAdPlaceholders(renderAll(imageMappings)(format, body));

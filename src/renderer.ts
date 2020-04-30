@@ -23,6 +23,7 @@ import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import { AtomType } from 'mapiThriftModels';
 import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
+import { Design } from '@guardian/types/Format';
 
 // ----- Renderer ----- //
 
@@ -410,7 +411,13 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                     return null;
                 }
 
-                return h(InteractiveAtom, { html, styles, js, format })
+                const atom = h(InteractiveAtom, { html, styles, js, format });
+
+                if (format.design !== Design.Interactive) {
+                    return h('iframe', null, atom);
+                } else {
+                    return atom;
+                }
             }
 
             return null;

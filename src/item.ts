@@ -485,7 +485,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
 
     // These checks aim for parity with the CAPI Scala client:
     // https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
-    if (isImmersive(content) && isInteractive(content)) {
+    if (isInteractive(content)) {
         return {
             design: Design.Interactive,
             ...itemFieldsWithBody(docParser, content),
