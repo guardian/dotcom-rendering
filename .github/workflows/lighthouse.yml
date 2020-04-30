@@ -12,7 +12,7 @@ jobs:
           node-version: 10.15.3
       - name: install, build
         run: |
-          make build
+          yarn && yarn makeBuild
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.3.x
