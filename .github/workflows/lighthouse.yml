@@ -10,9 +10,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.15.3
-      - name: npm install, build
+      - name: install, build
         run: |
-          npm install
           make build
       - name: run Lighthouse CI
         run: |
