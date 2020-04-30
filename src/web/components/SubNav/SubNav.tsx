@@ -152,7 +152,10 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
     const expandSubNav = !showMore || isExpanded;
 
     return (
-        <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
+        <div
+            className={cx({ [wrapperCollapsed]: collapseWrapper })}
+            data-cy="sub-nav"
+        >
             <ul
                 ref={ulRef}
                 className={cx({

@@ -96,6 +96,7 @@ export const ExpandedMenu: React.FC<{
         <div id="expanded-menu">
             <ExpandedMenuToggle display={display} />
             <div
+                id="expanded-menu"
                 className={mainMenuStyles}
                 data-testid="expanded-menu"
                 data-cy="expanded-menu"

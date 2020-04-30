@@ -99,7 +99,7 @@ const brandExtensionLink = css`
 export const Columns: React.FC<{
     nav: NavType;
 }> = ({ nav }) => (
-    <ul className={ColumnsStyle} role="menubar">
+    <ul className={ColumnsStyle} role="menubar" data-cy="nav-menu-columns">
         {nav.pillars.map((column, i) => (
             <Column
                 column={column}

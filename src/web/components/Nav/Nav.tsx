@@ -86,50 +86,63 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 dangerouslySetInnerHTML={{
                     __html: `document.addEventListener('DOMContentLoaded', function(){
                         // Used to toggle data-link-name on label buttons
-                        var hasMenuButtonBeenClicked = false
+                        var isMenuOpen = false
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var showMoreButton = document.getElementById('${showMoreButtonId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
 
+                        // We assume News is the 1st column
+                        var firstColLabel = document.getElementById('News-button')
+                        var firstColLink = document.querySelectorAll('#newsLinks > li:first-of-type > a')[0]
+                        var lastNavLink = document.querySelectorAll('#moreLinks > li:last-of-type > a ')[0]
+
+                        var focusOnFirstNavElement = function(){
+                          // need to focus on first element in list, firstColLabel is not viewable on desktop
+                          if(window.getComputedStyle(firstColLabel).display === 'none'){
+                            firstColLink.focus()
+                          } else {
+                            firstColLabel.focus()
+                          }
+                        }
                         navInputCheckbox.addEventListener('click',function(){
-                            if(hasMenuButtonBeenClicked) {
-                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                                expandedMenuClickableTags.forEach(function($selectableElement){
-                                    $selectableElement.setAttribute('tabindex','-1')
-                                })
-                                hasMenuButtonBeenClicked = false
-                            } else {
-                                showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                                veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                                console.log(expandedMenuClickableTags)
-                                expandedMenuClickableTags.forEach(function($selectableElement){
-                                    $selectableElement.setAttribute('tabindex','0')
-                                })
-                                hasMenuButtonBeenClicked = true
-                            }
+                          if(isMenuOpen) {
+                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
+                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','-1')
+                            })
+                            isMenuOpen = false
+                          } else {
+                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','0')
+                            })
+                            focusOnFirstNavElement()
+                            isMenuOpen = true
+                          }
                         })
                         // Close hide menu on press enter
                         var toggleMainMenu = function(e){
-                            // keyCode: 13 => Enter key | keyCode: 32 => Space key
-                            if (e.keyCode === 13 || e.keyCode === 32) {
-                                e.preventDefault()
-                                navInputCheckbox.click();
-                            }
+                          // keyCode: 13 => Enter key | keyCode: 32 => Space key
+                          if (e.keyCode === 13 || e.keyCode === 32) {
+                            e.preventDefault()
+                            navInputCheckbox.click();
+                          }
                         }
                         showMoreButton.addEventListener('keydown', toggleMainMenu)
                         veggieBurger.addEventListener('keydown', toggleMainMenu)
                         // Accessibility to hide Nav when pressing escape key
-                        var hideNavOnEscape = function(e){
-                            if (e.keyCode === 27) {
-                                if(navInputCheckbox.checked) {
-                                    navInputCheckbox.click()
-                                }
+                        document.addEventListener('keydown', function(e){
+                          // keyCode: 27 => esc
+                          if (e.keyCode === 27) {
+                            if(navInputCheckbox.checked) {
+                              navInputCheckbox.click()
                             }
-                        }
-                        document.addEventListener('keydown', hideNavOnEscape)
-                    })`,
+                          }
+                        })
+                      })`,
                 }}
             />
             <nav

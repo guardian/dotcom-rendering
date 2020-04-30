@@ -82,4 +82,46 @@ describe('Interactivity', function() {
             cy.contains('Columnists').should('be.visible');
         });
     });
+
+    describe('accessibility mobile', function() {
+        it('should not focus on menu items if menu not open', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.get('[data-cy=veggie-burger]')
+                .focus()
+                .tab();
+            cy.get('[data-cy=sub-nav] a')
+                .first()
+                .should('have.focus');
+        });
+
+        it('should focus on menu items if menu open', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.get('[data-cy=veggie-burger]').click();
+            cy.get('[data-cy=column-collapse-News]').should('have.focus');
+        });
+
+        it('should not focus on hidden sub menu items', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.get('[data-cy=veggie-burger]').click();
+            cy.get('[data-cy=column-collapse-News]').should('have.focus');
+            cy.get('[data-cy=column-collapse-sublink-UK]').should(
+                'not.have.focus',
+            );
+        });
+
+        it('should focus on visible sub menu items', function() {
+            cy.viewport('iphone-x');
+            cy.visit(`/Article?url=${articleUrl}`);
+            cy.get('[data-cy=veggie-burger]').click();
+            cy.get('[data-cy=column-collapse-News]').click();
+            cy.get('[data-cy=column-collapse-News]')
+                .first()
+                .focus()
+                .tab();
+            cy.get('[data-cy=column-collapse-sublink-UK]').should('have.focus');
+        });
+    });
 });

@@ -102,6 +102,7 @@ const ColumnLink: React.FC<{
             href={link.url}
             role="menuitem"
             data-link-name={`nav2 : secondary : ${link.longTitle}`}
+            data-cy={`column-collapse-sublink-${link.title}`}
             tabIndex={-1}
         >
             {link.longTitle}
