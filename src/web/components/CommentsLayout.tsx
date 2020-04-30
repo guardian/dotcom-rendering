@@ -97,6 +97,7 @@ export const CommentsLayout = ({
                 expanded={expanded}
                 commentToScrollTo={commentToScrollTo}
                 onPermalinkClick={onPermalinkClick}
+                apiKey="dotcom-rendering"
             />
         </div>
     </Flex>
