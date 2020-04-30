@@ -1,0 +1,38 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@typescript-eslint/eslint-plugin-tslint > lodash':
+        patched: '2020-04-30T23:56:53.414Z'
+    - eslint-stats > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - inquirer > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - log4js > streamroller > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - prettier-eslint > eslint > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - prettier-eslint > vue-eslint-parser > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - '@typescript-eslint/eslint-plugin-tslint > @typescript-eslint/experimental-utils > @typescript-eslint/typescript-estree > lodash':
+        patched: '2020-04-30T23:56:53.414Z'
+    - eslint-config-airbnb-typescript > @typescript-eslint/parser > @typescript-eslint/typescript-estree > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - log4js > streamroller > async > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - pm2 > @pm2/js-api > async > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - prettier-eslint > eslint > inquirer > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - prettier-eslint > eslint > table > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - emotion > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - eslint-config-airbnb-typescript > @typescript-eslint/parser > @typescript-eslint/experimental-utils > @typescript-eslint/typescript-estree > lodash:
+        patched: '2020-04-30T23:56:53.414Z'
+    - '@emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2020-04-30T23:56:53.414Z'
