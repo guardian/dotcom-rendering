@@ -72,7 +72,13 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                    return <BlockquoteComponent key={i} html={element.html} />;
+                    return (
+                        <BlockquoteComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
