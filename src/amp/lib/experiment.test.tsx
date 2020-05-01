@@ -83,17 +83,15 @@ describe('Experiment Component', () => {
     it('builds the correct variant style strings', () => {
         const testStyles = {
             experiment1: {
-                treatment1: `string1`,
-                treatment2: `string2`,
+                treatment1: `.test-header { background-color: yellow;}`,
+                treatment2: `.test-header { background-color: purple;}`,
             },
             experiment2: {
-                treatment1: `string3`,
-                treatment2: `string4`,
+                treatment1: `.test-header { background-color: red;}`,
             },
         };
 
-        const validStyleString =
-            "body[amp-x-experiment1='treatment1'] string1 body[amp-x-experiment1='treatment2'] string2 body[amp-x-experiment2='treatment1'] string3 body[amp-x-experiment2='treatment2'] string4";
+        const validStyleString = `body[amp-x-experiment1='treatment1'] ${testStyles.experiment1.treatment1} body[amp-x-experiment1='treatment2'] ${testStyles.experiment1.treatment2} body[amp-x-experiment2='treatment1'] ${testStyles.experiment2.treatment1}`;
 
         expect(buildExperimentStyle(testStyles)).toBe(validStyleString);
     });

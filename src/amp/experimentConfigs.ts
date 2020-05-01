@@ -7,7 +7,7 @@ export const experimentFullConfig: StyledModelCollection = {
         variants: {
             treatment1: {
                 proportion: 0.0000001,
-                style: `.test-header { background-color: yellow;}`,
+                style: `.test-header { background-color: #052960;}`,
             },
         },
     },
