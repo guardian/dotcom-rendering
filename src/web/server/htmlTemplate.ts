@@ -103,6 +103,23 @@ export const htmlTemplate = ({
 
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
+    // Duplicated performance tags from DCP:
+    const staticPrefetchPreconnectTags = `
+        <link rel="dns-prefetch" href="https://assets.guim.co.uk/">
+        <link rel="dns-prefetch" href="https://i.guim.co.uk">
+        <link rel="dns-prefetch" href="https://api.nextgen.guardianapps.co.uk">
+        <link rel="dns-prefetch" href="https://hits-secure.theguardian.com">
+        <link rel="dns-prefetch" href="//j.ophan.co.uk">
+        <link rel="dns-prefetch" href="//ophan.theguardian.com">
+        <link rel="dns-prefetch" href="//phar.gu-web.net">
+        <link rel="dns-prefetch" href="//www.google-analytics.com">
+        <link rel="preconnect" href="https://assets.guim.co.uk/">
+        <link rel="preconnect" href="https://i.guim.co.uk">
+        <link rel="preconnect" href="//interactive.guim.co.uk">
+        <link rel="preconnect" href="//www.google-analytics.com">
+        <link rel="dns-prefetch" href="//sb.scorecardresearch.com">
+    `;
+
     return `<!doctype html>
         <html lang="en">
             <head>
@@ -113,6 +130,8 @@ export const htmlTemplate = ({
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <meta name="theme-color" content="${brandBackground.primary}" />
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+
+                ${staticPrefetchPreconnectTags}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
