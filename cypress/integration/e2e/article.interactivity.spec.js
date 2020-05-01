@@ -16,12 +16,10 @@ describe('Interactivity', function() {
             cy.get('[data-cy=dropdown-button]').click();
             cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
-
         it('should display the share count for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=share-counts]').should('exist');
         });
-
         it('should display all the rich links for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.scrollTo('bottom', { duration: 100 });
@@ -33,7 +31,6 @@ describe('Interactivity', function() {
                 // which case this check should be updated
                 .should('be', 2);
         });
-
         describe('When most viewed is mocked', function() {
             beforeEach(getPolyfill);
             beforeEach(mockApi);
@@ -47,7 +44,6 @@ describe('Interactivity', function() {
                 cy.get('[data-cy=tab-body-1]').should('be.visible');
             });
         });
-
         it('should render the reader revenue links in the header', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.scrollTo('bottom', { duration: 300 });
@@ -103,8 +99,8 @@ describe('Interactivity', function() {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').click();
-                cy.get('[data-cy=column-collapse-News]')
-                    .click()
+                cy.focused()
+                    .type('{enter}')
                     .tab();
                 cy.focused().should(
                     'have.attr',
