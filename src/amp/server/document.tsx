@@ -7,11 +7,7 @@ import escape from 'lodash.escape';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
-import {
-    buildExperimentStyle,
-    extractExperimentStyles,
-    getActiveExperiments,
-} from '@root/src/amp/lib/experiment';
+import { getAllActiveCss } from '@root/src/amp/lib/experiment';
 import { CAPI } from '@root/fixtures/CAPI/CAPI';
 
 interface RenderToStringResult {
@@ -37,11 +33,7 @@ export const document = ({
     scripts: string[];
     metadata: Metadata;
 }) => {
-    const testCss = buildExperimentStyle(
-        extractExperimentStyles(
-            getActiveExperiments(experimentFullConfig, CAPI.config.switches),
-        ),
-    );
+    const testCss = getAllActiveCss(experimentFullConfig, CAPI.config.switches);
 
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core

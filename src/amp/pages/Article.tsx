@@ -9,7 +9,7 @@ import { AdConsent } from '@root/src/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { Experiment, } from '@root/src/amp/components/Experiment';
+import { Experiment } from '@root/src/amp/components/Experiment';
 import { AmpModelCollection } from '@root/src/amp/lib/experiment';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';

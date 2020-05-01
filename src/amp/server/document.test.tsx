@@ -4,10 +4,7 @@ import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import {
-    extractExperimentModels,
-    getActiveExperiments,
-} from '@root/src/amp/lib/experiment';
+import { getAllActiveExperiments } from '@root/src/amp/lib/experiment';
 import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
 import { document } from './document';
 
@@ -62,8 +59,9 @@ test('produces valid AMP doc', async () => {
         },
     };
 
-    const activeExperiments = extractExperimentModels(
-        getActiveExperiments(experimentFullConfig, config.switches)
+    const activeExperiments = getAllActiveExperiments(
+        experimentFullConfig,
+        config.switches,
     );
 
     const body = (

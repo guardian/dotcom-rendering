@@ -1,8 +1,8 @@
 import {
     StyledModelCollection,
-    getActiveExperiments,
+    filterActiveExperiments,
     extractExperimentModels,
-    extractExperimentStyles,
+    extractStylesFromExperiments,
     buildExperimentStyle,
 } from '@root/src/amp/lib/experiment';
 
@@ -49,7 +49,7 @@ describe('Experiment Component', () => {
     };
 
     it('gets the correct active tests based on the switches', () => {
-        const activeExperiments = getActiveExperiments(
+        const activeExperiments = filterActiveExperiments(
             testFullConfig,
             commercialConfig.switches,
         );
@@ -71,7 +71,7 @@ describe('Experiment Component', () => {
     });
     it('extracts the correct ExperimentStyle from the FullConfig', () => {
         const testConfig = { experiment1: testFullConfig.experiment1 };
-        const testStyle = extractExperimentStyles(testConfig);
+        const testStyle = extractStylesFromExperiments(testConfig);
         expect(testStyle).toMatchObject({
             experiment1: {
                 treatment1: `.test-header { background-color: yellow;}`,

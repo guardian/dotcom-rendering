@@ -10,11 +10,7 @@ import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import {
-    AmpModelCollection,
-    extractExperimentModels,
-    getActiveExperiments,
-} from '@root/src/amp/lib/experiment';
+import { getAllActiveExperiments } from '@root/src/amp/lib/experiment';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -49,8 +45,10 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             },
         };
 
-        const activeExperiments: AmpModelCollection = extractExperimentModels(
-            getActiveExperiments(experimentFullConfig, config.switches))
+        const activeExperiments = getAllActiveExperiments(
+            experimentFullConfig,
+            config.switches,
+        );
         const metadata = {
             description: CAPI.trailText,
             canonicalURL: CAPI.webURL,
