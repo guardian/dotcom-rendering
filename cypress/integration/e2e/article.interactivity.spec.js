@@ -108,6 +108,28 @@ describe('Interactivity', function() {
                     'column-collapse-sublink-UK',
                 );
             });
+
+            it.only('should let reader traverse section titles using keyboard', function() {
+                cy.viewport('iphone-x');
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.get('[data-cy=veggie-burger]').type('{enter}');
+                cy.focused()
+                    .type('{enter}')
+                    .tab();
+                cy.focused().should(
+                    'have.attr',
+                    'data-cy',
+                    'column-collapse-Opinion',
+                );
+                cy.focused()
+                    .type('{enter}')
+                    .tab();
+                cy.focused().should(
+                    'have.attr',
+                    'data-cy',
+                    'column-collapse-sublink-The Guardian view',
+                );
+            });
         });
     });
 });
