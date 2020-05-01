@@ -57,8 +57,8 @@ describe('Interactivity', function() {
         });
     });
 
-    describe('for Pillar menu on Desktop', function() {
-        it('should display the expanded pillar menu when More is clicked', function() {
+    describe('Navigating the Pillar menu', function() {
+        it('should expand the desktop pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
@@ -68,59 +68,48 @@ describe('Interactivity', function() {
             // TODO: should also include assertion to select menu item when AD z-index fixed
             // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
         });
-    });
 
-    describe('for Pillar menu on Mobile', function() {
-        it('should display the expanded pillar menu when the VeggieBurger is clicked', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Crosswords').should('not.be.visible');
-            cy.get('[data-cy=veggie-burger]').click();
-            cy.contains('Crosswords');
-            cy.contains('Columnists').should('not.be.visible');
-            cy.get('[data-cy=column-collapse-Opinion]').click();
-            cy.contains('Columnists').should('be.visible');
-        });
-    });
+        describe('On mobile', function() {
+            it('should expand the mobile pillar menu when the VeggieBurger is clicked', function() {
+                cy.viewport('iphone-x');
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.contains('Crosswords').should('not.be.visible');
+                cy.get('[data-cy=veggie-burger]').click();
+                cy.contains('Crosswords');
+                cy.contains('Columnists').should('not.be.visible');
+                cy.get('[data-cy=column-collapse-Opinion]').click();
+                cy.contains('Columnists').should('be.visible');
+            });
 
-    describe('accessibility mobile', function() {
-        it('should not focus on menu items if menu not open', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=veggie-burger]')
-                .focus()
-                .tab();
-            cy.get('[data-cy=sub-nav] a')
-                .first()
-                .should('have.focus');
-        });
+            it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function() {
+                cy.viewport('iphone-x');
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.get('[data-cy=veggie-burger]')
+                    .focus()
+                    .tab();
+                cy.get('[data-cy=sub-nav] a')
+                    .first()
+                    .should('have.focus');
+            });
 
-        it('should focus on menu items if menu open', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=veggie-burger]').click();
-            cy.get('[data-cy=column-collapse-News]').should('have.focus');
-        });
+            it('should immediately focus on the News menu item when the menu first opens', function() {
+                cy.viewport('iphone-x');
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.get('[data-cy=veggie-burger]').click();
+                cy.get('[data-cy=column-collapse-News]').should('have.focus');
+            });
 
-        it('should not focus on hidden sub menu items', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=veggie-burger]').click();
-            cy.get('[data-cy=column-collapse-News]').should('have.focus');
-            cy.get('[data-cy=column-collapse-sublink-UK]').should(
-                'not.have.focus',
-            );
-        });
-
-        it('should focus on visible sub menu items', function() {
-            cy.viewport('iphone-x');
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=veggie-burger]').click();
-            cy.get('[data-cy=column-collapse-News]').click();
-            cy.get('[data-cy=column-collapse-News]')
-                .focus()
-                .tab();
-            cy.get('[data-cy=column-collapse-sublink-UK]').should('have.focus');
+            it('should transfer focus to sub menu items when tabbing from section header', function() {
+                cy.viewport('iphone-x');
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.get('[data-cy=veggie-burger]').click();
+                cy.get('[data-cy=column-collapse-News]')
+                    .click()
+                    .tab();
+                cy.get('[data-cy=column-collapse-sublink-UK]').should(
+                    'have.focus',
+                );
+            });
         });
     });
 });
