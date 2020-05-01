@@ -103,22 +103,33 @@ export const htmlTemplate = ({
 
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
-    // Duplicated performance tags from DCP:
-    const staticPrefetchPreconnectTags = `
-        <link rel="dns-prefetch" href="https://assets.guim.co.uk/">
-        <link rel="dns-prefetch" href="https://i.guim.co.uk">
-        <link rel="dns-prefetch" href="https://api.nextgen.guardianapps.co.uk">
-        <link rel="dns-prefetch" href="https://hits-secure.theguardian.com">
-        <link rel="dns-prefetch" href="//j.ophan.co.uk">
-        <link rel="dns-prefetch" href="//ophan.theguardian.com">
-        <link rel="dns-prefetch" href="//phar.gu-web.net">
-        <link rel="dns-prefetch" href="//www.google-analytics.com">
-        <link rel="preconnect" href="https://assets.guim.co.uk/">
-        <link rel="preconnect" href="https://i.guim.co.uk">
-        <link rel="preconnect" href="//interactive.guim.co.uk">
-        <link rel="preconnect" href="//www.google-analytics.com">
-        <link rel="dns-prefetch" href="//sb.scorecardresearch.com">
-    `;
+    // Duplicated prefetch and preconnect tags from DCP:
+    const staticPrefetchUrls = [
+        `https://assets.guim.co.uk/`,
+        `https://i.guim.co.uk`,
+        `https://api.nextgen.guardianapps.co.uk`,
+        `https://hits-secure.theguardian.com`,
+        `//j.ophan.co.uk`,
+        `//ophan.theguardian.com`,
+        `//phar.gu-web.net`,
+        `//www.google-analytics.com`,
+        '//sb.scorecardresearch.com',
+    ];
+
+    const staticPreconnectUrls = [
+        `https://assets.guim.co.uk/`,
+        `https://i.guim.co.uk`,
+        `//interactive.guim.co.uk`,
+        `//www.google-analytics.com`,
+    ];
+
+    const prefetchTags = staticPrefetchUrls.map(
+        src => `<link rel="dns-prefetch" href="${src}">`,
+    );
+
+    const preconnectTags = staticPreconnectUrls.map(
+        src => `<link rel="preconnect" href="${src}">`,
+    );
 
     return `<!doctype html>
         <html lang="en">
@@ -131,7 +142,8 @@ export const htmlTemplate = ({
                 <meta name="theme-color" content="${brandBackground.primary}" />
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
-                ${staticPrefetchPreconnectTags}
+                ${prefetchTags}
+                ${preconnectTags}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
