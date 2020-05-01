@@ -9,6 +9,7 @@ import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteC
 import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -60,6 +61,8 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <InstagramBlockComponent key={i} element={element} />
                     );
+                case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                    return <EmbedBlockComponent key={i} element={element} />;
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteComponent
