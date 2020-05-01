@@ -95,7 +95,6 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
                         var firstColLink = document.querySelectorAll('#newsLinks > li:first-of-type > a')[0]
-                        var lastNavLink = document.querySelectorAll('#moreLinks > li:last-of-type > a ')[0]
 
                         var focusOnFirstNavElement = function(){
                           // need to focus on first element in list, firstColLabel is not viewable on desktop
