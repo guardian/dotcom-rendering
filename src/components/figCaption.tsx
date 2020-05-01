@@ -47,11 +47,16 @@ interface CreditProps {
     format: Format;
 }
 
+const creditStyles = css`
+    ${textSans.xsmall()}
+    margin: ${remSpace[1]} 0;
+`;
+
 const Credit: FC<CreditProps> = ({ format, credit }: CreditProps) =>
     credit.fmap<ReactElement | null>(cred => {
         switch (format.design) {
             case Design.Media:
-                return <p>{cred}</p>;
+                return <p css={creditStyles}>{cred}</p>;
             default:
                 return <> {cred}</>;
         }
@@ -61,10 +66,7 @@ const captionHeadingStyles = css`
     ${headline.xxxsmall()}
     color: ${neutral[86]};
     margin: 0 0 ${remSpace[3]};
-
-    em {
-        ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
-    }
+    display: inline;
 `;
 
 const anchorStyles = css`
@@ -80,7 +82,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
         case 'BR':
             return null;
         case 'EM':
-            return <em key={key}>{children}</em>
+            return <em css={ textSans.xsmall({ italic: true, fontWeight: 'bold'})} key={key}>{children}</em>
         case 'A':
             return (
                 <Anchor
@@ -92,7 +94,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
                 </Anchor>
             );
         case '#text':
-            return text;
+            return <span>{ text }</span>;
         default:
             return renderTextElement(format)(node, key);
     }
@@ -118,6 +120,12 @@ const styles = css`
 
 const mediaStyles = css`
     color: ${neutral[86]};
+
+    h2 + span {
+        display: block;
+        ${textSans.xsmall()}
+        margin: ${remSpace[1]} 0;
+    }
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
