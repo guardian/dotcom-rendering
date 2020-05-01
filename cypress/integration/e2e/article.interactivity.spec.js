@@ -106,8 +106,10 @@ describe('Interactivity', function() {
                 cy.get('[data-cy=column-collapse-News]')
                     .click()
                     .tab();
-                cy.get('[data-cy=column-collapse-sublink-UK]').should(
-                    'have.focus',
+                cy.focused().should(
+                    'have.attr',
+                    'data-cy',
+                    'column-collapse-sublink-UK',
                 );
             });
         });
