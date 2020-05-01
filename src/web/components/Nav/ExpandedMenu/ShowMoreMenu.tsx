@@ -77,22 +77,25 @@ const openExpandedMenuStyles = (display: Display) => css`
 `;
 
 export const ShowMoreMenu = ({ display }: { display: Display }) => (
-    // eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role
-    // @ts-ignore
-    <label
-        id={showMoreButtonId}
-        className={openExpandedMenuStyles(display)}
-        aria-label="Toggle main menu"
-        key="OpenExpandedMenuButton"
-        htmlFor={navInputCheckboxId}
-        data-link-name="nav2 : veggie-burger: show"
-        // @ts-ignore
-        tabIndex={0}
-        role="button"
-        data-cy="nav-show-more-button"
-    >
-        <span className={screenReadable}>Show</span>
-        <span className={showMoreTextStyles}>More</span>
-    </label>
-    // eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role
+    <>
+        {/* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
+        {/*
+    // @ts-ignore */}
+        <label
+            id={showMoreButtonId}
+            className={openExpandedMenuStyles(display)}
+            aria-label="Toggle main menu"
+            key="OpenExpandedMenuButton"
+            htmlFor={navInputCheckboxId}
+            data-link-name="nav2 : veggie-burger: show"
+            // @ts-ignore
+            tabIndex={0}
+            role="button"
+            data-cy="nav-show-more-button"
+        >
+            <span className={screenReadable}>Show</span>
+            <span className={showMoreTextStyles}>More</span>
+        </label>
+        {/* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
+    </>
 );
