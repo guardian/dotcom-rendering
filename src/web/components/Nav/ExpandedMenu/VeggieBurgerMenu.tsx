@@ -32,7 +32,7 @@ const veggieBurgerIconStyles = () => {
             to support NoJS
         */
         /* stylelint-disable-next-line selector-type-no-unknown */
-        ${`#${navInputCheckboxId}`}:checked ~ label & {
+        ${`#${navInputCheckboxId}`}:checked ~ div & {
             background-color: transparent;
         }
 
@@ -49,7 +49,7 @@ const veggieBurgerIconStyles = () => {
             top: -6px;
             /* refer to comment above */
             /* stylelint-disable-next-line selector-type-no-unknown */
-            ${`#${navInputCheckboxId}`}:checked ~ label & {
+            ${`#${navInputCheckboxId}`}:checked ~ div & {
                 top: 0;
                 transform: rotate(-45deg);
             }
@@ -60,7 +60,7 @@ const veggieBurgerIconStyles = () => {
             bottom: -6px;
             /* refer to comment above */
             /* stylelint-disable-next-line selector-type-no-unknown */
-            ${`#${navInputCheckboxId}`}:checked ~ label & {
+            ${`#${navInputCheckboxId}`}:checked ~ div & {
                 bottom: 0;
                 transform: rotate(45deg);
             }
