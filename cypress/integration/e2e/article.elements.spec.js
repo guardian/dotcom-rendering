@@ -48,4 +48,22 @@ describe('Elements', function() {
             getIframeBody().contains('View More on Instagram');
         });
     });
+    describe('WEB', function() {
+        // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
+        const getIframeBody = () => {
+            return cy
+                .get('div[data-cy="soundcloud-embed"] > iframe')
+                .its('0.contentDocument.body')
+                .should('not.be.empty')
+                .then(cy.wrap);
+        };
+
+        it('should render the soundcloud embed', function() {
+            cy.visit(
+                'Article?url=https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+            );
+
+            getIframeBody().contains('Cookie policy');
+        });
+    });
 });

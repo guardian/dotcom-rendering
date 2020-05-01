@@ -15,6 +15,7 @@ export const SoundcloudBlockComponent: React.FC<{
     return (
         <div className={widthOverride}>
             <div
+                data-cy="soundcloud-embed"
                 dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
             />
         </div>
