@@ -163,15 +163,11 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 
     return (
         <div
-<<<<<<< HEAD
-            className={cx({ [wrapperCollapsed]: collapseWrapper })}
-            data-cy="sub-nav"
-=======
             className={cx(
                 { [wrapperCollapsed]: collapseWrapper },
                 spaceBetween,
             )}
->>>>>>> 911574bf81e1d1d0cc4df6677f57dc33e73e8002
+            data-cy="sub-nav"
         >
             <ul
                 ref={ulRef}
