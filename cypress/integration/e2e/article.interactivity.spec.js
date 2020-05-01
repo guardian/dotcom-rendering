@@ -118,7 +118,6 @@ describe('Interactivity', function() {
             cy.get('[data-cy=veggie-burger]').click();
             cy.get('[data-cy=column-collapse-News]').click();
             cy.get('[data-cy=column-collapse-News]')
-                .first()
                 .focus()
                 .tab();
             cy.get('[data-cy=column-collapse-sublink-UK]').should('have.focus');
