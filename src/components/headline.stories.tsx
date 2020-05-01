@@ -72,6 +72,13 @@ const Review = (): ReactElement =>
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
     }} />
 
+const Labs = (): ReactElement =>
+    <Headline item={{
+        ...item,
+        design: Design.AdvertisementFeature,
+        display: Display.Standard,
+    }} />
+
 
 // ----- Exports ----- //
 
@@ -86,4 +93,5 @@ export {
     Analysis,
     Feature,
     Review,
+    Labs,
 }

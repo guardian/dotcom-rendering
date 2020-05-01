@@ -4,10 +4,10 @@ import React, { FC, ReactElement, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { text, neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, palette } from '@guardian/src-foundations';
 import { Format, Design } from '@guardian/types/Format';
 
-import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { getPillarStyles } from 'pillarStyles';
 import { Option } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
 import Anchor from 'components/anchor';
@@ -19,26 +19,29 @@ interface TriangleProps {
     format: Format;
 }
 
-const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
-    fill: ${kicker};
+const triangleStyles = (colour: string): SerializedStyles => css`
+    fill: ${colour};
     height: 0.8em;
     padding-right: ${remSpace[1]};
 `;
+
+const triangleSvg = (colour: string): ReactElement =>
+    <svg
+        css={triangleStyles(colour)}
+        viewBox="0 0 10 9"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <polygon points="0,9 5,0 10,9 0,9" />
+    </svg>
 
 const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
     switch (format.design) {
         case Design.Media:
             return null;
+        case Design.AdvertisementFeature:
+            return triangleSvg(palette.labs[300]);
         default:
-            return (
-                <svg
-                    css={triangleStyles(getPillarStyles(format.pillar))}
-                    viewBox="0 0 10 9"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <polygon points="0,9 5,0 10,9 0,9" />
-                </svg>
-            );
+            return triangleSvg(getPillarStyles(format.pillar).kicker);
     }
 }
 
