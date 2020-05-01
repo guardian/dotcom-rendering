@@ -126,7 +126,7 @@ export const htmlTemplate = ({
         `https://ophan.theguardian.com`,
         `https://phar.gu-web.net`,
         `https://www.google-analytics.com`,
-        'https://sb.scorecardresearch.com',
+        `https://sb.scorecardresearch.com`,
     ];
 
     const prefetchTags = staticPrefetchUrls.map(
