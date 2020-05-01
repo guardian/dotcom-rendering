@@ -160,7 +160,9 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
-    margin-right: -1.25rem;
+    ${from.mobileLandscape} {
+        margin-right: -1.25rem;
+    }
     margin-top: -36px;
     margin-bottom: -29px;
 `;
