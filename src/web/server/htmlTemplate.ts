@@ -142,8 +142,8 @@ export const htmlTemplate = ({
                 <meta name="theme-color" content="${brandBackground.primary}" />
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
-                ${prefetchTags}
-                ${preconnectTags}
+                ${prefetchTags.join('\n')}
+                ${preconnectTags.join('\n')}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
