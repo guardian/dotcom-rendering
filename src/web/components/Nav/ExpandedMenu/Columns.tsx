@@ -5,7 +5,9 @@ import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
-import { Column, More, ReaderRevenueLinks } from './Column';
+import { Column } from './Column';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { MoreColumn } from './MoreColumn';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
@@ -108,7 +110,7 @@ export const Columns: React.FC<{
             />
         ))}
         <ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-        <More
+        <MoreColumn
             column={nav.otherLinks}
             brandExtensions={nav.brandExtensions}
             key="more"

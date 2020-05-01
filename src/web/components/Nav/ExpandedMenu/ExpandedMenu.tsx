@@ -5,7 +5,8 @@ import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
+import { ShowMoreMenu } from './ShowMoreMenu';
+import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';
 import { navInputCheckboxId } from '../config';
 
@@ -94,7 +95,8 @@ export const ExpandedMenu: React.FC<{
 }> = ({ display, nav }) => {
     return (
         <div id="expanded-menu">
-            <ExpandedMenuToggle display={display} />
+            <ShowMoreMenu display={display} />
+            <VeggieBurgerMenu display={display} />
             <div
                 id="expanded-menu"
                 className={mainMenuStyles}

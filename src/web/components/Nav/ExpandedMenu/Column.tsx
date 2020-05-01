@@ -8,9 +8,6 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { CollapseColumnButton } from './CollapseColumnButton';
 
-// CSS vars
-const pillarHeight = 42;
-
 // CSS
 export const hideDesktop = css`
     ${from.desktop} {
@@ -30,14 +27,6 @@ const pillarDivider = css`
             width: 1px;
             background-color: ${brand[600]};
             z-index: 1;
-        }
-    }
-`;
-
-const pillarDividerExtended = css`
-    ${from.desktop} {
-        :before {
-            top: -${pillarHeight}px;
         }
     }
 `;
@@ -88,28 +77,6 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const ColumnLink: React.FC<{
-    link: LinkType;
-}> = ({ link }) => (
-    <li
-        className={cx(mainMenuLinkStyle, {
-            [hideDesktop]: !!link.mobileOnly,
-        })}
-        role="none"
-    >
-        <a
-            className={cx('selectableMenuItem', columnLinkTitle)}
-            href={link.url}
-            role="menuitem"
-            data-link-name={`nav2 : secondary : ${link.longTitle}`}
-            data-cy={`column-collapse-sublink-${link.title}`}
-            tabIndex={-1}
-        >
-            {link.longTitle}
-        </a>
-    </li>
-);
-
 const columnLinks = css`
     ${textSans.medium()};
     box-sizing: border-box;
@@ -150,30 +117,6 @@ const hideStyles = (columnInputId: string) => css`
         }
     }
 `;
-
-const ColumnLinks: React.FC<{
-    column: LinkType;
-    columnInputId?: string;
-    id: string;
-    index?: number;
-}> = ({ column, columnInputId, id, index }) => {
-    return (
-        <ul
-            className={cx(
-                columnLinks,
-                { [firstColumnLinks]: index === 0 },
-                { [pillarColumnLinks]: !!column.pillar },
-                columnInputId && hideStyles(columnInputId),
-            )}
-            role="menu"
-            id={id}
-        >
-            {(column.children || []).map(link => (
-                <ColumnLink link={link} key={link.title.toLowerCase()} />
-            ))}
-        </ul>
-    );
-};
 
 const columnStyle = css`
     ${textSans.medium()};
@@ -219,59 +162,6 @@ const columnStyle = css`
         }
     }
 `;
-
-export const ReaderRevenueLinks: React.FC<{
-    readerRevenueLinks: ReaderRevenuePositions;
-}> = ({ readerRevenueLinks }) => {
-    const links: LinkType[] = [
-        {
-            longTitle: 'Make a contribution',
-            title: 'Make a contribution',
-            mobileOnly: true,
-            url: readerRevenueLinks.sideMenu.contribute,
-        },
-        {
-            longTitle: 'Subscribe',
-            title: 'Subscribe',
-            mobileOnly: true,
-            url: readerRevenueLinks.sideMenu.subscribe,
-        },
-    ];
-
-    return (
-        <ul className={cx(hideDesktop)}>
-            {links.map(link => (
-                <ColumnLink link={link} key={link.title.toLowerCase()} />
-            ))}
-        </ul>
-    );
-};
-
-export const More: React.FC<{
-    column: LinkType;
-    brandExtensions: LinkType[];
-}> = ({ column, brandExtensions }) => {
-    const subNavId = `${column.title.toLowerCase()}Links`;
-    // Add the brand extensions to 'more' on mobile.
-    const more = {
-        ...column,
-        children: [
-            ...brandExtensions.map(brandExtension => ({
-                ...brandExtension,
-                mobileOnly: true,
-            })),
-            ...(column.children || []),
-        ],
-    };
-    return (
-        <li
-            className={cx(columnStyle, pillarDivider, pillarDividerExtended)}
-            role="none"
-        >
-            <ColumnLinks column={more} id={subNavId} />
-        </li>
-    );
-};
 
 export const Column = ({
     column,
@@ -333,12 +223,41 @@ export const Column = ({
                 ariaControls={`${column.title.toLowerCase()}Links`}
             />
 
-            <ColumnLinks
-                column={column}
-                columnInputId={columnInputId}
+            {/* ColumnLinks */}
+            <ul
+                className={cx(
+                    columnLinks,
+                    { [firstColumnLinks]: index === 0 },
+                    { [pillarColumnLinks]: !!column.pillar },
+                    columnInputId && hideStyles(columnInputId),
+                )}
+                role="menu"
                 id={`${column.title.toLowerCase()}Links`}
-                index={index}
-            />
+            >
+                {(column.children || []).map(link => (
+                    <li
+                        key={link.title.toLowerCase()}
+                        className={cx(mainMenuLinkStyle, {
+                            [hideDesktop]: !!link.mobileOnly,
+                        })}
+                        role="none"
+                    >
+                        <a
+                            className={cx(
+                                'selectableMenuItem',
+                                columnLinkTitle,
+                            )}
+                            href={link.url}
+                            role="menuitem"
+                            data-link-name={`nav2 : secondary : ${link.longTitle}`}
+                            data-cy={`column-collapse-sublink-${link.title}`}
+                            tabIndex={-1}
+                        >
+                            {link.longTitle}
+                        </a>
+                    </li>
+                ))}
+            </ul>
         </li>
     );
 };

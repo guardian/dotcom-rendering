@@ -5,7 +5,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
-import { navInputCheckboxId, veggieBurgerId } from '../../config';
+import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
     ${visuallyHidden};
@@ -31,7 +31,7 @@ const veggieBurgerIconStyles = () => {
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
-		/* stylelint-disable-next-line selector-type-no-unknown */
+        /* stylelint-disable-next-line selector-type-no-unknown */
         ${`#${navInputCheckboxId}`}:checked ~ label & {
             background-color: transparent;
         }
@@ -48,7 +48,7 @@ const veggieBurgerIconStyles = () => {
             ${beforeAfterStyles};
             top: -6px;
             /* refer to comment above */
-			/* stylelint-disable-next-line selector-type-no-unknown */
+            /* stylelint-disable-next-line selector-type-no-unknown */
             ${`#${navInputCheckboxId}`}:checked ~ label & {
                 top: 0;
                 transform: rotate(-45deg);
@@ -103,7 +103,7 @@ const veggieBurgerStyles = (display: Display) => css`
     }
 `;
 
-export const VeggieBurger: React.FC<{
+export const VeggieBurgerMenu: React.FC<{
     display: Display;
 }> = ({ display }) => {
     return (
