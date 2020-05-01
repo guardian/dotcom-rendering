@@ -73,11 +73,21 @@ const linkStyle = css`
         text-decoration: underline;
     }
 `;
+
 const selected = css`
     font-weight: 700;
 `;
+
+const spaceBetween = css`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const showMoreStyle = css`
     ${fontStyle};
+
+    padding-left: 10px;
+    padding-right: 10px;
 
     cursor: pointer;
     border: none;
@@ -153,8 +163,15 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 
     return (
         <div
+<<<<<<< HEAD
             className={cx({ [wrapperCollapsed]: collapseWrapper })}
             data-cy="sub-nav"
+=======
+            className={cx(
+                { [wrapperCollapsed]: collapseWrapper },
+                spaceBetween,
+            )}
+>>>>>>> 911574bf81e1d1d0cc4df6677f57dc33e73e8002
         >
             <ul
                 ref={ulRef}

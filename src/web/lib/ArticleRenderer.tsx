@@ -8,6 +8,7 @@ import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBloc
 import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
 import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -55,6 +56,10 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
+                case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                    return (
+                        <InstagramBlockComponent key={i} element={element} />
+                    );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteComponent
@@ -67,7 +72,13 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                    return <BlockquoteComponent key={i} html={element.html} />;
+                    return (
+                        <BlockquoteComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
