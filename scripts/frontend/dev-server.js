@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
@@ -24,9 +25,9 @@ function ampifyUrl(url) {
     return url.replace('www', 'amp');
 }
 
-const go = async () => {
-    const webpackConfig = await require('../webpack/frontend');
-    const compiler = await webpack(webpackConfig);
+const go = () => {
+    const webpackConfig = require('../webpack/frontend');
+    const compiler = webpack(webpackConfig);
 
     const app = express();
 
@@ -86,7 +87,7 @@ const go = async () => {
                 req.body = config;
                 next();
             } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/tslint/config
+                // eslint-disable-next-line no-console
                 console.error(error);
             }
         },
@@ -96,7 +97,7 @@ const go = async () => {
         }),
     );
 
-    app.get('/', function(req, res) {
+    app.get('/', (req, res) => {
         res.sendFile(
             path.join(root, 'scripts', 'frontend', 'landing', 'index.html'),
         );
@@ -106,7 +107,7 @@ const go = async () => {
         res.redirect('/');
     });
 
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
         res.status(500).send(err.stack);
     });
 
