@@ -167,4 +167,6 @@ if (process.env.NODE_ENV === 'production') {
     }, 10 * 1000);
 
     app.listen(port);
+    // eslint-disable-next-line no-console
+    console.log(`Started production server on port ${port}`);
 }
