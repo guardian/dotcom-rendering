@@ -35,10 +35,11 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <TextBlockComponent
                             key={i}
+                            isFirstParagraph={i === 0}
                             html={element.html}
                             pillar={pillar}
                             designType={designType}
-                            dropCap={false} // TODO: Plug in the api response here when we have it
+                            dropCap={element.dropCap}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':

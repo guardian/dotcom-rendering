@@ -29,6 +29,7 @@ export const defaultStory = () => {
                 html={html}
                 pillar="news"
                 designType="Article"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -42,7 +43,8 @@ export const DropCap = () => {
                 html={html}
                 pillar="culture"
                 dropCap={true}
-                designType="Article"
+                designType="Immersive"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -57,6 +59,7 @@ export const QuotedDropCap = () => {
                 pillar="opinion"
                 dropCap={true}
                 designType="Comment"
+                isFirstParagraph={true}
             />
         </div>
     );
@@ -71,6 +74,7 @@ export const ShortText = () => {
                 pillar="news"
                 dropCap={true}
                 designType="Article"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -85,8 +89,24 @@ export const NoTags = () => {
                 pillar="news"
                 dropCap={true}
                 designType="Article"
+                isFirstParagraph={false}
             />
         </div>
     );
 };
 NoTags.story = { name: 'with no p tags' };
+
+export const FeatureDropCap = () => {
+    return (
+        <div className={containerStyles}>
+            <TextBlockComponent
+                html={html}
+                pillar="culture"
+                dropCap={false}
+                designType="Feature"
+                isFirstParagraph={true}
+            />
+        </div>
+    );
+};
+FeatureDropCap.story = { name: 'with designType of Feature' };
