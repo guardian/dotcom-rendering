@@ -1,6 +1,13 @@
-const enhancedElement = (element: CAPIElement): CAPIElement => {
+const enhanceElement = (element: CAPIElement): CAPIElement => {
+    const enhanceTextBlockElement = (
+        textBlockElement: TextBlockElement,
+    ): TextBlockElement => {
+        return textBlockElement;
+    };
+
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.TextBlockElement':
+            return enhanceTextBlockElement(element);
         case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
         case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -35,11 +42,15 @@ const enhancedElement = (element: CAPIElement): CAPIElement => {
     return element;
 };
 
+const enhanceElements = (elements: CAPIElement[]): CAPIElement[] => {
+    return elements.map(element => enhanceElement(element));
+};
+
 export const enhanceCAPI = (data: any): CAPIType => {
     const enhancedBlocks = data.blocks.map((block: Block) => {
         return {
             ...block,
-            elements: block.elements.map(element => enhancedElement(element)),
+            elements: enhanceElements(block.elements),
         };
     });
 
