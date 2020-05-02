@@ -52,6 +52,8 @@ monitor:
 logs:
 	@pm2 logs
 
+run: stop build start
+
 # dev #########################################
 
 dev: clear clean-dist install
