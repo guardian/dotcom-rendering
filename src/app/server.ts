@@ -1,5 +1,5 @@
 import * as path from 'path';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import compression from 'compression';
 
 import { dist, port, siteName, statik } from '@root/scripts/frontend/config';
@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.json({ limit: '50mb' }));
     app.use(compression());
 
-    app.get('/_healthcheck', (req, res) => {
+    app.get('/_healthcheck', (req: Request, res: Response) => {
         res.status(200).send('OKAY');
     });
 
@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/ArticlePerfTest', renderArticlePerfTest);
     app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
 
-    app.get('/', (req, res) => {
+    app.get('/', (req: Request, res: Response) => {
         try {
             res.send(`
                 <!DOCTYPE html>
