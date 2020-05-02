@@ -1,49 +1,37 @@
-const enhanceElement = (element: CAPIElement): CAPIElement => {
-    const enhanceTextBlockElement = (
-        textBlockElement: TextBlockElement,
-    ): TextBlockElement => {
-        return textBlockElement;
-    };
+import { JSDOM } from 'jsdom';
 
-    switch (element._type) {
-        case 'model.dotcomrendering.pageElements.TextBlockElement':
-            return enhanceTextBlockElement(element);
-        case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-        case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-        case 'model.dotcomrendering.pageElements.ImageBlockElement':
-        case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-        case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-        case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-        case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-        case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-        case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-        case 'model.dotcomrendering.pageElements.TweetBlockElement':
-        case 'model.dotcomrendering.pageElements.CommentBlockElement':
-        case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-        case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-        case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-        case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
-        case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-        case 'model.dotcomrendering.pageElements.QABlockElement':
-        case 'model.dotcomrendering.pageElements.GuideBlockElement':
-        case 'model.dotcomrendering.pageElements.ProfileBlockElement':
-        case 'model.dotcomrendering.pageElements.TimelineBlockElement':
-        case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-        case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-        case 'model.dotcomrendering.pageElements.MapBlockElement':
-        case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-        case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-        case 'model.dotcomrendering.pageElements.AudioBlockElement':
-        case 'model.dotcomrendering.pageElements.VideoBlockElement':
-        case 'model.dotcomrendering.pageElements.CodeBlockElement':
-        default:
-            return element;
-    }
-    return element;
+const TEXT = 'model.dotcomrendering.pageElements.TextBlockElement';
+const SUBHEADING = 'model.dotcomrendering.pageElements.SubheadingBlockElement';
+
+const isDropCapFlag = (element: SubheadingBlockElement): boolean => {
+    const frag = JSDOM.fragment(element.html);
+    if (!frag || !frag.firstChild) return false;
+    return frag.firstChild.nodeName === 'H2' && frag.textContent === '* * *';
 };
 
 const enhanceElements = (elements: CAPIElement[]): CAPIElement[] => {
-    return elements.map(element => enhanceElement(element));
+    let lastElementWasDropCapFlag = false;
+
+    const enhanced: CAPIElement[] = [];
+    elements.forEach(element => {
+        if (element._type === TEXT && lastElementWasDropCapFlag) {
+            // The previous element was the drop cap * * * flag so set the
+            // dropCap property on this, the next, element to true
+            element.dropCap = true;
+            enhanced.push(element);
+            lastElementWasDropCapFlag = false;
+        } else if (element._type === SUBHEADING && isDropCapFlag(element)) {
+            // This element is the * * * drop cap flag so just set our variable
+            // and don't include this element in the enhanced array
+            lastElementWasDropCapFlag = true;
+        } else {
+            // Otherwise pass it though
+            enhanced.push(element);
+            // We also reset this flag here just to be sure
+            lastElementWasDropCapFlag = false;
+        }
+    });
+    return enhanced;
 };
 
 export const enhanceCAPI = (data: any): CAPIType => {

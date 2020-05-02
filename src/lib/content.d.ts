@@ -12,6 +12,7 @@ type Weighting =
 
 interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
+    dropCap?: boolean;
     html: string;
 }
 
