@@ -10,7 +10,7 @@ const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
 const { siteName, root } = require('./config');
 
-function buildUrl(req) {
+function buildUrlFromQueryParam(req) {
     const DEFAULT_URL =
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
     const url = new URL(req.query.url || DEFAULT_URL);
@@ -59,7 +59,7 @@ const go = () => {
         '/Article',
         async (req, res, next) => {
             try {
-                const url = buildUrl(req);
+                const url = buildUrlFromQueryParam(req);
                 const { html, ...config } = await fetch(url).then(article =>
                     article.json(),
                 );
@@ -80,7 +80,7 @@ const go = () => {
         '/AMPArticle',
         async (req, res, next) => {
             try {
-                const url = buildUrl(req);
+                const url = buildUrlFromQueryParam(req);
                 const { html, ...config } = await fetch(ampifyUrl(url)).then(
                     article => article.json(),
                 );
