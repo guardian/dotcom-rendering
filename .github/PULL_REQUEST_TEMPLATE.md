@@ -2,4 +2,4 @@
 
 ## Why?
 
-## Link to supporting Trello card
+## Why?
