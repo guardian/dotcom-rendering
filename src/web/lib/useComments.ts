@@ -24,7 +24,9 @@ const updateTrailsWithCounts = (trails: TrailType[], counts: CommentType[]) => {
         const countOfComments = findComments(counts, shortUrl);
         return {
             ...trail,
-            commentCount: countOfComments,
+            // Only set the comment count on a card if some comments were made
+            // (otherwise we'd fill the page with distracting zero comment icons)
+            commentCount: countOfComments > 0 ? countOfComments : undefined,
         };
     });
 };
