@@ -99,6 +99,7 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
     switch (designType) {
         case 'Feature':
         case 'Review':
+        case 'Recipe':
         case 'Interview':
             return true;
         case 'Live':
@@ -106,7 +107,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
         case 'Analysis':
         case 'Article':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
         case 'GuardianLabs':
