@@ -13,6 +13,7 @@ type Props = {
     html: string;
     pillar: Pillar;
     designType: DesignType;
+    display: Display;
     isFirstParagraph: boolean;
     dropCap?: boolean;
 };
@@ -41,23 +42,27 @@ const decideDropCapLetter = (html: string) => {
 
 const shouldShowDropCap = ({
     designType,
+    display,
     isFirstParagraph,
     dropCap,
 }: {
     designType: DesignType;
+    display: Display;
     isFirstParagraph: boolean;
     dropCap?: boolean;
 }) => {
-    if (dropCap) return true; // Sometimes paragraphs other than the 1st one can have drop caps
+    // Sometimes paragraphs other than the 1st one can have drop caps
+    if (dropCap) return true;
     // Otherwise, we're only interested in marking the first para as a drop cap
     if (!isFirstParagraph) return false;
-    // And only if one of these design types
+    // If immersive, we show drop caps for the first para
+    if (display === 'immersive') return true;
+    // The first para has a drop cap for these design types
     switch (designType) {
         case 'Feature':
         case 'Comment':
         case 'Review':
         case 'Interview':
-        case 'Immersive':
         case 'Recipe':
             return true;
         case 'Article':
@@ -95,6 +100,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     html,
     pillar,
     designType,
+    display,
     dropCap,
     isFirstParagraph,
 }: Props) => {
@@ -115,7 +121,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         : unwrappedHtml;
 
     if (
-        shouldShowDropCap({ designType, isFirstParagraph, dropCap }) &&
+        shouldShowDropCap({ designType, display, isFirstParagraph, dropCap }) &&
         firstLetter &&
         isLongEnough(remainingLetters)
     ) {

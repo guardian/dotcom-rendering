@@ -39,6 +39,7 @@ export const ArticleRenderer: React.FC<{
                             html={element.html}
                             pillar={pillar}
                             designType={designType}
+                            display={display}
                             dropCap={element.dropCap}
                         />
                     );
