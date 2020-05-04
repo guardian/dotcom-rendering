@@ -47,8 +47,6 @@ const sendOphanEpicEvent = (action: OphanAction, testMeta: TestMeta): void => {
         action,
     };
 
-    console.log('sendOphanEpicEvent: ', componentEvent);
-
     window.guardian.ophan.record({ componentEvent });
 };
 
