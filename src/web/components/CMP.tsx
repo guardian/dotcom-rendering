@@ -35,7 +35,7 @@ export const CMP = () => {
 
     return (
         <>
-            {show && (
+            {true && (
                 <Suspense fallback={<></>}>
                     <ConsentManagementPlatform
                         source="dcr"

@@ -5,4 +5,4 @@
 __webpack_public_path__ =
     window.location.hostname === 'localhost'
         ? '/assets/'
-        : `${window.guardian.data.CAPI.config.frontendAssetsFullURL}/assets/`;
+        : `${window.guardian.app.data.CAPI.config.frontendAssetsFullURL}/assets/`;
