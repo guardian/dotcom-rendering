@@ -199,7 +199,6 @@ export const ImmersiveLayout = ({
             >
                 <Section
                     showSideBorders={false}
-                    borderColour={brandBorder.primary}
                     showTopBorder={false}
                     padded={false}
                     backgroundColour={brandBackground.primary}

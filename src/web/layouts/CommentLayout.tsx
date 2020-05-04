@@ -5,6 +5,7 @@ import {
     neutral,
     brandBorder,
     brandBackground,
+    brandLine,
     opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -112,6 +113,7 @@ const StandardGrid = ({
                 }
 
                 ${until.desktop} {
+                    grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
                         'title'
@@ -160,7 +162,9 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
-    margin-right: -1.25rem;
+    ${from.mobileLandscape} {
+        margin-right: -1.25rem;
+    }
     margin-top: -36px;
     margin-bottom: -29px;
 `;
@@ -262,7 +266,7 @@ export const CommentLayout = ({
 
             <Section
                 showSideBorders={true}
-                borderColour={brandBorder.primary}
+                borderColour={brandLine.primary}
                 showTopBorder={false}
                 padded={false}
                 backgroundColour={brandBackground.primary}

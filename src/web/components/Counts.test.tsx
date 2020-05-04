@@ -20,7 +20,7 @@ describe('Counts', () => {
         useApi.mockReset();
     });
 
-    it('It should render null if share_count is falsy', () => {
+    it('It should not render null if comments are disabled and share_count is zero', () => {
         useApi.mockReturnValue({
             data: { share_count: 0 },
         });
@@ -29,23 +29,21 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                commentCount={0}
                 pillar="news"
                 setOpenComments={() => {}}
             />,
         );
 
-        expect(container.firstChild).toBeNull();
+        expect(container.firstChild).not.toBeNull();
     });
 
-    it('It should render null if there is an error', () => {
+    it('It should not render anything if there was a share count error and comments are disabled', () => {
         useApi.mockReturnValue({ error: { message: 'Bad' } });
 
         const { container } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                commentCount={0}
                 pillar="news"
                 setOpenComments={() => {}}
             />,
@@ -54,14 +52,29 @@ describe('Counts', () => {
         expect(container.firstChild).toBeNull();
     });
 
-    it('It should render if share_count is truthy', () => {
+    it('It should still render the comment count even if the share count call failed', () => {
+        useApi.mockReturnValue({ error: { message: 'Bad' } });
+
+        const { getByTestId } = render(
+            <Counts
+                ajaxUrl={ajaxUrl}
+                pageId={pageId}
+                commentCount={34}
+                pillar="news"
+                setOpenComments={() => {}}
+            />,
+        );
+
+        expect(getByTestId('long-comment-count').innerHTML).toBe('34');
+    });
+
+    it('It should show the share count even if comments are disabled', () => {
         useApi.mockReturnValue({ data: { share_count: 100 } });
 
         const { getByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                commentCount={0}
                 pillar="news"
                 setOpenComments={() => {}}
             />,
@@ -71,14 +84,13 @@ describe('Counts', () => {
         expect(getByTestId('short-share-count').innerHTML).toBe('100');
     });
 
-    it('It should format long Counts correctly', () => {
+    it('It should format long share counts correctly', () => {
         useApi.mockReturnValue({ data: { share_count: 25000 } });
 
         const { getByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                commentCount={0}
                 pillar="news"
                 setOpenComments={() => {}}
             />,
@@ -88,12 +100,12 @@ describe('Counts', () => {
         expect(getByTestId('short-share-count').innerHTML).toBe('25k');
     });
 
-    it('It should not render the share component if there are no shares', () => {
+    it('It should still show zero even if the share count is zero', () => {
         useApi.mockReturnValue({
             data: { share_count: 0 },
         });
 
-        const { queryAllByTestId } = render(
+        const { queryAllByTestId, getByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
@@ -104,15 +116,15 @@ describe('Counts', () => {
         );
 
         expect(queryAllByTestId('long-comment-count').length).toBe(1);
-        expect(queryAllByTestId('long-share-count').length).toBe(0);
+        expect(getByTestId('short-share-count').innerHTML).toBe('0');
     });
 
-    it('It should not render the comment component if there are no comments', () => {
+    it('It should still render the comment component even if there are no comments', () => {
         useApi.mockReturnValue({
             data: { share_count: 80, counts: [{ id: 'abc', count: 0 }] },
         });
 
-        const { queryAllByTestId } = render(
+        const { queryAllByTestId, getByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
@@ -122,7 +134,9 @@ describe('Counts', () => {
             />,
         );
 
-        expect(queryAllByTestId('long-comment-count').length).toBe(0);
+        expect(queryAllByTestId('long-comment-count').length).toBe(1);
+        expect(getByTestId('short-comment-count').innerHTML).toBe('0');
+        expect(getByTestId('short-share-count').innerHTML).toBe('80');
         expect(queryAllByTestId('long-share-count').length).toBe(1);
     });
 
@@ -146,9 +160,9 @@ describe('Counts', () => {
         expect(queryAllByTestId('numbers-border').length).toBe(1);
     });
 
-    it('It should not render the border if there are only shares', () => {
+    it('It should still render the border even if both comments and shares are at zero', () => {
         useApi.mockReturnValue({
-            data: { share_count: 80, counts: [{ id: 'abc', count: 0 }] },
+            data: { share_count: 0, counts: [{ id: 'abc', count: 90 }] },
         });
 
         const { queryAllByTestId } = render(
@@ -162,27 +176,47 @@ describe('Counts', () => {
         );
 
         expect(queryAllByTestId('long-share-count').length).toBe(1);
-        expect(queryAllByTestId('long-comment-count').length).toBe(0);
-        expect(queryAllByTestId('numbers-border').length).toBe(0);
+        expect(queryAllByTestId('long-comment-count').length).toBe(1);
+        expect(queryAllByTestId('numbers-border').length).toBe(1);
     });
 
-    it('It should not render the border if there are only comments', () => {
+    it('It should not render the border if comments are disabled', () => {
         useApi.mockReturnValue({
-            data: { share_count: 0, counts: [{ id: 'abc', count: 78 }] },
+            data: { share_count: 80, counts: [{ id: 'abc', count: 0 }] },
         });
 
         const { queryAllByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                commentCount={1}
                 pillar="news"
                 setOpenComments={() => {}}
             />,
         );
 
-        expect(queryAllByTestId('long-share-count').length).toBe(0);
-        expect(queryAllByTestId('long-comment-count').length).toBe(1);
+        expect(queryAllByTestId('long-share-count').length).toBe(1);
+        expect(queryAllByTestId('long-comment-count').length).toBe(0);
         expect(queryAllByTestId('numbers-border').length).toBe(0);
+    });
+
+    it('It should format really long numbers correctly', () => {
+        useApi.mockReturnValue({
+            data: { share_count: 98460, counts: [{ id: 'abc', count: 78 }] },
+        });
+
+        const { getByTestId } = render(
+            <Counts
+                ajaxUrl={ajaxUrl}
+                pageId={pageId}
+                commentCount={1945}
+                pillar="news"
+                setOpenComments={() => {}}
+            />,
+        );
+
+        expect(getByTestId('long-comment-count').innerHTML).toBe('1,945');
+        expect(getByTestId('long-share-count').innerHTML).toBe('98,460');
+        expect(getByTestId('short-comment-count').innerHTML).toBe('1945');
+        expect(getByTestId('short-share-count').innerHTML).toBe('98k');
     });
 });
