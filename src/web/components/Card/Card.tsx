@@ -115,6 +115,7 @@ export const Card = ({
         contentCoverage = coverages.content[imageSize];
     }
 
+    const showCommentCount = commentCount || commentCount === 0;
     const { long: longCount, short: shortCount } = formatCount(commentCount);
 
     const pillarToUse =
@@ -225,7 +226,9 @@ export const Card = ({
                                         )
                                     }
                                     commentCount={
-                                        longCount && shortCount ? (
+                                        showCommentCount &&
+                                        longCount &&
+                                        shortCount ? (
                                             <CardCommentCount
                                                 designType={designType}
                                                 pillar={pillarToUse}
