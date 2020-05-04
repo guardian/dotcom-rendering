@@ -82,7 +82,10 @@ if (process.env.NODE_ENV === 'production') {
         app.use('/assets', express.static(path.relative(__dirname, dist)));
     }
 
-    app.use('/Article', async (req: Request, res: Response) => {
+    app.post('/Article', renderArticle);
+    app.post('/AMPArticle', renderAMPArticle);
+
+    app.get('/Article', async (req: Request, res: Response) => {
         // Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
         try {
             const url = buildUrlFromQueryParam(req);
@@ -98,7 +101,7 @@ if (process.env.NODE_ENV === 'production') {
         }
     });
 
-    app.use('/AMPArticle', async (req: Request, res: Response) => {
+    app.get('/AMPArticle', async (req: Request, res: Response) => {
         // Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
         try {
             const url = buildUrlFromQueryParam(req);
