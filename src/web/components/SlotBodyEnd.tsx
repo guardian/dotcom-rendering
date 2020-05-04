@@ -25,20 +25,24 @@ const checkForErrors = (response: any) => {
 
 type OphanAction = 'INSERT' | 'VIEW';
 
-const testName = 'FrontendDotcomRenderingEpic';
-const campaignCode = 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr';
+type TestMeta = {
+    abTestName: string;
+    abTestVariant: string;
+    campaignCode: string;
+    campaignId: string;
+};
 
-const sendOphanEpicEvent = (action: OphanAction): void => {
+const sendOphanEpicEvent = (action: OphanAction, testMeta: TestMeta): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode,
-            id: campaignCode,
+            campaignCode: testMeta.campaignCode,
+            id: testMeta.campaignId,
         },
         abTest: {
-            name: testName,
-            variant: 'dcr',
+            name: testMeta.abTestName,
+            variant: testMeta.abTestVariant,
         },
         action,
     };
@@ -117,6 +121,13 @@ const buildPayload = (props: Props) => {
     };
 };
 
+type SlotState = {
+    html: string;
+    css: string;
+    js: string;
+    meta: TestMeta;
+};
+
 const MemoisedInner = ({
     isSignedIn,
     countryCode,
@@ -130,11 +141,7 @@ const MemoisedInner = ({
     contributionsServiceUrl,
 }: Props) => {
     const [data, setData] = useState<{
-        slot?: {
-            html: string;
-            css: string;
-            js: string;
-        };
+        slot?: SlotState;
     }>();
 
     // Debounce the IntersectionObserver callback
@@ -167,16 +174,18 @@ const MemoisedInner = ({
         getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
-            .then(json =>
+            .then(json => {
                 setData({
                     slot: {
                         html: json.data.html,
                         css: json.data.css,
                         js: json.data.js,
+                        meta: json.data.meta,
                     },
-                }),
-            )
-            .then(() => sendOphanEpicEvent('INSERT'))
+                });
+
+                sendOphanEpicEvent('INSERT', json.data.meta);
+            })
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -192,11 +201,22 @@ const MemoisedInner = ({
         // because of the way the hook behaves, it'll only ever go from false ->
         // true once.
         if (hasBeenSeen) {
-            // Add a new entry to the view log when we know an Epic is viewed
-            logView(testName);
-            sendOphanEpicEvent('VIEW');
+            const meta = data?.slot?.meta;
+
+            if (meta) {
+                // Add a new entry to the view log when we know an Epic is viewed
+                logView(meta.abTestName);
+                sendOphanEpicEvent('VIEW', meta);
+            }
         }
-    }, [hasBeenSeen]);
+        // At the moment, given the information we currently store in data, it's
+        // fine to add it as a dependency because it won't ever change after
+        // viewing, so we shouldn't ever run the hook multiple times. If we _do_
+        // ever have an implementation where information in data could change
+        // after viewing, we'll need to revisit this. Perhaps it's clearer to
+        // remove data from the dependencies and disable the exhaustive-deps
+        // rule, as above.
+    }, [hasBeenSeen, data]);
 
     // Rely on useEffect to run a function that initialises the slot once it's
     // been injected in the DOM.
