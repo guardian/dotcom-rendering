@@ -5,6 +5,7 @@ import {
     neutral,
     brandBorder,
     brandBackground,
+    brandLine,
     opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -266,7 +267,7 @@ export const CommentLayout = ({
             <Section
                 sectionId="nav-root"
                 showSideBorders={true}
-                borderColour={brandBorder.primary}
+                borderColour={brandLine.primary}
                 showTopBorder={false}
                 padded={false}
                 backgroundColour={brandBackground.primary}
