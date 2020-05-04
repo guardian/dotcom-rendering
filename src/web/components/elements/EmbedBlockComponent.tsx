@@ -28,7 +28,7 @@ export const EmbedBlockComponent = ({ html, alt }: Props) => {
     // Email embeds are being turned into atoms, so we can remove this hack when that happens
     const isEmailEmbed = html.includes('email/form');
     return (
-        <div className={embedContainer}>
+        <div data-cy="embed-block" className={embedContainer}>
             <div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
             {isEmailEmbed && alt && (
                 <div className={emailCaptionStyle}>{alt}</div>

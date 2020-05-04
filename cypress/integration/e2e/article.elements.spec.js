@@ -48,4 +48,23 @@ describe('Elements', function() {
             getIframeBody().contains('View More on Instagram');
         });
     });
+
+    describe('WEB', function() {
+        // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
+        const getIframeBody = () => {
+            return cy
+                .get('div[data-cy="embed-block"] > div > iframe')
+                .its('0.contentDocument.body')
+                .should('not.be.empty')
+                .then(cy.wrap);
+        };
+
+        it('should render the embed', function() {
+            cy.visit(
+                'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+            );
+
+            getIframeBody().contains('radiolab');
+        });
+    });
 });
