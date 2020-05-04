@@ -54,7 +54,7 @@ describe('Interactivity', function() {
     });
 
     describe('Navigating the Pillar menu', function() {
-        it.only('should expand the desktop pillar menu when More is clicked', function() {
+        it('should expand the desktop pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
