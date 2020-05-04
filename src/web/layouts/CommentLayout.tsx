@@ -216,9 +216,7 @@ export const CommentLayout = ({
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Render the slot if one is true:
-    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
-    // 2) The global switch for the Frontend/DCR Epic test is true
+    // Render the slot if switch is set to true or flag set in URL (i.e. ?slot-machine-flags=showBodyEnd)
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
         CAPI.config.switches.slotBodyEnd;
