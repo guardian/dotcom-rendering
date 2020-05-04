@@ -15,7 +15,7 @@ import {
     AssetType,
     IAsset as Asset,
     IAtoms as Atoms,
-    IAtom as Atom,
+    IAtom
 } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { Format, Pillar, Design, Display } from 'format';
@@ -35,7 +35,7 @@ const enum ElementKind {
     Audio,
     Embed,
     Video,
-    ContentAtom
+    Atom
 }
 
 interface Fields extends Format {
@@ -70,9 +70,9 @@ type Video = {
     width: string;
 }
 
-type ContentAtom = {
-    kind: ElementKind.ContentAtom;
-    atom: Atom;
+type Atom = {
+    kind: ElementKind.Atom;
+    atom: IAtom;
 }
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
@@ -98,10 +98,10 @@ type BodyElement = {
 } | {
     kind: ElementKind.Instagram;
     html: string;
-} | Audio | {
+} | {
     kind: ElementKind.Embed;
     html: string;
-} | Video | ContentAtom;
+} | Audio | Video | Atom;
 
 type Body =
     Result<string, BodyElement>[];
@@ -321,7 +321,7 @@ const parseElement = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No atom matched')
             }
 
-            return new Ok({ kind: ElementKind.ContentAtom, atom });
+            return new Ok({ kind: ElementKind.Atom, atom });
         }
 
         default:

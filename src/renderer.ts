@@ -401,7 +401,7 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
             return h('div', props);
         }
 
-        case ElementKind.ContentAtom:
+        case ElementKind.Atom:
             if (element.atom.atomType === AtomType.INTERACTIVE) {
                 const html = element.atom.data.interactive?.html
                 const styles = element.atom.data.interactive?.css
