@@ -12,7 +12,7 @@ type Props = {
 
 const emailCaptionStyle = css`
     ${textSans.xsmall()};
-    word-wrap: break-word;
+    word-break: break-all;
     color: ${text.supporting};
 `;
 
