@@ -43,6 +43,8 @@ const sendOphanEpicEvent = (action: OphanAction): void => {
         action,
     };
 
+    console.log('sendOphanEpicEvent: ', componentEvent);
+
     window.guardian.ophan.record({ componentEvent });
 };
 
@@ -161,7 +163,8 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
-        getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
+        // getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
+        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
