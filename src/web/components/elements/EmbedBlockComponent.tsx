@@ -16,7 +16,7 @@ const emailCaptionStyle = css`
     color: ${text.supporting};
 `;
 
-const widthOverride = css`
+const embedContainer = css`
     iframe {
         /* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
         width: 100% !important;
@@ -25,9 +25,10 @@ const widthOverride = css`
 `;
 
 export const EmbedBlockComponent = ({ html, alt }: Props) => {
+    // Email embeds are being turned into atoms, so we can remove this hack when that happens
     const isEmailEmbed = html.includes('email/form');
     return (
-        <div className={widthOverride}>
+        <div className={embedContainer}>
             <div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
             {isEmailEmbed && alt && (
                 <div className={emailCaptionStyle}>{alt}</div>
