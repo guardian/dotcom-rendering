@@ -103,6 +103,9 @@
                     },
                     {
                         "$ref": "#/definitions/DocumentBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/TableBlockElement"
                     }
                 ]
             }
@@ -1170,6 +1173,21 @@
             },
             "required": ["_type", "isMandatory"]
         },
+        "TableBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.TableBlockElement"
+                    ]
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["_type", "isMandatory"]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1269,6 +1287,9 @@
                             },
                             {
                                 "$ref": "#/definitions/DocumentBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/TableBlockElement"
                             }
                         ]
                     }

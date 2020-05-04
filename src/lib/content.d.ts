@@ -277,6 +277,11 @@ interface DocumentBlockElement {
     isMandatory: boolean;
 }
 
+interface TableBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TableBlockElement';
+    isMandatory: boolean;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -307,4 +312,5 @@ type CAPIElement =
     | AudioBlockElement
     | VideoBlockElement
     | CodeBlockElement
-    | DocumentBlockElement;
+    | DocumentBlockElement
+    | TableBlockElement;
