@@ -1,6 +1,6 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { getStatic } from '@root/src/lib/assets';
+import { getStatic, CDN } from '@root/src/lib/assets';
 import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
@@ -103,6 +103,40 @@ export const htmlTemplate = ({
 
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
+    // Duplicated prefetch and preconnect tags from DCP:
+    // Documented here: https://github.com/guardian/frontend/pull/12935
+
+    // Information on preconnecting:
+    // https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
+    const staticPreconnectUrls = [
+        `${CDN}`,
+        `https://i.guim.co.uk`,
+        `https://interactive.guim.co.uk`,
+        `https://www.google-analytics.com`,
+    ];
+
+    // Information on prefetching:
+    // https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+    const staticPrefetchUrls = [
+        `${CDN}`,
+        `https://i.guim.co.uk`,
+        `https://api.nextgen.guardianapps.co.uk`,
+        `https://hits-secure.theguardian.com`,
+        `https://j.ophan.co.uk`,
+        `https://ophan.theguardian.com`,
+        `https://phar.gu-web.net`,
+        `https://www.google-analytics.com`,
+        `https://sb.scorecardresearch.com`,
+    ];
+
+    const prefetchTags = staticPrefetchUrls.map(
+        src => `<link rel="dns-prefetch" href="${src}">`,
+    );
+
+    const preconnectTags = staticPreconnectUrls.map(
+        src => `<link rel="preconnect" href="${src}">`,
+    );
+
     return `<!doctype html>
         <html lang="en">
             <head>
@@ -113,6 +147,9 @@ export const htmlTemplate = ({
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <meta name="theme-color" content="${brandBackground.primary}" />
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+
+                ${preconnectTags.join('\n')}
+                ${prefetchTags.join('\n')}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
