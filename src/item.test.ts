@@ -636,14 +636,6 @@ describe('video elements', () => {
 });
 
 describe('format', () => {
-    test('get format returns correct fields', () => {
-        const item = f(immersive);
-        const format = getFormat(item);
-        expect('design' in format).toBe(true);
-        expect('display' in format).toBe(true);
-        expect('pillar' in format).toBe(true);
-    });
-
     test('Uses immersive display', () => {
         const item = f(immersive);
         const format = getFormat(item);
