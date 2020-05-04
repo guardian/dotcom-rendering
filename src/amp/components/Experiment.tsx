@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AmpModelCollection } from '@root/src/amp/lib/experiment';
+import { AmpExperimentCollection } from '@root/src/amp/lib/experiment';
 
 export const Experiment: React.FC<{
-    experiments: AmpModelCollection;
+    experiments: AmpExperimentCollection;
 }> = ({ experiments }) => {
     const script: string = `<amp-experiment>
         <script type="application/json">

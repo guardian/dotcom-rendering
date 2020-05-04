@@ -1,4 +1,4 @@
-interface ExperimentModel<VariantData> {
+interface Experiment<VariantData> {
     sticky: boolean;
     consentNotificationId?: string;
     variants: {
@@ -6,9 +6,9 @@ interface ExperimentModel<VariantData> {
     };
 }
 
-type AmpModel = ExperimentModel<number>;
+type AmpExperiment = Experiment<number>;
 
-type StyledExperimentModel = ExperimentModel<VariantConfig>;
+type StyledExperiment = Experiment<VariantConfig>;
 
 interface VariantConfig {
     proportion: number;
@@ -19,9 +19,9 @@ interface ExperimentCollection<ExperimentObject> {
     [experimentName: string]: ExperimentObject;
 }
 
-export type AmpModelCollection = ExperimentCollection<AmpModel>;
+export type AmpExperimentCollection = ExperimentCollection<AmpExperiment>;
 
-export type StyledModelCollection = ExperimentCollection<StyledExperimentModel>;
+export type StyledExperimentCollection = ExperimentCollection<StyledExperiment>;
 
 type StylesCollection = ExperimentCollection<{ [variantName: string]: string }>;
 
@@ -37,8 +37,8 @@ const extractProportionFromVariants = (variants: {
     );
 
 export const extractExperimentModels = (
-    fullConfig: StyledModelCollection,
-): AmpModelCollection => {
+    fullConfig: StyledExperimentCollection,
+): AmpExperimentCollection => {
     return Object.entries(fullConfig).reduce(
         (extractedModels, [experimentName, styledModel]) => {
             const { variants, ...configWithoutVariants } = styledModel;
@@ -54,7 +54,7 @@ export const extractExperimentModels = (
                 },
             };
         },
-        {} as AmpModelCollection,
+        {} as AmpExperimentCollection,
     );
 };
 
@@ -70,7 +70,7 @@ const extractStyleFromVariants = (variants: {
     );
 
 export const extractStylesFromExperiments = (
-    fullConfig: StyledModelCollection,
+    fullConfig: StyledExperimentCollection,
 ): StylesCollection => {
     return Object.entries(fullConfig).reduce(
         (extractedModels, [experimentName, styledModel]) => {
@@ -83,15 +83,15 @@ export const extractStylesFromExperiments = (
 };
 
 export const filterActiveExperiments = (
-    abTestObject: StyledModelCollection,
+    abTestObject: StyledExperimentCollection,
     switches: { [key: string]: boolean },
-): StyledModelCollection => {
+): StyledExperimentCollection => {
     return Object.entries(abTestObject).reduce(
         (activeExperiments, [testName, testConfig]) =>
             switches[testName]
                 ? { ...activeExperiments, [testName]: testConfig }
                 : activeExperiments,
-        {} as StyledModelCollection,
+        {} as StyledExperimentCollection,
     );
 };
 
@@ -119,15 +119,15 @@ export const buildExperimentStyle = (experiments: StylesCollection): string => {
 };
 
 export const getAllActiveExperiments = (
-    experimentFullConfig: StyledModelCollection,
+    experimentFullConfig: StyledExperimentCollection,
     switches: { [key: string]: boolean },
-): AmpModelCollection =>
+): AmpExperimentCollection =>
     extractExperimentModels(
         filterActiveExperiments(experimentFullConfig, switches),
     );
 
 export const getAllActiveCss = (
-    experimentFullConfig: StyledModelCollection,
+    experimentFullConfig: StyledExperimentCollection,
     switches: { [key: string]: boolean },
 ) =>
     buildExperimentStyle(

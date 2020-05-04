@@ -1,5 +1,5 @@
 import {
-    StyledModelCollection,
+    StyledExperimentCollection,
     filterActiveExperiments,
     extractExperimentModels,
     extractStylesFromExperiments,
@@ -14,7 +14,7 @@ describe('Experiment Component', () => {
         },
     };
 
-    const testFullConfig: StyledModelCollection = {
+    const testFullConfig: StyledExperimentCollection = {
         experiment1: {
             sticky: false,
             variants: {
