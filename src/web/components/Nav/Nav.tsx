@@ -138,6 +138,11 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                           if (e.keyCode === 27) {
                             if(navInputCheckbox.checked) {
                               navInputCheckbox.click()
+                              if(window.getComputedStyle(veggieBurger).display === 'none'){
+                                showMoreButton.focus()
+                              }else{
+                                veggieBurger.focus()
+                              }
                             }
                           }
                         })

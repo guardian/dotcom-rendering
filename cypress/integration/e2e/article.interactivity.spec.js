@@ -54,7 +54,7 @@ describe('Interactivity', function() {
     });
 
     describe('Navigating the Pillar menu', function() {
-        it('should expand the desktop pillar menu when More is clicked', function() {
+        it('should expand and close the desktop pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
@@ -67,6 +67,10 @@ describe('Interactivity', function() {
                 .within(() => {
                     cy.get('a').should('have.focus');
                 });
+            // check focus is on menu button on close
+            cy.focused().type('{esc}');
+            cy.focused().should('have.attr', 'data-cy', 'nav-show-more-button');
+
             // TODO: should also include assertion to select menu item when AD z-index fixed
             // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
         });
@@ -81,6 +85,9 @@ describe('Interactivity', function() {
                 cy.contains('Columnists').should('not.be.visible');
                 cy.get('[data-cy=column-collapse-Opinion]').click();
                 cy.contains('Columnists').should('be.visible');
+                // check focus is on veggie burger menu button on close
+                cy.focused().type('{esc}');
+                cy.focused().should('have.attr', 'data-cy', 'veggie-burger');
             });
 
             it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function() {
@@ -108,17 +115,22 @@ describe('Interactivity', function() {
                 cy.focused()
                     .type('{enter}')
                     .tab();
-                cy.focused().should(
-                    'have.attr',
-                    'data-cy',
-                    'column-collapse-sublink-UK',
-                );
+                // get the first column (news column)
+                cy.get('[data-cy="nav-menu-columns"] li')
+                    .first()
+                    .within(() => {
+                        // get the first element in that column
+                        cy.get('ul > li > a')
+                            .first()
+                            .should('have.focus');
+                    });
             });
 
             it('should let reader traverse section titles using keyboard', function() {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').type('{enter}');
+                // Close the news menu
                 cy.focused()
                     .type('{enter}')
                     .tab();
@@ -127,6 +139,7 @@ describe('Interactivity', function() {
                     'data-cy',
                     'column-collapse-Opinion',
                 );
+                // Open the opinion menu
                 cy.focused()
                     .type('{enter}')
                     .tab();
