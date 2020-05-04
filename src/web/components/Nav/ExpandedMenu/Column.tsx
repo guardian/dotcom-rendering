@@ -233,6 +233,7 @@ export const Column = ({
                 )}
                 role="menu"
                 id={`${column.title.toLowerCase()}Links`}
+                data-cy={`${column.title.toLowerCase()}Links`}
             >
                 {(column.children || []).map(link => (
                     <li

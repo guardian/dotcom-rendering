@@ -54,13 +54,19 @@ describe('Interactivity', function() {
     });
 
     describe('Navigating the Pillar menu', function() {
-        it('should expand the desktop pillar menu when More is clicked', function() {
+        it.only('should expand the desktop pillar menu when More is clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
             cy.get('[data-cy=expanded-menu]').within(() => {
                 cy.contains('Columnists').should('be.visible');
             });
+            // Assert first item is highlighted
+            cy.get('[data-cy="newsLinks"] > li')
+                .first()
+                .within(() => {
+                    cy.get('a').should('have.focus');
+                });
             // TODO: should also include assertion to select menu item when AD z-index fixed
             // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
         });
@@ -109,7 +115,7 @@ describe('Interactivity', function() {
                 );
             });
 
-            it.only('should let reader traverse section titles using keyboard', function() {
+            it('should let reader traverse section titles using keyboard', function() {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').type('{enter}');
