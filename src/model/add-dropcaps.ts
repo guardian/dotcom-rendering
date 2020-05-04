@@ -47,7 +47,7 @@ const enhanceElements = (elements: CAPIElement[]): CAPIElement[] => {
     return enhanced;
 };
 
-export const enhanceCAPI = (data: any): CAPIType => {
+export const addDropCaps = (data: CAPIType): CAPIType => {
     const enhancedBlocks = data.blocks.map((block: Block) => {
         return {
             ...block,

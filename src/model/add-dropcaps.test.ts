@@ -1,12 +1,12 @@
-import { enhanceCAPI } from './enhance';
+import { addDropCaps } from './add-dropcaps';
 import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
 describe('Enhance CAPI', () => {
     it('creates an identical but new object when no changes are needed', () => {
-        expect(enhanceCAPI(example)).not.toBe(example); // We created a new object
-        expect(enhanceCAPI(example)).toEqual(example); // The new object is what we expect
+        expect(addDropCaps(example)).not.toBe(example); // We created a new object
+        expect(addDropCaps(example)).toEqual(example); // The new object is what we expect
     });
 
     it('sets the drop cap flag correctly', () => {
@@ -56,7 +56,7 @@ describe('Enhance CAPI', () => {
             ],
         };
 
-        expect(enhanceCAPI(input)).toEqual(expectedOutput);
+        expect(addDropCaps(input)).toEqual(expectedOutput);
     });
 
     it('handles multiple drop cap flags', () => {
@@ -122,7 +122,7 @@ describe('Enhance CAPI', () => {
             ],
         };
 
-        expect(enhanceCAPI(input)).toEqual(expectedOutput);
+        expect(addDropCaps(input)).toEqual(expectedOutput);
     });
 
     it('handles drop cap flags being put before elements that are not text', () => {
@@ -175,7 +175,7 @@ describe('Enhance CAPI', () => {
             ],
         };
 
-        expect(enhanceCAPI(input)).toEqual(expectedOutput);
+        expect(addDropCaps(input)).toEqual(expectedOutput);
     });
 
     it('handles multiple drop cap flags in sequence', () => {
@@ -245,6 +245,6 @@ describe('Enhance CAPI', () => {
             ],
         };
 
-        expect(enhanceCAPI(input)).toEqual(expectedOutput);
+        expect(addDropCaps(input)).toEqual(expectedOutput);
     });
 });
