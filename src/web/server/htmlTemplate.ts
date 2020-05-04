@@ -122,6 +122,7 @@ export const htmlTemplate = ({
         `https://securepubads.g.doubleclick.net`,
         `https://j.ophan.co.uk`,
         `https://ophan.theguardian.com`,
+        `https://googleads.g.doubleclick.net`,
     ];
 
     const staticPrefetchUrls = [
@@ -135,7 +136,6 @@ export const htmlTemplate = ({
         `https://cdn.permutive.com`,
         `https://collector.brandmetrics.com`,
         `https://confiant-integrations.global.ssl.fastly.net`,
-        `https://googleads.g.doubleclick.net`,
         `https://hits-secure.theguardian.com`,
         `https://ib.adnxs.com`,
         `https://interactive.guim.co.uk`,
