@@ -1,7 +1,8 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from 'mapiThriftModels';
-import { fromCapi, Standard, ElementKind, Review, Audio, Video } from 'item';
+import { fromCapi, Standard, ElementKind, Review, Audio, Video, getFormat } from 'item';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
+import { Display } from '@guardian/types/Format';
 
 const articleContent = {
     id: "",
@@ -47,6 +48,73 @@ const articleContentWithElement = (element: BlockElement) => ({
                 elements: [element]
             }
         ]
+    }
+})
+
+const immersive = {
+    id: "",
+    type: ContentType.ARTICLE,
+    webTitle: "",
+    webUrl: "",
+    apiUrl: "",
+    tags: [],
+    references: [],
+    isHosted: false,
+    fields: {
+        displayHint: "immersive"
+    }
+}
+
+const showcase = ({
+    ...articleContent,
+    blocks: {
+        body: [
+            {
+                id: "",
+                bodyHtml: "",
+                bodyTextSummary: "",
+                attributes: {},
+                published: true,
+                contributors: [],
+                elements: []
+            }
+        ],
+        main: {
+            id: "",
+            bodyHtml: "",
+            bodyTextSummary: "",
+            attributes: {},
+            published: true,
+            contributors: [],
+            elements: [
+                {
+                    type: ElementType.IMAGE,
+                    assets: [
+                        {
+                            type: AssetType.IMAGE,
+                            mimeType: "image/jpeg",
+                            file: "https://gu.com/image.jpg",
+                            typeData: {
+                                aspectRatio: "5:3",
+                                width: 5302,
+                                height: 3182,
+                                isMaster: true
+                            }
+                        }
+                    ],
+                    imageTypeData: {
+                        role: 'showcase',
+                        copyright: "",
+                        source: "",
+                        photographer: "",
+                        mediaId: "",
+                        mediaApiUri: "https://image.co.uk",
+                        suppliersReference: "",
+                        imageType: ""
+                    }
+                }
+            ]
+        }
     }
 })
 
@@ -564,5 +632,27 @@ describe('video elements', () => {
         const item = f(articleContentWithElement(videoElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
+    });
+});
+
+describe('format', () => {
+    test('get format returns correct fields', () => {
+        const item = f(immersive);
+        const format = getFormat(item);
+        expect('design' in format).toBe(true);
+        expect('display' in format).toBe(true);
+        expect('pillar' in format).toBe(true);
+    });
+
+    test('Uses immersive display', () => {
+        const item = f(immersive);
+        const format = getFormat(item);
+        expect(format.display).toBe(Display.Immersive)
+    });
+
+    test('Uses showcase display', () => {
+        const item = f(showcase);
+        const format = getFormat(item);
+        expect(format.display).toBe(Display.Showcase)
     });
 });
