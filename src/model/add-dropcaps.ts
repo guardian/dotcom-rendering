@@ -3,45 +3,51 @@ import { JSDOM } from 'jsdom';
 const TEXT = 'model.dotcomrendering.pageElements.TextBlockElement';
 const SUBHEADING = 'model.dotcomrendering.pageElements.SubheadingBlockElement';
 
-const isDropCapFlag = (element: SubheadingBlockElement): boolean => {
+const isDropCapFlag = (element: CAPIElement): boolean => {
     // A drop cap flag: <h2><strong>* * *</strong></h2>
+    if (element._type !== SUBHEADING) return false;
     const frag = JSDOM.fragment(element.html);
     if (!frag || !frag.firstChild) return false;
     return frag.firstChild.nodeName === 'H2' && frag.textContent === '* * *';
 };
 
-const enhanceElements = (elements: CAPIElement[]): CAPIElement[] => {
-    // enhanceElements loops the array of article elements making 'enhancements' (read hacks)
-    // to allow us to support the data model coming out of CAPI. Similar logic exists in frontend
-    // here: https://github.com/guardian/frontend/blob/08b3732d113c28c5165ab2ce8e9b7b52909da336/common/app/views/support/HtmlCleaner.scala
-    // TODO: Take these changes and push them up the stack so that we don't need to make logic
-    // overrides in the rendering tier.
-    //
-    // The current list of enhancements are:
-    //
-    // 1. Drop Cap
-    //    If a h2 tag containing * * * is found, then the proceeding element should be givin drop
-    //    cap styling (so long as it's a text element).
-    //
-    let dropCapFlagSeen = false;
+const isSubheading = (element: CAPIElement): boolean => {
+    return element._type === SUBHEADING;
+};
 
+const prevElementWasDropCapFlag = (
+    elements: CAPIElement[],
+    i: number,
+): boolean => {
+    return isSubheading(elements[i - 1]) && isDropCapFlag(elements[i - 1]);
+};
+
+const checkForDropCaps = (elements: CAPIElement[]): CAPIElement[] => {
+    // checkForDropCaps loops the array of article elements looking for drop cap flags and
+    // enhancing the data accordingly. In short, if a h2 tag is equal to * * * then the
+    // text element immediately aftwards should have dropCap set to true
     const enhanced: CAPIElement[] = [];
-    elements.forEach(element => {
-        if (element._type === TEXT && dropCapFlagSeen) {
-            // The previous element was the drop cap * * * flag so set the
-            // dropCap property to true on this, the next, element
-            element.dropCap = true;
-            enhanced.push(element);
-            dropCapFlagSeen = false;
-        } else if (element._type === SUBHEADING && isDropCapFlag(element)) {
-            // This element is the * * * drop cap flag so just set our variable
-            // and don't include this element in the enhanced array, removing it
-            dropCapFlagSeen = true;
-        } else {
-            // Otherwise pass this element though unchanged
-            enhanced.push(element);
-            // We also reset this flag here just in case the next element wasn't text
-            dropCapFlagSeen = false;
+    elements.forEach((element, i) => {
+        switch (element._type) {
+            case SUBHEADING:
+                if (!isDropCapFlag(element)) {
+                    enhanced.push(element);
+                }
+                // Otherwise, if it was a drop cap we delete it by not passing it
+                // through
+                break;
+            case TEXT:
+                // Always pass first element through
+                if (i === 0) enhanced.push(element);
+                else if (prevElementWasDropCapFlag(elements, i))
+                    enhanced.push({
+                        ...element,
+                        dropCap: true,
+                    });
+                else enhanced.push(element);
+                break;
+            default:
+                enhanced.push(element);
         }
     });
     return enhanced;
@@ -51,7 +57,7 @@ export const addDropCaps = (data: CAPIType): CAPIType => {
     const enhancedBlocks = data.blocks.map((block: Block) => {
         return {
             ...block,
-            elements: enhanceElements(block.elements),
+            elements: checkForDropCaps(block.elements),
         };
     });
 

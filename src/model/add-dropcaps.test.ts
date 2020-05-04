@@ -3,7 +3,7 @@ import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
-describe('Enhance CAPI', () => {
+describe('Drop Caps', () => {
     it('creates an identical but new object when no changes are needed', () => {
         expect(addDropCaps(example)).not.toBe(example); // We created a new object
         expect(addDropCaps(example)).toEqual(example); // The new object is what we expect
