@@ -105,36 +105,66 @@ export const htmlTemplate = ({
 
     // Duplicated prefetch and preconnect tags from DCP:
     // Documented here: https://github.com/guardian/frontend/pull/12935
-
-    // Information on preconnecting:
+    // Preconnect should be used for the most crucial third party domains
+    // "use preconnect when you know for sure that you’re going to be accessing a resource"
+    // - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
+    // DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
+    // Preconnecting to too many URLs can reduce page performance
+    // DNS-prefetch can also be used as a fallback for IE11
+    // More information on preconnecting:
     // https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
+    // More information on prefetching:
+    // https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+
     const staticPreconnectUrls = [
         `${CDN}`,
         `https://i.guim.co.uk`,
-        `https://interactive.guim.co.uk`,
-        `https://www.google-analytics.com`,
-    ];
-
-    // Information on prefetching:
-    // https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
-    const staticPrefetchUrls = [
-        `${CDN}`,
-        `https://i.guim.co.uk`,
-        `https://api.nextgen.guardianapps.co.uk`,
-        `https://hits-secure.theguardian.com`,
+        `https://securepubads.g.doubleclick.net`,
         `https://j.ophan.co.uk`,
         `https://ophan.theguardian.com`,
-        `https://phar.gu-web.net`,
-        `https://www.google-analytics.com`,
-        `https://sb.scorecardresearch.com`,
     ];
 
-    const prefetchTags = staticPrefetchUrls.map(
-        src => `<link rel="dns-prefetch" href="${src}">`,
-    );
+    const staticPrefetchUrls = [
+        ...staticPreconnectUrls,
+        `https://ad.crwdcntrl.net`,
+        `https://api.nextgen.guardianapps.co.uk`,
+        `https://api.permutive.com`,
+        `https://cdn-gl.imrworldwide.com`,
+        `https://cdn.adsafeprotected.com`,
+        `https://cdn.brandmetrics.com`,
+        `https://cdn.permutive.com`,
+        `https://collector.brandmetrics.com`,
+        `https://confiant-integrations.global.ssl.fastly.net`,
+        `https://googleads.g.doubleclick.net`,
+        `https://hits-secure.theguardian.com`,
+        `https://ib.adnxs.com`,
+        `https://interactive.guim.co.uk`,
+        `https://ipv6.guim.co.uk`,
+        `https://pagead2.googlesyndication.com`,
+        `https://phar.gu-web.net`,
+        `https://pixel.adsafeprotected.com`,
+        `https://pubads.g.doubleclick.net`,
+        `https://sb.scorecardresearch.com`,
+        `https://secure-gl.imrworldwide.com`,
+        `https://securepubads.g.doubleclick.net`,
+        `https://static.ads-twitter.com`,
+        `https://static.theguardian.com`,
+        `https://stats.g.doubleclick.net`,
+        `https://support.theguardian.com`,
+        `https://tpc.googlesyndication.com`,
+        `https://www.facebook.com`,
+        `https://www.google-analytics.com`,
+        `https://www.google.co.uk`,
+        `https://www.google.com`,
+        `https://www.googleadservices.com`,
+    ];
 
     const preconnectTags = staticPreconnectUrls.map(
         src => `<link rel="preconnect" href="${src}">`,
+    );
+
+    const prefetchTags = staticPrefetchUrls.map(
+        src => `<link rel="dns-prefetch" href="${src}">`,
     );
 
     return `<!doctype html>
