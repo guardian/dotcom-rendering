@@ -62,7 +62,13 @@ export const ArticleRenderer: React.FC<{
                         <InstagramBlockComponent key={i} element={element} />
                     );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-                    return <EmbedBlockComponent key={i} element={element} />;
+                    return (
+                        <EmbedBlockComponent
+                            key={i}
+                            html={element.html}
+                            alt={element.alt}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteComponent
