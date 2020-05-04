@@ -39,7 +39,7 @@ const go = async () => {
         webpackDevMiddleware(compiler, {
             serverSideRender: true,
             logLevel: 'silent',
-            publicPath: '/assets/javascript/',
+            publicPath: '/assets/',
             ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
         }),
     );

@@ -9,21 +9,10 @@ const { root, dist, siteName } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
-// GU_STAGE is set in cloudformation.yml, so will be undefined locally
-const stage =
-    typeof process.env.GU_STAGE === 'string'
-        ? process.env.GU_STAGE.toUpperCase()
-        : process.env.GU_STAGE;
-
-const CDN = stage
-    ? `https://assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-    : '/';
-
 const commonConfigs = ({ platform }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
-        publicPath: `${CDN}assets/`,
         path: dist,
     },
     stats: 'errors-only',
