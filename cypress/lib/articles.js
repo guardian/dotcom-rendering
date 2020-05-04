@@ -23,6 +23,14 @@ export const articles = [
         hasRichLinks: false,
         hideMostViewed: true,
     },
+    {
+        url:
+            'https://www.theguardian.com/environment/2020/may/01/not-just-weeds-how-rebel-botanists-are-using-graffiti-to-name-forgotten-flora-aoe',
+        pillar: 'news',
+        designType: 'Feature',
+        hasRichLinks: true,
+        hideMostViewed: true,
+    },
 ];
 
 export const AMPArticles = [
