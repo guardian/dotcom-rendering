@@ -25,7 +25,7 @@ const embedContainer = css`
 `;
 
 export const EmbedBlockComponent = ({ html, alt }: Props) => {
-    // Email embeds are being turned into atoms, so we can remove this hack when that happens
+    // TODO: Email embeds are being turned into atoms, so we can remove this hack when that happens
     const isEmailEmbed = html.includes('email/form');
     return (
         <div data-cy="embed-block" className={embedContainer}>
