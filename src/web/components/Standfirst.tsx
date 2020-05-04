@@ -1,7 +1,15 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { neutral } from '@guardian/src-foundations/palette';
+import { space } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+
+type Props = {
+    display: Display;
+    designType: DesignType;
+    standfirst: string;
+};
 
 const nestedStyles = css`
     li {
@@ -18,9 +26,9 @@ const nestedStyles = css`
         display: inline-block;
         content: '';
         border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
+        height: ${space[3]}px;
+        width: ${space[3]}px;
+        margin-right: ${space[2]}px;
         background-color: ${neutral[86]};
         margin-left: -20px;
     }
@@ -40,7 +48,24 @@ const nestedStyles = css`
     }
 `;
 
-const standfirstStyles = (designType: DesignType) => {
+const standfirstStyles = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
+        return css`
+            ${headline.xsmall({
+                fontWeight: 'light',
+            })};
+            padding-top: ${space[4]}px;
+
+            max-width: 280px;
+            ${from.tablet} {
+                max-width: 400px;
+            }
+            ${from.tablet} {
+                max-width: 460px;
+            }
+        `;
+    }
+
     switch (designType) {
         case 'Comment':
         case 'GuardianView':
@@ -51,13 +76,9 @@ const standfirstStyles = (designType: DesignType) => {
                 ${headline.xxsmall({
                     fontWeight: 'light',
                 })};
+                margin-bottom: ${space[3]}px;
             `;
         case 'Immersive':
-            return css`
-                ${headline.xsmall({
-                    fontWeight: 'light',
-                })};
-            `;
         case 'Media':
         case 'SpecialReport':
         case 'MatchReport':
@@ -74,19 +95,15 @@ const standfirstStyles = (designType: DesignType) => {
                     fontWeight: 'bold',
                 })};
                 line-height: 20px;
+                margin-bottom: ${space[3]}px;
             `;
     }
 };
 
-type Props = {
-    designType: DesignType;
-    standfirst: string;
-};
-
-export const Standfirst = ({ designType = 'Article', standfirst }: Props) => {
+export const Standfirst = ({ display, designType, standfirst }: Props) => {
     return (
         <div
-            className={cx(nestedStyles, standfirstStyles(designType))}
+            className={cx(nestedStyles, standfirstStyles(designType, display))}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
                 __html: standfirst,

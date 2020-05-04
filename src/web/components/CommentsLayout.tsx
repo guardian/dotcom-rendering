@@ -1,15 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { from } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-
+import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
-
-import { App as Comments } from '@guardian/discussion-rendering';
 
 type Props = {
     user?: UserProfile;
@@ -26,15 +23,13 @@ type Props = {
     commentPageSize?: 25 | 50 | 100;
     commentOrderBy?: 'newest' | 'oldest' | 'recommendations';
     commentToScrollTo?: number;
+    onPermalinkClick: (commentId: number) => void;
 };
 
 const containerStyles = css`
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    ${from.desktop} {
-        width: 620px;
-    }
 
     padding-top: ${space[3]}px;
     padding-bottom: ${space[6]}px;
@@ -60,6 +55,7 @@ export const CommentsLayout = ({
     discussionD2Uid,
     discussionApiClientHeader,
     commentToScrollTo,
+    onPermalinkClick,
 }: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
@@ -82,6 +78,7 @@ export const CommentsLayout = ({
                     />
                 </div>
             </Hide>
+
             <Comments
                 user={user}
                 baseUrl={baseUrl}
@@ -99,6 +96,8 @@ export const CommentsLayout = ({
                 }}
                 expanded={expanded}
                 commentToScrollTo={commentToScrollTo}
+                onPermalinkClick={onPermalinkClick}
+                apiKey="dotcom-rendering"
             />
         </div>
     </Flex>

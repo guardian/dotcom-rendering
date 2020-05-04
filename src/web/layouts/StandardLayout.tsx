@@ -7,9 +7,11 @@ import {
     background,
     brandAltBackground,
     brandBackground,
+    brandLine,
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -19,7 +21,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
@@ -29,7 +30,6 @@ import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
@@ -37,10 +37,12 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Flex } from '@root/src/web/components/Flex';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
     decideLineCount,
     decideLineEffect,
@@ -208,15 +210,38 @@ const headerWrapper = css`
     ${getZIndex('headerWrapper')}
 `;
 
+const ageWarningMargins = css`
+    margin-top: 12px;
+    margin-left: -10px;
+    margin-bottom: 6px;
+
+    ${from.tablet} {
+        margin-left: -20px;
+    }
+
+    ${from.leftCol} {
+        margin-left: -10px;
+        margin-top: 0;
+    }
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    display: Display;
+    designType: DesignType;
+    pillar: Pillar;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+export const StandardLayout = ({
+    CAPI,
+    NAV,
+    display,
+    designType,
+    pillar,
+}: Props) => {
     const {
         config: { isPaidContent },
-        pageType: { isSensitive },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -238,6 +263,8 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
     const showComments = CAPI.isCommentable;
+
+    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     return (
         <>
@@ -267,12 +294,20 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <Section
                         sectionId="nav-root"
                         showSideBorders={true}
-                        borderColour={brandBorder.primary}
+                        borderColour={brandLine.primary}
                         showTopBorder={false}
                         padded={false}
                         backgroundColour={brandBackground.primary}
                     >
-                        <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
+                        <Nav
+                            pillar={getCurrentPillar(CAPI)}
+                            nav={NAV}
+                            display={display}
+                            subscribeUrl={
+                                CAPI.nav.readerRevenueLinks.header.subscribe
+                            }
+                            edition={CAPI.editionId}
+                        />
                     </Section>
 
                     {NAV.subNavSections && (
@@ -284,7 +319,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             <SubNav
                                 subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                             />
                         </Section>
                     )}
@@ -294,7 +329,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines pillar={CAPI.pillar} />
+                        <GuardianLines count={4} pillar={pillar} />
                     </Section>
                 </div>
             </div>
@@ -303,13 +338,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
+                            display={display}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             badge={CAPI.badge}
-                            inLeftCol={true}
                         />
                     </GridItem>
                     <GridItem area="border">
@@ -317,17 +352,26 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
-                            >
+                            <ArticleHeadlinePadding designType={designType}>
+                                {age && (
+                                    <div className={ageWarningMargins}>
+                                        <AgeWarning age={age} />
+                                    </div>
+                                )}
                                 <ArticleHeadline
+                                    display={display}
                                     headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
-                                    pillar={CAPI.pillar}
-                                    webPublicationDate={CAPI.webPublicationDate}
+                                    designType={designType}
+                                    pillar={pillar}
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
+                                {age && (
+                                    <AgeWarning
+                                        age={age}
+                                        isScreenReader={true}
+                                    />
+                                )}
                             </ArticleHeadlinePadding>
                         </div>
                         {CAPI.starRating || CAPI.starRating === 0 ? (
@@ -343,16 +387,18 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
+                            display={display}
+                            designType={designType}
+                            pillar={pillar}
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
                     <GridItem area="media">
                         <div className={maxWidth}>
                             <MainMedia
+                                display={display}
                                 elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
+                                pillar={pillar}
                                 adTargeting={adTargeting}
                             />
                         </div>
@@ -361,12 +407,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
-                                    pillar={CAPI.pillar}
+                                    count={decideLineCount(designType)}
+                                    pillar={pillar}
                                     effect={decideLineEffect(
-                                        CAPI.designType,
-                                        CAPI.pillar,
+                                        designType,
+                                        pillar,
                                     )}
-                                    count={decideLineCount(CAPI.designType)}
                                 />
                             </div>
                         </div>
@@ -374,8 +420,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
-                                designType={CAPI.designType}
-                                pillar={CAPI.pillar}
+                                display={display}
+                                designType={designType}
+                                pillar={pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
@@ -389,11 +436,17 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="body">
                         <ArticleContainer>
                             <main className={articleWidth}>
-                                <ArticleBody CAPI={CAPI} />
+                                <ArticleBody
+                                    pillar={pillar}
+                                    blocks={CAPI.blocks}
+                                    display={display}
+                                    designType={designType}
+                                    adTargeting={adTargeting}
+                                />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines pillar={CAPI.pillar} />
+                                <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
-                                    pillar={CAPI.pillar}
+                                    pillar={pillar}
                                     subMetaKeywordLinks={
                                         CAPI.subMetaKeywordLinks
                                     }
@@ -429,20 +482,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section sectionId="onwards-upper" />
-
             {!isPaidContent && (
                 <>
-                    {!isSensitive && (
-                        <Section
-                            showTopBorder={false}
-                            backgroundColour={neutral[97]}
-                        >
-                            <OutbrainContainer />
-                        </Section>
+                    {/* Onwards (when signed IN) */}
+                    <Section sectionId="onwards-upper-whensignedin" />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedin" />
                     )}
-
-                    {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (
                         <Section sectionId="comments">
@@ -455,6 +501,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 </RightColumn>
                             </Flex>
                         </Section>
+                    )}
+
+                    {/* Onwards (when signed OUT) */}
+                    <Section
+                        sectionId="onwards-upper-whensignedout"
+                        showTopBorder={false}
+                    />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />
@@ -475,9 +530,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                     />
-                    <GuardianLines pillar={CAPI.pillar} />
+                    <GuardianLines count={4} pillar={pillar} />
                 </Section>
             )}
 
@@ -488,7 +543,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             >
                 <Footer
                     pageFooter={CAPI.pageFooter}
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     pillars={NAV.pillars}
                 />
             </Section>

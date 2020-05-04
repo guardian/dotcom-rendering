@@ -24,9 +24,9 @@ export const ArticleStory = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is how the default headline looks"
+                    display="standard"
                     designType="Article"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -44,9 +44,9 @@ export const oldHeadline = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an old headline"
+                    display="standard"
                     designType="Article"
                     pillar="news"
-                    webPublicationDate="2014-07-13T18:46:01.933Z"
                     tags={[
                         // Age warnings only show for old articles when the tone/news tag is present
                         {
@@ -71,9 +71,9 @@ export const Feature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is a Feature headline, it has colour applied based on pillar"
+                    display="standard"
                     designType="Feature"
                     pillar="lifestyle"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -96,15 +96,16 @@ export const ShowcaseInterview = () => (
                 >
                     <ArticleHeadline
                         headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                        display="showcase"
                         designType="Interview"
                         pillar="culture"
-                        webPublicationDate=""
                         tags={[]}
                         isShowcase={true}
                         byline="Byline text"
                     />
                 </div>
                 <MainMedia
+                    display="standard"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"
@@ -124,17 +125,19 @@ export const Interview = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                    display="standard"
                     designType="Interview"
                     pillar="culture"
-                    webPublicationDate=""
                     tags={[]}
                     byline="Byline text"
                 />
                 <Standfirst
+                    display="standard"
                     designType="Interview"
                     standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
                 />
                 <MainMedia
+                    display="standard"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"
@@ -154,9 +157,9 @@ export const Comment = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="Yes, the billionaire club is one we really need to shut down"
+                    display="standard"
                     designType="Comment"
                     pillar="opinion"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -174,9 +177,9 @@ export const Analysis = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                    display="standard"
                     designType="Analysis"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -194,9 +197,9 @@ export const Media = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Media"
+                    display="standard"
                     designType="Media"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -214,9 +217,9 @@ export const Review = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Review"
+                    display="standard"
                     designType="Review"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -234,9 +237,9 @@ export const AdvertisementFeature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is AdvertisementFeature"
+                    display="standard"
                     designType="AdvertisementFeature"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -254,9 +257,9 @@ export const Quiz = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Quiz"
+                    display="standard"
                     designType="Quiz"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -274,9 +277,9 @@ export const GuardianLabs = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianLabs"
+                    display="standard"
                     designType="GuardianLabs"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -294,9 +297,9 @@ export const Recipe = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Recipe"
+                    display="standard"
                     designType="Recipe"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -314,9 +317,9 @@ export const GuardianView = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianView"
+                    display="standard"
                     designType="GuardianView"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -334,9 +337,9 @@ export const MatchReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is MatchReport"
+                    display="standard"
                     designType="MatchReport"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -354,9 +357,9 @@ export const SpecialReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is SpecialReport"
+                    display="standard"
                     designType="SpecialReport"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -374,9 +377,9 @@ export const Live = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Live"
+                    display="standard"
                     designType="Live"
                     pillar="news"
-                    webPublicationDate=""
                     tags={[]}
                 />
             </ArticleContainer>
@@ -384,41 +387,3 @@ export const Live = () => (
     </Section>
 );
 Live.story = { name: 'Live' };
-
-export const Immersive = () => (
-    <>
-        <MainMedia
-            hideCaption={true}
-            elements={mainMediaElements}
-            pillar="news"
-        />
-        <Section
-            showTopBorder={false}
-            showSideBorders={false}
-            padded={false}
-            shouldCenter={false}
-        >
-            <Flex>
-                <LeftColumn showRightBorder={false}>
-                    <></>
-                </LeftColumn>
-                <ArticleContainer>
-                    <div
-                        className={css`
-                            margin-top: -100px;
-                        `}
-                    >
-                        <ArticleHeadline
-                            headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
-                            designType="Immersive"
-                            pillar="culture"
-                            webPublicationDate=""
-                            tags={[]}
-                        />
-                    </div>
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    </>
-);
-Immersive.story = { name: 'Immersive' };

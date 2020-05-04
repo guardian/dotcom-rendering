@@ -50,6 +50,7 @@ export const ArticleStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="standard"
                 designType="Article"
                 pillar="news"
                 pageId=""
@@ -70,6 +71,7 @@ export const FeatureStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="standard"
                 designType="Feature"
                 pillar="culture"
                 pageId=""
@@ -90,6 +92,7 @@ export const CommentStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="standard"
                 designType="Comment"
                 pillar="opinion"
                 pageId=""
@@ -110,6 +113,7 @@ export const InterviewStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="standard"
                 designType="Interview"
                 pillar="lifestyle"
                 pageId=""
@@ -130,6 +134,7 @@ export const ImmersiveStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="immersive"
                 designType="Immersive"
                 pillar="news"
                 pageId=""
@@ -140,7 +145,6 @@ export const ImmersiveStory = () => {
                 }}
                 tags={tagsWithBylineImage}
                 webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
-                isImmersive={true}
             />
         </Container>
     );
@@ -151,6 +155,7 @@ export const TwoContributorsStory = () => {
     return (
         <Container>
             <ArticleMeta
+                display="standard"
                 designType="Feature"
                 pillar="sport"
                 pageId=""

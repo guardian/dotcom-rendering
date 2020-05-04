@@ -32,7 +32,7 @@ type TestMeta = {
     campaignId: string;
 };
 
-const sendOphanEvent = (action: OphanAction, testMeta: TestMeta): void => {
+const sendOphanEpicEvent = (action: OphanAction, testMeta: TestMeta): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
@@ -45,6 +45,18 @@ const sendOphanEvent = (action: OphanAction, testMeta: TestMeta): void => {
             variant: testMeta.abTestVariant,
         },
         action,
+    };
+
+    window.guardian.ophan.record({ componentEvent });
+};
+
+const sendOphanReminderEvent = (componentId: string): void => {
+    const componentEvent = {
+        component: {
+            componentType: 'ACQUISITIONS_OTHER',
+            id: componentId,
+        },
+        action: 'CLICK',
     };
 
     window.guardian.ophan.record({ componentEvent });
@@ -67,6 +79,15 @@ type Props = {
     contributionsServiceUrl: string;
 };
 
+interface InitAutomatJsConfig {
+    epicRoot: HTMLElement | null;
+    onReminderOpen?: Function;
+}
+
+interface AutomatJsCallback {
+    buttonCopyAsString: string;
+}
+
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: Props) => {
     return {
@@ -76,9 +97,6 @@ const buildPayload = (props: Props) => {
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
-        },
-        localisation: {
-            countryCode: props.countryCode,
         },
         targeting: {
             contentType: props.contentType,
@@ -124,10 +142,16 @@ const MemoisedInner = ({
         slot?: SlotState;
     }>();
 
-    const [hasBeenSeen, setNode] = useHasBeenSeen({
-        rootMargin: '-18px',
-        threshold: 0,
-    }) as HasBeenSeen;
+    // Debounce the IntersectionObserver callback
+    // to ensure the Slot is seen for at least 200ms before registering the view
+    const debounce = true;
+    const [hasBeenSeen, setNode] = useHasBeenSeen(
+        {
+            rootMargin: '-18px',
+            threshold: 0,
+        },
+        debounce,
+    ) as HasBeenSeen;
 
     const slotRoot = useRef<HTMLDivElement>(null);
 
@@ -157,7 +181,7 @@ const MemoisedInner = ({
                     },
                 });
 
-                sendOphanEvent('INSERT', json.data.meta);
+                sendOphanEpicEvent('INSERT', json.data.meta);
             })
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
@@ -179,7 +203,7 @@ const MemoisedInner = ({
             if (meta) {
                 // Add a new entry to the view log when we know an Epic is viewed
                 logView(meta.abTestName);
-                sendOphanEvent('VIEW', meta);
+                sendOphanEpicEvent('VIEW', meta);
             }
         }
         // At the moment, given the information we currently store in data, it's
@@ -200,7 +224,21 @@ const MemoisedInner = ({
                 // eslint-disable-next-line no-eval
                 window.eval(data.slot.js);
                 if (typeof window.initAutomatJs === 'function') {
-                    window.initAutomatJs(slotRoot.current);
+                    const initAutomatJsConfig: InitAutomatJsConfig = {
+                        epicRoot: slotRoot.current,
+                        onReminderOpen: (callbackParams: AutomatJsCallback) => {
+                            const { buttonCopyAsString } = callbackParams;
+                            // Track two separate Open events when the Reminder
+                            // button is clicked
+                            sendOphanReminderEvent(
+                                'precontribution-reminder-prompt-clicked',
+                            );
+                            sendOphanReminderEvent(
+                                `precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
+                            );
+                        },
+                    };
+                    window.initAutomatJs(initAutomatJsConfig);
                 }
             } catch (error) {
                 // eslint-disable-next-line no-console

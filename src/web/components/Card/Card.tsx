@@ -115,11 +115,15 @@ export const Card = ({
         contentCoverage = coverages.content[imageSize];
     }
 
+    const showCommentCount = commentCount || commentCount === 0;
     const { long: longCount, short: shortCount } = formatCount(commentCount);
 
+    const pillarToUse =
+        designType === 'Comment' && pillar === 'news' ? 'opinion' : pillar;
+
     return (
-        <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
-            <TopBar topBarColour={pillarPalette[pillar].main}>
+        <CardLink linkTo={linkTo} designType={designType} pillar={pillarToUse}>
+            <TopBar topBarColour={pillarPalette[pillarToUse].main}>
                 <CardLayout imagePosition={imagePosition}>
                     <>
                         {imageUrl && (
@@ -144,7 +148,7 @@ export const Card = ({
                                     <CardHeadline
                                         headlineText={headlineText}
                                         designType={designType}
-                                        pillar={pillar}
+                                        pillar={pillarToUse}
                                         size={headlineSize}
                                         showQuotes={showQuotes}
                                         kickerText={
@@ -170,7 +174,7 @@ export const Card = ({
                                                 <Avatar
                                                     imageSrc={avatar.src}
                                                     imageAlt={avatar.alt}
-                                                    pillar={pillar}
+                                                    pillar={pillarToUse}
                                                 />
                                             </AvatarContainer>
                                         </Hide>
@@ -189,7 +193,7 @@ export const Card = ({
                                             <Avatar
                                                 imageSrc={avatar.src}
                                                 imageAlt={avatar.alt}
-                                                pillar={pillar}
+                                                pillar={pillarToUse}
                                             />
                                         </AvatarContainer>
                                     </Hide>
@@ -200,7 +204,7 @@ export const Card = ({
                                         webPublicationDate ? (
                                             <CardAge
                                                 designType={designType}
-                                                pillar={pillar}
+                                                pillar={pillarToUse}
                                                 webPublicationDate={
                                                     webPublicationDate
                                                 }
@@ -213,7 +217,7 @@ export const Card = ({
                                     mediaMeta={
                                         designType === 'Media' && mediaType ? (
                                             <MediaMeta
-                                                pillar={pillar}
+                                                pillar={pillarToUse}
                                                 mediaType={mediaType}
                                                 mediaDuration={mediaDuration}
                                             />
@@ -222,10 +226,12 @@ export const Card = ({
                                         )
                                     }
                                     commentCount={
-                                        longCount && shortCount ? (
+                                        showCommentCount &&
+                                        longCount &&
+                                        shortCount ? (
                                             <CardCommentCount
                                                 designType={designType}
-                                                pillar={pillar}
+                                                pillar={pillarToUse}
                                                 long={longCount}
                                                 short={shortCount}
                                             />

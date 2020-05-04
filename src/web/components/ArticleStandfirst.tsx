@@ -7,7 +7,6 @@ import { Standfirst } from '@frontend/web/components/Standfirst';
 
 const standfirstStyles = css`
     max-width: 540px;
-    margin-bottom: 12px;
 `;
 
 const standfirstLinks = pillarMap(
@@ -23,17 +22,23 @@ const standfirstLinks = pillarMap(
 );
 
 type Props = {
-    designType?: DesignType;
+    display: Display;
+    designType: DesignType;
     pillar: Pillar;
     standfirst: string; // Can be html
 };
 
 export const ArticleStandfirst = ({
-    designType = 'Article',
+    display,
+    designType,
     pillar,
     standfirst,
 }: Props) => (
     <div className={cx(standfirstStyles, standfirstLinks[pillar])}>
-        <Standfirst designType={designType} standfirst={standfirst} />
+        <Standfirst
+            display={display}
+            designType={designType}
+            standfirst={standfirst}
+        />
     </div>
 );

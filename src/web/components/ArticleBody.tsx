@@ -6,8 +6,14 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-import { Hide } from '@root/src/web/components/Hide';
+
+type Props = {
+    pillar: Pillar;
+    display: Display;
+    blocks: Block[];
+    designType: DesignType;
+    adTargeting: AdTargeting;
+};
 
 const pillarColours = pillarMap(
     pillar =>
@@ -36,13 +42,15 @@ const captionFont = css`
     color: ${text.supporting};
 `;
 
-const bodyStyle = css`
+const bodyStyle = (display: Display) => css`
     ${between.tablet.and.desktop} {
         padding-right: 80px;
     }
 
     h2 {
-        ${headline.xxsmall({ fontWeight: 'bold' })};
+        ${display === 'immersive'
+            ? headline.medium({ fontWeight: 'light' })
+            : headline.xxsmall({ fontWeight: 'bold' })};
     }
 
     strong {
@@ -95,13 +103,6 @@ const bodyStyle = css`
     }
 `;
 
-const immersiveBodyStyle = css`
-    h2 {
-        ${headline.medium()};
-        font-weight: 200;
-    }
-`;
-
 const linkColour = pillarMap(
     pillar => css`
         a {
@@ -116,32 +117,20 @@ const linkColour = pillarMap(
     `,
 );
 
-export const ArticleBody: React.FC<{
-    CAPI: CAPIType;
-    isShowcase?: boolean;
-    adTargeting?: AdTargeting;
-}> = ({ CAPI, isShowcase, adTargeting }) => {
+export const ArticleBody = ({
+    pillar,
+    display,
+    blocks,
+    designType,
+    adTargeting,
+}: Props) => {
     return (
-        <div
-            className={cx(bodyStyle, linkColour[CAPI.pillar], {
-                [immersiveBodyStyle]: CAPI.isImmersive,
-            })}
-        >
-            {isShowcase && (
-                // For articles with main media set as showcase, the standfirst sometimes
-                // sits inside here so that the right column advert does not get pushed down
-                <Hide when="below" breakpoint="leftCol">
-                    <ArticleStandfirst
-                        designType={CAPI.designType}
-                        pillar={CAPI.pillar}
-                        standfirst={CAPI.standfirst}
-                    />
-                </Hide>
-            )}
+        <div className={cx(bodyStyle(display), linkColour[pillar])}>
             <ArticleRenderer
-                elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
-                pillar={CAPI.pillar}
-                designType={CAPI.designType}
+                display={display}
+                elements={blocks[0] ? blocks[0].elements : []}
+                pillar={pillar}
+                designType={designType}
                 adTargeting={adTargeting}
             />
         </div>

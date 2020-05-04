@@ -22,6 +22,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
     `;
 
     switch (designType) {
+        case 'GuardianView':
         case 'Comment':
             return css`
                 ${baseStyles};
@@ -37,7 +38,6 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
@@ -60,6 +60,7 @@ const innerStyles = (designType: DesignType) => {
     `;
 
     switch (designType) {
+        case 'GuardianView':
         case 'Comment':
             return css`
                 ${baseStyles};
@@ -75,7 +76,6 @@ const innerStyles = (designType: DesignType) => {
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':

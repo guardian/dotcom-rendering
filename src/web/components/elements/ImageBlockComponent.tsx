@@ -4,6 +4,13 @@ import { ImageComponent } from '@root/src/web/components/elements/ImageComponent
 
 import { from } from '@guardian/src-foundations/mq';
 
+type Props = {
+    display: Display;
+    element: ImageBlockElement;
+    pillar: Pillar;
+    hideCaption?: boolean;
+};
+
 const imageCss = {
     inline: css`
         margin-top: 16px;
@@ -29,15 +36,30 @@ const imageCss = {
         }
     `,
 
-    // TODO: immersive is pending review of different article types
-    immersive: css``,
+    immersive: css`
+        ${from.tablet} {
+            margin-left: 0px;
+            margin-right: -100px;
+        }
+        ${from.desktop} {
+            margin-left: 0px;
+            margin-right: -320px;
+        }
+        ${from.leftCol} {
+            margin-left: -160px;
+            margin-right: -320px;
+        }
+        ${from.wide} {
+            margin-left: -240px;
+            margin-right: -400px;
+        }
+    `,
 
     showcase: css`
         position: relative;
         margin-top: 16px;
         margin-bottom: 12px;
         ${from.leftCol} {
-            position: relative;
             margin-bottom: 16px;
             margin-left: -160px;
         }
@@ -54,22 +76,14 @@ const imageCss = {
         margin-right: 20px;
         margin-top: 6px;
         ${from.tablet} {
-            margin-right: 20px;
-        }
-        ${from.wide} {
-            margin-left: -160px;
+            width: 140px;
         }
         ${from.wide} {
             margin-left: -240px;
         }
         ${from.leftCol} {
-            margin-left: -160px;
-        }
-        ${from.leftCol} {
             position: relative;
-        }
-        ${from.tablet} {
-            width: 140px;
+            margin-left: -160px;
         }
     `,
 
@@ -96,15 +110,17 @@ const decidePosition = (role: RoleType) => {
     }
 };
 
-export const ImageBlockComponent: React.FC<{
-    element: ImageBlockElement;
-    pillar: Pillar;
-    hideCaption?: boolean;
-}> = ({ element, pillar, hideCaption }) => {
+export const ImageBlockComponent = ({
+    display,
+    element,
+    pillar,
+    hideCaption,
+}: Props) => {
     const { role } = element;
     return (
         <div className={decidePosition(role)}>
             <ImageComponent
+                display={display}
                 element={element}
                 pillar={pillar}
                 hideCaption={hideCaption}

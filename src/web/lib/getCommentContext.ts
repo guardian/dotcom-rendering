@@ -77,7 +77,12 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 
 const buildParams = (filters: FilterOptions) => {
     return {
-        orderBy: filters.orderBy,
+        // Frontend uses the 'recommendations' key to store this options but the api expects
+        // 'mostRecommended' so we have to map here to support both
+        orderBy:
+            filters.orderBy === 'recommendations'
+                ? 'mostRecommended'
+                : filters.orderBy,
         pageSize: filters.pageSize,
         displayThreaded:
             filters.threads === 'collapsed' || filters.threads === 'expanded',

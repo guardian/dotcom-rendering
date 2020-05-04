@@ -77,29 +77,29 @@ export const CommentCount = ({
             aria-label={`${short} Comments`}
             data-cy="comment-counts"
         >
-            <div className={iconContainerStyles}>
-                <CommentIcon className={iconStyles(pillar)} />
-            </div>
-            <div
-                data-testid="long-comment-count"
-                className={longStyles}
-                aria-hidden="true"
+            <a
+                href="#comments"
+                className={linkStyles}
+                onClick={() => setOpenComments(true)}
             >
-                <a
-                    href="#comments"
-                    className={linkStyles}
-                    onClick={() => setOpenComments(true)}
+                <div className={iconContainerStyles}>
+                    <CommentIcon className={iconStyles(pillar)} />
+                </div>
+                <div
+                    data-testid="long-comment-count"
+                    className={longStyles}
+                    aria-hidden="true"
                 >
                     {long}
-                </a>
-            </div>
-            <div
-                data-testid="short-comment-count"
-                className={shortStyles}
-                aria-hidden="true"
-            >
-                {short}
-            </div>
+                </div>
+                <div
+                    data-testid="short-comment-count"
+                    className={shortStyles}
+                    aria-hidden="true"
+                >
+                    {short}
+                </div>
+            </a>
         </div>
     );
 };

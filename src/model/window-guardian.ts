@@ -85,6 +85,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     );
 
     return {
+        designType: CAPI.designType,
+        pillar: CAPI.pillar,
         config: {
             isDev: process.env.NODE_ENV !== 'production',
             ajaxUrl: CAPI.config.ajaxUrl,
@@ -116,13 +118,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         richLinks: richLinksWithIndex,
         editionId: CAPI.editionId,
-        pillar: CAPI.pillar,
         contentType: CAPI.contentType,
         sectionName: CAPI.sectionName,
         shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
         pageType: {
             isMinuteArticle: CAPI.pageType.isMinuteArticle,
             isPaidContent: CAPI.pageType.isPaidContent,
+            hasShowcaseMainElement: CAPI.pageType.hasShowcaseMainElement,
         },
         hasRelated: CAPI.hasRelated,
         hasStoryPackage: CAPI.hasStoryPackage,
@@ -137,6 +139,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             },
         },
         contributionsServiceUrl: CAPI.contributionsServiceUrl,
+        isImmersive: CAPI.isImmersive,
     };
 };
 

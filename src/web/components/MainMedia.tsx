@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -30,11 +30,6 @@ const mainMedia = css`
         }
     }
 
-    ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-
     img {
         flex: 0 0 auto; /* IE */
         width: 100%;
@@ -46,7 +41,20 @@ const mainMedia = css`
     }
 `;
 
+const noGutters = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    ${until.mobileLandscape} {
+        margin-left: -10px;
+        margin-right: -11px;
+    }
+`;
+
 function renderElement(
+    display: Display,
     element: CAPIElement,
     pillar: Pillar,
     i: number,
@@ -58,18 +66,20 @@ function renderElement(
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return (
                 <ImageComponent
+                    display={display}
                     key={i}
                     element={element}
                     pillar={pillar}
                     hideCaption={hideCaption}
-                    role={element.role}
                     isMainMedia={true}
+                    role={element.role}
                     starRating={starRating}
                 />
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
                 <YouTubeComponent
+                    display={display}
                     key={i}
                     element={element}
                     pillar={pillar}
@@ -77,6 +87,7 @@ function renderElement(
                     // eslint-disable-next-line jsx-a11y/aria-role
                     role="inline"
                     adTargeting={adTargeting}
+                    isMainMedia={true}
                 />
             );
         default:
@@ -89,15 +100,17 @@ function renderElement(
 }
 
 export const MainMedia: React.FC<{
+    display: Display;
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
     adTargeting?: AdTargeting;
     starRating?: number;
-}> = ({ elements, pillar, hideCaption, adTargeting, starRating }) => (
-    <div className={mainMedia}>
+}> = ({ display, elements, pillar, hideCaption, adTargeting, starRating }) => (
+    <div className={cx(mainMedia, display !== 'immersive' && noGutters)}>
         {elements.map((element, i) =>
             renderElement(
+                display,
                 element,
                 pillar,
                 i,

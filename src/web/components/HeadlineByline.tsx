@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
+import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
@@ -51,14 +52,52 @@ const opinionStyles = (pillar: Pillar) => css`
     }
 `;
 
+const immersiveStyles = css`
+    ${headline.xsmall({
+        fontWeight: 'light',
+    })}
+    margin-bottom: ${space[6]}px;
+`;
+
+const immersiveLinkStyles = (pillar: Pillar) => css`
+    a {
+        color: ${pillarPalette[pillar].main};
+        border-bottom: 1px solid ${pillarPalette[pillar].main};
+        text-decoration: none;
+        :hover {
+            border-bottom: 1px solid ${pillarPalette[pillar].dark};
+            color: ${pillarPalette[pillar].dark};
+            text-decoration: none;
+        }
+    }
+`;
+
 type Props = {
-    designType: 'Interview' | 'Comment';
+    display: Display;
+    designType: DesignType;
     pillar: Pillar;
     byline: string;
     tags: TagType[];
 };
 
-export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
+export const HeadlineByline = ({
+    display,
+    designType,
+    pillar,
+    byline,
+    tags,
+}: Props) => {
+    if (display === 'immersive') {
+        return (
+            <div className={immersiveStyles}>
+                by{' '}
+                <span className={immersiveLinkStyles(pillar)}>
+                    <BylineLink byline={byline} tags={tags} />
+                </span>
+            </div>
+        );
+    }
+
     switch (designType) {
         case 'Interview':
             return (
@@ -68,12 +107,27 @@ export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
                     </div>
                 </div>
             );
+        case 'GuardianView':
         case 'Comment':
             return (
                 <div className={opinionStyles(pillar)}>
                     <BylineLink byline={byline} tags={tags} />
                 </div>
             );
+
+        case 'Immersive':
+        case 'Analysis':
+        case 'Feature':
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
         default:
             return null;
     }

@@ -42,6 +42,19 @@ const hasCommentsHashInUrl = () => {
     return hash && hash === '#comments';
 };
 
+const decideDisplay = (CAPI: CAPIBrowserType): Display => {
+    if (CAPI.isImmersive) return 'immersive';
+    if (CAPI.pageType.hasShowcaseMainElement) return 'showcase';
+    return 'standard';
+};
+
+const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
+    // We override the pillar to be opinion on Comment news pieces
+    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
+        return 'opinion';
+    return CAPI.pillar;
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
@@ -56,8 +69,10 @@ export const App = ({ CAPI, NAV }: Props) => {
         'newest' | 'oldest' | 'recommendations'
     >();
     const [openComments, setOpenComments] = useState<boolean>(false);
+    const [hashCommentId, setHashCommentId] = useState<number | undefined>(
+        commentIdFromUrl(),
+    );
 
-    const hashCommentId = commentIdFromUrl();
     const hasCommentsHash = hasCommentsHashInUrl();
 
     useEffect(() => {
@@ -140,6 +155,20 @@ export const App = ({ CAPI, NAV }: Props) => {
         FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
 
+    const pillar = decidePillar(CAPI);
+    const display = decideDisplay(CAPI);
+
+    const handlePermalink = (commentId: number) => {
+        window.location.hash = `#comment-${commentId}`;
+        const comment = window.document.getElementById(`comment-${commentId}`);
+        if (comment) {
+            // The comment was already on the page so just scroll to it.
+            comment.scrollIntoView();
+        }
+        setHashCommentId(commentId);
+        return false;
+    };
+
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -151,7 +180,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and/or you want to access global application state, you want to use a Portal.
         //
         // Note: Both require a 'root' element that needs to be server rendered.
-        <>
+        <React.StrictMode>
             <Portal root="reader-revenue-links-header">
                 <ReaderRevenueLinks
                     urls={CAPI.nav.readerRevenueLinks.footer}
@@ -161,7 +190,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Hydrate root="links-root">
-                <Links isSignedIn={isSignedIn} />
+                <Links userId={user ? user.userId : undefined} />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown
@@ -170,7 +199,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
             <Hydrate root="nav-root">
-                <Nav pillar={CAPI.pillar} nav={NAV} />
+                <Nav
+                    pillar={pillar}
+                    nav={NAV}
+                    display={display}
+                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+                    edition={CAPI.editionId}
+                />
             </Hydrate>
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
@@ -178,7 +213,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         <SubNav
                             subNavSections={NAV.subNavSections}
                             currentNavLink={NAV.currentNavLink}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                         />
                     </>
                 </Hydrate>
@@ -191,24 +226,33 @@ export const App = ({ CAPI, NAV }: Props) => {
                 >
                     <RichLinkComponent
                         element={link}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                         ajaxEndpoint={CAPI.config.ajaxUrl}
                         richLinkIndex={index}
                     />
                 </Portal>
             ))}
             <Portal root="share-comment-counts">
-                <Counts
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    pageId={CAPI.config.pageId}
-                    commentCount={commentCount}
-                    pillar={CAPI.pillar}
-                    setOpenComments={setOpenComments}
-                />
+                {CAPI.isCommentable ? (
+                    <Counts
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        pageId={CAPI.config.pageId}
+                        commentCount={commentCount}
+                        pillar={pillar}
+                        setOpenComments={setOpenComments}
+                    />
+                ) : (
+                    <Counts
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        pageId={CAPI.config.pageId}
+                        pillar={pillar}
+                        setOpenComments={setOpenComments}
+                    />
+                )}
             </Portal>
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>
-                    <MostViewedRightWrapper pillar={CAPI.pillar} />
+                    <MostViewedRightWrapper pillar={pillar} />
                 </Lazy>
             </Portal>
             <Portal root="slot-body-end">
@@ -225,7 +269,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
             </Portal>
-            <Portal root="onwards-upper">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-upper-whensignedin'
+                        : 'onwards-upper-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsUpper
                         ajaxUrl={CAPI.config.ajaxUrl}
@@ -241,7 +291,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="onwards-lower">
+            <Portal
+                root={
+                    isSignedIn
+                        ? 'onwards-lower-whensignedin'
+                        : 'onwards-lower-whensignedout'
+                }
+            >
                 <Lazy margin={300}>
                     <OnwardsLower
                         ajaxUrl={CAPI.config.ajaxUrl}
@@ -257,7 +313,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 {openComments ? (
                     <CommentsLayout
                         user={user}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                         baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
@@ -274,12 +330,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                         }
                         expanded={true}
                         commentToScrollTo={hashCommentId}
+                        onPermalinkClick={handlePermalink}
                     />
                 ) : (
                     <Lazy margin={300}>
                         <CommentsLayout
                             user={user}
-                            pillar={CAPI.pillar}
+                            pillar={pillar}
                             baseUrl={CAPI.config.discussionApiUrl}
                             shortUrl={CAPI.config.shortUrlId}
                             commentCount={commentCount}
@@ -295,13 +352,15 @@ export const App = ({ CAPI, NAV }: Props) => {
                                 CAPI.config.enableDiscussionSwitch
                             }
                             expanded={false}
+                            commentToScrollTo={hashCommentId}
+                            onPermalinkClick={handlePermalink}
                         />
                     </Lazy>
                 )}
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
-                    pillar={CAPI.pillar}
+                    pillar={pillar}
                     sectionName={CAPI.sectionName}
                     ajaxUrl={CAPI.config.ajaxUrl}
                 />
@@ -316,9 +375,11 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.cmpUi} />
-            </Portal>
-        </>
+            {CAPI.config.cmpUi && (
+                <Portal root="cmp">
+                    <CMP />
+                </Portal>
+            )}
+        </React.StrictMode>
     );
 };

@@ -1,11 +1,22 @@
 import React from 'react';
 
 import { text } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
+
+type Props = {
+    display: Display;
+    captionText?: string;
+    pillar: Pillar;
+    children?: React.ReactNode;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    shouldLimitWidth?: boolean;
+};
 
 const figureStyle = css`
     margin-bottom: 6px;
@@ -18,6 +29,10 @@ const captionStyle = css`
 `;
 
 const limitedWidth = css`
+    /* use absolute position here to allow the article text to push up alongside
+    the caption when it is limited in width */
+    position: absolute;
+
     ${from.leftCol} {
         width: 140px;
     }
@@ -31,24 +46,22 @@ const captionPadding = css`
     padding-right: 8px;
 `;
 
-export const Caption: React.FC<{
-    captionText?: string;
-    pillar: Pillar;
-    padCaption?: boolean;
-    credit?: string;
-    displayCredit?: boolean;
-    role?: RoleType;
-    isMainMedia?: boolean;
-}> = ({
+const hideIconBelowLeftCol = css`
+    ${until.leftCol} {
+        display: none;
+    }
+`;
+
+export const Caption = ({
+    display,
     captionText,
     pillar,
     padCaption = false,
     credit,
     displayCredit = true,
     children,
-    role,
-    isMainMedia,
-}) => {
+    shouldLimitWidth = false,
+}: Props) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
@@ -80,9 +93,6 @@ export const Caption: React.FC<{
         );
     };
 
-    const shouldLimitWidth =
-        !isMainMedia && (role === 'showcase' || role === 'supporting');
-
     return (
         <figure className={figureStyle}>
             {children}
@@ -95,7 +105,12 @@ export const Caption: React.FC<{
                             { [captionPadding]: padCaption },
                         )}
                     >
-                        <span className={iconStyle}>
+                        <span
+                            className={cx(
+                                iconStyle,
+                                display === 'immersive' && hideIconBelowLeftCol,
+                            )}
+                        >
                             <TriangleIcon />
                         </span>
                         {getCaptionHtml()} {displayCredit && credit}

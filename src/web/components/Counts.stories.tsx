@@ -21,7 +21,24 @@ const Container = ({ children }: { children: JSXElements }) => (
     </div>
 );
 
-export const Live = () => {
+export const Both = () => {
+    fetchMock
+        .restore()
+        // Share count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+            {
+                status: 200,
+                body: {
+                    path:
+                        'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                    share_count: 80,
+                    refreshStatus: true,
+                },
+            },
+            { overwriteRoutes: false },
+        );
+
     return (
         <Container>
             <Counts
@@ -34,7 +51,7 @@ export const Live = () => {
         </Container>
     );
 };
-Live.story = { name: 'with both results' };
+Both.story = { name: 'with both results' };
 
 export const ShareOnly = () => {
     fetchMock
@@ -53,7 +70,6 @@ export const ShareOnly = () => {
         <Container>
             <Counts
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                commentCount={0}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
                 setOpenComments={() => {}}
@@ -61,7 +77,7 @@ export const ShareOnly = () => {
         </Container>
     );
 };
-ShareOnly.story = { name: 'with share count only' };
+ShareOnly.story = { name: 'with comments disabled' };
 
 export const CommentOnly = () => {
     fetchMock
@@ -80,6 +96,7 @@ export const CommentOnly = () => {
             },
             { overwriteRoutes: false },
         );
+
     return (
         <Container>
             <Counts
@@ -92,4 +109,68 @@ export const CommentOnly = () => {
         </Container>
     );
 };
-CommentOnly.story = { name: 'with comment count only' };
+CommentOnly.story = { name: 'with zero shares' };
+
+export const ZeroComments = () => {
+    fetchMock
+        .restore()
+        // Share count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+            {
+                status: 200,
+                body: {
+                    path:
+                        'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                    share_count: 60,
+                    refreshStatus: true,
+                },
+            },
+            { overwriteRoutes: false },
+        );
+
+    return (
+        <Container>
+            <Counts
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                commentCount={0}
+                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                pillar="news"
+                setOpenComments={() => {}}
+            />
+        </Container>
+    );
+};
+ZeroComments.story = { name: 'with zero comments' };
+
+export const BigNumbers = () => {
+    fetchMock
+        .restore()
+        // Share count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+            {
+                status: 200,
+                body: {
+                    path:
+                        'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                    share_count: 204320,
+                    refreshStatus: true,
+                },
+            },
+            { overwriteRoutes: false },
+        );
+
+    return (
+        <Container>
+            <Counts
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                commentCount={4320}
+                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                pillar="news"
+                setOpenComments={() => {}}
+            />
+        </Container>
+    );
+};
+BigNumbers.story = { name: 'with long numbers' };

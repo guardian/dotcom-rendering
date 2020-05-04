@@ -16,7 +16,7 @@ const showMore = css`
     }
 `;
 
-export const InteractiveUrl: React.SFC<{ url: string }> = ({ url }) => {
+export const AtomEmbedUrl: React.SFC<{ url: string }> = ({ url }) => {
     return (
         <amp-iframe
             class={styles}
@@ -26,6 +26,7 @@ export const InteractiveUrl: React.SFC<{ url: string }> = ({ url }) => {
             height="1"
             width="8"
             resizable=""
+            data-cy="atom-embed-url"
         >
             <div overflow="" className={showMore}>
                 <ShowMoreButton />

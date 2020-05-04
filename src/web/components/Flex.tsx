@@ -17,6 +17,9 @@ export const Flex = ({
             display: flex;
             flex-direction: ${direction};
             justify-content: ${justify};
+            /* Fixes IE 10/11 bug that collapses this container by default: */
+            /* stylelint-disable-next-line property-no-vendor-prefix */
+            -ms-flex-positive: 1;
         `}
     >
         {children}

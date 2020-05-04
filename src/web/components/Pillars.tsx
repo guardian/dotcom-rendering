@@ -17,7 +17,10 @@ export const preDesktopPillarWidth = 'auto';
 
 // CSS
 
-const pillarsStyles = css`
+const pillarsStyles = (display: Display) => css`
+    ${until.tablet} {
+        display: ${display === 'immersive' && 'none'};
+    }
     clear: right;
     margin: 0;
     list-style: none;
@@ -46,13 +49,13 @@ const pillarsStyles = css`
         bottom: 0;
         left: 0;
         right: 0;
-        height: 37px;
+        height: ${display === 'immersive' ? '49px' : '37px'};
         ${from.tablet} {
             border-bottom: 0;
             height: 49px;
         }
         ${from.desktop} {
-            height: 43px;
+            height: ${display === 'immersive' ? '49px' : '43px'};
         }
     }
 `;
@@ -118,7 +121,7 @@ const pillarDivider = css`
     }
 `;
 
-const linkStyle = css`
+const linkStyle = (display: Display) => css`
     ${headline.xxxsmall()};
     box-sizing: border-box;
     font-weight: 900;
@@ -126,34 +129,44 @@ const linkStyle = css`
     cursor: pointer;
     display: block;
     font-size: 15.4px;
-    height: 36px;
-    padding: 9px 5px 0;
+    height: ${display === 'immersive' ? '48px' : '36px'};
+    padding-top: ${display === 'immersive' ? '10px' : '9px'};
+    padding-right: ${display === 'immersive' ? '5px' : '5px'};
+    padding-bottom: ${display === 'immersive' ? '0' : '0'};
+    padding-left: ${display === 'immersive' ? '5px' : '5px'};
     position: relative;
     overflow: hidden;
     text-decoration: none;
     z-index: 1;
     ${from.mobileMedium} {
         font-size: 15.7px;
-        padding: 9px 4px 0;
+        padding-top: ${display === 'immersive' ? '9px' : '9px'};
+        padding-right: ${display === 'immersive' ? '5px' : '5px'};
+        padding-bottom: ${display === 'immersive' ? '0' : '0'};
+        padding-left: ${display === 'immersive' ? '5px' : '5px'};
     }
     ${from.mobileLandscape} {
         font-size: 18px;
-        padding: 7px 4px 0;
+        padding-top: ${display === 'immersive' ? '9px' : '9px'};
+        padding-right: ${display === 'immersive' ? '5px' : '5px'};
+        padding-bottom: ${display === 'immersive' ? '0' : '0'};
+        padding-left: ${display === 'immersive' ? '5px' : '5px'};
     }
     ${from.tablet} {
         font-size: 22px;
-        padding-top: 9px;
         height: 48px;
-        padding-right: 20px;
-        padding-left: 9px;
+        padding-top: ${display === 'immersive' ? '9px' : '9px'};
+        padding-right: ${display === 'immersive' ? '20px' : '20px'};
+        padding-bottom: ${display === 'immersive' ? '0' : '0'};
+        padding-left: ${display === 'immersive' ? '9px' : '9px'};
     }
     ${from.desktop} {
-        padding-top: 5px;
-        height: 42px;
+        padding-top: ${display === 'immersive' ? '9px' : '5px'};
+        height: ${display === 'immersive' ? '48px' : '42px'};
     }
 
     ${from.wide} {
-        padding-top: 7px;
+        padding-top: ${display === 'immersive' ? '10px' : '7px'};
         font-size: 24px;
     }
 
@@ -201,29 +214,35 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
     i !== noOfPillars - 1;
 
 export const Pillars: React.FC<{
+    display: Display;
     mainMenuOpen: boolean;
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
     dataLinkName: string;
 }> = ({
+    display,
     mainMenuOpen,
     pillars,
     pillar,
     showLastPillarDivider = true,
     dataLinkName,
 }) => (
-    <ul className={pillarsStyles}>
+    <ul className={pillarsStyles(display)}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
                 <a
-                    className={cx(linkStyle, pillarUnderline[p.pillar], {
-                        [pillarDivider]:
-                            showLastPillarDivider ||
-                            isNotLastPillar(i, pillars.length),
-                        [showMenuUnderline]: mainMenuOpen,
-                        [forceUnderline]: p.pillar === pillar,
-                    })}
+                    className={cx(
+                        linkStyle(display),
+                        pillarUnderline[p.pillar],
+                        {
+                            [pillarDivider]:
+                                showLastPillarDivider ||
+                                isNotLastPillar(i, pillars.length),
+                            [showMenuUnderline]: mainMenuOpen,
+                            [forceUnderline]: p.pillar === pillar,
+                        },
+                    )}
                     href={p.url}
                     data-link-name={`${dataLinkName} : primary : ${p.title}`}
                 >

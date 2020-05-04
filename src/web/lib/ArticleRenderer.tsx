@@ -8,6 +8,7 @@ import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBloc
 import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
 import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -15,11 +16,12 @@ const commercialPosition = css`
 `;
 
 export const ArticleRenderer: React.FC<{
+    display: Display;
     elements: CAPIElement[];
     pillar: Pillar;
     designType: DesignType;
     adTargeting?: AdTargeting;
-}> = ({ elements, pillar, designType, adTargeting }) => {
+}> = ({ display, elements, pillar, designType, adTargeting }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -46,6 +48,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
+                            display={display}
                             key={i}
                             element={element}
                             pillar={pillar}
@@ -53,6 +56,10 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
+                case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                    return (
+                        <InstagramBlockComponent key={i} element={element} />
+                    );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteComponent
@@ -65,10 +72,17 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                    return <BlockquoteComponent key={i} html={element.html} />;
+                    return (
+                        <BlockquoteComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
+                            display={display}
                             key={i}
                             element={element}
                             pillar={pillar}
@@ -76,6 +90,7 @@ export const ArticleRenderer: React.FC<{
                             // eslint-disable-next-line jsx-a11y/aria-role
                             role="inline"
                             adTargeting={adTargeting}
+                            isMainMedia={false}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':

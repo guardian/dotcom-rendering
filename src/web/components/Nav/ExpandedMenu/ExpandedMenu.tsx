@@ -69,14 +69,16 @@ const mainMenu = css`
 `;
 
 export const ExpandedMenu: React.FC<{
+    display: Display;
     id: string;
     nav: NavType;
     showExpandedMenu: boolean;
     toggleExpandedMenu: (value: boolean) => void;
-}> = ({ id, nav, showExpandedMenu, toggleExpandedMenu }) => {
+}> = ({ display, id, nav, showExpandedMenu, toggleExpandedMenu }) => {
     return (
         <>
             <ExpandedMenuToggle
+                display={display}
                 showExpandedMenu={showExpandedMenu}
                 toggleExpandedMenu={toggleExpandedMenu}
                 ariaControls={id}

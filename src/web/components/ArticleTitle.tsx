@@ -5,6 +5,16 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
+type Props = {
+    display: Display;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    badge?: BadgeType;
+};
+
 const sectionStyles = css`
     padding-top: 8px;
     display: flex;
@@ -13,17 +23,6 @@ const sectionStyles = css`
         flex-direction: column;
     }
 `;
-
-type Props = {
-    tags: TagType[];
-    sectionLabel: string;
-    sectionUrl: string;
-    guardianBaseURL: string;
-    pillar: Pillar;
-    inLeftCol?: boolean;
-    fallbackToSection?: boolean;
-    badge?: BadgeType;
-};
 
 const titleBadgeWrapper = css`
     margin-bottom: 6px;
@@ -44,30 +43,39 @@ const marginTop = css`
     margin-top: 6px;
 `;
 
+const marginBottom = css`
+    margin-bottom: 5px;
+`;
+
 export const ArticleTitle = ({
+    display,
     tags,
     sectionLabel,
     sectionUrl,
     guardianBaseURL,
     pillar,
-    inLeftCol,
-    fallbackToSection = true,
     badge,
 }: Props) => (
-    <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
-        {badge && (
+    <div className={cx(sectionStyles, badge && badgeContainer)}>
+        {badge && display !== 'immersive' && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
-        <div className={badge && marginTop}>
+        <div
+            className={cx(
+                badge && marginTop,
+                display === 'immersive' && marginBottom,
+            )}
+        >
             <SeriesSectionLink
+                display={display}
                 tags={tags}
                 sectionLabel={sectionLabel}
                 sectionUrl={sectionUrl}
                 guardianBaseURL={guardianBaseURL}
                 pillar={pillar}
-                fallbackToSection={fallbackToSection}
+                badge={badge}
             />
         </div>
     </div>

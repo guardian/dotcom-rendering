@@ -4,21 +4,29 @@ import { Caption } from '@root/src/web/components/Caption';
 import { YouTubeEmbed } from '@root/src/web/components/YouTubeEmbed';
 
 type Props = {
+    display: Display;
     element: YoutubeBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
     role: RoleType;
     adTargeting?: AdTargeting;
+    isMainMedia?: boolean;
     children?: JSX.Element | JSX.Element[];
 };
 
 export const YouTubeComponent = ({
+    display,
     element,
     pillar,
     hideCaption,
     role,
     adTargeting,
+    isMainMedia,
 }: Props) => {
+    const shouldLimitWidth =
+        !isMainMedia &&
+        (role === 'showcase' || role === 'supporting' || role === 'immersive');
+
     if (hideCaption) {
         return (
             <YouTubeEmbed
@@ -32,10 +40,11 @@ export const YouTubeComponent = ({
     }
     return (
         <Caption
+            display={display}
             captionText={element.mediaTitle || ''}
             pillar={pillar}
             displayCredit={false}
-            role={role}
+            shouldLimitWidth={shouldLimitWidth}
         >
             <YouTubeEmbed
                 assetId={element.assetId}

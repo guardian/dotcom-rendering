@@ -10,6 +10,7 @@ import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
+    display: Display;
     designType: DesignType;
     pillar: Pillar;
     pageId: string;
@@ -17,7 +18,6 @@ type Props = {
     author: AuthorType;
     tags: TagType[];
     webPublicationDateDisplay: string;
-    isImmersive?: boolean;
 };
 
 const meta = css`
@@ -75,6 +75,10 @@ const metaContainer = css`
         margin-left: -20px;
         margin-right: -20px;
     }
+    ${until.mobileLandscape} {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
 `;
 
 const getBylineImageUrl = (tags: TagType[]) => {
@@ -87,14 +91,15 @@ const getAuthorName = (tags: TagType[]) => {
     return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
-    if (isImmersive) {
+const shouldShowAvatar = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
         return false;
     }
 
     switch (designType) {
         case 'Feature':
         case 'Review':
+        case 'Recipe':
         case 'Interview':
             return true;
         case 'Live':
@@ -102,7 +107,6 @@ const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
         case 'Analysis':
         case 'Article':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
         case 'GuardianLabs':
@@ -115,16 +119,14 @@ const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
     }
 };
 
-const shouldShowContributor = (
-    designType: DesignType,
-    isImmersive?: boolean,
-) => {
-    if (isImmersive) {
+const shouldShowContributor = (designType: DesignType, display: Display) => {
+    if (display === 'immersive') {
         return false;
     }
 
     switch (designType) {
         case 'Comment':
+        case 'GuardianView':
             return false;
         case 'Feature':
         case 'Review':
@@ -136,7 +138,6 @@ const shouldShowContributor = (
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
-        case 'GuardianView':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
@@ -194,6 +195,7 @@ const RowBelowLeftCol = ({
 );
 
 export const ArticleMeta = ({
+    display,
     designType,
     pillar,
     pageId,
@@ -201,7 +203,6 @@ export const ArticleMeta = ({
     author,
     tags,
     webPublicationDateDisplay,
-    isImmersive,
 }: Props) => {
     const sharingUrls = getSharingUrls(pageId, webTitle);
     const bylineImageUrl = getBylineImageUrl(tags);
@@ -211,7 +212,7 @@ export const ArticleMeta = ({
         tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar =
-        onlyOneContributor && shouldShowAvatar(designType, isImmersive);
+        onlyOneContributor && shouldShowAvatar(designType, display);
 
     return (
         <div className={metaContainer}>
@@ -228,7 +229,7 @@ export const ArticleMeta = ({
                             </AvatarContainer>
                         )}
                         <div>
-                            {shouldShowContributor(designType, isImmersive) && (
+                            {shouldShowContributor(designType, display) && (
                                 <Contributor
                                     designType={designType}
                                     author={author}

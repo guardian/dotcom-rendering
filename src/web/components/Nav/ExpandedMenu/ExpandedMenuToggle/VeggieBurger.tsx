@@ -5,8 +5,10 @@ import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 const veggieBurger = ({
+    display,
     showExpandedMenu,
 }: {
+    display: Display;
     showExpandedMenu: boolean;
 }) => css`
     background-color: ${brandAlt[400]};
@@ -27,7 +29,7 @@ const veggieBurger = ({
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
-        bottom: -3px;
+        bottom: ${display === 'immersive' ? '3px' : '-3px'};
         right: 5px;
     }
     ${from.mobileLandscape} {
@@ -87,48 +89,22 @@ const veggieBurgerIcon = ({
 };
 
 export const VeggieBurger: React.FC<{
+    display: Display;
     toggleExpandedMenu: (value: boolean) => void;
     showExpandedMenu: boolean;
-    enhanceCheckbox: boolean;
-    htmlFor: string;
     ariaControls: string;
-}> = ({
-    toggleExpandedMenu,
-    showExpandedMenu,
-    enhanceCheckbox,
-    htmlFor,
-    ariaControls,
-}) => {
-    if (enhanceCheckbox) {
-        return (
-            <button
-                className={veggieBurger({ showExpandedMenu })}
-                onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-                aria-controls={ariaControls}
-                aria-label="Toggle main menu"
-                data-link-name={`nav2 : veggie-burger : ${
-                    showExpandedMenu ? 'hide' : 'show'
-                }`}
-            >
-                <span className={veggieBurgerIcon({ showExpandedMenu })} />
-            </button>
-        );
-    }
-
+}> = ({ display, toggleExpandedMenu, showExpandedMenu, ariaControls }) => {
     return (
-        // TODO: Refactor this component to work better without js. Where better
-        // means working and accessible
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
-        <label
-            className={veggieBurger({ showExpandedMenu })}
+        <button
+            className={veggieBurger({ display, showExpandedMenu })}
             onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-            htmlFor={htmlFor}
-            tabIndex={0}
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-            role="button"
+            aria-controls={ariaControls}
             aria-label="Toggle main menu"
+            data-link-name={`nav2 : veggie-burger : ${
+                showExpandedMenu ? 'hide' : 'show'
+            }`}
         >
             <span className={veggieBurgerIcon({ showExpandedMenu })} />
-        </label>
+        </button>
     );
 };
