@@ -31,35 +31,30 @@ describe('Elements', function() {
     });
 
     describe('WEB', function() {
-        // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
-        const getIframeBody = () => {
-            return cy
-                .get('div[data-cy="instagram-embed"] > iframe')
-                .its('0.contentDocument.body')
-                .should('not.be.empty')
-                .then(cy.wrap);
-        };
-
         it('should render the instagram embed', function() {
+            // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
+            const getIframeBody = () => {
+                return cy
+                    .get('div[data-cy="instagram-embed"] > iframe')
+                    .its('0.contentDocument.body')
+                    .should('not.be.empty')
+                    .then(cy.wrap);
+            };
             cy.visit(
                 'Article?url=https://www.theguardian.com/media/2018/aug/29/flat-tummy-instagram-women-appetite-suppressant-lollipops',
             );
 
             getIframeBody().contains('View More on Instagram');
         });
-    });
-
-    describe('WEB', function() {
-        // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
-        const getIframeBody = () => {
-            return cy
-                .get('div[data-cy="embed-block"] > div > iframe')
-                .its('0.contentDocument.body')
-                .should('not.be.empty')
-                .then(cy.wrap);
-        };
 
         it('should render the embed', function() {
+            const getIframeBody = () => {
+                return cy
+                    .get('div[data-cy="embed-block"] > div > iframe')
+                    .its('0.contentDocument.body')
+                    .should('not.be.empty')
+                    .then(cy.wrap);
+            };
             cy.visit(
                 'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
             );
