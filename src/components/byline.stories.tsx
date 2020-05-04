@@ -47,6 +47,14 @@ const Comment: FC = () =>
         bylineHtml={mockBylineHtml()}
     />
 
+const Labs: FC = () =>
+    <Byline
+        pillar={selectPillar(Pillar.News)}
+        design={Design.AdvertisementFeature}
+        display={Display.Standard}
+        bylineHtml={mockBylineHtml()}
+    />
+
 
 // ----- Exports ----- //
 
@@ -59,4 +67,5 @@ export default {
 export {
     Default,
     Comment,
+    Labs
 }

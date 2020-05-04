@@ -9,7 +9,7 @@ import { remSpace } from '@guardian/src-foundations';
 
 import { Item, getFormat } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
-import { darkModeCss as darkMode } from 'styles';
+import { darkModeCss as darkMode, textSans } from 'styles';
 import { Display, Design } from 'format';
 
 
@@ -76,6 +76,11 @@ const media = css`
     }
 `;
 
+const advertisementFeature = css`
+    ${styles}
+    ${textSans}
+`
+
 const getStyles = (item: Item): SerializedStyles => {
     if (item.display === Display.Immersive) {
         return immersive;
@@ -86,9 +91,10 @@ const getStyles = (item: Item): SerializedStyles => {
         case Design.Feature:
         case Design.Comment:
             return css(styles, thinHeadline);
-
         case Design.Media:
-            return css(media);
+            return media;
+        case Design.AdvertisementFeature:
+            return advertisementFeature;
 
         default:
             return css(styles, normalHeadline);

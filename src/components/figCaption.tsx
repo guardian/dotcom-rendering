@@ -4,10 +4,10 @@ import React, { FC, ReactElement, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { text, neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, palette } from '@guardian/src-foundations';
 import { Format, Design } from '@guardian/types/Format';
 
-import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { getPillarStyles } from 'pillarStyles';
 import { Option } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
 import Anchor from 'components/anchor';
@@ -19,26 +19,29 @@ interface TriangleProps {
     format: Format;
 }
 
-const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
-    fill: ${kicker};
+const triangleStyles = (colour: string): SerializedStyles => css`
+    fill: ${colour};
     height: 0.8em;
     padding-right: ${remSpace[1]};
 `;
+
+const triangleSvg = (colour: string): ReactElement =>
+    <svg
+        css={triangleStyles(colour)}
+        viewBox="0 0 10 9"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <polygon points="0,9 5,0 10,9 0,9" />
+    </svg>
 
 const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
     switch (format.design) {
         case Design.Media:
             return null;
+        case Design.AdvertisementFeature:
+            return triangleSvg(palette.labs[300]);
         default:
-            return (
-                <svg
-                    css={triangleStyles(getPillarStyles(format.pillar))}
-                    viewBox="0 0 10 9"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <polygon points="0,9 5,0 10,9 0,9" />
-                </svg>
-            );
+            return triangleSvg(getPillarStyles(format.pillar).kicker);
     }
 }
 
@@ -47,11 +50,16 @@ interface CreditProps {
     format: Format;
 }
 
+const creditStyles = css`
+    ${textSans.xsmall()}
+    margin: ${remSpace[1]} 0;
+`;
+
 const Credit: FC<CreditProps> = ({ format, credit }: CreditProps) =>
     credit.fmap<ReactElement | null>(cred => {
         switch (format.design) {
             case Design.Media:
-                return <p>{cred}</p>;
+                return <p css={creditStyles}>{cred}</p>;
             default:
                 return <> {cred}</>;
         }
@@ -61,10 +69,7 @@ const captionHeadingStyles = css`
     ${headline.xxxsmall()}
     color: ${neutral[86]};
     margin: 0 0 ${remSpace[3]};
-
-    em {
-        ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
-    }
+    display: inline;
 `;
 
 const anchorStyles = css`
@@ -80,7 +85,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
         case 'BR':
             return null;
         case 'EM':
-            return <em key={key}>{children}</em>
+            return <em css={ textSans.xsmall({ italic: true, fontWeight: 'bold'})} key={key}>{children}</em>
         case 'A':
             return (
                 <Anchor
@@ -92,7 +97,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
                 </Anchor>
             );
         case '#text':
-            return text;
+            return <span>{ text }</span>;
         default:
             return renderTextElement(format)(node, key);
     }
@@ -118,6 +123,12 @@ const styles = css`
 
 const mediaStyles = css`
     color: ${neutral[86]};
+
+    h2 + span {
+        display: block;
+        ${textSans.xsmall()}
+        margin: ${remSpace[1]} 0;
+    }
 `;
 
 const getStyles = (format: Format): SerializedStyles => {

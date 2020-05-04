@@ -2,7 +2,7 @@
 
 import React, { FC, ReactNode } from 'react';
 import { SerializedStyles, css } from '@emotion/core';
-import { Format } from '@guardian/types/Format';
+import { Format, Design } from '@guardian/types/Format';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { darkModeCss } from 'styles';
@@ -18,18 +18,32 @@ interface Props {
     className?: SerializedStyles;
 }
 
-const styles = (colour: string): SerializedStyles => css`
-    color: ${colour};
+const styles = css`
     text-decoration: none;
-    border-bottom: 0.0625rem solid ${neutral[86]};
 
     ${darkModeCss`
         color: ${neutral[86]};
     `}
 `;
 
+const colour = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    switch (format.design) {
+        case Design.Media:
+            return css`
+                color: ${inverted};
+                border-bottom: 0.0625rem solid ${neutral[20]};
+            `
+        default:
+            return css`
+                color: ${kicker};
+                border-bottom: 0.0625rem solid ${neutral[86]};
+            `
+    }
+}
+
 const Anchor: FC<Props> = ({ format, children, href, className }: Props) =>
-    <a css={[styles(getPillarStyles(format.pillar).kicker), className]} href={href}>
+    <a css={[styles, colour(format), className]} href={href}>
         {children}
     </a>
 

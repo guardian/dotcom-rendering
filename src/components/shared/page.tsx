@@ -1,9 +1,9 @@
 // ----- Imports ----- //
 
-import React, {ReactElement, ReactNode} from 'react';
-import {css} from '@emotion/core';
-
+import React, { ReactElement, ReactNode } from 'react';
+import { css } from '@emotion/core';
 import Standard from 'components/standard/article';
+import AdvertisementFeature from 'components/advertisementFeature/article';
 import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Immersive from 'components/immersive/article';
@@ -254,6 +254,17 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                 </Standard>
             </WithScript>
         ), resources: [articleScript], hydrationProps: {} };
+    }
+
+    if (item.design === Design.AdvertisementFeature) {
+        const body = partition(item.body).oks;
+        const content = insertAdPlaceholders(renderAll(imageMappings)(format, body));
+
+        return { element: (
+            <AdvertisementFeature imageMappings={imageMappings} item={item}>
+                {content}
+            </AdvertisementFeature>
+        ), resources: [], hydrationProps: {} };
     }
 
     const element = <p>Content format not implemented yet</p>;
