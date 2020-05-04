@@ -100,6 +100,9 @@
                     },
                     {
                         "$ref": "#/definitions/CodeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/DocumentBlockElement"
                     }
                 ]
             }
@@ -1152,6 +1155,21 @@
             },
             "required": ["_type", "isMandatory"]
         },
+        "DocumentBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.DocumentBlockElement"
+                    ]
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["_type", "isMandatory"]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1248,6 +1266,9 @@
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/DocumentBlockElement"
                             }
                         ]
                     }
