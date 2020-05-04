@@ -266,7 +266,7 @@ export const ShowcaseLayout = ({
     // 2) The global switch for the Frontend/DCR Epic test is true
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-        CAPI.config.switches.abFrontendDotcomRenderingEpic;
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
