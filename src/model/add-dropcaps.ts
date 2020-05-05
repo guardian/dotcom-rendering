@@ -1,18 +1,22 @@
 import { JSDOM } from 'jsdom';
 
-const TEXT = 'model.dotcomrendering.pageElements.TextBlockElement';
-const SUBHEADING = 'model.dotcomrendering.pageElements.SubheadingBlockElement';
-
 const isDropCapFlag = (element: CAPIElement): boolean => {
     // A drop cap flag: <h2><strong>* * *</strong></h2>
-    if (element._type !== SUBHEADING) return false;
+    if (
+        element._type !==
+        'model.dotcomrendering.pageElements.SubheadingBlockElement'
+    )
+        return false;
     const frag = JSDOM.fragment(element.html);
     if (!frag || !frag.firstChild) return false;
     return frag.firstChild.nodeName === 'H2' && frag.textContent === '* * *';
 };
 
 const isSubheading = (element: CAPIElement): boolean => {
-    return element._type === SUBHEADING;
+    return (
+        element._type ===
+        'model.dotcomrendering.pageElements.SubheadingBlockElement'
+    );
 };
 
 const prevElementWasDropCapFlag = (
@@ -29,14 +33,14 @@ const checkForDropCaps = (elements: CAPIElement[]): CAPIElement[] => {
     const enhanced: CAPIElement[] = [];
     elements.forEach((element, i) => {
         switch (element._type) {
-            case SUBHEADING:
+            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 if (!isDropCapFlag(element)) {
                     enhanced.push(element);
                 }
                 // Otherwise, if it was a drop cap we delete it by not passing it
                 // through
                 break;
-            case TEXT:
+            case 'model.dotcomrendering.pageElements.TextBlockElement':
                 // Always pass first element through
                 if (i === 0) enhanced.push(element);
                 else if (prevElementWasDropCapFlag(elements, i))
