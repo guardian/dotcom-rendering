@@ -185,7 +185,7 @@ export const Header: React.FC<{
     nav: NavType;
     guardianBaseURL: string;
 }> = ({ nav, guardianBaseURL }) => (
-    <header className={headerStyles}>
+    <header className={`test-header ${headerStyles}`}>
         <div className={row}>
             <ReaderRevenueButton
                 nav={nav}
