@@ -43,7 +43,7 @@ export const DropCap = () => {
             <TextBlockComponent
                 html={html}
                 pillar="culture"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
                 display="immersive"
                 isFirstParagraph={false}
@@ -59,7 +59,7 @@ export const QuotedDropCap = () => {
             <TextBlockComponent
                 html={quotedHtml}
                 pillar="opinion"
-                dropCap={false}
+                forceDropCap={false}
                 designType="Comment"
                 display="standard"
                 isFirstParagraph={true}
@@ -75,7 +75,7 @@ export const ShortText = () => {
             <TextBlockComponent
                 html={shortHtml}
                 pillar="news"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
                 display="standard"
                 isFirstParagraph={false}
@@ -91,7 +91,7 @@ export const NoTags = () => {
             <TextBlockComponent
                 html={differentWrapperTags}
                 pillar="news"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
                 display="standard"
                 isFirstParagraph={false}
@@ -107,7 +107,7 @@ export const FeatureDropCap = () => {
             <TextBlockComponent
                 html={html}
                 pillar="culture"
-                dropCap={false}
+                forceDropCap={false}
                 designType="Feature"
                 display="standard"
                 isFirstParagraph={true}

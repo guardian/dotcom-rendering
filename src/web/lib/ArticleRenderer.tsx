@@ -92,7 +92,7 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                             display={display}
                             designType={designType}
-                            dropCap={element.dropCap}
+                            forceDropCap={element.dropCap}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
