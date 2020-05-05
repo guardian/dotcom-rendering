@@ -15,14 +15,42 @@ type Props = {
     credit?: string;
     displayCredit?: boolean;
     shouldLimitWidth?: boolean;
+    isOverlayed?: boolean;
 };
 
 const captionStyle = css`
     padding-top: 6px;
-    margin-bottom: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${text.supporting};
+`;
+
+const bottomMargin = css`
+    margin-bottom: 6px;
+`;
+
+const overlayedStyles = css`
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 18, 18, 0.8);
+
+    span {
+        color: white;
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-top: 0.375rem;
+    padding-right: 2.5rem;
+    padding-left: 0.75rem;
+    padding-bottom: 0.375rem;
+
+    flex-grow: 1;
+    min-height: 2.25rem;
 `;
 
 const limitedWidth = css`
@@ -57,6 +85,7 @@ export const Caption = ({
     credit,
     displayCredit = true,
     shouldLimitWidth = false,
+    isOverlayed,
 }: Props) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
@@ -93,9 +122,15 @@ export const Caption = ({
 
     return (
         <figcaption
-            className={cx(captionStyle, shouldLimitWidth && limitedWidth, {
-                [captionPadding]: padCaption,
-            })}
+            className={cx(
+                captionStyle,
+                shouldLimitWidth && limitedWidth,
+                !isOverlayed && bottomMargin,
+                isOverlayed && overlayedStyles,
+                {
+                    [captionPadding]: padCaption,
+                },
+            )}
         >
             <span
                 className={cx(
