@@ -210,7 +210,6 @@ export const Column = ({
                     ${visuallyHidden};
                 `}
                 id={columnInputId}
-                // aria-controls={ariaControls}
                 tabIndex={-1}
                 key="OpenExpandedMenuCheckbox"
                 role="menuitemcheckbox"
