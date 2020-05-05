@@ -4,7 +4,10 @@ import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { Article } from '@root/src/amp/pages/Article';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { getAllActiveExperiments } from '@root/src/amp/lib/experiment';
+import {
+    getAllActiveExperiments,
+    getAllActiveCss,
+} from '@root/src/amp/lib/experiment';
 import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
 import { document } from './document';
 
@@ -12,6 +15,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
     const linkedData = [{}];
     const metadata = { description: '', canonicalURL: '' };
+    const abTestCss = '';
     const result = v.validateString(
         document({
             linkedData,
@@ -19,6 +23,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
             title: 'foo',
             scripts: [''],
             body: <img alt="foo" />,
+            abTestCss,
         }),
     );
     expect(result.errors.length > 0).toBe(true);
@@ -63,6 +68,7 @@ test('produces valid AMP doc', async () => {
         experimentFullConfig,
         config.switches,
     );
+    const abTestCss = getAllActiveCss(experimentFullConfig, config.switches);
 
     const body = (
         <Article
@@ -80,6 +86,7 @@ test('produces valid AMP doc', async () => {
             metadata,
             title: 'foo',
             scripts: [],
+            abTestCss,
         }),
     );
 
