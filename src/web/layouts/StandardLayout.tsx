@@ -7,6 +7,7 @@ import {
     background,
     brandAltBackground,
     brandBackground,
+    brandLine,
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -293,7 +294,7 @@ export const StandardLayout = ({
                     <Section
                         sectionId="nav-root"
                         showSideBorders={true}
-                        borderColour={brandBorder.primary}
+                        borderColour={brandLine.primary}
                         showTopBorder={false}
                         padded={false}
                         backgroundColour={brandBackground.primary}

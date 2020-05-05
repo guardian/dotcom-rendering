@@ -75,6 +75,10 @@ const metaContainer = css`
         margin-left: -20px;
         margin-right: -20px;
     }
+    ${until.mobileLandscape} {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
 `;
 
 const getBylineImageUrl = (tags: TagType[]) => {
@@ -95,6 +99,7 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
     switch (designType) {
         case 'Feature':
         case 'Review':
+        case 'Recipe':
         case 'Interview':
             return true;
         case 'Live':
@@ -102,7 +107,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
         case 'Analysis':
         case 'Article':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
         case 'GuardianLabs':
