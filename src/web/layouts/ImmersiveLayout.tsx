@@ -200,7 +200,6 @@ export const ImmersiveLayout = ({
                 <Section
                     sectionId="nav-root"
                     showSideBorders={false}
-                    borderColour={brandBorder.primary}
                     showTopBorder={false}
                     padded={false}
                     backgroundColour={brandBackground.primary}

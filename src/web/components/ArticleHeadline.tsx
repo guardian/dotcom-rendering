@@ -187,7 +187,6 @@ export const ArticleHeadline = ({
         case 'Media':
         case 'Live':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
         case 'Quiz':
@@ -195,6 +194,7 @@ export const ArticleHeadline = ({
             return <h1 className={standardFont}>{curly(headlineString)}</h1>;
 
         case 'Review':
+        case 'Recipe':
         case 'Feature':
             return (
                 <h1
