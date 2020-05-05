@@ -61,5 +61,19 @@ describe('Elements', function() {
 
             getIframeBody().contains('radiolab');
         });
+        it('should render the soundcloud embed', function() {
+            const getIframeBody = () => {
+                return cy
+                    .get('div[data-cy="soundcloud-embed"] > iframe')
+                    .its('0.contentDocument.body')
+                    .should('not.be.empty')
+                    .then(cy.wrap);
+            };
+            cy.visit(
+                'Article?url=https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+            );
+
+            getIframeBody().contains('Cookie policy');
+        });
     });
 });

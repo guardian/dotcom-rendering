@@ -10,6 +10,7 @@ import { BlockquoteComponent } from '@root/src/web/components/elements/Blockquot
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SouncloudBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -74,6 +75,10 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return <div key={i} id={`rich-link-${i}`} />;
+                case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                    return (
+                        <SoundcloudBlockComponent key={i} element={element} />
+                    );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
