@@ -283,15 +283,8 @@ export const SlotBodyEnd = ({
         return null;
     }
 
-    // FIXME - used temporarily to exclude US from the DCR 5% test.
-    // Please check with Slot Machine team if this condition can be removed.
-    if (countryCode === 'US') {
-        return null;
-    }
-
     // Memoised as we only ever want to call the Slots API once, for simplicity
     // and performance reasons.
-
     return (
         <MemoisedInner
             isSignedIn={isSignedIn}
