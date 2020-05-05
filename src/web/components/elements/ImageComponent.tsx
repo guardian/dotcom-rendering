@@ -1,11 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Picture, PictureSource } from '@root/src/web/components/Picture';
-import { Caption } from '@root/src/web/components/Caption';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
+
+import { Picture, PictureSource } from '@root/src/web/components/Picture';
+import { Caption } from '@root/src/web/components/Caption';
+import { Hide } from '@root/src/web/components/Hide';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 
 type Props = {
     display: Display;
@@ -187,14 +189,27 @@ export const ImageComponent = ({
                 />
                 {starRating && <StarRatingComponent rating={starRating} />}
             </div>
-            <Caption
-                display={display}
-                captionText={element.data.caption || ''}
-                pillar={pillar}
-                credit={element.data.credit}
-                displayCredit={true}
-                shouldLimitWidth={shouldLimitWidth}
-            />
+            {isMainMedia ? (
+                <Hide when="below" breakpoint="tablet">
+                    <Caption
+                        display={display}
+                        captionText={element.data.caption || ''}
+                        pillar={pillar}
+                        credit={element.data.credit}
+                        displayCredit={true}
+                        shouldLimitWidth={shouldLimitWidth}
+                    />
+                </Hide>
+            ) : (
+                <Caption
+                    display={display}
+                    captionText={element.data.caption || ''}
+                    pillar={pillar}
+                    credit={element.data.credit}
+                    displayCredit={true}
+                    shouldLimitWidth={shouldLimitWidth}
+                />
+            )}
         </>
     );
 };

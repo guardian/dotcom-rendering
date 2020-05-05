@@ -23,10 +23,6 @@ const captionStyle = css`
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${text.supporting};
-
-    ${until.tablet} {
-        display: none;
-    }
 `;
 
 const limitedWidth = css`
