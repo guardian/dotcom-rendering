@@ -8,7 +8,7 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
-import { ElementKind, BodyElement, AtomKind } from 'item';
+import { ElementKind, BodyElement } from 'item';
 import { Role, BodyImageProps } from 'image';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
@@ -400,7 +400,7 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
             return h('div', props);
         }
 
-        case AtomKind.Interactive: {
+        case ElementKind.InteractiveAtom: {
             const { html, css: styles, js } = element;
 
             const atom = h(InteractiveAtom, { html, styles, js, format });

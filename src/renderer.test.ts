@@ -9,8 +9,6 @@ import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Format, Design, Display } from '@guardian/types/Format';
-import { AtomType } from 'mapiThriftModels';
-import { Int64 } from '@creditkarma/thrift-server-core';
 
 configure({ adapter: new Adapter() });
 const mockFormat: Format = {
@@ -104,51 +102,10 @@ const audioElement = (): BodyElement =>
 
 const atomElement = (): BodyElement =>
     ({
-        kind: ElementKind.Atom,
-        atom: {
-            id: "interactives/2020/04/interactive-pandemic-timeline",
-            atomType: AtomType.INTERACTIVE,
-            labels: [],
-            defaultHtml: "default",
-            data: {
-                interactive: {
-                    type: "interactive",
-                    title: "Pandemics and epidemics timeline",
-                    css: "main { background: yellow; }",
-                    html: "<main>Some content</main>",
-                    mainJS: "console.log('init')",
-                    docData: ""
-                }
-            },
-            contentChangeDetails: {
-                lastModified: {
-                    date: Int64.fromDecimalString("0"),
-                    user: {
-                        email: "",
-                        firstName: "",
-                        lastName: ""
-                    }
-                },
-                created: {
-                    date: Int64.fromDecimalString("0"),
-                    user: {
-                        email: "",
-                        firstName: "",
-                        lastName: ""
-                    }
-                },
-                published: {
-                    date: Int64.fromDecimalString("0"),
-                    user: {
-                        email: "",
-                        firstName: "",
-                        lastName: ""
-                    }
-                },
-                revision: Int64.fromDecimalString("0")
-            },
-            commissioningDesks: []
-        }
+        kind: ElementKind.InteractiveAtom,
+        css: "main { background: yellow; }",
+        html: "<main>Some content</main>",
+        js: "console.log('init')"
     })
 
 const render = (element: BodyElement): ReactNode[] =>
@@ -276,7 +233,7 @@ describe('Renders different types of elements', () => {
         expect(video.html()).toContain('src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"');
     })
 
-    test('ElementKind.Atom', () => {
+    test('ElementKind.InteractiveAtom', () => {
         const nodes = render(atomElement())
         const atom = shallow(nodes.flat()[0]);
         expect(atom.html()).toContain('<style>main { background: yellow; }</style>');

@@ -34,7 +34,7 @@ const enum ElementKind {
     Audio,
     Embed,
     Video,
-    Atom
+    InteractiveAtom
 }
 
 interface Fields extends Format {
@@ -69,15 +69,14 @@ type Video = {
     width: string;
 }
 
-export const enum AtomKind {
-    Interactive
-}
-
-interface Atom {
-    kind: AtomKind;
+interface AtomFields {
     js?: string;
     css: string;
     html: string;
+}
+
+interface InteractiveAtom extends AtomFields {
+    kind: ElementKind.InteractiveAtom;
 }
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
@@ -106,7 +105,7 @@ type BodyElement = {
 } | {
     kind: ElementKind.Embed;
     html: string;
-} | Audio | Video | Atom;
+} | Audio | Video | InteractiveAtom;
 
 type Body =
     Result<string, BodyElement>[];
@@ -332,7 +331,7 @@ const parseElement = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err(`No html or css for atom: ${id}`);
             }
 
-            return new Ok({ kind: AtomKind.Interactive, html, css, js });
+            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js });
         }
 
         default:
