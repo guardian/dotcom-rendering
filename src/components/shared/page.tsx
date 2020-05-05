@@ -64,24 +64,6 @@ const PageStyles = css`
         overflow-x: hidden;
         line-height: 1.5;
     }
-
-    figure.element-embed {
-        margin: 2em 0
-    }
-
-    .js-email-sub__iframe {
-        width: 100%;
-    }
-
-    .js-email-sub__iframe + figcaption {
-        margin-top: -8px;
-    }
-
-    video,
-    .element-atom iframe,
-    .element-audio iframe {
-        width: 100%;
-    }
 `;
 
 interface BodyProps {

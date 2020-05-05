@@ -18,6 +18,7 @@ import { Pillar } from 'format';
 import { Item, getFormat } from 'item';
 import { ImageMappings } from 'components/shared/page';
 import Metadata from 'components/metadata';
+import { headline } from '@guardian/src-foundations/typography';
 
 
 // ----- Styles ----- //
@@ -28,15 +29,7 @@ const DarkStyles = darkModeCss`
 
 const HeaderStyles = css`
     h2 {
-        margin-top: 3.2rem;
-        font-size: 2.6rem;
-        line-height: 3.2rem;
-        font-weight: 200;
-        margin-bottom: 8px;
-
-        &+p {
-            margin-top: 0;
-        }
+        ${headline.small( { fontWeight: 'light' } )}
     }
 `;
 
