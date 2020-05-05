@@ -63,24 +63,6 @@ const PageStyles = css`
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
     }
-
-    figure.element-embed {
-        margin: 2em 0
-    }
-
-    .js-email-sub__iframe {
-        width: 100%;
-    }
-
-    .js-email-sub__iframe + figcaption {
-        margin-top: -8px;
-    }
-
-    video,
-    .element-atom iframe,
-    .element-audio iframe {
-        width: 100%;
-    }
 `;
 
 interface BodyProps {
