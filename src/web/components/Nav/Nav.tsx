@@ -105,7 +105,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                           }
                         }
                         navInputCheckbox.addEventListener('click',function(){
-                          if(navInputCheckbox.checked) {
+                          if(!navInputCheckbox.checked) {
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
