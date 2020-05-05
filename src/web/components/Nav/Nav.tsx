@@ -86,11 +86,11 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 dangerouslySetInnerHTML={{
                     __html: `document.addEventListener('DOMContentLoaded', function(){
                         // Used to toggle data-link-name on label buttons
-                        var isMenuOpen = false
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var showMoreButton = document.getElementById('${showMoreButtonId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
+                        var expandedMenu = document.getElementById('expanded-menu')
 
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
@@ -105,13 +105,12 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                           }
                         }
                         navInputCheckbox.addEventListener('click',function(){
-                          if(isMenuOpen) {
+                          if(navInputCheckbox.checked) {
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
-                            isMenuOpen = false
                           } else {
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
@@ -119,25 +118,27 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                                 $selectableElement.setAttribute('tabindex','0')
                             })
                             focusOnFirstNavElement()
-                            isMenuOpen = true
                           }
                         })
-                        // Close hide menu on press enter
                         var toggleMainMenu = function(e){
+                          navInputCheckbox.click()
+                        }
+                        // Close hide menu on press enter
+                        var keydownToggleMainMenu = function(e){
                           // keyCode: 13 => Enter key | keyCode: 32 => Space key
                           if (e.keyCode === 13 || e.keyCode === 32) {
                             e.preventDefault()
-                            navInputCheckbox.click();
+                            toggleMainMenu()
                           }
                         }
-                        showMoreButton.addEventListener('keydown', toggleMainMenu)
-                        veggieBurger.addEventListener('keydown', toggleMainMenu)
+                        showMoreButton.addEventListener('keydown', keydownToggleMainMenu)
+                        veggieBurger.addEventListener('keydown', keydownToggleMainMenu)
                         // Accessibility to hide Nav when pressing escape key
                         document.addEventListener('keydown', function(e){
                           // keyCode: 27 => esc
                           if (e.keyCode === 27) {
                             if(navInputCheckbox.checked) {
-                              navInputCheckbox.click()
+                              toggleMainMenu()
                               if(window.getComputedStyle(veggieBurger).display === 'none'){
                                 showMoreButton.focus()
                               }else{
@@ -146,6 +147,12 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                             }
                           }
                         })
+                        // onBlur close dialog
+                        document.addEventListener('mousedown', function(e){
+                          if(navInputCheckbox.checked && !expandedMenu.contains(e.target)){
+                            toggleMainMenu()
+                          }
+                        });
                       })`,
                 }}
             />
