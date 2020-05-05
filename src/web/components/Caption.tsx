@@ -94,29 +94,34 @@ export const Caption = ({
     };
 
     return (
-        <figure className={figureStyle}>
-            {children}
-            {captionText && (
-                <>
-                    <figcaption
-                        className={cx(
-                            captionStyle,
-                            shouldLimitWidth && limitedWidth,
-                            { [captionPadding]: padCaption },
-                        )}
-                    >
-                        <span
-                            className={cx(
-                                iconStyle,
-                                display === 'immersive' && hideIconBelowLeftCol,
-                            )}
-                        >
-                            <TriangleIcon />
-                        </span>
-                        {getCaptionHtml()} {displayCredit && credit}
-                    </figcaption>
-                </>
+        <>
+            {displayCredit && (
+                <figure className={figureStyle}>
+                    {children}
+                    {captionText && (
+                        <>
+                            <figcaption
+                                className={cx(
+                                    captionStyle,
+                                    shouldLimitWidth && limitedWidth,
+                                    { [captionPadding]: padCaption },
+                                )}
+                            >
+                                <span
+                                    className={cx(
+                                        iconStyle,
+                                        display === 'immersive' &&
+                                            hideIconBelowLeftCol,
+                                    )}
+                                >
+                                    <TriangleIcon />
+                                </span>
+                                {getCaptionHtml()} {credit}
+                            </figcaption>
+                        </>
+                    )}
+                </figure>
             )}
-        </figure>
+        </>
     );
 };

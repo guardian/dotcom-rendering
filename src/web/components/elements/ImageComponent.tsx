@@ -179,7 +179,7 @@ export const ImageComponent = ({
             captionText={element.data.caption || ''}
             pillar={pillar}
             credit={element.data.credit}
-            displayCredit={true}
+            displayCredit={element.displayCredit}
             shouldLimitWidth={shouldLimitWidth}
         >
             <div
