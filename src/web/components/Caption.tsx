@@ -11,18 +11,15 @@ type Props = {
     display: Display;
     captionText?: string;
     pillar: Pillar;
-    children?: React.ReactNode;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
     shouldLimitWidth?: boolean;
 };
 
-const figureStyle = css`
-    margin-bottom: 6px;
-`;
 const captionStyle = css`
     padding-top: 6px;
+    margin-bottom: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${text.supporting};
@@ -63,7 +60,6 @@ export const Caption = ({
     padCaption = false,
     credit,
     displayCredit = true,
-    children,
     shouldLimitWidth = false,
 }: Props) => {
     const iconStyle = css`
@@ -97,30 +93,23 @@ export const Caption = ({
         );
     };
 
+    if (!captionText) return null;
+
     return (
-        <figure className={figureStyle}>
-            {children}
-            {captionText && (
-                <>
-                    <figcaption
-                        className={cx(
-                            captionStyle,
-                            shouldLimitWidth && limitedWidth,
-                            { [captionPadding]: padCaption },
-                        )}
-                    >
-                        <span
-                            className={cx(
-                                iconStyle,
-                                display === 'immersive' && hideIconBelowLeftCol,
-                            )}
-                        >
-                            <TriangleIcon />
-                        </span>
-                        {getCaptionHtml()} {displayCredit && credit}
-                    </figcaption>
-                </>
-            )}
-        </figure>
+        <figcaption
+            className={cx(captionStyle, shouldLimitWidth && limitedWidth, {
+                [captionPadding]: padCaption,
+            })}
+        >
+            <span
+                className={cx(
+                    iconStyle,
+                    display === 'immersive' && hideIconBelowLeftCol,
+                )}
+            >
+                <TriangleIcon />
+            </span>
+            {getCaptionHtml()} {displayCredit && credit}
+        </figcaption>
     );
 };

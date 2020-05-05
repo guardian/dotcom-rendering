@@ -174,14 +174,7 @@ export const ImageComponent = ({
         );
     }
     return (
-        <Caption
-            display={display}
-            captionText={element.data.caption || ''}
-            pillar={pillar}
-            credit={element.data.credit}
-            displayCredit={true}
-            shouldLimitWidth={shouldLimitWidth}
-        >
+        <>
             <div
                 className={css`
                     position: relative;
@@ -194,6 +187,14 @@ export const ImageComponent = ({
                 />
                 {starRating && <StarRatingComponent rating={starRating} />}
             </div>
-        </Caption>
+            <Caption
+                display={display}
+                captionText={element.data.caption || ''}
+                pillar={pillar}
+                credit={element.data.credit}
+                displayCredit={true}
+                shouldLimitWidth={shouldLimitWidth}
+            />
+        </>
     );
 };
