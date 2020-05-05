@@ -66,7 +66,7 @@ const AdvertisementFeature = ({ imageMappings, item, children }: Props): JSX.Ele
                     <Metadata imageMappings={imageMappings} item={item} />
                 </section>
             </header>
-            <Body pillar={item.pillar} className={[articleWidthStyles]}>
+            <Body className={[articleWidthStyles]}>
                 {children}
             </Body>
         </article>

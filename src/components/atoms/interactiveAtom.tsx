@@ -8,7 +8,7 @@ import { getPillarStyles, PillarStyles } from 'pillarStyles';
 export interface InteractiveAtomProps {
     html: string;
     styles: string;
-    js: string;
+    js?: string;
     format: Format;
 }
 
@@ -25,9 +25,9 @@ const InteractiveAtomStyles = (pillarStyles: PillarStyles): SerializedStyles => 
 const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
     const { html, styles, js, format } = props;
     const pillarStyles = getPillarStyles(format.pillar);
-    const style = h('style', { dangerouslySetInnerHTML: { __html: styles } })
-    const script = h('script', { dangerouslySetInnerHTML: { __html: js } })
-    const markup = styledH('figure', { css: InteractiveAtomStyles(pillarStyles), dangerouslySetInnerHTML: { __html: html } })
+    const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
+    const script = js ? h('script', { dangerouslySetInnerHTML: { __html: js } }) : null;
+    const markup = styledH('figure', { css: InteractiveAtomStyles(pillarStyles), dangerouslySetInnerHTML: { __html: html } });
     return <>
         {style}
         {script}

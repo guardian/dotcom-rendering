@@ -15,7 +15,6 @@ import {
     AssetType,
     IAsset as Asset,
     IAtoms as Atoms,
-    IAtom
 } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { Format, Pillar, Design, Display } from 'format';
@@ -70,9 +69,15 @@ type Video = {
     width: string;
 }
 
-type Atom = {
-    kind: ElementKind.Atom;
-    atom: IAtom;
+export const enum AtomKind {
+    Interactive
+}
+
+interface Atom {
+    kind: AtomKind;
+    js?: string;
+    css: string;
+    html: string;
 }
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
@@ -317,11 +322,17 @@ const parseElement = (docParser: DocParser, atoms?: Atoms) =>
             const id = element.contentAtomTypeData?.atomId
             const atom = atoms.interactives?.find(interactive => interactive.id === id);
 
-            if (!atom) {
+            if (!atom?.data?.interactive) {
                 return new Err('No atom matched')
             }
 
-            return new Ok({ kind: ElementKind.Atom, atom });
+            const { html, css, mainJS: js } = atom?.data?.interactive;
+
+            if (!html || !css) {
+                return new Err(`No html or css for atom: ${id}`);
+            }
+
+            return new Ok({ kind: AtomKind.Interactive, html, css, js });
         }
 
         default:

@@ -8,7 +8,7 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement, AtomKind } from 'item';
 import { Role, BodyImageProps } from 'image';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
@@ -20,7 +20,6 @@ import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
-import { AtomType } from 'mapiThriftModels';
 import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
@@ -401,27 +400,18 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
             return h('div', props);
         }
 
-        case ElementKind.Atom:
-            if (element.atom.atomType === AtomType.INTERACTIVE) {
-                const html = element.atom.data.interactive?.html
-                const styles = element.atom.data.interactive?.css
-                const js = element.atom.data.interactive?.mainJS
+        case AtomKind.Interactive: {
+            const { html, css: styles, js } = element;
 
-                if (!html || !styles || !js) {
-                    return null;
-                }
+            const atom = h(InteractiveAtom, { html, styles, js, format });
 
-                const atom = h(InteractiveAtom, { html, styles, js, format });
-
-                if (format.design !== Design.Interactive) {
-                    return h('iframe', null, atom);
-                } else {
-                    return atom;
-                }
+            if (format.design !== Design.Interactive) {
+                return h('iframe', null, atom);
+            } else {
+                return atom;
             }
-
-            return null;
         }
+    }
 };
 
 const renderAll = (imageMappings: ImageMappings) =>
