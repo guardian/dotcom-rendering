@@ -36,114 +36,6 @@ export const Elements = (
     );
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
-            case 'model.dotcomrendering.pageElements.TextBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-                return (
-                    <Subheading
-                        key={i}
-                        html={element.html}
-                        pillar={pillar}
-                        isImmersive={isImmersive}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                return <Image key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-                return (
-                    <VideoYoutube key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                return (
-                    <VideoGuardian key={i} element={element} pillar={pillar} />
-                );
-
-            case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-                return <VideoVimeo key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                return (
-                    <VideoFacebook key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-                return <InstagramEmbed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return (
-                    <TwitterEmbed key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                return <RichLink key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                return <Comment key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                return <SoundcloudEmbed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-                return <Embed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.MapBlockElement':
-                return <MapEmbed key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-                return (
-                    <Disclaimer key={i} html={element.html} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
-                return (
-                    <PullQuote key={i} html={element.html} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.QABlockElement':
-                return (
-                    <Expandable
-                        id={element.id}
-                        type="Q&A"
-                        title={element.title}
-                        html={element.html}
-                        img={element.img}
-                        credit={element.credit}
-                        pillar={pillar}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.GuideBlockElement':
-                return (
-                    <Expandable
-                        id={element.id}
-                        type={element.label}
-                        title={element.title}
-                        html={element.html}
-                        img={element.img}
-                        credit={element.credit}
-                        pillar={pillar}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.ProfileBlockElement':
-                return (
-                    <Expandable
-                        id={element.id}
-                        type={element.label}
-                        title={element.title}
-                        html={element.html}
-                        img={element.img}
-                        credit={element.credit}
-                        pillar={pillar}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.TimelineBlockElement':
-                return (
-                    <Timeline
-                        id={element.id}
-                        title={element.title}
-                        description={element.description}
-                        events={element.events}
-                        pillar={pillar}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-                return (
-                    <YoutubeVideo
-                        element={element}
-                        pillar={pillar}
-                        adTargeting={adTargeting}
-                    />
-                );
             case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
                 return (
                     <AtomEmbedMarkup
@@ -156,8 +48,115 @@ export const Elements = (
                 return <AtomEmbedUrl url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtom element={element} />;
+            case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                return <Text key={i} html={element.html} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.CommentBlockElement':
+                return <Comment key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 return <ContentAtom element={element} />;
+            case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
+                return (
+                    <Disclaimer key={i} html={element.html} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                return <Embed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.GuideBlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type={element.label}
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                return (
+                    <VideoGuardian key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.ImageBlockElement':
+                return <Image key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                return <InstagramEmbed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.MapBlockElement':
+                return <MapEmbed key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type={element.label}
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
+                return (
+                    <PullQuote key={i} html={element.html} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.QABlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type="Q&A"
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                return <RichLink key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                return <SoundcloudEmbed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                return (
+                    <Subheading
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                        isImmersive={isImmersive}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.TextBlockElement':
+                return <Text key={i} html={element.html} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                return (
+                    <Timeline
+                        id={element.id}
+                        title={element.title}
+                        description={element.description}
+                        events={element.events}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                return (
+                    <TwitterEmbed key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
+                return (
+                    <VideoFacebook key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                return <VideoVimeo key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+                return (
+                    <VideoYoutube key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+                return (
+                    <YoutubeVideo
+                        element={element}
+                        pillar={pillar}
+                        adTargeting={adTargeting}
+                    />
+                );
             default:
                 // eslint-disable-next-line no-console
                 console.log('Unsupported Element', JSON.stringify(element));
