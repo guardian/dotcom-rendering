@@ -107,6 +107,7 @@ export const document = ({ data }: Props) => {
 
     const { openGraphData } = CAPI;
     const { twitterData } = CAPI;
+    const { isAdFreeUser } = CAPI;
     const keywords =
         typeof CAPI.config.keywords === 'undefined' ||
         CAPI.config.keywords === 'Network Front'
@@ -134,5 +135,6 @@ export const document = ({ data }: Props) => {
         openGraphData,
         twitterData,
         keywords,
+        isAdFreeUser,
     });
 };
