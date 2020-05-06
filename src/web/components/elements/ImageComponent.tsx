@@ -264,7 +264,7 @@ export const ImageComponent = ({
                                         captionText={element.data.caption || ''}
                                         pillar={pillar}
                                         credit={element.data.credit}
-                                        displayCredit={element.data.credit}
+                                        displayCredit={element.displayCredit}
                                         shouldLimitWidth={shouldLimitWidth}
                                         isOverlayed={true}
                                     />
@@ -282,7 +282,7 @@ export const ImageComponent = ({
                         captionText={element.data.caption || ''}
                         pillar={pillar}
                         credit={element.data.credit}
-                        displayCredit={element.data.credit}
+                        displayCredit={element.displayCredit}
                         shouldLimitWidth={shouldLimitWidth}
                     />
                 </Hide>
@@ -292,7 +292,7 @@ export const ImageComponent = ({
                     captionText={element.data.caption || ''}
                     pillar={pillar}
                     credit={element.data.credit}
-                    displayCredit={element.data.credit}
+                    displayCredit={element.displayCredit}
                     shouldLimitWidth={shouldLimitWidth}
                 />
             )}
