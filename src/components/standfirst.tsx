@@ -127,7 +127,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 
 const Standfirst: FC<Props> = ({ item }) =>
     item.standfirst.fmap<ReactElement | null>(standfirst =>
-        <div className="standfirst" css={getStyles(item)}>{content(standfirst, item)}</div>,
+        <div css={getStyles(item)}>{content(standfirst, item)}</div>,
     ).withDefault(null);
 
 

@@ -101,7 +101,6 @@ const clientConfig = {
         article: 'client/article.ts',
         liveblog: 'client/liveblog.ts',
         media: 'client/media.ts',
-        interactive: 'client/interactive.ts',
     },
     target: 'web',
     output: {
