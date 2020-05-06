@@ -29,12 +29,11 @@ const captionStyle = css`
 `;
 
 const limitedWidth = css`
-    /* use absolute position here to allow the article text to push up alongside
-    the caption when it is limited in width */
-    position: absolute;
-
     ${from.leftCol} {
         width: 140px;
+        /* use absolute position here to allow the article text to push up alongside
+           the caption when it is limited in width */
+        position: absolute;
     }
     ${from.wide} {
         width: 220px;
