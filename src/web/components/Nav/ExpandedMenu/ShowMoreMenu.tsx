@@ -31,11 +31,10 @@ const showMoreTextStyles = css`
             to support NoJS
         */
         transform: translateY(-3px) rotate(45deg);
-        /* stylelint-disable */
+        /* stylelint-disable-next-line selector-type-no-unknown */
         ${`#${navInputCheckboxId}`}:checked ~ div label & {
             transform: translateY(1px) rotate(-135deg);
         }
-        /* stylelint-enable */
 
         transition: transform 250ms ease-out;
         vertical-align: middle;
@@ -44,11 +43,10 @@ const showMoreTextStyles = css`
     :hover:after {
         transform: translateY(0) rotate(45deg);
         /* refer to comment above */
-        /* stylelint-disable */
+        /* stylelint-disable-next-line selector-type-no-unknown */
         ${`#${navInputCheckboxId}`}:checked ~ div label & {
             transform: translateY(-2px) rotate(-135deg);
         }
-        /* stylelint-enable */
     }
 `;
 

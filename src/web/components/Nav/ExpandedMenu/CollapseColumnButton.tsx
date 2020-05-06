@@ -18,7 +18,7 @@ const showColumnLinksStyle = (columnInputId: string) => css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    /* stylelint-disable */
+    /* stylelint-disable-next-line selector-type-no-unknown */
     ${`#${columnInputId}`}:checked ~ & {
         :before {
             margin-top: 8px;

@@ -27,14 +27,14 @@ const mainMenuStyles = css`
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    /* stylelint-disable */
+    /* stylelint-disable-next-line selector-type-no-unknown */
     ${`#${navInputCheckboxId}`}:checked ~ div & {
         ${from.desktop} {
             display: block;
             overflow: visible;
         }
     }
-    /* stylelint-enable */
+
     ${from.desktop} {
         display: none;
         position: absolute;
@@ -62,7 +62,7 @@ const mainMenuStyles = css`
             ); /* when translateX is set to 0% it reapears on the screen */
         }
     }
-    /* stylelint-enable */
+
     ${until.desktop} {
         transform: translateX(
             -110%
