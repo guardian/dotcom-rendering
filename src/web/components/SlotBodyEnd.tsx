@@ -206,14 +206,10 @@ const MemoisedInner = ({
                 sendOphanEpicEvent('VIEW', meta);
             }
         }
-        // At the moment, given the information we currently store in data, it's
-        // fine to add it as a dependency because it won't ever change after
-        // viewing, so we shouldn't ever run the hook multiple times. If we _do_
-        // ever have an implementation where information in data could change
-        // after viewing, we'll need to revisit this. Perhaps it's clearer to
-        // remove data from the dependencies and disable the exhaustive-deps
-        // rule, as above.
-    }, [hasBeenSeen, data]);
+    // The 'data' object used in the hook never changes after 'hasBeenSeen'
+    // is set to true, so we're intentionally leaving it out of the deps array.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hasBeenSeen]);
 
     // Rely on useEffect to run a function that initialises the slot once it's
     // been injected in the DOM.
