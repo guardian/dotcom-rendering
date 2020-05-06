@@ -9,6 +9,8 @@ import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteC
 import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SouncloudBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -31,19 +33,21 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
-                case 'model.dotcomrendering.pageElements.TextBlockElement':
+                case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
-                        <TextBlockComponent
+                        <BlockquoteComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
-                            designType={designType}
-                            dropCap={false} // TODO: Plug in the api response here when we have it
                         />
                     );
-                case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     return (
-                        <SubheadingBlockComponent key={i} html={element.html} />
+                        <EmbedBlockComponent
+                            key={i}
+                            html={element.html}
+                            alt={element.alt}
+                        />
                     );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
@@ -54,8 +58,6 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                    return <TweetBlockComponent key={i} element={element} />;
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return (
                         <InstagramBlockComponent key={i} element={element} />
@@ -71,14 +73,28 @@ export const ArticleRenderer: React.FC<{
                             role={element.role}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                    return <div key={i} id={`rich-link-${i}`} />;
+                case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
-                        <BlockquoteComponent
+                        <SoundcloudBlockComponent key={i} element={element} />
+                    );
+                case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                    return (
+                        <SubheadingBlockComponent key={i} html={element.html} />
+                    );
+                case 'model.dotcomrendering.pageElements.TextBlockElement':
+                    return (
+                        <TextBlockComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
+                            designType={designType}
+                            dropCap={false} // TODO: Plug in the api response here when we have it
                         />
                     );
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return <TweetBlockComponent key={i} element={element} />;
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
@@ -93,8 +109,6 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div key={i} id={`rich-link-${i}`} />;
                 default:
                     return null;
             }

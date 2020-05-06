@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
@@ -9,7 +10,7 @@ const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
 const { siteName, root } = require('./config');
 
-function buildUrl(req) {
+function buildUrlFromQueryParam(req) {
     const DEFAULT_URL =
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
     const url = new URL(req.query.url || DEFAULT_URL);
@@ -24,9 +25,9 @@ function ampifyUrl(url) {
     return url.replace('www', 'amp');
 }
 
-const go = async () => {
-    const webpackConfig = await require('../webpack/frontend');
-    const compiler = await webpack(webpackConfig);
+const go = () => {
+    const webpackConfig = require('../webpack/frontend');
+    const compiler = webpack(webpackConfig);
 
     const app = express();
 
@@ -58,7 +59,7 @@ const go = async () => {
         '/Article',
         async (req, res, next) => {
             try {
-                const url = buildUrl(req);
+                const url = buildUrlFromQueryParam(req);
                 const { html, ...config } = await fetch(url).then(article =>
                     article.json(),
                 );
@@ -79,14 +80,14 @@ const go = async () => {
         '/AMPArticle',
         async (req, res, next) => {
             try {
-                const url = buildUrl(req);
+                const url = buildUrlFromQueryParam(req);
                 const { html, ...config } = await fetch(ampifyUrl(url)).then(
                     article => article.json(),
                 );
                 req.body = config;
                 next();
             } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/tslint/config
+                // eslint-disable-next-line no-console
                 console.error(error);
             }
         },
@@ -96,7 +97,7 @@ const go = async () => {
         }),
     );
 
-    app.get('/', function(req, res) {
+    app.get('/', (req, res) => {
         res.sendFile(
             path.join(root, 'scripts', 'frontend', 'landing', 'index.html'),
         );
@@ -106,7 +107,7 @@ const go = async () => {
         res.redirect('/');
     });
 
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
         res.status(500).send(err.stack);
     });
 
