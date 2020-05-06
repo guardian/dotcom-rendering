@@ -28,6 +28,7 @@ const showColumnLinksStyle = (columnInputId: string) => css`
 `;
 
 const collapseColumnButton = css`
+    user-select: none;
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
