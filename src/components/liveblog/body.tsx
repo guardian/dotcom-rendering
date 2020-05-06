@@ -3,7 +3,7 @@ import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { css } from '@emotion/core'
 import { Pillar, Format } from 'format';
-import { LiveBlock } from 'item';
+import { LiveBlock } from 'liveBlock';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
 import { BufferedTransport, CompactProtocol } from '@creditkarma/thrift-server-core';

@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
 import { ReactNode } from 'react';
 import { compose } from 'lib';
-import { BodyElement, ElementKind } from 'item';
+import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
 import { None, Some } from 'types/option';

@@ -8,7 +8,7 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement } from 'bodyElement';
 import { Role, BodyImageProps } from 'image';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';

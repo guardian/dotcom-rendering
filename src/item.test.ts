@@ -1,5 +1,6 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from 'mapiThriftModels';
-import { fromCapi, Standard, ElementKind, Review, Audio, Video, getFormat } from 'item';
+import { fromCapi, Standard, Review, getFormat } from 'item';
+import { ElementKind, Audio, Video } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';

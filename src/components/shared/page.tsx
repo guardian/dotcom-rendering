@@ -16,7 +16,8 @@ import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi, getFormat, ElementKind } from 'item';
+import { fromCapi, getFormat } from 'item';
+import { ElementKind } from 'bodyElement';
 import { sign } from 'image';
 import {
     ElementType,

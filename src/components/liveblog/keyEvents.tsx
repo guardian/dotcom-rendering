@@ -5,7 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { LiveBlock } from 'item';
+import { LiveBlock } from 'liveBlock';
 import { body, headline } from '@guardian/src-foundations/typography';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
