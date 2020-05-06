@@ -261,7 +261,6 @@ export const ShowcaseLayout = ({
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Render the slot if switch is set to true or flag set in URL (i.e. ?slot-machine-flags=showBodyEnd)
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
         CAPI.config.switches.slotBodyEnd;
