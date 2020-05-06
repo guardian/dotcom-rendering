@@ -6,7 +6,7 @@ import { articles, AMPArticles } from '../../lib/articles.js';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 
 describe('E2E Page rendering', function() {
-    beforeEach(getPolyfill);
+    before(getPolyfill);
     beforeEach(setupApiRoutes);
 
     describe('for WEB', function() {
