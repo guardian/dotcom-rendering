@@ -27,14 +27,7 @@ interface Props {
     dataLinkName: string;
 }
 
-const input = css`
-    ${visuallyHidden};
-    :checked + ul {
-        display: block;
-    }
-`;
-
-const ul = css`
+const ulStyles = css`
     z-index: 1072;
     list-style: none;
     background-color: white;
@@ -65,7 +58,7 @@ const ulExpanded = css`
     display: block;
 `;
 
-const link = css`
+const linkStyles = css`
     ${textSans.small()};
     color: ${text.anchorSecondary};
     position: relative;
@@ -118,7 +111,7 @@ const linkFirst = css`
     }
 `;
 
-const button = css`
+const buttonStyles = css`
     ${textSans.medium()};
     display: block;
     cursor: pointer;
@@ -203,74 +196,95 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
     const handleToggle = () => setIsExpanded(!isExpanded);
 
     // needs to be unique to allow multiple dropdowns on same page
-    // this should be unique because JS is single-threaded
     const dropdownID = `dropbox-id-${id}`;
     const checkboxID = `checkbox-id-${id}`;
 
     return (
         <>
             {noJS ? (
-                <label
-                    htmlFor={checkboxID}
-                    className={cx({
-                        [button]: true,
-                        [buttonExpanded]: isExpanded,
-                    })}
-                    aria-controls={dropdownID}
-                    aria-expanded={isExpanded ? 'true' : 'false'}
+                <div
+                    className={css`
+                        ${`#${checkboxID}`} {
+                            /* Never show the input */
+                            ${visuallyHidden}
+                        }
+                        ${`#${dropdownID}`} {
+                            /* Hide caption by default */
+                            display: none;
+                        }
+                        /* stylelint-disable-next-line selector-type-no-unknown */
+                        ${`#${checkboxID}`}:checked + ${`#${dropdownID}`} {
+                            /* Show the caption if the input is checked */
+                            display: block;
+                        }
+                    `}
                 >
+                    <label htmlFor={checkboxID} className={buttonStyles}>
+                        {label}
+                    </label>
                     <input
-                        className={input}
                         type="checkbox"
                         id={checkboxID}
-                        aria-controls={dropdownID}
                         aria-checked="false"
                         tabIndex={-1}
-                        key="OpenMainMenuCheckbox"
-                        role="menuitemcheckbox"
                     />
-                    {label}
-                </label>
+                    <ul id={dropdownID} className={ulStyles}>
+                        {links.map((l, index) => (
+                            <li key={l.title}>
+                                <a
+                                    href={l.url}
+                                    className={cx({
+                                        [linkStyles]: true,
+                                        [linkActive]: !!l.isActive,
+                                        [linkFirst]: index === 0,
+                                    })}
+                                    data-link-name={l.dataLinkName}
+                                >
+                                    {l.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             ) : (
-                <button
-                    onClick={handleToggle}
-                    className={cx({
-                        [button]: true,
-                        [buttonExpanded]: isExpanded,
-                    })}
-                    aria-controls={dropdownID}
-                    aria-expanded={isExpanded ? 'true' : 'false'}
-                    data-link-name={dataLinkName}
-                    data-cy="dropdown-button"
-                >
-                    {label}
-                </button>
+                <>
+                    <button
+                        onClick={handleToggle}
+                        className={cx(
+                            buttonStyles,
+                            isExpanded && buttonExpanded,
+                        )}
+                        aria-expanded={isExpanded ? 'true' : 'false'}
+                        data-link-name={dataLinkName}
+                        data-cy="dropdown-button"
+                    >
+                        {label}
+                    </button>
+                    <ul
+                        className={cx({
+                            [ulStyles]: true,
+                            [ulExpanded]: isExpanded,
+                        })}
+                        data-cy="dropdown-options"
+                    >
+                        {links.map((l, index) => (
+                            <li key={l.title}>
+                                <a
+                                    href={l.url}
+                                    className={cx({
+                                        [linkStyles]: true,
+                                        [linkActive]: !!l.isActive,
+                                        [linkFirst]: index === 0,
+                                    })}
+                                    data-link-name={l.dataLinkName}
+                                >
+                                    {l.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </>
             )}
-
-            <ul
-                id={dropdownID}
-                className={cx({
-                    [ul]: true,
-                    [ulExpanded]: isExpanded,
-                })}
-                data-cy="dropdown-options"
-            >
-                {links.map((l, index) => (
-                    <li key={l.title}>
-                        <a
-                            href={l.url}
-                            className={cx({
-                                [link]: true,
-                                [linkActive]: !!l.isActive,
-                                [linkFirst]: index === 0,
-                            })}
-                            data-link-name={l.dataLinkName}
-                        >
-                            {l.title}
-                        </a>
-                    </li>
-                ))}
-            </ul>
         </>
     );
 };
