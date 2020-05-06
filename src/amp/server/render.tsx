@@ -10,7 +10,10 @@ import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import { getAllActiveExperiments } from '@root/src/amp/lib/experiment';
+import {
+    getAllActiveExperiments,
+    getAllActiveCss,
+} from '@root/src/amp/lib/experiment';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -49,6 +52,11 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             experimentFullConfig,
             config.switches,
         );
+        const abTestCss = getAllActiveCss(
+            experimentFullConfig,
+            config.switches,
+        );
+
         const metadata = {
             description: CAPI.trailText,
             canonicalURL: CAPI.webURL,
@@ -68,6 +76,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     config={config}
                 />
             ),
+            abTestCss,
         });
 
         res.status(200).send(resp);

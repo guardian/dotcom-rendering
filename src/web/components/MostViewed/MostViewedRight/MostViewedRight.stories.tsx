@@ -13,6 +13,9 @@ import { MostViewedRight } from './MostViewedRight';
 export default {
     component: MostViewedRight,
     title: 'Components/MostViewedRight',
+    parameters: {
+        chromatic: { diffThreshold: 0.2 },
+    },
 };
 
 export const defaultStory = () => {

@@ -2,7 +2,7 @@ import { StyledExperimentCollection } from '@root/src/amp/lib/experiment';
 
 // Variant proportions must be >0, so we set extremely low to simulate a 0% test
 export const experimentFullConfig: StyledExperimentCollection = {
-    'ab-amp-zero-test-experiment': {
+    abAmpZeroTestExperiment: {
         sticky: false,
         variants: {
             treatment1: {

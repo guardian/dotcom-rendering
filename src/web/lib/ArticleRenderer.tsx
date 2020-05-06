@@ -87,10 +87,12 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <TextBlockComponent
                             key={i}
+                            isFirstParagraph={i === 0}
                             html={element.html}
                             pillar={pillar}
+                            display={display}
                             designType={designType}
-                            dropCap={false} // TODO: Plug in the api response here when we have it
+                            forceDropCap={element.dropCap}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
