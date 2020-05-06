@@ -134,7 +134,7 @@ export const Caption = ({
                 }}
                 key="caption"
             />
-            {displayCredit && ` ${credit}`}
+            {credit && displayCredit && ` ${credit}`}
         </figcaption>
     );
 };
