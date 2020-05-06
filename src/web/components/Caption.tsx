@@ -80,48 +80,40 @@ export const Caption = ({
         }
     `;
 
-    const getCaptionHtml = () => {
-        return (
-            <span
-                className={captionLink}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                    __html: captionText || '',
-                }}
-                key="caption"
-            />
-        );
-    };
-
     return (
-        <>
-            {displayCredit && (
-                <figure className={figureStyle}>
-                    {children}
-                    {captionText && (
-                        <>
-                            <figcaption
-                                className={cx(
-                                    captionStyle,
-                                    shouldLimitWidth && limitedWidth,
-                                    { [captionPadding]: padCaption },
-                                )}
-                            >
-                                <span
-                                    className={cx(
-                                        iconStyle,
-                                        display === 'immersive' &&
-                                            hideIconBelowLeftCol,
-                                    )}
-                                >
-                                    <TriangleIcon />
-                                </span>
-                                {getCaptionHtml()} {credit}
-                            </figcaption>
-                        </>
-                    )}
-                </figure>
+        <figure className={figureStyle}>
+            {children}
+            {(captionText || displayCredit) && (
+                <>
+                    <figcaption
+                        className={cx(
+                            captionStyle,
+                            shouldLimitWidth && limitedWidth,
+                            { [captionPadding]: padCaption },
+                        )}
+                    >
+                        <span
+                            className={cx(
+                                iconStyle,
+                                display === 'immersive' && hideIconBelowLeftCol,
+                            )}
+                        >
+                            <TriangleIcon />
+                        </span>
+                        {captionText && (
+                            <span
+                                className={captionLink}
+                                // eslint-disable-next-line react/no-danger
+                                dangerouslySetInnerHTML={{
+                                    __html: captionText || '',
+                                }}
+                                key="caption"
+                            />
+                        )}
+                        {displayCredit && credit}
+                    </figcaption>
+                </>
             )}
-        </>
+        </figure>
     );
 };
