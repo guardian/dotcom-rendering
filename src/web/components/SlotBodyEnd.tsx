@@ -25,20 +25,24 @@ const checkForErrors = (response: any) => {
 
 type OphanAction = 'INSERT' | 'VIEW';
 
-const testName = 'FrontendDotcomRenderingEpic';
-const campaignCode = 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr';
+type TestMeta = {
+    abTestName: string;
+    abTestVariant: string;
+    campaignCode: string;
+    campaignId: string;
+};
 
-const sendOphanEpicEvent = (action: OphanAction): void => {
+const sendOphanEpicEvent = (action: OphanAction, testMeta: TestMeta): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode,
-            id: campaignCode,
+            campaignCode: testMeta.campaignCode,
+            id: testMeta.campaignId,
         },
         abTest: {
-            name: testName,
-            variant: 'dcr',
+            name: testMeta.abTestName,
+            variant: testMeta.abTestVariant,
         },
         action,
     };
@@ -115,6 +119,13 @@ const buildPayload = (props: Props) => {
     };
 };
 
+type SlotState = {
+    html: string;
+    css: string;
+    js: string;
+    meta: TestMeta;
+};
+
 const MemoisedInner = ({
     isSignedIn,
     countryCode,
@@ -128,11 +139,7 @@ const MemoisedInner = ({
     contributionsServiceUrl,
 }: Props) => {
     const [data, setData] = useState<{
-        slot?: {
-            html: string;
-            css: string;
-            js: string;
-        };
+        slot?: SlotState;
     }>();
 
     // Debounce the IntersectionObserver callback
@@ -164,16 +171,18 @@ const MemoisedInner = ({
         getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
-            .then(json =>
+            .then(json => {
                 setData({
                     slot: {
                         html: json.data.html,
                         css: json.data.css,
                         js: json.data.js,
+                        meta: json.data.meta,
                     },
-                }),
-            )
-            .then(() => sendOphanEpicEvent('INSERT'))
+                });
+
+                sendOphanEpicEvent('INSERT', json.data.meta);
+            })
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -189,10 +198,17 @@ const MemoisedInner = ({
         // because of the way the hook behaves, it'll only ever go from false ->
         // true once.
         if (hasBeenSeen) {
-            // Add a new entry to the view log when we know an Epic is viewed
-            logView(testName);
-            sendOphanEpicEvent('VIEW');
+            const meta = data?.slot?.meta;
+
+            if (meta) {
+                // Add a new entry to the view log when we know an Epic is viewed
+                logView(meta.abTestName);
+                sendOphanEpicEvent('VIEW', meta);
+            }
         }
+    // The 'data' object used in the hook never changes after 'hasBeenSeen'
+    // is set to true, so we're intentionally leaving it out of the deps array.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hasBeenSeen]);
 
     // Rely on useEffect to run a function that initialises the slot once it's
@@ -263,15 +279,8 @@ export const SlotBodyEnd = ({
         return null;
     }
 
-    // FIXME - used temporarily to exclude US from the DCR 5% test.
-    // Please check with Slot Machine team if this condition can be removed.
-    if (countryCode === 'US') {
-        return null;
-    }
-
     // Memoised as we only ever want to call the Slots API once, for simplicity
     // and performance reasons.
-
     return (
         <MemoisedInner
             isSignedIn={isSignedIn}

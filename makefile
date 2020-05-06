@@ -41,6 +41,7 @@ start: install
 	@NODE_ENV=production pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
+	@pm2 logs
 
 stop:
 	@pm2 kill
@@ -50,6 +51,8 @@ monitor:
 
 logs:
 	@pm2 logs
+
+run: stop build start
 
 # dev #########################################
 

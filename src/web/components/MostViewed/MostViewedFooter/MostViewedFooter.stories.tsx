@@ -12,6 +12,9 @@ import { MostViewedFooter } from './MostViewedFooter';
 export default {
     component: MostViewedFooter,
     title: 'Components/MostViewedFooter',
+    parameters: {
+        chromatic: { diffThreshold: 0.2 },
+    },
 };
 
 export const withTwoTabs = () => {
