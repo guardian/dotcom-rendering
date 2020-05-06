@@ -29,6 +29,8 @@ export const defaultStory = () => {
                 html={html}
                 pillar="news"
                 designType="Article"
+                display="standard"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -41,8 +43,10 @@ export const DropCap = () => {
             <TextBlockComponent
                 html={html}
                 pillar="culture"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
+                display="immersive"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -55,8 +59,10 @@ export const QuotedDropCap = () => {
             <TextBlockComponent
                 html={quotedHtml}
                 pillar="opinion"
-                dropCap={true}
+                forceDropCap={false}
                 designType="Comment"
+                display="standard"
+                isFirstParagraph={true}
             />
         </div>
     );
@@ -69,8 +75,10 @@ export const ShortText = () => {
             <TextBlockComponent
                 html={shortHtml}
                 pillar="news"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
+                display="standard"
+                isFirstParagraph={false}
             />
         </div>
     );
@@ -83,10 +91,28 @@ export const NoTags = () => {
             <TextBlockComponent
                 html={differentWrapperTags}
                 pillar="news"
-                dropCap={true}
+                forceDropCap={true}
                 designType="Article"
+                display="standard"
+                isFirstParagraph={false}
             />
         </div>
     );
 };
 NoTags.story = { name: 'with no p tags' };
+
+export const FeatureDropCap = () => {
+    return (
+        <div className={containerStyles}>
+            <TextBlockComponent
+                html={html}
+                pillar="culture"
+                forceDropCap={false}
+                designType="Feature"
+                display="standard"
+                isFirstParagraph={true}
+            />
+        </div>
+    );
+};
+FeatureDropCap.story = { name: 'with designType of Feature' };

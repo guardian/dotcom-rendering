@@ -246,12 +246,9 @@ export const StandardLayout = ({
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Render the slot if one is true:
-    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
-    // 2) The global switch for the Frontend/DCR Epic test is true
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-        CAPI.config.switches.abFrontendDotcomRenderingEpic;
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render

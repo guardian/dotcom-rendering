@@ -216,13 +216,22 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Portal>
             ))}
             <Portal root="share-comment-counts">
-                <Counts
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    pageId={CAPI.config.pageId}
-                    commentCount={commentCount}
-                    pillar={pillar}
-                    setOpenComments={setOpenComments}
-                />
+                {CAPI.isCommentable ? (
+                    <Counts
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        pageId={CAPI.config.pageId}
+                        commentCount={commentCount}
+                        pillar={pillar}
+                        setOpenComments={setOpenComments}
+                    />
+                ) : (
+                    <Counts
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        pageId={CAPI.config.pageId}
+                        pillar={pillar}
+                        setOpenComments={setOpenComments}
+                    />
+                )}
             </Portal>
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>

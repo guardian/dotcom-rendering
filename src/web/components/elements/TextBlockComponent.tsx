@@ -13,7 +13,9 @@ type Props = {
     html: string;
     pillar: Pillar;
     designType: DesignType;
-    dropCap?: boolean;
+    display: Display;
+    isFirstParagraph: boolean;
+    forceDropCap?: boolean;
 };
 
 const isLetter = (letter: string) => {
@@ -24,7 +26,7 @@ const isLongEnough = (html: string) => {
     return html.length > 199;
 };
 
-const decideDropCap = (html: string) => {
+const decideDropCapLetter = (html: string) => {
     const first = html.substr(0, 1);
     if (first === '“') {
         const second = html.substr(1, 1);
@@ -36,6 +38,45 @@ const decideDropCap = (html: string) => {
     }
 
     return isLetter(first) && first;
+};
+
+const shouldShowDropCap = ({
+    designType,
+    display,
+    isFirstParagraph,
+    forceDropCap,
+}: {
+    designType: DesignType;
+    display: Display;
+    isFirstParagraph: boolean;
+    forceDropCap?: boolean;
+}) => {
+    // Sometimes paragraphs other than the 1st one can have drop caps
+    if (forceDropCap) return true;
+    // Otherwise, we're only interested in marking the first para as a drop cap
+    if (!isFirstParagraph) return false;
+    // If immersive, we show drop caps for the first para
+    if (display === 'immersive') return true;
+    // The first para has a drop cap for these design types
+    switch (designType) {
+        case 'Feature':
+        case 'Comment':
+        case 'Review':
+        case 'Interview':
+        case 'Recipe':
+            return true;
+        case 'Article':
+        case 'Media':
+        case 'Live':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Analysis':
+            return false;
+    }
 };
 
 const sanitiserOptions = {
@@ -59,7 +100,9 @@ export const TextBlockComponent: React.FC<Props> = ({
     html,
     pillar,
     designType,
-    dropCap,
+    display,
+    forceDropCap,
+    isFirstParagraph,
 }: Props) => {
     const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
         prefix: '<p>',
@@ -72,12 +115,21 @@ export const TextBlockComponent: React.FC<Props> = ({
         ${body.medium()};
     `;
 
-    const firstLetter = decideDropCap(unwrappedHtml);
+    const firstLetter = decideDropCapLetter(unwrappedHtml);
     const remainingLetters = firstLetter
         ? unwrappedHtml.substr(firstLetter.length)
         : unwrappedHtml;
 
-    if (dropCap && firstLetter && isLongEnough(remainingLetters)) {
+    if (
+        shouldShowDropCap({
+            designType,
+            display,
+            isFirstParagraph,
+            forceDropCap,
+        }) &&
+        firstLetter &&
+        isLongEnough(remainingLetters)
+    ) {
         return (
             <>
                 <DropCap
