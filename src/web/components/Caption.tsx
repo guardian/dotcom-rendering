@@ -114,7 +114,6 @@ export const Caption = ({
                             <TriangleIcon />
                         </span>
                         {getCaptionHtml()} {displayCredit && credit}
-                        {displayCredit && credit}
                     </figcaption>
                 </>
             )}
