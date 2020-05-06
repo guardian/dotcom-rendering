@@ -5,6 +5,7 @@ import {
     neutral,
     brandBorder,
     brandBackground,
+    brandLine,
     opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -26,7 +27,6 @@ import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
@@ -113,6 +113,7 @@ const StandardGrid = ({
                 }
 
                 ${until.desktop} {
+                    grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
                         'title'
@@ -161,7 +162,9 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
-    margin-right: -1.25rem;
+    ${from.mobileLandscape} {
+        margin-right: -1.25rem;
+    }
     margin-top: -36px;
     margin-bottom: -29px;
 `;
@@ -209,17 +212,13 @@ export const CommentLayout = ({
 }: Props) => {
     const {
         config: { isPaidContent },
-        pageType: { isSensitive },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Render the slot if one is true:
-    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
-    // 2) The global switch for the Frontend/DCR Epic test is true
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-        CAPI.config.switches.abFrontendDotcomRenderingEpic;
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -265,7 +264,7 @@ export const CommentLayout = ({
             <Section
                 sectionId="nav-root"
                 showSideBorders={true}
-                borderColour={brandBorder.primary}
+                borderColour={brandLine.primary}
                 showTopBorder={false}
                 padded={false}
                 backgroundColour={brandBackground.primary}
@@ -274,6 +273,8 @@ export const CommentLayout = ({
                     pillar={getCurrentPillar(CAPI)}
                     nav={NAV}
                     display={display}
+                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+                    edition={CAPI.editionId}
                 />
             </Section>
 
@@ -454,20 +455,13 @@ export const CommentLayout = ({
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section sectionId="onwards-upper" />
-
             {!isPaidContent && (
                 <>
-                    {!isSensitive && (
-                        <Section
-                            showTopBorder={false}
-                            backgroundColour={neutral[97]}
-                        >
-                            <OutbrainContainer />
-                        </Section>
+                    {/* Onwards (when signed IN) */}
+                    <Section sectionId="onwards-upper-whensignedin" />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedin" />
                     )}
-
-                    {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (
                         <Section sectionId="comments">
@@ -480,6 +474,15 @@ export const CommentLayout = ({
                                 </RightColumn>
                             </Flex>
                         </Section>
+                    )}
+
+                    {/* Onwards (when signed OUT) */}
+                    <Section
+                        sectionId="onwards-upper-whensignedout"
+                        showTopBorder={false}
+                    />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />

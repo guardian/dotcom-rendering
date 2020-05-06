@@ -78,13 +78,7 @@
                         "$ref": "#/definitions/TimelineBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/InteractiveMarkupBlockElement"
-                    },
-                    {
                         "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InteractiveUrlElement"
                     },
                     {
                         "$ref": "#/definitions/AtomEmbedUrlElement"
@@ -106,6 +100,12 @@
                     },
                     {
                         "$ref": "#/definitions/CodeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/DocumentBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/TableBlockElement"
                     }
                 ]
             }
@@ -997,30 +997,6 @@
             },
             "required": ["date", "title"]
         },
-        "InteractiveMarkupBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.InteractiveMarkupBlockElement"
-                    ]
-                },
-                "id": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
-                }
-            },
-            "required": ["_type"]
-        },
         "AtomEmbedMarkupBlockElement": {
             "type": "object",
             "properties": {
@@ -1044,21 +1020,6 @@
                 }
             },
             "required": ["_type"]
-        },
-        "InteractiveUrlElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.InteractiveUrlBlockElement"
-                    ]
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": ["_type", "url"]
         },
         "AtomEmbedUrlElement": {
             "type": "object",
@@ -1197,6 +1158,36 @@
             },
             "required": ["_type", "isMandatory"]
         },
+        "DocumentBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.DocumentBlockElement"
+                    ]
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["_type", "isMandatory"]
+        },
+        "TableBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.TableBlockElement"
+                    ]
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["_type", "isMandatory"]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1271,13 +1262,7 @@
                                 "$ref": "#/definitions/TimelineBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/InteractiveMarkupBlockElement"
-                            },
-                            {
                                 "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InteractiveUrlElement"
                             },
                             {
                                 "$ref": "#/definitions/AtomEmbedUrlElement"
@@ -1299,6 +1284,12 @@
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/DocumentBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/TableBlockElement"
                             }
                         ]
                     }

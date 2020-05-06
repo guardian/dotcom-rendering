@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const webpack = require('webpack');
-const { promisify } = require('util');
-const glob = promisify(require('glob'));
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('./plugins/report-bundle-size');
-const { root, dist, siteName } = require('../frontend/config');
+const { dist } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
 

@@ -6,6 +6,9 @@ import { cache } from 'emotion';
 import escape from 'lodash.escape';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
+import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
+import { getAllActiveCss } from '@root/src/amp/lib/experiment';
+import { CAPI } from '@root/fixtures/CAPI/CAPI';
 
 interface RenderToStringResult {
     html: string;
@@ -30,6 +33,8 @@ export const document = ({
     scripts: string[];
     metadata: Metadata;
 }) => {
+    const testCss = getAllActiveCss(experimentFullConfig, CAPI.config.switches);
+
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
         renderToStaticMarkup(
@@ -72,6 +77,7 @@ export const document = ({
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
     <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-experiment" src="https://cdn.ampproject.org/v0/amp-experiment-0.1.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async custom-element="amp-geo" src="https://cdn.ampproject.org/v0/amp-geo-0.1.js"></script>
     <script async custom-element="amp-consent" src="https://cdn.ampproject.org/v0/amp-consent-0.1.js"></script>
@@ -83,7 +89,7 @@ export const document = ({
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}
 
-    <style amp-custom>${getFontsCss()}${resetCSS}${css}</style>
+    <style amp-custom>${testCss}${getFontsCss()}${resetCSS}${css}</style>
     </head>
     <body>
     ${html}

@@ -24,7 +24,13 @@ export const StandardStory = () => {
             padded={false}
             backgroundColour={brandBackground.primary}
         >
-            <Nav pillar="news" display="standard" nav={nav} />
+            <Nav
+                pillar="news"
+                display="standard"
+                nav={nav}
+                subscribeUrl=""
+                edition="UK"
+            />
         </Section>
     );
 };
@@ -40,7 +46,13 @@ export const ImmersiveStory = () => {
             padded={false}
             backgroundColour={brandBackground.primary}
         >
-            <Nav pillar="news" display="immersive" nav={nav} />
+            <Nav
+                pillar="news"
+                display="immersive"
+                nav={nav}
+                subscribeUrl=""
+                edition="UK"
+            />
         </Section>
     );
 };

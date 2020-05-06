@@ -12,6 +12,7 @@ type Weighting =
 
 interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
+    dropCap?: boolean;
     html: string;
 }
 
@@ -223,26 +224,12 @@ interface TimelineBlockElement {
     description?: string;
     events: TimelineEvent[];
 }
-
-interface InteractiveMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement';
-    id?: string;
-    html?: string;
-    css?: string;
-    js?: string;
-}
-
 interface AtomEmbedMarkupBlockElement {
     _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
     id?: string;
     html?: string;
     css?: string;
     js?: string;
-}
-
-interface InteractiveUrlElement {
-    _type: 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement';
-    url: string;
 }
 
 interface AtomEmbedUrlElement {
@@ -286,6 +273,16 @@ interface CodeBlockElement {
     isMandatory: boolean;
 }
 
+interface DocumentBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
+    isMandatory: boolean;
+}
+
+interface TableBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TableBlockElement';
+    isMandatory: boolean;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -308,13 +305,13 @@ type CAPIElement =
     | GuideBlockElement
     | ProfileBlockElement
     | TimelineBlockElement
-    | InteractiveMarkupBlockElement
     | AtomEmbedMarkupBlockElement
-    | InteractiveUrlElement
     | AtomEmbedUrlElement
     | MapBlockElement
     | AudioAtomElement
     | ContentAtomElement
     | AudioBlockElement
     | VideoBlockElement
-    | CodeBlockElement;
+    | CodeBlockElement
+    | DocumentBlockElement
+    | TableBlockElement;

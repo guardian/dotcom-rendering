@@ -121,6 +121,10 @@ const immersiveStyles = css`
     min-height: 112px;
     padding-bottom: ${space[9]}px;
     padding-left: ${space[3]}px;
+    ${from.phablet} {
+        padding-left: ${space[1]}px;
+    }
+    margin-right: ${space[5]}px;
 `;
 
 const blackBackground = css`
@@ -183,7 +187,6 @@ export const ArticleHeadline = ({
         case 'Media':
         case 'Live':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
         case 'Quiz':
@@ -191,6 +194,7 @@ export const ArticleHeadline = ({
             return <h1 className={standardFont}>{curly(headlineString)}</h1>;
 
         case 'Review':
+        case 'Recipe':
         case 'Feature':
             return (
                 <h1

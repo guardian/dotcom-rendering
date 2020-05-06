@@ -45,13 +45,18 @@ export const getCountryCode = async () => {
         // for later, letting the thread continue
         setTimeout(() => {
             if (countryCode) {
-                localStorage.setItem(
-                    COUNTRY_CODE_KEY,
-                    JSON.stringify({
-                        value: countryCode,
-                        expires: new Date().getTime() + TEN_DAYS,
-                    }),
-                );
+                try {
+                    localStorage.setItem(
+                        COUNTRY_CODE_KEY,
+                        JSON.stringify({
+                            value: countryCode,
+                            expires: new Date().getTime() + TEN_DAYS,
+                        }),
+                    );
+                } catch (error) {
+                    // We tried, it failed. Often local storage is not available and we
+                    // need to live with that
+                }
             }
         });
         // Return the country value that we got from our fetch call

@@ -13,7 +13,7 @@ type Props = {
     ajaxUrl: string;
     pageId: string;
     pillar: Pillar;
-    commentCount: number;
+    commentCount?: number;
     setOpenComments: Function;
 };
 
@@ -60,9 +60,10 @@ export const Counts = ({
         );
     }
 
-    // We use || false below because we use these vars to decide if to render or not and react sees 0 as truthy
-    const hasShareData = (shareData && shareData.share_count) || false;
-    const hasCommentData = commentCount || false;
+    const shareCount = shareData && shareData.share_count;
+    const hasShareData = !shareError && (shareCount || shareCount === 0);
+    const hasCommentData = commentCount || commentCount === 0;
+
     if (!hasShareData && !hasCommentData) {
         return null;
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { from } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
@@ -31,9 +30,6 @@ const containerStyles = css`
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    ${from.desktop} {
-        width: 620px;
-    }
 
     padding-top: ${space[3]}px;
     padding-bottom: ${space[6]}px;
@@ -101,6 +97,7 @@ export const CommentsLayout = ({
                 expanded={expanded}
                 commentToScrollTo={commentToScrollTo}
                 onPermalinkClick={onPermalinkClick}
+                apiKey="dotcom-rendering"
             />
         </div>
     </Flex>

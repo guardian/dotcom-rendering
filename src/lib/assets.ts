@@ -22,7 +22,7 @@ const stage =
         ? process.env.GU_STAGE.toUpperCase()
         : process.env.GU_STAGE;
 
-const CDN = stage
+export const CDN = stage
     ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
     : '/';
 

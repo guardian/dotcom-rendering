@@ -19,7 +19,7 @@ const containerStyles = css`
 export const defaultStory = () => {
     return (
         <div className={containerStyles}>
-            <BlockquoteComponent html={html} />
+            <BlockquoteComponent html={html} pillar="news" />
         </div>
     );
 };

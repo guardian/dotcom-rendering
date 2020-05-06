@@ -19,9 +19,7 @@ import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
-import { InteractiveUrl } from '@root/src/amp/components/elements/InteractiveUrl';
 import { AtomEmbedUrl } from '@root/src/amp/components/elements/AtomEmbedUrl';
-import { InteractiveMarkup } from '@root/src/amp/components/elements/InteractiveMarkup';
 import { AtomEmbedMarkup } from '@root/src/amp/components/elements/AtomEmbedMarkup';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
@@ -38,72 +36,30 @@ export const Elements = (
     );
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
-            case 'model.dotcomrendering.pageElements.TextBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+            case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
                 return (
-                    <Subheading
-                        key={i}
+                    <AtomEmbedMarkup
                         html={element.html}
-                        pillar={pillar}
-                        isImmersive={isImmersive}
+                        styles={element.css}
+                        js={element.js}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                return <Image key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-                return (
-                    <VideoYoutube key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                return (
-                    <VideoGuardian key={i} element={element} pillar={pillar} />
-                );
-
-            case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-                return <VideoVimeo key={i} element={element} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                return (
-                    <VideoFacebook key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-                return <InstagramEmbed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return (
-                    <TwitterEmbed key={i} element={element} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                return <RichLink key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
+                return <AtomEmbedUrl url={element.url} />;
+            case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                return <AudioAtom element={element} />;
+            case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                return <Text key={i} html={element.html} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <Comment key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                return <SoundcloudEmbed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-                return <Embed key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.MapBlockElement':
-                return <MapEmbed key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
+                return <ContentAtom element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
                     <Disclaimer key={i} html={element.html} pillar={pillar} />
                 );
-            case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
-                return (
-                    <PullQuote key={i} html={element.html} pillar={pillar} />
-                );
-            case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
-            case 'model.dotcomrendering.pageElements.QABlockElement':
-                return (
-                    <Expandable
-                        id={element.id}
-                        type="Q&A"
-                        title={element.title}
-                        html={element.html}
-                        img={element.img}
-                        credit={element.credit}
-                        pillar={pillar}
-                    />
-                );
+            case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                return <Embed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.GuideBlockElement':
                 return (
                     <Expandable
@@ -116,6 +72,16 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                return (
+                    <VideoGuardian key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.ImageBlockElement':
+                return <Image key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                return <InstagramEmbed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.MapBlockElement':
+                return <MapEmbed key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.ProfileBlockElement':
                 return (
                     <Expandable
@@ -128,6 +94,37 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
+                return (
+                    <PullQuote key={i} html={element.html} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.QABlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type="Q&A"
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                return <RichLink key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                return <SoundcloudEmbed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                return (
+                    <Subheading
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                        isImmersive={isImmersive}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.TextBlockElement':
+                return <Text key={i} html={element.html} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 return (
                     <Timeline
@@ -138,6 +135,20 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                return (
+                    <TwitterEmbed key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
+                return (
+                    <VideoFacebook key={i} element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                return <VideoVimeo key={i} element={element} pillar={pillar} />;
+            case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+                return (
+                    <VideoYoutube key={i} element={element} pillar={pillar} />
+                );
             case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                 return (
                     <YoutubeVideo
@@ -146,30 +157,6 @@ export const Elements = (
                         adTargeting={adTargeting}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
-                return (
-                    <InteractiveMarkup
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                return (
-                    <AtomEmbedMarkup
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
-                return <InteractiveUrl url={element.url} />;
-            case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-                return <AtomEmbedUrl url={element.url} />;
-            case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                return <AudioAtom element={element} />;
-            case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-                return <ContentAtom element={element} />;
             default:
                 // eslint-disable-next-line no-console
                 console.log('Unsupported Element', JSON.stringify(element));
