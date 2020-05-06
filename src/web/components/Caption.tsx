@@ -80,10 +80,23 @@ export const Caption = ({
         }
     `;
 
+    const getCaptionHtml = () => {
+        return (
+            <span
+                className={captionLink}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                    __html: captionText || '',
+                }}
+                key="caption"
+            />
+        );
+    };
+
     return (
         <figure className={figureStyle}>
             {children}
-            {(captionText || displayCredit) && (
+            {captionText && (
                 <>
                     <figcaption
                         className={cx(
@@ -100,16 +113,7 @@ export const Caption = ({
                         >
                             <TriangleIcon />
                         </span>
-                        {captionText && (
-                            <span
-                                className={captionLink}
-                                // eslint-disable-next-line react/no-danger
-                                dangerouslySetInnerHTML={{
-                                    __html: captionText || '',
-                                }}
-                                key="caption"
-                            />
-                        )}
+                        {getCaptionHtml()} {displayCredit && credit}
                         {displayCredit && credit}
                     </figcaption>
                 </>
