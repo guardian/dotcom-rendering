@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { YouTubeComponent } from './YouTubeComponent';
+import { YouTubeBlockComponent } from './YouTubeBlockComponent';
 
 export default {
-    component: YouTubeComponent,
+    component: YouTubeBlockComponent,
     title: 'Components/YouTubeComponent',
 };
 
@@ -22,7 +22,7 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
 export const noOverlay = () => {
     return (
         <Container>
-            <YouTubeComponent
+            <YouTubeBlockComponent
                 display="standard"
                 element={{
                     mediaTitle:
