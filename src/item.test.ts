@@ -1,5 +1,5 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement, AtomType, IAtoms as Atoms } from 'mapiThriftModels';
-import { fromCapi, Standard, Review, getFormat, ElementKind, Audio, Video } from 'item';
+import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
