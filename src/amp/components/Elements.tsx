@@ -16,15 +16,16 @@ import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockCom
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/amp/components/elements/SubheadingBlockComponent';
-
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
+import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
+import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
+
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
-import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 
 import { clean } from '@root/src/model/clean';
-import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
+
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 
 export const Elements = (
@@ -181,7 +182,11 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
                 return (
-                    <TwitterEmbed key={i} element={element} pillar={pillar} />
+                    <TwitterBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                 return (

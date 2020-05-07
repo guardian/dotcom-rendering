@@ -14,7 +14,7 @@ const makeFallback = (html: string): string | null => {
     return q.innerHTML;
 };
 
-export const TwitterEmbed: React.FC<{
+export const TwitterBlockComponent: React.FC<{
     element: TweetBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
