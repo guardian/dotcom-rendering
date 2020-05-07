@@ -24,8 +24,9 @@ const Default: FC = () =>
             pillar: selectPillar(Pillar.News)
         }}
         href={link()}
-        children={copy()}
-    />;
+    >
+        <span>{copy()}</span>
+    </Anchor>;
 
 
 // ----- Exports ----- //
