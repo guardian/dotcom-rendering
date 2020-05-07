@@ -11,6 +11,7 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SouncloudBlockComponent';
+import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -111,6 +112,8 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.DividerBlockElement':
+                    return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
@@ -131,7 +134,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
                 case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
-                case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return null;
             }
         })
