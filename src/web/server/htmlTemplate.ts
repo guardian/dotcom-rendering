@@ -118,7 +118,6 @@ export const htmlTemplate = ({
     const staticPreconnectUrls = [
         `${CDN}`,
         `https://i.guim.co.uk`,
-        `https://securepubads.g.doubleclick.net`,
         `https://j.ophan.co.uk`,
         `https://ophan.theguardian.com`,
     ];
@@ -132,8 +131,6 @@ export const htmlTemplate = ({
         `https://phar.gu-web.net`,
         `https://static.theguardian.com`,
         `https://support.theguardian.com`,
-        `https://www.facebook.com`,
-        `https://www.google-analytics.com`,
     ];
 
     const preconnectTags = staticPreconnectUrls.map(
