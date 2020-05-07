@@ -4,7 +4,7 @@ import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar, Format, Design, Display } from 'format';
 import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement } from 'bodyElement';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);

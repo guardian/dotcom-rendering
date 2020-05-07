@@ -2,23 +2,21 @@
 
 import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
-import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive } from 'capi';
+import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 import {
-    IBlock as Block,
-    ICapiDateTime as CapiDateTime,
     ElementType,
     IElement as Element,
     AssetType,
     IAsset as Asset,
     IAtoms as Atoms,
 } from 'mapiThriftModels';
-import { logger } from 'logger';
 import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
+import { LiveBlock, parseLiveBlocks } from 'liveBlock';
+import { Body, parseElements } from 'bodyElement';
 
 
 // ----- Item Type ----- //
@@ -418,7 +416,7 @@ const itemFields = (docParser: DocParser, content: Content): ItemFields =>
         standfirst: fromNullable(content?.fields?.standfirst).fmap(docParser),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(docParser),
-        publishDate: capiDateTimeToDate(content.webPublicationDate),
+        publishDate: maybeCapiDate(content.webPublicationDate),
         mainImage: articleMainImage(content).andThen(parseImage(docParser)),
         contributors: articleContributors(content),
         series: articleSeries(content),
@@ -484,7 +482,7 @@ const fromCapiLiveBlog = (docParser: DocParser) => (content: Content): Liveblog 
 
     return {
         design: Design.Live,
-        blocks: parseBlocks(docParser)(body),
+        blocks: parseLiveBlocks(docParser)(body),
         totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
         ...itemFields(docParser, content),
     };
@@ -577,11 +575,6 @@ export {
     Liveblog,
     Review,
     Standard,
-    LiveBlock,
-    ElementKind,
-    BodyElement,
-    Audio,
-    Video,
     fromCapi,
     fromCapiLiveBlog,
     getFormat,

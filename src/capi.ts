@@ -5,8 +5,8 @@ import { IContent as Content} from 'mapiThriftModels/Content';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { IBlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
-import { Option, fromNullable } from 'types/option';
-import { TagType, ContentType } from 'mapiThriftModels';
+import { Option, fromNullable, Some, None } from 'types/option';
+import { TagType, ContentType, ICapiDateTime as CapiDateTime } from 'mapiThriftModels';
 
 // ----- Parsing ----- //
 
@@ -120,6 +120,18 @@ const capiEndpoint = (articleId: string, key: string): string => {
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
 }
 
+const capiDateTimeToDate = (date: CapiDateTime): Option<Date> => {
+    // Thrift definitions define some dates as CapiDateTime but CAPI returns strings
+    try {
+        return new Some(new Date(date.iso8601));
+    } catch(e) {
+        return new None();
+    }
+}
+
+const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
+    fromNullable(date).andThen(capiDateTimeToDate);
+
 
 // ----- Exports ----- //
 
@@ -138,4 +150,5 @@ export {
     articleMainImage,
     capiEndpoint,
     includesTweets,
+    maybeCapiDate,
 };
