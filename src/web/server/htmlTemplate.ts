@@ -23,7 +23,6 @@ export const htmlTemplate = ({
     openGraphData,
     twitterData,
     keywords,
-    isAdFreeUser,
 }: {
     title?: string;
     description: string;
@@ -42,7 +41,6 @@ export const htmlTemplate = ({
     openGraphData: { [key: string]: string };
     twitterData: { [key: string]: string };
     keywords: string;
-    isAdFreeUser: boolean;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
