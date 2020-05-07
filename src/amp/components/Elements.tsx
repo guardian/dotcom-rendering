@@ -14,7 +14,7 @@ import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { VideoGuardian } from '@root/src/amp/components/elements/VideoGuardian';
 import { InstagramEmbed } from '@root/src/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
-import { Comment } from '@root/src/amp/components/elements/Comment';
+import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/src/amp/components/elements/Embed';
@@ -58,7 +58,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                return <Comment key={i} element={element} />;
+                return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 return <ContentAtom element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
