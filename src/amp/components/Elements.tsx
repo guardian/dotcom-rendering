@@ -7,15 +7,15 @@ import { CommentBlockComponent } from '@root/src/amp/components/elements/Comment
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBlockComponent';
-
 import { Expandable } from '@root/src/amp/components/Expandable';
+import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
+
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { Image } from '@root/src/amp/components/elements/Image';
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
-import { VideoGuardian } from '@root/src/amp/components/elements/VideoGuardian';
 import { InstagramEmbed } from '@root/src/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
@@ -85,7 +85,11 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 return (
-                    <VideoGuardian key={i} element={element} pillar={pillar} />
+                    <GuVideoBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
                 return <Image key={i} element={element} pillar={pillar} />;
