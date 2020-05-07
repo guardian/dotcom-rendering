@@ -22,7 +22,7 @@ import { TwitterBlockComponent } from '@root/src/amp/components/elements/Twitter
 import { VideoFacebookBlockComponent } from '@root/src/amp/components/elements/VideoFacebookBlockComponent';
 import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
-import { YoutubeBlockComponent2 } from '@root/src/amp/components/elements/YoutubeBlockComponent2';
+import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
 import { clean } from '@root/src/model/clean';
 
@@ -212,7 +212,7 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                 return (
-                    <YoutubeBlockComponent2
+                    <YoutubeBlockComponent
                         element={element}
                         pillar={pillar}
                         adTargeting={adTargeting}

@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
-import { YoutubeBlockComponent2 } from '@root/src/web/components/elements/YoutubeBlockComponent2';
+import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 const mainMedia = css`
     min-height: 1px;
@@ -63,7 +63,7 @@ function renderElement(
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
-                <YoutubeBlockComponent2
+                <YoutubeBlockComponent
                     display={display}
                     key={i}
                     element={element}
