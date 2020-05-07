@@ -5,9 +5,10 @@ import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/At
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
+import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
+import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBlockComponent';
 
 import { Expandable } from '@root/src/amp/components/Expandable';
-import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { Image } from '@root/src/amp/components/elements/Image';
@@ -17,10 +18,8 @@ import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { VideoGuardian } from '@root/src/amp/components/elements/VideoGuardian';
 import { InstagramEmbed } from '@root/src/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
-
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
-import { Embed } from '@root/src/amp/components/elements/Embed';
 import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
@@ -71,7 +70,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-                return <Embed key={i} element={element} />;
+                return <EmbedBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.GuideBlockElement':
                 return (
                     <Expandable
