@@ -153,6 +153,14 @@ interface Props {
     pillar: Pillar;
 }
 
+const decideCaption = (mainMedia: ImageBlockElement): string => {
+    const caption = [];
+    if (mainMedia.data.caption) caption.push(mainMedia.data.caption);
+    if (mainMedia.displayCredit && mainMedia.data.credit)
+        caption.push(mainMedia.data.credit);
+    return caption.join(' ');
+};
+
 export const ImmersiveLayout = ({
     CAPI,
     NAV,
@@ -183,7 +191,7 @@ export const ImmersiveLayout = ({
     const showComments = CAPI.isCommentable;
 
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
-    const captionText = mainMedia && mainMedia.data && mainMedia.data.caption;
+    const captionText = decideCaption(mainMedia);
 
     return (
         <>
