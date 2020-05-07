@@ -10,7 +10,7 @@ import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQ
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SouncloudBlockComponent';
+import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
