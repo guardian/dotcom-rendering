@@ -20,7 +20,7 @@ import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 import { AtomEmbedUrl } from '@root/src/amp/components/elements/AtomEmbedUrl';
-import { AtomEmbedMarkup } from '@root/src/amp/components/elements/AtomEmbedMarkup';
+import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
 import { ContentAtom } from '@root/src/amp/components/elements/ContentAtom';
@@ -38,7 +38,7 @@ export const Elements = (
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
                 return (
-                    <AtomEmbedMarkup
+                    <AtomEmbedMarkupBlockComponent
                         html={element.html}
                         styles={element.css}
                         js={element.js}
