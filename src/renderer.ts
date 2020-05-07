@@ -64,8 +64,7 @@ interface BulletProps {
 const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
         styledH('span', { css: bulletStyles(getPillarStyles(format.pillar).kicker) }, '•'),
-        text.replace(/•/g, ''),
-        null
+        text.replace(/•/g, '')
     );
 
 const HorizontalRuleStyles = css`
@@ -276,8 +275,10 @@ const richLinkStyles = css`
     }
 
     ${darkModeCss`
-        background: ${neutral[0]};
+        background-color: ${neutral[20]};
+        color: ${neutral[60]};
         a {
+            color: ${neutral[60]};
             border-bottom: 0.0625rem solid ${neutral[60]};
         }
     `}
@@ -289,10 +290,18 @@ const RichLink = (props: { url: string; linkText: string; format: Format }): Rea
         h(Anchor, { href: props.url, format: props.format }, 'Read more'),
     );
 
-const Interactive = (props: { url: string; title?: string }): ReactElement =>
-    styledH('figure', { className: 'interactive' },
+const Interactive = (props: { url: string; title?: string }): ReactElement => {
+    const styles = css`
+        margin: ${remSpace[4]} 0;
+        ${darkModeCss`
+            padding: ${remSpace[4]};
+            background: ${neutral[100]}
+        `}
+    `
+    return styledH('figure', { css: styles, className: 'interactive' },
         h('iframe', { src: props.url, height: 500, title: props.title ?? "" }, null)
     );
+}
 
 const Tweet = (props: { content: NodeList; format: Format; key: number }): ReactElement =>
     // twitter script relies on twitter-tweet class being present

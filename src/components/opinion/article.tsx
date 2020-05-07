@@ -47,6 +47,10 @@ const topBorder = css`
     ${from.wide} {
         margin-top: ${basePx(1)};
     }
+
+    ${darkModeCss`
+        border-top: solid 1px ${neutral[20]};
+    `}
 `;
 
 

@@ -28,10 +28,6 @@ const ArticleBodyStyles = css`
         }
     }
 
-    .interactive {
-        margin: ${remSpace[4]} 0;
-    }
-
     iframe {
         width: 100%;
         border: none;

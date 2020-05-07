@@ -8,6 +8,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 
 import Img from 'components/img';
 import { BodyImageProps } from 'image';
+import { darkModeCss } from 'styles';
 
 // ----- Setup ----- //
 
@@ -29,6 +30,11 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
+
+    ${darkModeCss`
+        color: ${neutral[60]};
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const BodyImage: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>

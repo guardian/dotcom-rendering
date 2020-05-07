@@ -6,6 +6,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 
 import { ImageMappings } from 'components/shared/page';
 import { Image, srcset, src } from 'image';
+import { darkModeCss } from 'styles';
 
 
 // ----- Component ----- //
@@ -19,6 +20,10 @@ interface Props {
 
 const styles = css`
     background-color: ${neutral[97]};
+    ${darkModeCss`
+        color: ${neutral[60]};
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const Img: FC<Props> = ({ image, sizes, imageMappings, className }) =>

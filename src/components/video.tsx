@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { css } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations';
+import { darkModeCss } from 'styles';
 
 export interface VideoProps {
     src: string;
@@ -23,6 +24,11 @@ const videoStyles = css`
         top: 0;
         left: 0;
     }
+
+    ${darkModeCss`
+        color: ${neutral[60]};
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const Video: FC<VideoProps> = ({ src, width, height }: VideoProps): ReactElement =>
