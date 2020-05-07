@@ -21,7 +21,7 @@ import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
-import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
+import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
@@ -123,7 +123,11 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                 return (
-                    <PullQuote key={i} html={element.html} pillar={pillar} />
+                    <PullquoteBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.QABlockElement':
                 return (
