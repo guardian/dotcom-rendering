@@ -15,9 +15,9 @@ import { PullquoteBlockComponent } from '@root/src/amp/components/elements/Pullq
 import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
+import { SubheadingBlockComponent } from '@root/src/amp/components/elements/SubheadingBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
-import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
@@ -154,7 +154,7 @@ export const Elements = (
                 return <SoundcloudBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 return (
-                    <Subheading
+                    <SubheadingBlockComponent
                         key={i}
                         html={element.html}
                         pillar={pillar}
