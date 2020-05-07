@@ -5,7 +5,7 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
-import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -64,7 +64,7 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
-                        <PullQuoteComponent
+                        <PullQuoteBlockComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
