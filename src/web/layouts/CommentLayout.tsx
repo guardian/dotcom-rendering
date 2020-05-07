@@ -262,7 +262,6 @@ export const CommentLayout = ({
             </Section>
 
             <Section
-                sectionId="nav-root"
                 showSideBorders={true}
                 borderColour={brandLine.primary}
                 showTopBorder={false}

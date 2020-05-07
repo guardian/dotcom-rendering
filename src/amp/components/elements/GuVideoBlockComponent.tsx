@@ -2,7 +2,7 @@ import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const GuVideoBlockComponent: React.FC<{
-    element: VideoGuardian;
+    element: GuVideoBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     return (

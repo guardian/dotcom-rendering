@@ -1,11 +1,13 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
-import { Column, More, ReaderRevenueLinks } from './Column';
+import { Column } from './Column';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { MoreColumn } from './MoreColumn';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
@@ -99,7 +101,7 @@ const brandExtensionLink = css`
 export const Columns: React.FC<{
     nav: NavType;
 }> = ({ nav }) => (
-    <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
+    <ul className={ColumnsStyle} role="menubar" data-cy="nav-menu-columns">
         {nav.pillars.map((column, i) => (
             <Column
                 column={column}
@@ -108,7 +110,7 @@ export const Columns: React.FC<{
             />
         ))}
         <ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-        <More
+        <MoreColumn
             column={nav.otherLinks}
             brandExtensions={nav.brandExtensions}
             key="more"
@@ -121,11 +123,15 @@ export const Columns: React.FC<{
                         key={brandExtension.title}
                     >
                         <a
-                            className={brandExtensionLink}
+                            className={cx(
+                                'selectableMenuItem',
+                                brandExtensionLink,
+                            )}
                             href={brandExtension.url}
                             key={brandExtension.title}
                             role="menuitem"
                             data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+                            tabIndex={-1}
                         >
                             {brandExtension.longTitle}
                         </a>
