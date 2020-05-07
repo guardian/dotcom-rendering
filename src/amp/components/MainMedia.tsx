@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import InfoIcon from '@frontend/static/icons/info.svg';
-import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
+import { YoutubeBlockComponent2 } from '@root/src/amp/components/elements/YoutubeBlockComponent2';
 import { scrsetStringFromImagesSources } from '@root/src/amp/lib/srcset-utils';
 
 const figureStyle = css`
@@ -134,7 +134,7 @@ const asComponent = (
             return mainImage(element);
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
-                <YoutubeVideo
+                <YoutubeBlockComponent2
                     element={element}
                     pillar={pillar}
                     adTargeting={adTargeting}

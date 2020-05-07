@@ -20,13 +20,11 @@ import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockC
 import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
 import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/amp/components/elements/VideoFacebookBlockComponent';
-
-import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
-import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
+import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
+import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
+import { YoutubeBlockComponent2 } from '@root/src/amp/components/elements/YoutubeBlockComponent2';
 
 import { clean } from '@root/src/model/clean';
-
-import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 
 export const Elements = (
     elements: CAPIElement[],
@@ -197,14 +195,24 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-                return <VideoVimeo key={i} element={element} pillar={pillar} />;
+                return (
+                    <VideoVimeoBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
                 return (
-                    <VideoYoutube key={i} element={element} pillar={pillar} />
+                    <VideoYoutubeBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                 return (
-                    <YoutubeVideo
+                    <YoutubeBlockComponent2
                         element={element}
                         pillar={pillar}
                         adTargeting={adTargeting}

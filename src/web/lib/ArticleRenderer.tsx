@@ -5,7 +5,7 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
-import { YouTubeBlockComponent } from '@root/src/web/components/elements/YouTubeBlockComponent';
+import { YoutubeBlockComponent2 } from '@root/src/web/components/elements/YoutubeBlockComponent2';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -99,7 +99,7 @@ export const ArticleRenderer: React.FC<{
                     return <TweetBlockComponent key={i} element={element} />;
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <YouTubeBlockComponent
+                        <YoutubeBlockComponent2
                             display={display}
                             key={i}
                             element={element}

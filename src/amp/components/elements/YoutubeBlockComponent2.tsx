@@ -25,7 +25,7 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
     };
 };
 
-export const YoutubeVideo: React.FC<{
+export const YoutubeBlockComponent2: React.FC<{
     element: YoutubeBlockElement;
     pillar: Pillar;
     adTargeting?: AdTargeting;

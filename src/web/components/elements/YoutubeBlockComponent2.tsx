@@ -14,7 +14,7 @@ type Props = {
     children?: JSX.Element | JSX.Element[];
 };
 
-export const YouTubeBlockComponent = ({
+export const YoutubeBlockComponent2 = ({
     display,
     element,
     pillar,
