@@ -126,7 +126,7 @@ function getStyles(role: string) {
     return role === 'supporting' ? supportingStyles : inlineStyles;
 }
 
-export const PullQuoteComponent: React.FC<{
+export const PullQuoteBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
     designType: DesignType;
