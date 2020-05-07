@@ -19,10 +19,10 @@ import { SubheadingBlockComponent } from '@root/src/amp/components/elements/Subh
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
 import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
+import { VideoFacebookBlockComponent } from '@root/src/amp/components/elements/VideoFacebookBlockComponent';
 
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
-import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 
 import { clean } from '@root/src/model/clean';
 
@@ -190,7 +190,11 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                 return (
-                    <VideoFacebook key={i} element={element} pillar={pillar} />
+                    <VideoFacebookBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                 return <VideoVimeo key={i} element={element} pillar={pillar} />;
