@@ -114,6 +114,9 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
+                case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
+                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
@@ -131,9 +134,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-                case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                     return null;
             }
         })
