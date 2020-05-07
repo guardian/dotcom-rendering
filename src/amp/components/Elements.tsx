@@ -12,6 +12,7 @@ import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideo
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
 import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
+import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
@@ -19,7 +20,7 @@ import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
-import { RichLink } from '@root/src/amp/components/elements/RichLink';
+
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
 import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { clean } from '@root/src/model/clean';
@@ -142,7 +143,13 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                return <RichLink key={i} element={element} pillar={pillar} />;
+                return (
+                    <RichLinkBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                 return <SoundcloudEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
