@@ -9,10 +9,10 @@ import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/Disc
 import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBlockComponent';
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
+import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
-import { Image } from '@root/src/amp/components/elements/Image';
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
@@ -92,7 +92,13 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                return <Image key={i} element={element} pillar={pillar} />;
+                return (
+                    <ImageBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':

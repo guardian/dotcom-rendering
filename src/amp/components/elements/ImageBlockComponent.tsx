@@ -18,7 +18,7 @@ const captionStyle = css`
     color: ${text.supporting};
 `;
 
-export const Image: React.FC<{
+export const ImageBlockComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
