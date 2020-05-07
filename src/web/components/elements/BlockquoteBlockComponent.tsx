@@ -31,7 +31,7 @@ const blockquoteStyles = css`
     color: ${neutral[46]};
 `;
 
-export const BlockquoteComponent: React.FC<Props> = ({
+export const BlockquoteBlockComponent: React.FC<Props> = ({
     html,
     pillar,
 }: Props) => {
