@@ -11,8 +11,10 @@ import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
+import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
+import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
@@ -21,8 +23,6 @@ import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 
-import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
-import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
@@ -151,7 +151,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                return <SoundcloudEmbed key={i} element={element} />;
+                return <SoundcloudBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 return (
                     <Subheading
