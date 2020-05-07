@@ -6,7 +6,7 @@ import { SubheadingBlockComponent } from '@root/src/web/components/elements/Subh
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
-import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
+import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
@@ -35,7 +35,7 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
-                        <BlockquoteComponent
+                        <BlockquoteBlockComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
