@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -7,7 +7,7 @@ import { nav } from './Nav.mock';
 
 describe('Nav', () => {
     it('should display pillar titles', () => {
-        const { getByText } = render(
+        const { getByTestId } = render(
             <Nav
                 pillar="news"
                 nav={nav}
@@ -16,15 +16,16 @@ describe('Nav', () => {
                 edition="UK"
             />,
         );
+        const list = within(getByTestId('pillar-list'));
 
-        expect(getByText('News')).toBeInTheDocument();
-        expect(getByText('Opinion')).toBeInTheDocument();
-        expect(getByText('Sport')).toBeInTheDocument();
-        expect(getByText('Culture')).toBeInTheDocument();
+        expect(list.getByText('News')).toBeInTheDocument();
+        expect(list.getByText('Opinion')).toBeInTheDocument();
+        expect(list.getByText('Sport')).toBeInTheDocument();
+        expect(list.getByText('Culture')).toBeInTheDocument();
     });
 
     it('should render the correct number of pillar items', () => {
-        const { container } = render(
+        const { getByTestId } = render(
             <Nav
                 pillar="news"
                 nav={nav}
@@ -34,29 +35,9 @@ describe('Nav', () => {
             />,
         );
 
-        const listItems = container.querySelectorAll('li');
+        const list = getByTestId('pillar-list');
+        const listItems = list.querySelectorAll('li');
 
         expect(listItems.length).toEqual(nav.pillars.length);
-    });
-
-    it('should open and close the expanded menu by clicking More', () => {
-        const { getByTestId, getByText, queryAllByRole } = render(
-            <Nav
-                pillar="news"
-                nav={nav}
-                display="standard"
-                subscribeUrl=""
-                edition="UK"
-            />,
-        );
-
-        const expandedMenu = getByTestId('expanded-menu');
-
-        expect(queryAllByRole('menu')).toEqual([]);
-        fireEvent.click(getByText('More'));
-        expect(expandedMenu).toHaveStyle('display: block');
-        expect(queryAllByRole('menu').length).toBeGreaterThan(1);
-        fireEvent.click(getByText('More'));
-        expect(queryAllByRole('menu')).toEqual([]);
     });
 });

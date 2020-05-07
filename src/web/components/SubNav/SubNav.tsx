@@ -167,6 +167,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
                 { [wrapperCollapsed]: collapseWrapper },
                 spaceBetween,
             )}
+            data-cy="sub-nav"
         >
             <ul
                 ref={ulRef}

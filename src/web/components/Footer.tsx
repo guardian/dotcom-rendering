@@ -213,7 +213,6 @@ export const Footer: React.FC<{
         <div className={pillarWrap}>
             <Pillars
                 display="standard"
-                mainMenuOpen={false}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}
