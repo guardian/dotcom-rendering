@@ -14,7 +14,7 @@ type Props = {
     children?: JSX.Element | JSX.Element[];
 };
 
-export const YouTubeComponent = ({
+export const YouTubeBlockComponent = ({
     display,
     element,
     pillar,
@@ -39,13 +39,7 @@ export const YouTubeComponent = ({
         );
     }
     return (
-        <Caption
-            display={display}
-            captionText={element.mediaTitle || ''}
-            pillar={pillar}
-            displayCredit={false}
-            shouldLimitWidth={shouldLimitWidth}
-        >
+        <>
             <YouTubeEmbed
                 assetId={element.assetId}
                 pillar={pillar}
@@ -53,6 +47,13 @@ export const YouTubeComponent = ({
                 duration={element.duration}
                 title={element.mediaTitle}
             />
-        </Caption>
+            <Caption
+                display={display}
+                captionText={element.mediaTitle || ''}
+                pillar={pillar}
+                displayCredit={false}
+                shouldLimitWidth={shouldLimitWidth}
+            />
+        </>
     );
 };

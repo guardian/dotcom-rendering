@@ -1,17 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
-import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
-
-const captionFont = css`
-    ${textSans.xsmall()};
-    color: ${text.supporting};
-`;
+import { YouTubeBlockComponent } from '@root/src/web/components/elements/YouTubeBlockComponent';
 
 const mainMedia = css`
     min-height: 1px;
@@ -24,20 +17,12 @@ const mainMedia = css`
     ${until.tablet} {
         margin: 0;
         order: -1;
-
-        figcaption {
-            display: none;
-        }
     }
 
     img {
         flex: 0 0 auto; /* IE */
         width: 100%;
         height: 100%;
-    }
-
-    figcaption {
-        ${captionFont};
     }
 `;
 
@@ -78,7 +63,7 @@ function renderElement(
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
-                <YouTubeComponent
+                <YouTubeBlockComponent
                     display={display}
                     key={i}
                     element={element}

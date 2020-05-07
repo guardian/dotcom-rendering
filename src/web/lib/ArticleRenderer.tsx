@@ -5,9 +5,9 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
-import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
-import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
-import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
+import { YouTubeBlockComponent } from '@root/src/web/components/elements/YouTubeBlockComponent';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
+import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SouncloudBlockComponent';
@@ -35,7 +35,7 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
-                        <BlockquoteComponent
+                        <BlockquoteBlockComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
@@ -64,7 +64,7 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
-                        <PullQuoteComponent
+                        <PullQuoteBlockComponent
                             key={i}
                             html={element.html}
                             pillar={pillar}
@@ -87,17 +87,19 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <TextBlockComponent
                             key={i}
+                            isFirstParagraph={i === 0}
                             html={element.html}
                             pillar={pillar}
+                            display={display}
                             designType={designType}
-                            dropCap={false} // TODO: Plug in the api response here when we have it
+                            forceDropCap={element.dropCap}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <YouTubeComponent
+                        <YouTubeBlockComponent
                             display={display}
                             key={i}
                             element={element}

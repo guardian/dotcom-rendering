@@ -5,7 +5,7 @@ import { articles } from '../../lib/articles.js';
 import { mockApi } from '../../lib/mocks';
 
 describe('For WEB', function() {
-    beforeEach(getPolyfill);
+    before(getPolyfill);
     beforeEach(fixTime);
     beforeEach(mockApi);
 

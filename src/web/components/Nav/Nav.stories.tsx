@@ -17,7 +17,6 @@ export default {
 export const StandardStory = () => {
     return (
         <Section
-            sectionId="nav-root"
             showSideBorders={true}
             borderColour={brandBorder.primary}
             showTopBorder={false}
@@ -39,7 +38,6 @@ StandardStory.story = { name: 'standard' };
 export const ImmersiveStory = () => {
     return (
         <Section
-            sectionId="nav-root"
             showSideBorders={false}
             borderColour={brandBorder.primary}
             showTopBorder={false}

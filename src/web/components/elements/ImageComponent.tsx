@@ -1,11 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Picture, PictureSource } from '@root/src/web/components/Picture';
-import { Caption } from '@root/src/web/components/Caption';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
+
+import { Picture, PictureSource } from '@root/src/web/components/Picture';
+import { Caption } from '@root/src/web/components/Caption';
+import { Hide } from '@root/src/web/components/Hide';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 
 type Props = {
     display: Display;
@@ -115,6 +117,55 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
     </div>
 );
 
+const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+    <div
+        className={css`
+            display: flex;
+            flex-direction: row;
+        `}
+    >
+        {children}
+    </div>
+);
+
+const CaptionToggle = () => (
+    <>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label
+            htmlFor="the-checkbox"
+            className={css`
+                position: absolute;
+                right: 5px;
+                width: 32px;
+                height: 32px;
+                z-index: 1;
+                /* We're using rgba here for the opactiy */
+                background-color: rgba(18, 18, 18, 0.6);
+                border-radius: 50%;
+                bottom: 6px;
+                border: none;
+                cursor: pointer;
+
+                svg {
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    margin: auto;
+                    position: absolute;
+                    fill: white;
+                }
+            `}
+        >
+            <svg width="6" height="14" fill="white" viewBox="0 0 6 14">
+                <path d="M4.6 12l-.4 1.4c-.7.2-1.9.6-3 .6-.7 0-1.2-.2-1.2-.9 0-.2 0-.3.1-.5l2-6.7H.7l.4-1.5 4.2-.6h.2L3 12h1.6zm-.3-9.2c-.9 0-1.4-.5-1.4-1.3C2.9.5 3.7 0 4.6 0 5.4 0 6 .5 6 1.3c0 1-.8 1.5-1.7 1.5z" />
+            </svg>
+        </label>
+        {/* Hidden input used to toggle the caption using css */}
+        <input type="checkbox" id="the-checkbox" />
+    </>
+);
+
 export const ImageComponent = ({
     display,
     element,
@@ -174,14 +225,7 @@ export const ImageComponent = ({
         );
     }
     return (
-        <Caption
-            display={display}
-            captionText={element.data.caption || ''}
-            pillar={pillar}
-            credit={element.data.credit}
-            displayCredit={true}
-            shouldLimitWidth={shouldLimitWidth}
-        >
+        <>
             <div
                 className={css`
                     position: relative;
@@ -192,8 +236,66 @@ export const ImageComponent = ({
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
                 />
+                {isMainMedia && (
+                    // Below tablet, main media images show an info toggle at the bottom right of
+                    // the image which, when clicked, toggles the caption as an overlay
+                    <Hide when="above" breakpoint="tablet">
+                        <Row>
+                            <div
+                                className={css`
+                                    #the-checkbox {
+                                        /* Never show the input */
+                                        display: none;
+                                    }
+                                    #the-caption {
+                                        /* Hide caption by default */
+                                        display: none;
+                                    }
+                                    #the-checkbox:checked + #the-caption {
+                                        /* Show the caption if the input is checked */
+                                        display: block;
+                                    }
+                                `}
+                            >
+                                <CaptionToggle />
+                                <div id="the-caption">
+                                    <Caption
+                                        display={display}
+                                        captionText={element.data.caption || ''}
+                                        pillar={pillar}
+                                        credit={element.data.credit}
+                                        displayCredit={element.displayCredit}
+                                        shouldLimitWidth={shouldLimitWidth}
+                                        isOverlayed={true}
+                                    />
+                                </div>
+                            </div>
+                        </Row>
+                    </Hide>
+                )}
                 {starRating && <StarRatingComponent rating={starRating} />}
             </div>
-        </Caption>
+            {isMainMedia ? (
+                <Hide when="below" breakpoint="tablet">
+                    <Caption
+                        display={display}
+                        captionText={element.data.caption || ''}
+                        pillar={pillar}
+                        credit={element.data.credit}
+                        displayCredit={element.displayCredit}
+                        shouldLimitWidth={shouldLimitWidth}
+                    />
+                </Hide>
+            ) : (
+                <Caption
+                    display={display}
+                    captionText={element.data.caption || ''}
+                    pillar={pillar}
+                    credit={element.data.credit}
+                    displayCredit={element.displayCredit}
+                    shouldLimitWidth={shouldLimitWidth}
+                />
+            )}
+        </>
     );
 };

@@ -1,24 +1,16 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
+import { ShowMoreMenu } from './ShowMoreMenu';
+import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';
+import { navInputCheckboxId } from '../config';
 
-const showExpandedMenuStyles = css`
-    ${from.desktop} {
-        display: block;
-        overflow: visible;
-    }
-    ${until.desktop} {
-        transform: translateX(0%);
-    }
-`;
-
-const mainMenu = css`
+const mainMenuStyles = css`
     background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
@@ -28,27 +20,21 @@ const mainMenu = css`
     top: 0;
     z-index: 1070;
     overflow: hidden;
-    ${until.desktop} {
-        transform: translateX(-110%);
-        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
-        bottom: 0;
-        height: 100%;
-        overflow: auto;
-        padding-top: 6px;
-        position: fixed;
-        right: 0;
-        will-change: transform;
+
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the fact we use ~
+        to support NoJS
+    */
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ${`#${navInputCheckboxId}`}:checked ~ div & {
+        ${from.desktop} {
+            display: block;
+            overflow: visible;
+        }
     }
-    ${from.mobileMedium} {
-        margin-right: 29px;
-    }
-    ${from.mobileLandscape} {
-        margin-right: 70px;
-    }
-    ${from.tablet} {
-        margin-right: 100px;
-    }
+
     ${from.desktop} {
         display: none;
         position: absolute;
@@ -66,33 +52,59 @@ const mainMenu = css`
             margin-right: -50vw;
         }
     }
+
+    /* refer to comment above */
+    /* stylelint-disable */
+    ${`#${navInputCheckboxId}`}:checked ~ div & {
+        ${until.desktop} {
+            transform: translateX(
+                0%
+            ); /* when translateX is set to 0% it reapears on the screen */
+        }
+    }
+
+    ${until.desktop} {
+        transform: translateX(
+            -110%
+        ); /* the negative translateX makes the nav hide to the side */
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+        bottom: 0;
+        height: 100%;
+        overflow: auto;
+        padding-top: 6px;
+        position: fixed;
+        right: 0;
+        will-change: transform;
+    }
+
+    ${from.mobileMedium} {
+        margin-right: 29px;
+    }
+    ${from.mobileLandscape} {
+        margin-right: 70px;
+    }
+    ${from.tablet} {
+        margin-right: 100px;
+    }
 `;
 
 export const ExpandedMenu: React.FC<{
     display: Display;
-    id: string;
     nav: NavType;
-    showExpandedMenu: boolean;
-    toggleExpandedMenu: (value: boolean) => void;
-}> = ({ display, id, nav, showExpandedMenu, toggleExpandedMenu }) => {
+}> = ({ display, nav }) => {
     return (
-        <>
-            <ExpandedMenuToggle
-                display={display}
-                showExpandedMenu={showExpandedMenu}
-                toggleExpandedMenu={toggleExpandedMenu}
-                ariaControls={id}
-            />
+        <div id="expanded-menu">
+            <ShowMoreMenu display={display} />
+            <VeggieBurgerMenu display={display} />
             <div
-                className={cx(mainMenu, {
-                    [showExpandedMenuStyles]: showExpandedMenu,
-                })}
-                aria-hidden={!showExpandedMenu}
-                id={id}
+                id="expanded-menu"
+                className={mainMenuStyles}
                 data-testid="expanded-menu"
+                data-cy="expanded-menu"
             >
-                {showExpandedMenu && <Columns nav={nav} />}
+                <Columns nav={nav} />
             </div>
-        </>
+        </div>
     );
 };

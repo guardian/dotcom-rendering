@@ -141,6 +141,11 @@ interface NavType {
     readerRevenueLinks: ReaderRevenuePositions;
 }
 
+interface SubNavBrowserType {
+    currentNavLink: string;
+    subNavSections?: SubNavType;
+}
+
 interface SubNavType {
     parent?: LinkType;
     links: LinkType[];
@@ -558,7 +563,7 @@ interface DCRBrowserDocumentData {
     page: string;
     site: string;
     CAPI: CAPIBrowserType;
-    NAV: NavType;
+    NAV: SubNavBrowserType;
     GA: GADataType;
     linkedData: object;
 }
@@ -571,7 +576,6 @@ type JSXElements = JSX.Element | JSX.Element[];
 
 type IslandType =
     | 'reader-revenue-links-header'
-    | 'nav-root'
     | 'sub-nav-root'
     | 'edition-root'
     | 'most-viewed-right'

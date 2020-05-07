@@ -5,7 +5,7 @@ import { AMPArticles } from '../../lib/articles.js';
 import { mockApi } from '../../lib/mocks';
 
 describe('For AMP', function() {
-    beforeEach(getPolyfill);
+    before(getPolyfill);
     beforeEach(fixTime);
     beforeEach(mockApi);
 
