@@ -4,14 +4,12 @@ import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
-import { Option, fromNullable, None, Some } from 'types/option';
-import { Err, Ok, Result } from 'types/result';
+import { Option, fromNullable } from 'types/option';
 import {
     ElementType,
     IElement as Element,
     AssetType,
     IAsset as Asset,
-    IAtoms as Atoms,
 } from 'mapiThriftModels';
 import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
@@ -20,20 +18,6 @@ import { Body, parseElements } from 'bodyElement';
 
 
 // ----- Item Type ----- //
-
-const enum ElementKind {
-    Text,
-    Image,
-    Pullquote,
-    Interactive,
-    RichLink,
-    Tweet,
-    Instagram,
-    Audio,
-    Embed,
-    Video,
-    InteractiveAtom
-}
 
 interface Fields extends Format {
     headline: string;
@@ -47,74 +31,6 @@ interface Fields extends Format {
     commentable: boolean;
     tags: Tag[];
     shouldHideReaderRevenue: boolean;
-}
-
-type Image = ImageData & {
-    kind: ElementKind.Image;
-}
-
-type Audio = {
-    kind: ElementKind.Audio;
-    src: string;
-    height: string;
-    width: string;
-}
-
-type Video = {
-    kind: ElementKind.Video;
-    src: string;
-    height: string;
-    width: string;
-}
-
-interface AtomFields {
-    js?: string;
-    css: string;
-    html: string;
-}
-
-interface InteractiveAtom extends AtomFields {
-    kind: ElementKind.InteractiveAtom;
-}
-
-type MediaKind = ElementKind.Audio | ElementKind.Video;
-
-type BodyElement = {
-    kind: ElementKind.Text;
-    doc: DocumentFragment;
-} | Image | {
-    kind: ElementKind.Pullquote;
-    quote: string;
-    attribution: Option<string>;
-} | {
-    kind: ElementKind.Interactive;
-    url: string;
-    alt?: string;
-} | {
-    kind: ElementKind.RichLink;
-    url: string;
-    linkText: string;
-} | {
-    kind: ElementKind.Tweet;
-    content: NodeList;
-} | {
-    kind: ElementKind.Instagram;
-    html: string;
-} | {
-    kind: ElementKind.Embed;
-    html: string;
-} | Audio | Video | InteractiveAtom;
-
-type Body =
-    Result<string, BodyElement>[];
-
-type LiveBlock = {
-    id: string;
-    isKeyEvent: boolean;
-    title: string;
-    firstPublished: Option<Date>;
-    lastModified: Option<Date>;
-    body: Body;
 }
 
 interface Liveblog extends Fields {
@@ -171,209 +87,6 @@ type ItemFieldsWithBody =
 
 const getFormat = (item: Item): Format =>
     ({ design: item.design, display: item.display, pillar: item.pillar });
-
-const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
-    const blockquote = doc.querySelector('blockquote');
-
-    if (blockquote !== null) {
-        return new Ok(blockquote.childNodes);
-    }
-
-    return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
-}
-
-const parseIframe = (docParser: DocParser) =>
-    (html: string, kind: MediaKind): Result<string, Audio | Video> => {
-        const iframe = docParser(html).querySelector('iframe');
-        const src = iframe?.getAttribute('src');
-
-        if (!iframe || !src) {
-            return new Err('No iframe within html');
-        }
-
-        return new Ok({
-            kind,
-            src,
-            width: iframe.getAttribute('width') ?? "380",
-            height: iframe.getAttribute('height') ?? "300",
-        });
-}
-
-const parseElement = (docParser: DocParser, atoms?: Atoms) =>
-    (element: BlockElement): Result<string, BodyElement> => {
-    switch (element.type) {
-
-        case ElementType.TEXT: {
-            const html = element?.textTypeData?.html;
-
-            if (!html) {
-                return new Err('No html field on textTypeData');
-            }
-
-            return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
-        }
-
-        case ElementType.IMAGE:
-            return parseImage(docParser)(element)
-                .fmap<Result<string, Image>>(image => new Ok({
-                    kind: ElementKind.Image,
-                    ...image
-                }))
-                .withDefault(new Err('I couldn\'t find a master asset'));
-
-        case ElementType.PULLQUOTE: {
-            const { html: quote, attribution } = element.pullquoteTypeData ?? {};
-
-            if (!quote) {
-                return new Err('No quote field on pullquoteTypeData');
-            }
-
-            return new Ok({
-                kind: ElementKind.Pullquote,
-                quote,
-                attribution: fromNullable(attribution),
-            });
-        }
-
-        case ElementType.INTERACTIVE: {
-            const { iframeUrl, alt } = element.interactiveTypeData ?? {};
-
-            if (!iframeUrl) {
-                return new Err('No iframeUrl field on interactiveTypeData');
-            }
-
-            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl, alt });
-        }
-
-        case ElementType.RICH_LINK: {
-            const { url, linkText } = element.richLinkTypeData ?? {};
-
-            if (!url) {
-                return new Err('No "url" field on richLinkTypeData');
-            } else if (!linkText) {
-                return new Err('No "linkText" field on richLinkTypeData');
-            }
-
-            return new Ok({ kind: ElementKind.RichLink, url, linkText });
-        }
-
-        case ElementType.TWEET: {
-            const { id, html: h } = element.tweetTypeData ?? {};
-
-            if (!id) {
-                return new Err('No "id" field on tweetTypeData')
-            } else if (!h) {
-                return new Err('No "html" field on tweetTypeData')
-            }
-
-            return tweetContent(id, docParser(h))
-                .fmap(content => ({ kind: ElementKind.Tweet, content }));
-        }
-
-        case ElementType.EMBED: {
-            const { html: embedHtml } = element.embedTypeData ?? {};
-
-            if (!embedHtml) {
-                return new Err('No html field on embedTypeData')
-            }
-
-            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
-        }
-
-        case ElementType.INSTAGRAM: {
-            const { html: instagramHtml } = element.instagramTypeData ?? {};
-
-            if (!instagramHtml) {
-                return new Err('No html field on instagramTypeData')
-            }
-
-            return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
-        }
-
-        case ElementType.AUDIO: {
-            const { html: audioHtml } = element.audioTypeData ?? {};
-
-            if (!audioHtml) {
-                return new Err('No html field on audioTypeData')
-            }
-
-            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
-        }
-
-        case ElementType.VIDEO: {
-            const { html: videoHtml } = element.videoTypeData ?? {};
-
-            if (!videoHtml) {
-                return new Err('No html field on videoTypeData')
-            }
-
-            return parseIframe(docParser)(videoHtml, ElementKind.Video);
-        }
-
-        case ElementType.CONTENTATOM: {
-
-            if (!atoms) {
-                return new Err('No atom data returned by capi')
-            }
-
-            const id = element.contentAtomTypeData?.atomId
-            const atom = atoms.interactives?.find(interactive => interactive.id === id);
-
-            if (!atom?.data?.interactive) {
-                return new Err('No atom matched')
-            }
-
-            const { html, css, mainJS: js } = atom?.data?.interactive;
-
-            if (!html || !css) {
-                return new Err(`No html or css for atom: ${id}`);
-            }
-
-            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js });
-        }
-
-        default:
-            return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
-    }
-
-}
-
-type Elements = BlockElement[] | undefined;
-
-const parseElements = (docParser: DocParser, atoms?: Atoms) =>
-    (elements: Elements): Result<string, BodyElement>[] => {
-        if (!elements) {
-            return [new Err('No body elements available')];
-        }
-        return elements.map(parseElement(docParser, atoms));
-    }
-
-const capiDateTimeToDate = (date: CapiDateTime | undefined): Option<Date> => {
-    // Thrift definitions define some dates as CapiDateTime but CAPI returns strings
-    try {
-        if (date) {
-            return new Some(new Date(date.iso8601));
-        }
-
-        return new None();
-    } catch(e) {
-        logger.error("Unable to convert date from CAPI", e);
-        return new None();
-    }
-}
-
-const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
-    ({
-        id: block.id,
-        isKeyEvent: block?.attributes?.keyEvent ?? false,
-        title: block?.title ?? "",
-        firstPublished: capiDateTimeToDate(block?.firstPublishedDate),
-        lastModified: capiDateTimeToDate(block?.lastModifiedDate),
-        body: parseElements(docParser)(block.elements),
-    })
-
-const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
-    blocks.map(parseBlock(docParser));
 
 // The main image for the page is meant to be shown as showcase.
 function isShowcaseImage(content: Content): boolean {
