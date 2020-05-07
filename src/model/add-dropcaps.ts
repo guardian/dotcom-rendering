@@ -44,10 +44,16 @@ const checkForDropCaps = (elements: CAPIElement[]): CAPIElement[] => {
                 // Always pass first element through
                 if (i === 0) enhanced.push(element);
                 else if (prevElementWasDropCapFlag(elements, i))
-                    enhanced.push({
-                        ...element,
-                        dropCap: true,
-                    });
+                    enhanced.push(
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            ...element,
+                            dropCap: true,
+                        },
+                    );
                 else enhanced.push(element);
                 break;
             default:
