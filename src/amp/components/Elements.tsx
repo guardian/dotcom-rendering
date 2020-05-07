@@ -10,13 +10,13 @@ import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBloc
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
+import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@root/src/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
-import { InstagramEmbed } from '@root/src/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
@@ -100,7 +100,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-                return <InstagramEmbed key={i} element={element} />;
+                return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':
                 return <MapEmbed key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.ProfileBlockElement':
