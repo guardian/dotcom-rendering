@@ -3,6 +3,9 @@ import React from 'react';
 import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
 import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/AtomEmbedUrlBlockComponent';
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
+import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
+import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
+
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { Disclaimer } from '@root/src/amp/components/elements/Disclaimer';
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
@@ -14,7 +17,7 @@ import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { VideoGuardian } from '@root/src/amp/components/elements/VideoGuardian';
 import { InstagramEmbed } from '@root/src/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
-import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
+
 import { RichLink } from '@root/src/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/src/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/src/amp/components/elements/Embed';
@@ -23,8 +26,6 @@ import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
-
-import { ContentAtom } from '@root/src/amp/components/elements/ContentAtom';
 
 export const Elements = (
     elements: CAPIElement[],
@@ -60,7 +61,7 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-                return <ContentAtom element={element} />;
+                return <ContentAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
                     <Disclaimer key={i} html={element.html} pillar={pillar} />

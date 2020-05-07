@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ContentAtom: React.FC<{
+export const ContentAtomBlockComponent: React.FC<{
     element: ContentAtomElement;
 }> = ({}) => {
     return null;
