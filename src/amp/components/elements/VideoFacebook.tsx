@@ -2,7 +2,7 @@ import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoFacebook: React.FC<{
-    element: VideoFacebook;
+    element: VideoFacebookBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     return (
