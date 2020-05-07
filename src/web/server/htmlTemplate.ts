@@ -117,51 +117,16 @@ export const htmlTemplate = ({
     // https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
     // More information on prefetching:
     // https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
-
-    // Preconnect links that are only necessary for ads:
-    const staticPreconnctAdUrls = isAdFreeUser
-        ? []
-        : [`https://googleads.g.doubleclick.net`];
-
-    // Prefetch links that are only necessary for ads:
-    const staticPrefetchAdUrls = isAdFreeUser
-        ? []
-        : [
-              `https://ad.crwdcntrl.net`,
-              `https://api.permutive.com`,
-              `https://cdn-gl.imrworldwide.com`,
-              `https://cdn.adsafeprotected.com`,
-              `https://cdn.brandmetrics.com`,
-              `https://cdn.permutive.com`,
-              `https://collector.brandmetrics.com`,
-              `https://confiant-integrations.global.ssl.fastly.net`,
-              `https://ib.adnxs.com`,
-              `https://pagead2.googlesyndication.com`,
-              `https://pixel.adsafeprotected.com`,
-              `https://pubads.g.doubleclick.net`,
-              `https://sb.scorecardresearch.com`,
-              `https://secure-gl.imrworldwide.com`,
-              `https://securepubads.g.doubleclick.net`,
-              `https://static.ads-twitter.com`,
-              `https://stats.g.doubleclick.net`,
-              `https://tpc.googlesyndication.com`,
-              `https://www.google.co.uk`,
-              `https://www.google.com`,
-              `https://www.googleadservices.com`,
-          ];
-
     const staticPreconnectUrls = [
         `${CDN}`,
         `https://i.guim.co.uk`,
         `https://securepubads.g.doubleclick.net`,
         `https://j.ophan.co.uk`,
         `https://ophan.theguardian.com`,
-        ...staticPreconnctAdUrls,
     ];
 
     const staticPrefetchUrls = [
         ...staticPreconnectUrls,
-        ...staticPrefetchAdUrls,
         `https://api.nextgen.guardianapps.co.uk`,
         `https://hits-secure.theguardian.com`,
         `https://interactive.guim.co.uk`,
