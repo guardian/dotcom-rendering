@@ -7,7 +7,7 @@ const noCaptionStyle = css`
     margin-bottom: 8px;
 `;
 
-export const MapEmbed: React.SFC<{
+export const MapBlockComponent: React.SFC<{
     element: MapBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {

@@ -11,6 +11,7 @@ import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
+import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
 
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
@@ -24,7 +25,6 @@ import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
-import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 
 export const Elements = (
     elements: CAPIElement[],
@@ -102,7 +102,13 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':
-                return <MapEmbed key={i} element={element} pillar={pillar} />;
+                return (
+                    <MapBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.ProfileBlockElement':
                 return (
                     <Expandable
