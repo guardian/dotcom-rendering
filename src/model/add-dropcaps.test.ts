@@ -42,6 +42,10 @@ describe('Drop Caps', () => {
                     elements: [
                         {
                             _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
                             dropCap: true,
                             html: '<p>I should become a drop cap.</p>',
@@ -102,9 +106,17 @@ describe('Drop Caps', () => {
                     elements: [
                         {
                             _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
                             dropCap: true,
                             html: '<p>I should become a drop cap.</p>',
+                        },
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
                         },
                         {
                             _type:
@@ -228,6 +240,10 @@ describe('Drop Caps', () => {
                             _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
                             html: '<p>I should NOT become a drop cap.</p>',
+                        },
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
                         },
                         {
                             _type:

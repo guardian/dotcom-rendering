@@ -1,16 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
-import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
+import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
+import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
+import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
+import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
+import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
-import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
-import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -41,6 +42,8 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.DividerBlockElement':
+                    return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     return (
                         <EmbedBlockComponent
