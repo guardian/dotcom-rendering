@@ -7,7 +7,7 @@ import { CommentBlockComponent } from '@root/src/amp/components/elements/Comment
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
 
 import { Expandable } from '@root/src/amp/components/Expandable';
-import { Disclaimer } from '@root/src/amp/components/elements/Disclaimer';
+import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { Image } from '@root/src/amp/components/elements/Image';
@@ -64,7 +64,11 @@ export const Elements = (
                 return <ContentAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
-                    <Disclaimer key={i} html={element.html} pillar={pillar} />
+                    <DisclaimerBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <Embed key={i} element={element} />;
