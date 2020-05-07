@@ -6,6 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
+import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
 
@@ -16,7 +17,6 @@ export const preLeftColPillarWidth = 134;
 export const preDesktopPillarWidth = 'auto';
 
 // CSS
-
 const pillarsStyles = (display: Display) => css`
     ${until.tablet} {
         display: ${display === 'immersive' && 'none'};
@@ -60,19 +60,28 @@ const pillarsStyles = (display: Display) => css`
     }
 `;
 
-const showMenuUnderline = css`
-    ${from.desktop} {
-        :before {
-            bottom: 0;
+const showMenuUnderlineStyles = css`
+    /*
+        IMPORTANT NOTE:
+        we need to specify the adjacent path to the a (current) tag
+        to apply styles to the nested tabs due to the fact we use ~
+        to support NoJS
+    */
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ${`#${navInputCheckboxId}`}:checked ~ ul li & {
+        ${from.desktop} {
+            :before {
+                bottom: 0;
+            }
         }
-    }
 
-    :hover {
-        text-decoration: underline;
-    }
+        :hover {
+            text-decoration: underline;
+        }
 
-    :after {
-        transform: translateY(4px);
+        :after {
+            transform: translateY(4px);
+        }
     }
 `;
 
@@ -215,31 +224,31 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 
 export const Pillars: React.FC<{
     display: Display;
-    mainMenuOpen: boolean;
+    isTopNav?: boolean;
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
     dataLinkName: string;
 }> = ({
     display,
-    mainMenuOpen,
+    isTopNav,
     pillars,
     pillar,
     showLastPillarDivider = true,
     dataLinkName,
 }) => (
-    <ul className={pillarsStyles(display)}>
+    <ul data-testid="pillar-list" className={pillarsStyles(display)}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
                 <a
                     className={cx(
                         linkStyle(display),
                         pillarUnderline[p.pillar],
+                        isTopNav && showMenuUnderlineStyles,
                         {
                             [pillarDivider]:
                                 showLastPillarDivider ||
                                 isNotLastPillar(i, pillars.length),
-                            [showMenuUnderline]: mainMenuOpen,
                             [forceUnderline]: p.pillar === pillar,
                         },
                     )}

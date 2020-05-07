@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ContentAtom: React.FC<{
-    element: ContentAtomElement;
+    element: ContentAtomBlockElement;
 }> = ({}) => {
     return null;
 };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
@@ -40,12 +39,6 @@ const commentIdFromUrl = () => {
 const hasCommentsHashInUrl = () => {
     const { hash } = window.location;
     return hash && hash === '#comments';
-};
-
-const decideDisplay = (CAPI: CAPIBrowserType): Display => {
-    if (CAPI.isImmersive) return 'immersive';
-    if (CAPI.pageType.hasShowcaseMainElement) return 'showcase';
-    return 'standard';
 };
 
 const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
@@ -156,7 +149,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     const pillar = decidePillar(CAPI);
-    const display = decideDisplay(CAPI);
 
     const handlePermalink = (commentId: number) => {
         window.location.hash = `#comment-${commentId}`;
@@ -196,15 +188,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                 <EditionDropdown
                     edition={CAPI.editionId}
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
-                />
-            </Hydrate>
-            <Hydrate root="nav-root">
-                <Nav
-                    pillar={pillar}
-                    nav={NAV}
-                    display={display}
-                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-                    edition={CAPI.editionId}
                 />
             </Hydrate>
             {NAV.subNavSections && (

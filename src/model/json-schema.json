@@ -30,13 +30,13 @@
                         "$ref": "#/definitions/YoutubeBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/VideoYoutube"
+                        "$ref": "#/definitions/VideoYoutubeBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/VideoVimeo"
+                        "$ref": "#/definitions/VideoVimeoBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/VideoFacebook"
+                        "$ref": "#/definitions/VideoFacebookBlockElement"
                     },
                     {
                         "$ref": "#/definitions/VideoGuardian"
@@ -81,7 +81,7 @@
                         "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/AtomEmbedUrlElement"
+                        "$ref": "#/definitions/AtomEmbedUrlBlockElement"
                     },
                     {
                         "$ref": "#/definitions/MapBlockElement"
@@ -90,7 +90,7 @@
                         "$ref": "#/definitions/AudioAtomElement"
                     },
                     {
-                        "$ref": "#/definitions/ContentAtomElement"
+                        "$ref": "#/definitions/ContentAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
@@ -581,7 +581,7 @@
             },
             "required": ["_type", "assetId", "mediaTitle"]
         },
-        "VideoYoutube": {
+        "VideoYoutubeBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -605,7 +605,7 @@
             },
             "required": ["_type", "caption", "height", "url", "width"]
         },
-        "VideoVimeo": {
+        "VideoVimeoBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -629,7 +629,7 @@
             },
             "required": ["_type", "caption", "height", "url", "width"]
         },
-        "VideoFacebook": {
+        "VideoFacebookBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -1024,7 +1024,7 @@
             },
             "required": ["_type"]
         },
-        "AtomEmbedUrlElement": {
+        "AtomEmbedUrlBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -1107,7 +1107,7 @@
                 "trackUrl"
             ]
         },
-        "ContentAtomElement": {
+        "ContentAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -1229,13 +1229,13 @@
                                 "$ref": "#/definitions/YoutubeBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/VideoYoutube"
+                                "$ref": "#/definitions/VideoYoutubeBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/VideoVimeo"
+                                "$ref": "#/definitions/VideoVimeoBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/VideoFacebook"
+                                "$ref": "#/definitions/VideoFacebookBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/VideoGuardian"
@@ -1280,7 +1280,7 @@
                                 "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/AtomEmbedUrlElement"
+                                "$ref": "#/definitions/AtomEmbedUrlBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
@@ -1289,7 +1289,7 @@
                                 "$ref": "#/definitions/AudioAtomElement"
                             },
                             {
-                                "$ref": "#/definitions/ContentAtomElement"
+                                "$ref": "#/definitions/ContentAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"

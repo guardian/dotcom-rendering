@@ -3,7 +3,7 @@ import { getIdFromUrl } from '@root/src/amp/lib/get-video-id';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoYoutube: React.FC<{
-    element: VideoYoutube;
+    element: VideoYoutubeBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     const youtubeId = getIdFromUrl(

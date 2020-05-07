@@ -195,7 +195,6 @@ export const ImmersiveLayout = ({
                 `}
             >
                 <Section
-                    sectionId="nav-root"
                     showSideBorders={false}
                     showTopBorder={false}
                     padded={false}

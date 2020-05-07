@@ -304,7 +304,6 @@ export const ShowcaseLayout = ({
                     </Section>
 
                     <Section
-                        sectionId="nav-root"
                         showSideBorders={true}
                         borderColour={brandLine.primary}
                         showTopBorder={false}

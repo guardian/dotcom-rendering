@@ -3,7 +3,7 @@ import { getIdFromUrl } from '@root/src/amp/lib/get-video-id';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoVimeo: React.FC<{
-    element: VideoVimeo;
+    element: VideoVimeoBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     const vimeoId = getIdFromUrl(element.url, '(\\d+)($|\\/)', true);
