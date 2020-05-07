@@ -24,7 +24,7 @@ import { VideoFacebook } from '@root/src/amp/components/elements/VideoFacebook';
 import { TwitterEmbed } from '@root/src/amp/components/elements/TwitterEmbed';
 
 import { clean } from '@root/src/model/clean';
-import { Timeline } from '@root/src/amp/components/elements/Timeline';
+import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 
 export const Elements = (
@@ -171,7 +171,7 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 return (
-                    <Timeline
+                    <TimelineBlockComponent
                         id={element.id}
                         title={element.title}
                         description={element.description}

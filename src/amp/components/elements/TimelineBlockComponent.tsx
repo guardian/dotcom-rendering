@@ -65,7 +65,7 @@ const getHTML = (events: TimelineEvent[], description?: string): string => {
     return (description || '') + eventString;
 };
 
-export const Timeline: React.FC<{
+export const TimelineBlockComponent: React.FC<{
     id: string;
     title: string;
     description?: string;
