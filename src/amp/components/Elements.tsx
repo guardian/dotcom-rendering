@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
+import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/AtomEmbedUrlBlockComponent';
+import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { Disclaimer } from '@root/src/amp/components/elements/Disclaimer';
 import { Text } from '@root/src/amp/components/elements/Text';
@@ -19,10 +22,8 @@ import { PullQuote } from '@root/src/amp/components/elements/PullQuote';
 import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
-import { AtomEmbedUrl } from '@root/src/amp/components/elements/AtomEmbedUrl';
-import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
-import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
+
 import { ContentAtom } from '@root/src/amp/components/elements/ContentAtom';
 
 export const Elements = (
@@ -45,9 +46,9 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-                return <AtomEmbedUrl url={element.url} />;
+                return <AtomEmbedUrlBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                return <AudioAtom element={element} />;
+                return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                 return <Text key={i} html={element.html} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
