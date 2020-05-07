@@ -1,45 +1,95 @@
-interface Switches {
-    [key: string]: boolean;
+// -------------------------------------
+// Elements
+// -------------------------------------
+
+interface AtomEmbedMarkupBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+    id?: string;
+    html?: string;
+    css?: string;
+    js?: string;
 }
 
-type Weighting =
-    | 'inline'
-    | 'thumbnail'
-    | 'supporting'
-    | 'showcase'
-    | 'halfwidth'
-    | 'immersive';
-
-interface TextBlockElement {
-    _type: 'model.dotcomrendering.pageElements.TextBlockElement';
-    dropCap?: boolean;
-    html: string;
-}
-
-interface SubheadingBlockElement {
-    _type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
-    html: string;
-}
-
-interface RichLinkBlockElement {
-    _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
+interface AtomEmbedUrlBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
     url: string;
-    text: string;
-    prefix: string;
-    role?: Weighting;
-    richLinkIndex?: number;
 }
 
-// aka weighting. RoleType affects how an image is placed. It is called weighting
-// in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
-// in DCR
-type RoleType =
-    | 'immersive'
-    | 'supporting'
-    | 'showcase'
-    | 'inline'
-    | 'thumbnail'
-    | 'halfWidth';
+interface AudioAtomElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+    id: string;
+    kicker: string;
+    trackUrl: string;
+    duration: number;
+    coverUrl: string;
+}
+
+interface AudioBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+}
+
+interface BlockquoteBlockElement {
+    _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
+    html: string;
+}
+
+interface CodeBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
+    isMandatory: boolean;
+}
+
+interface CommentBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CommentBlockElement';
+    body: string;
+    avatarURL: string;
+    profileURL: string;
+    profileName: string;
+    permalink: string;
+    dateTime: string;
+}
+
+interface ContentAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
+    atomId: string;
+}
+
+interface DisclaimerBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
+    html: string;
+}
+
+interface DividerBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+}
+
+interface DocumentBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
+    isMandatory: boolean;
+}
+
+interface EmbedBlockElement {
+    _type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
+    safe?: boolean;
+    alt?: string;
+    html: string;
+    isMandatory: boolean;
+}
+
+interface GuideBlockElement {
+    _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
+    id: string;
+    label: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
+interface GuVideoBlockElement {
+    _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
+    assets: VideoAssets[];
+    caption: string;
+}
 
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
@@ -54,21 +104,104 @@ interface ImageBlockElement {
     displayCredit?: boolean;
     role: RoleType;
 }
-interface YoutubeBlockElement {
-    _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
-    assetId: string;
-    mediaTitle: string;
-    id?: string;
-    channelId?: string;
-    duration?: number;
-    posterSrc?: string;
-    height?: string;
-    width?: string;
+
+interface InstagramBlockElement {
+    _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
+    html: string;
+    url: string;
+    hasCaption: boolean;
 }
 
-// Note, this is a Video Embed rather than the above Media Atom
-interface VideoYoutubeBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
+interface MapBlockElement {
+    _type: 'model.dotcomrendering.pageElements.MapBlockElement';
+    url: string;
+    originalUrl: string;
+    source: string;
+    caption: string;
+    title: string;
+}
+
+interface ProfileBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
+    id: string;
+    label: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
+interface PullquoteBlockElement {
+    _type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
+    html: string;
+    role: string;
+    attribution?: string;
+}
+
+interface QABlockElement {
+    _type: 'model.dotcomrendering.pageElements.QABlockElement';
+    id: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
+interface RichLinkBlockElement {
+    _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
+    url: string;
+    text: string;
+    prefix: string;
+    role?: Weighting;
+    richLinkIndex?: number;
+}
+
+interface SoundcloudBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
+    html: string;
+    id: string;
+    isTrack: boolean;
+    isMandatory: boolean;
+}
+
+interface SubheadingBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
+    html: string;
+}
+
+interface TableBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TableBlockElement';
+    isMandatory: boolean;
+}
+
+interface TextBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TextBlockElement';
+    dropCap?: boolean;
+    html: string;
+}
+
+interface TimelineBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
+    id: string;
+    title: string;
+    description?: string;
+    events: TimelineEvent[];
+}
+
+interface TweetBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TweetBlockElement';
+    html: string;
+    url: string;
+    id: string;
+    hasMedia: boolean;
+}
+
+interface VideoBlockElement {
+    _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
+}
+
+interface VideoFacebookBlockElement {
+    _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
     url: string;
     height: number;
     width: number;
@@ -83,37 +216,91 @@ interface VideoVimeoBlockElement {
     caption: string;
 }
 
-interface VideoFacebookBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
+interface VideoYoutubeBlockElement {
+    _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     url: string;
     height: number;
     width: number;
     caption: string;
 }
 
-interface GuVideoBlockElement {
-    _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
-    assets: VideoAssets[];
-    caption: string;
+interface YoutubeBlockElement {
+    _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
+    assetId: string;
+    mediaTitle: string;
+    id?: string;
+    channelId?: string;
+    duration?: number;
+    posterSrc?: string;
+    height?: string;
+    width?: string;
 }
 
-interface VideoAssets {
-    url: string;
-    mimeType: string;
-}
-interface InstagramBlockElement {
-    _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
-    html: string;
-    url: string;
-    hasCaption: boolean;
+type CAPIElement =
+    | AtomEmbedMarkupBlockElement
+    | AtomEmbedUrlBlockElement
+    | AudioAtomElement
+    | AudioBlockElement
+    | BlockquoteBlockElement
+    | CodeBlockElement
+    | CommentBlockElement
+    | ContentAtomBlockElement
+    | DisclaimerBlockElement
+    | DividerBlockElement
+    | DocumentBlockElement
+    | EmbedBlockElement
+    | GuideBlockElement
+    | GuVideoBlockElement
+    | ImageBlockElement
+    | InstagramBlockElement
+    | MapBlockElement
+    | ProfileBlockElement
+    | PullquoteBlockElement
+    | QABlockElement
+    | RichLinkBlockElement
+    | SoundcloudBlockElement
+    | SubheadingBlockElement
+    | TableBlockElement
+    | TextBlockElement
+    | TimelineBlockElement
+    | TweetBlockElement
+    | VideoBlockElement
+    | VideoFacebookBlockElement
+    | VideoVimeoBlockElement
+    | VideoYoutubeBlockElement
+    | YoutubeBlockElement;
+
+// -------------------------------------
+// Misc
+// -------------------------------------
+
+type Weighting =
+    | 'inline'
+    | 'thumbnail'
+    | 'supporting'
+    | 'showcase'
+    | 'halfwidth'
+    | 'immersive';
+
+// aka weighting. RoleType affects how an image is placed. It is called weighting
+// in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
+// in DCR
+type RoleType =
+    | 'immersive'
+    | 'supporting'
+    | 'showcase'
+    | 'inline'
+    | 'thumbnail'
+    | 'halfWidth';
+
+interface ImageSource {
+    weighting: Weighting;
+    srcSet: SrcSetItem[];
 }
 
-interface TweetBlockElement {
-    _type: 'model.dotcomrendering.pageElements.TweetBlockElement';
-    html: string;
-    url: string;
-    id: string;
-    hasMedia: boolean;
+interface SrcSetItem {
+    src: string;
+    width: number;
 }
 
 interface Image {
@@ -128,86 +315,9 @@ interface Image {
     url: string;
 }
 
-interface ImageSource {
-    weighting: Weighting;
-    srcSet: SrcSetItem[];
-}
-
-interface SrcSetItem {
-    src: string;
-    width: number;
-}
-
-interface CommentBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CommentBlockElement';
-    body: string;
-    avatarURL: string;
-    profileURL: string;
-    profileName: string;
-    permalink: string;
-    dateTime: string;
-}
-
-interface SoundcloudBlockElement {
-    _type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
-    html: string;
-    id: string;
-    isTrack: boolean;
-    isMandatory: boolean;
-}
-
-interface EmbedBlockElement {
-    _type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
-    safe?: boolean;
-    alt?: string;
-    html: string;
-    isMandatory: boolean;
-}
-
-interface DisclaimerBlockElement {
-    _type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
-    html: string;
-}
-
-interface PullquoteBlockElement {
-    _type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
-    html: string;
-    role: string;
-    attribution?: string;
-}
-
-interface BlockquoteBlockElement {
-    _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
-    html: string;
-}
-
-interface QABlockElement {
-    _type: 'model.dotcomrendering.pageElements.QABlockElement';
-    id: string;
-    title: string;
-    img?: string;
-    html: string;
-    credit: string;
-}
-
-interface GuideBlockElement {
-    _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
-    id: string;
-    label: string;
-    title: string;
-    img?: string;
-    html: string;
-    credit: string;
-}
-
-interface ProfileBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
-    id: string;
-    label: string;
-    title: string;
-    img?: string;
-    html: string;
-    credit: string;
+interface VideoAssets {
+    url: string;
+    mimeType: string;
 }
 
 interface TimelineEvent {
@@ -217,106 +327,6 @@ interface TimelineEvent {
     toDate?: string;
 }
 
-interface TimelineBlockElement {
-    _type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
-    id: string;
-    title: string;
-    description?: string;
-    events: TimelineEvent[];
+interface Switches {
+    [key: string]: boolean;
 }
-interface AtomEmbedMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
-    id?: string;
-    html?: string;
-    css?: string;
-    js?: string;
-}
-
-interface AtomEmbedUrlBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
-    url: string;
-}
-
-interface MapBlockElement {
-    _type: 'model.dotcomrendering.pageElements.MapBlockElement';
-    url: string;
-    originalUrl: string;
-    source: string;
-    caption: string;
-    title: string;
-}
-
-interface AudioAtomElement {
-    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
-    id: string;
-    kicker: string;
-    trackUrl: string;
-    duration: number;
-    coverUrl: string;
-}
-
-interface ContentAtomBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
-    atomId: string;
-}
-
-interface AudioBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AudioBlockElement';
-}
-
-interface VideoBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
-}
-
-interface CodeBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
-    isMandatory: boolean;
-}
-
-interface DocumentBlockElement {
-    _type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
-    isMandatory: boolean;
-}
-
-interface TableBlockElement {
-    _type: 'model.dotcomrendering.pageElements.TableBlockElement';
-    isMandatory: boolean;
-}
-
-interface DividerBlockElement {
-    _type: 'model.dotcomrendering.pageElements.DividerBlockElement';
-}
-
-type CAPIElement =
-    | TextBlockElement
-    | SubheadingBlockElement
-    | ImageBlockElement
-    | YoutubeBlockElement
-    | VideoYoutubeBlockElement
-    | VideoVimeoBlockElement
-    | VideoFacebookBlockElement
-    | GuVideoBlockElement
-    | InstagramBlockElement
-    | TweetBlockElement
-    | RichLinkBlockElement
-    | CommentBlockElement
-    | SoundcloudBlockElement
-    | EmbedBlockElement
-    | DisclaimerBlockElement
-    | PullquoteBlockElement
-    | BlockquoteBlockElement
-    | QABlockElement
-    | GuideBlockElement
-    | ProfileBlockElement
-    | TimelineBlockElement
-    | AtomEmbedMarkupBlockElement
-    | AtomEmbedUrlBlockElement
-    | MapBlockElement
-    | AudioAtomElement
-    | ContentAtomBlockElement
-    | AudioBlockElement
-    | VideoBlockElement
-    | CodeBlockElement
-    | DocumentBlockElement
-    | TableBlockElement
-    | DividerBlockElement;
