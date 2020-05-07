@@ -5,7 +5,7 @@ import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/At
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { Disclaimer } from '@root/src/amp/components/elements/Disclaimer';
-import { Text } from '@root/src/amp/components/elements/Text';
+import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { Subheading } from '@root/src/amp/components/elements/Subheading';
 import { Image } from '@root/src/amp/components/elements/Image';
 import { VideoYoutube } from '@root/src/amp/components/elements/VideoYoutube';
@@ -50,7 +50,13 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
+                return (
+                    <TextBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <Comment key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -125,7 +131,13 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.TextBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
+                return (
+                    <TextBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 return (
                     <Timeline

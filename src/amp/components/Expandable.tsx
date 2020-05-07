@@ -6,7 +6,7 @@ import PlusIcon from '@frontend/static/icons/plus.svg';
 
 import { palette } from '@guardian/src-foundations';
 import { body, textSans, headline } from '@guardian/src-foundations/typography';
-import { TextStyle } from '@root/src/amp/components/elements/Text';
+import { TextStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 
 const wrapper = (pillar: Pillar) => css`
     background: ${palette.neutral[93]};

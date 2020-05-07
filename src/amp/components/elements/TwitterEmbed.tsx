@@ -1,6 +1,6 @@
 import React from 'react';
 import { JSDOM } from 'jsdom';
-import { TextStyle } from '@root/src/amp/components/elements/Text';
+import { TextStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 
 const makeFallback = (html: string): string | null => {
     const { window } = new JSDOM(html);
