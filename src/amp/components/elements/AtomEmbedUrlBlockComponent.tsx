@@ -16,7 +16,9 @@ const showMore = css`
     }
 `;
 
-export const AtomEmbedUrl: React.SFC<{ url: string }> = ({ url }) => {
+export const AtomEmbedUrlBlockComponent: React.SFC<{ url: string }> = ({
+    url,
+}) => {
     return (
         <amp-iframe
             class={styles}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { JSDOM } from 'jsdom';
-import { TextStyle } from '@root/src/amp/components/elements/Text';
+import { TextStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 
 const makeFallback = (html: string): string | null => {
     const { window } = new JSDOM(html);
@@ -14,7 +14,7 @@ const makeFallback = (html: string): string | null => {
     return q.innerHTML;
 };
 
-export const TwitterEmbed: React.FC<{
+export const TwitterBlockComponent: React.FC<{
     element: TweetBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {

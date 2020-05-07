@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Embed: React.FC<{
+export const EmbedBlockComponent: React.FC<{
     element: EmbedBlockElement;
 }> = ({ element }) => {
     if (element.isMandatory) {

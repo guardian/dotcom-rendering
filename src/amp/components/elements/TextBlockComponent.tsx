@@ -72,7 +72,7 @@ const textStyleLabs = css`
     }
 `;
 
-export const Text: React.FC<{
+export const TextBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (

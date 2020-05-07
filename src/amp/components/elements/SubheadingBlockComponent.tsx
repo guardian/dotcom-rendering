@@ -39,7 +39,7 @@ const subHeadingStyleLabs = css`
     }
 `;
 
-export const Subheading: React.FC<{
+export const SubheadingBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
     isImmersive: boolean;

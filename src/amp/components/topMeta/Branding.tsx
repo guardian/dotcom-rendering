@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkStyle } from '@root/src/amp/components/elements/Text';
+import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 

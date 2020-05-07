@@ -4,7 +4,10 @@ import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutralBorder } from '@root/src/lib/pillars';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
-import { ListStyle, LinkStyle } from '@root/src/amp/components/elements/Text';
+import {
+    ListStyle,
+    LinkStyle,
+} from '@root/src/amp/components/elements/TextBlockComponent';
 
 const standfirstCss = (pillar: Pillar) => css`
     ${headline.xxxsmall()};

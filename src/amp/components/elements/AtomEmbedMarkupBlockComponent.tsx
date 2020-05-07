@@ -16,7 +16,7 @@ const showMore = css`
     }
 `;
 
-export const AtomEmbedMarkup: React.SFC<{
+export const AtomEmbedMarkupBlockComponent: React.SFC<{
     html?: string;
     styles?: string;
     js?: string;

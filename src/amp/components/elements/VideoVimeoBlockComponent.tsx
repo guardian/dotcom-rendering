@@ -2,7 +2,7 @@ import React from 'react';
 import { getIdFromUrl } from '@root/src/amp/lib/get-video-id';
 import { Caption } from '@root/src/amp/components/Caption';
 
-export const VideoVimeo: React.FC<{
+export const VideoVimeoBlockComponent: React.FC<{
     element: VideoVimeoBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
