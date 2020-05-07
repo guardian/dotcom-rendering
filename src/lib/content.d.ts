@@ -67,7 +67,7 @@ interface YoutubeBlockElement {
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
-interface VideoYoutube {
+interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     url: string;
     height: number;
@@ -75,7 +75,7 @@ interface VideoYoutube {
     caption: string;
 }
 
-interface VideoVimeo {
+interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
     url: string;
     height: number;
@@ -83,7 +83,7 @@ interface VideoVimeo {
     caption: string;
 }
 
-interface VideoFacebook {
+interface VideoFacebookBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
     url: string;
     height: number;
@@ -91,7 +91,7 @@ interface VideoFacebook {
     caption: string;
 }
 
-interface VideoGuardian {
+interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
@@ -232,7 +232,7 @@ interface AtomEmbedMarkupBlockElement {
     js?: string;
 }
 
-interface AtomEmbedUrlElement {
+interface AtomEmbedUrlBlockElement {
     _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
     url: string;
 }
@@ -255,7 +255,7 @@ interface AudioAtomElement {
     coverUrl: string;
 }
 
-interface ContentAtomElement {
+interface ContentAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
     atomId: string;
 }
@@ -288,10 +288,10 @@ type CAPIElement =
     | SubheadingBlockElement
     | ImageBlockElement
     | YoutubeBlockElement
-    | VideoYoutube
-    | VideoVimeo
-    | VideoFacebook
-    | VideoGuardian
+    | VideoYoutubeBlockElement
+    | VideoVimeoBlockElement
+    | VideoFacebookBlockElement
+    | GuVideoBlockElement
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement
@@ -306,10 +306,10 @@ type CAPIElement =
     | ProfileBlockElement
     | TimelineBlockElement
     | AtomEmbedMarkupBlockElement
-    | AtomEmbedUrlElement
+    | AtomEmbedUrlBlockElement
     | MapBlockElement
     | AudioAtomElement
-    | ContentAtomElement
+    | ContentAtomBlockElement
     | AudioBlockElement
     | VideoBlockElement
     | CodeBlockElement
