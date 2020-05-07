@@ -16,4 +16,4 @@ jobs:
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.3.x
-          lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+          lhci autorun --upload.target=temporary-public-storage --collect.numberOfRuns=5 --collect.url=http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu || echo "LHCI failed!"
