@@ -106,6 +106,9 @@
                     },
                     {
                         "$ref": "#/definitions/TableBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/DividerBlockElement"
                     }
                 ]
             }
@@ -1188,6 +1191,18 @@
             },
             "required": ["_type", "isMandatory"]
         },
+        "DividerBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.DividerBlockElement"
+                    ]
+                }
+            },
+            "required": ["_type"]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1290,6 +1305,9 @@
                             },
                             {
                                 "$ref": "#/definitions/TableBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/DividerBlockElement"
                             }
                         ]
                     }

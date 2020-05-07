@@ -283,6 +283,10 @@ interface TableBlockElement {
     isMandatory: boolean;
 }
 
+interface DividerBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -314,4 +318,5 @@ type CAPIElement =
     | VideoBlockElement
     | CodeBlockElement
     | DocumentBlockElement
-    | TableBlockElement;
+    | TableBlockElement
+    | DividerBlockElement;
