@@ -155,8 +155,9 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
     const caption = [];
-    if (mainMedia.data.caption) caption.push(mainMedia.data.caption);
-    if (mainMedia.displayCredit && mainMedia.data.credit)
+    if (mainMedia.data && mainMedia.data.caption)
+        caption.push(mainMedia.data.caption);
+    if (mainMedia.displayCredit && mainMedia.data && mainMedia.data.credit)
         caption.push(mainMedia.data.credit);
     return caption.join(' ');
 };
