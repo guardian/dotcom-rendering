@@ -120,6 +120,7 @@ export const HeadlineByline = ({
         case 'Feature':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

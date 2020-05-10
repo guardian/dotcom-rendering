@@ -189,6 +189,7 @@ const PositionHeadline = ({
         case 'Immersive':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

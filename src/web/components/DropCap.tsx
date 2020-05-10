@@ -33,6 +33,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'Interview':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':
@@ -71,6 +72,7 @@ const innerStyles = (designType: DesignType) => {
         case 'Interview':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

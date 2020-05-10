@@ -63,6 +63,7 @@ const shouldShowDropCap = ({
         case 'Comment':
         case 'Review':
         case 'Interview':
+        case 'PhotoEssay':
         case 'Recipe':
             return true;
         case 'Article':
