@@ -129,7 +129,7 @@ const listItemStyles: SerializedStyles = css`
     `}
 `;
 
-const HeadingTwoStyles = (format: Format) => {
+const HeadingTwoStyles = (format: Format): SerializedStyles => {
     const font = format.design === Design.AdvertisementFeature
         ? textSans.large({ fontWeight: 'bold' })
         : headline.xxsmall({ fontWeight: 'bold' })
