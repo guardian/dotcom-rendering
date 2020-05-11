@@ -311,7 +311,7 @@ type CAPIBrowserType = {
         discussionD2Uid: string;
         discussionApiClientHeader: string;
     };
-    richLinks: RichLinkBlockElement[];
+    richLinks: RichLinkBlockElementBrowser[];
     editionId: Edition;
     contentType: string;
     sectionName?: string;
@@ -502,6 +502,7 @@ interface ConfigType extends CommercialConfigType {
     ajaxUrl: string;
     sentryPublicApiKey: string;
     sentryHost: string;
+    references: { [key: string]: string }[];
     dcrSentryDsn: string;
     switches: { [key: string]: boolean };
     abTests: { [key: string]: string };

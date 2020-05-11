@@ -162,6 +162,11 @@ interface RichLinkBlockElement {
     richLinkIndex?: number;
 }
 
+interface RichLinkBlockElementBrowser {
+    url: string;
+    richLinkIndex: number;
+}
+
 interface SoundcloudBlockElement {
     _type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
     html: string;

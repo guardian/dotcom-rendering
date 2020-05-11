@@ -291,16 +291,16 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
     );
 };
 
-const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
-    element,
-    ajaxUrl,
-) => {
+const buildUrl: (
+    element: RichLinkBlockElementBrowser,
+    ajaxUrl: string,
+) => string = (element, ajaxUrl) => {
     const path = new URL(element.url).pathname;
     return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
 
 export const RichLinkComponent: React.FC<{
-    element: RichLinkBlockElement;
+    element: RichLinkBlockElementBrowser;
     pillar: Pillar;
     ajaxEndpoint: string;
     richLinkIndex: number;

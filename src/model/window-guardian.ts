@@ -66,23 +66,46 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
+type richLinkURL = { url: string };
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-    // it is important to pass down the index of rich links as well as the component itself
-    const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
-        (acc, element, index: number) => {
+    // filter out RichLinkBlockElement from elements
+    const richLinks: richLinkURL[] = CAPI.blocks[0].elements.reduce(
+        (acc, element) => {
             if (
                 element._type ===
                 'model.dotcomrendering.pageElements.RichLinkBlockElement'
             ) {
                 acc.push({
-                    ...element,
-                    richLinkIndex: index,
-                } as RichLinkBlockElement);
+                    url: element.url,
+                } as richLinkURL);
             }
             return acc;
         },
-        [] as RichLinkBlockElement[],
+        [] as richLinkURL[],
     );
+    // references with the key `rich-link` work similar to RichLinkBlockElement
+    // however thier structure is different so we filter them out sperartly
+    const referencesRichLink: richLinkURL[] = CAPI.config.references.reduce(
+        (acc, reference) => {
+            if (reference.hasOwnProperty('rich-link')) {
+                acc.push({
+                    url: reference['rich-link'],
+                } as richLinkURL);
+            }
+            return acc;
+        },
+        [] as richLinkURL[],
+    );
+
+    // It is important to pass down the index of rich links as well as the component itself
+    // We assume that richLinks should start ealier in the index
+    const richLinksWithIndex: RichLinkBlockElementBrowser[] = [
+        ...richLinks,
+        ...referencesRichLink,
+    ].map((element, index) => ({
+        url: element.url,
+        richLinkIndex: index,
+    }));
 
     return {
         designType: CAPI.designType,
