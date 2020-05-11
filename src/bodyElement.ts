@@ -237,7 +237,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
             const atom = atoms.interactives?.find(interactive => interactive.id === id);
 
             if (!atom?.data?.interactive) {
-                return new Err('No atom matched')
+                return new Err(`No atom matched this id: ${id}`);
             }
 
             const { html, css, mainJS: js } = atom?.data?.interactive;
