@@ -213,6 +213,11 @@ export const ImageComponent = ({
             <div
                 className={css`
                     position: relative;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
                 `}
             >
                 <Picture
@@ -229,6 +234,11 @@ export const ImageComponent = ({
             <div
                 className={css`
                     position: relative;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
                 `}
             >
                 <Picture

@@ -1,27 +1,8 @@
+import { initPerf } from './initPerf';
+
 export interface Reporter {
     report: (err: Error, tags: { [key: string]: string }) => void;
 }
-
-export const initPerf = (name: string) => {
-    const perf = window.performance;
-    const startKey = `${name}-start`;
-    const endKey = `${name}-end`;
-
-    const start = () => {
-        perf.mark(startKey);
-    };
-    const end = () => {
-        perf.mark(endKey);
-        perf.measure(name, startKey, endKey);
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify(perf.getEntriesByName(name)));
-    };
-
-    return {
-        start,
-        end,
-    };
-};
 
 const measure = (name: string, task: () => Promise<void>): void => {
     const { start, end } = initPerf(name);

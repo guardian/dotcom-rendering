@@ -8,7 +8,7 @@ import { MainMedia } from '@root/src/amp/components/MainMedia';
 import { Byline } from '@root/src/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { ListStyle } from '@root/src/amp/components/elements/Text';
+import { ListStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
