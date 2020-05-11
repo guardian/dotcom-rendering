@@ -33,13 +33,11 @@ Dotcom rendering has components for the following ad types
 
 -   Static ads (top-above, nav, top-right, most-viewed)
 -   Dynamic ads (article in-body)
--   Outbrain
 -   Mechandising slots (such as masterclass below-content onward component) [in progress...]
 
 The components responsible for the rendering of the above are
 
 -   `AdSlot.tsx`, for static and dynamic ads.
--   `Outbrain.tsx`, for the Outbrain widget.
 
 The file `advertisements.ts` is where we locate utility functions supporting the ad rendering. Important functions are
 

@@ -20,7 +20,6 @@ import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
@@ -166,7 +165,7 @@ export const ImmersiveLayout = ({
 }: Props) => {
     const {
         config: { isPaidContent },
-        pageType: { isSensitive },
+        pageType: {},
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -375,15 +374,6 @@ export const ImmersiveLayout = ({
 
             {!isPaidContent && (
                 <>
-                    {!isSensitive && (
-                        <Section
-                            showTopBorder={false}
-                            backgroundColour={neutral[97]}
-                        >
-                            <OutbrainContainer />
-                        </Section>
-                    )}
-
                     {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (

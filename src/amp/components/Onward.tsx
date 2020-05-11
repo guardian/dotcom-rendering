@@ -8,21 +8,6 @@ const wrapper = css`
     padding-top: 24px;
 `;
 
-const outbrainContainer = (webURL: string, isCompliant: boolean) => {
-    const widgetID = isCompliant ? 'AMP_1' : 'AMP_2';
-
-    return (
-        <amp-embed
-            height="485"
-            type="outbrain"
-            layout="fixed-height"
-            data-widgetIds={widgetID}
-            data-htmlURL={webURL}
-            data-ampURL={`${webURL}?amp`}
-        />
-    );
-};
-
 const sectionHasMostViewed = (sectionID: string): boolean => {
     const whitelist = new Set([
         'commentisfree',
@@ -55,18 +40,14 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
 };
 
 export const Onward: React.FC<{
-    shouldHideAds: boolean;
     pageID: string;
-    webURL: string;
     sectionID?: string;
     hasStoryPackage: boolean;
     hasRelated: boolean;
     seriesTags: TagType[];
     guardianBaseURL: string;
 }> = ({
-    shouldHideAds,
     pageID,
-    webURL,
     sectionID,
     hasStoryPackage,
     hasRelated,
@@ -131,19 +112,9 @@ export const Onward: React.FC<{
         'headlines',
     );
 
-    // Outbrain is compliant if it appears in the top 2 containers
-    const outbrainIsCompliant = storyPackage.concat(series).length <= 1;
-
-    const outbrain = // eslint-disable-next-line no-constant-condition
-        shouldHideAds || true // Outbrain gone for now.
-            ? []
-            : [outbrainContainer(webURL, outbrainIsCompliant)];
-
-    // Note, if order changes, you may need to recalculate outbrain compliance
     const containers = storyPackage.concat(
         series,
         related,
-        outbrain,
         sectionMostViewed,
         mostRead,
         headlines,
