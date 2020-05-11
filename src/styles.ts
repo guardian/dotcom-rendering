@@ -74,8 +74,8 @@ export const adStyles = css`
         background: ${neutral[97]};
 
         ${darkModeCss`
-            color: ${neutral[86]};
-            background: black;
+            color: ${neutral[60]};
+            background-color: ${neutral[20]};
         `}
 
         clear: both;
@@ -122,7 +122,9 @@ export const adStyles = css`
                     text-decoration: underline;
                 }
 
-                ${darkModeCss`color: ${neutral[86]};`}
+                ${darkModeCss`
+                    color: ${neutral[60]};
+                `}
             }
         }
 
