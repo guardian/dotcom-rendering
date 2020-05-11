@@ -12,7 +12,6 @@ const commonConfigs = ({ platform }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
-        publicPath: '/assets/',
         path: dist,
     },
     stats: 'errors-only',

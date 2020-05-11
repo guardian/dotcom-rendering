@@ -15,6 +15,7 @@ try {
     // do nothing
 }
 
+// TODO: this should be removed in favor of `frontendAssetsFullURL` defined in CAPI
 // GU_STAGE is set in cloudformation.yml, so will be undefined locally
 const stage =
     typeof process.env.GU_STAGE === 'string'
