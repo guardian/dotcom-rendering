@@ -32,7 +32,6 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Flex } from '@root/src/web/components/Flex';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -500,18 +499,7 @@ export const ShowcaseLayout = ({
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
 
-                    {showComments && (
-                        <Section sectionId="comments">
-                            <Flex>
-                                <div id="comments-root" />
-                                <RightColumn>
-                                    <AdSlot
-                                        asps={namedAdSlotParameters('comments')}
-                                    />
-                                </RightColumn>
-                            </Flex>
-                        </Section>
-                    )}
+                    {showComments && <Section sectionId="comments" />}
 
                     {/* Onwards (when signed OUT) */}
                     <Section

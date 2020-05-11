@@ -26,7 +26,6 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Flex } from '@root/src/web/components/Flex';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ImmersiveHeadline } from '@root/src/web/components/ImmersiveHeadline';
@@ -382,18 +381,7 @@ export const ImmersiveLayout = ({
 
                     {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
-                    {showComments && (
-                        <Section sectionId="comments">
-                            <Flex>
-                                <div id="comments-root" />
-                                <RightColumn>
-                                    <AdSlot
-                                        asps={namedAdSlotParameters('comments')}
-                                    />
-                                </RightColumn>
-                            </Flex>
-                        </Section>
-                    )}
+                    {showComments && <Section sectionId="comments" />}
 
                     <Section sectionId="most-viewed-footer" />
                 </>

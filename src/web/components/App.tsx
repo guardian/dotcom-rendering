@@ -292,7 +292,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
                 these cases we will be scrolling to comments and want them loaded */}
-            <Portal root="comments-root">
+            <Portal root="comments">
                 {openComments ? (
                     <CommentsLayout
                         user={user}
