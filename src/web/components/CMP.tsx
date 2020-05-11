@@ -4,7 +4,7 @@ import {
     setErrorHandler,
 } from '@guardian/consent-management-platform';
 
-import { initPerf } from '@root/src/web/browser/startup';
+import { initPerf } from '@root/src/web/browser/initPerf';
 
 const ConsentManagementPlatform = React.lazy(() => {
     const { start, end } = initPerf('ConsentManagementPlatform');
