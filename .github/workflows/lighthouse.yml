@@ -12,8 +12,8 @@ jobs:
           node-version: 10.15.3
       - name: install Lighthouse CI, start application
         run: |
-          make build
-          npm install -g @lhci/cli@0.3.x
+          yarn
+          yarn global add @lhci/cli@0.3.x
           make start
       - name: run Lighthouse CI
         run: |
