@@ -183,7 +183,14 @@ export const MultiImageBlockComponent = ({
             );
         case 3:
             return (
-                <div className={css``}>
+                <div
+                    className={css`
+                        img {
+                            object-fit: cover;
+                            width: 100%;
+                        }
+                    `}
+                >
                     <OneAboveTwoGrid>
                         <GridItem area="first">
                             <ImageComponent
