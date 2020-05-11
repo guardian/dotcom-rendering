@@ -85,7 +85,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
         case 'BR':
             return null;
         case 'EM':
-            return <em css={ textSans.xsmall({ italic: true, fontWeight: 'bold'})} key={key}>{children}</em>
+            return <em css={ textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold'})} key={key}>{children}</em>
         case 'A':
             return (
                 <Anchor

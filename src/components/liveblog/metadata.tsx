@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
-import { textSans, basePx } from 'styles';
+import { basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
+import { textSans } from '@guardian/src-foundations/typography';
 import Avatar from './avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
@@ -34,7 +35,7 @@ const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
         }
 
         time, .follow {
-            ${textSans}
+            ${textSans.small()};
         }
 
         time {

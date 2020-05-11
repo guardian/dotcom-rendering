@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { textSans } from 'styles';
 import { neutral } from '@guardian/src-foundations/palette';
-import {remSpace} from "@guardian/src-foundations";
+import { remSpace } from "@guardian/src-foundations";
+import { textSans } from '@guardian/src-foundations/typography';
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
     margin-top: 0;
@@ -11,7 +11,7 @@ const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
     display: block;
     list-style: none;
     padding: ${remSpace[2]} 0 ${remSpace[3]} 0;
-    ${textSans}
+    ${textSans.medium()}
 
     li {
         margin: ${remSpace[2]} ${remSpace[2]} ${remSpace[1]} 0;
