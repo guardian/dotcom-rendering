@@ -104,7 +104,10 @@ export const Caption = ({
         }
     `;
 
-    if (!captionText && !displayCredit) return null;
+    const noCaption = !captionText;
+    const noCredit = !credit;
+    const hideCredit = !displayCredit;
+    if (noCaption && (noCredit || hideCredit)) return null;
 
     return (
         <figcaption
