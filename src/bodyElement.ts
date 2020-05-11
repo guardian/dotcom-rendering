@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
+import { IAtoms as Atoms } from 'mapiThriftModels/Atoms';
 import { ElementType } from 'mapiThriftModels/ElementType';
 import { Option, fromNullable } from 'types/option';
 import { Result, Err, Ok } from 'types/result';
@@ -21,6 +22,7 @@ const enum ElementKind {
     Audio,
     Embed,
     Video,
+    InteractiveAtom
 }
 
 type Image = ImageData & {
@@ -42,6 +44,16 @@ type Video = {
 }
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
+
+interface AtomFields {
+    js?: string;
+    css: string;
+    html: string;
+}
+
+interface InteractiveAtom extends AtomFields {
+    kind: ElementKind.InteractiveAtom;
+}
 
 type BodyElement = {
     kind: ElementKind.Text;
@@ -67,7 +79,7 @@ type BodyElement = {
 } | Audio | {
     kind: ElementKind.Embed;
     html: string;
-} | Video;
+} | Video | InteractiveAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -104,8 +116,8 @@ const parseIframe = (docParser: DocParser) =>
         });
 }
 
-const parse =
-    (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+const parse = (docParser: DocParser, atoms?: Atoms) =>
+    (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
 
         case ElementType.TEXT: {
@@ -215,18 +227,40 @@ const parse =
             return parseIframe(docParser)(videoHtml, ElementKind.Video);
         }
 
+        case ElementType.CONTENTATOM: {
+
+            if (!atoms) {
+                return new Err('No atom data returned by capi')
+            }
+
+            const id = element.contentAtomTypeData?.atomId
+            const atom = atoms.interactives?.find(interactive => interactive.id === id);
+
+            if (!atom?.data?.interactive) {
+                return new Err(`No atom matched this id: ${id}`);
+            }
+
+            const { html, css, mainJS: js } = atom?.data?.interactive;
+
+            if (!html || !css) {
+                return new Err(`No html or css for atom: ${id}`);
+            }
+
+            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js });
+        }
+
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
     }
 
 }
 
-const parseElements =
-    (docParser: DocParser) => (elements: Elements): Result<string, BodyElement>[] => {
+const parseElements = (docParser: DocParser, atoms?: Atoms) =>
+    (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [new Err('No body elements available')];
         }
-        return elements.map(parse(docParser));
+        return elements.map(parse(docParser, atoms));
     }
 
 

@@ -7,7 +7,6 @@ import {
 } from 'styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import { Pillar } from 'format';
 import { remSpace } from '@guardian/src-foundations';
 
 const richLinkWidth = '8.75rem';
@@ -70,7 +69,6 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
 `;
 
 interface ArticleBodyProps {
-    pillar: Pillar;
     className: SerializedStyles[];
     children: ReactNode[];
 }

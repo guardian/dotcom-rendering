@@ -1,4 +1,4 @@
-import { renderAll, renderStandfirstText, renderText } from 'renderer';
+import { renderAll, renderStandfirstText, renderText, renderAllWithoutStyles } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
 import { ReactNode } from 'react';
@@ -78,19 +78,54 @@ const instagramElement = (): BodyElement =>
         html: '<blockquote>Instagram</blockquote>',
     })
 
+const embedElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Embed,
+        html: '<section>Embed</section>',
+    })
+
+const videoElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Video,
+        src: "https://www.youtube.com/",
+        height: "300",
+        width: "500"
+    })
+
+const audioElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Audio,
+        src: "https://www.spotify.com/",
+        height: "300",
+        width: "500"
+    })
+
+const atomElement = (): BodyElement =>
+    ({
+        kind: ElementKind.InteractiveAtom,
+        css: "main { background: yellow; }",
+        html: "<main>Some content</main>",
+        js: "console.log('init')"
+    })
+
 const render = (element: BodyElement): ReactNode[] =>
     renderAll({})(mockFormat, [element]);
+
+const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
+    renderAllWithoutStyles(mockFormat, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
     renderAll({})(mockFormat, [element]);
 
 const renderTextElement = compose(render, textElement);
 
+const renderTextElementWithoutStyles = compose(renderWithoutStyles, textElement);
+
 const renderCaptionElement = compose(renderCaption, imageElement)
 
 describe('renderer returns expected content', () => {
     test('Renders supported node types for text elements', () => {
-        const text = renderTextElement([
+        const elements = [
             '<h2></h2>',
             '<blockquote></blockquote>',
             '<strong></strong>',
@@ -98,9 +133,10 @@ describe('renderer returns expected content', () => {
             '<br>',
             '<ul><li></li></ul>',
             '<mark></mark>'
-        ]);
+        ];
 
-        expect(text.flat().length).toBe(7);
+        expect(renderTextElement(elements).flat().length).toBe(7);
+        expect(renderTextElementWithoutStyles(elements).flat().length).toBe(7);
     });
 
     test ('Renders caption node types', () => {
@@ -177,6 +213,32 @@ describe('Renders different types of elements', () => {
         const nodes = render(instagramElement())
         const instagram = shallow(nodes.flat()[0]);
         expect(instagram.html()).toBe('<div><blockquote>Instagram</blockquote></div>');
+    })
+
+    test('ElementKind.Embed', () => {
+        const nodes = render(embedElement())
+        const embed = shallow(nodes.flat()[0]);
+        expect(embed.html()).toBe('<div><section>Embed</section></div>');
+    })
+
+    test('ElementKind.Audio', () => {
+        const nodes = render(audioElement())
+        const audio = shallow(nodes.flat()[0]);
+        expect(audio.html()).toContain('src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"');
+    })
+
+    test('ElementKind.Video', () => {
+        const nodes = render(videoElement())
+        const video = shallow(nodes.flat()[0]);
+        expect(video.html()).toContain('src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"');
+    })
+
+    test('ElementKind.InteractiveAtom', () => {
+        const nodes = render(atomElement())
+        const atom = shallow(nodes.flat()[0]);
+        expect(atom.html()).toContain('<style>main { background: yellow; }</style>');
+        expect(atom.html()).toContain("<script>console.log('init')</script>");
+        expect(atom.html()).toContain('<main>Some content</main>');
     })
 });
 

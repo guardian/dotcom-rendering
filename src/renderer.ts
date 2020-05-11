@@ -21,7 +21,8 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
-
+import InteractiveAtom from 'components/atoms/interactiveAtom';
+import { Design } from '@guardian/types/Format';
 
 // ----- Renderer ----- //
 
@@ -142,6 +143,39 @@ const TweetStyles = css`
         clear: both;
     }
 `;
+
+const plainTextElement = (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(plainTextElement);
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        case '#text':
+            return text;
+        case 'SPAN':
+            return text;
+        case 'A':
+            return h('a', { href: getHref(node).withDefault(''), key }, children);
+        case 'H2':
+            return h('h2', { key }, children);
+        case 'BLOCKQUOTE':
+            return h('blockquote', { key }, children);
+        case 'STRONG':
+            return h('strong', { key }, children);
+        case 'EM':
+            return h('em', { key }, children);
+        case 'BR':
+            return h('br', { key }, null);
+        case 'UL':
+            return h('ul', { key }, children);
+        case 'LI':
+            return h('li', { key }, children);
+        case 'MARK':
+            return styledH('mark', { key }, children);
+        default:
+            return null;
+    }
+}
 
 const textElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
@@ -312,12 +346,14 @@ const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
     }
 }
 
-const render = (format: Format, imageMappings: ImageMappings) =>
+const render = (format: Format, imageMappings: ImageMappings, excludeStyles = false) =>
     (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
-            return text(element.doc, format);
+            return excludeStyles
+                ? Array.from(element.doc.childNodes).map(plainTextElement)
+                : text(element.doc, format)
 
         case ElementKind.Image: {
             const { caption, credit, role } = element;
@@ -363,6 +399,18 @@ const render = (format: Format, imageMappings: ImageMappings) =>
 
             return h('div', props);
         }
+
+        case ElementKind.InteractiveAtom: {
+            const { html, css: styles, js } = element;
+
+            const atom = h(InteractiveAtom, { html, styles, js, format });
+
+            if (format.design !== Design.Interactive) {
+                return h('iframe', null, atom);
+            } else {
+                return atom;
+            }
+        }
     }
 };
 
@@ -370,11 +418,14 @@ const renderAll = (imageMappings: ImageMappings) =>
     (format: Format, elements: BodyElement[]): ReactNode[] =>
         elements.map(render(format, imageMappings));
 
+const renderAllWithoutStyles = (format: Format, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(format, {}, true));
 
 // ----- Exports ----- //
 
 export {
     renderAll,
+    renderAllWithoutStyles,
     text as renderText,
     textElement as renderTextElement,
     standfirstText as renderStandfirstText,

@@ -84,7 +84,6 @@ const Immersive = ({ imageMappings, item, children }: Props): JSX.Element =>
                 </div>
             </header>
             <ArticleBody
-                pillar={item.pillar}
                 className={[articleWidthStyles, DropCapStyles(item.pillar), HeaderStyles]}
             >
                 {children}

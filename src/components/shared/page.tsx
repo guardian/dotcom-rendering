@@ -12,7 +12,7 @@ import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';
-import { renderAll } from 'renderer';
+import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
@@ -27,7 +27,7 @@ import {
     IBlockElement as BlockElement
 } from 'mapiThriftModels';
 import { Design, Display } from 'format';
-
+import Interactive from 'components/interactive/article';
 
 // ----- Components ----- //
 
@@ -63,6 +63,7 @@ const PageStyles = css`
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
+        line-height: 1.5;
     }
 `;
 
@@ -156,6 +157,17 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     const liveblogScript = getAssetLocation('liveblog.js');
     const mediaScript = getAssetLocation('media.js');
 
+    if (item.design === Design.Interactive && item.display === Display.Immersive) {
+        const interactiveBody = partition(item.body).oks;
+        const interactiveContent = renderAllWithoutStyles(format, interactiveBody);
+
+        return { element: (
+            <Interactive>
+                {interactiveContent}
+            </Interactive>
+        ), resources: [], hydrationProps: {} };
+    }
+
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
         const commentContent =
@@ -209,7 +221,8 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         item.design === Design.Feature ||
         item.design === Design.Analysis ||
         item.design === Design.Review ||
-        item.design === Design.Article
+        item.design === Design.Article ||
+        item.design === Design.Interactive
     ) {
         const body = partition(item.body).oks;
         const content = insertAdPlaceholders(renderAll(imageMappings)(format, body));

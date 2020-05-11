@@ -1,9 +1,10 @@
-import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from 'mapiThriftModels';
+import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement, AtomType, IAtoms as Atoms } from 'mapiThriftModels';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
+import { Int64 } from '@creditkarma/thrift-server-core/dist/main/types';
 
 const articleContent = {
     id: "",
@@ -35,8 +36,9 @@ const reviewContent = {
     }
 }
 
-const articleContentWithElement = (element: BlockElement) => ({
+const articleContentWith = (element: BlockElement, atoms?: Atoms) => ({
     ...articleContent,
+    atoms,
     blocks: {
         body: [
             {
@@ -119,7 +121,7 @@ const showcase = ({
     }
 })
 
-const articleContentWithImage = articleContentWithElement({
+const articleContentWithImage = articleContentWith({
     type: ElementType.IMAGE,
     assets: [
         {
@@ -149,7 +151,7 @@ const articleContentWithImage = articleContentWithElement({
     }
 })
 
-const articleContentWithImageWithoutFile = articleContentWithElement({
+const articleContentWithImageWithoutFile = articleContentWith({
     type: ElementType.IMAGE,
     assets: [
         {
@@ -258,7 +260,7 @@ describe('text elements', () => {
                 html: "<p>paragraph</p>"
             }
         }
-        const item = f(articleContentWithElement(textElement)) as Standard;
+        const item = f(articleContentWith(textElement)) as Standard;
         const element = getFirstBody(item)
         expect(element.kind).toBe(ElementKind.Text);
     })
@@ -271,7 +273,7 @@ describe('text elements', () => {
                 html: ""
             }
         }
-        const item = f(articleContentWithElement(textElement)) as Standard;
+        const item = f(articleContentWith(textElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -301,7 +303,7 @@ describe('pullquote elements', () => {
                 attribution: ""
             }
         }
-        const item = f(articleContentWithElement(pullquoteElement)) as Standard;
+        const item = f(articleContentWith(pullquoteElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Pullquote);
     })
@@ -315,7 +317,7 @@ describe('pullquote elements', () => {
                 attribution: ""
             }
         }
-        const item = f(articleContentWithElement(pullquoteElement)) as Standard;
+        const item = f(articleContentWith(pullquoteElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -330,7 +332,7 @@ describe('interactive elements', () => {
                 iframeUrl: "https://gu.com"
             }
         }
-        const item = f(articleContentWithElement(interactiveElement)) as Standard;
+        const item = f(articleContentWith(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -343,7 +345,7 @@ describe('interactive elements', () => {
                 iframeUrl: ""
             }
         }
-        const item = f(articleContentWithElement(interactiveElement)) as Standard;
+        const item = f(articleContentWith(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
         expect(element.kind).toBe(ElementKind.RichLink);
     })
@@ -362,7 +364,7 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const item = f(articleContentWith(richLinkElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.RichLink);
     })
@@ -379,7 +381,7 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const item = f(articleContentWith(richLinkElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -396,7 +398,7 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const item = f(articleContentWith(richLinkElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -412,7 +414,7 @@ describe('tweet elements', () => {
                 html: "<blockquote>tweet<blockquote>"
             }
         }
-        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const item = f(articleContentWith(tweetElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Tweet);
     })
@@ -426,7 +428,7 @@ describe('tweet elements', () => {
                 html: "<blockquote>tweet<blockquote>"
             }
         }
-        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const item = f(articleContentWith(tweetElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -440,7 +442,7 @@ describe('tweet elements', () => {
                 html: ""
             }
         }
-        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const item = f(articleContentWith(tweetElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -454,7 +456,7 @@ describe('tweet elements', () => {
                 html: "<span>tweet<span>"
             }
         }
-        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const item = f(articleContentWith(tweetElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     })
@@ -474,7 +476,7 @@ describe('instagram elements', () => {
                 authorUsername: ""
             }
         }
-        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const item = f(articleContentWith(instagramElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Instagram);
     });
@@ -491,7 +493,7 @@ describe('instagram elements', () => {
                 authorUsername: ""
             }
         }
-        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const item = f(articleContentWith(instagramElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -506,7 +508,7 @@ describe('embed elements', () => {
                 html: "<p>Embed element<p>",
             }
         }
-        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const item = f(articleContentWith(embedElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Embed);
     });
@@ -517,7 +519,7 @@ describe('embed elements', () => {
             assets: [],
             embedTypeData: {}
         }
-        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const item = f(articleContentWith(embedElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -532,7 +534,7 @@ describe('audio elements', () => {
                 html: "<iframe></iframe>",
             }
         }
-        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const item = f(articleContentWith(audioElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -543,7 +545,7 @@ describe('audio elements', () => {
             assets: [],
             audioTypeData: {}
         }
-        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const item = f(articleContentWith(audioElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -556,7 +558,7 @@ describe('audio elements', () => {
                 html: "<iframe src='https://open.spotify.com/embed/track/' width='300' height='300' frameborder='0'></iframe>",
             }
         }
-        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const item = f(articleContentWith(audioElement)) as Standard;
         item.body[0].fmap<Audio>(element => element as Audio)
             .fmap(({ src, width, height }) => {
                 expect(src).toContain('https://open.spotify.com/embed/track/');
@@ -573,7 +575,7 @@ describe('audio elements', () => {
                 html: "<p>Spotify playlist<p>",
             }
         }
-        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const item = f(articleContentWith(audioElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -589,7 +591,7 @@ describe('video elements', () => {
                 html: "<iframe></iframe>",
             }
         }
-        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const item = f(articleContentWith(videoElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -600,7 +602,7 @@ describe('video elements', () => {
             assets: [],
             videoTypeData: {}
         }
-        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const item = f(articleContentWith(videoElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
     });
@@ -613,7 +615,7 @@ describe('video elements', () => {
                 html: "<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>"
             }
         }
-        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const item = f(articleContentWith(videoElement)) as Standard;
         item.body[0].fmap<Video>(element => element as Video)
             .fmap(({ src, width, height }) => {
                 expect(src).toBe('https://www.youtube-nocookie.com/embed/');
@@ -630,9 +632,73 @@ describe('video elements', () => {
                 html: "<p>YouTube video<p>",
             }
         }
-        const item = f(articleContentWithElement(videoElement)) as Standard;
+        const item = f(articleContentWith(videoElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive);
+    });
+});
+
+describe('interactive atom elements', () => {
+    test('renders on matching atom data in capi response', () => {
+
+        const interactiveAtomElement = {
+            type: ElementType.CONTENTATOM,
+            assets: [],
+            contentAtomTypeData: {
+                atomId: "interactives/2020/04/interactive-pandemic-timeline",
+                atomType: "interactive"
+            }
+        }
+
+        const atoms = {
+            interactives: [{
+                id: "interactives/2020/04/interactive-pandemic-timeline",
+                atomType: AtomType.INTERACTIVE,
+                labels: [],
+                defaultHtml: "default",
+                data: {
+                    interactive: {
+                        type: "interactive",
+                        title: "Pandemics and epidemics timeline",
+                        css: "main { background: yellow; }",
+                        html: "<main>Some content</main>",
+                        mainJS: "console.log('init')",
+                        docData: ""
+                    }
+                },
+                contentChangeDetails: {
+                    lastModified: {
+                        date: Int64.fromDecimalString("0"),
+                        user: {
+                            email: "",
+                            firstName: "",
+                            lastName: ""
+                        }
+                    },
+                    created: {
+                        date: Int64.fromDecimalString("0"),
+                        user: {
+                            email: "",
+                            firstName: "",
+                            lastName: ""
+                        }
+                    },
+                    published: {
+                        date: Int64.fromDecimalString("0"),
+                        user: {
+                            email: "",
+                            firstName: "",
+                            lastName: ""
+                        }
+                    },
+                    revision: Int64.fromDecimalString("0")
+                },
+                commissioningDesks: []
+            }]
+        }
+        const item = f(articleContentWith(interactiveAtomElement, atoms)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.InteractiveAtom);
     });
 });
 

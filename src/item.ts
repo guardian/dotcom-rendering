@@ -3,7 +3,7 @@
 import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, maybeCapiDate } from 'capi';
+import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import {
     ElementType,
@@ -50,6 +50,11 @@ interface Comment extends Fields {
     body: Body;
 }
 
+interface Interactive extends Fields {
+    design: Design.Interactive;
+    body: Body;
+}
+
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
@@ -63,6 +68,7 @@ type Item
     | Review
     | Comment
     | Standard
+    | Interactive
     ;
 
 
@@ -113,7 +119,6 @@ function getDisplay(content: Content): Display {
     }
 
     return Display.Standard;
-
 }
 
 const itemFields = (docParser: DocParser, content: Content): ItemFields =>
@@ -135,10 +140,11 @@ const itemFields = (docParser: DocParser, content: Content): ItemFields =>
 
 const itemFieldsWithBody = (docParser: DocParser, content: Content): ItemFieldsWithBody => {
     const body = content?.blocks?.body ?? [];
+    const atoms = content?.atoms;
     const elements = body[0]?.elements;
     return ({
         ...itemFields(docParser, content),
-        body: elements !== undefined ? parseElements(docParser)(elements): [],
+        body: elements !== undefined ? parseElements(docParser, atoms)(elements): [],
     });
 }
 
@@ -200,7 +206,12 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
 
     // These checks aim for parity with the CAPI Scala client:
     // https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
-    if (isMedia(tags)) {
+    if (isInteractive(content)) {
+        return {
+            design: Design.Interactive,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isMedia(tags)) {
         return {
             design: Design.Media,
             ...itemFieldsWithBody(docParser, content),

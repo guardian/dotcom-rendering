@@ -11,9 +11,9 @@ import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
 
+import Page from 'components/shared/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
-import Page from 'components/shared/page';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';

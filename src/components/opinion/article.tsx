@@ -87,7 +87,7 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
                     format={getFormat(item)}
                 />
             </header>
-            <ArticleBody pillar={item.pillar} className={[articleWidthStyles]}>
+            <ArticleBody className={[articleWidthStyles]}>
                 {children}
             </ArticleBody>
             <footer css={articleWidthStyles}>
