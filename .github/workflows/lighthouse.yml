@@ -10,10 +10,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.15.3
-      - name: install, build
-        run: |
-          make run
-      - name: run Lighthouse CI
+      - name: install Lighthouse CI, start application
         run: |
           npm install -g @lhci/cli@0.3.x
+          make start
+      - name: run Lighthouse CI
+        run: |
           lhci autorun --upload.target=temporary-public-storage --collect.numberOfRuns=5 --collect.url=http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu || echo "LHCI failed!"
