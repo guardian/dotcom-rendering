@@ -121,6 +121,12 @@ interface MapBlockElement {
     title: string;
 }
 
+interface MultiImageBlockElement {
+    _type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
+    images: ImageBlockElement[];
+    caption?: string;
+}
+
 interface ProfileBlockElement {
     _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
     id: string;
@@ -254,6 +260,7 @@ type CAPIElement =
     | ImageBlockElement
     | InstagramBlockElement
     | MapBlockElement
+    | MultiImageBlockElement
     | ProfileBlockElement
     | PullquoteBlockElement
     | QABlockElement

@@ -286,6 +286,7 @@ type CAPIBrowserType = {
     designType: DesignType;
     pillar: Pillar;
     config: {
+        frontendAssetsFullURL: string;
         isDev: boolean;
         ajaxUrl: string;
         shortUrlId: string;

@@ -5,6 +5,7 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
+import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
@@ -64,6 +65,16 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return (
                         <InstagramBlockComponent key={i} element={element} />
+                    );
+                case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
+                    return (
+                        <MultiImageBlockComponent
+                            designType={designType}
+                            key={i}
+                            images={element.images}
+                            caption={element.caption}
+                            pillar={pillar}
+                        />
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (

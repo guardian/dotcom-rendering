@@ -66,6 +66,9 @@
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/MultiImageBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/ProfileBlockElement"
                     },
                     {
@@ -910,6 +913,30 @@
                 "url"
             ]
         },
+        "MultiImageBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.MultiImageBlockElement"
+                    ]
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageBlockElement"
+                    }
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "images"
+            ]
+        },
         "ProfileBlockElement": {
             "type": "object",
             "properties": {
@@ -1411,6 +1438,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/MultiImageBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/ProfileBlockElement"
