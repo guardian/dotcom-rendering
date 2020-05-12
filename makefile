@@ -30,12 +30,11 @@ deploy:
 
 # prod #########################################
 
-build: clear clean-dist install
+build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
-start:
-	@NODE_ENV=production make install
+start: install
 	@make stop
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
