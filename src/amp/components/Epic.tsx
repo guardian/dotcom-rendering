@@ -79,7 +79,7 @@ const supportButton = css`
     transition: background-color .3s;
     text-align: centre;
     &:hover {
-        background-color: #FFBB51;
+        background-color: ${palette.opinion[600]};
     }
 `;
 const arrow = css`
