@@ -14,9 +14,7 @@ jobs:
               run: |
                   make build
                   make start
-            - name: Add Lighthouse CI
+            - name: Add and run Lighthouse CI
               run: |
-                  yarn global add @lhci/cli@0.3.x
-            - name: Run Lighthouse CI
-              run: |
+                  npm install -g @lhci/cli@0.3.x
                   lhci autorun --upload.target=temporary-public-storage --collect.numberOfRuns=5 --collect.url=http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu || echo "LHCI failed!"
