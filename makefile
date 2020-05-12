@@ -90,7 +90,7 @@ stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
 	@stylelint "src/**/*.ts{,x}"
 
-test: clear clean-dist install
+test: clean-dist install
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand
 
