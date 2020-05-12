@@ -1,5 +1,6 @@
 import React from 'react';
 import { palette } from '@guardian/src-foundations';
+import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import {css} from "emotion";
 
 const epic = css`
@@ -13,7 +14,7 @@ const epic = css`
 const epicHeader = css `
     font-size: 1.25rem;
     line-height: 1.4375rem;
-    font-family: "Guardian Egyptian Web",Georgia,serif;
+    ${headline.xxsmall()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
@@ -27,7 +28,7 @@ const epicParagraph = css`
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-bottom: 0.5rem;
-    font-family: "Guardian Text Egyptian Web",Georgia,serif;
+    ${body.medium()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
@@ -45,7 +46,7 @@ const highlightedText = css`
     font-weight: bold;
     margin-left: 5px;
     color: ${palette.neutral[7]};
-    font-family: "Guardian Text Egyptian Web",Georgia,serif;
+    ${body.medium()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
@@ -57,7 +58,7 @@ const supportButton = css`
     background-color: ${palette.brandYellow.main};
     color: ${palette.neutral[7]};
     display: inline-block;
-    font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    ${textSans.medium()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
@@ -91,11 +92,9 @@ const arrow = css`
     color: ${palette.neutral[7]};
     vertical-align: sub;
 `;
-const acceptedPaymentMethods = css`
+const acceptedPaymentMethodsWrapper = css`
     margin-top: .5rem;
-    margin-left: .25rem;
-    width: 32.5%;
-    height: auto;
+    margin-left: .5rem;
     display: block;
 `;
 
@@ -105,6 +104,8 @@ export const Epic: React.FC<{}> = ({}) => {
     return (
         <amp-list
             layout="responsive"
+            height="0"
+            width="0"
             src="https://contributions.guardianapis.com/amp/epic"
             credentials="include"
         >
@@ -157,11 +158,15 @@ export const Epic: React.FC<{}> = ({}) => {
                         <path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
                     </svg>
                 </a>
-                <img
-                    src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-                    alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-                    className={acceptedPaymentMethods}
-                />
+                <div className={acceptedPaymentMethodsWrapper}>
+                    <amp-img
+                        layout="fixed"
+                        height="25px"
+                        width="176px"
+                        src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+                        alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+                    />
+                </div>
             </div>
         </amp-list>
     );
