@@ -66,9 +66,7 @@ export const Article: React.FC<{
                     config={config}
                 />
                 <Onward
-                    shouldHideAds={articleData.shouldHideAds}
                     pageID={articleData.pageId}
-                    webURL={articleData.webURL}
                     sectionID={articleData.sectionName}
                     hasRelated={articleData.hasRelated}
                     hasStoryPackage={articleData.hasStoryPackage}
