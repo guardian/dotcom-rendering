@@ -89,7 +89,12 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         .references
         ? CAPI.config.references.reduce(
               (acc, reference, index) => {
-                  if (reference.hasOwnProperty('rich-link')) {
+                  if (
+                      Object.prototype.hasOwnProperty.call(
+                          reference,
+                          'rich-link',
+                      )
+                  ) {
                       acc.push({
                           url: reference['rich-link'],
                           richLinkIndex: index,
