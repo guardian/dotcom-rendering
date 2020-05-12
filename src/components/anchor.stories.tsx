@@ -25,7 +25,7 @@ const Default: FC = () =>
         }}
         href={link()}
     >
-        <span>{copy()}</span>
+        {copy()}
     </Anchor>;
 
 
