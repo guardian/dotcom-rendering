@@ -465,7 +465,12 @@ export const CommentLayout = ({
                     {showComments && (
                         <Section sectionId="comments">
                             <Flex>
-                                <div id="comments-root" />
+                                <div
+                                    id="comments-root"
+                                    className={css`
+                                        width: 100%;
+                                    `}
+                                />
                                 <RightColumn>
                                     <AdSlot
                                         asps={namedAdSlotParameters('comments')}

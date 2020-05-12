@@ -6,7 +6,6 @@ import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
-import { Flex } from '@frontend/web/components/Flex';
 
 type Props = {
     user?: UserProfile;
@@ -40,6 +39,16 @@ const bottomPadding = css`
     padding-bottom: ${space[2]}px;
 `;
 
+const flexRowWrapper = css`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* Fixes IE 10/11 bug that collapses this container by default: */
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -ms-flex-positive: 1;
+`;
+
 export const CommentsLayout = ({
     user,
     pillar,
@@ -57,7 +66,7 @@ export const CommentsLayout = ({
     commentToScrollTo,
     onPermalinkClick,
 }: Props) => (
-    <Flex direction="row">
+    <div className={flexRowWrapper}>
         <LeftColumn showRightBorder={false}>
             <SignedInAs
                 pillar={pillar}
@@ -100,5 +109,5 @@ export const CommentsLayout = ({
                 apiKey="dotcom-rendering"
             />
         </div>
-    </Flex>
+    </div>
 );
