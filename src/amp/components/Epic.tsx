@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    MoustacheSection,
-    MoustacheTemplate,
-    MoustacheVariable,
-} from "@root/src/amp/components/moustache";
 import {css} from "emotion";
-import {headline} from "@guardian/src-foundations/typography";
 
 const epic = css`
     border-top: 0.0625rem solid #ffe500;
@@ -45,7 +39,6 @@ const highlightedText = css`
     background-color: #ffe500;
     padding: 0.125rem;
     font-weight: bold;
-    padding: 0.125rem;
     margin-left: 5px;
     color: #121212;
     font-family: "Guardian Text Egyptian Web",Georgia,serif;
@@ -60,7 +53,6 @@ const supportButton = css`
     background-color: #ffe500;
     color: #121212;
     display: inline-block;
-    line-height: 1.375rem;
     font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
     text-rendering: optimizeLegibility;
     font-kerning: normal;
