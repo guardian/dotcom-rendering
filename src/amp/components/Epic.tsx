@@ -1,9 +1,10 @@
 import React from 'react';
+import { palette } from '@guardian/src-foundations';
 import {css} from "emotion";
 
 const epic = css`
-    border-top: 0.0625rem solid #ffe500;
-    background-color: #f6f6f6;
+    border-top: 0.0625rem solid ${palette.brandYellow.main};
+    background-color: ${palette.neutral[97]};
     clear: left;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -33,14 +34,17 @@ const epicParagraph = css`
     -webkit-font-smoothing: antialiased;
     vertical-align: 0%;
     line-height: 1.5;
+    &::selection {
+        background-color: ${palette.brandYellow.main};
+    }
 `;
 const highlightedText = css`
     font-size: 1.1rem;
-    background-color: #ffe500;
+    background-color: ${palette.brandYellow.main};
     padding: 0.125rem;
     font-weight: bold;
     margin-left: 5px;
-    color: #121212;
+    color: ${palette.neutral[7]};
     font-family: "Guardian Text Egyptian Web",Georgia,serif;
     text-rendering: optimizeLegibility;
     font-kerning: normal;
@@ -50,8 +54,8 @@ const highlightedText = css`
     line-height: 1.5;
 `;
 const supportButton = css`
-    background-color: #ffe500;
-    color: #121212;
+    background-color: ${palette.brandYellow.main};
+    color: ${palette.neutral[7]};
     display: inline-block;
     font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
     text-rendering: optimizeLegibility;
@@ -74,8 +78,7 @@ const supportButton = css`
     line-height: 2.625rem;
     transition: background-color .3s;
     text-align: centre;
-
-    :hover {
+    &:hover {
         background-color: #FFBB51;
     }
 `;
@@ -85,7 +88,7 @@ const arrow = css`
     width: 1.3125rem;
     height: auto;
     display: inline;
-    color: #121212;
+    color: ${palette.neutral[7]};
     vertical-align: sub;
 `;
 const acceptedPaymentMethods = css`
