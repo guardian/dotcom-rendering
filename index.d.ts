@@ -502,7 +502,7 @@ interface ConfigType extends CommercialConfigType {
     ajaxUrl: string;
     sentryPublicApiKey: string;
     sentryHost: string;
-    references: { [key: string]: string }[];
+    references?: { [key: string]: string }[];
     dcrSentryDsn: string;
     switches: { [key: string]: boolean };
     abTests: { [key: string]: string };
