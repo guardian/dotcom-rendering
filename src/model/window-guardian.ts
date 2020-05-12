@@ -85,18 +85,21 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     );
     // references with the key `rich-link` work similar to RichLinkBlockElement
     // however thier structure is different so we filter them out sperartly
-    const referencesRichLink: RichLinkBlockElementBrowser[] = CAPI.config.references.reduce(
-        (acc, reference, index) => {
-            if (reference.hasOwnProperty('rich-link')) {
-                acc.push({
-                    url: reference['rich-link'],
-                    richLinkIndex: index,
-                } as RichLinkBlockElementBrowser);
-            }
-            return acc;
-        },
-        [] as RichLinkBlockElementBrowser[],
-    );
+    const referencesRichLink: RichLinkBlockElementBrowser[] = CAPI.config
+        .references
+        ? CAPI.config.references.reduce(
+              (acc, reference, index) => {
+                  if (reference.hasOwnProperty('rich-link')) {
+                      acc.push({
+                          url: reference['rich-link'],
+                          richLinkIndex: index,
+                      } as RichLinkBlockElementBrowser);
+                  }
+                  return acc;
+              },
+              [] as RichLinkBlockElementBrowser[],
+          )
+        : [];
 
     // It is important to pass down the index of rich links as well as the component itself
     // We assume that richLinks should start ealier in the index
