@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { textSans, darkModeCss, basePx } from '../../styles';
+import { darkModeCss, basePx } from '../../styles';
+import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
 const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
@@ -10,7 +11,7 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
     display: block;
     list-style: none;
     padding: ${basePx(1, 0, 2, 0)};
-    ${textSans}
+    ${textSans.medium()}
 
     li {
         margin: ${basePx(1, 1, .5, 0)};

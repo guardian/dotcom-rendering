@@ -2,9 +2,8 @@
 
 import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { body } from '@guardian/src-foundations/typography';
+import { body, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
-import { textSans } from 'styles';
 import { Format, Design } from '@guardian/types/Format';
 
 // ----- Component ----- //
@@ -16,7 +15,7 @@ interface Props {
 
 const styles = (design: Design): SerializedStyles => {
     const advertisementFeature = design === Design.AdvertisementFeature
-        ? textSans
+        ? textSans.medium()
         : null;
 
     return css`

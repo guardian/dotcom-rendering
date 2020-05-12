@@ -3,6 +3,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
 import { Option } from 'types/option';
+import { textSans } from '@guardian/src-foundations/typography';
 
 const BASE_PADDING = 8;
 
@@ -19,8 +20,6 @@ export const sidePadding = css`
         padding-left: 0;
         padding-right: 0;
     }`;
-
-export const textSans = "font-family: 'Guardian Text Sans Web', Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;";
 
 export const icons = "font-family: 'Guardian Icons';";
 
@@ -81,7 +80,7 @@ export const adStyles = css`
         clear: both;
 
         .ad-labels {
-            ${textSans}
+            ${textSans.xsmall()}
             padding: ${basePx(1)};
             float: left;
             width: calc(100% - ${basePx(2)});

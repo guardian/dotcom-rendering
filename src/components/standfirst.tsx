@@ -2,14 +2,14 @@
 
 import React, {FC, ReactElement, ReactNode} from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item, getFormat } from 'item';
 import { renderText, renderStandfirstText } from 'renderer';
-import { darkModeCss as darkMode, textSans } from 'styles';
+import { darkModeCss as darkMode } from 'styles';
 import { Display, Design } from 'format';
 
 
@@ -78,7 +78,7 @@ const media = css`
 
 const advertisementFeature = css`
     ${styles}
-    ${textSans}
+    ${textSans.medium()}
 `
 
 const getStyles = (item: Item): SerializedStyles => {

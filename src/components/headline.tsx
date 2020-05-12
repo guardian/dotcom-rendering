@@ -2,12 +2,12 @@
 
 import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item } from 'item';
-import { darkModeCss as darkMode, textSans } from 'styles';
+import { darkModeCss as darkMode } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import StarRating from './starRating';
 import { Display, Design } from 'format';
@@ -78,7 +78,7 @@ const commentStyles = css`
 
 const advertisementFeatureStyles = css`
     ${styles}
-    ${textSans}
+    ${textSans.xxxlarge({ lineHeight: 'regular' })}}
 `;
 
 const getStyles = (item: Item): SerializedStyles => {

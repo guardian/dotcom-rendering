@@ -10,7 +10,7 @@ import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { ElementKind, BodyElement } from 'bodyElement';
 import { Role, BodyImageProps } from 'image';
-import { body, headline } from '@guardian/src-foundations/typography';
+import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
 import Audio from 'components/audio';
@@ -129,14 +129,20 @@ const listItemStyles: SerializedStyles = css`
     `}
 `;
 
-const HeadingTwoStyles = css`
-    ${headline.xxsmall({ fontWeight: 'bold' })}
-    margin: ${remSpace[4]} 0 4px 0;
+const HeadingTwoStyles = (format: Format): SerializedStyles => {
+    const font = format.design === Design.AdvertisementFeature
+        ? textSans.large({ fontWeight: 'bold' })
+        : headline.xxsmall({ fontWeight: 'bold' })
 
-    & + p {
-        margin-top: 0;
-    }
-`;
+    return css`
+        ${font}
+        margin: ${remSpace[4]} 0 4px 0;
+
+        & + p {
+            margin-top: 0;
+        }
+    `;
+}
 
 const TweetStyles = css`
     ${until.wide} {
@@ -194,7 +200,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
                 key,
             }, transform(text, format));
         case 'H2':
-            return styledH('h2', { css: HeadingTwoStyles, key }, children );
+            return styledH('h2', { css: HeadingTwoStyles(format), key }, children );
         case 'BLOCKQUOTE':
             return h('blockquote', { key }, children);
         case 'STRONG':
