@@ -165,7 +165,6 @@ export const ImmersiveLayout = ({
 }: Props) => {
     const {
         config: { isPaidContent },
-        pageType: {},
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
