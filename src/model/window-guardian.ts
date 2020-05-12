@@ -66,35 +66,36 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
-type richLinkURL = { url: string };
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     // filter out RichLinkBlockElement from elements
-    const richLinks: richLinkURL[] = CAPI.blocks[0].elements.reduce(
-        (acc, element) => {
+    const richLinks: RichLinkBlockElementBrowser[] = CAPI.blocks[0].elements.reduce(
+        (acc, element, index) => {
             if (
                 element._type ===
                 'model.dotcomrendering.pageElements.RichLinkBlockElement'
             ) {
                 acc.push({
                     url: element.url,
-                } as richLinkURL);
+                    richLinkIndex: index,
+                } as RichLinkBlockElementBrowser);
             }
             return acc;
         },
-        [] as richLinkURL[],
+        [] as RichLinkBlockElementBrowser[],
     );
     // references with the key `rich-link` work similar to RichLinkBlockElement
     // however thier structure is different so we filter them out sperartly
-    const referencesRichLink: richLinkURL[] = CAPI.config.references.reduce(
-        (acc, reference) => {
+    const referencesRichLink: RichLinkBlockElementBrowser[] = CAPI.config.references.reduce(
+        (acc, reference, index) => {
             if (reference.hasOwnProperty('rich-link')) {
                 acc.push({
                     url: reference['rich-link'],
-                } as richLinkURL);
+                    richLinkIndex: index,
+                } as RichLinkBlockElementBrowser);
             }
             return acc;
         },
-        [] as richLinkURL[],
+        [] as RichLinkBlockElementBrowser[],
     );
 
     // It is important to pass down the index of rich links as well as the component itself
@@ -102,10 +103,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     const richLinksWithIndex: RichLinkBlockElementBrowser[] = [
         ...richLinks,
         ...referencesRichLink,
-    ].map((element, index) => ({
-        url: element.url,
-        richLinkIndex: index,
-    }));
+    ];
 
     return {
         designType: CAPI.designType,

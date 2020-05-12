@@ -201,6 +201,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
+            {console.log('CAPI.richLinks')}
+            {console.log(CAPI.richLinks)}
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
