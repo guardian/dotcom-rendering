@@ -12,8 +12,7 @@ jobs:
                   node-version: 10.15.3
             - name: Start application
               run: |
-                  make build
-                  make start
+                  make run
             - name: Add and run Lighthouse CI
               run: |
                   npm install -g @lhci/cli@0.3.x
