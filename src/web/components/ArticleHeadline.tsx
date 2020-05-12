@@ -185,6 +185,7 @@ export const ArticleHeadline = ({
         case 'Immersive':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Live':
         case 'SpecialReport':
         case 'MatchReport':

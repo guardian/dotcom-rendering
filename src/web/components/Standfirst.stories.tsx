@@ -216,3 +216,16 @@ export const AdvertisementFeature = () => {
     );
 };
 AdvertisementFeature.story = { name: 'AdvertisementFeature' };
+
+export const PhotoEssay = () => {
+    return (
+        <Section>
+            <Standfirst
+                display="standard"
+                designType="PhotoEssay"
+                standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+            />
+        </Section>
+    );
+};
+PhotoEssay.story = { name: 'PhotoEssay' };

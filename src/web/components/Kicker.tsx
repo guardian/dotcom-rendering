@@ -37,6 +37,7 @@ const decideColour = (
                 ? pillarPalette[pillar].bright
                 : pillarPalette[pillar].main;
         case 'Feature':
+        case 'PhotoEssay':
         case 'Interview':
         case 'Analysis':
         case 'Article':

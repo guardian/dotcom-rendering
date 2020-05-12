@@ -4835,6 +4835,7 @@ export const Immersive: CAPIType = {
         discussionApiClientHeader: 'testClientHeader',
         ampIframeUrl:
             'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+        isPhotoEssay: false,
     },
     sectionLabel: 'Christopher Eccleston',
 };

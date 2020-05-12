@@ -248,6 +248,26 @@ export const AdvertisementFeature = () => (
 );
 AdvertisementFeature.story = { name: 'AdvertisementFeature' };
 
+export const PhotoEssay = () => (
+    <Section>
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is the headline you see when design type is PhotoEssay"
+                    display="standard"
+                    designType="PhotoEssay"
+                    pillar="news"
+                    tags={[]}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+PhotoEssay.story = { name: 'PhotoEssay' };
+
 export const Quiz = () => (
     <Section>
         <Flex>

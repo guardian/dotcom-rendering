@@ -80,6 +80,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
             `;
         case 'Immersive':
         case 'Media':
+        case 'PhotoEssay':
         case 'SpecialReport':
         case 'MatchReport':
         case 'AdvertisementFeature':

@@ -1725,6 +1725,9 @@
                 "discussionApiClientHeader": {
                     "type": "string"
                 },
+                "isPhotoEssay": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -1766,6 +1769,7 @@
                 "frontendAssetsFullURL",
                 "googletagUrl",
                 "hbImpl",
+                "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",
                 "pageId",
@@ -1795,6 +1799,7 @@
                 "Live",
                 "MatchReport",
                 "Media",
+                "PhotoEssay",
                 "Quiz",
                 "Recipe",
                 "Review",

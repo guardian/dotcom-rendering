@@ -18,6 +18,7 @@ const determinPadding = (designType: DesignType) => {
     switch (designType) {
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Live':
         case 'SpecialReport':
         case 'Recipe':

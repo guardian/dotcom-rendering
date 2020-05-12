@@ -28,7 +28,8 @@ type DesignType =
     | 'GuardianView'
     | 'GuardianLabs'
     | 'Quiz'
-    | 'AdvertisementFeature';
+    | 'AdvertisementFeature'
+    | 'PhotoEssay';
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -335,6 +336,7 @@ type CAPIBrowserType = {
     };
     contributionsServiceUrl: string;
     isImmersive: boolean;
+    isPhotoEssay: boolean;
 };
 
 interface TagType {
@@ -528,6 +530,7 @@ interface ConfigType extends CommercialConfigType {
     discussionApiUrl: string;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
+    isPhotoEssay: boolean;
 }
 
 interface GADataType {
