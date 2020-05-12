@@ -1,20 +1,20 @@
 name: Run Lighthouse CI
 on: [push]
 jobs:
-  lhci:
-    name: Lighthouse CI
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 10.15.3
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10.15.3
-      - name: install Lighthouse CI, start application
-        run: |
-          yarn
-          yarn global add @lhci/cli@0.3.x
-          make start
-      - name: run Lighthouse CI
-        run: |
-          lhci autorun --upload.target=temporary-public-storage --collect.numberOfRuns=5 --collect.url=http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu || echo "LHCI failed!"
+    lhci:
+        name: Lighthouse CI
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js 10.15.3
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.15.3
+            - name: install Lighthouse CI, start application
+              run: |
+                  make build
+                  yarn global add @lhci/cli@0.3.x
+                  make start
+            - name: run Lighthouse CI
+              run: |
+                  lhci autorun --upload.target=temporary-public-storage --collect.numberOfRuns=5 --collect.url=http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu || echo "LHCI failed!"
