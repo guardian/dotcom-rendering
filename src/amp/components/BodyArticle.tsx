@@ -109,7 +109,7 @@ export const Body: React.FC<{
 
             {elements}
 
-            <Epic/>
+            <Epic />
 
             <SubMeta
                 sections={data.subMetaSectionLinks}

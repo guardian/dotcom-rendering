@@ -69,12 +69,10 @@ const headlineCSS = css`
     word-wrap: break-word;
     ${headline.xxxsmall()};
 `;
-
 const description = css`
     ${headline.xxxsmall()};
     margin-bottom: 16px;
 `;
-
 const iconCSS = css`
     svg {
         fill: ${palette.neutral[7]};
@@ -83,7 +81,6 @@ const iconCSS = css`
         width: 16px;
     }
 `;
-
 const quoteIconCSS = css`
     svg {
         fill: ${palette.neutral[60]};
@@ -92,13 +89,11 @@ const quoteIconCSS = css`
         width: 16px;
     }
 `;
-
 const ageWarning = css`
     color: ${palette.neutral[20]};
     fill: ${palette.neutral[20]};
     ${textSans.xsmall()};
 `;
-
 const showMore = css`
     background-color: ${palette.neutral[100]};
     &[overflow] {
@@ -171,6 +166,7 @@ export const OnwardContainer: React.FC<{
                                         </h2>
                                         <MoustacheSection name="isComment">
                                             <div>
+                                                <MoustacheVariable name="byline" />
                                                 <MoustacheVariable name="byline" />
                                             </div>
                                         </MoustacheSection>

@@ -14,6 +14,7 @@ import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { getPillar } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
+import {Epic} from "@root/src/amp/components/Epic";
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
