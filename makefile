@@ -30,7 +30,14 @@ deploy:
 
 # prod #########################################
 
-build: clean-dist install
+#  Setting "TERM" is required for lighthouse-ci github action because it relies on 'clear'
+#  From stackoverflow: https://stackoverflow.com/questions/19425727/how-to-remove-term-environment-variable-not-set
+#  Running a program that demands a terminal via cron can lead to problems; it won't have a terminal when it is run by cron.
+build:
+	@export TERM=${TERM:-dumb}
+	@clear
+	@make clean-dist
+	@make install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
