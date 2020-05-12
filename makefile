@@ -43,6 +43,14 @@ start: install
 	$(call log, "PROD server is running")
 	@pm2 logs
 
+# Do not merge:
+start-without-logs: install
+	@make stop
+	$(call log, "starting PROD server...")
+	@echo '' # just a spacer
+	@NODE_ENV=production pm2 start dist/frontend.server.js
+	@echo '' # just a spacer
+
 stop:
 	@pm2 kill
 
@@ -52,7 +60,7 @@ monitor:
 logs:
 	@pm2 logs
 
-run: build stop start
+run: build stop start-without-logs
 
 # dev #########################################
 
