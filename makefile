@@ -35,12 +35,11 @@ build: clear clean-dist install
 	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
 start:
-	@NODE_ENV=production
-	@make install
+	@NODE_ENV=production make install
 	@make stop
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	@pm2 start dist/frontend.server.js
+	@NODE_ENV=production pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
