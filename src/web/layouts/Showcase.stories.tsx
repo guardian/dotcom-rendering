@@ -59,7 +59,7 @@ export const ArticleStory = () => {
 ArticleStory.story = {
     name: 'Article',
     parameters: {
-        chromatic: { diffThreshold: 0.3 },
+        chromatic: { diffThreshold: 0.5 },
     },
 };
 
@@ -76,7 +76,7 @@ export const CommentStory = () => {
 CommentStory.story = {
     name: 'Comment',
     parameters: {
-        chromatic: { diffThreshold: 0.3 },
+        chromatic: { diffThreshold: 0.5 },
     },
 };
 
