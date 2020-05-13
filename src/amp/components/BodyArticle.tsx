@@ -98,6 +98,7 @@ export const Body: React.FC<{
             adInfo={adInfo}
         />
     );
+
     return (
         <InnerContainer className={body(pillar, designType)}>
             <TopMeta
@@ -109,7 +110,7 @@ export const Body: React.FC<{
 
             {elements}
 
-            <Epic />
+            <Epic pageId={data.pageId} />
 
             <SubMeta
                 sections={data.subMetaSectionLinks}

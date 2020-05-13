@@ -33,7 +33,7 @@ const epicParagraph = css`
     display: block;
     margin-block-start: 0.5rem;
     margin-block-end: 0.5rem;
-    
+
     ${body.medium()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
@@ -107,12 +107,15 @@ const acceptedPaymentMethodsWrapper = css`
     display: block;
 `;
 
-export const Epic: React.FC<{}> = ({}) => {
+export const Epic: React.FC<{
+    pageId: string
+}> = ({pageId}) => {
+    const testArticleId = 'science/2015/sep/28/nasa-scientists-find-evidence-flowing-water-mars'
     const epicUrl = process.env.NODE_ENV === 'production' ?
         'https://contributions.guardianapis.com/amp/epic' :
         'https://contributions.code.dev-guardianapis.com/amp/epic';
 
-    return (
+    return (pageId === testArticleId) ? (
         <amp-list
             layout="fixed-height"
             // This means that if the user refreshes at the end of the article while the epic is in view then the epic
@@ -161,5 +164,5 @@ export const Epic: React.FC<{}> = ({}) => {
                 </div>
             </MoustacheTemplate>
         </amp-list>
-    );
+    ) : null;
 };
