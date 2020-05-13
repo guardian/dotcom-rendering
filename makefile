@@ -60,7 +60,7 @@ monitor:
 logs:
 	@pm2 logs
 
-run: build stop start
+run: build stop start-without-logs
 
 # dev #########################################
 
