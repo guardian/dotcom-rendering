@@ -420,34 +420,36 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
 
             const atom = h(InteractiveAtom, { html, styles, js, format });
             const fenced = `
-            <html>
-                <head>
-                    <meta charset="utf-8">
-                    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                    <script>
-                        var fonts = [].slice.apply(window.parent.document.styleSheets)
-                            .map(function (sheet) { return sheet.ownerNode.textContent; })
-                            .shift();
-                        var css = document.createElement('style');
-                        css.textContent = fonts;
-                        document.head.appendChild(css);
-                    </script>
-                    <style>
-                        ${styles}
-                    </style>
-                </head>
-                <body>
-                    ${html}
-                    <script>
-                        ${js}
-                        function resize() {
-                            window.frameElement.height = document.body.offsetHeight;
-                        }
-                        window.addEventListener('resize', resize);
-                        resize();
-                    </script>
-                </body>
-            </html>`
+                <html>
+                    <head>
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                        <script>
+                            const fonts = [].slice.apply(window.parent.document.styleSheets)
+                                .filter(sheet => sheet.ownerNode.attributes?.getNamedItem('data-emotion-css')?.value?.includes('PageStyles'))
+                                .map(sheet => sheet.ownerNode.textContent)
+                                .join(' ')
+                            var css = document.createElement('style');
+                            css.textContent = fonts;
+                            document.head.appendChild(css);
+                        </script>
+                        <style>
+                            ${styles}
+                        </style>
+                    </head>
+                    <body>
+                        ${html}
+                        <script>
+                            ${js}
+                            function resize() {
+                                window.frameElement.height = document.body.offsetHeight;
+                            }
+                            window.addEventListener('resize', resize);
+                            resize();
+                        </script>
+                    </body>
+                </html>
+            `;
 
             if (format.design !== Design.Interactive) {
                 return h('iframe', { srcdoc: fenced });
