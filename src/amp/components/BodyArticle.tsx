@@ -100,6 +100,9 @@ export const Body: React.FC<{
         />
     );
 
+    const epicTestPageId = "science/2015/sep/28/nasa-scientists-find-evidence-flowing-water-mars"
+    const epic = (data.pageId === epicTestPageId) ? <Epic /> : null
+
     return (
         <InnerContainer className={body(pillar, designType)}>
             <TopMeta
@@ -111,7 +114,7 @@ export const Body: React.FC<{
 
             {elements}
 
-            <Epic pageId={data.pageId} />
+            {epic}
 
             <SubMeta
                 sections={data.subMetaSectionLinks}

@@ -108,15 +108,12 @@ const acceptedPaymentMethodsWrapper = css`
     display: block;
 `;
 
-export const Epic: React.FC<{
-    pageId: string
-}> = ({pageId}) => {
-    const testArticleId = 'science/2015/sep/28/nasa-scientists-find-evidence-flowing-water-mars'
+export const Epic: React.FC<{}> = ({}) => {
     const epicUrl = process.env.NODE_ENV === 'production' ?
         'https://contributions.guardianapis.com/amp/epic' :
         'https://contributions.code.dev-guardianapis.com/amp/epic';
 
-    return (pageId === testArticleId) ? (
+    return (
         <amp-list
             layout="fixed-height"
             // This means that if the user refreshes at the end of the article while the epic is in view then the epic
@@ -165,5 +162,5 @@ export const Epic: React.FC<{
                 </div>
             </MoustacheTemplate>
         </amp-list>
-    ) : null;
+    )
 };
