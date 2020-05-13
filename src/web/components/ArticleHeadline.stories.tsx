@@ -328,6 +328,47 @@ export const Recipe = () => (
 );
 Recipe.story = { name: 'Recipe' };
 
+export const Immersive = () => (
+    <Section>
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is the headline you see when display type is Immersive"
+                    display="immersive"
+                    designType="Article"
+                    pillar="news"
+                    tags={[]}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+Immersive.story = { name: 'Immersive' };
+
+export const ImmersiveNoMainMedia = () => (
+    <Section>
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is the headline you see when display type is Immersive, but with no main media"
+                    display="immersive"
+                    designType="Article"
+                    pillar="news"
+                    tags={[]}
+                    noMainMedia={true}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+ImmersiveNoMainMedia.story = { name: 'Immersive (with no main media)' };
+
 export const GuardianView = () => (
     <Section>
         <Flex>
