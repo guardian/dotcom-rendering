@@ -161,6 +161,26 @@ export const ArticleHeadline = ({
     tags,
     byline,
 }: Props) => {
+    const isPrintShop = tags.find(
+        tag => tag.id === 'artanddesign/series/guardian-print-shop',
+    );
+
+    if (isPrintShop) {
+        return (
+            // Immersive headlines are larger than normal
+            <h1
+                className={cx(
+                    jumboFont,
+                    maxWidth,
+                    immersiveStyles,
+                    displayBlock,
+                )}
+            >
+                {curly(headlineString)}
+            </h1>
+        );
+    }
+
     if (display === 'immersive') {
         return (
             // Immersive headlines are large and inverted and have their black background

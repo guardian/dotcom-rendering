@@ -4,12 +4,14 @@ import { css } from 'emotion';
 import {
     neutral,
     brandBackground,
+    brandAltBackground,
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -17,6 +19,9 @@ import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
+import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
+import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -29,9 +34,11 @@ import { Flex } from '@root/src/web/components/Flex';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ImmersiveHeadline } from '@root/src/web/components/ImmersiveHeadline';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
+import { getAgeWarning } from '@root/src/lib/age-warning';
 
 import {
     decideLineCount,
@@ -73,7 +80,9 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'caption    border      standfirst  right-column'
+                        'caption    border      title       right-column'
+                        '.          border      headline    right-column'
+                        '.          border      standfirst  right-column'
                         '.          border      byline      right-column'
                         'lines      border      body        right-column'
                         'meta       border      body        right-column'
@@ -90,6 +99,8 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        '.          border      title       right-column'
+                        '.          border      headline    right-column'
                         '.          border      standfirst  right-column'
                         '.          border      byline      right-column'
                         'lines      border      body        right-column'
@@ -105,6 +116,8 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        'title       right-column'
+                        'headline    right-column'
                         'standfirst  right-column'
                         'byline      right-column'
                         'caption     right-column'
@@ -117,6 +130,8 @@ const ImmersiveGrid = ({
                     grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'title'
+                        'headline'
                         'standfirst'
                         'byline'
                         'caption'
@@ -145,6 +160,40 @@ const stretchLines = css`
     ${until.mobileLandscape} {
         margin-left: -10px;
         margin-right: -10px;
+    }
+`;
+
+const starWrapper = css`
+    margin-bottom: 18px;
+    margin-top: 6px;
+    background-color: ${brandAltBackground.primary};
+    display: inline-block;
+
+    ${until.phablet} {
+        padding-left: 20px;
+        margin-left: -20px;
+    }
+    ${until.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
+    }
+
+    padding-left: 10px;
+    margin-left: -10px;
+`;
+
+const ageWarningMargins = css`
+    margin-top: 12px;
+    margin-left: -10px;
+    margin-bottom: 6px;
+
+    ${from.tablet} {
+        margin-left: -20px;
+    }
+
+    ${from.leftCol} {
+        margin-left: -10px;
+        margin-top: 0;
     }
 `;
 
@@ -201,6 +250,12 @@ export const ImmersiveLayout = ({
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
 
+    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
+
+    const isPrintShop = CAPI.tags.find(
+        tag => tag.id === 'artanddesign/series/guardian-print-shop',
+    );
+
     return (
         <>
             <div
@@ -250,19 +305,21 @@ export const ImmersiveLayout = ({
                 )}
             </div>
 
-            <ImmersiveHeadline
-                display={display}
-                designType={designType}
-                tags={CAPI.tags}
-                author={CAPI.author}
-                headline={CAPI.headline}
-                sectionLabel={CAPI.sectionLabel}
-                sectionUrl={CAPI.sectionUrl}
-                guardianBaseURL={CAPI.guardianBaseURL}
-                pillar={CAPI.pillar}
-                captionText={captionText}
-                badge={CAPI.badge}
-            />
+            {!isPrintShop && (
+                <ImmersiveHeadline
+                    display={display}
+                    designType={designType}
+                    tags={CAPI.tags}
+                    author={CAPI.author}
+                    headline={CAPI.headline}
+                    sectionLabel={CAPI.sectionLabel}
+                    sectionUrl={CAPI.sectionUrl}
+                    guardianBaseURL={CAPI.guardianBaseURL}
+                    pillar={CAPI.pillar}
+                    captionText={captionText}
+                    badge={CAPI.badge}
+                />
+            )}
 
             <Section showTopBorder={false} showSideBorders={false}>
                 <ImmersiveGrid>
@@ -281,6 +338,70 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="border">
                         <Border />
+                    </GridItem>
+                    <GridItem area="title">
+                        <>
+                            {isPrintShop && (
+                                <div
+                                    className={css`
+                                        margin-top: -3px;
+                                        margin-left: -10px;
+                                    `}
+                                >
+                                    <ArticleTitle
+                                        display={display}
+                                        tags={CAPI.tags}
+                                        sectionLabel={CAPI.sectionLabel}
+                                        sectionUrl={CAPI.sectionUrl}
+                                        guardianBaseURL={CAPI.guardianBaseURL}
+                                        pillar={pillar}
+                                        badge={CAPI.badge}
+                                    />
+                                </div>
+                            )}
+                        </>
+                    </GridItem>
+                    <GridItem area="headline">
+                        <>
+                            {isPrintShop && (
+                                <div className={maxWidth}>
+                                    <ArticleHeadlinePadding
+                                        designType={designType}
+                                    >
+                                        {age && (
+                                            <div className={ageWarningMargins}>
+                                                <AgeWarning age={age} />
+                                            </div>
+                                        )}
+                                        <ArticleHeadline
+                                            display={display}
+                                            headlineString={CAPI.headline}
+                                            designType={designType}
+                                            pillar={pillar}
+                                            tags={CAPI.tags}
+                                            byline={CAPI.author.byline}
+                                        />
+                                        {age && (
+                                            <AgeWarning
+                                                age={age}
+                                                isScreenReader={true}
+                                            />
+                                        )}
+                                    </ArticleHeadlinePadding>
+                                </div>
+                            )}
+                            {isPrintShop &&
+                            (CAPI.starRating || CAPI.starRating === 0) ? (
+                                <div className={starWrapper}>
+                                    <StarRating
+                                        rating={CAPI.starRating}
+                                        size="large"
+                                    />
+                                </div>
+                            ) : (
+                                <></>
+                            )}
+                        </>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -364,13 +485,21 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <div
-                                className={css`
-                                    margin-top: ${space[4]}px;
-                                `}
-                            >
-                                <AdSlot asps={namedAdSlotParameters('right')} />
-                            </div>
+                            <>
+                                {!isPrintShop && (
+                                    <div
+                                        className={css`
+                                            margin-top: ${space[4]}px;
+                                        `}
+                                    >
+                                        <AdSlot
+                                            asps={namedAdSlotParameters(
+                                                'right',
+                                            )}
+                                        />
+                                    </div>
+                                )}
+                            </>
                         </RightColumn>
                     </GridItem>
                 </ImmersiveGrid>
