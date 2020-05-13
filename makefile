@@ -46,9 +46,9 @@ start: install
 # Do not merge:
 start-without-logs: install
 	@make stop
-	$(call log, "starting PROD server...")
+	$(call log, "starting PROD server without logs...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/frontend.server.js
+	@NODE_ENV=production pm2 start dist/frontend.server.js -o /dev/null -e /dev/null
 	@echo '' # just a spacer
 
 stop:
