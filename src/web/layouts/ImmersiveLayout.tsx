@@ -383,11 +383,13 @@ export const ImmersiveLayout = ({
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section sectionId="onwards-upper" />
-
             {!isPaidContent && (
                 <>
-                    {showOnwardsLower && <Section sectionId="onwards-lower" />}
+                    {/* Onwards (when signed IN) */}
+                    <Section sectionId="onwards-upper-whensignedin" />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedin" />
+                    )}
 
                     {showComments && (
                         <Section sectionId="comments">
@@ -400,6 +402,15 @@ export const ImmersiveLayout = ({
                                 </RightColumn>
                             </Flex>
                         </Section>
+                    )}
+
+                    {/* Onwards (when signed OUT) */}
+                    <Section
+                        sectionId="onwards-upper-whensignedout"
+                        showTopBorder={false}
+                    />
+                    {showOnwardsLower && (
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />
