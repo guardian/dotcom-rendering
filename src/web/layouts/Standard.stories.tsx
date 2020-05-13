@@ -56,7 +56,12 @@ export const ArticleStory = () => {
     const ServerCAPI = convertToStandard(Article);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-ArticleStory.story = { name: 'Article' };
+ArticleStory.story = {
+    name: 'Article',
+    parameters: {
+        chromatic: { diffThreshold: 0.3 },
+    },
+};
 
 export const ReviewStory = () => {
     const ServerCAPI = convertToStandard(Review);
@@ -68,7 +73,12 @@ export const CommentStory = () => {
     const ServerCAPI = convertToStandard(Comment);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-CommentStory.story = { name: 'Comment' };
+CommentStory.story = {
+    name: 'Comment',
+    parameters: {
+        chromatic: { diffThreshold: 0.3 },
+    },
+};
 
 export const AdvertisementFeatureStory = () => {
     const ServerCAPI = convertToStandard(AdvertisementFeature);
