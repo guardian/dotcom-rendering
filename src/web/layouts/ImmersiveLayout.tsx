@@ -4,14 +4,12 @@ import { css } from 'emotion';
 import {
     neutral,
     brandBackground,
-    brandAltBackground,
     brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -34,11 +32,9 @@ import { Flex } from '@root/src/web/components/Flex';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ImmersiveHeadline } from '@root/src/web/components/ImmersiveHeadline';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-import { getAgeWarning } from '@root/src/lib/age-warning';
 
 import {
     decideLineCount,
@@ -163,40 +159,6 @@ const stretchLines = css`
     }
 `;
 
-const starWrapper = css`
-    margin-bottom: 18px;
-    margin-top: 6px;
-    background-color: ${brandAltBackground.primary};
-    display: inline-block;
-
-    ${until.phablet} {
-        padding-left: 20px;
-        margin-left: -20px;
-    }
-    ${until.leftCol} {
-        padding-left: 0px;
-        margin-left: -0px;
-    }
-
-    padding-left: 10px;
-    margin-left: -10px;
-`;
-
-const ageWarningMargins = css`
-    margin-top: 12px;
-    margin-left: -10px;
-    margin-bottom: 6px;
-
-    ${from.tablet} {
-        margin-left: -20px;
-    }
-
-    ${from.leftCol} {
-        margin-left: -10px;
-        margin-top: 0;
-    }
-`;
-
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -249,8 +211,6 @@ export const ImmersiveLayout = ({
 
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
-
-    const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     const isPrintShop = CAPI.tags.find(
         tag => tag.id === 'artanddesign/series/guardian-print-shop',
@@ -368,11 +328,6 @@ export const ImmersiveLayout = ({
                                     <ArticleHeadlinePadding
                                         designType={designType}
                                     >
-                                        {age && (
-                                            <div className={ageWarningMargins}>
-                                                <AgeWarning age={age} />
-                                            </div>
-                                        )}
                                         <ArticleHeadline
                                             display={display}
                                             headlineString={CAPI.headline}
@@ -381,25 +336,8 @@ export const ImmersiveLayout = ({
                                             tags={CAPI.tags}
                                             byline={CAPI.author.byline}
                                         />
-                                        {age && (
-                                            <AgeWarning
-                                                age={age}
-                                                isScreenReader={true}
-                                            />
-                                        )}
                                     </ArticleHeadlinePadding>
                                 </div>
-                            )}
-                            {isPrintShop &&
-                            (CAPI.starRating || CAPI.starRating === 0) ? (
-                                <div className={starWrapper}>
-                                    <StarRating
-                                        rating={CAPI.starRating}
-                                        size="large"
-                                    />
-                                </div>
-                            ) : (
-                                <></>
                             )}
                         </>
                     </GridItem>
