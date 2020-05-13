@@ -212,10 +212,6 @@ export const ImmersiveLayout = ({
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
 
-    const isPrintShop = CAPI.tags.find(
-        tag => tag.id === 'artanddesign/series/guardian-print-shop',
-    );
-
     return (
         <>
             <div
@@ -265,7 +261,7 @@ export const ImmersiveLayout = ({
                 )}
             </div>
 
-            {!isPrintShop && (
+            {mainMedia && (
                 <ImmersiveHeadline
                     display={display}
                     designType={designType}
@@ -301,11 +297,15 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="title">
                         <>
-                            {isPrintShop && (
+                            {!mainMedia && (
                                 <div
                                     className={css`
                                         margin-top: -3px;
                                         margin-left: -10px;
+
+                                        ${until.tablet} {
+                                            margin-left: -20px;
+                                        }
                                     `}
                                 >
                                     <ArticleTitle
@@ -323,7 +323,7 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="headline">
                         <>
-                            {isPrintShop && (
+                            {!mainMedia && (
                                 <div className={maxWidth}>
                                     <ArticleHeadlinePadding
                                         designType={designType}
@@ -335,6 +335,7 @@ export const ImmersiveLayout = ({
                                             pillar={pillar}
                                             tags={CAPI.tags}
                                             byline={CAPI.author.byline}
+                                            noMainMedia={true}
                                         />
                                     </ArticleHeadlinePadding>
                                 </div>
@@ -424,7 +425,7 @@ export const ImmersiveLayout = ({
                     <GridItem area="right-column">
                         <RightColumn>
                             <>
-                                {!isPrintShop && (
+                                {mainMedia && (
                                     <div
                                         className={css`
                                             margin-top: ${space[4]}px;

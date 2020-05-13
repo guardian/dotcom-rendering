@@ -17,6 +17,8 @@ type Props = {
     byline?: string;
     tags: TagType[];
     isShowcase?: boolean; // Used for Interviews to change headline position
+    noMainMedia?: boolean; // Used for Immersives where the headline styles
+    // change when there is no main media
 };
 
 const curly = (x: any) => x;
@@ -160,14 +162,11 @@ export const ArticleHeadline = ({
     pillar,
     tags,
     byline,
+    noMainMedia,
 }: Props) => {
-    const isPrintShop = tags.find(
-        tag => tag.id === 'artanddesign/series/guardian-print-shop',
-    );
-
-    if (isPrintShop) {
+    if (display === 'immersive' && noMainMedia) {
         return (
-            // Immersive headlines are larger than normal
+            // Immersive headlines have two versions, with main media, and (this one) without
             <h1
                 className={cx(
                     jumboFont,
@@ -183,8 +182,8 @@ export const ArticleHeadline = ({
 
     if (display === 'immersive') {
         return (
-            // Immersive headlines are large and inverted and have their black background
-            // extended to the right
+            // Immersive headlines with main media present, are large and inverted with
+            // a black background
             <h1 className={cx(invertedWrapper, blackBackground)}>
                 <span
                     className={cx(
