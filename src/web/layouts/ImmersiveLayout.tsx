@@ -207,7 +207,7 @@ export const ImmersiveLayout = ({
                 className={css`
                     display: flex;
                     flex-direction: column;
-                    min-height: 100vh;
+                    min-height: ${mainMedia && '100vh'};
                 `}
             >
                 <Section
@@ -226,26 +226,28 @@ export const ImmersiveLayout = ({
                         edition={CAPI.editionId}
                     />
                 </Section>
-                <div
-                    className={css`
-                        flex: 1;
-                        min-height: 31.25rem;
-                        position: relative;
-                    `}
-                >
-                    <MainMedia
-                        display={display}
-                        elements={CAPI.mainMediaElements}
-                        pillar={pillar}
-                        adTargeting={adTargeting}
-                        starRating={
-                            CAPI.designType === 'Review' && CAPI.starRating
-                                ? CAPI.starRating
-                                : undefined
-                        }
-                        hideCaption={true}
-                    />
-                </div>
+                {mainMedia && (
+                    <div
+                        className={css`
+                            flex: 1;
+                            min-height: 31.25rem;
+                            position: relative;
+                        `}
+                    >
+                        <MainMedia
+                            display={display}
+                            elements={CAPI.mainMediaElements}
+                            pillar={pillar}
+                            adTargeting={adTargeting}
+                            starRating={
+                                CAPI.designType === 'Review' && CAPI.starRating
+                                    ? CAPI.starRating
+                                    : undefined
+                            }
+                            hideCaption={true}
+                        />
+                    </div>
+                )}
             </div>
 
             <ImmersiveHeadline
