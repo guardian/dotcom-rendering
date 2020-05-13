@@ -19,6 +19,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         text-transform: uppercase;
         box-sizing: border-box;
         margin-right: 4px;
+        pointer-events: none;
     `;
 
     switch (designType) {
