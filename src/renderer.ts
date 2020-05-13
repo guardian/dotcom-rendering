@@ -419,9 +419,38 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
             const { html, css: styles, js } = element;
 
             const atom = h(InteractiveAtom, { html, styles, js, format });
+            const fenced = `
+            <html>
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                    <script>
+                        var fonts = [].slice.apply(window.parent.document.styleSheets)
+                            .map(function (sheet) { return sheet.ownerNode.textContent; })
+                            .shift();
+                        var css = document.createElement('style');
+                        css.textContent = fonts;
+                        document.head.appendChild(css);
+                    </script>
+                    <style>
+                        ${styles}
+                    </style>
+                </head>
+                <body>
+                    ${html}
+                    <script>
+                        ${js}
+                        function resize() {
+                            window.frameElement.height = document.body.offsetHeight;
+                        }
+                        window.addEventListener('resize', resize);
+                        resize();
+                    </script>
+                </body>
+            </html>`
 
             if (format.design !== Design.Interactive) {
-                return h('iframe', null, atom);
+                return h('iframe', { srcdoc: fenced });
             } else {
                 return atom;
             }
