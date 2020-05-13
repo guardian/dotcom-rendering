@@ -182,18 +182,6 @@ export const ArticleHeadline = ({
     }
 
     switch (designType) {
-        case 'Immersive':
-        case 'Article':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Live':
-        case 'SpecialReport':
-        case 'MatchReport':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
-
         case 'Review':
         case 'Recipe':
         case 'Feature':
@@ -260,5 +248,17 @@ export const ArticleHeadline = ({
                     )}
                 </div>
             );
+        case 'Immersive':
+        case 'Article':
+        case 'Media':
+        case 'PhotoEssay':
+        case 'Live':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        default:
+            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
     }
 };
