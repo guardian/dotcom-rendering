@@ -19,7 +19,6 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         text-transform: uppercase;
         box-sizing: border-box;
         margin-right: 4px;
-        pointer-events: none;
     `;
 
     switch (designType) {
@@ -59,6 +58,7 @@ const innerStyles = (designType: DesignType) => {
 
         display: inline-block;
         vertical-align: text-top;
+        pointer-events: none;
     `;
 
     switch (designType) {
