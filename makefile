@@ -48,7 +48,7 @@ start-without-logs: install
 	@make stop
 	$(call log, "starting PROD server without logs...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/frontend.server.js -o temporary-public-storage -e temporary-public-storage
+	@NODE_ENV=production pm2 start dist/frontend.server.js -o ~/out.log -e ~/err.log
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
