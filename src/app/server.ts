@@ -165,9 +165,9 @@ if (process.env.NODE_ENV === 'production') {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 
-    setInterval(() => {
-        recordBaselineCloudWatchMetrics();
-    }, 10 * 1000);
+    // setInterval(() => {
+    //     recordBaselineCloudWatchMetrics();
+    // }, 10 * 1000);
 
     app.listen(port);
     // eslint-disable-next-line no-console
