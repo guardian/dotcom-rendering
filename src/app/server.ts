@@ -54,14 +54,14 @@ const buildUrlFromPath = (req: Request) => {
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     logger.info('dotcom-rendering is GO.');
-    getGuardianConfiguration('prod')
-        .then((config: GuardianConfiguration) => {
-            log(`loaded ${config.size()} configuration parameters`);
-        })
-        .catch((err: any) => {
-            warn('Failed to get configuration. Bad AWS credentials?');
-            warn(err);
-        });
+    // getGuardianConfiguration('prod')
+    //     .then((config: GuardianConfiguration) => {
+    //         log(`loaded ${config.size()} configuration parameters`);
+    //     })
+    //     .catch((err: any) => {
+    //         warn('Failed to get configuration. Bad AWS credentials?');
+    //         warn(err);
+    //     });
 
     const app = express();
 
