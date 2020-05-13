@@ -312,6 +312,7 @@ type CAPIBrowserType = {
         discussionApiClientHeader: string;
     };
     richLinks: RichLinkBlockElementBrowser[];
+    referencesRichLink: ReferenceRichLinkBlockElementBrowser[];
     editionId: Edition;
     contentType: string;
     sectionName?: string;

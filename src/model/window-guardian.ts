@@ -76,6 +76,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             ) {
                 acc.push({
                     url: element.url,
+                    // It is important to pass down the index of rich links as well as the component itself
                     richLinkIndex: index,
                 } as RichLinkBlockElementBrowser);
             }
@@ -83,12 +84,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         [] as RichLinkBlockElementBrowser[],
     );
+
     // references with the key `rich-link` work similar to RichLinkBlockElement
-    // however thier structure is different so we filter them out sperartly
-    const referencesRichLink: RichLinkBlockElementBrowser[] = CAPI.config
-        .references
+    // however we do care about thier index, as we will use spaceFinder to determin thier location
+    const referencesRichLink: ReferenceRichLinkBlockElementBrowser[] = CAPI
+        .config.references
         ? CAPI.config.references.reduce(
-              (acc, reference, index) => {
+              (acc, reference) => {
                   if (
                       Object.prototype.hasOwnProperty.call(
                           reference,
@@ -97,21 +99,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
                   ) {
                       acc.push({
                           url: reference['rich-link'],
-                          richLinkIndex: index,
-                      } as RichLinkBlockElementBrowser);
+                      } as ReferenceRichLinkBlockElementBrowser);
                   }
                   return acc;
               },
-              [] as RichLinkBlockElementBrowser[],
+              [] as ReferenceRichLinkBlockElementBrowser[],
           )
         : [];
-
-    // It is important to pass down the index of rich links as well as the component itself
-    // We assume that richLinks should start ealier in the index
-    const richLinksWithIndex: RichLinkBlockElementBrowser[] = [
-        ...richLinks,
-        ...referencesRichLink,
-    ];
 
     return {
         designType: CAPI.designType,
@@ -146,7 +140,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionD2Uid: CAPI.config.discussionD2Uid,
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
         },
-        richLinks: richLinksWithIndex,
+        richLinks,
+        referencesRichLink,
         editionId: CAPI.editionId,
         contentType: CAPI.contentType,
         sectionName: CAPI.sectionName,

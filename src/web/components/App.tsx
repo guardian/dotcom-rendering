@@ -201,6 +201,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
+            {/* TODO: CAPI.referencesRichLink requires spaceFinder */}
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
