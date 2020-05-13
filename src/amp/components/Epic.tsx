@@ -2,6 +2,12 @@ import React from 'react';
 import { palette } from '@guardian/src-foundations';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import {css} from "emotion";
+import {
+    MoustacheSection,
+    MoustacheTemplate,
+    moustacheVariable,
+    MoustacheVariable
+} from "@root/src/amp/components/moustache";
 
 const epic = css`
     border-top: 0.0625rem solid ${palette.brandYellow.main};
@@ -9,7 +15,7 @@ const epic = css`
     clear: left;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-    padding: 0.25rem 0.3125rem 0.75rem;
+    padding: 0.25rem 0.3125rem 1rem;
 `;
 const epicHeader = css `
     font-size: 1.25rem;
@@ -25,9 +31,9 @@ const epicHeader = css `
 const epicParagraph = css`
     font-size: 1.1rem;
     display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-bottom: 0.5rem;
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+    
     ${body.medium()};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
@@ -38,21 +44,24 @@ const epicParagraph = css`
     &::selection {
         background-color: ${palette.brandYellow.main};
     }
+    &:last-of-type {
+      display: inline;
+    }
 `;
 const highlightedText = css`
     font-size: 1.1rem;
     background-color: ${palette.brandYellow.main};
     padding: 0.125rem;
-    font-weight: bold;
     margin-left: 5px;
     color: ${palette.neutral[7]};
-    ${body.medium()};
+    ${headline.xxxsmall({fontWeight: "bold"})};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
     -webkit-font-smoothing: antialiased;
     vertical-align: 0%;
     line-height: 1.5;
+    display: inline;
 `;
 const supportButton = css`
     background-color: ${palette.brandYellow.main};
@@ -98,76 +107,59 @@ const acceptedPaymentMethodsWrapper = css`
     display: block;
 `;
 
-const supportUrl = "https://support.theguardian.com/uk/contribute"
-
 export const Epic: React.FC<{}> = ({}) => {
+    const epicUrl = process.env.NODE_ENV === 'production' ?
+        'https://contributions.guardianapis.com/amp/epic' :
+        'https://contributions.code.dev-guardianapis.com/amp/epic';
+
     return (
         <amp-list
-            layout="responsive"
-            height="0"
-            width="0"
-            src="https://contributions.guardianapis.com/amp/epic"
+            layout="fixed-height"
+            // This means that if the user refreshes at the end of the article while the epic is in view then the epic
+            // will not display. This is such an edge case that we can live with it, and in general it will fill the
+            // space.
+            height="1px"
+            src={epicUrl}
             credentials="include"
         >
-            <div className={epic}>
-                <h2 className={epicHeader}>News is under threat …</h2>
-                <p className={epicParagraph}>
-                    … just when we need it the most. Millions of readers around the world are flocking to the
-                    Guardian in search of honest, authoritative, fact-based reporting that can help them
-                    understand the biggest challenge we have faced in our lifetime. But at this crucial moment,
-                    news organisations are facing a cruel financial double blow: with fewer people able to leave
-                    their homes, and fewer news vendors in operation, we’re seeing a reduction in newspaper
-                    sales across the UK. Advertising revenue continues to fall steeply meanwhile as businesses
-                    feel the pinch. We need you to help fill the gap.
-                </p>
-                <p className={epicParagraph}>
-                    We believe every one of us deserves equal access to quality news and measured explanation.
-                    So, unlike many others, we made a different choice: to keep Guardian journalism open for all,
-                    regardless of where they live or what they can afford to pay. This would not be possible without
-                    financial contributions from our readers, who now support our work from 180 countries around
-                    the world.
-                </p>
-                <p className={epicParagraph}>
-                    We have upheld our editorial independence in the face of the disintegration of traditional
-                    media – with social platforms giving rise to misinformation, the seemingly unstoppable rise of
-                    big tech and independent voices being squashed by commercial ownership. The Guardian’s
-                    independence means we can set our own agenda and voice our own opinions. Our journalism is free
-                    from commercial and political bias – never influenced by billionaire owners or shareholders.
-                    This makes us different. It means we can challenge the powerful without fear and give a voice to
-                    those less heard.
-                </p>
-                <p className={epicParagraph}>
-                    Reader financial support has meant we can keep investigating, disentangling and interrogating.
-                    It has protected our independence, which has never been so critical. We are so grateful.
-                </p>
-                <p className={epicParagraph}>
-                    We need your support so we can keep delivering quality journalism that’s open and independent.
-                    And that is here for the long term. Every reader contribution, however big or small, is so valuable.
-                    <span className={highlightedText}>Support the Guardian from as little as £1 – and it only takes a minute. Thank you.</span>
-                </p>
-                <a href={supportUrl} className={supportButton}>
-                    Support the Guardian
-                    <svg
-                        className={arrow}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 17.89"
-                        preserveAspectRatio="xMinYMid"
-                        aria-hidden="true"
-                        focusable="false"
-                    >
-                        <path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-                    </svg>
-                </a>
-                <div className={acceptedPaymentMethodsWrapper}>
-                    <amp-img
-                        layout="fixed"
-                        height="25px"
-                        width="176px"
-                        src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-                        alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-                    />
+            <MoustacheTemplate>
+                <div className={epic}>
+                    <h2 className={epicHeader}>
+                        <MoustacheVariable name="heading" />
+                    </h2>
+                    <MoustacheSection name="paragraphs">
+                        <p className={epicParagraph}>
+                            <MoustacheVariable name="." />
+                        </p>
+                    </MoustacheSection>
+                    <span className={highlightedText}><MoustacheVariable name="highlightedText" /></span>
+                    <br />
+                    <MoustacheSection name="cta">
+                        <a href={moustacheVariable('baseUrl')} className={supportButton}>
+                            <MoustacheVariable name="text" />
+                            <svg
+                                className={arrow}
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 17.89"
+                                preserveAspectRatio="xMinYMid"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+                            </svg>
+                        </a>
+                        <div className={acceptedPaymentMethodsWrapper}>
+                            <amp-img
+                                layout="fixed"
+                                height="25px"
+                                width="176px"
+                                src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+                                alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+                            />
+                        </div>
+                    </MoustacheSection>
                 </div>
-            </div>
+            </MoustacheTemplate>
         </amp-list>
     );
-}
+};
