@@ -86,7 +86,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     );
 
     // references with the key `rich-link` work similar to RichLinkBlockElement
-    // however we do care about thier index, as we will use spaceFinder to determin thier location
+    // however we do care about their index, as we will use spaceFinder to determine their location
     const referencesRichLink: ReferenceRichLinkBlockElementBrowser[] = CAPI
         .config.references
         ? CAPI.config.references.reduce(
