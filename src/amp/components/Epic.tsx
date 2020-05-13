@@ -1,13 +1,14 @@
 import React from 'react';
-import { palette } from '@guardian/src-foundations';
-import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import {css} from "emotion";
+import { css } from 'emotion';
+
 import {
     MoustacheSection,
+    MoustacheVariable,
     MoustacheTemplate,
     moustacheVariable,
-    MoustacheVariable
-} from "@root/src/amp/components/moustache";
+} from '@root/src/amp/components/moustache';
+import { palette } from '@guardian/src-foundations';
+import { headline, body, textSans } from '@guardian/src-foundations/typography';
 
 const epic = css`
     border-top: 0.0625rem solid ${palette.brandYellow.main};

@@ -1,7 +1,8 @@
 import React from 'react';
+import { css } from 'emotion';
+
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
-import { css } from 'emotion';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
@@ -13,7 +14,7 @@ import { WithAds } from '@root/src/amp/components/WithAds';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import {Epic} from "@root/src/amp/components/Epic";
+import { Epic } from "@root/src/amp/components/Epic";
 
 const bulletStyle = (pillar: Pillar) => css`
     .bullet {
