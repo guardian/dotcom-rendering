@@ -4,6 +4,7 @@ import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
+import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CMP } from '@frontend/web/components/CMP';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -54,16 +55,6 @@ const OnwardsLower = React.lazy(() => {
     ).then(module => {
         end();
         return { default: module.OnwardsLower };
-    });
-});
-const ReaderRevenueLinks = React.lazy(() => {
-    const { start, end } = initPerf('ReaderRevenueLinks');
-    start();
-    return import(
-        /* webpackChunkName: "ReaderRevenueLinks" */ '@frontend/web/components/ReaderRevenueLinks'
-    ).then(module => {
-        end();
-        return { default: module.ReaderRevenueLinks };
     });
 });
 
@@ -399,14 +390,12 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Portal root="reader-revenue-links-footer">
                 <Lazy margin={300}>
-                    <Suspense fallback={<></>}>
-                        <ReaderRevenueLinks
-                            urls={CAPI.nav.readerRevenueLinks.header}
-                            edition={CAPI.editionId}
-                            dataLinkNamePrefix="nav2 : "
-                            inHeader={false}
-                        />
-                    </Suspense>
+                    <ReaderRevenueLinks
+                        urls={CAPI.nav.readerRevenueLinks.header}
+                        edition={CAPI.editionId}
+                        dataLinkNamePrefix="nav2 : "
+                        inHeader={false}
+                    />
                 </Lazy>
             </Portal>
             {CAPI.config.cmpUi && (
