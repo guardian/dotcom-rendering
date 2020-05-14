@@ -48,7 +48,8 @@ start-without-logs: install
 	@make stop
 	$(call log, "starting PROD server without logs...")
 	@echo '' # just a spacer
-	@NODE_ENV=production node dist/frontend.server.js
+	@chown -R $(id -u):$(id -g) /
+	@NODE_ENV=production pm2 start dist/frontend.server.js -o /dev/null -e /dev/null
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
