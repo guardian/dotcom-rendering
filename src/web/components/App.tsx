@@ -206,14 +206,12 @@ export const App = ({ CAPI, NAV }: Props) => {
         // Note: Both require a 'root' element that needs to be server rendered.
         <React.StrictMode>
             <Portal root="reader-revenue-links-header">
-                <Suspense fallback={<></>}>
-                    <ReaderRevenueLinks
-                        urls={CAPI.nav.readerRevenueLinks.footer}
-                        edition={CAPI.editionId}
-                        dataLinkNamePrefix="footer : "
-                        inHeader={true}
-                    />
-                </Suspense>
+                <ReaderRevenueLinks
+                    urls={CAPI.nav.readerRevenueLinks.footer}
+                    edition={CAPI.editionId}
+                    dataLinkNamePrefix="footer : "
+                    inHeader={true}
+                />
             </Portal>
             <Hydrate root="links-root">
                 <Links userId={user ? user.userId : undefined} />
