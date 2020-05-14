@@ -1,18 +1,7 @@
-import React, { useRef, useState, useEffect, RefObject, Suspense } from 'react';
+import React, { useRef, useState, useEffect, RefObject } from 'react';
 import { css } from 'emotion';
 
-import { initPerf } from '@root/src/web/browser/initPerf';
-
-const MostViewedRight = React.lazy(() => {
-    const { start, end } = initPerf('MostViewedRight');
-    start();
-    return import(
-        /* webpackChunkName: "MostViewedRight" */ './MostViewedRight'
-    ).then(module => {
-        end();
-        return { default: module.MostViewedRight };
-    });
-});
+import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
     pillar: Pillar;
@@ -56,10 +45,7 @@ export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
     return (
         <div ref={bodyRef} className={flexGrow}>
             {heightIsAvailable ? (
-                // TODO: find better fallback
-                <Suspense fallback={<></>}>
-                    <MostViewedRight pillar={pillar} limitItems={limitItems} />
-                </Suspense>
+                <MostViewedRight pillar={pillar} limitItems={limitItems} />
             ) : null}
         </div>
     );

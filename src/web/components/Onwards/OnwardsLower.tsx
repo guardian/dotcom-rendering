@@ -1,18 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-import { initPerf } from '@root/src/web/browser/initPerf';
-
-const OnwardsData = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsData');
-    start();
-    return import(/* webpackChunkName: "OnwardsData" */ './OnwardsData').then(
-        module => {
-            end();
-            return { default: module.OnwardsData };
-        },
-    );
-});
+import { OnwardsData } from './OnwardsData';
 
 type Props = {
     ajaxUrl: string;
@@ -44,13 +33,10 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
     if (!url) return null;
 
     return (
-        // TODO: find better fallback
-        <Suspense fallback={<></>}>
-            <OnwardsData
-                url={url}
-                limit={4}
-                ophanComponentName={ophanComponentName}
-            />
-        </Suspense>
+        <OnwardsData
+            url={url}
+            limit={4}
+            ophanComponentName={ophanComponentName}
+        />
     );
 };

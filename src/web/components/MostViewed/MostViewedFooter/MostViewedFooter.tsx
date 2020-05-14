@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { css, cx } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 import { Lazy } from '@root/src/web/components/Lazy';
 
-import { MostViewedFooterData } from './MostViewedFooterData';
+const MostViewedFooterData = React.lazy(() => {
+    const { start, end } = initPerf('MostViewedFooterData');
+    start();
+    return import(
+        /* webpackChunkName: "MostViewedFooterData" */ './MostViewedFooterData'
+    ).then(module => {
+        end();
+        return { default: module.MostViewedFooterData };
+    });
+});
 
 const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
@@ -96,11 +106,13 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => (
             </section>
             <section className={stackBelow('desktop')}>
                 <Lazy margin={300}>
-                    <MostViewedFooterData
-                        sectionName={sectionName}
-                        pillar={pillar}
-                        ajaxUrl={ajaxUrl}
-                    />
+                    <Suspense fallback={<></>}>
+                        <MostViewedFooterData
+                            sectionName={sectionName}
+                            pillar={pillar}
+                            ajaxUrl={ajaxUrl}
+                        />
+                    </Suspense>
                 </Lazy>
                 <div
                     className={css`
