@@ -461,7 +461,7 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd name="right" />
+                            <StickyAd name="right" height={1059} />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
