@@ -19,6 +19,7 @@ export interface ArticleModel {
     subMetaKeywordLinks: SimpleLinkType[];
     webURL: string;
     shouldHideAds: boolean;
+    shouldHideReaderRevenue: boolean;
     guardianBaseURL: string;
     hasRelated: boolean;
     hasStoryPackage: boolean;
