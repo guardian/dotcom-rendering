@@ -1,8 +1,18 @@
 import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { initPerf } from '@root/src/web/browser/initPerf';
 
-import { OnwardsData } from './OnwardsData';
+const OnwardsData = React.lazy(() => {
+    const { start, end } = initPerf('OnwardsData');
+    start();
+    return import(/* webpackChunkName: "OnwardsData" */ './OnwardsData').then(
+        module => {
+            end();
+            return { default: module.OnwardsData };
+        },
+    );
+});
 
 type Props = {
     ajaxUrl: string;

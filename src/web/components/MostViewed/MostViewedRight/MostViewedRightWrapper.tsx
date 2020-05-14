@@ -1,6 +1,18 @@
 import React, { useRef, useState, useEffect, RefObject } from 'react';
 import { css } from 'emotion';
-import { MostViewedRight } from './MostViewedRight';
+
+import { initPerf } from '@root/src/web/browser/initPerf';
+
+const MostViewedRight = React.lazy(() => {
+    const { start, end } = initPerf('MostViewedRight');
+    start();
+    return import(
+        /* webpackChunkName: "MostViewedRight" */ './MostViewedRight'
+    ).then(module => {
+        end();
+        return { default: module.MostViewedRight };
+    });
+});
 
 type Props = {
     pillar: Pillar;
