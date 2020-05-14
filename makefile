@@ -45,11 +45,11 @@ start: install
 
 # Do not merge:
 start-without-logs: install
+	@npm install -g nodemon
 	@make stop
 	$(call log, "starting PROD server without logs...")
 	@echo '' # just a spacer
-	@touch out.log err.log
-	@NODE_ENV=production pm2 start dist/frontend.server.js -o out.log -e err.log
+	@NODE_ENV=production nodemon dist/frontend.server.js localhost 9000
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
