@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -171,10 +171,12 @@ export const OnwardsUpper = ({
     }
 
     return (
-        <OnwardsData
-            url={url}
-            limit={8}
-            ophanComponentName={ophanComponentName}
-        />
+        <Suspense fallback={<></>}>
+            <OnwardsData
+                url={url}
+                limit={8}
+                ophanComponentName={ophanComponentName}
+            />
+        </Suspense>
     );
 };

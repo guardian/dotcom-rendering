@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, RefObject } from 'react';
+import React, { useRef, useState, useEffect, RefObject, Suspense } from 'react';
 import { css } from 'emotion';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -56,7 +56,10 @@ export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
     return (
         <div ref={bodyRef} className={flexGrow}>
             {heightIsAvailable ? (
-                <MostViewedRight pillar={pillar} limitItems={limitItems} />
+                // TODO: find better fallback
+                <Suspense fallback={<></>}>
+                    <MostViewedRight pillar={pillar} limitItems={limitItems} />
+                </Suspense>
             ) : null}
         </div>
     );

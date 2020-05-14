@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -44,10 +44,13 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
     if (!url) return null;
 
     return (
-        <OnwardsData
-            url={url}
-            limit={4}
-            ophanComponentName={ophanComponentName}
-        />
+        // TODO: find better fallback
+        <Suspense fallback={<></>}>
+            <OnwardsData
+                url={url}
+                limit={4}
+                ophanComponentName={ophanComponentName}
+            />
+        </Suspense>
     );
 };
