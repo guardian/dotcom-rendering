@@ -58,6 +58,18 @@
             </div>
         </div>
 
+        <h2>Test Articles By Atom Type</h2>
+
+        <div id="test-articles-by-atom-type" class="test-articles-list">
+            <div class="test-article-header">
+                <span>type</span>
+                <span>local</span>
+                <span>local-amp</span>
+                <span>production</span>
+                <span>production-amp</span>
+            </div>
+        </div>
+
         <h2>Test Articles By Element (Missing)</h2>
         <ul>
             <li>AtomEmbedMarkupBlockElement</li>
@@ -211,6 +223,14 @@
                 },
             ];
 
+            var testContentAtomTypes = [
+                {
+                    name: 'AudioAtom',
+                    article:
+                        '/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
+                },
+            ];
+
             var makeTestArticle = a => `
             <div class="test-article">
                 <span>${a.name}</span>
@@ -221,15 +241,21 @@
             </div>
         `;
 
+            testContentTypes.forEach(a => {
+                document.getElementById(
+                    'test-articles-by-content',
+                ).innerHTML += makeTestArticle(a);
+            });
+
             testArticles.forEach(a => {
                 document.getElementById(
                     'test-articles-by-element',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testContentTypes.forEach(a => {
+            testContentAtomTypes.forEach(a => {
                 document.getElementById(
-                    'test-articles-by-content',
+                    'test-articles-by-atom-type',
                 ).innerHTML += makeTestArticle(a);
             });
         </script>
