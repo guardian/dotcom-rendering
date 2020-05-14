@@ -1,18 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-import { initPerf } from '@root/src/web/browser/initPerf';
 
-const OnwardsData = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsData');
-    start();
-    return import(/* webpackChunkName: "OnwardsData" */ './OnwardsData').then(
-        module => {
-            end();
-            return { default: module.OnwardsData };
-        },
-    );
-});
+import { OnwardsData } from './OnwardsData';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
@@ -171,12 +161,10 @@ export const OnwardsUpper = ({
     }
 
     return (
-        <Suspense fallback={<></>}>
-            <OnwardsData
-                url={url}
-                limit={8}
-                ophanComponentName={ophanComponentName}
-            />
-        </Suspense>
+        <OnwardsData
+            url={url}
+            limit={8}
+            ophanComponentName={ophanComponentName}
+        />
     );
 };
