@@ -58,6 +58,7 @@ const innerStyles = (designType: DesignType) => {
 
         display: inline-block;
         vertical-align: text-top;
+        pointer-events: none;
     `;
 
     switch (designType) {
