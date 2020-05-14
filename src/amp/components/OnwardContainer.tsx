@@ -167,7 +167,6 @@ export const OnwardContainer: React.FC<{
                                         <MoustacheSection name="isComment">
                                             <div>
                                                 <MoustacheVariable name="byline" />
-                                                <MoustacheVariable name="byline" />
                                             </div>
                                         </MoustacheSection>
                                     </div>
