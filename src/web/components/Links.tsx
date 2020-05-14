@@ -195,14 +195,6 @@ export const Links = ({ userId }: Props) => {
             >
                 Search jobs
             </a>
-
-            <a
-                href="https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader"
-                className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
-                data-link-name="nav2 : soulmates-cta"
-            >
-                Dating
-            </a>
             <div className={seperatorHideStyles} />
 
             {userId ? (

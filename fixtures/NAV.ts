@@ -1061,14 +1061,6 @@ export const NAV: NavType = {
             mobileOnly: false,
         },
         {
-            title: 'Dating',
-            longTitle: 'Dating',
-            url:
-                'https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader_dropdown',
-            children: [],
-            mobileOnly: false,
-        },
-        {
             title: 'Holidays',
             longTitle: 'Holidays',
             url:

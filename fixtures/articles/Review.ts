@@ -355,13 +355,6 @@ export const Review: CAPIType = {
                     extraClasses: '',
                 },
                 {
-                    text: 'Dating',
-                    url:
-                        'https://soulmates.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_SOULMATES',
-                    dataLinkName: 'uk : footer : soulmates',
-                    extraClasses: '',
-                },
-                {
                     text: 'Patrons',
                     url:
                         'https://patrons.theguardian.com?INTCMP=footer_patrons',
@@ -1641,15 +1634,6 @@ export const Review: CAPIType = {
                 title: 'Search jobs',
                 url:
                     'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
-                longTitle: '',
-                iconName: '',
-                children: [],
-                classList: [],
-            },
-            {
-                title: 'Dating',
-                url:
-                    'https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader_dropdown',
                 longTitle: '',
                 iconName: '',
                 children: [],
