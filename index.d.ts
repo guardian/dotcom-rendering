@@ -589,7 +589,7 @@ type IslandType =
     | 'onwards-lower-whensignedout'
     | 'rich-link'
     | 'links-root'
-    | 'comments-root';
+    | 'comments';
 
 interface TrailType {
     designType: DesignType;

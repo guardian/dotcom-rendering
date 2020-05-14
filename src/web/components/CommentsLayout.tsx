@@ -5,11 +5,11 @@ import { space } from '@guardian/src-foundations';
 import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { RightColumn } from '@frontend/web/components/RightColumn';
-import { AdSlot } from '@root/src/web/components/AdSlot';
+import { StickyAd } from '@root/src/web/components/StickyAd';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { Lazy } from '@frontend/web/components/Lazy';
 
 type Props = {
     user?: UserProfile;
@@ -81,30 +81,54 @@ export const CommentsLayout = ({
                     />
                 </div>
             </Hide>
-
-            <Comments
-                user={user}
-                baseUrl={baseUrl}
-                pillar={pillar}
-                initialPage={commentPage}
-                pageSizeOverride={commentPageSize}
-                isClosedForComments={
-                    isClosedForComments || !enableDiscussionSwitch
-                }
-                orderByOverride={commentOrderBy}
-                shortUrl={shortUrl}
-                additionalHeaders={{
-                    'D2-X-UID': discussionD2Uid,
-                    'GU-Client': discussionApiClientHeader,
-                }}
-                expanded={expanded}
-                commentToScrollTo={commentToScrollTo}
-                onPermalinkClick={onPermalinkClick}
-                apiKey="dotcom-rendering"
-            />
+            {expanded ? (
+                <Comments
+                    user={user}
+                    baseUrl={baseUrl}
+                    pillar={pillar}
+                    initialPage={commentPage}
+                    pageSizeOverride={commentPageSize}
+                    isClosedForComments={
+                        isClosedForComments || !enableDiscussionSwitch
+                    }
+                    orderByOverride={commentOrderBy}
+                    shortUrl={shortUrl}
+                    additionalHeaders={{
+                        'D2-X-UID': discussionD2Uid,
+                        'GU-Client': discussionApiClientHeader,
+                    }}
+                    expanded={true}
+                    commentToScrollTo={commentToScrollTo}
+                    onPermalinkClick={onPermalinkClick}
+                    apiKey="dotcom-rendering"
+                />
+            ) : (
+                <Lazy margin={300}>
+                    <Comments
+                        user={user}
+                        baseUrl={baseUrl}
+                        pillar={pillar}
+                        initialPage={commentPage}
+                        pageSizeOverride={commentPageSize}
+                        isClosedForComments={
+                            isClosedForComments || !enableDiscussionSwitch
+                        }
+                        orderByOverride={commentOrderBy}
+                        shortUrl={shortUrl}
+                        additionalHeaders={{
+                            'D2-X-UID': discussionD2Uid,
+                            'GU-Client': discussionApiClientHeader,
+                        }}
+                        expanded={false}
+                        commentToScrollTo={commentToScrollTo}
+                        onPermalinkClick={onPermalinkClick}
+                        apiKey="dotcom-rendering"
+                    />
+                </Lazy>
+            )}
         </div>
         <RightColumn>
-            <AdSlot asps={namedAdSlotParameters('comments')} />
+            <StickyAd name="comments" height={624} />
         </RightColumn>
     </Flex>
 );

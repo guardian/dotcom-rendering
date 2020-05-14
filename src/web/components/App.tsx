@@ -292,55 +292,27 @@ export const App = ({ CAPI, NAV }: Props) => {
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
                 these cases we will be scrolling to comments and want them loaded */}
-            <Portal root="comments">
-                {openComments ? (
-                    <CommentsLayout
-                        user={user}
-                        pillar={pillar}
-                        baseUrl={CAPI.config.discussionApiUrl}
-                        shortUrl={CAPI.config.shortUrlId}
-                        commentCount={commentCount}
-                        commentPage={commentPage}
-                        commentPageSize={commentPageSize}
-                        commentOrderBy={commentOrderBy}
-                        isClosedForComments={isClosedForComments}
-                        discussionD2Uid={CAPI.config.discussionD2Uid}
-                        discussionApiClientHeader={
-                            CAPI.config.discussionApiClientHeader
-                        }
-                        enableDiscussionSwitch={
-                            CAPI.config.enableDiscussionSwitch
-                        }
-                        expanded={true}
-                        commentToScrollTo={hashCommentId}
-                        onPermalinkClick={handlePermalink}
-                    />
-                ) : (
-                    <Lazy margin={300}>
-                        <CommentsLayout
-                            user={user}
-                            pillar={pillar}
-                            baseUrl={CAPI.config.discussionApiUrl}
-                            shortUrl={CAPI.config.shortUrlId}
-                            commentCount={commentCount}
-                            commentPage={commentPage}
-                            commentPageSize={commentPageSize}
-                            commentOrderBy={commentOrderBy}
-                            isClosedForComments={isClosedForComments}
-                            discussionD2Uid={CAPI.config.discussionD2Uid}
-                            discussionApiClientHeader={
-                                CAPI.config.discussionApiClientHeader
-                            }
-                            enableDiscussionSwitch={
-                                CAPI.config.enableDiscussionSwitch
-                            }
-                            expanded={false}
-                            commentToScrollTo={hashCommentId}
-                            onPermalinkClick={handlePermalink}
-                        />
-                    </Lazy>
-                )}
-            </Portal>
+            <Hydrate root="comments">
+                <CommentsLayout
+                    user={user}
+                    pillar={pillar}
+                    baseUrl={CAPI.config.discussionApiUrl}
+                    shortUrl={CAPI.config.shortUrlId}
+                    commentCount={commentCount}
+                    commentPage={commentPage}
+                    commentPageSize={commentPageSize}
+                    commentOrderBy={commentOrderBy}
+                    isClosedForComments={isClosedForComments}
+                    discussionD2Uid={CAPI.config.discussionD2Uid}
+                    discussionApiClientHeader={
+                        CAPI.config.discussionApiClientHeader
+                    }
+                    enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
+                    expanded={!!openComments}
+                    commentToScrollTo={hashCommentId}
+                    onPermalinkClick={handlePermalink}
+                />
+            </Hydrate>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
                     pillar={pillar}
