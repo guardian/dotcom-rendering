@@ -2428,15 +2428,6 @@ export const data = {
                     classList: [],
                 },
                 {
-                    title: 'Dating',
-                    url:
-                        'https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader',
-                    longTitle: '',
-                    iconName: '',
-                    children: [],
-                    classList: [],
-                },
-                {
                     title: 'Holidays',
                     url:
                         'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
