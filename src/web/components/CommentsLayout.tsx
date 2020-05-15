@@ -43,6 +43,8 @@ const bottomPadding = css`
     padding-bottom: ${space[2]}px;
 `;
 
+const DEFAULT_HEIGHT = 624;
+
 export const CommentsLayout = ({
     user,
     pillar,
@@ -60,7 +62,7 @@ export const CommentsLayout = ({
     commentToScrollTo,
     onPermalinkClick,
 }: Props) => {
-    const [availableHeight, setAvailableHeight] = useState(624);
+    const [heightToStick, setHeightToStick] = useState(DEFAULT_HEIGHT);
     const [heightChangeCount, setheightChangeCount] = useState<number>(0);
     const heightRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +73,14 @@ export const CommentsLayout = ({
     useEffect(() => {
         const checkHeight = (ref: RefObject<HTMLDivElement>) => {
             if (ref.current) {
-                setAvailableHeight(ref.current.clientHeight);
+                const availableHeight = ref.current.clientHeight;
+                // Don't run the sticky container all the way to the bottom
+                let heightWereUsing = availableHeight - 800;
+                // Never try to use a height less than the default size
+                if (heightWereUsing < DEFAULT_HEIGHT) {
+                    heightWereUsing = DEFAULT_HEIGHT;
+                }
+                setHeightToStick(heightWereUsing);
             }
         };
 
@@ -149,7 +158,7 @@ export const CommentsLayout = ({
                 )}
             </div>
             <RightColumn>
-                <StickyAd name="comments" height={availableHeight} />
+                <StickyAd name="comments" height={heightToStick} />
             </RightColumn>
         </Flex>
     );
