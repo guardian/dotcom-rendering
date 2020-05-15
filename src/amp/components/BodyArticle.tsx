@@ -100,8 +100,7 @@ export const Body: React.FC<{
         />
     );
 
-    const epicTestPageId = "science/2015/sep/28/nasa-scientists-find-evidence-flowing-water-mars"
-    const epic = (data.pageId === epicTestPageId) && !data.shouldHideReaderRevenue ? <Epic /> : null
+    const epic = data.shouldHideReaderRevenue ? null : <Epic />
 
     return (
         <InnerContainer className={body(pillar, designType)}>
