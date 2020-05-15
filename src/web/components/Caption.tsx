@@ -104,7 +104,10 @@ export const Caption = ({
         }
     `;
 
-    if (!captionText) return null;
+    const noCaption = !captionText;
+    const noCredit = !credit;
+    const hideCredit = !displayCredit;
+    if (noCaption && (noCredit || hideCredit)) return null;
 
     return (
         <figcaption
@@ -126,14 +129,16 @@ export const Caption = ({
             >
                 <TriangleIcon />
             </span>
-            <span
-                className={captionLink}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                    __html: captionText || '',
-                }}
-                key="caption"
-            />
+            {captionText && (
+                <span
+                    className={captionLink}
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                        __html: captionText || '',
+                    }}
+                    key="caption"
+                />
+            )}
             {credit && displayCredit && ` ${credit}`}
         </figcaption>
     );

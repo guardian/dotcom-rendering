@@ -1,3 +1,4 @@
+import '../webpackPublicPath';
 import { hydrate as hydrateCSS } from 'emotion';
 
 import { startup } from '@root/src/web/browser/startup';

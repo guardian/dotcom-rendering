@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
+
 import { OnwardsData } from './OnwardsData';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27

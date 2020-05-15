@@ -159,6 +159,10 @@ const stretchLines = css`
         margin-left: -20px;
         margin-right: -20px;
     }
+    ${until.mobileLandscape} {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
 `;
 
 const mainMediaWrapper = css`
@@ -188,6 +192,7 @@ const PositionHeadline = ({
         case 'Immersive':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

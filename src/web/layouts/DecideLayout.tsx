@@ -47,6 +47,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Interview':
                 case 'Live':
                 case 'Media':
+                case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
                 case 'SpecialReport':
@@ -86,6 +87,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Interview':
                 case 'Live':
                 case 'Media':
+                case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
                 case 'SpecialReport':
@@ -125,6 +127,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'Interview':
                 case 'Live':
                 case 'Media':
+                case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
                 case 'SpecialReport':

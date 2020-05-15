@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
 import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
+import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
 import { Review } from '@root/fixtures/articles/Review';
 import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
@@ -74,6 +75,12 @@ export const AdvertisementFeatureStory = () => {
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
+
+export const PhotoEssayStory = () => {
+    const ServerCAPI = convertToShowcase(PhotoEssay);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+PhotoEssayStory.story = { name: 'PhotoEssay' };
 
 export const AnalysisStory = () => {
     const ServerCAPI = convertToShowcase(Analysis);

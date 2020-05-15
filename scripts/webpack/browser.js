@@ -49,6 +49,12 @@ module.exports = ({ isLegacyJS }) => ({
         filename: generateName(isLegacyJS),
         chunkFilename: generateName(isLegacyJS),
     },
+    // fix for known issue with webpack dynamic imports
+    optimization: {
+        namedModules: true,
+        namedChunks: true,
+        splitChunks: { cacheGroups: { default: false } },
+    },
     plugins: [
         new AssetsManifest({
             writeToDisk: true,

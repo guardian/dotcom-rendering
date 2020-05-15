@@ -104,6 +104,7 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
             return true;
         case 'Live':
         case 'Media':
+        case 'PhotoEssay':
         case 'Analysis':
         case 'Article':
         case 'SpecialReport':
@@ -132,6 +133,7 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
         case 'Review':
         case 'Live':
         case 'Media':
+        case 'PhotoEssay':
         case 'Interview':
         case 'Analysis':
         case 'Article':

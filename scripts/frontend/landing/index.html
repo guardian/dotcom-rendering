@@ -58,6 +58,18 @@
             </div>
         </div>
 
+        <h2>Test Articles By Atom Type</h2>
+
+        <div id="test-articles-by-atom-type" class="test-articles-list">
+            <div class="test-article-header">
+                <span>type</span>
+                <span>local</span>
+                <span>local-amp</span>
+                <span>production</span>
+                <span>production-amp</span>
+            </div>
+        </div>
+
         <h2>Test Articles By Element (Missing)</h2>
         <ul>
             <li>AtomEmbedMarkupBlockElement</li>
@@ -70,7 +82,6 @@
             <li>InteractiveUrlBlockElement</li>
             <li>ProfileBlockElement</li>
             <li>QABlockElement</li>
-            <li>SoundcloudBlockElement</li>
             <li>SubheadingBlockElement</li>
             <li>TimelineBlockElement</li>
             <li>VideoBlockElement</li>
@@ -120,6 +131,11 @@
                     name: 'ContentAtomBlockElement',
                     article:
                         '/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port',
+                },
+                {
+                    name: 'DividerBlockElement',
+                    article:
+                        '/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
                 },
                 {
                     name: 'DocumentBlockElement',
@@ -176,6 +192,11 @@
                         '/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united',
                 },
                 {
+                    name: 'SoundcloudBlockElement',
+                    article:
+                        '/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+                },
+                {
                     name: 'TableBlockElement',
                     article:
                         '/football/blog/2019/dec/09/sergej-milinkovic-savic-and-luis-alberto-are-leading-lazios-surge',
@@ -200,10 +221,13 @@
                     article:
                         '/technology/2015/sep/04/vine-why-you-always-lyin-nicholas-fraser-down-goes',
                 },
+            ];
+
+            var testContentAtomTypes = [
                 {
-                    name: 'DividerBlockElement',
+                    name: 'AudioAtom',
                     article:
-                        '/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
+                        '/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
                 },
             ];
 
@@ -217,15 +241,21 @@
             </div>
         `;
 
+            testContentTypes.forEach(a => {
+                document.getElementById(
+                    'test-articles-by-content',
+                ).innerHTML += makeTestArticle(a);
+            });
+
             testArticles.forEach(a => {
                 document.getElementById(
                     'test-articles-by-element',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testContentTypes.forEach(a => {
+            testContentAtomTypes.forEach(a => {
                 document.getElementById(
-                    'test-articles-by-content',
+                    'test-articles-by-atom-type',
                 ).innerHTML += makeTestArticle(a);
             });
         </script>

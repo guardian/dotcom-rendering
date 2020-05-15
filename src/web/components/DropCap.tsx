@@ -33,6 +33,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'Interview':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':
@@ -57,6 +58,7 @@ const innerStyles = (designType: DesignType) => {
 
         display: inline-block;
         vertical-align: text-top;
+        pointer-events: none;
     `;
 
     switch (designType) {
@@ -71,6 +73,7 @@ const innerStyles = (designType: DesignType) => {
         case 'Interview':
         case 'Article':
         case 'Media':
+        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

@@ -30,7 +30,7 @@ deploy:
 
 # prod #########################################
 
-build: clear clean-dist install
+build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
@@ -90,7 +90,7 @@ stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
 	@stylelint "src/**/*.ts{,x}"
 
-test: clear clean-dist install
+test: clean-dist install
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand
 
@@ -101,10 +101,10 @@ test-ci: clear clean-dist install
 bundlesize: clear clean-dist install build
 	@bundlesize
 
-validate: clear clean-dist install tsc lint stylelint test validate-build
+validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install tsc lint stylelint test-ci bundlesize
+validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################

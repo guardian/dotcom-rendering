@@ -79,6 +79,7 @@ const headlineStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Live':
             return colourStyles(neutral[97]);
         case 'Analysis':
+        case 'PhotoEssay':
         case 'Article':
         case 'Review':
         case 'SpecialReport':

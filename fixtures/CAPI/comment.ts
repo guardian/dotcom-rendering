@@ -351,13 +351,6 @@ export const comment: CAPIType = {
                     extraClasses: '',
                 },
                 {
-                    text: 'Dating',
-                    url:
-                        'https://soulmates.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_SOULMATES',
-                    dataLinkName: 'uk : footer : soulmates',
-                    extraClasses: '',
-                },
-                {
                     text: 'Patrons',
                     url:
                         'https://patrons.theguardian.com?INTCMP=footer_patrons',
@@ -1637,15 +1630,6 @@ export const comment: CAPIType = {
                 classList: [],
             },
             {
-                title: 'Dating',
-                url:
-                    'https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader_dropdown',
-                longTitle: '',
-                iconName: '',
-                children: [],
-                classList: [],
-            },
-            {
                 title: 'Holidays',
                 url:
                     'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
@@ -2605,6 +2589,7 @@ export const comment: CAPIType = {
         discussionApiClientHeader: 'testClientHeader',
         ampIframeUrl:
             'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+        isPhotoEssay: false,
     },
     sectionLabel: 'Conservatives',
 };

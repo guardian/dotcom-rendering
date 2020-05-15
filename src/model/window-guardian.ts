@@ -88,6 +88,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         designType: CAPI.designType,
         pillar: CAPI.pillar,
         config: {
+            frontendAssetsFullURL: CAPI.config.frontendAssetsFullURL,
             isDev: process.env.NODE_ENV !== 'production',
             ajaxUrl: CAPI.config.ajaxUrl,
             shortUrlId: CAPI.config.shortUrlId,
@@ -140,6 +141,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         contributionsServiceUrl: CAPI.contributionsServiceUrl,
         isImmersive: CAPI.isImmersive,
+        isPhotoEssay: CAPI.config.isPhotoEssay,
     };
 };
 

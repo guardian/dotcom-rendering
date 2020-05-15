@@ -95,11 +95,6 @@ export const footerLinksNew: Link[][] = [
             url: 'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_JOBS',
         },
         {
-            title: 'Dating',
-            url:
-                'https://soulmates.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_SOULMATES',
-        },
-        {
             title: 'Patrons',
             url: 'https://patrons.theguardian.com/?INTCMP=footer_patrons',
         },
