@@ -46,7 +46,7 @@ export const Both = () => {
                 commentCount={239}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );
@@ -72,7 +72,7 @@ export const ShareOnly = () => {
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );
@@ -104,7 +104,7 @@ export const CommentOnly = () => {
                 commentCount={239}
                 pageId="/lifeandstyle/abc"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );
@@ -136,7 +136,7 @@ export const ZeroComments = () => {
                 commentCount={0}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );
@@ -168,7 +168,7 @@ export const BigNumbers = () => {
                 commentCount={4320}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );

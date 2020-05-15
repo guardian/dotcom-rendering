@@ -28,7 +28,7 @@ export const CommentCountStory = () => {
                 short="11k"
                 long="10,898"
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />
         </Container>
     );

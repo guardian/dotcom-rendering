@@ -30,7 +30,7 @@ describe('Counts', () => {
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -45,7 +45,7 @@ describe('Counts', () => {
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -61,7 +61,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={34}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -76,7 +76,7 @@ describe('Counts', () => {
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -92,7 +92,7 @@ describe('Counts', () => {
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -111,7 +111,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -130,7 +130,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -151,7 +151,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -171,7 +171,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -190,7 +190,7 @@ describe('Counts', () => {
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
@@ -210,7 +210,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1945}
                 pillar="news"
-                setOpenComments={() => {}}
+                setIsExpanded={() => {}}
             />,
         );
 
