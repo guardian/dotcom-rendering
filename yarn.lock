@@ -2151,10 +2151,10 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/discussion-rendering@^2.2.12":
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.12.tgz#c0796473772cdfd8e2d80299aeaf1e7391fe15b2"
-  integrity sha512-VmkeLSycQRF4H3UluMzXZIukggpXLyMxhfz9xpSmaf4jhuS8v6p27qK9aDrbgIKvjfyYOf9irbWdPohNLz1+Dw==
+"@guardian/discussion-rendering@^2.2.15":
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-2.2.15.tgz#35ff70035e9331c572436415adcb710759ff210c"
+  integrity sha512-CAcLc447SbgR6NRPhA7yIdZ0BZLZC4UOcWm4JgZVD25dnJDtBGhTk5xAyAKfzGGKzt2o5bH5FxOPIlSa6SYSiQ==
   dependencies:
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
