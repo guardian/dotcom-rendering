@@ -11,7 +11,7 @@ type Props = {
     pillar: Pillar;
     short: string;
     long: string;
-    setOpenComments: Function;
+    setIsExpanded: Function;
 };
 
 const containerStyles = (pillar: Pillar) => css`
@@ -65,12 +65,7 @@ const linkStyles = css`
     }
 `;
 
-export const CommentCount = ({
-    short,
-    long,
-    pillar,
-    setOpenComments,
-}: Props) => {
+export const CommentCount = ({ short, long, pillar, setIsExpanded }: Props) => {
     return (
         <div
             className={containerStyles(pillar)}
@@ -80,7 +75,7 @@ export const CommentCount = ({
             <a
                 href="#comments"
                 className={linkStyles}
-                onClick={() => setOpenComments(true)}
+                onClick={() => setIsExpanded(true)}
             >
                 <div className={iconContainerStyles}>
                     <CommentIcon className={iconStyles(pillar)} />

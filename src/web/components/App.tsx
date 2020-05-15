@@ -93,7 +93,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [commentOrderBy, setCommentOrderBy] = useState<
         'newest' | 'oldest' | 'recommendations'
     >();
-    const [openComments, setOpenComments] = useState<boolean>(false);
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
     const [hashCommentId, setHashCommentId] = useState<number | undefined>(
         commentIdFromUrl(),
     );
@@ -161,7 +161,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     setCommentPage(context.page);
                     setCommentPageSize(context.pageSize);
                     setCommentOrderBy(context.orderBy);
-                    setOpenComments(true);
+                    setIsExpanded(true);
                 },
             );
         }
@@ -169,7 +169,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         if (hasCommentsHash) {
-            setOpenComments(true);
+            setIsExpanded(true);
         }
     }, [hasCommentsHash]);
 
@@ -254,14 +254,14 @@ export const App = ({ CAPI, NAV }: Props) => {
                         pageId={CAPI.config.pageId}
                         commentCount={commentCount}
                         pillar={pillar}
-                        setOpenComments={setOpenComments}
+                        setIsExpanded={setIsExpanded}
                     />
                 ) : (
                     <Counts
                         ajaxUrl={CAPI.config.ajaxUrl}
                         pageId={CAPI.config.pageId}
                         pillar={pillar}
-                        setOpenComments={setOpenComments}
+                        setIsExpanded={setIsExpanded}
                     />
                 )}
             </Portal>
@@ -346,7 +346,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         CAPI.config.discussionApiClientHeader
                     }
                     enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-                    expanded={!!openComments}
+                    expanded={isExpanded}
                     commentToScrollTo={hashCommentId}
                     onPermalinkClick={handlePermalink}
                 />
