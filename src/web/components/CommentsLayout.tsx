@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, RefObject, useEffect } from 'react';
 import { css } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
@@ -59,51 +59,48 @@ export const CommentsLayout = ({
     discussionApiClientHeader,
     commentToScrollTo,
     onPermalinkClick,
-}: Props) => (
-    <Flex direction="row">
-        <LeftColumn showRightBorder={false}>
-            <SignedInAs
-                pillar={pillar}
-                enableDiscussionSwitch={enableDiscussionSwitch}
-                user={user}
-                commentCount={commentCount}
-                isClosedForComments={isClosedForComments}
-            />
-        </LeftColumn>
-        <div className={containerStyles}>
-            <Hide when="above" breakpoint="leftCol">
-                <div className={bottomPadding}>
-                    <SignedInAs
-                        pillar={pillar}
-                        enableDiscussionSwitch={enableDiscussionSwitch}
-                        user={user}
-                        commentCount={commentCount}
-                    />
-                </div>
-            </Hide>
-            {expanded ? (
-                <Comments
-                    user={user}
-                    baseUrl={baseUrl}
+}: Props) => {
+    const [availableHeight, setAvailableHeight] = useState(624);
+    const [heightChangeCount, setheightChangeCount] = useState<number>(0);
+    const heightRef = useRef<HTMLDivElement>(null);
+
+    const handleHeightChange = () => {
+        setheightChangeCount(heightChangeCount + 1);
+    };
+
+    useEffect(() => {
+        const checkHeight = (ref: RefObject<HTMLDivElement>) => {
+            if (ref.current) {
+                setAvailableHeight(ref.current.clientHeight);
+            }
+        };
+
+        checkHeight(heightRef);
+    }, [heightChangeCount]);
+
+    return (
+        <Flex>
+            <LeftColumn showRightBorder={false}>
+                <SignedInAs
                     pillar={pillar}
-                    initialPage={commentPage}
-                    pageSizeOverride={commentPageSize}
-                    isClosedForComments={
-                        isClosedForComments || !enableDiscussionSwitch
-                    }
-                    orderByOverride={commentOrderBy}
-                    shortUrl={shortUrl}
-                    additionalHeaders={{
-                        'D2-X-UID': discussionD2Uid,
-                        'GU-Client': discussionApiClientHeader,
-                    }}
-                    expanded={true}
-                    commentToScrollTo={commentToScrollTo}
-                    onPermalinkClick={onPermalinkClick}
-                    apiKey="dotcom-rendering"
+                    enableDiscussionSwitch={enableDiscussionSwitch}
+                    user={user}
+                    commentCount={commentCount}
+                    isClosedForComments={isClosedForComments}
                 />
-            ) : (
-                <Lazy margin={300}>
+            </LeftColumn>
+            <div ref={heightRef} className={containerStyles}>
+                <Hide when="above" breakpoint="leftCol">
+                    <div className={bottomPadding}>
+                        <SignedInAs
+                            pillar={pillar}
+                            enableDiscussionSwitch={enableDiscussionSwitch}
+                            user={user}
+                            commentCount={commentCount}
+                        />
+                    </div>
+                </Hide>
+                {expanded ? (
                     <Comments
                         user={user}
                         baseUrl={baseUrl}
@@ -119,16 +116,41 @@ export const CommentsLayout = ({
                             'D2-X-UID': discussionD2Uid,
                             'GU-Client': discussionApiClientHeader,
                         }}
-                        expanded={false}
+                        expanded={true}
                         commentToScrollTo={commentToScrollTo}
                         onPermalinkClick={onPermalinkClick}
                         apiKey="dotcom-rendering"
+                        onHeightChange={handleHeightChange}
                     />
-                </Lazy>
-            )}
-        </div>
-        <RightColumn>
-            <StickyAd name="comments" height={624} />
-        </RightColumn>
-    </Flex>
-);
+                ) : (
+                    <Lazy margin={300}>
+                        <Comments
+                            user={user}
+                            baseUrl={baseUrl}
+                            pillar={pillar}
+                            initialPage={commentPage}
+                            pageSizeOverride={commentPageSize}
+                            isClosedForComments={
+                                isClosedForComments || !enableDiscussionSwitch
+                            }
+                            orderByOverride={commentOrderBy}
+                            shortUrl={shortUrl}
+                            additionalHeaders={{
+                                'D2-X-UID': discussionD2Uid,
+                                'GU-Client': discussionApiClientHeader,
+                            }}
+                            expanded={false}
+                            commentToScrollTo={commentToScrollTo}
+                            onPermalinkClick={onPermalinkClick}
+                            apiKey="dotcom-rendering"
+                            onHeightChange={handleHeightChange}
+                        />
+                    </Lazy>
+                )}
+            </div>
+            <RightColumn>
+                <StickyAd name="comments" height={availableHeight} />
+            </RightColumn>
+        </Flex>
+    );
+};
