@@ -70,22 +70,40 @@ export const CommentsLayout = ({
         setheightChangeCount(heightChangeCount + 1);
     };
 
-    useEffect(() => {
-        const checkHeight = (ref: RefObject<HTMLDivElement>) => {
-            if (ref.current) {
-                const availableHeight = ref.current.clientHeight;
-                // Don't run the sticky container all the way to the bottom
-                let heightWereUsing = availableHeight - 800;
-                // Never try to use a height less than the default size
-                if (heightWereUsing < DEFAULT_HEIGHT) {
-                    heightWereUsing = DEFAULT_HEIGHT;
-                }
-                setHeightToStick(heightWereUsing);
+    const checkHeight = (ref: RefObject<HTMLDivElement>) => {
+        if (ref.current) {
+            const availableHeight = ref.current.clientHeight;
+            // Don't run the sticky container all the way to the bottom
+            let heightWereUsing = availableHeight - 600;
+            // Never try to use a height less than the default size
+            if (heightWereUsing < DEFAULT_HEIGHT) {
+                heightWereUsing = DEFAULT_HEIGHT;
             }
-        };
+            setHeightToStick(heightWereUsing);
+        }
+    };
 
+    useEffect(() => {
         checkHeight(heightRef);
     }, [heightChangeCount]);
+
+    useEffect(() => {
+        // Whoah, why on earth are you doing this? Are you mad?
+        // Yup, this is a hackity, hack, hack. It's bad because we have no way to be sure that the dom
+        // has finished rendering so maybe the check will fail (return the wrong height), and it's also
+        // bad because we could be running the check too late (delaying the dom update). So why?
+        // Because we are already working on a better way to render this ad slot so we're happy
+        // to leave this code sitting here for now as a workaround
+        // TODO: **** Remove this ****
+        if (expanded) {
+            setTimeout(() => {
+                checkHeight(heightRef);
+            }, 500);
+            setTimeout(() => {
+                checkHeight(heightRef);
+            }, 3000);
+        }
+    }, [expanded]);
 
     return (
         <Flex>
