@@ -29,6 +29,8 @@ type Props = {
     onPermalinkClick: (commentId: number) => void;
 };
 
+const SPACE_TO_LEAVE_UNDERNEATH = 600;
+
 const containerStyles = css`
     display: flex;
     flex-grow: 1;
@@ -74,7 +76,7 @@ export const CommentsLayout = ({
         if (ref.current) {
             const availableHeight = ref.current.clientHeight;
             // Don't run the sticky container all the way to the bottom
-            let heightWereUsing = availableHeight - 600;
+            let heightWereUsing = availableHeight - SPACE_TO_LEAVE_UNDERNEATH;
             // Never try to use a height less than the default size
             if (heightWereUsing < DEFAULT_HEIGHT) {
                 heightWereUsing = DEFAULT_HEIGHT;
