@@ -6,7 +6,6 @@ import Standard from 'components/standard/article';
 import AdvertisementFeature from 'components/advertisementFeature/article';
 import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
-import Immersive from 'components/immersive/article';
 import Media from 'components/media/article';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
@@ -188,20 +187,6 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                 <LiveblogArticle item={item} imageMappings={imageMappings} />
             </WithScript>
         ), resources: [liveblogScript], hydrationProps: { ...liveblogProps(capi), imageMappings } };
-    }
-
-    if (item.display === Display.Immersive) {
-        const immersiveBody = partition(item.body).oks;
-        const immersiveContent =
-            insertAdPlaceholders(renderAll(imageMappings)(format, immersiveBody));
-
-        return { element: (
-            <WithScript src={articleScript}>
-                <Immersive imageMappings={imageMappings} item={item}>
-                    {immersiveContent}
-                </Immersive>
-            </WithScript>
-        ), resources: [articleScript], hydrationProps: {} };
     }
 
     if (item.design === Design.Media) {

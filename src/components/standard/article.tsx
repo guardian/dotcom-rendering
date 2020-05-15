@@ -6,7 +6,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/headerImage';
-import Series from 'components/shared/articleSeries';
+import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
@@ -15,7 +15,7 @@ import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, Review, getFormat } from 'item';
 import { ImageMappings } from 'components/shared/page';
-import Metadata from './metadata';
+import Metadata from 'components/metadata';
 
 
 // ----- Styles ----- //
@@ -61,11 +61,10 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                     imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
+                <Series item={item} />
+                <Headline item={item} />
                 <div css={articleWidthStyles}>
-                    <Series series={item.series} pillar={item.pillar} />
-                    <Headline item={item} />
                     <Standfirst item={item} />
-
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>

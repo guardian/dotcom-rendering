@@ -68,8 +68,8 @@ const isReview = (content: Content): boolean =>
 const isAnalysis = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/analysis');
 
-const articleSeries = (content: Content): Tag =>
-    tagsOfType(TagType.SERIES)(content.tags)[0];
+const articleSeries = (content: Content): Option<Tag> =>
+    fromNullable(tagsOfType(TagType.SERIES)(content.tags)[0]);
 
 const articleContributors = (content: Content): Tag[] =>
     tagsOfType(TagType.CONTRIBUTOR)(content.tags);

@@ -6,7 +6,7 @@ import { withKnobs, boolean, radios } from '@storybook/addon-knobs';
 import Headline from './headline';
 import { Item } from 'item';
 import { Pillar, Design, Display } from 'format';
-import { None } from 'types/option';
+import { None, Some } from 'types/option';
 import { selectPillar } from 'storybookHelpers';
 
 
@@ -24,14 +24,14 @@ const item: Item = {
     publishDate: new None(),
     mainImage: new None(),
     contributors: [],
-    series: {
+    series: new Some({
         id: '',
         type: 0,
         webTitle: '',
         webUrl: '',
         apiUrl: '',
         references: [],
-    },
+    }),
     commentable: false,
     tags: [],
     shouldHideReaderRevenue: false,

@@ -55,6 +55,12 @@ const liveStyles = css`
         margin-right: 0;
     }
 `;
+
+const immersiveStyles = css`
+    margin: 0;
+    position: absolute;
+    left: 0;
+`;
     
 const imgStyles = (width: number, height: number): SerializedStyles => css`
     display: block;
@@ -69,20 +75,20 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 
 const immersiveImgStyles = css`
     display: block;
-    height: 80vh;
+    height: 100vh;
     object-fit: cover;
     width: 100vw;
-
-    ${from.wide} {
-        width: ${wideContentWidth}px;
-    }
 `;
 
-const getStyles = ({ design }: Format): SerializedStyles => {
+const getStyles = ({ design, display }: Format): SerializedStyles => {
     switch (design) {
         case Design.Live:
             return css(styles, liveStyles);
         default:
+            if (display === Display.Immersive) {
+                return immersiveStyles;
+            }
+
             return styles;
     }
 }
@@ -99,7 +105,7 @@ const getImgStyles = ({ display }: Format, image: Image): SerializedStyles => {
 const getSizes = ({ display }: Format, image: Image): string => {
     switch (display) {
         case Display.Immersive:
-            return `calc(80vh * ${image.width/image.height})`;
+            return `${100 * image.width/image.height}vh`;
         default:
             return `(min-width: ${breakpoints.wide}px) 620px, 100vw`;
     }

@@ -5,12 +5,13 @@ import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
+import { between, from } from '@guardian/src-foundations/mq';
+import { Display, Design } from '@guardian/types/Format';
 
 import { Item } from 'item';
-import { darkModeCss as darkMode } from 'styles';
+import { darkModeCss as darkMode, wideContentWidth, articleWidthStyles } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
-import StarRating from './starRating';
-import { Display, Design } from 'format';
+import StarRating from 'components/starRating';
 
 
 // ----- Component ----- //
@@ -30,6 +31,8 @@ const styles = css`
     color: ${text.primary};
     margin: 0;
 
+    ${articleWidthStyles}
+
     ${darkStyles}
 `;
 
@@ -39,7 +42,28 @@ const immersiveStyles = css`
     color: ${neutral[100]};
     font-weight: 700;
     padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
-    margin: 0;
+    margin: calc(100vh - 5rem) 0 0;
+    position: relative;
+    display: inline-block;
+
+    ${between.phablet.and.wide} {
+        width: ${wideContentWidth}px;
+    }
+
+    ${from.desktop} {
+        ${headline.xlarge({ fontWeight: 'bold' })}
+        margin-top: calc(100vh - 7rem);
+    }
+
+    ${from.wide} {
+        width: 100%;
+        margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
+
+        span {
+            display: block;
+            width: ${wideContentWidth}px;
+        }
+    }
 
     ${darkStyles}
 `;

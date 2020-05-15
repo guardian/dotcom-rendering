@@ -6,11 +6,11 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/headerImage';
-import Series from 'components/shared/articleSeries';
+import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
-import Metadata from 'components/standard/metadata';
+import Metadata from 'components/metadata';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, getFormat } from 'item';
@@ -56,7 +56,7 @@ const AdvertisementFeature = ({ imageMappings, item, children }: Props): JSX.Ele
                     format={getFormat(item)}
                 />
                 <div css={articleWidthStyles}>
-                    <Series series={item.series} pillar={item.pillar} />
+                    <Series item={item} />
                     <Headline item={item} />
                     <Standfirst item={item} />
 

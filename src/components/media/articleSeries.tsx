@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
+import { Option } from 'types/option';
 
 const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => css`    
     a {
@@ -14,22 +15,16 @@ const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => cs
 `;
 
 interface ArticleSeriesProps {
-    series: Series;
+    series: Option<Series>;
     pillar: Pillar;
 }
 
-const ArticleSeries = ({ series, pillar }: ArticleSeriesProps): JSX.Element | null => {
+const ArticleSeries = (props: ArticleSeriesProps): JSX.Element | null =>
 
-    if (series) {
-        return (
-            <nav css={ArticleSeriesStyles(getPillarStyles(pillar))}>
-                <a href={series.webUrl}>{series.webTitle}</a>
-            </nav>
-        )
-    }
-
-    return null;
-
-}
+    props.series.fmap<ReactElement | null>(series =>
+        <nav css={ArticleSeriesStyles(getPillarStyles(props.pillar))}>
+            <a href={series.webUrl}>{series.webTitle}</a>
+        </nav>
+    ).withDefault(null);
 
 export default ArticleSeries;

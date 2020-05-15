@@ -3,17 +3,22 @@
 import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
+import { Display, Design } from '@guardian/types/Format';
 
 import { Item } from 'item';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import CommentCount from 'components/commentCount';
+import { ImageMappings } from 'components/shared/page';
+import Avatar from 'components/avatar';
+import Byline from 'components/byline';
 
 
 // ----- Component ----- //
 
 interface Props {
     item: Item;
+    imageMappings: ImageMappings;
 }
 
 const styles = css`
@@ -21,11 +26,35 @@ const styles = css`
     margin-bottom: ${remSpace[5]};
 `;
 
+const withBylineStyles = css`
+    margin-bottom: ${remSpace[5]};
+`;
+
 const textStyles = css`
     flex-grow: 1;
 `;
 
-const Metadata: FC<Props> = ({ item }: Props) =>
+const withBylineTextStyles = css`
+    padding-top: ${remSpace[1]};
+`;
+
+const avatarStyles = css`
+    margin-right: ${remSpace[3]};
+    margin-top: ${remSpace[1]};
+`;
+
+const MetadataWithByline: FC<Props> = ({ item, imageMappings }: Props) =>
+    <div css={css(styles, withBylineStyles)}>
+        <Avatar className={avatarStyles} imageMappings={imageMappings} {...item} />
+        <div css={css(textStyles, withBylineTextStyles)}>
+            <Byline {...item} />
+            <Dateline date={item.publishDate} />
+            <Follow {...item} />
+        </div>
+        <CommentCount count={0} {...item} />
+    </div>
+
+const ShortMetadata: FC<Props> = ({ item }: Props) =>
     <div css={styles}>
         <div css={textStyles}>
             <Dateline date={item.publishDate} />
@@ -33,6 +62,16 @@ const Metadata: FC<Props> = ({ item }: Props) =>
         </div>
         <CommentCount count={0} {...item} />
     </div>
+
+const Metadata: FC<Props> = (props: Props) => {
+    const { display, design } = props.item;
+
+    if (display === Display.Immersive || design === Design.Comment) {
+        return <ShortMetadata {...props} />;
+    }
+
+    return <MetadataWithByline {...props} />;
+}
 
 
 // ----- Exports ----- //
