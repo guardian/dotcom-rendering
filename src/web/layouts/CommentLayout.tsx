@@ -41,6 +41,8 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
+const MOSTVIEWED_STICKY_HEIGHT = 1059;
+
 const StandardGrid = ({
     children,
 }: {
@@ -438,7 +440,10 @@ export const CommentLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd name="right" height={1059} />
+                            <StickyAd
+                                name="right"
+                                height={MOSTVIEWED_STICKY_HEIGHT}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
