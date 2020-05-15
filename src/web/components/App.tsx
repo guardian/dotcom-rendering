@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CMP } from '@frontend/web/components/CMP';
-import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
-import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
@@ -19,12 +16,47 @@ import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+
+// *******************************
+// ****** Dynamic imports ********
+// *******************************
+const MostViewedRightWrapper = React.lazy(() => {
+    const { start, end } = initPerf('MostViewedRightWrapper');
+    start();
+    return import(
+        /* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
+    ).then(module => {
+        end();
+        return { default: module.MostViewedRightWrapper };
+    });
+});
+const OnwardsUpper = React.lazy(() => {
+    const { start, end } = initPerf('OnwardsUpper');
+    start();
+    return import(
+        /* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
+    ).then(module => {
+        end();
+        return { default: module.OnwardsUpper };
+    });
+});
+const OnwardsLower = React.lazy(() => {
+    const { start, end } = initPerf('OnwardsLower');
+    start();
+    return import(
+        /* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
+    ).then(module => {
+        end();
+        return { default: module.OnwardsLower };
+    });
+});
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -235,7 +267,9 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>
-                    <MostViewedRightWrapper pillar={pillar} />
+                    <Suspense fallback={<></>}>
+                        <MostViewedRightWrapper pillar={pillar} />
+                    </Suspense>
                 </Lazy>
             </Portal>
             <Portal root="slot-body-end">
@@ -260,18 +294,20 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             >
                 <Lazy margin={300}>
-                    <OnwardsUpper
-                        ajaxUrl={CAPI.config.ajaxUrl}
-                        hasRelated={CAPI.hasRelated}
-                        hasStoryPackage={CAPI.hasStoryPackage}
-                        isAdFreeUser={CAPI.isAdFreeUser}
-                        pageId={CAPI.pageId}
-                        isPaidContent={CAPI.config.isPaidContent || false}
-                        showRelatedContent={CAPI.config.showRelatedContent}
-                        keywordIds={CAPI.config.keywordIds}
-                        contentType={CAPI.contentType}
-                        tags={CAPI.tags}
-                    />
+                    <Suspense fallback={<></>}>
+                        <OnwardsUpper
+                            ajaxUrl={CAPI.config.ajaxUrl}
+                            hasRelated={CAPI.hasRelated}
+                            hasStoryPackage={CAPI.hasStoryPackage}
+                            isAdFreeUser={CAPI.isAdFreeUser}
+                            pageId={CAPI.pageId}
+                            isPaidContent={CAPI.config.isPaidContent || false}
+                            showRelatedContent={CAPI.config.showRelatedContent}
+                            keywordIds={CAPI.config.keywordIds}
+                            contentType={CAPI.contentType}
+                            tags={CAPI.tags}
+                        />
+                    </Suspense>
                 </Lazy>
             </Portal>
             <Portal
@@ -282,11 +318,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             >
                 <Lazy margin={300}>
-                    <OnwardsLower
-                        ajaxUrl={CAPI.config.ajaxUrl}
-                        hasStoryPackage={CAPI.hasStoryPackage}
-                        tags={CAPI.tags}
-                    />
+                    <Suspense fallback={<></>}>
+                        <OnwardsLower
+                            ajaxUrl={CAPI.config.ajaxUrl}
+                            hasStoryPackage={CAPI.hasStoryPackage}
+                            tags={CAPI.tags}
+                        />
+                    </Suspense>
                 </Lazy>
             </Portal>
 

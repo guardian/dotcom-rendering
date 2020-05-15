@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-
 import { OnwardsData } from './OnwardsData';
 
 type Props = {
