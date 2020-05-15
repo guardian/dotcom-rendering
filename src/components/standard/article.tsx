@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React, { ReactNode } from 'react';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
@@ -41,7 +41,7 @@ const BorderStyles = css`
     }
 `;
 
-const itemStyles = (item: Item) => {
+const itemStyles = (item: Item): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(item.pillar);
 
     switch (item.display) {
