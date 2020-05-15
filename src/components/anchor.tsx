@@ -7,6 +7,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 
 import { darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
+import { palette } from '@guardian/src-foundations';
 
 
 // ----- Component ----- //
@@ -29,6 +30,16 @@ const styles = css`
 const colour = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
     switch (format.design) {
+        case Design.AdvertisementFeature:
+            return css`
+                color: ${palette.labs[300]};
+                border-bottom: 0.0625rem solid ${neutral[86]};
+
+                ${darkModeCss`
+                    color: ${neutral[86]};
+                    border-bottom: 0.0625rem solid ${neutral[86]};
+                `}
+            `
         case Design.Media:
             return css`
                 color: ${inverted};
