@@ -226,6 +226,13 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
+        case 'UL':
+            return styledH('ul', { css: listStyles }, children);
+        case 'LI':
+            return styledH('li', { css: listItemStyles }, children);
+        case 'A':
+            const colour = getPillarStyles(format.pillar).kicker;
+            return styledH('a', { key, css: css` color: ${colour}` }, children);
         default:
             return textElement(format)(node, key);
     }

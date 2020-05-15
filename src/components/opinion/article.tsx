@@ -66,9 +66,9 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
+                <Series item={item}/>
+                <Headline item={item} />
                 <div css={articleWidthStyles}>
-                    <Series item={item}/>
-                    <Headline item={item} />
                     <Byline {...item} />
                 </div>
                 <Cutout 
