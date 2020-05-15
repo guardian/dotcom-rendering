@@ -77,7 +77,27 @@ const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMapp
         .join(', ');
 
 const srcset: (url: string, mappings: ImageMappings) => string =
-    srcsetWithWidths(defaultWidths)
+    srcsetWithWidths(defaultWidths);
+
+const parseCredit = (
+    displayCredit: boolean | undefined,
+    credit: string | undefined,
+): Option<string> =>
+    fromNullable(displayCredit).andThen(display => display ? fromNullable(credit) : new None());
+
+const parseRole = (role: string | undefined): Option<Role> =>
+    fromNullable(role).andThen<Role>(
+        someRole => {
+            switch(someRole) {
+                case 'thumbnail':
+                    return new Some(Role.Thumbnail);
+                case 'halfWidth':
+                    return new Some(Role.HalfWidth);
+                default:
+                    return new None();
+            }
+        }
+    );
 
 const parseImage = (docParser: (html: string) => DocumentFragment) =>
     (element: BlockElement): Option<Image> => {
@@ -100,22 +120,9 @@ const parseImage = (docParser: (html: string) => DocumentFragment) =>
             width: asset.typeData.width,
             height: asset.typeData.height,
             caption: fromNullable(data?.caption).fmap(docParser),
-            credit: fromNullable(data?.credit).andThen<string>(
-                c => data?.displayCredit ? new Some(c) : new None()
-            ),
+            credit: parseCredit(data?.displayCredit, data?.credit),
             nativeCaption: fromNullable(data?.caption),
-            role: fromNullable(data?.role).andThen<Role>(
-                role => {
-                    switch(role) {
-                        case 'thumbnail':
-                            return new Some(Role.Thumbnail)
-                        case 'halfWidth':
-                            return new Some(Role.HalfWidth)
-                        default:
-                            return new None()
-                    }
-                }
-            ),
+            role: parseRole(data?.role),
         });
     });
 }
