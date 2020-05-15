@@ -76,12 +76,12 @@ export const CommentsLayout = ({
         if (ref.current) {
             const availableHeight = ref.current.clientHeight;
             // Don't run the sticky container all the way to the bottom
-            let heightWereUsing = availableHeight - SPACE_TO_LEAVE_UNDERNEATH;
+            let heightToUse = availableHeight - SPACE_TO_LEAVE_UNDERNEATH;
             // Never try to use a height less than the default size
-            if (heightWereUsing < DEFAULT_HEIGHT) {
-                heightWereUsing = DEFAULT_HEIGHT;
+            if (heightToUse < DEFAULT_HEIGHT) {
+                heightToUse = DEFAULT_HEIGHT;
             }
-            setHeightToStick(heightWereUsing);
+            setHeightToStick(heightToUse);
         }
     };
 
