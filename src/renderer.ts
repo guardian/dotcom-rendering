@@ -199,7 +199,9 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
                 key,
             }, transform(text, format));
         case 'H2':
-            return styledH('h2', { css: HeadingTwoStyles(format), key }, children );
+            return (text.includes('* * *'))
+                ? h(HorizontalRule, null, null)
+                : styledH('h2', { css: HeadingTwoStyles(format), key }, children );
         case 'BLOCKQUOTE':
             return h('blockquote', { key }, children);
         case 'STRONG':
