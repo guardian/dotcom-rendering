@@ -37,6 +37,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -489,7 +490,24 @@ export const StandardLayout = ({
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
 
-                    {showComments && <Section sectionId="comments" />}
+                    {showComments && (
+                        <Section sectionId="comments">
+                            <CommentsLayout
+                                pillar={pillar}
+                                baseUrl={CAPI.config.discussionApiUrl}
+                                shortUrl={CAPI.config.shortUrlId}
+                                commentCount={0}
+                                isClosedForComments={true}
+                                discussionD2Uid={CAPI.config.discussionD2Uid}
+                                discussionApiClientHeader={
+                                    CAPI.config.discussionApiClientHeader
+                                }
+                                enableDiscussionSwitch={false}
+                                expanded={false}
+                                onPermalinkClick={() => {}}
+                            />
+                        </Section>
+                    )}
 
                     {/* Onwards (when signed OUT) */}
                     <Section
