@@ -46,7 +46,7 @@ const bottomPadding = css`
     padding-bottom: ${space[2]}px;
 `;
 
-const DEFAULT_HEIGHT = 624;
+const DEFAULT_HEIGHT = 630;
 
 export const CommentsLayout = ({
     user,
