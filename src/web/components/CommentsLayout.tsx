@@ -98,13 +98,13 @@ export const CommentsLayout = ({
         // to leave this code sitting here for now as a workaround
         // TODO: **** Remove this ****
         if (expanded) {
-			let intervalCount = 0;
-            let checkHeightInterval = setInterval(() => {
-	            intervalCount++;
+            let intervalCount = 0;
+            const checkHeightInterval = setInterval(() => {
+                intervalCount += 1;
                 checkHeight(heightRef);
-    			if (intervalCount === 8) {
-    				clearInterval(checkHeightInterval)
-    			}
+                if (intervalCount === 8) {
+                    clearInterval(checkHeightInterval);
+                }
             }, 500);
         }
     }, [expanded]);
