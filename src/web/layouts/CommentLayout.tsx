@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 
 import {
     neutral,
-    border,
     brandBorder,
     brandBackground,
     brandLine,
@@ -37,11 +36,11 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { Flex } from '@root/src/web/components/Flex';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
-import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 
 const StandardGrid = ({
     children,
@@ -182,25 +181,6 @@ const headlinePadding = css`
     padding-bottom: 43px;
 `;
 
-// The advert is stuck to the top of the container as we scroll
-// until we hit the bottom of the wrapper that contains
-// the top banner and the header/navigation
-// We apply sticky positioning and z-indexes, the stickAdWrapper and headerWrapper
-// classes are tightly coupled.
-
-const stickyAdWrapper = css`
-    background-color: white;
-    border-bottom: 0.0625rem solid ${border.secondary};
-    position: sticky;
-    top: 0;
-    ${getZIndex('stickyAdWrapper')}
-`;
-
-const headerWrapper = css`
-    position: relative;
-    ${getZIndex('headerWrapper')}
-`;
-
 const ageWarningMargins = css`
     margin-top: 12px;
     margin-left: -10px;
@@ -264,7 +244,7 @@ export const CommentLayout = ({
     return (
         <>
             <div>
-                <div className={stickyAdWrapper}>
+                <Stuck>
                     <Section
                         showTopBorder={false}
                         showSideBorders={false}
@@ -275,8 +255,8 @@ export const CommentLayout = ({
                             shouldHideAds={CAPI.shouldHideAds}
                         />
                     </Section>
-                </div>
-                <div className={headerWrapper}>
+                </Stuck>
+                <SendToBack>
                     <Section
                         showTopBorder={false}
                         showSideBorders={false}
@@ -325,7 +305,7 @@ export const CommentLayout = ({
                     >
                         <GuardianLines count={4} pillar={pillar} />
                     </Section>
-                </div>
+                </SendToBack>
             </div>
 
             <Section showTopBorder={false} backgroundColour={opinion[800]}>
