@@ -27,6 +27,7 @@ type Props = {
     commentOrderBy?: 'newest' | 'oldest' | 'recommendations';
     commentToScrollTo?: number;
     onPermalinkClick: (commentId: number) => void;
+    hideAds?: boolean;
 };
 
 const SPACE_TO_LEAVE_UNDERNEATH = 600;
@@ -63,8 +64,11 @@ export const CommentsLayout = ({
     discussionApiClientHeader,
     commentToScrollTo,
     onPermalinkClick,
+    hideAds,
 }: Props) => {
-    const [heightToStick, setHeightToStick] = useState(DEFAULT_HEIGHT);
+    const [heightToStick, setHeightToStick] = useState(
+        hideAds ? 0 : DEFAULT_HEIGHT,
+    );
     const [heightChangeCount, setheightChangeCount] = useState<number>(0);
     const heightRef = useRef<HTMLDivElement>(null);
 

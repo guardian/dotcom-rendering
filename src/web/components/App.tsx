@@ -349,6 +349,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     expanded={isExpanded}
                     commentToScrollTo={hashCommentId}
                     onPermalinkClick={handlePermalink}
+                    hideAds={CAPI.isAdFreeUser || CAPI.shouldHideAds}
                 />
             </Hydrate>
             <Portal root="most-viewed-footer">

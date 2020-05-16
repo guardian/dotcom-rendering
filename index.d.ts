@@ -324,6 +324,7 @@ type CAPIBrowserType = {
     };
     hasRelated: boolean;
     hasStoryPackage: boolean;
+    shouldHideAds: boolean;
     isAdFreeUser: boolean;
     pageId: string;
     tags: TagType[];
