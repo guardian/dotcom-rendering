@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RichLinkBody } from '@frontend/web/components/RichLinkBody';
+import { RichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';
 
@@ -19,7 +19,7 @@ type CardStyle =
     | 'external'
     | 'news';
 
-interface RichLink {
+interface RichLinkType {
     cardStyle: CardStyle;
     thumbnailUrl: string;
     headline: string;
@@ -47,7 +47,7 @@ export const RichLinkComponent: React.FC<{
     richLinkIndex: number;
 }> = ({ element, ajaxEndpoint, richLinkIndex }) => {
     const url = buildUrl(element, ajaxEndpoint);
-    const { data, loading, error } = useApi<RichLink>(url);
+    const { data, loading, error } = useApi<RichLinkType>(url);
 
     if (error) {
         // Send the error to Sentry and then prevent the element from rendering
@@ -61,7 +61,7 @@ export const RichLinkComponent: React.FC<{
         return null;
     }
     return (
-        <RichLinkBody
+        <RichLink
             richLinkIndex={richLinkIndex}
             cardStyle={data.cardStyle}
             thumbnailUrl={data.thumbnailUrl}

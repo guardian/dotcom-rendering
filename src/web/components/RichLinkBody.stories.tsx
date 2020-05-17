@@ -5,7 +5,7 @@ import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Flex } from '@frontend/web/components/Flex';
 
-import { RichLinkBody } from './RichLinkBody';
+import { RichLink } from './RichLink';
 
 // cardStyle = "news" | "special-report" | "live" | "dead" | "feature" | "editorial" | "comment" | "podcast" | "media" | "analysis" | "review" | "letters" | "external"
 // ContentType = "article" | "network" | "section" | "imageContent" | "interactive" | "gallery" | "video" | "audio" | "liveBlog" | "tag" | "index" | "crossword" | "survey" | "signup" | "userid"
@@ -14,8 +14,8 @@ const someImage =
     'https://i.guim.co.uk/img/media/268d42accabbe8168fdbdee51ad31ab2f156b211/137_0_2088_1253/master/2088.jpg?width=460&quality=85&auto=format&fit=max&s=cf5abc39fb2af7a56b10306df21ab8e6';
 
 export default {
-    component: RichLinkBody,
-    title: 'Components/RichLinkBody',
+    component: RichLink,
+    title: 'Components/RichLink',
 };
 
 export const Article = () => {
@@ -26,7 +26,7 @@ export const Article = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="news"
                         thumbnailUrl={someImage}
@@ -51,7 +51,7 @@ export const Network = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="special-report"
                         thumbnailUrl={someImage}
@@ -82,7 +82,7 @@ export const SectionStory = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="live"
                         thumbnailUrl={someImage}
@@ -110,7 +110,7 @@ export const ImageContent = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="dead"
                         thumbnailUrl={someImage}
@@ -141,7 +141,7 @@ export const Interactive = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="feature"
                         thumbnailUrl={someImage}
@@ -171,7 +171,7 @@ export const Gallery = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="editorial"
                         thumbnailUrl={someImage}
@@ -196,7 +196,7 @@ export const Video = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="news"
                         thumbnailUrl={someImage}
@@ -227,7 +227,7 @@ export const Audio = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="podcast"
                         thumbnailUrl={someImage}
@@ -252,7 +252,7 @@ export const LiveBlog = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="media"
                         thumbnailUrl={someImage}
@@ -277,7 +277,7 @@ export const Tag = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="analysis"
                         thumbnailUrl={someImage}
@@ -302,7 +302,7 @@ export const Index = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="review"
                         thumbnailUrl={someImage}
@@ -334,7 +334,7 @@ export const Crossword = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="letters"
                         thumbnailUrl={someImage}
@@ -359,7 +359,7 @@ export const Survey = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="external"
                         thumbnailUrl={someImage}
@@ -384,7 +384,7 @@ export const Signup = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="comment"
                         thumbnailUrl={someImage}
@@ -409,7 +409,7 @@ export const Userid = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="news"
                         thumbnailUrl={someImage}
@@ -434,7 +434,7 @@ export const PaidFor = () => {
                     <p />
                 </LeftColumn>
                 <ArticleContainer>
-                    <RichLinkBody
+                    <RichLink
                         richLinkIndex={1}
                         cardStyle="news"
                         thumbnailUrl={someImage}

@@ -223,7 +223,7 @@ const imageStyles = css`
     height: auto;
 `;
 
-export const RichLinkBody = ({
+export const RichLink = ({
     richLinkIndex,
     cardStyle,
     thumbnailUrl,
