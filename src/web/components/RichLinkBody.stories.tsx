@@ -67,6 +67,12 @@ export const Network = () => {
         </Section>
     );
 };
+Network.story = {
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [380] },
+    },
+};
 
 export const SectionStory = () => {
     return (
@@ -120,6 +126,12 @@ export const ImageContent = () => {
         </Section>
     );
 };
+ImageContent.story = {
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1300] },
+    },
+};
 
 export const Interactive = () => {
     return (
@@ -144,6 +156,11 @@ export const Interactive = () => {
             </Flex>
         </Section>
     );
+};
+Interactive.story = {
+    parameters: {
+        viewport: { defaultViewport: 'leftCol' },
+    },
 };
 
 export const Gallery = () => {
@@ -194,6 +211,12 @@ export const Video = () => {
             </Flex>
         </Section>
     );
+};
+Video.story = {
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [380] },
+    },
 };
 
 export const Audio = () => {
