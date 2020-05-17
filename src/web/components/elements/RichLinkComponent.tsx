@@ -1,21 +1,8 @@
 import React from 'react';
-import { css, cx } from 'emotion';
 
-import { pillarPalette } from '@frontend/lib/pillars';
-import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
-import Quote from '@frontend/static/icons/quote.svg';
-import {
-    text,
-    neutral,
-    brandAltBackground,
-} from '@guardian/src-foundations/palette';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { Avatar } from '@frontend/web/components/Avatar';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { from, until, between } from '@guardian/src-foundations/mq';
+import { RichLinkBody } from '@frontend/web/components/RichLinkBody';
+
 import { useApi } from '@root/src/web/lib/api';
-
-type colour = string;
 
 type CardStyle =
     | 'special-report'
@@ -45,252 +32,6 @@ interface RichLink {
     contributorImage?: string;
 }
 
-const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
-    if (pillar) {
-        return pillarPalette[pillar].main;
-    }
-    return pillarPalette.news.main;
-};
-
-const richLinkContainer = css`
-    /*
-        TODO: avoid this edge case from appearing in editorials
-        edge case:
-        If rich link div is pushed further inline to the page the "margin-left: -240px;" wont work.
-        Using "clear: left;" allows us to igrnore the effects of other elements on the left.
-    */
-    clear: left;
-
-    ${until.wide} {
-        width: 140px;
-    }
-    float: left;
-    margin-right: 20px;
-    margin-bottom: 5px;
-    margin-left: 0px;
-    ${between.leftCol.and.wide} {
-        margin-left: -160px;
-    }
-    ${from.wide} {
-        margin-left: -240px;
-        width: 220px;
-    }
-`;
-
-const richLinkTopBorder: (pillar: Pillar) => colour = pillar => {
-    return css`
-        border-top: 1px;
-        border-top-style: solid;
-        border-top-color: ${richLinkPillarColour(pillar)};
-    `;
-};
-
-const richLinkLink = css`
-    text-decoration: none;
-`;
-
-const richLinkElements = css`
-    padding: 4px 5px 5px 7px;
-`;
-
-const quote: (pillar: Pillar) => colour = pillar => {
-    return css`
-        fill: ${richLinkPillarColour(pillar)};
-        float: left;
-        padding-right: 2px;
-    `;
-};
-
-const richLinkHeader = css`
-    padding-bottom: 10px;
-`;
-
-const richLinkTitle = css`
-    ${headline.xxxsmall()};
-    font-size: 14px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    font-weight: 400;
-    ${from.wide} {
-        ${headline.xxsmall()};
-        padding-bottom: 5px;
-    }
-`;
-
-const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
-    return css`
-        fill: ${richLinkPillarColour(pillar)};
-        color: ${richLinkPillarColour(pillar)};
-        padding-top: 2px;
-    `;
-};
-
-const readMoreTextStyle = css`
-    ${headline.xxxsmall()};
-    font-size: 14px;
-    ${from.wide} {
-        ${headline.xxxsmall()}
-    }
-    display: inline-block;
-    height: 30px;
-    line-height: 26px;
-    padding-left: 4px;
-    vertical-align: top;
-    font-weight: 500;
-    text-decoration: none;
-`;
-
-const byline = css`
-    ${headline.xxxsmall()};
-    font-size: 14px;
-    font-style: italic;
-    ${from.wide} {
-        ${headline.xxsmall()};
-    }
-`;
-
-const contributorImageWrapper = css`
-    width: 5rem;
-    height: 5rem;
-    margin-left: auto;
-    margin-right: 0.3rem;
-    ${from.wide} {
-        width: 8.5rem;
-        height: 8.5rem;
-    }
-
-    /* TODO remove the default img styling in ArticleBody.tsx - do we need direct element styling? */
-    img {
-        width: 100%;
-        height: 100%;
-    }
-`;
-
-const neutralBackground = css`
-    background-color: ${neutral[97]};
-    a {
-        color: inherit;
-    }
-    :hover {
-        background-color: ${neutral[93]};
-    }
-`;
-
-const pillarBackground: (pillar: Pillar) => colour = pillar => {
-    return css`
-        background-color: ${richLinkPillarColour(pillar)};
-    `;
-};
-
-const textColour: (pillar: Pillar) => colour = pillar => {
-    return css`
-        color: ${richLinkPillarColour(pillar)};
-    `;
-};
-
-const paidForBranding = css`
-    ${textSans.xsmall()};
-    font-weight: bold;
-    color: ${text.supporting};
-`;
-
-const starWrapper = css`
-    background-color: ${brandAltBackground.primary};
-    display: inline-block;
-`;
-
-const readMoreText: (contentType: string) => string = contentType => {
-    switch (contentType) {
-        case 'audio':
-            return 'Listen';
-        case 'gallery':
-            return 'View Gallery';
-        case 'video':
-            return 'Watch';
-        default:
-            return 'Read more';
-    }
-};
-
-const getMainContributor: (tags: TagType[]) => string = tags => {
-    const contributorTags = tags.filter(t => t.type === 'Contributor');
-    return contributorTags.length > 0 ? contributorTags[0].title : '';
-};
-
-const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
-    const linkText =
-        richLink.cardStyle === 'letters'
-            ? `${richLink.headline} | Letters `
-            : richLink.headline;
-
-    const imageCardStyles = ['news', 'letters', 'media', 'feature'];
-    const showImage =
-        richLink.thumbnailUrl && imageCardStyles.includes(richLink.cardStyle);
-    const isPaidContent = richLink.tags
-        ? richLink.tags.filter(t => t.id === 'tone/advertisement-features')
-              .length > 0
-        : false;
-    const isOpinion = richLink.cardStyle === 'comment';
-    const mainContributor = getMainContributor(richLink.tags);
-    return (
-        <a className={cx(richLinkLink)} href={richLink.url}>
-            <div className={richLinkTopBorder(richLink.pillar)} />
-            {showImage && (
-                <div>
-                    <img src={richLink.thumbnailUrl} alt="" />
-                </div>
-            )}
-            <div className={richLinkElements}>
-                <div className={richLinkHeader}>
-                    <div className={richLinkTitle}>
-                        {isOpinion && (
-                            <div className={quote(richLink.pillar)}>
-                                <Quote />
-                            </div>
-                        )}
-                        {linkText}
-                    </div>
-                    {isOpinion && (
-                        <div
-                            className={cx(byline, textColour(richLink.pillar))}
-                        >
-                            {mainContributor}
-                        </div>
-                    )}
-                    {richLink.starRating && richLink.starRating > 0 && (
-                        <div className={starWrapper}>
-                            <StarRating
-                                rating={richLink.starRating}
-                                size="medium"
-                            />
-                        </div>
-                    )}
-                    {isPaidContent && richLink.sponsorName && (
-                        <div className={paidForBranding}>
-                            Paid for by {richLink.sponsorName}
-                        </div>
-                    )}
-                </div>
-                {isOpinion && richLink.contributorImage && (
-                    <div className={contributorImageWrapper}>
-                        <Avatar
-                            imageSrc={richLink.contributorImage}
-                            imageAlt={mainContributor}
-                            pillar={richLink.pillar}
-                        />
-                    </div>
-                )}
-                <div className={richLinkReadMore(richLink.pillar)}>
-                    <ArrowInCircle />
-                    <div className={readMoreTextStyle}>
-                        {readMoreText(richLink.contentType)}
-                    </div>
-                </div>
-            </div>
-        </a>
-    );
-};
-
 const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
     element,
     ajaxUrl,
@@ -304,7 +45,7 @@ export const RichLinkComponent: React.FC<{
     pillar: Pillar;
     ajaxEndpoint: string;
     richLinkIndex: number;
-}> = ({ element, pillar, ajaxEndpoint, richLinkIndex }) => {
+}> = ({ element, ajaxEndpoint, richLinkIndex }) => {
     const url = buildUrl(element, ajaxEndpoint);
     const { data, loading, error } = useApi<RichLink>(url);
 
@@ -315,19 +56,23 @@ export const RichLinkComponent: React.FC<{
         return null;
     }
 
-    if (loading) {
+    if (loading || !data) {
         // Only render once data is available
         return null;
     }
     return (
-        <div
-            data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
-            data-component="rich-link"
-            className={pillarBackground(pillar)}
-        >
-            <div className={cx(richLinkContainer, neutralBackground)}>
-                {data && <RichLinkBody richLink={data} />}
-            </div>
-        </div>
+        <RichLinkBody
+            richLinkIndex={richLinkIndex}
+            cardStyle={data.cardStyle}
+            thumbnailUrl={data.thumbnailUrl}
+            headlineText={data.headline}
+            contentType={data.contentType}
+            url={data.url}
+            starRating={data.starRating}
+            pillar={data.pillar}
+            tags={data.tags}
+            sponsorName={data.sponsorName}
+            contributorImage={data.contributorImage}
+        />
     );
 };
