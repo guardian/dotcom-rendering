@@ -218,6 +218,11 @@ const getMainContributor: (tags: TagType[]) => string = tags => {
     return contributorTags.length > 0 ? contributorTags[0].title : '';
 };
 
+const imageStyles = css`
+    width: 100%;
+    height: auto;
+`;
+
 export const RichLinkBody = ({
     richLinkIndex,
     cardStyle,
@@ -253,7 +258,11 @@ export const RichLinkBody = ({
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (
                         <div>
-                            <img src={thumbnailUrl} alt="" />
+                            <img
+                                className={imageStyles}
+                                src={thumbnailUrl}
+                                alt=""
+                            />
                         </div>
                     )}
                     <div className={richLinkElements}>
