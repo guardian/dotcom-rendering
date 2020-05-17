@@ -12,6 +12,8 @@ import { RichLink } from './RichLink';
 
 const someImage =
     'https://i.guim.co.uk/img/media/268d42accabbe8168fdbdee51ad31ab2f156b211/137_0_2088_1253/master/2088.jpg?width=460&quality=85&auto=format&fit=max&s=cf5abc39fb2af7a56b10306df21ab8e6';
+const someContributor =
+    'https://i.guim.co.uk/img/uploads/2017/10/09/Oliver-Wainwright,-L.png?width=300&quality=85&auto=format&fit=max&s=e1aa270c46b716e34c4783ced3376cc9';
 
 export default {
     component: RichLink,
@@ -173,7 +175,7 @@ export const Gallery = () => {
                 <ArticleContainer>
                     <RichLink
                         richLinkIndex={1}
-                        cardStyle="editorial"
+                        cardStyle="comment"
                         thumbnailUrl={someImage}
                         headlineText="Rich link headline"
                         contentType="gallery"
@@ -181,11 +183,17 @@ export const Gallery = () => {
                         pillar="labs"
                         tags={[]}
                         sponsorName=""
+                        contributorImage={someContributor}
                     />
                 </ArticleContainer>
             </Flex>
         </Section>
     );
+};
+Gallery.story = {
+    parameters: {
+        viewport: { defaultViewport: 'leftCol' },
+    },
 };
 
 export const Video = () => {
@@ -198,7 +206,7 @@ export const Video = () => {
                 <ArticleContainer>
                     <RichLink
                         richLinkIndex={1}
-                        cardStyle="news"
+                        cardStyle="comment"
                         thumbnailUrl={someImage}
                         headlineText="Rich link headline"
                         contentType="video"
@@ -206,6 +214,7 @@ export const Video = () => {
                         pillar="news"
                         tags={[]}
                         sponsorName=""
+                        contributorImage={someContributor}
                     />
                 </ArticleContainer>
             </Flex>
@@ -267,6 +276,12 @@ export const LiveBlog = () => {
             </Flex>
         </Section>
     );
+};
+LiveBlog.story = {
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [380] },
+    },
 };
 
 export const Tag = () => {
@@ -394,6 +409,7 @@ export const Signup = () => {
                         pillar="culture"
                         tags={[]}
                         sponsorName=""
+                        contributorImage={someContributor}
                     />
                 </ArticleContainer>
             </Flex>
@@ -411,7 +427,7 @@ export const Userid = () => {
                 <ArticleContainer>
                     <RichLink
                         richLinkIndex={1}
-                        cardStyle="news"
+                        cardStyle="editorial"
                         thumbnailUrl={someImage}
                         headlineText="Rich link headline"
                         contentType="userid"
