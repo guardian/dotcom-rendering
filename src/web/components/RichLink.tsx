@@ -10,9 +10,11 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
-import Quote from '@frontend/static/icons/quote.svg';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
+import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
 
 type CardStyle =
@@ -115,14 +117,6 @@ const richLinkLink = css`
 const richLinkElements = css`
     padding: 4px 5px 5px 7px;
 `;
-
-const quote: (pillar: Pillar) => colour = pillar => {
-    return css`
-        fill: ${richLinkPillarColour(pillar)};
-        float: left;
-        padding-right: 2px;
-    `;
-};
 
 const richLinkHeader = css`
     padding-bottom: 10px;
@@ -269,9 +263,24 @@ export const RichLink = ({
                         <div className={richLinkHeader}>
                             <div className={richLinkTitle}>
                                 {isOpinion && (
-                                    <div className={quote(pillar)}>
-                                        <Quote />
-                                    </div>
+                                    <>
+                                        <Hide when="above" breakpoint="wide">
+                                            <QuoteIcon
+                                                colour={
+                                                    pillarPalette[pillar].main
+                                                }
+                                                size="small"
+                                            />
+                                        </Hide>
+                                        <Hide when="below" breakpoint="wide">
+                                            <QuoteIcon
+                                                colour={
+                                                    pillarPalette[pillar].main
+                                                }
+                                                size="medium"
+                                            />
+                                        </Hide>
+                                    </>
                                 )}
                                 {linkText}
                             </div>
