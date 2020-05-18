@@ -23,5 +23,5 @@ export const Hide = ({ children, when, breakpoint }: Props) => {
             }
         `;
     }
-    return <div className={whenToHide}>{children}</div>;
+    return <span className={whenToHide}>{children}</span>;
 };
