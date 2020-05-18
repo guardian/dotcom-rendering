@@ -37,7 +37,7 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
         return (
             <div className={wrapperStyles} data-component="geo-most-popular">
                 <GuardianLines count={4} pillar={pillar} />
-                <h3 className={headingStyles}>most viewed</h3>
+                <h3 className={headingStyles}>Most viewed</h3>
                 <ul data-link-name="Right hand most popular geo GB">
                     {(data.trails || [])
                         .slice(0, limitItems)
