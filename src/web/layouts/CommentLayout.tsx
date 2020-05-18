@@ -40,6 +40,7 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
@@ -244,62 +245,70 @@ export const CommentLayout = ({
 
     return (
         <>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-            >
-                <HeaderAdSlot
-                    isAdFreeUser={CAPI.isAdFreeUser}
-                    shouldHideAds={CAPI.shouldHideAds}
-                />
-            </Section>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-                backgroundColour={brandBackground.primary}
-            >
-                <Header edition={CAPI.editionId} />
-            </Section>
+            <div>
+                <Stuck>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                    >
+                        <HeaderAdSlot
+                            isAdFreeUser={CAPI.isAdFreeUser}
+                            shouldHideAds={CAPI.shouldHideAds}
+                        />
+                    </Section>
+                </Stuck>
+                <SendToBack>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                        backgroundColour={brandBackground.primary}
+                    >
+                        <Header edition={CAPI.editionId} />
+                    </Section>
 
-            <Section
-                showSideBorders={true}
-                borderColour={brandLine.primary}
-                showTopBorder={false}
-                padded={false}
-                backgroundColour={brandBackground.primary}
-            >
-                <Nav
-                    pillar={getCurrentPillar(CAPI)}
-                    nav={NAV}
-                    display={display}
-                    subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-                    edition={CAPI.editionId}
-                />
-            </Section>
+                    <Section
+                        showSideBorders={true}
+                        borderColour={brandLine.primary}
+                        showTopBorder={false}
+                        padded={false}
+                        backgroundColour={brandBackground.primary}
+                    >
+                        <Nav
+                            pillar={getCurrentPillar(CAPI)}
+                            nav={NAV}
+                            display={display}
+                            subscribeUrl={
+                                CAPI.nav.readerRevenueLinks.header.subscribe
+                            }
+                            edition={CAPI.editionId}
+                        />
+                    </Section>
 
-            {NAV.subNavSections && (
-                <Section
-                    backgroundColour={opinion[800]}
-                    padded={false}
-                    sectionId="sub-nav-root"
-                >
-                    <SubNav
-                        subNavSections={NAV.subNavSections}
-                        currentNavLink={NAV.currentNavLink}
-                        pillar={pillar}
-                    />
-                </Section>
-            )}
+                    {NAV.subNavSections && (
+                        <Section
+                            backgroundColour={opinion[800]}
+                            padded={false}
+                            sectionId="sub-nav-root"
+                        >
+                            <SubNav
+                                subNavSections={NAV.subNavSections}
+                                currentNavLink={NAV.currentNavLink}
+                                pillar={pillar}
+                            />
+                        </Section>
+                    )}
 
-            <Section
-                backgroundColour={opinion[800]}
-                padded={false}
-                showTopBorder={false}
-            >
-                <GuardianLines count={4} pillar={pillar} />
-            </Section>
+                    <Section
+                        backgroundColour={opinion[800]}
+                        padded={false}
+                        showTopBorder={false}
+                    >
+                        <GuardianLines count={4} pillar={pillar} />
+                    </Section>
+                </SendToBack>
+            </div>
 
             <Section showTopBorder={false} backgroundColour={opinion[800]}>
                 <StandardGrid>

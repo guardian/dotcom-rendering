@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
     neutral,
-    border,
     background,
     brandAltBackground,
     brandBackground,
@@ -41,13 +40,13 @@ import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
     decideLineCount,
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
@@ -197,25 +196,6 @@ const starWrapper = css`
     margin-left: -10px;
 `;
 
-// The advert is stuck to the top of the container as we scroll
-// until we hit the bottom of the wrapper that contains
-// the top banner and the header/navigation
-// We apply sticky positioning and z-indexes, the stickAdWrapper and headerWrapper
-// classes are tightly coupled.
-
-const stickyAdWrapper = css`
-    background-color: white;
-    border-bottom: 0.0625rem solid ${border.secondary};
-    position: sticky;
-    top: 0;
-    ${getZIndex('stickyAdWrapper')}
-`;
-
-const headerWrapper = css`
-    position: relative;
-    ${getZIndex('headerWrapper')}
-`;
-
 const ageWarningMargins = css`
     margin-top: 12px;
     margin-left: -10px;
@@ -272,7 +252,7 @@ export const StandardLayout = ({
     return (
         <>
             <div>
-                <div className={stickyAdWrapper}>
+                <Stuck>
                     <Section
                         showTopBorder={false}
                         showSideBorders={false}
@@ -283,8 +263,8 @@ export const StandardLayout = ({
                             shouldHideAds={CAPI.shouldHideAds}
                         />
                     </Section>
-                </div>
-                <div className={headerWrapper}>
+                </Stuck>
+                <SendToBack>
                     <Section
                         showTopBorder={false}
                         showSideBorders={false}
@@ -333,7 +313,7 @@ export const StandardLayout = ({
                     >
                         <GuardianLines count={4} pillar={pillar} />
                     </Section>
-                </div>
+                </SendToBack>
             </div>
 
             <Section showTopBorder={false}>
