@@ -55,11 +55,12 @@ const AdvertisementFeature = ({ imageMappings, item, children }: Props): JSX.Ele
                     imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
-                <div css={articleWidthStyles}>
+                <div>
                     <Series item={item} />
                     <Headline item={item} />
-                    <Standfirst item={item} />
-
+                    <div css={articleWidthStyles}>
+                        <Standfirst item={item} />
+                    </div>
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
