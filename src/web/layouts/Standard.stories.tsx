@@ -86,7 +86,13 @@ export const AnalysisStory = () => {
     const ServerCAPI = convertToStandard(Analysis);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-AnalysisStory.story = { name: 'Analysis' };
+AnalysisStory.story = {
+    name: 'Analysis',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [480] },
+    },
+};
 
 export const FeatureStory = () => {
     const ServerCAPI = convertToStandard(Feature);
@@ -98,25 +104,49 @@ export const GuardianViewStory = () => {
     const ServerCAPI = convertToStandard(GuardianView);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = { name: 'GuardianView' };
+GuardianViewStory.story = {
+    name: 'GuardianView',
+    parameters: {
+        viewport: { defaultViewport: 'phablet' },
+        chromatic: { viewports: [660] },
+    },
+};
 
 export const InterviewStory = () => {
     const ServerCAPI = convertToStandard(Interview);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-InterviewStory.story = { name: 'Interview' };
+InterviewStory.story = {
+    name: 'Interview',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [980] },
+    },
+};
 
 export const QuizStory = () => {
     const ServerCAPI = convertToStandard(Quiz);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-QuizStory.story = { name: 'Quiz' };
+QuizStory.story = {
+    name: 'Quiz',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1300] },
+    },
+};
 
 export const RecipeStory = () => {
     const ServerCAPI = convertToStandard(Recipe);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-RecipeStory.story = { name: 'Recipe' };
+RecipeStory.story = {
+    name: 'Recipe',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [375] },
+    },
+};
 
 export const MatchReportStory = () => {
     const ServerCAPI = convertToStandard(MatchReport);

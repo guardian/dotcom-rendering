@@ -62,7 +62,13 @@ export const ReviewStory = () => {
     const ServerCAPI = convertToImmersive(Review);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-ReviewStory.story = { name: 'Review' };
+ReviewStory.story = {
+    name: 'Review',
+    parameters: {
+        viewport: { defaultViewport: 'phablet' },
+        chromatic: { viewports: [660] },
+    },
+};
 
 export const CommentStory = () => {
     const ServerCAPI = convertToImmersive(Comment);
@@ -74,7 +80,13 @@ export const AdvertisementFeatureStory = () => {
     const ServerCAPI = convertToImmersive(AdvertisementFeature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
+AdvertisementFeatureStory.story = {
+    name: 'AdvertisementFeature',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [980] },
+    },
+};
 
 export const PhotoEssayStory = () => {
     const ServerCAPI = convertToImmersive(PhotoEssay);
@@ -86,19 +98,37 @@ export const AnalysisStory = () => {
     const ServerCAPI = convertToImmersive(Analysis);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-AnalysisStory.story = { name: 'Analysis' };
+AnalysisStory.story = {
+    name: 'Analysis',
+    parameters: {
+        viewport: { defaultViewport: 'tablet' },
+        chromatic: { viewports: [740] },
+    },
+};
 
 export const FeatureStory = () => {
     const ServerCAPI = convertToImmersive(Feature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-FeatureStory.story = { name: 'Feature' };
+FeatureStory.story = {
+    name: 'Feature',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [375] },
+    },
+};
 
 export const GuardianViewStory = () => {
     const ServerCAPI = convertToImmersive(GuardianView);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = { name: 'GuardianView' };
+GuardianViewStory.story = {
+    name: 'GuardianView',
+    parameters: {
+        viewport: { defaultViewport: 'leftCol' },
+        chromatic: { viewports: [1140] },
+    },
+};
 
 export const InterviewStory = () => {
     const ServerCAPI = convertToImmersive(Interview);
