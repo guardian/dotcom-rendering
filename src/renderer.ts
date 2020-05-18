@@ -223,9 +223,16 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
 
 const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(standfirstTextElement(format));
+    const colour = getPillarStyles(format.pillar).kicker;
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
+        case 'UL':
+            return styledH('ul', { css: listStyles }, children);
+        case 'LI':
+            return styledH('li', { css: listItemStyles }, children);
+        case 'A':
+            return styledH('a', { key, css: css` color: ${colour}` }, children);
         default:
             return textElement(format)(node, key);
     }

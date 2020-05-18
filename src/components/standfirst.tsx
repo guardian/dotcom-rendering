@@ -4,7 +4,6 @@ import React, {FC, ReactElement, ReactNode} from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item, getFormat } from 'item';
@@ -50,11 +49,7 @@ const normalHeadline = css`
 `;
 
 const thinHeadline = css`
-    ${headline.xxxsmall({ fontWeight: 'light' })}
-
-    ${from.tablet} {
-        ${headline.xxsmall({ fontWeight: 'light' })}
-    }
+    ${headline.xxsmall({ fontWeight: 'light' })}
 `;
 
 const immersive: SerializedStyles = css`
