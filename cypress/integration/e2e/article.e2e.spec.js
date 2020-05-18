@@ -16,7 +16,7 @@ describe('E2E Page rendering', function() {
             it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
                 cy.scrollTo('bottom', { duration: 100 });
-                cy.contains('Sign in');
+                cy.contains('Lifestyle');
 
                 cy.wait('@getMostRead').then(xhr => {
                     expect(xhr.response.body).to.have.property('tabs');
