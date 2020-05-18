@@ -21,6 +21,8 @@ const ignoreErrors = [
     'Failed to fetch',
     'This video is no longer available.',
     'UnknownError',
+    'TypeError: Failed to fetch',
+    'TypeError: NetworkError when attempting to fetch resource',
 ];
 
 export const initialiseSentry = (adBlockInUse: boolean) => {
