@@ -37,7 +37,6 @@ const colour = (format: Format): SerializedStyles => {
 
                 ${darkModeCss`
                     color: ${neutral[86]};
-                    border-bottom: 0.0625rem solid ${neutral[86]};
                 `}
             `
         case Design.Media:
