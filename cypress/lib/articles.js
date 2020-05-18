@@ -17,6 +17,14 @@ export const articles = [
     },
     {
         url:
+            'https://www.theguardian.com/artanddesign/2019/may/21/inside-huawei-a-photo-essay',
+        pillar: 'culture',
+        designType: 'PhotoEssay',
+        hasRichLinks: true,
+        hideMostViewed: true,
+    },
+    {
+        url:
             'https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people',
         pillar: 'news',
         designType: 'Article',
