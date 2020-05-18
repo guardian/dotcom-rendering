@@ -133,6 +133,9 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
                                     Most viewed{' '}
                                 </span>
                                 <span
+                                    className={css`
+                                        text-transform: capitalize;
+                                    `}
                                     // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
                                     dangerouslySetInnerHTML={{
                                         __html: tab.heading,
