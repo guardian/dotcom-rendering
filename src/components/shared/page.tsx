@@ -31,7 +31,7 @@ import Interactive from 'components/interactive/article';
 
 // ----- Components ----- //
 
-const PageStyles = css`
+export const pageFonts = `
     ${fontFace("Guardian Text Egyptian Web", new Some(400), new None, "/assets/fonts/GuardianTextEgyptian-Reg.ttf")}
     ${fontFace("Guardian Text Egyptian Web", new Some(400), new Some("italic"), "/assets/fonts/GuardianTextEgyptian-RegItalic.ttf")}
     ${fontFace("Guardian Text Egyptian Web", new Some(700), new None, "/assets/fonts/GuardianTextEgyptian-Bold.ttf")}
@@ -56,7 +56,10 @@ const PageStyles = css`
     ${fontFace("GH Guardian Headline", new Some(700), new Some("italic"), "/assets/fonts/GHGuardianHeadline-BoldItalic.ttf")}
 
     ${fontFace("Guardian Icons", new None, new None, "/assets/fonts/icons.otf")}
+`;
 
+const PageStyles = css`
+    ${pageFonts}
     background: white;
 
     body {

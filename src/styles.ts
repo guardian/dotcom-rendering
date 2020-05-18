@@ -162,7 +162,7 @@ export const fontFace = (
     weight: Option<number | string>,
     style: Option<string>,
     url: string
-): SerializedStyles => css`
+): string => `
   @font-face {
     font-family: ${family};
     ${style.fmap((s: string) => `font-style: ${s};`).withDefault('')}

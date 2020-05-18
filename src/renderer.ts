@@ -12,7 +12,7 @@ import { ElementKind, BodyElement } from 'bodyElement';
 import { Role, BodyImageProps } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
-import { ImageMappings } from 'components/shared/page';
+import { ImageMappings, pageFonts } from 'components/shared/page';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
@@ -417,44 +417,33 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
 
         case ElementKind.InteractiveAtom: {
             const { html, css: styles, js } = element;
-
-            const atom = h(InteractiveAtom, { html, styles, js, format });
-            const fenced = `
-                <html>
-                    <head>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                        <script>
-                            const fonts = [].slice.apply(window.parent.document.styleSheets)
-                                .filter(sheet => sheet.ownerNode.attributes?.getNamedItem('data-emotion-css')?.value?.includes('PageStyles'))
-                                .map(sheet => sheet.ownerNode.textContent)
-                                .join(' ')
-                            var css = document.createElement('style');
-                            css.textContent = fonts;
-                            document.head.appendChild(css);
-                        </script>
-                        <style>
-                            ${styles}
-                        </style>
-                    </head>
-                    <body>
-                        ${html}
-                        <script>
-                            ${js}
-                            function resize() {
-                                window.frameElement.height = document.body.offsetHeight;
-                            }
-                            window.addEventListener('resize', resize);
-                            resize();
-                        </script>
-                    </body>
-                </html>
-            `;
-
             if (format.design !== Design.Interactive) {
+                const fenced = `
+                    <html>
+                        <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                            <style>
+                                ${pageFonts}
+                                ${styles}
+                            </style>
+                        </head>
+                        <body>
+                            ${html}
+                            <script>
+                                ${js}
+                                function resize() {
+                                    window.frameElement.height = document.body.offsetHeight;
+                                }
+                                window.addEventListener('resize', resize);
+                                resize();
+                            </script>
+                        </body>
+                    </html>
+                `;
                 return h('iframe', { srcdoc: fenced });
             } else {
-                return atom;
+                return h(InteractiveAtom, { html, styles, js, format });
             }
         }
     }
