@@ -32,8 +32,8 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Flex } from '@root/src/web/components/Flex';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -507,14 +507,20 @@ export const ShowcaseLayout = ({
 
                     {showComments && (
                         <Section sectionId="comments">
-                            <Flex>
-                                <div id="comments-root" />
-                                <RightColumn>
-                                    <AdSlot
-                                        asps={namedAdSlotParameters('comments')}
-                                    />
-                                </RightColumn>
-                            </Flex>
+                            <CommentsLayout
+                                pillar={pillar}
+                                baseUrl={CAPI.config.discussionApiUrl}
+                                shortUrl={CAPI.config.shortUrlId}
+                                commentCount={0}
+                                isClosedForComments={true}
+                                discussionD2Uid={CAPI.config.discussionD2Uid}
+                                discussionApiClientHeader={
+                                    CAPI.config.discussionApiClientHeader
+                                }
+                                enableDiscussionSwitch={false}
+                                expanded={false}
+                                onPermalinkClick={() => {}}
+                            />
                         </Section>
                     )}
 

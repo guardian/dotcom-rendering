@@ -36,8 +36,8 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Flex } from '@root/src/web/components/Flex';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -48,6 +48,8 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+
+const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const StandardGrid = ({
     children,
@@ -466,7 +468,10 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd />
+                            <StickyAd
+                                name="right"
+                                height={MOSTVIEWED_STICKY_HEIGHT}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
@@ -492,14 +497,20 @@ export const StandardLayout = ({
 
                     {showComments && (
                         <Section sectionId="comments">
-                            <Flex>
-                                <div id="comments-root" />
-                                <RightColumn>
-                                    <AdSlot
-                                        asps={namedAdSlotParameters('comments')}
-                                    />
-                                </RightColumn>
-                            </Flex>
+                            <CommentsLayout
+                                pillar={pillar}
+                                baseUrl={CAPI.config.discussionApiUrl}
+                                shortUrl={CAPI.config.shortUrlId}
+                                commentCount={0}
+                                isClosedForComments={true}
+                                discussionD2Uid={CAPI.config.discussionD2Uid}
+                                discussionApiClientHeader={
+                                    CAPI.config.discussionApiClientHeader
+                                }
+                                enableDiscussionSwitch={false}
+                                expanded={false}
+                                onPermalinkClick={() => {}}
+                            />
                         </Section>
                     )}
 

@@ -129,6 +129,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         hasRelated: CAPI.hasRelated,
         hasStoryPackage: CAPI.hasStoryPackage,
+        shouldHideAds: CAPI.shouldHideAds,
         isAdFreeUser: CAPI.isAdFreeUser,
         pageId: CAPI.pageId,
         tags: CAPI.tags,
