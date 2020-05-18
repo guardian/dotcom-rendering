@@ -17,6 +17,9 @@ import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
+import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
+import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -73,7 +76,9 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'caption    border      standfirst  right-column'
+                        'caption    border      title       right-column'
+                        '.          border      headline    right-column'
+                        '.          border      standfirst  right-column'
                         '.          border      byline      right-column'
                         'lines      border      body        right-column'
                         'meta       border      body        right-column'
@@ -90,6 +95,8 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        '.          border      title       right-column'
+                        '.          border      headline    right-column'
                         '.          border      standfirst  right-column'
                         '.          border      byline      right-column'
                         'lines      border      body        right-column'
@@ -105,6 +112,8 @@ const ImmersiveGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        'title       right-column'
+                        'headline    right-column'
                         'standfirst  right-column'
                         'byline      right-column'
                         'caption     right-column'
@@ -117,6 +126,8 @@ const ImmersiveGrid = ({
                     grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'title'
+                        'headline'
                         'standfirst'
                         'byline'
                         'caption'
@@ -207,7 +218,7 @@ export const ImmersiveLayout = ({
                 className={css`
                     display: flex;
                     flex-direction: column;
-                    min-height: 100vh;
+                    min-height: ${mainMedia && '100vh'};
                 `}
             >
                 <Section
@@ -226,41 +237,45 @@ export const ImmersiveLayout = ({
                         edition={CAPI.editionId}
                     />
                 </Section>
-                <div
-                    className={css`
-                        flex: 1;
-                        min-height: 31.25rem;
-                        position: relative;
-                    `}
-                >
-                    <MainMedia
-                        display={display}
-                        elements={CAPI.mainMediaElements}
-                        pillar={pillar}
-                        adTargeting={adTargeting}
-                        starRating={
-                            CAPI.designType === 'Review' && CAPI.starRating
-                                ? CAPI.starRating
-                                : undefined
-                        }
-                        hideCaption={true}
-                    />
-                </div>
+                {mainMedia && (
+                    <div
+                        className={css`
+                            flex: 1;
+                            min-height: 31.25rem;
+                            position: relative;
+                        `}
+                    >
+                        <MainMedia
+                            display={display}
+                            elements={CAPI.mainMediaElements}
+                            pillar={pillar}
+                            adTargeting={adTargeting}
+                            starRating={
+                                CAPI.designType === 'Review' && CAPI.starRating
+                                    ? CAPI.starRating
+                                    : undefined
+                            }
+                            hideCaption={true}
+                        />
+                    </div>
+                )}
             </div>
 
-            <ImmersiveHeadline
-                display={display}
-                designType={designType}
-                tags={CAPI.tags}
-                author={CAPI.author}
-                headline={CAPI.headline}
-                sectionLabel={CAPI.sectionLabel}
-                sectionUrl={CAPI.sectionUrl}
-                guardianBaseURL={CAPI.guardianBaseURL}
-                pillar={CAPI.pillar}
-                captionText={captionText}
-                badge={CAPI.badge}
-            />
+            {mainMedia && (
+                <ImmersiveHeadline
+                    display={display}
+                    designType={designType}
+                    tags={CAPI.tags}
+                    author={CAPI.author}
+                    headline={CAPI.headline}
+                    sectionLabel={CAPI.sectionLabel}
+                    sectionUrl={CAPI.sectionUrl}
+                    guardianBaseURL={CAPI.guardianBaseURL}
+                    pillar={CAPI.pillar}
+                    captionText={captionText}
+                    badge={CAPI.badge}
+                />
+            )}
 
             <Section showTopBorder={false} showSideBorders={false}>
                 <ImmersiveGrid>
@@ -279,6 +294,53 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="border">
                         <Border />
+                    </GridItem>
+                    <GridItem area="title">
+                        <>
+                            {!mainMedia && (
+                                <div
+                                    className={css`
+                                        margin-top: -3px;
+                                        margin-left: -10px;
+
+                                        ${until.tablet} {
+                                            margin-left: -20px;
+                                        }
+                                    `}
+                                >
+                                    <ArticleTitle
+                                        display={display}
+                                        tags={CAPI.tags}
+                                        sectionLabel={CAPI.sectionLabel}
+                                        sectionUrl={CAPI.sectionUrl}
+                                        guardianBaseURL={CAPI.guardianBaseURL}
+                                        pillar={pillar}
+                                        badge={CAPI.badge}
+                                    />
+                                </div>
+                            )}
+                        </>
+                    </GridItem>
+                    <GridItem area="headline">
+                        <>
+                            {!mainMedia && (
+                                <div className={maxWidth}>
+                                    <ArticleHeadlinePadding
+                                        designType={designType}
+                                    >
+                                        <ArticleHeadline
+                                            display={display}
+                                            headlineString={CAPI.headline}
+                                            designType={designType}
+                                            pillar={pillar}
+                                            tags={CAPI.tags}
+                                            byline={CAPI.author.byline}
+                                            noMainMedia={true}
+                                        />
+                                    </ArticleHeadlinePadding>
+                                </div>
+                            )}
+                        </>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -362,13 +424,21 @@ export const ImmersiveLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <div
-                                className={css`
-                                    margin-top: ${space[4]}px;
-                                `}
-                            >
-                                <AdSlot asps={namedAdSlotParameters('right')} />
-                            </div>
+                            <>
+                                {mainMedia && (
+                                    <div
+                                        className={css`
+                                            margin-top: ${space[4]}px;
+                                        `}
+                                    >
+                                        <AdSlot
+                                            asps={namedAdSlotParameters(
+                                                'right',
+                                            )}
+                                        />
+                                    </div>
+                                )}
+                            </>
                         </RightColumn>
                     </GridItem>
                 </ImmersiveGrid>

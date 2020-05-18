@@ -17,6 +17,8 @@ type Props = {
     byline?: string;
     tags: TagType[];
     isShowcase?: boolean; // Used for Interviews to change headline position
+    noMainMedia?: boolean; // Used for Immersives where the headline styles
+    // change when there is no main media
 };
 
 const curly = (x: any) => x;
@@ -160,11 +162,28 @@ export const ArticleHeadline = ({
     pillar,
     tags,
     byline,
+    noMainMedia,
 }: Props) => {
+    if (display === 'immersive' && noMainMedia) {
+        return (
+            // Immersive headlines have two versions, with main media, and (this one) without
+            <h1
+                className={cx(
+                    jumboFont,
+                    maxWidth,
+                    immersiveStyles,
+                    displayBlock,
+                )}
+            >
+                {curly(headlineString)}
+            </h1>
+        );
+    }
+
     if (display === 'immersive') {
         return (
-            // Immersive headlines are large and inverted and have their black background
-            // extended to the right
+            // Immersive headlines with main media present, are large and inverted with
+            // a black background
             <h1 className={cx(invertedWrapper, blackBackground)}>
                 <span
                     className={cx(
@@ -182,18 +201,6 @@ export const ArticleHeadline = ({
     }
 
     switch (designType) {
-        case 'Immersive':
-        case 'Article':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Live':
-        case 'SpecialReport':
-        case 'MatchReport':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
-
         case 'Review':
         case 'Recipe':
         case 'Feature':
@@ -260,5 +267,17 @@ export const ArticleHeadline = ({
                     )}
                 </div>
             );
+        case 'Immersive':
+        case 'Article':
+        case 'Media':
+        case 'PhotoEssay':
+        case 'Live':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        default:
+            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
     }
 };
