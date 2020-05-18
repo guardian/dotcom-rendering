@@ -104,19 +104,37 @@ export const InterviewStory = () => {
     const ServerCAPI = convertToShowcase(Interview);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-InterviewStory.story = { name: 'Interview' };
+InterviewStory.story = {
+    name: 'Interview',
+    parameters: {
+        viewport: { defaultViewport: 'leftCol' },
+        chromatic: { viewports: [1140] },
+    },
+};
 
 export const QuizStory = () => {
     const ServerCAPI = convertToShowcase(Quiz);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-QuizStory.story = { name: 'Quiz' };
+QuizStory.story = {
+    name: 'Quiz',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1300] },
+    },
+};
 
 export const RecipeStory = () => {
     const ServerCAPI = convertToShowcase(Recipe);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-RecipeStory.story = { name: 'Recipe' };
+RecipeStory.story = {
+    name: 'Recipe',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [480] },
+    },
+};
 
 export const MatchReportStory = () => {
     const ServerCAPI = convertToShowcase(MatchReport);
