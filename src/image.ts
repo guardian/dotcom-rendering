@@ -22,6 +22,7 @@ const defaultWidths = [
 
 // Percentage.
 const defaultQuality = 85;
+const dpr2x = 45;
 
 
 // ----- Types ----- //
@@ -67,8 +68,22 @@ function src(imageMappings: ImageMappings, input: string, width: number): string
         'sig-ignores-params': 'true',
         s: imageMappings[url.pathname],
     });
+    console.log(params);
 
-    return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
+    const params2x = new URLSearchParams({
+        width: width.toString(),
+        quality: dpr2x.toString(),
+        fit: 'bounds',
+        dpr: '2',
+        'sig-ignores-params': 'true',
+        s: imageMappings[url.pathname],
+    });
+    console.log(params2x);
+
+    const result = `${imageResizer}/${service}${url.pathname}?${params.toString()}, ${imageResizer}/${service}${url.pathname}?${params2x.toString()} 2x`;
+
+    console.log(result);
+    return result;
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMappings): string =>
@@ -78,12 +93,13 @@ const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMapp
 
 const srcset: (url: string, mappings: ImageMappings) => string =
     srcsetWithWidths(defaultWidths)
+console.log(srcset)
 
 const parseImage = (docParser: (html: string) => DocumentFragment) =>
     (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const data = element.imageTypeData;
-    
+
     return fromNullable(masterAsset).andThen(asset => {
         if (
             asset?.file === undefined ||
