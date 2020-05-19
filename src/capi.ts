@@ -1,43 +1,11 @@
 // ----- Imports ----- //
 
-import { Result, Ok, Err } from 'types/result';
 import { IContent as Content} from 'mapiThriftModels/Content';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { IBlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { TagType, ContentType, ICapiDateTime as CapiDateTime } from 'mapiThriftModels';
-
-// ----- Parsing ----- //
-
-const enum ErrorStatus {
-    NotFound,
-    Unknown,
-}
-
-type Error = {
-    status: ErrorStatus;
-    message: string;
-}
-
-function getContent(status: number, path: string, content: Content): Result<Error, Content> {
-    switch (status) {
-        case 200:
-            return new Ok(content);
-    
-        case 404:
-            return new Err({
-                status: ErrorStatus.NotFound,
-                message: `CAPI says that it doesn't recognise this resource: ${path}`,
-            });
-        default:
-            return new Err({
-                status: ErrorStatus.Unknown,
-                message: `When I tried to talk to CAPI I received a ${status}.`,
-            });
-    }
-
-}
 
 
 // ----- Lookups ----- //
@@ -137,8 +105,6 @@ const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 
 export {
     Series,
-    ErrorStatus as CapiError,
-    getContent,
     isPhotoEssay,
     isImmersive,
     isInteractive,
