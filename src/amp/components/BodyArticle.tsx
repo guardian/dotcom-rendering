@@ -100,7 +100,7 @@ export const Body: React.FC<{
         />
     );
 
-    const epic = data.shouldHideReaderRevenue ? null : <Epic />
+    const epic = data.shouldHideReaderRevenue ? null : <Epic webURL={data.webURL} />;
 
     return (
         <InnerContainer className={body(pillar, designType)}>
