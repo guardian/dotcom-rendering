@@ -10,6 +10,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -215,6 +216,12 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Hydrate root="links-root">
                 <Links userId={user ? user.userId : undefined} />
+            </Hydrate>
+            <Hydrate root="header-ad-slot-root">
+                <HeaderAdSlot
+                    isAdFreeUser={CAPI.isAdFreeUser}
+                    shouldHideAds={CAPI.shouldHideAds}
+                />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown

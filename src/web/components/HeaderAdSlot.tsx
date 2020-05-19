@@ -35,19 +35,31 @@ export const HeaderAdSlot: React.FC<{
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
 }> = ({ isAdFreeUser, shouldHideAds }) => (
-    <div className={headerWrapper}>
-        <Hide when="below" breakpoint="tablet">
-            <div
-                className={cx({
-                    [headerAdWrapper]: true,
-                    [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
-                })}
-            >
-                <AdSlot
-                    asps={namedAdSlotParameters('top-above-nav')}
-                    localStyles={adSlotAboveNav}
-                />
+    <>
+        {/*
+            Commercial script does not render this ad slot on mobile width
+            if the element exists in the DOM. Therefore we need to remove it
+            from the DOM
+            TODO: find better work around working with commerical logic
+        */}
+        {/* 740 is the px width of tablet */}
+        {document.documentElement.clientWidth >= 740 && (
+            <div className={headerWrapper}>
+                <Hide when="below" breakpoint="tablet">
+                    <div
+                        className={cx({
+                            [headerAdWrapper]: true,
+                            [headerAdWrapperHidden]:
+                                isAdFreeUser || shouldHideAds,
+                        })}
+                    >
+                        <AdSlot
+                            asps={namedAdSlotParameters('top-above-nav')}
+                            localStyles={adSlotAboveNav}
+                        />
+                    </div>
+                </Hide>
             </div>
-        </Hide>
-    </div>
+        )}
+    </>
 );

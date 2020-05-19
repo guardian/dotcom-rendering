@@ -594,7 +594,8 @@ type IslandType =
     | 'onwards-lower-whensignedout'
     | 'rich-link'
     | 'links-root'
-    | 'comments';
+    | 'comments'
+    | 'header-ad-slot-root';
 
 interface TrailType {
     designType: DesignType;

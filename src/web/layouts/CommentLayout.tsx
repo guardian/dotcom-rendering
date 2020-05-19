@@ -29,7 +29,6 @@ import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
-import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
@@ -252,10 +251,7 @@ export const CommentLayout = ({
                         showSideBorders={false}
                         padded={false}
                     >
-                        <HeaderAdSlot
-                            isAdFreeUser={CAPI.isAdFreeUser}
-                            shouldHideAds={CAPI.shouldHideAds}
-                        />
+                        <div id="header-ad-slot-root" />
                     </Section>
                 </Stuck>
                 <SendToBack>
