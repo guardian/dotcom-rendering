@@ -8,17 +8,17 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Feedback](#feedback)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+-   [Chat](#chat)
+-   [Quick start](#quick-start)
+    -   [Install Node.js](#install-nodejs)
+    -   [Running instructions](#running-instructions)
+    -   [Detailed Setup](#detailed-setup)
+    -   [Feedback](#feedback)
+-   [Code Quality](#code-quality)
+-   [IDE setup](#ide-setup)
+    -   [Extensions](#extensions)
+    -   [Auto fix on save](#auto-fix-on-save)
+-   [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -53,6 +53,10 @@ You can render a specific article by [specifying the production URL in the query
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
+
+### Architecture Diagram
+
+You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
 ### Feedback
 
@@ -100,11 +104,11 @@ You can also find these extensions by searching for `@recommended` in the extens
 
 We recommend you update your workspace settings to automatically fix formatting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
 
-1. Open the Command Palette (`shift + cmd + P`) and type 
+1. Open the Command Palette (`shift + cmd + P`) and type
 
-	```
-	>Preferences: Open Settings (JSON)
-	```
+    ```
+    >Preferences: Open Settings (JSON)
+    ```
 
 2. Add the key value `"tslint.autoFixOnSave": true,`
 

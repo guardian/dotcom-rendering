@@ -142,3 +142,6 @@ gen-schema:
 
 perf-test:
 	@node scripts/perf/perf-test.js
+
+arch-diagram:
+	@npx arkit

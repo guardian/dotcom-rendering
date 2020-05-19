@@ -1,0 +1,49 @@
+{
+    "$schema": "https://arkit.js.org/schema.json",
+    "excludePatterns": [
+        "test/**",
+        "tests/**",
+        "**/*.test.*",
+        "**/*.stories.*",
+        "**/*.mock.*",
+        "**/*.mocks.*"
+    ],
+    "components": [
+        {
+            "type": "Component",
+            "patterns": ["src/web/**/*.ts", "src/web/**/*.tsx"]
+        }
+    ],
+    "output": [
+        {
+            "path": "docs/webArchitecture.svg",
+            "groups": [
+                {
+                    "first": true,
+                    "components": ["Web"],
+                    "patterns": ["src/web/**"]
+                },
+                {
+                    "type": "Browser",
+                    "patterns": ["src/web/browser/**"]
+                },
+                {
+                    "type": "Server",
+                    "patterns": ["src/web/server/**"]
+                },
+                {
+                    "type": "Components",
+                    "patterns": ["src/web/components/**"]
+                },
+                {
+                    "type": "Layouts",
+                    "patterns": ["src/web/layouts/**"]
+                },
+                {
+                    "type": "Lib",
+                    "patterns": ["src/web/lib/**"]
+                }
+            ]
+        }
+    ]
+}
