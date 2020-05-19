@@ -108,7 +108,18 @@ const acceptedPaymentMethodsWrapper = css`
     display: block;
 `;
 
-export const Epic: React.FC<{}> = ({}) => {
+const buildUrl = (contributionsUrl: string, articleUrl: string, campaignCode: string, componentId: string): string => {
+    const acquisitionData = {
+        source: "GOOGLE_AMP",
+        componentType: "ACQUISITIONS_EPIC",
+        componentId,
+        campaignCode,
+        referrerUrl: articleUrl
+    };
+    return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(acquisitionData)}`;
+};
+
+export const Epic: React.FC<{webURL: string}> = ({webURL}) => {
     const epicUrl = process.env.NODE_ENV === 'production' ?
         'https://contributions.guardianapis.com/amp/epic' :
         'https://contributions.code.dev-guardianapis.com/amp/epic';
@@ -136,7 +147,17 @@ export const Epic: React.FC<{}> = ({}) => {
                     <span className={highlightedText}><MoustacheVariable name="highlightedText" /></span>
                     <br />
                     <MoustacheSection name="cta">
-                        <a href={moustacheVariable('baseUrl')} className={supportButton}>
+                        <a
+                            href={
+                                buildUrl(
+                                    moustacheVariable('url'),
+                                    webURL,
+                                    moustacheVariable('campaignCode'),
+                                    moustacheVariable('componentId')
+                                )
+                            }
+                            className={supportButton}
+                        >
                             <MoustacheVariable name="text" />
                             <svg
                                 className={arrow}
