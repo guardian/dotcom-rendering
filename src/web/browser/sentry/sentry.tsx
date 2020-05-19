@@ -26,12 +26,12 @@ const ignoreErrors = [
 ];
 
 export const initialiseSentry = (adBlockInUse: boolean) => {
-    const CAPIbrowser: CAPIBrowserType = window.guardian.app.data.CAPI;
+    const CAPIBrowser: CAPIBrowserType = window.guardian.app.data.CAPI;
     const {
         editionLongForm,
         contentType,
         config: { isDev, enableSentryReporting, dcrSentryDsn },
-    } = CAPIbrowser;
+    } = CAPIBrowser;
 
     Sentry.init({
         ignoreErrors,
