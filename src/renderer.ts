@@ -5,7 +5,7 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
-import { basePx, icons, darkModeCss } from 'styles';
+import { basePx, icons, darkModeCss, pageFonts } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { ElementKind, BodyElement } from 'bodyElement';
@@ -426,13 +426,33 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
 
         case ElementKind.InteractiveAtom: {
             const { html, css: styles, js } = element;
-
-            const atom = h(InteractiveAtom, { html, styles, js, format });
-
             if (format.design !== Design.Interactive) {
-                return h('iframe', null, atom);
+                const fenced = `
+                    <html>
+                        <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                            <style>
+                                ${pageFonts}
+                                ${styles}
+                            </style>
+                        </head>
+                        <body>
+                            ${html}
+                            <script>
+                                ${js}
+                                function resize() {
+                                    window.frameElement.height = document.body.offsetHeight;
+                                }
+                                window.addEventListener('resize', resize);
+                                resize();
+                            </script>
+                        </body>
+                    </html>
+                `;
+                return h('iframe', { srcdoc: fenced });
             } else {
-                return atom;
+                return h(InteractiveAtom, { html, styles, js, format });
             }
         }
     }
