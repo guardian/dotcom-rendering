@@ -311,9 +311,11 @@ type CAPIBrowserType = {
         discussionApiUrl: string;
         discussionD2Uid: string;
         discussionApiClientHeader: string;
+        dcrSentryDsn: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
+    editionLongForm: string;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
