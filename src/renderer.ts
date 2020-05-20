@@ -419,13 +419,21 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                   __html: element.html,
                 },
             };
-            const figureCss = css`margin-right: 0; margin-left: 0`;
+
+            const figureCss = css`margin ${remSpace[4]} 0`;
             const captionStyles = css`
                 ${textSans.xsmall()}
                 color: ${textColour.supporting};
             `
-            const caption = styledH('figcaption', { css: captionStyles }, element.alt)
-            return styledH('figure', { css: figureCss }, [h('div', props), caption])
+
+            const figure = (alt: string | null) => {
+                const children = [h('div', props), styledH('figcaption', { css: captionStyles }, alt)];
+                return styledH('figure', { css: figureCss }, children);
+            }
+
+            return element.alt
+                .fmap(alt => figure(alt))
+                .withDefault(figure(null))
         }
 
         case ElementKind.Instagram: {

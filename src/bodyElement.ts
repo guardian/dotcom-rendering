@@ -195,7 +195,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on embedTypeData')
             }
 
-            return new Ok({ kind: ElementKind.Embed, html: embedHtml, alt });
+            return new Ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
         }
 
         case ElementType.INSTAGRAM: {

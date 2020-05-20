@@ -82,6 +82,7 @@ const embedElement = (): BodyElement =>
     ({
         kind: ElementKind.Embed,
         html: '<section>Embed</section>',
+        alt: new None
     })
 
 const videoElement = (): BodyElement =>
@@ -218,7 +219,7 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Embed', () => {
         const nodes = render(embedElement())
         const embed = shallow(nodes.flat()[0]);
-        expect(embed.html()).toBe('<div><section>Embed</section></div>');
+        expect(embed.html()).toContain('<div><section>Embed</section></div>');
     })
 
     test('ElementKind.Audio', () => {
