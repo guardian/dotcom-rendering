@@ -426,7 +426,7 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                 color: ${textColour.supporting};
             `
 
-            const figure = (alt: string | null) => {
+            const figure = (alt: string | null): ReactElement => {
                 const children = [h('div', props), styledH('figcaption', { css: captionStyles }, alt)];
                 return styledH('figure', { css: figureCss }, children);
             }
