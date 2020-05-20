@@ -79,6 +79,7 @@ type BodyElement = {
 } | Audio | {
     kind: ElementKind.Embed;
     html: string;
+    alt: Option<string>;
 } | Video | InteractiveAtom;
 
 type Elements = BlockElement[] | undefined;
@@ -188,13 +189,13 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
         }
 
         case ElementType.EMBED: {
-            const { html: embedHtml } = element.embedTypeData ?? {};
+            const { html: embedHtml, alt } = element.embedTypeData ?? {};
 
             if (!embedHtml) {
                 return new Err('No html field on embedTypeData')
             }
 
-            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
+            return new Ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
         }
 
         case ElementType.INSTAGRAM: {

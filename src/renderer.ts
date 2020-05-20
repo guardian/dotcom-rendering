@@ -3,7 +3,7 @@
 import { ReactNode, createElement as h, ReactElement, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
+import { text as textColour, neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss, pageFonts } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
@@ -413,7 +413,29 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
         case ElementKind.Video:
             return h(Video, { src: element.src, width: element.width, height: element.height })
 
-        case ElementKind.Embed:
+        case ElementKind.Embed: {
+            const props = {
+                dangerouslySetInnerHTML: {
+                  __html: element.html,
+                },
+            };
+
+            const figureCss = css`margin ${remSpace[4]} 0`;
+            const captionStyles = css`
+                ${textSans.xsmall()}
+                color: ${textColour.supporting};
+            `
+
+            const figure = (alt: string | null): ReactElement => {
+                const children = [h('div', props), styledH('figcaption', { css: captionStyles }, alt)];
+                return styledH('figure', { css: figureCss }, children);
+            }
+
+            return element.alt
+                .fmap(alt => figure(alt))
+                .withDefault(figure(null))
+        }
+
         case ElementKind.Instagram: {
             const props = {
                 dangerouslySetInnerHTML: {
