@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { css } from 'emotion';
+import React, { useEffect, useState } from 'react';
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 import {
     getBodyEnd,
     getViewLog,
@@ -14,11 +16,16 @@ import {
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
+const { css } = emotion;
+
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
-        throw Error(response.statusText || `SlotBodyEnd | An api call returned HTTP status ${response.status}`);
+        throw Error(
+            response.statusText ||
+                `SlotBodyEnd | An api call returned HTTP status ${response.status}`,
+        );
     }
     return response;
 };
@@ -62,6 +69,17 @@ const sendOphanReminderEvent = (componentId: string): void => {
     window.guardian.ophan.record({ componentEvent });
 };
 
+interface OpenProps {
+    buttonCopyAsString: string;
+}
+
+const sendOphanReminderOpenEvent = ({ buttonCopyAsString }: OpenProps) => {
+    sendOphanReminderEvent('precontribution-reminder-prompt-clicked');
+    sendOphanReminderEvent(
+        `precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
+    );
+};
+
 const wrapperMargins = css`
     margin: 18px 0;
 `;
@@ -78,15 +96,6 @@ type Props = {
     tags: TagType[];
     contributionsServiceUrl: string;
 };
-
-interface InitAutomatJsConfig {
-    epicRoot: HTMLElement | null;
-    onReminderOpen?: Function;
-}
-
-interface AutomatJsCallback {
-    buttonCopyAsString: string;
-}
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: Props) => {
@@ -119,13 +128,6 @@ const buildPayload = (props: Props) => {
     };
 };
 
-type SlotState = {
-    html: string;
-    css: string;
-    js: string;
-    meta: TestMeta;
-};
-
 const MemoisedInner = ({
     isSignedIn,
     countryCode,
@@ -138,22 +140,15 @@ const MemoisedInner = ({
     tags,
     contributionsServiceUrl,
 }: Props) => {
-    const [data, setData] = useState<{
-        slot?: SlotState;
-    }>();
+    const [Epic, setEpic] = useState<React.FC>();
+    const [epicProps, setEpicProps] = useState<{}>();
+    const [epicMeta, setEpicMeta] = useState<TestMeta>();
 
-    // Debounce the IntersectionObserver callback
-    // to ensure the Slot is seen for at least 200ms before registering the view
-    const debounce = true;
-    const [hasBeenSeen, setNode] = useHasBeenSeen(
-        {
-            rootMargin: '-18px',
-            threshold: 0,
-        },
-        debounce,
-    ) as HasBeenSeen;
-
-    const slotRoot = useRef<HTMLDivElement>(null);
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        rootMargin: '-18px',
+        threshold: 0,
+        debounce: true,
+    }) as HasBeenSeen;
 
     useEffect(() => {
         const contributionsPayload = buildPayload({
@@ -168,96 +163,60 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
-        getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
+
+        window.automat = {
+            react: React,
+            emotionCore,
+            emotionTheming,
+            emotion,
+        };
+
+        getBodyEnd(
+            contributionsPayload,
+            `${contributionsServiceUrl}/epic?dataOnly=true`,
+        )
             .then(checkForErrors)
             .then(response => response.json())
             .then(json => {
-                if (json.data) {
-                    setData({
-                        slot: {
-                            html: json.data.html,
-                            css: json.data.css,
-                            js: json.data.js,
-                            meta: json.data.meta,
-                        },
-                    });
-
-                    sendOphanEpicEvent('INSERT', json.data.meta);
+                if (!json.data) {
+                    return;
                 }
-            })
-            .catch(error =>
-                window.guardian.modules.sentry.reportError(
-                    error,
-                    'slot-body-end',
-                ),
-            );
+
+                const { meta, module } = json.data;
+                const epic = import(/* webpackIgnore: true */ module.url);
+
+                // TODO, we need to reconsider event handling, as this is all
+                // highly coupled at the moment (better would be data
+                // attributes).
+                const props = {
+                    ...module.props,
+                    onReminderOpen: sendOphanReminderOpenEvent,
+                };
+
+                epic.then(epicModule => {
+                    setEpicMeta(meta);
+                    setEpicProps(props);
+                    setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
+                    sendOphanEpicEvent('INSERT', meta);
+                    // eslint-disable-next-line no-console
+                }).catch(error => console.log(`epic - error is: ${error}`));
+            });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // only ever call once (we'd rather fail then call the API multiple times)
+    }, []);
 
+    // Should only run once
     useEffect(() => {
-        // This won't be true until we've successfully fetched the data and
-        // rendered the epic (because of how we're wiring up the ref below). And
-        // because of the way the hook behaves, it'll only ever go from false ->
-        // true once.
-        if (hasBeenSeen) {
-            const meta = data?.slot?.meta;
-
-            if (meta) {
-                // Add a new entry to the view log when we know an Epic is viewed
-                logView(meta.abTestName);
-                sendOphanEpicEvent('VIEW', meta);
-            }
+        if (hasBeenSeen && epicMeta) {
+            logView(epicMeta.abTestName);
+            sendOphanEpicEvent('VIEW', epicMeta);
         }
-    // The 'data' object used in the hook never changes after 'hasBeenSeen'
-    // is set to true, so we're intentionally leaving it out of the deps array.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [hasBeenSeen]);
+    }, [hasBeenSeen, epicMeta]);
 
-    // Rely on useEffect to run a function that initialises the slot once it's
-    // been injected in the DOM.
-    useEffect(() => {
-        if (data && data.slot && data.slot.js) {
-            // This should only be called once
-            try {
-                // eslint-disable-next-line no-eval
-                window.eval(data.slot.js);
-                if (typeof window.initAutomatJs === 'function') {
-                    const initAutomatJsConfig: InitAutomatJsConfig = {
-                        epicRoot: slotRoot.current,
-                        onReminderOpen: (callbackParams: AutomatJsCallback) => {
-                            const { buttonCopyAsString } = callbackParams;
-                            // Track two separate Open events when the Reminder
-                            // button is clicked
-                            sendOphanReminderEvent(
-                                'precontribution-reminder-prompt-clicked',
-                            );
-                            sendOphanReminderEvent(
-                                `precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
-                            );
-                        },
-                    };
-                    window.initAutomatJs(initAutomatJsConfig);
-                }
-            } catch (error) {
-                // eslint-disable-next-line no-console
-                console.error(error);
-                window.guardian.modules.sentry.reportError(
-                    error,
-                    'slot-body-end',
-                );
-            }
-        }
-    }, [data]);
-
-    if (data && data.slot) {
+    if (Epic) {
         return (
             <div ref={setNode} className={wrapperMargins}>
-                {data.slot.css && <style>{data.slot.css}</style>}
-                <div
-                    ref={slotRoot}
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: data.slot.html }}
-                />
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Epic {...epicProps} />
             </div>
         );
     }
