@@ -3,7 +3,7 @@
 import { ReactNode, createElement as h, ReactElement, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
+import { text as t, neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss, pageFonts } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
@@ -413,7 +413,21 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
         case ElementKind.Video:
             return h(Video, { src: element.src, width: element.width, height: element.height })
 
-        case ElementKind.Embed:
+        case ElementKind.Embed: {
+            const props = {
+                dangerouslySetInnerHTML: {
+                  __html: element.html,
+                },
+            };
+            const figureCss = css`margin-right: 0; margin-left: 0`;
+            const captionStyles = css`
+                ${textSans.xsmall()}
+                color: ${t.supporting};
+            `
+            const caption = styledH('div', { css: captionStyles }, element.alt)
+            return styledH('figure', { css: figureCss }, [h('div', props), caption])
+        }
+
         case ElementKind.Instagram: {
             const props = {
                 dangerouslySetInnerHTML: {
