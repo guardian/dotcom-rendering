@@ -172,16 +172,18 @@ const MemoisedInner = ({
             .then(checkForErrors)
             .then(response => response.json())
             .then(json => {
-                setData({
-                    slot: {
-                        html: json.data.html,
-                        css: json.data.css,
-                        js: json.data.js,
-                        meta: json.data.meta,
-                    },
-                });
+                if (json.data) {
+                    setData({
+                        slot: {
+                            html: json.data.html,
+                            css: json.data.css,
+                            js: json.data.js,
+                            meta: json.data.meta,
+                        },
+                    });
 
-                sendOphanEpicEvent('INSERT', json.data.meta);
+                    sendOphanEpicEvent('INSERT', json.data.meta);
+                }
             })
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
