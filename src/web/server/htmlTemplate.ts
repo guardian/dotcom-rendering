@@ -1,7 +1,6 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { getStatic, CDN } from '@root/src/lib/assets';
-import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 
@@ -206,8 +205,6 @@ export const htmlTemplate = ({
                             }),
                     };
                 </script>
-
-                <script>${prepareCmpString}</script>
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
