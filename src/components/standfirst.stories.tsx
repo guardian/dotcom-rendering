@@ -6,7 +6,7 @@ import React, { ReactElement } from 'react';
 import Standfirst from './standfirst';
 import { Item } from 'item';
 import { Pillar, Design, Display } from 'format';
-import { Option, None } from 'types/option';
+import { Option, None, Some } from 'types/option';
 import { parse } from 'client/parser';
 import { selectPillar } from 'storybookHelpers';
 
@@ -32,14 +32,14 @@ const item: Item = {
     publishDate: new None(),
     mainImage: new None(),
     contributors: [],
-    series: {
+    series: new Some({
         id: '',
         type: 0,
         webTitle: '',
         webUrl: '',
         apiUrl: '',
         references: [],
-    },
+    }),
     commentable: false,
     tags: [],
     shouldHideReaderRevenue: false,

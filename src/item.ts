@@ -27,7 +27,7 @@ interface Fields extends Format {
     publishDate: Option<Date>;
     mainImage: Option<ImageData>;
     contributors: Tag[];
-    series: Tag;
+    series: Option<Tag>;
     commentable: boolean;
     tags: Tag[];
     shouldHideReaderRevenue: boolean;

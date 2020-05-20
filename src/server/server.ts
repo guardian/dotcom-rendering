@@ -9,16 +9,18 @@ import express, {
 import compression from 'compression';
 import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 
 import Page from 'components/shared/page';
 import { getConfigValue } from 'server/ssmConfig';
-import { CapiError, capiEndpoint, getContent } from 'capi';
+import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { response } from './liveblogResponse';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
+import { Result, Ok, Err } from 'types/result';
+import { IContent as Content } from 'mapiThriftModels/Content';
 
 
 // ----- Setup ----- //
@@ -34,6 +36,44 @@ const port = 3040;
 function getPrefetchHeader(resources: string[]): string {
     return resources.reduce((linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`, '');
 }
+
+const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
+    fetch(capiEndpoint(articleId, key));
+
+const parseCapiResponse = (articleId: string) =>
+    async (capiResponse: Response): Promise<Result<number, Content>> => {
+    const buffer = await capiResponse.buffer();
+        
+    switch (capiResponse.status) {
+        case 200: {
+            const response = capiDecoder(buffer);
+
+            if (response.content === undefined) {
+                logger.error(`CAPI returned a 200 for ${articleId}, but didn't give me any content`);
+                return new Err(500);
+            }
+
+            return new Ok(response.content);
+        }
+
+        case 404:
+            logger.warn(`CAPI says that it doesn't recognise this resource: ${articleId}`);
+
+            return new Err(404);
+
+        default: {
+            const response = errorDecoder(buffer);
+
+            logger.error(`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`);
+            return new Err(500);
+        }
+    }
+}
+
+const askCapiFor = (articleId: string): Promise<Result<number, Content>> =>
+    getConfigValue<string>('capi.key')
+        .then(capiRequest(articleId))
+        .then(parseCapiResponse(articleId));
 
 async function serveArticlePost(
     { body }: Request,
@@ -63,45 +103,25 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             res.json(response);
         }
         const articleId = req.params[ 0 ] || defaultId;
-        const key = await getConfigValue<string>("capi.key");
         const imageSalt = await getConfigValue<string>('apis.img.salt');
-        const capiResponse = await fetch(capiEndpoint(articleId, key));
-        const buffer = await capiResponse.buffer();
-        
-        if (capiResponse.status === 200) {
-            const response = capiDecoder(buffer);
+        const capiContent = await askCapiFor(articleId);
 
-            if (response.content) {
-                getContent(capiResponse.status, articleId, response.content).either(
-                    error => {
-                        if (error.status === CapiError.NotFound) {
-                            logger.warn(error.message);
-                            res.sendStatus(404);
-                        } else {
-                            logger.error(error.message);
-                            res.sendStatus(500);
-                        }
-                    },
-                    content => {
-                        const {
-                            resources,
-                            element,
-                            hydrationProps,
-                        } = Page({ content, imageSalt, getAssetLocation });
-                        res.set('Link', getPrefetchHeader(resources));
-                        res.write('<!DOCTYPE html>');
-                        res.write('<meta charset="UTF-8" />');
-                        res.write(`<script id="hydrationProps" type="application/json">${JSON.stringify(hydrationProps)}</script>`);
-                        res.write(renderToString(element));
-                        res.end();
-                    }
-                )
-            }
-        } else {
-            const response = errorDecoder(buffer);
-            logger.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message} for resource ${articleId}`);
-            res.sendStatus(500);
-        }
+        capiContent.either(
+            errorStatus => { res.sendStatus(errorStatus) },
+            content => {
+                const {
+                    resources,
+                    element,
+                    hydrationProps,
+                } = Page({ content, imageSalt, getAssetLocation });
+                res.set('Link', getPrefetchHeader(resources));
+                res.write('<!DOCTYPE html>');
+                res.write('<meta charset="UTF-8" />');
+                res.write(`<script id="hydrationProps" type="application/json">${JSON.stringify(hydrationProps)}</script>`);
+                res.write(renderToString(element));
+                res.end();
+            },
+        )
     } catch (e) {
         logger.error(`This error occurred`, e);
         res.sendStatus(500);

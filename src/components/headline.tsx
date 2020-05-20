@@ -3,14 +3,15 @@
 import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
+import { between, from } from '@guardian/src-foundations/mq';
+import { Format, Display, Design } from '@guardian/types/Format';
 
 import { Item } from 'item';
-import { darkModeCss as darkMode } from 'styles';
-import { getPillarStyles, PillarStyles } from 'pillarStyles';
-import StarRating from './starRating';
-import { Display, Design } from 'format';
+import { wideContentWidth, articleWidthStyles } from 'styles';
+import StarRating from 'components/starRating';
+import { border } from 'editorialPalette';
+import { headlineTextColour, headlineBackgroundColour } from 'editorialStyles';
 
 
 // ----- Component ----- //
@@ -19,88 +20,88 @@ interface Props {
     item: Item;
 }
 
-const darkStyles = darkMode`
-    background: ${background.inverse};
-    color: ${neutral[86]};
-`;
-
-const styles = css`
+const styles = (format: Format): SerializedStyles => css`
     ${headline.medium()}
+    ${headlineTextColour(format)}
+    ${headlineBackgroundColour(format)}
     padding-bottom: ${remSpace[9]};
-    color: ${text.primary};
     margin: 0;
 
-    ${darkStyles}
+    ${articleWidthStyles}
 `;
 
 const immersiveStyles = css`
     ${headline.medium({ fontWeight: 'bold' })}
-    background-color: ${neutral[7]};
-    color: ${neutral[100]};
     font-weight: 700;
     padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
-    margin: 0;
+    margin: calc(100vh - 5rem) 0 0;
+    position: relative;
+    display: inline-block;
 
-    ${darkStyles}
+    ${between.phablet.and.wide} {
+        width: ${wideContentWidth}px;
+    }
+
+    ${from.desktop} {
+        ${headline.xlarge({ fontWeight: 'bold' })}
+        margin-top: calc(100vh - 7rem);
+    }
+
+    ${from.wide} {
+        width: 100%;
+        margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
+
+        span {
+            display: block;
+            width: ${wideContentWidth}px;
+        }
+    }
 `;
 
-const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
-    ${styles}
+const analysisStyles = (format: Format): SerializedStyles => css`
     ${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
     span {
-        box-shadow: inset 0 -0.1rem ${kicker};
+        box-shadow: inset 0 -0.1rem ${border.primary(format)};
         padding-bottom: 0.2rem;
     }
 `;
 
-const mediaStyles = css `
-    ${styles}
-    color: ${neutral[100]};
+const mediaStyles = css`
     ${headline.medium({ fontWeight: 'medium' })}
-    
-    ${darkMode`
-        color: ${neutral[86]};
-    `}
 `
 
-const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => css`
-    ${styles}
+const featureStyles = css`
     ${headline.medium({ fontWeight: 'bold' })}
-    color: ${featureHeadline};
 `;
 
 const commentStyles = css`
-    ${styles}
     ${headline.medium({ fontWeight: 'light' })}
     padding-bottom: ${remSpace[1]};
 `;
 
 const advertisementFeatureStyles = css`
-    ${styles}
     ${textSans.xxxlarge({ lineHeight: 'regular' })}}
 `;
 
-const getStyles = (item: Item): SerializedStyles => {
-    const pillarStyles = getPillarStyles(item.pillar);
-
-    if (item.display === Display.Immersive) {
-        return immersiveStyles;
+const getStyles = (format: Format): SerializedStyles => {
+    if (format.display === Display.Immersive) {
+        return css(styles(format), immersiveStyles);
     }
 
-    switch (item.design) {
+    switch (format.design) {
         case Design.Analysis:
-            return analysisStyles(pillarStyles);
+            return css(styles(format), analysisStyles(format));
         case Design.Feature:
-            return featureStyles(pillarStyles);
+            return css(styles(format), featureStyles);
         case Design.Comment:
-            return commentStyles;
+            return css(styles(format), commentStyles);
         case Design.Media:
-            return mediaStyles;
+            return css(styles(format), mediaStyles);
         case Design.AdvertisementFeature:
-            return advertisementFeatureStyles;
+            return css(styles(format), advertisementFeatureStyles);
         default:
-            return styles;
+            return styles(format);
     }
 }
 

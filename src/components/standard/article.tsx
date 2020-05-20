@@ -1,21 +1,24 @@
 // ----- Imports ----- //
 
 import React, { ReactNode } from 'react';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/headerImage';
-import Series from 'components/shared/articleSeries';
+import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review, getFormat } from 'item';
+import { Standard, Review, getFormat, Item } from 'item';
 import { ImageMappings } from 'components/shared/page';
-import Metadata from './metadata';
+import Metadata from 'components/metadata';
+import { getPillarStyles } from 'pillarStyles';
+import { Display } from '@guardian/types/Format';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Styles ----- //
@@ -38,6 +41,34 @@ const BorderStyles = css`
     }
 `;
 
+const itemStyles = (item: Item): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(item.pillar);
+
+    switch (item.display) {
+        case Display.Immersive:
+            return css`
+                p:first-of-type:first-letter,
+                hr + p:first-letter {
+                    color: ${kicker};
+                    display: inline-block;
+                    vertical-align: text-top;
+                    line-height: 5.625rem;
+                    font-size: 6.8125rem;
+                    display: inline-block;
+                    font-weight: 900;
+                    float: left;
+                    margin-right: ${remSpace[2]};
+
+                    ${darkModeCss`
+                        color: ${inverted};
+                    `}
+                }
+            `;
+
+        default:
+            return css``;
+    }
+}
 
 // ----- Component ----- //
 
@@ -61,18 +92,17 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                     imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
+                <Series item={item} />
+                <Headline item={item} />
                 <div css={articleWidthStyles}>
-                    <Series series={item.series} pillar={item.pillar} />
-                    <Headline item={item} />
                     <Standfirst item={item} />
-
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata imageMappings={imageMappings} item={item} />
                 </section>
             </header>
-            <Body className={[articleWidthStyles]}>
+            <Body className={[articleWidthStyles, itemStyles(item)]}>
                 {children}
             </Body>
             {epicContainer}

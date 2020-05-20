@@ -82,6 +82,7 @@ const embedElement = (): BodyElement =>
     ({
         kind: ElementKind.Embed,
         html: '<section>Embed</section>',
+        alt: new None
     })
 
 const videoElement = (): BodyElement =>
@@ -218,7 +219,7 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Embed', () => {
         const nodes = render(embedElement())
         const embed = shallow(nodes.flat()[0]);
-        expect(embed.html()).toBe('<div><section>Embed</section></div>');
+        expect(embed.html()).toContain('<div><section>Embed</section></div>');
     })
 
     test('ElementKind.Audio', () => {
@@ -236,9 +237,9 @@ describe('Renders different types of elements', () => {
     test('ElementKind.InteractiveAtom', () => {
         const nodes = render(atomElement())
         const atom = shallow(nodes.flat()[0]);
-        expect(atom.html()).toContain('<style>main { background: yellow; }</style>');
-        expect(atom.html()).toContain("<script>console.log('init')</script>");
-        expect(atom.html()).toContain('<main>Some content</main>');
+        expect(atom.html()).toContain('main { background: yellow; }');
+        expect(atom.html()).toContain("console.log(&#x27;init&#x27;)");
+        expect(atom.html()).toContain('Some content');
     })
 });
 

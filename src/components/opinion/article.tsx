@@ -6,7 +6,7 @@ import { neutral, opinion, background } from '@guardian/src-foundations/palette'
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/headerImage';
-import ArticleSeries from 'components/shared/articleSeries';
+import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
@@ -66,9 +66,9 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
+                <Series item={item}/>
+                <Headline item={item} />
                 <div css={articleWidthStyles}>
-                    <ArticleSeries series={item.series} pillar={item.pillar}/>
-                    <Headline item={item} />
                     <Byline {...item} />
                 </div>
                 <Cutout 
@@ -82,7 +82,7 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
                 </div>
 
                 <section css={[articleWidthStyles, topBorder]}>
-                    <Metadata item={item} />
+                    <Metadata item={item} imageMappings={imageMappings} />
                 </section>
 
                 <HeaderImage
