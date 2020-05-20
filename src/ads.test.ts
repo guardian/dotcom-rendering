@@ -24,7 +24,7 @@ const generateParas = (paras: number): BodyElement =>
     textElement(Array(paras).fill('<p>foo</p>'));
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(mockFormat, [element]);
+    renderAll(mockFormat, [element]);
 
 const renderParagraphs = compose(render, generateParas);
 

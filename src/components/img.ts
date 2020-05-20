@@ -4,8 +4,7 @@ import { FC } from 'react';
 import { jsx as styledH, SerializedStyles, css } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { ImageMappings } from 'components/shared/page';
-import { Image, srcset, src } from 'image';
+import { Image } from 'image';
 import { darkModeCss } from 'styles';
 
 
@@ -13,7 +12,6 @@ import { darkModeCss } from 'styles';
 
 interface Props {
     image: Image;
-    imageMappings: ImageMappings;
     sizes: string;
     className?: SerializedStyles;
 }
@@ -26,11 +24,11 @@ const styles = css`
     `}
 `;
 
-const Img: FC<Props> = ({ image, sizes, imageMappings, className }) =>
+const Img: FC<Props> = ({ image, sizes, className }) =>
     styledH('img', {
         sizes,
-        srcSet: srcset(image.src, imageMappings),
-        src: src(imageMappings, image.src, 500),
+        srcSet: image.srcset,
+        src: image.src,
         alt: image.alt.withDefault(''),
         className: 'js-launch-slideshow',
         css: [styles, className],

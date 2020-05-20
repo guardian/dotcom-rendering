@@ -1,28 +1,22 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
-import { srcsetWithWidths, src } from 'image';
 import { Contributor, isSingleContributor } from 'contributor';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
-import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Setup ----- //
 
 const dimensions = '4rem';
 
-const srcset = srcsetWithWidths([32, 64, 128, 192, 256]);
-const defaultSrcWidth = 64;
-
 
 // ----- Component ----- //
 
 interface Props extends Format {
     contributors: Contributor[];
-    imageMappings: ImageMappings;
     className?: SerializedStyles;
 }
 
@@ -40,22 +34,22 @@ const getStyles = ({ pillar }: Format): SerializedStyles => {
     return styles(colours.inverted);
 }
 
-const Avatar: FC<Props> = ({ contributors, imageMappings, className, ...format }: Props) => {
+const Avatar: FC<Props> = ({ contributors, className, ...format }: Props) => {
     const [contributor] = contributors;
 
-    if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl !== undefined) {
-        return (
-            <img
-                css={[getStyles(format), className]}
-                srcSet={srcset(contributor.bylineLargeImageUrl, imageMappings)}
-                alt={contributor.webTitle}
-                sizes={dimensions}
-                src={src(imageMappings, contributor.bylineLargeImageUrl, defaultSrcWidth)}
-            />
-        );
+    if (!isSingleContributor(contributors)) {
+        return null;
     }
 
-    return null;
+    return contributor.image.fmap<ReactElement | null>(image =>
+        <img
+            css={[getStyles(format), className]}
+            srcSet={image.srcset}
+            alt={contributor.name}
+            sizes={dimensions}
+            src={image.src}
+        />
+    ).withDefault(null);
 }
 
 

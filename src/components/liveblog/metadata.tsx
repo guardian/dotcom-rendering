@@ -11,7 +11,6 @@ import { CommentCount } from './commentCount';
 import { Liveblog, getFormat } from 'item';
 import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
-import { ImageMappings } from 'components/shared/page';
 
 const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -69,10 +68,9 @@ const commentCount = ({ liveblogBackground }: PillarStyles): SerializedStyles =>
 
 interface Props {
     item: Liveblog;
-    imageMappings: ImageMappings;
 }
 
-const Metadata = ({ item, imageMappings}: Props): JSX.Element => {
+const Metadata = ({ item }: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(item.pillar);
 
     const byline = item.bylineHtml.fmap<ReactNode>(html =>
@@ -88,7 +86,6 @@ const Metadata = ({ item, imageMappings}: Props): JSX.Element => {
                         <Avatar
                             contributors={item.contributors}
                             bgColour={pillarStyles.featureHeadline}
-                            imageMappings={imageMappings}
                         />
                         <div className="author">
                             { byline }

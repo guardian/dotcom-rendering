@@ -2,7 +2,7 @@
 
 import { IBlock as Block } from 'mapiThriftModels/Block';
 import { Option } from 'types/option';
-import DocParser from 'types/docParser';
+import { Context } from 'types/parserContext';
 import { Body, parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
 
@@ -21,18 +21,18 @@ type LiveBlock = {
 
 // ----- Functions ----- //
 
-const parse = (docParser: DocParser) => (block: Block): LiveBlock =>
+const parse = (context: Context) => (block: Block): LiveBlock =>
     ({
         id: block.id,
         isKeyEvent: block?.attributes?.keyEvent ?? false,
         title: block?.title ?? "",
         firstPublished: maybeCapiDate(block?.firstPublishedDate),
         lastModified: maybeCapiDate(block?.lastModifiedDate),
-        body: parseElements(docParser)(block.elements),
+        body: parseElements(context)(block.elements),
     })
 
-const parseLiveBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
-    blocks.map(parse(docParser));
+const parseLiveBlocks = (context: Context) => (blocks: Block[]): LiveBlock[] =>
+    blocks.map(parse(context));
 
 
 // ----- Exports ----- //

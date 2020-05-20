@@ -10,7 +10,6 @@ import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
 import { Image } from 'image';
 import Img from 'components/img';
-import { ImageMappings } from 'components/shared/page';
 import { Format, Display, Design } from 'format';
 
 
@@ -113,18 +112,16 @@ const getSizes = ({ display }: Format, image: Image): string => {
 
 interface Props {
     image: Option<Image>;
-    imageMappings: ImageMappings;
     className?: SerializedStyles;
     format: Format;
 }
 
-const HeaderImage: FC<Props> = ({ className, image, imageMappings, format }) =>
+const HeaderImage: FC<Props> = ({ className, image, format }) =>
     image.fmap<ReactElement | null>(imageData =>
         <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
             <Img
                 image={imageData}
                 sizes={getSizes(format, imageData)}
-                imageMappings={imageMappings}
                 className={getImgStyles(format, imageData)}
             />
             <Caption format={format} image={imageData} />

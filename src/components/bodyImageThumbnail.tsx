@@ -32,11 +32,10 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(${size} * ${height / width});
 `;
 
-const BodyImageThumbnail: FC<Props> = ({ image, imageMappings, children }: Props) =>
+const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
     <figure css={styles}>
         <Img
             image={image}
-            imageMappings={imageMappings}
             sizes={size}
             className={imgStyles(image.width, image.height)}
         />

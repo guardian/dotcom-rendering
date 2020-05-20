@@ -177,7 +177,7 @@ const articleContentWithImageWithoutFile = articleContentWith({
     }
 })
 
-const f = fromCapi(JSDOM.fragment);
+const f = fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' });
 
 const getFirstBody = (item: Review | Standard) =>
     item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' });

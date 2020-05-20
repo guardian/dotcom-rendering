@@ -8,7 +8,6 @@ import { renderAll } from 'renderer';
 import { partition } from 'types/result';
 import { BufferedTransport, CompactProtocol } from '@creditkarma/thrift-server-core';
 import { Blocks } from 'mapiThriftModels';
-import { ImageMappings } from 'components/shared/page';
 import { remSpace } from '@guardian/src-foundations';
 
 const LiveBodyStyles = css`
@@ -27,7 +26,6 @@ interface LiveblogBodyProps {
     format: Format;
     blocks: LiveBlock[];
     totalBodyBlocks: number;
-    imageMappings: ImageMappings;
 }
 
 async function loadMoreBlocks(): Promise<void> {
@@ -45,7 +43,7 @@ const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Ele
         : null;
 
 const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
-    const { format, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;
+    const { format, blocks: initialBlocks, totalBodyBlocks } = props;
     const [blocks] = useState(initialBlocks);
 
     return (
@@ -59,7 +57,7 @@ const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
                         title={block.title}
                         firstPublishedDate={block.firstPublished}
                         lastModifiedDate={block.lastModified}>
-                            <>{ renderAll(imageMappings)(format, partition(block.body).oks) }</>
+                            <>{ renderAll(format, partition(block.body).oks) }</>
                         </LiveblogBlock>
                 })
             }

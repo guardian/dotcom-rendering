@@ -2,7 +2,15 @@
 
 type DocParser = (html: string) => DocumentFragment;
 
+type Context = {
+    docParser: DocParser;
+    salt: string;
+}
+
 
 // ----- Exports ----- //
 
-export default DocParser;
+export {
+    Context,
+    DocParser,
+};

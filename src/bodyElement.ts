@@ -5,7 +5,7 @@ import { IAtoms as Atoms } from 'mapiThriftModels/Atoms';
 import { ElementType } from 'mapiThriftModels/ElementType';
 import { Option, fromNullable } from 'types/option';
 import { Result, Err, Ok } from 'types/result';
-import DocParser from 'types/docParser';
+import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
 
 
@@ -117,7 +117,7 @@ const parseIframe = (docParser: DocParser) =>
         });
 }
 
-const parse = (docParser: DocParser, atoms?: Atoms) =>
+const parse = (context: Context, atoms?: Atoms) =>
     (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
 
@@ -128,11 +128,11 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on textTypeData');
             }
 
-            return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
+            return new Ok({ kind: ElementKind.Text, doc: context.docParser(html) });
         }
 
         case ElementType.IMAGE:
-            return parseImage(docParser)(element)
+            return parseImage(context)(element)
                 .fmap<Result<string, Image>>(image => new Ok({
                     kind: ElementKind.Image,
                     ...image
@@ -184,7 +184,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No "html" field on tweetTypeData')
             }
 
-            return tweetContent(id, docParser(h))
+            return tweetContent(id, context.docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
         }
 
@@ -215,7 +215,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on audioTypeData')
             }
 
-            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
+            return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
         }
 
         case ElementType.VIDEO: {
@@ -225,7 +225,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on videoTypeData')
             }
 
-            return parseIframe(docParser)(videoHtml, ElementKind.Video);
+            return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
         }
 
         case ElementType.CONTENTATOM: {
@@ -256,12 +256,12 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
 
 }
 
-const parseElements = (docParser: DocParser, atoms?: Atoms) =>
+const parseElements = (context: Context, atoms?: Atoms) =>
     (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [new Err('No body elements available')];
         }
-        return elements.map(parse(docParser, atoms));
+        return elements.map(parse(context, atoms));
     }
 
 

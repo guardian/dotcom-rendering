@@ -49,7 +49,7 @@ function Follow({ contributors, ...format }: Props): JSX.Element | null {
         return (
             <button className="js-follow" css={getStyles(format)} data-id={contributor.id}>
                 <span className="js-status">Follow </span>
-                { contributor.webTitle }
+                { contributor.name }
             </button>
         );
     }

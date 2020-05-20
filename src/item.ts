@@ -3,7 +3,7 @@
 import { pillarFromString } from 'pillarStyles';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { articleMainImage, articleContributors, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
+import { articleMainImage, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import {
     ElementType,
@@ -15,6 +15,8 @@ import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
 import { LiveBlock, parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';
+import { Context } from 'types/parserContext';
+import { Contributor, parseContributors } from 'contributor';
 
 
 // ----- Item Type ----- //
@@ -26,7 +28,7 @@ interface Fields extends Format {
     bylineHtml: Option<DocumentFragment>;
     publishDate: Option<Date>;
     mainImage: Option<ImageData>;
-    contributors: Tag[];
+    contributors: Contributor[];
     series: Option<Tag>;
     commentable: boolean;
     tags: Tag[];
@@ -74,8 +76,6 @@ type Item
 
 // ----- Convenience Types ----- //
 
-type DocParser = (html: string) => DocumentFragment;
-
 type ItemFields =
     Omit<Fields, 'design'>;
 
@@ -121,30 +121,30 @@ function getDisplay(content: Content): Display {
     return Display.Standard;
 }
 
-const itemFields = (docParser: DocParser, content: Content): ItemFields =>
+const itemFields = (context: Context, content: Content): ItemFields =>
     ({
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
-        standfirst: fromNullable(content?.fields?.standfirst).fmap(docParser),
+        standfirst: fromNullable(content?.fields?.standfirst).fmap(context.docParser),
         byline: content?.fields?.byline ?? "",
-        bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(docParser),
+        bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(context.docParser),
         publishDate: maybeCapiDate(content.webPublicationDate),
-        mainImage: articleMainImage(content).andThen(parseImage(docParser)),
-        contributors: articleContributors(content),
+        mainImage: articleMainImage(content).andThen(parseImage(context)),
+        contributors: parseContributors(context.salt, content),
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false
     })
 
-const itemFieldsWithBody = (docParser: DocParser, content: Content): ItemFieldsWithBody => {
+const itemFieldsWithBody = (context: Context, content: Content): ItemFieldsWithBody => {
     const body = content?.blocks?.body ?? [];
     const atoms = content?.atoms;
     const elements = body[0]?.elements;
     return ({
-        ...itemFields(docParser, content),
-        body: elements !== undefined ? parseElements(docParser, atoms)(elements): [],
+        ...itemFields(context, content),
+        body: elements !== undefined ? parseElements(context, atoms)(elements): [],
     });
 }
 
@@ -190,18 +190,18 @@ const isQuiz =
 const isAdvertisementFeature =
     hasTag('tone/advertisement-features');
 
-const fromCapiLiveBlog = (docParser: DocParser) => (content: Content): Liveblog => {
+const fromCapiLiveBlog = (context: Context) => (content: Content): Liveblog => {
     const body = content?.blocks?.body?.slice(0, 7) ?? [];
 
     return {
         design: Design.Live,
-        blocks: parseLiveBlocks(docParser)(body),
+        blocks: parseLiveBlocks(context)(body),
         totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-        ...itemFields(docParser, content),
+        ...itemFields(context, content),
     };
 }
 
-const fromCapi = (docParser: DocParser) => (content: Content): Item => {
+const fromCapi = (context: Context) => (content: Content): Item => {
     const { tags, fields } = content;
 
     // These checks aim for parity with the CAPI Scala client:
@@ -209,26 +209,26 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
     if (isInteractive(content)) {
         return {
             design: Design.Interactive,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isMedia(tags)) {
         return {
             design: Design.Media,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (fields?.starRating !== undefined && isReview(tags)) {
         return {
             design: Design.Review,
             starRating: fields?.starRating,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isAnalysis(tags)) {
         return {
             design: Design.Analysis,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isComment(tags)) {
-        const item = itemFieldsWithBody(docParser, content);
+        const item = itemFieldsWithBody(context, content);
         return {
             design: Design.Comment,
             ...item,
@@ -237,45 +237,45 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
     } else if (isFeature(tags)) {
         return {
             design: Design.Feature,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isLive(tags)) {
-        return fromCapiLiveBlog(docParser)(content);
+        return fromCapiLiveBlog(context)(content);
     } else if (isRecipe(tags)) {
         return {
             design: Design.Recipe,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isMatchReport(tags)) {
         return {
             design: Design.MatchReport,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isInterview(tags)) {
         return {
             design: Design.Interview,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isGuardianView(tags)) {
         return {
             design: Design.GuardianView,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isQuiz(tags)) {
         return {
             design: Design.Quiz,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     } else if (isAdvertisementFeature(tags)) {
         return {
             design: Design.AdvertisementFeature,
-            ...itemFieldsWithBody(docParser, content),
+            ...itemFieldsWithBody(context, content),
         };
     }
 
     return {
         design: Design.Article,
-        ...itemFieldsWithBody(docParser, content),
+        ...itemFieldsWithBody(context, content),
     };
 }
 

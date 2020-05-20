@@ -6,6 +6,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
 import { Pillar, Design, Display } from 'format';
+import { None } from 'types/option';
+import { Contributor } from 'contributor';
 
 
 // ----- Setup ----- //
@@ -23,11 +25,12 @@ const followFormat = {
 
 describe('Follow component renders as expected', () => {
     it('Displays title correctly', () => {
-        const contributors = [
+        const contributors: Contributor[] = [
             {
                 apiUrl: "https://mapi.co.uk/test",
-                webTitle: "George Monbiot",
+                name: "George Monbiot",
                 id: "test",
+                image: new None(),
             },
         ];
         const follow = shallow(
@@ -38,8 +41,8 @@ describe('Follow component renders as expected', () => {
     })
 
     it('Renders null if no apiUrl', () => {
-        const contributors = [
-            { webTitle: "George Monbiot", id: "test", apiUrl: "" },
+        const contributors: Contributor[] = [
+            { name: "George Monbiot", id: "test", apiUrl: "", image: new None() },
         ];
         const follow = shallow(
             <Follow contributors={contributors} {...followFormat} />
@@ -49,16 +52,18 @@ describe('Follow component renders as expected', () => {
     })
 
     it('Renders null if more than one contributor', () => {
-        const contributors = [
+        const contributors: Contributor[] = [
             {
-                webTitle: "Contributor 1",
+                name: "Contributor 1",
                 apiUrl: "https://mapi.co.uk/test",
                 id: "test",
+                image: new None(),
             },
             {
-                webTitle: "Contributor 2",
+                name: "Contributor 2",
                 apiUrl: "https://mapi.co.uk/test",
                 id: "test",
+                image: new None(),
             },
         ];
         const follow = shallow(

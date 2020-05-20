@@ -14,7 +14,6 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, Review, getFormat, Item } from 'item';
-import { ImageMappings } from 'components/shared/page';
 import Metadata from 'components/metadata';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
@@ -73,12 +72,11 @@ const itemStyles = (item: Item): SerializedStyles => {
 // ----- Component ----- //
 
 interface Props {
-    imageMappings: ImageMappings;
     item: Standard | Review;
     children: ReactNode[];
 }
 
-const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
+const Standard = ({ item, children }: Props): JSX.Element => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? <div id="epic-container"></div>
@@ -89,7 +87,6 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
             <header>
                 <HeaderImage
                     image={item.mainImage}
-                    imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
                 <Series item={item} />
@@ -99,7 +96,7 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
-                    <Metadata imageMappings={imageMappings} item={item} />
+                    <Metadata item={item} />
                 </section>
             </header>
             <Body className={[articleWidthStyles, itemStyles(item)]}>

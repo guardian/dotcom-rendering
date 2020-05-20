@@ -9,7 +9,6 @@ import { Item } from 'item';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import CommentCount from 'components/commentCount';
-import { ImageMappings } from 'components/shared/page';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 
@@ -18,7 +17,6 @@ import Byline from 'components/byline';
 
 interface Props {
     item: Item;
-    imageMappings: ImageMappings;
 }
 
 const styles = css`
@@ -43,9 +41,9 @@ const avatarStyles = css`
     margin-top: ${remSpace[1]};
 `;
 
-const MetadataWithByline: FC<Props> = ({ item, imageMappings }: Props) =>
+const MetadataWithByline: FC<Props> = ({ item }: Props) =>
     <div css={css(styles, withBylineStyles)}>
-        <Avatar className={avatarStyles} imageMappings={imageMappings} {...item} />
+        <Avatar className={avatarStyles} {...item} />
         <div css={css(textStyles, withBylineTextStyles)}>
             <Byline {...item} />
             <Dateline date={item.publishDate} />

@@ -6,6 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Follow from './follow';
 import { Pillar, Design, Display } from 'format';
 import { selectPillar } from 'storybookHelpers';
+import { None } from 'types/option';
 
 
 // ----- Stories ----- //
@@ -16,7 +17,8 @@ const Default: FC = () =>
             {
                 id: 'profile/janesmith',
                 apiUrl: 'janesmith.com',
-                webTitle: 'Jane Smith',
+                name: 'Jane Smith',
+                image: new None(),
             }
         ]}
         pillar={selectPillar(Pillar.News)}

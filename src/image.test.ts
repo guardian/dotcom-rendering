@@ -23,7 +23,7 @@ const imageBlock: BlockElement = {
     type: ElementType.IMAGE,
     assets: [{
         type: AssetType.IMAGE,
-        file: 'url',
+        file: 'http://gu.com/url',
         typeData: {
             isMaster: true,
             width: 5,
@@ -35,6 +35,7 @@ const imageBlock: BlockElement = {
 
 const image: Image = {
     src: '',
+    srcset: '',
     alt: new None(),
     width: 0,
     height: 0,
@@ -49,13 +50,19 @@ const image: Image = {
 
 describe('image', () => {
     test('includes credit when displayCredit is true', () => {
-        const parsed = parseImage(JSDOM.fragment)(imageBlock);
+        const parsed = parseImage({
+            docParser: JSDOM.fragment,
+            salt: 'mockSalt',
+        })(imageBlock);
 
         expect(parsed.withDefault(image).credit.withDefault('')).toBe('Credit');
     });
 
     test('does not include credit when displayCredit is false', () => {
-        const parsed = parseImage(JSDOM.fragment)({
+        const parsed = parseImage({
+            docParser: JSDOM.fragment,
+            salt: 'mockSalt',
+        })({
             ...imageBlock,
             imageTypeData: {
                 ...imageData,

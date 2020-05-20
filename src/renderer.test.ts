@@ -31,6 +31,7 @@ const imageElement = (): BodyElement =>
     ({
         kind: ElementKind.Image,
         src: 'https://gu.com/img.png',
+        srcset: '',
         alt: new Some("alt tag"),
         caption: new Some(JSDOM.fragment('this caption contains <em>html</em>')),
         nativeCaption: new Some('caption'),
@@ -110,13 +111,13 @@ const atomElement = (): BodyElement =>
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(mockFormat, [element]);
+    renderAll(mockFormat, [element]);
 
 const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
     renderAllWithoutStyles(mockFormat, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
-    renderAll({})(mockFormat, [element]);
+    renderAll(mockFormat, [element]);
 
 const renderTextElement = compose(render, textElement);
 
