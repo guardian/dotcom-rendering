@@ -424,7 +424,7 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                 ${textSans.xsmall()}
                 color: ${t.supporting};
             `
-            const caption = styledH('div', { css: captionStyles }, element.alt)
+            const caption = styledH('figcaption', { css: captionStyles }, element.alt)
             return styledH('figure', { css: figureCss }, [h('div', props), caption])
         }
 
