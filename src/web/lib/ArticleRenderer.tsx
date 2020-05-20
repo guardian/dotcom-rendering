@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { AtomEmbedUrlBlockComponent } from '@root/src/web/components/elements/AtomEmbedUrlBlockComponent';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
@@ -35,6 +36,10 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
+                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                    return null;
+                case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
+                    return <AtomEmbedUrlBlockComponent url={element.url} />;
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
                         <BlockquoteBlockComponent
@@ -76,6 +81,8 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+                    return null;
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteBlockComponent
@@ -87,6 +94,8 @@ export const ArticleRenderer: React.FC<{
                             role={element.role}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.QABlockElement':
+                    return null;
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return <div key={i} id={`rich-link-${i}`} />;
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
@@ -97,6 +106,8 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
                     );
+                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                    return null;
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return (
                         <TextBlockComponent
@@ -126,9 +137,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
-                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -137,10 +146,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileBlockElement':
-                case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TableBlockElement':
-                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
