@@ -6,6 +6,7 @@ import { Format } from '@guardian/types/Format';
 import { icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { neutral } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Component ----- //
@@ -18,7 +19,7 @@ interface Props {
 const styles = (format: Format) => css`
     font-style: italic;
     position: relative;
-    margin: ${remSpace[4]} 0 ${remSpace[8]} 0;
+    margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
     padding: 0 ${remSpace[6]};
 
     &::before {
