@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React, { FC, ReactNode } from 'react';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { Format } from '@guardian/types/Format';
 import { icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
@@ -16,7 +16,7 @@ interface Props {
     format: Format;
 }
 
-const styles = (format: Format) => css`
+const styles = (format: Format): SerializedStyles => css`
     font-style: italic;
     position: relative;
     margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
