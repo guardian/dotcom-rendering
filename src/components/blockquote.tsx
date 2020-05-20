@@ -1,0 +1,49 @@
+// ----- Imports ----- //
+
+import React, { FC, ReactNode } from 'react';
+import { css } from '@emotion/core';
+import { Format } from '@guardian/types/Format';
+import { icons, darkModeCss } from 'styles';
+import { getPillarStyles } from 'pillarStyles';
+import { neutral } from '@guardian/src-foundations/palette';
+
+
+// ----- Component ----- //
+
+interface Props {
+    children?: ReactNode;
+    format: Format;
+}
+
+const styles = (format: Format) => css`
+    font-style: italic;
+    position: relative;
+    margin: 1rem 0 2rem 0;
+    padding: 0 1.5rem;
+
+    &::before {
+        ${icons}
+        font-style: normal;
+        font-size: 2.5rem;
+        content: '\\e11c';
+        color: ${getPillarStyles(format.pillar).kicker};
+    }
+
+    ${darkModeCss`
+        &::before {
+            color: ${neutral[86]};
+        }
+    `}
+`;
+
+
+
+const Blockquote: FC<Props> = ({ children, format }: Props) =>
+    <blockquote css={styles(format)}>
+        {children}
+    </blockquote>
+
+
+// ----- Exports ----- //
+
+export default Blockquote;
