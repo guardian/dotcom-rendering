@@ -22,6 +22,7 @@ import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
+import Blockquote from 'components/blockquote';
 
 // ----- Renderer ----- //
 
@@ -202,7 +203,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
                 ? h(HorizontalRule, null, null)
                 : styledH('h2', { css: HeadingTwoStyles(format), key }, children );
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, children);
+            return h(Blockquote, { key, format }, children);
         case 'STRONG':
             return h('strong', { key }, children);
         case 'EM':
