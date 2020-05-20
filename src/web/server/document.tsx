@@ -61,15 +61,14 @@ export const document = ({ data }: Props) => {
      */
     const priorityScripts = [
         polyfillIO,
+        getDist({ path: 'commercial.js', legacy: false }),
         CAPI.config && CAPI.config.commercialBundleUrl,
     ];
     const priorityLegacyScripts = [
-        getDist({ path: 'commercial.js', legacy: true }),
         getDist({ path: 'sentry.js', legacy: true }),
         getDist({ path: 'react.js', legacy: true }),
     ];
     const priorityNonLegacyScripts = [
-        getDist({ path: 'commercial.js', legacy: false }),
         getDist({ path: 'sentry.js', legacy: false }),
         getDist({ path: 'react.js', legacy: false }),
     ];
