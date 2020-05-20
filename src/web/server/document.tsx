@@ -64,10 +64,12 @@ export const document = ({ data }: Props) => {
         CAPI.config && CAPI.config.commercialBundleUrl,
     ];
     const priorityLegacyScripts = [
+        getDist({ path: 'commercial.js', legacy: true }),
         getDist({ path: 'sentry.js', legacy: true }),
         getDist({ path: 'react.js', legacy: true }),
     ];
     const priorityNonLegacyScripts = [
+        getDist({ path: 'commercial.js', legacy: false }),
         getDist({ path: 'sentry.js', legacy: false }),
         getDist({ path: 'react.js', legacy: false }),
     ];

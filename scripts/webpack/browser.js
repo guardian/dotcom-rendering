@@ -44,6 +44,7 @@ module.exports = ({ isLegacyJS }) => ({
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),
         lotame: scriptPath('lotame'),
+        commercial: scriptPath('commercial'),
     },
     output: {
         filename: generateName(isLegacyJS),
