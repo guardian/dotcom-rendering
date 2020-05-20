@@ -79,7 +79,7 @@ type BodyElement = {
 } | Audio | {
     kind: ElementKind.Embed;
     html: string;
-    alt?: string;
+    alt: Option<string>;
 } | Video | InteractiveAtom;
 
 type Elements = BlockElement[] | undefined;
