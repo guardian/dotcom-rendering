@@ -22,7 +22,7 @@ const defaultWidths = [
 
 // Percentage.
 const defaultQuality = 85;
-const dpr2x = 45;
+const lowerQuality = 45;
 
 
 // ----- Types ----- //
@@ -63,27 +63,14 @@ function src(imageMappings: ImageMappings, input: string, width: number): string
 
     const params = new URLSearchParams({
         width: width.toString(),
-        quality: defaultQuality.toString(),
+        quality: width > 500 ? lowerQuality.toString() : defaultQuality.toString(),
+        dpr: width > 500 ? '2' : '1',
         fit: 'bounds',
         'sig-ignores-params': 'true',
         s: imageMappings[url.pathname],
     });
-    console.log(params);
 
-    const params2x = new URLSearchParams({
-        width: width.toString(),
-        quality: dpr2x.toString(),
-        fit: 'bounds',
-        dpr: '2',
-        'sig-ignores-params': 'true',
-        s: imageMappings[url.pathname],
-    });
-    console.log(params2x);
-
-    const result = `${imageResizer}/${service}${url.pathname}?${params.toString()}, ${imageResizer}/${service}${url.pathname}?${params2x.toString()} 2x`;
-
-    console.log(result);
-    return result;
+    return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMappings): string =>
@@ -92,8 +79,7 @@ const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMapp
         .join(', ');
 
 const srcset: (url: string, mappings: ImageMappings) => string =
-    srcsetWithWidths(defaultWidths)
-console.log(srcset)
+    srcsetWithWidths(defaultWidths);
 
 const parseImage = (docParser: (html: string) => DocumentFragment) =>
     (element: BlockElement): Option<Image> => {
