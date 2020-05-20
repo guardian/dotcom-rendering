@@ -3,7 +3,7 @@
 import { ReactNode, createElement as h, ReactElement, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { text as t, neutral } from '@guardian/src-foundations/palette';
+import { text as textColour, neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { basePx, icons, darkModeCss, pageFonts } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
