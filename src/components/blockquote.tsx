@@ -18,8 +18,8 @@ interface Props {
 const styles = (format: Format) => css`
     font-style: italic;
     position: relative;
-    margin: 1rem 0 2rem 0;
-    padding: 0 1.5rem;
+    margin: ${remSpace[4]} 0 ${remSpace[8]} 0;
+    padding: 0 ${remSpace[6]};
 
     &::before {
         ${icons}
