@@ -100,7 +100,10 @@ export const getCommentContext = async (
     return fetch(url + objAsParams(params))
         .then(response => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                throw Error(
+                    response.statusText ||
+                        `getCommentContext | An api call returned HTTP status ${response.status}`,
+                );
             }
             return response;
         })

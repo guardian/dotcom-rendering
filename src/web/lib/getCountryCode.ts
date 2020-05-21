@@ -26,7 +26,10 @@ export const getCountryCode = async () => {
         )
             .then(response => {
                 if (!response.ok) {
-                    throw Error(response.statusText);
+                    throw Error(
+                        response.statusText ||
+                            `getCountryCode | An api call returned HTTP status ${response.status}`,
+                    );
                 }
                 return response;
             })

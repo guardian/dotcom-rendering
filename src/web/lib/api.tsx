@@ -25,7 +25,11 @@ interface FetchOptions {
 
 function checkForErrors(response: any) {
     if (!response.ok) {
-        throw Error(response.statusText);
+        console.log(response);
+        throw Error(
+            response.statusText ||
+                `useApi | An api call returned HTTP status ${response.status}`,
+        );
     }
     return response;
 }

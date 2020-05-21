@@ -7,7 +7,10 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
     })
         .then(response => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                throw Error(
+                    response.statusText ||
+                        `getUser | An api call returned HTTP status ${response.status}`,
+                );
             }
             return response;
         })
