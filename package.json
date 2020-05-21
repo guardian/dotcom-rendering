@@ -61,7 +61,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
-    "@guardian/bridget": "^0.52.0",
+    "@guardian/bridget": "^0.54.0",
     "@guardian/node-riffraff-artifact": "^0.1.7",
     "@guardian/src-button": "^1.0.0",
     "@guardian/src-foundations": "^1.0.0",
