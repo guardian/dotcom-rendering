@@ -232,7 +232,9 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'LI':
             return styledH('li', { css: listItemStyles }, children);
         case 'A':
-            return styledH('a', { key, css: css` color: ${colour}` }, children);
+            const styles = css` color: ${colour}; text-decoration: none`;
+            const href = getHref(node).withDefault('');
+            return styledH('a', { key, href, css: styles }, children);
         default:
             return textElement(format)(node, key);
     }
