@@ -47,7 +47,7 @@ export const TweetBlockComponent: React.FC<{
             />
             <script
                 async={true}
-                src="https://platform.twitter.com/widgets.js"
+                src="https://ton.twimg.com/syndication/widgetsjs/partner/widgets.js"
             />
         </div>
     );
