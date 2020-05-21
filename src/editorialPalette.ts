@@ -65,6 +65,8 @@ const textHeadlineInverse = (_: Format): Colour =>
 const backgroundHeadlinePrimary = (format: Format): Colour => {
     if (format.display === Display.Immersive) {
         return neutral[7];
+    } else if (format.pillar === Pillar.Opinion) {
+        return opinion[800];
     }
 
     return coreBackground.primary;

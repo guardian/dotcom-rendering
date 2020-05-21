@@ -54,7 +54,7 @@ const thinHeadline = css`
 
 const immersive: SerializedStyles = css`
     ${styles}
-    ${headline.xsmall({ fontWeight: 'light' })}
+    ${headline.xxsmall({ fontWeight: 'light' })}
     margin-top: ${remSpace[3]};
 `;
 
@@ -110,7 +110,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
             <>
                 {rendered}
                 <address>
-                    <p>By {renderText(byline, format)}</p>
+                    <p>By {renderStandfirstText(byline, format)}</p>
                 </address>
             </>
         ).withDefault(rendered);

@@ -81,7 +81,9 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
     const children = Array.from(node.childNodes).map(captionElement(format));
     switch (node.nodeName) {
         case 'STRONG':
-            return <h2 css={captionHeadingStyles} key={key}>{children}</h2>;
+            return (format.design === Design.Media)
+                ? <h2 css={captionHeadingStyles} key={key}>{children}</h2>
+                : <>{children}</>
         case 'BR':
             return null;
         case 'EM':
