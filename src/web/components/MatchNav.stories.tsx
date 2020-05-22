@@ -30,9 +30,6 @@ export default {
 export const Default = () => {
     return (
         <MatchNav
-            isResult={true}
-            isLive={true}
-            venue="Wembley"
             homeTeam={homeTeam}
             awayTeam={awayTeam}
             comments="Here is a comments string"

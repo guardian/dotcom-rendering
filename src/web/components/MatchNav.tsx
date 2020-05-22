@@ -8,9 +8,6 @@ type TeamType = {
 };
 
 type Props = {
-    isResult: boolean;
-    isLive: boolean;
-    venue: string;
     homeTeam: TeamType;
     awayTeam: TeamType;
     comments: string;
