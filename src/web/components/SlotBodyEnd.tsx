@@ -18,7 +18,7 @@ type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
-        throw Error(response.statusText);
+        throw Error(response.statusText || `SlotBodyEnd | An api call returned HTTP status ${response.status}`);
     }
     return response;
 };
