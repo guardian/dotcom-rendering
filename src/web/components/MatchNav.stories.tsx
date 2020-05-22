@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { Section } from './Section';
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
+import { ArticleContainer } from './ArticleContainer';
+
 import { MatchNav } from './MatchNav';
 
 const homeTeam = {
@@ -37,3 +42,39 @@ export const Default = () => {
     );
 };
 Default.story = { name: 'default' };
+
+export const ZeroZero = () => {
+    return (
+        <MatchNav
+            homeTeam={{ ...homeTeam, score: 0, scorers: [] }}
+            awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
+            comments="Neither team scored any goals"
+        />
+    );
+};
+ZeroZero.story = { name: 'zero - zero' };
+
+export const NoComments = () => {
+    return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} />;
+};
+NoComments.story = { name: 'with no comments' };
+
+export const InContext = () => {
+    return (
+        <Section>
+            <Flex>
+                <LeftColumn>
+                    <></>
+                </LeftColumn>
+                <ArticleContainer>
+                    <MatchNav
+                        homeTeam={homeTeam}
+                        awayTeam={awayTeam}
+                        comments="Here is a comments string"
+                    />
+                </ArticleContainer>
+            </Flex>
+        </Section>
+    );
+};
+InContext.story = { name: 'when placed in article context' };
