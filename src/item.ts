@@ -62,7 +62,6 @@ interface Interactive extends Fields {
 interface Standard extends Fields {
     design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
     body: Body;
-    shouldHideReaderRevenue: boolean;
 }
 
 type Item
