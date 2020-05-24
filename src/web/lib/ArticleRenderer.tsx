@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { AtomEmbedHtmlDocumentBlockComponent } from '@root/src/web/components/elements/AtomEmbedHtmlDocumentBlockComponent';
 import { AtomEmbedUrlBlockComponent } from '@root/src/web/components/elements/AtomEmbedUrlBlockComponent';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
@@ -38,6 +39,21 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                     return null;
+                case 'model.dotcomrendering.pageElements.AtomEmbedHtmlDocumentBlockElement':
+                    // ------------------------------------------------------------------------
+                    // author: Pascal
+                    // date: 24th May 2020
+                    // The current efforts regarding atoms migration are focused on not sending
+                    // the metadata and instead use the atom renderer as much as possible.
+                    // We have tried AtomEmbedUrlBlockElement with AtomEmbedUrlBlockComponent
+                    // which works well, and now trying AtomEmbedHtmlDocumentBlockElement.
+                    // ------------------------------------------------------------------------
+                    // return <AtomEmbedUrlBlockComponent url={element.url} />;
+                    return (
+                        <AtomEmbedHtmlDocumentBlockComponent
+                            htmldocument={element.htmldocument}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
                     return <AtomEmbedUrlBlockComponent url={element.url} />;
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':

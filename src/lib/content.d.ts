@@ -10,6 +10,11 @@ interface AtomEmbedMarkupBlockElement {
     js?: string;
 }
 
+interface AtomEmbedHtmlDocumentBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedHtmlDocumentBlockElement';
+    htmldocument: string;
+}
+
 interface AtomEmbedUrlBlockElement {
     _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
     url: string;
@@ -244,6 +249,7 @@ interface YoutubeBlockElement {
 
 type CAPIElement =
     | AtomEmbedMarkupBlockElement
+    | AtomEmbedHtmlDocumentBlockElement
     | AtomEmbedUrlBlockElement
     | AudioAtomElement
     | AudioBlockElement
