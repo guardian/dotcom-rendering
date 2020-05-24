@@ -58,7 +58,10 @@ export const getDiscussion = async (
     return fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                throw Error(
+                    response.statusText ||
+                        `getDiscussion | An api call returned HTTP status ${response.status}`,
+                );
             }
             return response;
         })
