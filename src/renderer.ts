@@ -42,20 +42,26 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
-const bulletStyles = (colour: string): SerializedStyles => css`
-    color: transparent;
-    display: inline-block;
-
-    &::before {
-        content: '';
-        background-color: ${colour};
-        width: 1rem;
-        height: 1rem;
-        border-radius: .5rem;
+const bulletStyles = (format: Format): SerializedStyles => {
+const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: transparent;
         display: inline-block;
-        vertical-align: middle;
-    }
-`;
+
+        &::before {
+            content: '';
+            background-color: ${kicker};
+            width: 1rem;
+            height: 1rem;
+            border-radius: .5rem;
+            display: inline-block;
+            vertical-align: middle;
+            ${darkModeCss`
+                background-color: ${inverted};
+            `}
+        }
+    `;
+}
 
 interface BulletProps {
     format: Format;
@@ -64,7 +70,7 @@ interface BulletProps {
 
 const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(format.pillar).kicker) }, '•'),
+        styledH('span', { css: bulletStyles(format) }, '•'),
         text.replace(/•/g, '')
     );
 

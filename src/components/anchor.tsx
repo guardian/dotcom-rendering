@@ -24,6 +24,7 @@ const styles = css`
 
     ${darkModeCss`
         color: ${neutral[86]};
+        border-bottom: 0.0625rem solid ${neutral[46]};
     `}
 `;
 

@@ -11,6 +11,7 @@ import { getPillarStyles } from 'pillarStyles';
 import { Option } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
 import Anchor from 'components/anchor';
+import { darkModeCss } from 'styles';
 
 
 // ----- Subcomponents ----- //
@@ -19,15 +20,16 @@ interface TriangleProps {
     format: Format;
 }
 
-const triangleStyles = (colour: string): SerializedStyles => css`
+const triangleStyles = (colour: string, inverted?: string): SerializedStyles => css`
     fill: ${colour};
     height: 0.8em;
     padding-right: ${remSpace[1]};
+    ${inverted ? darkModeCss`fill: ${inverted};` : ``}
 `;
 
-const triangleSvg = (colour: string): ReactElement =>
+const triangleSvg = (colour: string, inverted?: string): ReactElement =>
     <svg
-        css={triangleStyles(colour)}
+        css={triangleStyles(colour, inverted)}
         viewBox="0 0 10 9"
         xmlns="http://www.w3.org/2000/svg"
     >
@@ -41,7 +43,8 @@ const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
         case Design.AdvertisementFeature:
             return triangleSvg(palette.labs[300]);
         default:
-            return triangleSvg(getPillarStyles(format.pillar).kicker);
+            const { kicker, inverted } = getPillarStyles(format.pillar);
+            return triangleSvg(kicker, inverted);
     }
 }
 
