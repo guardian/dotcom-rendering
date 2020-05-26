@@ -43,7 +43,7 @@ const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
 const bulletStyles = (format: Format): SerializedStyles => {
-const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.pillar);
     return css`
         color: transparent;
         display: inline-block;
