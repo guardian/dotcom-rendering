@@ -298,23 +298,17 @@ const richLinkWidth = '8.75rem';
 const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
+    text-decoration: none;
+    border-bottom: none;
+    color: ${neutral[7]};
 
     h1 {
         margin: ${basePx(0, 0, 2, 0)};
-        font-size: 1rem;
-    }
-
-    p {
-        margin: ${basePx(1, 0)};
+        font-size: ${remSpace[4]};
     }
 
     span {
         display: none;
-    }
-
-    a {
-        text-decoration: none;
-        border-bottom: none;
     }
 
     float: left;
@@ -329,18 +323,18 @@ const richLinkStyles = css`
     ${darkModeCss`
         background-color: ${neutral[20]};
         color: ${neutral[60]};
-        a {
+
+        h1 {
             color: ${neutral[60]};
-            border-bottom: 0.0625rem solid ${neutral[60]};
+            border-bottom: none;
         }
     `}
 `;
 
-const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
-    styledH('aside', { css: richLinkStyles },
-        h('h1', null, props.linkText),
-        h(Anchor, { href: props.url, format: props.format }, 'Read more'),
-    );
+const RichLink = (props: { url: string; linkText: string; }): ReactElement =>
+    styledH('a', { href: props.url, css: richLinkStyles },
+        styledH('aside', null, [h('h1', null, props.linkText), 'Read more'])
+    )
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
     const styles = css`
@@ -401,7 +395,7 @@ const render = (format: Format, excludeStyles = false) =>
         case ElementKind.RichLink: {
             const { url, linkText } = element;
 
-            return h(RichLink, { url, linkText, format, key });
+            return h(RichLink, { url, linkText, key });
         }
 
         case ElementKind.Interactive:
