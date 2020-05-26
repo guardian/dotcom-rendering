@@ -331,10 +331,10 @@ const richLinkStyles = css`
     `}
 `;
 
-const RichLink = (props: { url: string; linkText: string; }): ReactElement =>
+const RichLink = (props: { url: string; linkText: string }): ReactElement =>
     styledH('a', { href: props.url, css: richLinkStyles },
         styledH('aside', null, [h('h1', null, props.linkText), 'Read more'])
-    )
+    );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
     const styles = css`
