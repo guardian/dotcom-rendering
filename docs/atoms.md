@@ -88,7 +88,9 @@ TimelineBlockElement
     -> [amp] TimelineBlockComponent
 ```
 
-### Atom Documentation
+## Atom Documentation
+
+### AudioAtom
 
 `AudioAtomBlockElement`
 
@@ -102,5 +104,30 @@ TimelineBlockElement
 	    contentId: String
 	) extends PageElement
 	```
-	
-Example: [www](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may), [data](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may.json?dcr).
+
+AMP: See `AudioAtomBlockComponent` ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### ChartAtom
+
+Comes to DCR as `AtomEmbedUrlBlockElement` 
+
+AMP: See `AtomEmbedUrlBlockComponent` ✅
+
+WEB: Currently not supported. Should be rendered using an iframe as it is treated as interactive. 🚧
+
+### CommonsDivision
+
+I question whether we should be supporting it in the first place given how very rare it is.
+
+### ExplainerAtom
+```
+case class ExplainerAtomBlockElement(
+    id: String, 
+    title: String, 
+    body: String, 
+    displayType: String
+) extends PageElement
+```
+
