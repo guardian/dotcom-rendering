@@ -37,6 +37,8 @@ const immersiveStyles = css`
     margin: calc(80vh - 5rem) 0 0;
     position: relative;
     display: inline-block;
+    min-height: 112px;
+    box-sizing: border-box;
 
     ${between.phablet.and.wide} {
         width: ${wideContentWidth}px;
