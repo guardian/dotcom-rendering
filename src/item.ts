@@ -13,7 +13,7 @@ import {
 } from 'mapiThriftModels';
 import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
-import { LiveBlock, parseLiveBlocks } from 'liveBlock';
+import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
@@ -194,7 +194,7 @@ const fromCapiLiveBlog = (context: Context) => (content: Content): Liveblog => {
 
     return {
         design: Design.Live,
-        blocks: parseLiveBlocks(context)(body),
+        blocks: parseLiveBlocks(body)(context),
         totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
         ...itemFields(context, content),
     };

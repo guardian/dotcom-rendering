@@ -21,6 +21,25 @@ import { response } from './liveblogResponse';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 import { Result, Ok, Err } from 'types/result';
 import { IContent as Content } from 'mapiThriftModels/Content';
+import { ContentType } from 'mapiThriftModels/ContentType';
+import {
+    newBlocksSince,
+    updatedBlocksSince,
+    recentBlocks,
+    toSerialisable as serialiseLiveBlocks,
+} from 'liveBlock';
+import { JSDOM } from 'jsdom';
+import JsonSerialisable from 'types/jsonSerialisable';
+import { parseDate, Param } from 'server/paramParser';
+import { Context } from 'types/parserContext';
+
+
+// ----- Types ----- //
+
+interface LiveUpdates {
+    newBlocks: JsonSerialisable;
+    updatedBlocks: JsonSerialisable;
+}
 
 
 // ----- Setup ----- //
@@ -29,6 +48,7 @@ const getAssetLocation: (assetName: string) => string = getMappedAssetLocation()
 const defaultId =
     'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
+const docParser = JSDOM.fragment.bind(null);
 
 
 // ----- Functions ----- //
@@ -128,6 +148,50 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     }
 }
 
+const liveBlockUpdates = (since: Date, content: Content, context: Context): LiveUpdates => ({
+    newBlocks: serialiseLiveBlocks(newBlocksSince(since)(content)(context)),
+    updatedBlocks: serialiseLiveBlocks(updatedBlocksSince(since)(content)(context)),
+});
+
+const recentLiveBlocks = (content: Content, context: Context): LiveUpdates => ({
+    newBlocks: serialiseLiveBlocks(recentBlocks(10)(content)(context)),
+    updatedBlocks: [],
+});
+
+async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
+    try {
+        const articleId = req.params.articleId || defaultId;
+        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const since = parseDate(req.query.since);
+
+        if (since.kind === Param.Invalid) {
+            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand this timestamp: ${since}`);
+            return res.sendStatus(400).end();
+        }
+
+        const capiContent = await askCapiFor(articleId);
+
+        capiContent.either(
+            errorStatus => { res.sendStatus(errorStatus) },
+            content => {
+                const context = { salt: imageSalt, docParser };
+
+                if (content.type !== ContentType.LIVEBLOG) {
+                    logger.warn(`I was asked to provide updates on something that wasn't a liveblog: ${articleId}`);
+                    res.sendStatus(400);
+                } else if (since.kind === Param.None) {
+                    res.status(200).json(recentLiveBlocks(content, context));
+                } else {
+                    res.status(200).json(liveBlockUpdates(since.value, content, context));
+                }
+            },
+        );
+    } catch (e) {
+        logger.error(`This error occurred`, e);
+        res.sendStatus(500);
+    }
+}
+
 
 // ----- App ----- //
 
@@ -143,6 +207,8 @@ app.use(bodyParser.raw({ limit: '50mb' }));
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
+
+app.get('/:articleId(*)/live-blocks', liveBlocks);
 
 app.all('*', (request, response, next) => {
     const start = Date.now();
