@@ -24,7 +24,7 @@ const triangleStyles = (colour: string, inverted?: string): SerializedStyles => 
     fill: ${colour};
     height: 0.8em;
     padding-right: ${remSpace[1]};
-    ${inverted ? darkModeCss`fill: ${inverted};` : ``}
+    ${inverted ? darkModeCss`fill: ${inverted};` : ''}
 `;
 
 const triangleSvg = (colour: string, inverted?: string): ReactElement =>
