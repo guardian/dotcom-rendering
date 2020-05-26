@@ -23,13 +23,10 @@ import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
+import { isElement } from 'lib';
+
 
 // ----- Renderer ----- //
-
-// The nodeType for ELEMENT_NODE has the value 1.
-function isElement(node: Node): node is Element {
-    return node.nodeType === 1;
-}
 
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? new Some(node.attributes) : new None();
@@ -269,7 +266,7 @@ const pullquoteStyles = (format: Format): SerializedStyles => {
         }
 
         p {
-            margin: 1em 0;
+            margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
 
             &::before {
                 ${icons}
@@ -296,15 +293,20 @@ const pullquoteStyles = (format: Format): SerializedStyles => {
 type PullquoteProps = {
     quote: string;
     format: Format;
+    attribution: Option<string>;
 };
 
-const Pullquote: FC<PullquoteProps> = ({ quote, format }: PullquoteProps) =>
-    styledH('aside',
+
+const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
+    const children = attribution
+        .fmap(attribution => ([h('p', null, quote), h('cite', null, attribution)]))
+        .withDefault([h('p', null, quote)])
+
+    return styledH('aside',
         { css: pullquoteStyles(format) },
-        h('blockquote', null,
-            h('p', null, quote)
-        ),
+        h('blockquote', null, children)
     );
+}
 
 const richLinkWidth = '8.75rem';
 
@@ -408,8 +410,10 @@ const render = (format: Format, excludeStyles = false) =>
             return h(ImageComponent, { image: element }, figcaption);
         }
 
-        case ElementKind.Pullquote:
-            return h(Pullquote, { quote: element.quote, format, key });
+        case ElementKind.Pullquote: {
+            const { quote, attribution } = element;
+            return h(Pullquote, { quote, attribution, format, key });
+        }
 
         case ElementKind.RichLink: {
             const { url, linkText } = element;
@@ -478,7 +482,7 @@ const render = (format: Format, excludeStyles = false) =>
                         <body>
                             ${html}
                             <script>
-                                ${js}
+                                ${js.withDefault('')}
                                 function resize() {
                                     window.frameElement.height = document.body.offsetHeight;
                                 }

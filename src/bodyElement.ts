@@ -3,10 +3,16 @@
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { IAtoms as Atoms } from 'mapiThriftModels/Atoms';
 import { ElementType } from 'mapiThriftModels/ElementType';
-import { Option, fromNullable } from 'types/option';
+import {
+    Option,
+    fromNullable,
+    toSerialisable as optionToSerialisable,
+} from 'types/option';
 import { Result, Err, Ok } from 'types/result';
 import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
+import { isElement } from 'lib';
+import JsonSerialisable from 'types/jsonSerialisable';
 
 
 // ----- Types ----- //
@@ -46,7 +52,7 @@ type Video = {
 type MediaKind = ElementKind.Audio | ElementKind.Video;
 
 interface AtomFields {
-    js?: string;
+    js: Option<string>;
     css: string;
     html: string;
 }
@@ -89,6 +95,44 @@ type Body =
 
 
 // ----- Functions ----- //
+
+const serialiseNodes = (nodes: NodeList): string =>
+    Array.from(nodes).map(node => {
+        if (isElement(node)) {
+            return node.outerHTML;
+        }
+
+        return node.textContent ?? '';
+    }).join('');
+
+const serialiseFragment = (doc: DocumentFragment): string =>
+    serialiseNodes(doc.childNodes);
+
+function toSerialisable(elem: BodyElement): JsonSerialisable {
+    switch (elem.kind) {
+        case ElementKind.Text:
+            return { ...elem, doc: serialiseFragment(elem.doc) };
+        case ElementKind.Image:
+            return {
+                ...elem,
+                alt: optionToSerialisable(elem.alt),
+                caption: optionToSerialisable(elem.caption.fmap(serialiseFragment)),
+                credit: optionToSerialisable(elem.credit),
+                nativeCaption: optionToSerialisable(elem.nativeCaption),
+                role: optionToSerialisable(elem.role),
+            };
+        case ElementKind.Pullquote:
+            return { ...elem, attribution: optionToSerialisable(elem.attribution) };
+        case ElementKind.Tweet:
+            return { ...elem, content: serialiseNodes(elem.content) };
+        case ElementKind.InteractiveAtom:
+            return { ...elem, js: optionToSerialisable(elem.js) };
+        case ElementKind.Embed:
+            return { ...elem, alt: optionToSerialisable(elem.alt) };
+        default:
+            return elem;
+    }
+}
 
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
@@ -247,7 +291,7 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return new Err(`No html or css for atom: ${id}`);
             }
 
-            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js });
+            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js: fromNullable(js) });
         }
 
         default:
@@ -274,4 +318,5 @@ export {
     Video,
     Body,
     parseElements,
+    toSerialisable,
 };

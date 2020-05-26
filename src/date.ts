@@ -91,4 +91,5 @@ const format = (date: Date): string =>
 export {
     makeRelativeDate,
     format as formatDate,
+    isValidDate,
 }

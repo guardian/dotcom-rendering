@@ -54,6 +54,14 @@ const pullquoteElement = (): BodyElement =>
         attribution: new None()
     })
 
+
+const pullquoteWithAttributionElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Pullquote,
+        quote: "quote",
+        attribution: new Some('attribution')
+    })
+
 const richLinkElement = (): BodyElement =>
     ({
         kind: ElementKind.RichLink,
@@ -107,7 +115,7 @@ const atomElement = (): BodyElement =>
         kind: ElementKind.InteractiveAtom,
         css: "main { background: yellow; }",
         html: "<main>Some content</main>",
-        js: "console.log('init')"
+        js: new Some("console.log('init')"),
     })
 
 const render = (element: BodyElement): ReactNode[] =>
@@ -190,6 +198,12 @@ describe('Renders different types of elements', () => {
         const nodes = render(pullquoteElement())
         const pullquote = shallow(nodes.flat()[0]);
         expect(pullquote.html()).toContain('<blockquote><p>quote</p></blockquote>');
+    })
+
+    test('ElementKind.Pullquote with attribution', () => {
+        const nodes = render(pullquoteWithAttributionElement())
+        const pullquote = shallow(nodes.flat()[0]);
+        expect(pullquote.html()).toContain('<blockquote><p>quote</p><cite>attribution</cite></blockquote>');
     })
 
     test('ElementKind.RichLink', () => {
