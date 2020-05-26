@@ -53,6 +53,8 @@ export const ArticleRenderer: React.FC<{
                             alt={element.alt}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
+                    return null; // awaiting the coming atom support (wip)
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent

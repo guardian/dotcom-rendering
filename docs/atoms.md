@@ -131,3 +131,6 @@ case class ExplainerAtomBlockElement(
 ) extends PageElement
 ```
 
+AMP: Currently not supported.
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
