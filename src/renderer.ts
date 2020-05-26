@@ -313,17 +313,16 @@ const richLinkWidth = '8.75rem';
 const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
-    text-decoration: none;
-    border-bottom: none;
-    color: ${neutral[7]};
 
-    h1 {
-        margin: ${basePx(0, 0, 2, 0)};
-        font-size: ${remSpace[4]};
-    }
+    a {
+        display:inline-block;
+        text-decoration: none;
+        color: ${neutral[7]};
 
-    span {
-        display: none;
+        h1 {
+            margin: ${basePx(0, 0, 2, 0)};
+            ${body.medium({ fontWeight: 'bold' })}
+        }
     }
 
     float: left;
@@ -339,16 +338,15 @@ const richLinkStyles = css`
         background-color: ${neutral[20]};
         color: ${neutral[60]};
 
-        h1 {
+        a, h1 {
             color: ${neutral[60]};
-            border-bottom: none;
         }
     `}
 `;
 
 const RichLink = (props: { url: string; linkText: string }): ReactElement =>
-    styledH('a', { href: props.url, css: richLinkStyles },
-        styledH('aside', null, [h('h1', null, props.linkText), 'Read more'])
+    styledH('aside', { css: richLinkStyles },
+        styledH('a', { href: props.url }, [h('h1', null, props.linkText), 'Read more'])
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
