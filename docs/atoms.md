@@ -134,3 +134,94 @@ case class ExplainerAtomBlockElement(
 AMP: Currently not supported.
 
 WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### InteractiveAtom
+
+```
+case class AtomEmbedUrlBlockElement(
+	url: String
+) extends PageElement
+```
+
+AMP: AtomEmbedUrlBlockComponent ✅
+
+WEB: Currently not supported. Should be rendered using an iframe. 🚧
+
+### GuideAtom
+
+```
+case class ProfileBlockElement(
+	id: String, 
+	label: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### MediaAtom
+
+The MediaAtom is sent to DCR either as `YoutubeBlockElement` or `HTMLFallbackBlockElement`.
+
+```
+case class YoutubeBlockElement(
+	id: String, 
+	assetId: String, 
+	channelId: Option[String], 
+	mediaTitle: String
+) extends PageElement
+```
+
+AMP: YoutubeBlockComponent ✅
+
+WEB: YoutubeBlockComponent ✅
+
+### ProfileAtom
+
+```
+case class ProfileBlockElement(
+	id: String, 
+	label: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### QuandaAtom
+
+```
+case class QABlockElement(
+	id: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### QuizAtom
+
+Undocumented for the moment 🚧 ‼️
+
+### RecipeAtom
+
+I am not sure it's ever been used. ‼️
+
+### ReviewAtom
+
+Not found in AtomWorkshop ‼️
