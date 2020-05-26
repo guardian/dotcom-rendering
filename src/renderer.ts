@@ -83,6 +83,9 @@ const HorizontalRuleStyles = css`
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
     background-color: ${neutral[93]};
+    ${darkModeCss`
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const HorizontalRule = (): ReactElement =>
@@ -253,38 +256,42 @@ const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(standfirstTextElement(format));
 
-const pullquoteStyles = (colour: string): SerializedStyles => css`
-    color: ${colour};
-    margin: 0;
-    ${headline.xsmall({ fontWeight: 'light' })};
+const pullquoteStyles = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: ${kicker};
+        margin: 0;
+        ${headline.xsmall({ fontWeight: 'light' })};
+        ${darkModeCss`color: ${inverted};`}
 
-    blockquote {
-        margin-left: 0;
-    }
-
-    p {
-        margin: 1em 0;
-
-        &::before {
-            ${icons}
-            font-size: 1.5rem;
-            line-height: 1.2;
-            font-weight: 300;
-            content: '\\e11c';
-            display: inline-block;
-            margin-right: ${basePx(1)};
+        blockquote {
+            margin-left: 0;
         }
-    }
 
-    footer {
-        font-size: 1.8rem;
-        margin-top: 4px;
+        p {
+            margin: 1em 0;
 
-        cite {
-            font-style: normal;
+            &::before {
+                ${icons}
+                font-size: 1.5rem;
+                line-height: 1.2;
+                font-weight: 300;
+                content: '\\e11c';
+                display: inline-block;
+                margin-right: ${basePx(1)};
+            }
         }
-    }
-`;
+
+        footer {
+            font-size: 1.8rem;
+            margin-top: 4px;
+
+            cite {
+                font-style: normal;
+            }
+        }
+    `;
+}
 
 type PullquoteProps = {
     quote: string;
@@ -293,7 +300,7 @@ type PullquoteProps = {
 
 const Pullquote: FC<PullquoteProps> = ({ quote, format }: PullquoteProps) =>
     styledH('aside',
-        { css: pullquoteStyles(getPillarStyles(format.pillar).kicker) },
+        { css: pullquoteStyles(format) },
         h('blockquote', null,
             h('p', null, quote)
         ),
