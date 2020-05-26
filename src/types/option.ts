@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { Monad } from './monad';
+import { identity } from 'lib';
 
 
 // ----- Classes ----- //
@@ -108,6 +109,15 @@ type Option<A> = Some<A> | None<A>;
 const fromNullable = <A>(a: A | null | undefined): Option<A> =>
     a === null || a === undefined ? new None() : new Some(a);
 
+// ----- Serialisation ----- //
+
+/**
+ * Transforms Option into a type that JSON.stringify understands
+ * @param opt The option to be made serialisable
+ */
+const toSerialisable = <A>(opt: Option<A>): A | null =>
+    opt.fmap<A | null>(identity).withDefault(null);
+
 
 // ----- Exports ----- //
 
@@ -116,4 +126,5 @@ export {
     Some,
     None,
     fromNullable,
+    toSerialisable,
 };

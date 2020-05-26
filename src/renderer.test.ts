@@ -107,7 +107,7 @@ const atomElement = (): BodyElement =>
         kind: ElementKind.InteractiveAtom,
         css: "main { background: yellow; }",
         html: "<main>Some content</main>",
-        js: "console.log('init')"
+        js: new Some("console.log('init')"),
     })
 
 const render = (element: BodyElement): ReactNode[] =>

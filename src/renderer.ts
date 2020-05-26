@@ -23,13 +23,10 @@ import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
+import { isElement } from 'lib';
+
 
 // ----- Renderer ----- //
-
-// The nodeType for ELEMENT_NODE has the value 1.
-function isElement(node: Node): node is Element {
-    return node.nodeType === 1;
-}
 
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? new Some(node.attributes) : new None();
@@ -465,7 +462,7 @@ const render = (format: Format, excludeStyles = false) =>
                         <body>
                             ${html}
                             <script>
-                                ${js}
+                                ${js.withDefault('')}
                                 function resize() {
                                     window.frameElement.height = document.body.offsetHeight;
                                 }
