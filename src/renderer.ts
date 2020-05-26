@@ -254,7 +254,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
     }
 
     p {
-        margin: 1em 0;
+        margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
 
         &::before {
             ${icons}
@@ -280,15 +280,19 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
 type PullquoteProps = {
     quote: string;
     format: Format;
+    attribution: Option<string>;
 };
 
-const Pullquote: FC<PullquoteProps> = ({ quote, format }: PullquoteProps) =>
-    styledH('aside',
+const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
+    const children = attribution
+        .fmap(attribution => ([h('p', null, quote), h('cite', null, attribution)]))
+        .withDefault([h('p', null, quote)])
+
+    return styledH('aside',
         { css: pullquoteStyles(getPillarStyles(format.pillar).kicker) },
-        h('blockquote', null,
-            h('p', null, quote)
-        ),
+        h('blockquote', null, children)
     );
+}
 
 const richLinkWidth = '8.75rem';
 
@@ -392,8 +396,10 @@ const render = (format: Format, excludeStyles = false) =>
             return h(ImageComponent, { image: element }, figcaption);
         }
 
-        case ElementKind.Pullquote:
-            return h(Pullquote, { quote: element.quote, format, key });
+        case ElementKind.Pullquote: {
+            const { quote, attribution } = element;
+            return h(Pullquote, { quote, attribution, format, key });
+        }
 
         case ElementKind.RichLink: {
             const { url, linkText } = element;
