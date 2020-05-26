@@ -40,6 +40,7 @@ const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css
 
 const commentStyles = (kicker: string): SerializedStyles => css`
     color: ${kicker};
+    width: 75%;
     ${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
