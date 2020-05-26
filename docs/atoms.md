@@ -88,12 +88,9 @@ TimelineBlockElement
     -> [amp] TimelineBlockComponent
 ```
 
+### Atom Documentation
 
-### Todo
-
-This section contains all the work that need to be done as part of this atom migration.
-
-- Build a DCR component that utilises the AudioAtom data passed to DCR by the backend carried by `AudioAtomBlockElement`
+`AudioAtomBlockElement`
 
 	```
 	case class AudioAtomBlockElement(
@@ -106,4 +103,4 @@ This section contains all the work that need to be done as part of this atom mig
 	) extends PageElement
 	```
 	
-	And example of a page with an AudioAtom is [here](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may), and the data is already is the [data sent to DCR](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may.json?dcr).
+Example: [www](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may), [data](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may.json?dcr).
