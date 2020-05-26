@@ -3,12 +3,12 @@
 import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, neutral } from '@guardian/src-foundations';
 import { between, from } from '@guardian/src-foundations/mq';
 import { Format, Display, Design } from '@guardian/types/Format';
 
 import { Item } from 'item';
-import { wideContentWidth, articleWidthStyles } from 'styles';
+import { wideContentWidth, articleWidthStyles, darkModeCss } from 'styles';
 import StarRating from 'components/starRating';
 import { border } from 'editorialPalette';
 import { headlineTextColour, headlineBackgroundColour } from 'editorialStyles';
@@ -64,6 +64,10 @@ const analysisStyles = (format: Format): SerializedStyles => css`
     span {
         box-shadow: inset 0 -0.1rem ${border.primary(format)};
         padding-bottom: 0.2rem;
+
+        ${darkModeCss`
+            box-shadow: inset 0 -0.1rem ${neutral[46]};
+        `}
     }
 `;
 

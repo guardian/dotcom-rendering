@@ -39,20 +39,26 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
-const bulletStyles = (colour: string): SerializedStyles => css`
-    color: transparent;
-    display: inline-block;
-
-    &::before {
-        content: '';
-        background-color: ${colour};
-        width: 1rem;
-        height: 1rem;
-        border-radius: .5rem;
+const bulletStyles = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: transparent;
         display: inline-block;
-        vertical-align: middle;
-    }
-`;
+
+        &::before {
+            content: '';
+            background-color: ${kicker};
+            width: 1rem;
+            height: 1rem;
+            border-radius: .5rem;
+            display: inline-block;
+            vertical-align: middle;
+            ${darkModeCss`
+                background-color: ${inverted};
+            `}
+        }
+    `;
+}
 
 interface BulletProps {
     format: Format;
@@ -61,7 +67,7 @@ interface BulletProps {
 
 const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(format.pillar).kicker) }, '•'),
+        styledH('span', { css: bulletStyles(format) }, '•'),
         text.replace(/•/g, '')
     );
 
@@ -74,6 +80,9 @@ const HorizontalRuleStyles = css`
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
     background-color: ${neutral[93]};
+    ${darkModeCss`
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const HorizontalRule = (): ReactElement =>
@@ -244,38 +253,42 @@ const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(standfirstTextElement(format));
 
-const pullquoteStyles = (colour: string): SerializedStyles => css`
-    color: ${colour};
-    margin: 0;
-    ${headline.xsmall({ fontWeight: 'light' })};
+const pullquoteStyles = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: ${kicker};
+        margin: 0;
+        ${headline.xsmall({ fontWeight: 'light' })};
+        ${darkModeCss`color: ${inverted};`}
 
-    blockquote {
-        margin-left: 0;
-    }
-
-    p {
-        margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
-
-        &::before {
-            ${icons}
-            font-size: 1.5rem;
-            line-height: 1.2;
-            font-weight: 300;
-            content: '\\e11c';
-            display: inline-block;
-            margin-right: ${basePx(1)};
+        blockquote {
+            margin-left: 0;
         }
-    }
 
-    footer {
-        font-size: 1.8rem;
-        margin-top: 4px;
+        p {
+            margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
 
-        cite {
-            font-style: normal;
+            &::before {
+                ${icons}
+                font-size: 1.5rem;
+                line-height: 1.2;
+                font-weight: 300;
+                content: '\\e11c';
+                display: inline-block;
+                margin-right: ${basePx(1)};
+            }
         }
-    }
-`;
+
+        footer {
+            font-size: 1.8rem;
+            margin-top: 4px;
+
+            cite {
+                font-style: normal;
+            }
+        }
+    `;
+}
 
 type PullquoteProps = {
     quote: string;
@@ -283,13 +296,14 @@ type PullquoteProps = {
     attribution: Option<string>;
 };
 
+
 const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
     const children = attribution
         .fmap(attribution => ([h('p', null, quote), h('cite', null, attribution)]))
         .withDefault([h('p', null, quote)])
 
     return styledH('aside',
-        { css: pullquoteStyles(getPillarStyles(format.pillar).kicker) },
+        { css: pullquoteStyles(format) },
         h('blockquote', null, children)
     );
 }

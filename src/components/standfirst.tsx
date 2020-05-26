@@ -24,7 +24,7 @@ const darkStyles: SerializedStyles = darkMode`
 
     a {
         color: ${neutral[60]};
-        border-bottom: 0.0625rem solid ${neutral[60]};
+        border-bottom: 0.0625rem solid ${neutral[46]};
     }
 `;
 
