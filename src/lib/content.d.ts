@@ -80,7 +80,6 @@ interface ExplainerAtomBlockElement {
     id: string;
     title: string;
     body: string;
-    displayType: string;
 }
 
 interface GuideBlockElement {
