@@ -432,7 +432,13 @@ const render = (format: Format, excludeStyles = false) =>
                 },
             };
 
-            const figureCss = css`margin ${remSpace[4]} 0`;
+            const figureCss = css`
+                margin ${remSpace[4]} 0;
+                ${darkModeCss`
+                    background: white;
+                    padding: ${remSpace[2]};
+                `}
+            `;
             const captionStyles = css`
                 ${textSans.xsmall()}
                 color: ${textColour.supporting};
@@ -469,6 +475,10 @@ const render = (format: Format, excludeStyles = false) =>
                             <style>
                                 ${pageFonts}
                                 ${styles}
+                                body {
+                                    background: white !important;
+                                    padding: ${remSpace[2]} !important;
+                                }
                             </style>
                         </head>
                         <body>
