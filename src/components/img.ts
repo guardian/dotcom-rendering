@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
-import { FC } from 'react';
-import { jsx as styledH, SerializedStyles, css } from '@emotion/core';
+import { createElement as h, FC } from 'react';
+import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { ImageMappings } from 'components/shared/page';
-import { Image, srcset, src } from 'image';
+import { Dpr, Image } from 'image';
 import { darkModeCss } from 'styles';
 
 
@@ -13,9 +12,14 @@ import { darkModeCss } from 'styles';
 
 interface Props {
     image: Image;
-    imageMappings: ImageMappings;
     sizes: string;
     className?: SerializedStyles;
+}
+
+interface SourceProps {
+    sizes: string,
+    srcSet: string,
+    dpr: Dpr,
 }
 
 const styles = css`
@@ -26,17 +30,44 @@ const styles = css`
     `}
 `;
 
-const Img: FC<Props> = ({ image, sizes, imageMappings, className }) =>
-    styledH('img', {
+const mediaQuery = (dpr: Dpr): string => {
+    switch (dpr) {
+        case Dpr.Two:
+            return '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)';
+        case Dpr.One:
+        default:
+            return '';
+    }
+};
+
+const Source: FC<SourceProps> = ({ sizes, srcSet, dpr }) =>
+    h('source', {
         sizes,
-        srcSet: srcset(image.src, imageMappings),
-        src: src(imageMappings, image.src, 500),
-        alt: image.alt.withDefault(''),
-        className: 'js-launch-slideshow',
-        css: [styles, className],
-        'data-caption': image.nativeCaption.withDefault(''),
-        'data-credit': image.credit.withDefault(''),
+        srcSet,
+        media: mediaQuery(dpr),
     });
+
+const Img: FC<Props> = ({ image, sizes, className }) =>
+    h('picture', null, [
+        h(Source, {
+            sizes,
+            srcSet: image.dpr2Srcset,
+            dpr: Dpr.Two,
+        }),
+        h(Source, {
+            sizes,
+            srcSet: image.srcset,
+            dpr: Dpr.One,
+        }),
+        styledH('img', {
+            src: image.src,
+            alt: image.alt.withDefault(''),
+            className: 'js-launch-slideshow',
+            css: [styles, className],
+            'data-caption': image.nativeCaption.withDefault(''),
+            'data-credit': image.credit.withDefault(''),
+        }),
+    ] );
 
 
 // ----- Exports ----- //
