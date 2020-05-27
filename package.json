@@ -27,6 +27,7 @@
     "dependencies": {
         "@babel/runtime": "^7.9.2",
         "@emotion/core": "^10.0.28",
+        "@guardian/atoms-rendering": "^1.2.0",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/consent-management-platform": "^3.0.4",
         "@guardian/discussion-rendering": "^2.2.20",

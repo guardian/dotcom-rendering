@@ -2137,6 +2137,11 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@guardian/atoms-rendering@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.2.0.tgz#057bd790bb92fc0f5269414902b53c2e6d5eac2a"
+  integrity sha512-eFftfnmuAEyLWOj7opatVHW+feL8bS9b6g+YnkfRiNCzg+7BJNdvlKXXf1qYmUqF55n9SplkrtmqHYZlTUmUYQ==
+
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
