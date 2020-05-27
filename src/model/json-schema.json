@@ -607,9 +607,6 @@
                 },
                 "body": {
                     "type": "string"
-                },
-                "displayType": {
-                    "type": "string"
                 }
             },
             "required": ["_type", "id", "title", "body", "displayType"]
