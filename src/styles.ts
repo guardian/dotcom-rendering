@@ -168,6 +168,7 @@ export const fontFace = (
     ${style.fmap((s: string) => `font-style: ${s};`).withDefault('')}
     ${weight.fmap((w: number | string) => `font-weight: ${w};`).withDefault('')}
     src: url('${url}');
+    font-display: swap;
   }
 `;
 
