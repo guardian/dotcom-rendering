@@ -25,7 +25,7 @@ const addFormField = (formField: CampaignsFeildType) => {
             return (
                 <textarea
                     name={`field_${formField.id}`}
-                    required={formField.required === '1' ? true : false}
+                    required={formField.required === '1'}
                 />
             );
         case 'file':
@@ -35,7 +35,7 @@ const addFormField = (formField: CampaignsFeildType) => {
                         name={`field_${formField.id}`}
                         type="file"
                         accept="image/*, .pdf"
-                        required={formField.required === '1' ? true : false}
+                        required={formField.required === '1'}
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -46,7 +46,7 @@ const addFormField = (formField: CampaignsFeildType) => {
             return (
                 <select
                     name={`field_${formField.id}`}
-                    required={formField.required === '1' ? true : false}
+                    required={formField.required === '1'}
                 >
                     {formField.options &&
                         formField.options.map(option => (
@@ -79,7 +79,7 @@ const addFormField = (formField: CampaignsFeildType) => {
                 <input
                     name={`field_${formField.id}`}
                     type={formField.type}
-                    required={formField.required === '1' ? true : false}
+                    required={formField.required === '1'}
                 />
             );
     }
@@ -159,9 +159,9 @@ export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
 
     // const name = campaign.name;
     const title = campaign.fields.callout;
-    const description = campaign.fields.description;
-    const formFields = campaign.fields.formFields;
-    const formId = campaign.fields.formId;
+    const {description} = campaign.fields;
+    const {formFields} = campaign.fields;
+    const {formId} = campaign.fields;
     // const tagName = campaign.fields.tagName;
 
     return (

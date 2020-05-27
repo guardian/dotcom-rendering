@@ -151,7 +151,7 @@ interface CampaignsType {
 }
 
 interface CampaignsFeildType {
-    text_size?: number | string; //TODO: need to fix at source
+    text_size?: number | string; // TODO: need to fix at source
     name?: string;
     description?: string;
     hide_label?: string;

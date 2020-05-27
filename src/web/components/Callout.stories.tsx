@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Callout } from './Callout';
 import { rootConfig } from '@root/fixtures/rootConfig';
+import { Callout } from './Callout';
 
 export default {
     component: Callout,
