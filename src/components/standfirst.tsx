@@ -54,7 +54,7 @@ const thinHeadline = css`
 
 const immersive: SerializedStyles = css`
     ${styles}
-    ${headline.xxsmall({ fontWeight: 'light' })}
+    ${headline.xsmall({ fontWeight: 'light' })}
     margin-top: ${remSpace[3]};
 `;
 
