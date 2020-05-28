@@ -186,7 +186,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
     return { element: (
         <html lang="en" css={PageStyles}>
             <head>
-                <title>{content.id}</title>
+                <title>{content.webTitle}</title>
                 <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
                 <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
                 <link rel="stylesheet" href="native://fontSize.css" />
