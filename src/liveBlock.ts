@@ -3,17 +3,19 @@
 import { IBlock as Block } from 'mapiThriftModels/Block';
 import { ICapiDateTime as CapiDateTime } from 'mapiThriftModels/CapiDateTime';
 import { IContent as Content } from 'mapiThriftModels/Content';
-import { Option, toSerialisable as optionToSerialisable } from 'types/option';
-import { Context } from 'types/parserContext';
+import { Option, toSerialisable as optionToSerialisable, fromNullable } from 'types/option';
+import { Context, DocParser } from 'types/parserContext';
 import JsonSerialisable from 'types/jsonSerialisable';
 import {
     Body,
     parseElements,
     toSerialisable as bodyElementToSerialisable,
+    fromSerialisable as bodyElementFromSerialisable,
 } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
-import { partition } from 'types/result';
+import { partition, Ok } from 'types/result';
 import { compose } from 'lib';
+import { fromString as dateFromString } from 'date';
 
 
 // ----- Types ----- //
@@ -47,8 +49,33 @@ const serialiseLiveBlock = ({
         body: partition(body).oks.map(bodyElementToSerialisable),
     });
 
+// Disabled because the point of these functions is to convert the `any`
+// provided by JSON.parse to a stricter type
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const deserialiseLiveBlock = (docParser: DocParser) => ({
+    id,
+    isKeyEvent,
+    title,
+    firstPublished,
+    lastModified,
+    body,
+}: any): LiveBlock =>
+    ({
+        id,
+        isKeyEvent,
+        title,
+        firstPublished: fromNullable(firstPublished).andThen(dateFromString),
+        lastModified: fromNullable(lastModified).andThen(dateFromString),
+        body: body.map((elem: any) => new Ok(bodyElementFromSerialisable(docParser)(elem))),
+    });
+
 const toSerialisable = (blocks: LiveBlock[]): JsonSerialisable =>
     blocks.map(serialiseLiveBlock);
+
+const fromSerialisable = (docParser: DocParser) => (blocks: any): LiveBlock[] =>
+    blocks.map(deserialiseLiveBlock(docParser));
+
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 const parse = (context: Context) => (block: Block): LiveBlock =>
     ({
@@ -92,6 +119,7 @@ export {
     parseMany,
     newBlocksSince,
     updatedBlocksSince,
-    toSerialisable,
     recentBlocks,
+    toSerialisable,
+    fromSerialisable,
 };

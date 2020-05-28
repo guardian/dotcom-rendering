@@ -132,12 +132,10 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                 const {
                     resources,
                     element,
-                    hydrationProps,
                 } = Page({ content, imageSalt, getAssetLocation });
                 res.set('Link', getPrefetchHeader(resources));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
-                res.write(`<script id="hydrationProps" type="application/json">${JSON.stringify(hydrationProps)}</script>`);
                 res.write(renderToString(element));
                 res.end();
             },
@@ -154,7 +152,7 @@ const liveBlockUpdates = (since: Date, content: Content, context: Context): Live
 });
 
 const recentLiveBlocks = (content: Content, context: Context): LiveUpdates => ({
-    newBlocks: serialiseLiveBlocks(recentBlocks(10)(content)(context)),
+    newBlocks: serialiseLiveBlocks(recentBlocks(7)(content)(context)),
     updatedBlocks: [],
 });
 
@@ -208,8 +206,6 @@ app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 
-app.get('/:articleId(*)/live-blocks', liveBlocks);
-
 app.all('*', (request, response, next) => {
     const start = Date.now();
 
@@ -220,6 +216,8 @@ app.all('*', (request, response, next) => {
 
     next();
 });
+
+app.get('/:articleId(*)/live-blocks', liveBlocks);
 
 app.get('/healthcheck', (_req, res) => res.send("Ok"));
 

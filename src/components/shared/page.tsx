@@ -15,7 +15,6 @@ import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, getFormat } from 'item';
 import { ElementKind } from 'bodyElement';
-import { IBlock as Block } from 'mapiThriftModels';
 import { Design, Display } from 'format';
 import Interactive from 'components/interactive/article';
 import { pageFonts } from 'styles';
@@ -44,27 +43,7 @@ interface BodyProps {
 interface ElementWithResources {
     element: React.ReactElement;
     resources: string[];
-    hydrationProps: {};
 }
-
-const filterBlocks = (block: Block): Block => {
-    const { createdBy, lastModifiedBy, ...blocks } = block;
-    return blocks;
-};
-
-const liveblogProps = (capi: Content): Content => {
-    const { id, type, webTitle, webUrl, apiUrl, fields, tags, references, isHosted, blocks } = capi;
-    return {
-        id, type, webTitle, webUrl, apiUrl, fields, references, isHosted,
-        tags: tags.map(({ type, webTitle, webUrl, id, references, apiUrl }) =>
-            ({ type, webTitle, webUrl, id, references, apiUrl })),
-        blocks: {
-            totalBodyBlocks: blocks?.totalBodyBlocks,
-            main: blocks?.main ? filterBlocks(blocks?.main) : undefined,
-            body: blocks?.body ? blocks.body.map(filterBlocks) : undefined
-        }
-    }
-};
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
     <>
@@ -94,7 +73,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
             <Interactive>
                 {interactiveContent}
             </Interactive>
-        ), resources: [], hydrationProps: {} };
+        ), resources: [] };
     }
 
     if (item.design === Design.Comment) {
@@ -108,7 +87,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                     {commentContent}
                 </Opinion>
             </WithScript>
-        ), resources: [articleScript], hydrationProps: {} };
+        ), resources: [articleScript] };
     }
 
     if (item.design === Design.Live) {
@@ -116,7 +95,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
             <WithScript src={liveblogScript}>
                 <LiveblogArticle item={item} />
             </WithScript>
-        ), resources: [liveblogScript], hydrationProps: { ...liveblogProps(capi) } };
+        ), resources: [liveblogScript] };
     }
 
     if (item.design === Design.Media) {
@@ -129,7 +108,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                         {mediaContent}
                     </Media>
                 </WithScript>
-            ), resources: [mediaScript], hydrationProps: {} };
+            ), resources: [mediaScript] };
     }
 
     if (
@@ -148,7 +127,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                     {content}
                 </Standard>
             </WithScript>
-        ), resources: [articleScript], hydrationProps: {} };
+        ), resources: [articleScript] };
     }
 
     if (item.design === Design.AdvertisementFeature) {
@@ -159,11 +138,11 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
             <AdvertisementFeature item={item}>
                 {content}
             </AdvertisementFeature>
-        ), resources: [], hydrationProps: {} };
+        ), resources: [] };
     }
 
     const element = <p>Content format not implemented yet</p>;
-    return { element, resources: [], hydrationProps: {} };
+    return { element, resources: [] };
 }
 
 interface Props {
@@ -180,7 +159,6 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
     const {
         element,
         resources,
-        hydrationProps
     } = ArticleBody({ imageSalt, capi: content, getAssetLocation });
 
     return { element: (
@@ -196,7 +174,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
                 { twitterScript }
             </body>
         </html>
-    ), resources, hydrationProps };
+    ), resources };
 }
 
 
