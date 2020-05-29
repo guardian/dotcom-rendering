@@ -11,7 +11,7 @@ import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
-import Page from 'components/shared/page';
+import { page } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
@@ -32,6 +32,7 @@ import { JSDOM } from 'jsdom';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
+import { toArray } from 'lib';
 
 
 // ----- Types ----- //
@@ -104,11 +105,10 @@ async function serveArticlePost(
         const content = mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-        const { resources, element } = Page({ content, imageSalt, getAssetLocation });
-        const html = renderToString(element);
-        res.set('Link', getPrefetchHeader(resources));
+        const { html, clientScript } = page(imageSalt, content, getAssetLocation);
+        res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
         res.write('<!DOCTYPE html>');
-        res.write(html);
+        res.write(renderToString(html));
         res.end();
     } catch (e) {
         logger.error(`This error occurred`, e);
@@ -129,14 +129,11 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
         capiContent.either(
             errorStatus => { res.sendStatus(errorStatus) },
             content => {
-                const {
-                    resources,
-                    element,
-                } = Page({ content, imageSalt, getAssetLocation });
-                res.set('Link', getPrefetchHeader(resources));
+                const { html, clientScript } = page(imageSalt, content, getAssetLocation);
+                res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
-                res.write(renderToString(element));
+                res.write(renderToString(html));
                 res.end();
             },
         )
