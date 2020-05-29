@@ -2137,10 +2137,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/atoms-rendering@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.2.0.tgz#057bd790bb92fc0f5269414902b53c2e6d5eac2a"
-  integrity sha512-eFftfnmuAEyLWOj7opatVHW+feL8bS9b6g+YnkfRiNCzg+7BJNdvlKXXf1qYmUqF55n9SplkrtmqHYZlTUmUYQ==
+"@guardian/atoms-rendering@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.3.3.tgz#5142fc6bfb8cf90024edad09c3aee039c3e75f38"
+  integrity sha512-Uug54iosZNTOcoSsRQ4GyEIUUiA5Dg+0ikrkQJOP+wSFdGhoYKBGcS39COXZ0V8xcij/hnopiIJeOVxMW3x5Uw==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"

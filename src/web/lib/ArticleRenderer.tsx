@@ -14,6 +14,8 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
+import { ExplainerAtom } from '@guardian/atoms-rendering';
+
 // This is required for spacefinder to work!
 const commercialPosition = css`
     position: relative;
@@ -34,6 +36,7 @@ export const ArticleRenderer: React.FC<{
 
     const output = elements
         .map((element, i) => {
+            console.log({ element });
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
@@ -54,7 +57,14 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
-                    return null; // awaiting the coming atom support (wip)
+                    return (
+                        <ExplainerAtom
+                            key={i}
+                            id={element.id}
+                            title={element.title}
+                            html={element.body}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
