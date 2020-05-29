@@ -319,7 +319,8 @@ const richLinkStyles = css`
         background: none;
         border: none;
         ${textSans.medium()};
-        padding-left: 0;
+        padding: 0;
+        margin: 0;
     }
 
     button::before {
@@ -327,8 +328,9 @@ const richLinkStyles = css`
         content: '\\e005';
         border-radius: 100%;
         border: solid 1px ${neutral[7]};
-        padding: 4px 5px 5px 5px;
         font-size: 12px;
+        padding: 3px 6px 4px 6px;
+        display: inline-block;
         margin-right: ${remSpace[2]};
     }
 
