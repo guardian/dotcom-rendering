@@ -14,11 +14,12 @@ export const Default = () => {
         <div
             className={css`
                 width: 630px;
+                padding: 15px;
             `}
         >
             {/*
             // @ts-ignore */}
-            <Callout campaign={rootConfig.page.campaigns[0]} />
+            <Callout campaign={rootConfig.page.campaigns[0]} pillar={'news'} />
         </div>
     );
 };

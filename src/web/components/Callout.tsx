@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
-import { palette } from '@guardian/src-foundations';
+import { palette, neutral } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
+import { TextInput } from '@guardian/src-text-input';
+import { RadioGroup, Radio } from '@guardian/src-radio';
+import { Link } from '@guardian/src-link';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
@@ -11,6 +14,7 @@ import MinusIcon from '@frontend/static/icons/minus.svg';
 const rowStyle = css`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 `;
 
 const columnStyles = css`
@@ -19,19 +23,61 @@ const columnStyles = css`
     justify-content: space-between;
 `;
 
+const fieldLabelStyles = css`
+    ${textSans.medium({ fontWeight: 'bold' })}
+`;
+
+const fieldDescription = css`
+    ${textSans.medium()}
+`;
+
+const optionalTextStyles = css`
+    ${textSans.small({ italic: true })}
+    color: ${neutral[46]};
+    padding-left: 5px;
+`;
+
+const fileUploadInputStyles = css`
+    padding-top: 10px;
+    padding-bottom: 10px;
+`;
+
+const FieldLabel = ({ formField }: { formField: CampaignsFeildType }) => (
+    <label className={fieldLabelStyles} htmlFor={formField.name}>
+        <div>
+            {formField.label}
+            {formField.required === '1' && (
+                <span className={optionalTextStyles}>Optional</span>
+            )}
+        </div>
+        {formField.description && (
+            <div>
+                <span className={fieldDescription}>
+                    {`(${formField.description})`}
+                </span>
+            </div>
+        )}
+    </label>
+);
+
 const addFormField = (formField: CampaignsFeildType) => {
     switch (formField.type) {
         case 'textarea':
             return (
-                <textarea
-                    name={`field_${formField.id}`}
-                    required={formField.required === '1'}
-                />
+                <>
+                    <FieldLabel formField={formField} />
+                    <textarea
+                        name={`field_${formField.id}`}
+                        required={formField.required === '1'}
+                    />
+                </>
             );
         case 'file':
             return (
                 <>
+                    <FieldLabel formField={formField} />
                     <input
+                        className={fileUploadInputStyles}
                         name={`field_${formField.id}`}
                         type="file"
                         accept="image/*, .pdf"
@@ -44,68 +90,89 @@ const addFormField = (formField: CampaignsFeildType) => {
             );
         case 'select':
             return (
-                <select
-                    name={`field_${formField.id}`}
-                    required={formField.required === '1'}
-                >
-                    {formField.options &&
-                        formField.options.map(option => (
-                            <option value={option.value}>{option.value}</option>
-                        ))}
-                </select>
+                <>
+                    <FieldLabel formField={formField} />
+                    <select
+                        name={`field_${formField.id}`}
+                        required={formField.required === '1'}
+                    >
+                        {formField.options &&
+                            formField.options.map(option => (
+                                <option value={option.value}>
+                                    {option.value}
+                                </option>
+                            ))}
+                    </select>
+                </>
             );
         case 'radio':
         case 'checkbox':
             return (
                 <div className="form_option_container">
-                    {formField.options &&
-                        formField.options.map(option => (
-                            <>
-                                <input
-                                    type={formField.type}
-                                    value={option.value}
-                                    id={option.label}
+                    <FieldLabel formField={formField} />
+                    {formField.options && (
+                        <RadioGroup
+                            name={formField.name || ''}
+                            orientation="horizontal"
+                        >
+                            {formField.options.map((option, index) => (
+                                <Radio
+                                    label={option.value}
+                                    value={index}
                                     name={`field_${formField.id}`}
                                 />
-                                <label htmlFor={option.label}>
-                                    {option.value}
-                                </label>
-                            </>
-                        ))}
+                            ))}
+                        </RadioGroup>
+                    )}
                 </div>
             );
-        default:
+        default: {
             return (
-                <input
+                <TextInput
                     name={`field_${formField.id}`}
                     type={formField.type}
-                    required={formField.required === '1'}
+                    label={formField.label || ''}
+                    supporting={formField.description}
+                    optional={formField.required !== '1'}
                 />
             );
+        }
     }
 };
 
-const rootStyle = css`
-    margin-top: 1rem;
-    margin-bottom: 0.75rem;
-    position: relative;
-`;
 // TODO: find better name
 const snippetStyles = css`
-    border-top: 0.0625rem #dcdcdc solid;
-    border-bottom: 0.0625rem #dcdcdc solid;
+    border-top: 1px ${neutral[86]} solid;
+    border-bottom: 1px ${neutral[86]} solid;
     position: relative;
-    padding: 0;
+    padding-bottom: 10px;
+`;
+
+const snippetExpandedStyle = css`
+    background-color: ${neutral[97]};
 `;
 
 const speechBubbleWrapperStyles = css`
     margin-right: 10px;
 `;
 
-const speechBubbleStyles = css`
+// Removing default styles from summery tag
+const summeryStyles = css`
+    ::-webkit-details-marker {
+        display: none;
+    }
+    outline: none;
+`;
+
+const formStyles = css`
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
+const speechBubbleStyles = (pillar: Pillar) => css`
     ${textSans.medium({ fontWeight: 'bold' })}
-    color: #fff;
-    background-color: #c70000;
+    color: ${neutral[100]};
+    background-color: ${palette[pillar][400]};
     min-width: 88px;
     padding-bottom: 6px;
     padding-left: 10px;
@@ -116,7 +183,7 @@ const speechBubbleStyles = css`
         height: 22px;
         border-bottom-right-radius: 18px;
         position: absolute;
-        background-color: #c70000;
+        background-color: ${palette[pillar][400]};
     }
 `;
 
@@ -135,42 +202,55 @@ const headingTextStyles = css`
 `;
 
 const buttonWrapperStyles = css`
+    position: absolute;
     cursor: pointer;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    border: 0;
-    margin: 0 0 0 0.625rem;
+    margin-top: -5px;
+`;
+
+const footerPaddingStyles = css`
+    padding-bottom: 40px;
 `;
 
 const termsAndConditionsStyles = css``;
 const submitButtonStyles = css``;
 const errorStyles = css``;
 
-export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
+export const Callout = ({
+    campaign,
+    pillar,
+}: {
+    campaign: CampaignsType;
+    pillar: Pillar;
+}) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [error, setError] = useState('');
+
     useEffect(() => {
         setError('');
     }, []);
 
     // const name = campaign.name;
     const title = campaign.fields.callout;
-    const {description} = campaign.fields;
-    const {formFields} = campaign.fields;
-    const {formId} = campaign.fields;
+    const { description } = campaign.fields;
+    const { formFields } = campaign.fields;
+    const { formId } = campaign.fields;
     // const tagName = campaign.fields.tagName;
 
     return (
-        <figure className={rootStyle}>
-            <details className={snippetStyles}>
-                <summary>
+        <figure>
+            <details
+                className={cx(snippetStyles, {
+                    [snippetExpandedStyle]: isExpanded,
+                })}
+                onClick={e => e.preventDefault()}
+                onKeyDown={e => e.preventDefault()}
+                aria-hidden={true}
+                open={!!isExpanded}
+            >
+                <summary className={summeryStyles}>
                     <div className={cx(rowStyle)}>
                         <div className={speechBubbleWrapperStyles}>
-                            <div className={speechBubbleStyles}>
+                            <div className={speechBubbleStyles(pillar)}>
                                 <h4>Share your story</h4>
                             </div>
                         </div>
@@ -184,7 +264,7 @@ export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
                                 />
                             )}
                         </div>
-                        {/* TODO: should be conditionally rendered if bumission is true */}
+                        {/* TODO: should be conditionally rendered if submission is true */}
                         {/* <div className="success_box">
                             <p className="success-message">
                                 Thank you for your contribution
@@ -192,23 +272,14 @@ export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
                         </div> */}
                     </div>
                     <span className={buttonWrapperStyles} aria-hidden="true">
-                        {!isExpanded ? (
+                        {!isExpanded && (
                             <Button
                                 iconSide="left"
-                                size="small"
+                                size="xsmall"
                                 icon={<PlusIcon />}
                                 onClick={() => setIsExpanded(true)}
                             >
                                 Tell us
-                            </Button>
-                        ) : (
-                            <Button
-                                iconSide="left"
-                                size="small"
-                                icon={<MinusIcon />}
-                                onClick={() => setIsExpanded(false)}
-                            >
-                                Hide
                             </Button>
                         )}
                     </span>
@@ -217,20 +288,14 @@ export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
                 <form
                     action="/formstack-campaign/submit"
                     method="post"
-                    className={columnStyles}
+                    className={cx(formStyles, columnStyles)}
                 >
                     <input name="formId" type="hidden" value={formId} />
 
                     {formFields.map(formField => (
                         <>
-                            <label htmlFor={formField.name}>
-                                {formField.label}
-                                {formField.description && (
-                                    <span>{`(${formField.description})`}</span>
-                                )}
-                                {formField.required === '1' && '*'}
-                            </label>
                             {addFormField(formField)}
+                            <hr />
                         </>
                     ))}
 
@@ -247,22 +312,42 @@ export const Callout = ({ campaign }: { campaign: CampaignsType }) => {
                                     id="twitter-handle"
                                     placeholder="@mytwitterhandle"
                                 />
+                                <hr />
                             </div>
                         </div>
                     */}
-                    <div className={rowStyle}>
-                        <button className={submitButtonStyles} type="submit">
+                    {error && <div className={errorStyles}>{error}</div>}
+                    <div className={cx(rowStyle, footerPaddingStyles)}>
+                        <Button
+                            priority="secondary"
+                            className={submitButtonStyles}
+                            size="xsmall"
+                            type="submit"
+                        >
                             Share with the Guardian
-                        </button>
-                        <a
+                        </Button>
+                        <Link
                             className={termsAndConditionsStyles}
+                            subdued={true}
+                            priority="secondary"
                             href="https://www.theguardian.com/help/terms-of-service"
                         >
                             Terms and conditions
-                        </a>
+                        </Link>
                     </div>
-                    {error && <div className={errorStyles}>{error}</div>}
                 </form>
+                <span className={buttonWrapperStyles} aria-hidden="true">
+                    {isExpanded && (
+                        <Button
+                            iconSide="left"
+                            size="xsmall"
+                            icon={<MinusIcon />}
+                            onClick={() => setIsExpanded(false)}
+                        >
+                            Hide
+                        </Button>
+                    )}
+                </span>
             </details>
         </figure>
     );
