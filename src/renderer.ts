@@ -313,6 +313,26 @@ const richLinkWidth = '8.75rem';
 const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
+    border-top: solid 1px ${neutral[60]};
+
+    button {
+        background: none;
+        border: none;
+        ${textSans.medium()};
+        padding: 0;
+        margin: 0;
+    }
+
+    button::before {
+        ${icons}
+        content: '\\e005';
+        border-radius: 100%;
+        border: solid 1px ${neutral[7]};
+        font-size: 12px;
+        padding: 3px 6px 4px 6px;
+        display: inline-block;
+        margin-right: ${remSpace[2]};
+    }
 
     a {
         display:inline-block;
@@ -321,7 +341,7 @@ const richLinkStyles = css`
 
         h1 {
             margin: ${basePx(0, 0, 2, 0)};
-            ${body.medium({ fontWeight: 'bold' })}
+            ${headline.xxxsmall({ fontWeight: 'bold' })}
         }
     }
 
@@ -336,9 +356,11 @@ const richLinkStyles = css`
 
     ${darkModeCss`
         background-color: ${neutral[20]};
-        color: ${neutral[60]};
+        button::before {
+            border-color: ${neutral[60]};
+        }
 
-        a, h1 {
+        a, h1, button {
             color: ${neutral[60]};
         }
     `}
@@ -346,7 +368,7 @@ const richLinkStyles = css`
 
 const RichLink = (props: { url: string; linkText: string }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
-        styledH('a', { href: props.url }, [h('h1', null, props.linkText), 'Read more'])
+        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
