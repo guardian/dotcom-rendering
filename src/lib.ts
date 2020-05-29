@@ -9,6 +9,8 @@ function isElement(node: Node): node is Element {
     return node.nodeType === 1;
 }
 
+const toArray = Array.of.bind(null);
+
 
 // ----- Exports ----- //
 
@@ -16,4 +18,5 @@ export {
     compose,
     identity,
     isElement,
+    toArray,
 };

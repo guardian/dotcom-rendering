@@ -34,9 +34,11 @@ const immersiveStyles = css`
     ${headline.medium({ fontWeight: 'bold' })}
     font-weight: 700;
     padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
-    margin: calc(100vh - 5rem) 0 0;
+    margin: calc(80vh - 5rem) 0 0;
     position: relative;
     display: inline-block;
+    min-height: 112px;
+    box-sizing: border-box;
 
     ${between.phablet.and.wide} {
         width: ${wideContentWidth}px;
@@ -44,12 +46,13 @@ const immersiveStyles = css`
 
     ${from.desktop} {
         ${headline.xlarge({ fontWeight: 'bold' })}
-        margin-top: calc(100vh - 7rem);
+        margin-top: calc(80vh - 7rem);
     }
 
     ${from.wide} {
         width: 100%;
         margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
+        padding-left: ${remSpace[2]};
 
         span {
             display: block;

@@ -58,11 +58,13 @@ const LiveblogArticle = ({ item }: LiveblogArticleProps): JSX.Element => {
                     />
                 </div>
                 <LiveblogKeyEvents blocks={item.blocks} pillar={item.pillar} />
-                <LiveblogBody
-                    blocks={item.blocks}
-                    format={format}
-                    totalBodyBlocks={item.totalBodyBlocks}
-                />
+                <article id="blocks">
+                    <LiveblogBody
+                        blocks={item.blocks}
+                        format={format}
+                        totalBodyBlocks={item.totalBodyBlocks}
+                    />
+                </article>
                 <Tags tags={item.tags} background={neutral[93]} />
             </div>
         </main>

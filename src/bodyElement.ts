@@ -134,6 +134,35 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
     }
 }
 
+// Disabled because the point of this function is to convert the `any`
+// provided by JSON.parse to a stricter type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
+    switch (elem.kind) {
+        case ElementKind.Text:
+            return { ...elem, doc: docParser(elem.doc) };
+        case ElementKind.Image:
+            return {
+                ...elem,
+                alt: fromNullable(elem.alt),
+                caption: fromNullable(elem.caption).fmap(docParser),
+                credit: fromNullable(elem.credit),
+                nativeCaption: fromNullable(elem.nativeCaption),
+                role: fromNullable(elem.role),
+            };
+        case ElementKind.Pullquote:
+            return { ...elem, attribution: fromNullable(elem.attribution) };
+        case ElementKind.Tweet:
+            return { ...elem, content: docParser(elem.content) };
+        case ElementKind.InteractiveAtom:
+            return { ...elem, js: fromNullable(elem.js) };
+        case ElementKind.Embed:
+            return { ...elem, alt: fromNullable(elem.alt) };
+        default:
+            return elem;
+    }
+}
+
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
 
@@ -319,4 +348,5 @@ export {
     Body,
     parseElements,
     toSerialisable,
+    fromSerialisable,
 };

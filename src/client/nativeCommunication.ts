@@ -63,6 +63,7 @@ function ads(): void {
 
 function launchSlideshow(src: string | null): void {
     const images = Array.from(document.querySelectorAll('.js-launch-slideshow'));
+    const title = document.title;
     const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
         const url = image.getAttribute('src');
         const caption =  image.getAttribute('data-caption') ?? undefined;
@@ -71,7 +72,7 @@ function launchSlideshow(src: string | null): void {
     });
     const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);
     if (imagesWithCaptions.length && clickedImageIndex >= 0) {
-        galleryClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
+        galleryClient.launchSlideshow(imagesWithCaptions, clickedImageIndex, title);
     }
 }
 
