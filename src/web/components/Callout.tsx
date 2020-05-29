@@ -61,15 +61,34 @@ const FieldLabel = ({ formField }: { formField: CampaignsFeildType }) => (
     </label>
 );
 
-const addFormField = (formField: CampaignsFeildType) => {
+const addFormField = ({
+    formField,
+    formData,
+    setFormData,
+}: {
+    formField: CampaignsFeildType;
+    formData: { [key in string]: any };
+    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+}) => {
     switch (formField.type) {
         case 'textarea':
             return (
                 <>
                     <FieldLabel formField={formField} />
                     <textarea
-                        name={`field_${formField.id}`}
+                        name={formField.id}
                         required={formField.required === '1'}
+                        value={
+                            formField.id && formField.id in formData
+                                ? formData[formField.id]
+                                : ''
+                        }
+                        onChange={e =>
+                            setFormData({
+                                ...formData,
+                                [formField.id || '']: e.target.value,
+                            })
+                        }
                     />
                 </>
             );
@@ -79,10 +98,21 @@ const addFormField = (formField: CampaignsFeildType) => {
                     <FieldLabel formField={formField} />
                     <input
                         className={fileUploadInputStyles}
-                        name={`field_${formField.id}`}
+                        name={formField.id}
                         type="file"
                         accept="image/*, .pdf"
                         required={formField.required === '1'}
+                        value={
+                            formField.id && formField.id in formData
+                                ? formData[formField.id]
+                                : ''
+                        }
+                        onChange={e =>
+                            setFormData({
+                                ...formData,
+                                [formField.id || '']: e.target.value,
+                            })
+                        }
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -94,8 +124,19 @@ const addFormField = (formField: CampaignsFeildType) => {
                 <>
                     <FieldLabel formField={formField} />
                     <select
-                        name={`field_${formField.id}`}
+                        name={`${formField.id}`}
                         required={formField.required === '1'}
+                        value={
+                            formField.id && formField.id in formData
+                                ? formData[formField.id]
+                                : ''
+                        }
+                        onChange={e =>
+                            setFormData({
+                                ...formData,
+                                [formField.id || '']: e.target.value,
+                            })
+                        }
                     >
                         {formField.options &&
                             formField.options.map(option => (
@@ -116,13 +157,27 @@ const addFormField = (formField: CampaignsFeildType) => {
                             name={formField.name || ''}
                             orientation="horizontal"
                         >
-                            {formField.options.map((option, index) => (
-                                <Radio
-                                    label={option.value}
-                                    value={index}
-                                    name={`field_${formField.id}`}
-                                />
-                            ))}
+                            {formField.options.map(option => {
+                                const isRadioChecked =
+                                    formField.id &&
+                                    formField.id in formData &&
+                                    formData[formField.id];
+                                return (
+                                    <Radio
+                                        label={option.value}
+                                        value={option.value}
+                                        name={`${formField.id}`}
+                                        checked={isRadioChecked}
+                                        onChange={e =>
+                                            setFormData({
+                                                ...formData,
+                                                [formField.id ||
+                                                '']: !isRadioChecked,
+                                            })
+                                        }
+                                    />
+                                );
+                            })}
                         </RadioGroup>
                     )}
                 </div>
@@ -130,11 +185,22 @@ const addFormField = (formField: CampaignsFeildType) => {
         default: {
             return (
                 <TextInput
-                    name={`field_${formField.id}`}
+                    name={`${formField.id}`}
                     type={formField.type}
                     label={formField.label || ''}
                     supporting={formField.description}
                     optional={formField.required !== '1'}
+                    value={
+                        formField.id && formField.id in formData
+                            ? formData[formField.id]
+                            : ''
+                    }
+                    onChange={e =>
+                        setFormData({
+                            ...formData,
+                            [formField.id || '']: e.target.value,
+                        })
+                    }
                 />
             );
         }
@@ -226,6 +292,10 @@ export const Callout = ({
     const [isExpanded, setIsExpanded] = useState(false);
     const [error, setError] = useState('');
 
+    // As the form is dynamically rendered, we cannot have
+    // individual setStates for each field
+    const [formData, setFormData] = useState<{ [key in string]: any }>({});
+
     useEffect(() => {
         setError('');
     }, []);
@@ -295,7 +365,7 @@ export const Callout = ({
 
                     {formFields.map(formField => (
                         <>
-                            {addFormField(formField)}
+                            {addFormField({ formField, formData, setFormData })}
                             <hr />
                         </>
                     ))}
