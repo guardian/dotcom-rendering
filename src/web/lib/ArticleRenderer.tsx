@@ -36,7 +36,6 @@ export const ArticleRenderer: React.FC<{
 
     const output = elements
         .map((element, i) => {
-            console.log({ element });
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
