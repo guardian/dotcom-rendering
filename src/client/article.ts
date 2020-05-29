@@ -36,7 +36,6 @@ function getTopic(follow: Element | null): Topic | null {
         logger.error('No display name for topic');
         return null;
     }
-
     return new Topic({ id, displayName, type: 'tag-contributor' });
 }
 
@@ -50,13 +49,13 @@ function topicClick(e: Event): void {
         if (statusText && statusText === 'Follow') {
             notificationsClient.follow(topic).then(response => {
                 if (status?.textContent) {
-                    status.textContent = "Following";
+                    status.textContent = "Following ";
                 }
             })
         } else {
             notificationsClient.unfollow(topic).then(response => {
                 if (status?.textContent) {
-                    status.textContent = "Follow";
+                    status.textContent = "Follow ";
                 }
             })
         }
@@ -72,7 +71,7 @@ function topics(): void {
         follow?.addEventListener('click', topicClick);
         notificationsClient.isFollowing(topic).then(following => {
             if (following && status?.textContent) {
-                status.textContent = "Following";
+                status.textContent = "Following ";
             }
         })
     }
