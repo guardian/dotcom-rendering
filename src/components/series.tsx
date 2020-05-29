@@ -25,11 +25,11 @@ const immersiveStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     position: absolute;
     left: 0;
     transform: translateY(-100%);
-    margin-top: calc(100vh - 5rem);
+    margin-top: calc(80vh - 5rem);
     display: inline-block;
 
     ${from.desktop} {
-        margin-top: calc(100vh - 7rem);
+        margin-top: calc(80vh - 7rem);
     }
 
     ${from.wide} {

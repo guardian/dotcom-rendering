@@ -74,7 +74,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 
 const immersiveImgStyles = css`
     display: block;
-    height: 100vh;
+    height: 80vh;
     object-fit: cover;
     width: 100vw;
 `;

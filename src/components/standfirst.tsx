@@ -7,7 +7,7 @@ import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item, getFormat } from 'item';
-import { renderText, renderStandfirstText } from 'renderer';
+import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
 import { Display, Design } from 'format';
 
@@ -110,7 +110,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
             <>
                 {rendered}
                 <address>
-                    <p>By {renderText(byline, format)}</p>
+                    <p>By {renderStandfirstText(byline, format)}</p>
                 </address>
             </>
         ).withDefault(rendered);
