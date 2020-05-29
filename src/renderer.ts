@@ -314,14 +314,15 @@ const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
     border-top: solid 1px ${neutral[60]};
-    ${textSans.medium()}
 
-    p:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
+    button {
+        background: none;
+        border: none;
+        ${textSans.medium()};
+        padding-left: 0;
     }
 
-    p::before {
+    button::before {
         ${icons}
         content: '\\e005';
         border-radius: 100%;
@@ -353,13 +354,11 @@ const richLinkStyles = css`
 
     ${darkModeCss`
         background-color: ${neutral[20]};
-        color: ${neutral[60]};
-
-        p::before {
+        button::before {
             border-color: ${neutral[60]};
         }
 
-        a, h1 {
+        a, h1, button {
             color: ${neutral[60]};
         }
     `}
@@ -367,7 +366,7 @@ const richLinkStyles = css`
 
 const RichLink = (props: { url: string; linkText: string }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
-        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('p', null, 'Read more')])
+        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
