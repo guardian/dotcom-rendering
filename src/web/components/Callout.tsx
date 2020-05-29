@@ -87,8 +87,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                     />
                 </>
             );
@@ -111,8 +110,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -135,8 +133,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                     >
                         {formField.options &&
                             formField.options.map(option => (
@@ -168,13 +165,12 @@ const addFormField = ({
                                         value={option.value}
                                         name={`${formField.id}`}
                                         checked={isRadioChecked}
-                                        onChange={e =>
+                                        onChange={() =>
                                             setFormData({
                                                 ...formData,
                                                 [formField.id ||
                                                 '']: !isRadioChecked,
-                                            })
-                                        }
+                                            })}
                                     />
                                 );
                             })}
@@ -199,8 +195,7 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })
-                    }
+                        })}
                 />
             );
         }
