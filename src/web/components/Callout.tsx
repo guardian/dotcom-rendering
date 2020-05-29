@@ -33,7 +33,7 @@ const fieldDescription = css`
 `;
 
 const optionalTextStyles = css`
-    ${textSans.small({ italic: true })}
+    ${textSans.small({ fontStyle: 'italic' })}
     color: ${neutral[46]};
     padding-left: 5px;
 `;
@@ -102,15 +102,11 @@ const addFormField = ({
                         type="file"
                         accept="image/*, .pdf"
                         required={formField.required === '1'}
-                        value={
-                            formField.id && formField.id in formData
-                                ? formData[formField.id]
-                                : ''
-                        }
                         onChange={e =>
                             setFormData({
                                 ...formData,
-                                [formField.id || '']: e.target.value,
+                                [formField.id || '']:
+                                    e.target.files && e.target.files[0],
                             })
                         }
                     />
@@ -150,7 +146,7 @@ const addFormField = ({
         case 'radio':
         case 'checkbox':
             return (
-                <div className="form_option_container">
+                <>
                     <FieldLabel formField={formField} />
                     {formField.options && (
                         <RadioGroup
@@ -161,18 +157,18 @@ const addFormField = ({
                                 const isRadioChecked =
                                     formField.id &&
                                     formField.id in formData &&
-                                    formData[formField.id];
+                                    formData[formField.id] === option.value;
                                 return (
                                     <Radio
                                         label={option.value}
                                         value={option.value}
                                         name={`${formField.id}`}
-                                        checked={isRadioChecked}
+                                        checked={!!isRadioChecked}
                                         onChange={() =>
                                             setFormData({
                                                 ...formData,
                                                 [formField.id ||
-                                                '']: !isRadioChecked,
+                                                '']: option.value,
                                             })
                                         }
                                     />
@@ -180,7 +176,7 @@ const addFormField = ({
                             })}
                         </RadioGroup>
                     )}
-                </div>
+                </>
             );
         default: {
             return (
@@ -313,10 +309,12 @@ export const Callout = ({
                 className={cx(snippetStyles, {
                     [snippetExpandedStyle]: isExpanded,
                 })}
-                onClick={e => e.preventDefault()}
-                onKeyDown={e => e.preventDefault()}
+                onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }}
                 aria-hidden={true}
-                open={!!isExpanded}
+                open={isExpanded}
             >
                 <summary className={summeryStyles}>
                     <div className={cx(rowStyle)}>
@@ -401,6 +399,7 @@ export const Callout = ({
                             className={termsAndConditionsStyles}
                             subdued={true}
                             priority="secondary"
+                            target="_blank"
                             href="https://www.theguardian.com/help/terms-of-service"
                         >
                             Terms and conditions
