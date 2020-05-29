@@ -89,3 +89,17 @@ export const Three = () => {
     );
 };
 Three.story = { name: 'with three sections' };
+
+export const Smaller = () => {
+    return (
+        <Container>
+            <Donut
+                sections={twoSections}
+                percentCutout={20}
+                width={200}
+                height={200}
+            />
+        </Container>
+    );
+};
+Smaller.story = { name: 'with options used to change size' };
