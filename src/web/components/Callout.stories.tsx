@@ -19,7 +19,7 @@ export const Default = () => {
         >
             {/*
             // @ts-ignore */}
-            <Callout campaign={rootConfig.page.campaigns[0]} pillar={'news'} />
+            <Callout campaign={rootConfig.page.campaigns[0]} pillar="news" />
         </div>
     );
 };
