@@ -309,6 +309,7 @@ export const Callout = ({
                 className={cx(snippetStyles, {
                     [snippetExpandedStyle]: isExpanded,
                 })}
+                // we want to prevent default behavior of details HTML element in favor of buttons
                 onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
