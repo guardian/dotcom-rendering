@@ -276,7 +276,7 @@ export const Callout = ({
                         {!isExpanded && (
                             <Button
                                 iconSide="left"
-                                size="xsmall"
+                                size="small"
                                 icon={<PlusIcon />}
                                 onClick={() => setIsExpanded(true)}
                             >
@@ -322,7 +322,7 @@ export const Callout = ({
                         <Button
                             priority="secondary"
                             className={submitButtonStyles}
-                            size="xsmall"
+                            size="small"
                             type="submit"
                         >
                             Share with the Guardian
@@ -341,7 +341,7 @@ export const Callout = ({
                     {isExpanded && (
                         <Button
                             iconSide="left"
-                            size="xsmall"
+                            size="small"
                             icon={<MinusIcon />}
                             onClick={() => setIsExpanded(false)}
                         >
