@@ -291,17 +291,41 @@ export const Callout = ({
     // As the form is dynamically rendered, we cannot have
     // individual setStates for each field
     const [formData, setFormData] = useState<{ [key in string]: any }>({});
+    const [twitterHandle, setTwitterHandle] = useState('');
 
     useEffect(() => {
         setError('');
     }, []);
 
+    // TODO: need to use name and tagName
     // const name = campaign.name;
+    // const tagName = campaign.fields.tagName;
     const title = campaign.fields.callout;
     const { description } = campaign.fields;
     const { formFields } = campaign.fields;
     const { formId } = campaign.fields;
-    // const tagName = campaign.fields.tagName;
+
+    const submitForm = async () => {
+        const formDataWithFieldPrefix = Object.keys(formData).reduce(
+            (acc, cur) => ({
+                ...acc,
+                [`field_${cur}`]: formData[cur],
+            }),
+            {},
+        );
+        return fetch('/formstack-campaign/submit', {
+            method: 'POST',
+            body: JSON.stringify({
+                formId,
+                ['twitter-handle']: twitterHandle,
+                ...formDataWithFieldPrefix,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            credentials: 'include',
+        }).then(resp => resp.json());
+    };
 
     return (
         <figure>
@@ -359,33 +383,35 @@ export const Callout = ({
                     action="/formstack-campaign/submit"
                     method="post"
                     className={cx(formStyles, columnStyles)}
+                    onSubmit={e => {
+                        e.preventDefault();
+                        submitForm();
+                    }}
                 >
                     <input name="formId" type="hidden" value={formId} />
-
                     {formFields.map(formField => (
                         <>
                             {addFormField({ formField, formData, setFormData })}
                             <hr />
                         </>
                     ))}
-
-                    {/*
-                        TODO: this element is a H O N £ Y - P 0 T
-                        <div
-                            className="form_input form_input--twitter-handle"
-                            aria-hidden="true"
-                        >
-                            <div className="form_field">
-                                <input
-                                    name="twitter-handle"
-                                    type="text"
-                                    id="twitter-handle"
-                                    placeholder="@mytwitterhandle"
-                                />
-                                <hr />
-                            </div>
-                        </div>
-                    */}
+                    {/* TODO: this element is a H O N £ Y - P 0 T */}
+                    <div
+                        className={css`
+                            position: absolute;
+                            left: -62.5rem;
+                        `}
+                        aria-hidden="true"
+                    >
+                        <input
+                            name="twitter-handle"
+                            type="text"
+                            id="twitter-handle"
+                            placeholder="@mytwitterhandle"
+                            value={twitterHandle}
+                            onChange={e => setTwitterHandle(e.target.value)}
+                        />
+                    </div>
                     {error && <div className={errorStyles}>{error}</div>}
                     <div className={cx(rowStyle, footerPaddingStyles)}>
                         <Button
