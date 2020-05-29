@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
-import { palette, neutral } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
+import { palette } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 import { TextInput } from '@guardian/src-text-input';
 import { RadioGroup, Radio } from '@guardian/src-radio';
