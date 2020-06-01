@@ -75,8 +75,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                     />
                 </>
             );
@@ -95,8 +94,7 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })
-                        }
+                            })}
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -119,8 +117,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                     >
                         {formField.options &&
                             formField.options.map(option => (
@@ -158,8 +155,7 @@ const addFormField = ({
                                                 ...formData,
                                                 [formField.id ||
                                                 '']: option.value,
-                                            })
-                                        }
+                                            })}
                                     />
                                 );
                             })}
@@ -184,8 +180,7 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })
-                    }
+                        })}
                 />
             );
         }
