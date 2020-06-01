@@ -302,6 +302,9 @@ export const Callout = ({
     const { description, formFields, formId } = campaign.fields;
 
     const submitForm = async () => {
+        // Reset error for new submission attempt
+        setError('')
+        
         if (twitterHandle) {
             setError('Sorry we think you are a robot.');
         }
@@ -329,6 +332,8 @@ export const Callout = ({
             if (resp.status === 201) {
                 setSubmissionSuccess(true);
                 setIsExpanded(false);
+            } else {
+                setError('Sorry, there was a problem submitting your form. Please try again later.')
             }
         });
     };
