@@ -26,6 +26,10 @@ const optionalTextStyles = css`
     padding-left: 5px;
 `;
 
+const textAreaStyles = css`
+    width: 100%;
+`
+
 const fileUploadInputStyles = css`
     padding-top: 10px;
     padding-bottom: 10px;
@@ -64,6 +68,7 @@ const addFormField = ({
                 <>
                     <FieldLabel formField={formField} />
                     <textarea
+                        className={textAreaStyles}
                         name={formField.id}
                         required={formField.required === '1'}
                         value={
