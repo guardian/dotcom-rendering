@@ -12,18 +12,6 @@ import { Link } from '@guardian/src-link';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 
-const rowStyle = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`;
-
-const columnStyles = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`;
-
 const fieldLabelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })}
 `;
@@ -212,7 +200,7 @@ const snippetStyles = css`
     padding-bottom: 10px;
 `;
 
-const snippetExpandedStyle = css`
+const backgroundColorStyle = css`
     background-color: ${neutral[97]};
 `;
 
@@ -220,15 +208,28 @@ const speechBubbleWrapperStyles = css`
     margin-right: 10px;
 `;
 
-// Removing default styles from summery tag
+const successTextStyles = css`
+    ${textSans.medium({ fontWeight: 'bold' })}
+`;
+
 const summeryStyles = css`
+    /* Removing default styles from summery tag */
     ::-webkit-details-marker {
         display: none;
     }
     outline: none;
 `;
 
+const summeryContentWrapper = css`
+    min-height: 70px;
+    display: flex;
+    flex-direction: row;
+`;
+
 const formStyles = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
 `;
@@ -273,6 +274,8 @@ const buttonWrapperStyles = css`
 
 const footerPaddingStyles = css`
     padding-bottom: 40px;
+    display: flex;
+    flex-direction: row;
 `;
 
 const termsAndConditionsStyles = css``;
@@ -303,8 +306,8 @@ export const Callout = ({
 
     const submitForm = async () => {
         // Reset error for new submission attempt
-        setError('')
-        
+        setError('');
+
         if (twitterHandle) {
             setError('Sorry we think you are a robot.');
         }
@@ -333,7 +336,9 @@ export const Callout = ({
                 setSubmissionSuccess(true);
                 setIsExpanded(false);
             } else {
-                setError('Sorry, there was a problem submitting your form. Please try again later.')
+                setError(
+                    'Sorry, there was a problem submitting your form. Please try again later.',
+                );
             }
         });
     };
@@ -342,7 +347,7 @@ export const Callout = ({
         <figure>
             <details
                 className={cx(snippetStyles, {
-                    [snippetExpandedStyle]: isExpanded,
+                    [backgroundColorStyle]: isExpanded || submissionSuccess,
                 })}
                 // we want to prevent default behavior of details HTML element in favor of buttons
                 onClick={e => {
@@ -353,13 +358,13 @@ export const Callout = ({
                 open={isExpanded}
             >
                 <summary className={summeryStyles}>
-                    <div className={cx(rowStyle)}>
+                    <div className={summeryContentWrapper}>
                         <div className={speechBubbleWrapperStyles}>
                             <div className={speechBubbleStyles(pillar)}>
                                 <h4>Share your story</h4>
                             </div>
                         </div>
-                        {submissionSuccess ? (
+                        {!submissionSuccess ? (
                             <div className={headingTextStyles}>
                                 <h4 className={headingTextHeaderStyles}>
                                     {title}
@@ -373,13 +378,16 @@ export const Callout = ({
                                 )}
                             </div>
                         ) : (
-                            <p className="success-message">
+                            <p className={successTextStyles}>
                                 Thank you for your contribution
                             </p>
                         )}
                     </div>
-                    <span className={buttonWrapperStyles} aria-hidden="true">
-                        {!isExpanded && (
+                    {!isExpanded && !submissionSuccess && (
+                        <span
+                            className={buttonWrapperStyles}
+                            aria-hidden="true"
+                        >
                             <Button
                                 iconSide="left"
                                 size="small"
@@ -388,14 +396,14 @@ export const Callout = ({
                             >
                                 Tell us
                             </Button>
-                        )}
-                    </span>
+                        </span>
+                    )}
                 </summary>
 
                 <form
                     action="/formstack-campaign/submit"
                     method="post"
-                    className={cx(formStyles, columnStyles)}
+                    className={formStyles}
                     onSubmit={e => {
                         e.preventDefault();
                         submitForm();
@@ -426,7 +434,7 @@ export const Callout = ({
                         />
                     </div>
                     {error && <div className={errorStyles}>{error}</div>}
-                    <div className={cx(rowStyle, footerPaddingStyles)}>
+                    <div className={footerPaddingStyles}>
                         <Button
                             priority="secondary"
                             className={submitButtonStyles}
