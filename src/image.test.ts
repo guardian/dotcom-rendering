@@ -36,6 +36,7 @@ const imageBlock: BlockElement = {
 const image: Image = {
     src: '',
     srcset: '',
+    dpr2Srcset: '',
     alt: new None(),
     width: 0,
     height: 0,

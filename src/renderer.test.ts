@@ -32,6 +32,7 @@ const imageElement = (): BodyElement =>
         kind: ElementKind.Image,
         src: 'https://gu.com/img.png',
         srcset: '',
+        dpr2Srcset: '',
         alt: new Some("alt tag"),
         caption: new Some(JSDOM.fragment('this caption contains <em>html</em>')),
         nativeCaption: new Some('caption'),

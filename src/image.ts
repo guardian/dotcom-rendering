@@ -91,7 +91,7 @@ const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: 
 const srcset: (url: string, salt: string, dpr: Dpr) => string =
     srcsetWithWidths(defaultWidths);
 
-const srcsets = (url: string, salt: string) : Srcsets => ({
+const srcsets = (url: string, salt: string): Srcsets => ({
     srcset: srcset(url, salt, Dpr.One),
     dpr2Srcset: srcset(url, salt, Dpr.Two),
 });
