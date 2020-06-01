@@ -288,6 +288,7 @@ export const Callout = ({
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [error, setError] = useState('');
+    const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
     // As the form is dynamically rendered, we cannot have
     // individual setStates for each field
@@ -326,7 +327,12 @@ export const Callout = ({
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             credentials: 'include',
-        }).then(resp => resp.json());
+        }).then(resp => {
+            if (resp.status === 201) {
+                setSubmissionSuccess(true);
+                setIsExpanded(false);
+            }
+        });
     };
 
     return (
@@ -350,22 +356,24 @@ export const Callout = ({
                                 <h4>Share your story</h4>
                             </div>
                         </div>
-                        <div className={headingTextStyles}>
-                            <h4 className={headingTextHeaderStyles}>{title}</h4>
-                            {description && (
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: description,
-                                    }}
-                                />
-                            )}
-                        </div>
-                        {/* TODO: should be conditionally rendered if submission is true */}
-                        {/* <div className="success_box">
+                        {submissionSuccess ? (
+                            <div className={headingTextStyles}>
+                                <h4 className={headingTextHeaderStyles}>
+                                    {title}
+                                </h4>
+                                {description && (
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: description,
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        ) : (
                             <p className="success-message">
                                 Thank you for your contribution
                             </p>
-                        </div> */}
+                        )}
                     </div>
                     <span className={buttonWrapperStyles} aria-hidden="true">
                         {!isExpanded && (
