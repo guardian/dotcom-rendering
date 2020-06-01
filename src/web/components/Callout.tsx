@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
@@ -295,10 +295,6 @@ export const Callout = ({
     const [formData, setFormData] = useState<{ [key in string]: any }>({});
     const [twitterHandle, setTwitterHandle] = useState('');
 
-    useEffect(() => {
-        setError('');
-    }, []);
-
     // TODO: need to use name and tagName
     // const name = campaign.name;
     // const tagName = campaign.fields.tagName;
@@ -306,6 +302,9 @@ export const Callout = ({
     const { description, formFields, formId } = campaign.fields;
 
     const submitForm = async () => {
+        if (twitterHandle) {
+            setError('Sorry we think you are a robot.');
+        }
         // need to add prefix `field_` to all keys in form
         const formDataWithFieldPrefix = Object.keys(formData).reduce(
             (acc, cur) => ({
@@ -318,6 +317,7 @@ export const Callout = ({
             method: 'POST',
             body: JSON.stringify({
                 formId,
+                // TODO: check if we need to send this
                 'twitter-handle': twitterHandle,
                 ...formDataWithFieldPrefix,
             }),
