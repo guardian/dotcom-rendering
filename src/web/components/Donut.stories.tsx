@@ -102,4 +102,4 @@ export const Smaller = () => {
         </Container>
     );
 };
-Smaller.story = { name: 'with options used to change size' };
+Smaller.story = { name: 'with props used to change size' };
