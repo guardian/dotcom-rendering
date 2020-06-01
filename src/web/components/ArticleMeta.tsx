@@ -6,12 +6,15 @@ import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
+import { Branding } from '@root/src/web/components/Branding';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
+    branding: Branding;
     display: Display;
     designType: DesignType;
+    editionCommercialProperties: EditionCommercialProperties;
     pillar: Pillar;
     pageId: string;
     webTitle: string;
@@ -120,6 +123,14 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
     }
 };
 
+const shouldShowBranding = (
+    editionCommercialProperties: EditionCommercialProperties,
+) => {
+    if (editionCommercialProperties.branding !== undefined) {
+        return true;
+    }
+};
+
 const shouldShowContributor = (designType: DesignType, display: Display) => {
     if (display === 'immersive') {
         return false;
@@ -197,8 +208,10 @@ const RowBelowLeftCol = ({
 );
 
 export const ArticleMeta = ({
+    branding,
     display,
     designType,
+    editionCommercialProperties,
     pillar,
     pageId,
     webTitle,
@@ -230,6 +243,10 @@ export const ArticleMeta = ({
                                 />
                             </AvatarContainer>
                         )}
+                        {shouldShowBranding && (
+                            <Branding branding={branding} pillar={pillar} />
+                        )}
+
                         <div>
                             {shouldShowContributor(designType, display) && (
                                 <Contributor
