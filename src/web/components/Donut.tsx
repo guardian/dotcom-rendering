@@ -62,7 +62,7 @@ export const Donut = ({
 
     const totalValue = sections
         .map(section => section.value)
-        .reduce((prev, next) => prev + next);
+        .reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
     const halfPI = Math.PI / 2;
     const doublePI = Math.PI * 2;
