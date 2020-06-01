@@ -14,7 +14,7 @@ import Tags from 'components/media/tags';
 import { articleWidthStyles } from 'styles';
 import { Item, getFormat } from 'item';
 import Headline from 'components/headline';
-import { ImageMappings } from "../shared/page";
+
 
 // ----- Styles ----- //
 
@@ -35,18 +35,16 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageMappings: ImageMappings;
     item: Item;
     children: ReactNode[];
 }
 
-const Media = ({ imageMappings, item, children }: Props): JSX.Element =>
+const Media = ({ item, children }: Props): JSX.Element =>
      <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
                     image={item.mainImage}
-                    imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
                 <div css={articleWidthStyles}>

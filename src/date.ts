@@ -1,3 +1,8 @@
+// ----- Imports ----- //
+
+import { Option, Some, None } from 'types/option';
+
+
 // ----- Setup ----- //
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -85,10 +90,20 @@ const time = (date: Date): string =>
 const format = (date: Date): string =>
     `${day(date)} ${date.getUTCDate()} ${month(date)} ${date.getUTCFullYear()} ${time(date)} UTC`;
 
+function fromString(date: string): Option<Date> {
+    try {
+        return new Some(new Date(date));
+    } catch(e) {
+        return new None();
+    }
+}
+
 
 // ----- Exports ----- //
 
 export {
     makeRelativeDate,
     format as formatDate,
+    isValidDate,
+    fromString,
 }

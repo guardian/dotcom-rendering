@@ -3,10 +3,16 @@
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { IAtoms as Atoms } from 'mapiThriftModels/Atoms';
 import { ElementType } from 'mapiThriftModels/ElementType';
-import { Option, fromNullable } from 'types/option';
+import {
+    Option,
+    fromNullable,
+    toSerialisable as optionToSerialisable,
+} from 'types/option';
 import { Result, Err, Ok } from 'types/result';
-import DocParser from 'types/docParser';
+import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
+import { isElement } from 'lib';
+import JsonSerialisable from 'types/jsonSerialisable';
 
 
 // ----- Types ----- //
@@ -46,7 +52,7 @@ type Video = {
 type MediaKind = ElementKind.Audio | ElementKind.Video;
 
 interface AtomFields {
-    js?: string;
+    js: Option<string>;
     css: string;
     html: string;
 }
@@ -90,6 +96,73 @@ type Body =
 
 // ----- Functions ----- //
 
+const serialiseNodes = (nodes: NodeList): string =>
+    Array.from(nodes).map(node => {
+        if (isElement(node)) {
+            return node.outerHTML;
+        }
+
+        return node.textContent ?? '';
+    }).join('');
+
+const serialiseFragment = (doc: DocumentFragment): string =>
+    serialiseNodes(doc.childNodes);
+
+function toSerialisable(elem: BodyElement): JsonSerialisable {
+    switch (elem.kind) {
+        case ElementKind.Text:
+            return { ...elem, doc: serialiseFragment(elem.doc) };
+        case ElementKind.Image:
+            return {
+                ...elem,
+                alt: optionToSerialisable(elem.alt),
+                caption: optionToSerialisable(elem.caption.fmap(serialiseFragment)),
+                credit: optionToSerialisable(elem.credit),
+                nativeCaption: optionToSerialisable(elem.nativeCaption),
+                role: optionToSerialisable(elem.role),
+            };
+        case ElementKind.Pullquote:
+            return { ...elem, attribution: optionToSerialisable(elem.attribution) };
+        case ElementKind.Tweet:
+            return { ...elem, content: serialiseNodes(elem.content) };
+        case ElementKind.InteractiveAtom:
+            return { ...elem, js: optionToSerialisable(elem.js) };
+        case ElementKind.Embed:
+            return { ...elem, alt: optionToSerialisable(elem.alt) };
+        default:
+            return elem;
+    }
+}
+
+// Disabled because the point of this function is to convert the `any`
+// provided by JSON.parse to a stricter type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
+    switch (elem.kind) {
+        case ElementKind.Text:
+            return { ...elem, doc: docParser(elem.doc) };
+        case ElementKind.Image:
+            return {
+                ...elem,
+                alt: fromNullable(elem.alt),
+                caption: fromNullable(elem.caption).fmap(docParser),
+                credit: fromNullable(elem.credit),
+                nativeCaption: fromNullable(elem.nativeCaption),
+                role: fromNullable(elem.role),
+            };
+        case ElementKind.Pullquote:
+            return { ...elem, attribution: fromNullable(elem.attribution) };
+        case ElementKind.Tweet:
+            return { ...elem, content: docParser(elem.content) };
+        case ElementKind.InteractiveAtom:
+            return { ...elem, js: fromNullable(elem.js) };
+        case ElementKind.Embed:
+            return { ...elem, alt: fromNullable(elem.alt) };
+        default:
+            return elem;
+    }
+}
+
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
 
@@ -117,7 +190,7 @@ const parseIframe = (docParser: DocParser) =>
         });
 }
 
-const parse = (docParser: DocParser, atoms?: Atoms) =>
+const parse = (context: Context, atoms?: Atoms) =>
     (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
 
@@ -128,11 +201,11 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on textTypeData');
             }
 
-            return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
+            return new Ok({ kind: ElementKind.Text, doc: context.docParser(html) });
         }
 
         case ElementType.IMAGE:
-            return parseImage(docParser)(element)
+            return parseImage(context)(element)
                 .fmap<Result<string, Image>>(image => new Ok({
                     kind: ElementKind.Image,
                     ...image
@@ -184,7 +257,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No "html" field on tweetTypeData')
             }
 
-            return tweetContent(id, docParser(h))
+            return tweetContent(id, context.docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
         }
 
@@ -215,7 +288,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on audioTypeData')
             }
 
-            return parseIframe(docParser)(audioHtml, ElementKind.Audio);
+            return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
         }
 
         case ElementType.VIDEO: {
@@ -225,7 +298,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err('No html field on videoTypeData')
             }
 
-            return parseIframe(docParser)(videoHtml, ElementKind.Video);
+            return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
         }
 
         case ElementType.CONTENTATOM: {
@@ -247,7 +320,7 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
                 return new Err(`No html or css for atom: ${id}`);
             }
 
-            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js });
+            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js: fromNullable(js) });
         }
 
         default:
@@ -256,12 +329,12 @@ const parse = (docParser: DocParser, atoms?: Atoms) =>
 
 }
 
-const parseElements = (docParser: DocParser, atoms?: Atoms) =>
+const parseElements = (context: Context, atoms?: Atoms) =>
     (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [new Err('No body elements available')];
         }
-        return elements.map(parse(docParser, atoms));
+        return elements.map(parse(context, atoms));
     }
 
 
@@ -274,4 +347,6 @@ export {
     Video,
     Body,
     parseElements,
+    toSerialisable,
+    fromSerialisable,
 };

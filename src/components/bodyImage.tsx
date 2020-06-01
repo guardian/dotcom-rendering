@@ -26,7 +26,8 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     background: ${neutral[97]};
     display: block;
     width: 100%;
- 
+    object-fit: cover;
+
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
@@ -37,11 +38,10 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     `}
 `;
 
-const BodyImage: FC<BodyImageProps> = ({ image, imageMappings, children }: BodyImageProps) =>
+const BodyImage: FC<BodyImageProps> = ({ image, children }: BodyImageProps) =>
     <figure css={styles}>
         <Img
             image={image}
-            imageMappings={imageMappings}
             sizes={sizes}
             className={imgStyles(image.width, image.height)}
         />

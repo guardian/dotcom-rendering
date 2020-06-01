@@ -2,49 +2,37 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Avatar from 'components/liveblog/avatar';
+import { Contributor } from 'contributor';
+import { None, Some } from 'types/option';
 
 configure({ adapter: new Adapter() });
 
 describe('Avatar component renders as expected', () => {
+    const contributors: Contributor[] = [{
+        name: "Web Title",
+        id: "test",
+        apiUrl: 'test',
+        image: new Some({
+            src: '',
+            srcset: '',
+        }),
+    }]
     it('Adds correct alt attribute', () => {
-        const contributors = [{
-            bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title",
-            id: "test",
-            apiUrl: 'test',
-        }]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="" />);
         expect(avatar.find('img').prop('alt')).toBe("Web Title")
     })
 
     it('Uses background colour prop', () => {
-        const contributors = [{
-            bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title",
-            id: "test",
-            apiUrl: 'test',
-        }];
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageMappings={{}} />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" />);
         expect(avatar.props().css.styles).toContain("background-color: pink")
     })
 
-    it('Generates correct image url', () => {
-        const contributors = [{
-            bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title",
-            id: "test",
-            apiUrl: 'test',
-        }]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{ "/test": "SALT" }}/>);
-        expect(avatar.find('img').prop('src')).toBe("https://i.guim.co.uk/img/mapi/test?width=204&quality=85&fit=bounds&sig-ignores-params=true&s=SALT")
-    })
-
     it('Renders null if more than one contributor', () => {
-        const contributors = [
-            { webTitle: "Contributor 1", id: "test", apiUrl: 'test', },
-            { webTitle: "Contributor 2", id: "test", apiUrl: 'test', }
+        const contributors: Contributor[] = [
+            { name: "Contributor 1", id: "test", apiUrl: 'test', image: new None() },
+            { name: "Contributor 2", id: "test", apiUrl: 'test', image: new None() },
         ]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="" />);
         expect(avatar.html()).toBe(null)
     })
 });

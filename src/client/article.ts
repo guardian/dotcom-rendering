@@ -9,7 +9,7 @@ import { createElement as h } from 'react';
 import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
-import {ads, slideshow} from 'client/nativeCommunication';
+import { ads, slideshow } from 'client/nativeCommunication';
 
 // ----- Run ----- //
 
@@ -23,51 +23,58 @@ declare global {
     }
 }
 
+function getTopic(follow: Element | null): Topic | null {
+    const id = follow?.getAttribute('data-id');
+    const displayName = follow?.getAttribute('data-display-name');
+
+    if (!id) {
+        logger.error('No id for topic');
+        return null;
+    }
+
+    if (!displayName) {
+        logger.error('No display name for topic');
+        return null;
+    }
+    return new Topic({ id, displayName, type: 'tag-contributor' });
+}
+
 function topicClick(e: Event): void {
     const follow = document.querySelector('.js-follow');
     const status = follow?.querySelector('.js-status');
     const statusText = status?.textContent;
-    const id = follow?.getAttribute('data-id');
+    const topic = getTopic(follow);
 
-    if (!id) {
-        logger.error('No id for topic');
-        return;
-    }
-
-    const topic = new Topic({ id });
-
-    if (statusText && statusText === 'Follow') {
-        notificationsClient.follow(topic).then(response => {
-            if (status?.textContent) {
-                status.textContent = "Following";
-            }
-        })
-    } else {
-        notificationsClient.unfollow(topic).then(response => {
-            if (status?.textContent) {
-                status.textContent = "Follow";
-            }
-        })
+    if (topic) {
+        if (statusText && statusText === 'Follow') {
+            notificationsClient.follow(topic).then(response => {
+                if (status?.textContent) {
+                    status.textContent = "Following ";
+                }
+            })
+        } else {
+            notificationsClient.unfollow(topic).then(response => {
+                if (status?.textContent) {
+                    status.textContent = "Follow ";
+                }
+            })
+        }
     }
 }
 
 function topics(): void {
     const follow = document.querySelector('.js-follow');
     const status = follow?.querySelector('.js-status');
-    const id = follow?.getAttribute('data-id');
+    const topic = getTopic(follow);
 
-    if (!id) {
-        logger.error('No id for topic');
-        return;
+    if (topic) {
+        follow?.addEventListener('click', topicClick);
+        notificationsClient.isFollowing(topic).then(following => {
+            if (following && status?.textContent) {
+                status.textContent = "Following ";
+            }
+        })
     }
-
-    const topic = new Topic({ id });
-    follow?.addEventListener('click', topicClick);
-    notificationsClient.isFollowing(topic).then(following => {
-        if (following && status?.textContent) {
-            status.textContent = "Following";
-        }
-    })
 }
 
 function formatDates(): void {

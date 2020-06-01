@@ -40,6 +40,7 @@ const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css
 
 const commentStyles = (kicker: string): SerializedStyles => css`
     color: ${kicker};
+    width: 75%;
     ${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
@@ -102,11 +103,18 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
     }
 }
 
+const getProfileLink = (node: Node): string => {
+    const href = getHref(node).withDefault('');
+    return href.startsWith('profile/')
+        ? `https://www.theguardian.com/${href}`
+        : href
+}
+
 const toReact = (format: Format) => (node: Node): ReactNode => {
     switch (node.nodeName) {
         case 'A':
             return (
-                <a href={getHref(node).withDefault('')} css={getAnchorStyles(format)}>
+                <a href={getProfileLink(node)} css={getAnchorStyles(format)}>
                     {node.textContent ?? ''}
                 </a>
             );

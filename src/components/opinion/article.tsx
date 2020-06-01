@@ -15,7 +15,6 @@ import Cutout from 'components/opinion/cutout';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Comment, getFormat } from 'item';
-import { ImageMappings } from 'components/shared/page';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 
@@ -57,12 +56,11 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    imageMappings: ImageMappings;
     item: Comment;
     children: ReactNode[];
 }
 
-const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
+const Opinion = ({ item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -73,7 +71,6 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
                 </div>
                 <Cutout 
                     contributors={item.contributors}
-                    imageMappings={imageMappings}
                     className={articleWidthStyles}
                 />
                 <Keyline {...item} />
@@ -82,12 +79,11 @@ const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
                 </div>
 
                 <section css={[articleWidthStyles, topBorder]}>
-                    <Metadata item={item} imageMappings={imageMappings} />
+                    <Metadata item={item} />
                 </section>
 
                 <HeaderImage
                     image={item.mainImage}
-                    imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
             </header>

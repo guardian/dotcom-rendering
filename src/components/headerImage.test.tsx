@@ -26,7 +26,7 @@ describe('HeaderImage component renders as expected', () => {
             display: Display.Standard,
         }
         const headerImage = shallow(
-            <HeaderImage image={image} imageMappings={{}} format={format} />
+            <HeaderImage image={image} format={format} />
         )
 
         expect(headerImage.html()).toBe(null);

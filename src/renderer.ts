@@ -12,7 +12,6 @@ import { ElementKind, BodyElement } from 'bodyElement';
 import { Role, BodyImageProps } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
-import { ImageMappings } from 'components/shared/page';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
@@ -23,13 +22,11 @@ import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
+import Blockquote from 'components/blockquote';
+import { isElement } from 'lib';
+
 
 // ----- Renderer ----- //
-
-// The nodeType for ELEMENT_NODE has the value 1.
-function isElement(node: Node): node is Element {
-    return node.nodeType === 1;
-}
 
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? new Some(node.attributes) : new None();
@@ -42,20 +39,26 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
-const bulletStyles = (colour: string): SerializedStyles => css`
-    color: transparent;
-    display: inline-block;
-
-    &::before {
-        content: '';
-        background-color: ${colour};
-        width: 1rem;
-        height: 1rem;
-        border-radius: .5rem;
+const bulletStyles = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: transparent;
         display: inline-block;
-        vertical-align: middle;
-    }
-`;
+
+        &::before {
+            content: '';
+            background-color: ${kicker};
+            width: 1rem;
+            height: 1rem;
+            border-radius: .5rem;
+            display: inline-block;
+            vertical-align: middle;
+            ${darkModeCss`
+                background-color: ${inverted};
+            `}
+        }
+    `;
+}
 
 interface BulletProps {
     format: Format;
@@ -64,7 +67,7 @@ interface BulletProps {
 
 const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(format.pillar).kicker) }, '•'),
+        styledH('span', { css: bulletStyles(format) }, '•'),
         text.replace(/•/g, '')
     );
 
@@ -77,6 +80,9 @@ const HorizontalRuleStyles = css`
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
     background-color: ${neutral[93]};
+    ${darkModeCss`
+        background-color: ${neutral[20]};
+    `}
 `;
 
 const HorizontalRule = (): ReactElement =>
@@ -203,7 +209,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
                 ? h(HorizontalRule, null, null)
                 : styledH('h2', { css: HeadingTwoStyles(format), key }, children );
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, children);
+            return h(Blockquote, { key, format }, children);
         case 'STRONG':
             return h('strong', { key }, children);
         case 'EM':
@@ -231,8 +237,11 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
             return styledH('li', { css: listItemStyles }, children);
-        case 'A':
-            return styledH('a', { key, css: css` color: ${colour}` }, children);
+        case 'A': {
+            const styles = css` color: ${colour}; text-decoration: none`;
+            const href = getHref(node).withDefault('');
+            return styledH('a', { key, href, css: styles }, children);
+        }
         default:
             return textElement(format)(node, key);
     }
@@ -244,74 +253,96 @@ const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(standfirstTextElement(format));
 
-const pullquoteStyles = (colour: string): SerializedStyles => css`
-    color: ${colour};
-    margin: 0;
-    ${headline.xsmall({ fontWeight: 'light' })};
+const pullquoteStyles = (format: Format): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        color: ${kicker};
+        margin: 0;
+        ${headline.xsmall({ fontWeight: 'light' })};
+        ${darkModeCss`color: ${inverted};`}
 
-    blockquote {
-        margin-left: 0;
-    }
-
-    p {
-        margin: 1em 0;
-
-        &::before {
-            ${icons}
-            font-size: 1.5rem;
-            line-height: 1.2;
-            font-weight: 300;
-            content: '\\e11c';
-            display: inline-block;
-            margin-right: ${basePx(1)};
+        blockquote {
+            margin-left: 0;
         }
-    }
 
-    footer {
-        font-size: 1.8rem;
-        margin-top: 4px;
+        p {
+            margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
 
-        cite {
-            font-style: normal;
+            &::before {
+                ${icons}
+                font-size: 1.5rem;
+                line-height: 1.2;
+                font-weight: 300;
+                content: '\\e11c';
+                display: inline-block;
+                margin-right: ${basePx(1)};
+            }
         }
-    }
-`;
+
+        footer {
+            font-size: 1.8rem;
+            margin-top: 4px;
+
+            cite {
+                font-style: normal;
+            }
+        }
+    `;
+}
 
 type PullquoteProps = {
     quote: string;
     format: Format;
+    attribution: Option<string>;
 };
 
-const Pullquote: FC<PullquoteProps> = ({ quote, format }: PullquoteProps) =>
-    styledH('aside',
-        { css: pullquoteStyles(getPillarStyles(format.pillar).kicker) },
-        h('blockquote', null,
-            h('p', null, quote)
-        ),
+
+const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
+    const children = attribution
+        .fmap(attribution => ([h('p', null, quote), h('cite', null, attribution)]))
+        .withDefault([h('p', null, quote)])
+
+    return styledH('aside',
+        { css: pullquoteStyles(format) },
+        h('blockquote', null, children)
     );
+}
 
 const richLinkWidth = '8.75rem';
 
 const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
+    border-top: solid 1px ${neutral[60]};
 
-    h1 {
-        margin: ${basePx(0, 0, 2, 0)};
-        font-size: 1rem;
+    button {
+        background: none;
+        border: none;
+        ${textSans.medium()};
+        padding: 0;
+        margin: 0;
     }
 
-    p {
-        margin: ${basePx(1, 0)};
-    }
-
-    span {
-        display: none;
+    button::before {
+        ${icons}
+        content: '\\e005';
+        border-radius: 100%;
+        border: solid 1px ${neutral[7]};
+        font-size: 12px;
+        padding: 3px 6px 4px 6px;
+        display: inline-block;
+        margin-right: ${remSpace[2]};
     }
 
     a {
+        display:inline-block;
         text-decoration: none;
-        border-bottom: none;
+        color: ${neutral[7]};
+
+        h1 {
+            margin: ${basePx(0, 0, 2, 0)};
+            ${headline.xxxsmall({ fontWeight: 'bold' })}
+        }
     }
 
     float: left;
@@ -325,18 +356,19 @@ const richLinkStyles = css`
 
     ${darkModeCss`
         background-color: ${neutral[20]};
-        color: ${neutral[60]};
-        a {
+        button::before {
+            border-color: ${neutral[60]};
+        }
+
+        a, h1, button {
             color: ${neutral[60]};
-            border-bottom: 0.0625rem solid ${neutral[60]};
         }
     `}
 `;
 
-const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
+const RichLink = (props: { url: string; linkText: string }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
-        h('h1', null, props.linkText),
-        h(Anchor, { href: props.url, format: props.format }, 'Read more'),
+        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
@@ -370,7 +402,7 @@ const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
     }
 }
 
-const render = (format: Format, imageMappings: ImageMappings, excludeStyles = false) =>
+const render = (format: Format, excludeStyles = false) =>
     (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
@@ -389,16 +421,18 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                 ? h(FigCaption, { format, caption, credit })
                 : null;
 
-            return h(ImageComponent, { image: element, imageMappings }, figcaption);
+            return h(ImageComponent, { image: element }, figcaption);
         }
 
-        case ElementKind.Pullquote:
-            return h(Pullquote, { quote: element.quote, format, key });
+        case ElementKind.Pullquote: {
+            const { quote, attribution } = element;
+            return h(Pullquote, { quote, attribution, format, key });
+        }
 
         case ElementKind.RichLink: {
             const { url, linkText } = element;
 
-            return h(RichLink, { url, linkText, format, key });
+            return h(RichLink, { url, linkText, key });
         }
 
         case ElementKind.Interactive:
@@ -462,7 +496,7 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
                         <body>
                             ${html}
                             <script>
-                                ${js}
+                                ${js.withDefault('')}
                                 function resize() {
                                     window.frameElement.height = document.body.offsetHeight;
                                 }
@@ -480,12 +514,12 @@ const render = (format: Format, imageMappings: ImageMappings, excludeStyles = fa
     }
 };
 
-const renderAll = (imageMappings: ImageMappings) =>
-    (format: Format, elements: BodyElement[]): ReactNode[] =>
-        elements.map(render(format, imageMappings));
+const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
+    elements.map(render(format));
 
 const renderAllWithoutStyles = (format: Format, elements: BodyElement[]): ReactNode[] =>
-        elements.map(render(format, {}, true));
+    elements.map(render(format, true));
+
 
 // ----- Exports ----- //
 

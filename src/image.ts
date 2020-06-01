@@ -85,10 +85,10 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
     widths
-        .map(width => `${src(salt, url, width, dpr)} ${width}w`)
+        .map(width => `${src(salt, url, width)} ${width}w`)
         .join(', ');
 
-const srcset: (url: string, salt: string, dpr: Dpr) => string =
+const srcset: (url: string, salt: string) => string =
     srcsetWithWidths(defaultWidths);
 
 const srcsets = (url: string, salt: string) : Srcsets => ({

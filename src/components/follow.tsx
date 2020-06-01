@@ -47,9 +47,14 @@ function Follow({ contributors, ...format }: Props): JSX.Element | null {
         format.design !== Design.AdvertisementFeature
     ) {
         return (
-            <button className="js-follow" css={getStyles(format)} data-id={contributor.id}>
+            <button
+                className="js-follow"
+                css={getStyles(format)}
+                data-id={contributor.id}
+                data-display-name={contributor.name}
+            >
                 <span className="js-status">Follow </span>
-                { contributor.webTitle }
+                { contributor.name }
             </button>
         );
     }

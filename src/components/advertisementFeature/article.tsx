@@ -14,7 +14,6 @@ import Metadata from 'components/metadata';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, getFormat } from 'item';
-import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -41,18 +40,16 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageMappings: ImageMappings;
     item: Standard;
     children: ReactNode[];
 }
 
-const AdvertisementFeature = ({ imageMappings, item, children }: Props): JSX.Element => {
+const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
                     image={item.mainImage}
-                    imageMappings={imageMappings}
                     format={getFormat(item)}
                 />
                 <div>
@@ -64,7 +61,7 @@ const AdvertisementFeature = ({ imageMappings, item, children }: Props): JSX.Ele
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
-                    <Metadata imageMappings={imageMappings} item={item} />
+                    <Metadata item={item} />
                 </section>
             </header>
             <Body className={[articleWidthStyles]}>

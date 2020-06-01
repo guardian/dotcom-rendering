@@ -31,6 +31,7 @@ const imageElement = (): BodyElement =>
     ({
         kind: ElementKind.Image,
         src: 'https://gu.com/img.png',
+        srcset: '',
         alt: new Some("alt tag"),
         caption: new Some(JSDOM.fragment('this caption contains <em>html</em>')),
         nativeCaption: new Some('caption'),
@@ -51,6 +52,14 @@ const pullquoteElement = (): BodyElement =>
         kind: ElementKind.Pullquote,
         quote: "quote",
         attribution: new None()
+    })
+
+
+const pullquoteWithAttributionElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Pullquote,
+        quote: "quote",
+        attribution: new Some('attribution')
     })
 
 const richLinkElement = (): BodyElement =>
@@ -106,17 +115,17 @@ const atomElement = (): BodyElement =>
         kind: ElementKind.InteractiveAtom,
         css: "main { background: yellow; }",
         html: "<main>Some content</main>",
-        js: "console.log('init')"
+        js: new Some("console.log('init')"),
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll({})(mockFormat, [element]);
+    renderAll(mockFormat, [element]);
 
 const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
     renderAllWithoutStyles(mockFormat, [element]);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
-    renderAll({})(mockFormat, [element]);
+    renderAll(mockFormat, [element]);
 
 const renderTextElement = compose(render, textElement);
 
@@ -189,6 +198,12 @@ describe('Renders different types of elements', () => {
         const nodes = render(pullquoteElement())
         const pullquote = shallow(nodes.flat()[0]);
         expect(pullquote.html()).toContain('<blockquote><p>quote</p></blockquote>');
+    })
+
+    test('ElementKind.Pullquote with attribution', () => {
+        const nodes = render(pullquoteWithAttributionElement())
+        const pullquote = shallow(nodes.flat()[0]);
+        expect(pullquote.html()).toContain('<blockquote><p>quote</p><cite>attribution</cite></blockquote>');
     })
 
     test('ElementKind.RichLink', () => {

@@ -11,6 +11,7 @@ import { getPillarStyles } from 'pillarStyles';
 import { Option } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
 import Anchor from 'components/anchor';
+import { darkModeCss } from 'styles';
 
 
 // ----- Subcomponents ----- //
@@ -19,15 +20,16 @@ interface TriangleProps {
     format: Format;
 }
 
-const triangleStyles = (colour: string): SerializedStyles => css`
+const triangleStyles = (colour: string, inverted?: string): SerializedStyles => css`
     fill: ${colour};
     height: 0.8em;
     padding-right: ${remSpace[1]};
+    ${inverted ? darkModeCss`fill: ${inverted};` : ''}
 `;
 
-const triangleSvg = (colour: string): ReactElement =>
+const triangleSvg = (colour: string, inverted?: string): ReactElement =>
     <svg
-        css={triangleStyles(colour)}
+        css={triangleStyles(colour, inverted)}
         viewBox="0 0 10 9"
         xmlns="http://www.w3.org/2000/svg"
     >
@@ -40,8 +42,10 @@ const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
             return null;
         case Design.AdvertisementFeature:
             return triangleSvg(palette.labs[300]);
-        default:
-            return triangleSvg(getPillarStyles(format.pillar).kicker);
+        default: {
+            const { kicker, inverted } = getPillarStyles(format.pillar);
+            return triangleSvg(kicker, inverted);
+        }
     }
 }
 
@@ -81,7 +85,9 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
     const children = Array.from(node.childNodes).map(captionElement(format));
     switch (node.nodeName) {
         case 'STRONG':
-            return <h2 css={captionHeadingStyles} key={key}>{children}</h2>;
+            return (format.design === Design.Media)
+                ? <h2 css={captionHeadingStyles} key={key}>{children}</h2>
+                : <>{children}</>
         case 'BR':
             return null;
         case 'EM':
