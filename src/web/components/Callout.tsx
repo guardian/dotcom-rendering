@@ -87,7 +87,8 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                     />
                 </>
             );
@@ -106,7 +107,8 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })}
+                            })
+                        }
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -129,7 +131,8 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                     >
                         {formField.options &&
                             formField.options.map(option => (
@@ -150,13 +153,14 @@ const addFormField = ({
                             name={formField.name || ''}
                             orientation="horizontal"
                         >
-                            {formField.options.map(option => {
+                            {formField.options.map((option, index) => {
                                 const isRadioChecked =
                                     formField.id &&
                                     formField.id in formData &&
                                     formData[formField.id] === option.value;
                                 return (
                                     <Radio
+                                        key={index}
                                         label={option.value}
                                         value={option.value}
                                         name={`${formField.id}`}
@@ -166,7 +170,8 @@ const addFormField = ({
                                                 ...formData,
                                                 [formField.id ||
                                                 '']: option.value,
-                                            })}
+                                            })
+                                        }
                                     />
                                 );
                             })}
@@ -191,7 +196,8 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })}
+                        })
+                    }
                 />
             );
         }
@@ -385,11 +391,11 @@ export const Callout = ({
                     }}
                 >
                     <input name="formId" type="hidden" value={formId} />
-                    {formFields.map(formField => (
-                        <>
+                    {formFields.map((formField, index) => (
+                        <div key={index}>
                             {addFormField({ formField, formData, setFormData })}
                             <hr />
-                        </>
+                        </div>
                     ))}
                     {/* TODO: this element is a H O N £ Y - P 0 T */}
                     <div
