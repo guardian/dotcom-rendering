@@ -301,6 +301,7 @@ export const Callout = ({
     const { formId } = campaign.fields;
 
     const submitForm = async () => {
+        // need to add prefix `field_` to all keys in form
         const formDataWithFieldPrefix = Object.keys(formData).reduce(
             (acc, cur) => ({
                 ...acc,
