@@ -44,18 +44,13 @@ export const Donut = ({
     height = 300,
 }: Props) => {
     if (withoutZeroSections(sections).length === 1) {
-        console.warn('The Donut component requires at least 2 sections');
+        // The Donut component requires at least 2 sections
         // TODO: Support showing 100% for a single section
         return null;
     }
 
-    if (sections.find(section => section.value === 0)) {
-        console.warn(
-            'Each section in the Donut component must have a non zero value',
-        );
-        // We handle these at the moment by filtering them out using withoutZeroSections()
-        // TODO: Support displaying 0% for sections where value is zero
-    }
+    // TODO: Support displaying 0% for sections where value is zero
+    // We handle these at the moment by filtering them out using withoutZeroSections()
 
     const radius = Math.min(height / 2, width / 2);
     const cutoutRadius = radius * (percentCutout / 100);
