@@ -49,15 +49,14 @@ const Source: FC<SourceProps> = ({ sizes, srcSet, dpr }) =>
 
 const Img: FC<Props> = ({ image, sizes, className }) =>
     h('picture', null, [
-        h(Source, {
+        h('source', {
             sizes,
             srcSet: image.dpr2Srcset,
-            dpr: Dpr.Two,
+            media: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
         }),
-        h(Source, {
+        h('source', {
             sizes,
             srcSet: image.srcset,
-            dpr: Dpr.One,
         }),
         styledH('img', {
             src: image.src,
