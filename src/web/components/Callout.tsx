@@ -303,9 +303,7 @@ export const Callout = ({
     // const name = campaign.name;
     // const tagName = campaign.fields.tagName;
     const title = campaign.fields.callout;
-    const { description } = campaign.fields;
-    const { formFields } = campaign.fields;
-    const { formId } = campaign.fields;
+    const { description, formFields, formId } = campaign.fields;
 
     const submitForm = async () => {
         // need to add prefix `field_` to all keys in form
