@@ -183,23 +183,19 @@ const MemoisedInner = ({
                 }
 
                 const { meta, module } = json.data;
-                const epic = import(/* webpackIgnore: true */ module.url);
 
-                // TODO, we need to reconsider event handling, as this is all
-                // highly coupled at the moment (better would be data
-                // attributes).
-                const props = {
-                    ...module.props,
-                    onReminderOpen: sendOphanReminderOpenEvent,
-                };
-
-                epic.then(epicModule => {
-                    setEpicMeta(meta);
-                    setEpicProps(props);
-                    setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-                    sendOphanEpicEvent('INSERT', meta);
+                import(/* webpackIgnore: true */ module.url)
+                    .then(epicModule => {
+                        setEpicMeta(meta);
+                        setEpicProps({
+                            ...module.props,
+                            onReminderOpen: sendOphanReminderOpenEvent,
+                        });
+                        setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
+                        sendOphanEpicEvent('INSERT', meta);
+                    })
                     // eslint-disable-next-line no-console
-                }).catch(error => console.log(`epic - error is: ${error}`));
+                    .catch(error => console.log(`epic - error is: ${error}`));
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
