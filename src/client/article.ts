@@ -50,14 +50,14 @@ function topicClick(e: Event): void {
 
     if (topic) {
         if (statusText && statusText === followText) {
-            notificationsClient.follow(topic).then(response => {
-                if (status?.textContent) {
+            notificationsClient.follow(topic).then(success => {
+                if (status?.textContent && success) {
                     status.textContent = followingText;
                 }
             })
         } else {
-            notificationsClient.unfollow(topic).then(response => {
-                if (status?.textContent) {
+            notificationsClient.unfollow(topic).then(success => {
+                if (status?.textContent && success) {
                     status.textContent = followText;
                 }
             })
