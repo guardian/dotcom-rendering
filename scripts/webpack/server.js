@@ -42,7 +42,6 @@ module.exports = () => ({
                         loader: 'babel-loader',
                         options: {
                             presets: [
-                                '@babel/preset-typescript',
                                 // TODO: remove @babel/preset-react once we stop using JSX in server folder
                                 '@babel/preset-react',
                                 [
@@ -56,6 +55,10 @@ module.exports = () => ({
                             ],
                         },
                     },
+                    {
+                        loader: 'ts-loader',
+                        options: { configFile: 'tsconfig.build.json' },
+                    }
                 ],
             },
             // TODO: find a way to remove
