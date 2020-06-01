@@ -85,10 +85,10 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
     widths
-        .map(width => `${src(salt, url, width)} ${width}w`)
+        .map(width => `${src(salt, url, width, dpr)} ${width}w`)
         .join(', ');
 
-const srcset: (url: string, salt: string) => string =
+const srcset: (url: string, salt: string, dpr: Dpr) => string =
     srcsetWithWidths(defaultWidths);
 
 const srcsets = (url: string, salt: string) : Srcsets => ({
@@ -143,7 +143,7 @@ const parseImage = ({ docParser, salt }: Context) =>
             role: parseRole(data?.role),
         });
     });
-}
+};
 
 
 // ----- Exports ----- //

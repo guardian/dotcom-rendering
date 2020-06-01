@@ -4,7 +4,7 @@ import { createElement as h, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { Dpr, Image } from 'image';
+import { Image } from 'image';
 import { darkModeCss } from 'styles';
 
 
@@ -16,12 +16,6 @@ interface Props {
     className?: SerializedStyles;
 }
 
-interface SourceProps {
-    sizes: string,
-    srcSet: string,
-    dpr: Dpr,
-}
-
 const styles = css`
     background-color: ${neutral[97]};
     ${darkModeCss`
@@ -30,34 +24,16 @@ const styles = css`
     `}
 `;
 
-const mediaQuery = (dpr: Dpr): string => {
-    switch (dpr) {
-        case Dpr.Two:
-            return '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)';
-        case Dpr.One:
-        default:
-            return '';
-    }
-};
-
-const Source: FC<SourceProps> = ({ sizes, srcSet, dpr }) =>
-    h('source', {
-        sizes,
-        srcSet,
-        media: mediaQuery(dpr),
-    });
-
 const Img: FC<Props> = ({ image, sizes, className }) =>
     h('picture', null, [
-        h(Source, {
+        h('source', {
             sizes,
             srcSet: image.dpr2Srcset,
-            dpr: Dpr.Two,
+            media: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
         }),
-        h(Source, {
+        h('source', {
             sizes,
             srcSet: image.srcset,
-            dpr: Dpr.One,
         }),
         styledH('img', {
             src: image.src,
