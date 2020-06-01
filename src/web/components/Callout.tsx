@@ -276,6 +276,7 @@ const footerPaddingStyles = css`
     padding-bottom: 40px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 `;
 
 const termsAndConditionsStyles = css``;
