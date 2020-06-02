@@ -103,6 +103,32 @@ export const rootConfig: RootConfigType = {
                             required: '1',
                         },
                         {
+                            name: 'can_we_publish_your_response',
+                            options: [
+                                {
+                                    label: 'Yes, entirely',
+                                    value: 'Yes, entirely',
+                                },
+                                {
+                                    label: 'Yes, but please keep me anonymous',
+                                    value: 'Yes, but please keep me anonymous',
+                                },
+                                {
+                                    label: 'Yes, but please contact me first',
+                                    value: 'Yes, but please contact me first',
+                                },
+                                {
+                                    label: 'No, this is information only',
+                                    value: 'No, this is information only',
+                                },
+                            ],
+                            hide_label: '0',
+                            label: 'Can we publish your response?',
+                            id: '91884878',
+                            type: 'checkbox',
+                            required: '1',
+                        },
+                        {
                             text_size: 50,
                             name: 'email_address_',
                             description:
@@ -130,6 +156,32 @@ export const rootConfig: RootConfigType = {
                             label: 'Do you have anything else to add?',
                             id: '91884881',
                             type: 'textarea',
+                            required: '0',
+                        },
+                        {
+                            name: 'do_you_have_anything_else_to_add',
+                            hide_label: '0',
+                            label: 'Do you have anything else to add?',
+                            id: '91884881',
+                            type: 'select',
+                            options: [
+                                {
+                                    label: 'Yes, entirely',
+                                    value: 'Yes, entirely',
+                                },
+                                {
+                                    label: 'Yes, but please keep me anonymous',
+                                    value: 'Yes, but please keep me anonymous',
+                                },
+                                {
+                                    label: 'Yes, but please contact me first',
+                                    value: 'Yes, but please contact me first',
+                                },
+                                {
+                                    label: 'No, this is information only',
+                                    value: 'No, this is information only',
+                                },
+                            ],
                             required: '0',
                         },
                     ],
