@@ -1,24 +1,24 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 import {
-    shouldShow,
+    shouldShow as _shouldShow,
     setErrorHandler,
 } from '@guardian/consent-management-platform';
+
+export const shouldShow = _shouldShow;
 
 export const CMP = () => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        if (shouldShow()) {
-            setShow(true);
+        setShow(true);
 
-            // setErrorHandler takes function to be called on errors in the CMP UI
-            setErrorHandler((errMsg: string): void => {
-                const err = new Error(errMsg);
+        // setErrorHandler takes function to be called on errors in the CMP UI
+        setErrorHandler((errMsg: string): void => {
+            const err = new Error(errMsg);
 
-                window.guardian.modules.sentry.reportError(err, 'cmp');
-            });
-        }
+            window.guardian.modules.sentry.reportError(err, 'cmp');
+        });
     }, []);
 
     return (

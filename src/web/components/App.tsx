@@ -5,7 +5,8 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { CMP } from '@frontend/web/components/CMP';
+import { CMP, canShow as shouldShowCMP } from '@frontend/web/components/CMP';
+// import { ReaderRevenueBanner } from '@frontend/web/components/ReaderRevenueBanner';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
@@ -100,6 +101,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
+    const [showCMP, setShowCMP] = useState<boolean>(false);
+
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
@@ -192,6 +195,14 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
+
+    useEffect(() => {
+        const callShouldShow = async () => setShowCMP(await shouldShowCMP());
+
+        if (CAPI.config.cmpUi) {
+            callShouldShow();
+        }
+    }, [CAPI.config.cmpUi]);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -369,11 +380,14 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            {CAPI.config.cmpUi && (
-                <Portal root="cmp">
+            {showCMP ? (
+                <Portal root="bottom-banner">
                     <CMP />
                 </Portal>
-            )}
+            ) : null}
+            {/*  <Portal root="bottom-banner">
+                     <ReaderRevenueBanner />
+                 </Portal> */}
         </React.StrictMode>
     );
 };
