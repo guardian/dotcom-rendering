@@ -76,16 +76,17 @@ describe('image', () => {
 
     test('show lower quality when DPR is 2', () => {
         const src = srcset(
-            'https://i.guim.co.uk/img/media/948ad0a2ebe6d931d8827ea89ac184986af76c1b/0_22_1313_788/master/1313.jpg',
+            'https://media.guim.co.uk/img/media/948ad0a2ebe6d931d8827ea89ac184986af76c1b/0_22_1313_788/master/1313.jpg',
             '',
             Dpr.Two
         );
+        console.log(src)
         expect(src).toContain('quality=45');
     });
 
     test('show higher quality when DPR is 1', () => {
         const src = srcset(
-            'https://i.guim.co.uk/img/media/948ad0a2ebe6d931d8827ea89ac184986af76c1b/0_22_1313_788/master/1313.jpg',
+            'https://media.guim.co.uk/img/media/948ad0a2ebe6d931d8827ea89ac184986af76c1b/0_22_1313_788/master/1313.jpg',
             '',
             Dpr.One
         );
