@@ -1,10 +1,12 @@
 import React from 'react';
 import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { textSans } from '@guardian/src-foundations/typography';
+
 import { css } from 'emotion';
+import { palette } from '@guardian/src-foundations';
 
 const brandingStyle = (pillar: Pillar) => css`
-    padding: 10px 0;
+    padding-bottom: 10px;
     ${LinkStyle(pillar)}
 
     a, a:hover {
@@ -16,6 +18,8 @@ const brandingStyle = (pillar: Pillar) => css`
 
 const brandingLabelStyle = css`
     ${textSans.xsmall()};
+    color: ${palette.neutral[46]};
+    font-weight: bold;
 `;
 
 const brandingLogoStyle = css`

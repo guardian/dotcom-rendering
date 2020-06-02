@@ -251,8 +251,6 @@ export const StandardLayout = ({
 
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
-    console.log(branding);
-
     return (
         <>
             <div>

@@ -221,6 +221,7 @@ export const ArticleMeta = ({
     return (
         <div className={metaContainer}>
             <div className={cx(meta)}>
+                {branding && <Branding branding={branding} pillar={pillar} />}
                 <RowBelowLeftCol>
                     <>
                         {showAvatar && bylineImageUrl && (
@@ -232,10 +233,6 @@ export const ArticleMeta = ({
                                 />
                             </AvatarContainer>
                         )}
-                        {branding && (
-                            <Branding branding={branding} pillar={pillar} />
-                        )}
-
                         <div>
                             {shouldShowContributor(designType, display) && (
                                 <Contributor
