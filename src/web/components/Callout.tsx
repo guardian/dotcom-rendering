@@ -63,6 +63,8 @@ const addFormField = ({
     formData: { [key in string]: any };
     setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 }) => {
+    console.log('formData')
+    console.log(formData)
     switch (formField.type) {
         case 'textarea':
             return (
@@ -180,9 +182,11 @@ const addFormField = ({
                         <CheckboxGroup name={formField.name || ''}>
                             {formField.options.map((option, index) => {
                                 const checkboxSelection =
-                                    formField.id && formField.id in formData
+                                    (formField.id && formField.id in formData)
                                         ? formData[formField.id]
                                         : [];
+                                console.log('checkboxSelection')
+                                console.log(checkboxSelection)
                                 const isCheckboxChecked = checkboxSelection.find(
                                     (ele: string) => ele === option.value,
                                 );
