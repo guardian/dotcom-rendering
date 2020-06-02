@@ -430,7 +430,7 @@ export const Callout = ({
                             <hr />
                         </div>
                     ))}
-                    {/* TODO: this element is a H O N £ Y - P 0 T */}
+                    {/* this element is a H O N £ Y - P 0 T */}
                     <div
                         className={css`
                             position: absolute;
