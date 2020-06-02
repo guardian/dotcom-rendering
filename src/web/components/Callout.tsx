@@ -241,8 +241,8 @@ const addFormField = ({
                         }
                     >
                         {formField.options &&
-                            formField.options.map(option => (
-                                <option value={option.value}>
+                            formField.options.map((option, index) => (
+                                <option key={index} value={option.value}>
                                     {option.value}
                                 </option>
                             ))}
