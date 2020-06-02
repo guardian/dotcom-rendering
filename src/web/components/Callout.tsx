@@ -28,7 +28,7 @@ const optionalTextStyles = css`
 
 const textAreaStyles = css`
     width: 100%;
-`
+`;
 
 const fileUploadInputStyles = css`
     padding-top: 10px;
@@ -80,7 +80,8 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                     />
                 </>
             );
@@ -99,7 +100,8 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })}
+                            })
+                        }
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -122,7 +124,8 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                     >
                         {formField.options &&
                             formField.options.map(option => (
@@ -160,7 +163,8 @@ const addFormField = ({
                                                 ...formData,
                                                 [formField.id ||
                                                 '']: option.value,
-                                            })}
+                                            })
+                                        }
                                     />
                                 );
                             })}
@@ -185,7 +189,8 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })}
+                        })
+                    }
                 />
             );
         }
@@ -350,10 +355,18 @@ export const Callout = ({
                 className={cx(snippetStyles, {
                     [backgroundColorStyle]: isExpanded || submissionSuccess,
                 })}
-                // we want to prevent default behavior of details HTML element in favor of buttons
-                onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                // we want to prevent default behavior of `details` HTML element
+                // however we do not want to affect other elements from event bubbling
+                onClick={event => {
+                    const target = event.target as HTMLElement;
+                    if (
+                        target.tagName !== 'BUTTON' &&
+                        target.tagName !== 'INPUT' &&
+                        target.tagName !== 'A'
+                    ) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
                 }}
                 aria-hidden={true}
                 open={isExpanded}
