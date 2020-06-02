@@ -13,6 +13,13 @@ import { Link } from '@guardian/src-link';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 
+type fieldProp = {
+    formField: CampaignsFeildType;
+    formData: { [key in string]: any };
+    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+    firstElementRef?: React.RefObject<HTMLElement> | null | undefined;
+};
+
 const fieldLabelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })}
 `;
@@ -61,11 +68,8 @@ const CheckboxWrapper = ({
     formField,
     formData,
     setFormData,
-}: {
-    formField: CampaignsFeildType;
-    formData: { [key in string]: any };
-    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-}) => {
+}: // firstElementRef
+fieldProp) => {
     const [state, setState] = useState([]);
     useEffect(() => {
         setFormData({
@@ -107,6 +111,8 @@ const CheckboxWrapper = ({
                                               ],
                                     );
                                 }}
+                                // TODO: use ref once forwardRef is implemented @guardian/src-button
+                                // ref={index === 0 && firstElementRef}
                             />
                         );
                     })}
@@ -123,11 +129,8 @@ const RadioWrapper = ({
     formField,
     formData,
     setFormData,
-}: {
-    formField: CampaignsFeildType;
-    formData: { [key in string]: any };
-    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-}) => {
+}: // firstElementRef
+fieldProp) => {
     const [state, setState] = useState();
     useEffect(() => {
         setFormData({
@@ -157,6 +160,8 @@ const RadioWrapper = ({
                                 name={`${formField.id}`}
                                 checked={!!isRadioChecked}
                                 onChange={() => setState(option.value)}
+                                // TODO: use ref once forwardRef is implemented @guardian/src-button
+                                // ref={index === 0 && firstElementRef}
                             />
                         );
                     })}
@@ -170,11 +175,8 @@ const addFormField = ({
     formField,
     formData,
     setFormData,
-}: {
-    formField: CampaignsFeildType;
-    formData: { [key in string]: any };
-    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-}) => {
+    firstElementRef,
+}: fieldProp) => {
     switch (formField.type) {
         case 'textarea':
             return (
@@ -193,8 +195,9 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
+                        // TODO: use ref once forwardRef is implemented @guardian/src-button
+                        // ref={firstElementRef}
                     />
                 </>
             );
@@ -213,8 +216,9 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })
-                        }
+                            })}
+                        // TODO: use ref once forwardRef is implemented @guardian/src-button
+                        // ref={firstElementRef}
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -237,8 +241,9 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
+                        // TODO: use ref once forwardRef is implemented @guardian/src-button
+                        // ref={firstElementRef}
                     >
                         {formField.options &&
                             formField.options.map((option, index) => (
@@ -255,6 +260,7 @@ const addFormField = ({
                     formField={formField}
                     formData={formData}
                     setFormData={setFormData}
+                    firstElementRef={firstElementRef}
                 />
             );
         case 'checkbox':
@@ -263,6 +269,7 @@ const addFormField = ({
                     formField={formField}
                     formData={formData}
                     setFormData={setFormData}
+                    firstElementRef={firstElementRef}
                 />
             );
         default: {
@@ -282,8 +289,9 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })
-                    }
+                        })}
+                    // TODO: use ref once forwardRef is implemented @guardian/src-button
+                    // ref={firstElementRef}
                 />
             );
         }
@@ -391,6 +399,75 @@ export const Callout = ({
     const [isExpanded, setIsExpanded] = useState(false);
     const [error, setError] = useState('');
     const [submissionSuccess, setSubmissionSuccess] = useState(false);
+
+    let openCalloutRef: HTMLElement | null = null;
+    let firstElementRef: HTMLElement | null = null;
+    let lastElementRef: HTMLElement | null = null;
+
+    // select each DOM element on form expand
+    useEffect(() => {
+        openCalloutRef = document.querySelector(
+            '*[custom-guardian="callout-form-open-button"]',
+        );
+
+        firstElementRef = document.querySelector(
+            '*[custom-guardian="callout-form-field"]:first-of-type',
+        );
+
+        lastElementRef = document.querySelector(
+            '*[custom-guardian="callout-form-close-button"]',
+        );
+    }, [isExpanded]);
+
+    // TODO: need to focus open form button on close
+    useEffect(() => {
+        // openCalloutRef
+    }, [openCalloutRef]);
+
+    // be able to close the form using the escape key for accessibility
+    useEffect(() => {
+        const keyListener = (e: KeyboardEvent) => {
+            // keyCode 27 is the escape key, we want to be able to close the form using it
+            if (e.keyCode === 27) {
+                setIsExpanded(false);
+            }
+        };
+        isExpanded && document.addEventListener('keydown', keyListener);
+        return () => document.removeEventListener('keydown', keyListener);
+    }, [isExpanded, setIsExpanded]);
+
+    // highlight first element on expand
+    useEffect(() => {
+        if (isExpanded) {
+            firstElementRef && firstElementRef.focus();
+        }
+    }, [isExpanded, firstElementRef]);
+
+    // TODO: make sure that the focus of elements is encapsulated within the form when open
+    useEffect(() => {
+        lastElementRef;
+        // const keyListener = (e: KeyboardEvent) => {
+        //     if (e.keyCode === 27) {
+        //         toggleSetShowForm();
+        //     } else if (e.keyCode === 9) {
+        //         // If firstElement or lastElement are not defined, do not continue
+        //         if (!firstElement || !lastElement) return;
+
+        //         // we use `e.shiftKey` internally to determin the direction of the highlighting
+        //         // using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
+        //         if (!e.shiftKey && document.activeElement === lastElement) {
+        //             firstElement && firstElement.focus();
+        //             e.preventDefault();
+        //         }
+
+        //         if (e.shiftKey && document.activeElement === firstElement) {
+        //             lastElement && lastElement.focus(); // The shift key is down so loop focus back to the last item
+        //             e.preventDefault();
+        //         }
+        //     }
+        // };
+        // document.addEventListener('keydown', keyListener);
+    }, [lastElementRef]);
 
     // As the form is dynamically rendered, we cannot have
     // individual setStates for each field
@@ -500,6 +577,7 @@ export const Callout = ({
                                 size="xsmall"
                                 icon={<PlusIcon />}
                                 onClick={() => setIsExpanded(true)}
+                                custom-guardian="callout-form-open-button"
                             >
                                 Tell us
                             </Button>
@@ -518,8 +596,12 @@ export const Callout = ({
                 >
                     <input name="formId" type="hidden" value={formId} />
                     {formFields.map((formField, index) => (
-                        <div key={index}>
-                            {addFormField({ formField, formData, setFormData })}
+                        <div key={index} custom-guardian="callout-form-field">
+                            {addFormField({
+                                formField,
+                                formData,
+                                setFormData,
+                            })}
                             <hr />
                         </div>
                     ))}
@@ -568,6 +650,9 @@ export const Callout = ({
                             size="xsmall"
                             icon={<MinusIcon />}
                             onClick={() => setIsExpanded(false)}
+                            custom-guardian="callout-form-close-button"
+                            // TODO: use ref once forwardRef is implemented @guardian/src-button
+                            // ref={lastElement}
                         >
                             Hide
                         </Button>
