@@ -58,7 +58,7 @@ run: stop build start
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development NODE_OPTIONS=--max_old_space_size=2048 nodemon scripts/frontend/dev-server
+	@NODE_ENV=development nodemon scripts/frontend/dev-server
 
 # cypress #####################################
 

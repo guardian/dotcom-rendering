@@ -99,7 +99,7 @@ module.exports = ({ isLegacyJS }) => ({
                     },
                     {
                         loader: 'ts-loader',
-                        options: { configFile: 'tsconfig.build.json' },
+                        options: { configFile: 'tsconfig.build.json', transpileOnly: true },
                     }
                 ],
             },
