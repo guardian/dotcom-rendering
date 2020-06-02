@@ -249,6 +249,10 @@ export const StandardLayout = ({
 
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
+    const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+    console.log(branding);
+
     return (
         <>
             <div>
@@ -402,6 +406,7 @@ export const StandardLayout = ({
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                branding={branding}
                                 display={display}
                                 designType={designType}
                                 pillar={pillar}

@@ -27,6 +27,7 @@ export const Branding: React.FC<{
     branding: Branding;
     pillar: Pillar;
 }> = ({ branding, pillar }) => {
+    if (!branding) return null;
     return (
         <div className={brandingStyle(pillar)}>
             <div className={brandingLabelStyle}>{branding.logo.label}</div>
@@ -37,14 +38,12 @@ export const Branding: React.FC<{
                 rel="nofollow"
                 aria-label={`Visit the ${branding.sponsorName} website`}
             >
-                <ImageWrapper>
-                    <img
-                        src={branding.logo.src}
-                        width={branding.logo.dimensions.width}
-                        height={branding.logo.dimensions.height}
-                        alt={branding.sponsorName}
-                    />
-                </ImageWrapper>
+                <img
+                    src={branding.logo.src}
+                    width={branding.logo.dimensions.width}
+                    height={branding.logo.dimensions.height}
+                    alt={branding.sponsorName}
+                />
             </a>
             <a href={branding.aboutThisLink}>About this content</a>
         </div>

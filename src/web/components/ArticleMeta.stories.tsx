@@ -65,6 +65,46 @@ export const ArticleStory = () => {
         </Container>
     );
 };
+
+export const BrandingStory = () => {
+    return (
+        <Container>
+            <ArticleMeta
+                branding={{
+                    sponsorName: 'Humanity United',
+                    logo: {
+                        src:
+                            'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
+                        dimensions: { width: 140, height: 90 },
+                        link: 'http://www.humanityunited.org/ ',
+                        label: 'Supported by',
+                    },
+                    logoForDarkBackground: {
+                        src:
+                            'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
+                        dimensions: { width: 140, height: 39 },
+                        link: 'http://www.humanityunited.org/ ',
+                        label: 'Supported by',
+                    },
+                    aboutThisLink:
+                        'https://www.theguardian.com/info/2016/jan/25/content-funding',
+                }}
+                display="standard"
+                designType="Article"
+                pillar="news"
+                pageId=""
+                webTitle=""
+                author={{
+                    byline: 'Lanre Bakare',
+                    twitterHandle: 'lanre_bakare',
+                }}
+                tags={tagsWithBylineImage}
+                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+            />
+        </Container>
+    );
+};
+
 ArticleStory.story = { name: 'Article' };
 
 export const FeatureStory = () => {

@@ -211,6 +211,7 @@ export const ImmersiveLayout = ({
 
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
+    const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
     return (
         <>
@@ -378,6 +379,7 @@ export const ImmersiveLayout = ({
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                branding={branding}
                                 display={display}
                                 designType={designType}
                                 pillar={pillar}

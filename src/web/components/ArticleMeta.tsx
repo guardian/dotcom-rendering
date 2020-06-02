@@ -11,16 +11,15 @@ import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
-    branding: Branding;
     display: Display;
     designType: DesignType;
-    editionCommercialProperties: EditionCommercialProperties;
     pillar: Pillar;
     pageId: string;
     webTitle: string;
     author: AuthorType;
     tags: TagType[];
     webPublicationDateDisplay: string;
+    branding?: Branding;
 };
 
 const meta = css`
@@ -123,14 +122,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
     }
 };
 
-const shouldShowBranding = (
-    editionCommercialProperties: EditionCommercialProperties,
-) => {
-    if (editionCommercialProperties.branding !== undefined) {
-        return true;
-    }
-};
-
 const shouldShowContributor = (designType: DesignType, display: Display) => {
     if (display === 'immersive') {
         return false;
@@ -211,7 +202,6 @@ export const ArticleMeta = ({
     branding,
     display,
     designType,
-    editionCommercialProperties,
     pillar,
     pageId,
     webTitle,
@@ -228,7 +218,6 @@ export const ArticleMeta = ({
 
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
-
     return (
         <div className={metaContainer}>
             <div className={cx(meta)}>
@@ -243,7 +232,7 @@ export const ArticleMeta = ({
                                 />
                             </AvatarContainer>
                         )}
-                        {shouldShowBranding && (
+                        {branding && (
                             <Branding branding={branding} pillar={pillar} />
                         )}
 
