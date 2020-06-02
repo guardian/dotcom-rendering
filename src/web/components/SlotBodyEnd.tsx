@@ -13,7 +13,8 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
-import { initPerf } from 'src/web/browser/initPerf';
+import { initPerf } from '@root/src/web/browser/initPerf';
+import 'shimport';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
