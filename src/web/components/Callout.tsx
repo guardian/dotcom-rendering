@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
@@ -54,6 +54,118 @@ const FieldLabel = ({ formField }: { formField: CampaignsFeildType }) => (
     </label>
 );
 
+// We encapsulate the Componet's state here instead of directly sourcing it from
+// `formData` to avoid unnessesary rerenders, as this was causing selection animation
+// to be applied whenever formData was changin
+const CheckboxWrapper = ({
+    formField,
+    formData,
+    setFormData,
+}: {
+    formField: CampaignsFeildType;
+    formData: { [key in string]: any };
+    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+}) => {
+    const [state, setState] = useState([]);
+    useEffect(() => {
+        setFormData({
+            ...formData,
+            [formField.id || '']: state,
+        });
+    }, [state]);
+
+    return (
+        <>
+            <FieldLabel formField={formField} />
+            {formField.options && (
+                <CheckboxGroup name={formField.name || ''}>
+                    {formField.options.map((option, index) => {
+                        const checkboxSelection =
+                            formField.id && formField.id in formData
+                                ? formData[formField.id]
+                                : [];
+                        const isCheckboxChecked = checkboxSelection.find(
+                            (ele: string) => ele === option.value,
+                        );
+                        return (
+                            <Checkbox
+                                key={index}
+                                label={option.value}
+                                value={option.value}
+                                name={`${formField.id}`}
+                                checked={!!isCheckboxChecked}
+                                onChange={() => {
+                                    setState(
+                                        isCheckboxChecked
+                                            ? checkboxSelection.filter(
+                                                  (ele: string) =>
+                                                      ele !== option.value,
+                                              )
+                                            : [
+                                                  ...checkboxSelection,
+                                                  option.value,
+                                              ],
+                                    );
+                                }}
+                            />
+                        );
+                    })}
+                </CheckboxGroup>
+            )}
+        </>
+    );
+};
+
+// We encapsulate the Componet's state here instead of directly sourcing it from
+// `formData` to avoid unnessesary rerenders, as this was causing selection animation
+// to be applied whenever formData was changin
+const RadioWrapper = ({
+    formField,
+    formData,
+    setFormData,
+}: {
+    formField: CampaignsFeildType;
+    formData: { [key in string]: any };
+    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+}) => {
+    const [state, setState] = useState();
+    useEffect(() => {
+        setFormData({
+            ...formData,
+            [formField.id || '']: state,
+        });
+    }, [state]);
+
+    return (
+        <>
+            <FieldLabel formField={formField} />
+            {formField.options && (
+                <RadioGroup
+                    name={formField.name || ''}
+                    orientation="horizontal"
+                >
+                    {formField.options.map((option, index) => {
+                        const isRadioChecked =
+                            formField.id &&
+                            formField.id in formData &&
+                            formData[formField.id] === option.value;
+                        return (
+                            <Radio
+                                key={index}
+                                label={option.value}
+                                value={option.value}
+                                name={`${formField.id}`}
+                                checked={!!isRadioChecked}
+                                onChange={() => setState(option.value)}
+                            />
+                        );
+                    })}
+                </RadioGroup>
+            )}
+        </>
+    );
+};
+
 const addFormField = ({
     formField,
     formData,
@@ -63,8 +175,6 @@ const addFormField = ({
     formData: { [key in string]: any };
     setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 }) => {
-    console.log('formData')
-    console.log(formData)
     switch (formField.type) {
         case 'textarea':
             return (
@@ -141,84 +251,19 @@ const addFormField = ({
             );
         case 'radio':
             return (
-                <>
-                    <FieldLabel formField={formField} />
-                    {formField.options && (
-                        <RadioGroup
-                            name={formField.name || ''}
-                            orientation="horizontal"
-                        >
-                            {formField.options.map((option, index) => {
-                                const isRadioChecked =
-                                    formField.id &&
-                                    formField.id in formData &&
-                                    formData[formField.id] === option.value;
-                                return (
-                                    <Radio
-                                        key={index}
-                                        label={option.value}
-                                        value={option.value}
-                                        name={`${formField.id}`}
-                                        checked={!!isRadioChecked}
-                                        onChange={() =>
-                                            setFormData({
-                                                ...formData,
-                                                [formField.id ||
-                                                '']: option.value,
-                                            })
-                                        }
-                                    />
-                                );
-                            })}
-                        </RadioGroup>
-                    )}
-                </>
+                <RadioWrapper
+                    formField={formField}
+                    formData={formData}
+                    setFormData={setFormData}
+                />
             );
         case 'checkbox':
             return (
-                <>
-                    <FieldLabel formField={formField} />
-                    {formField.options && (
-                        <CheckboxGroup name={formField.name || ''}>
-                            {formField.options.map((option, index) => {
-                                const checkboxSelection =
-                                    (formField.id && formField.id in formData)
-                                        ? formData[formField.id]
-                                        : [];
-                                console.log('checkboxSelection')
-                                console.log(checkboxSelection)
-                                const isCheckboxChecked = checkboxSelection.find(
-                                    (ele: string) => ele === option.value,
-                                );
-                                return (
-                                    <Checkbox
-                                        key={index}
-                                        label={option.value}
-                                        value={option.value}
-                                        name={`${formField.id}`}
-                                        checked={!!isCheckboxChecked}
-                                        onChange={() => {
-                                            setFormData({
-                                                ...formData,
-                                                [formField.id ||
-                                                '']: isCheckboxChecked
-                                                    ? checkboxSelection.filter(
-                                                          (ele: string) =>
-                                                              ele !==
-                                                              option.value,
-                                                      )
-                                                    : [
-                                                          ...checkboxSelection,
-                                                          option.value,
-                                                      ],
-                                            });
-                                        }}
-                                    />
-                                );
-                            })}
-                        </CheckboxGroup>
-                    )}
-                </>
+                <CheckboxWrapper
+                    formField={formField}
+                    formData={formData}
+                    setFormData={setFormData}
+                />
             );
         default: {
             return (
