@@ -80,7 +80,6 @@ describe('image', () => {
             '',
             Dpr.Two
         );
-        console.log(src)
         expect(src).toContain('quality=45');
     });
 
