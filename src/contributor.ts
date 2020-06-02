@@ -3,7 +3,7 @@
 import { Option, fromNullable } from 'types/option';
 import { IContent as Content } from 'mapiThriftModels';
 import { articleContributors } from 'capi';
-import { srcsetWithWidths, src } from 'image';
+import { srcsetWithWidths, src, Dpr } from 'image';
 
 
 // ------ Types ----- //
@@ -32,8 +32,8 @@ const parseContributors = (salt: string, content: Content): Contributor[] =>
         apiUrl: contributor.apiUrl,
         name: contributor.webTitle,
         image: fromNullable(contributor.bylineLargeImageUrl).fmap(url => ({
-            srcset: contributorSrcset(url, salt),
-            src: src(salt, url, 64),
+            srcset: contributorSrcset(url, salt, Dpr.One),
+            src: src(salt, url, 64, Dpr.One),
         })),
     }));
 

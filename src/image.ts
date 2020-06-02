@@ -22,6 +22,7 @@ const defaultWidths = [
 
 // Percentage.
 const defaultQuality = 85;
+const lowerQuality = 45;
 
 
 // ----- Types ----- //
@@ -31,9 +32,20 @@ enum Role {
     HalfWidth
 }
 
+const enum Dpr {
+    One,
+    Two
+}
+
+interface Srcsets {
+    srcset: string;
+    dpr2Srcset: string;
+}
+
 interface Image {
     src: string;
     srcset: string;
+    dpr2Srcset: string;
     alt: Option<string>;
     width: number;
     height: number;
@@ -56,13 +68,13 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex');
 
-function src(salt: string, input: string, width: number): string {
+function src(salt: string, input: string, width: number, dpr: Dpr): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
     const params = new URLSearchParams({
         width: width.toString(),
-        quality: defaultQuality.toString(),
+        quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
         fit: 'bounds',
         'sig-ignores-params': 'true',
         s: sign(salt, url.pathname),
@@ -71,13 +83,18 @@ function src(salt: string, input: string, width: number): string {
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-const srcsetWithWidths = (widths: number[]) => (url: string, salt: string): string =>
+const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
     widths
-        .map(width => `${src(salt, url, width)} ${width}w`)
+        .map(width => `${src(salt, url, width, dpr)} ${width}w`)
         .join(', ');
 
-const srcset: (url: string, salt: string) => string =
+const srcset: (url: string, salt: string, dpr: Dpr) => string =
     srcsetWithWidths(defaultWidths);
+
+const srcsets = (url: string, salt: string): Srcsets => ({
+    srcset: srcset(url, salt, Dpr.One),
+    dpr2Srcset: srcset(url, salt, Dpr.Two),
+});
 
 const parseCredit = (
     displayCredit: boolean | undefined,
@@ -103,7 +120,7 @@ const parseImage = ({ docParser, salt }: Context) =>
     (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const data = element.imageTypeData;
-    
+
     return fromNullable(masterAsset).andThen(asset => {
         if (
             asset?.file === undefined ||
@@ -115,8 +132,8 @@ const parseImage = ({ docParser, salt }: Context) =>
         }
 
         return new Some({
-            src: src(salt, asset.file, 500),
-            srcset: srcset(asset.file, salt),
+            src: src(salt, asset.file, 500, Dpr.One),
+            ...srcsets(asset.file, salt),
             alt: fromNullable(data?.alt),
             width: asset.typeData.width,
             height: asset.typeData.height,
@@ -126,7 +143,7 @@ const parseImage = ({ docParser, salt }: Context) =>
             role: parseRole(data?.role),
         });
     });
-}
+};
 
 
 // ----- Exports ----- //
@@ -134,6 +151,7 @@ const parseImage = ({ docParser, salt }: Context) =>
 export {
     Image,
     Role,
+    Dpr,
     src,
     srcset,
     srcsetWithWidths,

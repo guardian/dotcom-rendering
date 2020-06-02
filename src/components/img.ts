@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { FC } from 'react';
-import { jsx as styledH, SerializedStyles, css } from '@emotion/core';
+import { createElement as h, FC } from 'react';
+import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { Image } from 'image';
@@ -25,16 +25,25 @@ const styles = css`
 `;
 
 const Img: FC<Props> = ({ image, sizes, className }) =>
-    styledH('img', {
-        sizes,
-        srcSet: image.srcset,
-        src: image.src,
-        alt: image.alt.withDefault(''),
-        className: 'js-launch-slideshow',
-        css: [styles, className],
-        'data-caption': image.nativeCaption.withDefault(''),
-        'data-credit': image.credit.withDefault(''),
-    });
+    h('picture', null, [
+        h('source', {
+            sizes,
+            srcSet: image.dpr2Srcset,
+            media: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+        }),
+        h('source', {
+            sizes,
+            srcSet: image.srcset,
+        }),
+        styledH('img', {
+            src: image.src,
+            alt: image.alt.withDefault(''),
+            className: 'js-launch-slideshow',
+            css: [styles, className],
+            'data-caption': image.nativeCaption.withDefault(''),
+            'data-credit': image.credit.withDefault(''),
+        }),
+    ] );
 
 
 // ----- Exports ----- //
