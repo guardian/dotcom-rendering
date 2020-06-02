@@ -13,6 +13,7 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
+import { initPerf } from 'src/web/browser/initPerf';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -171,11 +172,16 @@ const MemoisedInner = ({
             emotion,
         };
 
+        const dataPerf = initPerf('contributions-epic-data');
+        dataPerf.start();
         getBodyEnd(
             contributionsPayload,
             `${contributionsServiceUrl}/epic?dataOnly=true`,
         )
-            .then(checkForErrors)
+            .then(response => {
+                dataPerf.end();
+                return checkForErrors(response);
+            })
             .then(response => response.json())
             .then(json => {
                 if (!json.data) {
@@ -184,8 +190,11 @@ const MemoisedInner = ({
 
                 const { meta, module } = json.data;
 
+                const modulePerf = initPerf('contributions-epic-module');
+                modulePerf.start();
                 import(/* webpackIgnore: true */ module.url)
                     .then(epicModule => {
+                        modulePerf.end();
                         setEpicMeta(meta);
                         setEpicProps({
                             ...module.props,
