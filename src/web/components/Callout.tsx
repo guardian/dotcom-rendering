@@ -7,6 +7,7 @@ import { palette } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 import { TextInput } from '@guardian/src-text-input';
 import { RadioGroup, Radio } from '@guardian/src-radio';
+import { CheckboxGroup, Checkbox } from '@guardian/src-checkbox';
 import { Link } from '@guardian/src-link';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
@@ -137,7 +138,6 @@ const addFormField = ({
                 </>
             );
         case 'radio':
-        case 'checkbox':
             return (
                 <>
                     <FieldLabel formField={formField} />
@@ -169,6 +169,50 @@ const addFormField = ({
                                 );
                             })}
                         </RadioGroup>
+                    )}
+                </>
+            );
+        case 'checkbox':
+            return (
+                <>
+                    <FieldLabel formField={formField} />
+                    {formField.options && (
+                        <CheckboxGroup name={formField.name || ''}>
+                            {formField.options.map((option, index) => {
+                                const checkboxSelection =
+                                    formField.id && formField.id in formData
+                                        ? formData[formField.id]
+                                        : [];
+                                const isCheckboxChecked = checkboxSelection.find(
+                                    (ele: string) => ele === option.value,
+                                );
+                                return (
+                                    <Checkbox
+                                        key={index}
+                                        label={option.value}
+                                        value={option.value}
+                                        name={`${formField.id}`}
+                                        checked={!!isCheckboxChecked}
+                                        onChange={() => {
+                                            setFormData({
+                                                ...formData,
+                                                [formField.id ||
+                                                '']: isCheckboxChecked
+                                                    ? checkboxSelection.filter(
+                                                          (ele: string) =>
+                                                              ele !==
+                                                              option.value,
+                                                      )
+                                                    : [
+                                                          ...checkboxSelection,
+                                                          option.value,
+                                                      ],
+                                            });
+                                        }}
+                                    />
+                                );
+                            })}
+                        </CheckboxGroup>
                     )}
                 </>
             );

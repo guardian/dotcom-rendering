@@ -2167,6 +2167,14 @@
     "@guardian/src-helpers" "^1.1.0"
     "@guardian/src-svgs" "^1.1.0"
 
+"@guardian/src-checkbox@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-checkbox/-/src-checkbox-1.1.0.tgz#86ce173163ce59b63704df4091a78570c6380ca5"
+  integrity sha512-L6K2G2oaZxlzqIrHYp2zRYDHqHWBp2OxVyWJ0fbpCnntUKV69fwPCPepUd5xwBZoZTQt27UMUFhrg92e4mNJBg==
+  dependencies:
+    "@guardian/src-helpers" "^1.1.0"
+    "@guardian/src-inline-error" "^1.1.0-rc.0"
+
 "@guardian/src-ed-lines@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-1.1.0.tgz#2b248c7bbd31b32d111ac8bf796d0a69f984e590"

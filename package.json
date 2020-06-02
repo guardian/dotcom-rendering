@@ -31,6 +31,7 @@
         "@guardian/consent-management-platform": "^3.0.4",
         "@guardian/discussion-rendering": "^2.2.20",
         "@guardian/src-button": "^1.1.0",
+        "@guardian/src-checkbox": "^1.1.0",
         "@guardian/src-ed-lines": "^1.1.0",
         "@guardian/src-foundations": "^1.1.0",
         "@guardian/src-link": "^1.1.0",
