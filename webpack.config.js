@@ -103,6 +103,7 @@ const clientConfig = {
         media: 'client/media.ts',
     },
     target: 'web',
+    devtool: 'inline-cheap-source-map',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: '[name].js',
@@ -149,6 +150,7 @@ const clientConfigProduction = {
     ...clientConfig,
     name: 'clientProduction',
     mode: 'production',
+    devtool: false,
     plugins: [
         new ManifestPlugin(),
     ],

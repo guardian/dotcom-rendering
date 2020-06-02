@@ -1,7 +1,10 @@
 // ----- Imports ----- //
 
 import React, { ReactNode, FC, ReactElement } from 'react';
-import { css } from '@emotion/core';
+import { renderToString } from 'react-dom/server';
+import { CacheProvider } from '@emotion/core';
+import createEmotionServer from 'create-emotion-server';
+import createCache from '@emotion/cache';
 import { JSDOM } from 'jsdom';
 import { Format, Design, Display } from '@guardian/types/Format';
 
@@ -20,6 +23,8 @@ import { fromCapi, Item } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
 import { pageFonts } from 'styles';
 import { Option, Some, None } from 'types/option';
+import { compose } from 'lib';
+import { csp } from 'server/csp';
 
 
 // ----- Setup ----- //
@@ -109,28 +114,42 @@ interface ClientJsProps {
 const ClientJs: FC<ClientJsProps> = ({ src }: ClientJsProps) =>
     src.fmap<ReactElement | null>(s => <script src={s}></script>).withDefault(null);
 
-interface TwitterJSProps {
-    content: Content;
+interface ScriptsProps {
+    clientScript: Option<string>;
+    twitter: boolean;
 }
 
-const TwitterJs: FC<TwitterJSProps> = ({ content }: TwitterJSProps) =>
-    includesTweets(content)
-        ? <script src="https://platform.twitter.com/widgets.js"></script>
-        : null;
+const Scripts: FC<ScriptsProps> = ({ clientScript, twitter }: ScriptsProps) =>
+    <>
+        <ClientJs src={clientScript} />
+        { twitter ? <script src="https://platform.twitter.com/widgets.js"></script> : null }
+    </>
+
+interface HeadProps {
+    webTitle: string;
+}
+
+const Head: FC<HeadProps> = ({ webTitle }: HeadProps) =>
+    <>
+        <title>{webTitle}</title>
+        <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
+        <link rel="stylesheet" href="native://fontSize.css" />
+    </>
 
 
 // ----- Page ----- //
 
 interface Page {
-    html: ReactElement;
+    html: string;
     clientScript: Option<string>;
 }
 
-const PageStyles = css`
+const styles = `
     ${pageFonts}
-    background: white;
 
     body {
+        background: white;
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
@@ -145,22 +164,33 @@ function page(
 ): Page {
     const item = fromCapi({ docParser, salt: imageSalt })(content);
     const shouldHideAds = content.fields?.shouldHideAdverts ?? false;
+    const hasTwitter = includesTweets(content);
     const clientScript = scriptName(item).fmap(getAssetLocation);
-    const html = (
-        <html lang="en" css={PageStyles}>
+    const emotionCache = createCache();
+    const { extractCritical } = createEmotionServer(emotionCache);
+    const { html: body, css, ids } = compose(extractCritical, renderToString)(
+        <CacheProvider value={emotionCache}>
+            <Body item={item} shouldHideAds={shouldHideAds} />
+        </CacheProvider>
+    );
+    const cspString = csp(item, { scripts: [], styles: [styles, css] }, hasTwitter);
+    const html = `
+        <html lang="en">
             <head>
-                <title>{content.webTitle}</title>
-                <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
-                <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
-                <link rel="stylesheet" href="native://fontSize.css" />
+                ${renderToString(<Head webTitle={content.webTitle} />)}
+                <meta
+                    http-equiv="Content-Security-Policy"
+                    content="${cspString}"
+                />
+                <style>${styles}</style>
+                <style data-emotion-css="${ids.join(' ')}">${css}</style>
             </head>
             <body>
-                <Body item={item} shouldHideAds={shouldHideAds} />
-                <ClientJs src={clientScript} />
-                <TwitterJs content={content} />
+                ${body}
+                ${renderToString(<Scripts clientScript={clientScript} twitter={hasTwitter} />)}
             </body>
         </html>
-    );
+    `;
 
     return { html, clientScript };
 }

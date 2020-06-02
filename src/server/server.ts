@@ -7,7 +7,6 @@ import express, {
     Response as ExpressResponse,
 } from 'express';
 import compression from 'compression';
-import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
@@ -108,7 +107,7 @@ async function serveArticlePost(
         const { html, clientScript } = page(imageSalt, content, getAssetLocation);
         res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
         res.write('<!DOCTYPE html>');
-        res.write(renderToString(html));
+        res.write(html);
         res.end();
     } catch (e) {
         logger.error(`This error occurred`, e);
@@ -133,7 +132,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                 res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
-                res.write(renderToString(html));
+                res.write(html);
                 res.end();
             },
         )
