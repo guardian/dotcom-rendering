@@ -35,7 +35,7 @@ module.exports = () => ({
     module: {
         rules: [
             {
-                test: /(\.tsx)|(\.js)|(\.ts)$/,
+                test: /(\.tsx|\.js|\.ts)$/,
                 exclude: /node_modules/,
                 use: [
                     {
