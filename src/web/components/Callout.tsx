@@ -17,7 +17,7 @@ type fieldProp = {
     formField: CampaignsFeildType;
     formData: { [key in string]: any };
     setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-    firstElementRef?: React.RefObject<HTMLElement> | null | undefined;
+    firstFieldElementRef?: React.RefObject<HTMLElement> | null | undefined;
 };
 
 const fieldLabelStyles = css`
@@ -68,7 +68,7 @@ const CheckboxWrapper = ({
     formField,
     formData,
     setFormData,
-}: // firstElementRef
+}: // firstFieldElementRef
 fieldProp) => {
     const [state, setState] = useState([]);
     useEffect(() => {
@@ -112,7 +112,7 @@ fieldProp) => {
                                     );
                                 }}
                                 // TODO: use ref once forwardRef is implemented @guardian/src-button
-                                // ref={index === 0 && firstElementRef}
+                                // ref={index === 0 && firstFieldElementRef}
                             />
                         );
                     })}
@@ -129,7 +129,7 @@ const RadioWrapper = ({
     formField,
     formData,
     setFormData,
-}: // firstElementRef
+}: // firstFieldElementRef
 fieldProp) => {
     const [state, setState] = useState();
     useEffect(() => {
@@ -161,7 +161,7 @@ fieldProp) => {
                                 checked={!!isRadioChecked}
                                 onChange={() => setState(option.value)}
                                 // TODO: use ref once forwardRef is implemented @guardian/src-button
-                                // ref={index === 0 && firstElementRef}
+                                // ref={index === 0 && firstFieldElementRef}
                             />
                         );
                     })}
@@ -175,7 +175,7 @@ const addFormField = ({
     formField,
     formData,
     setFormData,
-    firstElementRef,
+    firstFieldElementRef,
 }: fieldProp) => {
     switch (formField.type) {
         case 'textarea':
@@ -195,9 +195,10 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
-                        // ref={firstElementRef}
+                        // ref={firstFieldElementRef}
                     />
                 </>
             );
@@ -216,9 +217,10 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })}
+                            })
+                        }
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
-                        // ref={firstElementRef}
+                        // ref={firstFieldElementRef}
                     />
                     <p className="form-info-text">
                         We accept images and pdfs. Maximum total file size: 6MB
@@ -241,9 +243,10 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })}
+                            })
+                        }
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
-                        // ref={firstElementRef}
+                        // ref={firstFieldElementRef}
                     >
                         {formField.options &&
                             formField.options.map((option, index) => (
@@ -260,7 +263,7 @@ const addFormField = ({
                     formField={formField}
                     formData={formData}
                     setFormData={setFormData}
-                    firstElementRef={firstElementRef}
+                    firstFieldElementRef={firstFieldElementRef}
                 />
             );
         case 'checkbox':
@@ -269,7 +272,7 @@ const addFormField = ({
                     formField={formField}
                     formData={formData}
                     setFormData={setFormData}
-                    firstElementRef={firstElementRef}
+                    firstFieldElementRef={firstFieldElementRef}
                 />
             );
         default: {
@@ -289,9 +292,10 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })}
+                        })
+                    }
                     // TODO: use ref once forwardRef is implemented @guardian/src-button
-                    // ref={firstElementRef}
+                    // ref={firstFieldElementRef}
                 />
             );
         }
@@ -389,6 +393,9 @@ const termsAndConditionsStyles = css``;
 const submitButtonStyles = css``;
 const errorStyles = css``;
 
+// a hack used to make sure we do not highlight the openCallout button on first render
+let isFirstTimeRendering = true
+
 export const Callout = ({
     campaign,
     pillar,
@@ -401,28 +408,56 @@ export const Callout = ({
     const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
     let openCalloutRef: HTMLElement | null = null;
-    let firstElementRef: HTMLElement | null = null;
+    let firstFieldElementRef: HTMLElement | null = null;
     let lastElementRef: HTMLElement | null = null;
 
     // select each DOM element on form expand
     useEffect(() => {
         openCalloutRef = document.querySelector(
-            '*[custom-guardian="callout-form-open-button"]',
+            'button[custom-guardian="callout-form-open-button"]',
         );
-
-        firstElementRef = document.querySelector(
-            '*[custom-guardian="callout-form-field"]:first-of-type',
-        );
-
+        firstFieldElementRef = document.querySelector(`
+            *[custom-guardian="callout-form-field"]:first-of-type input,
+            *[custom-guardian="callout-form-field"]:first-of-type select
+        `);
         lastElementRef = document.querySelector(
-            '*[custom-guardian="callout-form-close-button"]',
+            'button[custom-guardian="callout-form-close-button"]',
         );
-    }, [isExpanded]);
 
-    // TODO: need to focus open form button on close
-    useEffect(() => {
-        // openCalloutRef
-    }, [openCalloutRef]);
+        // on open form, focus on firstFieldElementRef
+        if (isExpanded && !isFirstTimeRendering) {
+            isFirstTimeRendering = false
+            firstFieldElementRef && firstFieldElementRef.focus();
+        } else {
+            openCalloutRef && openCalloutRef.focus();
+        }
+
+        // lock shift to the form
+        const keyListener = (e: KeyboardEvent) => {
+            // keyCode 9 is shift shift key
+            if (e.keyCode === 9) {
+                // If firstElement or lastElement are not defined, do not continue
+                if (!firstFieldElementRef || !lastElementRef) return;
+
+                // we use `e.shiftKey` internally to determin the direction of the highlighting
+                // using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
+                if (!e.shiftKey && document.activeElement === lastElementRef) {
+                    firstFieldElementRef && firstFieldElementRef.focus();
+                    e.preventDefault();
+                }
+
+                if (
+                    e.shiftKey &&
+                    document.activeElement === firstFieldElementRef
+                ) {
+                    lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
+                    e.preventDefault();
+                }
+            }
+        };
+        document.addEventListener('keydown', keyListener);
+        return () => document.removeEventListener('keydown', keyListener);
+    }, [isExpanded]);
 
     // be able to close the form using the escape key for accessibility
     useEffect(() => {
@@ -439,35 +474,9 @@ export const Callout = ({
     // highlight first element on expand
     useEffect(() => {
         if (isExpanded) {
-            firstElementRef && firstElementRef.focus();
+            firstFieldElementRef && firstFieldElementRef.focus();
         }
-    }, [isExpanded, firstElementRef]);
-
-    // TODO: make sure that the focus of elements is encapsulated within the form when open
-    useEffect(() => {
-        lastElementRef;
-        // const keyListener = (e: KeyboardEvent) => {
-        //     if (e.keyCode === 27) {
-        //         toggleSetShowForm();
-        //     } else if (e.keyCode === 9) {
-        //         // If firstElement or lastElement are not defined, do not continue
-        //         if (!firstElement || !lastElement) return;
-
-        //         // we use `e.shiftKey` internally to determin the direction of the highlighting
-        //         // using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
-        //         if (!e.shiftKey && document.activeElement === lastElement) {
-        //             firstElement && firstElement.focus();
-        //             e.preventDefault();
-        //         }
-
-        //         if (e.shiftKey && document.activeElement === firstElement) {
-        //             lastElement && lastElement.focus(); // The shift key is down so loop focus back to the last item
-        //             e.preventDefault();
-        //         }
-        //     }
-        // };
-        // document.addEventListener('keydown', keyListener);
-    }, [lastElementRef]);
+    }, [isExpanded, firstFieldElementRef]);
 
     // As the form is dynamically rendered, we cannot have
     // individual setStates for each field
