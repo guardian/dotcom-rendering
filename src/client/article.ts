@@ -13,6 +13,9 @@ import { ads, slideshow } from 'client/nativeCommunication';
 
 // ----- Run ----- //
 
+const followText = 'Follow ';
+const followingText = 'Following ';
+
 interface FontFaceSet {
     readonly ready: Promise<FontFaceSet>;
 }
@@ -46,16 +49,16 @@ function topicClick(e: Event): void {
     const topic = getTopic(follow);
 
     if (topic) {
-        if (statusText && statusText === 'Follow') {
-            notificationsClient.follow(topic).then(response => {
-                if (status?.textContent) {
-                    status.textContent = "Following ";
+        if (statusText && statusText === followText) {
+            notificationsClient.follow(topic).then(success => {
+                if (status?.textContent && success) {
+                    status.textContent = followingText;
                 }
             })
         } else {
-            notificationsClient.unfollow(topic).then(response => {
-                if (status?.textContent) {
-                    status.textContent = "Follow ";
+            notificationsClient.unfollow(topic).then(success => {
+                if (status?.textContent && success) {
+                    status.textContent = followText;
                 }
             })
         }
@@ -71,7 +74,7 @@ function topics(): void {
         follow?.addEventListener('click', topicClick);
         notificationsClient.isFollowing(topic).then(following => {
             if (following && status?.textContent) {
-                status.textContent = "Following ";
+                status.textContent = followingText;
             }
         })
     }
