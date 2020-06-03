@@ -79,13 +79,17 @@ const MemoisedInner = ({
             emotion,
         };
 
-        // TODO replace this stub with imported version from the client lib
-        const getBanner = (a: {}, b: string) => Promise.resolve({ a, b });
+        // TODO replace this with an imported version from the client lib
+        const getBanner = (meta: {}, url: string): Promise<Response> => {
+            const json = JSON.stringify(meta);
+            return fetch(url, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: json,
+            });
+        };
 
-        getBanner(
-            bannerPayload,
-            `${contributionsServiceUrl}/banner?dataOnly=true`,
-        )
+        getBanner(bannerPayload, `${contributionsServiceUrl}/banner`)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json => {
@@ -119,7 +123,7 @@ const MemoisedInner = ({
     return null;
 };
 
-export const SlotBanner = ({
+export const ReaderRevenueBanner = ({
     isSignedIn,
     countryCode,
     contentType,

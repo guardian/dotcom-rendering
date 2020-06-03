@@ -6,7 +6,7 @@ import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CMP, canShow as shouldShowCMP } from '@frontend/web/components/CMP';
-// import { ReaderRevenueBanner } from '@frontend/web/components/ReaderRevenueBanner';
+import { ReaderRevenueBanner } from '@frontend/web/components/ReaderRevenueBanner';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
@@ -384,10 +384,22 @@ export const App = ({ CAPI, NAV }: Props) => {
                 <Portal root="bottom-banner">
                     <CMP />
                 </Portal>
-            ) : null}
-            {/*  <Portal root="bottom-banner">
-                     <ReaderRevenueBanner />
-                 </Portal> */}
+            ) : (
+                <Portal root="bottom-banner">
+                    <ReaderRevenueBanner
+                        isSignedIn={isSignedIn}
+                        countryCode={countryCode}
+                        contentType={CAPI.contentType}
+                        sectionName={CAPI.sectionName}
+                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                        isPaidContent={CAPI.pageType.isPaidContent}
+                        isSensitive={CAPI.config.isSensitive}
+                        tags={CAPI.tags}
+                        contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                    />
+                </Portal>
+            )}
         </React.StrictMode>
     );
 };
