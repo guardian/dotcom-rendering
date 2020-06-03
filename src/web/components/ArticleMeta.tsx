@@ -94,60 +94,66 @@ const getAuthorName = (tags: TagType[]) => {
 };
 
 const shouldShowAvatar = (designType: DesignType, display: Display) => {
-    if (display === 'immersive') {
-        return false;
-    }
-
-    switch (designType) {
-        case 'Feature':
-        case 'Review':
-        case 'Recipe':
-        case 'Interview':
-            return true;
-        case 'Live':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Analysis':
-        case 'Article':
-        case 'SpecialReport':
-        case 'MatchReport':
-        case 'GuardianView':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Comment':
-        case 'Immersive':
-        default:
+    switch (display) {
+        case 'immersive':
             return false;
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'Feature':
+                case 'Review':
+                case 'Recipe':
+                case 'Interview':
+                    return true;
+                case 'Live':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'GuardianView':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Comment':
+                case 'Immersive':
+                default:
+                    return false;
+            }
+        }
     }
 };
 
 const shouldShowContributor = (designType: DesignType, display: Display) => {
-    if (display === 'immersive') {
-        return false;
-    }
-
-    switch (designType) {
-        case 'Comment':
-        case 'GuardianView':
+    switch (display) {
+        case 'immersive':
             return false;
-        case 'Feature':
-        case 'Review':
-        case 'Live':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Interview':
-        case 'Analysis':
-        case 'Article':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Immersive':
-        default:
-            return true;
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return false;
+                case 'Feature':
+                case 'Review':
+                case 'Live':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Interview':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                default:
+                    return true;
+            }
+        }
     }
 };
 
