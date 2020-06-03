@@ -394,7 +394,7 @@ const submitButtonStyles = css``;
 const errorStyles = css``;
 
 // a hack used to make sure we do not highlight the openCallout button on first render
-let isFirstTimeRendering = true
+let isFirstTimeRendering = true;
 
 export const Callout = ({
     campaign,
@@ -426,7 +426,7 @@ export const Callout = ({
 
         // on open form, focus on firstFieldElementRef
         if (isExpanded && !isFirstTimeRendering) {
-            isFirstTimeRendering = false
+            isFirstTimeRendering = false;
             firstFieldElementRef && firstFieldElementRef.focus();
         } else {
             openCalloutRef && openCalloutRef.focus();
@@ -495,7 +495,7 @@ export const Callout = ({
 
         if (twitterHandle) {
             setError('Sorry we think you are a robot.');
-            return
+            return;
         }
         // need to add prefix `field_` to all keys in form
         const formDataWithFieldPrefix = Object.keys(formData).reduce(
@@ -535,23 +535,19 @@ export const Callout = ({
                 className={cx(snippetStyles, {
                     [backgroundColorStyle]: isExpanded || submissionSuccess,
                 })}
-                // we want to prevent default behavior of `details` HTML element
-                // however we do not want to affect other elements from event bubbling
-                onClick={event => {
-                    const target = event.target as HTMLElement;
-                    if (
-                        target.tagName !== 'BUTTON' &&
-                        target.tagName !== 'INPUT' &&
-                        target.tagName !== 'A'
-                    ) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                }}
                 aria-hidden={true}
                 open={isExpanded}
             >
-                <summary className={summeryStyles}>
+                <summary
+                    className={summeryStyles}
+                    onClick={event => {
+                        const target = event.target as HTMLElement;
+                        if (target.tagName !== 'A') {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                    }}
+                >
                     <div className={summeryContentWrapper}>
                         <div className={speechBubbleWrapperStyles}>
                             <div className={speechBubbleStyles(pillar)}>
