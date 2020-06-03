@@ -7,6 +7,7 @@ import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
     display: Display;
+    designType: DesignType;
     tags: TagType[];
     sectionLabel: string;
     sectionUrl: string;
@@ -49,6 +50,7 @@ const marginBottom = css`
 
 export const ArticleTitle = ({
     display,
+    designType,
     tags,
     sectionLabel,
     sectionUrl,
@@ -70,6 +72,7 @@ export const ArticleTitle = ({
         >
             <SeriesSectionLink
                 display={display}
+                designType={designType}
                 tags={tags}
                 sectionLabel={sectionLabel}
                 sectionUrl={sectionUrl}

@@ -311,6 +311,7 @@ export const ImmersiveLayout = ({
                                 >
                                     <ArticleTitle
                                         display={display}
+                                        designType={designType}
                                         tags={CAPI.tags}
                                         sectionLabel={CAPI.sectionLabel}
                                         sectionUrl={CAPI.sectionUrl}

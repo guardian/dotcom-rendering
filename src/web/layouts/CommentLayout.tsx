@@ -317,6 +317,7 @@ export const CommentLayout = ({
                     <GridItem area="title">
                         <ArticleTitle
                             display={display}
+                            designType={designType}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}

@@ -18,6 +18,8 @@ const CAPI = {
     guardianBaseURL: 'https://theguardian.com',
     inLeftCol: true,
     fallbackToSection: true,
+    sectionLabel: 'Section label',
+    sectionUrl: '/section_url',
 };
 const brexitCAPI = {
     ...CAPI,
@@ -53,8 +55,13 @@ export default {
 export const defaultStory = () => {
     return (
         <Container>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <ArticleTitle {...brexitCAPI} display="standard" pillar="sport" />
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...brexitCAPI}
+                display="standard"
+                pillar="sport"
+                designType="Article"
+            />
         </Container>
     );
 };
@@ -68,8 +75,159 @@ export const beyondTheBlade = () => {
                 {...beyondTheBladeCAPI}
                 display="standard"
                 pillar="news"
+                designType="Article"
             />
         </Container>
     );
 };
 beyondTheBlade.story = { name: 'Beyond the blade badge' };
+
+export const immersiveComment = () => {
+    return (
+        <div
+            className={css`
+                background-color: lightgray;
+                padding: 20px;
+            `}
+        >
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...brexitCAPI}
+                display="immersive"
+                pillar="sport"
+                designType="Comment"
+            />
+        </div>
+    );
+};
+immersiveComment.story = { name: 'Immersive comment piece' };
+
+export const immersiveCommentTag = () => {
+    return (
+        <div
+            className={css`
+                background-color: lightgray;
+                padding: 20px;
+            `}
+        >
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="immersive"
+                pillar="sport"
+                designType="Comment"
+                tags={[
+                    {
+                        id: '',
+                        title: 'Tag title',
+                        type: 'Blog',
+                    },
+                ]}
+            />
+        </div>
+    );
+};
+immersiveCommentTag.story = { name: 'Immersive comment piece with Blog tag' };
+
+export const ImmersiveSeriesTag = () => {
+    return (
+        <Container>
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="immersive"
+                pillar="sport"
+                designType="Review"
+                tags={[
+                    {
+                        id: '',
+                        title: 'Series title',
+                        type: 'Series',
+                    },
+                ]}
+            />
+        </Container>
+    );
+};
+ImmersiveSeriesTag.story = { name: 'Immersive with a Series tag' };
+
+export const ArticleBlogTag = () => {
+    return (
+        <Container>
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="standard"
+                pillar="sport"
+                designType="Article"
+                tags={[
+                    {
+                        id: '',
+                        title: 'Blog title',
+                        type: 'Blog',
+                    },
+                ]}
+            />
+        </Container>
+    );
+};
+ArticleBlogTag.story = { name: 'Article with a Blog tag' };
+
+export const ArticleOpinionTag = () => {
+    return (
+        <Container>
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="standard"
+                pillar="sport"
+                designType="Article"
+                tags={[
+                    {
+                        id: '',
+                        title: 'Opinion title',
+                        type: 'Opinion',
+                    },
+                ]}
+            />
+        </Container>
+    );
+};
+ArticleOpinionTag.story = { name: 'Article with a Opinion tag' };
+
+export const ArticleSeriesTag = () => {
+    return (
+        <Container>
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="standard"
+                pillar="sport"
+                designType="Article"
+                tags={[
+                    {
+                        id: '',
+                        title: 'Series title',
+                        type: 'Series',
+                    },
+                ]}
+            />
+        </Container>
+    );
+};
+ArticleSeriesTag.story = { name: 'Article with a Series tag' };
+
+export const ArticleNoTags = () => {
+    return (
+        <Container>
+            <ArticleTitle
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...CAPI}
+                display="standard"
+                pillar="culture"
+                designType="Article"
+            />
+        </Container>
+    );
+};
+ArticleNoTags.story = { name: 'Article with no tags' };
