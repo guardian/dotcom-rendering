@@ -627,7 +627,7 @@ export const Callout = ({
                             name="twitter-handle"
                             type="text"
                             id="twitter-handle"
-                            tabindex="-1"
+                            tabIndex={-1}
                             placeholder="@mytwitterhandle"
                             value={twitterHandle}
                             onChange={e => setTwitterHandle(e.target.value)}
