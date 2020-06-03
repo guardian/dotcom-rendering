@@ -133,6 +133,13 @@ const blackBackground = css`
     background-color: black;
 `;
 
+const invertedText = css`
+    color: white;
+    white-space: pre-wrap;
+    padding-bottom: ${space[1]}px;
+    padding-right: ${space[1]}px;
+`;
+
 const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
@@ -166,38 +173,75 @@ export const ArticleHeadline = ({
 }: Props) => {
     switch (display) {
         case 'immersive': {
-            if (noMainMedia) {
-                return (
-                    // Immersive headlines have two versions, with main media, and (this one) without
-                    <h1
-                        className={cx(
-                            jumboFont,
-                            maxWidth,
-                            immersiveStyles,
-                            displayBlock,
-                        )}
-                    >
-                        {curly(headlineString)}
-                    </h1>
-                );
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return (
+                        <>
+                            <h1 className={cx(lightFont, invertedText)}>
+                                {curly(headlineString)}
+                            </h1>
+                            {byline && (
+                                <HeadlineByline
+                                    display={display}
+                                    designType={designType}
+                                    pillar={pillar}
+                                    byline={byline}
+                                    tags={tags}
+                                />
+                            )}
+                        </>
+                    );
+                case 'Review':
+                case 'Recipe':
+                case 'Feature':
+                case 'Analysis':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Article':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                default:
+                    if (noMainMedia) {
+                        return (
+                            // Immersive headlines have two versions, with main media, and (this one) without
+                            <h1
+                                className={cx(
+                                    jumboFont,
+                                    maxWidth,
+                                    immersiveStyles,
+                                    displayBlock,
+                                )}
+                            >
+                                {curly(headlineString)}
+                            </h1>
+                        );
+                    }
+                    return (
+                        // Immersive headlines with main media present, are large and inverted with
+                        // a black background
+                        <h1 className={cx(invertedWrapper, blackBackground)}>
+                            <span
+                                className={cx(
+                                    jumboFont,
+                                    maxWidth,
+                                    invertedStyles,
+                                    immersiveStyles,
+                                    displayBlock,
+                                )}
+                            >
+                                {curly(headlineString)}
+                            </span>
+                        </h1>
+                    );
             }
-            return (
-                // Immersive headlines with main media present, are large and inverted with
-                // a black background
-                <h1 className={cx(invertedWrapper, blackBackground)}>
-                    <span
-                        className={cx(
-                            jumboFont,
-                            maxWidth,
-                            invertedStyles,
-                            immersiveStyles,
-                            displayBlock,
-                        )}
-                    >
-                        {curly(headlineString)}
-                    </span>
-                </h1>
-            );
+            break;
         }
         case 'showcase':
         case 'standard': {
