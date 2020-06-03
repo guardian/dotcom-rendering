@@ -6,12 +6,14 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 import { TextInput } from '@guardian/src-text-input';
-import { RadioGroup, Radio } from '@guardian/src-radio';
-import { CheckboxGroup, Checkbox } from '@guardian/src-checkbox';
 import { Link } from '@guardian/src-link';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
+
+import { RadioWrapper } from './RadioWrapper';
+import { CheckboxWrapper } from './CheckboxWrapper';
+import { FieldLabel } from './FieldLabel';
 
 type fieldProp = {
     formField: CampaignsFeildType;
@@ -19,20 +21,6 @@ type fieldProp = {
     setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
     firstFieldElementRef?: React.RefObject<HTMLElement> | null | undefined;
 };
-
-const fieldLabelStyles = css`
-    ${textSans.medium({ fontWeight: 'bold' })}
-`;
-
-const fieldDescription = css`
-    ${textSans.medium()}
-`;
-
-const optionalTextStyles = css`
-    ${textSans.small({ fontStyle: 'italic' })}
-    color: ${neutral[46]};
-    padding-left: 5px;
-`;
 
 const textAreaStyles = css`
     width: 100%;
@@ -42,134 +30,6 @@ const fileUploadInputStyles = css`
     padding-top: 10px;
     padding-bottom: 10px;
 `;
-
-const FieldLabel = ({ formField }: { formField: CampaignsFeildType }) => (
-    <label className={fieldLabelStyles} htmlFor={formField.name}>
-        <div>
-            {formField.label}
-            {formField.required === '1' && (
-                <span className={optionalTextStyles}>Optional</span>
-            )}
-        </div>
-        {formField.description && (
-            <div>
-                <span className={fieldDescription}>
-                    {`(${formField.description})`}
-                </span>
-            </div>
-        )}
-    </label>
-);
-
-// We encapsulate the Componet's state here instead of directly sourcing it from
-// `formData` to avoid unnessesary rerenders, as this was causing selection animation
-// to be applied whenever formData was changin
-const CheckboxWrapper = ({
-    formField,
-    formData,
-    setFormData,
-}: // firstFieldElementRef
-fieldProp) => {
-    const [state, setState] = useState([]);
-    useEffect(() => {
-        setFormData({
-            ...formData,
-            [formField.id || '']: state,
-        });
-    }, [state]);
-
-    return (
-        <>
-            <FieldLabel formField={formField} />
-            {formField.options && (
-                <CheckboxGroup name={formField.name || ''}>
-                    {formField.options.map((option, index) => {
-                        const checkboxSelection =
-                            formField.id && formField.id in formData
-                                ? formData[formField.id]
-                                : [];
-                        const isCheckboxChecked = checkboxSelection.find(
-                            (ele: string) => ele === option.value,
-                        );
-                        return (
-                            <Checkbox
-                                key={index}
-                                label={option.value}
-                                value={option.value}
-                                name={`${formField.id}`}
-                                checked={!!isCheckboxChecked}
-                                onChange={() => {
-                                    setState(
-                                        isCheckboxChecked
-                                            ? checkboxSelection.filter(
-                                                  (ele: string) =>
-                                                      ele !== option.value,
-                                              )
-                                            : [
-                                                  ...checkboxSelection,
-                                                  option.value,
-                                              ],
-                                    );
-                                }}
-                                // TODO: use ref once forwardRef is implemented @guardian/src-button
-                                // ref={index === 0 && firstFieldElementRef}
-                            />
-                        );
-                    })}
-                </CheckboxGroup>
-            )}
-        </>
-    );
-};
-
-// We encapsulate the Componet's state here instead of directly sourcing it from
-// `formData` to avoid unnessesary rerenders, as this was causing selection animation
-// to be applied whenever formData was changin
-const RadioWrapper = ({
-    formField,
-    formData,
-    setFormData,
-}: // firstFieldElementRef
-fieldProp) => {
-    const [state, setState] = useState();
-    useEffect(() => {
-        setFormData({
-            ...formData,
-            [formField.id || '']: state,
-        });
-    }, [state]);
-
-    return (
-        <>
-            <FieldLabel formField={formField} />
-            {formField.options && (
-                <RadioGroup
-                    name={formField.name || ''}
-                    orientation="horizontal"
-                >
-                    {formField.options.map((option, index) => {
-                        const isRadioChecked =
-                            formField.id &&
-                            formField.id in formData &&
-                            formData[formField.id] === option.value;
-                        return (
-                            <Radio
-                                key={index}
-                                label={option.value}
-                                value={option.value}
-                                name={`${formField.id}`}
-                                checked={!!isRadioChecked}
-                                onChange={() => setState(option.value)}
-                                // TODO: use ref once forwardRef is implemented @guardian/src-button
-                                // ref={index === 0 && firstFieldElementRef}
-                            />
-                        );
-                    })}
-                </RadioGroup>
-            )}
-        </>
-    );
-};
 
 const addFormField = ({
     formField,
@@ -195,8 +55,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
                         // ref={firstFieldElementRef}
                     />
@@ -217,8 +76,7 @@ const addFormField = ({
                                 ...formData,
                                 [formField.id || '']:
                                     e.target.files && e.target.files[0],
-                            })
-                        }
+                            })}
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
                         // ref={firstFieldElementRef}
                     />
@@ -243,8 +101,7 @@ const addFormField = ({
                             setFormData({
                                 ...formData,
                                 [formField.id || '']: e.target.value,
-                            })
-                        }
+                            })}
                         // TODO: use ref once forwardRef is implemented @guardian/src-button
                         // ref={firstFieldElementRef}
                     >
@@ -257,6 +114,9 @@ const addFormField = ({
                     </select>
                 </>
             );
+        // We encapsulate the Componet's state here instead of directly sourcing it from
+        // `formData` to avoid unnessesary rerenders, as this was causing selection animation
+        // to be applied whenever formData was changing
         case 'radio':
             return (
                 <RadioWrapper
@@ -266,6 +126,9 @@ const addFormField = ({
                     firstFieldElementRef={firstFieldElementRef}
                 />
             );
+        // We encapsulate the Componet's state here instead of directly sourcing it from
+        // `formData` to avoid unnessesary rerenders, as this was causing selection animation
+        // to be applied whenever formData was changing
         case 'checkbox':
             return (
                 <CheckboxWrapper
@@ -292,8 +155,7 @@ const addFormField = ({
                         setFormData({
                             ...formData,
                             [formField.id || '']: e.target.value,
-                        })
-                    }
+                        })}
                     // TODO: use ref once forwardRef is implemented @guardian/src-button
                     // ref={firstFieldElementRef}
                 />
@@ -396,6 +258,10 @@ const errorStyles = css``;
 // a hack used to make sure we do not highlight the openCallout button on first render
 let isFirstTimeRendering = true;
 
+let openCalloutRef: HTMLButtonElement | null = null;
+let firstFieldElementRef: HTMLElement | null = null;
+let lastElementRef: HTMLButtonElement | null = null;
+
 export const Callout = ({
     campaign,
     pillar,
@@ -407,12 +273,10 @@ export const Callout = ({
     const [error, setError] = useState('');
     const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
-    let openCalloutRef: HTMLElement | null = null;
-    let firstFieldElementRef: HTMLElement | null = null;
-    let lastElementRef: HTMLElement | null = null;
-
-    // select each DOM element on form expand
     useEffect(() => {
+        // select each DOM element on form expand
+        // we have to use this instead of refs as src-* libs do not yet
+        // support forward ref
         openCalloutRef = document.querySelector(
             'button[custom-guardian="callout-form-open-button"]',
         );
