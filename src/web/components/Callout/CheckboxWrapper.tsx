@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { CheckboxGroup, Checkbox } from '@guardian/src-checkbox';
 import { FieldLabel } from './FieldLabel';
@@ -19,12 +19,13 @@ export const CheckboxWrapper = ({
     setFormData,
 }: fieldProp) => {
     const [state, setState] = useState([]);
-    useEffect(() => {
+    const updateState = (newState: []) => {
+        setState(newState);
         setFormData({
             ...formData,
             [formField.id || '']: state,
         });
-    }, [state]);
+    };
 
     return (
         <>
@@ -47,7 +48,7 @@ export const CheckboxWrapper = ({
                                 name={`${formField.id}`}
                                 checked={!!isCheckboxChecked}
                                 onChange={() => {
-                                    setState(
+                                    updateState(
                                         isCheckboxChecked
                                             ? checkboxSelection.filter(
                                                   (ele: string) =>

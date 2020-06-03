@@ -291,8 +291,10 @@ export const Callout = ({
         // on open form, focus on firstFieldElementRef
         if (isExpanded && !isFirstTimeRendering) {
             isFirstTimeRendering = false;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             firstFieldElementRef && firstFieldElementRef.focus();
         } else {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             openCalloutRef && openCalloutRef.focus();
         }
 
@@ -306,6 +308,7 @@ export const Callout = ({
                 // we use `e.shiftKey` internally to determin the direction of the highlighting
                 // using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
                 if (!e.shiftKey && document.activeElement === lastElementRef) {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     firstFieldElementRef && firstFieldElementRef.focus();
                     e.preventDefault();
                 }
@@ -314,6 +317,7 @@ export const Callout = ({
                     e.shiftKey &&
                     document.activeElement === firstFieldElementRef
                 ) {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
                     e.preventDefault();
                 }
@@ -331,16 +335,11 @@ export const Callout = ({
                 setIsExpanded(false);
             }
         };
-        isExpanded && document.addEventListener('keydown', keyListener);
+        if (isExpanded) {
+            document.addEventListener('keydown', keyListener);
+        }
         return () => document.removeEventListener('keydown', keyListener);
     }, [isExpanded, setIsExpanded]);
-
-    // highlight first element on expand
-    useEffect(() => {
-        if (isExpanded) {
-            firstFieldElementRef && firstFieldElementRef.focus();
-        }
-    }, [isExpanded, firstFieldElementRef]);
 
     // As the form is dynamically rendered, we cannot have
     // individual setStates for each field
@@ -404,6 +403,7 @@ export const Callout = ({
             >
                 <summary
                     className={summeryStyles}
+                    role="none"
                     onClick={event => {
                         const target = event.target as HTMLElement;
                         if (target.tagName !== 'A') {

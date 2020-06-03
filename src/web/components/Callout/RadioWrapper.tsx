@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { RadioGroup, Radio } from '@guardian/src-radio';
 import { FieldLabel } from './FieldLabel';
@@ -19,12 +19,13 @@ export const RadioWrapper = ({
     setFormData,
 }: fieldProp) => {
     const [state, setState] = useState();
-    useEffect(() => {
+    const updateState = (newState: string) => {
+        setState(newState);
         setFormData({
             ...formData,
             [formField.id || '']: state,
         });
-    }, [state]);
+    };
 
     return (
         <>
@@ -46,7 +47,7 @@ export const RadioWrapper = ({
                                 value={option.value}
                                 name={`${formField.id}`}
                                 checked={!!isRadioChecked}
-                                onChange={() => setState(option.value)}
+                                onChange={() => updateState(option.value)}
                                 // TODO: use ref once forwardRef is implemented @guardian/src-button
                                 // ref={index === 0 && firstFieldElementRef}
                             />
