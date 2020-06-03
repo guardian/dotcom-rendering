@@ -495,6 +495,7 @@ export const Callout = ({
 
         if (twitterHandle) {
             setError('Sorry we think you are a robot.');
+            return
         }
         // need to add prefix `field_` to all keys in form
         const formDataWithFieldPrefix = Object.keys(formData).reduce(
