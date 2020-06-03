@@ -54,13 +54,13 @@ function topicClick(e: Event): void {
                 if (status?.textContent && success) {
                     status.textContent = followingText;
                 }
-            }).catch(error => console.log(error))
+            })
         } else {
             notificationsClient.unfollow(topic).then(success => {
                 if (status?.textContent && success) {
                     status.textContent = followText;
                 }
-            }).catch(error => console.log(error))
+            })
         }
     }
 }
