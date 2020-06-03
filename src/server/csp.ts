@@ -48,7 +48,7 @@ const assetHashes = (assets: string[]): string =>
 const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     default-src 'self';
     style-src ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};
-    img-src 'self' https://i.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
+    img-src 'self' https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
     script-src 'self' ${assetHashes(scripts)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
     frame-src ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
