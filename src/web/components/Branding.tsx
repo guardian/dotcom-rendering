@@ -1,29 +1,31 @@
 import React from 'react';
-import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
+import { pillarPalette } from '@root/src/lib/pillars';
 
-const brandingStyle = (pillar: Pillar) => css`
+const brandingStyle = css`
     padding-bottom: 10px;
-    ${LinkStyle(pillar)}
-
-    a, a:hover {
-        display: block;
-        border-bottom: none;
-        ${textSans.xsmall()}
-    }
 `;
 
 const brandingLabelStyle = css`
-    ${textSans.xsmall()};
-    color: ${palette.neutral[46]};
-    font-weight: bold;
+    ${textSans.xsmall({ fontWeight: 'bold' })};
+    color: ${neutral[46]};
 `;
 
 const brandingLogoStyle = css`
     padding: 10px 0;
+`;
+
+const brandingAboutLink = (pillar: Pillar) => css`
+    color: ${pillarPalette[pillar].main};
+    ${textSans.xsmall()}
+    display: block;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 export const Branding: React.FC<{
@@ -32,7 +34,7 @@ export const Branding: React.FC<{
 }> = ({ branding, pillar }) => {
     if (!branding) return null;
     return (
-        <div className={brandingStyle(pillar)}>
+        <div className={brandingStyle}>
             <div className={brandingLabelStyle}>{branding.logo.label}</div>
             <a
                 className={brandingLogoStyle}
@@ -48,7 +50,12 @@ export const Branding: React.FC<{
                     alt={branding.sponsorName}
                 />
             </a>
-            <a href={branding.aboutThisLink}>About this content</a>
+            <a
+                href={branding.aboutThisLink}
+                className={brandingAboutLink(pillar)}
+            >
+                About this content
+            </a>
         </div>
     );
 };
