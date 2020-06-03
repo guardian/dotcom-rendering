@@ -123,7 +123,7 @@ export const SeriesSectionLink = ({
                         // We have a tag, we're not immersive, show both series and section titles
                         return (
                             // Sometimes the tags/titles are shown inline, sometimes stacked
-                            <div className={marginBottom}>
+                            <div className={cx(!badge && rowBelowLeftCol)}>
                                 <a
                                     href={`${guardianBaseURL}/${tag.id}`}
                                     className={cx(
@@ -156,18 +156,20 @@ export const SeriesSectionLink = ({
                     }
                     // There's no tag so fallback to section title
                     return (
-                        <a
-                            href={`${guardianBaseURL}/${sectionUrl}`}
-                            className={cx(
-                                sectionLabelLink,
-                                primaryStyle,
-                                whiteFont,
-                            )}
-                            data-component="section"
-                            data-link-name="article section"
-                        >
-                            <span>{sectionLabel}</span>
-                        </a>
+                        <div className={marginBottom}>
+                            <a
+                                href={`${guardianBaseURL}/${sectionUrl}`}
+                                className={cx(
+                                    sectionLabelLink,
+                                    primaryStyle,
+                                    whiteFont,
+                                )}
+                                data-component="section"
+                                data-link-name="article section"
+                            >
+                                <span>{sectionLabel}</span>
+                            </a>
+                        </div>
                     );
                 }
                 case 'Feature':
