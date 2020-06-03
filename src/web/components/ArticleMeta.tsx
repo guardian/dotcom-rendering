@@ -6,6 +6,7 @@ import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
+import { Branding } from '@root/src/web/components/Branding';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
@@ -18,6 +19,7 @@ type Props = {
     author: AuthorType;
     tags: TagType[];
     webPublicationDateDisplay: string;
+    branding?: Branding;
 };
 
 const meta = css`
@@ -197,6 +199,7 @@ const RowBelowLeftCol = ({
 );
 
 export const ArticleMeta = ({
+    branding,
     display,
     designType,
     pillar,
@@ -215,10 +218,10 @@ export const ArticleMeta = ({
 
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
-
     return (
         <div className={metaContainer}>
             <div className={cx(meta)}>
+                {branding && <Branding branding={branding} pillar={pillar} />}
                 <RowBelowLeftCol>
                     <>
                         {showAvatar && bylineImageUrl && (

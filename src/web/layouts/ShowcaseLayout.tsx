@@ -263,6 +263,8 @@ export const ShowcaseLayout = ({
 
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
+    const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
     return (
         <>
             <div>
@@ -415,6 +417,7 @@ export const ShowcaseLayout = ({
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                branding={branding}
                                 display={display}
                                 designType={designType}
                                 pillar={pillar}
