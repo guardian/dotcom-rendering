@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { css } from 'emotion';
 import { HeadlineByline } from './HeadlineByline';
 
 export default {
@@ -51,6 +51,32 @@ export const immersiveStory = () => {
     );
 };
 immersiveStory.story = { name: 'Immersive' };
+
+export const ImmersiveComment = () => {
+    return (
+        <div
+            className={css`
+                background-color: lightgray;
+                padding: 20px;
+            `}
+        >
+            <HeadlineByline
+                display="immersive"
+                designType="Comment"
+                pillar="lifestyle"
+                byline="Jane Smith"
+                tags={[
+                    {
+                        id: '1',
+                        type: 'Contributor',
+                        title: 'Jane Smith',
+                    },
+                ]}
+            />
+        </div>
+    );
+};
+ImmersiveComment.story = { name: 'Immersive Comment' };
 
 export const MultipleStory = () => {
     return (
