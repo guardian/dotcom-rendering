@@ -87,49 +87,53 @@ export const HeadlineByline = ({
     byline,
     tags,
 }: Props) => {
-    if (display === 'immersive') {
-        return (
-            <div className={immersiveStyles}>
-                by{' '}
-                <span className={immersiveLinkStyles(pillar)}>
-                    <BylineLink byline={byline} tags={tags} />
-                </span>
-            </div>
-        );
-    }
-
-    switch (designType) {
-        case 'Interview':
+    switch (display) {
+        case 'immersive': {
             return (
-                <div className={wrapperStyles}>
-                    <div className={yellowBoxStyles}>
+                <div className={immersiveStyles}>
+                    by{' '}
+                    <span className={immersiveLinkStyles(pillar)}>
                         <BylineLink byline={byline} tags={tags} />
-                    </div>
+                    </span>
                 </div>
             );
-        case 'GuardianView':
-        case 'Comment':
-            return (
-                <div className={opinionStyles(pillar)}>
-                    <BylineLink byline={byline} tags={tags} />
-                </div>
-            );
+        }
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'Interview':
+                    return (
+                        <div className={wrapperStyles}>
+                            <div className={yellowBoxStyles}>
+                                <BylineLink byline={byline} tags={tags} />
+                            </div>
+                        </div>
+                    );
+                case 'GuardianView':
+                case 'Comment':
+                    return (
+                        <div className={opinionStyles(pillar)}>
+                            <BylineLink byline={byline} tags={tags} />
+                        </div>
+                    );
 
-        case 'Immersive':
-        case 'Analysis':
-        case 'Feature':
-        case 'Article':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Review':
-        case 'Live':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        default:
-            return null;
+                case 'Immersive':
+                case 'Analysis':
+                case 'Feature':
+                case 'Article':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Review':
+                case 'Live':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                default:
+                    return null;
+            }
+        }
     }
 };
