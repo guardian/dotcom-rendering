@@ -68,6 +68,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <ImageBlockComponent
                             display={display}
+                            designType={designType}
                             key={i}
                             element={element}
                             pillar={pillar}

@@ -382,6 +382,7 @@ export const StandardLayout = ({
                         <div className={maxWidth}>
                             <MainMedia
                                 display={display}
+                                designType={designType}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}

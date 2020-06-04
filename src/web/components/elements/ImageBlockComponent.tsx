@@ -6,6 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     display: Display;
+    designType: DesignType;
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
@@ -112,6 +113,7 @@ const decidePosition = (role: RoleType) => {
 
 export const ImageBlockComponent = ({
     display,
+    designType,
     element,
     pillar,
     hideCaption,
@@ -121,6 +123,7 @@ export const ImageBlockComponent = ({
         <div className={decidePosition(role)}>
             <ImageComponent
                 display={display}
+                designType={designType}
                 element={element}
                 pillar={pillar}
                 hideCaption={hideCaption}
