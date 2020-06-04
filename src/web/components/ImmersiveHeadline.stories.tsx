@@ -19,6 +19,7 @@ export const Short = () => (
         >
             <MainMedia
                 display="immersive"
+                designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
                 pillar="news"
@@ -49,6 +50,7 @@ export const Long = () => (
         >
             <MainMedia
                 display="immersive"
+                designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
                 pillar="news"

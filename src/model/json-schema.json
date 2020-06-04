@@ -51,6 +51,9 @@
                         "$ref": "#/definitions/EmbedBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/ExplainerAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/GuideBlockElement"
                     },
                     {
@@ -616,6 +619,32 @@
                 "_type",
                 "html",
                 "isMandatory"
+            ]
+        },
+        "ExplainerAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ExplainerAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "body",
+                "id",
+                "title"
             ]
         },
         "GuideBlockElement": {
@@ -1423,6 +1452,9 @@
                             },
                             {
                                 "$ref": "#/definitions/EmbedBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/ExplainerAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/GuideBlockElement"

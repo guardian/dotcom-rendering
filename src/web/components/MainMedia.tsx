@@ -40,6 +40,7 @@ const noGutters = css`
 
 function renderElement(
     display: Display,
+    designType: DesignType,
     element: CAPIElement,
     pillar: Pillar,
     i: number,
@@ -52,6 +53,7 @@ function renderElement(
             return (
                 <ImageComponent
                     display={display}
+                    designType={designType}
                     key={i}
                     element={element}
                     pillar={pillar}
@@ -86,16 +88,26 @@ function renderElement(
 
 export const MainMedia: React.FC<{
     display: Display;
+    designType: DesignType;
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
     adTargeting?: AdTargeting;
     starRating?: number;
-}> = ({ display, elements, pillar, hideCaption, adTargeting, starRating }) => (
+}> = ({
+    display,
+    designType,
+    elements,
+    pillar,
+    hideCaption,
+    adTargeting,
+    starRating,
+}) => (
     <div className={cx(mainMedia, display !== 'immersive' && noGutters)}>
         {elements.map((element, i) =>
             renderElement(
                 display,
+                designType,
                 element,
                 pillar,
                 i,

@@ -88,12 +88,11 @@ TimelineBlockElement
     -> [amp] TimelineBlockComponent
 ```
 
+## Atom Documentation
 
-### Todo
+### AudioAtom
 
-This section contains all the work that need to be done as part of this atom migration.
-
-- Build a DCR component that utilises the AudioAtom data passed to DCR by the backend carried by `AudioAtomBlockElement`
+`AudioAtomBlockElement`
 
 	```
 	case class AudioAtomBlockElement(
@@ -105,5 +104,124 @@ This section contains all the work that need to be done as part of this atom mig
 	    contentId: String
 	) extends PageElement
 	```
-	
-	And example of a page with an AudioAtom is [here](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may), and the data is already is the [data sent to DCR](https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may.json?dcr).
+
+AMP: See `AudioAtomBlockComponent` ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### ChartAtom
+
+Comes to DCR as `AtomEmbedUrlBlockElement` 
+
+AMP: See `AtomEmbedUrlBlockComponent` ✅
+
+WEB: Currently not supported. Should be rendered using an iframe as it is treated as interactive. 🚧
+
+### CommonsDivision
+
+I question whether we should be supporting it in the first place given how very rare it is.
+
+### ExplainerAtom
+```
+case class ExplainerAtomBlockElement(
+    id: String, 
+    title: String, 
+    body: String, 
+    displayType: String
+) extends PageElement
+```
+
+AMP: Currently not supported.
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### InteractiveAtom
+
+```
+case class AtomEmbedUrlBlockElement(
+	url: String
+) extends PageElement
+```
+
+AMP: AtomEmbedUrlBlockComponent ✅
+
+WEB: Currently not supported. Should be rendered using an iframe. 🚧
+
+### GuideAtom
+
+```
+case class ProfileBlockElement(
+	id: String, 
+	label: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### MediaAtom
+
+The MediaAtom is sent to DCR either as `YoutubeBlockElement` or `HTMLFallbackBlockElement`.
+
+```
+case class YoutubeBlockElement(
+	id: String, 
+	assetId: String, 
+	channelId: Option[String], 
+	mediaTitle: String
+) extends PageElement
+```
+
+AMP: YoutubeBlockComponent ✅
+
+WEB: YoutubeBlockComponent ✅
+
+### ProfileAtom
+
+```
+case class ProfileBlockElement(
+	id: String, 
+	label: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### QuandaAtom
+
+```
+case class QABlockElement(
+	id: String, 
+	title: String, 
+	img: Option[String], 
+	html: String, 
+	credit: String
+) extends PageElement
+```
+
+AMP: Expandable (Component) ✅
+
+WEB: Currently not supported. Awaiting new Atom library. 🚧
+
+### QuizAtom
+
+Undocumented for the moment 🚧 ‼️
+
+### RecipeAtom
+
+I am not sure it's ever been used. ‼️
+
+### ReviewAtom
+
+Not found in AtomWorkshop ‼️ (According to Alex W. there actually isn't one.)

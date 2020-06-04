@@ -29,7 +29,7 @@ const links = [
 const LABEL = 'Dropdown label';
 
 describe('Dropdown', () => {
-    it('should display the given label', () => {
+    it('should display the given label', () => {
         const { getByText } = render(
             <Dropdown
                 id="abc"
@@ -42,7 +42,7 @@ describe('Dropdown', () => {
         expect(getByText(LABEL)).toBeInTheDocument();
     });
 
-    it('should display link titles', () => {
+    it('should display link titles', () => {
         const { getByText } = render(
             <Dropdown
                 id="abc"
@@ -58,7 +58,7 @@ describe('Dropdown', () => {
         expect(getByText(links[3].title)).toBeInTheDocument();
     });
 
-    it('should render the correct number of link items', () => {
+    it('should render the correct number of link items', () => {
         const { container } = render(
             <Dropdown
                 id="abc"
@@ -73,7 +73,7 @@ describe('Dropdown', () => {
         expect(listItems.length).toEqual(links.length);
     });
 
-    it('should expand the menu when clicked upon', () => {
+    it('should expand the menu when clicked upon', () => {
         const { container, getByRole } = render(
             <Dropdown
                 id="abc"
@@ -85,12 +85,12 @@ describe('Dropdown', () => {
 
         const ulElement = container.querySelector('ul');
 
-        expect(ulElement).toHaveStyle('display: none');
+        expect(ulElement).toHaveStyle('display: none');
         fireEvent.click(getByRole('button'));
-        expect(ulElement).toHaveStyle('display: block');
+        expect(ulElement).toHaveStyle('display: block');
     });
 
-    it('should close the expanded menu when they click away', () => {
+    it('should close the expanded menu when they click away', () => {
         const { container, getByRole } = render(
             <Dropdown
                 id="abc"
@@ -103,12 +103,12 @@ describe('Dropdown', () => {
         const ulElement = container.querySelector('ul');
 
         fireEvent.click(getByRole('button'));
-        expect(ulElement).toHaveStyle('display: block');
+        expect(ulElement).toHaveStyle('display: block');
         container.click();
-        expect(ulElement).toHaveStyle('display: none');
+        expect(ulElement).toHaveStyle('display: none');
     });
 
-    it('should close the expanded menu when blurred', () => {
+    it('should close the expanded menu when blurred', () => {
         const { container, getByRole } = render(
             <Dropdown
                 id="abc"
@@ -121,8 +121,8 @@ describe('Dropdown', () => {
         const ulElement = container.querySelector('ul');
 
         fireEvent.click(getByRole('button'));
-        expect(ulElement).toHaveStyle('display: block');
+        expect(ulElement).toHaveStyle('display: block');
         fireEvent.keyDown(container, { key: 'Escape', code: 'Escape' });
-        expect(ulElement).toHaveStyle('display: none');
+        expect(ulElement).toHaveStyle('display: none');
     });
 });

@@ -4,7 +4,7 @@ import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const gutter = 20;
@@ -72,6 +72,10 @@ const supportingStyles = css`
     margin-right: 0.6rem;
     clear: left;
     float: left;
+
+    ${until.mobileMedium} {
+        width: 100%;
+    }
 
     ${from.leftCol} {
         margin-left: -${gutter / 2 + gsSpan(3) / 2}px;

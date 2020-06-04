@@ -75,6 +75,13 @@ interface EmbedBlockElement {
     isMandatory: boolean;
 }
 
+interface ExplainerAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement';
+    id: string;
+    title: string;
+    body: string;
+}
+
 interface GuideBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
     id: string;
@@ -255,6 +262,7 @@ type CAPIElement =
     | DividerBlockElement
     | DocumentBlockElement
     | EmbedBlockElement
+    | ExplainerAtomBlockElement
     | GuideBlockElement
     | GuVideoBlockElement
     | ImageBlockElement
