@@ -18,7 +18,7 @@ type Contributor = {
 
 // ----- Functions ----- //
 
-const contributorSrcset = srcsetWithWidths([32, 64, 128, 192, 256]);
+const contributorSrcset = srcsetWithWidths([32, 64, 128, 192, 256, 400, 600]);
 
 const isSingleContributor = (cs: Contributor[]): boolean =>
     cs.length === 1

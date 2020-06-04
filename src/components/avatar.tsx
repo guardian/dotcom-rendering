@@ -6,7 +6,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Contributor, isSingleContributor } from 'contributor';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
-import Img from './img';
+import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';
 
 

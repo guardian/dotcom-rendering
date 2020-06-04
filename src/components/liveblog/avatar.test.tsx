@@ -15,6 +15,14 @@ describe('Avatar component renders as expected', () => {
         image: new Some({
             src: '',
             srcset: '',
+            dpr2Srcset: '',
+            height: 192,
+            width: 192,
+            credit: new None(),
+            caption: new None(),
+            alt: new None(),
+            role: new None(),
+            nativeCaption: new None()
         }),
     }]
     it('Adds correct alt attribute', () => {
