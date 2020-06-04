@@ -2,11 +2,11 @@
 
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import React, { ReactElement } from 'react';
+import { Pillar, Display } from '@guardian/types/Format';
 
 import Standfirst from './standfirst';
-import { Item } from 'item';
-import { Pillar, Design, Display } from 'format';
-import { Option, None, Some } from 'types/option';
+import { Option } from 'types/option';
+import { article, review, feature, comment } from 'fixtures/item';
 import { parse } from 'client/parser';
 import { selectPillar } from 'storybookHelpers';
 
@@ -20,62 +20,37 @@ const standfirst: Option<DocumentFragment> =
     parseStandfirst('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>')
         .toOption();
 
-const item: Item = {
-    pillar: Pillar.News,
-    design: Design.Article,
-    display: Display.Standard,
-    body: [],
-    headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
-    standfirst,
-    byline: '',
-    bylineHtml: new None(),
-    publishDate: new None(),
-    mainImage: new None(),
-    contributors: [],
-    series: new Some({
-        id: '',
-        type: 0,
-        webTitle: '',
-        webUrl: '',
-        apiUrl: '',
-        references: [],
-    }),
-    commentable: false,
-    tags: [],
-    shouldHideReaderRevenue: false,
-};
-
 
 // ----- Stories ----- //
 
 const Default = (): ReactElement =>
     <Standfirst item={{
-        ...item,
+        ...article,
+        standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>
     <Standfirst item={{
-        ...item,
-        design: Design.Review,
-        starRating: 4,
+        ...review,
+        standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.Culture),
     }} />
 
 const Feature = (): ReactElement =>
     <Standfirst item={{
-        ...item,
-        design: Design.Feature,
+        ...feature,
+        standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.Sport),
     }} />
 
 const Comment = (): ReactElement =>
     <Standfirst item={{
-        ...item,
-        design: Design.Comment,
+        ...comment,
+        standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.Opinion),
     }} />

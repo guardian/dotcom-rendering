@@ -104,6 +104,7 @@ const listStyles: SerializedStyles = css`
     list-style: none;
     margin: ${remSpace[2]} 0;
     padding-left: 0;
+    clear: both;
 `;
 
 const listItemStyles: SerializedStyles = css`
@@ -342,6 +343,7 @@ const richLinkStyles = css`
         h1 {
             margin: ${basePx(0, 0, 2, 0)};
             ${headline.xxxsmall({ fontWeight: 'bold' })}
+            hyphens: auto;
         }
     }
 

@@ -2,40 +2,20 @@
 
 import React, { ReactElement } from 'react';
 import { withKnobs, boolean, radios } from '@storybook/addon-knobs';
+import { Pillar, Display } from '@guardian/types/Format';
 
 import Headline from './headline';
-import { Item } from 'item';
-import { Pillar, Design, Display } from 'format';
-import { None, Some } from 'types/option';
+import {
+    article,
+    analysis,
+    feature,
+    review,
+    advertisementFeature,
+} from 'fixtures/item';
 import { selectPillar } from 'storybookHelpers';
 
 
 // ----- Setup ----- //
-
-const item: Item = {
-    pillar: Pillar.News,
-    design: Design.Article,
-    display: Display.Standard,
-    body: [],
-    headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
-    standfirst: new None(),
-    byline: '',
-    bylineHtml: new None(),
-    publishDate: new None(),
-    mainImage: new None(),
-    contributors: [],
-    series: new Some({
-        id: '',
-        type: 0,
-        webTitle: '',
-        webUrl: '',
-        apiUrl: '',
-        references: [],
-    }),
-    commentable: false,
-    tags: [],
-    shouldHideReaderRevenue: false,
-};
 
 const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
 
@@ -44,38 +24,34 @@ const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
 
 const Default = (): ReactElement =>
     <Headline item={{
-        ...item,
+        ...article,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
     }} />
 
 const Analysis = (): ReactElement =>
     <Headline item={{
-        ...item,
-        design: Design.Analysis,
+        ...analysis,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.News),
     }} />
 
 const Feature = (): ReactElement =>
     <Headline item={{
-        ...item,
-        design: Design.Feature,
+        ...feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>
     <Headline item={{
-        ...item,
-        design: Design.Review,
+        ...review,
         starRating: radios('Rating', starRating, 3),
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
     }} />
 
 const Labs = (): ReactElement =>
     <Headline item={{
-        ...item,
-        design: Design.AdvertisementFeature,
+        ...advertisementFeature,
         display: Display.Standard,
     }} />
 
