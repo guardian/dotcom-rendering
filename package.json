@@ -108,9 +108,9 @@
     "storybook-chromatic": "^3.5.3",
     "ts-jest": "^26.1.0",
     "ts-loader": "^6.2.1",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
     "webpack-manifest-plugin": "^2.2.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
