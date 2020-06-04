@@ -248,6 +248,7 @@ export const ImmersiveLayout = ({
                     >
                         <MainMedia
                             display={display}
+                            designType={designType}
                             elements={CAPI.mainMediaElements}
                             pillar={pillar}
                             adTargeting={adTargeting}

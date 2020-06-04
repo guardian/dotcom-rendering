@@ -106,6 +106,7 @@ export const ShowcaseInterview = () => (
                 </div>
                 <MainMedia
                     display="standard"
+                    designType="Article"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"
@@ -138,6 +139,7 @@ export const Interview = () => (
                 />
                 <MainMedia
                     display="standard"
+                    designType="Article"
                     hideCaption={true}
                     elements={mainMediaElements}
                     pillar="news"

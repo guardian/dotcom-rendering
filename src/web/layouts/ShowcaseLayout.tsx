@@ -382,6 +382,7 @@ export const ShowcaseLayout = ({
                         <div className={mainMediaWrapper}>
                             <MainMedia
                                 display={display}
+                                designType={designType}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
