@@ -50,7 +50,7 @@ const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     style-src ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};
     img-src 'self' https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
     script-src 'self' ${assetHashes(scripts)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
-    frame-src https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com' : ''};
+    frame-src https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
     connect-src 'self' https://interactive.guim.co.uk
 `.trim();
