@@ -36,14 +36,9 @@ const withBylineTextStyles = css`
     padding-top: ${remSpace[1]};
 `;
 
-const avatarStyles = css`
-    margin-right: ${remSpace[3]};
-    margin-top: ${remSpace[1]};
-`;
-
 const MetadataWithByline: FC<Props> = ({ item }: Props) =>
     <div css={css(styles, withBylineStyles)}>
-        <Avatar className={avatarStyles} {...item} />
+        <Avatar {...item} />
         <div css={css(textStyles, withBylineTextStyles)}>
             <Byline {...item} />
             <Dateline date={item.publishDate} />

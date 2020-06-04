@@ -4,6 +4,7 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
+import Img from 'components/img';
 
 
 // ----- Styles ----- //
@@ -17,6 +18,7 @@ const imageStyles = css`
     height: 160px;
     right: 0;
     top: -48px;
+    background: none;
 `;
 
 
@@ -34,17 +36,16 @@ const Cutout = ({ contributors, className }: Props): JSX.Element | null => {
         return null;
     }
 
-    return contributor.image.fmap<ReactElement | null>(image =>
-        <div css={[className, styles]}>
-            <img
-                css={imageStyles}
-                srcSet={image.srcset}
-                src={image.src}
-                alt={contributor.name}
-                sizes="6rem"
-            />
-        </div>
-    ).withDefault(null);
+    return contributor.image.fmap<ReactElement | null>(image => {
+        return (
+            <div css={[className, styles]}>
+                <Img
+                    image={image}
+                    sizes="12rem"
+                    className={imageStyles}
+                />
+            </div>)
+    }).withDefault(null);
 }
 
 

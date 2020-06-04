@@ -6,6 +6,8 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Contributor, isSingleContributor } from 'contributor';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
+import Img from 'components/img';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Setup ----- //
@@ -17,7 +19,6 @@ const dimensions = '4rem';
 
 interface Props extends Format {
     contributors: Contributor[];
-    className?: SerializedStyles;
 }
 
 const styles = (background: string): SerializedStyles => css`
@@ -26,15 +27,16 @@ const styles = (background: string): SerializedStyles => css`
     clip-path: circle(50%);
     object-fit: cover;
     background: ${background};
+    margin-right: ${remSpace[3]};
+    margin-top: ${remSpace[1]};
 `;
 
 const getStyles = ({ pillar }: Format): SerializedStyles => {
     const colours = getPillarStyles(pillar);
-
     return styles(colours.inverted);
 }
 
-const Avatar: FC<Props> = ({ contributors, className, ...format }: Props) => {
+const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
     const [contributor] = contributors;
 
     if (!isSingleContributor(contributors)) {
@@ -42,12 +44,10 @@ const Avatar: FC<Props> = ({ contributors, className, ...format }: Props) => {
     }
 
     return contributor.image.fmap<ReactElement | null>(image =>
-        <img
-            css={[getStyles(format), className]}
-            srcSet={image.srcset}
-            alt={contributor.name}
+        <Img
+            image={image}
             sizes={dimensions}
-            src={image.src}
+            className={getStyles(format)}
         />
     ).withDefault(null);
 }
