@@ -369,6 +369,30 @@ export const ImmersiveNoMainMedia = () => (
 );
 ImmersiveNoMainMedia.story = { name: 'Immersive (with no main media)' };
 
+export const ImmersiveComment = () => (
+    <Section
+        showSideBorders={false}
+        showTopBorder={false}
+        backgroundColour="orange"
+    >
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is the headline you see when display type is Immersive and designType Comment"
+                    display="immersive"
+                    designType="Comment"
+                    pillar="news"
+                    tags={[]}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+ImmersiveComment.story = { name: 'Immersive opinion piece' };
+
 export const GuardianView = () => (
     <Section>
         <Flex>
