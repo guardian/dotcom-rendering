@@ -41,7 +41,7 @@ const Cutout = ({ contributors, className }: Props): JSX.Element | null => {
             <div css={[className, styles]}>
                 <Img
                     image={image}
-                    sizes={"12rem"}
+                    sizes="12rem"
                     className={imageStyles}
                 />
             </div>)
