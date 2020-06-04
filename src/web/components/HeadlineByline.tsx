@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -52,6 +52,10 @@ const opinionStyles = (pillar: Pillar) => css`
     }
 `;
 
+const whiteText = css`
+    color: white;
+`;
+
 const immersiveStyles = css`
     ${headline.xsmall({
         fontWeight: 'light',
@@ -89,14 +93,39 @@ export const HeadlineByline = ({
 }: Props) => {
     switch (display) {
         case 'immersive': {
-            return (
-                <div className={immersiveStyles}>
-                    by{' '}
-                    <span className={immersiveLinkStyles(pillar)}>
-                        <BylineLink byline={byline} tags={tags} />
-                    </span>
-                </div>
-            );
+            switch (designType) {
+                case 'GuardianView':
+                case 'Comment':
+                    return (
+                        <div className={cx(opinionStyles(pillar), whiteText)}>
+                            <BylineLink byline={byline} tags={tags} />
+                        </div>
+                    );
+                case 'Interview':
+                case 'Immersive':
+                case 'Analysis':
+                case 'Feature':
+                case 'Article':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Review':
+                case 'Live':
+                case 'SpecialReport':
+                case 'Recipe':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                default:
+                    return (
+                        <div className={immersiveStyles}>
+                            by{' '}
+                            <span className={immersiveLinkStyles(pillar)}>
+                                <BylineLink byline={byline} tags={tags} />
+                            </span>
+                        </div>
+                    );
+            }
         }
         case 'showcase':
         case 'standard': {
