@@ -45,14 +45,18 @@ const interactiveAssets = compose(extractInteractiveAssets, getValidElements);
 const assetHashes = (assets: string[]): string =>
     assets.map(asset => `'sha256-${assetHash(asset)}'`).join(' ');
 
+// const cspString = `
+//     default-src https:; script-src https: 'unsafe-inline' 'unsafe-eval'; frame-src https: data:; style-src https: 'unsafe-inline'; img-src https: data: blob:; media-src https: data: blob:; font-src https: data:; connect-src https: wss:; child-src https: blob:
+// `
+
 const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     default-src 'self';
     style-src ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};
     img-src 'self' https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
-    script-src 'self' ${assetHashes(scripts)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
-    frame-src https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
+    script-src 'self' ${assetHashes(scripts)} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
+    frame-src https://www.tiktok.com https://interactive.guim.co.uk https://open.spotify.com https://www.youtube-nocookie.com ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
-    connect-src 'self' https://interactive.guim.co.uk
+    connect-src 'self' https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/
 `.trim();
 
 function csp(item: Item, additionalAssets: Assets, twitter: boolean): string {

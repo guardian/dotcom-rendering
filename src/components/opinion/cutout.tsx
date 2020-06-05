@@ -5,6 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
 import Img from 'components/img';
+import { darkModeCss } from 'styles';
 
 
 // ----- Styles ----- //
@@ -19,6 +20,10 @@ const imageStyles = css`
     right: 0;
     top: -48px;
     background: none;
+
+    ${darkModeCss`
+        background: none;
+    `}
 `;
 
 
