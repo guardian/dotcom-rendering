@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 import {
-    shouldShow as _shouldShow,
+    shouldShow as shouldShow_,
     setErrorHandler,
 } from '@guardian/consent-management-platform';
 
-export const shouldShow = _shouldShow;
+export const shouldShow = shouldShow_;
 
 export const CMP = () => {
     const [show, setShow] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     CMP,
-    canShow as shouldShowCMP,
+    shouldShow as shouldShowCMP,
 } from '@root/src/web/components/BottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/BottomBanner/ReaderRevenueBanner';
 
@@ -15,7 +15,7 @@ export const BottomBanner = ({ isSignedIn, countryCode, CAPI }: Props) => {
     const [showCMP, setShowCMP] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const callShouldShow = async () => setShowCMP(await shouldShowCMP());
+        const callShouldShow = () => setShowCMP(shouldShowCMP());
 
         if (CAPI.config.cmpUi) {
             callShouldShow();
@@ -32,7 +32,7 @@ export const BottomBanner = ({ isSignedIn, countryCode, CAPI }: Props) => {
 
     return (
         <>
-            {!showCMP ? (
+            {showCMP ? (
                 <CMP />
             ) : (
                 showRRBanner && (
