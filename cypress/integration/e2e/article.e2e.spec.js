@@ -15,11 +15,11 @@ describe('E2E Page rendering', function() {
 
             it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
-                cy.scrollTo('bottom', { duration: 100 });
+                cy.scrollTo('bottom', { duration: 500 });
                 cy.contains('Lifestyle');
 
                 if (!article.hideMostViewed) {
-                    cy.wait('@getMostReadGeo').then(xhr => {
+                    cy.wait('@getMostReadGeo', { timeout: 8000 }).then(xhr => {
                         expect(xhr.response.body).to.have.property('heading');
                         expect(xhr.status).to.be.equal(200);
 
@@ -46,9 +46,9 @@ describe('E2E Page rendering', function() {
                 // We scroll again here because not all the content at the bottom of the page loads
                 // when you first touch bottom, you sometimes need to scroll once more to trigger
                 // lazy loading Most Popular
-                cy.scrollTo('bottom', { duration: 100 });
+                cy.scrollTo('bottom', { duration: 500 });
 
-                cy.wait('@getMostRead', { timeout: 5000 }).then(xhr => {
+                cy.wait('@getMostRead', { timeout: 8000 }).then(xhr => {
                     expect(xhr.response.body).to.have.property('tabs');
                     expect(xhr.status).to.be.equal(200);
 
