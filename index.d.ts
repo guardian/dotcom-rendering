@@ -464,6 +464,36 @@ type UserProfile = {
 };
 
 /**
+ * Football
+ */
+type TeamType = {
+    id: string;
+    lineup: PlayerType[];
+    possession: number;
+    shotsOn: number;
+    shotsOff: number;
+    corners: number;
+    fouls: number;
+    colours: string;
+};
+
+type PlayerType = {
+    id: string;
+    name: string;
+    position: string;
+    lastName: string;
+    substitute: boolean;
+    timeOnPitch: string;
+    shirtNumber: string;
+    events: EventType[];
+};
+
+type EventType = {
+    eventTime: string; // minutes
+    eventType: 'substitution' | 'dismissal' | 'booking';
+};
+
+/**
  * Onwards
  */
 type OnwardsType = {
