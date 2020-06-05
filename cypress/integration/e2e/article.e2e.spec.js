@@ -43,6 +43,11 @@ describe('E2E Page rendering', function() {
                     });
                 }
 
+                // We scroll again here because not all the content at the bottom of the page loads
+                // when you first touch bottom, you sometimes need to scroll once more to trigger
+                // lazy loading Most Popular
+                cy.scrollTo('bottom', { duration: 100 });
+
                 cy.wait('@getMostRead', { timeout: 5000 }).then(xhr => {
                     expect(xhr.response.body).to.have.property('tabs');
                     expect(xhr.status).to.be.equal(200);
