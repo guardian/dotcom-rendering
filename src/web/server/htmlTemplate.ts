@@ -2,8 +2,8 @@ import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { getStatic, CDN } from '@root/src/lib/assets';
 import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
-
 import { brandBackground } from '@guardian/src-foundations/palette';
+import he from 'he';
 
 export const htmlTemplate = ({
     title = 'The Guardian',
@@ -145,7 +145,7 @@ export const htmlTemplate = ({
         <html lang="en">
             <head>
                 <title>${title}</title>
-                <meta name="description" content="${escape(description)}" />
+                <meta name="description" content="${he.encode(description)}" />
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
