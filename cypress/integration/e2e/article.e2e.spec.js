@@ -18,13 +18,6 @@ describe('E2E Page rendering', function() {
                 cy.scrollTo('bottom', { duration: 100 });
                 cy.contains('Lifestyle');
 
-                cy.wait('@getMostRead').then(xhr => {
-                    expect(xhr.response.body).to.have.property('tabs');
-                    expect(xhr.status).to.be.equal(200);
-
-                    cy.contains('Most popular');
-                });
-
                 if (!article.hideMostViewed) {
                     cy.wait('@getMostReadGeo').then(xhr => {
                         expect(xhr.response.body).to.have.property('heading');
@@ -49,6 +42,13 @@ describe('E2E Page rendering', function() {
                         cy.contains('Read more');
                     });
                 }
+
+                cy.wait('@getMostRead', { timeout: 5000 }).then(xhr => {
+                    expect(xhr.response.body).to.have.property('tabs');
+                    expect(xhr.status).to.be.equal(200);
+
+                    cy.contains('Most popular');
+                });
             });
         });
     });
