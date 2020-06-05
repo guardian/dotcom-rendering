@@ -22,7 +22,7 @@ describe('Interactivity', function() {
         });
         it('should display all the rich links for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.scrollTo('bottom', { duration: 100 });
+            cy.scrollTo('bottom', { duration: 300 });
             cy.get('[data-component=rich-link]')
                 .should('exist')
                 .its('length')
@@ -36,7 +36,9 @@ describe('Interactivity', function() {
             beforeEach(mockApi);
             it('should change the list of most viewed items when a tab is clicked', function() {
                 cy.visit(`/Article?url=${articleUrl}`, fetchPolyfill);
-                cy.scrollTo('bottom', { duration: 100 });
+                cy.scrollTo('bottom', { duration: 300 });
+                cy.contains('Lifestyle');
+                cy.scrollTo('bottom', { duration: 300 });
                 cy.get('[data-cy=tab-body-0]').should('be.visible');
                 cy.get('[data-cy=tab-body-1]').should('not.be.visible');
                 cy.get('[data-cy=tab-heading-1]').click();
