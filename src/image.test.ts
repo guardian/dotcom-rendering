@@ -44,6 +44,7 @@ const image: Image = {
     credit: new None(),
     nativeCaption: new None(),
     role: new None(),
+    launchSlideshow: true
 };
 
 

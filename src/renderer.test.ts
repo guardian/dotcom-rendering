@@ -39,7 +39,8 @@ const imageElement = (): BodyElement =>
         credit: new Some('credit'),
         width: 500,
         height: 500,
-        role: new None()
+        role: new None(),
+        launchSlideshow: true
     });
 
 const imageElementWithRole = () =>

@@ -38,7 +38,8 @@ const parseContributors = (salt: string, content: Content): Contributor[] =>
             caption: new None(),
             alt: new None(),
             role: new None(),
-            nativeCaption: new None()
+            nativeCaption: new None(),
+            launchSlideshow: false
         })),
     }));
 

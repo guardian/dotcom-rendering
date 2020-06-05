@@ -22,7 +22,8 @@ describe('Avatar component renders as expected', () => {
             caption: new None(),
             alt: new None(),
             role: new None(),
-            nativeCaption: new None()
+            nativeCaption: new None(),
+            launchSlideshow: false
         }),
     }]
     it('Adds correct alt attribute', () => {
