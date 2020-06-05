@@ -27,23 +27,28 @@ export const BottomBanner = ({ isSignedIn, countryCode, CAPI }: Props) => {
         return null;
     }
 
+    // Temporary flag to toggle RR banner while it is in development
+    const showRRBanner = false;
+
     return (
         <>
             {!showCMP ? (
                 <CMP />
             ) : (
-                <ReaderRevenueBanner
-                    isSignedIn={isSignedIn}
-                    countryCode={countryCode}
-                    contentType={CAPI.contentType}
-                    sectionName={CAPI.sectionName}
-                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                    isPaidContent={CAPI.pageType.isPaidContent}
-                    isSensitive={CAPI.config.isSensitive}
-                    tags={CAPI.tags}
-                    contributionsServiceUrl={CAPI.contributionsServiceUrl}
-                />
+                showRRBanner && (
+                    <ReaderRevenueBanner
+                        isSignedIn={isSignedIn}
+                        countryCode={countryCode}
+                        contentType={CAPI.contentType}
+                        sectionName={CAPI.sectionName}
+                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                        isPaidContent={CAPI.pageType.isPaidContent}
+                        isSensitive={CAPI.config.isSensitive}
+                        tags={CAPI.tags}
+                        contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                    />
+                )
             )}
         </>
     );
