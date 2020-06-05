@@ -243,6 +243,8 @@ export const CommentLayout = ({
 
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
+    const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
     return (
         <>
             <div>
@@ -315,6 +317,7 @@ export const CommentLayout = ({
                     <GridItem area="title">
                         <ArticleTitle
                             display={display}
+                            designType={designType}
                             tags={CAPI.tags}
                             sectionLabel={CAPI.sectionLabel}
                             sectionUrl={CAPI.sectionUrl}
@@ -394,6 +397,7 @@ export const CommentLayout = ({
                         <div className={maxWidth}>
                             <MainMedia
                                 display={display}
+                                designType={designType}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
@@ -403,6 +407,7 @@ export const CommentLayout = ({
                     <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
+                                branding={branding}
                                 display={display}
                                 designType={designType}
                                 pillar={pillar}

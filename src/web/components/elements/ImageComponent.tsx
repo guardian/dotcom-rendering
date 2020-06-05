@@ -11,6 +11,7 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 
 type Props = {
     display: Display;
+    designType: DesignType;
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
@@ -168,6 +169,7 @@ const CaptionToggle = () => (
 
 export const ImageComponent = ({
     display,
+    designType,
     element,
     pillar,
     hideCaption,
@@ -180,8 +182,10 @@ export const ImageComponent = ({
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
+    const isNotOpinion =
+        designType !== 'Comment' && designType !== 'GuardianView';
 
-    if (isMainMedia && display === 'immersive') {
+    if (isMainMedia && display === 'immersive' && isNotOpinion) {
         return (
             <div
                 className={css`

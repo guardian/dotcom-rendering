@@ -126,6 +126,7 @@ export const MultiImageBlockComponent = ({
                 >
                     <ImageComponent
                         display="standard"
+                        designType="Article"
                         element={images[0]}
                         pillar={pillar}
                         hideCaption={true}
@@ -155,6 +156,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="first">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -164,6 +166,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="second">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -195,6 +198,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="first">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -204,6 +208,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="second">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -213,6 +218,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="third">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[2]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -244,6 +250,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="first">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -253,6 +260,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="second">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -262,6 +270,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="third">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[2]}
                                 pillar={pillar}
                                 hideCaption={true}
@@ -271,6 +280,7 @@ export const MultiImageBlockComponent = ({
                         <GridItem area="forth">
                             <ImageComponent
                                 display="standard"
+                                designType="Article"
                                 element={images[3]}
                                 pillar={pillar}
                                 hideCaption={true}

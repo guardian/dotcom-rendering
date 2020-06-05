@@ -49,55 +49,59 @@ const nestedStyles = css`
 `;
 
 const standfirstStyles = (designType: DesignType, display: Display) => {
-    if (display === 'immersive') {
-        return css`
-            ${headline.xsmall({
-                fontWeight: 'light',
-            })};
-            padding-top: ${space[4]}px;
-
-            max-width: 280px;
-            ${from.tablet} {
-                max-width: 400px;
-            }
-            ${from.tablet} {
-                max-width: 460px;
-            }
-        `;
-    }
-
-    switch (designType) {
-        case 'Comment':
-        case 'GuardianView':
-        case 'Feature':
-        case 'Recipe':
-        case 'Review':
+    switch (display) {
+        case 'immersive':
             return css`
-                ${headline.xxsmall({
+                ${headline.xsmall({
                     fontWeight: 'light',
                 })};
-                margin-bottom: ${space[3]}px;
+                padding-top: ${space[4]}px;
+
+                max-width: 280px;
+                ${from.tablet} {
+                    max-width: 400px;
+                }
+                ${from.tablet} {
+                    max-width: 460px;
+                }
             `;
-        case 'Immersive':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'SpecialReport':
-        case 'MatchReport':
-        case 'AdvertisementFeature':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'Article':
-        case 'Live':
-        case 'Analysis':
-        case 'Interview':
-        default:
-            return css`
-                ${headline.xxxsmall({
-                    fontWeight: 'bold',
-                })};
-                line-height: 20px;
-                margin-bottom: ${space[3]}px;
-            `;
+
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                case 'Feature':
+                case 'Recipe':
+                case 'Review':
+                    return css`
+                        ${headline.xxsmall({
+                            fontWeight: 'light',
+                        })};
+                        margin-bottom: ${space[3]}px;
+                    `;
+                case 'Immersive':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'AdvertisementFeature':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'Article':
+                case 'Live':
+                case 'Analysis':
+                case 'Interview':
+                default:
+                    return css`
+                        ${headline.xxxsmall({
+                            fontWeight: 'bold',
+                        })};
+                        line-height: 20px;
+                        margin-bottom: ${space[3]}px;
+                    `;
+            }
+        }
     }
 };
 

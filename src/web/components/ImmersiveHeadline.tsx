@@ -123,6 +123,7 @@ export const ImmersiveHeadline = ({
                     <PositionHeadline>
                         <ArticleTitle
                             display={display}
+                            designType={designType}
                             tags={tags}
                             sectionLabel={sectionLabel}
                             sectionUrl={sectionUrl}

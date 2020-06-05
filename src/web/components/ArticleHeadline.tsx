@@ -133,6 +133,13 @@ const blackBackground = css`
     background-color: black;
 `;
 
+const invertedText = css`
+    color: white;
+    white-space: pre-wrap;
+    padding-bottom: ${space[1]}px;
+    padding-right: ${space[1]}px;
+`;
+
 const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
@@ -164,120 +171,172 @@ export const ArticleHeadline = ({
     byline,
     noMainMedia,
 }: Props) => {
-    if (display === 'immersive' && noMainMedia) {
-        return (
-            // Immersive headlines have two versions, with main media, and (this one) without
-            <h1
-                className={cx(
-                    jumboFont,
-                    maxWidth,
-                    immersiveStyles,
-                    displayBlock,
-                )}
-            >
-                {curly(headlineString)}
-            </h1>
-        );
-    }
-
-    if (display === 'immersive') {
-        return (
-            // Immersive headlines with main media present, are large and inverted with
-            // a black background
-            <h1 className={cx(invertedWrapper, blackBackground)}>
-                <span
-                    className={cx(
-                        jumboFont,
-                        maxWidth,
-                        invertedStyles,
-                        immersiveStyles,
-                        displayBlock,
-                    )}
-                >
-                    {curly(headlineString)}
-                </span>
-            </h1>
-        );
-    }
-
-    switch (designType) {
-        case 'Review':
-        case 'Recipe':
-        case 'Feature':
-            return (
-                <h1
-                    className={cx(
-                        boldFont,
-                        colourStyles(pillarPalette[pillar].dark),
-                    )}
-                >
-                    {curly(headlineString)}
-                </h1>
-            );
-
-        case 'GuardianView':
-        case 'Comment':
-            return (
-                <>
-                    <h1 className={lightFont}>{curly(headlineString)}</h1>
-                    {byline && (
-                        <HeadlineByline
-                            display={display}
-                            designType={designType}
-                            pillar={pillar}
-                            byline={byline}
-                            tags={tags}
-                        />
-                    )}
-                </>
-            );
-
-        case 'Analysis':
-            return (
-                <h1 className={cx(standardFont, underlinedStyles)}>
-                    {curly(headlineString)}
-                </h1>
-            );
-
-        case 'Interview':
-            return (
-                // Inverted headlines have a wrapper div for positioning
-                // and a black background (only for the text)
-                <div className={cx(shiftSlightly, maxWidth, displayFlex)}>
-                    <HeadlineTag tagText="Interview" pillar={pillar} />
-                    <h1 className={cx(invertedFont, invertedWrapper, zIndex)}>
-                        <span
+    switch (display) {
+        case 'immersive': {
+            switch (designType) {
+                case 'Comment':
+                case 'GuardianView':
+                    return (
+                        <>
+                            <h1 className={cx(lightFont, invertedText)}>
+                                {curly(headlineString)}
+                            </h1>
+                            {byline && (
+                                <HeadlineByline
+                                    display={display}
+                                    designType={designType}
+                                    pillar={pillar}
+                                    byline={byline}
+                                    tags={tags}
+                                />
+                            )}
+                        </>
+                    );
+                case 'Review':
+                case 'Recipe':
+                case 'Feature':
+                case 'Analysis':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Article':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                default:
+                    if (noMainMedia) {
+                        return (
+                            // Immersive headlines have two versions, with main media, and (this one) without
+                            <h1
+                                className={cx(
+                                    jumboFont,
+                                    maxWidth,
+                                    immersiveStyles,
+                                    displayBlock,
+                                )}
+                            >
+                                {curly(headlineString)}
+                            </h1>
+                        );
+                    }
+                    return (
+                        // Immersive headlines with main media present, are large and inverted with
+                        // a black background
+                        <h1 className={cx(invertedWrapper, blackBackground)}>
+                            <span
+                                className={cx(
+                                    jumboFont,
+                                    maxWidth,
+                                    invertedStyles,
+                                    immersiveStyles,
+                                    displayBlock,
+                                )}
+                            >
+                                {curly(headlineString)}
+                            </span>
+                        </h1>
+                    );
+            }
+            break;
+        }
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'Review':
+                case 'Recipe':
+                case 'Feature':
+                    return (
+                        <h1
                             className={cx(
-                                blackBackground,
-                                invertedStyles,
-                                displayInline,
+                                boldFont,
+                                colourStyles(pillarPalette[pillar].dark),
                             )}
                         >
                             {curly(headlineString)}
-                        </span>
-                    </h1>
-                    {byline && (
-                        <HeadlineByline
-                            display={display}
-                            designType={designType}
-                            pillar={pillar}
-                            byline={byline}
-                            tags={tags}
-                        />
-                    )}
-                </div>
-            );
-        case 'Immersive':
-        case 'Article':
-        case 'Media':
-        case 'PhotoEssay':
-        case 'Live':
-        case 'SpecialReport':
-        case 'MatchReport':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        default:
-            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
+                        </h1>
+                    );
+                case 'Comment':
+                case 'GuardianView':
+                    return (
+                        <>
+                            <h1 className={lightFont}>
+                                {curly(headlineString)}
+                            </h1>
+                            {byline && (
+                                <HeadlineByline
+                                    display={display}
+                                    designType={designType}
+                                    pillar={pillar}
+                                    byline={byline}
+                                    tags={tags}
+                                />
+                            )}
+                        </>
+                    );
+                case 'Analysis':
+                    return (
+                        <h1 className={cx(standardFont, underlinedStyles)}>
+                            {curly(headlineString)}
+                        </h1>
+                    );
+                case 'Interview':
+                    return (
+                        // Inverted headlines have a wrapper div for positioning
+                        // and a black background (only for the text)
+                        <div
+                            className={cx(shiftSlightly, maxWidth, displayFlex)}
+                        >
+                            <HeadlineTag tagText="Interview" pillar={pillar} />
+                            <h1
+                                className={cx(
+                                    invertedFont,
+                                    invertedWrapper,
+                                    zIndex,
+                                )}
+                            >
+                                <span
+                                    className={cx(
+                                        blackBackground,
+                                        invertedStyles,
+                                        displayInline,
+                                    )}
+                                >
+                                    {curly(headlineString)}
+                                </span>
+                            </h1>
+                            {byline && (
+                                <HeadlineByline
+                                    display={display}
+                                    designType={designType}
+                                    pillar={pillar}
+                                    byline={byline}
+                                    tags={tags}
+                                />
+                            )}
+                        </div>
+                    );
+                case 'Live':
+                case 'Media':
+                case 'PhotoEssay':
+                case 'Article':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Immersive':
+                default:
+                    return (
+                        <h1 className={standardFont}>
+                            {curly(headlineString)}
+                        </h1>
+                    );
+            }
+            break;
+        }
     }
 };
