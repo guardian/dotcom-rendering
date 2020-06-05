@@ -84,9 +84,7 @@ const Side = ({
                 left: ${position === 'right' && 0};
                 right: ${position === 'left' && 0};
 
-                background-image: none;
-                background-repeat: none;
-                background-size: 0;
+                background: ${teamColours};
 
                 text-align: ${position === 'left' ? 'left' : 'right'};
 
