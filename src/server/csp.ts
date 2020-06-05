@@ -46,8 +46,16 @@ const assetHashes = (assets: string[]): string =>
     assets.map(asset => `'sha256-${assetHash(asset)}'`).join(' ');
 
 // const cspString = `
-//     default-src https:; script-src https: 'unsafe-inline' 'unsafe-eval'; frame-src https: data:; style-src https: 'unsafe-inline'; img-src https: data: blob:; media-src https: data: blob:; font-src https: data:; connect-src https: wss:; child-src https: blob:
-// `
+//     default-src https:;
+//     script-src https: 'unsafe-inline' 'unsafe-eval';
+//     frame-src https: data:;
+//     style-src https: 'unsafe-inline';
+//     img-src https: data: blob:;
+//     media-src https: data: blob:;
+//     font-src https: data:;
+//     connect-src https: wss:;
+//     child-src https: blob:
+// `.trim()
 
 const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     default-src 'self';
