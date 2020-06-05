@@ -197,9 +197,9 @@ const MemoisedInner = ({
                 const modulePerf = initPerf('contributions-epic-module');
                 modulePerf.start();
 
-                initialiseDynamicImport(); // called here as experimental
-                // eslint-disable-next-line no-restricted-globals
-                self.__import__(module.url)
+                initialiseDynamicImport()
+                    // eslint-disable-next-line no-restricted-globals
+                    .then(() => self.__import__(module.url))
                     .then(epicModule => {
                         modulePerf.end();
                         setEpicMeta(meta);
