@@ -5,12 +5,11 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { CMP, canShow as shouldShowCMP } from '@frontend/web/components/CMP';
-import { ReaderRevenueBanner } from '@frontend/web/components/ReaderRevenueBanner';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { BottomBanner } from '@frontend/web/components/BottomBanner/BottomBanner';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -100,8 +99,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     );
 
     const hasCommentsHash = hasCommentsHashInUrl();
-
-    const [showCMP, setShowCMP] = useState<boolean>(false);
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -195,14 +192,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
-
-    useEffect(() => {
-        const callShouldShow = async () => setShowCMP(await shouldShowCMP());
-
-        if (CAPI.config.cmpUi) {
-            callShouldShow();
-        }
-    }, [CAPI.config.cmpUi]);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -380,26 +369,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            {showCMP ? (
-                <Portal root="bottom-banner">
-                    <CMP />
-                </Portal>
-            ) : (
-                <Portal root="bottom-banner">
-                    <ReaderRevenueBanner
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        isSensitive={CAPI.config.isSensitive}
-                        tags={CAPI.tags}
-                        contributionsServiceUrl={CAPI.contributionsServiceUrl}
-                    />
-                </Portal>
-            )}
+            <Portal root="bottom-banner">
+                <BottomBanner
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    CAPI={CAPI}
+                />
+            </Portal>
         </React.StrictMode>
     );
 };
