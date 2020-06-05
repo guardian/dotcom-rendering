@@ -42,6 +42,12 @@ const windowGuardian = {
     functions: {
         import: (url: string) => import(url),
     },
+    automat: {
+        react: undefined,
+        emotion: undefined,
+        emotionCore: undefined,
+        emotionTheming: undefined,
+    },
 };
 
 // Stub global Guardian object

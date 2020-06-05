@@ -166,7 +166,7 @@ const MemoisedInner = ({
             isSensitive,
         });
 
-        window.automat = {
+        window.guardian.automat = {
             react: React,
             emotionCore,
             emotionTheming,
