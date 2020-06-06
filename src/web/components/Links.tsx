@@ -8,7 +8,9 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
+
 import ProfileIcon from '@frontend/static/icons/profile.svg';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
     userId?: string;
@@ -114,6 +116,8 @@ const linksStyles = css`
     ${from.wide} {
         right: 342px;
     }
+
+    ${getZIndex('headerLinks')}
 `;
 
 export const Links = ({ userId }: Props) => {

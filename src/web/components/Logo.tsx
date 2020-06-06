@@ -6,6 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const link = css`
     float: right;
@@ -23,11 +24,12 @@ const link = css`
         margin-top: 5px;
         margin-bottom: 15px;
         position: relative;
-        z-index: 1071;
     }
     ${from.wide} {
         margin-right: 96px;
     }
+
+    ${getZIndex('TheGuardian')}
 `;
 
 const style = css`
