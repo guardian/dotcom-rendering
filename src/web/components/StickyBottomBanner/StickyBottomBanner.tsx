@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
     CMP,
     shouldShow as shouldShowCMP,
-} from '@root/src/web/components/BottomBanner/CMP';
-import { ReaderRevenueBanner } from '@root/src/web/components/BottomBanner/ReaderRevenueBanner';
+} from '@root/src/web/components/StickyBottomBanner/CMP';
+import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 
 type Props = {
     isSignedIn?: boolean;
