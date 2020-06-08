@@ -467,7 +467,6 @@ type UserProfile = {
  * Football
  */
 type TeamType = {
-    id: string;
     lineup: PlayerType[];
     possession: number;
     shotsOn: number;
