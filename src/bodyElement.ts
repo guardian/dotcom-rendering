@@ -13,7 +13,7 @@ import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
 import { isElement } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
-
+import { parseAtom } from 'atoms';
 
 // ----- Types ----- //
 
@@ -28,7 +28,8 @@ const enum ElementKind {
     Audio,
     Embed,
     Video,
-    InteractiveAtom
+    InteractiveAtom,
+    ExplainerAtom
 }
 
 type Image = ImageData & {
@@ -51,14 +52,18 @@ type Video = {
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
 
-interface AtomFields {
+interface InteractiveAtom {
+    kind: ElementKind.InteractiveAtom;
     js: Option<string>;
     css: string;
     html: string;
 }
 
-interface InteractiveAtom extends AtomFields {
-    kind: ElementKind.InteractiveAtom;
+interface ExplainerAtom {
+    kind: ElementKind.ExplainerAtom;
+    html: string;
+    title: string;
+    id: string;
 }
 
 type BodyElement = {
@@ -86,7 +91,7 @@ type BodyElement = {
     kind: ElementKind.Embed;
     html: string;
     alt: Option<string>;
-} | Video | InteractiveAtom;
+} | Video | InteractiveAtom | ExplainerAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -127,6 +132,8 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem, content: serialiseNodes(elem.content) };
         case ElementKind.InteractiveAtom:
             return { ...elem, js: optionToSerialisable(elem.js) };
+        case ElementKind.ExplainerAtom:
+            return { ...elem };
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
         default:
@@ -302,25 +309,11 @@ const parse = (context: Context, atoms?: Atoms) =>
         }
 
         case ElementType.CONTENTATOM: {
-
             if (!atoms) {
                 return new Err('No atom data returned by capi')
             }
 
-            const id = element.contentAtomTypeData?.atomId
-            const atom = atoms.interactives?.find(interactive => interactive.id === id);
-
-            if (!atom?.data?.interactive) {
-                return new Err(`No atom matched this id: ${id}`);
-            }
-
-            const { html, css, mainJS: js } = atom?.data?.interactive;
-
-            if (!html || !css) {
-                return new Err(`No html or css for atom: ${id}`);
-            }
-
-            return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js: fromNullable(js) });
+            return parseAtom(element, atoms);
         }
 
         default:

@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 
 import React, { ReactNode, FC, ReactElement } from 'react';
+import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
+import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
-import createEmotionServer from 'create-emotion-server';
-import createCache from '@emotion/cache';
 import { JSDOM } from 'jsdom';
 import { Format, Design, Display } from '@guardian/types/Format';
 
@@ -166,10 +166,8 @@ function page(
     const shouldHideAds = content.fields?.shouldHideAdverts ?? false;
     const hasTwitter = includesTweets(content);
     const clientScript = scriptName(item).fmap(getAssetLocation);
-    const emotionCache = createCache();
-    const { extractCritical } = createEmotionServer(emotionCache);
     const { html: body, css, ids } = compose(extractCritical, renderToString)(
-        <CacheProvider value={emotionCache}>
+        <CacheProvider value={cache}>
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );

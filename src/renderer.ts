@@ -24,6 +24,7 @@ import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement } from 'lib';
+import { ExplainerAtom } from '@guardian/atoms-rendering';
 
 
 // ----- Renderer ----- //
@@ -486,6 +487,10 @@ const render = (format: Format, excludeStyles = false) =>
             };
 
             return h('div', props);
+        }
+
+        case ElementKind.ExplainerAtom: {
+            return h(ExplainerAtom, { ...element })
         }
 
         case ElementKind.InteractiveAtom: {
