@@ -675,6 +675,10 @@ declare module 'minify-css-string' {
 declare module 'storybook-chromatic/isChromatic';
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
+declare module 'dynamic-import-polyfill' {
+    export const initialize: any;
+}
+
 // ------------------------------------- //
 // AMP types                             //
 // ------------------------------------- //
