@@ -73,7 +73,7 @@ interface EmbedBlockElement {
     alt?: string;
     html: string;
     isMandatory: boolean;
-    campaigns?: CampaignsType;
+    campaign?: CampaignsType;
 }
 
 interface ExplainerAtomBlockElement {

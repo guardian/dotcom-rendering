@@ -53,6 +53,8 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             html={element.html}
                             alt={element.alt}
+                            campaign={element.campaign}
+                            pillar={pillar}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
