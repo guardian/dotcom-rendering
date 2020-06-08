@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { css } from '@emotion/core';
-import { neutral } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { darkModeCss } from 'styles';
 
 export interface VideoProps {
@@ -15,6 +15,7 @@ const videoStyles = css`
     width: 100%;
     position: relative;
     overflow: hidden;
+    margin: ${remSpace[4]} 0;
 
     iframe {
         border: none;
