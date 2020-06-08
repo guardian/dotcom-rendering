@@ -146,11 +146,11 @@ interface CampaignType {
         _type: string;
         description: string;
         tagName: string;
-        formFields: CampaignsFeildType[];
+        formFields: CampaignFeildType[];
     };
 }
 
-interface CampaignsFeildType {
+interface CampaignFeildType {
     text_size?: number | string; // TODO: need to fix at source
     name?: string;
     description?: string;
