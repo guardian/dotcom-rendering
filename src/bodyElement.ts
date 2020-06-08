@@ -13,6 +13,7 @@ import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
 import { isElement } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
+import { parseAtom } from 'atoms';
 
 // ----- Types ----- //
 
@@ -308,55 +309,11 @@ const parse = (context: Context, atoms?: Atoms) =>
         }
 
         case ElementType.CONTENTATOM: {
-
             if (!atoms) {
                 return new Err('No atom data returned by capi')
             }
 
-            switch (element.contentAtomTypeData?.atomType) {
-                case "interactive": {
-                    const id = element.contentAtomTypeData?.atomId
-                    const atom = atoms.interactives?.find(interactive => interactive.id === id);
-
-                    if (!atom?.data?.interactive) {
-                        return new Err(`No atom matched this id: ${id}`);
-                    }
-
-                    const { html, css, mainJS: js } = atom?.data?.interactive;
-
-                    if (!html || !css) {
-                        return new Err(`No html or css for atom: ${id}`);
-                    }
-
-                    return new Ok({
-                        kind: ElementKind.InteractiveAtom,
-                        html,
-                        css,
-                        js: fromNullable(js)
-                    });
-                }
-
-                case "explainer": {
-                    const id = element.contentAtomTypeData?.atomId
-                    const atom = atoms.explainers?.find(explainer => explainer.id === id);
-
-                    if (!atom?.data?.explainer || !id) {
-                        return new Err(`No atom matched this id: ${id}`);
-                    }
-
-                    const { title, body } = atom?.data?.explainer;
-
-                    if (!title || !body) {
-                        return new Err(`No title or body for atom: ${id}`);
-                    }
-
-                    return new Ok({ kind: ElementKind.ExplainerAtom, html: body, title, id });
-                }
-
-                default: {
-                    return new Err(`Atom type not supported: ${element.contentAtomTypeData?.atomType}`);
-                }
-            }
+            return parseAtom(element, atoms);
         }
 
         default:
