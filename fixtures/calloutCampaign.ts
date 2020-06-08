@@ -1,4 +1,4 @@
-export const calloutCampaign: CampaignsType = {
+export const calloutCampaign: CampaignType = {
     id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
     name: 'CALLOUT: early coronavirus events',
     rules: [],

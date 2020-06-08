@@ -133,7 +133,7 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-interface CampaignsType {
+interface CampaignType {
     id: string;
     name: string;
     rules: [];
@@ -596,7 +596,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
-    campaigns?: CampaignsType[];
+    campaigns?: CampaignType[];
 }
 
 interface GADataType {
