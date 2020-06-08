@@ -49,9 +49,10 @@ const Media = ({ item, children }: Props): JSX.Element =>
                 />
                 <div css={articleWidthStyles}>
                     <Series series={item.series} pillar={item.pillar} />
-                    <Headline item={item} />
+                </div>
+                <Headline item={item} />
+                <div css={articleWidthStyles}>
                     <Standfirst item={item} />
-
                 </div>
                 <section>
                     <Byline
