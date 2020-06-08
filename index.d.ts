@@ -133,6 +133,38 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
+interface CampaignsType {
+    id: string;
+    name: string;
+    rules: [];
+    priority: number;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    fields: {
+        formId: number;
+        callout: string;
+        _type: string;
+        description: string;
+        tagName: string;
+        formFields: CampaignsFeildType[];
+    };
+}
+
+interface CampaignsFeildType {
+    text_size?: number | string; // TODO: need to fix at source
+    name?: string;
+    description?: string;
+    hide_label?: string;
+    label?: string;
+    id?: string;
+    type: string;
+    required: string;
+    options?: {
+        label: string;
+        value: string;
+    }[];
+}
+
 interface NavType {
     pillars: PillarType[];
     otherLinks: MoreType;
@@ -564,6 +596,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    campaigns?: CampaignsType[];
 }
 
 interface GADataType {
