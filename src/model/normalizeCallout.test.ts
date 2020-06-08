@@ -74,7 +74,7 @@ describe('Normalize callout campaigne data', () => {
                             html:
                                 '<div data-callout-tagname="callout-early-coronavirus-events">          \n                               <h2>Callout</h2>\n                               <p>callout-early-coronavirus-events</p>\n                           </div>',
                             isMandatory: false,
-                            campaign: campaign,
+                            campaign,
                         },
                         {
                             _type:

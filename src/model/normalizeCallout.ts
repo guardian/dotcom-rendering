@@ -27,9 +27,9 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                             ...ele,
                             campaign: calloutEle,
                         };
-                    } else {
+                    } 
                         return ele;
-                    }
+                    
                 }),
             })),
             config: {
@@ -44,14 +44,14 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                               ele.fields._type === 'callout'
                           ) {
                               return false;
-                          } else {
+                          } 
                               return true;
-                          }
+                          
                       })
                     : [],
             },
         };
-    } else {
+    } 
         return body;
-    }
+    
 };
