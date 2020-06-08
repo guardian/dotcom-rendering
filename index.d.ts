@@ -153,9 +153,9 @@ type CampaignFeildType =
     | CampaignFeildSelect;
 
 interface CampaignFeildText {
-    text_size: number;
+    text_size?: number;
     name: string;
-    description: string;
+    description?: string;
     hide_label: boolean;
     label: string;
     id: number;
@@ -164,8 +164,9 @@ interface CampaignFeildText {
 }
 
 interface CampaignFeildTextArea {
+    text_size?: number;
     name: string;
-    description: string;
+    description?: string;
     hide_label: boolean;
     label: string;
     id: number;
