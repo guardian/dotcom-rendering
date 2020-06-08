@@ -328,7 +328,12 @@ const parse = (context: Context, atoms?: Atoms) =>
                         return new Err(`No html or css for atom: ${id}`);
                     }
 
-                    return new Ok({ kind: ElementKind.InteractiveAtom, html, css, js: fromNullable(js) });
+                    return new Ok({
+                        kind: ElementKind.InteractiveAtom,
+                        html,
+                        css,
+                        js: fromNullable(js)
+                    });
                 }
 
                 case "explainer": {
