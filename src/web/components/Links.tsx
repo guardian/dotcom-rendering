@@ -8,33 +8,13 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
+
 import ProfileIcon from '@frontend/static/icons/profile.svg';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
     userId?: string;
 };
-
-const search = css`
-    :after {
-        content: '';
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        transform: translateY(-2px) rotate(45deg);
-        border-width: 1px;
-        border-style: solid;
-        border-color: currentColor;
-        border-left: none;
-        border-top: none;
-        margin-left: 5px;
-        vertical-align: middle;
-        backface-visibility: hidden;
-        transition: transform 250ms ease-out;
-    }
-    :hover:after {
-        transform: translateY(0) rotate(45deg);
-    }
-`;
 
 const linkStyles = css`
     ${textSans.medium()};
@@ -110,11 +90,7 @@ const Search = ({
     dataLinkName: string;
     children: JSXElements;
 }) => (
-    <a
-        href={href}
-        className={cx(search, className)}
-        data-link-name={dataLinkName}
-    >
+    <a href={href} className={className} data-link-name={dataLinkName}>
         {children}
     </a>
 );
@@ -140,6 +116,8 @@ const linksStyles = css`
     ${from.wide} {
         right: 342px;
     }
+
+    ${getZIndex('headerLinks')}
 `;
 
 export const Links = ({ userId }: Props) => {

@@ -6,6 +6,9 @@ describe('getZIndex', () => {
 
         expect(getZIndex('bodyArea')).toBe('z-index: 2;');
 
-        expect(getZIndex('stickyAdWrapper')).toBe('z-index: 4;');
+        expect(getZIndex('TheGuardian')).toBe('z-index: 3;');
+        expect(getZIndex('headerLinks')).toBe('z-index: 4;');
+
+        expect(getZIndex('stickyAdWrapper')).toBe('z-index: 6;');
     });
 });

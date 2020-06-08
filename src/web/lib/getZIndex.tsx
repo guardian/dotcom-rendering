@@ -6,6 +6,10 @@ const indices = [
     'rightColumnArea',
     'bodyArea',
 
+    // Header links (should be above The Guardian svg)
+    'TheGuardian',
+    'headerLinks',
+
     // Header
     'headerWrapper',
     'stickyAdWrapper',
