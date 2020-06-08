@@ -136,7 +136,7 @@ export default {
 export const Default = () => {
     return (
         <Container>
-            <Lineup title="Title text" players={players} />
+            <Lineup players={players} />
         </Container>
     );
 };

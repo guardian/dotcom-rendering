@@ -2,10 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
-// import { text } from '@guardian/src-foundations/palette';
 
 type Props = {
-    title: string;
     players: PlayerType[];
 };
 
@@ -62,51 +60,48 @@ const Event = ({
     }
 };
 
-export const Lineup = ({ title, players }: Props) => {
+export const Lineup = ({ players }: Props) => {
     return (
-        <div
-            className={css`
-                ${textSans.small()}
-            `}
-        >
-            <h4>{title}</h4>
-            <ul>
-                {players.map(player => (
-                    <li>
-                        <Row>
-                            <div
-                                className={css`
-                                    font-weight: bold;
-                                `}
-                            >
-                                {player.shirtNumber}
-                            </div>
-                            <div
-                                className={css`
-                                    position: absolute;
-                                    left: 40px;
-                                `}
-                            >
-                                <Row>
-                                    {player.name}
-                                    {player.events.map((event: EventType) => (
-                                        <div
-                                            className={css`
-                                                margin-left: 4px;
-                                            `}
-                                        >
-                                            <Event
-                                                type={event.eventType}
-                                                time={event.eventTime}
-                                            />
-                                        </div>
-                                    ))}
-                                </Row>
-                            </div>
-                        </Row>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ul>
+            {players.map(player => (
+                <li
+                    className={css`
+                        ${textSans.small()}
+                    `}
+                >
+                    <Row>
+                        <div
+                            className={css`
+                                font-weight: bold;
+                            `}
+                        >
+                            {player.shirtNumber}
+                        </div>
+                        <div
+                            className={css`
+                                position: absolute;
+                                left: 40px;
+                            `}
+                        >
+                            <Row>
+                                {player.name}
+                                {player.events.map((event: EventType) => (
+                                    <div
+                                        className={css`
+                                            margin-left: 4px;
+                                        `}
+                                    >
+                                        <Event
+                                            type={event.eventType}
+                                            time={event.eventTime}
+                                        />
+                                    </div>
+                                ))}
+                            </Row>
+                        </div>
+                    </Row>
+                </li>
+            ))}
+        </ul>
     );
 };
