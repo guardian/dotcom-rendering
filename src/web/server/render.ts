@@ -4,12 +4,14 @@ import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { document } from '@root/src/web/server/document';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDropCaps } from '@root/src/model/add-dropcaps';
+import { normalizeCallout } from '@root/src/model/normalizeCallout';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
-        const withDropCaps: CAPIType = addDropCaps(body);
+        const withCalloutNormalized: CAPIType = normalizeCallout(body);
+        const withDropCaps: CAPIType = addDropCaps(withCalloutNormalized);
         const CAPI: CAPIType = validateAsCAPIType(withDropCaps);
 
         const resp = document({
