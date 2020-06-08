@@ -490,8 +490,7 @@ const render = (format: Format, excludeStyles = false) =>
         }
 
         case ElementKind.ExplainerAtom: {
-            const { id, html, title } = element;
-            return styledH(ExplainerAtom, { id, html, title })
+            return h(ExplainerAtom, { ...element })
         }
 
         case ElementKind.InteractiveAtom: {
