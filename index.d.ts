@@ -135,34 +135,90 @@ type ReaderRevenuePosition =
 
 interface CampaignType {
     id: string;
-    name: string;
-    rules: [];
-    priority: number;
     activeFrom: number;
     displayOnSensitive: boolean;
-    fields: {
-        formId: number;
-        callout: string;
-        _type: string;
-        description: string;
-        tagName: string;
-        formFields: CampaignFeildType[];
-    };
+    formId: number;
+    calloutTitle: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFeildType[];
 }
 
-interface CampaignFeildType {
-    text_size?: number | string; // TODO: need to fix at source
-    name?: string;
-    description?: string;
-    hide_label?: string;
-    label?: string;
-    id?: string;
-    type: string;
-    required: string;
-    options?: {
+type CampaignFeildType =
+    | CampaignFeildText
+    | CampaignFeildTextArea
+    | CampaignFeildFile
+    | CampaignFeildRadio
+    | CampaignFeildCheckbox
+    | CampaignFeildSelect;
+
+interface CampaignFeildText {
+    text_size: number;
+    name: string;
+    description: string;
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'textarea';
+    required: boolean;
+}
+
+interface CampaignFeildTextArea {
+    name: string;
+    description: string;
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'text';
+    required: boolean;
+}
+
+interface CampaignFeildFile {
+    name: string;
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'file';
+    required: boolean;
+}
+
+interface CampaignFeildRadio {
+    name: string;
+    options: {
         label: string;
         value: string;
     }[];
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'radio';
+    required: boolean;
+}
+
+interface CampaignFeildCheckbox {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'checkbox';
+    required: boolean;
+}
+
+interface CampaignFeildSelect {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: boolean;
+    label: string;
+    id: number;
+    type: 'select';
+    required: boolean;
 }
 
 interface NavType {
