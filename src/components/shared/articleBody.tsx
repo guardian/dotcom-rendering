@@ -34,8 +34,11 @@ const ArticleBodyStyles = css`
 
     ${adStyles}
 
-    twitter-widget {
+    twitter-widget,
+    figure[data-atom-type="explainer"] {
         margin: ${remSpace[4]} 0;
+        clear: both;
+        display: inline-block;
     }
 `;
 
