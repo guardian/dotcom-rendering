@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
 
 type Props = {
@@ -29,7 +29,7 @@ const valueStyles = css`
 `;
 
 const labelStyles = css`
-    ${headline.xxsmall()}
+    ${textSans.small()}
     fill: ${text.ctaPrimary};
     text-anchor: middle;
 `;
