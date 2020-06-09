@@ -39,6 +39,9 @@ const windowGuardian = {
             },
         },
     },
+    functions: {
+        import: (url: string) => import(url),
+    },
 };
 
 // Stub global Guardian object
