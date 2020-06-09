@@ -176,6 +176,7 @@ interface CampaignFieldTextArea {
 
 interface CampaignFieldFile {
     name: string;
+    description?: string;
     hideLabel: boolean;
     label: string;
     id: number;
@@ -185,6 +186,7 @@ interface CampaignFieldFile {
 
 interface CampaignFieldRadio {
     name: string;
+    description?: string;
     options: {
         label: string;
         value: string;
@@ -198,6 +200,7 @@ interface CampaignFieldRadio {
 
 interface CampaignFieldCheckbox {
     name: string;
+    description?: string;
     options: {
         label: string;
         value: string;
@@ -211,6 +214,7 @@ interface CampaignFieldCheckbox {
 
 interface CampaignFieldSelect {
     name: string;
+    description?: string;
     options: {
         label: string;
         value: string;
