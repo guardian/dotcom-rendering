@@ -78,6 +78,8 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
             clear: left;
             position: relative;
             padding: ${space[2]}px 10px;
+            /* We use min-height to help reduce our CLS value */
+            min-height: 800px;
             background-color: ${BACKGROUND_COLOUR};
 
             :before {
