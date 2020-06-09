@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 type Props = {
     root: IslandType;
-    children: JSX.Element;
+    children: React.ReactNode;
     richLinkIndex?: number;
 };
 
