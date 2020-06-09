@@ -11,11 +11,15 @@ export const Portal = ({ root, children, richLinkIndex }: Props) => {
     const element = document.getElementById(rootId);
     if (!element) return null;
     window.performance.mark(`${rootId}-portal-start`);
-    // Remove any children. Why? Because we sometimes server render Placeholders in
-    // the root divs where the Portal is being inserted and we want to remove then
-    // when we load in the client side content
-    // See: https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-    element.textContent = '';
+    // First remove any placeholder. Why? Because we sometimes server side render Placeholders in
+    // the root divs where the Portal is being inserted so the page is rendered with the placeholder
+    // showing (to reduce jank). But ReactDOM.createPortal won't replace content so we need to
+    // manually remove it here.
+    const placeholderElement = element.querySelector(
+        '[data-name="placeholder"]',
+    );
+    if (placeholderElement) placeholderElement.remove();
+
     return ReactDOM.createPortal(children, element);
     window.performance.mark(`${rootId}-portal-end`);
     window.performance.measure(

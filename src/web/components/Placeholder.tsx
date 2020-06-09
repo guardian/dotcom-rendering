@@ -45,6 +45,7 @@ export const Placeholder = ({
 }: Props) => (
     <div id={rootId}>
         <div
+            data-name="placeholder"
             className={css`
                 height: ${height}px;
                 width: ${width ? `${width}px` : '100%'};
