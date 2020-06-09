@@ -313,7 +313,7 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 
 const richLinkWidth = '8.75rem';
 
-const richLinkStyles = (format: Format) => {
+const richLinkStyles = (format: Format): string => {
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
@@ -378,7 +378,7 @@ const richLinkStyles = (format: Format) => {
     `;
 }
 
-const RichLink = (props: { url: string; linkText: string, format: Format }): ReactElement =>
+const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
     styledH('aside', { css: richLinkStyles(props.format) },
         styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
     );
