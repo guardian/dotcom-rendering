@@ -73,7 +73,6 @@ interface EmbedBlockElement {
     alt?: string;
     html: string;
     isMandatory: boolean;
-    campaign?: CampaignType;
 }
 
 interface ExplainerAtomBlockElement {
@@ -250,6 +249,18 @@ interface YoutubeBlockElement {
     width?: string;
 }
 
+interface CalloutBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
+    id: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    calloutTitle: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
 type CAPIElement =
     | AtomEmbedMarkupBlockElement
     | AtomEmbedUrlBlockElement
@@ -350,17 +361,6 @@ interface Switches {
 // -------------------------------------
 // Callout Campaign
 // -------------------------------------
-
-interface CampaignType {
-    id: string;
-    activeFrom: number;
-    displayOnSensitive: boolean;
-    formId: number;
-    calloutTitle: string;
-    description: string;
-    tagName: string;
-    formFields: CampaignFieldType[];
-}
 
 type CampaignFieldType =
     | CampaignFieldText
