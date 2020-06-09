@@ -3,6 +3,7 @@ import React from 'react';
 import { Section } from './Section';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
+import { RightColumn } from './RightColumn';
 import { ArticleContainer } from './ArticleContainer';
 
 import { MatchNav } from './MatchNav';
@@ -75,7 +76,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
     return (
-        <Section>
+        <Section padded={false}>
             <Flex>
                 <LeftColumn>
                     <></>
@@ -87,6 +88,9 @@ export const InContext = () => {
                         comments="Here is a comments string"
                     />
                 </ArticleContainer>
+                <RightColumn>
+                    <></>
+                </RightColumn>
             </Flex>
         </Section>
     );

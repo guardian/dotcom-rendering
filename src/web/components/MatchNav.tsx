@@ -54,17 +54,11 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                /* Always stretch left */
+                width: 100vw;
                 left: -100vw;
-                /* Only stretch right below desktop */
-                right: 0;
                 ${until.desktop} {
-                    right: -20px;
+                    left: calc((100vw - 46rem) / -2);
                 }
-                ${until.mobileLandscape} {
-                    right: -10px;
-                }
-
                 background-color: ${brandYellow.main};
                 z-index: -1;
             }
