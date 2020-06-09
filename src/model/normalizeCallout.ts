@@ -121,9 +121,14 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                                 // if `alt` is defined we should use that in favor of HTML
                                 // as doing such a search can be costly
                                 if (block.alt) {
-                                    return block.alt.search(ele.fields.tagName);
+                                    return (
+                                        block.alt.search(ele.fields.tagName) !==
+                                        -1
+                                    );
                                 }
-                                return block.html.search(ele.fields.tagName);
+                                return (
+                                    block.html.search(ele.fields.tagName) !== -1
+                                );
                             },
                         );
 
