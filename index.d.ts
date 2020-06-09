@@ -141,18 +141,18 @@ interface CampaignType {
     calloutTitle: string;
     description: string;
     tagName: string;
-    formFields: CampaignFeildType[];
+    formFields: CampaignFieldType[];
 }
 
-type CampaignFeildType =
-    | CampaignFeildText
-    | CampaignFeildTextArea
-    | CampaignFeildFile
-    | CampaignFeildRadio
-    | CampaignFeildCheckbox
-    | CampaignFeildSelect;
+type CampaignFieldType =
+    | CampaignFieldText
+    | CampaignFieldTextArea
+    | CampaignFieldFile
+    | CampaignFieldRadio
+    | CampaignFieldCheckbox
+    | CampaignFieldSelect;
 
-interface CampaignFeildText {
+interface CampaignFieldText {
     text_size?: number;
     name: string;
     description?: string;
@@ -163,7 +163,7 @@ interface CampaignFeildText {
     required: boolean;
 }
 
-interface CampaignFeildTextArea {
+interface CampaignFieldTextArea {
     text_size?: number;
     name: string;
     description?: string;
@@ -174,7 +174,7 @@ interface CampaignFeildTextArea {
     required: boolean;
 }
 
-interface CampaignFeildFile {
+interface CampaignFieldFile {
     name: string;
     hide_label: boolean;
     label: string;
@@ -183,7 +183,7 @@ interface CampaignFeildFile {
     required: boolean;
 }
 
-interface CampaignFeildRadio {
+interface CampaignFieldRadio {
     name: string;
     options: {
         label: string;
@@ -196,7 +196,7 @@ interface CampaignFeildRadio {
     required: boolean;
 }
 
-interface CampaignFeildCheckbox {
+interface CampaignFieldCheckbox {
     name: string;
     options: {
         label: string;
@@ -209,7 +209,7 @@ interface CampaignFeildCheckbox {
     required: boolean;
 }
 
-interface CampaignFeildSelect {
+interface CampaignFieldSelect {
     name: string;
     options: {
         label: string;
