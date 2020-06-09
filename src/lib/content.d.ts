@@ -346,3 +346,100 @@ interface TimelineEvent {
 interface Switches {
     [key: string]: boolean;
 }
+
+// -------------------------------------
+// Callout Campaign
+// -------------------------------------
+
+interface CampaignType {
+    id: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    calloutTitle: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
+type CampaignFieldType =
+    | CampaignFieldText
+    | CampaignFieldTextArea
+    | CampaignFieldFile
+    | CampaignFieldRadio
+    | CampaignFieldCheckbox
+    | CampaignFieldSelect;
+
+interface CampaignFieldText {
+    id: number;
+    type: 'textarea';
+    name: string;
+    description?: string;
+    required: boolean;
+    text_size?: number;
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldTextArea {
+    id: number;
+    type: 'text';
+    name: string;
+    description?: string;
+    required: boolean;
+    text_size?: number;
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldFile {
+    id: number;
+    type: 'file';
+    name: string;
+    description?: string;
+    required: boolean;
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldRadio {
+    id: number;
+    type: 'radio';
+    name: string;
+    description?: string;
+    required: boolean;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldCheckbox {
+    id: number;
+    type: 'checkbox';
+    name: string;
+    description?: string;
+    required: boolean;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldSelect {
+    id: number;
+    type: 'select';
+    name: string;
+    description?: string;
+    required: boolean;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hideLabel: boolean;
+    label: string;
+}
