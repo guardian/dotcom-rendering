@@ -108,8 +108,9 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
             // This is made a little complex due to the fact that we are handling multiple arrys.
             // Furthermore there is no clear way of checking if a EmbedBlockElement is a CalloutBlockElement
             // currently `alt` and `html` in the EmbedBlockElement to search for a string mathcing the calloutElements tagName
-            blocks: body.blocks.map(block => {
-                const elements = block.elements.map(block => {
+            blocks: body.blocks.map(({ elements, ...rest }) => ({
+                ...rest,
+                elements: elements.map(block => {
                     if (
                         block._type ===
                         'model.dotcomrendering.pageElements.EmbedBlockElement'
@@ -143,13 +144,8 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                         return block;
                     }
                     return block;
-                });
-
-                return {
-                    ...block,
-                    elements,
-                };
-            }),
+                }),
+            })),
             // TODO: we can potentually remove callout campaigns from configs?
         };
     }
