@@ -295,7 +295,8 @@ type CAPIElement =
     | VideoFacebookBlockElement
     | VideoVimeoBlockElement
     | VideoYoutubeBlockElement
-    | YoutubeBlockElement;
+    | YoutubeBlockElement
+    | CalloutBlockElement;
 
 // -------------------------------------
 // Misc
