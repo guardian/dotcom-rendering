@@ -268,6 +268,21 @@ describe('Normalize callout campaigne data', () => {
                             isMandatory: false,
                         },
                         {
+                            alt: 'Callout should-not-be-removed',
+                            _type:
+                                'model.dotcomrendering.pageElements.EmbedBlockElement',
+                            html:
+                                '<div data-callout-tagname="should-not-be-removed">          \n                               <h2>Callout</h2>\n                               <p>should-not-be-removed</p>\n                           </div>',
+                            isMandatory: false,
+                        },
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.EmbedBlockElement',
+                            html:
+                                '<div data-callout-tagname="should-not-be-removed">          \n                               <h2>Callout</h2>\n                               <p>should-not-be-removed</p>\n                           </div>',
+                            isMandatory: false,
+                        },
+                        {
                             _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
                             html: '<p>I should not be edited.</p>',
@@ -287,6 +302,21 @@ describe('Normalize callout campaigne data', () => {
                 {
                     elements: [
                         postNormalizedCampaign,
+                        {
+                            alt: 'Callout should-not-be-removed',
+                            _type:
+                                'model.dotcomrendering.pageElements.EmbedBlockElement',
+                            html:
+                                '<div data-callout-tagname="should-not-be-removed">          \n                               <h2>Callout</h2>\n                               <p>should-not-be-removed</p>\n                           </div>',
+                            isMandatory: false,
+                        },
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.EmbedBlockElement',
+                            html:
+                                '<div data-callout-tagname="should-not-be-removed">          \n                               <h2>Callout</h2>\n                               <p>should-not-be-removed</p>\n                           </div>',
+                            isMandatory: false,
+                        },
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
