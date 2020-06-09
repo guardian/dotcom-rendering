@@ -42,7 +42,7 @@ fetch(`${window.location}/live-blocks`)
     .then(({ newBlocks }) => {
         const blocks = deserialise(newBlocks);
 
-        ReactDOM.render(
+        ReactDOM.hydrate(
             h(LiveblogBody, { format, blocks, totalBodyBlocks: 20 }),
             document.getElementById('blocks'),
         );

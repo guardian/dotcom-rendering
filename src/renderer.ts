@@ -313,65 +313,73 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 
 const richLinkWidth = '8.75rem';
 
-const richLinkStyles = css`
-    background: ${neutral[97]};
-    padding: ${basePx(1)};
-    border-top: solid 1px ${neutral[60]};
+const richLinkStyles = (format: Format) => {
+    const formatStyles = format.design === Design.Live
+        ? `width: calc(100% - ${remSpace[4]});`
+        : `
+            width: ${richLinkWidth};
+            ${from.wide} {
+                margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
+            }
+        `
 
-    button {
-        background: none;
-        border: none;
-        ${textSans.medium()};
-        padding: 0;
-        margin: 0;
-    }
+    return css`
+        background: ${neutral[97]};
+        padding: ${basePx(1)};
+        border-top: solid 1px ${neutral[60]};
 
-    button::before {
-        ${icons}
-        content: '\\e005';
-        border-radius: 100%;
-        border: solid 1px ${neutral[7]};
-        font-size: 12px;
-        padding: 3px 6px 4px 6px;
-        display: inline-block;
-        margin-right: ${remSpace[2]};
-    }
-
-    a {
-        display:inline-block;
-        text-decoration: none;
-        color: ${neutral[7]};
-
-        h1 {
-            margin: ${basePx(0, 0, 2, 0)};
-            ${headline.xxxsmall({ fontWeight: 'bold' })}
-            hyphens: auto;
+        button {
+            background: none;
+            border: none;
+            ${textSans.medium()};
+            padding: 0;
+            margin: 0;
         }
-    }
 
-    float: left;
-    clear: left;
-    width: ${richLinkWidth};
-    margin: ${basePx(1, 2, 1, 0)};
-
-    ${from.wide} {
-        margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
-    }
-
-    ${darkModeCss`
-        background-color: ${neutral[20]};
         button::before {
-            border-color: ${neutral[60]};
+            ${icons}
+            content: '\\e005';
+            border-radius: 100%;
+            border: solid 1px ${neutral[7]};
+            font-size: 12px;
+            padding: 3px 6px 4px 6px;
+            display: inline-block;
+            margin-right: ${remSpace[2]};
         }
 
-        a, h1, button {
-            color: ${neutral[60]};
-        }
-    `}
-`;
+        a {
+            display:inline-block;
+            text-decoration: none;
+            color: ${neutral[7]};
 
-const RichLink = (props: { url: string; linkText: string }): ReactElement =>
-    styledH('aside', { css: richLinkStyles },
+            h1 {
+                margin: ${basePx(0, 0, 2, 0)};
+                ${headline.xxxsmall({ fontWeight: 'bold' })}
+                hyphens: auto;
+            }
+        }
+
+        float: left;
+        clear: left;
+        margin: ${basePx(1, 2, 1, 0)};
+
+        ${formatStyles}
+
+        ${darkModeCss`
+            background-color: ${neutral[20]};
+            button::before {
+                border-color: ${neutral[60]};
+            }
+
+            a, h1, button {
+                color: ${neutral[60]};
+            }
+        `}
+    `;
+}
+
+const RichLink = (props: { url: string; linkText: string, format: Format }): ReactElement =>
+    styledH('aside', { css: richLinkStyles(props.format) },
         styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
     );
 
@@ -435,8 +443,7 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.RichLink: {
             const { url, linkText } = element;
-
-            return h(RichLink, { url, linkText, key });
+            return h(RichLink, { url, linkText, key, format });
         }
 
         case ElementKind.Interactive:

@@ -8,7 +8,7 @@ import LiveblogKeyEvents from 'components/liveblog/keyEvents';
 import LiveblogBody from 'components/liveblog/body';
 import HeaderImage from 'components/headerImage';
 import Tags from 'components/shared/tags';
-import { darkModeCss, wideColumnWidth } from 'styles';
+import { darkModeCss, wideColumnWidth, articleWidthStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
