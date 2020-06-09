@@ -94,6 +94,7 @@
     "devDependencies": {
         "@babel/core": "^7.10.2",
         "@babel/helper-create-regexp-features-plugin": "^7.10.1",
+        "@babel/helper-validator-identifier": "^7.10.1",
         "@babel/plugin-proposal-class-properties": "^7.10.1",
         "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
         "@babel/plugin-proposal-optional-chaining": "^7.10.1",
