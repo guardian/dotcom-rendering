@@ -153,77 +153,77 @@ type CampaignFieldType =
     | CampaignFieldSelect;
 
 interface CampaignFieldText {
-    text_size?: number;
-    name: string;
-    description?: string;
-    hideLabel: boolean;
-    label: string;
     id: number;
     type: 'textarea';
+    name: string;
+    description?: string;
     required: boolean;
+    text_size?: number;
+    hideLabel: boolean;
+    label: string;
 }
 
 interface CampaignFieldTextArea {
-    text_size?: number;
-    name: string;
-    description?: string;
-    hideLabel: boolean;
-    label: string;
     id: number;
     type: 'text';
+    name: string;
+    description?: string;
     required: boolean;
+    text_size?: number;
+    hideLabel: boolean;
+    label: string;
 }
 
 interface CampaignFieldFile {
-    name: string;
-    description?: string;
-    hideLabel: boolean;
-    label: string;
     id: number;
     type: 'file';
+    name: string;
+    description?: string;
     required: boolean;
+    hideLabel: boolean;
+    label: string;
 }
 
 interface CampaignFieldRadio {
+    id: number;
+    type: 'radio';
     name: string;
     description?: string;
+    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
     hideLabel: boolean;
     label: string;
-    id: number;
-    type: 'radio';
-    required: boolean;
 }
 
 interface CampaignFieldCheckbox {
+    id: number;
+    type: 'checkbox';
     name: string;
     description?: string;
+    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
     hideLabel: boolean;
     label: string;
-    id: number;
-    type: 'checkbox';
-    required: boolean;
 }
 
 interface CampaignFieldSelect {
+    id: number;
+    type: 'select';
     name: string;
     description?: string;
+    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
     hideLabel: boolean;
     label: string;
-    id: number;
-    type: 'select';
-    required: boolean;
 }
 
 interface NavType {
