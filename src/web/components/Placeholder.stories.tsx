@@ -93,3 +93,12 @@ export const Root = () => {
     );
 };
 Root.story = { name: 'with rootId set' };
+
+export const NoShimmer = () => {
+    return (
+        <Container>
+            <Placeholder height={200} shouldShimmer={false} />
+        </Container>
+    );
+};
+NoShimmer.story = { name: 'without shimmer' };

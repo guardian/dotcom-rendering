@@ -12,6 +12,7 @@ type Props = {
     width?: number;
     spaceBelow?: 1 | 2 | 3 | 4 | 5 | 6 | 9;
     spaceLeft?: 1 | 2 | 3 | 4 | 5 | 6 | 9;
+    shouldShimmer?: boolean;
 };
 
 const shimmer = keyframes`
@@ -40,6 +41,7 @@ export const Placeholder = ({
     width,
     spaceBelow,
     spaceLeft,
+    shouldShimmer = true,
 }: Props) => (
     <div id={rootId}>
         <div
@@ -50,7 +52,7 @@ export const Placeholder = ({
                 margin-left: ${spaceLeft && space[spaceLeft]}px;
                 background-color: ${BACKGROUND_COLOUR};
 
-                ${shimmerStyles}
+                ${shouldShimmer && shimmerStyles}
             `}
         />
     </div>
