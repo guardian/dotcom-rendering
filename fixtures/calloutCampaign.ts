@@ -1,5 +1,5 @@
 export const calloutCampaign: CalloutBlockElement = {
-    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement',
     id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
     tagName: 'callout-early-coronavirus-events',
     activeFrom: 1588118400000,
