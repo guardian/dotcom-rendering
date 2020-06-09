@@ -6,19 +6,19 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { Option } from 'types/option';
-import Dateline from 'components/dateline';
 import { Item, getFormat } from 'item';
 import { textSans } from "@guardian/src-foundations/typography";
 import { renderText } from "../../renderer";
 import { remSpace } from "@guardian/src-foundations";
+import Dateline from 'components/dateline';
 
 
 // ----- Styles ----- //
 
 const Styles = ({ inverted }: PillarStyles): SerializedStyles => css`
-    
     .author {
         margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
+        color: ${neutral[86]};
 
         .follow, a {
             color: ${inverted};

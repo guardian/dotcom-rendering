@@ -231,7 +231,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
 
 const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(standfirstTextElement(format));
-    const colour = getPillarStyles(format.pillar).kicker;
+    const { kicker, inverted } = getPillarStyles(format.pillar);
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
@@ -240,6 +240,7 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'LI':
             return styledH('li', { css: listItemStyles }, children);
         case 'A': {
+            const colour = format.design === Design.Media ? inverted : kicker;
             const styles = css` color: ${colour}; text-decoration: none`;
             const href = getHref(node).withDefault('');
             return styledH('a', { key, href, css: styles }, children);
