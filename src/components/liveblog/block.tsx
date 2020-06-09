@@ -1,9 +1,9 @@
 import React, { ReactNode, useState, useEffect } from 'react';
-import { icons, basePx, linkStyle } from 'styles';
+import { basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { until, from } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
