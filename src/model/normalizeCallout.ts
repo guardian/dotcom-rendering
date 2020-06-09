@@ -108,9 +108,8 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
             // This is made a little complex due to the fact that we are handling multiple arrys.
             // Furthermore there is no clear way of checking if a EmbedBlockElement is a CalloutBlockElement
             // currently `alt` and `html` in the EmbedBlockElement to search for a string mathcing the calloutElements tagName
-            blocks: body.blocks.map(block => ({
-                ...block,
-                elements: block.elements.map(block => {
+            blocks: body.blocks.map(block => {
+                const elements = block.elements.map(block => {
                     if (
                         block._type ===
                         'model.dotcomrendering.pageElements.EmbedBlockElement'
@@ -122,37 +121,37 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                                 // as doing such a search can be costly
                                 if (block.alt) {
                                     return block.alt.search(ele.fields.tagName);
-                                } else {
-                                    return block.html.search(
-                                        ele.fields.tagName,
-                                    );
                                 }
+                                return block.html.search(ele.fields.tagName);
                             },
                         );
 
                         // TODO: throw warning if we have more than 1 match
-                        if (relatedCalloutElement.length > 1)
+                        if (relatedCalloutElement.length > 1) {
+                            // eslint-disable-next-line no-console
                             console.warn(
                                 'More than one callout block match candidate, need to investigate and mitigate issue',
                             );
+                        }
 
                         // if we find a match we should remove that EmbedBlockElement with a CalloutBlockElement
                         if (relatedCalloutElement.length) {
                             return formatCalloutObject(
                                 relatedCalloutElement[0],
                             );
-                        } else {
-                            return block;
                         }
-                    } else {
                         return block;
                     }
-                }),
-            })),
+                    return block;
+                });
 
+                return {
+                    ...block,
+                    elements,
+                };
+            }),
             // TODO: we can potentually remove callout campaigns from configs?
         };
-    } else {
-        return body;
     }
+    return body;
 };
