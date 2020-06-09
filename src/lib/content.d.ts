@@ -476,18 +476,7 @@ type preNormalizedCampaignFieldType =
     | preNormalizedCampaignFieldSelect;
 
 type preNormalizedCampaignFieldText = {
-    text_size: number;
-    name: string;
-    description?: string;
-    hide_label: string;
-    label: string;
-    id: string;
-    type: 'textarea';
-    required: string;
-};
-
-type preNormalizedCampaignFieldTextArea = {
-    text_size: string;
+    text_size?: number;
     name: string;
     description?: string;
     hide_label: string;
@@ -497,8 +486,19 @@ type preNormalizedCampaignFieldTextArea = {
     required: string;
 };
 
+type preNormalizedCampaignFieldTextArea = {
+    text_size?: number;
+    name: string;
+    description?: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'textarea';
+    required: string;
+};
+
 type preNormalizedCampaignFieldFile = {
-    text_size: string;
+    text_size?: string;
     name: string;
     hide_label: string;
     label: string;
