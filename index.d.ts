@@ -156,7 +156,7 @@ interface CampaignFieldText {
     text_size?: number;
     name: string;
     description?: string;
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'textarea';
@@ -167,7 +167,7 @@ interface CampaignFieldTextArea {
     text_size?: number;
     name: string;
     description?: string;
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'text';
@@ -176,7 +176,7 @@ interface CampaignFieldTextArea {
 
 interface CampaignFieldFile {
     name: string;
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'file';
@@ -189,7 +189,7 @@ interface CampaignFieldRadio {
         label: string;
         value: string;
     }[];
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'radio';
@@ -202,7 +202,7 @@ interface CampaignFieldCheckbox {
         label: string;
         value: string;
     }[];
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'checkbox';
@@ -215,7 +215,7 @@ interface CampaignFieldSelect {
         label: string;
         value: string;
     }[];
-    hide_label: boolean;
+    hideLabel: boolean;
     label: string;
     id: number;
     type: 'select';
