@@ -10,7 +10,7 @@ export const calloutCampaign: CalloutBlockElement = {
         '<p>If you attended one of these events and believe you may have been infected by coronavirus, we\'d like to hear from you. You can get in touch by filling in the form below, or by contacting us&nbsp;<a href="https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian">via WhatsApp</a>&nbsp;by&nbsp;<a href="https://api.whatsapp.com/send?phone=447867825056">clicking here&nbsp;</a>or adding the contact +44(0)7867825056. Only the Guardian can see your contributions and one of our journalists may contact you to discuss further. </p>',
     formFields: [
         {
-            text_size: 50,
+            textSize: 50,
             name: 'name',
             description: 'You can use your first name only',
             hideLabel: false,
@@ -20,7 +20,7 @@ export const calloutCampaign: CalloutBlockElement = {
             required: true,
         },
         {
-            text_size: 50,
+            textSize: 50,
             name: 'where_do_you_live',
             description: 'Town or area is fine',
             hideLabel: false,
@@ -30,7 +30,7 @@ export const calloutCampaign: CalloutBlockElement = {
             required: true,
         },
         {
-            text_size: 50,
+            textSize: 50,
             name: 'tell_us_a_bit_about_yourself_age_and_what_you_do_etc',
             hideLabel: false,
             label: 'Tell us a bit about yourself (age and what you do etc.)',
@@ -39,7 +39,7 @@ export const calloutCampaign: CalloutBlockElement = {
             required: false,
         },
         {
-            text_size: 50,
+            textSize: 50,
             name: 'which_event_did_you_attend_and_when',
             hideLabel: false,
             label: 'Which event did you attend and when?',
@@ -119,7 +119,7 @@ export const calloutCampaign: CalloutBlockElement = {
             required: true,
         },
         {
-            text_size: 50,
+            textSize: 50,
             name: 'email_address_',
             description:
                 'Your contact details are helpful so we can contact you for more information. They will only be seen by the Guardian.',
@@ -130,7 +130,7 @@ export const calloutCampaign: CalloutBlockElement = {
             required: true,
         },
         {
-            text_size: 50,
+            textSize: 50,
             name: 'phone_number',
             description:
                 'Your contact details are helpful so we can contact you for more information. They will only be seen by the Guardian.',
@@ -177,7 +177,7 @@ export const calloutCampaign: CalloutBlockElement = {
     ],
 };
 
-export const preNormalizedCalloutCampaign = {
+export const preNormalizedCalloutCampaign: preNormalizedCampaignType = {
     id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
     name: 'CALLOUT: early coronavirus events',
     rules: [],
