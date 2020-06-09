@@ -133,7 +133,7 @@ const Head: FC<HeadProps> = ({ webTitle }: HeadProps) =>
     <>
         <title>{webTitle}</title>
         <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
-        <meta name="viewport" content="initial-scale=1, maximum-scale=5" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
         <link rel="stylesheet" href="native://fontSize.css" />
     </>
 
