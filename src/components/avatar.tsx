@@ -48,6 +48,7 @@ const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
             image={image}
             sizes={dimensions}
             className={getStyles(format)}
+            format={format}
         />
     ).withDefault(null);
 }

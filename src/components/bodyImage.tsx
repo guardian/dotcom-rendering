@@ -23,7 +23,6 @@ const styles = css`
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
-    background: ${neutral[97]};
     display: block;
     width: 100%;
     object-fit: cover;
@@ -38,12 +37,13 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     `}
 `;
 
-const BodyImage: FC<BodyImageProps> = ({ image, children }: BodyImageProps) =>
+const BodyImage: FC<BodyImageProps> = ({ image, children, format }: BodyImageProps) =>
     <figure css={styles}>
         <Img
             image={image}
             sizes={sizes}
             className={imgStyles(image.width, image.height)}
+            format={format}
         />
         {children}
     </figure>

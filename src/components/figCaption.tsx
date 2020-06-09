@@ -10,8 +10,8 @@ import { Format, Design } from '@guardian/types/Format';
 import { getPillarStyles } from 'pillarStyles';
 import { Option } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
-import Anchor from 'components/anchor';
 import { darkModeCss } from 'styles';
+import Anchor from 'components/anchor';
 
 
 // ----- Subcomponents ----- //
@@ -73,7 +73,7 @@ const captionHeadingStyles = css`
     ${headline.xxxsmall()}
     color: ${neutral[86]};
     margin: 0 0 ${remSpace[3]};
-    display: inline;
+    display: block;
 `;
 
 const anchorStyles = css`
@@ -91,7 +91,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
         case 'BR':
             return null;
         case 'EM':
-            return <em css={ textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold'})} key={key}>{children}</em>
+            return <em css={ css`${textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold'})}` } key={key}>{children}</em>
         case 'A':
             return (
                 <Anchor

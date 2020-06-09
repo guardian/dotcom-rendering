@@ -32,12 +32,13 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     width: 100%;
 `;
 
-const BodyImageHalfWidth: FC<Props> = ({ image }: Props) =>
+const BodyImageHalfWidth: FC<Props> = ({ image, format }: Props) =>
     <figure css={styles} className="halfWidth">
         <Img
             image={image}
             sizes={size}
             className={imgStyles(image.width, image.height)}
+            format={format}
         />
     </figure>;
 
