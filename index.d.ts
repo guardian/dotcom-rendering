@@ -564,6 +564,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    campaigns?: preNormalizedCampaignType[];
 }
 
 interface GADataType {

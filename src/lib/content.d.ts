@@ -372,22 +372,22 @@ type CampaignFieldType =
 
 interface CampaignFieldText {
     id: number;
-    type: 'textarea';
+    type: 'text';
     name: string;
     description?: string;
     required: boolean;
-    text_size?: number;
+    textSize?: number;
     hideLabel: boolean;
     label: string;
 }
 
 interface CampaignFieldTextArea {
     id: number;
-    type: 'text';
+    type: 'textarea';
     name: string;
     description?: string;
     required: boolean;
-    text_size?: number;
+    textSize?: number;
     hideLabel: boolean;
     label: string;
 }
@@ -398,6 +398,7 @@ interface CampaignFieldFile {
     name: string;
     description?: string;
     required: boolean;
+    textSize?: number;
     hideLabel: boolean;
     label: string;
 }
@@ -443,3 +444,103 @@ interface CampaignFieldSelect {
     hideLabel: boolean;
     label: string;
 }
+
+// -------------------------------------
+// preNormalisedCampaign callout types
+// -------------------------------------
+
+type preNormalizedCampaignType = {
+    id: string;
+    name: string;
+    rules: [];
+    priority: number;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    fields: {
+        formId: number;
+        callout: string;
+        _type: string;
+        description: string;
+        tagName: string;
+        formFields: preNormalizedCampaignFieldType[];
+    };
+};
+
+type preNormalizedCampaignFieldType =
+    | preNormalizedCampaignFieldText
+    | preNormalizedCampaignFieldTextArea
+    | preNormalizedCampaignFieldFile
+    | preNormalizedCampaignFieldRadio
+    | preNormalizedCampaignFieldCheckbox
+    | preNormalizedCampaignFieldSelect;
+
+type preNormalizedCampaignFieldText = {
+    text_size: number;
+    name: string;
+    description?: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'textarea';
+    required: string;
+};
+
+type preNormalizedCampaignFieldTextArea = {
+    text_size: string;
+    name: string;
+    description?: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'text';
+    required: string;
+};
+
+type preNormalizedCampaignFieldFile = {
+    text_size: string;
+    name: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'file';
+    required: string;
+};
+
+type preNormalizedCampaignFieldRadio = {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'radio';
+    required: string;
+};
+
+type preNormalizedCampaignFieldCheckbox = {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'checkbox';
+    required: string;
+};
+
+type preNormalizedCampaignFieldSelect = {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'select';
+    required: string;
+};
