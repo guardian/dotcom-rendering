@@ -7,15 +7,22 @@ import { ArticleContainer } from './ArticleContainer';
 
 import { MatchNav } from './MatchNav';
 
-const homeTeam = {
+const homeTeam: TeamType = {
     name: 'Liverpool',
     id: '9',
     score: 2,
     crest: 'https://sport.guim.co.uk/football/crests/120/9.png',
     scorers: ['Georginio Wijnaldum 43', 'Roberto Firmino 94'],
+    lineup: [],
+    possession: 1,
+    shotsOn: 2,
+    shotsOff: 66,
+    corners: 8,
+    fouls: 4,
+    colours: '#e354c3',
 };
 
-const awayTeam = {
+const awayTeam: TeamType = {
     name: 'Atlético',
     id: '26305',
     score: 3,
@@ -25,6 +32,13 @@ const awayTeam = {
         'Marcos Llorente 105 +0:02',
         'Alvaro Morata 120 +0:16',
     ],
+    lineup: [],
+    possession: 1,
+    shotsOn: 28,
+    shotsOff: 6,
+    corners: 8,
+    fouls: 4,
+    colours: '#fc3',
 };
 
 export default {
