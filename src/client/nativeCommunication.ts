@@ -1,6 +1,6 @@
 import { AdSlot } from "@guardian/bridget/AdSlot";
 import { Image } from "@guardian/bridget/Image";
-import { commercialClient, galleryClient, userClient } from "../native/nativeApi";
+import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
 import { logger } from "../logger";
 
 function getAdSlots(): AdSlot[] {
@@ -57,6 +57,12 @@ function ads(): void {
             Array.from(document.querySelectorAll('.ad-placeholder'))
                 .forEach(placeholder => placeholder.classList.remove('hidden'))
             insertAds();
+            Array.from(document.querySelectorAll('.ad-hide'))
+                .forEach(hideButton => {
+                    hideButton.addEventListener('click', () => {
+                        acquisitionsClient.launchFrictionScreen();
+                    })
+                })
         }
     })
 }

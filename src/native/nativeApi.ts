@@ -1,7 +1,7 @@
 import { createAppClient } from './thrift/nativeConnection';
 import * as Environment from '@guardian/bridget/Environment';
 import * as Commercial from '@guardian/bridget/Commercial';
-import * as Acquisitions from '@guardian/bridget/Acquistions';
+import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Gallery from '@guardian/bridget/Gallery';
