@@ -255,7 +255,7 @@ interface CalloutBlockElement {
     activeFrom: number;
     displayOnSensitive: boolean;
     formId: number;
-    calloutTitle: string;
+    title: string;
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];

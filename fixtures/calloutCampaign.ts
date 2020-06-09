@@ -5,7 +5,7 @@ export const calloutCampaign: CalloutBlockElement = {
     activeFrom: 1588118400000,
     displayOnSensitive: false,
     formId: 3860296,
-    calloutTitle: 'Were you infected at this time?',
+    title: 'Were you infected at this time?',
     description:
         '<p>If you attended one of these events and believe you may have been infected by coronavirus, we\'d like to hear from you. You can get in touch by filling in the form below, or by contacting us&nbsp;<a href="https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian">via WhatsApp</a>&nbsp;by&nbsp;<a href="https://api.whatsapp.com/send?phone=447867825056">clicking here&nbsp;</a>or adding the contact +44(0)7867825056. Only the Guardian can see your contributions and one of our journalists may contact you to discuss further. </p>',
     formFields: [
