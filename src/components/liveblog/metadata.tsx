@@ -26,6 +26,8 @@ const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
                 font-style: normal;
                 font-weight: 500;
                 padding-top: 4px;
+                color: ${neutral[93]};
+                border-bottom: 0.0625rem solid rgb(220, 220, 220, .4);
             }
         }
 
@@ -45,6 +47,7 @@ const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     }
 
     section {
+        display: inline-block;
         margin-top: ${basePx(-1)};
 
         .metadata {

@@ -13,6 +13,7 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
 
     a {
         color: ${neutral[93]};
+        border-bottom: 0.0625rem solid rgb(220, 220, 220, .4);
     }
 
     li {

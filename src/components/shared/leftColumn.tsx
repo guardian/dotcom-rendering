@@ -10,7 +10,7 @@ import { remSpace } from '@guardian/src-foundations';
 // ----- Styles ----- //
 
 const LeftColumnStyles = css`
-    padding: ${remSpace[2]} 0;
+    padding: ${remSpace[2]};
 
     ${from.phablet} {
         display: flex;

@@ -1,9 +1,9 @@
 import React, { ReactNode, useState, useEffect } from 'react';
-import { icons, basePx, linkStyle } from 'styles';
+import { basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { until, from } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
@@ -32,42 +32,11 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     time:nth-child(1) {
         margin-top: 0;
         margin-bottom: ${remSpace[4]};
-        padding-left: ${remSpace[2]};
     }
 
     ${until.phablet} {
         margin-left: ${basePx(1)};
         margin-right: ${basePx(1)};
-    }
-
-    .rich-link {
-        ${linkStyle(kicker)}
-    }
-
-    blockquote {
-        font-style: italic;
-        position: relative;
-        margin-left: 0;
-        padding-left: 4rem;
-
-        &::before {
-            ${icons}
-            font-style: normal;
-            font-size: 2.5rem;
-            content: '\\e11c';
-            color: ${kicker};
-            position: absolute;
-            left: 0;
-            top: -10px;
-        }
-    }
-
-    aside {
-        width: calc(100% - 2rem);
-        margin-left: 0;
-        ${from.wide} {
-            width: 100%;
-        }
     }
 
     h3 {
