@@ -91,6 +91,10 @@ const serverConfig = env => {
                 }
             ]
         },
+        optimization: {
+            minimize: false
+        },
+        devtool: 'inline-cheap-source-map',
     }
 }
 

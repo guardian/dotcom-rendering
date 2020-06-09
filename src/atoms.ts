@@ -1,4 +1,5 @@
-import { IBlockElement as BlockElement, IAtoms as Atoms } from "mapiThriftModels";
+import { Atoms } from "@guardian/content-api-models/v1/atoms";
+import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
 import { Result, Err, Ok } from "types/result";
 import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from "types/option";
@@ -10,7 +11,7 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
         case "interactive": {
             const atom = atoms.interactives?.find(interactive => interactive.id === id);
 
-            if (!atom?.data?.interactive) {
+            if (atom?.data?.kind !== "interactive") {
                 return new Err(`No atom matched this id: ${id}`);
             }
 
@@ -31,7 +32,7 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
         case "explainer": {
             const atom = atoms.explainers?.find(explainer => explainer.id === id);
 
-            if (!atom?.data?.explainer || !id) {
+            if (atom?.data?.kind !== "explainer" || !id) {
                 return new Err(`No atom matched this id: ${id}`);
             }
 

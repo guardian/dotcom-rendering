@@ -1,16 +1,14 @@
 // ----- Imports ----- //
 
 import { pillarFromString } from 'pillarStyles';
-import { IContent as Content } from 'mapiThriftModels/Content';
-import { ITag as Tag } from 'mapiThriftModels/Tag';
+import { Content } from '@guardian/content-api-models/v1/content';
+import { Tag } from '@guardian/content-api-models/v1/tag';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
+import { Element } from '@guardian/content-api-models/v1/element';
+import { Asset } from '@guardian/content-api-models/v1/asset';
+import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { articleMainImage, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
 import { Option, fromNullable } from 'types/option';
-import {
-    ElementType,
-    IElement as Element,
-    AssetType,
-    IAsset as Asset,
-} from 'mapiThriftModels';
 import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
 import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';

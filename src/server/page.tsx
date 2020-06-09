@@ -14,7 +14,7 @@ import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Media from 'components/media/article';
 import Interactive from 'components/interactive/article';
-import { IContent as Content } from 'mapiThriftModels/Content';
+import { Content } from '@guardian/content-api-models/v1/content';
 import { includesTweets } from 'capi';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { partition } from 'types/result';

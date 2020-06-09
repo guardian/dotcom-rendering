@@ -63,6 +63,8 @@
     "@emotion/styled": "^10.0.27",
     "@guardian/atoms-rendering": "^1.3.3",
     "@guardian/bridget": "^0.58.0",
+    "@guardian/content-api-models": "^15.9.1",
+    "@guardian/content-atom-model": "^3.2.2",
     "@guardian/node-riffraff-artifact": "^0.1.7",
     "@guardian/src-button": "^1.0.0",
     "@guardian/src-foundations": "^1.0.0",
@@ -78,8 +80,11 @@
     "express": "^4.17.1",
     "jsdom": "^15.2.1",
     "node-fetch": "^2.6.0",
+    "node-int64": "^0.4.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "source-map-support": "^0.5.19",
+    "thrift": "^0.12.0",
     "typescript": "^3.8.3"
   },
   "devDependencies": {

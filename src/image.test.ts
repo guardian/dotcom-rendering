@@ -3,11 +3,9 @@
 import { JSDOM } from 'jsdom';
 
 import { Dpr, parseImage, Image, srcset } from 'image';
-import {
-    IBlockElement as BlockElement,
-    ElementType,
-    AssetType,
-} from 'mapiThriftModels';
+import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
+import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { None } from 'types/option';
 
 

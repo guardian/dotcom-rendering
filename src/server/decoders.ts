@@ -1,14 +1,9 @@
 // ----- Imports ----- //
 
-import {
-    BufferedTransport,
-    CompactProtocol,
-    TProtocol,
-} from '@creditkarma/thrift-server-core';
-
-import { Response as CapiResponse } from 'mapiThriftModels/Response';
-import { Content as MapiContent } from 'mapiThriftModels/Content';
-import { ErrorResponse } from 'mapiThriftModels/ErrorResponse';
+import {TProtocol, TCompactProtocol, TBufferedTransport, TTransport} from 'thrift';
+import { ContentSerde } from '@guardian/content-api-models/v1/content';
+import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
+import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
 
 
 // ----- Types ----- //
@@ -20,16 +15,30 @@ interface ThriftDecoder<A> {
 
 // ----- Functions ----- //
 
-const decodeContent = <A>(decoder: ThriftDecoder<A>) => (content: Buffer | undefined): A => {
-    const transport = new BufferedTransport(content);
-    const protocol = new CompactProtocol(transport);
-
-    return decoder.read(protocol);
+async function toTransport(buffer: Buffer): Promise<TTransport> {
+    return new Promise((resolve, reject) => {
+        const writer = TBufferedTransport.receiver((transport, seqID) => {
+            resolve(transport)
+        }, 0);
+        writer(buffer);
+    });
 }
 
-const capiDecoder = decodeContent(CapiResponse);
-const errorDecoder = decodeContent(ErrorResponse);
-const mapiDecoder = decodeContent(MapiContent);
+const decodeContent = <A>(decoder: ThriftDecoder<A>) =>
+    async (content: Buffer | undefined): Promise<A> => {
+    if (content) {
+        const transport = await toTransport(content);
+        const protocol = new TCompactProtocol(transport);
+
+        return decoder.read(protocol);
+    } else {
+        return Promise.reject("Invalid request")
+    }
+}
+
+const capiDecoder = decodeContent(ItemResponseSerde);
+const errorDecoder = decodeContent(ErrorResponseSerde);
+const mapiDecoder = decodeContent(ContentSerde);
 
 
 // ----- Exports ----- //

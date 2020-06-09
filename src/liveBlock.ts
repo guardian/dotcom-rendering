@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import { IBlock as Block } from 'mapiThriftModels/Block';
-import { ICapiDateTime as CapiDateTime } from 'mapiThriftModels/CapiDateTime';
-import { IContent as Content } from 'mapiThriftModels/Content';
+import { Block } from '@guardian/content-api-models/v1/block';
+import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
+import { Content } from '@guardian/content-api-models/v1/content';
 import { Option, toSerialisable as optionToSerialisable, fromNullable } from 'types/option';
 import { Context, DocParser } from 'types/parserContext';
 import JsonSerialisable from 'types/jsonSerialisable';

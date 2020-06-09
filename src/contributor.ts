@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Option, fromNullable, None } from 'types/option';
-import { IContent as Content } from 'mapiThriftModels';
+import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContributors } from 'capi';
 import { srcsetWithWidths, src, Dpr, Image } from 'image';
 

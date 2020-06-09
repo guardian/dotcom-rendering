@@ -1,10 +1,17 @@
-import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement, AtomType, IAtoms as Atoms } from 'mapiThriftModels';
+import { ContentType } from '@guardian/content-api-models/v1/contentType';
+import { Tag } from '@guardian/content-api-models/v1/tag';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
+import { AssetType } from '@guardian/content-api-models/v1/assetType';
+import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { AtomType } from '@guardian/content-atom-model/atomType';
+import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
-import { Int64 } from '@creditkarma/thrift-server-core/dist/main/types';
+import Int64 from 'node-int64';
 
 const articleContent = {
     id: "",
@@ -17,17 +24,20 @@ const articleContent = {
     isHosted: false
 }
 
-const contentWithTag = (tagId: string) => ({
-    ...articleContent,
-    tags: [new Tag({
+const contentWithTag = (tagId: string) => {
+    const tags: Tag[] = [{
         id: tagId,
         type: TagType.TONE,
         webTitle: "",
         webUrl: "",
         apiUrl: "",
         references: []
-    })]
-})
+    }];
+    return {
+        ...articleContent,
+        tags
+    }
+}
 
 const reviewContent = {
     ...contentWithTag('tone/reviews'),
@@ -650,13 +660,14 @@ describe('interactive atom elements', () => {
             }
         }
 
-        const atoms = {
+        const atoms: Atoms = {
             interactives: [{
                 id: "interactives/2020/04/interactive-pandemic-timeline",
                 atomType: AtomType.INTERACTIVE,
                 labels: [],
                 defaultHtml: "default",
                 data: {
+                    kind: "interactive",
                     interactive: {
                         type: "interactive",
                         title: "Pandemics and epidemics timeline",
@@ -668,7 +679,7 @@ describe('interactive atom elements', () => {
                 },
                 contentChangeDetails: {
                     lastModified: {
-                        date: Int64.fromDecimalString("0"),
+                        date: new Int64("0"),
                         user: {
                             email: "",
                             firstName: "",
@@ -676,7 +687,7 @@ describe('interactive atom elements', () => {
                         }
                     },
                     created: {
-                        date: Int64.fromDecimalString("0"),
+                        date: new Int64("0"),
                         user: {
                             email: "",
                             firstName: "",
@@ -684,14 +695,14 @@ describe('interactive atom elements', () => {
                         }
                     },
                     published: {
-                        date: Int64.fromDecimalString("0"),
+                        date: new Int64("0"),
                         user: {
                             email: "",
                             firstName: "",
                             lastName: ""
                         }
                     },
-                    revision: Int64.fromDecimalString("0")
+                    revision: new Int64("0")
                 },
                 commissioningDesks: []
             }]

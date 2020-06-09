@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { createHash } from 'crypto';
 
 import { Option, Some, None, fromNullable } from 'types/option';
-import { IBlockElement as BlockElement } from 'mapiThriftModels';
+import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { Context } from 'types/parserContext';
 
 

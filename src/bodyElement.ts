@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
-import { IAtoms as Atoms } from 'mapiThriftModels/Atoms';
-import { ElementType } from 'mapiThriftModels/ElementType';
+import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { Atoms } from '@guardian/content-api-models/v1/atoms';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import {
     Option,
     fromNullable,

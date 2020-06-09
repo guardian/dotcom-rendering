@@ -1,11 +1,13 @@
 // ----- Imports ----- //
 
-import { IContent as Content} from 'mapiThriftModels/Content';
-import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { IBlockElement} from 'mapiThriftModels/BlockElement';
-import { ElementType } from 'mapiThriftModels/ElementType';
+import { Content } from '@guardian/content-api-models/v1/content';
+import { ContentType } from '@guardian/content-api-models/v1/contentType';
+import { Tag } from '@guardian/content-api-models/v1/tag';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
+import { BlockElement} from '@guardian/content-api-models/v1/blockElement';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
+import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
 import { Option, fromNullable } from 'types/option';
-import { TagType, ContentType, ICapiDateTime as CapiDateTime } from 'mapiThriftModels';
 import { fromString as dateFromString } from 'date';
 
 
@@ -43,10 +45,10 @@ const articleSeries = (content: Content): Option<Tag> =>
 const articleContributors = (content: Content): Tag[] =>
     tagsOfType(TagType.CONTRIBUTOR)(content.tags);
 
-const isImage = (elem: IBlockElement): boolean =>
+const isImage = (elem: BlockElement): boolean =>
     elem.type === ElementType.IMAGE;
 
-const articleMainImage = (content: Content): Option<IBlockElement> =>
+const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
 
 const includesTweets = (content: Content): boolean => {
