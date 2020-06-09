@@ -1,4 +1,5 @@
-export const calloutCampaign: CampaignType = {
+export const calloutCampaign: CalloutBlockElement = {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
     id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
     tagName: 'callout-early-coronavirus-events',
     activeFrom: 1588118400000,
@@ -12,7 +13,7 @@ export const calloutCampaign: CampaignType = {
             text_size: 50,
             name: 'name',
             description: 'You can use your first name only',
-            hide_label: false,
+            hideLabel: false,
             label: 'Name',
             id: 91884870,
             type: 'text',
@@ -22,7 +23,7 @@ export const calloutCampaign: CampaignType = {
             text_size: 50,
             name: 'where_do_you_live',
             description: 'Town or area is fine',
-            hide_label: false,
+            hideLabel: false,
             label: 'Where do you live?',
             id: 91884872,
             type: 'text',
@@ -31,7 +32,7 @@ export const calloutCampaign: CampaignType = {
         {
             text_size: 50,
             name: 'tell_us_a_bit_about_yourself_age_and_what_you_do_etc',
-            hide_label: false,
+            hideLabel: false,
             label: 'Tell us a bit about yourself (age and what you do etc.)',
             id: 91884871,
             type: 'text',
@@ -40,7 +41,7 @@ export const calloutCampaign: CampaignType = {
         {
             text_size: 50,
             name: 'which_event_did_you_attend_and_when',
-            hide_label: false,
+            hideLabel: false,
             label: 'Which event did you attend and when?',
             id: 91884886,
             type: 'text',
@@ -49,7 +50,7 @@ export const calloutCampaign: CampaignType = {
         {
             name: 'share_your_experiences_here',
             description: 'Please include as much detail as possible',
-            hide_label: false,
+            hideLabel: false,
             label: 'Share your experiences here',
             id: 91884874,
             type: 'textarea',
@@ -58,7 +59,7 @@ export const calloutCampaign: CampaignType = {
         {
             name:
                 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
-            hide_label: false,
+            hideLabel: false,
             label:
                 'You can upload a photo here if you think it will add to your story',
             id: 91884877,
@@ -85,7 +86,7 @@ export const calloutCampaign: CampaignType = {
                     value: 'No, this is information only',
                 },
             ],
-            hide_label: false,
+            hideLabel: false,
             label: 'Can we publish your response?',
             id: 91884878,
             type: 'radio',
@@ -111,7 +112,7 @@ export const calloutCampaign: CampaignType = {
                     value: 'No, this is information only',
                 },
             ],
-            hide_label: false,
+            hideLabel: false,
             label: 'Can we publish your response?',
             id: 918848785,
             type: 'checkbox',
@@ -122,7 +123,7 @@ export const calloutCampaign: CampaignType = {
             name: 'email_address_',
             description:
                 'Your contact details are helpful so we can contact you for more information. They will only be seen by the Guardian.',
-            hide_label: false,
+            hideLabel: false,
             label: 'Email address ',
             id: 91884879,
             type: 'text',
@@ -133,7 +134,7 @@ export const calloutCampaign: CampaignType = {
             name: 'phone_number',
             description:
                 'Your contact details are helpful so we can contact you for more information. They will only be seen by the Guardian.',
-            hide_label: false,
+            hideLabel: false,
             label: 'Phone number',
             id: 91884880,
             type: 'text',
@@ -141,7 +142,7 @@ export const calloutCampaign: CampaignType = {
         },
         {
             name: 'do_you_have_anything_else_to_add',
-            hide_label: false,
+            hideLabel: false,
             label: 'Do you have anything else to add?',
             id: 918848810,
             type: 'textarea',
@@ -149,7 +150,7 @@ export const calloutCampaign: CampaignType = {
         },
         {
             name: 'do_you_have_anything_else_to_add',
-            hide_label: false,
+            hideLabel: false,
             label: 'Do you have anything else to add?',
             id: 91884881,
             type: 'select',
