@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import libDebounce from 'lodash.debounce';
 
 const useHasBeenSeen = (
-    options: IntersectionObserverInit,
-    debounce?: boolean,
+    options: IntersectionObserverInit & { debounce?: boolean },
 ) => {
     const [hasBeenSeen, setHasBeenSeen] = useState<boolean>(false);
     const [node, setNode] = useState<HTMLElement | null>(null);
@@ -17,7 +16,7 @@ const useHasBeenSeen = (
             setHasBeenSeen(true);
         }
     };
-    const intersectionCallback = debounce
+    const intersectionCallback = options.debounce
         ? libDebounce(intersectionFn, 200)
         : intersectionFn;
 

@@ -34,10 +34,16 @@ declare global {
             functions: {
                 import: (url: string) => Promise<any>;
             };
+            // TODO expose as type from Automat client lib
+            automat: {
+                react: any;
+                emotion: any;
+                emotionCore: any;
+                emotionTheming: any;
+            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
-        initAutomatJs?: Function;
     }
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
