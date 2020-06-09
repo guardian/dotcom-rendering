@@ -146,6 +146,7 @@ export const normalizeCallout = (body: CAPIType): CAPIType => {
                     return block;
                 }),
             })),
+
             // TODO: we can potentually remove callout campaigns from configs?
         };
     }
