@@ -16,7 +16,6 @@ import {
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
-import { initialiseDynamicImport } from '../lib/dynamicImport';
 
 const { css } = emotion;
 
@@ -176,11 +175,9 @@ const MemoisedInner = ({
         const dataPerf = initPerf('contributions-epic-data');
         dataPerf.start();
 
-        const localurl =
-            'http://localhost:3030/epic?dataOnly=true&force=2020-05-15_ENVIRON_EPIC_ROUND1__NO_ARTICLE_COUNT:V1_GREENER_WORLD';
         getBodyEnd(
             contributionsPayload,
-            localurl, // `${contributionsServiceUrl}/epic?dataOnly=true`,
+            `${contributionsServiceUrl}/epic?dataOnly=true`,
         )
             .then(response => {
                 dataPerf.end();
@@ -197,9 +194,9 @@ const MemoisedInner = ({
                 const modulePerf = initPerf('contributions-epic-module');
                 modulePerf.start();
 
-                initialiseDynamicImport()
-                    // eslint-disable-next-line no-restricted-globals
-                    .then(() => self.__import__(module.url))
+                // eslint-disable-next-line no-restricted-globals
+                window.guardian.functions
+                    .import(module.url)
                     .then(epicModule => {
                         modulePerf.end();
                         setEpicMeta(meta);
