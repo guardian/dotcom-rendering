@@ -313,7 +313,7 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 
 const richLinkWidth = '8.75rem';
 
-const richLinkStyles = (format: Format): string => {
+const richLinkStyles = (format: Format): SerializedStyles => {
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
