@@ -44,6 +44,7 @@ module.exports = ({ isLegacyJS }) => ({
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),
         lotame: scriptPath('lotame'),
+        dynamicImport: scriptPath('dynamicImport'),
     },
     output: {
         filename: generateName(isLegacyJS),
@@ -71,8 +72,8 @@ module.exports = ({ isLegacyJS }) => ({
     module: {
         rules: [
             {
-                test: /(\.tsx)|(\.js)|(\.ts)$/,
-                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)\/).*/,
+                test: /(\.tsx)|(\.js)|(\.ts)|(\.mjs)$/,
+                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(dynamic-import-polyfill))\/.*/,
                 use: [
                     {
                         loader: 'babel-loader',

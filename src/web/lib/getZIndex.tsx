@@ -1,23 +1,57 @@
-// The z-indexes will be applied in order from 1 -> length of the array.
-// The later in the array, the higher the z-index will be
-// All indexes will be adjusted when new elements are added
+/**
+ * How do I get a z-index for my new item?
+ *
+ * Decide a meaningful name for your item and then insert it
+ * in the indices array below. The higher up your item visually,
+ * then the higher it will be in the z-index stack,
+ * 'higher' means _earlier_ in the array.
+ *
+ * Eg. stickyAdWrapper will be given a higher z-index than bodyArea
+ *
+ * Once inserted in the array, use getZIndex() to return the css
+ *
+ * Eg.
+ *
+ * import { getZIndex } from '@frontend/web/lib/getZIndex';
+ *
+ * const myCss = css`
+ *    color: blue;
+ *    ${getZIndex('TheGuardian')}
+ * `;
+ *
+ * As new items are added, all z-indexes are adjusted
+ */
 const indices = [
-    // Body
-    'rightColumnArea',
-    'bodyArea',
-
-    // Header links (should be above The Guardian svg)
-    'TheGuardian',
-    'headerLinks',
+    // Modals will go here at the top
 
     // Header
-    'headerWrapper',
     'stickyAdWrapper',
+    'headerWrapper',
 
-    // Modals will go here at the top
-] as const;
+    // Header links (should be above The Guardian svg)
+    'headerLinks',
+    'TheGuardian',
 
+    // Body
+    'bodyArea',
+    'rightColumnArea',
+];
+
+//
+// Implementation code  - you don't need to change this to get a new index
 type ZIndex = typeof indices[number];
 
+function reverseArray(array: any[]) {
+    return array.map((item, index) => array[array.length - 1 - index]);
+}
+
+const decideIndex = (name: string): number | null => {
+    let decided;
+    reverseArray(indices).forEach((item, index) => {
+        if (item === name) decided = index + 1;
+    });
+    return decided || null;
+};
+
 export const getZIndex = (zIndex: ZIndex): string =>
-    `z-index: ${indices.indexOf(zIndex) + 1};`;
+    `z-index: ${decideIndex(zIndex)};`;

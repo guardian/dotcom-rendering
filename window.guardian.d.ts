@@ -31,6 +31,9 @@ declare global {
                     reportError: (error: Error, feature: string) => void;
                 };
             };
+            functions: {
+                import: (url: string) => Promise<any>;
+            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;

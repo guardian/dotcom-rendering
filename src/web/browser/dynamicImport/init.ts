@@ -1,0 +1,49 @@
+/* eslint-disable no-new-func */
+/* eslint-disable no-new */
+
+import '../webpackPublicPath';
+import dynamicImportPolyfill from 'dynamic-import-polyfill';
+import { startup } from '@root/src/web/browser/startup';
+
+// Provides an import function to use for dynamic imports. **Only works on
+// browsers that cut the mustard (support modules).**
+const initialiseDynamicImport = () => {
+    try {
+        window.guardian.functions.import = new Function(
+            'url',
+            `return import(url)`,
+        ) as (url: string) => Promise<any>;
+    } catch (e) {
+        dynamicImportPolyfill.initialize({
+            importFunctionName: 'guardian.functions.import',
+        });
+    }
+};
+
+// Provides an import function to use for dynamic imports. **Designed for
+// legacy browsers. Dynamic loads a ~4k bundle.**
+const initialiseDynamicImportLegacy = () => {
+    return import(/* webpackChunkName: "shimport" */ '@guardian/shimport').then(
+        shimport => {
+            shimport.initialise(); // note this adds a __shimport__ global
+            window.guardian.functions.import = shimport.load;
+        },
+    );
+};
+
+const init = (): Promise<void> => {
+    window.guardian.functions = {
+        import: (url: string) =>
+            Promise.reject(
+                new Error(`import not polyfilled; attempted import(${url})`),
+            ),
+    };
+
+    if (window.guardian.mustardCut) {
+        return Promise.resolve(initialiseDynamicImport());
+    }
+
+    return initialiseDynamicImportLegacy();
+};
+
+startup('dynamicImport', null, init);

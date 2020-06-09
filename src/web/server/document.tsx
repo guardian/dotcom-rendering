@@ -65,10 +65,12 @@ export const document = ({ data }: Props) => {
     ];
     const priorityLegacyScripts = [
         getDist({ path: 'sentry.js', legacy: true }),
+        getDist({ path: 'dynamicImport.js', legacy: true }),
         getDist({ path: 'react.js', legacy: true }),
     ];
     const priorityNonLegacyScripts = [
         getDist({ path: 'sentry.js', legacy: false }),
+        getDist({ path: 'dynamicImport.js', legacy: false }),
         getDist({ path: 'react.js', legacy: false }),
     ];
 
