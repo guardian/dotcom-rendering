@@ -46,6 +46,8 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
                 padding: 0;
                 border: none;
                 ${body.medium()}
+                background: none;
+                text-align: left;
             }
 
             &::before {
