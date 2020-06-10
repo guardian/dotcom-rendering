@@ -129,6 +129,9 @@ export const Callout = ({
                     className={summeryStyles}
                     role="none"
                     onClick={event => {
+                        // We want to prevent the default `details` behavior from appearing
+                        // expanding the details should only be done via the button
+                        // however we still want links to be clickable
                         const target = event.target as HTMLElement;
                         if (target.tagName !== 'A') {
                             event.preventDefault();
