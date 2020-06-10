@@ -88,6 +88,10 @@ const whiteFont = css`
     color: ${neutral[100]};
 `;
 
+const blackText = css`
+    color: ${neutral[0]};
+`;
+
 const secondaryStyle = css`
     ${headline.xxxsmall({ fontWeight: 'regular' })};
     display: block;
@@ -240,7 +244,9 @@ export const SeriesSectionLink = ({
                                     href={`${guardianBaseURL}/${tag.id}`}
                                     className={cx(
                                         sectionLabelLink,
-                                        pillarColours[pillar],
+                                        designType === 'MatchReport'
+                                            ? blackText
+                                            : pillarColours[pillar],
                                         primaryStyle,
                                         isSpecial && yellowBackground,
                                     )}
@@ -255,7 +261,9 @@ export const SeriesSectionLink = ({
                                         href={`${guardianBaseURL}/${sectionUrl}`}
                                         className={cx(
                                             sectionLabelLink,
-                                            pillarColours[pillar],
+                                            designType === 'MatchReport'
+                                                ? blackText
+                                                : pillarColours[pillar],
                                             secondaryStyle,
                                         )}
                                         data-component="section"
@@ -273,7 +281,9 @@ export const SeriesSectionLink = ({
                             href={`${guardianBaseURL}/${sectionUrl}`}
                             className={cx(
                                 sectionLabelLink,
-                                pillarColours[pillar],
+                                designType === 'MatchReport'
+                                    ? blackText
+                                    : pillarColours[pillar],
                                 primaryStyle,
                             )}
                             data-component="section"
