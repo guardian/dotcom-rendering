@@ -255,7 +255,7 @@ interface CalloutBlockElement {
     activeFrom: number;
     displayOnSensitive: boolean;
     formId: number;
-    calloutTitle: string;
+    title: string;
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];
@@ -370,76 +370,148 @@ type CampaignFieldType =
     | CampaignFieldCheckbox
     | CampaignFieldSelect;
 
-interface CampaignFieldText {
+interface CampaignField {
     id: number;
-    type: 'textarea';
     name: string;
     description?: string;
     required: boolean;
-    text_size?: number;
+    textSize?: number;
     hideLabel: boolean;
     label: string;
 }
 
-interface CampaignFieldTextArea {
-    id: number;
+interface CampaignFieldText extends CampaignField {
     type: 'text';
-    name: string;
-    description?: string;
-    required: boolean;
-    text_size?: number;
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldFile {
-    id: number;
+interface CampaignFieldTextArea extends CampaignField {
+    type: 'textarea';
+}
+
+interface CampaignFieldFile extends CampaignField {
     type: 'file';
-    name: string;
-    description?: string;
-    required: boolean;
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldRadio {
-    id: number;
+interface CampaignFieldRadio extends CampaignField {
     type: 'radio';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldCheckbox {
-    id: number;
+interface CampaignFieldCheckbox extends CampaignField {
     type: 'checkbox';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldSelect {
-    id: number;
+interface CampaignFieldSelect extends CampaignField {
     type: 'select';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
+}
+
+// -------------------------------------
+// preNormalisedCampaign callout types
+// -------------------------------------
+
+type preNormalizedCampaignType = {
+    id: string;
+    name: string;
+    rules: [];
+    priority: number;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    fields: {
+        formId: number;
+        callout: string;
+        _type: string;
+        description: string;
+        tagName: string;
+        formFields: preNormalizedCampaignFieldType[];
+    };
+};
+
+type preNormalizedCampaignFieldType =
+    | preNormalizedCampaignFieldText
+    | preNormalizedCampaignFieldTextArea
+    | preNormalizedCampaignFieldFile
+    | preNormalizedCampaignFieldRadio
+    | preNormalizedCampaignFieldCheckbox
+    | preNormalizedCampaignFieldSelect;
+
+interface preNormalizedCampaignFieldText {
+    text_size?: number;
+    name: string;
+    description?: string;
+    hide_label: string;
     label: string;
+    id: string;
+    type: 'text';
+    required: string;
+}
+
+interface preNormalizedCampaignFieldTextArea {
+    text_size?: number;
+    name: string;
+    description?: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'textarea';
+    required: string;
+}
+
+interface preNormalizedCampaignFieldFile {
+    text_size?: string;
+    name: string;
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'file';
+    required: string;
+}
+
+interface preNormalizedCampaignFieldRadio {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'radio';
+    required: string;
+}
+
+interface preNormalizedCampaignFieldCheckbox {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'checkbox';
+    required: string;
+}
+
+interface preNormalizedCampaignFieldSelect {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+    hide_label: string;
+    label: string;
+    id: string;
+    type: 'select';
+    required: string;
 }
