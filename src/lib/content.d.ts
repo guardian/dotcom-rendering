@@ -420,7 +420,7 @@ interface CampaignFieldSelect extends CampaignField {
 // preNormalisedCampaign callout types
 // -------------------------------------
 
-type preNormalizedCampaignType = {
+type PreNormalizedCampaignType = {
     id: string;
     name: string;
     rules: [];
@@ -433,19 +433,19 @@ type preNormalizedCampaignType = {
         _type: string;
         description: string;
         tagName: string;
-        formFields: preNormalizedCampaignFieldType[];
+        formFields: PreNormalizedCampaignFieldType[];
     };
 };
 
-type preNormalizedCampaignFieldType =
-    | preNormalizedCampaignFieldText
-    | preNormalizedCampaignFieldTextArea
-    | preNormalizedCampaignFieldFile
-    | preNormalizedCampaignFieldRadio
-    | preNormalizedCampaignFieldCheckbox
-    | preNormalizedCampaignFieldSelect;
+type PreNormalizedCampaignFieldType =
+    | PreNormalizedCampaignFieldText
+    | PreNormalizedCampaignFieldTextArea
+    | PreNormalizedCampaignFieldFile
+    | PreNormalizedCampaignFieldRadio
+    | PreNormalizedCampaignFieldCheckbox
+    | PreNormalizedCampaignFieldSelect;
 
-interface preNormalizedCampaignFieldText {
+interface PreNormalizedCampaignFieldText {
     text_size?: number;
     name: string;
     description?: string;
@@ -456,7 +456,7 @@ interface preNormalizedCampaignFieldText {
     required: string;
 }
 
-interface preNormalizedCampaignFieldTextArea {
+interface PreNormalizedCampaignFieldTextArea {
     text_size?: number;
     name: string;
     description?: string;
@@ -467,7 +467,7 @@ interface preNormalizedCampaignFieldTextArea {
     required: string;
 }
 
-interface preNormalizedCampaignFieldFile {
+interface PreNormalizedCampaignFieldFile {
     text_size?: string;
     name: string;
     hide_label: string;
@@ -477,7 +477,7 @@ interface preNormalizedCampaignFieldFile {
     required: string;
 }
 
-interface preNormalizedCampaignFieldRadio {
+interface PreNormalizedCampaignFieldRadio {
     name: string;
     options: {
         label: string;
@@ -490,7 +490,7 @@ interface preNormalizedCampaignFieldRadio {
     required: string;
 }
 
-interface preNormalizedCampaignFieldCheckbox {
+interface PreNormalizedCampaignFieldCheckbox {
     name: string;
     options: {
         label: string;
@@ -503,7 +503,7 @@ interface preNormalizedCampaignFieldCheckbox {
     required: string;
 }
 
-interface preNormalizedCampaignFieldSelect {
+interface PreNormalizedCampaignFieldSelect {
     name: string;
     options: {
         label: string;
