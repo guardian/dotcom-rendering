@@ -90,195 +90,200 @@
         </ul>
 
         <script>
-            var testContentTypes = [
-                {
-                    name: 'Live Blog',
-                    article:
-                        '/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
-                },
-                {
-                    name: 'Opinion Piece',
-                    article:
-                        '/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster',
-                },
-                {
-                    name: 'Review',
-                    article: '/music/2018/aug/31/eminem-kamikaze-album-review',
-                },
-                {
-                    name: 'Paid Content',
-                    article:
-                        '/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution',
-                },
-            ];
+                var testContentTypes = [
+                    {
+                        name: 'Live Blog',
+                        article:
+                            '/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
+                    },
+                    {
+                        name: 'Opinion Piece',
+                        article:
+                            '/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster',
+                    },
+                    {
+                        name: 'Review',
+                        article: '/music/2018/aug/31/eminem-kamikaze-album-review',
+                    },
+                    {
+                        name: 'Paid Content',
+                        article:
+                            '/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution',
+                    },
+                ];
 
-            var testArticles = [
-                {
-                    name: 'AudioBlockElement',
-                    article:
-                        '/music/2018/nov/02/the-prodigy-no-tourists-review',
-                },
-                {
-                    name: 'CodeBlockElement',
-                    article: '/info/2018/nov/30/bye-bye-mongo-hello-postgres',
-                },
-                {
-                    name: 'CommentBlockElement',
-                    article:
-                        'https://theguardian.com/music/2016/apr/28/readers-recommend-playlist-songs-about-climate-change',
-                },
-                {
-                    name: 'ContentAtomBlockElement',
-                    article:
-                        '/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port',
-                },
-                {
-                    name: 'DividerBlockElement',
-                    article:
-                        '/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
-                },
-                {
-                    name: 'DocumentBlockElement',
-                    article:
-                        '/australia-news/2019/oct/25/why-angus-taylors-statement-on-the-council-documents-doesnt-clear-up-anything',
-                },
-                {
-                    name: 'EmbedBlockElement',
-                    article:
-                        '/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission',
-                },
-                {
-                    name: 'GuVideoBlockElement',
-                    article: '/film/2013/feb/14/keanu-reeves-future-of-cinema',
-                },
-                {
-                    name: 'ImageBlockElement',
-                    article:
-                        '/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
-                },
-                {
-                    name: 'ImageBlockElement (left)',
-                    article:
-                        '/film/2018/aug/30/damon-herriman-to-play-charles-manson-in-quentin-tarantino-film',
-                },
-                {
-                    name: 'InstagramBlockElement',
-                    article:
-                        '/lifeandstyle/2020/apr/27/its-like-a-sexy-story-just-for-me-how-lockdown-has-triggered-a-wave-of-sexting',
-                },
-                {
-                    name: 'InteractiveBlockElement',
-                    article:
-                        '/uk-news/2019/feb/21/teenager-shot-in-fight-on-london-tube-barking-hammersmith-and-city-line',
-                },
-                {
-                    name: 'MapBlockElement',
-                    article:
-                        '/world/2016/sep/19/democratic-republic-congo-demonstrations-banned-police-killed-joseph-kabila-etienne-tshisekedi',
-                },
-                {
-                    name: 'MembershipBlockElement',
-                    article:
-                        '/world/2019/may/02/britons-more-sold-on-immigration-benefits-than-other-europeans',
-                },
-                {
-                    name: 'PullquoteBlockElement',
-                    article:
-                        '/world/2018/dec/28/south-koreas-sexist-sex-education',
-                },
-                {
-                    name: 'RichLinkBlockElement',
-                    article:
-                        '/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united',
-                },
-                {
-                    name: 'SoundcloudBlockElement',
-                    article:
-                        '/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
-                },
-                {
-                    name: 'TableBlockElement',
-                    article:
-                        '/football/blog/2019/dec/09/sergej-milinkovic-savic-and-luis-alberto-are-leading-lazios-surge',
-                },
-                {
-                    name: 'TextBlockElement',
-                    article:
-                        '/politics/2018/nov/27/eu-will-not-renegotiate-brexit-deal-says-may-deputy-david-lidington',
-                },
-                {
-                    name: 'TweetBlockElement',
-                    article:
-                        '/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems',
-                },
-                {
-                    name: 'VideoYoutubeBlockElement',
-                    article:
-                        '/us-news/2017/feb/23/los-angeles-police-officer-teen-gun-video-protests',
-                },
-                {
-                    name: 'VineBlockElement',
-                    article:
-                        '/technology/2015/sep/04/vine-why-you-always-lyin-nicholas-fraser-down-goes',
-                },
-            ];
+                var testArticles = [
+                    {
+                        name: 'AudioBlockElement',
+                        article:
+                            '/music/2018/nov/02/the-prodigy-no-tourists-review',
+                    },
+                    {
+                        name: 'CodeBlockElement',
+                        article: '/info/2018/nov/30/bye-bye-mongo-hello-postgres',
+                    },
+                    {
+                        name: 'CommentBlockElement',
+                        article:
+                            'https://theguardian.com/music/2016/apr/28/readers-recommend-playlist-songs-about-climate-change',
+                    },
+                    {
+                        name: 'ContentAtomBlockElement',
+                        article:
+                            '/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port',
+                    },
+                    {
+                        name: 'DividerBlockElement',
+                        article:
+                            '/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
+                    },
+                    {
+                        name: 'DocumentBlockElement',
+                        article:
+                            '/australia-news/2019/oct/25/why-angus-taylors-statement-on-the-council-documents-doesnt-clear-up-anything',
+                    },
+                    {
+                        name: 'EmbedBlockElement',
+                        article:
+                            '/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission',
+                    },
+                    {
+                        name: 'GuVideoBlockElement',
+                        article: '/film/2013/feb/14/keanu-reeves-future-of-cinema',
+                    },
+                    {
+                        name: 'ImageBlockElement',
+                        article:
+                            '/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
+                    },
+                    {
+                        name: 'ImageBlockElement (left)',
+                        article:
+                            '/film/2018/aug/30/damon-herriman-to-play-charles-manson-in-quentin-tarantino-film',
+                    },
+                    {
+                        name: 'InstagramBlockElement',
+                        article:
+                            '/lifeandstyle/2020/apr/27/its-like-a-sexy-story-just-for-me-how-lockdown-has-triggered-a-wave-of-sexting',
+                    },
+                    {
+                        name: 'InteractiveBlockElement',
+                        article:
+                            '/uk-news/2019/feb/21/teenager-shot-in-fight-on-london-tube-barking-hammersmith-and-city-line',
+                    },
+                    {
+                        name: 'MapBlockElement',
+                        article:
+                            '/world/2016/sep/19/democratic-republic-congo-demonstrations-banned-police-killed-joseph-kabila-etienne-tshisekedi',
+                    },
+                    {
+                        name: 'MembershipBlockElement',
+                        article:
+                            '/world/2019/may/02/britons-more-sold-on-immigration-benefits-than-other-europeans',
+                    },
+                    {
+                        name: 'PullquoteBlockElement',
+                        article:
+                            '/world/2018/dec/28/south-koreas-sexist-sex-education',
+                    },
+                    {
+                        name: 'RichLinkBlockElement',
+                        article:
+                            '/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united',
+                    },
+                    {
+                        name: 'SoundcloudBlockElement',
+                        article:
+                            '/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+                    },
+                    {
+                        name: 'TableBlockElement',
+                        article:
+                            '/football/blog/2019/dec/09/sergej-milinkovic-savic-and-luis-alberto-are-leading-lazios-surge',
+                    },
+                    {
+                        name: 'TextBlockElement',
+                        article:
+                            '/politics/2018/nov/27/eu-will-not-renegotiate-brexit-deal-says-may-deputy-david-lidington',
+                    },
+                    {
+                        name: 'TweetBlockElement',
+                        article:
+                            '/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems',
+                    },
+                    {
+                        name: 'VideoYoutubeBlockElement',
+                        article:
+                            '/us-news/2017/feb/23/los-angeles-police-officer-teen-gun-video-protests',
+                    },
+                    {
+                        name: 'VineBlockElement',
+                        article:
+                            '/technology/2015/sep/04/vine-why-you-always-lyin-nicholas-fraser-down-goes',
+                    },
+                ];
 
-            var testContentAtomTypes = [
-                {
-                    name: 'AudioAtom',
-                    article:
-                        '/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
-                },
-                {
-                    name: 'ChartAtom',
-                    article:
-                        '/australia-news/2020/apr/07/coronavirus-crisis-has-had-staggering-impact-on-australian-businesses-data-reveals',
-                },
-                {
-                    name: 'ExplainerAtom',
-                    article:
-                        '/books/2020/may/07/poems-to-get-us-through-the-ghosts-of-cricketing-summers-knock-kit-wright-for-six-carol-ann-duffy-roller',
-                },
-                {
-                    name: 'GuideAtom',
-                    article:
-                        '/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby',
-                },
-                {
-                    name: 'ProfileAtom',
-                    article:
-                        '/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey',
-                },
+                var testContentAtomTypes = [
+                    {
+                        name: 'AudioAtom',
+                        article:
+                            '/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
+                    },
+                    {
+                        name: 'ChartAtom',
+                        article:
+                            '/australia-news/2020/apr/07/coronavirus-crisis-has-had-staggering-impact-on-australian-businesses-data-reveals',
+                    },
+                    {
+                        name: 'ExplainerAtom',
+                        article:
+                            '/books/2020/may/07/poems-to-get-us-through-the-ghosts-of-cricketing-summers-knock-kit-wright-for-six-carol-ann-duffy-roller',
+                    },
+                    {
+                        name: 'GuideAtom',
+                        article:
+                            '/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby',
+                    },
+                    {
+                        name: 'InteractiveAtom',
+                        article:
+                            '/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
+                    }
+                    {
+                        name: 'ProfileAtom',
+                        article:
+                            '/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey',
+                    },
 
-            ];
+                ];
 
-            var makeTestArticle = a => `
-            <div class="test-article">
-                <span>${a.name}</span>
-                <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
-                <span><a href="/AMPArticle?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
-                <span><a href="https://www.theguardian.com${a.article}">example</a></span>
-                <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
-            </div>
-        `;
+                var makeTestArticle = a => `
+                <div class="test-article">
+                    <span>${a.name}</span>
+                    <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
+                    <span><a href="/AMPArticle?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
+                    <span><a href="https://www.theguardian.com${a.article}">example</a></span>
+                    <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
+                </div>
+            `;
 
-            testContentTypes.forEach(a => {
-                document.getElementById(
-                    'test-articles-by-content',
-                ).innerHTML += makeTestArticle(a);
-            });
+                testContentTypes.forEach(a => {
+                    document.getElementById(
+                        'test-articles-by-content',
+                    ).innerHTML += makeTestArticle(a);
+                });
 
-            testArticles.forEach(a => {
-                document.getElementById(
-                    'test-articles-by-element',
-                ).innerHTML += makeTestArticle(a);
-            });
+                testArticles.forEach(a => {
+                    document.getElementById(
+                        'test-articles-by-element',
+                    ).innerHTML += makeTestArticle(a);
+                });
 
-            testContentAtomTypes.forEach(a => {
-                document.getElementById(
-                    'test-articles-by-atom-type',
-                ).innerHTML += makeTestArticle(a);
-            });
+                testContentAtomTypes.forEach(a => {
+                    document.getElementById(
+                        'test-articles-by-atom-type',
+                    ).innerHTML += makeTestArticle(a);
+                });
         </script>
     </body>
 </html>
