@@ -90,8 +90,7 @@
         "prettier-eslint": "^9.0.0",
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
-        "sanitize-html": "^1.20.1",
-        "ts-loader": "^7.0.5"
+        "sanitize-html": "^1.20.1"
     },
     "devDependencies": {
         "@babel/core": "^7.5.5",
@@ -105,7 +104,6 @@
         "@babel/preset-env": "^7.8.4",
         "@babel/preset-modules": "^0.1.2",
         "@babel/preset-react": "^7.0.0",
-        "@babel/preset-typescript": "^7.3.3",
         "@storybook/addon-actions": "^5.2.5",
         "@storybook/addon-links": "^5.2.5",
         "@storybook/addon-storysource": "^5.2.5",
@@ -178,6 +176,7 @@
         "stylelint-processor-styled-components": "^1.8.0",
         "svg-loader": "^0.0.2",
         "ts-jest": "^24.0.2",
+        "ts-loader": "^7.0.5",
         "tslint": "^5.18.0",
         "tslint-config-airbnb": "^5.11.1",
         "tslint-config-prettier": "^1.18.0",
