@@ -255,7 +255,7 @@ interface CalloutBlockElement {
     activeFrom: number;
     displayOnSensitive: boolean;
     formId: number;
-    calloutTitle: string;
+    title: string;
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];
@@ -370,76 +370,48 @@ type CampaignFieldType =
     | CampaignFieldCheckbox
     | CampaignFieldSelect;
 
-interface CampaignFieldText {
+interface CampaignField {
     id: number;
+    name: string;
+    description?: string;
+    required: boolean;
+    textSize?: number;
+    hideLabel: boolean;
+    label: string;
+}
+
+interface CampaignFieldText extends CampaignField {
     type: 'textarea';
-    name: string;
-    description?: string;
-    required: boolean;
-    text_size?: number;
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldTextArea {
-    id: number;
+interface CampaignFieldTextArea extends CampaignField {
     type: 'text';
-    name: string;
-    description?: string;
-    required: boolean;
-    text_size?: number;
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldFile {
-    id: number;
+interface CampaignFieldFile extends CampaignField {
     type: 'file';
-    name: string;
-    description?: string;
-    required: boolean;
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldRadio {
-    id: number;
+interface CampaignFieldRadio extends CampaignField {
     type: 'radio';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldCheckbox {
-    id: number;
+interface CampaignFieldCheckbox extends CampaignField {
     type: 'checkbox';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
-    label: string;
 }
 
-interface CampaignFieldSelect {
-    id: number;
+interface CampaignFieldSelect extends CampaignField {
     type: 'select';
-    name: string;
-    description?: string;
-    required: boolean;
     options: {
         label: string;
         value: string;
     }[];
-    hideLabel: boolean;
-    label: string;
 }
