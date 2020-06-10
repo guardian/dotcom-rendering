@@ -96,15 +96,19 @@ export const adStyles = css`
                 float: right;
                 background: none;
                 border: none;
+                outline: none;
                 font-size: 16px;
                 color: ${neutral[20]};
                 position: relative;
                 margin: 0;
+                line-height: 24px;
 
                 span {
-                    position: absolute;
-                    right: 20px;
-                    top: 3px;
+                    margin-right: 16px;
+                }
+
+                &::focus, &::hover, &::active {
+                    border none;
                 }
 
                 &::after {
@@ -114,11 +118,7 @@ export const adStyles = css`
                     font-size: 16px;
                     position: absolute;
                     right: 0px;
-                    top: 1px;
-                }
-
-                &:focus {
-                    text-decoration: underline;
+                    top: -1px;
                 }
 
                 ${darkModeCss`
