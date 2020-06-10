@@ -48,6 +48,7 @@ const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
 
     section {
         display: inline-block;
+        width: 100%;
         margin-top: ${basePx(-1)};
 
         .metadata {

@@ -51,7 +51,7 @@ interface LeftColumnProps {
 
 const LeftColumn =
     ({ children, columnContent = null, className = null }: LeftColumnProps): JSX.Element =>
-        <div css={[className, LeftColumnStyles]}>
+        <div css={[LeftColumnStyles, className]}>
             <div className="column-content">{columnContent}</div>
             <div className="main-content">{children}</div>
         </div>

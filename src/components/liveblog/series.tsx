@@ -8,6 +8,7 @@ import { Pillar } from 'format';
 import { Option } from 'types/option';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
+    padding-bottom: 0;
     background: ${kicker};
     a {
         font-weight: 700;
