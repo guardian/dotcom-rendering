@@ -86,7 +86,7 @@ function slideshow(): void {
     const images = document.querySelectorAll('.js-launch-slideshow');
     Array.from(images)
         .forEach((image: Element) => image.addEventListener('click', (e: Event) => {
-            launchSlideshow(image.getAttribute('src'));
+            launchSlideshow(image?.currentSrc ?? image.getAttribute('src'));
         }));
 }
 
