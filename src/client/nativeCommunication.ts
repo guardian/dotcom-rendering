@@ -67,20 +67,18 @@ function ads(): void {
     })
 }
 
-function getImageUrl(image: Element): string | null {
-    return (image instanceof HTMLImageElement)
-        ? image.currentSrc
-        : image.getAttribute('src')
-}
-
 function launchSlideshow(src: string | null): void {
     const images = Array.from(document.querySelectorAll('.js-launch-slideshow'));
     const title = document.title;
     const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
-        const url = getImageUrl(image);
-        const caption =  image.getAttribute('data-caption') ?? undefined;
-        const credit = image.getAttribute('data-credit') ?? undefined;
-        return url ? new Image({ url, caption, credit }) : [];
+        if (image instanceof HTMLImageElement) {
+            const url = image?.currentSrc ?? image.src;
+            const caption =  image.getAttribute('data-caption') ?? undefined;
+            const credit = image.getAttribute('data-credit') ?? undefined;
+            return new Image({ url, caption, credit });
+        } else {
+            return [];
+        }
     });
     const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);
     if (imagesWithCaptions.length && clickedImageIndex >= 0) {
@@ -92,7 +90,7 @@ function slideshow(): void {
     const images = document.querySelectorAll('.js-launch-slideshow');
     Array.from(images)
         .forEach((image: Element) => image.addEventListener('touchstart', (e: Event) => {
-            launchSlideshow(getImageUrl(image))
+            launchSlideshow(image.getAttribute('src'))
         }));
 }
 
