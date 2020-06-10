@@ -92,8 +92,8 @@ const getStyles = ({ design, display }: Format): SerializedStyles => {
     }
 }
 
-const getImgStyles = ({ display }: Format, image: Image): SerializedStyles => {
-    switch (display) {
+const getImgStyles = (format: Format, image: Image): SerializedStyles => {
+    switch (format.display) {
         case Display.Immersive:
             return immersiveImgStyles;
         default:
@@ -123,6 +123,7 @@ const HeaderImage: FC<Props> = ({ className, image, format }) =>
                 image={imageData}
                 sizes={getSizes(format, imageData)}
                 className={getImgStyles(format, imageData)}
+                format={format}
             />
             <Caption format={format} image={imageData} />
         </figure>

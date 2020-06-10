@@ -433,7 +433,7 @@ const render = (format: Format, excludeStyles = false) =>
                 ? h(FigCaption, { format, caption, credit })
                 : null;
 
-            return h(ImageComponent, { image: element }, figcaption);
+            return h(ImageComponent, { image: element, format }, figcaption);
         }
 
         case ElementKind.Pullquote: {

@@ -64,11 +64,6 @@ const media = css`
         ${headline.xxxsmall({ lineHeight: 'loose' })}
         margin: 0;
     }
-    
-    li:before {
-        height: 0.7rem;
-        width: 0.7rem;
-    }
 `;
 
 const advertisementFeature = css`

@@ -6,6 +6,7 @@ import { createHash } from 'crypto';
 import { Option, Some, None, fromNullable } from 'types/option';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { Context } from 'types/parserContext';
+import { Format } from '@guardian/types/Format';
 
 
 // ----- Setup ----- //
@@ -59,6 +60,7 @@ interface Image {
 interface BodyImageProps {
     image: Image;
     children?: ReactNode;
+    format: Format;
 }
 
 // ----- Functions ----- //
