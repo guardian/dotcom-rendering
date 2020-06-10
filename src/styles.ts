@@ -101,10 +101,11 @@ export const adStyles = css`
                 color: ${neutral[20]};
                 position: relative;
                 margin: 0;
+                padding: 0;
                 line-height: 24px;
 
                 span {
-                    margin-right: 16px;
+                    margin-right: 24px;
                 }
 
                 &::focus, &::hover, &::active {
@@ -118,7 +119,7 @@ export const adStyles = css`
                     font-size: 16px;
                     position: absolute;
                     right: 0px;
-                    top: -1px;
+                    top: -2px;
                 }
 
                 ${darkModeCss`
@@ -146,13 +147,7 @@ export const adStyles = css`
 
     .ad-placeholder.short:nth-of-type(1) {
         ${from.desktop} {
-        top: 0;
-        }
-    }
-
-    .ad-placeholder.short:nth-of-type(2) {
-        ${from.desktop} {
-        top: 300px;
+            top: 0;
         }
     }
 `
