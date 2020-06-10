@@ -467,6 +467,7 @@ type UserProfile = {
  * Football
  */
 type TeamType = {
+    id: string;
     name: string;
     lineup: PlayerType[];
     possession: number;
@@ -475,6 +476,9 @@ type TeamType = {
     corners: number;
     fouls: number;
     colours: string;
+    score: number;
+    crest: string;
+    scorers: string[];
 };
 
 type PlayerType = {
@@ -626,6 +630,8 @@ type IslandType =
     | 'onwards-lower-whensignedout'
     | 'rich-link'
     | 'links-root'
+    | 'match-nav'
+    | 'match-stats'
     | 'comments';
 
 interface TrailType {
