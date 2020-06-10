@@ -185,7 +185,7 @@ export const Callout = ({
 
                     {/* TODO: map input for formFields */}
 
-                    {/* this element is a H O N £ Y - P 0 T */}
+                    {/* this element is a H.O.N.E.Y - P.O.T */}
                     <div
                         className={css`
                             position: absolute;
