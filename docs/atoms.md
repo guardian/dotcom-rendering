@@ -41,14 +41,14 @@ InteractiveAtom
     -> AtomEmbedUrlBlockElement
 
 GuideAtom
-    -> ProfileBlockElement
+    -> ProfileAtomBlockElement
 
 MediaAtom
     -> YoutubeBlockElement
     -> HTMLFallbackBlockElement
 
 ProfileAtom
-    -> ProfileBlockElement
+    -> ProfileAtomBlockElement
 
 QandaAtom
     -> QABlockElement
@@ -74,7 +74,7 @@ AudioAtomBlockElement
 AtomEmbedUrlBlockElement
     -> [amp] AtomEmbedUrlBlockComponent
 
-ProfileBlockElement
+ProfileAtomBlockElement
     -> [amp] Expandable
 
 YoutubeBlockElement

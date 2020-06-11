@@ -109,7 +109,7 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+            case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 return (
                     <Expandable
                         id={element.id}

@@ -149,7 +149,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TableBlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':

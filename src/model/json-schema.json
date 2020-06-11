@@ -72,7 +72,7 @@
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/ProfileBlockElement"
+                        "$ref": "#/definitions/ProfileAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/PullquoteBlockElement"
@@ -888,13 +888,13 @@
             },
             "required": ["_type", "images"]
         },
-        "ProfileBlockElement": {
+        "ProfileAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
                     "enum": [
-                        "model.dotcomrendering.pageElements.ProfileBlockElement"
+                        "model.dotcomrendering.pageElements.ProfileAtomBlockElement"
                     ]
                 },
                 "id": {
@@ -1322,7 +1322,7 @@
                                 "$ref": "#/definitions/MultiImageBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/ProfileBlockElement"
+                                "$ref": "#/definitions/ProfileAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/PullquoteBlockElement"

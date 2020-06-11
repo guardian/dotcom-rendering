@@ -134,8 +134,8 @@ interface MultiImageBlockElement {
     caption?: string;
 }
 
-interface ProfileBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
+interface ProfileAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
     id: string;
     label: string;
     title: string;
@@ -281,7 +281,7 @@ type CAPIElement =
     | InstagramBlockElement
     | MapBlockElement
     | MultiImageBlockElement
-    | ProfileBlockElement
+    | ProfileAtomBlockElement
     | PullquoteBlockElement
     | QABlockElement
     | RichLinkBlockElement
