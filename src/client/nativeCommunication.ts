@@ -57,9 +57,9 @@ function ads(): void {
             Array.from(document.querySelectorAll('.ad-placeholder'))
                 .forEach(placeholder => placeholder.classList.remove('hidden'))
             insertAds();
-            Array.from(document.querySelectorAll('.ad-hide'))
-                .forEach(hideButton => {
-                    hideButton.addEventListener('click', () => {
+            Array.from(document.querySelectorAll('.ad-labels'))
+                .forEach(adLabel => {
+                    adLabel.addEventListener('touchstart', () => {
                         acquisitionsClient.launchFrictionScreen();
                     })
                 })
@@ -90,7 +90,7 @@ function slideshow(): void {
     const images = document.querySelectorAll('.js-launch-slideshow');
     Array.from(images)
         .forEach((image: Element) => image.addEventListener('touchstart', (e: Event) => {
-            launchSlideshow(image.getAttribute('src'))
+            launchSlideshow(image.getAttribute('src'));
         }));
 }
 
