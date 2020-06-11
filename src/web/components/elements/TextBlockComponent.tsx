@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import HTMLParser from 'html-react-parser';
 
 import { body } from '@guardian/src-foundations/typography';
 import { sanitise } from '@frontend/lib/sanitise-html';
@@ -144,7 +145,7 @@ export const TextBlockComponent: React.FC<Props> = ({
                     designType={designType}
                 />
                 <>
-                    {require('html-react-parser')(
+                    {HTMLParser(
                         unescapeData(
                             sanitise(remainingLetters, sanitiserOptions),
                         ),
