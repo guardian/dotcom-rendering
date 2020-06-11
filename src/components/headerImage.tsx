@@ -117,19 +117,16 @@ interface Props {
 }
 
 const HeaderImage: FC<Props> = ({ className, image, format }) =>
-    image.fmap<ReactElement | null>(imageData => {
-        const img = format.display === Display.Immersive
-            ? { ...imageData, launchSlideshow: false } : imageData;
-        return <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
+    image.fmap<ReactElement | null>(imageData => <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
             <Img
-                image={img}
+                image={imageData}
                 sizes={getSizes(format, imageData)}
                 className={getImgStyles(format, imageData)}
                 format={format}
             />
             <Caption format={format} image={imageData} />
         </figure>
-    }).withDefault(null);
+    ).withDefault(null);
 
 
 // ----- Exports ----- //
