@@ -67,12 +67,22 @@ function ads(): void {
     })
 }
 
+function updateUrl(src: string): string {
+    const url = new URL(src);
+    const width = parseInt(url.searchParams.get('width') ?? '0');
+    const dpr = window.devicePixelRatio;
+    const newWidth = Math.max(screen.height * dpr, screen.width * dpr, width);
+
+    url.searchParams.set('width', newWidth.toString());
+    return url.href;
+}
+
 function launchSlideshow(src: string | null): void {
     const images = Array.from(document.querySelectorAll('.js-launch-slideshow'));
     const title = document.title;
     const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
         if (image instanceof HTMLImageElement) {
-            const url = image?.currentSrc ?? image.src;
+            const url = updateUrl(image?.currentSrc ?? image.src);
             const caption =  image.getAttribute('data-caption') ?? undefined;
             const credit = image.getAttribute('data-credit') ?? undefined;
             return new Image({ url, caption, credit });
