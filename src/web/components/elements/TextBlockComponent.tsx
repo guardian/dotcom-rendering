@@ -144,13 +144,9 @@ export const TextBlockComponent: React.FC<Props> = ({
                     pillar={pillar}
                     designType={designType}
                 />
-                <>
-                    {HTMLParser(
-                        unescapeData(
-                            sanitise(remainingLetters, sanitiserOptions),
-                        ),
-                    )}
-                </>
+                {HTMLParser(
+                    unescapeData(sanitise(remainingLetters, sanitiserOptions)),
+                )}
             </p>
         );
     }
