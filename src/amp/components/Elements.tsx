@@ -71,7 +71,7 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <EmbedBlockComponent key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.GuideBlockElement':
+            case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 return (
                     <Expandable
                         id={element.id}

@@ -82,8 +82,8 @@ interface ExplainerAtomBlockElement {
     body: string;
 }
 
-interface GuideBlockElement {
-    _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
+interface GuideAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
     id: string;
     label: string;
     title: string;
@@ -275,7 +275,7 @@ type CAPIElement =
     | DocumentBlockElement
     | EmbedBlockElement
     | ExplainerAtomBlockElement
-    | GuideBlockElement
+    | GuideAtomBlockElement
     | GuVideoBlockElement
     | ImageBlockElement
     | InstagramBlockElement
