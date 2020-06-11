@@ -117,7 +117,8 @@ interface Props {
 }
 
 const HeaderImage: FC<Props> = ({ className, image, format }) =>
-    image.fmap<ReactElement | null>(imageData => <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
+    image.fmap<ReactElement | null>(imageData =>
+        <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
             <Img
                 image={imageData}
                 sizes={getSizes(format, imageData)}
