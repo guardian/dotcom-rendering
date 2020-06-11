@@ -78,7 +78,6 @@
         "glob": "^7.1.3",
         "he": "^1.2.0",
         "html-minifier": "^3.5.14",
-        "html-react-parser": "^0.13.0",
         "inquirer": "^5.2.0",
         "jsdom": "^16.2.2",
         "lodash.debounce": "^4.0.6",

@@ -1,11 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
-import HTMLParser from 'html-react-parser';
 
 import { body } from '@guardian/src-foundations/typography';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
-import { unescapeData } from '@root/src/lib/escapeData';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
@@ -133,9 +131,6 @@ export const TextBlockComponent: React.FC<Props> = ({
         firstLetter &&
         isLongEnough(remainingLetters)
     ) {
-        // Components that use `dangerouslySetInnerHTML` cannot have children.
-        // As we want `DropCap` to be rendered adjacently to raw HTML we need
-        // to parse the HTML ourselves as a child node to the component
         return (
             <p className={paraStyles}>
                 <DropCap
@@ -143,9 +138,12 @@ export const TextBlockComponent: React.FC<Props> = ({
                     pillar={pillar}
                     designType={designType}
                 />
-                {HTMLParser(
-                    unescapeData(sanitise(remainingLetters, sanitiserOptions)),
-                )}
+                <RewrappedComponent
+                    isUnwrapped={isUnwrapped}
+                    html={sanitise(remainingLetters, sanitiserOptions)}
+                    elCss={paraStyles}
+                    tagName="span"
+                />
             </p>
         );
     }
