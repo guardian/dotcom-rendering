@@ -23,8 +23,7 @@ export const Select = ({ formField, formData, setFormData }: Props) => (
                 setFormData({
                     ...formData,
                     [formField.id || '']: e.target.value,
-                })
-            }
+                })}
 
             // ref={firstFieldElementRef}
         >
