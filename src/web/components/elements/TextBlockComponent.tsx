@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
+import { unescapeData } from '@root/src/lib/escapeData';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
@@ -131,20 +132,25 @@ export const TextBlockComponent: React.FC<Props> = ({
         firstLetter &&
         isLongEnough(remainingLetters)
     ) {
+        // In order to render the DropCap adjacently to the content we would
+        // need to dangerouslySetInnerHTML content into a fragment.
+        // React does not allow you to dangerouslySetInnerHTML in fragments, instead we use: html-react-parser
+        // https://stackoverflow.com/questions/48236588/using-fragment-to-insert-html-rendered-on-the-back-end-via-dangerouslysetinnerht
         return (
-            <>
+            <p className={paraStyles}>
                 <DropCap
                     letter={firstLetter}
                     pillar={pillar}
                     designType={designType}
                 />
-                <RewrappedComponent
-                    isUnwrapped={isUnwrapped}
-                    html={sanitise(remainingLetters, sanitiserOptions)}
-                    elCss={paraStyles}
-                    tagName="p"
-                />
-            </>
+                <>
+                    {require('html-react-parser')(
+                        unescapeData(
+                            sanitise(remainingLetters, sanitiserOptions),
+                        ),
+                    )}
+                </>
+            </p>
         );
     }
 
