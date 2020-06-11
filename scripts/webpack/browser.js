@@ -79,7 +79,6 @@ module.exports = ({ isLegacyJS }) => ({
                         loader: 'babel-loader',
                         options: {
                             presets: [
-                                '@babel/preset-typescript',
                                 '@babel/preset-react',
                                 // @babel/preset-env is used for legacy browsers
                                 // @babel/preset-modules is used for modern browsers
@@ -98,6 +97,10 @@ module.exports = ({ isLegacyJS }) => ({
                             ],
                         },
                     },
+                    {
+                        loader: 'ts-loader',
+                        options: { configFile: 'tsconfig.build.json', transpileOnly: true },
+                    }
                 ],
             },
             {
