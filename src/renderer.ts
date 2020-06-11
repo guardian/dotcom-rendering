@@ -441,6 +441,7 @@ const render = (format: Format, excludeStyles = false) =>
             return h(Pullquote, { quote, attribution, format, key });
         }
 
+        case ElementKind.Membership:
         case ElementKind.RichLink: {
             const { url, linkText } = element;
             return h(RichLink, { url, linkText, key, format });

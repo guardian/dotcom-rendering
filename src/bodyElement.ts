@@ -27,6 +27,7 @@ const enum ElementKind {
     Instagram,
     Audio,
     Embed,
+    Membership,
     Video,
     InteractiveAtom,
     ExplainerAtom
@@ -91,6 +92,10 @@ type BodyElement = {
     kind: ElementKind.Embed;
     html: string;
     alt: Option<string>;
+} | {
+    kind: ElementKind.Membership;
+    linkText: string;
+    url: string;
 } | Video | InteractiveAtom | ExplainerAtom;
 
 type Elements = BlockElement[] | undefined;
@@ -276,6 +281,16 @@ const parse = (context: Context, atoms?: Atoms) =>
             }
 
             return new Ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
+        }
+
+        case ElementType.MEMBERSHIP: {
+            const { linkText, originalUrl: url } = element.membershipTypeData ?? {};
+
+            if (!linkText || !url) {
+                return new Err('No title or href field on membershipTypeData')
+            }
+
+            return new Ok({ kind: ElementKind.Membership, linkText, url });
         }
 
         case ElementType.INSTAGRAM: {
