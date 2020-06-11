@@ -287,7 +287,7 @@ const parse = (context: Context, atoms?: Atoms) =>
             const { linkText, originalUrl: url } = element.membershipTypeData ?? {};
 
             if (!linkText || !url) {
-                return new Err('No title or href field on membershipTypeData')
+                return new Err('No linkText or originalUrl field on membershipTypeData');
             }
 
             return new Ok({ kind: ElementKind.Membership, linkText, url });
