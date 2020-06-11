@@ -134,7 +134,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         isLongEnough(remainingLetters)
     ) {
         // Components that use `dangerouslySetInnerHTML` cannot have children.
-        // As we `DropCap` to be rendered adjacently to the raw HTML we need
+        // As we want `DropCap` to be rendered adjacently to raw HTML we need
         // to parse the HTML ourselves as a child node to the component
         return (
             <p className={paraStyles}>
