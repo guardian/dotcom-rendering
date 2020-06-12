@@ -10,6 +10,7 @@ type Props = {
 
 export const TextInput = ({ formField, formData, setFormData }: Props) => (
     <SourceTextInput
+        id={`form-field-${formField.id}`}
         type={formField.type}
         label={formField.label}
         supporting={formField.description}
@@ -19,6 +20,7 @@ export const TextInput = ({ formField, formData, setFormData }: Props) => (
             setFormData({
                 ...formData,
                 [formField.id]: e.target.value,
-            })}
+            })
+        }
     />
 );

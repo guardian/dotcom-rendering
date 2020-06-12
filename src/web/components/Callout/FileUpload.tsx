@@ -18,8 +18,8 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => (
     <>
         <FieldLabel formField={formField} />
         <input
+            id={`form-field-${formField.id}`}
             className={fileUploadInputStyles}
-            name={String(formField.id)}
             type="file"
             accept="image/*, .pdf"
             required={formField.required}
@@ -27,7 +27,8 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => (
                 setFormData({
                     ...formData,
                     [formField.id]: e.target.files && e.target.files[0],
-                })}
+                })
+            }
         />
         <p>We accept images and pdfs. Maximum total file size: 6MB</p>
     </>

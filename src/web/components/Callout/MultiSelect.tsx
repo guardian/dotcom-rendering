@@ -16,7 +16,7 @@ export const MultiSelect = ({
     setFormData,
     multiple,
 }: Props) => (
-    <>
+    <div id={`form-field-${formField.id}`}>
         {multiple ? (
             <CheckboxSelect
                 formField={formField as CampaignFieldCheckbox}
@@ -30,5 +30,5 @@ export const MultiSelect = ({
                 setFormData={setFormData}
             />
         )}
-    </>
+    </div>
 );

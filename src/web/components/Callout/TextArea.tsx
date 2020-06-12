@@ -17,15 +17,16 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
     <>
         <FieldLabel formField={formField} />
         <textarea
+            id={`form-field-${formField.id}`}
             className={textAreaStyles}
-            name={String(formField.id)}
             required={formField.required}
             value={formField.id in formData ? formData[formField.id] : ''}
             onChange={e =>
                 setFormData({
                     ...formData,
                     [formField.id]: e.target.value,
-                })}
+                })
+            }
         />
     </>
 );

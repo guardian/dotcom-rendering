@@ -12,7 +12,7 @@ export const Select = ({ formField, formData, setFormData }: Props) => (
     <>
         <FieldLabel formField={formField} />
         <select
-            name={`${formField.id}`}
+            id={`form-field-${formField.id}`}
             required={formField.required}
             value={
                 formField.id && formField.id in formData
@@ -23,7 +23,8 @@ export const Select = ({ formField, formData, setFormData }: Props) => (
                 setFormData({
                     ...formData,
                     [formField.id]: e.target.value,
-                })}
+                })
+            }
         >
             {formField.options &&
                 formField.options.map((option, index) => (
