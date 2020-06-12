@@ -28,29 +28,33 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
             {formField.options && (
                 <CheckboxGroup name={formField.name || ''}>
                     {formField.options.map((option, index) => {
-                        const checkboxSelection =
-                            formField.id && formField.id in formData
+                        // data related to this field is mapped to `formData` using `formField.id`
+                        // We cannot assume that the data exists, so we need to check if `formField.id` key exists in `formData`
+                        const selectedCheckboxesArray =
+                            formField.id in formData
                                 ? formData[formField.id]
                                 : [];
-                        const isCheckboxChecked = checkboxSelection.find(
+
+                        const isCheckboxChecked = !!selectedCheckboxesArray.find(
                             (ele: string) => ele === option.value,
                         );
+
                         return (
                             <Checkbox
                                 key={index}
                                 label={option.value}
                                 value={option.value}
                                 name={`${formField.id}`}
-                                checked={!!isCheckboxChecked}
+                                checked={isCheckboxChecked}
                                 onChange={() => {
                                     updateState(
                                         isCheckboxChecked
-                                            ? checkboxSelection.filter(
+                                            ? selectedCheckboxesArray.filter(
                                                   (ele: string) =>
                                                       ele !== option.value,
                                               )
                                             : [
-                                                  ...checkboxSelection,
+                                                  ...selectedCheckboxesArray,
                                                   option.value,
                                               ],
                                     );
