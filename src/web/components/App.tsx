@@ -9,7 +9,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
-import { BottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
+import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -370,7 +370,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="bottom-banner">
-                <BottomBanner
+                <StickyBottomBanner
                     isSignedIn={isSignedIn}
                     countryCode={countryCode}
                     CAPI={CAPI}

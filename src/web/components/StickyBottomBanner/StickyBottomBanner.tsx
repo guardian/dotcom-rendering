@@ -11,7 +11,11 @@ type Props = {
     CAPI: CAPIBrowserType;
 };
 
-export const BottomBanner = ({ isSignedIn, countryCode, CAPI }: Props) => {
+export const StickyBottomBanner = ({
+    isSignedIn,
+    countryCode,
+    CAPI,
+}: Props) => {
     const [showCMP, setShowCMP] = useState<boolean | null>(null);
 
     useEffect(() => {
