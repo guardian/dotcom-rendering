@@ -24,7 +24,6 @@ export const TextInput = ({ formField, formData, setFormData }: Props) => (
             setFormData({
                 ...formData,
                 [formField.id]: e.target.value,
-            })
-        }
+            })}
     />
 );

@@ -29,7 +29,6 @@ export const Radios = ({ formField, formData, setFormData }: fieldProp) => {
                 <RadioGroup name={formField.name} orientation="horizontal">
                     {formField.options.map((option, index) => {
                         const isRadioChecked =
-                            formField.id &&
                             formField.id in formData &&
                             formData[formField.id] === option.value;
                         return (
