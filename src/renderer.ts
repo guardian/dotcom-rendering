@@ -25,7 +25,7 @@ import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
-import MembershipLink from 'components/MembershipLink';
+import MembershipLink from 'components/membershipLink';
 
 
 // ----- Renderer ----- //
