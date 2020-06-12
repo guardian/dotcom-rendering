@@ -3,6 +3,8 @@ import { css } from 'emotion';
 
 import { Link } from '@guardian/src-link';
 import { Button } from '@guardian/src-button';
+import { text } from '@guardian/src-foundations/palette';
+import { textSans } from '@guardian/src-foundations/typography';
 
 import { Checkboxes } from './Checkboxes';
 import { FileUpload } from './FileUpload';
@@ -23,6 +25,12 @@ const footerPaddingStyles = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+`;
+
+const errorMessagesStyles = css`
+    padding-bottom: 10px;
+    color: ${text.error};
+    ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
 type formData = { [key in string]: any };
@@ -153,7 +161,7 @@ export const Form = ({ submitForm, formId, formFields, error }: FormProps) => {
                     onChange={e => setTwitterHandle(e.target.value)}
                 />
             </div>
-            {error && <div>{error}</div>}
+            {error && <div className={errorMessagesStyles}>{error}</div>}
             <div className={footerPaddingStyles}>
                 <Button priority="secondary" size="xsmall" type="submit">
                     Share with the Guardian
