@@ -27,65 +27,79 @@ const footerPaddingStyles = css`
 
 type formData = { [key in string]: any };
 
-type addFormFieldProp = {
+type FormFieldProp = {
     formField: CampaignFieldType;
     formData: formData;
     setFormData: React.Dispatch<React.SetStateAction<formData>>;
 };
 
-const addFormField = ({
-    formField,
-    formData,
-    setFormData,
-}: addFormFieldProp) => {
+const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
     switch (formField.type) {
         case 'textarea':
             return (
-                <TextArea
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <TextArea
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         case 'file':
             return (
-                <FileUpload
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <FileUpload
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         case 'select':
             return (
-                <Select
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <Select
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         case 'radio':
             return (
-                <Radios
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <Radios
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         case 'checkbox':
             return (
-                <Checkboxes
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <Checkboxes
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         default: {
             return (
-                <TextInput
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <>
+                    <TextInput
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <hr />
+                </>
             );
         }
     }
@@ -114,14 +128,12 @@ export const Form = ({ submitForm, formId, formFields, error }: FormProps) => {
         >
             <input name="formId" type="hidden" value={formId} />
             {formFields.map((formField, index) => (
-                <div key={index}>
-                    {addFormField({
-                        formField,
-                        formData,
-                        setFormData,
-                    })}
-                    <hr />
-                </div>
+                <FormField
+                    key={index}
+                    formField={formField}
+                    formData={formData}
+                    setFormData={setFormData}
+                />
             ))}
             {/* this element is a H O N £ Y - P 0 T */}
             <div
