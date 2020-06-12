@@ -26,7 +26,7 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
         <>
             <FieldLabel formField={formField} />
             {formField.options && (
-                <CheckboxGroup name={formField.name || ''}>
+                <CheckboxGroup name={formField.name}>
                     {formField.options.map((option, index) => {
                         // data related to this field is mapped to `formData` using `formField.id`
                         // We cannot assume that the data exists, so we need to check if `formField.id` key exists in `formData`
