@@ -114,7 +114,7 @@ export const Form = ({ submitForm, formId, formFields, error }: FormProps) => {
         >
             <input name="formId" type="hidden" value={formId} />
             {formFields.map((formField, index) => (
-                <div key={index} custom-guardian="callout-form-field">
+                <div key={index}>
                     {addFormField({
                         formField,
                         formData,
