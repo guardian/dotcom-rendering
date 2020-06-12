@@ -469,7 +469,7 @@ type UserProfile = {
 type TeamType = {
     id: string;
     name: string;
-    lineup: PlayerType[];
+    players: PlayerType[];
     possession: number;
     shotsOn: number;
     shotsOff: number;
