@@ -20,12 +20,10 @@ const optionalTextStyles = css`
 
 export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
     <label className={fieldLabelStyles} htmlFor={formField.name}>
-        <div>
-            {formField.label}
-            {!formField.required && (
-                <span className={optionalTextStyles}>Optional</span>
-            )}
-        </div>
+        {formField.label}
+        {!formField.required && (
+            <span className={optionalTextStyles}>Optional</span>
+        )}
         {formField.description && (
             <div>
                 <span className={fieldDescription}>
