@@ -18,7 +18,7 @@ export const Radios = ({ formField, formData, setFormData }: fieldProp) => {
         setState(newState);
         setFormData({
             ...formData,
-            [formField.id || '']: state,
+            [formField.id]: state,
         });
     };
 
@@ -26,10 +26,7 @@ export const Radios = ({ formField, formData, setFormData }: fieldProp) => {
         <>
             <FieldLabel formField={formField} />
             {formField.options && (
-                <RadioGroup
-                    name={formField.name || ''}
-                    orientation="horizontal"
-                >
+                <RadioGroup name={formField.name} orientation="horizontal">
                     {formField.options.map((option, index) => {
                         const isRadioChecked =
                             formField.id &&

@@ -22,8 +22,9 @@ export const Select = ({ formField, formData, setFormData }: Props) => (
             onChange={e =>
                 setFormData({
                     ...formData,
-                    [formField.id || '']: e.target.value,
-                })}
+                    [formField.id]: e.target.value,
+                })
+            }
         >
             {formField.options &&
                 formField.options.map((option, index) => (

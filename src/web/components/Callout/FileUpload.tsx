@@ -26,7 +26,7 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => (
             onChange={e =>
                 setFormData({
                     ...formData,
-                    [formField.id || '']: e.target.files && e.target.files[0],
+                    [formField.id]: e.target.files && e.target.files[0],
                 })
             }
         />

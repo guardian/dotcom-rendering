@@ -18,7 +18,7 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
         setState(newState);
         setFormData({
             ...formData,
-            [formField.id || '']: state,
+            [formField.id]: state,
         });
     };
 

@@ -12,7 +12,7 @@ export const TextInput = ({ formField, formData, setFormData }: Props) => (
     <SourceTextInput
         name={`${formField.id}`}
         type={formField.type}
-        label={formField.label || ''}
+        label={formField.label}
         supporting={formField.description}
         optional={formField.required}
         value={
@@ -23,7 +23,8 @@ export const TextInput = ({ formField, formData, setFormData }: Props) => (
         onChange={e =>
             setFormData({
                 ...formData,
-                [formField.id || '']: e.target.value,
-            })}
+                [formField.id]: e.target.value,
+            })
+        }
     />
 );
