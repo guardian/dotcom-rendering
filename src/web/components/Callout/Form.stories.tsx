@@ -19,7 +19,7 @@ export const Default = () => {
         >
             <Form
                 formFields={calloutCampaign.formFields}
-                submitForm={() => {}}
+                onSubmit={() => {}}
                 formId={1234}
             />
         </div>
@@ -37,7 +37,7 @@ export const WithError = () => {
         >
             <Form
                 formFields={calloutCampaign.formFields}
-                submitForm={() => {}}
+                onSubmit={() => {}}
                 formId={1234}
                 error="I am a form error"
             />

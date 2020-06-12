@@ -114,13 +114,13 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 };
 
 type FormProps = {
-    submitForm: () => void;
+    onSubmit: () => void;
     formId: number;
     formFields: CampaignFieldType[];
     error?: string;
 };
 
-export const Form = ({ submitForm, formId, formFields, error }: FormProps) => {
+export const Form = ({ onSubmit, formId, formFields, error }: FormProps) => {
     const [twitterHandle, setTwitterHandle] = useState('');
     const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
@@ -131,7 +131,7 @@ export const Form = ({ submitForm, formId, formFields, error }: FormProps) => {
             className={formStyles}
             onSubmit={e => {
                 e.preventDefault();
-                submitForm();
+                onSubmit();
             }}
         >
             <input name="formId" type="hidden" value={formId} />
