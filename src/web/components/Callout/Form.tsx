@@ -25,10 +25,12 @@ const footerPaddingStyles = css`
     justify-content: space-between;
 `;
 
+type formData = { [key in string]: any };
+
 type addFormFieldProp = {
     formField: CampaignFieldType;
-    formData: { [key in string]: any };
-    setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+    formData: formData;
+    setFormData: React.Dispatch<React.SetStateAction<formData>>;
 };
 
 const addFormField = ({
