@@ -6,9 +6,8 @@ import { Button } from '@guardian/src-button';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { CheckboxList } from './CheckboxList';
 import { FileUpload } from './FileUpload';
-import { RadioList } from './RadioList';
+import { MultiSelect } from './MultiSelect';
 import { Select } from './Select';
 import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
@@ -76,24 +75,15 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
                     <hr />
                 </>
             );
+        case 'checkbox':
         case 'radio':
             return (
                 <>
-                    <RadioList
+                    <MultiSelect
                         formField={formField}
                         formData={formData}
                         setFormData={setFormData}
-                    />
-                    <hr />
-                </>
-            );
-        case 'checkbox':
-            return (
-                <>
-                    <CheckboxList
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
+                        multiple={formField.type === 'checkbox'}
                     />
                     <hr />
                 </>
