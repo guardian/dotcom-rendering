@@ -27,8 +27,7 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => (
                 setFormData({
                     ...formData,
                     [formField.id || '']: e.target.files && e.target.files[0],
-                })
-            }
+                })}
         />
         <p className="form-info-text">
             We accept images and pdfs. Maximum total file size: 6MB

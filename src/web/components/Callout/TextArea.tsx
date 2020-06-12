@@ -29,8 +29,7 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
                 setFormData({
                     ...formData,
                     [formField.id || '']: e.target.value,
-                })
-            }
+                })}
         />
     </>
 );
