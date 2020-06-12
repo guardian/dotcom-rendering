@@ -105,12 +105,11 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 
 type FormProps = {
     onSubmit: () => void;
-    formId: number;
     formFields: CampaignFieldType[];
     error?: string;
 };
 
-export const Form = ({ onSubmit, formId, formFields, error }: FormProps) => {
+export const Form = ({ onSubmit, formFields, error }: FormProps) => {
     const [twitterHandle, setTwitterHandle] = useState('');
     const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
@@ -124,7 +123,6 @@ export const Form = ({ onSubmit, formId, formFields, error }: FormProps) => {
                 onSubmit();
             }}
         >
-            <input name="formId" type="hidden" value={formId} />
             {formFields.map((formField, index) => (
                 <FormField
                     key={index}

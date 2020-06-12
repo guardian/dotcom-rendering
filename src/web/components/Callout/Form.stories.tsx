@@ -17,11 +17,7 @@ export const Default = () => {
                 padding: 15px;
             `}
         >
-            <Form
-                formFields={calloutCampaign.formFields}
-                onSubmit={() => {}}
-                formId={1234}
-            />
+            <Form formFields={calloutCampaign.formFields} onSubmit={() => {}} />
         </div>
     );
 };
@@ -38,7 +34,6 @@ export const WithError = () => {
             <Form
                 formFields={calloutCampaign.formFields}
                 onSubmit={() => {}}
-                formId={1234}
                 error="I am a form error"
             />
         </div>
