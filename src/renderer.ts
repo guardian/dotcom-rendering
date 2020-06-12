@@ -25,6 +25,7 @@ import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
+import MembershipLink from 'components/MembershipLink';
 
 
 // ----- Renderer ----- //
@@ -441,10 +442,13 @@ const render = (format: Format, excludeStyles = false) =>
             return h(Pullquote, { quote, attribution, format, key });
         }
 
-        case ElementKind.Membership:
         case ElementKind.RichLink: {
             const { url, linkText } = element;
             return h(RichLink, { url, linkText, key, format });
+        }
+
+        case ElementKind.Membership: {
+            return h(MembershipLink, { ...element, key });
         }
 
         case ElementKind.Interactive:

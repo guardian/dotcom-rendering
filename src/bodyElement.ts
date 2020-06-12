@@ -14,6 +14,7 @@ import { Image as ImageData, parseImage } from 'image';
 import { isElement } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
+import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 
 // ----- Types ----- //
 
@@ -96,6 +97,9 @@ type BodyElement = {
     kind: ElementKind.Membership;
     linkText: string;
     url: string;
+    image?: string;
+    price?: string;
+    start?: CapiDateTime;
 } | Video | InteractiveAtom | ExplainerAtom;
 
 type Elements = BlockElement[] | undefined;
@@ -141,6 +145,8 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem };
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
+        case ElementKind.Membership:
+                return { ...elem, start: elem?.start?.iso8601 };
         default:
             return elem;
     }
@@ -284,13 +290,13 @@ const parse = (context: Context, atoms?: Atoms) =>
         }
 
         case ElementType.MEMBERSHIP: {
-            const { linkText, originalUrl: url } = element.membershipTypeData ?? {};
+            const { linkText, originalUrl: url, price, start, image } = element.membershipTypeData ?? {};
 
             if (!linkText || !url) {
                 return new Err('No title or href field on membershipTypeData')
             }
 
-            return new Ok({ kind: ElementKind.Membership, linkText, url });
+            return new Ok({ kind: ElementKind.Membership, linkText, url, price, start, image });
         }
 
         case ElementType.INSTAGRAM: {
