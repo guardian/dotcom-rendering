@@ -12,7 +12,7 @@ type fieldProp = {
 // We encapsulate the Component's state here instead of directly sourcing it from
 // `formData` to avoid unnessesary rerenders, as this was causing selection animation
 // to be applied whenever formData was changin
-export const Radios = ({ formField, formData, setFormData }: fieldProp) => {
+export const RadioList = ({ formField, formData, setFormData }: fieldProp) => {
     const [state, setState] = useState();
     const updateState = (newState: string) => {
         setState(newState);

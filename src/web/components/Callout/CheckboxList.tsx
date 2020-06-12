@@ -12,7 +12,7 @@ type Props = {
 // We encapsulate the Component's state here instead of directly sourcing it from
 // `formData` to avoid unnessesary rerenders, as this was causing selection animation
 // to be applied whenever formData was changing
-export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
+export const CheckboxList = ({ formField, formData, setFormData }: Props) => {
     const [state, setState] = useState([]);
     const updateState = (newState: []) => {
         setState(newState);

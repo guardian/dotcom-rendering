@@ -6,9 +6,9 @@ import { Button } from '@guardian/src-button';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { Checkboxes } from './Checkboxes';
+import { CheckboxList } from './CheckboxList';
 import { FileUpload } from './FileUpload';
-import { Radios } from './Radios';
+import { RadioList } from './RadioList';
 import { Select } from './Select';
 import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
@@ -79,7 +79,7 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
         case 'radio':
             return (
                 <>
-                    <Radios
+                    <RadioList
                         formField={formField}
                         formData={formData}
                         setFormData={setFormData}
@@ -90,7 +90,7 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
         case 'checkbox':
             return (
                 <>
-                    <Checkboxes
+                    <CheckboxList
                         formField={formField}
                         formData={formData}
                         setFormData={setFormData}
