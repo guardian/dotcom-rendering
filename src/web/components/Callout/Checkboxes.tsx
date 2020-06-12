@@ -39,6 +39,16 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
                             (ele: string) => ele === option.value,
                         );
 
+                        const filterOutCheckboxFromArray = () =>
+                            selectedCheckboxesArray.filter(
+                                (ele: string) => ele !== option.value,
+                            );
+
+                        const addCheckboxToArray = () => [
+                            ...selectedCheckboxesArray,
+                            option.value,
+                        ];
+
                         return (
                             <Checkbox
                                 key={index}
@@ -49,14 +59,8 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
                                 onChange={() => {
                                     updateState(
                                         isCheckboxChecked
-                                            ? selectedCheckboxesArray.filter(
-                                                  (ele: string) =>
-                                                      ele !== option.value,
-                                              )
-                                            : [
-                                                  ...selectedCheckboxesArray,
-                                                  option.value,
-                                              ],
+                                            ? filterOutCheckboxFromArray()
+                                            : addCheckboxToArray(),
                                     );
                                 }}
                             />
