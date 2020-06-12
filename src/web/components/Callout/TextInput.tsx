@@ -15,11 +15,7 @@ export const TextInput = ({ formField, formData, setFormData }: Props) => (
         label={formField.label}
         supporting={formField.description}
         optional={formField.required}
-        value={
-            formField.id && formField.id in formData
-                ? formData[formField.id]
-                : ''
-        }
+        value={formField.id in formData ? formData[formField.id] : ''}
         onChange={e =>
             setFormData({
                 ...formData,
