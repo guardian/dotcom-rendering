@@ -290,7 +290,13 @@ const parse = (context: Context, atoms?: Atoms) =>
         }
 
         case ElementType.MEMBERSHIP: {
-            const { linkText, originalUrl: url, price, start, image } = element.membershipTypeData ?? {};
+            const {
+                linkText,
+                originalUrl: url,
+                price,
+                start,
+                image
+            } = element.membershipTypeData ?? {};
 
             if (!linkText || !url) {
                 return new Err('No linkText or originalUrl field on membershipTypeData');

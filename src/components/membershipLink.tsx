@@ -88,7 +88,7 @@ const membershipLinkStyles: SerializedStyles =
 
 const MembershipLink = (props: MembershipLinkProps): ReactElement => {
     const { url, image, linkText, start, price } = props;
-    const headerImage = image ? <img src={image} /> : null;
+    const headerImage = image ? <img src={image} alt="Membership event"/> : null;
     const date = start ? formatDate(new Date(start?.iso8601)) : null;
     return <aside css={membershipLinkStyles}>
         <a href={url}>
