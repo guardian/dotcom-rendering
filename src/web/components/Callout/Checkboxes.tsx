@@ -54,7 +54,6 @@ export const Checkboxes = ({ formField, formData, setFormData }: Props) => {
                                 key={index}
                                 label={option.value}
                                 value={option.value}
-                                name={`${formField.id}`}
                                 checked={isCheckboxChecked}
                                 onChange={() => {
                                     updateState(
