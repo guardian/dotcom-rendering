@@ -14,7 +14,7 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
-import { ExplainerAtom } from '@guardian/atoms-rendering';
+import { ExplainerAtom, ChartAtom } from '@guardian/atoms-rendering';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -48,7 +48,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return null; // will be filled shortly with the ChartAtom from atoms-rendering
+                    return <ChartAtom id={element.id} url={element.url} />;
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     return (
                         <EmbedBlockComponent
