@@ -392,11 +392,14 @@
                         "model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement"
                     ]
                 },
+                "id": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 }
             },
-            "required": ["_type", "url"]
+            "required": ["_type", "id", "url"]
         },
         "AudioAtomElement": {
             "type": "object",
