@@ -12,6 +12,7 @@ interface AtomEmbedMarkupBlockElement {
 
 interface AtomEmbedUrlBlockElement {
     _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
+    id: string;
     url: string;
 }
 
