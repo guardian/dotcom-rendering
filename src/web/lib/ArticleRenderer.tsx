@@ -47,6 +47,8 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
+                case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
+                    return null; // will be filled shortly with the ChartAtom from atoms-rendering
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     return (
                         <EmbedBlockComponent

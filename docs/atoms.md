@@ -31,7 +31,7 @@ AudioAtom
     -> AudioAtomBlockElement
 
 ChartAtom
-    -> AtomEmbedUrlBlockElement
+    -> ChartAtomBlockElement
 
 CommonsDivisionAtom
 
@@ -75,6 +75,9 @@ AudioAtomBlockElement
 AtomEmbedUrlBlockElement
     -> [amp] AtomEmbedUrlBlockComponent
     -> [web] InteractiveAtom (atoms-rendering)
+
+ChartAtomBlockElement
+    -> [web] ChartAtom (atoms-rendering)
 
 ExplainerAtomBlockElement
 	 -> [web] ExplainerAtom (atoms-rendering)
