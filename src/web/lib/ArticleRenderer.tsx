@@ -12,6 +12,7 @@ import { SoundcloudBlockComponent } from '@root/src/web/components/elements/Soun
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
+import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import { ExplainerAtom } from '@guardian/atoms-rendering';
@@ -123,6 +124,13 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
+                case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                    return (
+                        <VimeoBlockComponent
+                            element={element}
+                            pillar={pillar}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YoutubeBlockComponent
@@ -155,7 +163,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
                     return null;
             }
