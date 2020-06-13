@@ -74,6 +74,7 @@ AudioAtomBlockElement
 
 AtomEmbedUrlBlockElement
     -> [amp] AtomEmbedUrlBlockComponent
+    -> [web] InteractiveAtom (atoms-rendering)
 
 ExplainerAtomBlockElement
 	 -> [web] ExplainerAtom (atoms-rendering)
