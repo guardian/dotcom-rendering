@@ -14,7 +14,11 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
-import { ExplainerAtom } from '@guardian/atoms-rendering';
+import {
+    ExplainerAtom,
+    GuideAtom,
+    ProfileAtom,
+} from '@guardian/atoms-rendering';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -66,6 +70,17 @@ export const ArticleRenderer: React.FC<{
                             html={element.body}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                    return (
+                        <GuideAtom
+                            id={element.id}
+                            label={element.label}
+                            title={element.title}
+                            img={element.img}
+                            html={element.html}
+                            credit={element.credit}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
@@ -88,6 +103,17 @@ export const ArticleRenderer: React.FC<{
                             images={element.images}
                             caption={element.caption}
                             pillar={pillar}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
+                    return (
+                        <ProfileAtom
+                            id={element.id}
+                            label={element.label}
+                            title={element.title}
+                            img={element.img}
+                            html={element.html}
+                            credit={element.credit}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
@@ -150,8 +176,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TableBlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
