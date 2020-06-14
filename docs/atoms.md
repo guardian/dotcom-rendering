@@ -84,9 +84,11 @@ ExplainerAtomBlockElement
 
 GuideAtomBlockElement
     -> [amp] Expandable
+    -> [web] GuideAtom (atoms-rendering)
 
 ProfileAtomBlockElement
     -> [amp] Expandable
+    -> [web] ProfileAtom (atoms-rendering)
 
 YoutubeBlockElement
     -> [amp] YoutubeBlockComponent
