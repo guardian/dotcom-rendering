@@ -191,7 +191,6 @@ interface SubheadingBlockElement {
 interface TableBlockElement {
     _type: 'model.dotcomrendering.pageElements.TableBlockElement';
     isMandatory: boolean;
-    html: string;
 }
 
 interface TextBlockElement {

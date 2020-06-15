@@ -10,7 +10,6 @@ import { InstagramBlockComponent } from '@root/src/web/components/elements/Insta
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
-import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
@@ -112,8 +111,6 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
                     );
-                case 'model.dotcomrendering.pageElements.TableBlockElement':
-                    return <TableBlockComponent element={element} />;
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return (
                         <TextBlockComponent
@@ -156,6 +153,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.QABlockElement':
+                case 'model.dotcomrendering.pageElements.TableBlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
