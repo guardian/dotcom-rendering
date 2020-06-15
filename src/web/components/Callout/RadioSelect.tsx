@@ -22,7 +22,7 @@ export const RadioSelect = ({
         setState(newState);
         setFormData({
             ...formData,
-            [formField.id]: state,
+            [formField.id]: newState,
         });
     };
 
@@ -36,12 +36,13 @@ export const RadioSelect = ({
                         formData[formField.id] === option.value;
                     return (
                         <Radio
+                            data-testid={`form-field-${option.value}`}
                             key={index}
                             label={option.value}
                             value={option.value}
                             name={`${formField.id}`}
                             checked={!!isRadioChecked}
-                            onChange={() => updateState(option.value)}
+                            onClick={() => updateState(option.value)}
                         />
                     );
                 })}

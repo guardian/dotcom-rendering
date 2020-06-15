@@ -18,7 +18,7 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => (
     <>
         <FieldLabel formField={formField} />
         <input
-            id={`form-field-${formField.id}`}
+            data-testid={`form-field-${formField.id}`}
             className={fileUploadInputStyles}
             type="file"
             accept="image/*, .pdf"

@@ -104,7 +104,7 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 };
 
 type FormProps = {
-    onSubmit: () => void;
+    onSubmit: (formData: formData) => void;
     formFields: CampaignFieldType[];
     error?: string;
 };
@@ -120,7 +120,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
             className={formStyles}
             onSubmit={e => {
                 e.preventDefault();
-                onSubmit();
+                onSubmit(formData);
             }}
         >
             {formFields.map((formField, index) => (

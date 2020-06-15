@@ -18,7 +18,7 @@ export const CheckboxSelect = ({ formField, formData, setFormData }: Props) => {
         setState(newState);
         setFormData({
             ...formData,
-            [formField.id]: state,
+            [formField.id]: newState,
         });
     };
 
@@ -48,6 +48,7 @@ export const CheckboxSelect = ({ formField, formData, setFormData }: Props) => {
 
                     return (
                         <Checkbox
+                            data-testid={`form-field-${option.value}`}
                             key={index}
                             label={option.value}
                             value={option.value}

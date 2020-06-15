@@ -16,7 +16,7 @@ export const MultiSelect = ({
     setFormData,
     multiple,
 }: Props) => (
-    <div id={`form-field-${formField.id}`}>
+    <div data-testid={`form-field-${formField.id}`}>
         {multiple ? (
             <CheckboxSelect
                 formField={formField as CampaignFieldCheckbox}
