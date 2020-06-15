@@ -59,7 +59,7 @@ function ads(): void {
             insertAds();
             Array.from(document.querySelectorAll('.ad-labels'))
                 .forEach(adLabel => {
-                    adLabel.addEventListener('touchstart', () => {
+                    adLabel.addEventListener('click', () => {
                         acquisitionsClient.launchFrictionScreen();
                     })
                 })

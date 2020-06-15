@@ -71,7 +71,7 @@ function topics(): void {
     const topic = getTopic(follow);
 
     if (topic) {
-        follow?.addEventListener('touchstart', topicClick);
+        follow?.addEventListener('click', topicClick);
         notificationsClient.isFollowing(topic).then(following => {
             if (following && status?.textContent) {
                 status.textContent = followingText;
