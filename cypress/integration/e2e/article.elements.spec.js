@@ -75,5 +75,19 @@ describe('Elements', function() {
 
             getIframeBody().contains('Cookie policy');
         });
+
+        it('should render the football embed', function() {
+            const getBody = () => {
+                return cy
+                    .get('div[data-cy="football-table-embed"]')
+                    .should('not.be.empty')
+                    .then(cy.wrap);
+            };
+            cy.visit(
+                'Article?url=https://www.theguardian.com/football/2020/jun/10/premier-league-restart-preview-no-5-burnley',
+            );
+
+            getBody().contains('Liverpool');
+        });
     });
 });
