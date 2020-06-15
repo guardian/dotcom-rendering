@@ -127,8 +127,13 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                     return (
                         <VimeoBlockComponent
-                            element={element}
                             pillar={pillar}
+                            url={element.url}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.credit}
+                            title={element.title}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
