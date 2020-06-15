@@ -5,12 +5,13 @@ import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
 
 const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${kicker};
     h1 {
         ${headline.medium()};
-        margin: 0;
+        margin: 0 0 ${remSpace[6]} 0;
         color: ${neutral[100]};
     }
 `;
