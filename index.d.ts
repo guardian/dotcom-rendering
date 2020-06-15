@@ -624,7 +624,7 @@ type IslandType =
     | 'most-viewed-footer'
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
-    | 'cmp'
+    | 'bottom-banner'
     | 'onwards-upper-whensignedin'
     | 'onwards-upper-whensignedout'
     | 'onwards-lower-whensignedin'
