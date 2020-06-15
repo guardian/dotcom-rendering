@@ -6,7 +6,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 
 const tableEmbed = css`
     .table--football {
-        /* The  embed js hijacks the iframe and calculated an incorrect width, which pushed the body out */
         width: 100%;
         background: ${palette.background.secondary};
         border-top: 0.0625rem solid ${border.focusHalo};
@@ -43,6 +42,8 @@ const tableEmbed = css`
             width: 100%;
         }
     }
+
+    margin-bottom: 16px;
 `;
 
 export const TableBlockComponent: React.FC<{
