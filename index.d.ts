@@ -295,12 +295,6 @@ type CAPIBrowserType = {
         showRelatedContent: boolean;
         keywordIds: string;
         ampIframeUrl: string;
-        ampPrebid: boolean;
-        permutive: boolean;
-        enableSentryReporting: boolean;
-        cmpUi: boolean;
-        enableDiscussionSwitch: boolean;
-        slotBodyEnd: boolean;
         isSensitive: boolean;
         videoDuration: number;
         edition: string;

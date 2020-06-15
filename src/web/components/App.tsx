@@ -345,7 +345,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                     discussionApiClientHeader={
                         CAPI.config.discussionApiClientHeader
                     }
-                    enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
+                    enableDiscussionSwitch={
+                        CAPI.config.switches.enableDiscussionSwitch
+                    }
                     expanded={isExpanded}
                     commentToScrollTo={hashCommentId}
                     onPermalinkClick={handlePermalink}

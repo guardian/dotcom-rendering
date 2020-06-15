@@ -21,10 +21,10 @@ export const StickyBottomBanner = ({
     useEffect(() => {
         const callShouldShow = () => setShowCMP(shouldShowCMP());
 
-        if (CAPI.config.cmpUi) {
+        if (CAPI.config.switches.cmpUI) {
             callShouldShow();
         }
-    }, [CAPI.config.cmpUi]);
+    }, [CAPI.config.switches.cmpUI]);
 
     // Don't render anything until we know whether we can show the CMP
     if (showCMP === null) {

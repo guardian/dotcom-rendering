@@ -97,15 +97,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             showRelatedContent: CAPI.config.showRelatedContent,
             keywordIds: CAPI.config.keywordIds,
             ampIframeUrl: CAPI.config.ampIframeUrl,
-
-            // switches
-            cmpUi: CAPI.config.switches.cmpUi,
-            slotBodyEnd: CAPI.config.switches.slotBodyEnd,
-            ampPrebid: CAPI.config.switches.ampPrebid,
-            permutive: CAPI.config.switches.permutive,
-            enableSentryReporting: CAPI.config.switches.enableSentryReporting,
-            enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
-
             // used by lib/ad-targeting.ts
             isSensitive: CAPI.config.isSensitive,
             videoDuration: CAPI.config.videoDuration,
@@ -116,9 +107,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiUrl: CAPI.config.discussionApiUrl,
             discussionD2Uid: CAPI.config.discussionD2Uid,
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
-
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
-
             // ab tests
             switches: CAPI.config.switches,
         },

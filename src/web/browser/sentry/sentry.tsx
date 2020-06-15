@@ -30,7 +30,11 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
     const {
         editionLongForm,
         contentType,
-        config: { isDev, enableSentryReporting, dcrSentryDsn },
+        config: {
+            isDev,
+            switches: { enableSentryReporting },
+            dcrSentryDsn,
+        },
     } = CAPIBrowser;
 
     Sentry.init({
