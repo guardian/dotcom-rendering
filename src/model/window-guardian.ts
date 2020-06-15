@@ -118,6 +118,9 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
 
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
+
+            // ab tests
+            switches: CAPI.config.switches,
         },
         richLinks: richLinksWithIndex,
         editionId: CAPI.editionId,

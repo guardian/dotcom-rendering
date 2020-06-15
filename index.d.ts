@@ -312,6 +312,7 @@ type CAPIBrowserType = {
         discussionD2Uid: string;
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
+        switches: { [key: string]: boolean };
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
