@@ -70,7 +70,7 @@ function ads(): void {
 function updateUrl(src: string): string {
     const url = new URL(src);
     const width = parseInt(url.searchParams.get('width') ?? '0');
-    const dpr = window.devicePixelRatio;
+    const dpr = window.devicePixelRatio >= 1.25 ? 2 : 1;
     const newWidth = Math.max(screen.height * dpr, screen.width * dpr, width);
 
     url.searchParams.set('width', newWidth.toString());
