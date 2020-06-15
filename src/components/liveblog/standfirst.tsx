@@ -6,10 +6,15 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { renderText } from 'renderer';
 import { Option } from 'types/option';
+import { headline } from '@guardian/src-foundations/typography';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
     color: ${neutral[97]};
+
+    p, li {
+        ${headline.xxxsmall({ fontWeight: 'bold' })}
+    }
 
     a {
         color: ${neutral[93]};
