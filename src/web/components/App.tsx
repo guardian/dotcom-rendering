@@ -5,11 +5,11 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { CMP } from '@frontend/web/components/CMP';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -369,11 +369,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            {CAPI.config.cmpUi && (
-                <Portal root="cmp">
-                    <CMP />
-                </Portal>
-            )}
+            <Portal root="bottom-banner">
+                <StickyBottomBanner
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    CAPI={CAPI}
+                />
+            </Portal>
         </React.StrictMode>
     );
 };
