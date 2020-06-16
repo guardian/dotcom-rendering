@@ -46,6 +46,10 @@ const radioField = {
             label: 'radio 2',
             value: 'radio 2',
         },
+        {
+            label: 'radio 3',
+            value: 'radio 3',
+        },
     ],
     hideLabel: false,
     label: 'Can we publish your response?',
@@ -97,9 +101,8 @@ const selectField = {
 } as CampaignFieldSelect;
 
 describe('Callout from', () => {
-    it('submit data in form', async () => {
+    it('should submit text input', () => {
         const mockSubmit = jest.fn();
-
         const { getByTestId, queryByText } = render(
             <Form
                 formFields={[
@@ -112,27 +115,205 @@ describe('Callout from', () => {
                 onSubmit={mockSubmit}
             />,
         );
-
         const getByFieldId = (fieldId: number | string) =>
             getByTestId(`form-field-${fieldId}`);
 
         const textFieldComponent = getByFieldId(
             textField.id,
         ) as HTMLInputElement;
-        const textFieldValue = 'Text';
+        const textFieldValue = 'textInput';
         fireEvent.change(textFieldComponent, {
             target: { value: textFieldValue },
         });
         expect(textFieldComponent.value).toBe(textFieldValue);
 
+        const submitButton = queryByText(
+            'Share with the Guardian',
+        ) as HTMLButtonElement;
+        fireEvent.click(submitButton);
+
+        expect(mockSubmit.mock.calls.length).toBe(1);
+        expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+            '91884886': 'textInput',
+        });
+    });
+
+    it('should submit textarea input', () => {
+        const mockSubmit = jest.fn();
+        const { getByTestId, queryByText } = render(
+            <Form
+                formFields={[
+                    textField,
+                    textAreaField,
+                    radioField,
+                    checkboxField,
+                    selectField,
+                ]}
+                onSubmit={mockSubmit}
+            />,
+        );
+        const getByFieldId = (fieldId: number | string) =>
+            getByTestId(`form-field-${fieldId}`);
+
         const textAreaFieldComponent = getByFieldId(
             textAreaField.id,
         ) as HTMLTextAreaElement;
-        const textAreaFieldValue = 'TextArea';
+        const textAreaFieldValue = 'textAreaInput';
         fireEvent.change(textAreaFieldComponent, {
             target: { value: textAreaFieldValue },
         });
         expect(textAreaFieldComponent.value).toBe(textAreaFieldValue);
+
+        const submitButton = queryByText(
+            'Share with the Guardian',
+        ) as HTMLButtonElement;
+        fireEvent.click(submitButton);
+
+        expect(mockSubmit.mock.calls.length).toBe(1);
+        expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+            '91884874': 'textAreaInput',
+        });
+    });
+
+    it('should submit radio', () => {
+        const mockSubmit = jest.fn();
+        const { getByTestId, queryByText } = render(
+            <Form
+                formFields={[
+                    textField,
+                    textAreaField,
+                    radioField,
+                    checkboxField,
+                    selectField,
+                ]}
+                onSubmit={mockSubmit}
+            />,
+        );
+        const getByFieldId = (fieldId: number | string) =>
+            getByTestId(`form-field-${fieldId}`);
+
+        const radioFieldComponent1 = getByFieldId(
+            radioField.options[0].value,
+        ) as HTMLInputElement;
+        fireEvent.click(radioFieldComponent1);
+        expect(radioFieldComponent1.checked).toBe(true);
+
+        const radioFieldComponent2 = getByFieldId(
+            radioField.options[0].value,
+        ) as HTMLInputElement;
+        fireEvent.click(radioFieldComponent2);
+        expect(radioFieldComponent2.checked).toBe(true);
+
+        const submitButton = queryByText(
+            'Share with the Guardian',
+        ) as HTMLButtonElement;
+        fireEvent.click(submitButton);
+
+        expect(mockSubmit.mock.calls.length).toBe(1);
+        expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+            '91884878': 'radio 2',
+        });
+    });
+
+    it.only('should submit checkbox', () => {
+        const mockSubmit = jest.fn();
+        const { getByTestId, queryByText } = render(
+            <Form
+                formFields={[
+                    textField,
+                    textAreaField,
+                    radioField,
+                    checkboxField,
+                    selectField,
+                ]}
+                onSubmit={mockSubmit}
+            />,
+        );
+        const getByFieldId = (fieldId: number | string) =>
+            getByTestId(`form-field-${fieldId}`);
+
+        const checkBoxFieldComponent1 = getByFieldId(
+            checkboxField.options[0].value,
+        ) as HTMLInputElement;
+        fireEvent.click(checkBoxFieldComponent1);
+        expect(checkBoxFieldComponent1.checked).toBe(true);
+
+        const checkBoxFieldComponent2 = getByFieldId(
+            checkboxField.options[1].value,
+        ) as HTMLInputElement;
+        fireEvent.click(checkBoxFieldComponent2);
+        expect(checkBoxFieldComponent2.checked).toBe(true);
+        // we want to check if we can uncheck the checkbox
+        fireEvent.click(checkBoxFieldComponent2);
+        expect(checkBoxFieldComponent2.checked).toBe(false);
+
+        const checkBoxFieldComponent3 = getByFieldId(
+            checkboxField.options[2].value,
+        ) as HTMLInputElement;
+        fireEvent.click(checkBoxFieldComponent3);
+        expect(checkBoxFieldComponent3.checked).toBe(true);
+
+        const submitButton = queryByText(
+            'Share with the Guardian',
+        ) as HTMLButtonElement;
+        fireEvent.click(submitButton);
+
+        expect(mockSubmit.mock.calls.length).toBe(1);
+        expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+            '91884871': ['checkbox 1', 'checkbox 3'],
+        });
+    });
+
+    it.todo('should submit select', () => {
+        const mockSubmit = jest.fn();
+        const { getByTestId, queryByText } = render(
+            <Form
+                formFields={[
+                    textField,
+                    textAreaField,
+                    radioField,
+                    checkboxField,
+                    selectField,
+                ]}
+                onSubmit={mockSubmit}
+            />,
+        );
+        const getByFieldId = (fieldId: number | string) =>
+            getByTestId(`form-field-${fieldId}`);
+
+        const selectText = 'selection 1';
+        const selectFieldComponent = queryByText(
+            selectText,
+        ) as HTMLSelectElement;
+        fireEvent.click(selectFieldComponent);
+
+        const submitButton = queryByText(
+            'Share with the Guardian',
+        ) as HTMLButtonElement;
+        fireEvent.click(submitButton);
+
+        expect(mockSubmit.mock.calls.length).toBe(1);
+        expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+            '91884871': 'selection 1',
+        });
+    });
+
+    it('submit multiple values', () => {
+        const mockSubmit = jest.fn();
+        const { getByTestId, queryByText } = render(
+            <Form
+                formFields={[
+                    textField,
+                    textAreaField,
+                    radioField,
+                    checkboxField,
+                    selectField,
+                ]}
+                onSubmit={mockSubmit}
+            />,
+        );
+        const getByFieldId = (fieldId: number | string) =>
+            getByTestId(`form-field-${fieldId}`);
 
         const radioFieldComponent = getByFieldId(
             radioField.options[0].value,
@@ -152,12 +333,6 @@ describe('Callout from', () => {
         fireEvent.click(checkBoxFieldComponent2);
         expect(checkBoxFieldComponent2.checked).toBe(true);
 
-        const selectText = 'selection 1';
-        const selectFieldComponent = queryByText(
-            selectText,
-        ) as HTMLSelectElement;
-        fireEvent.click(selectFieldComponent);
-
         const submitButton = queryByText(
             'Share with the Guardian',
         ) as HTMLButtonElement;
@@ -166,9 +341,7 @@ describe('Callout from', () => {
         expect(mockSubmit.mock.calls.length).toBe(1);
         expect(mockSubmit.mock.calls[0][0]).toMatchObject({
             '91884871': ['checkbox 1', 'checkbox 2'],
-            '91884874': 'TextArea',
             '91884878': 'radio 1',
-            '91884886': 'Text',
         });
     });
 });
