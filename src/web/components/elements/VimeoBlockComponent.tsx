@@ -1,22 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
-// import { border } from '@guardian/src-foundations/palette';
-// import { body } from '@guardian/src-foundations/typography';
 import { Caption } from '@root/src/web/components/Caption';
 
 const widthOverride = css`
     width: 100%;
-    max-width: 1800px;
 `;
 
-const inner = css`
-    width: 100%;
-    position: relative;
-
+const inner = (maxWidth: number) => css`
     iframe {
         width: 100%;
         height: 400px;
     }
+    max-width: ${maxWidth}px;
 `;
 export const VimeoBlockComponent: React.FC<{
     pillar: Pillar;
@@ -26,11 +21,16 @@ export const VimeoBlockComponent: React.FC<{
     caption: string;
     credit: string;
     title: string;
-}> = ({ url, caption, title, pillar }) => {
+}> = ({ url, caption, title, pillar, width, height }) => {
+    // maxHeight is a value copied from frontend, which is the full height on an iphone X
+    const maxHeight = 812;
+    const aspectRatio = width / height;
+    const maxWidth = maxHeight * aspectRatio;
+
     return (
         <div className={widthOverride}>
-            <div className={inner}>
-                <iframe src={url} title={title} />
+            <div className={inner(maxWidth)}>
+                <iframe src={url} title={title} height={height} width={width} />
             </div>
             {caption && (
                 <Caption

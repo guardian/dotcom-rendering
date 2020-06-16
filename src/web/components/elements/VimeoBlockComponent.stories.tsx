@@ -19,15 +19,15 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     </div>
 );
 
-export const noOverlay = () => {
+export const smallAspectRatio = () => {
     return (
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
                 url="https://player.vimeo.com/video/327310297?app_id=122963"
                 pillar="news"
-                height={460}
-                width={259}
+                height={250}
+                width={250}
                 caption="blah"
                 credit=""
                 title=""
@@ -36,4 +36,23 @@ export const noOverlay = () => {
         </Container>
     );
 };
-noOverlay.story = { name: 'with no overlay' };
+smallAspectRatio.story = { name: 'with small aspect ratio' };
+
+export const largeAspectRatio = () => {
+    return (
+        <Container>
+            <p>abc</p>
+            <VimeoBlockComponent
+                url="https://player.vimeo.com/video/327310297?app_id=122963"
+                pillar="news"
+                height={259}
+                width={460}
+                caption="blah"
+                credit=""
+                title=""
+            />
+            <p>abc</p>
+        </Container>
+    );
+};
+largeAspectRatio.story = { name: 'with large aspect ratio' };
