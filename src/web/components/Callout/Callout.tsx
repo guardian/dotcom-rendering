@@ -175,56 +175,7 @@ export const Callout = ({
                     )}
                 </summary>
 
-                <form
-                    action="/formstack-campaign/submit"
-                    method="post"
-                    className={formStyles}
-                    onSubmit={e => {
-                        e.preventDefault();
-                        submitForm();
-                    }}
-                >
-                    <input name="formId" type="hidden" value={formId} />
-
-                    {/* TODO: map input for formFields */}
-
-                    {/* this element is a H.O.N.E.Y - P.O.T */}
-                    <div
-                        className={css`
-                            position: absolute;
-                            left: -62.5rem;
-                        `}
-                        aria-hidden="true"
-                    >
-                        <input
-                            name="twitter-handle"
-                            type="text"
-                            id="twitter-handle"
-                            tabIndex={-1}
-                            placeholder="@mytwitterhandle"
-                            value={twitterHandle}
-                            onChange={e => setTwitterHandle(e.target.value)}
-                        />
-                    </div>
-                    {/* TODO: display error message */}
-                    <div className={footerPaddingStyles}>
-                        <Button
-                            priority="secondary"
-                            size="xsmall"
-                            type="submit"
-                        >
-                            Share with the Guardian
-                        </Button>
-                        <Link
-                            subdued={true}
-                            priority="secondary"
-                            target="_blank"
-                            href="https://www.theguardian.com/help/terms-of-service"
-                        >
-                            Terms and conditions
-                        </Link>
-                    </div>
-                </form>
+                {/* import Form component here */}
                 <span className={buttonWrapperStyles} aria-hidden="true">
                     {isExpanded && (
                         <Button
