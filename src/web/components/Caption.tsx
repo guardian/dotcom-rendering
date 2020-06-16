@@ -9,6 +9,7 @@ import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 type Props = {
     display: Display;
+    designType: DesignType;
     captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;

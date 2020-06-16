@@ -288,6 +288,7 @@ export const ImmersiveLayout = ({
                         <Hide when="above" breakpoint="leftCol">
                             <Caption
                                 display={display}
+                                designType={designType}
                                 captionText={captionText}
                                 pillar={pillar}
                                 shouldLimitWidth={false}

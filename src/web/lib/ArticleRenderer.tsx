@@ -132,6 +132,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <YoutubeBlockComponent
                             display={display}
+                            designType={designType}
                             key={i}
                             element={element}
                             pillar={pillar}
