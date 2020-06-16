@@ -30,6 +30,9 @@
                         "$ref": "#/definitions/BlockquoteBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/ChartAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CodeBlockElement"
                     },
                     {
@@ -458,6 +461,24 @@
                 }
             },
             "required": ["_type", "html"]
+        },
+        "ChartAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ChartAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type", "id", "url"]
         },
         "CodeBlockElement": {
             "type": "object",
@@ -1278,6 +1299,9 @@
                             },
                             {
                                 "$ref": "#/definitions/BlockquoteBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/ChartAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"

@@ -31,17 +31,18 @@ AudioAtom
     -> AudioAtomBlockElement
 
 ChartAtom
-    -> AtomEmbedUrlBlockElement
+    -> ChartAtomBlockElement
 
 CommonsDivisionAtom
 
 ExplainerAtom
+	-> ExplainerAtomBlockElement
 
 InteractiveAtom
     -> AtomEmbedUrlBlockElement
 
 GuideAtom
-    -> ProfileAtomBlockElement
+    -> GuideAtomBlockElement
 
 MediaAtom
     -> YoutubeBlockElement
@@ -73,6 +74,16 @@ AudioAtomBlockElement
 
 AtomEmbedUrlBlockElement
     -> [amp] AtomEmbedUrlBlockComponent
+    -> [web] InteractiveAtom (atoms-rendering)
+
+ChartAtomBlockElement
+    -> [web] ChartAtom (atoms-rendering)
+
+ExplainerAtomBlockElement
+	 -> [web] ExplainerAtom (atoms-rendering)
+
+GuideAtomBlockElement
+    -> [amp] Expandable
 
 ProfileAtomBlockElement
     -> [amp] Expandable

@@ -529,7 +529,7 @@ export const ImmersiveLayout = ({
                 />
             </Section>
 
-            <div id="cmp" />
+            <div id="bottom-banner" />
             <MobileStickyContainer />
         </>
     );

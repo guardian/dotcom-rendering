@@ -28,12 +28,15 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
                 ${baseStyles};
                 color: ${opinion[400]};
             `;
+        case 'PhotoEssay':
+            return css`
+                ${baseStyles};
+            `;
         case 'Analysis':
         case 'Feature':
         case 'Interview':
         case 'Article':
         case 'Media':
-        case 'PhotoEssay':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

@@ -132,7 +132,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         isLongEnough(remainingLetters)
     ) {
         return (
-            <>
+            <p className={paraStyles}>
                 <DropCap
                     letter={firstLetter}
                     pillar={pillar}
@@ -142,9 +142,9 @@ export const TextBlockComponent: React.FC<Props> = ({
                     isUnwrapped={isUnwrapped}
                     html={sanitise(remainingLetters, sanitiserOptions)}
                     elCss={paraStyles}
-                    tagName="p"
+                    tagName="span"
                 />
-            </>
+            </p>
         );
     }
 

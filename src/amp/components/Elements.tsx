@@ -57,6 +57,8 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
+                return <AtomEmbedUrlBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

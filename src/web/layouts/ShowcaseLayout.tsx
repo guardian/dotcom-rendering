@@ -554,7 +554,7 @@ export const ShowcaseLayout = ({
                 />
             </Section>
 
-            <div id="cmp" />
+            <div id="bottom-banner" />
             <MobileStickyContainer />
         </>
     );
