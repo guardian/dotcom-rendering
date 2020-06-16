@@ -128,7 +128,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <VimeoBlockComponent
                             pillar={pillar}
-                            url="https://player.vimeo.com/video/327310297?app_id=122963"
+                            url={element.url}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
