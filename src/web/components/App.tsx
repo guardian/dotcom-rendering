@@ -209,7 +209,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 <ReaderRevenueLinks
                     urls={CAPI.nav.readerRevenueLinks.header}
                     edition={CAPI.editionId}
-                    dataLinkNamePrefix="footer : "
+                    dataLinkNamePrefix="nav2 : "
                     inHeader={true}
                 />
             </Portal>
@@ -364,7 +364,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <ReaderRevenueLinks
                         urls={CAPI.nav.readerRevenueLinks.footer}
                         edition={CAPI.editionId}
-                        dataLinkNamePrefix="nav2 : "
+                        dataLinkNamePrefix="footer : "
                         inHeader={false}
                     />
                 </Lazy>
