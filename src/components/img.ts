@@ -20,16 +20,13 @@ interface Props {
 }
 
 const styles = (role: Option<Role>, format?: Format): SerializedStyles => {
-    const darkModeStyles = darkModeCss`
-        color: ${neutral[60]};
-        background-color: ${neutral[20]};
-    `
-
+    const backgroundColour = format?.design === Design.Media ? neutral[20] : neutral[97];
     return role.fmap(imageRole => imageRole).withDefault(Role.HalfWidth) === Role.Thumbnail
-        ? darkModeStyles
+        ? css`color: ${neutral[60]};`
         : css`
-            background-color: ${format?.design === Design.Media ? neutral[20] : neutral[97]};
-            ${darkModeStyles}
+            background-color: ${backgroundColour};
+            ${darkModeCss`background-color: ${neutral[20]};`}
+            color: ${neutral[60]};
         `
 }
 
