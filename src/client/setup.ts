@@ -1,6 +1,10 @@
-// ----- Procedures ----- //
+// ----- Imports ----- //
 
-import {logger} from "../logger";
+import { logger } from 'logger';
+import { metrics } from 'client/metrics';
+
+
+// ----- Procedures ----- //
 
 function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 
@@ -39,7 +43,16 @@ function twitter(): void {
     }
 }
 
+function performanceMetrics(): void {
+    window.addEventListener(
+        'load',
+        () => console.log('Metrics: ', metrics(performance.getEntries())),
+        { once: true },
+    );
+}
+
 function setup(): void {
+    performanceMetrics();
     interactives();
     twitter();
 }
