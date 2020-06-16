@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { text, neutral, border } from '@guardian/src-foundations/palette';
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
@@ -24,24 +24,6 @@ const pillarColours = pillarMap(
         `,
 );
 
-// TODO refactor  to use in Caption.tsx
-// const pillarFigCaptionIconColor = pillarMap(
-//     pillar =>
-//         css`
-//             figcaption {
-//                 &::before {
-//                     border-color: transparent transparent
-//                         ${pillarPalette[pillar].main} transparent;
-//                 }
-//             }
-//         `,
-// );
-
-const captionFont = css`
-    ${textSans.xsmall()};
-    color: ${text.supporting};
-`;
-
 const bodyStyle = (display: Display) => css`
     ${between.tablet.and.desktop} {
         padding-right: 80px;
@@ -60,10 +42,6 @@ const bodyStyle = (display: Display) => css`
     img {
         width: 100%;
         height: auto;
-    }
-
-    figcaption {
-        ${captionFont};
     }
 
     figure {
