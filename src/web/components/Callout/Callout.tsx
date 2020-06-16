@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
-import { Link } from '@guardian/src-link';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
@@ -38,16 +37,6 @@ const summeryContentWrapper = css`
     min-height: 70px;
     display: flex;
     flex-direction: row;
-`;
-
-const formStyles = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
 `;
 
 const speechBubbleStyles = (pillar: Pillar) => css`
@@ -88,11 +77,12 @@ const buttonWrapperStyles = css`
     margin-top: -5px;
 `;
 
-const footerPaddingStyles = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`;
+// a hack used to make sure we do not highlight the openCallout button on first render
+let isFirstTimeRendering = true;
+
+let expandFormButtonRef: HTMLButtonElement | null = null;
+let firstFieldElementRef: HTMLElement | null = null;
+let lastElementRef: HTMLButtonElement | null = null;
 
 export const Callout = ({
     callout,
@@ -103,18 +93,78 @@ export const Callout = ({
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // As the form is dynamically rendered, we cannot have
-    // individual setStates for each field
-    // const [formData, setFormData] = useState<{ [key in string]: any }>({});
-    const [twitterHandle, setTwitterHandle] = useState('');
+    const { title, description } = callout;
 
-    const { title, description, formId } = callout;
+    // ***************************
+    // *     Accessibility       *
+    // ***************************
+    useEffect(() => {
+        // select each DOM element on form expand
+        // we have to use this instead of refs as src-* libs do not yet
+        // support forward ref
+        expandFormButtonRef = document.querySelector(
+            'button[custom-guardian="callout-form-open-button"]',
+        );
+        firstFieldElementRef = document.querySelector(`
+            *[custom-guardian="callout-form-field"]:first-of-type input,
+            *[custom-guardian="callout-form-field"]:first-of-type select
+        `);
+        lastElementRef = document.querySelector(
+            'button[custom-guardian="callout-form-close-button"]',
+        );
 
-    const submitForm = async () => {
-        // TODO:
-    };
+        // on open form, focus on firstFieldElementRef
+        if (isExpanded && !isFirstTimeRendering) {
+            isFirstTimeRendering = false;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            firstFieldElementRef && firstFieldElementRef.focus();
+        } else {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            expandFormButtonRef && expandFormButtonRef.focus();
+        }
 
-    // TODO: Accessibility
+        // lock shift to the form
+        const keyListener = (e: KeyboardEvent) => {
+            // keyCode 9 is shift shift key
+            if (e.keyCode === 9) {
+                // If firstElement or lastElement are not defined, do not continue
+                if (!firstFieldElementRef || !lastElementRef) return;
+
+                // we use `e.shiftKey` internally to determin the direction of the highlighting
+                // using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
+                if (!e.shiftKey && document.activeElement === lastElementRef) {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                    firstFieldElementRef && firstFieldElementRef.focus();
+                    e.preventDefault();
+                }
+
+                if (
+                    e.shiftKey &&
+                    document.activeElement === firstFieldElementRef
+                ) {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                    lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
+                    e.preventDefault();
+                }
+            }
+        };
+        document.addEventListener('keydown', keyListener);
+        return () => document.removeEventListener('keydown', keyListener);
+    }, [isExpanded]);
+
+    // be able to close the form using the escape key for accessibility
+    useEffect(() => {
+        const keyListener = (e: KeyboardEvent) => {
+            // keyCode 27 is the escape key, we want to be able to close the form using it
+            if (e.keyCode === 27) {
+                setIsExpanded(false);
+            }
+        };
+        if (isExpanded) {
+            document.addEventListener('keydown', keyListener);
+        }
+        return () => document.removeEventListener('keydown', keyListener);
+    }, [isExpanded, setIsExpanded]);
 
     return (
         <figure>
