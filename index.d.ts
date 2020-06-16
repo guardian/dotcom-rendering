@@ -280,6 +280,8 @@ interface CAPIType {
     slotMachineFlags?: string;
 
     pageType: PageTypeType;
+
+    matchUrl?: string;
 }
 
 type CAPIBrowserType = {
@@ -340,6 +342,7 @@ type CAPIBrowserType = {
     contributionsServiceUrl: string;
     isImmersive: boolean;
     isPhotoEssay: boolean;
+    matchUrl?: string;
 };
 
 interface TagType {
@@ -568,6 +571,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    references?: { [key: string]: string }[];
 }
 
 interface GADataType {

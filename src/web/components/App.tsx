@@ -9,12 +9,14 @@ import { CMP } from '@frontend/web/components/CMP';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
+import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
+import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -55,6 +57,16 @@ const OnwardsLower = React.lazy(() => {
     ).then(module => {
         end();
         return { default: module.OnwardsLower };
+    });
+});
+const GetMatchStats = React.lazy(() => {
+    const { start, end } = initPerf('GetMatchStats');
+    start();
+    return import(
+        /* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
+    ).then(module => {
+        end();
+        return { default: module.GetMatchStats };
     });
 });
 
@@ -233,6 +245,11 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
+            {CAPI.matchUrl && (
+                <Portal root="match-nav">
+                    <GetMatchNav matchUrl={CAPI.matchUrl} />
+                </Portal>
+            )}
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
@@ -272,6 +289,15 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </Suspense>
                 </Lazy>
             </Portal>
+            {CAPI.matchUrl && (
+                <Portal root="match-stats">
+                    <Lazy margin={300}>
+                        <Suspense fallback={<Placeholder height={800} />}>
+                            <GetMatchStats matchUrl={CAPI.matchUrl} />
+                        </Suspense>
+                    </Lazy>
+                </Portal>
+            )}
             <Portal root="slot-body-end">
                 <SlotBodyEnd
                     isSignedIn={isSignedIn}
