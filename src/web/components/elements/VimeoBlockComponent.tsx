@@ -2,16 +2,17 @@ import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
 
-const widthOverride = css`
-    width: 100%;
-`;
-
-const inner = (maxWidth: number) => css`
+const responsiveAspectRatio = (height: number, width: number) => css`
+    /* https://css-tricks.com/aspect-ratio-boxes/ */
+    padding-bottom: ${(height / width) * 100}%;
+    position: relative;
     iframe {
         width: 100%;
-        height: 400px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
-    max-width: ${maxWidth}px;
 `;
 export const VimeoBlockComponent: React.FC<{
     pillar: Pillar;
@@ -22,15 +23,26 @@ export const VimeoBlockComponent: React.FC<{
     credit: string;
     title: string;
 }> = ({ url, caption, title, pillar, width, height }) => {
-    // maxHeight is a value copied from frontend, which is the full height on an iphone X
+    // 812 is the full height on an iphone X
     const maxHeight = 812;
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
 
     return (
-        <div className={widthOverride}>
-            <div className={inner(maxWidth)}>
-                <iframe src={url} title={title} height={height} width={width} />
+        <div
+            className={css`
+                max-width: ${maxWidth}px;
+                width: 100%;
+            `}
+        >
+            <div className={responsiveAspectRatio(height, width)}>
+                <iframe
+                    src={url}
+                    title={title}
+                    height={height}
+                    width={width}
+                    allowFullScreen={true}
+                />
             </div>
             {caption && (
                 <Caption
