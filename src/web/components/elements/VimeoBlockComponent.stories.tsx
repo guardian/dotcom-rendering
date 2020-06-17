@@ -56,3 +56,22 @@ export const largeAspectRatio = () => {
     );
 };
 largeAspectRatio.story = { name: 'with large aspect ratio' };
+
+export const verticalAspectRatio = () => {
+    return (
+        <Container>
+            <p>abc</p>
+            <VimeoBlockComponent
+                url="https://player.vimeo.com/video/265111898?app_id=122963"
+                pillar="news"
+                height={818}
+                width={460}
+                caption="blah"
+                credit=""
+                title=""
+            />
+            <p>abc</p>
+        </Container>
+    );
+};
+verticalAspectRatio.story = { name: 'with vertical aspect ratio' };

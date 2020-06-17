@@ -23,7 +23,7 @@ export const VimeoBlockComponent: React.FC<{
     credit: string;
     title: string;
 }> = ({ url, caption, title, pillar, width, height }) => {
-    // 812 is the full height on an iphone X
+    // 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
     const maxHeight = 812;
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
