@@ -227,7 +227,6 @@ interface VideoVimeoBlockElement {
     height: number;
     width: number;
     caption: string;
-    html: string;
     credit: string;
     title: string;
     description: string;
