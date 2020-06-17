@@ -44,7 +44,7 @@ const Img: FC<Props> = ({ image, sizes, className, format }) =>
         styledH('img', {
             src: image.src,
             alt: image.alt.withDefault(''),
-            className: image.launchSlideshow ? 'js-launch-slideshow' : '',
+            className: image.width > 620 ? 'js-launch-slideshow' : '',
             css: [styles(image.role, format), className],
             'data-caption': image.nativeCaption.withDefault(''),
             'data-credit': image.credit.withDefault(''),

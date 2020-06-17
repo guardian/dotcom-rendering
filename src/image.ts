@@ -54,7 +54,6 @@ interface Image {
     credit: Option<string>;
     nativeCaption: Option<string>;
     role: Option<Role>;
-    launchSlideshow: boolean;
 }
 
 interface BodyImageProps {
@@ -144,7 +143,6 @@ const parseImage = ({ docParser, salt }: Context) =>
             credit: parseCredit(data?.displayCredit, data?.credit),
             nativeCaption: fromNullable(data?.caption),
             role: parseRole(data?.role),
-            launchSlideshow: true
         });
     });
 };

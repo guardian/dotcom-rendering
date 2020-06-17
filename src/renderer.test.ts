@@ -40,7 +40,6 @@ const imageElement = (): BodyElement =>
         width: 500,
         height: 500,
         role: new None(),
-        launchSlideshow: true
     });
 
 const imageElementWithRole = () =>
