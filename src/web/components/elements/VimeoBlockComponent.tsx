@@ -24,8 +24,10 @@ export const VimeoBlockComponent: React.FC<{
     title: string;
 }> = ({ url, caption, title, pillar, width, height }) => {
     // 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
-    const maxHeight = 812;
-    const aspectRatio = width / height;
+	// Constrain iframe embeds with a width to their natural width 
+	// rather than stretch them to the container using
+	// a max that would prevent portrait videos from being taller than an iphone X (baseline)
+	// More context: https://github.com/guardian/frontend/pull/17902
     const maxWidth = maxHeight * aspectRatio;
 
     return (
