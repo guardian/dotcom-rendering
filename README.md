@@ -91,6 +91,8 @@ $ make fix
 
 See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
 
+[Read about testing tools and testing strategy](docs/testing.md).
+
 ## IDE setup
 
 We recommend using [VSCode](https://code.visualstudio.com/).
