@@ -85,7 +85,7 @@ const veggieBurgerStyles = (display: Display) => css`
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
-        bottom: ${display === 'immersive' ? '3px' : '-3px'};
+        bottom: ${display === Display.Immersive ? '3px' : '-3px'};
         right: 5px;
     }
     ${from.mobileLandscape} {

@@ -65,7 +65,7 @@ const openExpandedMenuStyles = (display: Display) => css`
     padding-right: 20px;
     ${from.desktop} {
         display: block;
-        padding-top: ${display === 'immersive' ? '9px' : '5px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '5px'};
         height: 42px;
     }
     :hover,
