@@ -6714,10 +6714,10 @@ csstype@^2.2.0, csstype@^2.5.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
   integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
 
-curlyquotes@^1.3.2:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.3.5.tgz#53d5ae8cc9f0f5f1349444ce4f31c3e82a06a0eb"
-  integrity sha512-X4gJCHHv8ZKzyGG4AVqliBM/5f/A9qyi2ddS1NoFpoGO4E1ztoab5gemN9LS405k8rY/MKSS05M8sFDr9cRoxQ==
+curlyquotes@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.4.3.tgz#e962d94e2afc14df11b150aade7c55b14ec03538"
+  integrity sha512-4t0j5hA0Z4GQdSNWZk9lZ17Glxngcd2yV6pgeZsa3T5mK3YhrRUdpPjF8BUtU8hri+Dv4rw5JX16QlwCP+mwOQ==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
