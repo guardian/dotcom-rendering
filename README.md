@@ -14,6 +14,8 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Running instructions](#running-instructions)
   - [Detailed Setup](#detailed-setup)
   - [Architecture Diagram](#architecture-diagram)
+  - [Storybook](#storybook)
+  - [Concepts](#concepts)
   - [Feedback](#feedback)
 - [Code Quality](#code-quality)
 - [IDE setup](#ide-setup)
