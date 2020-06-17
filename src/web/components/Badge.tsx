@@ -31,7 +31,7 @@ type Props = {
 
 export const Badge = ({ imageUrl, seriesTag }: Props) => (
     <div className={badgeWrapper}>
-        <a href={seriesTag} className={badgeLink} role="button">
+        <a href={'/' + seriesTag} className={badgeLink} role="button">
             <img className={imageStyles} src={imageUrl} alt="" />
         </a>
     </div>
