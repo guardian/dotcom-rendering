@@ -59,6 +59,21 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
+### Storybook
+
+We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic.
+
+### Concepts
+
+There are some concepts to learn, that will make working with Dotcom Rendering clearer:
+
+-   DesignTypes
+-   DecideLayout
+-   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
+-   Dynamic imports
+-   EnhanceCAPI
+-   Data generated in Frontend
+
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
