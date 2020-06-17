@@ -275,6 +275,7 @@ export const ImageComponent = ({
                                 <div id="the-caption">
                                     <Caption
                                         display={display}
+                                        designType={designType}
                                         captionText={element.data.caption || ''}
                                         pillar={pillar}
                                         credit={element.data.credit}
@@ -293,6 +294,7 @@ export const ImageComponent = ({
                 <Hide when="below" breakpoint="tablet">
                     <Caption
                         display={display}
+                        designType={designType}
                         captionText={element.data.caption || ''}
                         pillar={pillar}
                         credit={element.data.credit}
@@ -303,6 +305,7 @@ export const ImageComponent = ({
             ) : (
                 <Caption
                     display={display}
+                    designType={designType}
                     captionText={element.data.caption || ''}
                     pillar={pillar}
                     credit={element.data.credit}

@@ -67,6 +67,7 @@ function renderElement(
             return (
                 <YoutubeBlockComponent
                     display={display}
+                    designType={designType}
                     key={i}
                     element={element}
                     pillar={pillar}
