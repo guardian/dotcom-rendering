@@ -207,9 +207,9 @@ export const App = ({ CAPI, NAV }: Props) => {
         <React.StrictMode>
             <Portal root="reader-revenue-links-header">
                 <ReaderRevenueLinks
-                    urls={CAPI.nav.readerRevenueLinks.footer}
+                    urls={CAPI.nav.readerRevenueLinks.header}
                     edition={CAPI.editionId}
-                    dataLinkNamePrefix="footer : "
+                    dataLinkNamePrefix="nav2 : "
                     inHeader={true}
                 />
             </Portal>
@@ -362,9 +362,9 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="reader-revenue-links-footer">
                 <Lazy margin={300}>
                     <ReaderRevenueLinks
-                        urls={CAPI.nav.readerRevenueLinks.header}
+                        urls={CAPI.nav.readerRevenueLinks.footer}
                         edition={CAPI.editionId}
-                        dataLinkNamePrefix="nav2 : "
+                        dataLinkNamePrefix="footer : "
                         inHeader={false}
                     />
                 </Lazy>
