@@ -31,7 +31,7 @@ type Props = {
     tags: TagType[];
     contributionsServiceUrl: string;
     alreadyVisitedCount: number;
-    engagementBannerLastClosedAt: Date | null,
+    engagementBannerLastClosedAt?: string,
 };
 
 // TODO specify return type (need to update client to provide this first)

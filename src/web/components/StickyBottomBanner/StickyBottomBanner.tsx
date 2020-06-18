@@ -16,9 +16,8 @@ const getAlreadyVisitedCount = (): number => {
     return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
 };
 
-const getEngagementBannerLastClosedAt = (): Date | null => {
-    const engagementBannerLastClosedAt = localStorage.getItem('engagementBannerLastClosedAt');
-    return engagementBannerLastClosedAt ? new Date(engagementBannerLastClosedAt) : null;
+const getEngagementBannerLastClosedAt = (): string | undefined => {
+    return localStorage.getItem('engagementBannerLastClosedAt') || undefined;
 };
 
 export const StickyBottomBanner = ({
