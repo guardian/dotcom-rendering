@@ -12,7 +12,7 @@ type Props = {
 };
 
 const getAlreadyVisitedCount = (): number => {
-    const alreadyVisited = parseInt(localStorage.getItem('gu.alreadyVisited') ?? "", 10);
+    const alreadyVisited = parseInt(localStorage.getItem('gu.alreadyVisited') || "", 10);
     return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
 };
 
