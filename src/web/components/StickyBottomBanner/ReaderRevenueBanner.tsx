@@ -150,7 +150,6 @@ const MemoisedInner = ({
 
     // Should only run once
     useEffect(() => {
-        console.log("seen?",hasBeenSeen, bannerMeta)
         if (hasBeenSeen && bannerMeta) {
             logView(bannerMeta.abTestName);
             sendOphanBannerEvent('VIEW', bannerMeta);
