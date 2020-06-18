@@ -1340,7 +1340,6 @@
             },
             "required": [
                 "_type",
-                "caption",
                 "credit",
                 "description",
                 "height",
