@@ -527,6 +527,7 @@ interface CommercialConfigType {
     section?: string;
     edition?: string;
     series?: string;
+    toneIds?: string;
     contentType: string;
     ampIframeUrl: string;
 }

@@ -6,6 +6,7 @@ export interface PermutivePayload {
     'properties.content.authors!'?: string;
     'properties.content.keywords!'?: string;
     'properties.content.publishedAt'?: string;
+    'properties.content.tone'?: string;
     'properties.user.edition'?: string;
 }
 
@@ -41,6 +42,7 @@ export const generatePermutivePayload = (
         'properties.content.authors!list[string]': authors,
         'properties.content.keywords!list[string]': keywords,
         'properties.content.publishedAt': publishedAt,
+        'properties.content.tone': rawConfig.toneIds,
         'properties.user.edition': rawConfig.edition,
     };
 

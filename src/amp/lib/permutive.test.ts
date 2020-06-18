@@ -11,6 +11,7 @@ describe('generatePermutivePayload', () => {
             keywords: 'keyword1,keyword2',
             edition: 'UK',
             webPublicationDate: 1578926460000,
+            toneIds: 'tone/advertisement-features',
         };
 
         const expected = {
@@ -21,6 +22,7 @@ describe('generatePermutivePayload', () => {
             'properties.content.authors!list[string]': 'author name',
             'properties.content.keywords!list[string]': 'keyword1,keyword2',
             'properties.content.publishedAt': '2020-01-13T14:41:00.000Z',
+            'properties.content.tone': 'tone/advertisement-features',
             'properties.user.edition': 'UK',
         };
         expect(generatePermutivePayload(config as ConfigType)).toStrictEqual(
