@@ -67,29 +67,11 @@ type Props = {
 const buildPayload = (props: Props) => {
     return {
         tracking: {
-            ophanPageId: window.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_BANNER',
-            platformId: 'GUARDIAN_WEB',
-            clientName: 'dcr',
-            referrerUrl: window.location.origin + window.location.pathname,
+            // TODO stub
         },
         targeting: {
-            contentType: props.contentType,
-            sectionName: props.sectionName || '', // TODO update client to reflect that this is optional
-            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
-            isMinuteArticle: props.isMinuteArticle,
-            isPaidContent: props.isPaidContent,
-            isSensitive: props.isSensitive,
-            tags: props.tags,
-            showSupportMessaging: shouldShowSupportMessaging(),
-            isRecurringContributor: isRecurringContributor(
-                props.isSignedIn || false,
-            ),
-            lastOneOffContributionDate: getLastOneOffContributionDate(),
-            epicViewLog: getViewLog(),
-            weeklyArticleHistory: getWeeklyArticleHistory(),
-            mvtId: Number(getCookie('GU_mvt_id')),
-            countryCode: props.countryCode,
+            ...props,
+            // TODO stub
         },
     };
 };
