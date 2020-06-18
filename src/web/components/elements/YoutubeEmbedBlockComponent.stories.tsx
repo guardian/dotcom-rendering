@@ -5,7 +5,7 @@ import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
 export default {
     component: YoutubeEmbedBlockComponent,
-    title: 'Components/VimeoComponent',
+    title: 'Components/YoutubeEmbedComponent',
 };
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
