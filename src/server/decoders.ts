@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import {TProtocol, TCompactProtocol, TBufferedTransport, TTransport} from 'thrift';
-import { ContentSerde } from '@guardian/content-api-models/v1/content';
+import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
 import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
 
@@ -38,7 +38,7 @@ const decodeContent = <A>(decoder: ThriftDecoder<A>) =>
 
 const capiDecoder = decodeContent(ItemResponseSerde);
 const errorDecoder = decodeContent(ErrorResponseSerde);
-const mapiDecoder = decodeContent(ContentSerde);
+const mapiDecoder = decodeContent(RenderingRequestSerde);
 
 
 // ----- Exports ----- //
