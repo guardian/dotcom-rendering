@@ -103,10 +103,10 @@ async function serveArticlePost(
     next: NextFunction,
 ): Promise<void> {
     try {
-        const content = await mapiDecoder(body);
+        const renderingRequest = await mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-        const { html, clientScript } = page(imageSalt, content, getAssetLocation);
+        const { html, clientScript } = page(imageSalt, renderingRequest.content, getAssetLocation);
         res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
         res.write('<!DOCTYPE html>');
         res.write(html);

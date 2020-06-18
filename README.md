@@ -97,6 +97,7 @@ In order to release the models you'll need to:
 
 In the SBT repl:
 ```sbtshell
+clean
 project scalaApiModels
 release
 project tsApiModels
