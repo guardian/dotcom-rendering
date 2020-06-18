@@ -31,6 +31,7 @@ export const smallAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
+                display="standard"
             />
             <p>abc</p>
         </Container>
@@ -50,6 +51,7 @@ export const largeAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
+                display="standard"
             />
             <p>abc</p>
         </Container>
@@ -69,6 +71,7 @@ export const verticalAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
+                display="standard"
             />
             <p>abc</p>
         </Container>

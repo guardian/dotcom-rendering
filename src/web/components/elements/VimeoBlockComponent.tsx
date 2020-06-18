@@ -22,7 +22,8 @@ export const VimeoBlockComponent: React.FC<{
     caption?: string;
     credit: string;
     title: string;
-}> = ({ url, caption, title, pillar, width, height }) => {
+    display: Display;
+}> = ({ url, caption, title, pillar, width, height, display }) => {
     // 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
     // Constrain iframe embeds with a width to their natural width
     // rather than stretch them to the container using
@@ -52,7 +53,7 @@ export const VimeoBlockComponent: React.FC<{
                 <Caption
                     captionText={caption}
                     pillar={pillar}
-                    display="standard"
+                    display={display}
                 />
             )}
         </div>

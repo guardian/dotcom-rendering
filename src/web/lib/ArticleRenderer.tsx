@@ -139,6 +139,7 @@ export const ArticleRenderer: React.FC<{
                             caption={element.caption}
                             credit={element.credit}
                             title={element.title}
+                            display={display}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
