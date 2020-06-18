@@ -3,13 +3,7 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
-import {getViewLog, getWeeklyArticleHistory, logView} from "@root/node_modules/@guardian/automat-client";
-import {
-    getLastOneOffContributionDate,
-    isRecurringContributor,
-    shouldShowSupportMessaging
-} from "@root/src/web/lib/contributions";
-import {getCookie} from "@root/src/web/browser/cookie";
+import {logView} from "@root/node_modules/@guardian/automat-client";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
