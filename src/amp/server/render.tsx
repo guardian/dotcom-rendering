@@ -65,8 +65,11 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 
         res.status(200).send(resp);
     } catch (e) {
-        // a validation error
-        if (e instanceof TypeError) {
+        if (e.message.startsWith('404')) {
+            // Message starts with 404 (mandatory content)
+            res.status(404).send(`<pre>${e.message}</pre>`);
+        } else if (e instanceof TypeError) {
+            // a validation error
             res.status(400).send(`<pre>${e.message}</pre>`);
         } else {
             res.status(500).send(`<pre>${e.message}</pre>`);
