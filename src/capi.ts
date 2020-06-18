@@ -10,7 +10,6 @@ import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
 import { Option, fromNullable } from 'types/option';
 import { fromString as dateFromString } from 'date';
 
-
 // ----- Lookups ----- //
 
 interface Series {
@@ -48,8 +47,15 @@ const articleContributors = (content: Content): Tag[] =>
 const isImage = (elem: BlockElement): boolean =>
     elem.type === ElementType.IMAGE;
 
+const isVideo = (elem: BlockElement): boolean =>
+    elem.type === ElementType.CONTENTATOM &&
+    elem.contentAtomTypeData?.atomType === "media";
+
 const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
+
+const articleMainVideo = (content: Content): Option<BlockElement> =>
+    fromNullable(content?.blocks?.main?.elements.filter(isVideo)[0]);
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;
@@ -111,6 +117,7 @@ export {
     isAnalysis,
     articleSeries,
     articleContributors,
+    articleMainVideo,
     articleMainImage,
     capiEndpoint,
     includesTweets,

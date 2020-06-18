@@ -18,6 +18,7 @@ import Metadata from 'components/metadata';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
+import HeaderVideo from 'components/headerVideo';
 
 
 // ----- Styles ----- //
@@ -76,6 +77,15 @@ interface Props {
     children: ReactNode[];
 }
 
+const headerMedia = (item: Item) => {
+    return item.mainImage.fmap(_ =>
+        <HeaderImage
+            image={item.mainImage}
+            format={getFormat(item)}
+        />
+    ).withDefault(<HeaderVideo video={item.mainVideo}/>)
+}
+
 const Standard = ({ item, children }: Props): JSX.Element => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
@@ -85,10 +95,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
-                <HeaderImage
-                    image={item.mainImage}
-                    format={getFormat(item)}
-                />
+                { headerMedia(item) }
                 <Series item={item} />
                 <Headline item={item} />
                 <div css={articleWidthStyles}>
