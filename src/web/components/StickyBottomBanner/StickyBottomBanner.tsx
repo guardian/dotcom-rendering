@@ -11,6 +11,17 @@ type Props = {
     CAPI: CAPIBrowserType;
 };
 
+//engagementBannerLastClosedAt
+const getAlreadyVisitedCount = (): number => {
+    const alreadyVisited = parseInt(localStorage.getItem('gu.alreadyVisited') ?? "");
+    return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
+};
+
+const getEngagementBannerLastClosedAt = (): Date | null => {
+    const engagementBannerLastClosedAt = localStorage.getItem('engagementBannerLastClosedAt');
+    return engagementBannerLastClosedAt ? new Date(engagementBannerLastClosedAt) : null;
+};
+
 export const StickyBottomBanner = ({
     isSignedIn,
     countryCode,
@@ -32,7 +43,7 @@ export const StickyBottomBanner = ({
     }
 
     // Temporary flag to toggle RR banner while it is in development
-    const showRRBanner = false;
+    const showRRBanner = true;
 
     return (
         <>
@@ -51,6 +62,8 @@ export const StickyBottomBanner = ({
                         isSensitive={CAPI.config.isSensitive}
                         tags={CAPI.tags}
                         contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                        alreadyVisitedCount={getAlreadyVisitedCount()}
+                        engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
                     />
                 )
             )}

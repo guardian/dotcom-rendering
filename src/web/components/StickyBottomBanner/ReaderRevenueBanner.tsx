@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
+import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
+import {getCookie} from "@root/src/web/browser/cookie";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -28,17 +30,28 @@ type Props = {
     isSensitive: boolean;
     tags: TagType[];
     contributionsServiceUrl: string;
+    alreadyVisitedCount: number;
+    engagementBannerLastClosedAt: Date | null,
 };
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: Props) => {
     return {
         tracking: {
-            // TODO stub
+            ophanPageId: window.guardian.config.ophan.pageViewId,
+            ophanComponentId: 'ACQUISITIONS_BANNER',
+            platformId: 'GUARDIAN_WEB',
+            clientName: 'dcr',
+            referrerUrl: window.location.origin + window.location.pathname,
         },
         targeting: {
-            ...props,
-            // TODO stub
+            alreadyVisitedCount: props.alreadyVisitedCount,
+            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+            isPaidContent: props.isPaidContent,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
+            mvtId: Number(getCookie('GU_mvt_id')),
+            countryCode: props.countryCode,
         },
     };
 };
@@ -54,6 +67,8 @@ const MemoisedInner = ({
     isSensitive,
     tags,
     contributionsServiceUrl,
+    alreadyVisitedCount,
+    engagementBannerLastClosedAt,
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
@@ -70,6 +85,8 @@ const MemoisedInner = ({
             tags,
             contributionsServiceUrl,
             isSensitive,
+            alreadyVisitedCount,
+            engagementBannerLastClosedAt,
         });
 
         window.guardian.automat = {
@@ -134,6 +151,8 @@ export const ReaderRevenueBanner = ({
     isSensitive,
     tags,
     contributionsServiceUrl,
+    alreadyVisitedCount,
+    engagementBannerLastClosedAt,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -153,6 +172,8 @@ export const ReaderRevenueBanner = ({
             isSensitive={isSensitive}
             tags={tags}
             contributionsServiceUrl={contributionsServiceUrl}
+            alreadyVisitedCount={alreadyVisitedCount}
+            engagementBannerLastClosedAt={engagementBannerLastClosedAt}
         />
     );
 };
