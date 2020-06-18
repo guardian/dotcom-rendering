@@ -5,6 +5,7 @@ import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Item, Review } from 'item';
 import { None, Some } from 'types/option';
 import { Image } from 'image';
+import { Video } from 'video';
 
 
 // ----- Fixture ----- //
@@ -19,6 +20,7 @@ const fields = {
     bylineHtml: new None<DocumentFragment>(),
     publishDate: new None<Date>(),
     mainImage: new None<Image>(),
+    mainVideo: new None<Video>(),
     contributors: [],
     series: new Some({
         id: '',
