@@ -129,7 +129,8 @@ const itemFields = (context: Context, content: Content): ItemFields =>
         bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(context.docParser),
         publishDate: maybeCapiDate(content.webPublicationDate),
         mainImage: articleMainImage(content).andThen(parseImage(context)),
-        mainVideo: articleMainVideo(content).andThen(blockElement => parseVideo(blockElement, content.atoms)),
+        mainVideo: articleMainVideo(content)
+            .andThen(blockElement => parseVideo(blockElement, content.atoms)),
         contributors: parseContributors(context.salt, content),
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,

@@ -77,7 +77,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const headerMedia = (item: Item) => {
+const headerMedia = (item: Item): JSX.Element => {
     return item.mainImage.fmap(_ =>
         <HeaderImage
             image={item.mainImage}

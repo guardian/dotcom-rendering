@@ -21,7 +21,8 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
     }
 
     const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
-    const videoId = assets.find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
+    const videoId = assets
+        .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
     
     if (!posterUrl || !videoId) {
         return new None();

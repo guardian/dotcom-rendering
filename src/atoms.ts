@@ -52,7 +52,9 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
             }
 
             const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
-            const videoId = assets.find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
+            const videoId = assets
+                .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
+
             if (!posterUrl) {
                 return new Err(`No posterUrl for atom: ${id}`);
             }
@@ -61,7 +63,12 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
                 return new Err(`No videoId for atom: ${id}`);
             }
 
-            return new Ok({ kind: ElementKind.MediaAtom, posterUrl, videoId, duration: duration?.toNumber() });
+            return new Ok({
+                kind: ElementKind.MediaAtom,
+                posterUrl,
+                videoId,
+                duration: duration?.toNumber()
+            });
         }
 
         default: {

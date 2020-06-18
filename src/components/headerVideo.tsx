@@ -23,7 +23,7 @@ const styles = css`
 `;
 
 interface Props {
-    video: Option<Video>
+    video: Option<Video>;
 }
 
 const HeaderVideo: FC<Props> = ({ video }): JSX.Element =>
