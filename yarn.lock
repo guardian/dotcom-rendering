@@ -2102,14 +2102,14 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/consent-management-platform@^3.0.4":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.0.4.tgz#8e64bf1c2d92e124c60f0869f2e3b59be786dcaa"
-  integrity sha512-QOd2NbTFWGhh9qhd6wQOU0xyF0dqB9yIFT3W2fZI529Qie+NqPDFU3yVKrvsSQvYpW0ITTZhzCtULQ8rf2kc8w==
+"@guardian/consent-management-platform@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.4.3.tgz#1d4c51fab20f443cb788acedb62b40eb6289da55"
+  integrity sha512-mDs01NIfW49T4KxY50EEbehAWhbuY+NqGoIS3E+gaA3xlXSnoJIAVBCw4/D6hymvIXlsaZbTyen8TaDgwWqLcA==
   dependencies:
-    consent-string "^1.5.1"
-    js-cookie "^2.2.1"
-    whatwg-fetch "^3.0.0"
+    consent-string "1.5.2"
+    js-cookie "2.2.1"
+    whatwg-fetch "3.0.0"
 
 "@guardian/discussion-rendering@^2.2.23":
   version "2.2.23"
@@ -2126,13 +2126,13 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/src-button@^0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-0.17.0.tgz#c18c0a0abcc0d968c5b725eed4c02008fccae67b"
-  integrity sha512-mlJ9dOypR1AKYIX23aORa4Wh0fdCKuD/JlXTPf6YMVWYlEEZzxV5UzdNziyAmfgCU5pv8Fjv4wiTfUHXTSK9Tw==
+"@guardian/src-button@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-1.4.0.tgz#4e9e3bb4cab37bd8cb1d5ddb190dcc5c95ca1029"
+  integrity sha512-KooMyGmCEZ4FRcFUcxWydt3qGJRTA4JMSmlpOMmCOGvKPDZhIzycrqgdcbOTnwaVW2Y54CMTMYQuYNkIAFAOJQ==
   dependencies:
-    "@guardian/src-helpers" "^0.17.0"
-    "@guardian/src-svgs" "^0.17.0"
+    "@guardian/src-helpers" "^1.4.0"
+    "@guardian/src-icons" "^1.4.0"
 
 "@guardian/src-ed-lines@^0.18.0-rc.0":
   version "0.18.0-rc.0"
@@ -2141,22 +2141,15 @@
   dependencies:
     "@guardian/src-helpers" "^0.18.0-rc.0"
 
-"@guardian/src-foundations@^0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.17.0.tgz#ea189b370fb222ef52686998fab8d8673d496a54"
-  integrity sha512-Dgm/i1J3JjxZeADT6+EgT6rz3hL0OrB4KEiNerxycL2saCBS9HqtmK18io95s7eg9pUZVINq+3KwrFeB8czY3g==
-
 "@guardian/src-foundations@^0.18.0-rc.0":
   version "0.18.0-rc.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.18.0-rc.0.tgz#c8f1072853d190706b99563ab022fd58bcf1bf52"
   integrity sha512-AHf+r7tzzq/3oDblCv4mNKuoxNe6Kp2OpD2bxgcZOTE36OoKdW2pTBbEk9+Mwzb2/tUqWdARN3pZDg7ACKLw3g==
 
-"@guardian/src-helpers@^0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-0.17.0.tgz#94aca933a5fa9c8f4666378eddf1ec144700f78b"
-  integrity sha512-DGcF1gB+eqE/dksG4qHWTkrFV3D3dTXqtq/uX2lZnWfy/vvyxmxvvmKZKQ7zBAtxvmnrQFoTx6FWk7lFQv2C8w==
-  dependencies:
-    "@guardian/src-foundations" "^0.17.0"
+"@guardian/src-foundations@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-1.4.0.tgz#f26e3fb6d2da1d08dcb8042d00bec3bcc8cddbc3"
+  integrity sha512-FH9TBLVQph13bfY0jfqXetXWCxDHIhOUHVuSsdEgxVGAIKgdv0ocju9JoYwRnZvk+RJlekXO/EEESnS+u8yYgQ==
 
 "@guardian/src-helpers@^0.18.0-rc.0":
   version "0.18.0-rc.0"
@@ -2164,6 +2157,18 @@
   integrity sha512-Ayvi5HviebH/J0SF0TN+TRIq4y0QYt23iNzwkPPbhfXSBDBAYRA0yw/smmG1qK5G67fwgCntlFrQzZf7qEfHOQ==
   dependencies:
     "@guardian/src-foundations" "^0.18.0-rc.0"
+
+"@guardian/src-helpers@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-1.4.0.tgz#137aac157fdf493e4ccfcabe517dd2cd5d7bd927"
+  integrity sha512-5yEvkMgDpd+iI58HmwCcBlLkKSf9u0bJSJILSdsupcOvZB6g1e9HtDZdKb+BsQN/jNp5kz9qbylZZHJ5aFIhpQ==
+  dependencies:
+    "@guardian/src-foundations" "^1.4.0"
+
+"@guardian/src-icons@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-1.4.0.tgz#3159d034a3c42bf94bdf88384dac95f9c8708173"
+  integrity sha512-0j2QRPNjhRePicB/2aZp79OyRtPA3ftf1e/9oareisHUfn3jcvDDFeP3xkHXmv5SoMobG4GwWUepb0VNYvELnQ==
 
 "@guardian/src-inline-error@^0.18.0-rc.0":
   version "0.18.0-rc.0"
@@ -2179,11 +2184,6 @@
   integrity sha512-6id58HxgWT2sCCsAwWxucxroxYU+MICLOXizvSIV9bkcDb1gVwv68OPO2WwTV+3t/pSSwqon/VtK2h5qF7/XjA==
   dependencies:
     "@guardian/src-helpers" "^0.18.0-rc.0"
-
-"@guardian/src-svgs@^0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.17.0.tgz#7fc944a0d4708d2b3102144fa8ae66c9987e4657"
-  integrity sha512-8913E5P9xEUs7zktJxx5vJBqJOw4fb4AagbAG1lWwGYqLhvSx8xw3u0U/zFydEyx/+IOGfp0xWmLaulv7o7pzw==
 
 "@guardian/src-svgs@^0.18.0-rc.0":
   version "0.18.0-rc.0"
@@ -6227,7 +6227,7 @@ confusing-browser-globals@^1.0.7:
   resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.9.tgz#72bc13b483c0276801681871d4898516f8f54fdd"
   integrity sha512-KbS1Y0jMtyPgIxjO7ZzMAuUpAKMt1SzCL9fsrKsX6b0zJPTaT0SiSPmewwVZg9UAO83HVIlEhZF84LIjZ0lmAw==
 
-consent-string@^1.5.1:
+consent-string@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/consent-string/-/consent-string-1.5.2.tgz#cd3615f406a1d7649ebc9722960b5e451cf6a685"
   integrity sha512-xzfHnFzHQSupiamNY93UGn8FggPajHYExI45pzadhVpXVaj3ztnhnA7lYjKXl09pKRQKCT4hvjytt+2eoH7Jaw==
@@ -11123,7 +11123,7 @@ jpeg-js@0.1.2, jpeg-js@^0.1.2:
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.1.2.tgz#135b992c0575c985cfa0f494a3227ed238583ece"
   integrity sha1-E1uZLAV1yYXPoPSUoyJ+0jhYPs4=
 
-js-cookie@^2.2.1:
+js-cookie@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
   integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
@@ -17918,7 +17918,7 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   dependencies:
     iconv-lite "0.4.24"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
+whatwg-fetch@3.0.0, whatwg-fetch@>=0.10.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
   integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
