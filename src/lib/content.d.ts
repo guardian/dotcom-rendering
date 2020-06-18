@@ -78,6 +78,7 @@ interface EmbedBlockElement {
     safe?: boolean;
     alt?: string;
     html: string;
+    url?: string;
     isMandatory: boolean;
 }
 

@@ -742,6 +742,7 @@ declare namespace JSX {
         'amp-live-list': any;
         'amp-audio': any;
         'amp-embed': any;
+        'amp-embedly-card': any;
     }
     /* eslint-enable @typescript-eslint/no-explicit-any */
 }
