@@ -189,7 +189,7 @@
         "webpack-assets-manifest": "^3.1.1",
         "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.1.1",
-        "webpack-dev-middleware": "^3.1.2",
+        "webpack-dev-middleware": "^3.7.2",
         "webpack-hot-middleware": "^2.22.0",
         "webpack-hot-server-middleware": "^0.5.0",
         "webpack-merge": "^4.1.2",
