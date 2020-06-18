@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
+import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
+import {logView} from "@root/node_modules/@guardian/automat-client";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -13,8 +15,33 @@ const checkForErrors = (response: any) => {
     return response;
 };
 
-const sendOphanEvent = (): void => {
-    // TODO stub
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+
+type OphanAction = 'INSERT' | 'VIEW';
+
+type TestMeta = {
+    abTestName: string;
+    abTestVariant: string;
+    campaignCode: string;
+    campaignId: string;
+};
+
+const sendOphanBannerEvent = (action: OphanAction, testMeta: TestMeta): void => {
+    const componentEvent = {
+        component: {
+            componentType: 'ACQUISITIONS_BANNER',
+            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
+            campaignCode: testMeta.campaignCode,
+            id: testMeta.campaignId,
+        },
+        abTest: {
+            name: testMeta.abTestName,
+            variant: testMeta.abTestVariant,
+        },
+        action,
+    };
+
+    window.guardian.ophan.record({ componentEvent });
 };
 
 type Props = {
@@ -57,6 +84,13 @@ const MemoisedInner = ({
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
+    const [bannerMeta, setBannerMeta] = useState<TestMeta>();
+
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        rootMargin: '-18px',
+        threshold: 0,
+        debounce: true,
+    }) as HasBeenSeen;
 
     useEffect(() => {
         const bannerPayload = buildPayload({
@@ -97,7 +131,7 @@ const MemoisedInner = ({
                     return;
                 }
 
-                const { module } = json.data;
+                const { module, meta } = json.data;
 
                 import(/* webpackIgnore: true */ module.url)
                     .then(bannerModule => {
@@ -105,7 +139,8 @@ const MemoisedInner = ({
                             ...module.props,
                         });
                         setBanner(() => bannerModule.Banner); // useState requires functions to be wrapped
-                        sendOphanEvent();
+                        setBannerMeta(meta);
+                        sendOphanBannerEvent('INSERT', meta);
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`banner - error is: ${error}`));
@@ -113,10 +148,22 @@ const MemoisedInner = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Should only run once
+    useEffect(() => {
+        console.log("seen?",hasBeenSeen, bannerMeta)
+        if (hasBeenSeen && bannerMeta) {
+            logView(bannerMeta.abTestName);
+            sendOphanBannerEvent('VIEW', bannerMeta);
+        }
+    }, [hasBeenSeen, bannerMeta]);
+
     if (Banner) {
         return (
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            <Banner {...bannerProps} />
+            <div ref={setNode}>
+                hello
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Banner {...bannerProps} />
+            </div>
         );
     }
 
