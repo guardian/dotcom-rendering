@@ -488,7 +488,11 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "id", "url"]
+            "required": [
+                "_type",
+                "id",
+                "url"
+            ]
         },
         "CodeBlockElement": {
             "type": "object",
@@ -1173,10 +1177,14 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "html": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "html",
                 "isMandatory"
             ]
         },
@@ -1354,17 +1362,11 @@
                 },
                 "title": {
                     "type": "string"
-                },
-                "description": {
-                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "credit",
-                "description",
                 "height",
-                "title",
                 "url",
                 "width"
             ]

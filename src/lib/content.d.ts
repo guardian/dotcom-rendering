@@ -234,9 +234,8 @@ interface VideoVimeoBlockElement {
     height: number;
     width: number;
     caption?: string;
-    credit: string;
-    title: string;
-    description: string;
+    credit?: string;
+    title?: string;
 }
 
 interface VideoYoutubeBlockElement {

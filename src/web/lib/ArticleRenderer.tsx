@@ -133,13 +133,14 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <VimeoBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            url="https://player.vimeo.com/video/327310297?app_id=122963"
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
                             credit={element.credit}
                             title={element.title}
                             display={display}
+                            designType={designType}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
