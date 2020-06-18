@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
@@ -184,7 +183,7 @@ const MemoisedInner = ({
     if (Banner) {
         return (
             // The css here is necessary to put the container div in view, so that we can track the view
-            <div ref={setNode} className={css`position: fixed; bottom: -1px;`}>
+            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px;`}>
                 hello
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Banner {...bannerProps} />
