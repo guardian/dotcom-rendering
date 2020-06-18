@@ -4,7 +4,13 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
-import {logView} from "@root/node_modules/@guardian/automat-client";
+import {getViewLog, getWeeklyArticleHistory, logView} from "@root/node_modules/@guardian/automat-client";
+import {
+    getLastOneOffContributionDate,
+    isRecurringContributor,
+    shouldShowSupportMessaging
+} from "@root/src/web/lib/contributions";
+import {getCookie} from "@root/src/web/browser/cookie";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -62,14 +68,33 @@ type Props = {
 const buildPayload = (props: Props) => {
     return {
         tracking: {
-            // TODO stub
+            ophanPageId: window.guardian.config.ophan.pageViewId,
+            ophanComponentId: 'ACQUISITIONS_BANNER',
+            platformId: 'GUARDIAN_WEB',
+            clientName: 'dcr',
+            referrerUrl: window.location.origin + window.location.pathname,
         },
         targeting: {
-            ...props,
-            // TODO stub
+            contentType: props.contentType,
+            sectionName: props.sectionName || '', // TODO update client to reflect that this is optional
+            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+            isMinuteArticle: props.isMinuteArticle,
+            isPaidContent: props.isPaidContent,
+            isSensitive: props.isSensitive,
+            tags: props.tags,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            isRecurringContributor: isRecurringContributor(
+                props.isSignedIn || false,
+            ),
+            lastOneOffContributionDate: getLastOneOffContributionDate(),
+            epicViewLog: getViewLog(),
+            weeklyArticleHistory: getWeeklyArticleHistory(),
+            mvtId: Number(getCookie('GU_mvt_id')),
+            countryCode: props.countryCode,
         },
     };
 };
+
 
 const MemoisedInner = ({
     isSignedIn,
