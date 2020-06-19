@@ -129,7 +129,7 @@ const MemoisedInner = ({
                         setBannerProps({
                             ...module.props,
                         });
-                        setBanner(() => bannerModule.Banner); // useState requires functions to be wrapped
+                        setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
                         setBannerMeta(meta);
                         sendOphanContributionsComponentEvent('INSERT', meta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
                     })
@@ -150,8 +150,7 @@ const MemoisedInner = ({
     if (Banner) {
         return (
             // The css here is necessary to put the container div in view, so that we can track the view
-            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px;`}>
-                hello
+            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px; width: 100%; z-index: 999`}>
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Banner {...bannerProps} />
             </div>
