@@ -6,6 +6,7 @@ import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
 import {logView} from "@root/node_modules/@guardian/automat-client";
 import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
 import {getCookie} from "@root/src/web/browser/cookie";
+import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -18,32 +19,6 @@ const checkForErrors = (response: any) => {
 };
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
-
-type OphanAction = 'INSERT' | 'VIEW';
-
-type TestMeta = {
-    abTestName: string;
-    abTestVariant: string;
-    campaignCode: string;
-};
-
-const sendOphanBannerEvent = (action: OphanAction, testMeta: TestMeta): void => {
-    const componentEvent = {
-        component: {
-            componentType: 'ACQUISITIONS_BANNER',
-            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: testMeta.campaignCode,
-            id: testMeta.campaignCode,
-        },
-        abTest: {
-            name: testMeta.abTestName,
-            variant: testMeta.abTestVariant,
-        },
-        action,
-    };
-
-    window.guardian.ophan.record({ componentEvent });
-};
 
 type Props = {
     isSignedIn?: boolean;
@@ -156,7 +131,7 @@ const MemoisedInner = ({
                         });
                         setBanner(() => bannerModule.Banner); // useState requires functions to be wrapped
                         setBannerMeta(meta);
-                        sendOphanBannerEvent('INSERT', meta);
+                        sendOphanContributionsComponentEvent('INSERT', meta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`banner - error is: ${error}`));
@@ -168,7 +143,7 @@ const MemoisedInner = ({
     useEffect(() => {
         if (hasBeenSeen && bannerMeta) {
             logView(bannerMeta.abTestName);
-            sendOphanBannerEvent('VIEW', bannerMeta);
+            sendOphanContributionsComponentEvent('VIEW', bannerMeta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
         }
     }, [hasBeenSeen, bannerMeta]);
 

@@ -7,6 +7,39 @@ interface ABTestPayload {
     abTestRegister: { [key: string]: ABTestRecord };
 }
 
+export type OphanAction = 'INSERT' | 'VIEW';
+
+export type OphanComponentType = 'ACQUISITIONS_EPIC' | 'ACQUISITIONS_ENGAGEMENT_BANNER';
+
+export type TestMeta = {
+    abTestName: string;
+    abTestVariant: string;
+    campaignCode: string;
+    campaignId?: string;
+};
+
+export const sendOphanContributionsComponentEvent = (
+    action: OphanAction,
+    testMeta: TestMeta,
+    componentType: OphanComponentType
+): void => {
+    const componentEvent = {
+        component: {
+            componentType,
+            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
+            campaignCode: testMeta.campaignCode,
+            id: testMeta.campaignId || testMeta.campaignCode,
+        },
+        abTest: {
+            name: testMeta.abTestName,
+            variant: testMeta.abTestVariant,
+        },
+        action,
+    };
+
+    window.guardian.ophan.record({ componentEvent });
+};
+
 export const abTestPayload = (tests: {
     [key: string]: string;
 }): ABTestPayload => {
