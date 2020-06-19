@@ -128,7 +128,7 @@ export const Links = ({ userId }: Props) => {
             dataLinkName: 'nav2 : topbar : account overview',
         },
         {
-            url: `https://profile.theguardian.com/public-settings`,
+            url: `https://manage.theguardian.com/public-settings`,
             title: 'Profile',
             dataLinkName: 'nav2 : topbar : edit profile',
         },
