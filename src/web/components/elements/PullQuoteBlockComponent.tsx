@@ -13,59 +13,6 @@ const quoteMark = 35;
 
 const gsSpan = (nColumns: number) => nColumns * 60 + gutter * (nColumns - 1);
 
-const commonStyles = (pillar: Pillar, designType: DesignType) => {
-    switch (designType) {
-        case 'GuardianView':
-        case 'Comment':
-            return css`
-                ${headline.xxsmall({ fontWeight: 'light' })};
-                line-height: 25px;
-                position: relative;
-                /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
-                /* stylelint-disable-next-line color-no-hex */
-                background-color: #fbe6d5;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-top: 6px;
-                padding-bottom: 12px;
-                margin-bottom: 1.75rem;
-
-                :after {
-                    content: '';
-                    width: ${quoteTail}px;
-                    height: ${quoteTail}px;
-                    bottom: -${quoteTail}px;
-                    position: absolute;
-                    /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
-                    /* stylelint-disable-next-line color-no-hex */
-                    background-color: #fbe6d5;
-                }
-            `;
-        default:
-            return css`
-                ${headline.xxsmall({ fontWeight: 'bold' })};
-                line-height: 25px;
-                position: relative;
-                background-color: ${neutral[97]};
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-top: 6px;
-                padding-bottom: 12px;
-                margin-bottom: 1.75rem;
-                color: ${pillarPalette[pillar].dark};
-
-                :after {
-                    content: '';
-                    width: ${quoteTail}px;
-                    height: ${quoteTail}px;
-                    bottom: -${quoteTail}px;
-                    position: absolute;
-                    background-color: ${neutral[97]};
-                }
-            `;
-    }
-};
-
 const supportingStyles = css`
     width: ${gsSpan(3)}px;
     margin-left: -${gutter / 2}px;
@@ -136,20 +83,112 @@ export const PullQuoteBlockComponent: React.FC<{
     designType: DesignType;
     role: string;
     attribution?: string;
-}> = ({ html, pillar, designType, attribution, role }) => (
-    <aside className={cx(getStyles(role), commonStyles(pillar, designType))}>
-        <QuoteIcon colour={pillarPalette[pillar].main} />
-        <blockquote
-            className={css`
-                display: inline;
-            `}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-                __html: unescapeData(html),
-            }}
-        />
-        <footer>
-            <cite>{attribution}</cite>
-        </footer>
-    </aside>
-);
+}> = ({ html, pillar, designType, attribution, role }) => {
+    switch (designType) {
+        case 'GuardianView':
+        case 'Comment':
+            return (
+                <aside
+                    className={cx(
+                        getStyles(role),
+                        css`
+                            ${headline.xxsmall({ fontWeight: 'light' })};
+                            line-height: 25px;
+                            position: relative;
+                            /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
+                            /* stylelint-disable-next-line color-no-hex */
+                            background-color: #fbe6d5;
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            padding-top: 6px;
+                            padding-bottom: 12px;
+                            margin-bottom: 1.75rem;
+
+                            :after {
+                                content: '';
+                                width: ${quoteTail}px;
+                                height: ${quoteTail}px;
+                                bottom: -${quoteTail}px;
+                                position: absolute;
+                                /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
+                                /* stylelint-disable-next-line color-no-hex */
+                                background-color: #fbe6d5;
+                            }
+                        `,
+                    )}
+                >
+                    <QuoteIcon colour={pillarPalette[pillar].main} />
+                    <blockquote
+                        className={css`
+                            display: inline;
+                        `}
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{
+                            __html: unescapeData(html),
+                        }}
+                    />
+                    <footer>
+                        <cite>{attribution}</cite>
+                    </footer>
+                </aside>
+            );
+        case 'PhotoEssay':
+        case 'Feature':
+        case 'Recipe':
+        case 'Review':
+        case 'Immersive':
+        case 'Media':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'AdvertisementFeature':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'Article':
+        case 'Live':
+        case 'Analysis':
+        case 'Interview':
+        default:
+            return (
+                <aside
+                    className={cx(
+                        getStyles(role),
+                        css`
+                            ${headline.xxsmall({ fontWeight: 'bold' })};
+                            line-height: 25px;
+                            position: relative;
+                            background-color: ${neutral[97]};
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            padding-top: 6px;
+                            padding-bottom: 12px;
+                            margin-bottom: 1.75rem;
+                            color: ${pillarPalette[pillar].dark};
+
+                            :after {
+                                content: '';
+                                width: ${quoteTail}px;
+                                height: ${quoteTail}px;
+                                bottom: -${quoteTail}px;
+                                position: absolute;
+                                background-color: ${neutral[97]};
+                            }
+                        `,
+                    )}
+                >
+                    <QuoteIcon colour={pillarPalette[pillar].main} />
+                    <blockquote
+                        className={css`
+                            display: inline;
+                        `}
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{
+                            __html: unescapeData(html),
+                        }}
+                    />
+                    <footer>
+                        <cite>{attribution}</cite>
+                    </footer>
+                </aside>
+            );
+    }
+};
