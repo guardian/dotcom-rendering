@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
+import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
+import {logView} from "@root/node_modules/@guardian/automat-client";
 import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
 import {getCookie} from "@root/src/web/browser/cookie";
+import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -15,9 +18,7 @@ const checkForErrors = (response: any) => {
     return response;
 };
 
-const sendOphanEvent = (): void => {
-    // TODO stub
-};
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type Props = {
     isSignedIn?: boolean;
@@ -56,6 +57,7 @@ const buildPayload = (props: Props) => {
     };
 };
 
+
 const MemoisedInner = ({
     isSignedIn,
     countryCode,
@@ -72,6 +74,12 @@ const MemoisedInner = ({
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
+    const [bannerMeta, setBannerMeta] = useState<TestMeta>();
+
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        threshold: 0,
+        debounce: true,
+    }) as HasBeenSeen;
 
     useEffect(() => {
         const bannerPayload = buildPayload({
@@ -114,7 +122,7 @@ const MemoisedInner = ({
                     return;
                 }
 
-                const { module } = json.data;
+                const { module, meta } = json.data;
 
                 import(/* webpackIgnore: true */ module.url)
                     .then(bannerModule => {
@@ -122,7 +130,8 @@ const MemoisedInner = ({
                             ...module.props,
                         });
                         setBanner(() => bannerModule.Banner); // useState requires functions to be wrapped
-                        sendOphanEvent();
+                        setBannerMeta(meta);
+                        sendOphanContributionsComponentEvent('INSERT', meta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`banner - error is: ${error}`));
@@ -130,10 +139,22 @@ const MemoisedInner = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Should only run once
+    useEffect(() => {
+        if (hasBeenSeen && bannerMeta) {
+            logView(bannerMeta.abTestName);
+            sendOphanContributionsComponentEvent('VIEW', bannerMeta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
+        }
+    }, [hasBeenSeen, bannerMeta]);
+
     if (Banner) {
         return (
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            <Banner {...bannerProps} />
+            // The css here is necessary to put the container div in view, so that we can track the view
+            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px;`}>
+                hello
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Banner {...bannerProps} />
+            </div>
         );
     }
 
