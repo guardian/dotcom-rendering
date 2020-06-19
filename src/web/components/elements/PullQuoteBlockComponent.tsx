@@ -8,7 +8,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const supportingStyles = css`
-    width: 400px;
+    width: 220px;
     margin-left: -10px;
     margin-right: 10px;
     clear: left;
@@ -19,7 +19,7 @@ const supportingStyles = css`
     }
 
     ${from.leftCol} {
-        margin-left: -210px;
+        margin-left: -120px;
     }
 
     :after {
@@ -29,7 +29,7 @@ const supportingStyles = css`
         ${from.leftCol} {
             border-radius: 0 0 0 25px;
             left: 0;
-            margin-left: 176px;
+            margin-left: 140px;
         }
     }
 `;
