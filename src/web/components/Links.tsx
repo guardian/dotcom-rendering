@@ -123,39 +123,34 @@ const linksStyles = css`
 export const Links = ({ userId }: Props) => {
     const identityLinks: DropdownLinkType[] = [
         {
-            url: `https://profile.theguardian.com/user/id/${userId}`,
-            title: 'Comments and replies',
-            dataLinkName: 'nav2 : topbar : comment activity',
+            url: `https://manage.theguardian.com/`,
+            title: 'Account overview',
+            dataLinkName: 'nav2 : topbar : account overview',
         },
         {
-            url: `https://profile.theguardian.com/public/edit`,
-            title: 'Public profile',
+            url: `https://profile.theguardian.com/public-settings`,
+            title: 'Profile',
             dataLinkName: 'nav2 : topbar : edit profile',
         },
         {
-            url: `https://profile.theguardian.com/account/edit`,
-            title: 'Account details',
-            dataLinkName: 'nav2 : topbar : account details',
-        },
-        {
-            url: `https://profile.theguardian.com/email-prefs`,
-            title: 'Emails and marketing',
+            url: `https://manage.theguardian.com/email-prefs`,
+            title: 'Emails & marketing',
             dataLinkName: 'nav2 : topbar : email prefs',
         },
         {
-            url: `https://profile.theguardian.com/membership/edit`,
-            title: 'Membership',
-            dataLinkName: 'nav2 : topbar : membership',
+            url: `https://manage.theguardian.com/account-settings`,
+            title: 'Settings',
+            dataLinkName: 'nav2 : topbar : settings',
         },
         {
-            url: `https://profile.theguardian.com/contribution/recurring/edit`,
-            title: 'Contributions',
-            dataLinkName: 'nav2 : topbar : contributions',
+            url: `https://manage.theguardian.com/help`,
+            title: 'Help',
+            dataLinkName: 'nav2 : topbar : help',
         },
         {
-            url: `https://profile.theguardian.com/digitalpack/edit`,
-            title: 'Digital pack',
-            dataLinkName: 'nav2 : topbar : subscriptions',
+            url: `https://profile.theguardian.com/user/id/${userId}`,
+            title: 'Comments & replies',
+            dataLinkName: 'nav2 : topbar : comment activity',
         },
         {
             url: `https://profile.theguardian.com/signout`,
