@@ -2153,7 +2153,7 @@
   dependencies:
     "@guardian/src-foundations" "^1.5.0"
 
-"@guardian/src-icons@^1.5.0":
+"@guardian/src-icons@^1.5.0", "@guardian/src-svgs@npm:@guardian/src-icons@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-1.5.0.tgz#3d3c02c9fd4c11c4d74e8bacc98d6a610ee77498"
   integrity sha512-gI3rUadcV7idvYGr+kfsiDh+rZESwca1r+UVgwJ+gIGR/hhWsOe3HSYizDVow7f6nTiwkj1M/+slVJjYej4nRw==
@@ -2164,11 +2164,6 @@
   integrity sha512-ap6nc60dfwexHGM9icI+yHIYGNwuPGhFcjmzJuQpUr38bsd4y1dOhhiFLvnIYb7oNgV+pO+ifOYpTIgnlw7tqg==
   dependencies:
     "@guardian/src-helpers" "^1.5.0"
-
-"@guardian/src-svgs@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-1.5.0.tgz#2e7240d40c6d9bc3fd703cb8f41acec9a666d70c"
-  integrity sha512-9N3I43BYDM+YYI3IDt3DOg35x7ncybrI6m7iWcVHvnHAtAQGyTCRvg4AjAf83Imi0vXZBtRBttO0ULBoiWoC/A==
 
 "@guardian/src-text-input@^1.5.0":
   version "1.5.0"
