@@ -2,12 +2,12 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
-const supportingStyles = css`
+const partiallyLeft = css`
     width: 220px;
     margin-left: -10px;
     margin-right: 10px;
@@ -33,8 +33,29 @@ const supportingStyles = css`
         }
     }
 `;
+const fullyLeft = css`
+    margin-left: -10px;
+    margin-right: 10px;
+    clear: left;
+    float: left;
 
-const inlineStyles = css`
+    ${until.mobileLandscape} {
+        width: 100%;
+    }
+    ${from.mobileLandscape} {
+        width: 220px;
+    }
+    ${from.leftCol} {
+        width: 160px;
+        margin-left: -200px;
+    }
+    ${from.wide} {
+        width: 220px;
+        margin-left: -320px;
+    }
+`;
+
+const placeInline = css`
     margin-left: 0rem;
     display: block;
 
@@ -67,8 +88,11 @@ const inlineStyles = css`
     }
 `;
 
-function getStyles(role: string) {
-    return role === 'supporting' ? supportingStyles : inlineStyles;
+function decidePosition(role: string, designType: DesignType) {
+    if (designType === 'PhotoEssay') {
+        return role === 'supporting' ? fullyLeft : placeInline;
+    }
+    return role === 'supporting' ? partiallyLeft : placeInline;
 }
 
 export const PullQuoteBlockComponent: React.FC<{
@@ -84,7 +108,7 @@ export const PullQuoteBlockComponent: React.FC<{
             return (
                 <aside
                     className={cx(
-                        getStyles(role),
+                        decidePosition(role, designType),
                         css`
                             ${headline.xxsmall({ fontWeight: 'light' })};
                             line-height: 25px;
@@ -127,6 +151,41 @@ export const PullQuoteBlockComponent: React.FC<{
                 </aside>
             );
         case 'PhotoEssay':
+            return (
+                <aside
+                    className={cx(
+                        decidePosition(role, designType),
+                        css`
+                            ${headline.xxsmall({ fontWeight: 'light' })};
+                            color: ${text.anchorPrimary};
+                            line-height: 25px;
+                            position: relative;
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            padding-top: 6px;
+                            padding-bottom: 12px;
+                            margin-bottom: 28px;
+                        `,
+                    )}
+                >
+                    <QuoteIcon colour={text.anchorPrimary} size="large" />
+                    <blockquote
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{
+                            __html: unescapeData(html),
+                        }}
+                    />
+                    <footer>
+                        <cite
+                            className={css`
+                                color: ${text.supporting};
+                            `}
+                        >
+                            {attribution}
+                        </cite>
+                    </footer>
+                </aside>
+            );
         case 'Feature':
         case 'Recipe':
         case 'Review':
@@ -145,7 +204,7 @@ export const PullQuoteBlockComponent: React.FC<{
             return (
                 <aside
                     className={cx(
-                        getStyles(role),
+                        decidePosition(role, designType),
                         css`
                             ${headline.xxsmall({ fontWeight: 'bold' })};
                             line-height: 25px;
