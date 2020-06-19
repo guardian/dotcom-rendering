@@ -132,7 +132,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             errorStatus => { res.sendStatus(errorStatus) },
             content => {
                 const mockedRenderingRequest: RenderingRequest = {
-                    content: content,
+                    content,
                     targetingParams: {
                         "co": "Jane Smith",
                         "k": "potato,tomato,avocado"
