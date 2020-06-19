@@ -13,12 +13,13 @@ const toArray = Array.of.bind(null);
 
 function memoise<A>(fn: () => A): () => A {
     let state: A | null = null;
-    return () => {
+    const memoised: () => A = () => {
         if (!state) {
             state = fn();
         }
-        return state
-    }
+        return state;
+    };
+    return memoised;
 }
 
 // ----- Exports ----- //

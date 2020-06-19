@@ -9,7 +9,8 @@ const getTargetingParams: () => Map<string, string> = memoise(() => {
     const parsed = JSON.parse(content);
     const map: Map<string, string> = new Map();
     for (const key in parsed) {
-        if (parsed.hasOwnProperty(key) && typeof parsed[key] === 'string') {
+        if (Object.prototype.hasOwnProperty.call(parsed.hasOwnProperty, key) &&
+            typeof parsed[key] === 'string') {
             map.set(key, parsed[key]);
         }
     }
