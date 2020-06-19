@@ -55,8 +55,8 @@ const fullyLeft = css`
     }
 `;
 
-const placeInline = css`
-    margin-left: 0rem;
+const partiallyInline = css`
+    margin-left: 0;
     display: block;
 
     ${from.mobileLandscape} {
@@ -88,11 +88,16 @@ const placeInline = css`
     }
 `;
 
+const fullyInline = css`
+    margin-left: 0;
+    display: block;
+`;
+
 function decidePosition(role: string, designType: DesignType) {
     if (designType === 'PhotoEssay') {
-        return role === 'supporting' ? fullyLeft : placeInline;
+        return role === 'supporting' ? fullyLeft : fullyInline;
     }
-    return role === 'supporting' ? partiallyLeft : placeInline;
+    return role === 'supporting' ? partiallyLeft : partiallyInline;
 }
 
 export const PullQuoteBlockComponent: React.FC<{
