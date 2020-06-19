@@ -7,6 +7,7 @@ import {logView} from "@root/node_modules/@guardian/automat-client";
 import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
 import {getCookie} from "@root/src/web/browser/cookie";
 import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
+import {getZIndex} from "@root/src/web/lib/getZIndex";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -150,7 +151,7 @@ const MemoisedInner = ({
     if (Banner) {
         return (
             // The css here is necessary to put the container div in view, so that we can track the view
-            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px; width: 100%; z-index: 999`}>
+            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px; width: 100%; ${getZIndex('banner')}`}>
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Banner {...bannerProps} />
             </div>
