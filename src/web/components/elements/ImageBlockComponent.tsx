@@ -10,6 +10,7 @@ type Props = {
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
+    title?: string;
 };
 
 const imageCss = {
@@ -117,6 +118,7 @@ export const ImageBlockComponent = ({
     element,
     pillar,
     hideCaption,
+    title,
 }: Props) => {
     const { role } = element;
     return (
@@ -128,6 +130,7 @@ export const ImageBlockComponent = ({
                 pillar={pillar}
                 hideCaption={hideCaption}
                 role={role}
+                title={title}
             />
         </div>
     );
