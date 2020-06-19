@@ -21,6 +21,7 @@ import { getMappedAssetLocation } from './assets';
 import { response } from './liveblogResponse';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 import { Result, Ok, Err } from 'types/result';
+import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import {
@@ -106,7 +107,7 @@ async function serveArticlePost(
         const renderingRequest = await mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-        const { html, clientScript } = page(imageSalt, renderingRequest.content, getAssetLocation);
+        const { html, clientScript } = page(imageSalt, renderingRequest, getAssetLocation);
         res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
         res.write('<!DOCTYPE html>');
         res.write(html);
@@ -130,7 +131,14 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
         capiContent.either(
             errorStatus => { res.sendStatus(errorStatus) },
             content => {
-                const { html, clientScript } = page(imageSalt, content, getAssetLocation);
+                const mockedRenderingRequest: RenderingRequest = {
+                    content: content,
+                    targetingParams: {
+                        "co": "Jane Smith",
+                        "k": "potato,tomato,avocado"
+                    }
+                };
+                const { html, clientScript } = page(imageSalt, mockedRenderingRequest, getAssetLocation);
                 res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
