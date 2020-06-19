@@ -39,7 +39,7 @@ const buildPayload = (props: Props) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_BANNER',
+            ophanComponentId: 'ACQUISITIONS_ENGAGEMENT_BANNER',
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
