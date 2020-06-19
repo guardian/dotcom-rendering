@@ -2182,6 +2182,11 @@
   dependencies:
     "@guardian/src-helpers" "^1.5.0"
 
+"@guardian/src-svgs@^1.4.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-1.5.0.tgz#2e7240d40c6d9bc3fd703cb8f41acec9a666d70c"
+  integrity sha512-9N3I43BYDM+YYI3IDt3DOg35x7ncybrI6m7iWcVHvnHAtAQGyTCRvg4AjAf83Imi0vXZBtRBttO0ULBoiWoC/A==
+
 "@guardian/src-text-input@^1.4.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-text-input/-/src-text-input-1.5.0.tgz#4e88c4a3352d9ef5cb1b476472a64673c179709b"

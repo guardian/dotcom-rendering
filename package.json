@@ -37,6 +37,7 @@
         "@guardian/src-foundations": "^1.4.0",
         "@guardian/src-link": "^1.4.0",
         "@guardian/src-icons": "^1.4.0",
+        "@guardian/src-svgs": "^1.4.0",
         "@guardian/src-text-input": "^1.4.0",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
