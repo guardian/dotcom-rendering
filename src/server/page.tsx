@@ -182,7 +182,7 @@ function page(
                 />
                 <style>${styles}</style>
                 <style data-emotion-css="${ids.join(' ')}">${css}</style>
-                <script id="targetingParams" type="application/json">
+                <script id="targeting-params" type="application/json">
                     ${JSON.stringify(renderingRequest.targetingParams)}
                 </script>
             </head>
