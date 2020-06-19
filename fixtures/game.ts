@@ -2,7 +2,7 @@ export const game = {
     id: '4188140',
     homeTeam: {
         name: 'Liverpool',
-        lineup: [
+        players: [
             {
                 id: '427331',
                 name: 'del Castillo Adrian',
@@ -218,7 +218,7 @@ export const game = {
     } as TeamType,
     awayTeam: {
         name: 'Atletico',
-        lineup: [
+        players: [
             {
                 id: '457037',
                 name: 'Jan Oblak',
