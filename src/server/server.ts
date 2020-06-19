@@ -138,7 +138,11 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                         "k": "potato,tomato,avocado"
                     }
                 };
-                const { html, clientScript } = page(imageSalt, mockedRenderingRequest, getAssetLocation);
+                const { html, clientScript } = page(
+                    imageSalt,
+                    mockedRenderingRequest,
+                    getAssetLocation
+                );
                 res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
