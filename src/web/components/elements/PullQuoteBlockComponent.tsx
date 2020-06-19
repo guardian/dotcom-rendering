@@ -7,16 +7,10 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
-const gutter = 20;
-const quoteTail = 25;
-const quoteMark = 35;
-
-const gsSpan = (nColumns: number) => nColumns * 60 + gutter * (nColumns - 1);
-
 const supportingStyles = css`
-    width: ${gsSpan(3)}px;
-    margin-left: -${gutter / 2}px;
-    margin-right: 0.6rem;
+    width: 400px;
+    margin-left: -10px;
+    margin-right: 10px;
     clear: left;
     float: left;
 
@@ -25,17 +19,17 @@ const supportingStyles = css`
     }
 
     ${from.leftCol} {
-        margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
+        margin-left: -210px;
     }
 
     :after {
-        left: ${gutter / 2};
-        border-radius: 0 0 ${quoteTail}px;
+        left: 10px;
+        border-radius: 0 0 25px;
 
         ${from.leftCol} {
-            border-radius: 0 0 0 ${quoteTail}px;
-            left: 0rem;
-            margin-left: ${gsSpan(3) / 2 - quoteTail + 1}px;
+            border-radius: 0 0 0 25px;
+            left: 0;
+            margin-left: 176px;
         }
     }
 `;
@@ -45,30 +39,30 @@ const inlineStyles = css`
     display: block;
 
     ${from.mobileLandscape} {
-        margin-left: -${gutter}px;
+        margin-left: -20px;
     }
     ${from.phablet} {
-        margin-left: -${gutter / 2}px;
+        margin-left: -10px;
     }
     ${from.leftCol} {
-        margin-left: -3.5rem;
+        margin-left: -56px;
     }
 
     :after {
-        left: 0rem;
-        border-radius: 0 0 ${quoteTail}px;
+        left: 0;
+        border-radius: 0 0 25px;
 
         ${from.mobileLandscape} {
-            left: ${gutter}px;
+            left: 20px;
         }
         ${from.phablet} {
-            left: ${gutter / 2}px;
+            left: 10px;
         }
         ${from.desktop} {
             left: 0px;
         }
         ${from.leftCol} {
-            left: ${quoteMark + gutter / 2}px;
+            left: 27px;
         }
     }
 `;
@@ -102,13 +96,13 @@ export const PullQuoteBlockComponent: React.FC<{
                             padding-right: 10px;
                             padding-top: 6px;
                             padding-bottom: 12px;
-                            margin-bottom: 1.75rem;
+                            margin-bottom: 28px;
 
                             :after {
                                 content: '';
-                                width: ${quoteTail}px;
-                                height: ${quoteTail}px;
-                                bottom: -${quoteTail}px;
+                                width: 25px;
+                                height: 25px;
+                                bottom: -25px;
                                 position: absolute;
                                 /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
                                 /* stylelint-disable-next-line color-no-hex */
@@ -166,9 +160,9 @@ export const PullQuoteBlockComponent: React.FC<{
 
                             :after {
                                 content: '';
-                                width: ${quoteTail}px;
-                                height: ${quoteTail}px;
-                                bottom: -${quoteTail}px;
+                                width: 25px;
+                                height: 25px;
+                                bottom: -25px;
                                 position: absolute;
                                 background-color: ${neutral[97]};
                             }
