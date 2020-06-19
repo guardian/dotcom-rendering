@@ -280,6 +280,8 @@ interface CAPIType {
     slotMachineFlags?: string;
 
     pageType: PageTypeType;
+
+    matchUrl?: string;
 }
 
 type CAPIBrowserType = {
@@ -340,6 +342,7 @@ type CAPIBrowserType = {
     contributionsServiceUrl: string;
     isImmersive: boolean;
     isPhotoEssay: boolean;
+    matchUrl?: string;
 };
 
 interface TagType {
@@ -469,7 +472,7 @@ type UserProfile = {
 type TeamType = {
     id: string;
     name: string;
-    lineup: PlayerType[];
+    players: PlayerType[];
     possession: number;
     shotsOn: number;
     shotsOff: number;
@@ -568,6 +571,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    references?: { [key: string]: string }[];
 }
 
 interface GADataType {

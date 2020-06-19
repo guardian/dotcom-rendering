@@ -43,7 +43,12 @@ export const Placeholder = ({
     spaceLeft,
     shouldShimmer = true,
 }: Props) => (
-    <div id={rootId}>
+    <div
+        id={rootId}
+        className={css`
+            flex-grow: 1;
+        `}
+    >
         <div
             data-name="placeholder"
             className={css`
