@@ -23,7 +23,6 @@ type TestMeta = {
     abTestName: string;
     abTestVariant: string;
     campaignCode: string;
-    campaignId: string;
 };
 
 const sendOphanBannerEvent = (action: OphanAction, testMeta: TestMeta): void => {
@@ -32,7 +31,7 @@ const sendOphanBannerEvent = (action: OphanAction, testMeta: TestMeta): void => 
             componentType: 'ACQUISITIONS_BANNER',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
             campaignCode: testMeta.campaignCode,
-            id: testMeta.campaignId,
+            id: testMeta.campaignCode,
         },
         abTest: {
             name: testMeta.abTestName,
