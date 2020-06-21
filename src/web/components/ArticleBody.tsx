@@ -44,11 +44,6 @@ const bodyStyle = (display: Display) => css`
         height: auto;
     }
 
-    figure {
-        margin-top: 16px;
-        margin-bottom: 12px;
-    }
-
     ul {
         margin-bottom: 12px;
     }
