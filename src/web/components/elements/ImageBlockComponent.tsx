@@ -89,8 +89,12 @@ const imageCss = {
         }
     `,
 
-    // TODO:
-    halfWidth: css``,
+    halfWidth: css`
+        width: 50%;
+        float: left;
+        clear: left;
+        margin-right: 16px;
+    `,
 };
 
 const decidePosition = (role: RoleType) => {
