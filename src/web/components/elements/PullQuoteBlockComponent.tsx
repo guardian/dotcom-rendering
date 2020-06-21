@@ -46,12 +46,12 @@ const fullyLeft = css`
         width: 220px;
     }
     ${from.leftCol} {
-        width: 160px;
-        margin-left: -200px;
+        width: 150px;
+        margin-left: -160px;
     }
     ${from.wide} {
-        width: 220px;
-        margin-left: -320px;
+        width: 200px;
+        margin-left: -215px;
     }
 `;
 
@@ -89,7 +89,7 @@ const partiallyInline = css`
 `;
 
 const fullyInline = css`
-    margin-left: 0;
+    margin-left: 10px;
     display: block;
 `;
 
@@ -98,6 +98,17 @@ function decidePosition(role: string, designType: DesignType) {
         return role === 'supporting' ? fullyLeft : fullyInline;
     }
     return role === 'supporting' ? partiallyLeft : partiallyInline;
+}
+
+function decideFont(role: string) {
+    if (role === 'supporting') {
+        return css`
+            ${headline.xxsmall({ fontWeight: 'light' })};
+        `;
+    }
+    return css`
+        ${headline.xsmall({ fontWeight: 'light' })};
+    `;
 }
 
 export const PullQuoteBlockComponent: React.FC<{
@@ -160,16 +171,16 @@ export const PullQuoteBlockComponent: React.FC<{
                 <aside
                     className={cx(
                         decidePosition(role, designType),
+                        decideFont(role),
                         css`
-                            ${headline.xxsmall({ fontWeight: 'light' })};
-                            color: ${text.anchorPrimary};
+                            color: ${pillarPalette[pillar].main};
                             line-height: 25px;
                             position: relative;
                             padding-left: 10px;
                             padding-right: 10px;
                             padding-top: 6px;
                             padding-bottom: 12px;
-                            margin-bottom: 28px;
+                            margin-bottom: 16px;
                         `,
                     )}
                 >

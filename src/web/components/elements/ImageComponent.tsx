@@ -141,20 +141,26 @@ const basicTitlePadding = css`
 `;
 
 const moreTitlePadding = css`
-    ${basicTitlePadding}
+    padding-top: 4px;
 
-    ${from.leftCol} {
-        padding-top: 4px;
+    ${until.tablet} {
+        padding-bottom: 14px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    ${from.tablet} {
         padding-bottom: 17px;
-        padding-left: 180px;
+        padding-left: 20px;
         padding-right: 20px;
     }
 
+    ${from.leftCol} {
+        padding-left: 160px;
+    }
+
     ${from.wide} {
-        padding-top: 4px;
-        padding-bottom: 17px;
-        padding-left: 260px;
-        padding-right: 20px;
+        padding-left: 240px;
     }
 `;
 

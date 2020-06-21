@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { text, brandBackground } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -58,7 +58,7 @@ const overlayedStyles = css`
 
 const limitedWidth = css`
     ${from.leftCol} {
-        width: 140px;
+        width: 150px;
         /* use absolute position here to allow the article text to push up alongside
            the caption when it is limited in width */
         position: absolute;
@@ -70,7 +70,7 @@ const limitedWidth = css`
 
 const veryLimitedWidth = css`
     ${from.leftCol} {
-        width: 104px;
+        width: 120px;
         /* use absolute position here to allow the article text to push up alongside
            the caption when it is limited in width */
         position: absolute;
@@ -87,6 +87,9 @@ const captionPadding = css`
 
 const leftMargin = css`
     margin-left: ${space[9]}px;
+    ${until.wide} {
+        margin-left: 0;
+    }
 `;
 
 const hideIconBelowLeftCol = css`
@@ -135,13 +138,18 @@ export const Caption = ({
                 <figcaption
                     className={cx(
                         css`
-                            ${textSans.xsmall()};
-                            color: ${brandBackground.primary};
+                            ${textSans.xsmall({ lineHeight: 'tight' })};
+                            color: ${pillarPalette[pillar].dark};
                             width: 100%;
-                            line-height: ${space[5]}px;
-                            margin-top: ${space[2]}px;
-                            padding-top: ${space[1]}px;
-                            border-top: 1px solid ${brandBackground.primary};
+                            margin-top: ${space[3]}px;
+                            li:not(:first-child) {
+                                margin-top: ${space[3]}px;
+                            }
+                            li {
+                                padding-top: ${space[2]}px;
+                                border-top: 1px solid
+                                    ${pillarPalette[pillar].dark};
+                            }
                         `,
                         bottomMargin,
                         padCaption && captionPadding,
