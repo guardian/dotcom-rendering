@@ -162,7 +162,7 @@ export const PullQuoteBlockComponent: React.FC<{
                         decidePosition(role, designType),
                         css`
                             ${headline.xxsmall({ fontWeight: 'light' })};
-                            color: ${text.anchorPrimary};
+                            color: ${pillarPalette[pillar].main};
                             line-height: 25px;
                             position: relative;
                             padding-left: 10px;
@@ -173,7 +173,10 @@ export const PullQuoteBlockComponent: React.FC<{
                         `,
                     )}
                 >
-                    <QuoteIcon colour={text.anchorPrimary} size="large" />
+                    <QuoteIcon
+                        colour={pillarPalette[pillar].main}
+                        size="large"
+                    />
                     <blockquote
                         // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={{

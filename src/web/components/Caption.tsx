@@ -136,7 +136,7 @@ export const Caption = ({
                     className={cx(
                         css`
                             ${textSans.xsmall()};
-                            color: ${brandBackground.primary};
+                            color: ${pillarPalette[pillar].dark};
                             width: 100%;
                             line-height: ${space[5]}px;
                             margin-top: ${space[2]}px;
