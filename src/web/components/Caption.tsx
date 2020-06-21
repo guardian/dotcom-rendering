@@ -149,7 +149,16 @@ export const Caption = ({
                         shouldLimitWidth && leftMargin,
                     )}
                 >
-                    {captionText}
+                    {captionText && (
+                        <span
+                            className={captionLink(pillar)}
+                            // eslint-disable-next-line react/no-danger
+                            dangerouslySetInnerHTML={{
+                                __html: captionText || '',
+                            }}
+                            key="caption"
+                        />
+                    )}
                     {credit && displayCredit && ` ${credit}`}
                 </figcaption>
             );
