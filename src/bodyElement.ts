@@ -300,8 +300,8 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return new Err('No linkText or originalUrl field on membershipTypeData');
             }
 
-            const date = new Date(start?.iso8601);
-            const formattedDate = !isNaN(date) ? formatDate(date) : undefined;
+            const formattedDate = start?.iso8601 && !isNaN(new Date(start?.iso8601).valueOf())
+                ? formatDate(new Date(start?.iso8601)) : undefined;
 
             return new Ok({
                 kind: ElementKind.LiveEvent,
