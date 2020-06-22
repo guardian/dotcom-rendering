@@ -60,7 +60,7 @@ const liveEventLinkStyles: SerializedStyles =
                     margin: 0;
                     background: #B84376;
                     color: ${neutral[100]};
-                    border-radius: 24px;
+                    border-radius: 1.5rem;
                     padding: 0 ${remSpace[3]};
                 }
             }
