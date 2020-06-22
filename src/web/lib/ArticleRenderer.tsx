@@ -76,6 +76,7 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             element={element}
                             pillar={pillar}
+                            title={element.title}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
