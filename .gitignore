@@ -20,3 +20,6 @@ dist
 
 # Istanbul/Jest code coverage
 coverage
+
+# sbt
+target

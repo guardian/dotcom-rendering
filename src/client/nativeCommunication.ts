@@ -2,9 +2,24 @@ import { AdSlot } from "@guardian/bridget/AdSlot";
 import { Image } from "@guardian/bridget/Image";
 import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
 import { logger } from "../logger";
+import { memoise } from "../lib";
+
+const getTargetingParams: () => Map<string, string> = memoise(() => {
+    const content = document.getElementById('targeting-params')?.innerHTML ?? '{}';
+    const parsed = JSON.parse(content);
+    const map: Map<string, string> = new Map();
+    for (const key in parsed) {
+        if (Object.prototype.hasOwnProperty.call(parsed.hasOwnProperty, key) &&
+            typeof parsed[key] === 'string') {
+            map.set(key, parsed[key]);
+        }
+    }
+    return map;
+});
 
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
+    const targetingParams = getTargetingParams();
 
     if (!advertSlots) {
         return [];
@@ -21,7 +36,8 @@ function getAdSlots(): AdSlot[] {
             x: slotPosition.left + scrollLeft,
             y: slotPosition.top + scrollTop,
             width: slotPosition.width,
-            height: slotPosition.height
+            height: slotPosition.height,
+            targetingParams
         })
     });
 }
