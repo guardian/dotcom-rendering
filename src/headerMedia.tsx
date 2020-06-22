@@ -11,7 +11,9 @@ export const enum MainMediaKind {
     Video,
 }
 
-export type MainMedia = { kind: MainMediaKind.Image; image: Option<ImageData>; } | { kind: MainMediaKind.Video; video: Option<VideoData>; }
+export type MainMedia =
+    { kind: MainMediaKind.Image; image: Option<ImageData> } |
+    { kind: MainMediaKind.Video; video: Option<VideoData> }
 
 interface HeaderMediaProps {
     item: Item;

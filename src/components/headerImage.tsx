@@ -115,7 +115,7 @@ interface Props {
     format: Format;
 }
 
-const HeaderImage: FC<Props> = ({ className, image, format }) =>
+const HeaderImage: FC<Props> = ({ className, image, format }: Props) =>
     <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
         <Img
             image={image}

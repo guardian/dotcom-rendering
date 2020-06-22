@@ -61,10 +61,17 @@ const articleMainImage = (content: Content): Option<BlockElement> =>
 const articleMainVideo = (content: Content): Option<BlockElement> =>
     fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
 
-const articleMainMedia = (content: Content, context: Context) : MainMedia =>
-    !!content?.blocks?.main?.elements.filter(isImage)[0]
-        ? { kind: MainMediaKind.Image, image: articleMainImage(content).andThen(parseImage(context)) }
-        : { kind: MainMediaKind.Video, video: articleMainVideo(content).andThen(blockElement => parseVideo(blockElement, content.atoms)) }
+const articleMainMedia = (content: Content, context: Context): MainMedia =>
+    content?.blocks?.main?.elements.filter(isImage)[0]
+        ? {
+            kind: MainMediaKind.Image,
+            image: articleMainImage(content).andThen(parseImage(context))
+        }
+        : {
+            kind: MainMediaKind.Video,
+            video: articleMainVideo(content)
+                .andThen(blockElement => parseVideo(blockElement, content.atoms))
+        }
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React, { FC } from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { remSpace, neutral } from '@guardian/src-foundations';
 
 import { darkModeCss, wideContentWidth } from 'styles';
@@ -18,7 +18,7 @@ const marginAuto = `
     margin-right: auto;
 `;
 
-const styles = (format: Format) => css`
+const styles = (format: Format): SerializedStyles => css`
     margin: 0 0 ${remSpace[2]} 0;
     position: relative;
     display: block;
@@ -41,7 +41,7 @@ interface Props {
     format: Format;
 }
 
-const HeaderVideo: FC<Props> = ({ video, format }): JSX.Element =>
+const HeaderVideo: FC<Props> = ({ video, format }: Props): JSX.Element =>
     <div
         css={styles(format)}
         data-posterUrl={video.posterUrl}
