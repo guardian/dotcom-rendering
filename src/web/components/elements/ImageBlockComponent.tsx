@@ -100,8 +100,14 @@ const imageCss = {
         }
     `,
 
-    // TODO:
-    halfWidth: css``,
+    halfWidth: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
+        width: 50%;
+        float: left;
+        clear: left;
+        margin-right: 16px;
+    `,
 };
 
 const decidePosition = (role: RoleType) => {
