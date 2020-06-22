@@ -6,7 +6,6 @@ import LiveblogStandfirst from 'components/liveblog/standfirst';
 import Metadata from 'components/liveblog/metadata';
 import LiveblogKeyEvents from 'components/liveblog/keyEvents';
 import LiveblogBody from 'components/liveblog/body';
-import HeaderImage from 'components/headerImage';
 import Tags from 'components/shared/tags';
 import { darkModeCss, wideColumnWidth } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
@@ -14,6 +13,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog, getFormat } from 'item';
+import HeaderMedia from 'headerMedia';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -52,10 +52,7 @@ const LiveblogArticle = ({ item }: LiveblogArticleProps): JSX.Element => {
                 <LiveblogStandfirst standfirst={item.standfirst} format={format} />
                 <Metadata item={item} />
                 <div css={headerImageStyles(getPillarStyles(item.pillar))}>
-                    <HeaderImage
-                        image={item.mainImage}
-                        format={format}
-                    />
+                    <HeaderMedia item={item} />
                 </div>
                 <LiveblogKeyEvents blocks={item.blocks} pillar={item.pillar} />
                 <article id="blocks">

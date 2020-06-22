@@ -5,15 +5,15 @@ import { css } from '@emotion/core';
 import { background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/headerImage';
 import Series from 'components/media/articleSeries';
 import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import Body from 'components/media/articleBody';
 import Tags from 'components/media/tags';
 import { articleWidthStyles } from 'styles';
-import { Item, getFormat } from 'item';
+import { Item } from 'item';
 import Headline from 'components/headline';
+import HeaderMedia from 'headerMedia';
 
 
 // ----- Styles ----- //
@@ -43,10 +43,7 @@ const Media = ({ item, children }: Props): JSX.Element =>
      <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>
-                <HeaderImage
-                    image={item.mainImage}
-                    format={getFormat(item)}
-                />
+                <HeaderMedia item={item} />
                 <div css={articleWidthStyles}>
                     <Series series={item.series} pillar={item.pillar} />
                 </div>

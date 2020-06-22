@@ -9,6 +9,10 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
 import { Option, fromNullable } from 'types/option';
 import { fromString as dateFromString } from 'date';
+import { Context } from 'types/parserContext';
+import { parseImage } from 'image';
+import { parseVideo } from 'video';
+import { MainMediaKind, MainMedia } from 'headerMedia';
 
 // ----- Lookups ----- //
 
@@ -52,10 +56,15 @@ const isVideo = (elem: BlockElement): boolean =>
     elem.contentAtomTypeData?.atomType === "media";
 
 const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
+    fromNullable(content?.blocks?.main?.elements.filter(isImage)[0])
 
 const articleMainVideo = (content: Content): Option<BlockElement> =>
     fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
+
+const articleMainMedia = (content: Content, context: Context) : MainMedia =>
+    !!content?.blocks?.main?.elements.filter(isImage)[0]
+        ? { kind: MainMediaKind.Image, image: articleMainImage(content).andThen(parseImage(context)) }
+        : { kind: MainMediaKind.Video, video: articleMainVideo(content).andThen(blockElement => parseVideo(blockElement, content.atoms)) }
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;
@@ -117,8 +126,7 @@ export {
     isAnalysis,
     articleSeries,
     articleContributors,
-    articleMainVideo,
-    articleMainImage,
+    articleMainMedia,
     capiEndpoint,
     includesTweets,
     maybeCapiDate,

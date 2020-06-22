@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/headerImage';
 import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
@@ -13,7 +12,8 @@ import Body from 'components/shared/articleBody';
 import Metadata from 'components/metadata';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, getFormat } from 'item';
+import { Standard } from 'item';
+import HeaderMedia from 'headerMedia';
 
 
 // ----- Styles ----- //
@@ -48,10 +48,7 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
-                <HeaderImage
-                    image={item.mainImage}
-                    format={getFormat(item)}
-                />
+                <HeaderMedia item={item}/>
                 <div>
                     <Series item={item} />
                     <Headline item={item} />

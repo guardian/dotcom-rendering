@@ -7,15 +7,14 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { Element } from '@guardian/content-api-models/v1/element';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { articleMainImage, articleMainVideo, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
+import { articleMainMedia, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Format, Pillar, Design, Display } from 'format';
-import { Image as ImageData, parseImage } from 'image';
-import { Video as VideoData, parseVideo } from 'video';
 import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
+import { MainMedia } from 'headerMedia';
 
 // ----- Item Type ----- //
 
@@ -25,8 +24,7 @@ interface Fields extends Format {
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: Option<Date>;
-    mainImage: Option<ImageData>;
-    mainVideo: Option<VideoData>;
+    mainMedia: MainMedia;
     contributors: Contributor[];
     series: Option<Tag>;
     commentable: boolean;
@@ -128,9 +126,7 @@ const itemFields = (context: Context, content: Content): ItemFields =>
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(context.docParser),
         publishDate: maybeCapiDate(content.webPublicationDate),
-        mainImage: articleMainImage(content).andThen(parseImage(context)),
-        mainVideo: articleMainVideo(content)
-            .andThen(blockElement => parseVideo(blockElement, content.atoms)),
+        mainMedia: articleMainMedia(content, context),
         contributors: parseContributors(context.salt, content),
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,

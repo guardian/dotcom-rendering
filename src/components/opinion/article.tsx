@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { neutral, opinion, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/headerImage';
 import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
@@ -14,9 +13,10 @@ import Tags from 'components/shared/tags';
 import Cutout from 'components/opinion/cutout';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Comment, getFormat } from 'item';
+import { Comment } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
+import HeaderMedia from 'headerMedia';
 
 
 // ----- Styles ----- //
@@ -82,10 +82,7 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
                     <Metadata item={item} />
                 </section>
 
-                <HeaderImage
-                    image={item.mainImage}
-                    format={getFormat(item)}
-                />
+                <HeaderMedia item={item}/>
             </header>
             <ArticleBody className={[articleWidthStyles]}>
                 {children}
