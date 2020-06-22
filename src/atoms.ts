@@ -67,7 +67,7 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
                 kind: ElementKind.MediaAtom,
                 posterUrl,
                 videoId,
-                duration: duration?.toNumber()
+                duration: fromNullable(duration?.toNumber()),
             });
         }
 
