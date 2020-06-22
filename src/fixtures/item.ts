@@ -4,9 +4,7 @@ import { Pillar, Design, Display } from '@guardian/types/Format';
 
 import { Item, Review } from 'item';
 import { None, Some } from 'types/option';
-import { Image } from 'image';
-import { Video } from 'video';
-
+import { MainMediaKind } from 'headerMedia';
 
 // ----- Fixture ----- //
 
@@ -19,8 +17,6 @@ const fields = {
     byline: '',
     bylineHtml: new None<DocumentFragment>(),
     publishDate: new None<Date>(),
-    mainImage: new None<Image>(),
-    mainVideo: new None<Video>(),
     contributors: [],
     series: new Some({
         id: '',
@@ -38,32 +34,38 @@ const fields = {
 const article: Item = {
     design: Design.Article,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 const analysis: Item = {
     design: Design.Analysis,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 const feature: Item = {
     design: Design.Feature,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 const review: Review = {
     design: Design.Review,
     starRating: 4,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 const advertisementFeature: Item = {
     design: Design.AdvertisementFeature,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 const comment: Item = {
     design: Design.Comment,
     ...fields,
+    mainMedia: { kind: MainMediaKind.Image, image: new None() }
 };
 
 
