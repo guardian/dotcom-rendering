@@ -4,6 +4,7 @@ import {
     shouldShow as shouldShowCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
+import {getAlreadyVisitedCount} from "@root/src/web/lib/alreadyVisited";
 
 type Props = {
     isSignedIn?: boolean;
@@ -11,13 +12,8 @@ type Props = {
     CAPI: CAPIBrowserType;
 };
 
-const getAlreadyVisitedCount = (): number => {
-    const alreadyVisited = parseInt(localStorage.getItem('gu.alreadyVisited') || "", 10);
-    return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
-};
-
 const getEngagementBannerLastClosedAt = (): string | undefined => {
-    return localStorage.getItem('engagementBannerLastClosedAt') || undefined;
+    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
 };
 
 export const StickyBottomBanner = ({

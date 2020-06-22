@@ -1,9 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { neutral, border } from '@guardian/src-foundations/palette';
-import { textSans, headline } from '@guardian/src-foundations/typography';
-import { from, between } from '@guardian/src-foundations/mq';
+import { border } from '@guardian/src-foundations/palette';
+import { headline } from '@guardian/src-foundations/typography';
+import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 
@@ -42,37 +42,6 @@ const bodyStyle = (display: Display) => css`
     img {
         width: 100%;
         height: auto;
-    }
-
-    ul {
-        margin-bottom: 12px;
-    }
-
-    ${from.tablet} {
-        ul {
-            margin-bottom: 16px;
-        }
-    }
-
-    li {
-        ${textSans.medium()};
-        margin-bottom: 6px;
-        padding-left: 20px;
-
-        p {
-            display: inline;
-        }
-    }
-
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${neutral[86]};
-        margin-left: -20px;
     }
 `;
 
