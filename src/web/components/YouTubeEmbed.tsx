@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { YouTubeOverlay } from '@frontend/web/components/YouTubeOverlay';
+import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 
 import { constructQuery } from '@root/src/lib/querystring';
 
@@ -37,35 +37,6 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
         },
     };
 };
-
-const MaintainAspectRatio = ({
-    height,
-    width,
-    children,
-}: {
-    height: number;
-    width: number;
-    children: JSX.Element | JSX.Element[];
-}) => (
-    /* https://css-tricks.com/aspect-ratio-boxes/ */
-    <div
-        className={css`
-            /* position relative to contain the absolutely positioned iframe plus any Overlay image */
-            position: relative;
-            padding-bottom: ${(height / width) * 100}%;
-            position: relative;
-            iframe {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-        `}
-    >
-        {children}
-    </div>
-);
 
 export const YouTubeEmbed = ({
     assetId,
