@@ -5,7 +5,7 @@ import { textSans, headline } from "@guardian/src-foundations/typography";
 import React, { ReactElement } from "react";
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import { formatDate } from 'date';
-import { SvgGuardianLogo } from '@guardian/src-brand'
+import { SvgGuardianLiveLogo } from '@guardian/src-brand'
 
 const richLinkWidth = '8.75rem';
 
@@ -92,7 +92,7 @@ const MembershipLink = (props: MembershipLinkProps): ReactElement => {
     const date = start ? formatDate(new Date(start?.iso8601)) : null;
     return <aside css={membershipLinkStyles}>
         <a href={url}>
-            <div><SvgGuardianLogo /></div>
+            <div><SvgGuardianLiveLogo /></div>
             { headerImage }
             <section>
                 <h1>{ linkText }</h1>
