@@ -43,7 +43,7 @@ const liveEventLinkStyles: SerializedStyles =
                 ${textSans.xsmall()};
 
                 h1 {
-                    margin: ${basePx(0, 0, 1, 0)};
+                    margin: 0 0 ${remSpace[2]} 0;
                     ${headline.xxxsmall({ fontWeight: 'bold' })}
                     hyphens: auto;
                 }
