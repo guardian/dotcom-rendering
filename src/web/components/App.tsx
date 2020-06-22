@@ -25,6 +25,7 @@ import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import {incrementAlreadyVisited} from "@root/src/web/lib/alreadyVisited";
 
 // *******************************
 // ****** Dynamic imports ********
@@ -154,6 +155,10 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.config.shortUrlId,
         CAPI.isCommentable,
     ]);
+
+    useEffect(() => {
+        incrementAlreadyVisited();
+    }, []);
 
     // Log an article view using the Slot Machine client lib
     // This function must be called once per article serving.
