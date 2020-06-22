@@ -58,7 +58,7 @@ const overlayedStyles = css`
 
 const limitedWidth = css`
     ${from.leftCol} {
-        width: 150px;
+        width: 140px;
         /* use absolute position here to allow the article text to push up alongside
            the caption when it is limited in width */
         position: absolute;
