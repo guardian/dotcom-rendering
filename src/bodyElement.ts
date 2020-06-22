@@ -71,7 +71,7 @@ interface MediaAtom {
     kind: ElementKind.MediaAtom;
     posterUrl: string;
     videoId: string;
-    duration?: number;
+    duration: Option<number>;
 }
 
 type BodyElement = {
