@@ -15,7 +15,7 @@ type Props = {
 
 const imageCss = {
     inline: css`
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
     `,
 
@@ -70,10 +70,10 @@ const imageCss = {
 
     showcase: css`
         position: relative;
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
         ${from.leftCol} {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             margin-left: -160px;
         }
         ${from.wide} {
