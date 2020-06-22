@@ -9,7 +9,7 @@ import { SvgGuardianLiveLogo } from '@guardian/src-brand'
 
 const richLinkWidth = '8.75rem';
 
-type MembershipLinkProps = {
+type LiveEventLinkProps = {
     url: string;
     linkText: string;
     price?: string;
@@ -17,7 +17,7 @@ type MembershipLinkProps = {
     start?: CapiDateTime;
 }
 
-const membershipLinkStyles: SerializedStyles =
+const liveEventLinkStyles: SerializedStyles =
     css`
         background: ${neutral[97]};
 
@@ -86,11 +86,11 @@ const membershipLinkStyles: SerializedStyles =
         `}
     `;
 
-const MembershipLink = (props: MembershipLinkProps): ReactElement => {
+const LiveEventLink = (props: LiveEventLinkProps): ReactElement => {
     const { url, image, linkText, start, price } = props;
-    const headerImage = image ? <img src={image} alt="Membership event"/> : null;
+    const headerImage = image ? <img src={image} alt="Live event"/> : null;
     const date = start ? formatDate(new Date(start?.iso8601)) : null;
-    return <aside css={membershipLinkStyles}>
+    return <aside css={liveEventLinkStyles}>
         <a href={url}>
             <div><SvgGuardianLiveLogo /></div>
             { headerImage }
@@ -105,4 +105,4 @@ const MembershipLink = (props: MembershipLinkProps): ReactElement => {
 }
 
 
-export default MembershipLink;
+export default LiveEventLink;

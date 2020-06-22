@@ -28,7 +28,7 @@ const enum ElementKind {
     Instagram,
     Audio,
     Embed,
-    Membership,
+    LiveEvent,
     Video,
     InteractiveAtom,
     ExplainerAtom
@@ -94,7 +94,7 @@ type BodyElement = {
     html: string;
     alt: Option<string>;
 } | {
-    kind: ElementKind.Membership;
+    kind: ElementKind.LiveEvent;
     linkText: string;
     url: string;
     image?: string;
@@ -145,7 +145,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem };
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
-        case ElementKind.Membership:
+        case ElementKind.LiveEvent:
                 return { ...elem, start: elem?.start?.iso8601 };
         default:
             return elem;
@@ -302,7 +302,7 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return new Err('No linkText or originalUrl field on membershipTypeData');
             }
 
-            return new Ok({ kind: ElementKind.Membership, linkText, url, price, start, image });
+            return new Ok({ kind: ElementKind.LiveEvent, linkText, url, price, start, image });
         }
 
         case ElementType.INSTAGRAM: {
