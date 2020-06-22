@@ -2,7 +2,7 @@ import { AdSlot } from "@guardian/bridget/AdSlot";
 import { Image } from "@guardian/bridget/Image";
 import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
 import { logger } from "../logger";
-import {memoise} from "../lib";
+import { memoise } from "../lib";
 
 const getTargetingParams: () => Map<string, string> = memoise(() => {
     const content = document.getElementById('targeting-params')?.innerHTML ?? '{}';
