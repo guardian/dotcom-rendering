@@ -90,6 +90,8 @@ const imageCss = {
     `,
 
     halfWidth: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
         width: 50%;
         float: left;
         clear: left;
