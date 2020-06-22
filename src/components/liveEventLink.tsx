@@ -39,7 +39,7 @@ const liveEventLinkStyles: SerializedStyles =
             }
     
             section {
-                padding: ${basePx(1)};
+                padding: ${remSpace[2]};
                 ${textSans.xsmall()};
 
                 h1 {
