@@ -23,7 +23,7 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
             </LeftColumn>
             <div
                 className={css`
-                    width: 620px;
+                    max-width: 620px;
                     padding: 20px;
                 `}
             >
