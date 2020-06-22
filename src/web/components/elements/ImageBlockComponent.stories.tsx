@@ -25,6 +25,7 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
                 className={css`
                     max-width: 620px;
                     padding: 20px;
+                    flex-grow: 1;
                 `}
             >
                 {children}
