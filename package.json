@@ -88,7 +88,7 @@
         "pm2": "^4.3.0",
         "polished": "^1.9.2",
         "preact": "^10.3.1",
-        "prettier-eslint": "^9.0.0",
+        "prettier-eslint": "^11.0.0",
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
         "sanitize-html": "^1.27.0"
