@@ -4,11 +4,14 @@ import React, { FC } from 'react';
 import { css } from '@emotion/core'
 import { remSpace, neutral } from '@guardian/src-foundations';
 
-import { darkModeCss } from 'styles';
+import { darkModeCss, wideContentWidth } from 'styles';
 import { Option } from 'types/option';
 import { Video } from 'video';
+import { from } from '@guardian/src-foundations/mq';
 
 // ----- Component ----- //
+
+const videoHeight = wideContentWidth * 0.5625;
 
 const styles = css`
     margin: 0 0 ${remSpace[2]} 0;
@@ -20,6 +23,13 @@ const styles = css`
     ${darkModeCss`
         background: ${neutral[20]};
     `}
+
+    ${from.phablet} {
+        padding-bottom: ${videoHeight}px;
+        width: ${wideContentWidth}px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 `;
 
 interface Props {
