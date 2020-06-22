@@ -12,7 +12,8 @@ type Props = {
     role: RoleType;
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
-    children?: JSX.Element | JSX.Element[];
+    height?: number;
+    width?: number;
 };
 
 export const YoutubeBlockComponent = ({
@@ -24,6 +25,8 @@ export const YoutubeBlockComponent = ({
     role,
     adTargeting,
     isMainMedia,
+    height,
+    width,
 }: Props) => {
     const shouldLimitWidth =
         !isMainMedia &&
@@ -37,6 +40,8 @@ export const YoutubeBlockComponent = ({
                 adTargeting={adTargeting}
                 duration={element.duration}
                 title={element.mediaTitle}
+                height={height}
+                width={width}
             />
         );
     }
@@ -48,6 +53,8 @@ export const YoutubeBlockComponent = ({
                 adTargeting={adTargeting}
                 duration={element.duration}
                 title={element.mediaTitle}
+                height={height}
+                width={width}
             />
             <Caption
                 display={display}

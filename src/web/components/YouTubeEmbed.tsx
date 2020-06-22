@@ -12,6 +12,8 @@ type Props = {
     overlayImage?: string;
     duration?: number; // in seconds
     title?: string;
+    height?: number;
+    width?: number;
 };
 
 type EmbedConfig = {
@@ -36,15 +38,29 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
     };
 };
 
-const PositionRelative = ({
+const MaintainAspectRatio = ({
+    height,
+    width,
     children,
 }: {
+    height: number;
+    width: number;
     children: JSX.Element | JSX.Element[];
 }) => (
+    /* https://css-tricks.com/aspect-ratio-boxes/ */
     <div
         className={css`
-            /* position relative to contain the absolutely positioned Overlay image */
+            /* position relative to contain the absolutely positioned iframe plus any Overlay image */
             position: relative;
+            padding-bottom: ${(height / width) * 100}%;
+            position: relative;
+            iframe {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
         `}
     >
         {children}
@@ -57,6 +73,8 @@ export const YouTubeEmbed = ({
     adTargeting,
     overlayImage,
     duration,
+    height = 259,
+    width = 460,
     title = 'YouTube video player',
 }: Props) => {
     const embedConfig =
@@ -64,7 +82,7 @@ export const YouTubeEmbed = ({
 
     if (overlayImage) {
         return (
-            <PositionRelative>
+            <MaintainAspectRatio height={height} width={width}>
                 <YouTubeOverlay
                     image={overlayImage}
                     pillar={pillar}
@@ -72,20 +90,22 @@ export const YouTubeEmbed = ({
                 />
                 <iframe
                     title={title}
-                    width="100%"
-                    height="350px"
+                    width={width}
+                    height={height}
                     src={`https://www.youtube.com/embed/${assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
                 />
-            </PositionRelative>
+            </MaintainAspectRatio>
         );
     }
 
     return (
-        <iframe
-            title={title}
-            width="100%"
-            height="350px"
-            src={`https://www.youtube.com/embed/${assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
-        />
+        <MaintainAspectRatio height={height} width={width}>
+            <iframe
+                title={title}
+                width={width}
+                height={height}
+                src={`https://www.youtube.com/embed/${assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
+            />
+        </MaintainAspectRatio>
     );
 };
