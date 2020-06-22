@@ -14,7 +14,7 @@ export const MaintainAspectRatio = ({ height, width, children }: Props) => (
             /* position relative to contain the absolutely positioned iframe plus any Overlay image */
             position: relative;
             padding-bottom: ${(height / width) * 100}%;
-            position: relative;
+
             iframe {
                 width: 100%;
                 height: 100%;
