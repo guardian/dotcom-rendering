@@ -39,11 +39,11 @@ const liveEventLinkStyles: SerializedStyles =
             }
     
             section {
-                padding: ${basePx(1)};
+                padding: ${remSpace[2]};
                 ${textSans.xsmall()};
 
                 h1 {
-                    margin: ${basePx(0, 0, 1, 0)};
+                    margin: 0 0 ${remSpace[2]} 0;
                     ${headline.xxxsmall({ fontWeight: 'bold' })}
                     hyphens: auto;
                 }
@@ -60,8 +60,8 @@ const liveEventLinkStyles: SerializedStyles =
                     margin: 0;
                     background: #B84376;
                     color: ${neutral[100]};
-                    border-radius: 24px;
-                    padding: 0 12px;
+                    border-radius: 1.5rem;
+                    padding: 0 ${remSpace[3]};
                 }
             }
         }
@@ -69,6 +69,7 @@ const liveEventLinkStyles: SerializedStyles =
         float: left;
         clear: left;
         margin: ${basePx(1, 2, 1, 0)};
+        margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
 
         width: ${richLinkWidth};
 
