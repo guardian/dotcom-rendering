@@ -142,8 +142,12 @@ const moreTitlePadding = css`
 
     ${until.tablet} {
         padding-bottom: 14px;
-        padding-left: 40px;
+        padding-left: 20px;
         padding-right: 40px;
+    }
+
+    ${until.mobileLandscape} {
+        padding-left: 10px;
     }
 
     ${from.tablet} {

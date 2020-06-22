@@ -85,10 +85,20 @@ const captionPadding = css`
     padding-right: 8px;
 `;
 
-const leftMargin = css`
+const bigLeftMargin = css`
+    width: inherit;
     margin-left: ${space[9]}px;
     ${until.wide} {
-        margin-left: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    ${until.tablet} {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    ${until.mobileLandscape} {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 `;
 
@@ -154,7 +164,7 @@ export const Caption = ({
                         bottomMargin,
                         padCaption && captionPadding,
                         shouldLimitWidth && veryLimitedWidth,
-                        shouldLimitWidth && leftMargin,
+                        shouldLimitWidth && bigLeftMargin,
                     )}
                 >
                     {captionText && (

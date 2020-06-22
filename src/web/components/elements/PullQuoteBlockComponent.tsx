@@ -11,6 +11,8 @@ const partiallyLeft = css`
     width: 220px;
     margin-left: -10px;
     margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     clear: left;
     float: left;
 
@@ -36,6 +38,8 @@ const partiallyLeft = css`
 const fullyLeft = css`
     margin-left: -10px;
     margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     clear: left;
     float: left;
 
@@ -47,7 +51,7 @@ const fullyLeft = css`
     }
     ${from.leftCol} {
         width: 150px;
-        margin-left: -160px;
+        margin-left: -150px;
     }
     ${from.wide} {
         width: 200px;
@@ -57,6 +61,8 @@ const fullyLeft = css`
 
 const partiallyInline = css`
     margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
     display: block;
 
     ${from.mobileLandscape} {
@@ -89,7 +95,7 @@ const partiallyInline = css`
 `;
 
 const fullyInline = css`
-    margin-left: 10px;
+    margin-left: -10px;
     display: block;
 `;
 
@@ -132,8 +138,6 @@ export const PullQuoteBlockComponent: React.FC<{
                             /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
                             /* stylelint-disable-next-line color-no-hex */
                             background-color: #fbe6d5;
-                            padding-left: 10px;
-                            padding-right: 10px;
                             padding-top: 6px;
                             padding-bottom: 12px;
                             margin-bottom: 28px;
