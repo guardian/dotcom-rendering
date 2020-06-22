@@ -14,9 +14,8 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
     ${textSans.medium()}
 
     li {
-        margin: ${basePx(1, 1, .5, 0)};
+        margin: ${basePx(1, 1, 0, 0)};
         display: inline-block;
-        padding: ${basePx(.5, 0)};
 
         a {
             text-decoration: none;
@@ -27,6 +26,9 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
             max-width: 18.75rem;
             color: ${neutral[7]};
             background-color: ${background};
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
 `;
