@@ -304,7 +304,14 @@ const parse = (context: Context, atoms?: Atoms) =>
 
             const formattedDate = start ? formatDate(new Date(start?.iso8601)) : undefined;
 
-            return new Ok({ kind: ElementKind.LiveEvent, linkText, url, price, start: formattedDate, image });
+            return new Ok({
+                kind: ElementKind.LiveEvent,
+                linkText,
+                url,
+                price,
+                start: formattedDate,
+                image
+            });
         }
 
         case ElementType.INSTAGRAM: {
