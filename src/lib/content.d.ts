@@ -116,6 +116,7 @@ interface ImageBlockElement {
     imageSources: ImageSource[];
     displayCredit?: boolean;
     role: RoleType;
+    title?: string;
 }
 
 interface InstagramBlockElement {
