@@ -14,7 +14,7 @@ import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Media from 'components/media/article';
 import Interactive from 'components/interactive/article';
-import { Content } from '@guardian/content-api-models/v1/content';
+import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { includesTweets } from 'capi';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { partition } from 'types/result';
@@ -159,12 +159,12 @@ const styles = `
 
 function page(
     imageSalt: string,
-    content: Content,
+    renderingRequest: RenderingRequest,
     getAssetLocation: (assetName: string) => string,
 ): Page {
-    const item = fromCapi({ docParser, salt: imageSalt })(content);
-    const shouldHideAds = content.fields?.shouldHideAdverts ?? false;
-    const hasTwitter = includesTweets(content);
+    const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest.content);
+    const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
+    const hasTwitter = includesTweets(renderingRequest.content);
     const clientScript = scriptName(item).fmap(getAssetLocation);
     const { html: body, css, ids } = compose(extractCritical, renderToString)(
         <CacheProvider value={cache}>
@@ -175,13 +175,16 @@ function page(
     const html = `
         <html lang="en">
             <head>
-                ${renderToString(<Head webTitle={content.webTitle} />)}
+                ${renderToString(<Head webTitle={renderingRequest.content.webTitle} />)}
                 <meta
                     http-equiv="Content-Security-Policy"
                     content="${cspString}"
                 />
                 <style>${styles}</style>
                 <style data-emotion-css="${ids.join(' ')}">${css}</style>
+                <script id="targeting-params" type="application/json">
+                    ${JSON.stringify(renderingRequest.targetingParams)}
+                </script>
             </head>
             <body>
                 ${body}
