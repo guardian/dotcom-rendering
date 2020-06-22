@@ -3,8 +3,6 @@ import { neutral, remSpace } from "@guardian/src-foundations";
 import { basePx, darkModeCss } from "styles";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import React, { ReactElement } from "react";
-import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
-import { formatDate } from 'date';
 import { SvgGuardianLiveLogo } from '@guardian/src-brand'
 
 const richLinkWidth = '8.75rem';
@@ -14,7 +12,7 @@ type LiveEventLinkProps = {
     linkText: string;
     price?: string;
     image?: string;
-    start?: CapiDateTime;
+    start?: string;
 }
 
 const liveEventLinkStyles: SerializedStyles =
@@ -89,14 +87,13 @@ const liveEventLinkStyles: SerializedStyles =
 const LiveEventLink = (props: LiveEventLinkProps): ReactElement => {
     const { url, image, linkText, start, price } = props;
     const headerImage = image ? <img src={image} alt="Live event"/> : null;
-    const date = start ? formatDate(new Date(start?.iso8601)) : null;
     return <aside css={liveEventLinkStyles}>
         <a href={url}>
             <div><SvgGuardianLiveLogo /></div>
             { headerImage }
             <section>
                 <h1>{ linkText }</h1>
-                <time>{ date }</time>
+                <time>{ start }</time>
                 <p>{ price }</p>
                 <button>Book now</button>
             </section>

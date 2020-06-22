@@ -14,7 +14,7 @@ import { Image as ImageData, parseImage } from 'image';
 import { isElement } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
-import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
+import { formatDate } from 'date';
 
 // ----- Types ----- //
 
@@ -99,7 +99,7 @@ type BodyElement = {
     url: string;
     image?: string;
     price?: string;
-    start?: CapiDateTime;
+    start?: string;
 } | Video | InteractiveAtom | ExplainerAtom;
 
 type Elements = BlockElement[] | undefined;
@@ -146,7 +146,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
         case ElementKind.LiveEvent:
-                return { ...elem, start: elem?.start?.iso8601 };
+                return { ...elem };
         default:
             return elem;
     }
@@ -302,7 +302,9 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return new Err('No linkText or originalUrl field on membershipTypeData');
             }
 
-            return new Ok({ kind: ElementKind.LiveEvent, linkText, url, price, start, image });
+            const formattedDate = start ? formatDate(new Date(start?.iso8601)) : undefined;
+
+            return new Ok({ kind: ElementKind.LiveEvent, linkText, url, price, start: formattedDate, image });
         }
 
         case ElementType.INSTAGRAM: {
