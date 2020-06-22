@@ -14,6 +14,7 @@ import { Image as ImageData, parseImage } from 'image';
 import { isElement } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
+import { formatDate } from 'date';
 
 // ----- Types ----- //
 
@@ -27,6 +28,7 @@ const enum ElementKind {
     Instagram,
     Audio,
     Embed,
+    LiveEvent,
     Video,
     InteractiveAtom,
     ExplainerAtom
@@ -91,6 +93,13 @@ type BodyElement = {
     kind: ElementKind.Embed;
     html: string;
     alt: Option<string>;
+} | {
+    kind: ElementKind.LiveEvent;
+    linkText: string;
+    url: string;
+    image?: string;
+    price?: string;
+    start?: string;
 } | Video | InteractiveAtom | ExplainerAtom;
 
 type Elements = BlockElement[] | undefined;
@@ -276,6 +285,32 @@ const parse = (context: Context, atoms?: Atoms) =>
             }
 
             return new Ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
+        }
+
+        case ElementType.MEMBERSHIP: {
+            const {
+                linkText,
+                originalUrl: url,
+                price,
+                start,
+                image
+            } = element.membershipTypeData ?? {};
+
+            if (!linkText || !url) {
+                return new Err('No linkText or originalUrl field on membershipTypeData');
+            }
+
+            const formattedDate = start?.iso8601 && !isNaN(new Date(start?.iso8601).valueOf())
+                ? formatDate(new Date(start?.iso8601)) : undefined;
+
+            return new Ok({
+                kind: ElementKind.LiveEvent,
+                linkText,
+                url,
+                price,
+                start: formattedDate,
+                image
+            });
         }
 
         case ElementType.INSTAGRAM: {
