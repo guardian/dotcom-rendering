@@ -75,7 +75,8 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'firstPublicationDate',
         'shouldHideAdverts',
         'shouldHideReaderRevenue',
-        'displayHint'
+        'displayHint',
+        'starRating'
     ];
 
     const params = new URLSearchParams({
