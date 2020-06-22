@@ -50,7 +50,7 @@ const fullyLeft = css`
         width: 220px;
     }
     ${from.leftCol} {
-        width: 150px;
+        width: 140px;
         margin-left: -150px;
     }
     ${from.wide} {
