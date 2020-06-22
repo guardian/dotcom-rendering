@@ -184,7 +184,10 @@ export const PullQuoteBlockComponent: React.FC<{
                         `,
                     )}
                 >
-                    <QuoteIcon colour={text.anchorPrimary} size="large" />
+                    <QuoteIcon
+                        colour={pillarPalette[pillar].main}
+                        size="large"
+                    />
                     <blockquote
                         // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={{
