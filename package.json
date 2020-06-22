@@ -40,6 +40,7 @@
         "@guardian/src-link": "^1.5.0",
         "@guardian/src-radio": "^1.5.0",
         "@guardian/src-svgs": "^1.5.0",
+        "@guardian/src-text-area": "^1.5.0",
         "@guardian/src-text-input": "^1.5.0",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",

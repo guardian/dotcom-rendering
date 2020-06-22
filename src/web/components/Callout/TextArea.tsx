@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { FieldLabel } from './FieldLabel';
+import { TextArea as SourceTextArea } from '@guardian/src-text-area';
 
 const textAreaStyles = css`
     width: 100%;
@@ -15,17 +15,18 @@ type Props = {
 
 export const TextArea = ({ formField, formData, setFormData }: Props) => (
     <>
-        <FieldLabel formField={formField} />
-        <textarea
+        <SourceTextArea
             data-testid={`form-field-${formField.id}`}
+            label={formField.label}
             className={textAreaStyles}
-            required={formField.required}
+            optional={!formField.required}
             value={formField.id in formData ? formData[formField.id] : ''}
             onChange={e =>
                 setFormData({
                     ...formData,
                     [formField.id]: e.target.value,
-                })}
+                })
+            }
         />
     </>
 );
