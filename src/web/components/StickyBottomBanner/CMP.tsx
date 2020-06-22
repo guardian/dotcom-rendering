@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
+import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
 import {
     shouldShow as shouldShow_,
     setErrorHandler,

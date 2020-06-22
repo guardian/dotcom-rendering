@@ -8,7 +8,7 @@ import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { ThemeProvider } from 'emotion-theming';
 import { Button, buttonReaderRevenueBrand } from '@guardian/src-button';
-import { SvgArrowRightStraight } from '@guardian/src-svgs';
+import { SvgArrowRightStraight } from '@guardian/src-icons';
 
 import { Hide } from '@frontend/web/components/Hide';
 
