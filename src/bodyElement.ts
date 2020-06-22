@@ -143,7 +143,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.ExplainerAtom:
             return { ...elem };
         case ElementKind.MediaAtom:
-            return { ...elem };
+            return { ...elem, duration: optionToSerialisable(elem.duration) };
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
         default:
