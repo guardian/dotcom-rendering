@@ -17,7 +17,7 @@ const getAlreadyVisitedCount = (): number => {
 };
 
 const getEngagementBannerLastClosedAt = (): string | undefined => {
-    return localStorage.getItem('engagementBannerLastClosedAt') || undefined;
+    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
 };
 
 export const StickyBottomBanner = ({
