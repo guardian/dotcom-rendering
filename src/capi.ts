@@ -55,7 +55,7 @@ const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
 
 const articleMainVideo = (content: Content): Option<BlockElement> =>
-    fromNullable(content?.blocks?.main?.elements.filter(isVideo)[0]);
+    fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;
