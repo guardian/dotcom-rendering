@@ -13,6 +13,7 @@ import { SubheadingBlockComponent } from '@root/src/web/components/elements/Subh
 import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
+import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import { ExplainerAtom } from '@guardian/atoms-rendering';
@@ -128,10 +129,25 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
+                case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                    return (
+                        <VimeoBlockComponent
+                            pillar={pillar}
+                            url={element.url}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.credit}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YoutubeBlockComponent
                             display={display}
+                            designType={designType}
                             key={i}
                             element={element}
                             pillar={pillar}
@@ -159,7 +175,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
                     return null;
             }

@@ -24,6 +24,7 @@ export const noOverlay = () => {
         <Container>
             <YoutubeBlockComponent
                 display="standard"
+                designType="Article"
                 element={{
                     mediaTitle:
                         "Prince Harry and Meghan's 'bombshell' plans explained – video",

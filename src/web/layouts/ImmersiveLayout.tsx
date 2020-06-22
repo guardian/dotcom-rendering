@@ -288,6 +288,7 @@ export const ImmersiveLayout = ({
                         <Hide when="above" breakpoint="leftCol">
                             <Caption
                                 display={display}
+                                designType={designType}
                                 captionText={captionText}
                                 pillar={pillar}
                                 shouldLimitWidth={false}
@@ -365,18 +366,22 @@ export const ImmersiveLayout = ({
                         />
                     </GridItem>
                     <GridItem area="lines">
-                        <div className={maxWidth}>
-                            <div className={stretchLines}>
-                                <GuardianLines
-                                    pillar={pillar}
-                                    effect={decideLineEffect(
-                                        'Immersive',
-                                        pillar,
-                                    )}
-                                    count={decideLineCount('Immersive')}
-                                />
+                        {designType === 'PhotoEssay' ? (
+                            <></>
+                        ) : (
+                            <div className={maxWidth}>
+                                <div className={stretchLines}>
+                                    <GuardianLines
+                                        pillar={pillar}
+                                        effect={decideLineEffect(
+                                            'Immersive',
+                                            pillar,
+                                        )}
+                                        count={decideLineCount('Immersive')}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </GridItem>
                     <GridItem area="meta">
                         <div className={maxWidth}>

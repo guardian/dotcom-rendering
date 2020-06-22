@@ -24,6 +24,8 @@
 const indices = [
     // Modals will go here at the top
 
+    'banner',
+
     // Header
     'stickyAdWrapper',
     'headerWrapper',

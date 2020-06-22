@@ -106,7 +106,7 @@ const GridOfFour = ({
 );
 
 export const MultiImageBlockComponent = ({
-    // designType,
+    designType,
     caption,
     images,
     pillar,
@@ -126,7 +126,7 @@ export const MultiImageBlockComponent = ({
                 >
                     <ImageComponent
                         display="standard"
-                        designType="Article"
+                        designType={designType}
                         element={images[0]}
                         pillar={pillar}
                         hideCaption={true}
@@ -135,6 +135,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -177,6 +178,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -229,6 +231,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -291,6 +294,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}

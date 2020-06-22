@@ -1,8 +1,13 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { until, from, between } from '@guardian/src-foundations/mq';
-import { brandAltBackground } from '@guardian/src-foundations/palette';
+import { headline } from '@guardian/src-foundations/typography';
+import {
+    brandAltBackground,
+    border,
+    neutral,
+} from '@guardian/src-foundations/palette';
 
 import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
@@ -13,11 +18,12 @@ type Props = {
     display: Display;
     designType: DesignType;
     element: ImageBlockElement;
+    role: RoleType;
     pillar: Pillar;
     hideCaption?: boolean;
-    role: RoleType;
     isMainMedia?: boolean;
     starRating?: number;
+    title?: string;
 };
 
 const widths = [1020, 660, 480, 0];
@@ -112,11 +118,98 @@ const starsWrapper = css`
     }
 `;
 
-const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
+const PositionStarRating: React.FC<{ rating: number }> = ({ rating }) => (
     <div className={starsWrapper}>
         <StarRating rating={rating} size="large" />
     </div>
 );
+
+const basicTitlePadding = css`
+    ${until.tablet} {
+        padding-top: 4px;
+        padding-bottom: 14px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    ${from.tablet} {
+        padding-top: 4px;
+        padding-bottom: 17px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+`;
+
+const moreTitlePadding = css`
+    ${basicTitlePadding}
+
+    ${from.leftCol} {
+        padding-top: 4px;
+        padding-bottom: 17px;
+        padding-left: 180px;
+        padding-right: 20px;
+    }
+
+    ${from.wide} {
+        padding-top: 4px;
+        padding-bottom: 17px;
+        padding-left: 260px;
+        padding-right: 20px;
+    }
+`;
+
+const titleWrapper = css`
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    ${until.desktop} {
+        ${headline.xxsmall({ fontWeight: 'light' })}
+    }
+    ${until.phablet} {
+        ${headline.xxxsmall({ fontWeight: 'light' })}
+    }
+    ${from.desktop} {
+        ${headline.xsmall({ fontWeight: 'light' })}
+    }
+    color: ${neutral[100]};
+    background: linear-gradient(transparent, ${neutral[0]});
+
+    :before {
+        background-color: ${border.focusHalo};
+        display: block;
+        content: '';
+        width: 8.75rem;
+        ${until.desktop} {
+            height: 0.5rem;
+        }
+        ${from.desktop} {
+            height: 0.75rem;
+        }
+
+        margin-bottom: calc(1.25rem / 3);
+    }
+`;
+
+const ImageTitle: React.FC<{ title: string; role: RoleType }> = ({
+    title,
+    role,
+}) => {
+    switch (role) {
+        case 'inline':
+        case 'thumbnail':
+        case 'halfWidth':
+        case 'supporting':
+            return (
+                <h2 className={cx(titleWrapper, basicTitlePadding)}>{title}</h2>
+            );
+        case 'showcase':
+        case 'immersive':
+            return (
+                <h2 className={cx(titleWrapper, moreTitlePadding)}>{title}</h2>
+            );
+    }
+};
 
 const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
@@ -176,6 +269,7 @@ export const ImageComponent = ({
     role,
     isMainMedia,
     starRating,
+    title,
 }: Props) => {
     const { imageSources } = element;
     const sources = makeSources(imageSources, role);
@@ -207,7 +301,8 @@ export const ImageComponent = ({
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
                 />
-                {starRating && <StarRatingComponent rating={starRating} />}
+                {starRating && <PositionStarRating rating={starRating} />}
+                {title && <ImageTitle title={title} role={role} />}
             </div>
         );
     }
@@ -229,10 +324,12 @@ export const ImageComponent = ({
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
                 />
-                {starRating && <StarRatingComponent rating={starRating} />}
+                {starRating && <PositionStarRating rating={starRating} />}
+                {title && <ImageTitle title={title} role={role} />}
             </div>
         );
     }
+
     return (
         <>
             <div
@@ -275,6 +372,7 @@ export const ImageComponent = ({
                                 <div id="the-caption">
                                     <Caption
                                         display={display}
+                                        designType={designType}
                                         captionText={element.data.caption || ''}
                                         pillar={pillar}
                                         credit={element.data.credit}
@@ -287,12 +385,14 @@ export const ImageComponent = ({
                         </Row>
                     </Hide>
                 )}
-                {starRating && <StarRatingComponent rating={starRating} />}
+                {starRating && <PositionStarRating rating={starRating} />}
+                {title && <ImageTitle title={title} role={role} />}
             </div>
             {isMainMedia ? (
                 <Hide when="below" breakpoint="tablet">
                     <Caption
                         display={display}
+                        designType={designType}
                         captionText={element.data.caption || ''}
                         pillar={pillar}
                         credit={element.data.credit}
@@ -303,6 +403,7 @@ export const ImageComponent = ({
             ) : (
                 <Caption
                     display={display}
+                    designType={designType}
                     captionText={element.data.caption || ''}
                     pillar={pillar}
                     credit={element.data.credit}

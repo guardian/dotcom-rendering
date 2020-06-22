@@ -37,6 +37,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -245,6 +246,8 @@ export const StandardLayout = ({
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
+    const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
+
     const showComments = CAPI.isCommentable;
 
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
@@ -337,6 +340,9 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
+                            {designType === 'MatchReport' && (
+                                <Placeholder rootId="match-nav" height={230} />
+                            )}
                             <ArticleHeadlinePadding designType={designType}>
                                 {age && (
                                     <div className={ageWarningMargins}>
@@ -430,6 +436,7 @@ export const StandardLayout = ({
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />
+                                {showMatchStats && <div id="match-stats" />}
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta

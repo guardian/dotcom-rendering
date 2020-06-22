@@ -115,6 +115,7 @@ export const ImmersiveHeadline = ({
                     <LeftColumn showRightBorder={false}>
                         <Caption
                             display={display}
+                            designType={designType}
                             captionText={captionText}
                             pillar={pillar}
                             shouldLimitWidth={true}

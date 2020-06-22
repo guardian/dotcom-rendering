@@ -11,6 +11,15 @@ type Props = {
     CAPI: CAPIBrowserType;
 };
 
+const getAlreadyVisitedCount = (): number => {
+    const alreadyVisited = parseInt(localStorage.getItem('gu.alreadyVisited') || "", 10);
+    return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
+};
+
+const getEngagementBannerLastClosedAt = (): string | undefined => {
+    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
+};
+
 export const StickyBottomBanner = ({
     isSignedIn,
     countryCode,
@@ -51,6 +60,8 @@ export const StickyBottomBanner = ({
                         isSensitive={CAPI.config.isSensitive}
                         tags={CAPI.tags}
                         contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                        alreadyVisitedCount={getAlreadyVisitedCount()}
+                        engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
                     />
                 )
             )}
