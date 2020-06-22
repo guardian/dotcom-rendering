@@ -243,7 +243,8 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'A': {
             const colour = format.design === Design.Media ? inverted : kicker;
             const styles = css` color: ${colour}; text-decoration: none`;
-            const href = getHref(node).withDefault('');
+            const url = getHref(node).withDefault('')
+            const href = url.startsWith('profile/') ? `https://www.theguardian.com/${url}` : url
             return styledH('a', { key, href, css: styles }, children);
         }
         default:

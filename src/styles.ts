@@ -105,7 +105,7 @@ export const adStyles = css`
                 line-height: 24px;
 
                 span {
-                    margin-right: 24px;
+                    margin-right: 30px;
                 }
 
                 &::focus, &::hover, &::active {
@@ -116,7 +116,7 @@ export const adStyles = css`
                     padding-left: ${basePx(1)};
                     ${icons}
                     content: "\\e04F";
-                    font-size: 16px;
+                    font-size: 20px;
                     position: absolute;
                     right: 0px;
                     top: -2px;
