@@ -296,7 +296,7 @@ export const ImmersiveLayout = ({
                         </Hide>
                     </GridItem>
                     <GridItem area="border">
-                        <Border />
+                        {designType === 'PhotoEssay' ? <></> : <Border />}
                     </GridItem>
                     <GridItem area="title">
                         <>
