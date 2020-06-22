@@ -69,6 +69,7 @@ const liveEventLinkStyles: SerializedStyles =
         float: left;
         clear: left;
         margin: ${basePx(1, 2, 1, 0)};
+        margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
 
         width: ${richLinkWidth};
 
