@@ -145,8 +145,6 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem };
         case ElementKind.Embed:
             return { ...elem, alt: optionToSerialisable(elem.alt) };
-        case ElementKind.LiveEvent:
-                return { ...elem };
         default:
             return elem;
     }
