@@ -31,9 +31,6 @@ declare global {
                     reportError: (error: Error, feature: string) => void;
                 };
             };
-            functions: {
-                import: (url: string) => Promise<any>;
-            };
             // TODO expose as type from Automat client lib
             automat: {
                 react: any;
@@ -44,6 +41,7 @@ declare global {
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
+        guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
     }
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

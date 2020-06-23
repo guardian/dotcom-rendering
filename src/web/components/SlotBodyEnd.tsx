@@ -14,7 +14,10 @@ import {
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
+import {
+    sendOphanContributionsComponentEvent,
+    TestMeta,
+} from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -169,8 +172,8 @@ const MemoisedInner = ({
                 modulePerf.start();
 
                 // eslint-disable-next-line no-restricted-globals
-                window.guardian.functions
-                    .import(module.url)
+                window
+                    .guardianPolyfilledImport(module.url)
                     .then(epicModule => {
                         modulePerf.end();
                         setEpicMeta(meta);
@@ -179,7 +182,11 @@ const MemoisedInner = ({
                             onReminderOpen: sendOphanReminderOpenEvent,
                         });
                         setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-                        sendOphanContributionsComponentEvent('INSERT', meta, 'ACQUISITIONS_EPIC');
+                        sendOphanContributionsComponentEvent(
+                            'INSERT',
+                            meta,
+                            'ACQUISITIONS_EPIC',
+                        );
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`epic - error is: ${error}`));
@@ -191,7 +198,11 @@ const MemoisedInner = ({
     useEffect(() => {
         if (hasBeenSeen && epicMeta) {
             logView(epicMeta.abTestName);
-            sendOphanContributionsComponentEvent('VIEW', epicMeta, 'ACQUISITIONS_EPIC');
+            sendOphanContributionsComponentEvent(
+                'VIEW',
+                epicMeta,
+                'ACQUISITIONS_EPIC',
+            );
         }
     }, [hasBeenSeen, epicMeta]);
 
