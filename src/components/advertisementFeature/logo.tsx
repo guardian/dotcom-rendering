@@ -26,7 +26,8 @@ const styles = css`
 `;
 
 const Logo = ({ item }: Props): JSX.Element => {
-    const sponsorship = item.tags.find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop()
+    const sponsorship = item.tags
+        .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
     const logo = sponsorship?.sponsorLogo;
     const link = sponsorship?.sponsorLink;
     const alt = sponsorship?.sponsorName ?? "";
