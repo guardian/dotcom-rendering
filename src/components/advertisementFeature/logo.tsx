@@ -3,6 +3,8 @@ import { Item } from 'item';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
+import { darkModeCss } from 'styles';
+import { remSpace, neutral, text } from '@guardian/src-foundations';
 
 interface Props {
     item: Item;
@@ -12,6 +14,15 @@ const styles = css`
     display: flex;
     justify-content: space-between;
     ${textSans.medium()}
+    color: ${text.supporting};
+
+    ${darkModeCss`
+        color: ${neutral[60]};
+        img {
+            padding: ${remSpace[2]};
+            background: ${neutral[86]};
+        }
+    `}
 `;
 
 const Logo = ({ item }: Props): JSX.Element => {
