@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { darkModeCss } from 'styles';
@@ -24,7 +24,7 @@ const styles = css`
     `}
 `;
 
-const Logo = ({ logo }: Props): JSX.Element =>
+const Logo: FC<Props> = ({ logo }: Props) =>
     <section css={styles}>
         <span>Paid for by</span>
         <span>
