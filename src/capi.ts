@@ -56,22 +56,23 @@ const isVideo = (elem: BlockElement): boolean =>
     elem.contentAtomTypeData?.atomType === "media";
 
 const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable(content?.blocks?.main?.elements.filter(isImage)[0])
+    fromNullable((content?.blocks?.main?.elements.filter(isImage) ?? [])[0]);
 
 const articleMainVideo = (content: Content): Option<BlockElement> =>
     fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
 
-const articleMainMedia = (content: Content, context: Context): MainMedia =>
-    content?.blocks?.main?.elements.filter(isImage)[0]
-        ? {
+const articleMainMedia = (content: Content, context: Context): Option<MainMedia> => {
+    return (content?.blocks?.main?.elements.filter(isImage) ?? [])[0]
+        ? articleMainImage(content).andThen(parseImage(context)).fmap(image => ({
             kind: MainMediaKind.Image,
-            image: articleMainImage(content).andThen(parseImage(context))
-        }
-        : {
-            kind: MainMediaKind.Video,
-            video: articleMainVideo(content)
-                .andThen(blockElement => parseVideo(blockElement, content.atoms))
-        }
+            image
+        }))
+        : articleMainVideo(content).andThen(blockElement => parseVideo(blockElement, content.atoms))
+            .fmap(video => ({
+                kind: MainMediaKind.Video,
+                video
+            }))
+}
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;

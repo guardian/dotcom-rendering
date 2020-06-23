@@ -24,7 +24,7 @@ interface Fields extends Format {
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: Option<Date>;
-    mainMedia: MainMedia;
+    mainMedia: Option<MainMedia>;
     contributors: Contributor[];
     series: Option<Tag>;
     commentable: boolean;
