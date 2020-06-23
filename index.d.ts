@@ -314,6 +314,7 @@ type CAPIBrowserType = {
         discussionD2Uid: string;
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
+        remoteBanner: boolean;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;

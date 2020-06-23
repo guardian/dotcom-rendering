@@ -36,8 +36,7 @@ export const StickyBottomBanner = ({
         return null;
     }
 
-    // Temporary flag to toggle RR banner while it is in development
-    const showRRBanner = false;
+    const showRRBanner = CAPI.config.remoteBanner;
 
     return (
         <>
