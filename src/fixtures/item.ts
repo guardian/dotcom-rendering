@@ -4,7 +4,7 @@ import { Pillar, Design, Display } from '@guardian/types/Format';
 
 import { Item, Review } from 'item';
 import { None, Some } from 'types/option';
-import { MainMediaKind, MainMedia } from 'headerMedia';
+import { MainMedia } from 'headerMedia';
 
 // ----- Fixture ----- //
 
