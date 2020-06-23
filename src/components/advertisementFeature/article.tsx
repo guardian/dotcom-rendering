@@ -14,6 +14,7 @@ import Metadata from 'components/metadata';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, getFormat } from 'item';
+import Logo from './logo';
 
 
 // ----- Styles ----- //
@@ -62,6 +63,7 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
+                    <Logo item={item}/>
                 </section>
             </header>
             <Body className={[articleWidthStyles]}>
