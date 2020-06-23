@@ -60,4 +60,4 @@ Using [Media Atom maker tool](https://video.gutools.co.uk/), embedded into compo
 
 ### DCR Json
 
-![Media Atom CAPI Json](./youtubeimages/mediaatomdcrjson.png)s
+![Media Atom CAPI Json](./youtubeimages/mediaatomdcrjson.png)
