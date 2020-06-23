@@ -2,7 +2,7 @@ import { JSDOM } from 'jsdom';
 
 const getCaption = (element?: TextBlockElement): string => {
     if (!element) return '';
-    // An essay caption: <ul><Title text</p></li></ul>
+    // An essay caption: <ul><li><Caption text</li></ul>
     const frag = JSDOM.fragment(element.html);
     if (!frag || !frag.firstChild || !frag.firstElementChild) return '';
     const hasULwrapper = frag.firstChild.nodeName === 'UL';
