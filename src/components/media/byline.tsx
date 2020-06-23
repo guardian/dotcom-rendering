@@ -3,7 +3,6 @@
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
-import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { Option } from 'types/option';
 import { Item, getFormat } from 'item';
@@ -15,13 +14,13 @@ import Dateline from 'components/dateline';
 
 // ----- Styles ----- //
 
-const Styles = ({ inverted }: PillarStyles): SerializedStyles => css`
+const styles: SerializedStyles = css`
     .author {
         margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
         color: ${neutral[86]};
 
         .follow, a {
-            color: ${inverted};
+            color: ${neutral[86]};
         }
 
         time, .follow {
@@ -52,7 +51,7 @@ function Byline({ pillar, publicationDate, className, item }: Props): JSX.Elemen
     ).withDefault(null);
 
     return (
-        <div css={[className, Styles(getPillarStyles(pillar))]}>
+        <div css={[className, styles]}>
             <div>
                 <div className="author">
                     { byline }

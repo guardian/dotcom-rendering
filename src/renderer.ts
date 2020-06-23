@@ -109,33 +109,37 @@ const listStyles: SerializedStyles = css`
     clear: both;
 `;
 
-const listItemStyles: SerializedStyles = css`
-    padding-left: ${remSpace[6]};
-    padding-bottom: .375rem;
+const listItemStyles = (format: Format): SerializedStyles => {
+    const backgroundColour = format.design === Design.Media
+        ? neutral[46] : neutral[86];
+    return css`
+        padding-left: ${remSpace[6]};
+        padding-bottom: .375rem;
 
-    &::before {
-        display: inline-block;
-        content: '';
-        border-radius: .5rem;
-        height: 1rem;
-        width: 1rem;
-        margin-right: ${remSpace[2]};
-        background-color: ${neutral[86]};
-        margin-left: -${remSpace[6]};
-        vertical-align: middle;
-    }
-
-    > p:first-of-type {
-        display: inline;
-        padding: 0;
-    }
-
-    ${darkModeCss`
         &::before {
-            background-color: ${neutral[60]};
+            display: inline-block;
+            content: '';
+            border-radius: .5rem;
+            height: 1rem;
+            width: 1rem;
+            margin-right: ${remSpace[2]};
+            background-color: ${backgroundColour};
+            margin-left: -${remSpace[6]};
+            vertical-align: middle;
         }
-    `}
-`;
+
+        > p:first-of-type {
+            display: inline;
+            padding: 0;
+        }
+
+        ${darkModeCss`
+            &::before {
+                background-color: ${neutral[46]};
+            }
+        `}
+    `;
+}
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
     const font = format.design === Design.AdvertisementFeature
@@ -222,7 +226,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
         case 'UL':
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
-            return styledH('li', { css: listItemStyles }, children);
+            return styledH('li', { css: listItemStyles(format) }, children);
         case 'MARK':
             return styledH('mark', { key }, children);
         default:
@@ -239,7 +243,7 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'UL':
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
-            return styledH('li', { css: listItemStyles }, children);
+            return styledH('li', { css: listItemStyles(format) }, children);
         case 'A': {
             const colour = format.design === Design.Media ? inverted : kicker;
             const styles = css` color: ${colour}; text-decoration: none`;

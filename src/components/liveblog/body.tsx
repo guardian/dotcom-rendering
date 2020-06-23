@@ -5,12 +5,23 @@ import { Pillar, Format } from 'format';
 import { LiveBlock } from 'liveBlock';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
+import { remSpace } from '@guardian/src-foundations';
+import { css } from '@emotion/core';
+import { until } from '@guardian/src-foundations/mq';
 
 interface LiveblogBodyProps {
     format: Format;
     blocks: LiveBlock[];
     totalBodyBlocks: number;
 }
+
+const styles = css`
+    margin: ${remSpace[6]} 0 ${remSpace[2]} 0;
+
+    ${until.wide} {
+        margin-left: ${remSpace[2]};
+    }
+`
 
 const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Element | null =>
     total > 7
@@ -36,7 +47,9 @@ const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={totalBodyBlocks} pillar={format.pillar}/>
+            <div css={styles}>
+                <LoadMore total={totalBodyBlocks} pillar={format.pillar}/>
+            </div>
         </>
     );
 
