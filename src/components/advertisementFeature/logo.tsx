@@ -32,7 +32,7 @@ const Logo: FC<Props> = ({ item }: Props) => {
     const link = sponsorship?.sponsorLink;
     const alt = sponsorship?.sponsorName ?? "";
 
-    if (!logo || !link) return <></>;
+    if (!logo || !link) return null;
 
     return <section css={styles}>
         <span>Paid for by</span>
