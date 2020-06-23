@@ -7,15 +7,20 @@ import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { BlockElement} from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
-import { Option, fromNullable } from 'types/option';
+import { Option, fromNullable, None, Some } from 'types/option';
 import { fromString as dateFromString } from 'date';
-
 
 // ----- Lookups ----- //
 
 interface Series {
     webTitle?: string;
     webUrl?: string;
+}
+
+interface Logo {
+    src: string;
+    url: string;
+    alt: string;
 }
 
 const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
@@ -63,6 +68,17 @@ const includesTweets = (content: Content): boolean => {
         .some(Boolean)
 }
 
+const paidContentLogo = (tags: Tag[]): Option<Logo> => {
+    const sponsorship = tags
+        .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
+    const src = sponsorship?.sponsorLogo;
+    const url = sponsorship?.sponsorLink;
+    const alt = sponsorship?.sponsorName ?? "";
+    return (!src || !url)
+        ? new None()
+        : new Some({ src, url, alt })
+}
+
 
 // ----- Functions ----- //
 
@@ -104,6 +120,7 @@ const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 
 export {
     Series,
+    Logo,
     isPhotoEssay,
     isImmersive,
     isInteractive,
@@ -116,4 +133,5 @@ export {
     capiEndpoint,
     includesTweets,
     maybeCapiDate,
+    paidContentLogo,
 };
