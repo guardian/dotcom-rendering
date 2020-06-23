@@ -18,7 +18,6 @@ import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
-import { response } from './liveblogResponse';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 import { Result, Ok, Err } from 'types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
