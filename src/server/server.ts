@@ -120,10 +120,6 @@ async function serveArticlePost(
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
-        // mock liveblog content from mapi
-        if (req.query.date || req.query.filter) {
-            res.json(response);
-        }
         const articleId = req.params[ 0 ] || defaultId;
         const imageSalt = await getConfigValue<string>('apis.img.salt');
         const capiContent = await askCapiFor(articleId);
