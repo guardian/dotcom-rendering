@@ -63,7 +63,10 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-    design: Exclude<Design, Design.Live | Design.Review | Design.Comment | Design.AdvertisementFeature>;
+    design: Exclude<Design, Design.Live |
+        Design.Review |
+        Design.Comment |
+        Design.AdvertisementFeature>;
     body: Body;
 }
 
