@@ -24,3 +24,16 @@ export const defaultStory = () => {
     );
 };
 defaultStory.story = { name: 'default' };
+
+export const Unquoted = () => {
+    return (
+        <div className={containerStyles}>
+            <BlockquoteBlockComponent
+                html={html}
+                pillar="news"
+                quoted={false}
+            />
+        </div>
+    );
+};
+Unquoted.story = { name: 'with quoted false' };
