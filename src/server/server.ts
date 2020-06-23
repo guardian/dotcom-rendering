@@ -18,7 +18,6 @@ import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
-import { response } from './liveblogResponse';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 import { Result, Ok, Err } from 'types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
@@ -120,10 +119,6 @@ async function serveArticlePost(
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
-        // mock liveblog content from mapi
-        if (req.query.date || req.query.filter) {
-            res.json(response);
-        }
         const articleId = req.params[ 0 ] || defaultId;
         const imageSalt = await getConfigValue<string>('apis.img.salt');
         const capiContent = await askCapiFor(articleId);
