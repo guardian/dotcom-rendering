@@ -160,13 +160,13 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 className={cx(
                     clearFixStyle,
                     rowStyles,
-                    display === Display.Immersive && minHeight,
+                    display === 'immersive' && minHeight,
                 )}
                 role="navigation"
                 aria-label="Guardian sections"
                 data-component="nav2"
             >
-                {display === Display.Immersive && (
+                {display === 'immersive' && (
                     <Hide when="above" breakpoint="tablet">
                         <ThemeProvider theme={buttonReaderRevenueBrand}>
                             <PositionButton>
@@ -215,7 +215,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 />
                 <ExpandedMenu nav={nav} display={display} />
             </nav>
-            {display === Display.Immersive && (
+            {display === 'immersive' && (
                 <PositionRoundel>
                     <GuardianRoundel />
                 </PositionRoundel>

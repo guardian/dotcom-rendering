@@ -58,7 +58,7 @@ export const defaultStory = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...brexitCAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="sport"
                 designType="Article"
             />
@@ -73,7 +73,7 @@ export const beyondTheBlade = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...beyondTheBladeCAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="news"
                 designType="Article"
             />
@@ -93,7 +93,7 @@ export const immersiveComment = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...brexitCAPI}
-                display={Display.Immersive}
+                display="immersive"
                 pillar="sport"
                 designType="Comment"
             />
@@ -113,7 +113,7 @@ export const immersiveCommentTag = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Immersive}
+                display="immersive"
                 pillar="sport"
                 designType="Comment"
                 tags={[
@@ -135,7 +135,7 @@ export const ImmersiveSeriesTag = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Immersive}
+                display="immersive"
                 pillar="sport"
                 designType="Review"
                 tags={[
@@ -157,7 +157,7 @@ export const ArticleBlogTag = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="sport"
                 designType="Article"
                 tags={[
@@ -179,7 +179,7 @@ export const ArticleOpinionTag = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="sport"
                 designType="Article"
                 tags={[
@@ -201,7 +201,7 @@ export const ArticleSeriesTag = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="sport"
                 designType="Article"
                 tags={[
@@ -223,7 +223,7 @@ export const ArticleNoTags = () => {
             <ArticleTitle
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...CAPI}
-                display={Display.Standard}
+                display="standard"
                 pillar="culture"
                 designType="Article"
             />

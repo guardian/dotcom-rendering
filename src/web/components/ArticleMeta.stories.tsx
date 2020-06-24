@@ -50,7 +50,7 @@ export const ArticleStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Standard}
+                display="standard"
                 designType="Article"
                 pillar="news"
                 pageId=""
@@ -89,7 +89,7 @@ export const BrandingStory = () => {
                     aboutThisLink:
                         'https://www.theguardian.com/info/2016/jan/25/content-funding',
                 }}
-                display={Display.Standard}
+                display="standard"
                 designType="Article"
                 pillar="news"
                 pageId=""
@@ -111,7 +111,7 @@ export const FeatureStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Standard}
+                display="standard"
                 designType="Feature"
                 pillar="culture"
                 pageId=""
@@ -132,7 +132,7 @@ export const CommentStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Standard}
+                display="standard"
                 designType="Comment"
                 pillar="opinion"
                 pageId=""
@@ -153,7 +153,7 @@ export const InterviewStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Standard}
+                display="standard"
                 designType="Interview"
                 pillar="lifestyle"
                 pageId=""
@@ -174,7 +174,7 @@ export const ImmersiveStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Immersive}
+                display="immersive"
                 designType="Immersive"
                 pillar="news"
                 pageId=""
@@ -195,7 +195,7 @@ export const TwoContributorsStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display={Display.Standard}
+                display="standard"
                 designType="Feature"
                 pillar="sport"
                 pageId=""

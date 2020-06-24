@@ -23,7 +23,7 @@ export const noOverlay = () => {
     return (
         <Container>
             <YoutubeBlockComponent
-                display={Display.Standard}
+                display="standard"
                 designType="Article"
                 element={{
                     mediaTitle:

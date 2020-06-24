@@ -18,7 +18,7 @@ export const Short = () => (
             `}
         >
             <MainMedia
-                display={Display.Immersive}
+                display="immersive"
                 designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
@@ -27,7 +27,7 @@ export const Short = () => (
         </div>
 
         <ImmersiveHeadline
-            display={Display.Immersive}
+            display="immersive"
             designType="Immersive"
             tags={[]}
             author={{}}
@@ -49,7 +49,7 @@ export const Long = () => (
             `}
         >
             <MainMedia
-                display={Display.Immersive}
+                display="immersive"
                 designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
@@ -58,7 +58,7 @@ export const Long = () => (
         </div>
 
         <ImmersiveHeadline
-            display={Display.Immersive}
+            display="immersive"
             designType="Immersive"
             tags={[]}
             author={{}}

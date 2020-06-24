@@ -59,7 +59,7 @@ export const ArticleTitle = ({
     badge,
 }: Props) => (
     <div className={cx(sectionStyles, badge && badgeContainer)}>
-        {badge && display !== Display.Immersive && (
+        {badge && display !== 'immersive' && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
@@ -67,7 +67,7 @@ export const ArticleTitle = ({
         <div
             className={cx(
                 badge && marginTop,
-                display === Display.Immersive && marginBottom,
+                display === 'immersive' && marginBottom,
             )}
         >
             <SeriesSectionLink

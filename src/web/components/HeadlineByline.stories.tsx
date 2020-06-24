@@ -10,7 +10,7 @@ export default {
 export const interviewStory = () => {
     return (
         <HeadlineByline
-            display={Display.Standard}
+            display="standard"
             designType="Interview"
             pillar="culture"
             byline="Jane Smith"
@@ -23,7 +23,7 @@ interviewStory.story = { name: 'Interview' };
 export const commentStory = () => {
     return (
         <HeadlineByline
-            display={Display.Standard}
+            display="standard"
             designType="Comment"
             pillar="sport"
             byline="Jane Smith"
@@ -36,7 +36,7 @@ commentStory.story = { name: 'Comment' };
 export const immersiveStory = () => {
     return (
         <HeadlineByline
-            display={Display.Immersive}
+            display="immersive"
             designType="Immersive"
             pillar="lifestyle"
             byline="Jane Smith"
@@ -61,7 +61,7 @@ export const ImmersiveComment = () => {
             `}
         >
             <HeadlineByline
-                display={Display.Immersive}
+                display="immersive"
                 designType="Comment"
                 pillar="lifestyle"
                 byline="Jane Smith"
@@ -81,7 +81,7 @@ ImmersiveComment.story = { name: 'Immersive Comment' };
 export const MultipleStory = () => {
     return (
         <HeadlineByline
-            display={Display.Immersive}
+            display="immersive"
             designType="Immersive"
             pillar="lifestyle"
             byline="Jane Smith, John Doe and Nae Bevan"

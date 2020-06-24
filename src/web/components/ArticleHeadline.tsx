@@ -172,7 +172,7 @@ export const ArticleHeadline = ({
     noMainMedia,
 }: Props) => {
     switch (display) {
-        case Display.Immersive: {
+        case 'immersive': {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
@@ -243,9 +243,8 @@ export const ArticleHeadline = ({
             }
             break;
         }
-        case Display.Showcase:
-        case Display.Standard:
-        default: {
+        case 'showcase':
+        case 'standard': {
             switch (designType) {
                 case 'Review':
                 case 'Recipe':
