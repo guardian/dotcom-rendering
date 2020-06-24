@@ -41,6 +41,16 @@ declare global {
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
+        /**
+         * ES6 module import, possibly polyfilled depending on the current
+         * browser. There are three categories:
+         *
+         * 1. Full support out of the box
+         * 2. ES6 module support but not dynamic modules
+         * 3. No module support
+         *
+         * This gives support across all 3 cases.
+         */
         guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
     }
 }
