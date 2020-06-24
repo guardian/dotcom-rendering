@@ -95,17 +95,9 @@ test: clean-dist install
 	@yarn test --verbose  --runInBand
 	$(call log, "everything seems 👌")
 
-test-prepush: clean-dist install
-	$(call log, "running tests")
-	@yarn test --verbose  --runInBand --onlyChanged
-	$(call log, "everything seems 👌")
-
 test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
-
-lint-staged:
-	@yarn lint-staged
 
 bundlesize: clear clean-dist install build
 	@bundlesize
@@ -113,7 +105,8 @@ bundlesize: clear clean-dist install build
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-prepush: clean-dist install tsc lint-staged test-prepush
+validate-prepush:
+	@run-p tsc lint-staged "test -- --verbose  --runInBand --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
