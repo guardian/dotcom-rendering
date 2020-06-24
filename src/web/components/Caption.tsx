@@ -211,7 +211,7 @@ export const Caption = ({
                     <span
                         className={cx(
                             iconStyle(pillar),
-                            display === 'immersive' && hideIconBelowLeftCol,
+                            display === Display.Immersive && hideIconBelowLeftCol,
                         )}
                     >
                         <TriangleIcon />

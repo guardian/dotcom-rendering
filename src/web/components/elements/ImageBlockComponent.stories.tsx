@@ -51,7 +51,7 @@ export const StandardArticle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -67,7 +67,7 @@ export const Immersive = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'immersive' }}
                 pillar="news"
@@ -83,7 +83,7 @@ export const Showcase = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'showcase' }}
                 pillar="news"
@@ -99,7 +99,7 @@ export const Thumbnail = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'thumbnail' }}
                 pillar="news"
@@ -115,7 +115,7 @@ export const Supporting = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'supporting' }}
                 pillar="news"
@@ -131,7 +131,7 @@ export const HideCaption = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -148,7 +148,7 @@ export const InlineTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -170,7 +170,7 @@ export const InlineTitleMobile = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -192,7 +192,7 @@ export const ImmersiveTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'immersive' }}
                 pillar="news"
@@ -210,7 +210,7 @@ export const ShowcaseTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'showcase' }}
                 pillar="news"
@@ -252,7 +252,7 @@ export const HalfWidth = () => {
                 mollit anim id est laborum.
             </p>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'halfWidth' }}
                 pillar="news"
@@ -308,7 +308,7 @@ export const HalfWidthMobile = () => {
                 mollit anim id est laborum.
             </p>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'halfWidth' }}
                 pillar="news"
@@ -364,7 +364,7 @@ export const HalfWidthWide = () => {
                 deserunt mollit anim id est laborum.
             </p>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'halfWidth' }}
                 pillar="news"

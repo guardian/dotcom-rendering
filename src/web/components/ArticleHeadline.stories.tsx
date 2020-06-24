@@ -24,7 +24,7 @@ export const ArticleStory = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is how the default headline looks"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Article"
                     pillar="news"
                     tags={[]}
@@ -44,7 +44,7 @@ export const oldHeadline = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an old headline"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Article"
                     pillar="news"
                     tags={[
@@ -71,7 +71,7 @@ export const Feature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is a Feature headline, it has colour applied based on pillar"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Feature"
                     pillar="lifestyle"
                     tags={[]}
@@ -96,7 +96,7 @@ export const ShowcaseInterview = () => (
                 >
                     <ArticleHeadline
                         headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-                        display="showcase"
+                        display={Display.Showcase}
                         designType="Interview"
                         pillar="culture"
                         tags={[]}
@@ -105,7 +105,7 @@ export const ShowcaseInterview = () => (
                     />
                 </div>
                 <MainMedia
-                    display="standard"
+                    display={Display.Standard}
                     designType="Article"
                     hideCaption={true}
                     elements={mainMediaElements}
@@ -126,19 +126,19 @@ export const Interview = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Interview"
                     pillar="culture"
                     tags={[]}
                     byline="Byline text"
                 />
                 <Standfirst
-                    display="standard"
+                    display={Display.Standard}
                     designType="Interview"
                     standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
                 />
                 <MainMedia
-                    display="standard"
+                    display={Display.Standard}
                     designType="Article"
                     hideCaption={true}
                     elements={mainMediaElements}
@@ -159,7 +159,7 @@ export const Comment = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="Yes, the billionaire club is one we really need to shut down"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Comment"
                     pillar="opinion"
                     tags={[]}
@@ -179,7 +179,7 @@ export const Analysis = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Analysis"
                     pillar="news"
                     tags={[]}
@@ -199,7 +199,7 @@ export const Media = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Media"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Media"
                     pillar="news"
                     tags={[]}
@@ -219,7 +219,7 @@ export const Review = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Review"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Review"
                     pillar="news"
                     tags={[]}
@@ -239,7 +239,7 @@ export const AdvertisementFeature = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is AdvertisementFeature"
-                    display="standard"
+                    display={Display.Standard}
                     designType="AdvertisementFeature"
                     pillar="news"
                     tags={[]}
@@ -259,7 +259,7 @@ export const PhotoEssay = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is PhotoEssay"
-                    display="standard"
+                    display={Display.Standard}
                     designType="PhotoEssay"
                     pillar="news"
                     tags={[]}
@@ -279,7 +279,7 @@ export const Quiz = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Quiz"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Quiz"
                     pillar="news"
                     tags={[]}
@@ -299,7 +299,7 @@ export const GuardianLabs = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianLabs"
-                    display="standard"
+                    display={Display.Standard}
                     designType="GuardianLabs"
                     pillar="news"
                     tags={[]}
@@ -319,7 +319,7 @@ export const Recipe = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Recipe"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Recipe"
                     pillar="news"
                     tags={[]}
@@ -339,7 +339,7 @@ export const Immersive = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when display type is Immersive"
-                    display="immersive"
+                    display={Display.Immersive}
                     designType="Article"
                     pillar="news"
                     tags={[]}
@@ -359,7 +359,7 @@ export const ImmersiveNoMainMedia = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when display type is Immersive, but with no main media"
-                    display="immersive"
+                    display={Display.Immersive}
                     designType="Article"
                     pillar="news"
                     tags={[]}
@@ -384,7 +384,7 @@ export const ImmersiveComment = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when display type is Immersive and designType Comment"
-                    display="immersive"
+                    display={Display.Immersive}
                     designType="Comment"
                     pillar="news"
                     tags={[]}
@@ -404,7 +404,7 @@ export const GuardianView = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianView"
-                    display="standard"
+                    display={Display.Standard}
                     designType="GuardianView"
                     pillar="news"
                     tags={[]}
@@ -424,7 +424,7 @@ export const MatchReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is MatchReport"
-                    display="standard"
+                    display={Display.Standard}
                     designType="MatchReport"
                     pillar="news"
                     tags={[]}
@@ -444,7 +444,7 @@ export const SpecialReport = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is SpecialReport"
-                    display="standard"
+                    display={Display.Standard}
                     designType="SpecialReport"
                     pillar="news"
                     tags={[]}
@@ -464,7 +464,7 @@ export const Live = () => (
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Live"
-                    display="standard"
+                    display={Display.Standard}
                     designType="Live"
                     pillar="news"
                     tags={[]}

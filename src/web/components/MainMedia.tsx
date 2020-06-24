@@ -104,7 +104,7 @@ export const MainMedia: React.FC<{
     adTargeting,
     starRating,
 }) => (
-    <div className={cx(mainMedia, display !== 'immersive' && noGutters)}>
+    <div className={cx(mainMedia, display !== Display.Immersive && noGutters)}>
         {elements.map((element, i) =>
             renderElement(
                 display,

@@ -44,7 +44,7 @@ export const noOverlay = () => {
                 nisi ut aliquip ex ea commodo consequat.{' '}
             </p>
             <YoutubeBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{
                     mediaTitle:

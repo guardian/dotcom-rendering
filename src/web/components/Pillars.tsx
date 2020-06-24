@@ -19,7 +19,7 @@ export const preDesktopPillarWidth = 'auto';
 // CSS
 const pillarsStyles = (display: Display) => css`
     ${until.tablet} {
-        display: ${display === 'immersive' && 'none'};
+        display: ${display === Display.Immersive && 'none'};
     }
     clear: right;
     margin: 0;
@@ -49,13 +49,13 @@ const pillarsStyles = (display: Display) => css`
         bottom: 0;
         left: 0;
         right: 0;
-        height: ${display === 'immersive' ? '49px' : '37px'};
+        height: ${display === Display.Immersive ? '49px' : '37px'};
         ${from.tablet} {
             border-bottom: 0;
             height: 49px;
         }
         ${from.desktop} {
-            height: ${display === 'immersive' ? '49px' : '43px'};
+            height: ${display === Display.Immersive ? '49px' : '43px'};
         }
     }
 `;
@@ -138,44 +138,44 @@ const linkStyle = (display: Display) => css`
     cursor: pointer;
     display: block;
     font-size: 15.4px;
-    height: ${display === 'immersive' ? '48px' : '36px'};
-    padding-top: ${display === 'immersive' ? '10px' : '9px'};
-    padding-right: ${display === 'immersive' ? '5px' : '5px'};
-    padding-bottom: ${display === 'immersive' ? '0' : '0'};
-    padding-left: ${display === 'immersive' ? '5px' : '5px'};
+    height: ${display === Display.Immersive ? '48px' : '36px'};
+    padding-top: ${display === Display.Immersive ? '10px' : '9px'};
+    padding-right: ${display === Display.Immersive ? '5px' : '5px'};
+    padding-bottom: ${display === Display.Immersive ? '0' : '0'};
+    padding-left: ${display === Display.Immersive ? '5px' : '5px'};
     position: relative;
     overflow: hidden;
     text-decoration: none;
     z-index: 1;
     ${from.mobileMedium} {
         font-size: 15.7px;
-        padding-top: ${display === 'immersive' ? '9px' : '9px'};
-        padding-right: ${display === 'immersive' ? '5px' : '5px'};
-        padding-bottom: ${display === 'immersive' ? '0' : '0'};
-        padding-left: ${display === 'immersive' ? '5px' : '5px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '9px'};
+        padding-right: ${display === Display.Immersive ? '5px' : '5px'};
+        padding-bottom: ${display === Display.Immersive ? '0' : '0'};
+        padding-left: ${display === Display.Immersive ? '5px' : '5px'};
     }
     ${from.mobileLandscape} {
         font-size: 18px;
-        padding-top: ${display === 'immersive' ? '9px' : '9px'};
-        padding-right: ${display === 'immersive' ? '5px' : '5px'};
-        padding-bottom: ${display === 'immersive' ? '0' : '0'};
-        padding-left: ${display === 'immersive' ? '5px' : '5px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '9px'};
+        padding-right: ${display === Display.Immersive ? '5px' : '5px'};
+        padding-bottom: ${display === Display.Immersive ? '0' : '0'};
+        padding-left: ${display === Display.Immersive ? '5px' : '5px'};
     }
     ${from.tablet} {
         font-size: 22px;
         height: 48px;
-        padding-top: ${display === 'immersive' ? '9px' : '9px'};
-        padding-right: ${display === 'immersive' ? '20px' : '20px'};
-        padding-bottom: ${display === 'immersive' ? '0' : '0'};
-        padding-left: ${display === 'immersive' ? '9px' : '9px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '9px'};
+        padding-right: ${display === Display.Immersive ? '20px' : '20px'};
+        padding-bottom: ${display === Display.Immersive ? '0' : '0'};
+        padding-left: ${display === Display.Immersive ? '9px' : '9px'};
     }
     ${from.desktop} {
-        padding-top: ${display === 'immersive' ? '9px' : '5px'};
-        height: ${display === 'immersive' ? '48px' : '42px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '5px'};
+        height: ${display === Display.Immersive ? '48px' : '42px'};
     }
 
     ${from.wide} {
-        padding-top: ${display === 'immersive' ? '10px' : '7px'};
+        padding-top: ${display === Display.Immersive ? '10px' : '7px'};
         font-size: 24px;
     }
 

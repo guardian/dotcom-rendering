@@ -119,7 +119,7 @@ export const SeriesSectionLink = ({
     const hasSeriesTag = tag && tag.type === 'Series';
 
     switch (display) {
-        case 'immersive': {
+        case Display.Immersive: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView': {
@@ -214,8 +214,9 @@ export const SeriesSectionLink = ({
                 }
             }
         }
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard:
+        default: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':

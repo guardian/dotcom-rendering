@@ -31,7 +31,7 @@ export const smallAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -52,7 +52,7 @@ export const largeAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -73,7 +73,7 @@ export const verticalAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>

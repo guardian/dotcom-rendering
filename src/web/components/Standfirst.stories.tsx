@@ -13,7 +13,7 @@ export const Article = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -26,7 +26,7 @@ export const Comment = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Comment"
                 standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -39,7 +39,7 @@ export const Feature = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Feature"
                 standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -52,7 +52,7 @@ export const Immersive = () => {
     return (
         <Section>
             <Standfirst
-                display="immersive"
+                display={Display.Immersive}
                 designType="Immersive"
                 standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -65,7 +65,7 @@ export const Review = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Review"
                 standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -78,7 +78,7 @@ export const Live = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Live"
                 standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -91,7 +91,7 @@ export const Interview = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Interview"
                 standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -104,7 +104,7 @@ export const Analysis = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Analysis"
                 standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -117,7 +117,7 @@ export const Media = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Media"
                 standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -130,7 +130,7 @@ export const Recipe = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Recipe"
                 standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -143,7 +143,7 @@ export const MatchReport = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="MatchReport"
                 standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -156,7 +156,7 @@ export const Quiz = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="Quiz"
                 standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -169,7 +169,7 @@ export const SpecialReport = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="SpecialReport"
                 standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -182,7 +182,7 @@ export const GuardianView = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="GuardianView"
                 standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -195,7 +195,7 @@ export const GuardianLabs = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="GuardianLabs"
                 standfirst="This is how GuardianLabs standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -208,7 +208,7 @@ export const AdvertisementFeature = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="AdvertisementFeature"
                 standfirst="This is how AdvertisementFeature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
@@ -221,7 +221,7 @@ export const PhotoEssay = () => {
     return (
         <Section>
             <Standfirst
-                display="standard"
+                display={Display.Standard}
                 designType="PhotoEssay"
                 standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />

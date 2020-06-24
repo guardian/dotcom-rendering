@@ -29,7 +29,7 @@ export const defaultStory = () => {
                 html={html}
                 pillar="news"
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -45,7 +45,7 @@ export const DropCap = () => {
                 pillar="culture"
                 forceDropCap={true}
                 designType="Article"
-                display="immersive"
+                display={Display.Immersive}
                 isFirstParagraph={false}
             />
         </div>
@@ -61,7 +61,7 @@ export const QuotedDropCap = () => {
                 pillar="opinion"
                 forceDropCap={false}
                 designType="Comment"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={true}
             />
         </div>
@@ -77,7 +77,7 @@ export const ShortText = () => {
                 pillar="news"
                 forceDropCap={true}
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -93,7 +93,7 @@ export const NoTags = () => {
                 pillar="news"
                 forceDropCap={true}
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -109,7 +109,7 @@ export const FeatureDropCap = () => {
                 pillar="culture"
                 forceDropCap={false}
                 designType="Feature"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={true}
             />
         </div>

@@ -11,9 +11,9 @@ type Props = {
 };
 
 const decideDisplay = (CAPI: CAPIType): Display => {
-    if (CAPI.isImmersive) return 'immersive';
-    if (CAPI.pageType.hasShowcaseMainElement) return 'showcase';
-    return 'standard';
+    if (CAPI.isImmersive) return Display.Immersive;
+    if (CAPI.pageType.hasShowcaseMainElement) return Display.Showcase;
+    return Display.Standard;
 };
 
 const decidePillar = (CAPI: CAPIType): Pillar => {
@@ -29,7 +29,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const { designType } = CAPI;
 
     switch (display) {
-        case 'immersive': {
+        case Display.Immersive: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
@@ -37,7 +37,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <ImmersiveLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="immersive"
+                            display={Display.Immersive}
                             designType={designType}
                             pillar={pillar}
                         />
@@ -61,7 +61,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <ImmersiveLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="immersive"
+                            display={Display.Immersive}
                             designType={designType}
                             pillar={pillar}
                         />
@@ -69,7 +69,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             }
             break;
         }
-        case 'showcase': {
+        case Display.Showcase: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
@@ -77,7 +77,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <CommentLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="showcase"
+                            display={Display.Showcase}
                             designType={designType}
                             pillar={pillar}
                         />
@@ -101,7 +101,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <ShowcaseLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="showcase"
+                            display={Display.Showcase}
                             designType={designType}
                             pillar={pillar}
                         />
@@ -109,7 +109,8 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
             }
             break;
         }
-        case 'standard': {
+        case Display.Standard:
+        default: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
@@ -117,7 +118,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <CommentLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             pillar={pillar}
                         />
@@ -141,7 +142,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                         <StandardLayout
                             CAPI={CAPI}
                             NAV={NAV}
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             pillar={pillar}
                         />

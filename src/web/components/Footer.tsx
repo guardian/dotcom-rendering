@@ -212,7 +212,7 @@ export const Footer: React.FC<{
     <footer className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
-                display="standard"
+                display={Display.Standard}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}
