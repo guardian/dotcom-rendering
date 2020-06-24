@@ -7,9 +7,9 @@ import { Avatar } from '@root/src/web/components/Avatar';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
+import { Display } from '@root/src/lib/display';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
-import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

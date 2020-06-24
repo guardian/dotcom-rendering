@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { Display } from '@root/src/lib/display';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { Display } from '@root/src/lib/display';
 
 type Props = {
     CAPI: CAPIType;

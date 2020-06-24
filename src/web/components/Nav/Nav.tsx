@@ -14,9 +14,9 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
+import { Display } from '@root/src/lib/display';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
-import { Display } from '@root/src/lib/display';
 
 type Props = {
     pillar: Pillar;

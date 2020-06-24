@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Display } from '@root/src/lib/display';
 import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';
-import { Display } from '@root/src/lib/display';
 
 export default {
     component: Standfirst,

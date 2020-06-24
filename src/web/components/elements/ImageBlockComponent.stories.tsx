@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -9,7 +10,6 @@ import { RightColumn } from '../RightColumn';
 import { ImageBlockComponent } from './ImageBlockComponent';
 
 import { image } from './ImageBlockComponent.mocks';
-import { Display } from '@root/src/lib/display';
 
 export default {
     component: ImageBlockComponent,

@@ -6,8 +6,8 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
-import { navInputCheckboxId } from './Nav/config';
 import { Display } from '@root/src/lib/display';
+import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
 

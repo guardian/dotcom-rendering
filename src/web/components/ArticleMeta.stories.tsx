@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { ArticleMeta } from './ArticleMeta';
 import { Display } from '@root/src/lib/display';
+import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div

@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { MainMedia } from './MainMedia';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 import { ImmersiveHeadline } from './ImmersiveHeadline';
-import { Display } from '@root/src/lib/display';
 
 export default {
     component: ImmersiveHeadline,

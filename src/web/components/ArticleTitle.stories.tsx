@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { ArticleTitle } from './ArticleTitle';
 import { Display } from '@root/src/lib/display';
+import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div

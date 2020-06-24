@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { HeadlineByline } from './HeadlineByline';
 import { Display } from '@root/src/lib/display';
+import { HeadlineByline } from './HeadlineByline';
 
 export default {
     component: HeadlineByline,

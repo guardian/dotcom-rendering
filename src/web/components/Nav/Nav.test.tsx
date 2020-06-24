@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, within } from '@testing-library/react';
+import { Display } from '@root/src/lib/display';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
-import { Display } from '@root/src/lib/display';
 
 // type Pillar = "news" | "opinion" | "sport" | "culture" | "lifestyle" | "labs"
 
