@@ -13,6 +13,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { clearFix } from '@root/src/lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
+import { Display } from '@root/src/lib/display';
 
 // CSS vars
 const emailSignupSideMargins = 10;

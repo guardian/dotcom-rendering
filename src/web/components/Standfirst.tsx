@@ -4,6 +4,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

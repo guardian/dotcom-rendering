@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { VimeoBlockComponent } from './VimeoBlockComponent';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: VimeoBlockComponent,

@@ -9,6 +9,7 @@ import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';
 import { navInputCheckboxId } from '../config';
+import { Display } from '@root/src/lib/display';
 
 const mainMenuStyles = css`
     background-color: ${brandBackground.primary};

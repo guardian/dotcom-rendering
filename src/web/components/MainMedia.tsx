@@ -5,6 +5,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { Display } from '@root/src/lib/display';
 
 const mainMedia = css`
     min-height: 1px;

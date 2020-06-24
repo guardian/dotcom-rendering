@@ -42,6 +42,7 @@ import {
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Hide } from '../components/Hide';
+import { Display } from '@root/src/lib/display';
 
 const ImmersiveGrid = ({
     children,

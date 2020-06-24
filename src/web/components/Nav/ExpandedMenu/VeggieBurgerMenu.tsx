@@ -6,6 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
 import { navInputCheckboxId, veggieBurgerId } from '../config';
+import { Display } from '@root/src/lib/display';
 
 const screenReadable = css`
     ${visuallyHidden};

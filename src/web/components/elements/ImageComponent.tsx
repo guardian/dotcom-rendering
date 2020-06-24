@@ -10,6 +10,7 @@ import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

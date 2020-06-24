@@ -5,6 +5,7 @@ import { YouTubeOverlay } from '@frontend/web/components/YouTubeOverlay';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 
 import { constructQuery } from '@root/src/lib/querystring';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

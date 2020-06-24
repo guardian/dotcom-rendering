@@ -7,6 +7,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
 import { navInputCheckboxId, showMoreButtonId } from '../config';
+import { Display } from '@root/src/lib/display';
 
 const screenReadable = css`
     ${visuallyHidden};

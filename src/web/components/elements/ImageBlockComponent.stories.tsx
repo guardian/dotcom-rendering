@@ -9,6 +9,7 @@ import { RightColumn } from '../RightColumn';
 import { ImageBlockComponent } from './ImageBlockComponent';
 
 import { image } from './ImageBlockComponent.mocks';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: ImageBlockComponent,

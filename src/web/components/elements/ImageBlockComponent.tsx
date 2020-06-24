@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 import { from, until } from '@guardian/src-foundations/mq';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

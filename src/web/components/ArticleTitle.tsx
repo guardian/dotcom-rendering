@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;

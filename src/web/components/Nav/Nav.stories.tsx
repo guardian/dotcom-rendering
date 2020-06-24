@@ -8,6 +8,7 @@ import { Section } from '@frontend/web/components/Section';
 
 import { nav } from './Nav.mock';
 import { Nav } from './Nav';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: Nav,

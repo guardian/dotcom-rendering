@@ -7,6 +7,7 @@ import { LeftColumn } from '../LeftColumn';
 import { RightColumn } from '../RightColumn';
 
 import { YoutubeBlockComponent } from './YoutubeBlockComponent';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: YoutubeBlockComponent,

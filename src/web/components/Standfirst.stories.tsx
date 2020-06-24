@@ -3,6 +3,7 @@ import React from 'react';
 import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: Standfirst,

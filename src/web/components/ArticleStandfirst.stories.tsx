@@ -6,6 +6,7 @@ import { ArticleStandfirst } from './ArticleStandfirst';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: ArticleStandfirst,

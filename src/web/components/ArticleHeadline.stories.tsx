@@ -9,6 +9,7 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: ArticleHeadline,

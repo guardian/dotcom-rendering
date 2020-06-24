@@ -16,6 +16,7 @@ import { clearFix } from '@root/src/lib/mixins';
 
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     pillar: Pillar;

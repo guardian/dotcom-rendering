@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { ArticleTitle } from './ArticleTitle';
+import { Display } from '@root/src/lib/display';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
