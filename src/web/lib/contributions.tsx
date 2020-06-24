@@ -18,7 +18,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 // including but not limited to recurring & one-off contributions,
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-const shouldShowSupportMessagingCookie = (): boolean => {
+const shouldShowSupportMessaging = (): boolean => {
     const hideSupportMessaging =
         getCookie(HIDE_SUPPORT_MESSAGING_COOKIE) === 'true';
 
@@ -105,7 +105,7 @@ export const isRecentOneOffContributor = () => {
 };
 
 export const shouldHideSupportMessaging = (isSignedIn: boolean = false): boolean =>
-    !shouldShowSupportMessagingCookie() &&
-    isRecurringContributor(isSignedIn) &&
+    !shouldShowSupportMessaging() ||
+    isRecurringContributor(isSignedIn) ||
     isRecentOneOffContributor();
 
