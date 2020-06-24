@@ -313,6 +313,9 @@
                 "isPreview",
                 "isSensitive"
             ]
+        },
+        "matchUrl": {
+            "type": "string"
         }
     },
     "required": [
@@ -1797,6 +1800,15 @@
                 "isPhotoEssay": {
                     "type": "boolean"
                 },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -1813,6 +1825,9 @@
                     "type": "string"
                 },
                 "series": {
+                    "type": "string"
+                },
+                "toneIds": {
                     "type": "string"
                 },
                 "contentType": {

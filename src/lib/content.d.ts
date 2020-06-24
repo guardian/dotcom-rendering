@@ -33,6 +33,19 @@ interface BlockquoteBlockElement {
     html: string;
 }
 
+interface CaptionBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
+    display: Display;
+    designType: DesignType;
+    captionText?: string;
+    pillar: Pillar;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    shouldLimitWidth?: boolean;
+    isOverlayed?: boolean;
+}
+
 interface ChartAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
     id: string;
@@ -276,6 +289,7 @@ type CAPIElement =
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement
+    | CaptionBlockElement
     | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
