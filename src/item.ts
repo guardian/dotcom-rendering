@@ -7,7 +7,7 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { Element } from '@guardian/content-api-models/v1/element';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { articleMainImage, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate } from 'capi';
+import { articleMainImage, articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate, paidContentLogo, Logo } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Format, Pillar, Design, Display } from 'format';
 import { Image as ImageData, parseImage } from 'image';
@@ -15,7 +15,6 @@ import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
-
 
 // ----- Item Type ----- //
 
@@ -45,6 +44,12 @@ interface Review extends Fields {
     starRating: number;
 }
 
+interface AdvertisementFeature extends Fields {
+    design: Design.AdvertisementFeature;
+    body: Body;
+    logo: Option<Logo>;
+}
+
 interface Comment extends Fields {
     design: Design.Comment;
     body: Body;
@@ -58,7 +63,10 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-    design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
+    design: Exclude<Design, Design.Live |
+        Design.Review |
+        Design.Comment |
+        Design.AdvertisementFeature>;
     body: Body;
 }
 
@@ -68,6 +76,7 @@ type Item
     | Comment
     | Standard
     | Interactive
+    | AdvertisementFeature
     ;
 
 
@@ -267,6 +276,7 @@ const fromCapi = (context: Context) => (content: Content): Item => {
         return {
             design: Design.AdvertisementFeature,
             ...itemFieldsWithBody(context, content),
+            logo: paidContentLogo(content.tags),
         };
     }
 
@@ -284,6 +294,7 @@ export {
     Comment,
     Liveblog,
     Review,
+    AdvertisementFeature,
     Standard,
     fromCapi,
     fromCapiLiveBlog,
