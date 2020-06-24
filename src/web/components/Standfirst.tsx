@@ -50,7 +50,7 @@ const nestedStyles = css`
 
 const standfirstStyles = (designType: DesignType, display: Display) => {
     switch (display) {
-        case 'immersive':
+        case Display.Immersive:
             switch (designType) {
                 case 'PhotoEssay':
                     return css`
@@ -92,8 +92,8 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                     `;
             }
 
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':

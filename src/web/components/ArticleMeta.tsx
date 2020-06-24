@@ -80,9 +80,9 @@ const metaContainer = ({
     designType: DesignType;
 }) => {
     switch (display) {
-        case 'immersive':
-        case 'showcase':
-        case 'standard': {
+        case Display.Immersive:
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'PhotoEssay':
                     return css`
@@ -142,10 +142,10 @@ const getAuthorName = (tags: TagType[]) => {
 
 const shouldShowAvatar = (designType: DesignType, display: Display) => {
     switch (display) {
-        case 'immersive':
+        case Display.Immersive:
             return false;
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'Feature':
                 case 'Review':
@@ -174,10 +174,10 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
 
 const shouldShowContributor = (designType: DesignType, display: Display) => {
     switch (display) {
-        case 'immersive':
+        case Display.Immersive:
             return false;
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':

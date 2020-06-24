@@ -25,7 +25,7 @@ export const StandardStory = () => {
         >
             <Nav
                 pillar="news"
-                display="standard"
+                display={Display.Standard}
                 nav={nav}
                 subscribeUrl=""
                 edition="UK"
@@ -46,7 +46,7 @@ export const ImmersiveStory = () => {
         >
             <Nav
                 pillar="news"
-                display="immersive"
+                display={Display.Immersive}
                 nav={nav}
                 subscribeUrl=""
                 edition="UK"
