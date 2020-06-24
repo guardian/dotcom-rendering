@@ -30,7 +30,7 @@ const bodyStyle = (display: Display) => css`
     }
 
     h2 {
-        ${display === Display.Immersive
+        ${display === 'immersive'
             ? headline.medium({ fontWeight: 'light' })
             : headline.xxsmall({ fontWeight: 'bold' })};
     }

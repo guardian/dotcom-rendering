@@ -92,7 +92,7 @@ export const HeadlineByline = ({
     tags,
 }: Props) => {
     switch (display) {
-        case Display.Immersive: {
+        case 'immersive': {
             switch (designType) {
                 case 'GuardianView':
                 case 'Comment':
@@ -127,9 +127,8 @@ export const HeadlineByline = ({
                     );
             }
         }
-        case Display.Showcase:
-        case Display.Standard:
-        default: {
+        case 'showcase':
+        case 'standard': {
             switch (designType) {
                 case 'Interview':
                     return (

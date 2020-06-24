@@ -11,7 +11,7 @@ describe('Nav', () => {
             <Nav
                 pillar="news"
                 nav={nav}
-                display={Display.Standard}
+                display="standard"
                 subscribeUrl=""
                 edition="UK"
             />,
@@ -29,7 +29,7 @@ describe('Nav', () => {
             <Nav
                 pillar="news"
                 nav={nav}
-                display={Display.Standard}
+                display="standard"
                 subscribeUrl=""
                 edition="UK"
             />,

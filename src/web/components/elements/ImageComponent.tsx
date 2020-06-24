@@ -291,7 +291,7 @@ export const ImageComponent = ({
     const isNotOpinion =
         designType !== 'Comment' && designType !== 'GuardianView';
 
-    if (isMainMedia && display === Display.Immersive && isNotOpinion) {
+    if (isMainMedia && display === 'immersive' && isNotOpinion) {
         return (
             <div
                 className={css`

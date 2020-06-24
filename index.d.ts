@@ -9,11 +9,7 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
-declare const enum Display {
-    Standard,
-    Immersive,
-    Showcase,
-}
+type Display = 'standard' | 'immersive' | 'showcase';
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
