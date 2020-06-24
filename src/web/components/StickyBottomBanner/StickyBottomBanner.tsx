@@ -36,7 +36,7 @@ export const StickyBottomBanner = ({
         return null;
     }
 
-    const showRRBanner = CAPI.config.remoteBanner;
+    const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
 
     return (
         <>
