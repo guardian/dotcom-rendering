@@ -72,8 +72,6 @@
 
         <h2>Test Articles By Element (Missing)</h2>
         <ul>
-            <li>AtomEmbedMarkupBlockElement</li>
-            <li>AtomEmbedUrlBlockElement</li>
             <li>BlockquoteBlockElement</li>
             <li>CaptionBlockElement</li>
             <li>ContentAtomBlockElement</li>
@@ -118,6 +116,11 @@
                     name: 'AudioBlockElement',
                     article:
                         '/music/2018/nov/02/the-prodigy-no-tourists-review',
+                },
+                {
+                    name: 'AtomEmbedBlockElement', // Interactive Atom / Chart Atom
+                    article:
+                        '/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
                 },
                 {
                     name: 'CodeBlockElement',
@@ -262,7 +265,7 @@
                 },
             ];
 
-            var makeTestArticle = a => `
+            var makeTestArticle = (a) => `
                 <div class="test-article">
                     <span>${a.name}</span>
                     <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
@@ -272,19 +275,19 @@
                 </div>
             `;
 
-            testContentTypes.forEach(a => {
+            testContentTypes.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-content',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testArticles.forEach(a => {
+            testArticles.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-element',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testContentAtomTypes.forEach(a => {
+            testContentAtomTypes.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-atom-type',
                 ).innerHTML += makeTestArticle(a);

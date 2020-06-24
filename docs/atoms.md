@@ -72,8 +72,8 @@ The following maps PageElements to the corresponding amp and web Components. Thi
 AudioAtomBlockElement
     -> [amp] AudioAtomBlockComponent
 
-AtomEmbedUrlBlockElement
-    -> [amp] AtomEmbedUrlBlockComponent
+AtomEmbedBlockComponent
+    -> [amp] AtomEmbedBlockComponent
     -> [web] InteractiveAtom (atoms-rendering)
 
 ChartAtomBlockElement
