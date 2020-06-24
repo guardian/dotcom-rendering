@@ -92,7 +92,8 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand
+	@yarn test --verbose  --runInBand --onlyChanged
+	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
