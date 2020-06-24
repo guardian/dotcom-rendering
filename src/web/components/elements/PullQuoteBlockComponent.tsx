@@ -11,6 +11,8 @@ const partiallyLeft = css`
     width: 220px;
     margin-left: -10px;
     margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     clear: left;
     float: left;
 
@@ -36,6 +38,8 @@ const partiallyLeft = css`
 const fullyLeft = css`
     margin-left: -10px;
     margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     clear: left;
     float: left;
 
@@ -46,17 +50,19 @@ const fullyLeft = css`
         width: 220px;
     }
     ${from.leftCol} {
-        width: 160px;
-        margin-left: -200px;
+        width: 140px;
+        margin-left: -150px;
     }
     ${from.wide} {
-        width: 220px;
-        margin-left: -320px;
+        width: 200px;
+        margin-left: -215px;
     }
 `;
 
 const partiallyInline = css`
     margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
     display: block;
 
     ${from.mobileLandscape} {
@@ -89,7 +95,7 @@ const partiallyInline = css`
 `;
 
 const fullyInline = css`
-    margin-left: 0;
+    margin-left: -10px;
     display: block;
 `;
 
@@ -98,6 +104,17 @@ function decidePosition(role: string, designType: DesignType) {
         return role === 'supporting' ? fullyLeft : fullyInline;
     }
     return role === 'supporting' ? partiallyLeft : partiallyInline;
+}
+
+function decideFont(role: string) {
+    if (role === 'supporting') {
+        return css`
+            ${headline.xxsmall({ fontWeight: 'light' })};
+        `;
+    }
+    return css`
+        ${headline.xsmall({ fontWeight: 'light' })};
+    `;
 }
 
 export const PullQuoteBlockComponent: React.FC<{
@@ -121,8 +138,6 @@ export const PullQuoteBlockComponent: React.FC<{
                             /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
                             /* stylelint-disable-next-line color-no-hex */
                             background-color: #fbe6d5;
-                            padding-left: 10px;
-                            padding-right: 10px;
                             padding-top: 6px;
                             padding-bottom: 12px;
                             margin-bottom: 28px;
@@ -160,20 +175,23 @@ export const PullQuoteBlockComponent: React.FC<{
                 <aside
                     className={cx(
                         decidePosition(role, designType),
+                        decideFont(role),
                         css`
-                            ${headline.xxsmall({ fontWeight: 'light' })};
-                            color: ${text.anchorPrimary};
+                            color: ${pillarPalette[pillar].main};
                             line-height: 25px;
                             position: relative;
                             padding-left: 10px;
                             padding-right: 10px;
                             padding-top: 6px;
                             padding-bottom: 12px;
-                            margin-bottom: 28px;
+                            margin-bottom: 16px;
                         `,
                     )}
                 >
-                    <QuoteIcon colour={text.anchorPrimary} size="large" />
+                    <QuoteIcon
+                        colour={pillarPalette[pillar].main}
+                        size="large"
+                    />
                     <blockquote
                         // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={{

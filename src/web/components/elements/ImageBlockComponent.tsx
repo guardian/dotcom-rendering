@@ -51,12 +51,12 @@ const imageCss = {
             margin-right: -10px;
         }
         ${from.tablet} {
-            margin-left: 0px;
+            margin-left: -20px;
             margin-right: -100px;
         }
         ${from.desktop} {
-            margin-left: 0px;
-            margin-right: -320px;
+            margin-left: -20px;
+            margin-right: -340px;
         }
         ${from.leftCol} {
             margin-left: -160px;

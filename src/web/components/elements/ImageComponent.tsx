@@ -3,11 +3,8 @@ import { css, cx } from 'emotion';
 
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import {
-    brandAltBackground,
-    border,
-    neutral,
-} from '@guardian/src-foundations/palette';
+import { pillarPalette } from '@root/src/lib/pillars';
+import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
 import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
@@ -141,24 +138,34 @@ const basicTitlePadding = css`
 `;
 
 const moreTitlePadding = css`
-    ${basicTitlePadding}
+    padding-top: 4px;
+
+    ${until.tablet} {
+        padding-bottom: 14px;
+        padding-left: 20px;
+        padding-right: 40px;
+    }
+
+    ${until.mobileLandscape} {
+        padding-left: 10px;
+    }
+
+    ${from.tablet} {
+        padding-bottom: 17px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
     ${from.leftCol} {
-        padding-top: 4px;
-        padding-bottom: 17px;
-        padding-left: 180px;
-        padding-right: 20px;
+        padding-left: 160px;
     }
 
     ${from.wide} {
-        padding-top: 4px;
-        padding-bottom: 17px;
-        padding-left: 260px;
-        padding-right: 20px;
+        padding-left: 240px;
     }
 `;
 
-const titleWrapper = css`
+const titleWrapper = (pillar: Pillar) => css`
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -176,7 +183,7 @@ const titleWrapper = css`
     background: linear-gradient(transparent, ${neutral[0]});
 
     :before {
-        background-color: ${border.focusHalo};
+        background-color: ${pillarPalette[pillar].main};
         display: block;
         content: '';
         width: 8.75rem;
@@ -191,22 +198,27 @@ const titleWrapper = css`
     }
 `;
 
-const ImageTitle: React.FC<{ title: string; role: RoleType }> = ({
-    title,
-    role,
-}) => {
+const ImageTitle: React.FC<{
+    title: string;
+    role: RoleType;
+    pillar: Pillar;
+}> = ({ title, role, pillar }) => {
     switch (role) {
         case 'inline':
         case 'thumbnail':
         case 'halfWidth':
         case 'supporting':
             return (
-                <h2 className={cx(titleWrapper, basicTitlePadding)}>{title}</h2>
+                <h2 className={cx(titleWrapper(pillar), basicTitlePadding)}>
+                    {title}
+                </h2>
             );
         case 'showcase':
         case 'immersive':
             return (
-                <h2 className={cx(titleWrapper, moreTitlePadding)}>{title}</h2>
+                <h2 className={cx(titleWrapper(pillar), moreTitlePadding)}>
+                    {title}
+                </h2>
             );
     }
 };
@@ -302,7 +314,9 @@ export const ImageComponent = ({
                     src={getFallback(element.imageSources)}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
-                {title && <ImageTitle title={title} role={role} />}
+                {title && (
+                    <ImageTitle title={title} role={role} pillar={pillar} />
+                )}
             </div>
         );
     }
@@ -325,7 +339,9 @@ export const ImageComponent = ({
                     src={getFallback(element.imageSources)}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
-                {title && <ImageTitle title={title} role={role} />}
+                {title && (
+                    <ImageTitle title={title} role={role} pillar={pillar} />
+                )}
             </div>
         );
     }
@@ -386,7 +402,9 @@ export const ImageComponent = ({
                     </Hide>
                 )}
                 {starRating && <PositionStarRating rating={starRating} />}
-                {title && <ImageTitle title={title} role={role} />}
+                {title && (
+                    <ImageTitle title={title} role={role} pillar={pillar} />
+                )}
             </div>
             {isMainMedia ? (
                 <Hide when="below" breakpoint="tablet">
