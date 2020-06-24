@@ -80,9 +80,9 @@ const metaContainer = ({
     designType: DesignType;
 }) => {
     switch (display) {
-        case 'immersive':
-        case 'showcase':
-        case 'standard': {
+        case Display.Immersive:
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'PhotoEssay':
                     return css`
