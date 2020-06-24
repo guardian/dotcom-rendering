@@ -125,8 +125,9 @@ const MemoisedInner = ({
 
                 const { module, meta } = json.data;
 
-                import(/* webpackIgnore: true */ module.url)
-                    .then(bannerModule => {
+                window
+                    .guardianPolyfilledImport(module.url)
+                    .then((bannerModule) => {
                         setBannerProps({
                             ...module.props,
                         });
