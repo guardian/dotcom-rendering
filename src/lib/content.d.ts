@@ -104,6 +104,11 @@ interface GuVideoBlockElement {
     caption: string;
 }
 
+interface HighlightBlockElement {
+    _type: 'model.dotcomrendering.pageElements.HighlightBlockElement';
+    html: string;
+}
+
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
@@ -287,6 +292,7 @@ type CAPIElement =
     | ExplainerAtomBlockElement
     | GuideAtomBlockElement
     | GuVideoBlockElement
+    | HighlightBlockElement
     | ImageBlockElement
     | InstagramBlockElement
     | MapBlockElement

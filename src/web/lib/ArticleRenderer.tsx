@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -67,6 +68,10 @@ export const ArticleRenderer: React.FC<{
                             title={element.title}
                             html={element.body}
                         />
+                    );
+                case 'model.dotcomrendering.pageElements.HighlightBlockElement':
+                    return (
+                        <HighlightBlockComponent key={i} html={element.html} />
                     );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (

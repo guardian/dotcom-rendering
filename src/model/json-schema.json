@@ -63,6 +63,9 @@
                         "$ref": "#/definitions/GuVideoBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/HighlightBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/ImageBlockElement"
                     },
                     {
@@ -313,6 +316,9 @@
                 "isPreview",
                 "isSensitive"
             ]
+        },
+        "matchUrl": {
+            "type": "string"
         }
     },
     "required": [
@@ -747,6 +753,24 @@
             "required": [
                 "mimeType",
                 "url"
+            ]
+        },
+        "HighlightBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.HighlightBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
             ]
         },
         "ImageBlockElement": {
@@ -1500,6 +1524,9 @@
                                 "$ref": "#/definitions/GuVideoBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/HighlightBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/ImageBlockElement"
                             },
                             {
@@ -1797,6 +1824,15 @@
                 "isPhotoEssay": {
                     "type": "boolean"
                 },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -1813,6 +1849,9 @@
                     "type": "string"
                 },
                 "series": {
+                    "type": "string"
+                },
+                "toneIds": {
                     "type": "string"
                 },
                 "contentType": {
