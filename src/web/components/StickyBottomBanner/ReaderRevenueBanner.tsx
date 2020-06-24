@@ -4,7 +4,7 @@ import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
 import {logView} from "@root/node_modules/@guardian/automat-client";
-import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
+import {shouldHideSupportMessaging} from "@root/src/web/lib/contributions";
 import {getCookie} from "@root/src/web/browser/cookie";
 import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
 import {getZIndex} from "@root/src/web/lib/getZIndex";
@@ -50,7 +50,7 @@ const buildPayload = (props: Props) => {
             alreadyVisitedCount: props.alreadyVisitedCount,
             shouldHideReaderRevenue: props.shouldHideReaderRevenue,
             isPaidContent: props.isPaidContent,
-            showSupportMessaging: shouldShowSupportMessaging(),
+            showSupportMessaging: shouldHideSupportMessaging(props.isSignedIn),
             engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
