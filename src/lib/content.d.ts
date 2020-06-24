@@ -2,17 +2,13 @@
 // Elements
 // -------------------------------------
 
-interface AtomEmbedMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+interface AtomEmbedBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedBlockElement';
+    url: string;
     id?: string;
     html?: string;
     css?: string;
     js?: string;
-}
-
-interface AtomEmbedUrlBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
-    url: string;
 }
 
 interface AudioAtomElement {
@@ -272,8 +268,7 @@ interface CalloutBlockElement {
 }
 
 type CAPIElement =
-    | AtomEmbedMarkupBlockElement
-    | AtomEmbedUrlBlockElement
+    | AtomEmbedBlockElement
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement

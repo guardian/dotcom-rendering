@@ -15,10 +15,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/AtomEmbedUrlBlockElement"
+                        "$ref": "#/definitions/AtomEmbedBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioAtomElement"
@@ -313,6 +310,9 @@
                 "isPreview",
                 "isSensitive"
             ]
+        },
+        "matchUrl": {
+            "type": "string"
         }
     },
     "required": [
@@ -362,14 +362,17 @@
         "webURL"
     ],
     "definitions": {
-        "AtomEmbedMarkupBlockElement": {
+        "AtomEmbedBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
                     "enum": [
-                        "model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement"
+                        "model.dotcomrendering.pageElements.AtomEmbedBlockElement"
                     ]
+                },
+                "url": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -381,23 +384,6 @@
                     "type": "string"
                 },
                 "js": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type"
-            ]
-        },
-        "AtomEmbedUrlBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement"
-                    ]
-                },
-                "url": {
                     "type": "string"
                 }
             },
@@ -800,6 +786,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "title": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1452,10 +1441,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/AtomEmbedUrlBlockElement"
+                                "$ref": "#/definitions/AtomEmbedBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioAtomElement"
@@ -1797,6 +1783,15 @@
                 "isPhotoEssay": {
                     "type": "boolean"
                 },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -1813,6 +1808,9 @@
                     "type": "string"
                 },
                 "series": {
+                    "type": "string"
+                },
+                "toneIds": {
                     "type": "string"
                 },
                 "contentType": {

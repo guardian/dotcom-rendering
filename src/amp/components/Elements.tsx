@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
-import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/AtomEmbedUrlBlockComponent';
+import { AtomEmbedBlockComponent } from '@root/src/amp/components/elements/AtomEmbedBlockComponent';
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
@@ -32,21 +31,13 @@ export const Elements = (
     isImmersive: boolean,
     adTargeting?: AdTargeting,
 ): JSX.Element[] => {
-    const cleanedElements = elements.map(element =>
+    const cleanedElements = elements.map((element) =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
     );
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
-            case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                return (
-                    <AtomEmbedMarkupBlockComponent
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-                return <AtomEmbedUrlBlockComponent url={element.url} />;
+            case 'model.dotcomrendering.pageElements.AtomEmbedBlockElement':
+                return <AtomEmbedBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -58,7 +49,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                return <AtomEmbedUrlBlockComponent url={element.url} />;
+                return <AtomEmbedBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -232,5 +223,5 @@ export const Elements = (
         }
     });
 
-    return output.filter(el => el !== null) as JSX.Element[];
+    return output.filter((el) => el !== null) as JSX.Element[];
 };
