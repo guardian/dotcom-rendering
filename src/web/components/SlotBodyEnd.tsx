@@ -89,7 +89,7 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             isSensitive: props.isSensitive,
             tags: props.tags,
-            showSupportMessaging: shouldHideSupportMessaging(props.isSignedIn || false),
+            showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn || false),
             isRecurringContributor: isRecurringContributor(
                 props.isSignedIn || false,
             ),

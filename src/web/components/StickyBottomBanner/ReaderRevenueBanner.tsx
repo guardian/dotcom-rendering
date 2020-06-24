@@ -50,7 +50,7 @@ const buildPayload = (props: Props) => {
             alreadyVisitedCount: props.alreadyVisitedCount,
             shouldHideReaderRevenue: props.shouldHideReaderRevenue,
             isPaidContent: props.isPaidContent,
-            showSupportMessaging: shouldHideSupportMessaging(props.isSignedIn),
+            showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn),
             engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
