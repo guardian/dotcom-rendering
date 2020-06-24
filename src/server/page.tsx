@@ -4,7 +4,7 @@ import React, { ReactNode, FC, ReactElement } from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
-import { CacheProvider } from '@emotion/core';
+import { CacheProvider, css } from '@emotion/core';
 import { JSDOM } from 'jsdom';
 import { Format, Design, Display } from '@guardian/types/Format';
 
@@ -25,6 +25,7 @@ import { pageFonts } from 'styles';
 import { Option, Some, None } from 'types/option';
 import { compose } from 'lib';
 import { csp } from 'server/csp';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Setup ----- //
@@ -104,7 +105,7 @@ const Body: FC<BodyProps> = ({ item, shouldHideAds }: BodyProps) => {
         return <AdvertisementFeature item={item}>{render(item, body)}</AdvertisementFeature>;
     }
 
-    return <p>Content format not implemented yet</p>;
+    return <p css={css`padding: 0 ${remSpace[2]}`}>Content format not implemented yet</p>;
 }
 
 interface ClientJsProps {

@@ -55,6 +55,7 @@ const review: Review = {
 
 const advertisementFeature: Item = {
     design: Design.AdvertisementFeature,
+    logo: new None(),
     ...fields,
 };
 

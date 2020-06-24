@@ -14,7 +14,8 @@ import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard } from 'item';
 import HeaderMedia from 'headerMedia';
-
+import { AdvertisementFeature, getFormat } from 'item';
+import Logo from './logo';
 
 // ----- Styles ----- //
 
@@ -40,7 +41,7 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    item: Standard;
+    item: AdvertisementFeature;
     children: ReactNode[];
 }
 
@@ -59,6 +60,7 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
+                    {item.logo.fmap(props => <Logo logo={props} />).withDefault(<></>)}
                 </section>
             </header>
             <Body className={[articleWidthStyles]}>
