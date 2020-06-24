@@ -1,6 +1,6 @@
 {
     "hooks": {
-        "pre-push": "make validate && yarn run createtoc && yarn run addandcommittoc",
+        "pre-push": "make validate-prepush && yarn run createtoc && yarn run addandcommittoc",
         "post-merge": "./scripts/git-hooks/post-merge"
     }
 }

@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
+import {useHasBeenSeen} from "@root/src/web/lib/useHasBeenSeen";
+import {logView} from "@root/node_modules/@guardian/automat-client";
+import {shouldShowSupportMessaging} from "@root/src/web/lib/contributions";
+import {getCookie} from "@root/src/web/browser/cookie";
+import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
+import {getZIndex} from "@root/src/web/lib/getZIndex";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -13,9 +19,7 @@ const checkForErrors = (response: any) => {
     return response;
 };
 
-const sendOphanEvent = (): void => {
-    // TODO stub
-};
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type Props = {
     isSignedIn?: boolean;
@@ -28,20 +32,32 @@ type Props = {
     isSensitive: boolean;
     tags: TagType[];
     contributionsServiceUrl: string;
+    alreadyVisitedCount: number;
+    engagementBannerLastClosedAt?: string,
 };
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: Props) => {
     return {
         tracking: {
-            // TODO stub
+            ophanPageId: window.guardian.config.ophan.pageViewId,
+            ophanComponentId: 'ACQUISITIONS_ENGAGEMENT_BANNER',
+            platformId: 'GUARDIAN_WEB',
+            clientName: 'dcr',
+            referrerUrl: window.location.origin + window.location.pathname,
         },
         targeting: {
-            ...props,
-            // TODO stub
+            alreadyVisitedCount: props.alreadyVisitedCount,
+            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+            isPaidContent: props.isPaidContent,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
+            mvtId: Number(getCookie('GU_mvt_id')),
+            countryCode: props.countryCode,
         },
     };
 };
+
 
 const MemoisedInner = ({
     isSignedIn,
@@ -54,9 +70,17 @@ const MemoisedInner = ({
     isSensitive,
     tags,
     contributionsServiceUrl,
+    alreadyVisitedCount,
+    engagementBannerLastClosedAt,
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
+    const [bannerMeta, setBannerMeta] = useState<TestMeta>();
+
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        threshold: 0,
+        debounce: true,
+    }) as HasBeenSeen;
 
     useEffect(() => {
         const bannerPayload = buildPayload({
@@ -70,6 +94,8 @@ const MemoisedInner = ({
             tags,
             contributionsServiceUrl,
             isSensitive,
+            alreadyVisitedCount,
+            engagementBannerLastClosedAt,
         });
 
         window.guardian.automat = {
@@ -97,15 +123,16 @@ const MemoisedInner = ({
                     return;
                 }
 
-                const { module } = json.data;
+                const { module, meta } = json.data;
 
                 import(/* webpackIgnore: true */ module.url)
                     .then(bannerModule => {
                         setBannerProps({
                             ...module.props,
                         });
-                        setBanner(() => bannerModule.Banner); // useState requires functions to be wrapped
-                        sendOphanEvent();
+                        setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
+                        setBannerMeta(meta);
+                        sendOphanContributionsComponentEvent('INSERT', meta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`banner - error is: ${error}`));
@@ -113,10 +140,21 @@ const MemoisedInner = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Should only run once
+    useEffect(() => {
+        if (hasBeenSeen && bannerMeta) {
+            logView(bannerMeta.abTestName);
+            sendOphanContributionsComponentEvent('VIEW', bannerMeta, 'ACQUISITIONS_ENGAGEMENT_BANNER');
+        }
+    }, [hasBeenSeen, bannerMeta]);
+
     if (Banner) {
         return (
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            <Banner {...bannerProps} />
+            // The css here is necessary to put the container div in view, so that we can track the view
+            <div ref={setNode} className={emotion.css`position: fixed; bottom: -1px; width: 100%; ${getZIndex('banner')}`}>
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Banner {...bannerProps} />
+            </div>
         );
     }
 
@@ -134,6 +172,8 @@ export const ReaderRevenueBanner = ({
     isSensitive,
     tags,
     contributionsServiceUrl,
+    alreadyVisitedCount,
+    engagementBannerLastClosedAt,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -153,6 +193,8 @@ export const ReaderRevenueBanner = ({
             isSensitive={isSensitive}
             tags={tags}
             contributionsServiceUrl={contributionsServiceUrl}
+            alreadyVisitedCount={alreadyVisitedCount}
+            engagementBannerLastClosedAt={engagementBannerLastClosedAt}
         />
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
-import { ConsentManagementPlatform as ConsentManagementPlatform_ } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
+import { ConsentManagementPlatform as ConsentManagementPlatform_ } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
 
 import { CMP } from './CMP';
 
@@ -13,7 +13,7 @@ jest.mock('@guardian/consent-management-platform', () => ({
 }));
 
 jest.mock(
-    '@guardian/consent-management-platform/lib/ConsentManagementPlatform',
+    '@guardian/consent-management-platform/dist/ConsentManagementPlatform',
 );
 
 describe('CMP', () => {

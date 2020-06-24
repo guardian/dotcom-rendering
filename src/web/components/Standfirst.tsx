@@ -51,20 +51,46 @@ const nestedStyles = css`
 const standfirstStyles = (designType: DesignType, display: Display) => {
     switch (display) {
         case Display.Immersive:
-            return css`
-                ${headline.xsmall({
-                    fontWeight: 'light',
-                })};
-                padding-top: ${space[4]}px;
+            switch (designType) {
+                case 'PhotoEssay':
+                    return css`
+                        ${headline.xxxsmall({})};
+                        margin-top: ${space[2]}px;
+                        margin-bottom: ${space[3]}px;
+                        line-height: 22px;
+                    `;
+                case 'Comment':
+                case 'GuardianView':
+                case 'Feature':
+                case 'Recipe':
+                case 'Review':
+                case 'Immersive':
+                case 'Media':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'AdvertisementFeature':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'Article':
+                case 'Live':
+                case 'Analysis':
+                case 'Interview':
+                default:
+                    return css`
+                        ${headline.xsmall({
+                            fontWeight: 'light',
+                        })};
+                        padding-top: ${space[4]}px;
 
-                max-width: 280px;
-                ${from.tablet} {
-                    max-width: 400px;
-                }
-                ${from.tablet} {
-                    max-width: 460px;
-                }
-            `;
+                        max-width: 280px;
+                        ${from.tablet} {
+                            max-width: 400px;
+                        }
+                        ${from.tablet} {
+                            max-width: 460px;
+                        }
+                    `;
+            }
 
         case Display.Showcase:
         case Display.Standard: {

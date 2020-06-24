@@ -10,8 +10,14 @@ type Props = {
     ophanComponentName: OphanComponentName;
 };
 
+type OnwardsResponse = {
+    trails: [];
+    heading: string;
+    displayname: string;
+};
+
 export const OnwardsData = ({ url, limit, ophanComponentName }: Props) => {
-    const { data } = useApi(url);
+    const { data } = useApi<OnwardsResponse>(url);
     const onwardSections: OnwardsType[] = [];
     if (data && data.trails) {
         onwardSections.push({

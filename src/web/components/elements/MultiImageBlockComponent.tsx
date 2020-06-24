@@ -118,6 +118,8 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -147,6 +149,9 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
+
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -190,6 +195,9 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
+
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -243,6 +251,8 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
                         img {
                             object-fit: cover;
                             width: 100%;
