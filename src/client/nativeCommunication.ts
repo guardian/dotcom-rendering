@@ -48,7 +48,6 @@ function insertAds(): void {
         commercialClient.insertAdverts(adSlots);
         const targetNode = document.querySelector('html') as Node;
         const config: MutationObserverInit = {
-            attributes: true,
             childList: true,
             subtree: true,
             attributeFilter: ["style"]
