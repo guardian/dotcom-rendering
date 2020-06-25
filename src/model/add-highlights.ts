@@ -3,7 +3,6 @@ import { JSDOM } from 'jsdom';
 const isHighlight = (element: BlockquoteBlockElement): boolean => {
     // A highlight blockquote: <blockquote><p>Blah</p></blockquote>
     // A quoted blockquote: <blockquote class="quoted"><p>Blah</p></blockquote>
-    console.log(element.html)
     const frag = JSDOM.fragment(element.html);
     if (!frag) return false; // Not anything
     const isQuoted = !!frag.querySelector('.quoted');
