@@ -13,7 +13,7 @@ type Props = {
     pillar: Pillar;
 };
 
-const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Row = ({ children }: { children: React.ReactNode }) => (
     <div
         className={css`
             display: flex;
@@ -24,19 +24,12 @@ const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     </div>
 );
 
-const blockquoteStyles = css`
-    margin-bottom: 16px;
-    ${body.medium()};
-    font-style: italic;
-    color: ${neutral[46]};
-`;
-
 export const BlockquoteBlockComponent: React.FC<Props> = ({
     html,
     pillar,
 }: Props) => {
     const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
-        prefix: '<blockquote class="quted">',
+        prefix: '<blockquote>',
         suffix: '</blockquote>',
         html,
     });
@@ -47,7 +40,12 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
             <RewrappedComponent
                 isUnwrapped={isUnwrapped}
                 html={unwrappedHtml}
-                elCss={blockquoteStyles}
+                elCss={css`
+                    margin-bottom: 16px;
+                    ${body.medium()};
+                    font-style: italic;
+                    color: ${neutral[46]};
+                `}
                 tagName="blockquote"
             />
         </Row>
