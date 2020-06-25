@@ -5,11 +5,12 @@ import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'format';
-import { Option } from 'types/option';
+import { Option, withDefault, map } from 'types/option';
 import { neutral, palette } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillarStyles';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
+import { pipe2 } from 'lib';
 
 
 // ----- Component ----- //
@@ -104,7 +105,7 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 }
 
 const getProfileLink = (node: Node): string => {
-    const href = getHref(node).withDefault('');
+    const href = withDefault('')(getHref(node));
     return href.startsWith('profile/')
         ? `https://www.theguardian.com/${href}`
         : href
@@ -127,11 +128,15 @@ const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
     Array.from(byline.childNodes).map(toReact(format));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
-    bylineHtml.fmap<ReactElement | null>(byline =>
-        <address css={getStyles(format)}>
-            {renderText(format, byline)}
-        </address>
-    ).withDefault(null);
+    pipe2(
+        bylineHtml,
+        map(byline =>
+            <address css={getStyles(format)}>
+                {renderText(format, byline)}
+            </address>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 
 // ----- Exports ----- //

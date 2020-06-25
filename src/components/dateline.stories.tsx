@@ -3,14 +3,14 @@
 import React, { FC } from 'react';
 import { date, withKnobs } from '@storybook/addon-knobs';
 
-import { Some } from 'types/option';
+import { some } from 'types/option';
 import Dateline from './dateline';
 
 
 // ----- Stories ----- //
 
 const Default: FC = () =>
-    <Dateline date={new Some(new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))))} />
+    <Dateline date={some(new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))))} />
 
 
 // ----- Exports ----- //

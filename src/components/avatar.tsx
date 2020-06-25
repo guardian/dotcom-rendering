@@ -8,6 +8,8 @@ import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
 import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';
+import { map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 // ----- Setup ----- //
@@ -43,14 +45,18 @@ const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
         return null;
     }
 
-    return contributor.image.fmap<ReactElement | null>(image =>
-        <Img
-            image={image}
-            sizes={dimensions}
-            className={getStyles(format)}
-            format={format}
-        />
-    ).withDefault(null);
+    return pipe2(
+        contributor.image,
+        map(image =>
+            <Img
+                image={image}
+                sizes={dimensions}
+                className={getStyles(format)}
+                format={format}
+            />
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 }
 
 

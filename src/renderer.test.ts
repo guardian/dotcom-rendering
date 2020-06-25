@@ -6,7 +6,7 @@ import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
-import { None, Some } from 'types/option';
+import { none, some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Format, Design, Display } from '@guardian/types/Format';
 
@@ -33,26 +33,26 @@ const imageElement = (): BodyElement =>
         src: 'https://gu.com/img.png',
         srcset: '',
         dpr2Srcset: '',
-        alt: new Some("alt tag"),
-        caption: new Some(JSDOM.fragment('this caption contains <em>html</em>')),
-        nativeCaption: new Some('caption'),
-        credit: new Some('credit'),
+        alt: some("alt tag"),
+        caption: some(JSDOM.fragment('this caption contains <em>html</em>')),
+        nativeCaption: some('caption'),
+        credit: some('credit'),
         width: 500,
         height: 500,
-        role: new None(),
+        role: none,
     });
 
 const imageElementWithRole = () =>
     ({
         ...imageElement(),
-        role: new Some(Role.Thumbnail)
+        role: some(Role.Thumbnail)
     })
 
 const pullquoteElement = (): BodyElement =>
     ({
         kind: ElementKind.Pullquote,
         quote: "quote",
-        attribution: new None()
+        attribution: none,
     })
 
 
@@ -60,7 +60,7 @@ const pullquoteWithAttributionElement = (): BodyElement =>
     ({
         kind: ElementKind.Pullquote,
         quote: "quote",
-        attribution: new Some('attribution')
+        attribution: some('attribution')
     })
 
 const richLinkElement = (): BodyElement =>
@@ -92,7 +92,7 @@ const embedElement = (): BodyElement =>
     ({
         kind: ElementKind.Embed,
         html: '<section>Embed</section>',
-        alt: new None
+        alt: none,
     })
 
 const videoElement = (): BodyElement =>
@@ -116,7 +116,7 @@ const atomElement = (): BodyElement =>
         kind: ElementKind.InteractiveAtom,
         css: "main { background: yellow; }",
         html: "<main>Some content</main>",
-        js: new Some("console.log('init')"),
+        js: some("console.log('init')"),
     })
 
 const render = (element: BodyElement): ReactNode[] =>

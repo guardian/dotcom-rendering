@@ -8,8 +8,9 @@ import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { Option } from 'types/option';
+import { Option, withDefault, map } from 'types/option';
 import { remSpace } from '@guardian/src-foundations';
+import { pipe2 } from 'lib';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${neutral[100]};
@@ -74,14 +75,17 @@ const LiveblogBlock = ({
     firstPublishedDate,
     lastModifiedDate,
 }: LiveblogBlockProps): JSX.Element => {
-    const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => date
-        .fmap<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
-        .withDefault(null)
+    const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
+        date,
+        map(date => <time>{makeRelativeDate(date)}</time>),
+        withDefault<JSX.Element | null>(null),
+    );
 
-    const relativeLastModified: JSX.Element | null = lastModifiedDate
-        .fmap<JSX.Element | null>(date => <time>Last updated: {formatDate(date)}</time>)
-        .withDefault(null)
-
+    const relativeLastModified: JSX.Element | null = pipe2(
+        lastModifiedDate,
+        map(date => <time>Last updated: {formatDate(date)}</time>),
+        withDefault<JSX.Element | null>(null),
+    );
 
     const [dateJsx, setDateJsx] = useState(relativeFirstPublished(firstPublishedDate));
 

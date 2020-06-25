@@ -6,7 +6,8 @@ import { Dpr, parseImage, Image, srcset } from 'image';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { None } from 'types/option';
+import { none, withDefault } from 'types/option';
+import { pipe3 } from 'lib';
 
 
 // ----- Mocks ----- //
@@ -35,13 +36,13 @@ const image: Image = {
     src: '',
     srcset: '',
     dpr2Srcset: '',
-    alt: new None(),
+    alt: none,
     width: 0,
     height: 0,
-    caption: new None(),
-    credit: new None(),
-    nativeCaption: new None(),
-    role: new None(),
+    caption: none,
+    credit: none,
+    nativeCaption: none,
+    role: none,
 };
 
 
@@ -54,7 +55,12 @@ describe('image', () => {
             salt: 'mockSalt',
         })(imageBlock);
 
-        expect(parsed.withDefault(image).credit.withDefault('')).toBe('Credit');
+        expect(pipe3(
+            parsed,
+            withDefault(image),
+            (image: Image) => image.credit,
+            withDefault(''),
+        )).toBe('Credit');
     });
 
     test('does not include credit when displayCredit is false', () => {
@@ -69,7 +75,12 @@ describe('image', () => {
             }
         });
 
-        expect(parsed.withDefault(image).credit.withDefault('')).toBe('');
+        expect(pipe3(
+            parsed,
+            withDefault(image),
+            (image: Image) => image.credit,
+            withDefault(''),
+        )).toBe('');
     });
 
     test('show lower quality when DPR is 2', () => {

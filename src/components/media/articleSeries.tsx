@@ -4,7 +4,8 @@ import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => css`    
     a {
@@ -20,11 +21,14 @@ interface ArticleSeriesProps {
 }
 
 const ArticleSeries = (props: ArticleSeriesProps): JSX.Element | null =>
-
-    props.series.fmap<ReactElement | null>(series =>
-        <nav css={ArticleSeriesStyles(getPillarStyles(props.pillar))}>
-            <a href={series.webUrl}>{series.webTitle}</a>
-        </nav>
-    ).withDefault(null);
+    pipe2(
+        props.series,
+        map(series =>
+            <nav css={ArticleSeriesStyles(getPillarStyles(props.pillar))}>
+                <a href={series.webUrl}>{series.webTitle}</a>
+            </nav>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 export default ArticleSeries;

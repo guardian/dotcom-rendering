@@ -6,7 +6,8 @@ import { Design } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { partition, Result } from 'types/result';
 import { Item } from 'item';
-import { compose } from 'lib';
+import { compose, pipe2 } from 'lib';
+import { map, withDefault } from 'types/option';
 
 
 // ----- Types ----- //
@@ -27,7 +28,7 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
         if (elem.kind === ElementKind.InteractiveAtom) {
             return {
                 styles: [ ...styles, elem.css ],
-                scripts: elem.js.fmap(js => [ ...scripts, js ]).withDefault(scripts),
+                scripts: pipe2(elem.js, map(js => [ ...scripts, js ]), withDefault(scripts)),
             };
         }
 

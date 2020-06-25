@@ -6,12 +6,13 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import {
     Option,
     fromNullable,
-    toSerialisable as optionToSerialisable,
+    map,
+    withDefault,
 } from 'types/option';
 import { Result, Err, Ok } from 'types/result';
 import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
-import { isElement } from 'lib';
+import { isElement, pipe2 } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
@@ -127,24 +128,12 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.Text:
             return { ...elem, doc: serialiseFragment(elem.doc) };
         case ElementKind.Image:
-            return {
-                ...elem,
-                alt: optionToSerialisable(elem.alt),
-                caption: optionToSerialisable(elem.caption.fmap(serialiseFragment)),
-                credit: optionToSerialisable(elem.credit),
-                nativeCaption: optionToSerialisable(elem.nativeCaption),
-                role: optionToSerialisable(elem.role),
-            };
-        case ElementKind.Pullquote:
-            return { ...elem, attribution: optionToSerialisable(elem.attribution) };
+            return { ...elem, caption: map(serialiseFragment)(elem.caption) };
         case ElementKind.Tweet:
             return { ...elem, content: serialiseNodes(elem.content) };
         case ElementKind.InteractiveAtom:
-            return { ...elem, js: optionToSerialisable(elem.js) };
         case ElementKind.ExplainerAtom:
             return { ...elem };
-        case ElementKind.Embed:
-            return { ...elem, alt: optionToSerialisable(elem.alt) };
         default:
             return elem;
     }
@@ -158,22 +147,9 @@ const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
         case ElementKind.Text:
             return { ...elem, doc: docParser(elem.doc) };
         case ElementKind.Image:
-            return {
-                ...elem,
-                alt: fromNullable(elem.alt),
-                caption: fromNullable(elem.caption).fmap(docParser),
-                credit: fromNullable(elem.credit),
-                nativeCaption: fromNullable(elem.nativeCaption),
-                role: fromNullable(elem.role),
-            };
-        case ElementKind.Pullquote:
-            return { ...elem, attribution: fromNullable(elem.attribution) };
+            return { ...elem, caption: map(docParser)(elem.caption) };
         case ElementKind.Tweet:
             return { ...elem, content: docParser(elem.content) };
-        case ElementKind.InteractiveAtom:
-            return { ...elem, js: fromNullable(elem.js) };
-        case ElementKind.Embed:
-            return { ...elem, alt: fromNullable(elem.alt) };
         default:
             return elem;
     }
@@ -221,12 +197,14 @@ const parse = (context: Context, atoms?: Atoms) =>
         }
 
         case ElementType.IMAGE:
-            return parseImage(context)(element)
-                .fmap<Result<string, Image>>(image => new Ok({
+            return pipe2(
+                parseImage(context)(element),
+                map<ImageData, Result<string, Image>>(image => new Ok({
                     kind: ElementKind.Image,
                     ...image
-                }))
-                .withDefault(new Err('I couldn\'t find a master asset'));
+                })),
+                withDefault<Result<string, Image>>(new Err('I couldn\'t find a master asset')),
+            );
 
         case ElementType.PULLQUOTE: {
             const { html: quote, attribution } = element.pullquoteTypeData ?? {};

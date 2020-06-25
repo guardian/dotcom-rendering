@@ -11,6 +11,8 @@ import { Format, Display } from '@guardian/types/Format';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
 import { Item } from 'item';
+import { pipe2 } from 'lib';
+import { map, withDefault } from 'types/option';
 
 
 // ----- Component ----- //
@@ -71,13 +73,17 @@ const getStyles = ({ display, pillar }: Format): SerializedStyles => {
 }
 
 const Series: FC<Props> = ({ item }: Props) =>
-    item.series.fmap<ReactElement | null>(series =>
-        <nav css={getStyles(item)}>
-            <a css={getLinkStyles(item)} href={series.webUrl}>
-                {series.webTitle}
-            </a>
-        </nav>
-    ).withDefault(null);
+    pipe2(
+        item.series,
+        map(series =>
+            <nav css={getStyles(item)}>
+                <a css={getLinkStyles(item)} href={series.webUrl}>
+                    {series.webTitle}
+                </a>
+            </nav>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 
 // ----- Exports ----- //

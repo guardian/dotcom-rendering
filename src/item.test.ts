@@ -7,11 +7,12 @@ import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
-import { ElementKind, Audio, Video } from 'bodyElement';
+import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
 import Int64 from 'node-int64';
+import { withDefault } from 'types/option';
 
 const articleContent = {
     id: "",
@@ -190,7 +191,7 @@ const articleContentWithImageWithoutFile = articleContentWith({
 const f = fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' });
 
 const getFirstBody = (item: Review | Standard) =>
-    item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' });
+    withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' })(item.body[0].toOption());
 
 
 describe('fromCapi returns correct Item', () => {
@@ -343,7 +344,9 @@ describe('interactive elements', () => {
             }
         }
         const item = f(articleContentWith(interactiveElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
+        const element = withDefault<BodyElement>
+            ({ kind: ElementKind.RichLink, url: '', linkText: '' })
+            (item.body[0].toOption());
         expect(element.kind).toBe(ElementKind.Interactive);
     })
 
@@ -356,7 +359,9 @@ describe('interactive elements', () => {
             }
         }
         const item = f(articleContentWith(interactiveElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
+        const element = withDefault<BodyElement>
+            ({ kind: ElementKind.RichLink, url: '', linkText: '' })
+            (item.body[0].toOption());
         expect(element.kind).toBe(ElementKind.RichLink);
     })
 });
