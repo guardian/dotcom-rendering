@@ -52,7 +52,7 @@
         "@typescript-eslint/eslint-plugin-tslint": "^2.7.0",
         "ajv": "^6.10.1",
         "aws-sdk": "^2.340.0",
-        "chalk": "^2.4.0",
+        "chalk": "^4.1.0",
         "columnify": "^1.5.4",
         "compose-function": "^3.0.3",
         "compression": "^1.7.3",
