@@ -60,7 +60,7 @@ function insertAds(): void {
             }
         };
 
-        window.addEventListener('orientationchange', callback);
+        window.addEventListener('resize', callback);
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
 
