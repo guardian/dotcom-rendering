@@ -41,6 +41,7 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 

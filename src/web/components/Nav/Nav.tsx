@@ -14,6 +14,7 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
+import { Display } from '@root/src/lib/display';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
@@ -160,13 +161,13 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 className={cx(
                     clearFixStyle,
                     rowStyles,
-                    display === 'immersive' && minHeight,
+                    display === Display.Immersive && minHeight,
                 )}
                 role="navigation"
                 aria-label="Guardian sections"
                 data-component="nav2"
             >
-                {display === 'immersive' && (
+                {display === Display.Immersive && (
                     <Hide when="above" breakpoint="tablet">
                         <ThemeProvider theme={buttonReaderRevenueBrand}>
                             <PositionButton>
@@ -215,7 +216,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 />
                 <ExpandedMenu nav={nav} display={display} />
             </nav>
-            {display === 'immersive' && (
+            {display === Display.Immersive && (
                 <PositionRoundel>
                     <GuardianRoundel />
                 </PositionRoundel>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -31,7 +32,7 @@ export const smallAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -52,7 +53,7 @@ export const largeAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -73,7 +74,7 @@ export const verticalAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>

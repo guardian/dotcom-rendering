@@ -7,6 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { Caption } from '@frontend/web/components/Caption';
 import { GridItem } from '@root/src/web/components/GridItem';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     designType: DesignType;
@@ -127,7 +128,7 @@ export const MultiImageBlockComponent = ({
                     `}
                 >
                     <ImageComponent
-                        display="standard"
+                        display={Display.Standard}
                         designType={designType}
                         element={images[0]}
                         pillar={pillar}
@@ -136,7 +137,7 @@ export const MultiImageBlockComponent = ({
                     />
                     {caption && (
                         <Caption
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             captionText={caption}
                             pillar={pillar}
@@ -161,7 +162,7 @@ export const MultiImageBlockComponent = ({
                     <SideBySideGrid>
                         <GridItem area="first">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
@@ -171,7 +172,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="second">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
@@ -182,7 +183,7 @@ export const MultiImageBlockComponent = ({
                     </SideBySideGrid>
                     {caption && (
                         <Caption
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             captionText={caption}
                             pillar={pillar}
@@ -207,7 +208,7 @@ export const MultiImageBlockComponent = ({
                     <OneAboveTwoGrid>
                         <GridItem area="first">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
@@ -217,7 +218,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="second">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
@@ -227,7 +228,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="third">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[2]}
                                 pillar={pillar}
@@ -238,7 +239,7 @@ export const MultiImageBlockComponent = ({
                     </OneAboveTwoGrid>
                     {caption && (
                         <Caption
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             captionText={caption}
                             pillar={pillar}
@@ -262,7 +263,7 @@ export const MultiImageBlockComponent = ({
                     <GridOfFour>
                         <GridItem area="first">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[0]}
                                 pillar={pillar}
@@ -272,7 +273,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="second">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[1]}
                                 pillar={pillar}
@@ -282,7 +283,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="third">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[2]}
                                 pillar={pillar}
@@ -292,7 +293,7 @@ export const MultiImageBlockComponent = ({
                         </GridItem>
                         <GridItem area="forth">
                             <ImageComponent
-                                display="standard"
+                                display={Display.Standard}
                                 designType="Article"
                                 element={images[3]}
                                 pillar={pillar}
@@ -303,7 +304,7 @@ export const MultiImageBlockComponent = ({
                     </GridOfFour>
                     {caption && (
                         <Caption
-                            display="standard"
+                            display={Display.Standard}
                             designType={designType}
                             captionText={caption}
                             pillar={pillar}

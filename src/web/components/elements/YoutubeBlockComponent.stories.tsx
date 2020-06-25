@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -44,7 +45,7 @@ export const noOverlay = () => {
                 nisi ut aliquip ex ea commodo consequat.{' '}
             </p>
             <YoutubeBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{
                     mediaTitle:
@@ -80,7 +81,7 @@ export const Vertical = () => {
                 nisi ut aliquip ex ea commodo consequat.{' '}
             </p>
             <YoutubeBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{
                     mediaTitle:

@@ -10,6 +10,7 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     html: string;
@@ -58,7 +59,7 @@ const shouldShowDropCap = ({
     // Otherwise, we're only interested in marking the first para as a drop cap
     if (!isFirstParagraph) return false;
     // If immersive, we show drop caps for the first para
-    if (display === 'immersive') return true;
+    if (display === Display.Immersive) return true;
     // The first para has a drop cap for these design types
     switch (designType) {
         case 'Feature':

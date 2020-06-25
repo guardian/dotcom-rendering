@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
 export default {
@@ -31,7 +32,7 @@ export const standardAspectRatio = () => {
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>

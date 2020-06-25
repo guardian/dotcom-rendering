@@ -6,6 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     pillar: Pillar;
@@ -30,7 +31,7 @@ const bodyStyle = (display: Display) => css`
     }
 
     h2 {
-        ${display === 'immersive'
+        ${display === Display.Immersive
             ? headline.medium({ fontWeight: 'light' })
             : headline.xxsmall({ fontWeight: 'bold' })};
     }
