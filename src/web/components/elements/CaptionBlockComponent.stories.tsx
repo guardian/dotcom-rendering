@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -53,7 +54,7 @@ export const StandardArticle = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 captionText="Caption text"
                 pillar="news"
@@ -69,7 +70,7 @@ export const PhotoEssay = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="immersive"
+                display={Display.Immersive}
                 designType="PhotoEssay"
                 captionText="Caption text"
                 pillar="lifestyle"
@@ -90,7 +91,7 @@ export const Padded = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Analysis"
                 captionText="Caption text"
                 pillar="culture"
@@ -111,7 +112,7 @@ export const WidthLimited = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Review"
                 captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
                 pillar="culture"
@@ -132,7 +133,7 @@ export const Credited = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="MatchReport"
                 captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
                 pillar="culture"
@@ -153,7 +154,7 @@ export const Overlayed = () => {
     return (
         <Container>
             <CaptionBlockComponent
-                display="showcase"
+                display={Display.Showcase}
                 designType="Comment"
                 captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
                 pillar="sport"
