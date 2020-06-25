@@ -69,8 +69,8 @@ We use [storybook to generate component variations and 'layouts'](https://5dfcbf
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
 
--   DesignTypes
 -   DecideLayout
+-   Design and Display Types use the [Switch Pattern](docs/contributing/switch-on-display-design.md)
 -   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
 -   Dynamic imports
 -   [EnhanceCAPI](docs/contributing/enhance-capi.md)
