@@ -11,9 +11,10 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, wideColumnWidth } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog, getFormat } from 'item';
+import { remSpace } from '@guardian/src-foundations';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -36,6 +37,12 @@ const headerImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         padding-left: ${wideColumnWidth}px;
     }
 `;
+
+const tagStyles = css`
+    ${until.wide} {
+        margin: 0 ${remSpace[2]};
+    }
+`
 
 interface LiveblogArticleProps {
     item: Liveblog;
@@ -65,7 +72,9 @@ const LiveblogArticle = ({ item }: LiveblogArticleProps): JSX.Element => {
                         totalBodyBlocks={item.totalBodyBlocks}
                     />
                 </article>
-                <Tags tags={item.tags} background={neutral[93]} />
+                <div css={tagStyles}>
+                    <Tags tags={item.tags} background={neutral[93]} />
+                </div>
             </div>
         </main>
     );
