@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AtomEmbedBlockComponent } from '@root/src/amp/components/elements/AtomEmbedBlockComponent';
+import { InteractiveAtomBlockComponent } from '@root/src/amp/components/elements/InteractiveAtomBlockComponent';
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
@@ -36,8 +36,8 @@ export const Elements = (
     );
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
-            case 'model.dotcomrendering.pageElements.AtomEmbedBlockElement':
-                return <AtomEmbedBlockComponent url={element.url} />;
+            case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -49,7 +49,7 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                return <AtomEmbedBlockComponent url={element.url} />;
+                return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

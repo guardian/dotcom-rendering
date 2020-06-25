@@ -2,8 +2,8 @@
 // Elements
 // -------------------------------------
 
-interface AtomEmbedBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedBlockElement';
+interface InteractiveAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
     url: string;
     id?: string;
     html?: string;
@@ -268,7 +268,7 @@ interface CalloutBlockElement {
 }
 
 type CAPIElement =
-    | AtomEmbedBlockElement
+    | InteractiveAtomBlockElement
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement

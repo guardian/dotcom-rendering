@@ -159,7 +159,7 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.AtomEmbedBlockElement':
+                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
