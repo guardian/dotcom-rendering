@@ -3,7 +3,8 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Format } from '@guardian/types/Format';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 export interface InteractiveAtomProps {
@@ -27,9 +28,11 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps):
     const { html, styles, js, format } = props;
     const pillarStyles = getPillarStyles(format.pillar);
     const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
-    const script = js.fmap<ReactElement | null>(jsString =>
-        h('script', { dangerouslySetInnerHTML: { __html: jsString } }),
-    ).withDefault(null);
+    const script = pipe2(
+        js,
+        map(jsString => h('script', { dangerouslySetInnerHTML: { __html: jsString } })),
+        withDefault<ReactElement | null>(null),
+    );
     const markup = styledH('figure', { css: InteractiveAtomStyles(pillarStyles), dangerouslySetInnerHTML: { __html: html } });
 
     return <>

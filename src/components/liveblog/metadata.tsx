@@ -11,6 +11,8 @@ import { CommentCount } from './commentCount';
 import { Liveblog, getFormat } from 'item';
 import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
+import { pipe2 } from 'lib';
+import { map, withDefault } from 'types/option';
 
 const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -77,9 +79,11 @@ interface Props {
 const Metadata = ({ item }: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(item.pillar);
 
-    const byline = item.bylineHtml.fmap<ReactNode>(html =>
-        <address>{ renderText(html, getFormat(item)) }</address>
-    ).withDefault(null);
+    const byline = pipe2(
+        item.bylineHtml,
+        map(html => <address>{ renderText(html, getFormat(item)) }</address>),
+        withDefault<ReactNode>(null),
+    );
 
     return (
         <div css={[styles(pillarStyles)]}>

@@ -8,13 +8,14 @@ import { Element } from '@guardian/content-api-models/v1/element';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate, paidContentLogo, Logo, articleMainMedia } from 'capi';
-import { Option, fromNullable } from 'types/option';
+import { Option, fromNullable, map } from 'types/option';
 import { Format, Pillar, Design, Display } from 'format';
 import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
 import { MainMedia } from 'headerMedia';
+import { pipe2 } from 'lib';
 
 // ----- Item Type ----- //
 
@@ -132,9 +133,9 @@ const itemFields = (context: Context, content: Content): ItemFields =>
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
-        standfirst: fromNullable(content?.fields?.standfirst).fmap(context.docParser),
+        standfirst: pipe2(content?.fields?.standfirst, fromNullable, map(context.docParser)),
         byline: content?.fields?.byline ?? "",
-        bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(context.docParser),
+        bylineHtml: pipe2(content?.fields?.bylineHtml, fromNullable, map(context.docParser)),
         publishDate: maybeCapiDate(content.webPublicationDate),
         mainMedia: articleMainMedia(content, context),
         contributors: parseContributors(context.salt, content),

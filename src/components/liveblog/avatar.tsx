@@ -4,6 +4,8 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
+import { map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 // ----- Styles ----- //
@@ -42,16 +44,20 @@ function Avatar({ contributors, bgColour }: AvatarProps): JSX.Element | null {
         return null;
     }
 
-    return contributor.image.fmap<ReactElement | null>(image =>
-        <div css={AvatarStyles(bgColour)}>
-            <img
-                srcSet={image.srcset}
-                src={image.src}
-                alt={contributor.name}
-                sizes={imageWidth}
-            />
-        </div>
-    ).withDefault(null);
+    return pipe2(
+        contributor.image,
+        map(image =>
+            <div css={AvatarStyles(bgColour)}>
+                <img
+                    srcSet={image.srcset}
+                    src={image.src}
+                    alt={contributor.name}
+                    sizes={imageWidth}
+                />
+            </div>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 }
 
 

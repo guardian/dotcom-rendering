@@ -6,9 +6,9 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
+import Img from 'components/img';
 import { wideContentWidth } from 'styles';
 import { Image } from 'image';
-import Img from 'components/img';
 import { Format, Display, Design } from 'format';
 
 
@@ -125,7 +125,6 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) =>
         />
         <Caption format={format} image={image} />
     </figure>
-
 
 // ----- Exports ----- //
 

@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
-import { Option, fromNullable, None } from 'types/option';
+import { Option, fromNullable, none, map } from 'types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContributors } from 'capi';
 import { srcsetWithWidths, src, Dpr, Image } from 'image';
+import { pipe2 } from 'lib';
 
 
 // ------ Types ----- //
@@ -28,18 +29,22 @@ const parseContributors = (salt: string, content: Content): Contributor[] =>
         id: contributor.id,
         apiUrl: contributor.apiUrl,
         name: contributor.webTitle,
-        image: fromNullable(contributor.bylineLargeImageUrl).fmap(url => ({
-            srcset: contributorSrcset(url, salt, Dpr.One),
-            src: src(salt, url, 64, Dpr.One),
-            dpr2Srcset: contributorSrcset(url, salt, Dpr.Two),
-            height: 192,
-            width: 192,
-            credit: new None(),
-            caption: new None(),
-            alt: new None(),
-            role: new None(),
-            nativeCaption: new None(),
-        })),
+        image: pipe2(
+            contributor.bylineLargeImageUrl,
+            fromNullable,
+            map(url => ({
+                srcset: contributorSrcset(url, salt, Dpr.One),
+                src: src(salt, url, 64, Dpr.One),
+                dpr2Srcset: contributorSrcset(url, salt, Dpr.Two),
+                height: 192,
+                width: 192,
+                credit: none,
+                caption: none,
+                alt: none,
+                role: none,
+                nativeCaption: none,
+            })),
+        ),
     }));
 
 

@@ -20,6 +20,7 @@ import HeaderMedia from 'headerMedia';
 
 const Styles = css`
     background: ${background.inverse};
+    height: 100vh;
 `;
 
 const BorderStyles = css`

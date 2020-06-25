@@ -8,6 +8,7 @@ import setup from 'client/setup';
 import { fromSerialisable } from 'liveBlock';
 import { parse } from 'client/parser';
 import LiveblogBody from 'components/liveblog/body';
+import { withDefault } from 'types/option';
 
 
 // ----- Setup ----- //
@@ -24,9 +25,7 @@ const format: Format = {
 // ----- Functions ----- //
 
 const docParser = (html: string): DocumentFragment =>
-    parse(domParser)(html)
-        .toOption()
-        .withDefault(new DocumentFragment());
+    withDefault(new DocumentFragment())(parse(domParser)(html).toOption());
 
 const deserialise = fromSerialisable(docParser);
 

@@ -5,7 +5,8 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 const captionId = 'header-image-caption';
 
@@ -79,15 +80,19 @@ interface Props {
 	credit: Option<string>;
 }
 
-const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) => 
-	caption.fmap<ReactElement | null>(cap =>
-		<figcaption css={HeaderImageCaptionStyles}>
-			<details>
-				<summary><span>Click to see figure caption</span></summary>
-				<span id={captionId}>{cap} {credit.withDefault('')}</span>
-			</details>
-		</figcaption>
-	).withDefault(null);
+const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
+	pipe2(
+		caption,
+		map(cap =>
+			<figcaption css={HeaderImageCaptionStyles}>
+				<details>
+					<summary><span>Click to see figure caption</span></summary>
+					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
+				</details>
+			</figcaption>
+		),
+		withDefault<ReactElement | null>(null),
+	);
 
 export default HeaderImageCaption;
 

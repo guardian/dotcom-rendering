@@ -15,6 +15,8 @@ import { Keyline } from 'components/shared/keyline';
 import HeaderMedia from 'headerMedia';
 import { AdvertisementFeature } from 'item';
 import Logo from './logo';
+import { withDefault, map } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 // ----- Styles ----- //
@@ -60,7 +62,7 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
-                    {item.logo.fmap(props => <Logo logo={props} />).withDefault(<></>)}
+                    {pipe2(item.logo, map(props => <Logo logo={props} />), withDefault(<></>))}
                 </section>
             </header>
             <Body className={[articleWidthStyles]}>

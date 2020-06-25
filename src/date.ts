@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Option, Some, None } from 'types/option';
+import { Option, some, none } from 'types/option';
 
 
 // ----- Setup ----- //
@@ -92,9 +92,9 @@ const format = (date: Date): string =>
 
 function fromString(date: string): Option<Date> {
     try {
-        return new Some(new Date(date));
+        return some(new Date(date));
     } catch(e) {
-        return new None();
+        return none;
     }
 }
 

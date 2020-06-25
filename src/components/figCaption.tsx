@@ -8,10 +8,11 @@ import { remSpace, palette } from '@guardian/src-foundations';
 import { Format, Design } from '@guardian/types/Format';
 
 import { getPillarStyles } from 'pillarStyles';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
 import { renderTextElement, getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 import Anchor from 'components/anchor';
+import { pipe2 } from 'lib';
 
 
 // ----- Subcomponents ----- //
@@ -60,14 +61,18 @@ const creditStyles = css`
 `;
 
 const Credit: FC<CreditProps> = ({ format, credit }: CreditProps) =>
-    credit.fmap<ReactElement | null>(cred => {
-        switch (format.design) {
-            case Design.Media:
-                return <p css={creditStyles}>{cred}</p>;
-            default:
-                return <> {cred}</>;
-        }
-    }).withDefault(null);
+    pipe2(
+        credit,
+        map(cred => {
+            switch (format.design) {
+                case Design.Media:
+                    return <p css={creditStyles}>{cred}</p>;
+                default:
+                    return <> {cred}</>;
+            }
+        }),
+        withDefault<ReactElement | null>(null),
+    );
 
 const captionHeadingStyles = css`
     ${headline.xxxsmall()}
@@ -95,7 +100,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
         case 'A':
             return (
                 <Anchor
-                    href={getHref(node).withDefault('')}
+                    href={withDefault('')(getHref(node))}
                     className={anchorStyles}
                     format={format}
                 >
@@ -147,13 +152,17 @@ const getStyles = (format: Format): SerializedStyles => {
 }
 
 const FigCaption: FC<Props> = ({ format, caption, credit }: Props) =>
-    caption.fmap<ReactElement | null>(cap =>
-        <figcaption css={getStyles(format)}>
-            <Triangle format={format} />
-            {renderCaption(cap, format)}
-            <Credit format={format} credit={credit} />
-        </figcaption>
-    ).withDefault(null);
+    pipe2(
+        caption,
+        map(cap =>
+            <figcaption css={getStyles(format)}>
+                <Triangle format={format} />
+                {renderCaption(cap, format)}
+                <Credit format={format} credit={credit} />
+            </figcaption>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 
 // ----- Exports ----- //

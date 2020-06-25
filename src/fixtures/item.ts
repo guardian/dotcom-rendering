@@ -3,8 +3,7 @@
 import { Pillar, Design, Display } from '@guardian/types/Format';
 
 import { Item, Review } from 'item';
-import { None, Some } from 'types/option';
-import { MainMedia } from 'headerMedia';
+import { none, some } from 'types/option';
 
 // ----- Fixture ----- //
 
@@ -13,13 +12,13 @@ const fields = {
     display: Display.Standard,
     body: [],
     headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
-    standfirst: new None<DocumentFragment>(),
+    standfirst: none,
     byline: '',
-    bylineHtml: new None<DocumentFragment>(),
-    publishDate: new None<Date>(),
+    bylineHtml: none,
+    publishDate: none,
     contributors: [],
-    mainMedia: new None<MainMedia>(),
-    series: new Some({
+    mainMedia: none,
+    series: some({
         id: '',
         type: 0,
         webTitle: '',
@@ -55,7 +54,7 @@ const review: Review = {
 
 const advertisementFeature: Item = {
     design: Design.AdvertisementFeature,
-    logo: new None(),
+    logo: none,
     ...fields,
 };
 

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Monad } from './monad';
-import { Option, Some, None } from './option';
+import { Option, some, none } from './option';
 
 
 // ----- Classes ----- //
@@ -76,7 +76,7 @@ class Ok<E, B> implements ResultInterface<E, B> {
      * a `None`.
      */
     toOption(): Option<B> {
-        return new Some(this.value);
+        return some(this.value);
     }
 
     constructor(value: B) {
@@ -106,7 +106,7 @@ class Err<E, B> implements ResultInterface<E, B> {
     }
 
     toOption(): Option<B> {
-        return new None();
+        return none;
     }
 
     constructor(error: E) {

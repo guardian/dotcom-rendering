@@ -33,7 +33,8 @@ import { JSDOM } from 'jsdom';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
-import { toArray } from 'lib';
+import { toArray, pipe2 } from 'lib';
+import { Option, map, withDefault } from 'types/option';
 
 
 // ----- Types ----- //
@@ -97,6 +98,12 @@ const askCapiFor = (articleId: string): Promise<Result<number, Content>> =>
         .then(capiRequest(articleId))
         .then(parseCapiResponse(articleId));
 
+function resourceList(script: Option<string>): string[] {
+    const emptyList: string[] = [];
+
+    return pipe2(script, map(toArray), withDefault(emptyList));
+}
+
 async function serveArticlePost(
     { body }: Request,
     res: ExpressResponse,
@@ -107,7 +114,7 @@ async function serveArticlePost(
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
         const { html, clientScript } = page(imageSalt, renderingRequest, getAssetLocation);
-        res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
+        res.set('Link', getPrefetchHeader(resourceList(clientScript)));
         res.write('<!DOCTYPE html>');
         res.write(html);
         res.end();
@@ -138,7 +145,8 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                     mockedRenderingRequest,
                     getAssetLocation
                 );
-                res.set('Link', getPrefetchHeader(clientScript.fmap(toArray).withDefault([])));
+
+                res.set('Link', getPrefetchHeader(resourceList(clientScript)));
                 res.write('<!DOCTYPE html>');
                 res.write('<meta charset="UTF-8" />');
                 res.write(html);

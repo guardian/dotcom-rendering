@@ -10,6 +10,8 @@ import { Item, getFormat } from 'item';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
 import { Display, Design } from 'format';
+import { map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 // ----- Component ----- //
@@ -61,8 +63,7 @@ const immersive: SerializedStyles = css`
 const media = css`
     color: ${neutral[86]};
     p, ul, li {
-        ${headline.xxxsmall({ lineHeight: 'loose' })}
-        margin: 0;
+        ${headline.xxxsmall({ fontWeight: 'bold' })}
     }
 `;
 
@@ -101,14 +102,18 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
     const bylineInStandfirst = item.byline !== '' && standfirst.textContent?.includes(item.byline);
 
     if (item.display === Display.Immersive && !bylineInStandfirst) {
-        return item.bylineHtml.fmap<ReactNode>(byline =>
-            <>
-                {rendered}
-                <address>
-                    <p>By {renderStandfirstText(byline, format)}</p>
-                </address>
-            </>
-        ).withDefault(rendered);
+        return pipe2(
+            item.bylineHtml,
+            map(byline =>
+                <>
+                    {rendered}
+                    <address>
+                        <p>By {renderStandfirstText(byline, format)}</p>
+                    </address>
+                </>
+            ),
+            withDefault<ReactNode>(rendered),
+        );
     }
 
     return rendered;
@@ -116,9 +121,13 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 
 
 const Standfirst: FC<Props> = ({ item }) =>
-    item.standfirst.fmap<ReactElement | null>(standfirst =>
-        <div css={getStyles(item)}>{content(standfirst, item)}</div>,
-    ).withDefault(null);
+    pipe2(
+        item.standfirst,
+        map(standfirst =>
+            <div css={getStyles(item)}>{content(standfirst, item)}</div>,
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 
 // ----- Exports ----- //

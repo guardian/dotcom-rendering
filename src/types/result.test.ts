@@ -2,6 +2,7 @@
 
 import { Result, Ok, Err } from './result';
 import { identity } from 'lib';
+import { withDefault } from 'types/option';
 
 
 // ----- Setup ----- //
@@ -76,10 +77,10 @@ describe('mapError', () => {
 
 describe('toOption', () => {
     it('produces Some when Result is Ok', () => {
-        expect(ok.toOption().withDefault(6)).toBe(4);
+        expect(withDefault(6)(ok.toOption())).toBe(4);
     });
 
     it('produces None when Result is Err', () => {
-        expect(err.toOption().withDefault(6)).toBe(6);
+        expect(withDefault(6)(err.toOption())).toBe(6);
     });
 });

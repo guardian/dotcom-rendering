@@ -1,5 +1,5 @@
 import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
-import { Option, None, Some } from 'types/option';
+import { Option, some, none } from 'types/option';
 import { Atoms } from "@guardian/content-api-models/v1/atoms";
 
 interface Video {
@@ -10,14 +10,14 @@ interface Video {
 
 const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
     if (!atoms) {
-        return new None();
+        return none;
     }
 
     const id = element.contentAtomTypeData?.atomId
     const atom = atoms.media?.find(media => media.id === id);
 
     if (atom?.data?.kind !== "media") {
-        return new None();
+        return none;
     }
 
     const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
@@ -25,10 +25,10 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
         .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
     
     if (!posterUrl || !videoId) {
-        return new None();
+        return none;
     }
 
-    return new Some({
+    return some({
         posterUrl,
         videoId,
         duration: duration?.toNumber()

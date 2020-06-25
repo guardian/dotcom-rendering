@@ -1,6 +1,7 @@
 import { ssm } from './aws';
 import { App, Stack, Stage } from './appIdentity';
-import { Option, Some, None } from 'types/option';
+import { Option, some, none, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Config = {[key: string]: any};
@@ -30,16 +31,20 @@ async function recursivelyFetchConfig(nextToken?: string, currentConfig?: Config
     }
 }
 
-let state: Option<Config> = new None();
+let state: Option<Config> = none;
 
 async function getState(): Promise<Config> {
     const config = await recursivelyFetchConfig();
-    state = new Some(config);
+    state = some(config);
     return config;
 }
 
 async function fetchConfig(): Promise<Config> {
-    return state.fmap(s => Promise.resolve(s)).withDefault(getState());
+    return pipe2(
+        state,
+        map(s => Promise.resolve(s)),
+        withDefault(getState()),
+    );
 }
 
 export async function getConfigValue<A>(key: string, defaultValue?: A): Promise<A> {

@@ -3,7 +3,7 @@
 import { Block } from '@guardian/content-api-models/v1/block';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { Option, toSerialisable as optionToSerialisable, fromNullable } from 'types/option';
+import { Option, andThen, map, withDefault } from 'types/option';
 import { Context, DocParser } from 'types/parserContext';
 import JsonSerialisable from 'types/jsonSerialisable';
 import {
@@ -14,7 +14,7 @@ import {
 } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
 import { partition, Ok } from 'types/result';
-import { compose } from 'lib';
+import { compose, pipe3 } from 'lib';
 import { fromString as dateFromString } from 'date';
 
 
@@ -44,8 +44,8 @@ const serialiseLiveBlock = ({
         id,
         isKeyEvent,
         title,
-        firstPublished: optionToSerialisable(firstPublished),
-        lastModified: optionToSerialisable(lastModified),
+        firstPublished,
+        lastModified,
         body: partition(body).oks.map(bodyElementToSerialisable),
     });
 
@@ -64,8 +64,8 @@ const deserialiseLiveBlock = (docParser: DocParser) => ({
         id,
         isKeyEvent,
         title,
-        firstPublished: fromNullable(firstPublished).andThen(dateFromString),
-        lastModified: fromNullable(lastModified).andThen(dateFromString),
+        firstPublished: andThen(dateFromString)(firstPublished),
+        lastModified: andThen(dateFromString)(lastModified),
         body: body.map((elem: any) => new Ok(bodyElementFromSerialisable(docParser)(elem))),
     });
 
@@ -91,7 +91,7 @@ const parseMany = (blocks: Block[]): (context: Context) => LiveBlock[] =>
     (context: Context): LiveBlock[] => blocks.map(parse(context));
 
 const moreRecentThan = (since: Date) => (capiDate: CapiDateTime | undefined): boolean =>
-    maybeCapiDate(capiDate).fmap(date => date > since).withDefault(false);
+    pipe3(capiDate, maybeCapiDate, map(date => date > since), withDefault<boolean>(false));
 
 const filterBlocks = (filterFunc: (block: Block) => boolean) => (content: Content): Block[] =>
     content.blocks?.body?.filter(filterFunc) ?? [];

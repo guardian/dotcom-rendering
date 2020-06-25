@@ -5,9 +5,10 @@ import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text, neutral } from '@guardian/src-foundations/palette';
 
-import { Option } from 'types/option';
+import { Option, withDefault, map } from 'types/option';
 import { darkModeCss as darkMode } from 'styles';
 import { formatDate } from 'date';
+import { pipe2 } from 'lib';
 
 
 // ----- Component ----- //
@@ -28,9 +29,11 @@ const styles = css`
 `;
 
 const Dateline: FC<Props> = ({ date }) =>
-    date.fmap<ReactElement | null>(d =>
-        <time css={styles} data-date={d} className="date">{ formatDate(d) }</time>
-    ).withDefault(null);
+    pipe2(
+        date,
+        map(d => <time css={styles} data-date={d} className="date">{ formatDate(d) }</time>),
+        withDefault<ReactElement | null>(null),
+    )
 
 
 // ----- Exports ----- //

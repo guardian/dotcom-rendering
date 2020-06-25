@@ -4,7 +4,7 @@ import { ReactNode, createElement as h, ReactElement, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { text as textColour, neutral } from '@guardian/src-foundations/palette';
-import { Option, fromNullable, Some, None } from 'types/option';
+import { Option, fromNullable, some, none, andThen, map, withDefault } from 'types/option';
 import { basePx, icons, darkModeCss, pageFonts } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
@@ -23,7 +23,7 @@ import Anchor from 'components/anchor';
 import InteractiveAtom from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
-import { isElement } from 'lib';
+import { isElement, pipe2, pipe } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 
@@ -31,11 +31,16 @@ import LiveEventLink from 'components/liveEventLink';
 // ----- Renderer ----- //
 
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
-    isElement(node) ? new Some(node.attributes) : new None();
+    isElement(node) ? some(node.attributes) : none;
 
 const getAttr = (attr: string) => (node: Node): Option<string> =>
-    getAttrs(node).andThen(attrs =>
-        fromNullable(attrs.getNamedItem(attr)).fmap(attr => attr.value)
+    pipe(
+        getAttrs(node),
+        andThen(attrs => pipe2(
+            attrs.getNamedItem(attr),
+            fromNullable,
+            map(attr => attr.value),
+        )),
     );
 
 const getHref: (node: Node) => Option<string> =
@@ -109,33 +114,37 @@ const listStyles: SerializedStyles = css`
     clear: both;
 `;
 
-const listItemStyles: SerializedStyles = css`
-    padding-left: ${remSpace[6]};
-    padding-bottom: .375rem;
+const listItemStyles = (format: Format): SerializedStyles => {
+    const backgroundColour = format.design === Design.Media
+        ? neutral[46] : neutral[86];
+    return css`
+        padding-left: ${remSpace[6]};
+        padding-bottom: .375rem;
 
-    &::before {
-        display: inline-block;
-        content: '';
-        border-radius: .5rem;
-        height: 1rem;
-        width: 1rem;
-        margin-right: ${remSpace[2]};
-        background-color: ${neutral[86]};
-        margin-left: -${remSpace[6]};
-        vertical-align: middle;
-    }
-
-    > p:first-of-type {
-        display: inline;
-        padding: 0;
-    }
-
-    ${darkModeCss`
         &::before {
-            background-color: ${neutral[60]};
+            display: inline-block;
+            content: '';
+            border-radius: .5rem;
+            height: 1rem;
+            width: 1rem;
+            margin-right: ${remSpace[2]};
+            background-color: ${backgroundColour};
+            margin-left: -${remSpace[6]};
+            vertical-align: middle;
         }
-    `}
-`;
+
+        > p:first-of-type {
+            display: inline;
+            padding: 0;
+        }
+
+        ${darkModeCss`
+            &::before {
+                background-color: ${neutral[46]};
+            }
+        `}
+    `;
+}
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
     const font = format.design === Design.AdvertisementFeature
@@ -169,7 +178,7 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
         case 'SPAN':
             return text;
         case 'A':
-            return h('a', { href: getHref(node).withDefault(''), key }, children);
+            return h('a', { href: withDefault('')(getHref(node)), key }, children);
         case 'H2':
             return h('h2', { key }, children);
         case 'BLOCKQUOTE':
@@ -203,7 +212,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
             return text;
         case 'A':
             return h(Anchor, {
-                href: getHref(node).withDefault(''),
+                href: withDefault('')(getHref(node)),
                 format,
                 key,
             }, transform(text, format));
@@ -222,7 +231,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
         case 'UL':
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
-            return styledH('li', { css: listItemStyles }, children);
+            return styledH('li', { css: listItemStyles(format) }, children);
         case 'MARK':
             return styledH('mark', { key }, children);
         default:
@@ -239,11 +248,11 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'UL':
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
-            return styledH('li', { css: listItemStyles }, children);
+            return styledH('li', { css: listItemStyles(format) }, children);
         case 'A': {
             const colour = format.design === Design.Media ? inverted : kicker;
             const styles = css` color: ${colour}; text-decoration: none`;
-            const url = getHref(node).withDefault('')
+            const url = withDefault('')(getHref(node));
             const href = url.startsWith('profile/') ? `https://www.theguardian.com/${url}` : url
             return styledH('a', { key, href, css: styles }, children);
         }
@@ -303,9 +312,11 @@ type PullquoteProps = {
 
 
 const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
-    const children = attribution
-        .fmap(attribution => ([h('p', null, quote), h('cite', null, attribution)]))
-        .withDefault([h('p', null, quote)])
+    const children = pipe2(
+        attribution,
+        map(attribution => ([h('p', null, quote), h('cite', null, attribution)])),
+        withDefault([h('p', null, quote)]),
+    );
 
     return styledH('aside',
         { css: pullquoteStyles(format) },
@@ -427,11 +438,13 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.Image: {
             const { caption, credit, role } = element;
-            const ImageComponent = role
-                .fmap(imageComponentFromRole)
-                .withDefault(BodyImage);
+            const ImageComponent = pipe2(
+                role,
+                map(imageComponentFromRole),
+                withDefault(BodyImage),
+            );
 
-            const figcaption = role.withDefault(Role.Thumbnail) !== Role.HalfWidth
+            const figcaption = withDefault(Role.Thumbnail)(role) !== Role.HalfWidth
                 ? h(FigCaption, { format, caption, credit })
                 : null;
 
@@ -488,9 +501,11 @@ const render = (format: Format, excludeStyles = false) =>
                 return styledH('figure', { css: figureCss }, children);
             }
 
-            return element.alt
-                .fmap(alt => figure(alt))
-                .withDefault(figure(null))
+            return pipe2(
+                element.alt,
+                map(alt => figure(alt)),
+                withDefault(figure(null)),
+            );
         }
 
         case ElementKind.Instagram: {
@@ -527,7 +542,7 @@ const render = (format: Format, excludeStyles = false) =>
                         <body>
                             ${html}
                             <script>
-                                ${js.withDefault('')}
+                                ${withDefault('')(js)}
                                 function resize() {
                                     window.frameElement.height = document.body.offsetHeight;
                                 }

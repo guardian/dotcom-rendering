@@ -7,7 +7,7 @@ import { Format, Pillar, Design, Display } from '@guardian/types/Format';
 import { background } from '@guardian/src-foundations/palette';
 
 import FigCaption from './figCaption';
-import { Option, None, Some } from 'types/option';
+import { Option, none, some } from 'types/option';
 
 
 // ----- Setup ----- //
@@ -20,10 +20,10 @@ const format: Format = {
 
 const credit = (): Option<string> => {
     if (boolean('Show Credit', false)) {
-        return new Some(text('Credit', 'Photograph: A photographer'));
+        return some(text('Credit', 'Photograph: A photographer'));
     }
 
-    return new None();
+    return none;
 }
 
 const caption = (): Option<DocumentFragment> => {
@@ -34,7 +34,7 @@ const caption = (): Option<DocumentFragment> => {
 
     fragment.appendChild(node);
 
-    return new Some(fragment);
+    return some(fragment);
 }
 
 
