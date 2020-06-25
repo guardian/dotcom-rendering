@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
+import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
@@ -47,6 +48,21 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             html={element.html}
                             pillar={pillar}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.CaptionBlockElement':
+                    return (
+                        <CaptionBlockComponent
+                            key={i}
+                            display={display}
+                            designType={designType}
+                            pillar={pillar}
+                            captionText={element.captionText}
+                            padCaption={element.padCaption}
+                            credit={element.credit}
+                            displayCredit={element.displayCredit}
+                            shouldLimitWidth={element.shouldLimitWidth}
+                            isOverlayed={element.isOverlayed}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
