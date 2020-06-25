@@ -48,9 +48,9 @@ Analysis.story = { name: 'Analysis' };
 export const PhotoEssay = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display={Display.Standard}
+            display={Display.Immersive}
             designType="PhotoEssay"
-            captionText="This is how a PhotoEssay caption looks"
+            captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
             pillar="news"
         />
     </Section>
@@ -60,9 +60,9 @@ PhotoEssay.story = { name: 'PhotoEssay' };
 export const PhotoEssayLimitedWidth = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display={Display.Standard}
+            display={Display.Immersive}
             designType="PhotoEssay"
-            captionText="This is how a PhotoEssay caption looks when width is limited"
+            captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
             pillar="news"
             shouldLimitWidth={true}
         />
