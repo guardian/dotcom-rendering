@@ -106,7 +106,7 @@ const GridOfFour = ({
 );
 
 export const MultiImageBlockComponent = ({
-    // designType,
+    designType,
     caption,
     images,
     pillar,
@@ -118,6 +118,8 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -126,7 +128,7 @@ export const MultiImageBlockComponent = ({
                 >
                     <ImageComponent
                         display="standard"
-                        designType="Article"
+                        designType={designType}
                         element={images[0]}
                         pillar={pillar}
                         hideCaption={true}
@@ -135,6 +137,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -146,6 +149,9 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
+
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -177,6 +183,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -188,6 +195,9 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
+
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -229,6 +239,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}
@@ -240,6 +251,8 @@ export const MultiImageBlockComponent = ({
             return (
                 <div
                     className={css`
+                        margin-top: 12px;
+                        margin-bottom: 12px;
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -291,6 +304,7 @@ export const MultiImageBlockComponent = ({
                     {caption && (
                         <Caption
                             display="standard"
+                            designType={designType}
                             captionText={caption}
                             pillar={pillar}
                             shouldLimitWidth={false}

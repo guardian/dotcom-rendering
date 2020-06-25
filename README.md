@@ -1,5 +1,3 @@
-![Lighthouse](https://github.com/guardian/dotcom-rendering/workflows/Lighthouse/badge.svg?branch=gtrufitt%2Flighthouse-budgets)
-
 # Dotcom Rendering
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.

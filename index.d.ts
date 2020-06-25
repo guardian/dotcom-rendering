@@ -280,6 +280,8 @@ interface CAPIType {
     slotMachineFlags?: string;
 
     pageType: PageTypeType;
+
+    matchUrl?: string;
 }
 
 type CAPIBrowserType = {
@@ -312,6 +314,7 @@ type CAPIBrowserType = {
         discussionD2Uid: string;
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
+        remoteBanner: boolean;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -340,6 +343,7 @@ type CAPIBrowserType = {
     contributionsServiceUrl: string;
     isImmersive: boolean;
     isPhotoEssay: boolean;
+    matchUrl?: string;
 };
 
 interface TagType {
@@ -469,7 +473,7 @@ type UserProfile = {
 type TeamType = {
     id: string;
     name: string;
-    lineup: PlayerType[];
+    players: PlayerType[];
     possession: number;
     shotsOn: number;
     shotsOff: number;
@@ -527,6 +531,7 @@ interface CommercialConfigType {
     section?: string;
     edition?: string;
     series?: string;
+    toneIds?: string;
     contentType: string;
     ampIframeUrl: string;
 }
@@ -568,6 +573,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    references?: { [key: string]: string }[];
 }
 
 interface GADataType {

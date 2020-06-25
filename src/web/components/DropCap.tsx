@@ -29,9 +29,6 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
                 color: ${opinion[400]};
             `;
         case 'PhotoEssay':
-            return css`
-                ${baseStyles};
-            `;
         case 'Analysis':
         case 'Feature':
         case 'Interview':

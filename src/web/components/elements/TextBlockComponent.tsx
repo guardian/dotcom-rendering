@@ -1,7 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { body } from '@guardian/src-foundations/typography';
+import { neutral } from '@guardian/src-foundations/palette';
+import { textSans, body } from '@guardian/src-foundations/typography';
+import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -114,6 +116,37 @@ export const TextBlockComponent: React.FC<Props> = ({
     const paraStyles = css`
         margin-bottom: 16px;
         ${body.medium()};
+
+        ul {
+            margin-bottom: 12px;
+        }
+
+        ${from.tablet} {
+            ul {
+                margin-bottom: 16px;
+            }
+        }
+
+        li {
+            ${textSans.medium()};
+            margin-bottom: 6px;
+            padding-left: 20px;
+
+            p {
+                display: inline;
+            }
+        }
+
+        li:before {
+            display: inline-block;
+            content: '';
+            border-radius: 6px;
+            height: 12px;
+            width: 12px;
+            margin-right: 8px;
+            background-color: ${neutral[86]};
+            margin-left: -20px;
+        }
     `;
 
     const firstLetter = decideDropCapLetter(unwrappedHtml);

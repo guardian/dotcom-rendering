@@ -4,11 +4,16 @@ import {
     shouldShow as shouldShowCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
+import {getAlreadyVisitedCount} from "@root/src/web/lib/alreadyVisited";
 
 type Props = {
     isSignedIn?: boolean;
     countryCode?: string;
     CAPI: CAPIBrowserType;
+};
+
+const getEngagementBannerLastClosedAt = (): string | undefined => {
+    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
 };
 
 export const StickyBottomBanner = ({
@@ -31,8 +36,7 @@ export const StickyBottomBanner = ({
         return null;
     }
 
-    // Temporary flag to toggle RR banner while it is in development
-    const showRRBanner = false;
+    const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
 
     return (
         <>
@@ -51,6 +55,8 @@ export const StickyBottomBanner = ({
                         isSensitive={CAPI.config.isSensitive}
                         tags={CAPI.tags}
                         contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                        alreadyVisitedCount={getAlreadyVisitedCount()}
+                        engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
                     />
                 )
             )}

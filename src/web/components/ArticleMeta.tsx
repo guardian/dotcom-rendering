@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { border } from '@guardian/src-foundations/palette';
-import { between, until } from '@guardian/src-foundations/mq';
+import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 
@@ -72,16 +72,63 @@ const metaNumbers = css`
     }
 `;
 
-const metaContainer = css`
-    ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
+const metaContainer = ({
+    display,
+    designType,
+}: {
+    display: Display;
+    designType: DesignType;
+}) => {
+    switch (display) {
+        case 'immersive':
+        case 'showcase':
+        case 'standard': {
+            switch (designType) {
+                case 'PhotoEssay':
+                    return css`
+                        ${until.phablet} {
+                            margin-left: -20px;
+                            margin-right: -20px;
+                        }
+                        ${until.mobileLandscape} {
+                            margin-left: -10px;
+                            margin-right: -10px;
+                        }
+                        ${from.wide} {
+                            margin-left: 40px;
+                        }
+                    `;
+                case 'Feature':
+                case 'Review':
+                case 'Recipe':
+                case 'Interview':
+                case 'Live':
+                case 'Media':
+                case 'Analysis':
+                case 'Article':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'GuardianView':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'AdvertisementFeature':
+                case 'Comment':
+                case 'Immersive':
+                default:
+                    return css`
+                        ${until.phablet} {
+                            margin-left: -20px;
+                            margin-right: -20px;
+                        }
+                        ${until.mobileLandscape} {
+                            margin-left: -10px;
+                            margin-right: -10px;
+                        }
+                    `;
+            }
+        }
     }
-    ${until.mobileLandscape} {
-        margin-left: -10px;
-        margin-right: -10px;
-    }
-`;
+};
 
 const getBylineImageUrl = (tags: TagType[]) => {
     const contributorTag = tags.find(tag => tag.type === 'Contributor');
@@ -225,7 +272,7 @@ export const ArticleMeta = ({
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
     return (
-        <div className={metaContainer}>
+        <div className={metaContainer({ display, designType })}>
             <div className={cx(meta)}>
                 {branding && <Branding branding={branding} pillar={pillar} />}
                 <RowBelowLeftCol>

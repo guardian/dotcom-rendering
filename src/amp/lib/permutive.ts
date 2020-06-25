@@ -6,6 +6,7 @@ export interface PermutivePayload {
     'properties.content.authors!'?: string;
     'properties.content.keywords!'?: string;
     'properties.content.publishedAt'?: string;
+    'properties.content.tone'?: string;
     'properties.user.edition'?: string;
 }
 
@@ -31,6 +32,13 @@ export const generatePermutivePayload = (
                   .map(s => s.trim())
                   .join()
             : null;
+    const toneIds =
+        rawConfig.toneIds && typeof rawConfig.toneIds === 'string'
+            ? rawConfig.toneIds
+                  .split(',')
+                  .map(s => s.trim())
+                  .join()
+            : null;
     const config: { [key: string]: any } = {
         'properties.content.premium': rawConfig.isPaidContent,
         'properties.content.type': rawConfig.contentType,
@@ -41,6 +49,7 @@ export const generatePermutivePayload = (
         'properties.content.authors!list[string]': authors,
         'properties.content.keywords!list[string]': keywords,
         'properties.content.publishedAt': publishedAt,
+        'properties.content.tone!list[string]': toneIds,
         'properties.user.edition': rawConfig.edition,
     };
 

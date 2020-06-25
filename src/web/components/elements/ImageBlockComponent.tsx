@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 type Props = {
     display: Display;
@@ -10,11 +10,12 @@ type Props = {
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
+    title?: string;
 };
 
 const imageCss = {
     inline: css`
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
     `,
 
@@ -38,13 +39,24 @@ const imageCss = {
     `,
 
     immersive: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
+
+        ${until.tablet} {
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        ${until.mobileLandscape} {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
         ${from.tablet} {
-            margin-left: 0px;
+            margin-left: -20px;
             margin-right: -100px;
         }
         ${from.desktop} {
-            margin-left: 0px;
-            margin-right: -320px;
+            margin-left: -20px;
+            margin-right: -340px;
         }
         ${from.leftCol} {
             margin-left: -160px;
@@ -58,10 +70,10 @@ const imageCss = {
 
     showcase: css`
         position: relative;
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
         ${from.leftCol} {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             margin-left: -160px;
         }
         ${from.wide} {
@@ -88,8 +100,14 @@ const imageCss = {
         }
     `,
 
-    // TODO:
-    halfWidth: css``,
+    halfWidth: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
+        width: 50%;
+        float: left;
+        clear: left;
+        margin-right: 16px;
+    `,
 };
 
 const decidePosition = (role: RoleType) => {
@@ -117,6 +135,7 @@ export const ImageBlockComponent = ({
     element,
     pillar,
     hideCaption,
+    title,
 }: Props) => {
     const { role } = element;
     return (
@@ -128,6 +147,7 @@ export const ImageBlockComponent = ({
                 pillar={pillar}
                 hideCaption={hideCaption}
                 role={role}
+                title={title}
             />
         </div>
     );

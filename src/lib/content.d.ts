@@ -116,6 +116,7 @@ interface ImageBlockElement {
     imageSources: ImageSource[];
     displayCredit?: boolean;
     role: RoleType;
+    title?: string;
 }
 
 interface InstagramBlockElement {
@@ -233,7 +234,9 @@ interface VideoVimeoBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface VideoYoutubeBlockElement {
@@ -241,7 +244,9 @@ interface VideoYoutubeBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface YoutubeBlockElement {
