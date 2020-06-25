@@ -16,7 +16,7 @@ const showMore = css`
     }
 `;
 
-export const AtomEmbedBlockComponent: React.SFC<{ url: string }> = ({
+export const InteractiveAtomBlockComponent: React.SFC<{ url: string }> = ({
     url,
 }) => {
     return (
