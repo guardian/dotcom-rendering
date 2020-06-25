@@ -1,9 +1,7 @@
 // -------------------------------------
 // Elements
 // -------------------------------------
-
-interface InteractiveAtomBlockElement {
-    _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+interface InteractiveAtomBlockElementBase {
     url: string;
     id?: string;
     html?: string;
@@ -29,10 +27,8 @@ interface BlockquoteBlockElement {
     html: string;
 }
 
-interface ChartAtomBlockElement {
+interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
-    id: string;
-    url: string;
 }
 
 interface CodeBlockElement {
@@ -84,6 +80,10 @@ interface ExplainerAtomBlockElement {
     body: string;
 }
 
+interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+}
+
 interface GuideAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
     id: string;
@@ -120,6 +120,10 @@ interface InstagramBlockElement {
     html: string;
     url: string;
     hasCaption: boolean;
+}
+
+interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 }
 
 interface MapBlockElement {
@@ -281,6 +285,7 @@ type CAPIElement =
     | DocumentBlockElement
     | EmbedBlockElement
     | ExplainerAtomBlockElement
+    | GenericAtomBlockElement
     | GuideAtomBlockElement
     | GuVideoBlockElement
     | ImageBlockElement
