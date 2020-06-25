@@ -87,6 +87,27 @@ PhotoEssay.story = {
     name: 'PhotoEssay',
 };
 
+export const PhotoEssayHTML = () => {
+    return (
+        <Container>
+            <CaptionBlockComponent
+                display={Display.Immersive}
+                designType="PhotoEssay"
+                captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
+                pillar="sport"
+                padCaption={false}
+                credit="Credit text"
+                displayCredit={false}
+                shouldLimitWidth={false}
+                isOverlayed={false}
+            />
+        </Container>
+    );
+};
+PhotoEssayHTML.story = {
+    name: 'PhotoEssay using html',
+};
+
 export const Padded = () => {
     return (
         <Container>
