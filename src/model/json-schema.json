@@ -1574,7 +1574,6 @@
             },
             "required": [
                 "_type",
-                "embedUrl",
                 "height",
                 "url",
                 "width"
@@ -1613,7 +1612,6 @@
             },
             "required": [
                 "_type",
-                "embedUrl",
                 "height",
                 "url",
                 "width"

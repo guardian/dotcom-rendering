@@ -7,7 +7,7 @@ import { Display } from '@root/src/lib/display';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
     pillar: Pillar;
-    embedUrl: string;
+    embedUrl?: string;
     height: number;
     width: number;
     caption?: string;
