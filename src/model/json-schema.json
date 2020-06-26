@@ -72,12 +72,6 @@
                         "$ref": "#/definitions/InstagramBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/AtomEmbedUrlBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
-                    },
-                    {
                         "$ref": "#/definitions/InteractiveAtomBlockElement"
                     },
                     {
@@ -1048,66 +1042,6 @@
                 "url"
             ]
         },
-        "AtomEmbedUrlBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement"
-                    ]
-                },
-                "url": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "url"
-            ]
-        },
-        "AtomEmbedMarkupBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement"
-                    ]
-                },
-                "url": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "url"
-            ]
-        },
         "InteractiveAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1717,12 +1651,6 @@
                             },
                             {
                                 "$ref": "#/definitions/InstagramBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/AtomEmbedUrlBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/AtomEmbedMarkupBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/InteractiveAtomBlockElement"
