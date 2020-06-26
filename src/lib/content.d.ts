@@ -139,6 +139,12 @@ interface InstagramBlockElement {
     hasCaption: boolean;
 }
 
+interface AtomEmbedUrlBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
+}
+interface AtomEmbedMarkupBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+}
 interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 }
@@ -291,6 +297,8 @@ interface CalloutBlockElement {
 }
 
 type CAPIElement =
+    | AtomEmbedUrlBlockElement
+    | AtomEmbedMarkupBlockElement
     | InteractiveAtomBlockElement
     | AudioAtomElement
     | AudioBlockElement
