@@ -11,6 +11,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
+import { Display } from '@root/src/lib/display';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
@@ -212,7 +213,7 @@ export const Footer: React.FC<{
     <footer className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
-                display="standard"
+                display={Display.Standard}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}

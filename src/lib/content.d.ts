@@ -27,6 +27,18 @@ interface BlockquoteBlockElement {
     html: string;
 }
 
+interface CaptionBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
+    display: Display;
+    designType: DesignType;
+    captionText?: string;
+    pillar: Pillar;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    shouldLimitWidth?: boolean;
+    isOverlayed?: boolean;
+}
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
@@ -98,6 +110,11 @@ interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
+}
+
+interface HighlightBlockElement {
+    _type: 'model.dotcomrendering.pageElements.HighlightBlockElement';
+    html: string;
 }
 
 interface ImageBlockElement {
@@ -244,7 +261,9 @@ interface VideoYoutubeBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface YoutubeBlockElement {
@@ -272,10 +291,10 @@ interface CalloutBlockElement {
 }
 
 type CAPIElement =
-    | InteractiveAtomBlockElement
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement
+    | CaptionBlockElement
     | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
@@ -288,8 +307,10 @@ type CAPIElement =
     | GenericAtomBlockElement
     | GuideAtomBlockElement
     | GuVideoBlockElement
+    | HighlightBlockElement
     | ImageBlockElement
     | InstagramBlockElement
+    | InteractiveAtomBlockElement
     | MapBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement

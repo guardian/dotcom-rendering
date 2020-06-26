@@ -6,6 +6,7 @@ import {
 
 import { Section } from '@frontend/web/components/Section';
 
+import { Display } from '@root/src/lib/display';
 import { nav } from './Nav.mock';
 import { Nav } from './Nav';
 
@@ -25,7 +26,7 @@ export const StandardStory = () => {
         >
             <Nav
                 pillar="news"
-                display="standard"
+                display={Display.Standard}
                 nav={nav}
                 subscribeUrl=""
                 edition="UK"
@@ -46,7 +47,7 @@ export const ImmersiveStory = () => {
         >
             <Nav
                 pillar="news"
-                display="immersive"
+                display={Display.Immersive}
                 nav={nav}
                 subscribeUrl=""
                 edition="UK"

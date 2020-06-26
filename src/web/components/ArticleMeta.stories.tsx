@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
@@ -50,7 +51,7 @@ export const ArticleStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 pillar="news"
                 pageId=""
@@ -89,7 +90,7 @@ export const BrandingStory = () => {
                     aboutThisLink:
                         'https://www.theguardian.com/info/2016/jan/25/content-funding',
                 }}
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 pillar="news"
                 pageId=""
@@ -111,7 +112,7 @@ export const FeatureStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="standard"
+                display={Display.Standard}
                 designType="Feature"
                 pillar="culture"
                 pageId=""
@@ -132,7 +133,7 @@ export const CommentStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="standard"
+                display={Display.Standard}
                 designType="Comment"
                 pillar="opinion"
                 pageId=""
@@ -153,7 +154,7 @@ export const InterviewStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="standard"
+                display={Display.Standard}
                 designType="Interview"
                 pillar="lifestyle"
                 pageId=""
@@ -174,7 +175,7 @@ export const ImmersiveStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="immersive"
+                display={Display.Immersive}
                 designType="Immersive"
                 pillar="news"
                 pageId=""
@@ -195,7 +196,7 @@ export const TwoContributorsStory = () => {
     return (
         <Container>
             <ArticleMeta
-                display="standard"
+                display={Display.Standard}
                 designType="Feature"
                 pillar="sport"
                 pageId=""

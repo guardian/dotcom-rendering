@@ -4,6 +4,7 @@ import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { border } from '@guardian/src-foundations/palette';
 
 import { Standfirst } from '@frontend/web/components/Standfirst';
+import { Display } from '@root/src/lib/display';
 
 const standfirstStyles = css`
     max-width: 540px;

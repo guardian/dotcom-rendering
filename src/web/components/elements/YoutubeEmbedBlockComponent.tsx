@@ -1,21 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
+
 import { Caption } from '@root/src/web/components/Caption';
+import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Display } from '@root/src/lib/display';
 
-const responsiveAspectRatio = (height: number, width: number) => css`
-    /* https://css-tricks.com/aspect-ratio-boxes/ */
-    padding-bottom: ${(height / width) * 100}%;
-    position: relative;
-    iframe {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-`;
-export const VimeoBlockComponent: React.FC<{
+export const YoutubeEmbedBlockComponent: React.FC<{
     pillar: Pillar;
     url: string;
     height: number;
@@ -52,7 +42,7 @@ export const VimeoBlockComponent: React.FC<{
                 width: 100%;
             `}
         >
-            <div className={responsiveAspectRatio(height, width)}>
+            <MaintainAspectRatio height={height} width={width}>
                 <iframe
                     src={url}
                     title={title}
@@ -60,7 +50,7 @@ export const VimeoBlockComponent: React.FC<{
                     width={width}
                     allowFullScreen={true}
                 />
-            </div>
+            </MaintainAspectRatio>
             {caption && (
                 <Caption
                     captionText={caption}

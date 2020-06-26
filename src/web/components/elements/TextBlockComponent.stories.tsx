@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { Display } from '@root/src/lib/display';
 
 const html =
     '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -29,7 +30,7 @@ export const defaultStory = () => {
                 html={html}
                 pillar="news"
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -45,7 +46,7 @@ export const DropCap = () => {
                 pillar="culture"
                 forceDropCap={true}
                 designType="Article"
-                display="immersive"
+                display={Display.Immersive}
                 isFirstParagraph={false}
             />
         </div>
@@ -61,7 +62,7 @@ export const QuotedDropCap = () => {
                 pillar="opinion"
                 forceDropCap={false}
                 designType="Comment"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={true}
             />
         </div>
@@ -77,7 +78,7 @@ export const ShortText = () => {
                 pillar="news"
                 forceDropCap={true}
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -93,7 +94,7 @@ export const NoTags = () => {
                 pillar="news"
                 forceDropCap={true}
                 designType="Article"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={false}
             />
         </div>
@@ -109,7 +110,7 @@ export const FeatureDropCap = () => {
                 pillar="culture"
                 forceDropCap={false}
                 designType="Feature"
-                display="standard"
+                display={Display.Standard}
                 isFirstParagraph={true}
             />
         </div>

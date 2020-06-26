@@ -2,8 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
+import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -14,9 +16,11 @@ import { TableBlockComponent } from '@root/src/web/components/elements/TableBloc
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
+import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import { ExplainerAtom } from '@guardian/atoms-rendering';
+import { Display } from '@root/src/lib/display';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -47,6 +51,21 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.CaptionBlockElement':
+                    return (
+                        <CaptionBlockComponent
+                            key={i}
+                            display={display}
+                            designType={designType}
+                            pillar={pillar}
+                            captionText={element.captionText}
+                            padCaption={element.padCaption}
+                            credit={element.credit}
+                            displayCredit={element.displayCredit}
+                            shouldLimitWidth={element.shouldLimitWidth}
+                            isOverlayed={element.isOverlayed}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -67,6 +86,10 @@ export const ArticleRenderer: React.FC<{
                             title={element.title}
                             html={element.body}
                         />
+                    );
+                case 'model.dotcomrendering.pageElements.HighlightBlockElement':
+                    return (
+                        <HighlightBlockComponent key={i} html={element.html} />
                     );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
@@ -144,6 +167,20 @@ export const ArticleRenderer: React.FC<{
                             designType={designType}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+                    return (
+                        <YoutubeEmbedBlockComponent
+                            pillar={pillar}
+                            url={element.url}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.credit}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YoutubeBlockComponent
@@ -177,7 +214,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
                     return null;
             }
         })

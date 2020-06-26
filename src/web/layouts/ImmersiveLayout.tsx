@@ -41,6 +41,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Display } from '@root/src/lib/display';
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({

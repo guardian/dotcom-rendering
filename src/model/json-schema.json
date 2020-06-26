@@ -24,6 +24,9 @@
                         "$ref": "#/definitions/BlockquoteBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/CaptionBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
@@ -58,6 +61,9 @@
                     },
                     {
                         "$ref": "#/definitions/GuVideoBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/HighlightBlockElement"
                     },
                     {
                         "$ref": "#/definitions/ImageBlockElement"
@@ -431,6 +437,91 @@
                 "html"
             ]
         },
+        "CaptionBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CaptionBlockElement"
+                    ]
+                },
+                "display": {
+                    "$ref": "#/definitions/Display"
+                },
+                "designType": {
+                    "$ref": "#/definitions/DesignType"
+                },
+                "captionText": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/Pillar"
+                },
+                "padCaption": {
+                    "type": "boolean"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "shouldLimitWidth": {
+                    "type": "boolean"
+                },
+                "isOverlayed": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "designType",
+                "display",
+                "pillar"
+            ]
+        },
+        "Display": {
+            "type": "number",
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "DesignType": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
+        },
+        "Pillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
         "ChartAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -744,6 +835,24 @@
             "required": [
                 "mimeType",
                 "url"
+            ]
+        },
+        "HighlightBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.HighlightBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
             ]
         },
         "ImageBlockElement": {
@@ -1421,11 +1530,16 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "caption",
                 "height",
                 "url",
                 "width"
@@ -1491,6 +1605,9 @@
                                 "$ref": "#/definitions/BlockquoteBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/CaptionBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
                             },
                             {
@@ -1525,6 +1642,9 @@
                             },
                             {
                                 "$ref": "#/definitions/GuVideoBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/HighlightBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/ImageBlockElement"
@@ -1693,17 +1813,6 @@
                 "title",
                 "type"
             ]
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",
@@ -1895,28 +2004,6 @@
                 "switches",
                 "videoDuration"
             ]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",
