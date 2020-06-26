@@ -255,6 +255,7 @@ interface VideoFacebookBlockElement {
 interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
     embedUrl: string;
+    url: string;
     height: number;
     width: number;
     caption?: string;
@@ -265,6 +266,7 @@ interface VideoVimeoBlockElement {
 interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     embedUrl: string;
+    url: string;
     height: number;
     width: number;
     caption?: string;

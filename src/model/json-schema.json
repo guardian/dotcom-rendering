@@ -1553,6 +1553,9 @@
                 "embedUrl": {
                     "type": "string"
                 },
+                "url": {
+                    "type": "string"
+                },
                 "height": {
                     "type": "number"
                 },
@@ -1573,6 +1576,7 @@
                 "_type",
                 "embedUrl",
                 "height",
+                "url",
                 "width"
             ]
         },
@@ -1588,6 +1592,9 @@
                 "embedUrl": {
                     "type": "string"
                 },
+                "url": {
+                    "type": "string"
+                },
                 "height": {
                     "type": "number"
                 },
@@ -1608,6 +1615,7 @@
                 "_type",
                 "embedUrl",
                 "height",
+                "url",
                 "width"
             ]
         },
