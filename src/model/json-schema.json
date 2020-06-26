@@ -1550,7 +1550,7 @@
                         "model.dotcomrendering.pageElements.VideoVimeoBlockElement"
                     ]
                 },
-                "url": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "height": {
@@ -1571,8 +1571,8 @@
             },
             "required": [
                 "_type",
+                "embedUrl",
                 "height",
-                "url",
                 "width"
             ]
         },
@@ -1585,7 +1585,7 @@
                         "model.dotcomrendering.pageElements.VideoYoutubeBlockElement"
                     ]
                 },
-                "url": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "height": {
@@ -1606,8 +1606,8 @@
             },
             "required": [
                 "_type",
+                "embedUrl",
                 "height",
-                "url",
                 "width"
             ]
         },
