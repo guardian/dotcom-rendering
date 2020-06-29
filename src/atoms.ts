@@ -6,7 +6,6 @@ import { fromNullable } from "types/option";
 
 function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElement> {
     const id = element.contentAtomTypeData?.atomId
-
     switch (element.contentAtomTypeData?.atomType) {
         case "interactive": {
             const atom = atoms.interactives?.find(interactive => interactive.id === id);
@@ -43,6 +42,33 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
             }
 
             return new Ok({ kind: ElementKind.ExplainerAtom, html: body, title, id });
+        }
+
+        case "media": {
+            const atom = atoms.media?.find(media => media.id === id);
+
+            if (atom?.data?.kind !== "media") {
+                return new Err(`No atom matched this id: ${id}`);
+            }
+
+            const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
+            const videoId = assets
+                .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
+
+            if (!posterUrl) {
+                return new Err(`No posterUrl for atom: ${id}`);
+            }
+
+            if (!videoId) {
+                return new Err(`No videoId for atom: ${id}`);
+            }
+
+            return new Ok({
+                kind: ElementKind.MediaAtom,
+                posterUrl,
+                videoId,
+                duration: fromNullable(duration?.toNumber()),
+            });
         }
 
         default: {
