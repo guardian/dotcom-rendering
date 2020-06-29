@@ -199,6 +199,8 @@ export const ArticleRenderer: React.FC<{
 
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+                case 'model.dotcomrendering.pageElements.CalloutBlockElementXp':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
