@@ -13,6 +13,7 @@ import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
 import Int64 from 'node-int64';
 import { withDefault } from 'types/option';
+import { Content } from '@guardian/content-api-models/v1/content';
 
 const articleContent = {
     id: "",
@@ -188,7 +189,7 @@ const articleContentWithImageWithoutFile = articleContentWith({
     }
 })
 
-const f = fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' });
+const f = (content: Content) => fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })({ content });
 
 const getFirstBody = (item: Review | Standard) =>
     withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' })(item.body[0].toOption());
