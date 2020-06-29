@@ -19,7 +19,7 @@ import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
-import { Result, Ok, Err } from 'types/result';
+import { Result, ok, err, either } from 'types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
@@ -73,22 +73,22 @@ const parseCapiResponse = (articleId: string) =>
 
             if (response.content === undefined) {
                 logger.error(`CAPI returned a 200 for ${articleId}, but didn't give me any content`);
-                return new Err(500);
+                return err(500);
             }
 
-            return new Ok(response.content);
+            return ok(response.content);
         }
 
         case 404:
             logger.warn(`CAPI says that it doesn't recognise this resource: ${articleId}`);
 
-            return new Err(404);
+            return err(404);
 
         default: {
             const response = await errorDecoder(buffer);
 
             logger.error(`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`);
-            return new Err(500);
+            return err(500);
         }
     }
 }
@@ -130,9 +130,9 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
         const imageSalt = await getConfigValue<string>('apis.img.salt');
         const capiContent = await askCapiFor(articleId);
 
-        capiContent.either(
-            errorStatus => { res.sendStatus(errorStatus) },
-            content => {
+        either(
+            (errorStatus: number) => { res.sendStatus(errorStatus) },
+            (content: Content) => {
                 const mockedRenderingRequest: RenderingRequest = {
                     content,
                     targetingParams: {
@@ -152,7 +152,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                 res.write(html);
                 res.end();
             },
-        )
+        )(capiContent);
     } catch (e) {
         logger.error(`This error occurred`, e);
         res.sendStatus(500);
@@ -182,9 +182,9 @@ async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
 
         const capiContent = await askCapiFor(articleId);
 
-        capiContent.either(
-            errorStatus => { res.sendStatus(errorStatus) },
-            content => {
+        either(
+            (errorStatus: number) => { res.sendStatus(errorStatus) },
+            (content: Content) => {
                 const context = { salt: imageSalt, docParser };
 
                 if (content.type !== ContentType.LIVEBLOG) {
@@ -196,7 +196,7 @@ async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
                     res.status(200).json(liveBlockUpdates(since.value, content, context));
                 }
             },
-        );
+        )(capiContent);
     } catch (e) {
         logger.error(`This error occurred`, e);
         res.sendStatus(500);

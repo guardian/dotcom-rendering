@@ -21,7 +21,7 @@ import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Item } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
-import { pageFonts } from 'styles';
+import { pageFonts, darkModeCss } from 'styles';
 import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
@@ -155,6 +155,10 @@ const styles = `
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
         line-height: 1.5;
+
+        ${darkModeCss`
+            background: transparent;
+        `}
     }
 `;
 
