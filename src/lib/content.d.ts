@@ -39,6 +39,19 @@ interface CaptionBlockElement {
     shouldLimitWidth?: boolean;
     isOverlayed?: boolean;
 }
+
+interface CalloutBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
+    id: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    title: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
@@ -276,18 +289,6 @@ interface YoutubeBlockElement {
     posterSrc?: string;
     height?: string;
     width?: string;
-}
-
-interface CalloutBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
-    id: string;
-    activeFrom: number;
-    displayOnSensitive: boolean;
-    formId: number;
-    title: string;
-    description: string;
-    tagName: string;
-    formFields: CampaignFieldType[];
 }
 
 type CAPIElement =
