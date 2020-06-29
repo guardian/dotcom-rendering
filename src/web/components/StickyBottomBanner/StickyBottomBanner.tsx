@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     CMP,
+    willShowNewCMP,
     shouldShowOldCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
@@ -24,43 +25,41 @@ export const StickyBottomBanner = ({
     countryCode,
     CAPI,
 }: Props) => {
-    const [showCMP, setShowCMP] = useState<boolean | null>(null);
+    const [showOldCMP, setShowOldCMP] = useState<boolean | null>(null);
+    const [newCMPWillShow, setNewCMPWillShow] = useState<boolean | null>(null);
 
     useEffect(() => {
-        shouldShowOldCMP().then((shouldShow) => {
-            setShowCMP(shouldShow && CAPI.config.cmpUi);
-        });
+        Promise.all([shouldShowOldCMP(), willShowNewCMP()]).then(
+            ([shouldShowOld, willShowNew]) => {
+                setShowOldCMP(shouldShowOld && CAPI.config.cmpUi);
+                setNewCMPWillShow(willShowNew);
+            },
+        );
     }, [CAPI.config.cmpUi]);
 
-    // Don't render anything until we know whether we can show the CMP
-    if (showCMP === null) {
-        return null;
-    }
+    if (newCMPWillShow) return null;
+
+    if (showOldCMP) return <CMP />;
 
     const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
 
-    return (
-        <>
-            {showCMP ? (
-                <CMP />
-            ) : (
-                showRRBanner && (
-                    <ReaderRevenueBanner
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        isSensitive={CAPI.config.isSensitive}
-                        tags={CAPI.tags}
-                        contributionsServiceUrl={CAPI.contributionsServiceUrl}
-                        alreadyVisitedCount={getAlreadyVisitedCount()}
-                        engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
-                    />
-                )
-            )}
-        </>
-    );
+    if (showRRBanner)
+        return (
+            <ReaderRevenueBanner
+                isSignedIn={isSignedIn}
+                countryCode={countryCode}
+                contentType={CAPI.contentType}
+                sectionName={CAPI.sectionName}
+                shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                isPaidContent={CAPI.pageType.isPaidContent}
+                isSensitive={CAPI.config.isSensitive}
+                tags={CAPI.tags}
+                contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                alreadyVisitedCount={getAlreadyVisitedCount()}
+                engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
+            />
+        );
+
+    return null;
 };
