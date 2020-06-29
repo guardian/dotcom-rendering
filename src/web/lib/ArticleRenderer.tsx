@@ -158,7 +158,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <VideoFacebookBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            embedUrl={element.embedUrl}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
@@ -233,7 +233,7 @@ export const ArticleRenderer: React.FC<{
                     return null;
             }
         })
-        .filter(_ => _ != null);
+        .filter((_) => _ != null);
 
     return (
         <div

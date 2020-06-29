@@ -25,7 +25,7 @@ export const largeAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VideoFacebookBlockComponent
-                url="https://www.facebook.com/video/embed?video_id=10155703704626323\"
+                embedUrl="https://www.facebook.com/video/embed?video_id=10155703704626323\"
                 pillar="news"
                 height={281}
                 width={500}
@@ -46,7 +46,7 @@ export const verticalAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VideoFacebookBlockComponent
-                url="https://www.facebook.com/video/embed?video_id=10155591097456323\"
+                embedUrl="https://www.facebook.com/video/embed?video_id=10155591097456323\"
                 pillar="news"
                 height={889}
                 width={500}
