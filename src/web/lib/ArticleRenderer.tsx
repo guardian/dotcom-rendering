@@ -157,7 +157,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <VimeoBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            embedUrl={element.embedUrl}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
@@ -171,7 +171,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <YoutubeEmbedBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            embedUrl={element.embedUrl}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
@@ -196,18 +196,21 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
+
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+                case 'model.dotcomrendering.pageElements.CalloutBlockElementXp':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
-                case 'model.dotcomrendering.pageElements.MapBlockElement':
+                case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
