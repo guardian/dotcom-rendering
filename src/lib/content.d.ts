@@ -52,6 +52,10 @@ interface CalloutBlockElement {
     formFields: CampaignFieldType[];
 }
 
+interface CalloutBlockElementXp {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElementXp';
+}
+
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
@@ -296,6 +300,7 @@ type CAPIElement =
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
+    | CalloutBlockElementXp
     | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement

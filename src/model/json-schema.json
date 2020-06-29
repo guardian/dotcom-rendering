@@ -27,6 +27,9 @@
                         "$ref": "#/definitions/CaptionBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/CalloutBlockElementXp"
+                    },
+                    {
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
@@ -521,6 +524,20 @@
                 "sport"
             ],
             "type": "string"
+        },
+        "CalloutBlockElementXp": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CalloutBlockElementXp"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
         },
         "ChartAtomBlockElement": {
             "type": "object",
@@ -1606,6 +1623,9 @@
                             },
                             {
                                 "$ref": "#/definitions/CaptionBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/CalloutBlockElementXp"
                             },
                             {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
