@@ -45,7 +45,7 @@
         "@guardian/src-link": "^1.5.0",
         "@guardian/src-svgs": "npm:@guardian/src-icons@^1.5.0",
         "@guardian/src-text-input": "^1.5.0",
-        "@sentry/browser": "^5.7.1",
+        "@sentry/browser": "^5.18.1",
         "@types/ajv": "^1.0.0",
         "@types/lodash.debounce": "^4.0.6",
         "@types/lodash.escape": "^4.0.6",
