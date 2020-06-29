@@ -5,6 +5,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
+import { Display } from '@root/src/lib/display';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
@@ -85,7 +86,7 @@ const veggieBurgerStyles = (display: Display) => css`
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
-        bottom: ${display === 'immersive' ? '3px' : '-3px'};
+        bottom: ${display === Display.Immersive ? '3px' : '-3px'};
         right: 5px;
     }
     ${from.mobileLandscape} {

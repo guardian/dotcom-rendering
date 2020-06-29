@@ -41,6 +41,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Display } from '@root/src/lib/display';
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
@@ -296,7 +297,7 @@ export const ImmersiveLayout = ({
                         </Hide>
                     </GridItem>
                     <GridItem area="border">
-                        <Border />
+                        {designType === 'PhotoEssay' ? <></> : <Border />}
                     </GridItem>
                     <GridItem area="title">
                         <>

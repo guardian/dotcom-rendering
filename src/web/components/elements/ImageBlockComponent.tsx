@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 import { from, until } from '@guardian/src-foundations/mq';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;
@@ -15,7 +16,7 @@ type Props = {
 
 const imageCss = {
     inline: css`
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
     `,
 
@@ -51,12 +52,12 @@ const imageCss = {
             margin-right: -10px;
         }
         ${from.tablet} {
-            margin-left: 0px;
+            margin-left: -20px;
             margin-right: -100px;
         }
         ${from.desktop} {
-            margin-left: 0px;
-            margin-right: -320px;
+            margin-left: -20px;
+            margin-right: -340px;
         }
         ${from.leftCol} {
             margin-left: -160px;
@@ -70,10 +71,10 @@ const imageCss = {
 
     showcase: css`
         position: relative;
-        margin-top: 16px;
+        margin-top: 12px;
         margin-bottom: 12px;
         ${from.leftCol} {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             margin-left: -160px;
         }
         ${from.wide} {
@@ -100,8 +101,14 @@ const imageCss = {
         }
     `,
 
-    // TODO:
-    halfWidth: css``,
+    halfWidth: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
+        width: 50%;
+        float: left;
+        clear: left;
+        margin-right: 16px;
+    `,
 };
 
 const decidePosition = (role: RoleType) => {

@@ -11,7 +11,7 @@ const tracker: TrackerConfig = {
     name: 'allEditorialPropertyTracker',
     id: 'UA-78705427-1',
     sampleRate: 100,
-    siteSpeedSampleRate: 100, // TODO Should be set to 1 when rolling out to wider audience
+    siteSpeedSampleRate: 1, // TODO Should be set to 0.1 when rolling out to wider audience
 };
 
 const getQueryParam = (
@@ -32,7 +32,6 @@ export const init = (): void => {
     };
 
     window.ga = window.ga || (coldQueue as UniversalAnalytics.ga);
-    const identityId = getCookie('GU_U');
 
     window.GoogleAnalyticsObject = 'ga';
     window.ga.l = +new Date();
@@ -40,7 +39,6 @@ export const init = (): void => {
     window.ga('create', tracker.id, 'auto', tracker.name, {
         sampleRate: tracker.sampleRate,
         siteSpeedSampleRate: tracker.siteSpeedSampleRate,
-        userId: identityId,
     });
 };
 
@@ -103,7 +101,7 @@ export const sendPageView = (): void => {
     const { GA } = window.guardian.app.data;
     const set = `${tracker.name}.set`;
     const send = `${tracker.name}.send`;
-    const identityId = getCookie('GU_U');
+    const userCookie = getCookie('GU_U');
     const { ga } = window;
 
     ga(set, 'forceSSL', true);
@@ -125,8 +123,7 @@ export const sendPageView = (): void => {
     ga(set, 'dimension9', GA.keywordIds);
     ga(set, 'dimension10', GA.toneIds);
     ga(set, 'dimension11', GA.seriesId);
-    ga(set, 'dimension15', identityId);
-    ga(set, 'dimension16', (identityId && 'true') || 'false');
+    ga(set, 'dimension16', (userCookie && 'true') || 'false');
     ga(set, 'dimension21', getQueryParam('INTCMP', window.location.search)); // internal campaign code
     ga(set, 'dimension22', getQueryParam('CMP_BUNIT', window.location.search)); // campaign business unit
     ga(set, 'dimension23', getQueryParam('CMP_TU', window.location.search)); // campaign team

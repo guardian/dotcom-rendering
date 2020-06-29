@@ -12,6 +12,8 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Running instructions](#running-instructions)
   - [Detailed Setup](#detailed-setup)
   - [Architecture Diagram](#architecture-diagram)
+  - [Storybook](#storybook)
+  - [Concepts](#concepts)
   - [Feedback](#feedback)
 - [Code Quality](#code-quality)
 - [IDE setup](#ide-setup)
@@ -57,6 +59,21 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
+### Storybook
+
+We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic.
+
+### Concepts
+
+There are some concepts to learn, that will make working with Dotcom Rendering clearer:
+
+-   Design and Display Types use the [Switch Pattern](docs/contributing/switch-on-display-design.md)
+-   [DecideLayout](docs/contributing/decide-layout.md)
+-   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
+-   Dynamic imports
+-   [EnhanceCAPI](docs/contributing/enhance-capi.md)
+-   Data generated in Frontend
+
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
@@ -89,6 +106,8 @@ $ make fix
 
 See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
 
+[Read about testing tools and testing strategy](docs/testing.md).
+
 ## IDE setup
 
 We recommend using [VSCode](https://code.visualstudio.com/).
@@ -115,4 +134,4 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 <a href="https://www.chromaticqa.com/"><img src="https://cdn-images-1.medium.com/letterbox/147/36/50/50/1*oHHjTjInDOBxIuYHDY2gFA.png?source=logoAvatar-d7276495b101---37816ec27d7a" width="120"/></a>
 
-Thanks to [Chromatic](https://www.chromaticqa.com/) for providing the visual testing platform that helps us catch unexpected changes on time.
+Thanks to [Chromatic](https://www.chromaticqa.com/) for providing the visual testing platform that helps us catch unexpected changes on time

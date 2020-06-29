@@ -9,9 +9,8 @@ import {
     getWeeklyArticleHistory,
 } from '@guardian/automat-client';
 import {
-    shouldShowSupportMessaging,
     isRecurringContributor,
-    getLastOneOffContributionDate,
+    getLastOneOffContributionDate, shouldHideSupportMessaging,
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {sendOphanContributionsComponentEvent, TestMeta} from "@root/src/web/browser/ophan/ophan";
@@ -90,7 +89,7 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             isSensitive: props.isSensitive,
             tags: props.tags,
-            showSupportMessaging: shouldShowSupportMessaging(),
+            showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn || false),
             isRecurringContributor: isRecurringContributor(
                 props.isSignedIn || false,
             ),

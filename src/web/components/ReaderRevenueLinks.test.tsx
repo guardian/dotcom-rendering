@@ -17,6 +17,9 @@ jest.mock('@frontend/web/browser/cookie', () => ({
 describe('ReaderRevenueLinks', () => {
     const contributionsCookie = 'gu.contributions.contrib-timestamp';
     const payingMemberCookie = 'gu_paying_member';
+    const digitalSubscriberCookie = 'gu_digital_subscriber';
+    const recentContributorCookie = 'gu.contributions.contrib-timestamp';
+
     const urls = {
         contribute: 'https://www.theguardian.com/contribute',
         subscribe: 'https://www.theguardian.com/subscribe',
@@ -49,8 +52,11 @@ describe('ReaderRevenueLinks', () => {
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
 
-        expect(getCookie).toHaveBeenCalledTimes(2);
+        expect(getCookie).toHaveBeenCalledTimes(4);
         expect(getCookie).toHaveBeenCalledWith(contributionsCookie);
+        expect(getCookie).toHaveBeenCalledWith(digitalSubscriberCookie);
+        expect(getCookie).toHaveBeenCalledWith(payingMemberCookie);
+        expect(getCookie).toHaveBeenCalledWith(recentContributorCookie);
     });
 
     it('should not render correctly if paying member', async () => {
@@ -76,9 +82,11 @@ describe('ReaderRevenueLinks', () => {
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
 
-        expect(getCookie).toHaveBeenCalledTimes(2);
+        expect(getCookie).toHaveBeenCalledTimes(4);
         expect(getCookie).toHaveBeenCalledWith(contributionsCookie);
         expect(getCookie).toHaveBeenCalledWith(payingMemberCookie);
+        expect(getCookie).toHaveBeenCalledWith(digitalSubscriberCookie);
+        expect(getCookie).toHaveBeenCalledWith(recentContributorCookie);
     });
 
     it('should render if neither paying member or recent contributor', async () => {
@@ -104,8 +112,10 @@ describe('ReaderRevenueLinks', () => {
         await wait(() => expect(container.firstChild).not.toBeNull());
 
         expect(getByText('Support The Guardian')).toBeInTheDocument();
-        expect(getCookie).toHaveBeenCalledTimes(2);
+        expect(getCookie).toHaveBeenCalledTimes(4);
         expect(getCookie).toHaveBeenCalledWith(contributionsCookie);
         expect(getCookie).toHaveBeenCalledWith(payingMemberCookie);
+        expect(getCookie).toHaveBeenCalledWith(digitalSubscriberCookie);
+        expect(getCookie).toHaveBeenCalledWith(recentContributorCookie);
     });
 });

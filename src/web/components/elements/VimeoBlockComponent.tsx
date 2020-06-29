@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
+import { Display } from '@root/src/lib/display';
 
 const responsiveAspectRatio = (height: number, width: number) => css`
     /* https://css-tricks.com/aspect-ratio-boxes/ */
@@ -16,7 +17,7 @@ const responsiveAspectRatio = (height: number, width: number) => css`
 `;
 export const VimeoBlockComponent: React.FC<{
     pillar: Pillar;
-    url: string;
+    embedUrl?: string;
     height: number;
     width: number;
     caption?: string;
@@ -25,7 +26,7 @@ export const VimeoBlockComponent: React.FC<{
     display: Display;
     designType: DesignType;
 }> = ({
-    url,
+    embedUrl,
     caption,
     title,
     pillar,
@@ -53,7 +54,7 @@ export const VimeoBlockComponent: React.FC<{
         >
             <div className={responsiveAspectRatio(height, width)}>
                 <iframe
-                    src={url}
+                    src={embedUrl}
                     title={title}
                     height={height}
                     width={width}

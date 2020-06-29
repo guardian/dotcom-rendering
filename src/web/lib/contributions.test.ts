@@ -1,6 +1,7 @@
 import { addCookie } from '../browser/cookie';
 import {
     getLastOneOffContributionDate,
+    isRecentOneOffContributor,
     ONE_OFF_CONTRIBUTION_DATE_COOKIE,
     SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
@@ -61,3 +62,31 @@ describe('getLastOneOffContributionDate', () => {
         expect(lastOneOffContributionDate).toBeUndefined();
     });
 });
+
+/* eslint-disable @typescript-eslint/unbound-method */
+describe('isRecentOneOffContributor', () => {
+   beforeEach(clearAllCookies);
+
+    it('returns false if there is no one-off contribution cookie', () => {
+        expect(isRecentOneOffContributor()).toBe(false);
+    });
+
+    it('returns true if there are 5 days between the last contribution date and now', () => {
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+        global.Date.now = jest.fn(() => Date.parse('2018-08-07T10:50:34'));
+        expect(isRecentOneOffContributor()).toBe(true);
+    });
+
+    it('returns true if there are 0 days between the last contribution date and now', () => {
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+        global.Date.now = jest.fn(() => Date.parse('2018-08-01T13:00:30'));
+        expect(isRecentOneOffContributor()).toBe(true);
+    });
+
+    it('returns false if the one-off contribution was more than 3 months ago', () => {
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+        global.Date.now = jest.fn(() => Date.parse('2019-08-01T13:00:30'));
+        expect(isRecentOneOffContributor()).toBe(false);
+    });
+});
+/* eslint-enable @typescript-eslint/unbound-method  */

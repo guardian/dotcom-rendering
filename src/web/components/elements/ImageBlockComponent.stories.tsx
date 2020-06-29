@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -23,8 +24,9 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
             </LeftColumn>
             <div
                 className={css`
-                    width: 620px;
+                    max-width: 620px;
                     padding: 20px;
+                    flex-grow: 1;
                 `}
             >
                 {children}
@@ -50,7 +52,7 @@ export const StandardArticle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -66,7 +68,7 @@ export const Immersive = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'immersive' }}
                 pillar="news"
@@ -82,7 +84,7 @@ export const Showcase = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'showcase' }}
                 pillar="news"
@@ -98,7 +100,7 @@ export const Thumbnail = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'thumbnail' }}
                 pillar="news"
@@ -114,7 +116,7 @@ export const Supporting = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'supporting' }}
                 pillar="news"
@@ -130,7 +132,7 @@ export const HideCaption = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -147,7 +149,7 @@ export const InlineTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -169,7 +171,7 @@ export const InlineTitleMobile = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'inline' }}
                 pillar="news"
@@ -191,7 +193,7 @@ export const ImmersiveTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'immersive' }}
                 pillar="news"
@@ -209,7 +211,7 @@ export const ShowcaseTitle = () => {
     return (
         <Container>
             <ImageBlockComponent
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
                 element={{ ...image, role: 'showcase' }}
                 pillar="news"
@@ -224,5 +226,173 @@ ShowcaseTitle.story = {
     parameters: {
         viewport: { defaultViewport: 'desktop' },
         chromatic: { viewports: [980] },
+    },
+};
+
+export const HalfWidth = () => {
+    return (
+        <Container>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </p>
+            <ImageBlockComponent
+                display={Display.Standard}
+                designType="Article"
+                element={{ ...image, role: 'halfWidth' }}
+                pillar="news"
+            />
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+HalfWidth.story = {
+    name: 'with role halfWidth on desktop',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [980] },
+    },
+};
+
+export const HalfWidthMobile = () => {
+    return (
+        <Container>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </p>
+            <ImageBlockComponent
+                display={Display.Standard}
+                designType="Article"
+                element={{ ...image, role: 'halfWidth' }}
+                pillar="news"
+            />
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+HalfWidthMobile.story = {
+    name: 'with role halfWidth on mobile',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [375] },
+    },
+};
+
+export const HalfWidthWide = () => {
+    return (
+        <Container>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est
+                laborum.Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            <ImageBlockComponent
+                display={Display.Standard}
+                designType="Article"
+                element={{ ...image, role: 'halfWidth' }}
+                pillar="news"
+            />
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+HalfWidthWide.story = {
+    name: 'with role halfWidth',
+    parameters: {
+        viewport: { defaultViewport: 'wide' },
+        chromatic: { viewports: [1300] },
     },
 };

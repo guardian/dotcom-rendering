@@ -7,6 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;
@@ -119,7 +120,7 @@ export const SeriesSectionLink = ({
     const hasSeriesTag = tag && tag.type === 'Series';
 
     switch (display) {
-        case 'immersive': {
+        case Display.Immersive: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView': {
@@ -214,8 +215,9 @@ export const SeriesSectionLink = ({
                 }
             }
         }
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard:
+        default: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':

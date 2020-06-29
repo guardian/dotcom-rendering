@@ -1,18 +1,12 @@
 // -------------------------------------
 // Elements
 // -------------------------------------
-
-interface AtomEmbedMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+interface InteractiveAtomBlockElementBase {
+    url: string;
     id?: string;
     html?: string;
     css?: string;
     js?: string;
-}
-
-interface AtomEmbedUrlBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
-    url: string;
 }
 
 interface AudioAtomElement {
@@ -33,10 +27,37 @@ interface BlockquoteBlockElement {
     html: string;
 }
 
-interface ChartAtomBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
+interface CaptionBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
+    display: Display;
+    designType: DesignType;
+    captionText?: string;
+    pillar: Pillar;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    shouldLimitWidth?: boolean;
+    isOverlayed?: boolean;
+}
+
+interface CalloutBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
     id: string;
-    url: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    title: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
+interface CalloutBlockElementXp {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElementXp';
+}
+
+interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
 
 interface CodeBlockElement {
@@ -88,6 +109,10 @@ interface ExplainerAtomBlockElement {
     body: string;
 }
 
+interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+}
+
 interface GuideAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
     id: string;
@@ -104,6 +129,11 @@ interface GuVideoBlockElement {
     caption: string;
 }
 
+interface HighlightBlockElement {
+    _type: 'model.dotcomrendering.pageElements.HighlightBlockElement';
+    html: string;
+}
+
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
@@ -116,6 +146,7 @@ interface ImageBlockElement {
     imageSources: ImageSource[];
     displayCredit?: boolean;
     role: RoleType;
+    title?: string;
 }
 
 interface InstagramBlockElement {
@@ -123,6 +154,10 @@ interface InstagramBlockElement {
     html: string;
     url: string;
     hasCaption: boolean;
+}
+
+interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 }
 
 interface MapBlockElement {
@@ -230,6 +265,7 @@ interface VideoFacebookBlockElement {
 
 interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
+    embedUrl?: string;
     url: string;
     height: number;
     width: number;
@@ -240,10 +276,13 @@ interface VideoVimeoBlockElement {
 
 interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
+    embedUrl?: string;
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface YoutubeBlockElement {
@@ -258,24 +297,13 @@ interface YoutubeBlockElement {
     width?: string;
 }
 
-interface CalloutBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
-    id: string;
-    activeFrom: number;
-    displayOnSensitive: boolean;
-    formId: number;
-    title: string;
-    description: string;
-    tagName: string;
-    formFields: CampaignFieldType[];
-}
-
 type CAPIElement =
-    | AtomEmbedMarkupBlockElement
-    | AtomEmbedUrlBlockElement
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement
+    | CaptionBlockElement
+    | CalloutBlockElement
+    | CalloutBlockElementXp
     | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
@@ -285,10 +313,13 @@ type CAPIElement =
     | DocumentBlockElement
     | EmbedBlockElement
     | ExplainerAtomBlockElement
+    | GenericAtomBlockElement
     | GuideAtomBlockElement
     | GuVideoBlockElement
+    | HighlightBlockElement
     | ImageBlockElement
     | InstagramBlockElement
+    | InteractiveAtomBlockElement
     | MapBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement

@@ -72,9 +72,8 @@
 
         <h2>Test Articles By Element (Missing)</h2>
         <ul>
-            <li>AtomEmbedMarkupBlockElement</li>
-            <li>AtomEmbedUrlBlockElement</li>
             <li>BlockquoteBlockElement</li>
+            <li>CaptionBlockElement</li>
             <li>ContentAtomBlockElement</li>
             <li>DisclaimerBlockElement</li>
             <li>GuideAtomBlockElement</li>
@@ -86,7 +85,6 @@
             <li>TimelineBlockElement</li>
             <li>VideoBlockElement</li>
             <li>VideoFacebookBlockElement</li>
-            <li>VideoVimeoBlockElement</li>
         </ul>
 
         <script>
@@ -119,6 +117,11 @@
                         '/music/2018/nov/02/the-prodigy-no-tourists-review',
                 },
                 {
+                    name: 'InteractiveAtomBlockElement',
+                    article:
+                        '/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
+                },
+                {
                     name: 'CodeBlockElement',
                     article: '/info/2018/nov/30/bye-bye-mongo-hello-postgres',
                 },
@@ -148,8 +151,18 @@
                         '/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission',
                 },
                 {
+                    name: 'GenericAtomBlockElement', // AudioAtom
+                    article:
+                        'football/2020/jun/13/the-forgotten-story-of-jimmy-hasty-irish-football-one-armed-wonder',
+                },
+                {
                     name: 'GuVideoBlockElement',
                     article: '/film/2013/feb/14/keanu-reeves-future-of-cinema',
+                },
+                {
+                    name: 'HighlightBlockElement',
+                    article:
+                        '/uk-news/2020/apr/22/eddies-last-farewell-a-funeral-in-the-time-of-coronavirus-photo-essay',
                 },
                 {
                     name: 'ImageBlockElement',
@@ -212,6 +225,11 @@
                         '/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems',
                 },
                 {
+                    name: 'VideoVimeoBlockElement',
+                    article:
+                        '/stage/2020/mar/29/ecole-des-femmes-review-moliere-theatre-odeon',
+                },
+                {
                     name: 'VideoYoutubeBlockElement',
                     article:
                         '/us-news/2017/feb/23/los-angeles-police-officer-teen-gun-video-protests',
@@ -256,7 +274,7 @@
                 },
             ];
 
-            var makeTestArticle = a => `
+            var makeTestArticle = (a) => `
                 <div class="test-article">
                     <span>${a.name}</span>
                     <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
@@ -266,19 +284,19 @@
                 </div>
             `;
 
-            testContentTypes.forEach(a => {
+            testContentTypes.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-content',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testArticles.forEach(a => {
+            testArticles.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-element',
                 ).innerHTML += makeTestArticle(a);
             });
 
-            testContentAtomTypes.forEach(a => {
+            testContentAtomTypes.forEach((a) => {
                 document.getElementById(
                     'test-articles-by-atom-type',
                 ).innerHTML += makeTestArticle(a);

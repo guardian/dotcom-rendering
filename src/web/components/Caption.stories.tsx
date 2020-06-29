@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
+import { Display } from '@root/src/lib/display';
 
 export default {
     component: Caption,
@@ -23,7 +24,7 @@ export default {
 export const Article = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Standard}
             designType="Article"
             captionText="This is how an Article caption looks"
             pillar="news"
@@ -35,7 +36,7 @@ Article.story = { name: 'Article' };
 export const Analysis = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Standard}
             designType="Analysis"
             captionText="This is how an Analysis caption looks"
             pillar="news"
@@ -47,9 +48,9 @@ Analysis.story = { name: 'Analysis' };
 export const PhotoEssay = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Immersive}
             designType="PhotoEssay"
-            captionText="This is how a PhotoEssay caption looks"
+            captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
             pillar="news"
         />
     </Section>
@@ -59,9 +60,9 @@ PhotoEssay.story = { name: 'PhotoEssay' };
 export const PhotoEssayLimitedWidth = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Immersive}
             designType="PhotoEssay"
-            captionText="This is how a PhotoEssay caption looks when width is limited"
+            captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
             pillar="news"
             shouldLimitWidth={true}
         />
@@ -72,7 +73,7 @@ PhotoEssayLimitedWidth.story = { name: 'PhotoEssay with width limited' };
 export const Credit = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Standard}
             designType="Feature"
             captionText="This is how a Feature caption looks with credit showing"
             pillar="news"
@@ -86,7 +87,7 @@ Credit.story = { name: 'with credit' };
 export const WidthLimited = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Standard}
             designType="Article"
             captionText="This is how a caption looks with width limited"
             pillar="news"
@@ -99,7 +100,7 @@ WidthLimited.story = { name: 'with width limited' };
 export const Padded = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <Caption
-            display="standard"
+            display={Display.Standard}
             designType="Article"
             captionText="This is how a caption looks when padded"
             pillar="news"

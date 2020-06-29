@@ -6,6 +6,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
+import { Display } from '@root/src/lib/display';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
 
 const screenReadable = css`
@@ -65,7 +66,7 @@ const openExpandedMenuStyles = (display: Display) => css`
     padding-right: 20px;
     ${from.desktop} {
         display: block;
-        padding-top: ${display === 'immersive' ? '9px' : '5px'};
+        padding-top: ${display === Display.Immersive ? '9px' : '5px'};
         height: 42px;
     }
     :hover,

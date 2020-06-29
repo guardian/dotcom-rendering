@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -11,7 +12,7 @@ export default {
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
         className={css`
-            width: 620px;
+            max-width: 620px;
             padding: 20px;
         `}
     >
@@ -24,14 +25,14 @@ export const smallAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/327310297?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
                 pillar="news"
                 height={250}
                 width={250}
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -45,14 +46,14 @@ export const largeAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/327310297?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
                 pillar="news"
                 height={259}
                 width={460}
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
@@ -66,14 +67,14 @@ export const verticalAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/265111898?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/265111898?app_id=122963"
                 pillar="news"
                 height={818}
                 width={460}
                 caption="blah"
                 credit=""
                 title=""
-                display="standard"
+                display={Display.Standard}
                 designType="Article"
             />
             <p>abc</p>
