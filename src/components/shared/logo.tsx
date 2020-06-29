@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import Anchor from 'components/anchor';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { Logo } from 'capi';
 import { Format } from '@guardian/types/Format';
-import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { darkModeCss } from 'styles';
 import { remSpace, text, neutral } from '@guardian/src-foundations';
+import { Branding } from '@guardian/apps-rendering-api-models/branding';
 
 interface Props {
     branding: Branding;
     format: Format;
 }
 
-const styles = (lightModeImage: string, darkModeImage?: string) => css`
+const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => css`
     margin-bottom: ${remSpace[6]};
 
     .image img {
