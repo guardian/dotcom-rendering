@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -10,7 +10,7 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { getCookie } from '@root/src/web/browser/cookie';
+import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 
 type Props = {
     edition: Edition;
@@ -112,65 +112,16 @@ const subMessageStyles = css`
     margin-bottom: 5px;
 `;
 
-const decideIfRecentContributor: () => boolean = () => {
-    const cookieValue = getCookie('gu.contributions.contrib-timestamp');
-
-    if (!cookieValue) {
-        return false;
-    }
-
-    const now = new Date().getTime();
-    const lastContribution = new Date(cookieValue).getTime();
-    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
-
-    return diffDays <= 180;
-};
-
 export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
     urls,
     dataLinkNamePrefix,
     inHeader,
 }) => {
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>(
-        false,
-    );
-    const [hideSupportMessage, setShouldHideSupportMessage] = useState<boolean>(
-        false,
-    );
-
-    const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
-
-    const [isRecentContributor, setIsRecentContributor] = useState<boolean>(
-        false,
-    );
-
-    useEffect(() => {
-        // Is paying member?
-        setIsPayingMember(getCookie('gu_paying_member') === 'true');
-
-        // Should the support messages be shown
-        setShouldHideSupportMessage(
-            getCookie('gu_hide_support_messaging') === 'true',
-        );
-
-        // Is recent contributor?
-        setIsRecentContributor(decideIfRecentContributor());
-
-        // Is digital subscriber?
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
-    }, []);
-
     /*
-        Changed to OR statement as it's likely that at least one will will be false.
-        Default response is to show the banners
+        Updated to now use Reader Revenue shouldHideSupportMessaging()
     */
-    if (
-        isDigitalSubscriber ||
-        isPayingMember ||
-        isRecentContributor ||
-        hideSupportMessage
-    ) {
+    if (shouldHideSupportMessaging()) {
         return null;
     }
     return (
