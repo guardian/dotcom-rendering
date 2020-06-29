@@ -126,7 +126,7 @@ async function serveArticlePost(
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
-        const articleId = req.params[ 0 ] || defaultId;
+        const articleId = req.params[0] || defaultId;
         const imageSalt = await getConfigValue<string>('apis.img.salt');
         const capiContent = await askCapiFor(articleId);
 

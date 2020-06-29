@@ -16,7 +16,8 @@ import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
 import { pipe2 } from 'lib';
-
+import { RenderingRequest } from '../api-models/ts/target/scala-2.12/src_managed/main/thrift/@guardian/apps-rendering-api-models/renderingRequest';
+import { Branding } from '../api-models/ts/target/scala-2.12/src_managed/main/thrift/@guardian/apps-rendering-api-models/branding';
 
 // ----- Item Type ----- //
 
@@ -32,6 +33,7 @@ interface Fields extends Format {
     commentable: boolean;
     tags: Tag[];
     shouldHideReaderRevenue: boolean;
+    branding: Option<Branding>;
 }
 
 interface Liveblog extends Fields {
@@ -129,8 +131,9 @@ function getDisplay(content: Content): Display {
     return Display.Standard;
 }
 
-const itemFields = (context: Context, content: Content): ItemFields =>
-    ({
+const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
+    const { content, branding } = request;
+    return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
@@ -143,15 +146,18 @@ const itemFields = (context: Context, content: Content): ItemFields =>
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
-        shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false
-    })
+        shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
+        branding: fromNullable(branding)
+    }
+}
 
-const itemFieldsWithBody = (context: Context, content: Content): ItemFieldsWithBody => {
+const itemFieldsWithBody = (context: Context, request: RenderingRequest): ItemFieldsWithBody => {
+    const { content } = request;
     const body = content?.blocks?.body ?? [];
     const atoms = content?.atoms;
     const elements = body[0]?.elements;
     return ({
-        ...itemFields(context, content),
+        ...itemFields(context, request),
         body: elements !== undefined ? parseElements(context, atoms)(elements): [],
     });
 }
@@ -198,18 +204,20 @@ const isQuiz =
 const isAdvertisementFeature =
     hasTag('tone/advertisement-features');
 
-const fromCapiLiveBlog = (context: Context) => (content: Content): Liveblog => {
+const fromCapiLiveBlog = (context: Context) => (request: RenderingRequest): Liveblog => {
+    const { content } = request;
     const body = content?.blocks?.body?.slice(0, 7) ?? [];
 
     return {
         design: Design.Live,
         blocks: parseLiveBlocks(body)(context),
         totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-        ...itemFields(context, content),
+        ...itemFields(context, request),
     };
 }
 
-const fromCapi = (context: Context) => (content: Content): Item => {
+const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
+    const { content } = request;
     const { tags, fields } = content;
 
     // These checks aim for parity with the CAPI Scala client:
@@ -217,26 +225,26 @@ const fromCapi = (context: Context) => (content: Content): Item => {
     if (isInteractive(content)) {
         return {
             design: Design.Interactive,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isMedia(tags)) {
         return {
             design: Design.Media,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (fields?.starRating !== undefined && isReview(tags)) {
         return {
             design: Design.Review,
             starRating: fields?.starRating,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isAnalysis(tags)) {
         return {
             design: Design.Analysis,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isComment(tags)) {
-        const item = itemFieldsWithBody(context, content);
+        const item = itemFieldsWithBody(context, request);
         return {
             design: Design.Comment,
             ...item,
@@ -245,46 +253,46 @@ const fromCapi = (context: Context) => (content: Content): Item => {
     } else if (isFeature(tags)) {
         return {
             design: Design.Feature,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isLive(tags)) {
-        return fromCapiLiveBlog(context)(content);
+        return fromCapiLiveBlog(context)(request);
     } else if (isRecipe(tags)) {
         return {
             design: Design.Recipe,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isMatchReport(tags)) {
         return {
             design: Design.MatchReport,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isInterview(tags)) {
         return {
             design: Design.Interview,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isGuardianView(tags)) {
         return {
             design: Design.GuardianView,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isQuiz(tags)) {
         return {
             design: Design.Quiz,
-            ...itemFieldsWithBody(context, content),
+            ...itemFieldsWithBody(context, request),
         };
     } else if (isAdvertisementFeature(tags)) {
         return {
             design: Design.AdvertisementFeature,
-            ...itemFieldsWithBody(context, content),
-            logo: paidContentLogo(content.tags),
+            ...itemFieldsWithBody(context, request),
+            logo: paidContentLogo(tags),
         };
     }
 
     return {
         design: Design.Article,
-        ...itemFieldsWithBody(context, content),
+        ...itemFieldsWithBody(context, request),
     };
 }
 
