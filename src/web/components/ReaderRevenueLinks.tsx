@@ -132,7 +132,15 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     dataLinkNamePrefix,
     inHeader,
 }) => {
+    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>(
+        false,
+    );
+    const [hideSupportMessage, setShouldHideSupportMessage] = useState<boolean>(
+        false,
+    );
+
     const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
+
     const [isRecentContributor, setIsRecentContributor] = useState<boolean>(
         false,
     );
@@ -140,24 +148,65 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     useEffect(() => {
         // Is paying member?
         setIsPayingMember(getCookie('gu_paying_member') === 'true');
+
+        // Should the support messages be shown
+        setShouldHideSupportMessage(
+            getCookie('gu_hide_support_messaging') === 'true',
+        );
+
         // Is recent contributor?
         setIsRecentContributor(decideIfRecentContributor());
+
+        // Is digital subscriber?
+        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
     }, []);
 
-    if (!isPayingMember && !isRecentContributor) {
-        return (
-            <div className={cx(inHeader && paddingStyles)}>
-                <div
-                    className={cx({
-                        [hiddenUntilTablet]: inHeader,
-                    })}
+    /*
+        Changed to OR statement as it's likely that at least one will will be false.
+        Default response is to show the banners
+    */
+    if (
+        isDigitalSubscriber ||
+        isPayingMember ||
+        isRecentContributor ||
+        hideSupportMessage
+    ) {
+        return null;
+    }
+    return (
+        <div className={cx(inHeader && paddingStyles)}>
+            <div
+                className={cx({
+                    [hiddenUntilTablet]: inHeader,
+                })}
+            >
+                <div className={messageStyles}>Support The&nbsp;Guardian</div>
+                <div className={subMessageStyles}>
+                    Available for everyone, funded by readers
+                </div>
+                <a
+                    className={linkStyles}
+                    href={urls.contribute}
+                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                 >
-                    <div className={messageStyles}>
-                        Support The&nbsp;Guardian
-                    </div>
-                    <div className={subMessageStyles}>
-                        Available for everyone, funded by readers
-                    </div>
+                    Contribute <ArrowRightIcon />
+                </a>
+                <a
+                    className={linkStyles}
+                    href={urls.subscribe}
+                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                >
+                    Subscribe <ArrowRightIcon />
+                </a>
+            </div>
+
+            <div
+                className={cx({
+                    [hiddenFromTablet]: inHeader,
+                    [hidden]: !inHeader,
+                })}
+            >
+                {edition === 'UK' ? (
                     <a
                         className={linkStyles}
                         href={urls.contribute}
@@ -165,41 +214,16 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     >
                         Contribute <ArrowRightIcon />
                     </a>
+                ) : (
                     <a
                         className={linkStyles}
-                        href={urls.subscribe}
-                        data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                        href={urls.support}
+                        data-link-name={`${dataLinkNamePrefix}support-cta`}
                     >
-                        Subscribe <ArrowRightIcon />
+                        Support us <ArrowRightIcon />
                     </a>
-                </div>
-
-                <div
-                    className={cx({
-                        [hiddenFromTablet]: inHeader,
-                        [hidden]: !inHeader,
-                    })}
-                >
-                    {edition === 'UK' ? (
-                        <a
-                            className={linkStyles}
-                            href={urls.contribute}
-                            data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                        >
-                            Contribute <ArrowRightIcon />
-                        </a>
-                    ) : (
-                        <a
-                            className={linkStyles}
-                            href={urls.support}
-                            data-link-name={`${dataLinkNamePrefix}support-cta`}
-                        >
-                            Support us <ArrowRightIcon />
-                        </a>
-                    )}
-                </div>
+                )}
             </div>
-        );
-    }
-    return null;
+        </div>
+    );
 };

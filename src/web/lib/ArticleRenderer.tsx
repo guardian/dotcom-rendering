@@ -157,7 +157,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <VimeoBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            embedUrl={element.embedUrl}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}
@@ -171,7 +171,7 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <YoutubeEmbedBlockComponent
                             pillar={pillar}
-                            url={element.url}
+                            embedUrl={element.embedUrl}
                             height={element.height}
                             width={element.width}
                             caption={element.caption}

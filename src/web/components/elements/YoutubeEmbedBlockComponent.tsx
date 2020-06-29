@@ -7,7 +7,7 @@ import { Display } from '@root/src/lib/display';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
     pillar: Pillar;
-    url: string;
+    embedUrl?: string;
     height: number;
     width: number;
     caption?: string;
@@ -16,7 +16,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     display: Display;
     designType: DesignType;
 }> = ({
-    url,
+    embedUrl,
     caption,
     title,
     pillar,
@@ -44,7 +44,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
         >
             <MaintainAspectRatio height={height} width={width}>
                 <iframe
-                    src={url}
+                    src={embedUrl}
                     title={title}
                     height={height}
                     width={width}
