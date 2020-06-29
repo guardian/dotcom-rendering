@@ -1,11 +1,13 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
 import {
-    shouldShow as shouldShow_,
+    shouldShow,
     setErrorHandler,
 } from '@guardian/consent-management-platform';
+import { ccpaApplies } from '../../lib/ccpaApplies';
 
-export const shouldShow = shouldShow_;
+export const shouldShowOldCMP = async () =>
+    (await ccpaApplies()) ? false : shouldShow();
 
 export const CMP = () => {
     const [show, setShow] = useState(false);

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
     CMP,
-    shouldShow as shouldShowCMP,
+    shouldShowOldCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
-import {getAlreadyVisitedCount} from "@root/src/web/lib/alreadyVisited";
+import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 
 type Props = {
     isSignedIn?: boolean;
@@ -13,7 +13,10 @@ type Props = {
 };
 
 const getEngagementBannerLastClosedAt = (): string | undefined => {
-    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
+    return (
+        localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') ||
+        undefined
+    );
 };
 
 export const StickyBottomBanner = ({
@@ -24,11 +27,9 @@ export const StickyBottomBanner = ({
     const [showCMP, setShowCMP] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const callShouldShow = () => setShowCMP(shouldShowCMP());
-
-        if (CAPI.config.cmpUi) {
-            callShouldShow();
-        }
+        shouldShowOldCMP().then((shouldShow) => {
+            setShowCMP(shouldShow && CAPI.config.cmpUi);
+        });
     }, [CAPI.config.cmpUi]);
 
     // Don't render anything until we know whether we can show the CMP
