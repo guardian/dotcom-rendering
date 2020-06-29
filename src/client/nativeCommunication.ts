@@ -3,6 +3,7 @@ import { Image } from "@guardian/bridget/Image";
 import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
 import { logger } from "../logger";
 import { memoise } from "../lib";
+import { Rect } from "@guardian/bridget/Rect";
 
 const getTargetingParams: () => Map<string, string> = memoise(() => {
     const content = document.getElementById('targeting-params')?.innerHTML ?? '{}';
@@ -33,10 +34,12 @@ function getAdSlots(): AdSlot[] {
     return Array.from(advertSlots).map(adSlot => {
         const slotPosition = adSlot.getBoundingClientRect();
         return new AdSlot({
-            x: slotPosition.left + scrollLeft,
-            y: slotPosition.top + scrollTop,
-            width: slotPosition.width,
-            height: slotPosition.height,
+            rect: new Rect({
+                x: slotPosition.left + scrollLeft,
+                y: slotPosition.top + scrollTop,
+                width: slotPosition.width,
+                height: slotPosition.height
+            }),
             targetingParams
         })
     });
