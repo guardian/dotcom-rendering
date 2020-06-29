@@ -25,7 +25,7 @@ export const standardAspectRatio = () => {
         <Container>
             <p>abc</p>
             <YoutubeEmbedBlockComponent
-                url="https://www.youtube-nocookie.com/embed/79fzeNUqQbQ?wmode=opaque&feature=oembed"
+                embedUrl="https://www.youtube-nocookie.com/embed/79fzeNUqQbQ?wmode=opaque&feature=oembed"
                 pillar="news"
                 height={259}
                 width={460}

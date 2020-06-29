@@ -25,7 +25,7 @@ export const smallAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/327310297?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
                 pillar="news"
                 height={250}
                 width={250}
@@ -46,7 +46,7 @@ export const largeAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/327310297?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
                 pillar="news"
                 height={259}
                 width={460}
@@ -67,7 +67,7 @@ export const verticalAspectRatio = () => {
         <Container>
             <p>abc</p>
             <VimeoBlockComponent
-                url="https://player.vimeo.com/video/265111898?app_id=122963"
+                embedUrl="https://player.vimeo.com/video/265111898?app_id=122963"
                 pillar="news"
                 height={818}
                 width={460}

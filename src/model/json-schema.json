@@ -1484,6 +1484,9 @@
                         "model.dotcomrendering.pageElements.VideoVimeoBlockElement"
                     ]
                 },
+                "embedUrl": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -1518,6 +1521,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoYoutubeBlockElement"
                     ]
+                },
+                "embedUrl": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"
