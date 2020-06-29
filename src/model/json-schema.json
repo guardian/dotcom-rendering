@@ -27,6 +27,9 @@
                         "$ref": "#/definitions/CaptionBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/CalloutBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CalloutBlockElementXp"
                     },
                     {
@@ -524,6 +527,371 @@
                 "sport"
             ],
             "type": "string"
+        },
+        "CalloutBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CalloutBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "activeFrom": {
+                    "type": "number"
+                },
+                "displayOnSensitive": {
+                    "type": "boolean"
+                },
+                "formId": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tagName": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldFile"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldRadio"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldCheckbox"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldSelect"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "activeFrom",
+                "description",
+                "displayOnSensitive",
+                "formFields",
+                "formId",
+                "id",
+                "tagName",
+                "title"
+            ]
+        },
+        "CampaignFieldText": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "textarea"
+                    ]
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
+        },
+        "CampaignFieldTextArea": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "text"
+                    ]
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
+        },
+        "CampaignFieldFile": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "file"
+                    ]
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
+        },
+        "CampaignFieldRadio": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "radio"
+                    ]
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "label",
+                            "value"
+                        ]
+                    }
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "options",
+                "required",
+                "type"
+            ]
+        },
+        "CampaignFieldCheckbox": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "checkbox"
+                    ]
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "label",
+                            "value"
+                        ]
+                    }
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "options",
+                "required",
+                "type"
+            ]
+        },
+        "CampaignFieldSelect": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "select"
+                    ]
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "label",
+                            "value"
+                        ]
+                    }
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "textSize": {
+                    "type": "number"
+                },
+                "hideLabel": {
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "options",
+                "required",
+                "type"
+            ]
         },
         "CalloutBlockElementXp": {
             "type": "object",
@@ -1629,6 +1997,9 @@
                             },
                             {
                                 "$ref": "#/definitions/CaptionBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/CalloutBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/CalloutBlockElementXp"

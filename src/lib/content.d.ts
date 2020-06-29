@@ -302,6 +302,7 @@ type CAPIElement =
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
+    | CalloutBlockElement
     | CalloutBlockElementXp
     | ChartAtomBlockElement
     | CodeBlockElement
