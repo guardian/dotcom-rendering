@@ -557,6 +557,26 @@ const render = (format: Format, excludeStyles = false) =>
                 return h(InteractiveAtom, { html, styles, js, format });
             }
         }
+
+        case ElementKind.MediaAtom: {
+            const { posterUrl, videoId, duration } = element;
+            const styles = css`
+                width: 100%;
+                padding-bottom: 56.25%;
+                margin: ${remSpace[4]} 0;
+                background: ${neutral[97]};
+                ${darkModeCss`
+                    background: ${neutral[20]};
+                `}
+            `
+            const attributes = {
+                'data-posterUrl': posterUrl,
+                'data-videoId': videoId,
+                'data-duration': duration,
+                css: styles
+            }
+            return styledH('div', attributes)
+        }
     }
 };
 
