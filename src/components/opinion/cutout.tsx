@@ -6,6 +6,8 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Contributor, isSingleContributor } from 'contributor';
 import Img from 'components/img';
 import { darkModeCss } from 'styles';
+import { pipe2 } from 'lib';
+import { map, withDefault } from 'types/option';
 
 
 // ----- Styles ----- //
@@ -41,16 +43,19 @@ const Cutout = ({ contributors, className }: Props): JSX.Element | null => {
         return null;
     }
 
-    return contributor.image.fmap<ReactElement | null>(image => {
-        return (
+    return pipe2(
+        contributor.image,
+        map(image =>
             <div css={[className, styles]}>
                 <Img
                     image={image}
                     sizes="12rem"
                     className={imageStyles}
                 />
-            </div>)
-    }).withDefault(null);
+            </div>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 }
 
 

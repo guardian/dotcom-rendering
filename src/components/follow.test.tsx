@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
 import { Pillar, Design, Display } from 'format';
-import { None } from 'types/option';
+import { none } from 'types/option';
 import { Contributor } from 'contributor';
 
 
@@ -30,7 +30,7 @@ describe('Follow component renders as expected', () => {
                 apiUrl: "https://mapi.co.uk/test",
                 name: "George Monbiot",
                 id: "test",
-                image: new None(),
+                image: none,
             },
         ];
         const follow = shallow(
@@ -42,7 +42,7 @@ describe('Follow component renders as expected', () => {
 
     it('Renders null if no apiUrl', () => {
         const contributors: Contributor[] = [
-            { name: "George Monbiot", id: "test", apiUrl: "", image: new None() },
+            { name: "George Monbiot", id: "test", apiUrl: "", image: none },
         ];
         const follow = shallow(
             <Follow contributors={contributors} {...followFormat} />
@@ -57,13 +57,13 @@ describe('Follow component renders as expected', () => {
                 name: "Contributor 1",
                 apiUrl: "https://mapi.co.uk/test",
                 id: "test",
-                image: new None(),
+                image: none,
             },
             {
                 name: "Contributor 2",
                 apiUrl: "https://mapi.co.uk/test",
                 id: "test",
-                image: new None(),
+                image: none,
             },
         ];
         const follow = shallow(

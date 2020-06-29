@@ -5,8 +5,9 @@ import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { renderText } from 'renderer';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
 import { headline } from '@guardian/src-foundations/typography';
+import { pipe2 } from 'lib';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -34,10 +35,14 @@ interface LiveblogStandfirstProps {
 }
 
 const LiveblogStandfirst = ({ standfirst, format }: LiveblogStandfirstProps): JSX.Element | null =>
-    standfirst.fmap<JSX.Element | null>(doc =>
-        <LeftColumn className={StandfirstStyles(getPillarStyles(format.pillar))}>
-            <div>{ renderText(doc, format) }</div>
-        </LeftColumn>
-    ).withDefault(null)
+    pipe2(
+        standfirst,
+        map(doc =>
+            <LeftColumn className={StandfirstStyles(getPillarStyles(format.pillar))}>
+                <div>{ renderText(doc, format) }</div>
+            </LeftColumn>
+        ),
+        withDefault<JSX.Element | null>(null),
+    );
 
 export default LiveblogStandfirst;

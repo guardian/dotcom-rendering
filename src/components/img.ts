@@ -7,7 +7,8 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { Image, Role } from 'image';
 import { darkModeCss } from 'styles';
 import { Format, Design } from '@guardian/types/Format';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 
 // ----- Component ----- //
@@ -21,13 +22,16 @@ interface Props {
 
 const styles = (role: Option<Role>, format?: Format): SerializedStyles => {
     const backgroundColour = format?.design === Design.Media ? neutral[20] : neutral[97];
-    return role.fmap(imageRole => imageRole).withDefault(Role.HalfWidth) === Role.Thumbnail
-        ? css`color: ${neutral[60]};`
+    return pipe2(
+        role,
+        map(imageRole => imageRole),
+        withDefault(Role.HalfWidth),
+    ) === Role.Thumbnail ? css`color: ${neutral[60]};`
         : css`
             background-color: ${backgroundColour};
             ${darkModeCss`background-color: ${neutral[20]};`}
             color: ${neutral[60]};
-        `
+        `;
 }
 
 const Img: FC<Props> = ({ image, sizes, className, format }) =>
@@ -43,11 +47,11 @@ const Img: FC<Props> = ({ image, sizes, className, format }) =>
         }),
         styledH('img', {
             src: image.src,
-            alt: image.alt.withDefault(''),
+            alt: withDefault('')(image.alt),
             className: image.width > 620 ? 'js-launch-slideshow' : '',
             css: [styles(image.role, format), className],
-            'data-caption': image.nativeCaption.withDefault(''),
-            'data-credit': image.credit.withDefault(''),
+            'data-caption': withDefault('')(image.nativeCaption),
+            'data-credit': withDefault('')(image.credit),
         }),
     ] );
 

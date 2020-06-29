@@ -1,103 +1,29 @@
-// ----- Imports ----- //
+// ----- Types ----- //
 
-import { Monad } from './monad';
-import { identity } from 'lib';
-
-
-// ----- Classes ----- //
-
-interface OptionInterface<A> extends Monad<A> {
-    withDefault(a: A): A;
+const enum OptionKind {
+    Some,
+    None,
 }
 
-class Some<A> implements OptionInterface<A> {
-
+type Some<A> = {
+    kind: OptionKind.Some;
     value: A;
-
-    /**
-     * Returns the value if `Some`, otherwise returns `a`. You can think of it
-     * as "unwrapping" the `Option`, getting you back a plain value
-     * @param a The value to fall back to if the `Option` is `None`
-     * @returns {A} The value for a `Some`, `a` for a `None`
-     * @example
-     * const bylineOne = new Some('CP Scott');
-     * bylineOne.withDefault('Jane Smith'); // Returns 'CP Scott'
-     *
-     * const bylineTwo = new None();
-     * bylineTwo.withDefault('Jane Smith'); // Returns 'Jane Smith'
-     */
-    withDefault(_a: A): A {
-        return this.value;
-    }
-
-    /**
-     * Also called `map` (we've called it `fmap` for
-     * [reasons](https://github.com/guardian/apps-rendering/pull/166)).
-     * Applies a function to a `Some`, does nothing to a `None`.
-     * @param f The function to apply
-     * @returns {Option<B>} A new `Option`
-     * @example
-     * const creditOne = new Some('Nicéphore Niépce');
-     * // Returns Some('Photograph: Nicéphore Niépce')
-     * creditOne.fmap(name => `Photograph: ${name}`);
-     * 
-     * const creditTwo = new None();
-     * creditTwo.fmap(name => `Photograph: ${name}`); // Returns None()
-     * 
-     * // All together
-     * credit.fmap(name => `Photograph: ${name}`).withDefault('');
-     */
-    fmap<B>(f: (a: A) => B): Option<B> {
-        return new Some(f(this.value));
-    }
-
-    /**
-     * Like `fmap` but applies a function that *also* returns an `Option`.
-     * Then "unwraps" the result for you so you don't end up with
-     * `Option<Option<A>>`
-     * @param f The function to apply
-     * @returns {Option<B>} A new `Option`
-     * @example
-     * type GetUser = number => Option<User>;
-     * type GetUserName = User => Option<string>;
-     * 
-     * const userId = 1;
-     * const username: Option<string> = getUser(userId).andThen(getUserName);
-     */
-    andThen<B>(f: (a: A) => Option<B>): Option<B> {
-        return f(this.value);
-    }
-
-    constructor(value: A) {
-        this.value = value;
-    }
-
 }
 
-class None<A> implements OptionInterface<A> {
-
-    withDefault(a: A): A {
-        return a;
-    }
-
-    fmap<B>(_f: (a: A) => B): Option<B> {
-        return new None();
-    }
-
-    andThen<B>(_f: (a: A) => Option<B>): Option<B> {
-        return new None();
-    }
-
+type None = {
+    kind: OptionKind.None;
 }
 
 /**
  * Represents a value that may or may not exist; it's either a Some or a None.
- * @extends Monad
  */
-type Option<A> = Some<A> | None<A>;
+type Option<A> = Some<A> | None;
 
 
 // ----- Constructors ----- //
+
+const some = <A>(a: A): Some<A> => ({ kind: OptionKind.Some, value: a });
+const none: None = { kind: OptionKind.None };
 
 /**
  * Turns a value that may be `null` or `undefined` into an `Option`.
@@ -107,24 +33,72 @@ type Option<A> = Some<A> | None<A>;
  * @returns {Option<A>} An `Option`
  */
 const fromNullable = <A>(a: A | null | undefined): Option<A> =>
-    a === null || a === undefined ? new None() : new Some(a);
+    a === null || a === undefined ? none : some(a);
 
-// ----- Serialisation ----- //
+
+// ----- Functions ----- //
 
 /**
- * Transforms Option into a type that JSON.stringify understands
- * @param opt The option to be made serialisable
+ * Returns the value if `Some`, otherwise returns `a`. You can think of it
+ * as "unwrapping" the `Option`, getting you back a plain value
+ * @param a The value to fall back to if the `Option` is `None`
+ * @param optA The Option
+ * @returns {A} The value for a `Some`, `a` for a `None`
+ * @example
+ * const bylineOne = some('CP Scott');
+ * withDefault('Jane Smith')(bylineOne); // Returns 'CP Scott'
+ *
+ * const bylineTwo = none;
+ * withDefault('Jane Smith')(bylineTwo); // Returns 'Jane Smith'
+*/
+const withDefault = <A>(a: A) => (optA: Option<A>): A =>
+    optA.kind === OptionKind.Some ? optA.value : a;
+
+/**
+ * Applies a function to a `Some`, does nothing to a `None`.
+ * @param f The function to apply
+ * @param optA The Option
+ * @returns {Option<B>} A new `Option`
+ * @example
+ * const creditOne = some('Nicéphore Niépce');
+ * // Returns Some('Photograph: Nicéphore Niépce')
+ * map(name => `Photograph: ${name}`)(creditOne);
+ * 
+ * const creditTwo = none;
+ * map(name => `Photograph: ${name}`)(creditTwo); // Returns None
+ * 
+ * // All together
+ * compose(withDefault(''), map(name => `Photograph: ${name}`))(credit);
  */
-const toSerialisable = <A>(opt: Option<A>): A | null =>
-    opt.fmap<A | null>(identity).withDefault(null);
+const map = <A, B>(f: (a: A) => B) => (optA: Option<A>): Option<B> =>
+    optA.kind === OptionKind.Some ? some(f(optA.value)) : none;
+
+/**
+ * Like `map` but applies a function that *also* returns an `Option`.
+ * Then "unwraps" the result for you so you don't end up with
+ * `Option<Option<A>>`
+ * @param f The function to apply
+ * @param optA The Option
+ * @returns {Option<B>} A new `Option`
+ * @example
+ * type GetUser = number => Option<User>;
+ * type GetUserName = User => Option<string>;
+ * 
+ * const userId = 1;
+ * const username: Option<string> = compose(andThen(getUserName), getUser)(userId);
+ */
+const andThen = <A, B>(f: (a: A) => Option<B>) => (optA: Option<A>): Option<B> =>
+    optA.kind === OptionKind.Some ? f(optA.value) : none;
 
 
 // ----- Exports ----- //
 
 export {
     Option,
-    Some,
-    None,
+    some,
+    none,
     fromNullable,
-    toSerialisable,
+    withDefault,
+    map,
+    andThen,
 };

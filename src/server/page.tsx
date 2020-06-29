@@ -22,8 +22,8 @@ import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Item } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
 import { pageFonts } from 'styles';
-import { Option, Some, None } from 'types/option';
-import { compose } from 'lib';
+import { Option, some, none, map, withDefault } from 'types/option';
+import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
 import { remSpace } from '@guardian/src-foundations';
 
@@ -38,19 +38,19 @@ const docParser = JSDOM.fragment.bind(null);
 const scriptName = ({ design, display }: Format): Option<string> => {
     switch (design) {
         case Design.Live:
-            return new Some('liveblog.js');
+            return some('liveblog.js');
         case Design.Interactive:
-            return display !== Display.Immersive ? new Some('article.js') : new None();
+            return display !== Display.Immersive ? some('article.js') : none;
         case Design.Comment:
         case Design.Feature:
         case Design.Analysis:
         case Design.Review:
         case Design.Article:
-            return new Some('article.js');
+            return some('article.js');
         case Design.Media:
-            return new Some('media.js');
+            return some('media.js');
         default:
-            return new None();
+            return none;
     }
 }
 
@@ -113,7 +113,7 @@ interface ClientJsProps {
 }
 
 const ClientJs: FC<ClientJsProps> = ({ src }: ClientJsProps) =>
-    src.fmap<ReactElement | null>(s => <script src={s}></script>).withDefault(null);
+    pipe2(src, map(s => <script src={s}></script>), withDefault<ReactElement | null>(null));
 
 interface ScriptsProps {
     clientScript: Option<string>;
@@ -166,7 +166,7 @@ function page(
     const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest.content);
     const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
     const hasTwitter = includesTweets(renderingRequest.content);
-    const clientScript = scriptName(item).fmap(getAssetLocation);
+    const clientScript = map(getAssetLocation)(scriptName(item));
     const { html: body, css, ids } = compose(extractCritical, renderToString)(
         <CacheProvider value={cache}>
             <Body item={item} shouldHideAds={shouldHideAds} />

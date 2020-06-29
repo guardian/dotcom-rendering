@@ -5,7 +5,8 @@ import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     padding-bottom: 0;
@@ -23,11 +24,14 @@ interface LiveblogSeriesProps {
 }
 
 const LiveblogSeries = (props: LiveblogSeriesProps): JSX.Element | null =>
-
-    props.series.fmap<JSX.Element | null>(series =>
+    pipe2(
+        props.series,
+        map(series =>
             <LeftColumn className={LiveblogSeriesStyles(getPillarStyles(props.pillar))}>
                 <a href={series.webUrl}>{series.webTitle}</a>
             </LeftColumn>
-    ).withDefault(null);
+        ),
+        withDefault<JSX.Element | null>(null),
+    );
 
 export default LiveblogSeries;

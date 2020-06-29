@@ -7,6 +7,8 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { LiveBlock } from 'liveBlock';
 import { body, headline } from '@guardian/src-foundations/typography';
+import { map, withDefault } from 'types/option';
+import { pipe2 } from 'lib';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${neutral[100]};
@@ -154,9 +156,11 @@ const LiveblogKeyEvents = ({ pillar, blocks }: LiveblogKeyEventsProps): JSX.Elem
                 <summary><h2>Key Events ({keyEvents.length})</h2></summary>
                 <ul>
                     {keyEvents.map(event => {
-                        const relativeDate: JSX.Element | null = event.firstPublished
-                            .fmap<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
-                            .withDefault(null)
+                        const relativeDate: JSX.Element | null = pipe2(
+                            event.firstPublished,
+                            map(date => <time>{makeRelativeDate(date)}</time>),
+                            withDefault<JSX.Element | null>(null),
+                        );
 
                         return <li key={event.id}>
                             { relativeDate }

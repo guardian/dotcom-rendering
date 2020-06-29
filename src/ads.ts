@@ -1,4 +1,4 @@
-import { createElement as h, ReactNode, ReactElement } from 'react';
+import { createElement as h, ReactNode, ReactElement, isValidElement } from 'react';
 import Paragraph from 'components/paragraph';
 
 function getAdIndices(): number[] {
@@ -16,8 +16,8 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
     const flattenedNodes = reactNodes.flat();
 
-    const isPara = (node: ReactElement): boolean =>
-        node?.type === Paragraph;
+    const isPara = (node: ReactNode): boolean =>
+        isValidElement(node) && node?.type === Paragraph;
 
     const numParas = flattenedNodes.filter(isPara).length;
 
@@ -37,15 +37,17 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
         adIndices.includes(para) ? [...nodes, ad(para)] : nodes;
 
     return flattenedNodes
-        .reduce(([paraNum, prevNodes], node) => {
+        .reduce<{ paraNum: number; nodes: ReactNode[] }>(({ paraNum, nodes: prevNodes }, node) => {
             const nodes = [ ...prevNodes, node ];
+
             if (isPara(node)) {
                 const newParaNum = paraNum + 1;
-                return [ newParaNum, insertAd(newParaNum, nodes) ];
+                return { paraNum: newParaNum, nodes: insertAd(newParaNum, nodes) };
             }
-            return [ paraNum, nodes ];
-        }, [0, []])
-        .pop();
+
+            return { paraNum, nodes };
+        }, { paraNum: 0, nodes: [] })
+        .nodes;
 }
 
 const getAdPlaceholderInserter =

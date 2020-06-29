@@ -7,10 +7,11 @@ import { remSpace } from '@guardian/src-foundations';
 
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { wideContentWidth } from 'styles';
-import { Option } from 'types/option';
+import { Option, map, withDefault } from 'types/option';
 import { Image } from 'image';
 import Img from 'components/img';
 import { Format, Display, Design } from 'format';
+import { pipe2 } from 'lib';
 
 
 // ----- Subcomponents ----- //
@@ -117,17 +118,21 @@ interface Props {
 }
 
 const HeaderImage: FC<Props> = ({ className, image, format }) =>
-    image.fmap<ReactElement | null>(imageData =>
-        <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
-            <Img
-                image={imageData}
-                sizes={getSizes(format, imageData)}
-                className={getImgStyles(format, imageData)}
-                format={format}
-            />
-            <Caption format={format} image={imageData} />
-        </figure>
-    ).withDefault(null);
+    pipe2(
+        image,
+        map(imageData =>
+            <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
+                <Img
+                    image={imageData}
+                    sizes={getSizes(format, imageData)}
+                    className={getImgStyles(format, imageData)}
+                    format={format}
+                />
+                <Caption format={format} image={imageData} />
+            </figure>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 
 // ----- Exports ----- //

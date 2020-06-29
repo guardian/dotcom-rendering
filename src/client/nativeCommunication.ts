@@ -46,8 +46,12 @@ function insertAds(): void {
     let adSlots = getAdSlots();
     if (adSlots.length > 0) {
         commercialClient.insertAdverts(adSlots);
-        const targetNode = document.querySelector('body') as Node;
-        const config = { attributes: true, childList: true, subtree: true };
+        const targetNode = document.querySelector('html') as Node;
+        const config: MutationObserverInit = {
+            childList: true,
+            subtree: true,
+            attributeFilter: ["style"]
+        };
         const callback = function(): void {
             const currentAdSlots = getAdSlots();
             if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
@@ -56,6 +60,7 @@ function insertAds(): void {
             }
         };
 
+        window.addEventListener('resize', callback);
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Tags from 'components/shared/tags';
+import { SerializedStyles } from '@emotion/core';
 
 configure({ adapter: new Adapter() });
 
@@ -10,7 +11,7 @@ const tagsProps = [{
     webUrl: "https://mapi.co.uk/tag"
 }];
 
-const styles = (component: ShallowWrapper): string => Array.from(component.prop('css'))
+const styles = (component: ShallowWrapper): string => Array.from(component.prop<SerializedStyles[]>('css'))
     .flat()
     .map(({ styles }: { styles: string }) => styles)
     .reduce((a: string, b: string) => a + b, '')

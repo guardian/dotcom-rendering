@@ -3,10 +3,11 @@
 import { ReactNode } from 'react';
 import { createHash } from 'crypto';
 
-import { Option, Some, None, fromNullable } from 'types/option';
+import { Option, some, none, fromNullable, andThen, map } from 'types/option';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
+import { pipe2 } from 'lib';
 
 
 // ----- Setup ----- //
@@ -102,20 +103,26 @@ const parseCredit = (
     displayCredit: boolean | undefined,
     credit: string | undefined,
 ): Option<string> =>
-    fromNullable(displayCredit).andThen(display => display ? fromNullable(credit) : new None());
+    pipe2(
+        displayCredit,
+        fromNullable,
+        andThen(display => display ? fromNullable(credit) : none),
+    );
 
 const parseRole = (role: string | undefined): Option<Role> =>
-    fromNullable(role).andThen<Role>(
-        someRole => {
+    pipe2(
+        role,
+        fromNullable,
+        andThen(someRole => {
             switch(someRole) {
                 case 'thumbnail':
-                    return new Some(Role.Thumbnail);
+                    return some(Role.Thumbnail);
                 case 'halfWidth':
-                    return new Some(Role.HalfWidth);
+                    return some(Role.HalfWidth);
                 default:
-                    return new None();
+                    return none;
             }
-        }
+        }),
     );
 
 const parseImage = ({ docParser, salt }: Context) =>
@@ -123,28 +130,32 @@ const parseImage = ({ docParser, salt }: Context) =>
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const data = element.imageTypeData;
 
-    return fromNullable(masterAsset).andThen(asset => {
-        if (
-            asset?.file === undefined ||
-            asset.file === '' ||
-            asset?.typeData?.width === undefined ||
-            asset?.typeData?.height === undefined
-        ) {
-            return new None();
-        }
+    return pipe2(
+        masterAsset,
+        fromNullable,
+        andThen(asset => {
+            if (
+                asset?.file === undefined ||
+                asset.file === '' ||
+                asset?.typeData?.width === undefined ||
+                asset?.typeData?.height === undefined
+            ) {
+                return none;
+            }
 
-        return new Some({
-            src: src(salt, asset.file, 500, Dpr.One),
-            ...srcsets(asset.file, salt),
-            alt: fromNullable(data?.alt),
-            width: asset.typeData.width,
-            height: asset.typeData.height,
-            caption: fromNullable(data?.caption).fmap(docParser),
-            credit: parseCredit(data?.displayCredit, data?.credit),
-            nativeCaption: fromNullable(data?.caption),
-            role: parseRole(data?.role),
-        });
-    });
+            return some({
+                src: src(salt, asset.file, 500, Dpr.One),
+                ...srcsets(asset.file, salt),
+                alt: fromNullable(data?.alt),
+                width: asset.typeData.width,
+                height: asset.typeData.height,
+                caption: pipe2(data?.caption, fromNullable, map(docParser)),
+                credit: parseCredit(data?.displayCredit, data?.credit),
+                nativeCaption: fromNullable(data?.caption),
+                role: parseRole(data?.role),
+            });
+        })
+    );
 };
 
 
