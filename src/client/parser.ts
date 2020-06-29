@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Result, Err, Ok } from 'types/result';
+import { Result, err, ok } from 'types/result';
 
 
 // ----- Functions ----- //
@@ -12,9 +12,9 @@ const parse = (domParser: DOMParser) => (s: string): Result<string, DocumentFrag
         const docNodes = domParser.parseFromString(s, 'text/html').body.childNodes;
 
         Array.from(docNodes).forEach(node => frag.appendChild(node));
-        return new Ok(frag);
+        return ok(frag);
     } catch (e) {
-        return new Err(`I wasn't able to parse the string into a DocumentFragment because: ${e}`);
+        return err(`I wasn't able to parse the string into a DocumentFragment because: ${e}`);
     }
 
 }

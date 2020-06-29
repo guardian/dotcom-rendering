@@ -13,6 +13,8 @@ import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
 import Int64 from 'node-int64';
 import { withDefault } from 'types/option';
+import { pipe2 } from 'lib';
+import { toOption, map } from 'types/result';
 
 const articleContent = {
     id: "",
@@ -191,8 +193,11 @@ const articleContentWithImageWithoutFile = articleContentWith({
 const f = fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' });
 
 const getFirstBody = (item: Review | Standard) =>
-    withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' })(item.body[0].toOption());
-
+    pipe2(
+        item.body[0],
+        toOption,
+        withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' }),
+    );
 
 describe('fromCapi returns correct Item', () => {
     test('media', () => {
@@ -344,9 +349,11 @@ describe('interactive elements', () => {
             }
         }
         const item = f(articleContentWith(interactiveElement)) as Standard;
-        const element = withDefault<BodyElement>
-            ({ kind: ElementKind.RichLink, url: '', linkText: '' })
-            (item.body[0].toOption());
+        const element = pipe2(
+            item.body[0],
+            toOption,
+            withDefault<BodyElement>({ kind: ElementKind.RichLink, url: '', linkText: '' }),
+        );
         expect(element.kind).toBe(ElementKind.Interactive);
     })
 
@@ -359,9 +366,11 @@ describe('interactive elements', () => {
             }
         }
         const item = f(articleContentWith(interactiveElement)) as Standard;
-        const element = withDefault<BodyElement>
-            ({ kind: ElementKind.RichLink, url: '', linkText: '' })
-            (item.body[0].toOption());
+        const element = pipe2(
+            item.body[0],
+            toOption,
+            withDefault<BodyElement>({ kind: ElementKind.RichLink, url: '', linkText: '' }),
+        );
         expect(element.kind).toBe(ElementKind.RichLink);
     })
 });
@@ -574,12 +583,15 @@ describe('audio elements', () => {
             }
         }
         const item = f(articleContentWith(audioElement)) as Standard;
-        item.body[0].fmap<Audio>(element => element as Audio)
-            .fmap(({ src, width, height }) => {
+        pipe2(
+            item.body[0],
+            map<BodyElement, Audio>(element => element as Audio),
+            map(({ src, width, height }) => {
                 expect(src).toContain('https://open.spotify.com/embed/track/');
                 expect(width).toContain('300');
                 expect(height).not.toContain('380');
-            });
+            }),
+        );
     });
 
     test('does not render if no iframe inside the html', () => {
@@ -631,12 +643,15 @@ describe('video elements', () => {
             }
         }
         const item = f(articleContentWith(videoElement)) as Standard;
-        item.body[0].fmap<Video>(element => element as Video)
-            .fmap(({ src, width, height }) => {
+        pipe2(
+            item.body[0],
+            map<BodyElement, Video>(element => element as Video),
+            map(({ src, width, height }) => {
                 expect(src).toBe('https://www.youtube-nocookie.com/embed/');
                 expect(width).toBe('460');
                 expect(height).toBe('259');
-            });
+            })
+        );
     });
 
     test('does not render if no iframe inside the html', () => {
