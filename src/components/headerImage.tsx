@@ -1,17 +1,15 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
-import { wideContentWidth } from 'styles';
-import { Option, map, withDefault } from 'types/option';
-import { Image } from 'image';
 import Img from 'components/img';
+import { wideContentWidth } from 'styles';
+import { Image } from 'image';
 import { Format, Display, Design } from 'format';
-import { pipe2 } from 'lib';
 
 
 // ----- Subcomponents ----- //
@@ -112,28 +110,21 @@ const getSizes = ({ display }: Format, image: Image): string => {
 }
 
 interface Props {
-    image: Option<Image>;
+    image: Image;
     className?: SerializedStyles;
     format: Format;
 }
 
-const HeaderImage: FC<Props> = ({ className, image, format }) =>
-    pipe2(
-        image,
-        map(imageData =>
-            <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
-                <Img
-                    image={imageData}
-                    sizes={getSizes(format, imageData)}
-                    className={getImgStyles(format, imageData)}
-                    format={format}
-                />
-                <Caption format={format} image={imageData} />
-            </figure>
-        ),
-        withDefault<ReactElement | null>(null),
-    );
-
+const HeaderImage: FC<Props> = ({ className, image, format }: Props) =>
+    <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
+        <Img
+            image={image}
+            sizes={getSizes(format, image)}
+            className={getImgStyles(format, image)}
+            format={format}
+        />
+        <Caption format={format} image={image} />
+    </figure>
 
 // ----- Exports ----- //
 

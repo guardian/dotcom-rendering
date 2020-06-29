@@ -7,8 +7,12 @@ import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { BlockElement} from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
-import { Option, fromNullable, andThen, none, some } from 'types/option';
+import { Option, fromNullable, andThen, none, some, map } from 'types/option';
 import { fromString as dateFromString } from 'date';
+import { Context } from 'types/parserContext';
+import { parseImage } from 'image';
+import { parseVideo } from 'video';
+import { MainMediaKind, MainMedia } from 'headerMedia';
 import { pipe2 } from 'lib';
 
 
@@ -55,8 +59,33 @@ const articleContributors = (content: Content): Tag[] =>
 const isImage = (elem: BlockElement): boolean =>
     elem.type === ElementType.IMAGE;
 
+const isVideo = (elem: BlockElement): boolean =>
+    elem.type === ElementType.CONTENTATOM &&
+    elem.contentAtomTypeData?.atomType === "media";
+
 const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
+    fromNullable((content?.blocks?.main?.elements.filter(isImage) ?? [])[0]);
+
+const articleMainVideo = (content: Content): Option<BlockElement> =>
+    fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
+
+const articleMainMedia = (content: Content, context: Context): Option<MainMedia> => {
+    return (content?.blocks?.main?.elements.filter(isImage) ?? [])[0]
+        ? pipe2(
+            articleMainImage(content),
+            andThen(parseImage(context)),
+            map(image => ({
+                kind: MainMediaKind.Image,
+                image
+            })))
+        : pipe2(
+            articleMainVideo(content),
+            andThen(blockElement => parseVideo(blockElement, content.atoms)),
+            map(video => ({
+                kind: MainMediaKind.Video,
+                video
+            })))
+}
 
 const includesTweets = (content: Content): boolean => {
     const body = content?.blocks?.body;
@@ -131,7 +160,7 @@ export {
     isAnalysis,
     articleSeries,
     articleContributors,
-    articleMainImage,
+    articleMainMedia,
     capiEndpoint,
     includesTweets,
     maybeCapiDate,

@@ -28,18 +28,22 @@ const KeylineLiveblogStyles = css`
     }
 `;
 
-const KeylineNewsStyles = css`
+const KeylineStandardStyles = css`
     background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
+
+    ${darkModeCss`
+        background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 3px);
+    `}
 `;
 
 const KeylineOpinionStyles = css`
     background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
     height: 24px;
     margin-top: 90px;
-`;
 
-const KeylineDarkStyles = darkModeCss`
-    background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 3px);
+    ${darkModeCss`
+        background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 3px);
+    `}
 `;
 
 type Props = {
@@ -48,14 +52,14 @@ type Props = {
 
 export const Keyline = ({ design }: Props): JSX.Element => {
     const SelectedKeylineStyles = ((design): SerializedStyles => {
-        switch(design) {
+        switch (design) {
             case Design.Live:
                 return KeylineLiveblogStyles
             case Design.Comment:
                 return KeylineOpinionStyles
             default:
-                return KeylineNewsStyles;
+                return KeylineStandardStyles;
         }})(design);
     
-    return <hr css={[BaseStyles, SelectedKeylineStyles, KeylineDarkStyles]} />
+    return <hr css={[BaseStyles, SelectedKeylineStyles]} />
 }

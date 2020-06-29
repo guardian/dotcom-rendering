@@ -32,7 +32,8 @@ const enum ElementKind {
     LiveEvent,
     Video,
     InteractiveAtom,
-    ExplainerAtom
+    ExplainerAtom,
+    MediaAtom
 }
 
 type Image = ImageData & {
@@ -69,6 +70,13 @@ interface ExplainerAtom {
     id: string;
 }
 
+interface MediaAtom {
+    kind: ElementKind.MediaAtom;
+    posterUrl: string;
+    videoId: string;
+    duration: Option<number>;
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -101,7 +109,7 @@ type BodyElement = {
     image?: string;
     price?: string;
     start?: string;
-} | Video | InteractiveAtom | ExplainerAtom;
+} | Video | InteractiveAtom | ExplainerAtom | MediaAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -133,6 +141,8 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem, content: serialiseNodes(elem.content) };
         case ElementKind.InteractiveAtom:
         case ElementKind.ExplainerAtom:
+        case ElementKind.MediaAtom:
+        case ElementKind.Embed:
             return { ...elem };
         default:
             return elem;
