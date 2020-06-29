@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
+import Anchor from 'components/anchor';
 import { css } from '@emotion/core';
 import { Logo } from 'capi';
 import { Format } from '@guardian/types/Format';
-import { Branding } from '../../../api-models/ts/target/scala-2.12/src_managed/main/thrift/@guardian/apps-rendering-api-models/branding';
-import Anchor from 'components/anchor';
+import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { darkModeCss } from 'styles';
 import { remSpace, text, neutral } from '@guardian/src-foundations';
 

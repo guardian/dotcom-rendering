@@ -16,8 +16,8 @@ import { Body, parseElements } from 'bodyElement';
 import { Context } from 'types/parserContext';
 import { Contributor, parseContributors } from 'contributor';
 import { pipe2 } from 'lib';
-import { RenderingRequest } from '../api-models/ts/target/scala-2.12/src_managed/main/thrift/@guardian/apps-rendering-api-models/renderingRequest';
-import { Branding } from '../api-models/ts/target/scala-2.12/src_managed/main/thrift/@guardian/apps-rendering-api-models/branding';
+import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { Branding } from '@guardian/apps-rendering-api-models/branding';
 
 // ----- Item Type ----- //
 
