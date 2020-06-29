@@ -44,13 +44,9 @@
         "@guardian/src-foundations": "^1.5.0",
         "@guardian/src-icons": "^1.5.0",
         "@guardian/src-link": "^1.5.0",
-<<<<<<< HEAD
         "@guardian/src-radio": "^1.5.0",
         "@guardian/src-svgs": "^1.5.0",
         "@guardian/src-text-area": "^1.5.0",
-=======
-        "@guardian/src-svgs": "npm:@guardian/src-icons@^1.5.0",
->>>>>>> 474ce4e3ad82bc1846663150a22d28a57b8d63ee
         "@guardian/src-text-input": "^1.5.0",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
