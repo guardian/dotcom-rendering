@@ -11,6 +11,9 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
+import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
+import {TickerCountType} from "@root/src/lib/variants";
+import highlight = Mocha.utils.highlight;
 
 type Props = {
     edition: Edition;
@@ -145,6 +148,10 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         false,
     );
 
+    const [numberOfSupporters, setnumberOfSupporters] = useState<string>(
+        '',
+    );
+
     useEffect(() => {
         // Is paying member?
         setIsPayingMember(getCookie('gu_paying_member') === 'true');
@@ -156,6 +163,8 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 
         // Is recent contributor?
         setIsRecentContributor(decideIfRecentContributor());
+
+        fetchTickerDataCached(TickerCountType.people).then(td => setnumberOfSupporters(td.total.toLocaleString()));
 
         // Is digital subscriber?
         setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
@@ -171,7 +180,17 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         isRecentContributor ||
         hideSupportMessage
     ) {
-        return null;
+        <div className={subMessageStyles}>
+            { edition === 'UK' ?
+                (
+                    <div>
+                        We're funded by {`${numberOfSupporters} `} readers across Australia.<br />
+                        Thank you for supporting us
+                    </div>
+                )
+                : null
+            }
+        </div>
     }
     return (
         <div className={cx(inHeader && paddingStyles)}>
@@ -182,7 +201,17 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    Available for everyone, funded by readers
+                    {edition === 'UK' ?
+                        (
+                            <div>
+                                We're funded by
+                              {` ${numberOfSupporters} `}
+                                    readers across Australia.<br />
+                                Thank you for supporting us
+                            </div>
+                        )
+                        : ( <div>  Available for everyone, funded by readers</div>)
+                    }
                 </div>
                 <a
                     className={linkStyles}
