@@ -72,7 +72,7 @@
     "@guardian/src-foundations": "^1.0.0",
     "@guardian/src-brand": "^1.7.0",
     "@guardian/types": "^0.3.0",
-    "@types/jsdom": "^12.2.4",
+    "@types/jsdom": "^16.2.3",
     "@types/uuid": "^8.0.0",
     "aws-sdk": "^2.604.0",
     "babel-jest": "^26.1.0",
