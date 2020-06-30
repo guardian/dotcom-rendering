@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
     CMP,
-    shouldShow as shouldShowCMP,
+    willShowNewCMP,
+    shouldShowOldCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
-import {getAlreadyVisitedCount} from "@root/src/web/lib/alreadyVisited";
+import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 
 type Props = {
     isSignedIn?: boolean;
@@ -13,7 +14,10 @@ type Props = {
 };
 
 const getEngagementBannerLastClosedAt = (): string | undefined => {
-    return localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') || undefined;
+    return (
+        localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') ||
+        undefined
+    );
 };
 
 export const StickyBottomBanner = ({
@@ -21,45 +25,47 @@ export const StickyBottomBanner = ({
     countryCode,
     CAPI,
 }: Props) => {
-    const [showCMP, setShowCMP] = useState<boolean | null>(null);
+    const [showOldCMP, setShowOldCMP] = useState<boolean | null>(null);
+    const [newCMPWillShow, setNewCMPWillShow] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const callShouldShow = () => setShowCMP(shouldShowCMP());
-
-        if (CAPI.config.cmpUi) {
-            callShouldShow();
-        }
+        shouldShowOldCMP().then((shouldShowOld) =>
+            setShowOldCMP(shouldShowOld && CAPI.config.cmpUi),
+        );
+        willShowNewCMP().then(setNewCMPWillShow);
     }, [CAPI.config.cmpUi]);
 
     // Don't render anything until we know whether we can show the CMP
-    if (showCMP === null) {
+    if (showOldCMP === null || newCMPWillShow === null) {
         return null;
     }
 
+    // New CMP is not a react component and is shown outside of react's world
+    // so render nothing if it will show
+    if (newCMPWillShow) return null;
+
+    if (showOldCMP) return <CMP />;
+
     const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
 
-    return (
-        <>
-            {showCMP ? (
-                <CMP />
-            ) : (
-                showRRBanner && (
-                    <ReaderRevenueBanner
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        isSensitive={CAPI.config.isSensitive}
-                        tags={CAPI.tags}
-                        contributionsServiceUrl={CAPI.contributionsServiceUrl}
-                        alreadyVisitedCount={getAlreadyVisitedCount()}
-                        engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
-                    />
-                )
-            )}
-        </>
-    );
+    if (showRRBanner)
+        return (
+            <ReaderRevenueBanner
+                isSignedIn={isSignedIn}
+                countryCode={countryCode}
+                contentType={CAPI.contentType}
+                sectionName={CAPI.sectionName}
+                shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                isPaidContent={CAPI.pageType.isPaidContent}
+                isSensitive={CAPI.config.isSensitive}
+                tags={CAPI.tags}
+                contributionsServiceUrl={CAPI.contributionsServiceUrl}
+                alreadyVisitedCount={getAlreadyVisitedCount()}
+                engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
+            />
+        );
+
+    // Nothing applies, so do nothing.
+    return null;
 };
