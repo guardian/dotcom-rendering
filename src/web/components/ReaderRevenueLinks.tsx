@@ -194,86 +194,86 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 >
                     <div className={messageStyles}>Welcome Back</div>
 
-            <div className={subMessageStyles}>
-                {edition === 'UK' ? (
-                    <div>
+                    <div className={subMessageStyles}>
+                        {edition === 'UK' ? (
+                            <div>
                         We&apos;re funded by
-                        <span className={headerYellowHighlight}>
-                            {` ${numberOfSupporters} `}
-                        </span>
-                        readers across Australia.<br/>
+                                <span className={headerYellowHighlight}>
+                                    {` ${numberOfSupporters} `}
+                                </span>
+                        readers across Australia.<br />
                         Thank you for supporting us
-                    </div>
+                            </div>
                     )
                     : (null)}
-            </div>
+                    </div>
                 </div>
             </div>
         )
-    } else {
+    } 
         return (
             <div className={cx(inHeader && paddingStyles)}>
-            <div
-                className={cx({
+                <div
+                    className={cx({
                     [hiddenUntilTablet]: inHeader,
                 })}
-            >
-                <div className={messageStyles}>Support The&nbsp;Guardian</div>
-                <div className={subMessageStyles}>
-                    {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
+                >
+                    <div className={messageStyles}>Support The&nbsp;Guardian</div>
+                    <div className={subMessageStyles}>
+                        {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
                         (
                             <div>
                                 We&apos;re funded by
                                 <span className={headerYellowHighlight}>
                                     {` ${numberOfSupporters} `}
                                 </span>
-                                readers across Australia.<br/>
+                                readers across Australia.<br />
                                 Thank you for supporting us
                             </div>
                         )
                         : (<div> Available for everyone, funded by readers</div>)}
-                </div>
-                <a
-                    className={linkStyles}
-                    href={urls.contribute}
-                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                >
-                    Contribute <ArrowRightIcon/>
-                </a>
-                <a
-                    className={linkStyles}
-                    href={urls.subscribe}
-                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-                >
-                    Subscribe <ArrowRightIcon/>
-                </a>
-            </div>
-
-            <div
-                className={cx({
-                    [hiddenFromTablet]: inHeader,
-                    [hidden]: !inHeader,
-                })}
-            >
-                {edition === 'UK' ? (
+                    </div>
                     <a
                         className={linkStyles}
                         href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                     >
-                        Contribute <ArrowRightIcon/>
+                    Contribute <ArrowRightIcon />
                     </a>
+                    <a
+                        className={linkStyles}
+                        href={urls.subscribe}
+                        data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                    >
+                    Subscribe <ArrowRightIcon />
+                    </a>
+                </div>
+
+                <div
+                    className={cx({
+                    [hiddenFromTablet]: inHeader,
+                    [hidden]: !inHeader,
+                })}
+                >
+                    {edition === 'UK' ? (
+                        <a
+                            className={linkStyles}
+                            href={urls.contribute}
+                            data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                        >
+                        Contribute <ArrowRightIcon />
+                        </a>
                 ) : (
                     <a
                         className={linkStyles}
                         href={urls.support}
                         data-link-name={`${dataLinkNamePrefix}support-cta`}
                     >
-                        Support us <ArrowRightIcon/>
+                        Support us <ArrowRightIcon />
                     </a>
                 )}
+                </div>
             </div>
-        </div>
         )
-    }
+    
 };
