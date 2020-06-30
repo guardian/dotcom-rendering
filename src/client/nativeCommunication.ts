@@ -6,45 +6,6 @@ import { commercialClient, galleryClient, userClient, acquisitionsClient, videoC
 import { logger } from "../logger";
 import { memoise } from "../lib";
 
-function reportNativeElementPositionChanges(): void {
-    let adSlots = getAdSlots();
-    let videoSlots = getVideoSlots();
-
-    const targetNode = document.querySelector('html') as Node;
-    const config: MutationObserverInit = {
-        childList: true,
-        subtree: true,
-        attributeFilter: ["style"]
-    };
-    const callback = function(): void {
-        const currentAdSlots = getAdSlots();
-        const currentVideoSlots = getVideoSlots();
-
-        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
-            adSlots = currentAdSlots;
-            commercialClient.updateAdverts(currentAdSlots);
-        }
-
-        if (JSON.stringify(videoSlots) !== JSON.stringify(currentVideoSlots)) {
-            videoSlots = currentVideoSlots;
-            videoClient.updateVideos(currentVideoSlots);
-        }
-    };
-
-    window.addEventListener('resize', callback);
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
-
-    try {
-        document.fonts.ready.then(() => {
-            commercialClient.updateAdverts(getAdSlots());
-            videoClient.updateVideos(getVideoSlots());
-        });
-    } catch (e) {
-        logger.error(`font loading API not supported: ${e}`)
-    }
-}
-
 function getRect(slotPosition: DOMRect): Rect {
     const scrollLeft = document.scrollingElement
         ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
@@ -90,7 +51,7 @@ function getAdSlots(): AdSlot[] {
 }
 
 function insertAds(): void {
-    let adSlots = getAdSlots();
+    const adSlots = getAdSlots();
     if (adSlots.length) {
         commercialClient.insertAdverts(adSlots);
     }
@@ -171,6 +132,45 @@ function videos(): void {
     const videoSlots = getVideoSlots();
     if (videoSlots.length) {
         videoClient.insertVideos(videoSlots);
+    }
+}
+
+function reportNativeElementPositionChanges(): void {
+    let adSlots = getAdSlots();
+    let videoSlots = getVideoSlots();
+
+    const targetNode = document.querySelector('html') as Node;
+    const config: MutationObserverInit = {
+        childList: true,
+        subtree: true,
+        attributeFilter: ["style"]
+    };
+    const callback = function(): void {
+        const currentAdSlots = getAdSlots();
+        const currentVideoSlots = getVideoSlots();
+
+        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+            adSlots = currentAdSlots;
+            commercialClient.updateAdverts(currentAdSlots);
+        }
+
+        if (JSON.stringify(videoSlots) !== JSON.stringify(currentVideoSlots)) {
+            videoSlots = currentVideoSlots;
+            videoClient.updateVideos(currentVideoSlots);
+        }
+    };
+
+    window.addEventListener('resize', callback);
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+    try {
+        document.fonts.ready.then(() => {
+            commercialClient.updateAdverts(getAdSlots());
+            videoClient.updateVideos(getVideoSlots());
+        });
+    } catch (e) {
+        logger.error(`font loading API not supported: ${e}`)
     }
 }
 
