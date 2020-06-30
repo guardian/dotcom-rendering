@@ -15,6 +15,7 @@ import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
 
 import highlight = Mocha.utils.highlight;
+import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
 type Props = {
     edition: Edition;
@@ -210,7 +211,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    {edition === 'UK' ?
+                    {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
                         (
                             <div>
                                 We're funded by
@@ -245,7 +246,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     [hidden]: !inHeader,
                 })}
             >
-                {edition === 'UK' ? (
+                {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ? (
                     <a
                         className={linkStyles}
                         href={urls.contribute}
