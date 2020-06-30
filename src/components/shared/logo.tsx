@@ -42,7 +42,7 @@ const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyle
     `}
 `;
 
-const OptionalLogo = (item: Item) => pipe2(
+const OptionalLogo = (item: Item): JSX.Element => pipe2(
     item.branding,
     map(branding => <Logo branding={branding} format={getFormat(item)} />),
     withDefault(<></>)
