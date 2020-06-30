@@ -1,8 +1,63 @@
 import { AdSlot } from "@guardian/bridget/AdSlot";
+import { VideoSlot } from "@guardian/bridget/VideoSlot";
 import { Image } from "@guardian/bridget/Image";
-import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
+import { Rect } from "@guardian/bridget/Rect";
+import { commercialClient, galleryClient, userClient, acquisitionsClient, videoClient } from "../native/nativeApi";
 import { logger } from "../logger";
 import { memoise } from "../lib";
+
+function reportNativeElementPositionChanges(): void {
+    let adSlots = getAdSlots();
+    let videoSlots = getVideoSlots();
+
+    const targetNode = document.querySelector('html') as Node;
+    const config: MutationObserverInit = {
+        childList: true,
+        subtree: true,
+        attributeFilter: ["style"]
+    };
+    const callback = function(): void {
+        const currentAdSlots = getAdSlots();
+        const currentVideoSlots = getVideoSlots();
+
+        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+            adSlots = currentAdSlots;
+            commercialClient.updateAdverts(currentAdSlots);
+        }
+
+        if (JSON.stringify(videoSlots) !== JSON.stringify(currentVideoSlots)) {
+            videoSlots = currentVideoSlots;
+            videoClient.updateVideos(currentVideoSlots);
+        }
+    };
+
+    window.addEventListener('resize', callback);
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+    try {
+        document.fonts.ready.then(() => {
+            commercialClient.updateAdverts(getAdSlots());
+            videoClient.updateVideos(getVideoSlots());
+        });
+    } catch (e) {
+        logger.error(`font loading API not supported: ${e}`)
+    }
+}
+
+function getRect(slotPosition: DOMRect): Rect {
+    const scrollLeft = document.scrollingElement
+        ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
+    const scrollTop = document.scrollingElement
+        ? document.scrollingElement.scrollTop : document.body.scrollTop;
+
+    return new Rect({
+        x: slotPosition.left + scrollLeft,
+        y: slotPosition.top + scrollTop,
+        width: slotPosition.width,
+        height: slotPosition.height
+    })
+}
 
 const getTargetingParams: () => Map<string, string> = memoise(() => {
     const content = document.getElementById('targeting-params')?.innerHTML ?? '{}';
@@ -25,20 +80,10 @@ function getAdSlots(): AdSlot[] {
         return [];
     }
 
-    const scrollLeft = document.scrollingElement
-        ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
-    const scrollTop = document.scrollingElement
-        ? document.scrollingElement.scrollTop : document.body.scrollTop;
-
     return Array.from(advertSlots).map(adSlot => {
         const slotPosition = adSlot.getBoundingClientRect();
         return new AdSlot({
-            rect: {
-                x: slotPosition.left + scrollLeft,
-                y: slotPosition.top + scrollTop,
-                width: slotPosition.width,
-                height: slotPosition.height
-            },
+            rect: getRect(slotPosition),
             targetingParams
         })
     });
@@ -46,31 +91,8 @@ function getAdSlots(): AdSlot[] {
 
 function insertAds(): void {
     let adSlots = getAdSlots();
-    if (adSlots.length > 0) {
+    if (adSlots.length) {
         commercialClient.insertAdverts(adSlots);
-        const targetNode = document.querySelector('html') as Node;
-        const config: MutationObserverInit = {
-            childList: true,
-            subtree: true,
-            attributeFilter: ["style"]
-        };
-        const callback = function(): void {
-            const currentAdSlots = getAdSlots();
-            if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
-                adSlots = currentAdSlots;
-                commercialClient.updateAdverts(currentAdSlots);
-            }
-        };
-
-        window.addEventListener('resize', callback);
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-
-        try {
-            document.fonts.ready.then(() => commercialClient.updateAdverts(getAdSlots()));
-        } catch (e) {
-            logger.error(`font loading API not supported: ${e}`)
-        }
     }
 }
 
@@ -127,7 +149,34 @@ function slideshow(): void {
         }));
 }
 
+function getVideoSlots(): VideoSlot[] {
+    const videoSlots = document.querySelectorAll('.native-video');
+
+    if (!videoSlots) {
+        return [];
+    }
+
+    return Array.from(videoSlots).map(videoSlot => {
+        const slotPosition = videoSlot.getBoundingClientRect();
+        return new VideoSlot({
+            rect: getRect(slotPosition),
+            videoId: videoSlot.getAttribute('data-videoId') ?? '',
+            posterUrl: videoSlot.getAttribute('data-posterUrl') ?? '',
+            duration: parseInt(videoSlot.getAttribute('data-duration') ?? '0')
+        })
+    });
+}
+
+function videos(): void {
+    const videoSlots = getVideoSlots();
+    if (videoSlots.length) {
+        videoClient.insertVideos(videoSlots);
+    }
+}
+
 export {
     ads,
     slideshow,
+    videos,
+    reportNativeElementPositionChanges
 };

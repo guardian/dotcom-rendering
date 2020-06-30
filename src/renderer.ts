@@ -573,6 +573,7 @@ const render = (format: Format, excludeStyles = false) =>
                 'data-posterUrl': posterUrl,
                 'data-videoId': videoId,
                 'data-duration': duration,
+                'className': 'native-video',
                 css: styles
             }
             return styledH('div', attributes)
