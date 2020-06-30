@@ -10,17 +10,15 @@ import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Metadata from 'components/metadata';
-import Logo from 'components/shared/logo';
+import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review, getFormat, Item } from 'item';
+import { Standard, Review, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
-import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
 
 // ----- Styles ----- //
 
@@ -84,12 +82,6 @@ const Standard = ({ item, children }: Props): JSX.Element => {
         ? <div id="epic-container"></div>
         : null
 
-    const sponsorLogo = pipe2(
-        item.branding,
-        map(branding => <Logo branding={branding} format={getFormat(item)} />),
-        withDefault(<></>)
-    )
-
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -102,7 +94,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
-                    {sponsorLogo}
+                    {OptionalLogo(item)}
                 </section>
             </header>
             <Body className={[articleWidthStyles, itemStyles(item)]}>
