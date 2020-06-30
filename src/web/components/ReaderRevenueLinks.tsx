@@ -115,6 +115,11 @@ const subMessageStyles = css`
     margin-bottom: 5px;
 `;
 
+const headerYellowHighlight = css`
+    color: #ffe500;
+    font-weight: 700;
+`;
+
 const decideIfRecentContributor: () => boolean = () => {
     const cookieValue = getCookie('gu.contributions.contrib-timestamp');
 
@@ -184,7 +189,11 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             { edition === 'UK' ?
                 (
                     <div>
-                        We're funded by {`${numberOfSupporters} `} readers across Australia.<br />
+                        We're funded by
+                        <span className={headerYellowHighlight}>
+                            {` ${numberOfSupporters} `}
+                        </span>
+                        readers across Australia.<br />
                         Thank you for supporting us
                     </div>
                 )
@@ -205,7 +214,9 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         (
                             <div>
                                 We're funded by
-                              {` ${numberOfSupporters} `}
+                                <span className={headerYellowHighlight}>
+                                    {` ${numberOfSupporters} `}
+                                </span>
                                     readers across Australia.<br />
                                 Thank you for supporting us
                             </div>
