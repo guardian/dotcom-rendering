@@ -14,7 +14,6 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
 
-import highlight = Mocha.utils.highlight;
 import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
 type Props = {
