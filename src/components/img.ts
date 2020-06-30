@@ -50,6 +50,7 @@ const Img: FC<Props> = ({ image, sizes, className, format }) =>
             alt: withDefault('')(image.alt),
             className: image.width > 620 ? 'js-launch-slideshow' : '',
             css: [styles(image.role, format), className],
+            'data-ratio': image.width / image.height,
             'data-caption': withDefault('')(image.nativeCaption),
             'data-credit': withDefault('')(image.credit),
         }),
