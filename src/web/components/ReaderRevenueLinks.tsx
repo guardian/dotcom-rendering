@@ -122,7 +122,6 @@ const headerYellowHighlight = css`
 
 const decideIfRecentContributor: () => boolean = () => {
     const cookieValue = getCookie('gu.contributions.contrib-timestamp');
-    console.log("cookie", cookieValue)
 
     if (!cookieValue) {
         return false;
@@ -130,7 +129,6 @@ const decideIfRecentContributor: () => boolean = () => {
 
     const now = new Date().getTime();
     const diffDays = Math.ceil((now - parseInt(cookieValue,10)) / (1000 * 3600 * 24));
-    console.log("diff", diffDays)
     return diffDays <= 180;
 };
 
@@ -175,16 +173,12 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
     }, []);
 
-    console.log("isRC", isRecentContributor);
-
     if (
         isDigitalSubscriber ||
         isPayingMember ||
         isRecentContributor ||
         hideSupportMessage
     ) {
-        console.log("edition", edition)
-        console.log("CAPI.config.switches.ausMomentEnabled", CAPI.config.switches.ausMomentEnabled)
         return (
             <div className={cx(inHeader && paddingStyles)}>
                 <div
@@ -195,7 +189,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     <div className={messageStyles}>Welcome Back</div>
 
                     <div className={subMessageStyles}>
-                        {edition === 'UK' ? (
+                        {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ? (
                             <div>
                         We&apos;re funded by
                                 <span className={headerYellowHighlight}>
@@ -210,7 +204,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 </div>
             </div>
         )
-    } 
+    }
         return (
             <div className={cx(inHeader && paddingStyles)}>
                 <div
@@ -275,5 +269,5 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 </div>
             </div>
         )
-    
+
 };
