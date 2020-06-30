@@ -23,18 +23,6 @@ const textAreaField = {
     required: true,
 } as CampaignFieldTextArea;
 
-// TODO:
-// const fileField = {
-//     name:
-//         'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
-//     hideLabel: false,
-//     label:
-//         'You can upload a photo here if you think it will add to your story',
-//     id: 91884877,
-//     type: 'file',
-//     required: false,
-// } as CampaignFieldFile
-
 const radioField = {
     name: 'can_we_publish_your_response',
     options: [
@@ -202,15 +190,6 @@ describe('Callout from', () => {
         fireEvent.click(checkBoxFieldComponent1);
         expect(checkBoxFieldComponent1.checked).toBe(true);
 
-        // TODO: we want to uncheck a checkbox
-        // const checkBoxFieldComponent2 = getByFieldId(
-        //     checkboxField.options[1].value,
-        // ) as HTMLInputElement;
-        // fireEvent.click(checkBoxFieldComponent2);
-        // expect(checkBoxFieldComponent2.checked).toBe(true);
-        // // we want to check if we can uncheck the checkbox
-        // fireEvent.click(checkBoxFieldComponent2);
-        // expect(checkBoxFieldComponent2.checked).toBe(false);
 
         const checkBoxFieldComponent3 = getByFieldId(
             checkboxField.options[2].value,
@@ -228,6 +207,10 @@ describe('Callout from', () => {
             [checkboxField.id]: ['checkbox 1', 'checkbox 3'],
         });
     });
+
+    // TODO:
+    // file upload unit tests are flaky to implement
+    it.todo('should allow file upload')
 
     it('should submit select', () => {
         const mockSubmit = jest.fn();
