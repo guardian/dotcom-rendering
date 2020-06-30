@@ -122,15 +122,15 @@ const headerYellowHighlight = css`
 
 const decideIfRecentContributor: () => boolean = () => {
     const cookieValue = getCookie('gu.contributions.contrib-timestamp');
+    console.log("cookie", cookieValue)
 
     if (!cookieValue) {
         return false;
     }
 
     const now = new Date().getTime();
-    const lastContribution = new Date(cookieValue).getTime();
-    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
-
+    const diffDays = Math.ceil((now - parseInt(cookieValue,10)) / (1000 * 3600 * 24));
+    console.log("diff", diffDays)
     return diffDays <= 180;
 };
 
@@ -175,33 +175,44 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
     }, []);
 
-    /*
-        Changed to OR statement as it's likely that at least one will will be false.
-        Default response is to show the banners
-    */
+    console.log("isRC", isRecentContributor);
+
     if (
         isDigitalSubscriber ||
         isPayingMember ||
         isRecentContributor ||
         hideSupportMessage
     ) {
-        <div className={subMessageStyles}>
-            { edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
-                (
+        console.log("edition", edition)
+        console.log("CAPI.config.switches.ausMomentEnabled", CAPI.config.switches.ausMomentEnabled)
+        return (
+            <div className={cx(inHeader && paddingStyles)}>
+                <div
+                    className={cx({
+                        [hiddenUntilTablet]: inHeader,
+                    })}
+                >
+                    <div className={messageStyles}>Welcome Back</div>
+
+            <div className={subMessageStyles}>
+                {edition === 'UK' ? (
                     <div>
                         We&apos;re funded by
                         <span className={headerYellowHighlight}>
                             {` ${numberOfSupporters} `}
                         </span>
-                        readers across Australia.<br />
+                        readers across Australia.<br/>
                         Thank you for supporting us
                     </div>
-                )
-                : null}
-        </div>
-    }
-    return (
-        <div className={cx(inHeader && paddingStyles)}>
+                    )
+                    : (null)}
+            </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className={cx(inHeader && paddingStyles)}>
             <div
                 className={cx({
                     [hiddenUntilTablet]: inHeader,
@@ -216,25 +227,25 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                                 <span className={headerYellowHighlight}>
                                     {` ${numberOfSupporters} `}
                                 </span>
-                                    readers across Australia.<br />
+                                readers across Australia.<br/>
                                 Thank you for supporting us
                             </div>
                         )
-                        : ( <div>  Available for everyone, funded by readers</div>)}
+                        : (<div> Available for everyone, funded by readers</div>)}
                 </div>
                 <a
                     className={linkStyles}
                     href={urls.contribute}
                     data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                 >
-                    Contribute <ArrowRightIcon />
+                    Contribute <ArrowRightIcon/>
                 </a>
                 <a
                     className={linkStyles}
                     href={urls.subscribe}
                     data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
                 >
-                    Subscribe <ArrowRightIcon />
+                    Subscribe <ArrowRightIcon/>
                 </a>
             </div>
 
@@ -250,7 +261,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                     >
-                        Contribute <ArrowRightIcon />
+                        Contribute <ArrowRightIcon/>
                     </a>
                 ) : (
                     <a
@@ -258,10 +269,11 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         href={urls.support}
                         data-link-name={`${dataLinkNamePrefix}support-cta`}
                     >
-                        Support us <ArrowRightIcon />
+                        Support us <ArrowRightIcon/>
                     </a>
                 )}
             </div>
         </div>
-    );
+        )
+    }
 };
