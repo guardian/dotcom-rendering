@@ -26,6 +26,7 @@ import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
 import { remSpace } from '@guardian/src-foundations';
+import {atomCss, atomScript} from "../components/atoms/interactiveAtom";
 
 
 // ----- Setup ----- //
@@ -172,7 +173,7 @@ function page(
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );
-    const cspString = csp(item, { scripts: [], styles: [styles, css] }, hasTwitter);
+    const cspString = csp(item, { scripts: [atomScript], styles: [styles, css, atomCss] }, hasTwitter);
     const html = `
         <html lang="en">
             <head>
