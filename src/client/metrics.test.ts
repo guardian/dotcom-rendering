@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
-import { MetricKind, metrics } from './metrics';
+import { MetricType } from '@guardian/bridget/Metric';
+
+import { metrics } from './metrics';
 
 
 // ----- Setup ----- //
@@ -31,8 +33,8 @@ test('Captures paint events', () => {
     expect(results).toHaveLength(2);
     expect(results).toEqual(
         expect.arrayContaining([
-            expect.objectContaining({ kind: MetricKind.FirstPaint }),
-            expect.objectContaining({ kind: MetricKind.FirstContentfulPaint }),
+            expect.objectContaining({ __type: MetricType.MetricWithFirstPaint }),
+            expect.objectContaining({ __type: MetricType.MetricWithFirstContentfulPaint }),
         ]),
     );
 });
