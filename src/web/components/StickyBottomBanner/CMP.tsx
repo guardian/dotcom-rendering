@@ -7,6 +7,7 @@ import {
     checkWillShowUi as checkWillShowCCPAUi,
 } from '@guardian/consent-management-platform';
 import { ccpaApplies } from '@root/src/web/lib/ccpaApplies';
+import { addPrivacySettingsLink } from './CMPPrivacyLink';
 
 // this is the wrong place to be doing this, but it's temporary
 // until we remove the old react CMP component and go 100% sourcepoint
@@ -17,6 +18,7 @@ export const willShowNewCMP = async () => {
         initCCPA({
             useCcpa: true,
         });
+        addPrivacySettingsLink();
         return checkWillShowCCPAUi();
     }
 
