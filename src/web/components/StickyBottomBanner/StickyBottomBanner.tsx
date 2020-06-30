@@ -14,8 +14,9 @@ type Props = {
 };
 
 const getEngagementBannerLastClosedAt = (): string | undefined => {
+    const item = localStorage.getItem('gu.prefs.engagementBannerLastClosedAt');
     return (
-        localStorage.getItem('gu.prefs.engagementBannerLastClosedAt') ||
+        (item && JSON.parse(item).value) ||
         undefined
     );
 };
