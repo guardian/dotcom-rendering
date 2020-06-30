@@ -15,8 +15,6 @@ import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
 import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
-import highlight = Mocha.utils.highlight;
-
 type Props = {
     edition: Edition;
     urls: {
