@@ -17,6 +17,7 @@ import { Comment } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
+import OptionalLogo from 'components/shared/logo';
 
 
 // ----- Styles ----- //
@@ -83,6 +84,9 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
                 </section>
 
                 <HeaderMedia item={item}/>
+                <section css={articleWidthStyles}>
+                    {OptionalLogo(item)}
+                </section>
             </header>
             <ArticleBody className={[articleWidthStyles]}>
                 {children}

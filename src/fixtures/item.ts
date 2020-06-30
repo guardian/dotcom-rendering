@@ -29,6 +29,7 @@ const fields = {
     commentable: false,
     tags: [],
     shouldHideReaderRevenue: false,
+    branding: none
 };
 
 const article: Item = {

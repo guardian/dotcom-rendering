@@ -167,7 +167,7 @@ function page(
     renderingRequest: RenderingRequest,
     getAssetLocation: (assetName: string) => string,
 ): Page {
-    const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest.content);
+    const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
     const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
     const hasTwitter = includesTweets(renderingRequest.content);
     const clientScript = map(getAssetLocation)(scriptName(item));

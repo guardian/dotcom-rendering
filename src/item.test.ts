@@ -1,3 +1,4 @@
+import Int64 from 'node-int64';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
@@ -11,8 +12,8 @@ import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
-import Int64 from 'node-int64';
 import { withDefault } from 'types/option';
+import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
 import { toOption, map } from 'types/result';
 
@@ -190,7 +191,7 @@ const articleContentWithImageWithoutFile = articleContentWith({
     }
 })
 
-const f = fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' });
+const f = (content: Content) => fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })({ content });
 
 const getFirstBody = (item: Review | Standard) =>
     pipe2(
