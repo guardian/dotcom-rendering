@@ -13,6 +13,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
+
 import highlight = Mocha.utils.highlight;
 
 type Props = {
@@ -197,8 +198,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         Thank you for supporting us
                     </div>
                 )
-                : null
-            }
+                : null}
         </div>
     }
     return (
@@ -221,8 +221,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                                 Thank you for supporting us
                             </div>
                         )
-                        : ( <div>  Available for everyone, funded by readers</div>)
-                    }
+                        : ( <div>  Available for everyone, funded by readers</div>)}
                 </div>
                 <a
                     className={linkStyles}

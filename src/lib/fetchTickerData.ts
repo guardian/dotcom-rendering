@@ -25,9 +25,9 @@ const parse = (json: any): Promise<TickerData> => {
             total,
             goal,
         });
-    } else {
-        return Promise.reject(`Failed to parse ticker data: ${json}`);
     }
+        return Promise.reject(`Failed to parse ticker data: ${json}`);
+
 };
 
 export const fetchTickerDataCached = (
@@ -48,26 +48,4 @@ export const fetchTickerDataCached = (
     );
 
     return cachedRes();
-};
-
-export const addTickerDataToSettings = (tickerSettings: TickerSettings): Promise<TickerSettings> =>
-    fetchTickerDataCached(tickerSettings).then(tickerData => ({
-        ...tickerSettings,
-        tickerData,
-    }));
-
-export const addTickerDataToVariant = (variant: Variant): Promise<Variant> => {
-    if (variant.tickerSettings) {
-        const tickerSettings = variant.tickerSettings;
-
-        return fetchTickerDataCached(tickerSettings).then((tickerData: TickerData) => ({
-            ...variant,
-            tickerSettings: {
-                ...tickerSettings,
-                tickerData,
-            },
-        }));
-    } else {
-        return Promise.resolve(variant);
-    }
 };
