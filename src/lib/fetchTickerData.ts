@@ -1,5 +1,5 @@
 import fetch, { Response } from 'node-fetch';
-import { TickerCountType, TickerData, TickerSettings, Variant } from './variants';
+import { TickerCountType, TickerData } from './variants';
 import { cacheAsync } from './cache';
 
 const tickerUrl = (countType: TickerCountType): string =>
