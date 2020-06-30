@@ -177,7 +177,10 @@ function page(
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );
-    const cspString = csp(item, { scripts: [atomScript], styles: [styles, css, atomCss] }, hasTwitter);
+    const cspString = csp(item, {
+        scripts: [atomScript],
+        styles: [styles, css, atomCss]
+    }, hasTwitter);
     const html = `
         <html lang="en">
             <head>
