@@ -3,10 +3,8 @@ import { showPrivacyManager } from '@guardian/consent-management-platform';
 
 const show = (forceModal?: boolean) => {
     ccpaApplies().then((useCCPA) => {
-        if (useCCPA) {
-            if (forceModal) {
-                showPrivacyManager();
-            }
+        if (useCCPA && forceModal) {
+			showPrivacyManager();
         }
     });
 };
