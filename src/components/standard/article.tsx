@@ -5,20 +5,20 @@ import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
-import HeaderImage from 'components/headerImage';
+import HeaderMedia from 'headerMedia';
 import Series from 'components/series';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
+import Metadata from 'components/metadata';
+import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review, getFormat, Item } from 'item';
-import Metadata from 'components/metadata';
+import { Standard, Review, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
-
 
 // ----- Styles ----- //
 
@@ -85,10 +85,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
-                <HeaderImage
-                    image={item.mainImage}
-                    format={getFormat(item)}
-                />
+                <HeaderMedia item={item} />
                 <Series item={item} />
                 <Headline item={item} />
                 <div css={articleWidthStyles}>
@@ -97,6 +94,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
+                    {OptionalLogo(item)}
                 </section>
             </header>
             <Body className={[articleWidthStyles, itemStyles(item)]}>

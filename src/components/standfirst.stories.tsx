@@ -9,6 +9,8 @@ import { Option } from 'types/option';
 import { article, review, feature, comment } from 'fixtures/item';
 import { parse } from 'client/parser';
 import { selectPillar } from 'storybookHelpers';
+import { pipe2 } from 'lib';
+import { toOption } from 'types/result';
 
 
 // ----- Setup ----- //
@@ -17,8 +19,11 @@ const parser = new DOMParser();
 const parseStandfirst = parse(parser);
 
 const standfirst: Option<DocumentFragment> =
-    parseStandfirst('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>')
-        .toOption();
+    pipe2(
+        '<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
+        parseStandfirst,
+        toOption,
+    );
 
 
 // ----- Stories ----- //

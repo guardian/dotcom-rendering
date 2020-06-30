@@ -8,6 +8,8 @@ import Byline from './byline';
 import { Pillar, Design, Display } from 'format';
 import { Option } from 'types/option';
 import { parse } from 'client/parser';
+import { pipe2 } from 'lib';
+import { toOption } from 'types/result';
 
 
 // ----- Setup ----- //
@@ -25,8 +27,11 @@ const job = (): string =>
     text('Job Title', 'Editor of things');
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-    parseByline(`<a href="${profileLink()}">${byline()}</a> ${job()}`)
-        .toOption();
+    pipe2(
+        `<a href="${profileLink()}">${byline()}</a> ${job()}`,
+        parseByline,
+        toOption,
+    );
 
 
 // ----- Stories ----- //

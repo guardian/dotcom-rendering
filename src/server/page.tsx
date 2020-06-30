@@ -21,7 +21,7 @@ import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Item } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
-import { pageFonts } from 'styles';
+import { pageFonts, darkModeCss } from 'styles';
 import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
@@ -156,6 +156,10 @@ const styles = `
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
         line-height: 1.5;
+
+        ${darkModeCss`
+            background: transparent;
+        `}
     }
 `;
 
@@ -164,7 +168,7 @@ function page(
     renderingRequest: RenderingRequest,
     getAssetLocation: (assetName: string) => string,
 ): Page {
-    const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest.content);
+    const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
     const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
     const hasTwitter = includesTweets(renderingRequest.content);
     const clientScript = map(getAssetLocation)(scriptName(item));

@@ -5,7 +5,6 @@ import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Item, Review } from 'item';
 import { none, some } from 'types/option';
 
-
 // ----- Fixture ----- //
 
 const fields = {
@@ -17,8 +16,8 @@ const fields = {
     byline: '',
     bylineHtml: none,
     publishDate: none,
-    mainImage: none,
     contributors: [],
+    mainMedia: none,
     series: some({
         id: '',
         type: 0,
@@ -30,6 +29,7 @@ const fields = {
     commentable: false,
     tags: [],
     shouldHideReaderRevenue: false,
+    branding: none
 };
 
 const article: Item = {
@@ -61,7 +61,7 @@ const advertisementFeature: Item = {
 
 const comment: Item = {
     design: Design.Comment,
-    ...fields,
+    ...fields
 };
 
 

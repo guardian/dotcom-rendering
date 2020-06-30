@@ -13,7 +13,7 @@ import {
     fromSerialisable as bodyElementFromSerialisable,
 } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
-import { partition, Ok } from 'types/result';
+import { partition, ok } from 'types/result';
 import { compose, pipe3 } from 'lib';
 import { fromString as dateFromString } from 'date';
 
@@ -66,7 +66,7 @@ const deserialiseLiveBlock = (docParser: DocParser) => ({
         title,
         firstPublished: andThen(dateFromString)(firstPublished),
         lastModified: andThen(dateFromString)(lastModified),
-        body: body.map((elem: any) => new Ok(bodyElementFromSerialisable(docParser)(elem))),
+        body: body.map((elem: any) => ok(bodyElementFromSerialisable(docParser)(elem))),
     });
 
 const toSerialisable = (blocks: LiveBlock[]): JsonSerialisable =>
