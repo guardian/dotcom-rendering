@@ -26,7 +26,7 @@ const parse = (json: any): Promise<TickerData> => {
             goal,
         });
     }
-        return Promise.reject(`Failed to parse ticker data: ${json}`);
+        return Promise.reject(Error(`Failed to parse ticker data: ${json}`));
 
 };
 

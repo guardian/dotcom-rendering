@@ -13,9 +13,9 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
+import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
 import highlight = Mocha.utils.highlight;
-import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
 type Props = {
     edition: Edition;
@@ -191,7 +191,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             { edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
                 (
                     <div>
-                        We're funded by
+                        We&apos;re funded by
                         <span className={headerYellowHighlight}>
                             {` ${numberOfSupporters} `}
                         </span>
@@ -214,7 +214,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
                         (
                             <div>
-                                We're funded by
+                                We&apos;re funded by
                                 <span className={headerYellowHighlight}>
                                     {` ${numberOfSupporters} `}
                                 </span>
