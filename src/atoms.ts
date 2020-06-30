@@ -48,7 +48,7 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
             const atom = atoms.media?.find(media => media.id === id);
 
             if (atom?.data?.kind !== "media") {
-                return new Err(`No atom matched this id: ${id}`);
+                return err(`No atom matched this id: ${id}`);
             }
 
             const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
@@ -56,14 +56,14 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
                 .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
 
             if (!posterUrl) {
-                return new Err(`No posterUrl for atom: ${id}`);
+                return err(`No posterUrl for atom: ${id}`);
             }
 
             if (!videoId) {
-                return new Err(`No videoId for atom: ${id}`);
+                return err(`No videoId for atom: ${id}`);
             }
 
-            return new Ok({
+            return ok({
                 kind: ElementKind.MediaAtom,
                 posterUrl,
                 videoId,
