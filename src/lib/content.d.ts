@@ -261,6 +261,7 @@ interface VideoFacebookBlockElement {
     height: number;
     width: number;
     caption: string;
+    embedUrl?: string;
 }
 
 interface VideoVimeoBlockElement {
