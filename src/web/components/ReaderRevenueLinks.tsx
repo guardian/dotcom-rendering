@@ -14,6 +14,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import {fetchTickerDataCached} from "@root/src/lib/fetchTickerData";
 import {TickerCountType} from "@root/src/lib/variants";
 
+import highlight = Mocha.utils.highlight;
 import {CAPI} from "@root/fixtures/CAPI/CAPI";
 
 type Props = {
@@ -187,7 +188,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         hideSupportMessage
     ) {
         <div className={subMessageStyles}>
-            { edition === 'UK' ?
+            { edition === 'AU' && CAPI.config.switches.ausMomentEnabled ?
                 (
                     <div>
                         We're funded by
@@ -245,7 +246,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     [hidden]: !inHeader,
                 })}
             >
-                {edition === 'AU' && CAPI.config.switches.ausMomentEnabled ? (
+                {edition === 'UK' ? (
                     <a
                         className={linkStyles}
                         href={urls.contribute}
