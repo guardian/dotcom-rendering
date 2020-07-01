@@ -10,9 +10,9 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import {CAPI} from "@root/fixtures/CAPI/CAPI";
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import {fetchTickerData, TickerCountType, TickerData} from "@root/src/lib/fetchTickerData";
+import {addForMinutes, getCookie} from "@root/src/web/browser/cookie";
 
 type Props = {
     edition: Edition;
@@ -23,6 +23,7 @@ type Props = {
     };
     dataLinkNamePrefix: string;
     inHeader: boolean;
+    enableAusMoment2020Header: boolean,
 };
 
 const paddingStyles = css`
@@ -119,46 +120,61 @@ const headerYellowHighlight = css`
     font-weight: 700;
 `;
 
+const AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME = 'gu_aus_moment_supporter_count';
+
 export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
     urls,
     dataLinkNamePrefix,
     inHeader,
+    enableAusMoment2020Header,
 }) => {
     const [numberOfSupporters, setnumberOfSupporters] = useState<string>(
         '',
     );
-
-    const ausMomentEnabled = true// edition === 'AU' && CAPI.config.switches.ausMomentEnabled;
+    const showAusMomentHeader = edition === 'AU' && enableAusMoment2020Header;
 
     useEffect(() => {
-        if (ausMomentEnabled) {
-            fetchTickerData(TickerCountType.people)
-                .then((td: TickerData) => setnumberOfSupporters(td.total.toLocaleString()));
+        if (showAusMomentHeader) {
+            const cookieValue = getCookie(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME);
+
+            if (cookieValue) {
+                setnumberOfSupporters(cookieValue.toLocaleString())
+            } else {
+                fetchTickerData(TickerCountType.people)
+                    .then((td: TickerData) => {
+                        addForMinutes(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME, `${td.total}`, 60);
+                        setnumberOfSupporters(td.total.toLocaleString())
+                    });
+            }
         }
-    }, []);
+    }, [showAusMomentHeader]);
 
-    if (ausMomentEnabled && shouldHideSupportMessaging()) {
-        return (
-            <div className={cx(inHeader && paddingStyles)}>
-                <div
-                    className={cx({
-                        [hiddenUntilTablet]: inHeader,
-                    })}
-                >
-                    <div className={messageStyles}>Welcome back</div>
+    if (shouldHideSupportMessaging()) {
+        if (showAusMomentHeader) {
+            return (
+                <div className={cx(inHeader && paddingStyles)}>
+                    <div
+                        className={cx({
+                            [hiddenUntilTablet]: inHeader,
+                        })}
+                    >
+                        <div className={messageStyles}>Welcome back</div>
 
-                    <div className={subMessageStyles}>
-                        We&apos;re funded by
-                        <span className={headerYellowHighlight}>
-                            {` ${numberOfSupporters} `}
-                        </span>
-                        readers across Australia.<br />
-                        Thank you for supporting us
+                        <div className={subMessageStyles}>
+                            We&apos;re funded by
+                            <span className={headerYellowHighlight}>
+                                {` ${numberOfSupporters} `}
+                            </span>
+                            readers across Australia.<br />
+                            Thank you for supporting us
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } 
+            return null
+        
     }
     return (
         <div className={cx(inHeader && paddingStyles)}>
@@ -169,16 +185,17 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    { ausMomentEnabled ?
-                        (<div>
+                    { showAusMomentHeader ?
+                        (
+                            <div>
                                 We&apos;re funded by
                                 <span className={headerYellowHighlight}>
                                     {` ${numberOfSupporters} `}
                                 </span>
                                 readers across Australia.
-                        </div>)
-                        : (<div> Available for everyone, funded by readers</div>)
-                    }
+                            </div>
+)
+                        : (<div> Available for everyone, funded by readers</div>)}
                 </div>
                 <a
                     className={linkStyles}
