@@ -158,6 +158,10 @@ interface InstagramBlockElement {
 
 interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+    id: string;
+    js: string;
+    html?: string;
+    css?: string;
 }
 
 interface MapBlockElement {
