@@ -104,7 +104,7 @@ export const makeClassNames = (
     optClassNames: string[],
 ): string => {
     const baseClassNames = ['js-ad-slot', 'ad-slot', `ad-slot--${name}`];
-    const adTypeClassNames = adTypes.map(adType => `ad-slot--${adType}`);
+    const adTypeClassNames = adTypes.map((adType) => `ad-slot--${adType}`);
     return baseClassNames.concat(adTypeClassNames, optClassNames).join(' ');
 };
 
