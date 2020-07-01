@@ -15,7 +15,7 @@ Browser-support is high (~90%) but not enough to forgo a polyfill.
 Support `import` via polyfills for browsers that need them.
 
 As it is not possible to directly override `import`, dynamic import is exposed
-via `window.guardian.functions.import`.
+via `window.guardianPolyfilledImport`.
 
 ## Status
 
