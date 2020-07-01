@@ -413,7 +413,7 @@ type CampaignFieldType =
     | CampaignFieldSelect;
 
 interface CampaignField {
-    id: number;
+    id: string;
     name: string;
     description?: string;
     required: boolean;
