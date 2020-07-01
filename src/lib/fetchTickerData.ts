@@ -1,6 +1,5 @@
 import fetch, { Response } from 'node-fetch';
 import { TickerCountType, TickerData } from './variants';
-import { cacheAsync } from './cache';
 
 const tickerUrl = (countType: TickerCountType): string =>
     countType === TickerCountType.people
@@ -30,22 +29,10 @@ const parse = (json: any): Promise<TickerData> => {
 
 };
 
-export const fetchTickerDataCached = (
+export const fetchTickerData = (
     tickerType: TickerCountType,
-): Promise<TickerData> => {
-    const fetchForType = (): Promise<TickerData> => {
-        return fetch(tickerUrl(tickerType))
-            .then(response => checkForErrors(response))
-            .then(response => response.json())
-            .then(parse);
-    };
-
-
-    const [, cachedRes] = cacheAsync(
-        fetchForType,
-        60,
-        `fetchTickerData_${tickerType}`,
-    );
-
-    return cachedRes();
-};
+): Promise<TickerData> =>
+    fetch(tickerUrl(tickerType))
+        .then(response => checkForErrors(response))
+        .then(response => response.json())
+        .then(parse);

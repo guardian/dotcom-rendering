@@ -97,8 +97,7 @@
         "prettier-eslint": "^11.0.0",
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
-        "sanitize-html": "^1.27.0",
-        "node-cache": "^5.1.0"
+        "sanitize-html": "^1.27.0"
     },
     "devDependencies": {
         "@babel/core": "^7.5.5",
