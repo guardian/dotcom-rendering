@@ -20,7 +20,7 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
-import { ExplainerAtom } from '@guardian/atoms-rendering';
+import { ExplainerAtom, InteractiveAtom } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
 // This is required for spacefinder to work!
@@ -211,6 +211,15 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                    return (
+                        <InteractiveAtom
+                            id={element.id}
+                            html={element.html}
+                            js={element.js}
+                            css={element.css}
+                        />
+                    );
 
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -224,7 +233,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.QABlockElement':
