@@ -10,9 +10,9 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import {fetchTickerData, TickerCountType} from "@root/src/lib/fetchTickerData";
 import {CAPI} from "@root/fixtures/CAPI/CAPI";
-import {shouldHideSupportMessaging} from "@root/src/web/lib/contributions";
+import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {fetchTickerData, TickerCountType, TickerData} from "@root/src/lib/fetchTickerData";
 
 type Props = {
     edition: Edition;
@@ -129,12 +129,12 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         '',
     );
 
-    const ausMomentEnabled = edition === 'AU' && CAPI.config.switches.ausMomentEnabled;
+    const ausMomentEnabled = true// edition === 'AU' && CAPI.config.switches.ausMomentEnabled;
 
     useEffect(() => {
         if (ausMomentEnabled) {
             fetchTickerData(TickerCountType.people)
-                .then(td => setnumberOfSupporters(td.total.toLocaleString()));
+                .then((td: TickerData) => setnumberOfSupporters(td.total.toLocaleString()));
         }
     }, []);
 

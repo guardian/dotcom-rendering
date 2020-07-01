@@ -5,7 +5,7 @@ export enum TickerCountType {
     people = 'people',
 }
 
-interface TickerData {
+export interface TickerData {
     total: number;
     goal: number;
 }

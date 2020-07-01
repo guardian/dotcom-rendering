@@ -39,6 +39,23 @@ interface CaptionBlockElement {
     shouldLimitWidth?: boolean;
     isOverlayed?: boolean;
 }
+
+interface CalloutBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
+    id: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    title: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
+interface CalloutBlockElementXp {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElementXp';
+}
+
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
@@ -244,6 +261,7 @@ interface VideoFacebookBlockElement {
     height: number;
     width: number;
     caption: string;
+    embedUrl?: string;
 }
 
 interface VideoVimeoBlockElement {
@@ -280,23 +298,13 @@ interface YoutubeBlockElement {
     width?: string;
 }
 
-interface CalloutBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
-    id: string;
-    activeFrom: number;
-    displayOnSensitive: boolean;
-    formId: number;
-    title: string;
-    description: string;
-    tagName: string;
-    formFields: CampaignFieldType[];
-}
-
 type CAPIElement =
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
+    | CalloutBlockElement
+    | CalloutBlockElementXp
     | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
