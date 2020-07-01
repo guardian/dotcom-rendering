@@ -10,8 +10,7 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import {fetchTickerData} from "@root/src/lib/fetchTickerData";
-import {TickerCountType} from "@root/src/lib/variants";
+import {fetchTickerData, TickerCountType} from "@root/src/lib/fetchTickerData";
 import {CAPI} from "@root/fixtures/CAPI/CAPI";
 import {shouldHideSupportMessaging} from "@root/src/web/lib/contributions";
 

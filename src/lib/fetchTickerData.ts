@@ -1,5 +1,14 @@
 import fetch, { Response } from 'node-fetch';
-import { TickerCountType, TickerData } from './variants';
+
+export enum TickerCountType {
+    money = 'money',
+    people = 'people',
+}
+
+interface TickerData {
+    total: number;
+    goal: number;
+}
 
 const tickerUrl = (countType: TickerCountType): string =>
     countType === TickerCountType.people
