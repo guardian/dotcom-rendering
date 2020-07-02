@@ -10,8 +10,7 @@ import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 import { Form } from './Form';
 
-// TODO: find better name
-const snippetStyles = css`
+const calloutDetailsStyles = css`
     border-top: 1px ${neutral[86]} solid;
     border-bottom: 1px ${neutral[86]} solid;
     position: relative;
@@ -24,6 +23,10 @@ const backgroundColorStyle = css`
 
 const speechBubbleWrapperStyles = css`
     margin-right: 10px;
+`;
+
+const successTextStyles = css`
+    ${textSans.medium({ fontWeight: 'bold' })}
 `;
 
 const summeryStyles = css`
@@ -83,6 +86,8 @@ const buttonWrapperStyles = css`
 // after it was opened
 let hasFormBeenOpened = true;
 
+type formData = { [key in string]: any };
+
 export const Callout = ({
     callout,
     pillar,
@@ -95,8 +100,60 @@ export const Callout = ({
     let lastElementRef: HTMLButtonElement | null = null;
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const [error, setError] = useState('');
+    const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
     const { title, description, formFields } = callout;
+
+    const onSubmit = async (formData: formData) => {
+        // Reset error for new submission attempt
+        setError('');
+
+        if (formData.twitterHandle) {
+            setError('Sorry we think you are a robot.');
+            return;
+        }
+        // need to add prefix `field_` to all keys in form
+        const formDataWithFieldPrefix = Object.keys(formData).reduce(
+            (acc, cur) => ({
+                ...acc,
+                [`field_${cur}`]: formData[cur],
+            }),
+            {},
+        );
+
+        return fetch(
+            'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    formId: formData.formId,
+                    // TODO: check if we need to send this
+                    'twitter-handle': '',
+                    ...formDataWithFieldPrefix,
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                credentials: 'include',
+            },
+        )
+            .then((resp) => {
+                if (resp.status === 201) {
+                    setSubmissionSuccess(true);
+                    setIsExpanded(false);
+                } else {
+                    setError(
+                        'Sorry, there was a problem submitting your form. Please try again later.',
+                    );
+                }
+            })
+            .catch((_) => {
+                setError(
+                    'Sorry, there was a problem submitting your form. Please try again later.',
+                );
+            });
+    };
 
     // ***************************
     // *     Accessibility       *
@@ -188,10 +245,46 @@ export const Callout = ({
         return () => document.removeEventListener('keydown', keyListener);
     }, [isExpanded, setIsExpanded]);
 
+    if (submissionSuccess) {
+        return (
+            <figure>
+                <details
+                    className={cx(calloutDetailsStyles, {
+                        [backgroundColorStyle]: isExpanded,
+                    })}
+                    aria-hidden={true}
+                    open={isExpanded}
+                >
+                    <summary
+                        className={summeryStyles}
+                        role="none"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }}
+                    >
+                        <div className={summeryContentWrapper}>
+                            <div className={speechBubbleWrapperStyles}>
+                                <div className={speechBubbleStyles(pillar)}>
+                                    <h4>Share your story</h4>
+                                </div>
+                            </div>
+                            <div className={headingTextStyles}>
+                                <p className={successTextStyles}>
+                                    Thank you for your contribution
+                                </p>
+                            </div>
+                        </div>
+                    </summary>
+                </details>
+            </figure>
+        );
+    }
+
     return (
         <figure>
             <details
-                className={cx(snippetStyles, {
+                className={cx(calloutDetailsStyles, {
                     [backgroundColorStyle]: isExpanded,
                 })}
                 aria-hidden={true}
@@ -227,7 +320,6 @@ export const Callout = ({
                                 />
                             )}
                         </div>
-                        {/* TODO: submissionSuccess */}
                     </div>
                     {!isExpanded && (
                         <span
@@ -247,8 +339,11 @@ export const Callout = ({
                     )}
                 </summary>
 
-                {/* TODO: onSubmit  */}
-                <Form formFields={formFields} onSubmit={() => {}} />
+                <Form
+                    formFields={formFields}
+                    onSubmit={onSubmit}
+                    error={error}
+                />
 
                 <span className={buttonWrapperStyles} aria-hidden="true">
                     {isExpanded && (
