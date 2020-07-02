@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
+import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
@@ -71,6 +72,15 @@ export const ArticleRenderer: React.FC<{
                     return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
                     return null; // will be filled shortly with the ChartAtom from atoms-rendering
+                case 'model.dotcomrendering.pageElements.DocumentBlockElement':
+                    return (
+                        <DocumentBlockComponent
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            title={element.title}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     return (
                         <EmbedBlockComponent
@@ -229,7 +239,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-                case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':

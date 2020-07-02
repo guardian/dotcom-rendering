@@ -602,7 +602,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "textarea"
+                        "text"
                     ]
                 },
                 "id": {
@@ -642,7 +642,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "text"
+                        "textarea"
                     ]
                 },
                 "id": {
@@ -1052,13 +1052,24 @@
                         "model.dotcomrendering.pageElements.DocumentBlockElement"
                     ]
                 },
-                "isMandatory": {
-                    "type": "boolean"
+                "embedUrl": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "isMandatory"
+                "embedUrl",
+                "height",
+                "width"
             ]
         },
         "EmbedBlockElement": {
@@ -1436,10 +1447,10 @@
                         "model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
                     ]
                 },
-                "url": {
+                "id": {
                     "type": "string"
                 },
-                "id": {
+                "js": {
                     "type": "string"
                 },
                 "html": {
@@ -1448,12 +1459,14 @@
                 "css": {
                     "type": "string"
                 },
-                "js": {
+                "url": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "id",
+                "js",
                 "url"
             ]
         },

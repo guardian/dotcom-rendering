@@ -2,8 +2,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
-describe('Elements', function() {
-    describe('AMP', function() {
+describe('Elements', function () {
+    describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
         // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
         const getAmpIframeBody = () => {
@@ -21,7 +21,7 @@ describe('Elements', function() {
             );
         };
 
-        it('should render the corona embed', function() {
+        it('should render the corona embed', function () {
             cy.visit(
                 'AMPArticle?url=https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
             );
@@ -30,8 +30,8 @@ describe('Elements', function() {
         });
     });
 
-    describe('WEB', function() {
-        it('should render the instagram embed', function() {
+    describe('WEB', function () {
+        it('should render the instagram embed', function () {
             // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
             const getIframeBody = () => {
                 return cy
@@ -47,7 +47,7 @@ describe('Elements', function() {
             getIframeBody().contains('View More on Instagram');
         });
 
-        it('should render the embed', function() {
+        it('should render the embed', function () {
             const getIframeBody = () => {
                 return cy
                     .get('div[data-cy="embed-block"] > div > iframe')
@@ -61,7 +61,7 @@ describe('Elements', function() {
 
             getIframeBody().contains('radiolab');
         });
-        it('should render the soundcloud embed', function() {
+        it('should render the soundcloud embed', function () {
             const getIframeBody = () => {
                 return cy
                     .get('div[data-cy="soundcloud-embed"] > iframe')
@@ -76,7 +76,7 @@ describe('Elements', function() {
             getIframeBody().contains('Cookie policy');
         });
 
-        it('should render the football embed', function() {
+        it('should render the football embed', function () {
             const getBody = () => {
                 return cy
                     .get('div[data-cy="football-table-embed"]')
@@ -88,6 +88,20 @@ describe('Elements', function() {
             );
 
             getBody().contains('Liverpool');
+        });
+
+        it('should render the document embed', function () {
+            const getBody = () => {
+                return cy
+                    .get('div[data-cy="document-embed"]')
+                    .should('not.be.empty')
+                    .then(cy.wrap);
+            };
+            cy.visit(
+                'Article?url=https://www.theguardian.com/technology/2018/dec/26/amazon-anne-rung-government-services-authority',
+            );
+
+            getBody().contains('Scribd');
         });
     });
 });
