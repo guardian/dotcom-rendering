@@ -24,6 +24,7 @@ const footerPaddingStyles = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 15px;
 `;
 
 const errorMessagesStyles = css`
@@ -118,7 +119,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
             action="/formstack-campaign/submit"
             method="post"
             className={formStyles}
-            onSubmit={e => {
+            onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit(formData);
             }}
@@ -146,7 +147,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
                     tabIndex={-1}
                     placeholder="@mytwitterhandle"
                     value={twitterHandle}
-                    onChange={e => setTwitterHandle(e.target.value)}
+                    onChange={(e) => setTwitterHandle(e.target.value)}
                 />
             </div>
             {error && <div className={errorMessagesStyles}>{error}</div>}
