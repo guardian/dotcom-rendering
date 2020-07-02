@@ -26,6 +26,7 @@ describe('ReaderRevenueLinks', () => {
                 edition={edition}
                 dataLinkNamePrefix="nav2 : "
                 inHeader={true}
+                enableAusMoment2020Header={false}
             />,
         );
 
@@ -42,6 +43,7 @@ describe('ReaderRevenueLinks', () => {
                 edition={edition}
                 dataLinkNamePrefix="nav2 : "
                 inHeader={true}
+                enableAusMoment2020Header={false}
             />,
         );
 
