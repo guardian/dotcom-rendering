@@ -10,7 +10,9 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { getCookie } from '@root/src/web/browser/cookie';
+import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {fetchTickerData, TickerCountType, TickerData} from "@root/src/lib/fetchTickerData";
+import {addForMinutes, getCookie} from "@root/src/web/browser/cookie";
 
 type Props = {
     edition: Edition;
@@ -21,6 +23,7 @@ type Props = {
     };
     dataLinkNamePrefix: string;
     inHeader: boolean;
+    enableAusMoment2020Header: boolean;
 };
 
 const paddingStyles = css`
@@ -112,77 +115,87 @@ const subMessageStyles = css`
     margin-bottom: 5px;
 `;
 
-const decideIfRecentContributor: () => boolean = () => {
-    const cookieValue = getCookie('gu.contributions.contrib-timestamp');
+const headerYellowHighlight = css`
+    color: ${brandAlt[400]};
+    font-weight: 700;
+`;
 
-    if (!cookieValue) {
-        return false;
-    }
-
-    const now = new Date().getTime();
-    const lastContribution = new Date(cookieValue).getTime();
-    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
-
-    return diffDays <= 180;
-};
+const AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME = 'gu_aus_moment_supporter_count';
 
 export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
     urls,
     dataLinkNamePrefix,
     inHeader,
+    enableAusMoment2020Header,
 }) => {
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>(
-        false,
+    const [numberOfSupporters, setnumberOfSupporters] = useState<string>(
+        '',
     );
-    const [hideSupportMessage, setShouldHideSupportMessage] = useState<boolean>(
-        false,
-    );
-
-    const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
-
-    const [isRecentContributor, setIsRecentContributor] = useState<boolean>(
-        false,
-    );
+    const showAusMomentHeader = edition === 'AU' && enableAusMoment2020Header;
 
     useEffect(() => {
-        // Is paying member?
-        setIsPayingMember(getCookie('gu_paying_member') === 'true');
+        if (showAusMomentHeader) {
+            const cookieValue = getCookie(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME);
 
-        // Should the support messages be shown
-        setShouldHideSupportMessage(
-            getCookie('gu_hide_support_messaging') === 'true',
-        );
+            if (cookieValue) {
+                setnumberOfSupporters(cookieValue.toLocaleString())
+            } else {
+                fetchTickerData(TickerCountType.people)
+                    .then((td: TickerData) => {
+                        addForMinutes(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME, `${td.total}`, 60);
+                        setnumberOfSupporters(td.total.toLocaleString())
+                    });
+            }
+        }
+    }, [showAusMomentHeader]);
 
-        // Is recent contributor?
-        setIsRecentContributor(decideIfRecentContributor());
+    if (shouldHideSupportMessaging()) {
+        if (showAusMomentHeader) {
+            return (
+                <div className={cx(inHeader && paddingStyles)}>
+                    <div
+                        className={cx({
+                            [hiddenUntilTablet]: inHeader,
+                        })}
+                    >
+                        <div className={messageStyles}>Welcome back</div>
 
-        // Is digital subscriber?
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
-    }, []);
-
-    /*
-        Changed to OR statement as it's likely that at least one will will be false.
-        Default response is to show the banners
-    */
-    if (
-        isDigitalSubscriber ||
-        isPayingMember ||
-        isRecentContributor ||
-        hideSupportMessage
-    ) {
-        return null;
+                        <div className={subMessageStyles}>
+                            We&apos;re funded by
+                            <span className={headerYellowHighlight}>
+                                {` ${numberOfSupporters} `}
+                            </span>
+                            readers across Australia.<br />
+                            Thank you for supporting us
+                        </div>
+                    </div>
+                </div>
+            )
+        } 
+            return null
+        
     }
     return (
         <div className={cx(inHeader && paddingStyles)}>
             <div
                 className={cx({
-                    [hiddenUntilTablet]: inHeader,
-                })}
+                [hiddenUntilTablet]: inHeader,
+            })}
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    Available for everyone, funded by readers
+                    { showAusMomentHeader ?
+                        (
+                            <div>
+                                We&apos;re funded by
+                                <span className={headerYellowHighlight}>
+                                    {` ${numberOfSupporters} `}
+                                </span>
+                                readers across Australia.
+                            </div>
+)
+                        : (<div> Available for everyone, funded by readers</div>)}
                 </div>
                 <a
                     className={linkStyles}
@@ -212,7 +225,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                     >
-                        Contribute <ArrowRightIcon />
+                      Contribute <ArrowRightIcon />
                     </a>
                 ) : (
                     <a
@@ -225,5 +238,6 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 )}
             </div>
         </div>
-    );
+    )
+
 };

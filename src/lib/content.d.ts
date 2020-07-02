@@ -158,6 +158,10 @@ interface InstagramBlockElement {
 
 interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+    id: string;
+    js: string;
+    html?: string;
+    css?: string;
 }
 
 interface MapBlockElement {
@@ -261,6 +265,7 @@ interface VideoFacebookBlockElement {
     height: number;
     width: number;
     caption: string;
+    embedUrl?: string;
 }
 
 interface VideoVimeoBlockElement {
@@ -412,7 +417,7 @@ type CampaignFieldType =
     | CampaignFieldSelect;
 
 interface CampaignField {
-    id: number;
+    id: string;
     name: string;
     description?: string;
     required: boolean;
@@ -422,11 +427,11 @@ interface CampaignField {
 }
 
 interface CampaignFieldText extends CampaignField {
-    type: 'textarea';
+    type: 'text';
 }
 
 interface CampaignFieldTextArea extends CampaignField {
-    type: 'text';
+    type: 'textarea';
 }
 
 interface CampaignFieldFile extends CampaignField {
