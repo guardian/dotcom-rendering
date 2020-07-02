@@ -3,7 +3,6 @@
 import { logger } from 'logger';
 import { metrics } from 'client/metrics';
 import { metricsClient } from 'native/nativeApi';
-import { pipe2 } from 'lib';
 
 
 // ----- Procedures ----- //
@@ -49,11 +48,8 @@ function performanceMetrics(): void {
     window.addEventListener(
         'load',
         () => {
-            pipe2(
-                performance.getEntries(),
-                metrics,
-                metricsClient.sendMetrics.bind(null),
-            );
+            const metricsToSend = metrics(performance.getEntries());
+            metricsClient.sendMetrics(metricsToSend);
         },
         { once: true },
     );

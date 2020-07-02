@@ -5,7 +5,7 @@ import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Gallery from '@guardian/bridget/Gallery';
-import Metrics from '@guardian/bridget/Metrics';
+import * as Metrics from '@guardian/bridget/Metrics';
 
 const environmentClient: Environment.Client<void> = createAppClient<Environment.Client>(Environment.Client, 'buffered', 'compact');
 const commercialClient: Commercial.Client<void> = createAppClient<Commercial.Client>(Commercial.Client, 'buffered', 'compact');
