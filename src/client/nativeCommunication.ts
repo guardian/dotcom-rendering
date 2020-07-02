@@ -90,13 +90,16 @@ function ads(): void {
     })
 }
 
-function updateUrl(src: string): string {
+function getImageWidth(src: string): number {
     const url = new URL(src);
     const width = parseInt(url.searchParams.get('width') ?? '0');
     const dpr = window.devicePixelRatio >= 1.25 ? 2 : 1;
-    const newWidth = Math.max(screen.height * dpr, screen.width * dpr, width);
+    return Math.max(screen.height * dpr, screen.width * dpr, width);
+}
 
-    url.searchParams.set('width', newWidth.toString());
+function updateUrl(src: string): string {
+    const url = new URL(src);
+    url.searchParams.set('width', getImageWidth(src).toString());
     return url.href;
 }
 
@@ -108,7 +111,9 @@ function launchSlideshow(src: string | null): void {
             const url = updateUrl(image?.currentSrc ?? image.src);
             const caption =  image.getAttribute('data-caption') ?? undefined;
             const credit = image.getAttribute('data-credit') ?? undefined;
-            return new Image({ url, caption, credit });
+            const width = getImageWidth(url);
+            const height = width * parseFloat(image.getAttribute('data-ratio') ?? '0.56');
+            return new Image({ url, caption, credit, width, height });
         } else {
             return [];
         }
