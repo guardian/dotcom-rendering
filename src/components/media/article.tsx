@@ -24,8 +24,6 @@ const Styles = css`
 `;
 
 const BorderStyles = css`
-    background: ${background.inverse};
-
     ${from.wide} {
         width: ${breakpoints.wide}px;
         margin: 0 auto;
