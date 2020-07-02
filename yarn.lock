@@ -2389,6 +2389,14 @@
     "@guardian/src-helpers" "^1.5.0"
     "@guardian/src-icons" "^1.5.0"
 
+"@guardian/src-checkbox@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-checkbox/-/src-checkbox-1.5.0.tgz#d81e1759d3fddc8986b3748f5ef16a38ea0b47be"
+  integrity sha512-RpL/mSW1zfzledMtYcuRNvRWxC4klX1Q/Sm4rDtWCV/MaXwBNh8zFUoVqMLasKxFwPX7xMI4L3j7PJy9OnHNxw==
+  dependencies:
+    "@guardian/src-helpers" "^1.5.0"
+    "@guardian/src-user-feedback" "^1.5.0"
+
 "@guardian/src-ed-lines@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-1.5.0.tgz#33e43dcb12c2e775c041c45398c370ee5bf51aac"
@@ -2408,7 +2416,7 @@
   dependencies:
     "@guardian/src-foundations" "^1.5.0"
 
-"@guardian/src-icons@^1.5.0", "@guardian/src-svgs@npm:@guardian/src-icons@^1.5.0":
+"@guardian/src-icons@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-1.5.0.tgz#3d3c02c9fd4c11c4d74e8bacc98d6a610ee77498"
   integrity sha512-gI3rUadcV7idvYGr+kfsiDh+rZESwca1r+UVgwJ+gIGR/hhWsOe3HSYizDVow7f6nTiwkj1M/+slVJjYej4nRw==
@@ -2419,6 +2427,27 @@
   integrity sha512-ap6nc60dfwexHGM9icI+yHIYGNwuPGhFcjmzJuQpUr38bsd4y1dOhhiFLvnIYb7oNgV+pO+ifOYpTIgnlw7tqg==
   dependencies:
     "@guardian/src-helpers" "^1.5.0"
+
+"@guardian/src-radio@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-radio/-/src-radio-1.5.0.tgz#34693e05098da2be72855894535363ff9469f4b2"
+  integrity sha512-1lcFaFr0O/v4hR4feY/HEeepVutWCsuTjkKhHJUVfPU45tIluQf21I0ApRPh6+2qMrZcBS+cLpWrKSWZdyS7IA==
+  dependencies:
+    "@guardian/src-helpers" "^1.5.0"
+    "@guardian/src-user-feedback" "^1.5.0"
+
+"@guardian/src-svgs@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-1.5.0.tgz#2e7240d40c6d9bc3fd703cb8f41acec9a666d70c"
+  integrity sha512-9N3I43BYDM+YYI3IDt3DOg35x7ncybrI6m7iWcVHvnHAtAQGyTCRvg4AjAf83Imi0vXZBtRBttO0ULBoiWoC/A==
+
+"@guardian/src-text-area@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-text-area/-/src-text-area-1.5.0.tgz#ff9dd1f36542b623de3644752e3c8f79a4620aa2"
+  integrity sha512-BsAJLyMIVXXnFrMVts3f6K9EF4zSArpySQdT8dYbniwVmBqmIy6qkHaxR3KGMICWp545AHw+wbrfhjM72IHo0w==
+  dependencies:
+    "@guardian/src-helpers" "^1.5.0"
+    "@guardian/src-user-feedback" "^1.5.0"
 
 "@guardian/src-text-input@^1.5.0":
   version "1.5.0"
