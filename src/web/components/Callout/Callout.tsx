@@ -78,10 +78,6 @@ const buttonWrapperStyles = css`
     margin-top: -5px;
 `;
 
-let expandFormButtonRef: HTMLButtonElement | null = null;
-let firstFieldElementRef: HTMLElement | null = null;
-let lastElementRef: HTMLButtonElement | null = null;
-
 export const Callout = ({
     callout,
     pillar,
@@ -89,6 +85,10 @@ export const Callout = ({
     callout: CalloutBlockElement;
     pillar: Pillar;
 }) => {
+    let expandFormButtonRef: HTMLButtonElement | null = null;
+    let firstFieldElementRef: HTMLElement | null = null;
+    let lastElementRef: HTMLButtonElement | null = null;
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     const { title, description, formFields } = callout;
@@ -97,16 +97,20 @@ export const Callout = ({
     // *     Accessibility       *
     // ***************************
     useEffect(() => {
-        // select each DOM element on form expand
-        // we have to use this instead of refs as src-* libs do not yet
-        // support forward ref
+        // we have to use document.querySelector to find DOM elements
+        // as Source library does not yet support react ref
+        // TODO: use `useRef` once supported in Source
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         expandFormButtonRef = document.querySelector(
             'button[custom-guardian="callout-form-open-button"]',
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         firstFieldElementRef = document.querySelector(`
             *[custom-guardian="callout-form-field"]:first-of-type input,
             *[custom-guardian="callout-form-field"]:first-of-type select
         `);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         lastElementRef = document.querySelector(
             'button[custom-guardian="callout-form-close-button"]',
         );
@@ -143,6 +147,7 @@ export const Callout = ({
     // on open form, focus on firstFieldElementRef
     useEffect(() => {
         if (isExpanded && firstFieldElementRef) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             firstFieldElementRef && firstFieldElementRef.focus();
         }
     }, [isExpanded, firstFieldElementRef]);
@@ -150,6 +155,7 @@ export const Callout = ({
     // on close form, focus on expandFormButtonRef
     useEffect(() => {
         if (!isExpanded && expandFormButtonRef) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             expandFormButtonRef && expandFormButtonRef.focus();
         }
     }, [isExpanded, expandFormButtonRef]);
