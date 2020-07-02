@@ -113,6 +113,9 @@ function launchSlideshow(src: string | null): void {
             const credit = image.getAttribute('data-credit') ?? undefined;
             const width = getImageWidth(url);
             const height = width * parseFloat(image.getAttribute('data-ratio') ?? '0.56');
+            if (isNaN(width) || isNaN(height)) {
+                return [];
+            }
             return new Image({ url, caption, credit, width, height });
         } else {
             return [];
