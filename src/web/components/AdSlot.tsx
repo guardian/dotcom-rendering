@@ -9,7 +9,8 @@ const adSlotStyles = css`
     position: relative;
 `;
 export const labelStyles = css`
-    .ad-slot__label {
+    .ad-slot__label,
+    .ad-slot__scroll {
         ${textSans.xsmall()};
         position: relative;
         height: 24px;
@@ -23,6 +24,12 @@ export const labelStyles = css`
 
     .ad-slot__close-button {
         display: none;
+    }
+
+    .ad-slot__scroll {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
 `;
 const mobileStickyAdStyles = css`
