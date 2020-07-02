@@ -24,12 +24,18 @@ const footerPaddingStyles = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 15px;
 `;
 
 const errorMessagesStyles = css`
     padding-bottom: 10px;
     color: ${text.error};
     ${textSans.medium({ fontWeight: 'bold' })};
+`;
+
+const formFieldWrapperStyles = css`
+    display: flex;
+    flex-direction: column;
 `;
 
 type formData = { [key in string]: any };
@@ -118,19 +124,28 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
             action="/formstack-campaign/submit"
             method="post"
             className={formStyles}
-            onSubmit={e => {
+            onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit(formData);
             }}
         >
             {formFields.map((formField, index) => (
-                <FormField
+                <div
+                    className={formFieldWrapperStyles}
+                    // we use custom-guardian to find 1st field for accessibility
+                    // ideally we should useRef but need to wait for Source to
+                    // support React references
+                    custom-guardian="callout-form-field"
                     key={index}
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                >
+                    <FormField
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                </div>
             ))}
+
             {/* this element is a H O N £ Y - P 0 T */}
             <div
                 className={css`
@@ -146,7 +161,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
                     tabIndex={-1}
                     placeholder="@mytwitterhandle"
                     value={twitterHandle}
-                    onChange={e => setTwitterHandle(e.target.value)}
+                    onChange={(e) => setTwitterHandle(e.target.value)}
                 />
             </div>
             {error && <div className={errorMessagesStyles}>{error}</div>}
