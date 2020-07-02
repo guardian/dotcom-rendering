@@ -39,7 +39,7 @@ interface FilterOptions {
 
 const objAsParams = (obj: any): string => {
     const params = Object.keys(obj)
-        .map(key => {
+        .map((key) => {
             return `${key}=${obj[key]}`;
         })
         .join('&');
@@ -98,7 +98,7 @@ export const getCommentContext = async (
     const params = buildParams(filters);
 
     return fetch(url + objAsParams(params))
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw Error(
                     response.statusText ||
@@ -107,8 +107,8 @@ export const getCommentContext = async (
             }
             return response;
         })
-        .then(response => response.json())
-        .catch(error => {
+        .then((response) => response.json())
+        .catch((error) => {
             window.guardian.modules.sentry.reportError(
                 error,
                 'get-comment-page',

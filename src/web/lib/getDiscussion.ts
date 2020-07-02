@@ -56,7 +56,7 @@ export const getDiscussion = async (
 ): Promise<DiscussionResponse> => {
     const url = joinUrl([ajaxUrl, 'discussion', shortUrl]);
     return fetch(url)
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw Error(
                     response.statusText ||
@@ -65,9 +65,9 @@ export const getDiscussion = async (
             }
             return response;
         })
-        .then(response => response.json())
-        .then(json => json)
-        .catch(error => {
+        .then((response) => response.json())
+        .then((json) => json)
+        .catch((error) => {
             window.guardian.modules.sentry.reportError(error, 'get-discussion');
         });
 };

@@ -11,7 +11,7 @@ export const isAdBlockInUse: () => Promise<boolean> = () => {
         return Promise.resolve(adBlockInUse);
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         const ad = document.createElement('div');
 
         ad.style.position = 'absolute';

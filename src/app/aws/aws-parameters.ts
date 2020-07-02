@@ -47,7 +47,7 @@ const getAllParams = function getGuardianConfigurationRecursiveStep(
     params = [],
     token: string | undefined = undefined,
 ): Promise<AWSParameter[]> {
-    return getParams(stage, token).then(response => {
+    return getParams(stage, token).then((response) => {
         if (!response.NextToken) {
             return params;
         }
@@ -64,7 +64,7 @@ const getAllParams = function getGuardianConfigurationRecursiveStep(
 const getGuardianConfiguration = (
     stage: string,
 ): Promise<GuardianConfiguration> => {
-    return getAllParams(stage).then(params => {
+    return getAllParams(stage).then((params) => {
         const configuration: ConfigMap = params.reduce((map: ConfigMap, p) => {
             const newMap = map;
             newMap[p.Name] = p.Value;

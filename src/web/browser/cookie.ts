@@ -64,7 +64,7 @@ export const addCookie = (
 };
 
 export const cleanUp = (names: string[]): void => {
-    names.forEach(name => {
+    names.forEach((name) => {
         removeCookie(name);
     });
 };

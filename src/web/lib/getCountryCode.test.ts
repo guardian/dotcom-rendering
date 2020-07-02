@@ -5,7 +5,7 @@ import { getCountryCode } from './getCountryCode';
 // Mock Local Storage
 // See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
 // eslint-disable-next-line func-names
-const localStorageMock = (function() {
+const localStorageMock = (function () {
     let store: {
         [key: string]: string;
     } = {};

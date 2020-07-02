@@ -2,8 +2,8 @@ export const getAgeWarning = (
     tags: TagType[],
     webPublicationDate: string,
 ): string | undefined => {
-    const isNews = tags.some(t => t.id === 'tone/news');
-    const isOpinion = tags.some(t => t.id === 'tone/comment');
+    const isNews = tags.some((t) => t.id === 'tone/news');
+    const isOpinion = tags.some((t) => t.id === 'tone/comment');
 
     // Only show an age warning for news or opinion pieces
     if (isNews || isOpinion) {

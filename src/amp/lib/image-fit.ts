@@ -14,7 +14,7 @@ export const bestFitImage = (
 
     const bestFit = srcSets
         .sort((a, b) => a.width - b.width)
-        .find(img => img.width >= containerWidth);
+        .find((img) => img.width >= containerWidth);
 
     return bestFit || srcSets[srcSets.length - 1];
 };

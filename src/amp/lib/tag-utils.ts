@@ -3,7 +3,7 @@ export const filterForTagsOfType = (
     tagType: string,
 ): TagType[] => {
     return tags.filter(
-        tag =>
+        (tag) =>
             tag.type === tagType ||
             (tag.type === 'PaidContent' && tag.paidContentType === tagType),
     );

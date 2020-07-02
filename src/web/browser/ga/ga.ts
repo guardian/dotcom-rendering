@@ -19,11 +19,11 @@ const getQueryParam = (
     queryString: string,
 ): string | undefined => {
     const params = queryString.substring(1).split('&');
-    const pairs = params.map(x => x.split('='));
+    const pairs = params.map((x) => x.split('='));
 
     return pairs
-        .filter(xs => xs.length === 2 && xs[0] === key)
-        .map(xs => xs[1])[0];
+        .filter((xs) => xs.length === 2 && xs[0] === key)
+        .map((xs) => xs[1])[0];
 };
 
 export const init = (): void => {
@@ -53,7 +53,7 @@ const trackLCP = (send: string) => {
     }
 
     // Create the PerformanceObserver instance.
-    const po = new window.PerformanceObserver(entryList => {
+    const po = new window.PerformanceObserver((entryList) => {
         const entries = entryList.getEntries();
         const lastEntry = entries[entries.length - 1];
 

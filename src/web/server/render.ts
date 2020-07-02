@@ -13,7 +13,9 @@ export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         const withDropCaps: CAPIType = addDropCaps(body);
         const withHighlights: CAPIType = addHighlights(withDropCaps);
-        const withEssayEnhancement: CAPIType = enhancePhotoEssay(withHighlights);
+        const withEssayEnhancement: CAPIType = enhancePhotoEssay(
+            withHighlights,
+        );
         const CAPI: CAPIType = validateAsCAPIType(withEssayEnhancement);
 
         const resp = document({

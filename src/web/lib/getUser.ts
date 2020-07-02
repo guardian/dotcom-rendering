@@ -5,7 +5,7 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
     return fetch(url, {
         credentials: 'include',
     })
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw Error(
                     response.statusText ||
@@ -14,9 +14,9 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
             }
             return response;
         })
-        .then(response => response.json())
-        .then(json => json.userProfile)
-        .catch(error => {
+        .then((response) => response.json())
+        .then((json) => json.userProfile)
+        .catch((error) => {
             window.guardian.modules.sentry.reportError(error, 'get-user');
         });
 };

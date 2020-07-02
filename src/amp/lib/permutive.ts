@@ -22,21 +22,21 @@ export const generatePermutivePayload = (
         rawConfig.author && typeof rawConfig.author === 'string'
             ? rawConfig.author
                   .split(',')
-                  .map(s => s.trim())
+                  .map((s) => s.trim())
                   .join()
             : null;
     const keywords =
         rawConfig.keywords && typeof rawConfig.keywords === 'string'
             ? rawConfig.keywords
                   .split(',')
-                  .map(s => s.trim())
+                  .map((s) => s.trim())
                   .join()
             : null;
     const toneIds =
         rawConfig.toneIds && typeof rawConfig.toneIds === 'string'
             ? rawConfig.toneIds
                   .split(',')
-                  .map(s => s.trim())
+                  .map((s) => s.trim())
                   .join()
             : null;
     const config: { [key: string]: any } = {
@@ -55,7 +55,7 @@ export const generatePermutivePayload = (
 
     const payload: { [key: string]: any } = Object.keys(config)
         .filter(
-            key => typeof config[key] !== 'undefined' && config[key] !== null,
+            (key) => typeof config[key] !== 'undefined' && config[key] !== null,
         )
         .reduce((acc: { [key: string]: any }, key) => {
             acc[key] = config[key];

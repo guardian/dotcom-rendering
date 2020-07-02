@@ -51,34 +51,34 @@ export const htmlTemplate = ({
     // ****** high priority script ****
     // ********************************
     const priorityScriptTags = priorityScripts.map(
-        src => `<script defer src="${src}"></script>`,
+        (src) => `<script defer src="${src}"></script>`,
     );
     // transpiled with preset-env
     const priorityLegacyScriptTags = priorityLegacyScripts.map(
-        src => `<script defer nomodule src="${src}"></script>`,
+        (src) => `<script defer nomodule src="${src}"></script>`,
     );
     // transpiled with preset-modules
     const priorityNonLegacyScriptTags = priorityNonLegacyScripts.map(
-        src => `<script defer type="module" src="${src}"></script>`,
+        (src) => `<script defer type="module" src="${src}"></script>`,
     );
 
     // ********************************
     // **** low priority scripts ******
     // ********************************
     const lowPriorityScriptTags = lowPriorityScripts.map(
-        src => `<script async src="${src}"></script>`,
+        (src) => `<script async src="${src}"></script>`,
     );
     // transpiled with preset-env
     const lowPriorityLegacyScriptTags = lowPriorityLegacyScripts.map(
-        src => `<script async nomodule src="${src}"></script>`,
+        (src) => `<script async nomodule src="${src}"></script>`,
     );
     // transpiled with preset-modules
     const lowPriorityNonLegacyScriptTags = lowPriorityNonLegacyScripts.map(
-        src => `<script async type="module" src="${src}"></script>`,
+        (src) => `<script async type="module" src="${src}"></script>`,
     );
 
     const fontPreloadTags = fontFiles.map(
-        fontFile =>
+        (fontFile) =>
             `<link rel="preload" href="${getStatic(
                 fontFile,
             )}" as="font" crossorigin>`,
@@ -134,11 +134,11 @@ export const htmlTemplate = ({
     ];
 
     const preconnectTags = staticPreconnectUrls.map(
-        src => `<link rel="preconnect" href="${src}">`,
+        (src) => `<link rel="preconnect" href="${src}">`,
     );
 
     const prefetchTags = staticPrefetchUrls.map(
-        src => `<link rel="dns-prefetch" href="${src}">`,
+        (src) => `<link rel="dns-prefetch" href="${src}">`,
     );
 
     return `<!doctype html>

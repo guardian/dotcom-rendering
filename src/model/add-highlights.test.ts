@@ -18,7 +18,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote>This is not a quote</blockquote>',
+                            html:
+                                '<blockquote>This is not a quote</blockquote>',
                         },
                     ],
                 },
@@ -33,7 +34,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.HighlightBlockElement',
-                            html: '<blockquote>This is not a quote</blockquote>',
+                            html:
+                                '<blockquote>This is not a quote</blockquote>',
                         },
                     ],
                 },
@@ -52,7 +54,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote class="quoted">This is a quote</blockquote>',
+                            html:
+                                '<blockquote class="quoted">This is a quote</blockquote>',
                         },
                     ],
                 },
@@ -67,7 +70,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote class="quoted">This is a quote</blockquote>',
+                            html:
+                                '<blockquote class="quoted">This is a quote</blockquote>',
                         },
                     ],
                 },
@@ -86,7 +90,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote class="somethingelse">This is not a quote</blockquote>',
+                            html:
+                                '<blockquote class="somethingelse">This is not a quote</blockquote>',
                         },
                     ],
                 },
@@ -101,7 +106,8 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.HighlightBlockElement',
-                            html: '<blockquote class="somethingelse">This is not a quote</blockquote>',
+                            html:
+                                '<blockquote class="somethingelse">This is not a quote</blockquote>',
                         },
                     ],
                 },
@@ -120,12 +126,14 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote class="quoted">This is a quote</blockquote>',
+                            html:
+                                '<blockquote class="quoted">This is a quote</blockquote>',
                         },
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote>This is not a quote</blockquote>',
+                            html:
+                                '<blockquote>This is not a quote</blockquote>',
                         },
                     ],
                 },
@@ -140,12 +148,14 @@ describe('Drop Caps', () => {
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-                            html: '<blockquote class="quoted">This is a quote</blockquote>',
+                            html:
+                                '<blockquote class="quoted">This is a quote</blockquote>',
                         },
                         {
                             _type:
                                 'model.dotcomrendering.pageElements.HighlightBlockElement',
-                            html: '<blockquote>This is not a quote</blockquote>',
+                            html:
+                                '<blockquote>This is not a quote</blockquote>',
                         },
                     ],
                 },

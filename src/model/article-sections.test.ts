@@ -90,7 +90,7 @@ describe('returns section for each subsection', () => {
     ];
 
     it('returns correct Section for each test case', () => {
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             for (const subsection of testCase[0]) {
                 expect(findBySubsection(subsection).name).toEqual(testCase[1]);
             }

@@ -18,11 +18,11 @@ describe('validate', () => {
         expect(() => validateAsCAPIType(data)).toThrowError(TypeError);
     });
 
-    urlsToTest.forEach(url => {
+    urlsToTest.forEach((url) => {
         it('confirm valid data', () => {
             return fetch(url)
-                .then(response => response.json())
-                .then(myJson => {
+                .then((response) => response.json())
+                .then((myJson) => {
                     expect(validateAsCAPIType(myJson)).toBe(myJson);
                 });
         });

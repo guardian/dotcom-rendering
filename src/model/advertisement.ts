@@ -90,7 +90,7 @@ const adSizeNameToValues = (name: string): [number, number] => {
 
 const adSizeNamesToString = (names: string[]): string => {
     return names
-        .map(name => {
+        .map((name) => {
             const values = adSizeNameToValues(name);
             return adSizesToString(values[0], values[1]);
         })
