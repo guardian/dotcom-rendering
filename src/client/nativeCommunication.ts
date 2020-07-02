@@ -117,15 +117,17 @@ function getVideoSlots(): VideoSlot[] {
         return [];
     }
 
-    return Array.from(videoSlots).map(videoSlot => {
-        const slotPosition = videoSlot.getBoundingClientRect();
-        return new VideoSlot({
-            rect: getRect(slotPosition),
-            videoId: videoSlot.getAttribute('data-videoId') ?? '',
-            posterUrl: videoSlot.getAttribute('data-posterUrl') ?? '',
-            duration: parseInt(videoSlot.getAttribute('data-duration') ?? '0')
-        })
-    });
+    return Array.from(videoSlots).reduce((slots: VideoSlot[], elem) => {
+        const slotPosition = elem.getBoundingClientRect();
+        const videoId =  elem.getAttribute('data-videoId') ?? '';
+        const posterUrl = elem.getAttribute('data-posterUrl') ?? '';
+        const duration = parseInt(elem.getAttribute('data-duration') ?? '0');
+        const rect = getRect(slotPosition);
+        if (videoId) {
+            slots.push(new VideoSlot({ rect, videoId, posterUrl, duration }))
+        }
+        return slots;
+    }, []);
 }
 
 function videos(): void {
