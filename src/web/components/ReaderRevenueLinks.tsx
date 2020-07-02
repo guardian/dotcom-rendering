@@ -23,7 +23,7 @@ type Props = {
     };
     dataLinkNamePrefix: string;
     inHeader: boolean;
-    enableAusMoment2020Header: boolean,
+    enableAusMoment2020Header: boolean;
 };
 
 const paddingStyles = css`
