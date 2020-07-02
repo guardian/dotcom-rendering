@@ -78,13 +78,6 @@ const buttonWrapperStyles = css`
     margin-top: -5px;
 `;
 
-// a hack used to make sure we do not highlight the openCallout button on first render
-let isFirstTimeRendering = true;
-
-let expandFormButtonRef: HTMLButtonElement | null = null;
-let firstFieldElementRef: HTMLElement | null = null;
-let lastElementRef: HTMLButtonElement | null = null;
-
 export const Callout = ({
     callout,
     pillar,
@@ -92,6 +85,10 @@ export const Callout = ({
     callout: CalloutBlockElement;
     pillar: Pillar;
 }) => {
+    let expandFormButtonRef: HTMLButtonElement | null = null;
+    let firstFieldElementRef: HTMLElement | null = null;
+    let lastElementRef: HTMLButtonElement | null = null;
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     const { title, description, formFields } = callout;
@@ -114,19 +111,9 @@ export const Callout = ({
             'button[custom-guardian="callout-form-close-button"]',
         );
 
-        // on open form, focus on firstFieldElementRef
-        if (isExpanded && !isFirstTimeRendering) {
-            isFirstTimeRendering = false;
-            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            firstFieldElementRef && firstFieldElementRef.focus();
-        } else {
-            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            expandFormButtonRef && expandFormButtonRef.focus();
-        }
-
         // lock shift to the form
         const keyListener = (e: KeyboardEvent) => {
-            // keyCode 9 is shift shift key
+            // keyCode 9 is tab key
             if (e.keyCode === 9) {
                 // If firstElement or lastElement are not defined, do not continue
                 if (!firstFieldElementRef || !lastElementRef) return;
@@ -152,6 +139,20 @@ export const Callout = ({
         document.addEventListener('keydown', keyListener);
         return () => document.removeEventListener('keydown', keyListener);
     }, [isExpanded]);
+
+    // on open form, focus on firstFieldElementRef
+    useEffect(() => {
+        if (isExpanded && firstFieldElementRef) {
+            firstFieldElementRef && firstFieldElementRef.focus();
+        }
+    }, [isExpanded, firstFieldElementRef]);
+
+    // on close form, focus on expandFormButtonRef
+    useEffect(() => {
+        if (!isExpanded && expandFormButtonRef) {
+            expandFormButtonRef && expandFormButtonRef.focus();
+        }
+    }, [isExpanded, expandFormButtonRef]);
 
     // be able to close the form using the escape key for accessibility
     useEffect(() => {

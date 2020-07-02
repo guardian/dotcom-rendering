@@ -33,6 +33,11 @@ const errorMessagesStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
+const formFieldWrapperStyles = css`
+    display: flex;
+    flex-direction: column;
+`;
+
 type formData = { [key in string]: any };
 
 type FormFieldProp = {
@@ -125,13 +130,22 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
             }}
         >
             {formFields.map((formField, index) => (
-                <FormField
+                <div
+                    className={formFieldWrapperStyles}
+                    // we use custom-guardian to find 1st field for accessibility
+                    // ideally we should useRef but need to wait for Source to
+                    // support React references
+                    custom-guardian="callout-form-field"
                     key={index}
-                    formField={formField}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                >
+                    <FormField
+                        formField={formField}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                </div>
             ))}
+
             {/* this element is a H O N £ Y - P 0 T */}
             <div
                 className={css`
