@@ -38,6 +38,7 @@ export const Header = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
+                enableAusMoment2020Header={false}
             />
         </Container>
     );
@@ -58,6 +59,7 @@ export const HeaderMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
+                enableAusMoment2020Header={false}
             />
         </Container>
     );
@@ -78,6 +80,7 @@ export const Footer = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
+                enableAusMoment2020Header={false}
             />
         </Container>
     );
@@ -98,6 +101,7 @@ export const FooterMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
+                enableAusMoment2020Header={false}
             />
         </Container>
     );
