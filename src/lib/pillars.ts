@@ -48,9 +48,9 @@ export const pillarPalette: Record<Pillar, PillarColours> = {
 This takes a function, f, and applies it to all pillars.
 It returns an object with each pillar as the keys and f('pillar') as the value
 */
-export const pillarMap: <T>(
-    f: (name: Pillar) => T,
-) => { [K in Pillar]: T } = f => ({
+export const pillarMap: <T>(f: (name: Pillar) => T) => { [K in Pillar]: T } = (
+    f,
+) => ({
     news: f('news'),
     opinion: f('opinion'),
     sport: f('sport'),

@@ -16,12 +16,13 @@ const checkForHighlights = (elements: CAPIElement[]): CAPIElement[] => {
     // is left as a BlockquoteBlockElement but if not then it is transformed
     // into a HighlightBlockElement
     const enhanced: CAPIElement[] = [];
-    elements.forEach(element => {
+    elements.forEach((element) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                 if (isHighlight(element)) {
                     enhanced.push({
-                        _type: 'model.dotcomrendering.pageElements.HighlightBlockElement',
+                        _type:
+                            'model.dotcomrendering.pageElements.HighlightBlockElement',
                         html: element.html,
                     });
                 } else {

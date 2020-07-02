@@ -89,7 +89,7 @@ if (process.env.NODE_ENV === 'production') {
         // Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
         try {
             const url = buildUrlFromQueryParam(req);
-            const { html, ...config } = await fetch(url).then(article =>
+            const { html, ...config } = await fetch(url).then((article) =>
                 article.json(),
             );
 
@@ -105,7 +105,7 @@ if (process.env.NODE_ENV === 'production') {
         // Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
         try {
             const url = buildUrlFromQueryParam(req);
-            const { html, ...config } = await fetch(url).then(article =>
+            const { html, ...config } = await fetch(url).then((article) =>
                 article.json(),
             );
 
@@ -148,7 +148,7 @@ if (process.env.NODE_ENV === 'production') {
         // Eg. http://localhost:9000/commentisfree/...
         try {
             const url = buildUrlFromPath(req);
-            const { html, ...config } = await fetch(url).then(article =>
+            const { html, ...config } = await fetch(url).then((article) =>
                 article.json(),
             );
 

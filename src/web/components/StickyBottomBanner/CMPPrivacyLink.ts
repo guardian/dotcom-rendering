@@ -4,7 +4,7 @@ import { showPrivacyManager } from '@guardian/consent-management-platform';
 const show = (forceModal?: boolean) => {
     ccpaApplies().then((useCCPA) => {
         if (useCCPA && forceModal) {
-			showPrivacyManager();
+            showPrivacyManager();
         }
     });
 };

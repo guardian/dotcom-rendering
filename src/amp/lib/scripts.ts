@@ -6,8 +6,8 @@ export const extractScripts: (
     elements: CAPIElement[],
     mainMediaElements: CAPIElement[],
 ) => string[] = (elements, mainMediaElements) => {
-    return [...new Set([...elements, ...mainMediaElements].map(e => e._type))]
-        .map(t => {
+    return [...new Set([...elements, ...mainMediaElements].map((e) => e._type))]
+        .map((t) => {
             switch (t) {
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return `<script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>`;

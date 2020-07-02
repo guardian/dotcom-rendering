@@ -5,7 +5,7 @@ const filterTags = (
     tags: CAPIType['tags'],
     tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Lets make a decision to keep this tag getter small and well defined, we don't really want to use tags
 ): TagType['id'] | '' => {
-    const tagArr = tags.filter(tag => tag.type === tagType);
+    const tagArr = tags.filter((tag) => tag.type === tagType);
     const arrOfvalues =
         tagArr.length > 0 &&
         tagArr.reduce(
@@ -20,17 +20,14 @@ const filterTags = (
 const getCommissioningDesk = (
     tags: CAPIType['tags'],
 ): TagType['title'] | '' => {
-    const tag = tags.find(thisTag =>
+    const tag = tags.find((thisTag) =>
         thisTag.id.includes('tracking/commissioningdesk'),
     );
     return (tag && tag.title) || '';
 };
 
 const formatStringForGa = (string: string): string =>
-    string
-        .toLowerCase()
-        .split(' ')
-        .join('');
+    string.toLowerCase().split(' ').join('');
 
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: CAPIType): GADataType => ({

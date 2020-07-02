@@ -18,5 +18,5 @@ export const findPillar: (
     if (pillar === 'arts') {
         return 'culture';
     }
-    return pillarNames.find(_ => _ === pillar);
+    return pillarNames.find((_) => _ === pillar);
 };

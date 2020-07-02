@@ -20,7 +20,7 @@ const logFields = (logEvent: any): any => {
 };
 
 addLayout('json', () => {
-    return logEvent => {
+    return (logEvent) => {
         return JSON.stringify(logFields(logEvent));
     };
 });
@@ -47,7 +47,7 @@ configure({
 // We do this to ensure no memory leaks during development as hot reloading
 // doesn't clear up old listeners.
 if (process.env.NODE_ENV === 'development') {
-    shutdown(e => {
+    shutdown((e) => {
         if (e) {
             // eslint-disable-next-line no-console
             console.log(e);

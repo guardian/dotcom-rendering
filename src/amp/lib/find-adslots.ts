@@ -45,7 +45,7 @@ export const getElementLength = (element: CAPIElement): number => {
 const getElementsWithLength = (
     elements: CAPIElement[],
 ): ElementWithLength[] => {
-    return elements.map(e => {
+    return elements.map((e) => {
         return {
             element: e,
             length: getElementLength(e),
@@ -57,12 +57,12 @@ const getLengthOfFollowingTextElements = (
     elements: ElementWithLength[],
 ): number => {
     const firstNonTextIndex = elements.findIndex(
-        e => !isTextElement(e.element),
+        (e) => !isTextElement(e.element),
     );
 
     return elements
         .slice(0, firstNonTextIndex)
-        .map(e => e.length)
+        .map((e) => e.length)
         .reduce((a, b) => a + b, 0);
 };
 
@@ -79,7 +79,7 @@ const hasForwardBuffer = (
         getLengthOfFollowingTextElements(forwardElements) >=
         NONTEXT_BUFFER_FORWARD;
     const noForwardsEmbeds =
-        forwardElements.filter(e => isTextElement(e.element)).length ===
+        forwardElements.filter((e) => isTextElement(e.element)).length ===
         forwardElements.length;
 
     const enoughCharsForward = meetsThreshold || noForwardsEmbeds;
@@ -99,7 +99,7 @@ const hasBackwardBuffer = (
         getLengthOfFollowingTextElements(backwardsElements) >=
         NONTEXT_BUFFER_BACKWARD;
     const noBackwardsEmbeds =
-        backwardsElements.filter(e => isTextElement(e.element)).length ===
+        backwardsElements.filter((e) => isTextElement(e.element)).length ===
         backwardsElements.length;
 
     const enoughCharsBackward = meetsThreshold || noBackwardsEmbeds;
@@ -175,7 +175,7 @@ export const findBlockAdSlots = (blocks: any[]): number[] => {
     // maxAds.
     return blocks
         .map((_, i) => i)
-        .filter(i => i !== 0 && i % 5 === 0)
-        .map(i => i - 1)
+        .filter((i) => i !== 0 && i % 5 === 0)
+        .map((i) => i - 1)
         .slice(0, maxAds);
 };

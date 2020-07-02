@@ -32,10 +32,10 @@ const removeDuplicateWidth = (items: SrcSetItem[]): SrcSetItem[] => {
 export const scrsetStringFromImagesSources = (
     imageSources: ImageSource[],
 ): string => {
-    const srcSetItems1 = containerWidths.map(width =>
+    const srcSetItems1 = containerWidths.map((width) =>
         bestFitImage(imageSources, width),
     );
     // We now need to make sure that we do not have multiple images with the same width
     const srcSetItems2 = removeDuplicateWidth(srcSetItems1);
-    return srcSetItems2.map(item => `${item.src} ${item.width}w`).join(', ');
+    return srcSetItems2.map((item) => `${item.src} ${item.width}w`).join(', ');
 };

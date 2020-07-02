@@ -3,7 +3,7 @@ const constructQuery = (query: { [key: string]: any }): string =>
         .map((param: any) => {
             const value = query[param];
             const queryValue = Array.isArray(value)
-                ? value.map(v => encodeURIComponent(v)).join(',')
+                ? value.map((v) => encodeURIComponent(v)).join(',')
                 : encodeURIComponent(value);
             return `${param}=${queryValue}`;
         })

@@ -16,14 +16,15 @@ const tickerUrl = (countType: TickerCountType): string =>
 const checkForErrors = (response: Response): Promise<Response> => {
     if (!response.ok) {
         return Promise.reject(
-            response.statusText || `Ticker api call returned HTTP status ${response.status}`,
+            response.statusText ||
+                `Ticker api call returned HTTP status ${response.status}`,
         );
     }
     return Promise.resolve(response);
 };
 
 const parse = (json: any): Promise<TickerData> => {
-    const total = parseInt(json.total,10);
+    const total = parseInt(json.total, 10);
     const goal = parseInt(json.goal, 10);
 
     if (!Number.isNaN(total) && !Number.isNaN(goal)) {
@@ -32,14 +33,13 @@ const parse = (json: any): Promise<TickerData> => {
             goal,
         });
     }
-        return Promise.reject(Error(`Failed to parse ticker data: ${json}`));
-
+    return Promise.reject(Error(`Failed to parse ticker data: ${json}`));
 };
 
 export const fetchTickerData = (
     tickerType: TickerCountType,
 ): Promise<TickerData> =>
     fetch(tickerUrl(tickerType))
-        .then(response => checkForErrors(response))
-        .then(response => response.json())
+        .then((response) => checkForErrors(response))
+        .then((response) => response.json())
         .then(parse);

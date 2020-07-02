@@ -9,7 +9,9 @@ interface ABTestPayload {
 
 export type OphanAction = 'INSERT' | 'VIEW';
 
-export type OphanComponentType = 'ACQUISITIONS_EPIC' | 'ACQUISITIONS_ENGAGEMENT_BANNER';
+export type OphanComponentType =
+    | 'ACQUISITIONS_EPIC'
+    | 'ACQUISITIONS_ENGAGEMENT_BANNER';
 
 export type TestMeta = {
     abTestName: string;
@@ -21,7 +23,7 @@ export type TestMeta = {
 export const sendOphanContributionsComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
-    componentType: OphanComponentType
+    componentType: OphanComponentType,
 ): void => {
     const componentEvent = {
         component: {
@@ -44,7 +46,7 @@ export const abTestPayload = (tests: {
     [key: string]: string;
 }): ABTestPayload => {
     const records: { [key: string]: ABTestRecord } = {};
-    Object.keys(tests).forEach(testName => {
+    Object.keys(tests).forEach((testName) => {
         records[`ab${testName}`] = {
             variantName: tests[testName],
             complete: false,

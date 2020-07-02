@@ -65,7 +65,7 @@ describe('getLastOneOffContributionDate', () => {
 
 /* eslint-disable @typescript-eslint/unbound-method */
 describe('isRecentOneOffContributor', () => {
-   beforeEach(clearAllCookies);
+    beforeEach(clearAllCookies);
 
     it('returns false if there is no one-off contribution cookie', () => {
         expect(isRecentOneOffContributor()).toBe(false);

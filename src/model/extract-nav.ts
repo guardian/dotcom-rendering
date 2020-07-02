@@ -50,7 +50,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
         url: getString(data, 'url'),
         pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
         children: getArray<object>(data, 'children', []).map(
-            l => getLink(l, { isPillar: false }), // children are never pillars
+            (l) => getLink(l, { isPillar: false }), // children are never pillars
         ),
         mobileOnly: false,
     };
@@ -77,7 +77,7 @@ const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
 export const extract = (data: {}): NavType => {
     let pillars = getArray<any>(data, 'pillars');
 
-    pillars = pillars.map(link => getLink(link, { isPillar: true }));
+    pillars = pillars.map((link) => getLink(link, { isPillar: true }));
 
     const subnav = get(data, 'subNavSections');
 
@@ -88,20 +88,22 @@ export const extract = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray<object>(data, 'otherLinks', []).map(l =>
+            children: getArray<object>(data, 'otherLinks', []).map((l) =>
                 getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray<object>(data, 'brandExtensions', []).map(l =>
-            getLink(l, { isPillar: false }),
-        ),
+        brandExtensions: getArray<object>(
+            data,
+            'brandExtensions',
+            [],
+        ).map((l) => getLink(l, { isPillar: false })),
         currentNavLink: getString(data, 'currentNavLink.title', ''),
         subNavSections: subnav
             ? {
                   parent: subnav.parent
                       ? getLink(subnav.parent, { isPillar: false })
                       : undefined,
-                  links: getArray<object>(subnav, 'links').map(l =>
+                  links: getArray<object>(subnav, 'links').map((l) =>
                       getLink(l, { isPillar: false }),
                   ),
               }

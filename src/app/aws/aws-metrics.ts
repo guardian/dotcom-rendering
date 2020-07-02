@@ -23,7 +23,7 @@ const sendMetric = (m: any[]) => {
         Namespace: 'Application',
     };
 
-    cloudWatchClient.putMetricData(params, err => {
+    cloudWatchClient.putMetricData(params, (err) => {
         if (err) {
             // eslint-disable-next-line no-console
             console.error(err, err.stack);
@@ -35,7 +35,7 @@ const sendMetric = (m: any[]) => {
 
 const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
     setInterval(() => {
-        metrics.forEach(m => m.send());
+        metrics.forEach((m) => m.send());
     }, METRICS_TIME_RESOLUTION);
 };
 
@@ -51,7 +51,7 @@ const TimingMetric = (app: string, stage: string, metricName: string) => {
 
         send: () => {
             sendMetric(
-                values.map(v => ({
+                values.map((v) => ({
                     Dimensions: [
                         {
                             Name: 'ApplicationName',
@@ -85,7 +85,7 @@ const BytesMetric = (app: string, stage: string, metricName: string) => {
 
         send: () => {
             sendMetric(
-                values.map(v => ({
+                values.map((v) => ({
                     Dimensions: [
                         {
                             Name: 'ApplicationName',

@@ -19,7 +19,7 @@ describe('getIdFromUrl', () => {
             },
         ];
 
-        formats.forEach(_ => {
+        formats.forEach((_) => {
             expect(getIdFromUrl(_.url, youtubeRegEx, false, 'v')).toBe(_.id);
         });
     });
@@ -42,7 +42,7 @@ describe('getIdFromUrl', () => {
             },
         ];
 
-        formats.forEach(_ => {
+        formats.forEach((_) => {
             expect(getIdFromUrl(_.url, vimeoRegEx, true)).toBe(_.id);
         });
     });

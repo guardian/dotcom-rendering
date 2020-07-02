@@ -22,7 +22,8 @@ describe('generatePermutivePayload', () => {
             'properties.content.authors!list[string]': 'author name',
             'properties.content.keywords!list[string]': 'keyword1,keyword2',
             'properties.content.publishedAt': '2020-01-13T14:41:00.000Z',
-            'properties.content.tone!list[string]': 'tone/advertisement-features,tone/minutebyminute',
+            'properties.content.tone!list[string]':
+                'tone/advertisement-features,tone/minutebyminute',
             'properties.user.edition': 'UK',
         };
         expect(generatePermutivePayload(config as ConfigType)).toStrictEqual(
