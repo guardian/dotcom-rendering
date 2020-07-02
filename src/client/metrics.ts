@@ -1,24 +1,6 @@
-// ----- Types ----- //
+// ----- Imports ----- //
 
-const enum MetricKind {
-    FirstPaint,
-    FirstContentfulPaint,
-    Font,
-}
-
-type Metric = {
-    kind: MetricKind.FirstPaint;
-    time: number;
-} | {
-    kind: MetricKind.FirstContentfulPaint;
-    time: number;
-} | {
-    kind: MetricKind.Font;
-    duration: number;
-    // Safari doesn't support resource sizes
-    size: number | null;
-    name: string | null;
-}
+import { Metric, MetricType } from '@guardian/bridget/Metric';
 
 
 // ----- Functions ----- //
@@ -27,17 +9,25 @@ const isFont = (entry: PerformanceEntry): boolean =>
     entry.name.endsWith('.ttf') || entry.name.endsWith('.otf');
 
 const firstPaint = (entry: PerformanceEntry): Metric =>
-    ({ kind: MetricKind.FirstPaint, time: entry.startTime });
+    ({
+        __type: MetricType.MetricWithFirstPaint,
+        firstPaint: { time: entry.startTime },
+    });
 
 const firstContentfulPaint = (entry: PerformanceEntry): Metric =>
-    ({ kind: MetricKind.FirstContentfulPaint, time: entry.startTime });
+    ({
+        __type: MetricType.MetricWithFirstContentfulPaint,
+        firstContentfulPaint: { time: entry.startTime },
+    });
 
 const font = (entry: PerformanceResourceTiming): Metric =>
     ({
-        kind: MetricKind.Font,
-        duration: entry.duration,
-        size: entry.decodedBodySize ?? null,
-        name: entry.name.split('/').pop() ?? null,
+        __type: MetricType.MetricWithFont,
+        font: {
+            duration: entry.duration,
+            size: entry.decodedBodySize ?? undefined,
+            name: entry.name.split('/').pop(),
+        }
     });
 
 const metrics = (entries: PerformanceEntryList): Metric[] =>
@@ -59,7 +49,5 @@ const metrics = (entries: PerformanceEntryList): Metric[] =>
 // ----- Exports ----- //
 
 export {
-    MetricKind,
-    Metric,
     metrics,
 };

@@ -2,6 +2,8 @@
 
 import { logger } from 'logger';
 import { metrics } from 'client/metrics';
+import { metricsClient } from 'native/nativeApi';
+import { pipe2 } from 'lib';
 
 
 // ----- Procedures ----- //
@@ -46,7 +48,13 @@ function twitter(): void {
 function performanceMetrics(): void {
     window.addEventListener(
         'load',
-        () => console.log('Metrics: ', metrics(performance.getEntries())),
+        () => {
+            pipe2(
+                performance.getEntries(),
+                metrics,
+                metricsClient.sendMetrics.bind(null),
+            );
+        },
         { once: true },
     );
 }

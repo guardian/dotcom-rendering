@@ -114,10 +114,8 @@ const listStyles: SerializedStyles = css`
     clear: both;
 `;
 
-const listItemStyles = (format: Format): SerializedStyles => {
-    const backgroundColour = format.design === Design.Media
-        ? neutral[46] : neutral[86];
-    return css`
+const listItemStyles = (format: Format): SerializedStyles[] => {
+    const baseStyles = css`
         padding-left: ${remSpace[6]};
         padding-bottom: .375rem;
 
@@ -128,7 +126,7 @@ const listItemStyles = (format: Format): SerializedStyles => {
             height: 1rem;
             width: 1rem;
             margin-right: ${remSpace[2]};
-            background-color: ${backgroundColour};
+            background-color: ${neutral[86]};
             margin-left: -${remSpace[6]};
             vertical-align: middle;
         }
@@ -144,6 +142,29 @@ const listItemStyles = (format: Format): SerializedStyles => {
             }
         `}
     `;
+
+    const mediaStyles = css`
+        &::before {
+            background-color: ${neutral[46]};
+        }
+    `
+
+    const liveblogStyles = css`
+        ${darkModeCss`
+            &::before {
+                background-color: ${neutral[86]};
+            }
+        `}
+    `
+
+    switch (format.design) {
+        case (Design.Media):
+            return [baseStyles, mediaStyles];
+        case (Design.Live):
+            return [baseStyles, liveblogStyles];
+        default:
+            return [baseStyles];
+    }
 }
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
