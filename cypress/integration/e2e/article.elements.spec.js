@@ -89,19 +89,5 @@ describe('Elements', function () {
 
             getBody().contains('Liverpool');
         });
-
-        it('should render the document embed', function () {
-            const getBody = () => {
-                return cy
-                    .get('div[data-cy="document-embed"]')
-                    .should('not.be.empty')
-                    .then(cy.wrap);
-            };
-            cy.visit(
-                'Article?url=https://www.theguardian.com/technology/2018/dec/26/amazon-anne-rung-government-services-authority',
-            );
-
-            getBody().contains('Scribd');
-        });
     });
 });
