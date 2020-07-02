@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { AtomEmbedMarkupBlockComponent } from '@root/src/amp/components/elements/AtomEmbedMarkupBlockComponent';
-import { AtomEmbedUrlBlockComponent } from '@root/src/amp/components/elements/AtomEmbedUrlBlockComponent';
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
@@ -11,8 +9,9 @@ import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
-import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
+import { InteractiveAtomBlockComponent } from '@root/src/amp/components/elements/InteractiveAtomBlockComponent';
 import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
+import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/amp/components/elements/SubheadingBlockComponent';
@@ -32,21 +31,11 @@ export const Elements = (
     isImmersive: boolean,
     adTargeting?: AdTargeting,
 ): JSX.Element[] => {
-    const cleanedElements = elements.map(element =>
+    const cleanedElements = elements.map((element) =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
     );
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
-            case 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement':
-                return (
-                    <AtomEmbedMarkupBlockComponent
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
-            case 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement':
-                return <AtomEmbedUrlBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -57,6 +46,8 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
+                return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -71,7 +62,9 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <EmbedBlockComponent key={i} element={element} />;
-            case 'model.dotcomrendering.pageElements.GuideBlockElement':
+            case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
+                return <InteractiveAtomBlockComponent url={element.url} />;
+            case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 return (
                     <Expandable
                         id={element.id}
@@ -101,6 +94,8 @@ export const Elements = (
                 );
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramBlockComponent key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':
                 return (
                     <MapBlockComponent
@@ -109,7 +104,7 @@ export const Elements = (
                         pillar={pillar}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+            case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 return (
                     <Expandable
                         id={element.id}
@@ -230,5 +225,5 @@ export const Elements = (
         }
     });
 
-    return output.filter(el => el !== null) as JSX.Element[];
+    return output.filter((el) => el !== null) as JSX.Element[];
 };

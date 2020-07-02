@@ -29,10 +29,13 @@ type Props = {
     seriesTag: string;
 };
 
-export const Badge = ({ imageUrl, seriesTag }: Props) => (
-    <div className={badgeWrapper}>
-        <a href={seriesTag} className={badgeLink} role="button">
-            <img className={imageStyles} src={imageUrl} alt="" />
-        </a>
-    </div>
-);
+export const Badge = ({ imageUrl, seriesTag }: Props) => {
+    const urlPath = `/${seriesTag}`;
+    return (
+        <div className={badgeWrapper}>
+            <a href={urlPath} className={badgeLink} role="button">
+                <img className={imageStyles} src={imageUrl} alt="" />
+            </a>
+        </div>
+    );
+};

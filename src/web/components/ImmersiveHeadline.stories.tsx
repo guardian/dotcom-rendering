@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display } from '@root/src/lib/display';
 import { MainMedia } from './MainMedia';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 import { ImmersiveHeadline } from './ImmersiveHeadline';
@@ -18,7 +19,7 @@ export const Short = () => (
             `}
         >
             <MainMedia
-                display="immersive"
+                display={Display.Immersive}
                 designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
@@ -27,7 +28,7 @@ export const Short = () => (
         </div>
 
         <ImmersiveHeadline
-            display="immersive"
+            display={Display.Immersive}
             designType="Immersive"
             tags={[]}
             author={{}}
@@ -49,7 +50,7 @@ export const Long = () => (
             `}
         >
             <MainMedia
-                display="immersive"
+                display={Display.Immersive}
                 designType="Article"
                 hideCaption={true}
                 elements={mainMediaElements}
@@ -58,7 +59,7 @@ export const Long = () => (
         </div>
 
         <ImmersiveHeadline
-            display="immersive"
+            display={Display.Immersive}
             designType="Immersive"
             tags={[]}
             author={{}}

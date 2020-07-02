@@ -9,13 +9,13 @@ import { startup } from '@root/src/web/browser/startup';
 // browsers that cut the mustard (support modules).**
 const initialiseDynamicImport = () => {
     try {
-        window.guardian.functions.import = new Function(
+        window.guardianPolyfilledImport = new Function(
             'url',
             `return import(url)`,
         ) as (url: string) => Promise<any>;
     } catch (e) {
         dynamicImportPolyfill.initialize({
-            importFunctionName: 'guardian.functions.import',
+            importFunctionName: 'guardianPolyfilledImport', // must be a direct property of the window
         });
     }
 };
@@ -26,18 +26,16 @@ const initialiseDynamicImportLegacy = () => {
     return import(/* webpackChunkName: "shimport" */ '@guardian/shimport').then(
         shimport => {
             shimport.initialise(); // note this adds a __shimport__ global
-            window.guardian.functions.import = shimport.load;
+            window.guardianPolyfilledImport = shimport.load;
         },
     );
 };
 
 const init = (): Promise<void> => {
-    window.guardian.functions = {
-        import: (url: string) =>
-            Promise.reject(
-                new Error(`import not polyfilled; attempted import(${url})`),
-            ),
-    };
+    window.guardianPolyfilledImport = (url: string) =>
+        Promise.reject(
+            new Error(`import not polyfilled; attempted import(${url})`),
+        );
 
     if (window.guardian.mustardCut) {
         return Promise.resolve(initialiseDynamicImport());

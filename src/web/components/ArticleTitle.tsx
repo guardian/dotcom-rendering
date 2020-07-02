@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
+import { Display } from '@root/src/lib/display';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
@@ -59,7 +60,7 @@ export const ArticleTitle = ({
     badge,
 }: Props) => (
     <div className={cx(sectionStyles, badge && badgeContainer)}>
-        {badge && display !== 'immersive' && (
+        {badge && display !== Display.Immersive && (
             <div className={titleBadgeWrapper}>
                 <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
@@ -67,7 +68,7 @@ export const ArticleTitle = ({
         <div
             className={cx(
                 badge && marginTop,
-                display === 'immersive' && marginBottom,
+                display === Display.Immersive && marginBottom,
             )}
         >
             <SeriesSectionLink

@@ -9,7 +9,11 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
-type Display = 'standard' | 'immersive' | 'showcase';
+declare const enum Display {
+    Standard,
+    Immersive,
+    Showcase,
+}
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
@@ -280,6 +284,8 @@ interface CAPIType {
     slotMachineFlags?: string;
 
     pageType: PageTypeType;
+
+    matchUrl?: string;
 }
 
 type CAPIBrowserType = {
@@ -312,6 +318,8 @@ type CAPIBrowserType = {
         discussionD2Uid: string;
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
+        remoteBanner: boolean;
+        ausMoment2020Header: boolean;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -340,6 +348,7 @@ type CAPIBrowserType = {
     contributionsServiceUrl: string;
     isImmersive: boolean;
     isPhotoEssay: boolean;
+    matchUrl?: string;
 };
 
 interface TagType {
@@ -469,7 +478,7 @@ type UserProfile = {
 type TeamType = {
     id: string;
     name: string;
-    lineup: PlayerType[];
+    players: PlayerType[];
     possession: number;
     shotsOn: number;
     shotsOff: number;
@@ -527,6 +536,7 @@ interface CommercialConfigType {
     section?: string;
     edition?: string;
     series?: string;
+    toneIds?: string;
     contentType: string;
     ampIframeUrl: string;
 }
@@ -568,6 +578,7 @@ interface ConfigType extends CommercialConfigType {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
+    references?: { [key: string]: string }[];
 }
 
 interface GADataType {
@@ -623,7 +634,7 @@ type IslandType =
     | 'most-viewed-footer'
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
-    | 'cmp'
+    | 'bottom-banner'
     | 'onwards-upper-whensignedin'
     | 'onwards-upper-whensignedout'
     | 'onwards-lower-whensignedin'

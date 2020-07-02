@@ -8,6 +8,7 @@ import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { Flex } from '@root/src/web/components/Flex';
 import { Caption } from '@root/src/web/components/Caption';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;
@@ -115,6 +116,7 @@ export const ImmersiveHeadline = ({
                     <LeftColumn showRightBorder={false}>
                         <Caption
                             display={display}
+                            designType={designType}
                             captionText={captionText}
                             pillar={pillar}
                             shouldLimitWidth={true}

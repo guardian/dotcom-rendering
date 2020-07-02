@@ -18,7 +18,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 // including but not limited to recurring & one-off contributions,
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-export const shouldShowSupportMessaging = (): boolean => {
+const shouldShowSupportMessaging = (): boolean => {
     const hideSupportMessaging =
         getCookie(HIDE_SUPPORT_MESSAGING_COOKIE) === 'true';
 
@@ -85,3 +85,27 @@ export const getLastOneOffContributionDate = (): number | undefined => {
 
     return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
 };
+
+const dateDiffDays = (from: number, to: number): number => {
+    const oneDayMs = 1000 * 60 * 60 * 24;
+    const diffMs = to - from;
+    return Math.floor(diffMs / oneDayMs);
+};
+
+const AskPauseDays = 90;
+
+export const isRecentOneOffContributor = () => {
+    const lastContributionDate = getLastOneOffContributionDate();
+    if (lastContributionDate) {
+        const now = Date.now();
+        return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
+    }
+
+    return false;
+};
+
+export const shouldHideSupportMessaging = (isSignedIn: boolean = false): boolean =>
+    !shouldShowSupportMessaging() ||
+    isRecurringContributor(isSignedIn) ||
+    isRecentOneOffContributor();
+

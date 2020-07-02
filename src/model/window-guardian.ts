@@ -105,6 +105,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             permutive: CAPI.config.switches.permutive,
             enableSentryReporting: CAPI.config.switches.enableSentryReporting,
             enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
+            remoteBanner: CAPI.config.switches.remoteBanner,
+            ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
             // used by lib/ad-targeting.ts
             isSensitive: CAPI.config.isSensitive,
@@ -146,6 +148,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         contributionsServiceUrl: CAPI.contributionsServiceUrl,
         isImmersive: CAPI.isImmersive,
         isPhotoEssay: CAPI.config.isPhotoEssay,
+        matchUrl: CAPI.matchUrl,
     };
 };
 

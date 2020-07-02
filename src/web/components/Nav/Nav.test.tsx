@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, within } from '@testing-library/react';
+import { Display } from '@root/src/lib/display';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -11,7 +12,7 @@ describe('Nav', () => {
             <Nav
                 pillar="news"
                 nav={nav}
-                display="standard"
+                display={Display.Standard}
                 subscribeUrl=""
                 edition="UK"
             />,
@@ -29,7 +30,7 @@ describe('Nav', () => {
             <Nav
                 pillar="news"
                 nav={nav}
-                display="standard"
+                display={Display.Standard}
                 subscribeUrl=""
                 edition="UK"
             />,

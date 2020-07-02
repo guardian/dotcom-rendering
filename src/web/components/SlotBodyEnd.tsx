@@ -9,11 +9,14 @@ import {
     getWeeklyArticleHistory,
 } from '@guardian/automat-client';
 import {
-    shouldShowSupportMessaging,
     isRecurringContributor,
-    getLastOneOffContributionDate,
+    getLastOneOffContributionDate, shouldHideSupportMessaging,
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
+import {
+    sendOphanContributionsComponentEvent,
+    TestMeta,
+} from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -29,33 +32,6 @@ const checkForErrors = (response: any) => {
         );
     }
     return response;
-};
-
-type OphanAction = 'INSERT' | 'VIEW';
-
-type TestMeta = {
-    abTestName: string;
-    abTestVariant: string;
-    campaignCode: string;
-    campaignId: string;
-};
-
-const sendOphanEpicEvent = (action: OphanAction, testMeta: TestMeta): void => {
-    const componentEvent = {
-        component: {
-            componentType: 'ACQUISITIONS_EPIC',
-            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: testMeta.campaignCode,
-            id: testMeta.campaignId,
-        },
-        abTest: {
-            name: testMeta.abTestName,
-            variant: testMeta.abTestVariant,
-        },
-        action,
-    };
-
-    window.guardian.ophan.record({ componentEvent });
 };
 
 const sendOphanReminderEvent = (componentId: string): void => {
@@ -116,7 +92,7 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             isSensitive: props.isSensitive,
             tags: props.tags,
-            showSupportMessaging: shouldShowSupportMessaging(),
+            showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn || false),
             isRecurringContributor: isRecurringContributor(
                 props.isSignedIn || false,
             ),
@@ -195,8 +171,8 @@ const MemoisedInner = ({
                 modulePerf.start();
 
                 // eslint-disable-next-line no-restricted-globals
-                window.guardian.functions
-                    .import(module.url)
+                window
+                    .guardianPolyfilledImport(module.url)
                     .then(epicModule => {
                         modulePerf.end();
                         setEpicMeta(meta);
@@ -205,7 +181,11 @@ const MemoisedInner = ({
                             onReminderOpen: sendOphanReminderOpenEvent,
                         });
                         setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-                        sendOphanEpicEvent('INSERT', meta);
+                        sendOphanContributionsComponentEvent(
+                            'INSERT',
+                            meta,
+                            'ACQUISITIONS_EPIC',
+                        );
                     })
                     // eslint-disable-next-line no-console
                     .catch(error => console.log(`epic - error is: ${error}`));
@@ -217,7 +197,11 @@ const MemoisedInner = ({
     useEffect(() => {
         if (hasBeenSeen && epicMeta) {
             logView(epicMeta.abTestName);
-            sendOphanEpicEvent('VIEW', epicMeta);
+            sendOphanContributionsComponentEvent(
+                'VIEW',
+                epicMeta,
+                'ACQUISITIONS_EPIC',
+            );
         }
     }, [hasBeenSeen, epicMeta]);
 

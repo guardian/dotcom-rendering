@@ -5,6 +5,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { Display } from '@root/src/lib/display';
 
 const mainMedia = css`
     min-height: 1px;
@@ -67,6 +68,7 @@ function renderElement(
             return (
                 <YoutubeBlockComponent
                     display={display}
+                    designType={designType}
                     key={i}
                     element={element}
                     pillar={pillar}
@@ -103,7 +105,7 @@ export const MainMedia: React.FC<{
     adTargeting,
     starRating,
 }) => (
-    <div className={cx(mainMedia, display !== 'immersive' && noGutters)}>
+    <div className={cx(mainMedia, display !== Display.Immersive && noGutters)}>
         {elements.map((element, i) =>
             renderElement(
                 display,

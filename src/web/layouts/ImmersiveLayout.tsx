@@ -41,6 +41,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Display } from '@root/src/lib/display';
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
@@ -288,6 +289,7 @@ export const ImmersiveLayout = ({
                         <Hide when="above" breakpoint="leftCol">
                             <Caption
                                 display={display}
+                                designType={designType}
                                 captionText={captionText}
                                 pillar={pillar}
                                 shouldLimitWidth={false}
@@ -295,7 +297,7 @@ export const ImmersiveLayout = ({
                         </Hide>
                     </GridItem>
                     <GridItem area="border">
-                        <Border />
+                        {designType === 'PhotoEssay' ? <></> : <Border />}
                     </GridItem>
                     <GridItem area="title">
                         <>
@@ -365,18 +367,22 @@ export const ImmersiveLayout = ({
                         />
                     </GridItem>
                     <GridItem area="lines">
-                        <div className={maxWidth}>
-                            <div className={stretchLines}>
-                                <GuardianLines
-                                    pillar={pillar}
-                                    effect={decideLineEffect(
-                                        'Immersive',
-                                        pillar,
-                                    )}
-                                    count={decideLineCount('Immersive')}
-                                />
+                        {designType === 'PhotoEssay' ? (
+                            <></>
+                        ) : (
+                            <div className={maxWidth}>
+                                <div className={stretchLines}>
+                                    <GuardianLines
+                                        pillar={pillar}
+                                        effect={decideLineEffect(
+                                            'Immersive',
+                                            pillar,
+                                        )}
+                                        count={decideLineCount('Immersive')}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </GridItem>
                     <GridItem area="meta">
                         <div className={maxWidth}>
@@ -529,7 +535,7 @@ export const ImmersiveLayout = ({
                 />
             </Section>
 
-            <div id="cmp" />
+            <div id="bottom-banner" />
             <MobileStickyContainer />
         </>
     );

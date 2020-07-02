@@ -43,6 +43,7 @@ import {
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import { Display } from '@root/src/lib/display';
 
 const ShowcaseGrid = ({
     children,
@@ -554,7 +555,7 @@ export const ShowcaseLayout = ({
                 />
             </Section>
 
-            <div id="cmp" />
+            <div id="bottom-banner" />
             <MobileStickyContainer />
         </>
     );

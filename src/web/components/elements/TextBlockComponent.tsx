@@ -1,13 +1,16 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { body } from '@guardian/src-foundations/typography';
+import { neutral } from '@guardian/src-foundations/palette';
+import { textSans, body } from '@guardian/src-foundations/typography';
+import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     html: string;
@@ -56,7 +59,7 @@ const shouldShowDropCap = ({
     // Otherwise, we're only interested in marking the first para as a drop cap
     if (!isFirstParagraph) return false;
     // If immersive, we show drop caps for the first para
-    if (display === 'immersive') return true;
+    if (display === Display.Immersive) return true;
     // The first para has a drop cap for these design types
     switch (designType) {
         case 'Feature':
@@ -114,6 +117,37 @@ export const TextBlockComponent: React.FC<Props> = ({
     const paraStyles = css`
         margin-bottom: 16px;
         ${body.medium()};
+
+        ul {
+            margin-bottom: 12px;
+        }
+
+        ${from.tablet} {
+            ul {
+                margin-bottom: 16px;
+            }
+        }
+
+        li {
+            ${textSans.medium()};
+            margin-bottom: 6px;
+            padding-left: 20px;
+
+            p {
+                display: inline;
+            }
+        }
+
+        li:before {
+            display: inline-block;
+            content: '';
+            border-radius: 6px;
+            height: 12px;
+            width: 12px;
+            margin-right: 8px;
+            background-color: ${neutral[86]};
+            margin-left: -20px;
+        }
     `;
 
     const firstLetter = decideDropCapLetter(unwrappedHtml);
@@ -132,7 +166,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         isLongEnough(remainingLetters)
     ) {
         return (
-            <>
+            <p className={paraStyles}>
                 <DropCap
                     letter={firstLetter}
                     pillar={pillar}
@@ -142,9 +176,9 @@ export const TextBlockComponent: React.FC<Props> = ({
                     isUnwrapped={isUnwrapped}
                     html={sanitise(remainingLetters, sanitiserOptions)}
                     elCss={paraStyles}
-                    tagName="p"
+                    tagName="span"
                 />
-            </>
+            </p>
         );
     }
 

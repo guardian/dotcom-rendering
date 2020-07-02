@@ -31,24 +31,25 @@ AudioAtom
     -> AudioAtomBlockElement
 
 ChartAtom
-    -> AtomEmbedUrlBlockElement
+    -> ChartAtomBlockElement
 
 CommonsDivisionAtom
 
 ExplainerAtom
+	-> ExplainerAtomBlockElement
 
 InteractiveAtom
     -> AtomEmbedUrlBlockElement
 
 GuideAtom
-    -> ProfileBlockElement
+    -> GuideAtomBlockElement
 
 MediaAtom
     -> YoutubeBlockElement
     -> HTMLFallbackBlockElement
 
 ProfileAtom
-    -> ProfileBlockElement
+    -> ProfileAtomBlockElement
 
 QandaAtom
     -> QABlockElement
@@ -71,10 +72,24 @@ The following maps PageElements to the corresponding amp and web Components. Thi
 AudioAtomBlockElement
     -> [amp] AudioAtomBlockComponent
 
-AtomEmbedUrlBlockElement
-    -> [amp] AtomEmbedUrlBlockComponent
+InteractiveAtomBlockElement
+    -> [amp] InteractiveAtomBlockComponent
+    -> [web] InteractiveAtom (atoms-rendering)
 
-ProfileBlockElement
+ChartAtomBlockElement
+    -> [web] ChartAtom (atoms-rendering)
+
+ExplainerAtomBlockElement
+	 -> [web] ExplainerAtom (atoms-rendering)
+
+GenericAtomBlockElement
+    -> [amp] InteractiveAtomBlockComponent
+    -> [web] InteractiveAtom (atoms-rendering)
+
+GuideAtomBlockElement
+    -> [amp] Expandable
+
+ProfileAtomBlockElement
     -> [amp] Expandable
 
 YoutubeBlockElement

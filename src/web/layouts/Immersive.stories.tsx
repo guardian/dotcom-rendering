@@ -92,7 +92,21 @@ export const PhotoEssayStory = () => {
     const ServerCAPI = convertToImmersive(PhotoEssay);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-PhotoEssayStory.story = { name: 'PhotoEssay' };
+PhotoEssayStory.story = {
+    name: 'PhotoEssay',
+};
+
+export const MobilePhotoEssay = () => {
+    const ServerCAPI = convertToImmersive(PhotoEssay);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+MobilePhotoEssay.story = {
+    name: 'MobilePhotoEssay',
+    parameters: {
+        viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [375] },
+    },
+};
 
 export const AnalysisStory = () => {
     const ServerCAPI = convertToImmersive(Analysis);

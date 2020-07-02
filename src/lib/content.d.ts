@@ -1,18 +1,12 @@
 // -------------------------------------
 // Elements
 // -------------------------------------
-
-interface AtomEmbedMarkupBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedMarkupBlockElement';
+interface InteractiveAtomBlockElementBase {
+    url: string;
     id?: string;
     html?: string;
     css?: string;
     js?: string;
-}
-
-interface AtomEmbedUrlBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AtomEmbedUrlBlockElement';
-    url: string;
 }
 
 interface AudioAtomElement {
@@ -31,6 +25,39 @@ interface AudioBlockElement {
 interface BlockquoteBlockElement {
     _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
     html: string;
+}
+
+interface CaptionBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
+    display: Display;
+    designType: DesignType;
+    captionText?: string;
+    pillar: Pillar;
+    padCaption?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
+    shouldLimitWidth?: boolean;
+    isOverlayed?: boolean;
+}
+
+interface CalloutBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
+    id: string;
+    activeFrom: number;
+    displayOnSensitive: boolean;
+    formId: number;
+    title: string;
+    description: string;
+    tagName: string;
+    formFields: CampaignFieldType[];
+}
+
+interface CalloutBlockElementXp {
+    _type: 'model.dotcomrendering.pageElements.CalloutBlockElementXp';
+}
+
+interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 }
 
 interface CodeBlockElement {
@@ -82,8 +109,12 @@ interface ExplainerAtomBlockElement {
     body: string;
 }
 
-interface GuideBlockElement {
-    _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
+interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+}
+
+interface GuideAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
     id: string;
     label: string;
     title: string;
@@ -98,6 +129,11 @@ interface GuVideoBlockElement {
     caption: string;
 }
 
+interface HighlightBlockElement {
+    _type: 'model.dotcomrendering.pageElements.HighlightBlockElement';
+    html: string;
+}
+
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
@@ -110,6 +146,7 @@ interface ImageBlockElement {
     imageSources: ImageSource[];
     displayCredit?: boolean;
     role: RoleType;
+    title?: string;
 }
 
 interface InstagramBlockElement {
@@ -117,6 +154,14 @@ interface InstagramBlockElement {
     html: string;
     url: string;
     hasCaption: boolean;
+}
+
+interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+    id: string;
+    js: string;
+    html?: string;
+    css?: string;
 }
 
 interface MapBlockElement {
@@ -134,8 +179,8 @@ interface MultiImageBlockElement {
     caption?: string;
 }
 
-interface ProfileBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
+interface ProfileAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
     id: string;
     label: string;
     title: string;
@@ -185,6 +230,7 @@ interface SubheadingBlockElement {
 interface TableBlockElement {
     _type: 'model.dotcomrendering.pageElements.TableBlockElement';
     isMandatory: boolean;
+    html: string;
 }
 
 interface TextBlockElement {
@@ -219,22 +265,29 @@ interface VideoFacebookBlockElement {
     height: number;
     width: number;
     caption: string;
+    embedUrl?: string;
 }
 
 interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
+    embedUrl?: string;
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
+    embedUrl?: string;
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
+    credit?: string;
+    title?: string;
 }
 
 interface YoutubeBlockElement {
@@ -249,24 +302,14 @@ interface YoutubeBlockElement {
     width?: string;
 }
 
-interface CalloutBlockElement {
-    _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
-    id: string;
-    activeFrom: number;
-    displayOnSensitive: boolean;
-    formId: number;
-    title: string;
-    description: string;
-    tagName: string;
-    formFields: CampaignFieldType[];
-}
-
 type CAPIElement =
-    | AtomEmbedMarkupBlockElement
-    | AtomEmbedUrlBlockElement
     | AudioAtomElement
     | AudioBlockElement
     | BlockquoteBlockElement
+    | CaptionBlockElement
+    | CalloutBlockElement
+    | CalloutBlockElementXp
+    | ChartAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
     | ContentAtomBlockElement
@@ -275,13 +318,16 @@ type CAPIElement =
     | DocumentBlockElement
     | EmbedBlockElement
     | ExplainerAtomBlockElement
-    | GuideBlockElement
+    | GenericAtomBlockElement
+    | GuideAtomBlockElement
     | GuVideoBlockElement
+    | HighlightBlockElement
     | ImageBlockElement
     | InstagramBlockElement
+    | InteractiveAtomBlockElement
     | MapBlockElement
     | MultiImageBlockElement
-    | ProfileBlockElement
+    | ProfileAtomBlockElement
     | PullquoteBlockElement
     | QABlockElement
     | RichLinkBlockElement
@@ -371,7 +417,7 @@ type CampaignFieldType =
     | CampaignFieldSelect;
 
 interface CampaignField {
-    id: number;
+    id: string;
     name: string;
     description?: string;
     required: boolean;
@@ -381,11 +427,11 @@ interface CampaignField {
 }
 
 interface CampaignFieldText extends CampaignField {
-    type: 'textarea';
+    type: 'text';
 }
 
 interface CampaignFieldTextArea extends CampaignField {
-    type: 'text';
+    type: 'textarea';
 }
 
 interface CampaignFieldFile extends CampaignField {

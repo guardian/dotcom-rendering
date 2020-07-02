@@ -93,6 +93,7 @@ stylelint: clean-dist install
 test: clean-dist install
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand
+	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
@@ -103,6 +104,9 @@ bundlesize: clear clean-dist install build
 
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
+
+validate-prepush:
+	@run-p tsc lint-staged "test -- --verbose  --runInBand --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")

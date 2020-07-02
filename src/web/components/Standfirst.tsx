@@ -4,6 +4,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     display: Display;
@@ -50,24 +51,50 @@ const nestedStyles = css`
 
 const standfirstStyles = (designType: DesignType, display: Display) => {
     switch (display) {
-        case 'immersive':
-            return css`
-                ${headline.xsmall({
-                    fontWeight: 'light',
-                })};
-                padding-top: ${space[4]}px;
+        case Display.Immersive:
+            switch (designType) {
+                case 'PhotoEssay':
+                    return css`
+                        ${headline.xxxsmall({})};
+                        margin-top: ${space[2]}px;
+                        margin-bottom: ${space[3]}px;
+                        line-height: 22px;
+                    `;
+                case 'Comment':
+                case 'GuardianView':
+                case 'Feature':
+                case 'Recipe':
+                case 'Review':
+                case 'Immersive':
+                case 'Media':
+                case 'SpecialReport':
+                case 'MatchReport':
+                case 'AdvertisementFeature':
+                case 'GuardianLabs':
+                case 'Quiz':
+                case 'Article':
+                case 'Live':
+                case 'Analysis':
+                case 'Interview':
+                default:
+                    return css`
+                        ${headline.xsmall({
+                            fontWeight: 'light',
+                        })};
+                        padding-top: ${space[4]}px;
 
-                max-width: 280px;
-                ${from.tablet} {
-                    max-width: 400px;
-                }
-                ${from.tablet} {
-                    max-width: 460px;
-                }
-            `;
+                        max-width: 280px;
+                        ${from.tablet} {
+                            max-width: 400px;
+                        }
+                        ${from.tablet} {
+                            max-width: 460px;
+                        }
+                    `;
+            }
 
-        case 'showcase':
-        case 'standard': {
+        case Display.Showcase:
+        case Display.Standard: {
             switch (designType) {
                 case 'Comment':
                 case 'GuardianView':
