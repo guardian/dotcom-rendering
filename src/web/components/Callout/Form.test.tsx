@@ -8,7 +8,7 @@ const textField = {
     name: 'which_event_did_you_attend_and_when',
     hideLabel: false,
     label: 'Which event did you attend and when?',
-    id: 91884886,
+    id: '91884886',
     type: 'text',
     required: true,
 } as CampaignFieldText;
@@ -18,7 +18,7 @@ const textAreaField = {
     description: 'Please include as much detail as possible',
     hideLabel: false,
     label: 'Share your experiences here',
-    id: 91884874,
+    id: '91884874',
     type: 'textarea',
     required: true,
 } as CampaignFieldTextArea;
@@ -41,7 +41,7 @@ const radioField = {
     ],
     hideLabel: false,
     label: 'Can we publish your response?',
-    id: 91884878,
+    id: '91884878',
     type: 'radio',
     required: true,
 } as CampaignFieldRadio;
@@ -64,7 +64,7 @@ const checkboxField = {
     ],
     hideLabel: false,
     label: 'Can we publish your response?',
-    id: 91884871,
+    id: '91884871',
     type: 'checkbox',
     required: true,
 } as CampaignFieldCheckbox;
@@ -73,7 +73,7 @@ const selectField = {
     name: 'do_you_have_anything_else_to_add',
     hideLabel: false,
     label: 'Do you have anything else to add?',
-    id: 91884881,
+    id: '91884881',
     type: 'select',
     options: [
         {
@@ -190,7 +190,6 @@ describe('Callout from', () => {
         fireEvent.click(checkBoxFieldComponent1);
         expect(checkBoxFieldComponent1.checked).toBe(true);
 
-
         const checkBoxFieldComponent3 = getByFieldId(
             checkboxField.options[2].value,
         ) as HTMLInputElement;
@@ -210,7 +209,7 @@ describe('Callout from', () => {
 
     // TODO:
     // file upload unit tests are flaky to implement
-    it.todo('should allow file upload')
+    it.todo('should allow file upload');
 
     it('should submit select', () => {
         const mockSubmit = jest.fn();
