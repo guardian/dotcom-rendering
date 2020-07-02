@@ -1,5 +1,3 @@
-import fetch, { Response } from 'node-fetch';
-
 export enum TickerCountType {
     money = 'money',
     people = 'people',

@@ -9,8 +9,6 @@ import { AdConsent } from '@root/src/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { Experiment } from '@root/src/amp/components/Experiment';
-import { AmpExperimentCollection } from '@root/src/amp/lib/experiment';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { getPillar } from '@root/src/lib/pillars';
@@ -28,7 +26,7 @@ const Body: React.SFC<{
 }> = ({ data, config, pillar }) => {
     // TODO check if there is a better way to determine if liveblog
     const isLiveBlog =
-        data.tags.find(tag => tag.id === 'tone/minutebyminute') !== undefined;
+        data.tags.find((tag) => tag.id === 'tone/minutebyminute') !== undefined;
 
     if (isLiveBlog) {
         return <BodyLiveblog pillar={pillar} data={data} config={config} />;
@@ -42,13 +40,11 @@ export const Article: React.FC<{
     articleData: ArticleModel;
     config: ConfigType;
     analytics: AnalyticsModel;
-    experiments: AmpExperimentCollection;
-}> = ({ nav, articleData, config, analytics, experiments }) => (
+}> = ({ nav, articleData, config, analytics }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
         <AnalyticsIframe url={config.ampIframeUrl} />
         <AdConsent />
-        <Experiment experiments={experiments} />
 
         {/* /TODO change to gray bgcolor */}
         <div key="main" className={backgroundColour}>
