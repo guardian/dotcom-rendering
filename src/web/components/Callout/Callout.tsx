@@ -8,6 +8,7 @@ import { Button } from '@guardian/src-button';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
+import { Form } from './Form';
 
 // TODO: find better name
 const snippetStyles = css`
@@ -93,7 +94,7 @@ export const Callout = ({
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const { title, description } = callout;
+    const { title, description, formFields } = callout;
 
     // ***************************
     // *     Accessibility       *
@@ -178,7 +179,7 @@ export const Callout = ({
                 <summary
                     className={summeryStyles}
                     role="none"
-                    onClick={event => {
+                    onClick={(event) => {
                         // We want to prevent the default `details` behavior from appearing
                         // expanding the details should only be done via the button
                         // however we still want links to be clickable
@@ -225,7 +226,9 @@ export const Callout = ({
                     )}
                 </summary>
 
-                {/* import Form component here */}
+                {/* TODO: onSubmit  */}
+                <Form formFields={formFields} onSubmit={() => {}} />
+
                 <span className={buttonWrapperStyles} aria-hidden="true">
                     {isExpanded && (
                         <Button
