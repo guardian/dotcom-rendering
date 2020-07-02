@@ -427,11 +427,11 @@ interface CampaignField {
 }
 
 interface CampaignFieldText extends CampaignField {
-    type: 'textarea';
+    type: 'text';
 }
 
 interface CampaignFieldTextArea extends CampaignField {
-    type: 'text';
+    type: 'textarea';
 }
 
 interface CampaignFieldFile extends CampaignField {
