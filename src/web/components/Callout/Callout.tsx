@@ -78,6 +78,10 @@ const buttonWrapperStyles = css`
     margin-top: -5px;
 `;
 
+let expandFormButtonRef: HTMLButtonElement | null = null;
+let firstFieldElementRef: HTMLElement | null = null;
+let lastElementRef: HTMLButtonElement | null = null;
+
 export const Callout = ({
     callout,
     pillar,
@@ -85,10 +89,6 @@ export const Callout = ({
     callout: CalloutBlockElement;
     pillar: Pillar;
 }) => {
-    let expandFormButtonRef: HTMLButtonElement | null = null;
-    let firstFieldElementRef: HTMLElement | null = null;
-    let lastElementRef: HTMLButtonElement | null = null;
-
     const [isExpanded, setIsExpanded] = useState(false);
 
     const { title, description, formFields } = callout;
