@@ -78,6 +78,11 @@ const buttonWrapperStyles = css`
     margin-top: -5px;
 `;
 
+// Normally forms are in Modals, but here they are embeded into the page
+// we therefore need to only focus on expandFormButtonRef if the form has been closed
+// after it was opened
+let isFirstTimeRendering = true;
+
 export const Callout = ({
     callout,
     pillar,
@@ -154,11 +159,20 @@ export const Callout = ({
 
     // on close form, focus on expandFormButtonRef
     useEffect(() => {
-        if (!isExpanded && expandFormButtonRef) {
+        if (!isExpanded && expandFormButtonRef && !isFirstTimeRendering) {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             expandFormButtonRef && expandFormButtonRef.focus();
         }
     }, [isExpanded, expandFormButtonRef]);
+
+    // Normally forms are in Modals, but here they are embeded into the page
+    // we therefore need to only focus on expandFormButtonRef if the form has been closed
+    // after it was opened
+    useEffect(() => {
+        if (isExpanded) {
+            isFirstTimeRendering = false;
+        }
+    }, [isExpanded]);
 
     // be able to close the form using the escape key for accessibility
     useEffect(() => {
