@@ -5,15 +5,10 @@ import { Article } from '@root/src/amp/pages/Article';
 import { extractScripts } from '@root/src/amp/lib/scripts';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { experimentFullConfig } from '@root/src/amp/experimentConfigs';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import {
-    getAllActiveExperiments,
-    getAllActiveCss,
-} from '@root/src/amp/lib/experiment';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -21,7 +16,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const CAPI = validateV2(body);
         const { linkedData } = CAPI;
         const { config } = CAPI;
-        const blockElements = CAPI.blocks.map(block => block.elements);
+        const blockElements = CAPI.blocks.map((block) => block.elements);
 
         // This is simply to flatten the elements
         const elements = ([] as CAPIElement[]).concat(...blockElements);
@@ -48,15 +43,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             },
         };
 
-        const activeExperiments = getAllActiveExperiments(
-            experimentFullConfig,
-            config.switches,
-        );
-        const abTestCss = getAllActiveCss(
-            experimentFullConfig,
-            config.switches,
-        );
-
         const metadata = {
             description: CAPI.trailText,
             canonicalURL: CAPI.webURL,
@@ -72,11 +58,9 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     articleData={CAPI}
                     nav={extractNAV(CAPI.nav)}
                     analytics={analytics}
-                    experiments={activeExperiments}
                     config={config}
                 />
             ),
-            abTestCss,
         });
 
         res.status(200).send(resp);
