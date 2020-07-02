@@ -171,14 +171,14 @@ function page(
 ): Page {
     const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
     const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
-    const hasTwitter = includesTweets(renderingRequest.content);
+    const hasTweets = includesTweets(renderingRequest.content);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const { html: body, css, ids } = compose(extractCritical, renderToString)(
         <CacheProvider value={cache}>
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );
-    const cspString = csp(item, { scripts: [], styles: [styles(getFormat(item)), css] }, hasTwitter);
+    const cspString = csp(item, { scripts: [], styles: [styles(getFormat(item)), css] }, hasTweets);
     const html = `
         <html lang="en">
             <head>
@@ -195,7 +195,7 @@ function page(
             </head>
             <body>
                 ${body}
-                ${renderToString(<Scripts clientScript={clientScript} twitter={hasTwitter} />)}
+                ${renderToString(<Scripts clientScript={clientScript} twitter={hasTweets} />)}
             </body>
         </html>
     `;
