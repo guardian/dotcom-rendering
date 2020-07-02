@@ -167,7 +167,7 @@ const navRow = css`
 const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
     <nav>
         <ul className={pillarListStyles}>
-            {pillars.map(p => (
+            {pillars.map((p) => (
                 <li className={pillarListItemStyle} key={p.title}>
                     <a
                         className={pillarLinkStyle(p.pillar)}
@@ -185,7 +185,7 @@ export const Header: React.FC<{
     nav: NavType;
     guardianBaseURL: string;
 }> = ({ nav, guardianBaseURL }) => (
-    <header className={`test-header ${headerStyles}`}>
+    <header className={headerStyles}>
         <div className={row}>
             <ReaderRevenueButton
                 nav={nav}
