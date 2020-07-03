@@ -148,9 +148,9 @@ export const Callout = ({
                     );
                 }
             })
-            .catch((error) => {
+            .catch((respError) => {
                 window.guardian.modules.sentry.reportError(
-                    error,
+                    respError,
                     'callout-embed-submission',
                 );
                 setError(
