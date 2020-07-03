@@ -21,13 +21,14 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         margin-right: 4px;
     `;
 
+    /*
+        The reason pillar type 'opinion' is forced to opinion[400] is that
+        opinion.dark is much darker so it is forced to keep with similar colour
+        tones (that's my understanding anyway!)
+    */
     switch (designType) {
         case 'GuardianView':
         case 'Comment':
-            return css`
-                ${baseStyles};
-                color: ${opinion[400]};
-            `;
         case 'PhotoEssay':
         case 'Analysis':
         case 'Feature':
@@ -46,7 +47,9 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         default:
             return css`
                 ${baseStyles};
-                color: ${pillarPalette[pillar].dark};
+                color: ${pillar === 'opinion'
+                    ? opinion[400]
+                    : pillarPalette[pillar].dark};
             `;
     }
 };
