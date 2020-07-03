@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import fetchMock from 'fetch-mock';
 
 import { calloutCampaign } from '@root/fixtures/calloutCampaign';
 import { Callout } from './Callout';
@@ -10,6 +11,15 @@ export default {
 };
 
 export const Default = () => {
+    fetchMock
+        .restore()
+        .post(
+            'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+            {
+                status: 201,
+                body: null,
+            },
+        );
     return (
         <div
             className={css`
@@ -17,7 +27,11 @@ export const Default = () => {
                 padding: 15px;
             `}
         >
-            <Callout callout={calloutCampaign} pillar="news" />
+            <Callout
+                callout={calloutCampaign}
+                calloutsUrl="https://callouts.code.dev-guardianapis.com"
+                pillar="news"
+            />
         </div>
     );
 };
