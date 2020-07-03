@@ -87,7 +87,10 @@ interface DividerBlockElement {
 
 interface DocumentBlockElement {
     _type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
-    isMandatory: boolean;
+    embedUrl: string;
+    height: number;
+    width: number;
+    title?: string;
 }
 
 interface EmbedBlockElement {
