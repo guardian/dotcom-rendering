@@ -10,17 +10,16 @@ export default {
     title: 'Components/Callout',
 };
 
-fetchMock
-    .restore()
-    .post(
-        'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-        {
-            status: 201,
-            body: null,
-        },
-    );
-
 export const Default = () => {
+    fetchMock
+        .restore()
+        .post(
+            'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+            {
+                status: 201,
+                body: null,
+            },
+        );
     return (
         <div
             className={css`

@@ -127,7 +127,7 @@ export const Callout = ({
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    formId: formData.formId,
+                    formId: callout.formId,
                     // TODO: check if we need to send this
                     'twitter-handle': '',
                     ...formDataWithFieldPrefix,
@@ -148,7 +148,11 @@ export const Callout = ({
                     );
                 }
             })
-            .catch((_) => {
+            .catch((error) => {
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'callout-embed-submission',
+                );
                 setError(
                     'Sorry, there was a problem submitting your form. Please try again later.',
                 );
@@ -249,9 +253,7 @@ export const Callout = ({
         return (
             <figure>
                 <details
-                    className={cx(calloutDetailsStyles, {
-                        [backgroundColorStyle]: isExpanded,
-                    })}
+                    className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
                     open={isExpanded}
                 >
