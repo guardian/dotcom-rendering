@@ -44,7 +44,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) =>
             <Dateline date={item.publishDate} />
             <Follow {...item} />
         </div>
-        <CommentCount count={0} {...item} />
+        <CommentCount count={item.commentCount} {...item} />
     </div>
 
 const ShortMetadata: FC<Props> = ({ item }: Props) =>
@@ -53,7 +53,7 @@ const ShortMetadata: FC<Props> = ({ item }: Props) =>
             <Dateline date={item.publishDate} />
             <Follow {...item} />
         </div>
-        <CommentCount count={0} {...item} />
+        <CommentCount count={item.commentCount} {...item} />
     </div>
 
 const Metadata: FC<Props> = (props: Props) => {
