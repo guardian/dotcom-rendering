@@ -29,6 +29,12 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
     switch (designType) {
         case 'GuardianView':
         case 'Comment':
+            return css`
+                ${baseStyles};
+                color: ${pillar === 'opinion'
+                    ? opinion[400]
+                    : pillarPalette[pillar].dark};
+            `;
         case 'PhotoEssay':
         case 'Analysis':
         case 'Feature':
@@ -47,9 +53,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         default:
             return css`
                 ${baseStyles};
-                color: ${pillar === 'opinion'
-                    ? opinion[400]
-                    : pillarPalette[pillar].dark};
+                color: ${pillarPalette[pillar].dark};
             `;
     }
 };
