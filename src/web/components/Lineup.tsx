@@ -54,7 +54,7 @@ const Event = ({
                 <i
                     className={css`
                         display: inline-block;
-                        background-image: url('data:image/svg+xml, ${svgBackgroundYellow}');
+                        background-image: url('data:image/svg+xml;utf-8,${svgBackgroundYellow}');
                         background-position: 0 0;
                         width: 0.5625rem;
                         height: 0.75rem;

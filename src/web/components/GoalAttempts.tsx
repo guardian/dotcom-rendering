@@ -59,7 +59,7 @@ const Side = ({
 
             height: 132px;
 
-            background-image: url('data:image/svg+xml, ${svgBackground}');
+            background-image: url('data:image/svg+xml;utf-8,${svgBackground}');
             background-repeat: repeat;
             background-size: 3px;
             background-position-x: 0;
