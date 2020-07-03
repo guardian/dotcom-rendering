@@ -8,7 +8,7 @@ import { Button } from '@guardian/src-button';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
-import { Form } from './Form';
+import { Form } from '../Callout/Form';
 
 const calloutDetailsStyles = css`
     border-top: 1px ${neutral[86]} solid;
@@ -88,13 +88,11 @@ let hasFormBeenOpened = true;
 
 type formData = { [key in string]: any };
 
-export const Callout = ({
+export const CalloutBlockComponent = ({
     callout,
-    calloutsUrl,
     pillar,
 }: {
     callout: CalloutBlockElement;
-    calloutsUrl: string;
     pillar: Pillar;
 }) => {
     let expandFormButtonRef: HTMLButtonElement | null = null;
@@ -124,7 +122,7 @@ export const Callout = ({
             {},
         );
 
-        return fetch(`${calloutsUrl}/formstack-campaign/submit`, {
+        return fetch(callout.calloutsUrl, {
             method: 'POST',
             body: JSON.stringify({
                 formId: callout.formId,

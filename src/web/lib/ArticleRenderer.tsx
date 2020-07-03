@@ -19,6 +19,7 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 
 import { ExplainerAtom, InteractiveAtom } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
@@ -220,10 +221,16 @@ export const ArticleRenderer: React.FC<{
                             css={element.css}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+                    return (
+                        <CalloutBlockComponent
+                            callout={element}
+                            pillar={pillar}
+                        />
+                    );
 
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
