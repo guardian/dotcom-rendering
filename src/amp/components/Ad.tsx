@@ -12,7 +12,7 @@ const svgBackground = encodeURIComponent(
 
 const adStyle = css`
     background: ${palette.neutral[93]};
-    background-image: url('data:image/svg+xml; ${svgBackground}');
+    background-image: url('data:image/svg+xml;utf-8,${svgBackground}');
     background-size: 105px;
     background-repeat: no-repeat;
     background-position: center;
