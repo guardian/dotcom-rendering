@@ -19,13 +19,9 @@ const Row = ({ children }: { children: React.ReactNode }) => (
     </div>
 );
 
-const svgBackgroundRed = encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1 1"><rect fill="#cc2b12" width="1" height="1"></svg>',
-);
+const BackgroundRed = '#cc2b12';
 
-const svgBackgroundYellow = encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1 1"><rect fill="#fb0" width="1" height="1"></svg>',
-);
+const BackgroundYellow = '#fb0';
 
 const Event = ({
     type,
@@ -40,7 +36,7 @@ const Event = ({
                 <i
                     className={css`
                         display: inline-block;
-                        background-image: url('data:image/svg+xml, ${svgBackgroundRed}');
+                        background-color: ${BackgroundRed};
                         background-position: 0 0;
                         width: 0.5625rem;
                         height: 0.75rem;
@@ -54,7 +50,7 @@ const Event = ({
                 <i
                     className={css`
                         display: inline-block;
-                        background-image: url('data:image/svg+xml;utf-8,${svgBackgroundYellow}');
+                        background-color: ${BackgroundYellow};
                         background-position: 0 0;
                         width: 0.5625rem;
                         height: 0.75rem;
