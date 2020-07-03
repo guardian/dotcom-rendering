@@ -27,7 +27,11 @@ export const Default = () => {
                 padding: 15px;
             `}
         >
-            <Callout callout={calloutCampaign} pillar="news" />
+            <Callout
+                callout={calloutCampaign}
+                calloutsUrl="https://callouts.code.dev-guardianapis.com"
+                pillar="news"
+            />
         </div>
     );
 };

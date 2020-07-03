@@ -90,9 +90,11 @@ type formData = { [key in string]: any };
 
 export const Callout = ({
     callout,
+    calloutsUrl,
     pillar,
 }: {
     callout: CalloutBlockElement;
+    calloutsUrl: string;
     pillar: Pillar;
 }) => {
     let expandFormButtonRef: HTMLButtonElement | null = null;
@@ -122,22 +124,19 @@ export const Callout = ({
             {},
         );
 
-        return fetch(
-            'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    formId: callout.formId,
-                    // TODO: check if we need to send this
-                    'twitter-handle': '',
-                    ...formDataWithFieldPrefix,
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                credentials: 'include',
+        return fetch(`${calloutsUrl}/formstack-campaign/submit`, {
+            method: 'POST',
+            body: JSON.stringify({
+                formId: callout.formId,
+                // TODO: check if we need to send this
+                'twitter-handle': '',
+                ...formDataWithFieldPrefix,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-        )
+            credentials: 'include',
+        })
             .then((resp) => {
                 if (resp.status === 201) {
                     setSubmissionSuccess(true);
