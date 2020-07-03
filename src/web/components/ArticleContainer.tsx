@@ -24,6 +24,7 @@ const articleAdStyles = css`
         min-width: 160px;
         min-height: 274px;
         text-align: center;
+        position: relative;
     }
     .ad-slot--mostpop {
         ${from.desktop} {
