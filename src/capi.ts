@@ -123,7 +123,9 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'shouldHideAdverts',
         'shouldHideReaderRevenue',
         'displayHint',
-        'starRating'
+        'starRating',
+        'commentable',
+        'internalShortId'
     ];
 
     const params = new URLSearchParams({

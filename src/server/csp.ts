@@ -60,12 +60,12 @@ const assetHashes = (assets: string[]): string =>
 
 const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     default-src 'self';
-    style-src ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};
+    style-src 'unsafe-inline';
     img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
     script-src 'self' ${assetHashes(scripts)} http://www.instagram.com/embed.js https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
     frame-src https://www.theguardian.com https://www.scribd.com https://www.instagram.com https://www.tiktok.com https://interactive.guim.co.uk https://open.spotify.com https://www.youtube-nocookie.com ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
-    connect-src 'self' https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/
+    connect-src 'self' https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://discussion.theguardian.com/discussion-api/
 `.trim();
 
 function csp(item: Item, additionalAssets: Assets, twitter: boolean): string {

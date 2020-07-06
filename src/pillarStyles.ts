@@ -75,6 +75,21 @@ function pillarFromString(pillar: string | undefined): Pillar {
     }
 }
 
+function stringFromPillar(pillar: Pillar): string {
+    switch (pillar) {
+        case Pillar.Opinion:
+            return 'opinion';
+        case Pillar.Sport:
+            return 'sport';
+        case Pillar.Culture:
+            return 'culture';
+        case Pillar.Lifestyle:
+            return 'lifestyle';
+        case Pillar.News:
+        default:
+            return 'news';
+    }
+}
 
 // ----- Exports ----- //
 
@@ -82,4 +97,5 @@ export {
     PillarStyles,
     getPillarStyles,
     pillarFromString,
+    stringFromPillar
 };

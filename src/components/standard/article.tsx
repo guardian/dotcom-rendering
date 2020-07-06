@@ -16,9 +16,11 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, Review, Item } from 'item';
-import { getPillarStyles } from 'pillarStyles';
+import { getPillarStyles, stringFromPillar } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
+import { pipe2 } from 'lib';
+import { map, withDefault } from 'types/option';
 
 // ----- Styles ----- //
 
@@ -82,6 +84,21 @@ const Standard = ({ item, children }: Props): JSX.Element => {
         ? <div id="epic-container"></div>
         : null
 
+    const commentContainer = item.commentable
+        ? pipe2(
+            item.internalShortId,
+            map(id =>
+                <section
+                    css={css`margin-bottom: ${remSpace[4]}`}
+                    id="comments"
+                    data-closed={false}
+                    data-pillar={stringFromPillar(item.pillar)}
+                    data-short-id={id}
+                ></section>),
+            withDefault(<></>)
+          )
+        : null
+
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -103,6 +120,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
             {epicContainer}
             <footer css={articleWidthStyles}>
                 <Tags tags={item.tags}/>
+                {commentContainer}
             </footer>
         </article>
     </main>

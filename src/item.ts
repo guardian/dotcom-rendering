@@ -34,6 +34,7 @@ interface Fields extends Format {
     tags: Tag[];
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
+    internalShortId: Option<string>;
 }
 
 interface Liveblog extends Fields {
@@ -147,7 +148,8 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
-        branding: fromNullable(branding)
+        branding: fromNullable(branding),
+        internalShortId: fromNullable(content.fields?.internalShortId)
     }
 }
 

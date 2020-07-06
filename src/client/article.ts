@@ -10,7 +10,8 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow } from 'client/nativeCommunication';
-
+import { App } from '@guardian/discussion-rendering/build/App';
+import "regenerator-runtime/runtime.js";
 
 // ----- Run ----- //
 
@@ -108,6 +109,29 @@ function insertEpic(): void {
             }
         })
     }
+}
+
+declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+const commentContainer = document.getElementById('comments');
+const pillar = commentContainer?.getAttribute('data-pillar') as Pillar;
+const shortUrl = commentContainer?.getAttribute('data-short-id');
+const isClosedForComments = !!commentContainer?.getAttribute('pillar');
+
+if (pillar && shortUrl) {
+    const props = {
+        shortUrl,
+        baseUrl: "https://discussion.theguardian.com/discussion-api",
+        pillar,
+        isClosedForComments,
+        additionalHeaders: {},
+        expanded: false,
+        apiKey: "apps-rendering",
+        onPermalinkClick: () => {},
+        onHeightChange: () => {}
+    }
+
+    ReactDOM.render(h(App, props), commentContainer)
 }
 
 setup();
