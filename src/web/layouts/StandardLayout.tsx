@@ -243,7 +243,7 @@ export const StandardLayout = ({
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
 
     const seriesTag = CAPI.tags.find(
-        tag => tag.type === 'Series' || tag.type === 'Blog',
+        (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
@@ -263,6 +263,7 @@ export const StandardLayout = ({
                         showTopBorder={false}
                         showSideBorders={false}
                         padded={false}
+                        shouldCenter={false}
                     >
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
