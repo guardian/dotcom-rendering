@@ -119,11 +119,11 @@ function getVideoSlots(): VideoSlot[] {
 
     return Array.from(videoSlots).reduce((slots: VideoSlot[], elem) => {
         const slotPosition = elem.getBoundingClientRect();
-        const videoId =  elem.getAttribute('data-videoId') ?? '';
-        const posterUrl = elem.getAttribute('data-posterUrl') ?? '';
+        const videoId =  elem.getAttribute('data-videoId');
+        const posterUrl = elem.getAttribute('data-posterUrl');
         const duration = parseInt(elem.getAttribute('data-duration') ?? '0');
         const rect = getRect(slotPosition);
-        if (videoId) {
+        if (videoId && posterUrl) {
             slots.push(new VideoSlot({ rect, videoId, posterUrl, duration }))
         }
         return slots;
