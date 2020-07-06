@@ -62,7 +62,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@guardian/atoms-rendering": "^1.3.3",
+    "@guardian/atoms-rendering": "^1.3.4",
     "@guardian/bridget": "^0.65",
     "@guardian/content-api-models": "^15.9.1",
     "@guardian/content-atom-model": "^3.2.2",
