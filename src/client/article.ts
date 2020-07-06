@@ -127,8 +127,9 @@ if (pillar && shortUrl) {
         additionalHeaders: {},
         expanded: false,
         apiKey: "apps-rendering",
-        onPermalinkClick: () => {},
-        onHeightChange: () => {}
+        onPermalinkClick: (commentId: number): void => {
+            console.log(commentId)
+        }
     }
 
     ReactDOM.render(h(App, props), commentContainer)
