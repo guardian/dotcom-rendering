@@ -24,7 +24,8 @@ const styles = (format: Format): SerializedStyles => css`
     display: block;
     width: 100%;
     padding-bottom: 56.25%;
-    background: ${neutral[97]};
+    background: ${format.design === Design.Media ? neutral[20] : neutral[97]};
+
     ${darkModeCss`
         background: ${neutral[20]};
     `}
@@ -32,7 +33,7 @@ const styles = (format: Format): SerializedStyles => css`
     ${from.wide} {
         padding-bottom: ${videoHeight}px;
         width: ${wideContentWidth}px;
-        ${format.design !== Design.Live ? marginAuto : null }
+        ${format.design !== Design.Live ? marginAuto : null}
     }
 `;
 
