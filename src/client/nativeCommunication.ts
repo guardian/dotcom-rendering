@@ -134,9 +134,9 @@ function getVideoSlots(): VideoSlot[] {
         if (videoId && posterUrl) {
             if (durationString) {
                 const duration = parseInt(durationString);
-                slots.push(new VideoSlot({ rect, videoId, posterUrl, duration }))
+                return [ ...slots, new VideoSlot({ rect, videoId, posterUrl, duration }) ];
             } else {
-                slots.push(new VideoSlot({ rect, videoId, posterUrl }))
+                return [ ...slots, new VideoSlot({ rect, videoId, posterUrl }) ];
             }
         }
         return slots;
