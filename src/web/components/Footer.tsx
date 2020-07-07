@@ -62,10 +62,10 @@ const emailSignup = css`
 
     ${from.wide} {
         margin-right: ${pillarWidth * 2 +
-            firstPillarWidth -
-            (emailSignupWidth +
-                emailSignupSideMargins +
-                footerItemContainerPadding)}px;
+        firstPillarWidth -
+        (emailSignupWidth +
+            emailSignupSideMargins +
+            footerItemContainerPadding)}px;
     }
 `;
 
@@ -173,7 +173,7 @@ const bttPosition = css`
 const FooterLinks: React.FC<{
     pageFooter: FooterType;
 }> = ({ pageFooter }) => {
-    const linkGroups = pageFooter.footerLinks.map(linkGroup => {
+    const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
         const linkList = linkGroup.map((l: FooterLink, index: number) => (
             <li key={`${l.url}${index}`}>
                 <a

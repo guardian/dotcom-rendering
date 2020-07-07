@@ -117,7 +117,7 @@ export const Columns: React.FC<{
         />
         <li className={desktopBrandExtensionColumn} role="none">
             <ul className={brandExtensionList} role="menu">
-                {nav.brandExtensions.map(brandExtension => (
+                {nav.brandExtensions.map((brandExtension) => (
                     <li
                         className={brandExtensionListItem}
                         key={brandExtension.title}

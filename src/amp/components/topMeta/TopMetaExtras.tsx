@@ -8,14 +8,14 @@ import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             color: ${pillarPalette[pillar].main};
         `,
 );
 
 const pillarFill = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             fill: ${pillarPalette[pillar].main};
         `,

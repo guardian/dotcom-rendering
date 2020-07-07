@@ -15,7 +15,7 @@ fs.writeFile(
     root + '/src/model/json-schema.json',
     JSON.stringify(schema, null, 4),
     'utf8',
-    function(err) {
+    function (err) {
         if (err) {
             // eslint-disable-next-line @typescript-eslint/tslint/config
             console.log(err);

@@ -234,7 +234,7 @@ export const Column = ({
                 id={`${column.title.toLowerCase()}Links`}
                 data-cy={`${column.title.toLowerCase()}Links`}
             >
-                {(column.children || []).map(link => (
+                {(column.children || []).map((link) => (
                     <li
                         key={link.title.toLowerCase()}
                         className={cx(mainMenuLinkStyle, {

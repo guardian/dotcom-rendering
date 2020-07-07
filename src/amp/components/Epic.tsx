@@ -18,7 +18,7 @@ const epic = css`
     margin-bottom: 1.5rem;
     padding: 0.25rem 0.3125rem 1rem;
 `;
-const epicHeader = css `
+const epicHeader = css`
     font-size: 1.25rem;
     line-height: 1.4375rem;
     ${headline.xxsmall()};
@@ -46,7 +46,7 @@ const epicParagraph = css`
         background-color: ${palette.brandYellow.main};
     }
     &:last-of-type {
-      display: inline;
+        display: inline;
     }
 `;
 const highlightedText = css`
@@ -55,7 +55,7 @@ const highlightedText = css`
     padding: 0.125rem;
     margin-left: 5px;
     color: ${palette.neutral[7]};
-    ${headline.xxxsmall({fontWeight: "bold"})};
+    ${headline.xxxsmall({ fontWeight: 'bold' })};
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-variant-ligatures: common-ligatures;
@@ -87,14 +87,14 @@ const supportButton = css`
     margin: 2rem 0.625rem 0.25rem 0;
     vertical-align: base;
     line-height: 2.625rem;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     text-align: centre;
     &:hover {
         background-color: ${palette.opinion[600]};
     }
 `;
 const arrow = css`
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     position: relative;
     width: 1.3125rem;
     height: auto;
@@ -103,26 +103,34 @@ const arrow = css`
     vertical-align: sub;
 `;
 const acceptedPaymentMethodsWrapper = css`
-    margin-top: .5rem;
-    margin-left: .5rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
     display: block;
 `;
 
-const buildUrl = (contributionsUrl: string, articleUrl: string, campaignCode: string, componentId: string): string => {
+const buildUrl = (
+    contributionsUrl: string,
+    articleUrl: string,
+    campaignCode: string,
+    componentId: string,
+): string => {
     const acquisitionData = {
-        source: "GOOGLE_AMP",
-        componentType: "ACQUISITIONS_EPIC",
+        source: 'GOOGLE_AMP',
+        componentType: 'ACQUISITIONS_EPIC',
         componentId,
         campaignCode,
-        referrerUrl: articleUrl
+        referrerUrl: articleUrl,
     };
-    return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(acquisitionData)}`;
+    return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(
+        acquisitionData,
+    )}`;
 };
 
-export const Epic: React.FC<{webURL: string}> = ({webURL}) => {
-    const epicUrl = process.env.NODE_ENV === 'production' ?
-        'https://contributions.guardianapis.com/amp/epic' :
-        'https://contributions.code.dev-guardianapis.com/amp/epic';
+export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
+    const epicUrl =
+        process.env.NODE_ENV === 'production'
+            ? 'https://contributions.guardianapis.com/amp/epic'
+            : 'https://contributions.code.dev-guardianapis.com/amp/epic';
 
     return (
         <amp-list
@@ -144,18 +152,18 @@ export const Epic: React.FC<{webURL: string}> = ({webURL}) => {
                             <MoustacheVariable name="." />
                         </p>
                     </MoustacheSection>
-                    <span className={highlightedText}><MoustacheVariable name="highlightedText" /></span>
+                    <span className={highlightedText}>
+                        <MoustacheVariable name="highlightedText" />
+                    </span>
                     <br />
                     <MoustacheSection name="cta">
                         <a
-                            href={
-                                buildUrl(
-                                    moustacheVariable('url'),
-                                    webURL,
-                                    moustacheVariable('campaignCode'),
-                                    moustacheVariable('componentId')
-                                )
-                            }
+                            href={buildUrl(
+                                moustacheVariable('url'),
+                                webURL,
+                                moustacheVariable('campaignCode'),
+                                moustacheVariable('componentId'),
+                            )}
                             className={supportButton}
                         >
                             <MoustacheVariable name="text" />
@@ -183,5 +191,5 @@ export const Epic: React.FC<{webURL: string}> = ({webURL}) => {
                 </div>
             </MoustacheTemplate>
         </amp-list>
-    )
+    );
 };

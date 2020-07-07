@@ -1,6 +1,6 @@
 import React from 'react';
 
-const getShortcode: (url: string) => string = url => {
+const getShortcode: (url: string) => string = (url) => {
     const match = /.*\/(.*)\//.exec(url);
     if (match == null) {
         throw new Error('No shortcode could be found for instagram embed.');

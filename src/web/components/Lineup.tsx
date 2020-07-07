@@ -63,7 +63,7 @@ const Event = ({
 export const Lineup = ({ players }: Props) => {
     return (
         <ul>
-            {players.map(player => (
+            {players.map((player) => (
                 <li
                     className={css`
                         ${textSans.small()}

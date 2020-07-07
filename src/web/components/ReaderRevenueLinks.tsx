@@ -11,8 +11,12 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
-import {fetchTickerData, TickerCountType, TickerData} from "@root/src/lib/fetchTickerData";
-import {addForMinutes, getCookie} from "@root/src/web/browser/cookie";
+import {
+    fetchTickerData,
+    TickerCountType,
+    TickerData,
+} from '@root/src/lib/fetchTickerData';
+import { addForMinutes, getCookie } from '@root/src/web/browser/cookie';
 
 type Props = {
     edition: Edition;
@@ -129,23 +133,28 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     inHeader,
     enableAusMoment2020Header,
 }) => {
-    const [numberOfSupporters, setnumberOfSupporters] = useState<string>(
-        '',
-    );
+    const [numberOfSupporters, setnumberOfSupporters] = useState<string>('');
     const showAusMomentHeader = edition === 'AU' && enableAusMoment2020Header;
 
     useEffect(() => {
         if (showAusMomentHeader) {
-            const cookieValue = getCookie(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME);
+            const cookieValue = getCookie(
+                AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME,
+            );
 
             if (cookieValue) {
-                setnumberOfSupporters(cookieValue.toLocaleString())
+                setnumberOfSupporters(cookieValue.toLocaleString());
             } else {
-                fetchTickerData(TickerCountType.people)
-                    .then((td: TickerData) => {
-                        addForMinutes(AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME, `${td.total}`, 60);
-                        setnumberOfSupporters(td.total.toLocaleString())
-                    });
+                fetchTickerData(TickerCountType.people).then(
+                    (td: TickerData) => {
+                        addForMinutes(
+                            AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME,
+                            `${td.total}`,
+                            60,
+                        );
+                        setnumberOfSupporters(td.total.toLocaleString());
+                    },
+                );
             }
         }
     }, [showAusMomentHeader]);
@@ -166,36 +175,36 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                             <span className={headerYellowHighlight}>
                                 {` ${numberOfSupporters} `}
                             </span>
-                            readers across Australia.<br />
+                            readers across Australia.
+                            <br />
                             Thank you for supporting us
                         </div>
                     </div>
                 </div>
-            )
-        } 
-            return null
-        
+            );
+        }
+        return null;
     }
     return (
         <div className={cx(inHeader && paddingStyles)}>
             <div
                 className={cx({
-                [hiddenUntilTablet]: inHeader,
-            })}
+                    [hiddenUntilTablet]: inHeader,
+                })}
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    { showAusMomentHeader ?
-                        (
-                            <div>
-                                We&apos;re funded by
-                                <span className={headerYellowHighlight}>
-                                    {` ${numberOfSupporters} `}
-                                </span>
-                                readers across Australia.
-                            </div>
-)
-                        : (<div> Available for everyone, funded by readers</div>)}
+                    {showAusMomentHeader ? (
+                        <div>
+                            We&apos;re funded by
+                            <span className={headerYellowHighlight}>
+                                {` ${numberOfSupporters} `}
+                            </span>
+                            readers across Australia.
+                        </div>
+                    ) : (
+                        <div> Available for everyone, funded by readers</div>
+                    )}
                 </div>
                 <a
                     className={linkStyles}
@@ -225,7 +234,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                     >
-                      Contribute <ArrowRightIcon />
+                        Contribute <ArrowRightIcon />
                     </a>
                 ) : (
                     <a
@@ -238,6 +247,5 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 )}
             </div>
         </div>
-    )
-
+    );
 };

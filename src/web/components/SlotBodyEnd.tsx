@@ -10,7 +10,8 @@ import {
 } from '@guardian/automat-client';
 import {
     isRecurringContributor,
-    getLastOneOffContributionDate, shouldHideSupportMessaging,
+    getLastOneOffContributionDate,
+    shouldHideSupportMessaging,
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
@@ -92,7 +93,9 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             isSensitive: props.isSensitive,
             tags: props.tags,
-            showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn || false),
+            showSupportMessaging: !shouldHideSupportMessaging(
+                props.isSignedIn || false,
+            ),
             isRecurringContributor: isRecurringContributor(
                 props.isSignedIn || false,
             ),
@@ -155,12 +158,12 @@ const MemoisedInner = ({
             contributionsPayload,
             `${contributionsServiceUrl}/epic?dataOnly=true`,
         )
-            .then(response => {
+            .then((response) => {
                 dataPerf.end();
                 return checkForErrors(response);
             })
-            .then(response => response.json())
-            .then(json => {
+            .then((response) => response.json())
+            .then((json) => {
                 if (!json.data) {
                     return;
                 }
@@ -173,7 +176,7 @@ const MemoisedInner = ({
                 // eslint-disable-next-line no-restricted-globals
                 window
                     .guardianPolyfilledImport(module.url)
-                    .then(epicModule => {
+                    .then((epicModule) => {
                         modulePerf.end();
                         setEpicMeta(meta);
                         setEpicProps({
@@ -188,7 +191,7 @@ const MemoisedInner = ({
                         );
                     })
                     // eslint-disable-next-line no-console
-                    .catch(error => console.log(`epic - error is: ${error}`));
+                    .catch((error) => console.log(`epic - error is: ${error}`));
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

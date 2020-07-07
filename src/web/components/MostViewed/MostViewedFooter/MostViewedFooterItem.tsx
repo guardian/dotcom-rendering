@@ -19,8 +19,8 @@ const gridItem = (position: number) => css`
     /* Above leftCol, don't apply a top border on the 1st and 6th
        items to prevent double borders */
     border-top: ${position !== 1 &&
-        position !== 6 &&
-        `1px solid ${border.secondary}`};
+    position !== 6 &&
+    `1px solid ${border.secondary}`};
 
     /* The left border is set on the container */
     border-right: 1px solid ${border.secondary};

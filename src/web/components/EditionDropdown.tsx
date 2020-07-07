@@ -62,10 +62,10 @@ export const EditionDropdown: React.FC<{
     ];
 
     // Find active link, default to UK
-    const activeLink = links.find(link => link.isActive) || links[0];
+    const activeLink = links.find((link) => link.isActive) || links[0];
 
     // Remove the active link and add it back to the top of the list
-    const linksToDisplay = links.filter(link => !link.isActive);
+    const linksToDisplay = links.filter((link) => !link.isActive);
     linksToDisplay.unshift(activeLink);
 
     return (

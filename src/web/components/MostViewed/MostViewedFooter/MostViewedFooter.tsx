@@ -15,7 +15,7 @@ const MostViewedFooterData = React.lazy(() => {
     start();
     return import(
         /* webpackChunkName: "MostViewedFooterData" */ './MostViewedFooterData'
-    ).then(module => {
+    ).then((module) => {
         end();
         return { default: module.MostViewedFooterData };
     });

@@ -12,8 +12,8 @@ type Props = {
 // It does this so we can have separate links to both contributors
 const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
     const contributorTags = tags
-        .filter(t => t.type === 'Contributor')
-        .map(c => c.title);
+        .filter((t) => t.type === 'Contributor')
+        .map((c) => c.title);
     // The contributor tag title should exist inside the byline for this regex to work
     const regex = new RegExp(`(${contributorTags.join('|')})`);
 
@@ -22,7 +22,7 @@ const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 
 export const BylineLink = ({ byline, tags }: Props) => {
     const renderedTokens = bylineAsTokens(byline, tags).map((token, i) => {
-        const associatedTags = tags.filter(t => t.title === token);
+        const associatedTags = tags.filter((t) => t.title === token);
         if (associatedTags.length > 0) {
             return (
                 <ContributorLink

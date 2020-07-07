@@ -96,9 +96,9 @@ const Side = ({
 
                 border-top: 8px solid ${backgroundColour};
                 border-left: ${position === 'left' &&
-                    `8px solid ${backgroundColour}`};
+                `8px solid ${backgroundColour}`};
                 border-right: ${position === 'right' &&
-                    `8px solid ${backgroundColour}`};
+                `8px solid ${backgroundColour}`};
             `}
         >
             {onTarget}

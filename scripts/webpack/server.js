@@ -57,8 +57,11 @@ module.exports = () => ({
                     },
                     {
                         loader: 'ts-loader',
-                        options: { configFile: 'tsconfig.build.json', transpileOnly: true },
-                    }
+                        options: {
+                            configFile: 'tsconfig.build.json',
+                            transpileOnly: true,
+                        },
+                    },
                 ],
             },
             // TODO: find a way to remove
