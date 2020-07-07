@@ -145,7 +145,7 @@ function getVideoSlots(): VideoSlot[] {
 
 function videos(): void {
     const videoSlots = getVideoSlots();
-    if (videoSlots.length) {
+    if (videoSlots.length > 0) {
         videoClient.insertVideos(videoSlots);
     }
 }
