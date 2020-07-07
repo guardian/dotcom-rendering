@@ -81,7 +81,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
             </amp-geo>
             <amp-consent
                 layout="nodisplay"
-                id="the-adconsent-element"
+                id="consent"
                 style={{ background: 'none' }}
             >
                 <JsonScript
