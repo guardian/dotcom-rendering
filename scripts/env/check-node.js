@@ -9,10 +9,9 @@ const ensure = require('./ensure');
         const [semver] = await ensure('semver');
 
         const nodeVersion = process.version.match(/^v(\d+\.\d+\.\d+)/)[1];
-        const nvmrcVersion = (await readFile(
-            join(__dirname, '..', '..', '.nvmrc'),
-            'utf8',
-        )).trim();
+        const nvmrcVersion = (
+            await readFile(join(__dirname, '..', '..', '.nvmrc'), 'utf8')
+        ).trim();
 
         if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
             const { warn, prompt, log } = require('./log');

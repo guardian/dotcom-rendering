@@ -128,7 +128,7 @@ const listItemStyles = css`
 
 // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
 const leftColBorder = pillarMap(
-    pillar => css`
+    (pillar) => css`
         :after {
             border-left-color: ${pillarPalette[pillar].main};
         }
@@ -189,7 +189,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
                         </a>
                     </li>
                 )}
-                {subNavSections.links.map(link => (
+                {subNavSections.links.map((link) => (
                     <li key={link.url}>
                         <a
                             className={cx(linkStyle, {

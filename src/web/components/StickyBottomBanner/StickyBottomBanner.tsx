@@ -15,10 +15,7 @@ type Props = {
 
 const getEngagementBannerLastClosedAt = (): string | undefined => {
     const item = localStorage.getItem('gu.prefs.engagementBannerLastClosedAt');
-    return (
-        (item && JSON.parse(item).value) ||
-        undefined
-    );
+    return (item && JSON.parse(item).value) || undefined;
 };
 
 export const StickyBottomBanner = ({

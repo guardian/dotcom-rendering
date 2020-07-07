@@ -1,6 +1,7 @@
 // BRANDED LOGGING
 
-const capitalize = str => str.replace(/^([a-z])/, match => match.toUpperCase());
+const capitalize = (str) =>
+    str.replace(/^([a-z])/, (match) => match.toUpperCase());
 
 // we could use chalk, but this saves needing to pre-install it
 // if this is a first run

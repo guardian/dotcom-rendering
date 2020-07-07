@@ -271,14 +271,14 @@ export const MatchStats = ({ home, away }: Props) => (
                     <H4>{home.name}</H4>
                     <Lineup
                         players={home.players.filter(
-                            player => !player.substitute,
+                            (player) => !player.substitute,
                         )}
                     />
                     <br />
                     <H4>Substitutes</H4>
                     <Lineup
                         players={home.players.filter(
-                            player => player.substitute,
+                            (player) => player.substitute,
                         )}
                     />
                     <br />
@@ -287,12 +287,14 @@ export const MatchStats = ({ home, away }: Props) => (
             <GridItem area="away">
                 <H4>{away.name}</H4>
                 <Lineup
-                    players={away.players.filter(player => !player.substitute)}
+                    players={away.players.filter(
+                        (player) => !player.substitute,
+                    )}
                 />
                 <br />
                 <H4>Substitutes</H4>
                 <Lineup
-                    players={away.players.filter(player => player.substitute)}
+                    players={away.players.filter((player) => player.substitute)}
                 />
                 <br />
             </GridItem>

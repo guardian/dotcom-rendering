@@ -58,7 +58,7 @@ export const Contributor: React.FC<{
     }
 
     const onlyOneContributor: boolean =
-        tags.filter(tag => tag.type === 'Contributor').length === 1;
+        tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
     return (
         <address

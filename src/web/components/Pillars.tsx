@@ -191,7 +191,7 @@ const linkStyle = (display: Display) => css`
     }
 `;
 const pillarUnderline = pillarMap(
-    pillar => css`
+    (pillar) => css`
         :after {
             border-top: 4px solid ${pillarPalette[pillar].bright};
             left: 0;

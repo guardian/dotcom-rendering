@@ -18,7 +18,7 @@ const result = document({
 test('that all the required meta SEO fields exist', () => {
     const names = ['description', 'viewport'];
 
-    names.map(name =>
+    names.map((name) =>
         expect(result).toEqual(expect.stringContaining(`<meta name="${name}"`)),
     );
 });
@@ -33,7 +33,7 @@ test('that the most important opengraph meta tags exist', () => {
         'article:author',
     ];
 
-    names.map(name =>
+    names.map((name) =>
         expect(result).toEqual(
             expect.stringContaining(`<meta property="${name}"`),
         ),
@@ -43,7 +43,7 @@ test('that the most important opengraph meta tags exist', () => {
 test('that the most important twitter meta tags exist', () => {
     const names = ['card', 'image', 'site'];
 
-    names.map(name =>
+    names.map((name) =>
         expect(result).toEqual(
             expect.stringContaining(`<meta name="twitter:${name}"`),
         ),
@@ -53,7 +53,7 @@ test('that the most important twitter meta tags exist', () => {
 test('that all the required links exist', () => {
     const names = ['amphtml'];
 
-    names.map(name =>
+    names.map((name) =>
         expect(result).toEqual(
             expect.stringContaining(`<link rel="${name}" href="`),
         ),

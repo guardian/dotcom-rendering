@@ -65,7 +65,9 @@ const BylineMeta: React.SFC<{
     articleData: ArticleModel;
     pillar: Pillar;
 }> = ({ articleData, pillar }) => {
-    const contributorTag = articleData.tags.find(t => t.type === 'Contributor');
+    const contributorTag = articleData.tags.find(
+        (t) => t.type === 'Contributor',
+    );
     const bylineImageUrl = contributorTag
         ? contributorTag.bylineImageUrl
         : null;

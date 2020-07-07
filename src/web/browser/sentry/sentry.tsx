@@ -49,7 +49,7 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
         },
     });
 
-    Sentry.configureScope(scope => {
+    Sentry.configureScope((scope) => {
         scope.setTag('edition', editionLongForm);
         scope.setTag('contentType', contentType);
     });

@@ -74,7 +74,7 @@ export const Onward: React.FC<{
           ]
         : [];
 
-    const series = seriesTags.map(tag =>
+    const series = seriesTags.map((tag) =>
         container(`${ampBaseURL}/series-mf2/${tag.id}.json`, 'series'),
     );
 

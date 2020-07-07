@@ -12,7 +12,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             fill: ${pillarPalette[pillar].main};
         `,
@@ -121,7 +121,7 @@ export const SharingIcons: React.FC<{
 
     return (
         <ul className={cx(shareIconList, [className])}>
-            {shareList.map(shareListItem => {
+            {shareList.map((shareListItem) => {
                 const {
                     Icon,
                     id,

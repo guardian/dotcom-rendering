@@ -44,6 +44,29 @@ export const Article = () => {
 };
 Article.story = { name: 'Article | news' };
 
+export const OpinionArticle = () => {
+    return (
+        <Container>
+            <p
+                className={css`
+                    ${body.medium()};
+                `}
+            >
+                <DropCap designType="Article" letter="O" pillar="opinion" />
+                nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+OpinionArticle.story = { name: 'Article | opinion' };
+
 export const Feature = () => {
     return (
         <Container>
@@ -135,3 +158,49 @@ export const Comment = () => {
     );
 };
 Comment.story = { name: 'Comment | opinion' };
+
+export const CommentSport = () => {
+    return (
+        <Container>
+            <p
+                className={css`
+                    ${body.medium()};
+                `}
+            >
+                <DropCap designType="Comment" letter="O" pillar="sport" />
+                nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+CommentSport.story = { name: 'Comment | sport' };
+
+export const CommentCulture = () => {
+    return (
+        <Container>
+            <p
+                className={css`
+                    ${body.medium()};
+                `}
+            >
+                <DropCap designType="Comment" letter="O" pillar="culture" />
+                nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum.
+            </p>
+        </Container>
+    );
+};
+CommentCulture.story = { name: 'Comment | culture' };

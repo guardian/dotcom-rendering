@@ -132,7 +132,7 @@ export const SubMeta: React.FC<{
     isCommentable,
     guardianBaseURL,
 }) => {
-    const sectionListItems = sections.map(link => (
+    const sectionListItems = sections.map((link) => (
         <li className={itemStyle} key={link.url}>
             <a
                 className={sectionLinkStyle(pillar)}
@@ -143,7 +143,7 @@ export const SubMeta: React.FC<{
         </li>
     ));
 
-    const keywordListItems = keywords.map(link => (
+    const keywordListItems = keywords.map((link) => (
         <li className={itemStyle} key={link.url}>
             <a
                 className={linkStyle(pillar)}

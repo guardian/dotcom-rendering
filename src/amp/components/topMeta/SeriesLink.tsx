@@ -28,13 +28,13 @@ export const SeriesLink: React.SFC<{
     sectionUrl,
     pillar,
 }) => {
-    const tag = tags.find(t => t.type === 'Blog' || t.type === 'Series');
+    const tag = tags.find((t) => t.type === 'Blog' || t.type === 'Series');
 
     if (!tag && !fallbackToSection) {
         return null;
     }
 
-    if (!tag && (sectionLabel && sectionUrl)) {
+    if (!tag && sectionLabel && sectionUrl) {
         return (
             <a
                 className={seriesStyle(pillar)}

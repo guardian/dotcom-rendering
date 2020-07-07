@@ -8,19 +8,19 @@ const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
     'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
 
-describe('Interactivity', function() {
-    describe('Verify elements have been hydrated', function() {
-        it('should open the edition dropdown menu when clicked', function() {
+describe('Interactivity', function () {
+    describe('Verify elements have been hydrated', function () {
+        it('should open the edition dropdown menu when clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=dropdown-options]').should('not.be.visible');
             cy.get('[data-cy=dropdown-button]').click();
             cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
-        it('should display the share count for an article', function() {
+        it('should display the share count for an article', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=share-counts]').should('exist');
         });
-        it('should display all the rich links for an article', function() {
+        it('should display all the rich links for an article', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.scrollTo('bottom', { duration: 300 });
             cy.get('[data-component=rich-link]')
@@ -31,10 +31,10 @@ describe('Interactivity', function() {
                 // which case this check should be updated
                 .should('be', 2);
         });
-        describe('When most viewed is mocked', function() {
+        describe('When most viewed is mocked', function () {
             before(getPolyfill);
             beforeEach(mockApi);
-            it('should change the list of most viewed items when a tab is clicked', function() {
+            it('should change the list of most viewed items when a tab is clicked', function () {
                 cy.visit(`/Article?url=${articleUrl}`, fetchPolyfill);
                 cy.scrollTo('bottom', { duration: 300 });
                 cy.contains('Lifestyle');
@@ -46,7 +46,7 @@ describe('Interactivity', function() {
                 cy.get('[data-cy=tab-body-1]').should('be.visible');
             });
         });
-        it('should render the reader revenue links in the header', function() {
+        it('should render the reader revenue links in the header', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.scrollTo('bottom', { duration: 300 });
             cy.get('header')
@@ -55,8 +55,8 @@ describe('Interactivity', function() {
         });
     });
 
-    describe('Navigating the Pillar menu', function() {
-        it('should expand and close the desktop pillar menu when More is clicked', function() {
+    describe('Navigating the Pillar menu', function () {
+        it('should expand and close the desktop pillar menu when More is clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
@@ -77,8 +77,8 @@ describe('Interactivity', function() {
             // See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
         });
 
-        describe('On mobile', function() {
-            it('should expand the mobile pillar menu when the VeggieBurger is clicked', function() {
+        describe('On mobile', function () {
+            it('should expand the mobile pillar menu when the VeggieBurger is clicked', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.contains('Crosswords').should('not.be.visible');
@@ -92,59 +92,47 @@ describe('Interactivity', function() {
                 cy.focused().should('have.attr', 'data-cy', 'veggie-burger');
             });
 
-            it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function() {
+            it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
-                cy.get('[data-cy=veggie-burger]')
-                    .focus()
-                    .tab();
-                cy.get('[data-cy=sub-nav] a')
-                    .first()
-                    .should('have.focus');
+                cy.get('[data-cy=veggie-burger]').focus().tab();
+                cy.get('[data-cy=sub-nav] a').first().should('have.focus');
             });
 
-            it('should immediately focus on the News menu item when the menu first opens', function() {
+            it('should immediately focus on the News menu item when the menu first opens', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').click();
                 cy.get('[data-cy=column-collapse-News]').should('have.focus');
             });
 
-            it('should transfer focus to sub menu items when tabbing from section header', function() {
+            it('should transfer focus to sub menu items when tabbing from section header', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').click();
-                cy.focused()
-                    .type('{enter}')
-                    .tab();
+                cy.focused().type('{enter}').tab();
                 // get the first column (news column)
                 cy.get('[data-cy="nav-menu-columns"] li')
                     .first()
                     .within(() => {
                         // get the first element in that column
-                        cy.get('ul > li > a')
-                            .first()
-                            .should('have.focus');
+                        cy.get('ul > li > a').first().should('have.focus');
                     });
             });
 
-            it('should let reader traverse section titles using keyboard', function() {
+            it('should let reader traverse section titles using keyboard', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=veggie-burger]').type('{enter}');
                 // Close the news menu
-                cy.focused()
-                    .type('{enter}')
-                    .tab();
+                cy.focused().type('{enter}').tab();
                 cy.focused().should(
                     'have.attr',
                     'data-cy',
                     'column-collapse-Opinion',
                 );
                 // Open the opinion menu
-                cy.focused()
-                    .type('{enter}')
-                    .tab();
+                cy.focused().type('{enter}').tab();
                 cy.focused().should(
                     'have.attr',
                     'data-cy',

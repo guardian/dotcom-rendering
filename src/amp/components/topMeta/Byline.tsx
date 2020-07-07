@@ -12,11 +12,11 @@ export const Byline: React.FC<{
         return null;
     }
 
-    const contributorTags = tags.filter(tag => tag.type === 'Contributor');
+    const contributorTags = tags.filter((tag) => tag.type === 'Contributor');
     const tokens = bylineTokens(byline, contributorTags);
 
-    const linkedByline = tokens.map(token => {
-        const matchedTag = contributorTags.find(tag => tag.title === token);
+    const linkedByline = tokens.map((token) => {
+        const matchedTag = contributorTags.find((tag) => tag.title === token);
 
         if (matchedTag) {
             return (

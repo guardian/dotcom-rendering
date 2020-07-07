@@ -118,7 +118,7 @@ const realTimeConfig = (
         urls: [
             usePrebid ? prebidURL : '',
             usePermutive ? permutiveURL : '',
-        ].filter(url => url),
+        ].filter((url) => url),
     };
 
     return JSON.stringify(data);

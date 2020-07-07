@@ -25,7 +25,7 @@ import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import {incrementAlreadyVisited} from "@root/src/web/lib/alreadyVisited";
+import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -35,7 +35,7 @@ const MostViewedRightWrapper = React.lazy(() => {
     start();
     return import(
         /* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
-    ).then(module => {
+    ).then((module) => {
         end();
         return { default: module.MostViewedRightWrapper };
     });
@@ -45,7 +45,7 @@ const OnwardsUpper = React.lazy(() => {
     start();
     return import(
         /* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
-    ).then(module => {
+    ).then((module) => {
         end();
         return { default: module.OnwardsUpper };
     });
@@ -55,7 +55,7 @@ const OnwardsLower = React.lazy(() => {
     start();
     return import(
         /* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
-    ).then(module => {
+    ).then((module) => {
         end();
         return { default: module.OnwardsLower };
     });
@@ -65,7 +65,7 @@ const GetMatchStats = React.lazy(() => {
     start();
     return import(
         /* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
-    ).then(module => {
+    ).then((module) => {
         end();
         return { default: module.GetMatchStats };
     });
@@ -174,7 +174,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         if (hashCommentId) {
             getCommentContext(CAPI.config.discussionApiUrl, hashCommentId).then(
-                context => {
+                (context) => {
                     setCommentPage(context.page);
                     setCommentPageSize(context.pageSize);
                     setCommentOrderBy(context.orderBy);
