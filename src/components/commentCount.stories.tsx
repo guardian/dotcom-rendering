@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React, { FC } from 'react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 
 import CommentCount from './commentCount';
 import { Pillar, Design, Display } from 'format';
@@ -13,7 +13,7 @@ import { some } from 'types/option';
 
 const Default: FC = () =>
     <CommentCount
-        count={some(1234)}
+        count={some(number('Count', 1234, { min: 0 }))}
         pillar={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
