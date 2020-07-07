@@ -75,6 +75,7 @@ module.exports = {
         'react/sort-comp': [0],
         'react/state-in-constructor': [0],
         'react/no-danger': [0],
+        'react/jsx-curly-newline': [0],
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
     },
