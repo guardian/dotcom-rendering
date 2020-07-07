@@ -26,9 +26,12 @@ const InteractiveAtomStyles = (pillarStyles: PillarStyles): SerializedStyles => 
 `;
 const atomCss = `
     ${pageFonts} 
-    body {
-        background: white !important;
-        padding: ${remSpace[2]} !important;
+    
+    @media (prefers-color-scheme: dark) {
+        body {
+            background: white !important;
+            padding: ${remSpace[2]} !important;
+        } 
     }`
 const atomScript = `
     function resize() {

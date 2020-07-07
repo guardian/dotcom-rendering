@@ -26,7 +26,7 @@ import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
 import { remSpace, background } from '@guardian/src-foundations';
-import { atomCss, atomScript } from "../components/atoms/interactiveAtom";
+import { atomCss, atomScript } from "components/atoms/interactiveAtom";
 
 
 // ----- Setup ----- //
