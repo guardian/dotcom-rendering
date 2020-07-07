@@ -87,14 +87,29 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 <JsonScript
                     o={{
                         consents: {
-                            adconsent: {
-                                promptIfUnknownForGeoGroup: 'eea',
-                                promptUI: 'adconsent-ui',
+                            sourcepoint: {
+                                consentRequired: 'remote',
+                                checkConsentHref:
+                                    'https://wrapper-api.sp-prod.net/tcfv2/v1/amp',
+                                promptUISrc: 'https://amp.sp-prod.net/',
+                                postPromptUI: 'consent-ui',
+                                clientConfig: {
+                                    accountId: 1257,
+                                    propertyHref: 'https://theguardian.amp',
+                                    propertyId: 8791,
+                                    privacyManagerId: 145885,
+                                    isTCFV2: true,
+                                    pmTab: 'purposes',
+                                    stageCampaign: false,
+                                    targetingParams: {
+                                        color: 'red',
+                                    },
+                                },
                             },
                         },
                         policy: {
                             default: {
-                                waitFor: { adconsent: [] },
+                                waitFor: { sourcepoint: [] },
                                 timeout: {
                                     seconds: 5,
                                     fallbackAction: 'reject',
