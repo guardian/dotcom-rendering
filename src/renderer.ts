@@ -5,7 +5,7 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { text as textColour, neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from 'types/option';
-import { basePx, icons, darkModeCss} from 'styles';
+import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { ElementKind, BodyElement } from 'bodyElement';
