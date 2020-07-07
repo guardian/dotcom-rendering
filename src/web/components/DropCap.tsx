@@ -24,7 +24,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
     /*
         The reason pillar type 'opinion' is forced to opinion[400] is that
         opinion.dark is much darker so it is forced to keep with similar colour
-        tones (that's my understanding anyway!)
+        tones used on the site(that's my understanding anyway!)
     */
     switch (designType) {
         case 'GuardianView':
