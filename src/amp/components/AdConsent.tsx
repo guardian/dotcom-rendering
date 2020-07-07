@@ -118,45 +118,10 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         },
                     }}
                 />
-                <div id="adconsent-ui" className={consentUIStyle}>
-                    <div className={containerDivStyle}>
-                        <h2 className={h2Style}>Your privacy</h2>
-                        <p className={pStyle}>
-                            We use cookies to improve your experience on our
-                            site and to show you personalised advertising.
-                        </p>
-                        <p className={pStyle}>
-                            To find out more, read our{' '}
-                            <a
-                                className={aStyle}
-                                href="https://www.theguardian.com/help/privacy-policy"
-                            >
-                                privacy policy
-                            </a>{' '}
-                            and{' '}
-                            <a
-                                className={aStyle}
-                                href="https://www.theguardian.com/info/cookies"
-                            >
-                                cookie policy
-                            </a>
-                            .
-                        </p>
-                    </div>
-                    <div className={cx(actionsStyle, containerDivStyle)}>
-                        <button
-                            on="tap:the-adconsent-element.accept"
-                            className={cx(buttonStyle, acceptStyle)}
-                        >
-                            <Tick /> I&apos;m OK with that
-                        </button>
-                        <button
-                            on="tap:the-adconsent-element.reject"
-                            className={cx(buttonStyle, rejectStyle)}
-                        >
-                            I do not want to see personalised ads
-                        </button>
-                    </div>
+                <div id="consent-ui" className={consentUIStyle}>
+                    <button on="tap:consent.prompt(consent=SourcePoint)">
+                        Manage privacy settings
+                    </button>
                 </div>
             </amp-consent>
         </>
