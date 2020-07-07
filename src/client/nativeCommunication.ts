@@ -132,7 +132,7 @@ function getVideoSlots(): VideoSlot[] {
         const durationString = elem.getAttribute('data-duration');
         const rect = getRect(slotPosition);
         if (videoId && posterUrl) {
-            if (durationString) {
+            if (durationString && !isNaN(parseInt(durationString))) {
                 const duration = parseInt(durationString);
                 return [ ...slots, new VideoSlot({ rect, videoId, posterUrl, duration }) ];
             } else {
