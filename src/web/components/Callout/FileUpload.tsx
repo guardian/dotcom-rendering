@@ -38,8 +38,6 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
                     [formField.id]: stringifiedFile,
                 });
             } catch (e) {
-                console.log('dfsiuhfdsuihfdsiuyghdf');
-                console.log(e);
                 setError(e);
             }
         }
