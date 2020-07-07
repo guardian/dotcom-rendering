@@ -34,6 +34,7 @@ interface Fields extends Format {
     tags: Tag[];
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
+    commentCount: Option<number>;
 }
 
 interface Liveblog extends Fields {
@@ -132,7 +133,7 @@ function getDisplay(content: Content): Display {
 }
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
-    const { content, branding } = request;
+    const { content, branding, commentCount } = request;
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
@@ -147,7 +148,8 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
-        branding: fromNullable(branding)
+        branding: fromNullable(branding),
+        commentCount: fromNullable(commentCount)
     }
 }
 
