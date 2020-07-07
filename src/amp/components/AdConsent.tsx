@@ -14,31 +14,6 @@ const consentUIStyle = css`
     overflow-x: hidden;
 `;
 
-const containerDivStyle = css`
-    margin: 16px;
-`;
-
-const h2Style = css`
-    margin-bottom: 16px;
-    font-size: 24px;
-    font-weight: bold;
-`;
-
-const pStyle = css`
-    margin-bottom: 8px;
-`;
-
-const aStyle = css`
-    color: ${palette.neutral[97]};
-    &:hover {
-        text-decoration: none;
-    }
-`;
-
-const actionsStyle = css`
-    text-align: right;
-`;
-
 const buttonStyle = css`
     font: inherit;
     border: 0;
@@ -47,19 +22,6 @@ const buttonStyle = css`
     display: block;
     width: 100%;
     margin-top: 16px;
-`;
-
-const acceptStyle = css`
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: ${palette.brandYellow.main};
-    color: ${palette.neutral[7]};
-    padding: 5px 20px;
-    font-weight: bold;
-`;
-
-const rejectStyle = css`
-    text-decoration: underline;
 `;
 
 export const AdConsent: React.FC<{}> = ({}) => {
@@ -121,7 +83,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 <div id="consent-ui" className={consentUIStyle}>
                     <button on="tap:consent.prompt(consent=SourcePoint)">
                         Manage privacy settings
-                    </button>
+                    </button className={buttonStyle}>
                 </div>
             </amp-consent>
         </>
