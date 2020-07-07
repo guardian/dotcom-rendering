@@ -76,6 +76,7 @@ interface MediaAtom {
     posterUrl: string;
     videoId: string;
     duration: Option<number>;
+    caption: Option<DocumentFragment>;
 }
 
 type BodyElement = {
@@ -140,9 +141,10 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem, caption: map(serialiseFragment)(elem.caption) };
         case ElementKind.Tweet:
             return { ...elem, content: serialiseNodes(elem.content) };
+        case ElementKind.MediaAtom:
+            return { ...elem, caption: map(serialiseFragment)(elem.caption) };
         case ElementKind.InteractiveAtom:
         case ElementKind.ExplainerAtom:
-        case ElementKind.MediaAtom:
         case ElementKind.Embed:
             return { ...elem };
         default:
@@ -339,7 +341,7 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return err('No atom data returned by capi')
             }
 
-            return parseAtom(element, atoms);
+            return parseAtom(element, atoms, context.docParser);
         }
 
         default:

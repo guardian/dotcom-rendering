@@ -580,7 +580,7 @@ const render = (format: Format, excludeStyles = false) =>
         }
 
         case ElementKind.MediaAtom: {
-            const { posterUrl, videoId, duration } = element;
+            const { posterUrl, videoId, duration, caption } = element;
             const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
@@ -596,7 +596,8 @@ const render = (format: Format, excludeStyles = false) =>
                 'data-duration': duration,
                 css: styles
             }
-            return styledH('div', attributes)
+            const figcaption = h(FigCaption, { format, caption: caption, credit: none });
+            return styledH('div', attributes, figcaption)
         }
     }
 };
