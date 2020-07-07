@@ -67,7 +67,7 @@ const makeWindowGuardianConfig = (
 };
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-    // For some elements it is important key thier index in the `elements` array
+    // For some elements it is important to keep thier index in the `elements` array
     const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
             if (
