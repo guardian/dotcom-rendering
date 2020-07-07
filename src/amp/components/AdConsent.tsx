@@ -69,7 +69,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 <JsonScript
                     o={{
                         ISOCountryGroups: {
-                            eea: ['preset-eea'],
+                            eea: ['preset-eea', 'unknown'],
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
                         },
