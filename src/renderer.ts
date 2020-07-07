@@ -5,7 +5,7 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { text as textColour, neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from 'types/option';
-import { basePx, icons, darkModeCss, pageFonts } from 'styles';
+import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { ElementKind, BodyElement } from 'bodyElement';
@@ -20,7 +20,7 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
-import InteractiveAtom from 'components/atoms/interactiveAtom';
+import InteractiveAtom, { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe2, pipe } from 'lib';
@@ -551,25 +551,13 @@ const render = (format: Format, excludeStyles = false) =>
                         <head>
                             <meta charset="utf-8">
                             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                            <style>
-                                ${pageFonts}
-                                ${styles}
-                                body {
-                                    background: white !important;
-                                    padding: ${remSpace[2]} !important;
-                                }
-                            </style>
+                            <style>${styles}</style>
+                            <style>${atomCss}</style>
                         </head>
                         <body>
                             ${html}
-                            <script>
-                                ${withDefault('')(js)}
-                                function resize() {
-                                    window.frameElement.height = document.body.offsetHeight;
-                                }
-                                window.addEventListener('resize', resize);
-                                resize();
-                            </script>
+                            <script>${withDefault('')(js)}</script>
+                            <script>${atomScript}</script>
                         </body>
                     </html>
                 `;

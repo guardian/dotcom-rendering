@@ -83,4 +83,5 @@ function csp(item: Item, additionalAssets: Assets, twitter: boolean): string {
 
 export {
     csp,
+    assetHashes,
 };
