@@ -52,7 +52,7 @@ function getAdSlots(): AdSlot[] {
 
 function insertAds(): void {
     const adSlots = getAdSlots();
-    if (adSlots.length) {
+    if (adSlots.length > 0) {
         commercialClient.insertAdverts(adSlots);
     }
 }
