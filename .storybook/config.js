@@ -1,4 +1,4 @@
-import isChromatic from 'storybook-chromatic/isChromatic';
+import isChromatic from 'chromatic/isChromatic';
 
 import fetchMock from 'fetch-mock';
 import { configure, addParameters } from '@storybook/react';
