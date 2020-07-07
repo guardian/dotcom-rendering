@@ -138,7 +138,8 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                     targetingParams: {
                         "co": "Jane Smith",
                         "k": "potato,tomato,avocado"
-                    }
+                    },
+                    commentCount: 30
                 };
                 const { html, clientScript } = page(
                     imageSalt,

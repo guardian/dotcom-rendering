@@ -19,14 +19,14 @@ import { includesTweets } from 'capi';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi, Item } from 'item';
+import { fromCapi, Item, getFormat } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
-import { pageFonts, darkModeCss } from 'styles';
+import { pageFonts } from 'styles';
 import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
-import { remSpace } from '@guardian/src-foundations';
-import {atomCss, atomScript} from "../components/atoms/interactiveAtom";
+import { remSpace, background } from '@guardian/src-foundations';
+import { atomCss, atomScript } from "../components/atoms/interactiveAtom";
 
 
 // ----- Setup ----- //
@@ -147,19 +147,21 @@ interface Page {
     clientScript: Option<string>;
 }
 
-const styles = `
+const styles = (format: Format): string => `
     ${pageFonts}
 
     body {
-        background: white;
+        background: ${format.design === Design.Media ? background.inverse : 'white'};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
         line-height: 1.5;
+    }
 
-        ${darkModeCss`
+    @media (prefers-color-scheme: dark) {
+        body {
             background: transparent;
-        `}
+        }
     }
 `;
 
@@ -170,17 +172,19 @@ function page(
 ): Page {
     const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
     const shouldHideAds = renderingRequest.content.fields?.shouldHideAdverts ?? false;
-    const hasTwitter = includesTweets(renderingRequest.content);
+    const hasTweets = includesTweets(renderingRequest.content);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const { html: body, css, ids } = compose(extractCritical, renderToString)(
         <CacheProvider value={cache}>
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );
+
     const cspString = csp(item, {
         scripts: [atomScript],
-        styles: [styles, css, atomCss]
-    }, hasTwitter);
+        styles: [styles(getFormat(item)), css, atomCss]
+    }, hasTweets);
+
     const html = `
         <html lang="en">
             <head>
@@ -189,7 +193,7 @@ function page(
                     http-equiv="Content-Security-Policy"
                     content="${cspString}"
                 />
-                <style>${styles}</style>
+                <style>${styles(getFormat(item))}</style>
                 <style data-emotion-css="${ids.join(' ')}">${css}</style>
                 <script id="targeting-params" type="application/json">
                     ${JSON.stringify(renderingRequest.targetingParams)}
@@ -197,7 +201,7 @@ function page(
             </head>
             <body>
                 ${body}
-                ${renderToString(<Scripts clientScript={clientScript} twitter={hasTwitter} />)}
+                ${renderToString(<Scripts clientScript={clientScript} twitter={hasTweets} />)}
             </body>
         </html>
     `;

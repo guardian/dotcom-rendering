@@ -5,15 +5,16 @@ import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { border } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
-
+import { Option, map, withDefault } from 'types/option';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
+import { pipe2 } from 'lib';
 
 
 // ----- Component ----- //
 
 interface Props extends Format {
-    count: number;
+    count: Option<number>;
     commentable: boolean;
 }
 
@@ -50,15 +51,19 @@ const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
         return null;
     }
 
-    return (
-        <button css={getStyles(format)}>
-            <svg css={getBubbleStyles(format)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 8">
-                <rect x="0" y="0" width="9" height="6" rx="1.2" />
-                <polygon points="2,6 2,8 2.5,8 4,6" />
-            </svg>
-            { count.toLocaleString() }
-        </button>
-    );
+    return pipe2(
+        count,
+        map((count: number) =>
+            <button css={getStyles(format)}>
+                <svg css={getBubbleStyles(format)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 8">
+                    <rect x="0" y="0" width="9" height="6" rx="1.2" />
+                    <polygon points="2,6 2,8 2.5,8 4,6" />
+                </svg>
+                { count.toLocaleString() }
+            </button>
+        ),
+        withDefault(<></>)
+    )
 }
 
 // ----- Exports ----- //
