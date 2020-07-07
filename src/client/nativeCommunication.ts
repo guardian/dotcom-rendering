@@ -129,10 +129,15 @@ function getVideoSlots(): VideoSlot[] {
         const slotPosition = elem.getBoundingClientRect();
         const videoId =  elem.getAttribute('data-videoId');
         const posterUrl = elem.getAttribute('data-posterUrl');
-        const duration = parseInt(elem.getAttribute('data-duration') ?? '0');
+        const durationString = elem.getAttribute('data-duration');
         const rect = getRect(slotPosition);
         if (videoId && posterUrl) {
-            slots.push(new VideoSlot({ rect, videoId, posterUrl, duration }))
+            if (durationString) {
+                const duration = parseInt(durationString);
+                slots.push(new VideoSlot({ rect, videoId, posterUrl, duration }))
+            } else {
+                slots.push(new VideoSlot({ rect, videoId, posterUrl }))
+            }
         }
         return slots;
     }, []);
