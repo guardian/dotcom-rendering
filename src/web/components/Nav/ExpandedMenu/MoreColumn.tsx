@@ -163,7 +163,7 @@ export const MoreColumn: React.FC<{
     const moreColumn = {
         ...column,
         children: [
-            ...brandExtensions.map(brandExtension => ({
+            ...brandExtensions.map((brandExtension) => ({
                 ...brandExtension,
                 mobileOnly: true,
             })),
@@ -182,7 +182,7 @@ export const MoreColumn: React.FC<{
                 role="menu"
                 id={subNavId}
             >
-                {(moreColumn.children || []).map(link => (
+                {(moreColumn.children || []).map((link) => (
                     <li
                         key={link.title.toLowerCase()}
                         className={cx(mainMenuLinkStyle, {

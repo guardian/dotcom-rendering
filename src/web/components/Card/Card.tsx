@@ -210,9 +210,7 @@ export const Card = ({
                                                 }
                                                 showClock={showClock}
                                             />
-                                        ) : (
-                                            undefined
-                                        )
+                                        ) : undefined
                                     }
                                     mediaMeta={
                                         designType === 'Media' && mediaType ? (
@@ -221,9 +219,7 @@ export const Card = ({
                                                 mediaType={mediaType}
                                                 mediaDuration={mediaDuration}
                                             />
-                                        ) : (
-                                            undefined
-                                        )
+                                        ) : undefined
                                     }
                                     commentCount={
                                         showCommentCount &&
@@ -235,9 +231,7 @@ export const Card = ({
                                                 long={longCount}
                                                 short={shortCount}
                                             />
-                                        ) : (
-                                            undefined
-                                        )
+                                        ) : undefined
                                     }
                                 />
                             </div>

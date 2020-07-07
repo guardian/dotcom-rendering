@@ -20,7 +20,7 @@ const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
 // We need to distinguish files compiled by @babel/preset-env with the prefix "legacy"
-const generateName = isLegacyJS => {
+const generateName = (isLegacyJS) => {
     const legacyString = isLegacyJS ? '.legacy' : '';
     const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
     return `[name]${legacyString}${chunkhashString}.js`;
@@ -30,7 +30,7 @@ const generateName = isLegacyJS => {
 const manifestData = {};
 const legacyManifestData = {};
 
-const scriptPath = package =>
+const scriptPath = (package) =>
     [
         `./src/web/browser/${package}/init.ts`,
         DEV &&
@@ -99,8 +99,11 @@ module.exports = ({ isLegacyJS }) => ({
                     },
                     {
                         loader: 'ts-loader',
-                        options: { configFile: 'tsconfig.build.json', transpileOnly: true },
-                    }
+                        options: {
+                            configFile: 'tsconfig.build.json',
+                            transpileOnly: true,
+                        },
+                    },
                 ],
             },
             {

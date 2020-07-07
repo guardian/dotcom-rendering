@@ -59,7 +59,7 @@ export const Blocks: React.SFC<{
     shouldHideAds,
 }) => {
     // TODO add last updated for blocks to show here
-    const liveBlogBlocks = blocks.map(block => {
+    const liveBlogBlocks = blocks.map((block) => {
         return (
             <div
                 id={block.id}

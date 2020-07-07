@@ -11,7 +11,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             fill: ${pillarPalette[pillar].main};
         `,
@@ -106,7 +106,7 @@ export const ShareIcons: React.FC<{
 
     return (
         <ul className={className}>
-            {shareList.map(shareListItem => {
+            {shareList.map((shareListItem) => {
                 const { Icon, id, url, userMessage } = shareListItem;
 
                 return (

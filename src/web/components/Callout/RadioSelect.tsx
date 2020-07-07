@@ -33,7 +33,8 @@ export const RadioSelect = ({
                             setFormData({
                                 ...formData,
                                 [formField.id]: option.value,
-                            })}
+                            })
+                        }
                     />
                 );
             })}

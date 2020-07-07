@@ -11,7 +11,7 @@ const standfirstStyles = css`
 `;
 
 const standfirstLinks = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             a {
                 color: ${pillarPalette[pillar].dark};

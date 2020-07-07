@@ -6,7 +6,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
 const pillarColours = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             color: ${pillarPalette[pillar].main};
         `,

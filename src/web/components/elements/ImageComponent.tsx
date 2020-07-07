@@ -75,7 +75,7 @@ const makeSources = (
     // hidpi images.
     // Until that happens, here we're manually injecting (inadequate) <source> elements for
     // those images, albeit without the necessary query params for hidpi images :(
-    widths.forEach(width => {
+    widths.forEach((width) => {
         sources.push(makeSource(true, width, bestFor(width, inlineSrcSets)));
         sources.push(makeSource(false, width, bestFor(width, inlineSrcSets)));
     });
@@ -83,7 +83,7 @@ const makeSources = (
     return sources;
 };
 
-const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
+const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
 
     return bestFor(300, inlineSrcSets).src;

@@ -47,7 +47,7 @@ const go = () => {
 
     app.use(
         webpackHotMiddleware(
-            compiler.compilers.find(config => config.name === 'browser'),
+            compiler.compilers.find((config) => config.name === 'browser'),
             {
                 // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
                 log: () => {},
@@ -60,7 +60,7 @@ const go = () => {
         async (req, res, next) => {
             try {
                 const url = buildUrlFromQueryParam(req);
-                const { html, ...config } = await fetch(url).then(article =>
+                const { html, ...config } = await fetch(url).then((article) =>
                     article.json(),
                 );
 
@@ -81,9 +81,9 @@ const go = () => {
         async (req, res, next) => {
             try {
                 const url = buildUrlFromQueryParam(req);
-                const { html, ...config } = await fetch(ampifyUrl(url)).then(
-                    article => article.json(),
-                );
+                const { html, ...config } = await fetch(
+                    ampifyUrl(url),
+                ).then((article) => article.json());
                 req.body = config;
                 next();
             } catch (error) {

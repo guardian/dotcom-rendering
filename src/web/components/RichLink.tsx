@@ -83,26 +83,26 @@ const neutralBackground = css`
     }
 `;
 
-const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
+const richLinkPillarColour: (pillar: Pillar) => colour = (pillar) => {
     if (pillar) {
         return pillarPalette[pillar].main;
     }
     return pillarPalette.news.main;
 };
 
-const pillarBackground: (pillar: Pillar) => colour = pillar => {
+const pillarBackground: (pillar: Pillar) => colour = (pillar) => {
     return css`
         background-color: ${richLinkPillarColour(pillar)};
     `;
 };
 
-const textColour: (pillar: Pillar) => colour = pillar => {
+const textColour: (pillar: Pillar) => colour = (pillar) => {
     return css`
         color: ${richLinkPillarColour(pillar)};
     `;
 };
 
-const richLinkTopBorder: (pillar: Pillar) => colour = pillar => {
+const richLinkTopBorder: (pillar: Pillar) => colour = (pillar) => {
     return css`
         border-top: 1px;
         border-top-style: solid;
@@ -134,7 +134,7 @@ const richLinkTitle = css`
     }
 `;
 
-const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
+const richLinkReadMore: (pillar: Pillar) => colour = (pillar) => {
     return css`
         fill: ${richLinkPillarColour(pillar)};
         color: ${richLinkPillarColour(pillar)};
@@ -194,7 +194,7 @@ const starWrapper = css`
     display: inline-block;
 `;
 
-const readMoreText: (contentType: string) => string = contentType => {
+const readMoreText: (contentType: string) => string = (contentType) => {
     switch (contentType) {
         case 'audio':
             return 'Listen';
@@ -207,8 +207,8 @@ const readMoreText: (contentType: string) => string = contentType => {
     }
 };
 
-const getMainContributor: (tags: TagType[]) => string = tags => {
-    const contributorTags = tags.filter(t => t.type === 'Contributor');
+const getMainContributor: (tags: TagType[]) => string = (tags) => {
+    const contributorTags = tags.filter((t) => t.type === 'Contributor');
     return contributorTags.length > 0 ? contributorTags[0].title : '';
 };
 
@@ -236,7 +236,7 @@ export const RichLink = ({
     const imageCardStyles = ['news', 'letters', 'media', 'feature'];
     const showImage = thumbnailUrl && imageCardStyles.includes(cardStyle);
     const isPaidContent = tags
-        ? tags.filter(t => t.id === 'tone/advertisement-features').length > 0
+        ? tags.filter((t) => t.id === 'tone/advertisement-features').length > 0
         : false;
     const isOpinion = cardStyle === 'comment';
     const mainContributor = getMainContributor(tags);

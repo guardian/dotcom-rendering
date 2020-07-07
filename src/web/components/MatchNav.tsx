@@ -95,7 +95,7 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
             margin-bottom: ${space[3]}px;
         `}
     >
-        {scorers.map(player => (
+        {scorers.map((player) => (
             <li
                 className={css`
                     ${textSans.small()}

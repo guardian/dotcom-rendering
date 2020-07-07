@@ -46,7 +46,7 @@ const yellowBackground = css`
 `;
 
 const pillarColours = pillarMap(
-    pillar =>
+    (pillar) =>
         css`
             color: ${pillarPalette[pillar].main};
         `,
@@ -111,7 +111,7 @@ export const SeriesSectionLink = ({
 }: Props) => {
     // If we have a tag, use it to show 2 section titles
     const tag = tags.find(
-        thisTag =>
+        (thisTag) =>
             thisTag.type === 'Blog' ||
             thisTag.type === 'Series' ||
             thisTag.title === 'The Observer',

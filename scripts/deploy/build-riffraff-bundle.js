@@ -98,7 +98,7 @@ const createBuildConfig = () => {
 Promise.all([copyCfn(), copyStatic(), copyDist(), copyRiffRaff()])
     .then(zipBundle)
     .then(createBuildConfig)
-    .catch(err => {
+    .catch((err) => {
         warn(err.stack);
         process.exit(1);
     });

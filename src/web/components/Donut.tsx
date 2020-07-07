@@ -35,7 +35,7 @@ const labelStyles = css`
 `;
 
 const withoutZeroSections = (sections: Section[]) =>
-    sections.filter(section => section.value !== 0);
+    sections.filter((section) => section.value !== 0);
 
 export const Donut = ({
     sections,
@@ -56,7 +56,7 @@ export const Donut = ({
     const cutoutRadius = radius * (percentCutout / 100);
 
     const totalValue = sections
-        .map(section => section.value)
+        .map((section) => section.value)
         .reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
     const halfPI = Math.PI / 2;
@@ -78,7 +78,7 @@ export const Donut = ({
     let a;
     let startRadius = -halfPI;
 
-    withoutZeroSections(sections).forEach(section => {
+    withoutZeroSections(sections).forEach((section) => {
         segmentAngle = (section.value / totalValue) * doublePI;
 
         endRadius = startRadius + segmentAngle;
@@ -143,9 +143,9 @@ export const Donut = ({
             ].join(' '),
             label: section.label,
             value: section.value,
-            transform: `translate(${Math.cos(a) * r + center.x}, ${Math.sin(a) *
-                r +
-                center.y})`,
+            transform: `translate(${Math.cos(a) * r + center.x}, ${
+                Math.sin(a) * r + center.y
+            })`,
             color: section.color,
         });
 
@@ -159,7 +159,7 @@ export const Donut = ({
             height={height}
             viewBox={`0 0 ${width} ${height}`}
         >
-            {segments.map(segment => (
+            {segments.map((segment) => (
                 <g>
                     <path d={segment.d} fill={segment.color} />
                     <text transform={segment.transform}>

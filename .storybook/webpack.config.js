@@ -25,7 +25,7 @@ module.exports = ({ config }) => {
 
     // modify storybook's file-loader rule to avoid conflicts with our svg
     // https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
-    const fileLoaderRule = rules.find(rule => rule.test.test('.svg'));
+    const fileLoaderRule = rules.find((rule) => rule.test.test('.svg'));
     fileLoaderRule.exclude = /\.svg$/;
     rules.push({
         test: /\.svg$/,

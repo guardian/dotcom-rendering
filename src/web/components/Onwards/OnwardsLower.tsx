@@ -12,7 +12,7 @@ type Props = {
 export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
     // In this context, Blog tags are treated the same as Series tags
     const seriesTag = tags.find(
-        tag => tag.type === 'Series' || tag.type === 'Blog',
+        (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
 
     let url;

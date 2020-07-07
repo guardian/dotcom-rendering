@@ -97,7 +97,7 @@ export const OnwardsUpper = ({
 
     // In this context, Blog tags are treated the same as Series tags
     const seriesTag = tags.find(
-        tag => tag.type === 'Series' || tag.type === 'Blog',
+        (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
 
     let url;
@@ -142,7 +142,9 @@ export const OnwardsUpper = ({
 
         // Add any exclude tags to the url
         if (tagsToExclude.length > 0) {
-            const queryParams = tagsToExclude.map(tag => `exclude-tag=${tag}`);
+            const queryParams = tagsToExclude.map(
+                (tag) => `exclude-tag=${tag}`,
+            );
             popularInTagUrl += `&${queryParams.join('&')}`;
         }
 
