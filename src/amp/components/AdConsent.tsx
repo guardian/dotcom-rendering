@@ -80,9 +80,12 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     }}
                 />
                 <div id="consent-ui" className={consentUIStyle}>
-                    <button on="tap:consent.prompt(consent=SourcePoint)">
+                    <button
+                        className={buttonStyle}
+                        on="tap:consent.prompt(consent=SourcePoint)"
+                    >
                         Manage privacy settings
-                    </button className={buttonStyle}>
+                    </button>
                 </div>
             </amp-consent>
         </>
