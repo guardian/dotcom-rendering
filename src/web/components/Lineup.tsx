@@ -19,6 +19,10 @@ const Row = ({ children }: { children: React.ReactNode }) => (
     </div>
 );
 
+const BackgroundRed = '#cc2b12';
+
+const BackgroundYellow = '#fb0';
+
 const Event = ({
     type,
     time,
@@ -32,7 +36,7 @@ const Event = ({
                 <i
                     className={css`
                         display: inline-block;
-                        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjEyIj48cGF0aCBmaWxsPSIjY2MyYjEyIiBkPSJNMCAwaDl2MTJIMHoiLz48L3N2Zz4=);
+                        background-color: ${BackgroundRed};
                         background-position: 0 0;
                         width: 0.5625rem;
                         height: 0.75rem;
@@ -46,7 +50,7 @@ const Event = ({
                 <i
                     className={css`
                         display: inline-block;
-                        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjEyIj48cGF0aCBmaWxsPSIjZmIwIiBkPSJNMCAwaDl2MTJIMHoiLz48L3N2Zz4=);
+                        background-color: ${BackgroundYellow};
                         background-position: 0 0;
                         width: 0.5625rem;
                         height: 0.75rem;
