@@ -20,7 +20,7 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
-import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactiveAtom';
+import InteractiveAtom, { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe2, pipe } from 'lib';
