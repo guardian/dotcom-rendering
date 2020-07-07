@@ -349,6 +349,7 @@ type CAPIBrowserType = {
     isImmersive: boolean;
     isPhotoEssay: boolean;
     matchUrl?: string;
+    callouts: CalloutBlockElement[];
 };
 
 interface TagType {
@@ -643,6 +644,7 @@ type IslandType =
     | 'links-root'
     | 'match-nav'
     | 'match-stats'
+    | 'callout'
     | 'comments';
 
 interface TrailType {

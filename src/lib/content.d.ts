@@ -51,6 +51,7 @@ interface CalloutBlockElement {
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];
+    calloutIndex?: number;
 }
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {

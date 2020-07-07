@@ -10,6 +10,11 @@ import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 import { Form } from '../Callout/Form';
 
+const wrapperStyles = css`
+    margin-bottom: 26px;
+    margin-top: 16px;
+`;
+
 const calloutDetailsStyles = css`
     border-top: 1px ${neutral[86]} solid;
     border-bottom: 1px ${neutral[86]} solid;
@@ -248,7 +253,7 @@ export const CalloutBlockComponent = ({
 
     if (submissionSuccess) {
         return (
-            <figure>
+            <figure className={wrapperStyles}>
                 <details
                     className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
@@ -281,7 +286,7 @@ export const CalloutBlockComponent = ({
     }
 
     return (
-        <figure>
+        <figure className={wrapperStyles}>
             <details
                 className={cx(calloutDetailsStyles, {
                     [backgroundColorStyle]: isExpanded,

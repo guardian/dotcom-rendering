@@ -223,10 +223,12 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.CalloutBlockElement':
                     return (
-                        <CalloutBlockComponent
-                            callout={element}
-                            pillar={pillar}
-                        />
+                        <div id={`callout-${i}`}>
+                            <CalloutBlockComponent
+                                callout={element}
+                                pillar={pillar}
+                            />
+                        </div>
                     );
 
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
