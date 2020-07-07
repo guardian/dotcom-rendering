@@ -5,8 +5,8 @@ import { Format } from '@guardian/types/Format';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Option, map, withDefault } from 'types/option';
 import { pipe2 } from 'lib';
-import {pageFonts} from "styles";
-import {remSpace} from "@guardian/src-foundations";
+import { pageFonts } from "styles";
+import { remSpace } from "@guardian/src-foundations";
 
 export interface InteractiveAtomProps {
     html: string;
