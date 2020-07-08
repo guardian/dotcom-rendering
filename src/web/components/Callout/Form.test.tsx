@@ -228,8 +228,10 @@ describe('Callout from', () => {
         ) as HTMLInputElement;
         user.upload(input, file);
 
-        expect(input.files[0]).toStrictEqual(file);
-        expect(input.files).toHaveLength(1);
+        const inputFiles = input.files ? input.files : [];
+
+        expect(inputFiles[0]).toStrictEqual(file);
+        expect(inputFiles).toHaveLength(1);
 
         const submitButton = queryByText(
             'Share with the Guardian',
