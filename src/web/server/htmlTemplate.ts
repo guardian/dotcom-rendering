@@ -242,7 +242,7 @@ export const htmlTemplate = ({
                     ...priorityLegacyScriptTags,
                     ...priorityNonLegacyScriptTags,
                 ].join('\n')}
-                <style>${getFontsCss()}${resetCSS}${css}</style>
+                <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
             </head>
 
