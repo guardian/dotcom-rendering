@@ -26,12 +26,12 @@ type Props = {
 
 export const FileUpload = ({ formField, formData, setFormData }: Props) => {
     const [error, setError] = useState('');
-    const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
+    const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
             try {
                 setError('');
                 const stringifiedFile = await stringifyFileBase64(
-                    e.target.files[0],
+                    event.target.files[0],
                 );
                 setFormData({
                     ...formData,

@@ -11,19 +11,27 @@ export const stringifyFileBase64 = (file: File) =>
                 // remove data:*/*;base64, from the start of the base64 string
 
                 reject(
-                    'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                    Error(
+                        'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                    ),
                 );
-                fileAsBase64
-                    ? resolve(fileAsBase64)
-                    : reject(
-                          'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
-                      );
+                if (fileAsBase64) {
+                    resolve(fileAsBase64);
+                } else {
+                    reject(
+                        Error(
+                            'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                        ),
+                    );
+                }
             },
             false,
         );
         reader.addEventListener('error', () => {
             reject(
-                'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                Error(
+                    'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                ),
             );
         });
         reader.readAsDataURL(file);
