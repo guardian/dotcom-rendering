@@ -1,13 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { palette, space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { JsonScript } from './JsonScript';
 
 const consentUIStyle = css`
     ${textSans.medium()};
-    color: ${palette.neutral[97]};
-    background-color: ${palette.neutral[20]};
+    color: ${palette.brand.primary};
+    background-color: ${palette.brandBackground.primary};
     max-width: 600px;
     margin: 0 auto;
     overflow-x: hidden;
@@ -16,11 +16,14 @@ const consentUIStyle = css`
 const buttonStyle = css`
     font: inherit;
     border: 0;
-    background: transparent;
+    background-color: ${palette.brandBackground.ctaSecondary};
+    color: ${palette.brand.ctaSecondary};
     color: inherit;
     display: block;
-    width: 100%;
-    margin-top: 16px;
+    width: auto;
+    padding: ${space[1]}px ${space[3]}px;
+    margin: ${space[2]}px auto;
+    border-radius: 100rem;
 `;
 
 export const AdConsent: React.FC<{}> = ({}) => {
@@ -51,7 +54,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         consentRequired: 'remote',
                         checkConsentHref:
                             'https://wrapper-api.sp-prod.net/tcfv2/v1/amp',
-                        promptUISrc: 'https://amp.sp-prod.net/',
+                        promptUISrc: 'https://consent.theguardian.test/',
                         postPromptUI: 'consent-ui',
                         clientConfig: {
                             accountId: 1257,
