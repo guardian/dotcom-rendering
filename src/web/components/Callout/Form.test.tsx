@@ -223,7 +223,9 @@ describe('Callout from', () => {
             <Form formFields={[fileField]} onSubmit={mockSubmit} />,
         );
 
-        const input = screen.getByTestId(`form-field-${fileField.id}`);
+        const input = screen.getByTestId(
+            `form-field-${fileField.id}`,
+        ) as HTMLInputElement;
         user.upload(input, file);
 
         expect(input.files[0]).toStrictEqual(file);
