@@ -43,6 +43,7 @@ interface CaptionBlockElement {
 interface CalloutBlockElement {
     _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
     id: string;
+    calloutsUrl: string;
     activeFrom: number;
     displayOnSensitive: boolean;
     formId: number;
@@ -50,6 +51,7 @@ interface CalloutBlockElement {
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];
+    calloutIndex?: number;
 }
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {

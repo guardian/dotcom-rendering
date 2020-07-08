@@ -3,11 +3,11 @@ import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
 import { calloutCampaign } from '@root/fixtures/calloutCampaign';
-import { Callout } from './Callout';
+import { CalloutBlockComponent } from './CalloutBlockComponent';
 
 export default {
-    component: Callout,
-    title: 'Components/Callout',
+    component: CalloutBlockComponent,
+    title: 'Components/CalloutBlockComponent',
 };
 
 export const Default = () => {
@@ -27,11 +27,7 @@ export const Default = () => {
                 padding: 15px;
             `}
         >
-            <Callout
-                callout={calloutCampaign}
-                calloutsUrl="https://callouts.code.dev-guardianapis.com"
-                pillar="news"
-            />
+            <CalloutBlockComponent callout={calloutCampaign} pillar="news" />
         </div>
     );
 };

@@ -67,7 +67,7 @@ const makeWindowGuardianConfig = (
 };
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-    // it is important to pass down the index of rich links as well as the component itself
+    // For some elements it is important to keep thier index in the `elements` array
     const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
             if (
@@ -82,6 +82,21 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             return acc;
         },
         [] as RichLinkBlockElement[],
+    );
+    const calloutsWithIndex: CalloutBlockElement[] = CAPI.blocks[0].elements.reduce(
+        (acc, element, index: number) => {
+            if (
+                element._type ===
+                'model.dotcomrendering.pageElements.CalloutBlockElement'
+            ) {
+                acc.push({
+                    ...element,
+                    calloutIndex: index,
+                } as CalloutBlockElement);
+            }
+            return acc;
+        },
+        [] as CalloutBlockElement[],
     );
 
     return {
@@ -149,6 +164,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         isImmersive: CAPI.isImmersive,
         isPhotoEssay: CAPI.config.isPhotoEssay,
         matchUrl: CAPI.matchUrl,
+        callouts: calloutsWithIndex,
     };
 };
 

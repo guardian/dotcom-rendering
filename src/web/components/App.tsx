@@ -4,6 +4,7 @@ import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
+import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -269,6 +270,11 @@ export const App = ({ CAPI, NAV }: Props) => {
                         richLinkIndex={index}
                     />
                 </Portal>
+            ))}
+            {CAPI.callouts.map((callout) => (
+                <Hydrate root="callout" index={callout.calloutIndex}>
+                    <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
             ))}
             <Portal root="share-comment-counts">
                 {CAPI.isCommentable ? (
