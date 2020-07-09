@@ -26,6 +26,7 @@ import Blockquote from 'components/blockquote';
 import { isElement, pipe2, pipe } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
+import { fromUnsafe, Result, toOption } from 'types/result';
 
 
 // ----- Renderer ----- //
@@ -39,15 +40,22 @@ const transformHref = (href: string): string => {
         return `https://www.theguardian.com/${href}`;
     }
 
-    const url = new URL(href);
-    const path = url.pathname.split('/');
-    const isLatest = url.hostname === 'www.theguardian.com' && path[path.length - 1] === 'latest';
+    const url: Result<string, URL> = fromUnsafe(() => new URL(href), 'invalid url');
 
-    if (isLatest) {
-        return href.slice(0, -7);
-    }
+    return pipe2(
+        toOption(url),
+        map(url => {
+            const path = url.pathname.split('/');
+            const isLatest = url.hostname === 'www.theguardian.com' && path[path.length - 1] === 'latest';
 
-    return href
+            if (isLatest) {
+                return href.slice(0, -7);
+            }
+
+            return href;
+        }),
+        withDefault(href)
+    )
 }
 
 const getHref = (node: Node): Option<string> =>
