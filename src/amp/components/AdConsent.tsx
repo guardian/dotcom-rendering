@@ -67,7 +67,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             'https://wrapper-api.sp-prod.net/tcfv2/v1/amp',
                         // TODO: change this url in PROD
                         promptUISrc: 'https://consent.theguardian.test/',
-                        postPromptUI: 'consent-ui',
+                        postPromptUI: 'consent-ui-manager',
                         clientConfig: {
                             accountId: 1257,
                             propertyHref: 'https://theguardian.amp',
@@ -137,7 +137,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             </Button>
                         </div>
                     </div>
-                    <div id="consent-ui" className={consentUIStyle}>
+                    <div id="consent-ui-manager" className={consentUIStyle}>
                         <div className="center">
                             <Button
                                 size="xsmall"
