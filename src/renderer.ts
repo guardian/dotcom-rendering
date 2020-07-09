@@ -260,7 +260,7 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
     }
 };
 
-const colourFromFormat = (format: Format): string => {
+const linkColourFromFormat = (format: Format): string => {
     if (format.design === Design.AdvertisementFeature) {
         return palette.labs[300];
     }
