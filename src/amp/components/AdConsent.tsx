@@ -65,6 +65,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         consentRequired: 'remote',
                         checkConsentHref:
                             'https://wrapper-api.sp-prod.net/tcfv2/v1/amp',
+                        // TODO: change this url in PROD
                         promptUISrc: 'https://consent.theguardian.test/',
                         postPromptUI: 'consent-ui',
                         clientConfig: {
