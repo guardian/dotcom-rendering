@@ -39,7 +39,11 @@ const transformHref = (href: string): string => {
         return `https://www.theguardian.com/${href}`;
     }
 
-    if (/https:\/\/www\.theguardian\.com\/[a-zA-Z0-9|/|-]+\/latest/.exec(href)?.length) {
+    const url = new URL(href);
+    const path = url.pathname.split('/');
+    const isLatest = url.hostname === 'www.theguardian.com' && path[path.length - 1] === 'latest';
+
+    if (isLatest) {
         return href.slice(0, -7);
     }
 
