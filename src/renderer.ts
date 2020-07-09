@@ -279,7 +279,7 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'LI':
             return styledH('li', { css: listItemStyles(format) }, children);
         case 'A': {
-            const colour = colourFromFormat(format);
+            const colour = linkColourFromFormat(format);
             const styles = css` color: ${colour}; text-decoration: none`;
             const url = withDefault('')(getHref(node));
             const href = url.startsWith('profile/') ? `https://www.theguardian.com/${url}` : url
