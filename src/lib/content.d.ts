@@ -165,6 +165,10 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     css?: string;
 }
 
+interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
+}
+
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
     url: string;
@@ -325,6 +329,7 @@ type CAPIElement =
     | ImageBlockElement
     | InstagramBlockElement
     | InteractiveAtomBlockElement
+    | InteractiveBlockElement
     | MapBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement
