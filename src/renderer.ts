@@ -33,18 +33,27 @@ import LiveEventLink from 'components/liveEventLink';
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? some(node.attributes) : none;
 
-const getAttr = (attr: string) => (node: Node): Option<string> =>
+const getHref = (node: Node): Option<string> =>
     pipe(
         getAttrs(node),
         andThen(attrs => pipe2(
-            attrs.getNamedItem(attr),
+            attrs.getNamedItem('href'),
             fromNullable,
-            map(attr => attr.value),
+            map(attr => transformHref(attr.value)),
         )),
     );
 
-const getHref: (node: Node) => Option<string> =
-    getAttr('href');
+const transformHref = (href: string): string => {
+    if (href.startsWith('profile/')) {
+        return `https://www.theguardian.com/${href}`;
+    }
+
+    if (href.match(/https:\/\/www\.theguardian\.com\/[a-zA-Z0-9|\/|-]+\/latest/)?.length) {
+        return href.slice(0, -7);
+    }
+
+    return href
+}
 
 const bulletStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
