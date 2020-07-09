@@ -124,14 +124,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             <Button
                                 size="small"
                                 icon={<SvgCheckmark />}
-                                on="tap:the-adconsent-element.accept"
+                                on="tap:consent.accept"
                             >
                                 I&apos;m OK with that
                             </Button>
                             <Button
                                 size="small"
                                 priority="tertiary"
-                                on="tap:the-adconsent-element.reject"
+                                on="tap:consent.reject"
                             >
                                 I do not want to see personalised ads
                             </Button>
