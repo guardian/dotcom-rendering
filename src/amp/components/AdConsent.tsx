@@ -1,29 +1,40 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette, space } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans, headline } from '@guardian/src-foundations/typography';
+import { Button } from '@guardian/src-button';
+import { SvgCheckmark } from '@guardian/src-icons';
+import { ThemeProvider } from 'emotion-theming';
+import { brand } from '@guardian/src-foundations/themes';
 import { JsonScript } from './JsonScript';
 
 const consentUIStyle = css`
-    ${textSans.medium()};
-    color: ${palette.brand.primary};
+    ${textSans.small()};
+    color: ${palette.brandText.primary};
     background-color: ${palette.brandBackground.primary};
     max-width: 600px;
+    padding: ${space[2]}px;
     margin: 0 auto;
     overflow-x: hidden;
+
+    h2 {
+        color: ${palette.brandText.primary};
+        ${headline.small()};
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .center {
+        text-align: center;
+    }
 `;
 
-const buttonStyle = css`
-    font: inherit;
-    border: 0;
-    background-color: ${palette.brandBackground.ctaSecondary};
-    color: ${palette.brand.ctaSecondary};
-    color: inherit;
-    display: block;
-    width: auto;
-    padding: ${space[1]}px ${space[3]}px;
-    margin: ${space[2]}px auto;
-    border-radius: 100rem;
+const stack = css`
+    & > * {
+        margin-top: ${space[2]}px;
+    }
 `;
 
 export const AdConsent: React.FC<{}> = ({}) => {
@@ -68,25 +79,75 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 color: 'red',
                             },
                         },
-                        policy: {
-                            default: {
-                                waitFor: { sourcepoint: [] },
-                                timeout: {
-                                    seconds: 5,
-                                    fallbackAction: 'reject',
-                                },
+                        geoOverride: {
+                            us: {
+                                consentRequired: true,
+                                checkConsentHref: false,
+                                promptUI: 'consent-ui-ccpa',
+                                promptUISrc: false,
+                                postPromptUI: false,
                             },
                         },
+                        // policy: {
+                        //     default: {
+                        //         waitFor: { sourcepoint: [] },
+                        //         timeout: {
+                        //             seconds: 5,
+                        //             fallbackAction: 'reject',
+                        //         },
+                        //     },
+                        // },
                     }}
                 />
-                <div id="consent-ui" className={consentUIStyle}>
-                    <button
-                        className={buttonStyle}
-                        on="tap:consent.prompt(consent=SourcePoint)"
-                    >
-                        Manage privacy settings
-                    </button>
-                </div>
+                <ThemeProvider theme={brand}>
+                    <div id="consent-ui-ccpa" className={consentUIStyle}>
+                        <div>
+                            <h2>Your privacy</h2>
+                            <p>
+                                We use cookies to improve your experience on our
+                                site and to show you personalised advertising.
+                            </p>
+                            <p>
+                                To find out more, read our{' '}
+                                <a href="https://www.theguardian.com/help/privacy-policy">
+                                    privacy policy
+                                </a>{' '}
+                                and{' '}
+                                <a href="https://www.theguardian.com/info/cookies">
+                                    cookie policy
+                                </a>
+                                .
+                            </p>
+                        </div>
+                        <div className={stack}>
+                            <Button
+                                size="small"
+                                icon={<SvgCheckmark />}
+                                on="tap:the-adconsent-element.accept"
+                            >
+                                I&apos;m OK with that
+                            </Button>
+                            <Button
+                                size="small"
+                                priority="tertiary"
+                                on="tap:the-adconsent-element.reject"
+                            >
+                                I do not want to see personalised ads
+                            </Button>
+                        </div>
+                    </div>
+                    <div id="consent-ui" className={consentUIStyle}>
+                        <div className="center">
+                            <Button
+                                size="xsmall"
+                                on="tap:consent.prompt(consent=SourcePoint)"
+                                priority="tertiary"
+                            >
+                                Manage privacy settings
+                            </Button>
+                        </div>
+                    </div>
+                </ThemeProvider>
             </amp-consent>
         </>
     );
