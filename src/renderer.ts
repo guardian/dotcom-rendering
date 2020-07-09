@@ -11,7 +11,7 @@ import { Format } from 'format';
 import { ElementKind, BodyElement } from 'bodyElement';
 import { Role, BodyImageProps } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, palette } from '@guardian/src-foundations';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
@@ -260,9 +260,17 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
     }
 };
 
+const linkColourFromFormat = (format: Format): string => {
+    if (format.design === Design.AdvertisementFeature) {
+        return palette.labs[300];
+    }
+
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return format.design === Design.Media ? inverted : kicker
+}
+
 const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(standfirstTextElement(format));
-    const { kicker, inverted } = getPillarStyles(format.pillar);
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
@@ -271,7 +279,7 @@ const standfirstTextElement = (format: Format) => (node: Node, key: number): Rea
         case 'LI':
             return styledH('li', { css: listItemStyles(format) }, children);
         case 'A': {
-            const colour = format.design === Design.Media ? inverted : kicker;
+            const colour = linkColourFromFormat(format);
             const styles = css` color: ${colour}; text-decoration: none`;
             const url = withDefault('')(getHref(node));
             const href = url.startsWith('profile/') ? `https://www.theguardian.com/${url}` : url
