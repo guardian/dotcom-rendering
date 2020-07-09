@@ -36,9 +36,14 @@ describe('Elements', function () {
                 'AMPArticle?url=https://www.theguardian.com/us-news/2015/nov/05/police-tasers-deaths-the-counted',
             );
 
-            getAmpIframeBody(
-                'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"] > iframe',
-            ).contains('Deaths after Taser use: the findings');
+            const ampIframeSelector =
+                'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
+            const ampIframe = cy.get(ampIframeSelector);
+            ampIframe.scrollIntoView();
+
+            getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
+                'Deaths after Taser use: the findings',
+            );
         });
     });
 
