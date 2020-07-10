@@ -26,6 +26,7 @@ import Blockquote from 'components/blockquote';
 import { isElement, pipe2, pipe } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
+import { fromUnsafe, Result, toOption } from 'types/result';
 
 
 // ----- Renderer ----- //
@@ -33,18 +34,39 @@ import LiveEventLink from 'components/liveEventLink';
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? some(node.attributes) : none;
 
-const getAttr = (attr: string) => (node: Node): Option<string> =>
+
+const transformHref = (href: string): string => {
+    if (href.startsWith('profile/')) {
+        return `https://www.theguardian.com/${href}`;
+    }
+
+    const url: Result<string, URL> = fromUnsafe(() => new URL(href), 'invalid url');
+
+    return pipe2(
+        toOption(url),
+        map(url => {
+            const path = url.pathname.split('/');
+            const isLatest = url.hostname === 'www.theguardian.com' && path[path.length - 1] === 'latest';
+
+            if (isLatest) {
+                return href.slice(0, -7);
+            }
+
+            return href;
+        }),
+        withDefault(href)
+    )
+}
+
+const getHref = (node: Node): Option<string> =>
     pipe(
         getAttrs(node),
         andThen(attrs => pipe2(
-            attrs.getNamedItem(attr),
+            attrs.getNamedItem('href'),
             fromNullable,
-            map(attr => attr.value),
+            map(attr => transformHref(attr.value)),
         )),
     );
-
-const getHref: (node: Node) => Option<string> =
-    getAttr('href');
 
 const bulletStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
