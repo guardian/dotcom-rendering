@@ -4,8 +4,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Logo } from 'capi';
 import { Format } from '@guardian/types/Format';
 import { darkModeCss } from 'styles';
-import { remSpace } from '@guardian/src-foundations';
-import { text, neutral } from '@guardian/src-foundations/palette';
+import { remSpace, text, neutral } from '@guardian/src-foundations';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { Item, getFormat } from 'item';
 import { pipe2 } from 'lib';
@@ -17,13 +16,9 @@ interface Props {
     format: Format;
 }
 
-const styles = (lightModeImage: string): SerializedStyles => css`
+const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => css`
     margin: ${remSpace[9]} 0;
     ${textSans.small()}
-
-    label {
-        color: ${text.supporting};
-    }
 
     img {
         content: url("${lightModeImage}");
@@ -31,16 +26,20 @@ const styles = (lightModeImage: string): SerializedStyles => css`
         margin: ${remSpace[2]} 0;
         max-height: 60px;
     }
-`;
 
-const darkStyles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => darkModeCss`
     label {
-        color: ${neutral[86]};
+        color: ${text.supporting};
     }
 
-    img {
-        content: url("${darkModeImage ?? lightModeImage}");
-    }
+    ${darkModeCss`
+        img {
+            content: url("${darkModeImage ?? lightModeImage}");
+        }
+
+        label {
+            color: ${neutral[86]};
+        }
+    `}
 `;
 
 const OptionalLogo = (item: Item): JSX.Element => pipe2(
@@ -49,9 +48,17 @@ const OptionalLogo = (item: Item): JSX.Element => pipe2(
     withDefault(<></>)
 )
 
+const cleanImageUrl = (url: string) =>
+    encodeURI(url)
+        .replace('(', '%28')
+        .replace(')', '%29')
+
 const Logo: FC<Props> = ({ branding, format }: Props) => {
+    const lightLogo = cleanImageUrl(branding.logo);
+    const darkLogo = cleanImageUrl(branding.altLogo ?? '');
+
     return (
-        <section css={[styles(branding.logo), darkStyles(branding.logo, branding.altLogo)]}>
+        <section css={styles(lightLogo, darkLogo)}>
             <label>{branding.label}</label>
             <a href={branding.sponsorUri}>
                 <img alt={branding.sponsorName} />
