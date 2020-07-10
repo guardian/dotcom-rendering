@@ -48,7 +48,7 @@ const OptionalLogo = (item: Item): JSX.Element => pipe2(
     withDefault(<></>)
 )
 
-const cleanImageUrl = (url: string) =>
+const cleanImageUrl = (url: string): string =>
     encodeURI(url)
         .replace('(', '%28')
         .replace(')', '%29')
