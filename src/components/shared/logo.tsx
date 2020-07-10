@@ -17,9 +17,13 @@ interface Props {
     format: Format;
 }
 
-const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => css`
+const styles = (lightModeImage: string): SerializedStyles => css`
     margin: ${remSpace[9]} 0;
     ${textSans.small()}
+
+    label {
+        color: ${text.supporting};
+    }
 
     img {
         content: url("${lightModeImage}");
@@ -27,20 +31,16 @@ const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyle
         margin: ${remSpace[2]} 0;
         max-height: 60px;
     }
+`;
 
+const darkStyles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => darkModeCss`
     label {
-        color: ${text.supporting};
+        color: ${neutral[86]};
     }
 
-    ${darkModeCss`
-        img {
-            content: url("${darkModeImage ?? lightModeImage}");
-        }
-
-        label {
-            color: ${neutral[86]};
-        }
-    `}
+    img {
+        content: url("${darkModeImage ?? lightModeImage}");
+    }
 `;
 
 const OptionalLogo = (item: Item): JSX.Element => pipe2(
@@ -51,7 +51,7 @@ const OptionalLogo = (item: Item): JSX.Element => pipe2(
 
 const Logo: FC<Props> = ({ branding, format }: Props) => {
     return (
-        <section css={styles(branding.logo, branding.altLogo)}>
+        <section css={[styles(branding.logo), darkStyles(branding.logo, branding.altLogo)]}>
             <label>{branding.label}</label>
             <a href={branding.sponsorUri}>
                 <img alt={branding.sponsorName} />
