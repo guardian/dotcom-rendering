@@ -4,7 +4,7 @@ import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const sidebarStyles = css`
-    width: 80vh;
+    width: 80vw;
     background-color: ${palette.brand.main};
 
     [aria-expanded='true'] {
