@@ -39,7 +39,11 @@ describe('Elements', function () {
             const ampIframeSelector =
                 'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
             const ampIframe = cy.get(ampIframeSelector);
-            ampIframe.scrollIntoView();
+            ampIframe.scrollIntoView({
+                duration: 300,
+                offset: { top: -100, left: 0 },
+            });
+            cy.wait(300);
 
             getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
                 'Deaths after Taser use: the findings',
