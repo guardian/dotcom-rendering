@@ -3,7 +3,7 @@ import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
 import { Result, err, ok } from 'types/result';
 import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from "types/option";
-import {DocParser} from "./types/parserContext";
+import { DocParser } from "types/parserContext";
 
 function parseAtom(element: BlockElement, atoms: Atoms, docParser: DocParser): Result<string, BodyElement> {
     const id = element.contentAtomTypeData?.atomId
