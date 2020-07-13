@@ -584,20 +584,25 @@ const render = (format: Format, excludeStyles = false) =>
             const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
-                margin: ${remSpace[4]} 0;
+                margin: 0;
                 background: ${neutral[97]};
                 ${darkModeCss`
                     background: ${neutral[20]};
                 `}
             `
+
+            const figureAttributes = {
+                css: css`margin: ${remSpace[4]} 0;`
+            }
+
             const attributes = {
                 'data-posterUrl': posterUrl,
                 'data-videoId': videoId,
                 'data-duration': duration,
                 css: styles
             }
-            const figcaption = h(FigCaption, { format, caption: caption, credit: none });
-            return styledH('div', attributes, figcaption)
+            const figcaption = h(FigCaption, { format, caption, credit: none });
+            return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
         }
     }
 };
