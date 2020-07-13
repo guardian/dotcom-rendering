@@ -3,8 +3,12 @@ import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
 import { Result, err, ok } from 'types/result';
 import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from "types/option";
+import { DocParser } from "types/parserContext";
 
-function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElement> {
+function parseAtom(
+    element: BlockElement,
+    atoms: Atoms,
+    docParser: DocParser): Result<string, BodyElement> {
     const id = element.contentAtomTypeData?.atomId
     switch (element.contentAtomTypeData?.atomType) {
         case "interactive": {
@@ -51,10 +55,10 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
                 return err(`No atom matched this id: ${id}`);
             }
 
-            const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
+            const { posterUrl, duration, assets, activeVersion, title } = atom?.data?.media;
             const videoId = assets
                 .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
-
+            const caption = docParser(title)
             if (!posterUrl) {
                 return err(`No posterUrl for atom: ${id}`);
             }
@@ -68,6 +72,7 @@ function parseAtom(element: BlockElement, atoms: Atoms): Result<string, BodyElem
                 posterUrl,
                 videoId,
                 duration: fromNullable(duration?.toNumber()),
+                caption: fromNullable(caption)
             });
         }
 

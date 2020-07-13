@@ -600,23 +600,29 @@ const render = (format: Format, excludeStyles = false) =>
         }
 
         case ElementKind.MediaAtom: {
-            const { posterUrl, videoId, duration } = element;
+            const { posterUrl, videoId, duration, caption } = element;
             const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
-                margin: ${remSpace[4]} 0;
+                margin: 0;
                 background: ${neutral[97]};
                 ${darkModeCss`
                     background: ${neutral[20]};
                 `}
             `
+
+            const figureAttributes = {
+                css: css`margin: ${remSpace[4]} 0;`
+            }
+
             const attributes = {
                 'data-posterUrl': posterUrl,
                 'data-videoId': videoId,
                 'data-duration': duration,
                 css: styles
             }
-            return styledH('div', attributes)
+            const figcaption = h(FigCaption, { format, caption, credit: none });
+            return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
         }
     }
 };
