@@ -9,6 +9,9 @@ import {
 } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
+import { LinkButton } from '@guardian/src-button';
+import { buttonBrand } from '@guardian/src-button'
+
 
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import {
@@ -17,6 +20,7 @@ import {
     TickerData,
 } from '@root/src/lib/fetchTickerData';
 import { addForMinutes, getCookie } from '@root/src/web/browser/cookie';
+import {ThemeProvider} from "@root/node_modules/emotion-theming";
 
 type Props = {
     edition: Edition;
@@ -168,7 +172,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                             [hiddenUntilTablet]: inHeader,
                         })}
                     >
-                        <div className={messageStyles}>Welcome back</div>
+                        <div className={messageStyles}>Thank you</div>
 
                         <div className={subMessageStyles}>
                             We&apos;re funded by
@@ -177,7 +181,16 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                             </span>
                             readers across Australia.
                             <br />
-                            Thank you for supporting us
+                            <ThemeProvider theme={buttonBrand}>
+                                <LinkButton
+                                    priority="secondary"
+                                    showIcon={true}
+                                    size="small"
+                                    href="https://support.theguardian.com/aus-2020-map"
+                                >
+                                    Hear from our supporters
+                                </LinkButton>
+                            </ThemeProvider>
                         </div>
                     </div>
                 </div>
