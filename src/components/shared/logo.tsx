@@ -48,10 +48,10 @@ const OptionalLogo = (item: Item): JSX.Element => pipe2(
     withDefault(<></>)
 )
 
-const cleanImageUrl = (url: string): string =>
+export const cleanImageUrl = (url: string): string =>
     encodeURI(url)
-        .replace('(', '%28')
-        .replace(')', '%29')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29')
 
 const Logo: FC<Props> = ({ branding, format }: Props) => {
     const lightLogo = cleanImageUrl(branding.logo);
