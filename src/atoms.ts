@@ -5,7 +5,10 @@ import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from "types/option";
 import { DocParser } from "types/parserContext";
 
-function parseAtom(element: BlockElement, atoms: Atoms, docParser: DocParser): Result<string, BodyElement> {
+function parseAtom(
+    element: BlockElement,
+    atoms: Atoms,
+    docParser: DocParser): Result<string, BodyElement> {
     const id = element.contentAtomTypeData?.atomId
     switch (element.contentAtomTypeData?.atomType) {
         case "interactive": {
