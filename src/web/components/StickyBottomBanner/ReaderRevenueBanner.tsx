@@ -38,7 +38,7 @@ type Props = {
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
     subscriptionBannerLastClosedAt?: string;
-    switches: { [String]: boolean };
+    switches: { [key: string]: boolean };
 };
 
 // TODO specify return type (need to update client to provide this first)
