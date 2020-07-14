@@ -65,11 +65,11 @@ const analysisStyles = (format: Format): SerializedStyles => css`
     ${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
     span {
-        box-shadow: inset 0 -0.1rem ${border.primary(format)};
+        box-shadow: inset 0 -0.025rem ${border.primary(format)};
         padding-bottom: 0.2rem;
 
         ${darkModeCss`
-            box-shadow: inset 0 -0.1rem ${neutral[46]};
+            box-shadow: inset 0 -0.025rem ${neutral[46]};
         `}
     }
 `;
