@@ -62,7 +62,18 @@ function insertAds(): void {
             }
         };
 
-        window.addEventListener('resize', callback);
+
+        let timeout: number;
+        window.addEventListener('resize', function ( event ) {
+            if (timeout) {
+                window.cancelAnimationFrame(timeout);
+            }
+
+            timeout = window.requestAnimationFrame(function () {
+                callback();
+            });
+        }, false);
+
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
 
