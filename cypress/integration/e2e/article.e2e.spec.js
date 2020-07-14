@@ -62,6 +62,51 @@ describe('E2E Page rendering', function () {
         });
     });
 
+    describe.only('AB Tests - Can modify page', function () {
+        it('should set the correct AB Test Variant', function () {
+            // Variant by cookie
+            cy.setCookie('GU_mvt_id_local', '99', {
+                log: true,
+            });
+
+            cy.visit(
+                'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+            );
+
+            cy.scrollTo('bottom', { duration: 300 });
+            cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
+                'be.visible',
+            );
+
+            cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
+
+            cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
+                'not.be.visible',
+            );
+        });
+
+        it('should not edit the page if not in an AB test', function () {
+            // Not in test
+            cy.setCookie('GU_mvt_id_local', '500', {
+                log: true,
+            });
+
+            cy.visit(
+                'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+            );
+
+            cy.scrollTo('bottom', { duration: 300 });
+
+            cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
+                'be.visible',
+            );
+
+            cy.get('[data-cy-ab-runnable-test=not-runnable]').should(
+                'be.visible',
+            );
+        });
+    });
+
     describe('for AMP', function () {
         AMPArticles.map((article, index) => {
             const { url, pillar, designType } = article;
