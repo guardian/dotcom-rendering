@@ -64,14 +64,11 @@ function insertAds(): void {
 
 
         let timeout: number;
-        window.addEventListener('resize', function ( event ) {
+        window.addEventListener('resize', () => {
             if (timeout) {
                 window.cancelAnimationFrame(timeout);
             }
-
-            timeout = window.requestAnimationFrame(function () {
-                callback();
-            });
+            timeout = window.requestAnimationFrame(callback);
         }, false);
 
         const observer = new MutationObserver(callback);
