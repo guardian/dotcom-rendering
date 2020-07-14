@@ -2402,22 +2402,15 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/ab-core@^0.1.1-alpha.19":
-  version "0.1.1-alpha.19"
-  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-0.1.1-alpha.19.tgz#95569f55be2e02aec8b010751d3cd35138509d10"
-  integrity sha512-+RBWf8YI6RKjOoF39V5isSBGIOdgoPC7RKYpyF9XBtz6Gx+W0Y0mleKfTDompORwase9fVvQQu4gVXX7Q/b9Ew==
+"@guardian/ab-core@1.0.0-next.0":
+  version "1.0.0-next.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.0.0-next.0.tgz#9aa515ab3a73cf7748e868a1ba134b7c6170259c"
+  integrity sha512-6W+Z/bbmVXH/xlTLBC4/6LPuH4neiphWPfUuMiAOorzXkgGRj62IUZ04Gwl5H+028YpeXea63krvWVFzZwJULw==
 
-"@guardian/ab-core@^0.2.1-alpha.11+75b5583":
-  version "0.2.1-alpha.14"
-  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-0.2.1-alpha.14.tgz#c68fee0d1636002044047e724740963c51c16035"
-  integrity sha512-rSO+BVdH8NH0y6rEgmU1n4HI3C1JXVCh+amo9yjKVZcdFJxS4RQKP1B7kz7EPRixbrAbI3nFKxVhDV8CtU4/MQ==
-
-"@guardian/ab-react@0.2.1-alpha.18":
-  version "0.2.1-alpha.18"
-  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-0.2.1-alpha.18.tgz#98309a34a87881fb5160473b346d8aa7ea6f6f6b"
-  integrity sha512-EmLBbE6Kxap3Kb7NK59mCTIgmSJZxLfuf7xT4bBRLC4eLp1XgAKivmM5n1RJOUGoxhv2uFpJeyykyEA6yGmb+Q==
-  dependencies:
-    "@guardian/ab-core" "^0.2.1-alpha.11+75b5583"
+"@guardian/ab-react@1.0.0-next.0":
+  version "1.0.0-next.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.0.0-next.0.tgz#f5e070b112616b32663a2bebb202106604d87b48"
+  integrity sha512-2B9zDSz89ZYLBHXpnUFuCoT6biJZFGII+fkuKmdO6g3DbGgOfLKcZNZmdmQlxwLsHRHWCiNY+0cyvh8Bbr3EkQ==
 
 "@guardian/atoms-rendering@^1.3.4":
   version "1.3.4"
