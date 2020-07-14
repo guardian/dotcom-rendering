@@ -320,7 +320,7 @@ type CAPIBrowserType = {
         dcrSentryDsn: string;
         remoteBanner: boolean;
         ausMoment2020Header: boolean;
-    };
+    } & ConfigType;
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
     editionLongForm: string;
