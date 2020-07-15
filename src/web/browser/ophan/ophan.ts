@@ -13,6 +13,25 @@ export type OphanComponentType =
     | 'ACQUISITIONS_EPIC'
     | 'ACQUISITIONS_ENGAGEMENT_BANNER';
 
+export type OphanComponent = {
+    componentType: OphanComponentType;
+    id?: string;
+    products?: Array<OphanProduct>;
+    campaignCode?: string;
+    labels?: Array<string>;
+};
+
+export type OphanComponentEvent = {
+    component: OphanComponent;
+    action: OphanAction;
+    value?: string;
+    id?: string;
+    abTest?: {
+        name: string;
+        variant: string;
+    };
+};
+
 export type TestMeta = {
     abTestName: string;
     abTestVariant: string;
