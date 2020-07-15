@@ -3,8 +3,8 @@ import { VideoSlot } from "@guardian/bridget/VideoSlot";
 import { Image } from "@guardian/bridget/Image";
 import { Rect, IRect } from "@guardian/bridget/Rect";
 import { commercialClient, galleryClient, userClient, acquisitionsClient, videoClient } from "../native/nativeApi";
-import { logger } from "../logger";
 import { memoise } from "../lib";
+import { logger } from "../logger";
 
 type Slot = AdSlot | VideoSlot;
 
