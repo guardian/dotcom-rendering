@@ -4,6 +4,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { neutral } from '@guardian/src-foundations';
 import { pillarPalette } from '@root/src/lib/pillars';
+import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 
 const brandingStyle = css`
     padding-bottom: 10px;
@@ -43,12 +44,12 @@ export const Branding: React.FC<{
                 rel="nofollow"
                 aria-label={`Visit the ${branding.sponsorName} website`}
             >
-                <img
-                    src={branding.logo.src}
+                <MaintainAspectRatio
                     width={branding.logo.dimensions.width}
                     height={branding.logo.dimensions.height}
-                    alt={branding.sponsorName}
-                />
+                >
+                    <img src={branding.logo.src} alt={branding.sponsorName} />
+                </MaintainAspectRatio>
             </a>
             <a
                 href={branding.aboutThisLink}
