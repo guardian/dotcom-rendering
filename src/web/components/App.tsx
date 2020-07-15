@@ -14,6 +14,8 @@ import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
+import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
+
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -376,6 +378,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         />
                     </Suspense>
                 </Lazy>
+            </Portal>
+            <Portal root="sign-in-gate">
+                <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
             </Portal>
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
