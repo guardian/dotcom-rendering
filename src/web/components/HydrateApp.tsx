@@ -13,7 +13,7 @@ type Props = {
 
 export const HydrateApp = ({ CAPI, NAV }: Props) => {
     const mvtId = Number(
-        (window.guardian.config.page.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
+        (CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
             getCookie('GU_mvt_id'),
     );
     if (!mvtId) {
