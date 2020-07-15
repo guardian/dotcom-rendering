@@ -1,10 +1,24 @@
 import { AdSlot } from "@guardian/bridget/AdSlot";
 import { VideoSlot } from "@guardian/bridget/VideoSlot";
 import { Image } from "@guardian/bridget/Image";
-import { Rect } from "@guardian/bridget/Rect";
+import { Rect, IRect } from "@guardian/bridget/Rect";
 import { commercialClient, galleryClient, userClient, acquisitionsClient, videoClient } from "../native/nativeApi";
 import { logger } from "../logger";
 import { memoise } from "../lib";
+
+type Slot = AdSlot | VideoSlot;
+
+function positionChanged(slotsA: Slot[], slotsB: Slot[]): boolean {
+    if (slotsA.length !== slotsB.length) return true;
+    return !slotsA.every((slot, index) => areRectsEqual(slot.rect, slotsB[index].rect))
+}
+
+function areRectsEqual(rectA: IRect, rectB: IRect): boolean {
+    return rectA.height === rectB.height &&
+        rectA.width === rectB.width &&
+        rectA.x === rectB.x &&
+        rectA.y === rectB.y
+}
 
 function getRect(slotPosition: DOMRect): Rect {
     const scrollLeft = document.scrollingElement
@@ -164,12 +178,12 @@ function reportNativeElementPositionChanges(): void {
         const currentAdSlots = getAdSlots();
         const currentVideoSlots = getVideoSlots();
 
-        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+        if (positionChanged(currentAdSlots, adSlots)) {
             adSlots = currentAdSlots;
             commercialClient.updateAdverts(currentAdSlots);
         }
 
-        if (JSON.stringify(videoSlots) !== JSON.stringify(currentVideoSlots)) {
+        if (positionChanged(currentVideoSlots, videoSlots)) {
             videoSlots = currentVideoSlots;
             videoClient.updateVideos(currentVideoSlots);
         }
