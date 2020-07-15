@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -27,9 +29,6 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-
-import { useAB } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
 
 // *******************************
 // ****** Dynamic imports ********
