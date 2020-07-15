@@ -2402,10 +2402,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/ab-core@1.0.1-next.0":
-  version "1.0.1-next.0"
-  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.0.1-next.0.tgz#d6051e526fa2f8d599cbdc56e3bdb36c50379b48"
-  integrity sha512-AibcrM10lJzGZtdw6RPJPRmBhEZuzNrA/eXukDAcVa8v7A1ochI7r5unTIKpddAchm3blV+vXLOxy8wLDtwR2Q==
+"@guardian/ab-core@1.1.0-next.0":
+  version "1.1.0-next.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.1.0-next.0.tgz#2d164022c0df449547c177967aba755e57720a1c"
+  integrity sha512-47s0me3Ov8+v5Apynhzce5RfNoO4onQW0/XyOPnjgCbv2FlIgWk0B4tRg41PwI1DbVgDhBZkS+T0jrJM1VPXPg==
 
 "@guardian/ab-react@1.0.0-next.0":
   version "1.0.0-next.0"

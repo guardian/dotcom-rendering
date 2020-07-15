@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-// import { useAB } from '@guardian/ab-react';
-// import { ABTest } from '@guardian/ab-core';
-// import { Runnable } from '@guardian/ab-core/dist/types';
+import React, { useState, useEffect } from 'react';
+import { useAB } from '@guardian/ab-react';
+import { ABTest, Runnable } from '@guardian/ab-core';
+
 import {
     setUserDismissedGate,
     hasUserDismissedGate,
@@ -12,8 +12,8 @@ import {
 } from '@frontend/web/components/SignInGate/gateDesigns/types';
 
 // Sign in Gate A/B Tests
-// import { signInGatePatientia } from ''@frontend/web/experiments/tests/sign-in-gate-patientia';
-// import { signInGateVii } from '@frontend/web/experiments/tests/sign-in-gate-vii';
+import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
+import { signInGateVii } from '@frontend/web/experiments/tests/sign-in-gate-vii';
 import { signInGateCentesimus } from '@frontend/web/experiments/tests/sign-in-gate-centesimus';
 
 // Sign in Gate Types
@@ -55,11 +55,11 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 
 // This should be added when the ab test framework is setup
 
-// const tests: ReadonlyArray<ABTest> = [
-//     signInGatePatientia,
-//     signInGateCentesimus,
-//     signInGateVii,
-// ];
+const tests: ReadonlyArray<ABTest> = [
+    signInGatePatientia,
+    signInGateCentesimus,
+    signInGateVii,
+];
 
 const testVariantToGateMapping: GateTestMap = {
     'patientia-control-1': signInGateComponentCentesimusControl2,
@@ -107,21 +107,31 @@ export const SignInGateSelector = ({
     CAPI,
 }: SignInGateSelectorProps) => {
     const [showGate, setShowGate] = useState(true);
+    const [currentTest, setCurrentTest] = useState({ id: '', variantId: '' });
 
     // wow this whole thing is tightly coupled to the AB test framework ...
-    // const ab = useAB();
+    const ab = useAB();
 
-    const test = {
-        ...signInGateCentesimus,
-        variantToRun: {
-            id: 'centesimus-control-2',
-            test: (): void => {},
-        },
-    };
-    // const test:Runnable<ABTest> = ab.firstRunnableTest(tests);
+    useEffect(() => {
+        const test: Runnable | null = ab.firstRunnableTest(tests);
 
-    const currentTestId = test?.id || '';
-    const currentVariantId = test?.variantToRun.id || '';
+        setCurrentTest({
+            id: test?.id || '',
+            variantId: test?.variantToRun.id || '',
+        });
+    }, [ab]);
+
+    // const test = {
+    //     ...signInGateCentesimus,
+    //     variantToRun: {
+    //         id: 'centesimus-control-2',
+    //         test: (): void => {},
+    //     },
+    // };
+
+    if (currentTest.id === '' || currentTest.variantId === '') {
+        return null;
+    }
 
     return (
         <>
@@ -129,8 +139,8 @@ export const SignInGateSelector = ({
                 signInGateFilter(
                     setShowGate,
                     {
-                        name: currentTestId,
-                        variant: currentVariantId,
+                        name: currentTest.id,
+                        variant: currentTest.variantId,
                     },
                     CAPI,
                     isSignedIn,
