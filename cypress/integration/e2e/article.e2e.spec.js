@@ -64,7 +64,13 @@ describe('E2E Page rendering', function () {
 
     describe('AB Tests - Can modify page', function () {
         it('should set the correct AB Test Variant', function () {
-            // Variant by cookie
+            // The A/B test has an audience of 0.001 and test offset of 0
+            // Therefore the test will run from MVTIds 0 - 100
+            // As there are two variants and therefore each variant falls into odd or even numbers
+            // The 'control' will be even numbers, and the 'variant' will be odd
+            // We test 99 here for the MVT cookie (set by Fastly usually) as expecting it to return
+            // the 'variant' of the A/B test
+            // See https://ab-tests.netlify.app/ for help caluclating buckets
             cy.setCookie('GU_mvt_id_local', '99', {
                 log: true,
             });
@@ -86,7 +92,8 @@ describe('E2E Page rendering', function () {
         });
 
         it('should not edit the page if not in an AB test', function () {
-            // Not in test
+            // See explanation above
+            // The test runs from 0-100 MVT IDs, so 500 should force user not to be in the test
             cy.setCookie('GU_mvt_id_local', '500', {
                 log: true,
             });
