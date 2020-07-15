@@ -46,9 +46,10 @@ const bodyStyle = (display: Display) => css`
     }
 `;
 
+// TODO, is the p > a styling scope well enough? What about anchors in list items?
 const linkColour = pillarMap(
     (pillar) => css`
-        a {
+        p > a {
             text-decoration: none;
             border-bottom: 1px solid ${border.secondary};
             ${pillarColours[pillar]};
