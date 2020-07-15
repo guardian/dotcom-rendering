@@ -62,7 +62,7 @@ describe('E2E Page rendering', function () {
         });
     });
 
-    describe.only('AB Tests - Can modify page', function () {
+    describe('AB Tests - Can modify page', function () {
         it('should set the correct AB Test Variant', function () {
             // Variant by cookie
             cy.setCookie('GU_mvt_id_local', '99', {
