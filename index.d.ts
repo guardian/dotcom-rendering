@@ -321,6 +321,26 @@ type CAPIBrowserType = {
         remoteBanner: boolean;
         ausMoment2020Header: boolean;
         switches: CAPIType['config']['switches'];
+        // TODO: This isn't right here
+        // we've got duplicates of certain config in here and outside of config
+        // We've got pageTypeType that comes as a seperate field from DCRCAPI object
+        // It all needs consolidating into one place that is understandable
+        // GT
+        page?: {
+            isColumn: boolean;
+            isFront: boolean;
+            isHosted: boolean;
+            isImmersive: boolean;
+            isLive: boolean;
+            isLiveBlog: boolean;
+            isNumberedList: boolean;
+            isPaidContent: boolean;
+            isPhotoEssay: boolean;
+            isSensitive: boolean;
+            isSplash: boolean;
+            section: string;
+            [key: string]: boolean | string;
+        };
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
