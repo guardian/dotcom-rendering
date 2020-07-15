@@ -646,7 +646,8 @@ type IslandType =
     | 'match-nav'
     | 'match-stats'
     | 'callout'
-    | 'comments';
+    | 'comments'
+    | 'sign-in-gate';
 
 interface TrailType {
     designType: DesignType;
