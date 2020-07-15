@@ -22,6 +22,9 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
         console.log('There is no MVT ID set, see HydrateApp.tsx');
     }
 
+    const ophanRecordFunc =
+        window && window.guardian && window.guardian.ophan.record;
+
     ReactDOM.render(
         <ABProvider
             arrayOfTestObjects={tests}
@@ -32,7 +35,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             pageIsSensitive={CAPI.config.isSensitive}
             mvtMaxValue={1000000}
             mvtId={mvtId}
-            ophanRecord={window.guardian.ophan.record}
+            ophanRecord={ophanRecordFunc}
         >
             <App CAPI={CAPI} NAV={NAV} />
         </ABProvider>,
