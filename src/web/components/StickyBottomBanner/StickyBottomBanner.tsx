@@ -19,7 +19,9 @@ export const StickyBottomBanner = ({
     countryCode,
     CAPI,
 }: Props) => {
-    const [CMPWillShow, setCMPWillShow] = useState<boolean | undefined>(null);
+    const [CMPWillShow, setCMPWillShow] = useState<boolean | undefined>(
+        undefined,
+    );
 
     useEffect(() => {
         willShowCMP().then(setCMPWillShow);
