@@ -1,12 +1,8 @@
 import { ccpaApplies } from '@root/src/web/lib/ccpaApplies';
-import { showPrivacyManager } from '@guardian/consent-management-platform';
+import { cmp } from '@guardian/consent-management-platform';
 
 const show = (forceModal?: boolean) => {
-    ccpaApplies().then((useCCPA) => {
-        if (useCCPA && forceModal) {
-            showPrivacyManager();
-        }
-    });
+    if (forceModal) cmp.showPrivacyManager();
 };
 
 export const addPrivacySettingsLink = (): void => {
