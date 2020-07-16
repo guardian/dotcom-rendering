@@ -1,9 +1,9 @@
 import { cmp } from '@guardian/consent-management-platform';
 
 jest.mock('@guardian/consent-management-platform', () => ({
-    cmp:{
+    cmp: {
         showPrivacyManager: jest.fn(),
-    }:
+    },
 }));
 
 describe('CMP', () => {
