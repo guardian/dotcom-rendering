@@ -1,6 +1,6 @@
 import { AdSlot } from "@guardian/bridget/AdSlot";
 import { Image } from "@guardian/bridget/Image";
-import { commercialClient, galleryClient, userClient, acquisitionsClient } from "../native/nativeApi";
+import { commercialClient, galleryClient, acquisitionsClient, userClient } from "../native/nativeApi";
 import { logger } from "../logger";
 import { memoise } from "../lib";
 

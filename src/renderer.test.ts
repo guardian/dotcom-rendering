@@ -1,14 +1,14 @@
-import { renderAll, renderStandfirstText, renderText, renderAllWithoutStyles } from 'renderer';
+import { renderAll, renderAllWithoutStyles, renderStandfirstText, renderText } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
-import { ReactNode, isValidElement } from 'react';
+import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
 import { none, some } from 'types/option';
 import Adapter from 'enzyme-adapter-react-16';
-import { Format, Design, Display } from '@guardian/types/Format';
+import { Design, Display, Format } from '@guardian/types/Format';
 
 configure({ adapter: new Adapter() });
 const mockFormat: Format = {
@@ -118,6 +118,22 @@ const atomElement = (): BodyElement =>
         html: "<main>Some content</main>",
         js: some("console.log('init')"),
     })
+
+const liveEventElement = (): BodyElement =>
+    ({
+        kind:ElementKind.LiveEvent,
+        linkText: "this links to a live event",
+        url: "https://gu.com/liveevent"
+    })
+
+const explainerElement = (): BodyElement =>
+    ({
+        kind:ElementKind.ExplainerAtom,
+        html: "<main>Some content</main>",
+        title: "this is an explainer atom",
+        id: ""
+    })
+
 
 const render = (element: BodyElement): ReactNode[] =>
     renderAll(mockFormat, [element]);
@@ -259,6 +275,18 @@ describe('Renders different types of elements', () => {
         expect(getHtml(atom)).toContain('main { background: yellow; }');
         expect(getHtml(atom)).toContain("console.log(&#x27;init&#x27;)");
         expect(getHtml(atom)).toContain('Some content');
+    })
+
+    test('ElementKind.LiveEvent', () => {
+        const nodes = render(liveEventElement())
+        const liveEvent = nodes.flat()[0];
+        expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
+    })
+
+    test('ElementKind.ExplainerAtom', () => {
+        const nodes = render(explainerElement())
+        const explainer = nodes.flat()[0];
+        expect(getHtml(explainer)).toContain('<main>Some content</main>');
     })
 });
 
