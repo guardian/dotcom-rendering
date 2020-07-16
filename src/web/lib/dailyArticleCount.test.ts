@@ -3,7 +3,6 @@ import {
     DailyArticleCountKey,
     getDailyArticleCount,
     incrementDailyArticleCount,
-    // incrementDailyArticleCount,
 } from './dailyArticleCount';
 
 const today = Math.floor(Date.now() / 86400000);
