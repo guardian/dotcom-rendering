@@ -1,6 +1,5 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
-import { CMP } from './CMP';
 
 const vendorList = {
     vendorListVersion: 207,
@@ -79,7 +78,7 @@ const vendorList = {
 };
 
 export default {
-    component: CMP,
+    // component: CMP,
     title: 'Components/CMP',
 };
 
@@ -91,6 +90,6 @@ export const defaultStory = () => {
             body: vendorList,
         });
 
-    return <CMP />;
+    return <></>;
 };
 defaultStory.story = { name: 'bottom banner' };
