@@ -16,7 +16,7 @@ interface TagsProps {
 }
 
 const tagsStyles = (format: Format): SerializedStyles => {
-    const backgroundColour = (format: Format) => {
+    const backgroundColour = (format: Format): string => {
         switch (format.design) {
             case Design.Comment:
                 return neutral[86];

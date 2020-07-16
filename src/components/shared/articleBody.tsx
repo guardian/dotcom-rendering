@@ -11,7 +11,7 @@ interface ArticleBodyProps {
     format: Format;
 }
 
-const ArticleBodyStyles = (format: Format) => css`
+const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     position: relative;
     clear: both;
 

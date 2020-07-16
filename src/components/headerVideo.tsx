@@ -18,14 +18,14 @@ const marginAuto = `
     margin-right: auto;
 `;
 
-const backgroundColour = (format: Format) => {
+const backgroundColour = (format: Format): string => {
     switch (format.design) {
         case Design.Media:
             return neutral[20];
         case Design.Comment:
             return neutral[86];
         default:
-            return neutral[97]
+            return neutral[97];
     }
 };
 

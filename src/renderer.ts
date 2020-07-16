@@ -380,7 +380,8 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 const richLinkWidth = '8.75rem';
 
 const richLinkStyles = (format: Format): SerializedStyles => {
-    const backgroundColor = (format: Format) => format.design === Design.Comment ? neutral[86] : neutral[97];
+    const backgroundColor = (format: Format): string =>
+        format.design === Design.Comment ? neutral[86] : neutral[97];
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
@@ -603,7 +604,8 @@ const render = (format: Format, excludeStyles = false) =>
         case ElementKind.MediaAtom: {
             const { posterUrl, videoId, duration, caption } = element;
 
-            const backgroundColor = (format: Format) => format.design === Design.Comment ? neutral[86] : neutral[97];
+            const backgroundColor = (format: Format): string =>
+                format.design === Design.Comment ? neutral[86] : neutral[97];
 
             const styles = css`
                 width: 100%;

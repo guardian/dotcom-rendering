@@ -7,7 +7,7 @@ import { Pillar } from 'format';
 import { remSpace } from "@guardian/src-foundations";
 import { Format } from '@guardian/types/Format';
 
-const ArticleBodyStyles = (format: Format) => css`
+const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     position: relative;
     clear: both;
     background: ${background.inverse}    
@@ -39,7 +39,9 @@ const ArticleBodyMedia = ({
     children,
     format
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles(getPillarStyles(pillar)), ...className]}>
+    <div css={[ArticleBodyStyles(format),
+        ArticleBodyDarkStyles(getPillarStyles(pillar)),
+        ...className]}>
         {children}
     </div>
 

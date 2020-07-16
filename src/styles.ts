@@ -65,7 +65,7 @@ export const articleWidthStyles = css`
 
 const adHeight = '258px';
 
-export const adStyles  = (format: Format) => {
+export const adStyles  = (format: Format): SerializedStyles => {
     const backgroundColour = format.design === Design.Comment ? neutral[86] : neutral[97];
 
     return css`
