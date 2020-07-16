@@ -27,6 +27,7 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
@@ -172,6 +173,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         incrementAlreadyVisited();
+    }, []);
+
+    useEffect(() => {
+        incrementDailyArticleCount();
     }, []);
 
     // Log an article view using the Slot Machine client lib
