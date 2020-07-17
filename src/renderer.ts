@@ -1,17 +1,17 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, ReactElement, FC } from 'react';
+import { createElement as h, FC, ReactElement, ReactNode } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { text as textColour, neutral } from '@guardian/src-foundations/palette';
-import { Option, fromNullable, some, none, andThen, map, withDefault } from 'types/option';
-import { basePx, icons, darkModeCss } from 'styles';
+import { neutral, text as textColour } from '@guardian/src-foundations/palette';
+import { andThen, fromNullable, map, none, Option, some, withDefault } from 'types/option';
+import { basePx, darkModeCss, icons } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
-import { ElementKind, BodyElement } from 'bodyElement';
-import { Role, BodyImageProps } from 'image';
+import { BodyElement, ElementKind } from 'bodyElement';
+import { BodyImageProps, Role } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace, palette } from '@guardian/src-foundations';
+import { palette, remSpace } from '@guardian/src-foundations';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
@@ -20,10 +20,10 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
-import InteractiveAtom, { atomCss, atomScript } from 'components/atoms/interactiveAtom';
+import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
-import { isElement, pipe2, pipe } from 'lib';
+import { isElement, pipe, pipe2 } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import { fromUnsafe, Result, toOption } from 'types/result';
@@ -380,6 +380,7 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 const richLinkWidth = '8.75rem';
 
 const richLinkStyles = (format: Format): SerializedStyles => {
+    const backgroundColor = format.design === Design.Comment ? neutral[86] : neutral[97];
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
@@ -390,7 +391,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
         `
 
     return css`
-        background: ${neutral[97]};
+        background: ${backgroundColor};
         padding: ${basePx(1)};
         border-top: solid 1px ${neutral[60]};
 
@@ -601,11 +602,15 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.MediaAtom: {
             const { posterUrl, videoId, duration, caption } = element;
+
+            const backgroundColor = (format: Format): string =>
+                format.design === Design.Comment ? neutral[86] : neutral[97];
+
             const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
                 margin: 0;
-                background: ${neutral[97]};
+                background: ${backgroundColor(format)};
                 ${darkModeCss`
                     background: ${neutral[20]};
                 `}

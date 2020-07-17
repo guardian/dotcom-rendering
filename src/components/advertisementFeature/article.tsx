@@ -65,7 +65,7 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
                     {pipe2(item.logo, map(props => <Logo logo={props} />), withDefault(<></>))}
                 </section>
             </header>
-            <Body className={[articleWidthStyles]}>
+            <Body className={[articleWidthStyles]} format={item}>
                 {children}
             </Body>
         </article>
