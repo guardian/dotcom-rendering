@@ -7,7 +7,7 @@ import { ArticleMeta } from './ArticleMeta';
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
         className={css`
-            width: 620px;
+            width: 220px;
             padding: 20px;
         `}
     >
