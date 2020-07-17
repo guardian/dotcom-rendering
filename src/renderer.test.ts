@@ -128,7 +128,7 @@ const liveEventElement = (): BodyElement =>
 
 const explainerElement = (): BodyElement =>
     ({
-        kind:ElementKind.ExplainerAtom,
+        kind: ElementKind.ExplainerAtom,
         html: "<main>Some content</main>",
         title: "this is an explainer atom",
         id: ""
