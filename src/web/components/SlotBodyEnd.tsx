@@ -102,6 +102,8 @@ const buildPayload = (props: Props) => {
             lastOneOffContributionDate: getLastOneOffContributionDate(),
             epicViewLog: getViewLog(),
             weeklyArticleHistory: getWeeklyArticleHistory(),
+            hasOptedOutOfArticleCount:
+                getCookie('gu_article_count_opt_out') !== null,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
         },

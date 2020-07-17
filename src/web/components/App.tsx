@@ -166,7 +166,9 @@ export const App = ({ CAPI, NAV }: Props) => {
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        if (getCookie('gu_article_count_opt_out') == null) {
+            incrementWeeklyArticleCount();
+        }
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
