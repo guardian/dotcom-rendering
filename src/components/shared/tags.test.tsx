@@ -3,7 +3,7 @@ import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Tags from 'components/shared/tags';
 import { SerializedStyles } from '@emotion/core';
-import { Design, Display, Format, Pillar } from "../../format";
+import { Design, Display, Format, Pillar } from '@guardian/types/Format';
 
 configure({ adapter: new Adapter() });
 
