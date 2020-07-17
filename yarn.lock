@@ -2422,10 +2422,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/consent-management-platform@4.0.0-2":
-  version "4.0.0-2"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-4.0.0-2.tgz#ad055a1f7470f440863d049b36a27bb41ed5d990"
-  integrity sha512-FCgl/6MgH7NU+Qg950DjF+avisQunZK9Rs0ZMIzcFzXT8QO3SJn9H4n1y4Y0RqUGe4V40n+5KmcgCfGAkwsBmA==
+"@guardian/consent-management-platform@4.0.0-5":
+  version "4.0.0-5"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-4.0.0-5.tgz#2980e4794754c3a297ea172cfe11712b08b5f54c"
+  integrity sha512-yhcSVOQ8ULHSNHe88RXemvKxzFG5uMmv0Qul3GU9S5KUsrq/KdPFnnbdt72H+dH9l2AtffxX2oJ42TZcSAriJw==
   dependencies:
     "@guardian/old-cmp" "npm:@guardian/consent-management-platform@^3.4.9"
 
