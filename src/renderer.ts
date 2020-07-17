@@ -380,8 +380,7 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 const richLinkWidth = '8.75rem';
 
 const richLinkStyles = (format: Format): SerializedStyles => {
-    const backgroundColor = (format: Format): string =>
-        format.design === Design.Comment ? neutral[86] : neutral[97];
+    const backgroundColor = format.design === Design.Comment ? neutral[86] : neutral[97];
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
@@ -392,7 +391,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
         `
 
     return css`
-        background: ${backgroundColor(format)};
+        background: ${backgroundColor};
         padding: ${basePx(1)};
         border-top: solid 1px ${neutral[60]};
 
