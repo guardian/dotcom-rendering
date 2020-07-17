@@ -27,6 +27,7 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { hasOptedOutOfArticleCount } from '../lib/contributions';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -166,7 +167,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        if (getCookie('gu_article_count_opt_out') == null) {
+        if (!hasOptedOutOfArticleCount()) {
             incrementWeeklyArticleCount();
         }
     }, []);
