@@ -121,7 +121,7 @@ const atomElement = (): BodyElement =>
 
 const liveEventElement = (): BodyElement =>
     ({
-        kind:ElementKind.LiveEvent,
+        kind: ElementKind.LiveEvent,
         linkText: "this links to a live event",
         url: "https://gu.com/liveevent"
     })
