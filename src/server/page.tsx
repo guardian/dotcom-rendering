@@ -26,6 +26,7 @@ import { Option, some, none, map, withDefault } from 'types/option';
 import { compose, pipe2 } from 'lib';
 import { csp } from 'server/csp';
 import { remSpace, background } from '@guardian/src-foundations';
+import { atomCss, atomScript } from "components/atoms/interactiveAtom";
 
 
 // ----- Setup ----- //
@@ -135,7 +136,6 @@ const Head: FC<HeadProps> = ({ webTitle }: HeadProps) =>
         <title>{webTitle}</title>
         <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-        <link rel="stylesheet" href="native://fontSize.css" />
     </>
 
 
@@ -178,7 +178,12 @@ function page(
             <Body item={item} shouldHideAds={shouldHideAds} />
         </CacheProvider>
     );
-    const cspString = csp(item, { scripts: [], styles: [styles(getFormat(item)), css] }, hasTweets);
+
+    const cspString = csp(item, {
+        scripts: [atomScript],
+        styles: [styles(getFormat(item)), css, atomCss]
+    }, hasTweets);
+
     const html = `
         <html lang="en">
             <head>

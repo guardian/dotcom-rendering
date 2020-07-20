@@ -81,10 +81,6 @@ const captionHeadingStyles = css`
     display: block;
 `;
 
-const anchorStyles = css`
-    color: ${neutral[86]};
-`;
-
 const captionElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
     const children = Array.from(node.childNodes).map(captionElement(format));
@@ -101,7 +97,9 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
             return (
                 <Anchor
                     href={withDefault('')(getHref(node))}
-                    className={anchorStyles}
+                    className={
+                        format.design === Design.Media ? css`color: ${neutral[86]};` : undefined
+                    }
                     format={format}
                 >
                     {children}
