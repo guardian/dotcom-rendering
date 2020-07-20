@@ -12,6 +12,7 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
     shouldHideSupportMessaging,
+    hasOptedOutOfArticleCount,
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
@@ -102,6 +103,7 @@ const buildPayload = (props: Props) => {
             lastOneOffContributionDate: getLastOneOffContributionDate(),
             epicViewLog: getViewLog(),
             weeklyArticleHistory: getWeeklyArticleHistory(),
+            hasOptedOutOfArticleCount: hasOptedOutOfArticleCount(),
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
         },

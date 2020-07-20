@@ -319,7 +319,9 @@ type CAPIBrowserType = {
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
         remoteBanner: boolean;
+        remoteSubscriptionsBanner: boolean;
         ausMoment2020Header: boolean;
+        switches: CAPIType['config']['switches'];
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;

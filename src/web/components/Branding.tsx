@@ -4,6 +4,8 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { neutral } from '@guardian/src-foundations';
 import { pillarPalette } from '@root/src/lib/pillars';
+import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
+import { until } from '@guardian/src-foundations/mq';
 
 const brandingStyle = css`
     padding-bottom: 10px;
@@ -15,6 +17,11 @@ const brandingLabelStyle = css`
 `;
 
 const brandingLogoStyle = css`
+    ${until.phablet} {
+        max-width: 150px;
+    }
+    max-width: 220px;
+    width: 100%;
     padding: 10px 0;
 `;
 
@@ -36,20 +43,25 @@ export const Branding: React.FC<{
     return (
         <div className={brandingStyle}>
             <div className={brandingLabelStyle}>{branding.logo.label}</div>
-            <a
-                className={brandingLogoStyle}
-                href={branding.logo.link}
-                data-sponsor={branding.sponsorName.toLowerCase()}
-                rel="nofollow"
-                aria-label={`Visit the ${branding.sponsorName} website`}
-            >
-                <img
-                    src={branding.logo.src}
-                    width={branding.logo.dimensions.width}
+            <div className={brandingLogoStyle}>
+                <MaintainAspectRatio
                     height={branding.logo.dimensions.height}
-                    alt={branding.sponsorName}
-                />
-            </a>
+                    width={branding.logo.dimensions.width}
+                >
+                    <a
+                        href={branding.logo.link}
+                        data-sponsor={branding.sponsorName.toLowerCase()}
+                        rel="nofollow"
+                        aria-label={`Visit the ${branding.sponsorName} website`}
+                    >
+                        <img
+                            src={branding.logo.src}
+                            alt={branding.sponsorName}
+                        />
+                    </a>
+                </MaintainAspectRatio>
+            </div>
+
             <a
                 href={branding.aboutThisLink}
                 className={brandingAboutLink(pillar)}

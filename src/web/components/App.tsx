@@ -27,6 +27,12 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
+
+import { hasOptedOutOfArticleCount } from '../lib/contributions';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -114,6 +120,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
+    // *******************************
+    // ** Setup AB Test Tracking *****
+    // *******************************
+    const ABTestAPI = useAB();
+    useEffect(() => {
+        const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+        ABTestAPI.registerImpressionEvents(allRunnableTests);
+        ABTestAPI.registerCompleteEvents(allRunnableTests);
+    }, [ABTestAPI]);
+
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
@@ -161,12 +177,18 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementAlreadyVisited();
     }, []);
 
+    useEffect(() => {
+        incrementDailyArticleCount();
+    }, []);
+
     // Log an article view using the Slot Machine client lib
     // This function must be called once per article serving.
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        if (!hasOptedOutOfArticleCount()) {
+            incrementWeeklyArticleCount();
+        }
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120

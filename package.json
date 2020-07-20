@@ -33,6 +33,8 @@
     "dependencies": {
         "@babel/runtime": "^7.9.2",
         "@emotion/core": "^10.0.28",
+        "@guardian/ab-core": "1.0.1-next.0",
+        "@guardian/ab-react": "1.0.0-next.0",
         "@guardian/atoms-rendering": "^1.3.4",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/consent-management-platform": "^3.4.5",
@@ -158,7 +160,7 @@
         "babel-plugin-transform-runtime": "^6.23.0",
         "bundlesize": "^0.18.0",
         "chromatic": "^5.0.0",
-        "cypress": "^3.8.3",
+        "cypress": "^4.10.0",
         "cypress-plugin-tab": "^1.0.5",
         "desvg-loader": "^0.1.0",
         "doctoc": "^1.4.0",
