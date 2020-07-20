@@ -37,6 +37,8 @@ type Props = {
     contributionsServiceUrl: string;
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
+    subscriptionBannerLastClosedAt?: string;
+    switches: { [key: string]: boolean };
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -55,8 +57,11 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn),
             engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
+            subscriptionBannerLastClosedAt:
+                props.subscriptionBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
+            switches: props.switches,
         },
     };
 };
@@ -74,6 +79,8 @@ const MemoisedInner = ({
     contributionsServiceUrl,
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
+    subscriptionBannerLastClosedAt,
+    switches,
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
@@ -98,6 +105,8 @@ const MemoisedInner = ({
             isSensitive,
             alreadyVisitedCount,
             engagementBannerLastClosedAt,
+            subscriptionBannerLastClosedAt,
+            switches,
         });
 
         window.guardian.automat = {
@@ -192,6 +201,8 @@ export const ReaderRevenueBanner = ({
     contributionsServiceUrl,
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
+    subscriptionBannerLastClosedAt,
+    switches,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -213,6 +224,8 @@ export const ReaderRevenueBanner = ({
             contributionsServiceUrl={contributionsServiceUrl}
             alreadyVisitedCount={alreadyVisitedCount}
             engagementBannerLastClosedAt={engagementBannerLastClosedAt}
+            subscriptionBannerLastClosedAt={subscriptionBannerLastClosedAt}
+            switches={switches}
         />
     );
 };
