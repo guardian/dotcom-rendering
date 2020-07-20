@@ -5,6 +5,11 @@ interface DailyArticle {
 
 export type DailyArticleCount = Array<DailyArticle>;
 
+// in localStorage, has format {"value":[{"day":18459,"count":1},{"day":18457,"count":1},{"day":18446,"count":1}]} to match frontend
+interface DailyArticleCountLocalStorage {
+    value: DailyArticleCount;
+}
+
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
 export const getDailyArticleCount = (): DailyArticleCount => {
@@ -15,7 +20,14 @@ export const getDailyArticleCount = (): DailyArticleCount => {
     }
 
     try {
-        return JSON.parse(dailyCount);
+        const { value }: DailyArticleCountLocalStorage = JSON.parse(dailyCount);
+
+        // check if value parsed correctly
+        if (!value || !value.length) {
+            throw new Error('Invalid gu.history.dailyArticleCount value');
+        }
+
+        return value;
     } catch (e) {
         // error parsing the string, so remove the key
         localStorage.removeItem(DailyArticleCountKey);
@@ -57,6 +69,8 @@ export const incrementDailyArticleCount = (): void => {
     // set the latest article count
     localStorage.setItem(
         DailyArticleCountKey,
-        JSON.stringify(dailyArticleCount),
+        JSON.stringify({
+            value: dailyArticleCount,
+        } as DailyArticleCountLocalStorage),
     );
 };
