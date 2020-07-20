@@ -8,6 +8,17 @@ import {
 } from '@frontend/web/components/SignInGate/displayRule';
 
 const canShow = (CAPI: CAPIBrowserType): boolean => {
+    console.log('canShow main-variant');
+    console.log('isNPageOrHigherPageView(3)', isNPageOrHigherPageView(3));
+    console.log('!isInvalidArticleType(CAPI)', !isInvalidArticleType(CAPI));
+    console.log('!isInvalidSection(CAPI)', !isInvalidSection(CAPI));
+    console.log('!isIOS9()', !isIOS9());
+    console.log(
+        isNPageOrHigherPageView(3) &&
+            !isInvalidArticleType(CAPI) &&
+            !isInvalidSection(CAPI) &&
+            !isIOS9(),
+    );
     return (
         isNPageOrHigherPageView(3) &&
         !isInvalidArticleType(CAPI) &&
@@ -16,7 +27,7 @@ const canShow = (CAPI: CAPIBrowserType): boolean => {
     );
 };
 
-export const signInGateComponentCentesimusControl2: SignInGateComponent = {
+export const signInGateComponent: SignInGateComponent = {
     gate: SignInGateVii,
     canShow,
 };

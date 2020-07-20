@@ -1,22 +1,12 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
+import { getDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
     // get daily read article count array from local storage
-    const getDailyArticleCount = (): { count: number; day: number } => {
-        try {
-            const item = localStorage.getItem('gu.history.dailyArticleCount');
-            const defaultIfNothingInLocalStorage = { count: 0 };
-            return (
-                // get the count from latest date, if it doesnt exist, set to 0
-                (item && JSON.parse(item).value[0]) ||
-                defaultIfNothingInLocalStorage
-            );
-        } catch {
-            return { count: 0, day: 0 };
-        }
-    };
+    const [dailyCount] = getDailyArticleCount();
 
-    const { count } = getDailyArticleCount();
+    const { count = 0 } = dailyCount;
 
     // check if count is greater or equal to 1 less than n since dailyArticleCount is incremented after this component is loaded
     return count >= n - 1;

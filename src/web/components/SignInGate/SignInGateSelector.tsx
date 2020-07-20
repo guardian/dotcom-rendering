@@ -13,11 +13,11 @@ import {
 
 // Sign in Gate A/B Tests
 import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
-import { signInGateVii } from '@frontend/web/experiments/tests/sign-in-gate-vii';
-import { signInGateCentesimus } from '@frontend/web/experiments/tests/sign-in-gate-centesimus';
+import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
+import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 
 // Sign in Gate Types
-import { signInGateComponentCentesimusControl2 } from '@frontend/web/components/SignInGate/gates/centesimus-control-2';
+import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-variant';
 
 // component name, should always be sign-in-gate
 export const componentName = 'sign-in-gate';
@@ -57,15 +57,15 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 
 const tests: ReadonlyArray<ABTest> = [
     signInGatePatientia,
-    signInGateCentesimus,
-    signInGateVii,
+    signInGateMainVariant,
+    signInGateMainControl,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-    'patientia-control-1': signInGateComponentCentesimusControl2,
-    'patientia-variant-1': signInGateComponentCentesimusControl2,
-    'centesimus-control-2': signInGateComponentCentesimusControl2,
-    'vii-variant': signInGateComponentCentesimusControl2,
+    // 'patientia-control-1': gateMainControl,
+    // 'patientia-variant-1': gateMainControl,
+    // 'main-control-1': gateMainControl,
+    'main-variant-1': gateMainControl,
 };
 
 /*
@@ -82,12 +82,19 @@ const signInGateFilter = (
     CAPI: CAPIBrowserType,
     isSignedIn?: boolean,
 ): JSX.Element | undefined => {
+    console.log(setShowGate, abTest, CAPI, isSignedIn);
     const gateVariant: SignInGateComponent | null =
         testVariantToGateMapping?.[abTest.variant];
-
+    console.log('gateVariant', gateVariant);
+    console.log('gateVariant?.canShow(CAPI)', gateVariant?.canShow(CAPI));
+    console.log('!!isSignedIn', !isSignedIn);
+    console.log(
+        '!hasUserDismissedGate(abTest.variant, abTest.name)',
+        !hasUserDismissedGate(abTest.variant, abTest.name),
+    );
     if (
         gateVariant?.canShow(CAPI) &&
-        !!isSignedIn &&
+        !isSignedIn &&
         !hasUserDismissedGate(abTest.variant, abTest.name)
     ) {
         return gateVariant.gate({
@@ -122,17 +129,17 @@ export const SignInGateSelector = ({
     }, [ab]);
 
     // const test = {
-    //     ...signInGateCentesimus,
+    //     ...signInGateMainVariant,
     //     variantToRun: {
     //         id: 'centesimus-control-2',
     //         test: (): void => {},
     //     },
     // };
-
+    console.log('currentTest', currentTest);
     if (currentTest.id === '' || currentTest.variantId === '') {
         return null;
     }
-
+    console.log('showGate', showGate);
     return (
         <>
             {showGate &&
