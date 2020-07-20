@@ -27,6 +27,7 @@ import { isElement, pipe2, pipe } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import { fromUnsafe, Result, toOption } from 'types/result';
+import CalloutForm from 'components/calloutForm';
 
 
 // ----- Renderer ----- //
@@ -529,6 +530,11 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.Video:
             return h(Video, { src: element.src, width: element.width, height: element.height })
+
+        case ElementKind.Callout: {
+            const { campaign } = element;
+            return h(CalloutForm, { campaign, format });
+        }
 
         case ElementKind.Embed: {
             const props = {

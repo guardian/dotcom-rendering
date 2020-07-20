@@ -18,6 +18,7 @@ import { MainMedia } from 'headerMedia';
 import { pipe2 } from 'lib';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
+import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 
 // ----- Item Type ----- //
 
@@ -35,6 +36,7 @@ interface Fields extends Format {
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
     commentCount: Option<number>;
+    campaigns: Option<Campaign[]>;
 }
 
 interface Liveblog extends Fields {
@@ -133,7 +135,8 @@ function getDisplay(content: Content): Display {
 }
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
-    const { content, branding, commentCount } = request;
+    const { content, branding, commentCount, campaigns } = request;
+
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
@@ -149,7 +152,8 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         tags: content.tags,
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
         branding: fromNullable(branding),
-        commentCount: fromNullable(commentCount)
+        commentCount: fromNullable(commentCount),
+        campaigns: fromNullable(campaigns)
     }
 }
 
@@ -157,10 +161,11 @@ const itemFieldsWithBody = (context: Context, request: RenderingRequest): ItemFi
     const { content } = request;
     const body = content?.blocks?.body ?? [];
     const atoms = content?.atoms;
+    const campaigns = request.campaigns;
     const elements = body[0]?.elements;
     return ({
         ...itemFields(context, request),
-        body: elements !== undefined ? parseElements(context, atoms)(elements): [],
+        body: elements !== undefined ? parseElements(context, atoms, campaigns)(elements): [],
     });
 }
 

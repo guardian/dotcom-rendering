@@ -110,9 +110,89 @@ function insertEpic(): void {
     }
 }
 
+function submit(body: { [key: string]: string | File | Promise<File>; }) {
+    fetch('https://callouts.code.dev-guardianapis.com/formstack-campaign/submit', {
+        method: 'POST',
+        body: JSON.stringify(body)
+    })
+}
+
+function readFile(file: Blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        setTimeout(reject, 30000);
+
+        reader.addEventListener('load', () => {
+                if (reader.result) {
+                    const fileAsBase64 = reader.result
+                        .toString()
+                        .split(';base64,')[1];
+                    resolve(fileAsBase64);
+                }
+            }
+        );
+
+        reader.addEventListener('error', () => {
+            reject();
+        });
+
+        reader.readAsDataURL(file);
+    })
+}
+
+function callouts() {
+    const callouts = Array.from(document.querySelectorAll('details.callout'));
+    callouts.forEach(callout => {
+        const buttons = Array.from(callout.querySelectorAll('.callout-expand'));
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                callout.toggleAttribute('open')
+            })
+        })
+
+        const form = callout.querySelector('form');
+        if (!form) return;
+        let promises: Promise<File>[] = [];
+        let keys: string[] = [];
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const elements = form.elements as HTMLCollectionOf<HTMLInputElement>;
+            const data = Array.from(elements).reduce((o: { [key: string]: string | Promise<File> | File }, e) => {
+                if (e.type === 'radio') {
+                    if (e.checked) {
+                        o[e.name] = e.value;
+                    }
+                } else if (e.type === 'file' && e?.files?.length) {
+                    const filePromise = readFile(e.files[0]) as Promise<File>;
+                    promises.push(filePromise);
+                    keys.push(e.name);
+                    o[e.name] = filePromise;
+                } else if (e.value) {
+                    o[e.name] = e.value;
+                }
+
+                return o;
+            }, {});
+
+            Promise.all(promises).then(results => {
+                results.map((result, index) => {
+                    data[keys[index]] = result;
+                })
+
+                submit(data);
+            }).catch(() => {
+                // displayFileError(campaign, form);
+            })
+
+        })
+    })
+}
+
 setup();
 ads();
 topics();
 slideshow();
 formatDates();
 insertEpic();
+callouts();
