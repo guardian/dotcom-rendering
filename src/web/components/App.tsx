@@ -33,6 +33,8 @@ import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
+import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
@@ -185,7 +187,9 @@ export const App = ({ CAPI, NAV }: Props) => {
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        if (!hasOptedOutOfArticleCount()) {
+            incrementWeeklyArticleCount();
+        }
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120

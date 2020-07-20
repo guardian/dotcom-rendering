@@ -36,7 +36,7 @@ describe('dailyArticleCount', () => {
     it('returns array of valid daily article counts if they exist', () => {
         localStorage.setItem(
             DailyArticleCountKey,
-            JSON.stringify(validDailyArticleCount),
+            JSON.stringify({ value: validDailyArticleCount }),
         );
 
         const output = getDailyArticleCount();
@@ -46,6 +46,18 @@ describe('dailyArticleCount', () => {
 
     it('returns empty array of daily article counts if failed to parse local storage, and remove the key from localStorage', () => {
         localStorage.setItem(DailyArticleCountKey, 'not a valid json string');
+
+        const output = getDailyArticleCount();
+
+        expect(output).toEqual([]);
+        expect(localStorage.getItem(DailyArticleCountKey)).toBeNull();
+    });
+
+    it('returns empty array of daily article counts if invalid json format, and removes the key from localStorage', () => {
+        localStorage.setItem(
+            DailyArticleCountKey,
+            JSON.stringify(validDailyArticleCount), // invalid format (array only, not it { value: array } format)
+        );
 
         const output = getDailyArticleCount();
 
@@ -73,7 +85,7 @@ describe('dailyArticleCount', () => {
         // set localstorage to mock daily count
         localStorage.setItem(
             DailyArticleCountKey,
-            JSON.stringify(validDailyArticleCount),
+            JSON.stringify({ value: validDailyArticleCount }),
         );
 
         // increment article view
@@ -93,7 +105,10 @@ describe('dailyArticleCount', () => {
         const [, ...mocked] = validDailyArticleCount;
 
         // set localstorage to mock daily count
-        localStorage.setItem(DailyArticleCountKey, JSON.stringify(mocked));
+        localStorage.setItem(
+            DailyArticleCountKey,
+            JSON.stringify({ value: mocked }),
+        );
 
         // increment article view
         incrementDailyArticleCount();
@@ -119,7 +134,10 @@ describe('dailyArticleCount', () => {
         ];
 
         // set localstorage to mock daily count
-        localStorage.setItem(DailyArticleCountKey, JSON.stringify(mocked));
+        localStorage.setItem(
+            DailyArticleCountKey,
+            JSON.stringify({ value: mocked }),
+        );
 
         // increment article view
         incrementDailyArticleCount();

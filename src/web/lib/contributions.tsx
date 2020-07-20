@@ -4,6 +4,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
+export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
 // Support Frontend cookies (dropped when contribution is made)
 export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
@@ -110,3 +111,6 @@ export const shouldHideSupportMessaging = (
     !shouldShowSupportMessaging() ||
     isRecurringContributor(isSignedIn) ||
     isRecentOneOffContributor();
+
+export const hasOptedOutOfArticleCount = (): boolean =>
+    getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
