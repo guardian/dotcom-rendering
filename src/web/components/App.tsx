@@ -28,6 +28,10 @@ import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -115,6 +119,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
+    // *******************************
+    // ** Setup AB Test Tracking *****
+    // *******************************
+    const ABTestAPI = useAB();
+    useEffect(() => {
+        const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+        ABTestAPI.registerImpressionEvents(allRunnableTests);
+        ABTestAPI.registerCompleteEvents(allRunnableTests);
+    }, [ABTestAPI]);
+
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
@@ -160,6 +174,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         incrementAlreadyVisited();
+    }, []);
+
+    useEffect(() => {
+        incrementDailyArticleCount();
     }, []);
 
     // Log an article view using the Slot Machine client lib

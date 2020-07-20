@@ -19,7 +19,7 @@ export interface WindowGuardianConfig {
         ajaxUrl: string;
         hbImpl: object | string;
         shouldHideReaderRevenue: boolean;
-    };
+    } & ConfigType;
     libs: {
         googletag: string;
     };
@@ -114,6 +114,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             ampIframeUrl: CAPI.config.ampIframeUrl,
 
             // switches
+            switches: CAPI.config.switches,
             cmpUi: CAPI.config.switches.cmpUi,
             slotBodyEnd: CAPI.config.switches.slotBodyEnd,
             ampPrebid: CAPI.config.switches.ampPrebid,
@@ -121,6 +122,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             enableSentryReporting: CAPI.config.switches.enableSentryReporting,
             enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
             remoteBanner: CAPI.config.switches.remoteBanner,
+            remoteSubscriptionsBanner:
+                CAPI.config.switches.remoteSubscriptionsBanner,
             ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
             // used by lib/ad-targeting.ts
