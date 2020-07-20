@@ -97,12 +97,12 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                     {OptionalLogo(item)}
                 </section>
             </header>
-            <Body className={[articleWidthStyles, itemStyles(item)]}>
+            <Body className={[articleWidthStyles, itemStyles(item)]} format={item}>
                 {children}
             </Body>
             {epicContainer}
             <footer css={articleWidthStyles}>
-                <Tags tags={item.tags}/>
+                <Tags tags={item.tags} format={item}/>
             </footer>
         </article>
     </main>

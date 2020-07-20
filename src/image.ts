@@ -79,11 +79,12 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
         width: width.toString(),
         quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
         fit: 'bounds',
-        'sig-ignores-params': 'true',
-        s: sign(salt, url.pathname),
     });
 
-    return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
+    const path = `${url.pathname}?${params.toString()}`;
+    const sig = sign(salt, path);
+
+    return `${imageResizer}/${service}${path}&s=${sig}`;
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>

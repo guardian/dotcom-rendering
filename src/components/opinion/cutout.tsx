@@ -8,6 +8,7 @@ import Img from 'components/img';
 import { darkModeCss } from 'styles';
 import { pipe2 } from 'lib';
 import { map, withDefault } from 'types/option';
+import { Format } from '@guardian/types/Format';
 
 
 // ----- Styles ----- //
@@ -34,9 +35,10 @@ const imageStyles = css`
 interface Props {
     contributors: Contributor[];
     className: SerializedStyles;
+    format: Format;
 }
 
-const Cutout = ({ contributors, className }: Props): JSX.Element | null => {
+const Cutout = ({ contributors, className, format }: Props): JSX.Element | null => {
     const [contributor] = contributors;
 
     if (!isSingleContributor(contributors)) {
@@ -51,6 +53,7 @@ const Cutout = ({ contributors, className }: Props): JSX.Element | null => {
                     image={image}
                     sizes="12rem"
                     className={imageStyles}
+                    format={format}
                 />
             </div>
         ),

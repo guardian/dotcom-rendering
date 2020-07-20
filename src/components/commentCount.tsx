@@ -3,12 +3,13 @@
 import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
-import { border } from '@guardian/src-foundations/palette';
+import { border, neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, map, withDefault } from 'types/option';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
 import { pipe2 } from 'lib';
+import { darkModeCss } from 'styles';
 
 
 // ----- Component ----- //
@@ -25,6 +26,9 @@ const styles = (colour: string): SerializedStyles => css`
     border-left: 1px solid ${border.secondary};
     padding-top: ${remSpace[2]};
     color: ${colour};
+    ${darkModeCss`
+        border-left: 1px solid ${neutral[20]};
+    `}
 `;
 
 const bubbleStyles = (colour: string): SerializedStyles => css`

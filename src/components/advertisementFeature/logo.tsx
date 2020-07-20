@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { darkModeCss } from 'styles';
-import { remSpace, neutral, text } from '@guardian/src-foundations';
+import { remSpace, neutral, text, palette } from '@guardian/src-foundations';
 import { Logo } from 'capi';
 
 interface Props {
@@ -15,11 +15,19 @@ const styles = css`
     ${textSans.medium()}
     color: ${text.supporting};
 
+    a {
+        color: ${palette.labs[300]};
+    }
+
     ${darkModeCss`
         color: ${neutral[60]};
         img {
             padding: ${remSpace[2]};
             background: ${neutral[86]};
+        }
+
+        a {
+            color: ${neutral[7]};
         }
     `}
 `;

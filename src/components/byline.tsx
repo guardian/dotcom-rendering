@@ -104,18 +104,11 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
     }
 }
 
-const getProfileLink = (node: Node): string => {
-    const href = withDefault('')(getHref(node));
-    return href.startsWith('profile/')
-        ? `https://www.theguardian.com/${href}`
-        : href
-}
-
 const toReact = (format: Format) => (node: Node): ReactNode => {
     switch (node.nodeName) {
         case 'A':
             return (
-                <a href={getProfileLink(node)} css={getAnchorStyles(format)}>
+                <a href={withDefault('')(getHref(node))} css={getAnchorStyles(format)}>
                     {node.textContent ?? ''}
                 </a>
             );
