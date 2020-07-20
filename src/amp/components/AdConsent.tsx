@@ -52,7 +52,7 @@ const buttonStyle = css`
 const acceptStyle = css`
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    background: ${palette.brandYellow.main};
+    background: ${palette.brandAlt[400]};
     color: ${palette.neutral[7]};
     padding: 5px 20px;
     font-weight: bold;

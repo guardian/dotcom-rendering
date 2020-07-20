@@ -5,7 +5,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const sidebarStyles = css`
     width: 80vh;
-    background-color: ${palette.brand.main};
+    background-color: ${palette.brand[400]};
 
     [aria-expanded='true'] {
         i {
@@ -75,7 +75,7 @@ const link = css`
 `;
 
 const subLinks = css`
-    background-color: ${palette.brand.dark};
+    background-color: ${palette.brand[300]};
     padding-bottom: 12px;
 
     a {
@@ -92,7 +92,7 @@ const otherLinks = css`
 const membershipLinks = css`
     a {
         font-weight: 700;
-        color: ${palette.brandYellow.main};
+        color: ${palette.brandAlt[400]};
     }
 `;
 
