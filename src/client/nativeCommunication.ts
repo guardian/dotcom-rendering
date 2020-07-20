@@ -8,16 +8,16 @@ import { logger } from "../logger";
 
 type Slot = AdSlot | VideoSlot;
 
-function positionChanged(slotsA: Slot[], slotsB: Slot[]): boolean {
-    if (slotsA.length !== slotsB.length) return true;
-    return !slotsA.every((slot, index) => areRectsEqual(slot.rect, slotsB[index].rect))
-}
-
 function areRectsEqual(rectA: IRect, rectB: IRect): boolean {
     return rectA.height === rectB.height &&
         rectA.width === rectB.width &&
         rectA.x === rectB.x &&
         rectA.y === rectB.y
+}
+
+function positionChanged(slotsA: Slot[], slotsB: Slot[]): boolean {
+    if (slotsA.length !== slotsB.length) return true;
+    return !slotsA.every((slot, index) => areRectsEqual(slot.rect, slotsB[index].rect))
 }
 
 function getRect(slotPosition: DOMRect): Rect {
