@@ -32,6 +32,8 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 
+import { hasOptedOutOfArticleCount } from '../lib/contributions';
+
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
@@ -184,7 +186,9 @@ export const App = ({ CAPI, NAV }: Props) => {
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        if (!hasOptedOutOfArticleCount()) {
+            incrementWeeklyArticleCount();
+        }
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
