@@ -3,8 +3,15 @@ import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, adStyles } from 'styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
+import { Format } from '@guardian/types/Format';
 
-const ArticleBodyStyles = css`
+interface ArticleBodyProps {
+    className: SerializedStyles[];
+    children: ReactNode[];
+    format: Format;
+}
+
+const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     position: relative;
     clear: both;
 
@@ -13,7 +20,7 @@ const ArticleBodyStyles = css`
         border: none;
     }
 
-    ${adStyles}
+    ${adStyles(format)}
 
     twitter-widget,
     figure[data-atom-type="explainer"] {
@@ -37,16 +44,12 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     }
 `;
 
-interface ArticleBodyProps {
-    className: SerializedStyles[];
-    children: ReactNode[];
-}
-
 const ArticleBody = ({
     className,
     children,
+    format
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles, ...className]}>
+    <div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
         {children}
     </div>
 

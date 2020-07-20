@@ -70,7 +70,7 @@ const LiveblogArticle = ({ item }: LiveblogArticleProps): JSX.Element => {
                     />
                 </article>
                 <div css={tagStyles}>
-                    <Tags tags={item.tags} background={neutral[93]} />
+                    <Tags tags={item.tags} format={format}/>
                 </div>
             </div>
         </main>

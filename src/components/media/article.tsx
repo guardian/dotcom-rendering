@@ -59,7 +59,7 @@ const Media = ({ item, children }: Props): JSX.Element =>
                     />
                 </section>
             </header>
-            <Body pillar={item.pillar} className={[articleWidthStyles]}>
+            <Body pillar={item.pillar} className={[articleWidthStyles]} format={item}>
                 {children}
             </Body>
             <footer css={articleWidthStyles}>
