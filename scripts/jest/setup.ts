@@ -52,30 +52,3 @@ const windowGuardian = {
 
 // Stub global Guardian object
 window.guardian = windowGuardian;
-
-// Mock Local Storage
-// See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
-// eslint-disable-next-line func-names
-const localStorageMock = (function () {
-    let store: {
-        [key: string]: string;
-    } = {};
-    return {
-        getItem(key: string) {
-            return store[key] || null;
-        },
-        setItem(key: string, value: string) {
-            store[key] = value.toString();
-        },
-        removeItem(key: string) {
-            delete store[key];
-        },
-        clear() {
-            store = {};
-        },
-    };
-})();
-
-Object.defineProperty(window, 'localStorage', {
-    value: localStorageMock,
-});
