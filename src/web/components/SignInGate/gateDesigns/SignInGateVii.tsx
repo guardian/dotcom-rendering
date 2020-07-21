@@ -9,7 +9,6 @@ import { Link } from '@guardian/src-link';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
 import { OphanComponent } from '@frontend/web/browser/ophan/ophan';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SerializedStyles } from '@emotion/core';
 import { SignInGateProps } from './types';
 
 const signinGate = css`
