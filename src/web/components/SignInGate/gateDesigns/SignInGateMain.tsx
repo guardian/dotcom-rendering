@@ -18,25 +18,16 @@ const signinGate = css`
         min-height: 600px;
     }
 
-    p {
-        ${textSans.medium()}
-        padding-bottom: ${space[6]}px;
-        line-height: 135%;
-
-        ${from.phablet} {
-            padding-right: 160px;
-        }
-    }
     /* This needs to be here because link styles are applied globally to the article body :/ */
     a {
-            text-decoration: underline;
-            border-bottom: none;
-            color: ${palette.text.primary};
+        text-decoration: underline;
+        border-bottom: none;
+        color: ${palette.text.primary};
 
-            :hover {
-                border-bottom: none;
-            }
+        :hover {
+            border-bottom: none;
         }
+    }
 `;
 
 const headingStyles = css`
@@ -51,11 +42,21 @@ const headingStyles = css`
 `;
 
 const subHeader = css`
-    ${textSans.medium({ fontWeight: 'bold' })};
+    ${textSans.medium({ fontWeight: 'bold' })}
     border-top: 1px ${palette.line.primary} solid;
     padding-bottom: 20px;
     ${from.phablet} {
         padding-right: 130px;
+    }
+`;
+
+const bodyText = css`
+    ${textSans.medium()}
+    padding-bottom: ${space[6]}px;
+    line-height: 135%;
+
+    ${from.phablet} {
+        padding-right: 160px;
     }
 `;
 
@@ -70,8 +71,8 @@ const actionButtons = css`
     margin-bottom: 42px;
 
     > a {
-        margin-right: ${space[9]}px;
-        text-decoration: none;
+        margin-right: ${space[9]}px !important;
+        text-decoration: none !important;
     }
 `;
 
@@ -88,15 +89,14 @@ const signInLink = css`
 `;
 
 const faq = css`
-    background-color: ${palette.neutral[97]};
     padding-top: ${space[3]}px;
     padding-bottom: 18px;
-    margin-top: ${space[9]}px;
+    margin-top: ${space[5]}px;
 
     & a {
         color: ${palette.text.primary};
         display: block;
-        margin-bottom: 22px;
+        margin-bottom: ${space[4]}px;
     }
 
     & a:hover {
@@ -161,16 +161,16 @@ export const SignInGateMain = ({
             <h1 className={cx(headingStyles)}>
                 Register for free and continue reading
             </h1>
-            <h2 className={cx(subHeader)}>
+            <p className={cx(subHeader)}>
                 It’s important to say this is not a step towards a paywall
-            </h2>
-            <p>
+            </p>
+            <p className={cx(bodyText)}>
                 We need more readers to register with us to help sustain our
                 independent, quality journalism. Without you taking this simple
                 step, we miss out on revenues from personalised advertising - a
                 critical source of funding for our future.
             </p>
-            <p>
+            <p className={cx(bodyText)}>
                 Through doing so, you&apos;ll help ensure that our reporting
                 remains freely available to everyone, and if we recognise you
                 when you come back, we can improve your news experience too. You
@@ -212,9 +212,9 @@ export const SignInGateMain = ({
                 </LinkButton>
             </div>
 
-            <h2 className={cx([subHeader, signInHeader])}>
+            <p className={cx([subHeader, signInHeader])}>
                 Have a subscription? Made a contribution? Already registered?
-            </h2>
+            </p>
 
             <Link
                 className={cx(signInLink)}
