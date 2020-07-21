@@ -9,7 +9,7 @@ import { Link } from '@guardian/src-link';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
 import { OphanComponent } from '@frontend/web/browser/ophan/ophan';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-
+import { SerializedStyles } from '@emotion/core';
 import { SignInGateProps } from './types';
 
 const signinGate = css`
@@ -28,6 +28,16 @@ const signinGate = css`
             padding-right: 160px;
         }
     }
+    /* This needs to be here because link styles are applied globally to the article body :/ */
+    a {
+            text-decoration: underline;
+            border-bottom: none;
+            color: ${palette.text.primary};
+
+            :hover {
+                border-bottom: none;
+            }
+        }
 `;
 
 const headingStyles = css`
@@ -62,7 +72,20 @@ const actionButtons = css`
 
     > a {
         margin-right: ${space[9]}px;
+        text-decoration: none;
     }
+`;
+
+const registerButton = css`
+    color: ${palette.text.ctaPrimary} !important;
+`;
+
+const laterButton = css`
+    color: ${palette.brand[400]} !important;
+`;
+
+const signInLink = css`
+    color: ${palette.text.anchorPrimary} !important;
 `;
 
 const faq = css`
@@ -130,9 +153,10 @@ export const SignInGateVii = ({
     dismissGate,
     abTest,
     component,
+    isComment,
 }: SignInGateProps): JSX.Element => {
     const [showCpmUi, setShowCmpUi] = useState(false);
-
+    console.log(isComment);
     return (
         <div className={cx(signinGate)}>
             <style>{hideElementsCss}</style>
@@ -167,6 +191,7 @@ export const SignInGateVii = ({
             </p>
             <div className={cx(actionButtons)}>
                 <LinkButton
+                    className={cx(registerButton)}
                     priority="primary"
                     size="small"
                     href={signInUrl} // This needs the queryParams attached for tracking !
@@ -178,6 +203,7 @@ export const SignInGateVii = ({
                 </LinkButton>
 
                 <LinkButton
+                    className={cx(laterButton)}
                     priority="subdued"
                     size="small"
                     onClick={() => {
@@ -194,6 +220,7 @@ export const SignInGateVii = ({
             </h2>
 
             <Link
+                className={cx(signInLink)}
                 href={signInUrl}
                 onClick={() => {
                     trackLink(component, 'sign-in-link', abTest);

@@ -8,6 +8,7 @@ export interface SignInGateProps {
     guUrl: string;
     dismissGate: () => void;
     component: string;
+    isComment?: boolean;
     abTest?: CurrentABTest;
 }
 

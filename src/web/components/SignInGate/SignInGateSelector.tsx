@@ -98,6 +98,9 @@ const signInGateFilter = (
             },
             abTest,
             component: componentName,
+            isComment:
+                CAPI.designType === 'Comment' ||
+                CAPI.designType === 'GuardianView',
         });
     }
 };
