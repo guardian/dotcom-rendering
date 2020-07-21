@@ -82,16 +82,9 @@ const signInGateFilter = (
     CAPI: CAPIBrowserType,
     isSignedIn?: boolean,
 ): JSX.Element | undefined => {
-    console.log(setShowGate, abTest, CAPI, isSignedIn);
     const gateVariant: SignInGateComponent | null =
         testVariantToGateMapping?.[abTest.variant];
-    console.log('gateVariant', gateVariant);
-    console.log('gateVariant?.canShow(CAPI)', gateVariant?.canShow(CAPI));
-    console.log('!!isSignedIn', !isSignedIn);
-    console.log(
-        '!hasUserDismissedGate(abTest.variant, abTest.name)',
-        !hasUserDismissedGate(abTest.variant, abTest.name),
-    );
+
     if (
         gateVariant?.canShow(CAPI) &&
         !isSignedIn &&
@@ -115,7 +108,7 @@ export const SignInGateSelector = ({
 }: SignInGateSelectorProps) => {
     const [showGate, setShowGate] = useState(true);
     const [currentTest, setCurrentTest] = useState({ id: '', variantId: '' });
-
+    console.log('CAPI', CAPI);
     // wow this whole thing is tightly coupled to the AB test framework ...
     const ab = useAB();
 
@@ -128,18 +121,10 @@ export const SignInGateSelector = ({
         });
     }, [ab]);
 
-    // const test = {
-    //     ...signInGateMainVariant,
-    //     variantToRun: {
-    //         id: 'centesimus-control-2',
-    //         test: (): void => {},
-    //     },
-    // };
-    console.log('currentTest', currentTest);
     if (currentTest.id === '' || currentTest.variantId === '') {
         return null;
     }
-    console.log('showGate', showGate);
+
     return (
         <>
             {showGate &&

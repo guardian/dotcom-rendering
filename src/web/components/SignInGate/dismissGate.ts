@@ -1,6 +1,4 @@
-const componentName = 'sign-in-gate';
-
-const localStorageKey = `gu.${componentName}`;
+const localStorageKey = `gu.prefs.sign-in-gate`;
 
 const localStorageLookupKey = (variant: string, name?: string): string => {
     return `${name ? `${name}-` : ''}${variant}`;
@@ -11,7 +9,7 @@ const localStorageLookupKey = (variant: string, name?: string): string => {
 //
 // This is set in local storage with the following shape:
 //
-// key:   gu.sign-in-gate
+// key:   gu.prefs.sign-in-gate
 // value: {"testVariantName":"2020-07-01T10:55:09.085Z"}
 //
 // We extract the value using the key, which remains constant

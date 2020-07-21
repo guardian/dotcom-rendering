@@ -8,8 +8,7 @@ export const isNPageOrHigherPageView = (n: number = 2): boolean => {
 
     const { count = 0 } = dailyCount;
 
-    // check if count is greater or equal to 1 less than n since dailyArticleCount is incremented after this component is loaded
-    return count >= n - 1;
+    return count >= n;
 };
 
 // determine if the useragent is running iOS 9 (known to be buggy for sign in flow)
@@ -26,43 +25,20 @@ export const isIOS9 = (): boolean => {
 };
 
 // hide the sign in gate on article types that are not supported
-// add to the include parameter array if there are specific types that should be included/overridden
-export const isInvalidArticleType = (
-    CAPI: CAPIBrowserType,
-    include: Array<string> = [],
-): boolean => {
-    // TODO: It's likely safer to definitively *include* types
-    // in particular DCR doesn't have Fronts or Hosted or Paid Content yet
-    // so 'excluding' doesn't make sense, whereas if we explicitly included
+export const isValidContentType = (CAPI: CAPIBrowserType): boolean => {
+    // It's safer to definitively *include* types
+    // we explicitly included
     // types then we would be able to know new types will not break the sign-in-gate going forward
-    const invalidTypes = [
-        'isColumn',
-        'isFront',
-        'isHosted',
-        'isImmersive',
-        'isLive',
-        'isLiveBlog',
-        'isNumberedList',
-        'isPaidContent',
-        'isPhotoEssay',
-        'isSensitive',
-        'isSplash',
-    ];
+    const validTypes = ['Article'];
 
-    return invalidTypes
-        .filter((el) => !include.includes(el)) // This allows you to override the default invalid types by removing them from the array
-        .reduce((isArticleInvalid: boolean, type: string): boolean => {
-            if (isArticleInvalid) return true;
-            return !!CAPI.config.page?.[type];
-        }, false);
+    return validTypes.reduce((valid: boolean, type: string): boolean => {
+        if (valid) return true;
+        return CAPI.contentType === type;
+    }, false);
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
-// add to the include parameter array if there are specific types that should be included/overridden
-export const isInvalidSection = (
-    CAPI: CAPIBrowserType,
-    include: Array<string> = [],
-): boolean => {
+export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
     const invalidSections = [
         'about',
         'info',
@@ -71,12 +47,15 @@ export const isInvalidSection = (
         'guardian-live-australia',
     ];
 
-    return invalidSections
-        .filter((el) => !include.includes(el))
-        .reduce((isSectionInvalid: boolean, section: string): boolean => {
+    // we check for invalid section by reducing the above array, and then NOT the result so we know
+    // its a valid section
+    return !invalidSections.reduce(
+        (isSectionInvalid: boolean, section: string): boolean => {
             if (isSectionInvalid) return true;
 
             // looks up window.guardian.config object in the browser console
-            return CAPI.config.page?.section === section;
-        }, false);
+            return CAPI.sectionName === section;
+        },
+        false,
+    );
 };
