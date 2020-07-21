@@ -19,6 +19,8 @@ export interface WindowGuardianConfig {
         ajaxUrl: string;
         hbImpl: object | string;
         shouldHideReaderRevenue: boolean;
+        idUrl: string;
+        host: string;
     } & ConfigType;
     libs: {
         googletag: string;

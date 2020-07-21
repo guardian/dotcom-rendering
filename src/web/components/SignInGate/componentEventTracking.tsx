@@ -9,6 +9,16 @@ type ABTestVariant = {
     variant: string;
 };
 
+export type ComponentEventParams = {
+    componentType: string;
+    componentId?: string;
+    abTestName: string;
+    abTestVariant: string;
+    viewId?: string;
+    browserId?: string;
+    visitId?: string;
+};
+
 type ComponentEventWithoutAction = {
     component: OphanComponent;
     value?: string;

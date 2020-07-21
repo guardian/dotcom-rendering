@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { space, palette } from '@guardian/src-foundations';
+import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
@@ -109,7 +109,7 @@ const privacyLink = css`
     cursor: pointer;
 `;
 
-const firstParagraphOverlay = css`
+const firstParagraphOverlay = (isComment: boolean) => css`
     margin-top: -250px;
     width: 100%;
     height: 250px;
@@ -118,7 +118,7 @@ const firstParagraphOverlay = css`
     /* "transparent" only works here because == rgba(0,0,0,0) */
     background-image: linear-gradient(
         0deg,
-        ${palette.background.primary},
+        ${isComment ? opinion[800] : palette.background.primary},
         70%,
         rgba(255, 255, 255, 0)
     );
@@ -131,12 +131,6 @@ const hideElementsCss = `
         display: none;
     }
     `;
-
-// TODO: Tracking -[x]
-// - [] Tone support ?
-// -
-// TODO: Tests
-// TODO: Embed in article on storybook
 
 // set the ophan component tracking vars
 export const withComponentId: (id: string) => OphanComponent = (
@@ -153,13 +147,13 @@ export const SignInGateVii = ({
     abTest,
     component,
     isComment,
-}: SignInGateProps): JSX.Element => {
+}: SignInGateProps) => {
     const [showCpmUi, setShowCmpUi] = useState(false);
-    console.log(isComment);
+
     return (
         <div className={cx(signinGate)}>
             <style>{hideElementsCss}</style>
-            <div className={cx(firstParagraphOverlay)} />
+            <div className={cx(firstParagraphOverlay(!!isComment))} />
             <h1 className={cx(headingStyles)}>
                 Register for free and continue reading
             </h1>
