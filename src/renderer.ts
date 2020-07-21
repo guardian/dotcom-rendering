@@ -654,4 +654,5 @@ export {
     textElement as renderTextElement,
     standfirstText as renderStandfirstText,
     getHref,
+    transformHref
 };

@@ -1,4 +1,4 @@
-import { renderAll, renderAllWithoutStyles, renderStandfirstText, renderText } from 'renderer';
+import { renderAll, renderAllWithoutStyles, renderStandfirstText, renderText, transformHref } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'format';
 import { isValidElement, ReactNode } from 'react';
@@ -305,3 +305,23 @@ describe('Paragraph tags rendered correctly', () => {
         expect(html).not.toBe('<p>Parapraph tag</p>')
     });
 });
+
+describe('Transforms hrefs', () => {
+    test('Transforms profile links', () => {
+       const href = "profile/firstname_lastname";
+       const transformed = transformHref(href);
+       expect(transformed).toBe("https://www.theguardian.com/profile/firstname_lastname")
+    });
+
+    test('Transforms latest links', () => {
+       const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
+       const transformed = transformHref(href);
+       expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
+    });
+
+    test('Does not transform valid link', () => {
+        const href = "https://www.theguardian.com/world/series/coronavirus-live";
+        const transformed = transformHref(href);
+        expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
+     });
+})
