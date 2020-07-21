@@ -1,14 +1,36 @@
 import {
-    news,
-    opinion,
-    sport,
-    culture,
-    lifestyle,
+    news as _news,
+    opinion as _opinion,
+    sport as _sport,
+    culture as _culture,
+    lifestyle as _lifestyle,
     labs,
     border,
 } from '@guardian/src-foundations/palette';
 
 type colour = string;
+
+const [news, opinion, sport, culture, lifestyle] = [
+    _news,
+    _opinion,
+    _sport,
+    _culture,
+    _lifestyle,
+].map((p) => ({
+    // maps legacy colour names to new names in Source
+    dark: p[300],
+    main: p[400],
+    bright: p[500],
+    pastel: p[600],
+    faded: p[800],
+
+    // continue to expose the new names too!
+    300: p[300],
+    400: p[400],
+    500: p[500],
+    600: p[600],
+    800: p[800],
+}));
 
 interface PillarColours {
     dark: colour;
@@ -16,6 +38,11 @@ interface PillarColours {
     bright: colour;
     pastel: colour;
     faded: colour;
+    300: colour;
+    400: colour;
+    500: colour;
+    600: colour;
+    800: colour;
 }
 
 export const pillarNames: Pillar[] = [
@@ -33,6 +60,11 @@ export const augmentedLabs: PillarColours = {
     bright: '#69d1ca', // bright teal
     pastel: '', // TODO
     faded: '#65a897', // dark teal
+    300: labs[300],
+    400: labs[400],
+    500: '#69d1ca', // bright teal
+    600: '', // TODO
+    800: '#65a897', // dark teal
 };
 
 export const pillarPalette: Record<Pillar, PillarColours> = {

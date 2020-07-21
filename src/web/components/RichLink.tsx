@@ -87,7 +87,7 @@ const richLinkPillarColour: (pillar: Pillar) => colour = (pillar) => {
     if (pillar) {
         return pillarPalette[pillar].main;
     }
-    return pillarPalette.news.main;
+    return pillarPalette.news[400];
 };
 
 const pillarBackground: (pillar: Pillar) => colour = (pillar) => {

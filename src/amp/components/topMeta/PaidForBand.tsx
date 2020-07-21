@@ -23,7 +23,7 @@ const headerStyle = css`
 `;
 
 const focusColor = css`
-    outline-color: ${palette.brandYellow.main};
+    outline-color: ${palette.brandAlt[400]};
 `;
 
 const metaStyle = css`
