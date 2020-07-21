@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { App } from '@root/src/web/components/App';
 import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-import { getCookie } from '../browser/cookie';
+import { getCookie } from '@frontend/web/browser/cookie';
+import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
 
 type Props = {
     CAPI: CAPIBrowserType;
@@ -28,6 +29,8 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
         window.guardian.ophan &&
         window.guardian.ophan.record;
 
+    const windowHash = window && window.location && window.location.hash;
+
     ReactDOM.render(
         <ABProvider
             arrayOfTestObjects={tests}
@@ -39,6 +42,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             mvtMaxValue={1000000}
             mvtId={mvtId}
             ophanRecord={ophanRecordFunc}
+            forcedTestVariant={getForcedParticipationsFromUrl(windowHash)}
         >
             <App CAPI={CAPI} NAV={NAV} />
         </ABProvider>,
