@@ -18,6 +18,9 @@ import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-g
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
+import { signInGateComponent as gatePatientiaControl } from '@root/src/web/components/SignInGate/gates/patientia-control';
+import { signInGateComponent as gatePatientiaVariant } from '@root/src/web/components/SignInGate/gates/patientia-variant';
+
 import {
     ComponentEventParams,
     submitViewEventTracking,
@@ -67,8 +70,8 @@ const tests: ReadonlyArray<ABTest> = [
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-    // 'patientia-control-1': gateMainControl,
-    // 'patientia-variant-1': gateMainControl,
+    'patientia-control-1': gatePatientiaControl,
+    'patientia-variant-1': gatePatientiaVariant,
     'main-control-1': gateMainControl,
     'main-variant-1': gateMainVariant,
 };

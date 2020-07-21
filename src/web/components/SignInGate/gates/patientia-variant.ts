@@ -1,4 +1,4 @@
-import { SignInGateMain } from '@root/src/web/components/SignInGate/gateDesigns/SignInGateMain';
+import { SignInGatePatientia } from '@root/src/web/components/SignInGate/gateDesigns/SignInGatePatientia';
 import {
     SignInGateComponent,
     CurrentABTest,
@@ -24,6 +24,6 @@ const canShow = (
     !isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
-    gate: SignInGateMain,
+    gate: SignInGatePatientia,
     canShow,
 };

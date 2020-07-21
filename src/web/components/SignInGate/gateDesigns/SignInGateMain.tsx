@@ -98,6 +98,10 @@ const faq = css`
         display: block;
         margin-bottom: 22px;
     }
+
+    & a:hover {
+        color: ${palette.text.primary};
+    }
 `;
 
 const privacyLink = css`
@@ -140,7 +144,7 @@ export const withComponentId: (id: string) => OphanComponent = (
     id,
 });
 
-export const SignInGateVii = ({
+export const SignInGateMain = ({
     signInUrl,
     guUrl,
     dismissGate,
@@ -224,7 +228,7 @@ export const SignInGateVii = ({
 
             <div className={cx(faq)}>
                 <Link
-                    href={`${guUrl}membership/2019/dec/20/signing-in-to-the-guardian`}
+                    href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
                     onClick={() => {
                         trackLink(component, 'how-link', abTest);
                     }}
@@ -233,7 +237,7 @@ export const SignInGateVii = ({
                 </Link>
 
                 <Link
-                    href={`${guUrl}info/2014/nov/03/why-your-data-matters-to-us-full-text`}
+                    href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
                     onClick={() => {
                         trackLink(component, 'why-link', abTest);
                     }}
@@ -242,7 +246,7 @@ export const SignInGateVii = ({
                 </Link>
 
                 <Link
-                    href={`${guUrl}help/identity-faq`}
+                    href={`${guUrl}/help/identity-faq`}
                     onClick={() => {
                         trackLink(component, 'help-link', abTest);
                     }}

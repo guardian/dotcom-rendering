@@ -1,4 +1,3 @@
-import { SignInGateMain } from '@root/src/web/components/SignInGate/gateDesigns/SignInGateMain';
 import {
     SignInGateComponent,
     CurrentABTest,
@@ -24,6 +23,5 @@ const canShow = (
     !isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
-    gate: SignInGateMain,
     canShow,
 };

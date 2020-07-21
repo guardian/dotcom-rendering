@@ -38,8 +38,8 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             ophanRecord={ophanRecordFunc}
             // TODO: Remove before live
             forcedTestVariant={{
-                testId: 'SignInGateMainVariant',
-                variant: { id: 'main-variant-1', test: () => {} },
+                testId: 'SignInGatePatientia',
+                variant: { id: 'patientia-variant-1', test: () => {} },
             }}
         >
             <App CAPI={CAPI} NAV={NAV} />

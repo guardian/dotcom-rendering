@@ -1,7 +1,8 @@
 import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 import { SignInGateSelector } from './SignInGateSelector';
-import { SignInGateVii } from './gateDesigns/SignInGateVii';
+import { SignInGateMain } from './gateDesigns/SignInGateMain';
+import { SignInGatePatientia } from './gateDesigns/SignInGatePatientia';
 
 export default {
     component: SignInGateSelector,
@@ -11,18 +12,11 @@ export default {
     },
 };
 
-export const standalone = () => {
-    // fetchMock
-    //     .restore()
-    //     .getOnce('https://vendorlist.consensu.org/vendorlist.json', {
-    //         status: 200,
-    //         body: iabVendorList,
-    //     });
-
+export const mainStandalone = () => {
     return (
         <Section>
-            <SignInGateVii
-                guUrl="https://theguardian.com/"
+            <SignInGateMain
+                guUrl="https://theguardian.com"
                 signInUrl="https://profile.theguardian.com/"
                 dismissGate={() => {}}
                 component="test"
@@ -30,4 +24,18 @@ export const standalone = () => {
         </Section>
     );
 };
-standalone.story = { name: 'standalone' };
+mainStandalone.story = { name: 'main_standalone' };
+
+export const mainPatientia = () => {
+    return (
+        <Section>
+            <SignInGatePatientia
+                guUrl="https://theguardian.com"
+                signInUrl="https://profile.theguardian.com/"
+                dismissGate={() => {}}
+                component="test"
+            />
+        </Section>
+    );
+};
+mainPatientia.story = { name: 'patientia_standalone' };
