@@ -110,14 +110,18 @@ function insertEpic(): void {
     }
 }
 
-function submit(body: { [key: string]: string | File | Promise<File>; }) {
+interface FormData {
+    [key: string]: string;
+}
+
+function submit(body: FormData): void {
     fetch('https://callouts.code.dev-guardianapis.com/formstack-campaign/submit', {
         method: 'POST',
         body: JSON.stringify(body)
     })
 }
 
-function readFile(file: Blob) {
+function readFile(file: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         setTimeout(reject, 30000);
@@ -140,7 +144,7 @@ function readFile(file: Blob) {
     })
 }
 
-function callouts() {
+function callouts(): void {
     const callouts = Array.from(document.querySelectorAll('details.callout'));
     callouts.forEach(callout => {
         const buttons = Array.from(callout.querySelectorAll('.callout-expand'));
@@ -152,39 +156,26 @@ function callouts() {
 
         const form = callout.querySelector('form');
         if (!form) return;
-        let promises: Promise<File>[] = [];
-        let keys: string[] = [];
-        form.addEventListener('submit', (e) => {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        form.addEventListener('submit', async (e): Promise<void> => {
             e.preventDefault();
-
             const elements = form.elements as HTMLCollectionOf<HTMLInputElement>;
-            const data = Array.from(elements).reduce((o: { [key: string]: string | Promise<File> | File }, e) => {
-                if (e.type === 'radio') {
-                    if (e.checked) {
-                        o[e.name] = e.value;
+            const data = Array.from(elements).reduce(async (o: Promise<FormData>, elem) => {
+                const acc = await o;
+                const { type, checked, name, value, files } = elem;
+                if (type === 'radio') {
+                    if (checked) {
+                        acc[name] = value;
                     }
-                } else if (e.type === 'file' && e?.files?.length) {
-                    const filePromise = readFile(e.files[0]) as Promise<File>;
-                    promises.push(filePromise);
-                    keys.push(e.name);
-                    o[e.name] = filePromise;
-                } else if (e.value) {
-                    o[e.name] = e.value;
+                } else if (type === 'file' && files?.length) {
+                    acc[name] = await readFile(files[0]);
+                } else if (value) {
+                    acc[name] = value;
                 }
+                return Promise.resolve(acc);
+            }, Promise.resolve({}));
 
-                return o;
-            }, {});
-
-            Promise.all(promises).then(results => {
-                results.map((result, index) => {
-                    data[keys[index]] = result;
-                })
-
-                submit(data);
-            }).catch(() => {
-                // displayFileError(campaign, form);
-            })
-
+            submit(await data);
         })
     })
 }

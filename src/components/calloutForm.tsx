@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
@@ -12,12 +12,12 @@ import { TextArea } from '@guardian/src-text-area';
 import { RadioGroup, Radio } from "@guardian/src-radio"
 import { FormField } from '@guardian/apps-rendering-api-models/formField';
 
-export interface CalloutFormProps {
+export interface CalloutProps {
     campaign: Campaign;
     format: Format;
 }
 
-const calloutStyles = (kicker: string, inverted: string) => css`
+const calloutStyles = (kicker: string): SerializedStyles => css`
     border-top: 1px ${neutral[86]} solid;
     border-bottom: 1px ${neutral[86]} solid;
     position: relative;
@@ -126,7 +126,7 @@ const labelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
-const renderField = ({ type, label, mandatory, options, id }: FormField) => {
+const renderField = ({ type, label, mandatory, options, id }: FormField): JSX.Element => {
     switch (type) {
         case 'text': {
             return <TextInput name={`field_${id}`} label={label} optional={!mandatory}/>
@@ -159,6 +159,7 @@ const renderField = ({ type, label, mandatory, options, id }: FormField) => {
                             options.map(({ value, label }) => {
                                 return (
                                     <Radio
+                                        key={value}
                                         value={value}
                                         label={label}
                                     />
@@ -169,14 +170,17 @@ const renderField = ({ type, label, mandatory, options, id }: FormField) => {
                 </>
             )
         }
+
+        default:
+            return <></>;
     }
 }
 
-const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }: CalloutFormProps): ReactElement => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+const CalloutForm: FC<CalloutProps> = ({ campaign, format }: CalloutProps): ReactElement => {
+    const { kicker } = getPillarStyles(format.pillar);
 
     return (
-        <details className="callout" css={calloutStyles(kicker, inverted)}>
+        <details className="callout" css={calloutStyles(kicker)}>
             <summary>
                 <div className="campaign--kicker">
                     <div className="campaign--snippet__heading-logo">
