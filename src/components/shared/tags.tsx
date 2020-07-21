@@ -2,10 +2,32 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss } from '../../styles';
 import { textSans } from '@guardian/src-foundations/typography';
-import { neutral, background } from '@guardian/src-foundations/palette';
+import { background, neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
+import { Design, Format } from '@guardian/types/Format';
 
-const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
+interface TagsProps {
+    tags: {
+        webUrl: string;
+        webTitle: string;
+    }[];
+    background?: string;
+    format: Format;
+}
+
+const tagsStyles = (format: Format): SerializedStyles => {
+    const backgroundColour = (format: Format): string => {
+        switch (format.design) {
+            case Design.Comment:
+                return neutral[86];
+            case Design.Live:
+                return neutral[93];
+            default:
+                return neutral[97];
+        }
+    };
+
+    return css`
     margin-top: 0;
     margin-bottom: 0;
 
@@ -26,13 +48,14 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
             text-overflow: ellipsis;
             max-width: 18.75rem;
             color: ${neutral[7]};
-            background-color: ${background};
+            background-color: ${backgroundColour(format)};
             display: inline-block;
             white-space: nowrap;
             overflow: hidden;
         }
     }
 `;
+}
 
 const tagsDarkStyles = darkModeCss`
     background: ${background.inverse};
@@ -44,16 +67,8 @@ const tagsDarkStyles = darkModeCss`
     }
 `;
 
-interface TagsProps {
-    tags: {
-        webUrl: string;
-        webTitle: string;
-    }[];
-    background?: string;
-}
-
-const Tags = ({ tags, background }: TagsProps): JSX.Element => (
-    <ul css={[tagsStyles(background), tagsDarkStyles]}>
+const Tags = ({ tags, format }: TagsProps): JSX.Element => (
+    <ul css={[tagsStyles(format), tagsDarkStyles]}>
         {tags.map((tag, index) => {
             return <li key={index}>
                 <a href={tag.webUrl}>
