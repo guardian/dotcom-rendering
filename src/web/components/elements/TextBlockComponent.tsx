@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { textSans, body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
@@ -143,7 +143,6 @@ export const TextBlockComponent: React.FC<Props> = ({
         }
 
         li {
-            ${textSans.medium()};
             margin-bottom: 6px;
             padding-left: 20px;
 
