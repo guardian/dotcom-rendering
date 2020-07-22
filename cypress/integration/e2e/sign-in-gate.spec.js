@@ -183,7 +183,7 @@ describe('Sign In Gate Tests', () => {
             cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
         });
 
-        it.only('should remove gate when the dismiss button is clicked', () => {
+        it('should remove gate when the dismiss button is clicked', () => {
             cy.visit(
                 'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
             );
