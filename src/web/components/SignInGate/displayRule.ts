@@ -28,9 +28,8 @@ export const isIOS9 = (): boolean => {
 
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (CAPI: CAPIBrowserType): boolean => {
-    // It's safer to definitively *include* types
-    // we explicitly included
-    // types then we would be able to know new types will not break the sign-in-gate going forward
+    // It's safer to definitively *include* types as we
+	// know new types will not break the sign-in-gate going forward
     const validTypes = ['Article'];
 
     return validTypes.reduce((valid: boolean, type: string): boolean => {
