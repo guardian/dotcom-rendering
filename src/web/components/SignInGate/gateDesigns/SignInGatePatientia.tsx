@@ -50,10 +50,9 @@ const subHeader = css`
 `;
 
 const bodyText = css`
-    ${body.medium()}
+    ${body.medium({ lineHeight: 'regular' })}
     padding-top: ${space[2]}px;
     padding-bottom: ${space[6]}px;
-    line-height: 135%;
 `;
 
 const signInBodyText = css`

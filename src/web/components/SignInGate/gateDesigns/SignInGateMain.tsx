@@ -51,9 +51,8 @@ const subHeader = css`
 `;
 
 const bodyText = css`
-    ${textSans.medium()}
+    ${textSans.medium({ lineHeight: 'regular' })}
     padding-bottom: ${space[6]}px;
-    line-height: 135%;
 
     ${from.phablet} {
         padding-right: 160px;
