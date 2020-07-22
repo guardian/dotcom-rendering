@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { headline, textSans, body } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -140,23 +140,23 @@ export const SignInGatePatientia = ({
     const [showCpmUi, setShowCmpUi] = useState(false);
 
     return (
-        <div className={cx(signinGate)} data-cy="sign-in-gate-patientia">
+        <div className={signinGate} data-cy="sign-in-gate-patientia">
             <style>{hideElementsCss}</style>
-            <div className={cx(firstParagraphOverlay(!!isComment))} />
-            <h1 className={cx(headingStyles)}>
+            <div className={firstParagraphOverlay(!!isComment)} />
+            <h1 className={headingStyles}>
                 Register for free and continue reading
             </h1>
-            <h2 className={cx(subHeader)}>
+            <h2 className={subHeader}>
                 The Guardian’s independent journalism is still free to read
             </h2>
-            <p className={cx(bodyText)}>
+            <p className={bodyText}>
                 Registering lets us understand you better. This means that we
                 can build better products and start to personalise the adverts
                 you see so we can charge more from advertisers in the future.
             </p>
-            <div className={cx(actionButtons)}>
+            <div className={actionButtons}>
                 <LinkButton
-                    className={cx(registerButton)}
+                    className={registerButton}
                     priority="primary"
                     size="small"
                     href={signInUrl} // This needs the queryParams attached for tracking !
@@ -180,10 +180,10 @@ export const SignInGatePatientia = ({
                 </LinkButton>
             </div>
 
-            <p className={cx(signInBodyText)}>
+            <p className={signInBodyText}>
                 Already registered, contributed or subscribed?{' '}
                 <Link
-                    className={cx(signInLink)}
+                    className={signInLink}
                     href={signInUrl}
                     onClick={() => {
                         trackLink(component, 'sign-in-link', abTest);
@@ -193,7 +193,7 @@ export const SignInGatePatientia = ({
                 </Link>
             </p>
 
-            <div className={cx(faq)}>
+            <div className={faq}>
                 <Link
                     href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
                     onClick={() => {

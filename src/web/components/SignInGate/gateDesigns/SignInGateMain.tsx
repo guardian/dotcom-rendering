@@ -155,29 +155,29 @@ export const SignInGateMain = ({
     const [showCpmUi, setShowCmpUi] = useState(false);
 
     return (
-        <div className={cx(signinGate)} data-cy="sign-in-gate-main">
+        <div className={signinGate} data-cy="sign-in-gate-main">
             <style>{hideElementsCss}</style>
-            <div className={cx(firstParagraphOverlay(!!isComment))} />
-            <h1 className={cx(headingStyles)}>
+            <div className={firstParagraphOverlay(!!isComment)} />
+            <h1 className={headingStyles}>
                 Register for free and continue reading
             </h1>
-            <p className={cx(subHeader)}>
+            <p className={subHeader}>
                 It’s important to say this is not a step towards a paywall
             </p>
-            <p className={cx(bodyText)}>
+            <p className={bodyText}>
                 We need more readers to register with us to help sustain our
                 independent, quality journalism. Without you taking this simple
                 step, we miss out on revenues from personalised advertising - a
                 critical source of funding for our future.
             </p>
-            <p className={cx(bodyText)}>
+            <p className={bodyText}>
                 Through doing so, you&apos;ll help ensure that our reporting
                 remains freely available to everyone, and if we recognise you
                 when you come back, we can improve your news experience too. You
                 can still control your own&nbsp;
                 <button
                     data-cy="sign-in-gate-main_privacy"
-                    className={cx(privacyLink)}
+                    className={privacyLink}
                     onClick={() => {
                         setShowCmpUi(!showCpmUi);
                         trackLink(component, 'privacy', abTest);
@@ -187,10 +187,10 @@ export const SignInGateMain = ({
                 </button>
                 . Thank you
             </p>
-            <div className={cx(actionButtons)}>
+            <div className={actionButtons}>
                 <LinkButton
                     data-cy="sign-in-gate-main_register"
-                    className={cx(registerButton)}
+                    className={registerButton}
                     priority="primary"
                     size="small"
                     href={signInUrl} // This needs the queryParams attached for tracking !
@@ -203,7 +203,7 @@ export const SignInGateMain = ({
 
                 <LinkButton
                     data-cy="sign-in-gate-main_dismiss"
-                    className={cx(laterButton)}
+                    className={laterButton}
                     priority="subdued"
                     size="small"
                     onClick={() => {
@@ -221,7 +221,7 @@ export const SignInGateMain = ({
 
             <Link
                 data-cy="sign-in-gate-main_signin"
-                className={cx(signInLink)}
+                className={signInLink}
                 href={signInUrl}
                 onClick={() => {
                     trackLink(component, 'sign-in-link', abTest);
@@ -230,7 +230,7 @@ export const SignInGateMain = ({
                 Sign In
             </Link>
 
-            <div className={cx(faq)}>
+            <div className={faq}>
                 <Link
                     href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
                     onClick={() => {
