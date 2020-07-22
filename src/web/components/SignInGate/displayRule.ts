@@ -29,13 +29,12 @@ export const isIOS9 = (): boolean => {
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (CAPI: CAPIBrowserType): boolean => {
     // It's safer to definitively *include* types as we
-	// know new types will not break the sign-in-gate going forward
+    // know new types will not break the sign-in-gate going forward
     const validTypes = ['Article'];
 
-    return validTypes.reduce((valid: boolean, type: string): boolean => {
-        if (valid) return true;
-        return CAPI.contentType === type;
-    }, false);
+    return validTypes.some(
+        (type: string): boolean => CAPI.contentType === type,
+    );
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
@@ -50,14 +49,8 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
 
     // we check for invalid section by reducing the above array, and then NOT the result so we know
     // its a valid section
-    return !invalidSections.reduce(
-        (isSectionInvalid: boolean, section: string): boolean => {
-            if (isSectionInvalid) return true;
-
-            // looks up window.guardian.config object in the browser console
-            return CAPI.sectionName === section;
-        },
-        false,
+    return !invalidSections.some(
+        (section: string): boolean => CAPI.sectionName === section,
     );
 };
 
