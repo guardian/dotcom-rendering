@@ -86,7 +86,7 @@ describe('Sign In Gate Tests', () => {
             cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
         });
 
-        it('should not load the sign in gate if the page is not a valid section (membership)', () => {
+        it('should not load the sign in gate if the article is not a valid section (membership)', () => {
             cy.visit(
                 'Article?url=https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
             );
@@ -94,7 +94,7 @@ describe('Sign In Gate Tests', () => {
             cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
         });
 
-        it('should not load thew sign in gate on a device with an ios9 user agent string', () => {
+        it('should not load the sign in gate on a device with an ios9 user agent string', () => {
             cy.visit('Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries', {
                 onBeforeLoad: win => {
                     Object.defineProperty(win.navigator, 'userAgent', {
