@@ -15,7 +15,8 @@ describe('E2E Page rendering', function () {
 
             it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
-                cy.scrollTo('bottom', { duration: 500 });
+                const roughLoadPositionOfMostView = 1400;
+                cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
                 cy.contains('Lifestyle');
 
                 if (!article.hideMostViewed) {
@@ -31,6 +32,7 @@ describe('E2E Page rendering', function () {
                     );
                 }
 
+                cy.scrollTo('bottom', { duration: 500 });
                 cy.wait('@getShareCount').then((xhr) => {
                     expect(xhr.status).to.be.equal(200);
                     expect(xhr.response.body).to.have.property('path');
@@ -56,7 +58,7 @@ describe('E2E Page rendering', function () {
                     expect(xhr.response.body).to.have.property('tabs');
                     expect(xhr.status).to.be.equal(200);
 
-                    cy.contains('Most popular');
+                    cy.contains('Most commented');
                 });
             });
         });
