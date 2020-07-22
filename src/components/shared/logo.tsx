@@ -48,9 +48,17 @@ const OptionalLogo = (item: Item): JSX.Element => pipe2(
     withDefault(<></>)
 )
 
+export const cleanImageUrl = (url: string): string =>
+    encodeURI(url)
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29')
+
 const Logo: FC<Props> = ({ branding, format }: Props) => {
+    const lightLogo = cleanImageUrl(branding.logo);
+    const darkLogo = cleanImageUrl(branding.altLogo ?? '');
+
     return (
-        <section css={styles(branding.logo, branding.altLogo)}>
+        <section css={styles(lightLogo, darkLogo)}>
             <label>{branding.label}</label>
             <a href={branding.sponsorUri}>
                 <img alt={branding.sponsorName} />
