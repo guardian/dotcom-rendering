@@ -322,6 +322,8 @@ type CAPIBrowserType = {
         remoteSubscriptionsBanner: boolean;
         ausMoment2020Header: boolean;
         switches: CAPIType['config']['switches'];
+        host: string;
+        idUrl: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -582,6 +584,8 @@ interface ConfigType extends CommercialConfigType {
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
     references?: { [key: string]: string }[];
+    host: string;
+    idUrl: string;
 }
 
 interface GADataType {

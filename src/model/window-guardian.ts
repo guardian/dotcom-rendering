@@ -19,8 +19,6 @@ export interface WindowGuardianConfig {
         ajaxUrl: string;
         hbImpl: object | string;
         shouldHideReaderRevenue: boolean;
-        idUrl: string;
-        host: string;
     } & ConfigType;
     libs: {
         googletag: string;
@@ -140,6 +138,10 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
 
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
+
+            // used by sign in gate
+            host: CAPI.config.host,
+            idUrl: CAPI.config.idUrl,
         },
         richLinks: richLinksWithIndex,
         editionId: CAPI.editionId,
