@@ -584,8 +584,8 @@ interface ConfigType extends CommercialConfigType {
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
     references?: { [key: string]: string }[];
-    host: string;
-    idUrl: string;
+    host?: string;
+    idUrl?: string;
 }
 
 interface GADataType {

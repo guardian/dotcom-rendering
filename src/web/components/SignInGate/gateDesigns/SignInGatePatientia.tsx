@@ -159,7 +159,7 @@ export const SignInGatePatientia = ({
                     className={registerButton}
                     priority="primary"
                     size="small"
-                    href={signInUrl} // This needs the queryParams attached for tracking !
+                    href={signInUrl}
                     onClick={() => {
                         trackLink(component, 'register-link', abTest);
                     }}
