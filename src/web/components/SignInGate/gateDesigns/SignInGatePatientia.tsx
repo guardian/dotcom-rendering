@@ -140,7 +140,7 @@ export const SignInGatePatientia = ({
     const [showCpmUi, setShowCmpUi] = useState(false);
 
     return (
-        <div className={cx(signinGate)}>
+        <div className={cx(signinGate)} data-cy="sign-in-gate-patientia">
             <style>{hideElementsCss}</style>
             <div className={cx(firstParagraphOverlay(!!isComment))} />
             <h1 className={cx(headingStyles)}>
@@ -168,6 +168,7 @@ export const SignInGatePatientia = ({
                 </LinkButton>
 
                 <LinkButton
+                    data-cy="sign-in-gate-patientia_dismiss"
                     priority="subdued"
                     size="small"
                     onClick={() => {

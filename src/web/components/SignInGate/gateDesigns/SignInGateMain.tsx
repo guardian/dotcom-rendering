@@ -155,7 +155,7 @@ export const SignInGateMain = ({
     const [showCpmUi, setShowCmpUi] = useState(false);
 
     return (
-        <div className={cx(signinGate)}>
+        <div className={cx(signinGate)} data-cy="sign-in-gate-main">
             <style>{hideElementsCss}</style>
             <div className={cx(firstParagraphOverlay(!!isComment))} />
             <h1 className={cx(headingStyles)}>
@@ -176,6 +176,7 @@ export const SignInGateMain = ({
                 when you come back, we can improve your news experience too. You
                 can still control your own&nbsp;
                 <button
+                    data-cy="sign-in-gate-main_privacy"
                     className={cx(privacyLink)}
                     onClick={() => {
                         setShowCmpUi(!showCpmUi);
@@ -188,6 +189,7 @@ export const SignInGateMain = ({
             </p>
             <div className={cx(actionButtons)}>
                 <LinkButton
+                    data-cy="sign-in-gate-main_register"
                     className={cx(registerButton)}
                     priority="primary"
                     size="small"
@@ -200,6 +202,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
+                    data-cy="sign-in-gate-main_dismiss"
                     className={cx(laterButton)}
                     priority="subdued"
                     size="small"
@@ -217,6 +220,7 @@ export const SignInGateMain = ({
             </p>
 
             <Link
+                data-cy="sign-in-gate-main_signin"
                 className={cx(signInLink)}
                 href={signInUrl}
                 onClick={() => {

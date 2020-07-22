@@ -1,3 +1,5 @@
+import { shouldShow } from '@guardian/consent-management-platform';
+
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { getDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
@@ -59,3 +61,6 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
         false,
     );
 };
+
+// wrapper over the cmp should show method
+export const shouldShowCmp = () => shouldShow();

@@ -34,7 +34,7 @@ export const hasUserDismissedGate = (
 //
 // This is set in local storage with the following shape:
 //
-// key:   gu.sign-in-gate
+// key:   gu.prefs.sign-in-gate
 // value: {"testVariantName":"2020-07-01T10:55:09.085Z"}
 //
 // We set the value using the key, which remains constant
