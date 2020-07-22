@@ -14,6 +14,8 @@ describe('Sign In Gate Tests', () => {
     }
 
     const setCookieConsent = () => {
+        // the value for the consent cookies is an actual value added to the cookie when the cmp is dismissed as setting it to arbitrary values
+        // caused the following error "ConsentString - Unsupported version 45 in the string to decode"
         cy.setCookie('euconsent', 'BO08eEOO08eEOBwABAENDOiAAAAwJ7_______9______9uz_Ov_v_f__33e8__9v_l_7_-___u_-23d4u_1vf99yfm1-7etr3tp_47ues2_Xur__71__3z3_9pxP78k89r7335Ew_v-_v-b7BCPN9Y3v-8K96g', {
             log: true
         });
@@ -84,9 +86,9 @@ describe('Sign In Gate Tests', () => {
             cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
         });
 
-        it('should not load the sign in gate if the page is not an article ie a live blog', () => {
+        it('should not load the sign in gate if the page is not a valid section (membership)', () => {
             cy.visit(
-                'Article?url=https://www.theguardian.com/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
+                'Article?url=https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
             );
 
             cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
