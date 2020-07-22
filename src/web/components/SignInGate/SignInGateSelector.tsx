@@ -30,9 +30,19 @@ import {
 // component name, should always be sign-in-gate
 export const componentName = 'sign-in-gate';
 
+// interface for the sign in gate selector component
 interface SignInGateSelectorProps {
     isSignedIn?: boolean;
     CAPI: CAPIBrowserType;
+}
+
+// interface for the component which shows the sign in gate
+interface ShowSignInGateProps {
+    setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+    abTest: CurrentABTest;
+    CAPI: CAPIBrowserType;
+    signInUrl: string;
+    gateVariant: SignInGateComponent;
 }
 
 const dismissGate = (
@@ -48,21 +58,13 @@ const dismissGate = (
         document.querySelector('.article-body-commercial-selector');
 
     articleBody?.parentElement?.scrollIntoView(true);
-
-    // mediator emit ??
 };
-
-// TODO: viewing criteria
-// TODO: url handling including encoding the tracking params!
 
 type GateTestMap = { [name: string]: SignInGateComponent };
 
 /* When adding a new test, you need to add the test name to the tests array below,
-   and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping
-   */
-
-// This should be added when the ab test framework is setup
-
+   and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
+*/
 const tests: ReadonlyArray<ABTest> = [
     signInGatePatientia,
     signInGateMainVariant,
@@ -82,6 +84,8 @@ const testIdToComponentId: { [key: string]: string } = {
     SignInGatePatientia: 'patientia_test',
 };
 
+// function to generate the profile.theguardian.com url with tracking params
+// and the return url (link to current article page)
 const generateSignInUrl = (
     CAPI: CAPIBrowserType,
     currentTest: CurrentABTest,
@@ -107,21 +111,9 @@ const generateSignInUrl = (
     )}`;
 };
 
-/*
-signInGateFilter takes:
- - all the active sign in gate components
- - filters gates by running their canShow function and checking if user has dismissed this gate
- - creates an instance of the gate
- - at this stage their should only be one gate available, this is returned
- */
-interface ShowSignInGateProps {
-    setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
-    abTest: CurrentABTest;
-    CAPI: CAPIBrowserType;
-    signInUrl: string;
-    gateVariant: SignInGateComponent;
-}
-
+// component which shows the sign in gate
+// fires a VIEW ophan component event
+// and show the gate component if it exists
 const ShowSignInGate = ({
     CAPI,
     abTest,
@@ -159,6 +151,8 @@ const ShowSignInGate = ({
     return <></>;
 };
 
+// component with conditional logic which determines if a sign in gate
+// should be shown on the current page
 export const SignInGateSelector = ({
     isSignedIn,
     CAPI,
@@ -169,7 +163,6 @@ export const SignInGateSelector = ({
         variant: '',
     });
 
-    // wow this whole thing is tightly coupled to the AB test framework ...
     const ab = useAB();
 
     useEffect(() => {
@@ -195,7 +188,7 @@ export const SignInGateSelector = ({
 
     return (
         <>
-            {/* Sign In Gate Display Logic here */}
+            {/* Sign In Gate Display Logic */}
             {showGate &&
                 gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
                     <ShowSignInGate

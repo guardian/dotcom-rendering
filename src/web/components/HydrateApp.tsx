@@ -36,11 +36,6 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             mvtMaxValue={1000000}
             mvtId={mvtId}
             ophanRecord={ophanRecordFunc}
-            // TODO: Remove before live
-            forcedTestVariant={{
-                testId: 'SignInGateMainVariant',
-                variant: { id: 'main-variant-1', test: () => {} },
-            }}
         >
             <App CAPI={CAPI} NAV={NAV} />
         </ABProvider>,
