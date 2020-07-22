@@ -135,7 +135,7 @@ const ShowSignInGate = ({
     // but still fire a view event if they are eligible to see the gate
     if (gateVariant.gate) {
         return gateVariant.gate({
-            guUrl: window.guardian.config.page.host,
+            guUrl: CAPI.config.host || 'https://theguardian.com/',
             signInUrl,
             dismissGate: () => {
                 dismissGate(setShowGate, abTest);
