@@ -114,10 +114,19 @@ interface FormData {
     [key: string]: string;
 }
 
-function submit(body: FormData): void {
+function submit(body: FormData, form: Element): void {
     fetch('https://callouts.code.dev-guardianapis.com/formstack-campaign/submit', {
         method: 'POST',
         body: JSON.stringify(body)
+    })
+    .then(() => {
+        form.innerHTML = "<p>Thank you for your contribution</p>"
+    })
+    .catch(() => {
+        const errorPlaceholder = form.querySelector('.error-message');
+        if (errorPlaceholder) {
+            errorPlaceholder.innerHTML = "Sorry, there was a problem submitting your form. Please try again later."
+        }
     })
 }
 
@@ -158,24 +167,31 @@ function callouts(): void {
         if (!form) return;
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         form.addEventListener('submit', async (e): Promise<void> => {
-            e.preventDefault();
-            const elements = form.elements as HTMLCollectionOf<HTMLInputElement>;
-            const data = Array.from(elements).reduce(async (o: Promise<FormData>, elem) => {
-                const acc = await o;
-                const { type, checked, name, value, files } = elem;
-                if (type === 'radio') {
-                    if (checked) {
+            try {
+                e.preventDefault();
+                const elements = form.elements as HTMLCollectionOf<HTMLInputElement>;
+                const data = Array.from(elements).reduce(async (o: Promise<FormData>, elem) => {
+                    const acc = await o;
+                    const { type, checked, name, value, files } = elem;
+                    if (type === 'radio') {
+                        if (checked) {
+                            acc[name] = value;
+                        }
+                    } else if (type === 'file' && files?.length) {
+                        acc[name] = await readFile(files[0]);
+                    } else if (value) {
                         acc[name] = value;
                     }
-                } else if (type === 'file' && files?.length) {
-                    acc[name] = await readFile(files[0]);
-                } else if (value) {
-                    acc[name] = value;
-                }
-                return Promise.resolve(acc);
-            }, Promise.resolve({}));
+                    return Promise.resolve(acc);
+                }, Promise.resolve({}));
 
-            submit(await data);
+                submit(await data, form);
+            } catch(e) {
+                const errorPlaceholder = form.querySelector('.error-message');
+                if (errorPlaceholder) {
+                    errorPlaceholder.innerHTML = "There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB"
+                }
+            }
         })
     })
 }

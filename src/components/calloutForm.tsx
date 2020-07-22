@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 import { SvgMinus, SvgPlus } from '@guardian/src-svgs';
 import { Format } from '@guardian/types/Format';
@@ -11,6 +11,7 @@ import { TextInput } from '@guardian/src-text-input';
 import { TextArea } from '@guardian/src-text-area';
 import { RadioGroup, Radio } from "@guardian/src-radio"
 import { FormField } from '@guardian/apps-rendering-api-models/formField';
+import { darkModeCss } from 'styles';
 
 export interface CalloutProps {
     campaign: Campaign;
@@ -115,6 +116,16 @@ const calloutStyles = (kicker: string): SerializedStyles => css`
             margin: ${remSpace[2]} 0;
         }
     }
+
+    .error-message {
+        color: ${text.error};
+    }
+
+    ${darkModeCss`
+        background: white;
+        color: ${neutral[7]};
+        border: none;
+    `}
 `;
 
 const optionalLabelStyles = css`
@@ -202,10 +213,9 @@ const CalloutForm: FC<CalloutProps> = ({ campaign, format }: CalloutProps): Reac
                 <div>
                     <input name="formId" type="hidden" value={campaign.id} />
                     {campaign.fields.formFields.map(renderField)}
+                    <p className="error-message"></p>
                     <Button type="submit" size="xsmall">Share with the Guardian</Button>
-                    <div>
-                        <a href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
-                    </div>
+                    <a href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
                 </div>
             </form>
         </details>
