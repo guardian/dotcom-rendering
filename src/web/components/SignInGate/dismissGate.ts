@@ -1,3 +1,4 @@
+// TODO: Add localstorage lib from https://github.com/guardian/libs/pull/1 when it is merged
 const localStorageKey = `gu.prefs.sign-in-gate`;
 
 const localStorageLookupKey = (variant: string, name?: string): string => {
