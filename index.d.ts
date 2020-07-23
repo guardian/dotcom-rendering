@@ -352,6 +352,7 @@ type CAPIBrowserType = {
     isPhotoEssay: boolean;
     matchUrl?: string;
     callouts: CalloutBlockElement[];
+    qandaAtoms: QABlockElement[];
 };
 
 interface TagType {

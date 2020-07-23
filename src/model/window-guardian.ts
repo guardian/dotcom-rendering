@@ -99,6 +99,22 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         [] as CalloutBlockElement[],
     );
 
+    const qandaAtomWithIndex: QABlockElement[] = CAPI.blocks[0].elements.reduce(
+        (acc, element, index: number) => {
+            if (
+                element._type ===
+                'model.dotcomrendering.pageElements.QABlockElement'
+            ) {
+                acc.push({
+                    ...element,
+                    qandaIndex: index,
+                } as QABlockElement);
+            }
+            return acc;
+        },
+        [] as QABlockElement[],
+    );
+
     return {
         designType: CAPI.designType,
         pillar: CAPI.pillar,
@@ -168,6 +184,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         isPhotoEssay: CAPI.config.isPhotoEssay,
         matchUrl: CAPI.matchUrl,
         callouts: calloutsWithIndex,
+        qandaAtoms: qandaAtomWithIndex,
     };
 };
 

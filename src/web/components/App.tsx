@@ -13,6 +13,7 @@ import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import { QandaAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -33,6 +34,8 @@ import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
+
+import * as Ophan from '../browser/ophan/ophan';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -296,6 +299,27 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.qandaAtoms.map((qandaAtom) => (
+                <Hydrate root="qanda-atom">
+                    <QandaAtom
+                        id={qandaAtom.id}
+                        title={qandaAtom.title}
+                        html={qandaAtom.html}
+                        image={qandaAtom.img ? qandaAtom.img : ''}
+                        credit={qandaAtom.credit}
+                        likeHandler={Ophan.sendLikeDislikeComponentEvent(
+                            'LIKE',
+                            qandaAtom.id,
+                            'QANDA_ATOM',
+                        )}
+                        dislikeHandler={Ophan.sendLikeDislikeComponentEvent(
+                            'DISLIKE',
+                            qandaAtom.id,
+                            'QANDA_ATOM',
+                        )}
+                    />
                 </Hydrate>
             ))}
             <Portal root="share-comment-counts">
