@@ -152,4 +152,4 @@ export const BadMarkup = () => {
         </div>
     );
 };
-NoTags.story = { name: 'with a bad markup' };
+BadMarkup.story = { name: 'with a bad markup' };
