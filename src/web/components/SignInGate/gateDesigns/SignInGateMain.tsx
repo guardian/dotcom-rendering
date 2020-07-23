@@ -41,7 +41,7 @@ const headingStyles = css`
     }
 `;
 
-const subHeader = css`
+const bodyBold = css`
     ${textSans.medium({ fontWeight: 'bold' })}
     border-top: 1px ${palette.line.primary} solid;
     padding-bottom: 20px;
@@ -160,7 +160,7 @@ export const SignInGateMain = ({
             <h1 className={headingStyles}>
                 Register for free and continue reading
             </h1>
-            <p className={subHeader}>
+            <p className={bodyBold}>
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
@@ -214,7 +214,7 @@ export const SignInGateMain = ({
                 </LinkButton>
             </div>
 
-            <p className={cx([subHeader, signInHeader])}>
+            <p className={cx([bodyBold, signInHeader])}>
                 Have a subscription? Made a contribution? Already registered?
             </p>
 
