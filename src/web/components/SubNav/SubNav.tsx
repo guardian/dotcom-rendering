@@ -95,7 +95,7 @@ const showMoreStyle = css`
     color: ${text.supporting};
 
     :hover {
-        color: ${news.main};
+        color: ${news[400]};
     }
 
     ${from.desktop} {

@@ -29,8 +29,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
     pillar,
 }: Props) => {
     const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
-        prefix: '<blockquote>',
-        suffix: '</blockquote>',
+        fixes: [{ prefix: '<blockquote>', suffix: '</blockquote>' }],
         html,
     });
 

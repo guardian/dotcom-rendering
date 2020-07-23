@@ -80,23 +80,32 @@ export type TestMeta = {
     abTestVariant: string;
     campaignCode: string;
     campaignId?: string;
+    componentType: OphanComponentType;
+    products?: OphanProduct[];
 };
 
-export const sendOphanContributionsComponentEvent = (
+export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
-    componentType: OphanComponentType,
 ): void => {
+    const {
+        abTestName,
+        abTestVariant,
+        componentType,
+        products = [],
+        campaignCode,
+    } = testMeta;
+
     const componentEvent = {
         component: {
             componentType,
-            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: testMeta.campaignCode,
+            products,
+            campaignCode,
             id: testMeta.campaignId || testMeta.campaignCode,
         },
         abTest: {
-            name: testMeta.abTestName,
-            variant: testMeta.abTestVariant,
+            name: abTestName,
+            variant: abTestVariant,
         },
         action,
     };

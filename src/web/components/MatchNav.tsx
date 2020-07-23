@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { brandYellow, background } from '@guardian/src-foundations/palette';
+import { brandAlt, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -45,7 +45,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
             justify-content: space-between;
             position: relative;
             padding: ${space[2]}px;
-            background-color: ${brandYellow.main};
+            background-color: ${brandAlt[400]};
 
             :before {
                 content: '';
@@ -57,7 +57,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
                 ${until.desktop} {
                     left: calc((100vw - 46rem) / -2);
                 }
-                background-color: ${brandYellow.main};
+                background-color: ${brandAlt[400]};
                 z-index: -1;
             }
         `}

@@ -7,7 +7,7 @@ import { logView } from '@root/node_modules/@guardian/automat-client';
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
-    sendOphanContributionsComponentEvent,
+    sendOphanComponentEvent,
     TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
@@ -46,7 +46,6 @@ const buildPayload = (props: Props) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_ENGAGEMENT_BANNER',
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
@@ -144,11 +143,7 @@ const MemoisedInner = ({
                         });
                         setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
                         setBannerMeta(meta);
-                        sendOphanContributionsComponentEvent(
-                            'INSERT',
-                            meta,
-                            'ACQUISITIONS_ENGAGEMENT_BANNER',
-                        );
+                        sendOphanComponentEvent('INSERT', meta);
                     })
                     // eslint-disable-next-line no-console
                     .catch((error) =>
@@ -161,12 +156,11 @@ const MemoisedInner = ({
     // Should only run once
     useEffect(() => {
         if (hasBeenSeen && bannerMeta) {
-            logView(bannerMeta.abTestName);
-            sendOphanContributionsComponentEvent(
-                'VIEW',
-                bannerMeta,
-                'ACQUISITIONS_ENGAGEMENT_BANNER',
-            );
+            const { abTestName } = bannerMeta;
+
+            logView(abTestName);
+
+            sendOphanComponentEvent('VIEW', bannerMeta);
         }
     }, [hasBeenSeen, bannerMeta]);
 

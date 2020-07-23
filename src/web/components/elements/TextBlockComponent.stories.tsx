@@ -12,6 +12,8 @@ const shortHtml =
     '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero </p>';
 const differentWrapperTags =
     '<span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p></span>';
+const aListHtml =
+    '<ul><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat.</li><li>Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</li></ul>';
 
 const containerStyles = css`
     max-width: 620px;
@@ -117,3 +119,19 @@ export const FeatureDropCap = () => {
     );
 };
 FeatureDropCap.story = { name: 'with designType of Feature' };
+
+export const AList = () => {
+    return (
+        <div className={containerStyles}>
+            <TextBlockComponent
+                html={aListHtml}
+                pillar="news"
+                forceDropCap={true}
+                designType="Article"
+                display={Display.Standard}
+                isFirstParagraph={false}
+            />
+        </div>
+    );
+};
+NoTags.story = { name: 'with a list' };
