@@ -29,6 +29,31 @@ export type TestMeta = {
     products?: OphanProduct[];
 };
 
+export type OphanComponent = {
+    componentType: OphanComponentType;
+    id?: string;
+    products?: OphanProduct[];
+    campaignCode?: string;
+    labels?: string[];
+};
+
+export type OphanComponentEvent = {
+    component: OphanComponent;
+    action: OphanAction;
+    value?: string;
+    id?: string;
+    abTest?: {
+        name: string;
+        variant: string;
+    };
+};
+
+export const submitComponentEvent = (
+    componentEvent: OphanComponentEvent,
+): void => {
+    window.guardian.ophan.record({ componentEvent });
+};
+
 export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
@@ -41,7 +66,7 @@ export const sendOphanComponentEvent = (
         campaignCode,
     } = testMeta;
 
-    const componentEvent = {
+    const componentEvent: OphanComponentEvent = {
         component: {
             componentType,
             products,
@@ -55,7 +80,7 @@ export const sendOphanComponentEvent = (
         action,
     };
 
-    window.guardian.ophan.record({ componentEvent });
+    submitComponentEvent(componentEvent);
 };
 
 export const abTestPayload = (tests: {
