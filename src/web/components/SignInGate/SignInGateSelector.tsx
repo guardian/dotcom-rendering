@@ -53,11 +53,11 @@ const dismissGate = (
     setUserDismissedGate(currentAbTestValue.variant, currentAbTestValue.name);
 
     // When the user closes the sign in gate, we scroll them back to the main content
-    const articleBody =
-        document.querySelector('.js-article__body') ||
-        document.querySelector('.article-body-commercial-selector');
+    const articleBody = document.querySelector(
+        '.article-body-commercial-selector',
+    );
 
-    articleBody?.parentElement?.scrollIntoView(true);
+    articleBody?.scrollIntoView(true);
 };
 
 type GateTestMap = { [name: string]: SignInGateComponent };
