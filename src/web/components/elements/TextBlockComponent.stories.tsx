@@ -136,7 +136,7 @@ export const AList = () => {
         </div>
     );
 };
-NoTags.story = { name: 'with a list' };
+AList.story = { name: 'with a list' };
 
 export const BadMarkup = () => {
     return (
