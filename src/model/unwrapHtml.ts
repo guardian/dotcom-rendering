@@ -38,7 +38,7 @@ export const unwrapHtml = ({
 
     // span is the default unwrappedElement
     const unwrappedElement =
-        (willUnwrap && matchingFix && matchingFix.unwrappedElement) || 'span';
+        (willUnwrap && matchingFix && matchingFix.unwrappedElement) || 'p';
 
     return {
         unwrappedHtml,
