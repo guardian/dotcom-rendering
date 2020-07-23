@@ -138,6 +138,10 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
 
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
+
+            // used by sign in gate
+            host: CAPI.config.host,
+            idUrl: CAPI.config.idUrl,
         },
         richLinks: richLinksWithIndex,
         editionId: CAPI.editionId,

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -12,6 +14,8 @@ import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
+import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
+
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -29,10 +33,7 @@ import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
-import { useAB } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
-
-import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -386,6 +387,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         />
                     </Suspense>
                 </Lazy>
+            </Portal>
+            <Portal root="sign-in-gate">
+                <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
             </Portal>
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
