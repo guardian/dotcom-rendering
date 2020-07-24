@@ -209,6 +209,9 @@ interface QABlockElement {
     html: string;
     credit: string;
     qandaIndex?: number;
+    likeHandler: () => void;
+    dislikeHandler: () => void;
+    expandHandler: () => void;
 }
 
 interface RichLinkBlockElement {
