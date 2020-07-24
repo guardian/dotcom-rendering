@@ -1,0 +1,18 @@
+name: Run Lighthouse CI
+on: [push]
+jobs:
+    lhci:
+        name: Lighthouse CI
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+            - name: Use Node.js 10.15.3
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.15.3
+            - run: make build
+            - name: Install and run Lighthouse CI
+              run: |
+                  npm install -g @lhci/cli@0.4.x
+                  lhci autorun
