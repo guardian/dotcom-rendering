@@ -1,11 +1,27 @@
-interface ABTestRecord {
+/**
+ * an individual A/B test, structured for Ophan
+ */
+export type OphanABEvent = {
     variantName: string;
     complete: string | boolean;
-}
+    campaignCodes?: Array<string>;
+};
 
-interface ABTestPayload {
-    abTestRegister: { [key: string]: ABTestRecord };
-}
+/**
+ * the actual payload we send to Ophan: an object of OphanABEvents with test IDs as keys
+ */
+export type OphanABPayload = {
+    abTestRegister: { [testId: string]: OphanABEvent };
+};
+
+export type OphanProduct =
+    | 'CONTRIBUTION'
+    | 'RECURRING_CONTRIBUTION'
+    | 'MEMBERSHIP_SUPPORTER'
+    | 'MEMBERSHIP_PATRON'
+    | 'MEMBERSHIP_PARTNER'
+    | 'DIGITAL_SUBSCRIPTION'
+    | 'PRINT_SUBSCRIPTION';
 
 export type OphanAction =
     | 'INSERT'
@@ -40,28 +56,56 @@ export type OphanComponentType =
     | 'ACQUISITIONS_OTHER'
     | 'SIGN_IN_GATE';
 
+export type OphanComponent = {
+    componentType: OphanComponentType;
+    id?: string;
+    products?: Array<OphanProduct>;
+    campaignCode?: string;
+    labels?: Array<string>;
+};
+
+export type OphanComponentEvent = {
+    component: OphanComponent;
+    action: OphanAction;
+    value?: string;
+    id?: string;
+    abTest?: {
+        name: string;
+        variant: string;
+    };
+};
+
 export type TestMeta = {
     abTestName: string;
     abTestVariant: string;
     campaignCode: string;
     campaignId?: string;
+    componentType: OphanComponentType;
+    products?: OphanProduct[];
 };
 
-export const sendOphanContributionsComponentEvent = (
+export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
-    componentType: OphanComponentType,
 ): void => {
+    const {
+        abTestName,
+        abTestVariant,
+        componentType,
+        products = [],
+        campaignCode,
+    } = testMeta;
+
     const componentEvent = {
         component: {
             componentType,
-            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: testMeta.campaignCode,
+            products,
+            campaignCode,
             id: testMeta.campaignId || testMeta.campaignCode,
         },
         abTest: {
-            name: testMeta.abTestName,
-            variant: testMeta.abTestVariant,
+            name: abTestName,
+            variant: abTestVariant,
         },
         action,
     };
@@ -87,8 +131,8 @@ export const recordComponentEvent = (
 
 export const abTestPayload = (tests: {
     [key: string]: string;
-}): ABTestPayload => {
-    const records: { [key: string]: ABTestRecord } = {};
+}): OphanABPayload => {
+    const records: { [key: string]: OphanABEvent } = {};
     Object.keys(tests).forEach((testName) => {
         records[`ab${testName}`] = {
             variantName: tests[testName],
