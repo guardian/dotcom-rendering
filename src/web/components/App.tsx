@@ -35,7 +35,7 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 
-import * as Ophan from '../browser/ophan/ophan';
+import { recordComponentEvent } from '../browser/ophan/ophan';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -302,23 +302,34 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
-                <Hydrate root="qanda-atom">
+                <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
                     <QandaAtom
                         id={qandaAtom.id}
                         title={qandaAtom.title}
                         html={qandaAtom.html}
-                        image={qandaAtom.img ? qandaAtom.img : ''}
+                        image={qandaAtom.img}
                         credit={qandaAtom.credit}
-                        likeHandler={Ophan.sendLikeDislikeComponentEvent(
-                            'LIKE',
-                            qandaAtom.id,
-                            'QANDA_ATOM',
-                        )}
-                        dislikeHandler={Ophan.sendLikeDislikeComponentEvent(
-                            'DISLIKE',
-                            qandaAtom.id,
-                            'QANDA_ATOM',
-                        )}
+                        likeHandler={() => {
+                            recordComponentEvent(
+                                'LIKE',
+                                qandaAtom.id,
+                                'QANDA_ATOM',
+                            );
+                        }}
+                        dislikeHandler={() => {
+                            recordComponentEvent(
+                                'DISLIKE',
+                                qandaAtom.id,
+                                'QANDA_ATOM',
+                            );
+                        }}
+                        expandHandler={() => {
+                            recordComponentEvent(
+                                'EXPAND',
+                                qandaAtom.id,
+                                'QANDA_ATOM',
+                            );
+                        }}
                     />
                 </Hydrate>
             ))}

@@ -99,7 +99,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         [] as CalloutBlockElement[],
     );
 
-    const qandaAtomWithIndex: QABlockElement[] = CAPI.blocks[0].elements.reduce(
+    const qandaAtomsWithIndex: QABlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
             if (
                 element._type ===
@@ -184,7 +184,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         isPhotoEssay: CAPI.config.isPhotoEssay,
         matchUrl: CAPI.matchUrl,
         callouts: calloutsWithIndex,
-        qandaAtoms: qandaAtomWithIndex,
+        qandaAtoms: qandaAtomsWithIndex,
     };
 };
 

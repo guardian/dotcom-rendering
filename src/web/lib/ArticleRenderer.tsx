@@ -247,13 +247,15 @@ export const ArticleRenderer: React.FC<{
 
                 case 'model.dotcomrendering.pageElements.QABlockElement':
                     return (
-                        <QandaAtom
-                            id={element.id}
-                            title={element.title}
-                            html={element.html}
-                            image={element.img ? element.img : ''}
-                            credit={element.credit}
-                        />
+                        <div id={`qanda-atom-${i}`}>
+                            <QandaAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':

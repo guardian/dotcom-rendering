@@ -7,11 +7,38 @@ interface ABTestPayload {
     abTestRegister: { [key: string]: ABTestRecord };
 }
 
-export type OphanAction = 'INSERT' | 'VIEW';
+export type OphanAction =
+    | 'INSERT'
+    | 'VIEW'
+    | 'EXPAND'
+    | 'LIKE'
+    | 'DISLIKE'
+    | 'SUBSCRIBE'
+    | 'ANSWER'
+    | 'VOTE'
+    | 'CLICK';
 
 export type OphanComponentType =
+    | 'READERS_QUESTIONS_ATOM'
+    | 'QANDA_ATOM'
+    | 'PROFILE_ATOM'
+    | 'GUIDE_ATOM'
+    | 'TIMELINE_ATOM'
+    | 'NEWSLETTER_SUBSCRIPTION'
+    | 'SURVEYS_QUESTIONS'
     | 'ACQUISITIONS_EPIC'
-    | 'ACQUISITIONS_ENGAGEMENT_BANNER';
+    | 'ACQUISITIONS_ENGAGEMENT_BANNER'
+    | 'ACQUISITIONS_THANK_YOU_EPIC'
+    | 'ACQUISITIONS_HEADER'
+    | 'ACQUISITIONS_FOOTER'
+    | 'ACQUISITIONS_INTERACTIVE_SLICE'
+    | 'ACQUISITIONS_NUGGET'
+    | 'ACQUISITIONS_STANDFIRST'
+    | 'ACQUISITIONS_THRASHER'
+    | 'ACQUISITIONS_EDITORIAL_LINK'
+    | 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
+    | 'ACQUISITIONS_OTHER'
+    | 'SIGN_IN_GATE';
 
 export type TestMeta = {
     abTestName: string;
@@ -35,6 +62,22 @@ export const sendOphanContributionsComponentEvent = (
         abTest: {
             name: testMeta.abTestName,
             variant: testMeta.abTestVariant,
+        },
+        action,
+    };
+
+    window.guardian.ophan.record({ componentEvent });
+};
+
+export const recordComponentEvent = (
+    action: OphanAction,
+    componentId: string,
+    componentType: OphanComponentType,
+): void => {
+    const componentEvent = {
+        component: {
+            componentType,
+            id: componentId,
         },
         action,
     };

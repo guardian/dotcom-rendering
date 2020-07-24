@@ -648,7 +648,8 @@ type IslandType =
     | 'match-nav'
     | 'match-stats'
     | 'callout'
-    | 'comments';
+    | 'comments'
+    | 'qanda-atom';
 
 interface TrailType {
     designType: DesignType;

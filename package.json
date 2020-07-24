@@ -99,6 +99,7 @@
         "pm2": "^4.3.0",
         "polished": "^1.9.2",
         "preact": "^10.3.1",
+        "preact-render-to-string": "^5.1.10",
         "prettier-eslint": "^11.0.0",
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
