@@ -258,6 +258,9 @@ export const ArticleRenderer: React.FC<{
                                 html={element.html}
                                 image={element.img}
                                 credit={element.credit}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandHandler={() => {}}
                             />
                         </div>
                     );
