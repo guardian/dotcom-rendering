@@ -125,7 +125,8 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'displayHint',
         'starRating',
         'commentable',
-        'internalShortId'
+        'internalShortId',
+        'commentable'
     ];
 
     const params = new URLSearchParams({

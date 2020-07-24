@@ -135,7 +135,17 @@ const clientConfig = {
                                 '@emotion/babel-preset-css-prop',
                                 [
                                     '@babel/preset-env',
-                                    { useBuiltIns: 'usage', modules: false, "targets": { "esmodules": true } }
+                                    {
+                                        // Babel recommends installing corejs as a peer dependency
+                                        // and specifying the version used here
+                                        // https://babeljs.io/docs/en/babel-preset-env#usebuiltins
+                                        // This should automatically inject polyfills as needed,
+                                        // based on our code and the browserslist in package.json
+                                        useBuiltIns: 'usage',
+                                        corejs: 3,
+                                        modules: false,
+                                        targets: { esmodules: true },
+                                    },
                                 ],
                             ],
                         },

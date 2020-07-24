@@ -9,7 +9,7 @@ import { createElement as h } from 'react';
 import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
-import { ads, slideshow } from 'client/nativeCommunication';
+import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { App } from '@guardian/discussion-rendering/build/App';
 import "regenerator-runtime/runtime.js";
 
@@ -137,6 +137,8 @@ if (pillar && shortUrl) {
 
 setup();
 ads();
+videos();
+reportNativeElementPositionChanges();
 topics();
 slideshow();
 formatDates();

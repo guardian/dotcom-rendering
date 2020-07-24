@@ -5,7 +5,8 @@ import { Format } from '@guardian/types/Format';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Option, map, withDefault } from 'types/option';
 import { pipe2 } from 'lib';
-
+import { pageFonts } from "styles";
+import { remSpace } from "@guardian/src-foundations";
 
 export interface InteractiveAtomProps {
     html: string;
@@ -23,6 +24,21 @@ const InteractiveAtomStyles = (pillarStyles: PillarStyles): SerializedStyles => 
         border-bottom: 0.0625rem solid ${neutral[86]};
     }
 `;
+const atomCss = `
+    ${pageFonts} 
+    
+    @media (prefers-color-scheme: dark) {
+        body {
+            background: white !important;
+            padding: ${remSpace[2]} !important;
+        } 
+    }`
+const atomScript = `
+    function resize() {
+        window.frameElement.height = document.body.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();`
 
 const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
     const { html, styles, js, format } = props;
@@ -43,3 +59,7 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps):
 }
 
 export default InteractiveAtom;
+export {
+    atomCss,
+    atomScript,
+}

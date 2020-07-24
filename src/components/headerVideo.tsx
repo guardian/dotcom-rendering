@@ -18,13 +18,24 @@ const marginAuto = `
     margin-right: auto;
 `;
 
+const backgroundColour = (format: Format): string => {
+    switch (format.design) {
+        case Design.Media:
+            return neutral[20];
+        case Design.Comment:
+            return neutral[86];
+        default:
+            return neutral[97];
+    }
+};
+
 const styles = (format: Format): SerializedStyles => css`
     margin: 0 0 ${remSpace[2]} 0;
     position: relative;
     display: block;
     width: 100%;
     padding-bottom: 56.25%;
-    background: ${format.design === Design.Media ? neutral[20] : neutral[97]};
+    background: ${backgroundColour(format)};
 
     ${darkModeCss`
         background: ${neutral[20]};

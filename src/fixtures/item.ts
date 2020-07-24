@@ -30,7 +30,8 @@ const fields = {
     tags: [],
     shouldHideReaderRevenue: false,
     branding: none,
-    internalShortId: none
+    internalShortId: none,
+    commentCount: none
 };
 
 const article: Item = {

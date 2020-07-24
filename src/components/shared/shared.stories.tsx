@@ -2,7 +2,7 @@ import React from 'react';
 import Tags from './tags';
 import { Keyline } from './keyline';
 import { withKnobs } from "@storybook/addon-knobs";
-import { Design } from 'format';
+import { Design, Format } from 'format';
 export default { title: 'Shared', decorators: [withKnobs] };
 
 export const OpinionKeyline = (): JSX.Element =>
@@ -19,7 +19,7 @@ const tagsProps = [{
     webUrl: "https://mapi.co.uk/tag"
 }];
 
-export const tags = (): JSX.Element => 
-    <Tags tags={[...tagsProps, ...tagsProps, ...tagsProps]} />
+export const tags = (format: Format): JSX.Element =>
+    <Tags tags={[...tagsProps, ...tagsProps, ...tagsProps]} format={format} />
 
- 
+

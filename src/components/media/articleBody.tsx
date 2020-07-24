@@ -5,14 +5,15 @@ import { background, neutral } from '@guardian/src-foundations/palette';
 import { getPillarStyles, PillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { remSpace } from "@guardian/src-foundations";
+import { Format } from '@guardian/types/Format';
 
-const ArticleBodyStyles = css`
+const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     position: relative;
     clear: both;
     background: ${background.inverse}    
     color: ${neutral[86]};
 
-    ${adStyles}
+    ${adStyles(format)}
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
@@ -29,14 +30,18 @@ interface ArticleBodyProps {
     pillar: Pillar;
     className: SerializedStyles[];
     children: ReactNode[];
+    format: Format;
 }
 
 const ArticleBodyMedia = ({
     pillar,
     className,
     children,
+    format
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles(getPillarStyles(pillar)), ...className]}>
+    <div css={[ArticleBodyStyles(format),
+        ArticleBodyDarkStyles(getPillarStyles(pillar)),
+        ...className]}>
         {children}
     </div>
 

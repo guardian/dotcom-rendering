@@ -1,17 +1,17 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, ReactElement, FC } from 'react';
+import { createElement as h, FC, ReactElement, ReactNode } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { text as textColour, neutral } from '@guardian/src-foundations/palette';
-import { Option, fromNullable, some, none, andThen, map, withDefault } from 'types/option';
-import { basePx, icons, darkModeCss, pageFonts } from 'styles';
+import { neutral, text as textColour } from '@guardian/src-foundations/palette';
+import { andThen, fromNullable, map, none, Option, some, withDefault } from 'types/option';
+import { basePx, darkModeCss, icons } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
-import { ElementKind, BodyElement } from 'bodyElement';
-import { Role, BodyImageProps } from 'image';
+import { BodyElement, ElementKind } from 'bodyElement';
+import { BodyImageProps, Role } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
+import { palette, remSpace } from '@guardian/src-foundations';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
@@ -20,12 +20,13 @@ import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
 import Anchor from 'components/anchor';
-import InteractiveAtom from 'components/atoms/interactiveAtom';
+import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
-import { isElement, pipe2, pipe } from 'lib';
+import { isElement, pipe, pipe2 } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
+import { fromUnsafe, Result, toOption } from 'types/result';
 
 
 // ----- Renderer ----- //
@@ -33,18 +34,39 @@ import LiveEventLink from 'components/liveEventLink';
 const getAttrs = (node: Node): Option<NamedNodeMap> =>
     isElement(node) ? some(node.attributes) : none;
 
-const getAttr = (attr: string) => (node: Node): Option<string> =>
+
+const transformHref = (href: string): string => {
+    if (href.startsWith('profile/')) {
+        return `https://www.theguardian.com/${href}`;
+    }
+
+    const url: Result<string, URL> = fromUnsafe(() => new URL(href), 'invalid url');
+
+    return pipe2(
+        toOption(url),
+        map(url => {
+            const path = url.pathname.split('/');
+            const isLatest = url.hostname === 'www.theguardian.com' && path[path.length - 1] === 'latest';
+
+            if (isLatest) {
+                return href.slice(0, -7);
+            }
+
+            return href;
+        }),
+        withDefault(href)
+    )
+}
+
+const getHref = (node: Node): Option<string> =>
     pipe(
         getAttrs(node),
         andThen(attrs => pipe2(
-            attrs.getNamedItem(attr),
+            attrs.getNamedItem('href'),
             fromNullable,
-            map(attr => attr.value),
+            map(attr => transformHref(attr.value)),
         )),
     );
-
-const getHref: (node: Node) => Option<string> =
-    getAttr('href');
 
 const bulletStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
@@ -260,19 +282,29 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
     }
 };
 
+const linkColourFromFormat = (format: Format): string => {
+    if (format.design === Design.AdvertisementFeature) {
+        return palette.labs[300];
+    }
+
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return format.design === Design.Media ? inverted : kicker
+}
+
 const standfirstTextElement = (format: Format) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(standfirstTextElement(format));
-    const { kicker, inverted } = getPillarStyles(format.pillar);
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
+        case 'STRONG':
+            return h('strong', { key }, children);
         case 'UL':
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
             return styledH('li', { css: listItemStyles(format) }, children);
         case 'A': {
-            const colour = format.design === Design.Media ? inverted : kicker;
-            const styles = css` color: ${colour}; text-decoration: none`;
+            const colour = linkColourFromFormat(format);
+            const styles = css` color: ${colour}; text-decoration: none;`;
             const url = withDefault('')(getHref(node));
             const href = url.startsWith('profile/') ? `https://www.theguardian.com/${url}` : url
             return styledH('a', { key, href, css: styles }, children);
@@ -348,6 +380,7 @@ const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: Pullquote
 const richLinkWidth = '8.75rem';
 
 const richLinkStyles = (format: Format): SerializedStyles => {
+    const backgroundColor = format.design === Design.Comment ? neutral[86] : neutral[97];
     const formatStyles = format.design === Design.Live
         ? `width: calc(100% - ${remSpace[4]});`
         : `
@@ -358,7 +391,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
         `
 
     return css`
-        background: ${neutral[97]};
+        background: ${backgroundColor};
         padding: ${basePx(1)};
         border-top: solid 1px ${neutral[60]};
 
@@ -551,25 +584,13 @@ const render = (format: Format, excludeStyles = false) =>
                         <head>
                             <meta charset="utf-8">
                             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                            <style>
-                                ${pageFonts}
-                                ${styles}
-                                body {
-                                    background: white !important;
-                                    padding: ${remSpace[2]} !important;
-                                }
-                            </style>
+                            <style>${styles}</style>
+                            <style>${atomCss}</style>
                         </head>
                         <body>
                             ${html}
-                            <script>
-                                ${withDefault('')(js)}
-                                function resize() {
-                                    window.frameElement.height = document.body.offsetHeight;
-                                }
-                                window.addEventListener('resize', resize);
-                                resize();
-                            </script>
+                            <script>${withDefault('')(js)}</script>
+                            <script>${atomScript}</script>
                         </body>
                     </html>
                 `;
@@ -580,23 +601,34 @@ const render = (format: Format, excludeStyles = false) =>
         }
 
         case ElementKind.MediaAtom: {
-            const { posterUrl, videoId, duration } = element;
+            const { posterUrl, videoId, duration, caption } = element;
+
+            const backgroundColor = (format: Format): string =>
+                format.design === Design.Comment ? neutral[86] : neutral[97];
+
             const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
-                margin: ${remSpace[4]} 0;
-                background: ${neutral[97]};
+                margin: 0;
+                background: ${backgroundColor(format)};
                 ${darkModeCss`
                     background: ${neutral[20]};
                 `}
             `
+
+            const figureAttributes = {
+                css: css`margin: ${remSpace[4]} 0;`
+            }
+
             const attributes = {
                 'data-posterUrl': posterUrl,
                 'data-videoId': videoId,
                 'data-duration': duration,
+                'className': 'native-video',
                 css: styles
             }
-            return styledH('div', attributes)
+            const figcaption = h(FigCaption, { format, caption, credit: none });
+            return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
         }
     }
 };

@@ -70,9 +70,10 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
                 <div css={articleWidthStyles}>
                     <Byline {...item} />
                 </div>
-                <Cutout 
+                <Cutout
                     contributors={item.contributors}
                     className={articleWidthStyles}
+                    format={item}
                 />
                 <Keyline {...item} />
                 <div css={articleWidthStyles}>
@@ -88,11 +89,11 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
                     {OptionalLogo(item)}
                 </section>
             </header>
-            <ArticleBody className={[articleWidthStyles]}>
+            <ArticleBody className={[articleWidthStyles]} format={item}>
                 {children}
             </ArticleBody>
             <footer css={articleWidthStyles}>
-                <Tags tags={item.tags}/>
+                <Tags tags={item.tags} format={item}/>
             </footer>
         </article>
     </main>
