@@ -113,6 +113,7 @@ const toReact = (format: Format) => (node: Node): ReactNode => {
                 </a>
             );
         case 'SPAN':
+            return Array.from(node.childNodes).map(toReact(format));
         case '#text':
             return node.textContent;
     }
