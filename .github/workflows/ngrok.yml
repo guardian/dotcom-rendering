@@ -1,8 +1,8 @@
-name: Run Lighthouse CI
+name: Ngrok it
 on: [push]
 jobs:
     lhci:
-        name: Lighthouse CI
+        name: Ngrok it
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
