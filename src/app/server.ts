@@ -146,6 +146,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     // express requires all 4 args here:
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     app.use((err: any, req: any, res: any, next: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
