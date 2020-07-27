@@ -61,7 +61,9 @@ export const Counts = ({
     }
 
     const shareCount = shareData && shareData.share_count;
-    const hasShareData = !shareError && (shareCount || shareCount === 0);
+    const hasShareData: boolean =
+        !shareError && (!!shareCount || shareCount === 0);
+    const shareCountGtZero: boolean = !!shareCount && shareCount > 0;
     const hasCommentData = commentCount || commentCount === 0;
 
     if (!hasShareData && !hasCommentData) {
@@ -78,8 +80,12 @@ export const Counts = ({
 
     return (
         <div className={containerStyles}>
-            {hasShareData && <ShareCount short={shareShort} long={shareLong} />}
-            {hasShareData && hasCommentData && <NumbersBorder />}
+            {hasShareData && shareCountGtZero && (
+                <ShareCount short={shareShort} long={shareLong} />
+            )}
+            {hasShareData && shareCountGtZero && hasCommentData && (
+                <NumbersBorder />
+            )}
             {hasCommentData && (
                 <CommentCount
                     short={commentShort}
