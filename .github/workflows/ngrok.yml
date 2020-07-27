@@ -12,7 +12,10 @@ jobs:
               with:
                   node-version: 10.15.3
             - run: make build
-            - name: Install and run Lighthouse CI
+            - name: Ngrok it
               run: |
                   npm install -g ngrok
-                  NODE_ENV=production node dist/frontend.server.js & ngrok http 9000 -log=stdout &
+                  NODE_ENV=production node dist/frontend.server.js & ngrok http 9000 -log=stdout
+                  sleep 180
+                  
+
