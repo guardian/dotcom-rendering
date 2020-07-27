@@ -174,3 +174,11 @@ export const sendPageView = (): void => {
 
     trackLCP(send);
 };
+
+export const trackNonClickInteraction = (actionName: string): void => {
+    const send = `${tracker.name}.send`;
+
+    window.ga(send, 'event', 'Interaction', actionName, {
+        nonInteraction: true, // to avoid affecting bounce rate
+    });
+};

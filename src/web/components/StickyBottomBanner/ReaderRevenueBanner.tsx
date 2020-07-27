@@ -11,6 +11,7 @@ import {
     TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { trackNonClickInteraction } from './ga';
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -156,11 +157,16 @@ const MemoisedInner = ({
     // Should only run once
     useEffect(() => {
         if (hasBeenSeen && bannerMeta) {
-            const { abTestName } = bannerMeta;
+            const { abTestName, componentType } = bannerMeta;
 
             logView(abTestName);
 
             sendOphanComponentEvent('VIEW', bannerMeta);
+
+            // track banner view event in Google Analytics for subscriptions banner
+            if (componentType === 'ACQUISITIONS_SUBSCRIPTIONS_BANNER') {
+                trackNonClickInteraction('subscription-banner : display');
+            }
         }
     }, [hasBeenSeen, bannerMeta]);
 
