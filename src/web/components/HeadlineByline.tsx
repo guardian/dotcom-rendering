@@ -77,6 +77,17 @@ const immersiveLinkStyles = (pillar: Pillar) => css`
     }
 `;
 
+// If there is an image reduce the width of the author div
+const mobileCommentAuthor = css`
+    @media (max-width: 400px) {
+        width: 65%;
+    }
+`;
+
+function hasBylineImage(item: TagType) {
+    return item.bylineImageUrl;
+}
+
 type Props = {
     display: Display;
     designType: DesignType;
@@ -142,8 +153,14 @@ export const HeadlineByline = ({
                     );
                 case 'GuardianView':
                 case 'Comment':
+                    // Check if there is an image for the author
+                    const hasImage = tags.find(hasBylineImage);
                     return (
-                        <div className={opinionStyles(pillar)}>
+                        <div
+                            className={`${opinionStyles(pillar)} ${
+                                hasImage ? mobileCommentAuthor : ''
+                            }`}
+                        >
                             <BylineLink byline={byline} tags={tags} />
                         </div>
                     );
