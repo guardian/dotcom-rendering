@@ -47,7 +47,7 @@ const buildUrlFromQueryParam = (req: Request) => {
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     logger.info('dotcom-rendering is GO.');
-    if(false)
+    if(false) // eslint-disable-line 
     getGuardianConfiguration('prod')
         .then((config: GuardianConfiguration) => {
             log(`loaded ${config.size()} configuration parameters`);
@@ -144,7 +144,7 @@ if (process.env.NODE_ENV === 'production') {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 
-if(false)
+if(false) // eslint-disable-line 
     setInterval(() => {
         recordBaselineCloudWatchMetrics();
     }, 10 * 1000);
