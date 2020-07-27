@@ -207,7 +207,7 @@ interface QABlockElement {
     title: string;
     img?: string;
     html: string;
-    credit: string;
+    credit?: string;
     qandaIndex?: number;
 }
 
