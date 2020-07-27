@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -11,15 +11,7 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { LinkButton , buttonBrand } from '@guardian/src-button';
 
-
-
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
-import {
-    fetchTickerData,
-    TickerCountType,
-    TickerData,
-} from '@root/src/lib/fetchTickerData';
-import { addForMinutes, getCookie } from '@root/src/web/browser/cookie';
 import {ThemeProvider} from "@root/node_modules/emotion-theming";
 
 type Props = {
@@ -31,7 +23,6 @@ type Props = {
     };
     dataLinkNamePrefix: string;
     inHeader: boolean;
-    enableAusMoment2020Header: boolean;
 };
 
 const paddingStyles = css`
@@ -120,48 +111,16 @@ const hiddenFromTablet = css`
 const subMessageStyles = css`
     color: ${brandText.primary};
     ${textSans.medium()};
-    margin-bottom: 5px;
+    margin: 5px 0;
 `;
-
-const headerYellowHighlight = css`
-    color: ${brandAlt[400]};
-    font-weight: 700;
-`;
-
-const AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME = 'gu_aus_moment_supporter_count';
 
 export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
     urls,
     dataLinkNamePrefix,
     inHeader,
-    enableAusMoment2020Header,
 }) => {
-    const [numberOfSupporters, setnumberOfSupporters] = useState<string>('');
-    const showAusMomentHeader = edition === 'AU' && enableAusMoment2020Header;
-
-    useEffect(() => {
-        if (showAusMomentHeader) {
-            const cookieValue = getCookie(
-                AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME,
-            );
-
-            if (cookieValue) {
-                setnumberOfSupporters(cookieValue.toLocaleString());
-            } else {
-                fetchTickerData(TickerCountType.people).then(
-                    (td: TickerData) => {
-                        addForMinutes(
-                            AUS_MOMENT_SUPPORTER_COUNT_COOKIE_NAME,
-                            `${td.total}`,
-                            60,
-                        );
-                        setnumberOfSupporters(td.total.toLocaleString());
-                    },
-                );
-            }
-        }
-    }, [showAusMomentHeader]);
+    const showAusMomentHeader = edition === 'AU';
 
     if (shouldHideSupportMessaging()) {
         if (showAusMomentHeader) {
@@ -175,12 +134,6 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                         <div className={messageStyles}>Thank you</div>
 
                         <div className={subMessageStyles}>
-                            We&apos;re funded by
-                            <span className={headerYellowHighlight}>
-                                {` ${numberOfSupporters} `}
-                            </span>
-                            readers across Australia.
-                            <br />
                             <ThemeProvider theme={buttonBrand}>
                                 <LinkButton
                                     priority="secondary"
@@ -207,17 +160,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             >
                 <div className={messageStyles}>Support The&nbsp;Guardian</div>
                 <div className={subMessageStyles}>
-                    {showAusMomentHeader ? (
-                        <div>
-                            We&apos;re funded by
-                            <span className={headerYellowHighlight}>
-                                {` ${numberOfSupporters} `}
-                            </span>
-                            readers across Australia.
-                        </div>
-                    ) : (
-                        <div> Available for everyone, funded by readers</div>
-                    )}
+                    <div> Available for everyone, funded by readers</div>
                 </div>
                 <a
                     className={linkStyles}
