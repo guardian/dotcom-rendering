@@ -147,8 +147,8 @@ const MemoisedInner = ({
                         setBannerMeta(meta);
                         sendOphanComponentEvent('INSERT', meta);
                     })
-                    // eslint-disable-next-line no-console
                     .catch((error) =>
+                        // eslint-disable-next-line no-console
                         console.log(`banner - error is: ${error}`),
                     );
             });
