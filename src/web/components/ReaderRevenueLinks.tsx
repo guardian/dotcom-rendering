@@ -141,7 +141,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                                     size="small"
                                     href="https://support.theguardian.com/aus-2020-map?INTCMP=Aus_moment_2020_frontend_header"
                                 >
-                                    Hear from our supporters
+                                    Hear from other supporters
                                 </LinkButton>
                             </ThemeProvider>
                         </div>
