@@ -84,6 +84,12 @@ export type TestMeta = {
     products?: OphanProduct[];
 };
 
+export const submitComponentEvent = (
+    componentEvent: OphanComponentEvent,
+): void => {
+    window.guardian.ophan.record({ componentEvent });
+};
+
 export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
@@ -96,7 +102,7 @@ export const sendOphanComponentEvent = (
         campaignCode,
     } = testMeta;
 
-    const componentEvent = {
+    const componentEvent: OphanComponentEvent = {
         component: {
             componentType,
             products,
@@ -110,7 +116,7 @@ export const sendOphanComponentEvent = (
         action,
     };
 
-    window.guardian.ophan.record({ componentEvent });
+    submitComponentEvent(componentEvent);
 };
 
 export const abTestPayload = (tests: {
