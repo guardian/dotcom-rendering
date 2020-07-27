@@ -9,7 +9,6 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import {
     sendOphanComponentEvent,
     TestMeta,
-    submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 
@@ -140,7 +139,6 @@ const MemoisedInner = ({
                     .guardianPolyfilledImport(module.url)
                     .then((bannerModule) => {
                         setBannerProps({
-                            submitComponentEvent,
                             ...module.props,
                         });
                         setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
