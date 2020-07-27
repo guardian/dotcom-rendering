@@ -44,13 +44,6 @@ const buildUrlFromQueryParam = (req: Request) => {
     return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 };
 
-const buildUrlFromPath = (req: Request) => {
-    // Supports urls such as:
-    // http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu
-    // Note. Defaults to using production frontend
-    return `https://www.theguardian.com${req.url}.json?dcr=true`;
-};
-
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     logger.info('dotcom-rendering is GO.');
