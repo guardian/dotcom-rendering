@@ -52,7 +52,12 @@ export const Branding: React.FC<{
                     rel="nofollow"
                     aria-label={`Visit the ${branding.sponsorName} website`}
                 >
-                    <img src={branding.logo.src} alt={branding.sponsorName} />
+                    <img
+                        src={branding.logo.src}
+                        alt={branding.sponsorName}
+                        height={branding.logo.dimensions.height}
+                        width={branding.logo.dimensions.width}
+                    />
                 </a>
             </div>
 
