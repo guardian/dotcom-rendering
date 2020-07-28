@@ -163,9 +163,14 @@ const minHeightWithAvatar = css`
     min-height: 259px;
 `;
 
+// If in mobile increase the margin top and margin right deficit
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
+    ${from.mobile} {
+        margin-right: -1.85rem;
+        margin-top: -50px;
+    }
     ${from.mobileLandscape} {
         margin-right: -1.25rem;
     }
