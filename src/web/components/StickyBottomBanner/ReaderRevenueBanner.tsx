@@ -111,6 +111,7 @@ const MemoisedInner = ({
 
         window.guardian.automat = {
             react: React,
+            preact: React,
             emotionCore,
             emotionTheming,
             emotion,

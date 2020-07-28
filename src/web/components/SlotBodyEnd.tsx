@@ -148,6 +148,7 @@ const MemoisedInner = ({
 
         window.guardian.automat = {
             react: React,
+            preact: React, // temp while we deploy newer contributions-service at which point client-lib does this for us
             emotionCore,
             emotionTheming,
             emotion,
