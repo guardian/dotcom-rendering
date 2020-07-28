@@ -2,6 +2,9 @@ import path from 'path';
 import { configure, getLogger, addLayout, shutdown } from 'log4js';
 
 const logLocation =
+    process.env.DISABLE_LOGGING_AND_METRICS === 'true'
+        ? `${path.resolve('logs')}/dotcom-rendering.log`
+        :
     process.env.NODE_ENV === 'production'
         ? '/var/log/dotcom-rendering/dotcom-rendering.log'
         : `${path.resolve('logs')}/dotcom-rendering.log`;
