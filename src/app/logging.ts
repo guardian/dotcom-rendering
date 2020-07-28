@@ -25,7 +25,7 @@ addLayout('json', () => {
     };
 });
 
-const log4js_disabled = {
+const disableLog4js = {
     appenders: {
         console: { type: 'console' },
     },
@@ -35,7 +35,7 @@ const log4js_disabled = {
     },
 };
 
-const log4js_enabled = {
+const enableLog4j = {
     appenders: {
         console: { type: 'console' },
         fileAppender: {
@@ -56,10 +56,10 @@ const log4js_enabled = {
 };
 
 if (process.env.DISABLE_LOGGING_AND_METRICS === "true") {
-    configure(log4js_disabled);
+    configure(disableLog4js);
 }
 else {
-    configure(log4js_enabled);
+    configure(enableLog4j);
 }
 
 // We do this to ensure no memory leaks during development as hot reloading
