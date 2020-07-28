@@ -3,6 +3,19 @@ include "content/v1.thrift"
 namespace scala com.gu.mobile.ar.models
 namespace typescript _at_guardian.apps_rendering_api_models
 
+struct Image {
+    1: required string url
+    2: required i32 height
+    3: required i32 width
+}
+
+struct RelatedContent {
+    1: required string title
+    2: required string lastModified
+    3: required Image headerImage
+    4: required link string
+}
+
 struct Branding {
     1: required string brandingType
     2: required string sponsorName
@@ -54,4 +67,5 @@ struct RenderingRequest {
     4: optional map<string,string> targetingParams
     5: optional Branding branding
     6: optional list<Campaign> campaigns
+    7: optional list<RelatedContent> relatedContent
 }
