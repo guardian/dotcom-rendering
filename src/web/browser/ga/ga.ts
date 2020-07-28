@@ -182,10 +182,17 @@ export const trackNonClickInteraction = (actionName: string): void => {
         const send = `${tracker.name}.send`;
 
         ga(send, 'event', 'Interaction', actionName, {
-            nonInteraction: true, // to avoid affecting bounce rate
+            /**
+             * set nonInteraction to avoid affecting bounce rate
+             * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
+             */
+            nonInteraction: true,
         });
     } else {
         const error = new Error("window.ga doesn't exist");
-        window.guardian.modules.sentry.reportError(error);
+        window.guardian.modules.sentry.reportError(
+            error,
+            'trackNonClickInteraction',
+        );
     }
 };
