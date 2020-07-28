@@ -184,5 +184,8 @@ export const trackNonClickInteraction = (actionName: string): void => {
         ga(send, 'event', 'Interaction', actionName, {
             nonInteraction: true, // to avoid affecting bounce rate
         });
+    } else {
+        const error = new Error("window.ga doesn't exist");
+        window.guardian.modules.sentry.reportError(error);
     }
 };
