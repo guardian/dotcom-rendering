@@ -14213,10 +14213,10 @@ openurl@^1.1.1:
   resolved "https://registry.yarnpkg.com/openurl/-/openurl-1.1.1.tgz#3875b4b0ef7a52c156f0db41d4609dbb0f94b387"
   integrity sha1-OHW0sO96UsFW8NtB1GCduw+Us4c=
 
-ophan-tracker-js@^1.3.13:
-  version "1.3.17"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.17.tgz#49bf3984978356f0c5fc719592d1300347311785"
-  integrity sha512-22x+66NntYxML1YGFkJmOc8eErXnhkQg4hKAY1egsjQjJNWHDvT/YGuyMSIz2gl7nZYFLH5nZTCeP3AqZxJRCw==
+ophan-tracker-js@^1.3.21:
+  version "1.3.21"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.21.tgz#b81463c1b96249e32f28ff42aa433ed00f143cc0"
+  integrity sha512-hroyMjdQbx3ywDJmYsCpY2Qcff1aYmH5M0wZSi56smSPUHP0SziRaMJx34G9rEKR8UL6EBUO6KIHSYyKcto5hg==
 
 optimist@^0.6.1:
   version "0.6.1"
