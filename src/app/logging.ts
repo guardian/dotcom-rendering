@@ -66,5 +66,3 @@ export const logger =
     process.env.NODE_ENV === 'development'
         ? getLogger('development')
         : getLogger();
-
-logger.level = 'info';
