@@ -6,7 +6,7 @@ import { ThemeProvider } from 'emotion-theming'
 import { from } from '@guardian/src-foundations/mq';
 import { brandAltBackground, neutral,  } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
-import { SvgArrowRightStraight } from "@guardian/src-svgs"
+import { SvgArrowRightStraight } from "@guardian/src-icons"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
 
