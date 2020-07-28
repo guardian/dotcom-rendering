@@ -440,6 +440,7 @@ export const StandardLayout = ({
                                 />
                                 {showMatchStats && <div id="match-stats" />}
                                 {showBodyEndSlot && <div id="slot-body-end" />}
+                                <div id="braze" />
                                 <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
                                     pillar={pillar}

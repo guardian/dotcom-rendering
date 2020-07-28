@@ -587,6 +587,7 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    brazeApiKey?: string;
 }
 
 interface GADataType {
@@ -654,7 +655,8 @@ type IslandType =
     | 'callout'
     | 'comments'
     | 'qanda-atom'
-    | 'sign-in-gate';
+    | 'sign-in-gate'
+    | 'braze';
 
 interface TrailType {
     designType: DesignType;

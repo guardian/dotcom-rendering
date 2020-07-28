@@ -15,6 +15,7 @@ import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
+import { Braze } from '@root/src/web/components/Braze';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 import { QandaAtom } from '@guardian/atoms-rendering';
@@ -398,6 +399,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                     tags={CAPI.tags}
                     contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
+            </Portal>
+            <Portal root="braze">
+                <Braze isSignedIn={isSignedIn} />
             </Portal>
             <Portal
                 root={
