@@ -11,7 +11,7 @@ import {
     TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
-import { trackNonClickInteraction } from '../../browser/ga/ga';
+import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
