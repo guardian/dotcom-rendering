@@ -2,7 +2,12 @@ name: "Chromatic"
 on:
     push:
         paths:
-        - 'src/components'
+        - '!api-models/'
+        - '!project/'
+        - '!*.sbt'
+        - '!*.md'
+        - '!*.yaml'
+        - '!.gitignore'
 
 jobs:
     test:
