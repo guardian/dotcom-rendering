@@ -140,6 +140,8 @@ export const recordComponentEvent = (
         component: {
             componentType,
             id: componentId,
+            products: [],
+            labels: [],
         },
         action,
     };
