@@ -47,15 +47,17 @@ const buildUrlFromQueryParam = (req: Request) => {
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     logger.info('dotcom-rendering is GO.');
-    if(false) // eslint-disable-line 
-    getGuardianConfiguration('prod')
-        .then((config: GuardianConfiguration) => {
-            log(`loaded ${config.size()} configuration parameters`);
-        })
-        .catch((err: any) => {
-            warn('Failed to get configuration. Bad AWS credentials?');
-            warn(err);
-        });
+
+    if (process.env.ENABLE_LOGGING_AND_METRICS !== "false") {
+       getGuardianConfiguration('prod')
+           .then((config: GuardianConfiguration) => {
+               log(`loaded ${config.size()} configuration parameters`);
+           })
+           .catch((err: any) => {
+               warn('Failed to get configuration. Bad AWS credentials?');
+               warn(err);
+           });
+    }
 
     const app = express();
 
@@ -144,10 +146,11 @@ if (process.env.NODE_ENV === 'production') {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 
-if(false) // eslint-disable-line 
-    setInterval(() => {
-        recordBaselineCloudWatchMetrics();
-    }, 10 * 1000);
+    if (process.env.ENABLE_LOGGING_AND_METRICS !== "false") {
+        setInterval(() => {
+            recordBaselineCloudWatchMetrics();
+        }, 10 * 1000);
+    }
 
     app.listen(port);
     // eslint-disable-next-line no-console
