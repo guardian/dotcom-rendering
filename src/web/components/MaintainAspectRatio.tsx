@@ -15,8 +15,7 @@ export const MaintainAspectRatio = ({ height, width, children }: Props) => (
             position: relative;
             padding-bottom: ${(height / width) * 100}%;
 
-            iframe,
-            img {
+            iframe {
                 width: 100%;
                 height: 100%;
                 position: absolute;
