@@ -77,6 +77,13 @@ const immersiveLinkStyles = (pillar: Pillar) => css`
     }
 `;
 
+// If there is an image reduce the width of the author div
+const mobileCommentAuthor = css`
+    @media (max-width: 400px) {
+        width: 65%;
+    }
+`;
+
 type Props = {
     display: Display;
     designType: DesignType;
@@ -143,7 +150,13 @@ export const HeadlineByline = ({
                 case 'GuardianView':
                 case 'Comment':
                     return (
-                        <div className={opinionStyles(pillar)}>
+                        <div
+                            className={`${opinionStyles(pillar)} ${
+                                tags.find((tag) => tag.bylineImageUrl)
+                                    ? mobileCommentAuthor
+                                    : ''
+                            }`}
+                        >
                             <BylineLink byline={byline} tags={tags} />
                         </div>
                     );

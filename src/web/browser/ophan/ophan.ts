@@ -84,6 +84,24 @@ export type TestMeta = {
     products?: OphanProduct[];
 };
 
+const record = (event: {}): void => {
+    if (
+        window.guardian &&
+        window.guardian.ophan &&
+        window.guardian.ophan.record
+    ) {
+        window.guardian.ophan.record(event);
+    } else {
+        throw new Error("window.guardian.ophan.record doesn't exist");
+    }
+};
+
+export const submitComponentEvent = (
+    componentEvent: OphanComponentEvent,
+): void => {
+    record({ componentEvent });
+};
+
 export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
@@ -96,7 +114,7 @@ export const sendOphanComponentEvent = (
         campaignCode,
     } = testMeta;
 
-    const componentEvent = {
+    const componentEvent: OphanComponentEvent = {
         component: {
             componentType,
             products,
@@ -110,7 +128,7 @@ export const sendOphanComponentEvent = (
         action,
     };
 
-    window.guardian.ophan.record({ componentEvent });
+    submitComponentEvent(componentEvent);
 };
 
 export const recordComponentEvent = (
@@ -144,20 +162,17 @@ export const abTestPayload = (tests: {
 };
 
 export const sendOphanPlatformRecord = () => {
+    record({ experiences: 'dotcom-rendering' });
+
+    // Record server-side AB test variants (i.e. control or variant)
     if (
         window.guardian &&
-        window.guardian.ophan &&
-        window.guardian.ophan.record
+        window.guardian.config &&
+        window.guardian.config.tests
     ) {
-        window.guardian.ophan.record({ experiences: 'dotcom-rendering' });
+        const { tests } = window.guardian.config;
 
-        // Record server-side AB test variants (i.e. control or variant)
-        if (window.guardian.config.tests) {
-            const { tests } = window.guardian.config;
-            window.guardian.ophan.record(abTestPayload(tests));
-        }
-    } else {
-        throw new Error("window.guardian.ophan.record doesn't exist");
+        record(abTestPayload(tests));
     }
 };
 
@@ -186,7 +201,7 @@ export const recordPerformance = () => {
         redirectCount: performanceAPI.navigation.redirectCount,
     };
 
-    window.guardian.ophan.record({
+    record({
         performance,
     });
 };

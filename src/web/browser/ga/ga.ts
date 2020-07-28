@@ -174,3 +174,25 @@ export const sendPageView = (): void => {
 
     trackLCP(send);
 };
+
+export const trackNonClickInteraction = (actionName: string): void => {
+    const { ga } = window;
+
+    if (ga) {
+        const send = `${tracker.name}.send`;
+
+        ga(send, 'event', 'Interaction', actionName, {
+            /**
+             * set nonInteraction to avoid affecting bounce rate
+             * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
+             */
+            nonInteraction: true,
+        });
+    } else {
+        const error = new Error("window.ga doesn't exist");
+        window.guardian.modules.sentry.reportError(
+            error,
+            'trackNonClickInteraction',
+        );
+    }
+};

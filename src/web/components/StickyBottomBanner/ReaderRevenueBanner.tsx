@@ -9,8 +9,10 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import {
     sendOphanComponentEvent,
     TestMeta,
+    submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -110,6 +112,7 @@ const MemoisedInner = ({
 
         window.guardian.automat = {
             react: React,
+            preact: React,
             emotionCore,
             emotionTheming,
             emotion,
@@ -139,14 +142,15 @@ const MemoisedInner = ({
                     .guardianPolyfilledImport(module.url)
                     .then((bannerModule) => {
                         setBannerProps({
+                            submitComponentEvent,
                             ...module.props,
                         });
                         setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
                         setBannerMeta(meta);
                         sendOphanComponentEvent('INSERT', meta);
                     })
-                    // eslint-disable-next-line no-console
                     .catch((error) =>
+                        // eslint-disable-next-line no-console
                         console.log(`banner - error is: ${error}`),
                     );
             });
@@ -156,11 +160,16 @@ const MemoisedInner = ({
     // Should only run once
     useEffect(() => {
         if (hasBeenSeen && bannerMeta) {
-            const { abTestName } = bannerMeta;
+            const { abTestName, componentType } = bannerMeta;
 
             logView(abTestName);
 
             sendOphanComponentEvent('VIEW', bannerMeta);
+
+            // track banner view event in Google Analytics for subscriptions banner
+            if (componentType === 'ACQUISITIONS_SUBSCRIPTIONS_BANNER') {
+                trackNonClickInteraction('subscription-banner : display');
+            }
         }
     }, [hasBeenSeen, bannerMeta]);
 

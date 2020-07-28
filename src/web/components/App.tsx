@@ -255,7 +255,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
-                    enableAusMoment2020Header={CAPI.config.ausMoment2020Header}
                 />
             </Portal>
             <Hydrate root="links-root">
@@ -465,7 +464,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="footer : "
                         inHeader={false}
-                        enableAusMoment2020Header={false}
                     />
                 </Lazy>
             </Portal>
