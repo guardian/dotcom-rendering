@@ -167,15 +167,35 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
+    overflow: hidden;
+    margin-bottom: -29px;
+    margin-top: -50px;
+
+    /*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
     ${from.mobile} {
-        margin-right: -1.85rem;
-        margin-top: -50px;
+        img {
+            margin-right: -1.85rem;
+        }
     }
     ${from.mobileLandscape} {
-        margin-right: -1.25rem;
+        img {
+            margin-right: -1.25rem;
+        }
     }
-    margin-top: -36px;
-    margin-bottom: -29px;
 `;
 
 const pushToBottom = css`
