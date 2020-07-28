@@ -176,9 +176,13 @@ export const sendPageView = (): void => {
 };
 
 export const trackNonClickInteraction = (actionName: string): void => {
-    const send = `${tracker.name}.send`;
+    const { ga } = window;
 
-    window.ga(send, 'event', 'Interaction', actionName, {
-        nonInteraction: true, // to avoid affecting bounce rate
-    });
+    if (ga) {
+        const send = `${tracker.name}.send`;
+
+        ga(send, 'event', 'Interaction', actionName, {
+            nonInteraction: true, // to avoid affecting bounce rate
+        });
+    }
 };
