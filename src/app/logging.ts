@@ -3,7 +3,7 @@ import { configure, getLogger, addLayout, shutdown } from 'log4js';
 
 const logLocation =
     process.env.NODE_ENV === 'production'
-        ? `${path.resolve('logs')}/dotcom-rendering.log`
+        ? '/var/log/dotcom-rendering/dotcom-rendering.log'
         : `${path.resolve('logs')}/dotcom-rendering.log`;
 
 const logFields = (logEvent: any): any => {
@@ -40,6 +40,7 @@ configure({
     categories: {
         default: { appenders: ['fileAppender'], level: 'info' },
         development: { appenders: ['console'], level: 'info' },
+        off: { appenders: ['console'], level: 'off' },
     },
     pm2: true,
 });
@@ -56,6 +57,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const logger =
+    process.env.DISABLE_LOGGING_AND_METRICS === 'true'
+        ? getLogger('off')
+        :
     process.env.NODE_ENV === 'development'
         ? getLogger('development')
         : getLogger();
