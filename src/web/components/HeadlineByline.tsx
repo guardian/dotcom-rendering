@@ -84,10 +84,6 @@ const mobileCommentAuthor = css`
     }
 `;
 
-function hasBylineImage(item: TagType) {
-    return item.bylineImageUrl;
-}
-
 type Props = {
     display: Display;
     designType: DesignType;
@@ -153,12 +149,12 @@ export const HeadlineByline = ({
                     );
                 case 'GuardianView':
                 case 'Comment':
-                    // Check if there is an image for the author
-                    const hasImage = tags.find(hasBylineImage);
                     return (
                         <div
                             className={`${opinionStyles(pillar)} ${
-                                hasImage ? mobileCommentAuthor : ''
+                                tags.find((tag) => tag.bylineImageUrl)
+                                    ? mobileCommentAuthor
+                                    : ''
                             }`}
                         >
                             <BylineLink byline={byline} tags={tags} />
