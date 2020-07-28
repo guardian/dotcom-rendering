@@ -223,18 +223,167 @@ export const signInGateComponent: SignInGateComponent = {
 
 ### Map AB Test to Gate Component
 
+Now that the required components have been set up, the AB tests must be matched to the SignInGateComponent that we've created.
+
+All of the following section happens in the `SignInGateSelector.tsx` file.
+
 #### AB Tests
+
+In `SignInGateSelector.tsx`, you'll first need to make sure that the AB test definition is imported into the `tests` array.
+
+This is because we use this array to determine which sign in gate test the user is in, and then determine which one to show by finding the test and (more importantly) the unique variant that the user has been assigned to.
 
 #### Test Variant to Gate Component
 
+Now that we know which variant the user is in, we need to determine which `SignInGateComponent` to show. We do this in the `testVariantToGateMapping` object, where we map the key (variant name) to the value (the `SignInGateComponent`). This is used to find the display rules/gate that should run/be displayed.
+
 #### Test ID to Ophan Component ID
+
+Finally we map the AB Test definition `id` to a `string` in the `testIdToComponentId` object, which is the Ophan Component ID, this let's us determine in analysis which version of the gate was used. This can be any value, but ideally should be the same as the `ophanComponentId` property from the `frontend` test definition.
 
 ### Testing The Gate
 
+Now that the code for the sign in gate test has been set up, it needs to be tested that it actually works correctly.
+
 #### Storybook
+
+The best way to design/develop the styling of the gate is to set up a Storybook component.
+
+In the `SignInGate.stories.tsx` file, simply import the gate design component, and then export it similar to the following example:
+
+```tsx
+export const mainPatientia = () => {
+    return (
+        <Section>
+            <SignInGatePatientia
+                guUrl="https://theguardian.com"
+                signInUrl="https://profile.theguardian.com/"
+                dismissGate={() => {}}
+                component="test"
+            />
+        </Section>
+    );
+};
+mainPatientia.story = { name: 'patientia_standalone' };
+```
+
+The props can be set to anything here, since storybook is only interested in the design of the component.
+
+To view it in storybook simply run `yarn storybook` which will launch a storybook server (with live reloading) to be able to view and develop it.
 
 #### Forced Test Variant
 
+Once the test has been set up, you may want to force yourself into the test to manually check that it's working as expected.
+
+Currently there are 2 ways of doing this.
+
+**A)** Set the `GU_mvt_id_local` cookie in your browser.
+
+To do this use https://ab-tests.netlify.app/ to figure out an mvt_id to use for your test. You'll need to set the audience size and offset, as well as any variants in that test. Then modify the `MVT ID` until in `Results` at the bottom, `Is user in test?` is `Yes`, and the variant that you want is highlighted.
+
+The advantage of this is being able to force yourself into a specific section of the audience, which is useful to see what the audience will see if test information is changed, or there are overlapping tests. You'll also need to work out the mvt_id for running the Cypress integration tests.
+
+The disadvantage of this method is that it's a bit tricky to work out exactly which mvt_id to set, and if you make changed to the audience and offset, you may have to adjust the value of the cookie too.
+
+**B)** Add the `forcedTestVariant` prop to the `ABProvider` in `HydrateApp.tsx`:
+
+```tsx
+<ABProvider
+    arrayOfTestObjects={tests}
+    abTestSwitches={{
+        ...{ abAbTestTest: true },
+        ...CAPI.config.switches,
+    }}
+    pageIsSensitive={CAPI.config.isSensitive}
+    mvtMaxValue={1000000}
+    mvtId={mvtId}
+    ophanRecord={ophanRecordFunc}
+    // forced test variant prop
+    forcedTestVariant={{
+        // id of the test from the test definition
+        testId: 'SignInGatePatientia',
+        // name of the variant to force into
+        variant: { id: 'patientia-variant-1', test: () => {} },
+    }}
+>
+    ...
+</ABProvider>
+```
+
+The advantage of using the forcedTestVariant is that you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+
+The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+
 #### Cypress Integration Tests
 
+The Cypress tests for the sign in gate are found in `cypress/integration/e2e/sign-in-gate.spec.js`. We use cypress to test that the functionality of the gate works as expected in a browser. Each test that shows a gate **must** be tested individually, as well as any display rules to show that gate (unless the display rules are shared).
+
+Some useful things to note when writing sign in gate tests:
+
+Inside each sign in gate `describe` block, use the `beforeEach` block to reset things before each test is run, for example:
+
+```js
+// describe block for the sign in gate main test
+describe('SignInGateMain', () => {
+    beforeEach(() => {
+        // you need to force the user into the test first using the mvt id
+        // so use the setMvtCookie method to set this cookie on all the tests
+        // (since cookies don't persist between each test)
+        // see the section above to work out which value of the mvt_id should be set
+
+        // sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
+        setMvtCookie('500');
+
+        // setArticleCount is used to set a default number of article views in localstorage
+        // for that display rule
+        // if needed this can be ovverriden in a test itself, to set more or less article counts
+
+        // set article count to be min number to view gate
+        setArticleCount(3);
+
+        // use the setCookieConsent helper method to make sure that the CMP banner is hidden on each test
+        // set consent cookie to hide cmp banner
+        setCookieConsent();
+    })
+
+    ...
+```
+
+In each test the `visitArticleAndScrollToGateForLazyLoad` should be called, this helper method makes cypress visit an article page and scroll down the page once loaded so that the sign in gate can be lazy loaded. This method can also take an object to override the default values:
+
+```js
+visitArticleAndScrollToGateForLazyLoad({
+    url: 'some overriden article url', // use this to override the default article that is visited, e.g. to test that it displays correctly on different article types/sections
+
+    roughPosition: 1000, // use this to override the default y position that is scrolled to after the sign in gate is loaded, you should only need this if the gate does not load because the article had not scrolled enough to lazy load the gate
+});
+```
+
+In the gate designs themselves, it is useful to set a `data-cy` attributes on any specific element you need to target in Cypress. For example we add this attribute to the top level of the sign in gate div element which we can use to test it's been inserted onto the page. For example:
+
+```html
+// gateDesigns/SignInGatePatientia.tsx ...
+<div className="{signinGate}" data-cy="sign-in-gate-patientia">
+    ...
+</div>
+...
+```
+
+```js
+// cypress/integration/e2e/sign-in-gate.spec.js
+...
+it('should load the sign in gate', () => {
+    visitArticleAndScrollToGateForLazyLoad();
+
+    cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
+});
+...
+```
+
+To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+
 #### Unit Tests
+
+Finally for specific code which can be unit tested too, there are some tests for those too. For display rules, you'll find them in `src/web/components/SignInGate/displayRule.test.ts` and for the setting/checking if the gate has been dismissed in `src/web/components/SignInGate/dismissGate.test.ts`. Ideally unit tests should not be a replacement for the integration tests.
+
+You can run tests using `yarn test`, if you want to run for a specific test file use `yarn test ./path/to/file` e.g. `yarn test ./src/web/components/SignInGate/displayRule.test.ts`
