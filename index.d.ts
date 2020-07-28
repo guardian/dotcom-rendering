@@ -315,6 +315,7 @@ type CAPIBrowserType = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sharedAdTargeting: { [key: string]: any };
         adUnit: string;
+        idApiUrl: string;
         discussionApiUrl: string;
         discussionD2Uid: string;
         discussionApiClientHeader: string;
@@ -585,6 +586,7 @@ interface ConfigType extends CommercialConfigType {
     keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
+    idApiUrl: string;
     discussionApiUrl: string;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
@@ -592,6 +594,7 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    brazeApiKey?: string;
 }
 
 interface GADataType {
