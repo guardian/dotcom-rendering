@@ -13,7 +13,7 @@ struct RelatedContent {
     1: required string title
     2: required v1.CapiDateTime lastModified
     3: required Image headerImage
-    4: required link string
+    4: required string link
 }
 
 struct Branding {
