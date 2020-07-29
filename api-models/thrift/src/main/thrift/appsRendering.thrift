@@ -37,7 +37,7 @@ struct FormField {
     3: required string name
     4: optional string description
     5: required string type
-    6: required bool required
+    6: required bool mandatory
     7: required list<FormOption> options
 }
 
