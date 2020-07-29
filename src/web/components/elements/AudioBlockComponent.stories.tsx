@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
 import { AudioBlockComponent } from './AudioBlockComponent';
 
 export default {

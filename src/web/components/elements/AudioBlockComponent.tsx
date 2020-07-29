@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 
 export const AudioBlockComponent: React.FC<{
