@@ -39,7 +39,6 @@ import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import {
     submitComponentEvent,
     OphanComponentEvent,
-    OphanComponent,
 } from '../browser/ophan/ophan';
 
 // *******************************
@@ -314,40 +313,37 @@ export const App = ({ CAPI, NAV }: Props) => {
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
                         likeHandler={() => {
-                            const likeComponent: OphanComponent = {
-                                componentType: 'QANDA_ATOM',
-                                id: qandaAtom.id,
-                                labels: [],
-                                products: [],
-                            };
                             const componentEvent: OphanComponentEvent = {
-                                component: likeComponent,
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
                                 action: 'LIKE',
                             };
                             submitComponentEvent(componentEvent);
                         }}
                         dislikeHandler={() => {
-                            const dislikeComponent: OphanComponent = {
-                                componentType: 'QANDA_ATOM',
-                                id: qandaAtom.id,
-                                labels: [],
-                                products: [],
-                            };
                             const componentEvent: OphanComponentEvent = {
-                                component: dislikeComponent,
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
                                 action: 'DISLIKE',
                             };
                             submitComponentEvent(componentEvent);
                         }}
                         expandHandler={() => {
-                            const expandComponent: OphanComponent = {
-                                componentType: 'QANDA_ATOM',
-                                id: qandaAtom.id,
-                                labels: [],
-                                products: [],
-                            };
                             const componentEvent: OphanComponentEvent = {
-                                component: expandComponent,
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
                                 action: 'EXPAND',
                             };
                             submitComponentEvent(componentEvent);
