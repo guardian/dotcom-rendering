@@ -131,24 +131,6 @@ export const sendOphanComponentEvent = (
     submitComponentEvent(componentEvent);
 };
 
-export const recordComponentEvent = (
-    action: OphanAction,
-    componentId: string,
-    componentType: OphanComponentType,
-): void => {
-    const componentEvent = {
-        component: {
-            componentType,
-            id: componentId,
-            products: [],
-            labels: [],
-        },
-        action,
-    };
-
-    window.guardian.ophan.record({ componentEvent });
-};
-
 export const abTestPayload = (tests: {
     [key: string]: string;
 }): OphanABPayload => {
