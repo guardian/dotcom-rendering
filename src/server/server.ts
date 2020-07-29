@@ -12,7 +12,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
-import { page } from 'server/page';
+import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
@@ -113,7 +113,7 @@ async function serveArticlePost(
         const renderingRequest = await mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-        const { html, clientScript } = page(imageSalt, renderingRequest, getAssetLocation);
+        const { html, clientScript } = render(imageSalt, renderingRequest, getAssetLocation);
         res.set('Link', getPrefetchHeader(resourceList(clientScript)));
         res.write('<!DOCTYPE html>');
         res.write(html);
@@ -141,7 +141,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                     },
                     commentCount: 30
                 };
-                const { html, clientScript } = page(
+                const { html, clientScript } = render(
                     imageSalt,
                     mockedRenderingRequest,
                     getAssetLocation
