@@ -183,9 +183,9 @@ function reportNativeElementPositionChanges(): void {
         }
     };
 
-    let currentAnimationFrame: number;
+    let currentAnimationFrame: number | null = null;
     window.addEventListener('resize', () => {
-        if (currentAnimationFrame) {
+        if (currentAnimationFrame !== null) {
             window.cancelAnimationFrame(currentAnimationFrame);
         }
         currentAnimationFrame = window.requestAnimationFrame(callback);
