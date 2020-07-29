@@ -419,10 +419,26 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.AudioBlockElement"
                     ]
+                },
+                "embedUrl": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "embedUrl",
+                "height",
+                "title",
+                "width"
             ]
         },
         "BlockquoteBlockElement": {

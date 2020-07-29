@@ -20,6 +20,10 @@ interface AudioAtomElement {
 
 interface AudioBlockElement {
     _type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+    embedUrl: string;
+    height: number;
+    width: number;
+    title: string;
 }
 
 interface BlockquoteBlockElement {

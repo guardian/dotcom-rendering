@@ -2584,10 +2584,14 @@ export const richLink: CAPIType = {
                     html:
                         '<p>But at its best, Kamikaze makes clear that Eminem is prepared to rage against the dying of the light – and the sound of him raging can still make for electrifying listening. </p>',
                 },
-                {
-                    _type:
-                        'model.dotcomrendering.pageElements.AudioBlockElement',
-                },
+                // {
+                //     _type:
+                //         'model.dotcomrendering.pageElements.AudioBlockElement',
+                //     url:
+                //         'https://open.spotify.com/embed/album/3HNnxK7NgLXbDoxRZxNWiR',
+                //     height: 380,
+                //     width: 300,
+                // },
             ],
             createdOn: 1535717841000,
             createdOnDisplay: '13:17 BST',

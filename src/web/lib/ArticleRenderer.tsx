@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { AudioBlockComponent } from '@root/src/web/components/elements/AudioBlockComponent';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
@@ -46,6 +47,15 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
+                case 'model.dotcomrendering.pageElements.AudioBlockElement':
+                    return (
+                        <AudioBlockComponent
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            title={element.title}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
                         <BlockquoteBlockComponent
@@ -241,7 +251,6 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
 
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
