@@ -183,7 +183,13 @@ function reportNativeElementPositionChanges(): void {
         }
     };
 
-    window.addEventListener('resize', callback);
+    let currentAnimationFrame: number | null = null;
+    window.addEventListener('resize', () => {
+        if (currentAnimationFrame !== null) {
+            window.cancelAnimationFrame(currentAnimationFrame);
+        }
+        currentAnimationFrame = window.requestAnimationFrame(callback);
+    }, false);
     const observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
 
