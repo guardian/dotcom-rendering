@@ -11,7 +11,7 @@ const style = (pillar: Pillar) => css`
     }
 
     sup {
-        font-size: 12.75px;
+        font-size: 85%;
     }
 `;
 
@@ -19,8 +19,9 @@ export const DisclaimerBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
-    <div
+    <span
         className={style(pillar)}
+        data-cy="affiliate-disclaimer"
         dangerouslySetInnerHTML={{
             __html: html,
         }}
