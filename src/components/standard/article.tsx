@@ -19,6 +19,7 @@ import { Standard, Review, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
+import ImmersiveCaption from 'components/immersiveCaption';
 
 // ----- Styles ----- //
 
@@ -90,6 +91,7 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 <Headline item={item} />
                 <div css={articleWidthStyles}>
                     <Standfirst item={item} />
+                    <ImmersiveCaption item={item} />
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
