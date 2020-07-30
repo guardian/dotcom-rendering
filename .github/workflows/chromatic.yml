@@ -1,5 +1,13 @@
 name: "Chromatic"
-on: push
+on:
+    push:
+        paths:
+        - '!api-models/'
+        - '!project/'
+        - '!*.sbt'
+        - '!*.md'
+        - '!*.yaml'
+        - '!.gitignore'
 
 jobs:
     test:
