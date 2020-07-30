@@ -37,6 +37,8 @@ const stack = css`
     }
 `;
 
+const domain = 'consent.theguardian.test';
+
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
     // https://localhost.cdn.ampproject.org/experiments.html
@@ -61,15 +63,15 @@ export const AdConsent: React.FC<{}> = ({}) => {
             >
                 <JsonScript
                     o={{
-                        consentInstanceId: 'sourcepoint',
                         consentRequired: 'remote',
-                        checkConsentHref:
-                            'https://wrapper-api.sp-prod.net/tcfv2/v1/amp',
+                        consentInstanceId: 'sourcepoint',
                         // TODO: change this url in PROD
-                        promptUISrc: 'https://consent.theguardian.test/',
+                        checkConsentHref: `https://${domain}/wrapper/tcfv2/v1/amp`,
+                        promptUISrc: `https://${domain}/amp/index.html`,
                         postPromptUI: 'consent-ui-manager',
                         clientConfig: {
                             accountId: 1257,
+                            mmsDomain: `https://${domain}`,
                             propertyHref: 'https://theguardian.amp',
                             propertyId: 8791,
                             privacyManagerId: 145885,
@@ -77,16 +79,25 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             pmTab: 'purposes',
                             stageCampaign: false,
                             targetingParams: {
-                                color: 'red',
+                                framework: 'tcfv2',
                             },
                         },
                         geoOverride: {
                             us: {
-                                consentRequired: true,
-                                checkConsentHref: false,
-                                promptUI: 'consent-ui-ccpa',
-                                promptUISrc: false,
-                                postPromptUI: false,
+                                clientConfig: {
+                                    accountId: 1257,
+                                    mmsDomain: `https://${domain}`,
+                                    propertyHref: 'https://theguardian.amp',
+                                    // TODO: update AMP CCPA IDs
+                                    propertyId: 8791,
+                                    privacyManagerId: 145885,
+                                    isTCFV2: false,
+                                    pmTab: 'purposes',
+                                    stageCampaign: false,
+                                    targetingParams: {
+                                        framework: 'ccpa',
+                                    },
+                                },
                             },
                         },
                         // policy: {
