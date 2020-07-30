@@ -2412,10 +2412,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.0.0-next.0.tgz#f5e070b112616b32663a2bebb202106604d87b48"
   integrity sha512-2B9zDSz89ZYLBHXpnUFuCoT6biJZFGII+fkuKmdO6g3DbGgOfLKcZNZmdmQlxwLsHRHWCiNY+0cyvh8Bbr3EkQ==
 
-"@guardian/atoms-rendering@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.4.0.tgz#3ac86e91bc450ce3c99b5008a072d656ef6feaac"
-  integrity sha512-nSP0UPTsrxb833elmWYsPClyQtURXiWi49ddOwF8xs0e6b0py7C0yNMTlUsPYslbTYhpnVLR9xuuEF262gqY8Q==
+"@guardian/atoms-rendering@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.5.0.tgz#b235923c7164e1a4ab9130531c6d470a0aebd7cd"
+  integrity sha512-J/xX6JgJAjK88VvJKW0lPgCdz7y1fHmNJEpbzzeXrYAizHpmyRwAIdgw4f1WhXO2v0Gey3EM0SKKKTXaOhta7A==
+  dependencies:
+    "@guardian/src-icons" "1.9.1"
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -2480,6 +2482,11 @@
   integrity sha512-fGZ8nH251FuymaBWYtyP1eVjy3DhcnOjXyhGWZy+E4fJ+ZYO77JAnEGam+I8lJyHTpPJUOdSJ1uKOQ1m3xfgGA==
   dependencies:
     "@guardian/src-foundations" "^1.5.0"
+
+"@guardian/src-icons@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-1.9.1.tgz#86d9dba8085042014e5851db8b2388ff2a25c201"
+  integrity sha512-wdLFDoE8qvKxRyb3EjTBvErMxsYpsckrb/2eRtEjqm4dP2nycK51qTyhLS9aJXvILQnlZLKg5yVbxKdYQokEgQ==
 
 "@guardian/src-icons@^1.5.0":
   version "1.5.0"
