@@ -102,5 +102,50 @@ export const Analytics: React.FC<{
         </amp-analytics>`,
     ];
 
+    // Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP
+    if (section && section === 'business') {
+        scripts.push(
+            `<amp-analytics type="snowplow_v2">
+                <script type="application/json">
+                    {
+                        "cookies": {
+                            "enabled": "false",
+                            "_sp_id": {
+                                "value": "null"
+                            }
+                        },
+                        "vars": {
+                            "collectorHost": "c.projectmodi.com",
+                            "appId": "com.theguardian"
+                        },
+                        "triggers": {
+                            "trackPageView": {
+                                "on": "visible",
+                                "request": "pageView"
+                            },
+                            "trackPagePings": {
+                                "on": "timer",
+                                "request": "ampPagePing",
+                                "timerSpec": {
+                                    "interval": 10,
+                                    "maxTimerLength": 600,
+                                    "immediate": false,
+                                    "startSpec": {
+                                        "on": "visible",
+                                        "selector": ":root"
+                                    },
+                                    "stopSpec": {
+                                        "on": "hidden",
+                                        "selector": ":root"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </amp-analytics>`,
+        );
+    }
+
     return <div dangerouslySetInnerHTML={{ __html: scripts.join('\n') }} />;
 };
