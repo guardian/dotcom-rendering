@@ -12,7 +12,7 @@ struct Image {
 struct RelatedItem {
     1: required string title
     2: optional v1.CapiDateTime lastModified
-    3: required Image headerImage
+    3: optional Image headerImage
     4: required string link
 }
 
