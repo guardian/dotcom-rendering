@@ -19,7 +19,7 @@ import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
-import { Result, ok, err, either } from 'types/result';
+import { Result, ok, err, either } from '@guardian/types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
@@ -34,7 +34,7 @@ import JsonSerialisable from 'types/jsonSerialisable';
 import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
 import { toArray, pipe2 } from 'lib';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 
 
 // ----- Types ----- //

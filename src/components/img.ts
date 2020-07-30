@@ -7,7 +7,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { Image, Role } from 'image';
 import { darkModeCss } from 'styles';
 import { Format, Design } from '@guardian/types/Format';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

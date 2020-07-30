@@ -7,7 +7,7 @@ import { Format, Pillar, Design, Display } from '@guardian/types/Format';
 import { background } from '@guardian/src-foundations/palette';
 
 import FigCaption from './figCaption';
-import { Option, none, some } from 'types/option';
+import { Option, none, some } from '@guardian/types/option';
 
 
 // ----- Setup ----- //

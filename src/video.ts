@@ -1,5 +1,5 @@
 import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
-import { Option, some, none } from 'types/option';
+import { Option, some, none } from '@guardian/types/option';
 import { Atoms } from "@guardian/content-api-models/v1/atoms";
 
 interface Video {

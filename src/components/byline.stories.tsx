@@ -6,10 +6,10 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './byline';
 import { Pillar, Design, Display } from 'format';
-import { Option } from 'types/option';
+import { Option } from '@guardian/types/option';
 import { parse } from 'client/parser';
 import { pipe2 } from 'lib';
-import { toOption } from 'types/result';
+import { toOption } from '@guardian/types/result';
 
 
 // ----- Setup ----- //

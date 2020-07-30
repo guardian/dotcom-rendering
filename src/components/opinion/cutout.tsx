@@ -7,7 +7,7 @@ import { Contributor, isSingleContributor } from 'contributor';
 import Img from 'components/img';
 import { darkModeCss } from 'styles';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { Format } from '@guardian/types/Format';
 
 

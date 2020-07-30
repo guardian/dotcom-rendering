@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'format';
-import { Option, withDefault, map } from 'types/option';
+import { Option, withDefault, map } from '@guardian/types/option';
 import { neutral, palette } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillarStyles';
 import { getHref } from 'renderer';

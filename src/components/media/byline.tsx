@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Pillar } from 'format';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { Item, getFormat } from 'item';
 import { textSans } from "@guardian/src-foundations/typography";
 import { renderText } from "../../renderer";

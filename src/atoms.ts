@@ -1,8 +1,8 @@
 import { Atoms } from "@guardian/content-api-models/v1/atoms";
 import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
-import { Result, err, ok } from 'types/result';
+import { Result, err, ok } from '@guardian/types/result';
 import { BodyElement, ElementKind } from "bodyElement";
-import { fromNullable } from "types/option";
+import { fromNullable } from '@guardian/types/option';
 import { DocParser } from "types/parserContext";
 
 function parseAtom(

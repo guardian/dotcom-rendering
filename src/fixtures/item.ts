@@ -3,7 +3,7 @@
 import { Pillar, Design, Display } from '@guardian/types/Format';
 
 import { Item, Review } from 'item';
-import { none, some } from 'types/option';
+import { none, some } from '@guardian/types/option';
 
 // ----- Fixture ----- //
 

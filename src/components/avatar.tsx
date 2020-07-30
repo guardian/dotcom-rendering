@@ -8,7 +8,7 @@ import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
 import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

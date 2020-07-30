@@ -10,7 +10,7 @@ import { Item, getFormat } from 'item';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
 import { Display, Design } from 'format';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

@@ -51,7 +51,7 @@
       "src"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@guardian/src-foundations)/)"
+      "node_modules/(?!(@guardian/src-foundations|@guardian/types)/)"
     ]
   },
   "author": "",
@@ -71,7 +71,7 @@
     "@guardian/src-button": "^1.9.0",
     "@guardian/src-foundations": "^1.9.0",
     "@guardian/src-icons": "^1.9.0",
-    "@guardian/types": "^0.3.0",
+    "@guardian/types": "github:guardian/types",
     "@types/jsdom": "^16.2.3",
     "@types/uuid": "^8.0.0",
     "aws-sdk": "^2.723.0",

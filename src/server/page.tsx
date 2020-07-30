@@ -13,7 +13,7 @@ import { background } from '@guardian/src-foundations/palette';
 
 import { includesTweets } from 'capi';
 import { fromCapi, Item } from 'item';
-import { Option, some, none, map } from 'types/option';
+import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
 import Body from 'components/body';
 import Scripts from 'components/scripts';

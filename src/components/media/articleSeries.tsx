@@ -4,7 +4,7 @@ import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { headline } from '@guardian/src-foundations/typography';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => css`    

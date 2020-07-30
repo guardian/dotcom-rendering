@@ -5,7 +5,7 @@ import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text, neutral } from '@guardian/src-foundations/palette';
 
-import { Option, withDefault, map } from 'types/option';
+import { Option, withDefault, map } from '@guardian/types/option';
 import { darkModeCss as darkMode } from 'styles';
 import { formatDate } from 'date';
 import { pipe2 } from 'lib';

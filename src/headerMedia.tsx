@@ -5,7 +5,7 @@ import HeaderImage from 'components/headerImage';
 import { Item, getFormat } from 'item';
 import HeaderVideo from 'components/headerVideo';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 
 export const enum MainMediaKind {
     Image,
