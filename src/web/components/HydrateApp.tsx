@@ -23,7 +23,10 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
     }
 
     const ophanRecordFunc =
-        window && window.guardian && window.guardian.ophan.record;
+        window &&
+        window.guardian &&
+        window.guardian.ophan &&
+        window.guardian.ophan.record;
 
     ReactDOM.render(
         <ABProvider
