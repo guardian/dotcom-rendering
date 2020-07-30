@@ -13,13 +13,15 @@ const style = (pillar: Pillar) => css`
     sup {
         font-size: 85%;
     }
+
+    margin-bottom: 16px;
 `;
 
 export const DisclaimerBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
-    <span
+    <footer
         className={style(pillar)}
         data-cy="affiliate-disclaimer"
         dangerouslySetInnerHTML={{
