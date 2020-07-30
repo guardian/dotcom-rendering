@@ -9,11 +9,16 @@ struct Image {
     3: required i32 width
 }
 
-struct RelatedContent {
+struct RelatedItem {
     1: required string title
-    2: required v1.CapiDateTime lastModified
+    2: optional v1.CapiDateTime lastModified
     3: required Image headerImage
     4: required string link
+}
+
+struct RelatedContent {
+    1: required string title
+    2: required list<RelatedItem> relatedItems
 }
 
 struct Branding {
@@ -67,5 +72,5 @@ struct RenderingRequest {
     4: optional map<string,string> targetingParams
     5: optional Branding branding
     6: optional list<Campaign> campaigns
-    7: optional list<RelatedContent> relatedContent
+    7: optional RelatedContent relatedContent
 }
