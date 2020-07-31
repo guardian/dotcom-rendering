@@ -1,86 +1,61 @@
-import React, {FC, ReactElement, ReactNode} from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Item } from 'item';
 import { MainMedia, MainMediaKind } from 'headerMedia';
-import {pipe2} from "../lib";
-import {map, Option, withDefault} from 'types/option';
-import {Design, Format} from "@guardian/types/Format";
-import {css} from "@emotion/core";
-import {headline, textSans} from "@guardian/src-foundations/typography";
-import Anchor from "./anchor";
-import {getHref, renderTextElement} from "../renderer";
-import {neutral} from "@guardian/src-foundations/palette";
-import {remSpace} from "@guardian/src-foundations";
+import { Option, OptionKind } from '@guardian/types/option';
+import { renderCaption } from './figCaption'
+import { Format } from "../format";
+import { css } from "@emotion/core";
+import { textSans } from "@guardian/src-foundations/typography";
+import { remSpace } from "@guardian/src-foundations";
+import { neutral } from "@guardian/src-foundations/palette";
 
 interface Props {
     item : Item;
-    caption: Option<DocumentFragment>;
-    credit: Option<string>;
 }
 
-const credit = (mainmedia: MainMedia): ReactElement | null => {
+const captionHeadingStyles = css`
+    ${textSans.xsmall()}
+    color: ${neutral[46]};
+    margin: 0 0 ${remSpace[3]};
+    display: block;
+`;
+
+const buildCaption = (cap: Option<DocumentFragment>, format: Format, credit: Option<string>): ReactElement | null => {
+    if (cap.kind === OptionKind.Some && credit.kind === OptionKind.Some){
+        return <p css={captionHeadingStyles}>{renderCaption(cap.value, format)} {credit.value}</p>
+    } else if (cap.kind === OptionKind.Some && credit.kind === OptionKind.None){
+        return <p css={captionHeadingStyles}>{renderCaption(cap.value, format)}</p>
+    } else if (cap.kind === OptionKind.None && credit.kind === OptionKind.Some) {
+        return <p css={captionHeadingStyles}>{credit.value}</p>
+    }
+    return null
+}
+
+const caption = (format: Format) => (mainmedia: MainMedia): ReactElement | null => {
     switch (mainmedia.kind) {
         case MainMediaKind.Image:
-            return pipe2(
-                mainmedia.image.credit,
-                map(credit=><p>{credit}</p>),
-                withDefault<ReactElement | null>(null),
-            )
+            return buildCaption(mainmedia.image.caption, format, mainmedia.image.credit)
         case MainMediaKind.Video:
         default:
             return null
     }
 }
 
-const captionHeadingStyles = css`
-    ${headline.xxxsmall()}
-    color: ${neutral[86]};
-    margin: 0 0 ${remSpace[3]};
-    display: block;
-`;
+const ImmersiveCaption: FC<Props> = (props) => {
 
-const captionElement = (format: Format) => (node: Node, key: number): ReactNode => {
-    const text = node.textContent ?? '';
-    const children = Array.from(node.childNodes).map(captionElement(format));
-    switch (node.nodeName) {
-        case 'STRONG':
-            return (format.design === Design.Media)
-                ? <h2 css={captionHeadingStyles} key={key}>{children}</h2>
-                : <>{children}</>
-        case 'BR':
-            return null;
-        case 'EM':
-            return <em css={ css`${textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold'})}` } key={key}>{children}</em>
-        case 'A':
-            return (
-                <Anchor
-                    href={withDefault('')(getHref(node))}
-                    className={
-                        format.design === Design.Media ? css`color: ${neutral[86]};` : undefined
-                    }
-                    format={format}
-                >
-                    {children}
-                </Anchor>
-            );
-        case '#text':
-            return <span>{ text }</span>;
+    switch (props.item.mainMedia.kind){
+        case OptionKind.Some:
+            return caption(props.item)(props.item.mainMedia.value)
+        case OptionKind.None:
         default:
-            return renderTextElement(format)(node, key);
+            return null
     }
 }
 
-const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
-    Array.from(doc.childNodes).map(captionElement(format));
-
-const ImmersiveCaption: FC<Props> = (caption, credit, props) =>
-    pipe2(
-        caption,
-        map(cap =>
-            {renderCaption(cap, format)}
-            {credit(props.item.mainMedia)}
-        ),
-        withDefault<ReactElement | null>(null),
-    );
-    // pipe2(props.item.mainMedia, map(credit), withDefault<ReactElement | null>(null),)
+    // pipe2(
+    //     props.item.mainMedia,
+    //     map(caption(props.item)),
+    //     withDefault<ReactElement | null>(null),
+    //     )
 
 export default ImmersiveCaption;
