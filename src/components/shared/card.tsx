@@ -3,7 +3,7 @@ import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
-import { Option, withDefault, map, fromNullable } from 'types/option';
+import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
 import { text } from '@guardian/src-foundations/palette';

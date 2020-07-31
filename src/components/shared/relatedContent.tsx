@@ -1,6 +1,6 @@
 import React from 'react';
 import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import Card from 'components/shared/card';
 import { css } from '@emotion/core';
