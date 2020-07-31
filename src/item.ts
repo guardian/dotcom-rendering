@@ -36,7 +36,7 @@ interface Fields extends Format {
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
     commentCount: Option<number>;
-    relatedContent: Option<RelatedContent>
+    relatedContent: Option<RelatedContent>;
 }
 
 interface Liveblog extends Fields {

@@ -58,7 +58,7 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 const Card = ({ item }: Props): JSX.Element => {
    return <li css={styles}>
        <div>
-           <img src={item.headerImage?.url} />
+           <img alt={item.title} src={item.headerImage?.url} />
        </div>
        <h2>{item.title}</h2>
        {relativeFirstPublished(fromNullable(new Date(item.lastModified?.iso8601 ?? 0)))}
