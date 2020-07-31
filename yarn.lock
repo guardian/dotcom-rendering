@@ -2069,6 +2069,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@braze/web-sdk@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-2.7.0.tgz#3bfd735bfb54f6d02ff09e2efb3f9aef8cb053c2"
+  integrity sha512-itn5M8xfsX4jtm6yfMnIXfOf8UPg0rYVhLriLAL5qZ2a/xO1Jpb4YYvR9j5VR1kVwTHJuTmMBsbSNnyOUtWCLw==
+
 "@chromaui/localtunnel@2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@chromaui/localtunnel/-/localtunnel-2.0.1.tgz#2d4cef4efa189a2a2f015d639e754956c54cacd1"

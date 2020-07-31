@@ -32,6 +32,7 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.9.2",
+        "@braze/web-sdk": "^2.7.0",
         "@emotion/core": "^10.0.28",
         "@guardian/ab-core": "1.1.0-next.0",
         "@guardian/ab-react": "1.0.0-next.0",

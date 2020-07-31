@@ -142,6 +142,9 @@ export const App = ({ CAPI, NAV }: Props) => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
 
+    console.log(isSignedIn)
+    console.log(user)
+
     useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
