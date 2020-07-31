@@ -737,7 +737,7 @@ declare module 'chromatic/isChromatic';
 declare type BrazeMessageConfig = {
     extras: {
         foo: string;
-        'test-value': string;
+        'test-key': string;
     };
 };
 

@@ -6,7 +6,7 @@ type Props = {
     isSignedIn?: boolean;
 };
 
-const brazeUuid = 'XXXXX';
+const brazeUuid = 'XXXX';
 
 export const Braze = ({ isSignedIn }: Props) => {
     const { brazeSwitch } = window.guardian.config.switches;
@@ -14,6 +14,7 @@ export const Braze = ({ isSignedIn }: Props) => {
     const [hasGivenConsent, setHasGivenConsent] = useState<boolean | null>(
         null,
     );
+    const [testValue, setTestValue] = useState<string | null>(null);
 
     console.log({ apiKey, brazeSwitch, isSignedIn, hasGivenConsent });
 
@@ -42,6 +43,7 @@ export const Braze = ({ isSignedIn }: Props) => {
 
                 appboy.subscribeToInAppMessage((config: BrazeMessageConfig) => {
                     console.log(config);
+                    setTestValue(config.extras['test-key']);
                 });
 
                 appboy.changeUser(brazeUuid);
@@ -50,5 +52,8 @@ export const Braze = ({ isSignedIn }: Props) => {
         }
     }, [brazeSwitch, apiKey, isSignedIn, hasGivenConsent]);
 
+    if (testValue) {
+        return <div>{testValue}</div>;
+    }
     return <div />;
 };
