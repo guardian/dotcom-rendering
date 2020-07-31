@@ -14,8 +14,8 @@ interface Props {
 
 const styles = css`
     background: white;
-    margin-right: ${remSpace[4]};
-    min-width: 250px;
+    margin-right: ${remSpace[3]};
+    min-width: 175px;
     width: 25%;
     position: relative;
     color: ${neutral[7]};
