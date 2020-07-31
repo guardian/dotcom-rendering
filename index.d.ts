@@ -734,8 +734,23 @@ declare module 'minify-css-string' {
 }
 declare module 'chromatic/isChromatic';
 
+declare type BrazeMessageConfig = {
+    extras: {
+        foo: string;
+        'test-value': string;
+    };
+};
+
 declare module '@braze/web-sdk' {
-    const appboy: any;
+    type InAppMessageCallback = (config: BrazeMessageConfig) => void;
+
+    type AppBoy = {
+        changeUser: (uuid: string) => void;
+        initialize: (apiKey: string, options: any) => void;
+        openSession: () => void;
+        subscribeToInAppMessage: (fn: InAppMessageCallback) => void;
+    };
+    const appboy: AppBoy;
     export default appboy;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */

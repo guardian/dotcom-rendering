@@ -5,12 +5,6 @@ import { IabPurposeState } from '@guardian/consent-management-platform/dist/tcf/
 type Props = {
     isSignedIn?: boolean;
 };
-type BrazeMessageConfig = {
-    extras: {
-        foo: string;
-        'test-value': string;
-    };
-};
 
 const brazeUuid = 'XXXXX';
 
@@ -36,7 +30,7 @@ export const Braze = ({ isSignedIn }: Props) => {
             console.log('Hi from Braze');
             import(
                 /* webpackChunkName: "braze-web-sdk" */ '@braze/web-sdk'
-            ).then((appboy) => {
+            ).then(({ default: appboy }) => {
                 // TODO: change session timeout for production from 1 second
                 appboy.initialize(apiKey, {
                     enableLogging: true,
@@ -46,13 +40,9 @@ export const Braze = ({ isSignedIn }: Props) => {
                     sessionTimeoutInSeconds: 1,
                 });
 
-                appboy.subscribeToInAppMessage(
-                    (configuration: BrazeMessageConfig) => {
-                        console.log(configuration);
-                        appboy.display.showInAppMessage(configuration);
-                        return true;
-                    },
-                );
+                appboy.subscribeToInAppMessage((config: BrazeMessageConfig) => {
+                    console.log(config);
+                });
 
                 appboy.changeUser(brazeUuid);
                 appboy.openSession();
