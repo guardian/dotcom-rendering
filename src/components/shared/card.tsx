@@ -6,7 +6,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
-import { text } from '@guardian/src-foundations/palette';
+import { text, neutral } from '@guardian/src-foundations/palette';
 
 interface Props {
     item: RelatedItem;
@@ -14,10 +14,12 @@ interface Props {
 
 const styles = css`
     background: white;
-    margin-right: ${remSpace[2]};
-    min-width: 200px;
+    margin-right: ${remSpace[4]};
+    min-width: 250px;
     width: 25%;
     position: relative;
+    color: ${neutral[7]};
+    text-decoration: none;
 
     div {
         padding-bottom: 56.25%;
@@ -56,13 +58,15 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const Card = ({ item }: Props): JSX.Element => {
-   return <li css={styles}>
-       <div>
-           <img alt={item.title} src={item.headerImage?.url} />
-       </div>
-       <h2>{item.title}</h2>
-       {relativeFirstPublished(fromNullable(new Date(item.lastModified?.iso8601 ?? 0)))}
-   </li>
+    return <a css={styles} href={item.link}>
+        <li>
+            <div>
+                <img alt={item.title} src={item.headerImage?.url} />
+            </div>
+            <h2>{item.title}</h2>
+            {relativeFirstPublished(fromNullable(new Date(item.lastModified?.iso8601 ?? 0)))}
+        </li>
+    </a>
 }
 
 
