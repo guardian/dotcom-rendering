@@ -2412,10 +2412,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.0.0-next.0.tgz#f5e070b112616b32663a2bebb202106604d87b48"
   integrity sha512-2B9zDSz89ZYLBHXpnUFuCoT6biJZFGII+fkuKmdO6g3DbGgOfLKcZNZmdmQlxwLsHRHWCiNY+0cyvh8Bbr3EkQ==
 
-"@guardian/atoms-rendering@^1.3.4":
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.3.4.tgz#13e8336d11d5a7847d66e658ede3d0b31de5d4f7"
-  integrity sha512-rpCaa9dx7GuBztcpx3g+sHX/EiOQDM2HKycHFRUw8NblZXIMTOESmdTOZ2hIORH4FplYHSysn1F1ETKERBWSkQ==
+"@guardian/atoms-rendering@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.5.0.tgz#b235923c7164e1a4ab9130531c6d470a0aebd7cd"
+  integrity sha512-J/xX6JgJAjK88VvJKW0lPgCdz7y1fHmNJEpbzzeXrYAizHpmyRwAIdgw4f1WhXO2v0Gey3EM0SKKKTXaOhta7A==
+  dependencies:
+    "@guardian/src-icons" "1.9.1"
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -2480,6 +2482,11 @@
   integrity sha512-fGZ8nH251FuymaBWYtyP1eVjy3DhcnOjXyhGWZy+E4fJ+ZYO77JAnEGam+I8lJyHTpPJUOdSJ1uKOQ1m3xfgGA==
   dependencies:
     "@guardian/src-foundations" "^1.5.0"
+
+"@guardian/src-icons@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-1.9.1.tgz#86d9dba8085042014e5851db8b2388ff2a25c201"
+  integrity sha512-wdLFDoE8qvKxRyb3EjTBvErMxsYpsckrb/2eRtEjqm4dP2nycK51qTyhLS9aJXvILQnlZLKg5yVbxKdYQokEgQ==
 
 "@guardian/src-icons@^1.5.0":
   version "1.5.0"
@@ -15115,6 +15122,13 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.1
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+preact-render-to-string@^5.1.10:
+  version "5.1.10"
+  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.10.tgz#cce03d73b166c550148af9dedc9e06fdf6820f8a"
+  integrity sha512-40svy7NDe5Qe0ymdsIC11f0hZb05MeTSUqqIaWJ5DEFCh/sF86KcpRW0kN/ymGYDVVUCfv9qFrVuLCXR7aQxgQ==
+  dependencies:
+    pretty-format "^3.8.0"
+
 preact@^10.3.1:
   version "10.3.1"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.3.1.tgz#70a2cc5484ca727c992216dfc528907d240e0a05"
@@ -15233,6 +15247,11 @@ pretty-format@^25.5.0:
     ansi-regex "^5.0.0"
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
+
+pretty-format@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
+  integrity sha1-v77VbV6ad2ZF9LH/eqGjrE+jw4U=
 
 pretty-hrtime@^1.0.3:
   version "1.0.3"

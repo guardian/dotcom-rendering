@@ -17,6 +17,7 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import { QandaAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -34,6 +35,11 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+
+import {
+    submitComponentEvent,
+    OphanComponentEvent,
+} from '../browser/ophan/ophan';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -296,6 +302,53 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.qandaAtoms.map((qandaAtom) => (
+                <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
+                    <QandaAtom
+                        id={qandaAtom.id}
+                        title={qandaAtom.title}
+                        html={qandaAtom.html}
+                        image={qandaAtom.img}
+                        credit={qandaAtom.credit}
+                        likeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'LIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        dislikeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'DISLIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        expandHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'EXPAND',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                    />
                 </Hydrate>
             ))}
             <Portal root="share-comment-counts">

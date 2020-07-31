@@ -208,6 +208,7 @@ interface QABlockElement {
     img?: string;
     html: string;
     credit: string;
+    qandaIndex?: number;
 }
 
 interface RichLinkBlockElement {

@@ -23,7 +23,11 @@ import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/Yo
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 
-import { ExplainerAtom, InteractiveAtom } from '@guardian/atoms-rendering';
+import {
+    ExplainerAtom,
+    InteractiveAtom,
+    QandaAtom,
+} from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
 // This is required for spacefinder to work!
@@ -253,6 +257,21 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
 
+                case 'model.dotcomrendering.pageElements.QABlockElement':
+                    return (
+                        <div id={`qanda-atom-${i}`}>
+                            <QandaAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandHandler={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
@@ -263,7 +282,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;

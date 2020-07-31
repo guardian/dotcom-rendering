@@ -68,6 +68,27 @@ const makeWindowGuardianConfig = (
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     // For some elements it is important to keep thier index in the `elements` array
+
+    const blockElementWithIndex = <T extends CAPIElement>(
+        blocks: { elements: CAPIElement[] }[],
+        blockElementType: CAPIElement['_type'],
+        indexName: string,
+    ): T[] => {
+        return blocks[0].elements.reduce(
+            (acc: T[], element: CAPIElement, index: number) => {
+                if (element._type === blockElementType) {
+                    acc.push({
+                        ...element,
+                        [indexName]: index,
+                    } as T);
+                }
+                return acc;
+            },
+            [] as T[],
+        );
+    };
+
+    /* Kept for posteriy...for now anyway!
     const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
             if (
@@ -83,21 +104,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         [] as RichLinkBlockElement[],
     );
-    const calloutsWithIndex: CalloutBlockElement[] = CAPI.blocks[0].elements.reduce(
-        (acc, element, index: number) => {
-            if (
-                element._type ===
-                'model.dotcomrendering.pageElements.CalloutBlockElement'
-            ) {
-                acc.push({
-                    ...element,
-                    calloutIndex: index,
-                } as CalloutBlockElement);
-            }
-            return acc;
-        },
-        [] as CalloutBlockElement[],
-    );
+*/
 
     return {
         designType: CAPI.designType,
@@ -143,7 +150,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             host: CAPI.config.host,
             idUrl: CAPI.config.idUrl,
         },
-        richLinks: richLinksWithIndex,
+        richLinks: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.RichLinkBlockElement',
+            'richLinkIndex',
+        ),
         editionId: CAPI.editionId,
         editionLongForm: CAPI.editionLongForm,
         contentType: CAPI.contentType,
@@ -171,7 +182,16 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         isImmersive: CAPI.isImmersive,
         isPhotoEssay: CAPI.config.isPhotoEssay,
         matchUrl: CAPI.matchUrl,
-        callouts: calloutsWithIndex,
+        callouts: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.CalloutBlockElement',
+            'calloutIndex',
+        ),
+        qandaAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.QABlockElement',
+            'qandaIndex',
+        ),
     };
 };
 

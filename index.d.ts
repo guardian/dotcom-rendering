@@ -354,6 +354,7 @@ type CAPIBrowserType = {
     isPhotoEssay: boolean;
     matchUrl?: string;
     callouts: CalloutBlockElement[];
+    qandaAtoms: QABlockElement[];
 };
 
 interface TagType {
@@ -652,6 +653,7 @@ type IslandType =
     | 'match-stats'
     | 'callout'
     | 'comments'
+    | 'qanda-atom'
     | 'sign-in-gate';
 
 interface TrailType {
