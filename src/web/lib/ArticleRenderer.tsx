@@ -83,6 +83,15 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
+                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+                    return (
+                        <div id={`callout-${i}`}>
+                            <CalloutBlockComponent
+                                callout={element}
+                                pillar={pillar}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
                     return null; // will be filled shortly with the ChartAtom from atoms-rendering
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
@@ -130,6 +139,15 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <InstagramBlockComponent key={i} element={element} />
                     );
+                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                    return (
+                        <InteractiveAtom
+                            id={element.id}
+                            html={element.html}
+                            js={element.js}
+                            css={element.css}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
                     return (
                         <MultiImageBlockComponent
@@ -150,6 +168,21 @@ export const ArticleRenderer: React.FC<{
                             attribution={element.attribution}
                             role={element.role}
                         />
+                    );
+                case 'model.dotcomrendering.pageElements.QABlockElement':
+                    return (
+                        <div id={`qanda-atom-${i}`}>
+                            <QandaAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandHandler={() => {}}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return <div key={i} id={`rich-link-${i}`} />;
@@ -237,40 +270,6 @@ export const ArticleRenderer: React.FC<{
                             adTargeting={adTargeting}
                             isMainMedia={false}
                         />
-                    );
-                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-                    return (
-                        <InteractiveAtom
-                            id={element.id}
-                            html={element.html}
-                            js={element.js}
-                            css={element.css}
-                        />
-                    );
-                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-                    return (
-                        <div id={`callout-${i}`}>
-                            <CalloutBlockComponent
-                                callout={element}
-                                pillar={pillar}
-                            />
-                        </div>
-                    );
-
-                case 'model.dotcomrendering.pageElements.QABlockElement':
-                    return (
-                        <div id={`qanda-atom-${i}`}>
-                            <QandaAtom
-                                id={element.id}
-                                title={element.title}
-                                html={element.html}
-                                image={element.img}
-                                credit={element.credit}
-                                likeHandler={() => {}}
-                                dislikeHandler={() => {}}
-                                expandHandler={() => {}}
-                            />
-                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
