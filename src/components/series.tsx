@@ -12,7 +12,7 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
 import { Item } from 'item';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 
 
 // ----- Component ----- //

@@ -6,7 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Follow from './follow';
 import { Pillar, Design, Display } from 'format';
 import { selectPillar } from 'storybookHelpers';
-import { none } from 'types/option';
+import { none } from '@guardian/types/option';
 
 
 // ----- Stories ----- //

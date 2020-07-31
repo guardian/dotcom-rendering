@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

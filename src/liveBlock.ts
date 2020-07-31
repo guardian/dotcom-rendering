@@ -3,7 +3,7 @@
 import { Block } from '@guardian/content-api-models/v1/block';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { Option, andThen, map, withDefault } from 'types/option';
+import { Option, andThen, map, withDefault } from '@guardian/types/option';
 import { Context, DocParser } from 'types/parserContext';
 import JsonSerialisable from 'types/jsonSerialisable';
 import {
@@ -13,7 +13,7 @@ import {
     fromSerialisable as bodyElementFromSerialisable,
 } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
-import { partition, ok } from 'types/result';
+import { partition, ok } from '@guardian/types/result';
 import { compose, pipe3 } from 'lib';
 import { fromString as dateFromString } from 'date';
 

@@ -3,7 +3,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Avatar from 'components/liveblog/avatar';
 import { Contributor } from 'contributor';
-import { none, some } from 'types/option';
+import { none, some } from '@guardian/types/option';
 
 configure({ adapter: new Adapter() });
 

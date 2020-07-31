@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Option, fromNullable, none, map } from 'types/option';
+import { Option, fromNullable, none, map } from '@guardian/types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContributors } from 'capi';
 import { srcsetWithWidths, src, Dpr, Image } from 'image';

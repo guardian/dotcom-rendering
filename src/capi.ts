@@ -7,7 +7,7 @@ import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { BlockElement} from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
-import { Option, fromNullable, andThen, none, some, map } from 'types/option';
+import { Option, fromNullable, andThen, none, some, map } from '@guardian/types/option';
 import { fromString as dateFromString } from 'date';
 import { Context } from 'types/parserContext';
 import { parseImage } from 'image';

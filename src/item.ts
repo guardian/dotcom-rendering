@@ -8,7 +8,7 @@ import { Element } from '@guardian/content-api-models/v1/element';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate, paidContentLogo, Logo, articleMainMedia } from 'capi';
-import { Option, fromNullable, map } from 'types/option';
+import { Option, fromNullable, map } from '@guardian/types/option';
 import { Format, Pillar, Design, Display } from 'format';
 import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
 import { Body, parseElements } from 'bodyElement';

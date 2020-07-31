@@ -2,7 +2,7 @@
 
 import React, { ReactElement, FC } from 'react';
 
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

@@ -13,7 +13,7 @@ import Liveblog from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Media from 'components/media/article';
 import Interactive from 'components/interactive/article';
-import { partition } from 'types/result';
+import { partition } from '@guardian/types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { ElementKind, BodyElement } from 'bodyElement';
 

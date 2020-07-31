@@ -8,7 +8,7 @@ import { remSpace, text, neutral } from '@guardian/src-foundations';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { Item, getFormat } from 'item';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { textSans } from '@guardian/src-foundations/typography';
 
 interface Props {
