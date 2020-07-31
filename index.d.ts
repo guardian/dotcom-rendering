@@ -733,6 +733,11 @@ declare module 'minify-css-string' {
     export default minifyCSSString;
 }
 declare module 'chromatic/isChromatic';
+
+declare module '@braze/web-sdk' {
+    const appboy: any;
+    export default appboy;
+}
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 declare module 'dynamic-import-polyfill' {
