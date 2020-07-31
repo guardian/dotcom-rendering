@@ -228,6 +228,13 @@ interface SoundcloudBlockElement {
     isMandatory: boolean;
 }
 
+interface SpotifyBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
+    html: string;
+    title: string;
+    caption: string;
+}
+
 interface SubheadingBlockElement {
     _type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
     html: string;
@@ -338,6 +345,7 @@ type CAPIElement =
     | QABlockElement
     | RichLinkBlockElement
     | SoundcloudBlockElement
+    | SpotifyBlockElement
     | SubheadingBlockElement
     | TableBlockElement
     | TextBlockElement
