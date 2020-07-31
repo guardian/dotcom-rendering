@@ -11,7 +11,7 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: 10.15.3
-            - run: make build
+            - run: make build-no-logs
             - name: Boot server and run ngrok
               run: |
                   npm install -g ngrok
