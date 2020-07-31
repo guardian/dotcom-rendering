@@ -63,7 +63,6 @@ const go = () => {
                 const { html, ...config } = await fetch(url).then((article) =>
                     article.json(),
                 );
-
                 req.body = config;
                 next();
             } catch (error) {

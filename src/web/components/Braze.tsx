@@ -3,12 +3,10 @@ import { onIabConsentNotification } from '@guardian/consent-management-platform'
 import { IabPurposeState } from '@guardian/consent-management-platform/dist/tcf/types';
 
 type Props = {
-    isSignedIn?: boolean;
+    brazeUuid: null | string;
 };
 
-const brazeUuid = 'XXXX';
-
-export const Braze = ({ isSignedIn }: Props) => {
+export const Braze = ({ brazeUuid }: Props) => {
     const { brazeSwitch } = window.guardian.config.switches;
     const apiKey = window.guardian.config.page.brazeApiKey;
     const [hasGivenConsent, setHasGivenConsent] = useState<boolean | null>(
@@ -16,7 +14,7 @@ export const Braze = ({ isSignedIn }: Props) => {
     );
     const [testValue, setTestValue] = useState<string | null>(null);
 
-    console.log({ apiKey, brazeSwitch, isSignedIn, hasGivenConsent });
+    console.log({ apiKey, brazeSwitch, brazeUuid, hasGivenConsent });
 
     useEffect(() => {
         onIabConsentNotification((state: IabPurposeState) => {
@@ -27,7 +25,7 @@ export const Braze = ({ isSignedIn }: Props) => {
     }, []);
 
     useEffect(() => {
-        if (brazeSwitch && apiKey && isSignedIn && hasGivenConsent) {
+        if (brazeSwitch && apiKey && brazeUuid && hasGivenConsent) {
             console.log('Hi from Braze');
             import(
                 /* webpackChunkName: "braze-web-sdk" */ '@braze/web-sdk'
@@ -50,7 +48,7 @@ export const Braze = ({ isSignedIn }: Props) => {
                 appboy.openSession();
             });
         }
-    }, [brazeSwitch, apiKey, isSignedIn, hasGivenConsent]);
+    }, [brazeSwitch, apiKey, brazeUuid, hasGivenConsent]);
 
     if (testValue) {
         return <div>{testValue}</div>;

@@ -2152,6 +2152,9 @@
                 "shouldHideReaderRevenue": {
                     "type": "boolean"
                 },
+                "idApiUrl": {
+                    "type": "string"
+                },
                 "discussionApiUrl": {
                     "type": "string"
                 },
@@ -2210,6 +2213,7 @@
                 "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
+                "idApiUrl",
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",

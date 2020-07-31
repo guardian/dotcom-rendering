@@ -29,7 +29,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
-import { getUser } from '@root/src/web/lib/getUser';
+import { getUser, getBrazeUuid } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
@@ -111,6 +111,7 @@ const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
+    const [brazeUuid, setBrazeUuid] = useState<string | null>(null);
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
@@ -142,16 +143,20 @@ export const App = ({ CAPI, NAV }: Props) => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
 
-    console.log(isSignedIn)
-    console.log(user)
+    console.log(isSignedIn);
+    console.log(user);
 
     useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
-
+        const callGetBrazeUuid = async () => {
+            console.log('About to call IDAPI', CAPI.config);
+            setBrazeUuid(await getBrazeUuid(CAPI.config.idApiUrl));
+        };
         if (isSignedIn) {
             callGetUser();
+            callGetBrazeUuid();
         }
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
@@ -404,7 +409,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="braze">
-                <Braze isSignedIn={isSignedIn} />
+                <Braze brazeUuid={brazeUuid} />
             </Portal>
             <Portal
                 root={
