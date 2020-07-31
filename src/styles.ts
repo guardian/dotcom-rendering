@@ -49,6 +49,7 @@ export const linkStyle = (kicker: string): string => `
     }
 `
 
+const footerContentWidth = 1300;
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
@@ -60,6 +61,12 @@ export const articleWidthStyles = css`
 
     ${from.phablet} {
         width: ${wideContentWidth}px;
+    }
+`;
+
+export const footerWidthStyles = css`
+    ${from.wide} {
+        width: ${footerContentWidth}px;
     }
 `;
 
