@@ -20,7 +20,7 @@ import { getPillarStyles, stringFromPillar } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 
 // ----- Styles ----- //
 
