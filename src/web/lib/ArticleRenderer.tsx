@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
@@ -9,10 +10,11 @@ import { DividerBlockComponent } from '@root/src/web/components/elements/Divider
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
-import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
+import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
@@ -21,7 +23,6 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 
 import {
     ExplainerAtom,
@@ -191,7 +192,7 @@ export const ArticleRenderer: React.FC<{
                         <SoundcloudBlockComponent key={i} element={element} />
                     );
                 case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
-                    return null;
+                    return <SpotifyBlockComponent element={element} />;
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
