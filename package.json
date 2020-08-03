@@ -75,7 +75,7 @@
     "@types/jsdom": "^16.2.3",
     "@types/uuid": "^8.0.0",
     "aws-sdk": "^2.724.0",
-    "babel-jest": "^26.1.0",
+    "babel-jest": "^26.2.2",
     "compression": "^1.7.4",
     "core-js": "^3.6.5",
     "create-emotion-server": "^10.0.27",
