@@ -5,7 +5,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 const captionId = 'header-image-caption';

@@ -8,7 +8,7 @@ import { remSpace, palette } from '@guardian/src-foundations';
 import { Format, Design } from '@guardian/types/Format';
 
 import { getPillarStyles } from 'pillarStyles';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { renderTextElement, getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 import Anchor from 'components/anchor';

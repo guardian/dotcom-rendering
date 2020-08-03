@@ -4,10 +4,10 @@ import { createHash } from 'crypto';
 import { Design } from '@guardian/types/Format';
 
 import { BodyElement, ElementKind } from 'bodyElement';
-import { partition, Result } from 'types/result';
+import { partition, Result } from '@guardian/types/result';
 import { Item } from 'item';
 import { compose, pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 
 
 // ----- Types ----- //

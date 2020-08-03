@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { Format } from 'format';
 import { getPillarStyles } from 'pillarStyles';
 import { pipe2 } from 'lib';

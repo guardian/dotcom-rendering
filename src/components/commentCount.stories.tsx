@@ -6,7 +6,7 @@ import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 import CommentCount from './commentCount';
 import { Pillar, Design, Display } from 'format';
 import { selectPillar } from 'storybookHelpers';
-import { some } from 'types/option';
+import { some } from '@guardian/types/option';
 
 
 // ----- Stories ----- //

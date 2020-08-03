@@ -2,7 +2,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
-import { map, none, Option, some, withDefault } from 'types/option';
+import { Option, some, none, map, withDefault } from '@guardian/types/option';
 import { textSans } from '@guardian/src-foundations/typography';
 import { pipe2 }  from 'lib';
 import { Format, Design } from '@guardian/types/Format';

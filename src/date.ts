@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Option, some, none } from 'types/option';
+import { Option, some, none } from '@guardian/types/option';
 
 
 // ----- Setup ----- //

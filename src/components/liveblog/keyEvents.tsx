@@ -7,7 +7,7 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
 import { LiveBlock } from 'liveBlock';
 import { body, headline } from '@guardian/src-foundations/typography';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`

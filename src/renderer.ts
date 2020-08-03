@@ -4,7 +4,7 @@ import { createElement as h, FC, ReactElement, ReactNode } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
-import { andThen, fromNullable, map, none, Option, some, withDefault } from 'types/option';
+import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss, icons } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
@@ -26,7 +26,7 @@ import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
-import { fromUnsafe, Result, toOption } from 'types/result';
+import { fromUnsafe, Result, toOption } from '@guardian/types/result';
 
 
 // ----- Renderer ----- //

@@ -8,7 +8,7 @@ import { remSpace, text, neutral } from '@guardian/src-foundations';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { Item, getFormat } from 'item';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 import { textSans } from '@guardian/src-foundations/typography';
 
 interface Props {
@@ -55,7 +55,7 @@ export const cleanImageUrl = (url: string): string =>
 
 const Logo: FC<Props> = ({ branding, format }: Props) => {
     const lightLogo = cleanImageUrl(branding.logo);
-    const darkLogo = cleanImageUrl(branding.altLogo ?? '');
+    const darkLogo = cleanImageUrl(branding.altLogo ?? branding.logo);
 
     return (
         <section css={styles(lightLogo, darkLogo)}>
