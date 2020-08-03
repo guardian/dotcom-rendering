@@ -183,7 +183,7 @@ const renderField = ({ type, label, mandatory, options, id }: FormField): ReactE
         }
 
         default:
-            return <></>;
+            return null;
     }
 }
 
