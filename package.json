@@ -38,7 +38,7 @@
         "@guardian/atoms-rendering": "^1.5.0",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/consent-management-platform": "^3.4.5",
-        "@guardian/discussion-rendering": "^2.2.23",
+        "@guardian/discussion-rendering": "^2.6.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^1.5.0",
         "@guardian/src-checkbox": "^1.5.0",
