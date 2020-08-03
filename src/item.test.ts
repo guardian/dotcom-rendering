@@ -12,10 +12,10 @@ import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
 import { Design } from 'format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
-import { withDefault } from 'types/option';
+import { withDefault } from '@guardian/types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
-import { toOption, map } from 'types/result';
+import { toOption, map } from '@guardian/types/result';
 
 const articleContent = {
     id: "",

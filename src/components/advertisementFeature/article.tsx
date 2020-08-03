@@ -15,7 +15,7 @@ import { Keyline } from 'components/shared/keyline';
 import HeaderMedia from 'headerMedia';
 import { AdvertisementFeature } from 'item';
 import Logo from './logo';
-import { withDefault, map } from 'types/option';
+import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
 

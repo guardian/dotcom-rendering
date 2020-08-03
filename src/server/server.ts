@@ -12,14 +12,14 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
-import { page } from 'server/page';
+import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
-import { Result, ok, err, either } from 'types/result';
+import { Result, ok, err, either } from '@guardian/types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
@@ -34,7 +34,7 @@ import JsonSerialisable from 'types/jsonSerialisable';
 import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
 import { toArray, pipe2 } from 'lib';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 
 
 // ----- Types ----- //
@@ -113,7 +113,7 @@ async function serveArticlePost(
         const renderingRequest = await mapiDecoder(body);
         const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-        const { html, clientScript } = page(imageSalt, renderingRequest, getAssetLocation);
+        const { html, clientScript } = render(imageSalt, renderingRequest, getAssetLocation);
         res.set('Link', getPrefetchHeader(resourceList(clientScript)));
         res.write('<!DOCTYPE html>');
         res.write(html);
@@ -141,7 +141,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                     },
                     commentCount: 30
                 };
-                const { html, clientScript } = page(
+                const { html, clientScript } = render(
                     imageSalt,
                     mockedRenderingRequest,
                     getAssetLocation

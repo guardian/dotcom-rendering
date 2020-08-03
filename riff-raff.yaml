@@ -5,6 +5,7 @@ deployments:
     type: cloud-formation
     app: mobile-apps-rendering
     parameters:
+      amiEncrypted: true
       amiTags:
         Recipe: xenial-mobile-node
         AmigoStage: PROD

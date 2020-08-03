@@ -4,7 +4,7 @@ import LiveblogLoadMore from './loadMore';
 import { Pillar, Format } from 'format';
 import { LiveBlock } from 'liveBlock';
 import { renderAll } from 'renderer';
-import { partition } from 'types/result';
+import { partition } from '@guardian/types/result';
 import { remSpace } from '@guardian/src-foundations';
 import { css } from '@emotion/core';
 import { until } from '@guardian/src-foundations/mq';

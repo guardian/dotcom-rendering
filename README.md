@@ -95,6 +95,8 @@ In order to release the models you'll need to:
  - have a bintray account with access to the guardian organisation
  - have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
 
+Make sure you set upstream `git push --set-upstream origin <BRANCH_NAME>`
+
 In the SBT repl:
 ```sbtshell
 clean

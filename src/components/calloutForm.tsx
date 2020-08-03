@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
-import { SvgMinus, SvgPlus } from '@guardian/src-svgs';
+import { SvgMinus, SvgPlus } from '@guardian/src-icons';
 import { Format } from '@guardian/types/Format';
 import { getPillarStyles } from 'pillarStyles';
 import { headline, textSans, body } from '@guardian/src-foundations/typography';

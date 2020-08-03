@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Result, err, ok } from 'types/result';
+import { Result, err, ok } from '@guardian/types/result';
 
 
 // ----- Functions ----- //

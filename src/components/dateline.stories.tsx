@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import { date, withKnobs } from '@storybook/addon-knobs';
 
-import { some } from 'types/option';
+import { some } from '@guardian/types/option';
 import Dateline from './dateline';
 
 

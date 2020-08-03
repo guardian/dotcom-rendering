@@ -5,12 +5,12 @@ import React, { ReactElement } from 'react';
 import { Pillar, Display } from '@guardian/types/Format';
 
 import Standfirst from './standfirst';
-import { Option } from 'types/option';
+import { Option } from '@guardian/types/option';
 import { article, review, feature, comment } from 'fixtures/item';
 import { parse } from 'client/parser';
 import { selectPillar } from 'storybookHelpers';
 import { pipe2 } from 'lib';
-import { toOption } from 'types/result';
+import { toOption } from '@guardian/types/result';
 
 
 // ----- Setup ----- //

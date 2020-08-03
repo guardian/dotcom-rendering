@@ -12,7 +12,7 @@ import { Liveblog, getFormat } from 'item';
 import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
 import { pipe2 } from 'lib';
-import { map, withDefault } from 'types/option';
+import { map, withDefault } from '@guardian/types/option';
 
 const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};

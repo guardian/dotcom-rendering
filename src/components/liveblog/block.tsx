@@ -8,7 +8,7 @@ import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Pillar } from 'format';
-import { Option, withDefault, map } from 'types/option';
+import { Option, withDefault, map } from '@guardian/types/option';
 import { remSpace } from '@guardian/src-foundations';
 import { pipe2 } from 'lib';
 

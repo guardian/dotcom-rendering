@@ -6,7 +6,7 @@ import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
 import { configure, shallow } from 'enzyme';
-import { none, some } from 'types/option';
+import { none, some } from '@guardian/types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
 

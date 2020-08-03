@@ -9,7 +9,7 @@ import { createElement as h } from 'react';
 import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
-import { ads, slideshow } from 'client/nativeCommunication';
+import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 
 
 // ----- Run ----- //
@@ -198,6 +198,8 @@ function callouts(): void {
 
 setup();
 ads();
+videos();
+reportNativeElementPositionChanges();
 topics();
 slideshow();
 formatDates();

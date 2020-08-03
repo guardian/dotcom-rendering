@@ -8,8 +8,8 @@ import {
     fromNullable,
     map,
     withDefault,
-} from 'types/option';
-import { Result, err, ok, map as rmap } from 'types/result';
+} from '@guardian/types/option';
+import { Result, err, ok, map as rmap } from '@guardian/types/result';
 import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
 import { isElement, pipe2, pipe } from 'lib';

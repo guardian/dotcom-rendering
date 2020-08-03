@@ -5,7 +5,7 @@ import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Format } from 'format';
 import { renderText } from 'renderer';
-import { Option, map, withDefault } from 'types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { headline } from '@guardian/src-foundations/typography';
 import { pipe2 } from 'lib';
 

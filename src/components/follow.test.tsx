@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
 import { Pillar, Design, Display } from 'format';
-import { none } from 'types/option';
+import { none } from '@guardian/types/option';
 import { Contributor } from 'contributor';
 
 
