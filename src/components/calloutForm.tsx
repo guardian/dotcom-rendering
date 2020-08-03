@@ -137,7 +137,7 @@ const labelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
-const renderField = ({ type, label, mandatory, options, id }: FormField): JSX.Element => {
+const renderField = ({ type, label, mandatory, options, id }: FormField): ReactElement | null => {
     switch (type) {
         case 'text': {
             return <TextInput name={`field_${id}`} label={label} optional={!mandatory}/>
