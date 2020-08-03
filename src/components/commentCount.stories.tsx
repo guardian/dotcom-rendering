@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 
 import CommentCount from './commentCount';
-import { Pillar, Design, Display } from 'format';
+import { Pillar, Design, Display } from '@guardian/types/Format';
 import { selectPillar } from 'storybookHelpers';
 import { some } from '@guardian/types/option';
 

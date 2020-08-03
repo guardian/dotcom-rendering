@@ -7,7 +7,7 @@ import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss, icons } from 'styles';
 import { getPillarStyles } from 'pillarStyles';
-import { Format } from 'format';
+import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { BodyImageProps, Role } from 'image';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';

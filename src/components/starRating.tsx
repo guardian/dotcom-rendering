@@ -7,7 +7,7 @@ import { remSpace } from '@guardian/src-foundations';
 
 import { Item } from 'item';
 import { icons, darkModeCss } from 'styles';
-import { Design } from 'format';
+import { Design } from '@guardian/types/Format';
 
 
 // ----- Subcomponents ----- //

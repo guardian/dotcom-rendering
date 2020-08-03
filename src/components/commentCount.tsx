@@ -6,7 +6,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, map, withDefault } from '@guardian/types/option';
-import { Format } from 'format';
+import { Format } from '@guardian/types/Format';
 import { getPillarStyles } from 'pillarStyles';
 import { pipe2 } from 'lib';
 import { darkModeCss } from 'styles';

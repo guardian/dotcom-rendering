@@ -9,7 +9,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { Item, getFormat } from 'item';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
-import { Display, Design } from 'format';
+import { Display, Design } from '@guardian/types/Format';
 import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 

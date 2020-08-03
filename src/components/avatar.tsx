@@ -4,7 +4,7 @@ import React, { FC, ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
-import { Format } from 'format';
+import { Format } from '@guardian/types/Format';
 import { getPillarStyles } from 'pillarStyles';
 import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';

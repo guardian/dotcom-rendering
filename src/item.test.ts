@@ -9,7 +9,7 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
-import { Design } from 'format';
+import { Design } from '@guardian/types/Format';
 import { JSDOM } from 'jsdom';
 import { Display } from '@guardian/types/Format';
 import { withDefault } from '@guardian/types/option';

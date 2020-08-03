@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
-import { Pillar, Format } from 'format';
+import { Pillar, Format } from '@guardian/types/Format';
 import { LiveBlock } from 'liveBlock';
 import { renderAll } from 'renderer';
 import { partition } from '@guardian/types/result';

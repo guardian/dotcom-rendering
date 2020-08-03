@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 import { selectPillar } from 'storybookHelpers';
 import Byline from './byline';
-import { Pillar, Design, Display } from 'format';
+import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Option } from '@guardian/types/option';
 import { parse } from 'client/parser';
 import { pipe2 } from 'lib';

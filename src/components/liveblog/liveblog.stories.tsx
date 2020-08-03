@@ -1,6 +1,6 @@
 import React from 'react';
 import LiveblogLoadMore from './loadMore';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { withKnobs, select } from "@storybook/addon-knobs";
 
 export default { title: 'Liveblog', decorators: [withKnobs] };

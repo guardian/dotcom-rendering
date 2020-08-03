@@ -1,6 +1,6 @@
 import { basePx, baseMultiply, darkModeCss } from './styles';
 import { getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 
 describe('helper functions return correct styles', () => {
     test('Calculates base pixels', () => {

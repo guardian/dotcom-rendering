@@ -7,7 +7,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { Option, withDefault, map } from '@guardian/types/option';
 import { remSpace } from '@guardian/src-foundations';
 import { pipe2 } from 'lib';

@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import Follow from './follow';
-import { Pillar, Design, Display } from 'format';
+import { Pillar, Design, Display } from '@guardian/types/Format';
 import { selectPillar } from 'storybookHelpers';
 import { none } from '@guardian/types/option';
 
