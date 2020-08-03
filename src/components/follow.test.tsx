@@ -5,7 +5,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
-import { Pillar, Design, Display } from 'format';
+import { Pillar, Design, Display } from '@guardian/types/Format';
 import { none } from '@guardian/types/option';
 import { Contributor } from 'contributor';
 

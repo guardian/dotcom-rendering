@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';

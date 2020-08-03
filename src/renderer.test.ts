@@ -1,6 +1,6 @@
 import { renderAll, renderAllWithoutStyles, renderStandfirstText, renderText } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';

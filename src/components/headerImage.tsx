@@ -9,7 +9,7 @@ import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import Img from 'components/img';
 import { wideContentWidth } from 'styles';
 import { Image } from 'image';
-import { Format, Display, Design } from 'format';
+import { Format, Display, Design } from '@guardian/types/Format';
 
 
 // ----- Subcomponents ----- //
