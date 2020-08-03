@@ -2439,10 +2439,10 @@
     "@guardian/src-helpers" "^1.5.0"
     "@guardian/src-user-feedback" "^1.5.0"
 
-"@guardian/src-svgs@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-1.5.0.tgz#2e7240d40c6d9bc3fd703cb8f41acec9a666d70c"
-  integrity sha512-9N3I43BYDM+YYI3IDt3DOg35x7ncybrI6m7iWcVHvnHAtAQGyTCRvg4AjAf83Imi0vXZBtRBttO0ULBoiWoC/A==
+"@guardian/src-svgs@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.0.0.tgz#982ac9688657df9cdc2071d6857c9b8a32c6e1be"
+  integrity sha512-cOTrBn+nHav0WgkwPfkLEWuhGoXuWl86+/Flxvb+USYMmHnqrDKJW/0CkurfOtFGOzi6fqgYg9mHo8UndMKnXA==
 
 "@guardian/src-text-area@^1.5.0":
   version "1.5.0"
