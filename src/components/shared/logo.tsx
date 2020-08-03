@@ -55,7 +55,7 @@ export const cleanImageUrl = (url: string): string =>
 
 const Logo: FC<Props> = ({ branding, format }: Props) => {
     const lightLogo = cleanImageUrl(branding.logo);
-    const darkLogo = cleanImageUrl(branding.altLogo ?? '');
+    const darkLogo = cleanImageUrl(branding.altLogo ?? branding.logo);
 
     return (
         <section css={styles(lightLogo, darkLogo)}>
