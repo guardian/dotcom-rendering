@@ -8,6 +8,7 @@ import { css } from "@emotion/core";
 import { textSans } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
 import { neutral } from "@guardian/src-foundations/palette";
+import { Display } from '@guardian/types/Format';
 
 interface Props {
     item : Item;
@@ -41,15 +42,18 @@ const caption = (format: Format) => (mainmedia: MainMedia): ReactElement | null 
     }
 }
 
-const ImmersiveCaption: FC<Props> = (props) => {
-
-    switch (props.item.mainMedia.kind){
-        case OptionKind.Some:
-            return caption(props.item)(props.item.mainMedia.value)
-        case OptionKind.None:
-        default:
-            return null
+const ImmersiveCaption: FC<Props> = (props,) => {
+    if (props.item.display === Display.Immersive){
+        switch (props.item.mainMedia.kind){
+            case OptionKind.Some:
+                return caption(props.item)(props.item.mainMedia.value)
+            case OptionKind.None:
+            default:
+                return null
+        }
     }
+    return null
+   
 }
 
 export default ImmersiveCaption;
