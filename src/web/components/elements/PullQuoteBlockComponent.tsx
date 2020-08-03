@@ -31,7 +31,7 @@ const partiallyLeft = css`
         ${from.leftCol} {
             border-radius: 0 0 0 25px;
             left: 0;
-            margin-left: 140px;
+            margin-left: 85px;
         }
     }
 `;
