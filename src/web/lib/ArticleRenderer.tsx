@@ -190,6 +190,8 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
                     );
+                case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
+                    return null;
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
@@ -281,7 +283,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
