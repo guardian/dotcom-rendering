@@ -1559,7 +1559,7 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html", "title", "caption"]
+            "required": ["_type", "html"]
         },
         "SubheadingBlockElement": {
             "type": "object",
