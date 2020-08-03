@@ -288,7 +288,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
                 return err('No html field on embedTypeData')
             }
 
-            const id = context.docParser(embedHtml).querySelector('[data-callout-tagname] p')?.textContent;
+            const id = context.docParser(embedHtml).querySelector('[data-callout-tagname]')?.getAttribute('data-callout-tagname');
 
             if (id && campaigns) {
                 const campaign = campaigns.find(campaign => campaign.fields.tagName === id);
