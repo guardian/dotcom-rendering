@@ -11,7 +11,7 @@ import { neutral } from "@guardian/src-foundations/palette";
 import { Display } from '@guardian/types/Format';
 
 interface Props {
-    item : Item;
+    item: Item;
 }
 
 const captionHeadingStyles = css`
@@ -21,7 +21,11 @@ const captionHeadingStyles = css`
     display: block;
 `;
 
-const buildCaption = (cap: Option<DocumentFragment>, format: Format, credit: Option<string>): ReactElement | null => {
+const buildCaption = (
+    cap: Option<DocumentFragment>, 
+    format: Format, 
+    credit: Option<string>
+    ): ReactElement | null => {
     if (cap.kind === OptionKind.Some && credit.kind === OptionKind.Some){
         return <p css={captionHeadingStyles}>{renderCaption(cap.value, format)} {credit.value}</p>
     } else if (cap.kind === OptionKind.Some && credit.kind === OptionKind.None){
