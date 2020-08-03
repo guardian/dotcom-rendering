@@ -52,10 +52,4 @@ const ImmersiveCaption: FC<Props> = (props) => {
     }
 }
 
-    // pipe2(
-    //     props.item.mainMedia,
-    //     map(caption(props.item)),
-    //     withDefault<ReactElement | null>(null),
-    //     )
-
 export default ImmersiveCaption;
