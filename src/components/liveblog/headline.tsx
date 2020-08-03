@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 

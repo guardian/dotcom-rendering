@@ -2,7 +2,7 @@
 
 import * as palette from '@guardian/src-foundations/palette';
 
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 
 
 // ----- Types ----- //

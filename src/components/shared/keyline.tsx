@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth } from 'styles';
 import { neutral } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import { Design } from 'format';
+import { Design } from '@guardian/types/Format';
 
 const BaseStyles = css`
     height: 10px;

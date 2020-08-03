@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Keyline } from 'components/shared/keyline';
-import { Design } from 'format';
+import { Design } from '@guardian/types/Format';
 import { SerializedStyles } from '@emotion/core';
 
 configure({ adapter: new Adapter() });
