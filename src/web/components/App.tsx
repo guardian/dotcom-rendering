@@ -144,15 +144,11 @@ export const App = ({ CAPI, NAV }: Props) => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
 
-    console.log(isSignedIn);
-    console.log(user);
-
     useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
         const callGetBrazeUuid = async () => {
-            console.log('About to call IDAPI', CAPI.config);
             setBrazeUuid(await getBrazeUuid(CAPI.config.idApiUrl));
         };
         if (isSignedIn) {
