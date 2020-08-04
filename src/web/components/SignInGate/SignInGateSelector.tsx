@@ -96,7 +96,7 @@ const generateSignInUrl = (
     // set the component event params to be included in the query
     const queryParams: ComponentEventParams = {
         componentType: 'signingate',
-        componentId: testIdToComponentId[currentTest.name],
+        componentId: testIdToComponentId[currentTest.id],
         abTestName: currentTest.name,
         abTestVariant: currentTest.variant,
         viewId: window.guardian.ophan.viewId,
@@ -124,7 +124,7 @@ const ShowSignInGate = ({
     // use effect hook to fire view event tracking only on initial render
     useEffect(() => {
         submitViewEventTracking({
-            component: withComponentId(testIdToComponentId[abTest.name]),
+            component: withComponentId(testIdToComponentId[abTest.id]),
             abTest,
         });
     }, [abTest]);
@@ -141,7 +141,7 @@ const ShowSignInGate = ({
                 dismissGate(setShowGate, abTest);
             },
             abTest,
-            component: componentName,
+            ophanComponentId: testIdToComponentId[abTest.id],
             isComment:
                 CAPI.designType === 'Comment' ||
                 CAPI.designType === 'GuardianView',
@@ -161,6 +161,7 @@ export const SignInGateSelector = ({
     const [currentTest, setCurrentTest] = useState<CurrentABTest>({
         name: '',
         variant: '',
+        id: '',
     });
 
     const ab = useAB();
@@ -171,6 +172,7 @@ export const SignInGateSelector = ({
         setCurrentTest({
             name: test?.dataLinkNames || test?.id || '',
             variant: test?.variantToRun.id || '',
+            id: test?.id || '',
         });
     }, [ab]);
 
