@@ -109,6 +109,7 @@ type BodyElement = {
     kind: ElementKind.Callout;
     id: string;
     campaign: Campaign;
+    description: DocumentFragment;
 } | {
     kind: ElementKind.LiveEvent;
     linkText: string;
@@ -138,10 +139,6 @@ const serialiseNodes = (nodes: NodeList): string =>
 const serialiseFragment = (doc: DocumentFragment): string =>
     serialiseNodes(doc.childNodes);
 
-const serialiseCampaign = (campaign: Campaign): string => {
-    return campaign.id
-}
-
 function toSerialisable(elem: BodyElement): JsonSerialisable {
     switch (elem.kind) {
         case ElementKind.Text:
@@ -153,7 +150,11 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.MediaAtom:
             return { ...elem, caption: map(serialiseFragment)(elem.caption) };
         case ElementKind.Callout:
-            return { ...elem, campaign: serialiseCampaign(elem.campaign) };
+            return {
+                ...elem,
+                campaign: JSON.stringify(elem.campaign),
+                description: serialiseFragment(elem.description)
+            };
         case ElementKind.InteractiveAtom:
         case ElementKind.ExplainerAtom:
         case ElementKind.Embed:
@@ -297,7 +298,8 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
                     return err('No matching campaign');
                 }
 
-                return ok({ kind: ElementKind.Callout, id, campaign });
+                const description = context.docParser(campaign.fields.description ?? '');
+                return ok({ kind: ElementKind.Callout, id, campaign, description });
             }
 
             return ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });

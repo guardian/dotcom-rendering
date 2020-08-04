@@ -532,8 +532,8 @@ const render = (format: Format, excludeStyles = false) =>
             return h(Video, { src: element.src, width: element.width, height: element.height })
 
         case ElementKind.Callout: {
-            const { campaign } = element;
-            return h(CalloutForm, { campaign, format });
+            const { campaign, description } = element;
+            return h(CalloutForm, { campaign, format, description });
         }
 
         case ElementKind.Embed: {
@@ -654,5 +654,6 @@ export {
     textElement as renderTextElement,
     standfirstText as renderStandfirstText,
     getHref,
-    transformHref
+    transformHref,
+    plainTextElement
 };

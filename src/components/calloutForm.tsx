@@ -9,16 +9,19 @@ import { getPillarStyles } from 'pillarStyles';
 import { headline, textSans, body } from '@guardian/src-foundations/typography';
 import { TextInput } from '@guardian/src-text-input';
 import { TextArea } from '@guardian/src-text-area';
-import { RadioGroup, Radio } from "@guardian/src-radio"
 import { FormField } from '@guardian/apps-rendering-api-models/formField';
 import { darkModeCss } from 'styles';
+import FileInput from 'components/FileInput';
+import RadioInput from 'components/RadioInput';
+import { plainTextElement } from 'renderer';
 
 export interface CalloutProps {
     campaign: Campaign;
     format: Format;
+    description: DocumentFragment;
 }
 
-const calloutStyles = (kicker: string): SerializedStyles => css`
+const calloutStyles = css`
     border-top: 1px ${neutral[86]} solid;
     border-bottom: 1px ${neutral[86]} solid;
     position: relative;
@@ -52,59 +55,13 @@ const calloutStyles = (kicker: string): SerializedStyles => css`
             display: none;
         }
     
-        .campaign--kicker {
+        .kicker {
             display: flex;
             flex-direction: row;
     
-            > .campaign--snippet__heading-logo {
+            > .logo {
                 flex: initial;
-    
-                .speech-bubble {
-                    padding: ${remSpace[3]};
-                    position: relative;
-                    color: ${neutral[100]};
-                    background-color: ${kicker};
-                    margin-bottom: ${remSpace[9]};
-                    min-width: 5.5rem;
-
-                    &::after {
-                        content: '';
-                        width: 1.25rem;
-                        height: 1.375rem;
-                        border-radius: 0 0 1.125rem;
-                        position: absolute;
-                        bottom: -0.75rem;
-                        left: 0.625rem;
-                        color: ${neutral[100]};
-                        background-color: ${kicker};
-                    }
-                }
             }
-        }
-    }
-    
-    form {
-        margin: ${remSpace[4]} ${remSpace[2]} ${remSpace[9]} ${remSpace[2]};
-
-        a {
-            color: ${kicker};
-            text-decoration: none;
-            ${ textSans.small() };
-            position: absolute;
-            bottom: ${remSpace[2]};
-            right: ${remSpace[2]};
-        }
-
-        button {
-            margin: ${remSpace[4]} 0;
-        }
-
-        input {
-            margin-bottom: ${remSpace[4]};
-        }
-
-        p {
-            ${textSans.small()};
         }
     }
 
@@ -128,80 +85,83 @@ const calloutStyles = (kicker: string): SerializedStyles => css`
     `}
 `;
 
-const optionalLabelStyles = css`
-    ${textSans.small({ fontStyle: "italic" })};
-    color: ${neutral[46]};
+const speechBubbleStyles = (kicker: string): SerializedStyles => css`
+    padding: ${remSpace[3]};
+    position: relative;
+    color: ${neutral[100]};
+    background-color: ${kicker};
+    margin-bottom: ${remSpace[9]};
+    min-width: 5.5rem;
+
+    &::after {
+        content: '';
+        width: 1.25rem;
+        height: 1.375rem;
+        border-radius: 0 0 1.125rem;
+        position: absolute;
+        bottom: -0.75rem;
+        left: 0.625rem;
+        color: ${neutral[100]};
+        background-color: ${kicker};
+    }
 `;
 
-const labelStyles = css`
-    ${textSans.medium({ fontWeight: 'bold' })};
+const formStyles = (kicker: string): SerializedStyles => css`
+    margin: ${remSpace[4]} ${remSpace[2]} ${remSpace[9]} ${remSpace[2]};
+
+    a {
+        color: ${kicker};
+        text-decoration: none;
+        ${ textSans.small() };
+        position: absolute;
+        bottom: ${remSpace[2]};
+        right: ${remSpace[2]};
+    }
+
+    button {
+        margin: ${remSpace[4]} 0;
+    }
+
+    input {
+        margin-bottom: ${remSpace[4]};
+    }
+
+    p {
+        ${textSans.small()};
+    }
 `;
 
 const renderField = ({ type, label, mandatory, options, id }: FormField): ReactElement | null => {
+    const fieldId = `field_${id}`;
     switch (type) {
-        case 'text': {
-            return <TextInput name={`field_${id}`} label={label} optional={!mandatory}/>
-        }
-        case 'textarea': {
-            return <TextArea name={`field_${id}`} label={label} optional={!mandatory}/>
-        }
-        case 'file': {
-            const optionalLabel = mandatory ? '' : <span css={optionalLabelStyles}>Optional</span>
-            return <>
-                <label css={labelStyles} htmlFor={`field_${id}`}>{label} {optionalLabel}</label>
-                <input
-                    name={`field_${id}`}
-                    type="file"
-                    accept="image/*, .pdf"
-                    required={mandatory}
-                />
-                <p>We accept images and pdfs. Maximum total file size: 6MB</p>
-            </>
-        }
-        case 'radio': {
-            const radioStyles = css`
-                margin-bottom: ${remSpace[4]};
-            `
-            return (
-                <>
-                    <label css={labelStyles} htmlFor={`field_${id}`}>{label}</label>
-                    <RadioGroup name={`field_${id}`} orientation="horizontal" cssOverrides={radioStyles}>
-                        {
-                            options.map(({ value, label }) => {
-                                return (
-                                    <Radio
-                                        key={value}
-                                        value={value}
-                                        label={label}
-                                    />
-                                )
-                            })
-                        }
-                    </RadioGroup>
-                </>
-            )
-        }
-
+        case 'text':
+            return <TextInput name={fieldId} label={label} optional={!mandatory} />
+        case 'textarea':
+            return <TextArea name={fieldId} label={label} optional={!mandatory} />
+        case 'file':
+            return <FileInput required={mandatory} name={fieldId} label={label} />
+        case 'radio':
+            return <RadioInput options={options} name={fieldId } label={label} />
         default:
             return null;
     }
 }
 
-const CalloutForm: FC<CalloutProps> = ({ campaign, format }: CalloutProps): ReactElement => {
+const CalloutForm: FC<CalloutProps> = ({ campaign, format, description }: CalloutProps): ReactElement => {
     const { kicker } = getPillarStyles(format.pillar);
 
     return (
-        <details className="callout" css={calloutStyles(kicker)}>
+        <details className="callout" css={calloutStyles}>
             <summary>
-                <div className="campaign--kicker">
-                    <div className="campaign--snippet__heading-logo">
-                        <div className="speech-bubble">
+                <div className="kicker">
+                    <div className="logo">
+                        <div css={speechBubbleStyles(kicker)}>
                             <h4>Take part</h4>
                         </div>
                     </div>
                     <div className="description">
                         <h4>{campaign.fields.callout}</h4>
-                        <div dangerouslySetInnerHTML={{__html: campaign.fields.description ?? ''}}></div>
+                        {Array.from(description.childNodes).map(plainTextElement)}
                     </div>
                 </div>
                 <Button size="xsmall" className="is-off callout-expand" iconSide="left" icon={<SvgPlus />}>Tell us</Button>
@@ -209,7 +169,7 @@ const CalloutForm: FC<CalloutProps> = ({ campaign, format }: CalloutProps): Reac
             </summary>
 
 
-            <form action="#" method="post">
+            <form css={formStyles(kicker)} action="#" method="post">
                 <div>
                     <input name="formId" type="hidden" value={campaign.id} />
                     {campaign.fields.formFields.map(renderField)}

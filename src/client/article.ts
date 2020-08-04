@@ -159,7 +159,7 @@ function callouts(): void {
         const buttons = Array.from(callout.querySelectorAll('.callout-expand'));
         buttons.forEach(button => {
             button.addEventListener('click', () => {
-                callout.toggleAttribute('open')
+                callout.toggleAttribute('open');
             })
         })
 
