@@ -2,8 +2,8 @@ import React, { FC, ReactElement } from 'react';
 import { Item } from 'item';
 import { MainMedia, MainMediaKind } from 'headerMedia';
 import { Option, OptionKind } from '@guardian/types/option';
-import { renderCaption } from './figCaption'
-import { Format } from "../format";
+import { renderCaption } from 'components/figCaption'
+import { Format } from "format";
 import { css } from "@emotion/core";
 import { textSans } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
