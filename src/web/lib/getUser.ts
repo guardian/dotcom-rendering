@@ -1,5 +1,4 @@
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-import { stringList } from 'aws-sdk/clients/datapipeline';
 
 export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
     const url = joinUrl([ajaxUrl, 'profile/me']);
