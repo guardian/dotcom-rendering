@@ -3,11 +3,11 @@ import { Item } from 'item';
 import { MainMedia, MainMediaKind } from 'headerMedia';
 import { Option, OptionKind } from '@guardian/types/option';
 import { renderCaption } from 'components/figCaption'
-import { Format } from "format";
-import { css } from "@emotion/core";
-import { textSans } from "@guardian/src-foundations/typography";
-import { remSpace } from "@guardian/src-foundations";
-import { neutral } from "@guardian/src-foundations/palette";
+import { Format } from 'format';
+import { css } from '@emotion/core';
+import { textSans } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { Display } from '@guardian/types/Format';
 
 interface Props {
