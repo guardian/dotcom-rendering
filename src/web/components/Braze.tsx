@@ -14,8 +14,6 @@ export const Braze = ({ brazeUuid }: Props) => {
     );
     const [testValue, setTestValue] = useState<string | null>(null);
 
-    console.log({ apiKey, brazeSwitch, brazeUuid, hasGivenConsent });
-
     useEffect(() => {
         onIabConsentNotification((state: IabPurposeState) => {
             const consentState =
@@ -26,7 +24,6 @@ export const Braze = ({ brazeUuid }: Props) => {
 
     useEffect(() => {
         if (brazeSwitch && apiKey && brazeUuid && hasGivenConsent) {
-            console.log('Hi from Braze');
             import(
                 /* webpackChunkName: "braze-web-sdk" */ '@braze/web-sdk'
             ).then(({ default: appboy }) => {
@@ -40,7 +37,6 @@ export const Braze = ({ brazeUuid }: Props) => {
                 });
 
                 appboy.subscribeToInAppMessage((config: BrazeMessageConfig) => {
-                    console.log(config);
                     setTestValue(config.extras['test-key']);
                 });
 
