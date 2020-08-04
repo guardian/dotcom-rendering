@@ -3,7 +3,7 @@ import { Item } from 'item';
 import { MainMedia, MainMediaKind } from 'headerMedia';
 import { Option, OptionKind } from '@guardian/types/option';
 import { renderCaption } from 'components/figCaption'
-import { Format } from 'format';
+import { Format } from '@guardian/types/Format';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
