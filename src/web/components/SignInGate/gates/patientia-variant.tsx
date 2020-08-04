@@ -40,11 +40,18 @@ const SignInGatePatientia = React.lazy(() => {
 });
 
 export const signInGateComponent: SignInGateComponent = {
-    gate: ({ component, dismissGate, guUrl, signInUrl, abTest, isComment }) => (
+    gate: ({
+        ophanComponentId,
+        dismissGate,
+        guUrl,
+        signInUrl,
+        abTest,
+        isComment,
+    }) => (
         <Lazy margin={300}>
             <Suspense fallback={<></>}>
                 <SignInGatePatientia
-                    component={component}
+                    ophanComponentId={ophanComponentId}
                     dismissGate={dismissGate}
                     guUrl={guUrl}
                     signInUrl={signInUrl}

@@ -7,7 +7,6 @@ import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
-import { OphanComponent } from '@frontend/web/browser/ophan/ophan';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 
@@ -120,20 +119,12 @@ const hideElementsCss = `
     }
     `;
 
-// set the ophan component tracking vars
-export const withComponentId: (id: string) => OphanComponent = (
-    id: string = '',
-) => ({
-    componentType: 'SIGN_IN_GATE',
-    id,
-});
-
 export const SignInGatePatientia = ({
     signInUrl,
     guUrl,
     dismissGate,
     abTest,
-    component,
+    ophanComponentId,
     isComment,
 }: SignInGateProps) => {
     const [showCpmUi, setShowCmpUi] = useState(false);
@@ -160,7 +151,7 @@ export const SignInGatePatientia = ({
                     size="small"
                     href={signInUrl}
                     onClick={() => {
-                        trackLink(component, 'register-link', abTest);
+                        trackLink(ophanComponentId, 'register-link', abTest);
                     }}
                 >
                     Register for free
@@ -172,7 +163,7 @@ export const SignInGatePatientia = ({
                     size="small"
                     onClick={() => {
                         dismissGate();
-                        trackLink(component, 'not-now', abTest);
+                        trackLink(ophanComponentId, 'not-now', abTest);
                     }}
                 >
                     Not Now
@@ -185,7 +176,7 @@ export const SignInGatePatientia = ({
                     className={signInLink}
                     href={signInUrl}
                     onClick={() => {
-                        trackLink(component, 'sign-in-link', abTest);
+                        trackLink(ophanComponentId, 'sign-in-link', abTest);
                     }}
                 >
                     Sign In
@@ -196,7 +187,7 @@ export const SignInGatePatientia = ({
                 <Link
                     href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
                     onClick={() => {
-                        trackLink(component, 'how-link', abTest);
+                        trackLink(ophanComponentId, 'how-link', abTest);
                     }}
                 >
                     Why register & how does it help?
@@ -205,7 +196,7 @@ export const SignInGatePatientia = ({
                 <Link
                     href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
                     onClick={() => {
-                        trackLink(component, 'why-link', abTest);
+                        trackLink(ophanComponentId, 'why-link', abTest);
                     }}
                 >
                     How will my information & data be used?
@@ -214,7 +205,7 @@ export const SignInGatePatientia = ({
                 <Link
                     href={`${guUrl}/help/identity-faq`}
                     onClick={() => {
-                        trackLink(component, 'help-link', abTest);
+                        trackLink(ophanComponentId, 'help-link', abTest);
                     }}
                 >
                     Get help with registering or signing in

@@ -19,7 +19,7 @@ export const mainStandalone = () => {
                 guUrl="https://theguardian.com"
                 signInUrl="https://profile.theguardian.com/"
                 dismissGate={() => {}}
-                component="test"
+                ophanComponentId="test"
             />
         </Section>
     );
@@ -33,7 +33,7 @@ export const mainPatientia = () => {
                 guUrl="https://theguardian.com"
                 signInUrl="https://profile.theguardian.com/"
                 dismissGate={() => {}}
-                component="test"
+                ophanComponentId="test"
             />
         </Section>
     );
