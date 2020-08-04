@@ -89,7 +89,7 @@
         "he": "^1.2.0",
         "html-minifier": "^3.5.14",
         "inquirer": "^5.2.0",
-        "jsdom": "^16.2.2",
+        "jsdom": "^16.3.0",
         "lodash.debounce": "^4.0.6",
         "lodash.escape": "^4.0.1",
         "lodash.get": "^4.4.2",
