@@ -27,13 +27,13 @@ export const Braze = ({ brazeUuid }: Props) => {
             import(
                 /* webpackChunkName: "braze-web-sdk" */ '@braze/web-sdk'
             ).then(({ default: appboy }) => {
-                // TODO: change session timeout for production from 1 second
                 appboy.initialize(apiKey, {
                     enableLogging: true,
                     noCookies: true,
                     baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
                     enableHtmlInAppMessages: true,
-                    sessionTimeoutInSeconds: 1,
+                    // Controls how soon we'll show a Braze message again, useful for local dev:
+                    // sessionTimeoutInSeconds: 1,
                 });
 
                 appboy.subscribeToInAppMessage((config: BrazeMessageConfig) => {
