@@ -19,8 +19,6 @@ import {
     sendOphanComponentEvent,
     TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
-import { onIabConsentNotification } from '@guardian/consent-management-platform';
-import { IabPurposeState } from '@guardian/consent-management-platform/dist/tcf/types';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -133,12 +131,6 @@ const MemoisedInner = ({
         threshold: 0,
         debounce: true,
     }) as HasBeenSeen;
-
-    useEffect(() => {
-        onIabConsentNotification((state: IabPurposeState) =>
-            console.log('consent state', state),
-        );
-    }, []);
 
     useEffect(() => {
         const contributionsPayload = buildPayload({
