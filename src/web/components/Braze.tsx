@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { onIabConsentNotification } from '@guardian/consent-management-platform';
-import { IabPurposeState } from '@guardian/consent-management-platform/dist/tcf/types';
 
 type Props = {
     brazeUuid: null | string;
@@ -15,10 +14,14 @@ export const Braze = ({ brazeUuid }: Props) => {
     const [testValue, setTestValue] = useState<string | null>(null);
 
     useEffect(() => {
-        onIabConsentNotification((state: IabPurposeState) => {
-            const consentState =
-                state[1] && state[2] && state[3] && state[4] && state[5];
-            setHasGivenConsent(consentState);
+        onIabConsentNotification((state: any) => {
+            if (state.ccpa) {
+                setHasGivenConsent(!state.ccpa.doNotSell);
+            } else {
+                const consentState =
+                    state[1] && state[2] && state[3] && state[4] && state[5];
+                setHasGivenConsent(consentState);
+            }
         });
     }, []);
 
