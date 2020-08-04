@@ -133,6 +133,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     const ABTestAPI = useAB();
     useEffect(() => {
         const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+        ABTestAPI.trackABTests(allRunnableTests);
         ABTestAPI.registerImpressionEvents(allRunnableTests);
         ABTestAPI.registerCompleteEvents(allRunnableTests);
     }, [ABTestAPI]);
