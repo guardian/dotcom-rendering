@@ -147,7 +147,8 @@ const renderField = ({ type, label, mandatory, options, id }: FormField): ReactE
     }
 }
 
-const CalloutForm: FC<CalloutProps> = ({ campaign, format, description }: CalloutProps): ReactElement => {
+const CalloutForm: FC<CalloutProps> = (props: CalloutProps): ReactElement => {
+    const { campaign, format, description } = props;
     const { kicker } = getPillarStyles(format.pillar);
 
     return (
