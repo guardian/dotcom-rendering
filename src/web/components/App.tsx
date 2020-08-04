@@ -155,7 +155,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             callGetUser();
             callGetBrazeUuid();
         }
-    }, [isSignedIn, CAPI.config.discussionApiUrl]);
+    }, [isSignedIn, CAPI.config.discussionApiUrl, CAPI.config.idApiUrl]);
 
     useEffect(() => {
         const callFetch = async () =>
