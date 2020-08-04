@@ -9,13 +9,17 @@ interface InteractiveAtomBlockElementBase {
     js?: string;
 }
 
-interface AudioAtomElement {
-    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+interface AudioAtomBlockElementAMP {
     id: string;
     kicker: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
+}
+
+interface AudioAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+    amp: AudioAtomBlockElementAMP;
 }
 
 interface AudioBlockElement {
@@ -316,7 +320,7 @@ interface YoutubeBlockElement {
 }
 
 type CAPIElement =
-    | AudioAtomElement
+    | AudioAtomBlockElement
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
