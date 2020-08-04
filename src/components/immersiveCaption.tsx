@@ -17,7 +17,7 @@ interface Props {
 const captionHeadingStyles = css`
     ${textSans.xsmall()}
     color: ${neutral[46]};
-    margin: 0 0 ${remSpace[3]};
+    margin: 0 0 ${remSpace[4]};
     margin-top: ${remSpace[4]};
     display: block;
 `;
