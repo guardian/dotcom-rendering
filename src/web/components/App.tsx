@@ -35,6 +35,7 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+import { init as initReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import {
     submitComponentEvent,
@@ -227,6 +228,10 @@ export const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
+
+    useEffect(() => {
+        initReaderRevenueDevUtils(CAPI.shouldHideReaderRevenue);
+    }, [CAPI.shouldHideReaderRevenue]);
 
     const pillar = decidePillar(CAPI);
 

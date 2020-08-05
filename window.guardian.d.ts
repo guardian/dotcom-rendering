@@ -39,6 +39,13 @@ declare global {
                 emotionCore: any;
                 emotionTheming: any;
             };
+            readerRevenue: {
+                changeGeolocation: (asExistingSupporter: boolean) => void;
+                showMeTheEpic: (asExistingSupporter: boolean) => void;
+                showMeTheBanner: (asExistingSupporter: boolean) => void;
+                showNextVariant: (asExistingSupporter: boolean) => void;
+                showPreviousVariant: (asExistingSupporter: boolean) => void;
+            }
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
