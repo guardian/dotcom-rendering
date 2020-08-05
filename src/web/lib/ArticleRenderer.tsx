@@ -3,16 +3,19 @@ import { css } from 'emotion';
 
 import { AudioBlockComponent } from '@root/src/web/components/elements/AudioBlockComponent';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
+import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
-import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
+import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
@@ -21,9 +24,12 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 
-import { ExplainerAtom, InteractiveAtom } from '@guardian/atoms-rendering';
+import {
+    ExplainerAtom,
+    InteractiveAtom,
+    QandaAtom,
+} from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
 // This is required for spacefinder to work!
@@ -47,13 +53,13 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
+                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                     return (
                         <AudioBlockComponent
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            title={element.title}
+                            embedUrl={element.web.embedUrl}
+                            height={element.web.height}
+                            width={element.web.width}
+                            title={element.web.title}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -79,8 +85,24 @@ export const ArticleRenderer: React.FC<{
                             isOverlayed={element.isOverlayed}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
+                    return (
+                        <DisclaimerBlockComponent
+                            html={element.html}
+                            pillar={pillar}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
+                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+                    return (
+                        <div id={`callout-${i}`}>
+                            <CalloutBlockComponent
+                                callout={element}
+                                pillar={pillar}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
                     return null; // will be filled shortly with the ChartAtom from atoms-rendering
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
@@ -128,6 +150,15 @@ export const ArticleRenderer: React.FC<{
                     return (
                         <InstagramBlockComponent key={i} element={element} />
                     );
+                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                    return (
+                        <InteractiveAtom
+                            id={element.id}
+                            html={element.html}
+                            js={element.js}
+                            css={element.css}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
                     return (
                         <MultiImageBlockComponent
@@ -149,12 +180,29 @@ export const ArticleRenderer: React.FC<{
                             role={element.role}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.QABlockElement':
+                    return (
+                        <div id={`qanda-atom-${i}`}>
+                            <QandaAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandHandler={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return <div key={i} id={`rich-link-${i}`} />;
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
                     );
+                case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
+                    return <SpotifyBlockComponent element={element} />;
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
@@ -163,15 +211,19 @@ export const ArticleRenderer: React.FC<{
                     return <TableBlockComponent element={element} />;
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return (
-                        <TextBlockComponent
-                            key={i}
-                            isFirstParagraph={i === 0}
-                            html={element.html}
-                            pillar={pillar}
-                            display={display}
-                            designType={designType}
-                            forceDropCap={element.dropCap}
-                        />
+                        <>
+                            <TextBlockComponent
+                                key={i}
+                                isFirstParagraph={i === 0}
+                                html={element.html}
+                                pillar={pillar}
+                                display={display}
+                                designType={designType}
+                                forceDropCap={element.dropCap}
+                            />
+                            {/* Insert the placeholder for the sign in gate on the 2nd paragrah */}
+                            {i === 1 && <span id="sign-in-gate" />}
+                        </>
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
@@ -232,36 +284,14 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
-                case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-                    return (
-                        <InteractiveAtom
-                            id={element.id}
-                            html={element.html}
-                            js={element.js}
-                            css={element.css}
-                        />
-                    );
-                case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-                    return (
-                        <div id={`callout-${i}`}>
-                            <CalloutBlockComponent
-                                callout={element}
-                                pillar={pillar}
-                            />
-                        </div>
-                    );
-
-                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.QABlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;

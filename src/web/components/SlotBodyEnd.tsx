@@ -16,7 +16,7 @@ import {
 } from '@root/src/web/lib/contributions';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
-    sendOphanContributionsComponentEvent,
+    sendOphanComponentEvent,
     TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '../browser/cookie';
@@ -81,7 +81,7 @@ const buildPayload = (props: Props) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_EPIC',
+            ophanComponentId: '', // TODO: Remove ophanComponentId from @guardian/automat-client/dist/types.d.ts Tracking type
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
@@ -148,6 +148,7 @@ const MemoisedInner = ({
 
         window.guardian.automat = {
             react: React,
+            preact: React, // temp while we deploy newer contributions-service at which point client-lib does this for us
             emotionCore,
             emotionTheming,
             emotion,
@@ -186,11 +187,7 @@ const MemoisedInner = ({
                             onReminderOpen: sendOphanReminderOpenEvent,
                         });
                         setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-                        sendOphanContributionsComponentEvent(
-                            'INSERT',
-                            meta,
-                            'ACQUISITIONS_EPIC',
-                        );
+                        sendOphanComponentEvent('INSERT', meta);
                     })
                     // eslint-disable-next-line no-console
                     .catch((error) => console.log(`epic - error is: ${error}`));
@@ -201,12 +198,11 @@ const MemoisedInner = ({
     // Should only run once
     useEffect(() => {
         if (hasBeenSeen && epicMeta) {
-            logView(epicMeta.abTestName);
-            sendOphanContributionsComponentEvent(
-                'VIEW',
-                epicMeta,
-                'ACQUISITIONS_EPIC',
-            );
+            const { abTestName } = epicMeta;
+
+            logView(abTestName);
+
+            sendOphanComponentEvent('VIEW', epicMeta);
         }
     }, [hasBeenSeen, epicMeta]);
 

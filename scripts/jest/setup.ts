@@ -44,6 +44,7 @@ const windowGuardian = {
     },
     automat: {
         react: undefined,
+        preact: undefined,
         emotion: undefined,
         emotionCore: undefined,
         emotionTheming: undefined,

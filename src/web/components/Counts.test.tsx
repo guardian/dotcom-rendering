@@ -100,12 +100,12 @@ describe('Counts', () => {
         expect(getByTestId('short-share-count').innerHTML).toBe('25k');
     });
 
-    it('It should still show zero even if the share count is zero', () => {
+    it('It should not show zero if the share count is zero', () => {
         useApi.mockReturnValue({
             data: { share_count: 0 },
         });
 
-        const { queryAllByTestId, getByTestId } = render(
+        const { queryAllByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
@@ -116,7 +116,7 @@ describe('Counts', () => {
         );
 
         expect(queryAllByTestId('long-comment-count').length).toBe(1);
-        expect(getByTestId('short-share-count').innerHTML).toBe('0');
+        expect(queryAllByTestId('short-share-count').length).toBe(0);
     });
 
     it('It should still render the comment component even if there are no comments', () => {
@@ -160,7 +160,7 @@ describe('Counts', () => {
         expect(queryAllByTestId('numbers-border').length).toBe(1);
     });
 
-    it('It should still render the border even if both comments and shares are at zero', () => {
+    it('It should not render the border if both comments and shares are at zero', () => {
         useApi.mockReturnValue({
             data: { share_count: 0, counts: [{ id: 'abc', count: 90 }] },
         });
@@ -175,9 +175,9 @@ describe('Counts', () => {
             />,
         );
 
-        expect(queryAllByTestId('long-share-count').length).toBe(1);
+        expect(queryAllByTestId('long-share-count').length).toBe(0);
         expect(queryAllByTestId('long-comment-count').length).toBe(1);
-        expect(queryAllByTestId('numbers-border').length).toBe(1);
+        expect(queryAllByTestId('numbers-border').length).toBe(0);
     });
 
     it('It should not render the border if comments are disabled', () => {

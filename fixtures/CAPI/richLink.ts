@@ -2586,12 +2586,23 @@ export const richLink: CAPIType = {
                 },
                 {
                     _type:
-                        'model.dotcomrendering.pageElements.AudioBlockElement',
-                    embedUrl:
-                        'https://open.spotify.com/embed/album/3HNnxK7NgLXbDoxRZxNWiR',
-                    height: 380,
-                    width: 300,
-                    title: 'Eminems Kamikaze album',
+                        'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+                    amp: {
+                        id: 'd6d509cf-ca10-407f-8913-e16a3712f415',
+                        kicker: 'Football Weekly Extra Extra',
+                        coverUrl:
+                            'https://media.guim.co.uk/95972cd44af49b3a457f95c36e7ddfdde1116d14/0_346_5618_3373/500.jpg',
+                        trackUrl:
+                            'https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3',
+                        duration: 849,
+                    },
+                    web: {
+                        embedUrl:
+                            'https://open.spotify.com/embed/album/3HNnxK7NgLXbDoxRZxNWiR',
+                        height: 380,
+                        width: 300,
+                        title: 'Eminems Kamikaze album',
+                    },
                 },
             ],
             createdOn: 1535717841000,

@@ -4,7 +4,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { neutral } from '@guardian/src-foundations';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { until } from '@guardian/src-foundations/mq';
 
 const brandingStyle = css`
@@ -23,6 +22,9 @@ const brandingLogoStyle = css`
     max-width: 220px;
     width: 100%;
     padding: 10px 0;
+    img {
+        max-width: 100%;
+    }
 `;
 
 const brandingAboutLink = (pillar: Pillar) => css`
@@ -44,22 +46,14 @@ export const Branding: React.FC<{
         <div className={brandingStyle}>
             <div className={brandingLabelStyle}>{branding.logo.label}</div>
             <div className={brandingLogoStyle}>
-                <MaintainAspectRatio
-                    height={branding.logo.dimensions.height}
-                    width={branding.logo.dimensions.width}
+                <a
+                    href={branding.logo.link}
+                    data-sponsor={branding.sponsorName.toLowerCase()}
+                    rel="nofollow"
+                    aria-label={`Visit the ${branding.sponsorName} website`}
                 >
-                    <a
-                        href={branding.logo.link}
-                        data-sponsor={branding.sponsorName.toLowerCase()}
-                        rel="nofollow"
-                        aria-label={`Visit the ${branding.sponsorName} website`}
-                    >
-                        <img
-                            src={branding.logo.src}
-                            alt={branding.sponsorName}
-                        />
-                    </a>
-                </MaintainAspectRatio>
+                    <img src={branding.logo.src} alt={branding.sponsorName} />
+                </a>
             </div>
 
             <a
