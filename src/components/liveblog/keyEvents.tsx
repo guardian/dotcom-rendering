@@ -4,7 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { LiveBlock } from 'liveBlock';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { map, withDefault } from '@guardian/types/option';

@@ -112,7 +112,7 @@ const captionElement = (format: Format) => (node: Node, key: number): ReactNode 
     }
 }
 
-const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
+export const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(captionElement(format));
 
 
