@@ -104,13 +104,15 @@ const init = (shouldHideReaderRevenue: boolean) => {
         })
     };
 
-    window.guardian.readerRevenue = {
-        changeGeolocation,
-        showMeTheEpic,
-        showMeTheBanner,
-        showNextVariant,
-        showPreviousVariant
-    };
+    if (window && window.guardian) {
+        window.guardian.readerRevenue = {
+            changeGeolocation,
+            showMeTheEpic,
+            showMeTheBanner,
+            showNextVariant,
+            showPreviousVariant
+        };
+    }
 };
 
 export {
