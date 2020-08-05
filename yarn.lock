@@ -2074,11 +2074,6 @@
   resolved "https://registry.yarnpkg.com/@braze/web-sdk-core/-/web-sdk-core-2.7.0.tgz#14e8d82472a7b9b83818bd251f68027aaa5b9469"
   integrity sha512-pbWfaAPOL3O/5HkIkp7nK7L2H1k9RC6xtFazlAXSXlC0obwTNvuyC0229K0aTpT7NVtuMa1Oxutxfj1Pl2+o1A==
 
-"@braze/web-sdk@^2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-2.7.0.tgz#3bfd735bfb54f6d02ff09e2efb3f9aef8cb053c2"
-  integrity sha512-itn5M8xfsX4jtm6yfMnIXfOf8UPg0rYVhLriLAL5qZ2a/xO1Jpb4YYvR9j5VR1kVwTHJuTmMBsbSNnyOUtWCLw==
-
 "@chromaui/localtunnel@2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@chromaui/localtunnel/-/localtunnel-2.0.1.tgz#2d4cef4efa189a2a2f015d639e754956c54cacd1"
