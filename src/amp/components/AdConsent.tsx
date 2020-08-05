@@ -37,7 +37,39 @@ const stack = css`
     }
 `;
 
-const domain = 'consent.theguardian.test';
+const domain = 'sourcepoint.theguardian.com';
+
+const clientConfig = {
+    accountId: 1257,
+    mmsDomain: `https://${domain}`,
+    propertyId: 8791,
+    propertyHref: 'https://theguardian.amp',
+    pmTab: 'purposes',
+    stageCampaign: false,
+};
+
+const clientConfigTcfv2 = {
+    ...clientConfig,
+    privacyManagerId: 145885,
+    isTCFV2: true,
+    isCCPA: false,
+    targetingParams: {
+        framework: 'tcfv2',
+    },
+};
+
+const clientConfigCcpa = {
+    ...clientConfig,
+    privacyManagerId: '5eba7ef78c167c47ca8b433d',
+    isTCFV2: false,
+    isCCPA: true,
+    // getDnsMsgMms: true,
+    // alwaysDisplayDns: false,
+    // showNoticeUntilAction: true,
+    targetingParams: {
+        framework: 'ccpa',
+    },
+};
 
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
@@ -50,7 +82,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         ISOCountryGroups: {
                             eea: ['preset-eea', 'unknown'],
-                            us: ['us', 'ca'],
+                            us: ['us'],
                             au: ['au', 'nz'],
                         },
                     }}
@@ -69,46 +101,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         checkConsentHref: `https://${domain}/wrapper/tcfv2/v1/amp`,
                         promptUISrc: `https://${domain}/amp/index.html`,
                         postPromptUI: 'consent-ui-manager',
-                        clientConfig: {
-                            accountId: 1257,
-                            mmsDomain: `https://${domain}`,
-                            propertyHref: 'https://theguardian.amp',
-                            propertyId: 8791,
-                            privacyManagerId: 145885,
-                            isTCFV2: true,
-                            pmTab: 'purposes',
-                            stageCampaign: false,
-                            targetingParams: {
-                                framework: 'tcfv2',
-                            },
-                        },
+                        clientConfig: clientConfigTcfv2,
                         geoOverride: {
                             us: {
-                                clientConfig: {
-                                    accountId: 1257,
-                                    mmsDomain: `https://${domain}`,
-                                    propertyHref: 'https://theguardian.amp',
-                                    // TODO: update AMP CCPA IDs
-                                    propertyId: 8791,
-                                    privacyManagerId: 145885,
-                                    isTCFV2: false,
-                                    pmTab: 'purposes',
-                                    stageCampaign: false,
-                                    targetingParams: {
-                                        framework: 'ccpa',
-                                    },
-                                },
+                                // postPromptUI: 'consent-ui-ccpa',
+                                checkConsentHref: `https://${domain}/ccpa/consent/amp`,
+                                clientConfig: clientConfigCcpa,
                             },
                         },
-                        // policy: {
-                        //     default: {
-                        //         waitFor: { sourcepoint: [] },
-                        //         timeout: {
-                        //             seconds: 5,
-                        //             fallbackAction: 'reject',
-                        //         },
-                        //     },
-                        // },
                     }}
                 />
                 <ThemeProvider theme={brand}>
@@ -144,7 +144,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 priority="tertiary"
                                 on="tap:consent.reject"
                             >
-                                I do not want to see personalised ads
+                                Do not sell my data
                             </Button>
                         </div>
                     </div>
