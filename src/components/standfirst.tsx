@@ -13,7 +13,6 @@ import { Display, Design } from '@guardian/types/Format';
 import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
-
 // ----- Component ----- //
 
 interface Props {
@@ -91,7 +90,6 @@ const getStyles = (item: Item): SerializedStyles => {
             return css(styles, normalHeadline);
     }
 }
-
 function content(standfirst: DocumentFragment, item: Item): ReactNode {
     const format = getFormat(item);
     const rendered = renderStandfirstText(standfirst, format);
