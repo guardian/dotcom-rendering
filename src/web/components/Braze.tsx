@@ -28,7 +28,7 @@ export const Braze = ({ brazeUuid }: Props) => {
     useEffect(() => {
         if (brazeSwitch && apiKey && brazeUuid && hasGivenConsent) {
             import(
-                /* webpackChunkName: "braze-web-sdk" */ '@braze/web-sdk'
+                /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
             ).then(({ default: appboy }) => {
                 appboy.initialize(apiKey, {
                     enableLogging: true,

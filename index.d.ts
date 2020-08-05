@@ -743,7 +743,7 @@ declare type BrazeMessageConfig = {
     };
 };
 
-declare module '@braze/web-sdk' {
+declare module '@braze/web-sdk-core' {
     type InAppMessageCallback = (config: BrazeMessageConfig) => void;
 
     type AppBoy = {
