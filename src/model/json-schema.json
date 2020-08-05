@@ -15,7 +15,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AudioAtomElement"
+                        "$ref": "#/definitions/AudioAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
@@ -380,7 +380,7 @@
         "webURL"
     ],
     "definitions": {
-        "AudioAtomElement": {
+        "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -389,30 +389,11 @@
                         "model.dotcomrendering.pageElements.AudioAtomBlockElement"
                     ]
                 },
-                "id": {
-                    "type": "string"
-                },
-                "kicker": {
-                    "type": "string"
-                },
-                "trackUrl": {
-                    "type": "string"
-                },
-                "duration": {
-                    "type": "number"
-                },
-                "coverUrl": {
-                    "type": "string"
+                "amp": {
+                    "type": "object"
                 }
             },
-            "required": [
-                "_type",
-                "coverUrl",
-                "duration",
-                "id",
-                "kicker",
-                "trackUrl"
-            ]
+            "required": ["_type", "amp"]
         },
         "AudioBlockElement": {
             "type": "object",
@@ -1833,7 +1814,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/AudioAtomElement"
+                                "$ref": "#/definitions/AudioAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"
