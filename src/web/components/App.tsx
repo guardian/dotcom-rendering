@@ -36,11 +36,11 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
+import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
 import {
     submitComponentEvent,
     OphanComponentEvent,
 } from '../browser/ophan/ophan';
-import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
 
 // *******************************
 // ****** Dynamic imports ********
@@ -234,7 +234,9 @@ export const App = ({ CAPI, NAV }: Props) => {
         const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
             import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
                 .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+                /* eslint-disable no-console */
                 .catch(error => console.log('Error loading readerRevenueDevUtils', error));
+                /* eslint-enable no-console */
 
         window.guardian.readerRevenue = {
             changeGeolocation: loadAndRun('changeGeolocation'),
