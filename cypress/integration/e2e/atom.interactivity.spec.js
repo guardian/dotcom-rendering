@@ -4,6 +4,9 @@
 const qandaUrl =
     'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';
 
+const guideUrl =
+    'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
+
 describe('Atom Interactivity', function () {
     describe('Q&A Atom', function () {
         it('should render', function () {
@@ -60,5 +63,38 @@ describe('Atom Interactivity', function () {
             cy.get('[data-testid="like"]').click();
         });
         */
+    });
+
+    describe('Guide Atom', function () {
+        it('should render', function () {
+            cy.visit(`/Article?url=${guideUrl}`);
+            cy.get('[data-snippet-type="guide"]').should('be.visible');
+        });
+
+        it('should expand on click', function () {
+            cy.visit(`/Article?url=${guideUrl}`);
+            cy.get('[data-snippet-type="guide"]').should('be.visible');
+            cy.get('[data-snippet-type="guide"]')
+                .contains('Show')
+                .should('not.be.null');
+            cy.get('[data-snippet-type="guide"]').click();
+            cy.get('[data-snippet-type="guide"]')
+                .contains('Hide')
+                .should('not.be.null');
+        });
+
+        it('should show feedback message when like is clicked', function () {
+            cy.visit(`/Article?url=${guideUrl}`);
+            cy.get('[data-snippet-type="guide"]').click();
+            cy.get('[data-testid="like"]').click();
+            cy.get('[data-testid="feedback"]').should('be.visible');
+        });
+
+        it('should show feedback message when dislike is clicked', function () {
+            cy.visit(`/Article?url=${guideUrl}`);
+            cy.get('[data-snippet-type="guide"]').click();
+            cy.get('[data-testid="dislike"]').click();
+            cy.get('[data-testid="feedback"]').should('be.visible');
+        });
     });
 });
