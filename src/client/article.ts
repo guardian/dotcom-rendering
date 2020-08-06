@@ -122,7 +122,9 @@ function submit(body: FormData, form: Element): void {
     .then(() => {
         const message = document.createElement('p');
         message.textContent = 'Thank you for your contribution';
-        form.replaceChild(message, form.firstChild);
+        if (form.firstChild) {
+            form.replaceChild(message, form.firstChild);
+        }
     })
     .catch(() => {
         const errorPlaceholder = form.querySelector('.js-error-message');
@@ -171,7 +173,7 @@ function callouts(): void {
         form.addEventListener('submit', async (e): Promise<void> => {
             try {
                 e.preventDefault();
-                const elements = form.elements as HTMLCollectionOf<HTMLInputElement>;
+                const elements = form.getElementsByTagName('input');
                 const data = Array.from(elements).reduce(async (o: Promise<FormData>, elem) => {
                     const acc = await o;
                     const { type, checked, name, value, files } = elem;

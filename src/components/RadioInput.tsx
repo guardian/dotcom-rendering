@@ -19,10 +19,9 @@ const labelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
-
 const RadioInput = (props: RadioInputProps): ReactElement =>
     <>
-        <label css={labelStyles} htmlFor={props.name}>{props.label}</label>
+        <label css={labelStyles}>{props.label}</label>
         <RadioGroup name={props.name} orientation="horizontal" cssOverrides={radioStyles}>
             {
                 props.options.map(({ value, label }) => {

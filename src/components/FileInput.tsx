@@ -25,6 +25,7 @@ const FileInput = (props: FileInputProps): ReactElement =>
     <>
         <label css={labelStyles} htmlFor={props.name}>{props.label} {optionalLabel}</label>
         <input
+            id={props.name}
             name={props.name}
             type="file"
             accept="image/*, .pdf"
