@@ -35,12 +35,12 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
-import { init as initReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import {
     submitComponentEvent,
     OphanComponentEvent,
 } from '../browser/ophan/ophan';
+import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
 
 // *******************************
 // ****** Dynamic imports ********
@@ -230,7 +230,19 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        initReaderRevenueDevUtils(CAPI.shouldHideReaderRevenue);
+        // Used internally only, so only import each function on demand
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
+            import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
+                .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+                .catch(error => console.log('Error loading readerRevenueDevUtils', error));
+
+        window.guardian.readerRevenue = {
+            changeGeolocation: loadAndRun('changeGeolocation'),
+            showMeTheEpic: loadAndRun('showMeTheEpic'),
+            showMeTheBanner: loadAndRun('showMeTheBanner'),
+            showNextVariant: loadAndRun('showNextVariant'),
+            showPreviousVariant: loadAndRun('showPreviousVariant'),
+        }
     }, [CAPI.shouldHideReaderRevenue]);
 
     const pillar = decidePillar(CAPI);

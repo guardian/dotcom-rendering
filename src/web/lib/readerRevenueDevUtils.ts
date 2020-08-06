@@ -46,75 +46,76 @@ const decrementMvtCookie = (): void => {
     }
 };
 
-const init = (shouldHideReaderRevenue: boolean) => {
 
-    const clearCommonReaderRevenueStateAndReload = (asExistingSupporter: boolean): void => {
-        if (shouldHideReaderRevenue) {
-            /* eslint-disable no-alert */
-            alert(
-                'This page has "Prevent membership/contribution appeals" ticked in Composer. Please try a different page'
-            );
-            /* eslint-enable no-alert */
-            return;
-        }
-
-        readerRevenueCookies.forEach(cookie => removeCookie(cookie));
-        clearEpicViewLog();
-
-        if (asExistingSupporter) {
-            fakeOneOffContributor();
-        }
-
-        window.location.reload();
-    };
-
-    const showMeTheEpic = (asExistingSupporter: boolean = false): void => {
-        clearCommonReaderRevenueStateAndReload(asExistingSupporter);
-    };
-
-    const showMeTheBanner = (asExistingSupporter: boolean = false): void => {
-        clearBannerLastClosedAt();
-        setAlreadyVisited(2);
-        clearCommonReaderRevenueStateAndReload(asExistingSupporter);
-    };
-
-    const showNextVariant = (asExistingSupporter: boolean = false): void => {
-        incrementMvtCookie();
-        clearCommonReaderRevenueStateAndReload(asExistingSupporter);
-    };
-
-    const showPreviousVariant = (asExistingSupporter: boolean = false): void => {
-        decrementMvtCookie();
-        clearCommonReaderRevenueStateAndReload(asExistingSupporter);
-    };
-
-    const changeGeolocation = (asExistingSupporter: boolean = false): void => {
-        getCountryCode().then(current => {
-            /* eslint-disable no-alert */
-            const geo = window.prompt(
-                `Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`
-            );
-            if (geo === 'UK') {
-                alert(`'UK' is not a valid geolocation - please use 'GB' instead!`);
-            } else if (geo) {
-                setCountryCode(geo);
-                clearCommonReaderRevenueStateAndReload(asExistingSupporter);
-            }
-            /* eslint-enable no-alert */
-        })
-    };
-
-    if (window && window.guardian) {
-        window.guardian.readerRevenue = {
-            changeGeolocation,
-            showMeTheEpic,
-            showMeTheBanner,
-            showNextVariant,
-            showPreviousVariant
-        };
+const clearCommonReaderRevenueStateAndReload = (asExistingSupporter: boolean, shouldHideReaderRevenue: boolean): void => {
+    if (shouldHideReaderRevenue) {
+        /* eslint-disable no-alert */
+        alert(
+            'This page has "Prevent membership/contribution appeals" ticked in Composer. Please try a different page'
+        );
+        /* eslint-enable no-alert */
+        return;
     }
+
+    readerRevenueCookies.forEach(cookie => removeCookie(cookie));
+    clearEpicViewLog();
+
+    if (asExistingSupporter) {
+        fakeOneOffContributor();
+    }
+
+    window.location.reload();
 };
 
-export {
-    init
+const showMeTheEpic = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+};
+
+const showMeTheBanner = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+    clearBannerLastClosedAt();
+    setAlreadyVisited(2);
+    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+};
+
+const showNextVariant = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+    incrementMvtCookie();
+    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+};
+
+const showPreviousVariant = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+    decrementMvtCookie();
+    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+};
+
+const changeGeolocation = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+    getCountryCode().then(current => {
+        /* eslint-disable no-alert */
+        const geo = window.prompt(
+            `Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`
+        );
+        if (geo === 'UK') {
+            alert(`'UK' is not a valid geolocation - please use 'GB' instead!`);
+        } else if (geo) {
+            setCountryCode(geo);
+            clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+        }
+        /* eslint-enable no-alert */
+    })
+};
+
+type ReaderRevenueDevUtil = (asExistingSupporter: boolean, shouldHideReaderRevenue: boolean) => void;
+export interface ReaderRevenueDevUtils {
+    changeGeolocation: ReaderRevenueDevUtil;
+    showMeTheEpic: ReaderRevenueDevUtil;
+    showMeTheBanner: ReaderRevenueDevUtil;
+    showNextVariant: ReaderRevenueDevUtil;
+    showPreviousVariant: ReaderRevenueDevUtil;
 }
+
+export {
+    changeGeolocation,
+    showMeTheEpic,
+    showMeTheBanner,
+    showNextVariant,
+    showPreviousVariant
+};
