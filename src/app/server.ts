@@ -44,24 +44,20 @@ const buildUrlFromQueryParam = (req: Request) => {
     return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 };
 
-const buildUrlFromPath = (req: Request) => {
-    // Supports urls such as:
-    // http://localhost:9000/tv-and-radio/2020/apr/26/normal-people-review-sally-rooney-bbc-hulu
-    // Note. Defaults to using production frontend
-    return `https://www.theguardian.com${req.url}.json?dcr=true`;
-};
-
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     logger.info('dotcom-rendering is GO.');
-    getGuardianConfiguration('prod')
-        .then((config: GuardianConfiguration) => {
-            log(`loaded ${config.size()} configuration parameters`);
-        })
-        .catch((err: any) => {
-            warn('Failed to get configuration. Bad AWS credentials?');
-            warn(err);
-        });
+
+    if (process.env.DISABLE_LOGGING_AND_METRICS !== "true") {
+       getGuardianConfiguration('prod')
+           .then((config: GuardianConfiguration) => {
+               log(`loaded ${config.size()} configuration parameters`);
+           })
+           .catch((err: any) => {
+               warn('Failed to get configuration. Bad AWS credentials?');
+               warn(err);
+           });
+    }
 
     const app = express();
 
@@ -144,32 +140,19 @@ if (process.env.NODE_ENV === 'production') {
         }
     });
 
-    app.get('*', async (req: Request, res: Response) => {
-        // Eg. http://localhost:9000/commentisfree/...
-        try {
-            const url = buildUrlFromPath(req);
-            const { html, ...config } = await fetch(url).then((article) =>
-                article.json(),
-            );
-
-            req.body = config;
-            return renderArticle(req, res);
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error(error);
-        }
-    });
-
     // express requires all 4 args here:
-    app.use((err: any, req: any, res: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    app.use((err: any, req: any, res: any, next: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 
-    setInterval(() => {
-        recordBaselineCloudWatchMetrics();
-    }, 10 * 1000);
+    if (process.env.DISABLE_LOGGING_AND_METRICS !== "true") {
+        setInterval(() => {
+            recordBaselineCloudWatchMetrics();
+        }, 10 * 1000);
+    }
 
     app.listen(port);
     // eslint-disable-next-line no-console
-    console.log(`Started production server on port ${port}`);
+    console.log(`Started production server on port ${port}\nready`);
 }

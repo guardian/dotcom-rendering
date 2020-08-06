@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -12,7 +14,10 @@ import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
+import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
+
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import { QandaAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -27,9 +32,14 @@ import { getUser } from '@root/src/web/lib/getUser';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 
-import { useAB } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
+import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+
+import {
+    submitComponentEvent,
+    OphanComponentEvent,
+} from '../browser/ophan/ophan';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -123,6 +133,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     const ABTestAPI = useAB();
     useEffect(() => {
         const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+        ABTestAPI.trackABTests(allRunnableTests);
         ABTestAPI.registerImpressionEvents(allRunnableTests);
         ABTestAPI.registerCompleteEvents(allRunnableTests);
     }, [ABTestAPI]);
@@ -174,12 +185,18 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementAlreadyVisited();
     }, []);
 
+    useEffect(() => {
+        incrementDailyArticleCount();
+    }, []);
+
     // Log an article view using the Slot Machine client lib
     // This function must be called once per article serving.
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        if (!hasOptedOutOfArticleCount()) {
+            incrementWeeklyArticleCount();
+        }
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -242,7 +259,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
-                    enableAusMoment2020Header={CAPI.config.ausMoment2020Header}
                 />
             </Portal>
             <Hydrate root="links-root">
@@ -287,6 +303,53 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.qandaAtoms.map((qandaAtom) => (
+                <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
+                    <QandaAtom
+                        id={qandaAtom.id}
+                        title={qandaAtom.title}
+                        html={qandaAtom.html}
+                        image={qandaAtom.img}
+                        credit={qandaAtom.credit}
+                        likeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'LIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        dislikeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'DISLIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        expandHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'QANDA_ATOM',
+                                    id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'EXPAND',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                    />
                 </Hydrate>
             ))}
             <Portal root="share-comment-counts">
@@ -378,6 +441,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </Suspense>
                 </Lazy>
             </Portal>
+            <Portal root="sign-in-gate">
+                <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
+            </Portal>
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
                 these cases we will be scrolling to comments and want them loaded */}
@@ -417,7 +483,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="footer : "
                         inHeader={false}
-                        enableAusMoment2020Header={false}
                     />
                 </Lazy>
             </Portal>

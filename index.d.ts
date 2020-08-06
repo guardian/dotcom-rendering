@@ -319,8 +319,11 @@ type CAPIBrowserType = {
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
         remoteBanner: boolean;
+        remoteSubscriptionsBanner: boolean;
         ausMoment2020Header: boolean;
         switches: CAPIType['config']['switches'];
+        host?: string;
+        idUrl?: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -351,6 +354,7 @@ type CAPIBrowserType = {
     isPhotoEssay: boolean;
     matchUrl?: string;
     callouts: CalloutBlockElement[];
+    qandaAtoms: QABlockElement[];
 };
 
 interface TagType {
@@ -581,6 +585,8 @@ interface ConfigType extends CommercialConfigType {
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
     references?: { [key: string]: string }[];
+    host?: string;
+    idUrl?: string;
 }
 
 interface GADataType {
@@ -646,7 +652,9 @@ type IslandType =
     | 'match-nav'
     | 'match-stats'
     | 'callout'
-    | 'comments';
+    | 'comments'
+    | 'qanda-atom'
+    | 'sign-in-gate';
 
 interface TrailType {
     designType: DesignType;
