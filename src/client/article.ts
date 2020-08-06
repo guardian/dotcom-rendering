@@ -189,7 +189,7 @@ function callouts(): void {
             } catch(e) {
                 const errorPlaceholder = form.querySelector('.error-message');
                 if (errorPlaceholder) {
-                    errorPlaceholder.innerHTML = "There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB"
+                    errorPlaceholder.textContent = "There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB"
                 }
             }
         })
