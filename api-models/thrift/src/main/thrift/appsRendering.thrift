@@ -3,6 +3,20 @@ include "content/v1.thrift"
 namespace scala com.gu.mobile.ar.models
 namespace typescript _at_guardian.apps_rendering_api_models
 
+enum RelatedItemType {
+    ARTICLE,
+    FEATURE,
+    ANALYSIS,
+    GALLERY,
+    SPECIAL,
+    AUDIO,
+    LIVE,
+    VIDEO,
+    REVIEW,
+    ADVERTISEMENT_FEATURE,
+    GUARDIAN_VIEW
+}
+
 struct Image {
     1: required string url
     2: required i32 height
@@ -14,6 +28,10 @@ struct RelatedItem {
     2: optional v1.CapiDateTime lastModified
     3: optional Image headerImage
     4: required string link
+    5: required RelatedItemType type
+    6: required v1.Pillar pillar
+    7: optional string length
+    8: optional string starRating
 }
 
 struct RelatedContent {

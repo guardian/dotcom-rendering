@@ -5,6 +5,7 @@ import { createHash } from 'crypto';
 
 import { Option, some, none, fromNullable, andThen, map } from '@guardian/types/option';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
 import { pipe2 } from 'lib';
@@ -31,7 +32,8 @@ const lowerQuality = 45;
 
 enum Role {
     Thumbnail,
-    HalfWidth
+    HalfWidth,
+    Card
 }
 
 const enum Dpr {
@@ -159,6 +161,24 @@ const parseImage = ({ docParser, salt }: Context) =>
     );
 };
 
+const parseCardImage = (image: CardImage | undefined, salt: string): Option<Image> => {
+    if (image === undefined) {
+        return none;
+    }
+
+    return some({
+        src: src(salt, image.url, 500, Dpr.One),
+        ...srcsets(image.url, salt),
+        alt: none,
+        width: image.width,
+        height: image.height,
+        caption: none,
+        credit: none,
+        nativeCaption: none,
+        role: some(Role.Card),
+    });
+}
+
 
 // ----- Exports ----- //
 
@@ -171,5 +191,6 @@ export {
     srcsetWithWidths,
     sign,
     parseImage,
+    parseCardImage,
     BodyImageProps
 };

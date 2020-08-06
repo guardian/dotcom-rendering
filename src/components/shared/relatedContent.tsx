@@ -6,9 +6,10 @@ import Card from 'components/shared/card';
 import { css } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import { ResizedRelatedContent } from 'item';
 
 interface Props {
-    content: Option<RelatedContent>;
+    content: Option<ResizedRelatedContent>;
 }
 
 const styles = css`
@@ -36,13 +37,13 @@ const styles = css`
 const RelatedContent = ({ content }: Props): JSX.Element => {
     return pipe2(
         content,
-        map(({ title, relatedItems }) => {
+        map(({ title, relatedItems, resizedImages }) => {
             return <section css={styles}>
                 <h1>{title}</h1>
                 <ul>
                     {
                         relatedItems.map((item, key) => {
-                            return <Card key={key} item={item}/>
+                            return <Card key={key} item={item} image={resizedImages[key]}/>
                         })
                     }
                 </ul>

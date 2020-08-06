@@ -19,6 +19,7 @@ import { pipe2 } from 'lib';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
+import { Image, parseCardImage } from 'image';
 
 // ----- Item Type ----- //
 
@@ -36,7 +37,11 @@ interface Fields extends Format {
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
     commentCount: Option<number>;
-    relatedContent: Option<RelatedContent>;
+    relatedContent: Option<ResizedRelatedContent>;
+}
+
+interface ResizedRelatedContent extends RelatedContent {
+    resizedImages: Option<Image>[];
 }
 
 interface Liveblog extends Fields {
@@ -152,7 +157,10 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
         branding: fromNullable(branding),
         commentCount: fromNullable(commentCount),
-        relatedContent: fromNullable(relatedContent)
+        relatedContent: pipe2(relatedContent, fromNullable, map(relatedContent => ({
+            ...relatedContent,
+            resizedImages: relatedContent.relatedItems.map(item => parseCardImage(item.headerImage, context.salt))
+        })))
     }
 }
 
@@ -311,6 +319,7 @@ export {
     Review,
     AdvertisementFeature,
     Standard,
+    ResizedRelatedContent,
     fromCapi,
     fromCapiLiveBlog,
     getFormat,

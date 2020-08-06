@@ -7,9 +7,13 @@ import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral } from '@guardian/src-foundations/palette';
+import BodyImage from 'components/bodyImage';
+import { Pillar, Design, Display } from '@guardian/types/Format';
+import { Image } from 'image';
 
 interface Props {
     item: RelatedItem;
+    image: Option<Image>;
 }
 
 const styles = css`
@@ -36,18 +40,17 @@ const styles = css`
 
     h2 {
         ${headline.xxxsmall()};
-        margin: 0 0 ${remSpace[12]} 0;
+        margin: 0 0 0;
         padding: ${remSpace[2]};
+        min-height: 100px;
     }
 
     time {
         ${textSans.small()};
-        float: left;
         color: ${text.supporting};
-        margin-top: ${remSpace[4]};
-        position: absolute;
-        bottom: ${remSpace[2]};
-        left: ${remSpace[2]};
+        text-align: right;
+        width: calc(100% - ${remSpace[2]});
+        display: inline-block;
     }
 `
 
@@ -57,14 +60,28 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
     withDefault<JSX.Element | null>(null),
 );
 
-const Card = ({ item }: Props): JSX.Element => {
+const Card = ({ item, image }: Props): JSX.Element => {
+    const format = {
+        pillar: Pillar.News,
+        design: Design.Article,
+        display: Display.Standard
+    }
+
+    const img = pipe2(
+        image,
+        map(img => {
+            return <BodyImage image={img} format={format}/>
+        }),
+        withDefault(<></>)
+    )
+
     return <a css={styles} href={item.link}>
         <li>
-            <div>
-                <img alt={item.title} src={item.headerImage?.url} />
-            </div>
             <h2>{item.title}</h2>
             {relativeFirstPublished(fromNullable(new Date(item.lastModified?.iso8601 ?? 0)))}
+            <div>
+                {img}
+            </div>
         </li>
     </a>
 }
