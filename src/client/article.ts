@@ -154,7 +154,7 @@ function readFile(file: Blob): Promise<string> {
 }
 
 function callouts(): void {
-    const callouts = Array.from(document.querySelectorAll('details.callout'));
+    const callouts = Array.from(document.querySelectorAll('.js-callout'));
     callouts.forEach(callout => {
         const buttons = Array.from(callout.querySelectorAll('.callout-expand'));
         buttons.forEach(button => {
