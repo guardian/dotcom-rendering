@@ -22,13 +22,13 @@ const styles = css`
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
-    height: calc(100vw * ${height / width});
+    height: ${100 * height / width}vw;
     display: block;
     width: 100%;
     object-fit: cover;
 
     ${from.phablet} {
-        height: calc(620px * ${height / width});
+        height: ${620 * height / width}px;
     }
 
     ${darkModeCss`
