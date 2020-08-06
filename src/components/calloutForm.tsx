@@ -27,11 +27,6 @@ const calloutStyles = css`
     position: relative;
     margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
 
-    h4 {
-        ${headline.xxxsmall({ fontWeight: 'bold' })};
-        margin: 0;
-    }
-
     &:not([open]) .is-on, &[open] .is-off {
         display: none;
     }
@@ -46,43 +41,48 @@ const calloutStyles = css`
         background: ${neutral[97]};
     }
 
-    summary {
-        outline: none;
-        padding: 0;
-        list-style: none;
-        
-        &::-webkit-details-marker {
-            display: none;
-        }
-    
-        .kicker {
-            display: flex;
-            flex-direction: row;
-    
-            > .logo {
-                flex: initial;
-            }
-        }
-    }
-
-    .description {
-        margin: ${remSpace[3]};
-
-        p {
-            ${body.small({ lineHeight: 'tight' })};
-            margin: ${remSpace[2]} 0;
-        }
-    }
-
-    .error-message {
-        color: ${text.error};
-    }
-
     ${darkModeCss`
         background: white;
         color: ${neutral[7]};
         border: none;
     `}
+`;
+
+const summaryStyles = css`
+    outline: none;
+    padding: 0;
+    list-style: none;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+`;
+
+const kickerStyles = css`
+    display: flex;
+    flex-direction: row;
+`;
+
+const logoStyles = css`
+    flex: initial;
+`;
+
+const headlineStyles = css`
+    ${headline.xxxsmall({ fontWeight: 'bold' })};
+    margin: 0;
+`;
+
+const descriptionStyles = css`
+    margin: ${remSpace[3]};
+
+    p {
+        ${body.small({ lineHeight: 'tight' })};
+        margin: ${remSpace[2]} 0;
+    }
+`;
+
+const errorStyles = css`
+    color: ${text.error};
 `;
 
 const speechBubbleStyles = (kicker: string): SerializedStyles => css`
