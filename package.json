@@ -68,7 +68,7 @@
     "@guardian/content-atom-model": "^3.2.2",
     "@guardian/node-riffraff-artifact": "^0.1.9",
     "@guardian/src-brand": "^2.1.0",
-    "@guardian/src-button": "^2.0.0",
+    "@guardian/src-button": "^2.1.0",
     "@guardian/src-foundations": "^2.1.0",
     "@guardian/src-icons": "^2.1.0",
     "@guardian/types": "github:guardian/types",
