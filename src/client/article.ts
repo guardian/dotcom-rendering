@@ -156,7 +156,7 @@ function readFile(file: Blob): Promise<string> {
 function callouts(): void {
     const callouts = Array.from(document.querySelectorAll('.js-callout'));
     callouts.forEach(callout => {
-        const buttons = Array.from(callout.querySelectorAll('.callout-expand'));
+        const buttons = Array.from(callout.querySelectorAll('.js-callout-expand'));
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 callout.toggleAttribute('open');
