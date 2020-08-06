@@ -125,7 +125,7 @@ function submit(body: FormData, form: Element): void {
     .catch(() => {
         const errorPlaceholder = form.querySelector('.error-message');
         if (errorPlaceholder) {
-            errorPlaceholder.innerHTML = "Sorry, there was a problem submitting your form. Please try again later."
+            errorPlaceholder.textContent = "Sorry, there was a problem submitting your form. Please try again later."
         }
     })
 }
