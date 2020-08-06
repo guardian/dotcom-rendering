@@ -3,7 +3,7 @@
 import React, {FC} from 'react';
 import Anchor from "./anchor";
 import {text, withKnobs} from "@storybook/addon-knobs";
-import { Pillar, Design, Display } from 'format';
+import { Pillar, Design, Display } from '@guardian/types/Format';
 import {selectPillar} from "../storybookHelpers";
 
 // ----- Setup ----- //

@@ -4,7 +4,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from 'format';
+import { Pillar } from '@guardian/types/Format';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 

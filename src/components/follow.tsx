@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { Format } from 'format';
+import { Format } from '@guardian/types/Format';
 import { getPillarStyles } from 'pillarStyles';
 import { Contributor, isSingleContributor } from 'contributor';
 import { darkModeCss } from 'styles';

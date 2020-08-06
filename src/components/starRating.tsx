@@ -6,8 +6,8 @@ import { brandAltBackground, text } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
 import { Item } from 'item';
-import { icons } from 'styles';
-import { Design } from 'format';
+import { icons, darkModeCss } from 'styles';
+import { Design } from '@guardian/types/Format';
 
 
 // ----- Subcomponents ----- //
@@ -28,6 +28,10 @@ const starStyles = css`
     &:nth-of-type(5) {
         padding-right: ${remSpace[1]};
     }
+
+    ${darkModeCss`
+        background-color: ${brandAltBackground.ctaSecondary};
+    `}
 `;
 
 const empty = <span css={starStyles}>☆</span>;
