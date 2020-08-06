@@ -26,7 +26,7 @@ describe('Elements', function () {
                 'AMPArticle?url=https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
             );
 
-            getAmpIframeBody().contains('Data from Public Health England');
+            getAmpIframeBody().contains('Data from PHE');
         });
     });
 
