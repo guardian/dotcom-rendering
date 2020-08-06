@@ -123,7 +123,7 @@ function submit(body: FormData, form: Element): void {
         form.innerHTML = "<p>Thank you for your contribution</p>"
     })
     .catch(() => {
-        const errorPlaceholder = form.querySelector('.error-message');
+        const errorPlaceholder = form.querySelector('.js-error-message');
         if (errorPlaceholder) {
             errorPlaceholder.textContent = "Sorry, there was a problem submitting your form. Please try again later."
         }
