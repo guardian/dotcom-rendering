@@ -6,7 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
-import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
+import { ConsentManagementPlatform } from '@guardian/old-cmp/dist/ConsentManagementPlatform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 
