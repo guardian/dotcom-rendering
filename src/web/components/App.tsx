@@ -17,7 +17,7 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom } from '@guardian/atoms-rendering';
+import { QandaAtom, GuideAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -342,6 +342,53 @@ export const App = ({ CAPI, NAV }: Props) => {
                                 component: {
                                     componentType: 'QANDA_ATOM',
                                     id: qandaAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'EXPAND',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.guideAtoms.map((guideAtom) => (
+                <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
+                    <GuideAtom
+                        id={guideAtom.id}
+                        title={guideAtom.title}
+                        html={guideAtom.html}
+                        image={guideAtom.img}
+                        credit={guideAtom.credit}
+                        likeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'GUIDE_ATOM',
+                                    id: guideAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'LIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        dislikeHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'GUIDE_ATOM',
+                                    id: guideAtom.id,
+                                    labels: [],
+                                    products: [],
+                                },
+                                action: 'DISLIKE',
+                            };
+                            submitComponentEvent(componentEvent);
+                        }}
+                        expandHandler={() => {
+                            const componentEvent: OphanComponentEvent = {
+                                component: {
+                                    componentType: 'GUIDE_ATOM',
+                                    id: guideAtom.id,
                                     labels: [],
                                     products: [],
                                 },

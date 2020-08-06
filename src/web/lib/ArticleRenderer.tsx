@@ -28,6 +28,7 @@ import {
     ExplainerAtom,
     InteractiveAtom,
     QandaAtom,
+    GuideAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
@@ -281,6 +282,23 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+
+                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                    return (
+                        <div id={`guide-atom-${i}`}>
+                            <GuideAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandHandler={() => {}}
+                            />
+                        </div>
+                    );
+
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
@@ -288,7 +306,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
