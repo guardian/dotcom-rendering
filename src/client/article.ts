@@ -187,7 +187,7 @@ function callouts(): void {
 
                 submit(await data, form);
             } catch(e) {
-                const errorPlaceholder = form.querySelector('.error-message');
+                const errorPlaceholder = form.querySelector('.js-error-message');
                 if (errorPlaceholder) {
                     errorPlaceholder.textContent = "There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB"
                 }
