@@ -152,21 +152,21 @@ const CalloutForm: FC<CalloutProps> = (props: CalloutProps): ReactElement => {
     const { kicker } = getPillarStyles(format.pillar);
 
     return (
-        <details className="callout" css={calloutStyles}>
-            <summary>
-                <div className="kicker">
-                    <div className="logo">
+        <details className="js-callout" css={calloutStyles}>
+            <summary css={summaryStyles}>
+                <div css={kickerStyles}>
+                    <div css={logoStyles}>
                         <div css={speechBubbleStyles(kicker)}>
-                            <h4>Take part</h4>
+                            <h4 css={headlineStyles}>Take part</h4>
                         </div>
                     </div>
-                    <div className="description">
-                        <h4>{campaign.fields.callout}</h4>
+                    <div css={descriptionStyles}>
+                        <h4 css={headlineStyles}>{campaign.fields.callout}</h4>
                         {Array.from(description.childNodes).map(plainTextElement)}
                     </div>
                 </div>
-                <Button size="xsmall" className="is-off callout-expand" iconSide="left" icon={<SvgPlus />}>Tell us</Button>
-                <Button size="xsmall" className="is-on callout-expand" iconSide="left" icon={<SvgMinus />}>Hide</Button>
+                <Button size="xsmall" className="is-off js-callout-expand" iconSide="left" icon={<SvgPlus />}>Tell us</Button>
+                <Button size="xsmall" className="is-on js-callout-expand" iconSide="left" icon={<SvgMinus />}>Hide</Button>
             </summary>
 
 
@@ -174,7 +174,7 @@ const CalloutForm: FC<CalloutProps> = (props: CalloutProps): ReactElement => {
                 <div>
                     <input name="formId" type="hidden" value={campaign.id} />
                     {campaign.fields.formFields.map(renderField)}
-                    <p className="error-message"></p>
+                    <p css={errorStyles} className="js-error-message"></p>
                     <Button type="submit" size="xsmall">Share with the Guardian</Button>
                     <a href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
                 </div>
