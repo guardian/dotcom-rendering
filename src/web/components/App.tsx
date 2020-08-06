@@ -238,12 +238,14 @@ export const App = ({ CAPI, NAV }: Props) => {
                 .catch(error => console.log('Error loading readerRevenueDevUtils', error));
                 /* eslint-enable no-console */
 
-        window.guardian.readerRevenue = {
-            changeGeolocation: loadAndRun('changeGeolocation'),
-            showMeTheEpic: loadAndRun('showMeTheEpic'),
-            showMeTheBanner: loadAndRun('showMeTheBanner'),
-            showNextVariant: loadAndRun('showNextVariant'),
-            showPreviousVariant: loadAndRun('showPreviousVariant'),
+        if (window && window.guardian) {
+            window.guardian.readerRevenue = {
+                changeGeolocation: loadAndRun('changeGeolocation'),
+                showMeTheEpic: loadAndRun('showMeTheEpic'),
+                showMeTheBanner: loadAndRun('showMeTheBanner'),
+                showNextVariant: loadAndRun('showNextVariant'),
+                showPreviousVariant: loadAndRun('showPreviousVariant'),
+            }
         }
     }, [CAPI.shouldHideReaderRevenue]);
 
