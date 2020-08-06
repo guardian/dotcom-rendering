@@ -5,8 +5,9 @@ import { pipe2 } from 'lib';
 import Card from 'components/shared/card';
 import { css } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, neutral } from '@guardian/src-foundations';
 import { ResizedRelatedContent } from 'item';
+import { darkModeCss } from 'styles';
 
 interface Props {
     content: Option<ResizedRelatedContent>;
@@ -18,6 +19,10 @@ const styles = css`
     h1 {
         ${headline.xsmall({ fontWeight: 'bold' })}
         margin: 0 0 ${remSpace[4]} 0;
+
+        ${darkModeCss`
+            color: ${neutral[86]};
+        `}
     }
 
     ul {

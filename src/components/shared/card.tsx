@@ -10,6 +10,7 @@ import { text, neutral } from '@guardian/src-foundations/palette';
 import BodyImage from 'components/bodyImage';
 import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Image } from 'image';
+import { darkModeCss } from 'styles';
 
 interface Props {
     item: RelatedItem;
@@ -25,9 +26,21 @@ const styles = css`
     color: ${neutral[7]};
     text-decoration: none;
 
+    ${darkModeCss`
+        color: ${neutral[86]};
+        background: ${neutral[20]};
+    `}
+
+    li {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     div {
         padding-bottom: 56.25%;
-        position: relative
+        position: relative;
     }
 
     img {
@@ -42,7 +55,7 @@ const styles = css`
         ${headline.xxxsmall()};
         margin: 0 0 0;
         padding: ${remSpace[2]};
-        min-height: 100px;
+        min-height: 150px;
     }
 
     time {
@@ -75,13 +88,16 @@ const Card = ({ item, image }: Props): JSX.Element => {
         withDefault(<></>)
     )
 
+    const lastModified = item.lastModified?.iso8601;
+    const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+
     return <a css={styles} href={item.link}>
         <li>
             <h2>{item.title}</h2>
-            {relativeFirstPublished(fromNullable(new Date(item.lastModified?.iso8601 ?? 0)))}
-            <div>
-                {img}
-            </div>
+            <section>
+                {date}
+                <div>{img}</div>
+            </section>
         </li>
     </a>
 }
