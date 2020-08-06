@@ -18,8 +18,8 @@ const labelStyles = css`
     ${textSans.medium({ fontWeight: 'bold' })};
 `;
 
-const optionalLabel = (required: boolean): ReactElement =>
-    required ? <></> : <span css={optionalLabelStyles}>Optional</span>
+const optionalLabel = (required: boolean): ReactElement | null =>
+    required ? null : <span css={optionalLabelStyles}>Optional</span>
 
 const FileInput = (props: FileInputProps): ReactElement =>
     <>
