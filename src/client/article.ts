@@ -120,7 +120,9 @@ function submit(body: FormData, form: Element): void {
         body: JSON.stringify(body)
     })
     .then(() => {
-        form.innerHTML = "<p>Thank you for your contribution</p>"
+        const message = document.createElement('p');
+        message.textContent = 'Thank you for your contribution';
+        form.replaceChild(message, form.firstChild);
     })
     .catch(() => {
         const errorPlaceholder = form.querySelector('.js-error-message');
