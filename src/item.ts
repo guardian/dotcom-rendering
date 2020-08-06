@@ -159,7 +159,8 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         commentCount: fromNullable(commentCount),
         relatedContent: pipe2(relatedContent, fromNullable, map(relatedContent => ({
             ...relatedContent,
-            resizedImages: relatedContent.relatedItems.map(item => parseCardImage(item.headerImage, context.salt))
+            resizedImages: relatedContent
+                .relatedItems.map(item => parseCardImage(item.headerImage, context.salt))
         })))
     }
 }

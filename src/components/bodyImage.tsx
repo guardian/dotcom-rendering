@@ -18,7 +18,7 @@ const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 
 // ----- Component ----- //
 
-const styles = (role: Option<Role>) => {
+const styles = (role: Option<Role>): SerializedStyles => {
     const margin = pipe2(
         role,
         map(role => role === Role.Card ? '0' : remSpace[4]),
