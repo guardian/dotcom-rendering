@@ -64,11 +64,16 @@ export const articleWidthStyles = css`
     }
 `;
 
-export const footerWidthStyles = css`
+export const relatedContentStyles = css`
+    ${sidePadding}
+    ${from.phablet} {
+        margin: 0 auto;
+    }
+
     ${from.wide} {
         width: ${footerContentWidth}px;
     }
-`;
+`
 
 const adHeight = '258px';
 

@@ -101,7 +101,7 @@ function insertEpic(): void {
             if (maybeEpic.epic) {
                 const epicContainer = document.createElement('div');
                 epicContainer.id = 'epic-container';
-                document.getElementById('tags')?.prepend(epicContainer);
+                document.querySelector('.js-tags')?.prepend(epicContainer);
                 const { title, body, firstButton, secondButton } = maybeEpic.epic;
                 const epicProps =  { title, body, firstButton, secondButton };
                 ReactDOM.render(h(Epic, epicProps), epicContainer)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -17,31 +17,14 @@ interface Props {
     image: Option<Image>;
 }
 
-const styles = css`
+const listStyles = css`
     background: white;
     margin-right: ${remSpace[3]};
-    min-width: 175px;
-    width: 25%;
-    position: relative;
-    color: ${neutral[7]};
-    text-decoration: none;
-
-    ${darkModeCss`
-        color: ${neutral[86]};
-        background: ${neutral[20]};
-    `}
-
-    li {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    div {
-        padding-bottom: 56.25%;
-        position: relative;
-    }
+    flex: 0 0 15rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     img {
         width: 100%;
@@ -49,13 +32,6 @@ const styles = css`
         position: absolute;
         top: 0;
         left: 0;
-    }
-
-    h2 {
-        ${headline.xxxsmall()};
-        margin: 0 0 0;
-        padding: ${remSpace[2]};
-        min-height: 150px;
     }
 
     time {
@@ -66,6 +42,27 @@ const styles = css`
         display: inline-block;
     }
 `
+
+const anchorStyles = css`
+    color: ${neutral[7]};
+    text-decoration: none;
+    ${darkModeCss`
+        color: ${neutral[86]};
+        background: ${neutral[20]};
+    `}
+`;
+
+const headingStyles = css`
+    ${headline.xxxsmall()};
+    margin: 0 0 0;
+    padding: ${remSpace[2]};
+    min-height: 150px;
+`;
+
+const imageWrapperStyles = css`
+    padding-bottom: 56.25%;
+    position: relative;
+`;
 
 const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
     date,
@@ -85,21 +82,21 @@ const Card = ({ item, image }: Props): JSX.Element => {
         map(img => {
             return <BodyImage image={img} format={format}/>
         }),
-        withDefault(<></>)
+        withDefault<ReactElement | null>(null)
     )
 
     const lastModified = item.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
-    return <a css={styles} href={item.link}>
-        <li>
-            <h2>{item.title}</h2>
-            <section>
-                {date}
-                <div>{img}</div>
-            </section>
+    return <li css={listStyles}>
+            <a css={anchorStyles}href={item.link}>
+                <h2 css={headingStyles}>{item.title}</h2>
+                <section>
+                    {date}
+                    <div css={imageWrapperStyles}>{img}</div>
+                </section>
+            </a>
         </li>
-    </a>
 }
 
 

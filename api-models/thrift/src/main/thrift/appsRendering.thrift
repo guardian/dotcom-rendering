@@ -21,6 +21,7 @@ struct Image {
     1: required string url
     2: required i32 height
     3: required i32 width
+    4: optional string altText
 }
 
 struct RelatedItem {
@@ -30,7 +31,7 @@ struct RelatedItem {
     4: required string link
     5: required RelatedItemType type
     6: required v1.Pillar pillar
-    7: optional string length
+    7: optional string mediaDuration
     8: optional string starRating
 }
 

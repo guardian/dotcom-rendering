@@ -1,5 +1,4 @@
 import React from 'react';
-import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import Card from 'components/shared/card';
@@ -15,37 +14,37 @@ interface Props {
 
 const styles = css`
     padding: ${remSpace[6]} 0;
+`;
 
-    h1 {
-        ${headline.xsmall({ fontWeight: 'bold' })}
-        margin: 0 0 ${remSpace[4]} 0;
+const headingStyles = css`
+    ${headline.xsmall({ fontWeight: 'bold' })}
+    margin: 0 0 ${remSpace[4]} 0;
 
-        ${darkModeCss`
-            color: ${neutral[86]};
-        `}
+    ${darkModeCss`
+        color: ${neutral[86]};
+    `}
+`;
+
+const listStyles = css`
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
     }
+`;
 
-    ul {
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        margin: 0;
-        padding: 0;
-        overflow-x: scroll;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    }
-`
-
-const RelatedContent = ({ content }: Props): JSX.Element => {
+const RelatedContent = ({ content }: Props): JSX.Element | null => {
     return pipe2(
         content,
         map(({ title, relatedItems, resizedImages }) => {
             return <section css={styles}>
-                <h1>{title}</h1>
-                <ul>
+                <h1 css={headingStyles}>{title}</h1>
+                <ul css={listStyles}>
                     {
                         relatedItems.map((item, key) => {
                             return <Card key={key} item={item} image={resizedImages[key]}/>
@@ -54,7 +53,7 @@ const RelatedContent = ({ content }: Props): JSX.Element => {
                 </ul>
             </section>
         }),
-        withDefault(<></>)
+        withDefault<JSX.Element | null>(null)
     )
 }
 

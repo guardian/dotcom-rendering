@@ -13,7 +13,7 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, footerWidthStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, Review, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
@@ -104,12 +104,12 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 {children}
             </Body>
             {epicContainer}
-            <section id="tags" css={articleWidthStyles}>
+            <section className="js-tags" css={articleWidthStyles}>
                 <Tags tags={item.tags} format={item}/>
             </section>
         </article>
-        <footer css={[articleWidthStyles, footerWidthStyles]}>
-            <RelatedContent css={articleWidthStyles} content={item.relatedContent}/>
+        <footer css={relatedContentStyles}>
+            <RelatedContent content={item.relatedContent}/>
         </footer>
     </main>
 }
