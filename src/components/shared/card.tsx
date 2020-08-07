@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
@@ -11,9 +11,14 @@ import BodyImage from 'components/bodyImage';
 import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
+import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
+import { Pillar as contentPillar } from '@guardian/content-api-models/v1/pillar';
+import { getPillarStyles, pillarFromString } from 'pillarStyles';
+
+
 
 interface Props {
-    item: RelatedItem;
+    relatedItem: RelatedItem;
     image: Option<Image>;
 }
 
@@ -70,7 +75,65 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
     withDefault<JSX.Element | null>(null),
 );
 
-const Card = ({ item, image }: Props): JSX.Element => {
+const cardStyles = (type: RelatedItemType, pillar: contentPillar): SerializedStyles => {
+    switch(type) {
+        case RelatedItemType.ARTICLE: {
+            return css``;
+        }
+
+        case RelatedItemType.FEATURE: {
+            const { kicker } = getPillarStyles(pillarFromString(pillar.id))
+
+            return css`
+                h2 {
+                    ${headline.xxxsmall({ fontWeight: 'bold' })}
+                    color: ${kicker};
+                }
+            `;
+        }
+
+        case RelatedItemType.ANALYSIS: {
+
+        }
+
+        case RelatedItemType.GALLERY: {
+
+        }
+
+        case RelatedItemType.SPECIAL: {
+
+        }
+
+        case RelatedItemType.AUDIO: {
+
+        }
+
+        case RelatedItemType.LIVE: {
+
+        }
+
+        case RelatedItemType.VIDEO: {
+
+        }
+
+        case RelatedItemType.REVIEW: {
+
+        }
+
+        case RelatedItemType.ADVERTISEMENT_FEATURE: {
+
+        }
+
+        case RelatedItemType.GUARDIAN_VIEW: {
+
+        }
+    }
+
+    return css``;
+}
+
+const Card = ({ relatedItem, image }: Props): JSX.Element => {
+
     const format = {
         pillar: Pillar.News,
         design: Design.Article,
@@ -85,12 +148,12 @@ const Card = ({ item, image }: Props): JSX.Element => {
         withDefault<ReactElement | null>(null)
     )
 
-    const lastModified = item.lastModified?.iso8601;
+    const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
-    return <li css={listStyles}>
-            <a css={anchorStyles}href={item.link}>
-                <h2 css={headingStyles}>{item.title}</h2>
+    return <li css={[listStyles, cardStyles(relatedItem.type, relatedItem.pillar)]}>
+            <a css={anchorStyles}href={relatedItem.link}>
+                <h2 css={headingStyles}>{relatedItem.title}</h2>
                 <section>
                     {date}
                     <div css={imageWrapperStyles}>{img}</div>

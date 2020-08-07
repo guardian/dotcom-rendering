@@ -46,8 +46,8 @@ const RelatedContent = ({ content }: Props): JSX.Element | null => {
                 <h1 css={headingStyles}>{title}</h1>
                 <ul css={listStyles}>
                     {
-                        relatedItems.map((item, key) => {
-                            return <Card key={key} item={item} image={resizedImages[key]}/>
+                        relatedItems.map((relatedItem, key) => {
+                            return <Card key={key} relatedItem={relatedItem} image={resizedImages[key]}/>
                         })
                     }
                 </ul>
