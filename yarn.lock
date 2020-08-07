@@ -2374,9 +2374,9 @@
     timeago.js "^4.0.2"
 
 "@guardian/old-cmp@npm:@guardian/consent-management-platform@^3.4.9":
-  version "3.4.9"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.4.9.tgz#6bd6108e12cb122c4a1fcba4ae657f4d0b67ad0b"
-  integrity sha512-9TRCahVCILDvD78xQpADaZMqqUZM1opsBXKPasVdEt3hnRyMwVB+l68DpydIEK8DZE9S2jxbuqtOEKrci/qMsw==
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.4.10.tgz#604e71d27c6bfa4664c83c55578a8aa73ff09d82"
+  integrity sha512-P3dTf9EqYhpH7JQ+Bg9MNoIQ08U4yD5j+s5epO9mNTaIBiX1BeOF3RcI3KNj/dBxSggaut0rBdQ82GN54Bg4jA==
   dependencies:
     consent-string "1.5.2"
     js-cookie "2.2.1"

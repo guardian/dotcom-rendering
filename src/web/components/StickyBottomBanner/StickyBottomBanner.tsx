@@ -29,7 +29,7 @@ export const StickyBottomBanner = ({
     );
 
     useEffect(() => {
-        shouldShowOldCMP().then((shouldShowOld) =>
+        shouldShowOldCMP().then(shouldShowOld =>
             setShowOldCMP(shouldShowOld && CAPI.config.cmpUi),
         );
         willShowCMP().then(setCMPWillShow);

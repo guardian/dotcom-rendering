@@ -1,11 +1,13 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { cmp, oldCmp } from '@guardian/consent-management-platform';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
-import { shouldUseSourcepointCmp } from '@root/src/web/lib/sourcepoint';
+import { getCountryCode } from '@root/src/web/lib/getCountryCode';
+import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 import { addPrivacySettingsLink } from './CMPPrivacyLink';
 
 export const willShowCMP = async () => {
-    if (!(await shouldUseSourcepointCmp())) return false;
+    const framework = await getPrivacyFramework();
+
+    if (!framework.ccpa && !framework.tcfv2) return false;
 
     const isInUsa = (await getCountryCode()) === 'US';
 
@@ -19,7 +21,7 @@ export const willShowCMP = async () => {
 // this is the wrong place to be doing this, but it's temporary
 // until we remove the old react CMP component and go 100% sourcepoint
 export const shouldShowOldCMP = async () =>
-    (await shouldUseSourcepointCmp()) ? false : oldCmp.shouldShow();
+    (await getPrivacyFramework()).tcfv1 ? oldCmp.shouldShow() : false;
 
 export const CMP = () => {
     const [show, setShow] = useState(false);
@@ -35,13 +37,11 @@ export const CMP = () => {
         });
     }, []);
 
-    const { ConsentManagementPlatform } = oldCmp;
-
     return (
         <>
             {show && (
                 <Suspense fallback={<></>}>
-                    <ConsentManagementPlatform
+                    <oldCmp.ConsentManagementPlatform
                         source="dcr"
                         onClose={() => setShow(false)}
                     />

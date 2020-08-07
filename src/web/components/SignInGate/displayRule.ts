@@ -55,4 +55,4 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
 };
 
 // wrapper over the cmp should show method
-export const shouldShowCmp = () => oldCmp.shouldShow();
+export const shouldShowCmp = oldCmp.shouldShow;
