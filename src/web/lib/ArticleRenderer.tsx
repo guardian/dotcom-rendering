@@ -294,7 +294,7 @@ export const ArticleRenderer: React.FC<{
                                 credit={element.credit}
                                 likeHandler={() => {}}
                                 dislikeHandler={() => {}}
-                                expandHandler={() => {}}
+                                expandCallback={() => {}}
                             />
                         </div>
                     );

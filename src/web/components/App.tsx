@@ -318,8 +318,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                                 component: {
                                     componentType: 'QANDA_ATOM',
                                     id: qandaAtom.id,
-                                    labels: [],
                                     products: [],
+                                    labels: [],
                                 },
                                 action: 'LIKE',
                             };
@@ -384,7 +384,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             };
                             submitComponentEvent(componentEvent);
                         }}
-                        expandHandler={() => {
+                        expandCallback={() => {
                             const componentEvent: OphanComponentEvent = {
                                 component: {
                                     componentType: 'GUIDE_ATOM',
