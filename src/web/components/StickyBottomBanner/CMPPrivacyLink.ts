@@ -1,13 +1,5 @@
-import { ccpaApplies } from '@root/src/web/lib/ccpaApplies';
-import { showPrivacyManager } from '@guardian/consent-management-platform';
-
-const show = (forceModal?: boolean) => {
-    ccpaApplies().then((useCCPA) => {
-        if (useCCPA && forceModal) {
-            showPrivacyManager();
-        }
-    });
-};
+import { cmp } from '@guardian/consent-management-platform';
+import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
 export const addPrivacySettingsLink = (): void => {
     if (
@@ -26,7 +18,7 @@ export const addPrivacySettingsLink = (): void => {
         const privacyLinkListItem = privacyLink.parentElement;
 
         if (privacyLinkListItem) {
-            ccpaApplies().then((useCCPA) => {
+            getPrivacyFramework().then(({ ccpa }) => {
                 const newPrivacyLink = privacyLink.cloneNode(false) as Element;
 
                 newPrivacyLink.setAttribute(
@@ -34,7 +26,7 @@ export const addPrivacySettingsLink = (): void => {
                     'privacy-settings',
                 );
                 newPrivacyLink.setAttribute('href', '#');
-                newPrivacyLink.innerHTML = useCCPA
+                newPrivacyLink.innerHTML = ccpa
                     ? 'California resident – Do Not Sell'
                     : 'Privacy settings';
 
@@ -49,9 +41,10 @@ export const addPrivacySettingsLink = (): void => {
                     newPrivacyLinkListItem,
                 );
 
-                newPrivacyLink.addEventListener('click', () => {
-                    show(true);
-                });
+                newPrivacyLink.addEventListener(
+                    'click',
+                    cmp.showPrivacyManager,
+                );
             });
         }
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     CMP,
-    willShowNewCMP,
+    willShowCMP,
     shouldShowOldCMP,
 } from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
@@ -24,23 +24,25 @@ export const StickyBottomBanner = ({
     CAPI,
 }: Props) => {
     const [showOldCMP, setShowOldCMP] = useState<boolean | null>(null);
-    const [newCMPWillShow, setNewCMPWillShow] = useState<boolean | null>(null);
+    const [CMPWillShow, setCMPWillShow] = useState<boolean | undefined>(
+        undefined,
+    );
 
     useEffect(() => {
-        shouldShowOldCMP().then((shouldShowOld) =>
+        shouldShowOldCMP().then(shouldShowOld =>
             setShowOldCMP(shouldShowOld && CAPI.config.cmpUi),
         );
-        willShowNewCMP().then(setNewCMPWillShow);
+        willShowCMP().then(setCMPWillShow);
     }, [CAPI.config.cmpUi]);
 
     // Don't render anything until we know whether we can show the CMP
-    if (showOldCMP === null || newCMPWillShow === null) {
+    if (showOldCMP === null || CMPWillShow === null) {
         return null;
     }
 
     // New CMP is not a react component and is shown outside of react's world
     // so render nothing if it will show
-    if (newCMPWillShow) return null;
+    if (CMPWillShow) return null;
 
     if (showOldCMP) return <CMP />;
 
