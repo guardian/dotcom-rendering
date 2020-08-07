@@ -7,10 +7,12 @@ import { addPrivacySettingsLink } from './CMPPrivacyLink';
 export const willShowCMP = async () => {
     const framework = await getPrivacyFramework();
 
-    if (!framework.ccpa && !framework.tcfv2) return false;
+    if (!framework.ccpa && !framework.tcfv2) {
+        addPrivacySettingsLink();
+        return false;
+    }
 
     const isInUsa = (await getCountryCode()) === 'US';
-
     cmp.init({
         isInUsa,
     });

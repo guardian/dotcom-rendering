@@ -1,4 +1,4 @@
-import { cmp } from '@guardian/consent-management-platform';
+import { cmp, oldCmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
 export const addPrivacySettingsLink = (): void => {
@@ -18,7 +18,7 @@ export const addPrivacySettingsLink = (): void => {
         const privacyLinkListItem = privacyLink.parentElement;
 
         if (privacyLinkListItem) {
-            getPrivacyFramework().then(({ ccpa }) => {
+            getPrivacyFramework().then((framework) => {
                 const newPrivacyLink = privacyLink.cloneNode(false) as Element;
 
                 newPrivacyLink.setAttribute(
@@ -26,7 +26,7 @@ export const addPrivacySettingsLink = (): void => {
                     'privacy-settings',
                 );
                 newPrivacyLink.setAttribute('href', '#');
-                newPrivacyLink.innerHTML = ccpa
+                newPrivacyLink.innerHTML = framework.ccpa
                     ? 'California resident – Do Not Sell'
                     : 'Privacy settings';
 
@@ -43,7 +43,9 @@ export const addPrivacySettingsLink = (): void => {
 
                 newPrivacyLink.addEventListener(
                     'click',
-                    cmp.showPrivacyManager,
+                    framework.tcfv1
+                        ? oldCmp.showPrivacyManager
+                        : cmp.showPrivacyManager,
                 );
             });
         }
