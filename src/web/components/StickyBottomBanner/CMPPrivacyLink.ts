@@ -1,10 +1,6 @@
 import { cmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
-const show = (forceModal?: boolean) => {
-    if (forceModal) cmp.showPrivacyManager();
-};
-
 export const addPrivacySettingsLink = (): void => {
     if (
         'guardian' in window &&
