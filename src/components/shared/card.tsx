@@ -93,39 +93,39 @@ const cardStyles = (type: RelatedItemType, pillar: contentPillar): SerializedSty
         }
 
         case RelatedItemType.ANALYSIS: {
-
+            return css``;
         }
 
         case RelatedItemType.GALLERY: {
-
+            return css``;
         }
 
         case RelatedItemType.SPECIAL: {
-
+            return css``;
         }
 
         case RelatedItemType.AUDIO: {
-
+            return css``;
         }
 
         case RelatedItemType.LIVE: {
-
+            return css``;
         }
 
         case RelatedItemType.VIDEO: {
-
+            return css``;
         }
 
         case RelatedItemType.REVIEW: {
-
+            return css``;
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
-
+            return css``;
         }
 
         case RelatedItemType.COMMENT: {
-
+            return css``;
         }
     }
 
