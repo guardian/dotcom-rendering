@@ -59,7 +59,7 @@ const anchorStyles = css`
 
 const headingStyles = css`
     ${headline.xxxsmall()};
-    margin: 0 0 0;
+    margin: 0;
     padding: ${remSpace[2]};
     min-height: 150px;
 `;
@@ -124,7 +124,7 @@ const cardStyles = (type: RelatedItemType, pillar: contentPillar): SerializedSty
 
         }
 
-        case RelatedItemType.GUARDIAN_VIEW: {
+        case RelatedItemType.COMMENT: {
 
         }
     }
