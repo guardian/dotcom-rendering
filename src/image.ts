@@ -169,7 +169,7 @@ const parseCardImage = (image: CardImage | undefined, salt: string): Option<Imag
     return some({
         src: src(salt, image.url, 500, Dpr.One),
         ...srcsets(image.url, salt),
-        alt: none,
+        alt: fromNullable(image.altText),
         width: image.width,
         height: image.height,
         caption: none,
