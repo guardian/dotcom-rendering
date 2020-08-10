@@ -292,6 +292,7 @@ export const ArticleRenderer: React.FC<{
                                 html={element.html}
                                 image={element.img}
                                 credit={element.credit}
+                                pillar={pillar}
                                 likeHandler={() => {}}
                                 dislikeHandler={() => {}}
                                 expandCallback={() => {}}
