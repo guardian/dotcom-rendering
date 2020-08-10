@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
+import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
@@ -37,8 +37,7 @@ export const Elements = (
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                // return <AudioAtomBlockComponent element={element} />;
-                return null;
+                return <AudioAtomBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                 return (
                     <TextBlockComponent
