@@ -3,7 +3,6 @@ import { css } from 'emotion';
 import { palette, space } from '@guardian/src-foundations';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
-import { SvgCheckmark } from '@guardian/src-icons';
 import { ThemeProvider } from 'emotion-theming';
 import { brand } from '@guardian/src-foundations/themes';
 import { JsonScript } from './JsonScript';
@@ -28,12 +27,6 @@ const consentUIStyle = css`
 
     .center {
         text-align: center;
-    }
-`;
-
-const stack = css`
-    & > * {
-        margin-top: ${space[2]}px;
     }
 `;
 
@@ -97,14 +90,13 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        // TODO: change this url in PROD
                         checkConsentHref: `https://${domain}/wrapper/tcfv2/v1/amp`,
                         promptUISrc: `https://${domain}/amp/index.html`,
-                        postPromptUI: 'consent-ui-manager',
+                        // TODO: decide on postPromptUI
+                        // postPromptUI: 'consent-ui-manager',
                         clientConfig: clientConfigTcfv2,
                         geoOverride: {
                             us: {
-                                // postPromptUI: 'consent-ui-ccpa',
                                 checkConsentHref: `https://${domain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
                             },
@@ -112,42 +104,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     }}
                 />
                 <ThemeProvider theme={brand}>
-                    <div id="consent-ui-ccpa" className={consentUIStyle}>
-                        <div>
-                            <h2>Your privacy</h2>
-                            <p>
-                                We use cookies to improve your experience on our
-                                site and to show you personalised advertising.
-                            </p>
-                            <p>
-                                To find out more, read our{' '}
-                                <a href="https://www.theguardian.com/help/privacy-policy">
-                                    privacy policy
-                                </a>{' '}
-                                and{' '}
-                                <a href="https://www.theguardian.com/info/cookies">
-                                    cookie policy
-                                </a>
-                                .
-                            </p>
-                        </div>
-                        <div className={stack}>
-                            <Button
-                                size="small"
-                                icon={<SvgCheckmark />}
-                                on="tap:consent.accept"
-                            >
-                                I&apos;m OK with that
-                            </Button>
-                            <Button
-                                size="small"
-                                priority="tertiary"
-                                on="tap:consent.reject"
-                            >
-                                Do not sell my data
-                            </Button>
-                        </div>
-                    </div>
                     <div id="consent-ui-manager" className={consentUIStyle}>
                         <div className="center">
                             <Button
