@@ -37,7 +37,8 @@ export const Elements = (
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                return <AudioAtomBlockComponent element={element.amp} />;
+                // return <AudioAtomBlockComponent element={element.amp} />;
+                return null;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                 return (
                     <TextBlockComponent
