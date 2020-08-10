@@ -1,22 +1,28 @@
 import React from 'react';
 import { css } from 'emotion';
-import { unescapeData } from '@root/src/lib/escapeData';
-
-const widthOverride = css`
-    iframe {
-        /* The  embed js hijacks the iframe and calculated an incorrect width, which pushed the body out */
-        width: 100%;
-    }
-`;
 
 export const SpotifyBlockComponent: React.FC<{
-    element: SpotifyBlockElement;
-}> = ({ element }) => {
+    embedUrl: string;
+    height: number;
+    width: number;
+    title: string;
+}> = ({ embedUrl, width, height, title }) => {
     return (
-        <div className={widthOverride}>
-            <div
-                data-cy="spotify-embed"
-                dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
+        <div
+            className={css`
+                iframe {
+                    width: 100%;
+                }
+                margin-bottom: 16px;
+            `}
+            data-cy="spotify-embed"
+        >
+            <iframe
+                src={embedUrl}
+                title={title}
+                height={height}
+                width={width}
+                allowFullScreen={true}
             />
         </div>
     );
