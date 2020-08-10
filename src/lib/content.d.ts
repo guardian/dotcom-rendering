@@ -9,17 +9,13 @@ interface InteractiveAtomBlockElementBase {
     js?: string;
 }
 
-interface AudioAtomBlockElementAMP {
+interface AudioAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
     id: string;
     kicker: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
-}
-
-interface AudioAtomBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
-    amp: AudioAtomBlockElementAMP;
 }
 
 interface AudioBlockElement {

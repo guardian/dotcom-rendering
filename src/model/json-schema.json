@@ -389,11 +389,30 @@
                         "model.dotcomrendering.pageElements.AudioAtomBlockElement"
                     ]
                 },
-                "amp": {
-                    "type": "object"
+                "id": {
+                    "type": "string"
+                },
+                "kicker": {
+                    "type": "string"
+                },
+                "trackUrl": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "coverUrl": {
+                    "type": "string"
                 }
             },
-            "required": ["_type", "amp"]
+            "required": [
+                "_type",
+                "coverUrl",
+                "duration",
+                "id",
+                "kicker",
+                "trackUrl"
+            ]
         },
         "AudioBlockElement": {
             "type": "object",

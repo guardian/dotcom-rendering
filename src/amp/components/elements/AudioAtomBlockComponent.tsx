@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const AudioAtomBlockComponent: React.FC<{
-    element: AudioAtomBlockElementAMP;
+    element: AudioAtomBlockElement;
 }> = ({ element }) => {
     return (
         <amp-audio src={element.trackUrl} title={element.kicker}>
