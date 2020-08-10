@@ -77,7 +77,7 @@ function ads(): void {
             Array.from(document.querySelectorAll('.ad-placeholder'))
                 .forEach(placeholder => placeholder.classList.remove('hidden'))
             insertAds();
-            Array.from(document.querySelectorAll('.ad-labels'))
+            Array.from(document.querySelectorAll('.ad-labels, .upgrade-banner-button'))
                 .forEach(adLabel => {
                     adLabel.addEventListener('click', () => {
                         acquisitionsClient.launchFrictionScreen();

@@ -1,5 +1,7 @@
 import { createElement as h, ReactNode, ReactElement, isValidElement } from 'react';
+import { jsx as styledH, css } from '@emotion/core';
 import Paragraph from 'components/paragraph';
+import { defaultSize, button } from '@guardian/src-button/styles';
 
 function getAdIndices(): number[] {
     const adEveryNParagraphs = 6;
@@ -26,11 +28,12 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
     const ad = (para: number): ReactElement => h('aside', { className, key: `ad-after-${para}-para` },
         h('div', { className: 'ad-labels' },
             h('h1', null, 'Advertisement'),
-            h('button', { className: 'ad-hide' },
-                h('span', null, 'Hide')
-            )
         ),
-        h('div', { className: 'ad-slot' }, null)
+        h('div', { className: 'ad-slot' }, null),
+        h('div', { className: 'upgrade-banner' },
+            h('h1', null, "Upgrade to Premium and enjoy the app ad-free."),
+            styledH('button', { className: 'upgrade-banner-button', css: [defaultSize, button] }, "Upgrade to Premium")
+        )
     );
 
     const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
