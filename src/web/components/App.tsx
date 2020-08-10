@@ -360,7 +360,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={guideAtom.html}
                         image={guideAtom.img}
                         credit={guideAtom.credit}
-                        pillar={guideAtom.pillar}
+                        pillar={pillar}
                         likeHandler={() => {
                             const componentEvent: OphanComponentEvent = {
                                 component: {
