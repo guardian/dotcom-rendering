@@ -9,13 +9,17 @@ interface InteractiveAtomBlockElementBase {
     js?: string;
 }
 
-interface AudioAtomElement {
-    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+interface AudioAtomBlockElementAMP {
     id: string;
     kicker: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
+}
+
+interface AudioAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+    amp: AudioAtomBlockElementAMP;
 }
 
 interface AudioBlockElement {
@@ -43,6 +47,7 @@ interface CaptionBlockElement {
 interface CalloutBlockElement {
     _type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
     id: string;
+    calloutsUrl: string;
     activeFrom: number;
     displayOnSensitive: boolean;
     formId: number;
@@ -50,6 +55,7 @@ interface CalloutBlockElement {
     description: string;
     tagName: string;
     formFields: CampaignFieldType[];
+    calloutIndex?: number;
 }
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
@@ -163,6 +169,10 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     css?: string;
 }
 
+interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
+}
+
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
     url: string;
@@ -202,6 +212,7 @@ interface QABlockElement {
     img?: string;
     html: string;
     credit: string;
+    qandaIndex?: number;
 }
 
 interface RichLinkBlockElement {
@@ -219,6 +230,13 @@ interface SoundcloudBlockElement {
     id: string;
     isTrack: boolean;
     isMandatory: boolean;
+}
+
+interface SpotifyBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
+    html: string;
+    title: string;
+    caption: string;
 }
 
 interface SubheadingBlockElement {
@@ -302,7 +320,7 @@ interface YoutubeBlockElement {
 }
 
 type CAPIElement =
-    | AudioAtomElement
+    | AudioAtomBlockElement
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
@@ -323,6 +341,7 @@ type CAPIElement =
     | ImageBlockElement
     | InstagramBlockElement
     | InteractiveAtomBlockElement
+    | InteractiveBlockElement
     | MapBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement
@@ -330,6 +349,7 @@ type CAPIElement =
     | QABlockElement
     | RichLinkBlockElement
     | SoundcloudBlockElement
+    | SpotifyBlockElement
     | SubheadingBlockElement
     | TableBlockElement
     | TextBlockElement

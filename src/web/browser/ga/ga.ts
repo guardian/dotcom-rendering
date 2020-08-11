@@ -1,3 +1,4 @@
+import { getCLS, getFID, getLCP } from 'web-vitals';
 import { getCookie } from './cookie';
 
 interface TrackerConfig {
@@ -13,6 +14,8 @@ const tracker: TrackerConfig = {
     sampleRate: 100,
     siteSpeedSampleRate: 1, // TODO Should be set to 0.1 when rolling out to wider audience
 };
+const set = `${tracker.name}.set`;
+const send = `${tracker.name}.send`;
 
 const getQueryParam = (
     key: string,
@@ -42,65 +45,38 @@ export const init = (): void => {
     });
 };
 
-// Adapted from https://web.dev/lcp/#measure-lcp-in-javascript
-const trackLCP = (send: string) => {
+type coreVitalsArgs = {
+    name: string;
+    delta: number;
+    id: string;
+};
+// https://www.npmjs.com/package/web-vitals#using-analyticsjs
+const sendCoreVital = ({ name, delta, id }: coreVitalsArgs): void => {
     const { ga } = window;
-    // Create a variable to hold the latest LCP value (since it can change).
-    let lcp: number;
 
-    if (!window.PerformanceObserver) {
+    if (!ga) {
         return;
     }
 
-    // Create the PerformanceObserver instance.
-    const po = new window.PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const lastEntry = entries[entries.length - 1];
-
-        // Update `lcp` to the latest value, using `renderTime` if it's available,
-        // otherwise using `loadTime`. (Note: `renderTime` may not be available if
-        // the element is an image and it's loaded cross-origin without the
-        // `Timing-Allow-Origin` header.)
-        lcp = lastEntry.renderTime || lastEntry.loadTime;
+    ga(send, 'event', {
+        eventCategory: 'Web Vitals',
+        eventAction: name,
+        // Google Analytics metrics must be integers, so the value is rounded.
+        // For CLS the value is first multiplied by 1000 for greater precision
+        // (note: increase the multiplier for greater precision if needed).
+        eventValue: Math.round(name === 'CLS' ? delta * 1000 : delta),
+        // The `id` value will be unique to the current page load. When sending
+        // multiple values from the same page (e.g. for CLS), Google Analytics can
+        // compute a total by grouping on this ID (note: requires `eventLabel` to
+        // be a dimension in your report).
+        eventLabel: id,
+        // Use a non-interaction event to avoid affecting bounce rate.
+        nonInteraction: true,
     });
-
-    // Observe entries of type `largest-contentful-paint`, including buffered
-    // entries, i.e. entries that occurred before calling `observe()`.
-    try {
-        // This inexplicably fires off an error instead of just ignoring a type it doesn't understand
-        // until fairly recent browsers.
-        // https://github.com/w3c/performance-timeline/issues/87
-        // If we can't observer LCP, catch and return early.
-        po.observe({ type: 'largest-contentful-paint', buffered: true });
-    } catch {
-        return;
-    }
-
-    // Send the latest LCP value to your analytics server once the user
-    // leaves the tab.
-    window.addEventListener(
-        'visibilitychange',
-        function fn() {
-            if (lcp && document.visibilityState === 'hidden') {
-                ga(
-                    send,
-                    'timing',
-                    'Javascript Load', // Matches Frontend
-                    'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
-                    Math.round(lcp),
-                    'Largest Contentful Paint',
-                );
-                window.removeEventListener('visibilitychange', fn, true);
-            }
-        },
-        true,
-    );
 };
 
 export const sendPageView = (): void => {
     const { GA } = window.guardian.app.data;
-    const set = `${tracker.name}.set`;
-    const send = `${tracker.name}.send`;
     const userCookie = getCookie('GU_U');
     const { ga } = window;
 
@@ -172,5 +148,44 @@ export const sendPageView = (): void => {
         },
     });
 
-    trackLCP(send);
+    // //////////////////////
+    // Core Vitals Reporting
+    // Supported only in Chromium but npm module tested in all our supported browsers
+    // https://www.npmjs.com/package/web-vitals#browser-support
+
+    // Only send for roughly 5% of users
+    // We want all or nothing on the corevitals so that they can be easily compared for a single pageview
+    // so we do this here rather than in the sendCoreVital function
+    const randomPerc = Math.random() * 100;
+    const coreVitalsSampleRate = 5;
+
+    if (coreVitalsSampleRate >= randomPerc) {
+        // CLS and LCP are captured when the page lifecycle changes to 'hidden'.
+        // https://developers.google.com/web/updates/2018/07/page-lifecycle-api#advice-hidden
+        getCLS(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getcls (This is actually DCLS, as doesn't track CLS in iframes, see https://github.com/WICG/layout-instability#cumulative-scores)
+        getLCP(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getlcp
+
+        // FID is captured when a user interacts with the page
+        getFID(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getfid
+    }
+};
+
+export const trackNonClickInteraction = (actionName: string): void => {
+    const { ga } = window;
+
+    if (ga) {
+        ga(send, 'event', 'Interaction', actionName, {
+            /**
+             * set nonInteraction to avoid affecting bounce rate
+             * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
+             */
+            nonInteraction: true,
+        });
+    } else {
+        const error = new Error("window.ga doesn't exist");
+        window.guardian.modules.sentry.reportError(
+            error,
+            'trackNonClickInteraction',
+        );
+    }
 };

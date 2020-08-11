@@ -13,8 +13,8 @@ type Props = {
     CAPI: CAPIBrowserType;
 };
 
-const getEngagementBannerLastClosedAt = (): string | undefined => {
-    const item = localStorage.getItem('gu.prefs.engagementBannerLastClosedAt');
+const getBannerLastClosedAt = (key: string): string | undefined => {
+    const item = localStorage.getItem(`gu.prefs.${key}`);
     return (item && JSON.parse(item).value) || undefined;
 };
 
@@ -44,7 +44,7 @@ export const StickyBottomBanner = ({
 
     if (showOldCMP) return <CMP />;
 
-    const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
+    const showRRBanner = CAPI.config.remoteBanner;
 
     if (showRRBanner)
         return (
@@ -60,7 +60,16 @@ export const StickyBottomBanner = ({
                 tags={CAPI.tags}
                 contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 alreadyVisitedCount={getAlreadyVisitedCount()}
-                engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
+                engagementBannerLastClosedAt={getBannerLastClosedAt(
+                    'engagementBannerLastClosedAt',
+                )}
+                subscriptionBannerLastClosedAt={getBannerLastClosedAt(
+                    'subscriptionBannerLastClosedAt',
+                )}
+                switches={{
+                    remoteSubscriptionsBanner: !!CAPI.config
+                        .remoteSubscriptionsBanner,
+                }}
             />
         );
 

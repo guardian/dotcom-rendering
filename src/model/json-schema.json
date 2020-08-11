@@ -15,7 +15,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AudioAtomElement"
+                        "$ref": "#/definitions/AudioAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
@@ -78,6 +78,9 @@
                         "$ref": "#/definitions/InteractiveAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/InteractiveBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
@@ -97,6 +100,9 @@
                     },
                     {
                         "$ref": "#/definitions/SoundcloudBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/SpotifyBlockElement"
                     },
                     {
                         "$ref": "#/definitions/SubheadingBlockElement"
@@ -374,7 +380,7 @@
         "webURL"
     ],
     "definitions": {
-        "AudioAtomElement": {
+        "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -383,30 +389,11 @@
                         "model.dotcomrendering.pageElements.AudioAtomBlockElement"
                     ]
                 },
-                "id": {
-                    "type": "string"
-                },
-                "kicker": {
-                    "type": "string"
-                },
-                "trackUrl": {
-                    "type": "string"
-                },
-                "duration": {
-                    "type": "number"
-                },
-                "coverUrl": {
-                    "type": "string"
+                "amp": {
+                    "type": "object"
                 }
             },
-            "required": [
-                "_type",
-                "coverUrl",
-                "duration",
-                "id",
-                "kicker",
-                "trackUrl"
-            ]
+            "required": ["_type", "amp"]
         },
         "AudioBlockElement": {
             "type": "object",
@@ -523,6 +510,9 @@
                 "id": {
                     "type": "string"
                 },
+                "calloutsUrl": {
+                    "type": "string"
+                },
                 "activeFrom": {
                     "type": "number"
                 },
@@ -565,11 +555,15 @@
                             }
                         ]
                     }
+                },
+                "calloutIndex": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
                 "activeFrom",
+                "calloutsUrl",
                 "description",
                 "displayOnSensitive",
                 "formFields",
@@ -584,7 +578,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["textarea"]
+                    "enum": ["text"]
                 },
                 "id": {
                     "type": "string"
@@ -615,7 +609,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["text"]
+                    "enum": ["textarea"]
                 },
                 "id": {
                     "type": "string"
@@ -1314,6 +1308,33 @@
                     "type": "string"
                 }
             },
+            "required": ["_type", "id", "js", "url"]
+        },
+        "InteractiveBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InteractiveBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
+                }
+            },
             "required": ["_type", "url"]
         },
         "MapBlockElement": {
@@ -1499,6 +1520,27 @@
                 }
             },
             "required": ["_type", "html", "id", "isMandatory", "isTrack"]
+        },
+        "SpotifyBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SpotifyBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type", "html"]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1772,7 +1814,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/AudioAtomElement"
+                                "$ref": "#/definitions/AudioAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"
@@ -1835,6 +1877,9 @@
                                 "$ref": "#/definitions/InteractiveAtomBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/InteractiveBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/MapBlockElement"
                             },
                             {
@@ -1851,6 +1896,9 @@
                             },
                             {
                                 "$ref": "#/definitions/RichLinkBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/SpotifyBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SoundcloudBlockElement"

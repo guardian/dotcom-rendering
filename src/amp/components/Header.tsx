@@ -9,7 +9,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
-    background-color: ${palette.brand.main};
+    background-color: ${palette.brand[400]};
 `;
 
 const row = css`
@@ -112,7 +112,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
 `;
 
 const veggieStyles = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${palette.brandAlt[400]};
     color: ${palette.neutral[97]};
     height: 42px;
     min-width: 42px;

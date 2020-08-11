@@ -15,7 +15,8 @@ describe('E2E Page rendering', function () {
 
             it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
-                cy.scrollTo('bottom', { duration: 500 });
+                const roughLoadPositionOfMostView = 1400;
+                cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
                 cy.contains('Lifestyle');
 
                 if (!article.hideMostViewed) {
@@ -31,6 +32,7 @@ describe('E2E Page rendering', function () {
                     );
                 }
 
+                cy.scrollTo('bottom', { duration: 500 });
                 cy.wait('@getShareCount').then((xhr) => {
                     expect(xhr.status).to.be.equal(200);
                     expect(xhr.response.body).to.have.property('path');
@@ -56,9 +58,61 @@ describe('E2E Page rendering', function () {
                     expect(xhr.response.body).to.have.property('tabs');
                     expect(xhr.status).to.be.equal(200);
 
-                    cy.contains('Most popular');
+                    cy.contains('Most commented');
                 });
             });
+        });
+    });
+
+    describe('AB Tests - Can modify page', function () {
+        it('should set the correct AB Test Variant', function () {
+            // The A/B test has an audience of 0.001 and test offset of 0
+            // Therefore the test will run from MVTIds 0 - 100
+            // As there are two variants and therefore each variant falls into odd or even numbers
+            // The 'control' will be even numbers, and the 'variant' will be odd
+            // We test 99 here for the MVT cookie (set by Fastly usually) as expecting it to return
+            // the 'variant' of the A/B test
+            // See https://ab-tests.netlify.app/ for help caluclating buckets
+            cy.setCookie('GU_mvt_id_local', '99', {
+                log: true,
+            });
+
+            cy.visit(
+                'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+            );
+
+            cy.scrollTo('bottom', { duration: 300 });
+            cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
+                'be.visible',
+            );
+
+            cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
+
+            cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
+                'not.be.visible',
+            );
+        });
+
+        it('should not edit the page if not in an AB test', function () {
+            // See explanation above
+            // The test runs from 0-100 MVT IDs, so 500 should force user not to be in the test
+            cy.setCookie('GU_mvt_id_local', '500', {
+                log: true,
+            });
+
+            cy.visit(
+                'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+            );
+
+            cy.scrollTo('bottom', { duration: 300 });
+
+            cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
+                'be.visible',
+            );
+
+            cy.get('[data-cy-ab-runnable-test=not-runnable]').should(
+                'be.visible',
+            );
         });
     });
 

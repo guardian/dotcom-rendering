@@ -1,6 +1,8 @@
 export const calloutCampaign: CalloutBlockElement = {
     _type: 'model.dotcomrendering.pageElements.CalloutBlockElement',
     id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
+    calloutsUrl:
+        'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
     tagName: 'callout-early-coronavirus-events',
     activeFrom: 1588118400000,
     displayOnSensitive: false,

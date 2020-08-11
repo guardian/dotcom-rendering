@@ -11,7 +11,7 @@ import { palette } from '@guardian/src-foundations';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
 
 const epic = css`
-    border-top: 0.0625rem solid ${palette.brandYellow.main};
+    border-top: 0.0625rem solid ${palette.brandAlt[400]};
     background-color: ${palette.neutral[97]};
     clear: left;
     margin-top: 1.5rem;
@@ -43,7 +43,7 @@ const epicParagraph = css`
     vertical-align: 0%;
     line-height: 1.5;
     &::selection {
-        background-color: ${palette.brandYellow.main};
+        background-color: ${palette.brandAlt[400]};
     }
     &:last-of-type {
         display: inline;
@@ -51,7 +51,7 @@ const epicParagraph = css`
 `;
 const highlightedText = css`
     font-size: 1.1rem;
-    background-color: ${palette.brandYellow.main};
+    background-color: ${palette.brandAlt[400]};
     padding: 0.125rem;
     margin-left: 5px;
     color: ${palette.neutral[7]};
@@ -65,7 +65,7 @@ const highlightedText = css`
     display: inline;
 `;
 const supportButton = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${palette.brandAlt[400]};
     color: ${palette.neutral[7]};
     display: inline-block;
     ${textSans.medium()};

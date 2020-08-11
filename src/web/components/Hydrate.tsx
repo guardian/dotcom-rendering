@@ -2,19 +2,21 @@ import ReactDOM from 'react-dom';
 
 type Props = {
     root: IslandType;
+    index?: number;
     children: JSX.Element;
 };
 
-export const Hydrate = ({ root, children }: Props) => {
-    const element = document.getElementById(root);
+export const Hydrate = ({ root, index, children }: Props) => {
+    const rootWithIndex = index ? `${root}-${index}` : root;
+    const element = document.getElementById(rootWithIndex);
     if (!element) return null;
-    window.performance.mark(`${root}-hydrate-start`);
+    window.performance.mark(`${rootWithIndex}-hydrate-start`);
     ReactDOM.hydrate(children, element);
-    window.performance.mark(`${root}-hydrate-end`);
+    window.performance.mark(`${rootWithIndex}-hydrate-end`);
     window.performance.measure(
-        `${root}-hydrate`,
-        `${root}-hydrate-start`,
-        `${root}-hydrate-end`,
+        `${rootWithIndex}-hydrate`,
+        `${rootWithIndex}-hydrate-start`,
+        `${rootWithIndex}-hydrate-end`,
     );
     return null;
 };

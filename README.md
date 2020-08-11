@@ -11,8 +11,8 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Install Node.js](#install-nodejs)
   - [Running instructions](#running-instructions)
   - [Detailed Setup](#detailed-setup)
+  - [Technologies](#technologies)
   - [Architecture Diagram](#architecture-diagram)
-  - [Storybook](#storybook)
   - [Concepts](#concepts)
   - [Feedback](#feedback)
 - [Code Quality](#code-quality)
@@ -55,23 +55,32 @@ You can render a specific article by [specifying the production URL in the query
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
+### Technologies
+
+| Technology                                                                       | Description                                                                                                                                                                                                                                                                                                                             |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />             | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatability with React modules.                                                                                                                                                                                |
+| <img alt="Emotion CSS-in-JS" src="./docs/images/logo-emotion.png" width="350" /> | Emotion is css-in-js library, DCR uses the `css` tagged template literal style to allow CSS copy-pasting.                                                                                                                                                                                                                               |
+| <img alt="Typescript" src="./docs/images/logo-typescript.png" width="350" />     | DCR is written in Typescript. You can see the [block element types](./src/lib/content.d.ts) as an example of our Typescript types.                                                                                                                                                                                                      |
+| <img alt="Express" src="./docs/images/logo-express.png" width="350" />           | We use Express as a very thin server to communicate with the Frontend endpoint.                                                                                                                                                                                                                                                         |
+| <img alt="Storybook" src="./docs/images/logo-storybook.jpg" width="350" />       | We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic. You'll notice `.stories.` files in the repo for components that define the variations of components as defined by the component props. |
+| <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />       | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
+| <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />           | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
+| <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />            | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
+
 ### Architecture Diagram
 
 You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
-
-### Storybook
-
-We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic.
 
 ### Concepts
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
 
--   Design and Display Types use the [Switch Pattern](docs/contributing/switch-on-display-design.md)
--   [DecideLayout](docs/contributing/decide-layout.md)
+-   Design and Display Types use the [Switch Pattern](docs/patterns/switch-on-display-design.md)
+-   [DecideLayout](docs/patterns/decide-layout.md)
 -   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
 -   Dynamic imports
--   [EnhanceCAPI](docs/contributing/enhance-capi.md)
+-   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
 
 ### Feedback

@@ -4,7 +4,7 @@ export const Feature: CAPIType = {
     slotMachineFlags: '',
     isAdFreeUser: false,
     main:
-        '<figure class="element element-atom"> \n <gu-atom data-atom-id="d904f65f-f5c1-4786-8d7a-54fc2a4abe72" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/7z3iv-HkI7o?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
+        '<figure class="element element-atom"> \n <gu-atom data-atom-id="6c4587d3-41ad-4f71-85d0-1b3ccc2c9314" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/KdPNZSIY918?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
     subMetaSectionLinks: [
         {
             url: '/film/oscars-2020',
@@ -1945,9 +1945,9 @@ export const Feature: CAPIType = {
         {
             mediaTitle:
                 'Biggest night in Hollywood: key moments from the Oscars – video ',
-            assetId: '7z3iv-HkI7o',
+            assetId: 'KdPNZSIY918',
             _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-            id: 'd904f65f-f5c1-4786-8d7a-54fc2a4abe72',
+            id: '6c4587d3-41ad-4f71-85d0-1b3ccc2c9314',
             channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
         },
     ],

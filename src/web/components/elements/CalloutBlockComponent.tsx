@@ -8,7 +8,12 @@ import { Button } from '@guardian/src-button';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
-import { Form } from './Form';
+import { Form } from '../Callout/Form';
+
+const wrapperStyles = css`
+    margin-bottom: 26px;
+    margin-top: 16px;
+`;
 
 const calloutDetailsStyles = css`
     border-top: 1px ${neutral[86]} solid;
@@ -88,13 +93,11 @@ let hasFormBeenOpened = true;
 
 type formData = { [key in string]: any };
 
-export const Callout = ({
+export const CalloutBlockComponent = ({
     callout,
-    calloutsUrl,
     pillar,
 }: {
     callout: CalloutBlockElement;
-    calloutsUrl: string;
     pillar: Pillar;
 }) => {
     let expandFormButtonRef: HTMLButtonElement | null = null;
@@ -124,7 +127,7 @@ export const Callout = ({
             {},
         );
 
-        return fetch(`${calloutsUrl}/formstack-campaign/submit`, {
+        return fetch(callout.calloutsUrl, {
             method: 'POST',
             body: JSON.stringify({
                 formId: callout.formId,
@@ -250,7 +253,7 @@ export const Callout = ({
 
     if (submissionSuccess) {
         return (
-            <figure>
+            <figure className={wrapperStyles}>
                 <details
                     className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
@@ -283,7 +286,7 @@ export const Callout = ({
     }
 
     return (
-        <figure>
+        <figure className={wrapperStyles}>
             <details
                 className={cx(calloutDetailsStyles, {
                     [backgroundColorStyle]: isExpanded,

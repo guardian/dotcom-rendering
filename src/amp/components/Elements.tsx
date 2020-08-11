@@ -37,7 +37,7 @@ export const Elements = (
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-                return <AudioAtomBlockComponent element={element} />;
+                return <AudioAtomBlockComponent element={element.amp} />;
             case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                 return (
                     <TextBlockComponent
@@ -95,6 +95,8 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+                return <InteractiveAtomBlockComponent url={element.url} />;
+            case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
                 return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':
                 return (

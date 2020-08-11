@@ -319,7 +319,11 @@ type CAPIBrowserType = {
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
         remoteBanner: boolean;
+        remoteSubscriptionsBanner: boolean;
         ausMoment2020Header: boolean;
+        switches: CAPIType['config']['switches'];
+        host?: string;
+        idUrl?: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -349,6 +353,8 @@ type CAPIBrowserType = {
     isImmersive: boolean;
     isPhotoEssay: boolean;
     matchUrl?: string;
+    callouts: CalloutBlockElement[];
+    qandaAtoms: QABlockElement[];
 };
 
 interface TagType {
@@ -579,6 +585,8 @@ interface ConfigType extends CommercialConfigType {
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
     references?: { [key: string]: string }[];
+    host?: string;
+    idUrl?: string;
 }
 
 interface GADataType {
@@ -643,7 +651,10 @@ type IslandType =
     | 'links-root'
     | 'match-nav'
     | 'match-stats'
-    | 'comments';
+    | 'callout'
+    | 'comments'
+    | 'qanda-atom'
+    | 'sign-in-gate';
 
 interface TrailType {
     designType: DesignType;
@@ -719,7 +730,7 @@ declare module 'minify-css-string' {
     const minifyCSSString: any;
     export default minifyCSSString;
 }
-declare module 'storybook-chromatic/isChromatic';
+declare module 'chromatic/isChromatic';
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 declare module 'dynamic-import-polyfill' {

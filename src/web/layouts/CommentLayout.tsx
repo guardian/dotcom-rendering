@@ -163,14 +163,39 @@ const minHeightWithAvatar = css`
     min-height: 259px;
 `;
 
+// If in mobile increase the margin top and margin right deficit
 const avatarPositionStyles = css`
     display: flex;
     justify-content: flex-end;
-    ${from.mobileLandscape} {
-        margin-right: -1.25rem;
-    }
-    margin-top: -36px;
+    overflow: hidden;
     margin-bottom: -29px;
+    margin-top: -50px;
+
+    /*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
+    ${from.mobile} {
+        img {
+            margin-right: -1.85rem;
+        }
+    }
+    ${from.mobileLandscape} {
+        img {
+            margin-right: -1.25rem;
+        }
+    }
 `;
 
 const pushToBottom = css`
@@ -476,10 +501,13 @@ export const CommentLayout = ({
 
             {!isPaidContent && (
                 <>
-                    {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    {/* Onwards (when signed OUT) */}
+                    <Section
+                        sectionId="onwards-upper-whensignedout"
+                        showTopBorder={false}
+                    />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedin" />
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     {showComments && (
@@ -501,13 +529,10 @@ export const CommentLayout = ({
                         </Section>
                     )}
 
-                    {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    {/* Onwards (when signed IN) */}
+                    <Section sectionId="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedout" />
+                        <Section sectionId="onwards-lower-whensignedin" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />

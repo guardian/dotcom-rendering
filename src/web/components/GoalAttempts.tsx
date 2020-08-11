@@ -18,6 +18,10 @@ type Section = {
     color: string;
 };
 
+const svgBackground = encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3"><circle fill="rgba(255, 255, 255, 0.3)" cx="1.5" cy="1.5" r="1"/></svg>',
+);
+
 const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
         className={css`
@@ -55,9 +59,9 @@ const Side = ({
 
             height: 132px;
 
-            background-image: url('data:image/svg+xml, %3Csvg%20width%3D%229%22%20height%3D%2212%22%20viewBox%3D%220%200%209%2012%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22rgba%28255%2C%20255%2C%20255%2C%200.3%29%22%3E%3Ccircle%20cx%3D%221.5%22%20cy%3D%221.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%221.5%22%20cy%3D%224.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%221.5%22%20cy%3D%227.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%221.5%22%20cy%3D%2210.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%221.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%224.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%227.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%2210.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%227.5%22%20cy%3D%221.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%227.5%22%20cy%3D%224.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%227.5%22%20cy%3D%227.5%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%227.5%22%20cy%3D%2210.5%22%20r%3D%221%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+            background-image: url('data:image/svg+xml;utf-8,${svgBackground}');
             background-repeat: repeat;
-            background-size: 0.625rem;
+            background-size: 3px;
             background-position-x: 0;
 
             padding-top: 1px;

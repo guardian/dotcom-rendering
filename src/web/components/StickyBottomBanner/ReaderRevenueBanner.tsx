@@ -7,10 +7,12 @@ import { logView } from '@root/node_modules/@guardian/automat-client';
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
-    sendOphanContributionsComponentEvent,
+    sendOphanComponentEvent,
     TestMeta,
+    submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -37,6 +39,8 @@ type Props = {
     contributionsServiceUrl: string;
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
+    subscriptionBannerLastClosedAt?: string;
+    switches: { [key: string]: boolean };
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -44,7 +48,6 @@ const buildPayload = (props: Props) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_ENGAGEMENT_BANNER',
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
@@ -55,8 +58,11 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn),
             engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
+            subscriptionBannerLastClosedAt:
+                props.subscriptionBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
+            switches: props.switches,
         },
     };
 };
@@ -74,6 +80,8 @@ const MemoisedInner = ({
     contributionsServiceUrl,
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
+    subscriptionBannerLastClosedAt,
+    switches,
 }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
     const [bannerProps, setBannerProps] = useState<{}>();
@@ -98,10 +106,13 @@ const MemoisedInner = ({
             isSensitive,
             alreadyVisitedCount,
             engagementBannerLastClosedAt,
+            subscriptionBannerLastClosedAt,
+            switches,
         });
 
         window.guardian.automat = {
             react: React,
+            preact: React,
             emotionCore,
             emotionTheming,
             emotion,
@@ -131,18 +142,15 @@ const MemoisedInner = ({
                     .guardianPolyfilledImport(module.url)
                     .then((bannerModule) => {
                         setBannerProps({
+                            submitComponentEvent,
                             ...module.props,
                         });
                         setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
                         setBannerMeta(meta);
-                        sendOphanContributionsComponentEvent(
-                            'INSERT',
-                            meta,
-                            'ACQUISITIONS_ENGAGEMENT_BANNER',
-                        );
+                        sendOphanComponentEvent('INSERT', meta);
                     })
-                    // eslint-disable-next-line no-console
                     .catch((error) =>
+                        // eslint-disable-next-line no-console
                         console.log(`banner - error is: ${error}`),
                     );
             });
@@ -152,12 +160,16 @@ const MemoisedInner = ({
     // Should only run once
     useEffect(() => {
         if (hasBeenSeen && bannerMeta) {
-            logView(bannerMeta.abTestName);
-            sendOphanContributionsComponentEvent(
-                'VIEW',
-                bannerMeta,
-                'ACQUISITIONS_ENGAGEMENT_BANNER',
-            );
+            const { abTestName, componentType } = bannerMeta;
+
+            logView(abTestName);
+
+            sendOphanComponentEvent('VIEW', bannerMeta);
+
+            // track banner view event in Google Analytics for subscriptions banner
+            if (componentType === 'ACQUISITIONS_SUBSCRIPTIONS_BANNER') {
+                trackNonClickInteraction('subscription-banner : display');
+            }
         }
     }, [hasBeenSeen, bannerMeta]);
 
@@ -192,6 +204,8 @@ export const ReaderRevenueBanner = ({
     contributionsServiceUrl,
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
+    subscriptionBannerLastClosedAt,
+    switches,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -213,6 +227,8 @@ export const ReaderRevenueBanner = ({
             contributionsServiceUrl={contributionsServiceUrl}
             alreadyVisitedCount={alreadyVisitedCount}
             engagementBannerLastClosedAt={engagementBannerLastClosedAt}
+            subscriptionBannerLastClosedAt={subscriptionBannerLastClosedAt}
+            switches={switches}
         />
     );
 };
