@@ -107,6 +107,23 @@ const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
     return CAPI.pillar;
 };
 
+const componentEventHandler = (
+    componentType: any,
+    id: any,
+    action: any,
+) => () => {
+    const componentEvent: OphanComponentEvent = {
+        component: {
+            componentType,
+            id,
+            products: [],
+            labels: [],
+        },
+        action,
+    };
+    submitComponentEvent(componentEvent);
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
@@ -313,42 +330,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={qandaAtom.html}
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
-                        likeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    products: [],
-                                    labels: [],
-                                },
-                                action: 'LIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        dislikeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'DISLIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        expandHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'EXPAND',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
+                        likeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'EXPAND',
+                        )}
                     />
                 </Hydrate>
             ))}
@@ -361,42 +357,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                         image={guideAtom.img}
                         credit={guideAtom.credit}
                         pillar={pillar}
-                        likeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'GUIDE_ATOM',
-                                    id: guideAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'LIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        dislikeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'GUIDE_ATOM',
-                                    id: guideAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'DISLIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        expandCallback={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'GUIDE_ATOM',
-                                    id: guideAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'EXPAND',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
+                        likeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'EXPAND',
+                        )}
                     />
                 </Hydrate>
             ))}
