@@ -36,7 +36,6 @@ const clientConfig = {
     accountId: 1257,
     mmsDomain: `https://${domain}`,
     propertyId: 8791,
-    propertyHref: 'https://theguardian.amp',
     pmTab: 'purposes',
     stageCampaign: false,
 };
@@ -44,6 +43,7 @@ const clientConfig = {
 const clientConfigTcfv2 = {
     privacyManagerId: 145885,
     isTCFV2: true,
+    propertyHref: 'https://theguardian.amp',
     targetingParams: {
         framework: 'tcfv2',
     },
@@ -52,6 +52,7 @@ const clientConfigTcfv2 = {
 const clientConfigCcpa = {
     privacyManagerId: '5eba7ef78c167c47ca8b433d',
     isCCPA: true,
+    siteHref: 'https://theguardian.amp',
     getDnsMsgMms: true,
     alwaysDisplayDns: false,
     showNoticeUntilAction: true,
