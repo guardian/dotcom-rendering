@@ -39,7 +39,6 @@ const listStyles = css`
 `;
 
 const RelatedContent = ({ content }: Props): JSX.Element | null => {
-    return null;
     return pipe2(
         content,
         map(({ title, relatedItems, resizedImages }) => {
