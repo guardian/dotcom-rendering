@@ -30,11 +30,11 @@ const consentUIStyle = css`
     }
 `;
 
-const domain = 'sourcepoint.theguardian.test';
+const sourcepointDomain = 'sourcepoint.theguardian.com';
 
 const clientConfig = {
     accountId: 1257,
-    mmsDomain: `https://${domain}`,
+    mmsDomain: `https://${sourcepointDomain}`,
     propertyId: 8791,
     pmTab: 'purposes',
     stageCampaign: false,
@@ -87,8 +87,8 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${domain}/wrapper/tcfv2/v1/amp`,
-                        promptUISrc: `https://${domain}/amp/index.html`,
+                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
+                        promptUISrc: `https://${sourcepointDomain}/amp/index.html`,
                         // TODO: decide on postPromptUI
                         // postPromptUI: 'consent-ui-manager',
                         clientConfig,
@@ -100,7 +100,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 clientConfig: clientConfigTcfv2,
                             },
                             us: {
-                                checkConsentHref: `https://${domain}/ccpa/consent/amp`,
+                                checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
                             },
                         },
