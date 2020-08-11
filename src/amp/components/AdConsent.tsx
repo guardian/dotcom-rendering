@@ -5,6 +5,7 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
 import { ThemeProvider } from 'emotion-theming';
 import { brand } from '@guardian/src-foundations/themes';
+import { SvgCheckmark } from '@guardian/src-icons';
 import { JsonScript } from './JsonScript';
 
 const consentUIStyle = css`
@@ -12,7 +13,7 @@ const consentUIStyle = css`
     color: ${palette.brandText.primary};
     background-color: ${palette.brandBackground.primary};
     max-width: 600px;
-    padding: ${space[2]}px;
+    padding: ${space[4]}px;
     margin: 0 auto;
     overflow-x: hidden;
 
@@ -27,6 +28,10 @@ const consentUIStyle = css`
 
     .center {
         text-align: center;
+    }
+
+    .center button {
+        margin: ${space[2]}px;
     }
 `;
 
@@ -72,8 +77,10 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         ISOCountryGroups: {
                             eea: ['preset-eea', 'unknown'],
-                            us: ['us'],
+                            us: ['us', 'ca'],
                             au: ['au', 'nz'],
+                            tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
+                            tcfv1: ['us'],
                         },
                     }}
                 />
@@ -93,19 +100,23 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         // postPromptUI: 'consent-ui-manager',
                         clientConfig,
                         geoOverride: {
-                            eea: {
+                            tcfv2: {
                                 clientConfig: clientConfigTcfv2,
                             },
-                            au: {
-                                clientConfig: clientConfigTcfv2,
+                            tcfv1: {
+                                consentRequired: true,
+                                promptUI: 'consent-ui',
+                                clientConfig: false,
                             },
-                            us: {
+                            ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
                             },
                         },
+                        // TODO: decide wether we want a fallback policy
                         policy: {
                             default: {
+                                waitFor: { sourcepoint: [] },
                                 timeout: {
                                     seconds: 5,
                                     fallbackAction: 'reject',
@@ -115,14 +126,37 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     }}
                 />
                 <ThemeProvider theme={brand}>
-                    <div id="consent-ui-manager" className={consentUIStyle}>
+                    <div id="consent-ui" className={consentUIStyle}>
+                        <h2>Your Privacy</h2>
+                        <p>
+                            We use cookies to improve your experience on our
+                            site and to show you personalised advertising.
+                        </p>
+                        <p>
+                            To find out more, read our{' '}
+                            <a href="https://www.theguardian.com/info/privacy">
+                                privacy policy
+                            </a>{' '}
+                            and{' '}
+                            <a href="https://www.theguardian.com/info/cookies">
+                                cookie policy
+                            </a>
+                            .
+                        </p>
                         <div className="center">
                             <Button
                                 size="xsmall"
-                                on="tap:consent.prompt(consent=SourcePoint)"
-                                priority="tertiary"
+                                icon={<SvgCheckmark />}
+                                on="tap:consent.accept"
                             >
-                                Manage privacy settings
+                                I&apos;m okay with that
+                            </Button>
+                            <Button
+                                size="xsmall"
+                                priority="tertiary"
+                                on="tap:consent.reject"
+                            >
+                                I do not want to see personalised ads
                             </Button>
                         </div>
                     </div>
