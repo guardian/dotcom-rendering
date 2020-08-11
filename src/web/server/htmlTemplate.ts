@@ -102,10 +102,8 @@ export const htmlTemplate = ({
     const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
     
     // Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
-    // Display twitter widget with restricted capabilities (even if our own CSP may allow more)
     // See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
-    const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">
-                                          <meta name="twitter:widgets:csp" content="on">`;
+    const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
     
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
