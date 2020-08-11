@@ -152,7 +152,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
     return <li css={[listStyles, cardStyles(relatedItem.type, relatedItem.pillar)]}>
-            <a css={anchorStyles}href={relatedItem.link}>
+            <a css={anchorStyles} href={relatedItem.link}>
                 <h2 css={headingStyles}>{relatedItem.title}</h2>
                 <section>
                     {date}
