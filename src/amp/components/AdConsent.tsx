@@ -66,7 +66,7 @@ const clientConfigCcpa = {
 
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
-    // https://localhost.cdn.ampproject.org/experiments.html
+    // https://cdn.ampproject.org/experiments.html
     // Then you can load the url with #amp-geo=XX, where XX is the country code
     return (
         <>
