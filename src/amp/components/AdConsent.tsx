@@ -30,7 +30,7 @@ const consentUIStyle = css`
     }
 `;
 
-const domain = 'sourcepoint.theguardian.com';
+const domain = 'sourcepoint.theguardian.test';
 
 const clientConfig = {
     accountId: 1257,
@@ -42,23 +42,19 @@ const clientConfig = {
 };
 
 const clientConfigTcfv2 = {
-    ...clientConfig,
     privacyManagerId: 145885,
     isTCFV2: true,
-    isCCPA: false,
     targetingParams: {
         framework: 'tcfv2',
     },
 };
 
 const clientConfigCcpa = {
-    ...clientConfig,
     privacyManagerId: '5eba7ef78c167c47ca8b433d',
-    isTCFV2: false,
     isCCPA: true,
-    // getDnsMsgMms: true,
-    // alwaysDisplayDns: false,
-    // showNoticeUntilAction: true,
+    getDnsMsgMms: true,
+    alwaysDisplayDns: false,
+    showNoticeUntilAction: true,
     targetingParams: {
         framework: 'ccpa',
     },
@@ -94,8 +90,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         promptUISrc: `https://${domain}/amp/index.html`,
                         // TODO: decide on postPromptUI
                         // postPromptUI: 'consent-ui-manager',
-                        clientConfig: clientConfigTcfv2,
+                        clientConfig,
                         geoOverride: {
+                            eea: {
+                                clientConfig: clientConfigTcfv2,
+                            },
+                            au: {
+                                clientConfig: clientConfigTcfv2,
+                            },
                             us: {
                                 checkConsentHref: `https://${domain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
