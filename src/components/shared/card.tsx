@@ -2,18 +2,18 @@ import React, { ReactElement } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, breakpoints } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral } from '@guardian/src-foundations/palette';
-import BodyImage from 'components/bodyImage';
 import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { Pillar as ContentPillar } from '@guardian/content-api-models/v1/pillar';
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
+import Img from 'components/img';
 
 
 
@@ -75,8 +75,8 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
     withDefault<JSX.Element | null>(null),
 );
 
-const cardStyles = (type: RelatedItemType, pillar: ContentPillar): SerializedStyles => {
-    switch(type) {
+const cardStyles = (itemType: RelatedItemType, pillar: ContentPillar): SerializedStyles => {
+    switch(itemType) {
         case RelatedItemType.ARTICLE: {
             return css``;
         }
@@ -140,10 +140,16 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         display: Display.Standard
     }
 
+    const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
+
     const img = pipe2(
         image,
         map(img => {
-            return <BodyImage image={img} format={format}/>
+            return <Img
+                image={img}
+                sizes={sizes}
+                format={format}
+            />
         }),
         withDefault<ReactElement | null>(null)
     )
@@ -153,7 +159,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
 
     return <li css={[listStyles, cardStyles(relatedItem.type, relatedItem.pillar)]}>
             <a css={anchorStyles} href={relatedItem.link}>
-                <h2 css={headingStyles}>{relatedItem.title}</h2>
+                <h3 css={headingStyles}>{relatedItem.title}</h3>
                 <section>
                     {date}
                     <div css={imageWrapperStyles}>{img}</div>

@@ -43,7 +43,7 @@ const RelatedContent = ({ content }: Props): JSX.Element | null => {
         content,
         map(({ title, relatedItems, resizedImages }) => {
             return <section css={styles}>
-                <h1 css={headingStyles}>{title}</h1>
+                <h2 css={headingStyles}>{title}</h2>
                 <ul css={listStyles}>
                     {
                         relatedItems.map((relatedItem, key) => {
