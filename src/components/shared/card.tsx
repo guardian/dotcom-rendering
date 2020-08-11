@@ -75,7 +75,7 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
     withDefault<JSX.Element | null>(null),
 );
 
-const cardStyles = (type: RelatedItemType, pillar: contentPillar): SerializedStyles => {
+const cardStyles = (type: RelatedItemType, pillar: ContentPillar): SerializedStyles => {
     switch(type) {
         case RelatedItemType.ARTICLE: {
             return css``;
