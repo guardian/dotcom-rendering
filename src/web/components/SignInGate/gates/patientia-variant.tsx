@@ -15,12 +15,12 @@ import {
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGate } from '../dismissGate';
 
-const canShow = (
+const canShow = async (
     CAPI: CAPIBrowserType,
     isSignedIn: boolean,
     currentTest: CurrentABTest,
-): boolean =>
-    !shouldShowCmp() &&
+): Promise<boolean> =>
+    !(await shouldShowCmp()) &&
     !isSignedIn &&
     !hasUserDismissedGate(currentTest.variant, currentTest.name) &&
     isNPageOrHigherPageView(3) &&

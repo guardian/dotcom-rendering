@@ -26,12 +26,12 @@ const SignInGateMain = React.lazy(() => {
     });
 });
 
-const canShow = (
+const canShow = async (
     CAPI: CAPIBrowserType,
     isSignedIn: boolean,
     currentTest: CurrentABTest,
-): boolean =>
-    !shouldShowCmp() &&
+): Promise<boolean> =>
+    !(await shouldShowCmp()) &&
     !isSignedIn &&
     !hasUserDismissedGate(currentTest.variant, currentTest.name) &&
     isNPageOrHigherPageView(3) &&
