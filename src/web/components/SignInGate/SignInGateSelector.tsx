@@ -158,6 +158,8 @@ export const SignInGateSelector = ({
     CAPI,
 }: SignInGateSelectorProps) => {
     const [showGate, setShowGate] = useState(true);
+    const [canShow, setCanShow] = useState(false);
+
     const [currentTest, setCurrentTest] = useState<CurrentABTest>({
         name: '',
         variant: '',
@@ -176,6 +178,15 @@ export const SignInGateSelector = ({
         });
     }, [ab]);
 
+    const signInUrl = generateSignInUrl(CAPI, currentTest);
+
+    const gateVariant: SignInGateComponent | null =
+        testVariantToGateMapping?.[currentTest.variant];
+
+    useEffect(() => {
+        gateVariant?.canShow(CAPI, !!isSignedIn, currentTest).then(setCanShow);
+    }, [CAPI, isSignedIn, currentTest]);
+
     // check to see if the test is available on this render cycle
     // required by the ab test framework, as we have to wait for the above
     // useEffect hook to determine which test to run
@@ -183,24 +194,18 @@ export const SignInGateSelector = ({
         return null;
     }
 
-    const signInUrl = generateSignInUrl(CAPI, currentTest);
-
-    const gateVariant: SignInGateComponent | null =
-        testVariantToGateMapping?.[currentTest.variant];
-
     return (
         <>
             {/* Sign In Gate Display Logic */}
-            {showGate &&
-                gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
-                    <ShowSignInGate
-                        CAPI={CAPI}
-                        abTest={currentTest}
-                        setShowGate={setShowGate}
-                        signInUrl={signInUrl}
-                        gateVariant={gateVariant}
-                    />
-                )}
+            {showGate && canShow && (
+                <ShowSignInGate
+                    CAPI={CAPI}
+                    abTest={currentTest}
+                    setShowGate={setShowGate}
+                    signInUrl={signInUrl}
+                    gateVariant={gateVariant}
+                />
+            )}
         </>
     );
 };
