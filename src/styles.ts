@@ -121,11 +121,6 @@ export const adStyles  = (format: Format): SerializedStyles => {
             margin-top: 0;
        }
 
-       .upgrade-banner-button {
-            background: ${neutral[7]};
-            color: ${neutral[100]};
-       }
-
         ${until.phablet} {
             margin: 1em ${basePx(-1)};
         }

@@ -1,7 +1,8 @@
 import { createElement as h, ReactNode, ReactElement, isValidElement } from 'react';
-import { jsx as styledH, css } from '@emotion/core';
 import Paragraph from 'components/paragraph';
-import { defaultSize, button } from '@guardian/src-button/styles';
+import { Button, buttonBrandAlt } from '@guardian/src-button';
+import React from 'react';
+import { ThemeProvider } from 'emotion-theming'
 
 function getAdIndices(): number[] {
     const adEveryNParagraphs = 6;
@@ -32,7 +33,9 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
         h('div', { className: 'ad-slot' }, null),
         h('div', { className: 'upgrade-banner' },
             h('h1', null, "Upgrade to Premium and enjoy the app ad-free."),
-            styledH('button', { className: 'upgrade-banner-button', css: [defaultSize, button] }, "Upgrade to Premium")
+            <ThemeProvider theme={buttonBrandAlt}>
+                <Button>Upgrade to Premium</Button>
+            </ThemeProvider>
         )
     );
 
