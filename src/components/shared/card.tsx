@@ -12,7 +12,7 @@ import { Pillar, Design, Display } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { Pillar as contentPillar } from '@guardian/content-api-models/v1/pillar';
+import { Pillar as ContentPillar } from '@guardian/content-api-models/v1/pillar';
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 
 
