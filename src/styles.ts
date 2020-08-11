@@ -111,15 +111,16 @@ export const adStyles  = (format: Format): SerializedStyles => {
         .upgrade-banner {
             padding: ${remSpace[2]};
             background-color: ${brandAltBackground.primary};
+
+            h1 {
+                ${headline.xxxsmall()};
+                margin-top: 0;
+            }
+
             ${darkModeCss`
                 background-color: ${brandAltBackground.ctaSecondary};
             `}
         }
-
-        h1 {
-            ${headline.xxxsmall()};
-            margin-top: 0;
-       }
 
         ${until.phablet} {
             margin: 1em ${basePx(-1)};
