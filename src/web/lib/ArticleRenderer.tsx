@@ -192,7 +192,14 @@ export const ArticleRenderer: React.FC<{
                         <SoundcloudBlockComponent key={i} element={element} />
                     );
                 case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
-                    return <SpotifyBlockComponent element={element} />;
+                    return (
+                        <SpotifyBlockComponent
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            title={element.title}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />

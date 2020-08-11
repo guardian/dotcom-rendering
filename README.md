@@ -6,7 +6,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
 - [Quick start](#quick-start)
   - [Install Node.js](#install-nodejs)
   - [Running instructions](#running-instructions)
