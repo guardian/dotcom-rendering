@@ -2355,12 +2355,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/consent-management-platform@4.0.0-9":
-  version "4.0.0-9"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-4.0.0-9.tgz#9335485e5b98c7771498dee2bb892a5f94e27b19"
-  integrity sha512-JL2LpgbUcYz488kBAmCAAn0t8NtmT8s4LDXd2sVvRhZAThG4evGyJDD1fI9FhBmwvhAukRaet2SPr52hxt7zUQ==
+"@guardian/consent-management-platform@4.0.0-10":
+  version "4.0.0-10"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-4.0.0-10.tgz#d34fafcd8c4dfd2fe301df3fbb283fa8007ad0d3"
+  integrity sha512-YwQVc1vNzA0YmXzbwQmW8MJmXKVkWR/clPTeV/eyaiK54d8ryydtEeFj3WU/3qTZapLy8x1mNAtfcaWeh078VA==
   dependencies:
-    "@guardian/old-cmp" "npm:@guardian/consent-management-platform@^3.4.9"
+    "@guardian/old-cmp" "npm:@guardian/consent-management-platform@^3.4.10"
 
 "@guardian/discussion-rendering@^2.6.0":
   version "2.6.0"
@@ -2373,7 +2373,7 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
-"@guardian/old-cmp@npm:@guardian/consent-management-platform@^3.4.9":
+"@guardian/old-cmp@npm:@guardian/consent-management-platform@^3.4.10":
   version "3.4.10"
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-3.4.10.tgz#604e71d27c6bfa4664c83c55578a8aa73ff09d82"
   integrity sha512-P3dTf9EqYhpH7JQ+Bg9MNoIQ08U4yD5j+s5epO9mNTaIBiX1BeOF3RcI3KNj/dBxSggaut0rBdQ82GN54Bg4jA==
