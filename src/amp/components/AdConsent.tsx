@@ -104,6 +104,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 clientConfig: clientConfigCcpa,
                             },
                         },
+                        policy: {
+                            default: {
+                                timeout: {
+                                    seconds: 5,
+                                    fallbackAction: 'reject',
+                                },
+                            },
+                        },
                     }}
                 />
                 <ThemeProvider theme={brand}>
