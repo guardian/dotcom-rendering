@@ -199,7 +199,7 @@ export const ArticleRenderer: React.FC<{
                             width={element.width}
                             title={element.title}
                             pillar={pillar}
-                            caption="Blah"
+                            caption={element.caption}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
