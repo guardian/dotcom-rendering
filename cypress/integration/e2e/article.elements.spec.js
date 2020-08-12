@@ -52,7 +52,7 @@ describe('Elements', function () {
     });
 
     describe('WEB', function () {
-        it.only('should render the page as expected', function () {
+        it('should render the page as expected', function () {
             cy.viewport('iphone-x');
             const iphoneXWidth = 375;
             let hasElementTooWide = false;
