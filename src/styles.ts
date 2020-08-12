@@ -1,9 +1,9 @@
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, brandAltBackground } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
 import { Option, some, none, map, withDefault } from '@guardian/types/option';
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 import { pipe2 }  from 'lib';
 import { Format, Design } from '@guardian/types/Format';
 
@@ -49,6 +49,7 @@ export const linkStyle = (kicker: string): string => `
     }
 `
 
+const footerContentWidth = 1300;
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
@@ -63,6 +64,17 @@ export const articleWidthStyles = css`
     }
 `;
 
+export const relatedContentStyles = css`
+    ${sidePadding}
+    ${from.phablet} {
+        margin: 0 auto;
+    }
+
+    ${from.wide} {
+        width: ${footerContentWidth}px;
+    }
+`
+
 const adHeight = '258px';
 
 export const adStyles  = (format: Format): SerializedStyles => {
@@ -70,6 +82,8 @@ export const adStyles  = (format: Format): SerializedStyles => {
 
     return css`
     .ad-placeholder {
+        margin: ${remSpace[4]} 0;
+
         &.hidden {
             display: none;
         }
@@ -78,7 +92,6 @@ export const adStyles  = (format: Format): SerializedStyles => {
         background: ${backgroundColour};
 
         ${darkModeCss`
-            color: ${neutral[60]};
             background-color: ${neutral[20]};
         `}
 
@@ -86,7 +99,7 @@ export const adStyles  = (format: Format): SerializedStyles => {
 
         .ad-labels {
             ${textSans.xsmall()}
-            padding: ${basePx(1)};
+            padding: ${remSpace[2]};
             float: left;
             width: calc(100% - ${basePx(2)});
 
@@ -95,37 +108,6 @@ export const adStyles  = (format: Format): SerializedStyles => {
                 float: left;
                 font-size: 16px;
                 font-weight: 400;
-            }
-
-            .ad-hide {
-                float: right;
-                background: none;
-                border: none;
-                outline: none;
-                font-size: 16px;
-                color: ${neutral[20]};
-                position: relative;
-                margin: 0;
-                padding: 0;
-                line-height: 24px;
-
-                span {
-                    margin-right: 30px;
-                }
-
-                &::focus, &::hover, &::active {
-                    border none;
-                }
-
-                &::after {
-                    padding-left: ${basePx(1)};
-                    ${icons}
-                    content: "\\e04F";
-                    font-size: 20px;
-                    position: absolute;
-                    right: 0px;
-                    top: -2px;
-                }
 
                 ${darkModeCss`
                     color: ${neutral[60]};
@@ -136,6 +118,20 @@ export const adStyles  = (format: Format): SerializedStyles => {
         .ad-slot {
             clear: both;
             padding-bottom: ${adHeight};
+        }
+
+        .upgrade-banner {
+            padding: ${remSpace[2]};
+            background-color: ${brandAltBackground.primary};
+
+            h1 {
+                ${headline.xxxsmall()};
+                margin-top: 0;
+            }
+
+            ${darkModeCss`
+                background-color: ${brandAltBackground.ctaSecondary};
+            `}
         }
 
         ${until.phablet} {
