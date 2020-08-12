@@ -3,13 +3,12 @@
 import { ReactNode } from 'react';
 import { createHash } from 'crypto';
 
-import { Option, some, none, fromNullable, andThen, map, withDefault } from '@guardian/types/option';
+import { Option, some, none, fromNullable, andThen, map } from '@guardian/types/option';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
 import { pipe2 } from 'lib';
-import { Result, fromUnsafe, toOption } from '@guardian/types/result';
-
+import { Result, fromUnsafe, ResultKind } from '@guardian/types/result';
 
 // ----- Setup ----- //
 
@@ -73,10 +72,11 @@ const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex');
 
 function src(salt: string, input: string, width: number, dpr: Dpr): string {
-    const url: Result<string, URL> = fromUnsafe(() => new URL(input), 'invalid url')
-    return pipe2(
-        toOption(url),
-        map(url => {
+    const maybeUrl: Result<string, URL> = fromUnsafe(() => new URL(input), 'invalid url');
+
+    switch (maybeUrl.kind) {
+        case ResultKind.Ok:
+            const url = maybeUrl.value;
             const service = getSubdomain(url.hostname);
 
             const params = new URLSearchParams({
@@ -87,10 +87,13 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
 
             const path = `${url.pathname}?${params.toString()}`;
             const sig = sign(salt, path);
+
             return `${imageResizer}/${service}${path}&s=${sig}`;
-    }),
-        withDefault(input)
-    )
+
+        case ResultKind.Err:
+        default:
+            return input;
+    }
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
