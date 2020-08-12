@@ -39,7 +39,6 @@ describe('Elements', function () {
                 duration: 300,
                 offset: { top: -100, left: 0 },
             });
-            cy.wait(300);
 
             getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
                 'Deaths after Taser use: the findings',
