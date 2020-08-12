@@ -31,7 +31,8 @@ const fields = {
     shouldHideReaderRevenue: false,
     branding: none,
     commentCount: none,
-    campaigns: none
+    campaigns: none,
+    relatedContent: none
 };
 
 const article: Item = {
