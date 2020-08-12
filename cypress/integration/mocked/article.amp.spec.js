@@ -9,9 +9,9 @@ describe('For AMP', function () {
     beforeEach(fixTime);
     beforeEach(mockApi);
 
-    AMPArticles.map((article, index) => {
-        const { url, pillar, designType } = article;
-        it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+    it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        AMPArticles.map((article) => {
+            const { url } = article;
             cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
         });
     });

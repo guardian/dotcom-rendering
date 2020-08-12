@@ -8,10 +8,9 @@ describe('E2E Page rendering', function () {
     beforeEach(setupApiRoutes);
 
     describe('for WEB', function () {
-        articles.map((article, index) => {
-            const { url, pillar, designType } = article;
-
-            it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+            articles.map((article, index) => {
+                const { url } = article;
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
                 const roughLoadPositionOfMostView = 1400;
                 cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
@@ -115,10 +114,9 @@ describe('E2E Page rendering', function () {
     });
 
     describe('for AMP', function () {
-        AMPArticles.map((article, index) => {
-            const { url, pillar, designType } = article;
-
-            it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+            AMPArticles.map((article, index) => {
+                const { url, pillar, designType } = article;
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 

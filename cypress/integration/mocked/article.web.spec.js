@@ -8,10 +8,10 @@ describe('For WEB', function () {
     before(getPolyfill);
     beforeEach(fixTime);
     beforeEach(mockApi);
+    it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        articles.map((article) => {
+            const { url } = article;
 
-    articles.map((article, index) => {
-        const { url, pillar, designType } = article;
-        it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
             // Prevent the Privacy consent banner from obscuring snapshots
             cy.setCookie('GU_TK', 'true');
             // Make the request, forcing the location to UK (for edition)
