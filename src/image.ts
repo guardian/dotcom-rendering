@@ -75,7 +75,7 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
     const maybeUrl: Result<string, URL> = fromUnsafe(() => new URL(input), 'invalid url');
 
     switch (maybeUrl.kind) {
-        case ResultKind.Ok:
+        case ResultKind.Ok: {
             const url = maybeUrl.value;
             const service = getSubdomain(url.hostname);
 
@@ -89,10 +89,11 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
             const sig = sign(salt, path);
 
             return `${imageResizer}/${service}${path}&s=${sig}`;
-
+        }
         case ResultKind.Err:
-        default:
+        default: {
             return input;
+        }
     }
 }
 
