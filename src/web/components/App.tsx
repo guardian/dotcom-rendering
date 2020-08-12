@@ -17,7 +17,7 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom } from '@guardian/atoms-rendering';
+import { QandaAtom, GuideAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -106,6 +106,23 @@ const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
     if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
         return 'opinion';
     return CAPI.pillar;
+};
+
+const componentEventHandler = (
+    componentType: any,
+    id: any,
+    action: any,
+) => () => {
+    const componentEvent: OphanComponentEvent = {
+        component: {
+            componentType,
+            id,
+            products: [],
+            labels: [],
+        },
+        action,
+    };
+    submitComponentEvent(componentEvent);
 };
 
 export const App = ({ CAPI, NAV }: Props) => {
@@ -334,42 +351,48 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={qandaAtom.html}
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
-                        likeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'LIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        dislikeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'DISLIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        expandHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'EXPAND',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
+                        likeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.guideAtoms.map((guideAtom) => (
+                <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
+                    <GuideAtom
+                        id={guideAtom.id}
+                        title={guideAtom.title}
+                        html={guideAtom.html}
+                        image={guideAtom.img}
+                        credit={guideAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'EXPAND',
+                        )}
                     />
                 </Hydrate>
             ))}

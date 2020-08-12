@@ -122,6 +122,8 @@ interface GuideAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
+    guideIndex?: number;
 }
 
 interface GuVideoBlockElement {

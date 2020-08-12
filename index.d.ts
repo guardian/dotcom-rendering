@@ -355,6 +355,7 @@ type CAPIBrowserType = {
     matchUrl?: string;
     callouts: CalloutBlockElement[];
     qandaAtoms: QABlockElement[];
+    guideAtoms: GuideAtomBlockElement[];
 };
 
 interface TagType {
@@ -654,6 +655,7 @@ type IslandType =
     | 'callout'
     | 'comments'
     | 'qanda-atom'
+    | 'guide-atom'
     | 'sign-in-gate';
 
 interface TrailType {
