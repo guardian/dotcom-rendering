@@ -37,7 +37,7 @@
         "@guardian/ab-react": "1.0.0-next.0",
         "@guardian/atoms-rendering": "^1.5.0",
         "@guardian/automat-client": "^0.2.16",
-        "@guardian/consent-management-platform": "4.0.0-12",
+        "@guardian/consent-management-platform": "4.0.0-13",
         "@guardian/discussion-rendering": "^2.6.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^1.5.0",
