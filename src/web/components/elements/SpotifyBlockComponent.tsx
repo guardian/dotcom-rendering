@@ -3,10 +3,10 @@ import { css } from 'emotion';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const SpotifyBlockComponent: React.FC<{
-    embedUrl: string;
-    height: number;
-    width: number;
-    title: string;
+    embedUrl?: string;
+    height?: number;
+    width?: number;
+    title?: string;
     pillar: Pillar;
     caption?: string;
 }> = ({ embedUrl, width, height, title, pillar, caption }) => {

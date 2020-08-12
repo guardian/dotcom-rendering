@@ -1739,13 +1739,8 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "embedUrl",
-                "height",
-                "title",
-                "width"
-            ]
+            "required": ["_type"]
+
         },
         "SubheadingBlockElement": {
             "type": "object",
