@@ -21,8 +21,8 @@ const labelStyles = css`
 `;
 
 const RadioInput = (props: RadioInputProps): ReactElement =>
-    <>
-        <label css={labelStyles}>{props.label}</label>
+    <label css={labelStyles}>
+        {props.label}
         <RadioGroup name={props.name} orientation="horizontal" cssOverrides={radioStyles}>
             {
                 props.options.map(({ value, label }) => {
@@ -37,6 +37,6 @@ const RadioInput = (props: RadioInputProps): ReactElement =>
                 })
             }
         </RadioGroup>
-    </>
+    </label>
 
 export default RadioInput;
