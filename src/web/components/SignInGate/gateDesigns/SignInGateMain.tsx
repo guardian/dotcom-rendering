@@ -6,7 +6,8 @@ import { from } from '@guardian/src-foundations/mq';
 import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
-import { oldCmp } from '@guardian/consent-management-platform';
+import { cmp, oldCmp } from '@guardian/consent-management-platform';
+import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 
@@ -169,7 +170,11 @@ export const SignInGateMain = ({
                     data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
                     onClick={() => {
-                        setShowCmpUi(!showCpmUi);
+                        getPrivacyFramework().then((framework) =>
+                            framework.tcfv1
+                                ? setShowCmpUi(!showCpmUi)
+                                : cmp.showPrivacyManager(),
+                        );
                         trackLink(ophanComponentId, 'privacy', abTest);
                     }}
                 >

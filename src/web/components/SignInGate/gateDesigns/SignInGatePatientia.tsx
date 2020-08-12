@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React from 'react';
 import { css } from 'emotion';
 
 import { headline, textSans, body } from '@guardian/src-foundations/typography';
@@ -6,7 +6,6 @@ import { from } from '@guardian/src-foundations/mq';
 import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
-import { oldCmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 
@@ -127,8 +126,6 @@ export const SignInGatePatientia = ({
     ophanComponentId,
     isComment,
 }: SignInGateProps) => {
-    const [showCpmUi, setShowCmpUi] = useState(false);
-
     return (
         <div className={signinGate} data-cy="sign-in-gate-patientia">
             <style>{hideElementsCss}</style>
@@ -211,15 +208,6 @@ export const SignInGatePatientia = ({
                     Get help with registering or signing in
                 </Link>
             </div>
-            {showCpmUi && (
-                <Suspense fallback={<></>}>
-                    <oldCmp.ConsentManagementPlatform
-                        source="dcr"
-                        forceModal={true}
-                        onClose={() => setShowCmpUi(false)}
-                    />
-                </Suspense>
-            )}
         </div>
     );
 };
