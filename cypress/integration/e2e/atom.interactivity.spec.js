@@ -57,5 +57,5 @@ const atomTests = (type, url) => {
         });
     });
 };
-// atomTests('qanda', qandaUrl);
-// atomTests('guide', guideUrl);
+atomTests('qanda', qandaUrl);
+atomTests('guide', guideUrl);
