@@ -234,6 +234,7 @@ interface SpotifyBlockElement {
     title: string;
     height: number;
     width: number;
+    caption?: string;
 }
 
 interface SubheadingBlockElement {
