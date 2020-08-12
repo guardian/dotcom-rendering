@@ -1,12 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
+import { Caption } from '@root/src/amp/components/Caption';
 
 export const SpotifyBlockComponent: React.FC<{
     embedUrl?: string;
-    title?: string;
     height?: number;
     width?: number;
-}> = ({ embedUrl, title, width, height }) => {
+    title?: string;
+    pillar: Pillar;
+    caption?: string;
+}> = ({ embedUrl, width, height, title, pillar, caption }) => {
     return (
         <>
             {embedUrl && title && width && height && (
@@ -26,6 +29,9 @@ export const SpotifyBlockComponent: React.FC<{
                         width={width}
                         allowFullScreen={true}
                     />
+                    {caption && (
+                        <Caption captionText={caption} pillar={pillar} />
+                    )}
                 </div>
             )}
         </>
