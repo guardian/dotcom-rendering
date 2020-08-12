@@ -9,7 +9,7 @@ import { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
 import { pipe2 } from 'lib';
-
+import { Result, fromUnsafe, ResultKind } from '@guardian/types/result';
 
 // ----- Setup ----- //
 
@@ -74,19 +74,29 @@ const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex');
 
 function src(salt: string, input: string, width: number, dpr: Dpr): string {
-    const url = new URL(input);
-    const service = getSubdomain(url.hostname);
+    const maybeUrl: Result<string, URL> = fromUnsafe(() => new URL(input), 'invalid url');
 
-    const params = new URLSearchParams({
-        width: width.toString(),
-        quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
-        fit: 'bounds',
-    });
+    switch (maybeUrl.kind) {
+        case ResultKind.Ok: {
+            const url = maybeUrl.value;
+            const service = getSubdomain(url.hostname);
 
-    const path = `${url.pathname}?${params.toString()}`;
-    const sig = sign(salt, path);
+            const params = new URLSearchParams({
+                width: width.toString(),
+                quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
+                fit: 'bounds',
+            });
 
-    return `${imageResizer}/${service}${path}&s=${sig}`;
+            const path = `${url.pathname}?${params.toString()}`;
+            const sig = sign(salt, path);
+
+            return `${imageResizer}/${service}${path}&s=${sig}`;
+        }
+        case ResultKind.Err:
+        default: {
+            return input;
+        }
+    }
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
