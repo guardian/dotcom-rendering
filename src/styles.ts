@@ -49,7 +49,7 @@ export const linkStyle = (kicker: string): string => `
     }
 `
 
-const footerContentWidth = 1300;
+const relatedContentWidth = 1300;
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
@@ -71,7 +71,7 @@ export const relatedContentStyles = css`
     }
 
     ${from.wide} {
-        width: ${footerContentWidth}px;
+        width: ${relatedContentWidth}px;
     }
 `
 
