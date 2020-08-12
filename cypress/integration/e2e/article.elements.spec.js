@@ -1,7 +1,3 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
-
 describe('Elements', function () {
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress

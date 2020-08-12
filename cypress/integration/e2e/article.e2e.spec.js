@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
