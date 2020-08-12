@@ -31,7 +31,6 @@ const fields = {
     shouldHideReaderRevenue: false,
     branding: none,
     commentCount: none,
-    campaigns: none,
     relatedContent: none
 };
 

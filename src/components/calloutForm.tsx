@@ -83,6 +83,7 @@ const descriptionStyles = css`
 
 const errorStyles = css`
     color: ${text.error};
+    ${textSans.small()};
 `;
 
 const speechBubbleStyles = (kicker: string): SerializedStyles => css`
@@ -106,48 +107,37 @@ const speechBubbleStyles = (kicker: string): SerializedStyles => css`
     }
 `;
 
-const formStyles = (kicker: string): SerializedStyles => css`
+const formStyles = css`
     margin: ${remSpace[4]} ${remSpace[2]} ${remSpace[9]} ${remSpace[2]};
+`;
 
-    a {
-        color: ${kicker};
-        text-decoration: none;
-        ${ textSans.small() };
-        position: absolute;
-        bottom: ${remSpace[2]};
-        right: ${remSpace[2]};
-    }
-
-    button {
-        margin: ${remSpace[4]} 0;
-    }
-
-    input {
-        margin-bottom: ${remSpace[4]};
-    }
-
-    p {
-        ${textSans.small()};
-    }
+const formAnchor = (kicker: string): SerializedStyles => css`
+    color: ${kicker};
+    text-decoration: none;
+    ${textSans.small()};
+    position: absolute;
+    bottom: ${remSpace[2]};
+    right: ${remSpace[2]};
 `;
 
 const renderField = ({ type, label, mandatory, options, id }: FormField): ReactElement | null => {
     const fieldId = `field_${id}`;
+    const inputMargin = css`margin-bottom: ${remSpace[4]};`
     switch (type) {
         case 'text':
-            return <TextInput name={fieldId} label={label} optional={!mandatory} />
+            return <TextInput cssOverrides={inputMargin} name={fieldId} label={label} optional={!mandatory} />
         case 'textarea':
-            return <TextArea name={fieldId} label={label} optional={!mandatory} />
+            return <TextArea cssOverrides={inputMargin} name={fieldId} label={label} optional={!mandatory} />
         case 'file':
-            return <FileInput required={mandatory} name={fieldId} label={label} />
+            return <FileInput cssOverrides={inputMargin} required={mandatory} name={fieldId} label={label} />
         case 'radio':
-            return <RadioInput options={options} name={fieldId } label={label} />
+            return <RadioInput cssOverrides={inputMargin} options={options} name={fieldId} label={label} />
         default:
             return null;
     }
 }
 
-const CalloutForm: FC<CalloutProps> = (props: CalloutProps): ReactElement => {
+const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
     const { campaign, format, description } = props;
     const { kicker } = getPillarStyles(format.pillar);
 
@@ -170,13 +160,13 @@ const CalloutForm: FC<CalloutProps> = (props: CalloutProps): ReactElement => {
             </summary>
 
 
-            <form css={formStyles(kicker)} action="#" method="post">
+            <form css={formStyles} action="#" method="post">
                 <div>
                     <input name="formId" type="hidden" value={campaign.id} />
                     {campaign.fields.formFields.map(renderField)}
                     <p css={errorStyles} className="js-error-message"></p>
-                    <Button type="submit" size="xsmall">Share with the Guardian</Button>
-                    <a href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
+                    <Button cssOverrides={css`margin: ${remSpace[4]} 0;`} type="submit" size="xsmall">Share with the Guardian</Button>
+                    <a css={formAnchor(kicker)} href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
                 </div>
             </form>
         </details>

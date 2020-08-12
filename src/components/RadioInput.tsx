@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { textSans } from "@guardian/src-foundations/typography";
-import { css } from "@emotion/core";
+import { css, SerializedStyles } from "@emotion/core";
 import { remSpace } from "@guardian/src-foundations";
 import { RadioGroup, Radio } from "@guardian/src-radio";
 import { FormOption } from "@guardian/apps-rendering-api-models/formOption";
@@ -9,6 +9,7 @@ interface RadioInputProps {
     name: string;
     label: string;
     options: FormOption[];
+    cssOverrides: SerializedStyles;
 }
 
 const radioStyles = css`
@@ -30,6 +31,7 @@ const RadioInput = (props: RadioInputProps): ReactElement =>
                             key={value}
                             value={value}
                             label={label}
+                            cssOverrides={props.cssOverrides}
                         />
                     )
                 })
