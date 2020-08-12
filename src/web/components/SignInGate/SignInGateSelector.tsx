@@ -158,7 +158,6 @@ export const SignInGateSelector = ({
     CAPI,
 }: SignInGateSelectorProps) => {
     const [showGate, setShowGate] = useState(true);
-
     const [currentTest, setCurrentTest] = useState<CurrentABTest>({
         name: '',
         variant: '',
