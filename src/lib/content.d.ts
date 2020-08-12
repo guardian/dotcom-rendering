@@ -232,10 +232,11 @@ interface SoundcloudBlockElement {
 
 interface SpotifyBlockElement {
     _type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
-    embedUrl: string;
-    title: string;
-    height: number;
-    width: number;
+    embedUrl?: string;
+    title?: string;
+    height?: number;
+    width?: number;
+    caption?: string;
 }
 
 interface SubheadingBlockElement {

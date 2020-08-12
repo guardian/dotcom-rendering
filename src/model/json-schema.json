@@ -1485,6 +1485,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "qandaIndex": {
+                    "type": "number"
                 }
             },
             "required": ["_type", "credit", "html", "id", "title"]
@@ -1549,17 +1552,23 @@
                         "model.dotcomrendering.pageElements.SpotifyBlockElement"
                     ]
                 },
-                "html": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
                 "caption": {
                     "type": "string"
                 }
             },
-            "required": ["_type", "html"]
+            "required": ["_type"]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1917,10 +1926,10 @@
                                 "$ref": "#/definitions/RichLinkBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/SpotifyBlockElement"
+                                "$ref": "#/definitions/SoundcloudBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/SoundcloudBlockElement"
+                                "$ref": "#/definitions/SpotifyBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SubheadingBlockElement"
@@ -2172,6 +2181,12 @@
                             "type": "string"
                         }
                     }
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
                 },
                 "pageId": {
                     "type": "string"
