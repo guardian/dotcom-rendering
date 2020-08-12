@@ -121,17 +121,17 @@ const formAnchor = (kicker: string): SerializedStyles => css`
 `;
 
 const renderField = ({ type, label, mandatory, options, id }: FormField): ReactElement | null => {
-    const fieldId = `field_${id}`;
-    const inputMargin = css`margin-bottom: ${remSpace[4]};`
+    const name = `field_${id}`;
+    const input = css`margin-bottom: ${remSpace[4]};`
     switch (type) {
         case 'text':
-            return <TextInput cssOverrides={inputMargin} name={fieldId} label={label} optional={!mandatory} />
+            return <TextInput cssOverrides={input} name={name} label={label} optional={!mandatory}/>
         case 'textarea':
-            return <TextArea cssOverrides={inputMargin} name={fieldId} label={label} optional={!mandatory} />
+            return <TextArea cssOverrides={input} name={name} label={label} optional={!mandatory}/>
         case 'file':
-            return <FileInput cssOverrides={inputMargin} required={mandatory} name={fieldId} label={label} />
+            return <FileInput cssOverrides={input} required={mandatory} name={name} label={label}/>
         case 'radio':
-            return <RadioInput cssOverrides={inputMargin} options={options} name={fieldId} label={label} />
+            return <RadioInput cssOverrides={input} options={options} name={name} label={label}/>
         default:
             return null;
     }
