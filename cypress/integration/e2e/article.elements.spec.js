@@ -145,7 +145,7 @@ describe('Elements', function () {
             getBody().contains('Liverpool');
         });
 
-        it.only('should render the affiliate disclaimer block', function () {
+        it('should render the affiliate disclaimer block', function () {
             const getBody = () => {
                 return cy
                     .get('[data-cy="affiliate-disclaimer"]')
