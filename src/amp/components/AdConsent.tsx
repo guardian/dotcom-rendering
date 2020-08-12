@@ -80,7 +80,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
                             tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
-                            tcfv1: ['us'],
+                            ccpa: ['us'],
                         },
                     }}
                 />
