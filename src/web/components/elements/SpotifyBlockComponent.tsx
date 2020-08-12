@@ -2,10 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 
 export const SpotifyBlockComponent: React.FC<{
-    embedUrl: string;
-    height: number;
-    width: number;
-    title: string;
+    embedUrl?: string;
+    title?: string;
+    height?: number;
+    width?: number;
 }> = ({ embedUrl, width, height, title }) => {
     return (
         <div
