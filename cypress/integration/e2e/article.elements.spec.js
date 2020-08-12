@@ -145,10 +145,10 @@ describe('Elements', function () {
             getBody().contains('Liverpool');
         });
 
-        it('should render the affiliate disclaimer block', function () {
+        it.only('should render the affiliate disclaimer block', function () {
             const getBody = () => {
                 return cy
-                    .get('div[data-cy="affiiate-disclaimer"]')
+                    .get('[data-cy="affiliate-disclaimer"]')
                     .should('not.be.empty')
                     .then(cy.wrap);
             };

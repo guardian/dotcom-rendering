@@ -36,6 +36,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
+import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -244,6 +245,26 @@ export const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
+
+    useEffect(() => {
+        // Used internally only, so only import each function on demand
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
+            import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
+                .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+                /* eslint-disable no-console */
+                .catch(error => console.log('Error loading readerRevenueDevUtils', error));
+                /* eslint-enable no-console */
+
+        if (window && window.guardian) {
+            window.guardian.readerRevenue = {
+                changeGeolocation: loadAndRun('changeGeolocation'),
+                showMeTheEpic: loadAndRun('showMeTheEpic'),
+                showMeTheBanner: loadAndRun('showMeTheBanner'),
+                showNextVariant: loadAndRun('showNextVariant'),
+                showPreviousVariant: loadAndRun('showPreviousVariant'),
+            }
+        }
+    }, [CAPI.shouldHideReaderRevenue]);
 
     const pillar = decidePillar(CAPI);
 
