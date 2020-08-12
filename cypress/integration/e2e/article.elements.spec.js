@@ -28,7 +28,7 @@ describe('Elements', function () {
 
             getAmpIframeBody(
                 'amp-iframe[data-cy="atom-embed-url"] > iframe',
-            ).contains('Data from Public Health England');
+            ).contains('Data from PHE');
         });
 
         it('should render the counted interactive embed', function () {
