@@ -6,8 +6,7 @@ import { mockApi } from '../../lib/mocks';
 
 describe('For AMP', function () {
     before(getPolyfill);
-    beforeEach(fixTime);
-    beforeEach(mockApi);
+    beforeEach(fixTime, mockApi);
 
     it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
         AMPArticles.map((article) => {
