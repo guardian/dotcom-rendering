@@ -10,10 +10,11 @@ import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import Body from 'components/media/articleBody';
 import Tags from 'components/media/tags';
-import { articleWidthStyles } from 'styles';
+import { articleWidthStyles, relatedContentStyles } from 'styles';
 import { Item } from 'item';
 import Headline from 'components/headline';
 import HeaderMedia from 'headerMedia';
+import RelatedContent from 'components/shared/relatedContent';
 
 
 // ----- Styles ----- //
@@ -62,10 +63,13 @@ const Media = ({ item, children }: Props): JSX.Element =>
             <Body pillar={item.pillar} className={[articleWidthStyles]} format={item}>
                 {children}
             </Body>
-            <footer css={articleWidthStyles}>
+            <section css={articleWidthStyles}>
                 <Tags tags={item.tags}/>
-            </footer>
+            </section>
         </article>
+        <footer css={relatedContentStyles}>
+            <RelatedContent content={item.relatedContent}/>
+        </footer>
     </main>;
 
 

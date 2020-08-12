@@ -13,12 +13,13 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard, Review, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
+import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
 
 // ----- Styles ----- //
@@ -103,10 +104,13 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 {children}
             </Body>
             {epicContainer}
-            <footer css={articleWidthStyles}>
+            <section className="js-tags" css={articleWidthStyles}>
                 <Tags tags={item.tags} format={item}/>
-            </footer>
+            </section>
         </article>
+        <footer css={relatedContentStyles}>
+            <RelatedContent content={item.relatedContent}/>
+        </footer>
     </main>
 }
 
