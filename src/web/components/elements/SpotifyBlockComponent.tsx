@@ -11,23 +11,29 @@ export const SpotifyBlockComponent: React.FC<{
     caption?: string;
 }> = ({ embedUrl, width, height, title, pillar, caption }) => {
     return (
-        <div
-            className={css`
-                iframe {
-                    width: 100%;
-                }
-                margin-bottom: 16px;
-            `}
-            data-cy="spotify-embed"
-        >
-            <iframe
-                src={embedUrl}
-                title={title}
-                height={height}
-                width={width}
-                allowFullScreen={true}
-            />
-            {caption && <Caption captionText={caption} pillar={pillar} />}
-        </div>
+        <>
+            {embedUrl && title && width && height && (
+                <div
+                    className={css`
+                        iframe {
+                            width: 100%;
+                        }
+                        margin-bottom: 16px;
+                    `}
+                    data-cy="spotify-embed"
+                >
+                    <iframe
+                        src={embedUrl}
+                        title={title}
+                        height={height}
+                        width={width}
+                        allowFullScreen={true}
+                    />
+                    {caption && (
+                        <Caption captionText={caption} pillar={pillar} />
+                    )}
+                </div>
+            )}
+        </>
     );
 };
