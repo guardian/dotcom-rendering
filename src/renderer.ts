@@ -10,7 +10,7 @@ import { getPillarStyles } from 'pillarStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { BodyImageProps, Role } from 'image';
-import { body, headline, textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, remSpace } from '@guardian/src-foundations';
 import Audio from 'components/audio';
 import Video from 'components/video';
@@ -27,6 +27,7 @@ import { isElement, pipe, pipe2 } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
+import Bullet from 'components/bullet';
 
 
 // ----- Renderer ----- //
@@ -66,38 +67,6 @@ const getHref = (node: Node): Option<string> =>
             fromNullable,
             map(attr => transformHref(attr.value)),
         )),
-    );
-
-const bulletStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
-    return css`
-        color: transparent;
-        display: inline-block;
-
-        &::before {
-            content: '';
-            background-color: ${kicker};
-            width: 1rem;
-            height: 1rem;
-            border-radius: .5rem;
-            display: inline-block;
-            vertical-align: middle;
-            ${darkModeCss`
-                background-color: ${inverted};
-            `}
-        }
-    `;
-}
-
-interface BulletProps {
-    format: Format;
-    text: string;
-}
-
-const Bullet: FC<BulletProps> = ({ format, text }: BulletProps): ReactElement =>
-    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(format) }, '•'),
-        text.replace(/•/g, '')
     );
 
 const HorizontalRuleStyles = css`
