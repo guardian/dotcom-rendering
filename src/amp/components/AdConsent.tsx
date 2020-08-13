@@ -111,6 +111,15 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 consentRequired: true,
                                 promptUI: 'consent-ui',
                                 clientConfig: false,
+                                policy: {
+                                    default: {
+                                        waitFor: { sourcepoint: [] },
+                                        timeout: {
+                                            seconds: 5,
+                                            fallbackAction: 'reject',
+                                        },
+                                    },
+                                },
                             },
                         },
                         // TODO: decide wether we want a fallback policy
