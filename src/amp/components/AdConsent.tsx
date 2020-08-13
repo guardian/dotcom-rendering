@@ -1,175 +1,145 @@
 import React from 'react';
-import { css } from 'emotion';
-import { palette, space } from '@guardian/src-foundations';
-import { textSans, headline } from '@guardian/src-foundations/typography';
-import { Button } from '@guardian/src-button';
-import { ThemeProvider } from 'emotion-theming';
-import { brand } from '@guardian/src-foundations/themes';
-import { SvgCheckmark } from '@guardian/src-icons';
+import { css, cx } from 'emotion';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/typography';
+import Tick from '@frontend/static/icons/tick.svg';
 import { JsonScript } from './JsonScript';
 
 const consentUIStyle = css`
-    ${textSans.small()};
-    color: ${palette.brandText.primary};
-    background-color: ${palette.brandBackground.primary};
+    ${textSans.medium()};
+    color: ${palette.neutral[97]};
+    background-color: ${palette.neutral[20]};
     max-width: 600px;
-    padding: ${space[4]}px;
     margin: 0 auto;
     overflow-x: hidden;
+`;
 
-    h2 {
-        color: ${palette.brandText.primary};
-        ${headline.small()};
-    }
+const containerDivStyle = css`
+    margin: 16px;
+`;
 
-    a {
-        color: inherit;
-    }
+const h2Style = css`
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: bold;
+`;
 
-    .center {
-        text-align: center;
-    }
+const pStyle = css`
+    margin-bottom: 8px;
+`;
 
-    .center button {
-        margin: ${space[2]}px;
+const aStyle = css`
+    color: ${palette.neutral[97]};
+    &:hover {
+        text-decoration: none;
     }
 `;
 
-const sourcepointDomain = 'sourcepoint.theguardian.com';
+const actionsStyle = css`
+    text-align: right;
+`;
 
-const clientConfig = {
-    accountId: 1257,
-    mmsDomain: `https://${sourcepointDomain}`,
-    propertyId: 8791,
-    pmTab: 'purposes',
-    stageCampaign: false,
-};
+const buttonStyle = css`
+    font: inherit;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+`;
 
-const clientConfigTcfv2 = {
-    privacyManagerId: 145885,
-    isTCFV2: true,
-    propertyHref: 'https://theguardian.amp',
-    targetingParams: {
-        framework: 'tcfv2',
-    },
-};
+const acceptStyle = css`
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: ${palette.brandAlt[400]};
+    color: ${palette.neutral[7]};
+    padding: 5px 20px;
+    font-weight: bold;
+`;
 
-const clientConfigCcpa = {
-    privacyManagerId: '5eba7ef78c167c47ca8b433d',
-    isCCPA: true,
-    siteHref: 'https://theguardian.amp',
-    getDnsMsgMms: true,
-    alwaysDisplayDns: false,
-    showNoticeUntilAction: true,
-    targetingParams: {
-        framework: 'ccpa',
-    },
-};
+const rejectStyle = css`
+    text-decoration: underline;
+`;
 
 export const AdConsent: React.FC<{}> = ({}) => {
-    // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
-    // https://cdn.ampproject.org/experiments.html
-    // Then you can load the url with #amp-geo=XX, where XX is the country code
     return (
         <>
             <amp-geo layout="nodisplay">
                 <JsonScript
                     o={{
                         ISOCountryGroups: {
-                            eea: ['preset-eea', 'unknown'],
+                            eea: ['preset-eea'],
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
-                            tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
-                            basic: ['us'],
                         },
                     }}
                 />
             </amp-geo>
             <amp-consent
                 layout="nodisplay"
-                id="consent"
+                id="the-adconsent-element"
                 style={{ background: 'none' }}
             >
                 <JsonScript
                     o={{
-                        consentRequired: 'remote',
-                        consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
-                        promptUISrc: `https://${sourcepointDomain}/amp/index.html`,
-                        // TODO: decide on postPromptUI
-                        // postPromptUI: 'consent-ui-manager',
-                        clientConfig,
-                        geoOverride: {
-                            tcfv2: {
-                                clientConfig: clientConfigTcfv2,
-                            },
-                            ccpa: {
-                                checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
-                                clientConfig: clientConfigCcpa,
-                            },
-                            basic: {
-                                consentRequired: true,
-                                promptUI: 'consent-ui',
-                                clientConfig: false,
-                                policy: {
-                                    default: {
-                                        waitFor: { sourcepoint: [] },
-                                        timeout: {
-                                            seconds: 5,
-                                            fallbackAction: 'reject',
-                                        },
-                                    },
-                                },
+                        consents: {
+                            adconsent: {
+                                promptIfUnknownForGeoGroup: 'eea',
+                                promptUI: 'adconsent-ui',
                             },
                         },
-                        // TODO: decide wether we want a fallback policy
                         policy: {
                             default: {
-                                waitFor: { sourcepoint: [] },
+                                waitFor: { adconsent: [] },
                                 timeout: {
-                                    seconds: 60,
+                                    seconds: 5,
                                     fallbackAction: 'reject',
                                 },
                             },
                         },
                     }}
                 />
-                <ThemeProvider theme={brand}>
-                    <div id="consent-ui" className={consentUIStyle}>
-                        <h2>Your Privacy</h2>
-                        <p>
+                <div id="adconsent-ui" className={consentUIStyle}>
+                    <div className={containerDivStyle}>
+                        <h2 className={h2Style}>Your privacy</h2>
+                        <p className={pStyle}>
                             We use cookies to improve your experience on our
                             site and to show you personalised advertising.
                         </p>
-                        <p>
+                        <p className={pStyle}>
                             To find out more, read our{' '}
-                            <a href="https://www.theguardian.com/info/privacy">
+                            <a
+                                className={aStyle}
+                                href="https://www.theguardian.com/help/privacy-policy"
+                            >
                                 privacy policy
                             </a>{' '}
                             and{' '}
-                            <a href="https://www.theguardian.com/info/cookies">
+                            <a
+                                className={aStyle}
+                                href="https://www.theguardian.com/info/cookies"
+                            >
                                 cookie policy
                             </a>
                             .
                         </p>
-                        <div className="center">
-                            <Button
-                                size="xsmall"
-                                icon={<SvgCheckmark />}
-                                on="tap:consent.accept"
-                            >
-                                I&apos;m okay with that
-                            </Button>
-                            <Button
-                                size="xsmall"
-                                priority="tertiary"
-                                on="tap:consent.reject"
-                            >
-                                I do not want to see personalised ads
-                            </Button>
-                        </div>
                     </div>
-                </ThemeProvider>
+                    <div className={cx(actionsStyle, containerDivStyle)}>
+                        <button
+                            on="tap:the-adconsent-element.accept"
+                            className={cx(buttonStyle, acceptStyle)}
+                        >
+                            <Tick /> I&apos;m OK with that
+                        </button>
+                        <button
+                            on="tap:the-adconsent-element.reject"
+                            className={cx(buttonStyle, rejectStyle)}
+                        >
+                            I do not want to see personalised ads
+                        </button>
+                    </div>
+                </div>
             </amp-consent>
         </>
     );
