@@ -7,13 +7,13 @@ import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral } from '@guardian/src-foundations/palette';
-import { Pillar, Design, Display } from '@guardian/types/Format';
+import { Design, Display, Format } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { Pillar as ContentPillar } from '@guardian/content-api-models/v1/pillar';
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
+import { border } from 'editorialPalette';
 
 
 
@@ -57,11 +57,14 @@ const anchorStyles = css`
     `}
 `;
 
+const headingWrapperStyles = css`
+    padding: ${remSpace[2]};
+    min-height: 150px;
+`
+
 const headingStyles = css`
     ${headline.xxxsmall()};
     margin: 0;
-    padding: ${remSpace[2]};
-    min-height: 150px;
 `;
 
 const imageWrapperStyles = css`
@@ -75,14 +78,10 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
     withDefault<JSX.Element | null>(null),
 );
 
-const cardStyles = (itemType: RelatedItemType, pillar: ContentPillar): SerializedStyles => {
+const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
     switch(itemType) {
-        case RelatedItemType.ARTICLE: {
-            return css``;
-        }
-
         case RelatedItemType.FEATURE: {
-            const { kicker } = getPillarStyles(pillarFromString(pillar.id))
+            const { kicker } = getPillarStyles(format.pillar);
 
             return css`
                 h2 {
@@ -93,7 +92,18 @@ const cardStyles = (itemType: RelatedItemType, pillar: ContentPillar): Serialize
         }
 
         case RelatedItemType.ANALYSIS: {
-            return css``;
+            return css`
+                ${headline.xxxsmall({ lineHeight: 'regular', fontWeight: 'light' })};
+                h3 {
+                    box-shadow: inset 0 -0.025rem ${border.primary(format)};
+                    padding-bottom: 0.2rem;
+                    display: inline;
+
+                    ${darkModeCss`
+                        box-shadow: inset 0 -0.025rem ${neutral[46]};
+                    `}
+                }
+            `;
         }
 
         case RelatedItemType.GALLERY: {
@@ -127,15 +137,17 @@ const cardStyles = (itemType: RelatedItemType, pillar: ContentPillar): Serialize
         case RelatedItemType.COMMENT: {
             return css``;
         }
-    }
 
-    return css``;
+        default: {
+            return css``;
+        }
+    }
 }
 
 const Card = ({ relatedItem, image }: Props): JSX.Element => {
 
     const format = {
-        pillar: Pillar.News,
+        pillar: pillarFromString(relatedItem.pillar.name),
         design: Design.Article,
         display: Display.Standard
     }
@@ -157,9 +169,11 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
-    return <li css={[listStyles, cardStyles(relatedItem.type, relatedItem.pillar)]}>
+    return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
             <a css={anchorStyles} href={relatedItem.link}>
-                <h3 css={headingStyles}>{relatedItem.title}</h3>
+                <section css={headingWrapperStyles}>
+                    <h3 css={headingStyles}>{relatedItem.title}</h3>
+                </section>
                 <section>
                     {date}
                     <div css={imageWrapperStyles}>{img}</div>
