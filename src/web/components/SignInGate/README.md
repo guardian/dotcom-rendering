@@ -8,8 +8,9 @@
 4. If the test needs a design, make it in the `gateDesigns` folder
 5. Set up individual variants in the `gates` folder, exports the `SignInGateComponent` type. Display rules defined here in the `canShow` method. Helpers in `displayRule.ts`.
 6. Import the `SignInGateComponent` in `SignInGateSelector.tsx` by mapping the variant name to the `SignInGateComponent` in the `testVariantToGateMapping` array.
-7. Add it to Storybook by modifying `SignInGate.stories.tsx`
-8. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
+7. Add a value for the new test to `testIdToComponentId` map (for tracking).
+8. If there is a new gate design, add the component to Storybook by modifying `SignInGate.stories.tsx`
+9. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
 
 ## Full Guide
 
@@ -275,6 +276,8 @@ To view it in storybook simply run `yarn storybook` which will launch a storyboo
 
 Once the test has been set up, you may want to force yourself into the test to manually check that it's working as expected.
 
+First, ensure you are running `frontend` locally, and the AB test switch has been switched on eg. `safeState=On` - do not commit this change.
+
 Currently there are 2 ways of doing this.
 
 **A)** Set the `GU_mvt_id_local` cookie in your browser.
@@ -310,9 +313,20 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 </ABProvider>
 ```
 
-The advantage of using the forcedTestVariant is that you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+The advantages of using the forcedTestVariant:
 
-The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+-   you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+-   you can technically run it without running `frontend` locally by manually switchi on your AB test switch:
+
+```tsx
+ abTestSwitches={{
+       ...{ abAbTestTest: true },
+       ...CAPI.config.switches,
+       ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
+   }}
+```
+
+The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
 
 #### Cypress Integration Tests
 
