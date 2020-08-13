@@ -80,7 +80,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
                             tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
-                            tcfv1: ['us'],
+                            basic: ['us'],
                         },
                     }}
                 />
@@ -103,14 +103,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             tcfv2: {
                                 clientConfig: clientConfigTcfv2,
                             },
-                            tcfv1: {
-                                consentRequired: true,
-                                promptUI: 'consent-ui',
-                                clientConfig: false,
-                            },
                             ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
+                            },
+                            basic: {
+                                consentRequired: true,
+                                promptUI: 'consent-ui',
+                                clientConfig: false,
                             },
                         },
                         // TODO: decide wether we want a fallback policy
