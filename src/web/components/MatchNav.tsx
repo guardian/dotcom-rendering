@@ -1,10 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { brandAlt, background } from '@guardian/src-foundations/palette';
+import {
+    brandAlt,
+    background,
+    border,
+} from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
+import { space, palette } from '@guardian/src-foundations';
+import { until, from } from '@guardian/src-foundations/mq';
 
 import { Score } from '@frontend/web/components/Score';
 
@@ -46,6 +50,10 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
             position: relative;
             padding: ${space[2]}px;
             background-color: ${brandAlt[400]};
+            margin-bottom: 10px;
+            ${until.tablet} {
+                margin: 0 -10px;
+            }
 
             :before {
                 content: '';
@@ -54,8 +62,8 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
                 bottom: 0;
                 width: 100vw;
                 left: -100vw;
-                ${until.desktop} {
-                    left: calc((100vw - 46rem) / -2);
+                ${from.desktop} {
+                    /* left: calc((100vw - 46rem) / -2); */
                 }
                 background-color: ${brandAlt[400]};
                 z-index: -1;
@@ -151,6 +159,7 @@ const TeamNav = ({
         className={css`
             display: flex;
             flex-grow: 1;
+            flex-basis: 50%;
         `}
     >
         <Column>
@@ -203,24 +212,75 @@ const Border = () => (
         `}
     />
 );
+const thinGreySolid = `1px solid ${border.secondary}`;
+
+const tabsContainer = css`
+    display: flex;
+    position: relative;
+    border-bottom: ${thinGreySolid};
+
+    li {
+        width: 50%;
+        height: 40px;
+        border-top: 3px solid ${border.secondary};
+        :nth-child(2) {
+            border-left: ${thinGreySolid};
+            background: ${palette.neutral[97]};
+            span {
+                color: ${palette.sport[400]};
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    span {
+        ${headline.xxxsmall()};
+        background: transparent;
+        padding: 6px 8px 0;
+        text-align: left;
+        font-weight: 600;
+        min-height: 36px;
+        display: block;
+        width: 100%;
+    }
+`;
+
+const MatchTabs = () => (
+    <div>
+        <ul className={tabsContainer}>
+            <li>
+                <span>Report</span>
+            </li>
+            <li>
+                <span>Min-by-min</span>
+            </li>
+        </ul>
+    </div>
+);
 
 export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
-    <StretchBackground>
-        <Row>
-            <TeamNav
-                name={homeTeam.name}
-                score={homeTeam.score}
-                crest={homeTeam.crest}
-                scorers={homeTeam.scorers}
-            />
-            <Border />
-            <TeamNav
-                name={awayTeam.name}
-                score={awayTeam.score}
-                crest={awayTeam.crest}
-                scorers={awayTeam.scorers}
-            />
-        </Row>
-        {comments && <Comments comments={comments} />}
-    </StretchBackground>
+    <div>
+        <StretchBackground>
+            <Row>
+                <TeamNav
+                    name={homeTeam.name}
+                    score={homeTeam.score}
+                    crest={homeTeam.crest}
+                    scorers={homeTeam.scorers}
+                />
+                <Border />
+                <TeamNav
+                    name={awayTeam.name}
+                    score={awayTeam.score}
+                    crest={awayTeam.crest}
+                    scorers={awayTeam.scorers}
+                />
+            </Row>
+            {comments && <Comments comments={comments} />}
+        </StretchBackground>
+        <MatchTabs />
+    </div>
 );
