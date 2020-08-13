@@ -1,39 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
-import { palette, space } from '@guardian/src-foundations';
-import { textSans, headline } from '@guardian/src-foundations/typography';
-import { Button } from '@guardian/src-button';
-import { ThemeProvider } from 'emotion-theming';
-import { brand } from '@guardian/src-foundations/themes';
-import { SvgCheckmark } from '@guardian/src-icons';
 import { JsonScript } from './JsonScript';
-
-const consentUIStyle = css`
-    ${textSans.small()};
-    color: ${palette.brandText.primary};
-    background-color: ${palette.brandBackground.primary};
-    max-width: 600px;
-    padding: ${space[4]}px;
-    margin: 0 auto;
-    overflow-x: hidden;
-
-    h2 {
-        color: ${palette.brandText.primary};
-        ${headline.small()};
-    }
-
-    a {
-        color: inherit;
-    }
-
-    .center {
-        text-align: center;
-    }
-
-    .center button {
-        margin: ${space[2]}px;
-    }
-`;
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
@@ -134,42 +100,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         },
                     }}
                 />
-                <ThemeProvider theme={brand}>
-                    <div id="consent-ui" className={consentUIStyle}>
-                        <h2>Your Privacy</h2>
-                        <p>
-                            We use cookies to improve your experience on our
-                            site and to show you personalised advertising.
-                        </p>
-                        <p>
-                            To find out more, read our{' '}
-                            <a href="https://www.theguardian.com/info/privacy">
-                                privacy policy
-                            </a>{' '}
-                            and{' '}
-                            <a href="https://www.theguardian.com/info/cookies">
-                                cookie policy
-                            </a>
-                            .
-                        </p>
-                        <div className="center">
-                            <Button
-                                size="xsmall"
-                                icon={<SvgCheckmark />}
-                                on="tap:consent.accept"
-                            >
-                                I&apos;m okay with that
-                            </Button>
-                            <Button
-                                size="xsmall"
-                                priority="tertiary"
-                                on="tap:consent.reject"
-                            >
-                                I do not want to see personalised ads
-                            </Button>
-                        </div>
-                    </div>
-                </ThemeProvider>
             </amp-consent>
         </>
     );
