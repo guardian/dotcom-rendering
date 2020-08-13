@@ -141,6 +141,7 @@ function getDisplay(content: Content): Display {
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
+
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
@@ -169,10 +170,11 @@ const itemFieldsWithBody = (context: Context, request: RenderingRequest): ItemFi
     const { content } = request;
     const body = content?.blocks?.body ?? [];
     const atoms = content?.atoms;
+    const campaigns = request.campaigns;
     const elements = body[0]?.elements;
     return ({
         ...itemFields(context, request),
-        body: elements !== undefined ? parseElements(context, atoms)(elements): [],
+        body: elements !== undefined ? parseElements(context, atoms, campaigns)(elements): [],
     });
 }
 

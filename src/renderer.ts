@@ -26,9 +26,9 @@ import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
 import { ExplainerAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
+import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
 import Bullet from 'components/bullet';
-
 
 // ----- Renderer ----- //
 
@@ -500,6 +500,11 @@ const render = (format: Format, excludeStyles = false) =>
         case ElementKind.Video:
             return h(Video, { src: element.src, width: element.width, height: element.height })
 
+        case ElementKind.Callout: {
+            const { campaign, description } = element;
+            return h(CalloutForm, { campaign, format, description });
+        }
+
         case ElementKind.Embed: {
             const props = {
                 dangerouslySetInnerHTML: {
@@ -618,4 +623,6 @@ export {
     textElement as renderTextElement,
     standfirstText as renderStandfirstText,
     getHref,
+    transformHref,
+    plainTextElement
 };

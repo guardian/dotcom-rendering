@@ -110,6 +110,96 @@ function insertEpic(): void {
     }
 }
 
+interface FormData {
+    [key: string]: string;
+}
+
+function submit(body: FormData, form: Element): void {
+    fetch('https://callouts.code.dev-guardianapis.com/formstack-campaign/submit', {
+        method: 'POST',
+        body: JSON.stringify(body)
+    })
+    .then(() => {
+        const message = document.createElement('p');
+        message.textContent = 'Thank you for your contribution';
+        if (form.firstChild) {
+            form.replaceChild(message, form.firstChild);
+        }
+    })
+    .catch(() => {
+        const errorPlaceholder = form.querySelector('.js-error-message');
+        if (errorPlaceholder) {
+            errorPlaceholder.textContent = "Sorry, there was a problem submitting your form. Please try again later."
+        }
+    })
+}
+
+function readFile(file: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        setTimeout(reject, 30000);
+
+        reader.addEventListener('load', () => {
+                if (reader.result) {
+                    const fileAsBase64 = reader.result
+                        .toString()
+                        .split(';base64,')[1];
+                    resolve(fileAsBase64);
+                }
+            }
+        );
+
+        reader.addEventListener('error', () => {
+            reject();
+        });
+
+        reader.readAsDataURL(file);
+    })
+}
+
+function callouts(): void {
+    const callouts = Array.from(document.querySelectorAll('.js-callout'));
+    callouts.forEach(callout => {
+        const buttons = Array.from(callout.querySelectorAll('.js-callout-expand'));
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                callout.toggleAttribute('open');
+            })
+        })
+
+        const form = callout.querySelector('form');
+        if (!form) return;
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        form.addEventListener('submit', async (e): Promise<void> => {
+            try {
+                e.preventDefault();
+                const elements = form.getElementsByTagName('input');
+                const data = Array.from(elements).reduce(async (o: Promise<FormData>, elem) => {
+                    const acc = await o;
+                    const { type, checked, name, value, files } = elem;
+                    if (type === 'radio') {
+                        if (checked) {
+                            acc[name] = value;
+                        }
+                    } else if (type === 'file' && files?.length) {
+                        acc[name] = await readFile(files[0]);
+                    } else if (value) {
+                        acc[name] = value;
+                    }
+                    return Promise.resolve(acc);
+                }, Promise.resolve({}));
+
+                submit(await data, form);
+            } catch(e) {
+                const errorPlaceholder = form.querySelector('.js-error-message');
+                if (errorPlaceholder) {
+                    errorPlaceholder.textContent = "There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB"
+                }
+            }
+        })
+    })
+}
+
 setup();
 ads();
 videos();
@@ -118,3 +208,4 @@ topics();
 slideshow();
 formatDates();
 insertEpic();
+callouts();
