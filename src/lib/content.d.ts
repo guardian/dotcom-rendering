@@ -261,7 +261,9 @@ interface TimelineBlockElement {
     id: string;
     title: string;
     description?: string;
+    pillar: Pillar;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {
