@@ -37,10 +37,10 @@ export const Analytics: React.FC<{
     },
 }) => {
     const scripts: string[] = [
-        `<amp-pixel data-block-on-consent src="${beacon}"></amp-pixel>`,
-        `<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
+        `<amp-pixel src="${beacon}"></amp-pixel>`,
+        `<amp-pixel src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
         `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-        `<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
+        `<amp-analytics type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
                  "requests": {
@@ -68,7 +68,7 @@ export const Analytics: React.FC<{
                }
                </script>
             </amp-analytics>`,
-        `<amp-analytics data-block-on-consent id="comscore" type="comscore">
+        `<amp-analytics id="comscore" type="comscore">
             <script type="application/json">
                 {
                     "vars": {"c2": "${comscoreID}"},
@@ -89,7 +89,7 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-        `<amp-analytics data-block-on-consent type="permutive">
+        `<amp-analytics type="permutive">
             <script type="application/json">
                 {
                     "vars": {
