@@ -67,9 +67,9 @@ const Media = ({ item, children }: Props): JSX.Element =>
                 <Tags tags={item.tags}/>
             </section>
         </article>
-        <footer css={relatedContentStyles}>
+        <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
-        </footer>
+        </section>
     </main>;
 
 

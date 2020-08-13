@@ -108,9 +108,9 @@ const Standard = ({ item, children }: Props): JSX.Element => {
                 <Tags tags={item.tags} format={item}/>
             </section>
         </article>
-        <footer css={relatedContentStyles}>
+        <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
-        </footer>
+        </section>
     </main>
 }
 

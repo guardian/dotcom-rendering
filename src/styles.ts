@@ -49,11 +49,11 @@ export const linkStyle = (kicker: string): string => `
     }
 `
 
-const footerContentWidth = 1300;
+const relatedContentWidth = 1300;
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
-export const articleWidthStyles = css`
+export const articleWidthStyles: SerializedStyles = css`
     ${sidePadding}
     ${from.wide} {
         margin: 0 auto;
@@ -64,14 +64,14 @@ export const articleWidthStyles = css`
     }
 `;
 
-export const relatedContentStyles = css`
+export const relatedContentStyles: SerializedStyles = css`
     ${sidePadding}
     ${from.phablet} {
         margin: 0 auto;
     }
 
     ${from.wide} {
-        width: ${footerContentWidth}px;
+        width: ${relatedContentWidth}px;
     }
 `
 
