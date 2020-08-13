@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { cmp, oldCmp } from '@guardian/consent-management-platform';
 import { getCountryCode } from '@root/src/web/lib/getCountryCode';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
+import { getCookie } from '@frontend/web/browser/cookie';
 import { addPrivacySettingsLink } from './CMPPrivacyLink';
 
 export const willShowCMP = async () => {
@@ -13,7 +14,12 @@ export const willShowCMP = async () => {
     }
 
     const isInUsa = (await getCountryCode()) === 'US';
+    const browserId: string | undefined = getCookie('bwid') || undefined;
+    const pubData: { browserId?: string } | undefined = browserId
+        ? { browserId }
+        : undefined;
     cmp.init({
+        pubData,
         isInUsa,
     });
     addPrivacySettingsLink();
