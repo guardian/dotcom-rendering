@@ -2579,6 +2579,7 @@ export const MatchReport: CAPIType = {
                     label: 'Quick Guide',
                     title: 'Six Nations fixtures and results',
                     credit: 'Photograph: Ben Evans/Rex Features',
+                    pillar: 'news',
                 },
                 {
                     _type:
