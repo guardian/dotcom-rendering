@@ -10,7 +10,7 @@ import { Format } from '@guardian/types/Format';
 const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     position: relative;
     clear: both;
-    background: ${background.inverse}    
+    background: ${background.inverse};
     color: ${neutral[86]};
 
     ${adStyles(format)}

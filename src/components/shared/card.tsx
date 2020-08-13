@@ -6,7 +6,7 @@ import { remSpace, breakpoints } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
-import { text, neutral } from '@guardian/src-foundations/palette';
+import { text, neutral, background } from '@guardian/src-foundations/palette';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
@@ -14,6 +14,7 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
+import { SvgCamera } from '@guardian/src-icons';
 
 
 
@@ -43,7 +44,7 @@ const listStyles = css`
         ${textSans.small()};
         color: ${text.supporting};
         text-align: right;
-        width: calc(100% - ${remSpace[2]});
+        float: right;
         display: inline-block;
     }
 `
@@ -107,7 +108,12 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.GALLERY: {
-            return css``;
+            return css`
+            background: ${background.inverse};
+            h3{
+                color: ${text.ctaPrimary};
+            }
+            `;
         }
 
         case RelatedItemType.SPECIAL: {
@@ -166,6 +172,39 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         withDefault<ReactElement | null>(null)
     )
 
+    const parentIconStyles = (format:Format): SerializedStyles => css`
+        display:inline-block;
+        svg {
+            width: 0.875rem;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0.300rem;
+            display: block;
+        }
+    `;
+
+    const iconStyles = (format:Format): SerializedStyles => css`
+        width: 1.5rem;
+        height: 1.4375rem;
+        display: inline-block;
+        background-color: #eacca0;
+        border-radius: 50%;
+    `;
+
+    const icon = (itemType: RelatedItemType, format: Format) => {
+        if (itemType === RelatedItemType.GALLERY){
+            return <section css={parentIconStyles}><span css={iconStyles}>< SvgCamera /></span></section>;
+        } else {
+            return <section css={parentIconStyles} ></section>;
+        }
+    }
+
+    const metaDataStyles = (format:Format): SerializedStyles => css`
+        padding: 0 ${remSpace[2]};
+        min-height:35px;
+    `;
+
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
@@ -175,11 +214,14 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
                     <h3 css={headingStyles}>{relatedItem.title}</h3>
                 </section>
                 <section>
-                    {date}
-                    <div css={imageWrapperStyles}>{img}</div>
+                    <div css= {metaDataStyles}>
+                        {icon(relatedItem.type, format)} 
+                        {date}
+                    </div>
+                    <div css={ imageWrapperStyles }>{img}</div>
                 </section>
             </a>
-        </li>
+        </li>ç
 }
 
 
