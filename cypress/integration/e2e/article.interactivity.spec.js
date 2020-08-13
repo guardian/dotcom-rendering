@@ -34,8 +34,7 @@ describe('Interactivity', function () {
         });
         describe('When most viewed is mocked', function () {
             before(getPolyfill);
-            beforeEach(mockApi);
-            beforeEach(setupApiRoutes);
+            beforeEach(mockApi, setupApiRoutes);
             // it('should change the list of most viewed items when a tab is clicked', function () {
             //     cy.visit(`/Article?url=${articleUrl}`, fetchPolyfill);
             //     cy.contains('Lifestyle');

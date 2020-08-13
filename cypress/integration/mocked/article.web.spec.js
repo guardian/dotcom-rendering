@@ -6,12 +6,11 @@ import { mockApi } from '../../lib/mocks';
 
 describe('For WEB', function () {
     before(getPolyfill);
-    beforeEach(fixTime);
-    beforeEach(mockApi);
-
-    articles.map((article, index) => {
-        const { url, pillar, designType } = article;
-        it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+    beforeEach(fixTime, mockApi);
+    it(`It should load designType articles under the  pillar`, function () {
+        articles.map((article) => {
+            const { url, designType, pillar } = article;
+            cy.log(`designType: ${designType}, pillar: ${pillar}`);
             // Prevent the Privacy consent banner from obscuring snapshots
             cy.setCookie('GU_TK', 'true');
             // Make the request, forcing the location to UK (for edition)

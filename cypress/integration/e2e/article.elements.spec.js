@@ -1,7 +1,3 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
-
 describe('Elements', function () {
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
@@ -38,12 +34,11 @@ describe('Elements', function () {
 
             const ampIframeSelector =
                 'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
-            const ampIframe = cy.get(ampIframeSelector);
-            ampIframe.scrollIntoView({
+
+            cy.get(ampIframeSelector).scrollIntoView({
                 duration: 300,
                 offset: { top: -100, left: 0 },
             });
-            cy.wait(300);
 
             getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
                 'Deaths after Taser use: the findings',
