@@ -103,14 +103,23 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             tcfv2: {
                                 clientConfig: clientConfigTcfv2,
                             },
-                            tcfv1: {
-                                consentRequired: true,
-                                promptUI: 'consent-ui',
-                                clientConfig: false,
-                            },
                             ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
+                            },
+                            basic: {
+                                consentRequired: true,
+                                promptUI: 'consent-ui',
+                                clientConfig: false,
+                                policy: {
+                                    default: {
+                                        waitFor: { sourcepoint: [] },
+                                        timeout: {
+                                            seconds: 5,
+                                            fallbackAction: 'reject',
+                                        },
+                                    },
+                                },
                             },
                         },
                         // TODO: decide wether we want a fallback policy
@@ -118,7 +127,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             default: {
                                 waitFor: { sourcepoint: [] },
                                 timeout: {
-                                    seconds: 5,
+                                    seconds: 60,
                                     fallbackAction: 'reject',
                                 },
                             },
