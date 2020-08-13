@@ -7,6 +7,9 @@ const qandaUrl =
 const guideUrl =
     'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
+const profileUrl =
+    'https://www.theguardian.com/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey';
+
 const atomTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
@@ -59,3 +62,4 @@ const atomTests = (type, url) => {
 };
 atomTests('qanda', qandaUrl);
 atomTests('guide', guideUrl);
+atomTests('profile', profileUrl);

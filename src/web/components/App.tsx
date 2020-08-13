@@ -17,7 +17,7 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom, GuideAtom } from '@guardian/atoms-rendering';
+import { QandaAtom, GuideAtom, ProfileAtom } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -36,7 +36,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
-import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
+import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -248,12 +248,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         // Used internally only, so only import each function on demand
-        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
-            import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
-                .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
+            asExistingSupporter: boolean,
+        ) =>
+            import(
+                /* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
+            )
+                .then((utils) =>
+                    utils[key](
+                        asExistingSupporter,
+                        CAPI.shouldHideReaderRevenue,
+                    ),
+                )
                 /* eslint-disable no-console */
-                .catch(error => console.log('Error loading readerRevenueDevUtils', error));
-                /* eslint-enable no-console */
+                .catch((error) =>
+                    console.log('Error loading readerRevenueDevUtils', error),
+                );
+        /* eslint-enable no-console */
 
         if (window && window.guardian) {
             window.guardian.readerRevenue = {
@@ -262,7 +273,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 showMeTheBanner: loadAndRun('showMeTheBanner'),
                 showNextVariant: loadAndRun('showNextVariant'),
                 showPreviousVariant: loadAndRun('showPreviousVariant'),
-            }
+            };
         }
     }, [CAPI.shouldHideReaderRevenue]);
 
@@ -391,6 +402,33 @@ export const App = ({ CAPI, NAV }: Props) => {
                         expandCallback={componentEventHandler(
                             'GUIDE_ATOM',
                             guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.profileAtoms.map((profileAtom) => (
+                <Hydrate root="profile-atom" index={profileAtom.guideIndex}>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
                             'EXPAND',
                         )}
                     />
