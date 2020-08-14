@@ -7,6 +7,8 @@ const qandaUrl =
 const guideUrl =
     'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
+const timelineUrl =
+    'http://localhost:6006/?path=/story/timelineatom--news-story-with-dates-to-expanded';
 const atomTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
@@ -59,3 +61,4 @@ const atomTests = (type, url) => {
 };
 atomTests('qanda', qandaUrl);
 atomTests('guide', guideUrl);
+atomTests('timeline', timelineUrl);
