@@ -62,7 +62,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Opinion = ({ item, children }: Props): JSX.Element =>
+const Comment = ({ item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -105,4 +105,4 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
 
 // ----- Exports ----- //
 
-export default Opinion;
+export default Comment;
