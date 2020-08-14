@@ -15,7 +15,7 @@ import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
 import { SvgCamera } from '@guardian/src-icons';
-
+import { SvgAudio } from '@guardian/src-icons';
 
 
 interface Props {
@@ -80,7 +80,7 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    switch(itemType) {
+    switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
 
@@ -121,7 +121,12 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.AUDIO: {
-            return css``;
+            return css`
+                background: ${background.inverse};
+                h3 {
+                    color: ${text.ctaPrimary};
+                }
+            `;
         }
 
         case RelatedItemType.LIVE: {
@@ -193,10 +198,14 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     `;
 
     const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
-        if (itemType === RelatedItemType.GALLERY){
+        if (itemType === RelatedItemType.GALLERY) {
             return <section css={parentIconStyles}>
-                    <span css={iconStyles}>< SvgCamera /></span>
-                   </section>;
+                <span css={iconStyles}>< SvgCamera /></span>
+            </section>;
+        } else if (itemType === RelatedItemType.AUDIO) {
+            return <section css={parentIconStyles}>
+                <span css={iconStyles}>< SvgAudio /></span>
+            </section>;
         } else {
             return <section css={parentIconStyles} ></section>;
         }
@@ -207,23 +216,34 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         min-height: 1.4375rem
     `;
 
+    const durationMedia = (duration: Option<string>): JSX.Element => {
+        return pipe2(
+            duration,
+            map(length => <span>{length}</span>),
+            withDefault(
+                <></>
+            )
+        )
+    }
+
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
     return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
-            <a css={anchorStyles} href={relatedItem.link}>
-                <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles}>{relatedItem.title}</h3>
-                </section>
-                <section>
-                    <div css= {metaDataStyles}>
-                        {icon(relatedItem.type, format)} 
-                        {date}
-                    </div>
-                    <div css={imageWrapperStyles}>{img}</div>
-                </section>
-            </a>
-        </li>
+        <a css={anchorStyles} href={relatedItem.link}>
+            <section css={headingWrapperStyles}>
+                <h3 css={headingStyles}>{relatedItem.title}</h3>
+            </section>
+            <section>
+                <div css={metaDataStyles}>
+                    {icon(relatedItem.type, format)}
+                    {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                    {date}
+                </div>
+                <div css={imageWrapperStyles}>{img}</div>
+            </section>
+        </a>
+    </li>
 }
 
 
