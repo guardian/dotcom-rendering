@@ -17,5 +17,13 @@
 import './commands';
 import 'cypress-plugin-tab';
 
+// Remove the consent iframe before the tests run
+// eslint-disable-next-line mocha/no-top-level-hooks
+before(function () {
+    cy.setCookie('consentUUID', '9c1d1bdd-3322-416a-ad9f-33773423e17c', {
+        log: true,
+    });
+});
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
