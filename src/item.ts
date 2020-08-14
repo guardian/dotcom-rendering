@@ -141,7 +141,6 @@ function getDisplay(content: Content): Display {
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
-
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),

@@ -1,4 +1,4 @@
-import { neutral, brandAltBackground } from '@guardian/src-foundations/palette';
+import { neutral, brandAltBackground, background } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
@@ -49,7 +49,6 @@ export const linkStyle = (kicker: string): string => `
     }
 `
 
-const relatedContentWidth = 1300;
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
@@ -65,14 +64,15 @@ export const articleWidthStyles: SerializedStyles = css`
 `;
 
 export const relatedContentStyles: SerializedStyles = css`
+    background: ${neutral[97]};
     ${sidePadding}
     ${from.phablet} {
         margin: 0 auto;
     }
 
-    ${from.wide} {
-        width: ${relatedContentWidth}px;
-    }
+    ${darkModeCss`
+        background: ${background.inverse};
+    `};
 `
 
 const adHeight = '258px';
