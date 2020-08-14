@@ -10,7 +10,7 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import Standard from 'components/standard/article';
 import AdvertisementFeature from 'components/advertisementFeature/article';
 import Liveblog from 'components/liveblog/article';
-import Opinion from 'components/opinion/article';
+import Opinion from 'components/comment/article';
 import Media from 'components/media/article';
 import Interactive from 'components/interactive/article';
 import { partition } from '@guardian/types/result';

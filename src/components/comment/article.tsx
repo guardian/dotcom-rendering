@@ -10,7 +10,7 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import Cutout from 'components/opinion/cutout';
+import Cutout from 'components/comment/cutout';
 import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Comment } from 'item';
