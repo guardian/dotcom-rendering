@@ -183,7 +183,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
             display: block;
         }
     `;
-    const { kicker } = getPillarStyles(format.pillar);
+    const { inverted } = getPillarStyles(format.pillar);
     const iconStyles = (format: Format): SerializedStyles => css`
         width: 1.5rem;
         height: 1.4375rem;
