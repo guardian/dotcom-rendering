@@ -183,12 +183,12 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
             display: block;
         }
     `;
-
+    const { kicker } = getPillarStyles(format.pillar);
     const iconStyles = (format: Format): SerializedStyles => css`
         width: 1.5rem;
         height: 1.4375rem;
         display: inline-block;
-        background-color: #eacca0;
+        background-color: ${kicker};
         border-radius: 50%;
     `;
 
@@ -204,7 +204,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
 
     const metaDataStyles = (format: Format): SerializedStyles => css`
         padding: 0 ${remSpace[2]};
-        min-height:35px;
+        min-height: 1.4375rem
     `;
 
     const lastModified = relatedItem.lastModified?.iso8601;
