@@ -59,6 +59,12 @@ const immersive: SerializedStyles = css`
     margin-top: ${remSpace[3]};
 `;
 
+const immersiveLabs: SerializedStyles = css`
+    ${styles}
+    ${textSans.large()}
+    margin-top: ${remSpace[3]};
+`;
+
 const media = css`
     color: ${neutral[86]};
     p, ul, li {
@@ -73,7 +79,7 @@ const advertisementFeature = css`
 
 const getStyles = (item: Item): SerializedStyles => {
     if (item.display === Display.Immersive) {
-        return immersive;
+        return item.design === Design.AdvertisementFeature ? immersiveLabs : immersive;
     }
 
     switch (item.design) {
