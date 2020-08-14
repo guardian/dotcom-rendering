@@ -188,7 +188,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         width: 1.5rem;
         height: 1.4375rem;
         display: inline-block;
-        background-color: ${kicker};
+        background-color: ${inverted};
         border-radius: 50%;
     `;
 
