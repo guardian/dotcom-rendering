@@ -109,10 +109,10 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
 
         case RelatedItemType.GALLERY: {
             return css`
-            background: ${background.inverse};
-            h3{
-                color: ${text.ctaPrimary};
-            }
+                background: ${background.inverse};
+                h3 {
+                    color: ${text.ctaPrimary};
+                }
             `;
         }
 
