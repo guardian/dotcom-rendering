@@ -172,7 +172,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         withDefault<ReactElement | null>(null)
     )
 
-    const parentIconStyles = (format:Format): SerializedStyles => css`
+    const parentIconStyles = (format: Format): SerializedStyles => css`
         display:inline-block;
         svg {
             width: 0.875rem;
@@ -184,7 +184,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         }
     `;
 
-    const iconStyles = (format:Format): SerializedStyles => css`
+    const iconStyles = (format: Format): SerializedStyles => css`
         width: 1.5rem;
         height: 1.4375rem;
         display: inline-block;
@@ -192,15 +192,17 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         border-radius: 50%;
     `;
 
-    const icon = (itemType: RelatedItemType, format: Format) => {
+    const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
         if (itemType === RelatedItemType.GALLERY){
-            return <section css={parentIconStyles}><span css={iconStyles}>< SvgCamera /></span></section>;
+            return <section css={parentIconStyles}>
+                    <span css={iconStyles}>< SvgCamera /></span>
+                   </section>;
         } else {
             return <section css={parentIconStyles} ></section>;
         }
     }
 
-    const metaDataStyles = (format:Format): SerializedStyles => css`
+    const metaDataStyles = (format: Format): SerializedStyles => css`
         padding: 0 ${remSpace[2]};
         min-height:35px;
     `;
@@ -221,7 +223,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
                     <div css={imageWrapperStyles}>{img}</div>
                 </section>
             </a>
-        </li>ç
+        </li>
 }
 
 
