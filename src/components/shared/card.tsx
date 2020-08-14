@@ -218,7 +218,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
                         {icon(relatedItem.type, format)} 
                         {date}
                     </div>
-                    <div css={ imageWrapperStyles }>{img}</div>
+                    <div css={imageWrapperStyles}>{img}</div>
                 </section>
             </a>
         </li>ç
