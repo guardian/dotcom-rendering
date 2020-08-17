@@ -13,7 +13,7 @@ import Tags from 'components/shared/tags';
 import Cutout from 'components/comment/cutout';
 import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Comment } from 'item';
+import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
@@ -58,7 +58,7 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    item: Comment;
+    item: CommentItem;
     children: ReactNode[];
 }
 
