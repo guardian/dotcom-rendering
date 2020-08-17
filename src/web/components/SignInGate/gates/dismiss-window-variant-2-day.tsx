@@ -15,7 +15,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGate } from '../dismissGate';
 
 const SignInGateMain = React.lazy(() => {
-    const { start, end } = initPerf('SignInGateDismissWindow');
+    const { start, end } = initPerf('SignInGateMain');
     start();
     return import(
         /* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
@@ -32,7 +32,7 @@ const canShow = (
 ): boolean =>
     !isSignedIn &&
     // will return false if user has dimissed gate more than 24 hrs ago, so we can reshow
-    !hasUserDismissedGate(currentTest.variant, currentTest.name, 0.01) &&
+    !hasUserDismissedGate(currentTest.variant, currentTest.name, 24) &&
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
