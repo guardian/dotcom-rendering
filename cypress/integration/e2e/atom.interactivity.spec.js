@@ -8,7 +8,7 @@ const guideUrl =
     'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
 const timelineUrl =
-    'http://localhost:6006/?path=/story/timelineatom--news-story-with-dates-to-expanded';
+    'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
 const atomTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
