@@ -123,6 +123,22 @@ export const ArticleRenderer: React.FC<{
                             html={element.body}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                    return (
+                        <div id={`guide-atom-${i}`}>
+                            <GuideAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
                         <HighlightBlockComponent key={i} html={element.html} />
@@ -284,23 +300,6 @@ export const ArticleRenderer: React.FC<{
                             adTargeting={adTargeting}
                             isMainMedia={false}
                         />
-                    );
-
-                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-                    return (
-                        <div id={`guide-atom-${i}`}>
-                            <GuideAtom
-                                id={element.id}
-                                title={element.title}
-                                html={element.html}
-                                image={element.img}
-                                credit={element.credit}
-                                pillar={pillar}
-                                likeHandler={() => {}}
-                                dislikeHandler={() => {}}
-                                expandCallback={() => {}}
-                            />
-                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                     return (
