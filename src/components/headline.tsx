@@ -91,9 +91,17 @@ const advertisementFeatureStyles = css`
     ${textSans.xxxlarge({ lineHeight: 'regular' })}}
 `;
 
+const immersiveLabs = css`
+    ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
+    ${from.desktop} {
+        ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
+    }
+`;
+
 const getStyles = (format: Format): SerializedStyles => {
     if (format.display === Display.Immersive) {
-        return css(styles(format), immersiveStyles);
+        const labs = format.design === Design.AdvertisementFeature ? immersiveLabs : null;
+        return css(styles(format), immersiveStyles, labs);
     }
 
     switch (format.design) {
