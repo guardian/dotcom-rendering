@@ -2,11 +2,11 @@
 
 import React, { FC, ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace, palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Format, Display } from '@guardian/types/Format';
+import { Format, Display, Design } from '@guardian/types/Format';
 
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
@@ -21,9 +21,9 @@ interface Props {
     item: Item;
 }
 
-const immersiveStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+const immersiveStyles = ({ kicker }: PillarStyles, isLabs: boolean): SerializedStyles => css`
     padding: ${remSpace[1]} ${remSpace[2]};
-    background-color: ${kicker};
+    background-color: ${isLabs ? palette.labs[300] : kicker};
     position: absolute;
     left: 0;
     transform: translateY(-100%);
@@ -49,24 +49,30 @@ const linkStyles = ({ kicker, inverted }: PillarStyles): SerializedStyles => css
     `}
 `;
 
-const immersiveLinkStyles = css`
+const immersiveLinkStyles = (isLabs: boolean) => css`
     color: ${neutral[100]};
     text-decoration: none;
     white-space: nowrap;
-    ${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+    ${
+        isLabs
+            ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
+            : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
+    }
 `;
 
-const getLinkStyles = ({ display, pillar }: Format): SerializedStyles => {
+const getLinkStyles = ({ display, pillar, design }: Format): SerializedStyles => {
     if (display === Display.Immersive) {
-        return immersiveLinkStyles;
+        const isLabs = design === Design.AdvertisementFeature;
+        return immersiveLinkStyles(isLabs);
     }
 
     return linkStyles(getPillarStyles(pillar));
 }
 
-const getStyles = ({ display, pillar }: Format): SerializedStyles => {
+const getStyles = ({ display, pillar, design }: Format): SerializedStyles => {
     if (display === Display.Immersive) {
-        return immersiveStyles(getPillarStyles(pillar));
+        const isLabs = design === Design.AdvertisementFeature;
+        return immersiveStyles(getPillarStyles(pillar), isLabs);
     }
 
     return articleWidthStyles;

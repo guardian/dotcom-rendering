@@ -14,6 +14,7 @@ import { parseImage } from 'image';
 import { parseVideo } from 'video';
 import { MainMediaKind, MainMedia } from 'headerMedia';
 import { pipe2 } from 'lib';
+import { isAdvertisementFeature } from 'item';
 
 
 // ----- Lookups ----- //
@@ -50,8 +51,10 @@ const isReview = (content: Content): boolean =>
 const isAnalysis = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/analysis');
 
-const articleSeries = (content: Content): Option<Tag> =>
-    fromNullable(tagsOfType(TagType.SERIES)(content.tags)[0]);
+const articleSeries = (content: Content): Option<Tag> => {
+    const type = isAdvertisementFeature(content.tags) ? TagType.PAID_CONTENT : TagType.SERIES;
+    return fromNullable(tagsOfType(type)(content.tags)[0]);
+}
 
 const articleContributors = (content: Content): Tag[] =>
     tagsOfType(TagType.CONTRIBUTOR)(content.tags);
