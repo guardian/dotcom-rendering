@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import Anchor from 'components/anchor';
 import { css, SerializedStyles } from '@emotion/core';
-import { Logo } from 'capi';
 import { Format } from '@guardian/types/Format';
 import { darkModeCss } from 'styles';
 import { remSpace, text, neutral } from '@guardian/src-foundations';

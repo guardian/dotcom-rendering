@@ -13,7 +13,7 @@ import Metadata from 'components/metadata';
 import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import HeaderMedia from 'headerMedia';
-import { AdvertisementFeature } from 'item';
+import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
@@ -44,7 +44,7 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    item: AdvertisementFeature;
+    item: AdvertisementFeatureItem;
     children: ReactNode[];
 }
 
