@@ -15,7 +15,7 @@ import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Standard, Review, Item } from 'item';
+import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
@@ -74,7 +74,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 // ----- Component ----- //
 
 interface Props {
-    item: Standard | Review;
+    item: StandardItem | ReviewItem;
     children: ReactNode[];
 }
 
