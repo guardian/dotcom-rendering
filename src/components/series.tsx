@@ -49,7 +49,7 @@ const linkStyles = ({ kicker, inverted }: PillarStyles): SerializedStyles => css
     `}
 `;
 
-const immersiveLinkStyles = (isLabs: boolean) => css`
+const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
     color: ${neutral[100]};
     text-decoration: none;
     white-space: nowrap;
