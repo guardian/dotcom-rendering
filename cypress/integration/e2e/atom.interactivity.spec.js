@@ -7,6 +7,8 @@ const qandaUrl =
 const guideUrl =
     'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
+const timelineUrl =
+    'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
 const atomTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
@@ -59,3 +61,4 @@ const atomTests = (type, url) => {
 };
 atomTests('qanda', qandaUrl);
 atomTests('guide', guideUrl);
+atomTests('timeline', timelineUrl);
