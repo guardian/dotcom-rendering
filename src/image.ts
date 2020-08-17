@@ -5,10 +5,11 @@ import { createHash } from 'crypto';
 
 import { Option, some, none, fromNullable, andThen, map } from '@guardian/types/option';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
 import { pipe2 } from 'lib';
-
+import { Result, fromUnsafe, ResultKind } from '@guardian/types/result';
 
 // ----- Setup ----- //
 
@@ -31,7 +32,8 @@ const lowerQuality = 45;
 
 enum Role {
     Thumbnail,
-    HalfWidth
+    HalfWidth,
+    Card
 }
 
 const enum Dpr {
@@ -72,19 +74,29 @@ const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex');
 
 function src(salt: string, input: string, width: number, dpr: Dpr): string {
-    const url = new URL(input);
-    const service = getSubdomain(url.hostname);
+    const maybeUrl: Result<string, URL> = fromUnsafe(() => new URL(input), 'invalid url');
 
-    const params = new URLSearchParams({
-        width: width.toString(),
-        quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
-        fit: 'bounds',
-    });
+    switch (maybeUrl.kind) {
+        case ResultKind.Ok: {
+            const url = maybeUrl.value;
+            const service = getSubdomain(url.hostname);
 
-    const path = `${url.pathname}?${params.toString()}`;
-    const sig = sign(salt, path);
+            const params = new URLSearchParams({
+                width: width.toString(),
+                quality: dpr === Dpr.Two ? lowerQuality.toString() : defaultQuality.toString(),
+                fit: 'bounds',
+            });
 
-    return `${imageResizer}/${service}${path}&s=${sig}`;
+            const path = `${url.pathname}?${params.toString()}`;
+            const sig = sign(salt, path);
+
+            return `${imageResizer}/${service}${path}&s=${sig}`;
+        }
+        case ResultKind.Err:
+        default: {
+            return input;
+        }
+    }
 }
 
 const srcsetWithWidths = (widths: number[]) => (url: string, salt: string, dpr: Dpr): string =>
@@ -159,6 +171,24 @@ const parseImage = ({ docParser, salt }: Context) =>
     );
 };
 
+const parseCardImage = (image: CardImage | undefined, salt: string): Option<Image> => {
+    if (image === undefined) {
+        return none;
+    }
+
+    return some({
+        src: src(salt, image.url, 500, Dpr.One),
+        ...srcsets(image.url, salt),
+        alt: fromNullable(image.altText),
+        width: image.width,
+        height: image.height,
+        caption: none,
+        credit: none,
+        nativeCaption: none,
+        role: some(Role.Card),
+    });
+}
+
 
 // ----- Exports ----- //
 
@@ -171,5 +201,6 @@ export {
     srcsetWithWidths,
     sign,
     parseImage,
+    parseCardImage,
     BodyImageProps
 };
