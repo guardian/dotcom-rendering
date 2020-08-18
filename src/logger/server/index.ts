@@ -7,7 +7,6 @@ interface LogEvent {
     "@timestamp"?: string;
     level: 'debug' | 'info' | 'warn' | 'error';
     message: string;
-    // eslint-disable-next-line @typescript-eslint/camelcase
     stack_trace?: string;
 }
 
@@ -45,8 +44,11 @@ class ServerLogger implements LoggerFunctions {
                 },
                 transports: [new winston.transports.Console()],
                 format: winston.format.printf((logObject) => {
-                    const timestamp = logObject["@timestamp"];
-                    const stackTrace = (logObject["stack_trace"]) ? `, ${logObject["stack_trace"]}` : "";
+                    const maybeTimestamp: unknown = logObject['@timestamp'];
+                    const maybeStackTrace: unknown = logObject['stack_trace'];
+                    const stackTrace = typeof maybeStackTrace === 'string' ? `, ${maybeStackTrace}` : '';
+                    const timestamp = typeof maybeTimestamp === 'string' ? maybeTimestamp : 'Unknown Timestamp';
+
                     return `${timestamp} [${logObject.level}] ${logObject.message}${stackTrace}`;
                 })
             };
@@ -80,7 +82,6 @@ class ServerLogger implements LoggerFunctions {
         this.log({
             level: 'warn',
             message,
-            // eslint-disable-next-line @typescript-eslint/camelcase
             stack_trace: error?.stack
         })
     }
@@ -89,7 +90,6 @@ class ServerLogger implements LoggerFunctions {
         this.log({
             level: 'error',
             message,
-            // eslint-disable-next-line @typescript-eslint/camelcase
             stack_trace: error?.stack
         })
     }

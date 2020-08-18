@@ -94,9 +94,17 @@ const parseCapiResponse = (articleId: string) =>
 }
 
 const askCapiFor = (articleId: string): Promise<Result<number, Content>> =>
-    getConfigValue<string>('capi.key')
-        .then(capiRequest(articleId))
-        .then(parseCapiResponse(articleId));
+    getConfigValue('capi.key')
+        .then(key => {
+            if (key === undefined) {
+                logger.error('Could not get CAPI key');
+
+                return err(500);
+            }
+
+            return capiRequest(articleId)(key)
+                .then(parseCapiResponse(articleId));
+        });
 
 function resourceList(script: Option<string>): string[] {
     const emptyList: string[] = [];
@@ -111,7 +119,11 @@ async function serveArticlePost(
 ): Promise<void> {
     try {
         const renderingRequest = await mapiDecoder(body);
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
 
         const { html, clientScript } = render(imageSalt, renderingRequest, getAssetLocation);
         res.set('Link', getPrefetchHeader(resourceList(clientScript)));
@@ -127,7 +139,12 @@ async function serveArticlePost(
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
+
         const capiContent = await askCapiFor(articleId);
 
         either(
@@ -173,11 +190,18 @@ const recentLiveBlocks = (content: Content, context: Context): LiveUpdates => ({
 async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params.articleId || defaultId;
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
+
         const since = parseDate(req.query.since);
 
         if (since.kind === Param.Invalid) {
-            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand this timestamp: ${since}`);
+            const timestamp = typeof req.query.since === 'string' ? `: ${req.query.since}` : '';
+            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand the timestamp${timestamp}`);
+
             return res.sendStatus(400).end();
         }
 

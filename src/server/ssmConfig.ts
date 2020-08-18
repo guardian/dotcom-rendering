@@ -3,8 +3,7 @@ import { App, Stack, Stage } from './appIdentity';
 import { Option, some, none, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Config = {[key: string]: any};
+type Config = {[key: string]: string | undefined};
 
 async function recursivelyFetchConfig(nextToken?: string, currentConfig?: Config): Promise<Config> {
     const path = `/${App}/${Stage}/${Stack}/`;
@@ -47,12 +46,15 @@ async function fetchConfig(): Promise<Config> {
     );
 }
 
-export async function getConfigValue<A>(key: string, defaultValue?: A): Promise<A> {
+export async function getConfigValue(
+    key: string,
+    defaultValue?: string,
+): Promise<string | undefined> {
     const conf = await fetchConfig();
+
     if (conf[key]) {
         return conf[key];
-    }
-    else {
+    } else {
         if (defaultValue) {
             return defaultValue;
         }

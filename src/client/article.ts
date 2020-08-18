@@ -51,13 +51,13 @@ function topicClick(e: Event): void {
 
     if (topic) {
         if (statusText && statusText === followText) {
-            notificationsClient.follow(topic).then(success => {
+            void notificationsClient.follow(topic).then(success => {
                 if (status?.textContent && success) {
                     status.textContent = followingText;
                 }
             })
         } else {
-            notificationsClient.unfollow(topic).then(success => {
+            void notificationsClient.unfollow(topic).then(success => {
                 if (status?.textContent && success) {
                     status.textContent = followText;
                 }
@@ -73,7 +73,7 @@ function topics(): void {
 
     if (topic) {
         follow?.addEventListener('click', topicClick);
-        notificationsClient.isFollowing(topic).then(following => {
+        void notificationsClient.isFollowing(topic).then(following => {
             if (following && status?.textContent) {
                 status.textContent = followingText;
             }
@@ -84,20 +84,23 @@ function topics(): void {
 function formatDates(): void {
     Array.from(document.querySelectorAll('time[data-date]'))
         .forEach(time => {
+            const timestamp = time.getAttribute('data-date');
+
             try {
-                const timestamp = time.getAttribute('data-date');
                 if (timestamp) {
                     time.textContent = formatDate(new Date(timestamp))
                 }
             } catch (e) {
-                logger.error(`Unable to parse and format date ${time}`, e);
+                const message = timestamp ?? 'because the data-date attribute was empty';
+
+                logger.error(`Unable to parse and format date ${message}`, e);
             }
         })
 }
 
 function insertEpic(): void {
     if (navigator.onLine && !document.getElementById('epic-container')) {
-        acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
+        void acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
             if (maybeEpic.epic) {
                 const epicContainer = document.createElement('div');
                 epicContainer.id = 'epic-container';

@@ -8,9 +8,15 @@ import { DocParser } from "types/parserContext";
 function parseAtom(
     element: BlockElement,
     atoms: Atoms,
-    docParser: DocParser): Result<string, BodyElement> {
-    const id = element.contentAtomTypeData?.atomId
-    switch (element.contentAtomTypeData?.atomType) {
+    docParser: DocParser,
+): Result<string, BodyElement> {
+    if (element.contentAtomTypeData === undefined) {
+        return err('The atom has no data');
+    }
+
+    const id = element.contentAtomTypeData.atomId;
+
+    switch (element.contentAtomTypeData.atomType) {
         case "interactive": {
             const atom = atoms.interactives?.find(interactive => interactive.id === id);
 
@@ -77,7 +83,7 @@ function parseAtom(
         }
 
         default: {
-            return err(`Atom type not supported: ${element.contentAtomTypeData?.atomType}`);
+            return err(`Atom type not supported: ${element.contentAtomTypeData.atomType}`);
         }
     }
 }

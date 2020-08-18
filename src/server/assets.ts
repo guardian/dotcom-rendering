@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { logger } from 'logger';
+import { isObject } from 'lib';
 
 type AssetMapping = { [key: string]: string } | null;
 
@@ -16,7 +17,17 @@ function getAssetMappings(): AssetMapping {
     }
 
     try {
-        return JSON.parse(fs.readFileSync(manifestLocation).toString());
+        const parsed: unknown = JSON.parse(fs.readFileSync(manifestLocation).toString());
+
+        if (!isObject(parsed)) {
+            throw new Error('Manifest file doesn\'t appear to be an object');
+        }
+
+        return Object.entries(parsed).reduce(
+            (mappings, [key, value]) =>
+                typeof value === 'string' ? { ...mappings, [key]: value } : mappings,
+            {},
+        );
     } catch(e) {
         logger.error(`Unable to load asset mapping`, e);
         throw e;
