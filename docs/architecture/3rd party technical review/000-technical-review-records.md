@@ -1,25 +1,22 @@
-# 3rd Party Technical Review Format
+# 3rd-Party Technical Review Format
 
 ## Context
 
-We are using succefully lightweight architecture decision records to document decision being made about architecture.
-Last year legislation changes around data privacy (GDPR, CCPA, PECR) and their impact on our obligations means we need to  increase our technical measures to ensure the safety of our readers data through:
-  * Reducing number of 3rd parties    
+We are using succefully lightweight architecture decision records to document decisions being made about architecture.
+Last year legislation changes around data privacy (GDPR, CCPA, PECR) and their impact on our obligations means we need to increase our technical measures to ensure the safety of our readers data through:
+  * Reducing number of third-party    
   * Architecting our systems with a [privacy by design](https://en.wikipedia.org/wiki/Privacy_by_design) approach 
   * Documenting risks and mitigations in place or to be added.
   * Adding new controls to prevent issues, i.e being proactive rather than reactive.
 
-
-Additionally to this privacy concern, we have noticed in the past the difficulty to correctly estimate and measure accurately the performance andm  by association our revenue impact of 3rd party. While they usually come with a direct revenue, there is as well indirect revenue loss through performamce impact:
+Additionally to this privacy concern, we have noticed in the past the difficulty to correctly estimate and measure accurately the performance and by association our revenue impact of each third-party. While they usually come with a direct revenue, there is as well indirect revenue loss through performamce impact:
  * performance degradation impacts our ad display and our advertising revenue  
- * performance degradation impacts our contributions conversion rate 
- * performance degradation impacts our Google SEO which impact our reach and indirectly our overall revenue
+ * performance degradation impacts our contributions conversion rate
+ * performance degradation impacts our Google SEO which impact our reach and indirectly all of our revenue streams (contributions, subsciptions, advertising)
 
+To address those 2 concerns, we are making a change to the process for deciding if a third- party will be added.  Before a decision is made by the business to add a third-party to our website or apps, we will perform an engineering technical review that will be used to inform the business decision.
 
-To address those 2 concerns, we are making a change to the process for deciding if a 3rd party will be added. 
-Before a decision is made by the business to add a third party to our website or apps, we will perform an engineering technical review that will be used to inform the business decision.
-
-The format of the 
+The suggested format of the review is the following:
 
 * Format of the engineering technical review:
  * Metadata about the review
@@ -34,9 +31,9 @@ The format of the
 
 ## Decision
 
-For all 3rd party technical reviews in this project, a record will be created with a filename of `XXX-technical-review.md` where XXX is the monotonically increasing number described in the linked document.
+For all third-party technical reviews in this project, a record will be created with a filename of `XXX-technical-review.md` where XXX is the monotonically increasing number described in the linked document.
 
-Pleae note that as records will be public, specific attention should be paid about information being disclosed.
+Please note that as records will be public, specific attention should be paid about information being disclosed.
 
 ## Status
 
