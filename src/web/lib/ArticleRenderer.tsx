@@ -29,6 +29,7 @@ import {
     InteractiveAtom,
     QandaAtom,
     GuideAtom,
+    ProfileAtom,
     TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
@@ -177,6 +178,22 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
+                    return (
+                        <div id={`profile-atom-${i}`}>
+                            <ProfileAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteBlockComponent
@@ -323,7 +340,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

@@ -17,7 +17,12 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom, GuideAtom, TimelineAtom } from '@guardian/atoms-rendering';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -401,6 +406,33 @@ export const App = ({ CAPI, NAV }: Props) => {
                         expandCallback={componentEventHandler(
                             'GUIDE_ATOM',
                             guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.profileAtoms.map((profileAtom) => (
+                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
                             'EXPAND',
                         )}
                     />

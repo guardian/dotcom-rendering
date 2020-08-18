@@ -194,6 +194,8 @@ interface ProfileAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
