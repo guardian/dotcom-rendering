@@ -12,7 +12,6 @@ import { Interview } from '@root/fixtures/articles/Interview';
 import { Quiz } from '@root/fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
-import { MatchReport } from '@root/fixtures/articles/MatchReport';
 
 import { NAV } from '@root/fixtures/NAV';
 
@@ -147,9 +146,3 @@ RecipeStory.story = {
         chromatic: { viewports: [375] },
     },
 };
-
-export const MatchReportStory = () => {
-    const ServerCAPI = convertToStandard(MatchReport);
-    return <HydratedLayout ServerCAPI={ServerCAPI} />;
-};
-MatchReportStory.story = { name: 'MatchReport' };
