@@ -3,7 +3,7 @@ import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
-import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
+import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
 import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral, background } from '@guardian/src-foundations/palette';
@@ -196,9 +196,14 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     return pipe2(
         duration,
         map(length => {
-            return <time css={[timeStyles, durationStyles]}>
-                {formatSeconds(length)}
-            </time>
+            const seconds = formatSeconds(length);
+            if (seconds.kind === OptionKind.Some) {
+                return <time css={[timeStyles, durationStyles]}>
+                    {seconds.value}
+                </time>
+            } else {
+                return null;
+            }
         }),
         withDefault<ReactElement | null>(null)
     )
