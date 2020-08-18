@@ -16,14 +16,16 @@ import Img from 'components/img';
 import { border } from 'editorialPalette';
 import { SvgCamera, SvgVideo } from '@guardian/src-icons';
 import { SvgAudio } from '@guardian/src-icons';
+// import { article } from 'fixtures/item';
 
 
 interface Props {
     relatedItem: RelatedItem;
     image: Option<Image>;
+
 }
 
-const listStyles = css`
+const listStyles = (format: Format): SerializedStyles => css`
     background: white;
     margin-right: ${remSpace[3]};
     flex: 0 0 15rem;
@@ -31,7 +33,7 @@ const listStyles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    border-top : 1px solid ${getPillarStyles(format.pillar).kicker};
     img {
         width: 100%;
         height: 100%;
@@ -71,10 +73,19 @@ const headingWrapperStyles = css`
     min-height: 150px;
 `
 
-const headingStyles = css`
-    ${headline.xxxsmall()};
-    margin: 0;
+const headingStyles = (itemType: RelatedItemType) => {
+    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+        return css`
+            ${textSans.medium({ lineHeight: 'regular' })}
+            margin: 0;
+    `;
+    } else {
+        return css`
+            ${headline.xxxsmall()};
+            margin: 0;
 `;
+    }
+}
 
 const imageWrapperStyles = css`
     padding-bottom: 56.25%;
@@ -88,6 +99,7 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    
     switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
@@ -139,7 +151,10 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
-            return css``;
+            return css`
+                background-color : ${neutral[97]};
+                ${textSans.large()}
+            `;
         }
 
         case RelatedItemType.COMMENT: {
@@ -210,7 +225,7 @@ const durationMedia = (duration: Option<string>): JSX.Element => {
     )
 }
 
-const Card = ({ relatedItem, image }: Props): JSX.Element => {
+const Card = ({ relatedItem, image }: Props): JSX.Element => { 
     const format = {
         pillar: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
@@ -232,12 +247,15 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     )
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
-
-    return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
+    const date = lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE ?
+                     relativeFirstPublished(fromNullable(new Date(lastModified))) :
+                     null;
+    // console.log(relatedItem.type === RelatedItemType.ADVERTISEMENT_FEATURE);
+    
+    return <li css={[listStyles(format), cardStyles(relatedItem.type, format)]}>
         <a css={anchorStyles} href={relatedItem.link}>
             <section css={headingWrapperStyles}>
-                <h3 css={headingStyles}>{relatedItem.title}</h3>
+                <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
             </section>
             <section>
                 <div css={metadataStyles}>
