@@ -325,4 +325,5 @@ export {
     fromCapi,
     fromCapiLiveBlog,
     getFormat,
+    isAdvertisementFeature
 };

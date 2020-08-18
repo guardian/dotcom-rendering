@@ -10,10 +10,10 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import Cutout from 'components/opinion/cutout';
+import Cutout from 'components/comment/cutout';
 import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Comment } from 'item';
+import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
@@ -58,11 +58,11 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    item: Comment;
+    item: CommentItem;
     children: ReactNode[];
 }
 
-const Opinion = ({ item, children }: Props): JSX.Element =>
+const Comment = ({ item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -105,4 +105,4 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
 
 // ----- Exports ----- //
 
-export default Opinion;
+export default Comment;
