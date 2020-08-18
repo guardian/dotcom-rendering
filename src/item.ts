@@ -184,6 +184,12 @@ const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
 const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === tagId);
 
+const isAudio = hasSomeTag(['type/audio']);
+
+const isVideo = hasSomeTag(['type/video']);
+
+const isGallery = hasSomeTag(['type/gallery']);
+
 const isMedia =
     hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
 
@@ -326,5 +332,10 @@ export {
     fromCapi,
     fromCapiLiveBlog,
     getFormat,
-    isAdvertisementFeature
+    isAdvertisementFeature,
+    isLive,
+    isComment,
+    isAudio,
+    isVideo,
+    isGallery
 };

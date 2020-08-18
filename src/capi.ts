@@ -138,6 +138,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
       'show-tags': 'all',
       'show-blocks': 'all',
       'show-elements': 'all',
+      'show-related': 'true'
     })
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
@@ -169,4 +170,5 @@ export {
     includesTweets,
     maybeCapiDate,
     paidContentLogo,
+    articleMainImage
 };
