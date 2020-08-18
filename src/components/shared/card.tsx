@@ -155,11 +155,11 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
 const parentIconStyles: SerializedStyles = css`
     display:inline-block;
     svg {
-        width: 0.875rem;
+        width: 1rem;
         height: auto;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 0.300rem;
+        margin-top: 0.25rem;
         display: block;
     }
 `;
@@ -168,7 +168,7 @@ const iconStyles = (format: Format): SerializedStyles => {
     const { inverted } = getPillarStyles(format.pillar);
     return css`
         width: 1.5rem;
-        height: 1.4375rem;
+        height: 1.5rem;
         display: inline-block;
         background-color: ${inverted};
         border-radius: 50%;
@@ -176,26 +176,28 @@ const iconStyles = (format: Format): SerializedStyles => {
 }
 
 const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
-    if (itemType === RelatedItemType.GALLERY) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgCamera /></span>
-        </section>;
-    } else if (itemType === RelatedItemType.AUDIO) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgAudio /></span>
-        </section>;
-    } else if (itemType === RelatedItemType.VIDEO) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgVideo /></span>
-        </section>;
-    } else {
-        return <section css={parentIconStyles} ></section>;
+    switch (itemType){
+        case RelatedItemType.GALLERY:
+            return <section css={parentIconStyles}>
+                        <span css={iconStyles(format)}>< SvgCamera /></span>
+                    </section>;
+        case RelatedItemType.AUDIO:
+            return <section css={parentIconStyles}>
+                        <span css={iconStyles(format)}>< SvgAudio /></span>
+                    </section>;
+        case RelatedItemType.VIDEO:
+            return <section css={parentIconStyles}>
+                        <span css={iconStyles(format)}>< SvgVideo /></span>
+                    </section>;
+        default:
+            return <section css={parentIconStyles} ></section>;
+
     }
 }
 
 const metadataStyles: SerializedStyles = css`
     padding: 0 ${remSpace[2]};
-    min-height: 1.4375rem
+    min-height: 1.5rem
 `;
 
 const durationMedia = (duration: Option<string>): JSX.Element => {
