@@ -168,7 +168,9 @@ const parseCapiResponse = (articleId: string, context: Context) =>
     }
 }
 
-const askCapiFor = (articleId: string, context: Context): Promise<Result<number, [Content, RelatedContent]>> =>
+type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
+
+const askCapiFor = (articleId: string, context: Context): CapiReturn =>
     getConfigValue<string>('capi.key')
         .then(capiRequest(articleId))
         .then(parseCapiResponse(articleId, context));
