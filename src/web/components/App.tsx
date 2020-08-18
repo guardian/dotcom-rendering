@@ -17,7 +17,12 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom, GuideAtom, ProfileAtom } from '@guardian/atoms-rendering';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -289,7 +294,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -408,7 +412,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Hydrate>
             ))}
             {CAPI.profileAtoms.map((profileAtom) => (
-                <Hydrate root="profile-atom" index={profileAtom.guideIndex}>
+                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
                     <ProfileAtom
                         id={profileAtom.id}
                         title={profileAtom.title}
@@ -429,6 +433,35 @@ export const App = ({ CAPI, NAV }: Props) => {
                         expandCallback={componentEventHandler(
                             'PROFILE_ATOM',
                             profileAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.timelineAtoms.map((timelineAtom) => (
+                <Hydrate
+                    root="timeline-atom"
+                    index={timelineAtom.timelineIndex}
+                >
+                    <TimelineAtom
+                        id={timelineAtom.id}
+                        title={timelineAtom.title}
+                        events={timelineAtom.events}
+                        description={timelineAtom.description}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
                             'EXPAND',
                         )}
                     />

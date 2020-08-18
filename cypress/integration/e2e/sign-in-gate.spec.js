@@ -139,7 +139,7 @@ describe('Sign In Gate Tests', function() {
 
             cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
-            cy.contains('Your privacy options');
+            cy.contains('privacy settings');
         });
     });
 

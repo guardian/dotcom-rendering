@@ -10,6 +10,8 @@ const guideUrl =
 const profileUrl =
     'https://www.theguardian.com/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey';
 
+const timelineUrl =
+    'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
 const atomTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
@@ -63,3 +65,4 @@ const atomTests = (type, url) => {
 atomTests('qanda', qandaUrl);
 atomTests('guide', guideUrl);
 atomTests('profile', profileUrl);
+atomTests('timeline', timelineUrl);

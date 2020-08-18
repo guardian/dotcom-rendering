@@ -195,7 +195,7 @@ interface ProfileAtomBlockElement {
     html: string;
     credit: string;
     pillar: Pillar;
-    guideIndex?: number;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
@@ -263,7 +263,9 @@ interface TimelineBlockElement {
     id: string;
     title: string;
     description?: string;
+    pillar: Pillar;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {

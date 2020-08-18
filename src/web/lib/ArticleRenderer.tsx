@@ -30,6 +30,7 @@ import {
     QandaAtom,
     GuideAtom,
     ProfileAtom,
+    TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
@@ -317,7 +318,20 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
-
+                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                    return (
+                        <div id={`timeline-atom-${i}`}>
+                            <TimelineAtom
+                                id={element.id}
+                                title={element.title}
+                                pillar={pillar}
+                                events={element.events}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
@@ -326,7 +340,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
-                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

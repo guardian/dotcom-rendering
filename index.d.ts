@@ -357,6 +357,7 @@ type CAPIBrowserType = {
     qandaAtoms: QABlockElement[];
     guideAtoms: GuideAtomBlockElement[];
     profileAtoms: ProfileAtomBlockElement[];
+    timelineAtoms: TimelineBlockElement[];
 };
 
 interface TagType {
@@ -658,6 +659,7 @@ type IslandType =
     | 'qanda-atom'
     | 'guide-atom'
     | 'profile-atom'
+    | 'timeline-atom'
     | 'sign-in-gate';
 
 interface TrailType {
