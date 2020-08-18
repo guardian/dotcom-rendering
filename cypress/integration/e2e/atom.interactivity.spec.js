@@ -8,7 +8,7 @@ const guideUrl =
     'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
 const profileUrl =
-    'https://www.theguardian.com/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey';
+    'https://www.theguardian.com/business/2020/may/11/richard-branson-to-sell-500m-worth-of-virgin-galactic-shares';
 
 const timelineUrl =
     'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
