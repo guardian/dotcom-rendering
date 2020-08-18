@@ -212,6 +212,7 @@ interface QABlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
     qandaIndex?: number;
 }
 
