@@ -14,8 +14,7 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
-import { SvgCamera, SvgVideo } from '@guardian/src-icons';
-import { SvgAudio } from '@guardian/src-icons';
+import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
 
 
 interface Props {
@@ -175,23 +174,16 @@ const iconStyles = (format: Format): SerializedStyles => {
     `;
 }
 
-const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
+const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
     switch (itemType){
         case RelatedItemType.GALLERY:
-            return <section css={parentIconStyles}>
-                        <span css={iconStyles(format)}>< SvgCamera /></span>
-                    </section>;
+            return <span css={iconStyles(format)}>< SvgCamera /></span>;
         case RelatedItemType.AUDIO:
-            return <section css={parentIconStyles}>
-                        <span css={iconStyles(format)}>< SvgAudio /></span>
-                    </section>;
+            return <span css={iconStyles(format)}>< SvgAudio /></span>;
         case RelatedItemType.VIDEO:
-            return <section css={parentIconStyles}>
-                        <span css={iconStyles(format)}>< SvgVideo /></span>
-                    </section>;
+            return <span css={iconStyles(format)}>< SvgVideo /></span>
         default:
-            return <section css={parentIconStyles} ></section>;
-
+            return null;
     }
 }
 
@@ -200,7 +192,7 @@ const metadataStyles: SerializedStyles = css`
     min-height: 1.5rem
 `;
 
-const durationMedia = (duration: Option<string>): JSX.Element => {
+const durationMedia = (duration: Option<string>): ReactElement | null => {
     return pipe2(
         duration,
         map(length => {
@@ -208,7 +200,7 @@ const durationMedia = (duration: Option<string>): JSX.Element => {
                 {formatSeconds(length)}
             </time>
         }),
-        withDefault(<></>)
+        withDefault<ReactElement | null>(null)
     )
 }
 
@@ -243,7 +235,9 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
             </section>
             <section>
                 <div css={metadataStyles}>
-                    {icon(relatedItem.type, format)}
+                    <section css={parentIconStyles}>
+                        {icon(relatedItem.type, format)}
+                    </section>
                     {durationMedia(fromNullable(relatedItem.mediaDuration))}
                     {date}
                 </div>
