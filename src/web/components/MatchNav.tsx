@@ -52,7 +52,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
             background-color: ${brandAlt[400]};
             margin-bottom: 10px;
             ${until.tablet} {
-                margin: 0 -10px;
+                margin: 0 -10px 10px;
             }
 
             :before {
@@ -220,31 +220,35 @@ const tabsContainer = css`
     border-bottom: ${thinGreySolid};
 
     li {
-        width: 50%;
+        flex-basis: 50%;
         height: 40px;
         border-top: 3px solid ${border.secondary};
-        :nth-child(2) {
-            border-left: ${thinGreySolid};
-            background: ${palette.neutral[97]};
-            span {
-                color: ${palette.sport[400]};
-            }
 
-            &:hover {
-                cursor: pointer;
-            }
+        :nth-child(1) {
+            border-top: 3px solid ${palette.sport[400]};
         }
-    }
 
-    span {
-        ${headline.xxxsmall()};
-        background: transparent;
-        padding: 6px 8px 0;
-        text-align: left;
-        font-weight: 600;
-        min-height: 36px;
-        display: block;
-        width: 100%;
+        span {
+            ${headline.xxxsmall()};
+            background: transparent;
+            padding: 6px 8px 0;
+            text-align: left;
+            font-weight: 600;
+            min-height: 36px;
+            display: block;
+            width: 100%;
+        }
+        a span:hover {
+            background-color: ${palette.neutral[93]};
+        }
+
+        a span {
+            color: ${palette.sport[400]};
+        }
+
+        a:link {
+            text-decoration: none;
+        }
     }
 `;
 
@@ -254,8 +258,11 @@ const MatchTabs = () => (
             <li>
                 <span>Report</span>
             </li>
+            <Border />
             <li>
-                <span>Min-by-min</span>
+                <a href="www.gu.com" data-link-name="Min-by-min">
+                    <span>Min-by-min</span>
+                </a>
             </li>
         </ul>
     </div>
