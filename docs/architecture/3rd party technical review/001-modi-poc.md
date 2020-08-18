@@ -1,9 +1,9 @@
 # MoDI Proof of Concept
 
 ## Metadata
-Date: 17/08/2020
-Author: Mariot Chauvin
-Platform concerned: AMP & Web  
+* Date: 17/08/2020
+* Author: Mariot Chauvin
+* Platform concerned: AMP & Web  
 
 ## Context
 
@@ -11,14 +11,10 @@ MoDI is an initiative from [NLA](https://www.nlamediaaccess.com/) to build a new
 
 The Proof of Concept scope consists of deploying the analytics capability on a single section on our primary publicatiom (The Guardian not our other brands).
 
-
 [MoDI documentation about AMP tracker](https://docs.projectmodi.com/articles/how-to-install-the-amp-tracker/)
 [MoDI documentation about Web tracker](https://docs.projectmodi.com/articles/how-to-install-the-javascript-tracker/)
 
-
-
  ## Data privacy engineering review
-
 
 The tag being used is the [snowplow tracker](https://github.com/snowplow/snowplow-javascript-tracker) one which is hosted on a cloudfront CDN.
 The tracker is configured to not store cookies or using similar storage through configuration of the `stateStorageStrategy` field to `none`.    
@@ -105,8 +101,7 @@ However with the current scope no further analysis have been done.
 
 #### Recommended mitigations
 
-Outside of the proof of concept there are 2 options than can be investigated to ensure our performances
-are less degraded:
+Outside of the proof of concept there are 2 options than can be investigated to ensure our performances are less degraded:
  * Use [idle-until-urgent pattern](https://philipwalton.com/articles/idle-until-urgent/) using a library like [idlize](https://github.com/GoogleChromeLabs/idlize)
  * Do not send the events client-side but server-side. This approach have several benefits:
     - Do not require sending custom events in both apps and web platforms
