@@ -5,7 +5,6 @@ import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { MatchReportLayout } from './MatchReportLayout';
 
 type Props = {
     CAPI: CAPIType;
@@ -136,15 +135,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
-                    return (
-                        <MatchReportLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Standard}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':

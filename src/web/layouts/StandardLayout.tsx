@@ -37,6 +37,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -85,12 +86,13 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column'
-                        '.      border  .           right-column';
+                        'title  border  preFurniture right-column'
+                        '.      border  headline     right-column'
+                        '.      border  standfirst   right-column'
+                        'lines  border  media        right-column'
+                        'meta   border  media        right-column'
+                        'meta   border  body         right-column'
+                        '.      border  .            right-column';
                 }
 
                 ${until.wide} {
@@ -100,12 +102,13 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column'
-                        '.      border  .           right-column';
+                        'title  border  preFurniture right-column'
+                        '.      border  headline     right-column'
+                        '.      border  standfirst   right-column'
+                        'lines  border  media        right-column'
+                        'meta   border  media        right-column'
+                        'meta   border  body         right-column'
+                        '.      border  .            right-column';
                 }
 
                 ${until.leftCol} {
@@ -113,19 +116,21 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title      right-column'
-                        'headline   right-column'
-                        'standfirst right-column'
-                        'media      right-column'
-                        'lines      right-column'
-                        'meta       right-column'
-                        'body       right-column'
-                        '.          right-column';
+                        'preFurniture  right-column'
+                        'title         right-column'
+                        'headline      right-column'
+                        'standfirst    right-column'
+                        'media         right-column'
+                        'lines         right-column'
+                        'meta          right-column'
+                        'body          right-column'
+                        '.             right-column';
                 }
 
                 ${until.desktop} {
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'preFurniture'
                         'title'
                         'headline'
                         'standfirst'
@@ -140,6 +145,7 @@ const StandardGrid = ({
 
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'preFurniture'
                         'media'
                         'title'
                         'headline'
@@ -246,6 +252,8 @@ export const StandardLayout = ({
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
+    const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
+
     const showComments = CAPI.isCommentable;
 
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
@@ -336,6 +344,13 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="border">
                         <Border />
+                    </GridItem>
+                    <GridItem area="preFurniture">
+                        <div className={maxWidth}>
+                            {designType === 'MatchReport' && (
+                                <Placeholder rootId="match-nav" height={230} />
+                            )}
+                        </div>
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
@@ -432,6 +447,8 @@ export const StandardLayout = ({
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />
+                                {showMatchStats && <div id="match-stats" />}
+
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
