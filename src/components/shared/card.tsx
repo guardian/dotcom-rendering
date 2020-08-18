@@ -213,7 +213,7 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
             const seconds = formatSeconds(length);
             if (seconds.kind === OptionKind.Some) {
                 return <time css={[timeStyles, durationStyles]}>
-                    {seconds}
+                    {seconds.value}
                 </time>
             } else {
                 return null;
