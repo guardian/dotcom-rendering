@@ -14,7 +14,7 @@ import fetch, { Response } from 'node-fetch';
 
 import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
-import { capiEndpoint, isFeature, isReview, isAnalysis, articleMainImage } from 'capi';
+import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
@@ -34,12 +34,9 @@ import JsonSerialisable from 'types/jsonSerialisable';
 import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
 import { toArray, pipe2 } from 'lib';
-import { Option, map, withDefault, andThen, OptionKind } from '@guardian/types/option';
+import { Option, map, withDefault } from '@guardian/types/option';
 import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
-import { Image } from '@guardian/apps-rendering-api-models/image';
-import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { isAdvertisementFeature, isLive, isComment, isAudio, isVideo, isGallery } from 'item';
-import { parseImage } from 'image';
+import { parseRelatedContent } from 'relatedContent';
 
 // ----- Types ----- //
 
@@ -66,71 +63,6 @@ function getPrefetchHeader(resources: string[]): string {
 
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
     fetch(capiEndpoint(articleId, key));
-
-const parseRelatedItemType = (content: Content): RelatedItemType => {
-    const { tags } = content;
-    if (isFeature(content)) {
-        return RelatedItemType.FEATURE
-      } else if (isLive(tags)) {
-        return RelatedItemType.LIVE
-      } else if (isReview(content)) {
-        return RelatedItemType.REVIEW
-      } else if (isAnalysis(content)) {
-        return RelatedItemType.ANALYSIS
-      } else if (isComment(tags)) {
-        return RelatedItemType.COMMENT
-      } else if (isAudio(tags)) {
-        return RelatedItemType.AUDIO
-      } else if (isVideo(tags)) {
-        return RelatedItemType.VIDEO
-      } else if (isGallery(tags)) {
-        return RelatedItemType.GALLERY
-      } else if (isAdvertisementFeature(tags)) {
-        return RelatedItemType.ADVERTISEMENT_FEATURE
-      } else {
-        return RelatedItemType.ARTICLE
-      }
-}
-
-const parseHeaderImage = (content: Content, context: Context): Image | undefined => {
-        const optionalImage = pipe2(
-            articleMainImage(content),
-            andThen(parseImage(context)),
-            map(image => ({
-                url: image.src,
-                height: image.height,
-                width: image.width,
-            }),
-        ));
-
-        if (optionalImage.kind === OptionKind.Some) {
-            return optionalImage.value;
-        } else {
-            return undefined;
-        }
-}
-
-const parseRelatedContent = (relatedContent: Content[], context: Context): RelatedContent => {
-    return {
-        title: "Related Stories",
-        relatedItems: relatedContent.map(content => {
-            return {
-                title: content.webTitle ?? "",
-                lastModified: content.fields?.lastModified,
-                headerImage: parseHeaderImage(content, context),
-                link: `/${content.id}`,
-                type: parseRelatedItemType(content),
-                pillar: {
-                    id: content.pillarId ?? "pillar/news",
-                    name: content.pillarName ?? "news",
-                    sectionIds: []
-                },
-                mediaDuration: "100",
-                starRating: content.fields?.starRating?.toString() ?? undefined
-            }
-        }).slice(0, 4)
-    }
-}
 
 const parseCapiResponse = (articleId: string, context: Context) =>
     async (capiResponse: Response): Promise<Result<number, [Content, RelatedContent]>> => {
