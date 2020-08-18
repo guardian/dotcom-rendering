@@ -98,12 +98,13 @@ function fromString(date: string): Option<Date> {
     }
 }
 
-function formatSeconds(seconds: string): string | null {
-    try {
+function formatSeconds(seconds: string): Option<string> {
         const secondsInt = parseInt(seconds);
+
         if (isNaN(secondsInt)) {
-            return null;
+            return none;
         }
+
         const hrs = Math.floor((secondsInt / 3600));
         const mins = Math.floor(((secondsInt % 3600) / 60));
         const secs = Math.floor(secondsInt) % 60;
@@ -114,10 +115,7 @@ function formatSeconds(seconds: string): string | null {
         }
 
         ret += `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-        return ret;
-    } catch(e) {
-        return null;
-    }
+        return some(ret);
 }
 
 
