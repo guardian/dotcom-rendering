@@ -3,8 +3,8 @@ import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
-import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
-import { makeRelativeDate } from 'date';
+import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
+import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral, background } from '@guardian/src-foundations/palette';
 import { Design, Display, Format } from '@guardian/types/Format';
@@ -14,8 +14,7 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
-import { SvgCamera } from '@guardian/src-icons';
-
+import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
 
 
 interface Props {
@@ -39,14 +38,22 @@ const listStyles = css`
         top: 0;
         left: 0;
     }
+`;
 
-    time {
-        ${textSans.small()};
-        color: ${text.supporting};
-        text-align: right;
-        float: right;
-        display: inline-block;
-    }
+const timeStyles = css`
+    ${textSans.small()};
+    color: ${text.supporting};
+    text-align: right;
+    display: inline-block;
+    vertical-align: top;
+`;
+
+const durationStyles = css`
+    margin-left: ${remSpace[2]};
+`;
+
+const dateStyles = css`
+    float: right;
 `
 
 const anchorStyles = css`
@@ -75,12 +82,12 @@ const imageWrapperStyles = css`
 
 const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
     date,
-    map(date => <time>{makeRelativeDate(date)}</time>),
+    map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
     withDefault<JSX.Element | null>(null),
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    switch(itemType) {
+    switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
 
@@ -107,6 +114,8 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
             `;
         }
 
+        case RelatedItemType.VIDEO:
+        case RelatedItemType.AUDIO:
         case RelatedItemType.GALLERY: {
             return css`
                 background: ${background.inverse};
@@ -120,15 +129,7 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
             return css``;
         }
 
-        case RelatedItemType.AUDIO: {
-            return css``;
-        }
-
         case RelatedItemType.LIVE: {
-            return css``;
-        }
-
-        case RelatedItemType.VIDEO: {
             return css``;
         }
 
@@ -150,10 +151,67 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
     }
 }
 
-const Card = ({ relatedItem, image }: Props): JSX.Element => {
+const parentIconStyles: SerializedStyles = css`
+    display:inline-block;
+    svg {
+        width: 1rem;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.25rem;
+        display: block;
+    }
+`;
 
+const iconStyles = (format: Format): SerializedStyles => {
+    const { inverted } = getPillarStyles(format.pillar);
+    return css`
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-block;
+        background-color: ${inverted};
+        border-radius: 50%;
+    `;
+}
+
+const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
+    switch (itemType){
+        case RelatedItemType.GALLERY:
+            return <span css={iconStyles(format)}>< SvgCamera /></span>;
+        case RelatedItemType.AUDIO:
+            return <span css={iconStyles(format)}>< SvgAudio /></span>;
+        case RelatedItemType.VIDEO:
+            return <span css={iconStyles(format)}>< SvgVideo /></span>
+        default:
+            return null;
+    }
+}
+
+const metadataStyles: SerializedStyles = css`
+    padding: 0 ${remSpace[2]};
+    min-height: 1.5rem
+`;
+
+const durationMedia = (duration: Option<string>): ReactElement | null => {
+    return pipe2(
+        duration,
+        map(length => {
+            const seconds = formatSeconds(length);
+            if (seconds.kind === OptionKind.Some) {
+                return <time css={[timeStyles, durationStyles]}>
+                    {seconds.value}
+                </time>
+            } else {
+                return null;
+            }
+        }),
+        withDefault<ReactElement | null>(null)
+    )
+}
+
+const Card = ({ relatedItem, image }: Props): JSX.Element => {
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.name),
+        pillar: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }
@@ -172,58 +230,26 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         withDefault<ReactElement | null>(null)
     )
 
-    const parentIconStyles = (format: Format): SerializedStyles => css`
-        display:inline-block;
-        svg {
-            width: 0.875rem;
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0.300rem;
-            display: block;
-        }
-    `;
-    const { inverted } = getPillarStyles(format.pillar);
-    const iconStyles = (format: Format): SerializedStyles => css`
-        width: 1.5rem;
-        height: 1.4375rem;
-        display: inline-block;
-        background-color: ${inverted};
-        border-radius: 50%;
-    `;
-
-    const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
-        if (itemType === RelatedItemType.GALLERY){
-            return <section css={parentIconStyles}>
-                    <span css={iconStyles}>< SvgCamera /></span>
-                   </section>;
-        } else {
-            return <section css={parentIconStyles} ></section>;
-        }
-    }
-
-    const metaDataStyles = (format: Format): SerializedStyles => css`
-        padding: 0 ${remSpace[2]};
-        min-height: 1.4375rem
-    `;
-
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
     return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
-            <a css={anchorStyles} href={relatedItem.link}>
-                <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles}>{relatedItem.title}</h3>
-                </section>
-                <section>
-                    <div css= {metaDataStyles}>
-                        {icon(relatedItem.type, format)} 
-                        {date}
-                    </div>
-                    <div css={imageWrapperStyles}>{img}</div>
-                </section>
-            </a>
-        </li>
+        <a css={anchorStyles} href={relatedItem.link}>
+            <section css={headingWrapperStyles}>
+                <h3 css={headingStyles}>{relatedItem.title}</h3>
+            </section>
+            <section>
+                <div css={metadataStyles}>
+                    <section css={parentIconStyles}>
+                        {icon(relatedItem.type, format)}
+                    </section>
+                    {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                    {date}
+                </div>
+                <div css={imageWrapperStyles}>{img}</div>
+            </section>
+        </a>
+    </li>
 }
 
 

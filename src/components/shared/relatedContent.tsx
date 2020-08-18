@@ -7,6 +7,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { remSpace, neutral } from '@guardian/src-foundations';
 import { ResizedRelatedContent } from 'item';
 import { darkModeCss } from 'styles';
+import { from } from '@guardian/src-foundations/mq';
 
 interface Props {
     content: Option<ResizedRelatedContent>;
@@ -14,6 +15,10 @@ interface Props {
 
 const styles = css`
     padding: ${remSpace[6]} 0;
+    ${from.wide} {
+        width: 1300px;
+        margin: 0 auto;
+    }
 `;
 
 const headingStyles = css`
