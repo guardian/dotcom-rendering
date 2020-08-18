@@ -14,9 +14,7 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
-import { SvgCamera, SvgVideo } from '@guardian/src-icons';
-import { SvgAudio } from '@guardian/src-icons';
-// import { article } from 'fixtures/item';
+import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
 
 
 interface Props {
@@ -170,11 +168,11 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
 const parentIconStyles: SerializedStyles = css`
     display:inline-block;
     svg {
-        width: 0.875rem;
+        width: 1rem;
         height: auto;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 0.300rem;
+        margin-top: 0.25rem;
         display: block;
     }
 `;
@@ -183,37 +181,32 @@ const iconStyles = (format: Format): SerializedStyles => {
     const { inverted } = getPillarStyles(format.pillar);
     return css`
         width: 1.5rem;
-        height: 1.4375rem;
+        height: 1.5rem;
         display: inline-block;
         background-color: ${inverted};
         border-radius: 50%;
     `;
 }
 
-const icon = (itemType: RelatedItemType, format: Format): JSX.Element => {
-    if (itemType === RelatedItemType.GALLERY) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgCamera /></span>
-        </section>;
-    } else if (itemType === RelatedItemType.AUDIO) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgAudio /></span>
-        </section>;
-    } else if (itemType === RelatedItemType.VIDEO) {
-        return <section css={parentIconStyles}>
-            <span css={iconStyles(format)}>< SvgVideo /></span>
-        </section>;
-    } else {
-        return <section css={parentIconStyles} ></section>;
+const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
+    switch (itemType){
+        case RelatedItemType.GALLERY:
+            return <span css={iconStyles(format)}>< SvgCamera /></span>;
+        case RelatedItemType.AUDIO:
+            return <span css={iconStyles(format)}>< SvgAudio /></span>;
+        case RelatedItemType.VIDEO:
+            return <span css={iconStyles(format)}>< SvgVideo /></span>
+        default:
+            return null;
     }
 }
 
 const metadataStyles: SerializedStyles = css`
     padding: 0 ${remSpace[2]};
-    min-height: 1.4375rem
+    min-height: 1.5rem
 `;
 
-const durationMedia = (duration: Option<string>): JSX.Element => {
+const durationMedia = (duration: Option<string>): ReactElement | null => {
     return pipe2(
         duration,
         map(length => {
@@ -221,11 +214,11 @@ const durationMedia = (duration: Option<string>): JSX.Element => {
                 {formatSeconds(length)}
             </time>
         }),
-        withDefault(<></>)
+        withDefault<ReactElement | null>(null)
     )
 }
 
-const Card = ({ relatedItem, image }: Props): JSX.Element => { 
+const Card = ({ relatedItem, image }: Props): JSX.Element => {
     const format = {
         pillar: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
@@ -247,27 +240,29 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     )
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE ?
+    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) ?
                      relativeFirstPublished(fromNullable(new Date(lastModified))) :
                      null;
-    // console.log(relatedItem.type === RelatedItemType.ADVERTISEMENT_FEATURE);
-    
-    return <li css={[listStyles(format), cardStyles(relatedItem.type, format)]}>
-        <a css={anchorStyles} href={relatedItem.link}>
-            <section css={headingWrapperStyles}>
-                <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
-            </section>
-            <section>
-                <div css={metadataStyles}>
-                    {icon(relatedItem.type, format)}
-                    {durationMedia(fromNullable(relatedItem.mediaDuration))}
-                    {date}
-                </div>
-                <div css={imageWrapperStyles}>{img}</div>
-            </section>
-        </a>
-    </li>
-}
 
+    return (
+        <li css={[listStyles(format), cardStyles(relatedItem.type, format)]}>
+            <a css={anchorStyles} href={relatedItem.link}>
+                <section css={headingWrapperStyles}>
+                    <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
+                </section>
+                <section>
+                    <div css={metadataStyles}>
+                        <section css={parentIconStyles}>
+                            {icon(relatedItem.type, format)}
+                        </section>
+                        {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                        {date}
+                    </div>
+                    <div css={imageWrapperStyles}>{img}</div>
+                </section>
+            </a>
+        </li>
+    )
+}
 
 export default Card;
