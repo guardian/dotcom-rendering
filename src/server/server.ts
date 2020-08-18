@@ -64,7 +64,7 @@ function getPrefetchHeader(resources: string[]): string {
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
     fetch(capiEndpoint(articleId, key));
 
-const parseCapiResponse = (articleId: string, context: Context) =>
+const parseCapiResponse = (articleId: string) =>
     async (capiResponse: Response): Promise<Result<number, [Content, RelatedContent]>> => {
     const buffer = await capiResponse.buffer();
         
@@ -102,10 +102,10 @@ const parseCapiResponse = (articleId: string, context: Context) =>
 
 type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
-const askCapiFor = (articleId: string, context: Context): CapiReturn =>
+const askCapiFor = (articleId: string): CapiReturn =>
     getConfigValue<string>('capi.key')
         .then(capiRequest(articleId))
-        .then(parseCapiResponse(articleId, context));
+        .then(parseCapiResponse(articleId));
 
 function resourceList(script: Option<string>): string[] {
     const emptyList: string[] = [];
@@ -137,8 +137,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
         const imageSalt = await getConfigValue<string>('apis.img.salt');
-        const context = { salt: imageSalt, docParser };
-        const capiContent = await askCapiFor(articleId, context);
+        const capiContent = await askCapiFor(articleId);
 
         either(
             (errorStatus: number) => { res.sendStatus(errorStatus) },
@@ -185,7 +184,6 @@ async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params.articleId || defaultId;
         const imageSalt = await getConfigValue<string>('apis.img.salt');
-        const context = { salt: imageSalt, docParser };
         const since = parseDate(req.query.since);
 
         if (since.kind === Param.Invalid) {
@@ -193,11 +191,13 @@ async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
             return res.sendStatus(400).end();
         }
 
-        const capiContent = await askCapiFor(articleId, context);
+        const capiContent = await askCapiFor(articleId);
 
         either(
             (errorStatus: number) => { res.sendStatus(errorStatus) },
             ([content, relatedContent]: [Content, RelatedContent]) => {
+                const context = { salt: imageSalt, docParser };
+
                 if (content.type !== ContentType.LIVEBLOG) {
                     logger.warn(`I was asked to provide updates on something that wasn't a liveblog: ${articleId}`);
                     res.sendStatus(400);
