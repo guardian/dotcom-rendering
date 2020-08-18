@@ -21,12 +21,12 @@ declare global {
     interface Window {
         nativeConnections: { [id: string]: NativeConnection };
         android?: {
-            postMessage: (data: string, connectionId: string) => {};
+            postMessage: (data: string, connectionId: string) => void;
         };
         webkit?: {
             messageHandlers: {
                 iOSWebViewMessage: {
-                    postMessage: (nativeMessage: NativeMessage) => {};
+                    postMessage: (nativeMessage: NativeMessage) => void;
                 };
             };
         };

@@ -90,7 +90,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
     useEffect(() => {
         const handleSeenEpic = debounce(() => {
             if (!impressionSeen && isElementPartiallyInViewport(epicContainer)) {
-                acquisitionsClient.epicSeen();
+                void acquisitionsClient.epicSeen();
                 setImpressionSeen(true);
             }
         }, 100);
