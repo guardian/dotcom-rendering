@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import {
     neutral,
     background,
-    brandAltBackground,
     brandBackground,
     brandLine,
     brandBorder,
@@ -13,7 +12,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -37,6 +35,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -85,6 +84,7 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        'title  border  matchTabs   right-column'
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
@@ -100,7 +100,8 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
+                        'title  border  matchTabs   rightColumn'
+                        '.      border  headline    right-column'
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
@@ -113,6 +114,7 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
+                        'matchTabs  right-column'
                         'title      right-column'
                         'headline   right-column'
                         'standfirst right-column'
@@ -126,6 +128,7 @@ const StandardGrid = ({
                 ${until.desktop} {
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'matchTabs'
                         'title'
                         'headline'
                         'standfirst'
@@ -140,6 +143,7 @@ const StandardGrid = ({
 
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'matchTabs'
                         'media'
                         'title'
                         'headline'
@@ -178,25 +182,6 @@ const stretchLines = css`
     }
 `;
 
-const starWrapper = css`
-    margin-bottom: 18px;
-    margin-top: 6px;
-    background-color: ${brandAltBackground.primary};
-    display: inline-block;
-
-    ${until.phablet} {
-        padding-left: 20px;
-        margin-left: -20px;
-    }
-    ${until.leftCol} {
-        padding-left: 0px;
-        margin-left: -0px;
-    }
-
-    padding-left: 10px;
-    margin-left: -10px;
-`;
-
 const ageWarningMargins = css`
     margin-top: 12px;
     margin-left: -10px;
@@ -220,7 +205,7 @@ interface Props {
     pillar: Pillar;
 }
 
-export const StandardLayout = ({
+export const MatchReportLayout = ({
     CAPI,
     NAV,
     display,
@@ -245,6 +230,8 @@ export const StandardLayout = ({
         (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
+
+    const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
 
     const showComments = CAPI.isCommentable;
 
@@ -337,6 +324,13 @@ export const StandardLayout = ({
                     <GridItem area="border">
                         <Border />
                     </GridItem>
+                    <GridItem area="matchTabs">
+                        <div className={maxWidth}>
+                            {designType === 'MatchReport' && (
+                                <Placeholder rootId="match-nav" height={230} />
+                            )}
+                        </div>
+                    </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
                             <ArticleHeadlinePadding designType={designType}>
@@ -361,16 +355,6 @@ export const StandardLayout = ({
                                 )}
                             </ArticleHeadlinePadding>
                         </div>
-                        {CAPI.starRating || CAPI.starRating === 0 ? (
-                            <div className={starWrapper}>
-                                <StarRating
-                                    rating={CAPI.starRating}
-                                    size="large"
-                                />
-                            </div>
-                        ) : (
-                            <></>
-                        )}
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -432,6 +416,7 @@ export const StandardLayout = ({
                                     designType={designType}
                                     adTargeting={adTargeting}
                                 />
+                                {showMatchStats && <div id="match-stats" />}
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />
                                 <SubMeta
