@@ -3,7 +3,7 @@ import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
-import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
+import { Option, withDefault, map, fromNullable } from '@guardian/types/option';
 import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
 import { text, neutral, background } from '@guardian/src-foundations/palette';
@@ -20,10 +20,9 @@ import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
 interface Props {
     relatedItem: RelatedItem;
     image: Option<Image>;
-
 }
 
-const listStyles = (format: Format): SerializedStyles => css`
+const listStyles = css`
     background: white;
     margin-right: ${remSpace[3]};
     flex: 0 0 15rem;
@@ -31,7 +30,7 @@ const listStyles = (format: Format): SerializedStyles => css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-top : 1px solid ${getPillarStyles(format.pillar).kicker};
+
     img {
         width: 100%;
         height: 100%;
@@ -71,19 +70,10 @@ const headingWrapperStyles = css`
     min-height: 150px;
 `
 
-const headingStyles = (itemType: RelatedItemType) => {
-    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
-        return css`
-            ${textSans.medium({ lineHeight: 'regular' })}
-            margin: 0;
-    `;
-    } else {
-        return css`
-            ${headline.xxxsmall()};
-            margin: 0;
+const headingStyles = css`
+    ${headline.xxxsmall()};
+    margin: 0;
 `;
-    }
-}
 
 const imageWrapperStyles = css`
     padding-bottom: 56.25%;
@@ -97,7 +87,6 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    
     switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
@@ -149,10 +138,7 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
-            return css`
-                background-color : ${neutral[97]};
-                ${textSans.large()}
-            `;
+            return css``;
         }
 
         case RelatedItemType.COMMENT: {
@@ -210,14 +196,9 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     return pipe2(
         duration,
         map(length => {
-            const seconds = formatSeconds(length);
-            if (seconds.kind === OptionKind.Some) {
-                return <time css={[timeStyles, durationStyles]}>
-                    {seconds.value}
-                </time>
-            } else {
-                return null;
-            }
+            return <time css={[timeStyles, durationStyles]}>
+                {formatSeconds(length)}
+            </time>
         }),
         withDefault<ReactElement | null>(null)
     )
@@ -245,29 +226,26 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     )
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) ?
-                     relativeFirstPublished(fromNullable(new Date(lastModified))) :
-                     null;
+    const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
 
-    return (
-        <li css={[listStyles(format), cardStyles(relatedItem.type, format)]}>
-            <a css={anchorStyles} href={relatedItem.link}>
-                <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
-                </section>
-                <section>
-                    <div css={metadataStyles}>
-                        <section css={parentIconStyles}>
-                            {icon(relatedItem.type, format)}
-                        </section>
-                        {durationMedia(fromNullable(relatedItem.mediaDuration))}
-                        {date}
-                    </div>
-                    <div css={imageWrapperStyles}>{img}</div>
-                </section>
-            </a>
-        </li>
-    )
+    return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
+        <a css={anchorStyles} href={relatedItem.link}>
+            <section css={headingWrapperStyles}>
+                <h3 css={headingStyles}>{relatedItem.title}</h3>
+            </section>
+            <section>
+                <div css={metadataStyles}>
+                    <section css={parentIconStyles}>
+                        {icon(relatedItem.type, format)}
+                    </section>
+                    {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                    {date}
+                </div>
+                <div css={imageWrapperStyles}>{img}</div>
+            </section>
+        </a>
+    </li>
 }
+
 
 export default Card;
