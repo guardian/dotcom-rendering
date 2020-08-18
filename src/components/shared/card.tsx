@@ -71,7 +71,7 @@ const headingWrapperStyles = css`
     min-height: 150px;
 `
 
-const headingStyles = (itemType: RelatedItemType) => {
+const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
     if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`
             ${textSans.medium({ lineHeight: 'regular' })}
