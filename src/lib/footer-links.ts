@@ -37,17 +37,17 @@ export const footerLinksNew: Link[][] = [
             url: 'https://workforus.theguardian.com/locations/london',
         },
         {
+            title: 'Privacy settings',
+            on: 'tap:consent.prompt(consent=SourcePoint)',
+            onlyOnPlatform: LinkPlatform.Amp,
+        },
+        {
             title: 'Privacy policy',
             url: 'https://www.theguardian.com/info/privacy',
         },
         {
             title: 'Cookie policy',
             url: 'https://www.theguardian.com/info/cookies',
-        },
-        {
-            title: 'Your privacy',
-            on: 'tap:the-adconsent-element.prompt',
-            onlyOnPlatform: LinkPlatform.Amp,
         },
         {
             title: 'Terms & conditions',
