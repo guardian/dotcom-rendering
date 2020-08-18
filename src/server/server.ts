@@ -82,7 +82,7 @@ const parseCapiResponse = (articleId: string, context: Context) =>
                 return err(500);
             }
 
-            const relatedContent = parseRelatedContent(response.relatedContent, context)
+            const relatedContent = parseRelatedContent(response.relatedContent);
             return ok([response.content, relatedContent]);
         }
 
