@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace, breakpoints } from '@guardian/src-foundations';
+import { remSpace, breakpoints, palette } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
 import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
@@ -20,26 +20,31 @@ import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
 interface Props {
     relatedItem: RelatedItem;
     image: Option<Image>;
-
 }
 
-const listStyles = (format: Format): SerializedStyles => css`
-    background: white;
-    margin-right: ${remSpace[3]};
-    flex: 0 0 15rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-top : 1px solid ${getPillarStyles(format.pillar).kicker};
-    img {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-`;
+const listStyles = (format: Format): SerializedStyles => {
+    const { inverted } = getPillarStyles(format.pillar);
+        return css`
+                background: white;
+                margin-right: ${remSpace[3]};
+                flex: 0 0 15rem;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border-top : ${palette.labs[300]};
+                ${darkModeCss`
+                    color: ${inverted};
+                `}
+                img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+        `;
+}
 
 const timeStyles = css`
     ${textSans.small()};
@@ -76,12 +81,12 @@ const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
         return css`
             ${textSans.medium({ lineHeight: 'regular' })}
             margin: 0;
-    `;
+        `;
     } else {
         return css`
             ${headline.xxxsmall()};
             margin: 0;
-`;
+        `;
     }
 }
 
@@ -150,7 +155,7 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
             return css`
-                background-color : ${neutral[97]};
+                background-color : ${neutral[93]};
                 ${textSans.large()}
             `;
         }
