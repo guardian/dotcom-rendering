@@ -32,7 +32,7 @@ const listStyles = (format: Format): SerializedStyles => {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                border-top : ${palette.labs[300]};
+                border-top : 1px solid ${palette.labs[300]};
                 ${darkModeCss`
                     color: ${inverted};
                 `}
