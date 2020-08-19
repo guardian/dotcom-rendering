@@ -22,7 +22,15 @@ interface Props {
     image: Option<Image>;
 }
 
-const listStyles = (format: Format): SerializedStyles => {
+const labPillarColors = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+        return css`1px solid ${palette.labs[300]}`
+    } else {
+        return css`1px solid ${getPillarStyles(format.pillar).kicker}`
+    }
+}
+
+const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
     const { inverted } = getPillarStyles(format.pillar);
         return css`
                 background: white;
@@ -32,7 +40,7 @@ const listStyles = (format: Format): SerializedStyles => {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                border-top : 1px solid ${palette.labs[300]};
+                border-top : ${labPillarColors(itemType, format)};
                 ${darkModeCss`
                     color: ${inverted};
                 `}
@@ -255,7 +263,7 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
                      null;
 
     return (
-        <li css={[listStyles(format), cardStyles(relatedItem.type, format)]}>
+        <li css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}>
             <a css={anchorStyles} href={relatedItem.link}>
                 <section css={headingWrapperStyles}>
                     <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
