@@ -31,12 +31,12 @@ describe('getForcedParticipationsFromUrl', () => {
     });
 
     it('Returns empty if empty string', () => {
-        expect(getForcedParticipationsFromUrl('')).toStrictEqual({});
+        expect(getForcedParticipationsFromUrl('')).toBeUndefined();
     });
 
     it('Returns empty if another hash', () => {
-        expect(getForcedParticipationsFromUrl('#discussion-123')).toStrictEqual(
-            {},
-        );
+        expect(
+            getForcedParticipationsFromUrl('#discussion-123'),
+        ).toBeUndefined();
     });
 });

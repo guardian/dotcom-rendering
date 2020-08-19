@@ -1,10 +1,10 @@
 import { Variant } from '@guardian/ab-core';
 
-type Participations = { testId: string; variant: Variant };
+export type Participations = { testId: { variant: Variant } };
 
 export const getForcedParticipationsFromUrl = (
     windowHash: string,
-): Participations => {
+): Participations | undefined => {
     if (windowHash.startsWith('#ab')) {
         const tokens = windowHash.replace('#ab-', '').split(',');
         return tokens.reduce((obj, token) => {
@@ -13,8 +13,8 @@ export const getForcedParticipationsFromUrl = (
                 ...obj,
                 [testId]: { variant: variantId },
             };
-        }, {});
+        }, {} as Participations);
     }
 
-    return {};
+    return undefined;
 };

@@ -2333,6 +2333,7 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+<<<<<<< HEAD
 "@guardian/ab-core@1.1.0-next.0":
   version "1.1.0-next.0"
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.1.0-next.0.tgz#2d164022c0df449547c177967aba755e57720a1c"
@@ -2342,6 +2343,17 @@
   version "1.0.0-next.0"
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.0.0-next.0.tgz#f5e070b112616b32663a2bebb202106604d87b48"
   integrity sha512-2B9zDSz89ZYLBHXpnUFuCoT6biJZFGII+fkuKmdO6g3DbGgOfLKcZNZmdmQlxwLsHRHWCiNY+0cyvh8Bbr3EkQ==
+=======
+"@guardian/ab-core@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.2.0.tgz#4ee4b8fb24eaf77c8cdc5c4e482dcde924980821"
+  integrity sha512-2eghazK4GMA1tYTFM+0vMVvAaQnZpY9wnkNWvCywb9wJFqyiZyuji9XvkrAoXQpk7v++1Bjczqiyotu5rXLGfw==
+
+"@guardian/ab-react@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.2.0.tgz#c48893523ff3c1ac846e5e89d85120b59210452e"
+  integrity sha512-LYkTGYx4kmuY3TReei+M/fW06FtlXTfBcPvPmOpbeTNKzJdPojnbe4U/FgUiDQ9lIWvON6Dlt1J1eLyLkdqdow==
+>>>>>>> WIP
 
 "@guardian/atoms-rendering@^1.8.2":
   version "1.8.2"
