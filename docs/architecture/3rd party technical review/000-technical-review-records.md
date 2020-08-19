@@ -4,7 +4,7 @@
 
 We are using succefully lightweight architecture decision records to document decisions being made about architecture.
 Last year legislation changes around data privacy (GDPR, CCPA, PECR) and their impact on our obligations means we need to increase our technical measures to ensure the safety of our readers data through:
-  * Reducing number of third-party    
+  * Reducing the number of third-party scripts
   * Architecting our systems with a [privacy by design](https://en.wikipedia.org/wiki/Privacy_by_design) approach 
   * Documenting risks and mitigations in place or to be added.
   * Adding new controls to prevent issues, i.e being proactive rather than reactive.
