@@ -254,7 +254,6 @@ export const StandardLayout = ({
     const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
-
     return (
         <>
             <div>
@@ -424,6 +423,9 @@ export const StandardLayout = ({
                                 tags={CAPI.tags}
                                 webPublicationDateDisplay={
                                     CAPI.webPublicationDateDisplay
+                                }
+                                secondaryDateline={
+                                    CAPI.blocks[0].secondaryDateLine
                                 }
                             />
                         </div>
