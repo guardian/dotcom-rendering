@@ -15,6 +15,7 @@ import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
 import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
+import { stars } from 'components/starRating';
 
 
 interface Props {
@@ -38,6 +39,10 @@ const listStyles = css`
         top: 0;
         left: 0;
     }
+
+    ${darkModeCss`
+        background: ${neutral[20]};
+    `}
 `;
 
 const timeStyles = css`
@@ -61,7 +66,6 @@ const anchorStyles = css`
     text-decoration: none;
     ${darkModeCss`
         color: ${neutral[86]};
-        background: ${neutral[20]};
     `}
 `;
 
@@ -72,7 +76,7 @@ const headingWrapperStyles = css`
 
 const headingStyles = css`
     ${headline.xxxsmall()};
-    margin: 0;
+    margin: 0 0 ${remSpace[2]} 0;
 `;
 
 const imageWrapperStyles = css`
@@ -130,11 +134,16 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.LIVE: {
-            return css``;
-        }
-
-        case RelatedItemType.REVIEW: {
-            return css``;
+            const { kicker, liveblogDarkBackground } = getPillarStyles(format.pillar);
+            return css`
+                background: ${kicker};
+                h3, time {
+                    color: ${text.ctaPrimary};
+                }
+                ${darkModeCss`
+                    background: ${liveblogDarkBackground};
+                `}
+            `;
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
@@ -232,11 +241,13 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
 
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+    const starRating = relatedItem.starRating ? stars(parseInt(relatedItem.starRating)) : null;
 
     return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
         <a css={anchorStyles} href={relatedItem.link}>
             <section css={headingWrapperStyles}>
                 <h3 css={headingStyles}>{relatedItem.title}</h3>
+                {starRating}
             </section>
             <section>
                 <div css={metadataStyles}>
