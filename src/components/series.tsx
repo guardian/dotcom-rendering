@@ -39,9 +39,18 @@ const immersiveStyles = ({ kicker }: PillarStyles, isLabs: boolean): SerializedS
     }
 `;
 
-const linkStyles = ({ kicker, inverted }: PillarStyles): SerializedStyles => css`
-    ${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
-    color: ${kicker};
+const font = (isLabs: Boolean): SerializedStyles => {
+    return css`
+        ${
+            isLabs
+                ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
+                : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
+        }`
+}
+
+const linkStyles = ({ kicker, inverted }: PillarStyles, isLabs: Boolean): SerializedStyles => css`
+    ${font(isLabs)}
+    color: ${isLabs ? palette.labs[300] : kicker};
     text-decoration: none;
 
     ${darkModeCss`
@@ -53,20 +62,17 @@ const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
     color: ${neutral[100]};
     text-decoration: none;
     white-space: nowrap;
-    ${
-        isLabs
-            ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
-            : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
-    }
+    ${font(isLabs)}
 `;
 
 const getLinkStyles = ({ display, pillar, design }: Format): SerializedStyles => {
+    const isLabs = design === Design.AdvertisementFeature;
+
     if (display === Display.Immersive) {
-        const isLabs = design === Design.AdvertisementFeature;
         return immersiveLinkStyles(isLabs);
     }
 
-    return linkStyles(getPillarStyles(pillar));
+    return linkStyles(getPillarStyles(pillar), isLabs);
 }
 
 const getStyles = ({ display, pillar, design }: Format): SerializedStyles => {
