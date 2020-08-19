@@ -11,7 +11,7 @@ const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;
 	if (isFeature(content)) {
         return RelatedItemType.FEATURE
-	} else if (isLive(tags)) {
+	} else if (isLive(tags) && content.fields?.liveBloggingNow) {
 		return RelatedItemType.LIVE
 	} else if (isReview(content)) {
 		return RelatedItemType.REVIEW
