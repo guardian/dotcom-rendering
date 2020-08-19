@@ -98,6 +98,26 @@ function fromString(date: string): Option<Date> {
     }
 }
 
+function formatSeconds(seconds: string): Option<string> {
+        const secondsInt = parseInt(seconds);
+
+        if (isNaN(secondsInt)) {
+            return none;
+        }
+
+        const hrs = Math.floor((secondsInt / 3600));
+        const mins = Math.floor(((secondsInt % 3600) / 60));
+        const secs = Math.floor(secondsInt) % 60;
+        let ret = "";
+
+        if (hrs > 0) {
+            ret += `${hrs}:${mins < 10 ? "0" : ""}`
+        }
+
+        ret += `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+        return some(ret);
+}
+
 
 // ----- Exports ----- //
 
@@ -106,4 +126,5 @@ export {
     format as formatDate,
     isValidDate,
     fromString,
+    formatSeconds,
 }

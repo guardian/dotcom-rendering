@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Avatar from 'components/liveblog/avatar';
 import { Contributor } from 'contributor';
 import { none, some } from '@guardian/types/option';
+import { isObject } from 'lib';
 
 configure({ adapter: new Adapter() });
 
@@ -31,8 +32,14 @@ describe('Avatar component renders as expected', () => {
     })
 
     it('Uses background colour prop', () => {
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" />);
-        expect(avatar.props().css.styles).toContain("background-color: pink")
+        const avatar = shallow<typeof Avatar>(<Avatar contributors={contributors} bgColour="pink" />);
+        const cssProp = avatar.prop('css');
+
+        if (isObject(cssProp)) {
+            expect(cssProp.styles).toContain("background-color: pink");
+        } else {
+            fail('No styles found');
+        }
     })
 
     it('Renders null if more than one contributor', () => {

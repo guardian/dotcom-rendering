@@ -166,7 +166,13 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
 
 // Disabled because the point of this function is to convert the `any`
 // provided by JSON.parse to a stricter type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
+
 const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
     switch (elem.kind) {
         case ElementKind.Text:
@@ -179,6 +185,13 @@ const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
             return elem;
     }
 }
+
+/* eslint-enable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
 
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');

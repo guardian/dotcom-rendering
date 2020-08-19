@@ -51,7 +51,14 @@ const serialiseLiveBlock = ({
 
 // Disabled because the point of these functions is to convert the `any`
 // provided by JSON.parse to a stricter type
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-assignment,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-call,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
 const deserialiseLiveBlock = (docParser: DocParser) => ({
     id,
     isKeyEvent,
@@ -75,7 +82,14 @@ const toSerialisable = (blocks: LiveBlock[]): JsonSerialisable =>
 const fromSerialisable = (docParser: DocParser) => (blocks: any): LiveBlock[] =>
     blocks.map(deserialiseLiveBlock(docParser));
 
-/* eslint-enable @typescript-eslint/no-explicit-any */
+/* eslint-enable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-assignment,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-call,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
 
 const parse = (context: Context) => (block: Block): LiveBlock =>
     ({

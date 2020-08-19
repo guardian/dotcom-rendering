@@ -3,6 +3,7 @@
 import { logger } from 'logger';
 import { metrics } from 'client/metrics';
 import { metricsClient } from 'native/nativeApi';
+import { isObject } from 'lib';
 
 
 // ----- Procedures ----- //
@@ -10,10 +11,10 @@ import { metricsClient } from 'native/nativeApi';
 function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 
     try {
-        const { type, value } = JSON.parse(message);
+        const parsed: unknown = JSON.parse(message);
 
-        if (type === 'set-height') {
-            interactive.height = value;
+        if (isObject(parsed) && parsed.type === 'set-height' && typeof parsed.value === 'string') {
+            interactive.height = parsed.value;
         }
     } catch (e) {
         logger.error(e);
@@ -49,7 +50,7 @@ function performanceMetrics(): void {
         'load',
         () => {
             const metricsToSend = metrics(performance.getEntries());
-            metricsClient.sendMetrics(metricsToSend);
+            void metricsClient.sendMetrics(metricsToSend);
         },
         { once: true },
     );
