@@ -39,7 +39,7 @@ const immersiveStyles = ({ kicker }: PillarStyles, isLabs: boolean): SerializedS
     }
 `;
 
-const font = (isLabs: Boolean): SerializedStyles => {
+const font = (isLabs: boolean): SerializedStyles => {
     return css`
         ${
             isLabs
@@ -48,7 +48,7 @@ const font = (isLabs: Boolean): SerializedStyles => {
         }`
 }
 
-const linkStyles = ({ kicker, inverted }: PillarStyles, isLabs: Boolean): SerializedStyles => css`
+const linkStyles = ({ kicker, inverted }: PillarStyles, isLabs: boolean): SerializedStyles => css`
     ${font(isLabs)}
     color: ${isLabs ? palette.labs[300] : kicker};
     text-decoration: none;
