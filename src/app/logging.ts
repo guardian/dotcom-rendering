@@ -25,7 +25,17 @@ addLayout('json', () => {
     };
 });
 
-configure({
+const disableLog4js = {
+    appenders: {
+        console: { type: 'console' },
+    },
+    categories: {
+        default: { appenders: ['console'], level: 'off' },
+        off: { appenders: ['console'], level: 'off' },
+    },
+};
+
+const enableLog4j = {
     appenders: {
         console: { type: 'console' },
         fileAppender: {
@@ -39,10 +49,18 @@ configure({
     },
     categories: {
         default: { appenders: ['fileAppender'], level: 'info' },
+        production: { appenders: ['fileAppender'], level: 'info' },
         development: { appenders: ['console'], level: 'info' },
     },
     pm2: true,
-});
+};
+
+if (process.env.DISABLE_LOGGING_AND_METRICS === "true") {
+    configure(disableLog4js);
+}
+else {
+    configure(enableLog4j);
+}
 
 // We do this to ensure no memory leaks during development as hot reloading
 // doesn't clear up old listeners.
@@ -56,8 +74,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const logger =
-    process.env.NODE_ENV === 'development'
-        ? getLogger('development')
-        : getLogger();
-
-logger.level = 'info';
+    process.env.DISABLE_LOGGING_AND_METRICS === 'true'
+        ? getLogger('off')
+        : getLogger(process.env.NODE_ENV);

@@ -6,7 +6,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
 - [Quick start](#quick-start)
   - [Install Node.js](#install-nodejs)
   - [Running instructions](#running-instructions)
@@ -22,10 +21,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 - [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Chat
-
-Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
 
 ## Quick start
 

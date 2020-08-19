@@ -15,7 +15,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AudioAtomElement"
+                        "$ref": "#/definitions/AudioAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
@@ -100,6 +100,9 @@
                     },
                     {
                         "$ref": "#/definitions/SoundcloudBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/SpotifyBlockElement"
                     },
                     {
                         "$ref": "#/definitions/SubheadingBlockElement"
@@ -377,7 +380,7 @@
         "webURL"
     ],
     "definitions": {
-        "AudioAtomElement": {
+        "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -1636,6 +1639,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "qandaIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1707,6 +1713,34 @@
                 "isMandatory",
                 "isTrack"
             ]
+        },
+        "SpotifyBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SpotifyBlockElement"
+                    ]
+                },
+                "embedUrl": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type"]
+
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -2026,7 +2060,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/AudioAtomElement"
+                                "$ref": "#/definitions/AudioAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"
@@ -2111,6 +2145,9 @@
                             },
                             {
                                 "$ref": "#/definitions/SoundcloudBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/SpotifyBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SubheadingBlockElement"
@@ -2380,6 +2417,12 @@
                             "type": "string"
                         }
                     }
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
                 },
                 "pageId": {
                     "type": "string"

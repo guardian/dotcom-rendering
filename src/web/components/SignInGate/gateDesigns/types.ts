@@ -11,7 +11,7 @@ export interface SignInGateProps {
     signInUrl: string;
     guUrl: string;
     dismissGate: () => void;
-    component: string;
+    ophanComponentId: string;
     isComment?: boolean;
     abTest?: CurrentABTest;
 }
@@ -19,4 +19,5 @@ export interface SignInGateProps {
 export type CurrentABTest = {
     name: string;
     variant: string;
+    id: string;
 };

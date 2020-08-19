@@ -10,7 +10,6 @@ import {
     isValidContentType,
     isValidSection,
     isIOS9,
-    shouldShowCmp,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGate } from '../dismissGate';
@@ -20,7 +19,6 @@ const canShow = (
     isSignedIn: boolean,
     currentTest: CurrentABTest,
 ): boolean =>
-    !shouldShowCmp() &&
     !isSignedIn &&
     !hasUserDismissedGate(currentTest.variant, currentTest.name) &&
     isNPageOrHigherPageView(3) &&
@@ -40,11 +38,18 @@ const SignInGatePatientia = React.lazy(() => {
 });
 
 export const signInGateComponent: SignInGateComponent = {
-    gate: ({ component, dismissGate, guUrl, signInUrl, abTest, isComment }) => (
+    gate: ({
+        ophanComponentId,
+        dismissGate,
+        guUrl,
+        signInUrl,
+        abTest,
+        isComment,
+    }) => (
         <Lazy margin={300}>
             <Suspense fallback={<></>}>
                 <SignInGatePatientia
-                    component={component}
+                    ophanComponentId={ophanComponentId}
                     dismissGate={dismissGate}
                     guUrl={guUrl}
                     signInUrl={signInUrl}

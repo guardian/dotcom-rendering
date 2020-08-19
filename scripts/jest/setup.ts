@@ -49,6 +49,13 @@ const windowGuardian = {
         emotionCore: undefined,
         emotionTheming: undefined,
     },
+    readerRevenue: {
+        changeGeolocation: () => {},
+        showMeTheEpic: () => {},
+        showMeTheBanner: () => {},
+        showNextVariant: () => {},
+        showPreviousVariant: () => {},
+    }
 };
 
 // Stub global Guardian object

@@ -64,6 +64,7 @@ export const trackLink = (
     abTest?: CurrentABTest,
 ): void => {
     const component = withComponentId(componentId);
+
     submitClickEventTracking({
         component,
         abTest,

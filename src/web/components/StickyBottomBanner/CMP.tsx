@@ -1,32 +1,35 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { ConsentManagementPlatform } from '@guardian/consent-management-platform/dist/ConsentManagementPlatform';
-import {
-    init as initCCPA,
-    shouldShow,
-    setErrorHandler,
-    checkWillShowUi as checkWillShowCCPAUi,
-} from '@guardian/consent-management-platform';
-import { ccpaApplies } from '@root/src/web/lib/ccpaApplies';
+import { cmp, oldCmp } from '@guardian/consent-management-platform';
+import { getCountryCode } from '@root/src/web/lib/getCountryCode';
+import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
+import { getCookie } from '@frontend/web/browser/cookie';
 import { addPrivacySettingsLink } from './CMPPrivacyLink';
+
+export const willShowCMP = async () => {
+    const framework = await getPrivacyFramework();
+
+    if (!framework.ccpa && !framework.tcfv2) {
+        addPrivacySettingsLink();
+        return false;
+    }
+
+    const isInUsa = (await getCountryCode()) === 'US';
+    const browserId: string | undefined = getCookie('bwid') || undefined;
+    const pubData: { browserId?: string } | undefined = browserId
+        ? { browserId }
+        : undefined;
+    cmp.init({
+        pubData,
+        isInUsa,
+    });
+    addPrivacySettingsLink();
+    return cmp.willShowPrivacyMessage();
+};
 
 // this is the wrong place to be doing this, but it's temporary
 // until we remove the old react CMP component and go 100% sourcepoint
-export const willShowNewCMP = async () => {
-    const useCCPA = await ccpaApplies();
-
-    if (useCCPA) {
-        initCCPA({
-            useCcpa: true,
-        });
-        addPrivacySettingsLink();
-        return checkWillShowCCPAUi();
-    }
-
-    return false;
-};
-
 export const shouldShowOldCMP = async () =>
-    (await ccpaApplies()) ? false : shouldShow();
+    (await getPrivacyFramework()).tcfv1 ? oldCmp.shouldShow() : false;
 
 export const CMP = () => {
     const [show, setShow] = useState(false);
@@ -35,7 +38,7 @@ export const CMP = () => {
         setShow(true);
 
         // setErrorHandler takes function to be called on errors in the CMP UI
-        setErrorHandler((errMsg: string): void => {
+        oldCmp.setErrorHandler((errMsg: string): void => {
             const err = new Error(errMsg);
 
             window.guardian.modules.sentry.reportError(err, 'cmp');
@@ -46,7 +49,7 @@ export const CMP = () => {
         <>
             {show && (
                 <Suspense fallback={<></>}>
-                    <ConsentManagementPlatform
+                    <oldCmp.ConsentManagementPlatform
                         source="dcr"
                         onClose={() => setShow(false)}
                     />

@@ -1,8 +1,8 @@
 // TODO: Add localstorage lib from https://github.com/guardian/libs/pull/1 when it is merged
 const localStorageKey = `gu.prefs.sign-in-gate`;
 
-const localStorageLookupKey = (variant: string, name?: string): string => {
-    return `${name ? `${name}-` : ''}${variant}`;
+const localStorageLookupKey = (variant: string, name: string): string => {
+    return `${name}-${variant}`;
 };
 
 // Check if the user has dismissed the gate by checking the user preferences,
@@ -18,7 +18,7 @@ const localStorageLookupKey = (variant: string, name?: string): string => {
 
 export const hasUserDismissedGate = (
     variant: string,
-    name?: string,
+    name: string,
 ): boolean => {
     try {
         const prefs = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
@@ -40,7 +40,7 @@ export const hasUserDismissedGate = (
 //
 // We set the value using the key, which remains constant
 // and add an entry to the object with the testname and variant, and use current ISO date string as the value
-export const setUserDismissedGate = (variant: string, name?: string): void => {
+export const setUserDismissedGate = (variant: string, name: string): void => {
     try {
         const prefs = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
         prefs[localStorageLookupKey(variant, name)] = new Date().toISOString();

@@ -1,7 +1,3 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
-
 describe('Elements', function () {
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
@@ -28,7 +24,7 @@ describe('Elements', function () {
 
             getAmpIframeBody(
                 'amp-iframe[data-cy="atom-embed-url"] > iframe',
-            ).contains('Data from Public Health England');
+            ).contains('Data from PHE');
         });
 
         it('should render the counted interactive embed', function () {
@@ -38,12 +34,11 @@ describe('Elements', function () {
 
             const ampIframeSelector =
                 'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
-            const ampIframe = cy.get(ampIframeSelector);
-            ampIframe.scrollIntoView({
+
+            cy.get(ampIframeSelector).scrollIntoView({
                 duration: 300,
                 offset: { top: -100, left: 0 },
             });
-            cy.wait(300);
 
             getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
                 'Deaths after Taser use: the findings',
@@ -52,7 +47,7 @@ describe('Elements', function () {
     });
 
     describe('WEB', function () {
-        it.only('should render the page as expected', function () {
+        it('should render the page as expected', function () {
             cy.viewport('iphone-x');
             const iphoneXWidth = 375;
             let hasElementTooWide = false;
@@ -148,7 +143,7 @@ describe('Elements', function () {
         it('should render the affiliate disclaimer block', function () {
             const getBody = () => {
                 return cy
-                    .get('div[data-cy="affiiate-disclaimer"]')
+                    .get('[data-cy="affiliate-disclaimer"]')
                     .should('not.be.empty')
                     .then(cy.wrap);
             };

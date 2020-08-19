@@ -28,6 +28,8 @@ The following is a mapping from atoms to the PageElement that is being used to t
 
 ```
 AudioAtom
+    -> SoundcloudBlockElement
+    -> SpotifyBlockElement
     -> AudioAtomBlockElement
 
 ChartAtom
@@ -80,7 +82,7 @@ ChartAtomBlockElement
     -> [web] ChartAtom (atoms-rendering)
 
 ExplainerAtomBlockElement
-	 -> [web] ExplainerAtom (atoms-rendering)
+	-> [web] ExplainerAtom (atoms-rendering)
 
 GenericAtomBlockElement
     -> [amp] InteractiveAtomBlockComponent
@@ -98,6 +100,13 @@ YoutubeBlockElement
 
 QABlockElement
     -> [amp] Expandable
+
+SoundcloudBlockElement
+    -> [amp] SoundcloudBlockComponent
+    -> [web] SoundcloudBlockComponent
+
+SpotifyBlockElement
+    -> [web] SpotifyBlockComponent
 
 TimelineBlockElement
     -> [amp] TimelineBlockComponent
