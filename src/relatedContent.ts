@@ -76,7 +76,6 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
                     name: content.pillarName ?? "news",
                     sectionIds: []
                 },
-                mediaDuration: "100",
                 starRating: content.fields?.starRating?.toString()
             }
         }).slice(0, 4)

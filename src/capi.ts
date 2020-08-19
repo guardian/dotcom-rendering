@@ -127,7 +127,8 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'shouldHideReaderRevenue',
         'displayHint',
         'starRating',
-        'commentable'
+        'commentable',
+        'liveBloggingNow'
     ];
 
     const params = new URLSearchParams({
