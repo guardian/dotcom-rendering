@@ -105,7 +105,7 @@ export const Analytics: React.FC<{
     // Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP
     if (section && section === 'business') {
         scripts.push(
-            `<amp-analytics type="snowplow_v2">
+            `<amp-analytics data-block-on-consent type="snowplow_v2">
                 <script type="application/json">
                     {
                         "cookies": {
