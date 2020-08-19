@@ -34,6 +34,21 @@ const toggleClass = css`
         opacity: 0;
         display: none;
     }
+
+    input[type='checkbox']:checked ~ span ~ p {
+        max-height: 80px;
+    }
+`;
+
+const pCheckboxStyle = css`
+    p {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+`;
+
+const labelStyles = css`
     label {
         cursor: pointer;
     }
@@ -52,15 +67,6 @@ const toggleClass = css`
         top: 50%;
         left: 10px;
     }
-
-    p {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-    }
-    input[type='checkbox']:checked ~ span ~ p {
-        max-height: 80px;
-    }
 `;
 
 // At the moment there is no way to tell from primaryDateline and secondaryDatline
@@ -73,7 +79,14 @@ export const Dateline: React.FC<{
     return (
         <div className={dateline}>
             {primaryDateline !== secondaryDateline ? (
-                <div className={cx(toggleClass, dateline)}>
+                <div
+                    className={cx(
+                        toggleClass,
+                        pCheckboxStyle,
+                        labelStyles,
+                        dateline,
+                    )}
+                >
                     <input type="checkbox" id="dateToggle" />
                     <span>
                         <label htmlFor="dateToggle">{primaryDateline}</label>
