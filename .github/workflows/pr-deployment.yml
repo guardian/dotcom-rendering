@@ -5,8 +5,9 @@ jobs:
         name: server
         runs-on: ubuntu-latest
         steps:
-            - name: Auto Cancel Redundant Job
-              uses: technote-space/auto-cancel-redundant-job@v1.2.2
+            - uses: rokroskar/workflow-run-cleanup-action@master
+              env:
+                GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
             - name: Checkout code
               uses: actions/checkout@v1
