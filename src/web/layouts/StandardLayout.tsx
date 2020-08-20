@@ -421,9 +421,9 @@ export const StandardLayout = ({
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
                                 tags={CAPI.tags}
-                                primaryDateline={CAPI.blocks[0].primaryDateLine}
+                                primaryDateline={CAPI.webPublicationDateDisplay}
                                 secondaryDateline={
-                                    CAPI.blocks[0].secondaryDateLine
+                                    CAPI.blocks[0].secondaryDateline
                                 }
                             />
                         </div>
