@@ -25,9 +25,9 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc((100vw - ${remSpace[4]}) * ${height / width});
     display: block;
     width: 100%;
-
+    
     ${from.phablet} {
-        height: ${620 * height / width}%;
+        height: calc(620px * ${height / width});
     }
 
     ${darkModeCss`

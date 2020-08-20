@@ -10,14 +10,15 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import Cutout from 'components/opinion/cutout';
-import { darkModeCss, articleWidthStyles, basePx } from 'styles';
+import Cutout from 'components/comment/cutout';
+import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { Comment } from 'item';
+import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
+import RelatedContent from 'components/shared/relatedContent';
 
 
 // ----- Styles ----- //
@@ -57,11 +58,11 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    item: Comment;
+    item: CommentItem;
     children: ReactNode[];
 }
 
-const Opinion = ({ item, children }: Props): JSX.Element =>
+const Comment = ({ item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -92,13 +93,16 @@ const Opinion = ({ item, children }: Props): JSX.Element =>
             <ArticleBody className={[articleWidthStyles]} format={item}>
                 {children}
             </ArticleBody>
-            <footer css={articleWidthStyles}>
+            <section css={articleWidthStyles}>
                 <Tags tags={item.tags} format={item}/>
-            </footer>
+            </section>
         </article>
+        <section css={relatedContentStyles}>
+            <RelatedContent content={item.relatedContent}/>
+        </section>
     </main>
 
 
 // ----- Exports ----- //
 
-export default Opinion;
+export default Comment;

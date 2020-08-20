@@ -16,7 +16,7 @@ import { isElement, pipe2, pipe } from 'lib';
 import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
-
+import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 
 // ----- Types ----- //
 
@@ -30,6 +30,7 @@ const enum ElementKind {
     Instagram,
     Audio,
     Embed,
+    Callout,
     LiveEvent,
     Video,
     InteractiveAtom,
@@ -105,6 +106,11 @@ type BodyElement = {
     html: string;
     alt: Option<string>;
 } | {
+    kind: ElementKind.Callout;
+    id: string;
+    campaign: Campaign;
+    description: DocumentFragment;
+} | {
     kind: ElementKind.LiveEvent;
     linkText: string;
     url: string;
@@ -143,6 +149,12 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem, content: serialiseNodes(elem.content) };
         case ElementKind.MediaAtom:
             return { ...elem, caption: map(serialiseFragment)(elem.caption) };
+        case ElementKind.Callout:
+            return {
+                ...elem,
+                campaign: JSON.stringify(elem.campaign),
+                description: serialiseFragment(elem.description)
+            };
         case ElementKind.InteractiveAtom:
         case ElementKind.ExplainerAtom:
         case ElementKind.Embed:
@@ -154,7 +166,13 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
 
 // Disabled because the point of this function is to convert the `any`
 // provided by JSON.parse to a stricter type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
+
 const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
     switch (elem.kind) {
         case ElementKind.Text:
@@ -167,6 +185,13 @@ const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
             return elem;
     }
 }
+
+/* eslint-enable
+   @typescript-eslint/no-explicit-any,
+   @typescript-eslint/no-unsafe-member-access,
+   @typescript-eslint/no-unsafe-return,
+   @typescript-eslint/explicit-module-boundary-types
+*/
 
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
@@ -195,7 +220,7 @@ const parseIframe = (docParser: DocParser) =>
         });
 }
 
-const parse = (context: Context, atoms?: Atoms) =>
+const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
     (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
 
@@ -277,6 +302,19 @@ const parse = (context: Context, atoms?: Atoms) =>
                 return err('No html field on embedTypeData')
             }
 
+            const id = context.docParser(embedHtml).querySelector('[data-callout-tagname]')?.getAttribute('data-callout-tagname');
+
+            if (id && campaigns) {
+                const campaign = campaigns.find(campaign => campaign.fields.tagName === id);
+
+                if (!campaign) {
+                    return err('No matching campaign');
+                }
+
+                const description = context.docParser(campaign.fields.description ?? '');
+                return ok({ kind: ElementKind.Callout, id, campaign, description });
+            }
+
             return ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
         }
 
@@ -350,12 +388,12 @@ const parse = (context: Context, atoms?: Atoms) =>
 
 }
 
-const parseElements = (context: Context, atoms?: Atoms) =>
+const parseElements = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
     (elements: Elements): Result<string, BodyElement>[] => {
         if (!elements) {
             return [err('No body elements available')];
         }
-        return elements.map(parse(context, atoms));
+        return elements.map(parse(context, atoms, campaigns));
     }
 
 

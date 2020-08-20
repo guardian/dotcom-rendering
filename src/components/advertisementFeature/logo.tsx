@@ -3,10 +3,10 @@ import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { darkModeCss } from 'styles';
 import { remSpace, neutral, text, palette } from '@guardian/src-foundations';
-import { Logo } from 'capi';
+import { Logo as LogoImage } from 'capi';
 
 interface Props {
-    logo: Logo;
+    logo: LogoImage;
 }
 
 const styles = css`

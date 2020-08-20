@@ -23,11 +23,8 @@ type QueryParam<A> = {
 
 // ----- Functions ----- //
 
-// Disabled because the point of this function is to convert the `any`
-// provided by Express to a stricter type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function parseDate(param: any): QueryParam<Date> {
-    if (param === undefined) {
+function parseDate<A>(param: A): QueryParam<Date> {
+    if (typeof param !== 'string') {
         return { kind: Param.None };
     }
     const date = new Date(param);

@@ -9,7 +9,7 @@ import { fromSerialisable } from 'liveBlock';
 import { parse } from 'client/parser';
 import LiveblogBody from 'components/liveblog/body';
 import { withDefault } from '@guardian/types/option';
-import { pipe3 } from 'lib';
+import { pipe3, errorToString } from 'lib';
 import { toOption } from '@guardian/types/result';
 
 
@@ -43,7 +43,7 @@ const deserialise = fromSerialisable(docParser);
 setup();
 
 // Load the initial group of blocks.
-fetch(`${window.location}/live-blocks`)
+fetch(`${window.location.toString()}/live-blocks`)
     .then(res => res.json())
     .then(({ newBlocks }) => {
         const blocks = deserialise(newBlocks);
@@ -53,4 +53,6 @@ fetch(`${window.location}/live-blocks`)
             document.getElementById('blocks'),
         );
     })
-    .catch(err => console.warn(`I couldn't load any live blocks because: ${err}`));
+    .catch(err =>
+        console.warn(`I couldn't load any live blocks because: ${errorToString(err, 'unknown reason')}`),
+    );

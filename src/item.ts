@@ -18,6 +18,8 @@ import { MainMedia } from 'headerMedia';
 import { pipe2 } from 'lib';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Branding } from '@guardian/apps-rendering-api-models/branding';
+import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
+import { Image, parseCardImage } from 'image';
 
 // ----- Item Type ----- //
 
@@ -35,6 +37,11 @@ interface Fields extends Format {
     shouldHideReaderRevenue: boolean;
     branding: Option<Branding>;
     commentCount: Option<number>;
+    relatedContent: Option<ResizedRelatedContent>;
+}
+
+interface ResizedRelatedContent extends RelatedContent {
+    resizedImages: Option<Image>[];
 }
 
 interface Liveblog extends Fields {
@@ -133,7 +140,7 @@ function getDisplay(content: Content): Display {
 }
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
-    const { content, branding, commentCount } = request;
+    const { content, branding, commentCount, relatedContent } = request;
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
@@ -149,7 +156,12 @@ const itemFields = (context: Context, request: RenderingRequest): ItemFields => 
         tags: content.tags,
         shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
         branding: fromNullable(branding),
-        commentCount: fromNullable(commentCount)
+        commentCount: fromNullable(commentCount),
+        relatedContent: pipe2(relatedContent, fromNullable, map(relatedContent => ({
+            ...relatedContent,
+            resizedImages: relatedContent
+                .relatedItems.map(item => parseCardImage(item.headerImage, context.salt))
+        })))
     }
 }
 
@@ -157,10 +169,11 @@ const itemFieldsWithBody = (context: Context, request: RenderingRequest): ItemFi
     const { content } = request;
     const body = content?.blocks?.body ?? [];
     const atoms = content?.atoms;
+    const campaigns = request.campaigns;
     const elements = body[0]?.elements;
     return ({
         ...itemFields(context, request),
-        body: elements !== undefined ? parseElements(context, atoms)(elements): [],
+        body: elements !== undefined ? parseElements(context, atoms, campaigns)(elements): [],
     });
 }
 
@@ -169,6 +182,12 @@ const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
 
 const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === tagId);
+
+const isAudio = hasTag('type/audio');
+
+const isVideo = hasTag('type/video');
+
+const isGallery = hasTag('type/gallery');
 
 const isMedia =
     hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
@@ -308,7 +327,14 @@ export {
     Review,
     AdvertisementFeature,
     Standard,
+    ResizedRelatedContent,
     fromCapi,
     fromCapiLiveBlog,
     getFormat,
+    isAdvertisementFeature,
+    isLive,
+    isComment,
+    isAudio,
+    isVideo,
+    isGallery
 };

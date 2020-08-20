@@ -15,6 +15,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 12
+    - uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: node-    
     - name: install
       run: npm ci
     - name: lint

@@ -10,13 +10,14 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
 import Metadata from 'components/metadata';
-import { darkModeCss, articleWidthStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import HeaderMedia from 'headerMedia';
-import { AdvertisementFeature } from 'item';
+import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
+import RelatedContent from 'components/shared/relatedContent';
 
 
 // ----- Styles ----- //
@@ -43,7 +44,7 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    item: AdvertisementFeature;
+    item: AdvertisementFeatureItem;
     children: ReactNode[];
 }
 
@@ -69,6 +70,9 @@ const AdvertisementFeature = ({ item, children }: Props): JSX.Element => {
                 {children}
             </Body>
         </article>
+        <section css={relatedContentStyles}>
+            <RelatedContent content={item.relatedContent}/>
+        </section>
     </main>
 }
 

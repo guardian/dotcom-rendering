@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import {TProtocol, TCompactProtocol, TBufferedTransport, TTransport} from 'thrift';
+import { TProtocol, TCompactProtocol, TBufferedTransport, TTransport } from 'thrift';
 import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
 import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
