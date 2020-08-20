@@ -1,5 +1,8 @@
 name: PR deployment
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - master
 jobs:
     server:
         name: server
