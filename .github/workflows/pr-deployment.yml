@@ -8,10 +8,6 @@ jobs:
         name: server
         runs-on: ubuntu-latest
         steps:
-            - uses: rokroskar/workflow-run-cleanup-action@master
-              env:
-                GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
             - name: Checkout code
               uses: actions/checkout@v1
             - name: Use Node.js 10.15.3
@@ -23,7 +19,7 @@ jobs:
               run: |
                   npm install -g ngrok
                   NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js &
-                  timeout 5m ngrok http 9000 -log=stdout | \
+                  timeout 60m ngrok http 9000 -log=stdout | \
                     grep --line-buffered -o 'https://.*' | \
                     xargs -L1 -I{} -t \
-                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} -d "{\"state\":\"success\", \"target_url\":\"{}\", \"context\":\"PR deployment\", \"description\":\"This PR is now live until `date -d "+6 hour" "+%a %H:%M"`. Click details to access it ->\"}"
+                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} -d "{\"state\":\"success\", \"target_url\":\"{}\", \"context\":\"PR deployment\", \"description\":\"This PR is now live until `date -d "+1 hour" "+%a %H:%M"`. Click details to access it ->\"}"
