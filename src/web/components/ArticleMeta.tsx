@@ -300,7 +300,6 @@ export const ArticleMeta = ({
                             )}
                             <Dateline
                                 primaryDateline={primaryDateline}
-                                descriptionText="Published on"
                                 secondaryDateline={secondaryDateline}
                             />
                         </div>

@@ -50,7 +50,6 @@ const labelStyles = css`
 // what the prepend should be (either 'Last modified on' or 'First published on ')
 export const Dateline: React.FC<{
     primaryDateline: string;
-    descriptionText: string;
     secondaryDateline: string;
 }> = ({ primaryDateline, secondaryDateline }) => {
     return (
