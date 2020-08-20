@@ -241,7 +241,8 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
 
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
-    const starRating = relatedItem.starRating ? stars(parseInt(relatedItem.starRating)) : null;
+    const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
+        ? stars(parseInt(relatedItem.starRating)) : null;
 
     return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
         <a css={anchorStyles} href={relatedItem.link}>
