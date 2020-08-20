@@ -122,6 +122,8 @@ interface GuideAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
+    guideIndex?: number;
 }
 
 interface GuVideoBlockElement {
@@ -192,6 +194,8 @@ interface ProfileAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
@@ -208,6 +212,7 @@ interface QABlockElement {
     img?: string;
     html: string;
     credit: string;
+    pillar: Pillar;
     qandaIndex?: number;
 }
 
@@ -259,7 +264,9 @@ interface TimelineBlockElement {
     id: string;
     title: string;
     description?: string;
+    pillar: Pillar;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {

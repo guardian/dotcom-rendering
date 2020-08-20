@@ -17,7 +17,12 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom } from '@guardian/atoms-rendering';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -36,7 +41,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
-import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
+import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -106,6 +111,23 @@ const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
     if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
         return 'opinion';
     return CAPI.pillar;
+};
+
+const componentEventHandler = (
+    componentType: any,
+    id: any,
+    action: any,
+) => () => {
+    const componentEvent: OphanComponentEvent = {
+        component: {
+            componentType,
+            id,
+            products: [],
+            labels: [],
+        },
+        action,
+    };
+    submitComponentEvent(componentEvent);
 };
 
 export const App = ({ CAPI, NAV }: Props) => {
@@ -231,12 +253,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         // Used internally only, so only import each function on demand
-        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
-            import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
-                .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
+            asExistingSupporter: boolean,
+        ) =>
+            import(
+                /* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
+            )
+                .then((utils) =>
+                    utils[key](
+                        asExistingSupporter,
+                        CAPI.shouldHideReaderRevenue,
+                    ),
+                )
                 /* eslint-disable no-console */
-                .catch(error => console.log('Error loading readerRevenueDevUtils', error));
-                /* eslint-enable no-console */
+                .catch((error) =>
+                    console.log('Error loading readerRevenueDevUtils', error),
+                );
+        /* eslint-enable no-console */
 
         if (window && window.guardian) {
             window.guardian.readerRevenue = {
@@ -245,7 +278,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 showMeTheBanner: loadAndRun('showMeTheBanner'),
                 showNextVariant: loadAndRun('showNextVariant'),
                 showPreviousVariant: loadAndRun('showPreviousVariant'),
-            }
+            };
         }
     }, [CAPI.shouldHideReaderRevenue]);
 
@@ -261,7 +294,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -334,42 +366,105 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={qandaAtom.html}
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
-                        likeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'LIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        dislikeHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'DISLIKE',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
-                        expandHandler={() => {
-                            const componentEvent: OphanComponentEvent = {
-                                component: {
-                                    componentType: 'QANDA_ATOM',
-                                    id: qandaAtom.id,
-                                    labels: [],
-                                    products: [],
-                                },
-                                action: 'EXPAND',
-                            };
-                            submitComponentEvent(componentEvent);
-                        }}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.guideAtoms.map((guideAtom) => (
+                <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
+                    <GuideAtom
+                        id={guideAtom.id}
+                        title={guideAtom.title}
+                        html={guideAtom.html}
+                        image={guideAtom.img}
+                        credit={guideAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.profileAtoms.map((profileAtom) => (
+                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.timelineAtoms.map((timelineAtom) => (
+                <Hydrate
+                    root="timeline-atom"
+                    index={timelineAtom.timelineIndex}
+                >
+                    <TimelineAtom
+                        id={timelineAtom.id}
+                        title={timelineAtom.title}
+                        events={timelineAtom.events}
+                        description={timelineAtom.description}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'EXPAND',
+                        )}
                     />
                 </Hydrate>
             ))}

@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
@@ -10,10 +8,10 @@ describe('E2E Page rendering', function () {
     beforeEach(setupApiRoutes);
 
     describe('for WEB', function () {
-        articles.map((article, index) => {
-            const { url, pillar, designType } = article;
-
-            it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        it(`It should load the designType under the pillar`, function () {
+            articles.map((article, index) => {
+                const { url, designType, pillar } = article;
+                cy.log(`designType: ${designType}, pillar: ${pillar}`);
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
                 const roughLoadPositionOfMostView = 1400;
                 cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
@@ -117,10 +115,10 @@ describe('E2E Page rendering', function () {
     });
 
     describe('for AMP', function () {
-        AMPArticles.map((article, index) => {
-            const { url, pillar, designType } = article;
-
-            it(`It should load ${designType} articles under the ${pillar} pillar`, function () {
+        it(`It should load designType articles under the pillar`, function () {
+            AMPArticles.map((article, index) => {
+                const { url, pillar, designType } = article;
+                cy.log(`designType: ${designType}, pillar: ${pillar}`);
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 

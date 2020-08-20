@@ -28,6 +28,9 @@ import {
     ExplainerAtom,
     InteractiveAtom,
     QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 
@@ -121,6 +124,22 @@ export const ArticleRenderer: React.FC<{
                             html={element.body}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                    return (
+                        <div id={`guide-atom-${i}`}>
+                            <GuideAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
                         <HighlightBlockComponent key={i} html={element.html} />
@@ -159,6 +178,22 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
+                    return (
+                        <div id={`profile-atom-${i}`}>
+                            <ProfileAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
                         <PullQuoteBlockComponent
@@ -179,9 +214,10 @@ export const ArticleRenderer: React.FC<{
                                 html={element.html}
                                 image={element.img}
                                 credit={element.credit}
+                                pillar={pillar}
                                 likeHandler={() => {}}
                                 dislikeHandler={() => {}}
-                                expandHandler={() => {}}
+                                expandCallback={() => {}}
                             />
                         </div>
                     );
@@ -283,6 +319,20 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                    return (
+                        <div id={`timeline-atom-${i}`}>
+                            <TimelineAtom
+                                id={element.id}
+                                title={element.title}
+                                pillar={pillar}
+                                events={element.events}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
@@ -290,10 +340,7 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }
