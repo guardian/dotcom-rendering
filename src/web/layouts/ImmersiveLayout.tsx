@@ -395,9 +395,7 @@ export const ImmersiveLayout = ({
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
                                 tags={CAPI.tags}
-                                webPublicationDateDisplay={
-                                    CAPI.webPublicationDateDisplay
-                                }
+                                primaryDateline={CAPI.webPublicationDateDisplay}
                             />
                         </div>
                     </GridItem>

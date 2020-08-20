@@ -61,7 +61,7 @@ export const ArticleStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -100,7 +100,7 @@ export const BrandingStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -122,7 +122,7 @@ export const FeatureStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -143,7 +143,7 @@ export const CommentStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -164,7 +164,7 @@ export const InterviewStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -185,7 +185,7 @@ export const ImmersiveStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithBylineImage}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
@@ -206,7 +206,7 @@ export const TwoContributorsStory = () => {
                     twitterHandle: 'lanre_bakare',
                 }}
                 tags={tagsWithByTwoContributors}
-                webPublicationDateDisplay="Sun 12 Jan 2020 18.00 GMT"
+                primaryDateline="Sun 12 Jan 2020 18.00 GMT"
             />
         </Container>
     );
