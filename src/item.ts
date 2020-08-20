@@ -183,11 +183,11 @@ const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
 const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === tagId);
 
-const isAudio = hasSomeTag(['type/audio']);
+const isAudio = hasTag('type/audio');
 
-const isVideo = hasSomeTag(['type/video']);
+const isVideo = hasTag('type/video');
 
-const isGallery = hasSomeTag(['type/gallery']);
+const isGallery = hasTag('type/gallery');
 
 const isMedia =
     hasSomeTag(['type/audio', 'type/video', 'type/gallery']);

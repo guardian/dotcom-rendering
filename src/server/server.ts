@@ -53,6 +53,7 @@ const defaultId =
     'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
 const docParser = JSDOM.fragment.bind(null);
+type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 
 // ----- Functions ----- //
@@ -64,8 +65,7 @@ function getPrefetchHeader(resources: string[]): string {
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
     fetch(capiEndpoint(articleId, key));
 
-const parseCapiResponse = (articleId: string) =>
-    async (capiResponse: Response): Promise<Result<number, [Content, RelatedContent]>> => {
+const parseCapiResponse = (articleId: string) => async (capiResponse: Response): CapiReturn => {
     const buffer = await capiResponse.buffer();
         
     switch (capiResponse.status) {
@@ -100,8 +100,6 @@ const parseCapiResponse = (articleId: string) =>
     }
 }
 
-type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
-
 const askCapiFor = (articleId: string): CapiReturn =>
     getConfigValue('capi.key')
         .then(key => {
@@ -117,7 +115,6 @@ const askCapiFor = (articleId: string): CapiReturn =>
 
 function resourceList(script: Option<string>): string[] {
     const emptyList: string[] = [];
-
     return pipe2(script, map(toArray), withDefault(emptyList));
 }
 
