@@ -16,7 +16,7 @@ type Props = {
     homeTeam: TeamType;
     awayTeam: TeamType;
     comments?: string;
-    minByMinUrl: string;
+    minByMinUrl?: string;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -253,7 +253,7 @@ const tabsContainer = css`
     }
 `;
 
-const MatchTabs = ({ minByMinUrl }: { minByMinUrl: string }) => (
+const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
     <div>
         <ul className={tabsContainer}>
             <li>
@@ -296,6 +296,6 @@ export const MatchNav = ({
             </Row>
             {comments && <Comments comments={comments} />}
         </StretchBackground>
-        <MatchTabs minByMinUrl={minByMinUrl} />
+        {minByMinUrl && <MatchTabs minByMinUrl={minByMinUrl} />}
     </div>
 );
