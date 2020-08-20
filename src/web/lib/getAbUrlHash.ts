@@ -1,6 +1,4 @@
-import { Variant } from '@guardian/ab-core';
-
-export type Participations = { [key: string]: { variant: Variant } };
+import { Participations } from '@guardian/ab-core';
 
 export const getForcedParticipationsFromUrl = (
     windowHash: string,
