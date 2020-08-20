@@ -16,6 +16,7 @@ type Props = {
     homeTeam: TeamType;
     awayTeam: TeamType;
     comments?: string;
+    minByMinUrl: string;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -252,7 +253,7 @@ const tabsContainer = css`
     }
 `;
 
-const MatchTabs = () => (
+const MatchTabs = ({ minByMinUrl }: { minByMinUrl: string }) => (
     <div>
         <ul className={tabsContainer}>
             <li>
@@ -261,14 +262,21 @@ const MatchTabs = () => (
             <Border />
             <li>
                 <a href="www.gu.com" data-link-name="Min-by-min">
-                    <span>Min-by-min</span>
+                    <span>
+                        <a href={minByMinUrl}>Min-by-min</a>
+                    </span>
                 </a>
             </li>
         </ul>
     </div>
 );
 
-export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
+export const MatchNav = ({
+    homeTeam,
+    awayTeam,
+    comments,
+    minByMinUrl,
+}: Props) => (
     <div>
         <StretchBackground>
             <Row>
@@ -288,6 +296,6 @@ export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
             </Row>
             {comments && <Comments comments={comments} />}
         </StretchBackground>
-        <MatchTabs />
+        <MatchTabs minByMinUrl={minByMinUrl} />
     </div>
 );
