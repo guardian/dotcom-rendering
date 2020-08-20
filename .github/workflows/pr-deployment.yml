@@ -1,8 +1,8 @@
-name: Ngrok
+name: PR deployment
 on: [push]
 jobs:
-    lhci:
-        name: run
+    server:
+        name: server
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
