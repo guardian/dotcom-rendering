@@ -19,7 +19,7 @@ type Props = {
     webTitle: string;
     author: AuthorType;
     tags: TagType[];
-    webPublicationDateDisplay: string;
+    primaryDateline: string;
     secondaryDateline?: string;
     branding?: Branding;
 };
@@ -262,7 +262,7 @@ export const ArticleMeta = ({
     webTitle,
     author,
     tags,
-    webPublicationDateDisplay,
+    primaryDateline,
     secondaryDateline,
 }: Props) => {
     const sharingUrls = getSharingUrls(pageId, webTitle);
@@ -299,7 +299,7 @@ export const ArticleMeta = ({
                                 />
                             )}
                             <Dateline
-                                primaryDateline={webPublicationDateDisplay}
+                                primaryDateline={primaryDateline}
                                 descriptionText="Published on"
                                 secondaryDateline={secondaryDateline}
                             />

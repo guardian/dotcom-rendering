@@ -23,7 +23,8 @@ const secondaryDateWidth = css`
     }
 `;
 
-// Checkbox functionality
+// We use the 'Checkbox Hack' for the show-hide functionality of the secondary date line.
+// https://css-tricks.com/the-checkbox-hack/
 const toggleClass = css`
     input[type='checkbox'] {
         position: absolute;
