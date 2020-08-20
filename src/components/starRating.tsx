@@ -38,7 +38,7 @@ const empty = <span css={starStyles}>☆</span>;
 
 const full = <span css={starStyles}>★</span>;
 
-const stars = (rating: number): ReactNode =>
+export const stars = (rating: number): ReactNode =>
     [empty, empty, empty, empty, empty]
         .fill(full, 0, rating);
 

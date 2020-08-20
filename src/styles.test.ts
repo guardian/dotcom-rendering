@@ -18,7 +18,8 @@ describe('helper functions return correct styles', () => {
             featureHeadline: '#AB0613',
             soft: '#FFF4F2',
             inverted: '#FF5943',
-            liveblogBackground: '#AB0613'
+            liveblogBackground: '#AB0613',
+            liveblogDarkBackground: "#8B0000",
         }
         expect(pillarStyles).toEqual(expectedNewsPillarStyles);
     });
