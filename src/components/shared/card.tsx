@@ -31,6 +31,7 @@ const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyle
 }
 
 const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    // const { inverted } = getPillarStyles(format.pillar);
         return css`
                 background: white;
                 margin-right: ${remSpace[3]};
