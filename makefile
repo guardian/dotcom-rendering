@@ -34,10 +34,6 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
-build-no-logs: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true webpack --config scripts/webpack/frontend
-
 start: install
 	@make stop
 	$(call log, "starting PROD server...")
