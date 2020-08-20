@@ -13,6 +13,7 @@ interface PillarStyles {
     soft: string;
     inverted: string;
     liveblogBackground: string;
+    liveblogDarkBackground: string;
 }
 
 type PillarColours = {
@@ -26,6 +27,7 @@ export const pillarColours: PillarColours = {
         soft: palette.news[800],
         inverted: palette.news[500],
         liveblogBackground: palette.news[300],
+        liveblogDarkBackground: palette.news[200]
     },
     [Pillar.Opinion]: {
         kicker: palette.opinion[400],
@@ -33,6 +35,7 @@ export const pillarColours: PillarColours = {
         soft: palette.opinion[800],
         inverted: palette.opinion[500],
         liveblogBackground: palette.opinion[300],
+        liveblogDarkBackground: palette.opinion[200]
     },
     [Pillar.Sport]: {
         kicker: palette.sport[400],
@@ -40,6 +43,7 @@ export const pillarColours: PillarColours = {
         soft: palette.sport[800],
         inverted: palette.sport[500],
         liveblogBackground: palette.sport[300],
+        liveblogDarkBackground: palette.sport[200]
     },
     [Pillar.Culture]: {
         kicker: palette.culture[400],
@@ -47,6 +51,7 @@ export const pillarColours: PillarColours = {
         soft: palette.culture[800],
         inverted: palette.culture[500],
         liveblogBackground: palette.culture[300],
+        liveblogDarkBackground: palette.culture[200]
     },
     [Pillar.Lifestyle]: {
         kicker: palette.lifestyle[400],
@@ -54,6 +59,7 @@ export const pillarColours: PillarColours = {
         soft: palette.lifestyle[800],
         inverted: palette.lifestyle[500],
         liveblogBackground: palette.lifestyle[300],
+        liveblogDarkBackground: palette.lifestyle[200]
     }
 }
 

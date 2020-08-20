@@ -15,6 +15,7 @@ import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
 import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
+import { stars } from 'components/starRating';
 
 
 interface Props {
@@ -31,23 +32,28 @@ const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyle
 }
 
 const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-        return css`
-                background: white;
-                margin-right: ${remSpace[3]};
-                flex: 0 0 15rem;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                border-top : ${borderColor(itemType, format)};
-                img {
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
-        `;
+    return css`
+        background: white;
+        margin-right: ${remSpace[3]};
+        flex: 0 0 15rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-top : ${borderColor(itemType, format)};
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ${darkModeCss`
+            background: ${neutral[20]};
+        `}
+    `;
 }
 
 const timeStyles = css`
@@ -71,7 +77,6 @@ const anchorStyles = css`
     text-decoration: none;
     ${darkModeCss`
         color: ${neutral[86]};
-        background: ${neutral[20]};
     `}
 `;
 
@@ -84,12 +89,12 @@ const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
     if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`
             ${textSans.medium({ lineHeight: 'regular' })}
-            margin: 0;
+            margin: 0 0 ${remSpace[2]} 0;
         `;
     } else {
         return css`
             ${headline.xxxsmall()};
-            margin: 0;
+            margin: 0 0 ${remSpace[2]} 0;
         `;
     }
 }
@@ -150,11 +155,16 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.LIVE: {
-            return css``;
-        }
-
-        case RelatedItemType.REVIEW: {
-            return css``;
+            const { kicker, liveblogDarkBackground } = getPillarStyles(format.pillar);
+            return css`
+                background: ${kicker};
+                h3, time {
+                    color: ${text.ctaPrimary};
+                }
+                ${darkModeCss`
+                    background: ${liveblogDarkBackground};
+                `}
+            `;
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
@@ -254,15 +264,17 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     )
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) ?
-                     relativeFirstPublished(fromNullable(new Date(lastModified))) :
-                     null;
+    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) 
+        ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+    const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
+        ? stars(parseInt(relatedItem.starRating)) : null;
 
     return (
         <li css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}>
             <a css={anchorStyles} href={relatedItem.link}>
                 <section css={headingWrapperStyles}>
                     <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
+                    {starRating}
                 </section>
                 <section>
                     <div css={metadataStyles}>

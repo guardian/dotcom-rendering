@@ -127,7 +127,8 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'shouldHideReaderRevenue',
         'displayHint',
         'starRating',
-        'commentable'
+        'commentable',
+        'liveBloggingNow'
     ];
 
     const params = new URLSearchParams({
@@ -138,6 +139,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
       'show-tags': 'all',
       'show-blocks': 'all',
       'show-elements': 'all',
+      'show-related': 'true'
     })
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
@@ -169,4 +171,5 @@ export {
     includesTweets,
     maybeCapiDate,
     paidContentLogo,
+    articleMainImage
 };
