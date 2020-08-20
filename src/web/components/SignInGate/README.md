@@ -328,6 +328,17 @@ The advantages of using the forcedTestVariant:
 
 The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
 
+#### Testing in CODE
+
+To test in CODE you will need to:
+
+1. Ensure the AB test is deployed in Frontend CODE and switched ON here: https://frontend.code.dev-gutools.co.uk/dev/switchboard
+2. Ensure the AB test experiment file with audience offsets are depolyed to Frontend CODE and check here: https://frontend.code.devv-gutools.co.uk/analytics/abtests (These test files should be identical in DCR and Frontend)
+3. Deploy you DCR branch to CODE.
+4. In chrome dev tools, set the value of the `GU_mvt_id` for the `dev-theguardian.com` cookie to one that will be captured by your desired test bucket (use https://ab-tests.netlify.app/)
+5. Navigate to an article page and trigger DCR by adding `?dcr` to the url
+6. Verify you are in the correct test bucket by looking at the `abtest` value sent to Ophan in the network tab.
+
 #### Cypress Integration Tests
 
 The Cypress tests for the sign in gate are found in `cypress/integration/e2e/sign-in-gate.spec.js`. We use cypress to test that the functionality of the gate works as expected in a browser. Each test that shows a gate **must** be tested individually, as well as any display rules to show that gate (unless the display rules are shared).
