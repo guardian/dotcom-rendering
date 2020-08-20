@@ -4579,6 +4579,8 @@ export const Immersive: CAPIType = {
             lastUpdatedDisplay: '16:55 GMT',
             firstPublished: 1581094411000,
             firstPublishedDisplay: '16:53 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

@@ -75,7 +75,7 @@ const labelStyles = css`
 export const Dateline: React.FC<{
     primaryDateline: string;
     descriptionText: string;
-    secondaryDateline?: string;
+    secondaryDateline: string;
 }> = ({ primaryDateline, secondaryDateline }) => {
     return (
         <div className={dateline}>
@@ -92,11 +92,10 @@ export const Dateline: React.FC<{
                     <span>
                         <label htmlFor="dateToggle">{primaryDateline}</label>
                     </span>
-                    {secondaryDateline && (
-                        <p className={secondaryDateWidth}>
-                            Last modified on {secondaryDateline}
-                        </p>
-                    )}
+
+                    <p className={secondaryDateWidth}>
+                        Last modified on {secondaryDateline}
+                    </p>
                 </div>
             ) : (
                 primaryDateline

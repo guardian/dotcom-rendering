@@ -6194,6 +6194,8 @@ export const Interview: CAPIType = {
             lastUpdatedDisplay: '11:54 GMT',
             firstPublished: 1580751774000,
             firstPublishedDisplay: '17:42 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

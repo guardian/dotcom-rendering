@@ -9144,6 +9144,8 @@ export const PhotoEssay: CAPIType = {
             lastUpdatedDisplay: '13:37 GMT',
             firstPublished: 1576258694000,
             firstPublishedDisplay: '17:38 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     linkedData: [

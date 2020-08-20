@@ -429,6 +429,9 @@ export const ShowcaseLayout = ({
                                 author={CAPI.author}
                                 tags={CAPI.tags}
                                 primaryDateline={CAPI.webPublicationDateDisplay}
+                                secondaryDateline={
+                                    CAPI.blocks[0].secondaryDateLine
+                                }
                             />
                         </div>
                     </GridItem>

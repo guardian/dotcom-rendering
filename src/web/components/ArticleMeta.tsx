@@ -20,7 +20,7 @@ type Props = {
     author: AuthorType;
     tags: TagType[];
     primaryDateline: string;
-    secondaryDateline?: string;
+    secondaryDateline: string;
     branding?: Branding;
 };
 

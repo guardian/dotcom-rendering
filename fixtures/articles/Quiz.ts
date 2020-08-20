@@ -2884,6 +2884,8 @@ export const Quiz: CAPIType = {
             lastUpdatedDisplay: '13:15 GMT',
             firstPublished: 1579007705000,
             firstPublishedDisplay: '13:15 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: { byline: 'Thomas Eaton' },

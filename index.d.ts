@@ -172,7 +172,8 @@ interface Block {
     title?: string;
     firstPublished?: number;
     firstPublishedDisplay?: string;
-    secondaryDateline?: string;
+    primaryDateLine: string;
+    secondaryDateLine: string;
 }
 
 interface Pagination {

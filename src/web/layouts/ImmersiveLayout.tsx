@@ -213,7 +213,6 @@ export const ImmersiveLayout = ({
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
-
     return (
         <>
             <div
@@ -396,6 +395,9 @@ export const ImmersiveLayout = ({
                                 author={CAPI.author}
                                 tags={CAPI.tags}
                                 primaryDateline={CAPI.webPublicationDateDisplay}
+                                secondaryDateline={
+                                    CAPI.blocks[0].secondaryDateLine
+                                }
                             />
                         </div>
                     </GridItem>
