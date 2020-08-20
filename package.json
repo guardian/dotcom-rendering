@@ -117,7 +117,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^7.6.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react": "^7.20.6",
     "jest": "^26.2.2",
     "storybook-chromatic": "^4.0.2",
     "ts-jest": "^26.2.0",
