@@ -2334,6 +2334,7 @@
     tslib "^1.8.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@guardian/ab-core@1.1.0-next.0":
   version "1.1.0-next.0"
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.1.0-next.0.tgz#2d164022c0df449547c177967aba755e57720a1c"
@@ -2354,6 +2355,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-1.2.0.tgz#c48893523ff3c1ac846e5e89d85120b59210452e"
   integrity sha512-LYkTGYx4kmuY3TReei+M/fW06FtlXTfBcPvPmOpbeTNKzJdPojnbe4U/FgUiDQ9lIWvON6Dlt1J1eLyLkdqdow==
 >>>>>>> WIP
+=======
+"@guardian/ab-core@0.2.1-alpha.12":
+  version "0.2.1-alpha.12"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-0.2.1-alpha.12.tgz#64d7ee61619ae31a3afbc4515847bad0e3f94a77"
+  integrity sha512-AMDXiv0d5soUlsgkJvNID6ZWuN++QRoobtDX53E+6JaokDJpX+8zkBRgZvW1wqsE/dPWwlISNRr4zfvAU6/aFg==
+
+"@guardian/ab-react@0.2.1-alpha.12":
+  version "0.2.1-alpha.12"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-0.2.1-alpha.12.tgz#493a57334318702c0cc7c45a0e1ad8fb0cec0d95"
+  integrity sha512-LSmEKzLoXuAscD5WbavBfStY1eVPalmJhr4vqvySO7hDMDRrb3UfcMZC5ZzJpeFv34YIH1L0CxwIi+CqAKzuyg==
+>>>>>>> Install alpha-12 of ab-packages
 
 "@guardian/atoms-rendering@^1.8.2":
   version "1.8.2"
