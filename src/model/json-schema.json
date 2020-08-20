@@ -1178,6 +1178,12 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/Pillar"
+                },
+                "guideIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1186,6 +1192,7 @@
                 "html",
                 "id",
                 "label",
+                "pillar",
                 "title"
             ]
         },
@@ -1580,6 +1587,12 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/Pillar"
+                },
+                "profileIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1588,6 +1601,7 @@
                 "html",
                 "id",
                 "label",
+                "pillar",
                 "title"
             ]
         },
@@ -1640,6 +1654,9 @@
                 "credit": {
                     "type": "string"
                 },
+                "pillar": {
+                    "$ref": "#/definitions/Pillar"
+                },
                 "qandaIndex": {
                     "type": "number"
                 }
@@ -1649,6 +1666,7 @@
                 "credit",
                 "html",
                 "id",
+                "pillar",
                 "title"
             ]
         },
@@ -1739,8 +1757,9 @@
                     "type": "string"
                 }
             },
-            "required": ["_type"]
-
+            "required": [
+                "_type"
+            ]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1821,17 +1840,24 @@
                 "description": {
                     "type": "string"
                 },
+                "pillar": {
+                    "$ref": "#/definitions/Pillar"
+                },
                 "events": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/TimelineEvent"
                     }
+                },
+                "timelineIndex": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
                 "events",
                 "id",
+                "pillar",
                 "title"
             ]
         },
