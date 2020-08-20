@@ -22,7 +22,7 @@ const styles = css`
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
-    height: ${100 * height / width}%;
+    height: calc((100vw - ${remSpace[4]}) * ${height / width});
     display: block;
     width: 100%;
 
