@@ -19,4 +19,4 @@ jobs:
                   ngrok http 9000 -log=stdout | \
                     grep --line-buffered -o 'https://.*' | \
                     xargs -L1 -I{} -t \
-                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} -d '{"state":"success", "target_url":"{}", "context":"PR deployment", "description":"This PR is now live. Click details to access it 👉"}'
+                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} -d '{"state":"success", "target_url":"{}", "context":"PR deployment", "description":"This PR is now live until `date -d "+6 hour" "+%a %H:%M"`. Click details to access it 👉"}'
