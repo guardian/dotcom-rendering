@@ -22,7 +22,7 @@ interface Props {
     image: Option<Image>;
 }
 
-const labPillarColors = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyles => {
     if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`1px solid ${palette.labs[300]}`
     } else {
@@ -31,7 +31,7 @@ const labPillarColors = (itemType: RelatedItemType, format: Format): SerializedS
 }
 
 const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    const { inverted } = getPillarStyles(format.pillar);
+    // const { inverted } = getPillarStyles(format.pillar);
         return css`
                 background: white;
                 margin-right: ${remSpace[3]};
@@ -40,10 +40,7 @@ const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                border-top : ${labPillarColors(itemType, format)};
-                ${darkModeCss`
-                    color: ${inverted};
-                `}
+                border-top : ${borderColor(itemType, format)};
                 img {
                     width: 100%;
                     height: 100%;
