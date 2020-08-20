@@ -42,7 +42,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             mvtMaxValue={1000000}
             mvtId={mvtId}
             ophanRecord={ophanRecordFunc}
-            forcedTestVariant={getForcedParticipationsFromUrl(windowHash)}
+            forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
         >
             <App CAPI={CAPI} NAV={NAV} />
         </ABProvider>,
