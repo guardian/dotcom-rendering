@@ -2,6 +2,7 @@ import { cmp } from '@guardian/consent-management-platform';
 import { startup } from '@root/src/web/browser/startup';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { addPrivacySettingsLink } from '../../lib/addPrivacySettingsLink';
 
 const initConsent = async () => {
     const isInUsa = (await getCountryCode()) === 'US';
@@ -10,6 +11,7 @@ const initConsent = async () => {
         ? { browserId }
         : undefined;
     cmp.init({ isInUsa, pubData });
+    addPrivacySettingsLink();
 };
 
 const switches =
