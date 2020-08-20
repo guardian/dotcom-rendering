@@ -1192,7 +1192,6 @@
                 "html",
                 "id",
                 "label",
-                "pillar",
                 "title"
             ]
         },
@@ -1601,7 +1600,6 @@
                 "html",
                 "id",
                 "label",
-                "pillar",
                 "title"
             ]
         },
@@ -1666,7 +1664,6 @@
                 "credit",
                 "html",
                 "id",
-                "pillar",
                 "title"
             ]
         },
@@ -1857,7 +1854,6 @@
                 "_type",
                 "events",
                 "id",
-                "pillar",
                 "title"
             ]
         },
