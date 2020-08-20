@@ -27,9 +27,9 @@ const backgroundColour = (light: Colour, dark: Colour): SerializedStyles =>
     `;
 
 const headlineTextColour = (format: Format): SerializedStyles =>
-    textColour(text.headlinePrimary(format), text.headlineInverse(format));
+    textColour(text.headlinePrimary(format), text.headlinePrimaryInverse(format));
 const headlineBackgroundColour = (format: Format): SerializedStyles =>
-    backgroundColour(background.headlinePrimary(format), background.headlineInverse(format));
+    backgroundColour(background.headlinePrimary(format), background.headlinePrimaryInverse(format));
 
 
 // ----- Exports ----- //
