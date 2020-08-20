@@ -17,56 +17,32 @@ const dateline = css`
     margin-bottom: 6px;
 `;
 
-const secondaryDateWidth = css`
+// We use the 'Checkbox Hack' for the show-hide functionality of the secondary date line.
+// https://css-tricks.com/the-checkbox-hack/
+const toggleClass = css`
+    input[type='checkbox'] {
+        display: none;
+    }
+
+    input[type='checkbox']:checked ~ p {
+        max-height: 80px;
+    }
+`;
+
+const pStyle = css`
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
     ${from.leftCol} {
         width: 90%;
     }
 `;
 
-// We use the 'Checkbox Hack' for the show-hide functionality of the secondary date line.
-// https://css-tricks.com/the-checkbox-hack/
-const toggleClass = css`
-    input[type='checkbox'] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        display: none;
-    }
-
-    input[type='checkbox']:checked ~ span ~ p {
-        max-height: 80px;
-    }
-`;
-
-const pCheckboxStyle = css`
-    p {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-    }
-`;
-
 const labelStyles = css`
-    label {
-        cursor: pointer;
-    }
-    label {
-        position: relative;
-        display: block;
-    }
-    label:hover {
+    cursor: pointer;
+
+    :hover {
         text-decoration: underline;
-    }
-    label::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        top: 50%;
-        left: 10px;
     }
 `;
 
@@ -80,20 +56,17 @@ export const Dateline: React.FC<{
     return (
         <div className={dateline}>
             {primaryDateline !== secondaryDateline ? (
-                <div
-                    className={cx(
-                        toggleClass,
-                        pCheckboxStyle,
-                        labelStyles,
-                        dateline,
-                    )}
-                >
-                    <input type="checkbox" id="dateToggle" />
-                    <span>
-                        <label htmlFor="dateToggle">{primaryDateline}</label>
-                    </span>
+                <div className={cx(toggleClass, dateline)}>
+                    <label className={labelStyles} htmlFor="dateToggle">
+                        {primaryDateline}
+                    </label>
 
-                    <p className={secondaryDateWidth}>
+                    <input
+                        className={toggleClass}
+                        type="checkbox"
+                        id="dateToggle"
+                    />
+                    <p className={pStyle}>
                         Last modified on {secondaryDateline}
                     </p>
                 </div>
