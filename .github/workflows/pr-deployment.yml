@@ -21,7 +21,7 @@ jobs:
             - run: make build
             - name: Boot server and run ngrok
               run: |
-                  npm install -g ngrok
+                  timeout 5m npm install -g ngrok
                   NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js &
                   ngrok http 9000 -log=stdout | \
                     grep --line-buffered -o 'https://.*' | \
