@@ -25,7 +25,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
     display: block;
     width: 100%;
-
+    object-fit: cover;
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
