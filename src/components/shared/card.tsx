@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace, breakpoints } from '@guardian/src-foundations';
+import { remSpace, breakpoints, palette } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
 import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
@@ -23,27 +23,38 @@ interface Props {
     image: Option<Image>;
 }
 
-const listStyles = css`
-    background: white;
-    margin-right: ${remSpace[3]};
-    flex: 0 0 15rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    img {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
+const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+        return css`1px solid ${palette.labs[300]}`
+    } else {
+        return css`1px solid ${getPillarStyles(format.pillar).kicker}`
     }
+}
 
-    ${darkModeCss`
-        background: ${neutral[20]};
-    `}
-`;
+const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    return css`
+        background: white;
+        margin-right: ${remSpace[3]};
+        flex: 0 0 15rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-top : ${borderColor(itemType, format)};
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ${darkModeCss`
+            background: ${neutral[20]};
+        `}
+    `;
+}
 
 const timeStyles = css`
     ${textSans.small()};
@@ -74,10 +85,19 @@ const headingWrapperStyles = css`
     min-height: 150px;
 `
 
-const headingStyles = css`
-    ${headline.xxxsmall()};
-    margin: 0 0 ${remSpace[2]} 0;
-`;
+const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
+    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+        return css`
+            ${textSans.medium({ lineHeight: 'regular' })}
+            margin: 0 0 ${remSpace[2]} 0;
+        `;
+    } else {
+        return css`
+            ${headline.xxxsmall()};
+            margin: 0 0 ${remSpace[2]} 0;
+        `;
+    }
+}
 
 const imageWrapperStyles = css`
     padding-bottom: 56.25%;
@@ -91,6 +111,7 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+    
     switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
@@ -147,7 +168,10 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.ADVERTISEMENT_FEATURE: {
-            return css``;
+            return css`
+                background-color : ${neutral[93]};
+                ${textSans.large()}
+            `;
         }
 
         case RelatedItemType.COMMENT: {
@@ -240,29 +264,31 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
     )
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = lastModified ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) 
+        ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
     const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
         ? stars(parseInt(relatedItem.starRating)) : null;
 
-    return <li css={[listStyles, cardStyles(relatedItem.type, format)]}>
-        <a css={anchorStyles} href={relatedItem.link}>
-            <section css={headingWrapperStyles}>
-                <h3 css={headingStyles}>{relatedItem.title}</h3>
-                {starRating}
-            </section>
-            <section>
-                <div css={metadataStyles}>
-                    <section css={parentIconStyles}>
-                        {icon(relatedItem.type, format)}
-                    </section>
-                    {durationMedia(fromNullable(relatedItem.mediaDuration))}
-                    {date}
-                </div>
-                <div css={imageWrapperStyles}>{img}</div>
-            </section>
-        </a>
-    </li>
+    return (
+        <li css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}>
+            <a css={anchorStyles} href={relatedItem.link}>
+                <section css={headingWrapperStyles}>
+                    <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
+                    {starRating}
+                </section>
+                <section>
+                    <div css={metadataStyles}>
+                        <section css={parentIconStyles}>
+                            {icon(relatedItem.type, format)}
+                        </section>
+                        {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                        {date}
+                    </div>
+                    <div css={imageWrapperStyles}>{img}</div>
+                </section>
+            </a>
+        </li>
+    )
 }
-
 
 export default Card;
