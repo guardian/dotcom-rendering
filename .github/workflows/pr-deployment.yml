@@ -5,8 +5,9 @@ jobs:
         name: server
         runs-on: ubuntu-latest
         steps:
-            - name: Cancel previous executions
-              uses: technote-space/auto-cancel-redundant-job@v1
+            - name: Auto Cancel Redundant Job
+              uses: technote-space/auto-cancel-redundant-job@v1.2.2
+
             - name: Checkout code
               uses: actions/checkout@v1
             - name: Use Node.js 10.15.3
