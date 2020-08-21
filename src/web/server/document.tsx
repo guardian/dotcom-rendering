@@ -101,6 +101,7 @@ export const document = ({ data }: Props) => {
      * unlikely.
      */
     const lowPriorityScriptTags = generateScriptTags([
+        { src: 'https://www.google-analytics.com/analytics.js' },
         { src: 'ga.js', module: true },
         { src: 'ophan.js', module: true },
         { src: 'lotame.js', module: true },
