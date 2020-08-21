@@ -33,6 +33,7 @@ import {
     TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
+import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -256,8 +257,6 @@ export const ArticleRenderer: React.FC<{
                                 designType={designType}
                                 forceDropCap={element.dropCap}
                             />
-                            {/* Insert the placeholder for the sign in gate on the 2nd paragrah */}
-                            {i === 1 && <span id="sign-in-gate" />}
                         </>
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
@@ -351,7 +350,8 @@ export const ArticleRenderer: React.FC<{
         <div
             className={`article-body-commercial-selector ${commercialPosition}`}
         >
-            {output}
+            {/* Insert the placeholder for the sign in gate on the 2nd article element */}
+            {withSignInGateSlot(output)}
         </div>
     ); // classname that space finder is going to target for in-body ads in DCR
 };
