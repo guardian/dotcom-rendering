@@ -3195,6 +3195,8 @@ export const Feature: CAPIType = {
             lastUpdatedDisplay: '06:59 GMT',
             firstPublished: 1581309836000,
             firstPublishedDisplay: '04:43 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {
