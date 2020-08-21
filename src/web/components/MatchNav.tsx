@@ -8,7 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space, palette } from '@guardian/src-foundations';
-import { until, from } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 
 import { Score } from '@frontend/web/components/Score';
 
@@ -63,9 +63,6 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
                 bottom: 0;
                 width: 100vw;
                 left: -100vw;
-                ${from.desktop} {
-                    /* left: calc((100vw - 46rem) / -2); */
-                }
                 background-color: ${brandAlt[400]};
                 z-index: -1;
             }
@@ -261,10 +258,8 @@ const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
             </li>
             <Border />
             <li>
-                <a href="www.gu.com" data-link-name="Min-by-min">
-                    <span>
-                        <a href={minByMinUrl}>Min-by-min</a>
-                    </span>
+                <a href={minByMinUrl} data-link-name="Min-by-min">
+                    <span>Min-by-min</span>
                 </a>
             </li>
         </ul>
