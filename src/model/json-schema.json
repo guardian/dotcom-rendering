@@ -1178,6 +1178,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "guideIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1580,6 +1583,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "profileIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1739,8 +1745,9 @@
                     "type": "string"
                 }
             },
-            "required": ["_type"]
-
+            "required": [
+                "_type"
+            ]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1826,6 +1833,9 @@
                     "items": {
                         "$ref": "#/definitions/TimelineEvent"
                     }
+                },
+                "timelineIndex": {
+                    "type": "number"
                 }
             },
             "required": [
