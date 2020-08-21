@@ -1993,20 +1993,9 @@
                 },
                 "firstPublishedDisplay": {
                     "type": "string"
-                },
-                "primaryDateLine": {
-                    "type": "string"
-                },
-                "secondaryDateLine": {
-                    "type": "string"
                 }
             },
-            "required": [
-                "elements",
-                "id",
-                "primaryDateLine",
-                "secondaryDateLine"
-            ]
+            "required": ["elements", "id"]
         },
         "Pagination": {
             "type": "object",
