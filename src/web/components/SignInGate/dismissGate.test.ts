@@ -1,4 +1,4 @@
-import { hasUserDismissedGate, setUserDismissedGate } from './dismissGate';
+import { hasUserDismissedGate, setUserDismissedGate, unsetUserDismissedGate } from './dismissGate';
 
 describe('SignInGate - dismissGate methods', () => {
     beforeEach(() => {
@@ -62,6 +62,53 @@ describe('SignInGate - dismissGate methods', () => {
 
             expect(output).toBe(false);
         });
+
+        test('user has dismissed gate within time window', () => {
+            const lessThanADayAgo = new Date();
+            lessThanADayAgo.setHours(lessThanADayAgo.getHours() - 1);
+            localStorage.setItem(
+                'gu.prefs.sign-in-gate',
+                JSON.stringify({
+                    'SignInGateCurrent-variant-name': lessThanADayAgo.toISOString(),
+                }),
+            );
+            const output = hasUserDismissedGate(
+                'variant-name',
+                'SignInGateCurrent',
+                24
+            );
+
+            expect(output).toBe(true);
+        });
+
+        test('user has not dismissed gate within time window', () => {
+            const moreThanADayAgo = new Date();
+            moreThanADayAgo.setHours(moreThanADayAgo.getHours() - 48);
+            localStorage.setItem(
+                'gu.prefs.sign-in-gate',
+                JSON.stringify({
+                    'SignInGateCurrent-variant-name': moreThanADayAgo.toISOString(),
+                }),
+            );
+
+            const output = hasUserDismissedGate(
+                'variant-name',
+                'SignInGateCurrent',
+                24
+            );
+
+            expect(output).toBe(false);
+        });
+
+        test('returns false if window is checked but there is no dismissal time for the varian in local storage', () => {
+            const output = hasUserDismissedGate(
+                'variant-name',
+                'SignInGateCurrent',
+                24
+            );
+
+            expect(output).toBe(false);
+        });
     });
 
     describe('setUserDismissedGate', () => {
@@ -85,6 +132,21 @@ describe('SignInGate - dismissGate methods', () => {
 
             expect(output1).toBe(true);
             expect(output2).toBe(true);
+        });
+    });
+
+    describe('unsetUserDismissedGate', () => {
+        test('unsets dismissed sign in gate for correct test and variant', () => {
+            setUserDismissedGate('variant-1', 'test-1');
+            setUserDismissedGate('variant-2', 'test-2');
+            unsetUserDismissedGate('variant-2', 'test-2');
+
+            const output1 = hasUserDismissedGate('variant-1', 'test-1');
+            const output2 = hasUserDismissedGate('variant-2', 'test-2');
+
+            expect(output1).toBe(true);
+            expect(output2).toBe(false);
+
         });
     });
 });

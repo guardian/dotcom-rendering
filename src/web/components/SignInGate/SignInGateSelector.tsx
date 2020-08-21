@@ -14,12 +14,16 @@ import { getCookie } from '@frontend/web/browser/cookie';
 import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
+import { signInGateDismissWindow } from '@root/src/web/experiments/tests/sign-in-gate-dismiss-window';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
 import { signInGateComponent as gatePatientiaControl } from '@root/src/web/components/SignInGate/gates/patientia-control';
 import { signInGateComponent as gatePatientiaVariant } from '@root/src/web/components/SignInGate/gates/patientia-variant';
+import { signInGateComponent as gateDismissWindowControl } from '@root/src/web/components/SignInGate/gates/dismiss-window-control';
+import { signInGateComponent as gateDismissWindowVariant1Article } from '@root/src/web/components/SignInGate/gates/dismiss-window-variant-1-article';
+import { signInGateComponent as gateDismissWindowVariant2Day } from '@root/src/web/components/SignInGate/gates/dismiss-window-variant-2-day';
 
 import {
     ComponentEventParams,
@@ -69,6 +73,7 @@ const tests: ReadonlyArray<ABTest> = [
     signInGatePatientia,
     signInGateMainVariant,
     signInGateMainControl,
+    signInGateDismissWindow,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
@@ -76,12 +81,16 @@ const testVariantToGateMapping: GateTestMap = {
     'patientia-variant-1': gatePatientiaVariant,
     'main-control-1': gateMainControl,
     'main-variant-1': gateMainVariant,
+    'dismiss-window-control': gateDismissWindowControl,
+    'dismiss-window-variant-1-article': gateDismissWindowVariant1Article,
+    'dismiss-window-variant-2-day': gateDismissWindowVariant2Day,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
     SignInGateMainVariant: 'main_variant_1',
     SignInGateMainControl: 'main_control_1',
     SignInGatePatientia: 'patientia_test',
+    SignInGateDismissWindow: 'dismiss_window_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
