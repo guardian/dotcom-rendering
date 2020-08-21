@@ -166,7 +166,10 @@ export const SignInGateMain = ({
                 <button
                     data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
-                    onClick={cmp.showPrivacyManager}
+                    onClick={() => {
+                        cmp.showPrivacyManager();
+                        trackLink(ophanComponentId, 'privacy', abTest);
+                    }}
                 >
                     privacy settings
                 </button>
