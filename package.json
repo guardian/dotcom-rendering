@@ -36,7 +36,7 @@
         "@emotion/core": "^10.0.28",
         "@guardian/atoms-rendering": "^1.8.2",
         "@guardian/ab-core": "^2.0.0",
-        "@guardian/ab-react": "^2.0.0",
+        "@guardian/ab-react": "^2.0.1",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/consent-management-platform": "4.0.2",
         "@guardian/discussion-rendering": "^2.6.0",
