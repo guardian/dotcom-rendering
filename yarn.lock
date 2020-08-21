@@ -2335,6 +2335,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@guardian/ab-core@1.1.0-next.0":
   version "1.1.0-next.0"
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-1.1.0-next.0.tgz#2d164022c0df449547c177967aba755e57720a1c"
@@ -2366,6 +2367,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-0.2.1-alpha.12.tgz#493a57334318702c0cc7c45a0e1ad8fb0cec0d95"
   integrity sha512-LSmEKzLoXuAscD5WbavBfStY1eVPalmJhr4vqvySO7hDMDRrb3UfcMZC5ZzJpeFv34YIH1L0CxwIi+CqAKzuyg==
 >>>>>>> Install alpha-12 of ab-packages
+=======
+"@guardian/ab-core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-2.0.0.tgz#d8a9408d5a66ff1f8c684ed458c99517bbee15b1"
+  integrity sha512-E5p6l0l37hY0GNFaZmA5/22TlVuavzlMHR3OeweD5eDcY2gB3nGgzPK/d3M67dkbDAJkGjB4a0W84Z5N2YScvQ==
+
+"@guardian/ab-react@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.0.tgz#1172f5ff9b5fdf7ec93dfcc0d96709cde0b8093f"
+  integrity sha512-a12bNg3BcFmA1pYeC5IPw53wcDntnXwAeHd5ntbCvRgpWFg+FPrPzhoeEPf0CMPFdtO0CnjCyDTqes8Ae2k4pA==
+>>>>>>> Bump library to v2
 
 "@guardian/atoms-rendering@^1.8.2":
   version "1.8.2"
