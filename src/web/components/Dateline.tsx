@@ -55,7 +55,8 @@ export const Dateline: React.FC<{
 }> = ({ primaryDateline, secondaryDateline }) => {
     return (
         <div className={dateline}>
-            {!secondaryDateline.includes(primaryDateline) ? (
+            {secondaryDateline &&
+            !secondaryDateline.includes(primaryDateline) ? (
                 <div className={cx(toggleClass, dateline)}>
                     <label className={labelStyles} htmlFor="dateToggle">
                         {primaryDateline}
