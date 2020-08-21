@@ -200,7 +200,7 @@ const Comments = ({ comments }: { comments: string }) => (
     </div>
 );
 
-const Border = () => (
+const YellowBorder = () => (
     <div
         className={css`
             /* stylelint-disable-next-line color-no-hex */
@@ -210,7 +210,19 @@ const Border = () => (
         `}
     />
 );
+
 const thinGreySolid = `1px solid ${border.secondary}`;
+
+const GreyBorder = () => (
+    <div
+        className={css`
+            /* stylelint-disable-next-line color-no-hex */
+            border-left: ${thinGreySolid};
+            margin-left: ${space[1]}px;
+            width: ${space[2]}px;
+        `}
+    />
+);
 
 const tabsContainer = css`
     display: flex;
@@ -223,7 +235,10 @@ const tabsContainer = css`
         border-top: 3px solid ${border.secondary};
 
         :nth-child(1) {
-            border-top: 3px solid ${palette.sport[400]};
+            border-top: 3px solid ${palette.sport.main};
+        }
+        :nth-child(2) {
+            border-left: ${thinGreySolid};
         }
 
         span {
@@ -241,7 +256,7 @@ const tabsContainer = css`
         }
 
         a span {
-            color: ${palette.sport[400]};
+            color: ${palette.sport.main};
         }
 
         a:link {
@@ -256,7 +271,7 @@ const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
             <li>
                 <span>Report</span>
             </li>
-            <Border />
+            <GreyBorder />
             <li>
                 <a href={minByMinUrl} data-link-name="Min-by-min">
                     <span>Min-by-min</span>
@@ -281,7 +296,7 @@ export const MatchNav = ({
                     crest={homeTeam.crest}
                     scorers={homeTeam.scorers}
                 />
-                <Border />
+                <YellowBorder />
                 <TeamNav
                     name={awayTeam.name}
                     score={awayTeam.score}
