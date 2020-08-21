@@ -72,7 +72,7 @@
     "@guardian/src-text-input": "^2.0.0",
     "@guardian/src-brand": "^2.1.0",
     "@guardian/src-button": "^2.1.0",
-    "@guardian/src-foundations": "^2.1.0",
+    "@guardian/src-foundations": "^2.2.0",
     "@guardian/src-icons": "^2.1.0",
     "@guardian/types": "github:guardian/types#semver:^0.4.0",
     "@types/jsdom": "^16.2.3",
