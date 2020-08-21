@@ -1,7 +1,17 @@
-import { cmp } from '@guardian/consent-management-platform';
+import { cmp, oldCmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
 export const addPrivacySettingsLink = (): void => {
+    if (
+        'guardian' in window &&
+        'config' in window.guardian &&
+        'switches' in window.guardian.config &&
+        'cmpUi' in window.guardian.config.switches &&
+        !window.guardian.config.switches.cmpUi
+    ) {
+        return;
+    }
+
     const privacyLink = document.querySelector('a[data-link-name=privacy]');
 
     if (privacyLink) {
@@ -33,7 +43,9 @@ export const addPrivacySettingsLink = (): void => {
 
                 newPrivacyLink.addEventListener(
                     'click',
-                    cmp.showPrivacyManager,
+                    framework.tcfv1
+                        ? oldCmp.showPrivacyManager
+                        : cmp.showPrivacyManager,
                 );
             });
         }
