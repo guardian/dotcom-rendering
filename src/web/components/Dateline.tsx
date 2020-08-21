@@ -46,15 +46,16 @@ const labelStyles = css`
     }
 `;
 
-// At the moment there is no way to tell from primaryDateline and secondaryDatline
-// what the prepend should be (either 'Last modified on' or 'First published on ')
+// At the moment the 'First published on' / 'Last modified on' is passed through on
+// the secondaryDateline (this will be refactored). The current logic checks if the primary
+// date is in the secondary to avoid duplicate dates being shown
 export const Dateline: React.FC<{
     primaryDateline: string;
     secondaryDateline: string;
 }> = ({ primaryDateline, secondaryDateline }) => {
     return (
         <div className={dateline}>
-            {primaryDateline !== secondaryDateline ? (
+            {!secondaryDateline.includes(primaryDateline) ? (
                 <div className={cx(toggleClass, dateline)}>
                     <label className={labelStyles} htmlFor="dateToggle">
                         {primaryDateline}
@@ -65,9 +66,7 @@ export const Dateline: React.FC<{
                         type="checkbox"
                         id="dateToggle"
                     />
-                    <p className={pStyle}>
-                        Last modified on {secondaryDateline}
-                    </p>
+                    <p className={pStyle}>{secondaryDateline}</p>
                 </div>
             ) : (
                 primaryDateline
