@@ -14,8 +14,9 @@ export const getPrivacyFramework = async () => {
         const isInUS = (await getCountryCode()) === 'US';
 
         frameworks = {
-            ccpa: isInUS && switches.frameworkCcpa,
-            tcfv2: !isInUS && switches.frameworkTcfv2,
+            ccpa: isInUS && switches.ccpaCmpUi,
+            tcfv1: !isInUS && !switches.tcfv2Dcr,
+            tcfv2: !isInUS && switches.tcfv2Dcr,
         };
     }
     return frameworks;

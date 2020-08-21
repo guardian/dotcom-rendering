@@ -17,29 +17,6 @@ interface RenderToStringResult {
     ids: string[];
 }
 
-const generateScriptTags = (
-    scripts: Array<{ src: string; module?: boolean }>,
-) =>
-    scripts.reduce((scriptTags, script) => {
-        if (script.module) {
-            scriptTags.push(
-                `<script defer module src="${getDist({
-                    path: script.src,
-                    legacy: false,
-                })}"></script>`,
-            );
-            scriptTags.push(
-                `<script defer nomodule src="${getDist({
-                    path: script.src,
-                    legacy: true,
-                })}"></script>`,
-            );
-        } else {
-            scriptTags.push(`<script defer src="${script.src}"></script>`);
-        }
-        return scriptTags;
-    }, [] as string[]);
-
 export const document = ({ data }: Props) => {
     const { CAPI, NAV, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
@@ -82,16 +59,20 @@ export const document = ({ data }: Props) => {
      * Please talk to the dotcom platform team before adding more.
      * Scripts will be executed in the order they appear in this array
      */
-    const priorityScriptTags = generateScriptTags(
-        [
-            { src: polyfillIO },
-            { src: 'commercial.js', module: true },
-            CAPI.config && { src: CAPI.config.commercialBundleUrl },
-            { src: 'sentry.js', module: true },
-            { src: 'dynamicImport.js', module: true },
-            { src: 'react.js', module: true },
-        ].filter(Boolean),
-    );
+    const priorityScripts = [
+        polyfillIO,
+        CAPI.config && CAPI.config.commercialBundleUrl,
+    ];
+    const priorityLegacyScripts = [
+        getDist({ path: 'sentry.js', legacy: true }),
+        getDist({ path: 'dynamicImport.js', legacy: true }),
+        getDist({ path: 'react.js', legacy: true }),
+    ];
+    const priorityNonLegacyScripts = [
+        getDist({ path: 'sentry.js', legacy: false }),
+        getDist({ path: 'dynamicImport.js', legacy: false }),
+        getDist({ path: 'react.js', legacy: false }),
+    ];
 
     /**
      * Low priority scripts. These scripts will be requested
@@ -100,12 +81,19 @@ export const document = ({ data }: Props) => {
      * *before* the high priority scripts, although this is very
      * unlikely.
      */
-    const lowPriorityScriptTags = generateScriptTags([
-        { src: 'https://www.google-analytics.com/analytics.js' },
-        { src: 'ga.js', module: true },
-        { src: 'ophan.js', module: true },
-        { src: 'lotame.js', module: true },
-    ]);
+    const lowPriorityScripts = [
+        'https://www.google-analytics.com/analytics.js',
+    ];
+    const lowPriorityLegacyScripts = [
+        getDist({ path: 'ga.js', legacy: true }),
+        getDist({ path: 'ophan.js', legacy: true }),
+        getDist({ path: 'lotame.js', legacy: true }),
+    ];
+    const lowPriorityNonLegacyScripts = [
+        getDist({ path: 'ga.js', legacy: false }),
+        getDist({ path: 'ophan.js', legacy: false }),
+        getDist({ path: 'lotame.js', legacy: false }),
+    ];
 
     /**
      * We escape windowGuardian here to prevent errors when the data
@@ -130,9 +118,13 @@ export const document = ({ data }: Props) => {
     return htmlTemplate({
         linkedData,
 
-        priorityScriptTags,
+        priorityScripts,
+        priorityLegacyScripts,
+        priorityNonLegacyScripts,
 
-        lowPriorityScriptTags,
+        lowPriorityScripts,
+        lowPriorityLegacyScripts,
+        lowPriorityNonLegacyScripts,
 
         css,
         html,
