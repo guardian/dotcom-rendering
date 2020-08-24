@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import {
+    willShowCMP,
+    shouldShowOldCMP,
+    CMP,
+} from '@root/src/web/components/StickyBottomBanner/CMP';
 import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
-import { cmp } from '@guardian/consent-management-platform';
 
 type Props = {
     isSignedIn?: boolean;
@@ -19,15 +23,28 @@ export const StickyBottomBanner = ({
     countryCode,
     CAPI,
 }: Props) => {
-    const [CMPWillShow, setCMPWillShow] = useState<boolean>(true);
+    const [showOldCMP, setShowOldCMP] = useState<boolean | null>(null);
+    const [CMPWillShow, setCMPWillShow] = useState<boolean | undefined>(
+        undefined,
+    );
 
     useEffect(() => {
-        cmp.willShowPrivacyMessage().then(setCMPWillShow);
-    }, []);
+        shouldShowOldCMP().then((shouldShowOld) =>
+            setShowOldCMP(shouldShowOld && CAPI.config.cmpUi),
+        );
+        willShowCMP().then(setCMPWillShow);
+    }, [CAPI.config.cmpUi]);
 
-    // CMP is not a react component and is shown outside of react's world
+    // Don't render anything until we know whether we can show the CMP
+    if (showOldCMP === null || CMPWillShow === null) {
+        return null;
+    }
+
+    // New CMP is not a react component and is shown outside of react's world
     // so render nothing if it will show
     if (CMPWillShow) return null;
+
+    if (showOldCMP) return <CMP />;
 
     const showRRBanner = CAPI.config.remoteBanner;
 
