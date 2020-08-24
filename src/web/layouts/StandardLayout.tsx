@@ -124,7 +124,8 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
                     300px; /* Right Column */
                 grid-template-areas:
                     ${hasPreFurniture
-                        ? `'preFurniture  right-column'`
+                        ? `'preFurniture  right-column'
+                           'title         right-column'`
                         : `'title         right-column'`}
                     'headline      right-column'
                     'standfirst    right-column'
@@ -138,7 +139,10 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
             ${until.desktop} {
                 grid-template-columns: 1fr; /* Main content */
                 grid-template-areas:
-                    ${hasPreFurniture ? `'preFurniture` : `'title'`}
+                    ${hasPreFurniture
+                        ? `'preFurniture'
+                           'title'`
+                        : `'title'`}
                     'headline'
                     'standfirst'
                     'media'
@@ -152,7 +156,10 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 
                 grid-template-columns: 1fr; /* Main content */
                 grid-template-areas:
-                    ${hasPreFurniture ? `'preFurniture'` : `'media'`}
+                    ${hasPreFurniture
+                        ? `'preFurniture'
+                           'media'`
+                        : `'media'`}
                     'title'
                     'headline'
                     'standfirst'
