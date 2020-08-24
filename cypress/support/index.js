@@ -39,8 +39,10 @@ beforeEach(function () {
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     // don't break our tests if sourcepoint code breaks
-    if (/wrapperMessagingWithoutDetection/.match(err.stack)) {
+    if (/wrapperMessagingWithoutDetection/.test(err.stack)) {
         console.warn(err);
         return false;
     }
+
+    return true;
 });
