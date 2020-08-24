@@ -3811,10 +3811,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/dateformat@^1.0.1":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-1.0.2.tgz#9ccd4eff73a0d44ab35435c181029c2a2940c207"
-  integrity sha512-43meO0YSZLdVGAOxkjhGodwvh8TW2x3bKOT1lmLwU/XBea8mwO367ARgS9FHqmhzxf7AGKDM6u9CN2qxs+DLfQ==
+"@types/dateformat@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-3.0.1.tgz#98d747a2e5e9a56070c6bf14e27bff56204e34cc"
+  integrity sha512-KlPPdikagvL6ELjWsljbyDIPzNCeliYkqRpI+zea99vBBbCIA5JNshZAwQKTON139c87y9qvTFVgkFd14rtS4g==
 
 "@types/domhandler@*":
   version "2.4.1"
