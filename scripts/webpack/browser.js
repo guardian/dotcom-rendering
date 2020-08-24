@@ -45,6 +45,7 @@ module.exports = ({ isLegacyJS }) => ({
         react: scriptPath('react'),
         lotame: scriptPath('lotame'),
         dynamicImport: scriptPath('dynamicImport'),
+        commercial: scriptPath('commercial'),
     },
     output: {
         filename: generateName(isLegacyJS),
