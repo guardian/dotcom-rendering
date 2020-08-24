@@ -3,6 +3,8 @@ name: "Chromatic"
 on:
   push:
     paths:
+    - 'src/*'
+    - '*.json'
     - '!api-models/'
     - '!project/'
     - '!*.sbt'
