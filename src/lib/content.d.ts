@@ -56,6 +56,8 @@ interface CalloutBlockElement {
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
+    chartIndex?: number;
+    id: string;
 }
 
 interface CodeBlockElement {

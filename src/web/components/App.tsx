@@ -22,6 +22,7 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    ChartAtom,
 } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -356,6 +357,11 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.chartAtoms.map((chart) => (
+                <Hydrate root="chart-atom" index={chart.chartIndex}>
+                    <ChartAtom id={chart.id} url={chart.url} />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (

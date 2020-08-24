@@ -31,6 +31,7 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    ChartAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -98,7 +99,7 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return null; // will be filled shortly with the ChartAtom from atoms-rendering
+                    return <ChartAtom url={element.url} id={element.id} />;
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
                         <DocumentBlockComponent

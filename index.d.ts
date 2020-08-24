@@ -360,6 +360,7 @@ type CAPIBrowserType = {
     guideAtoms: GuideAtomBlockElement[];
     profileAtoms: ProfileAtomBlockElement[];
     timelineAtoms: TimelineBlockElement[];
+    chartAtoms: ChartAtomBlockElement[];
 };
 
 interface TagType {
@@ -662,7 +663,8 @@ type IslandType =
     | 'guide-atom'
     | 'profile-atom'
     | 'timeline-atom'
-    | 'sign-in-gate';
+    | 'sign-in-gate'
+    | 'chart-atom';
 
 interface TrailType {
     designType: DesignType;
