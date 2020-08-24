@@ -36,3 +36,11 @@ beforeEach(function () {
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // don't break our tests if sourcepoint code breaks
+    if (/wrapperMessagingWithoutDetection/.match(err.stack)) {
+        console.warn(err);
+        return false;
+    }
+});
