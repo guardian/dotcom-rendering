@@ -9,7 +9,7 @@ The library docs above explain the integration and the API.
 1. [Create a switch in Frontend](https://github.com/guardian/frontend/blob/master/common/app/conf/switches/ABTestSwitches.scala)
 2. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/master/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_.
 3. Add your test to [concurrent tests](https://github.com/guardian/frontend/blob/master/static/src/javascripts/projects/common/modules/experiments/ab-tests.js) on _Frontend_.
-4. Copy the JS file into DCR (and update to TS types) in (web/experiments/tests)[https://github.com/guardian/dotcom-rendering/tree/master/src/web/experiments/tests]
+4. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/tree/master/src/web/experiments/tests)
 5. Add it to the test array in [src/web/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/master/src/web/experiments/ab-tests.ts)
 6. Use the [A/B test API](https://github.com/guardian/ab-testing#the-api)
 7. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-yourTest=yourVariant
