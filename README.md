@@ -6,20 +6,21 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+- [Dotcom Rendering](#dotcom-rendering)
+  - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+  - [Quick start](#quick-start)
+    - [Install Node.js](#install-nodejs)
+    - [Running instructions](#running-instructions)
+    - [Detailed Setup](#detailed-setup)
+    - [Technologies](#technologies)
+    - [Architecture Diagram](#architecture-diagram)
+    - [Concepts](#concepts)
+    - [Feedback](#feedback)
+  - [Code Quality](#code-quality)
+  - [IDE setup](#ide-setup)
+    - [Extensions](#extensions)
+    - [Auto fix on save](#auto-fix-on-save)
+  - [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -42,7 +43,8 @@ in the `<body>` tag:
 
 ```html
 <body>
-<div id="react-root"></div>
+    <div id="react-root"></div>
+</body>
 ```
 
 ## Quick start
@@ -85,6 +87,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />       | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />           | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />            | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />     | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                     |
 
 ### Architecture Diagram
 
