@@ -10,8 +10,8 @@ const initConsent = async () => {
     const pubData: { browserId?: string } | undefined = browserId
         ? { browserId }
         : undefined;
-    cmp.init({ isInUsa, pubData });
     addPrivacySettingsLink();
+    cmp.init({ isInUsa, pubData });
 };
 
 const switches =
