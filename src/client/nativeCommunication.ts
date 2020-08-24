@@ -3,8 +3,8 @@ import { VideoSlot } from "@guardian/bridget/VideoSlot";
 import { Image } from "@guardian/bridget/Image";
 import { Rect, IRect } from "@guardian/bridget/Rect";
 import { commercialClient, galleryClient, userClient, acquisitionsClient, videoClient } from "../native/nativeApi";
-import { memoise } from "../lib";
-import { logger } from "../logger";
+import { memoise, isObject, errorToString } from 'lib';
+import { logger } from 'logger';
 
 type Slot = AdSlot | VideoSlot;
 
@@ -36,14 +36,21 @@ function getRect(slotPosition: DOMRect): Rect {
 
 const getTargetingParams: () => Map<string, string> = memoise(() => {
     const content = document.getElementById('targeting-params')?.innerHTML ?? '{}';
-    const parsed = JSON.parse(content);
-    const map: Map<string, string> = new Map();
+    const parsed: unknown = JSON.parse(content);
+    const map = new Map<string, string>();
+
+    if (!isObject(parsed)) {
+        return map;
+    }
+
     for (const key in parsed) {
-        if (Object.prototype.hasOwnProperty.call(parsed.hasOwnProperty, key) &&
-            typeof parsed[key] === 'string') {
-            map.set(key, parsed[key]);
+        const value = parsed[key];
+
+        if (typeof value === 'string') {
+            map.set(key, value);
         }
     }
+
     return map;
 });
 
@@ -67,12 +74,12 @@ function getAdSlots(): AdSlot[] {
 function insertAds(): void {
     const adSlots = getAdSlots();
     if (adSlots.length > 0) {
-        commercialClient.insertAdverts(adSlots);
+        void commercialClient.insertAdverts(adSlots);
     }
 }
 
 function ads(): void {
-    userClient.isPremium().then(premiumUser => {
+    void userClient.isPremium().then(premiumUser => {
         if (!premiumUser) {
             Array.from(document.querySelectorAll('.ad-placeholder'))
                 .forEach(placeholder => placeholder.classList.remove('hidden'))
@@ -80,7 +87,7 @@ function ads(): void {
             Array.from(document.querySelectorAll('.ad-labels, .upgrade-banner button'))
                 .forEach(adLabel => {
                     adLabel.addEventListener('click', () => {
-                        acquisitionsClient.launchFrictionScreen();
+                        void acquisitionsClient.launchFrictionScreen();
                     })
                 })
         }
@@ -114,7 +121,7 @@ function launchSlideshow(src: string | null): void {
     });
     const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);
     if (imagesWithCaptions.length && clickedImageIndex >= 0) {
-        galleryClient.launchSlideshow(imagesWithCaptions, clickedImageIndex, title);
+        void galleryClient.launchSlideshow(imagesWithCaptions, clickedImageIndex, title);
     }
 }
 
@@ -154,7 +161,7 @@ function getVideoSlots(): VideoSlot[] {
 function videos(): void {
     const videoSlots = getVideoSlots();
     if (videoSlots.length > 0) {
-        videoClient.insertVideos(videoSlots);
+        void videoClient.insertVideos(videoSlots);
     }
 }
 
@@ -174,12 +181,12 @@ function reportNativeElementPositionChanges(): void {
 
         if (positionChanged(currentAdSlots, adSlots)) {
             adSlots = currentAdSlots;
-            commercialClient.updateAdverts(currentAdSlots);
+            void commercialClient.updateAdverts(currentAdSlots);
         }
 
         if (positionChanged(currentVideoSlots, videoSlots)) {
             videoSlots = currentVideoSlots;
-            videoClient.updateVideos(currentVideoSlots);
+            void videoClient.updateVideos(currentVideoSlots);
         }
     };
 
@@ -194,12 +201,12 @@ function reportNativeElementPositionChanges(): void {
     observer.observe(targetNode, config);
 
     try {
-        document.fonts.ready.then(() => {
-            commercialClient.updateAdverts(getAdSlots());
-            videoClient.updateVideos(getVideoSlots());
+        void document.fonts.ready.then(() => {
+            void commercialClient.updateAdverts(getAdSlots());
+            void videoClient.updateVideos(getVideoSlots());
         });
     } catch (e) {
-        logger.error(`font loading API not supported: ${e}`)
+        logger.error(`font loading API not supported: ${errorToString(e, 'unknown reason')}`);
     }
 }
 

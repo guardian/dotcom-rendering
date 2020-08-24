@@ -35,7 +35,8 @@ import { parseDate, Param } from 'server/paramParser';
 import { Context } from 'types/parserContext';
 import { toArray, pipe2 } from 'lib';
 import { Option, map, withDefault } from '@guardian/types/option';
-
+import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
+import { parseRelatedContent } from 'relatedContent';
 
 // ----- Types ----- //
 
@@ -52,6 +53,7 @@ const defaultId =
     'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
 const docParser = JSDOM.fragment.bind(null);
+type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 
 // ----- Functions ----- //
@@ -63,8 +65,7 @@ function getPrefetchHeader(resources: string[]): string {
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
     fetch(capiEndpoint(articleId, key));
 
-const parseCapiResponse = (articleId: string) =>
-    async (capiResponse: Response): Promise<Result<number, Content>> => {
+const parseCapiResponse = (articleId: string) => async (capiResponse: Response): CapiReturn => {
     const buffer = await capiResponse.buffer();
         
     switch (capiResponse.status) {
@@ -76,7 +77,13 @@ const parseCapiResponse = (articleId: string) =>
                 return err(500);
             }
 
-            return ok(response.content);
+            if (response.relatedContent === undefined) {
+                logger.error(`Unable to fetch related content for ${articleId}`);
+                return err(500);
+            }
+
+            const relatedContent = parseRelatedContent(response.relatedContent);
+            return ok([response.content, relatedContent]);
         }
 
         case 404:
@@ -93,14 +100,21 @@ const parseCapiResponse = (articleId: string) =>
     }
 }
 
-const askCapiFor = (articleId: string): Promise<Result<number, Content>> =>
-    getConfigValue<string>('capi.key')
-        .then(capiRequest(articleId))
-        .then(parseCapiResponse(articleId));
+const askCapiFor = (articleId: string): CapiReturn =>
+    getConfigValue('capi.key')
+        .then(key => {
+            if (key === undefined) {
+                logger.error('Could not get CAPI key');
+
+                return err(500);
+            }
+
+            return capiRequest(articleId)(key)
+                .then(parseCapiResponse(articleId));
+        });
 
 function resourceList(script: Option<string>): string[] {
     const emptyList: string[] = [];
-
     return pipe2(script, map(toArray), withDefault(emptyList));
 }
 
@@ -111,7 +125,11 @@ async function serveArticlePost(
 ): Promise<void> {
     try {
         const renderingRequest = await mapiDecoder(body);
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
 
         const { html, clientScript } = render(imageSalt, renderingRequest, getAssetLocation);
         res.set('Link', getPrefetchHeader(resourceList(clientScript)));
@@ -127,19 +145,25 @@ async function serveArticlePost(
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
+
         const capiContent = await askCapiFor(articleId);
 
         either(
             (errorStatus: number) => { res.sendStatus(errorStatus) },
-            (content: Content) => {
+            ([content, relatedContent]: [Content, RelatedContent]) => {
                 const mockedRenderingRequest: RenderingRequest = {
                     content,
                     targetingParams: {
                         "co": "Jane Smith",
                         "k": "potato,tomato,avocado"
                     },
-                    commentCount: 30
+                    commentCount: 30,
+                    relatedContent
                 };
                 const { html, clientScript } = render(
                     imageSalt,
@@ -173,11 +197,18 @@ const recentLiveBlocks = (content: Content, context: Context): LiveUpdates => ({
 async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params.articleId || defaultId;
-        const imageSalt = await getConfigValue<string>('apis.img.salt');
+        const imageSalt = await getConfigValue('apis.img.salt');
+
+        if (imageSalt === undefined) {
+            throw new Error('Could not get image salt');
+        }
+
         const since = parseDate(req.query.since);
 
         if (since.kind === Param.Invalid) {
-            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand this timestamp: ${since}`);
+            const timestamp = typeof req.query.since === 'string' ? `: ${req.query.since}` : '';
+            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand the timestamp${timestamp}`);
+
             return res.sendStatus(400).end();
         }
 
@@ -185,7 +216,7 @@ async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
 
         either(
             (errorStatus: number) => { res.sendStatus(errorStatus) },
-            (content: Content) => {
+            ([content, relatedContent]: [Content, RelatedContent]) => {
                 const context = { salt: imageSalt, docParser };
 
                 if (content.type !== ContentType.LIVEBLOG) {

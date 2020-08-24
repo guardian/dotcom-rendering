@@ -142,7 +142,6 @@ function getDisplay(content: Content): Display {
 
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
-
     return {
         pillar: pillarFromString(content?.pillarId),
         display: getDisplay(content),
@@ -185,6 +184,12 @@ const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
 
 const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === tagId);
+
+const isAudio = hasTag('type/audio');
+
+const isVideo = hasTag('type/video');
+
+const isGallery = hasTag('type/gallery');
 
 const isMedia =
     hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
@@ -328,4 +333,10 @@ export {
     fromCapi,
     fromCapiLiveBlog,
     getFormat,
+    isAdvertisementFeature,
+    isLive,
+    isComment,
+    isAudio,
+    isVideo,
+    isGallery
 };

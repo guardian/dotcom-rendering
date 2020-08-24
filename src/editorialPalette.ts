@@ -20,15 +20,15 @@ type Colour = string;
 interface Palette {
     text: {
         headlinePrimary: Colour;
-        headlineInverse: Colour;
+        headlinePrimaryInverse: Colour;
     };
     background: {
         headlinePrimary: Colour;
-        headlineInverse: Colour;
+        headlinePrimaryInverse: Colour;
     };
     border: {
         primary: Colour;
-        inverse: Colour;
+        primaryInverse: Colour;
     };
 }
 
@@ -59,7 +59,7 @@ const textHeadlinePrimary = (format: Format): Colour => {
     return coreText.primary;
 }
 
-const textHeadlineInverse = (_: Format): Colour =>
+const textHeadlinePrimaryInverse = (_: Format): Colour =>
     neutral[86];
 
 const backgroundHeadlinePrimary = (format: Format): Colour => {
@@ -74,7 +74,7 @@ const backgroundHeadlinePrimary = (format: Format): Colour => {
     return coreBackground.primary;
 }
 
-const backgroundHeadlineInverse = (_: Format): Colour =>
+const backgroundHeadlinePrimaryInverse = (_: Format): Colour =>
     coreBackground.inverse;
 
 const borderPrimary = (format: Format): Colour => {
@@ -93,39 +93,39 @@ const borderPrimary = (format: Format): Colour => {
     }
 }
 
-const borderInverse = borderPrimary;
+const borderPrimaryInverse = borderPrimary;
 
 
 // ----- API ----- //
 
 const text = {
     headlinePrimary: textHeadlinePrimary,
-    headlineInverse: textHeadlineInverse,
+    headlinePrimaryInverse: textHeadlinePrimaryInverse,
 };
 
 const background = {
     headlinePrimary: backgroundHeadlinePrimary,
-    headlineInverse: backgroundHeadlineInverse,
+    headlinePrimaryInverse: backgroundHeadlinePrimaryInverse,
 };
 
 const border = {
     primary: borderPrimary,
-    inverse: borderInverse,
+    primaryInverse: borderPrimaryInverse,
 };
 
 const palette = (format: Format): Palette =>
     ({
         text: {
             headlinePrimary: text.headlinePrimary(format),
-            headlineInverse: text.headlineInverse(format),
+            headlinePrimaryInverse: text.headlinePrimaryInverse(format),
         },
         background: {
             headlinePrimary: background.headlinePrimary(format),
-            headlineInverse: background.headlineInverse(format),
+            headlinePrimaryInverse: background.headlinePrimaryInverse(format),
         },
         border: {
             primary: border.primary(format),
-            inverse: border.inverse(format),
+            primaryInverse: border.primaryInverse(format),
         },
     });
 
