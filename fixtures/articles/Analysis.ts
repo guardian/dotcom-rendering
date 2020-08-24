@@ -2743,7 +2743,6 @@ export const Analysis: CAPIType = {
                     id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
                     title: 'What are the main political parties in Ireland?',
                     credit: '',
-                    pillar: 'news',
                 },
                 {
                     _type:
@@ -2815,6 +2814,8 @@ export const Analysis: CAPIType = {
             lastUpdatedDisplay: '13:30 GMT',
             firstPublished: 1581333562000,
             firstPublishedDisplay: '11:19 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

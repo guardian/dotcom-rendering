@@ -2813,6 +2813,8 @@ export const GuardianView: CAPIType = {
             lastUpdatedDisplay: '19:19 GMT',
             firstPublished: 1581012008000,
             firstPublishedDisplay: '18:00 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: { byline: 'Editorial' },

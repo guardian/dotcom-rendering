@@ -2594,6 +2594,8 @@ export const richLink: CAPIType = {
             lastUpdatedDisplay: '14:28 BST',
             firstPublished: 1535717845000,
             firstPublishedDisplay: '13:17 BST',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {
