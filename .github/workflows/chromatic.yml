@@ -2,15 +2,13 @@ name: "Chromatic"
 
 on:
   push:
-    paths:
-    - 'src/*'
-    - '*.json'
-    - '!api-models/'
-    - '!project/'
-    - '!*.sbt'
-    - '!*.md'
-    - '!*.yaml'
-    - '!.gitignore'
+    paths-ignore:
+    - 'api-models/'
+    - 'project/'
+    - '*.sbt'
+    - '*.md'
+    - '*.yml'
+    - '.gitignore'
 
 jobs:
   test:
