@@ -14,7 +14,7 @@ import { Design } from '@guardian/types/Format';
 
 const starStyles = css`
     ${icons}
-    background-color: pink;
+    background-color: ${brandAltBackground.primary};
     font-size: ${remSpace[5]};
     line-height: 1;
     display: inline-block;
