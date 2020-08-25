@@ -42,7 +42,8 @@ in the `<body>` tag:
 
 ```html
 <body>
-<div id="react-root"></div>
+    <div id="react-root"></div>
+</body>
 ```
 
 ## Quick start
@@ -85,6 +86,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />       | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />           | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />            | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />     | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                     |
 
 ### Architecture Diagram
 
