@@ -8,8 +8,12 @@ export const htmlTemplate = ({
     title = 'The Guardian',
     description,
     linkedData,
-    priorityScriptTags,
-    lowPriorityScriptTags,
+    priorityScripts,
+    priorityLegacyScripts,
+    priorityNonLegacyScripts,
+    lowPriorityScripts,
+    lowPriorityLegacyScripts,
+    lowPriorityNonLegacyScripts,
     css,
     html,
     windowGuardian,
@@ -22,8 +26,12 @@ export const htmlTemplate = ({
     title?: string;
     description: string;
     linkedData: object;
-    priorityScriptTags: string[];
-    lowPriorityScriptTags: string[];
+    priorityScripts: string[];
+    priorityLegacyScripts: string[];
+    priorityNonLegacyScripts: string[];
+    lowPriorityScripts: string[];
+    lowPriorityLegacyScripts: string[];
+    lowPriorityNonLegacyScripts: string[];
     css: string;
     html: string;
     fontFiles?: string[];
@@ -37,6 +45,36 @@ export const htmlTemplate = ({
         process.env.NODE_ENV === 'production'
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
+
+    // ********************************
+    // ****** high priority script ****
+    // ********************************
+    const priorityScriptTags = priorityScripts.map(
+        (src) => `<script defer src="${src}"></script>`,
+    );
+    // transpiled with preset-env
+    const priorityLegacyScriptTags = priorityLegacyScripts.map(
+        (src) => `<script defer nomodule src="${src}"></script>`,
+    );
+    // transpiled with preset-modules
+    const priorityNonLegacyScriptTags = priorityNonLegacyScripts.map(
+        (src) => `<script defer type="module" src="${src}"></script>`,
+    );
+
+    // ********************************
+    // **** low priority scripts ******
+    // ********************************
+    const lowPriorityScriptTags = lowPriorityScripts.map(
+        (src) => `<script async src="${src}"></script>`,
+    );
+    // transpiled with preset-env
+    const lowPriorityLegacyScriptTags = lowPriorityLegacyScripts.map(
+        (src) => `<script async nomodule src="${src}"></script>`,
+    );
+    // transpiled with preset-modules
+    const lowPriorityNonLegacyScriptTags = lowPriorityNonLegacyScripts.map(
+        (src) => `<script async type="module" src="${src}"></script>`,
+    );
 
     const fontPreloadTags = fontFiles.map(
         (fontFile) =>
@@ -202,7 +240,11 @@ export const htmlTemplate = ({
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
                 </noscript>
-                ${[...priorityScriptTags].join('\n')}
+                ${[
+                    ...priorityScriptTags,
+                    ...priorityLegacyScriptTags,
+                    ...priorityNonLegacyScriptTags,
+                ].join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
             </head>
@@ -210,7 +252,11 @@ export const htmlTemplate = ({
             <body>
                 <div id="react-root"></div>
                 ${html}
-                ${[...lowPriorityScriptTags].join('\n')}
+                ${[
+                    ...lowPriorityScriptTags,
+                    ...lowPriorityLegacyScriptTags,
+                    ...lowPriorityNonLegacyScriptTags,
+                ].join('\n')}
             </body>
         </html>`;
 };
