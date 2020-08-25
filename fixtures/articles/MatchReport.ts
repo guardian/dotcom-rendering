@@ -2579,7 +2579,6 @@ export const MatchReport: CAPIType = {
                     label: 'Quick Guide',
                     title: 'Six Nations fixtures and results',
                     credit: 'Photograph: Ben Evans/Rex Features',
-                    pillar: 'news',
                 },
                 {
                     _type:
@@ -2612,6 +2611,8 @@ export const MatchReport: CAPIType = {
             lastUpdatedDisplay: '21:00 GMT',
             firstPublished: 1581282014000,
             firstPublishedDisplay: '21:00 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

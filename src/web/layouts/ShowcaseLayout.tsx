@@ -428,8 +428,9 @@ export const ShowcaseLayout = ({
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
                                 tags={CAPI.tags}
-                                webPublicationDateDisplay={
-                                    CAPI.webPublicationDateDisplay
+                                primaryDateline={CAPI.webPublicationDateDisplay}
+                                secondaryDateline={
+                                    CAPI.blocks[0].secondaryDateLine
                                 }
                             />
                         </div>

@@ -153,3 +153,21 @@ export const BadMarkup = () => {
     );
 };
 BadMarkup.story = { name: 'with a bad markup' };
+
+export const SubSupscript = () => {
+    return (
+        <div className={containerStyles}>
+            <TextBlockComponent
+                html={
+                    '<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>'
+                }
+                pillar="news"
+                forceDropCap={false}
+                designType="Article"
+                display={Display.Standard}
+                isFirstParagraph={false}
+            />
+        </div>
+    );
+};
+SubSupscript.story = { name: 'with a sub and sup' };

@@ -19,7 +19,8 @@ type Props = {
     webTitle: string;
     author: AuthorType;
     tags: TagType[];
-    webPublicationDateDisplay: string;
+    primaryDateline: string;
+    secondaryDateline: string;
     branding?: Branding;
 };
 
@@ -29,8 +30,8 @@ const meta = css`
     }
 
     ${until.phablet} {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     padding-top: 2px;
 `;
@@ -66,10 +67,10 @@ const metaNumbers = css`
     }
 
     ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 `;
 
@@ -132,12 +133,12 @@ const metaContainer = ({
 };
 
 const getBylineImageUrl = (tags: TagType[]) => {
-    const contributorTag = tags.find((tag) => tag.type === 'Contributor');
+    const contributorTag = tags.find(tag => tag.type === 'Contributor');
     return contributorTag && contributorTag.bylineImageUrl;
 };
 
 const getAuthorName = (tags: TagType[]) => {
-    const contributorTag = tags.find((tag) => tag.type === 'Contributor');
+    const contributorTag = tags.find(tag => tag.type === 'Contributor');
     return contributorTag && contributorTag.title;
 };
 
@@ -261,14 +262,15 @@ export const ArticleMeta = ({
     webTitle,
     author,
     tags,
-    webPublicationDateDisplay,
+    primaryDateline,
+    secondaryDateline,
 }: Props) => {
     const sharingUrls = getSharingUrls(pageId, webTitle);
     const bylineImageUrl = getBylineImageUrl(tags);
     const authorName = getAuthorName(tags);
 
     const onlyOneContributor: boolean =
-        tags.filter((tag) => tag.type === 'Contributor').length === 1;
+        tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
@@ -297,8 +299,8 @@ export const ArticleMeta = ({
                                 />
                             )}
                             <Dateline
-                                dateDisplay={webPublicationDateDisplay}
-                                descriptionText="Published on"
+                                primaryDateline={primaryDateline}
+                                secondaryDateline={secondaryDateline}
                             />
                         </div>
                     </>

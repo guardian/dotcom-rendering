@@ -366,6 +366,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={qandaAtom.html}
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
+                        pillar={pillar}
                         likeHandler={componentEventHandler(
                             'QANDA_ATOM',
                             qandaAtom.id,
@@ -376,7 +377,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             qandaAtom.id,
                             'DISLIKE',
                         )}
-                        expandHandler={componentEventHandler(
+                        expandCallback={componentEventHandler(
                             'QANDA_ATOM',
                             qandaAtom.id,
                             'EXPAND',

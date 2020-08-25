@@ -2173,6 +2173,8 @@ export const standardReviewCAPI: CAPIType = {
             lastUpdatedDisplay: '11:09 GMT',
             firstPublished: 1580204719000,
             firstPublishedDisplay: '09:45 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

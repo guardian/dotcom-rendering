@@ -1,0 +1,28 @@
+name: PR deployment
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+jobs:
+    server:
+        name: server
+        runs-on: ubuntu-latest
+        steps:
+            - name: Kill any other PR deployments on this branch
+              uses: rokroskar/workflow-run-cleanup-action@master
+              env:
+                GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            - name: Checkout code
+              uses: actions/checkout@v1
+            - name: Use Node.js 10.15.3
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.15.3
+            - run: make build
+            - name: Boot server and run ngrok
+              run: |
+                  npm install -g ngrok
+                  NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js &
+                  timeout 5h ngrok http 9000 -log=stdout | \
+                    grep --line-buffered -o 'https://.*' | \
+                    xargs -L1 -I{} -t \
+                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }} -d "{\"state\":\"success\", \"target_url\":\"{}\", \"context\":\"PR deployment\", \"description\":\"This PR is now live until `date -d "+5 hour" "+%a %H:%M"`. Click details to access it ->\"}"
