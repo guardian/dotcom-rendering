@@ -358,7 +358,7 @@ export const MatchReport: CAPIType = {
     trailText:
         'France moved top of the Six Nations standings as they claimed a bonus point in an otherwise unimpressive 35-22 defeat of a weak Italy on Sunday',
     matchUrl:
-        'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2020/08/17/6136/38299.json?dcr=true&page=football%2F2020%2Faug%2F17%2Finter-shakhtar-donetsk-europa-league-semi-final-report-lukaku',
+        'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2020/08/14/26300/26247.json?dcr=true&page=football%2F2020%2Faug%2F14%2Fthomas-muller-leads-rout-as-bayern-munich-demolish-barcelona-8-2',
     subMetaKeywordLinks: [
         {
             url: '/sport/france-rugby-union-team',
