@@ -228,53 +228,52 @@ const tabsContainer = css`
     display: flex;
     position: relative;
     border-bottom: ${thinGreySolid};
+`;
 
-    li {
-        flex-basis: 50%;
-        height: 40px;
-        border-top: 3px solid ${border.secondary};
+const tab = css`
+    flex-basis: 50%;
+    height: 40px;
+    border-top: 3px solid ${border.secondary};
 
-        :nth-child(1) {
-            border-top: 3px solid ${palette.sport.main};
-        }
-        :nth-child(2) {
-            border-left: ${thinGreySolid};
-        }
-
-        span {
-            ${headline.xxxsmall()};
-            background: transparent;
-            padding: 6px 8px 0;
-            text-align: left;
-            font-weight: 600;
-            min-height: 36px;
-            display: block;
-            width: 100%;
-        }
-        a span:hover {
-            background-color: ${palette.neutral[93]};
-        }
-
-        a span {
-            color: ${palette.sport.main};
-        }
-
-        a:link {
-            text-decoration: none;
-        }
+    :nth-child(1) {
+        border-top: 3px solid ${palette.sport[300]};
     }
+`;
+
+const tabLink = css`
+    color: ${palette.sport[300]};
+    display: block;
+    text-decoration: none;
+    &:hover {
+        background-color: ${palette.neutral[93]};
+    }
+`;
+
+const tabLabel = css`
+    ${headline.xxxsmall()};
+    background: transparent;
+    padding: 6px 8px 0;
+    text-align: left;
+    font-weight: 600;
+    min-height: 36px;
+    display: block;
+    width: 100%;
 `;
 
 const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
     <div>
         <ul className={tabsContainer}>
-            <li>
-                <span>Report</span>
+            <li className={tab}>
+                <span className={tabLabel}>Report</span>
             </li>
             <GreyBorder />
-            <li>
-                <a href={minByMinUrl} data-link-name="Min-by-min">
-                    <span>Min-by-min</span>
+            <li className={tab}>
+                <a
+                    href={minByMinUrl}
+                    data-link-name="Min-by-min"
+                    className={tabLink}
+                >
+                    <span className={tabLabel}>Min-by-min</span>
                 </a>
             </li>
         </ul>
