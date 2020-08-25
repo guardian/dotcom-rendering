@@ -1,5 +1,4 @@
 import { capiEndpoint } from './capi';
-import { date } from '@storybook/addon-knobs';
 
 describe('server logic runs as expected', () => {
     it('generates capi endpoint url', () => {
