@@ -105,8 +105,6 @@ export const document = ({ data }: Props) => {
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
-    const description = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-
     const { openGraphData } = CAPI;
     const { twitterData } = CAPI;
     const keywords =
@@ -130,7 +128,7 @@ export const document = ({ data }: Props) => {
         html,
         fontFiles,
         title,
-        description,
+        description: CAPI.trailText,
         windowGuardian,
         ampLink,
         openGraphData,
