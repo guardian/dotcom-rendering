@@ -69,7 +69,7 @@
     "@guardian/node-riffraff-artifact": "^0.1.9",
     "@guardian/src-radio": "^2.0.0",
     "@guardian/src-text-area": "^2.0.0",
-    "@guardian/src-text-input": "^2.0.0",
+    "@guardian/src-text-input": "^2.2.0",
     "@guardian/src-brand": "^2.1.0",
     "@guardian/src-button": "^2.1.0",
     "@guardian/src-foundations": "^2.2.0",
