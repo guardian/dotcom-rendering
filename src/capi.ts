@@ -128,7 +128,8 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'displayHint',
         'starRating',
         'commentable',
-        'liveBloggingNow'
+        'liveBloggingNow',
+        'lastModified'
     ];
 
     const params = new URLSearchParams({
