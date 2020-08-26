@@ -295,7 +295,11 @@ export const App = ({ CAPI, NAV }: Props) => {
         }
     }, [CAPI.shouldHideReaderRevenue]);
 
+    // kick off the CMP...
     useEffect(() => {
+        // the UI is injected automatically into the page,
+        // and is not a react component, so it's
+        // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
             const browserId: string | undefined =
                 getCookie('bwid') || undefined;
@@ -303,6 +307,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                 ? { browserId }
                 : undefined;
             cmp.init({ isInUsa: countryCode === 'US', pubData });
+
+            // this manually updates the footer DOM because the footer is
+            // not hydrated
             injectPrivacySettingsLink();
         }
     }, [countryCode, CAPI]);
