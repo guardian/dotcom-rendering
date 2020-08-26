@@ -208,9 +208,6 @@ const iconStyles = (format: Format): SerializedStyles => {
 }
 
 const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
-    // console.log(itemType)
-    // console.log(format);
-    
     switch (itemType){
         case RelatedItemType.GALLERY:
             return <span css={iconStyles(format)}>< SvgCamera /></span>;

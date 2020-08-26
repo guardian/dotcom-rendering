@@ -97,7 +97,7 @@ const Metadata = ({ item }: Props): JSX.Element => {
                         />
                         <div className="author">
                             { byline }
-                            <Dateline date={item.publishDate} />
+                            <Dateline date={item.publishDate} pillar={item.pillar}/>
                             <div className="follow">Get alerts on this story</div>
                         </div>
                     </div>
