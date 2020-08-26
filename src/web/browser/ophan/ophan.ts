@@ -84,7 +84,7 @@ export type TestMeta = {
     products?: OphanProduct[];
 };
 
-const record = (event: {}): void => {
+export const record = (event: {}): void => {
     if (
         window.guardian &&
         window.guardian.ophan &&
