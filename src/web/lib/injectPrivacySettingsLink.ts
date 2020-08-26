@@ -1,7 +1,7 @@
 import { cmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
-export const addPrivacySettingsLink = (): void => {
+export const injectPrivacySettingsLink = (): void => {
     const privacyLink = document.querySelector('a[data-link-name=privacy]');
 
     if (privacyLink) {

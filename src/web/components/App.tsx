@@ -42,6 +42,9 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+
+import { cmp } from '@guardian/consent-management-platform';
+import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -281,6 +284,18 @@ export const App = ({ CAPI, NAV }: Props) => {
             };
         }
     }, [CAPI.shouldHideReaderRevenue]);
+
+    useEffect(() => {
+        if (CAPI.config.switches.consentManagement && countryCode) {
+            const browserId: string | undefined =
+                getCookie('bwid') || undefined;
+            const pubData: { browserId?: string } | undefined = browserId
+                ? { browserId }
+                : undefined;
+            cmp.init({ isInUsa: countryCode === 'US', pubData });
+            injectPrivacySettingsLink();
+        }
+    }, [countryCode, CAPI]);
 
     const pillar = decidePillar(CAPI);
 

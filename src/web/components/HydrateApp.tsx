@@ -6,7 +6,6 @@ import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
-import { Consent } from './Consent';
 
 type Props = {
     CAPI: CAPIBrowserType;
@@ -46,7 +45,6 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
         >
             <App CAPI={CAPI} NAV={NAV} />
-            <Consent CAPI={CAPI} />
         </ABProvider>,
 
         document.getElementById('react-root'),
