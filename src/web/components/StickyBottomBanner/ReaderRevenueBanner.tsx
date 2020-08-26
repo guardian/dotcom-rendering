@@ -104,6 +104,11 @@ export const canShow = ({
 }: CanShowProps): Promise<CanShowResult> => {
     if (!remoteBannerConfig) return Promise.resolve({ result: false });
 
+    if (shouldHideReaderRevenue || isPaidContent) {
+        // We never serve Reader Revenue banners in this case
+        return Promise.resolve({ result: false });
+    }
+
     return asyncCountryCode
         .then((countryCode) =>
             buildPayload({
