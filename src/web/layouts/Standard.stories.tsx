@@ -26,7 +26,7 @@ mockRESTCalls();
 export default {
     title: 'Layouts/Standard',
     parameters: {
-        chromatic: { viewports: [1300], delay: 800, diffThreshold: 0.2 },
+        chromatic: { viewports: [1300], delay: 2000, diffThreshold: 0.2 },
     },
 };
 
