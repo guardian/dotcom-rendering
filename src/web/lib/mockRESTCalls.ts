@@ -7,6 +7,7 @@ import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 import { discussion } from '@root/fixtures/discussion';
 import { storypackage } from '@root/fixtures/storypackage';
+import { matchreport } from '@root/fixtures/matchreport';
 
 export const mockRESTCalls = () =>
     fetchMock
@@ -89,6 +90,15 @@ export const mockRESTCalls = () =>
             {
                 status: 200,
                 body: { country: 'GB' },
+            },
+            { overwriteRoutes: false },
+        )
+        // Match report data
+        .get(
+            /.*api.nextgen.guardianapps.co.uk\/football\/api.*/,
+            {
+                status: 200,
+                body: matchreport,
             },
             { overwriteRoutes: false },
         );

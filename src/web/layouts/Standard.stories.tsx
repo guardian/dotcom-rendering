@@ -152,4 +152,10 @@ export const MatchReportStory = () => {
     const ServerCAPI = convertToStandard(MatchReport);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-MatchReportStory.story = { name: 'MatchReport' };
+MatchReportStory.story = {
+    name: 'MatchReport',
+    parameters: {
+        viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1330] },
+    },
+};
