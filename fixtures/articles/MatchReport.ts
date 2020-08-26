@@ -357,6 +357,8 @@ export const MatchReport: CAPIType = {
     publication: 'The Guardian',
     trailText:
         'France moved top of the Six Nations standings as they claimed a bonus point in an otherwise unimpressive 35-22 defeat of a weak Italy on Sunday',
+    matchUrl:
+        'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2020/08/14/26300/26247.json?dcr=true&page=football%2F2020%2Faug%2F14%2Fthomas-muller-leads-rout-as-bayern-munich-demolish-barcelona-8-2',
     subMetaKeywordLinks: [
         {
             url: '/sport/france-rugby-union-team',

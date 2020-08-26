@@ -173,11 +173,17 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 const StandardGrid = ({
     children,
     designType,
+    CAPI,
 }: {
     children: JSX.Element | JSX.Element[];
     designType: DesignType;
+    CAPI: CAPIType;
 }) => (
-    <div className={layoutGrid(designType === 'MatchReport')}>{children}</div>
+    <div
+        className={layoutGrid(designType === 'MatchReport' && !!CAPI.matchUrl)}
+    >
+        {children}
+    </div>
 );
 
 const maxWidth = css`
@@ -347,7 +353,7 @@ export const StandardLayout = ({
             </div>
 
             <Section showTopBorder={false}>
-                <StandardGrid designType={designType}>
+                <StandardGrid designType={designType} CAPI={CAPI}>
                     <GridItem area="title">
                         <ArticleTitle
                             display={display}
@@ -365,7 +371,7 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="preFurniture">
                         <div className={maxWidth}>
-                            {designType === 'MatchReport' && (
+                            {designType === 'MatchReport' && CAPI.matchUrl && (
                                 <Placeholder rootId="match-nav" height={230} />
                             )}
                         </div>
