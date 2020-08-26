@@ -8,11 +8,11 @@ import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
     sendOphanComponentEvent,
-    TestMeta,
     submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
+import { CanShowResult } from './bannerPicker';
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -26,9 +26,8 @@ const checkForErrors = (response: any) => {
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
-type Props = {
-    isSignedIn?: boolean;
-    countryCode?: string;
+type BaseProps = {
+    isSignedIn: boolean;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
@@ -43,8 +42,17 @@ type Props = {
     switches: { [key: string]: boolean };
 };
 
+type BuildPayloadProps = BaseProps & {
+    countryCode: string;
+};
+
+type CanShowProps = BaseProps & {
+    asyncCountryCode: Promise<string>;
+    remoteBannerConfig: boolean;
+};
+
 // TODO specify return type (need to update client to provide this first)
-const buildPayload = (props: Props) => {
+const buildPayload = (props: BuildPayloadProps) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -67,9 +75,20 @@ const buildPayload = (props: Props) => {
     };
 };
 
-const MemoisedInner = ({
+// TODO replace this with an imported version from the client lib
+const getBanner = (meta: {}, url: string): Promise<Response> => {
+    const json = JSON.stringify(meta);
+    return fetch(url, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: json,
+    });
+};
+
+export const canShow = ({
+    remoteBannerConfig,
     isSignedIn,
-    countryCode,
+    asyncCountryCode,
     contentType,
     sectionName,
     shouldHideReaderRevenue,
@@ -82,10 +101,51 @@ const MemoisedInner = ({
     engagementBannerLastClosedAt,
     subscriptionBannerLastClosedAt,
     switches,
-}: Props) => {
+}: CanShowProps): Promise<CanShowResult> => {
+    if (!remoteBannerConfig) return Promise.resolve({ result: false });
+
+    return asyncCountryCode
+        .then((countryCode) =>
+            buildPayload({
+                isSignedIn,
+                countryCode,
+                contentType,
+                sectionName,
+                shouldHideReaderRevenue,
+                isMinuteArticle,
+                isPaidContent,
+                tags,
+                contributionsServiceUrl,
+                isSensitive,
+                alreadyVisitedCount,
+                engagementBannerLastClosedAt,
+                subscriptionBannerLastClosedAt,
+                switches,
+            }),
+        )
+        .then((bannerPayload) =>
+            getBanner(bannerPayload, `${contributionsServiceUrl}/banner`),
+        )
+        .then(checkForErrors)
+        .then((response) => response.json())
+        .then((json) => {
+            if (!json.data) {
+                return { result: false };
+            }
+
+            const { module, meta } = json.data;
+
+            return { result: true, meta: { module, meta } };
+        });
+};
+
+type Props = {
+    meta: any;
+    module: any;
+};
+
+export const ReaderRevenueBanner = ({ meta, module }: Props) => {
     const [Banner, setBanner] = useState<React.FC>();
-    const [bannerProps, setBannerProps] = useState<{}>();
-    const [bannerMeta, setBannerMeta] = useState<TestMeta>();
 
     const [hasBeenSeen, setNode] = useHasBeenSeen({
         threshold: 0,
@@ -93,22 +153,9 @@ const MemoisedInner = ({
     }) as HasBeenSeen;
 
     useEffect(() => {
-        const bannerPayload = buildPayload({
-            isSignedIn,
-            countryCode,
-            contentType,
-            sectionName,
-            shouldHideReaderRevenue,
-            isMinuteArticle,
-            isPaidContent,
-            tags,
-            contributionsServiceUrl,
-            isSensitive,
-            alreadyVisitedCount,
-            engagementBannerLastClosedAt,
-            subscriptionBannerLastClosedAt,
-            switches,
-        });
+        if (module === undefined || meta === undefined) {
+            return;
+        }
 
         window.guardian.automat = {
             react: React,
@@ -118,60 +165,35 @@ const MemoisedInner = ({
             emotion,
         };
 
-        // TODO replace this with an imported version from the client lib
-        const getBanner = (meta: {}, url: string): Promise<Response> => {
-            const json = JSON.stringify(meta);
-            return fetch(url, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: json,
-            });
-        };
-
-        getBanner(bannerPayload, `${contributionsServiceUrl}/banner`)
-            .then(checkForErrors)
-            .then((response) => response.json())
-            .then((json) => {
-                if (!json.data) {
-                    return;
-                }
-
-                const { module, meta } = json.data;
-
-                window
-                    .guardianPolyfilledImport(module.url)
-                    .then((bannerModule) => {
-                        setBannerProps({
-                            submitComponentEvent,
-                            ...module.props,
-                        });
-                        setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
-                        setBannerMeta(meta);
-                        sendOphanComponentEvent('INSERT', meta);
-                    })
-                    .catch((error) =>
-                        // eslint-disable-next-line no-console
-                        console.log(`banner - error is: ${error}`),
-                    );
-            });
+        window
+            .guardianPolyfilledImport(module.url)
+            .then((bannerModule) => {
+                setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
+                sendOphanComponentEvent('INSERT', meta);
+            })
+            .catch((error) =>
+                // eslint-disable-next-line no-console
+                console.log(`banner - error is: ${error}`),
+            );
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Should only run once
     useEffect(() => {
-        if (hasBeenSeen && bannerMeta) {
-            const { abTestName, componentType } = bannerMeta;
+        if (hasBeenSeen && meta) {
+            const { abTestName, componentType } = meta;
 
             logView(abTestName);
 
-            sendOphanComponentEvent('VIEW', bannerMeta);
+            sendOphanComponentEvent('VIEW', meta);
 
             // track banner view event in Google Analytics for subscriptions banner
             if (componentType === 'ACQUISITIONS_SUBSCRIPTIONS_BANNER') {
                 trackNonClickInteraction('subscription-banner : display');
             }
         }
-    }, [hasBeenSeen, bannerMeta]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hasBeenSeen]);
 
     if (Banner) {
         return (
@@ -182,53 +204,15 @@ const MemoisedInner = ({
                     'banner',
                 )}`}
             >
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                <Banner {...bannerProps} />
+                {/* eslint-disable react/jsx-props-no-spreading */}
+                <Banner
+                    {...module.props}
+                    submitComponentEvent={submitComponentEvent}
+                />
+                {/* eslint-enable react/jsx-props-no-spreading */}
             </div>
         );
     }
 
     return null;
-};
-
-export const ReaderRevenueBanner = ({
-    isSignedIn,
-    countryCode,
-    contentType,
-    sectionName,
-    shouldHideReaderRevenue,
-    isMinuteArticle,
-    isPaidContent,
-    isSensitive,
-    tags,
-    contributionsServiceUrl,
-    alreadyVisitedCount,
-    engagementBannerLastClosedAt,
-    subscriptionBannerLastClosedAt,
-    switches,
-}: Props) => {
-    if (isSignedIn === undefined || countryCode === undefined) {
-        return null;
-    }
-
-    // Memoised as we only ever want to call the Slots API once, for simplicity
-    // and performance reasons.
-    return (
-        <MemoisedInner
-            isSignedIn={isSignedIn}
-            countryCode={countryCode}
-            contentType={contentType}
-            sectionName={sectionName}
-            shouldHideReaderRevenue={shouldHideReaderRevenue}
-            isMinuteArticle={isMinuteArticle}
-            isPaidContent={isPaidContent}
-            isSensitive={isSensitive}
-            tags={tags}
-            contributionsServiceUrl={contributionsServiceUrl}
-            alreadyVisitedCount={alreadyVisitedCount}
-            engagementBannerLastClosedAt={engagementBannerLastClosedAt}
-            subscriptionBannerLastClosedAt={subscriptionBannerLastClosedAt}
-            switches={switches}
-        />
-    );
 };

@@ -137,6 +137,13 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
     const [countryCode, setCountryCode] = useState<string>();
+    // This is an async version of the countryCode state value defined above.
+    // This can be used where you've got logic which depends on countryCode but
+    // don't want to block on it becoming available, as you would with the
+    // non-async version (this is the case in the banner picker where some
+    // banners need countryCode but we don't want to block all banners from
+    // executing their canShow logic until countryCode is available):
+    const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
@@ -179,8 +186,11 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
-        const callFetch = async () =>
-            setCountryCode((await getCountryCode()) || '');
+        const callFetch = () => {
+            const countryCodePromise = getCountryCode();
+            setAsyncCountryCode(countryCodePromise);
+            countryCodePromise.then((cc) => setCountryCode(cc || ''));
+        };
         callFetch();
     }, []);
 
@@ -620,7 +630,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="bottom-banner">
                 <StickyBottomBanner
                     isSignedIn={isSignedIn}
-                    countryCode={countryCode}
+                    asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
                 />
             </Portal>
