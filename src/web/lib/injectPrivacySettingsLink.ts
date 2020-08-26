@@ -1,10 +1,15 @@
 import { cmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
+const newPrivacyLinkName = 'privacy-settings';
+
 export const injectPrivacySettingsLink = (): void => {
     const privacyLink = document.querySelector('a[data-link-name=privacy]');
 
-    if (privacyLink) {
+    if (
+        !document.querySelector(`a[data-link-name=${newPrivacyLinkName}]`) &&
+        privacyLink
+    ) {
         const privacyLinkListItem = privacyLink.parentElement;
 
         if (privacyLinkListItem) {
@@ -13,7 +18,7 @@ export const injectPrivacySettingsLink = (): void => {
 
                 newPrivacyLink.setAttribute(
                     'data-link-name',
-                    'privacy-settings',
+                    newPrivacyLinkName,
                 );
                 newPrivacyLink.setAttribute('href', '#');
                 newPrivacyLink.innerHTML = framework.ccpa
