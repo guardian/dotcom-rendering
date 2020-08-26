@@ -3,7 +3,7 @@
 import React, { FC, ReactElement } from 'react';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
-import { text, neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, withDefault, map } from '@guardian/types/option';
 import { darkModeCss as darkMode } from 'styles';
@@ -23,7 +23,7 @@ const darkStyles = darkMode`
 
 const styles = css`
     ${textSans.xsmall()}
-    color: ${text.supporting};
+    color: ${neutral[20]};
 
     ${darkStyles}
 `;
