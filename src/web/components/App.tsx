@@ -306,11 +306,8 @@ export const App = ({ CAPI, NAV }: Props) => {
             const pubData: { browserId?: string } | undefined = browserId
                 ? { browserId }
                 : undefined;
+            injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
             cmp.init({ isInUsa: countryCode === 'US', pubData });
-
-            // this manually updates the footer DOM because the footer is
-            // not hydrated
-            injectPrivacySettingsLink();
         }
     }, [countryCode, CAPI.config.switches]);
 
