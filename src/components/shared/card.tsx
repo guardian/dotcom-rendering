@@ -215,7 +215,7 @@ const commentIconStyle = (): SerializedStyles => {
         width: 2.0rem;
         height: 1.4375rem;
         display: inline-block;
-        fill: #E05E00;
+        fill: ${opinion[400]};;
         vertical-align: text-top;
         margin-top: -3px;
         margin-right: -2px;
