@@ -50,7 +50,7 @@
         "@guardian/src-svgs": "^1.5.0",
         "@guardian/src-text-area": "^1.5.0",
         "@guardian/src-text-input": "^1.5.0",
-        "@sentry/browser": "^5.19.0",
+        "@sentry/browser": "^5.21.4",
         "@types/ajv": "^1.0.0",
         "@types/lodash.debounce": "^4.0.6",
         "@types/lodash.escape": "^4.0.6",
