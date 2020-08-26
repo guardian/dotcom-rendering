@@ -14,6 +14,7 @@ import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from "@root/node_modules/@guardian/automat-client/dist/types";
 import { CanShowResult } from './bannerPicker';
+import { getForcedVariant } from "@root/src/web/lib/readerRevenueDevUtils";
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -131,9 +132,12 @@ export const canShow = ({
                 switches,
             }),
         )
-        .then((bannerPayload) =>
-            getBanner(bannerPayload, `${contributionsServiceUrl}/banner`),
-        )
+        .then((bannerPayload) => {
+            const forcedVariant = getForcedVariant('banner');
+            const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
+
+            return getBanner(bannerPayload, `${contributionsServiceUrl}/banner${queryString}`);
+        })
         .then(checkForErrors)
         .then((response) => response.json())
         .then((json) => {
