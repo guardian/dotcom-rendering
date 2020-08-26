@@ -312,7 +312,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             // not hydrated
             injectPrivacySettingsLink();
         }
-    }, [countryCode, CAPI]);
+    }, [countryCode, CAPI.config.switches]);
 
     const pillar = decidePillar(CAPI);
 
