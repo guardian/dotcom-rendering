@@ -301,13 +301,11 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and is not a react component, so it's
         // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
-            const browserId: string | undefined =
-                getCookie('bwid') || undefined;
-            const pubData: { browserId?: string } | undefined = browserId
-                ? { browserId }
-                : undefined;
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
-            cmp.init({ isInUsa: countryCode === 'US', pubData });
+            cmp.init({
+                isInUsa: countryCode === 'US',
+                pubData: { browserId: getCookie('bwid') || undefined },
+            });
         }
     }, [countryCode, CAPI.config.switches]);
 
