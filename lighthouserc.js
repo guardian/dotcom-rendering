@@ -5,6 +5,9 @@ module.exports = {
       startServerCommand: 'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js',
       numberOfRuns: '6',
       puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
+      settings: {
+        onlyCategories: "accessibility,best-practices,performance,seo",
+      }
     },
     upload: {
       target: 'temporary-public-storage',
