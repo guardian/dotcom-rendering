@@ -234,6 +234,11 @@ export const SlotBodyEnd = ({
         return null;
     }
 
+    if (shouldHideReaderRevenue || isPaidContent) {
+        // We never serve Reader Revenue epics in this case
+        return null;
+    }
+
     // Memoised as we only ever want to call the Slots API once, for simplicity
     // and performance reasons.
     return (
