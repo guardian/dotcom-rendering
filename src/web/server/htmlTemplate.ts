@@ -4,6 +4,7 @@ import { getStatic, CDN } from '@root/src/lib/assets';
 import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
 import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
+import { atomIframeResize } from '@root/src/lib/atomIframe';
 
 export const htmlTemplate = ({
     title = 'The Guardian',
@@ -100,11 +101,11 @@ export const htmlTemplate = ({
     };
 
     const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
-    
+
     // Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
     // See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
     const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
-    
+
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
     // Duplicated prefetch and preconnect tags from DCP:
@@ -169,9 +170,9 @@ export const htmlTemplate = ({
                 ${fontPreloadTags.join('\n')}
 
                 ${openGraphMetaTags}
-                
+
                 ${twitterSecAndPrivacyMetaTags}
-                
+
                 ${twitterMetaTags}
 
                 <script>
@@ -239,6 +240,7 @@ export const htmlTemplate = ({
                 </script>
 
                 <script>${prepareCmpString}</script>
+
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
