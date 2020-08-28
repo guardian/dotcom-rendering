@@ -631,7 +631,7 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <div id="bottom-banner" style={{position: 'sticky', bottom: 0, zIndex: 99999}}/>
             <MobileStickyContainer />
         </>
     );
