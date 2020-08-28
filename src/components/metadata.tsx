@@ -4,13 +4,13 @@ import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { Display, Design } from '@guardian/types/Format';
-
 import { Item } from 'item';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import CommentCount from 'components/commentCount';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
+
 
 
 // ----- Component ----- //
@@ -41,7 +41,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) =>
         <Avatar {...item} />
         <div css={css(textStyles, withBylineTextStyles)}>
             <Byline {...item} />
-            <Dateline date={item.publishDate} />
+            <Dateline date={item.publishDate} pillar={item.pillar} />
             <Follow {...item} />
         </div>
         <CommentCount count={item.commentCount} {...item} />
@@ -50,7 +50,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) =>
 const ShortMetadata: FC<Props> = ({ item }: Props) =>
     <div css={styles}>
         <div css={textStyles}>
-            <Dateline date={item.publishDate} />
+            <Dateline date={item.publishDate} pillar={item.pillar} />
             <Follow {...item} />
         </div>
         <CommentCount count={item.commentCount} {...item} />
