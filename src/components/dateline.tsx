@@ -29,7 +29,7 @@ const styles = css`
     ${darkStyles}
 `;
 
-const commentDatelinStyles = css`
+const commentDatelineStyles = css`
     ${textSans.xsmall()}
     color: ${neutral[20]};
 
@@ -39,7 +39,7 @@ const commentDatelinStyles = css`
 const getDatelineStyles = (pillar: Pillar): SerializedStyles => {
     switch(pillar){
         case Pillar.Opinion:
-            return commentDatelinStyles;
+            return commentDatelineStyles;
         default:
             return styles;
     }
