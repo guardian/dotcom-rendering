@@ -23,6 +23,7 @@ const styles = (format: Format, lightModeImage: string, darkModeImage?: string):
         ${textSans.small()}
 
         img {
+            content: url("${darkModeImage ?? lightModeImage}");
             display: block;
             margin: ${remSpace[2]} 0;
             max-height: 60px;
