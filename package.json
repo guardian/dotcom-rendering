@@ -20,7 +20,8 @@
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
         "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
-        "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config scripts/webpack/frontend"
+        "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config scripts/webpack/frontend",
+        "getPfUrl": "make build && node ./scripts/buildPolyfilllIoUrl.js"
     },
     "bundlesize": [
         {
@@ -64,6 +65,7 @@
         "compose-function": "^3.0.3",
         "compression": "^1.7.3",
         "cpy": "^8.1.0",
+        "create-polyfill-service-url": "^2.2.2",
         "curlyquotes": "^1.4.3",
         "dateformat": "^3.0.3",
         "diskusage": "^0.2.5",
