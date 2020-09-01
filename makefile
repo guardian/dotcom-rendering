@@ -97,7 +97,7 @@ test: clean-dist install
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
+	@yarn 	 test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
 
 bundlesize: clear clean-dist install build
 	@bundlesize
@@ -123,7 +123,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent
+	@yarn --silent --ignore-engines
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
