@@ -25,7 +25,7 @@ const styles = (format: Format,
         ${textSans.small()}
 
         img {
-            content: url("${darkModeImage ?? lightModeImage}");
+            content: url("${lightModeImage}");
             display: block;
             margin: ${remSpace[2]} 0;
             max-height: 60px;
@@ -49,7 +49,7 @@ const styles = (format: Format,
             }
 
             a {
-                color: ${inverted}
+                color: ${inverted};
             }
         `}
     `;
@@ -66,7 +66,7 @@ export const cleanImageUrl = (url: string): string =>
         .replace(/\(/g, '%28')
         .replace(/\)/g, '%29')
 
-const Logo: FC<Props> = ({ branding, format }: Props) => {    
+const Logo: FC<Props> = ({ branding, format }: Props) => {
     const lightLogo = cleanImageUrl(branding.logo);
     const darkLogo = cleanImageUrl(branding.altLogo ?? branding.logo);
 
