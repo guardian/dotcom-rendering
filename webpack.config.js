@@ -4,6 +4,7 @@ const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // ----- Plugins ----- //
 
@@ -167,6 +168,11 @@ const clientConfigProduction = {
     devtool: false,
     plugins: [
         new ManifestPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'rendered-items-assets.html',
+            template: path.resolve(__dirname, `config/rendered-items-assets-template.html`),
+            minify: true,
+          })
     ],
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
