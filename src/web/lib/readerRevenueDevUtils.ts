@@ -112,10 +112,23 @@ export interface ReaderRevenueDevUtils {
     showPreviousVariant: ReaderRevenueDevUtil;
 }
 
+const getForcedVariant = (type: 'epic' | 'banner'): string | null => {
+    if (URLSearchParams) {
+        const params = new URLSearchParams(window.location.search);
+        const value = params.get(`force-${type}`);
+        if (value) {
+            return value;
+        }
+    }
+
+    return null;
+};
+
 export {
     changeGeolocation,
     showMeTheEpic,
     showMeTheBanner,
     showNextVariant,
-    showPreviousVariant
+    showPreviousVariant,
+    getForcedVariant,
 };

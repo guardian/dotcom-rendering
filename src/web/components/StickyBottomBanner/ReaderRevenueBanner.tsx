@@ -3,7 +3,7 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { logView } from '@root/node_modules/@guardian/automat-client';
+import { getWeeklyArticleHistory, logView } from '@root/node_modules/@guardian/automat-client';
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -12,6 +12,8 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
+import { WeeklyArticleHistory } from "@root/node_modules/@guardian/automat-client/dist/types";
+import { getForcedVariant } from "@root/src/web/lib/readerRevenueDevUtils";
 import { CanShowResult } from './bannerPicker';
 
 const checkForErrors = (response: any) => {
@@ -40,6 +42,7 @@ type BaseProps = {
     engagementBannerLastClosedAt?: string;
     subscriptionBannerLastClosedAt?: string;
     switches: { [key: string]: boolean };
+    weeklyArticleHistory?: WeeklyArticleHistory;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -71,6 +74,7 @@ const buildPayload = (props: BuildPayloadProps) => {
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
             switches: props.switches,
+            weeklyArticleHistory: getWeeklyArticleHistory(),
         },
     };
 };
@@ -128,9 +132,12 @@ export const canShow = ({
                 switches,
             }),
         )
-        .then((bannerPayload) =>
-            getBanner(bannerPayload, `${contributionsServiceUrl}/banner`),
-        )
+        .then((bannerPayload) => {
+            const forcedVariant = getForcedVariant('banner');
+            const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
+
+            return getBanner(bannerPayload, `${contributionsServiceUrl}/banner${queryString}`);
+        })
         .then(checkForErrors)
         .then((response) => response.json())
         .then((json) => {
