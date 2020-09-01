@@ -246,8 +246,6 @@ export const ArticleRenderer: React.FC<{
                             />
                         </div>
                     );
-
-                // return <div key={i} id={`rich-link-${i}`} />;
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
