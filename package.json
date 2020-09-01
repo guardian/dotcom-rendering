@@ -121,7 +121,7 @@
     "eslint-plugin-react": "^7.20.6",
     "jest": "^26.4.2",
     "ts-jest": "^26.3.0",
-    "ts-loader": "^8.0.2",
+    "ts-loader": "^8.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
