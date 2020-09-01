@@ -67,13 +67,11 @@ export const document = ({ data }: Props) => {
         getDist({ path: 'sentry.js', legacy: true }),
         getDist({ path: 'dynamicImport.js', legacy: true }),
         getDist({ path: 'react.js', legacy: true }),
-        getDist({ path: 'atomIframe.js', legacy: true }),
     ];
     const priorityNonLegacyScripts = [
         getDist({ path: 'sentry.js', legacy: false }),
         getDist({ path: 'dynamicImport.js', legacy: false }),
         getDist({ path: 'react.js', legacy: false }),
-        getDist({ path: 'atomIframe.js', legacy: false }),
     ];
 
     /**
@@ -90,11 +88,13 @@ export const document = ({ data }: Props) => {
         getDist({ path: 'ga.js', legacy: true }),
         getDist({ path: 'ophan.js', legacy: true }),
         getDist({ path: 'lotame.js', legacy: true }),
+        getDist({ path: 'atomIframe.js', legacy: true }),
     ];
     const lowPriorityNonLegacyScripts = [
         getDist({ path: 'ga.js', legacy: false }),
         getDist({ path: 'ophan.js', legacy: false }),
         getDist({ path: 'lotame.js', legacy: false }),
+        getDist({ path: 'atomIframe.js', legacy: false }),
     ];
 
     /**

@@ -4,7 +4,6 @@ import { getStatic, CDN } from '@root/src/lib/assets';
 import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
 import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
-import { atomIframeResize } from '@root/src/lib/atomIframe';
 
 export const htmlTemplate = ({
     title = 'The Guardian',

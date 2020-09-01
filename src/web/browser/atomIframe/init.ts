@@ -2,7 +2,6 @@ import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
 
 const init = (): Promise<void> => {
-    console.log('CONDITION 1');
     const iframes: HTMLIFrameElement[] = [].slice.call(
         document.querySelectorAll('.atom__iframe'),
     );
