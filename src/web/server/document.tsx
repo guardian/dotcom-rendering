@@ -49,8 +49,10 @@ export const document = ({ data }: Props) => {
         'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
     ];
 
-    const polyfillIO =
-        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+    // Built with yarn getPfUrl (only get he 'features' from the returned result)
+    const polyfillIOFeatures =
+        'Array.from,Array.isArray,Array.prototype.entries,Array.prototype.every,Array.prototype.fill,Array.prototype.filter,Array.prototype.find,Array.prototype.findIndex,Array.prototype.forEach,Array.prototype.includes,Array.prototype.indexOf,Array.prototype.keys,Array.prototype.lastIndexOf,Array.prototype.map,Array.prototype.reduce,Array.prototype.some,Array.prototype.sort,Array.prototype.values,ArrayBuffer,Blob,console,CustomEvent,DataView,Date.now,Date.prototype.toISOString,document,Element,Event,fetch,Function.prototype.bind,globalThis,JSON,localStorage,Map,modernizr:es5object,Number.isNaN,Object.assign,Object.entries,Object.freeze,Object.getOwnPropertyDescriptors,Object.getOwnPropertySymbols,Object.setPrototypeOf,Promise,Promise.prototype.finally,Reflect,Reflect.construct,requestAnimationFrame,Set,String.prototype.endsWith,String.prototype.includes,String.prototype.startsWith,String.prototype.trim,String.raw,Symbol,Symbol.for,Symbol.iterator,Symbol.prototype.description,Symbol.toStringTag,Uint16Array,Uint8Array,URL,URLSearchParams,WeakMap,WeakSet,XMLHttpRequest';
+    const polyfillIO = `https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=${polyfillIOFeatures}&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1`;
 
     /**
      * The highest priority scripts.
