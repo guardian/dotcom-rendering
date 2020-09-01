@@ -35,6 +35,7 @@ import {
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
+import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -235,7 +236,18 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div key={i} id={`rich-link-${i}`} />;
+                    return (
+                        <div key={i} id={`rich-link-${i}`}>
+                            <DefaultRichLink
+                                index={i}
+                                headlineText={element.text}
+                                url={element.url}
+                                isPlaceholder={true}
+                            />
+                        </div>
+                    );
+
+                // return <div key={i} id={`rich-link-${i}`} />;
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
