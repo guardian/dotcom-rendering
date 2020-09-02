@@ -122,6 +122,7 @@
         "@babel/preset-react": "^7.10.1",
         "@babel/preset-typescript": "^7.10.1",
         "@babel/runtime": "^7.10.2",
+        "@cypress/skip-test": "^2.5.0",
         "@storybook/addon-actions": "^5.3.19",
         "@storybook/addon-links": "^5.2.5",
         "@storybook/addon-storysource": "^5.2.8",
