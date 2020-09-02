@@ -172,6 +172,8 @@ interface Block {
     title?: string;
     firstPublished?: number;
     firstPublishedDisplay?: string;
+    primaryDateLine: string;
+    secondaryDateLine: string;
 }
 
 interface Pagination {
@@ -356,6 +358,8 @@ type CAPIBrowserType = {
     callouts: CalloutBlockElement[];
     qandaAtoms: QABlockElement[];
     guideAtoms: GuideAtomBlockElement[];
+    profileAtoms: ProfileAtomBlockElement[];
+    timelineAtoms: TimelineBlockElement[];
 };
 
 interface TagType {
@@ -656,6 +660,8 @@ type IslandType =
     | 'comments'
     | 'qanda-atom'
     | 'guide-atom'
+    | 'profile-atom'
+    | 'timeline-atom'
     | 'sign-in-gate';
 
 interface TrailType {

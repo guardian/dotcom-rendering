@@ -1178,6 +1178,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "guideIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1206,12 +1209,20 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "assets",
-                "caption"
+                "caption",
+                "html",
+                "source"
             ]
         },
         "VideoAssets": {
@@ -1580,6 +1591,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "profileIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1739,8 +1753,9 @@
                     "type": "string"
                 }
             },
-            "required": ["_type"]
-
+            "required": [
+                "_type"
+            ]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1826,6 +1841,9 @@
                     "items": {
                         "$ref": "#/definitions/TimelineEvent"
                     }
+                },
+                "timelineIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -2202,11 +2220,19 @@
                 },
                 "firstPublishedDisplay": {
                     "type": "string"
+                },
+                "primaryDateLine": {
+                    "type": "string"
+                },
+                "secondaryDateLine": {
+                    "type": "string"
                 }
             },
             "required": [
                 "elements",
-                "id"
+                "id",
+                "primaryDateLine",
+                "secondaryDateLine"
             ]
         },
         "Pagination": {

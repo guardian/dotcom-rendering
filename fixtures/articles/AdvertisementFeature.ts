@@ -2379,6 +2379,8 @@ export const AdvertisementFeature: CAPIType = {
             lastUpdatedDisplay: '11:12 GMT',
             firstPublished: 1572620146000,
             firstPublishedDisplay: '14:55 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: { byline: 'Maria McCarthy' },

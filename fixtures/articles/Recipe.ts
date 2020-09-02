@@ -5268,6 +5268,8 @@ export const Recipe: CAPIType = {
             lastUpdatedDisplay: '13:12 BST',
             firstPublished: 1585734719000,
             firstPublishedDisplay: '10:51 BST',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     linkedData: [

@@ -2445,6 +2445,8 @@ export const showcaseReviewCAPI: CAPIType = {
             lastUpdatedDisplay: '15:20 GMT',
             firstPublished: 1579021299000,
             firstPublishedDisplay: '17:01 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {

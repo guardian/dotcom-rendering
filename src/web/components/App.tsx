@@ -17,7 +17,12 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
-import { QandaAtom, GuideAtom } from '@guardian/atoms-rendering';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -36,7 +41,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
-import {ReaderRevenueDevUtils} from "@root/src/web/lib/readerRevenueDevUtils";
+import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -129,6 +134,13 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
     const [countryCode, setCountryCode] = useState<string>();
+    // This is an async version of the countryCode state value defined above.
+    // This can be used where you've got logic which depends on countryCode but
+    // don't want to block on it becoming available, as you would with the
+    // non-async version (this is the case in the banner picker where some
+    // banners need countryCode but we don't want to block all banners from
+    // executing their canShow logic until countryCode is available):
+    const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
@@ -171,8 +183,11 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
-        const callFetch = async () =>
-            setCountryCode((await getCountryCode()) || '');
+        const callFetch = () => {
+            const countryCodePromise = getCountryCode();
+            setAsyncCountryCode(countryCodePromise);
+            countryCodePromise.then((cc) => setCountryCode(cc || ''));
+        };
         callFetch();
     }, []);
 
@@ -248,12 +263,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         // Used internally only, so only import each function on demand
-        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (asExistingSupporter: boolean) =>
-            import(/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils')
-                .then(utils => utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue))
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
+            asExistingSupporter: boolean,
+        ) =>
+            import(
+                /* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
+            )
+                .then((utils) =>
+                    utils[key](
+                        asExistingSupporter,
+                        CAPI.shouldHideReaderRevenue,
+                    ),
+                )
                 /* eslint-disable no-console */
-                .catch(error => console.log('Error loading readerRevenueDevUtils', error));
-                /* eslint-enable no-console */
+                .catch((error) =>
+                    console.log('Error loading readerRevenueDevUtils', error),
+                );
+        /* eslint-enable no-console */
 
         if (window && window.guardian) {
             window.guardian.readerRevenue = {
@@ -262,7 +288,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 showMeTheBanner: loadAndRun('showMeTheBanner'),
                 showNextVariant: loadAndRun('showNextVariant'),
                 showPreviousVariant: loadAndRun('showPreviousVariant'),
-            }
+            };
         }
     }, [CAPI.shouldHideReaderRevenue]);
 
@@ -278,7 +304,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -351,6 +376,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         html={qandaAtom.html}
                         image={qandaAtom.img}
                         credit={qandaAtom.credit}
+                        pillar={pillar}
                         likeHandler={componentEventHandler(
                             'QANDA_ATOM',
                             qandaAtom.id,
@@ -361,7 +387,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             qandaAtom.id,
                             'DISLIKE',
                         )}
-                        expandHandler={componentEventHandler(
+                        expandCallback={componentEventHandler(
                             'QANDA_ATOM',
                             qandaAtom.id,
                             'EXPAND',
@@ -391,6 +417,62 @@ export const App = ({ CAPI, NAV }: Props) => {
                         expandCallback={componentEventHandler(
                             'GUIDE_ATOM',
                             guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.profileAtoms.map((profileAtom) => (
+                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.timelineAtoms.map((timelineAtom) => (
+                <Hydrate
+                    root="timeline-atom"
+                    index={timelineAtom.timelineIndex}
+                >
+                    <TimelineAtom
+                        id={timelineAtom.id}
+                        title={timelineAtom.title}
+                        events={timelineAtom.events}
+                        description={timelineAtom.description}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
                             'EXPAND',
                         )}
                     />
@@ -533,7 +615,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="bottom-banner">
                 <StickyBottomBanner
                     isSignedIn={isSignedIn}
-                    countryCode={countryCode}
+                    asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
                 />
             </Portal>

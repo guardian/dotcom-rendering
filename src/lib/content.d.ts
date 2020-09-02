@@ -122,7 +122,6 @@ interface GuideAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
-    pillar: Pillar;
     guideIndex?: number;
 }
 
@@ -130,6 +129,8 @@ interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
+    html: string;
+    source: string;
 }
 
 interface HighlightBlockElement {
@@ -194,6 +195,7 @@ interface ProfileAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
@@ -262,6 +264,7 @@ interface TimelineBlockElement {
     title: string;
     description?: string;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {
