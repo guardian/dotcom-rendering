@@ -122,16 +122,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 },
                             },
                         },
-                        // TODO: decide wether we want a fallback policy
-                        policy: {
-                            default: {
-                                waitFor: { sourcepoint: [] },
-                                timeout: {
-                                    seconds: 60,
-                                    fallbackAction: 'reject',
-                                },
-                            },
-                        },
                     }}
                 />
                 <ThemeProvider theme={brand}>
