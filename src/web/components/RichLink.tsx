@@ -46,6 +46,7 @@ interface Props {
     tags: TagType[];
     sponsorName: string;
     contributorImage?: string;
+    isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
 
 const richLinkContainer = css`
@@ -217,6 +218,35 @@ const imageStyles = css`
     height: auto;
 `;
 
+type DefaultProps = {
+    index: number;
+    headlineText: string;
+    url: string;
+    isPlaceholder?: boolean;
+};
+
+export const DefaultRichLink: React.FC<DefaultProps> = ({
+    index,
+    headlineText,
+    url,
+    isPlaceholder,
+}) => {
+    return (
+        <RichLink
+            richLinkIndex={index}
+            cardStyle="news"
+            thumbnailUrl=""
+            headlineText={headlineText}
+            contentType="article"
+            url={url}
+            pillar="news"
+            tags={[]}
+            sponsorName=""
+            isPlaceholder={isPlaceholder}
+        />
+    );
+};
+
 export const RichLink = ({
     richLinkIndex,
     cardStyle,
@@ -229,6 +259,7 @@ export const RichLink = ({
     tags,
     sponsorName,
     contributorImage,
+    isPlaceholder,
 }: Props) => {
     const linkText =
         cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
@@ -246,6 +277,7 @@ export const RichLink = ({
             data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
             data-component="rich-link"
             className={pillarBackground(pillar)}
+            data-name={(isPlaceholder && 'placeholder') || ''}
         >
             <div className={cx(richLinkContainer, neutralBackground)}>
                 <a className={cx(richLinkLink)} href={url}>

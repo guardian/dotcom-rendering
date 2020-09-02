@@ -129,6 +129,8 @@ interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
+    html: string;
+    source: string;
 }
 
 interface HighlightBlockElement {

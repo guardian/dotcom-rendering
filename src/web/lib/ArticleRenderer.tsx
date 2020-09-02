@@ -34,6 +34,8 @@ import {
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
+import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -141,6 +143,17 @@ export const ArticleRenderer: React.FC<{
                             />
                         </div>
                     );
+                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                    return (
+                        <GuVideoBlockComponent
+                            html={element.html}
+                            pillar={pillar}
+                            designType={designType}
+                            display={display}
+                            credit={element.source}
+                            caption={element.caption}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
                         <HighlightBlockComponent key={i} html={element.html} />
@@ -223,7 +236,16 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div key={i} id={`rich-link-${i}`} />;
+                    return (
+                        <div key={i} id={`rich-link-${i}`}>
+                            <DefaultRichLink
+                                index={i}
+                                headlineText={element.text}
+                                url={element.url}
+                                isPlaceholder={true}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
@@ -338,7 +360,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
