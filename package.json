@@ -76,7 +76,7 @@
     "@guardian/src-icons": "^2.2.0",
     "@guardian/types": "github:guardian/types#semver:^0.4.0",
     "@types/jsdom": "^16.2.3",
-    "@types/uuid": "^8.0.1",
+    "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.743.0",
     "babel-jest": "^26.3.0",
     "compression": "^1.7.4",
