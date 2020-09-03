@@ -307,7 +307,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 pubData: { browserId: getCookie('bwid') || undefined },
             });
         }
-    }, [countryCode, CAPI.config.switches]);
+    }, [countryCode, CAPI.config.switches.consentManagement]);
 
     const pillar = decidePillar(CAPI);
 
