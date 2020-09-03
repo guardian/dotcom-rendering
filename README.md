@@ -126,7 +126,6 @@ $ make lint
 $ make stylelint
 $ make tsc
 $ make test
-$ make me breakfast
 ```
 
 If you get lint errors, you can attempt to automatically fix them with:
