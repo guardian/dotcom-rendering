@@ -170,7 +170,7 @@ const clientConfigProduction = {
         new ManifestPlugin(),
         new HtmlWebpackPlugin({
             filename: 'rendered-items-assets.html',
-            template: path.resolve(__dirname, `config/rendered-items-assets-template.html`),
+            template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
             minify: true,
           })
     ],
