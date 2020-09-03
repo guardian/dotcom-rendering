@@ -292,6 +292,22 @@ export const ImageComponent = ({
     const isNotOpinion =
         designType !== 'Comment' && designType !== 'GuardianView';
 
+    // We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
+    // because the image sources and CSS deal with the sizing. What the height and width gives us is a true
+    // ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
+    //
+    // The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
+    const imageWidth =
+        (element.media &&
+            element.media.allImages[0] &&
+            element.media.allImages[0].fields.width) ||
+        '620';
+    const imageHeight =
+        (element.media &&
+            element.media.allImages[0] &&
+            element.media.allImages[0].fields.height) ||
+        '372';
+
     if (isMainMedia && display === Display.Immersive && isNotOpinion) {
         return (
             <div
@@ -313,6 +329,8 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -329,6 +347,7 @@ export const ImageComponent = ({
                     position: relative;
 
                     img {
+                        height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
@@ -338,6 +357,8 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -354,6 +375,7 @@ export const ImageComponent = ({
                     position: relative;
 
                     img {
+                        height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
@@ -363,6 +385,8 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
                 />
                 {isMainMedia && (
                     // Below tablet, main media images show an info toggle at the bottom right of
