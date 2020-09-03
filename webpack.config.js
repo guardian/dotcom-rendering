@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const renderedItemsStyles = require('./config/rendered-items-assets-styles');
 
 // ----- Plugins ----- //
 
@@ -172,6 +173,9 @@ const clientConfigProduction = {
             filename: 'rendered-items-assets.html',
             template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
             minify: true,
+            templateParameters: {
+                foo: renderedItemsStyles
+            }
           })
     ],
     output: {
