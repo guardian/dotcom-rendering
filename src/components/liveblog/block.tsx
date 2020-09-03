@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState, useEffect, FC } from 'react';
 import { basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
@@ -59,7 +59,7 @@ interface TitleProps {
     highlighted: boolean;
 }
 
-const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
+const Title: FC<TitleProps> = ({ title, highlighted } ) => {
     const TitleStyles = css`
         padding: 0.1rem 0.125rem;
         background-color: ${brandAlt[400]};
@@ -67,15 +67,15 @@ const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }
 
-const LiveblogBlock = ({
+const LiveblogBlock: FC<LiveblogBlockProps> = ({
     pillar,
     highlighted,
     title,
     children,
     firstPublishedDate,
     lastModifiedDate,
-}: LiveblogBlockProps): JSX.Element => {
-    const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
+}) => {
+    const relativeFirstPublished: FC<Option<Date>> = (date) => pipe2(
         date,
         map(date => <time>{makeRelativeDate(date)}</time>),
         withDefault<JSX.Element | null>(null),

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 
 // ----- Component ----- //
 
@@ -8,7 +8,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Interactive = ({ children }: Props): JSX.Element =>
+const Interactive:FC<Props> = ({ children }) =>
     <main>
         <article>
             {children}

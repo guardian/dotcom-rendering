@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -104,14 +104,13 @@ const imageWrapperStyles = css`
     position: relative;
 `;
 
-const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
+const relativeFirstPublished: FC<Option<Date>> = (date) => pipe2(
     date,
     map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
     withDefault<JSX.Element | null>(null),
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    
     switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
@@ -265,7 +264,7 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     )
 }
 
-const Card = ({ relatedItem, image }: Props): JSX.Element => {
+const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
         pillar: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,

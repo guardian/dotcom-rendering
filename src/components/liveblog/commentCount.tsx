@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SerializedStyles, css } from '@emotion/core';
 import { basePx, icons } from 'styles';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -35,7 +35,7 @@ const CommentCountStyles = (colour: string): SerializedStyles => css`
     }
 `
 
-export const CommentCount = ({ count, colour, className }: CommentCountProps): JSX.Element => {
+export const CommentCount: FC<CommentCountProps> = ({ count, colour, className }) => {
     return <div css={[CommentCountStyles(colour), className]}>
         <span></span>
         <button>{count}</button>

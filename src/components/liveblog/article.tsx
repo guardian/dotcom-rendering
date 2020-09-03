@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import LiveblogSeries from 'components/liveblog/series';
 import LiveblogHeadline from 'components/liveblog/headline';
@@ -48,7 +48,7 @@ interface LiveblogArticleProps {
     item: Liveblog;
 }
 
-const LiveblogArticle = ({ item }: LiveblogArticleProps): JSX.Element => {
+const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
     const format = getFormat(item);
 
     return (

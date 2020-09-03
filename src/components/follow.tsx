@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -37,8 +37,7 @@ function getStyles({ pillar }: Format): SerializedStyles {
     return styles(kicker, inverted);
 }
 
-function Follow({ contributors, ...format }: Props): JSX.Element | null {
-
+const Follow: FC<Props> = ({ contributors, ...format }) => {
     const [contributor] = contributors;
 
     if (
