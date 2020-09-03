@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Caption } from '@root/src/amp/components/Caption';
+import { Caption } from '@root/src/web/components/Caption';
+import { Display } from '@root/src/lib/display';
 
 export const SpotifyBlockComponent: React.FC<{
     embedUrl?: string;
@@ -9,19 +10,33 @@ export const SpotifyBlockComponent: React.FC<{
     title?: string;
     pillar: Pillar;
     caption?: string;
-}> = ({ embedUrl, width, height, title, pillar, caption }) => {
+    display: Display;
+    designType: DesignType;
+    credit?: string;
+}> = ({
+    embedUrl,
+    width,
+    height,
+    title,
+    pillar,
+    caption,
+    display,
+    designType,
+    credit,
+}) => {
+    const hasCaption = caption != null;
+
+    const embedContainer = css`
+        iframe {
+            width: 100%;
+        }
+        margin-bottom: 16px;
+    `;
+
     return (
         <>
             {embedUrl && title && width && height && (
-                <div
-                    className={css`
-                        iframe {
-                            width: 100%;
-                        }
-                        margin-bottom: 16px;
-                    `}
-                    data-cy="spotify-embed"
-                >
+                <div className={embedContainer} data-cy="spotify-embed">
                     <iframe
                         src={embedUrl}
                         title={title}
@@ -29,8 +44,14 @@ export const SpotifyBlockComponent: React.FC<{
                         width={width}
                         allowFullScreen={true}
                     />
-                    {caption && (
-                        <Caption captionText={caption} pillar={pillar} />
+                    {hasCaption && (
+                        <Caption
+                            captionText={caption}
+                            designType={designType}
+                            pillar={pillar}
+                            display={display}
+                            credit={credit}
+                        />
                     )}
                 </div>
             )}

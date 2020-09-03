@@ -44,14 +44,16 @@ export const VimeoBlockComponent: React.FC<{
     const maxHeight = 812;
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
+    const hasCaption = caption != null;
+
+    const embedContainer = css`
+        max-width: ${maxWidth}px;
+        width: 100%;
+        margin-bottom: ${hasCaption ? `0px` : `6px`};
+    `;
 
     return (
-        <div
-            className={css`
-                max-width: ${maxWidth}px;
-                width: 100%;
-            `}
-        >
+        <div className={embedContainer}>
             <div className={responsiveAspectRatio(height, width)}>
                 <iframe
                     src={embedUrl}
@@ -61,7 +63,7 @@ export const VimeoBlockComponent: React.FC<{
                     allowFullScreen={true}
                 />
             </div>
-            {caption && (
+            {hasCaption && (
                 <Caption
                     captionText={caption}
                     designType={designType}

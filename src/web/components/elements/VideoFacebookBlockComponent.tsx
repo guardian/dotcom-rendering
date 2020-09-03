@@ -34,14 +34,16 @@ export const VideoFacebookBlockComponent: React.FC<{
     const maxHeight = 812;
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
+    const hasCaption = caption != null;
+
+    const embedContainer = css`
+        max-width: ${maxWidth}px;
+        width: 100%;
+        margin-bottom: ${hasCaption ? `0px` : `6px`};
+    `;
 
     return (
-        <div
-            className={css`
-                max-width: ${maxWidth}px;
-                width: 100%;
-            `}
-        >
+        <div className={embedContainer}>
             <MaintainAspectRatio height={height} width={width}>
                 <iframe
                     src={embedUrl}
@@ -51,7 +53,7 @@ export const VideoFacebookBlockComponent: React.FC<{
                     allowFullScreen={true}
                 />
             </MaintainAspectRatio>
-            {caption && (
+            {hasCaption && (
                 <Caption
                     captionText={caption}
                     designType={designType}

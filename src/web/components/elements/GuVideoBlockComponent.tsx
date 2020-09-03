@@ -13,18 +13,18 @@ export const GuVideoBlockComponent: React.FC<{
     credit: string;
     caption?: string;
 }> = ({ html, pillar, designType, display, credit, caption }) => {
+    const hasCaption = caption != null;
+
+    const embedContainer = css`
+        width: 100%;
+        margin-bottom: ${hasCaption ? `0px` : `6px`};
+    `;
+
     return (
-        <div
-            className={css`
-                width: 100%;
-                video {
-                    width: 100%;
-                }
-            `}
-        >
+        <div className={embedContainer}>
             <div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 
-            {caption && (
+            {hasCaption && (
                 <Caption
                     captionText={caption}
                     designType={designType}
