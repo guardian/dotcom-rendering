@@ -1945,7 +1945,6 @@
             },
             "required": [
                 "_type",
-                "caption",
                 "height",
                 "url",
                 "width"
@@ -2004,6 +2003,9 @@
                 "url": {
                     "type": "string"
                 },
+                "originalUrl": {
+                    "type": "string"
+                },
                 "height": {
                     "type": "number"
                 },
@@ -2023,6 +2025,7 @@
             "required": [
                 "_type",
                 "height",
+                "originalUrl",
                 "url",
                 "width"
             ]
