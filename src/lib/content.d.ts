@@ -284,7 +284,7 @@ interface VideoFacebookBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
     embedUrl?: string;
 }
 
@@ -303,6 +303,7 @@ interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     embedUrl?: string;
     url: string;
+    originalUrl: string;
     height: number;
     width: number;
     caption?: string;
