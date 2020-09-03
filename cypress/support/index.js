@@ -16,6 +16,14 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-plugin-tab';
+import { getAbSwitches } from '../lib/abSwitches';
+console.log('running Support');
+
+// eslint-disable-next-line mocha/no-top-level-hooks
+before(function () {
+    console.log('running Support Before');
+    getAbSwitches();
+});
 
 // Remove the consent iframe before the tests run
 // eslint-disable-next-line mocha/no-top-level-hooks
