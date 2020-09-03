@@ -1,12 +1,5 @@
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 
-const switches =
-    'guardian' in window &&
-    'config' in window.guardian &&
-    'switches' in window.guardian.config
-        ? window.guardian.config.switches
-        : {};
-
 let frameworks: undefined | Record<string, boolean>;
 
 export const getPrivacyFramework = async () => {
@@ -14,8 +7,8 @@ export const getPrivacyFramework = async () => {
         const isInUS = (await getCountryCode()) === 'US';
 
         frameworks = {
-            ccpa: isInUS && switches.frameworkCcpa,
-            tcfv2: !isInUS && switches.frameworkTcfv2,
+            ccpa: isInUS,
+            tcfv2: !isInUS,
         };
     }
     return frameworks;
