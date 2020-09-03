@@ -6,20 +6,21 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+- [Dotcom Rendering](#dotcom-rendering)
+  - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+  - [Quick start](#quick-start)
+    - [Install Node.js](#install-nodejs)
+    - [Running instructions](#running-instructions)
+    - [Detailed Setup](#detailed-setup)
+    - [Technologies](#technologies)
+    - [Architecture Diagram](#architecture-diagram)
+    - [Concepts](#concepts)
+    - [Feedback](#feedback)
+  - [Code Quality](#code-quality)
+  - [IDE setup](#ide-setup)
+    - [Extensions](#extensions)
+    - [Auto fix on save](#auto-fix-on-save)
+  - [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -125,6 +126,7 @@ $ make lint
 $ make stylelint
 $ make tsc
 $ make test
+$ make me breakfast
 ```
 
 If you get lint errors, you can attempt to automatically fix them with:
