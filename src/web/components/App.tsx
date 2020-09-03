@@ -42,6 +42,9 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+
+import { cmp } from '@guardian/consent-management-platform';
+import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
     submitComponentEvent,
     OphanComponentEvent,
@@ -291,6 +294,20 @@ export const App = ({ CAPI, NAV }: Props) => {
             };
         }
     }, [CAPI.shouldHideReaderRevenue]);
+
+    // kick off the CMP...
+    useEffect(() => {
+        // the UI is injected automatically into the page,
+        // and is not a react component, so it's
+        // handled in here.
+        if (CAPI.config.switches.consentManagement && countryCode) {
+            injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+            cmp.init({
+                isInUsa: countryCode === 'US',
+                pubData: { browserId: getCookie('bwid') || undefined },
+            });
+        }
+    }, [countryCode, CAPI.config.switches.consentManagement]);
 
     const pillar = decidePillar(CAPI);
 

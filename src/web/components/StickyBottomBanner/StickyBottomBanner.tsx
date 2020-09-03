@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    willShowCMP,
-    shouldShowOldCMP,
-    CMP,
-} from '@root/src/web/components/StickyBottomBanner/CMP';
+import { cmp } from '@guardian/consent-management-platform';
 import {
     canShow as canShowRRBanner,
     ReaderRevenueBanner,
@@ -24,28 +20,17 @@ const getBannerLastClosedAt = (key: string): string | undefined => {
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
 
-const buildNewCmpBannerConfig = (): Banner => {
-    return {
-        id: 'cmpUi',
-        canShow: () => willShowCMP().then((result) => ({ result: !!result })),
+const buildCmpBannerConfig = (): Banner => ({
+    id: 'cmpUi',
+    canShow: () =>
+        cmp.willShowPrivacyMessage().then((result) => ({ result: !!result })),
+    show: () => {
         // New CMP is not a react component and is shown outside of react's world
         // so render nothing if it will show
-        show: () => null,
-        timeoutMillis: null,
-    };
-};
-
-const buildOldCmpBannerConfig = (CAPI: CAPIBrowserType): Banner => {
-    return {
-        id: 'cmpUi',
-        canShow: () =>
-            shouldShowOldCMP().then((shouldShowOld) => ({
-                result: shouldShowOld && CAPI.config.cmpUi,
-            })),
-        show: () => CMP,
-        timeoutMillis: null,
-    };
-};
+        return null;
+    },
+    timeoutMillis: null,
+});
 
 const buildReaderRevenueBannerConfig = (
     CAPI: CAPIBrowserType,
@@ -97,14 +82,13 @@ export const StickyBottomBanner = ({
             return;
         }
 
-        const newCmp = buildNewCmpBannerConfig();
-        const oldCmp = buildOldCmpBannerConfig(CAPI);
+        const CMP = buildCmpBannerConfig();
         const readerRevenue = buildReaderRevenueBannerConfig(
             CAPI,
             isSignedIn,
             asyncCountryCode,
         );
-        const bannerConfig: BannerConfig = [newCmp, oldCmp, readerRevenue];
+        const bannerConfig: BannerConfig = [CMP, readerRevenue];
 
         pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
             setSelectedBanner(PickedBanner),

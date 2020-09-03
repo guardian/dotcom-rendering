@@ -26,7 +26,7 @@ export const switches = {
     prebidAppnexusInvcode: true,
     prebidAppnexus: true,
     enableDiscussionSwitch: true,
-    enableConsentManagementService: true,
+    consentManagement: true,
     prebidXaxis: true,
     oldTlsSupportDeprecation: true,
     abContributionsEpicAskFourEarning: true,
