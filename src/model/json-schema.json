@@ -1516,29 +1516,32 @@
                         "model.dotcomrendering.pageElements.MapBlockElement"
                     ]
                 },
-                "url": {
-                    "type": "string"
-                },
-                "originalUrl": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "source": {
                     "type": "string"
                 },
-                "caption": {
+                "title": {
                     "type": "string"
                 },
-                "title": {
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "caption",
-                "originalUrl",
+                "embedUrl",
+                "height",
                 "source",
                 "title",
-                "url"
+                "width"
             ]
         },
         "MultiImageBlockElement": {

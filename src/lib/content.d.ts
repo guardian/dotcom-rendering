@@ -174,11 +174,12 @@ interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
 
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
-    url: string;
-    originalUrl: string;
+    embedUrl: string;
     source: string;
-    caption: string;
     title: string;
+    height: number;
+    width: number;
+    caption?: string;
 }
 
 interface MultiImageBlockElement {
