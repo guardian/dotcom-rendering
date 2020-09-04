@@ -212,8 +212,7 @@ export const Column = ({
                 id={columnInputId}
                 tabIndex={-1}
                 key="OpenExpandedMenuCheckbox"
-                role="menuitemcheckbox"
-                aria-checked="false"
+                aria-hidden="true"
             />
             <CollapseColumnButton
                 collapseColumnInputId={collapseColumnInputId}
