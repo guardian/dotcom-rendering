@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { Pillar, Format } from '@guardian/types/Format';
@@ -22,13 +22,17 @@ const styles = css`
         margin-left: ${remSpace[2]};
     }
 `
+interface LoadMoreProps { 
+    total: number; 
+    pillar: Pillar;
+}
 
-const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Element | null =>
+const LoadMore: FC<LoadMoreProps> = ({total, pillar}) => 
     total > 7
         ? <LiveblogLoadMore onLoadMore={(): Promise<void> => Promise.resolve()} pillar={pillar}/>
         : null;
 
-const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
+const LiveblogBody: FC<LiveblogBodyProps> = (props) => {
     const { format, blocks: initialBlocks, totalBodyBlocks } = props;
     const [blocks] = useState(initialBlocks);
 

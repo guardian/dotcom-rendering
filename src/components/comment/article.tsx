@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { css } from '@emotion/core';
 import { neutral, opinion, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
@@ -62,7 +62,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Comment = ({ item, children }: Props): JSX.Element =>
+const Comment: FC<Props> = ({ item, children }) =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>

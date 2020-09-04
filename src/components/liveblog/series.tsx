@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { Series } from '../../capi';
@@ -23,7 +23,7 @@ interface LiveblogSeriesProps {
     pillar: Pillar;
 }
 
-const LiveblogSeries = (props: LiveblogSeriesProps): JSX.Element | null =>
+const LiveblogSeries: FC<LiveblogSeriesProps> = (props) =>
     pipe2(
         props.series,
         map(series =>

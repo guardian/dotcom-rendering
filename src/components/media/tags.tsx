@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from "@guardian/src-foundations";
@@ -39,7 +39,7 @@ interface TagsProps {
     background?: string;
 }
 
-const Tags = ({ tags, background }: TagsProps): JSX.Element => (
+const Tags: FC<TagsProps> = ({ tags, background }) => (
     <ul css={tagsStyles(background)}>
         {tags.map((tag, index) => {
             return <li key={index}>

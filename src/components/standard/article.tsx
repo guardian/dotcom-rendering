@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
@@ -78,7 +78,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Standard = ({ item, children }: Props): JSX.Element => {
+const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? <div id="epic-container"></div>
