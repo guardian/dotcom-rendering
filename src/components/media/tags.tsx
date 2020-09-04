@@ -44,7 +44,7 @@ const Tags: FC<TagsProps> = ({ tags, background }) => (
         {tags.map((tag, index) => {
             return <li key={index}>
                 <a href={tag.webUrl}>
-                    {tag.webTitle}FRED
+                    {tag.webTitle}
                 </a>
             </li>
         })}
