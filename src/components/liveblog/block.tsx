@@ -59,7 +59,7 @@ interface TitleProps {
     highlighted: boolean;
 }
 
-const Title: FC<TitleProps> = ({ title, highlighted } ) => {
+const Title: FC<TitleProps> = ({ title, highlighted }) => {
     const TitleStyles = css`
         padding: 0.1rem 0.125rem;
         background-color: ${brandAlt[400]};
