@@ -10,7 +10,7 @@ interface Props {
     onLoadMore: () => Promise<void>;
 }
 
-const LiveblogLoadMore:FC<Props> = ({ pillar, onLoadMore }) => {
+const LiveblogLoadMore: FC<Props> = ({ pillar, onLoadMore }) => {
     const theme = {
         button: {
             textPrimary: pillarColours[pillar].soft,
