@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { fork, ChildProcess } from 'child_process';
-import webpack, { Compiler } from 'webpack';
+import webpack, { Compiler, Configuration } from 'webpack';
 import path from 'path';
 import ManifestPlugin from 'webpack-manifest-plugin';
 
@@ -99,7 +99,7 @@ const serverConfig = (env: NodeJS.ProcessEnv) => {
     }
 }
 
-const clientConfig = {
+export const clientConfig: Configuration = {
     name: 'client',
     mode: 'development',
     entry: {
@@ -178,4 +178,4 @@ const clientConfigProduction = {
 
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig, clientConfigProduction ];
+export default [ serverConfig, clientConfig, clientConfigProduction ];
