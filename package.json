@@ -98,7 +98,7 @@
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
-    "@storybook/addon-knobs": "^6.0.16",
+    "@storybook/addon-knobs": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@storybook/storybook-deployer": "^2.8.6",
     "storybook-chromatic": "^4.0.2",
