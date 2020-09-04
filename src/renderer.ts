@@ -29,6 +29,8 @@ import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
 import Bullet from 'components/bullet';
+import Pullquote  from 'components/pullquote';
+
 
 // ----- Renderer ----- //
 
@@ -288,63 +290,6 @@ const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 
 const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
     Array.from(doc.childNodes).map(standfirstTextElement(format));
-
-const pullquoteStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
-    return css`
-        color: ${kicker};
-        margin: 0;
-        ${headline.xsmall({ fontWeight: 'light' })};
-        ${darkModeCss`color: ${inverted};`}
-
-        blockquote {
-            margin-left: 0;
-        }
-
-        p {
-            margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
-
-            &::before {
-                ${icons}
-                font-size: 1.5rem;
-                line-height: 1.2;
-                font-weight: 300;
-                content: '\\e11c';
-                display: inline-block;
-                margin-right: ${basePx(1)};
-            }
-        }
-
-        footer {
-            font-size: 1.8rem;
-            margin-top: 4px;
-
-            cite {
-                font-style: normal;
-            }
-        }
-    `;
-}
-
-type PullquoteProps = {
-    quote: string;
-    format: Format;
-    attribution: Option<string>;
-};
-
-
-const Pullquote: FC<PullquoteProps> = ({ quote, attribution, format }: PullquoteProps) => {
-    const children = pipe2(
-        attribution,
-        map(attribution => ([h('p', null, quote), h('cite', null, attribution)])),
-        withDefault([h('p', null, quote)]),
-    );
-
-    return styledH('aside',
-        { css: pullquoteStyles(format) },
-        h('blockquote', null, children)
-    );
-}
 
 const richLinkWidth = '8.75rem';
 
