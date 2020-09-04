@@ -1,14 +1,15 @@
 // ----- Imports ----- //
 
-const { fork } = require('child_process');
-const webpack = require('webpack');
-const path = require('path');
-const ManifestPlugin = require('webpack-manifest-plugin');
+import { fork, ChildProcess } from 'child_process';
+import webpack, { Compiler } from 'webpack';
+import path from 'path';
+import ManifestPlugin from 'webpack-manifest-plugin';
 
 // ----- Plugins ----- //
 
 class LaunchServerPlugin {
-    apply(compiler) {
+    server?: ChildProcess;
+    apply(compiler: Compiler) {
         compiler.hooks.afterEmit.tap('LaunchServerPlugin', () => {
             console.log('Server starting...');
             this.server = fork('./dist/server.js');
@@ -25,7 +26,7 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-function resolve(loggerName) {
+function resolve(loggerName: String) {
     return {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
@@ -40,7 +41,7 @@ function resolve(loggerName) {
 
 // ----- Configs ----- //
 
-const serverConfig = env => {
+const serverConfig = (env: NodeJS.ProcessEnv) => {
     const isProd = env && env.production;
     const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
