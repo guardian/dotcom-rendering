@@ -8,7 +8,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Interactive:FC<Props> = ({ children }) =>
+const Interactive: FC<Props> = ({ children }) =>
     <main>
         <article>
             {children}
