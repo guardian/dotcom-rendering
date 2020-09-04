@@ -24,7 +24,8 @@ const styles = css`
 `
 interface LoadMoreProps { 
     total: number; 
-    pillar: Pillar }
+    pillar: Pillar;
+}
 
 const LoadMore: FC<LoadMoreProps> = ({total, pillar}) => 
     total > 7
