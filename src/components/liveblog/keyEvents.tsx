@@ -148,7 +148,7 @@ interface LiveblogKeyEventsProps {
     blocks: LiveBlock[];
 }
 
-const LiveblogKeyEvents:FC<LiveblogKeyEventsProps> = ({ pillar, blocks }) => {
+const LiveblogKeyEvents: FC<LiveblogKeyEventsProps> = ({ pillar, blocks }) => {
     const keyEvents = blocks.filter(elem => elem.isKeyEvent).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(getPillarStyles(pillar))}>
