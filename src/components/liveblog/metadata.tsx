@@ -76,7 +76,7 @@ interface Props {
     item: Liveblog;
 }
 
-const Metadata:FC<Props> = ({ item }) => {
+const Metadata: FC<Props> = ({ item }) => {
     const pillarStyles = getPillarStyles(item.pillar);
 
     const byline = pipe2(
