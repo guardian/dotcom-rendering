@@ -513,7 +513,7 @@ const render = (format: Format, excludeStyles = false) =>
             };
 
             const figureCss = css`
-                margin ${remSpace[4]} 0;
+                margin: ${remSpace[4]} 0;
                 ${darkModeCss`
                     background: white;
                     padding: ${remSpace[2]};
