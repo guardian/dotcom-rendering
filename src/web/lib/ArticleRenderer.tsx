@@ -11,6 +11,7 @@ import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBloc
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
@@ -180,6 +181,20 @@ export const ArticleRenderer: React.FC<{
                             html={element.html}
                             js={element.js}
                             css={element.css}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.MapBlockElement':
+                    return (
+                        <MapEmbedBlockComponent
+                            pillar={pillar}
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.source}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -360,7 +375,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

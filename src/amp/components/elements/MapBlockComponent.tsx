@@ -12,7 +12,7 @@ export const MapBlockComponent: React.SFC<{
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     const attributes = {
-        src: `${element.url}`,
+        src: `${element.embedUrl}`,
         title: `${element.source}: ${element.title}`,
         layout: 'responsive',
         sandbox: 'allow-scripts allow-same-origin',
