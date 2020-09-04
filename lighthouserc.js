@@ -20,6 +20,7 @@ module.exports = {
         "largest-contentful-paint": ["warn", {"maxNumericValue": 3000}],
         "interactive": ["warn", {"maxNumericValue": 3500}],
         "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.001}],
+        'categories:accessibility': ['error', {minScore: 0.96}]
       }
     }
   },
