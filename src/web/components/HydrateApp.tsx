@@ -6,6 +6,7 @@ import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
+import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 
 type Props = {
     CAPI: CAPIBrowserType;
@@ -31,12 +32,15 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 
     const windowHash = window && window.location && window.location.hash;
 
+    // forced switches when running within cypress
+    const cypressAbSwitches = getCypressSwitches();
+
     ReactDOM.render(
         <ABProvider
             arrayOfTestObjects={tests}
             abTestSwitches={{
-                ...{ abAbTestTest: true }, // Test switch, used for Cypress integration test
                 ...CAPI.config.switches,
+                ...cypressAbSwitches,
             }}
             pageIsSensitive={CAPI.config.isSensitive}
             mvtMaxValue={1000000}
