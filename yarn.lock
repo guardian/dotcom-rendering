@@ -17207,18 +17207,10 @@ source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@0.5.16:
+source-map-support@0.5.16, source-map-support@^0.5.3, source-map-support@^0.5.6, source-map-support@~0.5.12:
   version "0.5.16"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.16.tgz#0ae069e7fe3ba7538c64c98515e35339eac5a042"
   integrity sha512-efyLRJDr68D9hBBNIPWFjhpFzURh+KJykQwvMyW5UiZzYwoF6l4YMMDIJJEyFWxWCqfyxLzz6tSfUFR+kXXsVQ==
-  dependencies:
-    buffer-from "^1.0.0"
-    source-map "^0.6.0"
-
-source-map-support@^0.5.3, source-map-support@^0.5.6, source-map-support@~0.5.12:
-  version "0.5.12"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
-  integrity sha512-4h2Pbvyy15EE02G+JOZpUCmqWJuqrs+sEkzewTm++BPi7Hvn/HwcqLAcNxYAyI0x13CpPPn+kMjl+hplXMHITQ==
   dependencies:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
@@ -19287,15 +19279,14 @@ webpack-hot-middleware@^2.22.0, webpack-hot-middleware@^2.25.0:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-hot-server-middleware@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/webpack-hot-server-middleware/-/webpack-hot-server-middleware-0.5.0.tgz#c3a3137e2af2c926485d1c8126c2aad81d35b78c"
-  integrity sha512-ykNFgeYQkIYDjwUrzJjqc8W6w9lj8DheKPyBRdemXuDJZCMTfeztixm3eMDx59C7LMNWvHEfsSq2LsKEK5vWBA==
+webpack-hot-server-middleware@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/webpack-hot-server-middleware/-/webpack-hot-server-middleware-0.6.1.tgz#1515b2d5db3277b583b01fc59bb0d5b87dc46494"
+  integrity sha512-YOKwdS0hnmADsNCsReGkMOBkoz2YVrQZvnVcViM2TDXlK9NnaOGXmnrLFjzwsHFa0/iuJy/QJFEoMxzk8R1Mgg==
   dependencies:
     debug "^3.1.0"
     require-from-string "^2.0.1"
     source-map-support "^0.5.3"
-    yarn "^1.5.1"
 
 webpack-log@^1.2.0:
   version "1.2.0"
@@ -19885,11 +19876,6 @@ yarn-or-npm@^3.0.1:
   dependencies:
     cross-spawn "^6.0.5"
     pkg-dir "^4.2.0"
-
-yarn@^1.5.1:
-  version "1.22.4"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.4.tgz#01c1197ca5b27f21edc8bc472cd4c8ce0e5a470e"
-  integrity sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA==
 
 yauzl@^2.10.0:
   version "2.10.0"
