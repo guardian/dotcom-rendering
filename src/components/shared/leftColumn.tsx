@@ -50,7 +50,7 @@ interface LeftColumnProps {
 // ----- Component ----- //
 
 const LeftColumn: FC<LeftColumnProps> =
-    ({ children, columnContent = null, className = null } ) =>
+    ({ children, columnContent = null, className = null }) =>
         <div css={[LeftColumnStyles, className]}>
             <div className="column-content">{columnContent}</div>
             <div className="main-content">{children}</div>
