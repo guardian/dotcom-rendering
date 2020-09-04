@@ -16,6 +16,9 @@ export const GuVideoBlockComponent: React.FC<{
     const embedContainer = css`
         width: 100%;
         margin-bottom: ${caption ? `0px` : `6px`};
+        video {
+            width: 100%;
+        }
     `;
 
     return (
