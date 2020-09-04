@@ -32,7 +32,8 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 
     const windowHash = window && window.location && window.location.hash;
 
-    // forced switches when running within cypress
+    // Get the forced switches to use for when running within cypress
+    // Is empty object if not in cypress
     const cypressAbSwitches = getCypressSwitches();
 
     ReactDOM.render(
@@ -40,7 +41,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
             arrayOfTestObjects={tests}
             abTestSwitches={{
                 ...CAPI.config.switches,
-                ...cypressAbSwitches,
+                ...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
             }}
             pageIsSensitive={CAPI.config.isSensitive}
             mvtMaxValue={1000000}
