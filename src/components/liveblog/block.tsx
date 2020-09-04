@@ -75,7 +75,7 @@ const LiveblogBlock: FC<LiveblogBlockProps> = ({
     firstPublishedDate,
     lastModifiedDate,
 }) => {
-    const relativeFirstPublished: FC<Option<Date>> = (date) => pipe2(
+    const relativeFirstPublished = (date: Option<Date>): JSX.Element | null  => pipe2(
         date,
         map(date => <time>{makeRelativeDate(date)}</time>),
         withDefault<JSX.Element | null>(null),
