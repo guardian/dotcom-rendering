@@ -34,12 +34,11 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     const maxHeight = 812;
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
-    const hasCaption = caption != null;
 
     const embedContainer = css`
         max-width: ${maxWidth}px;
         width: 100%;
-        margin-bottom: ${hasCaption ? `0px` : `6px`};
+        margin-bottom: ${caption ? `0px` : `6px`};
     `;
 
     return (
@@ -53,7 +52,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
                     allowFullScreen={true}
                 />
             </MaintainAspectRatio>
-            {hasCaption && (
+            {caption && (
                 <Caption
                     captionText={caption}
                     designType={designType}

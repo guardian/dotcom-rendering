@@ -24,8 +24,6 @@ export const SpotifyBlockComponent: React.FC<{
     designType,
     credit,
 }) => {
-    const hasCaption = caption != null;
-
     const embedContainer = css`
         iframe {
             width: 100%;
@@ -44,7 +42,7 @@ export const SpotifyBlockComponent: React.FC<{
                         width={width}
                         allowFullScreen={true}
                     />
-                    {hasCaption && (
+                    {caption && (
                         <Caption
                             captionText={caption}
                             designType={designType}
