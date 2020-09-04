@@ -21,7 +21,7 @@ interface LiveblogHeadlineProps {
     pillar: Pillar;
 }
 
-const LiveblogHeadline:FC<LiveblogHeadlineProps> = ({ headline, pillar }) =>
+const LiveblogHeadline: FC<LiveblogHeadlineProps> = ({ headline, pillar }) =>
     <LeftColumn className={LiveblogHeadlineStyles(getPillarStyles(pillar))}>
         <h1>{ headline }</h1>
     </LeftColumn>
