@@ -42,6 +42,10 @@ const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         justify-content: space-between;
         border-top : ${borderColor(itemType, format)};
 
+        &.fade {
+            opacity: .7;
+        }
+
         img {
             width: 100%;
             height: 100%;
@@ -214,7 +218,7 @@ const commentIconStyle = (): SerializedStyles => {
         width: 2.0rem;
         height: 1.4375rem;
         display: inline-block;
-        fill: ${opinion[400]};;
+        fill: ${opinion[400]};
         vertical-align: text-top;
         margin-top: -3px;
         margin-right: -2px;
@@ -244,7 +248,7 @@ const quotationComment = (itemType: RelatedItemType, format: Format): ReactEleme
 
 const metadataStyles: SerializedStyles = css`
     padding: 0 ${remSpace[2]};
-    min-height: 1.5rem
+    min-height: 2rem;
 `;
 
 const durationMedia = (duration: Option<string>): ReactElement | null => {
@@ -290,9 +294,14 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
         ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
     const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
         ? stars(parseInt(relatedItem.starRating)) : null;
+    const articleId = relatedItem.link.split('.com/').pop();
 
     return (
-        <li css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}>
+        <li
+            className="js-card"
+            data-article-id={articleId}
+            css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}
+        >
             <a css={anchorStyles} href={relatedItem.link}>
                 <section css={headingWrapperStyles}>
                     <h3 css={headingStyles(relatedItem.type)}>
