@@ -327,12 +327,6 @@ export const standardReviewCAPI: CAPIType = {
                     dataLinkName: 'uk : footer : patrons',
                     extraClasses: '',
                 },
-                {
-                    text: 'Discount Codes',
-                    url: 'https://discountcode.theguardian.com/',
-                    dataLinkName: 'uk: footer : discount code',
-                    extraClasses: 'js-discount-code-link',
-                },
             ],
         ],
     },
@@ -1636,14 +1630,6 @@ export const standardReviewCAPI: CAPIType = {
                 iconName: '',
                 children: [],
                 classList: [],
-            },
-            {
-                title: 'Discount Codes',
-                url: 'https://discountcode.theguardian.com',
-                longTitle: '',
-                iconName: '',
-                children: [],
-                classList: ['js-discount-code-link'],
             },
         ],
         currentNavLink: {

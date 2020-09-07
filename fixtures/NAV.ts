@@ -1104,13 +1104,6 @@ export const NAV: NavType = {
             children: [],
             mobileOnly: false,
         },
-        {
-            title: 'Discount Codes',
-            longTitle: 'Discount Codes',
-            url: 'https://discountcode.theguardian.com',
-            children: [],
-            mobileOnly: false,
-        },
     ],
     currentNavLink: 'Football',
     subNavSections: {

@@ -1097,13 +1097,6 @@ export const nav: any = {
             children: [],
             mobileOnly: false,
         },
-        {
-            title: 'Discount Codes',
-            longTitle: 'Discount Codes',
-            url: 'https://discountcode.theguardian.com',
-            children: [],
-            mobileOnly: false,
-        },
     ],
     currentNavLink: 'UK politics',
     subNavSections: {

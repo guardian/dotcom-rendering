@@ -2372,15 +2372,6 @@ export const data = {
                     children: [],
                     classList: [],
                 },
-                {
-                    title: 'Discount Codes',
-                    url:
-                        'https://discountcode.theguardian.com/uk?INTCMP=guardian_header',
-                    longTitle: '',
-                    iconName: '',
-                    children: [],
-                    classList: [],
-                },
             ],
             currentNavLink: {
                 title: 'Money',

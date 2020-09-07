@@ -98,10 +98,5 @@ export const footerLinksNew: Link[][] = [
             title: 'Patrons',
             url: 'https://patrons.theguardian.com/?INTCMP=footer_patrons',
         },
-        {
-            title: 'Discount Codes',
-            url:
-                'https://discountcode.theguardian.com/uk?INTCMP=guardian_footer',
-        },
     ],
 ];

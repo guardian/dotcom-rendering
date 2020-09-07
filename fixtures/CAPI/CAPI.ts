@@ -255,12 +255,6 @@ export const CAPI: CAPIType = modifyDCRJsonResponse({
                     dataLinkName: 'uk : footer : patrons',
                     extraClasses: '',
                 },
-                {
-                    text: 'Discount Codes',
-                    url: 'https://discountcode.theguardian.com/',
-                    dataLinkName: 'uk: footer : discount code',
-                    extraClasses: 'js-discount-code-link',
-                },
             ],
         ],
     },
@@ -1541,14 +1535,6 @@ export const CAPI: CAPIType = modifyDCRJsonResponse({
                 iconName: '',
                 children: [],
                 classList: [],
-            },
-            {
-                title: 'Discount Codes',
-                url: 'https://discountcode.theguardian.com',
-                longTitle: '',
-                iconName: '',
-                children: [],
-                classList: ['js-discount-code-link'],
             },
         ],
         currentNavLink: {
