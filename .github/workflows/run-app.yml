@@ -23,4 +23,7 @@ jobs:
     - name: install
       run: npm ci
     - name: run
-      run: npm run watch
+      run: |
+        npm install -g ngrok
+        npm run watch
+        ngrok http 8080 -log=stdout
