@@ -16,6 +16,9 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
+  Constants:
+    RunbookCopy:
+      Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
 
 Parameters:
   App:
@@ -230,9 +233,10 @@ Resources:
     Properties:
       AlarmActions: [!Ref ScaleUpPolicy]
       AlarmDescription: !Sub
-        - Scale-Up if cpu is greater than ${Threshold}% over last ${Period} seconds
+        - Scale-Up if cpu is greater than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
         - Threshold: !FindInMap [!Ref Stage, ScalingUp, Threshold]
           Period: !FindInMap [!Ref Stage, ScalingUp, Period]
+        - RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
         - Name: AutoScalingGroupName
@@ -249,9 +253,10 @@ Resources:
     Properties:
       AlarmActions: [!Ref ScaleDownPolicy]
       AlarmDescription: !Sub
-        - Scale-Down if cpu is lower than ${Threshold}% over last ${Period} seconds
+        - Scale-Down if cpu is lower than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
         - Threshold: !FindInMap [!Ref Stage, ScalingDown, Threshold]
           Period: !FindInMap [!Ref Stage, ScalingDown, Period]
+        - RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
       ComparisonOperator: LessThanThreshold
       Dimensions:
         - Name: AutoScalingGroupName
