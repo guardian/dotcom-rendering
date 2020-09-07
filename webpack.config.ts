@@ -1,14 +1,15 @@
 // ----- Imports ----- //
 
-const { fork } = require('child_process');
-const webpack = require('webpack');
-const path = require('path');
-const ManifestPlugin = require('webpack-manifest-plugin');
+import { fork, ChildProcess } from 'child_process';
+import webpack, { Compiler, Configuration, Resolve } from 'webpack';
+import path from 'path';
+import ManifestPlugin from 'webpack-manifest-plugin';
 
 // ----- Plugins ----- //
 
 class LaunchServerPlugin {
-    apply(compiler) {
+    server?: ChildProcess;
+    apply(compiler: Compiler): void {
         compiler.hooks.afterEmit.tap('LaunchServerPlugin', () => {
             console.log('Server starting...');
             this.server = fork('./dist/server.js');
@@ -25,7 +26,7 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-function resolve(loggerName) {
+function resolve(loggerName: string): Resolve {
     return {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
@@ -36,11 +37,11 @@ function resolve(loggerName) {
             logger: path.resolve(__dirname, `src/logger/${loggerName}`)
         },
     }
-};
+}
 
 // ----- Configs ----- //
 
-const serverConfig = env => {
+const serverConfig = (env: { [key: string]: boolean | undefined }): Configuration => {
     const isProd = env && env.production;
     const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
@@ -98,7 +99,7 @@ const serverConfig = env => {
     }
 }
 
-const clientConfig = {
+export const clientConfig: Configuration = {
     name: 'client',
     mode: 'development',
     entry: {
@@ -177,4 +178,4 @@ const clientConfigProduction = {
 
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig, clientConfigProduction ];
+export default [ serverConfig, clientConfig, clientConfigProduction ];
