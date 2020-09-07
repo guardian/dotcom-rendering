@@ -22,7 +22,9 @@ export const Picture: React.FC<{
     sources: PictureSource[];
     alt: string;
     src: string;
-}> = ({ sources, alt, src }) => {
+    height: string;
+    width: string;
+}> = ({ sources, alt, src, height, width }) => {
     return (
         // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
         // why did we put `style="vertical-align: middle;"` inside the img tag
@@ -32,7 +34,7 @@ export const Picture: React.FC<{
                     .map(forSource)
                     .join(
                         '',
-                    )}<!--[if IE 9]></video><![endif]--><img style="vertical-align: middle;" itemprop="contentUrl" alt="${alt}" src="${src}" />`,
+                    )}<!--[if IE 9]></video><![endif]--><img style="vertical-align: middle;" itemprop="contentUrl" alt="${alt}" src="${src}" height="${height}" width="${width}" loading="lazy" />`,
             }}
         />
     );

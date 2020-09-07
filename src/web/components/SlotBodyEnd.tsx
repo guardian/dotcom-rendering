@@ -14,6 +14,7 @@ import {
     shouldHideSupportMessaging,
     hasOptedOutOfArticleCount,
 } from '@root/src/web/lib/contributions';
+import {getForcedVariant} from "@root/src/web/lib/readerRevenueDevUtils";
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
     sendOphanComponentEvent,
@@ -21,6 +22,7 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+
 
 const { css } = emotion;
 
@@ -157,9 +159,12 @@ const MemoisedInner = ({
         const dataPerf = initPerf('contributions-epic-data');
         dataPerf.start();
 
+        const forcedVariant = getForcedVariant('epic');
+        const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
+
         getBodyEnd(
             contributionsPayload,
-            `${contributionsServiceUrl}/epic?dataOnly=true`,
+            `${contributionsServiceUrl}/epic${queryString}`,
         )
             .then((response) => {
                 dataPerf.end();
@@ -231,6 +236,11 @@ export const SlotBodyEnd = ({
     contributionsServiceUrl,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
+        return null;
+    }
+
+    if (shouldHideReaderRevenue || isPaidContent) {
+        // We never serve Reader Revenue epics in this case
         return null;
     }
 

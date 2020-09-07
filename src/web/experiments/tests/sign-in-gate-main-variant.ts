@@ -20,7 +20,7 @@ export const signInGateMainVariant: ABTest = {
     variants: [
         {
             id: 'main-variant-1',
-            test: (): void => {},
+            test: (): void => { },
         },
     ],
 };

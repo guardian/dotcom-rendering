@@ -1,3 +1,5 @@
+import { switches } from '../switches';
+
 export const Recipe: CAPIType = {
     shouldHideReaderRevenue: false,
     slotMachineFlags: '',
@@ -5268,6 +5270,8 @@ export const Recipe: CAPIType = {
             lastUpdatedDisplay: '13:12 BST',
             firstPublished: 1585734719000,
             firstPublishedDisplay: '10:51 BST',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     linkedData: [
@@ -5407,7 +5411,7 @@ export const Recipe: CAPIType = {
         sentryHost: 'app.getsentry.com/35463',
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-        switches: {},
+        switches,
         shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',

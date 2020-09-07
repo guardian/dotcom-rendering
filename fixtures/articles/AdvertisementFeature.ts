@@ -1,3 +1,5 @@
+import { switches } from '../switches';
+
 export const AdvertisementFeature: CAPIType = {
     contributionsServiceUrl: 'https://contributions.guardianapis.com',
     shouldHideReaderRevenue: true,
@@ -2379,6 +2381,8 @@ export const AdvertisementFeature: CAPIType = {
             lastUpdatedDisplay: '11:12 GMT',
             firstPublished: 1572620146000,
             firstPublishedDisplay: '14:55 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: { byline: 'Maria McCarthy' },
@@ -2506,7 +2510,7 @@ export const AdvertisementFeature: CAPIType = {
         sentryHost: 'app.getsentry.com/35463',
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-        switches: {},
+        switches,
         shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',

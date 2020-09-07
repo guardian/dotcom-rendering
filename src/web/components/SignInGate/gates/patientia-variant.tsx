@@ -10,7 +10,6 @@ import {
     isValidContentType,
     isValidSection,
     isIOS9,
-    shouldShowCmp,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGate } from '../dismissGate';
@@ -20,7 +19,6 @@ const canShow = (
     isSignedIn: boolean,
     currentTest: CurrentABTest,
 ): boolean =>
-    !shouldShowCmp() &&
     !isSignedIn &&
     !hasUserDismissedGate(currentTest.variant, currentTest.name) &&
     isNPageOrHigherPageView(3) &&

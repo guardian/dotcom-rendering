@@ -11,6 +11,7 @@ import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBloc
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
@@ -28,8 +29,14 @@ import {
     ExplainerAtom,
     InteractiveAtom,
     QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
+import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
+import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -121,6 +128,33 @@ export const ArticleRenderer: React.FC<{
                             html={element.body}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
+                    return (
+                        <div id={`guide-atom-${i}`}>
+                            <GuideAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
+                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                    return (
+                        <GuVideoBlockComponent
+                            html={element.html}
+                            pillar={pillar}
+                            designType={designType}
+                            display={display}
+                            credit={element.source}
+                            caption={element.caption}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
                         <HighlightBlockComponent key={i} html={element.html} />
@@ -149,6 +183,20 @@ export const ArticleRenderer: React.FC<{
                             css={element.css}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.MapBlockElement':
+                    return (
+                        <MapEmbedBlockComponent
+                            pillar={pillar}
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.source}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
                     return (
                         <MultiImageBlockComponent
@@ -158,6 +206,22 @@ export const ArticleRenderer: React.FC<{
                             caption={element.caption}
                             pillar={pillar}
                         />
+                    );
+                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
+                    return (
+                        <div id={`profile-atom-${i}`}>
+                            <ProfileAtom
+                                id={element.id}
+                                title={element.title}
+                                html={element.html}
+                                image={element.img}
+                                credit={element.credit}
+                                pillar={pillar}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
@@ -179,20 +243,39 @@ export const ArticleRenderer: React.FC<{
                                 html={element.html}
                                 image={element.img}
                                 credit={element.credit}
+                                pillar={pillar}
                                 likeHandler={() => {}}
                                 dislikeHandler={() => {}}
-                                expandHandler={() => {}}
+                                expandCallback={() => {}}
                             />
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div key={i} id={`rich-link-${i}`} />;
+                    return (
+                        <div key={i} id={`rich-link-${i}`}>
+                            <DefaultRichLink
+                                index={i}
+                                headlineText={element.text}
+                                url={element.url}
+                                isPlaceholder={true}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
                     );
                 case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
-                    return <SpotifyBlockComponent element={element} />;
+                    return (
+                        <SpotifyBlockComponent
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            title={element.title}
+                            pillar={pillar}
+                            caption={element.caption}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
@@ -211,8 +294,6 @@ export const ArticleRenderer: React.FC<{
                                 designType={designType}
                                 forceDropCap={element.dropCap}
                             />
-                            {/* Insert the placeholder for the sign in gate on the 2nd paragrah */}
-                            {i === 1 && <span id="sign-in-gate" />}
                         </>
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
@@ -274,17 +355,26 @@ export const ArticleRenderer: React.FC<{
                             isMainMedia={false}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                    return (
+                        <div id={`timeline-atom-${i}`}>
+                            <TimelineAtom
+                                id={element.id}
+                                title={element.title}
+                                pillar={pillar}
+                                events={element.events}
+                                likeHandler={() => {}}
+                                dislikeHandler={() => {}}
+                                expandCallback={() => {}}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.MapBlockElement':
-                case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }
@@ -295,7 +385,8 @@ export const ArticleRenderer: React.FC<{
         <div
             className={`article-body-commercial-selector ${commercialPosition}`}
         >
-            {output}
+            {/* Insert the placeholder for the sign in gate on the 2nd article element */}
+            {withSignInGateSlot(output)}
         </div>
     ); // classname that space finder is going to target for in-body ads in DCR
 };

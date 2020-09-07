@@ -122,7 +122,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 
             // switches
             switches: CAPI.config.switches,
-            cmpUi: CAPI.config.switches.cmpUi,
             slotBodyEnd: CAPI.config.switches.slotBodyEnd,
             ampPrebid: CAPI.config.switches.ampPrebid,
             permutive: CAPI.config.switches.permutive,
@@ -191,6 +190,21 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             CAPI.blocks,
             'model.dotcomrendering.pageElements.QABlockElement',
             'qandaIndex',
+        ),
+        guideAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+            'guideIndex',
+        ),
+        profileAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+            'profileIndex',
+        ),
+        timelineAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.TimelineBlockElement',
+            'timelineIndex',
         ),
     };
 };

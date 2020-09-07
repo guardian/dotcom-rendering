@@ -8,8 +8,9 @@
 4. If the test needs a design, make it in the `gateDesigns` folder
 5. Set up individual variants in the `gates` folder, exports the `SignInGateComponent` type. Display rules defined here in the `canShow` method. Helpers in `displayRule.ts`.
 6. Import the `SignInGateComponent` in `SignInGateSelector.tsx` by mapping the variant name to the `SignInGateComponent` in the `testVariantToGateMapping` array.
-7. Add it to Storybook by modifying `SignInGate.stories.tsx`
-8. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
+7. Add a value for the new test to `testIdToComponentId` map (for tracking).
+8. If there is a new gate design, add the component to Storybook by modifying `SignInGate.stories.tsx`
+9. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
 
 ## Full Guide
 
@@ -275,6 +276,8 @@ To view it in storybook simply run `yarn storybook` which will launch a storyboo
 
 Once the test has been set up, you may want to force yourself into the test to manually check that it's working as expected.
 
+First, ensure you are running `frontend` locally, and the AB test switch has been switched on eg. `safeState=On` - do not commit this change.
+
 Currently there are 2 ways of doing this.
 
 **A)** Set the `GU_mvt_id_local` cookie in your browser.
@@ -291,8 +294,8 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 <ABProvider
     arrayOfTestObjects={tests}
     abTestSwitches={{
-        ...{ abAbTestTest: true },
         ...CAPI.config.switches,
+        ...cypressAbSwitches,
     }}
     pageIsSensitive={CAPI.config.isSensitive}
     mvtMaxValue={1000000}
@@ -310,9 +313,31 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 </ABProvider>
 ```
 
-The advantage of using the forcedTestVariant is that you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+The advantages of using the forcedTestVariant:
 
-The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+-   you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+-   you can technically run it without running `frontend` locally by manually switchi on your AB test switch:
+
+```tsx
+ abTestSwitches={{
+       ...CAPI.config.switches,
+       ...cypressAbSwitches,
+       ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
+   }}
+```
+
+The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+
+#### Testing in CODE
+
+To test in CODE you will need to:
+
+1. Ensure the AB test is deployed in Frontend CODE and switched ON here: https://frontend.code.dev-gutools.co.uk/dev/switchboard
+2. Ensure the AB test experiment file with audience offsets are depolyed to Frontend CODE and check here: https://frontend.code.devv-gutools.co.uk/analytics/abtests (These test files should be identical in DCR and Frontend)
+3. Deploy you DCR branch to CODE.
+4. In chrome dev tools, set the value of the `GU_mvt_id` for the `dev-theguardian.com` cookie to one that will be captured by your desired test bucket (use https://ab-tests.netlify.app/)
+5. Navigate to an article page and trigger DCR by adding `?dcr` to the url
+6. Verify you are in the correct test bucket by looking at the `abtest` value sent to Ophan in the network tab.
 
 #### Cypress Integration Tests
 
@@ -381,6 +406,21 @@ it('should load the sign in gate', () => {
 ```
 
 To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+
+Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
+
+To decouple the switch state from production, we define the state of the switch in DCR that will be set only when running within Cypress. In `src/web/experiments/cypress-switches.ts` update the `cypressSwitches` object to add the switch and state for your new test.
+
+```ts
+...
+const cypressSwitches = {
+    abAbTestTest: true,
+    abSignInGatePatientia: true, // setting the Patientia test to always be true in Cypress regardless of production state
+};
+...
+```
+
+Now the AB test will be picked up even if the switch does not exist yet in Frontend, or the switch is set to Off in Frontend too.
 
 #### Unit Tests
 

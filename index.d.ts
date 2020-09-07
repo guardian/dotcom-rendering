@@ -172,6 +172,8 @@ interface Block {
     title?: string;
     firstPublished?: number;
     firstPublishedDisplay?: string;
+    primaryDateLine: string;
+    secondaryDateLine: string;
 }
 
 interface Pagination {
@@ -304,7 +306,6 @@ type CAPIBrowserType = {
         ampPrebid: boolean;
         permutive: boolean;
         enableSentryReporting: boolean;
-        cmpUi: boolean;
         enableDiscussionSwitch: boolean;
         slotBodyEnd: boolean;
         isSensitive: boolean;
@@ -355,6 +356,9 @@ type CAPIBrowserType = {
     matchUrl?: string;
     callouts: CalloutBlockElement[];
     qandaAtoms: QABlockElement[];
+    guideAtoms: GuideAtomBlockElement[];
+    profileAtoms: ProfileAtomBlockElement[];
+    timelineAtoms: TimelineBlockElement[];
 };
 
 interface TagType {
@@ -654,6 +658,9 @@ type IslandType =
     | 'callout'
     | 'comments'
     | 'qanda-atom'
+    | 'guide-atom'
+    | 'profile-atom'
+    | 'timeline-atom'
     | 'sign-in-gate';
 
 interface TrailType {

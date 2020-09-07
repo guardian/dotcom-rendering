@@ -161,6 +161,23 @@ export const TextBlockComponent: React.FC<Props> = ({
             background-color: ${neutral[86]};
             margin-left: -20px;
         }
+
+        /* Subscript and Superscript styles */
+        sub {
+            bottom: -0.25em;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
     `;
 
     const firstLetter = decideDropCapLetter(unwrappedHtml);

@@ -1,40 +1,27 @@
-import { ccpaApplies } from '@root/src/web/lib/ccpaApplies';
-import { showPrivacyManager } from '@guardian/consent-management-platform';
+import { cmp } from '@guardian/consent-management-platform';
+import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 
-const show = (forceModal?: boolean) => {
-    ccpaApplies().then((useCCPA) => {
-        if (useCCPA && forceModal) {
-            showPrivacyManager();
-        }
-    });
-};
+const newPrivacyLinkName = 'privacy-settings';
 
-export const addPrivacySettingsLink = (): void => {
-    if (
-        'guardian' in window &&
-        'config' in window.guardian &&
-        'switches' in window.guardian.config &&
-        'cmpUi' in window.guardian.config.switches &&
-        !window.guardian.config.switches.cmpUi
-    ) {
-        return;
-    }
-
+export const injectPrivacySettingsLink = (): void => {
     const privacyLink = document.querySelector('a[data-link-name=privacy]');
 
-    if (privacyLink) {
+    if (
+        !document.querySelector(`a[data-link-name=${newPrivacyLinkName}]`) &&
+        privacyLink
+    ) {
         const privacyLinkListItem = privacyLink.parentElement;
 
         if (privacyLinkListItem) {
-            ccpaApplies().then((useCCPA) => {
+            getPrivacyFramework().then((framework) => {
                 const newPrivacyLink = privacyLink.cloneNode(false) as Element;
 
                 newPrivacyLink.setAttribute(
                     'data-link-name',
-                    'privacy-settings',
+                    newPrivacyLinkName,
                 );
                 newPrivacyLink.setAttribute('href', '#');
-                newPrivacyLink.innerHTML = useCCPA
+                newPrivacyLink.innerHTML = framework.ccpa
                     ? 'California resident – Do Not Sell'
                     : 'Privacy settings';
 
@@ -49,9 +36,10 @@ export const addPrivacySettingsLink = (): void => {
                     newPrivacyLinkListItem,
                 );
 
-                newPrivacyLink.addEventListener('click', () => {
-                    show(true);
-                });
+                newPrivacyLink.addEventListener(
+                    'click',
+                    cmp.showPrivacyManager,
+                );
             });
         }
     }

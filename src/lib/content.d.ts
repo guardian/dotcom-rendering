@@ -9,17 +9,13 @@ interface InteractiveAtomBlockElementBase {
     js?: string;
 }
 
-interface AudioAtomBlockElementAMP {
+interface AudioAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
     id: string;
     kicker: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
-}
-
-interface AudioAtomBlockElement {
-    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
-    amp: AudioAtomBlockElementAMP;
 }
 
 interface AudioBlockElement {
@@ -126,12 +122,15 @@ interface GuideAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    guideIndex?: number;
 }
 
 interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
+    html: string;
+    source: string;
 }
 
 interface HighlightBlockElement {
@@ -175,11 +174,13 @@ interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
 
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
-    url: string;
+    embedUrl: string;
     originalUrl: string;
     source: string;
-    caption: string;
     title: string;
+    height: number;
+    width: number;
+    caption?: string;
 }
 
 interface MultiImageBlockElement {
@@ -196,6 +197,7 @@ interface ProfileAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
@@ -234,9 +236,11 @@ interface SoundcloudBlockElement {
 
 interface SpotifyBlockElement {
     _type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
-    html: string;
-    title: string;
-    caption: string;
+    embedUrl?: string;
+    title?: string;
+    height?: number;
+    width?: number;
+    caption?: string;
 }
 
 interface SubheadingBlockElement {
@@ -262,6 +266,7 @@ interface TimelineBlockElement {
     title: string;
     description?: string;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {
@@ -281,7 +286,7 @@ interface VideoFacebookBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
     embedUrl?: string;
 }
 
@@ -300,6 +305,7 @@ interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     embedUrl?: string;
     url: string;
+    originalUrl: string;
     height: number;
     width: number;
     caption?: string;

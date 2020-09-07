@@ -6,7 +6,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
+- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
 - [Quick start](#quick-start)
   - [Install Node.js](#install-nodejs)
   - [Running instructions](#running-instructions)
@@ -23,9 +23,28 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Chat
+## Where can I see Dotcom Rendering in Production?
 
-Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
+Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
+
+```
+https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers?dcr
+```
+
+You can force DCR on or off explicitly with
+[`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
+
+One way to verify whether the article you're looking at is being rendered by DCR or not is to
+[View Page Source](view-source:https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers)
+and search for the presence of DCR's
+[`react-root`](https://github.com/guardian/dotcom-rendering/blob/c90bbc20eac321d83f4337e1320d1667e264d55d/src/web/server/htmlTemplate.ts#L255-L256):
+in the `<body>` tag:
+
+```html
+<body>
+    <div id="react-root"></div>
+</body>
+```
 
 ## Quick start
 
@@ -67,6 +86,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />       | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />           | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />            | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />     | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                     |
 
 ### Architecture Diagram
 

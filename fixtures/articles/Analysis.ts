@@ -1,3 +1,5 @@
+import { switches } from '../switches';
+
 export const Analysis: CAPIType = {
     contributionsServiceUrl: 'https://contributions.guardianapis.com',
     shouldHideReaderRevenue: false,
@@ -2814,6 +2816,8 @@ export const Analysis: CAPIType = {
             lastUpdatedDisplay: '13:30 GMT',
             firstPublished: 1581333562000,
             firstPublishedDisplay: '11:19 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {
@@ -2956,7 +2960,7 @@ export const Analysis: CAPIType = {
         sentryHost: 'app.getsentry.com/35463',
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-        switches: {},
+        switches,
         shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',

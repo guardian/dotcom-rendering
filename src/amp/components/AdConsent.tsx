@@ -62,8 +62,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         consentInstanceId: 'sourcepoint',
                         checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
                         promptUISrc: `https://${sourcepointDomain}/amp/index.html`,
-                        // TODO: decide on postPromptUI
-                        // postPromptUI: 'consent-ui-manager',
                         clientConfig,
                         geoOverride: {
                             tcfv2: {
@@ -80,16 +78,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                             fallbackAction: 'reject',
                                         },
                                     },
-                                },
-                            },
-                        },
-                        // TODO: decide wether we want a fallback policy
-                        policy: {
-                            default: {
-                                waitFor: { sourcepoint: [] },
-                                timeout: {
-                                    seconds: 60,
-                                    fallbackAction: 'reject',
                                 },
                             },
                         },
