@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss } from '../../styles';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -67,7 +67,7 @@ const tagsDarkStyles = darkModeCss`
     }
 `;
 
-const Tags = ({ tags, format }: TagsProps): JSX.Element => (
+const Tags: FC<TagsProps> = ({ tags, format }) => (
     <ul css={[tagsStyles(format), tagsDarkStyles]}>
         {tags.map((tag, index) => {
             return <li key={index}>

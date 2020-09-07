@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth } from 'styles';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -50,7 +50,7 @@ type Props = {
     design: Design;
 };
 
-export const Keyline = ({ design }: Props): JSX.Element => {
+export const Keyline: FC<Props> = ({ design }) => {
     const SelectedKeylineStyles = ((design): SerializedStyles => {
         switch (design) {
             case Design.Live:

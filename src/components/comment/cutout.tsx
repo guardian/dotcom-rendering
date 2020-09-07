@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactElement } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
@@ -38,7 +38,7 @@ interface Props {
     format: Format;
 }
 
-const Cutout = ({ contributors, className, format }: Props): JSX.Element | null => {
+const Cutout: FC<Props> = ({ contributors, className, format }) => {
     const [contributor] = contributors;
 
     if (!isSingleContributor(contributors)) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Image as ImageData } from 'image';
 import { Video as VideoData } from 'video';
 import HeaderImage from 'components/headerImage';
@@ -20,7 +20,7 @@ interface HeaderMediaProps {
     item: Item;
 }
 
-const HeaderMedia = ({ item }: HeaderMediaProps): JSX.Element => {
+const HeaderMedia: FC<HeaderMediaProps> = ({ item }) => {
     const format = getFormat(item);
     return pipe2(
         item.mainMedia,

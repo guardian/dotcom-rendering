@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import Card from 'components/shared/card';
@@ -43,7 +43,7 @@ const listStyles = css`
     }
 `;
 
-const RelatedContent = ({ content }: Props): JSX.Element | null => {
+const RelatedContent: FC<Props> = ({ content }) => {
     return pipe2(
         content,
         map(({ title, relatedItems, resizedImages }) => {
