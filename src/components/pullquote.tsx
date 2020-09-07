@@ -61,7 +61,8 @@ const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
     );
     const children = pipe2(
         attribution,
-        map(attribution => ([quoteElement, <cite css={citeStyles}>{attribution}</cite>])),
+        map(attribution => 
+            ([quoteElement, <cite key={attribution} css={citeStyles}>{attribution}</cite>])),
         withDefault<ReactNode>([quoteElement]));
 
     return (
