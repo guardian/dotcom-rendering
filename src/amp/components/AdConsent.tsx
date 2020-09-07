@@ -70,15 +70,6 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
-                                policy: {
-                                    default: {
-                                        waitFor: { sourcepoint: [] },
-                                        timeout: {
-                                            seconds: 5,
-                                            fallbackAction: 'reject',
-                                        },
-                                    },
-                                },
                             },
                         },
                     }}
