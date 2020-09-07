@@ -25,5 +25,8 @@ jobs:
     - name: run
       run: |
         npm install -g ngrok
-        npm run watch
-        ngrok http 8080 -log=stdout
+        npm run watch & 
+        ngrok http 8080 -log=stdout &
+    - name: sleep
+      run: sleep 300s
+          
