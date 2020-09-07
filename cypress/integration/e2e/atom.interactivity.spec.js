@@ -12,7 +12,9 @@ const profileUrl =
 
 const timelineUrl =
     'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
-const atomTests = (type, url) => {
+const chartUrl =
+    'https://www.theguardian.com/technology/2020/aug/19/apple-becomes-wall-streets-first-2tn-company';
+const atomExpandableTests = (type, url) => {
     describe(type, function () {
         it('should render', function () {
             cy.visit(`/Article?url=${url}`);
@@ -62,7 +64,17 @@ const atomTests = (type, url) => {
         });
     });
 };
-atomTests('qanda', qandaUrl);
-atomTests('guide', guideUrl);
-atomTests('profile', profileUrl);
-atomTests('timeline', timelineUrl);
+
+const atomGenericTests = (type, url) => {
+    describe(type, function () {
+        it('should render', function () {
+            cy.visit(`/Article?url=${url}`);
+            cy.get(`[data-snippet-type=${type}]`).should('be.visible');
+        });
+    });
+};
+atomExpandableTests('qanda', qandaUrl);
+atomExpandableTests('guide', guideUrl);
+atomExpandableTests('profile', profileUrl);
+atomExpandableTests('timeline', timelineUrl);
+atomGenericTests('chart', chartUrl);
