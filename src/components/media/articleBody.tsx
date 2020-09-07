@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { adStyles, darkModeCss } from 'styles';
 import { background, neutral } from '@guardian/src-foundations/palette';
@@ -33,12 +33,12 @@ interface ArticleBodyProps {
     format: Format;
 }
 
-const ArticleBodyMedia = ({
+const ArticleBodyMedia: FC<ArticleBodyProps> = ({
     pillar,
     className,
     children,
     format
-}: ArticleBodyProps): JSX.Element =>
+}) =>
     <div css={[ArticleBodyStyles(format),
         ArticleBodyDarkStyles(getPillarStyles(pillar)),
         ...className]}>

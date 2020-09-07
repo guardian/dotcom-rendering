@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactElement } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
@@ -37,7 +37,7 @@ interface AvatarProps {
     bgColour: string;
 }
 
-function Avatar({ contributors, bgColour }: AvatarProps): JSX.Element | null {
+const Avatar: FC<AvatarProps> = ({ contributors, bgColour }) => {
     const [contributor] = contributors;
 
     if (!isSingleContributor(contributors)) {

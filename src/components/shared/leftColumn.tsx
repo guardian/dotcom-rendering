@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth, wideColumnWidth } from 'styles';
@@ -49,8 +49,8 @@ interface LeftColumnProps {
 
 // ----- Component ----- //
 
-const LeftColumn =
-    ({ children, columnContent = null, className = null }: LeftColumnProps): JSX.Element =>
+const LeftColumn: FC<LeftColumnProps> =
+    ({ children, columnContent = null, className = null }) =>
         <div css={[LeftColumnStyles, className]}>
             <div className="column-content">{columnContent}</div>
             <div className="main-content">{children}</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { icons, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
@@ -148,7 +148,7 @@ interface LiveblogKeyEventsProps {
     blocks: LiveBlock[];
 }
 
-const LiveblogKeyEvents = ({ pillar, blocks }: LiveblogKeyEventsProps): JSX.Element => {
+const LiveblogKeyEvents: FC<LiveblogKeyEventsProps> = ({ pillar, blocks }) => {
     const keyEvents = blocks.filter(elem => elem.isKeyEvent).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(getPillarStyles(pillar))}>
