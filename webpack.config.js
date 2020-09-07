@@ -3,9 +3,16 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
+const { createHash } = require('crypto');
+const CleanCSS = require('clean-css');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const renderedItemsStyles = require('./config/rendered-items-assets-styles');
+
+
+// TEMP
+const assetHash = asset =>
+    createHash('sha256').update(asset).digest('base64');
 
 // ----- Plugins ----- //
 
@@ -162,6 +169,8 @@ const clientConfig = {
     }
 };
 
+const minifiedRenderedItemsStyles = new CleanCSS().minify(renderedItemsStyles).styles.trim()
+
 const clientConfigProduction = {
     ...clientConfig,
     name: 'clientProduction',
@@ -170,11 +179,14 @@ const clientConfigProduction = {
     plugins: [
         new ManifestPlugin(),
         new HtmlWebpackPlugin({
+            meta: {
+                'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': `style-src 'sha256-${assetHash(minifiedRenderedItemsStyles)}';` },
+              },
             filename: 'rendered-items-assets.html',
             template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
             minify: true,
             templateParameters: {
-                foo: renderedItemsStyles
+                styles: minifiedRenderedItemsStyles
             }
           })
     ],
