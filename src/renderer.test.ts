@@ -30,7 +30,7 @@ const textElement = (nodes: string[]): BodyElement =>
 const imageElement = (): BodyElement =>
     ({
         kind: ElementKind.Image,
-        src: 'https://gu.com/img.png',
+        src: 'https://theguardian.com/image.jpg',
         srcset: '',
         dpr2Srcset: '',
         alt: some("alt tag"),
@@ -66,14 +66,14 @@ const pullquoteWithAttributionElement = (): BodyElement =>
 const richLinkElement = (): BodyElement =>
     ({
         kind: ElementKind.RichLink,
-        url: "https://gu.com/article",
+        url: "https://theguardian.com",
         linkText: "this links to a related article"
     })
 
 const interactiveElement = (): BodyElement =>
     ({
         kind: ElementKind.Interactive,
-        url: "https://gu.com/interactive",
+        url: "https://theguardian.com",
     })
 
 const tweetElement = (): BodyElement =>
@@ -123,7 +123,7 @@ const liveEventElement = (): BodyElement =>
     ({
         kind: ElementKind.LiveEvent,
         linkText: "this links to a live event",
-        url: "https://gu.com/liveevent"
+        url: "https://theguardian.com"
     })
 
 const explainerElement = (): BodyElement =>
@@ -230,13 +230,13 @@ describe('Renders different types of elements', () => {
         const nodes = render(richLinkElement())
         const richLink = nodes.flat()[0];
         expect(getHtml(richLink)).toContain('<h1>this links to a related article</h1>');
-        expect(getHtml(richLink)).toContain('href="https://gu.com/article"');
+        expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
     })
 
     test('ElementKind.Interactive', () => {
         const nodes = render(interactiveElement())
         const interactive = nodes.flat()[0];
-        expect(getHtml(interactive)).toContain('<iframe src="https://gu.com/interactive" height="500" title=""></iframe>');
+        expect(getHtml(interactive)).toContain('<iframe src="https://theguardian.com" height="500" title=""></iframe>');
     })
 
     test('ElementKind.Tweet', () => {
