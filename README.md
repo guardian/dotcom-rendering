@@ -23,7 +23,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-##
+## Moving to main as default branch
 
 The `master` branch in the dotcom-rendering repository has been renamed to `main`. If you have been working with DCR before the change, we recommend you run the following sequence of commands in your local repository. These will rename your master branch to main and set main as your default branch.
 
