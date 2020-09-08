@@ -236,7 +236,7 @@ Resources:
         - Scale-Up if cpu is greater than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
         - Threshold: !FindInMap [!Ref Stage, ScalingUp, Threshold]
           Period: !FindInMap [!Ref Stage, ScalingUp, Period]
-        - RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
+          RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
         - Name: AutoScalingGroupName
@@ -256,7 +256,7 @@ Resources:
         - Scale-Down if cpu is lower than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
         - Threshold: !FindInMap [!Ref Stage, ScalingDown, Threshold]
           Period: !FindInMap [!Ref Stage, ScalingDown, Period]
-        - RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
+          RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
       ComparisonOperator: LessThanThreshold
       Dimensions:
         - Name: AutoScalingGroupName
