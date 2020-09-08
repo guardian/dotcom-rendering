@@ -11,6 +11,7 @@ import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBloc
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
@@ -35,6 +36,8 @@ import {
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
+import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -148,6 +151,17 @@ export const ArticleRenderer: React.FC<{
                             />
                         </div>
                     );
+                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                    return (
+                        <GuVideoBlockComponent
+                            html={element.html}
+                            pillar={pillar}
+                            designType={designType}
+                            display={display}
+                            credit={element.source}
+                            caption={element.caption}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
                         <HighlightBlockComponent key={i} html={element.html} />
@@ -174,6 +188,20 @@ export const ArticleRenderer: React.FC<{
                             html={element.html}
                             js={element.js}
                             css={element.css}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.MapBlockElement':
+                    return (
+                        <MapEmbedBlockComponent
+                            pillar={pillar}
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.source}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -230,7 +258,16 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div key={i} id={`rich-link-${i}`} />;
+                    return (
+                        <div key={i} id={`rich-link-${i}`}>
+                            <DefaultRichLink
+                                index={i}
+                                headlineText={element.text}
+                                url={element.url}
+                                isPlaceholder={true}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
                         <SoundcloudBlockComponent key={i} element={element} />
@@ -345,8 +382,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-                case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

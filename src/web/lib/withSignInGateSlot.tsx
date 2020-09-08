@@ -1,7 +1,7 @@
 import React from 'react';
 
-// This span is used to insert the sign in gate into the appropirate location within body of an article,
-// if the SignInGateSector determines a gate should be rendered.
+// This placeholder span is used by the SignInGate component to insert the sign in gate into the appropriate location within body of an article,
+// if the SignInGateSelector determines a gate should be rendered.
 
 const SignInGateSlot = <span id="sign-in-gate" />;
 
@@ -12,6 +12,7 @@ export const withSignInGateSlot = (
         return (
             <>
                 {element}
+                {/* Add the placeholder div after the second article element */}
                 {i === 1 && SignInGateSlot}
             </>
         );

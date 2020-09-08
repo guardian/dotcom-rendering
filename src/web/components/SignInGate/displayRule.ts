@@ -43,6 +43,7 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
         'membership',
         'help',
         'guardian-live-australia',
+        'gnm-archive',
     ];
 
     // we check for invalid section by reducing the above array, and then NOT the result so we know

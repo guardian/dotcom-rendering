@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { Display } from '@root/src/lib/display';
 
 type Props = {
@@ -14,7 +14,6 @@ type Props = {
 
 const nestedStyles = css`
     li {
-        ${textSans.medium()};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -36,12 +35,6 @@ const nestedStyles = css`
 
     p {
         margin-bottom: 8px;
-    }
-
-    li {
-        ${headline.xxxsmall({
-            fontWeight: 'bold',
-        })};
     }
 
     strong {

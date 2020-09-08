@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -6,8 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { space, palette, opinion } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
-import { cmp, oldCmp } from '@guardian/consent-management-platform';
-import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
+import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 
@@ -143,8 +142,6 @@ export const SignInGateMain = ({
     ophanComponentId,
     isComment,
 }: SignInGateProps) => {
-    const [showCpmUi, setShowCmpUi] = useState(false);
-
     return (
         <div className={signinGate} data-cy="sign-in-gate-main">
             <style>{hideElementsCss}</style>
@@ -170,11 +167,7 @@ export const SignInGateMain = ({
                     data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
                     onClick={() => {
-                        getPrivacyFramework().then((framework) =>
-                            framework.tcfv1
-                                ? setShowCmpUi(!showCpmUi)
-                                : cmp.showPrivacyManager(),
-                        );
+                        cmp.showPrivacyManager();
                         trackLink(ophanComponentId, 'privacy', abTest);
                     }}
                 >
@@ -253,15 +246,6 @@ export const SignInGateMain = ({
                     Get help with registering or signing in
                 </Link>
             </div>
-            {showCpmUi && (
-                <Suspense fallback={<></>}>
-                    <oldCmp.ConsentManagementPlatform
-                        source="dcr"
-                        forceModal={true}
-                        onClose={() => setShowCmpUi(false)}
-                    />
-                </Suspense>
-            )}
         </div>
     );
 };

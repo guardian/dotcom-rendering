@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import { App } from '@root/src/web/components/App';
 import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-import { getCookie } from '../browser/cookie';
+import { getCookie } from '@frontend/web/browser/cookie';
+import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
+import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 
 type Props = {
     CAPI: CAPIBrowserType;
@@ -28,17 +30,24 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
         window.guardian.ophan &&
         window.guardian.ophan.record;
 
+    const windowHash = window && window.location && window.location.hash;
+
+    // Get the forced switches to use for when running within cypress
+    // Is empty object if not in cypress
+    const cypressAbSwitches = getCypressSwitches();
+
     ReactDOM.render(
         <ABProvider
             arrayOfTestObjects={tests}
             abTestSwitches={{
-                ...{ abAbTestTest: true }, // Test switch, used for Cypress integration test
                 ...CAPI.config.switches,
+                ...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
             }}
             pageIsSensitive={CAPI.config.isSensitive}
             mvtMaxValue={1000000}
             mvtId={mvtId}
             ophanRecord={ophanRecordFunc}
+            forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
         >
             <App CAPI={CAPI} NAV={NAV} />
         </ABProvider>,

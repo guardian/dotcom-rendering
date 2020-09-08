@@ -294,8 +294,8 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 <ABProvider
     arrayOfTestObjects={tests}
     abTestSwitches={{
-        ...{ abAbTestTest: true },
         ...CAPI.config.switches,
+        ...cypressAbSwitches,
     }}
     pageIsSensitive={CAPI.config.isSensitive}
     mvtMaxValue={1000000}
@@ -320,8 +320,8 @@ The advantages of using the forcedTestVariant:
 
 ```tsx
  abTestSwitches={{
-       ...{ abAbTestTest: true },
        ...CAPI.config.switches,
+       ...cypressAbSwitches,
        ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
    }}
 ```
@@ -406,6 +406,21 @@ it('should load the sign in gate', () => {
 ```
 
 To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+
+Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
+
+To decouple the switch state from production, we define the state of the switch in DCR that will be set only when running within Cypress. In `src/web/experiments/cypress-switches.ts` update the `cypressSwitches` object to add the switch and state for your new test.
+
+```ts
+...
+const cypressSwitches = {
+    abAbTestTest: true,
+    abSignInGatePatientia: true, // setting the Patientia test to always be true in Cypress regardless of production state
+};
+...
+```
+
+Now the AB test will be picked up even if the switch does not exist yet in Frontend, or the switch is set to Off in Frontend too.
 
 #### Unit Tests
 

@@ -306,7 +306,6 @@ type CAPIBrowserType = {
         ampPrebid: boolean;
         permutive: boolean;
         enableSentryReporting: boolean;
-        cmpUi: boolean;
         enableDiscussionSwitch: boolean;
         slotBodyEnd: boolean;
         isSensitive: boolean;

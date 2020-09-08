@@ -14,6 +14,10 @@ import {
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { unsetUserDismissedGate } from '../dismissGate';
 
+/**
+ * Not currently in use in any test. Keeping test file in case we want to roll it out
+ */
+
 const SignInGateMain = React.lazy(() => {
     const { start, end } = initPerf('SignInGateMain');
     start();

@@ -69,12 +69,12 @@ export const CommentCount = ({ short, long, pillar, setIsExpanded }: Props) => {
     return (
         <div
             className={containerStyles(pillar)}
-            aria-label={`${short} Comments`}
             data-cy="comment-counts"
         >
             <a
                 href="#comments"
                 className={linkStyles}
+                aria-label={`${short} Comments`}
                 onClick={() => setIsExpanded(true)}
             >
                 <div className={iconContainerStyles}>
