@@ -1,12 +1,14 @@
 import React, { FC, ReactElement } from 'react';
 import { css } from '@emotion/core';
-import { basePx, icons, wideContentWidth, darkModeCss } from 'styles';
+import { basePx, wideContentWidth, darkModeCss } from 'styles';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
+import { SvgCamera } from '@guardian/src-icons';
+
 
 const captionId = 'header-image-caption';
 
@@ -30,12 +32,9 @@ const HeaderImageCaptionStyles = css`
 			font-size: 0;
 		}
 
-		&::before {
-			${icons}
-			content: "\\e044";
-			font-size: 16px;
+		svg {
 			position: absolute;
-			right: ${basePx(1)};
+			right: ${basePx(0.25)};
 		}
 
 		&::-webkit-details-marker {
@@ -86,7 +85,7 @@ const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 		map(cap =>
 			<figcaption css={HeaderImageCaptionStyles}>
 				<details>
-					<summary><span>Click to see figure caption</span></summary>
+					<summary><span><SvgCamera/>Click to see figure caption</span></summary>
 					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
 				</details>
 			</figcaption>

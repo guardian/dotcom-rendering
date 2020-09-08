@@ -10,6 +10,7 @@ import { none, some } from '@guardian/types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
 
+
 configure({ adapter: new Adapter() });
 const mockFormat: Format = {
     pillar: Pillar.News,
@@ -217,13 +218,13 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Pullquote', () => {
         const nodes = render(pullquoteElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p></blockquote>');
+        expect(getHtml(pullquote)).toContain('<aside><blockquote><p>quote</p></blockquote></aside>');
     })
 
     test('ElementKind.Pullquote with attribution', () => {
         const nodes = render(pullquoteWithAttributionElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p><cite>attribution</cite></blockquote>');
+        expect(getHtml(pullquote)).toContain('<aside><blockquote><p>quote</p><cite>attribution</cite></blockquote></aside>');
     })
 
     test('ElementKind.RichLink', () => {
