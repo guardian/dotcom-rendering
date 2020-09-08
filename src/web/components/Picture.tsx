@@ -24,7 +24,8 @@ export const Picture: React.FC<{
     src: string;
     height: string;
     width: string;
-}> = ({ sources, alt, src, height, width }) => {
+    isLazy?: boolean;
+}> = ({ sources, alt, src, height, width, isLazy = true }) => {
     return (
         // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
         // why did we put `style="vertical-align: middle;"` inside the img tag
@@ -34,7 +35,9 @@ export const Picture: React.FC<{
                     .map(forSource)
                     .join(
                         '',
-                    )}<!--[if IE 9]></video><![endif]--><img style="vertical-align: middle;" itemprop="contentUrl" alt="${alt}" src="${src}" height="${height}" width="${width}" loading="lazy" />`,
+                    )}<!--[if IE 9]></video><![endif]--><img style="vertical-align: middle;" itemprop="contentUrl" alt="${alt}" src="${src}" height="${height}" width="${width}" ${
+                    isLazy ? 'loading="lazy"' : ''
+                } />`,
             }}
         />
     );
