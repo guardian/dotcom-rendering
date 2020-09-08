@@ -104,6 +104,7 @@ export const document = ({ data }: Props) => {
         { src: 'ga.js', module: true },
         { src: 'ophan.js', module: true },
         { src: 'lotame.js', module: true },
+        { src: 'atomIframe.js', module: true },
     ]);
 
     /**
