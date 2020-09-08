@@ -13,6 +13,7 @@ interface AudioAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
     id: string;
     kicker: string;
+    title?: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
