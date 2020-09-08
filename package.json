@@ -51,7 +51,7 @@
       "src"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@guardian/src-foundations|@guardian/types)/)"
+      "node_modules/(?!(@guardian/src-foundations|@guardian/types|@guardian/src-icons)/)"
     ]
   },
   "author": "",
