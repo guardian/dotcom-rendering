@@ -4,7 +4,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 400;
   src: url("/assets/fonts/GuardianTextEgyptian-Reg.ttf");
 }
-.a {
+.GuardianTextEgyptian-Reg {
   font-family: Guardian Text Egyptian Web;
   font-weight: 400;
 }
@@ -14,7 +14,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 400;
   src: url("/assets/fonts/GuardianTextEgyptian-RegItalic.ttf");
 }
-.b {
+.GuardianTextEgyptian-RegItalic {
   font-family: Guardian Text Egyptian Web;
   font-style: italic;
   font-weight: 400;
@@ -24,7 +24,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GuardianTextEgyptian-Bold.ttf");
 }
-.c {
+.GuardianTextEgyptian-Bold {
   font-family: Guardian Text Egyptian Web;
   font-weight: 700;
 }
@@ -34,37 +34,17 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf");
 }
-.d {
+.GuardianTextEgyptian-BoldItalic {
   font-family: Guardian Text Egyptian Web;
   font-style: italic;
   font-weight: 700;
-}
-@font-face {
-  font-family: Guardian Text Egyptian Web;
-  font-weight: bold;
-  src: url("/assets/fonts/GuardianTextEgyptian-Bold.ttf");
-}
-.e {
-  font-family: Guardian Text Egyptian Web;
-  font-weight: bold;
-}
-@font-face {
-  font-family: Guardian Text Egyptian Web;
-  font-style: italic;
-  font-weight: bold;
-  src: url("/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf");
-}
-.f {
-  font-family: Guardian Text Egyptian Web;
-  font-style: italic;
-  font-weight: bold;
 }
 @font-face {
   font-family: Guardian Text Sans Web;
   font-weight: 400;
   src: url("/assets/fonts/GuardianTextSans-Regular.ttf");
 }
-.g {
+.GuardianTextSans-Regular {
   font-family: Guardian Text Sans Web;
   font-weight: 400;
 }
@@ -74,7 +54,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 400;
   src: url("/assets/fonts/GuardianTextSans-RegularItalic.ttf");
 }
-.h {
+.GuardianTextSans-RegularItalic {
   font-family: Guardian Text Sans Web;
   font-style: italic;
   font-weight: 400;
@@ -84,7 +64,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GuardianTextSans-Bold.ttf");
 }
-.i {
+.GuardianTextSans-Bold {
   font-family: Guardian Text Sans Web;
   font-weight: 700;
 }
@@ -94,7 +74,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GuardianTextSans-BoldItalic.ttf");
 }
-.j {
+.GuardianTextSans-BoldItalic {
   font-family: Guardian Text Sans Web;
   font-style: italic;
   font-weight: 700;
@@ -104,7 +84,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 300;
   src: url("/assets/fonts/GHGuardianHeadline-Light.ttf");
 }
-.k {
+.GHGuardianHeadline-Light {
   font-family: GH Guardian Headline;
   font-weight: 300;
 }
@@ -114,7 +94,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 300;
   src: url("/assets/fonts/GHGuardianHeadline-LightItalic.ttf");
 }
-.l {
+.GHGuardianHeadline-LightItalic {
   font-family: GH Guardian Headline;
   font-style: italic;
   font-weight: 300;
@@ -124,7 +104,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 400;
   src: url("/assets/fonts/GHGuardianHeadline-Regular.ttf");
 }
-.m {
+.GHGuardianHeadline-Regular {
   font-family: GH Guardian Headline;
   font-weight: 400;
 }
@@ -134,7 +114,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 400;
   src: url("/assets/fonts/GHGuardianHeadline-RegularItalic.ttf");
 }
-.n {
+.GHGuardianHeadline-RegularItalic {
   font-family: GH Guardian Headline;
   font-style: italic;
   font-weight: 400;
@@ -144,7 +124,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 500;
   src: url("/assets/fonts/GHGuardianHeadline-Medium.ttf");
 }
-.o {
+.GHGuardianHeadline-Medium {
   font-family: GH Guardian Headline;
   font-weight: 500;
 }
@@ -154,7 +134,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 500;
   src: url("/assets/fonts/GHGuardianHeadline-MediumItalic.ttf");
 }
-.p {
+.GHGuardianHeadline-MediumItalic {
   font-family: GH Guardian Headline;
   font-style: italic;
   font-weight: 500;
@@ -164,7 +144,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 600;
   src: url("/assets/fonts/GHGuardianHeadline-Semibold.ttf");
 }
-.q {
+.GHGuardianHeadline-Semibold {
   font-family: GH Guardian Headline;
   font-weight: 600;
 }
@@ -174,7 +154,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 600;
   src: url("/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf");
 }
-.r {
+.GHGuardianHeadline-SemiboldItalic {
   font-family: GH Guardian Headline;
   font-style: italic;
   font-weight: 600;
@@ -184,7 +164,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GHGuardianHeadline-Bold.ttf");
 }
-.s {
+.GHGuardianHeadline-Bold {
   font-family: GH Guardian Headline;
   font-weight: 700;
 }
@@ -194,7 +174,7 @@ export const renederedItemsAssetsCss = `
   font-weight: 700;
   src: url("/assets/fonts/GHGuardianHeadline-BoldItalic.ttf");
 }
-.t {
+.GHGuardianHeadline-BoldItalic {
   font-family: GH Guardian Headline;
   font-style: italic;
   font-weight: 700;
@@ -203,7 +183,7 @@ export const renederedItemsAssetsCss = `
   font-family: Guardian Icons;
   src: url("/assets/fonts/icons.otf");
 }
-.u {
+.icons {
   font-family: Guardian Icons;
 }
 `
