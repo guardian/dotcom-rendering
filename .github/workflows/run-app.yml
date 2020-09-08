@@ -27,6 +27,9 @@ jobs:
         npm install -g ngrok
         npm run watch & 
         ngrok http 8080 -log=stdout -host-header=rewrite &
+      env: 
+        APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}  
+        CAPI_KEY: ${{ secrets.CAPI_KEY }}
     - name: sleep
       run: sleep 300s
           
