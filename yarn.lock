@@ -1010,6 +1010,13 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.1"
 
+"@babel/plugin-syntax-typescript@^7.3.3":
+  version "7.10.4"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.10.4.tgz#2f55e770d3501e83af217d782cb7517d7bb34d25"
+  integrity sha512-oSAEz1YkBCAKr5Yiq8/BNtvSAPwkp/IyUnwZogd8p+F0RuYQQrLeRUzIQhueQTTBy/F+a40uS7OFKxnkRvmvFQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.4"
+
 "@babel/plugin-transform-arrow-functions@^7.10.1":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-arrow-functions/-/plugin-transform-arrow-functions-7.10.1.tgz#cb5ee3a36f0863c06ead0b409b4cc43a889b295b"
@@ -2317,10 +2324,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.9.0.tgz#88b8eebd2e28e4479430d986d8a292b183e52148"
-  integrity sha512-Pt3dK+fQOlKQDu6JqIPJS+fNSXyHEC/h3g+SLar5eMWUeBO+HpGPiEOnn6JOpZDg9ol6gQbqzf32rns3K1IhAg==
+"@guardian/atoms-rendering@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.10.0.tgz#8d97bc18fd60d1ece6e5e562554954b66ec30936"
+  integrity sha512-N318laY99cYyEf/j4z5+tjUNPwfQ9pN4FcIZxS+WbqbdVUkZHncYLsu+ZFVQmhFieMCSoKmr5yG+N1r43P/kGw==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -2449,6 +2456,13 @@
   dependencies:
     "@guardian/src-helpers" "^1.5.0"
     "@guardian/src-icons" "^1.5.0"
+
+"@guardian/types@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.4.4.tgz#dba5c1ef0e95cfe9b8411c21354a528cba7b338c"
+  integrity sha512-kBnfpMouvhheuEXaWLFEDQRv2Lyx1wbrz/4IidSK04RqALAMdrsZiXRLHIApUDcgohgEGYp9Jwquml0Vvp7o5Q==
+  dependencies:
+    typescript "^3.8.3"
 
 "@hapi/address@2.x.x":
   version "2.1.2"
@@ -5334,6 +5348,14 @@ babel-plugin-add-react-displayname@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/babel-plugin-add-react-displayname/-/babel-plugin-add-react-displayname-0.0.5.tgz#339d4cddb7b65fd62d1df9db9fe04de134122bd5"
   integrity sha1-M51M3be2X9YtHfnbn+BN4TQSK9U=
+
+babel-plugin-const-enum@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-const-enum/-/babel-plugin-const-enum-1.0.1.tgz#0d742faf9731be4f213c4d01d61fc4e93c44d159"
+  integrity sha512-6oGu63g1FS9psUPQyLCJM08ty6kGihGKTbzWGbAKHfUuCzCh7y9twh516cR6v0lM4d4NOoR+DgLb7uKVytyp6Q==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/plugin-syntax-typescript" "^7.3.3"
 
 babel-plugin-dynamic-import-node@^2.3.0:
   version "2.3.0"
@@ -18638,6 +18660,11 @@ typescript@^3.5.3, typescript@^3.9.3, typescript@^3.9.6:
   version "3.9.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.6.tgz#8f3e0198a34c3ae17091b35571d3afd31999365a"
   integrity sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
+
+typescript@^3.8.3:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 ua-parser-js@^0.7.18:
   version "0.7.20"

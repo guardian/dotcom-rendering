@@ -74,7 +74,7 @@ module.exports = ({ isLegacyJS }) => ({
         rules: [
             {
                 test: /(\.tsx)|(\.js)|(\.ts)|(\.mjs)$/,
-                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(dynamic-import-polyfill))\/.*/,
+                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(@guardian\/types)|(dynamic-import-polyfill))\/.*/,
                 use: [
                     {
                         loader: 'babel-loader',
@@ -96,6 +96,7 @@ module.exports = ({ isLegacyJS }) => ({
                                       ]
                                     : '@babel/preset-modules',
                             ],
+                            plugins: ['const-enum'],
                         },
                     },
                     {

@@ -23,6 +23,7 @@ module.exports = {
         ],
         'babel-plugin-px-to-rem',
         '@babel/plugin-transform-runtime',
+        'const-enum',
     ],
 
     env: {
