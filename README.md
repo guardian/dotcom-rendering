@@ -133,7 +133,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 

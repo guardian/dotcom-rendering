@@ -28,7 +28,7 @@ In the first instance, consider adding the script as a low priority script. Thes
 
 An example is the [Google Analytics tracking script](https://developers.google.com/analytics/devguides/collection/analyticsjs/).
 
-They can be added to the `lowPriorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/src/web/document.tsx) module.
+They can be added to the `lowPriorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/main/src/web/document.tsx) module.
 
 ### High priority scripts
 
@@ -38,11 +38,11 @@ Examples include the [polyfill.io](https://polyfill.io) response and the main ap
 
 ⚠️ **High priority scripts have a considerable impact on site performance and should be added sparingly. Please get approval from at least 2 members of the dotcom platform team before adding a new script here.**
 
-They can be added to the `priorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/src/web/document.tsx) module.
+They can be added to the `priorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/main/src/web/document.tsx) module.
 
 ## Data extraction
 
-`dotcom-rendering` receives most of its data from CAPI, via the [`DotcomponentsDataModel`](https://github.com/guardian/frontend/blob/master/article/app/model/dotcomponents/DotcomponentsDataModel.scala) in `frontend`.
+`dotcom-rendering` receives most of its data from CAPI, via the [`DotcomponentsDataModel`](https://github.com/guardian/frontend/blob/main/article/app/model/dotcomponents/DotcomponentsDataModel.scala) in `frontend`.
 
 The data received from CAPI is probably not in an immediately useful form, and some data extraction or parsing logic is needed. When contemplating where to put this logic, consider the following axioms, in order of importance.
 
