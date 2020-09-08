@@ -22,7 +22,7 @@ const imageBlock: BlockElement = {
     type: ElementType.IMAGE,
     assets: [{
         type: AssetType.IMAGE,
-        file: 'http://gu.com/url',
+        file: 'https://theguardian.com',
         typeData: {
             isMaster: true,
             width: 5,
