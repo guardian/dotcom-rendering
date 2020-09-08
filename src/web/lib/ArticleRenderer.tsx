@@ -26,6 +26,7 @@ import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/Yo
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import {
+    AudioAtom,
     ExplainerAtom,
     InteractiveAtom,
     QandaAtom,
@@ -60,6 +61,14 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
+                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                    return (
+                        <AudioAtom
+                            trackUrl={element.trackUrl}
+                            kicker={element.kicker}
+                            title={element.title}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
                         <BlockquoteBlockComponent
@@ -377,7 +386,6 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
-                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
