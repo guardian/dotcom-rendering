@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { notificationsClient, acquisitionsClient } from 'native/nativeApi';
+import { notificationsClient, acquisitionsClient, userClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
 import { IMaybeEpic as MaybeEpic } from '@guardian/bridget/MaybeEpic';
 import { formatDate } from 'date';
@@ -203,6 +203,17 @@ function callouts(): void {
     })
 }
 
+function hasSeenCards(): void {
+    const articleIds = Array.from(document.querySelectorAll('.js-card'))
+        .map(card => card.getAttribute('data-article-id') ?? '');
+
+    void userClient.filterSeenArticles(articleIds).then(seenArticles => {
+        seenArticles.forEach(id => {
+            document.querySelector(`.js-card[data-article-id='${id}']`)?.classList.add('fade');
+        });
+    })
+}
+
 setup();
 ads();
 videos();
@@ -212,3 +223,4 @@ slideshow();
 formatDates();
 insertEpic();
 callouts();
+hasSeenCards();
