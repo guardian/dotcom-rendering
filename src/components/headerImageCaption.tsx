@@ -14,7 +14,7 @@ const captionId = 'header-image-caption';
 
 const HeaderImageCaptionStyles = css`
 	summary {
-		line-height: 30px;
+		/* line-height: 30px; */
         text-align: center;
         background-color: ${brandAlt[400]};
         color: ${neutral[7]};
@@ -30,11 +30,6 @@ const HeaderImageCaptionStyles = css`
 		
 		span {
 			font-size: 0;
-		}
-
-		svg {
-			position: absolute;
-			right: ${basePx(0.25)};
 		}
 
 		&::-webkit-details-marker {
@@ -61,6 +56,7 @@ const HeaderImageCaptionStyles = css`
 
 		${darkModeCss`
 			color: ${neutral[60]};
+			height: 5rem;
 		`}
 	}
 
@@ -79,13 +75,23 @@ interface Props {
 	credit: Option<string>;
 }
 
+const svgStyle = css`
+	line-height: 60px;
+	svg {
+		
+		width: ${basePx(3.5)};
+    	height: ${basePx(3.5)};
+	}
+	
+`;
+
 const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 	pipe2(
 		caption,
 		map(cap =>
 			<figcaption css={HeaderImageCaptionStyles}>
 				<details>
-					<summary><span><SvgCamera/>Click to see figure caption</span></summary>
+					<summary><span css={svgStyle}><SvgCamera/>Click to see figure caption</span></summary>
 					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
 				</details>
 			</figcaption>
