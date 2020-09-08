@@ -2,7 +2,7 @@
 
 ## Quick Setup Guide
 
-1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/master/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/master/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
+1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
 2. Add test definition to `src/web/experiments/tests` folder, and import test in the `src/web/experiments/ab-tests.ts` file. Variant name in test definition must be unique.
 3. Import test definition in the `tests` array in the `SignInGateSelector.tsx`
 4. If the test needs a design, make it in the `gateDesigns` folder
@@ -50,7 +50,7 @@ There are a few steps to take to set up a Sign In Gate AB Test.
 
 #### AB Test Switch
 
-First a AB Test Switch needs to be set up in [guardian/frontend](https://github.com/guardian/frontend/blob/master/common/app/conf/switches/ABTestSwitches.scala). You can follow the instructions from [here](https://github.com/guardian/frontend/blob/master/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch).
+First a AB Test Switch needs to be set up in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala). You can follow the instructions from [here](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch).
 
 Example:
 
@@ -126,7 +126,7 @@ The most important properties are:
 
 Once you've made the test definition, you'll need to import it into the `tests` array in the `src/web/experiments/ab-tests.ts` file.
 
-The test definition should also be replicated in `frontend` too if the same sign in gate tests is required on both `DCR` and `frontend`. Use the existing documentation in [`frontend`](https://github.com/guardian/frontend/blob/master/static/src/javascripts/projects/common/modules/identity/sign-in-gate/README.md) to set up the tests there. Tests should be mirrored is as far as possible.
+The test definition should also be replicated in `frontend` too if the same sign in gate tests is required on both `DCR` and `frontend`. Use the existing documentation in [`frontend`](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/identity/sign-in-gate/README.md) to set up the tests there. Tests should be mirrored is as far as possible.
 
 ### Sign In Gate Design
 
@@ -326,7 +326,7 @@ The advantages of using the forcedTestVariant:
    }}
 ```
 
-The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to main, and that if the `id` or variant id changes, you have to make sure to change it here too.
 
 #### Testing in CODE
 

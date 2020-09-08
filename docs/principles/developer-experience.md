@@ -32,7 +32,7 @@ Performance targets should be discoverable and highly visible. If they are not m
 the earliest opportunity.
 
 -   [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
--   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
+-   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/main/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
 
 ## We only deliver the assets that the page needs
 
