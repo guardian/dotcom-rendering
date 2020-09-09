@@ -84,7 +84,7 @@ function pillarFromString(pillar: string | undefined): Pillar {
 function pillarToString(pillar: Pillar): string {
     switch (pillar) {
         case Pillar.Opinion:
-            'opinion';
+            return 'opinion';
         case Pillar.Sport:
             return 'sport';
         case Pillar.Culture:

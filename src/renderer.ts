@@ -556,9 +556,9 @@ const render = (format: Format, excludeStyles = false) =>
             return h(GuideAtom, {
                 ...element,
                 pillar: pillarToString(format.pillar),
-                likeHandler: () => {},
-                dislikeHandler: () => {},
-                expandCallback: () => {}
+                likeHandler: () => { console.log("like clicked"); },
+                dislikeHandler: () => { console.log("dislike clicked"); },
+                expandCallback: () => { console.log("expand clicked"); }
             })
         }
 
