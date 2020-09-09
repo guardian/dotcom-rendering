@@ -14,23 +14,15 @@ const captionId = 'header-image-caption';
 
 const HeaderImageCaptionStyles = css`
 	summary {
-		/* line-height: 30px; */
         text-align: center;
         background-color: ${brandAlt[400]};
         color: ${neutral[7]};
         width: ${basePx(4)};
         height: ${basePx(4)};
-        display: inline-block;
         position: absolute;
         bottom: ${basePx(1)};
         right: ${basePx(1)};
 		border-radius: 100%;
-		z-index: 2;
-		outline: none;
-		
-		span {
-			font-size: 0;
-		}
 
 		&::-webkit-details-marker {
 			display: none;
@@ -70,20 +62,20 @@ const HeaderImageCaptionStyles = css`
 	}
 `;
 
+const svgStyle = css`
+	line-height: 55px;
+	font-size: 0;
+	svg {
+		width: ${basePx(2.7)};
+    	height: ${basePx(2.7)};
+	}
+`;
+
 interface Props {
 	caption: Option<string>;
 	credit: Option<string>;
 }
 
-const svgStyle = css`
-	line-height: 60px;
-	svg {
-		
-		width: ${basePx(3.5)};
-    	height: ${basePx(3.5)};
-	}
-	
-`;
 
 const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 	pipe2(
