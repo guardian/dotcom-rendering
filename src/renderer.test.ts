@@ -111,6 +111,13 @@ const audioElement = (): BodyElement =>
         width: "500"
     })
 
+const liveEventElement = (): BodyElement =>
+    ({
+        kind: ElementKind.LiveEvent,
+        linkText: "this links to a live event",
+        url: "https://theguardian.com"
+    })
+
 const atomElement = (): BodyElement =>
     ({
         kind: ElementKind.InteractiveAtom,
@@ -119,18 +126,27 @@ const atomElement = (): BodyElement =>
         js: some("console.log('init')"),
     })
 
-const liveEventElement = (): BodyElement =>
-    ({
-        kind: ElementKind.LiveEvent,
-        linkText: "this links to a live event",
-        url: "https://theguardian.com"
-    })
-
 const explainerElement = (): BodyElement =>
     ({
         kind: ElementKind.ExplainerAtom,
-        html: "<main>Some content</main>",
+        html: "<main>Explainer content</main>",
         title: "this is an explainer atom",
+        id: ""
+    })
+
+const guideElement = (): BodyElement =>
+    ({
+        kind: ElementKind.GuideAtom,
+        html: "<main>Guide content</main>",
+        title: "this is a guide atom",
+        id: ""
+    })
+
+const qandaElement = (): BodyElement =>
+    ({
+        kind: ElementKind.QandaAtom,
+        html: "<main>QandA content</main>",
+        title: "this is a qanda atom",
         id: ""
     })
 
@@ -269,6 +285,12 @@ describe('Renders different types of elements', () => {
         expect(getHtml(video)).toContain('src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"');
     })
 
+    test('ElementKind.LiveEvent', () => {
+        const nodes = render(liveEventElement())
+        const liveEvent = nodes.flat()[0];
+        expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
+    })
+
     test('ElementKind.InteractiveAtom', () => {
         const nodes = render(atomElement())
         const atom = nodes.flat()[0];
@@ -277,16 +299,22 @@ describe('Renders different types of elements', () => {
         expect(getHtml(atom)).toContain('Some content');
     })
 
-    test('ElementKind.LiveEvent', () => {
-        const nodes = render(liveEventElement())
-        const liveEvent = nodes.flat()[0];
-        expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
-    })
-
     test('ElementKind.ExplainerAtom', () => {
         const nodes = render(explainerElement())
         const explainer = nodes.flat()[0];
-        expect(getHtml(explainer)).toContain('<main>Some content</main>');
+        expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
+    })
+
+    test('ElementKind.GuideAtom', () => {
+        const nodes = render(guideElement())
+        const explainer = nodes.flat()[0];
+        expect(getHtml(explainer)).toContain('<main>Guide content</main>');
+    })
+
+    test('ElementKind.QandaAtom', () => {
+        const nodes = render(qandaElement())
+        const explainer = nodes.flat()[0];
+        expect(getHtml(explainer)).toContain('<main>QandA content</main>');
     })
 });
 
