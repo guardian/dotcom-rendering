@@ -912,13 +912,16 @@
                         "model.dotcomrendering.pageElements.ChartAtomBlockElement"
                     ]
                 },
-                "url": {
-                    "type": "string"
+                "chartIndex": {
+                    "type": "number"
                 },
                 "id": {
                     "type": "string"
                 },
                 "html": {
+                    "type": "string"
+                },
+                "url": {
                     "type": "string"
                 },
                 "css": {
@@ -930,6 +933,8 @@
             },
             "required": [
                 "_type",
+                "html",
+                "id",
                 "url"
             ]
         },
@@ -1519,6 +1524,9 @@
                 "embedUrl": {
                     "type": "string"
                 },
+                "originalUrl": {
+                    "type": "string"
+                },
                 "source": {
                     "type": "string"
                 },
@@ -1539,6 +1547,7 @@
                 "_type",
                 "embedUrl",
                 "height",
+                "originalUrl",
                 "source",
                 "title",
                 "width"
@@ -2058,12 +2067,6 @@
                     "type": "number"
                 },
                 "posterSrc": {
-                    "type": "string"
-                },
-                "height": {
-                    "type": "string"
-                },
-                "width": {
                     "type": "string"
                 }
             },

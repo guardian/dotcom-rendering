@@ -324,8 +324,6 @@ interface YoutubeBlockElement {
     channelId?: string;
     duration?: number;
     posterSrc?: string;
-    height?: string;
-    width?: string;
 }
 
 type CAPIElement =
