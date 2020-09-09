@@ -52,21 +52,6 @@ export const YoutubeBlockComponent = ({
                 title={title}
                 duration={duration}
             />
-            {/*             <MaintainAspectRatio height={height} width={width}>
-                {overlayImage && (
-                    <YouTubeOverlay
-                        image={overlayImage}
-                        pillar={pillar}
-                        duration={duration}
-                    />
-                )}
-                <iframe
-                    title={title}
-                    width={width}
-                    height={height}
-                    src={`https://www.youtube.com/embed/${element.assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
-                />
-            </MaintainAspectRatio> */}
             {!hideCaption && (
                 <Caption
                     display={display}

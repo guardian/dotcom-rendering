@@ -96,7 +96,6 @@ module.exports = ({ isLegacyJS }) => ({
                                       ]
                                     : '@babel/preset-modules',
                             ],
-                            plugins: ['const-enum'],
                         },
                     },
                     {
