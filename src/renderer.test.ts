@@ -178,11 +178,15 @@ describe('renderer returns expected content', () => {
             '<em></em>',
             '<br>',
             '<ul><li></li></ul>',
-            '<mark></mark>'
+            '<mark></mark>',
+            '<p></p>',
+            '<span></span>',
+            '<a></a>',
+            'text'
         ];
 
-        expect(renderTextElement(elements).flat().length).toBe(7);
-        expect(renderTextElementWithoutStyles(elements).flat().length).toBe(7);
+        expect(renderTextElement(elements).flat().length).toBe(11);
+        expect(renderTextElementWithoutStyles(elements).flat().length).toBe(11);
     });
 
     test ('Renders caption node types', () => {
@@ -320,17 +324,17 @@ describe('Renders different types of elements', () => {
 
 describe('Paragraph tags rendered correctly', () => {
     test('Contains no styles in standfirsts', () => {
-        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const fragment = JSDOM.fragment('<a href="#"><ul><li><strong><p>Standfirst link</p></strong></li></ul></a>');
         const nodes = renderStandfirstText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
-        expect(html).toBe('<p>Parapraph tag</p>')
+        expect(html).toContain('<strong><p>Standfirst link</p></strong>');
     });
 
     test('Contains styles in article body', () => {
-        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const fragment = JSDOM.fragment('<ul><li><strong><p>Standfirst link</p></strong></li></ul>');
         const nodes = renderText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
-        expect(html).not.toBe('<p>Parapraph tag</p>')
+        expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
     });
 });
 
