@@ -36,7 +36,8 @@ const enum ElementKind {
     InteractiveAtom,
     ExplainerAtom,
     MediaAtom,
-    GuideAtom
+    GuideAtom,
+    QandaAtom
 }
 
 type Image = ImageData & {
@@ -88,6 +89,13 @@ interface GuideAtom {
     id: string;
 }
 
+interface QandaAtom {
+    kind: ElementKind.QandaAtom;
+    html: string;
+    title: string;
+    id: string;
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -125,7 +133,7 @@ type BodyElement = {
     image?: string;
     price?: string;
     start?: string;
-} | Video | InteractiveAtom | ExplainerAtom | MediaAtom | GuideAtom;
+} | Video | InteractiveAtom | ExplainerAtom | MediaAtom | GuideAtom | QandaAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -168,6 +176,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.Embed:
             return { ...elem };
         case ElementKind.GuideAtom:
+        case ElementKind.QandaAtom:
             return {};
         default:
             return elem;
