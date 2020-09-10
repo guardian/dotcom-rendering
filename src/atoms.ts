@@ -4,6 +4,19 @@ import { Result, err, ok } from '@guardian/types/result';
 import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from '@guardian/types/option';
 import { DocParser } from "types/parserContext";
+import Int64 from 'node-int64';
+import { isValidDate } from "date";
+
+function formatDate(date: Int64) {
+    return new Date(date.toNumber()).toDateString();
+}
+
+function formatOptionalDate(date: Int64 | undefined) {
+    if (date === undefined) return undefined;
+    const d = new Date(date.toNumber());
+    if (!isValidDate(d)) return undefined;
+    return d.toDateString();
+}
 
 function parseAtom(
     element: BlockElement,
@@ -113,6 +126,36 @@ function parseAtom(
                 id,
                 image,
                 credit
+            });
+        }
+
+        case "timeline": {
+            const atom = atoms.timelines?.find(timeline => timeline.id === id);
+
+            if (atom?.data?.kind !== "timeline" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const events = atom.data.timeline.events.map(event => ({
+                title: event.title,
+                date: formatDate(event.date),
+                body: event.body,
+                toDate: formatOptionalDate(event.toDate),
+            }));
+
+            const description = atom.data.timeline.description;
+
+            if (!title || !events.length) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.TimelineAtom,
+                title,
+                id,
+                events,
+                description
             });
         }
 

@@ -38,7 +38,8 @@ const enum ElementKind {
     MediaAtom,
     GuideAtom,
     QandaAtom,
-    ProfileAtom
+    ProfileAtom,
+    TimelineAtom
 }
 
 type Image = ImageData & {
@@ -103,6 +104,21 @@ interface ProfileAtom extends ExpandableAtom {
     kind: ElementKind.ProfileAtom;
 }
 
+interface TimelineItem {
+    title: string;
+    date: string;
+    body?: string;
+    toDate?: string;
+}
+
+interface TimelineAtom {
+    kind: ElementKind.TimelineAtom;
+    title: string;
+    id: string;
+    description?: string;
+    events: TimelineItem[];
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -140,7 +156,14 @@ type BodyElement = {
     image?: string;
     price?: string;
     start?: string;
-} | Video | InteractiveAtom | ExplainerAtom | MediaAtom | GuideAtom | QandaAtom | ProfileAtom;
+} | Video
+  | InteractiveAtom
+  | ExplainerAtom
+  | MediaAtom
+  | GuideAtom
+  | QandaAtom
+  | ProfileAtom
+  | TimelineAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -185,6 +208,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.GuideAtom:
         case ElementKind.QandaAtom:
         case ElementKind.ProfileAtom:
+        case ElementKind.TimelineAtom:
             return {};
         default:
             return elem;
