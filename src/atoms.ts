@@ -46,6 +46,8 @@ function parseAtom(
             }
 
             const { title } = atom;
+            const image = atom.data.guide.guideImage?.master?.file;
+            const credit = atom.data.guide.guideImage?.master?.credit;
             const { body } = atom.data.guide.items[0];
 
             if (!title || !body) {
@@ -56,7 +58,9 @@ function parseAtom(
                 kind: ElementKind.GuideAtom,
                 html: body,
                 title,
-                id
+                id,
+                image,
+                credit
             });
         }
 
@@ -69,6 +73,8 @@ function parseAtom(
 
             const { title } = atom;
             const { body } = atom.data.qanda.item;
+            const image = atom.data.qanda.eventImage?.master?.file;
+            const credit = atom.data.qanda.eventImage?.master?.credit;
 
             if (!title || !body) {
                 return err(`No title or body for atom: ${id}`);
@@ -78,7 +84,9 @@ function parseAtom(
                 kind: ElementKind.QandaAtom,
                 html: body,
                 title,
-                id
+                id,
+                image,
+                credit
             });
         }
 

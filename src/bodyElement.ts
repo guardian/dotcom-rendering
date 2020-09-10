@@ -87,6 +87,8 @@ interface GuideAtom {
     html: string;
     title: string;
     id: string;
+    image?: string;
+    credit?: string;
 }
 
 interface QandaAtom {
@@ -94,6 +96,8 @@ interface QandaAtom {
     html: string;
     title: string;
     id: string;
+    image?: string;
+    credit?: string;
 }
 
 type BodyElement = {
