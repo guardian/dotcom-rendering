@@ -82,7 +82,11 @@ const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 		map(cap =>
 			<figcaption css={HeaderImageCaptionStyles}>
 				<details>
-					<summary><span css={svgStyle}><SvgCamera/>Click to see figure caption</span></summary>
+					<summary>
+						<span css={svgStyle}>
+							<SvgCamera/>Click to see figure caption
+						</span>
+					</summary>
 					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
 				</details>
 			</figcaption>
