@@ -5,7 +5,7 @@ import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
-import { configure, shallow } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import { none, some } from '@guardian/types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
@@ -148,6 +148,45 @@ const qandaElement = (): BodyElement =>
         html: "<main>QandA content</main>",
         title: "this is a qanda atom",
         id: ""
+    })
+
+const profileElement = (): BodyElement =>
+    ({
+        kind: ElementKind.ProfileAtom,
+        html: "<main>Profile content</main>",
+        title: "this is a profile atom",
+        id: ""
+    })
+
+const timelineElement = (): BodyElement =>
+    ({
+        kind: ElementKind.TimelineAtom,
+        title: "this is a timeline atom",
+        id: "",
+        events: [
+            {
+                title: ' ',
+                date: '1 May 2019',
+                body:
+                    '<p><a href="https://www.theguardian.com/media/2019/may/01/julian-assange-jailed-for-50-weeks-for-breaching-bail-in-2012">He is jailed for 50 weeks</a>&nbsp;in the UK for breaching his bail conditions back in 2012. An apology letter from Assange is read out in court, but the judge rules that he had engaged in a \'deliberate attempt to evade justice\'. On the following day <a href="https://www.theguardian.com/media/2019/may/02/us-begins-extradition-case-against-julian-assange-in-london">the US extradition proceedings were formally started</a>.&nbsp;</p>',
+            },
+            {
+                title: ' ',
+                date: '13 May 2019',
+                body:
+                    '<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
+            },
+        ]
+    })
+
+const chartElement = (): BodyElement =>
+    ({
+        kind: ElementKind.ChartAtom,
+        html: "<main>Chart content</main>",
+        title: "this is a chart atom",
+        id: "",
+        css: [],
+        js: []
     })
 
 
@@ -313,15 +352,50 @@ describe('Renders different types of elements', () => {
 
     test('ElementKind.GuideAtom', () => {
         const nodes = render(guideElement())
-        const explainer = nodes.flat()[0];
-        expect(getHtml(explainer)).toContain('<main>Guide content</main>');
+        const guide = nodes.flat()[0];
+        expect(getHtml(guide)).toContain('<main>Guide content</main>');
+        testHandlers(guide);
     })
 
     test('ElementKind.QandaAtom', () => {
         const nodes = render(qandaElement())
-        const explainer = nodes.flat()[0];
-        expect(getHtml(explainer)).toContain('<main>QandA content</main>');
+        const qanda = nodes.flat()[0];
+        expect(getHtml(qanda)).toContain('<main>QandA content</main>');
+        testHandlers(qanda);
     })
+
+    test('ElementKind.ProfileAtom', () => {
+        const nodes = render(profileElement())
+        const profile = nodes.flat()[0];
+        expect(getHtml(profile)).toContain('<main>Profile content</main>');
+        testHandlers(profile);
+    })
+
+    test('ElementKind.TimelineAtom', () => {
+        const nodes = render(timelineElement())
+        const timeline = nodes.flat()[0];
+        expect(getHtml(timeline)).toContain('<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>');
+        testHandlers(timeline);
+    })
+
+    test('ElementKind.ChartAtom', () => {
+        const nodes = render(chartElement())
+        const chart = nodes.flat()[0];
+        expect(getHtml(chart)).toContain('srcDoc=\"&lt;main&gt;Chart content&lt;/main&gt;\"');
+    })
+
+    function testHandlers(node: ReactNode): void {
+        if (isValidElement(node)) {
+            const component = mount(node);
+            const likeButton = component.find('[data-testid="like"]');
+            const dislikeButton = component.find('[data-testid="dislike"]');
+            const feedback = component.find('[data-testid="feedback"]');
+            expect(feedback.html()).toContain('hidden=""');
+            dislikeButton.simulate('click');
+            likeButton.simulate('click');
+            expect(feedback.html()).not.toContain('hidden=""');
+        }
+    }
 });
 
 describe('Paragraph tags rendered correctly', () => {
