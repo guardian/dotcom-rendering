@@ -1,42 +1,28 @@
 import React, { FC, ReactElement } from 'react';
 import { css } from '@emotion/core';
-import { basePx, icons, wideContentWidth, darkModeCss } from 'styles';
+import { basePx, wideContentWidth, darkModeCss } from 'styles';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
+import { SvgCamera } from '@guardian/src-icons';
+
 
 const captionId = 'header-image-caption';
 
 const HeaderImageCaptionStyles = css`
 	summary {
-		line-height: 30px;
         text-align: center;
         background-color: ${brandAlt[400]};
         color: ${neutral[7]};
         width: ${basePx(4)};
         height: ${basePx(4)};
-        display: inline-block;
         position: absolute;
         bottom: ${basePx(1)};
         right: ${basePx(1)};
 		border-radius: 100%;
-		z-index: 2;
-		outline: none;
-		
-		span {
-			font-size: 0;
-		}
-
-		&::before {
-			${icons}
-			content: "\\e044";
-			font-size: 16px;
-			position: absolute;
-			right: ${basePx(1)};
-		}
 
 		&::-webkit-details-marker {
 			display: none;
@@ -75,10 +61,20 @@ const HeaderImageCaptionStyles = css`
 	}
 `;
 
+const svgStyle = css`
+	line-height: 3.4375rem;
+	font-size: 0;
+	svg {
+		width: 1.35rem;
+		height: 1.35rem;
+	}
+`;
+
 interface Props {
 	caption: Option<string>;
 	credit: Option<string>;
 }
+
 
 const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 	pipe2(
@@ -86,7 +82,11 @@ const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
 		map(cap =>
 			<figcaption css={HeaderImageCaptionStyles}>
 				<details>
-					<summary><span>Click to see figure caption</span></summary>
+					<summary>
+						<span css={svgStyle}>
+							<SvgCamera/>Click to see figure caption
+						</span>
+					</summary>
 					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
 				</details>
 			</figcaption>

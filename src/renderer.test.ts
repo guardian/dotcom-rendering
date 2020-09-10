@@ -10,6 +10,7 @@ import { none, some } from '@guardian/types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
 
+
 configure({ adapter: new Adapter() });
 const mockFormat: Format = {
     pillar: Pillar.News,
