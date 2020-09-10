@@ -7,11 +7,11 @@ import { DocParser } from "types/parserContext";
 import Int64 from 'node-int64';
 import { isValidDate } from "date";
 
-function formatDate(date: Int64) {
+function formatDate(date: Int64): string {
     return new Date(date.toNumber()).toDateString();
 }
 
-function formatOptionalDate(date: Int64 | undefined) {
+function formatOptionalDate(date: Int64 | undefined): string | undefined {
     if (date === undefined) return undefined;
     const d = new Date(date.toNumber());
     if (!isValidDate(d)) return undefined;
