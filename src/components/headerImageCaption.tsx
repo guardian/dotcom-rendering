@@ -48,7 +48,6 @@ const HeaderImageCaptionStyles = css`
 
 		${darkModeCss`
 			color: ${neutral[60]};
-			height: 5rem;
 		`}
 	}
 
@@ -63,11 +62,11 @@ const HeaderImageCaptionStyles = css`
 `;
 
 const svgStyle = css`
-	line-height: 55px;
+	line-height: 3.4375rem;
 	font-size: 0;
 	svg {
-		width: ${basePx(2.7)};
-    	height: ${basePx(2.7)};
+		width: 1.35rem;
+		height: 1.35rem;
 	}
 `;
 

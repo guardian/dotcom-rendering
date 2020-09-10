@@ -218,13 +218,13 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Pullquote', () => {
         const nodes = render(pullquoteElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<aside><blockquote><p>quote</p></blockquote></aside>');
+        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p></blockquote>');
     })
 
     test('ElementKind.Pullquote with attribution', () => {
         const nodes = render(pullquoteWithAttributionElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<aside><blockquote><p>quote</p><cite>attribution</cite></blockquote></aside>');
+        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p><cite>attribution</cite></blockquote>');
     })
 
     test('ElementKind.RichLink', () => {
