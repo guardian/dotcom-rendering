@@ -32,6 +32,13 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
             };
         }
 
+        if (elem.kind === ElementKind.ChartAtom) {
+            return {
+                styles: [ ...styles, ...elem.css ],
+                scripts: [ ...scripts, ...elem.js ],
+            };
+        }
+
         return { scripts, styles };
     }, { scripts: [], styles: [] });
 

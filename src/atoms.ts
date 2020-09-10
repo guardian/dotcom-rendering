@@ -129,6 +129,34 @@ function parseAtom(
             });
         }
 
+        case "chart": {
+            const atom = atoms.charts?.find(chart => chart.id === id);
+
+            if (atom?.data?.kind !== "chart" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title, defaultHtml } = atom;
+
+            if (!title || !defaultHtml) {
+                return err(`No title or defaultHtml for atom: ${id}`);
+            }
+
+            const css = Array.from(docParser(defaultHtml).querySelectorAll('style'))
+                .map(style => style.innerHTML);
+            const js = Array.from(docParser(defaultHtml).querySelectorAll('script'))
+                .map(script => script.innerHTML);
+
+            return ok({
+                kind: ElementKind.ChartAtom,
+                title,
+                id,
+                html: defaultHtml,
+                css,
+                js
+            });
+        }
+
         case "timeline": {
             const atom = atoms.timelines?.find(timeline => timeline.id === id);
 

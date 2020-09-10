@@ -39,7 +39,8 @@ const enum ElementKind {
     GuideAtom,
     QandaAtom,
     ProfileAtom,
-    TimelineAtom
+    TimelineAtom,
+    ChartAtom
 }
 
 type Image = ImageData & {
@@ -67,6 +68,15 @@ interface InteractiveAtom {
     js: Option<string>;
     css: string;
     html: string;
+}
+
+interface ChartAtom {
+    kind: ElementKind.ChartAtom;
+    title: string;
+    id: string;
+    html: string;
+    css: string[];
+    js: string[];
 }
 
 interface ExplainerAtom {
@@ -163,7 +173,8 @@ type BodyElement = {
   | GuideAtom
   | QandaAtom
   | ProfileAtom
-  | TimelineAtom;
+  | TimelineAtom
+  | ChartAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -209,6 +220,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.QandaAtom:
         case ElementKind.ProfileAtom:
         case ElementKind.TimelineAtom:
+        case ElementKind.ChartAtom:
             return {};
         default:
             return elem;

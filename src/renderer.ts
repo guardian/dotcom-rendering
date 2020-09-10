@@ -24,7 +24,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
+import { ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -534,6 +534,13 @@ const render = (format: Format, excludeStyles = false) =>
                 likeHandler: () => { console.log("like clicked"); },
                 dislikeHandler: () => { console.log("dislike clicked"); },
                 expandCallback: () => { console.log("expand clicked"); }
+            })
+        }
+
+        case ElementKind.ChartAtom: {
+            return h(ChartAtom, {
+                ...element,
+                url: ""
             })
         }
 
