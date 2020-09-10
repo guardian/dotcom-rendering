@@ -158,15 +158,23 @@ export const OnwardsUpper = ({
         ophanComponentName = 'related-stories';
     }
 
-    if (!url) {
-        return null;
-    }
+    const headlinesDataUrl =
+        'http://localhost:9000/container/data/uk-alpha/news/regular-stories.json';
 
     return (
-        <OnwardsData
-            url={url}
-            limit={8}
-            ophanComponentName={ophanComponentName}
-        />
+        <div>
+            <OnwardsData
+                url={headlinesDataUrl}
+                limit={4}
+                ophanComponentName="curated-content"
+            />
+            {url && (
+                <OnwardsData
+                    url={url}
+                    limit={8}
+                    ophanComponentName={ophanComponentName}
+                />
+            )}
+        </div>
     );
 };
