@@ -6,7 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss, icons } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getPillarStyles, pillarToString } from 'pillarStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { BodyImageProps, Role } from 'image';
@@ -24,7 +24,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { ExplainerAtom } from '@guardian/atoms-rendering';
+import { ExplainerAtom, GuideAtom, QandaAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -238,6 +238,8 @@ const textElement = (format: Format) => (node: Node, key: number): ReactNode => 
             return h(Blockquote, { key, format }, children);
         case 'STRONG':
             return h('strong', { key }, children);
+        case 'B':
+            return h('b', { key }, children);
         case 'EM':
             return h('em', { key }, children);
         case 'BR':
@@ -493,6 +495,26 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.ExplainerAtom: {
             return h(ExplainerAtom, { ...element })
+        }
+
+        case ElementKind.GuideAtom: {
+            return h(GuideAtom, {
+                ...element,
+                pillar: pillarToString(format.pillar),
+                likeHandler: () => { console.log("like clicked"); },
+                dislikeHandler: () => { console.log("dislike clicked"); },
+                expandCallback: () => { console.log("expand clicked"); }
+            })
+        }
+
+        case ElementKind.QandaAtom: {
+            return h(QandaAtom, {
+                ...element,
+                pillar: pillarToString(format.pillar),
+                likeHandler: () => { console.log("like clicked"); },
+                dislikeHandler: () => { console.log("dislike clicked"); },
+                expandCallback: () => { console.log("expand clicked"); }
+            })
         }
 
         case ElementKind.InteractiveAtom: {
