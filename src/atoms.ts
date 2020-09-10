@@ -90,6 +90,32 @@ function parseAtom(
             });
         }
 
+        case "profile": {
+            const atom = atoms.profiles?.find(profile => profile.id === id);
+
+            if (atom?.data?.kind !== "profile" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const { body } = atom.data.profile.items[0];
+            const image = atom.data.profile.headshot?.master?.file;
+            const credit = atom.data.profile.headshot?.master?.credit;
+
+            if (!title || !body) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.ProfileAtom,
+                html: body,
+                title,
+                id,
+                image,
+                credit
+            });
+        }
+
         case "explainer": {
             const atom = atoms.explainers?.find(explainer => explainer.id === id);
 
