@@ -41,7 +41,7 @@ const articleAdStyles = css`
             margin-left: 20px;
         }
         ${from.desktop} {
-            width: 100%;
+            width: auto;
             float: right;
             margin: 0;
             margin-top: 4px;
@@ -62,6 +62,7 @@ const articleAdStyles = css`
     .ad-slot--outstream {
         ${from.tablet} {
             margin-left: 0;
+            width: 100%;
 
             .ad-slot__label {
                 margin-left: 35px;
