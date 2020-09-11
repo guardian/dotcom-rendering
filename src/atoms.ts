@@ -6,6 +6,7 @@ import { fromNullable } from '@guardian/types/option';
 import { DocParser } from "types/parserContext";
 import Int64 from 'node-int64';
 import { isValidDate } from "date";
+import { atomScript } from "components/atoms/interactiveAtom";
 
 function formatDate(date: Int64): string {
     return new Date(date.toNumber()).toDateString();
@@ -139,23 +140,24 @@ function parseAtom(
             const { title, defaultHtml } = atom;
 
             if (!title || !defaultHtml) {
-                return err(`No title or defaultHtml for atom: ${id}`);
+                return err(`No title or defaultHtml for atom: ${id}`);``
             }
 
-            const styles = Array.from(docParser(defaultHtml).querySelectorAll('style'))
+            const doc = docParser(defaultHtml);
+            const styles = Array.from(doc.querySelectorAll('style'))
                 .map(style => style.innerHTML);
 
-            const inlineStyles = Array.from(docParser(defaultHtml).querySelectorAll('[style]'))
+            const inlineStyles = Array.from(doc.querySelectorAll('[style]'))
                 .map(element => (element as HTMLElement).style.cssText);
 
-            const js = Array.from(docParser(defaultHtml).querySelectorAll('script'))
+            const js = Array.from(doc.querySelectorAll('script'))
                 .map(script => script.innerHTML);
 
             return ok({
                 kind: ElementKind.ChartAtom,
                 title,
                 id,
-                html: defaultHtml,
+                html: defaultHtml + `<script>${atomScript}</script>`,
                 css: [...styles, ...inlineStyles],
                 js
             });
