@@ -98,6 +98,11 @@ const immersiveLabs = css`
     }
 `;
 
+// stop headlines from growing in size with font resizer
+const fontSizeRestriction = css`
+    font-size: 34px;
+`
+
 const getStyles = (format: Format): SerializedStyles => {
     if (format.display === Display.Immersive) {
         const labs = format.design === Design.AdvertisementFeature ? immersiveLabs : null;
@@ -106,17 +111,17 @@ const getStyles = (format: Format): SerializedStyles => {
 
     switch (format.design) {
         case Design.Analysis:
-            return css(styles(format), analysisStyles(format));
+            return css(styles(format), analysisStyles(format), fontSizeRestriction);
         case Design.Feature:
-            return css(styles(format), featureStyles);
+            return css(styles(format), featureStyles, fontSizeRestriction);
         case Design.Comment:
-            return css(styles(format), commentStyles);
+            return css(styles(format), commentStyles, fontSizeRestriction);
         case Design.Media:
-            return css(styles(format), mediaStyles);
+            return css(styles(format), mediaStyles, fontSizeRestriction);
         case Design.AdvertisementFeature:
-            return css(styles(format), advertisementFeatureStyles);
+            return css(styles(format), advertisementFeatureStyles, fontSizeRestriction);
         default:
-            return styles(format);
+            return css(styles(format), fontSizeRestriction);
     }
 }
 
