@@ -142,7 +142,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiUrl: CAPI.config.discussionApiUrl,
             discussionD2Uid: CAPI.config.discussionD2Uid,
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
-            idApiUrl: CAPI.config.idApiUrl,
 
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
 
