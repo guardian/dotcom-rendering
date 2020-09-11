@@ -142,8 +142,12 @@ function parseAtom(
                 return err(`No title or defaultHtml for atom: ${id}`);
             }
 
-            const css = Array.from(docParser(defaultHtml).querySelectorAll('style'))
+            const styles = Array.from(docParser(defaultHtml).querySelectorAll('style'))
                 .map(style => style.innerHTML);
+
+            const inlineStyles = Array.from(docParser(defaultHtml).querySelectorAll('[style]'))
+                .map(element => (element as HTMLElement).style.cssText);
+
             const js = Array.from(docParser(defaultHtml).querySelectorAll('script'))
                 .map(script => script.innerHTML);
 
@@ -152,7 +156,7 @@ function parseAtom(
                 title,
                 id,
                 html: defaultHtml,
-                css,
+                css: [...styles, ...inlineStyles],
                 js
             });
         }
