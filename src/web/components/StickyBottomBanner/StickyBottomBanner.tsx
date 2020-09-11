@@ -16,6 +16,14 @@ type Props = {
     isDigitalSubscriber?: boolean;
 };
 
+type FulfilledProps = {
+    isSignedIn: boolean;
+    asyncCountryCode: Promise<string>;
+    CAPI: CAPIBrowserType;
+    asyncBrazeUuid: Promise<null | string>;
+    isDigitalSubscriber: boolean;
+};
+
 const getBannerLastClosedAt = (key: string): string | undefined => {
     const item = localStorage.getItem(`gu.prefs.${key}`);
     return (item && JSON.parse(item).value) || undefined;
@@ -83,24 +91,16 @@ const buildBrazeBanner = (
     timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
-export const StickyBottomBanner = ({
+const StickyBottomBannerWithFullfilledDependencies = ({
     isSignedIn,
     asyncCountryCode,
     CAPI,
     asyncBrazeUuid,
     isDigitalSubscriber,
-}: Props) => {
+}: FulfilledProps) => {
     const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 
     useEffect(() => {
-        if (
-            isSignedIn === undefined ||
-            asyncCountryCode === undefined ||
-            asyncBrazeUuid === undefined
-        ) {
-            return;
-        }
-
         const CMP = buildCmpBannerConfig();
         const readerRevenue = buildReaderRevenueBannerConfig(
             CAPI,
@@ -117,11 +117,41 @@ export const StickyBottomBanner = ({
             setSelectedBanner(PickedBanner),
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSignedIn, asyncCountryCode, asyncBrazeUuid]);
+    }, []); // Empty dependency array because we only want this to run once
 
     if (SelectedBanner) {
         return <SelectedBanner />;
     }
 
     return null;
+};
+
+// This outer component exists because we don't want to run the banner picker
+// until all of our dependencies are defined. Then when they are all defined we
+// only want to run the banner picker once.
+export const StickyBottomBanner = ({
+    isSignedIn,
+    asyncCountryCode,
+    CAPI,
+    asyncBrazeUuid,
+    isDigitalSubscriber,
+}: Props) => {
+    if (
+        isSignedIn === undefined ||
+        asyncCountryCode === undefined ||
+        asyncBrazeUuid === undefined ||
+        isDigitalSubscriber === undefined
+    ) {
+        return null;
+    }
+
+    return (
+        <StickyBottomBannerWithFullfilledDependencies
+            isSignedIn={isSignedIn}
+            asyncCountryCode={asyncCountryCode}
+            asyncBrazeUuid={asyncBrazeUuid}
+            isDigitalSubscriber={isDigitalSubscriber}
+            CAPI={CAPI}
+        />
+    );
 };
