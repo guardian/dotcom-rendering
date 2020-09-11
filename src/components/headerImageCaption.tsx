@@ -23,6 +23,7 @@ const HeaderImageCaptionStyles = css`
         bottom: ${basePx(1)};
         right: ${basePx(1)};
 		border-radius: 100%;
+		outline: none;
 
 		&::-webkit-details-marker {
 			display: none;
@@ -62,11 +63,12 @@ const HeaderImageCaptionStyles = css`
 `;
 
 const svgStyle = css`
-	line-height: 3.4375rem;
+	line-height: 32px;
 	font-size: 0;
 	svg {
-		width: 1.35rem;
-		height: 1.35rem;
+		width: 24px;
+		height: 24px;
+		margin: 4px;
 	}
 `;
 
