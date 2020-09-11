@@ -17,6 +17,7 @@ import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 
 // ----- Types ----- //
 
@@ -114,19 +115,12 @@ interface ProfileAtom extends ExpandableAtom {
     kind: ElementKind.ProfileAtom;
 }
 
-interface TimelineItem {
-    title: string;
-    date: string;
-    body?: string;
-    toDate?: string;
-}
-
 interface TimelineAtom {
     kind: ElementKind.TimelineAtom;
     title: string;
     id: string;
     description?: string;
-    events: TimelineItem[];
+    events: TimelineEvent[];
 }
 
 type BodyElement = {
