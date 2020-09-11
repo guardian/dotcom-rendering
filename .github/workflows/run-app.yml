@@ -7,6 +7,7 @@ on:
 jobs:
   pr_deployment:
     
+    # We only want to run the app if the PR Deployment label has been added
     if: ${{ github.event.label.id == 2340278517 }}
 
     runs-on: ubuntu-latest
