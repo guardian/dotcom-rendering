@@ -6,14 +6,11 @@ import {
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
-import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
     isSignedIn?: boolean;
     asyncCountryCode?: Promise<string>;
     CAPI: CAPIBrowserType;
-    asyncBrazeUuid?: Promise<null | string>;
-    isDigitalSubscriber?: boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -73,31 +70,15 @@ const buildReaderRevenueBannerConfig = (
     };
 };
 
-const buildBrazeBanner = (
-    asyncBrazeUuid: Promise<null | string>,
-    isDigitalSubscriber: undefined | boolean,
-): Banner => ({
-    id: 'braze-banner',
-    canShow: () => canShowBrazeBanner(asyncBrazeUuid, isDigitalSubscriber),
-    show: (meta: any) => () => <BrazeBanner meta={meta} />,
-    timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
-});
-
 export const StickyBottomBanner = ({
     isSignedIn,
     asyncCountryCode,
     CAPI,
-    asyncBrazeUuid,
-    isDigitalSubscriber,
 }: Props) => {
     const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 
     useEffect(() => {
-        if (
-            isSignedIn === undefined ||
-            asyncCountryCode === undefined ||
-            asyncBrazeUuid === undefined
-        ) {
+        if (isSignedIn === undefined || asyncCountryCode === undefined) {
             return;
         }
 
@@ -107,17 +88,13 @@ export const StickyBottomBanner = ({
             isSignedIn,
             asyncCountryCode,
         );
-        const brazeBanner = buildBrazeBanner(
-            asyncBrazeUuid,
-            isDigitalSubscriber,
-        );
-        const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
+        const bannerConfig: BannerConfig = [CMP, readerRevenue];
 
         pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
             setSelectedBanner(PickedBanner),
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSignedIn, asyncCountryCode, asyncBrazeUuid]);
+    }, [isSignedIn, asyncCountryCode]);
 
     if (SelectedBanner) {
         return <SelectedBanner />;
