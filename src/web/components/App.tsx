@@ -35,6 +35,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
+import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
@@ -134,7 +135,11 @@ const componentEventHandler = (
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
+    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
+    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
+        Promise<string | null>
+    >();
     const [countryCode, setCountryCode] = useState<string>();
     // This is an async version of the countryCode state value defined above.
     // This can be used where you've got logic which depends on countryCode but
@@ -175,6 +180,10 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
+        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
+    }, []);
+
+    useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
@@ -183,6 +192,14 @@ export const App = ({ CAPI, NAV }: Props) => {
             callGetUser();
         }
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
+
+    useEffect(() => {
+        if (isSignedIn) {
+            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
+        } else {
+            setAsyncBrazeUuid(Promise.resolve(null));
+        }
+    }, [isSignedIn, CAPI.config.idApiUrl]);
 
     useEffect(() => {
         const callFetch = () => {
@@ -642,6 +659,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isSignedIn={isSignedIn}
                     asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
+                    asyncBrazeUuid={asyncBrazeUuid}
+                    isDigitalSubscriber={isDigitalSubscriber}
                 />
             </Portal>
         </React.StrictMode>
