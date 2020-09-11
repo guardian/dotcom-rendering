@@ -35,4 +35,4 @@ jobs:
       env: 
         APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}  
         CAPI_KEY: ${{ secrets.CAPI_KEY }}
-          
+        TZ: "/usr/share/zoneinfo/Europe/London"  
