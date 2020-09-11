@@ -187,14 +187,19 @@ export const App = ({ CAPI, NAV }: Props) => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
-        const callGetBrazeUuid = async () => {
-            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
-        };
+
         if (isSignedIn) {
             callGetUser();
-            callGetBrazeUuid();
         }
-    }, [isSignedIn, CAPI.config.discussionApiUrl, CAPI.config.idApiUrl]);
+    }, [isSignedIn, CAPI.config.discussionApiUrl]);
+
+    useEffect(() => {
+        if (isSignedIn) {
+            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
+        } else {
+            setAsyncBrazeUuid(Promise.resolve(null));
+        }
+    }, [isSignedIn, CAPI.config.idApiUrl]);
 
     useEffect(() => {
         const callFetch = () => {
