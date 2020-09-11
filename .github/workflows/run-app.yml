@@ -1,12 +1,13 @@
 name: PR Deployment
 
 on:
-  pull_request:
-    branches:
-      - master
+  pull_request: 
+    types: [labeled]
 
 jobs:
   pr_deployment:
+    
+    if: ${{ github.event.label.id == 2340278517 }}
 
     runs-on: ubuntu-latest
 
