@@ -331,6 +331,7 @@ export const ImageComponent = ({
                     src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -359,6 +360,7 @@ export const ImageComponent = ({
                     src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -387,6 +389,7 @@ export const ImageComponent = ({
                     src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {isMainMedia && (
                     // Below tablet, main media images show an info toggle at the bottom right of
