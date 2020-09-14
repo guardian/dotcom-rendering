@@ -19,17 +19,18 @@ interface RenderToStringResult {
 
 const generateScriptTags = (
     scripts: Array<{ src: string; module?: boolean }>,
+    scriptAttrs: string = '',
 ) =>
     scripts.reduce((scriptTags, script) => {
         if (script.module) {
             scriptTags.push(
-                `<script defer module src="${getDist({
+                `<script ${scriptAttrs} type="module" src="${getDist({
                     path: script.src,
                     legacy: false,
                 })}"></script>`,
             );
             scriptTags.push(
-                `<script defer nomodule src="${getDist({
+                `<script ${scriptAttrs} nomodule src="${getDist({
                     path: script.src,
                     legacy: true,
                 })}"></script>`,
@@ -90,6 +91,7 @@ export const document = ({ data }: Props) => {
             { src: 'dynamicImport.js', module: true },
             { src: 'react.js', module: true },
         ].filter(Boolean),
+        'defer',
     );
 
     /**
@@ -99,13 +101,16 @@ export const document = ({ data }: Props) => {
      * *before* the high priority scripts, although this is very
      * unlikely.
      */
-    const lowPriorityScriptTags = generateScriptTags([
-        { src: 'https://www.google-analytics.com/analytics.js' },
-        { src: 'ga.js', module: true },
-        { src: 'ophan.js', module: true },
-        { src: 'lotame.js', module: true },
-        { src: 'atomIframe.js', module: true },
-    ]);
+    const lowPriorityScriptTags = generateScriptTags(
+        [
+            { src: 'https://www.google-analytics.com/analytics.js' },
+            { src: 'ga.js', module: true },
+            { src: 'ophan.js', module: true },
+            { src: 'lotame.js', module: true },
+            { src: 'atomIframe.js', module: true },
+        ],
+        'async',
+    );
 
     /**
      * We escape windowGuardian here to prevent errors when the data
