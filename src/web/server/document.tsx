@@ -24,7 +24,7 @@ const generateScriptTags = (
     scripts.reduce((scriptTags, script) => {
         if (script.module) {
             scriptTags.push(
-                `<script ${scriptAttrs} module src="${getDist({
+                `<script ${scriptAttrs} type="module" src="${getDist({
                     path: script.src,
                     legacy: false,
                 })}"></script>`,
