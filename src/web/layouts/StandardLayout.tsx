@@ -49,7 +49,6 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
-import { useAB } from '@guardian/ab-react';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
@@ -277,14 +276,7 @@ export const StandardLayout = ({
         (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
 
-    const ABTestAPI = useAB();
-    const inCuratedContainerTest = ABTestAPI.isUserInVariant(
-        'CuratedContainerTest',
-        'variant',
-    );
-
-    const showOnwardsLower =
-        inCuratedContainerTest || (seriesTag && CAPI.hasStoryPackage);
+    const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
     const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
 
