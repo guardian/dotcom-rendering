@@ -281,6 +281,9 @@ export const ArticleRenderer: React.FC<{
                             title={element.title}
                             pillar={pillar}
                             caption={element.caption}
+                            designType={designType}
+                            display={display}
+                            credit="Spotify"
                         />
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':

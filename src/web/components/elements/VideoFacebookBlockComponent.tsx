@@ -35,13 +35,14 @@ export const VideoFacebookBlockComponent: React.FC<{
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
 
+    const embedContainer = css`
+        max-width: ${maxWidth}px;
+        width: 100%;
+        margin-bottom: ${caption ? `0px` : `6px`};
+    `;
+
     return (
-        <div
-            className={css`
-                max-width: ${maxWidth}px;
-                width: 100%;
-            `}
-        >
+        <div className={embedContainer}>
             <MaintainAspectRatio height={height} width={width}>
                 <iframe
                     src={embedUrl}
