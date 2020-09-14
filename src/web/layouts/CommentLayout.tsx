@@ -45,115 +45,122 @@ import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
+const showcaseGrid = css`
+    grid-template-areas:
+        'title      border  headline    headline'
+        'lines      border  headline    headline'
+        'meta       border  standfirst  standfirst'
+        'meta       border  media       media'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
 const StandardGrid = ({
     children,
 }: {
     children: JSX.Element | JSX.Element[];
     display: Display;
 }) => (
-    <div
-        className={css`
-            /* IE Fallback */
-            display: flex;
-            flex-direction: column;
-            ${until.leftCol} {
-                margin-left: 0px;
-            }
-            ${from.leftCol} {
-                margin-left: 151px;
-            }
-            ${from.wide} {
-                margin-left: 230px;
-            }
-
-            @supports (display: grid) {
-                display: grid;
-                width: 100%;
-                margin-left: 0;
-
-                grid-column-gap: 10px;
-
-                ${from.wide} {
-                    grid-template-columns:
-                        219px /* Left Column (220 - 1px border) */
-                        1px /* Vertical grey border */
-                        1fr /* Main content */
-                        300px; /* Right Column */
-                    grid-template-areas: ${Display.Showcase
-                        ? `'title      border  headline    headline'
-                        'lines      border  headline    headline'
-                        'meta       border  standfirst  standfirst'
-                        'meta       border  media       media'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column'`
-                        : `
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column'}`};
-                }
-
-                ${until.wide} {
-                    grid-template-columns:
-                        140px /* Left Column (220 - 1px border) */
-                        1px /* Vertical grey border */
-                        1fr /* Main content */
-                        300px; /* Right Column */
-                    grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
-                }
-
+        <div
+            className={css`
+                /* IE Fallback */
+                display: flex;
+                flex-direction: column;
                 ${until.leftCol} {
-                    grid-template-columns:
-                        1fr /* Main content */
-                        300px; /* Right Column */
-                    grid-template-areas:
-                        'title      right-column'
-                        'headline   right-column'
-                        'standfirst right-column'
-                        'meta       right-column'
-                        'media      right-column'
-                        'body       right-column'
-                        '.          right-column';
+                    margin-left: 0px;
                 }
-
-                ${until.desktop} {
-                    grid-column-gap: 0px;
-                    grid-template-columns: 1fr; /* Main content */
-                    grid-template-areas:
-                        'title'
-                        'headline'
-                        'standfirst'
-                        'meta'
-                        'media'
-                        'body';
+                ${from.leftCol} {
+                    margin-left: 151px;
                 }
-
-                ${until.tablet} {
-                    grid-column-gap: 0px;
-
-                    grid-template-columns: 1fr; /* Main content */
-                    grid-template-areas:
-                        'title'
-                        'headline'
-                        'standfirst'
-                        'meta'
-                        'media'
-                        'body';
+                ${from.wide} {
+                    margin-left: 230px;
                 }
-            }
-        `}
-    >
-        {children}
-    </div>
-);
+    
+                @supports (display: grid) {
+                    display: grid;
+                    width: 100%;
+                    margin-left: 0;
+    
+                    grid-column-gap: 10px;
+    
+                    ${from.wide} {
+                        grid-template-columns:
+                            219px /* Left Column (220 - 1px border) */
+                            1px /* Vertical grey border */
+                            1fr /* Main content */
+                            300px; /* Right Column */
+    
+                        grid-template-areas:
+                            'title      border  headline    right-column'
+                            'lines      border  headline    right-column'
+                            'meta       border  standfirst  right-column'
+                            'meta       border  media       right-column'
+                            '.          border  body        right-column'
+                            '.          border  .           right-column';
+    
+                        /* Override grid-template-areas if showcase */
+                        ${display === Display.Showcase ? showcaseGrid : ''}
+                    }
+    
+                    ${until.wide} {
+                        grid-template-columns:
+                            140px /* Left Column (220 - 1px border) */
+                            1px /* Vertical grey border */
+                            1fr /* Main content */
+                            300px; /* Right Column */
+                        grid-template-areas:
+                            'title      border  headline    right-column'
+                            'lines      border  headline    right-column'
+                            'meta       border  standfirst  right-column'
+                            'meta       border  media       right-column'
+                            '.          border  body        right-column'
+                            '.          border  .           right-column';
+                    }
+    
+                    ${until.leftCol} {
+                        grid-template-columns:
+                            1fr /* Main content */
+                            300px; /* Right Column */
+                        grid-template-areas:
+                            'title      right-column'
+                            'headline   right-column'
+                            'standfirst right-column'
+                            'meta       right-column'
+                            'media      right-column'
+                            'body       right-column'
+                            '.          right-column';
+                    }
+    
+                    ${until.desktop} {
+                        grid-column-gap: 0px;
+                        grid-template-columns: 1fr; /* Main content */
+                        grid-template-areas:
+                            'title'
+                            'headline'
+                            'standfirst'
+                            'meta'
+                            'media'
+                            'body';
+                    }
+    
+                    ${until.tablet} {
+                        grid-column-gap: 0px;
+    
+                        grid-template-columns: 1fr; /* Main content */
+                        grid-template-areas:
+                            'title'
+                            'headline'
+                            'standfirst'
+                            'meta'
+                            'media'
+                            'body';
+                    }
+                }
+            `}
+        >
+            {children}
+        </div>
+    );
 
 const maxWidth = css`
     ${from.desktop} {
@@ -432,34 +439,27 @@ export const CommentLayout = ({
                         />
                     </GridItem>
                     <GridItem area="media">
-                        {display === Display.Showcase &&
-                        CAPI.pageType.hasShowcaseMainElement ? (
-                            <div className={mainMediaWrapper}>
-                                <MainMedia
-                                    display={display}
-                                    designType={designType}
-                                    elements={CAPI.mainMediaElements}
-                                    pillar={pillar}
-                                    adTargeting={adTargeting}
-                                    starRating={
-                                        designType === 'Review' &&
-                                        CAPI.starRating
-                                            ? CAPI.starRating
-                                            : undefined
-                                    }
-                                />
-                            </div>
-                        ) : (
-                            <div className={maxWidth}>
-                                <MainMedia
-                                    display={display}
-                                    designType={designType}
-                                    elements={CAPI.mainMediaElements}
-                                    pillar={pillar}
-                                    adTargeting={adTargeting}
-                                />
-                            </div>
-                        )}
+                        <div
+                            className={
+                                display === Display.Showcase &&
+                                CAPI.pageType.hasShowcaseMainElement
+                                    ? mainMediaWrapper
+                                    : maxWidth
+                            }
+                        >
+                            <MainMedia
+                                display={display}
+                                designType={designType}
+                                elements={CAPI.mainMediaElements}
+                                pillar={pillar}
+                                adTargeting={adTargeting}
+                                starRating={
+                                    designType === 'Review' && CAPI.starRating
+                                        ? CAPI.starRating
+                                        : undefined
+                                }
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="meta">
                         <div className={maxWidth}>
