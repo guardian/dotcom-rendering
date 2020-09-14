@@ -57,110 +57,111 @@ const showcaseGrid = css`
 
 const StandardGrid = ({
     children,
+    display,
 }: {
     children: JSX.Element | JSX.Element[];
     display: Display;
 }) => (
-        <div
-            className={css`
-                /* IE Fallback */
-                display: flex;
-                flex-direction: column;
-                ${until.leftCol} {
-                    margin-left: 0px;
-                }
-                ${from.leftCol} {
-                    margin-left: 151px;
-                }
+    <div
+        className={css`
+            /* IE Fallback */
+            display: flex;
+            flex-direction: column;
+            ${until.leftCol} {
+                margin-left: 0px;
+            }
+            ${from.leftCol} {
+                margin-left: 151px;
+            }
+            ${from.wide} {
+                margin-left: 230px;
+            }
+
+            @supports (display: grid) {
+                display: grid;
+                width: 100%;
+                margin-left: 0;
+
+                grid-column-gap: 10px;
+
                 ${from.wide} {
-                    margin-left: 230px;
+                    grid-template-columns:
+                        219px /* Left Column (220 - 1px border) */
+                        1px /* Vertical grey border */
+                        1fr /* Main content */
+                        300px; /* Right Column */
+
+                    grid-template-areas:
+                        'title      border  headline    right-column'
+                        'lines      border  headline    right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
+
+                    /* Override grid-template-areas if showcase */
+                    ${display === Display.Showcase ? showcaseGrid : ''}
                 }
-    
-                @supports (display: grid) {
-                    display: grid;
-                    width: 100%;
-                    margin-left: 0;
-    
-                    grid-column-gap: 10px;
-    
-                    ${from.wide} {
-                        grid-template-columns:
-                            219px /* Left Column (220 - 1px border) */
-                            1px /* Vertical grey border */
-                            1fr /* Main content */
-                            300px; /* Right Column */
-    
-                        grid-template-areas:
-                            'title      border  headline    right-column'
-                            'lines      border  headline    right-column'
-                            'meta       border  standfirst  right-column'
-                            'meta       border  media       right-column'
-                            '.          border  body        right-column'
-                            '.          border  .           right-column';
-    
-                        /* Override grid-template-areas if showcase */
-                        ${display === Display.Showcase ? showcaseGrid : ''}
-                    }
-    
-                    ${until.wide} {
-                        grid-template-columns:
-                            140px /* Left Column (220 - 1px border) */
-                            1px /* Vertical grey border */
-                            1fr /* Main content */
-                            300px; /* Right Column */
-                        grid-template-areas:
-                            'title      border  headline    right-column'
-                            'lines      border  headline    right-column'
-                            'meta       border  standfirst  right-column'
-                            'meta       border  media       right-column'
-                            '.          border  body        right-column'
-                            '.          border  .           right-column';
-                    }
-    
-                    ${until.leftCol} {
-                        grid-template-columns:
-                            1fr /* Main content */
-                            300px; /* Right Column */
-                        grid-template-areas:
-                            'title      right-column'
-                            'headline   right-column'
-                            'standfirst right-column'
-                            'meta       right-column'
-                            'media      right-column'
-                            'body       right-column'
-                            '.          right-column';
-                    }
-    
-                    ${until.desktop} {
-                        grid-column-gap: 0px;
-                        grid-template-columns: 1fr; /* Main content */
-                        grid-template-areas:
-                            'title'
-                            'headline'
-                            'standfirst'
-                            'meta'
-                            'media'
-                            'body';
-                    }
-    
-                    ${until.tablet} {
-                        grid-column-gap: 0px;
-    
-                        grid-template-columns: 1fr; /* Main content */
-                        grid-template-areas:
-                            'title'
-                            'headline'
-                            'standfirst'
-                            'meta'
-                            'media'
-                            'body';
-                    }
+
+                ${until.wide} {
+                    grid-template-columns:
+                        140px /* Left Column (220 - 1px border) */
+                        1px /* Vertical grey border */
+                        1fr /* Main content */
+                        300px; /* Right Column */
+                    grid-template-areas:
+                        'title      border  headline    right-column'
+                        'lines      border  headline    right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
                 }
-            `}
-        >
-            {children}
-        </div>
-    );
+
+                ${until.leftCol} {
+                    grid-template-columns:
+                        1fr /* Main content */
+                        300px; /* Right Column */
+                    grid-template-areas:
+                        'title      right-column'
+                        'headline   right-column'
+                        'standfirst right-column'
+                        'meta       right-column'
+                        'media      right-column'
+                        'body       right-column'
+                        '.          right-column';
+                }
+
+                ${until.desktop} {
+                    grid-column-gap: 0px;
+                    grid-template-columns: 1fr; /* Main content */
+                    grid-template-areas:
+                        'title'
+                        'headline'
+                        'standfirst'
+                        'meta'
+                        'media'
+                        'body';
+                }
+
+                ${until.tablet} {
+                    grid-column-gap: 0px;
+
+                    grid-template-columns: 1fr; /* Main content */
+                    grid-template-areas:
+                        'title'
+                        'headline'
+                        'standfirst'
+                        'meta'
+                        'media'
+                        'body';
+                }
+            }
+        `}
+    >
+        {children}
+    </div>
+);
 
 const maxWidth = css`
     ${from.desktop} {
