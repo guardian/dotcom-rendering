@@ -214,6 +214,45 @@ function hasSeenCards(): void {
     })
 }
 
+function safeParse(item: {} | string): any {
+    try {
+        const str = typeof item === 'string' ? item : JSON.stringify(item);
+        return JSON.parse(str);
+    } catch(e) {
+        return {};
+    }
+}
+
+function iframeHeightChanges() {
+    const figures = Array.from(document.querySelectorAll('figure.interactive'));
+    figures.forEach(figure => {
+        const serverRenderedIframe = figure.querySelector('iframe');
+        if (!serverRenderedIframe) return;
+        const iframe = document.createElement('iframe');
+        iframe.style.width = '100%';
+        iframe.style.border = 'none';
+        iframe.height = '500';
+        iframe.src = serverRenderedIframe.src;
+
+        window.addEventListener('message', function(event) {
+            if (event.source !== iframe.contentWindow) {
+                return;
+            }
+
+            const message = safeParse(event.data);
+
+            switch (message.type) {
+                case 'set-height':
+                    iframe.height = message.value;
+                    break;
+                default:
+            }
+        }, false);
+
+        figure.replaceChild(iframe, serverRenderedIframe);
+    });
+}
+
 setup();
 ads();
 videos();
@@ -224,3 +263,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+iframeHeightChanges();
