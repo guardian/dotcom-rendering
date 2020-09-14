@@ -45,13 +45,14 @@ export const VimeoBlockComponent: React.FC<{
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
 
+    const embedContainer = css`
+        max-width: ${maxWidth}px;
+        width: 100%;
+        margin-bottom: ${caption ? `0px` : `6px`};
+    `;
+
     return (
-        <div
-            className={css`
-                max-width: ${maxWidth}px;
-                width: 100%;
-            `}
-        >
+        <div className={embedContainer}>
             <div className={responsiveAspectRatio(height, width)}>
                 <iframe
                     src={embedUrl}

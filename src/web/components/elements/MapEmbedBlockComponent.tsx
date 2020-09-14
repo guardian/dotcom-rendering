@@ -1,27 +1,27 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
+import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
 
-export const VideoFacebookBlockComponent: React.FC<{
-    pillar: Pillar;
+export const MapEmbedBlockComponent: React.FC<{
     embedUrl?: string;
     height: number;
     width: number;
-    caption?: string;
-    credit?: string;
     title?: string;
+    caption?: string;
+    pillar: Pillar;
     display: Display;
     designType: DesignType;
+    credit?: string;
 }> = ({
     embedUrl,
-    caption,
     title,
-    pillar,
     width,
     height,
+    caption,
+    pillar,
     display,
     designType,
     credit,
@@ -35,10 +35,12 @@ export const VideoFacebookBlockComponent: React.FC<{
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
 
+    const hasCaption = caption != null;
+
     const embedContainer = css`
         max-width: ${maxWidth}px;
         width: 100%;
-        margin-bottom: ${caption ? `0px` : `6px`};
+        margin-bottom: ${hasCaption ? `0px` : `6px`};
     `;
 
     return (
@@ -52,7 +54,7 @@ export const VideoFacebookBlockComponent: React.FC<{
                     allowFullScreen={true}
                 />
             </MaintainAspectRatio>
-            {caption && (
+            {hasCaption && (
                 <Caption
                     captionText={caption}
                     designType={designType}

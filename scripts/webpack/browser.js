@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
-const { siteName } = require('../frontend/config');
 
 const friendlyErrorsWebpackPlugin = () =>
     new FriendlyErrorsWebpackPlugin({
@@ -45,6 +45,7 @@ module.exports = ({ isLegacyJS }) => ({
         react: scriptPath('react'),
         lotame: scriptPath('lotame'),
         dynamicImport: scriptPath('dynamicImport'),
+        atomIframe: scriptPath('atomIframe'),
     },
     output: {
         filename: generateName(isLegacyJS),
@@ -73,7 +74,7 @@ module.exports = ({ isLegacyJS }) => ({
         rules: [
             {
                 test: /(\.tsx)|(\.js)|(\.ts)|(\.mjs)$/,
-                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(dynamic-import-polyfill))\/.*/,
+                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(@guardian\/types)|(dynamic-import-polyfill))\/.*/,
                 use: [
                     {
                         loader: 'babel-loader',

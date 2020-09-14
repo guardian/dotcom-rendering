@@ -107,3 +107,26 @@ test('Footer ophan data-attributes exist', () => {
         expect.stringContaining(`data-link-name="footer : primary : Opinion"`),
     );
 });
+
+test('Sample of script tags have the correct attributes', () => {
+    expect(result).toEqual(
+        expect.stringContaining(
+            `<script defer type="module" src="/assets/react.js"></script>`,
+        ),
+    );
+    expect(result).toEqual(
+        expect.stringContaining(
+            `<script defer nomodule src=\"/assets/react.js\"></script>`,
+        ),
+    );
+    expect(result).toEqual(
+        expect.stringContaining(
+            `<script async type="module" src="/assets/ophan.js"></script>`,
+        ),
+    );
+    expect(result).toEqual(
+        expect.stringContaining(
+            `<script async nomodule src=\"/assets/ophan.js\"></script>`,
+        ),
+    );
+});

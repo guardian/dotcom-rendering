@@ -2,7 +2,7 @@
 
 ## Quick Setup Guide
 
-1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/master/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/master/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
+1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
 2. Add test definition to `src/web/experiments/tests` folder, and import test in the `src/web/experiments/ab-tests.ts` file. Variant name in test definition must be unique.
 3. Import test definition in the `tests` array in the `SignInGateSelector.tsx`
 4. If the test needs a design, make it in the `gateDesigns` folder
@@ -50,7 +50,7 @@ There are a few steps to take to set up a Sign In Gate AB Test.
 
 #### AB Test Switch
 
-First a AB Test Switch needs to be set up in [guardian/frontend](https://github.com/guardian/frontend/blob/master/common/app/conf/switches/ABTestSwitches.scala). You can follow the instructions from [here](https://github.com/guardian/frontend/blob/master/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch).
+First a AB Test Switch needs to be set up in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala). You can follow the instructions from [here](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch).
 
 Example:
 
@@ -126,7 +126,7 @@ The most important properties are:
 
 Once you've made the test definition, you'll need to import it into the `tests` array in the `src/web/experiments/ab-tests.ts` file.
 
-The test definition should also be replicated in `frontend` too if the same sign in gate tests is required on both `DCR` and `frontend`. Use the existing documentation in [`frontend`](https://github.com/guardian/frontend/blob/master/static/src/javascripts/projects/common/modules/identity/sign-in-gate/README.md) to set up the tests there. Tests should be mirrored is as far as possible.
+The test definition should also be replicated in `frontend` too if the same sign in gate tests is required on both `DCR` and `frontend`. Use the existing documentation in [`frontend`](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/identity/sign-in-gate/README.md) to set up the tests there. Tests should be mirrored is as far as possible.
 
 ### Sign In Gate Design
 
@@ -294,8 +294,8 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 <ABProvider
     arrayOfTestObjects={tests}
     abTestSwitches={{
-        ...{ abAbTestTest: true },
         ...CAPI.config.switches,
+        ...cypressAbSwitches,
     }}
     pageIsSensitive={CAPI.config.isSensitive}
     mvtMaxValue={1000000}
@@ -320,13 +320,13 @@ The advantages of using the forcedTestVariant:
 
 ```tsx
  abTestSwitches={{
-       ...{ abAbTestTest: true },
        ...CAPI.config.switches,
+       ...cypressAbSwitches,
        ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
    }}
 ```
 
-The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to master, and that if the `id` or variant id changes, you have to make sure to change it here too.
+The disadvantage of this is that you have to make sure that you **DO NOT** commit the `forcedTestVariant` or `abTestSwitches` change to main, and that if the `id` or variant id changes, you have to make sure to change it here too.
 
 #### Testing in CODE
 
@@ -406,6 +406,21 @@ it('should load the sign in gate', () => {
 ```
 
 To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+
+Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
+
+To decouple the switch state from production, we define the state of the switch in DCR that will be set only when running within Cypress. In `src/web/experiments/cypress-switches.ts` update the `cypressSwitches` object to add the switch and state for your new test.
+
+```ts
+...
+const cypressSwitches = {
+    abAbTestTest: true,
+    abSignInGatePatientia: true, // setting the Patientia test to always be true in Cypress regardless of production state
+};
+...
+```
+
+Now the AB test will be picked up even if the switch does not exist yet in Frontend, or the switch is set to Off in Frontend too.
 
 #### Unit Tests
 

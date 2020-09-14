@@ -6,22 +6,34 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+-   [Moving to main as default branch](#moving-to-main-as-default-branch)
+-   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+-   [Quick start](#quick-start)
+    -   [Install Node.js](#install-nodejs)
+    -   [Running instructions](#running-instructions)
+    -   [Detailed Setup](#detailed-setup)
+    -   [Technologies](#technologies)
+    -   [Architecture Diagram](#architecture-diagram)
+    -   [Concepts](#concepts)
+    -   [Feedback](#feedback)
+-   [Code Quality](#code-quality)
+-   [IDE setup](#ide-setup)
+    -   [Extensions](#extensions)
+    -   [Auto fix on save](#auto-fix-on-save)
+-   [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Moving to main as default branch
+
+The `master` branch in the dotcom-rendering repository has been renamed to `main`. If you have been working with DCR before the change, we recommend you run the following sequence of commands in your local repository. These will rename your master branch to main and set main as your default branch.
+
+```
+git fetch --all
+git remote set-head origin -a
+git branch master --set-upstream-to origin/main
+git branch -m master main
+```
 
 ## Where can I see Dotcom Rendering in Production?
 
@@ -133,7 +145,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 

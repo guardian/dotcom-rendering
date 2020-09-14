@@ -13,6 +13,7 @@ interface AudioAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
     id: string;
     kicker: string;
+    title?: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
@@ -56,6 +57,9 @@ interface CalloutBlockElement {
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
+    chartIndex?: number;
+    id: string;
+    html: string;
 }
 
 interface CodeBlockElement {
@@ -174,11 +178,13 @@ interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
 
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
-    url: string;
+    embedUrl: string;
     originalUrl: string;
     source: string;
-    caption: string;
     title: string;
+    height: number;
+    width: number;
+    caption?: string;
 }
 
 interface MultiImageBlockElement {
@@ -319,8 +325,6 @@ interface YoutubeBlockElement {
     channelId?: string;
     duration?: number;
     posterSrc?: string;
-    height?: string;
-    width?: string;
 }
 
 type CAPIElement =

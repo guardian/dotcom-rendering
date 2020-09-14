@@ -11,6 +11,7 @@ import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBloc
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
@@ -31,6 +32,7 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    ChartAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -100,7 +102,13 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return null; // will be filled shortly with the ChartAtom from atoms-rendering
+                    return (
+                        <ChartAtom
+                            url={element.url}
+                            id={element.id}
+                            html={element.html}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
                         <DocumentBlockComponent
@@ -182,6 +190,20 @@ export const ArticleRenderer: React.FC<{
                             css={element.css}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.MapBlockElement':
+                    return (
+                        <MapEmbedBlockComponent
+                            pillar={pillar}
+                            embedUrl={element.embedUrl}
+                            height={element.height}
+                            width={element.width}
+                            caption={element.caption}
+                            credit={element.source}
+                            title={element.title}
+                            display={display}
+                            designType={designType}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
                     return (
                         <MultiImageBlockComponent
@@ -259,6 +281,9 @@ export const ArticleRenderer: React.FC<{
                             title={element.title}
                             pillar={pillar}
                             caption={element.caption}
+                            designType={designType}
+                            display={display}
+                            credit="Spotify"
                         />
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
@@ -360,7 +385,6 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.MapBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

@@ -912,13 +912,16 @@
                         "model.dotcomrendering.pageElements.ChartAtomBlockElement"
                     ]
                 },
-                "url": {
-                    "type": "string"
+                "chartIndex": {
+                    "type": "number"
                 },
                 "id": {
                     "type": "string"
                 },
                 "html": {
+                    "type": "string"
+                },
+                "url": {
                     "type": "string"
                 },
                 "css": {
@@ -930,6 +933,8 @@
             },
             "required": [
                 "_type",
+                "html",
+                "id",
                 "url"
             ]
         },
@@ -1516,7 +1521,7 @@
                         "model.dotcomrendering.pageElements.MapBlockElement"
                     ]
                 },
-                "url": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "originalUrl": {
@@ -1525,20 +1530,27 @@
                 "source": {
                     "type": "string"
                 },
-                "caption": {
+                "title": {
                     "type": "string"
                 },
-                "title": {
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "caption",
+                "embedUrl",
+                "height",
                 "originalUrl",
                 "source",
                 "title",
-                "url"
+                "width"
             ]
         },
         "MultiImageBlockElement": {
@@ -2055,12 +2067,6 @@
                     "type": "number"
                 },
                 "posterSrc": {
-                    "type": "string"
-                },
-                "height": {
-                    "type": "string"
-                },
-                "width": {
                     "type": "string"
                 }
             },

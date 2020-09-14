@@ -204,8 +204,7 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                     name="more"
                     tabIndex={-1}
                     key="OpenExpandedMenuCheckbox"
-                    role="menuitemcheckbox"
-                    aria-checked="false"
+                    aria-hidden="true"
                 />
                 <Pillars
                     display={display}

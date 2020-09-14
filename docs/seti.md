@@ -43,6 +43,6 @@ Advice for SETI new starters on Dotcom
 
 * [Dotcom Alerts & Monitoring](https://docs.google.com/presentation/d/1YtpEM1myWSzZQpFIqokN48PqdsEuvJzYUkCnjU8ypG4/edit?usp=sharing) (with speakers notes!)
 * [The Google SRE Book](https://landing.google.com/sre/sre-book/toc/index.html)
-* [Dotcom Incident Response & Triage Docs](https://github.com/guardian/frontend/blob/master/docs/01-start-here/08-incidents.md)
+* [Dotcom Incident Response & Triage Docs](https://github.com/guardian/frontend/blob/main/docs/01-start-here/08-incidents.md)
 * [Dotcom Rendering Original Intoduction Tech Time](https://docs.google.com/presentation/d/1YBe3WxeoxmzR327nXZbSVIvr69OT0M6FOLFr3qQVctI/edit?usp=sharing) (with speakers notes!)
-* [Dotcom Rendering Architecture Docs](https://github.com/guardian/dotcom-rendering/tree/master/docs/architecture)
+* [Dotcom Rendering Architecture Docs](https://github.com/guardian/dotcom-rendering/tree/main/docs/architecture)

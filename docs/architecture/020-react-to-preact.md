@@ -4,7 +4,7 @@
 
 We decided to make the jump from React to Preact. Main advantages was reducing the bundle size, with minimal changes to the architecture.
 
-Preact had been quite good at keeping up with React features, which was one of the main [precvious concerns.](https://github.com/guardian/dotcom-rendering/blob/master/docs/architecture/003-react.md)
+Preact had been quite good at keeping up with React features, which was one of the main [precvious concerns.](https://github.com/guardian/dotcom-rendering/blob/main/docs/architecture/003-react.md)
 
 Preact uses a lib called [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact) which allows us to not have a major refactoring to embrace React.
 

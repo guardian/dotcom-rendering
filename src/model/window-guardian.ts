@@ -206,6 +206,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             'model.dotcomrendering.pageElements.TimelineBlockElement',
             'timelineIndex',
         ),
+        chartAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+            'chartIndex',
+        ),
     };
 };
 

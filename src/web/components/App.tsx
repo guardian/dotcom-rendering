@@ -22,6 +22,7 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    ChartAtom,
 } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -38,9 +39,7 @@ import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
-
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import { cmp } from '@guardian/consent-management-platform';
@@ -383,6 +382,15 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.chartAtoms.map((chart) => (
+                <Hydrate root="chart-atom" index={chart.chartIndex}>
+                    <ChartAtom
+                        id={chart.id}
+                        url={chart.url}
+                        html={chart.html}
+                    />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
