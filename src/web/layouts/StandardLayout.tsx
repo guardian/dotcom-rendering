@@ -275,6 +275,7 @@ export const StandardLayout = ({
     const seriesTag = CAPI.tags.find(
         (tag) => tag.type === 'Series' || tag.type === 'Blog',
     );
+
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
     const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
