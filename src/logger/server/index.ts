@@ -37,6 +37,7 @@ class ServerLogger implements LoggerFunctions {
         } else {
             winstonConfig = {
                 level: 'debug',
+                silent: !!process.env.GITHUB_ACTIONS,
                 defaultMeta: {
                     app: App,
                     stack: Stack,
