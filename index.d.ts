@@ -535,6 +535,7 @@ type OphanComponentName =
     | 'related-content'
     | 'more-media-in-section'
     | 'more-galleries'
+    | 'curated-content'
     | 'default-onwards'; // We should never see this in the analytics data!
 
 interface CommercialConfigType {

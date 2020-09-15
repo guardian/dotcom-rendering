@@ -1,7 +1,6 @@
 import React from 'react';
-
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-
+import { useAB } from '@guardian/ab-react';
 import { OnwardsData } from './OnwardsData';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
@@ -158,15 +157,33 @@ export const OnwardsUpper = ({
         ophanComponentName = 'related-stories';
     }
 
-    if (!url) {
-        return null;
-    }
+    const ABTestAPI = useAB();
+    const headlinesDataUrl = joinUrl([
+        ajaxUrl,
+        '/container/data/uk-alpha/news/regular-stories.json',
+    ]);
+
+    const inCuratedContainerTest = ABTestAPI.isUserInVariant(
+        'CuratedContainerTest',
+        'variant',
+    );
 
     return (
-        <OnwardsData
-            url={url}
-            limit={8}
-            ophanComponentName={ophanComponentName}
-        />
+        <div>
+            {inCuratedContainerTest && (
+                <OnwardsData
+                    url={headlinesDataUrl}
+                    limit={4}
+                    ophanComponentName="curated-content"
+                />
+            )}
+            {url && (
+                <OnwardsData
+                    url={url}
+                    limit={8}
+                    ophanComponentName={ophanComponentName}
+                />
+            )}
+        </div>
     );
 };
