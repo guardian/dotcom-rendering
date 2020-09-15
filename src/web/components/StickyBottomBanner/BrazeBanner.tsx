@@ -27,7 +27,7 @@ export const hasRequiredConsents = (): Promise<boolean> =>
             const consentGivenUnderTcfv2 =
                 tcfv2 && tcfv2.vendorConsents[brazeVendorId];
 
-            resolve(!!(consentGivenUnderCcpa || consentGivenUnderTcfv2));
+            resolve(Boolean(consentGivenUnderCcpa || consentGivenUnderTcfv2));
         });
     });
 
