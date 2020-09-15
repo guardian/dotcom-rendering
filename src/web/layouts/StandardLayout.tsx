@@ -50,8 +50,6 @@ import {
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
-
 const layoutGrid = (hasPreFurniture?: boolean) =>
     css`
         /* IE Fallback */
