@@ -31,6 +31,14 @@ export const hasRequiredConsents = (): Promise<boolean> =>
         });
     });
 
+// We can show a Braze banner if:
+// - The Braze switch is on
+// - We have a Braze API key
+// - The user is a digital subscriber
+// - We've got a Braze UUID from the API, given a user's ID Creds
+// - The user has given Consent via CCPA or TCFV2
+// - The Braze websdk appboy initialisation does not throw an error
+// - The Braze app Boy subscription to in app message returns meta info
 export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
