@@ -132,6 +132,7 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
+
                     ${display === Display.Showcase
                         ? showcaseGridUntilWide
                         : gridUntilWide}
