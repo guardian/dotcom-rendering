@@ -52,6 +52,96 @@ import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
+const gridTemplateWide = css`
+    grid-template-areas:
+        'title  border  headline     right-column'
+        '.      border  standfirst   right-column'
+        'lines  border  media        right-column'
+        'meta   border  media        right-column'
+        'meta   border  body         right-column'
+        '.      border  .            right-column';
+`;
+
+const gridTemplateWidePreFurnished = css`
+    grid-template-areas:
+        'title  border  preFurniture right-column'
+        '.      border  headline     right-column'
+        '.      border  standfirst   right-column'
+        'lines  border  media        right-column'
+        'meta   border  media        right-column'
+        'meta   border  body         right-column'
+        '.      border  .            right-column';
+`;
+
+const gridTemplateLeftCol = css`
+    grid-template-areas:
+        'preFurniture  right-column'
+        'title         right-column'
+        'headline      right-column'
+        'standfirst    right-column'
+        'media         right-column'
+        'lines         right-column'
+        'meta          right-column'
+        'body          right-column'
+        '.             right-column';
+`;
+
+const gridTemplateLeftColPreFurnished = css`
+    grid-template-areas:
+        'title         right-column'
+        'headline      right-column'
+        'standfirst    right-column'
+        'media         right-column'
+        'lines         right-column'
+        'meta          right-column'
+        'body          right-column'
+        '.             right-column';
+`;
+
+const gridTemplateDesktop = css`
+    grid-template-areas:
+        'title'
+        'headline'
+        'standfirst'
+        'media'
+        'lines'
+        'meta'
+        'body';
+`;
+const gridTemplateDesktopPreFurnished = css`
+    grid-template-areas:
+        'preFurniture'
+        'title'
+        'headline'
+        'standfirst'
+        'media'
+        'lines'
+        'meta'
+        'body';
+`;
+
+const gridTemplateTablet = css`
+    grid-template-areas:
+        'media'
+        'title'
+        'headline'
+        'standfirst'
+        'lines'
+        'meta'
+        'body';
+`;
+const gridTemplateTabletPreFurnished = css`
+    grid-template-areas:
+        'preFurniture'
+        'media'
+        'title'
+        'headline'
+        'standfirst'
+        'lines'
+        'meta'
+        'body';
+`;
+
 const layoutGrid = (hasPreFurniture?: boolean) =>
     css`
         /* IE Fallback */
@@ -80,20 +170,10 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
                     1px /* Vertical grey border */
                     1fr /* Main content */
                     300px; /* Right Column */
-                grid-template-areas:
-                    ${hasPreFurniture
-                        ? `
-                    'title  border  preFurniture right-column'
-                    '.      border  headline     right-column'
-                    `
-                        : `
-                    'title  border  headline     right-column'
-                    `}
-                    '.      border  standfirst   right-column'
-                    'lines  border  media        right-column'
-                    'meta   border  media        right-column'
-                    'meta   border  body         right-column'
-                    '.      border  .            right-column';
+
+                grid-template-areas: ${hasPreFurniture
+                    ? gridTemplateWidePreFurnished
+                    : gridTemplateWide};
             }
 
             ${until.wide} {
@@ -102,70 +182,35 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
                     1px /* Vertical grey border */
                     1fr /* Main content */
                     300px; /* Right Column */
-                grid-template-areas:
-                    ${hasPreFurniture
-                        ? `
-                    'title  border  preFurniture right-column'
-                    '.      border  headline     right-column'
-                    `
-                        : `
-                    'title  border  headline     right-column'
-                    `}
-                    '.      border  standfirst   right-column'
-                    'lines  border  media        right-column'
-                    'meta   border  media        right-column'
-                    'meta   border  body         right-column'
-                    '.      border  .            right-column';
+
+                grid-template-areas: ${hasPreFurniture
+                    ? gridTemplateWidePreFurnished
+                    : gridTemplateWide};
             }
 
             ${until.leftCol} {
                 grid-template-columns:
                     1fr /* Main content */
                     300px; /* Right Column */
-                grid-template-areas:
-                    ${hasPreFurniture
-                        ? `'preFurniture  right-column'
-                           'title         right-column'`
-                        : `'title         right-column'`}
-                    'headline      right-column'
-                    'standfirst    right-column'
-                    'media         right-column'
-                    'lines         right-column'
-                    'meta          right-column'
-                    'body          right-column'
-                    '.             right-column';
+                grid-template-areas: ${hasPreFurniture
+                    ? gridTemplateLeftColPreFurnished
+                    : gridTemplateLeftCol};
             }
 
             ${until.desktop} {
                 grid-template-columns: 1fr; /* Main content */
-                grid-template-areas:
-                    ${hasPreFurniture
-                        ? `'preFurniture'
-                           'title'`
-                        : `'title'`}
-                    'headline'
-                    'standfirst'
-                    'media'
-                    'lines'
-                    'meta'
-                    'body';
+                grid-template-areas: ${hasPreFurniture
+                    ? gridTemplateDesktopPreFurnished
+                    : gridTemplateDesktop};
             }
 
             ${until.tablet} {
                 grid-column-gap: 0px;
 
                 grid-template-columns: 1fr; /* Main content */
-                grid-template-areas:
-                    ${hasPreFurniture
-                        ? `'preFurniture'
-                           'media'`
-                        : `'media'`}
-                    'title'
-                    'headline'
-                    'standfirst'
-                    'lines'
-                    'meta'
-                    'body';
+                grid-template-areas: ${hasPreFurniture
+                    ? gridTemplateTabletPreFurnished
+                    : gridTemplateTablet};
             }
         }
     `;
