@@ -45,7 +45,37 @@ import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
-const showcaseGrid = css`
+const gridFromWide = css`
+    grid-template-areas:
+        'title      border  headline    right-column'
+        'lines      border  headline    right-column'
+        'meta       border  standfirst  right-column'
+        'meta       border  media       right-column'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
+const showcaseGridFromWide = css`
+    grid-template-areas:
+        'title      border  headline    headline'
+        'lines      border  headline    headline'
+        'meta       border  standfirst  standfirst'
+        'meta       border  media       media'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
+const gridUntilWide = css`
+    grid-template-areas:
+        'title      border  headline    right-column'
+        'lines      border  headline    right-column'
+        'meta       border  standfirst  right-column'
+        'meta       border  media       right-column'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
+const showcaseGridUntilWide = css`
     grid-template-areas:
         'title      border  headline    headline'
         'lines      border  headline    headline'
@@ -91,16 +121,9 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
 
-                    grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
-
-                    /* Override grid-template-areas if showcase */
-                    ${display === Display.Showcase ? showcaseGrid : ''}
+                    ${display === Display.Showcase
+                        ? showcaseGridFromWide
+                        : gridFromWide}
                 }
 
                 ${until.wide} {
@@ -109,13 +132,9 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
-                    grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
+                    ${display === Display.Showcase
+                        ? showcaseGridUntilWide
+                        : gridUntilWide}
                 }
 
                 ${until.leftCol} {
