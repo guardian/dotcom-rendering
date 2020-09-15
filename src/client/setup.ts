@@ -12,7 +12,11 @@ function handleMessage(interactive: HTMLIFrameElement, message: string): void {
     try {
         const parsed: unknown = JSON.parse(message);
         if (isObject(parsed) && parsed.type === 'set-height') {
-            interactive.height = (typeof parsed.value === 'string') ? parsed.value : `${parsed.value}`;
+            if (typeof parsed.value === 'string') {
+                interactive.height = parsed.value;
+            } else if (typeof parsed.value === 'number') {
+                interactive.height = `${parsed.value}`;
+            }
         }
     } catch (e) {
         logger.error(e);
