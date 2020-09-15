@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const Hydrate = ({ root, index, children }: Props) => {
-    const rootWithIndex = index ? `${root}-${index}` : root;
+    const rootWithIndex = index===0 || index ? `${root}-${index}` : root;
     const element = document.getElementById(rootWithIndex);
     if (!element) return null;
     window.performance.mark(`${rootWithIndex}-hydrate-start`);
