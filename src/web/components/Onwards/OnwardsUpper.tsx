@@ -158,8 +158,10 @@ export const OnwardsUpper = ({
     }
 
     const ABTestAPI = useAB();
-    const headlinesDataUrl =
-        'http://localhost:9000/container/data/uk-alpha/news/regular-stories.json';
+    const headlinesDataUrl = joinUrl([
+        ajaxUrl,
+        '/container/data/uk-alpha/news/regular-stories.json',
+    ]);
 
     const inCuratedContainerTest = ABTestAPI.isUserInVariant(
         'CuratedContainerTest',
