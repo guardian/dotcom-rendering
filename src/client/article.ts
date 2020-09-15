@@ -214,16 +214,16 @@ function hasSeenCards(): void {
     })
 }
 
-function safeParse(item: {} | string): any {
+function safeParse(item: Record<string, unknown> | string): Record<string, unknown> {
     try {
         const str = typeof item === 'string' ? item : JSON.stringify(item);
-        return JSON.parse(str);
+        return JSON.parse(str) as Record<string, unknown>;
     } catch(e) {
         return {};
     }
 }
 
-function iframeHeightChanges() {
+function iframeHeightChanges(): void {
     const figures = Array.from(document.querySelectorAll('figure.interactive'));
     figures.forEach(figure => {
         const serverRenderedIframe = figure.querySelector('iframe');
@@ -239,11 +239,11 @@ function iframeHeightChanges() {
                 return;
             }
 
-            const message = safeParse(event.data);
+            const { type, value } = safeParse(event.data);
 
-            switch (message.type) {
+            switch (type) {
                 case 'set-height':
-                    iframe.height = message.value;
+                    iframe.height = (typeof value === 'number') ? `${value}` : '500';
                     break;
                 default:
             }
