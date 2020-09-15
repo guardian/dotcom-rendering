@@ -171,9 +171,9 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
                     1fr /* Main content */
                     300px; /* Right Column */
 
-                grid-template-areas: ${hasPreFurniture
+                ${hasPreFurniture
                     ? gridTemplateWidePreFurnished
-                    : gridTemplateWide};
+                    : gridTemplateWide}
             }
 
             ${until.wide} {
@@ -183,34 +183,34 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
                     1fr /* Main content */
                     300px; /* Right Column */
 
-                grid-template-areas: ${hasPreFurniture
+                ${hasPreFurniture
                     ? gridTemplateWidePreFurnished
-                    : gridTemplateWide};
+                    : gridTemplateWide}
             }
 
             ${until.leftCol} {
                 grid-template-columns:
                     1fr /* Main content */
                     300px; /* Right Column */
-                grid-template-areas: ${hasPreFurniture
+                ${hasPreFurniture
                     ? gridTemplateLeftColPreFurnished
-                    : gridTemplateLeftCol};
+                    : gridTemplateLeftCol}
             }
 
             ${until.desktop} {
                 grid-template-columns: 1fr; /* Main content */
-                grid-template-areas: ${hasPreFurniture
+                ${hasPreFurniture
                     ? gridTemplateDesktopPreFurnished
-                    : gridTemplateDesktop};
+                    : gridTemplateDesktop}
             }
 
             ${until.tablet} {
                 grid-column-gap: 0px;
 
                 grid-template-columns: 1fr; /* Main content */
-                grid-template-areas: ${hasPreFurniture
+                ${hasPreFurniture
                     ? gridTemplateTabletPreFurnished
-                    : gridTemplateTablet};
+                    : gridTemplateTablet}
             }
         }
     `;
