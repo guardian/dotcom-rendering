@@ -15,6 +15,8 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog, getFormat } from 'item';
 import HeaderMedia from 'headerMedia';
 import { remSpace } from '@guardian/src-foundations';
+import { Footer } from "@guardian/src-footer"
+
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -48,6 +50,8 @@ interface LiveblogArticleProps {
     item: Liveblog;
 }
 
+const Wrapper = () => <Footer showBackToTop={true} />
+
 const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
     const format = getFormat(item);
 
@@ -73,6 +77,7 @@ const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
                     <Tags tags={item.tags} format={format}/>
                 </div>
             </div>
+            <Wrapper />
         </main>
     );
 }

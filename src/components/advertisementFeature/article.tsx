@@ -18,6 +18,7 @@ import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import RelatedContent from 'components/shared/relatedContent';
+import { Footer } from "@guardian/src-footer"
 
 
 // ----- Styles ----- //
@@ -42,6 +43,8 @@ const BorderStyles = css`
 
 
 // ----- Component ----- //
+
+const Wrapper = () => <Footer showBackToTop={true} />
 
 interface Props {
     item: AdvertisementFeatureItem;
@@ -73,6 +76,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
+        <Wrapper />
     </main>
 }
 
