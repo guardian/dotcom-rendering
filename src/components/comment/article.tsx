@@ -55,7 +55,7 @@ const topBorder = css`
 `;
 
 const lineStyles = css`
-    margin-top: 5.2rem;
+    margin-top: 83px;
     ${from.wide} {
         width: ${wideContentWidth}px;
         margin-left: auto;
