@@ -73,15 +73,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
         case Display.Showcase: {
             switch (designType) {
                 case 'Comment':
-                    return (
-                        <CommentLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Showcase}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
                 case 'GuardianView':
                     return (
                         <CommentLayout
