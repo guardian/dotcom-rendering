@@ -44,12 +44,16 @@ const BorderStyles = css`
 
 // ----- Component ----- //
 
-const Wrapper = () => <Footer showBackToTop={true} />
-
 interface Props {
     item: AdvertisementFeatureItem;
     children: ReactNode[];
 }
+
+interface FooterProps {
+    showBackToTop: boolean;
+}
+
+const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 const AdvertisementFeature: FC<Props> = ({ item, children }) => {
     return <main css={[Styles, DarkStyles]}>
@@ -76,7 +80,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper />
+        <Wrapper showBackToTop={true} />
     </main>
 }
 

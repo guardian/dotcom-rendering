@@ -74,8 +74,11 @@ const itemStyles = (item: Item): SerializedStyles => {
 }
 
 // ----- Component ----- //
+interface FooterProps {
+    showBackToTop: boolean;
+}
 
-const Wrapper = () => <Footer showBackToTop={true} />
+const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface Props {
     item: StandardItem | ReviewItem;
@@ -115,7 +118,7 @@ const Standard: FC<Props> = ({ item, children }) => {
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper />
+        <Wrapper showBackToTop={true} />
     </main>
 }
 

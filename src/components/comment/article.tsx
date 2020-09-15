@@ -57,8 +57,11 @@ const topBorder = css`
 
 
 // ----- Component ----- //
+interface FooterProps {
+    showBackToTop: boolean;
+}
 
-const Wrapper = () => <Footer showBackToTop={true} />
+const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface Props {
     item: CommentItem;
@@ -103,7 +106,7 @@ const Comment: FC<Props> = ({ item, children }) =>
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper />
+        <Wrapper showBackToTop={true} />
     </main>
 
 

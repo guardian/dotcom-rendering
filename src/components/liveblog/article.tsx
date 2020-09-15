@@ -45,12 +45,16 @@ const tagStyles = css`
         margin: 0 ${remSpace[2]};
     }
 `
+// ----- Component ----- //
+interface FooterProps {
+    showBackToTop: boolean;
+}
+
+const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface LiveblogArticleProps {
     item: Liveblog;
 }
-
-const Wrapper = () => <Footer showBackToTop={true} />
 
 const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
     const format = getFormat(item);
@@ -77,7 +81,7 @@ const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
                     <Tags tags={item.tags} format={format}/>
                 </div>
             </div>
-            <Wrapper />
+            <Wrapper showBackToTop={true} />
         </main>
     );
 }
