@@ -43,7 +43,7 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
-const gridFromWide = css`
+const gridWide = css`
     grid-template-areas:
         'title      border  headline    right-column'
         'lines      border  headline    right-column'
@@ -53,27 +53,7 @@ const gridFromWide = css`
         '.          border  .           right-column';
 `;
 
-const showcaseGridFromWide = css`
-    grid-template-areas:
-        'title      border  headline    headline'
-        'lines      border  headline    headline'
-        'meta       border  standfirst  standfirst'
-        'meta       border  media       media'
-        '.          border  body        right-column'
-        '.          border  .           right-column';
-`;
-
-const gridUntilWide = css`
-    grid-template-areas:
-        'title      border  headline    right-column'
-        'lines      border  headline    right-column'
-        'meta       border  standfirst  right-column'
-        'meta       border  media       right-column'
-        '.          border  body        right-column'
-        '.          border  .           right-column';
-`;
-
-const showcaseGridUntilWide = css`
+const showcaseGridWide = css`
     grid-template-areas:
         'title      border  headline    headline'
         'lines      border  headline    headline'
@@ -120,8 +100,8 @@ const StandardGrid = ({
                         300px; /* Right Column */
 
                     ${display === Display.Showcase
-                        ? showcaseGridFromWide
-                        : gridFromWide}
+                        ? showcaseGridWide
+                        : gridWide}
                 }
 
                 ${until.wide} {
@@ -132,8 +112,8 @@ const StandardGrid = ({
                         300px; /* Right Column */
 
                     ${display === Display.Showcase
-                        ? showcaseGridUntilWide
-                        : gridUntilWide}
+                        ? showcaseGridWide
+                        : gridWide}
                 }
 
                 ${until.leftCol} {
