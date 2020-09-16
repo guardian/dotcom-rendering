@@ -21,6 +21,7 @@ interface FetchOptions {
             | 'application/x-www-form-urlencoded';
     };
     body?: string;
+    credentials?: 'omit' | 'include' | 'same-origin';
 }
 
 function checkForErrors(response: any) {
@@ -33,7 +34,7 @@ function checkForErrors(response: any) {
     return response;
 }
 
-const callApi = (url: string, options?: FetchOptions) => {
+export const callApi = (url: string, options?: FetchOptions) => {
     return fetch(url, options)
         .then(checkForErrors)
         .then((response) => response.json());
