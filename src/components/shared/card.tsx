@@ -63,27 +63,6 @@ const fullWidthImage = css`
     }
 `;
 
-const bylineImage = css`
-    border-radius: 50%;
-    right: 0.625rem;
-    top: 0.375rem;
-    overflow: hidden;
-    height: 8.25rem;
-    width: 8.25rem;
-    contain: paint;
-    background-color: #e05e00;
-
-    img {
-        margin: auto;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        height: 8.25rem;
-        left: -0.625rem;
-    }
-`;
-
 const timeStyles = css`
     ${textSans.small()};
     color: ${text.supporting};
