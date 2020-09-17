@@ -315,6 +315,8 @@ interface VideoYoutubeBlockElement {
     caption?: string;
     credit?: string;
     title?: string;
+    expired: boolean;
+    fallbackImageUrl: string;
 }
 
 interface YoutubeBlockElement {

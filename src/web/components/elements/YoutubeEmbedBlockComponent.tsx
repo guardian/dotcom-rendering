@@ -1,9 +1,30 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/typography';
+
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Display } from '@root/src/lib/display';
+
+const expiredFallbackTextStyles = css`
+    position: absolute;
+    display: table-cell;
+    width: 100%;
+    padding: 1.125rem 3.75rem;
+
+    ${textSans.medium({ fontWeight: 'bold' })}
+    color: ${palette.neutral[100]};
+    background-color: ${palette.neutral[20]};
+
+    :before {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzYgMzYiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgZmlsbD0iI2ZmZiIgY3g9IjE4IiBjeT0iMTgiIHI9IjE4Ii8+PHBhdGggZD0iTTE0LjcyNyA1LjcyN2wxLjYzNi0xLjYzNmgzLjI3M2wxLjYzNiAxLjYzNi0xLjYzNiAxNS41NDVoLTMuMjczTDE0LjcyNyA1LjcyN202LjU0NSAyMi4wOWMwLTEuOC0xLjQ3My0zLjI3My0zLjI3My0zLjI3M2EzLjI4MyAzLjI4MyAwIDAgMC0zLjI3MyAzLjI3M2MwIDEuOCAxLjQ3MyAzLjI3MyAzLjI3MyAzLjI3M3MzLjI3My0xLjQ3MyAzLjI3My0zLjI3MyIgZmlsbD0iIzMzMyIvPjwvZz48L3N2Zz4=);
+        background-position: 0 0;
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+`;
 
 export const YoutubeEmbedBlockComponent: React.FC<{
     pillar: Pillar;
@@ -15,6 +36,8 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     title?: string;
     display: Display;
     designType: DesignType;
+    expired: boolean;
+    fallbackImageUrl?: string;
 }> = ({
     embedUrl,
     caption,
@@ -25,6 +48,8 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     display,
     designType,
     credit,
+    expired,
+    fallbackImageUrl,
 }) => {
     // 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
     // Constrain iframe embeds with a width to their natural width
@@ -35,22 +60,41 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     const aspectRatio = width / height;
     const maxWidth = maxHeight * aspectRatio;
 
+    const fallbackImageStyles =
+        fallbackImageUrl && expired
+            ? css`
+                  background-image: url(${fallbackImageUrl});
+                  background-size: cover;
+                  background-repeat: no-repeat;
+              `
+            : '';
+
     const embedContainer = css`
         max-width: ${maxWidth}px;
         width: 100%;
         margin-bottom: ${caption ? `0px` : `6px`};
+
+        ${fallbackImageStyles}
     `;
 
     return (
         <div className={embedContainer}>
             <MaintainAspectRatio height={height} width={width}>
-                <iframe
-                    src={embedUrl}
-                    title={title}
-                    height={height}
-                    width={width}
-                    allowFullScreen={true}
-                />
+                {expired ? (
+                    <div className={expiredFallbackTextStyles}>
+                        This video has been removed. This could be because it
+                        launched early, our rights have expired, there was a
+                        legal issue, or for another reason.
+                    </div>
+                ) : (
+                    <iframe
+                        src={embedUrl}
+                        title={title}
+                        height={height}
+                        width={width}
+                        allowFullScreen={true}
+                    />
+                )}
             </MaintainAspectRatio>
             {caption && (
                 <Caption
