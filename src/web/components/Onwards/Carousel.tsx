@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
     SvgChevronLeftSingle,
     SvgChevronRightSingle,
@@ -8,6 +8,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
+import libDebounce from 'lodash/debounce';
 import { CardAge } from '../Card/components/CardAge';
 
 type Props = {
@@ -24,6 +25,11 @@ const navIconStyle = css`
     }
 `;
 
+const headerRowStyle = css`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const headingStyle = css`
     ${headline.xxsmall()};
     ${until.desktop} {
@@ -37,7 +43,7 @@ const carouselStyle = css`
     display: flex;
 
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
     overflow-x: scroll;
 `;
 
@@ -48,6 +54,11 @@ const cardWrapperStyle = css`
     margin: 0 ${space[2]}px;
 
     scroll-snap-align: start;
+`;
+
+const cardWrapperFirstStyle = css`
+    ${cardWrapperStyle};
+    margin-left: 0;
 `;
 
 // TODO image ratio is wrong from source. We could wrap in a div and use
@@ -95,13 +106,26 @@ const dotActiveStyle = css`
 
 export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
     const carouselRef = useRef<HTMLDivElement>(null);
-    const activeIndex = 1; // TODO update based on (debounced) scroll or next/prev
+    const [index, setIndex] = useState(0); // TODO update based on (debounced) scroll or next/prev
 
     const getItems = (): HTMLElement[] => {
         const { current } = carouselRef;
         if (current === null) return [];
 
         return Array.from(current.children) as HTMLElement[];
+    };
+
+    const getIndex = (): number => {
+        const { current } = carouselRef;
+        if (current === null) return 0;
+        const scrolled = current.scrollLeft || 0;
+
+        const active = getItems().findIndex((el) => el.offsetLeft >= scrolled);
+        return Math.max(0, active);
+    };
+
+    const getSetIndex = () => {
+        setIndex(getIndex());
     };
 
     const prev = () => {
@@ -116,7 +140,11 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
 
         if (nextOffset) {
             current.scrollTo({ left: nextOffset });
+        } else {
+            current.scrollTo({ left: 0 });
         }
+
+        getSetIndex();
     };
 
     const next = () => {
@@ -130,11 +158,22 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
         if (nextOffset) {
             current.scrollTo({ left: nextOffset });
         }
+
+        getSetIndex();
     };
+
+    useEffect(() => {
+        if (carouselRef.current) {
+            carouselRef.current.addEventListener(
+                'scroll',
+                libDebounce(getSetIndex, 100),
+            );
+        }
+    });
 
     return (
         <div>
-            <div>
+            <div className={headerRowStyle}>
                 <h3 className={headingStyle}>{heading}</h3>
                 <div className={navIconStyle}>
                     <button onClick={prev}>
@@ -144,19 +183,19 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
                         <SvgChevronRightSingle />
                     </button>
                 </div>
-                <div className={dotsStyle}>
-                    {trails.map((value, i) => (
-                        <span
-                            className={
-                                i === activeIndex ? dotActiveStyle : dotStyle
-                            }
-                        />
-                    ))}
-                </div>
+            </div>
+            <div className={dotsStyle}>
+                {trails.map((value, i) => (
+                    <span className={i === index ? dotActiveStyle : dotStyle} />
+                ))}
             </div>
             <div className={carouselStyle} ref={carouselRef}>
-                {trails.map((trail) => (
-                    <div className={cardWrapperStyle}>
+                {trails.map((trail, i) => (
+                    <div
+                        className={
+                            i === 0 ? cardWrapperFirstStyle : cardWrapperStyle
+                        }
+                    >
                         <img
                             className={cardImageStyle}
                             src={trail.image}
