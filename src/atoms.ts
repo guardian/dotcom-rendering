@@ -180,7 +180,7 @@ function parseAtom(
 
             const description = atom.data.timeline.description;
 
-            if (!title || !events.length) {
+            if (!title || events.length === 0) {
                 return err(`No title or body for atom: ${id}`);
             }
 
