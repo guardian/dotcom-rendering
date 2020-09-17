@@ -684,6 +684,7 @@ interface TrailType {
     shortUrl?: string;
     commentCount?: number;
     starRating?: number;
+    linkText?: string;
 }
 
 interface TrailTabType {
