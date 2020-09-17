@@ -318,10 +318,6 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
         display: Display.Standard
     }
 
-    if (relatedItem.type === RelatedItemType.COMMENT && relatedItem?.bylineImage){
-        return <div css={bylineImage}><img src={relatedItem?.bylineImage}/></div>
-    }
-
     return pipe2(
         image,
         map(img => {

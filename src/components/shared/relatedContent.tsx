@@ -45,6 +45,8 @@ const listStyles = css`
     }
 `;
 
+const COMMENT = RelatedItemType.COMMENT;
+
 const RelatedContent: FC<Props> = ({ content }) => {
     return pipe2(
         content,
@@ -54,7 +56,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
                 <ul css={listStyles}>
                     {
                         relatedItems.map((relatedItem, key) => {
-                            return relatedItem.type === RelatedItemType.COMMENT && relatedItem.bylineImage
+                            return relatedItem.type === COMMENT && relatedItem.bylineImage
                                 ? <BylineCard
                                     key={key}
                                     relatedItem={relatedItem}

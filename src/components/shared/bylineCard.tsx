@@ -115,9 +115,10 @@ const byline = (relatedItem: RelatedItem): ReactElement | null => {
     )
 }
 
-const cardImage = (relatedItem: RelatedItem): ReactElement | null => {
-    return <div css={bylineImage}><img src={relatedItem?.bylineImage}/></div>
-}
+const cardImage = (relatedItem: RelatedItem): ReactElement | null =>
+    <div css={bylineImage}>
+        <img alt={relatedItem.byline ?? "Byline image"} src={relatedItem?.bylineImage}/>
+    </div>
 
 const dateStyles = css`
     ${textSans.small()};
