@@ -21,7 +21,7 @@ const starStyles = css`
     }
 ;
     svg {
-        margin: 0 -2px;
+        margin: 0 -0.125rem;
         height: 2rem;
     }
 
