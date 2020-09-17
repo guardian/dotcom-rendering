@@ -8,6 +8,8 @@ import { remSpace, neutral } from '@guardian/src-foundations';
 import { ResizedRelatedContent } from 'item';
 import { darkModeCss } from 'styles';
 import { from } from '@guardian/src-foundations/mq';
+import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
+import BylineCard from './bylineCard';
 
 interface Props {
     content: Option<ResizedRelatedContent>;
@@ -52,11 +54,16 @@ const RelatedContent: FC<Props> = ({ content }) => {
                 <ul css={listStyles}>
                     {
                         relatedItems.map((relatedItem, key) => {
-                            return <Card
-                                key={key}
-                                relatedItem={relatedItem}
-                                image={resizedImages[key]}
-                            />
+                            return relatedItem.type === RelatedItemType.COMMENT && relatedItem.bylineImage
+                                ? <BylineCard
+                                    key={key}
+                                    relatedItem={relatedItem}
+                                  />
+                                : <Card
+                                    key={key}
+                                    relatedItem={relatedItem}
+                                    image={resizedImages[key]}
+                                />
                         })
                     }
                 </ul>
