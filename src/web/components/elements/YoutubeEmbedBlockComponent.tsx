@@ -14,15 +14,19 @@ const expiredFallbackTextStyles = css`
     width: 100%;
     padding: 1.125rem 3.75rem;
 
-    ${textSans.medium({ fontWeight: 'bold' })}
+    ${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
     color: ${palette.neutral[100]};
     background-color: ${palette.neutral[20]};
 
-    :before {
+    ::before {
+        content: '';
         background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzYgMzYiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgZmlsbD0iI2ZmZiIgY3g9IjE4IiBjeT0iMTgiIHI9IjE4Ii8+PHBhdGggZD0iTTE0LjcyNyA1LjcyN2wxLjYzNi0xLjYzNmgzLjI3M2wxLjYzNiAxLjYzNi0xLjYzNiAxNS41NDVoLTMuMjczTDE0LjcyNyA1LjcyN202LjU0NSAyMi4wOWMwLTEuOC0xLjQ3My0zLjI3My0zLjI3My0zLjI3M2EzLjI4MyAzLjI4MyAwIDAgMC0zLjI3MyAzLjI3M2MwIDEuOCAxLjQ3MyAzLjI3MyAzLjI3MyAzLjI3M3MzLjI3My0xLjQ3MyAzLjI3My0zLjI3MyIgZmlsbD0iIzMzMyIvPjwvZz48L3N2Zz4=);
-        background-position: 0 0;
-        width: 2.25rem;
-        height: 2.25rem;
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        margin-top: -18px;
     }
 `;
 
@@ -73,29 +77,29 @@ export const YoutubeEmbedBlockComponent: React.FC<{
         max-width: ${maxWidth}px;
         width: 100%;
         margin-bottom: ${caption ? `0px` : `6px`};
-
-        ${fallbackImageStyles}
     `;
 
     return (
         <div className={embedContainer}>
-            <MaintainAspectRatio height={height} width={width}>
-                {expired ? (
-                    <div className={expiredFallbackTextStyles}>
-                        This video has been removed. This could be because it
-                        launched early, our rights have expired, there was a
-                        legal issue, or for another reason.
-                    </div>
-                ) : (
-                    <iframe
-                        src={embedUrl}
-                        title={title}
-                        height={height}
-                        width={width}
-                        allowFullScreen={true}
-                    />
-                )}
-            </MaintainAspectRatio>
+            <div className={fallbackImageStyles}>
+                <MaintainAspectRatio height={height} width={width}>
+                    {expired ? (
+                        <div className={expiredFallbackTextStyles}>
+                            This video has been removed. This could be because
+                            it launched early, our rights have expired, there
+                            was a legal issue, or for another reason.
+                        </div>
+                    ) : (
+                        <iframe
+                            src={embedUrl}
+                            title={title}
+                            height={height}
+                            width={width}
+                            allowFullScreen={true}
+                        />
+                    )}
+                </MaintainAspectRatio>
+            </div>
             {caption && (
                 <Caption
                     captionText={caption}
