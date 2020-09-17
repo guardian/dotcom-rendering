@@ -16,7 +16,12 @@ const starStyles = css`
     display: inline-block;
     line-height: 0;
 
+    &:nth-of-type(5) {
+        padding-right: 2px;
+    }
+;
     svg {
+        margin: 0 -2px;
         height: 2rem;
     }
 
