@@ -8,10 +8,6 @@ import Int64 from 'node-int64';
 import { isValidDate } from "date";
 import { atomScript } from "components/atoms/interactiveAtom";
 
-function formatDate(date: Int64): string {
-    return new Date(date.toNumber()).toDateString();
-}
-
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
     if (date === undefined) return undefined;
     const d = new Date(date.toNumber());
@@ -173,7 +169,7 @@ function parseAtom(
             const { title } = atom;
             const events = atom.data.timeline.events.map(event => ({
                 title: event.title,
-                date: formatDate(event.date),
+                date: formatOptionalDate(event.date) ?? '',
                 body: event.body,
                 toDate: formatOptionalDate(event.toDate),
             }));
@@ -182,6 +178,10 @@ function parseAtom(
 
             if (!title || events.length === 0) {
                 return err(`No title or body for atom: ${id}`);
+            }
+
+            if (events.every(event => event.date !== '')) {
+                return err('Invalid date in timeline atom');
             }
 
             return ok({
