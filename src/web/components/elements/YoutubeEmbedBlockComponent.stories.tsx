@@ -20,7 +20,7 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     </div>
 );
 
-const fallbackImageUrl =
+const overrideImage =
     'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e';
 
 export const standardAspectRatio = () => {
@@ -38,7 +38,7 @@ export const standardAspectRatio = () => {
                 display={Display.Standard}
                 designType="Article"
                 expired={false}
-                fallbackImageUrl={fallbackImageUrl}
+                overrideImage={overrideImage}
             />
             <p>abc</p>
         </Container>
@@ -61,7 +61,7 @@ export const standardAspectRatioError = () => {
                 display={Display.Standard}
                 designType="Article"
                 expired={true}
-                fallbackImageUrl={fallbackImageUrl}
+                overrideImage={overrideImage}
             />
             <p>abc</p>
         </Container>

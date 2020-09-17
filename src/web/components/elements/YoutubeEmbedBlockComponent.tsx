@@ -41,7 +41,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     display: Display;
     designType: DesignType;
     expired: boolean;
-    fallbackImageUrl?: string;
+    overrideImage?: string;
 }> = ({
     embedUrl,
     caption,
@@ -53,7 +53,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     designType,
     credit,
     expired,
-    fallbackImageUrl,
+    overrideImage,
 }) => {
     // 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
     // Constrain iframe embeds with a width to their natural width
@@ -65,9 +65,9 @@ export const YoutubeEmbedBlockComponent: React.FC<{
     const maxWidth = maxHeight * aspectRatio;
 
     const fallbackImageStyles =
-        fallbackImageUrl && expired
+        overrideImage && expired
             ? css`
-                  background-image: url(${fallbackImageUrl});
+                  background-image: url(${overrideImage});
                   background-size: cover;
                   background-repeat: no-repeat;
               `

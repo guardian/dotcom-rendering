@@ -349,7 +349,7 @@ export const ArticleRenderer: React.FC<{
                             display={display}
                             designType={designType}
                             expired={element.expired}
-                            fallbackImageUrl={element.fallbackImageUrl}
+                            overrideImage={element.overrideImage}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
