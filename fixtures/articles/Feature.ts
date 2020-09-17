@@ -1951,6 +1951,9 @@ export const Feature: CAPIType = {
             _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
             id: '6c4587d3-41ad-4f71-85d0-1b3ccc2c9314',
             channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
+            expired: false,
+            overrideImage:
+                'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e',
         },
     ],
     webPublicationDate: '2020-02-10T06:59:35.000Z',
