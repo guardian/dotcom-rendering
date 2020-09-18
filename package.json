@@ -28,7 +28,13 @@
   },
   "jest": {
     "collectCoverage": true,
-    "preset": "ts-jest/presets/js-with-babel",
+    "preset": "ts-jest/presets/js-with-ts",
+    "globals": {
+      "ts-jest": {
+        "babelConfig": true,
+        "tsConfig": "config/tsconfig.test.json"
+      }
+    },
     "coverageThreshold": {
       "global": {
         "branches": 75,

@@ -36,7 +36,7 @@ describe('Avatar component renders as expected', () => {
         const cssProp = avatar.prop('css');
 
         if (isObject(cssProp)) {
-            expect(cssProp.styles).toContain("background-color: pink");
+            expect(cssProp.styles).toContain("background-color:pink");
         } else {
             fail('No styles found');
         }
