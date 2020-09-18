@@ -30,7 +30,9 @@ describe('Tags component renders as expected', () => {
     })
 
     it('Renders correct number of tags', () => {
-        const tags = renderer.create(<Tags tags={[...tagsProps, ...tagsProps]} format={mockFormat} />)
+        const tags = renderer.create(
+        <Tags tags={[...tagsProps, ...tagsProps]} format={mockFormat} />
+        )
         expect(tags.root.findAllByType('li').length).toBe(2)
     })
 
