@@ -121,6 +121,7 @@ const richLinkElements = css`
 
 const richLinkHeader = css`
     padding-bottom: 10px;
+    color: ${neutral[0]};
 `;
 
 const richLinkTitle = css`
