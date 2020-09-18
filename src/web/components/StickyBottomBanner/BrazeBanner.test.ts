@@ -1,4 +1,8 @@
-import { brazeVendorId, hasRequiredConsents } from './BrazeBanner';
+import {
+    brazeVendorId,
+    hasRequiredConsents,
+    canShowPreChecks,
+} from './BrazeBanner';
 
 let mockOnConsentChangeResult: any;
 jest.mock('@guardian/consent-management-platform', () => ({
@@ -61,6 +65,73 @@ describe('hasRequiredConsents', () => {
             };
 
             await expect(hasRequiredConsents()).resolves.toBe(false);
+        });
+    });
+});
+
+describe('canShowPreChecks', () => {
+    describe('when the switch is off', () => {
+        it('returns false', () => {
+            const result = canShowPreChecks({
+                brazeSwitch: false,
+                apiKey: 'abcde',
+                isDigitalSubscriber: true,
+                pageConfig: { isPaidContent: false },
+            });
+
+            expect(result).toBe(false);
+        });
+    });
+
+    describe('when the api key is empty', () => {
+        it('returns false', () => {
+            const result = canShowPreChecks({
+                brazeSwitch: true,
+                apiKey: '',
+                isDigitalSubscriber: true,
+                pageConfig: { isPaidContent: false },
+            });
+
+            expect(result).toBe(false);
+        });
+    });
+
+    describe('when not a digital subscriber', () => {
+        it('returns false', () => {
+            const result = canShowPreChecks({
+                brazeSwitch: true,
+                apiKey: 'abcde',
+                isDigitalSubscriber: false,
+                pageConfig: { isPaidContent: false },
+            });
+
+            expect(result).toBe(false);
+        });
+    });
+
+    describe('when viewing paid content', () => {
+        it('returns false', () => {
+            const result = canShowPreChecks({
+                brazeSwitch: true,
+                apiKey: 'abcde',
+                isDigitalSubscriber: true,
+                pageConfig: { isPaidContent: true },
+            });
+
+            expect(result).toBe(false);
+        });
+    });
+
+    describe('when all checks pass', () => {
+        it('returns true', () => {
+            const result = canShowPreChecks({
+                brazeSwitch: true,
+                apiKey: 'abcde',
+                isDigitalSubscriber: true,
+                pageConfig: { isPaidContent: false },
+            });
+
+            expect(result).toBe(true);
         });
     });
 });
