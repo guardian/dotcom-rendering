@@ -2340,10 +2340,10 @@
     "@guardian/src-button" "^2.1.0"
     "@guardian/src-foundations" "^2.1.0"
 
-"@guardian/consent-management-platform@5.0.0-0":
-  version "5.0.0-0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-5.0.0-0.tgz#d55282b95b1e624608096876ef25909457be2fe3"
-  integrity sha512-tKZDpZVu2eHgh+TDxB1+HwmICDEl5Ay/RWvgEyJnXD5DQAGhurKOxlWSiq16d/Fvycei3pRrpa8jwUQ0svVdNA==
+"@guardian/consent-management-platform@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-5.0.0.tgz#1a0c1de69f2c0d6cafa51a224beaa2839b402bc4"
+  integrity sha512-UaWjeZQQktI/rOIoeQyQTkbyjiMPCeNVvCWKdYMiJpDcISxjRwi/rLWYQ7C9bsX7RzimbA6WgIBePBn0B1YfjQ==
 
 "@guardian/discussion-rendering@^2.6.0":
   version "2.6.0"
