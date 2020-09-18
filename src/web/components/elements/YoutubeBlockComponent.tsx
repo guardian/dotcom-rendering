@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/src-foundations/typography';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
@@ -12,8 +12,11 @@ import { asFormat } from '@root/src/lib/format';
 const expiredFallbackTextStyles = css`
     position: absolute;
     display: table-cell;
-    padding: 1.125rem 3.75rem;
-    ${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 60px;
+    padding-right: 60px;
+    ${body.medium({ lineHeight: 'tight' })}
     color: ${palette.neutral[100]};
     background-color: ${palette.neutral[20]};
     ::before {
