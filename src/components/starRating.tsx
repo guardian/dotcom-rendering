@@ -22,7 +22,7 @@ const starStyles = css`
 ;
     svg {
         margin: 0 -0.125rem;
-        height: 2rem;
+        height: 1.75rem;
     }
 
     ${darkModeCss`
