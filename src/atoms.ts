@@ -180,7 +180,7 @@ function parseAtom(
                 return err(`No title or body for atom: ${id}`);
             }
 
-            if (events.every(event => event.date !== '')) {
+            if (!events.every(event => event.date !== '')) {
                 return err('Invalid date in timeline atom');
             }
 
