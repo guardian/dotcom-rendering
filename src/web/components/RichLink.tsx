@@ -116,7 +116,10 @@ const richLinkLink = css`
 `;
 
 const richLinkElements = css`
-    padding: 4px 5px 5px 7px;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
 `;
 
 const richLinkHeader = css`
@@ -281,7 +284,7 @@ export const RichLink = ({
             data-name={(isPlaceholder && 'placeholder') || ''}
         >
             <div className={cx(richLinkContainer, neutralBackground)}>
-                <a className={cx(richLinkLink)} href={url}>
+                <a className={richLinkLink} href={url}>
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (
                         <div>
