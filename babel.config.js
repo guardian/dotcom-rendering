@@ -6,6 +6,8 @@ module.exports = {
         [
             '@babel/preset-env',
             { 'targets': { 'node': '12' }, 'modules': 'cjs' }
-        ]
+        ],
+        '@babel/preset-react',
+        '@emotion/babel-preset-css-prop',
     ]
 }
