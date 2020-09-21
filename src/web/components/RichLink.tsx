@@ -152,10 +152,11 @@ const readMoreTextStyle = css`
     font-size: 14px;
     ${from.wide} {
         ${headline.xxxsmall()}
+        line-height: 25px;
     }
     display: inline-block;
     height: 30px;
-    line-height: 26px;
+    line-height: 25px;
     padding-left: 4px;
     vertical-align: top;
     font-weight: 500;
