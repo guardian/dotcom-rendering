@@ -39,7 +39,7 @@
         "@guardian/atoms-rendering": "^1.11.2",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/consent-management-platform": "5.0.0",
-        "@guardian/braze-components": "^0.0.5",
+        "@guardian/braze-components": "^0.0.7",
         "@guardian/discussion-rendering": "^2.6.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^1.5.0",
