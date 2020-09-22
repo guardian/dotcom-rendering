@@ -184,6 +184,12 @@ const trails: TrailType[] = [
     },
 ];
 
-export const Headlines = () => <Carousel heading="Headlines" trails={trails} />;
+export const Headlines = () => (
+    <Carousel
+        heading="Headlines"
+        trails={trails}
+        ophanComponentName="curated-content"
+    />
+);
 
 Headlines.story = 'Headlines carousel';

@@ -5,15 +5,14 @@ import {
 } from '@guardian/src-icons';
 import { css } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
-import { until } from '@guardian/src-foundations/mq';
-import { palette, space, border } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
+import { palette, space } from '@guardian/src-foundations';
 import libDebounce from 'lodash/debounce';
+import { LeftColumn } from '@frontend/web/components/LeftColumn';
+import { Hide } from '@frontend/web/components/Hide';
+import { formatAttrString } from '@frontend/web/lib/formatAttrString';
+import { OnwardsTitle } from './OnwardsTitle';
 import { CardAge } from '../Card/components/CardAge';
-
-type Props = {
-    heading: string;
-    trails: TrailType[];
-};
 
 const navIconStyle = css`
     display: inline-block;
@@ -24,31 +23,66 @@ const navIconStyle = css`
     }
 `;
 
-const headerOuterStyle = css`
-    border-top: 1px solid ${border.primary};
-    padding-top: ${space[2]}px;
-`;
-
-const headerInnerStyle = css`
+const wrapperStyle = css`
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
+
+    ${from.desktop} {
+        overflow: hidden;
+    }
 `;
 
-const headingStyle = css`
-    ${headline.xxsmall({ fontWeight: 'bold' })};
-    ${until.desktop} {
-        ${headline.xxxsmall({ fontWeight: 'bold' })};
+const containerStyles = css`
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    margin-top: 6px;
+    ${from.leftCol} {
+        margin-top: 26px;
+    }
+
+    margin-bottom: 60px;
+
+    margin-left: 0px;
+    margin-right: 0px;
+
+    ${from.tablet} {
+        /* Shrink the container to remove the leading and
+       trailing side margins from the list of cards */
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    ${from.leftCol} {
+        margin-left: 0px;
+        margin-right: -10px;
+    }
+
+    ${from.wide} {
+        margin-right: 70px;
+        margin-top: 8px;
     }
 `;
 
 const carouselStyle = css`
-    width: 100%;
     height: 227px;
     display: flex;
 
     scroll-snap-type: x mandatory;
     /* scroll-behavior: smooth; */
-    overflow-x: scroll;
+
+    position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
+
+    overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
+    ${from.desktop} {
+        overflow: hidden;
+    }
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
 `;
 
 const cardWrapperStyle = css`
@@ -136,6 +170,8 @@ const buttonStyle = css`
     border: none;
     background: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 `;
 
 const verticalLine = css`
@@ -144,8 +180,20 @@ const verticalLine = css`
     flex-shrink: 0;
 `;
 
+const navRowStyles = css`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
+`;
+
 const interleave = <A,>(arr: A[], separator: A): A[] => {
-    return arr.map((elem) => [elem, separator]).flat();
+    const separated = arr.map((elem) => [elem, separator]).flat();
+    if (separated.length > 0) separated.pop(); // remove separator at end
+    return separated;
 };
 
 type CardProps = {
@@ -179,7 +227,13 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
     </div>
 );
 
-export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
+export const Carousel: React.FC<OnwardsType> = ({
+    heading,
+    description,
+    trails,
+    url,
+    ophanComponentName,
+}: OnwardsType) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0); // TODO update based on (debounced) scroll or next/prev
 
@@ -196,11 +250,13 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
     const getIndex = (): number => {
         const { current } = carouselRef;
         if (current === null) return 0;
-        const scrolled = current.scrollLeft || 0;
 
-        const active = getItems()
+        const offsets = getItems()
             .filter(notPresentation)
-            .findIndex((el) => el.offsetLeft >= scrolled);
+            .map((el) => el.offsetLeft);
+
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
+        const active = offsets.findIndex((el) => el >= scrolled);
 
         return Math.max(0, active);
     };
@@ -212,11 +268,12 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
     const prev = () => {
         const { current } = carouselRef;
         if (current === null) return;
-        const scrolled = current.scrollLeft || 0;
 
         const offsets = getItems()
             .filter(notPresentation)
             .map((el) => el.offsetLeft);
+
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
 
         const nextOffset = offsets
             .reverse()
@@ -234,12 +291,12 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
     const next = () => {
         const { current } = carouselRef;
         if (current === null) return;
-        const scrolled = current.scrollLeft || 0;
 
         const offsets = getItems()
             .filter(notPresentation)
             .map((el) => el.offsetLeft);
 
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
         const nextOffset = offsets.find((offset) => offset > scrolled);
 
         if (nextOffset) {
@@ -263,10 +320,38 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
     ));
 
     return (
-        <div>
-            <div className={headerOuterStyle}>
-                <div className={headerInnerStyle}>
-                    <h3 className={headingStyle}>{heading}</h3>
+        <div className={wrapperStyle}>
+            <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
+                <OnwardsTitle
+                    title={heading}
+                    description={description}
+                    url={url}
+                />
+            </LeftColumn>
+            <div
+                className={containerStyles}
+                data-component={ophanComponentName}
+                data-link={formatAttrString(heading)}
+            >
+                <Hide when="above" breakpoint="leftCol">
+                    <OnwardsTitle
+                        title={heading}
+                        description={description}
+                        url={url}
+                    />
+                </Hide>
+
+                <div className={navRowStyles}>
+                    <div className={dotsStyle}>
+                        {trails.map((value, i) => (
+                            <span
+                                className={
+                                    i === index ? dotActiveStyle : dotStyle
+                                }
+                            />
+                        ))}
+                    </div>
+
                     <div className={navIconStyle}>
                         <button onClick={prev} className={buttonStyle}>
                             <SvgChevronLeftSingle />
@@ -276,18 +361,13 @@ export const Carousel: React.FC<Props> = ({ heading, trails }: Props) => {
                         </button>
                     </div>
                 </div>
-            </div>
 
-            <div className={dotsStyle}>
-                {trails.map((value, i) => (
-                    <span className={i === index ? dotActiveStyle : dotStyle} />
-                ))}
-            </div>
-            <div className={carouselStyle} ref={carouselRef}>
-                {interleave(
-                    cards,
-                    <div role="presentation" className={verticalLine} />,
-                )}
+                <div className={carouselStyle} ref={carouselRef}>
+                    {interleave(
+                        cards,
+                        <div role="presentation" className={verticalLine} />,
+                    )}
+                </div>
             </div>
         </div>
     );

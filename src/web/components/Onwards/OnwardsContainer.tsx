@@ -19,6 +19,7 @@ export const OnwardsContainer = ({
             display: flex;
             flex-grow: 1;
             flex-direction: column;
+            width: 100%;
 
             margin-top: 6px;
             ${from.leftCol} {

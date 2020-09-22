@@ -1,7 +1,10 @@
 import React from 'react';
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { useAB } from '@guardian/ab-react';
+import { css } from 'emotion';
 import { OnwardsData } from './OnwardsData';
+import { Carousel } from './Carousel';
+import { OnwardsLayout } from './OnwardsLayout';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
@@ -62,6 +65,10 @@ const firstPopularTag = (
     // filter for the first tag in the whitelist
     return isPaidContent ? pageTags[0] : firstTagInWhitelist;
 };
+
+const onwardsWrapper = css`
+    width: 100%;
+`;
 
 type Props = {
     ajaxUrl: string;
@@ -165,16 +172,30 @@ export const OnwardsUpper = ({
 
     const inCuratedContainerTest = ABTestAPI.isUserInVariant(
         'CuratedContainerTest',
-        'variant',
+        'fixed',
     );
 
+    const inCuratedCarouselTest = true; // ABTestAPI.isUserInVariant(
+    /*         'CuratedContainerTest',
+        'carousel',
+    );
+ */
     return (
-        <div>
+        <div className={onwardsWrapper}>
+            {inCuratedCarouselTest && (
+                <OnwardsData
+                    url={headlinesDataUrl}
+                    limit={10}
+                    ophanComponentName="curated-content"
+                    container={Carousel}
+                />
+            )}
             {inCuratedContainerTest && (
                 <OnwardsData
                     url={headlinesDataUrl}
                     limit={4}
                     ophanComponentName="curated-content"
+                    container={OnwardsLayout}
                 />
             )}
             {url && (
@@ -182,6 +203,7 @@ export const OnwardsUpper = ({
                     url={url}
                     limit={8}
                     ophanComponentName={ophanComponentName}
+                    container={OnwardsLayout}
                 />
             )}
         </div>

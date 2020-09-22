@@ -27,7 +27,17 @@ export const curatedContainerTest: ABTest = {
             },
         },
         {
-            id: 'variant',
+            id: 'fixed',
+            test: (): void => {},
+            impression: (impression) => {
+                impression();
+            },
+            success: (success) => {
+                success();
+            },
+        },
+        {
+            id: 'carousel',
             test: (): void => {},
             impression: (impression) => {
                 impression();
