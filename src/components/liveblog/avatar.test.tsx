@@ -1,12 +1,11 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import Avatar from 'components/liveblog/avatar';
 import { Contributor } from 'contributor';
 import { none, some } from '@guardian/types/option';
-import { isObject } from 'lib';
+import renderer from 'react-test-renderer';
+import { matchers } from 'jest-emotion';
 
-configure({ adapter: new Adapter() });
+expect.extend(matchers);
 
 describe('Avatar component renders as expected', () => {
     const contributors: Contributor[] = [{
@@ -27,19 +26,14 @@ describe('Avatar component renders as expected', () => {
         }),
     }]
     it('Adds correct alt attribute', () => {
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" />);
-        expect(avatar.find('img').prop('alt')).toBe("Web Title")
+        const avatar = renderer.create(<Avatar contributors={contributors} bgColour="" />);
+        expect(avatar.root.findByType('img').props.alt).toBe("Web Title")
     })
 
     it('Uses background colour prop', () => {
-        const avatar = shallow<typeof Avatar>(<Avatar contributors={contributors} bgColour="pink" />);
-        const cssProp = avatar.prop('css');
+        const avatar = renderer.create(<Avatar contributors={contributors} bgColour="pink" />);
 
-        if (isObject(cssProp)) {
-            expect(cssProp.styles).toContain("background-color:pink");
-        } else {
-            fail('No styles found');
-        }
+        expect(avatar.toJSON()).toHaveStyleRule('background-color', 'pink')
     })
 
     it('Renders null if more than one contributor', () => {
@@ -47,7 +41,9 @@ describe('Avatar component renders as expected', () => {
             { name: "Contributor 1", id: "test", apiUrl: 'test', image: none },
             { name: "Contributor 2", id: "test", apiUrl: 'test', image: none },
         ]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" />);
-        expect(avatar.html()).toBe(null)
+
+        const avatar = renderer.create(<Avatar contributors={contributors} bgColour="" />);
+
+        expect(avatar.root.children).toHaveLength(0);
     })
 });
