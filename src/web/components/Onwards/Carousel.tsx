@@ -9,9 +9,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
 import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { Hide } from '@frontend/web/components/Hide';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
-import { OnwardsTitle } from './OnwardsTitle';
 import { CardAge } from '../Card/components/CardAge';
 
 const navIconStyle = css`
@@ -27,10 +25,6 @@ const wrapperStyle = css`
     display: flex;
     justify-content: space-between;
     overflow: hidden;
-
-    ${from.desktop} {
-        overflow: hidden;
-    }
 `;
 
 const containerStyles = css`
@@ -76,7 +70,7 @@ const carouselStyle = css`
     position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 
     overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
-    ${from.desktop} {
+    ${from.tablet} {
         overflow: hidden;
     }
 
@@ -150,6 +144,7 @@ const headlineFirstStyle = css`
 
 const dotsStyle = css`
     margin-bottom: ${space[2]}px;
+    margin-left: 10px;
 `;
 
 const dotStyle = css`
@@ -183,12 +178,57 @@ const verticalLine = css`
 const navRowStyles = css`
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 
     ${from.tablet} {
+        padding-right: 10px;
+    }
+
+    ${from.leftCol} {
         margin-left: 10px;
     }
 `;
+
+const linkStyles = css`
+    text-decoration: none;
+    color: ${palette.text.anchorSecondary};
+
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
+const headerStyles = css`
+    ${headline.xsmall({ fontWeight: 'bold' })};
+    color: ${palette.text.primary};
+    padding-bottom: 14px;
+    padding-top: 6px;
+    margin-left: 10px;
+
+    ${from.leftCol} {
+        margin-left: 0;
+    }
+`;
+
+const titleStyle = css`
+    color: ${palette.news.main};
+`;
+
+export const Title = ({ title, url }: { title: string; url?: string }) => (
+    <>
+        {url ? (
+            <a className={linkStyles} href={url}>
+                <h2 className={headerStyles}>
+                    More from <span className={titleStyle}>{title}</span>
+                </h2>
+            </a>
+        ) : (
+            <h2 className={headerStyles}>
+                More from <span className={titleStyle}>{title}</span>
+            </h2>
+        )}
+    </>
+);
 
 const interleave = <A,>(arr: A[], separator: A): A[] => {
     const separated = arr.map((elem) => [elem, separator]).flat();
@@ -229,7 +269,6 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
 
 export const Carousel: React.FC<OnwardsType> = ({
     heading,
-    description,
     trails,
     url,
     ophanComponentName,
@@ -322,35 +361,15 @@ export const Carousel: React.FC<OnwardsType> = ({
     return (
         <div className={wrapperStyle}>
             <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
-                <OnwardsTitle
-                    title={heading}
-                    description={description}
-                    url={url}
-                />
+                <div />
             </LeftColumn>
             <div
                 className={containerStyles}
                 data-component={ophanComponentName}
                 data-link={formatAttrString(heading)}
             >
-                <Hide when="above" breakpoint="leftCol">
-                    <OnwardsTitle
-                        title={heading}
-                        description={description}
-                        url={url}
-                    />
-                </Hide>
-
                 <div className={navRowStyles}>
-                    <div className={dotsStyle}>
-                        {trails.map((value, i) => (
-                            <span
-                                className={
-                                    i === index ? dotActiveStyle : dotStyle
-                                }
-                            />
-                        ))}
-                    </div>
+                    <Title title={heading} url={url} />
 
                     <div className={navIconStyle}>
                         <button onClick={prev} className={buttonStyle}>
@@ -360,6 +379,14 @@ export const Carousel: React.FC<OnwardsType> = ({
                             <SvgChevronRightSingle />
                         </button>
                     </div>
+                </div>
+
+                <div className={dotsStyle}>
+                    {trails.map((value, i) => (
+                        <span
+                            className={i === index ? dotActiveStyle : dotStyle}
+                        />
+                    ))}
                 </div>
 
                 <div className={carouselStyle} ref={carouselRef}>
