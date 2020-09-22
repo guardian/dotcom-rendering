@@ -84,6 +84,17 @@ const lineStyles = css`
         margin-left: auto;
         margin-right: auto;
     }
+    div {
+        ${darkModeCss`
+        background-image: repeating-linear-gradient(
+            to bottom,
+            ${neutral[20]},
+            ${neutral[20]} 1px,
+            transparent 1px,
+            transparent 3px
+            );
+    `}
+    }
 `;
 
 const Standard: FC<Props> = ({ item, children }) => {

@@ -61,6 +61,17 @@ const lineStyles = css`
         margin-left: auto;
         margin-right: auto;
     }
+    div {
+        ${darkModeCss`
+        background-image: repeating-linear-gradient(
+            to bottom,
+            ${neutral[20]},
+            ${neutral[20]} 1px,
+            transparent 1px,
+            transparent 3px
+            );
+    `}
+    }
 `;
 
 // ----- Component ----- //
@@ -87,7 +98,7 @@ const Comment: FC<Props> = ({ item, children }) =>
                 <div css={lineStyles}>
                     <Lines count={8} />
                 </div>
-                
+
                 <div css={articleWidthStyles}>
                     <Standfirst item={item} />
                 </div>
