@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
@@ -20,7 +20,7 @@ interface ArticleSeriesProps {
     pillar: Pillar;
 }
 
-const ArticleSeries = (props: ArticleSeriesProps): JSX.Element | null =>
+const ArticleSeries: FC<ArticleSeriesProps> = (props) =>
     pipe2(
         props.series,
         map(series =>

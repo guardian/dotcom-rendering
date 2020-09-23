@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, FC } from 'react';
 import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -6,7 +6,7 @@ import { remSpace, breakpoints, palette } from '@guardian/src-foundations';
 import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
 import { makeRelativeDate, formatSeconds } from 'date';
 import { pipe2 } from 'lib';
-import { text, neutral, background } from '@guardian/src-foundations/palette';
+import { text, neutral, background, opinion } from '@guardian/src-foundations/palette';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
@@ -14,7 +14,7 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { getPillarStyles, pillarFromString } from 'pillarStyles';
 import Img from 'components/img';
 import { border } from 'editorialPalette';
-import { SvgCamera, SvgVideo, SvgAudio } from '@guardian/src-icons';
+import { SvgCamera, SvgVideo, SvgAudio, SvgQuote } from '@guardian/src-icons';
 import { stars } from 'components/starRating';
 
 
@@ -41,6 +41,10 @@ const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         flex-direction: column;
         justify-content: space-between;
         border-top : ${borderColor(itemType, format)};
+
+        &.fade {
+            opacity: .7;
+        }
 
         img {
             width: 100%;
@@ -93,7 +97,7 @@ const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
         `;
     } else {
         return css`
-            ${headline.xxxsmall()};
+            ${headline.xxsmall()}
             margin: 0 0 ${remSpace[2]} 0;
         `;
     }
@@ -111,7 +115,6 @@ const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2
 );
 
 const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    
     switch (itemType) {
         case RelatedItemType.FEATURE: {
             const { kicker } = getPillarStyles(format.pillar);
@@ -175,7 +178,10 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.COMMENT: {
-            return css``;
+            return css`
+                background-color : ${opinion[800]};
+                ${headline.xxsmall()}
+            `;
         }
 
         default: {
@@ -207,6 +213,18 @@ const iconStyles = (format: Format): SerializedStyles => {
     `;
 }
 
+const commentIconStyle = (): SerializedStyles => {
+    return css`
+        width: 2.0rem;
+        height: 1.4375rem;
+        display: inline-block;
+        fill: ${opinion[400]};
+        vertical-align: text-top;
+        margin-top: -3px;
+        margin-right: -2px;
+    `;
+}
+
 const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
     switch (itemType){
         case RelatedItemType.GALLERY:
@@ -220,9 +238,17 @@ const icon = (itemType: RelatedItemType, format: Format): ReactElement | null =>
     }
 }
 
+const quotationComment = (itemType: RelatedItemType, format: Format): ReactElement | null => {
+    if (itemType === RelatedItemType.COMMENT){
+        return <span css={commentIconStyle}>< SvgQuote /></span>;
+    } else {
+        return null
+    }
+}
+
 const metadataStyles: SerializedStyles = css`
     padding: 0 ${remSpace[2]};
-    min-height: 1.5rem
+    min-height: 2rem;
 `;
 
 const durationMedia = (duration: Option<string>): ReactElement | null => {
@@ -242,7 +268,7 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     )
 }
 
-const Card = ({ relatedItem, image }: Props): JSX.Element => {
+const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
         pillar: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
@@ -268,12 +294,20 @@ const Card = ({ relatedItem, image }: Props): JSX.Element => {
         ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
     const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
         ? stars(parseInt(relatedItem.starRating)) : null;
+    const articleId = relatedItem.link.split('.com/').pop();
 
     return (
-        <li css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}>
+        <li
+            className="js-card"
+            data-article-id={articleId}
+            css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}
+        >
             <a css={anchorStyles} href={relatedItem.link}>
                 <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles(relatedItem.type)}>{relatedItem.title}</h3>
+                    <h3 css={headingStyles(relatedItem.type)}>
+                        {quotationComment(relatedItem.type, format)}
+                        {relatedItem.title}
+                    </h3>
                     {starRating}
                 </section>
                 <section>

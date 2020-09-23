@@ -38,6 +38,50 @@ function parseAtom(
             });
         }
 
+        case "guide": {
+            const atom = atoms.guides?.find(guide => guide.id === id);
+
+            if (atom?.data?.kind !== "guide" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const { body } = atom.data.guide.items[0];
+
+            if (!title || !body) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.GuideAtom,
+                html: body,
+                title,
+                id
+            });
+        }
+
+        case "qanda": {
+            const atom = atoms.qandas?.find(qanda => qanda.id === id);
+
+            if (atom?.data?.kind !== "qanda" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const { body } = atom.data.qanda.item;
+
+            if (!title || !body) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.QandaAtom,
+                html: body,
+                title,
+                id
+            });
+        }
+
         case "explainer": {
             const atom = atoms.explainers?.find(explainer => explainer.id === id);
 

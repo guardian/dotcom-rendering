@@ -110,7 +110,7 @@ const showcase = ({
                         {
                             type: AssetType.IMAGE,
                             mimeType: "image/jpeg",
-                            file: "https://gu.com/image.jpg",
+                            file: "https://theguardian.com/image.jpg",
                             typeData: {
                                 aspectRatio: "5:3",
                                 width: 5302,
@@ -125,7 +125,7 @@ const showcase = ({
                         source: "",
                         photographer: "",
                         mediaId: "",
-                        mediaApiUri: "https://image.co.uk",
+                        mediaApiUri: "https://theguardian.com/image.jpg",
                         suppliersReference: "",
                         imageType: ""
                     }
@@ -141,7 +141,7 @@ const articleContentWithImage = articleContentWith({
         {
             type: AssetType.IMAGE,
             mimeType: "image/jpeg",
-            file: "https://gu.com/image.jpg",
+            file: "https://theguardian.com/image.jpg",
             typeData: {
                 aspectRatio: "5:3",
                 width: 5302,
@@ -346,7 +346,7 @@ describe('interactive elements', () => {
             type: ElementType.INTERACTIVE,
             assets: [],
             interactiveTypeData: {
-                iframeUrl: "https://gu.com"
+                iframeUrl: "https://theguardian.com"
             }
         }
         const item = f(articleContentWith(interactiveElement)) as Standard;

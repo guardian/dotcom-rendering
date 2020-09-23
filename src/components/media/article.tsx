@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { css } from '@emotion/core';
 import { background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
@@ -39,7 +39,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Media = ({ item, children }: Props): JSX.Element =>
+const Media: FC<Props> = ({ item, children }) =>
      <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>

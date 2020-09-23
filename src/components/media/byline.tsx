@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Pillar } from '@guardian/types/Format';
@@ -45,8 +45,7 @@ interface Props {
     item: Item;
 }
 
-function Byline({ pillar, publicationDate, className, item }: Props): JSX.Element {
-
+const Byline: FC<Props> = ({ pillar, publicationDate, className, item }) => {
     const byline = pipe2(
         item.bylineHtml,
         map(html => <address>{ renderText(html, getFormat(item)) }</address>),
@@ -58,7 +57,7 @@ function Byline({ pillar, publicationDate, className, item }: Props): JSX.Elemen
             <div>
                 <div className="author">
                     { byline }
-                    <Dateline date={publicationDate} />
+                    <Dateline date={publicationDate} pillar={item.pillar}/>
                 </div>
             </div>
         </div>

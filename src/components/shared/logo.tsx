@@ -9,37 +9,51 @@ import { Item, getFormat } from 'item';
 import { pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
 import { textSans } from '@guardian/src-foundations/typography';
+import { getPillarStyles } from 'pillarStyles';
 
 interface Props {
     branding: Branding;
     format: Format;
 }
 
-const styles = (lightModeImage: string, darkModeImage?: string): SerializedStyles => css`
-    margin: ${remSpace[9]} 0;
-    ${textSans.small()}
+const styles = (format: Format, 
+                lightModeImage: string, 
+                darkModeImage?: string): SerializedStyles => {
+    const { kicker, inverted } = getPillarStyles(format.pillar);
+    return css`
+        margin: ${remSpace[9]} 0;
+        ${textSans.small()}
 
-    img {
-        content: url("${lightModeImage}");
-        display: block;
-        margin: ${remSpace[2]} 0;
-        max-height: 60px;
-    }
-
-    label {
-        color: ${text.supporting};
-    }
-
-    ${darkModeCss`
         img {
-            content: url("${darkModeImage ?? lightModeImage}");
+            content: url("${lightModeImage}");
+            display: block;
+            margin: ${remSpace[2]} 0;
+            max-height: 60px;
         }
 
         label {
-            color: ${neutral[86]};
+            color: ${text.supporting};
         }
-    `}
-`;
+
+        a {
+            color: ${kicker};
+        }
+
+        ${darkModeCss`
+            img {
+                content: url("${darkModeImage ?? lightModeImage}");
+            }
+
+            label {
+                color: ${neutral[86]};
+            }
+
+            a {
+                color: ${inverted};
+            }
+        `}
+    `;
+}
 
 const OptionalLogo = (item: Item): JSX.Element => pipe2(
     item.branding,
@@ -57,7 +71,7 @@ const Logo: FC<Props> = ({ branding, format }: Props) => {
     const darkLogo = cleanImageUrl(branding.altLogo ?? branding.logo);
 
     return (
-        <section css={styles(lightLogo, darkLogo)}>
+        <section css={styles(format, lightLogo, darkLogo)}>
             <label>{branding.label}</label>
             <a href={branding.sponsorUri}>
                 <img alt={branding.sponsorName} />

@@ -81,14 +81,14 @@ function pillarFromString(pillar: string | undefined): Pillar {
     }
 }
 
-function stringFromPillar(pillar: Pillar): string {
+function pillarToString(pillar: Pillar): string {
     switch (pillar) {
         case Pillar.Opinion:
             return 'opinion';
         case Pillar.Sport:
             return 'sport';
         case Pillar.Culture:
-            return 'culture';
+            return 'arts';
         case Pillar.Lifestyle:
             return 'lifestyle';
         case Pillar.News:
@@ -103,5 +103,5 @@ export {
     PillarStyles,
     getPillarStyles,
     pillarFromString,
-    stringFromPillar
+    pillarToString
 };

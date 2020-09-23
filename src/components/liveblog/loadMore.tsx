@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { pillarColours } from 'pillarStyles';
 import { Pillar } from '@guardian/types/Format';
 import { SvgPlus } from "@guardian/src-icons"
@@ -10,7 +10,7 @@ interface Props {
     onLoadMore: () => Promise<void>;
 }
 
-const LiveblogLoadMore = ({ pillar, onLoadMore }: Props): JSX.Element => {
+const LiveblogLoadMore: FC<Props> = ({ pillar, onLoadMore }) => {
     const theme = {
         button: {
             textPrimary: pillarColours[pillar].soft,

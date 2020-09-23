@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';
@@ -34,7 +34,7 @@ interface LiveblogStandfirstProps {
     format: Format;
 }
 
-const LiveblogStandfirst = ({ standfirst, format }: LiveblogStandfirstProps): JSX.Element | null =>
+const LiveblogStandfirst: FC<LiveblogStandfirstProps> = ({ standfirst, format }) =>
     pipe2(
         standfirst,
         map(doc =>

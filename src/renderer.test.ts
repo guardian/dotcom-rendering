@@ -10,6 +10,7 @@ import { none, some } from '@guardian/types/option';
 import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
 
+
 configure({ adapter: new Adapter() });
 const mockFormat: Format = {
     pillar: Pillar.News,
@@ -30,7 +31,7 @@ const textElement = (nodes: string[]): BodyElement =>
 const imageElement = (): BodyElement =>
     ({
         kind: ElementKind.Image,
-        src: 'https://gu.com/img.png',
+        src: 'https://theguardian.com/image.jpg',
         srcset: '',
         dpr2Srcset: '',
         alt: some("alt tag"),
@@ -66,14 +67,14 @@ const pullquoteWithAttributionElement = (): BodyElement =>
 const richLinkElement = (): BodyElement =>
     ({
         kind: ElementKind.RichLink,
-        url: "https://gu.com/article",
+        url: "https://theguardian.com",
         linkText: "this links to a related article"
     })
 
 const interactiveElement = (): BodyElement =>
     ({
         kind: ElementKind.Interactive,
-        url: "https://gu.com/interactive",
+        url: "https://theguardian.com",
     })
 
 const tweetElement = (): BodyElement =>
@@ -111,6 +112,13 @@ const audioElement = (): BodyElement =>
         width: "500"
     })
 
+const liveEventElement = (): BodyElement =>
+    ({
+        kind: ElementKind.LiveEvent,
+        linkText: "this links to a live event",
+        url: "https://theguardian.com"
+    })
+
 const atomElement = (): BodyElement =>
     ({
         kind: ElementKind.InteractiveAtom,
@@ -119,18 +127,27 @@ const atomElement = (): BodyElement =>
         js: some("console.log('init')"),
     })
 
-const liveEventElement = (): BodyElement =>
-    ({
-        kind: ElementKind.LiveEvent,
-        linkText: "this links to a live event",
-        url: "https://gu.com/liveevent"
-    })
-
 const explainerElement = (): BodyElement =>
     ({
         kind: ElementKind.ExplainerAtom,
-        html: "<main>Some content</main>",
+        html: "<main>Explainer content</main>",
         title: "this is an explainer atom",
+        id: ""
+    })
+
+const guideElement = (): BodyElement =>
+    ({
+        kind: ElementKind.GuideAtom,
+        html: "<main>Guide content</main>",
+        title: "this is a guide atom",
+        id: ""
+    })
+
+const qandaElement = (): BodyElement =>
+    ({
+        kind: ElementKind.QandaAtom,
+        html: "<main>QandA content</main>",
+        title: "this is a qanda atom",
         id: ""
     })
 
@@ -162,11 +179,15 @@ describe('renderer returns expected content', () => {
             '<em></em>',
             '<br>',
             '<ul><li></li></ul>',
-            '<mark></mark>'
+            '<mark></mark>',
+            '<p></p>',
+            '<span></span>',
+            '<a></a>',
+            'text'
         ];
 
-        expect(renderTextElement(elements).flat().length).toBe(7);
-        expect(renderTextElementWithoutStyles(elements).flat().length).toBe(7);
+        expect(renderTextElement(elements).flat().length).toBe(11);
+        expect(renderTextElementWithoutStyles(elements).flat().length).toBe(11);
     });
 
     test ('Renders caption node types', () => {
@@ -217,26 +238,28 @@ describe('Renders different types of elements', () => {
     test('ElementKind.Pullquote', () => {
         const nodes = render(pullquoteElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p></blockquote>');
+        expect(getHtml(pullquote)).toContain('quote');
+        expect(getHtml(pullquote)).not.toContain('attribution');
     })
 
     test('ElementKind.Pullquote with attribution', () => {
         const nodes = render(pullquoteWithAttributionElement())
         const pullquote = nodes.flat()[0];
-        expect(getHtml(pullquote)).toContain('<blockquote><p>quote</p><cite>attribution</cite></blockquote>');
+        expect(getHtml(pullquote)).toContain('attribution');
+        expect(getHtml(pullquote)).toContain('quote');
     })
 
     test('ElementKind.RichLink', () => {
         const nodes = render(richLinkElement())
         const richLink = nodes.flat()[0];
         expect(getHtml(richLink)).toContain('<h1>this links to a related article</h1>');
-        expect(getHtml(richLink)).toContain('href="https://gu.com/article"');
+        expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
     })
 
     test('ElementKind.Interactive', () => {
         const nodes = render(interactiveElement())
         const interactive = nodes.flat()[0];
-        expect(getHtml(interactive)).toContain('<iframe src="https://gu.com/interactive" height="500" title=""></iframe>');
+        expect(getHtml(interactive)).toContain('<iframe src="https://theguardian.com" height="500" title=""></iframe>');
     })
 
     test('ElementKind.Tweet', () => {
@@ -269,6 +292,12 @@ describe('Renders different types of elements', () => {
         expect(getHtml(video)).toContain('src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"');
     })
 
+    test('ElementKind.LiveEvent', () => {
+        const nodes = render(liveEventElement())
+        const liveEvent = nodes.flat()[0];
+        expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
+    })
+
     test('ElementKind.InteractiveAtom', () => {
         const nodes = render(atomElement())
         const atom = nodes.flat()[0];
@@ -277,32 +306,38 @@ describe('Renders different types of elements', () => {
         expect(getHtml(atom)).toContain('Some content');
     })
 
-    test('ElementKind.LiveEvent', () => {
-        const nodes = render(liveEventElement())
-        const liveEvent = nodes.flat()[0];
-        expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
-    })
-
     test('ElementKind.ExplainerAtom', () => {
         const nodes = render(explainerElement())
         const explainer = nodes.flat()[0];
-        expect(getHtml(explainer)).toContain('<main>Some content</main>');
+        expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
+    })
+
+    test('ElementKind.GuideAtom', () => {
+        const nodes = render(guideElement())
+        const explainer = nodes.flat()[0];
+        expect(getHtml(explainer)).toContain('<main>Guide content</main>');
+    })
+
+    test('ElementKind.QandaAtom', () => {
+        const nodes = render(qandaElement())
+        const explainer = nodes.flat()[0];
+        expect(getHtml(explainer)).toContain('<main>QandA content</main>');
     })
 });
 
 describe('Paragraph tags rendered correctly', () => {
     test('Contains no styles in standfirsts', () => {
-        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const fragment = JSDOM.fragment('<a href="#"><ul><li><strong><p>Standfirst link</p></strong></li></ul></a>');
         const nodes = renderStandfirstText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
-        expect(html).toBe('<p>Parapraph tag</p>')
+        expect(html).toContain('<strong><p>Standfirst link</p></strong>');
     });
 
     test('Contains styles in article body', () => {
-        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const fragment = JSDOM.fragment('<ul><li><strong><p>Standfirst link</p></strong></li></ul>');
         const nodes = renderText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
-        expect(html).not.toBe('<p>Parapraph tag</p>')
+        expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
     });
 });
 

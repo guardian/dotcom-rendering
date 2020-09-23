@@ -1,14 +1,19 @@
 // ----- Imports ----- //
 
-const { fork } = require('child_process');
-const webpack = require('webpack');
-const path = require('path');
-const ManifestPlugin = require('webpack-manifest-plugin');
+import { fork, ChildProcess } from 'child_process';
+import webpack, { Compiler, Configuration, Resolve } from 'webpack';
+import path from 'path';
+import ManifestPlugin from 'webpack-manifest-plugin';
+import CleanCSS from 'clean-css';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { createHash } from 'crypto';
+import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 
 // ----- Plugins ----- //
 
 class LaunchServerPlugin {
-    apply(compiler) {
+    server?: ChildProcess;
+    apply(compiler: Compiler): void {
         compiler.hooks.afterEmit.tap('LaunchServerPlugin', () => {
             console.log('Server starting...');
             this.server = fork('./dist/server.js');
@@ -25,7 +30,7 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-function resolve(loggerName) {
+function resolve(loggerName: string): Resolve {
     return {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
@@ -36,11 +41,11 @@ function resolve(loggerName) {
             logger: path.resolve(__dirname, `src/logger/${loggerName}`)
         },
     }
-};
+}
 
 // ----- Configs ----- //
 
-const serverConfig = env => {
+const serverConfig = (env: { [key: string]: boolean | undefined }): Configuration => {
     const isProd = env && env.production;
     const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
@@ -98,7 +103,7 @@ const serverConfig = env => {
     }
 }
 
-const clientConfig = {
+export const clientConfig: Configuration = {
     name: 'client',
     mode: 'development',
     entry: {
@@ -160,6 +165,10 @@ const clientConfig = {
     }
 };
 
+const assetsTemplateCss = new CleanCSS().minify(renederedItemsAssetsCss).styles.trim()
+const assetHash = (asset: string): string =>
+    createHash('sha256').update(asset).digest('base64');
+
 const clientConfigProduction = {
     ...clientConfig,
     name: 'clientProduction',
@@ -167,6 +176,17 @@ const clientConfigProduction = {
     devtool: false,
     plugins: [
         new ManifestPlugin(),
+        new HtmlWebpackPlugin({
+            meta: {
+                'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': `style-src 'sha256-${assetHash(assetsTemplateCss)}';` },
+              },
+            filename: 'rendered-items-assets.html',
+            template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
+            minify: true,
+            templateParameters: {
+                styles: assetsTemplateCss
+            }
+          })
     ],
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
@@ -177,4 +197,4 @@ const clientConfigProduction = {
 
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig, clientConfigProduction ];
+export default [ serverConfig, clientConfig, clientConfigProduction ];

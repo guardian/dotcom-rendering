@@ -53,7 +53,7 @@ interface Props {
     format: Format;
 }
 
-const HeaderVideo: FC<Props> = ({ video, format }: Props): JSX.Element =>
+const HeaderVideo: FC<Props> = ({ video, format }) =>
     <div
         css={styles(format)}
         data-posterUrl={video.posterUrl}

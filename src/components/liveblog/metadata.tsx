@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
@@ -76,7 +76,7 @@ interface Props {
     item: Liveblog;
 }
 
-const Metadata = ({ item }: Props): JSX.Element => {
+const Metadata: FC<Props> = ({ item }) => {
     const pillarStyles = getPillarStyles(item.pillar);
 
     const byline = pipe2(
@@ -97,7 +97,7 @@ const Metadata = ({ item }: Props): JSX.Element => {
                         />
                         <div className="author">
                             { byline }
-                            <Dateline date={item.publishDate} />
+                            <Dateline date={item.publishDate} pillar={item.pillar}/>
                             <div className="follow">Get alerts on this story</div>
                         </div>
                     </div>
