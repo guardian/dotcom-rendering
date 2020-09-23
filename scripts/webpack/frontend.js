@@ -11,6 +11,10 @@ const PROD = process.env.NODE_ENV === 'production';
 const commonConfigs = ({ platform }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
+    optimization: {
+        // We no not want to minimize our code.
+        minimize: false,
+    },
     output: {
         path: dist,
     },
