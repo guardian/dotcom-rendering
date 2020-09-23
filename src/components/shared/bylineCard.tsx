@@ -145,10 +145,10 @@ const lineStyles = css`
     `}
 `
 
-const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
+const relativeFirstPublished = (date: Option<Date>): ReactElement | null => pipe2(
     date,
     map(date => <time css={dateStyles}>{makeRelativeDate(date)}</time>),
-    withDefault<JSX.Element | null>(null),
+    withDefault<ReactElement | null>(null),
 );
 
 const footerStyles = css`
