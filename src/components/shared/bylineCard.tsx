@@ -79,14 +79,14 @@ const headingWrapperStyles = css`
 `
 
 const headingStyles: SerializedStyles = css`
-        ${headline.xxsmall()}
-        margin: 0 0 ${remSpace[2]} 0;
-    `;
+    ${headline.xxsmall()}
+    margin: 0 0 ${remSpace[2]} 0;
+`;
 
 const cardStyles: SerializedStyles = css`
-        background-color : ${opinion[800]};
-        ${headline.xxsmall()}
-    `;
+    background-color: ${opinion[800]};
+    ${headline.xxsmall()}
+`;
 
 
 const commentIconStyle = (): SerializedStyles => {
