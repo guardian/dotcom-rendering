@@ -86,6 +86,10 @@ const cardWrapperStyle = css`
     margin: 0 ${space[2]}px;
 
     scroll-snap-align: start;
+
+    :hover {
+        filter: brightness(90%);
+    }
 `;
 
 const cardWrapperFirstStyle = css`
@@ -240,7 +244,10 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
-    <div className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}>
+    <a
+        href={trail.url}
+        className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
+    >
         <img
             className={cardImageStyle}
             src={trail.image}
@@ -262,7 +269,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
                 designType={isFirst ? 'Live' : 'Article'}
             />
         </div>
-    </div>
+    </a>
 );
 
 export const Carousel: React.FC<OnwardsType> = ({
