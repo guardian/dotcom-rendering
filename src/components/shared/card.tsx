@@ -89,7 +89,7 @@ const anchorStyles = css`
 
 const headingWrapperStyles = css`
     padding: ${remSpace[2]};
-    min-height: 150px;
+    min-height: 10rem;
 `
 
 const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
@@ -216,17 +216,15 @@ const iconStyles = (format: Format): SerializedStyles => {
     `;
 }
 
-const commentIconStyle = (): SerializedStyles => {
-    return css`
-        width: 2.0rem;
-        height: 1.4375rem;
-        display: inline-block;
-        fill: ${opinion[400]};
-        vertical-align: text-top;
-        margin-top: -3px;
-        margin-right: -2px;
-    `;
-}
+const commentIconStyle: SerializedStyles = css`
+    width: 2.0rem;
+    height: 1.4375rem;
+    display: inline-block;
+    fill: ${opinion[400]};
+    vertical-align: text-top;
+    margin-top: -3px;
+    margin-right: -2px;
+`;
 
 const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
     switch (itemType){

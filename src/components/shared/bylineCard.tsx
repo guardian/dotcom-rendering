@@ -75,7 +75,7 @@ const anchorStyles = css`
 
 const headingWrapperStyles = css`
     padding: ${remSpace[2]};
-    min-height: 150px;
+    min-height: 10rem;
 `
 
 const headingStyles: SerializedStyles = css`
@@ -115,10 +115,16 @@ const byline = (relatedItem: RelatedItem): ReactElement | null => {
     )
 }
 
-const cardImage = (relatedItem: RelatedItem): ReactElement | null =>
-    <div css={bylineImage}>
-        <img alt={relatedItem.byline ?? "Byline image"} src={relatedItem?.bylineImage}/>
+const cardImage = (relatedItem: RelatedItem): ReactElement | null => {
+    if (!relatedItem?.bylineImage) {
+        return null;
+    }
+
+    return <div css={bylineImage}>
+        <img alt={relatedItem?.byline ?? "Byline image"} src={relatedItem.bylineImage}/>
     </div>
+}
+
 
 const dateStyles = css`
     ${textSans.small()};
