@@ -24,6 +24,17 @@ type Props = {
     title?: string;
 };
 
+const isHidpi = (item: SrcSetItem): boolean => item.src.includes('dpr=');
+
+const srcSetSortValue = (item: SrcSetItem): number => {
+    if (isHidpi(item)) {
+        // hidpi image should be higher precedence than the equivalent
+        // width dpr=1 image so we add an extra half pixel
+        return item.width / 2 + 0.5;
+    }
+    return item.width;
+};
+
 const selectScrSetItemForWidth = (
     desiredWidth: number,
     inlineSrcSets: SrcSetItem[],
@@ -58,7 +69,7 @@ const makePictureSource = (
         hidpi,
         minWidth,
         width: srcSet.width,
-        srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
+        srcset: `${srcSet.src} ${srcSet.width}w`,
     };
 };
 
@@ -67,27 +78,9 @@ const makeSources = (
     role: RoleType,
 ): PictureSource[] => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, role);
-    const sources: PictureSource[] = [];
-    inlineSrcSets
-        .map((item) => item.width)
-        .forEach((width) => {
-            sources.push(
-                makePictureSource(
-                    true,
-                    width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
-                ),
-            );
-            sources.push(
-                makePictureSource(
-                    false,
-                    width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
-                ),
-            );
-        });
-
-    return sources;
+    return inlineSrcSets
+        .sort((a, b) => srcSetSortValue(b) - srcSetSortValue(a))
+        .map((item) => makePictureSource(isHidpi(item), item.width, item));
 };
 
 const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
