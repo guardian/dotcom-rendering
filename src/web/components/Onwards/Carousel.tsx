@@ -61,8 +61,9 @@ const containerStyles = css`
 `;
 
 const carouselStyle = css`
-    height: 227px;
+    min-height: 227px;
     display: flex;
+    align-items: stretch;
 
     scroll-snap-type: x mandatory;
     /* scroll-behavior: smooth; */
@@ -90,6 +91,12 @@ const cardWrapperStyle = css`
     :hover {
         filter: brightness(90%);
     }
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    text-decoration: none;
 `;
 
 const cardWrapperFirstStyle = css`
@@ -100,21 +107,17 @@ const cardWrapperFirstStyle = css`
 // TODO image ratio is wrong from source. We could wrap in a div and use
 // absolute positioning to fix this?
 const cardImageStyle = css`
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 258px;
-    height: 181px;
 `;
 
 const headlineWrapperStyle = css`
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 176px;
     background-color: ${palette.neutral[97]};
     min-height: 107px;
     padding: ${space[1]}px;
+
+    margin-top: -45px;
+    flex-grow: 1;
 
     display: flex;
     flex-direction: column;
@@ -123,27 +126,19 @@ const headlineWrapperStyle = css`
 
 const headlineWrapperFirstStyle = css`
     ${headlineWrapperStyle};
-
     background-color: ${palette.news.dark};
     color: white;
 `;
 
 const headlineStyle = css`
     ${headline.xxxsmall()};
-    a {
-        text-decoration: none;
-        color: ${palette.neutral[7]};
-    }
-
+    color: ${palette.neutral[7]};
     margin-bottom: ${space[1]}px;
 `;
 
 const headlineFirstStyle = css`
     ${headlineStyle};
-
-    a {
-        color: ${palette.neutral[100]};
-    }
+    color: ${palette.neutral[100]};
 `;
 
 const dotsStyle = css`
@@ -196,15 +191,6 @@ const navRowStyles = css`
     }
 `;
 
-const linkStyles = css`
-    text-decoration: none;
-    color: ${palette.text.anchorSecondary};
-
-    :hover {
-        text-decoration: underline;
-    }
-`;
-
 const headerStyles = css`
     ${headline.xsmall({ fontWeight: 'bold' })};
     color: ${palette.text.primary};
@@ -216,20 +202,10 @@ const titleStyle = css`
     color: ${palette.news.main};
 `;
 
-export const Title = ({ title, url }: { title: string; url?: string }) => (
-    <>
-        {url ? (
-            <a className={linkStyles} href={url}>
-                <h2 className={headerStyles}>
-                    From <span className={titleStyle}>{title}</span>
-                </h2>
-            </a>
-        ) : (
-            <h2 className={headerStyles}>
-                From <span className={titleStyle}>{title}</span>
-            </h2>
-        )}
-    </>
+export const Title = ({ title }: { title: string; url?: string }) => (
+    <h2 className={headerStyles}>
+        From <span className={titleStyle}>{title}</span>
+    </h2>
 );
 
 const interleave = <A,>(arr: A[], separator: A): A[] => {
@@ -260,7 +236,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
             }
         >
             <h4 className={isFirst ? headlineFirstStyle : headlineStyle}>
-                <a href={trail.url}>{trail.headline}</a>
+                {trail.headline}
             </h4>
             <CardAge
                 webPublicationDate={trail.webPublicationDate}
@@ -275,7 +251,6 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
 export const Carousel: React.FC<OnwardsType> = ({
     heading,
     trails,
-    url,
     ophanComponentName,
 }: OnwardsType) => {
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -374,7 +349,7 @@ export const Carousel: React.FC<OnwardsType> = ({
                 data-link={formatAttrString(heading)}
             >
                 <div className={navRowStyles}>
-                    <Title title={heading} url={url} />
+                    <Title title={heading} />
 
                     <div className={navIconStyle}>
                         <button onClick={prev} className={buttonStyle}>
