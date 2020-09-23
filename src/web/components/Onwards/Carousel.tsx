@@ -16,7 +16,7 @@ const navIconStyle = css`
     display: inline-block;
 
     svg {
-        height: 24px;
+        height: 32px;
         fill: ${palette.neutral[46]};
     }
 `;
@@ -144,7 +144,10 @@ const headlineFirstStyle = css`
 
 const dotsStyle = css`
     margin-bottom: ${space[2]}px;
-    margin-left: 10px;
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
 `;
 
 const dotStyle = css`
@@ -184,7 +187,7 @@ const navRowStyles = css`
         padding-right: 10px;
     }
 
-    ${from.leftCol} {
+    ${from.tablet} {
         margin-left: 10px;
     }
 `;
@@ -203,11 +206,6 @@ const headerStyles = css`
     color: ${palette.text.primary};
     padding-bottom: 14px;
     padding-top: 6px;
-    margin-left: 10px;
-
-    ${from.leftCol} {
-        margin-left: 0;
-    }
 `;
 
 const titleStyle = css`
@@ -219,12 +217,12 @@ export const Title = ({ title, url }: { title: string; url?: string }) => (
         {url ? (
             <a className={linkStyles} href={url}>
                 <h2 className={headerStyles}>
-                    More from <span className={titleStyle}>{title}</span>
+                    From <span className={titleStyle}>{title}</span>
                 </h2>
             </a>
         ) : (
             <h2 className={headerStyles}>
-                More from <span className={titleStyle}>{title}</span>
+                From <span className={titleStyle}>{title}</span>
             </h2>
         )}
     </>
