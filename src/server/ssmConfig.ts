@@ -50,6 +50,12 @@ export async function getConfigValue(
     key: string,
     defaultValue?: string,
 ): Promise<string | undefined> {
+
+    if (process.env.GITHUB_ACTIONS) {
+        // my.var.name is not a valid env var
+        return process.env[key.toUpperCase().replace(/\./g, '_')];
+    }
+
     const conf = await fetchConfig();
 
     if (conf[key]) {
