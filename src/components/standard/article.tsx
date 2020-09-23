@@ -16,7 +16,7 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
-import { getPillarStyles, stringFromPillar } from 'pillarStyles';
+import { getPillarStyles, pillarToString } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import { pipe2 } from 'lib';
@@ -94,7 +94,7 @@ const Standard: FC<Props> = ({ item, children }) => {
                     css={css`margin-bottom: ${remSpace[4]}`}
                     id="comments"
                     data-closed={false}
-                    data-pillar={stringFromPillar(item.pillar)}
+                    data-pillar={pillarToString(item.pillar)}
                     data-short-id={id}
                 ></section>),
             withDefault(<></>)
