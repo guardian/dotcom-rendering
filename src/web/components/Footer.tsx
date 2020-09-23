@@ -51,6 +51,7 @@ const pillarWrap = css`
 
 const emailSignup = css`
     padding-top: 12px;
+    min-height: 150px;
 
     ${from.desktop} {
         margin: 0 ${emailSignupSideMargins}px;

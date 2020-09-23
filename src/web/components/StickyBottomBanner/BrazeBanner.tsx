@@ -31,10 +31,31 @@ export const hasRequiredConsents = (): Promise<boolean> =>
         });
     });
 
+type PreCheckArgs = {
+    brazeSwitch: boolean;
+    apiKey?: string;
+    isDigitalSubscriber?: boolean;
+    pageConfig: { [key: string]: any };
+};
+
+export const canShowPreChecks = ({
+    brazeSwitch,
+    apiKey,
+    isDigitalSubscriber,
+    pageConfig,
+}: PreCheckArgs) =>
+    Boolean(
+        brazeSwitch &&
+            apiKey &&
+            isDigitalSubscriber &&
+            !pageConfig.isPaidContent,
+    );
+
 // We can show a Braze banner if:
 // - The Braze switch is on
 // - We have a Braze API key
 // - The user is a digital subscriber
+// - We're not on a Glabs paid content page
 // - We've got a Braze UUID from the API, given a user's ID Creds
 // - The user has given Consent via CCPA or TCFV2
 // - The Braze websdk appboy initialisation does not throw an error
@@ -46,11 +67,14 @@ export const canShow = async (
     const { brazeSwitch } = window.guardian.config.switches;
     const apiKey = window.guardian.config.page.brazeApiKey;
 
-    if (!(brazeSwitch && apiKey)) {
-        return { result: false };
-    }
-
-    if (!isDigitalSubscriber) {
+    if (
+        !canShowPreChecks({
+            brazeSwitch,
+            apiKey,
+            isDigitalSubscriber,
+            pageConfig: window.guardian.config.page,
+        })
+    ) {
         return { result: false };
     }
 
@@ -68,7 +92,7 @@ export const canShow = async (
             /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
         );
 
-        appboy.initialize(apiKey, {
+        appboy.initialize(apiKey as string, {
             enableLogging: false,
             noCookies: true,
             baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
@@ -113,7 +137,7 @@ export const canShow = async (
             appboy.changeUser(brazeUuid);
             appboy.openSession();
         });
-    } catch {
+    } catch (e) {
         return { result: false };
     }
 };
