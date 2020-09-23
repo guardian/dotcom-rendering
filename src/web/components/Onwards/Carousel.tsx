@@ -104,8 +104,6 @@ const cardWrapperFirstStyle = css`
     margin-left: 0;
 `;
 
-// TODO image ratio is wrong from source. We could wrap in a div and use
-// absolute positioning to fix this?
 const cardImageStyle = css`
     width: 258px;
 `;
@@ -254,7 +252,7 @@ export const Carousel: React.FC<OnwardsType> = ({
     ophanComponentName,
 }: OnwardsType) => {
     const carouselRef = useRef<HTMLDivElement>(null);
-    const [index, setIndex] = useState(0); // TODO update based on (debounced) scroll or next/prev
+    const [index, setIndex] = useState(0);
 
     const notPresentation = (el: HTMLElement): boolean =>
         el.getAttribute('role') !== 'presentation';

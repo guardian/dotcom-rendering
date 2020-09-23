@@ -571,6 +571,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             keywordIds={CAPI.config.keywordIds}
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
+                            edition={CAPI.editionId}
                         />
                     </Suspense>
                 </Lazy>

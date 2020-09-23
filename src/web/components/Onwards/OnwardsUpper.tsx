@@ -70,6 +70,19 @@ const onwardsWrapper = css`
     width: 100%;
 `;
 
+const headlinesContainer = (edition: Edition): string => {
+    switch (edition) {
+        case 'UK':
+            return 'uk-alpha/news/regular-stories';
+        case 'US':
+            return 'c5cad9ee-584d-4e85-85cd-bf8ee481b026';
+        case 'AU':
+            return 'au-alpha/news/regular-stories';
+        case 'INT':
+            return '10f21d96-18f6-426f-821b-19df55dfb831';
+    }
+};
+
 type Props = {
     ajaxUrl: string;
     hasRelated: boolean;
@@ -81,6 +94,7 @@ type Props = {
     keywordIds: string | string[];
     contentType: string;
     tags: TagType[];
+    edition: Edition;
 };
 
 export const OnwardsUpper = ({
@@ -94,6 +108,7 @@ export const OnwardsUpper = ({
     keywordIds,
     contentType,
     tags,
+    edition,
 }: Props) => {
     const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -167,7 +182,8 @@ export const OnwardsUpper = ({
     const ABTestAPI = useAB();
     const headlinesDataUrl = joinUrl([
         ajaxUrl,
-        '/container/data/uk-alpha/news/regular-stories.json',
+        'container/data',
+        `${headlinesContainer(edition)}.json`,
     ]);
 
     const inCuratedContainerTest = ABTestAPI.isUserInVariant(
@@ -175,11 +191,11 @@ export const OnwardsUpper = ({
         'fixed',
     );
 
-    const inCuratedCarouselTest = true; // ABTestAPI.isUserInVariant(
-    /*         'CuratedContainerTest',
+    const inCuratedCarouselTest = ABTestAPI.isUserInVariant(
+        'CuratedContainerTest',
         'carousel',
     );
- */
+
     return (
         <div className={onwardsWrapper}>
             {inCuratedCarouselTest && (
