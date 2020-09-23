@@ -3033,7 +3033,7 @@
   dependencies:
     type-detect "4.0.8"
 
-"@storybook/addon-actions@^5.3.21":
+"@storybook/addon-actions@^5.3.19":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-5.3.21.tgz#16eed3eb24996adfcbf70bd476a261324d6de593"
   integrity sha512-6SAF/j8UBZaAbRz/rYUlcCXda+c4LQvvNlbVJc9GHjNNNMJQQVc3/EU+M7PyFz6uDUxudAW1+AFchGk04ACJ2g==
@@ -3053,7 +3053,7 @@
     react-inspector "^4.0.0"
     uuid "^3.3.2"
 
-"@storybook/addon-links@^5.3.21":
+"@storybook/addon-links@^5.2.5":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-5.3.21.tgz#4bae11c5de77fcce1f5429be3454376870512db2"
   integrity sha512-Gjg3EUGVNSubvWawgbdiXQIKOL7QoMQOCeh1Pyl+5GPozYWDMr8O+86funTbt9LPBzGE1J+RWHarDaArUc6tSw==
@@ -3069,7 +3069,7 @@
     qs "^6.6.0"
     ts-dedent "^1.1.0"
 
-"@storybook/addon-storysource@^5.3.21":
+"@storybook/addon-storysource@^5.2.8":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-5.3.21.tgz#1c958f0b91128cc1d0410c0660422adfe3b876fb"
   integrity sha512-xndADOr74/Jf6Dy5bzV/cxmmXZBk4nted5O2fPGGnNIyvG24TPnJcQvPQfiHcC1Br/wW3HMgBcyQp3cT+UhXcg==
@@ -3088,7 +3088,7 @@
     regenerator-runtime "^0.13.3"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-viewport@^5.3.21":
+"@storybook/addon-viewport@^5.2.5":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-5.3.21.tgz#bb9dc937b21300bf6b611cdeceaf7e2365aeb99d"
   integrity sha512-Vb8+yvSU5m4sMCqM/6n3ZD8v6N/9xzElMlT7bYL+l9YecbvbgPVrN7xuNrVFKWMTHyEbkgoVPLtCwjK/Jbuvqw==
@@ -3105,7 +3105,7 @@
     prop-types "^15.7.2"
     util-deprecate "^1.0.2"
 
-"@storybook/addons@5.3.21", "@storybook/addons@^5.3.21":
+"@storybook/addons@5.3.21", "@storybook/addons@^5.2.5":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.3.21.tgz#ee312c738c33e8c34dc11777ef93522c3c36e56a"
   integrity sha512-Ji/21WADTLVbTbiKcZ64BcL0Es+h1Afxx3kNmGJqPSTUYroCwIFCT9mUzCqU6G+YyWaISAmTii5UJkTwMkChwA==
@@ -3324,7 +3324,7 @@
     pretty-hrtime "^1.0.3"
     regenerator-runtime "^0.13.3"
 
-"@storybook/react@^5.3.21":
+"@storybook/react@^5.3.19":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-5.3.21.tgz#f7f364d3d3adc70746a12cf8b6614952f41d4bd0"
   integrity sha512-A50F8dDZxyLGa/dE3q0Zxt7T5r9UbomoSclqw7oJTO9GI76QOu7GfsoWrEL2gTEDAmqXreLVQqGuTLQhBz0rlA==
@@ -6296,9 +6296,9 @@ chownr@^1.1.2:
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
 chromatic@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-5.0.0.tgz#64fcdd26e76c9a9d311d781e91d7532d2a0abd2a"
-  integrity sha512-jreBi7r6BFcJ5o30O9LQpZI/9ofNWAOZ6R8yX0U2EzxLGXA3yC8aiwkS73EDVUPwZC5qUvWm5pqzvD0FCIAHiw==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-5.2.0.tgz#318fed3c36912151320ab2f6b5e466e7f826d8f6"
+  integrity sha512-uUf0aFsUMiWCxy95vsufbtwQDlqi4B8FsXwnBWGvm0cf+fDHclzfB2ERgFTnW0ye/3Ben1DwH5UAvcGrq+qLIg==
   dependencies:
     "@babel/preset-react" "^7.9.4"
     "@babel/runtime" "^7.9.2"
@@ -6309,7 +6309,6 @@ chromatic@^5.0.0:
     cross-spawn "^7.0.2"
     debug "^4.1.1"
     dotenv "^8.2.0"
-    enhanced-resolve "^4.1.1"
     env-ci "^5.0.2"
     esm "^3.2.25"
     execa "^4.0.0"
@@ -8012,15 +8011,6 @@ enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-4.1.1.tgz#2937e2b8066cd0fe7ce0990a98f0d71a35189f66"
   integrity sha512-98p2zE+rL7/g/DzMHMTF4zZlCgeVdJ7yr6xzEpJRYwFYrGi9ANdn5DnJURg6RpBkyk60XYDnWIv51VfIhfNGuA==
-  dependencies:
-    graceful-fs "^4.1.2"
-    memory-fs "^0.5.0"
-    tapable "^1.0.0"
-
-enhanced-resolve@^4.1.1:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-4.2.0.tgz#5d43bda4a0fd447cb0ebbe71bef8deff8805ad0d"
-  integrity sha512-S7eiFb/erugyd1rLb6mQ3Vuq+EXHv5cpCkNqqIkYkBgN2QdFnyCZzFBleqwGEx4lgNGYij81BWnCrFNK7vxvjQ==
   dependencies:
     graceful-fs "^4.1.2"
     memory-fs "^0.5.0"
