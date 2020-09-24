@@ -10,7 +10,7 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
 import Metadata from 'components/metadata';
-import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, onwardStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import HeaderMedia from 'headerMedia';
 import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
@@ -70,7 +70,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
                 {children}
             </Body>
         </article>
-        <section css={relatedContentStyles}>
+        <section css={onwardStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
     </main>

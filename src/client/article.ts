@@ -116,26 +116,41 @@ function insertEpic(): void {
 
 declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
-const commentContainer = document.getElementById('comments');
-const pillar = commentContainer?.getAttribute('data-pillar') as Pillar;
-const shortUrl = commentContainer?.getAttribute('data-short-id');
-const isClosedForComments = !!commentContainer?.getAttribute('pillar');
+function renderComments(): void {
+    const commentContainer = document.getElementById('comments');
+    const pillar = commentContainer?.getAttribute('data-pillar') as Pillar;
+    const shortUrl = commentContainer?.getAttribute('data-short-id');
+    const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 
-if (pillar && shortUrl) {
-    const props = {
-        shortUrl,
-        baseUrl: "https://discussion.theguardian.com/discussion-api",
-        pillar,
-        isClosedForComments,
-        additionalHeaders: {},
-        expanded: false,
-        apiKey: "apps-rendering",
-        onPermalinkClick: (commentId: number): void => {
-            console.log(commentId)
+    if (pillar && shortUrl) {
+        const user = {
+            userId: 'abc123',
+            displayName: 'Jane Smith',
+            webUrl: '',
+            apiUrl: '',
+            secureAvatarUrl: '',
+            avatar: '',
+            badge: [],
+        };
+
+        const additionalHeaders = {};
+
+        const props = {
+            shortUrl,
+            baseUrl: "https://discussion.theguardian.com/discussion-api",
+            pillar,
+            user,
+            isClosedForComments,
+            additionalHeaders,
+            expanded: false,
+            apiKey: "ios",
+            onPermalinkClick: (commentId: number): void => {
+                console.log(commentId)
+            }
         }
-    }
 
-    ReactDOM.render(h(App, props), commentContainer)
+        ReactDOM.render(h(App, props), commentContainer)
+    }
 }
 
 interface FormData {
@@ -249,3 +264,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+renderComments();

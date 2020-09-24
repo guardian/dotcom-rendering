@@ -10,7 +10,7 @@ import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import Body from 'components/media/articleBody';
 import Tags from 'components/media/tags';
-import { articleWidthStyles, relatedContentStyles } from 'styles';
+import { articleWidthStyles, onwardStyles } from 'styles';
 import { Item } from 'item';
 import Headline from 'components/headline';
 import HeaderMedia from 'headerMedia';
@@ -67,7 +67,7 @@ const Media: FC<Props> = ({ item, children }) =>
                 <Tags tags={item.tags}/>
             </section>
         </article>
-        <section css={relatedContentStyles}>
+        <section css={onwardStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
     </main>;

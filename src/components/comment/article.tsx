@@ -11,7 +11,7 @@ import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import Cutout from 'components/comment/cutout';
-import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, basePx, onwardStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
@@ -97,7 +97,7 @@ const Comment: FC<Props> = ({ item, children }) =>
                 <Tags tags={item.tags} format={item}/>
             </section>
         </article>
-        <section css={relatedContentStyles}>
+        <section css={onwardStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
     </main>

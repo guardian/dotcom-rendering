@@ -13,7 +13,7 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, onwardStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
 import { getPillarStyles, pillarToString } from 'pillarStyles';
@@ -91,7 +91,7 @@ const Standard: FC<Props> = ({ item, children }) => {
             item.internalShortId,
             map(id =>
                 <section
-                    css={css`margin-bottom: ${remSpace[4]}`}
+                    css={onwardStyles}
                     id="comments"
                     data-closed={false}
                     data-pillar={pillarToString(item.pillar)}
@@ -125,7 +125,7 @@ const Standard: FC<Props> = ({ item, children }) => {
                 <Tags tags={item.tags} format={item}/>
             </section>
         </article>
-        <section css={relatedContentStyles}>
+        <section css={onwardStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
         {commentContainer}
