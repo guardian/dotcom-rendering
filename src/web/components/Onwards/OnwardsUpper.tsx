@@ -203,7 +203,7 @@ export const OnwardsUpper = ({
                     url={headlinesDataUrl}
                     limit={10}
                     ophanComponentName="curated-content"
-                    container={Carousel}
+                    Container={Carousel}
                 />
             )}
             {inCuratedContainerTest && (
@@ -211,7 +211,7 @@ export const OnwardsUpper = ({
                     url={headlinesDataUrl}
                     limit={4}
                     ophanComponentName="curated-content"
-                    container={OnwardsLayout}
+                    Container={OnwardsLayout}
                 />
             )}
             {url && (
@@ -219,7 +219,7 @@ export const OnwardsUpper = ({
                     url={url}
                     limit={8}
                     ophanComponentName={ophanComponentName}
-                    container={OnwardsLayout}
+                    Container={OnwardsLayout}
                 />
             )}
         </div>

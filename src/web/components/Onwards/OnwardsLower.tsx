@@ -38,7 +38,7 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
             url={url}
             limit={4}
             ophanComponentName={ophanComponentName}
-            container={OnwardsLayout}
+            Container={OnwardsLayout}
         />
     );
 };
