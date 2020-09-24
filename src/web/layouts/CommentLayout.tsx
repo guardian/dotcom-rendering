@@ -43,32 +43,12 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
-const gridWide = css`
-    grid-template-areas:
-        'title      border  headline    right-column'
-        'lines      border  headline    right-column'
-        'meta       border  standfirst  right-column'
-        'meta       border  media       right-column'
-        '.          border  body        right-column'
-        '.          border  .           right-column';
-`;
-
-const showcaseGridWide = css`
-    grid-template-areas:
-        'title      border  headline    headline'
-        'lines      border  headline    headline'
-        'meta       border  standfirst  standfirst'
-        'meta       border  media       media'
-        '.          border  body        right-column'
-        '.          border  .           right-column';
-`;
+const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const StandardGrid = ({
     children,
-    display,
 }: {
     children: JSX.Element | JSX.Element[];
-    display: Display;
 }) => (
     <div
         className={css`
@@ -98,10 +78,13 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
-
-                    ${display === Display.Showcase
-                        ? showcaseGridWide
-                        : gridWide}
+                    grid-template-areas:
+                        'title      border  headline    right-column'
+                        'lines      border  headline    right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -110,10 +93,13 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
-
-                    ${display === Display.Showcase
-                        ? showcaseGridWide
-                        : gridWide}
+                    grid-template-areas:
+                        'title      border  headline    right-column'
+                        'lines      border  headline    right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -239,10 +225,6 @@ const ageWarningMargins = css`
     }
 `;
 
-const mainMediaWrapper = css`
-    position: relative;
-`;
-
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -358,7 +340,7 @@ export const CommentLayout = ({
             </div>
 
             <Section showTopBorder={false} backgroundColour={opinion[800]}>
-                <StandardGrid display={display}>
+                <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
                             display={display}
@@ -439,25 +421,13 @@ export const CommentLayout = ({
                         />
                     </GridItem>
                     <GridItem area="media">
-                        <div
-                            className={
-                                display === Display.Showcase &&
-                                CAPI.pageType.hasShowcaseMainElement
-                                    ? mainMediaWrapper
-                                    : maxWidth
-                            }
-                        >
+                        <div className={maxWidth}>
                             <MainMedia
                                 display={display}
                                 designType={designType}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
-                                starRating={
-                                    designType === 'Review' && CAPI.starRating
-                                        ? CAPI.starRating
-                                        : undefined
-                                }
                             />
                         </div>
                     </GridItem>
@@ -512,7 +482,10 @@ export const CommentLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd name="right" />
+                            <StickyAd
+                                name="right"
+                                height={MOSTVIEWED_STICKY_HEIGHT}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
