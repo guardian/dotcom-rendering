@@ -23,6 +23,9 @@ export const sidePadding = css`
         padding-right: 0;
     }`;
 
+
+
+
 export const icons = "font-family: 'Guardian Icons';";
 
 export const darkModeCss = (
@@ -60,6 +63,25 @@ export const articleWidthStyles: SerializedStyles = css`
 
     ${from.phablet} {
         width: ${wideContentWidth}px;
+    }
+`;
+
+export const lineStyles = css`
+    ${from.wide} {
+        width: ${wideContentWidth}px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div {
+        ${darkModeCss`
+        background-image: repeating-linear-gradient(
+            to bottom,
+            ${neutral[20]},
+            ${neutral[20]} 1px,
+            transparent 1px,
+            transparent 3px
+            );
+    `}
     }
 `;
 

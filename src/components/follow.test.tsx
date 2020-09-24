@@ -1,25 +1,23 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 
 import Follow from './follow';
 import { Pillar, Design, Display } from '@guardian/types/Format';
 import { none } from '@guardian/types/option';
 import { Contributor } from 'contributor';
+import { act } from 'react-dom/test-utils';
+import { render, unmountComponentAtNode } from 'react-dom';
+import renderer from 'react-test-renderer';
 
 
 // ----- Setup ----- //
-
-configure({ adapter: new Adapter() });
 
 const followFormat = {
     pillar: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };
-
 
 // ----- Tests ----- //
 
@@ -33,22 +31,28 @@ describe('Follow component renders as expected', () => {
                 image: none,
             },
         ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
 
-        expect(follow.text()).toBe("Follow George Monbiot");
+        const container = document.createElement("div");
+        document.body.appendChild(container);
+
+        act(() => {
+            render(<Follow contributors= {contributors} {...followFormat}/>, container);
+        });
+
+        expect(container.textContent).toBe("Follow George Monbiot");
+
+        unmountComponentAtNode(container);
+        container.remove();
     })
 
     it('Renders null if no apiUrl', () => {
         const contributors: Contributor[] = [
             { name: "George Monbiot", id: "test", apiUrl: "", image: none },
         ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
 
-        expect(follow.html()).toBe(null);
+        const follow = renderer.create(<Follow contributors= {contributors} {...followFormat}/>);
+
+        expect(follow.root.children).toHaveLength(0);
     })
 
     it('Renders null if more than one contributor', () => {
@@ -66,10 +70,9 @@ describe('Follow component renders as expected', () => {
                 image: none,
             },
         ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
 
-        expect(follow.html()).toBe(null);
+        const follow = renderer.create(<Follow contributors= {contributors} {...followFormat}/>);
+
+        expect(follow.root.children).toHaveLength(0);
     })
 });
