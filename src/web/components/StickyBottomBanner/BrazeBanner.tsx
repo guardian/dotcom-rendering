@@ -102,7 +102,7 @@ export const canShow = async (
 
         return new Promise((resolve) => {
             appboy.subscribeToInAppMessage((message: any) => {
-                const meta = message.extras;
+                const { extras } = message;
 
                 const buttonHandler = (buttonId: number) => {
                     const thisButton = new appboy.InAppMessageButton(
@@ -122,16 +122,16 @@ export const canShow = async (
                     appboy.logInAppMessageImpression(message);
                 };
 
-                if (meta) {
-                    const newMeta = {
-                        ...meta,
+                if (extras) {
+                    const meta = {
+                        dataFromBraze: extras,
                         logImpression,
                         buttonHandler,
                     };
-                    resolve({ result: true, meta: newMeta });
+                    resolve({ result: true, meta });
+                } else {
+                    resolve({ result: false });
                 }
-
-                resolve({ result: false });
             });
 
             appboy.changeUser(brazeUuid);
@@ -160,8 +160,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
         <div className={containerStyles}>
             <BrazeComponent
                 onButtonClick={meta.buttonHandler}
-                header={meta.header}
-                body={meta.body}
+                componentName={meta.dataFromBraze.componentName}
+                brazeMessageProps={meta.dataFromBraze}
             />
         </div>
     );
@@ -189,7 +189,7 @@ export const BrazeBanner = ({ meta }: Props) => {
                 /* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
             )
                 .then((module) => {
-                    setBrazeComponent(() => module.DigitalSubscriberAppBanner);
+                    setBrazeComponent(() => module.BrazeMessage);
                 })
                 .catch((error) =>
                     window.guardian.modules.sentry.reportError(
