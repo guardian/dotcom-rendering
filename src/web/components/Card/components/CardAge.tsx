@@ -9,9 +9,9 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
-const ageStyles = (designType?: DesignType) => css`
+const ageStyles = (designType: DesignType, pillar: Pillar) => css`
     ${textSans.xsmall()};
-    color: ${neutral[60]};
+    color: ${designType === 'Live' ? decidePillarLight(pillar) : neutral[60]};
 
     /* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -19,7 +19,9 @@ const ageStyles = (designType?: DesignType) => css`
     padding-right: 5px;
 
     svg {
-        fill: ${neutral[46]};
+        fill: ${designType === 'Live'
+            ? decidePillarLight(pillar)
+            : neutral[46]};
         margin-bottom: -1px;
         height: 11px;
         width: 11px;
@@ -90,7 +92,7 @@ export const CardAge = ({
     return (
         <span
             className={cx(
-                ageStyles(designType),
+                ageStyles(designType, pillar),
                 colourStyles(designType, pillar),
             )}
         >

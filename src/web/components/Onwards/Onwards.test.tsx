@@ -19,7 +19,8 @@ describe('OnwardsLayout', () => {
         useApi.mockReturnValue(response);
 
         const { asFragment } = render(
-            <OnwardsLayout onwardSections={[linkAndDescription]} />,
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <OnwardsLayout {...linkAndDescription} />,
         );
 
         // Renders data-component
