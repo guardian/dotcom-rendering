@@ -50,6 +50,8 @@ import {
 import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
+const MOSTVIEWED_STICKY_HEIGHT = 1059;
+
 const gridTemplateWide = css`
     grid-template-areas:
         'title  border  headline     right-column'
@@ -541,7 +543,10 @@ export const StandardLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd name="right" />
+                            <StickyAd
+                                name="right"
+                                height={MOSTVIEWED_STICKY_HEIGHT}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>

@@ -6,12 +6,11 @@ import { namedAdSlotParameters } from '@root/src/model/advertisement';
 
 type Props = {
     name: AdSlotType;
-    height?: number;
+    height: number;
 };
-const adSlotWrapper = ({ height }: { height?: number }) => css`
+const adSlotWrapper = (height: number) => css`
     position: static;
-    min-height: 274px;
-    ${height ? `height: ${height}px;` : ''}
+    height: ${height}px;
 `;
 
 const stickyAdSlot = css`
@@ -20,7 +19,7 @@ const stickyAdSlot = css`
 `;
 
 export const StickyAd = ({ name, height }: Props) => (
-    <div className={adSlotWrapper({ height })}>
+    <div className={adSlotWrapper(height)}>
         <AdSlot asps={namedAdSlotParameters(name)} localStyles={stickyAdSlot} />
     </div>
 );
