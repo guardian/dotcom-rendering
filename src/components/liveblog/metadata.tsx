@@ -1,6 +1,5 @@
 import React, { ReactNode, FC } from 'react';
-import { basePx } from 'styles';
-import { Keyline } from '../shared/keyline';
+import { basePx, wideColumnWidth, wideContentWidth } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -13,6 +12,8 @@ import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
 import { pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
+import { Lines } from "@guardian/src-ed-lines";
+import { from } from '@guardian/src-foundations/mq';
 
 const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -76,6 +77,14 @@ interface Props {
     item: Liveblog;
 }
 
+const lineLiveblogStyles = css`
+    opacity: .4;
+    ${from.wide} {
+        width: ${wideContentWidth}px;
+        margin-left: ${wideColumnWidth}px;
+    }
+`;
+
 const Metadata: FC<Props> = ({ item }) => {
     const pillarStyles = getPillarStyles(item.pillar);
 
@@ -87,7 +96,9 @@ const Metadata: FC<Props> = ({ item }) => {
 
     return (
         <div css={[styles(pillarStyles)]}>
-            <Keyline {...item} />
+            <div css={lineLiveblogStyles}>
+                <Lines count={4} />
+            </div>
             <LeftColumn>
                 <section>
                     <div className="metadata">
