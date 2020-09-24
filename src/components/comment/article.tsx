@@ -11,7 +11,7 @@ import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import Cutout from 'components/comment/cutout';
-import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles, wideContentWidth } from 'styles';
+import { darkModeCss, articleWidthStyles, basePx, relatedContentStyles, lineStyles } from 'styles';
 import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
@@ -54,25 +54,10 @@ const topBorder = css`
     `}
 `;
 
-const lineStyles = css`
+
+const commentLineStylePosition = css`
     margin-top: 83px;
-    ${from.wide} {
-        width: ${wideContentWidth}px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    div {
-        ${darkModeCss`
-        background-image: repeating-linear-gradient(
-            to bottom,
-            ${neutral[20]},
-            ${neutral[20]} 1px,
-            transparent 1px,
-            transparent 3px
-            );
-    `}
-    }
-`;
+`
 
 // ----- Component ----- //
 
@@ -95,7 +80,7 @@ const Comment: FC<Props> = ({ item, children }) =>
                     className={articleWidthStyles}
                     format={item}
                 />
-                <div css={lineStyles}>
+                <div css={[commentLineStylePosition, lineStyles]}>
                     <Lines count={8} />
                 </div>
 

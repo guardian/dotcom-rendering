@@ -10,7 +10,7 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
 import Metadata from 'components/metadata';
-import { darkModeCss, articleWidthStyles, relatedContentStyles, wideContentWidth } from 'styles';
+import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
 import HeaderMedia from 'headerMedia';
 import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import Logo from './logo';
@@ -41,24 +41,7 @@ const BorderStyles = css`
     }
 `;
 
-const advertFeatureLineStyles = css`
-    ${from.wide} {
-        width: ${wideContentWidth}px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    div {
-        ${darkModeCss`
-        background-image: repeating-linear-gradient(
-            to bottom,
-            ${neutral[20]},
-            ${neutral[20]} 1px,
-            transparent 1px,
-            transparent 3px
-            );
-    `}
-    }
-`;
+
 // ----- Component ----- //
 
 interface Props {
@@ -78,7 +61,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
                         <Standfirst item={item} />
                     </div>
                 </div>
-                <div css={advertFeatureLineStyles}>
+                <div css={lineStyles}>
                     <Lines count={4} />
                 </div>
                 <section css={articleWidthStyles}>

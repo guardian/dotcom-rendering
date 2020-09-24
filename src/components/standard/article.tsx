@@ -13,7 +13,7 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, relatedContentStyles, wideContentWidth } from 'styles';
+import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
@@ -78,24 +78,6 @@ interface Props {
     children: ReactNode[];
 }
 
-const lineStyles = css`
-    ${from.wide} {
-        width: ${wideContentWidth}px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    div {
-        ${darkModeCss`
-        background-image: repeating-linear-gradient(
-            to bottom,
-            ${neutral[20]},
-            ${neutral[20]} 1px,
-            transparent 1px,
-            transparent 3px
-            );
-    `}
-    }
-`;
 
 const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
