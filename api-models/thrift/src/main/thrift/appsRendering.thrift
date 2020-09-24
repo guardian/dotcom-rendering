@@ -33,6 +33,8 @@ struct RelatedItem {
     6: required v1.Pillar pillar
     7: optional string mediaDuration
     8: optional string starRating
+    9: optional string byline
+    10: optional string bylineImage
 }
 
 struct RelatedContent {
