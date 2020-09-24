@@ -112,7 +112,6 @@ const headlineWrapperStyle = css`
     width: 176px;
     background-color: ${palette.neutral[97]};
     min-height: 107px;
-    padding: ${space[1]}px;
 
     margin-top: -45px;
     flex-grow: 1;
@@ -131,7 +130,9 @@ const headlineWrapperFirstStyle = css`
 const headlineStyle = css`
     ${headline.xxxsmall()};
     color: ${palette.neutral[7]};
-    margin-bottom: ${space[1]}px;
+
+    display: block;
+    padding: ${space[1]}px;
 `;
 
 const headlineFirstStyle = css`
