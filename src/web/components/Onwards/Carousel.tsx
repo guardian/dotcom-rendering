@@ -56,7 +56,7 @@ const containerStyles = css`
 
     ${from.wide} {
         margin-right: 70px;
-        margin-top: 8px;
+        margin-top: 5px;
     }
 `;
 
@@ -66,7 +66,7 @@ const carouselStyle = css`
     align-items: stretch;
 
     scroll-snap-type: x mandatory;
-    /* scroll-behavior: smooth; */
+    scroll-behavior: smooth;
 
     position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 
@@ -109,11 +109,15 @@ const cardImageStyle = css`
 `;
 
 const headlineWrapperStyle = css`
-    width: 176px;
+    width: 90%;
     background-color: ${palette.neutral[97]};
     min-height: 107px;
 
-    margin-top: -45px;
+    margin-top: -42px;
+    ${from.desktop} {
+        margin-top: -48px;
+    }
+
     flex-grow: 1;
 
     display: flex;
@@ -129,6 +133,10 @@ const headlineWrapperFirstStyle = css`
 
 const headlineStyle = css`
     ${headline.xxxsmall()};
+    ${from.desktop} {
+        ${headline.xxsmall()};
+    }
+
     color: ${palette.neutral[7]};
 
     display: block;
@@ -193,8 +201,8 @@ const navRowStyles = css`
 const headerStyles = css`
     ${headline.xsmall({ fontWeight: 'bold' })};
     color: ${palette.text.primary};
-    padding-bottom: 14px;
-    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-top: 0;
 `;
 
 const titleStyle = css`

@@ -487,10 +487,7 @@ export const ShowcaseLayout = ({
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    <div id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedout" />
                     )}
@@ -515,7 +512,7 @@ export const ShowcaseLayout = ({
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
