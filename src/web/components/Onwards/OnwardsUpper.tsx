@@ -2,6 +2,7 @@ import React from 'react';
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { useAB } from '@guardian/ab-react';
 import { css } from 'emotion';
+import { Section } from '@root/src/web/components/Section';
 import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel';
 import { OnwardsLayout } from './OnwardsLayout';
@@ -199,28 +200,34 @@ export const OnwardsUpper = ({
     return (
         <div className={onwardsWrapper}>
             {inCuratedCarouselTest && (
-                <OnwardsData
-                    url={headlinesDataUrl}
-                    limit={10}
-                    ophanComponentName="curated-content"
-                    Container={Carousel}
-                />
+                <Section showTopBorder={true}>
+                    <OnwardsData
+                        url={headlinesDataUrl}
+                        limit={10}
+                        ophanComponentName="curated-content"
+                        Container={Carousel}
+                    />
+                </Section>
             )}
             {inCuratedContainerTest && (
-                <OnwardsData
-                    url={headlinesDataUrl}
-                    limit={4}
-                    ophanComponentName="curated-content"
-                    Container={OnwardsLayout}
-                />
+                <Section showTopBorder={true}>
+                    <OnwardsData
+                        url={headlinesDataUrl}
+                        limit={4}
+                        ophanComponentName="curated-content"
+                        Container={OnwardsLayout}
+                    />
+                </Section>
             )}
             {url && (
-                <OnwardsData
-                    url={url}
-                    limit={8}
-                    ophanComponentName={ophanComponentName}
-                    Container={OnwardsLayout}
-                />
+                <Section>
+                    <OnwardsData
+                        url={url}
+                        limit={8}
+                        ophanComponentName={ophanComponentName}
+                        Container={OnwardsLayout}
+                    />
+                </Section>
             )}
         </div>
     );
