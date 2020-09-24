@@ -13,6 +13,11 @@ const ageStyles = (designType: DesignType, pillar: Pillar) => css`
     ${textSans.xsmall()};
     color: ${designType === 'Live' ? decidePillarLight(pillar) : neutral[60]};
 
+    /* Provide side padding for positioning and also to keep spacing
+    between any sibings (like GuardianLines) */
+    padding-left: 5px;
+    padding-right: 5px;
+
     svg {
         fill: ${designType === 'Live'
             ? decidePillarLight(pillar)

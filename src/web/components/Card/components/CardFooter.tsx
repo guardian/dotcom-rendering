@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Lines } from '@guardian/src-ed-lines';
-import { space } from '@guardian/src-foundations';
 
 type Props = {
     designType: DesignType;
@@ -15,7 +14,6 @@ const spaceBetween = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 ${space[1]}px;
 `;
 
 const flexEnd = css`
@@ -28,7 +26,6 @@ const linesWrapperStyles = css`
     flex-grow: 1;
     /* Push the lines down to align with the bottom of the card */
     margin-top: 5px;
-    margin-left: 5px;
 `;
 
 export const CardFooter = ({
