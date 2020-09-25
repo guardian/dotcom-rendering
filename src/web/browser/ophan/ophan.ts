@@ -54,7 +54,8 @@ export type OphanComponentType =
     | 'ACQUISITIONS_EDITORIAL_LINK'
     | 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
     | 'ACQUISITIONS_OTHER'
-    | 'SIGN_IN_GATE';
+    | 'SIGN_IN_GATE'
+    | 'RETENTION_ENGAGEMENT_BANNER';
 
 export type OphanComponent = {
     componentType: OphanComponentType;
