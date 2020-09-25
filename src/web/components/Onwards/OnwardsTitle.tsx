@@ -19,7 +19,11 @@ const headerStyles = css`
     color: ${text.primary};
     padding-bottom: 14px;
     padding-top: 6px;
-    margin-left: 10px;
+    margin-left: 0;
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
 
     ${from.leftCol} {
         margin-left: 0;
