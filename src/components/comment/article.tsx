@@ -11,14 +11,14 @@ import Standfirst from 'components/standfirst';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import Cutout from 'components/comment/cutout';
-import { darkModeCss, articleWidthStyles, basePx, onwardStyles } from 'styles';
-import { Keyline } from 'components/shared/keyline';
+import { darkModeCss, articleWidthStyles, basePx, onwardStyles, lineStyles } from 'styles';
 import { Comment as CommentItem } from 'item';
 import Byline from 'components/byline';
 import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
+import { Lines } from '@guardian/src-ed-lines';
 
 
 // ----- Styles ----- //
@@ -55,6 +55,10 @@ const topBorder = css`
 `;
 
 
+const commentLineStylePosition = css`
+    margin-top: 83px;
+`
+
 // ----- Component ----- //
 
 interface Props {
@@ -76,7 +80,10 @@ const Comment: FC<Props> = ({ item, children }) =>
                     className={articleWidthStyles}
                     format={item}
                 />
-                <Keyline {...item} />
+                <div css={[commentLineStylePosition, lineStyles]}>
+                    <Lines count={8} />
+                </div>
+
                 <div css={articleWidthStyles}>
                     <Standfirst item={item} />
                 </div>

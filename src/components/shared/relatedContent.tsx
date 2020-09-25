@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
+import BylineCard from 'components/shared/bylineCard';
 import Card from 'components/shared/card';
 import { css } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace, neutral } from '@guardian/src-foundations';
 import { ResizedRelatedContent } from 'item';
 import { darkModeCss } from 'styles';
+import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 
 interface Props {
     content: Option<ResizedRelatedContent>;
@@ -34,6 +36,8 @@ const listStyles = css`
     }
 `;
 
+const COMMENT = RelatedItemType.COMMENT;
+
 const RelatedContent: FC<Props> = ({ content }) => {
     return pipe2(
         content,
@@ -43,11 +47,16 @@ const RelatedContent: FC<Props> = ({ content }) => {
                 <ul css={listStyles}>
                     {
                         relatedItems.map((relatedItem, key) => {
-                            return <Card
-                                key={key}
-                                relatedItem={relatedItem}
-                                image={resizedImages[key]}
-                            />
+                            return relatedItem.type === COMMENT && relatedItem.bylineImage
+                                ? <BylineCard
+                                    key={key}
+                                    relatedItem={relatedItem}
+                                  />
+                                : <Card
+                                    key={key}
+                                    relatedItem={relatedItem}
+                                    image={resizedImages[key]}
+                                />
                         })
                     }
                 </ul>

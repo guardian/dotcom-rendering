@@ -13,8 +13,7 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, onwardStyles } from 'styles';
-import { Keyline } from 'components/shared/keyline';
+import { darkModeCss, articleWidthStyles, onwardStyles, lineStyles } from 'styles';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
 import { getPillarStyles, pillarToString } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
@@ -23,6 +22,7 @@ import { pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
+import { Lines } from "@guardian/src-ed-lines";
 
 // ----- Styles ----- //
 
@@ -80,6 +80,7 @@ interface Props {
     children: ReactNode[];
 }
 
+
 const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
@@ -111,7 +112,9 @@ const Standard: FC<Props> = ({ item, children }) => {
                     <Standfirst item={item} />
                     <ImmersiveCaption item={item} />
                 </div>
-                <Keyline {...item} />
+                <div css={lineStyles}>
+                    <Lines count={4}/>
+                </div>
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
                     {OptionalLogo(item)}
