@@ -6,6 +6,7 @@ import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDropCaps } from '@root/src/model/add-dropcaps';
 import { addHighlights } from '@root/src/model/add-highlights';
 import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
+import { filterUnsafeBlockElements } from '@root/src/model/filterUnsafeBlockElements';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 
@@ -16,7 +17,10 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const withEssayEnhancement: CAPIType = enhancePhotoEssay(
             withHighlights,
         );
-        const CAPI: CAPIType = validateAsCAPIType(withEssayEnhancement);
+        const withUnsafeBlockElements = filterUnsafeBlockElements(
+            withEssayEnhancement,
+        );
+        const CAPI: CAPIType = validateAsCAPIType(withUnsafeBlockElements);
 
         const resp = document({
             data: {

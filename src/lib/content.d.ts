@@ -62,6 +62,12 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     html: string;
 }
 
+interface UnsafeEmbedBlockElement {
+    _type: 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement';
+    chartIndex?: number;
+    html: string;
+}
+
 interface CodeBlockElement {
     _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
     isMandatory: boolean;
@@ -334,6 +340,7 @@ type CAPIElement =
     | CaptionBlockElement
     | CalloutBlockElement
     | ChartAtomBlockElement
+    | UnsafeEmbedBlockElement
     | CodeBlockElement
     | CommentBlockElement
     | ContentAtomBlockElement

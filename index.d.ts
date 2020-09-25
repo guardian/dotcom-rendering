@@ -361,6 +361,7 @@ type CAPIBrowserType = {
     profileAtoms: ProfileAtomBlockElement[];
     timelineAtoms: TimelineBlockElement[];
     chartAtoms: ChartAtomBlockElement[];
+    unsafeBlockElements: UnsafeEmbedBlockElement[];
 };
 
 interface TagType {
@@ -667,6 +668,7 @@ type IslandType =
     | 'profile-atom'
     | 'timeline-atom'
     | 'sign-in-gate'
+    | 'unsafe-block'
     | 'chart-atom';
 
 interface TrailType {
