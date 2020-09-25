@@ -17,7 +17,7 @@ import { BackToTop } from './BackToTop';
 
 // CSS vars
 const emailSignupSideMargins = 10;
-const footerItemContainerPadding = 19;
+const footerItemContainerPadding = 20;
 const emailSignupWidth =
     pillarWidth +
     firstPillarWidth -
@@ -158,9 +158,13 @@ const footerItemContainers = css`
     }
 
     width: 100%;
-    padding: 0 ${footerItemContainerPadding}px;
+    padding: 0 ${footerItemContainerPadding / 2}px;
     position: relative;
     border: ${footerBorders};
+
+    ${from.mobileLandscape} {
+        padding: 0 ${footerItemContainerPadding}px;
+    }
 `;
 
 const bttPosition = css`
