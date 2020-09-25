@@ -10,7 +10,9 @@ import { palette, space } from '@guardian/src-foundations';
 import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
-import { CardAge } from '../Card/components/CardAge';
+import { CardAge } from '../../Card/components/CardAge';
+import { Kicker } from '../../Kicker';
+import { headlineBackgroundColour, headlineColour } from './cardColours';
 
 const navIconStyle = css`
     display: inline-block;
@@ -97,6 +99,8 @@ const cardWrapperStyle = css`
     align-items: stretch;
 
     text-decoration: none;
+
+    color: inherit;
 `;
 
 const cardWrapperFirstStyle = css`
@@ -108,9 +112,8 @@ const cardImageStyle = css`
     width: 258px;
 `;
 
-const headlineWrapperStyle = css`
+const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
     width: 90%;
-    background-color: ${palette.neutral[97]};
     min-height: 107px;
 
     margin-top: -42px;
@@ -123,31 +126,33 @@ const headlineWrapperStyle = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    ${headlineBackgroundColour(designType, pillar)}
 `;
 
-const headlineWrapperFirstStyle = css`
+/* const headlineWrapperFirstStyle = css`
     ${headlineWrapperStyle};
     background-color: ${palette.news.dark};
     color: white;
 `;
-
-const headlineStyle = css`
+ */
+const headlineStyle = (designType: DesignType, pillar: Pillar) => css`
     ${headline.xxxsmall()};
     ${from.desktop} {
         ${headline.xxsmall()};
     }
 
-    color: ${palette.neutral[7]};
+    ${headlineColour(designType, pillar)};
 
     display: block;
     padding: ${space[1]}px;
 `;
 
-const headlineFirstStyle = css`
+/* const headlineFirstStyle = css`
     ${headlineStyle};
     color: ${palette.neutral[100]};
 `;
-
+ */
 const dotsStyle = css`
     margin-bottom: ${space[2]}px;
 
@@ -226,34 +231,45 @@ type CardProps = {
     isFirst?: boolean;
 };
 
-const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => (
-    <a
-        href={trail.url}
-        className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
-    >
-        <img
-            className={cardImageStyle}
-            src={trail.image}
-            alt=""
-            role="presentation"
-        />
-        <div
-            className={
-                isFirst ? headlineWrapperFirstStyle : headlineWrapperStyle
-            }
+const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
+    const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
+
+    return (
+        <a
+            href={trail.url}
+            className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
         >
-            <h4 className={isFirst ? headlineFirstStyle : headlineStyle}>
-                {trail.headline}
-            </h4>
-            <CardAge
-                webPublicationDate={trail.webPublicationDate}
-                showClock={true}
-                pillar="news"
-                designType={isFirst ? 'Live' : 'Article'}
+            <img
+                className={cardImageStyle}
+                src={trail.image}
+                alt=""
+                role="presentation"
             />
-        </div>
-    </a>
-);
+            <div
+                className={headlineWrapperStyle(trail.designType, trail.pillar)}
+            >
+                <h4 className={headlineStyle(trail.designType, trail.pillar)}>
+                    {kickerText && (
+                        <Kicker
+                            text={kickerText}
+                            designType={trail.designType}
+                            pillar={trail.pillar}
+                            showPulsingDot={trail.isLiveBlog}
+                            inCard={true}
+                        />
+                    )}
+                    {trail.headline}
+                </h4>
+                <CardAge
+                    webPublicationDate={trail.webPublicationDate}
+                    showClock={true}
+                    pillar={trail.pillar}
+                    designType={trail.designType}
+                />
+            </div>
+        </a>
+    );
+};
 
 export const Carousel: React.FC<OnwardsType> = ({
     heading,

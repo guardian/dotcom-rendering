@@ -4,7 +4,7 @@ import { useAB } from '@guardian/ab-react';
 import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';
 import { OnwardsData } from './OnwardsData';
-import { Carousel } from './Carousel';
+import { Carousel } from './Carousel/Carousel';
 import { OnwardsLayout } from './OnwardsLayout';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
@@ -203,7 +203,7 @@ export const OnwardsUpper = ({
                 <Section showTopBorder={true}>
                     <OnwardsData
                         url={headlinesDataUrl}
-                        limit={10}
+                        limit={8}
                         ophanComponentName="curated-content"
                         Container={Carousel}
                     />
@@ -213,7 +213,7 @@ export const OnwardsUpper = ({
                 <Section showTopBorder={true}>
                     <OnwardsData
                         url={headlinesDataUrl}
-                        limit={4}
+                        limit={8}
                         ophanComponentName="curated-content"
                         Container={OnwardsLayout}
                     />
