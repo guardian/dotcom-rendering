@@ -20,7 +20,7 @@ export const UnsafeEmbedBlockComponent = ({ html }: Props) => {
                 iFrameRef.current.contentWindow &&
                 iFrameRef.current.contentWindow.document;
 
-            numberOfIntervals++;
+            numberOfIntervals = numberOfIntervals + 1;
 
             if (doc) {
                 setIframeHeight(
