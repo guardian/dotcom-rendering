@@ -161,17 +161,27 @@ const dotsStyle = css`
     }
 `;
 
-const dotStyle = css`
+const dotStyle = (index: number) => css`
     display: inline-block;
     height: ${space[3]}px;
     width: ${space[3]}px;
     background-color: ${palette.neutral[93]};
     border-radius: 50%;
     margin-right: ${space[1]}px;
+
+    /* This is a bit of a hack for the test, while we think of better UX here.
+    It's very fragile to things like carousel item count.*/
+    ${from.phablet} {
+        display: ${index >= 7 ? 'none' : 'auto'};
+    }
+
+    ${from.desktop} {
+        display: ${index >= 6 ? 'none' : 'auto'};
+    }
 `;
 
-const dotActiveStyle = css`
-    ${dotStyle};
+const dotActiveStyle = (index: number) => css`
+    ${dotStyle(index)};
     background-color: ${palette.news.main};
 `;
 
@@ -387,7 +397,9 @@ export const Carousel: React.FC<OnwardsType> = ({
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
                         <span
-                            className={i === index ? dotActiveStyle : dotStyle}
+                            className={
+                                i === index ? dotActiveStyle(i) : dotStyle(i)
+                            }
                         />
                     ))}
                 </div>
