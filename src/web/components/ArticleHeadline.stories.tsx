@@ -118,6 +118,43 @@ export const ShowcaseInterview = () => (
 );
 ShowcaseInterview.story = { name: 'Interview (with showcase)' };
 
+export const ShowcaseInterviewNobyline = () => (
+    <Section>
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <div
+                    className={css`
+                        margin-bottom: -100px;
+                    `}
+                >
+                    <ArticleHeadline
+                        headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                        display={Display.Showcase}
+                        designType="Interview"
+                        pillar="culture"
+                        tags={[]}
+                        isShowcase={true}
+                        byline=""
+                    />
+                </div>
+                <MainMedia
+                    display={Display.Standard}
+                    designType="Article"
+                    hideCaption={true}
+                    elements={mainMediaElements}
+                    pillar="news"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+ShowcaseInterviewNobyline.story = {
+    name: 'Interview (with showcase and NO BYLINE)',
+};
+
 export const Interview = () => (
     <Section>
         <Flex>
@@ -150,6 +187,41 @@ export const Interview = () => (
     </Section>
 );
 Interview.story = { name: 'Interview (without showcase)' };
+
+export const InterviewNoByline = () => (
+    <Section>
+        <Flex>
+            <LeftColumn>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                    display={Display.Standard}
+                    designType="Interview"
+                    pillar="culture"
+                    tags={[]}
+                    byline=""
+                />
+                <Standfirst
+                    display={Display.Standard}
+                    designType="Interview"
+                    standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
+                />
+                <MainMedia
+                    display={Display.Standard}
+                    designType="Article"
+                    hideCaption={true}
+                    elements={mainMediaElements}
+                    pillar="news"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+InterviewNoByline.story = {
+    name: 'Interview (without showcase with NO BYLINE)',
+};
 
 export const Comment = () => (
     <Section>

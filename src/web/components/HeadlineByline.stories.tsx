@@ -130,3 +130,16 @@ export const MultipleStory = () => {
     );
 };
 MultipleStory.story = { name: 'Immersive with multiple contributors' };
+
+export const noBylineStory = () => {
+    return (
+        <HeadlineByline
+            display={Display.Standard}
+            designType="Interview"
+            pillar="culture"
+            byline=""
+            tags={[]}
+        />
+    );
+};
+noBylineStory.story = { name: 'No byline' };
