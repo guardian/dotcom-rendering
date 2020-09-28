@@ -116,9 +116,9 @@ const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
     width: 90%;
     min-height: 107px;
 
-    margin-top: -42px;
+    margin-top: -21px;
     ${from.desktop} {
-        margin-top: -48px;
+        margin-top: -23px;
     }
 
     flex-grow: 1;
