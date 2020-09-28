@@ -129,10 +129,12 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement':
                     return (
-                        <UnsafeEmbedBlockComponent
-                            key={i}
-                            html={element.html}
-                        />
+                        <div id={`unsafe-block-${i}`}>
+                            <UnsafeEmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (

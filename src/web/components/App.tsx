@@ -408,9 +408,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Hydrate>
             ))}
             {CAPI.unsafeBlockElements.map((unsafeBlock) => (
-                <Hydrate root="unsafe-block" index={unsafeBlock.chartIndex}>
+                <Hydrate
+                    root="unsafe-block"
+                    index={unsafeBlock.unsafeBlockElementIndex}
+                >
                     <UnsafeEmbedBlockComponent
-                        key={unsafeBlock.chartIndex}
+                        key={unsafeBlock.unsafeBlockElementIndex}
                         html={unsafeBlock.html}
                     />
                 </Hydrate>

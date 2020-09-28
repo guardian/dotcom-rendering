@@ -64,7 +64,7 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 
 interface UnsafeEmbedBlockElement {
     _type: 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement';
-    chartIndex?: number;
+    unsafeBlockElementIndex?: number;
     html: string;
 }
 

@@ -215,7 +215,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         unsafeBlockElements: blockElementWithIndex(
             CAPI.blocks,
             'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement',
-            'unsafeBlockElements',
+            'unsafeBlockElementIndex',
         ),
     };
 };
