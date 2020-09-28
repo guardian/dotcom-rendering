@@ -408,11 +408,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.chartAtoms.map((chart) => (
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
-                    <ChartAtom
-                        id={chart.id}
-                        url={chart.url}
-                        html={chart.html}
-                    />
+                    <ChartAtom id={chart.id} html={chart.html} />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
