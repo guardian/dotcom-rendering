@@ -176,6 +176,17 @@ export const SignInGateSelector = ({
         });
     }, [ab]);
 
+    useEffect(() => {
+        // this hook will fire when the sign in gate is dismissed
+        // which will happen when the showGate state is set to false
+        // this only happens within the dismissGate method
+        if (showGate === false) {
+            document.dispatchEvent(
+                new CustomEvent('dcr:page:article:redisplayed'),
+            );
+        }
+    }, [showGate]);
+
     // check to see if the test is available on this render cycle
     // required by the ab test framework, as we have to wait for the above
     // useEffect hook to determine which test to run
