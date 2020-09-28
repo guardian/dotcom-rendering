@@ -39,7 +39,7 @@
     "@guardian/content-api-models": "^15.9.2",
     "@guardian/content-atom-model": "^3.2.4",
     "@guardian/node-riffraff-artifact": "^0.1.9",
-    "@guardian/src-brand": "^2.3.0",
+    "@guardian/src-brand": "^2.4.0",
     "@guardian/src-button": "^2.3.0",
     "@guardian/src-ed-lines": "^2.3.0",
     "@guardian/src-foundations": "^2.4.0",
