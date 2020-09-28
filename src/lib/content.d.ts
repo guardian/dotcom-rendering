@@ -66,6 +66,7 @@ interface UnsafeEmbedBlockElement {
     _type: 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement';
     unsafeBlockElementIndex?: number;
     html: string;
+    alt: string;
 }
 
 interface CodeBlockElement {

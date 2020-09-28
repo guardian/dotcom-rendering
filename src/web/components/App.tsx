@@ -415,6 +415,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <UnsafeEmbedBlockComponent
                         key={unsafeBlock.unsafeBlockElementIndex}
                         html={unsafeBlock.html}
+                        alt={unsafeBlock.alt}
                     />
                 </Hydrate>
             ))}

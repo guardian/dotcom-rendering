@@ -8,6 +8,7 @@ export const filterUnsafeBlockElements = (data: CAPIType): CAPIType => {
             ) {
                 acc.push({
                     html: cur.html,
+                    alt: cur.alt || '',
                     _type:
                         'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement',
                 });

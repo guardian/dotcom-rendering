@@ -152,6 +152,7 @@ export const ArticleRenderer: React.FC<{
                             <UnsafeEmbedBlockComponent
                                 key={i}
                                 html={element.html}
+                                alt={element.alt}
                             />
                         </figure>
                     );

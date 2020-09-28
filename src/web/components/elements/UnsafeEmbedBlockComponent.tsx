@@ -3,11 +3,11 @@ import { css } from 'emotion';
 
 type Props = {
     html: string;
-    alt?: string;
+    alt: string;
 };
 
 let numberOfIntervals = 0;
-export const UnsafeEmbedBlockComponent = ({ html }: Props) => {
+export const UnsafeEmbedBlockComponent = ({ html, alt }: Props) => {
     const [iframeHeight, setIframeHeight] = useState<number>(0);
     const iFrameRef = useRef<HTMLIFrameElement>(null);
 
@@ -41,6 +41,7 @@ export const UnsafeEmbedBlockComponent = ({ html }: Props) => {
             className={css`
                 width: 100%;
             `}
+            title={alt}
             data-cy="embed-block"
             ref={iFrameRef}
             style={{ height: iframeHeight }}

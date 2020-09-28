@@ -11,7 +11,7 @@ const html = `<html> <head></head> <body style="padding: 0px; margin: 0px; overf
 export const defaultStory = () => {
     return (
         <div>
-            <UnsafeEmbedBlockComponent html={html} />
+            <UnsafeEmbedBlockComponent alt="Example component" html={html} />
         </div>
     );
 };
