@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { css } from 'emotion';
 
 type Props = {
     html: string;
@@ -37,6 +38,9 @@ export const UnsafeEmbedBlockComponent = ({ html }: Props) => {
 
     return (
         <iframe
+            className={css`
+                width: 100%;
+            `}
             data-cy="embed-block"
             ref={iFrameRef}
             style={{ height: iframeHeight }}

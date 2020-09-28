@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { from } from '@guardian/src-foundations/mq';
+
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
@@ -43,6 +45,20 @@ import { DefaultRichLink } from '../components/RichLink';
 // This is required for spacefinder to work!
 const commercialPosition = css`
     position: relative;
+`;
+
+const unsafeEmbedWrapperStyles = css`
+    position: relative;
+    float: left;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    margin-right: 20px;
+    ${from.leftCol} {
+        margin-left: -100px;
+    }
+    ${from.wide} {
+        width: 380px;
+    }
 `;
 
 export const ArticleRenderer: React.FC<{
@@ -129,12 +145,15 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement':
                     return (
-                        <div id={`unsafe-block-${i}`}>
+                        <figure
+                            className={unsafeEmbedWrapperStyles}
+                            id={`unsafe-block-${i}`}
+                        >
                             <UnsafeEmbedBlockComponent
                                 key={i}
                                 html={element.html}
                             />
-                        </div>
+                        </figure>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (
