@@ -104,9 +104,9 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
                     return (
                         <ChartAtom
-                            url={element.url}
                             id={element.id}
                             html={element.html}
+                            url={element.url}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':

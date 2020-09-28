@@ -410,8 +410,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
                     <ChartAtom
                         id={chart.id}
-                        url={chart.url}
                         html={chart.html}
+                        url={chart.url}
                     />
                 </Hydrate>
             ))}
