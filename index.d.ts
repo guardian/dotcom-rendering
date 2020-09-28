@@ -361,6 +361,7 @@ type CAPIBrowserType = {
     profileAtoms: ProfileAtomBlockElement[];
     timelineAtoms: TimelineBlockElement[];
     chartAtoms: ChartAtomBlockElement[];
+    mainMedia: CAPIElement[];
 };
 
 interface TagType {
@@ -667,7 +668,8 @@ type IslandType =
     | 'profile-atom'
     | 'timeline-atom'
     | 'sign-in-gate'
-    | 'chart-atom';
+    | 'chart-atom'
+    | 'youtube-mainmedia';
 
 interface TrailType {
     designType: DesignType;

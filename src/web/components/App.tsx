@@ -24,6 +24,7 @@ import {
     TimelineAtom,
     ChartAtom,
 } from '@guardian/atoms-rendering';
+import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -42,7 +43,7 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-
+import { Display } from '@root/src/lib/display';
 import { cmp } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
@@ -342,6 +343,10 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
+    const hasMainYoutube =
+        CAPI.mainMedia[0]._type ===
+        'model.dotcomrendering.pageElements.YoutubeBlockElement';
+    const mainMediaYoutube = CAPI.mainMedia[0] as YoutubeBlockElement;
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -387,6 +392,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <GetMatchNav matchUrl={CAPI.matchUrl} />
                 </Portal>
             )}
+            {hasMainYoutube && (
+                <Hydrate root="youtube-mainmedia">
+                    <YoutubeBlockComponent
+                        display={Display.Standard}
+                        designType={CAPI.designType}
+                        element={mainMediaYoutube}
+                        overlayImage={mainMediaYoutube.overrideImage}
+                        pillar={pillar}
+                        hideCaption={false}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        isMainMedia={false}
+                    />
+                </Hydrate>
+            )}
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
@@ -408,11 +428,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.chartAtoms.map((chart) => (
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
-                    <ChartAtom
-                        id={chart.id}
-                        url={chart.url}
-                        html={chart.html}
-                    />
+                    <ChartAtom id={chart.id} html={chart.html} />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (

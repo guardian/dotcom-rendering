@@ -39,7 +39,6 @@ export const YoutubeBlockComponent = ({
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
-
     return (
         <>
             <YoutubeAtom

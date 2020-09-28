@@ -56,7 +56,6 @@ export const ArticleRenderer: React.FC<{
     // );
     // ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
     //    But should be soon.
-
     const output = elements
         .map((element, i) => {
             switch (element._type) {
@@ -363,6 +362,7 @@ export const ArticleRenderer: React.FC<{
                             role="inline"
                             adTargeting={adTargeting}
                             isMainMedia={false}
+                            overlayImage={element.overrideImage}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
