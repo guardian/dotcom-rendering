@@ -123,14 +123,18 @@ export const HeadlineByline = ({
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 default:
-                    return (
-                        <div className={immersiveStyles}>
-                            by{' '}
-                            <span className={immersiveLinkStyles(pillar)}>
-                                <BylineLink byline={byline} tags={tags} />
-                            </span>
-                        </div>
-                    );
+                    if (byline) {
+                        return (
+                            <div className={immersiveStyles}>
+                                by{' '}
+                                <span className={immersiveLinkStyles(pillar)}>
+                                    <BylineLink byline={byline} tags={tags} />
+                                </span>
+                            </div>
+                        );
+                    }
+
+                    return null;
             }
         }
         case Display.Showcase:
