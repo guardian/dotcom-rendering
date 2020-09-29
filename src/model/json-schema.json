@@ -54,9 +54,6 @@
                         "$ref": "#/definitions/EmbedBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/UnsafeEmbedBlockElement"
-                    },
-                    {
                         "$ref": "#/definitions/ExplainerAtomBlockElement"
                     },
                     {
@@ -1023,21 +1020,6 @@
             },
             "required": ["_type", "html", "isMandatory"]
         },
-        "UnsafeEmbedBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.UnsafeEmbedBlockElement"
-                    ]
-                },
-                "html": {
-                    "type": "string"
-                }
-            },
-            "required": ["_type", "html"]
-        },
         "ExplainerAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1919,9 +1901,6 @@
                             },
                             {
                                 "$ref": "#/definitions/EmbedBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/UnsafeEmbedBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/ExplainerAtomBlockElement"

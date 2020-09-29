@@ -7,7 +7,6 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -405,18 +404,6 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
-                </Hydrate>
-            ))}
-            {CAPI.unsafeBlockElements.map((unsafeBlock) => (
-                <Hydrate
-                    root="unsafe-block"
-                    index={unsafeBlock.unsafeBlockElementIndex}
-                >
-                    <UnsafeEmbedBlockComponent
-                        key={unsafeBlock.unsafeBlockElementIndex}
-                        html={unsafeBlock.html}
-                        alt={unsafeBlock.alt}
-                    />
                 </Hydrate>
             ))}
             {CAPI.chartAtoms.map((chart) => (

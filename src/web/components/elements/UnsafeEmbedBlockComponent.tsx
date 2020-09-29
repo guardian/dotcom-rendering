@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
@@ -6,46 +6,16 @@ type Props = {
     alt: string;
 };
 
-let numberOfIntervals = 0;
-export const UnsafeEmbedBlockComponent = ({ html, alt }: Props) => {
-    const [iframeHeight, setIframeHeight] = useState<number>(0);
-    const iFrameRef = useRef<HTMLIFrameElement>(null);
-
-    useEffect(() => {
-        if (numberOfIntervals >= 12) return;
-
-        const timer = setInterval(() => {
-            const doc =
-                iFrameRef.current &&
-                iFrameRef.current.contentWindow &&
-                iFrameRef.current.contentWindow.document;
-
-            numberOfIntervals += 1;
-
-            if (doc) {
-                setIframeHeight(
-                    doc.documentElement.scrollHeight ||
-                        doc.documentElement.scrollHeight ||
-                        0,
-                );
-            }
-
-            if (numberOfIntervals >= 12) clearInterval(timer);
-        }, 300);
-
-        return () => clearInterval(timer);
-    }, [iFrameRef]);
-
-    return (
-        <iframe
-            className={css`
-                width: 100%;
-            `}
-            title={alt}
-            data-cy="embed-block"
-            ref={iFrameRef}
-            style={{ height: iframeHeight }}
-            srcDoc={html}
-        />
-    );
-};
+const fullWidthStyles = css`
+    width: 100%;
+`;
+export const UnsafeEmbedBlockComponent = ({ html, alt }: Props) => (
+    <iframe
+        className={`${fullWidthStyles} atom__iframe`}
+        title={alt}
+        data-cy="embed-block"
+        srcDoc={`<script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+            <script>iframeMessenger.enableAutoResize();</script>
+            ${html}`}
+    />
+);

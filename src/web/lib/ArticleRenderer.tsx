@@ -136,25 +136,23 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                    if (!element.safe) {
+                        return (
+                            <figure className={unsafeEmbedWrapperStyles}>
+                                <UnsafeEmbedBlockComponent
+                                    key={i}
+                                    html={element.html}
+                                    alt={element.alt || ''}
+                                />
+                            </figure>
+                        );
+                    }
                     return (
                         <EmbedBlockComponent
                             key={i}
                             html={element.html}
                             alt={element.alt}
                         />
-                    );
-                case 'model.dotcomrendering.pageElements.UnsafeEmbedBlockElement':
-                    return (
-                        <figure
-                            className={unsafeEmbedWrapperStyles}
-                            id={`unsafe-block-${i}`}
-                        >
-                            <UnsafeEmbedBlockComponent
-                                key={i}
-                                html={element.html}
-                                alt={element.alt}
-                            />
-                        </figure>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (
