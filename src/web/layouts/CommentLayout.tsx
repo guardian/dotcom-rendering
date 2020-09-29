@@ -45,10 +45,32 @@ import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
+const gridWide = css`
+    grid-template-areas:
+        'title      border  headline    right-column'
+        'lines      border  headline    right-column'
+        'meta       border  standfirst  right-column'
+        'meta       border  media       right-column'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
+const showcaseGridWide = css`
+    grid-template-areas:
+        'title      border  headline    headline'
+        'lines      border  headline    headline'
+        'meta       border  standfirst  standfirst'
+        'meta       border  media       media'
+        '.          border  body        right-column'
+        '.          border  .           right-column';
+`;
+
 const StandardGrid = ({
     children,
+    display,
 }: {
     children: JSX.Element | JSX.Element[];
+    display: Display;
 }) => (
     <div
         className={css`
@@ -78,13 +100,10 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
-                    grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
+
+                    ${display === Display.Showcase
+                        ? showcaseGridWide
+                        : gridWide}
                 }
 
                 ${until.wide} {
@@ -93,13 +112,10 @@ const StandardGrid = ({
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
-                    grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
+
+                    ${display === Display.Showcase
+                        ? showcaseGridWide
+                        : gridWide}
                 }
 
                 ${until.leftCol} {
@@ -170,7 +186,6 @@ const avatarPositionStyles = css`
     overflow: hidden;
     margin-bottom: -29px;
     margin-top: -50px;
-    pointer-events: none;
 
     /*  Why target img element?
 
@@ -223,6 +238,10 @@ const ageWarningMargins = css`
         margin-left: -10px;
         margin-top: 0;
     }
+`;
+
+const mainMediaWrapper = css`
+    position: relative;
 `;
 
 interface Props {
@@ -340,7 +359,7 @@ export const CommentLayout = ({
             </div>
 
             <Section showTopBorder={false} backgroundColour={opinion[800]}>
-                <StandardGrid>
+                <StandardGrid display={display}>
                     <GridItem area="title">
                         <ArticleTitle
                             display={display}
@@ -421,13 +440,25 @@ export const CommentLayout = ({
                         />
                     </GridItem>
                     <GridItem area="media">
-                        <div className={maxWidth}>
+                        <div
+                            className={
+                                display === Display.Showcase &&
+                                CAPI.pageType.hasShowcaseMainElement
+                                    ? mainMediaWrapper
+                                    : maxWidth
+                            }
+                        >
                             <MainMedia
                                 display={display}
                                 designType={designType}
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
+                                starRating={
+                                    designType === 'Review' && CAPI.starRating
+                                        ? CAPI.starRating
+                                        : undefined
+                                }
                             />
                         </div>
                     </GridItem>
