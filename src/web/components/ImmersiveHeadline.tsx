@@ -147,16 +147,14 @@ export const ImmersiveHeadline = ({
                                 pillar={pillar}
                                 badge={badge}
                             />
-                            <div className="articleHeight" ref={articleHeight}>
-                                <ArticleHeadline
-                                    display={display}
-                                    headlineString={headline}
-                                    designType={designType}
-                                    pillar={pillar}
-                                    tags={tags}
-                                    byline={author.byline}
-                                />
-                            </div>
+                            <ArticleHeadline
+                                display={display}
+                                headlineString={headline}
+                                designType={designType}
+                                pillar={pillar}
+                                tags={tags}
+                                byline={author.byline}
+                            />
                         </PositionHeadline>
                     </Flex>
                 </div>
