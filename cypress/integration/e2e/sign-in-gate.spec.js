@@ -105,7 +105,10 @@ describe('Sign In Gate Tests', function () {
         it('should not load the sign in gate if the user has already dismissed the gate', function () {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
-                '{"SignInGateMain-main-variant-2":"2020-07-22T08:25:05.567Z"}',
+                `{
+                    "SignInGateMain-main-variant-2": "2020-07-22T08:25:05.567Z",
+                    "gate-dismissed-count-SignInGateMain-main-variant-2": 6
+                }`,
             );
 
             visitArticleAndScrollToGateForLazyLoad();
