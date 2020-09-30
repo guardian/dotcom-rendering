@@ -111,13 +111,13 @@ const retrieveDismissedCount = (
     }
 };
 
-// Test whether the user has dismissed the gate variant at least `count` times
-export const hasUserDismissedGateCount = (
+// Test whether the user has dismissed the gate variant more than `count` times
+export const hasUserDismissedGateMoreThanCount = (
     variant: string,
     name: string,
     count: number
 ): boolean => {
-    return retrieveDismissedCount(variant, name) >= count;
+    return retrieveDismissedCount(variant, name) > count;
 };
 
 // Increment the number of times a user has dismissed this gate variant
