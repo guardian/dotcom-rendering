@@ -102,13 +102,7 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return (
-                        <ChartAtom
-                            id={element.id}
-                            html={element.html}
-                            url={element.url}
-                        />
-                    );
+                    return <ChartAtom id={element.id} html={element.html} />;
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
                         <DocumentBlockComponent
