@@ -104,18 +104,20 @@ function insertEpic(): void {
         epicPlaceholder.innerHTML = "";
     }
     if (navigator.onLine && epicPlaceholder) {
-        Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()]).then(([isPremium, maybeEpic]) => {
-            if (!isPremium && maybeEpic.epic) {
-                const { title, body, firstButton, secondButton } = maybeEpic.epic;
-                const epicProps =  {
-                    title,
-                    body,
-                    firstButton,
-                    secondButton
-                };
-                ReactDOM.render(h(Epic, epicProps), epicPlaceholder);
+        Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()]).then(
+            ([isPremium, maybeEpic]) => {
+                if (!isPremium && maybeEpic.epic) {
+                    const { title, body, firstButton, secondButton } = maybeEpic.epic;
+                    const epicProps =  {
+                        title,
+                        body,
+                        firstButton,
+                        secondButton
+                    };
+                    ReactDOM.render(h(Epic, epicProps), epicPlaceholder);
+                }
             }
-        })
+        ).catch(error => console.error(error));
     }
 }
 

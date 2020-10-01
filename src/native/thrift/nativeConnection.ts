@@ -66,7 +66,9 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         try {
             window.nativeConnections = window.nativeConnections || {};
             window.nativeConnections[this.connectionId] = this
-        } catch {}
+        } catch(error) {
+            console.error(error);
+        }
     }
     
     reset(oldConnectionId: string): void {
