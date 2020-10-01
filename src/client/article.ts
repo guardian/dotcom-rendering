@@ -98,7 +98,10 @@ function formatDates(): void {
         })
 }
 
-function insertEpic(): void {
+// TODO: don't show epics to premium users
+// TODO: show epics on opinion articles
+// TODO: make sure we only have one bridget request open at a given time
+function insertEpic(poll = 1000): void {
     if (navigator.onLine && !document.getElementById('epic-container')) {
         void acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
             if (maybeEpic.epic) {
@@ -107,7 +110,10 @@ function insertEpic(): void {
                 document.querySelector('.js-tags')?.prepend(epicContainer);
                 const { title, body, firstButton, secondButton } = maybeEpic.epic;
                 const epicProps =  { title, body, firstButton, secondButton };
+
                 ReactDOM.render(h(Epic, epicProps), epicContainer)
+            } else if (poll < 5000) {
+                setTimeout(() => insertEpic(poll + 1000), poll);
             }
         })
     }
