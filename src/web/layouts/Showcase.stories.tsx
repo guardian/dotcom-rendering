@@ -74,7 +74,10 @@ export const AdvertisementFeatureStory = () => {
     const ServerCAPI = convertToShowcase(AdvertisementFeature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
+AdvertisementFeatureStory.story = {
+    name: 'AdvertisementFeature',
+    chromatic: { delay: 500 },
+};
 
 export const PhotoEssayStory = () => {
     const ServerCAPI = convertToShowcase(PhotoEssay);

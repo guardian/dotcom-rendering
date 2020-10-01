@@ -84,7 +84,7 @@ AdvertisementFeatureStory.story = {
     name: 'AdvertisementFeature',
     parameters: {
         viewport: { defaultViewport: 'desktop' },
-        chromatic: { viewports: [980] },
+        chromatic: { viewports: [980], delay: 500 },
     },
 };
 
@@ -128,7 +128,7 @@ FeatureStory.story = {
     name: 'Feature',
     parameters: {
         viewport: { defaultViewport: 'mobileMedium' },
-        chromatic: { viewports: [375] },
+        chromatic: { viewports: [375], delay: 500 },
     },
 };
 
