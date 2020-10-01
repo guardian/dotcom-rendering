@@ -76,7 +76,6 @@ export const AdvertisementFeatureStory = () => {
 };
 AdvertisementFeatureStory.story = {
     name: 'AdvertisementFeature',
-    chromatic: { delay: 5000 },
 };
 
 export const PhotoEssayStory = () => {
