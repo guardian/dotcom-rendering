@@ -16,7 +16,9 @@ describe('SignInGate - dismissGate methods', () => {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 JSON.stringify({
-                    'SignInGateName-variant-name': new Date().toISOString(),
+                    value: {
+                        'SignInGateName-variant-name': new Date().toISOString(),
+                    }
                 }),
             );
 
@@ -41,7 +43,9 @@ describe('SignInGate - dismissGate methods', () => {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 JSON.stringify({
-                    'SignInGateName-variant-other': new Date().toISOString(),
+                    value: {
+                        'SignInGateName-variant-other': new Date().toISOString(),
+                    }
                 }),
             );
 
@@ -57,7 +61,9 @@ describe('SignInGate - dismissGate methods', () => {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 JSON.stringify({
-                    'SignInGateOther-variant-name': new Date().toISOString(),
+                    value: {
+                        'SignInGateOther-variant-name': new Date().toISOString(),
+                    }
                 }),
             );
 
@@ -75,7 +81,9 @@ describe('SignInGate - dismissGate methods', () => {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 JSON.stringify({
-                    'SignInGateCurrent-variant-name': lessThanADayAgo.toISOString(),
+                    value: {
+                        'SignInGateCurrent-variant-name': lessThanADayAgo.toISOString(),
+                    }
                 }),
             );
             const output = hasUserDismissedGate(
@@ -93,7 +101,9 @@ describe('SignInGate - dismissGate methods', () => {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 JSON.stringify({
-                    'SignInGateCurrent-variant-name': moreThanADayAgo.toISOString(),
+                    value: {
+                        'SignInGateCurrent-variant-name': moreThanADayAgo.toISOString(),
+                    }
                 }),
             );
 

@@ -14,10 +14,20 @@ const localStorageDismissedCountKey = (variant: string, name: string): string =>
 // Invalid json stored against `localStorageKey` should not break signin gate for a user forever
 const getSigninGatePrefsSafely = () => {
     try {
-        return JSON.parse(localStorage.getItem(localStorageKey) || '{}');
+        const prefs = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
+
+        if (typeof prefs === 'object' && typeof prefs.value === 'object') {
+            return prefs.value;
+        }
+        return {};
+
     } catch (e) {
         return {};
     }
+};
+
+const setSigninGatePrefs = (prefs: any) => {
+    localStorage.setItem(localStorageKey, JSON.stringify({ value: prefs } ));
 };
 
 // set in user preferences that the user has dismissed the gate, set the value to the current ISO date string
@@ -35,7 +45,7 @@ export const setUserDismissedGate = (variant: string, name: string): void => {
     try {
         const prefs = getSigninGatePrefsSafely();
         prefs[localStorageDismissedDateKey(variant, name)] = new Date().toISOString();
-        localStorage.setItem(localStorageKey, JSON.stringify(prefs));
+        setSigninGatePrefs(prefs);
     } catch (error) {
         // Alas, sometimes localstorage isn't available
     }
@@ -45,7 +55,7 @@ export const unsetUserDismissedGate = (variant: string, name: string): void => {
     try {
         const prefs = getSigninGatePrefsSafely();
         delete prefs[localStorageDismissedDateKey(variant, name)]
-        localStorage.setItem(localStorageKey, JSON.stringify(prefs));
+        setSigninGatePrefs(prefs);
     } catch (error) {
         // Alas, sometimes localstorage isn't available
     }
@@ -128,7 +138,7 @@ export const incrementUserDismissedGateCount = (
     try {
         const prefs = getSigninGatePrefsSafely();
         prefs[localStorageDismissedCountKey(variant, name)] = retrieveDismissedCount(variant, name) + 1;
-        localStorage.setItem(localStorageKey, JSON.stringify(prefs));
+        setSigninGatePrefs(prefs);
     } catch (error) {
         // localstorage isn't available so show the gate
     }

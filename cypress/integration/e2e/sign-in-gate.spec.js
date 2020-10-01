@@ -106,8 +106,10 @@ describe('Sign In Gate Tests', function () {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
                 `{
-                    "SignInGateMain-main-variant-2": "2020-07-22T08:25:05.567Z",
-                    "gate-dismissed-count-SignInGateMain-main-variant-2": 6
+                    "value": {
+                        "SignInGateMain-main-variant-2": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-2": 6
+                    }
                 }`,
             );
 
