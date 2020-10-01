@@ -19,4 +19,4 @@ export const defaultStory = () => {
         </div>
     );
 };
-defaultStory.story = { name: 'default', chromatic: { delay: 1500 } };
+defaultStory.story = { name: 'default', chromatic: { delay: 5000 } };
