@@ -4,18 +4,20 @@ import { css } from 'emotion';
 type Props = {
     html: string;
     alt: string;
+    index: number;
 };
 
 const fullWidthStyles = css`
     width: 100%;
 `;
-export const UnsafeEmbedBlockComponent = ({ html, alt }: Props) => (
+export const UnsafeEmbedBlockComponent = ({ html, alt, index }: Props) => (
     <iframe
         className={`${fullWidthStyles} atom__iframe`}
         title={alt}
+        name={`unsafe-embed-${index}`}
         data-cy="embed-block"
         srcDoc={`<script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
-            <script>iframeMessenger.enableAutoResize();</script>
-            ${html}`}
+        <gu-script>iframeMessenger.enableAutoResize();</gu-script>
+        ${html}`}
     />
 );

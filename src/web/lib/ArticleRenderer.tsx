@@ -143,6 +143,7 @@ export const ArticleRenderer: React.FC<{
                                     key={i}
                                     html={element.html}
                                     alt={element.alt || ''}
+                                    index={i}
                                 />
                             </figure>
                         );
