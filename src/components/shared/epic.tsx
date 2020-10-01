@@ -9,9 +9,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { SvgArrowRightStraight } from "@guardian/src-icons"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
-
 import { acquisitionsClient } from 'native/nativeApi';
-
 
 // ----- Styles ----- //
 
@@ -41,7 +39,6 @@ const epicStyles: SerializedStyles = css`
     }
 
     .button-container {
-        background: aliceblue;
         margin-top: ${remSpace[9]};
     }
 
@@ -64,7 +61,7 @@ interface EpicProps {
     title: string;
     body: string;
     firstButton: string;
-    secondButton: string | undefined;
+    secondButton?: string;
 }
 
 const isElementPartiallyInViewport = (el: React.MutableRefObject<HTMLDivElement>): boolean => {
@@ -86,7 +83,7 @@ const debounce = (fn: () => void, time: number): () => void => {
 }
 
 function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
-    const [impressionSeen, setImpressionSeen] = useState(false);    
+    const [impressionSeen, setImpressionSeen] = useState(false);
     const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {

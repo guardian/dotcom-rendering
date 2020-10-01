@@ -2,7 +2,6 @@
 
 import { notificationsClient, acquisitionsClient, userClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
-import { IMaybeEpic as MaybeEpic } from '@guardian/bridget/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
 import { createElement as h } from 'react';
@@ -98,22 +97,23 @@ function formatDates(): void {
         })
 }
 
-// TODO: don't show epics to premium users
 // TODO: show epics on opinion articles
-// TODO: make sure we only have one bridget request open at a given time
-function insertEpic(poll = 1000): void {
-    if (navigator.onLine && !document.getElementById('epic-container')) {
-        void acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
-            if (maybeEpic.epic) {
-                const epicContainer = document.createElement('div');
-                epicContainer.id = 'epic-container';
-                document.querySelector('.js-tags')?.prepend(epicContainer);
+function insertEpic(): void {
+    const epicPlaceholder = document.getElementById('epic-placeholder');
+    if (epicPlaceholder) {
+        epicPlaceholder.innerHTML = "";
+    }
+    if (navigator.onLine && epicPlaceholder) {
+        Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()]).then(([isPremium, maybeEpic]) => {
+            if (!isPremium && maybeEpic.epic) {
                 const { title, body, firstButton, secondButton } = maybeEpic.epic;
-                const epicProps =  { title, body, firstButton, secondButton };
-
-                ReactDOM.render(h(Epic, epicProps), epicContainer)
-            } else if (poll < 5000) {
-                setTimeout(() => insertEpic(poll + 1000), poll);
+                const epicProps =  {
+                    title,
+                    body,
+                    firstButton,
+                    secondButton
+                };
+                ReactDOM.render(h(Epic, epicProps), epicPlaceholder);
             }
         })
     }
