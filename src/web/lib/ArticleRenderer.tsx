@@ -64,13 +64,15 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                     return (
-                        <AudioAtom
-                            id={element.id}
-                            trackUrl={element.trackUrl}
-                            kicker={element.kicker}
-                            title={element.title}
-                            pillar={toTypesPillar(pillar)}
-                        />
+                        <div id={`audio-atom-${i}`}>
+                            <AudioAtom
+                                id={element.id}
+                                trackUrl={element.trackUrl}
+                                kicker={element.kicker}
+                                title={element.title}
+                                pillar={toTypesPillar(pillar)}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
