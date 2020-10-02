@@ -29,14 +29,13 @@ const headerWrapper = css`
 
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
 const bannerWrapper = css`
-    position: sticky;
+    position: sticky !important;
     bottom: 0;
     ${getZIndexImportant('banner')}
     
     width: 100% !important;
     background: none !important;
     top: auto !important;
-    position: sticky !important;
 `;
 
 export const Stuck = ({ children }: Props) => (
