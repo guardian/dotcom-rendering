@@ -23,6 +23,7 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
+    AudioAtom,
 } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -30,6 +31,7 @@ import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
+import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
@@ -409,6 +411,17 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.chartAtoms.map((chart) => (
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
                     <ChartAtom id={chart.id} html={chart.html} />
+                </Hydrate>
+            ))}
+            {CAPI.audioAtoms.map((audioAtom) => (
+                <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
+                    <AudioAtom
+                        id={audioAtom.id}
+                        trackUrl={audioAtom.trackUrl}
+                        kicker={audioAtom.kicker}
+                        title={audioAtom.title}
+                        pillar={toTypesPillar(pillar)}
+                    />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
