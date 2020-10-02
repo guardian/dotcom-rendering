@@ -5,6 +5,7 @@ import * as emotionTheming from 'emotion-theming';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { CanShowResult } from './bannerPicker';
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
@@ -152,7 +153,17 @@ const BrazeBannerWithSatisfiedDependencies = ({
     meta,
 }: InnerProps) => {
     useEffect(() => {
+        // Log the impression with Braze
         meta.logImpression();
+
+        // Log VIEW event with Ophan
+        submitComponentEvent({
+            component: {
+                componentType: 'RETENTION_ENGAGEMENT_BANNER',
+                id: meta.dataFromBraze.componentName,
+            },
+            action: 'VIEW',
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
