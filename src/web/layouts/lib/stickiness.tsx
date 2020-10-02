@@ -31,7 +31,7 @@ const headerWrapper = css`
 const bannerWrapper = css`
     position: sticky;
     bottom: 0;
-    ${getZIndexImportant('banner')} !important
+    ${getZIndexImportant('banner')}
     
     width: 100% !important;
     background: none !important;
