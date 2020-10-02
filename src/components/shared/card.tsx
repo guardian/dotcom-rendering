@@ -111,6 +111,10 @@ const imageWrapperStyles = css`
     position: relative;
 `;
 
+const imageBackground = css`
+    background: ${neutral[86]};
+`;
+
 const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
     date,
     map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
@@ -304,7 +308,7 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
                 format={format}
             /></div>
         }),
-        withDefault<ReactElement | null>(null)
+        withDefault<ReactElement | null>(<div css={[imageWrapperStyles, imageBackground]}></div>)
     )
 }
 
