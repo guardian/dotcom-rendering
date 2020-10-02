@@ -42,7 +42,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const ShowcaseGrid = ({
@@ -553,7 +553,7 @@ export const ShowcaseLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );
