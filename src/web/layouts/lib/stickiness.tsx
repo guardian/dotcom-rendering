@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getZIndex, getZIndexImportant } from '@frontend/web/lib/getZIndex';
 
 type Props = {
     children?: React.ReactNode;
@@ -31,7 +31,7 @@ const headerWrapper = css`
 const bannerWrapper = css`
     position: sticky;
     bottom: 0;
-    ${getZIndex('banner')} !important
+    ${getZIndexImportant('banner')} !important
     
     width: 100% !important;
     background: none !important;
