@@ -135,7 +135,6 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
                 ${headline.xxxsmall({ lineHeight: 'regular', fontWeight: 'light' })};
                 h3 {
                     box-shadow: inset 0 -0.025rem ${border.primary(format)};
-                    padding-bottom: 0.2rem;
                     display: inline;
 
                     ${darkModeCss`
