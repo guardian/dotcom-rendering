@@ -538,10 +538,7 @@ const render = (format: Format, excludeStyles = false) =>
         }
 
         case ElementKind.ChartAtom: {
-            return h(ChartAtom, {
-                ...element,
-                url: ""
-            })
+            return h(ChartAtom, { ...element })
         }
 
         case ElementKind.InteractiveAtom: {
