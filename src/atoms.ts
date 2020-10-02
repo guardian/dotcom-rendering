@@ -127,6 +127,15 @@ function parseAtom(
         }
 
         case "chart": {
+            const hideChartAtoms = true;
+            if (hideChartAtoms) {
+                return err(`
+                    Chart atoms not currently supported. We need to find a solution
+                    to handling the inline styles.
+                    style-src 'unsafe-hashes' is CSP level 3 so works in Chrome but not Safari yet
+                `);
+            }
+
             const atom = atoms.charts?.find(chart => chart.id === id);
 
             if (atom?.data?.kind !== "chart" || !id) {
