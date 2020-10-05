@@ -18,7 +18,7 @@ import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import RelatedContent from 'components/shared/relatedContent';
-import { Footer } from "@guardian/src-footer"
+import FooterCcpa from 'components/shared/footerStyles';
 
 
 // ----- Styles ----- //
@@ -49,12 +49,6 @@ interface Props {
     children: ReactNode[];
 }
 
-interface FooterProps {
-    showBackToTop: boolean;
-}
-
-const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
-
 const AdvertisementFeature: FC<Props> = ({ item, children }) => {
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
@@ -80,7 +74,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper showBackToTop={true} />
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>
 }
 

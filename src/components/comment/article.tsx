@@ -19,7 +19,7 @@ import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
-import { Footer } from "@guardian/src-footer"
+import FooterCcpa from 'components/shared/footerStyles';
 
 
 // ----- Styles ----- //
@@ -55,13 +55,6 @@ const topBorder = css`
     `}
 `;
 
-
-// ----- Component ----- //
-interface FooterProps {
-    showBackToTop: boolean;
-}
-
-const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface Props {
     item: CommentItem;
@@ -106,7 +99,8 @@ const Comment: FC<Props> = ({ item, children }) =>
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper showBackToTop={true} />
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
+
     </main>
 
 

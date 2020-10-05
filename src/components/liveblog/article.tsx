@@ -15,7 +15,7 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog, getFormat } from 'item';
 import HeaderMedia from 'headerMedia';
 import { remSpace } from '@guardian/src-foundations';
-import { Footer } from "@guardian/src-footer"
+import FooterCcpa from 'components/shared/footerStyles';
 
 
 const LiveblogArticleStyles: SerializedStyles = css`
@@ -45,12 +45,6 @@ const tagStyles = css`
         margin: 0 ${remSpace[2]};
     }
 `
-// ----- Component ----- //
-interface FooterProps {
-    showBackToTop: boolean;
-}
-
-const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface LiveblogArticleProps {
     item: Liveblog;
@@ -81,7 +75,7 @@ const LiveblogArticle: FC<LiveblogArticleProps> = ({ item }) => {
                     <Tags tags={item.tags} format={format}/>
                 </div>
             </div>
-            <Wrapper showBackToTop={true} />
+            <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
         </main>
     );
 }

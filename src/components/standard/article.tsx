@@ -21,7 +21,7 @@ import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
-import { Footer } from "@guardian/src-footer"
+import FooterCcpa from 'components/shared/footerStyles';
 
 
 // ----- Styles ----- //
@@ -73,12 +73,6 @@ const itemStyles = (item: Item): SerializedStyles => {
     }
 }
 
-// ----- Component ----- //
-interface FooterProps {
-    showBackToTop: boolean;
-}
-
-const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
 
 interface Props {
     item: StandardItem | ReviewItem;
@@ -118,7 +112,7 @@ const Standard: FC<Props> = ({ item, children }) => {
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
-        <Wrapper showBackToTop={true} />
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>
 }
 

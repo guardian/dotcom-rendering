@@ -10,6 +10,8 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
+import WithChildrenBlue from 'components/shared/footerStyles';
+
 
 
 // ----- Run ----- //
@@ -113,6 +115,18 @@ function insertEpic(): void {
     }
 }
 
+
+
+function isCCPA(): void {
+    userClient.doesCcpaApply().then(isOptedIn => {
+        const comp = h(WithChildrenBlue, {isCcpa: isOptedIn});
+        ReactDOM.render(comp, document.getElementById('articleFooter'));
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
+
+
 interface FormData {
     [key: string]: string;
 }
@@ -214,6 +228,8 @@ function hasSeenCards(): void {
     })
 }
 
+
+
 setup();
 ads();
 videos();
@@ -224,3 +240,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+isCCPA();
