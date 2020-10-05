@@ -23,6 +23,7 @@ import { map, withDefault } from '@guardian/types/option';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
 import { Lines } from "@guardian/src-ed-lines";
+import Epic from 'components/shared/epic';
 
 // ----- Styles ----- //
 
@@ -84,8 +85,15 @@ interface Props {
 const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
-        ? <div id="epic-container"></div>
-        : null
+        ? null
+        : <div id="epic-placeholder">
+            <Epic
+                title=""
+                body=""
+                firstButton=""
+                secondButton=""
+            />
+        </div>
 
     const commentContainer = item.commentable
         ? pipe2(

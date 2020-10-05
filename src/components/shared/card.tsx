@@ -111,6 +111,10 @@ const imageWrapperStyles = css`
     position: relative;
 `;
 
+const imageBackground = css`
+    background: ${neutral[86]};
+`;
+
 const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
     date,
     map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
@@ -135,7 +139,6 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
                 ${headline.xxxsmall({ lineHeight: 'regular', fontWeight: 'light' })};
                 h3 {
                     box-shadow: inset 0 -0.025rem ${border.primary(format)};
-                    padding-bottom: 0.2rem;
                     display: inline;
 
                     ${darkModeCss`
@@ -304,7 +307,7 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
                 format={format}
             /></div>
         }),
-        withDefault<ReactElement | null>(null)
+        withDefault<ReactElement | null>(<div css={[imageWrapperStyles, imageBackground]}></div>)
     )
 }
 
