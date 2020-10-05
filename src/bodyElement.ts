@@ -41,7 +41,8 @@ const enum ElementKind {
     QandaAtom,
     ProfileAtom,
     TimelineAtom,
-    ChartAtom
+    ChartAtom,
+    AudioAtom
 }
 
 type Image = ImageData & {
@@ -123,6 +124,14 @@ interface TimelineAtom {
     events: TimelineEvent[];
 }
 
+interface AudioAtom {
+    kind: ElementKind.AudioAtom;
+    id: string;
+    trackUrl: string;
+    kicker: string;
+    title: string;
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -168,7 +177,8 @@ type BodyElement = {
   | QandaAtom
   | ProfileAtom
   | TimelineAtom
-  | ChartAtom;
+  | ChartAtom
+  | AudioAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -215,6 +225,7 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
         case ElementKind.ProfileAtom:
         case ElementKind.TimelineAtom:
         case ElementKind.ChartAtom:
+        case ElementKind.AudioAtom:
             return {};
         default:
             return elem;

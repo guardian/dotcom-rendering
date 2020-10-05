@@ -246,6 +246,28 @@ function parseAtom(
             });
         }
 
+        case "audio": {
+            const atom = atoms.audios?.find(audio => audio.id === id);
+
+            if (atom?.data?.kind !== "audio") {
+                return err(`No atom matched this id: ${id}`);
+            }
+            const { id: audioId, title } = atom;
+            const { kicker, trackUrl } = atom?.data?.audio;
+
+            if (!title) {
+                return err(`No videoId for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.AudioAtom,
+                id: audioId,
+                trackUrl,
+                kicker,
+                title
+            });
+        }
+
         default: {
             return err(`Atom type not supported: ${element.contentAtomTypeData.atomType}`);
         }

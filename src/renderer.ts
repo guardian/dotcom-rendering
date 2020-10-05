@@ -24,7 +24,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
+import { AudioAtom, ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -594,6 +594,11 @@ const render = (format: Format, excludeStyles = false) =>
             }
             const figcaption = h(FigCaption, { format, caption, credit: none });
             return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
+        }
+
+        case ElementKind.AudioAtom: {
+            const { pillar } = format;
+            return h('div', { ...element, pillar: pillar.valueOf(), className: 'js-audio-atom audio-atom' }, h(AudioAtom, { ...element, pillar }))
         }
     }
 };

@@ -9,6 +9,8 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
+import { AudioAtom } from '@guardian/atoms-rendering';
+import { Pillar } from '@guardian/types/Format';
 
 
 // ----- Run ----- //
@@ -222,6 +224,21 @@ function hasSeenCards(): void {
     })
 }
 
+function initAudioAtoms() {
+    Array.from(document.querySelectorAll('.js-audio-atom'))
+        .forEach(atom => {
+            const id = atom.getAttribute('id');
+            const trackUrl = atom.getAttribute('trackurl');
+            const kicker = atom.getAttribute('kicker');
+            const title = atom.getAttribute('title');
+            const pillar = Pillar.Culture;
+
+            if (id && trackUrl && kicker && title && pillar) {
+                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, kicker, title, pillar }), atom)
+            }
+        })
+}
+
 setup();
 ads();
 videos();
@@ -232,3 +249,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+initAudioAtoms();
