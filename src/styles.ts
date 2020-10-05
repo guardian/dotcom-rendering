@@ -13,7 +13,6 @@ export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
-
 export const sidePadding = css`
     padding-left: ${remSpace[2]};
     padding-right: ${remSpace[2]};
@@ -22,9 +21,6 @@ export const sidePadding = css`
         padding-left: 0;
         padding-right: 0;
     }`;
-
-
-
 
 export const icons = "font-family: 'Guardian Icons';";
 

@@ -2,7 +2,6 @@
 
 import { notificationsClient, acquisitionsClient, userClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
-import { IMaybeEpic as MaybeEpic } from '@guardian/bridget/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
 import { createElement as h } from 'react';
@@ -98,18 +97,27 @@ function formatDates(): void {
         })
 }
 
+// TODO: show epics on opinion articles
 function insertEpic(): void {
-    if (navigator.onLine && !document.getElementById('epic-container')) {
-        void acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
-            if (maybeEpic.epic) {
-                const epicContainer = document.createElement('div');
-                epicContainer.id = 'epic-container';
-                document.querySelector('.js-tags')?.prepend(epicContainer);
-                const { title, body, firstButton, secondButton } = maybeEpic.epic;
-                const epicProps =  { title, body, firstButton, secondButton };
-                ReactDOM.render(h(Epic, epicProps), epicContainer)
+    const epicPlaceholder = document.getElementById('epic-placeholder');
+    if (epicPlaceholder) {
+        epicPlaceholder.innerHTML = "";
+    }
+    if (navigator.onLine && epicPlaceholder) {
+        Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()]).then(
+            ([isPremium, maybeEpic]) => {
+                if (!isPremium && maybeEpic.epic) {
+                    const { title, body, firstButton, secondButton } = maybeEpic.epic;
+                    const epicProps =  {
+                        title,
+                        body,
+                        firstButton,
+                        secondButton
+                    };
+                    ReactDOM.render(h(Epic, epicProps), epicPlaceholder);
+                }
             }
-        })
+        ).catch(error => console.error(error));
     }
 }
 
