@@ -17,6 +17,7 @@ import JsonSerialisable from 'types/jsonSerialisable';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 
 // ----- Types ----- //
 
@@ -37,7 +38,10 @@ const enum ElementKind {
     ExplainerAtom,
     MediaAtom,
     GuideAtom,
-    QandaAtom
+    QandaAtom,
+    ProfileAtom,
+    TimelineAtom,
+    ChartAtom
 }
 
 type Image = ImageData & {
@@ -67,6 +71,15 @@ interface InteractiveAtom {
     html: string;
 }
 
+interface ChartAtom {
+    kind: ElementKind.ChartAtom;
+    title: string;
+    id: string;
+    html: string;
+    css: string[];
+    js: string[];
+}
+
 interface ExplainerAtom {
     kind: ElementKind.ExplainerAtom;
     html: string;
@@ -82,18 +95,32 @@ interface MediaAtom {
     caption: Option<DocumentFragment>;
 }
 
-interface GuideAtom {
-    kind: ElementKind.GuideAtom;
+interface ExpandableAtom {
     html: string;
     title: string;
     id: string;
+    image?: string;
+    credit?: string;
 }
 
-interface QandaAtom {
+interface GuideAtom extends ExpandableAtom {
+    kind: ElementKind.GuideAtom;
+}
+
+interface QandaAtom extends ExpandableAtom {
     kind: ElementKind.QandaAtom;
-    html: string;
+}
+
+interface ProfileAtom extends ExpandableAtom {
+    kind: ElementKind.ProfileAtom;
+}
+
+interface TimelineAtom {
+    kind: ElementKind.TimelineAtom;
     title: string;
     id: string;
+    description?: string;
+    events: TimelineEvent[];
 }
 
 type BodyElement = {
@@ -133,7 +160,15 @@ type BodyElement = {
     image?: string;
     price?: string;
     start?: string;
-} | Video | InteractiveAtom | ExplainerAtom | MediaAtom | GuideAtom | QandaAtom;
+} | Video
+  | InteractiveAtom
+  | ExplainerAtom
+  | MediaAtom
+  | GuideAtom
+  | QandaAtom
+  | ProfileAtom
+  | TimelineAtom
+  | ChartAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -177,6 +212,9 @@ function toSerialisable(elem: BodyElement): JsonSerialisable {
             return { ...elem };
         case ElementKind.GuideAtom:
         case ElementKind.QandaAtom:
+        case ElementKind.ProfileAtom:
+        case ElementKind.TimelineAtom:
+        case ElementKind.ChartAtom:
             return {};
         default:
             return elem;
