@@ -59,6 +59,11 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps):
     </>
 }
 
+InteractiveAtom.defaultProps = {
+    html: "",
+    styles: ""
+};
+
 export default InteractiveAtom;
 export {
     atomCss,
