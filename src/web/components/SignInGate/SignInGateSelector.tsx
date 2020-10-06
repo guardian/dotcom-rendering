@@ -3,7 +3,7 @@ import { useAB } from '@guardian/ab-react';
 import { ABTest, Runnable } from '@guardian/ab-core';
 import { constructQuery } from '@root/src/lib/querystring';
 
-import { setUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
+import { incrementUserDismissedGateCount, setUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
 import {
     SignInGateComponent,
     CurrentABTest,
@@ -51,6 +51,7 @@ const dismissGate = (
 ) => {
     setShowGate(false);
     setUserDismissedGate(currentAbTestValue.variant, currentAbTestValue.name);
+    incrementUserDismissedGateCount(currentAbTestValue.variant, currentAbTestValue.name);
 
     // When the user closes the sign in gate, we scroll them back to the main content
     const articleBody = document.querySelector(
@@ -74,13 +75,13 @@ const tests: ReadonlyArray<ABTest> = [
 const testVariantToGateMapping: GateTestMap = {
     'patientia-control-1': gatePatientiaControl,
     'patientia-variant-1': gatePatientiaVariant,
-    'main-control-1': gateMainControl,
-    'main-variant-1': gateMainVariant,
+    'main-control-2': gateMainControl,
+    'main-variant-2': gateMainVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
-    SignInGateMainVariant: 'main_variant_1',
-    SignInGateMainControl: 'main_control_1',
+    SignInGateMainVariant: 'main_variant_2',
+    SignInGateMainControl: 'main_control_2',
     SignInGatePatientia: 'patientia_test',
 };
 
