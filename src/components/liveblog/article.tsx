@@ -15,7 +15,7 @@ import { PillarStyles, getPillarStyles } from 'pillarStyles';
 import { Liveblog, getFormat } from 'item';
 import HeaderMedia from 'headerMedia';
 import { remSpace } from '@guardian/src-foundations';
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 const LiveblogArticleStyles: SerializedStyles = css`

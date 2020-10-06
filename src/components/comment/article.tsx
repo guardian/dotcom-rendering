@@ -19,7 +19,7 @@ import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //

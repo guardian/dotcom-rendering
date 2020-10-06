@@ -15,7 +15,7 @@ import { Item } from 'item';
 import Headline from 'components/headline';
 import HeaderMedia from 'headerMedia';
 import RelatedContent from 'components/shared/relatedContent';
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //

@@ -3,17 +3,15 @@
 
 import React, { FC } from 'react';
 import { Footer } from "@guardian/src-footer"
+import { footerContents } from './shared/footer';
 
-interface FooterProps {
-    showBackToTop: boolean;
-}
 
-const Wrapper: FC<FooterProps> = ({showBackToTop}) => <Footer showBackToTop={true} />
+const FooterCcpa = () => <Footer>{footerContents(true)}</Footer>
 
 // ----- Stories ----- //
 
 const Default: FC = () =>
-    <Wrapper showBackToTop={true} />
+    <FooterCcpa />
 
 export default {
     title: 'Footer',

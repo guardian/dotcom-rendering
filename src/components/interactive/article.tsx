@@ -1,4 +1,4 @@
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 // ----- Imports ----- //
 
 import React, { ReactNode, FC } from 'react';

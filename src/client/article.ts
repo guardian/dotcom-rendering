@@ -10,7 +10,7 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
-import WithChildrenBlue from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 
@@ -119,7 +119,7 @@ function insertEpic(): void {
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
-        const comp = h(WithChildrenBlue, {isCcpa: isOptedIn});
+        const comp = h(FooterCcpa, {isCcpa: isOptedIn});
         ReactDOM.render(comp, document.getElementById('articleFooter'));
     }).catch((error)=>{
         console.log(error);

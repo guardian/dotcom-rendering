@@ -10,7 +10,7 @@ import React from 'react';
 const container = css`
 		border-style: solid;
 		border-color: ${brandBorder.primary};
-		border-width: 0 1px 0 1px;
+		border-width: 0 1px;
 	
 `
 
@@ -51,12 +51,12 @@ const link2 = css`
 	border-right-width: 1px;
 `
 
-const CcpaListItem = (val: bool) => {
-    if (val){
+const CcpaListItem = (ccpaStatus: bool) => {
+    if (ccpaStatus){
         return (
             <li css={[li, link2]}>
 				<a  id='testing' css={anchor} href="https://www.theguardian.com/ccpaoptedin">
-					CCPA
+					California Residents - Do not sell
 				</a>
 			</li>
         )
@@ -66,9 +66,7 @@ const CcpaListItem = (val: bool) => {
 }
 
 
-export const footerContents = (ccpabool: boolean): JSX.Element=>{
-    console.log(`>>---.>>  ${ccpabool}`);
-    
+export const footerContents = (ccpabool: boolean): JSX.Element=>{    
     return (
         <div css={container}>
             <p css={para}>
@@ -97,6 +95,6 @@ interface footerCcpaProps {
     isCcpa: boolean;
 }
 
-const FooterCcpa = ({ isCcpa }: footerCcpaProps) => <Footer>{footerContents(isCcpa)}</Footer>
+const FooterCcpa = ({ isCcpa }: footerCcpaProps) => <Footer>{footerContents(true)}</Footer>
 
 export default FooterCcpa;

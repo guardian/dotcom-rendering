@@ -21,7 +21,7 @@ import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //

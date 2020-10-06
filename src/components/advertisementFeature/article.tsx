@@ -18,7 +18,7 @@ import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import RelatedContent from 'components/shared/relatedContent';
-import FooterCcpa from 'components/shared/footerStyles';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //
