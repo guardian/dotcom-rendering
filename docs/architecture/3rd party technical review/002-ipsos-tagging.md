@@ -1,4 +1,4 @@
-# MoDI Proof of Concept
+# Ipsos Mori tagging
 
 ## Metadata
 
@@ -86,7 +86,7 @@ Similar security and data privacy considerations are applicable also for AMP. Th
 
 ## Perfomance engineering review
 
-Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 47kB in an initial experiment.
+Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 47kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is larger than google analytics and 15x the size of comscore.
 
 One of the responses appears not to be gzipped which may hold a small performance gain:
 
