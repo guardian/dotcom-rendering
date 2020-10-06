@@ -95,6 +95,6 @@ interface footerCcpaProps {
     isCcpa: boolean;
 }
 
-const FooterCcpa = ({ isCcpa }: footerCcpaProps) => <Footer>{footerContents(true)}</Footer>
+const FooterCcpa = ({ isCcpa }: footerCcpaProps) => <Footer>{footerContents(isCcpa)}</Footer>
 
 export default FooterCcpa;
