@@ -598,7 +598,12 @@ const render = (format: Format, excludeStyles = false) =>
 
         case ElementKind.AudioAtom: {
             const { pillar } = format;
-            return h('div', { ...element, pillar: pillar.valueOf(), className: 'js-audio-atom audio-atom' }, h(AudioAtom, { ...element, pillar }))
+            const audioAtomStyles = css`
+                figure {
+                    margin: 0;
+                }
+            `;
+            return styledH('div', { ...element, pillar, className: 'js-audio-atom', css: audioAtomStyles }, h(AudioAtom, { ...element, pillar }))
         }
     }
 };

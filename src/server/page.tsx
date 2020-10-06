@@ -71,10 +71,6 @@ const styles = (format: Format): string => `
         line-height: 1.5;
     }
 
-    .audio-atom figure {
-        margin: 0;
-    }
-
     @media (prefers-color-scheme: dark) {
         body {
             background: transparent;

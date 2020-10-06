@@ -10,8 +10,6 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { AudioAtom } from '@guardian/atoms-rendering';
-import { Pillar } from '@guardian/types/Format';
-
 
 // ----- Run ----- //
 
@@ -231,10 +229,9 @@ function initAudioAtoms(): void {
             const trackUrl = atom.getAttribute('trackurl');
             const kicker = atom.getAttribute('kicker');
             const title = atom.getAttribute('title');
-            const pillar = Pillar.Culture;
-
+            const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
             if (id && trackUrl && kicker && title && pillar) {
-                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, kicker, title, pillar }), atom)
+                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, pillar, kicker, title }), atom)
             }
         })
 }
