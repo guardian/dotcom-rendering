@@ -224,7 +224,7 @@ function hasSeenCards(): void {
     })
 }
 
-function initAudioAtoms() {
+function initAudioAtoms(): void {
     Array.from(document.querySelectorAll('.js-audio-atom'))
         .forEach(atom => {
             const id = atom.getAttribute('id');
