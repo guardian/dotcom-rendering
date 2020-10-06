@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { includesTweets } from 'capi';
+import { includesInstagram, includesSpotify, includesTweets, includesYoutube } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -82,6 +82,9 @@ function renderHead(
     item: Item,
     request: RenderingRequest,
     hasTweets: boolean,
+    hasInstagram: boolean,
+    hasYoutube: boolean,
+    hasSpotify: boolean,
     itemStyles: string,
     emotionIds: string[],
 ): string {
@@ -89,7 +92,7 @@ function renderHead(
     const cspString = csp(item, {
         scripts: [ atomScript ],
         styles: [ generalStyles, itemStyles, atomCss ],
-    }, hasTweets);
+    }, hasTweets, hasInstagram, hasYoutube, hasSpotify);
     const meta = h(Meta, { title: request.content.webTitle, cspString});
 
     return `
@@ -130,8 +133,11 @@ function render(
     const item = fromCapi({ docParser, salt: imageSalt })(request);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const hasTweets = includesTweets(request.content);
+    const hasInstagram = includesInstagram(request.content);
+    const hasYoutube = includesYoutube(request.content);
+    const hasSpotify = includesSpotify(request.content);
     const body = renderBody(item, request);
-    const head = renderHead(item, request, hasTweets, body.css, body.ids);
+    const head = renderHead(item, request, hasTweets, hasInstagram, hasYoutube, hasSpotify, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;
 
     return { html: buildHtml(head, body.html, scripts), clientScript };
