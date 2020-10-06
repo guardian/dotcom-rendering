@@ -49,8 +49,8 @@ const itemStyles = (item: Item): SerializedStyles => {
     switch (item.display) {
         case Display.Immersive:
             return css`
-                p:first-of-type:first-letter,
-                hr + p:first-letter {
+                > p:first-of-type:first-letter,
+                > hr + p:first-letter {
                     color: ${kicker};
                     display: inline-block;
                     vertical-align: text-top;
