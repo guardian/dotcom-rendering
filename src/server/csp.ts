@@ -75,7 +75,13 @@ const buildCsp = ({ styles, scripts }: Assets, twitter: boolean, instagram: bool
     connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/
 `.trim();
 
-function csp(item: Item, additionalAssets: Assets, twitter: boolean, instagram: boolean, youtube: boolean, spotify: boolean ): string {
+function csp(
+    item: Item, 
+    additionalAssets: Assets, 
+    twitter: boolean, 
+    instagram: boolean, 
+    youtube: boolean, 
+    spotify: boolean ): string {
     const interactives = interactiveAssets(item);
     const assets = {
         styles: [ ...interactives.styles, ...additionalAssets.styles ],
