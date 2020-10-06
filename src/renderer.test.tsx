@@ -396,13 +396,20 @@ describe('Renders different types of elements', () => {
            act(() => {
                renderDom(node, container);
            });
+
            const likeButton = container.querySelector('[data-testid="like"]');
            const dislikeButton = container.querySelector('[data-testid="dislike"]');
            const feedback = container.querySelector('[data-testid="feedback"]');
            expect(feedback?.getAttribute('hidden')).toBe("")
-           dislikeButton.simulate('click');
-           likeButton.simulate('click');
-           expect(feedback.html()).not.toContain('hidden=""');
+
+           act(() => {
+            dislikeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+          });
+           act(() => {
+            likeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+          });
+
+           expect(feedback!.textContent).not.toBe('hidden=""');
            unmountComponentAtNode(container);
            container.remove();
        }
