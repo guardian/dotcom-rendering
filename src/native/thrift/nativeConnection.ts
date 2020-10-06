@@ -63,11 +63,9 @@ export class NativeConnection<Context = void> extends ThriftConnection {
 
     constructor(Transport: ITransportConstructor, Protocol: IProtocolConstructor) {
         super(Transport, Protocol);
-        try {
+        if (typeof window !== 'undefined') {
             window.nativeConnections = window.nativeConnections || {};
             window.nativeConnections[this.connectionId] = this
-        } catch(error) {
-            console.error(error);
         }
     }
     
