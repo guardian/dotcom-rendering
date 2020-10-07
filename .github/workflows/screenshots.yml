@@ -51,14 +51,14 @@ jobs:
         echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/screenshot.png"
         echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/screenshot.png"
     - name: Search for previous screenshot comment
-      if: ${{ github.ref != 'main' }}
+      if: ${{ github.event_name == 'pull_request' }}
       uses: peter-evans/find-comment@v1
       id: fc
       with:
         issue-number: ${{ github.event.pull_request.number }}
         body-includes: <!-- github-actions-screenshots -->
     - name: Create comment if necessary
-      if: ${{ github.ref != 'main' && steps.fc.outputs.comment-id == '' }} 
+      if: ${{ github.event_name == 'pull_request' && steps.fc.outputs.comment-id == '' }} 
       uses: peter-evans/create-or-update-comment@v1
       with:
         issue-number: ${{ github.event.pull_request.number }}
@@ -68,7 +68,7 @@ jobs:
           | --- | --- |
           | <img src="${{ steps.image-urls.outputs.before }}" width="300px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="300px" /> |
     - name: Update comment if necessary
-      if: ${{ github.ref != 'main' && steps.fc.outputs.comment-id != '' }} 
+      if: ${{ github.event_name == 'pull_request' && steps.fc.outputs.comment-id != '' }} 
       uses: peter-evans/create-or-update-comment@v1
       with:
         comment-id: ${{ steps.fc.outputs.comment-id }}
