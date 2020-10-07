@@ -17,6 +17,7 @@ import { MatchReport } from '@root/fixtures/articles/MatchReport';
 import { NAV } from '@root/fixtures/NAV';
 
 import { HydrateApp } from '@root/src/web/components/HydrateApp';
+import { atomIframe } from '@root/src/web/browser/atomIframe/atomIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
@@ -48,6 +49,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
     useEffect(() => {
         const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
         HydrateApp({ CAPI, NAV });
+        atomIframe();
     }, [ServerCAPI]);
     return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
