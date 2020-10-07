@@ -43,7 +43,12 @@ const imageElement = (): BodyElement =>
        role: none,
    });
 
-const imageElementWithRole = () =>
+   enum Role {
+    Thumbnail,
+    HalfWidth,
+    Card
+}
+const imageElementWithRole = (): ReactNode =>
    ({
        ...imageElement(),
        role: some(Role.Thumbnail)
