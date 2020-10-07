@@ -382,7 +382,7 @@ describe('Renders different types of elements', () => {
    test('ElementKind.ChartAtom', () => {
        const nodes = render(chartElement())
        const chart = nodes.flat()[0];
-       expect(getHtml(chart)).toContain('srcDoc=\"&lt;main&gt;Chart content&lt;/main&gt;\"');
+       expect(getHtml(chart)).toContain('srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"');
    })
 
 
