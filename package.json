@@ -47,7 +47,7 @@
     "@guardian/src-radio": "^2.4.0",
     "@guardian/src-text-area": "^2.4.0",
     "@guardian/src-text-input": "^2.4.0",
-    "@guardian/types": "github:guardian/types#semver:^0.4.4",
+    "@guardian/types": "github:guardian/types#semver:^0.4.5",
     "@types/jsdom": "^16.2.4",
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.767.0",
