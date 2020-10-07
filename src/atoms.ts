@@ -256,7 +256,7 @@ function parseAtom(
             const { kicker, trackUrl } = atom?.data?.audio;
 
             if (!title) {
-                return err(`No videoId for atom: ${id}`);
+                return err(`No title for audio atom with id: ${audioId}`);
             }
 
             return ok({
