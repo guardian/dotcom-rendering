@@ -43,15 +43,19 @@ const imageElement = (): BodyElement =>
        role: none,
    });
 
-   enum Role {
-    Thumbnail,
-    HalfWidth,
-    Card
-}
-const imageElementWithRole = (): ReactNode =>
+const imageElementWithRole = (): BodyElement =>
    ({
-       ...imageElement(),
-       role: some(Role.Thumbnail)
+        kind: ElementKind.Image,
+        src: 'https://theguardian.com/image.jpg',
+        srcset: '',
+        dpr2Srcset: '',
+        alt: some("alt tag"),
+        caption: some(JSDOM.fragment('this caption contains <em>html</em>')),
+        nativeCaption: some('caption'),
+        credit: some('credit'),
+        width: 500,
+        height: 500,
+        role: some(Role.Thumbnail)
    })
 
 const pullquoteElement = (): BodyElement =>
