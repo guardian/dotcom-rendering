@@ -17,6 +17,7 @@ interface AudioAtomBlockElement {
     trackUrl: string;
     duration: number;
     coverUrl: string;
+    audioIndex?: number;
 }
 
 interface AudioBlockElement {

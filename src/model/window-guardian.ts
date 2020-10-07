@@ -212,6 +212,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             'model.dotcomrendering.pageElements.ChartAtomBlockElement',
             'chartIndex',
         ),
+        audioAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+            'audioIndex',
+        ),
     };
 };
 

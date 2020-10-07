@@ -116,9 +116,9 @@ const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
     width: 90%;
     min-height: 107px;
 
-    margin-top: -42px;
+    margin-top: -21px;
     ${from.desktop} {
-        margin-top: -48px;
+        margin-top: -23px;
     }
 
     flex-grow: 1;
@@ -161,17 +161,27 @@ const dotsStyle = css`
     }
 `;
 
-const dotStyle = css`
+const dotStyle = (index: number) => css`
     display: inline-block;
     height: ${space[3]}px;
     width: ${space[3]}px;
     background-color: ${palette.neutral[93]};
     border-radius: 50%;
     margin-right: ${space[1]}px;
+
+    /* This is a bit of a hack for the test, while we think of better UX here.
+    It's very fragile to things like carousel item count.*/
+    ${from.phablet} {
+        display: ${index >= 7 ? 'none' : 'auto'};
+    }
+
+    ${from.desktop} {
+        display: ${index >= 6 ? 'none' : 'auto'};
+    }
 `;
 
-const dotActiveStyle = css`
-    ${dotStyle};
+const dotActiveStyle = (index: number) => css`
+    ${dotStyle(index)};
     background-color: ${palette.news.main};
 `;
 
@@ -238,6 +248,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
         <a
             href={trail.url}
             className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
+            data-link-name="article"
         >
             <img
                 className={cardImageStyle}
@@ -362,7 +373,10 @@ export const Carousel: React.FC<OnwardsType> = ({
     ));
 
     return (
-        <div className={wrapperStyle}>
+        <div
+            className={wrapperStyle}
+            data-link-name={formatAttrString(heading)}
+        >
             <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
                 <div />
             </LeftColumn>
@@ -374,7 +388,7 @@ export const Carousel: React.FC<OnwardsType> = ({
                 <div className={navRowStyles}>
                     <Title title={heading} />
 
-                    <div className={navIconStyle}>
+                    <div className={navIconStyle} data-link-name="nav-arrow">
                         <button onClick={prev} className={buttonStyle}>
                             <SvgChevronLeftSingle />
                         </button>
@@ -387,7 +401,9 @@ export const Carousel: React.FC<OnwardsType> = ({
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
                         <span
-                            className={i === index ? dotActiveStyle : dotStyle}
+                            className={
+                                i === index ? dotActiveStyle(i) : dotStyle(i)
+                            }
                         />
                     ))}
                 </div>

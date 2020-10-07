@@ -47,7 +47,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
@@ -75,6 +75,7 @@ const gridTemplateWidePreFurnished = css`
 
 const gridTemplateLeftCol = css`
     grid-template-areas:
+        'preFurniture  right-column'
         'title         right-column'
         'headline      right-column'
         'standfirst    right-column'
@@ -87,7 +88,6 @@ const gridTemplateLeftCol = css`
 
 const gridTemplateLeftColPreFurnished = css`
     grid-template-areas:
-        'preFurniture  right-column'
         'title         right-column'
         'headline      right-column'
         'standfirst    right-column'
@@ -631,7 +631,7 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );

@@ -2260,20 +2260,20 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^1.11.2":
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.11.2.tgz#da392c908848ef6ba8d4bc731da2a9c422f90612"
-  integrity sha512-xARDBnWZQx2hTGeJZLw7O3+KGy6UPyDaz5ll2FqItB/1bOZQjV3BV43UkjAIOP2iUrjncMk2/q0+mjqE7rSiTQ==
+"@guardian/atoms-rendering@^1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-1.13.0.tgz#3b8bdb7a74db83a6ff5437af39fd58270b24748d"
+  integrity sha512-DNwlF7X4OkHeTiEEzhTaw1z9qCckTOEspxc4EegHfYw0KRnjuRR/+KFOc/Ckz7Bb1tg475XJzO7Kr0BHSIcMEg==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.10.tgz#a5e49f06a2ec81ad7f3c4bf2f81ebe6b39ab1dee"
-  integrity sha512-1vwhZpg9wSY0oCGERcblz3QcOvtguUSSpexJdmwB4HoO+sDVcVXkNeaceDzRQdlnGO89JxpGiSOuIBzpssBJWg==
+"@guardian/braze-components@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.11.tgz#93bc757be9b273fb3d305e9f0321862696a7aee4"
+  integrity sha512-mkBliGKiqHN4jm3N/Jy+JVNfmZESvNT9lO4pwiMvjiy9TaN/yW9ZWRVelsXHw05qcqlQsuiRp/B85htxz3Tk+Q==
   dependencies:
     "@guardian/src-button" "^2.1.0"
     "@guardian/src-foundations" "^2.1.0"
@@ -2281,10 +2281,10 @@
     "@guardian/src-icons" "^2.2.0"
     emotion-theming "^10.0.19"
 
-"@guardian/consent-management-platform@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.0.0.tgz#81eea5a8a965f1d94b8271ba946a2e59697487ec"
-  integrity sha512-ruroeF+lEcNQlRwUljd/PgWXDjriqlPJp5V9C1511ss5ItawFIJANm5ubJKidlMMpANcalqPudQuDnpCweHd6w==
+"@guardian/consent-management-platform@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.1.0.tgz#0de83ca15d37a60bd79f2e95046ca68d8cc5141d"
+  integrity sha512-EVRoGDSk78UK9+0ILHkkubWjLdBvNrvmObwNfbrYxXnfOtyszGuy+mfhtGtLAXUKf85w+7nXnY/hKRmz4MfyeQ==
 
 "@guardian/discussion-rendering@^2.6.0":
   version "2.6.0"
