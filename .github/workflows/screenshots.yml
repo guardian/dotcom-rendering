@@ -51,6 +51,7 @@ jobs:
         echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/screenshot.png"
         echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/screenshot.png"
     - name: Search for previous screenshot comment
+      if: ${{ github.ref != 'main' }}
       uses: peter-evans/find-comment@v1
       id: fc
       with:
