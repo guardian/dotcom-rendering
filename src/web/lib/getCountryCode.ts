@@ -46,15 +46,13 @@ export const setCountryCodeSynchronous = (countryCode: string): void => {
 };
 
 export const getCountryCodeFromLocalStorage = (): string | null => {
-    let localCountryCode: LocalCountryCodeType | null;
     try {
         const item = localStorage.getItem(COUNTRY_CODE_KEY);
-        localCountryCode = item ? JSON.parse(item) : null;
+        const localCountryCode = item ? JSON.parse(item) : null;
+        return localCountryCode.value || null
     } catch (error) {
-        localCountryCode = null;
+        return null
     }
-
-    return (localCountryCode && localCountryCode.value) || null
 };
 
 export const getCountryCode = async () => {
