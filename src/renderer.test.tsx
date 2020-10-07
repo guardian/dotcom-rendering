@@ -1,19 +1,20 @@
+import { renderAll, renderAllWithoutStyles, renderStandfirstText, renderText, transformHref } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from 'image';
-import { configure } from 'enzyme';
+// import { configure } from 'enzyme';
 import { none, some } from '@guardian/types/option';
-import Adapter from 'enzyme-adapter-react-16';
+// import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
  
  
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 const mockFormat: Format = {
    pillar: Pillar.News,
    design: Design.Article,
