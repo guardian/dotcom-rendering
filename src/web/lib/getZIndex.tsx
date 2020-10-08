@@ -57,3 +57,6 @@ const decideIndex = (name: string): number | null => {
 
 export const getZIndex = (zIndex: ZIndex): string =>
     `z-index: ${decideIndex(zIndex)};`;
+
+export const getZIndexImportant = (zIndex: ZIndex): string =>
+    `z-index: ${decideIndex(zIndex)} !important;`;

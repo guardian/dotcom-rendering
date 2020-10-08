@@ -248,6 +248,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
         <a
             href={trail.url}
             className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
+            data-link-name="article"
         >
             <img
                 className={cardImageStyle}
@@ -372,7 +373,10 @@ export const Carousel: React.FC<OnwardsType> = ({
     ));
 
     return (
-        <div className={wrapperStyle}>
+        <div
+            className={wrapperStyle}
+            data-link-name={formatAttrString(heading)}
+        >
             <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
                 <div />
             </LeftColumn>
@@ -384,7 +388,7 @@ export const Carousel: React.FC<OnwardsType> = ({
                 <div className={navRowStyles}>
                     <Title title={heading} />
 
-                    <div className={navIconStyle}>
+                    <div className={navIconStyle} data-link-name="nav-arrow">
                         <button onClick={prev} className={buttonStyle}>
                             <SvgChevronLeftSingle />
                         </button>

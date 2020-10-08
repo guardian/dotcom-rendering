@@ -41,7 +41,7 @@ export const YoutubeBlockComponent = ({
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
 
     return (
-        <>
+        <div data-chromatic="ignore">
             <YoutubeAtom
                 format={asFormat(pillar, display, designType)}
                 videoMeta={element}
@@ -62,6 +62,6 @@ export const YoutubeBlockComponent = ({
                     shouldLimitWidth={shouldLimitWidth}
                 />
             )}
-        </>
+        </div>
     );
 };
