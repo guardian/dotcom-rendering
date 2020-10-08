@@ -84,7 +84,7 @@ const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? null
-        : <div id="epic-placeholder">
+        : <div css={articleWidthStyles} id="epic-placeholder">
             <Epic
                 title=""
                 body=""
