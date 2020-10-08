@@ -323,17 +323,17 @@ export const App = ({ CAPI, NAV }: Props) => {
         // the UI is injected automatically into the page,
         // and is not a react component, so it's
         // handled in here.
-        if (CAPI.config.switches.consentManagement && countryCode) {
+        if (CAPI.config.switches.consentManagement && countryCode && window.guardian?.config?.ophan?.pageViewId) {
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
             cmp.init({
                 isInUsa: countryCode === 'US',
                 pubData: {
                     browserId: getCookie('bwid') || undefined,
-                    pageViewId: window.guardian.config.ophan.pageViewId,
+                    pageViewId: window.guardian?.config?.ophan?.pageViewId,
                 },
             });
         }
-    }, [countryCode, CAPI.config.switches.consentManagement]);
+    }, [countryCode, CAPI.config.switches.consentManagement, window.guardian?.config?.ophan?.pageViewId]);
 
     const pillar = decidePillar(CAPI);
 
