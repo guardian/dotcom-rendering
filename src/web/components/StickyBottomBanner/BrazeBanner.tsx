@@ -10,8 +10,16 @@ import { CanShowResult } from './bannerPicker';
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
+type Meta = {
+    dataFromBraze: {
+        [key: string]: string;
+    };
+    logImpressionWithBraze: () => void;
+    logButtonClickWithBraze: (id: number) => void;
+};
+
 type Props = {
-    meta: any;
+    meta: Meta;
 };
 
 const containerStyles = emotion.css`
@@ -85,7 +93,7 @@ const getMessageFromBraze = async (
                 appboy.logInAppMessageButtonClick(thisButton, message);
             };
 
-            const logImpression = () => {
+            const logImpressionWithBraze = () => {
                 // Log the impression with Braze
                 appboy.logInAppMessageImpression(message);
             };
@@ -93,7 +101,7 @@ const getMessageFromBraze = async (
             if (extras) {
                 const meta = {
                     dataFromBraze: extras,
-                    logImpression,
+                    logImpressionWithBraze,
                     logButtonClickWithBraze,
                 };
                 resolve({ result: true, meta });
@@ -107,6 +115,30 @@ const getMessageFromBraze = async (
     });
 };
 
+const getBrazeMetaFromQueryString = (): Meta | null => {
+    if (URLSearchParams) {
+        const params = new URLSearchParams(window.location.search);
+        const qsArg = 'force-braze-message';
+        const value = params.get(qsArg);
+        if (value) {
+            try {
+                const dataFromBraze = JSON.parse(value);
+
+                return {
+                    dataFromBraze,
+                    logImpressionWithBraze: () => {},
+                    logButtonClickWithBraze: () => {},
+                };
+            } catch (e) {
+                // Parsing failed. Log a message and fall through.
+                console.log(`There was an error with ${qsArg}: `, e.message);
+            }
+        }
+    }
+
+    return null;
+};
+
 // We can show a Braze banner if:
 // - The Braze switch is on
 // - We have a Braze API key
@@ -116,10 +148,20 @@ const getMessageFromBraze = async (
 // - The user has given Consent via CCPA or TCFV2
 // - The Braze websdk appboy initialisation does not throw an error
 // - The Braze app Boy subscription to in app message returns meta info
+// OR
+// - The force-braze-message query string arg is passed
 export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
+    const forcedBrazeMeta = getBrazeMetaFromQueryString();
+    if (forcedBrazeMeta) {
+        return {
+            result: true,
+            meta: forcedBrazeMeta,
+        };
+    }
+
     const { brazeSwitch } = window.guardian.config.switches;
     const apiKey = window.guardian.config.page.brazeApiKey;
 
@@ -151,7 +193,7 @@ export const canShow = async (
 };
 
 type InnerProps = {
-    meta: any;
+    meta: Meta;
     BrazeComponent: React.FC<BrazeBannerProps>;
 };
 
@@ -161,7 +203,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 }: InnerProps) => {
     useEffect(() => {
         // Log the impression with Braze
-        meta.logImpression();
+        meta.logImpressionWithBraze();
 
         // Log VIEW event with Ophan
         submitComponentEvent({
