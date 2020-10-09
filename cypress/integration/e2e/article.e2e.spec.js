@@ -2,15 +2,20 @@ import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
+import { setUrlFragment } from '../../lib/setUrlFragment.js';
 
 describe('E2E Page rendering', function () {
     before(getPolyfill);
     beforeEach(setupApiRoutes);
 
     describe('for WEB', function () {
-        it(`It should load the designType under the pillar`, function () {
-            articles.map((article, index) => {
-                const { url, designType, pillar } = article;
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        articles.map((article, index) => {
+            it(`It should load the designType under the pillar (${article.url})`, function () {
+                const { url: articleUrl, designType, pillar } = article;
+                const url = setUrlFragment(articleUrl, {
+                    'ab-CuratedContainerTest': 'control',
+                });
                 cy.log(`designType: ${designType}, pillar: ${pillar}`);
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
                 const roughLoadPositionOfMostView = 1400;
