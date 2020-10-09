@@ -9,17 +9,18 @@ import { isObject } from 'lib';
 // ----- Procedures ----- //
 
 function handleMessage(interactive: HTMLIFrameElement, message: string): void {
-
     try {
         const parsed: unknown = JSON.parse(message);
-
-        if (isObject(parsed) && parsed.type === 'set-height' && typeof parsed.value === 'string') {
-            interactive.height = parsed.value;
+        if (isObject(parsed) && parsed.type === 'set-height') {
+            if (typeof parsed.value === 'string') {
+                interactive.height = parsed.value;
+            } else if (typeof parsed.value === 'number') {
+                interactive.height = `${parsed.value}`;
+            }
         }
     } catch (e) {
         logger.error(e);
     }
-
 }
 
 const updateInteractives = (interactives: Element[]) => ({ data, source }: MessageEvent): void =>
@@ -30,10 +31,8 @@ const updateInteractives = (interactives: Element[]) => ({ data, source }: Messa
     });
 
 function interactives(): void {
-
     const interactives = Array.from(document.querySelectorAll('.interactive iframe'));
     window.addEventListener('message', updateInteractives(interactives), false);
-
 }
 
 function twitter(): void {

@@ -13,8 +13,7 @@ import Metadata from 'components/metadata';
 import OptionalLogo from 'components/shared/logo';
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
-import { Keyline } from 'components/shared/keyline';
+import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
 import { getPillarStyles } from 'pillarStyles';
 import { Display } from '@guardian/types/Format';
@@ -50,8 +49,8 @@ const itemStyles = (item: Item): SerializedStyles => {
     switch (item.display) {
         case Display.Immersive:
             return css`
-                p:first-of-type:first-letter,
-                hr + p:first-letter {
+                > p:first-of-type:first-letter,
+                > hr + p:first-letter {
                     color: ${kicker};
                     display: inline-block;
                     vertical-align: text-top;
@@ -79,11 +78,19 @@ interface Props {
     children: ReactNode[];
 }
 
+
 const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
-        ? <div id="epic-container"></div>
-        : null
+        ? null
+        : <div id="epic-placeholder">
+            <Epic
+                title=""
+                body=""
+                firstButton=""
+                secondButton=""
+            />
+        </div>
 
     return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
@@ -95,7 +102,9 @@ const Standard: FC<Props> = ({ item, children }) => {
                     <Standfirst item={item} />
                     <ImmersiveCaption item={item} />
                 </div>
-                <Keyline {...item} />
+                <div css={lineStyles}>
+                    <Lines count={4}/>
+                </div>
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
                     {OptionalLogo(item)}

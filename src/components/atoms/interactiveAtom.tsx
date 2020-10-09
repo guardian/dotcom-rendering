@@ -38,7 +38,8 @@ const atomScript = `
         window.frameElement.height = document.body.offsetHeight;
     }
     window.addEventListener('resize', resize);
-    resize();`
+    setTimeout(resize, 1000);
+`
 
 const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
     const { html, styles, js, format } = props;
@@ -57,6 +58,11 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps):
         {markup}
     </>
 }
+
+InteractiveAtom.defaultProps = {
+    html: "",
+    styles: ""
+};
 
 export default InteractiveAtom;
 export {

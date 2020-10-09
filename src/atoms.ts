@@ -4,6 +4,16 @@ import { Result, err, ok } from '@guardian/types/result';
 import { BodyElement, ElementKind } from "bodyElement";
 import { fromNullable } from '@guardian/types/option';
 import { DocParser } from "types/parserContext";
+import Int64 from 'node-int64';
+import { isValidDate } from "date";
+import { atomScript } from "components/atoms/interactiveAtom";
+
+function formatOptionalDate(date: Int64 | undefined): string | undefined {
+    if (date === undefined) return undefined;
+    const d = new Date(date.toNumber());
+    if (!isValidDate(d)) return undefined;
+    return d.toDateString();
+}
 
 function parseAtom(
     element: BlockElement,
@@ -26,8 +36,8 @@ function parseAtom(
 
             const { html, css, mainJS: js } = atom?.data?.interactive;
 
-            if (!html || !css) {
-                return err(`No html or css for atom: ${id}`);
+            if (!html && !css && !js) {
+                return err(`No content for atom: ${id}`);
             }
 
             return ok({
@@ -46,6 +56,8 @@ function parseAtom(
             }
 
             const { title } = atom;
+            const image = atom.data.guide.guideImage?.master?.file;
+            const credit = atom.data.guide.guideImage?.master?.credit;
             const { body } = atom.data.guide.items[0];
 
             if (!title || !body) {
@@ -56,7 +68,9 @@ function parseAtom(
                 kind: ElementKind.GuideAtom,
                 html: body,
                 title,
-                id
+                id,
+                image,
+                credit
             });
         }
 
@@ -69,6 +83,8 @@ function parseAtom(
 
             const { title } = atom;
             const { body } = atom.data.qanda.item;
+            const image = atom.data.qanda.eventImage?.master?.file;
+            const credit = atom.data.qanda.eventImage?.master?.credit;
 
             if (!title || !body) {
                 return err(`No title or body for atom: ${id}`);
@@ -78,7 +94,111 @@ function parseAtom(
                 kind: ElementKind.QandaAtom,
                 html: body,
                 title,
-                id
+                id,
+                image,
+                credit
+            });
+        }
+
+        case "profile": {
+            const atom = atoms.profiles?.find(profile => profile.id === id);
+
+            if (atom?.data?.kind !== "profile" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const { body } = atom.data.profile.items[0];
+            const image = atom.data.profile.headshot?.master?.file;
+            const credit = atom.data.profile.headshot?.master?.credit;
+
+            if (!title || !body) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            return ok({
+                kind: ElementKind.ProfileAtom,
+                html: body,
+                title,
+                id,
+                image,
+                credit
+            });
+        }
+
+        case "chart": {
+            const hideChartAtoms = true;
+            if (hideChartAtoms) {
+                return err(`
+                    Chart atoms not currently supported. We need to find a solution
+                    to handling the inline styles.
+                    style-src 'unsafe-hashes' is CSP level 3 so works in Chrome but not Safari yet
+                `);
+            }
+
+            const atom = atoms.charts?.find(chart => chart.id === id);
+
+            if (atom?.data?.kind !== "chart" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title, defaultHtml } = atom;
+
+            if (!title || !defaultHtml) {
+                return err(`No title or defaultHtml for atom: ${id}`);``
+            }
+
+            const doc = docParser(defaultHtml);
+            const styles = Array.from(doc.querySelectorAll('style'))
+                .map(style => style.innerHTML);
+
+            const inlineStyles = Array.from(doc.querySelectorAll('[style]'))
+                .map(element => (element as HTMLElement).style.cssText);
+
+            const js = Array.from(doc.querySelectorAll('script'))
+                .map(script => script.innerHTML);
+
+            return ok({
+                kind: ElementKind.ChartAtom,
+                title,
+                id,
+                html: defaultHtml + `<script>${atomScript}</script>`,
+                css: [...styles, ...inlineStyles],
+                js
+            });
+        }
+
+        case "timeline": {
+            const atom = atoms.timelines?.find(timeline => timeline.id === id);
+
+            if (atom?.data?.kind !== "timeline" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { title } = atom;
+            const events = atom.data.timeline.events.map(event => ({
+                title: event.title,
+                date: formatOptionalDate(event.date) ?? '',
+                body: event.body,
+                toDate: formatOptionalDate(event.toDate),
+            }));
+
+            const description = atom.data.timeline.description;
+
+            if (!title || events.length === 0) {
+                return err(`No title or body for atom: ${id}`);
+            }
+
+            if (events.some(event => event.date === '')) {
+                return err('Invalid date in timeline atom');
+            }
+
+            return ok({
+                kind: ElementKind.TimelineAtom,
+                title,
+                id,
+                events,
+                description
             });
         }
 

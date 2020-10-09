@@ -24,7 +24,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { ExplainerAtom, GuideAtom, QandaAtom } from '@guardian/atoms-rendering';
+import { ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -515,6 +515,30 @@ const render = (format: Format, excludeStyles = false) =>
                 dislikeHandler: () => { console.log("dislike clicked"); },
                 expandCallback: () => { console.log("expand clicked"); }
             })
+        }
+
+        case ElementKind.ProfileAtom: {
+            return h(ProfileAtom, {
+                ...element,
+                pillar: pillarToString(format.pillar),
+                likeHandler: () => { console.log("like clicked"); },
+                dislikeHandler: () => { console.log("dislike clicked"); },
+                expandCallback: () => { console.log("expand clicked"); }
+            })
+        }
+
+        case ElementKind.TimelineAtom: {
+            return h(TimelineAtom, {
+                ...element,
+                pillar: pillarToString(format.pillar),
+                likeHandler: () => { console.log("like clicked"); },
+                dislikeHandler: () => { console.log("dislike clicked"); },
+                expandCallback: () => { console.log("expand clicked"); }
+            })
+        }
+
+        case ElementKind.ChartAtom: {
+            return h(ChartAtom, { ...element })
         }
 
         case ElementKind.InteractiveAtom: {

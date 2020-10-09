@@ -9,50 +9,49 @@ import { remSpace } from '@guardian/src-foundations';
 import { SvgArrowRightStraight } from "@guardian/src-icons"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
-
 import { acquisitionsClient } from 'native/nativeApi';
-
 
 // ----- Styles ----- //
 
-const EpicStyles = (): SerializedStyles => css`
-        width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
-        margin: ${remSpace[2]};
+const epicStyles: SerializedStyles = css`
+    width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
+    margin: ${remSpace[2]};
 
-        ${from.wide} {
-            margin: ${remSpace[2]} 0;
-        }
+    ${from.wide} {
+        margin: ${remSpace[2]} 0;
+    }
 
-        clear: both;
+    clear: both;
 
-        border-top: 1px solid ${brandAltBackground.primary};
-        background: ${neutral[97]};
-        padding: ${remSpace[2]};
-        ${body.medium()}
-        clear: left;
+    border-top: 1px solid ${brandAltBackground.primary};
+    background: ${neutral[97]};
+    padding: ${remSpace[2]};
+    ${body.medium()}
+    clear: left;
 
-        h1:first-of-type {
-            ${headline.large()}
-        }
+    h1:first-of-type {
+        margin-top: 0;
+        ${headline.xsmall()}
+    }
 
-        button {
-            margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
-        }
+    button {
+        margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
+    }
 
-        .button-container {
-            margin-top: ${remSpace[9]};
-        }
+    .button-container {
+        margin-top: ${remSpace[9]};
+    }
 
-        svg {
-            margin-left: ${remSpace[2]};
-            margin-top: -${remSpace[1]};
-            vertical-align: middle;
-        }
+    svg {
+        margin-left: ${remSpace[2]};
+        margin-top: -${remSpace[1]};
+        vertical-align: middle;
+    }
 
-        mark {
-            background: ${brandAltBackground.primary};
-            padding: .1rem .125rem;
-        }
+    mark {
+        background: ${brandAltBackground.primary};
+        padding: .1rem .125rem;
+    }
 `;
 
 
@@ -62,7 +61,7 @@ interface EpicProps {
     title: string;
     body: string;
     firstButton: string;
-    secondButton: string | undefined;
+    secondButton?: string;
 }
 
 const isElementPartiallyInViewport = (el: React.MutableRefObject<HTMLDivElement>): boolean => {
@@ -84,7 +83,7 @@ const debounce = (fn: () => void, time: number): () => void => {
 }
 
 function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
-    const [impressionSeen, setImpressionSeen] = useState(false);    
+    const [impressionSeen, setImpressionSeen] = useState(false);
     const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {
@@ -106,8 +105,8 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
         </Button>
 
     return (
-        <div css={EpicStyles} ref={epicContainer}>
-            <h1>{title}</h1>
+        <div css={epicStyles} ref={epicContainer}>
+            <h1 dangerouslySetInnerHTML={{__html: title}}></h1>
             <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">
                 <ThemeProvider theme={buttonReaderRevenue}>

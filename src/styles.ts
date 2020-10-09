@@ -13,7 +13,6 @@ export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
-
 export const sidePadding = css`
     padding-left: ${remSpace[2]};
     padding-right: ${remSpace[2]};
@@ -60,6 +59,25 @@ export const articleWidthStyles: SerializedStyles = css`
 
     ${from.phablet} {
         width: ${wideContentWidth}px;
+    }
+`;
+
+export const lineStyles = css`
+    ${from.wide} {
+        width: ${wideContentWidth}px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div {
+        ${darkModeCss`
+        background-image: repeating-linear-gradient(
+            to bottom,
+            ${neutral[20]},
+            ${neutral[20]} 1px,
+            transparent 1px,
+            transparent 3px
+            );
+    `}
     }
 `;
 

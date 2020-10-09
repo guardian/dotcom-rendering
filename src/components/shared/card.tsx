@@ -46,19 +46,22 @@ const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
             opacity: .7;
         }
 
-        img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
         ${darkModeCss`
-            background: ${neutral[20]};
+            background: ${neutral[7]};
         `}
     `;
 }
+
+
+const fullWidthImage = css`
+    img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+`;
 
 const timeStyles = css`
     ${textSans.small()};
@@ -86,7 +89,7 @@ const anchorStyles = css`
 
 const headingWrapperStyles = css`
     padding: ${remSpace[2]};
-    min-height: 150px;
+    min-height: 10rem;
 `
 
 const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
@@ -104,8 +107,12 @@ const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
 }
 
 const imageWrapperStyles = css`
-    padding-bottom: 56.25%;
+    padding-bottom: 8.25rem;
     position: relative;
+`;
+
+const imageBackground = css`
+    background: ${neutral[86]};
 `;
 
 const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
@@ -132,7 +139,6 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
                 ${headline.xxxsmall({ lineHeight: 'regular', fontWeight: 'light' })};
                 h3 {
                     box-shadow: inset 0 -0.025rem ${border.primary(format)};
-                    padding-bottom: 0.2rem;
                     display: inline;
 
                     ${darkModeCss`
@@ -213,17 +219,15 @@ const iconStyles = (format: Format): SerializedStyles => {
     `;
 }
 
-const commentIconStyle = (): SerializedStyles => {
-    return css`
-        width: 2.0rem;
-        height: 1.4375rem;
-        display: inline-block;
-        fill: ${opinion[400]};
-        vertical-align: text-top;
-        margin-top: -3px;
-        margin-right: -2px;
-    `;
-}
+const commentIconStyle: SerializedStyles = css`
+    width: 2.0rem;
+    height: 1.4375rem;
+    display: inline-block;
+    fill: ${opinion[400]};
+    vertical-align: text-top;
+    margin-top: -3px;
+    margin-right: -2px;
+`;
 
 const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
     switch (itemType){
@@ -251,6 +255,10 @@ const metadataStyles: SerializedStyles = css`
     min-height: 2rem;
 `;
 
+const bylineStyles: SerializedStyles = css`
+    color: ${opinion[400]};
+`;
+
 const durationMedia = (duration: Option<string>): ReactElement | null => {
     return pipe2(
         duration,
@@ -268,6 +276,41 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     )
 }
 
+const byline = (relatedItem: RelatedItem): ReactElement | null => {
+    if (relatedItem.type !== RelatedItemType.COMMENT){
+        return null;
+    }
+
+    return pipe2(
+        fromNullable(relatedItem.byline),
+        map(byline => {
+            return <div css={bylineStyles}>{byline}</div>
+        }),
+        withDefault<ReactElement | null>(null)
+    )
+}
+
+const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement | null => {
+    const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
+    const format = {
+        pillar: pillarFromString(relatedItem.pillar.id),
+        design: Design.Article,
+        display: Display.Standard
+    }
+
+    return pipe2(
+        image,
+        map(img => {
+            return <div css={[fullWidthImage, imageWrapperStyles]}><Img
+                image={img}
+                sizes={sizes}
+                format={format}
+            /></div>
+        }),
+        withDefault<ReactElement | null>(<div css={[imageWrapperStyles, imageBackground]}></div>)
+    )
+}
+
 const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
         pillar: pillarFromString(relatedItem.pillar.id),
@@ -275,19 +318,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
         display: Display.Standard
     }
 
-    const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
-
-    const img = pipe2(
-        image,
-        map(img => {
-            return <Img
-                image={img}
-                sizes={sizes}
-                format={format}
-            />
-        }),
-        withDefault<ReactElement | null>(null)
-    )
+    const img = cardImage(image, relatedItem);
 
     const lastModified = relatedItem.lastModified?.iso8601;
     const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) 
@@ -307,6 +338,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
                     <h3 css={headingStyles(relatedItem.type)}>
                         {quotationComment(relatedItem.type, format)}
                         {relatedItem.title}
+                        {byline(relatedItem)}
                     </h3>
                     {starRating}
                 </section>
@@ -318,7 +350,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
                         {durationMedia(fromNullable(relatedItem.mediaDuration))}
                         {date}
                     </div>
-                    <div css={imageWrapperStyles}>{img}</div>
+                    {img}
                 </section>
             </a>
         </li>

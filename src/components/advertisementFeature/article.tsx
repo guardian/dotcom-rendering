@@ -10,8 +10,7 @@ import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import Body from 'components/shared/articleBody';
 import Metadata from 'components/metadata';
-import { darkModeCss, articleWidthStyles, relatedContentStyles } from 'styles';
-import { Keyline } from 'components/shared/keyline';
+import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
 import HeaderMedia from 'headerMedia';
 import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import Logo from './logo';
@@ -61,7 +60,9 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
                         <Standfirst item={item} />
                     </div>
                 </div>
-                <Keyline {...item} />
+                <div css={lineStyles}>
+                    <Lines count={4} />
+                </div>
                 <section css={articleWidthStyles}>
                     <Metadata item={item} />
                     {pipe2(item.logo, map(props => <Logo logo={props} />), withDefault(<></>))}
