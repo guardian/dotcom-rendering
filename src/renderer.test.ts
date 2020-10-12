@@ -66,11 +66,11 @@ const pullquoteElement = (): BodyElement =>
     })
 
 const pullquoteWithAttributionElement = (): BodyElement =>
-   ({
-       kind: ElementKind.Pullquote,
-       quote: "quote",
-       attribution: some('attribution')
-   })
+    ({
+        kind: ElementKind.Pullquote,
+        quote: "quote",
+        attribution: some('attribution')
+    })
 
 const richLinkElement = (): BodyElement =>
    ({
