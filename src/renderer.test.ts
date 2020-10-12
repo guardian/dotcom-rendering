@@ -89,7 +89,7 @@ const tweetElement = (): BodyElement =>
    ({
         kind: ElementKind.Tweet,
         content: JSDOM.fragment('<span>Tweet contents<span>').querySelectorAll('span'),
-   })
+    })
 
 const instagramElement = (): BodyElement =>
    ({
