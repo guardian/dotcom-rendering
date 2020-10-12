@@ -141,12 +141,6 @@ const invertedText = css`
     padding-right: ${space[1]}px;
 `;
 
-const maxWidth = css`
-    ${from.desktop} {
-        max-width: 620px;
-    }
-`;
-
 const invertedWrapper = css`
     /*
         Because we use box-shadow (to get clean and even background styles
@@ -215,7 +209,6 @@ export const ArticleHeadline = ({
                             <h1
                                 className={cx(
                                     jumboFont,
-                                    maxWidth,
                                     immersiveStyles,
                                     displayBlock,
                                 )}
@@ -231,7 +224,6 @@ export const ArticleHeadline = ({
                             <span
                                 className={cx(
                                     jumboFont,
-                                    maxWidth,
                                     invertedStyles,
                                     immersiveStyles,
                                     displayBlock,
@@ -289,9 +281,7 @@ export const ArticleHeadline = ({
                     return (
                         // Inverted headlines have a wrapper div for positioning
                         // and a black background (only for the text)
-                        <div
-                            className={cx(shiftSlightly, maxWidth, displayFlex)}
-                        >
+                        <div className={cx(shiftSlightly, displayFlex)}>
                             <HeadlineTag tagText="Interview" pillar={pillar} />
                             <h1
                                 className={cx(
