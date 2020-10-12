@@ -91,7 +91,7 @@ export const footerContents = (ccpabool: boolean): JSX.Element =>{
 
 }
 
-interface footerCcpaProps {
+interface FooterCcpaProps {
     isCcpa: boolean;
 }
 
