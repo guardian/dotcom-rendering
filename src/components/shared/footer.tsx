@@ -14,10 +14,6 @@ const container = css`
 
 `
 
-const para = css`
-	${textSans.medium({ lineHeight: "tight" })};
-	max-width: 58.75rem;
-`
 
 const ul = css`
 	list-style: none;
@@ -55,7 +51,7 @@ const CcpaListItem = (ccpaStatus: bool): JSX.Element | null => {
     if (ccpaStatus){
         return (
             <li css={[li, link2]}>
-                <a css={anchor} href="https://www.theguardian.com/ccpaoptedin">
+                <a css={anchor} href="https://www.theguardian.com/help/privacy-policy">
 					California Residents - Do not sell
                 </a>
             </li>
@@ -69,18 +65,9 @@ const CcpaListItem = (ccpaStatus: bool): JSX.Element | null => {
 export const footerContents = (ccpabool: boolean): JSX.Element =>{
     return (
         <div css={container}>
-            <p css={para}>
-                <strong>
-                    Promotion terms and conditions Offer subject to availability.
-                </strong>
-                <br />
-                Guardian News and Media Ltd (&quot;GNM&quot;) reserves the right to
-                withdraw this promotion at any time. Full promotion terms and
-                conditions for our monthly and annual offers.
-            </p>
             <ul css={ul}>
                 <li css={[li, link1]}>
-                    <a css={anchor} href="https://www.theguardian.com/privacypolicy">
+                    <a css={anchor} href="https://www.theguardian.com/help/privacy-policy">
                         Privacy policy
                     </a>
                 </li>
