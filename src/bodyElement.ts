@@ -275,175 +275,175 @@ const parseIframe = (docParser: DocParser) =>
             width: iframe.getAttribute('width') ?? "380",
             height: iframe.getAttribute('height') ?? "300",
         });
-}
+    }
 
 const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
     (element: BlockElement): Result<string, BodyElement> => {
-    switch (element.type) {
+        switch (element.type) {
 
-        case ElementType.TEXT: {
-            const html = element?.textTypeData?.html;
+            case ElementType.TEXT: {
+                const html = element?.textTypeData?.html;
 
-            if (!html) {
-                return err('No html field on textTypeData');
-            }
-
-            return ok({ kind: ElementKind.Text, doc: context.docParser(html) });
-        }
-
-        case ElementType.IMAGE:
-            return pipe2(
-                parseImage(context)(element),
-                map<ImageData, Result<string, Image>>(image => ok({
-                    kind: ElementKind.Image,
-                    ...image
-                })),
-                withDefault<Result<string, Image>>(err('I couldn\'t find a master asset')),
-            );
-
-        case ElementType.PULLQUOTE: {
-            const { html: quote, attribution } = element.pullquoteTypeData ?? {};
-
-            if (!quote) {
-                return err('No quote field on pullquoteTypeData');
-            }
-
-            return ok({
-                kind: ElementKind.Pullquote,
-                quote,
-                attribution: fromNullable(attribution),
-            });
-        }
-
-        case ElementType.INTERACTIVE: {
-            const { iframeUrl, alt } = element.interactiveTypeData ?? {};
-
-            if (!iframeUrl) {
-                return err('No iframeUrl field on interactiveTypeData');
-            }
-
-            return ok({ kind: ElementKind.Interactive, url: iframeUrl, alt });
-        }
-
-        case ElementType.RICH_LINK: {
-            const { url, linkText } = element.richLinkTypeData ?? {};
-
-            if (!url) {
-                return err('No "url" field on richLinkTypeData');
-            } else if (!linkText) {
-                return err('No "linkText" field on richLinkTypeData');
-            }
-
-            return ok({ kind: ElementKind.RichLink, url, linkText });
-        }
-
-        case ElementType.TWEET: {
-            const { id, html: h } = element.tweetTypeData ?? {};
-
-            if (!id) {
-                return err('No "id" field on tweetTypeData')
-            } else if (!h) {
-                return err('No "html" field on tweetTypeData')
-            }
-
-            return pipe(
-                tweetContent(id, context.docParser(h)),
-                rmap(content => ({ kind: ElementKind.Tweet, content })),
-            );
-        }
-
-        case ElementType.EMBED: {
-            const { html: embedHtml, alt } = element.embedTypeData ?? {};
-
-            if (!embedHtml) {
-                return err('No html field on embedTypeData')
-            }
-
-            const id = context.docParser(embedHtml).querySelector('[data-callout-tagname]')?.getAttribute('data-callout-tagname');
-
-            if (id && campaigns) {
-                const campaign = campaigns.find(campaign => campaign.fields.tagName === id);
-
-                if (!campaign) {
-                    return err('No matching campaign');
+                if (!html) {
+                    return err('No html field on textTypeData');
                 }
 
-                const description = context.docParser(campaign.fields.description ?? '');
-                return ok({ kind: ElementKind.Callout, id, campaign, description });
+                return ok({ kind: ElementKind.Text, doc: context.docParser(html) });
             }
 
-            return ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
-        }
+            case ElementType.IMAGE:
+                return pipe2(
+                    parseImage(context)(element),
+                    map<ImageData, Result<string, Image>>(image => ok({
+                        kind: ElementKind.Image,
+                        ...image
+                    })),
+                    withDefault<Result<string, Image>>(err('I couldn\'t find a master asset')),
+                );
 
-        case ElementType.MEMBERSHIP: {
-            const {
-                linkText,
-                originalUrl: url,
-                price,
-                start,
-                image
-            } = element.membershipTypeData ?? {};
+            case ElementType.PULLQUOTE: {
+                const { html: quote, attribution } = element.pullquoteTypeData ?? {};
 
-            if (!linkText || !url) {
-                return err('No linkText or originalUrl field on membershipTypeData');
+                if (!quote) {
+                    return err('No quote field on pullquoteTypeData');
+                }
+
+                return ok({
+                    kind: ElementKind.Pullquote,
+                    quote,
+                    attribution: fromNullable(attribution),
+                });
             }
 
-            const formattedDate = start?.iso8601 && !isNaN(new Date(start?.iso8601).valueOf())
-                ? formatDate(new Date(start?.iso8601)) : undefined;
+            case ElementType.INTERACTIVE: {
+                const { iframeUrl, alt } = element.interactiveTypeData ?? {};
 
-            return ok({
-                kind: ElementKind.LiveEvent,
-                linkText,
-                url,
-                price,
-                start: formattedDate,
-                image
-            });
-        }
+                if (!iframeUrl) {
+                    return err('No iframeUrl field on interactiveTypeData');
+                }
 
-        case ElementType.INSTAGRAM: {
-            const { html: instagramHtml } = element.instagramTypeData ?? {};
-
-            if (!instagramHtml) {
-                return err('No html field on instagramTypeData')
+                return ok({ kind: ElementKind.Interactive, url: iframeUrl, alt });
             }
 
-            return ok({ kind: ElementKind.Instagram, html: instagramHtml });
-        }
+            case ElementType.RICH_LINK: {
+                const { url, linkText } = element.richLinkTypeData ?? {};
 
-        case ElementType.AUDIO: {
-            const { html: audioHtml } = element.audioTypeData ?? {};
+                if (!url) {
+                    return err('No "url" field on richLinkTypeData');
+                } else if (!linkText) {
+                    return err('No "linkText" field on richLinkTypeData');
+                }
 
-            if (!audioHtml) {
-                return err('No html field on audioTypeData')
+                return ok({ kind: ElementKind.RichLink, url, linkText });
             }
 
-            return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
-        }
+            case ElementType.TWEET: {
+                const { id, html: h } = element.tweetTypeData ?? {};
 
-        case ElementType.VIDEO: {
-            const { html: videoHtml } = element.videoTypeData ?? {};
+                if (!id) {
+                    return err('No "id" field on tweetTypeData')
+                } else if (!h) {
+                    return err('No "html" field on tweetTypeData')
+                }
 
-            if (!videoHtml) {
-                return err('No html field on videoTypeData')
+                return pipe(
+                    tweetContent(id, context.docParser(h)),
+                    rmap(content => ({ kind: ElementKind.Tweet, content })),
+                );
             }
 
-            return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
-        }
+            case ElementType.EMBED: {
+                const { html: embedHtml, alt } = element.embedTypeData ?? {};
 
-        case ElementType.CONTENTATOM: {
-            if (!atoms) {
-                return err('No atom data returned by capi')
+                if (!embedHtml) {
+                    return err('No html field on embedTypeData')
+                }
+
+                const id = context.docParser(embedHtml).querySelector('[data-callout-tagname]')?.getAttribute('data-callout-tagname');
+
+                if (id && campaigns) {
+                    const campaign = campaigns.find(campaign => campaign.fields.tagName === id);
+
+                    if (!campaign) {
+                        return err('No matching campaign');
+                    }
+
+                    const description = context.docParser(campaign.fields.description ?? '');
+                    return ok({ kind: ElementKind.Callout, id, campaign, description });
+                }
+
+                return ok({ kind: ElementKind.Embed, html: embedHtml, alt: fromNullable(alt) });
             }
 
-            return parseAtom(element, atoms, context.docParser);
+            case ElementType.MEMBERSHIP: {
+                const {
+                    linkText,
+                    originalUrl: url,
+                    price,
+                    start,
+                    image
+                } = element.membershipTypeData ?? {};
+
+                if (!linkText || !url) {
+                    return err('No linkText or originalUrl field on membershipTypeData');
+                }
+
+                const formattedDate = start?.iso8601 && !isNaN(new Date(start?.iso8601).valueOf())
+                    ? formatDate(new Date(start?.iso8601)) : undefined;
+
+                return ok({
+                    kind: ElementKind.LiveEvent,
+                    linkText,
+                    url,
+                    price,
+                    start: formattedDate,
+                    image
+                });
+            }
+
+            case ElementType.INSTAGRAM: {
+                const { html: instagramHtml } = element.instagramTypeData ?? {};
+
+                if (!instagramHtml) {
+                    return err('No html field on instagramTypeData')
+                }
+
+                return ok({ kind: ElementKind.Instagram, html: instagramHtml });
+            }
+
+            case ElementType.AUDIO: {
+                const { html: audioHtml } = element.audioTypeData ?? {};
+
+                if (!audioHtml) {
+                    return err('No html field on audioTypeData')
+                }
+
+                return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
+            }
+
+            case ElementType.VIDEO: {
+                const { html: videoHtml } = element.videoTypeData ?? {};
+
+                if (!videoHtml) {
+                    return err('No html field on videoTypeData')
+                }
+
+                return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
+            }
+
+            case ElementType.CONTENTATOM: {
+                if (!atoms) {
+                    return err('No atom data returned by capi')
+                }
+
+                return parseAtom(element, atoms, context.docParser);
+            }
+
+            default:
+                return err(`I'm afraid I don't understand the element I was given: ${element.type}`);
         }
 
-        default:
-            return err(`I'm afraid I don't understand the element I was given: ${element.type}`);
     }
-
-}
 
 const parseElements = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
     (elements: Elements): Result<string, BodyElement>[] => {

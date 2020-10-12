@@ -22,8 +22,8 @@ import { ElementKind, BodyElement } from 'bodyElement';
 
 const renderWithAds =
     (shouldHide: boolean) =>
-    (format: Format, elements: BodyElement[]): ReactNode[] =>
-    getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+        (format: Format, elements: BodyElement[]): ReactNode[] =>
+            getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 
 // ----- Component ----- //

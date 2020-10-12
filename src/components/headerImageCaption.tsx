@@ -79,25 +79,25 @@ interface Props {
 
 
 const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
-	pipe2(
-		caption,
-		map(cap =>
-			<figcaption css={HeaderImageCaptionStyles}>
-				<details>
-					<summary>
-						<span css={svgStyle}>
-							<SvgCamera/>Click to see figure caption
-						</span>
-					</summary>
-					<span id={captionId}>{cap} {withDefault('')(credit)}</span>
-				</details>
-			</figcaption>
-		),
-		withDefault<ReactElement | null>(null),
-	);
+    pipe2(
+        caption,
+        map(cap =>
+            <figcaption css={HeaderImageCaptionStyles}>
+                <details>
+                    <summary>
+                        <span css={svgStyle}>
+                            <SvgCamera/>Click to see figure caption
+                        </span>
+                    </summary>
+                    <span id={captionId}>{cap} {withDefault('')(credit)}</span>
+                </details>
+            </figcaption>
+        ),
+        withDefault<ReactElement | null>(null),
+    );
 
 export default HeaderImageCaption;
 
 export {
-	captionId,
+    captionId,
 };

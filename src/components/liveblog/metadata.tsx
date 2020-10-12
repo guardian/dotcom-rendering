@@ -118,7 +118,7 @@ const Metadata: FC<Props> = ({ item }) => {
                             count={0}
                             colour={neutral[100]}
                             className={commentCount(pillarStyles)}
-                          />
+                        />
                         : null}
                 </section>
             </LeftColumn>

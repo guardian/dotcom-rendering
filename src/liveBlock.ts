@@ -112,12 +112,12 @@ const filterBlocks = (filterFunc: (block: Block) => boolean) => (content: Conten
 
 const blocksSince =
     (getDate: (block: Block) => CapiDateTime | undefined) =>
-    (since: Date): (content: Content) => (context: Context) => LiveBlock[] =>
-{
-    const isRecent = compose(moreRecentThan(since), getDate);
+        (since: Date): (content: Content) => (context: Context) => LiveBlock[] =>
+        {
+            const isRecent = compose(moreRecentThan(since), getDate);
 
-    return compose(parseMany, filterBlocks(isRecent));
-}
+            return compose(parseMany, filterBlocks(isRecent));
+        }
 
 const newBlocksSince = blocksSince(block => block.firstPublishedDate);
 const updatedBlocksSince = blocksSince(block => block.lastModifiedDate);

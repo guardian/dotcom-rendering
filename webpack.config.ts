@@ -179,14 +179,14 @@ const clientConfigProduction = {
         new HtmlWebpackPlugin({
             meta: {
                 'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': `style-src 'sha256-${assetHash(assetsTemplateCss)}';` },
-              },
+            },
             filename: 'rendered-items-assets.html',
             template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
             minify: true,
             templateParameters: {
                 styles: assetsTemplateCss
             }
-          })
+        })
     ],
     output: {
         path: path.resolve(__dirname, 'dist/assets'),

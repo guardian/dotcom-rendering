@@ -47,8 +47,8 @@ const LiveblogBody: FC<LiveblogBodyProps> = (props) => {
                         title={block.title}
                         firstPublishedDate={block.firstPublished}
                         lastModifiedDate={block.lastModified}>
-                            <>{ renderAll(format, partition(block.body).oks) }</>
-                        </LiveblogBlock>
+                        <>{ renderAll(format, partition(block.body).oks) }</>
+                    </LiveblogBlock>
                 })
             }
             <div css={styles}>

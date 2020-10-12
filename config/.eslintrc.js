@@ -24,6 +24,13 @@ module.exports =  {
         'eqeqeq': 'error',
         // Avoid let when variable is never re-assigned
         'prefer-const': 'error',
+        'indent': [
+            'error',
+            4,
+            {
+                'SwitchCase': 1,
+            },
+        ],
         'max-len': [
             'error',
             {

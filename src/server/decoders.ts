@@ -26,15 +26,15 @@ async function toTransport(buffer: Buffer): Promise<TTransport> {
 
 const decodeContent = <A>(decoder: ThriftDecoder<A>) =>
     async (content: Buffer | undefined): Promise<A> => {
-    if (content) {
-        const transport = await toTransport(content);
-        const protocol = new TCompactProtocol(transport);
+        if (content) {
+            const transport = await toTransport(content);
+            const protocol = new TCompactProtocol(transport);
 
-        return decoder.read(protocol);
-    } else {
-        return Promise.reject("Invalid request")
+            return decoder.read(protocol);
+        } else {
+            return Promise.reject("Invalid request")
+        }
     }
-}
 
 const capiDecoder = decodeContent(ItemResponseSerde);
 const errorDecoder = decodeContent(ErrorResponseSerde);

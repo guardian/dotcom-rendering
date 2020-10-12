@@ -95,7 +95,7 @@ const LiveblogBlock: FC<LiveblogBlockProps> = ({
         }, 15000);
 
         return (): void => clearInterval(interval);
-      }, []);
+    }, []);
 
     return (
         <article>

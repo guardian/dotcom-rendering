@@ -140,36 +140,36 @@ const parseRole = (role: string | undefined): Option<Role> =>
 
 const parseImage = ({ docParser, salt }: Context) =>
     (element: BlockElement): Option<Image> => {
-    const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const data = element.imageTypeData;
+        const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
+        const data = element.imageTypeData;
 
-    return pipe2(
-        masterAsset,
-        fromNullable,
-        andThen(asset => {
-            if (
-                asset?.file === undefined ||
+        return pipe2(
+            masterAsset,
+            fromNullable,
+            andThen(asset => {
+                if (
+                    asset?.file === undefined ||
                 asset.file === '' ||
                 asset?.typeData?.width === undefined ||
                 asset?.typeData?.height === undefined
-            ) {
-                return none;
-            }
+                ) {
+                    return none;
+                }
 
-            return some({
-                src: src(salt, asset.file, 500, Dpr.One),
-                ...srcsets(asset.file, salt),
-                alt: fromNullable(data?.alt),
-                width: asset.typeData.width,
-                height: asset.typeData.height,
-                caption: pipe2(data?.caption, fromNullable, map(docParser)),
-                credit: parseCredit(data?.displayCredit, data?.credit),
-                nativeCaption: fromNullable(data?.caption),
-                role: parseRole(data?.role),
-            });
-        })
-    );
-};
+                return some({
+                    src: src(salt, asset.file, 500, Dpr.One),
+                    ...srcsets(asset.file, salt),
+                    alt: fromNullable(data?.alt),
+                    width: asset.typeData.width,
+                    height: asset.typeData.height,
+                    caption: pipe2(data?.caption, fromNullable, map(docParser)),
+                    credit: parseCredit(data?.displayCredit, data?.credit),
+                    nativeCaption: fromNullable(data?.caption),
+                    role: parseRole(data?.role),
+                });
+            })
+        );
+    };
 
 const parseCardImage = (image: CardImage | undefined, salt: string): Option<Image> => {
     if (image === undefined) {
