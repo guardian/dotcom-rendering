@@ -16,8 +16,8 @@ export const UnsafeEmbedBlockComponent = ({ html, alt, index }: Props) => (
         title={alt}
         name={`unsafe-embed-${index}`}
         data-cy="embed-block"
-        srcDoc={`<script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
-        <gu-script>iframeMessenger.enableAutoResize();</gu-script>
-        ${html}`}
+        srcDoc={`${html}
+        <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+        <gu-script>iframeMessenger.enableAutoResize();</gu-script>`}
     />
 );
