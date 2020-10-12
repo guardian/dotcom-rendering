@@ -428,7 +428,7 @@ describe('Paragraph tags rendered correctly', () => {
         const nodes = renderStandfirstText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
         expect(html).toContain('<strong><p>Standfirst link</p></strong>');
-   });
+    });
 
     test('Contains styles in article body', () => {
         const fragment = JSDOM.fragment('<ul><li><strong><p>Standfirst link</p></strong></li></ul>');
