@@ -55,10 +55,10 @@ const CcpaListItem = (ccpaStatus: bool): JSX.Element | null => {
     if (ccpaStatus){
         return (
             <li css={[li, link2]}>
-				<a  id='testing' css={anchor} href="https://www.theguardian.com/ccpaoptedin">
+                <a  id='testing' css={anchor} href="https://www.theguardian.com/ccpaoptedin">
 					California Residents - Do not sell
-				</a>
-			</li>
+                </a>
+            </li>
         )
     } else {
         return null;
