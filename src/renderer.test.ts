@@ -443,7 +443,7 @@ describe('Transforms hrefs', () => {
         const href = "profile/firstname_lastname";
         const transformed = transformHref(href);
         expect(transformed).toBe("https://www.theguardian.com/profile/firstname_lastname")
-   });
+    });
 
     test('Transforms latest links', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
