@@ -435,7 +435,7 @@ describe('Paragraph tags rendered correctly', () => {
         const nodes = renderText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
         expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
-   });
+    });
 });
 
 describe('Transforms hrefs', () => {
