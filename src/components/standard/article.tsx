@@ -20,7 +20,10 @@ import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
+import Epic from 'components/shared/epic';
+import { Lines } from '@guardian/src-ed-lines';
 import FooterCcpa from 'components/shared/footer';
+
 
 
 // ----- Styles ----- //

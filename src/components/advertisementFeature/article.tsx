@@ -17,6 +17,7 @@ import Logo from './logo';
 import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import RelatedContent from 'components/shared/relatedContent';
+import { Lines } from '@guardian/src-ed-lines';
 import FooterCcpa from 'components/shared/footer';
 
 

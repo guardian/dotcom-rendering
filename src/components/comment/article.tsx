@@ -18,6 +18,7 @@ import Metadata from 'components/metadata';
 import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
+import { Lines } from '@guardian/src-ed-lines';
 import FooterCcpa from 'components/shared/footer';
 
 
@@ -53,6 +54,10 @@ const topBorder = css`
         border-top: solid 1px ${neutral[20]};
     `}
 `;
+
+const commentLineStylePosition = css`
+    margin-top: 83px;
+`
 
 interface Props {
     item: CommentItem;

@@ -3,15 +3,15 @@ import { Footer } from '@guardian/src-footer';
 import { brandBorder, brandText, space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { bool } from 'aws-sdk/clients/signer';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 
-// Footer content styles 
+// Footer content styles
 const container = css`
 		border-style: solid;
 		border-color: ${brandBorder.primary};
 		border-width: 0 1px;
-	
+
 `
 
 const para = css`
@@ -51,7 +51,7 @@ const link2 = css`
 	border-right-width: 1px;
 `
 
-const CcpaListItem = (ccpaStatus: bool) => {
+const CcpaListItem = (ccpaStatus: bool): JSX.Element | null => {
     if (ccpaStatus){
         return (
             <li css={[li, link2]}>
@@ -66,7 +66,7 @@ const CcpaListItem = (ccpaStatus: bool) => {
 }
 
 
-export const footerContents = (ccpabool: boolean): JSX.Element=>{    
+export const footerContents = (ccpabool: boolean): JSX.Element =>{
     return (
         <div css={container}>
             <p css={para}>
@@ -80,7 +80,7 @@ export const footerContents = (ccpabool: boolean): JSX.Element=>{
             </p>
             <ul css={ul}>
                 <li css={[li, link1]}>
-                    <a css={anchor} href="#">
+                    <a css={anchor} href="https://www.theguardian.com/privacypolicy">
                         Privacy policy
                     </a>
                 </li>
@@ -88,13 +88,15 @@ export const footerContents = (ccpabool: boolean): JSX.Element=>{
             </ul>
         </div>
     )
-    
-} 
+
+}
 
 interface footerCcpaProps {
     isCcpa: boolean;
 }
 
-const FooterCcpa = ({ isCcpa }: footerCcpaProps) => <Footer>{footerContents(isCcpa)}</Footer>
+const FooterCcpa = ({ isCcpa }: footerCcpaProps): ReactElement => {
+    return <Footer>{footerContents(isCcpa)}</Footer>
+}
 
 export default FooterCcpa;
