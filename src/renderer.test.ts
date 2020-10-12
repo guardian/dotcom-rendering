@@ -92,7 +92,7 @@ const tweetElement = (): BodyElement =>
     })
 
 const instagramElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.Instagram,
         html: '<blockquote>Instagram</blockquote>',
     })
