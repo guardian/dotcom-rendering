@@ -449,7 +449,7 @@ describe('Transforms hrefs', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
         const transformed = transformHref(href);
         expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
-   });
+    });
 
     test('Does not transform valid link', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live";
