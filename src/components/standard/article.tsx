@@ -94,7 +94,7 @@ const Standard: FC<Props> = ({ item, children }) => {
         </div>
 
     return <main css={[Styles, DarkStyles]}>
-        <article css={BorderStyles}>
+        <article className="js-article" css={BorderStyles}>
             <header>
                 <HeaderMedia item={item} />
                 <Series item={item} />
