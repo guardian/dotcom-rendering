@@ -3,14 +3,14 @@ import { Footer } from '@guardian/src-footer';
 import { brandBorder, brandText, space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { bool } from 'aws-sdk/clients/signer';
-import React, { ReactElement } from 'react';
+import React, { FC } from 'react';
 
 
 // Footer content styles
 const container = css`
-		border-style: solid;
-		border-color: ${brandBorder.primary};
-		border-width: 0 1px;
+    border-style: solid;
+    border-color: ${brandBorder.primary};
+    border-width: 0 1px;
 
 `
 
@@ -55,7 +55,7 @@ const CcpaListItem = (ccpaStatus: bool): JSX.Element | null => {
     if (ccpaStatus){
         return (
             <li css={[li, link2]}>
-                <a  id='testing' css={anchor} href="https://www.theguardian.com/ccpaoptedin">
+                <a css={anchor} href="https://www.theguardian.com/ccpaoptedin">
 					California Residents - Do not sell
                 </a>
             </li>
@@ -91,12 +91,10 @@ export const footerContents = (ccpabool: boolean): JSX.Element =>{
 
 }
 
-interface footerCcpaProps {
+interface FooterCcpaProps {
     isCcpa: boolean;
 }
 
-const FooterCcpa = ({ isCcpa }: footerCcpaProps): ReactElement => {
-    return <Footer>{footerContents(isCcpa)}</Footer>
-}
+const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => <Footer>{footerContents(isCcpa)}</Footer>
 
 export default FooterCcpa;
