@@ -415,7 +415,7 @@ describe('Renders different types of elements', () => {
                 likeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
             });
 
-            expect(feedback!.textContent).not.toBe('hidden=""');
+            expect(feedback?.getAttribute('hidden')).toBeNull();
             unmountComponentAtNode(container);
             container.remove();
        }
