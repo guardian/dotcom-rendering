@@ -73,11 +73,11 @@ const pullquoteWithAttributionElement = (): BodyElement =>
     })
 
 const richLinkElement = (): BodyElement =>
-   ({
-       kind: ElementKind.RichLink,
-       url: "https://theguardian.com",
-       linkText: "this links to a related article"
-   })
+    ({
+        kind: ElementKind.RichLink,
+        url: "https://theguardian.com",
+        linkText: "this links to a related article"
+    })
 
 const interactiveElement = (): BodyElement =>
     ({
