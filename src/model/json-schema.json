@@ -924,6 +924,9 @@
                 "url": {
                     "type": "string"
                 },
+                "placeholderUrl": {
+                    "type": "string"
+                },
                 "css": {
                     "type": "string"
                 },
@@ -1137,6 +1140,9 @@
                     ]
                 },
                 "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
                     "type": "string"
                 },
                 "id": {
@@ -1473,6 +1479,9 @@
                 },
                 "url": {
                     "type": "string"
+                },
+                "placeholderUrl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1492,6 +1501,9 @@
                     ]
                 },
                 "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
                     "type": "string"
                 },
                 "id": {
