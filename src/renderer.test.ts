@@ -66,18 +66,18 @@ const pullquoteElement = (): BodyElement =>
     })
 
 const pullquoteWithAttributionElement = (): BodyElement =>
-   ({
-       kind: ElementKind.Pullquote,
-       quote: "quote",
-       attribution: some('attribution')
-   })
+    ({
+        kind: ElementKind.Pullquote,
+        quote: "quote",
+        attribution: some('attribution')
+    })
 
 const richLinkElement = (): BodyElement =>
-   ({
-       kind: ElementKind.RichLink,
-       url: "https://theguardian.com",
-       linkText: "this links to a related article"
-   })
+    ({
+        kind: ElementKind.RichLink,
+        url: "https://theguardian.com",
+        linkText: "this links to a related article"
+    })
 
 const interactiveElement = (): BodyElement =>
     ({
@@ -86,23 +86,23 @@ const interactiveElement = (): BodyElement =>
     })
 
 const tweetElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.Tweet,
         content: JSDOM.fragment('<span>Tweet contents<span>').querySelectorAll('span'),
-   })
+    })
 
 const instagramElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.Instagram,
         html: '<blockquote>Instagram</blockquote>',
     })
 
 const embedElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.Embed,
         html: '<section>Embed</section>',
         alt: none,
-   })
+    })
 
 const videoElement = (): BodyElement =>
     ({
@@ -110,62 +110,62 @@ const videoElement = (): BodyElement =>
         src: "https://www.youtube.com/",
         height: "300",
         width: "500"
-   })
+    })
 
 const audioElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.Audio,
         src: "https://www.spotify.com/",
         height: "300",
         width: "500"
-   })
+    })
 
 const liveEventElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.LiveEvent,
         linkText: "this links to a live event",
         url: "https://theguardian.com"
-   })
+    })
 
 const atomElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.InteractiveAtom,
         css: "main { background: yellow; }",
         html: "<main>Some content</main>",
         js: some("console.log('init')"),
-   })
+    })
 
 const explainerElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.ExplainerAtom,
         html: "<main>Explainer content</main>",
         title: "this is an explainer atom",
         id: ""
-   })
+    })
 
 const guideElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.GuideAtom,
         html: "<main>Guide content</main>",
         title: "this is a guide atom",
         id: ""
-   })
+    })
 
 const qandaElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.QandaAtom,
         html: "<main>QandA content</main>",
         title: "this is a qanda atom",
         id: ""
-   })
+    })
 
 const profileElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.ProfileAtom,
         html: "<main>Profile content</main>",
         title: "this is a profile atom",
         id: ""
-   })
+    })
 
 const timelineElement = (): BodyElement =>
     ({
@@ -185,18 +185,18 @@ const timelineElement = (): BodyElement =>
                 body:
                     '<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
             },
-       ]
-   })
+        ]
+    })
 
 const chartElement = (): BodyElement =>
-   ({
+    ({
         kind: ElementKind.ChartAtom,
         html: "<main>Chart content</main>",
         title: "this is a chart atom",
         id: "",
         css: [],
         js: []
-   })
+    })
 
 
 const render = (element: BodyElement): ReactNode[] =>
@@ -218,7 +218,7 @@ const getHtml = (node: ReactNode): string =>
     isValidElement(node) ? renderToStaticMarkup(node): '';
 
 describe('renderer returns expected content', () => {
-test('Renders supported node types for text elements', () => {
+    test('Renders supported node types for text elements', () => {
         const elements = [
             '<h2></h2>',
             '<blockquote></blockquote>',
@@ -235,17 +235,17 @@ test('Renders supported node types for text elements', () => {
 
         expect(renderTextElement(elements).flat().length).toBe(11);
         expect(renderTextElementWithoutStyles(elements).flat().length).toBe(11);
-   });
+    });
 
     test ('Renders caption node types', () => {
         const text = renderCaptionElement(JSDOM.fragment('this caption contains'));
         expect(getHtml(text.flat()[0])).toContain('<p');
-   });
+    });
 
-   test ('Removes unsupported caption node types', () => {
-       const text = renderCaptionElement(JSDOM.fragment('this caption contains <blockquote>html</blockquote>'));
-       text.flatMap(element => expect(element).not.toContain("blockquote"))
-   });
+    test ('Removes unsupported caption node types', () => {
+        const text = renderCaptionElement(JSDOM.fragment('this caption contains <blockquote>html</blockquote>'));
+        text.flatMap(element => expect(element).not.toContain("blockquote"))
+    });
 });
 
 describe('Transforms text nodes', () => {
@@ -255,12 +255,12 @@ describe('Transforms text nodes', () => {
         ]);
         const bullet = nodes.flat()[0];
         expect(getHtml(bullet)).not.toContain('• This is a bullet point we receive from capi')
-   });
+    });
 
     test('Transforms horizontal rules', () => {
         const nodes = renderTextElement([
-           '* * *'
-       ]);
+            '* * *'
+        ]);
         const horizontalRule = nodes.flat()[0];
         expect(getHtml(horizontalRule)).not.toContain('* * *')
     });
@@ -274,76 +274,76 @@ describe('Renders different types of elements', () => {
         expect(getHtml(bodyImage)).toContain('figcaption');
         expect(getHtml(bodyImage)).toContain('caption="caption"');
         expect(getHtml(bodyImage)).toContain('credit="credit"');
-   })
+    })
 
-   test('ElementKind.Image with thumbnail role', () => {
+    test('ElementKind.Image with thumbnail role', () => {
         const nodes = render(imageElementWithRole())
         const bodyImage = nodes.flat()[0];
         expect(getHtml(bodyImage)).toContain('img');
-   })
+    })
 
-   test('ElementKind.Pullquote', () => {
+    test('ElementKind.Pullquote', () => {
         const nodes = render(pullquoteElement())
         const pullquote = nodes.flat()[0];
         expect(getHtml(pullquote)).toContain('quote');
         expect(getHtml(pullquote)).not.toContain('attribution');
-   })
+    })
 
-   test('ElementKind.Pullquote with attribution', () => {
+    test('ElementKind.Pullquote with attribution', () => {
         const nodes = render(pullquoteWithAttributionElement())
         const pullquote = nodes.flat()[0];
         expect(getHtml(pullquote)).toContain('attribution');
         expect(getHtml(pullquote)).toContain('quote');
-   })
+    })
 
     test('ElementKind.RichLink', () => {
         const nodes = render(richLinkElement())
         const richLink = nodes.flat()[0];
         expect(getHtml(richLink)).toContain('<h1>this links to a related article</h1>');
         expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
-   })
+    })
 
     test('ElementKind.Interactive', () => {
         const nodes = render(interactiveElement())
         const interactive = nodes.flat()[0];
         expect(getHtml(interactive)).toContain('<iframe src="https://theguardian.com" height="500" title=""></iframe>');
-   })
+    })
 
     test('ElementKind.Tweet', () => {
-       const nodes = render(tweetElement())
-       const tweet = nodes.flat()[0];
-       expect(getHtml(tweet)).toContain('twitter-tweet');
-   })
+        const nodes = render(tweetElement())
+        const tweet = nodes.flat()[0];
+        expect(getHtml(tweet)).toContain('twitter-tweet');
+    })
 
     test('ElementKind.Instagram', () => {
         const nodes = render(instagramElement())
         const instagram = nodes.flat()[0];
         expect(getHtml(instagram)).toBe('<div><blockquote>Instagram</blockquote></div>');
-   })
+    })
 
     test('ElementKind.Embed', () => {
         const nodes = render(embedElement())
         const embed = nodes.flat()[0];
         expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
-   })
+    })
 
     test('ElementKind.Audio', () => {
         const nodes = render(audioElement())
         const audio = nodes.flat()[0];
         expect(getHtml(audio)).toContain('src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"');
-   })
+    })
 
     test('ElementKind.Video', () => {
         const nodes = render(videoElement())
         const video = nodes.flat()[0];
         expect(getHtml(video)).toContain('src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"');
-   })
+    })
 
     test('ElementKind.LiveEvent', () => {
         const nodes = render(liveEventElement())
         const liveEvent = nodes.flat()[0];
         expect(getHtml(liveEvent)).toContain('<h1>this links to a live event</h1>');
-   })
+    })
 
     test('ElementKind.InteractiveAtom', () => {
         const nodes = render(atomElement())
@@ -351,49 +351,47 @@ describe('Renders different types of elements', () => {
         expect(getHtml(atom)).toContain('main { background: yellow; }');
         expect(getHtml(atom)).toContain("console.log(&#x27;init&#x27;)");
         expect(getHtml(atom)).toContain('Some content');
-   })
+    })
 
     test('ElementKind.ExplainerAtom', () => {
         const nodes = render(explainerElement())
         const explainer = nodes.flat()[0];
         expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
-   })
+    })
 
     test('ElementKind.GuideAtom', () => {
         const nodes = render(guideElement())
         const guide = nodes.flat()[0];
         expect(getHtml(guide)).toContain('<main>Guide content</main>');
         testHandlers(guide);
-   })
+    })
 
     test('ElementKind.QandaAtom', () => {
         const nodes = render(qandaElement())
         const qanda = nodes.flat()[0];
         expect(getHtml(qanda)).toContain('<main>QandA content</main>');
         testHandlers(qanda);
-   })
+    })
 
     test('ElementKind.ProfileAtom', () => {
         const nodes = render(profileElement())
         const profile = nodes.flat()[0];
         expect(getHtml(profile)).toContain('<main>Profile content</main>');
         testHandlers(profile);
-   })
+    })
 
     test('ElementKind.TimelineAtom', () => {
         const nodes = render(timelineElement())
         const timeline = nodes.flat()[0];
         expect(getHtml(timeline)).toContain('<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>');
         testHandlers(timeline);
-   })
+    })
 
     test('ElementKind.ChartAtom', () => {
         const nodes = render(chartElement())
         const chart = nodes.flat()[0];
         expect(getHtml(chart)).toContain('srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"');
    })
-
-
 
     function testHandlers(node: ReactNode): void {
         if (isValidElement(node)) {
@@ -415,7 +413,7 @@ describe('Renders different types of elements', () => {
                 likeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
             });
 
-            expect(feedback!.textContent).not.toBe('hidden=""');
+            expect(feedback?.getAttribute('hidden')).toBeNull();
             unmountComponentAtNode(container);
             container.remove();
        }
@@ -428,14 +426,14 @@ describe('Paragraph tags rendered correctly', () => {
         const nodes = renderStandfirstText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
         expect(html).toContain('<strong><p>Standfirst link</p></strong>');
-   });
+    });
 
     test('Contains styles in article body', () => {
         const fragment = JSDOM.fragment('<ul><li><strong><p>Standfirst link</p></strong></li></ul>');
         const nodes = renderText(fragment, mockFormat);
         const html = getHtml(nodes.flat()[0]);
         expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
-   });
+    });
 });
 
 describe('Transforms hrefs', () => {
@@ -443,13 +441,13 @@ describe('Transforms hrefs', () => {
         const href = "profile/firstname_lastname";
         const transformed = transformHref(href);
         expect(transformed).toBe("https://www.theguardian.com/profile/firstname_lastname")
-   });
+    });
 
     test('Transforms latest links', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
         const transformed = transformHref(href);
         expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
-   });
+    });
 
     test('Does not transform valid link', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live";
