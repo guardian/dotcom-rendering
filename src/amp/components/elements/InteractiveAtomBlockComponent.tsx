@@ -44,6 +44,15 @@ export const InteractiveAtomBlockComponent: React.SFC<{
     html?: string;
     placeholderUrl?: string;
 }> = ({ url, placeholderUrl, html }) => {
+    // On Dot Com, Interactive Atoms are sometimes used to modify the page
+    // around them. CSS, JS but no HTML can exist in an atom, and because we just
+    // add it to the page, it can modify the world around it.
+    // We can't do that on AMP, so if the html field of an interactive atom is an
+    // empty string then we just want to walk away from it.
+    if (html === '') {
+        return null;
+    }
+
     return (
         <amp-iframe
             class={styles(getHeight(html))}
