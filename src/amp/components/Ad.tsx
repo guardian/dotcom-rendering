@@ -70,6 +70,18 @@ const adRegionClasses = {
 
 type AdRegion = 'US' | 'AU' | 'ROW';
 
+interface Aps {
+    PUB_ID: string;
+    PARAMS: {
+        amp: string;
+        us_privacy?: string;
+    };
+}
+
+interface Vendors {
+    aps?: Aps;
+}
+
 const dfpAdUnitRoot = 'theguardian.com';
 
 const ampData = (section: string, contentType: string): string => {
@@ -97,6 +109,7 @@ const realTimeConfig = (
     adRegion: AdRegion,
     usePrebid: boolean,
     usePermutive: boolean,
+    useAps: boolean,
 ): any => {
     const placementID = getPlacementId(adRegion);
     const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
@@ -118,11 +131,26 @@ const realTimeConfig = (
         'purl=HREF',
     ].join('&');
 
+    // Amazon Publisher Services
+    const aps: Aps = {
+        PUB_ID: 'xxxx',
+        PARAMS: {
+            amp: '1',
+        },
+    };
+    if (adRegion === 'US') aps.PARAMS.us_privacy = '1---';
+
+    const vendors: Vendors = {};
+    if (useAps) vendors.aps = aps;
+
     const data = {
         urls: [
             usePrebid ? prebidURL : '',
             usePermutive ? permutiveURL : '',
         ].filter((url) => url),
+        vendors: {
+            aps: useAps ? aps : '',
+        },
     };
 
     return JSON.stringify(data);
@@ -131,6 +159,7 @@ const realTimeConfig = (
 interface CommercialConfig {
     usePrebid: boolean;
     usePermutive: boolean;
+    useAps: boolean;
 }
 
 const ampAdElem = (
@@ -157,6 +186,7 @@ const ampAdElem = (
                 adRegion,
                 config.usePrebid,
                 config.usePermutive,
+                config.useAps,
             )}
         />
     );

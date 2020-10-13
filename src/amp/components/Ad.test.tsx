@@ -9,6 +9,7 @@ describe('AdComponent', () => {
     const commercialConfig = {
         usePrebid: true,
         usePermutive: true,
+        useAps: true,
     };
     const commercialProperties = {
         UK: { adTargeting: [] },

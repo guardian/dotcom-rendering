@@ -26,6 +26,7 @@ export const WithAds: React.SFC<{
     const commercialConfig = {
         usePrebid: adInfo.switches.ampPrebid,
         usePermutive: adInfo.switches.permutive,
+        useAps: true, // TODO: add switch
     };
 
     const ad = (id: string): JSX.Element => (
