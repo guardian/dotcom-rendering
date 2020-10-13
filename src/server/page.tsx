@@ -138,8 +138,7 @@ function render(
     const hasSpotify = includesSpotify(request.content);
     const body = renderBody(item, request);
     const head = renderHead(item, request, hasTweets, 
-                            hasInstagram, hasYoutube, hasSpotify, 
-                            body.css, body.ids);
+        hasInstagram, hasYoutube, hasSpotify, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;
 
     return { html: buildHtml(head, body.html, scripts), clientScript };
