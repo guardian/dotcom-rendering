@@ -17,6 +17,7 @@ const fullWidthStyles = css`
 const unsafeEmbedWrapperStyles = css`
     position: relative;
     float: left;
+    width: 300px;
     margin-top: ${space[1]}px;
     margin-bottom: ${space[3]}px;
     margin-right: ${space[5]}px;
