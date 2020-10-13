@@ -42,12 +42,6 @@ const styles: SerializedStyles = css`
         margin-top: ${remSpace[9]};
     }
 
-    svg {
-        margin-left: ${remSpace[2]};
-        margin-top: -${remSpace[1]};
-        vertical-align: middle;
-    }
-
     mark {
         background: ${brandAltBackground.primary};
         padding: .1rem .125rem;
@@ -55,7 +49,7 @@ const styles: SerializedStyles = css`
 `;
 
 const darkStyles: SerializedStyles = darkModeCss`
-    color: ${neutral[60]};
+    color: ${neutral[93]};
     background-color: ${neutral[20]};
     border-top: 1px solid ${brandAlt[200]};
 
