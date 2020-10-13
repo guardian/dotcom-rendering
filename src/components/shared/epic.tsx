@@ -4,16 +4,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming'
 import { from } from '@guardian/src-foundations/mq';
-import { brandAltBackground, neutral,  } from '@guardian/src-foundations/palette';
+import { brandAlt, brandAltBackground, neutral,  } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { SvgArrowRightStraight } from "@guardian/src-icons"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { acquisitionsClient } from 'native/nativeApi';
+import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //
 
-const epicStyles: SerializedStyles = css`
+const styles: SerializedStyles = css`
     width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
 
     ${from.wide} {
@@ -53,6 +54,19 @@ const epicStyles: SerializedStyles = css`
     }
 `;
 
+const darkStyles: SerializedStyles = darkModeCss`
+    color: ${neutral[60]};
+    background-color: ${neutral[20]};
+    border-top: 1px solid ${brandAlt[200]};
+
+    mark {
+        background: ${brandAlt[200]};
+    }
+
+    .button-container button {
+        background: ${brandAlt[200]};
+    }
+`;
 
 // ----- Component ----- //
 
@@ -104,7 +118,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
         </Button>
 
     return (
-        <div css={epicStyles} ref={epicContainer}>
+        <div css={[styles, darkStyles]} ref={epicContainer}>
             <h1 dangerouslySetInnerHTML={{__html: title}}></h1>
             <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">
