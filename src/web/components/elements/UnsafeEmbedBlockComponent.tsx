@@ -21,6 +21,10 @@ const unsafeEmbedWrapperStyles = css`
     margin-top: ${space[1]}px;
     margin-bottom: ${space[3]}px;
     margin-right: ${space[5]}px;
+
+    &.img--landscape {
+        margin-right: ${space[5]}px;
+    }
     ${from.leftCol} {
         margin-left: -${space[9]}px;
     }
