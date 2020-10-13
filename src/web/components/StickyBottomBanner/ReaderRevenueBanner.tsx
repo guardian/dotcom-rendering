@@ -4,7 +4,7 @@ import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { getWeeklyArticleHistory, logView } from '@root/node_modules/@guardian/automat-client';
-import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {hasOptedOutOfArticleCount, shouldHideSupportMessaging} from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
     sendOphanComponentEvent,
@@ -75,6 +75,7 @@ const buildPayload = (props: BuildPayloadProps) => {
             countryCode: props.countryCode,
             switches: props.switches,
             weeklyArticleHistory: getWeeklyArticleHistory(),
+            hasOptedOutOfArticleCount: hasOptedOutOfArticleCount(),
         },
     };
 };
