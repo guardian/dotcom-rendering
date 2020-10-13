@@ -133,7 +133,7 @@ const realTimeConfig = (
 
     // Amazon Publisher Services
     const aps: Aps = {
-        PUB_ID: 'xxxx',
+        PUB_ID: '59666047',
         PARAMS: {
             amp: '1',
         },
