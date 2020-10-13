@@ -42,7 +42,10 @@ import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+import {
+    hasOptedOutOfArticleCount,
+    setUpArticleCountConsentListener,
+} from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import { cmp } from '@guardian/consent-management-platform';
@@ -246,6 +249,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         incrementDailyArticleCount();
+    }, []);
+
+    useEffect(() => {
+        setUpArticleCountConsentListener();
     }, []);
 
     // Log an article view using the Slot Machine client lib

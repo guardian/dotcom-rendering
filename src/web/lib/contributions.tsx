@@ -1,10 +1,13 @@
-import { getCookie } from '@root/src/web/browser/cookie';
+import { getCookie, addCookie } from '@root/src/web/browser/cookie';
+import { onConsentChange } from '@guardian/consent-management-platform';
+import { TCFv2ConsentState } from '@guardian/consent-management-platform/dist/types/tcfv2';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
+const OPT_OUT_OF_ARTICLE_COUNT_COOKIE_DAYS_TO_LIVE = 999;
 
 // Support Frontend cookies (dropped when contribution is made)
 export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
@@ -13,6 +16,10 @@ export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
     'gu.contributions.recurring.contrib-timestamp.Annual';
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
     'gu.contributions.contrib-timestamp';
+
+// Local storage keys
+const DAILY_ARTICLE_COUNT_STORAGE_KEY = 'gu.history.dailyArticleCount';
+const WEEKLY_ARTICLE_COUNT_STORAGE_KEY = 'gu.history.weeklyArticleCount';
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -111,6 +118,42 @@ export const shouldHideSupportMessaging = (
     !shouldShowSupportMessaging() ||
     isRecurringContributor(isSignedIn) ||
     isRecentOneOffContributor();
+
+const REQUIRED_CONSENTS_FOR_ARTILCE_COUNT = [1, 3, 7];
+
+const hasRequiredConsentsForArticleCount = (tcfv2: TCFv2ConsentState) =>
+    REQUIRED_CONSENTS_FOR_ARTILCE_COUNT.every(
+        (consent) => tcfv2.consents[consent],
+    );
+
+const setArticleCountOptOutCookie = (): void => {
+    addCookie(
+        OPT_OUT_OF_ARTICLE_COUNT_COOKIE,
+        new Date().getTime().toString(),
+        OPT_OUT_OF_ARTICLE_COUNT_COOKIE_DAYS_TO_LIVE,
+    );
+};
+
+const removeArticleCountFromLocalStorage = (): void => {
+    window.localStorage.removeItem(DAILY_ARTICLE_COUNT_STORAGE_KEY);
+    window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_STORAGE_KEY);
+};
+
+const optOutOfArticleCount = (): void => {
+    setArticleCountOptOutCookie();
+    removeArticleCountFromLocalStorage();
+};
+
+export const setUpArticleCountConsentListener = () => {
+    onConsentChange(({ tcfv2 }) => {
+        if (!tcfv2 || hasRequiredConsentsForArticleCount(tcfv2)) {
+            // it's ok
+            return;
+        }
+        // it's not ok
+        optOutOfArticleCount();
+    });
+};
 
 export const hasOptedOutOfArticleCount = (): boolean =>
     getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
