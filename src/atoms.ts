@@ -36,8 +36,8 @@ function parseAtom(
 
             const { html, css, mainJS: js } = atom?.data?.interactive;
 
-            if (!html || !css) {
-                return err(`No html or css for atom: ${id}`);
+            if (!html && !css && !js) {
+                return err(`No content for atom: ${id}`);
             }
 
             return ok({
