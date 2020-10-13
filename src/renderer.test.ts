@@ -45,7 +45,7 @@ const imageElement = (): BodyElement =>
 
 const imageElementWithRole = () =>
     ({
-        ...imageElement,
+        ...imageElement(),
         role: some(Role.Thumbnail)
     })
 
