@@ -99,6 +99,20 @@ function resourceList(script: Option<string>): string[] {
     return pipe2(script, map(toArray), withDefault(emptyList));
 }
 
+async function serveArticle(request: RenderingRequest, res: ExpressResponse): Promise<void> {
+    const imageSalt = await getConfigValue('apis.img.salt');
+
+    if (imageSalt === undefined) {
+        throw new Error('Could not get image salt');
+    }
+
+    const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+
+    res.set('Link', getPrefetchHeader(resourceList(clientScript)));
+    res.write(html);
+    res.end();
+}
+
 async function serveArticlePost(
     { body }: Request,
     res: ExpressResponse,
@@ -106,31 +120,17 @@ async function serveArticlePost(
 ): Promise<void> {
     try {
         const renderingRequest = await mapiDecoder(body);
-        const imageSalt = await getConfigValue('apis.img.salt');
-
-        if (imageSalt === undefined) {
-            throw new Error('Could not get image salt');
-        }
-
-        const { html, clientScript } = render(imageSalt, renderingRequest, getAssetLocation);
-        res.set('Link', getPrefetchHeader(resourceList(clientScript)));
-        res.write(html);
-        res.end();
+        
+        void serveArticle(renderingRequest, res);
     } catch (e) {
         logger.error(`This error occurred`, e);
         next(e);
     }
 }
 
-async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
+async function serveArticleGet(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
-        const imageSalt = await getConfigValue('apis.img.salt');
-
-        if (imageSalt === undefined) {
-            throw new Error('Could not get image salt');
-        }
-
         const capiContent = await askCapiFor(articleId);
 
         either(
@@ -145,15 +145,8 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
                     commentCount: 30,
                     relatedContent
                 };
-                const { html, clientScript } = render(
-                    imageSalt,
-                    mockedRenderingRequest,
-                    getAssetLocation
-                );
 
-                res.set('Link', getPrefetchHeader(resourceList(clientScript)));
-                res.write(html);
-                res.end();
+                void serveArticle(mockedRenderingRequest, res);
             },
         )(capiContent);
     } catch (e) {
@@ -194,7 +187,7 @@ app.get('/healthcheck', (_req, res) => res.send("Ok"));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
-app.get('/*', bodyParser.raw(), serveArticle);
+app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
