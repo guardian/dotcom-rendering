@@ -12,8 +12,7 @@ import {
 import { Result, err, ok, map as rmap } from '@guardian/types/result';
 import { Context, DocParser } from 'types/parserContext';
 import { Image as ImageData, parseImage } from 'image';
-import { isElement, pipe2, pipe } from 'lib';
-import JsonSerialisable from 'types/jsonSerialisable';
+import { pipe2, pipe } from 'lib';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
@@ -177,78 +176,6 @@ type Body =
 
 
 // ----- Functions ----- //
-
-const serialiseNodes = (nodes: NodeList): string =>
-    Array.from(nodes).map(node => {
-        if (isElement(node)) {
-            return node.outerHTML;
-        }
-
-        return node.textContent ?? '';
-    }).join('');
-
-const serialiseFragment = (doc: DocumentFragment): string =>
-    serialiseNodes(doc.childNodes);
-
-function toSerialisable(elem: BodyElement): JsonSerialisable {
-    switch (elem.kind) {
-        case ElementKind.Text:
-            return { ...elem, doc: serialiseFragment(elem.doc) };
-        case ElementKind.Image:
-            return { ...elem, caption: map(serialiseFragment)(elem.caption) };
-        case ElementKind.Tweet:
-            return { ...elem, content: serialiseNodes(elem.content) };
-        case ElementKind.MediaAtom:
-            return { ...elem, caption: map(serialiseFragment)(elem.caption) };
-        case ElementKind.Callout:
-            return {
-                ...elem,
-                campaign: JSON.stringify(elem.campaign),
-                description: serialiseFragment(elem.description)
-            };
-        case ElementKind.InteractiveAtom:
-        case ElementKind.ExplainerAtom:
-        case ElementKind.Embed:
-            return { ...elem };
-        case ElementKind.GuideAtom:
-        case ElementKind.QandaAtom:
-        case ElementKind.ProfileAtom:
-        case ElementKind.TimelineAtom:
-        case ElementKind.ChartAtom:
-            return {};
-        default:
-            return elem;
-    }
-}
-
-// Disabled because the point of this function is to convert the `any`
-// provided by JSON.parse to a stricter type
-/* eslint-disable
-   @typescript-eslint/no-explicit-any,
-   @typescript-eslint/no-unsafe-member-access,
-   @typescript-eslint/no-unsafe-return,
-   @typescript-eslint/explicit-module-boundary-types
-*/
-
-const fromSerialisable = (docParser: DocParser) => (elem: any): BodyElement => {
-    switch (elem.kind) {
-        case ElementKind.Text:
-            return { ...elem, doc: docParser(elem.doc) };
-        case ElementKind.Image:
-            return { ...elem, caption: map(docParser)(elem.caption) };
-        case ElementKind.Tweet:
-            return { ...elem, content: docParser(elem.content) };
-        default:
-            return elem;
-    }
-}
-
-/* eslint-enable
-   @typescript-eslint/no-explicit-any,
-   @typescript-eslint/no-unsafe-member-access,
-   @typescript-eslint/no-unsafe-return,
-   @typescript-eslint/explicit-module-boundary-types
-*/
 
 const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
@@ -463,6 +390,4 @@ export {
     Video,
     Body,
     parseElements,
-    toSerialisable,
-    fromSerialisable,
 };

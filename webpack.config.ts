@@ -108,7 +108,6 @@ export const clientConfig: Configuration = {
     mode: 'development',
     entry: {
         article: 'client/article.ts',
-        liveblog: 'client/liveblog.ts',
         media: 'client/media.ts',
     },
     target: 'web',

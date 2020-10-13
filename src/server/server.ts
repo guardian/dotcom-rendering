@@ -22,28 +22,10 @@ import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
 import { Result, ok, err, either } from '@guardian/types/result';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { ContentType } from '@guardian/content-api-models/v1/contentType';
-import {
-    newBlocksSince,
-    updatedBlocksSince,
-    recentBlocks,
-    toSerialisable as serialiseLiveBlocks,
-} from 'liveBlock';
-import { JSDOM } from 'jsdom';
-import JsonSerialisable from 'types/jsonSerialisable';
-import { parseDate, Param } from 'server/paramParser';
-import { Context } from 'types/parserContext';
 import { toArray, pipe2 } from 'lib';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { parseRelatedContent } from 'relatedContent';
-
-// ----- Types ----- //
-
-interface LiveUpdates {
-    newBlocks: JsonSerialisable;
-    updatedBlocks: JsonSerialisable;
-}
 
 
 // ----- Setup ----- //
@@ -52,7 +34,6 @@ const getAssetLocation: (assetName: string) => string = getMappedAssetLocation()
 const defaultId =
     'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
-const docParser = JSDOM.fragment.bind(null);
 type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 
@@ -181,57 +162,6 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     }
 }
 
-const liveBlockUpdates = (since: Date, content: Content, context: Context): LiveUpdates => ({
-    newBlocks: serialiseLiveBlocks(newBlocksSince(since)(content)(context)),
-    updatedBlocks: serialiseLiveBlocks(updatedBlocksSince(since)(content)(context)),
-});
-
-const recentLiveBlocks = (content: Content, context: Context): LiveUpdates => ({
-    newBlocks: serialiseLiveBlocks(recentBlocks(7)(content)(context)),
-    updatedBlocks: [],
-});
-
-async function liveBlocks(req: Request, res: ExpressResponse): Promise<void> {
-    try {
-        const articleId = req.params.articleId || defaultId;
-        const imageSalt = await getConfigValue('apis.img.salt');
-
-        if (imageSalt === undefined) {
-            throw new Error('Could not get image salt');
-        }
-
-        const since = parseDate(req.query.since);
-
-        if (since.kind === Param.Invalid) {
-            const timestamp = typeof req.query.since === 'string' ? `: ${req.query.since}` : '';
-            logger.warn(`I couldn't get liveblog updates for: ${articleId}, I didn't understand the timestamp${timestamp}`);
-
-            return res.sendStatus(400).end();
-        }
-
-        const capiContent = await askCapiFor(articleId);
-
-        either(
-            (errorStatus: number) => { res.sendStatus(errorStatus) },
-            ([content, relatedContent]: [Content, RelatedContent]) => {
-                const context = { salt: imageSalt, docParser };
-
-                if (content.type !== ContentType.LIVEBLOG) {
-                    logger.warn(`I was asked to provide updates on something that wasn't a liveblog: ${articleId}`);
-                    res.sendStatus(400);
-                } else if (since.kind === Param.None) {
-                    res.status(200).json(recentLiveBlocks(content, context));
-                } else {
-                    res.status(200).json(liveBlockUpdates(since.value, content, context));
-                }
-            },
-        )(capiContent);
-    } catch (e) {
-        logger.error(`This error occurred`, e);
-        res.sendStatus(500);
-    }
-}
-
 
 // ----- App ----- //
 
@@ -258,8 +188,6 @@ app.all('*', (request, response, next) => {
 
     next();
 });
-
-app.get('/:articleId(*)/live-blocks', liveBlocks);
 
 app.get('/healthcheck', (_req, res) => res.send("Ok"));
 
