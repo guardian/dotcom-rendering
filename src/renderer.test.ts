@@ -4,7 +4,6 @@ import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { Role } from 'image';
 import { none, some } from '@guardian/types/option';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -43,19 +42,9 @@ const imageElement = (): BodyElement =>
         role: none,
     });
 
-const imageElementWithRole = (): BodyElement =>
+const imageElementWithRole = () =>
     ({
-        kind: ElementKind.Image,
-        src: 'https://theguardian.com/image.jpg',
-        srcset: '',
-        dpr2Srcset: '',
-        alt: some("alt tag"),
-        caption: some(JSDOM.fragment('this caption contains <em>html</em>')),
-        nativeCaption: some('caption'),
-        credit: some('credit'),
-        width: 500,
-        height: 500,
-        role: some(Role.Thumbnail)
+        ...imageElement(),
     })
 
 const pullquoteElement = (): BodyElement =>
