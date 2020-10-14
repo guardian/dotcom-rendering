@@ -246,6 +246,35 @@ function parseAtom(
             });
         }
 
+        case "quiz": {
+            const atom = atoms.quizzes?.find(quiz => quiz.id === id);
+            if (atom?.data?.kind !== "quiz" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { content } = atom?.data?.quiz;
+
+            if (!content) {
+                return err(`No content for atom: ${id}`);
+            }
+
+            const questions = content.questions.map(question => {
+                return {
+                    text: question.questionText,
+                    ...question,
+                    answers: question.answers.map(answer => {
+                        return {
+                            text: answer.answerText,
+                            isCorrect: !!answer.weight,
+                            ...answer
+                        }
+                    })
+                }
+            })
+
+            return ok({ kind: ElementKind.QuizAtom, id, questions });
+        }
+
         default: {
             return err(`Atom type not supported: ${element.contentAtomTypeData.atomType}`);
         }

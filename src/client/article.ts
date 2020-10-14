@@ -9,6 +9,7 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
+import { QuizAtom } from '@guardian/atoms-rendering';
 
 
 // ----- Run ----- //
@@ -222,6 +223,21 @@ function hasSeenCards(): void {
     })
 }
 
+function hydrateQuizAtoms(): void {
+    Array.from(document.querySelectorAll('.js-quiz'))
+        .forEach(atom => {
+            const props = atom.querySelector('.js-quiz-params')?.innerHTML;
+            try {
+                if (props) {
+                    const quizProps = JSON.parse(props.replace(/&quot;/g, '"'));
+                    ReactDOM.hydrate(h(QuizAtom, quizProps), atom);
+                }
+            } catch(e) {
+                console.error(e);
+            }
+        })
+}
+
 setup();
 ads();
 videos();
@@ -232,3 +248,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+hydrateQuizAtoms();

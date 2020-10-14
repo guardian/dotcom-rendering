@@ -102,6 +102,10 @@ const includesTweets = (content: Content): boolean => {
         .some(Boolean)
 }
 
+const inlineStyleAtoms = (content: Content): boolean => {
+    return !!(content?.atoms?.quizzes || content?.atoms?.audios);
+}
+
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
         .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
@@ -172,5 +176,6 @@ export {
     includesTweets,
     maybeCapiDate,
     paidContentLogo,
-    articleMainImage
+    articleMainImage,
+    inlineStyleAtoms
 };
