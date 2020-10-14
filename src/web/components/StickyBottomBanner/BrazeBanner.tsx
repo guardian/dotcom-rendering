@@ -6,7 +6,9 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
+
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
@@ -154,6 +156,9 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
+    const performanceLogging = initPerf('braze-banner');
+    performanceLogging.start();
+
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
         return {
@@ -186,7 +191,10 @@ export const canShow = async (
     }
 
     try {
-        return getMessageFromBraze(apiKey as string, brazeUuid);
+        return getMessageFromBraze(apiKey as string, brazeUuid).then(result => {
+            performanceLogging.end();
+            return result;
+        });
     } catch (e) {
         return { result: false };
     }
