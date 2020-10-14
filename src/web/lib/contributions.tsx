@@ -15,6 +15,10 @@ export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
     'gu.contributions.contrib-timestamp';
 
+//  Local storage keys
+const DAILY_ARTILCE_COUNT_KEY = 'gu.history.dailyArticleCount';
+const WEEKLY_ARTILCE_COUNT_KEY = 'gu.history.weeklyArticleCount';
+
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
 // including but not limited to recurring & one-off contributions,
@@ -118,18 +122,30 @@ const REQUIRED_CONSENTS_FOR_ARTILCE_COUNT = [1, 3, 7];
 export const hasOptedOutOfArticleCount = (): boolean =>
     getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
+const removeArticleCountsFromLocalStorage = () => {
+    window.localStorage.removeItem(DAILY_ARTILCE_COUNT_KEY);
+    window.localStorage.removeItem(WEEKLY_ARTILCE_COUNT_KEY);
+};
+
 export const getArticleCountConsent = (): Promise<boolean> => {
     if (hasOptedOutOfArticleCount()) {
         return Promise.resolve(false);
     }
     return new Promise((resolve) => {
-        onConsentChange(({ tcfv2 }) => {
-            resolve(
-                !!tcfv2 &&
-                    REQUIRED_CONSENTS_FOR_ARTILCE_COUNT.every(
-                        (consent) => tcfv2.consents[consent],
-                    ),
-            );
+        onConsentChange(({ ccpa, tcfv2 }) => {
+            if (ccpa) {
+                resolve(true);
+            } else if (tcfv2) {
+                const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTILCE_COUNT.every(
+                    (consent) => tcfv2.consents[consent],
+                );
+
+                if (!hasRequiredConsents) {
+                    removeArticleCountsFromLocalStorage();
+                }
+
+                resolve(hasRequiredConsents);
+            }
         });
     });
 };
