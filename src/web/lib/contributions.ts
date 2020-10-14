@@ -16,8 +16,8 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
     'gu.contributions.contrib-timestamp';
 
 //  Local storage keys
-const DAILY_ARTILCE_COUNT_KEY = 'gu.history.dailyArticleCount';
-const WEEKLY_ARTILCE_COUNT_KEY = 'gu.history.weeklyArticleCount';
+const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
+const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -117,14 +117,14 @@ export const shouldHideSupportMessaging = (
     isRecurringContributor(isSignedIn) ||
     isRecentOneOffContributor();
 
-const REQUIRED_CONSENTS_FOR_ARTILCE_COUNT = [1, 3, 7];
+const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 
 export const hasOptedOutOfArticleCount = (): boolean =>
     getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
-    window.localStorage.removeItem(DAILY_ARTILCE_COUNT_KEY);
-    window.localStorage.removeItem(WEEKLY_ARTILCE_COUNT_KEY);
+    window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
+    window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
 export const getArticleCountConsent = (): Promise<boolean> => {
@@ -136,7 +136,7 @@ export const getArticleCountConsent = (): Promise<boolean> => {
             if (ccpa) {
                 resolve(true);
             } else if (tcfv2) {
-                const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTILCE_COUNT.every(
+                const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
                     (consent) => tcfv2.consents[consent],
                 );
 
