@@ -31,35 +31,18 @@ const canShow = (
     CAPI: CAPIBrowserType,
     isSignedIn: boolean,
     currentTest: CurrentABTest,
-): boolean => {
-    console.log('variant 1 (3)');
-    console.log(
-        !isSignedIn,
-        !hasUserDismissedGateMoreThanCount(
-            currentTest.variant,
-            currentTest.name,
-            5,
-        ),
-        isNPageOrHigherPageView(3),
-        isValidContentType(CAPI) && isValidSection(CAPI),
-        !isIOS9(),
-        isCountry('US'),
-    );
-
-    return (
-        !isSignedIn &&
-        !hasUserDismissedGateMoreThanCount(
-            currentTest.variant,
-            currentTest.name,
-            5,
-        ) &&
-        isNPageOrHigherPageView(3) &&
-        isValidContentType(CAPI) &&
-        isValidSection(CAPI) &&
-        !isIOS9() &&
-        isCountry('US')
-    );
-};
+): boolean =>
+    !isSignedIn &&
+    !hasUserDismissedGateMoreThanCount(
+        currentTest.variant,
+        currentTest.name,
+        5,
+    ) &&
+    isNPageOrHigherPageView(3) &&
+    isValidContentType(CAPI) &&
+    isValidSection(CAPI) &&
+    !isIOS9() &&
+    isCountry('US');
 
 export const signInGateComponent: SignInGateComponent = {
     gate: ({
