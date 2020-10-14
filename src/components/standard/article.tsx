@@ -49,8 +49,8 @@ const itemStyles = (item: Item): SerializedStyles => {
     switch (item.display) {
         case Display.Immersive:
             return css`
-                p:first-of-type:first-letter,
-                hr + p:first-letter {
+                > p:first-of-type:first-letter,
+                > hr + p:first-letter {
                     color: ${kicker};
                     display: inline-block;
                     vertical-align: text-top;
@@ -84,7 +84,7 @@ const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? null
-        : <div id="epic-placeholder">
+        : <div css={articleWidthStyles} id="epic-placeholder">
             <Epic
                 title=""
                 body=""
@@ -94,7 +94,7 @@ const Standard: FC<Props> = ({ item, children }) => {
         </div>
 
     return <main css={[Styles, DarkStyles]}>
-        <article css={BorderStyles}>
+        <article className="js-article" css={BorderStyles}>
             <header>
                 <HeaderMedia item={item} />
                 <Series item={item} />

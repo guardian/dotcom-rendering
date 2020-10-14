@@ -40,7 +40,7 @@ interface Props {
 }
 
 const Media: FC<Props> = ({ item, children }) =>
-     <main css={[Styles]}>
+    <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderMedia item={item} />

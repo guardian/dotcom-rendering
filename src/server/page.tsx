@@ -111,6 +111,7 @@ const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
     );
 
 const buildHtml = (head: string, body: string, scripts: ReactElement): string => `
+    <!DOCTYPE html>
     <html lang="en">
         <head>
             ${head}

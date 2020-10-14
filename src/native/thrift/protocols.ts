@@ -167,9 +167,9 @@ export class TMultiplexedProtocol extends TProtocolDecorator {
     writeMessageBegin(name: string, type: MessageType, seqid: number): void {
         if (type === MessageType.CALL || type === MessageType.ONEWAY) {
             super.writeMessageBegin(
-                    this.serviceName + TMultiplexedProtocol.separator + name,
-                    type,
-                    seqid
+                this.serviceName + TMultiplexedProtocol.separator + name,
+                type,
+                seqid
             );
         } else {
             super.writeMessageBegin(name, type, seqid);
