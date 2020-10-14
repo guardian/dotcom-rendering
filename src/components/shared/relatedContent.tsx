@@ -60,7 +60,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
                                 ? <BylineCard
                                     key={key}
                                     relatedItem={relatedItem}
-                                  />
+                                />
                                 : <Card
                                     key={key}
                                     relatedItem={relatedItem}

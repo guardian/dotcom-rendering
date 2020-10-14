@@ -13,4 +13,4 @@ const tagsProps = [{
 
 export const tags = (format: Format): JSX.Element =>
 
-<Tags tags={[...tagsProps, ...tagsProps, ...tagsProps]} format={format} />
+    <Tags tags={[...tagsProps, ...tagsProps, ...tagsProps]} format={format} />

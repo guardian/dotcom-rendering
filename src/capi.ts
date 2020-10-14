@@ -133,14 +133,14 @@ const capiEndpoint = (articleId: string, key: string): string => {
     ];
 
     const params = new URLSearchParams({
-      format: 'thrift',
-      'api-key': key,
-      'show-atoms': 'all',
-      'show-fields': fields.join(','),
-      'show-tags': 'all',
-      'show-blocks': 'all',
-      'show-elements': 'all',
-      'show-related': 'true'
+        format: 'thrift',
+        'api-key': key,
+        'show-atoms': 'all',
+        'show-fields': fields.join(','),
+        'show-tags': 'all',
+        'show-blocks': 'all',
+        'show-elements': 'all',
+        'show-related': 'true'
     })
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;

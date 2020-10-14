@@ -12,6 +12,7 @@ interface Props {
 
 const Meta: FC<Props> = ({ title, cspString }) =>
     <>
+        <meta charSet="utf-8" />
         <title>{title}</title>
         <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1" />

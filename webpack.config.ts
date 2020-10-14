@@ -108,7 +108,6 @@ export const clientConfig: Configuration = {
     mode: 'development',
     entry: {
         article: 'client/article.ts',
-        liveblog: 'client/liveblog.ts',
         media: 'client/media.ts',
     },
     target: 'web',
@@ -179,14 +178,14 @@ const clientConfigProduction = {
         new HtmlWebpackPlugin({
             meta: {
                 'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': `style-src 'sha256-${assetHash(assetsTemplateCss)}';` },
-              },
+            },
             filename: 'rendered-items-assets.html',
             template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
             minify: true,
             templateParameters: {
                 styles: assetsTemplateCss
             }
-          })
+        })
     ],
     output: {
         path: path.resolve(__dirname, 'dist/assets'),

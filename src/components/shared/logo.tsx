@@ -17,8 +17,8 @@ interface Props {
 }
 
 const styles = (format: Format, 
-                lightModeImage: string, 
-                darkModeImage?: string): SerializedStyles => {
+    lightModeImage: string, 
+    darkModeImage?: string): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
     return css`
         margin: ${remSpace[9]} 0;
