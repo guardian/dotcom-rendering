@@ -4,6 +4,7 @@ import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-g
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
 import { signInGatePageview } from '@frontend/web/experiments/tests/sign-in-gate-pageview';
+import { signInGatePersonalisedAdCopy } from '@frontend/web/experiments/tests/sign-in-gate-personalised-ad-copy'
 import { curatedContainerTest } from '@frontend/web/experiments/tests/curated-container-test';
 
 export const tests: ABTest[] = [
@@ -12,5 +13,6 @@ export const tests: ABTest[] = [
     signInGateMainControl,
     signInGatePatientia,
     signInGatePageview,
+    signInGatePersonalisedAdCopy,
     curatedContainerTest,
 ];

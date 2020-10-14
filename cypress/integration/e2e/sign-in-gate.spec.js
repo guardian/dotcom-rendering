@@ -257,4 +257,38 @@ describe('Sign In Gate Tests', function () {
             cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
         });
     });
+
+    describe('SignInGatePersonalisedAdCopy', function () {
+        beforeEach(function () {
+            // sign in gate patientia runs from 999901-1000000 MVT IDs, so 999901 forces user into test variant
+            setMvtCookie('700001');
+
+            // set article count to be min number to view gate
+            setArticleCount(3);
+        });
+
+        it('should load the sign in gate', function () {
+            visitArticleAndScrollToGateForLazyLoad();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('be.visible');
+        });
+
+        it('should remove gate when the dismiss button is clicked', function () {
+            visitArticleAndScrollToGateForLazyLoad();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('be.visible');
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2_dismiss]',
+            ).click();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('not.be.visible');
+        });
+    });
 });

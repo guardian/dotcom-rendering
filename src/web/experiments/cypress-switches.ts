@@ -15,6 +15,7 @@ const cypressSwitches = {
     abSignInGateMainVariant: true,
     abSignInGatePatientia: true,
     abSignInGatePageview: true,
+    abSignInGatePersonalisedAdCopy: true,
 };
 
 // Function to retrieve the switches if running in Cypress

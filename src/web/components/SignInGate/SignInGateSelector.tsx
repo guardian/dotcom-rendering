@@ -18,6 +18,7 @@ import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gat
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 import { signInGatePageview } from '@root/src/web/experiments/tests/sign-in-gate-pageview';
+import { signInGatePersonalisedAdCopy } from '@root/src/web/experiments/tests/sign-in-gate-personalised-ad-copy';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
@@ -28,6 +29,8 @@ import { signInGateComponent as gatePageviewVariant1 } from '@root/src/web/compo
 import { signInGateComponent as gatePageviewVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-variant-2';
 import { signInGateComponent as gatePageviewVariant3 } from '@root/src/web/components/SignInGate/gates/pageview-variant-3';
 import { signInGateComponent as gatePageviewVariant4 } from '@root/src/web/components/SignInGate/gates/pageview-variant-4';
+import { signInGateComponent as gatePersonalisedAdCopyVariant1 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-1';
+import { signInGateComponent as gatePersonalisedAdCopyVariant2 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-2';
 
 import {
     ComponentEventParams,
@@ -82,6 +85,7 @@ const tests: ReadonlyArray<ABTest> = [
     signInGateMainVariant,
     signInGateMainControl,
     signInGatePageview,
+    signInGatePersonalisedAdCopy,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
@@ -93,6 +97,8 @@ const testVariantToGateMapping: GateTestMap = {
     'pageview-variant-2': gatePageviewVariant2,
     'pageview-variant-3': gatePageviewVariant3,
     'pageview-variant-4': gatePageviewVariant4,
+    'personalised-ad-copy-variant-1': gatePersonalisedAdCopyVariant1,
+    'personalised-ad-copy-variant-2': gatePersonalisedAdCopyVariant2,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
@@ -100,6 +106,7 @@ const testIdToComponentId: { [key: string]: string } = {
     SignInGateMainControl: 'main_control_2',
     SignInGatePatientia: 'patientia_test',
     SignInGatePageview: 'pageview_test',
+    SignInGatePersonlisedAdCopy: 'personlised_ad_copy_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
