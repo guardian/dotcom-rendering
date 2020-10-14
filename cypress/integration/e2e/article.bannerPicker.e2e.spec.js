@@ -10,7 +10,7 @@ describe('Banner Picker Integration', function () {
 
     const cmpIframe = () => {
         return cy
-            .get('iframe#sp_message_iframe_208529')
+            .get('iframe[id*="sp_message_iframe"]')
             .its('0.contentDocument.body')
             .should('not.be.empty')
             .then(cy.wrap);

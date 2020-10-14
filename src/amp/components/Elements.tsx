@@ -95,7 +95,13 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-                return <InteractiveAtomBlockComponent url={element.url} />;
+                return (
+                    <InteractiveAtomBlockComponent
+                        url={element.url}
+                        html={element.html}
+                        placeholderUrl={element.placeholderUrl}
+                    />
+                ); // element.placeholderUrl
             case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
                 return <InteractiveAtomBlockComponent url={element.url} />;
             case 'model.dotcomrendering.pageElements.MapBlockElement':

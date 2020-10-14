@@ -3,6 +3,7 @@
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
     url: string;
+    placeholderUrl?: string;
     id?: string;
     html?: string;
     css?: string;

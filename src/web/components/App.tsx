@@ -327,7 +327,10 @@ export const App = ({ CAPI, NAV }: Props) => {
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
             cmp.init({
                 isInUsa: countryCode === 'US',
-                pubData: { browserId: getCookie('bwid') || undefined },
+                pubData: {
+                    browserId: getCookie('bwid') || undefined,
+                    pageViewId: window.guardian?.config?.ophan?.pageViewId,
+                },
             });
         }
     }, [countryCode, CAPI.config.switches.consentManagement]);
