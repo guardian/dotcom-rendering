@@ -66,9 +66,8 @@ const assetHashes = (assets: string[]): string =>
 // `.trim()
 
 const styleSrc = (styles: string[], twitter: boolean, hasInlineStyles: boolean): string => {
-    return hasInlineStyles
-        ? `https: 'unsafe-inline';`
-        : `'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};`
+    const urls = `https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''}`;
+    return hasInlineStyles ? `'self' ${urls} 'unsafe-inline';` : `'self' ${assetHashes(styles)} ${urls};`;
 }
 
 const buildCsp = ({ styles, scripts }: Assets, twitter: boolean, hasInlineStyles: boolean): string => `
