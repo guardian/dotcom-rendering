@@ -132,7 +132,10 @@ const hideElementsCss = `
     #sign-in-gate ~ * {
         display: none;
     }
-    `;
+    .ad-slot--inline {
+        display: none;
+    }
+`;
 
 export const SignInGateMain = ({
     signInUrl,
