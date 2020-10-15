@@ -45,7 +45,7 @@ Cookies are also dropped and sent with each request:
 
 The `url` field for the Guardian does not usually contain personal information, but sometimes it may as the previous page URL may contain an identifier. This is not only theorical and there is [good documentation about privacy concerns of referrer](https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns). It is a reminder to always follow good security practice on our website (i.e. no identifiers in URLs) and to never include these trackers on unnecessary pages (e.g. identity) where the risk of PII leakage may be higher.
 
-While none of the other fields individually contains information [that relates to an identified or identifiable individual](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/key-definitions/what-is-personal-data/), it is worth mentionning that by using a combination of those fields it may be possible to recreate a session identifier. It is difficult to estimate if there will be enough information to potentially identify an individual.
+While none of the other fields individually contains information [that relates to an identified or identifiable individual](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/key-definitions/what-is-personal-data/), it is worth mentioning that by using a combination of those fields it may be possible to recreate a session identifier. It is difficult to estimate if there will be enough information to potentially identify an individual.
 
 ### Recommended mitigations
 
@@ -77,7 +77,7 @@ Additionally loading a third-party script from a storage not controlled by us, a
 
 Should the events being sent client-side:
 
--   Audit the current version of the script ensuring it only does what is expected and create a hash of it. This is particularly complicated
+-   Audit the current version of the script ensuring it only does what is expected and create a hash of it. This is particularly complicated for Ipsos because its tag fetches further scripts.
 -   Add [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) so the script could not be modified maliciously.
 
 ### AMP
