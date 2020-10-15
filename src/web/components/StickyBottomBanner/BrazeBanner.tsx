@@ -5,9 +5,8 @@ import * as emotionTheming from 'emotion-theming';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
 import { CanShowResult } from './bannerPicker';
-import { record } from '@root/src/web/browser/ophan/ophan';
 
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
@@ -40,18 +39,19 @@ const measureTiming = (name: string) => {
         perf.mark(startKey);
     };
 
-    const end = () => {
+    const endAndReturn = () => {
         perf.mark(endKey);
         perf.measure(name, startKey, endKey);
-        const timeTaken = perf.getEntriesByName(name, "measure");
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify(timeTaken));
-        return perf.getEntriesByName(name, "measure");
+        const measureEntries = perf.getEntriesByName(name, "measure");
+        const timeTakenFloat = measureEntries[0].duration;
+        const timeTakenInt = Math.trunc(timeTakenFloat);
+
+        return timeTakenInt;
     };
 
     return {
         start,
-        end,
+        endAndReturn,
     };
 };
 
@@ -183,6 +183,7 @@ export const canShow = async (
     const canShowTiming = measureTiming('braze-banner');
     canShowTiming.start();
 
+
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
         return {
@@ -216,7 +217,7 @@ export const canShow = async (
 
     try {
         return getMessageFromBraze(apiKey as string, brazeUuid).then(result => {
-            const timeTaken = canShowTiming.end();
+            const timeTaken = canShowTiming.endAndReturn();
             record({
                 component: 'braze-banner-timing',
                 value: timeTaken,
