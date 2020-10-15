@@ -17,6 +17,7 @@ import { MatchReport } from '@root/fixtures/articles/MatchReport';
 import { NAV } from '@root/fixtures/NAV';
 
 import { HydrateApp } from '@root/src/web/components/HydrateApp';
+import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
@@ -48,6 +49,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
     useEffect(() => {
         const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
         HydrateApp({ CAPI, NAV });
+        embedIframe();
     }, [ServerCAPI]);
     return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
@@ -74,7 +76,9 @@ export const AdvertisementFeatureStory = () => {
     const ServerCAPI = convertToStandard(AdvertisementFeature);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
+AdvertisementFeatureStory.story = {
+    name: 'AdvertisementFeature',
+};
 
 export const PhotoEssayStory = () => {
     const ServerCAPI = convertToStandard(PhotoEssay);

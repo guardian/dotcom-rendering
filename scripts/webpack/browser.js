@@ -46,6 +46,7 @@ module.exports = ({ isLegacyJS }) => ({
         lotame: scriptPath('lotame'),
         dynamicImport: scriptPath('dynamicImport'),
         atomIframe: scriptPath('atomIframe'),
+        embedIframe: scriptPath('embedIframe'),
     },
     output: {
         filename: generateName(isLegacyJS),

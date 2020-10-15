@@ -108,6 +108,7 @@ export const document = ({ data }: Props) => {
             { src: 'ophan.js', module: true },
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
+            { src: 'embedIframe.js', module: true },
         ],
         'async',
     );
