@@ -130,26 +130,36 @@ const articleMainMedia = (content: Content, context: Context): Option<MainMedia>
   }
 }
 
-const checkForThirdPartyEmbeds = (thirdPartyEmbeds: ThirdPartyEmbeds, block: Block): ThirdPartyEmbeds => {
-    console.log('::>>::',block.elements[0]);
+const checkForThirdPartyEmbedsInner = (thirdPartyEmbeds: ThirdPartyEmbeds, block: Block): ThirdPartyEmbeds => {
+    // console.log('::>>::',block.elements[0]);
     console.log('::>>::',block.elements[1]);
+    console.log('SEEEEEE!',thirdPartyEmbeds);
+    
     return block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds);
 }
 
 const getThirdPartyEmbeds = (content: Content): any => {
     const body = content?.blocks?.body;
-    console.log(body?.length);
+    // console.log(body?.length);
+    console.log(content.blocks?.body)
     
     if (!body) {
         return false
     }
 
+    let mappedElems = body.map(el => el.elements)
+    console.log('>>>----------->>>>',mappedElems);
+    
     let allThirdPartyEmbeds = body.reduce(
         //(thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
-        checkForThirdPartyEmbeds,
+        checkForThirdPartyEmbedsInner,
         noThirdPartyEmbeds,
     );
 
+    // body.reduce(
+    //     (thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
+    //     noThirdPartyEmbeds,
+    //   );
     return allThirdPartyEmbeds;
 }
 
