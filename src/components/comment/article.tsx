@@ -19,6 +19,7 @@ import HeaderMedia from 'headerMedia';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
 import { Lines } from '@guardian/src-ed-lines';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //
@@ -54,12 +55,9 @@ const topBorder = css`
     `}
 `;
 
-
 const commentLineStylePosition = css`
     margin-top: 83px;
 `
-
-// ----- Component ----- //
 
 interface Props {
     item: CommentItem;
@@ -107,6 +105,8 @@ const Comment: FC<Props> = ({ item, children }) =>
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
+
     </main>
 
 

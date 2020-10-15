@@ -15,6 +15,7 @@ import { Item } from 'item';
 import Headline from 'components/headline';
 import HeaderMedia from 'headerMedia';
 import RelatedContent from 'components/shared/relatedContent';
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //
@@ -70,6 +71,7 @@ const Media: FC<Props> = ({ item, children }) =>
         <section css={relatedContentStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>;
 
 
