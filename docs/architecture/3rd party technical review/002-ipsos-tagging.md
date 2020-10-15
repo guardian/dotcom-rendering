@@ -43,7 +43,7 @@ Cookies are also dropped and sent with each request:
 -   `Dotmetrics.UniqueUserIdentityCookie` containing a user identifier, a creation date and a global identifier. It is not clear what the global identifier is for.
 -   `DotMetrics.DeviceKey` containing a device ID which appears to be unusued on web.
 
-The `url` field for the Guardian does not usually contain personal information, but sometimes it may as the previous page URL may contain an identifier. This is not only theorical and there is [good documentation about privacy concerns of referrer](https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns). It is a reminder to always follow good security practice on our website (i.e. no identifiers in URLs) and to never include these trackers on unnecessary pages (e.g. identity) where the risk of PII leakage may be higher.
+The `url` field for the Guardian does not usually contain personal information, but sometimes it may as the previous page URL may contain an identifier. This is not only theoretical and there is [good documentation about privacy concerns of referrer](https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns). It is a reminder to always follow good security practice on our website (i.e. no identifiers in URLs) and to never include these trackers on unnecessary pages (e.g. identity) where the risk of PII leakage may be higher.
 
 While none of the other fields individually contains information [that relates to an identified or identifiable individual](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/key-definitions/what-is-personal-data/), it is worth mentioning that by using a combination of those fields it may be possible to recreate a session identifier. It is difficult to estimate if there will be enough information to potentially identify an individual.
 
@@ -75,7 +75,7 @@ Additionally loading a third-party script from a storage not controlled by us, a
 
 #### Recommended mitigations
 
-Should the events being sent client-side:
+Should the events be sent client-side:
 
 -   Audit the current version of the script ensuring it only does what is expected and create a hash of it. This is particularly complicated for Ipsos because its tag fetches further scripts.
 -   Add [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) so the script could not be modified maliciously.
@@ -86,21 +86,15 @@ Similar security and data privacy considerations are applicable also for AMP. Th
 
 ## Perfomance engineering review
 
-Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 47kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is larger than google analytics and 15x the size of comscore.
-
-One of the responses appears not to be gzipped which may hold a small performance gain:
-
--   https://adex.dotmetrics.net/adexConfig.js?v=169&id={id}
+Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 31kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is larger than google analytics and 15x the size of comscore.
 
 The most time consuming part of the requests made by Dotmetrics scripts is the DNS lookup and initial connection. This could be optimised by adding prefetch/preconnect hints for these domains, although if this tag was to be behind consent then that may raise additional privacy concerns.
-
-On the web, we appear to load an additional script and config for tracking of our advertising. As this requires more requests to a completely fresh domain, we should disable this unless absolutely necessary. This may already be the case once we have real tag IDs to use in a production-like test.
 
 The Dotmetrics documentation mentions that script tags should be placed close to the page header. This implies that they suggest execution should be made as early as possible, but that it may not be absolutely critical and we therefore may take the decision to delay execution. I suggest we take that strategy to avoid blocking the loading of critical content at all.
 
 #### Recommended mitigations
 
-Outside of the proof of concept there are 4 areas than can be investigated to ensure our performances are less degraded:
+There are 4 areas than can be investigated to ensure our performances are less degraded:
 
 -   Deprioritise the loading of the initial script or the subsequent scripts it loads via an alternate loading strategy
 -   Only load the tag on UK page views
