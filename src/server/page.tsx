@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { includesInstagram, includesSpotify, includesTweets, includesYoutube } from 'capi';
+import { includesInstagram, includesSpotify, includesTweets, includesYoutube, getThirdPartyEmbeds } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -136,7 +136,16 @@ function render(
     const hasInstagram = includesInstagram(request.content);
     const hasYoutube = includesYoutube(request.content);
     const hasSpotify = includesSpotify(request.content);
+    // console.log(`>>> ${hasTweets}`);
+    // console.log(includesTweets(request.content));
+    // console.log(request.content.blocks?.body);
+    
+    
+    const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
+    console.log('thirdPartyEmbeds', thirdPartyEmbeds);
+
     const body = renderBody(item, request);
+    // replace has... with thirdPartyEmbeds
     const head = renderHead(item, request, hasTweets, 
         hasInstagram, hasYoutube, hasSpotify, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;
