@@ -6,8 +6,8 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
+import { record } from '@root/src/web/browser/ophan/ophan';
 
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
@@ -30,6 +30,30 @@ const containerStyles = emotion.css`
     width: 100%;
     ${getZIndex('banner')}
 `;
+
+const measureTiming = (name: string) => {
+    const perf = window.performance;
+    const startKey = `${name}-start`;
+    const endKey = `${name}-end`;
+
+    const start = () => {
+        perf.mark(startKey);
+    };
+
+    const end = () => {
+        perf.mark(endKey);
+        perf.measure(name, startKey, endKey);
+        const timeTaken = perf.getEntriesByName(name, "measure");
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(timeTaken));
+        return perf.getEntriesByName(name, "measure");
+    };
+
+    return {
+        start,
+        end,
+    };
+};
 
 export const hasRequiredConsents = (): Promise<boolean> =>
     new Promise((resolve) => {
@@ -156,8 +180,8 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
-    const performanceLogging = initPerf('braze-banner');
-    performanceLogging.start();
+    const canShowTiming = measureTiming('braze-banner');
+    canShowTiming.start();
 
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
@@ -192,7 +216,11 @@ export const canShow = async (
 
     try {
         return getMessageFromBraze(apiKey as string, brazeUuid).then(result => {
-            performanceLogging.end();
+            const timeTaken = canShowTiming.end();
+            record({
+                component: 'braze-banner-timing',
+                value: timeTaken,
+            });
             return result;
         });
     } catch (e) {
