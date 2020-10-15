@@ -10,7 +10,7 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { QuizAtom } from '@guardian/atoms-rendering';
-
+import { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
 
 // ----- Run ----- //
 
@@ -229,8 +229,8 @@ function hydrateQuizAtoms(): void {
             const props = atom.querySelector('.js-quiz-params')?.innerHTML;
             try {
                 if (props) {
-                    const quizProps = JSON.parse(props.replace(/&quot;/g, '"'));
-                    ReactDOM.hydrate(h(QuizAtom, quizProps), atom);
+                    const quizProps: unknown = JSON.parse(props.replace(/&quot;/g, '"'));
+                    ReactDOM.hydrate(h(QuizAtom, quizProps as QuizAtomType), atom);
                 }
             } catch(e) {
                 console.error(e);

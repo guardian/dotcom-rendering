@@ -65,7 +65,7 @@ const assetHashes = (assets: string[]): string =>
 //     child-src https: blob:
 // `.trim()
 
-const styleSrc = (styles: string[], twitter: boolean, hasInlineStyles: boolean) => {
+const styleSrc = (styles: string[], twitter: boolean, hasInlineStyles: boolean): string => {
     return hasInlineStyles
         ? `https: 'unsafe-inline';`
         : `'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};`
@@ -81,7 +81,12 @@ const buildCsp = ({ styles, scripts }: Assets, twitter: boolean, hasInlineStyles
     connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/
 `.trim();
 
-function csp(item: Item, additionalAssets: Assets, twitter: boolean, hasInlineStyles: boolean): string {
+function csp(
+    item: Item,
+    additionalAssets: Assets,
+    twitter: boolean,
+    hasInlineStyles: boolean
+): string {
     const interactives = interactiveAssets(item);
     const assets = {
         styles: [ ...interactives.styles, ...additionalAssets.styles ],
