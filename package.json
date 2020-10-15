@@ -8,6 +8,7 @@
     "ios >= 11"
   ],
   "scripts": {
+    "postinstall": "husky install",
     "upload": "node-riffraff-artifact",
     "copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
     "copy-fonts": "cp -R assets/fonts dist/assets/fonts",
@@ -102,7 +103,9 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.4",
     "html-webpack-plugin": "^4.5.0",
+    "husky": "^5.0.0-alpha.6",
     "jest": "^26.5.3",
+    "pinst": "^2.0.0",
     "storybook-chromatic": "^4.0.2",
     "ts-jest": "^26.4.1",
     "ts-loader": "^8.0.5",
