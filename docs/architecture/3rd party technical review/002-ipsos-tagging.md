@@ -88,7 +88,7 @@ Similar security and data privacy considerations are applicable also for AMP. Th
 
 Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 31kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is larger than google analytics and 15x the size of comscore.
 
-The most time consuming part of the requests made by Dotmetrics scripts is the DNS lookup and initial connection. This could be optimised by adding prefetch/preconnect hints for these domains, although if this tag was to be behind consent then that may raise additional privacy concerns.
+The most time consuming part of the requests made by Dotmetrics scripts is the DNS lookup and initial connection. This could be optimised by adding prefetch/preconnect hints for these domains, although if this tag was to be behind consent then that may raise additional privacy concerns - and optimising loading of this script will not be particularly advantageous.
 
 The Dotmetrics documentation mentions that script tags should be placed close to the page header. This implies that they suggest execution should be made as early as possible, but that it may not be absolutely critical and we therefore may take the decision to delay execution. I suggest we take that strategy to avoid blocking the loading of critical content at all.
 
@@ -98,8 +98,8 @@ There are 4 areas than can be investigated to ensure our performances are less d
 
 -   Deprioritise the loading of the initial script or the subsequent scripts it loads via an alternate loading strategy
 -   Only load the tag on UK page views
--   Prefetch/preconnect to optimise DNS lookup and initial connection
--   Do not send the events client-side but server-side. This approach have several benefits:
+-   Preconnect to optimise DNS lookup and initial connection
+-   Do not send the events client-side but server-side. This approach has several benefits:
     -   Do not require sending custom events in both apps and web platforms
     -   Ensure better privacy by design by not sharing any PII information such as IP addresses.
 
