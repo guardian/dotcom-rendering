@@ -33,7 +33,7 @@ const HeaderMedia: FC<HeaderMediaProps> = ({ item }) => {
             } else if (media.kind === MainMediaKind.Video) {
                 return <HeaderVideo video={media.video} format={format}/>
             }
-    
+
             return <></>
         }),
         withDefault(<></>)

@@ -48,7 +48,7 @@ const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 
 const parseCapiResponse = (articleId: string) => async (capiResponse: Response): CapiReturn => {
     const buffer = await capiResponse.buffer();
-        
+
     switch (capiResponse.status) {
         case 200: {
             const response = await capiDecoder(buffer);
@@ -120,7 +120,7 @@ async function serveArticlePost(
 ): Promise<void> {
     try {
         const renderingRequest = await mapiDecoder(body);
-        
+
         void serveArticle(renderingRequest, res);
     } catch (e) {
         logger.error(`This error occurred`, e);

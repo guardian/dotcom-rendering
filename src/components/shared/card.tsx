@@ -321,7 +321,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
     const img = cardImage(image, relatedItem);
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) 
+    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE)
         ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
     const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
         ? stars(parseInt(relatedItem.starRating)) : null;
