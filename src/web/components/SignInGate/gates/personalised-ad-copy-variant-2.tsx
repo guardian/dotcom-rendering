@@ -14,14 +14,14 @@ import {
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
 
-const SignInGateMain = React.lazy(() => {
-    const { start, end } = initPerf('SignInGateMain');
+const SignInGate = React.lazy(() => {
+    const { start, end } = initPerf('SignInGatePersonalisedAdCopyVariant2');
     start();
     return import(
-        /* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
+        /* webpackChunkName: "SignInGatePersonalisedAdCopyVariant2" */ '../gateDesigns/SignInGatePersonalisedAdCopyVariant2'
     ).then((module) => {
         end();
-        return { default: module.SignInGateMain };
+        return { default: module.SignInGatePersonalisedAdCopyVariant2 };
     });
 });
 
@@ -31,7 +31,11 @@ const canShow = (
     currentTest: CurrentABTest,
 ): boolean =>
     !isSignedIn &&
-    !hasUserDismissedGateMoreThanCount(currentTest.variant, currentTest.name, 5) &&
+    !hasUserDismissedGateMoreThanCount(
+        currentTest.variant,
+        currentTest.name,
+        5,
+    ) &&
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
@@ -48,7 +52,7 @@ export const signInGateComponent: SignInGateComponent = {
     }) => (
         <Lazy margin={300}>
             <Suspense fallback={<></>}>
-                <SignInGateMain
+                <SignInGate
                     ophanComponentId={ophanComponentId}
                     dismissGate={dismissGate}
                     guUrl={guUrl}

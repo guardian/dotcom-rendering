@@ -1,14 +1,25 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
-import { getDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+import {
+    DailyArticle,
+    getDailyArticleCount,
+} from '@frontend/web/lib/dailyArticleCount';
+import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
     // get daily read article count array from local storage
-    const [dailyCount] = getDailyArticleCount();
+    const [dailyCount = {} as DailyArticle] = getDailyArticleCount();
 
     const { count = 0 } = dailyCount;
 
     return count >= n;
+};
+
+// use gu.location to determine is the browser is in the specified country
+// Note, use country codes specified in guardian/frontend/static/src/javascripts/lib/geolocation.js
+export const isCountry = (countryCode: string): boolean => {
+    const countryCodeFromStorage = getCountryCodeFromLocalStorage();
+    return countryCodeFromStorage === countryCode;
 };
 
 // determine if the useragent is running iOS 9 (known to be buggy for sign in flow)

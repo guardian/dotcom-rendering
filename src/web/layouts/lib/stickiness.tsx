@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getZIndex, getZIndexImportant } from '@frontend/web/lib/getZIndex';
 
 type Props = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 // The advert is stuck to the top of the container as we scroll
@@ -27,10 +27,25 @@ const headerWrapper = css`
     ${getZIndex('headerWrapper')}
 `;
 
+// The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
+const bannerWrapper = css`
+    position: fixed !important;
+    bottom: 0;
+    ${getZIndexImportant('banner')}
+    
+    width: 100% !important;
+    background: none !important;
+    top: auto !important;
+`;
+
 export const Stuck = ({ children }: Props) => (
     <div className={stickyAdWrapper}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (
     <div className={headerWrapper}>{children}</div>
+);
+
+export const BannerWrapper = ({ children }: Props) => (
+    <div id="bottom-banner" className={bannerWrapper}>{children}</div>
 );

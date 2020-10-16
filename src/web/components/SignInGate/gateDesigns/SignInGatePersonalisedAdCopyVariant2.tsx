@@ -145,7 +145,7 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+export const SignInGatePersonalisedAdCopyVariant2 = ({
     signInUrl,
     guUrl,
     dismissGate,
@@ -154,7 +154,10 @@ export const SignInGateMain = ({
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-main">
+        <div
+            className={signinGate}
+            data-cy="sign-in-gate-personalised-ad-copy-variant-2"
+        >
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
             <h1 className={headingStyles}>
@@ -164,18 +167,15 @@ export const SignInGateMain = ({
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
-                We need more readers to register with us to help sustain our
-                independent, quality journalism. Without you taking this simple
-                step, we miss out on revenues from personalised advertising - a
-                critical source of funding for our future.
+                Registering is a free and simple way to help us sustain our
+                independent Guardian journalism.
             </p>
             <p className={bodyText}>
-                Through doing so, you&apos;ll help ensure that our reporting
-                remains freely available to everyone, and if we recognise you
-                when you come back, we can improve your news experience too. You
-                can still control your own&nbsp;
+                When you register with us we are able to improve our news
+                experience for you and for others. You will always be able to
+                control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-main_privacy"
+                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
@@ -188,7 +188,7 @@ export const SignInGateMain = ({
             </p>
             <div className={actionButtons}>
                 <LinkButton
-                    data-cy="sign-in-gate-main_register"
+                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_register"
                     className={registerButton}
                     priority="primary"
                     size="small"
@@ -201,7 +201,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
-                    data-cy="sign-in-gate-main_dismiss"
+                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_dismiss"
                     className={laterButton}
                     priority="subdued"
                     size="small"
@@ -219,7 +219,7 @@ export const SignInGateMain = ({
             </p>
 
             <Link
-                data-cy="sign-in-gate-main_signin"
+                data-cy="sign-in-gate-personalised-ad-copy-variant-2_signin"
                 className={signInLink}
                 href={signInUrl}
                 onClick={() => {

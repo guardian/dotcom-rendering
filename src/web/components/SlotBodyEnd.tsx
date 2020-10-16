@@ -12,9 +12,9 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
     shouldHideSupportMessaging,
-    hasOptedOutOfArticleCount,
+    getArticleCountConsent,
 } from '@root/src/web/lib/contributions';
-import {getForcedVariant} from "@root/src/web/lib/readerRevenueDevUtils";
+import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
     sendOphanComponentEvent,
@@ -22,7 +22,6 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '../browser/cookie';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
-
 
 const { css } = emotion;
 
@@ -79,7 +78,7 @@ type Props = {
 };
 
 // TODO specify return type (need to update client to provide this first)
-const buildPayload = (props: Props) => {
+const buildPayload = async (props: Props) => {
     return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -105,7 +104,7 @@ const buildPayload = (props: Props) => {
             lastOneOffContributionDate: getLastOneOffContributionDate(),
             epicViewLog: getViewLog(),
             weeklyArticleHistory: getWeeklyArticleHistory(),
-            hasOptedOutOfArticleCount: hasOptedOutOfArticleCount(),
+            hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
         },
@@ -135,19 +134,6 @@ const MemoisedInner = ({
     }) as HasBeenSeen;
 
     useEffect(() => {
-        const contributionsPayload = buildPayload({
-            isSignedIn,
-            countryCode,
-            contentType,
-            sectionName,
-            shouldHideReaderRevenue,
-            isMinuteArticle,
-            isPaidContent,
-            tags,
-            contributionsServiceUrl,
-            isSensitive,
-        });
-
         window.guardian.automat = {
             react: React,
             preact: React, // temp while we deploy newer contributions-service at which point client-lib does this for us
@@ -162,10 +148,24 @@ const MemoisedInner = ({
         const forcedVariant = getForcedVariant('epic');
         const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
-        getBodyEnd(
-            contributionsPayload,
-            `${contributionsServiceUrl}/epic${queryString}`,
-        )
+        buildPayload({
+            isSignedIn,
+            countryCode,
+            contentType,
+            sectionName,
+            shouldHideReaderRevenue,
+            isMinuteArticle,
+            isPaidContent,
+            tags,
+            contributionsServiceUrl,
+            isSensitive,
+        })
+            .then((contributionsPayload) =>
+                getBodyEnd(
+                    contributionsPayload,
+                    `${contributionsServiceUrl}/epic${queryString}`,
+                ),
+            )
             .then((response) => {
                 dataPerf.end();
                 return checkForErrors(response);

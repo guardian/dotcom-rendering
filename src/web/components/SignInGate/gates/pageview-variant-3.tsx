@@ -10,9 +10,10 @@ import {
     isValidContentType,
     isValidSection,
     isIOS9,
+    isCountry,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
+import { hasUserDismissedGate } from '../dismissGate';
 
 const SignInGateMain = React.lazy(() => {
     const { start, end } = initPerf('SignInGateMain');
@@ -25,17 +26,19 @@ const SignInGateMain = React.lazy(() => {
     });
 });
 
+// 3rd page view & old dismiss rule (never see gate again after first dismissal)
 const canShow = (
     CAPI: CAPIBrowserType,
     isSignedIn: boolean,
     currentTest: CurrentABTest,
 ): boolean =>
     !isSignedIn &&
-    !hasUserDismissedGateMoreThanCount(currentTest.variant, currentTest.name, 5) &&
+    !hasUserDismissedGate(currentTest.variant, currentTest.name) &&
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
-    !isIOS9();
+    !isIOS9() &&
+    !isCountry('US');
 
 export const signInGateComponent: SignInGateComponent = {
     gate: ({

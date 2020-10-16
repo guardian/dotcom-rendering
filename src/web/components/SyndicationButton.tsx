@@ -57,6 +57,7 @@ export const SyndicationButton: React.FC<{
                             webUrl,
                         )}&type=article&internalpagecode=${internalPageCode}`}
                         target="_blank"
+                        rel="noopener"
                         title="Reuse this content"
                     >
                         <span className={syndicationButton}>

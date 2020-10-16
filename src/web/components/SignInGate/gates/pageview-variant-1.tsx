@@ -10,6 +10,7 @@ import {
     isValidContentType,
     isValidSection,
     isIOS9,
+    isCountry,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
@@ -25,17 +26,23 @@ const SignInGateMain = React.lazy(() => {
     });
 });
 
+// 3rd page view & new dismiss rule (capped at 5)
 const canShow = (
     CAPI: CAPIBrowserType,
     isSignedIn: boolean,
     currentTest: CurrentABTest,
 ): boolean =>
     !isSignedIn &&
-    !hasUserDismissedGateMoreThanCount(currentTest.variant, currentTest.name, 5) &&
+    !hasUserDismissedGateMoreThanCount(
+        currentTest.variant,
+        currentTest.name,
+        5,
+    ) &&
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
-    !isIOS9();
+    !isIOS9() &&
+    !isCountry('US');
 
 export const signInGateComponent: SignInGateComponent = {
     gate: ({

@@ -3,6 +3,7 @@
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
     url: string;
+    placeholderUrl?: string;
     id?: string;
     html?: string;
     css?: string;
@@ -17,6 +18,7 @@ interface AudioAtomBlockElement {
     trackUrl: string;
     duration: number;
     coverUrl: string;
+    audioIndex?: number;
 }
 
 interface AudioBlockElement {

@@ -47,7 +47,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
@@ -631,7 +631,7 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );
