@@ -6,8 +6,8 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
-
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
@@ -29,31 +29,6 @@ const containerStyles = emotion.css`
     width: 100%;
     ${getZIndex('banner')}
 `;
-
-const measureTiming = (name: string) => {
-    const perf = window.performance;
-    const startKey = `${name}-start`;
-    const endKey = `${name}-end`;
-
-    const start = () => {
-        perf.mark(startKey);
-    };
-
-    const endAndReturn = () => {
-        perf.mark(endKey);
-        perf.measure(name, startKey, endKey);
-        const measureEntries = perf.getEntriesByName(name, "measure");
-        const timeTakenFloat = measureEntries[0].duration;
-        const timeTakenInt = Math.trunc(timeTakenFloat);
-
-        return timeTakenInt;
-    };
-
-    return {
-        start,
-        endAndReturn,
-    };
-};
 
 export const hasRequiredConsents = (): Promise<boolean> =>
     new Promise((resolve) => {
@@ -180,9 +155,8 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
-    const canShowTiming = measureTiming('braze-banner');
+    const canShowTiming = initPerf('braze-banner');
     canShowTiming.start();
-
 
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
@@ -216,14 +190,15 @@ export const canShow = async (
     }
 
     try {
-        return getMessageFromBraze(apiKey as string, brazeUuid).then(result => {
-            const timeTaken = canShowTiming.endAndReturn();
-            record({
-                component: 'braze-banner-timing',
-                value: timeTaken,
-            });
-            return result;
+        const result = await getMessageFromBraze(apiKey as string, brazeUuid)
+
+        const timeTaken = canShowTiming.end(true);
+        record({
+            component: 'braze-banner-timing',
+            value: timeTaken,
         });
+
+        return result;
     } catch (e) {
         return { result: false };
     }
