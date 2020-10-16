@@ -6,7 +6,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Moving to main as default branch](#moving-to-main-as-default-branch)
 - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
 - [Quick start](#quick-start)
   - [Install Node.js](#install-nodejs)
@@ -24,17 +23,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Moving to main as default branch
-
-The `master` branch in the dotcom-rendering repository has been renamed to `main`. If you have been working with DCR before the change, we recommend you run the following sequence of commands in your local repository. These will rename your master branch to main and set main as your default branch.
-
-```
-git fetch --all
-git remote set-head origin -a
-git branch master --set-upstream-to origin/main
-git branch -m master main
-```
-
 ## Where can I see Dotcom Rendering in Production?
 
 Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
@@ -46,17 +34,7 @@ https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdu
 You can force DCR on or off explicitly with
 [`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
 
-One way to verify whether the article you're looking at is being rendered by DCR or not is to
-[View Page Source](view-source:https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers)
-and search for the presence of DCR's
-[`react-root`](https://github.com/guardian/dotcom-rendering/blob/c90bbc20eac321d83f4337e1320d1667e264d55d/src/web/server/htmlTemplate.ts#L255-L256):
-in the `<body>` tag:
-
-```html
-<body>
-    <div id="react-root"></div>
-</body>
-```
+One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(modern)` in the footer after the copyright notice.
 
 ## Quick start
 
