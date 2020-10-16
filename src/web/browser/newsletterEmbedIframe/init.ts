@@ -3,7 +3,7 @@ import { startup } from '@root/src/web/browser/startup';
 
 const init = (): Promise<void> => {
     const allIframes: HTMLIFrameElement[] = [].slice.call(
-        document.querySelectorAll('.element-embed > .email-sub__iframe'),
+        document.querySelectorAll('.email-sub__iframe'),
     );
     type newsletterHeightEvent = { source: { location: { href: string } } };
 
