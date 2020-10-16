@@ -129,11 +129,12 @@ const firstParagraphOverlay = (isComment: boolean) => css`
 // This css hides all the elements in the article after the #sign-in-gate
 // using the General sibling combinator https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
 const hideElementsCss = `
-    #sign-in-gate ~ * {
+    .article-body-commercial-selector > * {
         display: none;
     }
-    .ad-slot--inline {
-        display: none;
+
+    #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n+3) {
+        display: block;
     }
 `;
 
