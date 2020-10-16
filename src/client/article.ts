@@ -10,6 +10,8 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { AudioAtom } from '@guardian/atoms-rendering';
+import FooterCcpa from 'components/shared/footer';
+
 
 // ----- Run ----- //
 
@@ -120,6 +122,18 @@ function insertEpic(): void {
         ).catch(error => console.error(error));
     }
 }
+
+
+
+function isCCPA(): void {
+    userClient.doesCcpaApply().then(isOptedIn => {
+        const comp = h(FooterCcpa, {isCcpa: isOptedIn});
+        ReactDOM.render(comp, document.getElementById('articleFooter'));
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
+
 
 interface FormData {
     [key: string]: string;
@@ -247,3 +261,4 @@ insertEpic();
 callouts();
 hasSeenCards();
 initAudioAtoms();
+isCCPA();

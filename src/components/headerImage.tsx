@@ -59,7 +59,7 @@ const immersiveStyles = css`
     position: absolute;
     left: 0;
 `;
-    
+
 const imgStyles = (width: number, height: number): SerializedStyles => css`
     display: block;
     width: 100%;
