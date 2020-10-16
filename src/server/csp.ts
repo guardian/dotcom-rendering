@@ -8,6 +8,7 @@ import { partition, Result } from '@guardian/types/result';
 import { Item } from 'item';
 import { compose, pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
+import { ThirdPartyEmbeds } from 'capi';
 
 
 // ----- Types ----- //
@@ -65,12 +66,12 @@ const assetHashes = (assets: string[]): string =>
 //     child-src https: blob:
 // `.trim()
 
-const buildCsp = ({ styles, scripts }: Assets, twitter: boolean, instagram: boolean, youtube: boolean, spotify: boolean): string => `
+const buildCsp = ({ styles, scripts }: Assets, {...thirdPartyEmbed }: ThirdPartyEmbeds): string => `
     default-src 'self';
-    style-src 'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''};
-    img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
-    script-src 'self' ${assetHashes(scripts)} ${instagram ? 'http://www.instagram.com/embed.js' : ''} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
-    frame-src https://www.theguardian.com https://www.scribd.com ${instagram ? 'https://www.instagram.com' : ''} https://www.tiktok.com https://interactive.guim.co.uk ${spotify ? 'https://open.spotify.com' : ''} ${youtube ? 'https://www.youtube-nocookie.com' : ''} https://player.vimeo.com/ ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
+    style-src 'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com' : ''};
+    img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
+    script-src 'self' ${assetHashes(scripts)} ${thirdPartyEmbed.instagram ? 'http://www.instagram.com/embed.js' : ''} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
+    frame-src https://www.theguardian.com https://www.scribd.com ${thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''} https://www.tiktok.com https://interactive.guim.co.uk ${thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''} ${thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''} https://player.vimeo.com/ ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
     connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/
 `.trim();
@@ -78,17 +79,15 @@ const buildCsp = ({ styles, scripts }: Assets, twitter: boolean, instagram: bool
 function csp(
     item: Item, 
     additionalAssets: Assets, 
-    twitter: boolean, 
-    instagram: boolean, 
-    youtube: boolean, 
-    spotify: boolean ): string {
+    thirdPartyEmbed: ThirdPartyEmbeds,
+     ): string {
     const interactives = interactiveAssets(item);
     const assets = {
         styles: [ ...interactives.styles, ...additionalAssets.styles ],
         scripts: [ ...interactives.scripts, ...additionalAssets.scripts ],
     };
 
-    return buildCsp(assets, twitter, instagram, youtube, spotify);
+    return buildCsp(assets, { ...thirdPartyEmbed});
 }
 
 

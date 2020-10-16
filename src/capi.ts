@@ -15,7 +15,6 @@ import { parseVideo } from 'video';
 import { MainMediaKind, MainMedia } from 'headerMedia';
 import { pipe2 } from 'lib';
 import { isAdvertisementFeature } from 'item';
-import { Block } from '@guardian/content-api-models/v1/block';
 
 
 // ----- Lookups ----- //
@@ -130,95 +129,69 @@ const articleMainMedia = (content: Content, context: Context): Option<MainMedia>
   }
 }
 
-const checkForThirdPartyEmbedsInner = (thirdPartyEmbeds: ThirdPartyEmbeds, block: Block): ThirdPartyEmbeds => {
-    // console.log('::>>::',block.elements[0]);
-    console.log('::>>::',block.elements[1]);
-    console.log('SEEEEEE!',thirdPartyEmbeds);
-    
-    return block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds);
-}
-
 const getThirdPartyEmbeds = (content: Content): any => {
     const body = content?.blocks?.body;
-    // console.log(body?.length);
-    console.log(content.blocks?.body)
-    
+        
     if (!body) {
         return false
     }
 
-    let mappedElems = body.map(el => el.elements)
-    console.log('>>>----------->>>>',mappedElems);
-    
     let allThirdPartyEmbeds = body.reduce(
-        //(thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
-        checkForThirdPartyEmbedsInner,
+        (thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
         noThirdPartyEmbeds,
-    );
-
-    // body.reduce(
-    //     (thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
-    //     noThirdPartyEmbeds,
-    //   );
+      );
+    console.log('>>>>>>>>>>>>>>>>>>', allThirdPartyEmbeds)
     return allThirdPartyEmbeds;
 }
 
-// To test this, you would need to provide at least the following inputs:
-// 1. A body with no blocks
-// 2. A body with a single block, no elements with special types
-// 3. A body with multiple blocks, each block has an element with a different special type,
-// e.g. block 1 has an element with a tweet, block 2 has an element with a youtube video
-// 4. A body with one block, that has multiple elements with different types
-
-
-const includesTweets = (content: Content): boolean => {
-    const body = content?.blocks?.body;
+// const includesTweets = (content: Content): boolean => {
+//     const body = content?.blocks?.body;
     
-    if (!body) {
-        return false
-    }
+//     if (!body) {
+//         return false
+//     }
 
-    return body
-        .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-        .some(Boolean)
+//     return body
+//         .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
+//         .some(Boolean)
         
-}
+// }
 
-const includesInstagram = (content: Content): boolean => {
-    const body = content?.blocks?.body;
+// const includesInstagram = (content: Content): boolean => {
+//     const body = content?.blocks?.body;
 
-    if (!body) {
-        return false
-    }
+//     if (!body) {
+//         return false
+//     }
 
-    return body
-        .flatMap(block => block.elements.some(element => element.type === ElementType.INSTAGRAM))
-        .some(Boolean)
-}
+//     return body
+//         .flatMap(block => block.elements.some(element => element.type === ElementType.INSTAGRAM))
+//         .some(Boolean)
+// }
 
-const includesYoutube = (content: Content): boolean => {
-    const body = content?.blocks?.body;
+// const includesYoutube = (content: Content): boolean => {
+//     const body = content?.blocks?.body;
 
-    if (!body) {
-        return false
-    }
+//     if (!body) {
+//         return false
+//     }
 
-    return body
-        .flatMap(block => block.elements.some(element => element.type === ElementType.VIDEO))
-        .some(Boolean)
-}
+//     return body
+//         .flatMap(block => block.elements.some(element => element.type === ElementType.VIDEO))
+//         .some(Boolean)
+// }
 
-const includesSpotify = (content: Content): boolean => {
-    const body = content?.blocks?.body;
+// const includesSpotify = (content: Content): boolean => {
+//     const body = content?.blocks?.body;
 
-    if (!body) {
-        return false
-    }
+//     if (!body) {
+//         return false
+//     }
 
-    return body
-        .flatMap(block => block.elements.some(element => element.type === ElementType.AUDIO))
-        .some(Boolean)
-}
+//     return body
+//         .flatMap(block => block.elements.some(element => element.type === ElementType.AUDIO))
+//         .some(Boolean)
+// }
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
@@ -277,6 +250,7 @@ const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 export {
     Series,
     Logo,
+    ThirdPartyEmbeds,
     isPhotoEssay,
     isImmersive,
     isInteractive,
@@ -287,10 +261,6 @@ export {
     articleContributors,
     articleMainMedia,
     capiEndpoint,
-    includesTweets,
-    includesInstagram,
-    includesYoutube,
-    includesSpotify,
     getThirdPartyEmbeds,
     maybeCapiDate,
     paidContentLogo,
