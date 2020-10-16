@@ -1,6 +1,6 @@
-import { 
-    ThriftConnection, 
-    ThriftClient, 
+import {
+    ThriftConnection,
+    ThriftClient,
     IClientConstructor,
     getTransport,
     getProtocol,
@@ -68,7 +68,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
             window.nativeConnections[this.connectionId] = this
         }
     }
-    
+
     reset(oldConnectionId: string): void {
         if (oldConnectionId === this.connectionId) {
             console.warn("Reseting connection " + oldConnectionId)
@@ -78,7 +78,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
             })
             this.promises = []
             this.connectionId = uuid.v4();
-            window.nativeConnections[this.connectionId] = this            
+            window.nativeConnections[this.connectionId] = this
         }
     }
 
@@ -105,7 +105,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const connection = this;
         return new Promise<Buffer>(function(res, rej): void {
-            connection.promises.push({ 
+            connection.promises.push({
                 resolve: res,
                 reject: rej,
                 timeoutId: setTimeout(function() { connection.reset(id); }, ACTION_TIMEOUT_MS)
@@ -126,8 +126,8 @@ export class NativeConnection<Context = void> extends ThriftConnection {
 }
 
 export function createAppClient<TClient extends ThriftClient<void>>(
-    ServiceClient: IClientConstructor<TClient, void>, 
-    transport: TransportType = 'buffered', 
+    ServiceClient: IClientConstructor<TClient, void>,
+    transport: TransportType = 'buffered',
     protocol: ProtocolType = 'compact'
 ): TClient {
     class NamedMultiplexedProtocol extends TMultiplexedProtocol {

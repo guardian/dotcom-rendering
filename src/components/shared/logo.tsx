@@ -16,8 +16,8 @@ interface Props {
     format: Format;
 }
 
-const styles = (format: Format, 
-    lightModeImage: string, 
+const styles = (format: Format,
+    lightModeImage: string,
     darkModeImage?: string): SerializedStyles => {
     const { kicker, inverted } = getPillarStyles(format.pillar);
     return css`

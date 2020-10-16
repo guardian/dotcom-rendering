@@ -1,4 +1,4 @@
-import { 
+import {
     TProtocol,
     TTransport,
     IThriftSet,
@@ -158,12 +158,12 @@ export abstract class TProtocolDecorator extends TProtocol {
 export class TMultiplexedProtocol extends TProtocolDecorator {
     static readonly separator = ":"
     readonly serviceName: string
-    
+
     constructor(protocol: TProtocol, serviceName: string) {
         super(protocol);
         this.serviceName = serviceName;
     }
-  
+
     writeMessageBegin(name: string, type: MessageType, seqid: number): void {
         if (type === MessageType.CALL || type === MessageType.ONEWAY) {
             super.writeMessageBegin(
