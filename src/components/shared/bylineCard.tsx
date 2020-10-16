@@ -175,7 +175,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
     const img = cardImage(relatedItem);
     const lastModified = relatedItem.lastModified?.iso8601;
     const articleId = relatedItem.link.split('.com/').pop();
-    const date = (lastModified) 
+    const date = (lastModified)
         ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
     return (
         <li

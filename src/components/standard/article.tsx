@@ -22,8 +22,11 @@ import { pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
 import RelatedContent from 'components/shared/relatedContent';
 import ImmersiveCaption from 'components/immersiveCaption';
-import { Lines } from "@guardian/src-ed-lines";
 import Epic from 'components/shared/epic';
+import { Lines } from '@guardian/src-ed-lines';
+import FooterCcpa from 'components/shared/footer';
+
+
 
 // ----- Styles ----- //
 
@@ -51,8 +54,8 @@ const itemStyles = (item: Item): SerializedStyles => {
     switch (item.display) {
         case Display.Immersive:
             return css`
-                p:first-of-type:first-letter,
-                hr + p:first-letter {
+                > p:first-of-type:first-letter,
+                > hr + p:first-letter {
                     color: ${kicker};
                     display: inline-block;
                     vertical-align: text-top;
@@ -74,7 +77,6 @@ const itemStyles = (item: Item): SerializedStyles => {
     }
 }
 
-// ----- Component ----- //
 
 interface Props {
     item: StandardItem | ReviewItem;
@@ -86,7 +88,7 @@ const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? null
-        : <div id="epic-placeholder">
+        : <div css={articleWidthStyles} id="epic-placeholder">
             <Epic
                 title=""
                 body=""
@@ -107,11 +109,11 @@ const Standard: FC<Props> = ({ item, children }) => {
                     data-short-id={id}
                 ></section>),
             withDefault(<></>)
-          )
+        )
         : null
 
     return <main css={[Styles, DarkStyles]}>
-        <article css={BorderStyles}>
+        <article className="js-article" css={BorderStyles}>
             <header>
                 <HeaderMedia item={item} />
                 <Series item={item} />
@@ -140,6 +142,7 @@ const Standard: FC<Props> = ({ item, children }) => {
             <RelatedContent content={item.relatedContent}/>
         </section>
         {commentContainer}
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>
 }
 

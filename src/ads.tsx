@@ -9,7 +9,7 @@ function getAdIndices(): number[] {
     const firstAdIndex = 3;
     const totalAds = 15;
 
-    const indiciesAfterFirstAd = [...Array(totalAds-1).keys()]
+    const indiciesAfterFirstAd = [...Array(totalAds - 1).keys()]
         .map(index => firstAdIndex + (adEveryNParagraphs * ++index))
     return [firstAdIndex, ...indiciesAfterFirstAd];
 }

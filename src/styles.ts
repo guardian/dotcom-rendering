@@ -29,10 +29,7 @@ export const darkModeCss = (
     ...placeholders: string[]
 ): SerializedStyles => css`
     @media (prefers-color-scheme: dark) {
-        ${styles
-        .map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`)
-        .join('')
-    }
+        ${styles.map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`).join('')}
     }
 `;
 

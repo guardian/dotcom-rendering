@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { App } from '@guardian/discussion-rendering/build/App';
 import "regenerator-runtime/runtime.js";
+import FooterCcpa from 'components/shared/footer';
 
 // ----- Run ----- //
 
@@ -161,6 +162,17 @@ function renderComments(): void {
     }
 }
 
+
+function isCCPA(): void {
+    userClient.doesCcpaApply().then(isOptedIn => {
+        const comp = h(FooterCcpa, {isCcpa: isOptedIn});
+        ReactDOM.render(comp, document.getElementById('articleFooter'));
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
+
+
 interface FormData {
     [key: string]: string;
 }
@@ -170,19 +182,19 @@ function submit(body: FormData, form: Element): void {
         method: 'POST',
         body: JSON.stringify(body)
     })
-    .then(() => {
-        const message = document.createElement('p');
-        message.textContent = 'Thank you for your contribution';
-        if (form.firstChild) {
-            form.replaceChild(message, form.firstChild);
-        }
-    })
-    .catch(() => {
-        const errorPlaceholder = form.querySelector('.js-error-message');
-        if (errorPlaceholder) {
-            errorPlaceholder.textContent = "Sorry, there was a problem submitting your form. Please try again later."
-        }
-    })
+        .then(() => {
+            const message = document.createElement('p');
+            message.textContent = 'Thank you for your contribution';
+            if (form.firstChild) {
+                form.replaceChild(message, form.firstChild);
+            }
+        })
+        .catch(() => {
+            const errorPlaceholder = form.querySelector('.js-error-message');
+            if (errorPlaceholder) {
+                errorPlaceholder.textContent = "Sorry, there was a problem submitting your form. Please try again later."
+            }
+        })
 }
 
 function readFile(file: Blob): Promise<string> {
@@ -191,13 +203,13 @@ function readFile(file: Blob): Promise<string> {
         setTimeout(reject, 30000);
 
         reader.addEventListener('load', () => {
-                if (reader.result) {
-                    const fileAsBase64 = reader.result
-                        .toString()
-                        .split(';base64,')[1];
-                    resolve(fileAsBase64);
-                }
+            if (reader.result) {
+                const fileAsBase64 = reader.result
+                    .toString()
+                    .split(';base64,')[1];
+                resolve(fileAsBase64);
             }
+        }
         );
 
         reader.addEventListener('error', () => {
@@ -262,6 +274,8 @@ function hasSeenCards(): void {
     })
 }
 
+
+
 setup();
 ads();
 videos();
@@ -273,3 +287,4 @@ insertEpic();
 callouts();
 hasSeenCards();
 renderComments();
+isCCPA();

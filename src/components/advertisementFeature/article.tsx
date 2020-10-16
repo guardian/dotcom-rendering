@@ -18,7 +18,7 @@ import { withDefault, map } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import RelatedContent from 'components/shared/relatedContent';
 import { Lines } from '@guardian/src-ed-lines';
-
+import FooterCcpa from 'components/shared/footer';
 
 
 // ----- Styles ----- //
@@ -76,6 +76,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
         <section css={onwardStyles}>
             <RelatedContent content={item.relatedContent}/>
         </section>
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>
 }
 
