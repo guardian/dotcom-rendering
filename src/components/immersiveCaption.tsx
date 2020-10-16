@@ -23,10 +23,10 @@ const captionHeadingStyles = css`
 `;
 
 const buildCaption = (
-    cap: Option<DocumentFragment>, 
-    format: Format, 
+    cap: Option<DocumentFragment>,
+    format: Format,
     credit: Option<string>
-    ): ReactElement | null => {
+): ReactElement | null => {
     if (cap.kind === OptionKind.Some && credit.kind === OptionKind.Some){
         return <p css={captionHeadingStyles}>{renderCaption(cap.value, format)} {credit.value}</p>
     } else if (cap.kind === OptionKind.Some && credit.kind === OptionKind.None){
@@ -58,7 +58,7 @@ const ImmersiveCaption: FC<Props> = (props,) => {
         }
     }
     return null
-   
+
 }
 
 export default ImmersiveCaption;

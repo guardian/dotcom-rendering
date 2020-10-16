@@ -39,14 +39,10 @@ const immersiveStyles = ({ kicker }: PillarStyles, isLabs: boolean): SerializedS
     }
 `;
 
-const font = (isLabs: boolean): SerializedStyles => {
-    return css`
-        ${
-            isLabs
-                ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
-                : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
-        }`
-}
+const font = (isLabs: boolean): string =>
+    isLabs
+        ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
+        : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
 
 const linkStyles = ({ kicker, inverted }: PillarStyles, isLabs: boolean): SerializedStyles => css`
     ${font(isLabs)}

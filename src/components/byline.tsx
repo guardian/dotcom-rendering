@@ -98,7 +98,7 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 
         case Design.AdvertisementFeature:
             return advertisementFeatureAnchorStyles;
-        
+
         default:
             return anchorStyles(kicker, inverted);
     }

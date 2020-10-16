@@ -9,7 +9,6 @@ import { Item } from 'item';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import Standard from 'components/standard/article';
 import AdvertisementFeature from 'components/advertisementFeature/article';
-import Liveblog from 'components/liveblog/article';
 import Comment from 'components/comment/article';
 import Media from 'components/media/article';
 import Interactive from 'components/interactive/article';
@@ -22,8 +21,8 @@ import { ElementKind, BodyElement } from 'bodyElement';
 
 const renderWithAds =
     (shouldHide: boolean) =>
-    (format: Format, elements: BodyElement[]): ReactNode[] =>
-    getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+        (format: Format, elements: BodyElement[]): ReactNode[] =>
+            getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 
 // ----- Component ----- //
@@ -33,9 +32,12 @@ interface Props {
     shouldHideAds: boolean;
 }
 
+const notImplemented =
+    <p css={css`padding: 0 ${remSpace[2]}`}>Content format not implemented yet</p>;
+
 const Body: FC<Props> = ({ item, shouldHideAds }) => {
     if (item.design === Design.Live) {
-        return <Liveblog item={item} />;
+        return notImplemented;
     }
 
     const body = partition(item.body).oks;
@@ -75,7 +77,7 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
         );
     }
 
-    return <p css={css`padding: 0 ${remSpace[2]}`}>Content format not implemented yet</p>;
+    return notImplemented;
 }
 
 
