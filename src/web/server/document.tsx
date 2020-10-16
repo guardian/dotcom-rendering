@@ -109,6 +109,7 @@ export const document = ({ data }: Props) => {
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
             { src: 'embedIframe.js', module: true },
+            { src: 'newsletterEmbedIframe.js', module: true },
         ],
         'async',
     );
