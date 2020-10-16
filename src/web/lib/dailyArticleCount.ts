@@ -1,4 +1,4 @@
-interface DailyArticle {
+export interface DailyArticle {
     day: number;
     count: number;
 }
