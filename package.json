@@ -40,7 +40,7 @@
         "@guardian/automat-client": "^0.2.16",
         "@guardian/braze-components": "0.0.11",
         "@guardian/consent-management-platform": "6.1.0",
-        "@guardian/discussion-rendering": "^2.6.0",
+        "@guardian/discussion-rendering": "^3.0.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^2.4.0",
         "@guardian/src-checkbox": "^2.4.0",
