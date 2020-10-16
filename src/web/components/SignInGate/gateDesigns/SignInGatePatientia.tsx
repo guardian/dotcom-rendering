@@ -120,6 +120,10 @@ const hideElementsCss = `
     #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n+3) {
         display: block;
     }
+
+    #sign-in-gate ~ * {
+        display: none;
+    }
 `;
 
 export const SignInGatePatientia = ({
