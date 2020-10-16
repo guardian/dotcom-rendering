@@ -103,7 +103,7 @@ const includesTweets = (content: Content): boolean => {
 }
 
 const inlineStyleAtoms = (content: Content): boolean => {
-    return !!(content?.atoms?.quizzes || content?.atoms?.audios);
+    return !!(content?.atoms?.quizzes || content?.atoms?.audios || content?.atoms?.charts);
 }
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
