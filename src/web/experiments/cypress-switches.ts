@@ -15,6 +15,7 @@ const cypressSwitches = {
     abSignInGateMainVariant: true,
     abSignInGatePatientia: true,
     abSignInGatePageview: true,
+    abSignInGatePageviewUs: true,
     abSignInGatePersonalisedAdCopy: true,
 };
 

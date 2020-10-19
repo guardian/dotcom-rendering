@@ -258,9 +258,39 @@ describe('Sign In Gate Tests', function () {
         });
     });
 
+    describe('SignInGatePageviewUs', function () {
+        beforeEach(function () {
+            setMvtCookie('650000');
+
+            // set article count to be min number to view gate
+            setArticleCount(4);
+        });
+
+        it('should not load the sign in gate if there is no available geolocation in local storage', function () {
+            visitArticle();
+            clearGeolocation();
+            scrollToGateForLazyLoading();
+            cy.get('[data-cy=sign-in-gate-main]').should('be.not.visible');
+        });
+
+        it('should not load the sign in gate for a non-US browser', function () {
+            visitArticle();
+            setGeolocation('GB');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+        });
+        it('should load the sign in gate for a US browser', function () {
+            visitArticle();
+            setGeolocation('US');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+        });
+    });
+
     describe('SignInGatePersonalisedAdCopy', function () {
         beforeEach(function () {
-            // sign in gate patientia runs from 999901-1000000 MVT IDs, so 999901 forces user into test variant
             setMvtCookie('700001');
 
             // set article count to be min number to view gate
