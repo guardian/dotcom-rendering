@@ -38,7 +38,7 @@ const canShow = (
         currentTest.name,
         5,
     ) &&
-    isNPageOrHigherPageView(3) &&
+    isNPageOrHigherPageView(2) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
     !isIOS9() &&
