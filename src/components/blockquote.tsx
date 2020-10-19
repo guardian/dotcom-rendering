@@ -28,7 +28,7 @@ const styles = (format: Format): SerializedStyles => {
         svg {
                 height: 62.4px;
                 margin-left: -9.2625px;
-                margin-bottom: -13px;
+                margin-bottom: -12px;
                 margin-top: 4.4px;
                 fill: ${kicker};
             }
