@@ -22,7 +22,6 @@ export const sidePadding = css`
         padding-right: 0;
     }`;
 
-export const icons = "font-family: 'Guardian Icons';";
 
 export const darkModeCss = (
     styles: TemplateStringsArray,
@@ -207,5 +206,4 @@ export const pageFonts = `
     ${fontFace("GH Guardian Headline", some(700), none, "/assets/fonts/GHGuardianHeadline-Bold.ttf")}
     ${fontFace("GH Guardian Headline", some(700), some("italic"), "/assets/fonts/GHGuardianHeadline-BoldItalic.ttf")}
 
-    ${fontFace("Guardian Icons", none, none, "/assets/fonts/icons.otf")}
 `;
