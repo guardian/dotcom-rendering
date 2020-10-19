@@ -130,9 +130,7 @@ function render(
     const item = fromCapi({ docParser, salt: imageSalt })(request);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
-    console.log('>>>>>-->>>>>>>>>>>>>>>>',thirdPartyEmbeds.twitter)
     const body = renderBody(item, request);
-    // replace has... with thirdPartyEmbeds
     const head = renderHead(item, request, thirdPartyEmbeds, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={thirdPartyEmbeds.twitter} />;
 
