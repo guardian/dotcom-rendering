@@ -66,7 +66,7 @@ const assetHashes = (assets: string[]): string =>
 //     child-src https: blob:
 // `.trim()
 
-const buildCsp = ({ styles, scripts }: Assets, {...thirdPartyEmbed }: ThirdPartyEmbeds): string => `
+const buildCsp = ({ styles, scripts }: Assets, thirdPartyEmbed : ThirdPartyEmbeds): string => `
     default-src 'self';
     style-src 'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com' : ''};
     img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
@@ -87,7 +87,7 @@ function csp(
         scripts: [ ...interactives.scripts, ...additionalAssets.scripts ],
     };
 
-    return buildCsp(assets, { ...thirdPartyEmbed});
+    return buildCsp(assets, thirdPartyEmbed);
 }
 
 

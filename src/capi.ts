@@ -131,7 +131,7 @@ const articleMainMedia = (content: Content, context: Context): Option<MainMedia>
 
 const getThirdPartyEmbeds = (content: Content): any => {
     const body = content?.blocks?.body;
-        
+    console.log(body)
     if (!body) {
         return false
     }
