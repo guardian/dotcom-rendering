@@ -99,7 +99,15 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                    return <CommentBlockComponent body={element.body} />;
+                    return (
+                        <CommentBlockComponent
+                            body={element.body}
+                            avatarURL={element.avatarURL}
+                            profileURL={element.profileURL}
+                            profileName={element.profileName}
+                            dateTime={element.dateTime}
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                     return (
                         <DisclaimerBlockComponent
