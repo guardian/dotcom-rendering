@@ -3,7 +3,6 @@
 import React, { ReactNode, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
-import { Pillar } from '@guardian/types/Format';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { Item, getFormat } from 'item';
 import { textSans } from "@guardian/src-foundations/typography";
@@ -39,13 +38,12 @@ const styles: SerializedStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    pillar: Pillar;
     publicationDate: Option<Date>;
     className: SerializedStyles;
     item: Item;
 }
 
-const Byline: FC<Props> = ({ pillar, publicationDate, className, item }) => {
+const Byline: FC<Props> = ({ publicationDate, className, item }) => {
     const byline = pipe2(
         item.bylineHtml,
         map(html => <address>{ renderText(html, getFormat(item)) }</address>),
@@ -57,7 +55,7 @@ const Byline: FC<Props> = ({ pillar, publicationDate, className, item }) => {
             <div>
                 <div className="author">
                     { byline }
-                    <Dateline date={publicationDate} pillar={item.pillar}/>
+                    <Dateline date={publicationDate} theme={item.theme}/>
                 </div>
             </div>
         </div>

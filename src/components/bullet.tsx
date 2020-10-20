@@ -25,7 +25,7 @@ const styles = css`
 `;
 
 const bulletStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.theme);
 
     return css`
         color: transparent;

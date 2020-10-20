@@ -27,7 +27,7 @@ const styles = (format: Format): SerializedStyles => css`
         font-style: normal;
         font-size: 2.5rem;
         content: '\\e11c';
-        color: ${getPillarStyles(format.pillar).kicker};
+        color: ${getPillarStyles(format.theme).kicker};
     }
 
     ${darkModeCss`

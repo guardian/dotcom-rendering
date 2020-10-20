@@ -18,7 +18,7 @@ interface Props {
 }
 
 const borderColor = (format: Format): SerializedStyles => {
-    return css`1px solid ${getPillarStyles(format.pillar).kicker}`
+    return css`1px solid ${getPillarStyles(format.theme).kicker}`
 }
 
 const listStyles = (format: Format): SerializedStyles => {
@@ -167,7 +167,7 @@ const footerStyles = css`
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
+        theme: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }

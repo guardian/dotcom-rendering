@@ -44,7 +44,7 @@ const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
         case Design.AdvertisementFeature:
             return triangleSvg(palette.labs[300]);
         default: {
-            const { kicker, inverted } = getPillarStyles(format.pillar);
+            const { kicker, inverted } = getPillarStyles(format.theme);
             return triangleSvg(kicker, inverted);
         }
     }

@@ -27,7 +27,7 @@ const borderColor = (type: RelatedItemType, format: Format): SerializedStyles =>
     if (type === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`1px solid ${palette.labs[300]}`
     } else {
-        return css`1px solid ${getPillarStyles(format.pillar).kicker}`
+        return css`1px solid ${getPillarStyles(format.theme).kicker}`
     }
 }
 
@@ -141,7 +141,7 @@ const relativeFirstPublished = (date: Option<Date>, type: RelatedItemType): JSX.
 const cardStyles = (type: RelatedItemType, format: Format): SerializedStyles => {
     switch (type) {
         case RelatedItemType.FEATURE: {
-            const { kicker } = getPillarStyles(format.pillar);
+            const { kicker } = getPillarStyles(format.theme);
 
             return css`
                 h2 {
@@ -181,7 +181,7 @@ const cardStyles = (type: RelatedItemType, format: Format): SerializedStyles => 
         }
 
         case RelatedItemType.LIVE: {
-            const { kicker, liveblogDarkBackground } = getPillarStyles(format.pillar);
+            const { kicker, liveblogDarkBackground } = getPillarStyles(format.theme);
             return css`
                 background: ${kicker};
                 h3, time {
@@ -226,7 +226,7 @@ const parentIconStyles: SerializedStyles = css`
 `;
 
 const iconStyles = (format: Format): SerializedStyles => {
-    const { inverted } = getPillarStyles(format.pillar);
+    const { inverted } = getPillarStyles(format.theme);
     return css`
         width: 1.5rem;
         height: 1.5rem;
@@ -310,7 +310,7 @@ const cardByline = (type: RelatedItemType, byline?: string): ReactElement | null
 const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement | null => {
     const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
+        theme: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }
@@ -330,7 +330,7 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
 
 const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
+        theme: pillarFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }

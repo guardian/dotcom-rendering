@@ -104,7 +104,7 @@ type ItemFieldsWithBody =
 // ----- Functions ----- //
 
 const getFormat = (item: Item): Format =>
-    ({ design: item.design, display: item.display, pillar: item.pillar });
+    ({ design: item.design, display: item.display, theme: item.theme });
 
 // The main image for the page is meant to be shown as showcase.
 function isShowcaseImage(content: Content): boolean {
@@ -142,7 +142,7 @@ function getDisplay(content: Content): Display {
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
     return {
-        pillar: pillarFromString(content?.pillarId),
+        theme: pillarFromString(content?.pillarId),
         display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
         standfirst: pipe2(content?.fields?.standfirst, fromNullable, map(context.docParser)),
@@ -269,7 +269,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
         return {
             design: Design.Comment,
             ...item,
-            pillar: item.pillar === Pillar.News ? Pillar.Opinion : item.pillar
+            theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme
         };
     } else if (isFeature(tags)) {
         return {

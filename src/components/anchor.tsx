@@ -29,7 +29,7 @@ const styles = css`
 `;
 
 const colour = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.theme);
     switch (format.design) {
         case Design.AdvertisementFeature:
             return css`

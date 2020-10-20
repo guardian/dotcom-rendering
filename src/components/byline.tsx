@@ -75,7 +75,7 @@ const advertisementFeatureAnchorStyles = css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-    const { kicker } = getPillarStyles(format.pillar);
+    const { kicker } = getPillarStyles(format.theme);
 
     switch (format.design) {
         case Design.Comment:
@@ -90,7 +90,7 @@ const getStyles = (format: Format): SerializedStyles => {
 }
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.theme);
 
     switch (format.design) {
         case Design.Comment:

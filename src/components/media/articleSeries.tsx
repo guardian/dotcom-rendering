@@ -2,7 +2,7 @@ import React, { ReactElement, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillarStyles';
-import { Pillar } from '@guardian/types/Format';
+import { Theme } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
@@ -17,14 +17,14 @@ const ArticleSeriesStyles = ({ inverted }: PillarStyles): SerializedStyles => cs
 
 interface ArticleSeriesProps {
     series: Option<Series>;
-    pillar: Pillar;
+    theme: Theme;
 }
 
 const ArticleSeries: FC<ArticleSeriesProps> = (props) =>
     pipe2(
         props.series,
         map(series =>
-            <nav css={ArticleSeriesStyles(getPillarStyles(props.pillar))}>
+            <nav css={ArticleSeriesStyles(getPillarStyles(props.theme))}>
                 <a href={series.webUrl}>{series.webTitle}</a>
             </nav>
         ),

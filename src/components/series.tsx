@@ -61,20 +61,20 @@ const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
     ${font(isLabs)}
 `;
 
-const getLinkStyles = ({ display, pillar, design }: Format): SerializedStyles => {
+const getLinkStyles = ({ display, theme, design }: Format): SerializedStyles => {
     const isLabs = design === Design.AdvertisementFeature;
 
     if (display === Display.Immersive) {
         return immersiveLinkStyles(isLabs);
     }
 
-    return linkStyles(getPillarStyles(pillar), isLabs);
+    return linkStyles(getPillarStyles(theme), isLabs);
 }
 
-const getStyles = ({ display, pillar, design }: Format): SerializedStyles => {
+const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
     if (display === Display.Immersive) {
         const isLabs = design === Design.AdvertisementFeature;
-        return immersiveStyles(getPillarStyles(pillar), isLabs);
+        return immersiveStyles(getPillarStyles(theme), isLabs);
     }
 
     return articleWidthStyles;

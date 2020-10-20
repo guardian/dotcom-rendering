@@ -12,7 +12,7 @@ import React from 'react';
 
 
 const styles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.theme);
     return css`
         color: ${kicker};
         margin: 0;
@@ -23,7 +23,7 @@ const styles = (format: Format): SerializedStyles => {
 };
 
 const quoteStyles =  (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.theme);
 
     return css`
         margin: ${remSpace[4]} 0 ${remSpace[2]} 0;

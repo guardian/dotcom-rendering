@@ -38,14 +38,14 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
     fill: ${colour};
 `;
 
-const getStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getPillarStyles(theme);
 
     return styles(colours.kicker);
 }
 
-const getBubbleStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getBubbleStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getPillarStyles(theme);
 
     return bubbleStyles(colours.kicker);
 }

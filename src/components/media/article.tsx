@@ -46,7 +46,7 @@ const Media: FC<Props> = ({ item, children }) =>
             <header>
                 <HeaderMedia item={item} />
                 <div css={articleWidthStyles}>
-                    <Series series={item.series} pillar={item.pillar} />
+                    <Series series={item.series} theme={item.theme} />
                 </div>
                 <Headline item={item} />
                 <div css={articleWidthStyles}>
@@ -54,14 +54,13 @@ const Media: FC<Props> = ({ item, children }) =>
                 </div>
                 <section>
                     <Byline
-                        pillar={item.pillar}
                         publicationDate={item.publishDate}
                         className={articleWidthStyles}
                         item={item}
                     />
                 </section>
             </header>
-            <Body pillar={item.pillar} className={[articleWidthStyles]} format={item}>
+            <Body theme={item.theme} className={[articleWidthStyles]} format={item}>
                 {children}
             </Body>
             <section css={articleWidthStyles}>

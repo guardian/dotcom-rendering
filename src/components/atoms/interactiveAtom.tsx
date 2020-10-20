@@ -43,7 +43,7 @@ const atomScript = `
 
 const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
     const { html, styles, js, format } = props;
-    const pillarStyles = getPillarStyles(format.pillar);
+    const pillarStyles = getPillarStyles(format.theme);
     const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
     const script = pipe2(
         js,

@@ -78,7 +78,7 @@ const backgroundHeadlinePrimaryInverse = (_: Format): Colour =>
     coreBackground.inverse;
 
 const borderPrimary = (format: Format): Colour => {
-    switch (format.pillar) {
+    switch (format.theme) {
         case Pillar.Opinion:
             return opinion[400];
         case Pillar.Sport:

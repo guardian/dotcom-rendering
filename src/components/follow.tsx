@@ -31,8 +31,8 @@ const styles = (kicker: string, inverted: string): SerializedStyles => css`
     `}
 `;
 
-function getStyles({ pillar }: Format): SerializedStyles {
-    const { kicker, inverted } = getPillarStyles(pillar);
+function getStyles({ theme }: Format): SerializedStyles {
+    const { kicker, inverted } = getPillarStyles(theme);
 
     return styles(kicker, inverted);
 }

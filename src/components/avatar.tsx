@@ -33,8 +33,8 @@ const styles = (background: string): SerializedStyles => css`
     margin-top: ${remSpace[1]};
 `;
 
-const getStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getPillarStyles(theme);
     return styles(colours.inverted);
 }
 

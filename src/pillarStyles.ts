@@ -2,7 +2,7 @@
 
 import * as palette from '@guardian/src-foundations/palette';
 
-import { Pillar } from '@guardian/types/Format';
+import { Pillar, Special, Theme } from '@guardian/types/Format';
 
 
 // ----- Types ----- //
@@ -17,7 +17,7 @@ interface PillarStyles {
 }
 
 type PillarColours = {
-    [ pillar in Pillar ]: PillarStyles;
+    [ theme in Theme ]: PillarStyles;
 };
 
 export const pillarColours: PillarColours = {
@@ -60,10 +60,18 @@ export const pillarColours: PillarColours = {
         inverted: palette.lifestyle[500],
         liveblogBackground: palette.lifestyle[300],
         liveblogDarkBackground: palette.lifestyle[200]
+    },
+    [Special.SpecialReport]: {
+        kicker: palette.lifestyle[400],
+        featureHeadline: palette.lifestyle[300],
+        soft: palette.lifestyle[800],
+        inverted: palette.lifestyle[500],
+        liveblogBackground: palette.lifestyle[300],
+        liveblogDarkBackground: palette.lifestyle[200]
     }
 }
 
-const getPillarStyles = (pillar: Pillar): PillarStyles => pillarColours[pillar];
+const getPillarStyles = (pillar: Theme): PillarStyles => pillarColours[pillar];
 
 function pillarFromString(pillar: string | undefined): Pillar {
     switch (pillar) {

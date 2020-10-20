@@ -47,7 +47,7 @@ const BorderStyles = css`
 `;
 
 const itemStyles = (item: Item): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(item.pillar);
+    const { kicker, inverted } = getPillarStyles(item.theme);
 
     switch (item.display) {
         case Display.Immersive:
