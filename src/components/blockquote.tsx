@@ -23,8 +23,7 @@ const styles = (format: Format): SerializedStyles => {
         font-style: italic;
         position: relative;
         margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
-        padding: 0 ${remSpace[5]};
-
+        padding: 0 ${remSpace[6]};
         svg {
                 height: 62.4px;
                 margin-left: -9.2625px;
