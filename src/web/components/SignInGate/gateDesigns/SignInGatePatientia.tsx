@@ -127,6 +127,10 @@ const hideElementsCss = `
     #sign-in-gate ~ * {
         display: none;
     }
+    
+    #slot-body-end {
+        display: none;
+    }
 `;
 
 export const SignInGatePatientia = ({
