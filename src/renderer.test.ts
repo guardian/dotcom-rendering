@@ -12,7 +12,7 @@ import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 
 
 const mockFormat: Format = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };
