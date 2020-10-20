@@ -12,7 +12,7 @@ import { selectPillar } from 'storybookHelpers';
 
 const Default: FC = () =>
     <Dateline
-        pillar={selectPillar(Pillar.Opinion)}
+        theme={selectPillar(Pillar.Opinion)}
         date={some(new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))))}
     />
 
