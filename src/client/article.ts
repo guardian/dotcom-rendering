@@ -103,7 +103,7 @@ function formatDates(): void {
 function insertEpic(): void {
     const epicPlaceholder = document.getElementById('epic-placeholder');
     if (epicPlaceholder) {
-        // epicPlaceholder.innerHTML = "";
+        epicPlaceholder.innerHTML = "";
     }
     if (navigator.onLine && epicPlaceholder) {
         Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()]).then(
