@@ -62,12 +62,12 @@ export const pillarColours: PillarColours = {
         liveblogDarkBackground: palette.lifestyle[200]
     },
     [Special.SpecialReport]: {
-        kicker: palette.lifestyle[400],
-        featureHeadline: palette.lifestyle[300],
-        soft: palette.lifestyle[800],
-        inverted: palette.lifestyle[500],
-        liveblogBackground: palette.lifestyle[300],
-        liveblogDarkBackground: palette.lifestyle[200]
+        kicker: palette.specialReport[400],
+        featureHeadline: palette.specialReport[300],
+        soft: palette.specialReport[800],
+        inverted: palette.specialReport[500],
+        liveblogBackground: palette.specialReport[300],
+        liveblogDarkBackground: palette.specialReport[200]
     }
 }
 
