@@ -41,7 +41,7 @@ const textHeadlinePrimary = (format: Format): Colour => {
     }
 
     if (format.design === Design.Feature) {
-        switch (format.pillar) {
+        switch (format.theme) {
             case Pillar.Opinion:
                 return opinion[300];
             case Pillar.Sport:
