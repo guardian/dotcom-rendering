@@ -32,6 +32,18 @@ const clientConfigCcpa = {
     },
 };
 
+const clientConfigAus = {
+    privacyManagerId: '',
+    isCCPA: true,
+    siteHref: 'https://au.theguardian.amp',
+    getDnsMsgMms: true,
+    alwaysDisplayDns: false,
+    showNoticeUntilAction: true,
+    targetingParams: {
+        framework: 'aus',
+    },
+}
+
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
     // https://cdn.ampproject.org/experiments.html
@@ -45,8 +57,9 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             eea: ['preset-eea', 'unknown'],
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
-                            tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
+                            tcfv2: ['preset-eea', 'ca', 'nz', 'unknown'],
                             ccpa: ['us'],
+                            aus: ['au'],
                         },
                     }}
                 />
@@ -70,6 +83,10 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
+                            },
+                            aus: {
+                                checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+                                clientConfig: clientConfigAus,
                             },
                         },
                     }}
