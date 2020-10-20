@@ -15,7 +15,7 @@ import { darkModeCss } from 'styles';
 // ----- Styles ----- //
 
 const styles: SerializedStyles = css`
-    width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
+    width: calc(100% - ${remSpace[4]});
 
     ${from.wide} {
         margin: ${remSpace[2]} 0;
