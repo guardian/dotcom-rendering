@@ -54,9 +54,12 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 <JsonScript
                     o={{
                         ISOCountryGroups: {
+                            // Ad regions
                             eea: ['preset-eea', 'unknown'],
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
+
+                            // frameworks
                             tcfv2: ['preset-eea', 'ca', 'nz', 'unknown'],
                             ccpa: ['us'],
                             aus: ['au'],
