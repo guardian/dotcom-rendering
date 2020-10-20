@@ -113,7 +113,7 @@ const testIdToComponentId: { [key: string]: string } = {
     SignInGatePatientia: 'patientia_test',
     SignInGatePageview: 'pageview_test',
     SignInGatePageviewUs: 'pageview_us_test',
-    SignInGatePersonlisedAdCopy: 'personlised_ad_copy_test',
+    SignInGatePersonalisedAdCopy: 'personalised_ad_copy_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
