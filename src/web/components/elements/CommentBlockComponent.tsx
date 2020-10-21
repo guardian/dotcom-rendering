@@ -12,7 +12,7 @@ type Props = {
     dateTime: string;
 };
 
-const commentWrapper = css`
+const commentWrapperStyles = css`
     ${textSans.medium()};
     padding: 4px 0 0 10px;
     border-left: 1px ${palette.neutral[86]} solid;
@@ -20,38 +20,26 @@ const commentWrapper = css`
     margin-top: 12px;
 `;
 
-const bodyContent = css`
+const bodyContentStyles = css`
     p {
         word-break: break-word;
         margin-bottom: 8px;
     }
 `;
 
-const profileWrapper = css`
+const profileWrapperStyles = css`
     display: flex;
     margin-top: ${space[4]}px;
     margin-bottom: ${space[12]}px;
+    a {
+        border-bottom: none;
+    }
 `;
 
-const avatar = css`
+const avatarStyles = css`
     width: ${space[12]}px;
     height: ${space[12]}px;
     margin-right: ${space[2]}px;
-    border-bottom: none !important;
-    img {
-        border-radius: 50%;
-    }
-`;
-
-const userName = css`
-    a {
-        ${textSans.medium({ fontWeight: 'bold' })};
-        /* color: ${palette.neutral[86]}; */
-        border-bottom: none;
-    }
-    p {
-        ${textSans.small()};
-    }
 `;
 
 export const CommentBlockComponent = ({
@@ -62,18 +50,38 @@ export const CommentBlockComponent = ({
     dateTime,
 }: Props) => {
     return (
-        <div className={commentWrapper}>
+        <div className={commentWrapperStyles}>
             <div
-                className={bodyContent}
+                className={bodyContentStyles}
                 dangerouslySetInnerHTML={{ __html: unescapeData(body) }}
             />
-            <div className={profileWrapper}>
-                <a className={avatar} href={profileURL}>
-                    <img src={avatarURL} alt="" />
+            <div className={profileWrapperStyles}>
+                <a className={avatarStyles} href={profileURL}>
+                    <img
+                        className={css`
+                            border-radius: 50%;
+                        `}
+                        src={avatarURL}
+                        alt=""
+                    />
                 </a>
-                <div className={userName}>
-                    <a href={profileURL}>{profileName}</a>
-                    <p>{dateTime}</p>
+                <div>
+                    <a
+                        className={css`
+                            ${textSans.medium({ fontWeight: 'bold' })};
+                            border-bottom: none;
+                        `}
+                        href={profileURL}
+                    >
+                        {profileName}
+                    </a>
+                    <p
+                        className={css`
+                            ${textSans.small()};
+                        `}
+                    >
+                        {dateTime}
+                    </p>
                 </div>
             </div>
         </div>
