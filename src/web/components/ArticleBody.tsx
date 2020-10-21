@@ -46,8 +46,8 @@ const bodyStyle = (display: Display) => css`
     }
 
     ::selection {
-        background: brandAltBackground.primary;
-        color: text.primary;
+        background: ${brandAltBackground.primary};
+        color: ${text.primary};
     }
 `;
 
