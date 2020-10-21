@@ -75,7 +75,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-react": "^7.12.1",
     "@storybook/addon-knobs": "^6.0.26",
     "@storybook/react": "^6.0.26",
     "@storybook/storybook-deployer": "^2.8.7",
