@@ -9,11 +9,10 @@ export const initPerf = (name: string) => {
         perf.mark(startKey);
     };
 
-    const end = (dontLog: boolean = false): TimeTakenInMilliseconds => {
+    const end = (shouldLog: boolean = true): TimeTakenInMilliseconds => {
         perf.mark(endKey);
         perf.measure(name, startKey, endKey);
-
-        if (!dontLog) {
+        if (shouldLog) {
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(perf.getEntriesByName(name)));
         }
