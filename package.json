@@ -53,7 +53,7 @@
     "@guardian/types": "github:guardian/types#semver:^0.4.5",
     "@types/jsdom": "^16.2.4",
     "@types/uuid": "^8.3.0",
-    "aws-sdk": "^2.774.0",
+    "aws-sdk": "^2.775.0",
     "babel-jest": "^26.5.2",
     "compression": "^1.7.4",
     "core-js": "^3.6.5",
