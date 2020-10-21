@@ -7,7 +7,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Design, Format } from '@guardian/types/Format';
 import { Option, withDefault, map } from '@guardian/types/option';
 import { neutral, palette } from '@guardian/src-foundations';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 import { pipe2 } from 'lib';
@@ -75,7 +75,7 @@ const advertisementFeatureAnchorStyles = css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-    const { kicker } = getPillarStyles(format.theme);
+    const { kicker } = getThemeStyles(format.theme);
 
     switch (format.design) {
         case Design.Comment:
@@ -90,7 +90,7 @@ const getStyles = (format: Format): SerializedStyles => {
 }
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.theme);
+    const { kicker, inverted } = getThemeStyles(format.theme);
 
     switch (format.design) {
         case Design.Comment:

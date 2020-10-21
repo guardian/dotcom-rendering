@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { pillarFromString } from 'pillarStyles';
+import { themeFromString } from 'themeStyles';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
@@ -142,7 +142,7 @@ function getDisplay(content: Content): Display {
 const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
     return {
-        theme: pillarFromString(content?.pillarId),
+        theme: themeFromString(content?.pillarId),
         display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
         standfirst: pipe2(content?.fields?.standfirst, fromNullable, map(context.docParser)),

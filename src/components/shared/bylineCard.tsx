@@ -9,7 +9,7 @@ import { pipe2 } from 'lib';
 import { neutral, opinion, text } from '@guardian/src-foundations/palette';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { darkModeCss } from 'styles';
-import { getPillarStyles, pillarFromString } from 'pillarStyles';
+import { getThemeStyles, themeFromString } from 'themeStyles';
 import { SvgQuote } from '@guardian/src-icons';
 import { makeRelativeDate } from 'date';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const borderColor = (format: Format): SerializedStyles => {
-    return css`1px solid ${getPillarStyles(format.theme).kicker}`
+    return css`1px solid ${getThemeStyles(format.theme).kicker}`
 }
 
 const listStyles = (format: Format): SerializedStyles => {
@@ -167,7 +167,7 @@ const footerStyles = css`
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
     const format = {
-        theme: pillarFromString(relatedItem.pillar.id),
+        theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }

@@ -1,5 +1,5 @@
 import { basePx, baseMultiply, darkModeCss } from './styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { Pillar } from '@guardian/types/Format';
 
 describe('helper functions return correct styles', () => {
@@ -12,7 +12,7 @@ describe('helper functions return correct styles', () => {
     });
 
     test('Returns correct pillar styles for pillar', () => {
-        const pillarStyles = getPillarStyles(Pillar.News);
+        const pillarStyles = getThemeStyles(Pillar.News);
         const expectedNewsPillarStyles =  {
             kicker: '#C70000',
             featureHeadline: '#AB0613',

@@ -2,7 +2,7 @@ import React, { ReactNode, FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { adStyles, darkModeCss } from 'styles';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { getPillarStyles, PillarStyles } from 'pillarStyles';
+import { getThemeStyles, ThemeStyles } from 'themeStyles';
 import { Theme } from '@guardian/types/Format';
 import { remSpace } from "@guardian/src-foundations";
 import { Format } from '@guardian/types/Format';
@@ -16,7 +16,7 @@ const ArticleBodyStyles = (format: Format): SerializedStyles => css`
     ${adStyles(format)}
 `;
 
-const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const ArticleBodyDarkStyles = ({ inverted }: ThemeStyles): SerializedStyles => darkModeCss`
     a {
         color: ${inverted};
     }
@@ -40,7 +40,7 @@ const ArticleBodyMedia: FC<ArticleBodyProps> = ({
     format
 }) =>
     <div css={[ArticleBodyStyles(format),
-        ArticleBodyDarkStyles(getPillarStyles(theme)),
+        ArticleBodyDarkStyles(getThemeStyles(theme)),
         ...className]}>
         {children}
     </div>

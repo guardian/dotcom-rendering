@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';
 import { map, withDefault } from '@guardian/types/option';
@@ -34,7 +34,7 @@ const styles = (background: string): SerializedStyles => css`
 `;
 
 const getStyles = ({ theme }: Format): SerializedStyles => {
-    const colours = getPillarStyles(theme);
+    const colours = getThemeStyles(theme);
     return styles(colours.inverted);
 }
 

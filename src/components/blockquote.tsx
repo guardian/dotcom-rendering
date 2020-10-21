@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { Format } from '@guardian/types/Format';
 import { icons, darkModeCss } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 
@@ -27,7 +27,7 @@ const styles = (format: Format): SerializedStyles => css`
         font-style: normal;
         font-size: 2.5rem;
         content: '\\e11c';
-        color: ${getPillarStyles(format.theme).kicker};
+        color: ${getThemeStyles(format.theme).kicker};
     }
 
     ${darkModeCss`

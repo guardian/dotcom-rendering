@@ -11,7 +11,7 @@ import { Design, Display, Format } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { getPillarStyles, pillarFromString } from 'pillarStyles';
+import { getThemeStyles, themeFromString } from 'themeStyles';
 import { border } from 'editorialPalette';
 import { SvgCamera, SvgVideo, SvgAudio, SvgQuote } from '@guardian/src-icons';
 import { stars } from 'components/starRating';
@@ -27,7 +27,7 @@ const borderColor = (type: RelatedItemType, format: Format): SerializedStyles =>
     if (type === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`1px solid ${palette.labs[300]}`
     } else {
-        return css`1px solid ${getPillarStyles(format.theme).kicker}`
+        return css`1px solid ${getThemeStyles(format.theme).kicker}`
     }
 }
 
@@ -141,7 +141,7 @@ const relativeFirstPublished = (date: Option<Date>, type: RelatedItemType): JSX.
 const cardStyles = (type: RelatedItemType, format: Format): SerializedStyles => {
     switch (type) {
         case RelatedItemType.FEATURE: {
-            const { kicker } = getPillarStyles(format.theme);
+            const { kicker } = getThemeStyles(format.theme);
 
             return css`
                 h2 {
@@ -181,9 +181,9 @@ const cardStyles = (type: RelatedItemType, format: Format): SerializedStyles => 
         }
 
         case RelatedItemType.LIVE: {
-            const { kicker, liveblogDarkBackground } = getPillarStyles(format.theme);
+            const { liveblogBackground, liveblogDarkBackground } = getThemeStyles(format.theme);
             return css`
-                background: ${kicker};
+                background: ${liveblogBackground};
                 h3, time {
                     color: ${text.ctaPrimary};
                 }
@@ -226,7 +226,7 @@ const parentIconStyles: SerializedStyles = css`
 `;
 
 const iconStyles = (format: Format): SerializedStyles => {
-    const { inverted } = getPillarStyles(format.theme);
+    const { inverted } = getThemeStyles(format.theme);
     return css`
         width: 1.5rem;
         height: 1.5rem;
@@ -310,7 +310,7 @@ const cardByline = (type: RelatedItemType, byline?: string): ReactElement | null
 const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement | null => {
     const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
     const format = {
-        theme: pillarFromString(relatedItem.pillar.id),
+        theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }
@@ -330,7 +330,7 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
 
 const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
-        theme: pillarFromString(relatedItem.pillar.id),
+        theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }

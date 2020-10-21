@@ -6,8 +6,7 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { text, neutral } from '@guardian/src-foundations/palette';
 import { remSpace, palette } from '@guardian/src-foundations';
 import { Format, Design } from '@guardian/types/Format';
-
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { renderTextElement, getHref } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -44,7 +43,7 @@ const Triangle: FC<TriangleProps> = ({ format }: TriangleProps) => {
         case Design.AdvertisementFeature:
             return triangleSvg(palette.labs[300]);
         default: {
-            const { kicker, inverted } = getPillarStyles(format.theme);
+            const { kicker, inverted } = getThemeStyles(format.theme);
             return triangleSvg(kicker, inverted);
         }
     }

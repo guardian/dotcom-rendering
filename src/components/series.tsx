@@ -7,8 +7,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { remSpace, palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Format, Display, Design } from '@guardian/types/Format';
-
-import { PillarStyles, getPillarStyles } from 'pillarStyles';
+import { ThemeStyles, getThemeStyles } from 'themeStyles';
 import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
 import { Item } from 'item';
 import { pipe2 } from 'lib';
@@ -21,7 +20,7 @@ interface Props {
     item: Item;
 }
 
-const immersiveStyles = ({ kicker }: PillarStyles, isLabs: boolean): SerializedStyles => css`
+const immersiveStyles = ({ kicker }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
     padding: ${remSpace[1]} ${remSpace[2]};
     background-color: ${isLabs ? palette.labs[300] : kicker};
     position: absolute;
@@ -44,7 +43,7 @@ const font = (isLabs: boolean): string =>
         ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
         : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
 
-const linkStyles = ({ kicker, inverted }: PillarStyles, isLabs: boolean): SerializedStyles => css`
+const linkStyles = ({ kicker, inverted }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
     ${font(isLabs)}
     color: ${isLabs ? palette.labs[300] : kicker};
     text-decoration: none;
@@ -68,13 +67,13 @@ const getLinkStyles = ({ display, theme, design }: Format): SerializedStyles => 
         return immersiveLinkStyles(isLabs);
     }
 
-    return linkStyles(getPillarStyles(theme), isLabs);
+    return linkStyles(getThemeStyles(theme), isLabs);
 }
 
 const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
     if (display === Display.Immersive) {
         const isLabs = design === Design.AdvertisementFeature;
-        return immersiveStyles(getPillarStyles(theme), isLabs);
+        return immersiveStyles(getThemeStyles(theme), isLabs);
     }
 
     return articleWidthStyles;
