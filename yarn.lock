@@ -2281,10 +2281,10 @@
     "@guardian/src-icons" "^2.2.0"
     emotion-theming "^10.0.19"
 
-"@guardian/consent-management-platform@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-7.0.0.tgz#38dc0c5badd185e8f5b799e0f56118435c2bf53a"
-  integrity sha512-1vd1jjxVxt+0ccT7xz2TQSiRGXqFHJf8+gEvfi0ogPopuvTESgDuAoF+qztbz8pRfv61XjH0YUriR338aK5N4w==
+"@guardian/consent-management-platform@7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-7.0.3.tgz#2476d31189eb0049d8c0fe73e6edf5638799c040"
+  integrity sha512-X88kABr1xpouV3PqCnwdLM0ObaHC/h0zZtmKJsrEIhIBnnwuKqvzYrGQaNl475Ux6b6FDSovjXVrX/e6PcJ0WQ==
 
 "@guardian/discussion-rendering@^2.6.0":
   version "2.6.0"
