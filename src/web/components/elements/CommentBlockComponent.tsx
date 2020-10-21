@@ -17,6 +17,14 @@ const commentWrapper = css`
     padding: 4px 0 0 10px;
     border-left: 1px ${palette.neutral[86]} solid;
     border-top: 1px ${palette.neutral[86]} solid;
+    margin-top: 12px;
+`;
+
+const bodyContent = css`
+    p {
+        word-break: break-word;
+        margin-bottom: 8px;
+    }
 `;
 
 const profileWrapper = css`
@@ -38,8 +46,11 @@ const avatar = css`
 const userName = css`
     a {
         ${textSans.medium({ fontWeight: 'bold' })};
-        color: ${palette.neutral[86]};
+        /* color: ${palette.neutral[86]}; */
         border-bottom: none;
+    }
+    p {
+        ${textSans.small()};
     }
 `;
 
@@ -52,15 +63,16 @@ export const CommentBlockComponent = ({
 }: Props) => {
     return (
         <div className={commentWrapper}>
-            <div dangerouslySetInnerHTML={{ __html: unescapeData(body) }} />
+            <div
+                className={bodyContent}
+                dangerouslySetInnerHTML={{ __html: unescapeData(body) }}
+            />
             <div className={profileWrapper}>
                 <a className={avatar} href={profileURL}>
                     <img src={avatarURL} alt="" />
                 </a>
-                <div>
-                    <a className={userName} href={profileURL}>
-                        {profileName}
-                    </a>
+                <div className={userName}>
+                    <a href={profileURL}>{profileName}</a>
                     <p>{dateTime}</p>
                 </div>
             </div>
