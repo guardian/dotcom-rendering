@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
+import { border, brandAltBackground, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
@@ -43,6 +43,11 @@ const bodyStyle = (display: Display) => css`
     img {
         width: 100%;
         height: auto;
+    }
+
+    ::selection {
+        background: brandAltBackground.primary;
+        color: text.primary;
     }
 `;
 
