@@ -336,7 +336,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         pubData,
                     });
                 } else {
-                    cmp.init({ pubData, country: 'GB' });
+                    cmp.init({ pubData, country: 'GB' }); // Fallback to TCFv2
                 }
             } else {
                 cmp.init({
