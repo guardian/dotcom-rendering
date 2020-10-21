@@ -131,7 +131,7 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
                 };
             } catch (e) {
                 // Parsing failed. Log a message and fall through.
-                // eslint-disable-line no-console
+                // eslint-disable-next-line no-console
                 console.log(`There was an error with ${qsArg}: `, e.message);
             }
         }
