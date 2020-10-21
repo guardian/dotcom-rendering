@@ -145,11 +145,9 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                             'outOfPage',
                             'empty',
                             'fabric',
-                            'outstreamMobile',
-                            'mpu',
                             'fluid',
+                            'leaderboard',
                         ]),
-                        '728,90', // This value comes from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     ].join('|'),
                 ],
                 desktop: ['1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid'], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
@@ -169,11 +167,23 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                     adSizeNamesToString([
                         'outOfPage',
                         'empty',
-                        'outstreamMobile',
                         'mpu',
                         'googleCard',
                         'fluid',
                     ]),
+                ],
+                tablet: [
+                    [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'mpu',
+                            'googleCard',
+                            'halfPage',
+                            'leaderboard',
+                            'fluid',
+                        ]),
+                    ].join('|'),
                 ],
                 phablet: [
                     adSizeNamesToString([
@@ -193,9 +203,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                         'empty',
                         'mpu',
                         'googleCard',
-                        'video',
-                        'outstreamDesktop',
-                        'outstreamGoogleDesktop',
+                        'halfPage',
                         'fluid',
                     ]),
                 ],
