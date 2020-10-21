@@ -15,8 +15,6 @@ describe('helper functions return correct styles', () => {
         const pillarStyles = getThemeStyles(Pillar.News);
         const expectedNewsPillarStyles =  {
             kicker: '#C70000',
-            featureHeadline: '#AB0613',
-            soft: '#FFF4F2',
             inverted: '#FF5943',
             liveblogBackground: '#AB0613',
             liveblogDarkBackground: "#8B0000",
