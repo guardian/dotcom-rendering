@@ -8,7 +8,7 @@ import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '../types';
 
 const signinGate = css`
     max-width: 617px;
@@ -59,7 +59,7 @@ const bodyText = css`
 `;
 
 const signInHeader = css`
-    padding-bottom: 0;
+    padding-bottom: ${space[2]}px;
 `;
 
 const actionButtons = css`
@@ -81,24 +81,10 @@ const registerButton = css`
 const laterButton = css`
     color: ${palette.brand[400]} !important;
 `;
-
-const signInLink = css`
-    color: ${palette.text.anchorPrimary} !important;
-`;
-
-const faq = css`
-    padding-top: ${space[3]}px;
-    padding-bottom: 18px;
-    margin-top: ${space[5]}px;
-
-    & a {
-        color: ${palette.text.primary};
-        display: block;
-        margin-bottom: ${space[4]}px;
-    }
-
-    & a:hover {
-        color: ${palette.text.primary};
+const signInLinkSection = css`
+    padding-bottom: ${space[9]}px;
+    > a {
+        color: ${palette.text.anchorPrimary};
     }
 `;
 
@@ -149,16 +135,16 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+// No FAQs
+export const SignInGateDesignOptVar1 = ({
     signInUrl,
-    guUrl,
     dismissGate,
     abTest,
     ophanComponentId,
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-main">
+        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-1">
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
             <h1 className={headingStyles}>
@@ -176,7 +162,7 @@ export const SignInGateMain = ({
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
+                    data-cy="sign-in-gate-design-opt-variant-1_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
@@ -185,11 +171,11 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you.
+                . Thank you
             </p>
             <div className={actionButtons}>
                 <LinkButton
-                    data-cy="sign-in-gate-main_register"
+                    data-cy="sign-in-gate-design-opt-variant-1_register"
                     className={registerButton}
                     priority="primary"
                     size="small"
@@ -202,7 +188,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
-                    data-cy="sign-in-gate-main_dismiss"
+                    data-cy="sign-in-gate-design-opt-variant-1_dismiss"
                     className={laterButton}
                     priority="subdued"
                     size="small"
@@ -214,48 +200,19 @@ export const SignInGateMain = ({
                     I’ll do it later
                 </LinkButton>
             </div>
-
-            <p className={cx([bodyBold, signInHeader])}>
-                Have a subscription? Made a contribution? Already registered?
-            </p>
-
-            <Link
-                data-cy="sign-in-gate-main_signin"
-                className={signInLink}
-                href={signInUrl}
-                onClick={() => {
-                    trackLink(ophanComponentId, 'sign-in-link', abTest);
-                }}
-            >
-                Sign In
-            </Link>
-
-            <div className={faq}>
+            <div className={signInLinkSection}>
+                <p className={cx([bodyBold, signInHeader])}>
+                    Have a subscription? Made a contribution? Already
+                    registered?
+                </p>
                 <Link
-                    href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
+                    data-cy="sign-in-gate-design-opt-variant-1_signin"
+                    href={signInUrl}
                     onClick={() => {
-                        trackLink(ophanComponentId, 'how-link', abTest);
+                        trackLink(ophanComponentId, 'sign-in-link', abTest);
                     }}
                 >
-                    Why register & how does it help?
-                </Link>
-
-                <Link
-                    href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
-                    onClick={() => {
-                        trackLink(ophanComponentId, 'why-link', abTest);
-                    }}
-                >
-                    How will my information & data be used?
-                </Link>
-
-                <Link
-                    href={`${guUrl}/help/identity-faq`}
-                    onClick={() => {
-                        trackLink(ophanComponentId, 'help-link', abTest);
-                    }}
-                >
-                    Get help with registering or signing in
+                    Sign In
                 </Link>
             </div>
         </div>

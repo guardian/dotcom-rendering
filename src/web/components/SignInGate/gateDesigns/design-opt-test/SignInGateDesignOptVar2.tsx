@@ -8,7 +8,7 @@ import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '../types';
 
 const signinGate = css`
     max-width: 617px;
@@ -37,6 +37,17 @@ const headingStyles = css`
     ${from.phablet} {
         padding-right: 160px;
         ${headline.medium({ fontWeight: 'bold' })};
+    }
+`;
+
+const bodyBlueHighlight = css`
+    ${headline.xxsmall({ fontWeight: 'bold' })};
+    color: ${palette.brand[400]};
+    text-decoration: underline ${palette.brand[800]};
+    text-underline-position: under;
+    padding-bottom: 20px;
+    ${from.phablet} {
+        padding-right: 130px;
     }
 `;
 
@@ -149,7 +160,9 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+// Blue highlight on key line of the text
+// TODO remove fAQs?
+export const SignInGateDesignOptVar2 = ({
     signInUrl,
     guUrl,
     dismissGate,
@@ -158,13 +171,17 @@ export const SignInGateMain = ({
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-main">
+        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-2">
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
             <h1 className={headingStyles}>
                 Register for free and continue reading
             </h1>
-            <p className={bodyBold}>
+            <p className={bodyBlueHighlight}>
+                We need more readers to register with us to help sustain our
+                independent, quality journalism
+            </p>
+            <p className={bodyText}>
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
@@ -176,7 +193,7 @@ export const SignInGateMain = ({
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
+                    data-cy="sign-in-gate-design-opt-variant-2_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
@@ -185,11 +202,11 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you.
+                . Thank you
             </p>
             <div className={actionButtons}>
                 <LinkButton
-                    data-cy="sign-in-gate-main_register"
+                    data-cy="sign-in-gate-design-opt-variant-2_register"
                     className={registerButton}
                     priority="primary"
                     size="small"
@@ -202,7 +219,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
-                    data-cy="sign-in-gate-main_dismiss"
+                    data-cy="sign-in-gate-design-opt-variant-2_dismiss"
                     className={laterButton}
                     priority="subdued"
                     size="small"
@@ -220,7 +237,7 @@ export const SignInGateMain = ({
             </p>
 
             <Link
-                data-cy="sign-in-gate-main_signin"
+                data-cy="sign-in-gate-design-opt-variant-2_signin"
                 className={signInLink}
                 href={signInUrl}
                 onClick={() => {

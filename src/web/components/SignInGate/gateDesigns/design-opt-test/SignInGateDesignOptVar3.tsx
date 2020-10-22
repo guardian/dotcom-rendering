@@ -8,7 +8,7 @@ import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '../types';
 
 const signinGate = css`
     max-width: 617px;
@@ -112,9 +112,9 @@ const privacyLink = css`
 `;
 
 const firstParagraphOverlay = (isComment: boolean) => css`
-    margin-top: -250px;
+    margin-top: -100px; // TODO adjust white space here
     width: 100%;
-    height: 250px;
+    height: 100px;
     position: absolute;
 
     /* "transparent" only works here because == rgba(0,0,0,0) */
@@ -123,7 +123,7 @@ const firstParagraphOverlay = (isComment: boolean) => css`
         ${isComment ? opinion[800] : palette.background.primary},
         70%,
         rgba(255, 255, 255, 0)
-    );
+    ); //  rgba(255, 255, 255, 0)
 `;
 
 // This css does 3 things
@@ -149,7 +149,8 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+// Less whitespace
+export const SignInGateDesignOptVar3 = ({
     signInUrl,
     guUrl,
     dismissGate,
@@ -158,7 +159,7 @@ export const SignInGateMain = ({
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-main">
+        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-3">
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
             <h1 className={headingStyles}>
@@ -176,7 +177,7 @@ export const SignInGateMain = ({
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
+                    data-cy="sign-in-gate-design-opt-variant-3_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
@@ -185,11 +186,11 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you.
+                . Thank you
             </p>
             <div className={actionButtons}>
                 <LinkButton
-                    data-cy="sign-in-gate-main_register"
+                    data-cy="sign-in-gate-design-opt-variant-3_register"
                     className={registerButton}
                     priority="primary"
                     size="small"
@@ -202,7 +203,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
-                    data-cy="sign-in-gate-main_dismiss"
+                    data-cy="sign-in-gate-design-opt-variant-3_dismiss"
                     className={laterButton}
                     priority="subdued"
                     size="small"
@@ -220,7 +221,7 @@ export const SignInGateMain = ({
             </p>
 
             <Link
-                data-cy="sign-in-gate-main_signin"
+                data-cy="sign-in-gate-design-opt-variant-3_signin"
                 className={signInLink}
                 href={signInUrl}
                 onClick={() => {

@@ -1,17 +1,25 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+    headline,
+    textSans,
+    body,
+    titlepiece,
+} from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { space, palette, opinion } from '@guardian/src-foundations';
+// import { space, palette, opinion, remSpace } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
+import { Lines } from '@guardian/src-ed-lines';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '../types';
 
 const signinGate = css`
-    max-width: 617px;
+    max-width: 640px;
+    background-color: #eaf1fd;
 
     ${from.desktop} {
         min-height: 600px;
@@ -30,9 +38,10 @@ const signinGate = css`
 `;
 
 const headingStyles = css`
-    ${headline.small({ fontWeight: 'bold' })};
-    border-top: 2px black solid;
+    ${titlepiece.small({})};
+    border-top: 2px ${palette.brandText.ctaPrimary} solid;
     padding-bottom: 42px;
+    color: ${palette.brandText.ctaPrimary};
 
     ${from.phablet} {
         padding-right: 160px;
@@ -41,12 +50,19 @@ const headingStyles = css`
 `;
 
 const bodyBold = css`
-    ${textSans.medium({ fontWeight: 'bold' })}
-    border-top: 1px ${palette.line.primary} solid;
+    ${body.medium({ fontWeight: 'bold' })}
     padding-bottom: 20px;
+    color: ${palette.brandText.ctaPrimary};
     ${from.phablet} {
-        padding-right: 130px;
+        padding-right: 110px;
     }
+`;
+
+const lineColor = css`
+    color: rgba(5, 41, 98, 0.2);
+`;
+const lineTop = css`
+    border-top: 1px solid rgba(5, 41, 98, 0.2);
 `;
 
 const bodyText = css`
@@ -59,7 +75,7 @@ const bodyText = css`
 `;
 
 const signInHeader = css`
-    padding-bottom: 0;
+    padding-bottom: ${space[2]}px;
 `;
 
 const actionButtons = css`
@@ -82,23 +98,25 @@ const laterButton = css`
     color: ${palette.brand[400]} !important;
 `;
 
-const signInLink = css`
-    color: ${palette.text.anchorPrimary} !important;
+const signInLinkSection = css`
+    padding-bottom: ${space[9]}px;
+    line-height: ${space[2]}px;
+    > a {
+    }
 `;
 
 const faq = css`
     padding-top: ${space[3]}px;
     padding-bottom: 18px;
-    margin-top: ${space[5]}px;
 
     & a {
-        color: ${palette.text.primary};
+        color: ${palette.brandText.ctaPrimary};
         display: block;
         margin-bottom: ${space[4]}px;
     }
 
     & a:hover {
-        color: ${palette.text.primary};
+        color: ${palette.brandText.ctaPrimary};
     }
 `;
 
@@ -149,21 +167,46 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+// This should be replaced by Source if rolled out - https://github.com/guardian/source/blob/main/src/editorial/web/components/lines/styles.ts
+// const lineGap = remSpace[1];
+// const straightLines = css`
+//     background-image: repeating-linear-gradient(
+//         to bottom,
+//         ${line.primary},
+//         ${line.primary} 1px,
+//         transparent 1px,
+//         transparent ${lineGap}
+//     );
+//     background-repeat: repeat-x;
+//     background-position: top;
+// `;
+// const count = (x: number) => css`
+//     background-size: 1px calc(${lineGap} * (${x}-1) + 1px);
+//     height: calc(${lineGap} * (${x}-1) + 1px);
+// `;
+// const LineBorder = (x: number) => <div css={[straightLines, count(x)]} />;
+
+// Slight colour highlight
+export const SignInGateDesignOptVar5 = ({
     signInUrl,
     guUrl,
     dismissGate,
     abTest,
+
     ophanComponentId,
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-main">
+        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-5">
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
             <h1 className={headingStyles}>
                 Register for free and continue reading
             </h1>
+            <section className={lineColor}>
+                <Lines count={4} />
+                <Lines effect="straight" />
+            </section>
             <p className={bodyBold}>
                 It’s important to say this is not a step towards a paywall
             </p>
@@ -176,7 +219,7 @@ export const SignInGateMain = ({
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
+                    data-cy="sign-in-gate-design-opt-variant-5_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
@@ -185,11 +228,11 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you.
+                . Thank you
             </p>
             <div className={actionButtons}>
                 <LinkButton
-                    data-cy="sign-in-gate-main_register"
+                    data-cy="sign-in-gate-design-opt-variant-5_register"
                     className={registerButton}
                     priority="primary"
                     size="small"
@@ -202,7 +245,7 @@ export const SignInGateMain = ({
                 </LinkButton>
 
                 <LinkButton
-                    data-cy="sign-in-gate-main_dismiss"
+                    data-cy="sign-in-gate-design-opt-variant-5_dismiss"
                     className={laterButton}
                     priority="subdued"
                     size="small"
@@ -214,22 +257,23 @@ export const SignInGateMain = ({
                     I’ll do it later
                 </LinkButton>
             </div>
+            {/* {LineBorder(1)} */}
+            <div className={signInLinkSection}>
+                <p className={cx([bodyBold, signInHeader, lineTop])}>
+                    Have a subscription? Made a contribution? Already
+                    registered?
+                </p>
 
-            <p className={cx([bodyBold, signInHeader])}>
-                Have a subscription? Made a contribution? Already registered?
-            </p>
-
-            <Link
-                data-cy="sign-in-gate-main_signin"
-                className={signInLink}
-                href={signInUrl}
-                onClick={() => {
-                    trackLink(ophanComponentId, 'sign-in-link', abTest);
-                }}
-            >
-                Sign In
-            </Link>
-
+                <Link
+                    data-cy="sign-in-gate-design-opt-variant-5_signin"
+                    href={signInUrl}
+                    onClick={() => {
+                        trackLink(ophanComponentId, 'sign-in-link', abTest);
+                    }}
+                >
+                    Sign In
+                </Link>
+            </div>
             <div className={faq}>
                 <Link
                     href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
