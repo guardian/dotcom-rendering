@@ -41,7 +41,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) =>
         <Avatar {...item} />
         <div css={css(textStyles, withBylineTextStyles)}>
             <Byline {...item} />
-            <Dateline date={item.publishDate} pillar={item.pillar} />
+            <Dateline date={item.publishDate} theme={item.theme} />
             <Follow {...item} />
         </div>
         <CommentCount count={item.commentCount} {...item} />
@@ -50,7 +50,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) =>
 const ShortMetadata: FC<Props> = ({ item }: Props) =>
     <div css={styles}>
         <div css={textStyles}>
-            <Dateline date={item.publishDate} pillar={item.pillar} />
+            <Dateline date={item.publishDate} theme={item.theme} />
             <Follow {...item} />
         </div>
         <CommentCount count={item.commentCount} {...item} />

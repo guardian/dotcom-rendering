@@ -14,7 +14,7 @@ import renderer from 'react-test-renderer';
 // ----- Setup ----- //
 
 const followFormat = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };

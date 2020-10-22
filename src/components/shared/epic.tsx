@@ -15,13 +15,9 @@ import { darkModeCss } from 'styles';
 // ----- Styles ----- //
 
 const styles: SerializedStyles = css`
-    width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
-
     ${from.wide} {
         margin: ${remSpace[2]} 0;
     }
-
-    clear: both;
 
     border-top: 1px solid ${brandAltBackground.primary};
     background: ${neutral[97]};
