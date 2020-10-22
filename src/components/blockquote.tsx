@@ -19,7 +19,7 @@ interface Props {
 }
 
 const styles = (format: Format): SerializedStyles => {
-    const { kicker } = getThemeStyles(format.pillar);
+    const { kicker } = getThemeStyles(format.theme);
     return css`
         font-style: italic;
         position: relative;
