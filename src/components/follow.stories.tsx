@@ -21,7 +21,7 @@ const Default: FC = () =>
                 image: none,
             }
         ]}
-        pillar={selectPillar(Pillar.News)}
+        theme={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
     />

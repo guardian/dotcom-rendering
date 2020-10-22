@@ -33,7 +33,7 @@ const Default = (): ReactElement =>
         ...article,
         standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.News),
+        theme: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>
@@ -41,7 +41,7 @@ const Review = (): ReactElement =>
         ...review,
         standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.Culture),
+        theme: selectPillar(Pillar.Culture),
     }} />
 
 const Feature = (): ReactElement =>
@@ -49,7 +49,7 @@ const Feature = (): ReactElement =>
         ...feature,
         standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.Sport),
+        theme: selectPillar(Pillar.Sport),
     }} />
 
 const Comment = (): ReactElement =>
@@ -57,7 +57,7 @@ const Comment = (): ReactElement =>
         ...comment,
         standfirst,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.Opinion),
+        theme: selectPillar(Pillar.Opinion),
     }} />
 
 

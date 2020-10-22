@@ -7,7 +7,7 @@ import { border, neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { pipe2 } from 'lib';
 import { darkModeCss } from 'styles';
 
@@ -38,14 +38,14 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
     fill: ${colour};
 `;
 
-const getStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getThemeStyles(theme);
 
     return styles(colours.kicker);
 }
 
-const getBubbleStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getBubbleStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getThemeStyles(theme);
 
     return bubbleStyles(colours.kicker);
 }

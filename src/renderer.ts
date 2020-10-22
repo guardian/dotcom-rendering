@@ -6,7 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss } from 'styles';
-import { getPillarStyles, pillarToString } from 'pillarStyles';
+import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { BodyImageProps, Role } from 'image';
@@ -261,7 +261,7 @@ const linkColourFromFormat = (format: Format): string => {
         return palette.labs[300];
     }
 
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
     return format.design === Design.Media ? inverted : kicker
 }
 
@@ -499,7 +499,7 @@ const render = (format: Format, excludeStyles = false) =>
             case ElementKind.GuideAtom: {
                 return h(GuideAtom, {
                     ...element,
-                    pillar: pillarToString(format.pillar),
+                    pillar: themeToPillar(format.theme),
                     likeHandler: () => { console.log("like clicked"); },
                     dislikeHandler: () => { console.log("dislike clicked"); },
                     expandCallback: () => { console.log("expand clicked"); }
@@ -509,7 +509,7 @@ const render = (format: Format, excludeStyles = false) =>
             case ElementKind.QandaAtom: {
                 return h(QandaAtom, {
                     ...element,
-                    pillar: pillarToString(format.pillar),
+                    pillar: themeToPillar(format.theme),
                     likeHandler: () => { console.log("like clicked"); },
                     dislikeHandler: () => { console.log("dislike clicked"); },
                     expandCallback: () => { console.log("expand clicked"); }
@@ -519,7 +519,7 @@ const render = (format: Format, excludeStyles = false) =>
             case ElementKind.ProfileAtom: {
                 return h(ProfileAtom, {
                     ...element,
-                    pillar: pillarToString(format.pillar),
+                    pillar: themeToPillar(format.theme),
                     likeHandler: () => { console.log("like clicked"); },
                     dislikeHandler: () => { console.log("dislike clicked"); },
                     expandCallback: () => { console.log("expand clicked"); }
@@ -529,7 +529,7 @@ const render = (format: Format, excludeStyles = false) =>
             case ElementKind.TimelineAtom: {
                 return h(TimelineAtom, {
                     ...element,
-                    pillar: pillarToString(format.pillar),
+                    pillar: themeToPillar(format.theme),
                     likeHandler: () => { console.log("like clicked"); },
                     dislikeHandler: () => { console.log("dislike clicked"); },
                     expandCallback: () => { console.log("expand clicked"); }
