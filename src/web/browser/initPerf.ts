@@ -9,13 +9,13 @@ export const initPerf = (name: string) => {
         perf.mark(startKey);
     };
 
-    const end = (shouldLog: boolean = true): TimeTakenInMilliseconds => {
+    const end = (): TimeTakenInMilliseconds => {
         perf.mark(endKey);
         perf.measure(name, startKey, endKey);
-        if (shouldLog) {
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify(perf.getEntriesByName(name)));
-        }
+
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(perf.getEntriesByName(name)));
+
         const measureEntries = perf.getEntriesByName(name, "measure");
         const timeTakenFloat = measureEntries[0].duration;
         const timeTakenInt = Math.round(timeTakenFloat);

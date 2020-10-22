@@ -155,8 +155,8 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
-    const canShowTiming = initPerf('braze-banner');
-    canShowTiming.start();
+    const timing = initPerf('braze-banner');
+    timing.start();
 
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
@@ -192,7 +192,7 @@ export const canShow = async (
     try {
         const result = await getMessageFromBraze(apiKey as string, brazeUuid)
 
-        const timeTaken = canShowTiming.end(true);
+        const timeTaken = timing.end();
         record({
             component: 'braze-banner-timing',
             value: timeTaken,
