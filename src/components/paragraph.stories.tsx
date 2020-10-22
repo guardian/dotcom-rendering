@@ -11,13 +11,13 @@ import { Design, Display, Pillar } from '@guardian/types/Format';
 const standard = {
     design: Design.Article,
     display: Display.Standard,
-    pillar: Pillar.News
+    theme: Pillar.News
 }
 
 const labs = {
     design: Design.AdvertisementFeature,
     display: Display.Standard,
-    pillar: Pillar.News
+    theme: Pillar.News
 }
 
 const Default: FC = () =>

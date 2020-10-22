@@ -13,7 +13,7 @@ import { Option, none, some } from '@guardian/types/option';
 // ----- Setup ----- //
 
 const format: Format = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };

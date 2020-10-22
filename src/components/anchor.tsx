@@ -6,7 +6,7 @@ import { Format, Design } from '@guardian/types/Format';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { darkModeCss } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { palette } from '@guardian/src-foundations';
 
 
@@ -29,7 +29,7 @@ const styles = css`
 `;
 
 const colour = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
     switch (format.design) {
         case Design.AdvertisementFeature:
             return css`

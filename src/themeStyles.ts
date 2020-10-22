@@ -1,72 +1,65 @@
 // ----- Imports ----- //
 
 import * as palette from '@guardian/src-foundations/palette';
-
-import { Pillar } from '@guardian/types/Format';
+import { Pillar, Special, Theme } from '@guardian/types/Format';
 
 
 // ----- Types ----- //
 
-interface PillarStyles {
+interface ThemeStyles {
     kicker: string;
-    featureHeadline: string;
-    soft: string;
     inverted: string;
     liveblogBackground: string;
     liveblogDarkBackground: string;
 }
 
-type PillarColours = {
-    [ pillar in Pillar ]: PillarStyles;
+type ThemeColours = {
+    [ theme in Theme ]: ThemeStyles;
 };
 
-export const pillarColours: PillarColours = {
+export const themeColours: ThemeColours = {
     [Pillar.News]: {
         kicker: palette.news[400],
-        featureHeadline: palette.news[300],
-        soft: palette.news[800],
         inverted: palette.news[500],
         liveblogBackground: palette.news[300],
         liveblogDarkBackground: palette.news[200]
     },
     [Pillar.Opinion]: {
         kicker: palette.opinion[400],
-        featureHeadline: palette.opinion[300],
-        soft: palette.opinion[800],
         inverted: palette.opinion[500],
         liveblogBackground: palette.opinion[300],
         liveblogDarkBackground: palette.opinion[200]
     },
     [Pillar.Sport]: {
         kicker: palette.sport[400],
-        featureHeadline: palette.sport[300],
-        soft: palette.sport[800],
         inverted: palette.sport[500],
         liveblogBackground: palette.sport[300],
         liveblogDarkBackground: palette.sport[200]
     },
     [Pillar.Culture]: {
         kicker: palette.culture[400],
-        featureHeadline: palette.culture[300],
-        soft: palette.culture[800],
         inverted: palette.culture[500],
         liveblogBackground: palette.culture[300],
         liveblogDarkBackground: palette.culture[200]
     },
     [Pillar.Lifestyle]: {
         kicker: palette.lifestyle[400],
-        featureHeadline: palette.lifestyle[300],
-        soft: palette.lifestyle[800],
         inverted: palette.lifestyle[500],
         liveblogBackground: palette.lifestyle[300],
         liveblogDarkBackground: palette.lifestyle[200]
+    },
+    [Special.SpecialReport]: {
+        kicker: palette.specialReport[400],
+        inverted: palette.specialReport[500],
+        liveblogBackground: palette.specialReport[300],
+        liveblogDarkBackground: palette.specialReport[200]
     }
 }
 
-const getPillarStyles = (pillar: Pillar): PillarStyles => pillarColours[pillar];
+const getThemeStyles = (theme: Theme): ThemeStyles => themeColours[theme];
 
-function pillarFromString(pillar: string | undefined): Pillar {
-    switch (pillar) {
+function themeFromString(theme: string | undefined): Pillar {
+    switch (theme) {
         case 'pillar/opinion':
             return Pillar.Opinion;
         case 'pillar/sport':
@@ -81,8 +74,8 @@ function pillarFromString(pillar: string | undefined): Pillar {
     }
 }
 
-function pillarToString(pillar: Pillar): string {
-    switch (pillar) {
+function themeToPillar(theme: Theme): string {
+    switch (theme) {
         case Pillar.Opinion:
             return 'opinion';
         case Pillar.Sport:
@@ -101,8 +94,8 @@ function pillarToString(pillar: Pillar): string {
 // ----- Exports ----- //
 
 export {
-    PillarStyles,
-    getPillarStyles,
-    pillarFromString,
-    pillarToString
+    ThemeStyles,
+    getThemeStyles,
+    themeFromString,
+    themeToPillar
 };

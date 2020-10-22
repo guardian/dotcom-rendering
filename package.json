@@ -50,7 +50,7 @@
     "@guardian/src-radio": "^2.5.0",
     "@guardian/src-text-area": "^2.5.0",
     "@guardian/src-text-input": "^2.4.0",
-    "@guardian/types": "github:guardian/types#semver:^0.4.5",
+    "@guardian/types": "github:guardian/types#semver:^0.5.2",
     "@types/jsdom": "^16.2.4",
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.775.0",

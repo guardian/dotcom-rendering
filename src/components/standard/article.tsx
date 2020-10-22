@@ -15,7 +15,7 @@ import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import RelatedContent from 'components/shared/relatedContent';
@@ -47,7 +47,7 @@ const BorderStyles = css`
 `;
 
 const itemStyles = (item: Item): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(item.pillar);
+    const { kicker, inverted } = getThemeStyles(item.theme);
 
     switch (item.display) {
         case Display.Immersive:

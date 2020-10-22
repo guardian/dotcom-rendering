@@ -14,7 +14,7 @@ import { some } from '@guardian/types/option';
 const Default: FC = () =>
     <CommentCount
         count={some(number('Count', 1234, { min: 0 }))}
-        pillar={selectPillar(Pillar.News)}
+        theme={selectPillar(Pillar.News)}
         design={Design.Article}
         display={Display.Standard}
         commentable={boolean('Commentable', true)}

@@ -5,7 +5,7 @@ import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 import { SvgMinus, SvgPlus } from '@guardian/src-icons';
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { headline, textSans, body } from '@guardian/src-foundations/typography';
 import { TextInput } from '@guardian/src-text-input';
 import { TextArea } from '@guardian/src-text-area';
@@ -139,7 +139,7 @@ const renderField = ({ type, label, mandatory, options, id }: FormField): ReactE
 
 const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
     const { campaign, format, description } = props;
-    const { kicker } = getPillarStyles(format.pillar);
+    const { kicker } = getThemeStyles(format.theme);
 
     return (
         <details className="js-callout" css={calloutStyles}>

@@ -8,14 +8,14 @@ import { Option, withDefault, map } from '@guardian/types/option';
 import { darkModeCss as darkMode } from 'styles';
 import { formatDate } from 'date';
 import { pipe2 } from 'lib';
-import { Pillar } from '@guardian/types/Format';
+import { Pillar, Theme } from '@guardian/types/Format';
 
 
 // ----- Component ----- //
 
 interface Props {
     date: Option<Date>;
-    pillar: Pillar;
+    theme: Theme;
 }
 
 const darkStyles = darkMode`
@@ -36,8 +36,8 @@ const commentDatelineStyles = css`
     ${darkStyles}
 `;
 
-const getDatelineStyles = (pillar: Pillar): SerializedStyles => {
-    switch(pillar){
+const getDatelineStyles = (theme: Theme): SerializedStyles => {
+    switch(theme){
         case Pillar.Opinion:
             return commentDatelineStyles;
         default:
@@ -45,10 +45,10 @@ const getDatelineStyles = (pillar: Pillar): SerializedStyles => {
     }
 }
 
-const Dateline: FC<Props> = ({ date, pillar }) =>
+const Dateline: FC<Props> = ({ date, theme }) =>
     pipe2(
         date,
-        map(d => <time css={getDatelineStyles(pillar)} data-date={d} className="date">{ formatDate(d) }</time>),
+        map(d => <time css={getDatelineStyles(theme)} data-date={d} className="date">{ formatDate(d) }</time>),
         withDefault<ReactElement | null>(null),
     )
 
