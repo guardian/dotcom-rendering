@@ -182,7 +182,7 @@ const dotStyle = (index: number) => css`
 
 const dotActiveStyle = (index: number) => css`
     ${dotStyle(index)};
-    background-color: ${palette.news[100]};
+    background-color: ${palette.news[400]};
 `;
 
 const buttonStyle = css`
@@ -221,7 +221,7 @@ const headerStyles = css`
 `;
 
 const titleStyle = css`
-    color: ${palette.news[100]};
+    color: ${palette.news[400]};
 `;
 
 export const Title = ({ title }: { title: string; url?: string }) => (
