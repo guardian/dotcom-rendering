@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'emotion';
 
 import { RadioGroup, Radio } from '@guardian/src-radio';
 import { FieldLabel } from './FieldLabel';
@@ -14,7 +15,15 @@ export const RadioSelect = ({
     formData,
     setFormData,
 }: fieldProp) => (
-    <>
+    // work around to enforce `display: flex;` to `RadioGroup`'s fieldset tag
+    // https://github.com/guardian/source/issues/580
+    <div
+        className={css`
+            fieldset {
+                display: flex;
+            }
+        `}
+    >
         <FieldLabel formField={formField} />
         <RadioGroup name={formField.name} orientation="horizontal">
             {formField.options.map((option, index) => {
@@ -39,5 +48,5 @@ export const RadioSelect = ({
                 );
             })}
         </RadioGroup>
-    </>
+    </div>
 );
