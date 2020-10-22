@@ -2,7 +2,6 @@ import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
-import { SignInGatePatientia } from './gateDesigns/SignInGatePatientia';
 import { SignInGatePersonalisedAdCopyVariant2 } from './gateDesigns/SignInGatePersonalisedAdCopyVariant2';
 
 export default {
@@ -26,20 +25,6 @@ export const mainStandalone = () => {
     );
 };
 mainStandalone.story = { name: 'main_standalone' };
-
-export const mainPatientia = () => {
-    return (
-        <Section>
-            <SignInGatePatientia
-                guUrl="https://theguardian.com"
-                signInUrl="https://profile.theguardian.com/"
-                dismissGate={() => {}}
-                ophanComponentId="test"
-            />
-        </Section>
-    );
-};
-mainPatientia.story = { name: 'patientia_standalone' };
 
 export const mainPersonalisedAdCopy = () => {
     return (
