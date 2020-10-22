@@ -8,7 +8,7 @@ import { getThemeStyles } from 'themeStyles';
 import { neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { SvgQuote } from '@guardian/src-icons';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'pillarStyles';
 
 
 // ----- Component ----- //
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const styles = (format: Format): SerializedStyles => {
-    const { kicker } = getPillarStyles(format.pillar);
+    const { kicker } = getThemeStyles(format.pillar);
     return css`
         font-style: italic;
         position: relative;
