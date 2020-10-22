@@ -50,7 +50,7 @@ const reviewContent = {
     }
 }
 
-const articleContentWith = (element: BlockElement, atoms?: Atoms) => ({
+export const articleContentWith = (element: BlockElement, atoms?: Atoms) => ({
     ...articleContent,
     atoms,
     blocks: {

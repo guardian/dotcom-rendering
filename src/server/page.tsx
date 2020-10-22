@@ -111,6 +111,7 @@ const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
     );
 
 const buildHtml = (head: string, body: string, scripts: ReactElement): string => `
+    <!DOCTYPE html>
     <html lang="en">
         <head>
             ${head}
@@ -133,6 +134,7 @@ function render(
     const body = renderBody(item, request);
     const head = renderHead(item, request, thirdPartyEmbeds, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={thirdPartyEmbeds.twitter} />;
+
 
     return { html: buildHtml(head, body.html, scripts), clientScript };
 }

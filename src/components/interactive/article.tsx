@@ -1,3 +1,4 @@
+import FooterCcpa from 'components/shared/footer';
 // ----- Imports ----- //
 
 import React, { ReactNode, FC } from 'react';
@@ -13,6 +14,7 @@ const Interactive: FC<Props> = ({ children }) =>
         <article>
             {children}
         </article>
+        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
     </main>
 
 

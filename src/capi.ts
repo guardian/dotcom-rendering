@@ -91,62 +91,55 @@ const articleMainMedia = (content: Content, context: Context): Option<MainMedia>
 }
 
 
-  type ThirdPartyEmbeds = {
+type ThirdPartyEmbeds = {
     twitter: boolean;
     youtube: boolean;
     instagram: boolean;
     spotify: boolean;
-  };
-  
-  const noThirdPartyEmbeds: ThirdPartyEmbeds = {
+};
+
+const noThirdPartyEmbeds: ThirdPartyEmbeds = {
     twitter: false,
     youtube: false,
     instagram: false,
     spotify: false,
-  };
-  
-  
-  const checkForThirdPartyEmbed = (thirdPartyEmbeds: ThirdPartyEmbeds, element: BlockElement): ThirdPartyEmbeds => {
-    // console.log(element);
-    
+};
+
+const checkForThirdPartyEmbed = (
+    thirdPartyEmbeds: ThirdPartyEmbeds,
+    element: BlockElement): ThirdPartyEmbeds => {
     switch (element.type) {
-  
-      case ElementType.INSTAGRAM:
-          return { ...thirdPartyEmbeds, instagram: true };
-  
-      case ElementType.TWEET:
-          return { ...thirdPartyEmbeds, twitter: true };
-  
-      case ElementType.VIDEO:
-          return { ...thirdPartyEmbeds, youtube: true };
-  
-      case ElementType.AUDIO:
-          return { ...thirdPartyEmbeds, spotify: true };
-  
-      default:
-        return thirdPartyEmbeds;
-  
-  }
+        case ElementType.INSTAGRAM:
+            return { ...thirdPartyEmbeds, instagram: true };
+        case ElementType.TWEET:
+            return { ...thirdPartyEmbeds, twitter: true };
+        case ElementType.VIDEO:
+            return { ...thirdPartyEmbeds, youtube: true };
+        case ElementType.AUDIO:
+            return { ...thirdPartyEmbeds, spotify: true };
+        default:
+            return thirdPartyEmbeds;
+    }
 }
 
-const getThirdPartyEmbeds = (content: Content): any => {
+const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
     const body = content?.blocks?.body;
-    console.log(body)
     if (!body) {
-        return false
+        return noThirdPartyEmbeds
     }
 
-    let allThirdPartyEmbeds = body.reduce(
-        (thirdPartyEmbeds, block) => block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
+    const allThirdPartyEmbeds = body.reduce(
+        (thirdPartyEmbeds, block) => block.elements
+            .reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
         noThirdPartyEmbeds,
-      );
+    );
     console.log('>>>>>>>>>>>>>>>>>>', allThirdPartyEmbeds)
     return allThirdPartyEmbeds;
 }
 
 // const includesTweets = (content: Content): boolean => {
 //     const body = content?.blocks?.body;
-    
+
 //     if (!body) {
 //         return false
 //     }
@@ -154,7 +147,7 @@ const getThirdPartyEmbeds = (content: Content): any => {
 //     return body
 //         .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
 //         .some(Boolean)
-        
+
 // }
 
 // const includesInstagram = (content: Content): boolean => {
@@ -224,16 +217,16 @@ const capiEndpoint = (articleId: string, key: string): string => {
     ];
 
     const params = new URLSearchParams({
-      format: 'thrift',
-      'api-key': key,
-      'show-atoms': 'all',
-      'show-fields': fields.join(','),
-      'show-tags': 'all',
-      'show-blocks': 'all',
-      'show-elements': 'all',
-      'show-related': 'true'
+        format: 'thrift',
+        'api-key': key,
+        'show-atoms': 'all',
+        'show-fields': fields.join(','),
+        'show-tags': 'all',
+        'show-blocks': 'all',
+        'show-elements': 'all',
+        'show-related': 'true'
     })
-  
+
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
 }
 
@@ -264,5 +257,6 @@ export {
     getThirdPartyEmbeds,
     maybeCapiDate,
     paidContentLogo,
-    articleMainImage
+    articleMainImage,
+    checkForThirdPartyEmbed
 };

@@ -81,8 +81,14 @@ function insertAds(): void {
 function ads(): void {
     void userClient.isPremium().then(premiumUser => {
         if (!premiumUser) {
-            Array.from(document.querySelectorAll('.ad-placeholder'))
-                .forEach(placeholder => placeholder.classList.remove('hidden'))
+            const articleLength = document.querySelector('.js-article')?.getBoundingClientRect().bottom ?? Infinity;
+            const placeholders = Array.from(document.querySelectorAll('.ad-placeholder'));
+            placeholders
+                .forEach(placeholder => placeholder.classList.remove('hidden'));
+            placeholders
+                .filter(slot => slot.getBoundingClientRect().bottom > articleLength)
+                .forEach(slot => slot.remove());
+
             insertAds();
             Array.from(document.querySelectorAll('.ad-labels, .upgrade-banner button'))
                 .forEach(adLabel => {

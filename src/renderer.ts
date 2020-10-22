@@ -399,152 +399,152 @@ const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
 
 const render = (format: Format, excludeStyles = false) =>
     (element: BodyElement, key: number): ReactNode => {
-    switch (element.kind) {
+        switch (element.kind) {
 
-        case ElementKind.Text:
-            return excludeStyles
-                ? Array.from(element.doc.childNodes).map(plainTextElement)
-                : text(element.doc, format)
+            case ElementKind.Text:
+                return excludeStyles
+                    ? Array.from(element.doc.childNodes).map(plainTextElement)
+                    : text(element.doc, format)
 
-        case ElementKind.Image: {
-            const { caption, credit, role } = element;
-            const ImageComponent = pipe2(
-                role,
-                map(imageComponentFromRole),
-                withDefault(BodyImage),
-            );
+            case ElementKind.Image: {
+                const { caption, credit, role } = element;
+                const ImageComponent = pipe2(
+                    role,
+                    map(imageComponentFromRole),
+                    withDefault(BodyImage),
+                );
 
-            const figcaption = withDefault(Role.Thumbnail)(role) !== Role.HalfWidth
-                ? h(FigCaption, { format, caption, credit })
-                : null;
+                const figcaption = withDefault(Role.Thumbnail)(role) !== Role.HalfWidth
+                    ? h(FigCaption, { format, caption, credit })
+                    : null;
 
-            return h(ImageComponent, { image: element, format }, figcaption);
-        }
+                return h(ImageComponent, { image: element, format }, figcaption);
+            }
 
-        case ElementKind.Pullquote: {
-            const { quote, attribution } = element;
-            return h(Pullquote, { quote, attribution, format, key });
-        }
+            case ElementKind.Pullquote: {
+                const { quote, attribution } = element;
+                return h(Pullquote, { quote, attribution, format, key });
+            }
 
-        case ElementKind.RichLink: {
-            const { url, linkText } = element;
-            return h(RichLink, { url, linkText, key, format });
-        }
+            case ElementKind.RichLink: {
+                const { url, linkText } = element;
+                return h(RichLink, { url, linkText, key, format });
+            }
 
-        case ElementKind.LiveEvent: {
-            return h(LiveEventLink, { ...element, key });
-        }
+            case ElementKind.LiveEvent: {
+                return h(LiveEventLink, { ...element, key });
+            }
 
-        case ElementKind.Interactive:
-            return h(Interactive, { url: element.url, key, title: element.alt });
+            case ElementKind.Interactive:
+                return h(Interactive, { url: element.url, key, title: element.alt });
 
-        case ElementKind.Tweet:
-            return h(Tweet, { content: element.content, format, key });
+            case ElementKind.Tweet:
+                return h(Tweet, { content: element.content, format, key });
 
-        case ElementKind.Audio:
-            return h(Audio, { src: element.src, width: element.width, height: element.height });
+            case ElementKind.Audio:
+                return h(Audio, { src: element.src, width: element.width, height: element.height });
 
-        case ElementKind.Video:
-            return h(Video, { src: element.src, width: element.width, height: element.height })
+            case ElementKind.Video:
+                return h(Video, { src: element.src, width: element.width, height: element.height })
 
-        case ElementKind.Callout: {
-            const { campaign, description } = element;
-            return h(CalloutForm, { campaign, format, description });
-        }
+            case ElementKind.Callout: {
+                const { campaign, description } = element;
+                return h(CalloutForm, { campaign, format, description });
+            }
 
-        case ElementKind.Embed: {
-            const props = {
-                dangerouslySetInnerHTML: {
-                  __html: element.html,
-                },
-            };
+            case ElementKind.Embed: {
+                const props = {
+                    dangerouslySetInnerHTML: {
+                        __html: element.html,
+                    },
+                };
 
-            const figureCss = css`
+                const figureCss = css`
                 margin: ${remSpace[4]} 0;
                 ${darkModeCss`
                     background: white;
                     padding: ${remSpace[2]};
                 `}
             `;
-            const captionStyles = css`
+                const captionStyles = css`
                 ${textSans.xsmall()}
                 color: ${textColour.supporting};
             `
 
-            const figure = (alt: string | null): ReactElement => {
-                const children = [h('div', props), styledH('figcaption', { css: captionStyles }, alt)];
-                return styledH('figure', { css: figureCss }, children);
+                const figure = (alt: string | null): ReactElement => {
+                    const children = [h('div', props), styledH('figcaption', { css: captionStyles }, alt)];
+                    return styledH('figure', { css: figureCss }, children);
+                }
+
+                return pipe2(
+                    element.alt,
+                    map(alt => figure(alt)),
+                    withDefault(figure(null)),
+                );
             }
 
-            return pipe2(
-                element.alt,
-                map(alt => figure(alt)),
-                withDefault(figure(null)),
-            );
-        }
+            case ElementKind.Instagram: {
+                const props = {
+                    dangerouslySetInnerHTML: {
+                        __html: element.html,
+                    },
+                };
 
-        case ElementKind.Instagram: {
-            const props = {
-                dangerouslySetInnerHTML: {
-                  __html: element.html,
-                },
-            };
+                return h('div', props);
+            }
 
-            return h('div', props);
-        }
+            case ElementKind.ExplainerAtom: {
+                return h(ExplainerAtom, { ...element })
+            }
 
-        case ElementKind.ExplainerAtom: {
-            return h(ExplainerAtom, { ...element })
-        }
+            case ElementKind.GuideAtom: {
+                return h(GuideAtom, {
+                    ...element,
+                    pillar: pillarToString(format.pillar),
+                    likeHandler: () => { console.log("like clicked"); },
+                    dislikeHandler: () => { console.log("dislike clicked"); },
+                    expandCallback: () => { console.log("expand clicked"); }
+                })
+            }
 
-        case ElementKind.GuideAtom: {
-            return h(GuideAtom, {
-                ...element,
-                pillar: pillarToString(format.pillar),
-                likeHandler: () => { console.log("like clicked"); },
-                dislikeHandler: () => { console.log("dislike clicked"); },
-                expandCallback: () => { console.log("expand clicked"); }
-            })
-        }
+            case ElementKind.QandaAtom: {
+                return h(QandaAtom, {
+                    ...element,
+                    pillar: pillarToString(format.pillar),
+                    likeHandler: () => { console.log("like clicked"); },
+                    dislikeHandler: () => { console.log("dislike clicked"); },
+                    expandCallback: () => { console.log("expand clicked"); }
+                })
+            }
 
-        case ElementKind.QandaAtom: {
-            return h(QandaAtom, {
-                ...element,
-                pillar: pillarToString(format.pillar),
-                likeHandler: () => { console.log("like clicked"); },
-                dislikeHandler: () => { console.log("dislike clicked"); },
-                expandCallback: () => { console.log("expand clicked"); }
-            })
-        }
+            case ElementKind.ProfileAtom: {
+                return h(ProfileAtom, {
+                    ...element,
+                    pillar: pillarToString(format.pillar),
+                    likeHandler: () => { console.log("like clicked"); },
+                    dislikeHandler: () => { console.log("dislike clicked"); },
+                    expandCallback: () => { console.log("expand clicked"); }
+                })
+            }
 
-        case ElementKind.ProfileAtom: {
-            return h(ProfileAtom, {
-                ...element,
-                pillar: pillarToString(format.pillar),
-                likeHandler: () => { console.log("like clicked"); },
-                dislikeHandler: () => { console.log("dislike clicked"); },
-                expandCallback: () => { console.log("expand clicked"); }
-            })
-        }
+            case ElementKind.TimelineAtom: {
+                return h(TimelineAtom, {
+                    ...element,
+                    pillar: pillarToString(format.pillar),
+                    likeHandler: () => { console.log("like clicked"); },
+                    dislikeHandler: () => { console.log("dislike clicked"); },
+                    expandCallback: () => { console.log("expand clicked"); }
+                })
+            }
 
-        case ElementKind.TimelineAtom: {
-            return h(TimelineAtom, {
-                ...element,
-                pillar: pillarToString(format.pillar),
-                likeHandler: () => { console.log("like clicked"); },
-                dislikeHandler: () => { console.log("dislike clicked"); },
-                expandCallback: () => { console.log("expand clicked"); }
-            })
-        }
+            case ElementKind.ChartAtom: {
+                return h(ChartAtom, { ...element })
+            }
 
-        case ElementKind.ChartAtom: {
-            return h(ChartAtom, { ...element })
-        }
-
-        case ElementKind.InteractiveAtom: {
-            const { html, css: styles, js } = element;
-            if (format.design !== Design.Interactive) {
-                const fenced = `
+            case ElementKind.InteractiveAtom: {
+                const { html, css: styles, js } = element;
+                if (format.design !== Design.Interactive) {
+                    const fenced = `
                     <html>
                         <head>
                             <meta charset="utf-8">
@@ -559,19 +559,19 @@ const render = (format: Format, excludeStyles = false) =>
                         </body>
                     </html>
                 `;
-                return h('iframe', { srcdoc: fenced });
-            } else {
-                return h(InteractiveAtom, { html, styles, js, format });
+                    return h('iframe', { srcdoc: fenced });
+                } else {
+                    return h(InteractiveAtom, { html, styles, js, format });
+                }
             }
-        }
 
-        case ElementKind.MediaAtom: {
-            const { posterUrl, videoId, duration, caption } = element;
+            case ElementKind.MediaAtom: {
+                const { posterUrl, videoId, duration, caption } = element;
 
-            const backgroundColor = (format: Format): string =>
-                format.design === Design.Comment ? neutral[86] : neutral[97];
+                const backgroundColor = (format: Format): string =>
+                    format.design === Design.Comment ? neutral[86] : neutral[97];
 
-            const styles = css`
+                const styles = css`
                 width: 100%;
                 padding-bottom: 56.25%;
                 margin: 0;
@@ -581,22 +581,22 @@ const render = (format: Format, excludeStyles = false) =>
                 `}
             `
 
-            const figureAttributes = {
-                css: css`margin: ${remSpace[4]} 0;`
-            }
+                const figureAttributes = {
+                    css: css`margin: ${remSpace[4]} 0;`
+                }
 
-            const attributes = {
-                'data-posterUrl': posterUrl,
-                'data-videoId': videoId,
-                'data-duration': duration,
-                'className': 'native-video',
-                css: styles
+                const attributes = {
+                    'data-posterUrl': posterUrl,
+                    'data-videoId': videoId,
+                    'data-duration': duration,
+                    'className': 'native-video',
+                    css: styles
+                }
+                const figcaption = h(FigCaption, { format, caption, credit: none });
+                return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
             }
-            const figcaption = h(FigCaption, { format, caption, credit: none });
-            return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
         }
-    }
-};
+    };
 
 const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(format));
