@@ -86,8 +86,6 @@ function csp(
         styles: [ ...interactives.styles, ...additionalAssets.styles ],
         scripts: [ ...interactives.scripts, ...additionalAssets.scripts ],
     };
-    console.log('>?>?>?>?',buildCsp(assets, thirdPartyEmbed));
-
     return buildCsp(assets, thirdPartyEmbed);
 }
 
