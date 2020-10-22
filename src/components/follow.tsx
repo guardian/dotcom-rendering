@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { Contributor, isSingleContributor } from 'contributor';
 import { darkModeCss } from 'styles';
 import { Design } from '@guardian/types/Format';
@@ -31,8 +31,8 @@ const styles = (kicker: string, inverted: string): SerializedStyles => css`
     `}
 `;
 
-function getStyles({ pillar }: Format): SerializedStyles {
-    const { kicker, inverted } = getPillarStyles(pillar);
+function getStyles({ theme }: Format): SerializedStyles {
+    const { kicker, inverted } = getThemeStyles(theme);
 
     return styles(kicker, inverted);
 }

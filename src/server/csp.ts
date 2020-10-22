@@ -70,7 +70,7 @@ const buildCsp = ({ styles, scripts }: Assets, twitter: boolean): string => `
     style-src 'unsafe-inline';
     img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
     script-src 'self' ${assetHashes(scripts)} http://www.instagram.com/embed.js https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
-    frame-src https://www.theguardian.com https://www.scribd.com https://www.instagram.com https://www.tiktok.com https://interactive.guim.co.uk https://open.spotify.com https://www.youtube-nocookie.com https://player.vimeo.com/ ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
+    frame-src https://www.theguardian.com https://www.scribd.com https://www.instagram.com https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk https://open.spotify.com https://www.youtube-nocookie.com https://player.vimeo.com/ ${twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
     connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/
 `.trim();

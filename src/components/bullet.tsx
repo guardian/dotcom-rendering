@@ -5,9 +5,8 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Format } from '@guardian/types/Format';
 import { body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
-
 import { darkModeCss } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 
 
 // ----- Component ----- //
@@ -25,7 +24,7 @@ const styles = css`
 `;
 
 const bulletStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
 
     return css`
         color: transparent;

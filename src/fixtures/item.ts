@@ -8,7 +8,7 @@ import { none, some } from '@guardian/types/option';
 // ----- Fixture ----- //
 
 const fields = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     display: Display.Standard,
     body: [],
     headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',

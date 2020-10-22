@@ -32,14 +32,14 @@ const Analysis = (): ReactElement =>
     <Headline item={{
         ...analysis,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.News),
+        theme: selectPillar(Pillar.News),
     }} />
 
 const Feature = (): ReactElement =>
     <Headline item={{
         ...feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: selectPillar(Pillar.News),
+        theme: selectPillar(Pillar.News),
     }} />
 
 const Review = (): ReactElement =>

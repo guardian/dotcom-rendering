@@ -11,11 +11,11 @@ import { Design, Display, Format } from '@guardian/types/Format';
 import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { getPillarStyles, pillarFromString } from 'pillarStyles';
-import Img from 'components/img';
+import { getThemeStyles, themeFromString } from 'themeStyles';
 import { border } from 'editorialPalette';
 import { SvgCamera, SvgVideo, SvgAudio, SvgQuote } from '@guardian/src-icons';
 import { stars } from 'components/starRating';
+import Img from 'components/img';
 
 
 interface Props {
@@ -23,15 +23,15 @@ interface Props {
     image: Option<Image>;
 }
 
-const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+const borderColor = (type: RelatedItemType, format: Format): SerializedStyles => {
+    if (type === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`1px solid ${palette.labs[300]}`
     } else {
-        return css`1px solid ${getPillarStyles(format.pillar).kicker}`
+        return css`1px solid ${getThemeStyles(format.theme).kicker}`
     }
 }
 
-const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
+const listStyles = (type: RelatedItemType, format: Format): SerializedStyles => {
     return css`
         background: white;
         margin-right: ${remSpace[3]};
@@ -40,7 +40,7 @@ const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border-top : ${borderColor(itemType, format)};
+        border-top : ${borderColor(type, format)};
 
         &.fade {
             opacity: .7;
@@ -63,13 +63,29 @@ const fullWidthImage = css`
     }
 `;
 
-const timeStyles = css`
-    ${textSans.small()};
-    color: ${text.supporting};
-    text-align: right;
-    display: inline-block;
-    vertical-align: top;
-`;
+const timeStyles = (type: RelatedItemType): SerializedStyles => {
+    switch (type) {
+        case RelatedItemType.VIDEO:
+        case RelatedItemType.AUDIO:
+        case RelatedItemType.GALLERY: {
+            return css`
+                ${textSans.small()};
+                color: ${text.ctaPrimary};
+                text-align: right;
+                display: inline-block;
+                vertical-align: top;
+            `;
+        }
+        default:
+            return css`
+                ${textSans.small()};
+                color: ${text.supporting};
+                text-align: right;
+                display: inline-block;
+                vertical-align: top;
+            `
+    }
+}
 
 const durationStyles = css`
     margin-left: ${remSpace[2]};
@@ -92,8 +108,8 @@ const headingWrapperStyles = css`
     min-height: 10rem;
 `
 
-const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
-    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
+const headingStyles = (type: RelatedItemType): SerializedStyles => {
+    if (type === RelatedItemType.ADVERTISEMENT_FEATURE){
         return css`
             ${textSans.medium({ lineHeight: 'regular' })}
             margin: 0 0 ${remSpace[2]} 0;
@@ -115,16 +131,17 @@ const imageBackground = css`
     background: ${neutral[86]};
 `;
 
-const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
-    date,
-    map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
-    withDefault<JSX.Element | null>(null),
-);
+const relativeFirstPublished = (date: Option<Date>, type: RelatedItemType): JSX.Element | null =>
+    pipe2(
+        date,
+        map(date => <time css={[timeStyles(type), dateStyles]}>{makeRelativeDate(date)}</time>),
+        withDefault<JSX.Element | null>(null),
+    );
 
-const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    switch (itemType) {
+const cardStyles = (type: RelatedItemType, format: Format): SerializedStyles => {
+    switch (type) {
         case RelatedItemType.FEATURE: {
-            const { kicker } = getPillarStyles(format.pillar);
+            const { kicker } = getThemeStyles(format.theme);
 
             return css`
                 h2 {
@@ -164,9 +181,9 @@ const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles
         }
 
         case RelatedItemType.LIVE: {
-            const { kicker, liveblogDarkBackground } = getPillarStyles(format.pillar);
+            const { liveblogBackground, liveblogDarkBackground } = getThemeStyles(format.theme);
             return css`
-                background: ${kicker};
+                background: ${liveblogBackground};
                 h3, time {
                     color: ${text.ctaPrimary};
                 }
@@ -209,7 +226,7 @@ const parentIconStyles: SerializedStyles = css`
 `;
 
 const iconStyles = (format: Format): SerializedStyles => {
-    const { inverted } = getPillarStyles(format.pillar);
+    const { inverted } = getThemeStyles(format.theme);
     return css`
         width: 1.5rem;
         height: 1.5rem;
@@ -229,8 +246,8 @@ const commentIconStyle: SerializedStyles = css`
     margin-right: -2px;
 `;
 
-const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
-    switch (itemType){
+const icon = (type: RelatedItemType, format: Format): ReactElement | null => {
+    switch (type){
         case RelatedItemType.GALLERY:
             return <span css={iconStyles(format)}>< SvgCamera /></span>;
         case RelatedItemType.AUDIO:
@@ -242,8 +259,8 @@ const icon = (itemType: RelatedItemType, format: Format): ReactElement | null =>
     }
 }
 
-const quotationComment = (itemType: RelatedItemType, format: Format): ReactElement | null => {
-    if (itemType === RelatedItemType.COMMENT){
+const quotationComment = (type: RelatedItemType, format: Format): ReactElement | null => {
+    if (type === RelatedItemType.COMMENT){
         return <span css={commentIconStyle}>< SvgQuote /></span>;
     } else {
         return null
@@ -259,13 +276,13 @@ const bylineStyles: SerializedStyles = css`
     color: ${opinion[400]};
 `;
 
-const durationMedia = (duration: Option<string>): ReactElement | null => {
+const durationMedia = (duration: Option<string>, type: RelatedItemType): ReactElement | null => {
     return pipe2(
         duration,
         map(length => {
             const seconds = formatSeconds(length);
             if (seconds.kind === OptionKind.Some) {
-                return <time css={[timeStyles, durationStyles]}>
+                return <time css={[timeStyles(type), durationStyles]}>
                     {seconds.value}
                 </time>
             } else {
@@ -276,13 +293,13 @@ const durationMedia = (duration: Option<string>): ReactElement | null => {
     )
 }
 
-const byline = (relatedItem: RelatedItem): ReactElement | null => {
-    if (relatedItem.type !== RelatedItemType.COMMENT){
+const cardByline = (type: RelatedItemType, byline?: string): ReactElement | null => {
+    if (type !== RelatedItemType.COMMENT){
         return null;
     }
 
     return pipe2(
-        fromNullable(relatedItem.byline),
+        fromNullable(byline),
         map(byline => {
             return <div css={bylineStyles}>{byline}</div>
         }),
@@ -293,7 +310,7 @@ const byline = (relatedItem: RelatedItem): ReactElement | null => {
 const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement | null => {
     const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
+        theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }
@@ -313,41 +330,42 @@ const cardImage = (image: Option<Image>, relatedItem: RelatedItem): ReactElement
 
 const Card: FC<Props> = ({ relatedItem, image }) => {
     const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
+        theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
         display: Display.Standard
     }
 
     const img = cardImage(image, relatedItem);
+    const { type, title, mediaDuration, link, byline } = relatedItem;
 
     const lastModified = relatedItem.lastModified?.iso8601;
-    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE)
-        ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+    const date = (lastModified && type !== RelatedItemType.ADVERTISEMENT_FEATURE)
+        ? relativeFirstPublished(fromNullable(new Date(lastModified)), type) : null;
     const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
         ? stars(parseInt(relatedItem.starRating)) : null;
-    const articleId = relatedItem.link.split('.com/').pop();
+    const articleId = link.split('.com/').pop();
 
     return (
         <li
             className="js-card"
             data-article-id={articleId}
-            css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}
+            css={[listStyles(type, format), cardStyles(type, format)]}
         >
-            <a css={anchorStyles} href={relatedItem.link}>
+            <a css={anchorStyles} href={link}>
                 <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles(relatedItem.type)}>
-                        {quotationComment(relatedItem.type, format)}
-                        {relatedItem.title}
-                        {byline(relatedItem)}
+                    <h3 css={headingStyles(type)}>
+                        {quotationComment(type, format)}
+                        {title}
+                        {cardByline(type, byline)}
                     </h3>
                     {starRating}
                 </section>
                 <section>
                     <div css={metadataStyles}>
                         <section css={parentIconStyles}>
-                            {icon(relatedItem.type, format)}
+                            {icon(type, format)}
                         </section>
-                        {durationMedia(fromNullable(relatedItem.mediaDuration))}
+                        {durationMedia(fromNullable(mediaDuration), type)}
                         {date}
                     </div>
                     {img}

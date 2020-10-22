@@ -4,16 +4,15 @@ import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { Role } from 'image';
-import { configure, mount, shallow } from 'enzyme';
 import { none, some } from '@guardian/types/option';
-import Adapter from 'enzyme-adapter-react-16';
 import { Design, Display, Format } from '@guardian/types/Format';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { act } from 'react-dom/test-utils';
+import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 
 
-configure({ adapter: new Adapter() });
 const mockFormat: Format = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };
@@ -46,7 +45,6 @@ const imageElement = (): BodyElement =>
 const imageElementWithRole = () =>
     ({
         ...imageElement(),
-        role: some(Role.Thumbnail)
     })
 
 const pullquoteElement = (): BodyElement =>
@@ -55,7 +53,6 @@ const pullquoteElement = (): BodyElement =>
         quote: "quote",
         attribution: none,
     })
-
 
 const pullquoteWithAttributionElement = (): BodyElement =>
     ({
@@ -207,7 +204,7 @@ const renderTextElementWithoutStyles = compose(renderWithoutStyles, textElement)
 const renderCaptionElement = compose(renderCaption, imageElement)
 
 const getHtml = (node: ReactNode): string =>
-    isValidElement(node) ? shallow(node).html() : '';
+    isValidElement(node) ? renderToStaticMarkup(node): '';
 
 describe('renderer returns expected content', () => {
     test('Renders supported node types for text elements', () => {
@@ -382,21 +379,34 @@ describe('Renders different types of elements', () => {
     test('ElementKind.ChartAtom', () => {
         const nodes = render(chartElement())
         const chart = nodes.flat()[0];
-        expect(getHtml(chart)).toContain('srcDoc=\"&lt;main&gt;Chart content&lt;/main&gt;\"');
-    })
+        expect(getHtml(chart)).toContain('srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"');
+   })
 
     function testHandlers(node: ReactNode): void {
         if (isValidElement(node)) {
-            const component = mount(node);
-            const likeButton = component.find('[data-testid="like"]');
-            const dislikeButton = component.find('[data-testid="dislike"]');
-            const feedback = component.find('[data-testid="feedback"]');
-            expect(feedback.html()).toContain('hidden=""');
-            dislikeButton.simulate('click');
-            likeButton.simulate('click');
-            expect(feedback.html()).not.toContain('hidden=""');
-        }
-    }
+            const container = document.createElement("div");
+            document.body.appendChild(container);
+            act(() => {
+                renderDom(node, container);
+            });
+
+            const likeButton = container.querySelector('[data-testid="like"]');
+            const dislikeButton = container.querySelector('[data-testid="dislike"]');
+            const feedback = container.querySelector('[data-testid="feedback"]');
+            expect(feedback?.getAttribute('hidden')).toBe("")
+
+            act(() => {
+                dislikeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+            });
+            act(() => {
+                likeButton!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+            });
+
+            expect(feedback?.getAttribute('hidden')).toBeNull();
+            unmountComponentAtNode(container);
+            container.remove();
+       }
+   }
 });
 
 describe('Paragraph tags rendered correctly', () => {
@@ -417,20 +427,20 @@ describe('Paragraph tags rendered correctly', () => {
 
 describe('Transforms hrefs', () => {
     test('Transforms profile links', () => {
-       const href = "profile/firstname_lastname";
-       const transformed = transformHref(href);
-       expect(transformed).toBe("https://www.theguardian.com/profile/firstname_lastname")
+        const href = "profile/firstname_lastname";
+        const transformed = transformHref(href);
+        expect(transformed).toBe("https://www.theguardian.com/profile/firstname_lastname")
     });
 
     test('Transforms latest links', () => {
-       const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
-       const transformed = transformHref(href);
-       expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
+        const href = "https://www.theguardian.com/world/series/coronavirus-live/latest";
+        const transformed = transformHref(href);
+        expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
     });
 
     test('Does not transform valid link', () => {
         const href = "https://www.theguardian.com/world/series/coronavirus-live";
         const transformed = transformHref(href);
         expect(transformed).toBe("https://www.theguardian.com/world/series/coronavirus-live")
-     });
+    });
 })

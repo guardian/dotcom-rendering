@@ -15,7 +15,7 @@ import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles, onwardStyles, lineStyles } from 'styles';
 import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
-import { getPillarStyles, pillarToString } from 'pillarStyles';
+import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { Display } from '@guardian/types/Format';
 import { remSpace } from '@guardian/src-foundations';
 import { pipe2 } from 'lib';
@@ -49,7 +49,7 @@ const BorderStyles = css`
 `;
 
 const itemStyles = (item: Item): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(item.pillar);
+    const { kicker, inverted } = getThemeStyles(item.theme);
 
     switch (item.display) {
         case Display.Immersive:
@@ -105,7 +105,7 @@ const Standard: FC<Props> = ({ item, children }) => {
                     css={onwardStyles}
                     id="comments"
                     data-closed={false}
-                    data-pillar={pillarToString(item.pillar)}
+                    data-pillar={themeToPillar(item.theme)}
                     data-short-id={id}
                 ></section>),
             withDefault(<></>)
