@@ -14,16 +14,16 @@ type Props = {
 
 const commentWrapperStyles = css`
     ${textSans.medium()};
-    padding: 4px 0 0 10px;
     border-left: 1px ${palette.neutral[86]} solid;
     border-top: 1px ${palette.neutral[86]} solid;
-    margin-top: 12px;
+    padding: ${space[1]}px 0 0 ${space[2]}px;
+    margin-top: ${space[3]}px;
 `;
 
 const bodyContentStyles = css`
     p {
         word-break: break-word;
-        margin-bottom: 8px;
+        margin-bottom: ${space[2]}px;
     }
 `;
 
@@ -31,15 +31,19 @@ const profileWrapperStyles = css`
     display: flex;
     margin-top: ${space[4]}px;
     margin-bottom: ${space[12]}px;
-    a {
-        border-bottom: none;
-    }
+`;
+
+const usernameWrapperStyles = css`
+    display: flex;
+    flex-direction: column;
 `;
 
 const avatarStyles = css`
     width: ${space[12]}px;
     height: ${space[12]}px;
     margin-right: ${space[2]}px;
+    //still can't overwrite inherited style from paraStyles
+    border-bottom: none !important;
 `;
 
 export const CommentBlockComponent = ({
@@ -56,7 +60,11 @@ export const CommentBlockComponent = ({
                 dangerouslySetInnerHTML={{ __html: unescapeData(body) }}
             />
             <div className={profileWrapperStyles}>
-                <a className={avatarStyles} href={profileURL}>
+                <a
+                    className={avatarStyles}
+                    href={profileURL}
+                    aria-hidden="true"
+                >
                     <img
                         className={css`
                             border-radius: 50%;
@@ -65,23 +73,23 @@ export const CommentBlockComponent = ({
                         alt=""
                     />
                 </a>
-                <div>
+                <div className={usernameWrapperStyles}>
                     <a
                         className={css`
                             ${textSans.medium({ fontWeight: 'bold' })};
-                            border-bottom: none;
+                            width: max-content;
                         `}
                         href={profileURL}
                     >
                         {profileName}
                     </a>
-                    <p
+                    <time
                         className={css`
                             ${textSans.small()};
                         `}
                     >
                         {dateTime}
-                    </p>
+                    </time>
                 </div>
             </div>
         </div>
