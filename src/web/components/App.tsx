@@ -23,6 +23,7 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
+    AudioAtom,
 } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -30,6 +31,7 @@ import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
+import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
@@ -40,7 +42,7 @@ import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import { cmp } from '@guardian/consent-management-platform';
@@ -242,18 +244,18 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementAlreadyVisited();
     }, []);
 
-    useEffect(() => {
-        incrementDailyArticleCount();
-    }, []);
-
     // Log an article view using the Slot Machine client lib
     // This function must be called once per article serving.
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        if (!hasOptedOutOfArticleCount()) {
-            incrementWeeklyArticleCount();
-        }
+        const incrementArticleCountsIfConsented = async () => {
+            if (await getArticleCountConsent()) {
+                incrementDailyArticleCount();
+                incrementWeeklyArticleCount();
+            }
+        };
+        incrementArticleCountsIfConsented();
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -325,7 +327,10 @@ export const App = ({ CAPI, NAV }: Props) => {
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
             cmp.init({
                 isInUsa: countryCode === 'US',
-                pubData: { browserId: getCookie('bwid') || undefined },
+                pubData: {
+                    browserId: getCookie('bwid') || undefined,
+                    pageViewId: window.guardian?.config?.ophan?.pageViewId,
+                },
             });
         }
     }, [countryCode, CAPI.config.switches.consentManagement]);
@@ -408,10 +413,17 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.chartAtoms.map((chart) => (
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
-                    <ChartAtom
-                        id={chart.id}
-                        url={chart.url}
-                        html={chart.html}
+                    <ChartAtom id={chart.id} html={chart.html} />
+                </Hydrate>
+            ))}
+            {CAPI.audioAtoms.map((audioAtom) => (
+                <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
+                    <AudioAtom
+                        id={audioAtom.id}
+                        trackUrl={audioAtom.trackUrl}
+                        kicker={audioAtom.kicker}
+                        title={audioAtom.title}
+                        pillar={toTypesPillar(pillar)}
                     />
                 </Hydrate>
             ))}
@@ -593,6 +605,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             keywordIds={CAPI.config.keywordIds}
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
+                            edition={CAPI.editionId}
                         />
                     </Suspense>
                 </Lazy>

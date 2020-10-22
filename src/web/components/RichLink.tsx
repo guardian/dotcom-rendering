@@ -116,11 +116,15 @@ const richLinkLink = css`
 `;
 
 const richLinkElements = css`
-    padding: 4px 5px 5px 7px;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
 `;
 
 const richLinkHeader = css`
     padding-bottom: 10px;
+    color: ${neutral[0]};
 `;
 
 const richLinkTitle = css`
@@ -148,10 +152,11 @@ const readMoreTextStyle = css`
     font-size: 14px;
     ${from.wide} {
         ${headline.xxxsmall()}
+        line-height: 25px;
     }
     display: inline-block;
     height: 30px;
-    line-height: 26px;
+    line-height: 25px;
     padding-left: 4px;
     vertical-align: top;
     font-weight: 500;
@@ -280,7 +285,7 @@ export const RichLink = ({
             data-name={(isPlaceholder && 'placeholder') || ''}
         >
             <div className={cx(richLinkContainer, neutralBackground)}>
-                <a className={cx(richLinkLink)} href={url}>
+                <a className={richLinkLink} href={url}>
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (
                         <div>

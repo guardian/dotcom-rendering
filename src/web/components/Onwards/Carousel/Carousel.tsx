@@ -1,0 +1,420 @@
+import React, { useRef, useState, useEffect } from 'react';
+import {
+    SvgChevronLeftSingle,
+    SvgChevronRightSingle,
+} from '@guardian/src-icons';
+import { css } from 'emotion';
+import { headline } from '@guardian/src-foundations/typography';
+import { from } from '@guardian/src-foundations/mq';
+import { palette, space } from '@guardian/src-foundations';
+import libDebounce from 'lodash/debounce';
+import { LeftColumn } from '@frontend/web/components/LeftColumn';
+import { formatAttrString } from '@frontend/web/lib/formatAttrString';
+import { CardAge } from '../../Card/components/CardAge';
+import { Kicker } from '../../Kicker';
+import { headlineBackgroundColour, headlineColour } from './cardColours';
+
+const navIconStyle = css`
+    display: inline-block;
+
+    svg {
+        height: 32px;
+        fill: ${palette.neutral[46]};
+    }
+`;
+
+const wrapperStyle = css`
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+`;
+
+const containerStyles = css`
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    margin-top: 6px;
+    ${from.leftCol} {
+        margin-top: 26px;
+    }
+
+    margin-bottom: 60px;
+
+    margin-left: 0px;
+    margin-right: 0px;
+
+    ${from.tablet} {
+        /* Shrink the container to remove the leading and
+       trailing side margins from the list of cards */
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    ${from.leftCol} {
+        margin-left: 0px;
+        margin-right: -10px;
+    }
+
+    ${from.wide} {
+        margin-right: 70px;
+        margin-top: 5px;
+    }
+`;
+
+const carouselStyle = css`
+    min-height: 227px;
+    display: flex;
+    align-items: stretch;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
+
+    overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
+    ${from.tablet} {
+        overflow: hidden;
+    }
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
+`;
+
+const cardWrapperStyle = css`
+    position: relative;
+    width: 258px;
+    flex-shrink: 0;
+    margin: 0 ${space[2]}px;
+
+    scroll-snap-align: start;
+
+    :hover {
+        filter: brightness(90%);
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    text-decoration: none;
+
+    color: inherit;
+`;
+
+const cardWrapperFirstStyle = css`
+    ${cardWrapperStyle};
+    margin-left: 0;
+`;
+
+const cardImageStyle = css`
+    width: 258px;
+`;
+
+const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
+    width: 90%;
+    min-height: 107px;
+
+    margin-top: -21px;
+    ${from.desktop} {
+        margin-top: -23px;
+    }
+
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    ${headlineBackgroundColour(designType, pillar)}
+`;
+
+/* const headlineWrapperFirstStyle = css`
+    ${headlineWrapperStyle};
+    background-color: ${palette.news.dark};
+    color: white;
+`;
+ */
+const headlineStyle = (designType: DesignType, pillar: Pillar) => css`
+    ${headline.xxxsmall()};
+    ${from.desktop} {
+        ${headline.xxsmall()};
+    }
+
+    ${headlineColour(designType, pillar)};
+
+    display: block;
+    padding: ${space[1]}px;
+`;
+
+/* const headlineFirstStyle = css`
+    ${headlineStyle};
+    color: ${palette.neutral[100]};
+`;
+ */
+const dotsStyle = css`
+    margin-bottom: ${space[2]}px;
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
+`;
+
+const dotStyle = (index: number) => css`
+    display: inline-block;
+    height: ${space[3]}px;
+    width: ${space[3]}px;
+    background-color: ${palette.neutral[93]};
+    border-radius: 50%;
+    margin-right: ${space[1]}px;
+
+    /* This is a bit of a hack for the test, while we think of better UX here.
+    It's very fragile to things like carousel item count.*/
+    ${from.phablet} {
+        display: ${index >= 7 ? 'none' : 'auto'};
+    }
+
+    ${from.desktop} {
+        display: ${index >= 6 ? 'none' : 'auto'};
+    }
+`;
+
+const dotActiveStyle = (index: number) => css`
+    ${dotStyle(index)};
+    background-color: ${palette.news[400]};
+`;
+
+const buttonStyle = css`
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+`;
+
+const verticalLine = css`
+    width: 1px;
+    background-color: ${palette.neutral[86]};
+    flex-shrink: 0;
+`;
+
+const navRowStyles = css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ${from.tablet} {
+        padding-right: 10px;
+    }
+
+    ${from.tablet} {
+        margin-left: 10px;
+    }
+`;
+
+const headerStyles = css`
+    ${headline.xsmall({ fontWeight: 'bold' })};
+    color: ${palette.text.primary};
+    padding-bottom: 6px;
+    padding-top: 0;
+`;
+
+const titleStyle = css`
+    color: ${palette.news[400]};
+`;
+
+export const Title = ({ title }: { title: string; url?: string }) => (
+    <h2 className={headerStyles}>
+        From <span className={titleStyle}>{title}</span>
+    </h2>
+);
+
+const interleave = <A,>(arr: A[], separator: A): A[] => {
+    const separated = arr.map((elem) => [elem, separator]).flat();
+    if (separated.length > 0) separated.pop(); // remove separator at end
+    return separated;
+};
+
+type CardProps = {
+    trail: TrailType;
+    isFirst?: boolean;
+};
+
+const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
+    const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
+
+    return (
+        <a
+            href={trail.url}
+            className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
+            data-link-name="article"
+        >
+            <img
+                className={cardImageStyle}
+                src={trail.image}
+                alt=""
+                role="presentation"
+            />
+            <div
+                className={headlineWrapperStyle(trail.designType, trail.pillar)}
+            >
+                <h4 className={headlineStyle(trail.designType, trail.pillar)}>
+                    {kickerText && (
+                        <Kicker
+                            text={kickerText}
+                            designType={trail.designType}
+                            pillar={trail.pillar}
+                            showPulsingDot={trail.isLiveBlog}
+                            inCard={true}
+                        />
+                    )}
+                    {trail.headline}
+                </h4>
+                <CardAge
+                    webPublicationDate={trail.webPublicationDate}
+                    showClock={true}
+                    pillar={trail.pillar}
+                    designType={trail.designType}
+                />
+            </div>
+        </a>
+    );
+};
+
+export const Carousel: React.FC<OnwardsType> = ({
+    heading,
+    trails,
+    ophanComponentName,
+}: OnwardsType) => {
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [index, setIndex] = useState(0);
+
+    const notPresentation = (el: HTMLElement): boolean =>
+        el.getAttribute('role') !== 'presentation';
+
+    const getItems = (): HTMLElement[] => {
+        const { current } = carouselRef;
+        if (current === null) return [];
+
+        return Array.from(current.children) as HTMLElement[];
+    };
+
+    const getIndex = (): number => {
+        const { current } = carouselRef;
+        if (current === null) return 0;
+
+        const offsets = getItems()
+            .filter(notPresentation)
+            .map((el) => el.offsetLeft);
+
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
+        const active = offsets.findIndex((el) => el >= scrolled);
+
+        return Math.max(0, active);
+    };
+
+    const getSetIndex = () => {
+        setIndex(getIndex());
+    };
+
+    const prev = () => {
+        const { current } = carouselRef;
+        if (current === null) return;
+
+        const offsets = getItems()
+            .filter(notPresentation)
+            .map((el) => el.offsetLeft);
+
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
+
+        const nextOffset = offsets
+            .reverse()
+            .find((offset) => offset < scrolled);
+
+        if (nextOffset) {
+            current.scrollTo({ left: nextOffset });
+        } else {
+            current.scrollTo({ left: 0 });
+        }
+
+        getSetIndex();
+    };
+
+    const next = () => {
+        const { current } = carouselRef;
+        if (current === null) return;
+
+        const offsets = getItems()
+            .filter(notPresentation)
+            .map((el) => el.offsetLeft);
+
+        const scrolled = (current.scrollLeft || 0) + offsets[0];
+        const nextOffset = offsets.find((offset) => offset > scrolled);
+
+        if (nextOffset) {
+            current.scrollTo({ left: nextOffset });
+        }
+
+        getSetIndex();
+    };
+
+    useEffect(() => {
+        if (carouselRef.current) {
+            carouselRef.current.addEventListener(
+                'scroll',
+                libDebounce(getSetIndex, 100),
+            );
+        }
+    });
+
+    const cards = trails.map((trail, i) => (
+        <Card trail={trail} isFirst={i === 0} />
+    ));
+
+    return (
+        <div
+            className={wrapperStyle}
+            data-link-name={formatAttrString(heading)}
+        >
+            <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
+                <div />
+            </LeftColumn>
+            <div
+                className={containerStyles}
+                data-component={ophanComponentName}
+                data-link={formatAttrString(heading)}
+            >
+                <div className={navRowStyles}>
+                    <Title title={heading} />
+
+                    <div className={navIconStyle} data-link-name="nav-arrow">
+                        <button onClick={prev} className={buttonStyle}>
+                            <SvgChevronLeftSingle />
+                        </button>
+                        <button onClick={next} className={buttonStyle}>
+                            <SvgChevronRightSingle />
+                        </button>
+                    </div>
+                </div>
+
+                <div className={dotsStyle}>
+                    {trails.map((value, i) => (
+                        <span
+                            className={
+                                i === index ? dotActiveStyle(i) : dotStyle(i)
+                            }
+                        />
+                    ))}
+                </div>
+
+                <div className={carouselStyle} ref={carouselRef}>
+                    {interleave(
+                        cards,
+                        <div role="presentation" className={verticalLine} />,
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};

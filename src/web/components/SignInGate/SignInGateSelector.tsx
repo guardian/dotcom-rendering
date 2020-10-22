@@ -3,7 +3,10 @@ import { useAB } from '@guardian/ab-react';
 import { ABTest, Runnable } from '@guardian/ab-core';
 import { constructQuery } from '@root/src/lib/querystring';
 
-import { setUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
+import {
+    incrementUserDismissedGateCount,
+    setUserDismissedGate,
+} from '@frontend/web/components/SignInGate/dismissGate';
 import {
     SignInGateComponent,
     CurrentABTest,
@@ -14,12 +17,23 @@ import { getCookie } from '@frontend/web/browser/cookie';
 import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
+import { signInGatePageview } from '@root/src/web/experiments/tests/sign-in-gate-pageview';
+import { signInGatePageviewUs } from '@root/src/web/experiments/tests/sign-in-gate-pageview-us';
+import { signInGatePersonalisedAdCopy } from '@root/src/web/experiments/tests/sign-in-gate-personalised-ad-copy';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
 import { signInGateComponent as gatePatientiaControl } from '@root/src/web/components/SignInGate/gates/patientia-control';
 import { signInGateComponent as gatePatientiaVariant } from '@root/src/web/components/SignInGate/gates/patientia-variant';
+import { signInGateComponent as gatePageviewVariant1 } from '@root/src/web/components/SignInGate/gates/pageview-variant-1';
+import { signInGateComponent as gatePageviewVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-variant-2';
+import { signInGateComponent as gatePageviewVariant3 } from '@root/src/web/components/SignInGate/gates/pageview-variant-3';
+import { signInGateComponent as gatePageviewVariant4 } from '@root/src/web/components/SignInGate/gates/pageview-variant-4';
+import { signInGateComponent as gatePersonalisedAdCopyVariant1 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-1';
+import { signInGateComponent as gatePersonalisedAdCopyVariant2 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-2';
+import { signInGateComponent as gatePageviewUsVariant1 } from '@root/src/web/components/SignInGate/gates/pageview-us-variant-1';
+import { signInGateComponent as gatePageviewUsVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-us-variant-2';
 
 import {
     ComponentEventParams,
@@ -51,6 +65,10 @@ const dismissGate = (
 ) => {
     setShowGate(false);
     setUserDismissedGate(currentAbTestValue.variant, currentAbTestValue.name);
+    incrementUserDismissedGateCount(
+        currentAbTestValue.variant,
+        currentAbTestValue.name,
+    );
 
     // When the user closes the sign in gate, we scroll them back to the main content
     const articleBody = document.querySelector(
@@ -69,19 +87,33 @@ const tests: ReadonlyArray<ABTest> = [
     signInGatePatientia,
     signInGateMainVariant,
     signInGateMainControl,
+    signInGatePageview,
+    signInGatePageviewUs,
+    signInGatePersonalisedAdCopy,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
     'patientia-control-1': gatePatientiaControl,
     'patientia-variant-1': gatePatientiaVariant,
-    'main-control-1': gateMainControl,
-    'main-variant-1': gateMainVariant,
+    'main-control-2': gateMainControl,
+    'main-variant-2': gateMainVariant,
+    'pageview-variant-1': gatePageviewVariant1,
+    'pageview-variant-2': gatePageviewVariant2,
+    'pageview-variant-3': gatePageviewVariant3,
+    'pageview-variant-4': gatePageviewVariant4,
+    'pageview-us-variant-1': gatePageviewUsVariant1,
+    'pageview-us-variant-2': gatePageviewUsVariant2,
+    'personalised-ad-copy-variant-1': gatePersonalisedAdCopyVariant1,
+    'personalised-ad-copy-variant-2': gatePersonalisedAdCopyVariant2,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
-    SignInGateMainVariant: 'main_variant_1',
-    SignInGateMainControl: 'main_control_1',
+    SignInGateMainVariant: 'main_variant_2',
+    SignInGateMainControl: 'main_control_2',
     SignInGatePatientia: 'patientia_test',
+    SignInGatePageview: 'pageview_test',
+    SignInGatePageviewUs: 'pageview_us_test',
+    SignInGatePersonalisedAdCopy: 'personalised_ad_copy_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -175,6 +207,17 @@ export const SignInGateSelector = ({
             id: test?.id || '',
         });
     }, [ab]);
+
+    useEffect(() => {
+        // this hook will fire when the sign in gate is dismissed
+        // which will happen when the showGate state is set to false
+        // this only happens within the dismissGate method
+        if (showGate === false) {
+            document.dispatchEvent(
+                new CustomEvent('dcr:page:article:redisplayed'),
+            );
+        }
+    }, [showGate]);
 
     // check to see if the test is available on this render cycle
     // required by the ab test framework, as we have to wait for the above

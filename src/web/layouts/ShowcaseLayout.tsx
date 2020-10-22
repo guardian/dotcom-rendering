@@ -42,7 +42,7 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const ShowcaseGrid = ({
@@ -487,10 +487,7 @@ export const ShowcaseLayout = ({
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    <div id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedout" />
                     )}
@@ -515,7 +512,7 @@ export const ShowcaseLayout = ({
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
@@ -556,7 +553,7 @@ export const ShowcaseLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );

@@ -8,6 +8,7 @@ import { DocumentBlockComponent } from '@root/src/web/components/elements/Docume
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -26,17 +27,19 @@ import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/Yo
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
 import {
+    AudioAtom,
+    ChartAtom,
     ExplainerAtom,
     InteractiveAtom,
     QandaAtom,
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
-    ChartAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
+import { toTypesPillar } from '@root/src/lib/format';
 import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
@@ -60,6 +63,18 @@ export const ArticleRenderer: React.FC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
+                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                    return (
+                        <div id={`audio-atom-${i}`}>
+                            <AudioAtom
+                                id={element.id}
+                                trackUrl={element.trackUrl}
+                                kicker={element.kicker}
+                                title={element.title}
+                                pillar={toTypesPillar(pillar)}
+                            />
+                        </div>
+                    );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
                         <BlockquoteBlockComponent
@@ -102,13 +117,7 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return (
-                        <ChartAtom
-                            url={element.url}
-                            id={element.id}
-                            html={element.html}
-                        />
-                    );
+                    return <ChartAtom id={element.id} html={element.html} />;
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
                         <DocumentBlockComponent
@@ -119,6 +128,16 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                    if (!element.safe) {
+                        return (
+                            <UnsafeEmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                                alt={element.alt || ''}
+                                index={i}
+                            />
+                        );
+                    }
                     return (
                         <EmbedBlockComponent
                             key={i}
@@ -380,7 +399,6 @@ export const ArticleRenderer: React.FC<{
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
-                case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

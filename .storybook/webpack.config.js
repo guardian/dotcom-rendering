@@ -7,7 +7,16 @@ module.exports = ({ config }) => {
     // Support typescript in Storybook
     // https://storybook.js.org/docs/configurations/typescript-config/
     rules.push({
-        test: /\.(ts|tsx)$/,
+        test: /\.[jt]sx?|mjs$/,
+        exclude: [
+            {
+                test: /node_modules/,
+                exclude: [
+                    /@guardian\/(?!(automat-modules))/,
+                    /dynamic-import-polyfill/,
+                ],
+            },
+        ],
         use: [
             {
                 loader: require.resolve('awesome-typescript-loader'),

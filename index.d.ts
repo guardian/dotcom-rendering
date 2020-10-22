@@ -361,6 +361,7 @@ type CAPIBrowserType = {
     profileAtoms: ProfileAtomBlockElement[];
     timelineAtoms: TimelineBlockElement[];
     chartAtoms: ChartAtomBlockElement[];
+    audioAtoms: AudioAtomBlockElement[];
 };
 
 interface TagType {
@@ -667,6 +668,7 @@ type IslandType =
     | 'profile-atom'
     | 'timeline-atom'
     | 'sign-in-gate'
+    | 'audio-atom'
     | 'chart-atom';
 
 interface TrailType {
@@ -687,6 +689,7 @@ interface TrailType {
     shortUrl?: string;
     commentCount?: number;
     starRating?: number;
+    linkText?: string;
 }
 
 interface TrailTabType {

@@ -74,7 +74,7 @@ export const document = ({ data }: Props) => {
     ];
 
     const polyfillIO =
-        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
     /**
      * The highest priority scripts.
@@ -108,6 +108,8 @@ export const document = ({ data }: Props) => {
             { src: 'ophan.js', module: true },
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
+            { src: 'embedIframe.js', module: true },
+            { src: 'newsletterEmbedIframe.js', module: true },
         ],
         'async',
     );

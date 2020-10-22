@@ -110,13 +110,28 @@ const firstParagraphOverlay = (isComment: boolean) => css`
     );
 `;
 
-// This css hides all the elements in the article after the #sign-in-gate
-// using the General sibling combinator https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
+// This css does 3 things
+// 1. first hide all article conent using display: none; (.article-body-commercial-selector > *)
+// 2. make the sign in gate ((#sign-in-gate), and the first 2 paragraphs of the article visible (.article-body-commercial-selector p:nth-of-type(-n+3))
+// 3. hide any siblings after the sign in gate incase because of the css in 2
+//    a paragraph is still visible (#sign-in-gate ~ *)
 const hideElementsCss = `
+    .article-body-commercial-selector > * {
+        display: none;
+    }
+
+    #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
+        display: block;
+    }
+
     #sign-in-gate ~ * {
         display: none;
     }
-    `;
+    
+    #slot-body-end {
+        display: none;
+    }
+`;
 
 export const SignInGatePatientia = ({
     signInUrl,

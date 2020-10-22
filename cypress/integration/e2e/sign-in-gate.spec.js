@@ -17,6 +17,19 @@ describe('Sign In Gate Tests', function () {
         );
     };
 
+    const setGeolocation = (n) => {
+        localStorage.setItem(
+            'gu.geolocation',
+            JSON.stringify({
+                value: n,
+            }),
+        );
+    };
+
+    const clearGeolocation = () => {
+        localStorage.removeItem('gu.geolocation');
+    };
+
     const setMvtCookie = (str) => {
         cy.setCookie('GU_mvt_id_local', str, {
             log: true,
@@ -105,7 +118,12 @@ describe('Sign In Gate Tests', function () {
         it('should not load the sign in gate if the user has already dismissed the gate', function () {
             localStorage.setItem(
                 'gu.prefs.sign-in-gate',
-                '{"SignInGateMain-main-variant-1":"2020-07-22T08:25:05.567Z"}',
+                `{
+                    "value": {
+                        "SignInGateMain-main-variant-2": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-2": 6
+                    }
+                }`,
             );
 
             visitArticleAndScrollToGateForLazyLoad();
@@ -204,6 +222,103 @@ describe('Sign In Gate Tests', function () {
             cy.get('[data-cy=sign-in-gate-patientia_dismiss]').click();
 
             cy.get('[data-cy=sign-in-gate-patientia]').should('not.be.visible');
+        });
+    });
+
+    describe('SignInGatePageview', function () {
+        beforeEach(function () {
+            setMvtCookie('790000');
+
+            // set article count to be min number to view gate
+            setArticleCount(3);
+        });
+
+        it('should load the sign in gate if there is no available geolocation in local storage', function () {
+            visitArticle();
+            clearGeolocation();
+            scrollToGateForLazyLoading();
+            cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+        });
+
+        it('should load the sign in gate for a non-US browser', function () {
+            visitArticle();
+            setGeolocation('GB');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+            cy.get('[data-cy=sign-in-gate-main_dismiss]').click();
+            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+        });
+        it('should not load the sign in gate for a US browser', function () {
+            visitArticle();
+            setGeolocation('US');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+        });
+    });
+
+    describe('SignInGatePageviewUs', function () {
+        beforeEach(function () {
+            setMvtCookie('650000');
+
+            // set article count to be min number to view gate
+            setArticleCount(4);
+        });
+
+        it('should not load the sign in gate if there is no available geolocation in local storage', function () {
+            visitArticle();
+            clearGeolocation();
+            scrollToGateForLazyLoading();
+            cy.get('[data-cy=sign-in-gate-main]').should('be.not.visible');
+        });
+
+        it('should not load the sign in gate for a non-US browser', function () {
+            visitArticle();
+            setGeolocation('GB');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+        });
+        it('should load the sign in gate for a US browser', function () {
+            visitArticle();
+            setGeolocation('US');
+            scrollToGateForLazyLoading();
+
+            cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+        });
+    });
+
+    describe('SignInGatePersonalisedAdCopy', function () {
+        beforeEach(function () {
+            setMvtCookie('700001');
+
+            // set article count to be min number to view gate
+            setArticleCount(3);
+        });
+
+        it('should load the sign in gate', function () {
+            visitArticleAndScrollToGateForLazyLoad();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('be.visible');
+        });
+
+        it('should remove gate when the dismiss button is clicked', function () {
+            visitArticleAndScrollToGateForLazyLoad();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('be.visible');
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2_dismiss]',
+            ).click();
+
+            cy.get(
+                '[data-cy=sign-in-gate-personalised-ad-copy-variant-2]',
+            ).should('not.be.visible');
         });
     });
 });

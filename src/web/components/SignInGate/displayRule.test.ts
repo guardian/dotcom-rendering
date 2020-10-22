@@ -1,11 +1,13 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode'
 import {
     isNPageOrHigherPageView,
     isIOS9,
     isValidContentType,
     isValidSection,
+    isCountry
 } from './displayRule';
 
 describe('SignInGate - displayRule methods', () => {
@@ -59,6 +61,24 @@ describe('SignInGate - displayRule methods', () => {
             const output = isNPageOrHigherPageView(5);
 
             expect(output).toBe(false);
+        });
+    });
+
+    describe('isCountry(\'countryCode\')', () => {
+        beforeEach(() => {
+            localStorage.clear();
+        });
+        test('geolocation is US', () => {
+            setCountryCodeSynchronous('US')
+            expect(isCountry('US')).toBe(true);
+        });
+
+        test('geolocation is not US', () => {
+            setCountryCodeSynchronous('GB')
+            expect(isCountry('US')).toBe(false);
+        });
+        test('geolocation is false if not set', () => {
+            expect(isCountry('US')).toBe(false);
         });
     });
 

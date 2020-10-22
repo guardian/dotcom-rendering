@@ -40,8 +40,10 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
+import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
+
+const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const gridWide = css`
     grid-template-areas:
@@ -511,7 +513,10 @@ export const CommentLayout = ({
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd name="right" />
+                            <StickyAd
+                                name="right"
+                                height={MOSTVIEWED_STICKY_HEIGHT}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
@@ -530,10 +535,7 @@ export const CommentLayout = ({
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    <div id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedout" />
                     )}
@@ -558,7 +560,7 @@ export const CommentLayout = ({
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
@@ -599,7 +601,7 @@ export const CommentLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );

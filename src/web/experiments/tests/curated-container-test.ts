@@ -7,7 +7,7 @@ export const curatedContainerTest: ABTest = {
     author: 'nicl',
     description:
         'Tests an additional "curated" onwards container below the article body',
-    audience: 0.0, // TODO will update once we are confident things are working
+    audience: 0.5,
     audienceOffset: 0,
     successMeasure: 'CTR on article pages',
     audienceCriteria: 'Everyone',
@@ -27,7 +27,17 @@ export const curatedContainerTest: ABTest = {
             },
         },
         {
-            id: 'variant',
+            id: 'fixed',
+            test: (): void => {},
+            impression: (impression) => {
+                impression();
+            },
+            success: (success) => {
+                success();
+            },
+        },
+        {
+            id: 'carousel',
             test: (): void => {},
             impression: (impression) => {
                 impression();

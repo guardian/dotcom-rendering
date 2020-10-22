@@ -24,9 +24,7 @@ type Props = {
     title?: string;
 };
 
-const widths = [1020, 660, 480, 0];
-
-const bestFor = (
+const selectScrSetItemForWidth = (
     desiredWidth: number,
     inlineSrcSets: SrcSetItem[],
 ): SrcSetItem => {
@@ -51,7 +49,7 @@ const getSrcSetsForWeighting = (
             weighting.toLowerCase() === forWeighting.toLowerCase(),
     )[0].srcSet;
 
-const makeSource = (
+const makePictureSource = (
     hidpi: boolean,
     minWidth: number,
     srcSet: SrcSetItem,
@@ -70,15 +68,24 @@ const makeSources = (
 ): PictureSource[] => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, role);
     const sources: PictureSource[] = [];
-
-    // TODO: ideally the imageSources array will come from frontend with prebaked URLs for
-    // hidpi images.
-    // Until that happens, here we're manually injecting (inadequate) <source> elements for
-    // those images, albeit without the necessary query params for hidpi images :(
-    widths.forEach((width) => {
-        sources.push(makeSource(true, width, bestFor(width, inlineSrcSets)));
-        sources.push(makeSource(false, width, bestFor(width, inlineSrcSets)));
-    });
+    inlineSrcSets
+        .map((item) => item.width)
+        .forEach((width) => {
+            sources.push(
+                makePictureSource(
+                    true,
+                    width,
+                    selectScrSetItemForWidth(width, inlineSrcSets),
+                ),
+            );
+            sources.push(
+                makePictureSource(
+                    false,
+                    width,
+                    selectScrSetItemForWidth(width, inlineSrcSets),
+                ),
+            );
+        });
 
     return sources;
 };
@@ -86,7 +93,7 @@ const makeSources = (
 const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
 
-    return bestFor(300, inlineSrcSets).src;
+    return selectScrSetItemForWidth(300, inlineSrcSets).src;
 };
 
 const starsWrapper = css`

@@ -42,6 +42,7 @@ import {
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Display } from '@root/src/lib/display';
+import {BannerWrapper} from "@root/src/web/layouts/lib/stickiness";
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
@@ -466,10 +467,7 @@ export const ImmersiveLayout = ({
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    <div id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedout" />
                     )}
@@ -494,7 +492,7 @@ export const ImmersiveLayout = ({
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
                         <Section sectionId="onwards-lower-whensignedin" />
                     )}
@@ -535,7 +533,7 @@ export const ImmersiveLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );

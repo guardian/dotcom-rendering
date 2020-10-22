@@ -2,6 +2,7 @@ import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { OnwardsData } from './OnwardsData';
+import { OnwardsLayout } from './OnwardsLayout';
 
 type Props = {
     ajaxUrl: string;
@@ -37,6 +38,7 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
             url={url}
             limit={4}
             ophanComponentName={ophanComponentName}
+            Container={OnwardsLayout}
         />
     );
 };

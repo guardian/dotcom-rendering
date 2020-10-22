@@ -6,8 +6,8 @@ export const signInGateMainVariant: ABTest = {
     expiry: '2020-12-01',
     author: 'Mahesh Makani',
     description:
-        'Show sign in gate to 100% of users on 3rd article view of simple article templates, with higher priority over banners and epic. Main/Variant Audience.',
-    audience: 0.9,
+        'Show sign in gate to 100% of users on 3rd article view of simple article templates, and show a further 5 times after the first dismissal, with higher priority over banners and epic. Main/Variant Audience.',
+    audience: 0.5322,
     audienceOffset: 0.0,
     successMeasure: 'Users sign in or create a Guardian account',
     audienceCriteria:
@@ -19,7 +19,7 @@ export const signInGateMainVariant: ABTest = {
     canRun: () => true,
     variants: [
         {
-            id: 'main-variant-1',
+            id: 'main-variant-2',
             test: (): void => { },
         },
     ],

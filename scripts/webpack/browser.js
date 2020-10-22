@@ -46,6 +46,8 @@ module.exports = ({ isLegacyJS }) => ({
         lotame: scriptPath('lotame'),
         dynamicImport: scriptPath('dynamicImport'),
         atomIframe: scriptPath('atomIframe'),
+        embedIframe: scriptPath('embedIframe'),
+        newsletterEmbedIframe: scriptPath('newsletterEmbedIframe'),
     },
     output: {
         filename: generateName(isLegacyJS),
@@ -73,8 +75,16 @@ module.exports = ({ isLegacyJS }) => ({
     module: {
         rules: [
             {
-                test: /(\.tsx)|(\.js)|(\.ts)|(\.mjs)$/,
-                exclude: /node_modules\/(?!(@guardian\/)|(dynamic-import-polyfill)).*/,
+                test: /\.[jt]sx?|mjs$/,
+                exclude: [
+                    {
+                        test: /node_modules/,
+                        exclude: [
+                            /@guardian\/(?!(automat-modules))/,
+                            /dynamic-import-polyfill/,
+                        ],
+                    },
+                ],
                 use: [
                     {
                         loader: 'babel-loader',
