@@ -3,12 +3,12 @@
 import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { Format } from '@guardian/types/Format';
-import { icons, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 import { neutral } from '@guardian/src-foundations/palette';
 import { remSpace } from '@guardian/src-foundations';
 import { SvgQuote } from '@guardian/src-icons';
-import { getThemeStyles } from 'pillarStyles';
+
 
 
 // ----- Component ----- //
