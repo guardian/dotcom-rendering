@@ -6,7 +6,7 @@ import { Breakpoint, from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss } from 'styles';
-import { getThemeStyles, themeToPillar } from 'themeStyles';
+import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -630,7 +630,8 @@ const render = (format: Format, excludeStyles = false) =>
             }
 
             case ElementKind.AudioAtom: {
-                const { pillar } = format;
+                const { theme } = format;
+                const pillar = themeFromString('pillar/' + themeToPillar(theme));
                 const audioAtomStyles = css`
                     figure {
                         margin: 0;
