@@ -1,11 +1,9 @@
 import React from 'react';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { YouTubeOverlay } from '@frontend/web/components/YouTubeOverlay';
-import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-
-import { constructQuery } from '@root/src/lib/querystring';
 import { Display } from '@root/src/lib/display';
+import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { asFormat } from '@root/src/lib/format';
 
 type Props = {
     display: Display;
@@ -21,28 +19,6 @@ type Props = {
     width?: number;
     title?: string;
     duration?: number; // in seconds
-};
-
-type EmbedConfig = {
-    adsConfig: {
-        adTagParameters: {
-            iu: string;
-            cust_params: string;
-        };
-    };
-};
-
-const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
-    return {
-        adsConfig: {
-            adTagParameters: {
-                iu: `${adTargeting.adUnit || ''}`,
-                cust_params: encodeURIComponent(
-                    constructQuery(adTargeting.customParams),
-                ),
-            },
-        },
-    };
 };
 
 export const YoutubeBlockComponent = ({
@@ -64,26 +40,18 @@ export const YoutubeBlockComponent = ({
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
 
-    const embedConfig =
-        adTargeting && JSON.stringify(buildEmbedConfig(adTargeting));
-
     return (
-        <>
-            <MaintainAspectRatio height={height} width={width}>
-                {overlayImage && (
-                    <YouTubeOverlay
-                        image={overlayImage}
-                        pillar={pillar}
-                        duration={duration}
-                    />
-                )}
-                <iframe
-                    title={title}
-                    width={width}
-                    height={height}
-                    src={`https://www.youtube.com/embed/${element.assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
-                />
-            </MaintainAspectRatio>
+        <div data-chromatic="ignore">
+            <YoutubeAtom
+                format={asFormat(pillar, display, designType)}
+                videoMeta={element}
+                overlayImage={overlayImage}
+                adTargeting={adTargeting}
+                height={height}
+                width={width}
+                title={title}
+                duration={duration}
+            />
             {!hideCaption && (
                 <Caption
                     display={display}
@@ -94,6 +62,6 @@ export const YoutubeBlockComponent = ({
                     shouldLimitWidth={shouldLimitWidth}
                 />
             )}
-        </>
+        </div>
     );
 };

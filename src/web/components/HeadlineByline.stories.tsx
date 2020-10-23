@@ -34,6 +34,29 @@ export const commentStory = () => {
 };
 commentStory.story = { name: 'Comment' };
 
+export const commentWithBylineImageStory = () => {
+    // Not visibly different in storybook but will apply a width
+    return (
+        <HeadlineByline
+            display={Display.Standard}
+            designType="Comment"
+            pillar="sport"
+            byline="Jane Smith"
+            tags={[
+                {
+                    id: 'profile/marinahyde',
+                    type: 'Contributor',
+                    title: 'Marina Hyde',
+                    twitterHandle: 'MarinaHyde',
+                    bylineImageUrl:
+                        'https://i.guim.co.uk/img/uploads/2018/01/10/Marina_Hyde,_L.png?width=300&quality=85&auto=format&fit=max&s=6476202195914952e48ef41aadb116ff',
+                },
+            ]}
+        />
+    );
+};
+commentWithBylineImageStory.story = { name: 'Comment with byline image' };
+
 export const immersiveStory = () => {
     return (
         <HeadlineByline
@@ -107,3 +130,16 @@ export const MultipleStory = () => {
     );
 };
 MultipleStory.story = { name: 'Immersive with multiple contributors' };
+
+export const noBylineStory = () => {
+    return (
+        <HeadlineByline
+            display={Display.Standard}
+            designType="Interview"
+            pillar="culture"
+            byline=""
+            tags={[]}
+        />
+    );
+};
+noBylineStory.story = { name: 'No byline' };

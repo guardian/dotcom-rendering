@@ -19,7 +19,7 @@ export interface WindowGuardianConfig {
         ajaxUrl: string;
         hbImpl: object | string;
         shouldHideReaderRevenue: boolean;
-    };
+    } & ConfigType;
     libs: {
         googletag: string;
     };
@@ -68,6 +68,27 @@ const makeWindowGuardianConfig = (
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
     // For some elements it is important to keep thier index in the `elements` array
+
+    const blockElementWithIndex = <T extends CAPIElement>(
+        blocks: { elements: CAPIElement[] }[],
+        blockElementType: CAPIElement['_type'],
+        indexName: string,
+    ): T[] => {
+        return blocks[0].elements.reduce(
+            (acc: T[], element: CAPIElement, index: number) => {
+                if (element._type === blockElementType) {
+                    acc.push({
+                        ...element,
+                        [indexName]: index,
+                    } as T);
+                }
+                return acc;
+            },
+            [] as T[],
+        );
+    };
+
+    /* Kept for posteriy...for now anyway!
     const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
             if (
@@ -83,21 +104,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         [] as RichLinkBlockElement[],
     );
-    const calloutsWithIndex: CalloutBlockElement[] = CAPI.blocks[0].elements.reduce(
-        (acc, element, index: number) => {
-            if (
-                element._type ===
-                'model.dotcomrendering.pageElements.CalloutBlockElement'
-            ) {
-                acc.push({
-                    ...element,
-                    calloutIndex: index,
-                } as CalloutBlockElement);
-            }
-            return acc;
-        },
-        [] as CalloutBlockElement[],
-    );
+*/
 
     return {
         designType: CAPI.designType,
@@ -114,13 +121,15 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             ampIframeUrl: CAPI.config.ampIframeUrl,
 
             // switches
-            cmpUi: CAPI.config.switches.cmpUi,
+            switches: CAPI.config.switches,
             slotBodyEnd: CAPI.config.switches.slotBodyEnd,
             ampPrebid: CAPI.config.switches.ampPrebid,
             permutive: CAPI.config.switches.permutive,
             enableSentryReporting: CAPI.config.switches.enableSentryReporting,
             enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
             remoteBanner: CAPI.config.switches.remoteBanner,
+            remoteSubscriptionsBanner:
+                CAPI.config.switches.remoteSubscriptionsBanner,
             ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
             // used by lib/ad-targeting.ts
@@ -133,10 +142,19 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             discussionApiUrl: CAPI.config.discussionApiUrl,
             discussionD2Uid: CAPI.config.discussionD2Uid,
             discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
+            idApiUrl: CAPI.config.idApiUrl,
 
             dcrSentryDsn: CAPI.config.dcrSentryDsn,
+
+            // used by sign in gate
+            host: CAPI.config.host,
+            idUrl: CAPI.config.idUrl,
         },
-        richLinks: richLinksWithIndex,
+        richLinks: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.RichLinkBlockElement',
+            'richLinkIndex',
+        ),
         editionId: CAPI.editionId,
         editionLongForm: CAPI.editionLongForm,
         contentType: CAPI.contentType,
@@ -164,7 +182,41 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         isImmersive: CAPI.isImmersive,
         isPhotoEssay: CAPI.config.isPhotoEssay,
         matchUrl: CAPI.matchUrl,
-        callouts: calloutsWithIndex,
+        callouts: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.CalloutBlockElement',
+            'calloutIndex',
+        ),
+        qandaAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.QABlockElement',
+            'qandaIndex',
+        ),
+        guideAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+            'guideIndex',
+        ),
+        profileAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+            'profileIndex',
+        ),
+        timelineAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.TimelineBlockElement',
+            'timelineIndex',
+        ),
+        chartAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+            'chartIndex',
+        ),
+        audioAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+            'audioIndex',
+        ),
     };
 };
 

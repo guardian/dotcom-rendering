@@ -1,3 +1,5 @@
+import { switches } from '../switches';
+
 export const MatchReport: CAPIType = {
     contributionsServiceUrl: 'https://contributions.guardianapis.com',
     shouldHideReaderRevenue: false,
@@ -357,6 +359,8 @@ export const MatchReport: CAPIType = {
     publication: 'The Guardian',
     trailText:
         'France moved top of the Six Nations standings as they claimed a bonus point in an otherwise unimpressive 35-22 defeat of a weak Italy on Sunday',
+    matchUrl:
+        'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2020/08/14/26300/26247.json?dcr=true&page=football%2F2020%2Faug%2F14%2Fthomas-muller-leads-rout-as-bayern-munich-demolish-barcelona-8-2',
     subMetaKeywordLinks: [
         {
             url: '/sport/france-rugby-union-team',
@@ -2611,6 +2615,8 @@ export const MatchReport: CAPIType = {
             lastUpdatedDisplay: '21:00 GMT',
             firstPublished: 1581282014000,
             firstPublishedDisplay: '21:00 GMT',
+            primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
+            secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
         },
     ],
     author: {
@@ -2787,11 +2793,12 @@ export const MatchReport: CAPIType = {
     config: {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+        idApiUrl: 'https://idapi.theguardian.com',
         sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
         sentryHost: 'app.getsentry.com/35463',
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-        switches: {},
+        switches,
         shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',

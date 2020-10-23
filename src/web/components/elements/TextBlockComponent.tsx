@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { textSans, body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
@@ -108,9 +108,23 @@ export const TextBlockComponent: React.FC<Props> = ({
     forceDropCap,
     isFirstParagraph,
 }: Props) => {
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
-        prefix: '<p>',
-        suffix: '</p>',
+    const {
+        willUnwrap: isUnwrapped,
+        unwrappedHtml,
+        unwrappedElement,
+    } = unwrapHtml({
+        fixes: [
+            {
+                unwrappedElement: 'p',
+                prefix: '<p>',
+                suffix: '</p>',
+            },
+            {
+                unwrappedElement: 'ul',
+                prefix: '<ul>',
+                suffix: '</ul>',
+            },
+        ],
         html,
     });
 
@@ -129,7 +143,6 @@ export const TextBlockComponent: React.FC<Props> = ({
         }
 
         li {
-            ${textSans.medium()};
             margin-bottom: 6px;
             padding-left: 20px;
 
@@ -147,6 +160,23 @@ export const TextBlockComponent: React.FC<Props> = ({
             margin-right: 8px;
             background-color: ${neutral[86]};
             margin-left: -20px;
+        }
+
+        /* Subscript and Superscript styles */
+        sub {
+            bottom: -0.25em;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
         }
     `;
 
@@ -187,7 +217,7 @@ export const TextBlockComponent: React.FC<Props> = ({
             isUnwrapped={isUnwrapped}
             html={sanitise(unwrappedHtml, sanitiserOptions)}
             elCss={paraStyles}
-            tagName="p"
+            tagName={unwrappedElement || 'p'}
         />
     );
 };

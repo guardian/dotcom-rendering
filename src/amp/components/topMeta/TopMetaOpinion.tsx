@@ -68,6 +68,9 @@ const BylineMeta: React.SFC<{
     const contributorTag = articleData.tags.find(
         (t) => t.type === 'Contributor',
     );
+    const contributorCount = articleData.tags.filter(
+        (t) => t.type === 'Contributor',
+    ).length;
     const bylineImageUrl = contributorTag
         ? contributorTag.bylineImageUrl
         : null;
@@ -84,7 +87,7 @@ const BylineMeta: React.SFC<{
                 })}
             />
 
-            {contributorTag && bylineImageUrl && (
+            {contributorTag && bylineImageUrl && contributorCount === 1 && (
                 <amp-img
                     class={bylineImageStyle}
                     src={bylineImageUrl}

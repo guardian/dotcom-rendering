@@ -42,6 +42,7 @@ import {
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Display } from '@root/src/lib/display';
+import {BannerWrapper} from "@root/src/web/layouts/lib/stickiness";
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
@@ -213,7 +214,6 @@ export const ImmersiveLayout = ({
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
-
     return (
         <>
             <div
@@ -395,8 +395,9 @@ export const ImmersiveLayout = ({
                                 webTitle={CAPI.webTitle}
                                 author={CAPI.author}
                                 tags={CAPI.tags}
-                                webPublicationDateDisplay={
-                                    CAPI.webPublicationDateDisplay
+                                primaryDateline={CAPI.webPublicationDateDisplay}
+                                secondaryDateline={
+                                    CAPI.blocks[0].secondaryDateLine
                                 }
                             />
                         </div>
@@ -465,10 +466,10 @@ export const ImmersiveLayout = ({
 
             {!isPaidContent && (
                 <>
-                    {/* Onwards (when signed IN) */}
-                    <Section sectionId="onwards-upper-whensignedin" />
+                    {/* Onwards (when signed OUT) */}
+                    <div id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedin" />
+                        <Section sectionId="onwards-lower-whensignedout" />
                     )}
 
                     {showComments && (
@@ -490,13 +491,10 @@ export const ImmersiveLayout = ({
                         </Section>
                     )}
 
-                    {/* Onwards (when signed OUT) */}
-                    <Section
-                        sectionId="onwards-upper-whensignedout"
-                        showTopBorder={false}
-                    />
+                    {/* Onwards (when signed IN) */}
+                    <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedout" />
+                        <Section sectionId="onwards-lower-whensignedin" />
                     )}
 
                     <Section sectionId="most-viewed-footer" />
@@ -535,7 +533,7 @@ export const ImmersiveLayout = ({
                 />
             </Section>
 
-            <div id="bottom-banner" />
+            <BannerWrapper />
             <MobileStickyContainer />
         </>
     );

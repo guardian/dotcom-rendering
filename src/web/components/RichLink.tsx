@@ -46,6 +46,7 @@ interface Props {
     tags: TagType[];
     sponsorName: string;
     contributorImage?: string;
+    isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
 
 const richLinkContainer = css`
@@ -87,7 +88,7 @@ const richLinkPillarColour: (pillar: Pillar) => colour = (pillar) => {
     if (pillar) {
         return pillarPalette[pillar].main;
     }
-    return pillarPalette.news.main;
+    return pillarPalette.news[400];
 };
 
 const pillarBackground: (pillar: Pillar) => colour = (pillar) => {
@@ -115,11 +116,15 @@ const richLinkLink = css`
 `;
 
 const richLinkElements = css`
-    padding: 4px 5px 5px 7px;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
 `;
 
 const richLinkHeader = css`
     padding-bottom: 10px;
+    color: ${neutral[0]};
 `;
 
 const richLinkTitle = css`
@@ -147,10 +152,11 @@ const readMoreTextStyle = css`
     font-size: 14px;
     ${from.wide} {
         ${headline.xxxsmall()}
+        line-height: 25px;
     }
     display: inline-block;
     height: 30px;
-    line-height: 26px;
+    line-height: 25px;
     padding-left: 4px;
     vertical-align: top;
     font-weight: 500;
@@ -217,6 +223,35 @@ const imageStyles = css`
     height: auto;
 `;
 
+type DefaultProps = {
+    index: number;
+    headlineText: string;
+    url: string;
+    isPlaceholder?: boolean;
+};
+
+export const DefaultRichLink: React.FC<DefaultProps> = ({
+    index,
+    headlineText,
+    url,
+    isPlaceholder,
+}) => {
+    return (
+        <RichLink
+            richLinkIndex={index}
+            cardStyle="news"
+            thumbnailUrl=""
+            headlineText={headlineText}
+            contentType="article"
+            url={url}
+            pillar="news"
+            tags={[]}
+            sponsorName=""
+            isPlaceholder={isPlaceholder}
+        />
+    );
+};
+
 export const RichLink = ({
     richLinkIndex,
     cardStyle,
@@ -229,6 +264,7 @@ export const RichLink = ({
     tags,
     sponsorName,
     contributorImage,
+    isPlaceholder,
 }: Props) => {
     const linkText =
         cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
@@ -246,9 +282,10 @@ export const RichLink = ({
             data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
             data-component="rich-link"
             className={pillarBackground(pillar)}
+            data-name={(isPlaceholder && 'placeholder') || ''}
         >
             <div className={cx(richLinkContainer, neutralBackground)}>
-                <a className={cx(richLinkLink)} href={url}>
+                <a className={richLinkLink} href={url}>
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (
                         <div>

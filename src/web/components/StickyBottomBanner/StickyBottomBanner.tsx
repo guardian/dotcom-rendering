@@ -1,69 +1,157 @@
 import React, { useState, useEffect } from 'react';
+import { cmp } from '@guardian/consent-management-platform';
 import {
-    CMP,
-    willShowNewCMP,
-    shouldShowOldCMP,
-} from '@root/src/web/components/StickyBottomBanner/CMP';
-import { ReaderRevenueBanner } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
+    canShow as canShowRRBanner,
+    ReaderRevenueBanner,
+} from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
+import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
+import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
     isSignedIn?: boolean;
-    countryCode?: string;
+    asyncCountryCode?: Promise<string>;
     CAPI: CAPIBrowserType;
+    asyncBrazeUuid?: Promise<null | string>;
+    isDigitalSubscriber?: boolean;
 };
 
-const getEngagementBannerLastClosedAt = (): string | undefined => {
-    const item = localStorage.getItem('gu.prefs.engagementBannerLastClosedAt');
+type FulfilledProps = {
+    isSignedIn: boolean;
+    asyncCountryCode: Promise<string>;
+    CAPI: CAPIBrowserType;
+    asyncBrazeUuid: Promise<null | string>;
+    isDigitalSubscriber: boolean;
+};
+
+const getBannerLastClosedAt = (key: string): string | undefined => {
+    const item = localStorage.getItem(`gu.prefs.${key}`);
     return (item && JSON.parse(item).value) || undefined;
 };
 
-export const StickyBottomBanner = ({
+const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
+
+const buildCmpBannerConfig = (): Banner => ({
+    id: 'cmpUi',
+    canShow: () =>
+        cmp.willShowPrivacyMessage().then((result) => ({ result: !!result })),
+    show: () => {
+        // New CMP is not a react component and is shown outside of react's world
+        // so render nothing if it will show
+        return null;
+    },
+    timeoutMillis: null,
+});
+
+const buildReaderRevenueBannerConfig = (
+    CAPI: CAPIBrowserType,
+    isSignedIn: boolean,
+    asyncCountryCode: Promise<string>,
+): Banner => {
+    return {
+        id: 'reader-revenue-banner',
+        canShow: () =>
+            canShowRRBanner({
+                remoteBannerConfig: CAPI.config.remoteBanner,
+                isSignedIn,
+                asyncCountryCode,
+                contentType: CAPI.contentType,
+                sectionName: CAPI.sectionName,
+                shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+                isMinuteArticle: CAPI.pageType.isMinuteArticle,
+                isPaidContent: CAPI.pageType.isPaidContent,
+                isSensitive: CAPI.config.isSensitive,
+                tags: CAPI.tags,
+                contributionsServiceUrl: CAPI.contributionsServiceUrl,
+                alreadyVisitedCount: getAlreadyVisitedCount(),
+                engagementBannerLastClosedAt: getBannerLastClosedAt(
+                    'engagementBannerLastClosedAt',
+                ),
+                subscriptionBannerLastClosedAt: getBannerLastClosedAt(
+                    'subscriptionBannerLastClosedAt',
+                ),
+                switches: {
+                    remoteSubscriptionsBanner: !!CAPI.config
+                        .remoteSubscriptionsBanner,
+                },
+            }),
+        /* eslint-disable-next-line react/jsx-props-no-spreading */
+        show: (meta: any) => () => <ReaderRevenueBanner {...meta} />,
+        timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+    };
+};
+
+const buildBrazeBanner = (
+    asyncBrazeUuid: Promise<null | string>,
+    isDigitalSubscriber: undefined | boolean,
+): Banner => ({
+    id: 'braze-banner',
+    canShow: () => canShowBrazeBanner(asyncBrazeUuid, isDigitalSubscriber),
+    show: (meta: any) => () => <BrazeBanner meta={meta} />,
+    timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+});
+
+const StickyBottomBannerWithFullfilledDependencies = ({
     isSignedIn,
-    countryCode,
+    asyncCountryCode,
     CAPI,
-}: Props) => {
-    const [showOldCMP, setShowOldCMP] = useState<boolean | null>(null);
-    const [newCMPWillShow, setNewCMPWillShow] = useState<boolean | null>(null);
+    asyncBrazeUuid,
+    isDigitalSubscriber,
+}: FulfilledProps) => {
+    const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 
     useEffect(() => {
-        shouldShowOldCMP().then((shouldShowOld) =>
-            setShowOldCMP(shouldShowOld && CAPI.config.cmpUi),
+        const CMP = buildCmpBannerConfig();
+        const readerRevenue = buildReaderRevenueBannerConfig(
+            CAPI,
+            isSignedIn,
+            asyncCountryCode,
         );
-        willShowNewCMP().then(setNewCMPWillShow);
-    }, [CAPI.config.cmpUi]);
+        const brazeBanner = buildBrazeBanner(
+            asyncBrazeUuid,
+            isDigitalSubscriber,
+        );
+        const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
 
-    // Don't render anything until we know whether we can show the CMP
-    if (showOldCMP === null || newCMPWillShow === null) {
+        pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
+            setSelectedBanner(PickedBanner),
+        );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Empty dependency array because we only want this to run once
+
+    if (SelectedBanner) {
+        return <SelectedBanner />;
+    }
+
+    return null;
+};
+
+// This outer component exists because we don't want to run the banner picker
+// until all of our dependencies are defined. Then when they are all defined we
+// only want to run the banner picker once.
+export const StickyBottomBanner = ({
+    isSignedIn,
+    asyncCountryCode,
+    CAPI,
+    asyncBrazeUuid,
+    isDigitalSubscriber,
+}: Props) => {
+    if (
+        isSignedIn === undefined ||
+        asyncCountryCode === undefined ||
+        asyncBrazeUuid === undefined ||
+        isDigitalSubscriber === undefined
+    ) {
         return null;
     }
 
-    // New CMP is not a react component and is shown outside of react's world
-    // so render nothing if it will show
-    if (newCMPWillShow) return null;
-
-    if (showOldCMP) return <CMP />;
-
-    const showRRBanner = CAPI.config.remoteBanner && countryCode === 'AU';
-
-    if (showRRBanner)
-        return (
-            <ReaderRevenueBanner
-                isSignedIn={isSignedIn}
-                countryCode={countryCode}
-                contentType={CAPI.contentType}
-                sectionName={CAPI.sectionName}
-                shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                isPaidContent={CAPI.pageType.isPaidContent}
-                isSensitive={CAPI.config.isSensitive}
-                tags={CAPI.tags}
-                contributionsServiceUrl={CAPI.contributionsServiceUrl}
-                alreadyVisitedCount={getAlreadyVisitedCount()}
-                engagementBannerLastClosedAt={getEngagementBannerLastClosedAt()}
-            />
-        );
-
-    // Nothing applies, so do nothing.
-    return null;
+    return (
+        <StickyBottomBannerWithFullfilledDependencies
+            isSignedIn={isSignedIn}
+            asyncCountryCode={asyncCountryCode}
+            asyncBrazeUuid={asyncBrazeUuid}
+            isDigitalSubscriber={isDigitalSubscriber}
+            CAPI={CAPI}
+        />
+    );
 };

@@ -172,6 +172,8 @@ interface Block {
     title?: string;
     firstPublished?: number;
     firstPublishedDisplay?: string;
+    primaryDateLine: string;
+    secondaryDateLine: string;
 }
 
 interface Pagination {
@@ -304,7 +306,6 @@ type CAPIBrowserType = {
         ampPrebid: boolean;
         permutive: boolean;
         enableSentryReporting: boolean;
-        cmpUi: boolean;
         enableDiscussionSwitch: boolean;
         slotBodyEnd: boolean;
         isSensitive: boolean;
@@ -314,12 +315,17 @@ type CAPIBrowserType = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sharedAdTargeting: { [key: string]: any };
         adUnit: string;
+        idApiUrl: string;
         discussionApiUrl: string;
         discussionD2Uid: string;
         discussionApiClientHeader: string;
         dcrSentryDsn: string;
         remoteBanner: boolean;
+        remoteSubscriptionsBanner: boolean;
         ausMoment2020Header: boolean;
+        switches: CAPIType['config']['switches'];
+        host?: string;
+        idUrl?: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -350,6 +356,12 @@ type CAPIBrowserType = {
     isPhotoEssay: boolean;
     matchUrl?: string;
     callouts: CalloutBlockElement[];
+    qandaAtoms: QABlockElement[];
+    guideAtoms: GuideAtomBlockElement[];
+    profileAtoms: ProfileAtomBlockElement[];
+    timelineAtoms: TimelineBlockElement[];
+    chartAtoms: ChartAtomBlockElement[];
+    audioAtoms: AudioAtomBlockElement[];
 };
 
 interface TagType {
@@ -525,6 +537,7 @@ type OphanComponentName =
     | 'related-content'
     | 'more-media-in-section'
     | 'more-galleries'
+    | 'curated-content'
     | 'default-onwards'; // We should never see this in the analytics data!
 
 interface CommercialConfigType {
@@ -575,11 +588,15 @@ interface ConfigType extends CommercialConfigType {
     keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
+    idApiUrl: string;
     discussionApiUrl: string;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     isPhotoEssay: boolean;
     references?: { [key: string]: string }[];
+    host?: string;
+    idUrl?: string;
+    brazeApiKey?: string;
 }
 
 interface GADataType {
@@ -645,7 +662,14 @@ type IslandType =
     | 'match-nav'
     | 'match-stats'
     | 'callout'
-    | 'comments';
+    | 'comments'
+    | 'qanda-atom'
+    | 'guide-atom'
+    | 'profile-atom'
+    | 'timeline-atom'
+    | 'sign-in-gate'
+    | 'audio-atom'
+    | 'chart-atom';
 
 interface TrailType {
     designType: DesignType;
@@ -665,6 +689,7 @@ interface TrailType {
     shortUrl?: string;
     commentCount?: number;
     starRating?: number;
+    linkText?: string;
 }
 
 interface TrailTabType {

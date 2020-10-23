@@ -6,7 +6,8 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Chat](#chat)
+- [Moving to main as default branch](#moving-to-main-as-default-branch)
+- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
 - [Quick start](#quick-start)
   - [Install Node.js](#install-nodejs)
   - [Running instructions](#running-instructions)
@@ -23,9 +24,39 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Chat
+## Moving to main as default branch
 
-Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
+The `master` branch in the dotcom-rendering repository has been renamed to `main`. If you have been working with DCR before the change, we recommend you run the following sequence of commands in your local repository. These will rename your master branch to main and set main as your default branch.
+
+```
+git fetch --all
+git remote set-head origin -a
+git branch master --set-upstream-to origin/main
+git branch -m master main
+```
+
+## Where can I see Dotcom Rendering in Production?
+
+Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
+
+```
+https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers?dcr
+```
+
+You can force DCR on or off explicitly with
+[`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
+
+One way to verify whether the article you're looking at is being rendered by DCR or not is to
+[View Page Source](view-source:https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers)
+and search for the presence of DCR's
+[`react-root`](https://github.com/guardian/dotcom-rendering/blob/c90bbc20eac321d83f4337e1320d1667e264d55d/src/web/server/htmlTemplate.ts#L255-L256):
+in the `<body>` tag:
+
+```html
+<body>
+    <div id="react-root"></div>
+</body>
+```
 
 ## Quick start
 
@@ -67,6 +98,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />       | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />           | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />            | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />     | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                     |
 
 ### Architecture Diagram
 
@@ -76,11 +108,11 @@ You can see a _web only_ architecture diagram by running `make arch-diagram`. It
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
 
--   Design and Display Types use the [Switch Pattern](docs/contributing/switch-on-display-design.md)
--   [DecideLayout](docs/contributing/decide-layout.md)
+-   Design and Display Types use the [Switch Pattern](docs/patterns/switch-on-display-design.md)
+-   [DecideLayout](docs/patterns/decide-layout.md)
 -   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
 -   Dynamic imports
--   [EnhanceCAPI](docs/contributing/enhance-capi.md)
+-   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
 
 ### Feedback
@@ -113,7 +145,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 

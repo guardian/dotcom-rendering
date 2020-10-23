@@ -20,7 +20,7 @@ Google's Data analysis suggests that ensuring the page is interactive within 5 s
 
 We aim to ensure our pages are consistently interactive within 5 seconds of the initial request.
 
-## Our critical JavaScript [bundle size](https://github.com/guardian/dotcom-rendering/blob/master/package.json#L13-L19) will not exceed 120KB
+## Our critical JavaScript [bundle size](https://github.com/guardian/dotcom-rendering/blob/main/package.json#L13-L19) will not exceed 120KB
 
 Alex Russell conducted analysis of real world JavaScript in 2017<sup>[[2]](#refs--alex-russell)</sup>. He concluded that to ensure a time to interactive of <= 5 seconds on first load, sites should serve between 130KB and 170KB of critical JavaScript. Since we don't have direct control over the size of all JavaScript, we will keep our critical JavaScript bundles below 120KB (minified and gzipped).
 

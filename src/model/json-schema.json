@@ -15,7 +15,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AudioAtomElement"
+                        "$ref": "#/definitions/AudioAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
@@ -78,6 +78,9 @@
                         "$ref": "#/definitions/InteractiveAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/InteractiveBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
@@ -97,6 +100,9 @@
                     },
                     {
                         "$ref": "#/definitions/SoundcloudBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/SpotifyBlockElement"
                     },
                     {
                         "$ref": "#/definitions/SubheadingBlockElement"
@@ -374,7 +380,7 @@
         "webURL"
     ],
     "definitions": {
-        "AudioAtomElement": {
+        "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -523,6 +529,9 @@
                 "id": {
                     "type": "string"
                 },
+                "calloutsUrl": {
+                    "type": "string"
+                },
                 "activeFrom": {
                     "type": "number"
                 },
@@ -565,11 +574,15 @@
                             }
                         ]
                     }
+                },
+                "calloutIndex": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
                 "activeFrom",
+                "calloutsUrl",
                 "description",
                 "displayOnSensitive",
                 "formFields",
@@ -584,7 +597,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["textarea"]
+                    "enum": ["text"]
                 },
                 "id": {
                     "type": "string"
@@ -615,7 +628,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["text"]
+                    "enum": ["textarea"]
                 },
                 "id": {
                     "type": "string"
@@ -843,13 +856,19 @@
                         "model.dotcomrendering.pageElements.ChartAtomBlockElement"
                     ]
                 },
-                "url": {
-                    "type": "string"
+                "chartIndex": {
+                    "type": "number"
                 },
                 "id": {
                     "type": "string"
                 },
                 "html": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
                     "type": "string"
                 },
                 "css": {
@@ -859,7 +878,7 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "url"]
+            "required": ["_type", "html", "id", "url"]
         },
         "CodeBlockElement": {
             "type": "object",
@@ -1037,6 +1056,9 @@
                 "url": {
                     "type": "string"
                 },
+                "placeholderUrl": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -1078,6 +1100,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "guideIndex": {
+                    "type": "number"
                 }
             },
             "required": ["_type", "credit", "html", "id", "label", "title"]
@@ -1099,9 +1124,15 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
                 }
             },
-            "required": ["_type", "assets", "caption"]
+            "required": ["_type", "assets", "caption", "html", "source"]
         },
         "VideoAssets": {
             "type": "object",
@@ -1312,6 +1343,39 @@
                 },
                 "url": {
                     "type": "string"
+                },
+                "placeholderUrl": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type", "id", "js", "url"]
+        },
+        "InteractiveBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InteractiveBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
                 }
             },
             "required": ["_type", "url"]
@@ -1325,7 +1389,7 @@
                         "model.dotcomrendering.pageElements.MapBlockElement"
                     ]
                 },
-                "url": {
+                "embedUrl": {
                     "type": "string"
                 },
                 "originalUrl": {
@@ -1334,20 +1398,27 @@
                 "source": {
                     "type": "string"
                 },
-                "caption": {
+                "title": {
                     "type": "string"
                 },
-                "title": {
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "caption",
+                "embedUrl",
+                "height",
                 "originalUrl",
                 "source",
                 "title",
-                "url"
+                "width"
             ]
         },
         "MultiImageBlockElement": {
@@ -1397,6 +1468,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "profileIndex": {
+                    "type": "number"
                 }
             },
             "required": ["_type", "credit", "html", "id", "label", "title"]
@@ -1445,6 +1519,9 @@
                 },
                 "credit": {
                     "type": "string"
+                },
+                "qandaIndex": {
+                    "type": "number"
                 }
             },
             "required": ["_type", "credit", "html", "id", "title"]
@@ -1499,6 +1576,33 @@
                 }
             },
             "required": ["_type", "html", "id", "isMandatory", "isTrack"]
+        },
+        "SpotifyBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SpotifyBlockElement"
+                    ]
+                },
+                "embedUrl": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": ["_type"]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1574,6 +1678,9 @@
                     "items": {
                         "$ref": "#/definitions/TimelineEvent"
                     }
+                },
+                "timelineIndex": {
+                    "type": "number"
                 }
             },
             "required": ["_type", "events", "id", "title"]
@@ -1657,7 +1764,7 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "caption", "height", "url", "width"]
+            "required": ["_type", "height", "url", "width"]
         },
         "VideoVimeoBlockElement": {
             "type": "object",
@@ -1707,6 +1814,9 @@
                 "url": {
                     "type": "string"
                 },
+                "originalUrl": {
+                    "type": "string"
+                },
                 "height": {
                     "type": "number"
                 },
@@ -1723,7 +1833,7 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "height", "url", "width"]
+            "required": ["_type", "height", "originalUrl", "url", "width"]
         },
         "YoutubeBlockElement": {
             "type": "object",
@@ -1751,12 +1861,6 @@
                 },
                 "posterSrc": {
                     "type": "string"
-                },
-                "height": {
-                    "type": "string"
-                },
-                "width": {
-                    "type": "string"
                 }
             },
             "required": ["_type", "assetId", "mediaTitle"]
@@ -1772,7 +1876,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/AudioAtomElement"
+                                "$ref": "#/definitions/AudioAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"
@@ -1835,6 +1939,9 @@
                                 "$ref": "#/definitions/InteractiveAtomBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/InteractiveBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/MapBlockElement"
                             },
                             {
@@ -1854,6 +1961,9 @@
                             },
                             {
                                 "$ref": "#/definitions/SoundcloudBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/SpotifyBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SubheadingBlockElement"
@@ -1908,9 +2018,20 @@
                 },
                 "firstPublishedDisplay": {
                     "type": "string"
+                },
+                "primaryDateLine": {
+                    "type": "string"
+                },
+                "secondaryDateLine": {
+                    "type": "string"
                 }
             },
-            "required": ["elements", "id"]
+            "required": [
+                "elements",
+                "id",
+                "primaryDateLine",
+                "secondaryDateLine"
+            ]
         },
         "Pagination": {
             "type": "object",
@@ -2085,6 +2206,9 @@
                 "shouldHideReaderRevenue": {
                     "type": "boolean"
                 },
+                "idApiUrl": {
+                    "type": "string"
+                },
                 "discussionApiUrl": {
                     "type": "string"
                 },
@@ -2105,6 +2229,12 @@
                             "type": "string"
                         }
                     }
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
                 },
                 "pageId": {
                     "type": "string"
@@ -2143,6 +2273,7 @@
                 "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
+                "idApiUrl",
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",

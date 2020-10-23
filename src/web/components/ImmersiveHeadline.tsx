@@ -51,21 +51,34 @@ const blackBlock = css`
         position: absolute;
         content: '';
         width: 0%;
-        ${from.phablet} {
+        ${from.tablet} {
+            width: 6%;
+            height: 114px;
+        }
+        /* These media queries are to avoid edge cases on long headlines */
+        @media screen and (max-width: 942px) and (min-width: 858px) {
+            width: 10%;
+            height: 114px;
+        }
+        @media screen and (max-width: 979px) and (min-width: 942px) {
+            width: 15%;
+        }
+        @media screen and (max-width: 1140px) and (min-width: 990px) {
+            height: 260px;
+            width: 15%;
+        }
+        @media screen and (max-width: 1300px) and (min-width: 1140px) {
+            height: 260px;
             width: 15%;
         }
         ${from.wide} {
             width: 20%;
+            height: 260px;
         }
         right: 0;
         bottom: 0;
         display: block;
         z-index: 1;
-
-        top: -68px;
-        ${from.leftCol} {
-            top: -64px;
-        }
     }
 `;
 
@@ -108,42 +121,44 @@ export const ImmersiveHeadline = ({
     pillar,
     captionText,
     badge,
-}: Props) => (
-    <div className={cx(postionRelative)}>
-        <div className={blackBlock}>
-            <div className={cx(center, padding)}>
-                <Flex>
-                    <LeftColumn showRightBorder={false}>
-                        <Caption
-                            display={display}
-                            designType={designType}
-                            captionText={captionText}
-                            pillar={pillar}
-                            shouldLimitWidth={true}
-                        />
-                    </LeftColumn>
-                    <PositionHeadline>
-                        <ArticleTitle
-                            display={display}
-                            designType={designType}
-                            tags={tags}
-                            sectionLabel={sectionLabel}
-                            sectionUrl={sectionUrl}
-                            guardianBaseURL={guardianBaseURL}
-                            pillar={pillar}
-                            badge={badge}
-                        />
-                        <ArticleHeadline
-                            display={display}
-                            headlineString={headline}
-                            designType={designType}
-                            pillar={pillar}
-                            tags={tags}
-                            byline={author.byline}
-                        />
-                    </PositionHeadline>
-                </Flex>
+}: Props) => {
+    return (
+        <div className={cx(postionRelative)}>
+            <div className={blackBlock}>
+                <div className={cx(center, padding)}>
+                    <Flex>
+                        <LeftColumn showRightBorder={false}>
+                            <Caption
+                                display={display}
+                                designType={designType}
+                                captionText={captionText}
+                                pillar={pillar}
+                                shouldLimitWidth={true}
+                            />
+                        </LeftColumn>
+                        <PositionHeadline>
+                            <ArticleTitle
+                                display={display}
+                                designType={designType}
+                                tags={tags}
+                                sectionLabel={sectionLabel}
+                                sectionUrl={sectionUrl}
+                                guardianBaseURL={guardianBaseURL}
+                                pillar={pillar}
+                                badge={badge}
+                            />
+                            <ArticleHeadline
+                                display={display}
+                                headlineString={headline}
+                                designType={designType}
+                                pillar={pillar}
+                                tags={tags}
+                                byline={author.byline}
+                            />
+                        </PositionHeadline>
+                    </Flex>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};

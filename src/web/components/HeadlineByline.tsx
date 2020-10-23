@@ -77,6 +77,11 @@ const immersiveLinkStyles = (pillar: Pillar) => css`
     }
 `;
 
+// If there is an image reduce the width of the author div
+const authorBylineWithImage = css`
+    width: 68%;
+`;
+
 type Props = {
     display: Display;
     designType: DesignType;
@@ -118,14 +123,18 @@ export const HeadlineByline = ({
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 default:
-                    return (
-                        <div className={immersiveStyles}>
-                            by{' '}
-                            <span className={immersiveLinkStyles(pillar)}>
-                                <BylineLink byline={byline} tags={tags} />
-                            </span>
-                        </div>
-                    );
+                    if (byline) {
+                        return (
+                            <div className={immersiveStyles}>
+                                by{' '}
+                                <span className={immersiveLinkStyles(pillar)}>
+                                    <BylineLink byline={byline} tags={tags} />
+                                </span>
+                            </div>
+                        );
+                    }
+
+                    return null;
             }
         }
         case Display.Showcase:
@@ -143,7 +152,14 @@ export const HeadlineByline = ({
                 case 'GuardianView':
                 case 'Comment':
                     return (
-                        <div className={opinionStyles(pillar)}>
+                        <div
+                            className={`${opinionStyles(pillar)} ${
+                                tags.filter((tag) => tag.type === 'Contributor')
+                                    .length === 1
+                                    ? authorBylineWithImage
+                                    : ''
+                            }`}
+                        >
                             <BylineLink byline={byline} tags={tags} />
                         </div>
                     );

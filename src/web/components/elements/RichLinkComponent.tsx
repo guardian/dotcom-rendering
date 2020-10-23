@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RichLink } from '@root/src/web/components/RichLink';
+import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';
 
@@ -53,7 +53,13 @@ export const RichLinkComponent: React.FC<{
         // Send the error to Sentry and then prevent the element from rendering
         window.guardian.modules.sentry.reportError(error, 'rich-link');
 
-        return null;
+        return (
+            <DefaultRichLink
+                index={richLinkIndex}
+                headlineText={element.text}
+                url={element.url}
+            />
+        );
     }
 
     if (loading || !data) {

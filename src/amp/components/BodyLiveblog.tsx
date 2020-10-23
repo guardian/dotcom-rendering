@@ -47,7 +47,7 @@ const updateButtonStyle = css`
         height: 36px;
         padding: 0 12px;
 
-        background-color: ${palette.news.main};
+        background-color: ${palette.news[400]};
         color: ${palette.neutral[100]};
         font-weight: bold;
         ${textSans.xsmall()};

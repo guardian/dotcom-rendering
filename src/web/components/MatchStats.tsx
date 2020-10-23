@@ -203,7 +203,7 @@ export const MatchStats = ({ home, away }: Props) => (
                                     label: away.name.slice(0, 3).toUpperCase(),
                                     color: away.colours,
                                 },
-                            ]}
+                            ].reverse()}
                         />
                     </Center>
                     <br />

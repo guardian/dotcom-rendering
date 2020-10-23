@@ -8,7 +8,11 @@ export const getAlreadyVisitedCount = (): number => {
     return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
 };
 
+export const setAlreadyVisited = (count: number): void => {
+    localStorage.setItem(AlreadyVisitedKey, count.toString());
+};
+
 export const incrementAlreadyVisited = () => {
     const alreadyVisited = getAlreadyVisitedCount();
-    localStorage.setItem(AlreadyVisitedKey, `${alreadyVisited + 1}`);
+    setAlreadyVisited(alreadyVisited + 1)
 };

@@ -13,5 +13,8 @@
     "eslint.enable": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
+    },
+    "files.watcherExclude": {
+        "**/target": true
     }
 }

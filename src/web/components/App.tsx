@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { useAB } from '@guardian/ab-react';
+import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -12,21 +14,43 @@ import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
+import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
+
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+    ChartAtom,
+    AudioAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
+import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
+import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+import { getArticleCountConsent } from '@frontend/web/lib/contributions';
+import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+
+import { cmp } from '@guardian/consent-management-platform';
+import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import {
+    submitComponentEvent,
+    OphanComponentEvent,
+} from '../browser/ophan/ophan';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -94,10 +118,38 @@ const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
     return CAPI.pillar;
 };
 
+const componentEventHandler = (
+    componentType: any,
+    id: any,
+    action: any,
+) => () => {
+    const componentEvent: OphanComponentEvent = {
+        component: {
+            componentType,
+            id,
+            products: [],
+            labels: [],
+        },
+        action,
+    };
+    submitComponentEvent(componentEvent);
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
+    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
+    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
+        Promise<string | null>
+    >();
     const [countryCode, setCountryCode] = useState<string>();
+    // This is an async version of the countryCode state value defined above.
+    // This can be used where you've got logic which depends on countryCode but
+    // don't want to block on it becoming available, as you would with the
+    // non-async version (this is the case in the banner picker where some
+    // banners need countryCode but we don't want to block all banners from
+    // executing their canShow logic until countryCode is available):
+    const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
@@ -114,23 +166,54 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
+    // *******************************
+    // ** Setup AB Test Tracking *****
+    // *******************************
+    const ABTestAPI = useAB();
+    useEffect(() => {
+        const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+        ABTestAPI.trackABTests(allRunnableTests);
+        ABTestAPI.registerImpressionEvents(allRunnableTests);
+        ABTestAPI.registerCompleteEvents(allRunnableTests);
+    }, [ABTestAPI]);
+
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
+    }, []);
+
+    useEffect(() => {
+        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
     }, []);
 
     useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
-
         if (isSignedIn) {
             callGetUser();
         }
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
-        const callFetch = async () =>
-            setCountryCode((await getCountryCode()) || '');
+        // Don't do anything until isSignedIn is defined as we only want to set
+        // asyncBrazeUuid once
+        if (isSignedIn === undefined) {
+            return;
+        }
+
+        if (isSignedIn) {
+            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
+        } else {
+            setAsyncBrazeUuid(Promise.resolve(null));
+        }
+    }, [isSignedIn, CAPI.config.idApiUrl]);
+
+    useEffect(() => {
+        const callFetch = () => {
+            const countryCodePromise = getCountryCode();
+            setAsyncCountryCode(countryCodePromise);
+            countryCodePromise.then((cc) => setCountryCode(cc || ''));
+        };
         callFetch();
     }, []);
 
@@ -166,7 +249,13 @@ export const App = ({ CAPI, NAV }: Props) => {
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        incrementWeeklyArticleCount();
+        const incrementArticleCountsIfConsented = async () => {
+            if (await getArticleCountConsent()) {
+                incrementDailyArticleCount();
+                incrementWeeklyArticleCount();
+            }
+        };
+        incrementArticleCountsIfConsented();
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -198,6 +287,54 @@ export const App = ({ CAPI, NAV }: Props) => {
         FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
 
+    useEffect(() => {
+        // Used internally only, so only import each function on demand
+        const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
+            asExistingSupporter: boolean,
+        ) =>
+            import(
+                /* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
+            )
+                .then((utils) =>
+                    utils[key](
+                        asExistingSupporter,
+                        CAPI.shouldHideReaderRevenue,
+                    ),
+                )
+                /* eslint-disable no-console */
+                .catch((error) =>
+                    console.log('Error loading readerRevenueDevUtils', error),
+                );
+        /* eslint-enable no-console */
+
+        if (window && window.guardian) {
+            window.guardian.readerRevenue = {
+                changeGeolocation: loadAndRun('changeGeolocation'),
+                showMeTheEpic: loadAndRun('showMeTheEpic'),
+                showMeTheBanner: loadAndRun('showMeTheBanner'),
+                showNextVariant: loadAndRun('showNextVariant'),
+                showPreviousVariant: loadAndRun('showPreviousVariant'),
+            };
+        }
+    }, [CAPI.shouldHideReaderRevenue]);
+
+    // kick off the CMP...
+    useEffect(() => {
+        // the UI is injected automatically into the page,
+        // and is not a react component, so it's
+        // handled in here.
+        if (CAPI.config.switches.consentManagement && countryCode) {
+            injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+            cmp.init({
+                isInUsa: countryCode === 'US',
+                pubData: {
+                    browserId: getCookie('bwid') || undefined,
+                    pageViewId: window.guardian?.config?.ophan?.pageViewId,
+                },
+            });
+        }
+    }, [countryCode, CAPI.config.switches.consentManagement]);
+
     const pillar = decidePillar(CAPI);
 
     const handlePermalink = (commentId: number) => {
@@ -210,7 +347,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setHashCommentId(commentId);
         return false;
     };
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -229,7 +365,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
-                    enableAusMoment2020Header={CAPI.config.ausMoment2020Header}
                 />
             </Portal>
             <Hydrate root="links-root">
@@ -274,6 +409,132 @@ export const App = ({ CAPI, NAV }: Props) => {
             {CAPI.callouts.map((callout) => (
                 <Hydrate root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
+                </Hydrate>
+            ))}
+            {CAPI.chartAtoms.map((chart) => (
+                <Hydrate root="chart-atom" index={chart.chartIndex}>
+                    <ChartAtom id={chart.id} html={chart.html} />
+                </Hydrate>
+            ))}
+            {CAPI.audioAtoms.map((audioAtom) => (
+                <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
+                    <AudioAtom
+                        id={audioAtom.id}
+                        trackUrl={audioAtom.trackUrl}
+                        kicker={audioAtom.kicker}
+                        title={audioAtom.title}
+                        pillar={toTypesPillar(pillar)}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.qandaAtoms.map((qandaAtom) => (
+                <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
+                    <QandaAtom
+                        id={qandaAtom.id}
+                        title={qandaAtom.title}
+                        html={qandaAtom.html}
+                        image={qandaAtom.img}
+                        credit={qandaAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.guideAtoms.map((guideAtom) => (
+                <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
+                    <GuideAtom
+                        id={guideAtom.id}
+                        title={guideAtom.title}
+                        html={guideAtom.html}
+                        image={guideAtom.img}
+                        credit={guideAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.profileAtoms.map((profileAtom) => (
+                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'EXPAND',
+                        )}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.timelineAtoms.map((timelineAtom) => (
+                <Hydrate
+                    root="timeline-atom"
+                    index={timelineAtom.timelineIndex}
+                >
+                    <TimelineAtom
+                        id={timelineAtom.id}
+                        title={timelineAtom.title}
+                        events={timelineAtom.events}
+                        description={timelineAtom.description}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'EXPAND',
+                        )}
+                    />
                 </Hydrate>
             ))}
             <Portal root="share-comment-counts">
@@ -344,6 +605,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             keywordIds={CAPI.config.keywordIds}
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
+                            edition={CAPI.editionId}
                         />
                     </Suspense>
                 </Lazy>
@@ -364,6 +626,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         />
                     </Suspense>
                 </Lazy>
+            </Portal>
+            <Portal root="sign-in-gate">
+                <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
             </Portal>
 
             {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
@@ -404,15 +669,16 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="footer : "
                         inHeader={false}
-                        enableAusMoment2020Header={false}
                     />
                 </Lazy>
             </Portal>
             <Portal root="bottom-banner">
                 <StickyBottomBanner
                     isSignedIn={isSignedIn}
-                    countryCode={countryCode}
+                    asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
+                    asyncBrazeUuid={asyncBrazeUuid}
+                    isDigitalSubscriber={isDigitalSubscriber}
                 />
             </Portal>
         </React.StrictMode>

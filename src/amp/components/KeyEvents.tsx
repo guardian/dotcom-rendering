@@ -53,7 +53,7 @@ const wrapper = css`
 const eventLinkStyle = css`
     display: block;
     text-decoration: none;
-    color: ${palette.sport.dark};
+    color: ${palette.sport[300]};
     :hover {
         text-decoration: underline;
     }

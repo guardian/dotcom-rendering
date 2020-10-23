@@ -1,51 +1,65 @@
-interface ABTestRecord {
-    variantName: string;
-    complete: string | boolean;
-}
+import {
+    OphanABEvent,
+    OphanABPayload,
+    OphanAction,
+    OphanComponent,
+    OphanComponentEvent,
+    OphanComponentType,
+    OphanProduct,
+    TestMeta,
+} from '@guardian/types/ophan';
 
-interface ABTestPayload {
-    abTestRegister: { [key: string]: ABTestRecord };
-}
-
-export type OphanAction = 'INSERT' | 'VIEW';
-
-export type OphanComponentType =
-    | 'ACQUISITIONS_EPIC'
-    | 'ACQUISITIONS_ENGAGEMENT_BANNER';
-
-export type TestMeta = {
-    abTestName: string;
-    abTestVariant: string;
-    campaignCode: string;
-    campaignId?: string;
+export const record = (event: {}): void => {
+    if (
+        window.guardian &&
+        window.guardian.ophan &&
+        window.guardian.ophan.record
+    ) {
+        window.guardian.ophan.record(event);
+    } else {
+        throw new Error("window.guardian.ophan.record doesn't exist");
+    }
 };
 
-export const sendOphanContributionsComponentEvent = (
+export const submitComponentEvent = (
+    componentEvent: OphanComponentEvent,
+): void => {
+    record({ componentEvent });
+};
+
+export const sendOphanComponentEvent = (
     action: OphanAction,
     testMeta: TestMeta,
-    componentType: OphanComponentType,
 ): void => {
-    const componentEvent = {
+    const {
+        abTestName,
+        abTestVariant,
+        componentType,
+        products = [],
+        campaignCode,
+    } = testMeta;
+
+    const componentEvent: OphanComponentEvent = {
         component: {
             componentType,
-            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: testMeta.campaignCode,
+            products,
+            campaignCode,
             id: testMeta.campaignId || testMeta.campaignCode,
         },
         abTest: {
-            name: testMeta.abTestName,
-            variant: testMeta.abTestVariant,
+            name: abTestName,
+            variant: abTestVariant,
         },
         action,
     };
 
-    window.guardian.ophan.record({ componentEvent });
+    submitComponentEvent(componentEvent);
 };
 
 export const abTestPayload = (tests: {
     [key: string]: string;
-}): ABTestPayload => {
-    const records: { [key: string]: ABTestRecord } = {};
+}): OphanABPayload => {
+    const records: { [key: string]: OphanABEvent } = {};
     Object.keys(tests).forEach((testName) => {
         records[`ab${testName}`] = {
             variantName: tests[testName],
@@ -57,20 +71,17 @@ export const abTestPayload = (tests: {
 };
 
 export const sendOphanPlatformRecord = () => {
+    record({ experiences: 'dotcom-rendering' });
+
+    // Record server-side AB test variants (i.e. control or variant)
     if (
         window.guardian &&
-        window.guardian.ophan &&
-        window.guardian.ophan.record
+        window.guardian.config &&
+        window.guardian.config.tests
     ) {
-        window.guardian.ophan.record({ experiences: 'dotcom-rendering' });
+        const { tests } = window.guardian.config;
 
-        // Record server-side AB test variants (i.e. control or variant)
-        if (window.guardian.config.tests) {
-            const { tests } = window.guardian.config;
-            window.guardian.ophan.record(abTestPayload(tests));
-        }
-    } else {
-        throw new Error("window.guardian.ophan.record doesn't exist");
+        record(abTestPayload(tests));
     }
 };
 
@@ -99,7 +110,18 @@ export const recordPerformance = () => {
         redirectCount: performanceAPI.navigation.redirectCount,
     };
 
-    window.guardian.ophan.record({
+    record({
         performance,
     });
+};
+
+export {
+    OphanABEvent,
+    OphanABPayload,
+    OphanAction,
+    OphanComponent,
+    OphanComponentEvent,
+    OphanComponentType,
+    OphanProduct,
+    TestMeta,
 };

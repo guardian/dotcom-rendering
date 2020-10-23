@@ -42,7 +42,7 @@ const body = (pillar: Pillar, designType: DesignType) => {
     // Extend defaultStyles with custom styles for some designTypes
     const designTypeStyle: DesignTypesObj = {
         ...defaultStyles,
-        Comment: palette.opinion.faded,
+        Comment: palette.opinion[800],
         AdvertisementFeature: palette.neutral[86],
     };
 

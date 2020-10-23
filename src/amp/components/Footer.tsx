@@ -12,7 +12,7 @@ import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButto
 import { InnerContainer } from './InnerContainer';
 
 const footer = css`
-    background-color: ${palette.brand.main};
+    background-color: ${palette.brand[400]};
     color: ${palette.neutral[86]};
     ${textSans.medium()};
     margin-top: 20px;
@@ -30,7 +30,7 @@ const footerLink = css`
     display: block;
 
     :hover {
-        color: ${palette.brandYellow.main};
+        color: ${palette.brandAlt[400]};
     }
 `;
 
@@ -92,7 +92,7 @@ const icon = css`
         left: 0;
         right: 0;
         margin: auto;
-        border: 2px solid ${palette.brand.main};
+        border: 2px solid ${palette.brand[400]};
         border-bottom: 0;
         border-right: 0;
         content: '';
@@ -104,7 +104,7 @@ const icon = css`
 
 const backToTopLink = css`
     position: absolute;
-    background-color: ${palette.brand.main};
+    background-color: ${palette.brand[400]};
     color: ${palette.neutral[100]};
     font-weight: 700;
     top: -14px;
@@ -119,7 +119,7 @@ const backToTopText = css`
 `;
 
 const supportLink = css`
-    color: ${palette.brandYellow.main};
+    color: ${palette.brandAlt[400]};
     ${body.medium()};
     padding-bottom: 0.375rem;
 `;

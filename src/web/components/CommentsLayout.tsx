@@ -10,6 +10,7 @@ import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
 import { Lazy } from '@frontend/web/components/Lazy';
+import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     user?: UserProfile;
@@ -39,7 +40,17 @@ const containerStyles = css`
 
     padding-top: ${space[3]}px;
     padding-bottom: ${space[6]}px;
-    padding-right: ${space[5]}px;
+    ${from.mobileLandscape} {
+        padding-right: ${space[5]}px;
+    }
+
+    width: 100%;
+`;
+
+// We need to force the width of the comments to be what we expect otherwise we
+// get overflow because of inner display: flex
+const commentsWrapper = css`
+    width: 100%;
 `;
 
 const bottomPadding = css`
@@ -136,29 +147,7 @@ export const CommentsLayout = ({
                     </div>
                 </Hide>
                 {expanded ? (
-                    <Comments
-                        user={user}
-                        baseUrl={baseUrl}
-                        pillar={pillar}
-                        initialPage={commentPage}
-                        pageSizeOverride={commentPageSize}
-                        isClosedForComments={
-                            isClosedForComments || !enableDiscussionSwitch
-                        }
-                        orderByOverride={commentOrderBy}
-                        shortUrl={shortUrl}
-                        additionalHeaders={{
-                            'D2-X-UID': discussionD2Uid,
-                            'GU-Client': discussionApiClientHeader,
-                        }}
-                        expanded={true}
-                        commentToScrollTo={commentToScrollTo}
-                        onPermalinkClick={onPermalinkClick}
-                        apiKey="dotcom-rendering"
-                        onHeightChange={handleHeightChange}
-                    />
-                ) : (
-                    <Lazy margin={300}>
+                    <div className={commentsWrapper}>
                         <Comments
                             user={user}
                             baseUrl={baseUrl}
@@ -174,12 +163,39 @@ export const CommentsLayout = ({
                                 'D2-X-UID': discussionD2Uid,
                                 'GU-Client': discussionApiClientHeader,
                             }}
-                            expanded={false}
+                            expanded={true}
                             commentToScrollTo={commentToScrollTo}
                             onPermalinkClick={onPermalinkClick}
                             apiKey="dotcom-rendering"
                             onHeightChange={handleHeightChange}
                         />
+                    </div>
+                ) : (
+                    <Lazy margin={300}>
+                        <div className={commentsWrapper}>
+                            <Comments
+                                user={user}
+                                baseUrl={baseUrl}
+                                pillar={pillar}
+                                initialPage={commentPage}
+                                pageSizeOverride={commentPageSize}
+                                isClosedForComments={
+                                    isClosedForComments ||
+                                    !enableDiscussionSwitch
+                                }
+                                orderByOverride={commentOrderBy}
+                                shortUrl={shortUrl}
+                                additionalHeaders={{
+                                    'D2-X-UID': discussionD2Uid,
+                                    'GU-Client': discussionApiClientHeader,
+                                }}
+                                expanded={false}
+                                commentToScrollTo={commentToScrollTo}
+                                onPermalinkClick={onPermalinkClick}
+                                apiKey="dotcom-rendering"
+                                onHeightChange={handleHeightChange}
+                            />
+                        </div>
                     </Lazy>
                 )}
             </div>

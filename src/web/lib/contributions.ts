@@ -1,9 +1,11 @@
 import { getCookie } from '@root/src/web/browser/cookie';
+import { onConsentChange } from '@guardian/consent-management-platform';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
+export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
 // Support Frontend cookies (dropped when contribution is made)
 export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
@@ -12,6 +14,10 @@ export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
     'gu.contributions.recurring.contrib-timestamp.Annual';
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
     'gu.contributions.contrib-timestamp';
+
+//  Local storage keys
+const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
+const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -110,3 +116,36 @@ export const shouldHideSupportMessaging = (
     !shouldShowSupportMessaging() ||
     isRecurringContributor(isSignedIn) ||
     isRecentOneOffContributor();
+
+const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
+
+export const hasOptedOutOfArticleCount = (): boolean =>
+    getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
+
+const removeArticleCountsFromLocalStorage = () => {
+    window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
+    window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
+};
+
+export const getArticleCountConsent = (): Promise<boolean> => {
+    if (hasOptedOutOfArticleCount()) {
+        return Promise.resolve(false);
+    }
+    return new Promise((resolve) => {
+        onConsentChange(({ ccpa, tcfv2 }) => {
+            if (ccpa) {
+                resolve(true);
+            } else if (tcfv2) {
+                const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+                    (consent) => tcfv2.consents[consent],
+                );
+
+                if (!hasRequiredConsents) {
+                    removeArticleCountsFromLocalStorage();
+                }
+
+                resolve(hasRequiredConsents);
+            }
+        });
+    });
+};

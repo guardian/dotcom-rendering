@@ -2,30 +2,6 @@ import fetchMock from 'fetch-mock';
 
 import { getCountryCode } from './getCountryCode';
 
-// Mock Local Storage
-// See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
-// eslint-disable-next-line func-names
-const localStorageMock = (function () {
-    let store: {
-        [key: string]: string;
-    } = {};
-    return {
-        getItem(key: string) {
-            return store[key] || null;
-        },
-        setItem(key: string, value: string) {
-            store[key] = value.toString();
-        },
-        clear() {
-            store = {};
-        },
-    };
-})();
-
-Object.defineProperty(window, 'localStorage', {
-    value: localStorageMock,
-});
-
 const expectedCountry = 'GB';
 const COUNTRY_CODE_KEY = 'gu.geolocation';
 const TEN_DAYS = 60 * 60 * 24 * 10;

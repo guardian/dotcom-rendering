@@ -10,6 +10,9 @@ import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 import { Lazy } from '@root/src/web/components/Lazy';
 
+import { useAB } from '@guardian/ab-react';
+import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
+
 const MostViewedFooterData = React.lazy(() => {
     const { start, end } = initPerf('MostViewedFooterData');
     start();
@@ -94,34 +97,52 @@ interface Props {
     ajaxUrl: string;
 }
 
-export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => (
-    <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
-        <div
-            className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
-            data-link-name="most-popular"
-            data-component="most-popular"
-        >
-            <section className={asideWidth}>
-                <h2 className={headingStyles}>Most popular</h2>
-            </section>
-            <section className={stackBelow('desktop')}>
-                <Lazy margin={300}>
-                    <Suspense fallback={<></>}>
-                        <MostViewedFooterData
-                            sectionName={sectionName}
-                            pillar={pillar}
-                            ajaxUrl={ajaxUrl}
-                        />
-                    </Suspense>
-                </Lazy>
-                <div
-                    className={css`
-                        margin: 6px 0 0 10px;
-                    `}
-                >
-                    <AdSlot asps={namedAdSlotParameters('mostpop')} />
-                </div>
-            </section>
+export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
+    // Example usage of AB Tests
+    // Used in the Cypress tests as smoke test of the AB tests framework integration
+    const ABTestAPI = useAB();
+    const abTestCypressDataAttr =
+        (ABTestAPI.isUserInVariant('AbTestTest', 'control') &&
+            'ab-test-control') ||
+        (ABTestAPI.isUserInVariant('AbTestTest', 'variant') &&
+            'ab-test-variant') ||
+        'ab-test-not-in-test';
+    const runnableTest = ABTestAPI.runnableTest(abTestTest);
+    const variantFromRunnable =
+        (runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
+
+
+    return (
+        <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+            <div
+                className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
+                data-link-name="most-popular"
+                data-component="most-popular"
+                data-cy-ab-user-in-variant={abTestCypressDataAttr}
+                data-cy-ab-runnable-test={variantFromRunnable}
+            >
+                <section className={asideWidth}>
+                    <h2 className={headingStyles}>Most popular</h2>
+                </section>
+                <section className={stackBelow('desktop')}>
+                    <Lazy margin={300}>
+                        <Suspense fallback={<></>}>
+                            <MostViewedFooterData
+                                sectionName={sectionName}
+                                pillar={pillar}
+                                ajaxUrl={ajaxUrl}
+                            />
+                        </Suspense>
+                    </Lazy>
+                    <div
+                        className={css`
+                            margin: 6px 0 0 10px;
+                        `}
+                    >
+                        <AdSlot asps={namedAdSlotParameters('mostpop')} />
+                    </div>
+                </section>
+            </div>
         </div>
-    </div>
-);
+    );
+};

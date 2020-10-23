@@ -1,9 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { brandYellow, background } from '@guardian/src-foundations/palette';
+import {
+    brandAlt,
+    background,
+    border,
+} from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
+import { space, palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
 import { Score } from '@frontend/web/components/Score';
@@ -12,6 +16,7 @@ type Props = {
     homeTeam: TeamType;
     awayTeam: TeamType;
     comments?: string;
+    minByMinUrl?: string;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -45,7 +50,11 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
             justify-content: space-between;
             position: relative;
             padding: ${space[2]}px;
-            background-color: ${brandYellow.main};
+            background-color: ${brandAlt[400]};
+            margin-bottom: 10px;
+            ${until.tablet} {
+                margin: 0 -10px 10px;
+            }
 
             :before {
                 content: '';
@@ -54,10 +63,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
                 bottom: 0;
                 width: 100vw;
                 left: -100vw;
-                ${until.desktop} {
-                    left: calc((100vw - 46rem) / -2);
-                }
-                background-color: ${brandYellow.main};
+                background-color: ${brandAlt[400]};
                 z-index: -1;
             }
         `}
@@ -151,6 +157,7 @@ const TeamNav = ({
         className={css`
             display: flex;
             flex-grow: 1;
+            flex-basis: 50%;
         `}
     >
         <Column>
@@ -193,7 +200,7 @@ const Comments = ({ comments }: { comments: string }) => (
     </div>
 );
 
-const Border = () => (
+const YellowBorder = () => (
     <div
         className={css`
             /* stylelint-disable-next-line color-no-hex */
@@ -204,23 +211,100 @@ const Border = () => (
     />
 );
 
-export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
-    <StretchBackground>
-        <Row>
-            <TeamNav
-                name={homeTeam.name}
-                score={homeTeam.score}
-                crest={homeTeam.crest}
-                scorers={homeTeam.scorers}
-            />
-            <Border />
-            <TeamNav
-                name={awayTeam.name}
-                score={awayTeam.score}
-                crest={awayTeam.crest}
-                scorers={awayTeam.scorers}
-            />
-        </Row>
-        {comments && <Comments comments={comments} />}
-    </StretchBackground>
+const thinGreySolid = `1px solid ${border.secondary}`;
+
+const GreyBorder = () => (
+    <div
+        className={css`
+            /* stylelint-disable-next-line color-no-hex */
+            border-left: ${thinGreySolid};
+            margin-left: ${space[1]}px;
+            width: ${space[2]}px;
+        `}
+    />
+);
+
+const tabsContainer = css`
+    display: flex;
+    position: relative;
+    border-bottom: ${thinGreySolid};
+`;
+
+const tab = css`
+    flex-basis: 50%;
+    height: 40px;
+    border-top: 3px solid ${border.secondary};
+
+    :nth-child(1) {
+        border-top: 3px solid ${palette.sport[300]};
+    }
+`;
+
+const tabLink = css`
+    color: ${palette.sport[300]};
+    display: block;
+    text-decoration: none;
+    &:hover {
+        background-color: ${palette.neutral[93]};
+    }
+`;
+
+const tabLabel = css`
+    ${headline.xxxsmall()};
+    background: transparent;
+    padding: 6px 8px 0;
+    text-align: left;
+    font-weight: 600;
+    min-height: 36px;
+    display: block;
+    width: 100%;
+`;
+
+const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
+    <div>
+        <ul className={tabsContainer}>
+            <li className={tab}>
+                <span className={tabLabel}>Report</span>
+            </li>
+            <GreyBorder />
+            <li className={tab}>
+                <a
+                    href={minByMinUrl}
+                    data-link-name="Min-by-min"
+                    className={tabLink}
+                >
+                    <span className={tabLabel}>Min-by-min</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+);
+
+export const MatchNav = ({
+    homeTeam,
+    awayTeam,
+    comments,
+    minByMinUrl,
+}: Props) => (
+    <div>
+        <StretchBackground>
+            <Row>
+                <TeamNav
+                    name={homeTeam.name}
+                    score={homeTeam.score}
+                    crest={homeTeam.crest}
+                    scorers={homeTeam.scorers}
+                />
+                <YellowBorder />
+                <TeamNav
+                    name={awayTeam.name}
+                    score={awayTeam.score}
+                    crest={awayTeam.crest}
+                    scorers={awayTeam.scorers}
+                />
+            </Row>
+            {comments && <Comments comments={comments} />}
+        </StretchBackground>
+        {minByMinUrl && <MatchTabs minByMinUrl={minByMinUrl} />}
+    </div>
 );

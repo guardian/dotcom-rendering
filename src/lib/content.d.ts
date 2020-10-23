@@ -3,19 +3,22 @@
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
     url: string;
+    placeholderUrl?: string;
     id?: string;
     html?: string;
     css?: string;
     js?: string;
 }
 
-interface AudioAtomElement {
+interface AudioAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
     id: string;
     kicker: string;
+    title?: string;
     trackUrl: string;
     duration: number;
     coverUrl: string;
+    audioIndex?: number;
 }
 
 interface AudioBlockElement {
@@ -56,6 +59,9 @@ interface CalloutBlockElement {
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
+    chartIndex?: number;
+    id: string;
+    html: string;
 }
 
 interface CodeBlockElement {
@@ -122,12 +128,15 @@ interface GuideAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    guideIndex?: number;
 }
 
 interface GuVideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
     assets: VideoAssets[];
     caption: string;
+    html: string;
+    source: string;
 }
 
 interface HighlightBlockElement {
@@ -165,13 +174,19 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     css?: string;
 }
 
+interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
+}
+
 interface MapBlockElement {
     _type: 'model.dotcomrendering.pageElements.MapBlockElement';
-    url: string;
+    embedUrl: string;
     originalUrl: string;
     source: string;
-    caption: string;
     title: string;
+    height: number;
+    width: number;
+    caption?: string;
 }
 
 interface MultiImageBlockElement {
@@ -188,6 +203,7 @@ interface ProfileAtomBlockElement {
     img?: string;
     html: string;
     credit: string;
+    profileIndex?: number;
 }
 
 interface PullquoteBlockElement {
@@ -204,6 +220,7 @@ interface QABlockElement {
     img?: string;
     html: string;
     credit: string;
+    qandaIndex?: number;
 }
 
 interface RichLinkBlockElement {
@@ -221,6 +238,15 @@ interface SoundcloudBlockElement {
     id: string;
     isTrack: boolean;
     isMandatory: boolean;
+}
+
+interface SpotifyBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
+    embedUrl?: string;
+    title?: string;
+    height?: number;
+    width?: number;
+    caption?: string;
 }
 
 interface SubheadingBlockElement {
@@ -246,6 +272,7 @@ interface TimelineBlockElement {
     title: string;
     description?: string;
     events: TimelineEvent[];
+    timelineIndex?: number;
 }
 
 interface TweetBlockElement {
@@ -265,7 +292,7 @@ interface VideoFacebookBlockElement {
     url: string;
     height: number;
     width: number;
-    caption: string;
+    caption?: string;
     embedUrl?: string;
 }
 
@@ -284,6 +311,7 @@ interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     embedUrl?: string;
     url: string;
+    originalUrl: string;
     height: number;
     width: number;
     caption?: string;
@@ -299,12 +327,10 @@ interface YoutubeBlockElement {
     channelId?: string;
     duration?: number;
     posterSrc?: string;
-    height?: string;
-    width?: string;
 }
 
 type CAPIElement =
-    | AudioAtomElement
+    | AudioAtomBlockElement
     | AudioBlockElement
     | BlockquoteBlockElement
     | CaptionBlockElement
@@ -325,6 +351,7 @@ type CAPIElement =
     | ImageBlockElement
     | InstagramBlockElement
     | InteractiveAtomBlockElement
+    | InteractiveBlockElement
     | MapBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement
@@ -332,6 +359,7 @@ type CAPIElement =
     | QABlockElement
     | RichLinkBlockElement
     | SoundcloudBlockElement
+    | SpotifyBlockElement
     | SubheadingBlockElement
     | TableBlockElement
     | TextBlockElement

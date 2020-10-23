@@ -4,7 +4,7 @@ import Star from '@frontend/static/icons/star.svg';
 import { palette } from '@guardian/src-foundations';
 
 const ratingsWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${palette.brandAlt[400]};
     display: inline-block;
 `;
 

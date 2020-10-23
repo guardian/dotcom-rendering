@@ -1,4 +1,5 @@
 import { WindowGuardianConfig } from '@root/src/model/window-guardian';
+import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 declare global {
     /* ~ Here, declare things that go in the global namespace, or augment
@@ -34,10 +35,12 @@ declare global {
             // TODO expose as type from Automat client lib
             automat: {
                 react: any;
+                preact: any;
                 emotion: any;
                 emotionCore: any;
                 emotionTheming: any;
             };
+            readerRevenue: ReaderRevenueDevUtils;
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
@@ -52,6 +55,7 @@ declare global {
          * This gives support across all 3 cases.
          */
         guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
+        Cypress: any; // for checking if running within cypress
     }
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

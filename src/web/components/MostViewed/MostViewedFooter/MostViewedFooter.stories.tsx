@@ -7,6 +7,7 @@ import {
     responseWithMissingImage,
 } from '@root/fixtures/mostViewed';
 import { Section } from '@frontend/web/components/Section';
+import { ABProvider } from '@guardian/ab-react';
 import { MostViewedFooter } from './MostViewedFooter';
 
 export default {
@@ -17,6 +18,20 @@ export default {
     },
 };
 
+const AbProvider: React.FC = ({ children }) => {
+    return (
+        <ABProvider
+            mvtMaxValue={1000000}
+            mvtId={1234}
+            pageIsSensitive={false}
+            abTestSwitches={{}}
+            arrayOfTestObjects={[]}
+        >
+            {children}
+        </ABProvider>
+    );
+};
+
 export const withTwoTabs = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
@@ -24,13 +39,15 @@ export const withTwoTabs = () => {
     });
 
     return (
-        <Section>
-            <MostViewedFooter
-                pillar="news"
-                sectionName="politics"
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-            />
-        </Section>
+        <AbProvider>
+            <Section>
+                <MostViewedFooter
+                    pillar="news"
+                    sectionName="politics"
+                    ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                />
+            </Section>
+        </AbProvider>
     );
 };
 withTwoTabs.story = { name: 'with two tabs' };
@@ -42,12 +59,14 @@ export const withOneTabs = () => {
     });
 
     return (
-        <Section>
-            <MostViewedFooter
-                pillar="news"
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-            />
-        </Section>
+        <AbProvider>
+            <Section>
+                <MostViewedFooter
+                    pillar="news"
+                    ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                />
+            </Section>
+        </AbProvider>
     );
 };
 withOneTabs.story = { name: 'with one tab' };
@@ -59,12 +78,14 @@ export const withNoMostSharedImage = () => {
     });
 
     return (
-        <Section>
-            <MostViewedFooter
-                pillar="news"
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-            />
-        </Section>
+        <AbProvider>
+            <Section>
+                <MostViewedFooter
+                    pillar="news"
+                    ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                />
+            </Section>
+        </AbProvider>
     );
 };
 withNoMostSharedImage.story = { name: 'with a missing image on most shared' };

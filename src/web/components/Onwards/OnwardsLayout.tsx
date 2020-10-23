@@ -14,10 +14,6 @@ import { ExactlyFive } from './ExactlyFive';
 import { FourOrLess } from './FourOrLess';
 import { Spotlight } from './Spotlight';
 
-type Props = {
-    onwardSections: OnwardsType[];
-};
-
 const decideLayout = (trails: TrailType[]) => {
     switch (trails.length) {
         case 1:
@@ -36,8 +32,8 @@ const decideLayout = (trails: TrailType[]) => {
     }
 };
 
-export const OnwardsLayout = ({ onwardSections }: Props) => {
-    const sections = useComments(onwardSections);
+export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
+    const sections = useComments([data]);
 
     return (
         <>

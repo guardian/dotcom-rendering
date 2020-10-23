@@ -6,8 +6,7 @@ export const SubheadingBlockComponent: React.FC<{ html: string }> = ({
     html,
 }) => {
     const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
-        prefix: '<h2>',
-        suffix: '</h2>',
+        fixes: [{ prefix: '<h2>', suffix: '</h2>' }],
         html,
     });
 

@@ -1,8 +1,11 @@
 import React from 'react';
-
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-
+import { useAB } from '@guardian/ab-react';
+import { css } from 'emotion';
+import { Section } from '@root/src/web/components/Section';
 import { OnwardsData } from './OnwardsData';
+import { Carousel } from './Carousel/Carousel';
+import { OnwardsLayout } from './OnwardsLayout';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
@@ -64,6 +67,23 @@ const firstPopularTag = (
     return isPaidContent ? pageTags[0] : firstTagInWhitelist;
 };
 
+const onwardsWrapper = css`
+    width: 100%;
+`;
+
+const headlinesContainer = (edition: Edition): string => {
+    switch (edition) {
+        case 'UK':
+            return 'uk-alpha/news/regular-stories';
+        case 'US':
+            return 'c5cad9ee-584d-4e85-85cd-bf8ee481b026';
+        case 'AU':
+            return 'au-alpha/news/regular-stories';
+        case 'INT':
+            return '10f21d96-18f6-426f-821b-19df55dfb831';
+    }
+};
+
 type Props = {
     ajaxUrl: string;
     hasRelated: boolean;
@@ -75,6 +95,7 @@ type Props = {
     keywordIds: string | string[];
     contentType: string;
     tags: TagType[];
+    edition: Edition;
 };
 
 export const OnwardsUpper = ({
@@ -88,6 +109,7 @@ export const OnwardsUpper = ({
     keywordIds,
     contentType,
     tags,
+    edition,
 }: Props) => {
     const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -158,15 +180,55 @@ export const OnwardsUpper = ({
         ophanComponentName = 'related-stories';
     }
 
-    if (!url) {
-        return null;
-    }
+    const ABTestAPI = useAB();
+    const headlinesDataUrl = joinUrl([
+        ajaxUrl,
+        'container/data',
+        `${headlinesContainer(edition)}.json`,
+    ]);
+
+    const inCuratedContainerTest = ABTestAPI.isUserInVariant(
+        'CuratedContainerTest',
+        'fixed',
+    );
+
+    const inCuratedCarouselTest = ABTestAPI.isUserInVariant(
+        'CuratedContainerTest',
+        'carousel',
+    );
 
     return (
-        <OnwardsData
-            url={url}
-            limit={8}
-            ophanComponentName={ophanComponentName}
-        />
+        <div className={onwardsWrapper}>
+            {inCuratedCarouselTest && (
+                <Section showTopBorder={true}>
+                    <OnwardsData
+                        url={headlinesDataUrl}
+                        limit={8}
+                        ophanComponentName="curated-content"
+                        Container={Carousel}
+                    />
+                </Section>
+            )}
+            {inCuratedContainerTest && (
+                <Section showTopBorder={true}>
+                    <OnwardsData
+                        url={headlinesDataUrl}
+                        limit={8}
+                        ophanComponentName="curated-content"
+                        Container={OnwardsLayout}
+                    />
+                </Section>
+            )}
+            {url && (
+                <Section>
+                    <OnwardsData
+                        url={url}
+                        limit={8}
+                        ophanComponentName={ophanComponentName}
+                        Container={OnwardsLayout}
+                    />
+                </Section>
+            )}
+        </div>
     );
 };

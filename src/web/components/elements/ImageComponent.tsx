@@ -24,9 +24,7 @@ type Props = {
     title?: string;
 };
 
-const widths = [1020, 660, 480, 0];
-
-const bestFor = (
+const selectScrSetItemForWidth = (
     desiredWidth: number,
     inlineSrcSets: SrcSetItem[],
 ): SrcSetItem => {
@@ -51,7 +49,7 @@ const getSrcSetsForWeighting = (
             weighting.toLowerCase() === forWeighting.toLowerCase(),
     )[0].srcSet;
 
-const makeSource = (
+const makePictureSource = (
     hidpi: boolean,
     minWidth: number,
     srcSet: SrcSetItem,
@@ -70,15 +68,24 @@ const makeSources = (
 ): PictureSource[] => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, role);
     const sources: PictureSource[] = [];
-
-    // TODO: ideally the imageSources array will come from frontend with prebaked URLs for
-    // hidpi images.
-    // Until that happens, here we're manually injecting (inadequate) <source> elements for
-    // those images, albeit without the necessary query params for hidpi images :(
-    widths.forEach((width) => {
-        sources.push(makeSource(true, width, bestFor(width, inlineSrcSets)));
-        sources.push(makeSource(false, width, bestFor(width, inlineSrcSets)));
-    });
+    inlineSrcSets
+        .map((item) => item.width)
+        .forEach((width) => {
+            sources.push(
+                makePictureSource(
+                    true,
+                    width,
+                    selectScrSetItemForWidth(width, inlineSrcSets),
+                ),
+            );
+            sources.push(
+                makePictureSource(
+                    false,
+                    width,
+                    selectScrSetItemForWidth(width, inlineSrcSets),
+                ),
+            );
+        });
 
     return sources;
 };
@@ -86,7 +93,7 @@ const makeSources = (
 const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
 
-    return bestFor(300, inlineSrcSets).src;
+    return selectScrSetItemForWidth(300, inlineSrcSets).src;
 };
 
 const starsWrapper = css`
@@ -292,6 +299,22 @@ export const ImageComponent = ({
     const isNotOpinion =
         designType !== 'Comment' && designType !== 'GuardianView';
 
+    // We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
+    // because the image sources and CSS deal with the sizing. What the height and width gives us is a true
+    // ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
+    //
+    // The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
+    const imageWidth =
+        (element.media &&
+            element.media.allImages[0] &&
+            element.media.allImages[0].fields.width) ||
+        '620';
+    const imageHeight =
+        (element.media &&
+            element.media.allImages[0] &&
+            element.media.allImages[0].fields.height) ||
+        '372';
+
     if (isMainMedia && display === Display.Immersive && isNotOpinion) {
         return (
             <div
@@ -313,6 +336,9 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -329,6 +355,7 @@ export const ImageComponent = ({
                     position: relative;
 
                     img {
+                        height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
@@ -338,6 +365,9 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -354,6 +384,7 @@ export const ImageComponent = ({
                     position: relative;
 
                     img {
+                        height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
@@ -363,6 +394,9 @@ export const ImageComponent = ({
                     sources={sources}
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
+                    width={imageWidth}
+                    height={imageHeight}
+                    isLazy={!isMainMedia}
                 />
                 {isMainMedia && (
                     // Below tablet, main media images show an info toggle at the bottom right of
