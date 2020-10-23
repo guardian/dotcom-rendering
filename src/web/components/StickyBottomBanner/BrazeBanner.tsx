@@ -5,7 +5,8 @@ import * as emotionTheming from 'emotion-theming';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
@@ -155,6 +156,9 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
+    const timing = initPerf('braze-banner');
+    timing.start();
+
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
         return {
@@ -187,7 +191,15 @@ export const canShow = async (
     }
 
     try {
-        return getMessageFromBraze(apiKey as string, brazeUuid);
+        const result = await getMessageFromBraze(apiKey as string, brazeUuid)
+
+        const timeTaken = timing.end();
+        record({
+            component: 'braze-banner-timing',
+            value: timeTaken,
+        });
+
+        return result;
     } catch (e) {
         return { result: false };
     }
