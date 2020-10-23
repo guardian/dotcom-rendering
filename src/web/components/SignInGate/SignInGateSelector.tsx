@@ -18,7 +18,6 @@ import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-g
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 import { signInGatePageview } from '@root/src/web/experiments/tests/sign-in-gate-pageview';
 import { signInGatePageviewUs } from '@root/src/web/experiments/tests/sign-in-gate-pageview-us';
-import { signInGatePersonalisedAdCopy } from '@root/src/web/experiments/tests/sign-in-gate-personalised-ad-copy';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
@@ -27,8 +26,6 @@ import { signInGateComponent as gatePageviewVariant1 } from '@root/src/web/compo
 import { signInGateComponent as gatePageviewVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-variant-2';
 import { signInGateComponent as gatePageviewVariant3 } from '@root/src/web/components/SignInGate/gates/pageview-variant-3';
 import { signInGateComponent as gatePageviewVariant4 } from '@root/src/web/components/SignInGate/gates/pageview-variant-4';
-import { signInGateComponent as gatePersonalisedAdCopyVariant1 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-1';
-import { signInGateComponent as gatePersonalisedAdCopyVariant2 } from '@root/src/web/components/SignInGate/gates/personalised-ad-copy-variant-2';
 import { signInGateComponent as gatePageviewUsVariant1 } from '@root/src/web/components/SignInGate/gates/pageview-us-variant-1';
 import { signInGateComponent as gatePageviewUsVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-us-variant-2';
 
@@ -85,7 +82,6 @@ const tests: ReadonlyArray<ABTest> = [
     signInGateMainControl,
     signInGatePageview,
     signInGatePageviewUs,
-    signInGatePersonalisedAdCopy,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
@@ -97,8 +93,6 @@ const testVariantToGateMapping: GateTestMap = {
     'pageview-variant-4': gatePageviewVariant4,
     'pageview-us-variant-1': gatePageviewUsVariant1,
     'pageview-us-variant-2': gatePageviewUsVariant2,
-    'personalised-ad-copy-variant-1': gatePersonalisedAdCopyVariant1,
-    'personalised-ad-copy-variant-2': gatePersonalisedAdCopyVariant2,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
@@ -106,7 +100,6 @@ const testIdToComponentId: { [key: string]: string } = {
     SignInGateMainControl: 'main_control_2',
     SignInGatePageview: 'pageview_test',
     SignInGatePageviewUs: 'pageview_us_test',
-    SignInGatePersonalisedAdCopy: 'personalised_ad_copy_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
