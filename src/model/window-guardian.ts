@@ -128,8 +128,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             enableSentryReporting: CAPI.config.switches.enableSentryReporting,
             enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
             remoteBanner: CAPI.config.switches.remoteBanner,
-            remoteSubscriptionsBanner:
-                CAPI.config.switches.remoteSubscriptionsBanner,
             ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
             // used by lib/ad-targeting.ts
