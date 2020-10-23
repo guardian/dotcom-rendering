@@ -7,6 +7,7 @@ import * as User from '@guardian/bridget/User';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Video from '@guardian/bridget/Videos';
 import * as Metrics from '@guardian/bridget/Metrics';
+import * as Discussion from '@guardian/bridget/Discussion';
 
 const environmentClient: Environment.Client<void> = createAppClient<Environment.Client<void>>(Environment.Client, 'buffered', 'compact');
 const commercialClient: Commercial.Client<void> = createAppClient<Commercial.Client<void>>(Commercial.Client, 'buffered', 'compact');
@@ -16,6 +17,7 @@ const userClient: User.Client<void> = createAppClient<User.Client<void>>(User.Cl
 const galleryClient: Gallery.Client<void> = createAppClient<Gallery.Client<void>>(Gallery.Client, 'buffered', 'compact');
 const videoClient: Video.Client<void> = createAppClient<Video.Client<void>>(Video.Client, 'buffered', 'compact');
 const metricsClient: Metrics.Client<void> = createAppClient<Metrics.Client<void>>(Metrics.Client, 'buffered', 'compact');
+const disucssionClient: Discussion.Client<void> = createAppClient<Discussion.Client<void>>(Discussion.Client, 'buffered', 'compact');
 
 export {
     environmentClient,
@@ -25,5 +27,6 @@ export {
     userClient,
     galleryClient,
     videoClient,
-    metricsClient
+    metricsClient,
+    disucssionClient
 };
