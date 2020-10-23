@@ -47,7 +47,6 @@ type BaseProps = {
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
     subscriptionBannerLastClosedAt?: string;
-    switches: { [key: string]: boolean };
     weeklyArticleHistory?: WeeklyArticleHistory;
 };
 
