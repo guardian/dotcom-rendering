@@ -4,6 +4,7 @@ import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
+import { Role } from '@guardian/image-rendering/src/image';
 import { none, some } from '@guardian/types/option';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -39,7 +40,7 @@ const imageElement = (): BodyElement =>
         credit: some('credit'),
         width: 500,
         height: 500,
-        role: none,
+        role: Role.Standard,
     });
 
 const imageElementWithRole = () =>
