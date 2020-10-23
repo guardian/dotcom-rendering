@@ -3,12 +3,12 @@
 import { createElement as h, FC } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
+import { Role } from '@guardian/image-rendering/src/image';
 
-import { Image, Role } from 'image';
+import { Image } from 'image';
 import { darkModeCss } from 'styles';
 import { Format, Design } from '@guardian/types/Format';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { pipe2 } from 'lib';
+import { withDefault } from '@guardian/types/option';
 
 
 // ----- Component ----- //
@@ -20,7 +20,7 @@ interface Props {
     format: Format;
 }
 
-const styles = (role: Option<Role>, format: Format): SerializedStyles => {
+const styles = (role: Role, format: Format): SerializedStyles => {
     const backgroundColour = (format: Format): string => {
         switch (format.design) {
             case Design.Media:
@@ -31,11 +31,7 @@ const styles = (role: Option<Role>, format: Format): SerializedStyles => {
                 return neutral[97]
         }
     };
-    return pipe2(
-        role,
-        map(imageRole => imageRole),
-        withDefault(Role.HalfWidth),
-    ) === Role.Thumbnail ? css`color: ${neutral[60]};`
+    return role === Role.Thumbnail ? css`color: ${neutral[60]};`
         : css`
             background-color: ${backgroundColour(format)};
             ${darkModeCss`background-color: ${neutral[20]};`}

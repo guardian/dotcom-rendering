@@ -1,24 +1,21 @@
 // ----- Imports ----- //
 
-import { createElement as h, FC, ReactElement, ReactNode } from 'react';
+import { createElement as h, ReactElement, ReactNode } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
-import { from, until } from '@guardian/src-foundations/mq';
+import { Breakpoint, from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { BodyImageProps, Role } from 'image';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, remSpace } from '@guardian/src-foundations';
 import Audio from 'components/audio';
 import Video from 'components/video';
 import Paragraph from 'components/paragraph';
-import BodyImage from 'components/bodyImage';
-import BodyImageThumbnail from 'components/bodyImageThumbnail';
-import FigCaption from 'components/figCaption';
-import BodyImageHalfWidth from 'components/bodyImageHalfWidth';
+import BodyImage from '@guardian/image-rendering/src/components/bodyImage';
+import FigCaption from '@guardian/image-rendering/src/components/figCaption';
 import Anchor from 'components/anchor';
 import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactiveAtom';
 import { Design } from '@guardian/types/Format';
@@ -31,6 +28,7 @@ import { fromUnsafe, Result, toOption } from '@guardian/types/result';
 import Bullet from 'components/bullet';
 import Pullquote  from 'components/pullquote';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
+import Credit from 'components/credit';
 
 
 // ----- Renderer ----- //
@@ -386,15 +384,40 @@ const Tweet = (props: { content: NodeList; format: Format; key: number }): React
         ...Array.from(props.content).map(textElement(props.format)),
     );
 
-const imageComponentFromRole = (role: Role): FC<BodyImageProps> => {
-    if (role === Role.Thumbnail) {
-        return BodyImageThumbnail;
-    } else if (role === Role.HalfWidth) {
-        return BodyImageHalfWidth;
-    } else {
-        return BodyImage;
+const captionHeadingStyles = css`
+    ${headline.xxxsmall()}
+    color: ${neutral[86]};
+    margin: 0 0 ${remSpace[3]};
+    display: block;
+`;
+
+const captionElement = (format: Format) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(captionElement(format));
+    switch (node.nodeName) {
+        case 'STRONG':
+            return (format.design === Design.Media)
+                ? h('h2', { css: captionHeadingStyles, key }, children)
+                : children
+        case 'BR':
+            return null;
+        case 'EM':
+            return h('em', { css: css`${textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold'})}`, key }, children);
+        case 'A':
+            return h(Anchor, {
+                href: withDefault('')(getHref(node)),
+                className: format.design === Design.Media ? css`color: ${neutral[86]};` : undefined,
+                format,
+            }, children);
+        case '#text':
+            return h('span', null, text);
+        default:
+            return textElement(format)(node, key);
     }
 }
+
+const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
+    Array.from(doc.childNodes).map(captionElement(format));
 
 const render = (format: Format, excludeStyles = false) =>
     (element: BodyElement, key: number): ReactNode => {
@@ -406,18 +429,25 @@ const render = (format: Format, excludeStyles = false) =>
                     : text(element.doc, format)
 
             case ElementKind.Image: {
-                const { caption, credit, role } = element;
-                const ImageComponent = pipe2(
-                    role,
-                    map(imageComponentFromRole),
-                    withDefault(BodyImage),
-                );
+                const { caption, credit, nativeCaption } = element;
 
-                const figcaption = withDefault(Role.Thumbnail)(role) !== Role.HalfWidth
-                    ? h(FigCaption, { format, caption, credit })
-                    : null;
-
-                return h(ImageComponent, { image: element, format }, figcaption);
+                return h(BodyImage, {
+                    caption: map<DocumentFragment, ReactNode>(cap =>
+                        [
+                            renderCaption(cap, format),
+                            h(Credit, { credit, format }),
+                        ],
+                    )(caption),
+                    format,
+                    supportsDarkMode: true,
+                    lightbox: some({
+                        className: 'js-launch-slideshow',
+                        caption: nativeCaption,
+                        credit,
+                    }),
+                    image: element,
+                    leftColumnBreakpoint: some<Breakpoint>('wide'),
+                });
             }
 
             case ElementKind.Pullquote: {
@@ -591,7 +621,11 @@ const render = (format: Format, excludeStyles = false) =>
                     'className': 'native-video',
                     css: styles
                 }
-                const figcaption = h(FigCaption, { format, caption, credit: none });
+                const figcaption = h(FigCaption, {
+                    format,
+                    supportsDarkMode: true,
+                    children: map((cap: DocumentFragment) => renderCaption(cap, format))(caption),
+                });
                 return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
             }
         }
@@ -614,5 +648,6 @@ export {
     standfirstText as renderStandfirstText,
     getHref,
     transformHref,
-    plainTextElement
+    plainTextElement,
+    renderCaption,
 };
