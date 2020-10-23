@@ -16,13 +16,13 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
 
 const SignInGateMain = React.lazy(() => {
-    const { start, end } = initPerf('SignInGateMain');
+    const { start, end } = initPerf('SignInGateMainVar2');
     start();
     return import(
-        /* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
+        /* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMainVar2'
     ).then((module) => {
         end();
-        return { default: module.SignInGateMain };
+        return { default: module.SignInGateMainVar2 };
     });
 });
 

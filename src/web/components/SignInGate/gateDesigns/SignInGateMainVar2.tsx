@@ -149,7 +149,7 @@ const hideElementsCss = `
     }
 `;
 
-export const SignInGateMain = ({
+export const SignInGateMainVar2 = ({
     signInUrl,
     guUrl,
     dismissGate,
@@ -168,13 +168,16 @@ export const SignInGateMain = ({
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
-                Registering is a free and simple way to help us sustain our
-                independent Guardian journalism.
+                We need more readers to register with us to help sustain our
+                independent, quality journalism. Without you taking this simple
+                step, we miss out on revenues from personalised advertising - a
+                critical source of funding for our future.
             </p>
             <p className={bodyText}>
-                When you register with us we are able to improve our news
-                experience for you and for others. You will always be able to
-                control your own&nbsp;
+                Through doing so, you&apos;ll help ensure that our reporting
+                remains freely available to everyone, and if we recognise you
+                when you come back, we can improve your news experience too. You
+                can still control your own&nbsp;
                 <button
                     data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
@@ -185,7 +188,7 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you.
+                . Thank you
             </p>
             <div className={actionButtons}>
                 <LinkButton
