@@ -5,7 +5,7 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
-import { basePx, darkModeCss, icons } from 'styles';
+import { basePx, darkModeCss } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
@@ -30,6 +30,7 @@ import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
 import Bullet from 'components/bullet';
 import Pullquote  from 'components/pullquote';
+import { SvgArrowRightStraight } from '@guardian/src-icons';
 
 
 // ----- Renderer ----- //
@@ -317,19 +318,16 @@ const richLinkStyles = (format: Format): SerializedStyles => {
             ${textSans.medium()};
             padding: 0;
             margin: 0;
+            display: inline-flex;
         }
-
-        button::before {
-            ${icons}
-            content: '\\e005';
+        svg{
+            width: 1.0625rem;
             border-radius: 100%;
             border: solid 1px ${neutral[7]};
-            font-size: 12px;
-            padding: 3px 6px 4px 6px;
+            padding: 4px;
             display: inline-block;
             margin-right: ${remSpace[2]};
         }
-
         a {
             display:inline-block;
             text-decoration: none;
@@ -350,8 +348,9 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
         ${darkModeCss`
             background-color: ${neutral[20]};
-            button::before {
+            svg {
                 border-color: ${neutral[60]};
+                fill: ${neutral[60]};
             }
 
             a, h1, button {
@@ -363,7 +362,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 const RichLink = (props: { url: string; linkText: string; format: Format }): ReactElement =>
     styledH('aside', { css: richLinkStyles(props.format) },
-        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, 'Read more')])
+        styledH('a', { href: props.url }, [h('h1', null, props.linkText), h('button', null, [h(SvgArrowRightStraight), 'Read more'])])
     );
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
