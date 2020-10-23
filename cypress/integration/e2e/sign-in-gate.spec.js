@@ -199,32 +199,6 @@ describe('Sign In Gate Tests', function () {
         });
     });
 
-    describe('SignInGatePatientia', function () {
-        beforeEach(function () {
-            // sign in gate patientia runs from 999901-1000000 MVT IDs, so 999901 forces user into test variant
-            setMvtCookie('999901');
-
-            // set article count to be min number to view gate
-            setArticleCount(3);
-        });
-
-        it('should load the sign in gate', function () {
-            visitArticleAndScrollToGateForLazyLoad();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
-        });
-
-        it('should remove gate when the dismiss button is clicked', function () {
-            visitArticleAndScrollToGateForLazyLoad();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
-
-            cy.get('[data-cy=sign-in-gate-patientia_dismiss]').click();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('not.be.visible');
-        });
-    });
-
     describe('SignInGatePageview', function () {
         beforeEach(function () {
             setMvtCookie('790000');
