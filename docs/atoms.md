@@ -123,7 +123,7 @@ In DCR there are 5 files that need to be edited to fully add your atom:
 
 ### content.d.ts
 
-This file maps data provided by frontend to data types defined in DCR, so make sure that you define an interface for your atom which contains all of the fields required, and whether. It is a good idea to add an optional [index field](https://github.com/guardian/dotcom-rendering/blob/main/src/lib/content.d.ts#L21) (which will not be populated by frontend, but will be populated and used internally in DCR).
+This file maps data provided by frontend to data types defined in DCR, so make sure that you define an interface for your atom which contains all of the fields required. It is a good idea to add an optional [index field](https://github.com/guardian/dotcom-rendering/blob/main/src/lib/content.d.ts#L21) (which will not be populated by frontend, but will be populated and used internally in DCR).
 
 ### index.d.ts
 
