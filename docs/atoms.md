@@ -118,6 +118,7 @@ The [atoms-rendering](https://github.com/guardian/atoms-rendering) project is no
 
 ### Implementing an atom
 
+If your atom is ready to implement in DCR use either `yarn link` to use your local atoms-rendering library (for development only) or update the atoms-rendering package in [package.json](https://github.com/guardian/dotcom-rendering/blob/main/package.json#L39).
 In DCR there are 5 files that need to be edited to fully add your atom:
 
 ### content.d.ts
