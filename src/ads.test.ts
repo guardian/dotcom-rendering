@@ -9,7 +9,7 @@ import { ElementKind, BodyElement } from 'bodyElement';
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
 const mockFormat: Format = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Article,
     display: Display.Standard,
 };

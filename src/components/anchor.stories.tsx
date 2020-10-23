@@ -21,7 +21,7 @@ const Default: FC = () =>
         format={{
             design: Design.Article,
             display: Display.Standard,
-            pillar: selectPillar(Pillar.News)
+            theme: selectPillar(Pillar.News)
         }}
         href={link()}
     >

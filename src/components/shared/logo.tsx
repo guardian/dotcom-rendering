@@ -9,7 +9,7 @@ import { Item, getFormat } from 'item';
 import { pipe2 } from 'lib';
 import { map, withDefault } from '@guardian/types/option';
 import { textSans } from '@guardian/src-foundations/typography';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 
 interface Props {
     branding: Branding;
@@ -19,7 +19,7 @@ interface Props {
 const styles = (format: Format,
     lightModeImage: string,
     darkModeImage?: string): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
     return css`
         margin: ${remSpace[9]} 0;
         ${textSans.small()}

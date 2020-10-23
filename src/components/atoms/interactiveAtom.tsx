@@ -2,7 +2,7 @@ import React, { FC, ReactElement, createElement as h } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles, PillarStyles } from 'pillarStyles';
+import { getThemeStyles, ThemeStyles } from 'themeStyles';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import { pageFonts } from "styles";
@@ -15,11 +15,11 @@ export interface InteractiveAtomProps {
     format: Format;
 }
 
-const InteractiveAtomStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+const InteractiveAtomStyles = (themeStyles: ThemeStyles): SerializedStyles => css`
     margin: 0;
 
     a {
-        color: ${pillarStyles.kicker};
+        color: ${themeStyles.kicker};
         text-decoration: none;
         border-bottom: 0.0625rem solid ${neutral[86]};
     }
@@ -43,7 +43,7 @@ const atomScript = `
 
 const InteractiveAtom: FC<InteractiveAtomProps> = (props: InteractiveAtomProps): ReactElement => {
     const { html, styles, js, format } = props;
-    const pillarStyles = getPillarStyles(format.pillar);
+    const pillarStyles = getThemeStyles(format.theme);
     const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
     const script = pipe2(
         js,

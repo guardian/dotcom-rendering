@@ -5,7 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 
 import { Contributor, isSingleContributor } from 'contributor';
 import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import Img from 'components/img';
 import { remSpace } from '@guardian/src-foundations';
 import { map, withDefault } from '@guardian/types/option';
@@ -33,8 +33,8 @@ const styles = (background: string): SerializedStyles => css`
     margin-top: ${remSpace[1]};
 `;
 
-const getStyles = ({ pillar }: Format): SerializedStyles => {
-    const colours = getPillarStyles(pillar);
+const getStyles = ({ theme }: Format): SerializedStyles => {
+    const colours = getThemeStyles(theme);
     return styles(colours.inverted);
 }
 

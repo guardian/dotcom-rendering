@@ -2,6 +2,8 @@
 
 import { Option, fromNullable, none, map } from '@guardian/types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
+import { Role } from '@guardian/image-rendering/src/image';
+
 import { articleContributors } from 'capi';
 import { srcsetWithWidths, src, Dpr, Image } from 'image';
 import { pipe2 } from 'lib';
@@ -41,7 +43,7 @@ const parseContributors = (salt: string, content: Content): Contributor[] =>
                 credit: none,
                 caption: none,
                 alt: none,
-                role: none,
+                role: Role.Standard,
                 nativeCaption: none,
             })),
         ),
