@@ -169,14 +169,25 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
                 <Button priority="secondary" size="xsmall" type="submit">
                     Share with the Guardian
                 </Button>
-                <Link
-                    subdued={true}
-                    priority="secondary"
-                    target="_blank"
-                    href="https://www.theguardian.com/help/terms-of-service"
+                <div
+                    className={css`
+                        a {
+                            border: 0;
+                        }
+                        a:hover {
+                            border: 0;
+                        }
+                    `}
                 >
-                    Terms and conditions
-                </Link>
+                    <Link
+                        subdued={true}
+                        priority="secondary"
+                        target="_blank"
+                        href="https://www.theguardian.com/help/terms-of-service"
+                    >
+                        Terms and conditions
+                    </Link>
+                </div>
             </div>
         </form>
     );
