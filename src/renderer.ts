@@ -597,7 +597,7 @@ const render = (format: Format, excludeStyles = false) =>
             }
 
             case ElementKind.AudioAtom: {
-                const { pillar } = format;
+                const { theme: pillar } = format;
                 const audioAtomStyles = css`
                     figure {
                         margin: 0;
