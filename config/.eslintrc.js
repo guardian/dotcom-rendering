@@ -24,6 +24,7 @@ module.exports = {
         'eqeqeq': 'error',
         // Avoid let when variable is never re-assigned
         'prefer-const': 'error',
+        'no-trailing-spaces': 'error',
         'indent': [
             'error',
             4,

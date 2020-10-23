@@ -153,7 +153,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
         'show-elements': 'all',
         'show-related': 'true'
     })
-  
+
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
 }
 
