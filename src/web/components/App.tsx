@@ -329,18 +329,17 @@ export const App = ({ CAPI, NAV }: Props) => {
                 pageViewId: window.guardian?.config?.ophan?.pageViewId,
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
-            if (countryCode === 'AU') {
-                if (window?.guardian?.config?.tests?.useAusCmpVariant) {
-                    cmp.init({
-                        country: 'AU',
-                        pubData,
-                    });
-                } else {
-                    cmp.init({ pubData, country: 'GB' }); // Fallback to TCFv2
-                }
-            } else {
+
+            if (
+                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
+            ) {
                 cmp.init({
                     country: countryCode,
+                    pubData,
+                });
+            } else {
+                cmp.init({
+                    isInUsa: countryCode === 'US',
                     pubData,
                 });
             }
