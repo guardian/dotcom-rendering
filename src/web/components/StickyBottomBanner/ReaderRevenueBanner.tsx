@@ -134,7 +134,6 @@ export const canShow = async ({
         alreadyVisitedCount,
         engagementBannerLastClosedAt,
         subscriptionBannerLastClosedAt,
-        switches,
         hasConsentedToArticleCounts,
     });
     const forcedVariant = getForcedVariant('banner');
