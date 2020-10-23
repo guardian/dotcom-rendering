@@ -135,55 +135,6 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
     return allThirdPartyEmbeds;
 }
 
-// const includesTweets = (content: Content): boolean => {
-//     const body = content?.blocks?.body;
-
-//     if (!body) {
-//         return false
-//     }
-
-//     return body
-//         .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-//         .some(Boolean)
-
-// }
-
-// const includesInstagram = (content: Content): boolean => {
-//     const body = content?.blocks?.body;
-
-//     if (!body) {
-//         return false
-//     }
-
-//     return body
-//         .flatMap(block => block.elements.some(element => element.type === ElementType.INSTAGRAM))
-//         .some(Boolean)
-// }
-
-// const includesYoutube = (content: Content): boolean => {
-//     const body = content?.blocks?.body;
-
-//     if (!body) {
-//         return false
-//     }
-
-//     return body
-//         .flatMap(block => block.elements.some(element => element.type === ElementType.VIDEO))
-//         .some(Boolean)
-// }
-
-// const includesSpotify = (content: Content): boolean => {
-//     const body = content?.blocks?.body;
-
-//     if (!body) {
-//         return false
-//     }
-
-//     return body
-//         .flatMap(block => block.elements.some(element => element.type === ElementType.AUDIO))
-//         .some(Boolean)
-// }
-
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
         .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
