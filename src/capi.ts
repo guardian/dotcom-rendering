@@ -104,7 +104,12 @@ const includesTweets = (content: Content): boolean => {
 
 const requiresInlineStyles = (): boolean => {
     // temporarily disable `unsafe-inline` in csp
-    // return !!(content.commentable? || content?.atoms?.quizzes || content?.atoms?.audios || content?.atoms?.charts);
+    // return !!(
+    //     content.commentable? ||
+    //     content?.atoms?.quizzes ||
+    //     content?.atoms?.audios ||
+    //     content?.atoms?.charts
+    // );
     return false;
 }
 
