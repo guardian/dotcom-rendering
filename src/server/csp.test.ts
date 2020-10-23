@@ -47,7 +47,7 @@ describe('Third party embeds function returns true when element type is found in
         const newContentYoutube = getThirdPartyEmbeds(contentYoutube)
         expect(newContentYoutube.youtube).toBe(true);
     });
-    test('returns true when twitter embed found', () => {
+    test('returns true when spotify embed found', () => {
         const newContentSpotify = getThirdPartyEmbeds(contentSpotify)
         expect(newContentSpotify.spotify).toBe(true);
     });
