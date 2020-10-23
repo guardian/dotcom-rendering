@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { includesTweets, inlineStyleAtoms } from 'capi';
+import { includesTweets, inlineStyleAtoms, requiresInlineStyles } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -137,7 +137,7 @@ function render(
     const item = fromCapi({ docParser, salt: imageSalt })(request);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const hasTweets = includesTweets(request.content);
-    const inlineStyles = inlineStyleAtoms(request.content);
+    const inlineStyles = requiresInlineStyles();
     const body = renderBody(item, request);
     const head = renderHead(item, request, hasTweets, inlineStyles, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;

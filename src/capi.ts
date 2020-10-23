@@ -102,8 +102,10 @@ const includesTweets = (content: Content): boolean => {
         .some(Boolean)
 }
 
-const inlineStyleAtoms = (content: Content): boolean => {
-    return !!(content?.atoms?.quizzes || content?.atoms?.audios || content?.atoms?.charts);
+const requiresInlineStyles = (): boolean => {
+    // temporarily disable `unsafe-inline` in csp
+    // return !!(content.commentable? || content?.atoms?.quizzes || content?.atoms?.audios || content?.atoms?.charts);
+    return false;
 }
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
@@ -177,5 +179,5 @@ export {
     maybeCapiDate,
     paidContentLogo,
     articleMainImage,
-    inlineStyleAtoms
+    requiresInlineStyles
 };
