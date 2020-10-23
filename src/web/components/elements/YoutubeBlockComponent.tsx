@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 
@@ -43,19 +43,19 @@ const expiredTextWrapperStyles = css`
     flex-direction: row;
     align-items: center;
 
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 5px;
-    padding-right: 60px;
+    padding-top: ${space[4]}px;
+    padding-bottom: ${space[4]}px;
+    padding-left: ${space[1]}px;
+    padding-right: ${space[12]}px;
     color: ${palette.neutral[100]};
     background-color: ${palette.neutral[20]};
 `;
 
 const expiredSVGWrapperStyles = css`
-    padding-right: 5px;
+    padding-right: ${space[1]}px;
     svg {
-        width: 50px;
-        height: 50px;
+        width: ${space[12]}px;
+        height: ${space[12]}px;
         fill: ${palette.neutral[100]};
     }
 `;
