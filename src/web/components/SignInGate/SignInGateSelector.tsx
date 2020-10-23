@@ -14,7 +14,6 @@ import {
 import { getCookie } from '@frontend/web/browser/cookie';
 
 // Sign in Gate A/B Tests
-import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 import { signInGatePageview } from '@root/src/web/experiments/tests/sign-in-gate-pageview';
@@ -24,8 +23,6 @@ import { signInGatePersonalisedAdCopy } from '@root/src/web/experiments/tests/si
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-import { signInGateComponent as gatePatientiaControl } from '@root/src/web/components/SignInGate/gates/patientia-control';
-import { signInGateComponent as gatePatientiaVariant } from '@root/src/web/components/SignInGate/gates/patientia-variant';
 import { signInGateComponent as gatePageviewVariant1 } from '@root/src/web/components/SignInGate/gates/pageview-variant-1';
 import { signInGateComponent as gatePageviewVariant2 } from '@root/src/web/components/SignInGate/gates/pageview-variant-2';
 import { signInGateComponent as gatePageviewVariant3 } from '@root/src/web/components/SignInGate/gates/pageview-variant-3';
@@ -84,7 +81,6 @@ type GateTestMap = { [name: string]: SignInGateComponent };
    and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
 */
 const tests: ReadonlyArray<ABTest> = [
-    signInGatePatientia,
     signInGateMainVariant,
     signInGateMainControl,
     signInGatePageview,
@@ -93,8 +89,6 @@ const tests: ReadonlyArray<ABTest> = [
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-    'patientia-control-1': gatePatientiaControl,
-    'patientia-variant-1': gatePatientiaVariant,
     'main-control-2': gateMainControl,
     'main-variant-2': gateMainVariant,
     'pageview-variant-1': gatePageviewVariant1,
@@ -110,7 +104,6 @@ const testVariantToGateMapping: GateTestMap = {
 const testIdToComponentId: { [key: string]: string } = {
     SignInGateMainVariant: 'main_variant_2',
     SignInGateMainControl: 'main_control_2',
-    SignInGatePatientia: 'patientia_test',
     SignInGatePageview: 'pageview_test',
     SignInGatePageviewUs: 'pageview_us_test',
     SignInGatePersonalisedAdCopy: 'personalised_ad_copy_test',
