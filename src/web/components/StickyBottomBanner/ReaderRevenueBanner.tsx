@@ -79,7 +79,6 @@ const buildPayload = (props: BuildPayloadProps) => {
                 props.subscriptionBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
-            switches: props.switches,
             weeklyArticleHistory: getWeeklyArticleHistory(),
             hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
         },
@@ -111,7 +110,6 @@ export const canShow = async ({
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
     subscriptionBannerLastClosedAt,
-    switches,
 }: CanShowProps): Promise<CanShowResult> => {
     if (!remoteBannerConfig) return Promise.resolve({ result: false });
 
