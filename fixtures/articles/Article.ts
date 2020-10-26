@@ -3464,6 +3464,19 @@ export const Article: CAPIType = {
                         '<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
                 },
                 {
+                    profileURL:
+                        'http://www.theguardian.com/discussion/user/id/13107777',
+                    profileName: 'imperium3',
+                    dateTime: '30 January 2017 10:56pm',
+                    avatarURL: 'https://avatar.guim.co.uk/user/13107777',
+                    _type:
+                        'model.dotcomrendering.pageElements.CommentBlockElement',
+                    body:
+                        "<p>Capaldi is an excellent Doctor, arguably the best of the reboot era. It's a shame that his tenure has coincided with some truly awful writing which rarely gave him the chance to shine.</p>",
+                    permalink:
+                        'https://discussion.theguardian.com/comment-permalink/92214999',
+                },
+                {
                     _type:
                         'model.dotcomrendering.pageElements.TextBlockElement',
                     html:
