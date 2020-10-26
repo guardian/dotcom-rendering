@@ -95,5 +95,4 @@ function csp(
 export {
     csp,
     assetHashes,
-    buildCsp,
 };

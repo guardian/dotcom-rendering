@@ -1,6 +1,6 @@
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { getThirdPartyEmbeds } from 'capi'
-import { articleContentWith } from 'item.test';
+import { articleContentWith } from 'helperTest'
 
 const contentTwitter = articleContentWith({
     type: ElementType.TWEET,

@@ -4,7 +4,6 @@ import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
@@ -16,6 +15,7 @@ import { withDefault } from '@guardian/types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
 import { toOption, map } from '@guardian/types/result';
+import {articleContentWith} from 'helperTest'
 
 const articleContent = {
     id: "",
@@ -49,24 +49,6 @@ const reviewContent = {
         starRating: 4
     }
 }
-
-export const articleContentWith = (element: BlockElement, atoms?: Atoms) => ({
-    ...articleContent,
-    atoms,
-    blocks: {
-        body: [
-            {
-                id: "",
-                bodyHtml: "",
-                bodyTextSummary: "",
-                attributes: {},
-                published: true,
-                contributors: [],
-                elements: [element]
-            }
-        ]
-    }
-})
 
 const immersive = {
     id: "",
