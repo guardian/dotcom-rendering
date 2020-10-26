@@ -66,9 +66,14 @@ const assetHashes = (assets: string[]): string =>
 //     child-src https: blob:
 // `.trim()
 
-const buildCsp = ({ styles, scripts }: Assets, thirdPartyEmbed : ThirdPartyEmbeds): string => `
+const styleSrc = (styles: string[], twitter: boolean, hasInlineStyles: boolean): string => {
+    const urls = `https://interactive.guim.co.uk ${twitter ? 'https://platform.twitter.com' : ''}`;
+    return hasInlineStyles ? `'self' ${urls} 'unsafe-inline';` : `'self' ${assetHashes(styles)} ${urls};`;
+}
+
+const buildCsp = ({ styles, scripts }: Assets, thirdPartyEmbed : ThirdPartyEmbeds, hasInlineStyles: boolean): string => `
     default-src 'self';
-    style-src 'self' ${assetHashes(styles)} https://interactive.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com' : ''};
+    style-src ${styleSrc(styles, thirdPartyEmbed.twitter, hasInlineStyles)}
     img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:' : ''};
     script-src 'self' ${assetHashes(scripts)} ${thirdPartyEmbed.instagram ? 'http://www.instagram.com/embed.js' : ''} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://cdn.syndication.twimg.com' : ''};
     frame-src https://www.theguardian.com https://www.scribd.com ${thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''} ${thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''} https://player.vimeo.com/ ${thirdPartyEmbed.twitter ? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com' : ''};
@@ -80,13 +85,15 @@ function csp(
     item: Item,
     additionalAssets: Assets,
     thirdPartyEmbed: ThirdPartyEmbeds,
+    hasInlineStyles: boolean
 ): string {
     const interactives = interactiveAssets(item);
     const assets = {
         styles: [ ...interactives.styles, ...additionalAssets.styles ],
         scripts: [ ...interactives.scripts, ...additionalAssets.scripts ],
     };
-    return buildCsp(assets, thirdPartyEmbed);
+
+    return buildCsp(assets, thirdPartyEmbed, hasInlineStyles);
 }
 
 

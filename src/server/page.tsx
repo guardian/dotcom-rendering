@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { getThirdPartyEmbeds, ThirdPartyEmbeds } from 'capi';
+import { getThirdPartyEmbeds, requiresInlineStyles, ThirdPartyEmbeds } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -49,6 +49,7 @@ const scriptName = ({ design, display }: Format): Option<string> => {
         case Design.Analysis:
         case Design.Review:
         case Design.Article:
+        case Design.Quiz:
             return some('article.js');
         case Design.Media:
             return some('media.js');
@@ -84,12 +85,14 @@ function renderHead(
     thirdPartyEmbeds: ThirdPartyEmbeds,
     itemStyles: string,
     emotionIds: string[],
+    inlineStyles: boolean,
 ): string {
     const generalStyles = styles(item);
-    const cspString = csp(item, {
-        scripts: [ atomScript ],
-        styles: [ generalStyles, itemStyles, atomCss ],
-    }, thirdPartyEmbeds);
+    const cspString = csp(
+        item, {
+            scripts: [ atomScript ],
+            styles: [ generalStyles, itemStyles, atomCss ],
+        }, thirdPartyEmbeds, inlineStyles);
     const meta = h(Meta, { title: request.content.webTitle, cspString});
 
     return `
@@ -132,7 +135,8 @@ function render(
     const clientScript = map(getAssetLocation)(scriptName(item));
     const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
     const body = renderBody(item, request);
-    const head = renderHead(item, request, thirdPartyEmbeds, body.css, body.ids);
+    const inlineStyles = requiresInlineStyles();
+    const head = renderHead(item, request, thirdPartyEmbeds, body.css, body.ids, inlineStyles);
     const scripts = <Scripts clientScript={clientScript} twitter={thirdPartyEmbeds.twitter} />;
 
 

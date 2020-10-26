@@ -17,6 +17,7 @@ import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
+import { QuestionType } from '@guardian/atoms-rendering/dist/QuizAtom';
 
 // ----- Types ----- //
 
@@ -40,7 +41,8 @@ const enum ElementKind {
     QandaAtom,
     ProfileAtom,
     TimelineAtom,
-    ChartAtom
+    ChartAtom,
+    QuizAtom
 }
 
 type Image = ImageData & {
@@ -122,6 +124,12 @@ interface TimelineAtom {
     events: TimelineEvent[];
 }
 
+interface QuizAtom {
+    kind: ElementKind.QuizAtom;
+    id: string;
+    questions: QuestionType[];
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -167,7 +175,8 @@ type BodyElement = {
   | QandaAtom
   | ProfileAtom
   | TimelineAtom
-  | ChartAtom;
+  | ChartAtom
+  | QuizAtom;
 
 type Elements = BlockElement[] | undefined;
 

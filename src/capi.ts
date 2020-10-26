@@ -135,6 +135,17 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
     return allThirdPartyEmbeds;
 }
 
+const requiresInlineStyles = (): boolean => {
+    // temporarily disable `unsafe-inline` in csp
+    // return !!(
+    //     content?.fields?.commentable ||
+    //     content?.atoms?.quizzes ||
+    //     content?.atoms?.audios ||
+    //     content?.atoms?.charts
+    // );
+    return false;
+}
+
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
         .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
@@ -207,5 +218,6 @@ export {
     maybeCapiDate,
     paidContentLogo,
     articleMainImage,
-    checkForThirdPartyEmbed
+    checkForThirdPartyEmbed,
+    requiresInlineStyles
 };
