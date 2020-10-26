@@ -36,6 +36,11 @@ const profileWrapperStyles = css`
     > a {
         border-bottom: none;
     }
+    :hover {
+        > a {
+            border-bottom: none;
+        }
+    }
 `;
 
 const usernameWrapperStyles = css`
