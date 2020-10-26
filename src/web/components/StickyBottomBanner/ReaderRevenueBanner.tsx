@@ -47,7 +47,6 @@ type BaseProps = {
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
     subscriptionBannerLastClosedAt?: string;
-    switches: { [key: string]: boolean };
     weeklyArticleHistory?: WeeklyArticleHistory;
 };
 
@@ -80,7 +79,6 @@ const buildPayload = (props: BuildPayloadProps) => {
                 props.subscriptionBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
-            switches: props.switches,
             weeklyArticleHistory: getWeeklyArticleHistory(),
             hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
         },
@@ -112,7 +110,6 @@ export const canShow = async ({
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
     subscriptionBannerLastClosedAt,
-    switches,
 }: CanShowProps): Promise<CanShowResult> => {
     if (!remoteBannerConfig) return Promise.resolve({ result: false });
 
@@ -137,7 +134,6 @@ export const canShow = async ({
         alreadyVisitedCount,
         engagementBannerLastClosedAt,
         subscriptionBannerLastClosedAt,
-        switches,
         hasConsentedToArticleCounts,
     });
     const forcedVariant = getForcedVariant('banner');

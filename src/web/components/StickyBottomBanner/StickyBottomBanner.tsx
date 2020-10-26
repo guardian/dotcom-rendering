@@ -70,10 +70,6 @@ const buildReaderRevenueBannerConfig = (
                 subscriptionBannerLastClosedAt: getBannerLastClosedAt(
                     'subscriptionBannerLastClosedAt',
                 ),
-                switches: {
-                    remoteSubscriptionsBanner: !!CAPI.config
-                        .remoteSubscriptionsBanner,
-                },
             }),
         /* eslint-disable-next-line react/jsx-props-no-spreading */
         show: (meta: any) => () => <ReaderRevenueBanner {...meta} />,
