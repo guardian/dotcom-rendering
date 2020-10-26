@@ -54,6 +54,12 @@ const avatarStyles = css`
     margin-right: ${space[2]}px;
 `;
 
+const imageStyles = css`
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+`;
+
 export const CommentBlockComponent = ({
     body,
     avatarURL,
@@ -73,13 +79,7 @@ export const CommentBlockComponent = ({
                     href={profileURL}
                     aria-hidden="true"
                 >
-                    <img
-                        className={css`
-                            border-radius: 50%;
-                        `}
-                        src={avatarURL}
-                        alt=""
-                    />
+                    <img className={imageStyles} src={avatarURL} alt="avatar" />
                 </a>
                 <div className={usernameWrapperStyles}>
                     <a
