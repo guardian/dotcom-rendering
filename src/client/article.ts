@@ -12,7 +12,6 @@ import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'clie
 import FooterCcpa from 'components/shared/footer';
 
 
-
 // ----- Run ----- //
 
 const followText = 'Follow ';
@@ -123,7 +122,15 @@ function insertEpic(): void {
     }
 }
 
-
+function footerInit(): void {
+    const isAndroid = /(android)/i.test(navigator.userAgent);
+    const footer = document.getElementById('articleFooter');
+    if (footer && isAndroid){
+        footer.innerHTML = '';
+    } else {
+        isCCPA();
+    }
+}
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
@@ -248,4 +255,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
-isCCPA();
+footerInit();
