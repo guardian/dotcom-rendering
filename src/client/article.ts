@@ -10,6 +10,8 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { AudioAtom } from '@guardian/atoms-rendering';
+import { QuizAtom } from '@guardian/atoms-rendering';
+import { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
 import FooterCcpa from 'components/shared/footer';
 
 
@@ -253,7 +255,22 @@ function initAudioAtoms(): void {
             const title = atom.getAttribute('title');
             const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
             if (id && trackUrl && kicker && title && pillar) {
-                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, pillar, kicker, title }), atom)
+                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, pillar, kicker, title }), atom);
+            }
+        })
+}
+
+function hydrateQuizAtoms(): void {
+    Array.from(document.querySelectorAll('.js-quiz'))
+        .forEach(atom => {
+            const props = atom.querySelector('.js-quiz-params')?.innerHTML;
+            try {
+                if (props) {
+                    const quizProps: unknown = JSON.parse(props.replace(/&quot;/g, '"'));
+                    ReactDOM.hydrate(h(QuizAtom, quizProps as QuizAtomType), atom);
+                }
+            } catch(e) {
+                console.error(e);
             }
         })
 }
@@ -269,4 +286,5 @@ insertEpic();
 callouts();
 hasSeenCards();
 initAudioAtoms();
+hydrateQuizAtoms();
 footerInit();

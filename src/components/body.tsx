@@ -64,7 +64,8 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
         item.design === Design.Analysis ||
         item.design === Design.Review ||
         item.design === Design.Article ||
-        item.design === Design.Interactive
+        item.design === Design.Interactive ||
+        item.design === Design.Quiz
     ) {
         return <Standard item={item}>{render(item, body)}</Standard>;
     }

@@ -21,7 +21,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { AudioAtom, ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
+import { AudioAtom, QuizAtom, ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -638,6 +638,12 @@ const render = (format: Format, excludeStyles = false) =>
                     }
                 `;
                 return styledH('div', { ...element, pillar, className: 'js-audio-atom', css: audioAtomStyles }, h(AudioAtom, { ...element, pillar }))
+            }
+
+            case ElementKind.QuizAtom: {
+                const props = JSON.stringify(element);
+                const hydrationParams = h('script', { className: 'js-quiz-params', type: 'application/json' }, props);
+                return h('div', { className: 'js-quiz' }, [hydrationParams, h(QuizAtom, { ...element })]);
             }
         }
     };

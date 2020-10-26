@@ -102,6 +102,17 @@ const includesTweets = (content: Content): boolean => {
         .some(Boolean)
 }
 
+const requiresInlineStyles = (): boolean => {
+    // temporarily disable `unsafe-inline` in csp
+    // return !!(
+    //     content?.fields?.commentable ||
+    //     content?.atoms?.quizzes ||
+    //     content?.atoms?.audios ||
+    //     content?.atoms?.charts
+    // );
+    return false;
+}
+
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
         .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
@@ -172,5 +183,6 @@ export {
     includesTweets,
     maybeCapiDate,
     paidContentLogo,
-    articleMainImage
+    articleMainImage,
+    requiresInlineStyles
 };

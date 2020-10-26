@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { includesTweets } from 'capi';
+import { includesTweets, requiresInlineStyles } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -49,6 +49,7 @@ const scriptName = ({ design, display }: Format): Option<string> => {
         case Design.Analysis:
         case Design.Review:
         case Design.Article:
+        case Design.Quiz:
             return some('article.js');
         case Design.Media:
             return some('media.js');
@@ -82,14 +83,19 @@ function renderHead(
     item: Item,
     request: RenderingRequest,
     hasTweets: boolean,
+    hasInlineStyles: boolean,
     itemStyles: string,
     emotionIds: string[],
 ): string {
     const generalStyles = styles(item);
-    const cspString = csp(item, {
-        scripts: [ atomScript ],
-        styles: [ generalStyles, itemStyles, atomCss ],
-    }, hasTweets);
+    const cspString = csp(
+        item,
+        {
+            scripts: [ atomScript ],
+            styles: [ generalStyles, itemStyles, atomCss ],
+        },
+        hasTweets,
+        hasInlineStyles);
     const meta = h(Meta, { title: request.content.webTitle, cspString});
 
     return `
@@ -131,8 +137,9 @@ function render(
     const item = fromCapi({ docParser, salt: imageSalt })(request);
     const clientScript = map(getAssetLocation)(scriptName(item));
     const hasTweets = includesTweets(request.content);
+    const inlineStyles = requiresInlineStyles();
     const body = renderBody(item, request);
-    const head = renderHead(item, request, hasTweets, body.css, body.ids);
+    const head = renderHead(item, request, hasTweets, inlineStyles, body.css, body.ids);
     const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;
 
 
