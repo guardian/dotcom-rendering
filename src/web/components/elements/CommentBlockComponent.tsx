@@ -31,6 +31,10 @@ const profileWrapperStyles = css`
     display: flex;
     margin-top: ${space[4]}px;
     margin-bottom: ${space[12]}px;
+    /* in order to remove border-bottom styles applied to all 'a' tags, TODO: avoid applying style to all 'a' tags */
+    > a {
+        border-bottom: none;
+    }
 `;
 
 const usernameWrapperStyles = css`
@@ -42,8 +46,6 @@ const avatarStyles = css`
     width: ${space[12]}px;
     height: ${space[12]}px;
     margin-right: ${space[2]}px;
-    //still can't overwrite inherited style from paraStyles
-    border-bottom: none !important;
 `;
 
 export const CommentBlockComponent = ({
