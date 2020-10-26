@@ -33,11 +33,11 @@ const profileWrapperStyles = css`
     margin-top: ${space[4]}px;
     margin-bottom: ${space[12]}px;
     /* in order to remove border-bottom styles applied to all 'a' tags, TODO: avoid applying style to all 'a' tags */
-    > a {
+    a {
         border-bottom: none;
     }
     :hover {
-        > a {
+        a {
             border-bottom: none;
         }
     }
