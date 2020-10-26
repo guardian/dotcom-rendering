@@ -10,9 +10,6 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import FooterCcpa from 'components/shared/footer';
-import { Footer } from '@guardian/src-footer';
-import { article } from 'fixtures/item';
-
 
 
 // ----- Run ----- //
