@@ -127,15 +127,6 @@ function parseAtom(
         }
 
         case "chart": {
-            const hideChartAtoms = true;
-            if (hideChartAtoms) {
-                return err(`
-                    Chart atoms not currently supported. We need to find a solution
-                    to handling the inline styles.
-                    style-src 'unsafe-hashes' is CSP level 3 so works in Chrome but not Safari yet
-                `);
-            }
-
             const atom = atoms.charts?.find(chart => chart.id === id);
 
             if (atom?.data?.kind !== "chart" || !id) {
@@ -244,6 +235,35 @@ function parseAtom(
                 duration: fromNullable(duration?.toNumber()),
                 caption: fromNullable(caption)
             });
+        }
+
+        case "quiz": {
+            const atom = atoms.quizzes?.find(quiz => quiz.id === id);
+            if (atom?.data?.kind !== "quiz" || !id) {
+                return err(`No atom matched this id: ${id}`);
+            }
+
+            const { content } = atom?.data?.quiz;
+
+            if (!content) {
+                return err(`No content for atom: ${id}`);
+            }
+
+            const questions = content.questions.map(question => {
+                return {
+                    text: question.questionText,
+                    ...question,
+                    answers: question.answers.map(answer => {
+                        return {
+                            text: answer.answerText,
+                            isCorrect: !!answer.weight,
+                            ...answer
+                        }
+                    })
+                }
+            })
+
+            return ok({ kind: ElementKind.QuizAtom, id, questions });
         }
 
         default: {
