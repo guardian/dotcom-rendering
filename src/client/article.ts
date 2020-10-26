@@ -124,9 +124,9 @@ function insertEpic(): void {
 
 function footerInit(): void {
     const isAndroid = /(android)/i.test(navigator.userAgent);
-    const footer = document.getElementById('articleFooter')
+    const footer = document.getElementById('articleFooter');
     if (footer && isAndroid){
-        ReactDOM.unmountComponentAtNode(footer)
+        footer.innerHTML = '';
     } else {
         isCCPA();
     }
