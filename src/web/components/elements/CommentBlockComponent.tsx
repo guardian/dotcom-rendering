@@ -16,7 +16,8 @@ const commentWrapperStyles = css`
     ${textSans.medium()};
     border-left: 1px ${palette.neutral[86]} solid;
     border-top: 1px ${palette.neutral[86]} solid;
-    padding: ${space[1]}px 0 0 ${space[2]}px;
+    padding-top: ${space[1]}px;
+    padding-left: ${space[2]}px;
     margin-top: ${space[3]}px;
 `;
 
