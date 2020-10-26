@@ -10,6 +10,8 @@ import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import FooterCcpa from 'components/shared/footer';
+import { Footer } from '@guardian/src-footer';
+import { article } from 'fixtures/item';
 
 
 
@@ -123,7 +125,15 @@ function insertEpic(): void {
     }
 }
 
-
+function footerInit(): void {
+    const isAndroid = /(android)/i.test(navigator.userAgent);
+    const footer = document.getElementById('articleFooter')
+    if (footer && isAndroid){
+        ReactDOM.unmountComponentAtNode(footer)
+    } else {
+        isCCPA();
+    }
+}
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
@@ -248,4 +258,4 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
-isCCPA();
+footerInit();
