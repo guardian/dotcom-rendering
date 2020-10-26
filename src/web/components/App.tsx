@@ -324,14 +324,25 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and is not a react component, so it's
         // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
+            const pubData = {
+                browserId: getCookie('bwid') || undefined,
+                pageViewId: window.guardian?.config?.ophan?.pageViewId,
+            };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
-            cmp.init({
-                isInUsa: countryCode === 'US',
-                pubData: {
-                    browserId: getCookie('bwid') || undefined,
-                    pageViewId: window.guardian?.config?.ophan?.pageViewId,
-                },
-            });
+
+            if (
+                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
+            ) {
+                cmp.init({
+                    country: countryCode,
+                    pubData,
+                });
+            } else {
+                cmp.init({
+                    isInUsa: countryCode === 'US',
+                    pubData,
+                });
+            }
         }
     }, [countryCode, CAPI.config.switches.consentManagement]);
 
