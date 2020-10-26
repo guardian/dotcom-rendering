@@ -10,6 +10,8 @@ import { Context } from 'types/parserContext';
 import { Format } from '@guardian/types/Format';
 import { pipe2 } from 'lib';
 import { Result, fromUnsafe, ResultKind } from '@guardian/types/result';
+import { Image as ImageData, Role } from '@guardian/image-rendering/src/image';
+
 
 // ----- Setup ----- //
 
@@ -30,12 +32,6 @@ const lowerQuality = 45;
 
 // ----- Types ----- //
 
-enum Role {
-    Thumbnail,
-    HalfWidth,
-    Card
-}
-
 const enum Dpr {
     One,
     Two
@@ -46,17 +42,10 @@ interface Srcsets {
     dpr2Srcset: string;
 }
 
-interface Image {
-    src: string;
-    srcset: string;
-    dpr2Srcset: string;
-    alt: Option<string>;
-    width: number;
-    height: number;
+interface Image extends ImageData {
     caption: Option<DocumentFragment>;
     credit: Option<string>;
     nativeCaption: Option<string>;
-    role: Option<Role>;
 }
 
 interface BodyImageProps {
@@ -122,21 +111,16 @@ const parseCredit = (
         andThen(display => display ? fromNullable(credit) : none),
     );
 
-const parseRole = (role: string | undefined): Option<Role> =>
-    pipe2(
-        role,
-        fromNullable,
-        andThen(someRole => {
-            switch(someRole) {
-                case 'thumbnail':
-                    return some(Role.Thumbnail);
-                case 'halfWidth':
-                    return some(Role.HalfWidth);
-                default:
-                    return none;
-            }
-        }),
-    );
+const parseRole = (role: string | undefined): Role => {
+    switch(role) {
+        case 'thumbnail':
+            return Role.Thumbnail;
+        case 'halfWidth':
+            return Role.HalfWidth;
+        default:
+            return Role.Standard;
+    }
+}
 
 const parseImage = ({ docParser, salt }: Context) =>
     (element: BlockElement): Option<Image> => {
@@ -185,7 +169,7 @@ const parseCardImage = (image: CardImage | undefined, salt: string): Option<Imag
         caption: none,
         credit: none,
         nativeCaption: none,
-        role: some(Role.Card),
+        role: Role.Standard,
     });
 }
 
@@ -194,7 +178,6 @@ const parseCardImage = (image: CardImage | undefined, salt: string): Option<Imag
 
 export {
     Image,
-    Role,
     Dpr,
     src,
     srcset,

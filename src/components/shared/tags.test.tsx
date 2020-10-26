@@ -12,7 +12,7 @@ const tagsProps = [{
 }];
 
 const mockFormat: Format = {
-    pillar: Pillar.News,
+    theme: Pillar.News,
     design: Design.Comment,
     display: Display.Standard,
 };

@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { Option, map, withDefault } from '@guardian/types/option';
 import { darkModeCss } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
+import { getThemeStyles } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
@@ -12,7 +12,7 @@ import React from 'react';
 
 
 const styles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
     return css`
         color: ${kicker};
         margin: 0;
@@ -23,7 +23,7 @@ const styles = (format: Format): SerializedStyles => {
 };
 
 const quoteStyles =  (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getThemeStyles(format.theme);
 
     return css`
         margin: ${remSpace[4]} 0 ${remSpace[2]} 0;

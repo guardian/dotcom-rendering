@@ -13,6 +13,7 @@ import { QuizAtom } from '@guardian/atoms-rendering';
 import { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
 import FooterCcpa from 'components/shared/footer';
 
+
 // ----- Run ----- //
 
 const followText = 'Follow ';
@@ -123,7 +124,15 @@ function insertEpic(): void {
     }
 }
 
-
+function footerInit(): void {
+    const isAndroid = /(android)/i.test(navigator.userAgent);
+    const footer = document.getElementById('articleFooter');
+    if (footer && isAndroid){
+        footer.innerHTML = '';
+    } else {
+        isCCPA();
+    }
+}
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
@@ -262,4 +271,4 @@ insertEpic();
 callouts();
 hasSeenCards();
 hydrateQuizAtoms();
-isCCPA();
+footerInit();

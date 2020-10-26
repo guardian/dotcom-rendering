@@ -39,6 +39,6 @@ module.exports = {
       'src',
     ],
     transformIgnorePatterns: [
-      'node_modules/(?!(@guardian/src-foundations|@guardian/types|@guardian/src-icons)/)',
+      'node_modules/(?!@guardian)',
     ],
 };

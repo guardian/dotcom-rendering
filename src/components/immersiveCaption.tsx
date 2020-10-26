@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Item } from 'item';
 import { MainMedia, MainMediaKind } from 'headerMedia';
 import { Option, OptionKind } from '@guardian/types/option';
-import { renderCaption } from 'components/figCaption'
+import { renderCaption } from 'renderer';
 import { Format } from '@guardian/types/Format';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
