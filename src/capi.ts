@@ -90,16 +90,59 @@ const articleMainMedia = (content: Content, context: Context): Option<MainMedia>
             })))
 }
 
-const includesTweets = (content: Content): boolean => {
-    const body = content?.blocks?.body;
 
-    if (!body) {
-        return false
+type ThirdPartyEmbeds = {
+    twitter: boolean;
+    youtube: boolean;
+    instagram: boolean;
+    spotify: boolean;
+};
+
+const noThirdPartyEmbeds: ThirdPartyEmbeds = {
+    twitter: false,
+    youtube: false,
+    instagram: false,
+    spotify: false,
+};
+
+const checkForThirdPartyEmbed = (
+    thirdPartyEmbeds: ThirdPartyEmbeds,
+    element: BlockElement): ThirdPartyEmbeds => {
+    switch (element.type) {
+        case ElementType.INSTAGRAM:
+            return { ...thirdPartyEmbeds, instagram: true };
+        case ElementType.TWEET:
+            return { ...thirdPartyEmbeds, twitter: true };
+        case ElementType.VIDEO:
+            return { ...thirdPartyEmbeds, youtube: true };
+        case ElementType.AUDIO:
+            return { ...thirdPartyEmbeds, spotify: true };
+        default:
+            return thirdPartyEmbeds;
     }
+}
 
-    return body
-        .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-        .some(Boolean)
+const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
+    const body = content?.blocks?.body;
+    if (!body) {
+        return noThirdPartyEmbeds
+    }
+    return body.reduce(
+        (thirdPartyEmbeds, block) => block.elements
+            .reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
+        noThirdPartyEmbeds,
+    );
+}
+
+const requiresInlineStyles = (): boolean => {
+    // temporarily disable `unsafe-inline` in csp
+    // return !!(
+    //     content?.fields?.commentable ||
+    //     content?.atoms?.quizzes ||
+    //     content?.atoms?.audios ||
+    //     content?.atoms?.charts
+    // );
+    return false;
 }
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
@@ -161,6 +204,7 @@ const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 export {
     Series,
     Logo,
+    ThirdPartyEmbeds,
     isPhotoEssay,
     isImmersive,
     isInteractive,
@@ -171,8 +215,10 @@ export {
     articleContributors,
     articleMainMedia,
     capiEndpoint,
-    includesTweets,
+    getThirdPartyEmbeds,
     maybeCapiDate,
     paidContentLogo,
-    articleMainImage
+    articleMainImage,
+    checkForThirdPartyEmbed,
+    requiresInlineStyles
 };

@@ -91,10 +91,10 @@ describe('Adds short classname correctly', () => {
     });
 
     test('Does not add short classnames for articles with 15 paragraphs', () => {
-        const fifteenParagrpahs = renderParagraphs(15)
-        const fifteenParagrpahsAndTwoAds: any = insertAdPlaceholders(fifteenParagrpahs);
-        expect(fifteenParagrpahsAndTwoAds[3].props.className).toBe('ad-placeholder hidden');
-        expect(fifteenParagrpahsAndTwoAds[10].props.className).toBe('ad-placeholder hidden');
+        const fifteenParagraphs = renderParagraphs(15)
+        const fifteenParagraphsAndTwoAds: any = insertAdPlaceholders(fifteenParagraphs);
+        expect(fifteenParagraphsAndTwoAds[3].props.className).toBe('ad-placeholder hidden');
+        expect(fifteenParagraphsAndTwoAds[10].props.className).toBe('ad-placeholder hidden');
     });
 });
 

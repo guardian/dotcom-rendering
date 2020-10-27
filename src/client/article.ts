@@ -11,8 +11,12 @@ import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
 import { App } from '@guardian/discussion-rendering/build/App';
 import "regenerator-runtime/runtime.js";
-import FooterCcpa from 'components/shared/footer';
 import { ICommentResponse as CommentResponse } from '@guardian/bridget';
+import { AudioAtom } from '@guardian/atoms-rendering';
+import { QuizAtom } from '@guardian/atoms-rendering';
+import { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
+import FooterCcpa from 'components/shared/footer';
+
 
 // ----- Run ----- //
 
@@ -177,6 +181,15 @@ function renderComments(): void {
     }
 }
 
+function footerInit(): void {
+    const isAndroid = /(android)/i.test(navigator.userAgent);
+    const footer = document.getElementById('articleFooter');
+    if (footer && isAndroid){
+        footer.innerHTML = '';
+    } else {
+        isCCPA();
+    }
+}
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
@@ -289,7 +302,34 @@ function hasSeenCards(): void {
     })
 }
 
+function initAudioAtoms(): void {
+    Array.from(document.querySelectorAll('.js-audio-atom'))
+        .forEach(atom => {
+            const id = atom.getAttribute('id');
+            const trackUrl = atom.getAttribute('trackurl');
+            const kicker = atom.getAttribute('kicker');
+            const title = atom.getAttribute('title');
+            const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
+            if (id && trackUrl && kicker && title && pillar) {
+                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, pillar, kicker, title }), atom);
+            }
+        })
+}
 
+function hydrateQuizAtoms(): void {
+    Array.from(document.querySelectorAll('.js-quiz'))
+        .forEach(atom => {
+            const props = atom.querySelector('.js-quiz-params')?.innerHTML;
+            try {
+                if (props) {
+                    const quizProps: unknown = JSON.parse(props.replace(/&quot;/g, '"'));
+                    ReactDOM.hydrate(h(QuizAtom, quizProps as QuizAtomType), atom);
+                }
+            } catch(e) {
+                console.error(e);
+            }
+        })
+}
 
 setup();
 ads();
@@ -303,3 +343,6 @@ callouts();
 hasSeenCards();
 renderComments();
 isCCPA();
+initAudioAtoms();
+hydrateQuizAtoms();
+footerInit();
