@@ -55,6 +55,7 @@ export const RichLinkComponent: React.FC<{
 
         return (
             <DefaultRichLink
+                id={`rich-link-${richLinkIndex}`}
                 index={richLinkIndex}
                 headlineText={element.text}
                 url={element.url}
