@@ -167,6 +167,9 @@ function renderComments(): void {
             onReply: (shortUrl: string, body: string, parentCommentId: number): Promise<CommentResponse & { status: "ok" | "error" }> => {
                 return discussionClient.reply(shortUrl, body, parentCommentId)
                     .then(response => ({ ...response, status: "ok" }))
+            },
+            onPreview: (body: string): Promise<string> => {
+                return discussionClient.preview(body);
             }
         }
 
