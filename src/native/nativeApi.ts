@@ -17,7 +17,7 @@ const userClient: User.Client<void> = createAppClient<User.Client<void>>(User.Cl
 const galleryClient: Gallery.Client<void> = createAppClient<Gallery.Client<void>>(Gallery.Client, 'buffered', 'compact');
 const videoClient: Video.Client<void> = createAppClient<Video.Client<void>>(Video.Client, 'buffered', 'compact');
 const metricsClient: Metrics.Client<void> = createAppClient<Metrics.Client<void>>(Metrics.Client, 'buffered', 'compact');
-const disucssionClient: Discussion.Client<void> = createAppClient<Discussion.Client<void>>(Discussion.Client, 'buffered', 'compact');
+const discussionClient: Discussion.Client<void> = createAppClient<Discussion.Client<void>>(Discussion.Client, 'buffered', 'compact');
 
 export {
     environmentClient,
@@ -28,5 +28,5 @@ export {
     galleryClient,
     videoClient,
     metricsClient,
-    disucssionClient
+    discussionClient
 };

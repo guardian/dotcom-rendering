@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { notificationsClient, acquisitionsClient, userClient, disucssionClient } from 'native/nativeApi';
+import { notificationsClient, acquisitionsClient, userClient, discussionClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
@@ -157,7 +157,7 @@ function renderComments(): void {
                 console.log(commentId)
             },
             onRecommend: (commentId: number): Promise<boolean> => {
-                return disucssionClient.recommend(commentId);
+                return discussionClient.recommend(commentId);
             }
         }
 
