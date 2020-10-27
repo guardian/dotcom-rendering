@@ -163,6 +163,10 @@ function renderComments(): void {
             onComment: (shortUrl: string, body: string): Promise<CommentResponse & { status: "ok" | "error" }> => {
                 return discussionClient.comment(shortUrl, body)
                     .then(response => ({ ...response, status: "ok" }))
+            },
+            onReply: (shortUrl: string, body: string, parentCommentId: number): Promise<CommentResponse & { status: "ok" | "error" }> => {
+                return discussionClient.reply(shortUrl, body, parentCommentId)
+                    .then(response => ({ ...response, status: "ok" }))
             }
         }
 
