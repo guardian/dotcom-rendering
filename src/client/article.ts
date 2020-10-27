@@ -12,6 +12,7 @@ import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'clie
 import { App } from '@guardian/discussion-rendering/build/App';
 import "regenerator-runtime/runtime.js";
 import FooterCcpa from 'components/shared/footer';
+import { ICommentResponse as CommentResponse } from '@guardian/bridget';
 
 // ----- Run ----- //
 
@@ -158,6 +159,10 @@ function renderComments(): void {
             },
             onRecommend: (commentId: number): Promise<boolean> => {
                 return discussionClient.recommend(commentId);
+            },
+            onComment: (shortUrl: string, body: string): Promise<CommentResponse & { status: "ok" | "error" }> => {
+                return discussionClient.comment(shortUrl, body)
+                    .then(response => ({ ...response, status: "ok" }))
             }
         }
 
