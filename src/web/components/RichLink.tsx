@@ -228,6 +228,7 @@ type DefaultProps = {
     headlineText: string;
     url: string;
     isPlaceholder?: boolean;
+    id: string;
 };
 
 export const DefaultRichLink: React.FC<DefaultProps> = ({
@@ -235,20 +236,23 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
     headlineText,
     url,
     isPlaceholder,
+    id,
 }) => {
     return (
-        <RichLink
-            richLinkIndex={index}
-            cardStyle="news"
-            thumbnailUrl=""
-            headlineText={headlineText}
-            contentType="article"
-            url={url}
-            pillar="news"
-            tags={[]}
-            sponsorName=""
-            isPlaceholder={isPlaceholder}
-        />
+        <aside id={id}>
+            <RichLink
+                richLinkIndex={index}
+                cardStyle="news"
+                thumbnailUrl=""
+                headlineText={headlineText}
+                contentType="article"
+                url={url}
+                pillar="news"
+                tags={[]}
+                sponsorName=""
+                isPlaceholder={isPlaceholder}
+            />
+        </aside>
     );
 };
 
