@@ -127,12 +127,11 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
     if (!body) {
         return noThirdPartyEmbeds
     }
-    const allThirdPartyEmbeds = body.reduce(
+    return body.reduce(
         (thirdPartyEmbeds, block) => block.elements
             .reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
         noThirdPartyEmbeds,
     );
-    return allThirdPartyEmbeds;
 }
 
 const requiresInlineStyles = (): boolean => {
