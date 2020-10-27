@@ -9,6 +9,7 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 import { ads, slideshow, videos, reportNativeElementPositionChanges } from 'client/nativeCommunication';
+import { AudioAtom } from '@guardian/atoms-rendering';
 import { QuizAtom } from '@guardian/atoms-rendering';
 import { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
 import FooterCcpa from 'components/shared/footer';
@@ -245,6 +246,20 @@ function hasSeenCards(): void {
     })
 }
 
+function initAudioAtoms(): void {
+    Array.from(document.querySelectorAll('.js-audio-atom'))
+        .forEach(atom => {
+            const id = atom.getAttribute('id');
+            const trackUrl = atom.getAttribute('trackurl');
+            const kicker = atom.getAttribute('kicker');
+            const title = atom.getAttribute('title');
+            const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
+            if (id && trackUrl && kicker && title && pillar) {
+                ReactDOM.hydrate(h(AudioAtom, { id, trackUrl, pillar, kicker, title }), atom);
+            }
+        })
+}
+
 function hydrateQuizAtoms(): void {
     Array.from(document.querySelectorAll('.js-quiz'))
         .forEach(atom => {
@@ -270,5 +285,6 @@ formatDates();
 insertEpic();
 callouts();
 hasSeenCards();
+initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();

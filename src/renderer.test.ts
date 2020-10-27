@@ -188,6 +188,22 @@ const chartElement = (): BodyElement =>
         js: []
     })
 
+const quizAtom = (): BodyElement =>
+    ({
+        kind: ElementKind.QuizAtom,
+        id: "",
+        questions: []
+    })
+
+const audioAtom = (): BodyElement =>
+    ({
+        kind: ElementKind.AudioAtom,
+        title: "title",
+        id: "",
+        trackUrl: "trackUrl",
+        kicker: "kicker"
+    })
+
 
 const render = (element: BodyElement): ReactNode[] =>
     renderAll(mockFormat, [element]);
@@ -381,7 +397,22 @@ describe('Renders different types of elements', () => {
         const nodes = render(chartElement())
         const chart = nodes.flat()[0];
         expect(getHtml(chart)).toContain('srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"');
-   })
+    })
+
+    test('ElementKind.QuizAtom', () => {
+        const nodes = render(quizAtom())
+        const quiz = nodes.flat()[0];
+        const html = getHtml(quiz);
+        expect(html).toContain('<div class=\"js-quiz\">');
+        expect(html).toContain('<script class=\"js-quiz-params\" type=\"application/json\">');
+    })
+
+    test('ElementKind.AudioAtom', () => {
+        const nodes = render(audioAtom())
+        const audio = nodes.flat()[0];
+        const html = getHtml(audio);
+        expect(html).toContain('<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"')
+    })
 
     function testHandlers(node: ReactNode): void {
         if (isValidElement(node)) {

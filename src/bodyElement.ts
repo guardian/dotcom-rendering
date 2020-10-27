@@ -42,6 +42,7 @@ const enum ElementKind {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
+    AudioAtom,
     QuizAtom
 }
 
@@ -124,6 +125,14 @@ interface TimelineAtom {
     events: TimelineEvent[];
 }
 
+interface AudioAtom {
+    kind: ElementKind.AudioAtom;
+    id: string;
+    trackUrl: string;
+    kicker: string;
+    title: string;
+}
+
 interface QuizAtom {
     kind: ElementKind.QuizAtom;
     id: string;
@@ -176,6 +185,7 @@ type BodyElement = {
   | ProfileAtom
   | TimelineAtom
   | ChartAtom
+  | AudioAtom
   | QuizAtom;
 
 type Elements = BlockElement[] | undefined;

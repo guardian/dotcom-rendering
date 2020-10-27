@@ -6,7 +6,7 @@ import { Breakpoint, from, until } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, some, none, andThen, map, withDefault } from '@guardian/types/option';
 import { basePx, darkModeCss } from 'styles';
-import { getThemeStyles, themeToPillar } from 'themeStyles';
+import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
 import { Format } from '@guardian/types/Format';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -21,7 +21,7 @@ import InteractiveAtom, {atomCss, atomScript} from 'components/atoms/interactive
 import { Design } from '@guardian/types/Format';
 import Blockquote from 'components/blockquote';
 import { isElement, pipe, pipe2 } from 'lib';
-import { ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, QuizAtom, TimelineAtom } from '@guardian/atoms-rendering';
+import { AudioAtom, QuizAtom, ChartAtom, ExplainerAtom, GuideAtom, ProfileAtom, QandaAtom, TimelineAtom } from '@guardian/atoms-rendering';
 import LiveEventLink from 'components/liveEventLink';
 import CalloutForm from 'components/calloutForm';
 import { fromUnsafe, Result, toOption } from '@guardian/types/result';
@@ -629,10 +629,21 @@ const render = (format: Format, excludeStyles = false) =>
                 return styledH('figure', figureAttributes, [ styledH('div', attributes), figcaption ]);
             }
 
+            case ElementKind.AudioAtom: {
+                const { theme } = format;
+                const pillar = themeFromString('pillar/' + themeToPillar(theme));
+                const audioAtomStyles = css`
+                    figure {
+                        margin: 0;
+                    }
+                `;
+                return styledH('div', { ...element, pillar, className: 'js-audio-atom', css: audioAtomStyles }, h(AudioAtom, { ...element, pillar }))
+            }
+
             case ElementKind.QuizAtom: {
                 const props = JSON.stringify(element);
-                const hydrationParams = h('script', { className: 'js-quiz-params', type: 'application/json' }, props)
-                return h('div', { className: 'js-quiz' }, [hydrationParams, h(QuizAtom, { ...element })])
+                const hydrationParams = h('script', { className: 'js-quiz-params', type: 'application/json' }, props);
+                return h('div', { className: 'js-quiz' }, [hydrationParams, h(QuizAtom, { ...element })]);
             }
         }
     };
