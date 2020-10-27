@@ -39,7 +39,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
                     font-style: italic;
                     color: ${neutral[46]};
                 `}
-                tagName="blockquote"
+                tagName="div"
             />
         </blockquote>
     );
