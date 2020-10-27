@@ -140,7 +140,7 @@ export const ImageBlockComponent = ({
 }: Props) => {
     const { role } = element;
     return (
-        <div className={decidePosition(role)}>
+        <figure className={decidePosition(role)}>
             <ImageComponent
                 display={display}
                 designType={designType}
@@ -150,6 +150,6 @@ export const ImageBlockComponent = ({
                 role={role}
                 title={title}
             />
-        </div>
+        </figure>
     );
 };

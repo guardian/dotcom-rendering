@@ -13,17 +13,6 @@ type Props = {
     pillar: Pillar;
 };
 
-const Row = ({ children }: { children: React.ReactNode }) => (
-    <div
-        className={css`
-            display: flex;
-            flex-direction: row;
-        `}
-    >
-        {children}
-    </div>
-);
-
 export const BlockquoteBlockComponent: React.FC<Props> = ({
     html,
     pillar,
@@ -34,7 +23,12 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
     });
 
     return (
-        <Row>
+        <blockquote
+            className={css`
+                display: flex;
+                flex-direction: row;
+            `}
+        >
             <QuoteIcon colour={pillarPalette[pillar].main} size="large" />
             <RewrappedComponent
                 isUnwrapped={isUnwrapped}
@@ -47,6 +41,6 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
                 `}
                 tagName="blockquote"
             />
-        </Row>
+        </blockquote>
     );
 };

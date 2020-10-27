@@ -278,14 +278,14 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return (
-                        <div key={i} id={`rich-link-${i}`}>
+                        <aside key={i} id={`rich-link-${i}`}>
                             <DefaultRichLink
                                 index={i}
                                 headlineText={element.text}
                                 url={element.url}
                                 isPlaceholder={true}
                             />
-                        </div>
+                        </aside>
                     );
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
