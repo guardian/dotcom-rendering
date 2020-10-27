@@ -11,7 +11,7 @@ import { Format, Design, Display } from '@guardian/types/Format';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 
-import { includesTweets, requiresInlineStyles } from 'capi';
+import { getThirdPartyEmbeds, requiresInlineStyles, ThirdPartyEmbeds } from 'capi';
 import { fromCapi, Item } from 'item';
 import { Option, some, none, map } from '@guardian/types/option';
 import { compose } from 'lib';
@@ -82,20 +82,17 @@ const styles = (format: Format): string => `
 function renderHead(
     item: Item,
     request: RenderingRequest,
-    hasTweets: boolean,
-    hasInlineStyles: boolean,
+    thirdPartyEmbeds: ThirdPartyEmbeds,
     itemStyles: string,
     emotionIds: string[],
+    inlineStyles: boolean,
 ): string {
     const generalStyles = styles(item);
     const cspString = csp(
-        item,
-        {
+        item, {
             scripts: [ atomScript ],
             styles: [ generalStyles, itemStyles, atomCss ],
-        },
-        hasTweets,
-        hasInlineStyles);
+        }, thirdPartyEmbeds, inlineStyles);
     const meta = h(Meta, { title: request.content.webTitle, cspString});
 
     return `
@@ -136,11 +133,11 @@ function render(
 ): Page {
     const item = fromCapi({ docParser, salt: imageSalt })(request);
     const clientScript = map(getAssetLocation)(scriptName(item));
-    const hasTweets = includesTweets(request.content);
-    const inlineStyles = requiresInlineStyles();
+    const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
     const body = renderBody(item, request);
-    const head = renderHead(item, request, hasTweets, inlineStyles, body.css, body.ids);
-    const scripts = <Scripts clientScript={clientScript} twitter={hasTweets} />;
+    const inlineStyles = requiresInlineStyles();
+    const head = renderHead(item, request, thirdPartyEmbeds, body.css, body.ids, inlineStyles);
+    const scripts = <Scripts clientScript={clientScript} twitter={thirdPartyEmbeds.twitter} />;
 
 
     return { html: buildHtml(head, body.html, scripts), clientScript };
