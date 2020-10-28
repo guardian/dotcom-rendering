@@ -46,9 +46,15 @@ const profileWrapperStyles = css`
 const usernameWrapperStyles = css`
     display: flex;
     flex-direction: column;
-    & .permalink {
+    height: ${space[12]}px;
+    /* in order to overwrite the a tag style we had to add a second class to give higher order specificity */
+    & > a.permalink {
         color: ${palette.neutral[46]};
         border-bottom: none;
+    }
+    & > a.permalink:hover {
+        color: ${palette.neutral[46]};
+        border-bottom: 1px solid ${palette.neutral[46]};
     }
 `;
 
