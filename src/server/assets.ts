@@ -1,8 +1,8 @@
-import fs from 'fs';
-import { logger } from 'logger';
-import { isObject } from 'lib';
+import fs from "fs";
+import { isObject } from "lib";
+import { logger } from "logger";
 
-type AssetMapping = { [key: string]: string } | null;
+type AssetMapping = Record<string, string | undefined> | null;
 
 function getAssetMappings(): AssetMapping {
     if (process.env.NODE_ENV !== "production") {
@@ -17,18 +17,22 @@ function getAssetMappings(): AssetMapping {
     }
 
     try {
-        const parsed: unknown = JSON.parse(fs.readFileSync(manifestLocation).toString());
+        const parsed: unknown = JSON.parse(
+            fs.readFileSync(manifestLocation).toString()
+        );
 
         if (!isObject(parsed)) {
-            throw new Error('Manifest file doesn\'t appear to be an object');
+            throw new Error("Manifest file doesn't appear to be an object");
         }
 
         return Object.entries(parsed).reduce(
             (mappings, [key, value]) =>
-                typeof value === 'string' ? { ...mappings, [key]: value } : mappings,
-            {},
+                typeof value === "string"
+                    ? { ...mappings, [key]: value }
+                    : mappings,
+            {}
         );
-    } catch(e) {
+    } catch (e) {
         logger.error(`Unable to load asset mapping`, e);
         throw e;
     }
@@ -40,8 +44,8 @@ export function getMappedAssetLocation(): (assetName: string) => string {
         return (assetName: string): string => {
             const mappedAsset = scriptMappings[assetName] ?? assetName;
             return `/assets/${mappedAsset}`;
-        }
+        };
     } else {
-        return (assetName: string): string => `/assets/${assetName}`
+        return (assetName: string): string => `/assets/${assetName}`;
     }
 }

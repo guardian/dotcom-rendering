@@ -1,52 +1,60 @@
 // ----- Imports ----- //
 
-import 'source-map-support/register'; // activating the source map support
+import "source-map-support/register"; // activating the source map support
 
-import path from 'path';
-import express, {
+import path from "path";
+import type { RelatedContent } from "@guardian/apps-rendering-api-models/relatedContent";
+import type { RenderingRequest } from "@guardian/apps-rendering-api-models/renderingRequest";
+import type { Content } from "@guardian/content-api-models/v1/content";
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import type { Result } from "@guardian/types/result";
+import { either, err, ok } from "@guardian/types/result";
+import bodyParser from "body-parser";
+import { capiEndpoint } from "capi";
+import compression from "compression";
+import type {
+    Response as ExpressResponse,
     NextFunction,
     Request,
-    Response as ExpressResponse,
-} from 'express';
-import compression from 'compression';
-import bodyParser from 'body-parser';
-import fetch, { Response } from 'node-fetch';
-
-import { render } from 'server/page';
-import { getConfigValue } from 'server/ssmConfig';
-import { capiEndpoint } from 'capi';
-import { logger } from 'logger';
-import { App, Stack, Stage } from './appIdentity';
-import { getMappedAssetLocation } from './assets';
-import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
-import { Result, ok, err, either } from '@guardian/types/result';
-import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { Content } from '@guardian/content-api-models/v1/content';
-import { toArray, pipe2 } from 'lib';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
-import { parseRelatedContent } from 'relatedContent';
-
+} from "express";
+import express from "express";
+import { pipe2, toArray } from "lib";
+import { logger } from "logger";
+import type { Response } from "node-fetch";
+import fetch from "node-fetch";
+import { parseRelatedContent } from "relatedContent";
+import { capiDecoder, errorDecoder, mapiDecoder } from "server/decoders";
+import { render } from "server/page";
+import { getConfigValue } from "server/ssmConfig";
+import { App, Stack, Stage } from "./appIdentity";
+import { getMappedAssetLocation } from "./assets";
 
 // ----- Setup ----- //
 
-const getAssetLocation: (assetName: string) => string = getMappedAssetLocation();
+const getAssetLocation: (
+    assetName: string
+) => string = getMappedAssetLocation();
 const defaultId =
-    'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+    "cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked";
 const port = 3040;
 type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
-
 
 // ----- Functions ----- //
 
 function getPrefetchHeader(resources: string[]): string {
-    return resources.reduce((linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`, '');
+    return resources.reduce(
+        (linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`,
+        ""
+    );
 }
 
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
     fetch(capiEndpoint(articleId, key));
 
-const parseCapiResponse = (articleId: string) => async (capiResponse: Response): CapiReturn => {
+const parseCapiResponse = (articleId: string) => async (
+    capiResponse: Response
+): CapiReturn => {
     const buffer = await capiResponse.buffer();
 
     switch (capiResponse.status) {
@@ -54,12 +62,16 @@ const parseCapiResponse = (articleId: string) => async (capiResponse: Response):
             const response = await capiDecoder(buffer);
 
             if (response.content === undefined) {
-                logger.error(`CAPI returned a 200 for ${articleId}, but didn't give me any content`);
+                logger.error(
+                    `CAPI returned a 200 for ${articleId}, but didn't give me any content`
+                );
                 return err(500);
             }
 
             if (response.relatedContent === undefined) {
-                logger.error(`Unable to fetch related content for ${articleId}`);
+                logger.error(
+                    `Unable to fetch related content for ${articleId}`
+                );
                 return err(500);
             }
 
@@ -68,47 +80,52 @@ const parseCapiResponse = (articleId: string) => async (capiResponse: Response):
         }
 
         case 404:
-            logger.warn(`CAPI says that it doesn't recognise this resource: ${articleId}`);
+            logger.warn(
+                `CAPI says that it doesn't recognise this resource: ${articleId}`
+            );
 
             return err(404);
 
         default: {
             const response = await errorDecoder(buffer);
 
-            logger.error(`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`);
+            logger.error(
+                `I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`
+            );
             return err(500);
         }
     }
-}
+};
 
 const askCapiFor = (articleId: string): CapiReturn =>
-    getConfigValue('capi.key')
-        .then(key => {
-            if (key === undefined) {
-                logger.error('Could not get CAPI key');
+    getConfigValue("capi.key").then((key) => {
+        if (key === undefined) {
+            logger.error("Could not get CAPI key");
 
-                return err(500);
-            }
+            return err(500);
+        }
 
-            return capiRequest(articleId)(key)
-                .then(parseCapiResponse(articleId));
-        });
+        return capiRequest(articleId)(key).then(parseCapiResponse(articleId));
+    });
 
 function resourceList(script: Option<string>): string[] {
     const emptyList: string[] = [];
     return pipe2(script, map(toArray), withDefault(emptyList));
 }
 
-async function serveArticle(request: RenderingRequest, res: ExpressResponse): Promise<void> {
-    const imageSalt = await getConfigValue('apis.img.salt');
+async function serveArticle(
+    request: RenderingRequest,
+    res: ExpressResponse
+): Promise<void> {
+    const imageSalt = await getConfigValue("apis.img.salt");
 
     if (imageSalt === undefined) {
-        throw new Error('Could not get image salt');
+        throw new Error("Could not get image salt");
     }
 
     const { html, clientScript } = render(imageSalt, request, getAssetLocation);
 
-    res.set('Link', getPrefetchHeader(resourceList(clientScript)));
+    res.set("Link", getPrefetchHeader(resourceList(clientScript)));
     res.write(html);
     res.end();
 }
@@ -116,7 +133,7 @@ async function serveArticle(request: RenderingRequest, res: ExpressResponse): Pr
 async function serveArticlePost(
     { body }: Request,
     res: ExpressResponse,
-    next: NextFunction,
+    next: NextFunction
 ): Promise<void> {
     try {
         const renderingRequest = await mapiDecoder(body);
@@ -128,33 +145,37 @@ async function serveArticlePost(
     }
 }
 
-async function serveArticleGet(req: Request, res: ExpressResponse): Promise<void> {
+async function serveArticleGet(
+    req: Request,
+    res: ExpressResponse
+): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
         const capiContent = await askCapiFor(articleId);
 
         either(
-            (errorStatus: number) => { res.sendStatus(errorStatus) },
+            (errorStatus: number) => {
+                res.sendStatus(errorStatus);
+            },
             ([content, relatedContent]: [Content, RelatedContent]) => {
                 const mockedRenderingRequest: RenderingRequest = {
                     content,
                     targetingParams: {
-                        "co": "Jane Smith",
-                        "k": "potato,tomato,avocado"
+                        co: "Jane Smith",
+                        k: "potato,tomato,avocado",
                     },
                     commentCount: 30,
-                    relatedContent
+                    relatedContent,
                 };
 
                 void serveArticle(mockedRenderingRequest, res);
-            },
+            }
         )(capiContent);
     } catch (e) {
         logger.error(`This error occurred`, e);
         res.sendStatus(500);
     }
 }
-
 
 // ----- App ----- //
 
@@ -166,30 +187,32 @@ if (process.env.NODE_ENV === "production") {
 
 const app = express();
 
-app.use(bodyParser.raw({ limit: '50mb' }));
-app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
-app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
+app.use(bodyParser.raw({ limit: "50mb" }));
+app.use("/assets", express.static(path.resolve(__dirname, "../assets")));
+app.use("/assets", express.static(path.resolve(__dirname, "../dist/assets")));
 app.use(compression());
 
-app.all('*', (request, response, next) => {
+app.all("*", (request, response, next) => {
     const start = Date.now();
 
-    response.once('finish', () => {
+    response.once("finish", () => {
         const duration = Date.now() - start;
-        logger.info(`HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`);
+        logger.info(
+            `HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`
+        );
     });
 
     next();
 });
 
-app.get('/healthcheck', (_req, res) => res.send("Ok"));
+app.get("/healthcheck", (_req, res) => res.send("Ok"));
 
-app.get('/favicon.ico', (_, res) => res.status(404).end());
-app.get('/fontSize.css', (_, res) => res.status(404).end());
+app.get("/favicon.ico", (_, res) => res.status(404).end());
+app.get("/fontSize.css", (_, res) => res.status(404).end());
 
-app.get('/*', bodyParser.raw(), serveArticleGet);
+app.get("/*", bodyParser.raw(), serveArticleGet);
 
-app.post('/article', bodyParser.raw(), serveArticlePost);
+app.post("/article", bodyParser.raw(), serveArticlePost);
 
 app.listen(port, () => {
     if (process.env.NODE_ENV === "production") {

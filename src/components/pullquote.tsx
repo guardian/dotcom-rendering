@@ -1,28 +1,28 @@
-import { FC, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
-import { Format } from '@guardian/types/Format';
-import { headline } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
-import { pipe2 } from 'lib';
-import { SvgQuote } from '@guardian/src-icons/quote';
-import React from 'react';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { headline } from "@guardian/src-foundations/typography";
+import { SvgQuote } from "@guardian/src-icons/quote";
+import type { Format } from "@guardian/types/Format";
+import { map, withDefault } from "@guardian/types/option";
+import type { Option } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import type { FC, ReactNode } from "react";
+import React from "react";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 const styles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getThemeStyles(format.theme);
     return css`
         color: ${kicker};
         margin: 0;
-        ${headline.xsmall({ fontWeight: 'light' })};
+        ${headline.xsmall({ fontWeight: "light" })};
         ${darkModeCss`color: ${inverted};`}
-
     `;
 };
 
-const quoteStyles =  (format: Format): SerializedStyles => {
+const quoteStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getThemeStyles(format.theme);
 
     return css`
@@ -36,7 +36,8 @@ const quoteStyles =  (format: Format): SerializedStyles => {
             fill: ${kicker};
             ${darkModeCss`fill: ${inverted};`}
         }
-`;}
+    `;
+};
 
 const citeStyles = css`
     font-style: normal;
@@ -50,26 +51,31 @@ type Props = {
 
 const blockQuoteStyles = css`
     margin-left: 0;
-`
+`;
 
 const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
     const quoteElement = (
         <p css={quoteStyles(format)}>
-            <SvgQuote/>
+            <SvgQuote />
             {quote}
         </p>
     );
     const children = pipe2(
         attribution,
-        map(attribution =>
-            ([quoteElement, <cite key={attribution} css={citeStyles}>{attribution}</cite>])),
-        withDefault<ReactNode>([quoteElement]));
+        map((attribution) => [
+            quoteElement,
+            <cite key={attribution} css={citeStyles}>
+                {attribution}
+            </cite>,
+        ]),
+        withDefault<ReactNode>([quoteElement])
+    );
 
     return (
-        <aside css= {styles(format)}>
+        <aside css={styles(format)}>
             <blockquote css={blockQuoteStyles}>{children}</blockquote>
         </aside>
     );
-}
+};
 
 export default Pullquote;

@@ -1,5 +1,6 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
+    
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
@@ -7,6 +8,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:react/recommended',
         'plugin:jsx-a11y/recommended',
+        '@guardian/eslint-config-typescript'
     ],
     parserOptions: {
         // Allows for the parsing of modern ECMAScript features
@@ -84,6 +86,9 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'error',
         // This check seems to be flaky, and complains about things that TS is happy about
         'react/prop-types': 'off',
+        'import/no-unresolved': 'off',
+        'indent': 'off',
+        'import/no-default-export': 'off'
     },
     settings: {
         react: {

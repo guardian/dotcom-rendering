@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
-import { Image as ImageData } from 'image';
-import { Video as VideoData } from 'video';
-import HeaderImage from 'components/headerImage';
-import { Item, getFormat } from 'item';
-import HeaderVideo from 'components/headerVideo';
-import { pipe2 } from 'lib';
-import { map, withDefault } from '@guardian/types/option';
+import { map, withDefault } from "@guardian/types/option";
+import HeaderImage from "components/headerImage";
+import HeaderVideo from "components/headerVideo";
+import type { Image as ImageData } from "image";
+import type { Item } from "item";
+import { getFormat } from "item";
+import { pipe2 } from "lib";
+import type { FC } from "react";
+import React from "react";
+import type { Video as VideoData } from "video";
 
 export const enum MainMediaKind {
     Image,
@@ -13,8 +15,8 @@ export const enum MainMediaKind {
 }
 
 export type MainMedia =
-    { kind: MainMediaKind.Image; image: ImageData } |
-    { kind: MainMediaKind.Video; video: VideoData }
+    | { kind: MainMediaKind.Image; image: ImageData }
+    | { kind: MainMediaKind.Video; video: VideoData };
 
 interface HeaderMediaProps {
     item: Item;
@@ -24,20 +26,19 @@ const HeaderMedia: FC<HeaderMediaProps> = ({ item }) => {
     const format = getFormat(item);
     return pipe2(
         item.mainMedia,
-        map(media => {
+        map((media) => {
             if (media.kind === MainMediaKind.Image) {
-                return <HeaderImage
-                    image={media.image}
-                    format={format}
-                />
-            } else if (media.kind === MainMediaKind.Video) {
-                return <HeaderVideo video={media.video} format={format}/>
+                return <HeaderImage image={media.image} format={format} />;
             }
 
-            return <></>
+            if (media.kind.valueOf() === MainMediaKind.Video.valueOf()) {
+                return <HeaderVideo video={media.video} format={format} />;
+            }
+
+            return <></>;
         }),
         withDefault(<></>)
-    )
-}
+    );
+};
 
 export default HeaderMedia;

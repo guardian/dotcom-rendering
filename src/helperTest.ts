@@ -1,8 +1,7 @@
-import { Atoms } from "@guardian/content-api-models/v1/atoms";
-import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
-import { Content } from "@guardian/content-api-models/v1/content";
+import type { Atoms } from "@guardian/content-api-models/v1/atoms";
+import type { BlockElement } from "@guardian/content-api-models/v1/blockElement";
+import type { Content } from "@guardian/content-api-models/v1/content";
 import { ContentType } from "@guardian/content-api-models/v1/contentType";
-
 
 const articleContent = {
     id: "",
@@ -12,10 +11,13 @@ const articleContent = {
     apiUrl: "",
     tags: [],
     references: [],
-    isHosted: false
-}
+    isHosted: false,
+};
 
-export const articleContentWith = (element: BlockElement, atoms?: Atoms): Content => ({
+export const articleContentWith = (
+    element: BlockElement,
+    atoms?: Atoms
+): Content => ({
     ...articleContent,
     atoms,
     blocks: {
@@ -27,8 +29,8 @@ export const articleContentWith = (element: BlockElement, atoms?: Atoms): Conten
                 attributes: {},
                 published: true,
                 contributors: [],
-                elements: [element]
-            }
-        ]
-    }
-})
+                elements: [element],
+            },
+        ],
+    },
+});

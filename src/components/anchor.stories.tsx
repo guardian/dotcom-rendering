@@ -1,42 +1,40 @@
 // ----- Imports ----- //
 
-import React, {FC} from 'react';
+import { Design, Display, Pillar } from "@guardian/types/Format";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import type { FC } from "react";
+import React from "react";
+import { selectPillar } from "../storybookHelpers";
 import Anchor from "./anchor";
-import {text, withKnobs} from "@storybook/addon-knobs";
-import { Pillar, Design, Display } from '@guardian/types/Format';
-import {selectPillar} from "../storybookHelpers";
 
 // ----- Setup ----- //
 
-const link = (): string =>
-    text('Link', 'https://theguardian.com');
+const link = (): string => text("Link", "https://theguardian.com");
 
 const copy = (): string =>
-    text('Copy', '“everything that was recommended was done”.');
+    text("Copy", "“everything that was recommended was done”.");
 
 // ----- Stories ----- //
 
-const Default: FC = () =>
+const Default: FC = () => (
     <Anchor
         format={{
             design: Design.Article,
             display: Display.Standard,
-            theme: selectPillar(Pillar.News)
+            theme: selectPillar(Pillar.News),
         }}
         href={link()}
     >
         {copy()}
-    </Anchor>;
-
+    </Anchor>
+);
 
 // ----- Exports ----- //
 
 export default {
     component: Anchor,
-    title: 'Anchor',
-    decorators: [ withKnobs ],
-}
+    title: "Anchor",
+    decorators: [withKnobs],
+};
 
-export {
-    Default,
-}
+export { Default };

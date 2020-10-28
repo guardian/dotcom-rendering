@@ -1,22 +1,21 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, FC } from 'react';
-import { css } from '@emotion/core';
-import { background } from '@guardian/src-foundations/palette';
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-
-import Series from 'components/media/articleSeries';
-import Standfirst from 'components/standfirst';
-import Byline from 'components/media/byline';
-import Body from 'components/media/articleBody';
-import Tags from 'components/media/tags';
-import { articleWidthStyles, relatedContentStyles } from 'styles';
-import { Item } from 'item';
-import Headline from 'components/headline';
-import HeaderMedia from 'headerMedia';
-import RelatedContent from 'components/shared/relatedContent';
-import FooterCcpa from 'components/shared/footer';
-
+import { css } from "@emotion/core";
+import { breakpoints, from } from "@guardian/src-foundations/mq";
+import { background } from "@guardian/src-foundations/palette";
+import Headline from "components/headline";
+import Body from "components/media/articleBody";
+import Series from "components/media/articleSeries";
+import Byline from "components/media/byline";
+import Tags from "components/media/tags";
+import FooterCcpa from "components/shared/footer";
+import RelatedContent from "components/shared/relatedContent";
+import Standfirst from "components/standfirst";
+import HeaderMedia from "headerMedia";
+import type { Item } from "item";
+import React from "react";
+import type { FC, ReactNode } from "react";
+import { articleWidthStyles, relatedContentStyles } from "styles";
 
 // ----- Styles ----- //
 
@@ -32,7 +31,6 @@ const BorderStyles = css`
     }
 `;
 
-
 // ----- Component ----- //
 
 interface Props {
@@ -40,7 +38,7 @@ interface Props {
     children: ReactNode[];
 }
 
-const Media: FC<Props> = ({ item, children }) =>
+const Media: FC<Props> = ({ item, children }) => (
     <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>
@@ -60,19 +58,25 @@ const Media: FC<Props> = ({ item, children }) =>
                     />
                 </section>
             </header>
-            <Body theme={item.theme} className={[articleWidthStyles]} format={item}>
+            <Body
+                theme={item.theme}
+                className={[articleWidthStyles]}
+                format={item}
+            >
                 {children}
             </Body>
             <section css={articleWidthStyles}>
-                <Tags tags={item.tags}/>
+                <Tags tags={item.tags} />
             </section>
         </article>
         <section css={relatedContentStyles}>
-            <RelatedContent content={item.relatedContent}/>
+            <RelatedContent content={item.relatedContent} />
         </section>
-        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
-    </main>;
-
+        <div id="articleFooter">
+            <FooterCcpa isCcpa={false} />
+        </div>
+    </main>
+);
 
 // ----- Exports ----- //
 

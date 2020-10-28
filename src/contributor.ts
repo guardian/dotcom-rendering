@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
-import { Option, fromNullable, none, map } from '@guardian/types/option';
-import { Content } from '@guardian/content-api-models/v1/content';
-import { Role } from '@guardian/image-rendering/src/image';
-
-import { articleContributors } from 'capi';
-import { srcsetWithWidths, src, Dpr, Image } from 'image';
-import { pipe2 } from 'lib';
-
+import type { Content } from "@guardian/content-api-models/v1/content";
+import { Role } from "@guardian/image-rendering/src/image";
+import type { Option } from "@guardian/types/option";
+import { fromNullable, map, none } from "@guardian/types/option";
+import { articleContributors } from "capi";
+import type { Image } from "image";
+import { Dpr, src, srcsetWithWidths } from "image";
+import { pipe2 } from "lib";
 
 // ------ Types ----- //
 
@@ -16,25 +16,23 @@ type Contributor = {
     apiUrl: string;
     name: string;
     image: Option<Image>;
-}
-
+};
 
 // ----- Functions ----- //
 
 const contributorSrcset = srcsetWithWidths([32, 64, 128, 192, 256, 400, 600]);
 
-const isSingleContributor = (cs: Contributor[]): boolean =>
-    cs.length === 1
+const isSingleContributor = (cs: Contributor[]): boolean => cs.length === 1;
 
 const parseContributors = (salt: string, content: Content): Contributor[] =>
-    articleContributors(content).map(contributor => ({
+    articleContributors(content).map((contributor) => ({
         id: contributor.id,
         apiUrl: contributor.apiUrl,
         name: contributor.webTitle,
         image: pipe2(
             contributor.bylineLargeImageUrl,
             fromNullable,
-            map(url => ({
+            map((url) => ({
                 srcset: contributorSrcset(url, salt, Dpr.One),
                 src: src(salt, url, 64, Dpr.One),
                 dpr2Srcset: contributorSrcset(url, salt, Dpr.Two),
@@ -45,15 +43,10 @@ const parseContributors = (salt: string, content: Content): Contributor[] =>
                 alt: none,
                 role: Role.Standard,
                 nativeCaption: none,
-            })),
+            }))
         ),
     }));
 
-
 // ----- Exports ----- //
 
-export {
-    Contributor,
-    isSingleContributor,
-    parseContributors,
-}
+export { Contributor, isSingleContributor, parseContributors };

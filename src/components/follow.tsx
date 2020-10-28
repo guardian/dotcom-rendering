@@ -1,15 +1,16 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { textSans } from '@guardian/src-foundations/typography';
-
-import { Format } from '@guardian/types/Format';
-import { getThemeStyles } from 'themeStyles';
-import { Contributor, isSingleContributor } from 'contributor';
-import { darkModeCss } from 'styles';
-import { Design } from '@guardian/types/Format';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { textSans } from "@guardian/src-foundations/typography";
+import { Design } from "@guardian/types/Format";
+import type { Format } from "@guardian/types/Format";
+import type { Contributor } from "contributor";
+import { isSingleContributor } from "contributor";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Component ----- //
 
@@ -42,7 +43,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 
     if (
         isSingleContributor(contributors) &&
-        contributor.apiUrl !== '' &&
+        contributor.apiUrl !== "" &&
         format.design !== Design.AdvertisementFeature
     ) {
         return (
@@ -53,15 +54,13 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
                 data-display-name={contributor.name}
             >
                 <span className="js-status">Follow </span>
-                { contributor.name }
+                {contributor.name}
             </button>
         );
     }
 
     return null;
-
-}
-
+};
 
 // ----- Exports ----- //
 

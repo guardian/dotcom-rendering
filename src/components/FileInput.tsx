@@ -1,7 +1,9 @@
-import React, { ReactElement } from "react";
-import { textSans } from "@guardian/src-foundations/typography";
-import { css, SerializedStyles } from "@emotion/core";
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
 import { neutral } from "@guardian/src-foundations";
+import { textSans } from "@guardian/src-foundations/typography";
+import React from "react";
+import type { ReactElement } from "react";
 
 interface FileInputProps {
     required: boolean;
@@ -16,15 +18,22 @@ const optionalLabelStyles = css`
 `;
 
 const labelStyles = css`
-    ${textSans.medium({ fontWeight: 'bold' })};
+    ${textSans.medium({ fontWeight: "bold" })};
 `;
 
 const optionalLabel = (required: boolean): ReactElement | null =>
-    required ? null : <span css={optionalLabelStyles}>Optional</span>
+    required ? null : <span css={optionalLabelStyles}>Optional</span>;
 
-const FileInput = ({ name, label, required, cssOverrides }: FileInputProps): ReactElement =>
+const FileInput = ({
+    name,
+    label,
+    required,
+    cssOverrides,
+}: FileInputProps): ReactElement => (
     <>
-        <label css={labelStyles} htmlFor={name}>{label} {optionalLabel(required)}</label>
+        <label css={labelStyles} htmlFor={name}>
+            {label} {optionalLabel(required)}
+        </label>
         <input
             id={name}
             name={name}
@@ -35,5 +44,6 @@ const FileInput = ({ name, label, required, cssOverrides }: FileInputProps): Rea
         />
         <p>We accept images and pdfs. Maximum total file size: 6MB</p>
     </>
+);
 
 export default FileInput;

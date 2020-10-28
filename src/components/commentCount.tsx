@@ -1,16 +1,18 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { textSans } from '@guardian/src-foundations/typography';
-import { border, neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { Format } from '@guardian/types/Format';
-import { getThemeStyles } from 'themeStyles';
-import { pipe2 } from 'lib';
-import { darkModeCss } from 'styles';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { border, neutral } from "@guardian/src-foundations/palette";
+import { textSans } from "@guardian/src-foundations/typography";
+import type { Format } from "@guardian/types/Format";
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Component ----- //
 
@@ -20,7 +22,7 @@ interface Props extends Format {
 }
 
 const styles = (colour: string): SerializedStyles => css`
-    ${textSans.medium({ fontWeight: 'bold' })}
+    ${textSans.medium({ fontWeight: "bold" })}
     border: none;
     background: none;
     border-left: 1px solid ${border.secondary};
@@ -42,13 +44,13 @@ const getStyles = ({ theme }: Format): SerializedStyles => {
     const colours = getThemeStyles(theme);
 
     return styles(colours.kicker);
-}
+};
 
 const getBubbleStyles = ({ theme }: Format): SerializedStyles => {
     const colours = getThemeStyles(theme);
 
     return bubbleStyles(colours.kicker);
-}
+};
 
 const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
     if (!commentable) {
@@ -57,18 +59,22 @@ const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
 
     return pipe2(
         count,
-        map((count: number) =>
+        map((count: number) => (
             <button css={getStyles(format)}>
-                <svg css={getBubbleStyles(format)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 8">
+                <svg
+                    css={getBubbleStyles(format)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 9 8"
+                >
                     <rect x="0" y="0" width="9" height="6" rx="1.2" />
                     <polygon points="2,6 2,8 2.5,8 4,6" />
                 </svg>
-                { count.toLocaleString() }
+                {count.toLocaleString()}
             </button>
-        ),
+        )),
         withDefault(<></>)
-    )
-}
+    );
+};
 
 // ----- Exports ----- //
 

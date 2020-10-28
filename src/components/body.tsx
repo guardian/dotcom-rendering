@@ -1,29 +1,30 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
-import { Design, Format, Display } from '@guardian/types/Format';
-import { remSpace } from '@guardian/src-foundations';
-import { css } from '@emotion/core';
-
-import { Item } from 'item';
-import { renderAll, renderAllWithoutStyles } from 'renderer';
-import Standard from 'components/standard/article';
-import AdvertisementFeature from 'components/advertisementFeature/article';
-import Comment from 'components/comment/article';
-import Media from 'components/media/article';
-import Interactive from 'components/interactive/article';
-import { partition } from '@guardian/types/result';
-import { getAdPlaceholderInserter } from 'ads';
-import { ElementKind, BodyElement } from 'bodyElement';
-
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { Design, Display } from "@guardian/types/Format";
+import type { Format } from "@guardian/types/Format";
+import { partition } from "@guardian/types/result";
+import { getAdPlaceholderInserter } from "ads";
+import type { BodyElement } from "bodyElement";
+import { ElementKind } from "bodyElement";
+import AdvertisementFeature from "components/advertisementFeature/article";
+import Comment from "components/comment/article";
+import Interactive from "components/interactive/article";
+import Media from "components/media/article";
+import Standard from "components/standard/article";
+import type { Item } from "item";
+import React from "react";
+import type { FC, ReactNode } from "react";
+import { renderAll, renderAllWithoutStyles } from "renderer";
 
 // ----- Functions ----- //
 
-const renderWithAds =
-    (shouldHide: boolean) =>
-        (format: Format, elements: BodyElement[]): ReactNode[] =>
-            getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
-
+const renderWithAds = (shouldHide: boolean) => (
+    format: Format,
+    elements: BodyElement[]
+): ReactNode[] =>
+    getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 // ----- Component ----- //
 
@@ -32,8 +33,15 @@ interface Props {
     shouldHideAds: boolean;
 }
 
-const notImplemented =
-    <p css={css`padding: 0 ${remSpace[2]}`}>Content format not implemented yet</p>;
+const notImplemented = (
+    <p
+        css={css`
+            padding: 0 ${remSpace[2]};
+        `}
+    >
+        Content format not implemented yet
+    </p>
+);
 
 const Body: FC<Props> = ({ item, shouldHideAds }) => {
     if (item.design === Design.Live) {
@@ -43,7 +51,10 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
     const body = partition(item.body).oks;
     const render = renderWithAds(shouldHideAds);
 
-    if (item.design === Design.Interactive && item.display === Display.Immersive) {
+    if (
+        item.design === Design.Interactive &&
+        item.display === Display.Immersive
+    ) {
         return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
     }
 
@@ -54,7 +65,10 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
     if (item.design === Design.Media) {
         return (
             <Media item={item}>
-                {render(item, body.filter(elem => elem.kind === ElementKind.Image))}
+                {render(
+                    item,
+                    body.filter((elem) => elem.kind === ElementKind.Image)
+                )}
             </Media>
         );
     }
@@ -79,8 +93,7 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
     }
 
     return notImplemented;
-}
-
+};
 
 // ----- Exports ----- //
 

@@ -1,19 +1,20 @@
-import React, { FC, ReactElement } from 'react';
-import { css } from '@emotion/core';
-import { basePx, wideContentWidth, darkModeCss } from 'styles';
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral, brandAlt } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
-import { remSpace } from '@guardian/src-foundations';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { pipe2 } from 'lib';
-import { SvgCamera } from '@guardian/src-icons';
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import { brandAlt, neutral } from "@guardian/src-foundations/palette";
+import { textSans } from "@guardian/src-foundations/typography";
+import { SvgCamera } from "@guardian/src-icons";
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { basePx, darkModeCss, wideContentWidth } from "styles";
 
-
-const captionId = 'header-image-caption';
+const captionId = "header-image-caption";
 
 const HeaderImageCaptionStyles = css`
-	summary {
+    summary {
         text-align: center;
         background-color: ${brandAlt[400]};
         color: ${neutral[7]};
@@ -22,82 +23,82 @@ const HeaderImageCaptionStyles = css`
         position: absolute;
         bottom: ${basePx(1)};
         right: ${basePx(1)};
-		border-radius: 100%;
-		outline: none;
+        border-radius: 100%;
+        outline: none;
 
-		&::-webkit-details-marker {
-			display: none;
-		}
+        &::-webkit-details-marker {
+            display: none;
+        }
 
-		${darkModeCss`
+        ${darkModeCss`
 			background-color: ${neutral[60]};
 			opacity: .7;
 		`}
-	}
+    }
 
-	details[open] {
-		min-height: 44px;
-		max-height: 999px;
-		background-color: rgba(0, 0, 0, 0.8);
-		padding: ${remSpace[2]};
-		overflow: hidden;
-		padding-right: ${basePx(6)};
-		z-index: 1;
-		color: ${neutral[100]};
-		${textSans.small()};
-		box-sizing: border-box;
+    details[open] {
+        min-height: 44px;
+        max-height: 999px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: ${remSpace[2]};
+        overflow: hidden;
+        padding-right: ${basePx(6)};
+        z-index: 1;
+        color: ${neutral[100]};
+        ${textSans.small()};
+        box-sizing: border-box;
 
-		${darkModeCss`
+        ${darkModeCss`
 			color: ${neutral[60]};
 		`}
-	}
+    }
 
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	
-	${from.wide} {
-		width: ${wideContentWidth}px;
-	}
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    ${from.wide} {
+        width: ${wideContentWidth}px;
+    }
 `;
 
 const svgStyle = css`
-	line-height: 32px;
-	font-size: 0;
-	svg {
-		width: 24px;
-		height: 24px;
-		margin: 4px;
-	}
+    line-height: 32px;
+    font-size: 0;
+    svg {
+        width: 24px;
+        height: 24px;
+        margin: 4px;
+    }
 `;
 
 interface Props {
-	caption: Option<string>;
-	credit: Option<string>;
+    caption: Option<string>;
+    credit: Option<string>;
 }
-
 
 const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
     pipe2(
         caption,
-        map(cap =>
+        map((cap) => (
             <figcaption css={HeaderImageCaptionStyles}>
                 <details>
                     <summary>
                         <span css={svgStyle}>
-                            <SvgCamera/>Click to see figure caption
+                            <SvgCamera />
+                            Click to see figure caption
                         </span>
                     </summary>
-                    <span id={captionId}>{cap} {withDefault('')(credit)}</span>
+                    <span id={captionId}>
+                        {cap} {withDefault("")(credit)}
+                    </span>
                 </details>
             </figcaption>
-        ),
-        withDefault<ReactElement | null>(null),
+        )),
+        withDefault<ReactElement | null>(null)
     );
 
 export default HeaderImageCaption;
 
-export {
-    captionId,
-};
+export { captionId };

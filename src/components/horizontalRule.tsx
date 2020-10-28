@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css } from '@emotion/core';
-import { neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-
-import { darkModeCss } from 'styles';
-
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { neutral } from "@guardian/src-foundations/palette";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss } from "styles";
 
 // ----- Component ----- //
 
@@ -23,9 +22,7 @@ const styles = css`
     `}
 `;
 
-const HorizontalRule: FC = () =>
-    <hr css={styles} />
-
+const HorizontalRule: FC = () => <hr css={styles} />;
 
 // ----- Exports ----- //
 

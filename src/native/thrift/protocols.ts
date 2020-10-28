@@ -1,19 +1,17 @@
-import {
-    TProtocol,
-    TTransport,
-    IThriftSet,
+import type {
     Int64,
-    TType,
-    MessageType,
-    IThriftMessage,
-    IThriftStruct,
-    IThriftMap,
     IThriftField,
-    IThriftList
-} from '@creditkarma/thrift-server-core'
+    IThriftList,
+    IThriftMap,
+    IThriftMessage,
+    IThriftSet,
+    IThriftStruct,
+    TTransport,
+    TType,
+} from "@creditkarma/thrift-server-core";
+import { MessageType, TProtocol } from "@creditkarma/thrift-server-core";
 
 export abstract class TProtocolDecorator extends TProtocol {
-
     private concreteProtocol: TProtocol;
 
     constructor(protocol: TProtocol) {
@@ -156,8 +154,8 @@ export abstract class TProtocolDecorator extends TProtocol {
 }
 
 export class TMultiplexedProtocol extends TProtocolDecorator {
-    static readonly separator = ":"
-    readonly serviceName: string
+    static readonly separator = ":";
+    readonly serviceName: string;
 
     constructor(protocol: TProtocol, serviceName: string) {
         super(protocol);

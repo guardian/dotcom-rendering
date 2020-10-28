@@ -1,11 +1,12 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { from } from '@guardian/src-foundations/mq';
-import { wideContentWidth, wideColumnWidth } from 'styles';
-import { remSpace } from '@guardian/src-foundations';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import type { FC } from "react";
+import React from "react";
+import { wideColumnWidth, wideContentWidth } from "styles";
 
 // ----- Styles ----- //
 
@@ -26,7 +27,7 @@ const LeftColumnStyles = css`
         }
     }
 
-    .main-content {        
+    .main-content {
         ${from.phablet} {
             width: 67%;
         }
@@ -37,7 +38,6 @@ const LeftColumnStyles = css`
     }
 `;
 
-
 // ----- Props ----- //
 
 interface LeftColumnProps {
@@ -46,15 +46,17 @@ interface LeftColumnProps {
     className?: SerializedStyles | null;
 }
 
-
 // ----- Component ----- //
 
-const LeftColumn: FC<LeftColumnProps> =
-    ({ children, columnContent = null, className = null }) =>
-        <div css={[LeftColumnStyles, className]}>
-            <div className="column-content">{columnContent}</div>
-            <div className="main-content">{children}</div>
-        </div>
-
+const LeftColumn: FC<LeftColumnProps> = ({
+    children,
+    columnContent = null,
+    className = null,
+}) => (
+    <div css={[LeftColumnStyles, className]}>
+        <div className="column-content">{columnContent}</div>
+        <div className="main-content">{children}</div>
+    </div>
+);
 
 export default LeftColumn;

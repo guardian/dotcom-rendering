@@ -1,25 +1,28 @@
-import React, { ReactElement, FC } from 'react';
-import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { Option } from '@guardian/types/option';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
-import { withDefault, map, fromNullable } from '@guardian/types/option';
-import { pipe2 } from 'lib';
-import { neutral, opinion, text } from '@guardian/src-foundations/palette';
-import { Design, Display, Format } from '@guardian/types/Format';
-import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString } from 'themeStyles';
-import { SvgQuote } from '@guardian/src-icons';
-import { makeRelativeDate } from 'date';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import type { RelatedItem } from "@guardian/apps-rendering-api-models/relatedItem";
+import { remSpace } from "@guardian/src-foundations";
+import { neutral, opinion, text } from "@guardian/src-foundations/palette";
+import { headline, textSans } from "@guardian/src-foundations/typography";
+import { SvgQuote } from "@guardian/src-icons";
+import type { Format } from "@guardian/types/Format";
+import { Design, Display } from "@guardian/types/Format";
+import { fromNullable, map, withDefault } from "@guardian/types/option";
+import type { Option } from "@guardian/types/option";
+import { makeRelativeDate } from "date";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { darkModeCss } from "styles";
+import { getThemeStyles, themeFromString } from "themeStyles";
 
 interface Props {
     relatedItem: RelatedItem;
 }
 
 const borderColor = (format: Format): SerializedStyles => {
-    return css`1px solid ${getThemeStyles(format.theme).kicker}`
-}
+    return css`1px solid ${getThemeStyles(format.theme).kicker}`;
+};
 
 const listStyles = (format: Format): SerializedStyles => {
     return css`
@@ -30,17 +33,17 @@ const listStyles = (format: Format): SerializedStyles => {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border-top : ${borderColor(format)};
+        border-top: ${borderColor(format)};
 
         &.fade {
-            opacity: .7;
+            opacity: 0.7;
         }
 
         ${darkModeCss`
             background: ${neutral[7]};
         `}
     `;
-}
+};
 
 const bylineImage = css`
     border-radius: 50%;
@@ -76,7 +79,7 @@ const anchorStyles = css`
 const headingWrapperStyles = css`
     padding: ${remSpace[2]};
     min-height: 10rem;
-`
+`;
 
 const headingStyles: SerializedStyles = css`
     ${headline.xxsmall()}
@@ -88,10 +91,9 @@ const cardStyles: SerializedStyles = css`
     ${headline.xxsmall()}
 `;
 
-
 const commentIconStyle = (): SerializedStyles => {
     return css`
-        width: 2.0rem;
+        width: 2rem;
         height: 1.4375rem;
         display: inline-block;
         fill: ${opinion[400]};
@@ -99,7 +101,7 @@ const commentIconStyle = (): SerializedStyles => {
         margin-top: -3px;
         margin-right: -2px;
     `;
-}
+};
 
 const bylineStyles: SerializedStyles = css`
     color: ${opinion[400]};
@@ -108,23 +110,27 @@ const bylineStyles: SerializedStyles = css`
 const byline = (relatedItem: RelatedItem): ReactElement | null => {
     return pipe2(
         fromNullable(relatedItem.byline),
-        map(byline => {
-            return <div css={bylineStyles}>{byline}</div>
+        map((byline) => {
+            return <div css={bylineStyles}>{byline}</div>;
         }),
         withDefault<ReactElement | null>(null)
-    )
-}
+    );
+};
 
 const cardImage = (relatedItem: RelatedItem): ReactElement | null => {
-    if (!relatedItem?.bylineImage) {
+    if (!relatedItem.bylineImage) {
         return null;
     }
 
-    return <div css={bylineImage}>
-        <img alt={relatedItem?.byline ?? "Byline image"} src={relatedItem.bylineImage}/>
-    </div>
-}
-
+    return (
+        <div css={bylineImage}>
+            <img
+                alt={relatedItem.byline ?? "Byline image"}
+                src={relatedItem.bylineImage}
+            />
+        </div>
+    );
+};
 
 const dateStyles = css`
     ${textSans.small()};
@@ -135,10 +141,15 @@ const dateStyles = css`
     float: right;
     margin-right: ${remSpace[2]};
     align-self: flex-end;
-`
+`;
 
 const lineStyles = css`
-    background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 0.25rem);
+    background-image: repeating-linear-gradient(
+        ${neutral[86]},
+        ${neutral[86]} 1px,
+        transparent 1px,
+        transparent 0.25rem
+    );
     background-repeat: repeat-x;
     background-position: center top;
     background-size: 1px calc(0.75rem + 1px);
@@ -149,13 +160,14 @@ const lineStyles = css`
     ${darkModeCss`
         background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 0.25rem);
     `}
-`
+`;
 
-const relativeFirstPublished = (date: Option<Date>): ReactElement | null => pipe2(
-    date,
-    map(date => <time css={dateStyles}>{makeRelativeDate(date)}</time>),
-    withDefault<ReactElement | null>(null),
-);
+const relativeFirstPublished = (date: Option<Date>): ReactElement | null =>
+    pipe2(
+        date,
+        map((date) => <time css={dateStyles}>{makeRelativeDate(date)}</time>),
+        withDefault<ReactElement | null>(null)
+    );
 
 const footerStyles = css`
     display: flex;
@@ -163,20 +175,21 @@ const footerStyles = css`
     align-items: center;
     clear: both;
     min-height: 2rem;
-`
+`;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
     const format = {
         theme: themeFromString(relatedItem.pillar.id),
         design: Design.Article,
-        display: Display.Standard
-    }
+        display: Display.Standard,
+    };
 
     const img = cardImage(relatedItem);
     const lastModified = relatedItem.lastModified?.iso8601;
-    const articleId = relatedItem.link.split('.com/').pop();
-    const date = (lastModified)
-        ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
+    const articleId = relatedItem.link.split(".com/").pop();
+    const date = lastModified
+        ? relativeFirstPublished(fromNullable(new Date(lastModified)))
+        : null;
     return (
         <li
             className="js-card"
@@ -186,7 +199,9 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
             <a css={anchorStyles} href={relatedItem.link}>
                 <section css={headingWrapperStyles}>
                     <h3 css={headingStyles}>
-                        <span css={commentIconStyle}>< SvgQuote /></span>
+                        <span css={commentIconStyle}>
+                            <SvgQuote />
+                        </span>
                         {relatedItem.title}
                         {byline(relatedItem)}
                     </h3>
@@ -200,7 +215,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
                 </section>
             </a>
         </li>
-    )
-}
+    );
+};
 
 export default BylineCard;

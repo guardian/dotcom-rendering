@@ -1,9 +1,11 @@
-import React, { ReactNode, FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { darkModeCss, adStyles } from 'styles';
-import { neutral, background } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-import { Format } from '@guardian/types/Format';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { background, neutral } from "@guardian/src-foundations/palette";
+import type { Format } from "@guardian/types/Format";
+import React from "react";
+import type { FC, ReactNode } from "react";
+import { adStyles, darkModeCss } from "styles";
 
 interface ArticleBodyProps {
     className: SerializedStyles[];
@@ -44,13 +46,10 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     }
 `;
 
-const ArticleBody: FC<ArticleBodyProps> = ({
-    className,
-    children,
-    format
-}) =>
+const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => (
     <div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
         {children}
     </div>
+);
 
 export default ArticleBody;

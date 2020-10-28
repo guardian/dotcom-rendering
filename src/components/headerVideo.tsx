@@ -1,13 +1,15 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { remSpace, neutral } from '@guardian/src-foundations';
-
-import { darkModeCss, wideContentWidth } from 'styles';
-import { Video } from 'video';
-import { from } from '@guardian/src-foundations/mq';
-import { Format, Design } from '@guardian/types/Format';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { neutral, remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import type { Format } from "@guardian/types/Format";
+import { Design } from "@guardian/types/Format";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss, wideContentWidth } from "styles";
+import type { Video } from "video";
 
 // ----- Component ----- //
 
@@ -53,14 +55,14 @@ interface Props {
     format: Format;
 }
 
-const HeaderVideo: FC<Props> = ({ video, format }) =>
+const HeaderVideo: FC<Props> = ({ video, format }) => (
     <div
         css={styles(format)}
         data-posterUrl={video.posterUrl}
         data-videoId={video.videoId}
         data-duration={video.duration}
-    >
-    </div>
+    ></div>
+);
 
 // ----- Exports ----- //
 

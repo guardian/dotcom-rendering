@@ -1,21 +1,22 @@
 // ----- Imports ----- //
 
-import { Content } from '@guardian/content-api-models/v1/content';
-import { ContentType } from '@guardian/content-api-models/v1/contentType';
-import { Tag } from '@guardian/content-api-models/v1/tag';
-import { TagType } from '@guardian/content-api-models/v1/tagType';
-import { BlockElement} from '@guardian/content-api-models/v1/blockElement';
-import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime'
-import { Option, fromNullable, andThen, none, some, map } from '@guardian/types/option';
-import { fromString as dateFromString } from 'date';
-import { Context } from 'types/parserContext';
-import { parseImage } from 'image';
-import { parseVideo } from 'video';
-import { MainMediaKind, MainMedia } from 'headerMedia';
-import { pipe2 } from 'lib';
-import { isAdvertisementFeature } from 'item';
-
+import type { BlockElement } from "@guardian/content-api-models/v1/blockElement";
+import type { CapiDateTime } from "@guardian/content-api-models/v1/capiDateTime";
+import type { Content } from "@guardian/content-api-models/v1/content";
+import { ContentType } from "@guardian/content-api-models/v1/contentType";
+import { ElementType } from "@guardian/content-api-models/v1/elementType";
+import type { Tag } from "@guardian/content-api-models/v1/tag";
+import { TagType } from "@guardian/content-api-models/v1/tagType";
+import type { Option } from "@guardian/types/option";
+import { andThen, fromNullable, map, none, some } from "@guardian/types/option";
+import { fromString as dateFromString } from "date";
+import type { MainMedia } from "headerMedia";
+import { MainMediaKind } from "headerMedia";
+import { parseImage } from "image";
+import { isAdvertisementFeature } from "item";
+import { pipe2 } from "lib";
+import type { Context } from "types/parserContext";
+import { parseVideo } from "video";
 
 // ----- Lookups ----- //
 
@@ -34,27 +35,29 @@ const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === tagType);
 
 const isImmersive = (content: Content): boolean =>
-    content?.fields?.displayHint === 'immersive';
+    content.fields?.displayHint === "immersive";
 
 const isInteractive = (content: Content): boolean =>
     content.type === ContentType.INTERACTIVE;
 
 const isPhotoEssay = (content: Content): boolean =>
-    content?.fields?.displayHint === 'photoEssay';
+    content.fields?.displayHint === "photoEssay";
 
 const isFeature = (content: Content): boolean =>
-    content.tags.some(tag => tag.id === 'tone/features');
+    content.tags.some((tag) => tag.id === "tone/features");
 
 const isReview = (content: Content): boolean =>
-    [0,1,2,3,4,5].includes(content?.fields?.starRating ?? -1)
+    [0, 1, 2, 3, 4, 5].includes(content.fields?.starRating ?? -1);
 
 const isAnalysis = (content: Content): boolean =>
-    content.tags.some(tag => tag.id === 'tone/analysis');
+    content.tags.some((tag) => tag.id === "tone/analysis");
 
 const articleSeries = (content: Content): Option<Tag> => {
-    const type = isAdvertisementFeature(content.tags) ? TagType.PAID_CONTENT : TagType.SERIES;
+    const type = isAdvertisementFeature(content.tags)
+        ? TagType.PAID_CONTENT
+        : TagType.SERIES;
     return fromNullable(tagsOfType(type)(content.tags)[0]);
-}
+};
 
 const articleContributors = (content: Content): Tag[] =>
     tagsOfType(TagType.CONTRIBUTOR)(content.tags);
@@ -67,29 +70,35 @@ const isVideo = (elem: BlockElement): boolean =>
     elem.contentAtomTypeData?.atomType === "media";
 
 const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable((content?.blocks?.main?.elements.filter(isImage) ?? [])[0]);
+    fromNullable((content.blocks?.main?.elements.filter(isImage) ?? [])[0]);
 
 const articleMainVideo = (content: Content): Option<BlockElement> =>
-    fromNullable((content?.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
+    fromNullable((content.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
 
-const articleMainMedia = (content: Content, context: Context): Option<MainMedia> => {
-    return (content?.blocks?.main?.elements.filter(isImage) ?? [])[0]
+const articleMainMedia = (
+    content: Content,
+    context: Context
+): Option<MainMedia> => {
+    return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
         ? pipe2(
-            articleMainImage(content),
-            andThen(parseImage(context)),
-            map(image => ({
-                kind: MainMediaKind.Image,
-                image
-            })))
+              articleMainImage(content),
+              andThen(parseImage(context)),
+              map((image) => ({
+                  kind: MainMediaKind.Image,
+                  image,
+              }))
+          )
         : pipe2(
-            articleMainVideo(content),
-            andThen(blockElement => parseVideo(blockElement, content.atoms)),
-            map(video => ({
-                kind: MainMediaKind.Video,
-                video
-            })))
-}
-
+              articleMainVideo(content),
+              andThen((blockElement) =>
+                  parseVideo(blockElement, content.atoms)
+              ),
+              map((video) => ({
+                  kind: MainMediaKind.Video,
+                  video,
+              }))
+          );
+};
 
 type ThirdPartyEmbeds = {
     twitter: boolean;
@@ -107,7 +116,8 @@ const noThirdPartyEmbeds: ThirdPartyEmbeds = {
 
 const checkForThirdPartyEmbed = (
     thirdPartyEmbeds: ThirdPartyEmbeds,
-    element: BlockElement): ThirdPartyEmbeds => {
+    element: BlockElement
+): ThirdPartyEmbeds => {
     switch (element.type) {
         case ElementType.INSTAGRAM:
             return { ...thirdPartyEmbeds, instagram: true };
@@ -120,19 +130,19 @@ const checkForThirdPartyEmbed = (
         default:
             return thirdPartyEmbeds;
     }
-}
+};
 
 const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
-    const body = content?.blocks?.body;
+    const body = content.blocks?.body;
     if (!body) {
-        return noThirdPartyEmbeds
+        return noThirdPartyEmbeds;
     }
     return body.reduce(
-        (thirdPartyEmbeds, block) => block.elements
-            .reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
-        noThirdPartyEmbeds,
+        (thirdPartyEmbeds, block) =>
+            block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
+        noThirdPartyEmbeds
     );
-}
+};
 
 const requiresInlineStyles = (): boolean => {
     // temporarily disable `unsafe-inline` in csp
@@ -143,51 +153,49 @@ const requiresInlineStyles = (): boolean => {
     //     content?.atoms?.charts
     // );
     return false;
-}
+};
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
     const sponsorship = tags
-        .find(tag => tag.type === TagType.PAID_CONTENT)?.activeSponsorships?.pop();
+        .find((tag) => tag.type === TagType.PAID_CONTENT)
+        ?.activeSponsorships?.pop();
     const src = sponsorship?.sponsorLogo;
     const url = sponsorship?.sponsorLink;
     const alt = sponsorship?.sponsorName ?? "";
-    return (!src || !url)
-        ? none
-        : some({ src, url, alt })
-}
-
+    return !src || !url ? none : some({ src, url, alt });
+};
 
 // ----- Functions ----- //
 
 const capiEndpoint = (articleId: string, key: string): string => {
     // If you need a new field here, MAPI probably also needs updating
     const fields = [
-        'headline',
-        'standfirst',
-        'bylineHtml',
-        'firstPublicationDate',
-        'shouldHideAdverts',
-        'shouldHideReaderRevenue',
-        'displayHint',
-        'starRating',
-        'commentable',
-        'liveBloggingNow',
-        'lastModified'
+        "headline",
+        "standfirst",
+        "bylineHtml",
+        "firstPublicationDate",
+        "shouldHideAdverts",
+        "shouldHideReaderRevenue",
+        "displayHint",
+        "starRating",
+        "commentable",
+        "liveBloggingNow",
+        "lastModified",
     ];
 
     const params = new URLSearchParams({
-        format: 'thrift',
-        'api-key': key,
-        'show-atoms': 'all',
-        'show-fields': fields.join(','),
-        'show-tags': 'all',
-        'show-blocks': 'all',
-        'show-elements': 'all',
-        'show-related': 'true'
-    })
+        format: "thrift",
+        "api-key": key,
+        "show-atoms": "all",
+        "show-fields": fields.join(","),
+        "show-tags": "all",
+        "show-blocks": "all",
+        "show-elements": "all",
+        "show-related": "true",
+    });
 
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
-}
+};
 
 const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
     // Thrift definitions define some dates as CapiDateTime but CAPI returns strings
@@ -195,7 +203,6 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
     pipe2(date, fromNullable, andThen(capiDateTimeToDate));
-
 
 // ----- Exports ----- //
 
@@ -218,5 +225,5 @@ export {
     paidContentLogo,
     articleMainImage,
     checkForThirdPartyEmbed,
-    requiresInlineStyles
+    requiresInlineStyles,
 };

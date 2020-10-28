@@ -1,6 +1,7 @@
-import { BlockElement } from "@guardian/content-api-models/v1/blockElement";
-import { Option, some, none } from '@guardian/types/option';
-import { Atoms } from "@guardian/content-api-models/v1/atoms";
+import type { Atoms } from "@guardian/content-api-models/v1/atoms";
+import type { BlockElement } from "@guardian/content-api-models/v1/blockElement";
+import type { Option } from "@guardian/types/option";
+import { none, some } from "@guardian/types/option";
 
 interface Video {
     posterUrl: string;
@@ -13,16 +14,17 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
         return none;
     }
 
-    const id = element.contentAtomTypeData?.atomId
-    const atom = atoms.media?.find(media => media.id === id);
+    const id = element.contentAtomTypeData?.atomId;
+    const atom = atoms.media?.find((media) => media.id === id);
 
-    if (atom?.data?.kind !== "media") {
+    if (atom?.data.kind !== "media") {
         return none;
     }
 
-    const { posterUrl, duration, assets, activeVersion } = atom?.data?.media;
-    const videoId = assets
-        .find((asset) => asset.version.toNumber() === activeVersion?.toNumber())?.id;
+    const { posterUrl, duration, assets, activeVersion } = atom.data.media;
+    const videoId = assets.find(
+        (asset) => asset.version.toNumber() === activeVersion?.toNumber()
+    )?.id;
 
     if (!posterUrl || !videoId) {
         return none;
@@ -31,12 +33,8 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
     return some({
         posterUrl,
         videoId,
-        duration: duration?.toNumber()
-    })
-
+        duration: duration?.toNumber(),
+    });
 };
 
-export {
-    Video,
-    parseVideo
-}
+export { Video, parseVideo };

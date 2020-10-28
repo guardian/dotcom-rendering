@@ -1,15 +1,18 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { textSans } from '@guardian/src-foundations/typography';
-import { text, neutral } from '@guardian/src-foundations/palette';
-import { Option, withDefault, map } from '@guardian/types/option';
-import { darkModeCss as darkMode } from 'styles';
-import { formatDate } from 'date';
-import { pipe2 } from 'lib';
-import { Pillar, Theme } from '@guardian/types/Format';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { neutral, text } from "@guardian/src-foundations/palette";
+import { textSans } from "@guardian/src-foundations/typography";
+import type { Theme } from "@guardian/types/Format";
+import { Pillar } from "@guardian/types/Format";
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import { formatDate } from "date";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { darkModeCss as darkMode } from "styles";
 
 // ----- Component ----- //
 
@@ -37,21 +40,24 @@ const commentDatelineStyles = css`
 `;
 
 const getDatelineStyles = (theme: Theme): SerializedStyles => {
-    switch(theme){
+    switch (theme) {
         case Pillar.Opinion:
             return commentDatelineStyles;
         default:
             return styles;
     }
-}
+};
 
 const Dateline: FC<Props> = ({ date, theme }) =>
     pipe2(
         date,
-        map(d => <time css={getDatelineStyles(theme)} data-date={d} className="date">{ formatDate(d) }</time>),
-        withDefault<ReactElement | null>(null),
-    )
-
+        map((d) => (
+            <time css={getDatelineStyles(theme)} data-date={d} className="date">
+                {formatDate(d)}
+            </time>
+        )),
+        withDefault<ReactElement | null>(null)
+    );
 
 // ----- Exports ----- //
 

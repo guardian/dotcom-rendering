@@ -1,16 +1,17 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { remSpace } from '@guardian/src-foundations';
-
-import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
-import Img from 'components/img';
-import { wideContentWidth } from 'styles';
-import { Image } from 'image';
-import { Format, Display, Design } from '@guardian/types/Format';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { breakpoints, from } from "@guardian/src-foundations/mq";
+import type { Format } from "@guardian/types/Format";
+import { Design, Display } from "@guardian/types/Format";
+import HeaderImageCaption, { captionId } from "components/headerImageCaption";
+import Img from "components/img";
+import type { Image } from "image";
+import React from "react";
+import type { FC } from "react";
+import { wideContentWidth } from "styles";
 
 // ----- Subcomponents ----- //
 
@@ -31,15 +32,14 @@ const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
                 />
             );
     }
-}
-
+};
 
 // ----- Component ----- //
 
 const styles = css`
     margin: 0 0 ${remSpace[2]} 0;
     position: relative;
-    
+
     ${from.wide} {
         width: ${wideContentWidth}px;
         margin-left: auto;
@@ -67,7 +67,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 
     ${from.wide} {
         width: ${wideContentWidth}px;
-        height: ${wideContentWidth * height / width}px;
+        height: ${(wideContentWidth * height) / width}px;
     }
 `;
 
@@ -89,7 +89,7 @@ const getStyles = ({ design, display }: Format): SerializedStyles => {
 
             return styles;
     }
-}
+};
 
 const getImgStyles = (format: Format, image: Image): SerializedStyles => {
     switch (format.display) {
@@ -98,16 +98,16 @@ const getImgStyles = (format: Format, image: Image): SerializedStyles => {
         default:
             return imgStyles(image.width, image.height);
     }
-}
+};
 
 const getSizes = ({ display }: Format, image: Image): string => {
     switch (display) {
         case Display.Immersive:
-            return `${100 * image.width/image.height}vh`;
+            return `${(100 * image.width) / image.height}vh`;
         default:
             return `(min-width: ${breakpoints.wide}px) 620px, 100vw`;
     }
-}
+};
 
 interface Props {
     image: Image;
@@ -115,7 +115,7 @@ interface Props {
     format: Format;
 }
 
-const HeaderImage: FC<Props> = ({ className, image, format }: Props) =>
+const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
     <figure css={[getStyles(format), className]} aria-labelledby={captionId}>
         <Img
             image={image}
@@ -125,6 +125,7 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) =>
         />
         <Caption format={format} image={image} />
     </figure>
+);
 
 // ----- Exports ----- //
 

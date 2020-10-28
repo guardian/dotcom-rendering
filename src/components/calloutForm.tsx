@@ -1,19 +1,21 @@
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import { neutral, remSpace, text } from '@guardian/src-foundations';
-import { Button } from '@guardian/src-button';
-import { SvgMinus, SvgPlus } from '@guardian/src-icons';
-import { Format } from '@guardian/types/Format';
-import { getThemeStyles } from 'themeStyles';
-import { headline, textSans, body } from '@guardian/src-foundations/typography';
-import { TextInput } from '@guardian/src-text-input';
-import { TextArea } from '@guardian/src-text-area';
-import { FormField } from '@guardian/apps-rendering-api-models/formField';
-import { darkModeCss } from 'styles';
-import FileInput from 'components/FileInput';
-import RadioInput from 'components/RadioInput';
-import { plainTextElement } from 'renderer';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import type { Campaign } from "@guardian/apps-rendering-api-models/campaign";
+import type { FormField } from "@guardian/apps-rendering-api-models/formField";
+import { Button } from "@guardian/src-button";
+import { neutral, remSpace, text } from "@guardian/src-foundations";
+import { body, headline, textSans } from "@guardian/src-foundations/typography";
+import { SvgMinus, SvgPlus } from "@guardian/src-icons";
+import { TextArea } from "@guardian/src-text-area";
+import { TextInput } from "@guardian/src-text-input";
+import type { Format } from "@guardian/types/Format";
+import FileInput from "components/FileInput";
+import RadioInput from "components/RadioInput";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { plainTextElement } from "renderer";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 export interface CalloutProps {
     campaign: Campaign;
@@ -27,11 +29,13 @@ const calloutStyles = css`
     position: relative;
     margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
 
-    &:not([open]) .is-on, &[open] .is-off {
+    &:not([open]) .is-on,
+    &[open] .is-off {
         display: none;
     }
 
-    .is-on, .is-off {
+    .is-on,
+    .is-off {
         position: absolute;
         transform: translate(0, 50%);
         bottom: 0;
@@ -68,7 +72,7 @@ const logoStyles = css`
 `;
 
 const headlineStyles = css`
-    ${headline.xxxsmall({ fontWeight: 'bold' })};
+    ${headline.xxxsmall({ fontWeight: "bold" })};
     margin: 0;
 `;
 
@@ -76,7 +80,7 @@ const descriptionStyles = css`
     margin: ${remSpace[3]};
 
     p {
-        ${body.small({ lineHeight: 'tight' })};
+        ${body.small({ lineHeight: "tight" })};
         margin: ${remSpace[2]} 0;
     }
 `;
@@ -95,7 +99,7 @@ const speechBubbleStyles = (kicker: string): SerializedStyles => css`
     min-width: 5.5rem;
 
     &::after {
-        content: '';
+        content: "";
         width: 1.25rem;
         height: 1.375rem;
         border-radius: 0 0 1.125rem;
@@ -120,22 +124,58 @@ const formAnchor = (kicker: string): SerializedStyles => css`
     right: ${remSpace[2]};
 `;
 
-const renderField = ({ type, label, mandatory, options, id }: FormField): ReactElement | null => {
+const renderField = ({
+    type,
+    label,
+    mandatory,
+    options,
+    id,
+}: FormField): ReactElement | null => {
     const name = `field_${id}`;
-    const input = css`margin-bottom: ${remSpace[4]};`
+    const input = css`
+        margin-bottom: ${remSpace[4]};
+    `;
     switch (type) {
-        case 'text':
-            return <TextInput cssOverrides={input} name={name} label={label} optional={!mandatory}/>
-        case 'textarea':
-            return <TextArea cssOverrides={input} name={name} label={label} optional={!mandatory}/>
-        case 'file':
-            return <FileInput cssOverrides={input} required={mandatory} name={name} label={label}/>
-        case 'radio':
-            return <RadioInput cssOverrides={input} options={options} name={name} label={label}/>
+        case "text":
+            return (
+                <TextInput
+                    cssOverrides={input}
+                    name={name}
+                    label={label}
+                    optional={!mandatory}
+                />
+            );
+        case "textarea":
+            return (
+                <TextArea
+                    cssOverrides={input}
+                    name={name}
+                    label={label}
+                    optional={!mandatory}
+                />
+            );
+        case "file":
+            return (
+                <FileInput
+                    cssOverrides={input}
+                    required={mandatory}
+                    name={name}
+                    label={label}
+                />
+            );
+        case "radio":
+            return (
+                <RadioInput
+                    cssOverrides={input}
+                    options={options}
+                    name={name}
+                    label={label}
+                />
+            );
         default:
             return null;
     }
-}
+};
 
 const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
     const { campaign, format, description } = props;
@@ -152,25 +192,53 @@ const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
                     </div>
                     <div css={descriptionStyles}>
                         <h4 css={headlineStyles}>{campaign.fields.callout}</h4>
-                        {Array.from(description.childNodes).map(plainTextElement)}
+                        {Array.from(description.childNodes).map(
+                            plainTextElement
+                        )}
                     </div>
                 </div>
-                <Button size="xsmall" className="is-off js-callout-expand" iconSide="left" icon={<SvgPlus />}>Tell us</Button>
-                <Button size="xsmall" className="is-on js-callout-expand" iconSide="left" icon={<SvgMinus />}>Hide</Button>
+                <Button
+                    size="xsmall"
+                    className="is-off js-callout-expand"
+                    iconSide="left"
+                    icon={<SvgPlus />}
+                >
+                    Tell us
+                </Button>
+                <Button
+                    size="xsmall"
+                    className="is-on js-callout-expand"
+                    iconSide="left"
+                    icon={<SvgMinus />}
+                >
+                    Hide
+                </Button>
             </summary>
-
 
             <form css={formStyles} action="#" method="post">
                 <div>
                     <input name="formId" type="hidden" value={campaign.id} />
                     {campaign.fields.formFields.map(renderField)}
                     <p css={errorStyles} className="js-error-message"></p>
-                    <Button cssOverrides={css`margin: ${remSpace[4]} 0;`} type="submit" size="xsmall">Share with the Guardian</Button>
-                    <a css={formAnchor(kicker)} href="https://www.theguardian.com/help/terms-of-service">Terms and conditions</a>
+                    <Button
+                        cssOverrides={css`
+                            margin: ${remSpace[4]} 0;
+                        `}
+                        type="submit"
+                        size="xsmall"
+                    >
+                        Share with the Guardian
+                    </Button>
+                    <a
+                        css={formAnchor(kicker)}
+                        href="https://www.theguardian.com/help/terms-of-service"
+                    >
+                        Terms and conditions
+                    </a>
                 </div>
             </form>
         </details>
-    )
-}
+    );
+};
 
 export default CalloutForm;

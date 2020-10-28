@@ -1,15 +1,16 @@
 // ----- Imports ----- //
 
-import React, { ReactElement, FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-
-import { Contributor, isSingleContributor } from 'contributor';
-import Img from 'components/img';
-import { darkModeCss } from 'styles';
-import { pipe2 } from 'lib';
-import { map, withDefault } from '@guardian/types/option';
-import { Format } from '@guardian/types/Format';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import type { Format } from "@guardian/types/Format";
+import { map, withDefault } from "@guardian/types/option";
+import Img from "components/img";
+import type { Contributor } from "contributor";
+import { isSingleContributor } from "contributor";
+import { pipe2 } from "lib";
+import type { FC, ReactElement } from "react";
+import React from "react";
+import { darkModeCss } from "styles";
 
 // ----- Styles ----- //
 
@@ -29,7 +30,6 @@ const imageStyles = css`
     `}
 `;
 
-
 // ----- Component ----- //
 
 interface Props {
@@ -47,7 +47,7 @@ const Cutout: FC<Props> = ({ contributors, className, format }) => {
 
     return pipe2(
         contributor.image,
-        map(image =>
+        map((image) => (
             <div css={[className, styles]}>
                 <Img
                     image={image}
@@ -56,11 +56,10 @@ const Cutout: FC<Props> = ({ contributors, className, format }) => {
                     format={format}
                 />
             </div>
-        ),
-        withDefault<ReactElement | null>(null),
+        )),
+        withDefault<ReactElement | null>(null)
     );
-}
-
+};
 
 // ----- Exports ----- //
 

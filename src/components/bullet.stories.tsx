@@ -1,16 +1,15 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
-import { Design, Display, Pillar } from '@guardian/types/Format';
-
-import { selectPillar } from 'storybookHelpers';
-import Bullet from './bullet';
-
+import { Design, Display, Pillar } from "@guardian/types/Format";
+import { withKnobs } from "@storybook/addon-knobs";
+import type { FC } from "react";
+import React from "react";
+import { selectPillar } from "storybookHelpers";
+import Bullet from "./bullet";
 
 // ----- Stories ----- //
 
-const Default: FC = () =>
+const Default: FC = () => (
     <Bullet
         format={{
             design: Design.Article,
@@ -19,16 +18,14 @@ const Default: FC = () =>
         }}
         text="• Lorem ipsum"
     />
-
+);
 
 // ----- Exports ----- //
 
 export default {
     component: Bullet,
-    title: 'Bullet',
-    decorators: [ withKnobs ],
-}
+    title: "Bullet",
+    decorators: [withKnobs],
+};
 
-export {
-    Default,
-}
+export { Default };

@@ -1,9 +1,7 @@
 // ----- Imports ----- //
 
-import { select } from '@storybook/addon-knobs';
-
-import { Pillar } from '@guardian/types/Format';
-
+import { Pillar } from "@guardian/types/Format";
+import { select } from "@storybook/addon-knobs";
 
 // ----- Helpers ----- //
 
@@ -16,11 +14,8 @@ const pillarOptions = {
 };
 
 const selectPillar = (initial: Pillar): Pillar =>
-    select('Pillar', pillarOptions, initial);
-
+    select("Pillar", pillarOptions, initial);
 
 // ----- Exports ----- //
 
-export {
-    selectPillar,
-}
+export { selectPillar };

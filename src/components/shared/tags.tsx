@@ -1,16 +1,19 @@
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { darkModeCss } from '../../styles';
-import { textSans } from '@guardian/src-foundations/typography';
-import { background, neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-import { Design, Format } from '@guardian/types/Format';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { background, neutral } from "@guardian/src-foundations/palette";
+import { textSans } from "@guardian/src-foundations/typography";
+import type { Format } from "@guardian/types/Format";
+import { Design } from "@guardian/types/Format";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss } from "../../styles";
 
 interface TagsProps {
-    tags: {
+    tags: Array<{
         webUrl: string;
         webTitle: string;
-    }[];
+    }>;
     background?: string;
     format: Format;
 }
@@ -28,34 +31,34 @@ const tagsStyles = (format: Format): SerializedStyles => {
     };
 
     return css`
-    margin-top: 0;
-    margin-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
 
-    display: block;
-    list-style: none;
-    padding: ${remSpace[2]} 0 ${remSpace[4]} 0;
-    ${textSans.medium()}
+        display: block;
+        list-style: none;
+        padding: ${remSpace[2]} 0 ${remSpace[4]} 0;
+        ${textSans.medium()}
 
-    li {
-        margin: ${remSpace[2]} ${remSpace[2]} 0 0;
-        display: inline-block;
-
-        a {
-            text-decoration: none;
-            white-space: nowrap;
-            padding: 6px 16px;
-            border-radius: 30px;
-            text-overflow: ellipsis;
-            max-width: 18.75rem;
-            color: ${neutral[7]};
-            background-color: ${backgroundColour(format)};
+        li {
+            margin: ${remSpace[2]} ${remSpace[2]} 0 0;
             display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
+
+            a {
+                text-decoration: none;
+                white-space: nowrap;
+                padding: 6px 16px;
+                border-radius: 30px;
+                text-overflow: ellipsis;
+                max-width: 18.75rem;
+                color: ${neutral[7]};
+                background-color: ${backgroundColour(format)};
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+            }
         }
-    }
-`;
-}
+    `;
+};
 
 const tagsDarkStyles = darkModeCss`
     background: ${background.inverse};
@@ -70,13 +73,13 @@ const tagsDarkStyles = darkModeCss`
 const Tags: FC<TagsProps> = ({ tags, format }) => (
     <ul css={[tagsStyles(format), tagsDarkStyles]}>
         {tags.map((tag, index) => {
-            return <li key={index}>
-                <a href={tag.webUrl}>
-                    {tag.webTitle}
-                </a>
-            </li>
+            return (
+                <li key={index}>
+                    <a href={tag.webUrl}>{tag.webTitle}</a>
+                </li>
+            );
         })}
     </ul>
-)
+);
 
 export default Tags;

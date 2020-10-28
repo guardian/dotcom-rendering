@@ -1,13 +1,16 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, FC } from 'react';
-import { css } from '@emotion/core';
-import { brandAltBackground, brandAltLine } from '@guardian/src-foundations/palette';
-import { SvgStar } from '@guardian/src-icons';
-import { Item } from 'item';
-import { darkModeCss } from 'styles';
-import { Design } from '@guardian/types/Format';
-
+import { css } from "@emotion/core";
+import {
+    brandAltBackground,
+    brandAltLine,
+} from "@guardian/src-foundations/palette";
+import { SvgStar } from "@guardian/src-icons";
+import { Design } from "@guardian/types/Format";
+import type { Item } from "item";
+import React from "react";
+import type { FC, ReactNode } from "react";
+import { darkModeCss } from "styles";
 
 // ----- Subcomponents ----- //
 
@@ -19,7 +22,6 @@ const starStyles = css`
     &:nth-of-type(5) {
         padding-right: 2px;
     }
-;
     svg {
         margin: 0 -0.125rem;
         height: 1.75rem;
@@ -35,15 +37,20 @@ const emptyStyles = css`
     stroke: ${brandAltLine.primary};
 `;
 
-const empty = <span css={[starStyles, emptyStyles]}><SvgStar/></span>;
+const empty = (
+    <span css={[starStyles, emptyStyles]}>
+        <SvgStar />
+    </span>
+);
 
-const full = <span css={starStyles}><SvgStar/></span>;
+const full = (
+    <span css={starStyles}>
+        <SvgStar />
+    </span>
+);
 
 export const stars = (rating: number): ReactNode =>
-    [empty, empty, empty, empty, empty]
-        .fill(full, 0, rating);
-
-
+    [empty, empty, empty, empty, empty].fill(full, 0, rating);
 
 // ----- Component ----- //
 
@@ -53,7 +60,6 @@ interface Props {
 
 const StarRating: FC<Props> = ({ item }) =>
     item.design === Design.Review ? <div>{stars(item.starRating)}</div> : null;
-
 
 // ----- Exports ----- //
 

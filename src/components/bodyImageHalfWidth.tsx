@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import Img from 'components/img';
-import { BodyImageProps as Props } from 'image';
-import { remSpace, breakpoints } from '@guardian/src-foundations';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { breakpoints, remSpace } from "@guardian/src-foundations";
+import Img from "components/img";
+import type { BodyImageProps as Props } from "image";
+import React from "react";
+import type { FC } from "react";
 
 // ----- Setup ----- //
 
@@ -18,11 +20,12 @@ const styles = css`
     display: inline-block;
     width: ${figureWidth};
 
-    + .halfWidth, + .halfWidth + .halfWidth + .halfWidth {
+    + .halfWidth,
+    + .halfWidth + .halfWidth + .halfWidth {
         margin-left: ${remSpace[2]};
     }
 
-    + .halfWidth + .halfWidth  {
+    + .halfWidth + .halfWidth {
         margin-left: 0;
     }
 `;
@@ -32,7 +35,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     width: 100%;
 `;
 
-const BodyImageHalfWidth: FC<Props> = ({ image, format }: Props) =>
+const BodyImageHalfWidth: FC<Props> = ({ image, format }: Props) => (
     <figure css={styles} className="halfWidth">
         <Img
             image={image}
@@ -40,8 +43,8 @@ const BodyImageHalfWidth: FC<Props> = ({ image, format }: Props) =>
             className={imgStyles(image.width, image.height)}
             format={format}
         />
-    </figure>;
-
+    </figure>
+);
 
 // ----- Exports ----- //
 

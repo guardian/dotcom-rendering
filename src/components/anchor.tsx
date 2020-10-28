@@ -1,14 +1,15 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
-import { SerializedStyles, css } from '@emotion/core';
-import { Format, Design } from '@guardian/types/Format';
-import { neutral } from '@guardian/src-foundations/palette';
-
-import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
-import { palette } from '@guardian/src-foundations';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { palette } from "@guardian/src-foundations";
+import { neutral } from "@guardian/src-foundations/palette";
+import type { Format } from "@guardian/types/Format";
+import { Design } from "@guardian/types/Format";
+import type { FC, ReactNode } from "react";
+import React from "react";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Component ----- //
 
@@ -39,25 +40,25 @@ const colour = (format: Format): SerializedStyles => {
                 ${darkModeCss`
                     color: ${neutral[86]};
                 `}
-            `
+            `;
         case Design.Media:
             return css`
                 color: ${inverted};
                 border-bottom: 0.0625rem solid ${neutral[20]};
-            `
+            `;
         default:
             return css`
                 color: ${kicker};
                 border-bottom: 0.0625rem solid ${neutral[86]};
-            `
+            `;
     }
-}
+};
 
-const Anchor: FC<Props> = ({ format, children, href, className }: Props) =>
+const Anchor: FC<Props> = ({ format, children, href, className }: Props) => (
     <a css={[styles, colour(format), className]} href={href}>
         {children}
     </a>
-
+);
 
 // ----- Exports ----- //
 

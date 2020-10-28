@@ -1,16 +1,17 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import Img from 'components/img';
-import { BodyImageProps as Props } from 'image';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import Img from "components/img";
+import type { BodyImageProps as Props } from "image";
+import React from "react";
+import type { FC } from "react";
 
 // ----- Setup ----- //
 
-const size = '8.75rem';
-
+const size = "8.75rem";
 
 // ----- Component ----- //
 
@@ -32,7 +33,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(${size} * ${height / width});
 `;
 
-const BodyImageThumbnail: FC<Props> = ({ image, children, format }: Props) =>
+const BodyImageThumbnail: FC<Props> = ({ image, children, format }: Props) => (
     <figure css={styles}>
         <Img
             image={image}
@@ -41,8 +42,8 @@ const BodyImageThumbnail: FC<Props> = ({ image, children, format }: Props) =>
             format={format}
         />
         {children}
-    </figure>;
-
+    </figure>
+);
 
 // ----- Exports ----- //
 

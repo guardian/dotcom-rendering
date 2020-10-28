@@ -1,9 +1,8 @@
 // ----- Imports ----- //
 
-import { Pillar, Design, Display } from '@guardian/types/Format';
-
-import { Item, Review } from 'item';
-import { none, some } from '@guardian/types/option';
+import { Design, Display, Pillar } from "@guardian/types/Format";
+import { none, some } from "@guardian/types/option";
+import type { Item, Review } from "item";
 
 // ----- Fixture ----- //
 
@@ -11,19 +10,20 @@ const fields = {
     theme: Pillar.News,
     display: Display.Standard,
     body: [],
-    headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
+    headline:
+        "Reclaimed lakes and giant airports: how Mexico City might have looked",
     standfirst: none,
-    byline: '',
+    byline: "",
     bylineHtml: none,
     publishDate: none,
     contributors: [],
     mainMedia: none,
     series: some({
-        id: '',
+        id: "",
         type: 0,
-        webTitle: '',
-        webUrl: '',
-        apiUrl: '',
+        webTitle: "",
+        webUrl: "",
+        apiUrl: "",
         references: [],
     }),
     commentable: false,
@@ -31,7 +31,7 @@ const fields = {
     shouldHideReaderRevenue: false,
     branding: none,
     commentCount: none,
-    relatedContent: none
+    relatedContent: none,
 };
 
 const article: Item = {
@@ -63,17 +63,9 @@ const advertisementFeature: Item = {
 
 const comment: Item = {
     design: Design.Comment,
-    ...fields
+    ...fields,
 };
-
 
 // ----- Exports ----- //
 
-export {
-    article,
-    analysis,
-    feature,
-    review,
-    advertisementFeature,
-    comment,
-};
+export { article, analysis, feature, review, advertisementFeature, comment };

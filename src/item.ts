@@ -1,25 +1,40 @@
 // ----- Imports ----- //
 
-import { themeFromString } from 'themeStyles';
-import { Content } from '@guardian/content-api-models/v1/content';
-import { Tag } from '@guardian/content-api-models/v1/tag';
-import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import { Element } from '@guardian/content-api-models/v1/element';
-import { Asset } from '@guardian/content-api-models/v1/asset';
-import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { articleSeries, isPhotoEssay, isImmersive, isInteractive, maybeCapiDate, paidContentLogo, Logo, articleMainMedia } from 'capi';
-import { Option, fromNullable, map } from '@guardian/types/option';
-import { Format, Pillar, Design, Display } from '@guardian/types/Format';
-import { LiveBlock, parseMany as parseLiveBlocks } from 'liveBlock';
-import { Body, parseElements } from 'bodyElement';
-import { Context } from 'types/parserContext';
-import { Contributor, parseContributors } from 'contributor';
-import { MainMedia } from 'headerMedia';
-import { pipe2 } from 'lib';
-import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { Branding } from '@guardian/apps-rendering-api-models/branding';
-import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
-import { Image, parseCardImage } from 'image';
+import type { Branding } from "@guardian/apps-rendering-api-models/branding";
+import type { RelatedContent } from "@guardian/apps-rendering-api-models/relatedContent";
+import type { RenderingRequest } from "@guardian/apps-rendering-api-models/renderingRequest";
+import type { Asset } from "@guardian/content-api-models/v1/asset";
+import { AssetType } from "@guardian/content-api-models/v1/assetType";
+import type { Content } from "@guardian/content-api-models/v1/content";
+import type { Element } from "@guardian/content-api-models/v1/element";
+import { ElementType } from "@guardian/content-api-models/v1/elementType";
+import type { Tag } from "@guardian/content-api-models/v1/tag";
+import type { Format } from "@guardian/types/Format";
+import { Design, Display, Pillar } from "@guardian/types/Format";
+import { fromNullable, map } from "@guardian/types/option";
+import type { Option } from "@guardian/types/option";
+import type { Body } from "bodyElement";
+import { parseElements } from "bodyElement";
+import type { Logo } from "capi";
+import {
+    articleMainMedia,
+    articleSeries,
+    isImmersive,
+    isInteractive,
+    isPhotoEssay,
+    maybeCapiDate,
+    paidContentLogo,
+} from "capi";
+import type { Contributor } from "contributor";
+import { parseContributors } from "contributor";
+import type { MainMedia } from "headerMedia";
+import type { Image } from "image";
+import { parseCardImage } from "image";
+import { pipe2 } from "lib";
+import type { LiveBlock } from "liveBlock";
+import { parseMany as parseLiveBlocks } from "liveBlock";
+import { themeFromString } from "themeStyles";
+import type { Context } from "types/parserContext";
 
 // ----- Item Type ----- //
 
@@ -41,7 +56,7 @@ interface Fields extends Format {
 }
 
 interface ResizedRelatedContent extends RelatedContent {
-    resizedImages: Option<Image>[];
+    resizedImages: Array<Option<Image>>;
 }
 
 interface Liveblog extends Fields {
@@ -75,63 +90,66 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-    design: Exclude<Design, Design.Live |
-        Design.Review |
-        Design.Comment |
-        Design.AdvertisementFeature>;
+    design: Exclude<
+        Design,
+        | Design.Live
+        | Design.Review
+        | Design.Comment
+        | Design.AdvertisementFeature
+    >;
     body: Body;
 }
 
-type Item
-    = Liveblog
+type Item =
+    | Liveblog
     | Review
     | Comment
     | Standard
     | Interactive
-    | AdvertisementFeature
-    ;
-
+    | AdvertisementFeature;
 
 // ----- Convenience Types ----- //
 
-type ItemFields =
-    Omit<Fields, 'design'>;
+type ItemFields = Omit<Fields, "design">;
 
-type ItemFieldsWithBody =
-    ItemFields & { body: Body };
-
+type ItemFieldsWithBody = ItemFields & { body: Body };
 
 // ----- Functions ----- //
 
-const getFormat = (item: Item): Format =>
-    ({ design: item.design, display: item.display, theme: item.theme });
+const getFormat = (item: Item): Format => ({
+    design: item.design,
+    display: item.display,
+    theme: item.theme,
+});
 
 // The main image for the page is meant to be shown as showcase.
 function isShowcaseImage(content: Content): boolean {
     const mainMedia = content.blocks?.main?.elements[0];
 
-    return mainMedia?.imageTypeData?.role === 'showcase';
+    return mainMedia?.imageTypeData?.role === "showcase";
 }
 
 // The main media for the page is an embed.
 const isMainEmbed = (elem: Element): boolean =>
-    elem.relation === 'main' && elem.type === ElementType.EMBED;
+    elem.relation === "main" && elem.type === ElementType.EMBED;
 
 // The first embed asset is meant to be shown as showcase.
-const hasShowcaseAsset = (assets: Asset[]): boolean  =>
-    assets.find(asset => asset.type === AssetType.EMBED)?.typeData?.role === 'showcase';
+const hasShowcaseAsset = (assets: Asset[]): boolean =>
+    assets.find((asset) => asset.type === AssetType.EMBED)?.typeData?.role ===
+    "showcase";
 
 // There is an embed element that is both the main media for the page,
 // and is meant to be displayed as showcase.
 const isShowcaseEmbed = (content: Content): boolean =>
-    content.elements?.some(elem => isMainEmbed(elem) && hasShowcaseAsset(elem.assets)) ?? false;
+    content.elements?.some(
+        (elem) => isMainEmbed(elem) && hasShowcaseAsset(elem.assets)
+    ) ?? false;
 
 function getDisplay(content: Content): Display {
-
     if (isImmersive(content) || isPhotoEssay(content)) {
         return Display.Immersive;
-    // This is meant to replicate the current logic in frontend:
-    // https://github.com/guardian/frontend/blob/88cfa609c73545085c3e5f3921631ec344a3eb83/common/app/model/meta.scala#L586
+        // This is meant to replicate the current logic in frontend:
+        // https://github.com/guardian/frontend/blob/88cfa609c73545085c3e5f3921631ec344a3eb83/common/app/model/meta.scala#L586
     } else if (isShowcaseImage(content) || isShowcaseEmbed(content)) {
         return Display.Showcase;
     }
@@ -139,95 +157,111 @@ function getDisplay(content: Content): Display {
     return Display.Standard;
 }
 
-const itemFields = (context: Context, request: RenderingRequest): ItemFields => {
+const itemFields = (
+    context: Context,
+    request: RenderingRequest
+): ItemFields => {
     const { content, branding, commentCount, relatedContent } = request;
     return {
-        theme: themeFromString(content?.pillarId),
+        theme: themeFromString(content.pillarId),
         display: getDisplay(content),
-        headline: content?.fields?.headline ?? "",
-        standfirst: pipe2(content?.fields?.standfirst, fromNullable, map(context.docParser)),
-        byline: content?.fields?.byline ?? "",
-        bylineHtml: pipe2(content?.fields?.bylineHtml, fromNullable, map(context.docParser)),
+        headline: content.fields?.headline ?? "",
+        standfirst: pipe2(
+            content.fields?.standfirst,
+            fromNullable,
+            map(context.docParser)
+        ),
+        byline: content.fields?.byline ?? "",
+        bylineHtml: pipe2(
+            content.fields?.bylineHtml,
+            fromNullable,
+            map(context.docParser)
+        ),
         publishDate: maybeCapiDate(content.webPublicationDate),
         mainMedia: articleMainMedia(content, context),
         contributors: parseContributors(context.salt, content),
         series: articleSeries(content),
-        commentable: content?.fields?.commentable ?? false,
+        commentable: content.fields?.commentable ?? false,
         tags: content.tags,
-        shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false,
+        shouldHideReaderRevenue:
+            content.fields?.shouldHideReaderRevenue ?? false,
         branding: fromNullable(branding),
         commentCount: fromNullable(commentCount),
-        relatedContent: pipe2(relatedContent, fromNullable, map(relatedContent => ({
-            ...relatedContent,
-            resizedImages: relatedContent
-                .relatedItems.map(item => parseCardImage(item.headerImage, context.salt))
-        })))
-    }
-}
+        relatedContent: pipe2(
+            relatedContent,
+            fromNullable,
+            map((relatedContent) => ({
+                ...relatedContent,
+                resizedImages: relatedContent.relatedItems.map((item) =>
+                    parseCardImage(item.headerImage, context.salt)
+                ),
+            }))
+        ),
+    };
+};
 
-const itemFieldsWithBody = (context: Context, request: RenderingRequest): ItemFieldsWithBody => {
+const itemFieldsWithBody = (
+    context: Context,
+    request: RenderingRequest
+): ItemFieldsWithBody => {
     const { content } = request;
-    const body = content?.blocks?.body ?? [];
-    const atoms = content?.atoms;
+    const body = content.blocks?.body ?? [];
+    const atoms = content.atoms;
     const campaigns = request.campaigns;
-    const elements = body[0]?.elements;
-    return ({
+    const elements = body.shift()?.elements;
+    return {
         ...itemFields(context, request),
-        body: elements !== undefined ? parseElements(context, atoms, campaigns)(elements): [],
-    });
-}
+        body: elements
+            ? parseElements(context, atoms, campaigns)(elements)
+            : [],
+    };
+};
 
 const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
-    tags.some(tag => tagIds.includes(tag.id));
+    tags.some((tag) => tagIds.includes(tag.id));
 
 const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
-    tags.some(tag => tag.id === tagId);
+    tags.some((tag) => tag.id === tagId);
 
-const isAudio = hasTag('type/audio');
+const isAudio = hasTag("type/audio");
 
-const isVideo = hasTag('type/video');
+const isVideo = hasTag("type/video");
 
-const isGallery = hasTag('type/gallery');
+const isGallery = hasTag("type/gallery");
 
-const isMedia =
-    hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
+const isMedia = hasSomeTag(["type/audio", "type/video", "type/gallery"]);
 
-const isReview =
-    hasSomeTag(['tone/reviews', 'tone/livereview', 'tone/albumreview']);
+const isReview = hasSomeTag([
+    "tone/reviews",
+    "tone/livereview",
+    "tone/albumreview",
+]);
 
-const isAnalysis =
-    hasTag('tone/analysis');
+const isAnalysis = hasTag("tone/analysis");
 
-const isComment =
-    hasSomeTag(['tone/comment', 'tone/letters']);
+const isComment = hasSomeTag(["tone/comment", "tone/letters"]);
 
-const isFeature =
-    hasTag('tone/features');
+const isFeature = hasTag("tone/features");
 
-const isLive =
-    hasTag('tone/minutebyminute');
+const isLive = hasTag("tone/minutebyminute");
 
-const isRecipe =
-    hasTag('tone/recipes');
+const isRecipe = hasTag("tone/recipes");
 
-const isMatchReport =
-    hasTag('tone/matchreports');
+const isMatchReport = hasTag("tone/matchreports");
 
-const isInterview =
-    hasTag('tone/interview');
+const isInterview = hasTag("tone/interview");
 
-const isGuardianView =
-    hasTag('tone/editorials');
+const isGuardianView = hasTag("tone/editorials");
 
-const isQuiz =
-    hasTag('tone/quizzes');
+const isQuiz = hasTag("tone/quizzes");
 
-const isAdvertisementFeature =
-    hasTag('tone/advertisement-features');
+const isAdvertisementFeature = hasTag("tone/advertisement-features");
 
-const fromCapiLiveBlog = (context: Context) => (request: RenderingRequest): Liveblog => {
+const fromCapiLiveBlog = (context: Context) => (
+    request: RenderingRequest
+): Liveblog => {
     const { content } = request;
-    const body = content?.blocks?.body?.slice(0, 7) ?? [];
+    const body = content.blocks?.body?.slice(0, 7) ?? [];
 
     return {
         design: Design.Live,
@@ -235,7 +269,7 @@ const fromCapiLiveBlog = (context: Context) => (request: RenderingRequest): Live
         totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
         ...itemFields(context, request),
     };
-}
+};
 
 const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
     const { content } = request;
@@ -256,7 +290,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
     } else if (fields?.starRating !== undefined && isReview(tags)) {
         return {
             design: Design.Review,
-            starRating: fields?.starRating,
+            starRating: fields.starRating,
             ...itemFieldsWithBody(context, request),
         };
     } else if (isAnalysis(tags)) {
@@ -269,7 +303,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
         return {
             design: Design.Comment,
             ...item,
-            theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme
+            theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
         };
     } else if (isFeature(tags)) {
         return {
@@ -315,8 +349,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
         design: Design.Article,
         ...itemFieldsWithBody(context, request),
     };
-}
-
+};
 
 // ----- Exports ----- //
 
@@ -336,5 +369,5 @@ export {
     isComment,
     isAudio,
     isVideo,
-    isGallery
+    isGallery,
 };

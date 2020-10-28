@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-
+import type { FC } from "react";
+import React from "react";
 
 // ----- Component ----- //
 
@@ -10,7 +10,7 @@ interface Props {
     cspString: string;
 }
 
-const Meta: FC<Props> = ({ title, cspString }) =>
+const Meta: FC<Props> = ({ title, cspString }) => (
     <>
         <meta charSet="utf-8" />
         <title>{title}</title>
@@ -19,7 +19,7 @@ const Meta: FC<Props> = ({ title, cspString }) =>
         <meta name="description" content={title} />
         <meta httpEquiv="Content-Security-Policy" content={cspString} />
     </>
-
+);
 
 // ----- Exports ----- //
 

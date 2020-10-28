@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { neutral } from '@guardian/src-foundations/palette';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
 import { remSpace } from "@guardian/src-foundations";
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral } from "@guardian/src-foundations/palette";
+import { textSans } from "@guardian/src-foundations/typography";
+import React from "react";
+import type { FC } from "react";
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
     margin-top: 0;
@@ -32,23 +34,23 @@ const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
 `;
 
 interface TagsProps {
-    tags: {
+    tags: Array<{
         webUrl: string;
         webTitle: string;
-    }[];
+    }>;
     background?: string;
 }
 
 const Tags: FC<TagsProps> = ({ tags, background }) => (
     <ul css={tagsStyles(background)}>
         {tags.map((tag, index) => {
-            return <li key={index}>
-                <a href={tag.webUrl}>
-                    {tag.webTitle}
-                </a>
-            </li>
+            return (
+                <li key={index}>
+                    <a href={tag.webUrl}>{tag.webTitle}</a>
+                </li>
+            );
         })}
     </ul>
-)
+);
 
 export default Tags;

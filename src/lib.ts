@@ -1,10 +1,15 @@
 // ----- Functions ----- //
 
-const compose = <A, B, C>(f: (_b: B) => C, g: (_a: A) => B) => (a: A): C => f(g(a));
+const compose = <A, B, C>(f: (_b: B) => C, g: (_a: A) => B) => (a: A): C =>
+    f(g(a));
 const pipe = <A, B>(a: A, f: (_a: A) => B): B => f(a);
 const pipe2 = <A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C => g(f(a));
-const pipe3 = <A, B, C, D>(a: A, f: (_a: A) => B, g: (_b: B) => C, h: (_c: C) => D): D =>
-    h(g(f(a)));
+const pipe3 = <A, B, C, D>(
+    a: A,
+    f: (_a: A) => B,
+    g: (_b: B) => C,
+    h: (_c: C) => D
+): D => h(g(f(a)));
 
 const identity = <A>(a: A): A => a;
 
@@ -27,7 +32,7 @@ function memoise<A>(fn: () => A): () => A {
 }
 
 function errorToString(error: unknown, fallback: string): string {
-    if (typeof error === 'object') {
+    if (typeof error === "object") {
         return error?.toString() ?? fallback;
     }
 
@@ -37,8 +42,7 @@ function errorToString(error: unknown, fallback: string): string {
 // Based on a suggestion from the typescript-eslint project
 // https://github.com/typescript-eslint/typescript-eslint/issues/2118#issuecomment-641464651
 const isObject = (a: unknown): a is Record<string, unknown> =>
-    typeof a === 'object' && a !== null;
-
+    typeof a === "object" && a !== null;
 
 // ----- Exports ----- //
 

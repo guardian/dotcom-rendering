@@ -1,5 +1,6 @@
-import React, { FC, ReactElement } from 'react';
-import { css } from '@emotion/core';
+import { css } from "@emotion/core";
+import type { FC, ReactElement } from "react";
+import React from "react";
 
 export interface AudioProps {
     src: string;
@@ -11,7 +12,19 @@ const audioStyles = css`
     border: none;
 `;
 
-const Audio: FC<AudioProps> = ({ src, width, height }: AudioProps): ReactElement =>
-    <iframe css={audioStyles} src={src} sandbox="allow-scripts" height={height} width={width} title="Audio element"/>
+const Audio: FC<AudioProps> = ({
+    src,
+    width,
+    height,
+}: AudioProps): ReactElement => (
+    <iframe
+        css={audioStyles}
+        src={src}
+        sandbox="allow-scripts"
+        height={height}
+        width={width}
+        title="Audio element"
+    />
+);
 
 export default Audio;

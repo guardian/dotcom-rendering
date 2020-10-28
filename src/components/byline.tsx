@@ -1,17 +1,19 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-
-import { Design, Format } from '@guardian/types/Format';
-import { Option, withDefault, map } from '@guardian/types/option';
-import { neutral, palette } from '@guardian/src-foundations';
-import { getThemeStyles } from 'themeStyles';
-import { getHref } from 'renderer';
-import { darkModeCss } from 'styles';
-import { pipe2 } from 'lib';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { neutral, palette } from "@guardian/src-foundations";
+import { headline, textSans } from "@guardian/src-foundations/typography";
+import { Design } from "@guardian/types/Format";
+import type { Format } from "@guardian/types/Format";
+import { map, withDefault } from "@guardian/types/option";
+import type { Option } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement, ReactNode } from "react";
+import { getHref } from "renderer";
+import { darkModeCss } from "styles";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Component ----- //
 
@@ -28,8 +30,11 @@ const styles = (kicker: string): SerializedStyles => css`
     `}
 `;
 
-const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
-    ${headline.xxxsmall({ fontWeight: 'bold' })}
+const anchorStyles = (
+    kicker: string,
+    inverted: string
+): SerializedStyles => css`
+    ${headline.xxxsmall({ fontWeight: "bold" })}
     font-style: normal;
     color: ${kicker};
     text-decoration: none;
@@ -42,10 +47,13 @@ const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css
 const commentStyles = (kicker: string): SerializedStyles => css`
     color: ${kicker};
     width: 75%;
-    ${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
+    ${headline.medium({ fontWeight: "light", fontStyle: "italic" })}
 `;
 
-const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
+const commentAnchorStyles = (
+    kicker: string,
+    inverted: string
+): SerializedStyles => css`
     color: ${kicker};
     text-decoration: none;
 
@@ -55,7 +63,7 @@ const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles
 `;
 
 const advertisementFeatureStyles = css`
-    ${textSans.medium( { lineHeight: 'regular' })}
+    ${textSans.medium({ lineHeight: "regular" })}
     color: ${palette.labs[300]};
 
     ${darkModeCss`
@@ -87,7 +95,7 @@ const getStyles = (format: Format): SerializedStyles => {
         default:
             return styles(kicker);
     }
-}
+};
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
     const { kicker, inverted } = getThemeStyles(format.theme);
@@ -102,22 +110,25 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
         default:
             return anchorStyles(kicker, inverted);
     }
-}
+};
 
 const toReact = (format: Format) => (node: Node): ReactNode => {
     switch (node.nodeName) {
-        case 'A':
+        case "A":
             return (
-                <a href={withDefault('')(getHref(node))} css={getAnchorStyles(format)}>
-                    {node.textContent ?? ''}
+                <a
+                    href={withDefault("")(getHref(node))}
+                    css={getAnchorStyles(format)}
+                >
+                    {node.textContent ?? ""}
                 </a>
             );
-        case 'SPAN':
+        case "SPAN":
             return Array.from(node.childNodes).map(toReact(format));
-        case '#text':
+        case "#text":
             return node.textContent;
     }
-}
+};
 
 const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
     Array.from(byline.childNodes).map(toReact(format));
@@ -125,14 +136,13 @@ const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
     pipe2(
         bylineHtml,
-        map(byline =>
+        map((byline) => (
             <address css={getStyles(format)}>
                 {renderText(format, byline)}
             </address>
-        ),
-        withDefault<ReactElement | null>(null),
+        )),
+        withDefault<ReactElement | null>(null)
     );
-
 
 // ----- Exports ----- //
 

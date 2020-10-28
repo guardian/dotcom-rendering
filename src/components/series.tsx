@@ -1,18 +1,21 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { neutral } from '@guardian/src-foundations/palette';
-import { remSpace, palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { Format, Display, Design } from '@guardian/types/Format';
-import { ThemeStyles, getThemeStyles } from 'themeStyles';
-import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
-import { Item } from 'item';
-import { pipe2 } from 'lib';
-import { map, withDefault } from '@guardian/types/option';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { palette, remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import { neutral } from "@guardian/src-foundations/palette";
+import { headline, textSans } from "@guardian/src-foundations/typography";
+import type { Format } from "@guardian/types/Format";
+import { Design, Display } from "@guardian/types/Format";
+import { map, withDefault } from "@guardian/types/option";
+import type { Item } from "item";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { articleWidthStyles, darkModeCss, wideContentWidth } from "styles";
+import { getThemeStyles } from "themeStyles";
+import type { ThemeStyles } from "themeStyles";
 
 // ----- Component ----- //
 
@@ -20,7 +23,10 @@ interface Props {
     item: Item;
 }
 
-const immersiveStyles = ({ kicker }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
+const immersiveStyles = (
+    { kicker }: ThemeStyles,
+    isLabs: boolean
+): SerializedStyles => css`
     padding: ${remSpace[1]} ${remSpace[2]};
     background-color: ${isLabs ? palette.labs[300] : kicker};
     position: absolute;
@@ -34,16 +40,21 @@ const immersiveStyles = ({ kicker }: ThemeStyles, isLabs: boolean): SerializedSt
     }
 
     ${from.wide} {
-        margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
+        margin-left: calc(
+            ((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]}
+        );
     }
 `;
 
 const font = (isLabs: boolean): string =>
     isLabs
-        ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
-        : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
+        ? textSans.medium({ lineHeight: "loose", fontWeight: "bold" })
+        : headline.xxxsmall({ lineHeight: "loose", fontWeight: "bold" });
 
-const linkStyles = ({ kicker, inverted }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
+const linkStyles = (
+    { kicker, inverted }: ThemeStyles,
+    isLabs: boolean
+): SerializedStyles => css`
     ${font(isLabs)}
     color: ${isLabs ? palette.labs[300] : kicker};
     text-decoration: none;
@@ -60,7 +71,11 @@ const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
     ${font(isLabs)}
 `;
 
-const getLinkStyles = ({ display, theme, design }: Format): SerializedStyles => {
+const getLinkStyles = ({
+    display,
+    theme,
+    design,
+}: Format): SerializedStyles => {
     const isLabs = design === Design.AdvertisementFeature;
 
     if (display === Display.Immersive) {
@@ -68,7 +83,7 @@ const getLinkStyles = ({ display, theme, design }: Format): SerializedStyles => 
     }
 
     return linkStyles(getThemeStyles(theme), isLabs);
-}
+};
 
 const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
     if (display === Display.Immersive) {
@@ -77,21 +92,20 @@ const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
     }
 
     return articleWidthStyles;
-}
+};
 
 const Series: FC<Props> = ({ item }: Props) =>
     pipe2(
         item.series,
-        map(series =>
+        map((series) => (
             <nav css={getStyles(item)}>
                 <a css={getLinkStyles(item)} href={series.webUrl}>
                     {series.webTitle}
                 </a>
             </nav>
-        ),
-        withDefault<ReactElement | null>(null),
+        )),
+        withDefault<ReactElement | null>(null)
     );
-
 
 // ----- Exports ----- //
 

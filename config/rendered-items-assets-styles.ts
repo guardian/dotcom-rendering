@@ -179,4 +179,4 @@ export const renederedItemsAssetsCss = `
   font-style: italic;
   font-weight: 700;
 }
-`
+`;

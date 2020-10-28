@@ -1,38 +1,50 @@
 // ----- Imports ----- //
 
-import { Option, some, none } from '@guardian/types/option';
-
+import type { Option } from "@guardian/types/option";
+import { none, some } from "@guardian/types/option";
 
 // ----- Setup ----- //
 
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
 
 // ----- Functions ----- //
 
 function isToday(date: Date): boolean {
     const today = new Date();
-    return (date.toDateString() === today.toDateString());
+    return date.toDateString() === today.toDateString();
 }
 
 function isWithin24Hours(date: Date): boolean {
     const today = new Date();
-    return (date.valueOf() > (today.valueOf() - (24 * 60 * 60 * 1000)));
+    return date.valueOf() > today.valueOf() - 24 * 60 * 60 * 1000;
 }
 
 function isWithinPastWeek(date: Date): boolean {
-    const daysAgo = new Date().valueOf() - (7 * 24 * 60 * 60 * 1000);
+    const daysAgo = new Date().valueOf() - 7 * 24 * 60 * 60 * 1000;
     return date.valueOf() >= daysAgo;
 }
 
 function isWithinPastYear(date: Date): boolean {
-    const weeksAgo = new Date().valueOf() - (52 * 7 * 24 * 60 * 60 * 1000);
+    const weeksAgo = new Date().valueOf() - 52 * 7 * 24 * 60 * 60 * 1000;
     return date.valueOf() >= weeksAgo;
 }
 
 function isValidDate(date: Date): boolean {
-    if (Object.prototype.toString.call(date) !== '[object Date]') {
+    if (Object.prototype.toString.call(date) !== "[object Date]") {
         return false;
     }
     return !isNaN(date.getTime());
@@ -46,17 +58,20 @@ function makeRelativeDate(date: Date): string | null {
         return null;
     }
 
-    const delta: number = parseInt(`${(now.valueOf() - then.valueOf()) / 1000}`, 10);
+    const delta: number = parseInt(
+        `${(now.valueOf() - then.valueOf()) / 1000}`,
+        10
+    );
 
     if (delta < 0) {
         return null;
     } else if (delta < 55) {
         return `${delta}s`;
-    } else if (delta < (55 * 60)) {
+    } else if (delta < 55 * 60) {
         const minutesAgo = Math.round(delta / 60);
 
         if (minutesAgo === 1) {
-            return 'Now';
+            return "Now";
         } else {
             return `${minutesAgo}m ago`;
         }
@@ -75,25 +90,24 @@ function makeRelativeDate(date: Date): string | null {
     }
 }
 
-const day = (date: Date): string =>
-    days[date.getUTCDay()];
+const day = (date: Date): string => days[date.getUTCDay()];
 
-const month = (date: Date): string =>
-    months[date.getUTCMonth()];
+const month = (date: Date): string => months[date.getUTCMonth()];
 
-const padZero = (n: number): string =>
-    n < 10 ? `0${n}` : n.toString();
+const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 
 const time = (date: Date): string =>
     `${padZero(date.getUTCHours())}.${padZero(date.getUTCMinutes())}`;
 
 const format = (date: Date): string =>
-    `${day(date)} ${date.getUTCDate()} ${month(date)} ${date.getUTCFullYear()} ${time(date)} UTC`;
+    `${day(date)} ${date.getUTCDate()} ${month(
+        date
+    )} ${date.getUTCFullYear()} ${time(date)} UTC`;
 
 function fromString(date: string): Option<Date> {
     try {
         return some(new Date(date));
-    } catch(e) {
+    } catch (e) {
         return none;
     }
 }
@@ -105,19 +119,18 @@ function formatSeconds(seconds: string): Option<string> {
         return none;
     }
 
-    const hrs = Math.floor((secondsInt / 3600));
-    const mins = Math.floor(((secondsInt % 3600) / 60));
+    const hrs = Math.floor(secondsInt / 3600);
+    const mins = Math.floor((secondsInt % 3600) / 60);
     const secs = Math.floor(secondsInt) % 60;
     let ret = "";
 
     if (hrs > 0) {
-        ret += `${hrs}:${mins < 10 ? "0" : ""}`
+        ret += `${hrs}:${mins < 10 ? "0" : ""}`;
     }
 
     ret += `${mins}:${secs < 10 ? "0" : ""}${secs}`;
     return some(ret);
 }
-
 
 // ----- Exports ----- //
 
@@ -127,4 +140,4 @@ export {
     isValidDate,
     fromString,
     formatSeconds,
-}
+};

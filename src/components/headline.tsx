@@ -1,18 +1,19 @@
 // ----- Imports ----- //
 
-import React, { ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace, neutral } from '@guardian/src-foundations';
-import { between, from } from '@guardian/src-foundations/mq';
-import { Format, Display, Design } from '@guardian/types/Format';
-
-import { Item } from 'item';
-import { wideContentWidth, articleWidthStyles, darkModeCss } from 'styles';
-import StarRating from 'components/starRating';
-import { border } from 'editorialPalette';
-import { headlineTextColour, headlineBackgroundColour } from 'editorialStyles';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { neutral, remSpace } from "@guardian/src-foundations";
+import { between, from } from "@guardian/src-foundations/mq";
+import { headline, textSans } from "@guardian/src-foundations/typography";
+import type { Format } from "@guardian/types/Format";
+import { Design, Display } from "@guardian/types/Format";
+import StarRating from "components/starRating";
+import { border } from "editorialPalette";
+import { headlineBackgroundColour, headlineTextColour } from "editorialStyles";
+import type { Item } from "item";
+import React from "react";
+import type { ReactElement } from "react";
+import { articleWidthStyles, darkModeCss, wideContentWidth } from "styles";
 
 // ----- Component ----- //
 
@@ -31,7 +32,7 @@ const styles = (format: Format): SerializedStyles => css`
 `;
 
 const immersiveStyles = css`
-    ${headline.medium({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: "bold" })}
     font-weight: 700;
     padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
     margin: calc(80vh - 5rem) 0 0;
@@ -45,13 +46,15 @@ const immersiveStyles = css`
     }
 
     ${from.desktop} {
-        ${headline.xlarge({ fontWeight: 'bold' })}
+        ${headline.xlarge({ fontWeight: "bold" })}
         margin-top: calc(80vh - 7rem);
     }
 
     ${from.wide} {
         width: 100%;
-        margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
+        margin-left: calc(
+            ((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]}
+        );
         padding-left: ${remSpace[2]};
 
         span {
@@ -62,7 +65,7 @@ const immersiveStyles = css`
 `;
 
 const analysisStyles = (format: Format): SerializedStyles => css`
-    ${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
+    ${headline.medium({ lineHeight: "regular", fontWeight: "light" })}
 
     span {
         box-shadow: inset 0 -0.025rem ${border.primary(format)};
@@ -75,43 +78,50 @@ const analysisStyles = (format: Format): SerializedStyles => css`
 `;
 
 const mediaStyles = css`
-    ${headline.medium({ fontWeight: 'medium' })}
-`
+    ${headline.medium({ fontWeight: "medium" })}
+`;
 
 const featureStyles = css`
-    ${headline.medium({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: "bold" })}
 `;
 
 const commentStyles = css`
-    ${headline.medium({ fontWeight: 'light' })}
+    ${headline.medium({ fontWeight: "light" })}
     padding-bottom: ${remSpace[1]};
 `;
 
 const advertisementFeatureStyles = css`
-    ${textSans.xxxlarge({ lineHeight: 'regular' })}}
+    ${textSans.xxxlarge({ lineHeight: "regular" })}}
 `;
 
 const immersiveLabs = css`
-    ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
+    ${textSans.xxxlarge({ lineHeight: "regular", fontWeight: "bold" })}}
     ${from.desktop} {
-        ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
+        ${textSans.xxxlarge({ lineHeight: "regular", fontWeight: "bold" })}}
     }
 `;
 
 // stop headlines from growing in size with font resizer
 const fontSizeRestriction = css`
     font-size: 34px;
-`
+`;
 
 const getStyles = (format: Format): SerializedStyles => {
     if (format.display === Display.Immersive) {
-        const labs = format.design === Design.AdvertisementFeature ? immersiveLabs : null;
+        const labs =
+            format.design === Design.AdvertisementFeature
+                ? immersiveLabs
+                : null;
         return css(styles(format), immersiveStyles, labs);
     }
 
     switch (format.design) {
         case Design.Analysis:
-            return css(styles(format), analysisStyles(format), fontSizeRestriction);
+            return css(
+                styles(format),
+                analysisStyles(format),
+                fontSizeRestriction
+            );
         case Design.Feature:
             return css(styles(format), featureStyles, fontSizeRestriction);
         case Design.Comment:
@@ -119,18 +129,22 @@ const getStyles = (format: Format): SerializedStyles => {
         case Design.Media:
             return css(styles(format), mediaStyles, fontSizeRestriction);
         case Design.AdvertisementFeature:
-            return css(styles(format), advertisementFeatureStyles, fontSizeRestriction);
+            return css(
+                styles(format),
+                advertisementFeatureStyles,
+                fontSizeRestriction
+            );
         default:
             return css(styles(format), fontSizeRestriction);
     }
-}
+};
 
-const Headline = ({ item }: Props): ReactElement =>
+const Headline = ({ item }: Props): ReactElement => (
     <h1 css={getStyles(item)}>
-        <span>{ item.headline }</span>
+        <span>{item.headline}</span>
         <StarRating item={item} />
-    </h1>;
-
+    </h1>
+);
 
 // ----- Exports ----- //
 

@@ -1,21 +1,21 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-
-import { Contributor, isSingleContributor } from 'contributor';
-import { Format } from '@guardian/types/Format';
-import { getThemeStyles } from 'themeStyles';
-import Img from 'components/img';
-import { remSpace } from '@guardian/src-foundations';
-import { map, withDefault } from '@guardian/types/option';
-import { pipe2 } from 'lib';
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import type { Format } from "@guardian/types/Format";
+import { map, withDefault } from "@guardian/types/option";
+import Img from "components/img";
+import { isSingleContributor } from "contributor";
+import type { Contributor } from "contributor";
+import { pipe2 } from "lib";
+import React from "react";
+import type { FC, ReactElement } from "react";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Setup ----- //
 
-const dimensions = '4rem';
-
+const dimensions = "4rem";
 
 // ----- Component ----- //
 
@@ -36,7 +36,7 @@ const styles = (background: string): SerializedStyles => css`
 const getStyles = ({ theme }: Format): SerializedStyles => {
     const colours = getThemeStyles(theme);
     return styles(colours.inverted);
-}
+};
 
 const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
     const [contributor] = contributors;
@@ -47,18 +47,17 @@ const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
 
     return pipe2(
         contributor.image,
-        map(image =>
+        map((image) => (
             <Img
                 image={image}
                 sizes={dimensions}
                 className={getStyles(format)}
                 format={format}
             />
-        ),
-        withDefault<ReactElement | null>(null),
+        )),
+        withDefault<ReactElement | null>(null)
     );
-}
-
+};
 
 // ----- Exports ----- //
 

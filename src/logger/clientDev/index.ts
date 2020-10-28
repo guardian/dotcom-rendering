@@ -1,4 +1,4 @@
-import {LoggerFunctions} from "../LoggerFunctions";
+import type { LoggerFunctions } from "../LoggerFunctions";
 
 class ClientDevLogger implements LoggerFunctions {
     debug(message: string): void {

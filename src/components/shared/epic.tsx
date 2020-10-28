@@ -1,16 +1,21 @@
 // ----- Imports ----- //
 
-import React, { useState, useEffect, useRef } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { ThemeProvider } from 'emotion-theming'
-import { from } from '@guardian/src-foundations/mq';
-import { brandAlt, brandAltBackground, neutral,  } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-import { SvgArrowRightStraight } from "@guardian/src-icons"
-import { Button, buttonReaderRevenue } from '@guardian/src-button';
-import { body, headline } from '@guardian/src-foundations/typography';
-import { acquisitionsClient } from 'native/nativeApi';
-import { darkModeCss } from 'styles';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { Button, buttonReaderRevenue } from "@guardian/src-button";
+import { remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import {
+    brandAlt,
+    brandAltBackground,
+    neutral,
+} from "@guardian/src-foundations/palette";
+import { body, headline } from "@guardian/src-foundations/typography";
+import { SvgArrowRightStraight } from "@guardian/src-icons";
+import { ThemeProvider } from "emotion-theming";
+import { acquisitionsClient } from "native/nativeApi";
+import React, { useEffect, useRef, useState } from "react";
+import { darkModeCss } from "styles";
 
 // ----- Styles ----- //
 
@@ -40,7 +45,7 @@ const styles: SerializedStyles = css`
 
     mark {
         background: ${brandAltBackground.primary};
-        padding: .1rem .125rem;
+        padding: 0.1rem 0.125rem;
     }
 `;
 
@@ -67,62 +72,85 @@ interface EpicProps {
     secondButton?: string;
 }
 
-const isElementPartiallyInViewport = (el: React.MutableRefObject<HTMLDivElement>): boolean => {
+const isElementPartiallyInViewport = (
+    el: React.MutableRefObject<HTMLDivElement>
+): boolean => {
     const rect = el.current.getBoundingClientRect();
-    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-    const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
-    const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
-    return (vertInView && horInView);
-}
+    const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+    const vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
+    const horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
+    return vertInView && horInView;
+};
 
-const debounce = (fn: () => void, time: number): () => void => {
+const debounce = (fn: () => void, time: number): (() => void) => {
     let timeout: NodeJS.Timeout;
-    return function(...args: []): void {
+    return function (...args: []): void {
         const functionCall = (): void => fn(...args);
         clearTimeout(timeout);
         timeout = setTimeout(functionCall, time);
-    }
-}
+    };
+};
 
-function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
+function Epic({
+    title,
+    body,
+    firstButton,
+    secondButton,
+}: EpicProps): React.ReactElement | null {
     const [impressionSeen, setImpressionSeen] = useState(false);
     const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {
         const handleSeenEpic = debounce(() => {
-            if (!impressionSeen && isElementPartiallyInViewport(epicContainer)) {
+            if (
+                !impressionSeen &&
+                isElementPartiallyInViewport(epicContainer)
+            ) {
                 void acquisitionsClient.epicSeen();
                 setImpressionSeen(true);
             }
         }, 100);
-        window.addEventListener('scroll', handleSeenEpic);
+        window.addEventListener("scroll", handleSeenEpic);
         return (): void => {
-            window.removeEventListener('scroll', handleSeenEpic);
-        }
+            window.removeEventListener("scroll", handleSeenEpic);
+        };
     }, [impressionSeen]);
 
-    const epicButton = (text: string, action: () => Promise<void>): JSX.Element =>
-        <Button onClick={action} iconSide="right" icon={<SvgArrowRightStraight />}>
+    const epicButton = (
+        text: string,
+        action: () => Promise<void>
+    ): JSX.Element => (
+        <Button
+            onClick={action}
+            iconSide="right"
+            icon={<SvgArrowRightStraight />}
+        >
             {text}
         </Button>
+    );
 
     return (
         <div css={[styles, darkStyles]} ref={epicContainer}>
-            <h1 dangerouslySetInnerHTML={{__html: title}}></h1>
-            <div dangerouslySetInnerHTML={{__html: body}}></div>
+            <h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
+            <div dangerouslySetInnerHTML={{ __html: body }}></div>
             <div className="button-container">
                 <ThemeProvider theme={buttonReaderRevenue}>
-                    {epicButton(firstButton, () => acquisitionsClient.launchFrictionScreen())}
+                    {epicButton(firstButton, () =>
+                        acquisitionsClient.launchFrictionScreen()
+                    )}
                     {secondButton
-                        ? epicButton(secondButton, () => acquisitionsClient.launchFrictionScreen())
+                        ? epicButton(secondButton, () =>
+                              acquisitionsClient.launchFrictionScreen()
+                          )
                         : null}
                 </ThemeProvider>
             </div>
         </div>
-    )
+    );
 }
-
 
 // ----- Exports ----- //
 

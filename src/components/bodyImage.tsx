@@ -1,19 +1,19 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { from } from '@guardian/src-foundations/mq';
-import { remSpace, breakpoints } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-
-import Img from 'components/img';
-import { BodyImageProps } from 'image';
-import { darkModeCss } from 'styles';
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { breakpoints, remSpace } from "@guardian/src-foundations";
+import { from } from "@guardian/src-foundations/mq";
+import { neutral } from "@guardian/src-foundations/palette";
+import Img from "components/img";
+import type { BodyImageProps } from "image";
+import React from "react";
+import type { FC } from "react";
+import { darkModeCss } from "styles";
 
 // ----- Setup ----- //
 
 const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
-
 
 // ----- Component ----- //
 
@@ -25,7 +25,7 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     height: calc((100vw - ${remSpace[4]}) * ${height / width});
     display: block;
     width: 100%;
-    
+
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
@@ -36,7 +36,11 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
     `}
 `;
 
-const BodyImage: FC<BodyImageProps> = ({ image, children, format }: BodyImageProps) =>
+const BodyImage: FC<BodyImageProps> = ({
+    image,
+    children,
+    format,
+}: BodyImageProps) => (
     <figure css={styles}>
         <Img
             image={image}
@@ -46,7 +50,7 @@ const BodyImage: FC<BodyImageProps> = ({ image, children, format }: BodyImagePro
         />
         {children}
     </figure>
-
+);
 
 // ----- Exports ----- //
 

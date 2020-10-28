@@ -1,10 +1,10 @@
 // ----- Section ----- //
 
-import React, { ReactElement, FC } from 'react';
-
-import { Option, map, withDefault } from '@guardian/types/option';
-import { pipe2 } from 'lib';
-
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import type { FC, ReactElement } from "react";
+import React from "react";
 
 // ----- Sub-Components ----- //
 
@@ -15,10 +15,9 @@ interface ClientJsProps {
 const ClientJs: FC<ClientJsProps> = ({ src }) =>
     pipe2(
         src,
-        map(s => <script src={s}></script>),
-        withDefault<ReactElement | null>(null),
+        map((s) => <script src={s}></script>),
+        withDefault<ReactElement | null>(null)
     );
-
 
 // ----- Component ----- //
 
@@ -27,12 +26,14 @@ interface Props {
     twitter: boolean;
 }
 
-const Scripts: FC<Props> = ({ clientScript, twitter }) =>
+const Scripts: FC<Props> = ({ clientScript, twitter }) => (
     <>
         <ClientJs src={clientScript} />
-        { twitter ? <script src="https://platform.twitter.com/widgets.js"></script> : null }
+        {twitter ? (
+            <script src="https://platform.twitter.com/widgets.js"></script>
+        ) : null}
     </>
-
+);
 
 // ----- Exports ----- //
 

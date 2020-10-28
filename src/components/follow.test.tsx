@@ -1,15 +1,13 @@
 // ----- Imports ----- //
 
-import React from 'react';
-
-import Follow from './follow';
-import { Pillar, Design, Display } from '@guardian/types/Format';
-import { none } from '@guardian/types/option';
-import { Contributor } from 'contributor';
-import { act } from 'react-dom/test-utils';
-import { render, unmountComponentAtNode } from 'react-dom';
-import renderer from 'react-test-renderer';
-
+import { Design, Display, Pillar } from "@guardian/types/Format";
+import { none } from "@guardian/types/option";
+import type { Contributor } from "contributor";
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+import renderer from "react-test-renderer";
+import Follow from "./follow";
 
 // ----- Setup ----- //
 
@@ -21,8 +19,8 @@ const followFormat = {
 
 // ----- Tests ----- //
 
-describe('Follow component renders as expected', () => {
-    it('Displays title correctly', () => {
+describe("Follow component renders as expected", () => {
+    it("Displays title correctly", () => {
         const contributors: Contributor[] = [
             {
                 apiUrl: "https://mapi.co.uk/test",
@@ -36,26 +34,31 @@ describe('Follow component renders as expected', () => {
         document.body.appendChild(container);
 
         act(() => {
-            render(<Follow contributors= {contributors} {...followFormat}/>, container);
+            render(
+                <Follow contributors={contributors} {...followFormat} />,
+                container
+            );
         });
 
         expect(container.textContent).toBe("Follow George Monbiot");
 
         unmountComponentAtNode(container);
         container.remove();
-    })
+    });
 
-    it('Renders null if no apiUrl', () => {
+    it("Renders null if no apiUrl", () => {
         const contributors: Contributor[] = [
             { name: "George Monbiot", id: "test", apiUrl: "", image: none },
         ];
 
-        const follow = renderer.create(<Follow contributors= {contributors} {...followFormat}/>);
+        const follow = renderer.create(
+            <Follow contributors={contributors} {...followFormat} />
+        );
 
         expect(follow.root.children).toHaveLength(0);
-    })
+    });
 
-    it('Renders null if more than one contributor', () => {
+    it("Renders null if more than one contributor", () => {
         const contributors: Contributor[] = [
             {
                 name: "Contributor 1",
@@ -71,8 +74,10 @@ describe('Follow component renders as expected', () => {
             },
         ];
 
-        const follow = renderer.create(<Follow contributors= {contributors} {...followFormat}/>);
+        const follow = renderer.create(
+            <Follow contributors={contributors} {...followFormat} />
+        );
 
         expect(follow.root.children).toHaveLength(0);
-    })
+    });
 });

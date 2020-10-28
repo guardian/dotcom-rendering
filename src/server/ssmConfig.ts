@@ -1,22 +1,28 @@
-import { ssm } from './aws';
-import { App, Stack, Stage } from './appIdentity';
-import { Option, some, none, map, withDefault } from '@guardian/types/option';
-import { pipe2 } from 'lib';
+import type { Option } from "@guardian/types/option";
+import { map, none, some, withDefault } from "@guardian/types/option";
+import { pipe2 } from "lib";
+import { App, Stack, Stage } from "./appIdentity";
+import { ssm } from "./aws";
 
-type Config = {[key: string]: string | undefined};
+type Config = Record<string, string | undefined>;
 
-async function recursivelyFetchConfig(nextToken?: string, currentConfig?: Config): Promise<Config> {
+async function recursivelyFetchConfig(
+    nextToken?: string,
+    currentConfig?: Config
+): Promise<Config> {
     const path = `/${App}/${Stage}/${Stack}/`;
-    const result = await ssm.getParametersByPath({
-        Path: path,
-        WithDecryption: true,
-        NextToken: nextToken
-    }).promise();
+    const result = await ssm
+        .getParametersByPath({
+            Path: path,
+            WithDecryption: true,
+            NextToken: nextToken,
+        })
+        .promise();
     const fetchedConfig: Config = {};
     if (result.Parameters) {
-        result.Parameters.forEach(param => {
+        result.Parameters.forEach((param) => {
             if (param.Name) {
-                const name = param.Name.replace(path, '');
+                const name = param.Name.replace(path, "");
                 fetchedConfig[name] = param.Value;
             }
         });
@@ -24,8 +30,7 @@ async function recursivelyFetchConfig(nextToken?: string, currentConfig?: Config
     const config = Object.assign({}, currentConfig, fetchedConfig);
     if (result.NextToken) {
         return recursivelyFetchConfig(result.NextToken, config);
-    }
-    else {
+    } else {
         return Promise.resolve(config);
     }
 }
@@ -41,19 +46,18 @@ async function getState(): Promise<Config> {
 async function fetchConfig(): Promise<Config> {
     return pipe2(
         state,
-        map(s => Promise.resolve(s)),
-        withDefault(getState()),
+        map((s) => Promise.resolve(s)),
+        withDefault(getState())
     );
 }
 
 export async function getConfigValue(
     key: string,
-    defaultValue?: string,
+    defaultValue?: string
 ): Promise<string | undefined> {
-
     if (process.env.GITHUB_ACTIONS) {
         // my.var.name is not a valid env var
-        return process.env[key.toUpperCase().replace(/\./g, '_')];
+        return process.env[key.toUpperCase().replace(/\./g, "_")];
     }
 
     const conf = await fetchConfig();
@@ -63,9 +67,10 @@ export async function getConfigValue(
     } else {
         if (defaultValue) {
             return defaultValue;
-        }
-        else {
-            throw new Error(`No config value for key: /${App}/${Stage}/${Stack}/${key}`);
+        } else {
+            throw new Error(
+                `No config value for key: /${App}/${Stage}/${Stack}/${key}`
+            );
         }
     }
 }

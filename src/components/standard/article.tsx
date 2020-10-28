@@ -1,30 +1,38 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { neutral, background } from '@guardian/src-foundations/palette';
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-
-import HeaderMedia from 'headerMedia';
-import Series from 'components/series';
-import Headline from 'components/headline';
-import Standfirst from 'components/standfirst';
-import Metadata from 'components/metadata';
-import OptionalLogo from 'components/shared/logo';
-import Body from 'components/shared/articleBody';
-import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
-import { Standard as StandardItem, Review as ReviewItem, Item } from 'item';
-import { getThemeStyles } from 'themeStyles';
-import { Display } from '@guardian/types/Format';
-import { remSpace } from '@guardian/src-foundations';
-import RelatedContent from 'components/shared/relatedContent';
-import ImmersiveCaption from 'components/immersiveCaption';
-import Epic from 'components/shared/epic';
-import { Lines } from '@guardian/src-ed-lines';
-import FooterCcpa from 'components/shared/footer';
-
-
+import type { SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
+import { Lines } from "@guardian/src-ed-lines";
+import { remSpace } from "@guardian/src-foundations";
+import { breakpoints, from } from "@guardian/src-foundations/mq";
+import { background, neutral } from "@guardian/src-foundations/palette";
+import { Display } from "@guardian/types/Format";
+import Headline from "components/headline";
+import ImmersiveCaption from "components/immersiveCaption";
+import Metadata from "components/metadata";
+import Series from "components/series";
+import Body from "components/shared/articleBody";
+import Epic from "components/shared/epic";
+import FooterCcpa from "components/shared/footer";
+import OptionalLogo from "components/shared/logo";
+import RelatedContent from "components/shared/relatedContent";
+import Tags from "components/shared/tags";
+import Standfirst from "components/standfirst";
+import HeaderMedia from "headerMedia";
+import type {
+    Item,
+    Review as ReviewItem,
+    Standard as StandardItem,
+} from "item";
+import React from "react";
+import type { FC, ReactNode } from "react";
+import {
+    articleWidthStyles,
+    darkModeCss,
+    lineStyles,
+    relatedContentStyles,
+} from "styles";
+import { getThemeStyles } from "themeStyles";
 
 // ----- Styles ----- //
 
@@ -73,61 +81,60 @@ const itemStyles = (item: Item): SerializedStyles => {
         default:
             return css``;
     }
-}
-
+};
 
 interface Props {
     item: StandardItem | ReviewItem;
     children: ReactNode[];
 }
 
-
 const Standard: FC<Props> = ({ item, children }) => {
     // client side code won't render an Epic if there's an element with this id
-    const epicContainer = item.shouldHideReaderRevenue
-        ? null
-        : <div css={articleWidthStyles} id="epic-placeholder">
-            <Epic
-                title=""
-                body=""
-                firstButton=""
-                secondButton=""
-            />
+    const epicContainer = item.shouldHideReaderRevenue ? null : (
+        <div css={articleWidthStyles} id="epic-placeholder">
+            <Epic title="" body="" firstButton="" secondButton="" />
         </div>
+    );
 
-    return <main css={[Styles, DarkStyles]}>
-        <article className="js-article" css={BorderStyles}>
-            <header>
-                <HeaderMedia item={item} />
-                <Series item={item} />
-                <Headline item={item} />
-                <div css={articleWidthStyles}>
-                    <Standfirst item={item} />
-                    <ImmersiveCaption item={item} />
-                </div>
-                <div css={lineStyles}>
-                    <Lines count={4}/>
-                </div>
-                <section css={articleWidthStyles}>
-                    <Metadata item={item} />
-                    {OptionalLogo(item)}
+    return (
+        <main css={[Styles, DarkStyles]}>
+            <article className="js-article" css={BorderStyles}>
+                <header>
+                    <HeaderMedia item={item} />
+                    <Series item={item} />
+                    <Headline item={item} />
+                    <div css={articleWidthStyles}>
+                        <Standfirst item={item} />
+                        <ImmersiveCaption item={item} />
+                    </div>
+                    <div css={lineStyles}>
+                        <Lines count={4} />
+                    </div>
+                    <section css={articleWidthStyles}>
+                        <Metadata item={item} />
+                        {OptionalLogo(item)}
+                    </section>
+                </header>
+                <Body
+                    className={[articleWidthStyles, itemStyles(item)]}
+                    format={item}
+                >
+                    {children}
+                </Body>
+                {epicContainer}
+                <section className="js-tags" css={articleWidthStyles}>
+                    <Tags tags={item.tags} format={item} />
                 </section>
-            </header>
-            <Body className={[articleWidthStyles, itemStyles(item)]} format={item}>
-                {children}
-            </Body>
-            {epicContainer}
-            <section className="js-tags" css={articleWidthStyles}>
-                <Tags tags={item.tags} format={item}/>
+            </article>
+            <section css={relatedContentStyles}>
+                <RelatedContent content={item.relatedContent} />
             </section>
-        </article>
-        <section css={relatedContentStyles}>
-            <RelatedContent content={item.relatedContent}/>
-        </section>
-        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
-    </main>
-}
-
+            <div id="articleFooter">
+                <FooterCcpa isCcpa={false} />
+            </div>
+        </main>
+    );
+};
 
 // ----- Exports ----- //
 
