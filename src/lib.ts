@@ -1,3 +1,9 @@
+// ----- Imports ----- //
+
+import { ReactElement } from 'react';
+import { map, Option, withDefault } from '@guardian/types/option';
+
+
 // ----- Functions ----- //
 
 const compose = <A, B, C>(f: (_b: B) => C, g: (_a: A) => B) => (a: A): C =>
@@ -44,6 +50,13 @@ function errorToString(error: unknown, fallback: string): string {
 const isObject = (a: unknown): a is Record<string, unknown> =>
     typeof a === "object" && a !== null;
 
+const maybeRender = <A>(oa: Option<A>, f: (a: A) => ReactElement | null): ReactElement | null =>
+    pipe2(
+        oa,
+        map(f),
+        withDefault<ReactElement | null>(null),
+    )
+
 // ----- Exports ----- //
 
 export {
@@ -57,4 +70,5 @@ export {
     memoise,
     errorToString,
     isObject,
+    maybeRender,
 };

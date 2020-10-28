@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import "source-map-support/register"; // activating the source map support
-
 import path from "path";
 import type { RelatedContent } from "@guardian/apps-rendering-api-models/relatedContent";
 import type { RenderingRequest } from "@guardian/apps-rendering-api-models/renderingRequest";
@@ -29,6 +28,24 @@ import { render } from "server/page";
 import { getConfigValue } from "server/ssmConfig";
 import { App, Stack, Stage } from "./appIdentity";
 import { getMappedAssetLocation } from "./assets";
+import compression from 'compression';
+import bodyParser from 'body-parser';
+import fetch, { Response } from 'node-fetch';
+import { render } from 'server/page';
+import { render as renderEditions } from 'server/editionsPage';
+import { getConfigValue } from 'server/ssmConfig';
+import { capiEndpoint } from 'capi';
+import { logger } from 'logger';
+import { App, Stack, Stage } from './appIdentity';
+import { getMappedAssetLocation } from './assets';
+import { mapiDecoder, capiDecoder, errorDecoder } from 'server/decoders';
+import { Result, ok, err, either } from '@guardian/types/result';
+import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { Content } from '@guardian/content-api-models/v1/content';
+import { toArray, pipe2 } from 'lib';
+import { Option, map, withDefault } from '@guardian/types/option';
+import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
+import { parseRelatedContent } from 'relatedContent';
 
 // ----- Setup ----- //
 
@@ -114,8 +131,9 @@ function resourceList(script: Option<string>): string[] {
 }
 
 async function serveArticle(
+    isEditions = false,
     request: RenderingRequest,
-    res: ExpressResponse
+    res: ExpressResponse,
 ): Promise<void> {
     const imageSalt = await getConfigValue("apis.img.salt");
 
@@ -123,7 +141,8 @@ async function serveArticle(
         throw new Error("Could not get image salt");
     }
 
-    const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+    const renderer = isEditions ? renderEditions : render;
+    const { html, clientScript } = renderer(imageSalt, request, getAssetLocation);
 
     res.set("Link", getPrefetchHeader(resourceList(clientScript)));
     res.write(html);
@@ -151,6 +170,7 @@ async function serveArticleGet(
 ): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
+        const isEditions = req.query.editions === '';
         const capiContent = await askCapiFor(articleId);
 
         either(
@@ -168,8 +188,8 @@ async function serveArticleGet(
                     relatedContent,
                 };
 
-                void serveArticle(mockedRenderingRequest, res);
-            }
+                void serveArticle(mockedRenderingRequest, res, isEditions);
+            },
         )(capiContent);
     } catch (e) {
         logger.error(`This error occurred`, e);
