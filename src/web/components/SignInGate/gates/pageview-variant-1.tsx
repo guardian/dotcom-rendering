@@ -11,6 +11,7 @@ import {
     isValidSection,
     isIOS9,
     isCountry,
+    isValidTag,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
@@ -41,6 +42,7 @@ const canShow = (
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
+    isValidTag(CAPI) &&
     !isIOS9() &&
     !isCountry('US');
 

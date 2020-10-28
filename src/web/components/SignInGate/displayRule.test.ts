@@ -1,13 +1,14 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
-import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode'
+import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode';
 import {
     isNPageOrHigherPageView,
     isIOS9,
     isValidContentType,
     isValidSection,
-    isCountry
+    isValidTag,
+    isCountry,
 } from './displayRule';
 
 describe('SignInGate - displayRule methods', () => {
@@ -186,6 +187,44 @@ describe('SignInGate - displayRule methods', () => {
             CAPIBrowser.sectionName = 'membership';
 
             expect(isValidSection(CAPIBrowser)).toBe(false);
+        });
+    });
+
+    describe('isValidTag', () => {
+        let defaultCAPIBrowser: CAPIBrowserType;
+        let CAPIBrowser: CAPIBrowserType;
+
+        beforeAll(() => {
+            defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
+        });
+
+        beforeEach(() => {
+            // reset the CAPI data
+            CAPIBrowser = { ...defaultCAPIBrowser };
+        });
+
+        test('is valid tag - us-news/us-news - returns true', () => {
+            CAPIBrowser.tags = [
+                {
+                    id: 'us-news/us-news',
+                    type: 'Keyword',
+                    title: 'US news',
+                },
+            ];
+
+            expect(isValidTag(CAPIBrowser)).toBe(true);
+        });
+
+        test('is valid tag - newsletters/newsletters - return false', () => {
+            CAPIBrowser.tags = [
+                {
+                    id: 'newsletters/newsletters',
+                    type: 'Keyword',
+                    title: 'Newsletters',
+                },
+            ];
+
+            expect(isValidTag(CAPIBrowser)).toBe(false);
         });
     });
 });
