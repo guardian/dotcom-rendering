@@ -1,14 +1,13 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css } from '@emotion/core';
-import { titlepiece } from '@guardian/src-foundations/typography';
-import { news } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-
-import { Item } from 'item';
-import { maybeRender } from 'lib';
-
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import { news } from "@guardian/src-foundations/palette";
+import { titlepiece } from "@guardian/src-foundations/typography";
+import type { Item } from "item";
+import { maybeRender } from "lib";
+import React from "react";
+import type { FC } from "react";
 
 // ----- Component ----- //
 
@@ -24,12 +23,9 @@ interface Props {
 }
 
 const Series: FC<Props> = ({ item }) =>
-    maybeRender(item.series, series =>
-        <nav css={styles}>
-            {series.webTitle}
-        </nav>
-    )
-
+    maybeRender(item.series, (series) => (
+        <nav css={styles}>{series.webTitle}</nav>
+    ));
 
 // ----- Exports ----- //
 

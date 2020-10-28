@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import { ReactElement } from 'react';
-import { map, Option, withDefault } from '@guardian/types/option';
-
+import type { Option } from "@guardian/types/option";
+import { map, withDefault } from "@guardian/types/option";
+import type { ReactElement } from "react";
 
 // ----- Functions ----- //
 
@@ -50,12 +50,11 @@ function errorToString(error: unknown, fallback: string): string {
 const isObject = (a: unknown): a is Record<string, unknown> =>
     typeof a === "object" && a !== null;
 
-const maybeRender = <A>(oa: Option<A>, f: (a: A) => ReactElement | null): ReactElement | null =>
-    pipe2(
-        oa,
-        map(f),
-        withDefault<ReactElement | null>(null),
-    )
+const maybeRender = <A>(
+    oa: Option<A>,
+    f: (a: A) => ReactElement | null
+): ReactElement | null =>
+    pipe2(oa, map(f), withDefault<ReactElement | null>(null));
 
 // ----- Exports ----- //
 

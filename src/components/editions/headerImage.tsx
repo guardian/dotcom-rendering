@@ -1,14 +1,13 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
-
-import { Item } from 'item';
-import Img from 'components/img';
-import { MainMediaKind } from 'headerMedia';
-import { maybeRender } from 'lib';
-
+import { css } from "@emotion/core";
+import { remSpace } from "@guardian/src-foundations";
+import Img from "components/img";
+import { MainMediaKind } from "headerMedia";
+import type { Item } from "item";
+import { maybeRender } from "lib";
+import React from "react";
+import type { FC } from "react";
 
 // ----- Component ----- //
 
@@ -26,7 +25,7 @@ interface Props {
 }
 
 const HeaderImage: FC<Props> = ({ item }) =>
-    maybeRender(item.mainMedia, media => {
+    maybeRender(item.mainMedia, (media) => {
         if (media.kind === MainMediaKind.Image) {
             return (
                 <figure css={styles}>
@@ -41,8 +40,7 @@ const HeaderImage: FC<Props> = ({ item }) =>
         }
 
         return null;
-    })
-
+    });
 
 // ----- Exports ----- //
 
