@@ -77,6 +77,7 @@ function renderElement(
                     role="inline"
                     adTargeting={adTargeting}
                     isMainMedia={true}
+                    overlayImage={element.overrideImage}
                 />
             );
         default:
