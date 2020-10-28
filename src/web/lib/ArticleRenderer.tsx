@@ -106,6 +106,7 @@ export const ArticleRenderer: React.FC<{
                             profileURL={element.profileURL}
                             profileName={element.profileName}
                             dateTime={element.dateTime}
+                            permalink={element.permalink}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':

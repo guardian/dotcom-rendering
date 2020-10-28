@@ -10,6 +10,7 @@ type Props = {
     profileURL: string;
     profileName: string;
     dateTime: string;
+    permalink: string;
 };
 
 const commentWrapperStyles = css`
@@ -32,20 +33,23 @@ const profileWrapperStyles = css`
     display: flex;
     margin-top: ${space[4]}px;
     margin-bottom: ${space[12]}px;
-    /* in order to remove border-bottom styles applied to all 'a' tags, TODO: avoid applying style to all 'a' tags */
-    a {
+    /* in order to overwrite the a tag style we had to add a second class to give higher order specificity */
+    & > a.avatarLink {
         border-bottom: none;
     }
-    :hover {
-        a {
-            border-bottom: none;
-        }
+
+    & > a.avatarLink:hover {
+        border-bottom: none;
     }
 `;
 
 const usernameWrapperStyles = css`
     display: flex;
     flex-direction: column;
+    & .permalink {
+        color: ${palette.neutral[46]};
+        border-bottom: none;
+    }
 `;
 
 const avatarStyles = css`
@@ -66,6 +70,7 @@ export const CommentBlockComponent = ({
     profileURL,
     profileName,
     dateTime,
+    permalink,
 }: Props) => {
     return (
         <div className={commentWrapperStyles}>
@@ -75,7 +80,8 @@ export const CommentBlockComponent = ({
             />
             <div className={profileWrapperStyles}>
                 <a
-                    className={avatarStyles}
+                    // TODO: remove avatarLink
+                    className={`${avatarStyles} avatarLink`}
                     href={profileURL}
                     aria-hidden="true"
                 >
@@ -91,13 +97,16 @@ export const CommentBlockComponent = ({
                     >
                         {profileName}
                     </a>
-                    <time
-                        className={css`
-                            ${textSans.small()};
-                        `}
-                    >
-                        {dateTime}
-                    </time>
+                    {/* TODO: remove permalink */}
+                    <a href={permalink} className="permalink">
+                        <time
+                            className={css`
+                                ${textSans.small()};
+                            `}
+                        >
+                            {dateTime}
+                        </time>
+                    </a>
                 </div>
             </div>
         </div>
