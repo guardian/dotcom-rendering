@@ -7,10 +7,10 @@ import { palette, space } from '@guardian/src-foundations';
 type Props = {
     body: string;
     avatarURL: string;
+    permalink: string;
     profileURL: string;
     profileName: string;
     dateTime: string;
-    permalink: string;
 };
 
 const commentWrapperStyles = css`
