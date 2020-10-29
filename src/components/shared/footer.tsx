@@ -1,6 +1,5 @@
 import { css } from '@emotion/core';
-import { Footer } from '@guardian/src-footer';
-import { brandBorder, brandText, space } from '@guardian/src-foundations';
+import { brandBorder, neutral, space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { bool } from 'aws-sdk/clients/signer';
 import React, { FC } from 'react';
@@ -8,9 +7,11 @@ import React, { FC } from 'react';
 
 // Footer content styles
 const container = css`
-    border-style: solid;
-    border-color: ${brandBorder.primary};
     border-width: 0 1px;
+    ${textSans.small({ lineHeight: "regular" })};
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 
 `
 
@@ -33,9 +34,9 @@ const li = css`
 	border-width: 0;
 `
 const anchor = css`
-	${textSans.medium({ lineHeight: "regular" })};
-	color: ${brandText.anchorPrimary};
-	text-decoration: none;
+	${textSans.small({ lineHeight: "regular" })};
+	color: ${neutral[7]};
+	text-decoration: underline;
 `
 
 const link1 = css`
@@ -82,6 +83,23 @@ interface FooterCcpaProps {
     isCcpa: boolean;
 }
 
-const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => <Footer>{footerContents(isCcpa)}</Footer>
+const renderContent = (ccpaStatus: boolean): JSX.Element => {
+    if (!ccpaStatus){
+        return <a css={anchor} href="https://www.theguardian.com/help/privacy-policy">Privacy Settings</a>
+    } else {
+        return <a css={anchor} href="https://www.theguardian.com/help/privacy-policy">California Residents - Do Not Sell</a>
+    }
+}
+
+
+const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => {
+    return <div css={container}>
+        &#169;
+        2020 Guardian News and Media Limited or its affiliated companies. All rights reserved.<br/>
+        {renderContent(isCcpa)}
+        &nbsp;&#183;&nbsp;
+        <a css={anchor} href="https://www.theguardian.com/help/privacy-policy">Privacy Policy</a>
+    </div>
+}
 
 export default FooterCcpa;

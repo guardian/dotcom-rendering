@@ -137,7 +137,7 @@ function footerInit(): void {
 
 function isCCPA(): void {
     userClient.doesCcpaApply().then(isOptedIn => {
-        const comp = h(FooterCcpa, {isCcpa: isOptedIn});
+        const comp = h(FooterCcpa, {isCcpa: false});
         ReactDOM.render(comp, document.getElementById('articleFooter'));
     }).catch((error)=>{
         console.log(error);
