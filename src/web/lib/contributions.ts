@@ -18,6 +18,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
+export const NO_BANNER_UNTIL_LATER_KEY = 'gu.noRRBannerUntilLater';   // Do not request RR banner until after this timestamp
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -149,3 +150,19 @@ export const getArticleCountConsent = (): Promise<boolean> => {
         });
     });
 };
+
+export const noBannerUntilLater = (): boolean => {
+    const item = window.localStorage.getItem(NO_BANNER_UNTIL_LATER_KEY);
+    if (item && !Number.isNaN(parseInt(item, 10))) {
+        const noBanner = parseInt(item, 10) > Date.now();
+        if (!noBanner) {
+            // Expired
+            window.localStorage.removeItem(NO_BANNER_UNTIL_LATER_KEY);
+        }
+        return noBanner;
+    }
+    return false;
+};
+
+export const setNoBannerUntilLaterKey = (): void =>
+    window.localStorage.setItem(NO_BANNER_UNTIL_LATER_KEY, `${Date.now() + (20*60000)}`);

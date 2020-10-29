@@ -10,6 +10,8 @@ import {
 import {
     shouldHideSupportMessaging,
     getArticleCountConsent,
+    noBannerUntilLater,
+    setNoBannerUntilLaterKey,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -118,6 +120,11 @@ export const canShow = async ({
         return Promise.resolve({ result: false });
     }
 
+    if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt && noBannerUntilLater()) {
+        // Both banners have been dismissed *and* we have recently been told not to display a banner
+        return Promise.resolve({ result: false });
+    }
+
     const countryCode = await asyncCountryCode;
     const hasConsentedToArticleCounts = await getArticleCountConsent();
     const bannerPayload = buildPayload({
@@ -147,6 +154,10 @@ export const canShow = async ({
         .then((response) => response.json())
         .then((json) => {
             if (!json.data) {
+                if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
+                    // Both banners have been dismissed *and* we have been told not too display a banner - do not request banner for a while
+                    setNoBannerUntilLaterKey();
+                }
                 return { result: false };
             }
 
