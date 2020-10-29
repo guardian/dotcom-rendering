@@ -208,7 +208,7 @@ const itemFieldsWithBody = (
     const body = content.blocks?.body ?? [];
     const atoms = content.atoms;
     const campaigns = request.campaigns;
-    const elements = body.shift()?.elements;
+    const elements = [...body].shift()?.elements;
     return {
         ...itemFields(context, request),
         body: elements
