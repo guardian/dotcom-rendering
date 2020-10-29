@@ -121,7 +121,6 @@ export const canShow = async ({
     }
 
     if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt && withinLocalNoBannerCachePeriod()) {
-        // Both banners have been dismissed *and* we have recently been told not to display a banner
         return Promise.resolve({ result: false });
     }
 
@@ -155,7 +154,6 @@ export const canShow = async ({
         .then((json) => {
             if (!json.data) {
                 if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
-                    // Both banners have been dismissed *and* we have been told not too display a banner - do not request banner for a while
                     setLocalNoBannerCachePeriod();
                 }
                 return { result: false };
