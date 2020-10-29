@@ -48,7 +48,7 @@ const getDatelineStyles = (theme: Theme): SerializedStyles => {
 const Dateline: FC<Props> = ({ date, theme }) =>
     pipe2(
         date,
-        map(d => <time css={getDatelineStyles(theme)} data-date={d} className="date">{ formatDate(d) }</time>),
+        map(d => <time css={getDatelineStyles(theme)} data-date={d} className="date js-date">{ formatDate(d) }</time>),
         withDefault<ReactElement | null>(null),
     )
 
