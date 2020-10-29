@@ -164,5 +164,6 @@ export const noBannerUntilLater = (): boolean => {
     return false;
 };
 
-export const setNoBannerUntilLaterKey = (): void =>
-    window.localStorage.setItem(NO_BANNER_UNTIL_LATER_KEY, `${Date.now() + (20*60000)}`);
+const twentyMins = 20*60000;
+export const setNoBannerUntilLater = (): void =>
+    window.localStorage.setItem(NO_BANNER_UNTIL_LATER_KEY, `${Date.now() + twentyMins}`);

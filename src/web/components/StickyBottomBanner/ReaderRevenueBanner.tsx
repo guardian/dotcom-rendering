@@ -11,7 +11,7 @@ import {
     shouldHideSupportMessaging,
     getArticleCountConsent,
     noBannerUntilLater,
-    setNoBannerUntilLaterKey,
+    setNoBannerUntilLater,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -156,7 +156,7 @@ export const canShow = async ({
             if (!json.data) {
                 if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
                     // Both banners have been dismissed *and* we have been told not too display a banner - do not request banner for a while
-                    setNoBannerUntilLaterKey();
+                    setNoBannerUntilLater();
                 }
                 return { result: false };
             }
