@@ -215,10 +215,10 @@ describe('SignInGate - displayRule methods', () => {
             expect(isValidTag(CAPIBrowser)).toBe(true);
         });
 
-        test('is valid tag - newsletters/newsletters - return false', () => {
+        test('is valid tag - info/newsletter-sign-up - return false', () => {
             CAPIBrowser.tags = [
                 {
-                    id: 'newsletters/newsletters',
+                    id: 'info/newsletter-sign-up',
                     type: 'Keyword',
                     title: 'Newsletters',
                 },
