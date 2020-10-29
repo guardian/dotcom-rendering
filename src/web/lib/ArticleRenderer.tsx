@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
+import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
@@ -96,6 +97,17 @@ export const ArticleRenderer: React.FC<{
                             displayCredit={element.displayCredit}
                             shouldLimitWidth={element.shouldLimitWidth}
                             isOverlayed={element.isOverlayed}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.CommentBlockElement':
+                    return (
+                        <CommentBlockComponent
+                            body={element.body}
+                            avatarURL={element.avatarURL}
+                            profileURL={element.profileURL}
+                            profileName={element.profileName}
+                            dateTime={element.dateTime}
+                            permalink={element.permalink}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
@@ -400,7 +412,6 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
-                case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
