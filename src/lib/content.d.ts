@@ -3,6 +3,7 @@
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
     url: string;
+    placeholderUrl?: string;
     id?: string;
     html?: string;
     css?: string;
@@ -326,6 +327,8 @@ interface YoutubeBlockElement {
     channelId?: string;
     duration?: number;
     posterSrc?: string;
+    expired: boolean;
+    overrideImage: string;
 }
 
 type CAPIElement =

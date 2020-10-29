@@ -3,8 +3,14 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { getWeeklyArticleHistory, logView } from '@root/node_modules/@guardian/automat-client';
-import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {
+    getWeeklyArticleHistory,
+    logView,
+} from '@root/node_modules/@guardian/automat-client';
+import {
+    shouldHideSupportMessaging,
+    getArticleCountConsent,
+} from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
     sendOphanComponentEvent,
@@ -12,8 +18,8 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { WeeklyArticleHistory } from "@root/node_modules/@guardian/automat-client/dist/types";
-import { getForcedVariant } from "@root/src/web/lib/readerRevenueDevUtils";
+import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
+import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from './bannerPicker';
 
 const checkForErrors = (response: any) => {
@@ -41,12 +47,12 @@ type BaseProps = {
     alreadyVisitedCount: number;
     engagementBannerLastClosedAt?: string;
     subscriptionBannerLastClosedAt?: string;
-    switches: { [key: string]: boolean };
     weeklyArticleHistory?: WeeklyArticleHistory;
 };
 
 type BuildPayloadProps = BaseProps & {
     countryCode: string;
+    hasConsentedToArticleCounts: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -73,8 +79,8 @@ const buildPayload = (props: BuildPayloadProps) => {
                 props.subscriptionBannerLastClosedAt,
             mvtId: Number(getCookie('GU_mvt_id')),
             countryCode: props.countryCode,
-            switches: props.switches,
             weeklyArticleHistory: getWeeklyArticleHistory(),
+            hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
         },
     };
 };
@@ -89,7 +95,7 @@ const getBanner = (meta: {}, url: string): Promise<Response> => {
     });
 };
 
-export const canShow = ({
+export const canShow = async ({
     remoteBannerConfig,
     isSignedIn,
     asyncCountryCode,
@@ -104,7 +110,6 @@ export const canShow = ({
     alreadyVisitedCount,
     engagementBannerLastClosedAt,
     subscriptionBannerLastClosedAt,
-    switches,
 }: CanShowProps): Promise<CanShowResult> => {
     if (!remoteBannerConfig) return Promise.resolve({ result: false });
 
@@ -113,31 +118,31 @@ export const canShow = ({
         return Promise.resolve({ result: false });
     }
 
-    return asyncCountryCode
-        .then((countryCode) =>
-            buildPayload({
-                isSignedIn,
-                countryCode,
-                contentType,
-                sectionName,
-                shouldHideReaderRevenue,
-                isMinuteArticle,
-                isPaidContent,
-                tags,
-                contributionsServiceUrl,
-                isSensitive,
-                alreadyVisitedCount,
-                engagementBannerLastClosedAt,
-                subscriptionBannerLastClosedAt,
-                switches,
-            }),
-        )
-        .then((bannerPayload) => {
-            const forcedVariant = getForcedVariant('banner');
-            const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
+    const countryCode = await asyncCountryCode;
+    const hasConsentedToArticleCounts = await getArticleCountConsent();
+    const bannerPayload = buildPayload({
+        isSignedIn,
+        countryCode,
+        contentType,
+        sectionName,
+        shouldHideReaderRevenue,
+        isMinuteArticle,
+        isPaidContent,
+        tags,
+        contributionsServiceUrl,
+        isSensitive,
+        alreadyVisitedCount,
+        engagementBannerLastClosedAt,
+        subscriptionBannerLastClosedAt,
+        hasConsentedToArticleCounts,
+    });
+    const forcedVariant = getForcedVariant('banner');
+    const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
-            return getBanner(bannerPayload, `${contributionsServiceUrl}/banner${queryString}`);
-        })
+    return getBanner(
+        bannerPayload,
+        `${contributionsServiceUrl}/banner${queryString}`,
+    )
         .then(checkForErrors)
         .then((response) => response.json())
         .then((json) => {
@@ -212,9 +217,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
             // The css here is necessary to put the container div in view, so that we can track the view
             <div
                 ref={setNode}
-                className={emotion.css`width: 100%; ${getZIndex(
-                    'banner',
-                )}`}
+                className={emotion.css`width: 100%; ${getZIndex('banner')}`}
             >
                 {/* eslint-disable react/jsx-props-no-spreading */}
                 <Banner

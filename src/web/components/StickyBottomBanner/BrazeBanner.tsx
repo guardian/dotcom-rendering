@@ -5,13 +5,22 @@ import * as emotionTheming from 'emotion-theming';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
 
 export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
+type Meta = {
+    dataFromBraze: {
+        [key: string]: string;
+    };
+    logImpressionWithBraze: () => void;
+    logButtonClickWithBraze: (id: number) => void;
+};
+
 type Props = {
-    meta: any;
+    meta: Meta;
 };
 
 const containerStyles = emotion.css`
@@ -52,6 +61,86 @@ export const canShowPreChecks = ({
             !pageConfig.isPaidContent,
     );
 
+const getMessageFromBraze = async (
+    apiKey: string,
+    brazeUuid: string,
+): Promise<CanShowResult> => {
+    const { default: appboy } = await import(
+        /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
+    );
+
+    appboy.initialize(apiKey, {
+        enableLogging: false,
+        noCookies: true,
+        baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
+        sessionTimeoutInSeconds: 1,
+        minimumIntervalBetweenTriggerActionsInSeconds: 0,
+    });
+
+    return new Promise((resolve) => {
+        appboy.subscribeToInAppMessage((message: any) => {
+            const { extras } = message;
+
+            const logButtonClickWithBraze = (internalButtonId: number) => {
+                const thisButton = new appboy.InAppMessageButton(
+                    `Button: ID ${internalButtonId}`,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    internalButtonId,
+                );
+                appboy.logInAppMessageButtonClick(thisButton, message);
+            };
+
+            const logImpressionWithBraze = () => {
+                // Log the impression with Braze
+                appboy.logInAppMessageImpression(message);
+            };
+
+            if (extras) {
+                const meta = {
+                    dataFromBraze: extras,
+                    logImpressionWithBraze,
+                    logButtonClickWithBraze,
+                };
+                resolve({ result: true, meta });
+            } else {
+                resolve({ result: false });
+            }
+        });
+
+        appboy.changeUser(brazeUuid);
+        appboy.openSession();
+    });
+};
+
+const getBrazeMetaFromQueryString = (): Meta | null => {
+    if (URLSearchParams) {
+        const params = new URLSearchParams(window.location.search);
+        const qsArg = 'force-braze-message';
+        const value = params.get(qsArg);
+        if (value) {
+            try {
+                const dataFromBraze = JSON.parse(value);
+
+                return {
+                    dataFromBraze,
+                    logImpressionWithBraze: () => {},
+                    logButtonClickWithBraze: () => {},
+                };
+            } catch (e) {
+                // Parsing failed. Log a message and fall through.
+                // eslint-disable-next-line no-console
+                console.log(`There was an error with ${qsArg}: `, e.message);
+            }
+        }
+    }
+
+    return null;
+};
+
 // We can show a Braze banner if:
 // - The Braze switch is on
 // - We have a Braze API key
@@ -61,10 +150,23 @@ export const canShowPreChecks = ({
 // - The user has given Consent via CCPA or TCFV2
 // - The Braze websdk appboy initialisation does not throw an error
 // - The Braze app Boy subscription to in app message returns meta info
+// OR
+// - The force-braze-message query string arg is passed
 export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
+    const timing = initPerf('braze-banner');
+    timing.start();
+
+    const forcedBrazeMeta = getBrazeMetaFromQueryString();
+    if (forcedBrazeMeta) {
+        return {
+            result: true,
+            meta: forcedBrazeMeta,
+        };
+    }
+
     const { brazeSwitch } = window.guardian.config.switches;
     const apiKey = window.guardian.config.page.brazeApiKey;
 
@@ -89,62 +191,22 @@ export const canShow = async (
     }
 
     try {
-        const { default: appboy } = await import(
-            /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-        );
+        const result = await getMessageFromBraze(apiKey as string, brazeUuid)
 
-        appboy.initialize(apiKey as string, {
-            enableLogging: false,
-            noCookies: true,
-            baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
-            sessionTimeoutInSeconds: 1,
-            minimumIntervalBetweenTriggerActionsInSeconds: 0,
+        const timeTaken = timing.end();
+        record({
+            component: 'braze-banner-timing',
+            value: timeTaken,
         });
 
-        return new Promise((resolve) => {
-            appboy.subscribeToInAppMessage((message: any) => {
-                const { extras } = message;
-
-                const buttonHandler = (buttonId: number) => {
-                    const thisButton = new appboy.InAppMessageButton(
-                        `Button: ID ${buttonId}`,
-                        undefined,
-                        undefined,
-                        undefined,
-                        undefined,
-                        undefined,
-                        buttonId,
-                    );
-                    appboy.logInAppMessageButtonClick(thisButton, message);
-                };
-
-                const logImpression = () => {
-                    // Log the impression with Braze
-                    appboy.logInAppMessageImpression(message);
-                };
-
-                if (extras) {
-                    const meta = {
-                        dataFromBraze: extras,
-                        logImpression,
-                        buttonHandler,
-                    };
-                    resolve({ result: true, meta });
-                } else {
-                    resolve({ result: false });
-                }
-            });
-
-            appboy.changeUser(brazeUuid);
-            appboy.openSession();
-        });
+        return result;
     } catch (e) {
         return { result: false };
     }
 };
 
 type InnerProps = {
-    meta: any;
+    meta: Meta;
     BrazeComponent: React.FC<BrazeBannerProps>;
 };
 
@@ -154,7 +216,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 }: InnerProps) => {
     useEffect(() => {
         // Log the impression with Braze
-        meta.logImpression();
+        meta.logImpressionWithBraze();
 
         // Log VIEW event with Ophan
         submitComponentEvent({
@@ -170,7 +232,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
     return (
         <div className={containerStyles}>
             <BrazeComponent
-                onButtonClick={meta.buttonHandler}
+                logButtonClickWithBraze={meta.logButtonClickWithBraze}
+                submitComponentEvent={submitComponentEvent}
                 componentName={meta.dataFromBraze.componentName}
                 brazeMessageProps={meta.dataFromBraze}
             />

@@ -29,9 +29,11 @@ const headerWrapper = css`
 
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
 const bannerWrapper = css`
-    position: sticky !important;
+    position: fixed !important;
     bottom: 0;
     ${getZIndexImportant('banner')}
+    max-height: 80vh;
+    overflow: auto;
     
     width: 100% !important;
     background: none !important;

@@ -9,6 +9,7 @@ import { DocumentBlockComponent } from '@root/src/web/components/elements/Docume
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -139,6 +140,16 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                    if (!element.safe) {
+                        return (
+                            <UnsafeEmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                                alt={element.alt || ''}
+                                index={i}
+                            />
+                        );
+                    }
                     return (
                         <EmbedBlockComponent
                             key={i}

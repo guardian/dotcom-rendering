@@ -106,9 +106,8 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'right',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
-                // Pascal: It's not totally obvious where this sequence should come from the frontend code,
-                // but it should be correct.
+                mobile: ['1,1|2,2|300,250|300,274|fluid'],
+                // mark: 01303e88-ef1f-462d-9b6e-242419435cec
             },
             showLabel: true,
             refresh: false,
@@ -145,11 +144,9 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                             'outOfPage',
                             'empty',
                             'fabric',
-                            'outstreamMobile',
-                            'mpu',
                             'fluid',
+                            'leaderboard',
                         ]),
-                        '728,90', // This value comes from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     ].join('|'),
                 ],
                 desktop: ['1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid'], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
@@ -169,11 +166,23 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                     adSizeNamesToString([
                         'outOfPage',
                         'empty',
-                        'outstreamMobile',
                         'mpu',
                         'googleCard',
                         'fluid',
                     ]),
+                ],
+                tablet: [
+                    [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'mpu',
+                            'googleCard',
+                            'halfPage',
+                            'leaderboard',
+                            'fluid',
+                        ]),
+                    ].join('|'),
                 ],
                 phablet: [
                     adSizeNamesToString([
@@ -193,9 +202,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                         'empty',
                         'mpu',
                         'googleCard',
-                        'video',
-                        'outstreamDesktop',
-                        'outstreamGoogleDesktop',
+                        'halfPage',
                         'fluid',
                     ]),
                 ],

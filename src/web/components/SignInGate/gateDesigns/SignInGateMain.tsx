@@ -126,13 +126,28 @@ const firstParagraphOverlay = (isComment: boolean) => css`
     );
 `;
 
-// This css hides all the elements in the article after the #sign-in-gate
-// using the General sibling combinator https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
+// This css does 3 things
+// 1. first hide all article conent using display: none; (.article-body-commercial-selector > *)
+// 2. make the sign in gate ((#sign-in-gate), and the first 2 paragraphs of the article visible (.article-body-commercial-selector p:nth-of-type(-n+3))
+// 3. hide any siblings after the sign in gate incase because of the css in 2
+//    a paragraph is still visible (#sign-in-gate ~ *)
 const hideElementsCss = `
+    .article-body-commercial-selector > * {
+        display: none;
+    }
+
+    #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
+        display: block;
+    }
+
     #sign-in-gate ~ * {
         display: none;
     }
-    `;
+
+    #slot-body-end {
+        display: none;
+    }
+`;
 
 export const SignInGateMain = ({
     signInUrl,
@@ -153,16 +168,13 @@ export const SignInGateMain = ({
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
-                We need more readers to register with us to help sustain our
-                independent, quality journalism. Without you taking this simple
-                step, we miss out on revenues from personalised advertising - a
-                critical source of funding for our future.
+                Registering is a free and simple way to help us sustain our
+                independent Guardian journalism.
             </p>
             <p className={bodyText}>
-                Through doing so, you&apos;ll help ensure that our reporting
-                remains freely available to everyone, and if we recognise you
-                when you come back, we can improve your news experience too. You
-                can still control your own&nbsp;
+                When you register with us we are able to improve our news
+                experience for you and for others. You will always be able to
+                control your own&nbsp;
                 <button
                     data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
@@ -173,7 +185,7 @@ export const SignInGateMain = ({
                 >
                     privacy settings
                 </button>
-                . Thank you
+                . Thank you.
             </p>
             <div className={actionButtons}>
                 <LinkButton

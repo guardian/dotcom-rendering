@@ -3,7 +3,10 @@ import { useAB } from '@guardian/ab-react';
 import { ABTest, Runnable } from '@guardian/ab-core';
 import { constructQuery } from '@root/src/lib/querystring';
 
-import { incrementUserDismissedGateCount, setUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
+import {
+    incrementUserDismissedGateCount,
+    setUserDismissedGate,
+} from '@frontend/web/components/SignInGate/dismissGate';
 import {
     SignInGateComponent,
     CurrentABTest,
@@ -11,15 +14,12 @@ import {
 import { getCookie } from '@frontend/web/browser/cookie';
 
 // Sign in Gate A/B Tests
-import { signInGatePatientia } from '@frontend/web/experiments/tests/sign-in-gate-patientia';
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-import { signInGateComponent as gatePatientiaControl } from '@root/src/web/components/SignInGate/gates/patientia-control';
-import { signInGateComponent as gatePatientiaVariant } from '@root/src/web/components/SignInGate/gates/patientia-variant';
 
 import {
     ComponentEventParams,
@@ -51,7 +51,10 @@ const dismissGate = (
 ) => {
     setShowGate(false);
     setUserDismissedGate(currentAbTestValue.variant, currentAbTestValue.name);
-    incrementUserDismissedGateCount(currentAbTestValue.variant, currentAbTestValue.name);
+    incrementUserDismissedGateCount(
+        currentAbTestValue.variant,
+        currentAbTestValue.name,
+    );
 
     // When the user closes the sign in gate, we scroll them back to the main content
     const articleBody = document.querySelector(
@@ -67,22 +70,18 @@ type GateTestMap = { [name: string]: SignInGateComponent };
    and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
 */
 const tests: ReadonlyArray<ABTest> = [
-    signInGatePatientia,
     signInGateMainVariant,
     signInGateMainControl,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-    'patientia-control-1': gatePatientiaControl,
-    'patientia-variant-1': gatePatientiaVariant,
-    'main-control-2': gateMainControl,
-    'main-variant-2': gateMainVariant,
+    'main-control-3': gateMainControl,
+    'main-variant-3': gateMainVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
-    SignInGateMainVariant: 'main_variant_2',
-    SignInGateMainControl: 'main_control_2',
-    SignInGatePatientia: 'patientia_test',
+    SignInGateMainVariant: 'main_variant_3',
+    SignInGateMainControl: 'main_control_3',
 };
 
 // function to generate the profile.theguardian.com url with tracking params

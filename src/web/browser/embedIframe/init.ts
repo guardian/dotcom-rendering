@@ -1,5 +1,5 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
-import { atomIframe } from './atomIframe';
+import { embedIframe } from './embedIframe';
 
-startup('atomIframe', null, atomIframe);
+startup('embedIframe', null, embedIframe);

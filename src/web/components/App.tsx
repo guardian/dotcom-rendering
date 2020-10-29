@@ -42,7 +42,7 @@ import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
+import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 
 import { cmp } from '@guardian/consent-management-platform';
@@ -244,18 +244,18 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementAlreadyVisited();
     }, []);
 
-    useEffect(() => {
-        incrementDailyArticleCount();
-    }, []);
-
     // Log an article view using the Slot Machine client lib
     // This function must be called once per article serving.
     // We should monitor this function call to ensure it only happens within an
     // article pages when other pages are supported by DCR.
     useEffect(() => {
-        if (!hasOptedOutOfArticleCount()) {
-            incrementWeeklyArticleCount();
-        }
+        const incrementArticleCountsIfConsented = async () => {
+            if (await getArticleCountConsent()) {
+                incrementDailyArticleCount();
+                incrementWeeklyArticleCount();
+            }
+        };
+        incrementArticleCountsIfConsented();
     }, []);
 
     // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -324,11 +324,25 @@ export const App = ({ CAPI, NAV }: Props) => {
         // and is not a react component, so it's
         // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
+            const pubData = {
+                browserId: getCookie('bwid') || undefined,
+                pageViewId: window.guardian?.config?.ophan?.pageViewId,
+            };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
-            cmp.init({
-                isInUsa: countryCode === 'US',
-                pubData: { browserId: getCookie('bwid') || undefined },
-            });
+
+            if (
+                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
+            ) {
+                cmp.init({
+                    country: countryCode,
+                    pubData,
+                });
+            } else {
+                cmp.init({
+                    isInUsa: countryCode === 'US',
+                    pubData,
+                });
+            }
         }
     }, [countryCode, CAPI.config.switches.consentManagement]);
 

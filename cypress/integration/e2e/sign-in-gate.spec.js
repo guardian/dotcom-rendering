@@ -17,6 +17,19 @@ describe('Sign In Gate Tests', function () {
         );
     };
 
+    const setGeolocation = (n) => {
+        localStorage.setItem(
+            'gu.geolocation',
+            JSON.stringify({
+                value: n,
+            }),
+        );
+    };
+
+    const clearGeolocation = () => {
+        localStorage.removeItem('gu.geolocation');
+    };
+
     const setMvtCookie = (str) => {
         cy.setCookie('GU_mvt_id_local', str, {
             log: true,
@@ -107,8 +120,8 @@ describe('Sign In Gate Tests', function () {
                 'gu.prefs.sign-in-gate',
                 `{
                     "value": {
-                        "SignInGateMain-main-variant-2": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-2": 6
+                        "SignInGateMain-main-variant-3": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-3": 6
                     }
                 }`,
             );
@@ -183,32 +196,6 @@ describe('Sign In Gate Tests', function () {
             cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
             cy.contains('privacy settings');
-        });
-    });
-
-    describe('SignInGatePatientia', function () {
-        beforeEach(function () {
-            // sign in gate patientia runs from 999901-1000000 MVT IDs, so 999901 forces user into test variant
-            setMvtCookie('999901');
-
-            // set article count to be min number to view gate
-            setArticleCount(3);
-        });
-
-        it('should load the sign in gate', function () {
-            visitArticleAndScrollToGateForLazyLoad();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
-        });
-
-        it('should remove gate when the dismiss button is clicked', function () {
-            visitArticleAndScrollToGateForLazyLoad();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
-
-            cy.get('[data-cy=sign-in-gate-patientia_dismiss]').click();
-
-            cy.get('[data-cy=sign-in-gate-patientia]').should('not.be.visible');
         });
     });
 });

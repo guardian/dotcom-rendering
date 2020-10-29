@@ -331,6 +331,13 @@ export const CalloutBlockComponent = ({
                             aria-hidden="true"
                         >
                             <Button
+                                className={css`
+                                    /* TODO: need to find an nicer way of dynamically setting svg dimensions */
+                                    svg {
+                                        width: 15px !important;
+                                        height: 15px !important;
+                                    }
+                                `}
                                 iconSide="left"
                                 size="xsmall"
                                 icon={<PlusIcon />}
