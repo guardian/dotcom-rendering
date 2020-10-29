@@ -66,7 +66,7 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
 
 // hide the sign in gate for certain tags on the site
 export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
-    const invalidTags = ['newsletters/newsletters'];
+    const invalidTags = ['info/newsletter-sign-up'];
 
     return !invalidTags.some((invalidTag) =>
         CAPI.tags.map((tag) => tag.id).includes(invalidTag),
