@@ -9,7 +9,6 @@ import {
     isNPageOrHigherPageView,
     isValidContentType,
     isValidSection,
-    isValidTag,
     isIOS9,
     isCountry,
 } from '@frontend/web/components/SignInGate/displayRule';
@@ -42,7 +41,6 @@ const canShow = (
     isNPageOrHigherPageView(2) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
-    isValidTag(CAPI) &&
     !isIOS9() &&
     isCountry('US');
 
