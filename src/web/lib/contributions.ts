@@ -151,7 +151,7 @@ export const getArticleCountConsent = (): Promise<boolean> => {
     });
 };
 
-export const noBannerUntilLater = (): boolean => {
+export const withinLocalNoBannerCachePeriod = (): boolean => {
     const item = window.localStorage.getItem(NO_BANNER_UNTIL_LATER_KEY);
     if (item && !Number.isNaN(parseInt(item, 10))) {
         const noBanner = parseInt(item, 10) > Date.now();
@@ -165,5 +165,5 @@ export const noBannerUntilLater = (): boolean => {
 };
 
 const twentyMins = 20*60000;
-export const setNoBannerUntilLater = (): void =>
+export const setLocalNoBannerCachePeriod = (): void =>
     window.localStorage.setItem(NO_BANNER_UNTIL_LATER_KEY, `${Date.now() + twentyMins}`);

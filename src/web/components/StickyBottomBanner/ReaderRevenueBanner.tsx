@@ -10,8 +10,8 @@ import {
 import {
     shouldHideSupportMessaging,
     getArticleCountConsent,
-    noBannerUntilLater,
-    setNoBannerUntilLater,
+    withinLocalNoBannerCachePeriod,
+    setLocalNoBannerCachePeriod,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -120,7 +120,7 @@ export const canShow = async ({
         return Promise.resolve({ result: false });
     }
 
-    if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt && noBannerUntilLater()) {
+    if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt && withinLocalNoBannerCachePeriod()) {
         // Both banners have been dismissed *and* we have recently been told not to display a banner
         return Promise.resolve({ result: false });
     }
@@ -156,7 +156,7 @@ export const canShow = async ({
             if (!json.data) {
                 if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
                     // Both banners have been dismissed *and* we have been told not too display a banner - do not request banner for a while
-                    setNoBannerUntilLater();
+                    setLocalNoBannerCachePeriod();
                 }
                 return { result: false };
             }
