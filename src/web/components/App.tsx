@@ -331,7 +331,8 @@ export const App = ({ CAPI, NAV }: Props) => {
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
 
-            // keep this in sync with static/src/javascripts/boot.js in frontend
+            // keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+            // mark: CONSENT_TIMING
             let recordedConsentTime = false;
             onConsentChange(() => {
                 if (!recordedConsentTime) {
