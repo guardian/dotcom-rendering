@@ -1,13 +1,12 @@
 import React from 'react';
 
+import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { Display } from '@root/src/lib/display';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-
-import { decidePillar } from '@root/src/web/lib/decidePillar';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 
 type Props = {
     CAPI: CAPIType;
