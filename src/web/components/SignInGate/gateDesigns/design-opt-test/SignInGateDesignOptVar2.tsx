@@ -43,7 +43,6 @@ const headingStyles = css`
 const bodyBlueHighlight = css`
     ${headline.xxsmall({ fontWeight: 'bold' })};
     color: ${palette.brand[400]};
-    text-decoration: underline ${palette.brand[800]};
     text-underline-position: under;
     padding-bottom: 20px;
     ${from.phablet} {
@@ -56,7 +55,7 @@ const bodyBold = css`
     border-top: 1px ${palette.line.primary} solid;
     padding-bottom: 20px;
     ${from.phablet} {
-        padding-right: 130px;
+        padding-right: 110px;
     }
 `;
 
@@ -94,7 +93,7 @@ const laterButton = css`
 `;
 
 const signInLink = css`
-    color: ${palette.text.anchorPrimary} !important;
+    color: ${palette.brand[400]} !important;
 `;
 
 const faq = css`
@@ -178,10 +177,6 @@ export const SignInGateDesignOptVar2 = ({
                 Register for free and continue reading
             </h1>
             <p className={bodyBlueHighlight}>
-                We need more readers to register with us to help sustain our
-                independent, quality journalism
-            </p>
-            <p className={bodyText}>
                 It’s important to say this is not a step towards a paywall
             </p>
             <p className={bodyText}>
