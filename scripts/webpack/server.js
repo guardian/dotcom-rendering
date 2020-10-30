@@ -13,7 +13,6 @@ module.exports = () => ({
     target: 'node',
     optimization: {
         minimize: false,
-        namedModules: true,
         runtimeChunk: false,
     },
     externals: [
