@@ -17,8 +17,8 @@ const commonConfigs = ({ platform }) => ({
     stats: 'errors-only',
     devtool:
         process.env.NODE_ENV === 'production'
-            ? 'sourcemap'
-            : 'cheap-module-eval-source-map',
+            ? 'source-map'
+            : 'eval-cheap-module-source-map',
     resolve: {
         alias: {
             '@root': path.resolve(__dirname, '.'),
