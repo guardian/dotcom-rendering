@@ -57,6 +57,7 @@ import { trackPerformance } from '../browser/ga/ga';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
+
 const MostViewedRightWrapper = React.lazy(() => {
     const { start, end } = initPerf('MostViewedRightWrapper');
     start();
@@ -98,71 +99,35 @@ const GetMatchStats = React.lazy(() => {
     });
 });
 
-const TimelineAtom = React.lazy(() => {
-    const { start, end } = initPerf('TimelineAtom');
-    start();
-    return import(
-        /* webpackChunkName: "TimelineAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.TimelineAtom };
-    });
-});
+// Break Atoms Rendering into it's own chunk
+const atomTypes: AtomTypes[] = [
+    'AudioAtom',
+    'ChartAtom',
+    'GuideAtom',
+    'ProfileAtom',
+    'QandaAtom',
+    'TimelineAtom',
+];
 
-const QandaAtom = React.lazy(() => {
-    const { start, end } = initPerf('QandaAtom');
-    start();
-    return import(
-        /* webpackChunkName: "QandaAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.QandaAtom };
-    });
-});
-
-const GuideAtom = React.lazy(() => {
-    const { start, end } = initPerf('GuideAtom');
-    start();
-    return import(
-        /* webpackChunkName: "GuideAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.GuideAtom };
-    });
-});
-
-const ProfileAtom = React.lazy(() => {
-    const { start, end } = initPerf('ProfileAtom');
-    start();
-    return import(
-        /* webpackChunkName: "ProfileAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.ProfileAtom };
-    });
-});
-
-const ChartAtom = React.lazy(() => {
-    const { start, end } = initPerf('ChartAtom');
-    start();
-    return import(
-        /* webpackChunkName: "ChartAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.ChartAtom };
-    });
-});
-
-const AudioAtom = React.lazy(() => {
-    const { start, end } = initPerf('AudioAtom');
-    start();
-    return import(
-        /* webpackChunkName: "AudioAtom" */ '@guardian/atoms-rendering'
-    ).then((module) => {
-        end();
-        return { default: module.AudioAtom };
-    });
-});
+const [
+    AudioAtom,
+    ChartAtom,
+    GuideAtom,
+    ProfileAtom,
+    QandaAtom,
+    TimelineAtom,
+] = atomTypes.map((atomType) =>
+    React.lazy(() => {
+        const { start, end } = initPerf(atomType);
+        start();
+        return import(
+            /* webpackChunkName: "AtomsRendering" */ '@guardian/atoms-rendering'
+        ).then((module) => {
+            end();
+            return { default: module[atomType] };
+        });
+    }),
+);
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
