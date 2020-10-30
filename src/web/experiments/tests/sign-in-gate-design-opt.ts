@@ -6,12 +6,12 @@ export const signInGateDesignOpt: ABTest = {
     expiry: '2020-12-01', // todo
     author: 'vlbee',
     description:
-        'Compare 6 different gate design changes, on 3rd page view, on simple article templates, with higher priority over banners and epi, excluding the US',
-    audience: 0.1290, // todo
-    audienceOffset: 0.7710, // todo
+        'Compare 6 different gate design changes, on 3rd page view, on simple article templates, with higher priority over banners and epi',
+    audience: 0.1971,
+    audienceOffset: 0.7029,
     successMeasure: 'Users sign in or create a Guardian account',
     audienceCriteria:
-        '3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss or reshown after 5 dismisses, not on help, info sections etc. Exclude US, iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
+        '3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss or reshown after 5 dismisses, not on help, info sections etc. exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
     dataLinkNames: 'SignInGateDesignOpt',
     idealOutcome:
         'We believe that we could increase sign in conversion by at least 5% by implementing these design changes',
