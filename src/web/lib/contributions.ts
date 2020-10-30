@@ -18,6 +18,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
+export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp';   // timestamp of when we were last told not to show a RR banner
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -149,3 +150,20 @@ export const getArticleCountConsent = (): Promise<boolean> => {
         });
     });
 };
+
+const twentyMins = 20*60000;
+export const withinLocalNoBannerCachePeriod = (): boolean => {
+    const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
+    if (item && !Number.isNaN(parseInt(item, 10))) {
+        const withinCachePeriod = (parseInt(item, 10) + twentyMins) > Date.now();
+        if (!withinCachePeriod) {
+            // Expired
+            window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
+        }
+        return withinCachePeriod;
+    }
+    return false;
+};
+
+export const setLocalNoBannerCachePeriod = (): void =>
+    window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);

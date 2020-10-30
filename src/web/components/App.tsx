@@ -50,12 +50,13 @@ import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { Display } from '@root/src/lib/display';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
-import { cmp } from '@guardian/consent-management-platform';
+import { cmp, onConsentChange } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
     submitComponentEvent,
     OphanComponentEvent,
 } from '../browser/ophan/ophan';
+import { trackPerformance } from '../browser/ga/ga';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -327,6 +328,22 @@ export const App = ({ CAPI, NAV }: Props) => {
                 pageViewId: window.guardian?.config?.ophan?.pageViewId,
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+
+            // keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+            // mark: CONSENT_TIMING
+            let recordedConsentTime = false;
+            onConsentChange(() => {
+                if (!recordedConsentTime) {
+                    recordedConsentTime = true;
+                    cmp.willShowPrivacyMessage().then((willShow) => {
+                        trackPerformance(
+                            'consent',
+                            'acquired',
+                            willShow ? 'new' : 'existing',
+                        );
+                    });
+                }
+            });
 
             if (
                 window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
