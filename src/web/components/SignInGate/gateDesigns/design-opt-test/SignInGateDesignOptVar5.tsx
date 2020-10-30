@@ -18,7 +18,6 @@ import { trackLink } from '@frontend/web/components/SignInGate/componentEventTra
 import { SignInGateProps } from '../types';
 
 const signinGate = css`
-    max-width: 640px;
     background-color: #eaf1fd;
 
     ${from.desktop} {
@@ -58,9 +57,19 @@ const bodyBold = css`
     }
 `;
 
+const leftMarginFill = css`
+    padding-left: 20px !important;
+    margin-left: -20px !important;
+    ${from.leftCol} {
+        padding-left: 10px !important;
+        margin-left: -10px !important;
+    }
+`;
+
 const lineColor = css`
     color: rgba(5, 41, 98, 0.2);
 `;
+
 const lineTop = css`
     border-top: 1px solid rgba(5, 41, 98, 0.2);
 `;
@@ -167,25 +176,6 @@ const hideElementsCss = `
     }
 `;
 
-// This should be replaced by Source if rolled out - https://github.com/guardian/source/blob/main/src/editorial/web/components/lines/styles.ts
-// const lineGap = remSpace[1];
-// const straightLines = css`
-//     background-image: repeating-linear-gradient(
-//         to bottom,
-//         ${line.primary},
-//         ${line.primary} 1px,
-//         transparent 1px,
-//         transparent ${lineGap}
-//     );
-//     background-repeat: repeat-x;
-//     background-position: top;
-// `;
-// const count = (x: number) => css`
-//     background-size: 1px calc(${lineGap} * (${x}-1) + 1px);
-//     height: calc(${lineGap} * (${x}-1) + 1px);
-// `;
-// const LineBorder = (x: number) => <div css={[straightLines, count(x)]} />;
-
 // Slight colour highlight
 export const SignInGateDesignOptVar5 = ({
     signInUrl,
@@ -197,16 +187,21 @@ export const SignInGateDesignOptVar5 = ({
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-5">
+        <div
+            className={cx([signinGate, leftMarginFill])}
+            data-cy="sign-in-gate-design-opt-variant-5"
+        >
             <style>{hideElementsCss}</style>
             <div className={firstParagraphOverlay(!!isComment)} />
-            <h1 className={headingStyles}>
+            <h1 className={cx([headingStyles, leftMarginFill])}>
                 Register for free and continue reading
             </h1>
-            <section className={lineColor}>
-                <Lines count={4} />
-                <Lines effect="straight" />
-            </section>
+            {/* TODO leftMargin fill not working - see Source documentation:
+            https://www.theguardian.design/2a1e5182b/p/2619e3-overriding-styles
+            cssOverrides don't work either */}
+            <div className={cx([lineColor, leftMarginFill])}>
+                <Lines count={4} effect="straight" />
+            </div>
             <p className={bodyBold}>
                 It’s important to say this is not a step towards a paywall
             </p>
@@ -257,9 +252,15 @@ export const SignInGateDesignOptVar5 = ({
                     I’ll do it later
                 </LinkButton>
             </div>
-            {/* {LineBorder(1)} */}
             <div className={signInLinkSection}>
-                <p className={cx([bodyBold, signInHeader, lineTop])}>
+                <p
+                    className={cx([
+                        bodyBold,
+                        signInHeader,
+                        lineTop,
+                        leftMarginFill,
+                    ])}
+                >
                     Have a subscription? Made a contribution? Already
                     registered?
                 </p>
