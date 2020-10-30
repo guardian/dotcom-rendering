@@ -421,6 +421,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         adTargeting={adTargeting}
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
+                        duration={youtubeBlock.duration}
                     />
                 </Hydrate>
             ))}
