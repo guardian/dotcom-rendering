@@ -189,3 +189,26 @@ export const trackNonClickInteraction = (actionName: string): void => {
         );
     }
 };
+
+export const trackPerformance = (
+    timingCategory: string,
+    timingVar: any,
+    timingLabel: string,
+): void => {
+    const { ga } = window;
+
+    if (!ga) {
+        return;
+    }
+
+    if (window.performance?.now) {
+        ga(
+            send,
+            'timing',
+            timingCategory,
+            timingVar,
+            Math.round(window.performance.now()),
+            timingLabel,
+        );
+    }
+};
