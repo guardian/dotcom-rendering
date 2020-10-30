@@ -55,8 +55,6 @@ module.exports = ({ isLegacyJS }) => ({
     },
     // fix for known issue with webpack dynamic imports
     optimization: {
-        namedModules: true,
-        namedChunks: true,
         splitChunks: { cacheGroups: { default: false } },
     },
     plugins: [
@@ -67,7 +65,6 @@ module.exports = ({ isLegacyJS }) => ({
             output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
         }),
         DEV && new webpack.HotModuleReplacementPlugin(),
-        DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin(),
         // https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
         // [...].filter(Boolean) why it is used
