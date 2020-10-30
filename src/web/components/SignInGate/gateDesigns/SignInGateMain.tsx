@@ -176,7 +176,7 @@ export const SignInGateMain = ({
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
                 <button
-                    data-cy="sign-in-gate-personalised-ad-copy-variant-2_privacy"
+                    data-cy="sign-in-gate-main_privacy"
                     className={privacyLink}
                     onClick={() => {
                         cmp.showPrivacyManager();
