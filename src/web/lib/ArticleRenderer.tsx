@@ -371,18 +371,20 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <YoutubeBlockComponent
-                            display={display}
-                            designType={designType}
-                            key={i}
-                            element={element}
-                            pillar={pillar}
-                            hideCaption={false}
-                            // eslint-disable-next-line jsx-a11y/aria-role
-                            role="inline"
-                            adTargeting={adTargeting}
-                            isMainMedia={false}
-                        />
+                        <div key={i} id={`youtube-block-${i}`}>
+                            <YoutubeBlockComponent
+                                display={display}
+                                designType={designType}
+                                key={i}
+                                element={element}
+                                pillar={pillar}
+                                hideCaption={false}
+                                // eslint-disable-next-line jsx-a11y/aria-role
+                                role="inline"
+                                adTargeting={adTargeting}
+                                isMainMedia={false}
+                            />
+                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                     return (

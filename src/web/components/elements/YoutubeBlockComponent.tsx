@@ -8,7 +8,6 @@ import { SvgAlertRound } from '@guardian/src-icons';
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import { asFormat } from '@root/src/lib/format';
 
 type Props = {
     display: Display;
@@ -122,7 +121,6 @@ export const YoutubeBlockComponent = ({
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
-                format={asFormat(pillar, display, designType)}
                 videoMeta={element}
                 overlayImage={overlayImage}
                 adTargeting={adTargeting}
