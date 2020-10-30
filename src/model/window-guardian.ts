@@ -215,10 +215,24 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             'model.dotcomrendering.pageElements.AudioAtomBlockElement',
             'audioIndex',
         ),
-        youtubeBlockElement: blockElementWithIndex(
-            CAPI.blocks,
-            'model.dotcomrendering.pageElements.YoutubeBlockElement',
-            'youtubeIndex',
+        youtubeMainMediaBlockElement: CAPI.mainMediaElements.reduce(
+            (
+                acc: CAPIElement[],
+                cur: CAPIElement,
+                index: number,
+            ): YoutubeBlockElement[] => {
+                if (
+                    cur._type ===
+                    'model.dotcomrendering.pageElements.YoutubeBlockElement'
+                ) {
+                    acc.push({
+                        ...cur,
+                        youtubeIndex: index,
+                    });
+                }
+                return acc as YoutubeBlockElement[];
+            },
+            [] as YoutubeBlockElement[],
         ),
     };
 };

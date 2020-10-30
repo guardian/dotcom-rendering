@@ -387,10 +387,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
                 />
             </Hydrate>
-            {CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
+            {CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
                 <Hydrate
                     key={index}
-                    root="youtube-block"
+                    root="youtube-block-main-media"
                     index={youtubeBlock.youtubeIndex}
                 >
                     <YoutubeBlockComponent
@@ -403,6 +403,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         role="inline"
                         adTargeting={adTargeting}
                         isMainMedia={false}
+                        overlayImage={youtubeBlock.overrideImage}
                     />
                 </Hydrate>
             ))}

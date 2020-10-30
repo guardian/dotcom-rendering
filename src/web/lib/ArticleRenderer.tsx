@@ -371,7 +371,6 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <div key={i} id={`youtube-block-${i}`}>
                             <YoutubeBlockComponent
                                 display={display}
                                 designType={designType}
@@ -384,7 +383,6 @@ export const ArticleRenderer: React.FC<{
                                 adTargeting={adTargeting}
                                 isMainMedia={false}
                             />
-                        </div>
                     );
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                     return (
