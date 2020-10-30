@@ -112,7 +112,7 @@ const privacyLink = css`
 `;
 
 const firstParagraphOverlay = (isComment: boolean) => css`
-    margin-top: -100px; // TODO adjust white space here
+    margin-top: -100px;
     width: 100%;
     height: 100px;
     position: absolute;
@@ -123,7 +123,7 @@ const firstParagraphOverlay = (isComment: boolean) => css`
         ${isComment ? opinion[800] : palette.background.primary},
         70%,
         rgba(255, 255, 255, 0)
-    ); //  rgba(255, 255, 255, 0)
+    );
 `;
 
 // This css does 3 things

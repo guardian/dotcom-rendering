@@ -18,7 +18,7 @@ import { trackLink } from '@frontend/web/components/SignInGate/componentEventTra
 import { SignInGateProps } from '../types';
 
 const signinGate = css`
-    background-color: #eaf1fd;
+    background-color: #eaf1fd; /* todo - consents colour - failing validation because not in Source */
 
     ${from.desktop} {
         min-height: 600px;
@@ -67,7 +67,8 @@ const leftMarginFill = css`
 `;
 
 const lineColor = css`
-    color: rgba(5, 41, 98, 0.2);
+    color: ${palette.brand[400]};
+    opacity: 0.2;
 `;
 
 const lineTop = css`
@@ -110,8 +111,6 @@ const laterButton = css`
 const signInLinkSection = css`
     padding-bottom: ${space[9]}px;
     line-height: ${space[2]}px;
-    > a {
-    }
 `;
 
 const faq = css`
