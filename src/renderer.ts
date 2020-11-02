@@ -29,6 +29,7 @@ import Bullet from 'components/bullet';
 import Pullquote  from 'components/pullquote';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
 import Credit from 'components/credit';
+import HorizontalRule from 'components/horizontalRule';
 
 
 // ----- Renderer ----- //
@@ -70,24 +71,6 @@ const getHref = (node: Node): Option<string> =>
         )),
     );
 
-const HorizontalRuleStyles = css`
-    display: block;
-    width: 8.75rem;
-    height: 0.125rem;
-    margin: 0;
-    border: 0;
-    margin-top: 3rem;
-    margin-bottom: 0.1875rem;
-    background-color: ${neutral[93]};
-    ${darkModeCss`
-        background-color: ${neutral[20]};
-    `}
-`;
-
-const HorizontalRule = (): ReactElement =>
-    styledH('hr', { css: HorizontalRuleStyles }, null);
-
-
 const transform = (text: string, format: Format): ReactElement | string => {
     if (text.includes('•')) {
         return h(Bullet, { format, text });
@@ -96,8 +79,6 @@ const transform = (text: string, format: Format): ReactElement | string => {
     }
     return text;
 };
-
-
 
 const listStyles: SerializedStyles = css`
     list-style: none;

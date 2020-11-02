@@ -13,6 +13,7 @@ import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
 import { render } from 'server/page';
+import { render as renderEditions } from 'server/editionsPage';
 import { getConfigValue } from 'server/ssmConfig';
 import { capiEndpoint } from 'capi';
 import { logger } from 'logger';
@@ -99,14 +100,19 @@ function resourceList(script: Option<string>): string[] {
     return pipe2(script, map(toArray), withDefault(emptyList));
 }
 
-async function serveArticle(request: RenderingRequest, res: ExpressResponse): Promise<void> {
+async function serveArticle(
+    request: RenderingRequest,
+    res: ExpressResponse,
+    isEditions = false,
+): Promise<void> {
     const imageSalt = await getConfigValue('apis.img.salt');
 
     if (imageSalt === undefined) {
         throw new Error('Could not get image salt');
     }
 
-    const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+    const renderer = isEditions ? renderEditions : render;
+    const { html, clientScript } = renderer(imageSalt, request, getAssetLocation);
 
     res.set('Link', getPrefetchHeader(resourceList(clientScript)));
     res.write(html);
@@ -131,6 +137,7 @@ async function serveArticlePost(
 async function serveArticleGet(req: Request, res: ExpressResponse): Promise<void> {
     try {
         const articleId = req.params[0] || defaultId;
+        const isEditions = req.query.editions === '';
         const capiContent = await askCapiFor(articleId);
 
         either(
@@ -146,7 +153,7 @@ async function serveArticleGet(req: Request, res: ExpressResponse): Promise<void
                     relatedContent
                 };
 
-                void serveArticle(mockedRenderingRequest, res);
+                void serveArticle(mockedRenderingRequest, res, isEditions);
             },
         )(capiContent);
     } catch (e) {
