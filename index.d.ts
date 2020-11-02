@@ -329,6 +329,7 @@ type CAPIBrowserType = {
     timelineAtoms: TimelineBlockElement[];
     chartAtoms: ChartAtomBlockElement[];
     audioAtoms: AudioAtomBlockElement[];
+    youtubeBlockElement: YoutubeBlockElement[];
     youtubeMainMediaBlockElement: YoutubeBlockElement[];
 };
 
@@ -671,6 +672,7 @@ type IslandType =
     | 'timeline-atom'
     | 'sign-in-gate'
     | 'audio-atom'
+    | 'youtube-block'
     | 'youtube-block-main-media'
     | 'chart-atom';
 

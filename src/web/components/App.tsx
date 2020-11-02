@@ -425,6 +425,27 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Hydrate>
             ))}
+            {CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
+                <Hydrate
+                    key={index}
+                    root="youtube-block"
+                    index={youtubeBlock.youtubeIndex}
+                >
+                    <YoutubeBlockComponent
+                        display={display}
+                        designType={CAPI.designType}
+                        element={youtubeBlock}
+                        pillar={pillar}
+                        hideCaption={false}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        adTargeting={adTargeting}
+                        isMainMedia={false}
+                        overlayImage={youtubeBlock.overrideImage}
+                        duration={youtubeBlock.duration}
+                    />
+                </Hydrate>
+            ))}
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
                     <>
