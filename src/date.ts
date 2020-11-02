@@ -90,11 +90,14 @@ const time = (date: Date): string =>
 const localTime = (date: Date): string =>
     `${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
 
+const localTimeZone = (date: Date): string =>
+    /\(.*?\)$/.exec(date.toTimeString())?.pop() ?? "";
+
 const format = (date: Date): string =>
     `${day(date)} ${date.getUTCDate()} ${month(date)} ${date.getUTCFullYear()} ${time(date)} UTC`;
 
 const formatLocal = (date: Date): string =>
-    `${localDay(date)} ${date.getDate()} ${localMonth(date)} ${date.getFullYear()} ${localTime(date)}`;
+    `${localDay(date)} ${date.getDate()} ${localMonth(date)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
 
 const localDay = (date: Date): string =>
     days[date.getDay()];
