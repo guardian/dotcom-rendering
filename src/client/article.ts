@@ -285,7 +285,7 @@ function localDates(): void {
             date.textContent = formatLocal(localDate);
         }
     } catch(e) {
-        console.error(e);
+        console.error("Could not set a local date", e);
     }
 }
 
