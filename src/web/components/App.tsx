@@ -7,6 +7,7 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
+import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -31,6 +32,8 @@ import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
+import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -44,6 +47,8 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+import { Display } from '@root/src/lib/display';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import { cmp, onConsentChange } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
@@ -110,13 +115,6 @@ const commentIdFromUrl = () => {
 const hasCommentsHashInUrl = () => {
     const { hash } = window.location;
     return hash && hash === '#comments';
-};
-
-const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
-    // We override the pillar to be opinion on Comment news pieces
-    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
-        return 'opinion';
-    return CAPI.pillar;
 };
 
 const componentEventHandler = (
@@ -364,6 +362,8 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, [countryCode, CAPI.config.switches.consentManagement]);
 
     const pillar = decidePillar(CAPI);
+    const display: Display = decideDisplay(CAPI);
+    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     const handlePermalink = (commentId: number) => {
         window.location.hash = `#comment-${commentId}`;
@@ -404,6 +404,27 @@ export const App = ({ CAPI, NAV }: Props) => {
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
                 />
             </Hydrate>
+            {CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
+                <Hydrate
+                    key={index}
+                    root="youtube-block-main-media"
+                    index={youtubeBlock.youtubeIndex}
+                >
+                    <YoutubeBlockComponent
+                        display={display}
+                        designType={CAPI.designType}
+                        element={youtubeBlock}
+                        pillar={pillar}
+                        hideCaption={false}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        adTargeting={adTargeting}
+                        isMainMedia={false}
+                        overlayImage={youtubeBlock.overrideImage}
+                        duration={youtubeBlock.duration}
+                    />
+                </Hydrate>
+            ))}
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
                     <>

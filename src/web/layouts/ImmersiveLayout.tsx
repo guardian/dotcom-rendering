@@ -42,7 +42,7 @@ import {
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Display } from '@root/src/lib/display';
-import {BannerWrapper} from "@root/src/web/layouts/lib/stickiness";
+import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
