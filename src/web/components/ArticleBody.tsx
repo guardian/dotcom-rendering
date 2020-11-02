@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
-import { between } from '@guardian/src-foundations/mq';
+import { between, from } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { Display } from '@root/src/lib/display';
@@ -46,6 +46,30 @@ const bodyStyle = (display: Display) => css`
     }
 `;
 
+const imbedAdSlotStyles = css`
+    div > div.ad-slot--im {
+        float: left;
+        width: 130px;
+
+        ${from.mobileLandscape} {
+            width: 220px;
+        }
+
+        &:not(.ad-slot--rendered) {
+            width: 0;
+            height: 0;
+        }
+
+        &.ad-slot--rendered {
+            margin: 5px 10px 6px 0;
+            ${from.mobileLandscape} {
+                margin-bottom: 12px;
+                margin-right: 20px;
+            }
+        }
+    }
+`;
+
 const linkColour = pillarMap(
     (pillar) => css`
         a {
@@ -68,7 +92,13 @@ export const ArticleBody = ({
     adTargeting,
 }: Props) => {
     return (
-        <div className={cx(bodyStyle(display), linkColour[pillar])}>
+        <div
+            className={cx(
+                bodyStyle(display),
+                linkColour[pillar],
+                imbedAdSlotStyles,
+            )}
+        >
             <ArticleRenderer
                 display={display}
                 elements={blocks[0] ? blocks[0].elements : []}
