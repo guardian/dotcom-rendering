@@ -39,9 +39,7 @@ const go = () => {
     app.use(
         webpackDevMiddleware(compiler, {
             serverSideRender: true,
-            logLevel: 'silent',
             publicPath: '/assets/',
-            ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
         }),
     );
 

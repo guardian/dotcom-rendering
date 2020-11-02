@@ -17,7 +17,7 @@ module.exports = () => ({
     },
     externals: [
         require('webpack-node-externals')({
-            whitelist: [/^@guardian/],
+            allowlist: [/^@guardian/],
         }),
         (context, request, callback) => {
             return request.endsWith('manifest.json')
