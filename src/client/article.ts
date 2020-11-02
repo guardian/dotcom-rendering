@@ -282,7 +282,7 @@ function localDates(): void {
     try {
         const localDate = new Date(dateString);
         if (isValidDate(localDate)) {
-            date.innerHTML = formatLocal(localDate);
+            date.textContent = formatLocal(localDate);
         }
     } catch(e) {
         console.error(e);
