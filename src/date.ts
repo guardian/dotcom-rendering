@@ -111,13 +111,13 @@ const format = (date: Date): string =>
     )} ${date.getUTCFullYear()} ${time(date)} UTC`;
 
 const formatLocal = (date: Date): string =>
-    `${localDay(date)} ${date.getDate()} ${localMonth(date)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
+    `${localDay(date)} ${date.getDate()} ${localMonth(
+        date
+    )} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
 
-const localDay = (date: Date): string =>
-    days[date.getDay()];
+const localDay = (date: Date): string => days[date.getDay()];
 
-const localMonth = (date: Date): string =>
-    months[date.getMonth()];
+const localMonth = (date: Date): string => months[date.getMonth()];
 
 function fromString(date: string): Option<Date> {
     try {
@@ -155,5 +155,5 @@ export {
     isValidDate,
     fromString,
     formatSeconds,
-    formatLocal
+    formatLocal,
 };

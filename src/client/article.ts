@@ -316,7 +316,7 @@ function localDates(): void {
         if (isValidDate(localDate)) {
             date.textContent = formatLocal(localDate);
         }
-    } catch(e) {
+    } catch (e) {
         console.error("Could not set a local date", e);
     }
 }
