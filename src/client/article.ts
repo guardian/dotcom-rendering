@@ -12,7 +12,7 @@ import {
 import setup from "client/setup";
 import Epic from "components/shared/epic";
 import FooterCcpa from "components/shared/footer";
-import { formatDate } from "date";
+import { formatDate, formatLocal, isValidDate } from "date";
 import {
     acquisitionsClient,
     notificationsClient,
@@ -307,6 +307,20 @@ function hydrateQuizAtoms(): void {
     });
 }
 
+function localDates(): void {
+    const date = document.querySelector("time.js-date");
+    const dateString = date?.getAttribute("data-date");
+    if (!dateString || !date) return;
+    try {
+        const localDate = new Date(dateString);
+        if (isValidDate(localDate)) {
+            date.textContent = formatLocal(localDate);
+        }
+    } catch(e) {
+        console.error("Could not set a local date", e);
+    }
+}
+
 setup();
 ads();
 videos();
@@ -320,3 +334,4 @@ hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();
+localDates();

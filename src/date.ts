@@ -99,10 +99,25 @@ const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 const time = (date: Date): string =>
     `${padZero(date.getUTCHours())}.${padZero(date.getUTCMinutes())}`;
 
+const localTime = (date: Date): string =>
+    `${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
+
+const localTimeZone = (date: Date): string =>
+    /\(.*?\)$/.exec(date.toTimeString())?.pop() ?? "";
+
 const format = (date: Date): string =>
     `${day(date)} ${date.getUTCDate()} ${month(
         date
     )} ${date.getUTCFullYear()} ${time(date)} UTC`;
+
+const formatLocal = (date: Date): string =>
+    `${localDay(date)} ${date.getDate()} ${localMonth(date)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
+
+const localDay = (date: Date): string =>
+    days[date.getDay()];
+
+const localMonth = (date: Date): string =>
+    months[date.getMonth()];
 
 function fromString(date: string): Option<Date> {
     try {
@@ -140,4 +155,5 @@ export {
     isValidDate,
     fromString,
     formatSeconds,
+    formatLocal
 };
