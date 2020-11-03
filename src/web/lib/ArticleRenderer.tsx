@@ -54,7 +54,8 @@ export const ArticleRenderer: React.FC<{
     pillar: Pillar;
     designType: DesignType;
     adTargeting?: AdTargeting;
-}> = ({ display, elements, pillar, designType, adTargeting }) => {
+    host?: string;
+}> = ({ display, elements, pillar, designType, adTargeting, host }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -397,6 +398,7 @@ export const ArticleRenderer: React.FC<{
                                 isMainMedia={false}
                                 overlayImage={element.overrideImage}
                                 duration={element.duration}
+                                origin={host}
                             />
                         </div>
                     );

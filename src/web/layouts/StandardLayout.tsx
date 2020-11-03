@@ -47,7 +47,11 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
+import {
+    Stuck,
+    SendToBack,
+    BannerWrapper,
+} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
@@ -304,7 +308,7 @@ export const StandardLayout = ({
     pillar,
 }: Props) => {
     const {
-        config: { isPaidContent },
+        config: { isPaidContent, host },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -517,6 +521,7 @@ export const StandardLayout = ({
                                     display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
+                                    host={host}
                                 />
                                 {showMatchStats && <div id="match-stats" />}
 
