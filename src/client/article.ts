@@ -2,7 +2,7 @@
 
 import { notificationsClient, acquisitionsClient, userClient } from 'native/nativeApi';
 import { Topic } from '@guardian/bridget/Topic';
-import { formatDate } from 'date';
+import { formatDate, formatLocal, isValidDate } from 'date';
 import { logger } from "../logger";
 import { createElement as h } from 'react';
 import setup from 'client/setup';
@@ -275,6 +275,20 @@ function hydrateQuizAtoms(): void {
         })
 }
 
+function localDates(): void {
+    const date = document.querySelector("time.js-date");
+    const dateString = date?.getAttribute("data-date");
+    if (!dateString || !date) return;
+    try {
+        const localDate = new Date(dateString);
+        if (isValidDate(localDate)) {
+            date.textContent = formatLocal(localDate);
+        }
+    } catch(e) {
+        console.error("Could not set a local date", e);
+    }
+}
+
 setup();
 ads();
 videos();
@@ -288,3 +302,4 @@ hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();
+localDates();
