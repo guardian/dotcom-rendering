@@ -31,7 +31,7 @@ export const Recipe: CAPIType = {
                     value:
                         '/lifeandstyle/2020/apr/03/folding-kneading-rolling-seven-meditative-dishes-to-cook-when-you-need-to-zone-out',
                 },
-                { name: 'sh', value: 'https://gu.com/p/dhpzc' },
+                { name: 'sh', value: 'https://theguardian.com/p/dhpzc' },
             ],
         },
         US: {
@@ -54,7 +54,7 @@ export const Recipe: CAPIType = {
                     value:
                         '/lifeandstyle/2020/apr/03/folding-kneading-rolling-seven-meditative-dishes-to-cook-when-you-need-to-zone-out',
                 },
-                { name: 'sh', value: 'https://gu.com/p/dhpzc' },
+                { name: 'sh', value: 'https://theguardian.com/p/dhpzc' },
             ],
         },
         AU: {
@@ -77,7 +77,7 @@ export const Recipe: CAPIType = {
                         '/lifeandstyle/2020/apr/03/folding-kneading-rolling-seven-meditative-dishes-to-cook-when-you-need-to-zone-out',
                 },
                 { name: 'edition', value: 'au' },
-                { name: 'sh', value: 'https://gu.com/p/dhpzc' },
+                { name: 'sh', value: 'https://theguardian.com/p/dhpzc' },
             ],
         },
         INT: {
@@ -100,7 +100,7 @@ export const Recipe: CAPIType = {
                     value:
                         '/lifeandstyle/2020/apr/03/folding-kneading-rolling-seven-meditative-dishes-to-cook-when-you-need-to-zone-out',
                 },
-                { name: 'sh', value: 'https://gu.com/p/dhpzc' },
+                { name: 'sh', value: 'https://theguardian.com/p/dhpzc' },
             ],
         },
     },

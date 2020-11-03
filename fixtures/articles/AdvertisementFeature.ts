@@ -36,7 +36,7 @@ export const AdvertisementFeature: CAPIType = {
             },
             adTargeting: [
                 { name: 'edition', value: 'uk' },
-                { name: 'sh', value: 'https://gu.com/p/cjf88' },
+                { name: 'sh', value: 'https://theguardian.com/p/cjf88' },
                 {
                     name: 'url',
                     value:
@@ -74,7 +74,7 @@ export const AdvertisementFeature: CAPIType = {
                     'https://www.theguardian.com/info/2016/jan/25/content-funding',
             },
             adTargeting: [
-                { name: 'sh', value: 'https://gu.com/p/cjf88' },
+                { name: 'sh', value: 'https://theguardian.com/p/cjf88' },
                 {
                     name: 'url',
                     value:
@@ -113,7 +113,7 @@ export const AdvertisementFeature: CAPIType = {
                     'https://www.theguardian.com/info/2016/jan/25/content-funding',
             },
             adTargeting: [
-                { name: 'sh', value: 'https://gu.com/p/cjf88' },
+                { name: 'sh', value: 'https://theguardian.com/p/cjf88' },
                 {
                     name: 'url',
                     value:
@@ -152,7 +152,7 @@ export const AdvertisementFeature: CAPIType = {
                     'https://www.theguardian.com/info/2016/jan/25/content-funding',
             },
             adTargeting: [
-                { name: 'sh', value: 'https://gu.com/p/cjf88' },
+                { name: 'sh', value: 'https://theguardian.com/p/cjf88' },
                 {
                     name: 'url',
                     value:
