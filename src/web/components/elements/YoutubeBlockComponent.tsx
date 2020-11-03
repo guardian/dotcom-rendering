@@ -23,6 +23,7 @@ type Props = {
     width?: number;
     title?: string;
     duration?: number; // in seconds
+    origin?: string;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -73,6 +74,7 @@ export const YoutubeBlockComponent = ({
     width = 460,
     title = 'YouTube video player',
     duration,
+    origin,
 }: Props) => {
     const shouldLimitWidth =
         !isMainMedia &&
@@ -128,6 +130,7 @@ export const YoutubeBlockComponent = ({
                 width={width}
                 title={title}
                 duration={duration}
+                origin={origin}
             />
             {!hideCaption && (
                 <Caption
