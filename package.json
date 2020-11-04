@@ -106,7 +106,6 @@
         "pm2": "^4.5.0",
         "polished": "^1.9.2",
         "preact": "^10.5.5",
-        "preact-compat": "^3.19.0",
         "preact-render-to-string": "^5.1.11",
         "prettier-eslint": "^11.0.0",
         "pretty-bytes": "^4.0.2",
