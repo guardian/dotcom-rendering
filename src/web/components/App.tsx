@@ -346,6 +346,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             });
 
             if (
+                CAPI.config.switches.auConsent ||
                 window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
             ) {
                 cmp.init({
@@ -359,7 +360,11 @@ export const App = ({ CAPI, NAV }: Props) => {
                 });
             }
         }
-    }, [countryCode, CAPI.config.switches.consentManagement]);
+    }, [
+        countryCode,
+        CAPI.config.switches.consentManagement,
+        CAPI.config.switches.auConsent,
+    ]);
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
