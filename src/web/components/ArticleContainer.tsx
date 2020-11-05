@@ -17,6 +17,8 @@ const articleContainer = css`
     z-index: 1;
 `;
 
+// styles from _adslot.scss in frontend
+// TODO: still a lot of styles to migrate from _adslot.scss
 const articleAdStyles = css`
     .ad-slot {
         width: 300px;
@@ -94,13 +96,48 @@ const articleAdStyles = css`
     ${labelStyles};
 `;
 
+// styles from _creatives.scss in frontend
+// TODO: still a lot of styles to migrate from _creatives.scss
+const articleCreativesStyles = css`
+    .creative__background-parent {
+        contain: size layout style;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+
+        /* This will clip the fixed-positioned child to the boundaries of its parent */
+        clip: rect(0, auto, auto, 0);
+
+        .creative__background {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            /* unable to find transition in frontend scss files, but it was being conditionally applied to DCR  */
+            transition: background 100ms ease
+        }
+
+        .creative__background--parallax {
+            position: absolute;
+        }
+
+        .creative__background--fixed {
+            position: fixed;
+        }
+    }
+`
+
 type Props = {
     children: JSXElements;
 };
 
 export const ArticleContainer = ({ children }: Props) => {
     return (
-        <main className={cx(articleContainer, articleAdStyles)}>
+        <main className={cx(articleContainer, articleAdStyles, articleCreativesStyles)}>
             {children}
         </main>
     );
