@@ -422,6 +422,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
                         duration={youtubeBlock.duration}
+                        origin={CAPI.config.host}
                     />
                 </Hydrate>
             ))}
@@ -443,6 +444,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
                         duration={youtubeBlock.duration}
+                        origin={CAPI.config.host}
                     />
                 </Hydrate>
             ))}

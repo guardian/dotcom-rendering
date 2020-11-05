@@ -14,6 +14,7 @@ type Props = {
     blocks: Block[];
     designType: DesignType;
     adTargeting: AdTargeting;
+    host?: string;
 };
 
 const pillarColours = pillarMap(
@@ -66,6 +67,7 @@ export const ArticleBody = ({
     blocks,
     designType,
     adTargeting,
+    host,
 }: Props) => {
     return (
         <div className={cx(bodyStyle(display), linkColour[pillar])}>
@@ -75,6 +77,7 @@ export const ArticleBody = ({
                 pillar={pillar}
                 designType={designType}
                 adTargeting={adTargeting}
+                host={host}
             />
         </div>
     );
