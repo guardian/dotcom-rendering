@@ -1,41 +1,41 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    
+    parser: "@typescript-eslint/parser",
+
     extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:react/recommended',
-        'plugin:jsx-a11y/recommended',
-        '@guardian/eslint-config-typescript'
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
+        "@guardian/eslint-config-typescript",
     ],
     parserOptions: {
         // Allows for the parsing of modern ECMAScript features
         ecmaVersion: 2018,
         // Allows for the use of imports
-        sourceType: 'module',
+        sourceType: "module",
         ecmaFeatures: {
             // Allows for the parsing of JSX
             jsx: true,
         },
-        project: 'tsconfig.json',
+        project: "tsconfig.json",
     },
     rules: {
         // Triple-equals equality in JS
-        'eqeqeq': 'error',
+        eqeqeq: "error",
         // Avoid let when variable is never re-assigned
-        'prefer-const': 'error',
-        'no-trailing-spaces': 'error',
-        'indent': [
-            'error',
+        "prefer-const": "error",
+        "no-trailing-spaces": "error",
+        indent: [
+            "error",
             4,
             {
-                'SwitchCase': 1,
+                SwitchCase: 1,
             },
         ],
-        'max-len': [
-            'error',
+        "max-len": [
+            "error",
             {
                 code: 100,
                 ignoreStrings: true,
@@ -45,8 +45,8 @@ module.exports = {
         ],
         // Enforce TypeScript naming conventions
         // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
-        '@typescript-eslint/naming-convention': [
-            'error',
+        "@typescript-eslint/naming-convention": [
+            "error",
 
             /**
              * Normal functions are 'camelCase', React components are 'PascalCase'
@@ -55,8 +55,8 @@ module.exports = {
              *   function HelloWorld(props: Props) {}
              */
             {
-                'selector': 'function',
-                'format': [ 'camelCase', 'PascalCase' ],
+                selector: "function",
+                format: ["camelCase", "PascalCase"],
             },
 
             /** Normal variables are 'camelCase', React components are 'PascalCase',
@@ -67,8 +67,8 @@ module.exports = {
              *   const IMAGE_WIDTH: number = 8
              */
             {
-                'selector': 'variable',
-                'format': [ 'camelCase', 'UPPER_CASE', 'PascalCase' ],
+                selector: "variable",
+                format: ["camelCase", "UPPER_CASE", "PascalCase"],
             },
 
             /** All types, including enum members, are 'PascalCase'
@@ -78,22 +78,22 @@ module.exports = {
              *   enum SpamAndEggs { Spam, Eggs }
              */
             {
-                'selector': [ 'typeLike', 'enumMember' ],
-                'format': [ 'PascalCase' ],
+                selector: ["typeLike", "enumMember"],
+                format: ["PascalCase"],
             },
         ],
-        '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'error',
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/explicit-function-return-type": "error",
         // This check seems to be flaky, and complains about things that TS is happy about
-        'react/prop-types': 'off',
-        'import/no-unresolved': 'off',
-        'indent': 'off',
-        'import/no-default-export': 'off'
+        "react/prop-types": "off",
+        "import/no-unresolved": "off",
+        indent: "off",
+        "import/no-default-export": "off",
     },
     settings: {
         react: {
             // Tells eslint-plugin-react to automatically detect the version of React to use
-            version: 'detect',
+            version: "detect",
         },
     },
 };

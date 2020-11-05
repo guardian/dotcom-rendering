@@ -1,35 +1,35 @@
-import type { SerializedStyles } from "@emotion/core";
-import { css } from "@emotion/core";
-import { remSpace } from "@guardian/src-foundations";
-import { background, neutral } from "@guardian/src-foundations/palette";
-import type { Format } from "@guardian/types/Format";
-import React from "react";
-import type { FC, ReactNode } from "react";
-import { adStyles, darkModeCss } from "styles";
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
+import { remSpace } from '@guardian/src-foundations';
+import { background, neutral } from '@guardian/src-foundations/palette';
+import type { Format } from '@guardian/types/Format';
+import React from 'react';
+import type { FC, ReactNode } from 'react';
+import { adStyles, darkModeCss } from 'styles';
 
 interface ArticleBodyProps {
-    className: SerializedStyles[];
-    children: ReactNode[];
-    format: Format;
+	className: SerializedStyles[];
+	children: ReactNode[];
+	format: Format;
 }
 
 const ArticleBodyStyles = (format: Format): SerializedStyles => css`
-    position: relative;
-    clear: both;
+	position: relative;
+	clear: both;
 
-    iframe {
-        width: 100%;
-        border: none;
-    }
+	iframe {
+		width: 100%;
+		border: none;
+	}
 
-    ${adStyles(format)}
+	${adStyles(format)}
 
-    twitter-widget,
+	twitter-widget,
     figure[data-atom-type="explainer"] {
-        margin: ${remSpace[4]} 0;
-        clear: both;
-        display: inline-block;
-    }
+		margin: ${remSpace[4]} 0;
+		clear: both;
+		display: inline-block;
+	}
 `;
 
 const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
@@ -47,9 +47,9 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
 `;
 
 const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => (
-    <div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
-        {children}
-    </div>
+	<div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
+		{children}
+	</div>
 );
 
 export default ArticleBody;

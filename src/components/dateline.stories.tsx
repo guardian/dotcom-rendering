@@ -1,30 +1,30 @@
 // ----- Imports ----- //
 
-import { Pillar } from "@guardian/types/Format";
-import { some } from "@guardian/types/option";
-import { date, withKnobs } from "@storybook/addon-knobs";
-import type { FC } from "react";
-import React from "react";
-import { selectPillar } from "storybookHelpers";
-import Dateline from "./dateline";
+import { Pillar } from '@guardian/types/Format';
+import { some } from '@guardian/types/option';
+import { date, withKnobs } from '@storybook/addon-knobs';
+import type { FC } from 'react';
+import React from 'react';
+import { selectPillar } from 'storybookHelpers';
+import Dateline from './dateline';
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
-    <Dateline
-        theme={selectPillar(Pillar.Opinion)}
-        date={some(
-            new Date(date("Publish Date", new Date("2019-12-17T03:24:00")))
-        )}
-    />
+	<Dateline
+		theme={selectPillar(Pillar.Opinion)}
+		date={some(
+			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
+		)}
+	/>
 );
 
 // ----- Exports ----- //
 
 export default {
-    component: Dateline,
-    title: "Dateline",
-    decorators: [withKnobs],
+	component: Dateline,
+	title: 'Dateline',
+	decorators: [withKnobs],
 };
 
 export { Default };

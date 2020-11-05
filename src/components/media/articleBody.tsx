@@ -1,25 +1,25 @@
-import type { SerializedStyles } from "@emotion/core";
-import { css } from "@emotion/core";
-import { remSpace } from "@guardian/src-foundations";
-import { background, neutral } from "@guardian/src-foundations/palette";
-import type { Format, Theme } from "@guardian/types/Format";
-import type { FC, ReactNode } from "react";
-import React from "react";
-import { adStyles, darkModeCss } from "styles";
-import type { ThemeStyles } from "themeStyles";
-import { getThemeStyles } from "themeStyles";
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
+import { remSpace } from '@guardian/src-foundations';
+import { background, neutral } from '@guardian/src-foundations/palette';
+import type { Format, Theme } from '@guardian/types/Format';
+import type { FC, ReactNode } from 'react';
+import React from 'react';
+import { adStyles, darkModeCss } from 'styles';
+import type { ThemeStyles } from 'themeStyles';
+import { getThemeStyles } from 'themeStyles';
 
 const ArticleBodyStyles = (format: Format): SerializedStyles => css`
-    position: relative;
-    clear: both;
-    background: ${background.inverse};
-    color: ${neutral[86]};
+	position: relative;
+	clear: both;
+	background: ${background.inverse};
+	color: ${neutral[86]};
 
-    ${adStyles(format)}
+	${adStyles(format)}
 `;
 
 const ArticleBodyDarkStyles = ({
-    inverted,
+	inverted,
 }: ThemeStyles): SerializedStyles => darkModeCss`
     a {
         color: ${inverted};
@@ -31,27 +31,27 @@ const ArticleBodyDarkStyles = ({
 `;
 
 interface ArticleBodyProps {
-    theme: Theme;
-    className: SerializedStyles[];
-    children: ReactNode[];
-    format: Format;
+	theme: Theme;
+	className: SerializedStyles[];
+	children: ReactNode[];
+	format: Format;
 }
 
 const ArticleBodyMedia: FC<ArticleBodyProps> = ({
-    theme,
-    className,
-    children,
-    format,
+	theme,
+	className,
+	children,
+	format,
 }) => (
-    <div
-        css={[
-            ArticleBodyStyles(format),
-            ArticleBodyDarkStyles(getThemeStyles(theme)),
-            ...className,
-        ]}
-    >
-        {children}
-    </div>
+	<div
+		css={[
+			ArticleBodyStyles(format),
+			ArticleBodyDarkStyles(getThemeStyles(theme)),
+			...className,
+		]}
+	>
+		{children}
+	</div>
 );
 
 export default ArticleBodyMedia;

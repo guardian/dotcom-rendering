@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import type { FC } from "react";
-import React from "react";
-import HorizontalRule from "./horizontalRule";
+import type { FC } from 'react';
+import React from 'react';
+import HorizontalRule from './horizontalRule';
 
 // ----- Stories ----- //
 
@@ -11,8 +11,8 @@ const Default: FC = () => <HorizontalRule />;
 // ----- Exports ----- //
 
 export default {
-    component: HorizontalRule,
-    title: "HorizontalRule",
+	component: HorizontalRule,
+	title: 'HorizontalRule',
 };
 
 export { Default };

@@ -1,39 +1,39 @@
 // ----- Imports ----- //
 
-import { RenderingRequestSerde } from "@guardian/apps-rendering-api-models/renderingRequest";
-import { ErrorResponseSerde } from "@guardian/content-api-models/v1/errorResponse";
-import { ItemResponseSerde } from "@guardian/content-api-models/v1/itemResponse";
-import { TBufferedTransport, TCompactProtocol } from "thrift";
-import type { TProtocol, TTransport } from "thrift";
+import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
+import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
+import { TBufferedTransport, TCompactProtocol } from 'thrift';
+import type { TProtocol, TTransport } from 'thrift';
 
 // ----- Types ----- //
 
 interface ThriftDecoder<A> {
-    read(p: TProtocol): A;
+	read(p: TProtocol): A;
 }
 
 // ----- Functions ----- //
 
 async function toTransport(buffer: Buffer): Promise<TTransport> {
-    return new Promise((resolve, reject) => {
-        const writer = TBufferedTransport.receiver((transport, seqID) => {
-            resolve(transport);
-        }, 0);
-        writer(buffer);
-    });
+	return new Promise((resolve, reject) => {
+		const writer = TBufferedTransport.receiver((transport, seqID) => {
+			resolve(transport);
+		}, 0);
+		writer(buffer);
+	});
 }
 
 const decodeContent = <A>(decoder: ThriftDecoder<A>) => async (
-    content: Buffer | undefined
+	content: Buffer | undefined,
 ): Promise<A> => {
-    if (content) {
-        const transport = await toTransport(content);
-        const protocol = new TCompactProtocol(transport);
+	if (content) {
+		const transport = await toTransport(content);
+		const protocol = new TCompactProtocol(transport);
 
-        return decoder.read(protocol);
-    } else {
-        return Promise.reject("Invalid request");
-    }
+		return decoder.read(protocol);
+	} else {
+		return Promise.reject('Invalid request');
+	}
 };
 
 const capiDecoder = decodeContent(ItemResponseSerde);

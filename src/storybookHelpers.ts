@@ -1,20 +1,20 @@
 // ----- Imports ----- //
 
-import { Pillar } from "@guardian/types/Format";
-import { select } from "@storybook/addon-knobs";
+import { Pillar } from '@guardian/types/Format';
+import { select } from '@storybook/addon-knobs';
 
 // ----- Helpers ----- //
 
 const pillarOptions = {
-    News: Pillar.News,
-    Opinion: Pillar.Opinion,
-    Sport: Pillar.Sport,
-    Culture: Pillar.Culture,
-    Lifestyle: Pillar.Lifestyle,
+	News: Pillar.News,
+	Opinion: Pillar.Opinion,
+	Sport: Pillar.Sport,
+	Culture: Pillar.Culture,
+	Lifestyle: Pillar.Lifestyle,
 };
 
 const selectPillar = (initial: Pillar): Pillar =>
-    select("Pillar", pillarOptions, initial);
+	select('Pillar', pillarOptions, initial);
 
 // ----- Exports ----- //
 

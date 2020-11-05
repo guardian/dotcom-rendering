@@ -1,20 +1,20 @@
-import FooterCcpa from "components/shared/footer";
-import type { FC, ReactNode } from "react";
-import React from "react";
+import FooterCcpa from 'components/shared/footer';
+import type { FC, ReactNode } from 'react';
+import React from 'react';
 
 // ----- Component ----- //
 
 interface Props {
-    children: ReactNode[];
+	children: ReactNode[];
 }
 
 const Interactive: FC<Props> = ({ children }) => (
-    <main>
-        <article>{children}</article>
-        <div id="articleFooter">
-            <FooterCcpa isCcpa={false} />
-        </div>
-    </main>
+	<main>
+		<article>{children}</article>
+		<div id="articleFooter">
+			<FooterCcpa isCcpa={false} />
+		</div>
+	</main>
 );
 
 // ----- Exports ----- //
