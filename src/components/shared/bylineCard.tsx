@@ -7,12 +7,8 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types/Format';
 import { Design, Display } from '@guardian/types/Format';
-import type {
-	fromNullable,
-	map,
-	Option,
-	withDefault,
-} from '@guardian/types/option';
+import { fromNullable, map, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
 import React from 'react';

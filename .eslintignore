@@ -1,5 +1,4 @@
 *.test.ts
 node_modules
 api-models
-api-models
 webpack.config.ts

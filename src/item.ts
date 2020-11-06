@@ -250,8 +250,6 @@ const isLive = hasTag('tone/minutebyminute');
 
 const isRecipe = hasTag('tone/recipes');
 
-const isMatchReport = hasTag('tone/matchreports');
-
 const isInterview = hasTag('tone/interview');
 
 const isGuardianView = hasTag('tone/editorials');
@@ -318,11 +316,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isMatchReport(tags)) {
-		return {
-			design: Design.MatchReport,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isInterview(tags)) {

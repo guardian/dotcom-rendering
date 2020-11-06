@@ -62,8 +62,10 @@ const scriptName = ({ design, display }: Format): Option<string> => {
 const shouldHideAds = (request: RenderingRequest): boolean =>
 	request.content.fields?.shouldHideAdverts ?? false;
 
-const styles = (format: Format): string => `
-    ${pageFonts}
+const styles = (format: Format): string => {
+	const bg = format.design === Design.Media ? background.inverse : 'white';
+	return `
+        ${pageFonts}
 
     body {
         background: ${
@@ -77,10 +79,20 @@ const styles = (format: Format): string => `
 
     @media (prefers-color-scheme: dark) {
         body {
-            background: transparent;
+            background: ${bg};
+            margin: 0;
+            font-family: 'Guardian Text Egyptian Web';
+            overflow-x: hidden;
+            line-height: 1.5;
         }
-    }
-`;
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: transparent;
+            }
+        }
+    `;
+};
 
 function renderHead(
 	item: Item,

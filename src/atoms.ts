@@ -141,7 +141,6 @@ function parseAtom(
 
 			if (!title || !defaultHtml) {
 				return err(`No title or defaultHtml for atom: ${id}`);
-				``;
 			}
 
 			const doc = docParser(defaultHtml);

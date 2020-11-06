@@ -1,26 +1,28 @@
 // ----- Imports ----- //
 
-import { fork, ChildProcess } from 'child_process';
-import webpack, { Compiler, Configuration, Resolve } from 'webpack';
-import path from 'path';
-import ManifestPlugin from 'webpack-manifest-plugin';
-import CleanCSS from 'clean-css';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { createHash } from 'crypto';
-import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
+import type { ChildProcess } from "child_process";
+import { fork } from "child_process";
+import { createHash } from "crypto";
+import path from "path";
+import CleanCSS from "clean-css";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import type { Compiler, Configuration, Resolve } from "webpack";
+import webpack from "webpack";
+import ManifestPlugin from "webpack-manifest-plugin";
+import { renederedItemsAssetsCss } from "./config/rendered-items-assets-styles";
 
 // ----- Plugins ----- //
 
 class LaunchServerPlugin {
     server?: ChildProcess;
     apply(compiler: Compiler): void {
-        compiler.hooks.afterEmit.tap('LaunchServerPlugin', () => {
-            console.log('Server starting...');
-            this.server = fork('./dist/server.js');
-            this.server.on('close', () => console.log('Server stopping...'));
+        compiler.hooks.afterEmit.tap("LaunchServerPlugin", () => {
+            console.log("Server starting...");
+            this.server = fork("./dist/server.js");
+            this.server.on("close", () => console.log("Server stopping..."));
         });
 
-        compiler.hooks.watchRun.tap('LaunchServerPlugin', () => {
+        compiler.hooks.watchRun.tap("LaunchServerPlugin", () => {
             if (this.server) {
                 this.server.kill();
             }
@@ -32,26 +34,25 @@ class LaunchServerPlugin {
 
 function resolve(loggerName: string): Resolve {
     return {
-        extensions: ['.ts', '.tsx', '.js'],
-        modules: [
-            path.resolve(__dirname, 'src'),
-            'node_modules',
-        ],
+        extensions: [".ts", ".tsx", ".js"],
+        modules: [path.resolve(__dirname, "src"), "node_modules"],
         alias: {
             logger: path.resolve(__dirname, `src/logger/${loggerName}`),
             react: path.resolve('./node_modules/react')
         },
-    }
+    };
 }
 
 // ----- Configs ----- //
 
-const serverConfig = (env: { [key: string]: boolean | undefined }): Configuration => {
-    const isProd = env && env.production;
-    const isWatch = env && env.watch;
+const serverConfig = (
+    env: Record<string, boolean | undefined>
+): Configuration => {
+    const isProd = env?.production;
+    const isWatch = env?.watch;
     // Does not try to require the 'canvas' package,
     // an optional dependency of jsdom that we aren't using.
-    const plugins = [ new webpack.IgnorePlugin(/^canvas$/) ];
+    const plugins = [new webpack.IgnorePlugin(/^canvas$/)];
     if (isWatch) {
         plugins.push(new LaunchServerPlugin());
     }
@@ -59,17 +60,17 @@ const serverConfig = (env: { [key: string]: boolean | undefined }): Configuratio
     const mode = isProd ? "production" : "development";
 
     return {
-        name: 'server',
+        name: "server",
         mode,
-        entry: 'server/server.ts',
-        target: 'node',
+        entry: "server/server.ts",
+        target: "node",
         node: {
             __dirname: false,
         },
         output: {
-            filename: isProd ? 'server/server.js': 'server.js',
+            filename: isProd ? "server/server.js" : "server.js",
         },
-        watch: env && env.watch,
+        watch: isWatch,
         watchOptions: {
             ignored: /node_modules/,
         },
@@ -81,51 +82,51 @@ const serverConfig = (env: { [key: string]: boolean | undefined }): Configuratio
                     test: /\.tsx?$/,
                     use: [
                         {
-                            loader: 'babel-loader',
+                            loader: "babel-loader",
                             options: {
                                 presets: [
-                                    '@babel/preset-react',
-                                    '@emotion/babel-preset-css-prop',
+                                    "@babel/preset-react",
+                                    "@emotion/babel-preset-css-prop",
                                 ],
                             },
                         },
                         {
-                            loader: 'ts-loader',
-                            options: { configFile: 'config/tsconfig.server.json' }
-                        }
+                            loader: "ts-loader",
+                            options: {
+                                configFile: "config/tsconfig.server.json",
+                            },
+                        },
                     ],
-                }
-            ]
+                },
+            ],
         },
         optimization: {
-            minimize: false
+            minimize: false,
         },
-        devtool: 'inline-cheap-source-map',
-    }
-}
+        devtool: "inline-cheap-source-map",
+    };
+};
 
 export const clientConfig: Configuration = {
-    name: 'client',
-    mode: 'development',
+    name: "client",
+    mode: "development",
     entry: {
-        article: 'client/article.ts',
-        media: 'client/media.ts',
+        article: "client/article.ts",
+        media: "client/media.ts",
     },
-    target: 'web',
-    devtool: 'inline-cheap-source-map',
+    target: "web",
+    devtool: "inline-cheap-source-map",
     output: {
-        path: path.resolve(__dirname, 'dist/assets'),
-        filename: '[name].js',
+        path: path.resolve(__dirname, "dist/assets"),
+        filename: "[name].js",
     },
-    plugins: [
-        new ManifestPlugin({ writeToFileEmit: true }),
-    ],
+    plugins: [new ManifestPlugin({ writeToFileEmit: true })],
     resolve: resolve("clientDev"),
     devServer: {
-        publicPath: '/assets/',
+        publicPath: "/assets/",
         proxy: {
-            '**': 'http://localhost:3040',
-        }
+            "**": "http://localhost:3040",
+        },
     },
     module: {
         rules: [
@@ -133,20 +134,20 @@ export const clientConfig: Configuration = {
                 test: /\.tsx?$/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: "babel-loader",
                         options: {
                             presets: [
-                                '@babel/preset-react',
-                                '@emotion/babel-preset-css-prop',
+                                "@babel/preset-react",
+                                "@emotion/babel-preset-css-prop",
                                 [
-                                    '@babel/preset-env',
+                                    "@babel/preset-env",
                                     {
                                         // Babel recommends installing corejs as a peer dependency
                                         // and specifying the version used here
                                         // https://babeljs.io/docs/en/babel-preset-env#usebuiltins
                                         // This should automatically inject polyfills as needed,
                                         // based on our code and the browserslist in package.json
-                                        useBuiltIns: 'usage',
+                                        useBuiltIns: "usage",
                                         corejs: 3,
                                         modules: false,
                                         targets: { esmodules: true },
@@ -156,45 +157,55 @@ export const clientConfig: Configuration = {
                         },
                     },
                     {
-                        loader: 'ts-loader',
-                        options: { configFile: 'config/tsconfig.client.json' }
+                        loader: "ts-loader",
+                        options: { configFile: "config/tsconfig.client.json" },
                     },
                 ],
             },
-        ]
-    }
+        ],
+    },
 };
 
-const assetsTemplateCss = new CleanCSS().minify(renederedItemsAssetsCss).styles.trim()
+const assetsTemplateCss = new CleanCSS()
+    .minify(renederedItemsAssetsCss)
+    .styles.trim();
 const assetHash = (asset: string): string =>
-    createHash('sha256').update(asset).digest('base64');
+    createHash("sha256").update(asset).digest("base64");
 
 const clientConfigProduction = {
     ...clientConfig,
-    name: 'clientProduction',
-    mode: 'production',
+    name: "clientProduction",
+    mode: "production",
     devtool: false,
     plugins: [
         new ManifestPlugin(),
         new HtmlWebpackPlugin({
             meta: {
-                'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': `style-src 'sha256-${assetHash(assetsTemplateCss)}';` },
+                "Content-Security-Policy": {
+                    "http-equiv": "Content-Security-Policy",
+                    content: `style-src 'sha256-${assetHash(
+                        assetsTemplateCss
+                    )}';`,
+                },
             },
-            filename: 'rendered-items-assets.html',
-            template: path.resolve(__dirname, 'config/rendered-items-assets-template.html'),
+            filename: "rendered-items-assets.html",
+            template: path.resolve(
+                __dirname,
+                "config/rendered-items-assets-template.html"
+            ),
             minify: true,
             templateParameters: {
-                styles: assetsTemplateCss
-            }
-        })
+                styles: assetsTemplateCss,
+            },
+        }),
     ],
     output: {
-        path: path.resolve(__dirname, 'dist/assets'),
-        filename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, "dist/assets"),
+        filename: "[name].[contenthash].js",
     },
-    resolve: resolve("clientProd")
-}
+    resolve: resolve("clientProd"),
+};
 
 // ----- Exports ----- //
 
-export default [ serverConfig, clientConfig, clientConfigProduction ];
+export default [serverConfig, clientConfig, clientConfigProduction];

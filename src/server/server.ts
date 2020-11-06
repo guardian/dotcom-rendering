@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import 'source-map-support/register'; // activating the source map support
-
 import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
@@ -145,7 +144,7 @@ async function serveArticlePost(
 	try {
 		const renderingRequest = await mapiDecoder(body);
 
-		void serveArticle(renderingRequest, res);
+		void serveArticle(renderingRequest, res, false);
 	} catch (e) {
 		logger.error(`This error occurred`, e);
 		next(e);
