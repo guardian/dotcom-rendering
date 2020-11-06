@@ -1,138 +1,148 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-
-import { Design, Format } from '@guardian/types/Format';
-import { Option, withDefault, map } from '@guardian/types/option';
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
 import { neutral, palette } from '@guardian/src-foundations';
-import { getThemeStyles } from 'themeStyles';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Design } from '@guardian/types/Format';
+import type { Format } from '@guardian/types/Format';
+import { map, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types/option';
+import { pipe2 } from 'lib';
+import React from 'react';
+import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
-import { pipe2 } from 'lib';
-
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
 interface Props extends Format {
-    bylineHtml: Option<DocumentFragment>;
+	bylineHtml: Option<DocumentFragment>;
 }
 
 const styles = (kicker: string): SerializedStyles => css`
-    ${headline.xxxsmall()}
-    color: ${kicker};
+	${headline.xxxsmall()}
+	color: ${kicker};
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${neutral[60]};
     `}
 `;
 
-const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
-    ${headline.xxxsmall({ fontWeight: 'bold' })}
-    font-style: normal;
-    color: ${kicker};
-    text-decoration: none;
+const anchorStyles = (
+	kicker: string,
+	inverted: string,
+): SerializedStyles => css`
+	${headline.xxxsmall({ fontWeight: 'bold' })}
+	font-style: normal;
+	color: ${kicker};
+	text-decoration: none;
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${inverted};
     `}
 `;
 
 const commentStyles = (kicker: string): SerializedStyles => css`
-    color: ${kicker};
-    width: 75%;
-    ${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
+	color: ${kicker};
+	width: 75%;
+	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
-const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
-    color: ${kicker};
-    text-decoration: none;
+const commentAnchorStyles = (
+	kicker: string,
+	inverted: string,
+): SerializedStyles => css`
+	color: ${kicker};
+	text-decoration: none;
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${inverted};
     `}
 `;
 
 const advertisementFeatureStyles = css`
-    ${textSans.medium( { lineHeight: 'regular' })}
-    color: ${palette.labs[300]};
+	${textSans.medium({ lineHeight: 'regular' })}
+	color: ${palette.labs[300]};
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${palette.labs[400]};
     `}
 `;
 
 const advertisementFeatureAnchorStyles = css`
-    font-weight: bold;
-    color: ${palette.labs[300]};
-    font-style: normal;
-    text-decoration: none;
+	font-weight: bold;
+	color: ${palette.labs[300]};
+	font-style: normal;
+	text-decoration: none;
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${palette.labs[400]};
     `}
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-    const { kicker } = getThemeStyles(format.theme);
+	const { kicker } = getThemeStyles(format.theme);
 
-    switch (format.design) {
-        case Design.Comment:
-            return commentStyles(kicker);
+	switch (format.design) {
+		case Design.Comment:
+			return commentStyles(kicker);
 
-        case Design.AdvertisementFeature:
-            return advertisementFeatureStyles;
+		case Design.AdvertisementFeature:
+			return advertisementFeatureStyles;
 
-        default:
-            return styles(kicker);
-    }
-}
+		default:
+			return styles(kicker);
+	}
+};
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
-    const { kicker, inverted } = getThemeStyles(format.theme);
+	const { kicker, inverted } = getThemeStyles(format.theme);
 
-    switch (format.design) {
-        case Design.Comment:
-            return commentAnchorStyles(kicker, inverted);
+	switch (format.design) {
+		case Design.Comment:
+			return commentAnchorStyles(kicker, inverted);
 
-        case Design.AdvertisementFeature:
-            return advertisementFeatureAnchorStyles;
+		case Design.AdvertisementFeature:
+			return advertisementFeatureAnchorStyles;
 
-        default:
-            return anchorStyles(kicker, inverted);
-    }
-}
+		default:
+			return anchorStyles(kicker, inverted);
+	}
+};
 
 const toReact = (format: Format) => (node: Node): ReactNode => {
-    switch (node.nodeName) {
-        case 'A':
-            return (
-                <a href={withDefault('')(getHref(node))} css={getAnchorStyles(format)}>
-                    {node.textContent ?? ''}
-                </a>
-            );
-        case 'SPAN':
-            return Array.from(node.childNodes).map(toReact(format));
-        case '#text':
-            return node.textContent;
-    }
-}
+	switch (node.nodeName) {
+		case 'A':
+			return (
+				<a
+					href={withDefault('')(getHref(node))}
+					css={getAnchorStyles(format)}
+				>
+					{node.textContent ?? ''}
+				</a>
+			);
+		case 'SPAN':
+			return Array.from(node.childNodes).map(toReact(format));
+		case '#text':
+			return node.textContent;
+	}
+};
 
 const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
-    Array.from(byline.childNodes).map(toReact(format));
+	Array.from(byline.childNodes).map(toReact(format));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
-    pipe2(
-        bylineHtml,
-        map(byline =>
-            <address css={getStyles(format)}>
-                {renderText(format, byline)}
-            </address>
-        ),
-        withDefault<ReactElement | null>(null),
-    );
-
+	pipe2(
+		bylineHtml,
+		map((byline) => (
+			<address css={getStyles(format)}>
+				{renderText(format, byline)}
+			</address>
+		)),
+		withDefault<ReactElement | null>(null),
+	);
 
 // ----- Exports ----- //
 
