@@ -1,25 +1,25 @@
-name: "Chromatic"
+name: 'Chromatic'
 
 on:
-  push:
-    paths-ignore:
-    - 'api-models/'
-    - 'project/'
-    - '*.sbt'
-    - '*.md'
-    - '*.yml'
-    - '.gitignore'
+    push:
+        paths-ignore:
+            - 'api-models/'
+            - 'project/'
+            - '*.sbt'
+            - '*.md'
+            - '*.yml'
+            - '.gitignore'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - run: npm ci
-    - uses: chromaui/action@v1
-      with:
-        appCode: ${{ secrets.CHROMATIC_APP_CODE }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+            - run: npm ci
+            - uses: chromaui/action@v1
+              with:
+                  appCode: ${{ secrets.CHROMATIC_APP_CODE }}
+                  token: ${{ secrets.GITHUB_TOKEN }}

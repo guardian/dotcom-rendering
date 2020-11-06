@@ -1,97 +1,111 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core'
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { neutral } from '@guardian/src-foundations/palette';
-import { remSpace, palette } from '@guardian/src-foundations';
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
+import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Format, Display, Design } from '@guardian/types/Format';
-import { ThemeStyles, getThemeStyles } from 'themeStyles';
-import { darkModeCss, wideContentWidth, articleWidthStyles } from 'styles';
-import { Item } from 'item';
-import { pipe2 } from 'lib';
+import { neutral } from '@guardian/src-foundations/palette';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import type { Format } from '@guardian/types/Format';
+import { Design, Display } from '@guardian/types/Format';
 import { map, withDefault } from '@guardian/types/option';
-
+import type { Item } from 'item';
+import { pipe2 } from 'lib';
+import React from 'react';
+import type { FC, ReactElement } from 'react';
+import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import { getThemeStyles } from 'themeStyles';
+import type { ThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
 interface Props {
-    item: Item;
+	item: Item;
 }
 
-const immersiveStyles = ({ kicker }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
-    padding: ${remSpace[1]} ${remSpace[2]};
-    background-color: ${isLabs ? palette.labs[300] : kicker};
-    position: absolute;
-    left: 0;
-    transform: translateY(-100%);
-    margin-top: calc(80vh - 5rem);
-    display: inline-block;
+const immersiveStyles = (
+	{ kicker }: ThemeStyles,
+	isLabs: boolean,
+): SerializedStyles => css`
+	padding: ${remSpace[1]} ${remSpace[2]};
+	background-color: ${isLabs ? palette.labs[300] : kicker};
+	position: absolute;
+	left: 0;
+	transform: translateY(-100%);
+	margin-top: calc(80vh - 5rem);
+	display: inline-block;
 
-    ${from.desktop} {
-        margin-top: calc(80vh - 7rem);
-    }
+	${from.desktop} {
+		margin-top: calc(80vh - 7rem);
+	}
 
-    ${from.wide} {
-        margin-left: calc(((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]});
-    }
+	${from.wide} {
+		margin-left: calc(
+			((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]}
+		);
+	}
 `;
 
 const font = (isLabs: boolean): string =>
-    isLabs
-        ? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
-        : headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })
+	isLabs
+		? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
+		: headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' });
 
-const linkStyles = ({ kicker, inverted }: ThemeStyles, isLabs: boolean): SerializedStyles => css`
-    ${font(isLabs)}
-    color: ${isLabs ? palette.labs[300] : kicker};
-    text-decoration: none;
+const linkStyles = (
+	{ kicker, inverted }: ThemeStyles,
+	isLabs: boolean,
+): SerializedStyles => css`
+	${font(isLabs)}
+	color: ${isLabs ? palette.labs[300] : kicker};
+	text-decoration: none;
 
-    ${darkModeCss`
+	${darkModeCss`
         color: ${inverted};
     `}
 `;
 
 const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
-    color: ${neutral[100]};
-    text-decoration: none;
-    white-space: nowrap;
-    ${font(isLabs)}
+	color: ${neutral[100]};
+	text-decoration: none;
+	white-space: nowrap;
+	${font(isLabs)}
 `;
 
-const getLinkStyles = ({ display, theme, design }: Format): SerializedStyles => {
-    const isLabs = design === Design.AdvertisementFeature;
+const getLinkStyles = ({
+	display,
+	theme,
+	design,
+}: Format): SerializedStyles => {
+	const isLabs = design === Design.AdvertisementFeature;
 
-    if (display === Display.Immersive) {
-        return immersiveLinkStyles(isLabs);
-    }
+	if (display === Display.Immersive) {
+		return immersiveLinkStyles(isLabs);
+	}
 
-    return linkStyles(getThemeStyles(theme), isLabs);
-}
+	return linkStyles(getThemeStyles(theme), isLabs);
+};
 
 const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
-    if (display === Display.Immersive) {
-        const isLabs = design === Design.AdvertisementFeature;
-        return immersiveStyles(getThemeStyles(theme), isLabs);
-    }
+	if (display === Display.Immersive) {
+		const isLabs = design === Design.AdvertisementFeature;
+		return immersiveStyles(getThemeStyles(theme), isLabs);
+	}
 
-    return articleWidthStyles;
-}
+	return articleWidthStyles;
+};
 
 const Series: FC<Props> = ({ item }: Props) =>
-    pipe2(
-        item.series,
-        map(series =>
-            <nav css={getStyles(item)}>
-                <a css={getLinkStyles(item)} href={series.webUrl}>
-                    {series.webTitle}
-                </a>
-            </nav>
-        ),
-        withDefault<ReactElement | null>(null),
-    );
-
+	pipe2(
+		item.series,
+		map((series) => (
+			<nav css={getStyles(item)}>
+				<a css={getLinkStyles(item)} href={series.webUrl}>
+					{series.webTitle}
+				</a>
+			</nav>
+		)),
+		withDefault<ReactElement | null>(null),
+	);
 
 // ----- Exports ----- //
 

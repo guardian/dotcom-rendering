@@ -1,39 +1,36 @@
 // ----- Imports ----- //
 
+import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import type { Option } from '@guardian/types/option';
+import { none } from '@guardian/types/option';
+import Article from 'components/editions/article';
+import { fromCapi } from 'item';
+import { JSDOM } from 'jsdom';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { JSDOM } from 'jsdom';
-import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { none, Option } from '@guardian/types/option';
-
-import { fromCapi } from 'item';
-import Article from 'components/editions/article';
 import { pageFonts } from 'styles';
-
 
 // ----- Types ----- //
 
 interface Page {
-    html: string;
-    clientScript: Option<string>;
+	html: string;
+	clientScript: Option<string>;
 }
-
 
 // ----- Setup ----- //
 
 const docParser = JSDOM.fragment.bind(null);
 
-
 // ----- Functions ----- //
 
 const renderHead = (request: RenderingRequest): string =>
-    renderToString(
-        <>
-            <meta charSet="utf-8" />
-            <title>{request.content.webTitle}</title>
-            <meta name="viewport" content="initial-scale=1" />
-        </>
-    );
+	renderToString(
+		<>
+			<meta charSet="utf-8" />
+			<title>{request.content.webTitle}</title>
+			<meta name="viewport" content="initial-scale=1" />
+		</>,
+	);
 
 const styles = `
     ${pageFonts}
@@ -56,24 +53,18 @@ const buildHtml = (head: string, body: string): string => `
     </html>
 `;
 
-function render(
-    imageSalt: string,
-    request: RenderingRequest,
-): Page {
-    const item = fromCapi({ docParser, salt: imageSalt })(request);
+function render(imageSalt: string, request: RenderingRequest): Page {
+	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
-    return {
-        html: buildHtml(
-            renderHead(request),
-            renderToString(<Article item={item} />),
-        ),
-        clientScript: none,
-    };
+	return {
+		html: buildHtml(
+			renderHead(request),
+			renderToString(<Article item={item} />),
+		),
+		clientScript: none,
+	};
 }
-
 
 // ----- Exports ----- //
 
-export {
-    render,
-};
+export { render };

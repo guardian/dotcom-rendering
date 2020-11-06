@@ -1,7 +1,11 @@
 import { Configuration } from 'webpack';
 import { clientConfig } from '../webpack.config';
 
-export default async ({ config } : { config: Configuration }) : Promise<Configuration> => {
+export default async ({
+	config,
+}: {
+	config: Configuration;
+}): Promise<Configuration> => {
 	return {
 		...config,
 		target: clientConfig?.target,
@@ -9,8 +13,6 @@ export default async ({ config } : { config: Configuration }) : Promise<Configur
 		module: {
 			rules: clientConfig?.module?.rules ?? [],
 		},
-		plugins: [
-			...config.plugins ?? []
-		],
+		plugins: [...(config.plugins ?? [])],
 	};
 };

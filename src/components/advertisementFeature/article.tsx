@@ -1,30 +1,34 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, FC } from 'react';
 import { css } from '@emotion/core';
-import { neutral, background } from '@guardian/src-foundations/palette';
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-
-import Series from 'components/series';
-import Headline from 'components/headline';
-import Standfirst from 'components/standfirst';
-import Body from 'components/shared/articleBody';
-import Metadata from 'components/metadata';
-import { darkModeCss, articleWidthStyles, relatedContentStyles, lineStyles } from 'styles';
-import HeaderMedia from 'headerMedia';
-import { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
-import Logo from './logo';
-import { withDefault, map } from '@guardian/types/option';
-import { pipe2 } from 'lib';
-import RelatedContent from 'components/shared/relatedContent';
 import { Lines } from '@guardian/src-ed-lines';
+import { breakpoints, from } from '@guardian/src-foundations/mq';
+import { background, neutral } from '@guardian/src-foundations/palette';
+import { map, withDefault } from '@guardian/types/option';
+import Headline from 'components/headline';
+import Metadata from 'components/metadata';
+import Series from 'components/series';
+import Body from 'components/shared/articleBody';
 import FooterCcpa from 'components/shared/footer';
-
+import RelatedContent from 'components/shared/relatedContent';
+import Standfirst from 'components/standfirst';
+import HeaderMedia from 'headerMedia';
+import type { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
+import { pipe2 } from 'lib';
+import type { FC, ReactNode } from 'react';
+import React from 'react';
+import {
+	articleWidthStyles,
+	darkModeCss,
+	lineStyles,
+	relatedContentStyles,
+} from 'styles';
+import Logo from './logo';
 
 // ----- Styles ----- //
 
 const Styles = css`
-    background: ${neutral[97]};
+	background: ${neutral[97]};
 `;
 
 const DarkStyles = darkModeCss`
@@ -32,54 +36,60 @@ const DarkStyles = darkModeCss`
 `;
 
 const BorderStyles = css`
-    background: ${neutral[100]};
-    ${darkModeCss`background: ${background.inverse};`}
+	background: ${neutral[100]};
+	${darkModeCss`background: ${background.inverse};`}
 
-    ${from.wide} {
-        width: ${breakpoints.wide}px;
-        margin: 0 auto;
-    }
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin: 0 auto;
+	}
 `;
-
 
 // ----- Component ----- //
 
 interface Props {
-    item: AdvertisementFeatureItem;
-    children: ReactNode[];
+	item: AdvertisementFeatureItem;
+	children: ReactNode[];
 }
 
 const AdvertisementFeature: FC<Props> = ({ item, children }) => {
-    return <main css={[Styles, DarkStyles]}>
-        <article css={BorderStyles}>
-            <header>
-                <HeaderMedia item={item}/>
-                <div>
-                    <Series item={item} />
-                    <Headline item={item} />
-                    <div css={articleWidthStyles}>
-                        <Standfirst item={item} />
-                    </div>
-                </div>
-                <div css={lineStyles}>
-                    <Lines count={4} />
-                </div>
-                <section css={articleWidthStyles}>
-                    <Metadata item={item} />
-                    {pipe2(item.logo, map(props => <Logo logo={props} />), withDefault(<></>))}
-                </section>
-            </header>
-            <Body className={[articleWidthStyles]} format={item}>
-                {children}
-            </Body>
-        </article>
-        <section css={relatedContentStyles}>
-            <RelatedContent content={item.relatedContent}/>
-        </section>
-        <div id='articleFooter'><FooterCcpa isCcpa={false} /></div>
-    </main>
-}
-
+	return (
+		<main css={[Styles, DarkStyles]}>
+			<article css={BorderStyles}>
+				<header>
+					<HeaderMedia item={item} />
+					<div>
+						<Series item={item} />
+						<Headline item={item} />
+						<div css={articleWidthStyles}>
+							<Standfirst item={item} />
+						</div>
+					</div>
+					<div css={lineStyles}>
+						<Lines count={4} />
+					</div>
+					<section css={articleWidthStyles}>
+						<Metadata item={item} />
+						{pipe2(
+							item.logo,
+							map((props) => <Logo logo={props} />),
+							withDefault(<></>),
+						)}
+					</section>
+				</header>
+				<Body className={[articleWidthStyles]} format={item}>
+					{children}
+				</Body>
+			</article>
+			<section css={relatedContentStyles}>
+				<RelatedContent content={item.relatedContent} />
+			</section>
+			<div id="articleFooter">
+				<FooterCcpa isCcpa={false} />
+			</div>
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 
