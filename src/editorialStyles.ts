@@ -1,40 +1,42 @@
 // ----- Imports ----- //
 
-import { SerializedStyles, css } from '@emotion/core';
-import { Format } from '@guardian/types/Format';
-
-import { Colour, text, background } from 'editorialPalette';
-
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
+import type { Format } from '@guardian/types/Format';
+import type { Colour } from 'editorialPalette';
+import { background, text } from 'editorialPalette';
 
 // ----- Functions ----- //
 
 const textColour = (light: Colour, dark: Colour): SerializedStyles =>
-    css`
-        color: ${light};
+	css`
+		color: ${light};
 
-        @media (prefers-color-scheme: dark) {
-            color: ${dark};
-        }
-    `;
+		@media (prefers-color-scheme: dark) {
+			color: ${dark};
+		}
+	`;
 
 const backgroundColour = (light: Colour, dark: Colour): SerializedStyles =>
-    css`
-        background-color: ${light};
+	css`
+		background-color: ${light};
 
-        @media (prefers-color-scheme: dark) {
-            background-color: ${dark};
-        }
-    `;
+		@media (prefers-color-scheme: dark) {
+			background-color: ${dark};
+		}
+	`;
 
 const headlineTextColour = (format: Format): SerializedStyles =>
-    textColour(text.headlinePrimary(format), text.headlinePrimaryInverse(format));
+	textColour(
+		text.headlinePrimary(format),
+		text.headlinePrimaryInverse(format),
+	);
 const headlineBackgroundColour = (format: Format): SerializedStyles =>
-    backgroundColour(background.headlinePrimary(format), background.headlinePrimaryInverse(format));
-
+	backgroundColour(
+		background.headlinePrimary(format),
+		background.headlinePrimaryInverse(format),
+	);
 
 // ----- Exports ----- //
 
-export {
-    headlineTextColour,
-    headlineBackgroundColour,
-};
+export { headlineTextColour, headlineBackgroundColour };
