@@ -223,7 +223,7 @@ describe('fromCapi returns correct Item', () => {
 
 	test('matchreport', () => {
 		const item = f(contentWithTag('tone/matchreports'));
-		expect(item.design).toBe(Design.MatchReport);
+		expect(item.design).toBe(Design.Article);
 	});
 
 	test('interview', () => {
@@ -250,11 +250,6 @@ describe('fromCapi returns correct Item', () => {
 		const item = f(articleContent);
 		expect(item.design).toBe(Design.Article);
 	});
-
-  test('matchreport', () => {
-    const item = f(contentWithTag('tone/matchreports'));
-    expect(item.design).toBe(Design.Article);
-  });
 });
 
 describe('text elements', () => {
