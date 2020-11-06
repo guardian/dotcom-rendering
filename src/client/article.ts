@@ -143,13 +143,19 @@ function insertEpic(): void {
 
 declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
+function isPillarString(pillar: string): boolean {
+	return ['news', 'opinion', 'sport', 'culture', 'lifestyle'].includes(
+		pillar.toLowerCase(),
+	);
+}
 function renderComments(): void {
 	const commentContainer = document.getElementById('comments');
-	const pillar = commentContainer?.getAttribute('data-pillar') as Pillar;
+	const pillarString = commentContainer?.getAttribute('data-pillar');
 	const shortUrl = commentContainer?.getAttribute('data-short-id');
 	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 
-	if (shortUrl) {
+	if (pillarString && isPillarString(pillarString) && shortUrl) {
+		const pillar = pillarString as Pillar;
 		const user = {
 			userId: 'abc123',
 			displayName: 'Jane Smith',
