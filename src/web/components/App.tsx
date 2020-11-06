@@ -50,7 +50,11 @@ import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { Display } from '@root/src/lib/display';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
-import { cmp, onConsentChange } from '@guardian/consent-management-platform';
+import {
+    cmp,
+    onConsentChange,
+    getConsentFor,
+} from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
     submitComponentEvent,
@@ -162,6 +166,8 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [hashCommentId, setHashCommentId] = useState<number | undefined>(
         commentIdFromUrl(),
     );
+
+    const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
@@ -366,6 +372,33 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.config.switches.auConsent,
     ]);
 
+    // *****************
+    // *     ACast     *
+    // *****************
+    useEffect(() => {
+        onConsentChange((state: any) => {
+            // Should we use ad enabled audio? If so, then set the shouldUseAcast
+            // state to true, triggering a rerender of AudioAtom using a new track url
+            // (one with adverts)
+            const consentGiven = getConsentFor('acast', state);
+            const aCastisEnabled = CAPI.config.switches.acast;
+            const readerCanBeShownAds = !CAPI.isAdFreeUser;
+            const contentIsNotSensitive = !CAPI.config.isSensitive;
+            if (
+                aCastisEnabled &&
+                consentGiven &&
+                readerCanBeShownAds && // Eg. Not a subscriber
+                contentIsNotSensitive
+            ) {
+                setShouldUseAcast(true);
+            }
+        });
+    }, [
+        CAPI.config.switches.acast,
+        CAPI.isAdFreeUser,
+        CAPI.config.isSensitive,
+    ]);
+
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -501,6 +534,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         kicker={audioAtom.kicker}
                         title={audioAtom.title}
                         pillar={toTypesPillar(pillar)}
+                        shouldUseAcast={shouldUseAcast}
                     />
                 </Hydrate>
             ))}

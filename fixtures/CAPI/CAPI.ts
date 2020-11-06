@@ -2792,6 +2792,7 @@ export const CAPI: CAPIType = modifyDCRJsonResponse({
             videojs: true,
             surveys: true,
             inizio: true,
+            acast: true,
         },
         hasYouTubeAtom: false,
         inBodyInternalLinkCount: 15,
