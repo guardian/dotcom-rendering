@@ -64,11 +64,13 @@ const serverConfig = (
 		mode,
 		entry: 'server/server.ts',
 		target: 'node',
-		externals: [
-			nodeExternals({
-				allowlist: [/@guardian/, /source-map/],
-			}),
-		],
+		externals: isProd
+			? []
+			: [
+					nodeExternals({
+						allowlist: [/@guardian/],
+					}),
+			  ],
 		node: {
 			__dirname: false,
 		},
