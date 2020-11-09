@@ -36,8 +36,8 @@
     "@emotion/babel-preset-css-prop": "^10.1.0",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
-    "@guardian/atoms-rendering": "2.0.7",
     "@guardian/apps-rendering-api-models": "^0.11.0",
+    "@guardian/atoms-rendering": "2.0.7",
     "@guardian/bridget": "^1.1.0",
     "@guardian/content-api-models": "^15.9.2",
     "@guardian/content-atom-model": "^3.2.4",
@@ -55,6 +55,7 @@
     "@guardian/types": "github:guardian/types#semver:^0.5.2",
     "@types/jsdom": "^16.2.5",
     "@types/uuid": "^8.3.0",
+    "@types/webpack-node-externals": "^2.5.0",
     "aws-sdk": "^2.781.0",
     "babel-jest": "^26.6.2",
     "compression": "^1.7.4",
@@ -121,6 +122,7 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-manifest-plugin": "^2.2.0",
+    "webpack-node-externals": "^2.5.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   }
