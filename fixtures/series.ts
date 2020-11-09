@@ -20,7 +20,7 @@ export const series = {
             webPublicationDate: '2020-02-03T23:00:24.000Z',
             headline:
                 'Baghdad Central review – more than just a Middle East Morse',
-            shortUrl: 'https://gu.com/p/d7m9d',
+            shortUrl: 'https://theguardian.com/p/d7m9d',
             starRating: 4,
         },
         {
@@ -38,7 +38,7 @@ export const series = {
             webPublicationDate: '2020-02-02T06:00:35.000Z',
             headline:
                 'Beauty Laid Bare review – the ugly secrets in your makeup bag',
-            shortUrl: 'https://gu.com/p/d79vx',
+            shortUrl: 'https://theguardian.com/p/d79vx',
             starRating: 3,
         },
         {
@@ -54,7 +54,7 @@ export const series = {
             designType: 'Review',
             webPublicationDate: '2020-01-31T07:00:38.000Z',
             headline: 'BoJack Horseman review – what will we do without him?',
-            shortUrl: 'https://gu.com/p/d6qze',
+            shortUrl: 'https://theguardian.com/p/d6qze',
             starRating: 4,
         },
         {
@@ -70,7 +70,7 @@ export const series = {
             designType: 'Review',
             webPublicationDate: '2020-01-30T16:50:19.000Z',
             headline: 'The Stranger review – was she ever even pregnant?!',
-            shortUrl: 'https://gu.com/p/d6yth',
+            shortUrl: 'https://theguardian.com/p/d6yth',
             starRating: 3,
         },
         {
@@ -88,7 +88,7 @@ export const series = {
             webPublicationDate: '2020-01-29T15:35:23.000Z',
             headline:
                 "Next in Fashion review – Alexa Chung and Tan France's reality show is bang on trend",
-            shortUrl: 'https://gu.com/p/d6yvq',
+            shortUrl: 'https://theguardian.com/p/d6yvq',
             starRating: 4,
         },
         {
@@ -106,7 +106,7 @@ export const series = {
             webPublicationDate: '2020-01-28T22:00:29.000Z',
             headline:
                 'Belsen: Our Story review – the Nazi horrors that must never be forgotten',
-            shortUrl: 'https://gu.com/p/d6nk8',
+            shortUrl: 'https://theguardian.com/p/d6nk8',
             starRating: 5,
         },
         {
@@ -124,7 +124,7 @@ export const series = {
             webPublicationDate: '2020-01-27T22:30:01.000Z',
             headline:
                 'The Windermere Children review – how the Lakes saved the lives of Nazi survivors',
-            shortUrl: 'https://gu.com/p/d6khx',
+            shortUrl: 'https://theguardian.com/p/d6khx',
             starRating: 4,
         },
         {
@@ -142,7 +142,7 @@ export const series = {
             webPublicationDate: '2020-01-26T22:00:34.000Z',
             headline:
                 'Win the Wilderness: Alaska review – someone will get eaten alive here, surely?',
-            shortUrl: 'https://gu.com/p/d68k6',
+            shortUrl: 'https://theguardian.com/p/d68k6',
             starRating: 3,
         },
         {
@@ -160,7 +160,7 @@ export const series = {
             webPublicationDate: '2020-01-24T09:00:21.000Z',
             headline:
                 'Star Trek: Picard review – Patrick Stewart goes guerrilla in skintight velour',
-            shortUrl: 'https://gu.com/p/d6629',
+            shortUrl: 'https://theguardian.com/p/d6629',
             starRating: 3,
         },
         {
@@ -178,7 +178,7 @@ export const series = {
             webPublicationDate: '2020-01-24T06:00:17.000Z',
             headline:
                 'The Goop Lab review – so Gwyneth Paltrow doesn’t know what a vagina is',
-            shortUrl: 'https://gu.com/p/d5vjg',
+            shortUrl: 'https://theguardian.com/p/d5vjg',
             starRating: 1,
         },
     ],

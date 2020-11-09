@@ -54,7 +54,7 @@ const paramSet: AdTargetParam[] = [
     },
     {
         name: 'sh',
-        value: ['https://gu.com/p/akj3n'],
+        value: ['https://theguardian.com/p/akj3n'],
     },
 ];
 
@@ -104,7 +104,7 @@ describe('stringify', () => {
                 k:
                     'asia-pacific,politics,business,uk/uk,eu,newzealand,world,europe-news,internationaltrade,foreignpolicy,australia-news,eu-referendum,global-economy,japan,economics,south-korea',
                 edition: 'au',
-                sh: 'https://gu.com/p/akj3n',
+                sh: 'https://theguardian.com/p/akj3n',
                 p: 'amp',
                 rp: 'dotcom-rendering',
             },

@@ -62,7 +62,7 @@ export const Article: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8ex5',
+                    value: 'https://theguardian.com/p/d8ex5',
                 },
             ],
         },
@@ -110,7 +110,7 @@ export const Article: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8ex5',
+                    value: 'https://theguardian.com/p/d8ex5',
                 },
                 {
                     name: 'edition',
@@ -162,7 +162,7 @@ export const Article: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8ex5',
+                    value: 'https://theguardian.com/p/d8ex5',
                 },
                 {
                     name: 'edition',
@@ -218,7 +218,7 @@ export const Article: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8ex5',
+                    value: 'https://theguardian.com/p/d8ex5',
                 },
             ],
         },

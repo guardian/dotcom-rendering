@@ -16,7 +16,7 @@ export const storypackage = {
             webPublicationDate: '2020-02-24T05:00:11.000Z',
             headline:
                 'Micheál Martin faces a battle of conscience to form Irish government',
-            shortUrl: 'https://gu.com/p/dayh8',
+            shortUrl: 'https://theguardian.com/p/dayh8',
         },
         {
             url:
@@ -31,7 +31,7 @@ export const storypackage = {
             designType: 'Article',
             webPublicationDate: '2020-02-20T23:28:27.000Z',
             headline: 'Varadkar resigns as Irish government enters stalemate',
-            shortUrl: 'https://gu.com/p/dayq6',
+            shortUrl: 'https://theguardian.com/p/dayq6',
         },
         {
             url:
@@ -48,7 +48,7 @@ export const storypackage = {
             webPublicationDate: '2020-02-17T22:37:30.000Z',
             headline:
                 'Varadkar prepares to go into opposition as deadlock continues',
-            shortUrl: 'https://gu.com/p/da75n',
+            shortUrl: 'https://theguardian.com/p/da75n',
         },
         {
             url:
@@ -65,7 +65,7 @@ export const storypackage = {
             webPublicationDate: '2020-02-16T07:00:22.000Z',
             headline:
                 'Ireland’s shock poll result was a vote against the success of globalisation',
-            shortUrl: 'https://gu.com/p/d9kx7',
+            shortUrl: 'https://theguardian.com/p/d9kx7',
         },
         {
             url:
@@ -80,7 +80,7 @@ export const storypackage = {
             designType: 'Article',
             webPublicationDate: '2020-02-13T18:33:42.000Z',
             headline: 'Ireland: Fianna Fáil rules out coalition with Sinn Féin',
-            shortUrl: 'https://gu.com/p/d9fbt',
+            shortUrl: 'https://theguardian.com/p/d9fbt',
         },
         {
             url:
@@ -97,7 +97,7 @@ export const storypackage = {
             webPublicationDate: '2020-02-11T09:47:32.000Z',
             headline:
                 'Sinn Féin begins efforts to form leftwing coalition in Ireland',
-            shortUrl: 'https://gu.com/p/d94nv',
+            shortUrl: 'https://theguardian.com/p/d94nv',
         },
         {
             url:
@@ -112,7 +112,7 @@ export const storypackage = {
             designType: 'Analysis',
             webPublicationDate: '2020-02-10T15:36:32.000Z',
             headline: 'What does the Irish election result mean for Brexit?',
-            shortUrl: 'https://gu.com/p/d9vjq',
+            shortUrl: 'https://theguardian.com/p/d9vjq',
         },
         {
             url:
@@ -130,7 +130,7 @@ export const storypackage = {
             webPublicationDate: '2020-02-10T14:45:04.000Z',
             headline:
                 "Irish election 'romcom': couple who ran against each other both win",
-            shortUrl: 'https://gu.com/p/d9xxh',
+            shortUrl: 'https://theguardian.com/p/d9xxh',
         },
         {
             url:
@@ -145,7 +145,7 @@ export const storypackage = {
             designType: 'Article',
             webPublicationDate: '2020-02-11T03:22:24.000Z',
             headline: 'Sinn Féin declares victory in Irish general election',
-            shortUrl: 'https://gu.com/p/d9vqt',
+            shortUrl: 'https://theguardian.com/p/d9vqt',
         },
     ],
 };
