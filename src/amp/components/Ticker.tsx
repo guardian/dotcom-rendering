@@ -1,5 +1,6 @@
 import {css} from 'emotion';
 import {headline} from '@guardian/src-foundations/typography';
+import {neutral, brandAlt} from '@guardian/src-foundations/palette';
 import React from 'react';
 
 const tickerWrapper = css`
@@ -31,7 +32,7 @@ const tickerProgress = css`
     margin: 0;
     padding: 0;
     left: 0;
-    background-color: #FFE500 !important;
+    background-color: ${brandAlt[400]} !important;
     height: 100%;
 `;
 const tickerBackground = css`
@@ -39,7 +40,7 @@ const tickerBackground = css`
     margin: 5px 0;
     height: 10px;
     width: 100%;
-    background-color: #DCDCDC;
+    background-color: ${neutral[86]};
     border: none;
 `;
 const currentAmount = css`
