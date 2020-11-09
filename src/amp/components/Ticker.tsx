@@ -26,14 +26,13 @@ const tickerInfo = css`
     flex-direction: row;
     justify-content: space-between;
 `;
-const tickerProgress = (percentage: string) => css`
+const tickerProgress = css`
     position: absolute;
     margin: 0;
     padding: 0;
     left: 0;
     background-color: #FFE500 !important;
     height: 100%;
-    width: ${percentage}%;
 `;
 const tickerBackground = css`
     position: relative;
@@ -72,7 +71,6 @@ export const Ticker: React.FC<{
     goalAmountFigure,
     goalAmountCaption,
 }) => {
-
     return (
         <div>
             <div className={tickerWrapper}>
@@ -87,7 +85,7 @@ export const Ticker: React.FC<{
                     </div>
                 </div>
                 <div className={tickerBackground}>
-                    <div className={tickerProgress(percentage)} style={{width: `${percentage}%`}} />
+                    <div className={tickerProgress} style={{width: `${percentage}%`}} />
                 </div>
             </div>
         </div>
