@@ -66,7 +66,7 @@ const serverConfig = (
 		target: 'node',
 		externals: [
 			nodeExternals({
-				allowlist: [/@guardian/],
+				allowlist: [/@guardian/, 'source-map-support'],
 			}),
 		],
 		node: {
