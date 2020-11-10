@@ -6,7 +6,7 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Option } from '@guardian/types/option';
-import { OptionKind, map, withDefault } from '@guardian/types/option';
+import { map, OptionKind, withDefault } from '@guardian/types/option';
 import type { Result } from '@guardian/types/result';
 import { either, err, ok } from '@guardian/types/result';
 import bodyParser from 'body-parser';
