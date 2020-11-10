@@ -11,7 +11,8 @@ const container = css`
 	${textSans.small({ lineHeight: 'regular' })};
 	margin-left: 10px;
 	margin-right: 10px;
-	margin-bottom: 10px;
+	padding-top: 0px;
+	padding-bottom: 24px;
 `;
 
 const ul = css`
@@ -86,7 +87,7 @@ interface FooterCcpaProps {
 }
 
 const renderContent = (ccpaStatus: boolean): JSX.Element => {
-	if (!ccpaStatus) {
+	if (ccpaStatus === false) {
 		return (
 			<a
 				css={anchor}
