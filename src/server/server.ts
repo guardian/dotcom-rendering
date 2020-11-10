@@ -31,7 +31,6 @@ import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
-import { Design } from '@guardian/types/Format';
 import { MainMediaKind } from 'headerMedia';
 
 // ----- Setup ----- //
@@ -143,7 +142,7 @@ async function serveArticle(
 async function serveRichLinkDetails(
 	renderingRequest: RenderingRequest,
 	res: ExpressResponse,
-) {
+): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
 	if (imageSalt === undefined) {
@@ -154,7 +153,6 @@ async function serveRichLinkDetails(
 	const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
 
 	if (
-		item.design === Design.Article &&
 		item.mainMedia.kind === OptionKind.Some &&
 		item.mainMedia.value.kind === MainMediaKind.Image
 	) {
@@ -162,7 +160,7 @@ async function serveRichLinkDetails(
 	}
 
 	res.set('pillar', renderingRequest.content.pillarName);
-	res.end();
+	res.status(200);
 }
 
 async function serveArticlePost(
@@ -176,9 +174,9 @@ async function serveArticlePost(
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
+		} else {
+			void serveArticle(renderingRequest, res, false);
 		}
-
-		void serveArticle(renderingRequest, res, false);
 	} catch (e) {
 		logger.error(`This error occurred`, e);
 		next(e);

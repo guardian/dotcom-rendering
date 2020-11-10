@@ -20,7 +20,7 @@ import type { Breakpoint } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
-import { Design } from '@guardian/types/Format';
+import { Design, Pillar } from '@guardian/types/Format';
 import type { Format } from '@guardian/types/Format';
 import {
 	andThen,
@@ -331,25 +331,61 @@ const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
 
 const richLinkWidth = '8.75rem';
 
+const richLinkPillarStyles = (kicker: string): string => {
+	return `
+		border-top: solid 1px ${kicker};
+
+		svg {
+			fill: white;
+			background: ${kicker};
+			border-color: ${kicker};
+		}
+
+		button {
+			color: ${kicker};
+		}
+	`;
+};
 const richLinkStyles = (format: Format): SerializedStyles => {
 	const backgroundColor =
 		format.design === Design.Comment ? neutral[86] : neutral[97];
-	const formatStyles =
-		format.design === Design.Live
-			? `width: calc(100% - ${remSpace[4]});`
-			: `
-            width: ${richLinkWidth};
-            ${from.wide} {
-                margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(
-					3,
-			  )});
-            }
-        `;
+
+	const { kicker: newsKicker } = getThemeStyles(Pillar.News);
+	const { kicker: opinionKicker } = getThemeStyles(Pillar.Opinion);
+	const { kicker: sportKicker } = getThemeStyles(Pillar.Sport);
+	const { kicker: cultureKicker } = getThemeStyles(Pillar.Culture);
+	const { kicker: lifestyleKicker } = getThemeStyles(Pillar.Lifestyle);
 
 	return css`
 		background: ${backgroundColor};
 		padding: ${basePx(1)};
 		border-top: solid 1px ${neutral[60]};
+		transition: all 0.2s ease;
+
+		&.js-news {
+			${richLinkPillarStyles(newsKicker)}
+		}
+
+		&.js-opinion {
+			${richLinkPillarStyles(opinionKicker)}
+		}
+
+		&.js-sport {
+			${richLinkPillarStyles(sportKicker)}
+		}
+
+		&.js-culture {
+			${richLinkPillarStyles(cultureKicker)}
+		}
+
+		&.js-lifestyle {
+			${richLinkPillarStyles(lifestyleKicker)}
+		}
+
+		.js-image img {
+			width: calc(100% + ${basePx(2)});
+			margin: -${basePx(1)} 0 0 -${basePx(1)};
+		}
 
 		button {
 			background: none;
@@ -358,7 +394,9 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			padding: 0;
 			margin: 0;
 			display: inline-flex;
+			transition: all 0.2s ease;
 		}
+
 		svg {
 			width: 1.0625rem;
 			border-radius: 100%;
@@ -366,7 +404,9 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			padding: 4px;
 			display: inline-block;
 			margin-right: ${remSpace[2]};
+			transition: all 0.2s ease;
 		}
+
 		a {
 			display: inline-block;
 			text-decoration: none;
@@ -383,7 +423,10 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		clear: left;
 		margin: ${basePx(1, 2, 1, 0)};
 
-		${formatStyles}
+		width: ${richLinkWidth};
+		${from.wide} {
+			margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
+		}
 
 		${darkModeCss`
             background-color: ${neutral[20]};
@@ -403,15 +446,29 @@ const RichLink = (props: {
 	url: string;
 	linkText: string;
 	format: Format;
-}): ReactElement =>
-	styledH(
+}): ReactElement => {
+	const webUrl = 'https://www.theguardian.com';
+
+	const articleId = props.url.includes(webUrl)
+		? { 'data-article-id': props.url.replace(webUrl, '') }
+		: {};
+
+	const attributes = {
+		css: richLinkStyles(props.format),
+		className: 'js-rich-link',
+		...articleId,
+	};
+
+	return styledH(
 		'aside',
-		{ css: richLinkStyles(props.format) },
+		{ ...attributes },
 		styledH('a', { href: props.url }, [
+			h('div', { className: 'js-image' }, null),
 			h('h1', null, props.linkText),
 			h('button', null, [h(SvgArrowRightStraight), 'Read more']),
 		]),
 	);
+};
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
 	const styles = css`
