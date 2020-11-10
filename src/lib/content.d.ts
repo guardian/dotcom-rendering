@@ -392,6 +392,17 @@ type CAPIElement =
 // -------------------------------------
 // Misc
 // -------------------------------------
+type AtomTypes =
+    | 'AudioAtom'
+    | 'ChartAtom'
+    | 'ExplainerAtom'
+    | 'GuideAtom'
+    | 'InteractiveAtom'
+    | 'ProfileAtom'
+    | 'QandaAtom'
+    | 'QuizAtom'
+    | 'TimelineAtom'
+    | 'YoutubeAtom';
 
 type Weighting =
     | 'inline'
