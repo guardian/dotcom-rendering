@@ -32,7 +32,7 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 start: install
 	@make stop
