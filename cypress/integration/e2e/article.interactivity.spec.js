@@ -2,14 +2,19 @@
 /* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
-import { fetchPolyfill } from '../../lib/config';
+// import { fetchPolyfill } from '../../lib/config';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
+import { disableCMP } from '../../lib/disableCMP';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
     'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
 
 describe('Interactivity', function () {
+    beforeEach(function () {
+        disableCMP();
+    });
+    
     describe('Verify elements have been hydrated', function () {
         it('should open the edition dropdown menu when clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
