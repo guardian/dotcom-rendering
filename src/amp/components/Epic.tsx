@@ -9,7 +9,7 @@ import {
 } from '@root/src/amp/components/moustache';
 import { palette } from '@guardian/src-foundations';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import {Ticker} from "@root/src/amp/components/Ticker";
+import { Ticker } from "@root/src/amp/components/Ticker";
 
 const epic = css`
     border-top: 0.0625rem solid ${palette.brandAlt[400]};
