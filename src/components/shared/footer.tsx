@@ -1,5 +1,10 @@
 import { css } from '@emotion/core';
-import { brandBorder, neutral, space } from '@guardian/src-foundations';
+import {
+	brandBorder,
+	neutral,
+	remSpace,
+	space,
+} from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { bool } from 'aws-sdk/clients/signer';
 import type { FC } from 'react';
@@ -9,9 +14,9 @@ import React from 'react';
 const container = css`
 	border-width: 0 1px;
 	${textSans.small({ lineHeight: 'regular' })};
-	margin-left: 10px;
-	margin-right: 10px;
-	padding-top: 0px;
+	margin-left: ${remSpace[2]};
+	margin-right: ${remSpace[2]};
+	padding-top: 16px;
 	padding-bottom: 24px;
 `;
 
@@ -87,7 +92,7 @@ interface FooterCcpaProps {
 }
 
 const renderContent = (ccpaStatus: boolean): JSX.Element => {
-	if (ccpaStatus) {
+	if (!ccpaStatus) {
 		return (
 			<a
 				css={anchor}
@@ -109,10 +114,11 @@ const renderContent = (ccpaStatus: boolean): JSX.Element => {
 };
 
 const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => {
+	const currentYear = new Date().getFullYear();
 	return (
 		<div css={container}>
-			&#169; 2020 Guardian News and Media Limited or its affiliated
-			companies. All rights reserved.
+			&#169; {currentYear} Guardian News and Media Limited or its
+			affiliated companies. All rights reserved.
 			<br />
 			{renderContent(isCcpa)}
 			&nbsp;&#183;&nbsp;
