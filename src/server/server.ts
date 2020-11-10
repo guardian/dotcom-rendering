@@ -5,7 +5,7 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { Option, OptionKind } from '@guardian/types/option';
+import type { Option, OptionKind } from '@guardian/types/option';
 import { map, withDefault } from '@guardian/types/option';
 import type { Result } from '@guardian/types/result';
 import { either, err, ok } from '@guardian/types/result';
@@ -18,6 +18,9 @@ import type {
 	Request,
 } from 'express';
 import express from 'express';
+import { MainMediaKind } from 'headerMedia';
+import { fromCapi } from 'item';
+import { JSDOM } from 'jsdom';
 import { pipe2, toArray } from 'lib';
 import { logger } from 'logger';
 import type { Response } from 'node-fetch';
@@ -29,9 +32,6 @@ import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
-import { fromCapi } from 'item';
-import { JSDOM } from 'jsdom';
-import { MainMediaKind } from 'headerMedia';
 
 // ----- Setup ----- //
 

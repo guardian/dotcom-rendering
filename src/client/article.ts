@@ -327,15 +327,18 @@ function richLinks(): void {
 		.forEach((richLink) => {
 			const articleId = richLink.getAttribute('data-article-id');
 			if (articleId) {
-				fetch(`${articleId}?richlink`).then((response) => {
+				void fetch(`${articleId}?richlink`).then((response) => {
 					const pillar = response.headers
 						.get('pillar')
 						?.toLowerCase();
 					const image = response.headers.get('image');
-					richLink.classList.add(`js-${pillar}`);
+
+					if (pillar) {
+						richLink.classList.add(`js-${pillar}`);
+					}
 
 					const placeholder = richLink.querySelector('.js-image');
-					if (placeholder) {
+					if (placeholder && image) {
 						placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
 					}
 				});
