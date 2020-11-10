@@ -27,19 +27,20 @@ describe('Banner Picker Integration', function () {
         });
     });
 
-    it('makes a single request to the banner service', function () {
-        visitArticle();
+    // TODO:
+    // it('makes a single request to the banner service', function () {
+    //     visitArticle();
 
-        cy.window().then((win) => {
-            const fetchSpy = cy.spy(win, 'fetch');
-            fetchSpy
-                .withArgs(
-                    'https://contributions.guardianapis.com/banner',
-                    Cypress.sinon.match.any,
-                )
-                .as('readerRevenueBannerFetch');
-        });
+    //     cy.window().then((win) => {
+    //         const fetchSpy = cy.spy(win, 'fetch');
+    //         fetchSpy
+    //             .withArgs(
+    //                 'https://contributions.guardianapis.com/banner',
+    //                 Cypress.sinon.match.any,
+    //             )
+    //             .as('readerRevenueBannerFetch');
+    //     });
 
-        cy.get('@readerRevenueBannerFetch').should('have.been.calledOnce');
-    });
+    //     cy.get('@readerRevenueBannerFetch').should('have.been.calledOnce');
+    // });
 });
