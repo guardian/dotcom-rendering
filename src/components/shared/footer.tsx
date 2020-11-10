@@ -87,7 +87,7 @@ interface FooterCcpaProps {
 }
 
 const renderContent = (ccpaStatus: boolean): JSX.Element => {
-	if (ccpaStatus === false) {
+	if (ccpaStatus) {
 		return (
 			<a
 				css={anchor}
