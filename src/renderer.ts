@@ -53,7 +53,7 @@ import Video from 'components/video';
 import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
-import { basePx, darkModeCss } from 'styles';
+import { basePx, darkModeCss, darkModeStyles } from 'styles';
 import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
 
 // ----- Renderer ----- //
@@ -335,14 +335,26 @@ const richLinkPillarStyles = (kicker: string): string => {
 	return `
 		border-top: solid 1px ${kicker};
 
+		${darkModeStyles`
+			border-top: solid 1px ${neutral[60]};
+		`}
+
 		svg {
 			fill: white;
 			background: ${kicker};
 			border-color: ${kicker};
+			${darkModeStyles`
+				border-color: ${neutral[60]};
+				background: ${neutral[20]};
+				fill: ${neutral[60]};
+			`}
 		}
 
 		button {
 			color: ${kicker};
+			${darkModeStyles`
+				color: ${neutral[60]};
+			`}
 		}
 	`;
 };
@@ -429,13 +441,9 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		${darkModeCss`
-            background-color: ${neutral[20]};
-            svg {
-                border-color: ${neutral[60]};
-                fill: ${neutral[60]};
-            }
+			background-color: ${neutral[20]};
 
-            a, h1, button {
+            a, h1 {
                 color: ${neutral[60]};
             }
         `}
