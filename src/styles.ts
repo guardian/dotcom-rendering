@@ -48,7 +48,7 @@ export const darkModeCss = (
 export const darkModeStyles = (
 	styles: TemplateStringsArray,
 	...placeholders: string[]
-) => darkModeCss(styles, ...placeholders).styles;
+): string => darkModeCss(styles, ...placeholders).styles;
 
 export const linkStyle = (kicker: string): string => `
     a {
