@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ReportBundleSize = require('./plugins/report-bundle-size');
+
 const { dist } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -34,7 +34,6 @@ const commonConfigs = ({ platform }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&
             new BundleAnalyzerPlugin({
                 reportFilename: path.join(dist, `${platform}-bundles.html`),
