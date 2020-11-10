@@ -5,7 +5,7 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option } from '@guardian/types/option';
+import { Option, OptionKind } from '@guardian/types/option';
 import { map, withDefault } from '@guardian/types/option';
 import type { Result } from '@guardian/types/result';
 import { either, err, ok } from '@guardian/types/result';
@@ -29,6 +29,10 @@ import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
+import { fromCapi } from 'item';
+import { JSDOM } from 'jsdom';
+import { Design } from '@guardian/types/Format';
+import { MainMediaKind } from 'headerMedia';
 
 // ----- Setup ----- //
 
@@ -136,13 +140,43 @@ async function serveArticle(
 	res.end();
 }
 
+async function serveRichLinkDetails(
+	renderingRequest: RenderingRequest,
+	res: ExpressResponse,
+) {
+	const imageSalt = await getConfigValue('apis.img.salt');
+
+	if (imageSalt === undefined) {
+		throw new Error('Could not get image salt');
+	}
+
+	const docParser = JSDOM.fragment.bind(null);
+	const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
+
+	if (
+		item.design === Design.Article &&
+		item.mainMedia.kind === OptionKind.Some &&
+		item.mainMedia.value.kind === MainMediaKind.Image
+	) {
+		res.set('image', item.mainMedia.value.image.src);
+	}
+
+	res.set('pillar', renderingRequest.content.pillarName);
+	res.end();
+}
+
 async function serveArticlePost(
-	{ body }: Request,
+	req: Request,
 	res: ExpressResponse,
 	next: NextFunction,
 ): Promise<void> {
 	try {
-		const renderingRequest = await mapiDecoder(body);
+		const renderingRequest = await mapiDecoder(req.body);
+		const richLinkDetails = req.query.richlink === '';
+
+		if (richLinkDetails) {
+			void serveRichLinkDetails(renderingRequest, res);
+		}
 
 		void serveArticle(renderingRequest, res, false);
 	} catch (e) {
@@ -174,6 +208,12 @@ async function serveArticleGet(
 					commentCount: 30,
 					relatedContent,
 				};
+
+				const richLinkDetails = req.query.richlink === '';
+
+				if (richLinkDetails) {
+					void serveRichLinkDetails(mockedRenderingRequest, res);
+				}
 
 				void serveArticle(mockedRenderingRequest, res, isEditions);
 			},
