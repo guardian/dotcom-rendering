@@ -2,7 +2,6 @@
 /* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
-// import { fetchPolyfill } from '../../lib/config';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { disableCMP } from '../../lib/disableCMP';
 
@@ -14,7 +13,7 @@ describe('Interactivity', function () {
     beforeEach(function () {
         disableCMP();
     });
-    
+
     describe('Verify elements have been hydrated', function () {
         it('should open the edition dropdown menu when clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
