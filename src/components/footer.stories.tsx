@@ -1,19 +1,13 @@
 // ----- Imports ----- //
-import { Footer } from '@guardian/src-footer';
 import { withKnobs } from '@storybook/addon-knobs';
-import type { FC, ReactElement } from 'react';
+import FooterCcpa from 'components/shared/footer';
+import type { FC } from 'react';
 import React from 'react';
-import { footerContents } from './shared/footer';
-
-const FooterCcpa = (): ReactElement => {
-	return <Footer>{footerContents(true)}</Footer>;
-};
 
 // ----- Stories ----- //
+const WithCcpa: FC = () => <FooterCcpa isCcpa={true} />;
 
-const Default: FC = (): ReactElement => {
-	return <FooterCcpa />;
-};
+const Default: FC = () => <FooterCcpa isCcpa={false} />;
 
 export default {
 	component: FooterCcpa,
@@ -21,4 +15,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default };
+export { Default, WithCcpa };
