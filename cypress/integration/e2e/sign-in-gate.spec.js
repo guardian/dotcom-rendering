@@ -61,7 +61,6 @@ describe('Sign In Gate Tests', function () {
         });
 
         it('should load the sign in gate', function () {
-            disableCMP();
             visitArticleAndScrollToGateForLazyLoad();
 
             cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
