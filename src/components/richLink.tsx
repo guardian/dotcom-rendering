@@ -139,14 +139,15 @@ const RichLink = (props: {
 	linkText: string;
 	format: Format;
 }): ReactElement => {
+	const { url, linkText, format } = props;
 	const webUrl = 'https://www.theguardian.com';
 
-	const articleId = props.url.includes(webUrl)
-		? { 'data-article-id': props.url.replace(webUrl, '') }
+	const articleId = url.includes(webUrl)
+		? { 'data-article-id': url.replace(webUrl, '') }
 		: {};
 
 	const attributes = {
-		css: richLinkStyles(props.format),
+		css: richLinkStyles(format),
 		className: 'js-rich-link',
 		...articleId,
 	};
@@ -154,10 +155,13 @@ const RichLink = (props: {
 	return styledH(
 		'aside',
 		{ ...attributes },
-		styledH('a', { href: props.url }, [
-			h('div', { className: 'js-image' }, null),
-			h('h1', null, props.linkText),
-			h('button', null, [h(SvgArrowRightStraight), 'Read more']),
+		styledH('a', { href: url }, [
+			h('div', { className: 'js-image', key: `${url}-div` }, null),
+			h('h1', { key: `${url}-h1` }, linkText),
+			h('button', { key: `${url}-button` }, [
+				h(SvgArrowRightStraight, { key: `${url}-svg` }),
+				'Read more',
+			]),
 		]),
 	);
 };
