@@ -47,6 +47,38 @@ describe('Elements', function () {
     });
 
     describe('WEB', function () {
+        it('should render the page as expected', function () {
+            cy.viewport('iphone-x');
+            const iphoneXWidth = 375;
+            let hasElementTooWide = false;
+
+            cy.visit(
+                'Article?url=https://www.theguardian.com/commentisfree/2020/jun/30/conservatives-cowboy-builders-boris-johnson',
+            );
+
+            const pageHasXOverflow = (docWidth) => {
+                return cy.get('*').each(($el) => {
+                    if (
+                        !$el.is('script') && // Remove script elements from check...
+                        $el.outerWidth() > docWidth
+                    ) {
+                        // This is brittle but if we're in here then we're trouble anyway
+                        // hopefully it shows some context for where the problem comes from
+                        // but you probably are going to want to be running Cypress locally
+                        cy.log(
+                            `Element is wider than document: ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]}`,
+                        );
+                        hasElementTooWide = true;
+                    }
+                });
+            };
+
+            cy.wrap(null).then(() =>
+                pageHasXOverflow(iphoneXWidth).then(
+                    () => expect(hasElementTooWide).to.be.false,
+                ),
+            );
+        });
         it('should render the instagram embed', function () {
             // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
             const getIframeBody = () => {
