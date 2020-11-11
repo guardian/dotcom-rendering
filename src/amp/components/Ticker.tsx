@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 
 const tickerWrapperStyle = css`
@@ -22,7 +22,6 @@ const rightStyle = css`
     justify-content: flex-end;
 `;
 const tickerInfoStyle = css`
-    ${headline.xxsmall()};
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -45,19 +44,13 @@ const tickerBackgroundStyle = css`
     border: none;
 `;
 const currentAmountStyle = css`
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
+    ${headline.xsmall({ fontWeight: 'bold' })}
 `;
 const goalAmountStyle = css`
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
+    ${headline.xxxsmall({ fontWeight: 'bold' })}
 `;
 const amountCaptionStyle = css`
-    font-weight:500;
-    font-style: italic;
-    font-size: 16px;
+    ${body.small({ fontStyle: 'italic' })};
 `;
 
 export const Ticker: React.FC<{
