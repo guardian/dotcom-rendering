@@ -73,15 +73,7 @@ module.exports = ({ isLegacyJS }) => ({
         rules: [
             {
                 test: /\.[jt]sx?|mjs$/,
-                exclude: [
-                    {
-                        test: /node_modules/,
-                        exclude: [
-                            /@guardian\/(?!(automat-modules))/,
-                            /dynamic-import-polyfill/,
-                        ],
-                    },
-                ],
+                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(@guardian\/types)|(dynamic-import-polyfill))\/.*/,
                 use: [
                     {
                         loader: 'babel-loader',
