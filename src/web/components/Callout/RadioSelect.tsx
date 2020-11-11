@@ -25,7 +25,7 @@ export const RadioSelect = ({
         `}
     >
         <FieldLabel formField={formField} />
-        <RadioGroup name={formField.name} orientation="horizontal">
+        <RadioGroup name={formField.name} orientation="vertical">
             {formField.options.map((option, index) => {
                 const isRadioChecked =
                     formField.id in formData &&
