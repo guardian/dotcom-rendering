@@ -25,7 +25,7 @@ export const richLink: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/99h48',
+                    value: 'https://theguardian.com/p/99h48',
                 },
                 {
                     name: 'su',
@@ -61,7 +61,7 @@ export const richLink: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/99h48',
+                    value: 'https://theguardian.com/p/99h48',
                 },
                 {
                     name: 'su',
@@ -101,7 +101,7 @@ export const richLink: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/99h48',
+                    value: 'https://theguardian.com/p/99h48',
                 },
                 {
                     name: 'su',
@@ -141,7 +141,7 @@ export const richLink: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/99h48',
+                    value: 'https://theguardian.com/p/99h48',
                 },
                 {
                     name: 'edition',

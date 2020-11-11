@@ -329,6 +329,7 @@ interface YoutubeBlockElement {
     posterSrc?: string;
     expired: boolean;
     overrideImage: string;
+    youtubeIndex?: number;
 }
 
 type CAPIElement =

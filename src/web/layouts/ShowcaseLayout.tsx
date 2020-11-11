@@ -42,7 +42,11 @@ import {
     decideLineEffect,
     getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
+import {
+    Stuck,
+    SendToBack,
+    BannerWrapper,
+} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const ShowcaseGrid = ({
@@ -242,7 +246,7 @@ export const ShowcaseLayout = ({
     pillar,
 }: Props) => {
     const {
-        config: { isPaidContent },
+        config: { isPaidContent, host },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -444,6 +448,7 @@ export const ShowcaseLayout = ({
                                     display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
+                                    host={host}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />

@@ -3,8 +3,8 @@ import { ABTest } from '@guardian/ab-core';
 export const curatedContainerTest: ABTest = {
     id: 'CuratedContainerTest',
     start: '2020-09-14',
-    expiry: '2020-11-02',
-    author: 'nicl',
+    expiry: '2020-11-10',
+    author: 'gtrufitt',
     description:
         'Tests an additional "curated" onwards container below the article body',
     audience: 0.5,

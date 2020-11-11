@@ -90,4 +90,5 @@ export const switches = {
     surveys: true,
     abCommercialAdVerification: false,
     inizio: true,
+    acast: true,
 };
