@@ -47,17 +47,6 @@ describe('Elements', function () {
     });
 
     describe('WEB', function () {
-        it('should render the page as expected', function () {
-            cy.viewport('iphone-x');
-            let hasElementTooWide = false;
-
-            cy.visit(
-                'Article?url=https://www.theguardian.com/commentisfree/2020/jun/30/conservatives-cowboy-builders-boris-johnson',
-            );
-
-            expect(hasElementTooWide).to.be.false;
-        });
-
         it('should render the instagram embed', function () {
             // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
             const getIframeBody = () => {
