@@ -61,13 +61,25 @@ export const canShowPreChecks = ({
             !pageConfig.isPaidContent,
     );
 
+const appboyTiming = initPerf('braze-appboy');
+
 const getMessageFromBraze = async (
     apiKey: string,
     brazeUuid: string,
 ): Promise<CanShowResult> => {
+
+    const sdkLoadTiming = initPerf('braze-sdk-load');
+    sdkLoadTiming.start();
+
     const { default: appboy } = await import(
         /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
     );
+
+    const sdkLoadTimeTaken = sdkLoadTiming.end();
+    record({
+        component: 'braze-sdk-load-timing',
+        value: sdkLoadTimeTaken,
+    });
 
     appboy.initialize(apiKey, {
         enableLogging: false,
@@ -78,6 +90,8 @@ const getMessageFromBraze = async (
     });
 
     return new Promise((resolve) => {
+
+        appboyTiming.start();
         appboy.subscribeToInAppMessage((message: any) => {
             const { extras } = message;
 
@@ -156,8 +170,8 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
-    const timing = initPerf('braze-banner');
-    timing.start();
+    const bannerTiming = initPerf('braze-banner');
+    bannerTiming.start();
 
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
@@ -193,7 +207,13 @@ export const canShow = async (
     try {
         const result = await getMessageFromBraze(apiKey as string, brazeUuid)
 
-        const timeTaken = timing.end();
+        const appboyTimeTaken = appboyTiming.end()
+        record({
+            component: 'braze-appboy-timing',
+            value: appboyTimeTaken,
+        });
+
+        const timeTaken = bannerTiming.end();
         record({
             component: 'braze-banner-timing',
             value: timeTaken,
