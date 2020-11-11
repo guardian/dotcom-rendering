@@ -58,7 +58,7 @@
     "aws-sdk": "^2.789.0",
     "babel-jest": "^26.6.2",
     "compression": "^1.7.4",
-    "core-js": "^3.6.5",
+    "core-js": "^3.7.0",
     "create-emotion-server": "^10.0.27",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
