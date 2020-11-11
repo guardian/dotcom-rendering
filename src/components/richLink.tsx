@@ -12,7 +12,7 @@ import type { ReactElement } from 'react';
 import { basePx, darkModeCss, darkModeStyles } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
-const richLinkWidth = '8.75rem';
+export const richLinkWidth = '8.75rem';
 
 const richLinkPillarStyles = (kicker: string): string => {
 	return `
