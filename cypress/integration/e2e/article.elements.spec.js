@@ -57,11 +57,10 @@ describe('Elements', function () {
             );
 
             const pageHasXOverflow = (docWidth) => {
-                const scrollbarWidth = 15; // Chrome scrollbar is 15px...
                 return cy.get('*').each(($el) => {
                     if (
                         !$el.is('script') && // Remove script elements from check...
-                        $el.outerWidth() > docWidth - scrollbarWidth
+                        $el.outerWidth() > docWidth
                     ) {
                         // This is brittle but if we're in here then we're trouble anyway
                         // hopefully it shows some context for where the problem comes from
@@ -80,7 +79,6 @@ describe('Elements', function () {
                 ),
             );
         });
-
         it('should render the instagram embed', function () {
             // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
             const getIframeBody = () => {
