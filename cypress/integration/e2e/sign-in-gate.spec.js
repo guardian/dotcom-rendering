@@ -1,3 +1,5 @@
+import { disableCMP } from '../../lib/disableCMP';
+
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -15,19 +17,6 @@ describe('Sign In Gate Tests', function () {
                 ],
             }),
         );
-    };
-
-    const setGeolocation = (n) => {
-        localStorage.setItem(
-            'gu.geolocation',
-            JSON.stringify({
-                value: n,
-            }),
-        );
-    };
-
-    const clearGeolocation = () => {
-        localStorage.removeItem('gu.geolocation');
     };
 
     const setMvtCookie = (str) => {
@@ -61,18 +50,9 @@ describe('Sign In Gate Tests', function () {
         scrollToGateForLazyLoading(roughPosition);
     };
 
-    const getCMPiFrame = () => {
-        return cy
-            .get('#sp_message_container_106842')
-            .then(cy.wrap)
-            .get('iframe')
-            .its('2.contentDocument.body')
-            .should('not.be.empty')
-            .then(cy.wrap);
-    };
-
     describe('SignInGateMain', function () {
         beforeEach(function () {
+            disableCMP();
             // sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
             setMvtCookie('500');
 
