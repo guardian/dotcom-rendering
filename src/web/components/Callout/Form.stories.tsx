@@ -1,7 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { calloutCampaign } from '@root/fixtures/calloutCampaign';
+import {
+    calloutCampaign,
+    calloutCampaignOnlyTwoRadio,
+} from '@root/fixtures/calloutCampaign';
 import { Form } from './Form';
 
 export default {
@@ -22,6 +25,23 @@ export const Default = () => {
     );
 };
 Default.story = { name: 'default' };
+
+export const WithOnlyTwoRadio = () => {
+    return (
+        <div
+            className={css`
+                width: 630px;
+                padding: 15px;
+            `}
+        >
+            <Form
+                formFields={calloutCampaignOnlyTwoRadio.formFields}
+                onSubmit={() => {}}
+            />
+        </div>
+    );
+};
+WithOnlyTwoRadio.story = { name: 'with only two radio' };
 
 export const WithError = () => {
     return (
