@@ -10,8 +10,8 @@ const container = css`
 	${textSans.small({ lineHeight: 'regular' })};
 	margin-left: ${remSpace[2]};
 	margin-right: ${remSpace[2]};
-	padding-top: 16px;
-	padding-bottom: 24px;
+	padding-top: ${remSpace[4]};
+	padding-bottom: ${remSpace[6]};
 `;
 
 const anchor = css`

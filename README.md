@@ -89,7 +89,7 @@ npm run storybook
 
 Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
 
-### Generating Apps rendering API models
+### Generating apps-rendering API models
 
 In order to release the models you'll need to:
  - have a bintray account with access to the guardian organisation
