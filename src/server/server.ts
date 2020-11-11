@@ -160,7 +160,7 @@ async function serveRichLinkDetails(
 	}
 
 	res.set('pillar', renderingRequest.content.pillarName);
-	res.status(200);
+	res.status(200).end();
 }
 
 async function serveArticlePost(
@@ -211,9 +211,9 @@ async function serveArticleGet(
 
 				if (richLinkDetails) {
 					void serveRichLinkDetails(mockedRenderingRequest, res);
+				} else {
+					void serveArticle(mockedRenderingRequest, res, isEditions);
 				}
-
-				void serveArticle(mockedRenderingRequest, res, isEditions);
 			},
 		)(capiContent);
 	} catch (e) {
