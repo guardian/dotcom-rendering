@@ -20,7 +20,7 @@ const container = css`
 	}
 	${darkModeCss`
             color: ${neutral[60]};
-        `}
+    `}
 `;
 
 const anchor = css`
@@ -29,7 +29,7 @@ const anchor = css`
 	text-decoration: underline;
 	${darkModeCss`
             color: ${neutral[60]};
-        `}
+    `}
 `;
 
 interface FooterCcpaProps {
