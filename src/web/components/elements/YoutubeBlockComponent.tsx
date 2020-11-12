@@ -84,8 +84,8 @@ export const YoutubeBlockComponent = ({
     >();
 
     // We need to find the best candidate posterImage from array
-    // we therefore need to find the smallest candidate that is
-    // larger than the width of the wrapper
+    // we therefore need to find the candidate with the smallest
+    // width, that is larger than the width of the wrapper
     useEffect(() => {
         const wrapperWidth = wrapperRef.current
             ? wrapperRef.current.clientWidth
