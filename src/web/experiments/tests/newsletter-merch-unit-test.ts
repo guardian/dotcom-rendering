@@ -5,7 +5,7 @@ export const newsletterMerchUnitLighthouseControl: ABTest = {
     start: '2020-11-11',
     expiry: '2020-12-01',
     author: 'Josh Buckland & Alex Dufournet',
-    description: 'Show a newsletter advert in the merchandising unit to 50% of users',
+    description: 'Show any merch unit to 50% of users. This is the control for the NewsletterMerchUnitLighthouseVariants test.',
     audience: 0.5,
     audienceOffset: 0.0,
     successMeasure: 'We see increased engagement from users shown the Newsletters ad unit',
@@ -26,7 +26,9 @@ export const newsletterMerchUnitLighthouseVariants: ABTest = {
     start: '2020-11-11',
     expiry: '2020-12-01',
     author: 'Josh Buckland & Alex Dufournet',
-    description: 'Show a newsletter advert in the merchandising unit to 50% of users',
+    description: 'Show a newsletter advert in the merchandising unit to 25% of users. ' +
+        'These two variants test value of showing newsletter merch units instead of reader revenue ones. ' +
+        'This test needs to run at the same time as NewsletterMerchUnitLighthouseVariants',
     audience: 0.5,
     audienceOffset: 0.5,
     successMeasure: 'We see increased engagement from users shown the Newsletters ad unit',
@@ -36,11 +38,11 @@ export const newsletterMerchUnitLighthouseVariants: ABTest = {
     canRun: () => true,
     variants: [
         {
-            id: 'variant1',
+            id: 'newsletter',
             test: (): void => {},
         },
         {
-            id: 'variant2',
+            id: 'reader-revenue',
             test: (): void => {},
         },
     ],
