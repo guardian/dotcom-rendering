@@ -9,8 +9,13 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: '10.15.3'
-            - run: |
-                  yarn && yarn makeBuild
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
+
+            - name: Install and build
+              run: yarn && yarn makeBuild
+
             - uses: chromaui/action@v1
               with:
                   projectToken: ${{ secrets.CHROMATIC_APP_CODE }}

@@ -9,6 +9,7 @@ import {
     isNPageOrHigherPageView,
     isValidContentType,
     isValidSection,
+    isValidTag,
     isIOS9,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -31,10 +32,15 @@ const canShow = (
     currentTest: CurrentABTest,
 ): boolean =>
     !isSignedIn &&
-    !hasUserDismissedGateMoreThanCount(currentTest.variant, currentTest.name, 5) &&
+    !hasUserDismissedGateMoreThanCount(
+        currentTest.variant,
+        currentTest.name,
+        5,
+    ) &&
     isNPageOrHigherPageView(3) &&
     isValidContentType(CAPI) &&
     isValidSection(CAPI) &&
+    isValidTag(CAPI) &&
     !isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {

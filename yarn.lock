@@ -2260,20 +2260,20 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^2.0.8":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.0.8.tgz#8707c6969177cff7b296a96d766868b1bbd9ac8c"
-  integrity sha512-TcKVIVODb7PIR6B3EnVeYdU23P46+kUwIoUzMvQVsqcC+ktq036mD57XX+8QScYRl1NpuenDCDwMcBMYyNHzzA==
+"@guardian/atoms-rendering@^2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.0.9.tgz#5e2ae5e5701314de4f3def000fe2cf8355eed086"
+  integrity sha512-viuUAFnS7d8/QQFlt7mSQJKHySg/87IXmJArJWF43k6qfDmRGGjwPiJdiGKXEHwR8KgyTMSDzk1pSJ1NfzATiQ==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.13.tgz#ac862f13806b41256bb3aa0999e8c179164489f1"
-  integrity sha512-o5aGroIs/s5s4kusKeZVaMykAhIdyiRild98E0jdVNtDa7axv/8Gh3MHddx6VTYQWS9Y4n9EqxZIWBjd9NeGEg==
+"@guardian/braze-components@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.14.tgz#da0edde0b1758a713019b1bdc7d643fdb9dcaab8"
+  integrity sha512-kdaEU6tAx5Rcq6jw2lxyNunXMLtrpyiX1dgZuGjDTvZM1RTJOEOI/36+/U9agB9oXpHmZ2y4mst5rvsa42uaqg==
   dependencies:
     "@guardian/src-button" "2.4.0"
     "@guardian/src-foundations" "2.4.0"
@@ -13504,10 +13504,10 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@^2.2.1, node-fetch@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+node-fetch@^2.6.0, node-fetch@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-forge@^0.8.1:
   version "0.8.5"
@@ -13972,10 +13972,10 @@ openurl@^1.1.1:
   resolved "https://registry.yarnpkg.com/openurl/-/openurl-1.1.1.tgz#3875b4b0ef7a52c156f0db41d4609dbb0f94b387"
   integrity sha1-OHW0sO96UsFW8NtB1GCduw+Us4c=
 
-ophan-tracker-js@^1.3.22:
-  version "1.3.22"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.22.tgz#1ce0ce5066ff8230edc97c2105f9b52b95c1efb4"
-  integrity sha512-UNTMjo/cEyHy7BfsrAs250Q7ujElYd6RqmAIb/+aoAT9oduHZ2giJ9nJMcd5qC83U4EP8adh9gcY+dGgJsEEBQ==
+ophan-tracker-js@^1.3.23:
+  version "1.3.23"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.23.tgz#e63ca951370b98f265ba654ec4c0db86c15cd822"
+  integrity sha512-MfNMDKUJ0uv9tq3j2B2ISjht8EPs73No8r0NH+H9D3ExrHi8wL9SlPcuVC/Ma2vI7quibduko2RzzuhvAX3BIQ==
 
 optimist@^0.6.1:
   version "0.6.1"

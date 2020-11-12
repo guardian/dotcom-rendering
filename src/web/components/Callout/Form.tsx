@@ -171,10 +171,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
                 </Button>
                 <div
                     className={css`
-                        a {
-                            border: 0;
-                        }
-                        a:hover {
+                        a, a:hover  {
                             border: 0;
                         }
                     `}
