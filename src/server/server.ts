@@ -6,7 +6,7 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import { map, OptionKind, withDefault } from '@guardian/types/option';
 import type { Result } from '@guardian/types/result';
 import { either, err, ok } from '@guardian/types/result';
 import bodyParser from 'body-parser';
@@ -18,6 +18,9 @@ import type {
 	Request,
 } from 'express';
 import express from 'express';
+import { MainMediaKind } from 'headerMedia';
+import { fromCapi } from 'item';
+import { JSDOM } from 'jsdom';
 import { pipe2, toArray } from 'lib';
 import { logger } from 'logger';
 import type { Response } from 'node-fetch';
@@ -136,15 +139,44 @@ async function serveArticle(
 	res.end();
 }
 
+async function serveRichLinkDetails(
+	renderingRequest: RenderingRequest,
+	res: ExpressResponse,
+): Promise<void> {
+	const imageSalt = await getConfigValue('apis.img.salt');
+
+	if (imageSalt === undefined) {
+		throw new Error('Could not get image salt');
+	}
+
+	const docParser = JSDOM.fragment.bind(null);
+	const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
+
+	if (
+		item.mainMedia.kind === OptionKind.Some &&
+		item.mainMedia.value.kind === MainMediaKind.Image
+	) {
+		res.set('image', item.mainMedia.value.image.src);
+	}
+
+	res.set('pillar', renderingRequest.content.pillarName);
+	res.status(200).end();
+}
+
 async function serveArticlePost(
-	{ body }: Request,
+	req: Request,
 	res: ExpressResponse,
 	next: NextFunction,
 ): Promise<void> {
 	try {
-		const renderingRequest = await mapiDecoder(body);
+		const renderingRequest = await mapiDecoder(req.body);
+		const richLinkDetails = req.query.richlink === '';
 
-		void serveArticle(renderingRequest, res, false);
+		if (richLinkDetails) {
+			void serveRichLinkDetails(renderingRequest, res);
+		} else {
+			void serveArticle(renderingRequest, res, false);
+		}
 	} catch (e) {
 		logger.error(`This error occurred`, e);
 		next(e);
@@ -175,7 +207,13 @@ async function serveArticleGet(
 					relatedContent,
 				};
 
-				void serveArticle(mockedRenderingRequest, res, isEditions);
+				const richLinkDetails = req.query.richlink === '';
+
+				if (richLinkDetails) {
+					void serveRichLinkDetails(mockedRenderingRequest, res);
+				} else {
+					void serveArticle(mockedRenderingRequest, res, isEditions);
+				}
 			},
 		)(capiContent);
 	} catch (e) {
