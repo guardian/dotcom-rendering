@@ -13,6 +13,7 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import FooterCcpa from 'components/shared/footer';
 import { formatDate, formatLocal, isValidDate } from 'date';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	notificationsClient,
@@ -333,20 +334,29 @@ function richLinks(): void {
 					},
 				};
 				void fetch(`${articleId}?richlink`, options)
+					.then(handleErrors)
 					.then((resp) => resp.json())
-					.then((response: Record<string, string | undefined>) => {
-						const pillar = response.pillar?.toLowerCase();
-						const image = response.image;
+					.then((response: unknown) => {
+						if (isObject(response)) {
+							const pillar =
+								typeof response.pillar === 'string'
+									? response.pillar.toLowerCase()
+									: null;
+							const image = response.image;
 
-						if (pillar) {
-							richLink.classList.add(`js-${pillar}`);
-						}
+							if (pillar) {
+								richLink.classList.add(`js-${pillar}`);
+							}
 
-						const placeholder = richLink.querySelector('.js-image');
-						if (placeholder && image) {
-							placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
+							const placeholder = richLink.querySelector(
+								'.js-image',
+							);
+							if (placeholder && image) {
+								placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
+							}
 						}
-					});
+					})
+					.catch((error) => console.error(error));
 			}
 		});
 }
