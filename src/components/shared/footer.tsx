@@ -61,7 +61,7 @@ const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => {
 			&#169; {currentYear} Guardian News and Media Limited or its
 			affiliated companies. All rights reserved.
 			<br />
-			{renderContent(true)}
+			{renderContent(isCcpa)}
 			<a
 				css={anchor}
 				href="https://www.theguardian.com/help/privacy-policy"
