@@ -61,7 +61,7 @@ export const canShowPreChecks = ({
             !pageConfig.isPaidContent,
     );
 
-const appboyTiming = initPerf('braze-appboy');
+
 
 const getMessageFromBraze = async (
     apiKey: string,
@@ -81,6 +81,9 @@ const getMessageFromBraze = async (
         value: sdkLoadTimeTaken,
     });
 
+    const appboyTiming = initPerf('braze-appboy');
+    appboyTiming.start();
+
     appboy.initialize(apiKey, {
         enableLogging: false,
         noCookies: true,
@@ -91,7 +94,6 @@ const getMessageFromBraze = async (
 
     return new Promise((resolve) => {
 
-        appboyTiming.start();
         appboy.subscribeToInAppMessage((message: any) => {
             const { extras } = message;
 
@@ -114,11 +116,18 @@ const getMessageFromBraze = async (
             };
 
             if (extras) {
+                const appboyTimeTaken = appboyTiming.end()
+                record({
+                    component: 'braze-appboy-timing',
+                    value: appboyTimeTaken,
+                });
+
                 const meta = {
                     dataFromBraze: extras,
                     logImpressionWithBraze,
                     logButtonClickWithBraze,
                 };
+
                 resolve({ result: true, meta });
             } else {
                 resolve({ result: false });
@@ -206,12 +215,6 @@ export const canShow = async (
 
     try {
         const result = await getMessageFromBraze(apiKey as string, brazeUuid)
-
-        const appboyTimeTaken = appboyTiming.end()
-        record({
-            component: 'braze-appboy-timing',
-            value: appboyTimeTaken,
-        });
 
         const timeTaken = bannerTiming.end();
         record({
