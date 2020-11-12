@@ -30,7 +30,7 @@ export const Interview: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d7nqb',
+                    value: 'https://theguardian.com/p/d7nqb',
                 },
                 {
                     name: 'url',
@@ -71,7 +71,7 @@ export const Interview: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d7nqb',
+                    value: 'https://theguardian.com/p/d7nqb',
                 },
                 {
                     name: 'url',
@@ -116,7 +116,7 @@ export const Interview: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d7nqb',
+                    value: 'https://theguardian.com/p/d7nqb',
                 },
                 {
                     name: 'url',
@@ -161,7 +161,7 @@ export const Interview: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d7nqb',
+                    value: 'https://theguardian.com/p/d7nqb',
                 },
                 {
                     name: 'url',

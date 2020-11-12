@@ -33,7 +33,7 @@ export const MatchReport: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8z6v',
+                    value: 'https://theguardian.com/p/d8z6v',
                 },
                 {
                     name: 'url',
@@ -73,7 +73,7 @@ export const MatchReport: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8z6v',
+                    value: 'https://theguardian.com/p/d8z6v',
                 },
                 {
                     name: 'url',
@@ -117,7 +117,7 @@ export const MatchReport: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8z6v',
+                    value: 'https://theguardian.com/p/d8z6v',
                 },
                 {
                     name: 'url',
@@ -161,7 +161,7 @@ export const MatchReport: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8z6v',
+                    value: 'https://theguardian.com/p/d8z6v',
                 },
                 {
                     name: 'edition',

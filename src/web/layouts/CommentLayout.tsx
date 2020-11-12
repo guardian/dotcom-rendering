@@ -40,7 +40,11 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
-import {Stuck, SendToBack, BannerWrapper} from '@root/src/web/layouts/lib/stickiness';
+import {
+    Stuck,
+    SendToBack,
+    BannerWrapper,
+} from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
@@ -186,6 +190,7 @@ const avatarPositionStyles = css`
     overflow: hidden;
     margin-bottom: -29px;
     margin-top: -50px;
+    pointer-events: none;
 
     /*  Why target img element?
 
@@ -260,7 +265,7 @@ export const CommentLayout = ({
     pillar,
 }: Props) => {
     const {
-        config: { isPaidContent },
+        config: { isPaidContent, host },
     } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -489,6 +494,7 @@ export const CommentLayout = ({
                                     display={display}
                                     designType={designType}
                                     adTargeting={adTargeting}
+                                    host={host}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />
