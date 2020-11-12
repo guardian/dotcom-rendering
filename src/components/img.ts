@@ -46,16 +46,19 @@ const styles = (role: Role, format: Format): SerializedStyles => {
 const Img: FC<Props> = ({ image, sizes, className, format }) =>
 	h('picture', null, [
 		h('source', {
+			key: `${image.src}-dpr2Srcset`,
 			sizes,
 			srcSet: image.dpr2Srcset,
 			media:
 				'(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
 		}),
 		h('source', {
+			key: `${image.src}-srcset`,
 			sizes,
 			srcSet: image.srcset,
 		}),
 		styledH('img', {
+			key: `${image.src}-img`,
 			src: image.src,
 			alt: withDefault('')(image.alt),
 			className: image.width > 620 ? 'js-launch-slideshow' : '',

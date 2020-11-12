@@ -490,11 +490,12 @@ const captionElement = (format: Format) => (
 							  `
 							: undefined,
 					format,
+					key,
 				},
 				children,
 			);
 		case '#text':
-			return h('span', null, text);
+			return h('span', { key }, text);
 		default:
 			return textElement(format)(node, key);
 	}
@@ -519,9 +520,10 @@ const render = (format: Format, excludeStyles = false) => (
 			return h(BodyImage, {
 				caption: map<DocumentFragment, ReactNode>((cap) => [
 					renderCaption(cap, format),
-					h(Credit, { credit, format }),
+					h(Credit, { credit, format, key }),
 				])(caption),
 				format,
+				key,
 				supportsDarkMode: true,
 				lightbox: some({
 					className: 'js-launch-slideshow',

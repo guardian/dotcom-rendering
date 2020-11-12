@@ -112,13 +112,14 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 };
 
-const toReact = (format: Format) => (node: Node): ReactNode => {
+const toReact = (format: Format) => (node: Node, index: number): ReactNode => {
 	switch (node.nodeName) {
 		case 'A':
 			return (
 				<a
 					href={withDefault('')(getHref(node))}
 					css={getAnchorStyles(format)}
+					key={`anchor-${index}`}
 				>
 					{node.textContent ?? ''}
 				</a>
@@ -131,7 +132,7 @@ const toReact = (format: Format) => (node: Node): ReactNode => {
 };
 
 const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
-	Array.from(byline.childNodes).map(toReact(format));
+	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
 	pipe2(
