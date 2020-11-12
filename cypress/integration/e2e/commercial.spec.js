@@ -9,17 +9,36 @@ describe('Commercial E2E tests', function () {
         disableCMP();
     });
 
-    describe('for WEB', function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
-        it(`It should check slots for a long article`, function () {
-            const longReadURL =
-                'https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife';
-            cy.log(`Opening A long read`);
-            cy.visit(`Article?url=${longReadURL}`, fetchPolyfill);
+    const longReadURL =
+        'https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife';
 
-            cy.scrollTo('bottom', { duration: 4500 });
+    const runLongReadTestFor = (url) => {
+        cy.log(`Opening A long read`);
+        cy.visit(url, fetchPolyfill);
 
-            cy.get('.js-ad-slot').should('have.length', 15);
+        cy.scrollTo('bottom', { duration: 500 });
+
+        // We are excluding survey slot as it only appears via cypress tests and only on frontend.
+        cy.get('.js-ad-slot:not([data-name="survey"]').should('have.length', 15);
+
+        Array(10).fill().forEach((item, i)=>{
+            cy.get(`[data-name="inline${(i+1)}"]`).should('have.length', 1);
+        })
+
+        cy.get(`[data-name="right"]`).should('have.length', 1);
+        cy.get(`[data-name="merchandising-high"]`).should('have.length', 1);
+        cy.get(`[data-name="mostpop"]`).should('have.length', 1);
+        cy.get(`[data-name="merchandising"]`).should('have.length', 1);
+    };
+
+    describe('Ad slot Parity between DCR and Frontend for a long read', function () {
+        it(`It should check slots for a long article in DCR`, function () {
+            runLongReadTestFor(`Article?url=${longReadURL}`);
+        });
+
+        it(`It should check slots for a long article in Frontend`, function () {
+            Cypress.config('baseUrl', null);
+            runLongReadTestFor(`${longReadURL}?dcr=false`);
         });
     });
 });
