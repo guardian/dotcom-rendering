@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { headline, body } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
+import { AmpAnimation } from '@root/src/amp/components/AmpAnimation';
 
 const tickerWrapperStyle = css`
     margin-bottom: 20px;
@@ -31,11 +32,23 @@ const tickerProgressStyle = css`
     position: absolute;
     margin: 0;
     padding: 0;
-    left: 0;
+    left: -100%;
     background-color: ${brandAlt[400]};
     height: 100%;
+    width: 100%;
+    transform-origin: left;
+`;
+const tickerHiddenProgressStyle = css`
+    height: 100%
+    left 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    z-index: -1;
 `;
 const tickerBackgroundStyle = css`
+    overflow: hidden;
     position: relative;
     margin: 5px 0;
     height: 10px;
@@ -66,8 +79,18 @@ export const Ticker: React.FC<{
     goalAmountFigure,
     goalAmountCaption,
 }) => {
+    const progressAnimation =
+        {
+            "selector": "#ticker-progress",
+            "duration": "1.5s",
+            "iterations": "1",
+            "fill": "forwards",
+            "keyframes": { "transform": "translate(width('#ticker-hidden-progress'))" }
+        }
+
     return (
         <div>
+            <AmpAnimation animationRules={progressAnimation} />
             <div className={tickerWrapperStyle}>
                 <div className={tickerInfoStyle}>
                     <div className={leftStyle}>
@@ -80,7 +103,8 @@ export const Ticker: React.FC<{
                     </div>
                 </div>
                 <div className={tickerBackgroundStyle}>
-                    <div className={tickerProgressStyle} style={{width: `${percentage}%`}} />
+                    <div id="ticker-hidden-progress" className={tickerHiddenProgressStyle} style={{width: `${percentage}%`}} />
+                    <div id='ticker-progress' className={tickerProgressStyle} />
                 </div>
             </div>
         </div>
