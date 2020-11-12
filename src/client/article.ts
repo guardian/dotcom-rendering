@@ -334,9 +334,9 @@ function richLinks(): void {
 				};
 				void fetch(`${articleId}?richlink`, options)
 					.then((resp) => resp.json())
-					.then((response) => {
-						const pillar = response?.pillar?.toLowerCase();
-						const image = response?.image;
+					.then((response: Record<string, string | undefined>) => {
+						const pillar = response.pillar?.toLowerCase();
+						const image = response.image;
 
 						if (pillar) {
 							richLink.classList.add(`js-${pillar}`);
