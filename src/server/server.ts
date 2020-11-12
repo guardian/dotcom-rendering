@@ -255,6 +255,7 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
+app.get('/rendered-items/*', bodyParser.raw(), serveArticleGet);
 app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);

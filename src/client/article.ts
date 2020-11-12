@@ -327,21 +327,28 @@ function richLinks(): void {
 		.forEach((richLink) => {
 			const articleId = richLink.getAttribute('data-article-id');
 			if (articleId) {
-				void fetch(`${articleId}?richlink`).then((response) => {
-					const pillar = response.headers
-						.get('pillar')
-						?.toLowerCase();
-					const image = response.headers.get('image');
+				const options = {
+					headers: {
+						Accept: 'text/html',
+					},
+				};
+				void fetch(`${articleId}?richlink`, options).then(
+					(response) => {
+						const pillar = response.headers
+							.get('pillar')
+							?.toLowerCase();
+						const image = response.headers.get('image');
 
-					if (pillar) {
-						richLink.classList.add(`js-${pillar}`);
-					}
+						if (pillar) {
+							richLink.classList.add(`js-${pillar}`);
+						}
 
-					const placeholder = richLink.querySelector('.js-image');
-					if (placeholder && image) {
-						placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
-					}
-				});
+						const placeholder = richLink.querySelector('.js-image');
+						if (placeholder && image) {
+							placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
+						}
+					},
+				);
 			}
 		});
 }
