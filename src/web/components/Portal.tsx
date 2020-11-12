@@ -20,11 +20,12 @@ export const Portal = ({ root, children, richLinkIndex }: Props) => {
     );
     if (placeholderElement) placeholderElement.remove();
 
-    return ReactDOM.createPortal(children, element);
+    const result = ReactDOM.createPortal(children, element);
     window.performance.mark(`${rootId}-portal-end`);
     window.performance.measure(
         `${rootId}-portal`,
         `${rootId}-portal-start`,
         `${rootId}-portal-end`,
     );
+    return result;
 };
