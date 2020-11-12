@@ -18,7 +18,8 @@ import { trackLink } from '@frontend/web/components/SignInGate/componentEventTra
 import { SignInGateProps } from '../types';
 
 const signinGate = css`
-    background-color: #eaf1fd; /* todo - consents colour - failing validation because not in Source */
+    /* stylelint-disable-next-line color-no-hex */
+    background-color: #eaf1fd;
 
     ${from.desktop} {
         min-height: 600px;
