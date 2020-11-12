@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { css } from 'emotion';
 
 import { palette, space } from '@guardian/src-foundations';
@@ -17,6 +17,7 @@ type Props = {
     role: RoleType;
     hideCaption?: boolean;
     overlayImage?: string;
+    posterImage?: PosterImageType[];
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
     height?: number;
@@ -26,10 +27,10 @@ type Props = {
     origin?: string;
 };
 
-const expiredOverlayStyles = (overrideImage: string) => css`
+const expiredOverlayStyles = (overrideImage?: string) => css`
     height: 0px;
     position: relative;
-    background-image: url(${overrideImage});
+    background-image: url(${overrideImage || ''});
     background-size: cover;
     background-position: 49% 49%;
     background-repeat: no-repeat;
@@ -67,6 +68,7 @@ export const YoutubeBlockComponent = ({
     pillar,
     hideCaption,
     overlayImage,
+    posterImage,
     role,
     adTargeting,
     isMainMedia,
@@ -76,6 +78,31 @@ export const YoutubeBlockComponent = ({
     duration,
     origin,
 }: Props) => {
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+    const [selectedPosterImage, setSelectedPosterImage] = useState<
+        PosterImageType
+    >();
+    useEffect(() => {
+        const wrapperWidth = wrapperRef.current
+            ? wrapperRef.current.clientWidth
+            : 0;
+        if (wrapperWidth && posterImage) {
+            const bestFitPosterImage = posterImage.reduce(
+                (
+                    acc: PosterImageType,
+                    cur: PosterImageType,
+                ): PosterImageType => {
+                    if (wrapperWidth < cur.width && cur.width < acc.width)
+                        return cur;
+                    return acc;
+                },
+                posterImage[0],
+            );
+            setSelectedPosterImage(bestFitPosterImage);
+        }
+    }, [wrapperRef, posterImage, setSelectedPosterImage]);
+
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -88,7 +115,12 @@ export const YoutubeBlockComponent = ({
                     margin-bottom: 16px;
                 `}
             >
-                <div className={expiredOverlayStyles(element.overrideImage)}>
+                <div
+                    className={expiredOverlayStyles(
+                        (selectedPosterImage && selectedPosterImage.url) ||
+                            element.overrideImage,
+                    )}
+                >
                     <div className={expiredTextWrapperStyles}>
                         <div className={expiredSVGWrapperStyles}>
                             <SvgAlertRound />
@@ -121,10 +153,13 @@ export const YoutubeBlockComponent = ({
     }
 
     return (
-        <div data-chromatic="ignore">
+        <div ref={wrapperRef} data-chromatic="ignore">
             <YoutubeAtom
                 videoMeta={element}
-                overlayImage={overlayImage}
+                overlayImage={
+                    (selectedPosterImage && selectedPosterImage.url) ||
+                    overlayImage
+                }
                 adTargeting={adTargeting}
                 height={height}
                 width={width}

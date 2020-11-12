@@ -79,6 +79,7 @@ function renderElement(
                         adTargeting={adTargeting}
                         isMainMedia={true}
                         overlayImage={element.overrideImage}
+                        posterImage={element.posterImage}
                         duration={element.duration}
                     />
                 </div>

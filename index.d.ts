@@ -370,6 +370,8 @@ type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
+type PosterImageType = { url: string; width: number };
+
 interface CardType {
     linkTo: string;
     pillar: Pillar;
