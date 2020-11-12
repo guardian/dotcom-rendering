@@ -5,7 +5,7 @@ export const newsletterMerchUnitLighthouseControl: ABTest = {
     start: '2020-11-11',
     expiry: '2020-12-01',
     author: 'Josh Buckland & Alex Dufournet',
-    description: 'Show any merch unit to 50% of users. This is the control for the NewsletterMerchUnitLighthouseVariants test.',
+    description: 'Show BAU merch unit to 50% of users. This is the control for the NewsletterMerchUnitLighthouseVariants test.',
     audience: 0.5,
     audienceOffset: 0.0,
     successMeasure: 'We see increased engagement from users shown the Newsletters ad unit',
