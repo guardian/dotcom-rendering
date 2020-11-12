@@ -121,8 +121,8 @@ export const YoutubeBlockComponent = ({
             >
                 <div
                     className={expiredOverlayStyles(
-                        (selectedPosterImage && selectedPosterImage.url) ||
-                            element.overrideImage,
+                        element.overrideImage ||
+                            (selectedPosterImage && selectedPosterImage.url),
                     )}
                 >
                     <div className={expiredTextWrapperStyles}>
@@ -161,8 +161,8 @@ export const YoutubeBlockComponent = ({
             <YoutubeAtom
                 videoMeta={element}
                 overlayImage={
-                    (selectedPosterImage && selectedPosterImage.url) ||
-                    overlayImage
+                    overlayImage ||
+                    (selectedPosterImage && selectedPosterImage.url)
                 }
                 adTargeting={adTargeting}
                 height={height}
