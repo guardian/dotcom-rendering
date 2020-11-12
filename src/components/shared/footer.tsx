@@ -1,8 +1,10 @@
 import { css } from '@emotion/core';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { breakpoints, neutral, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { FC } from 'react';
 import React from 'react';
+import { darkModeCss } from 'styles';
 
 // Footer content styles
 const container = css`
@@ -12,37 +14,43 @@ const container = css`
 	margin-right: ${remSpace[2]};
 	padding-top: ${remSpace[4]};
 	padding-bottom: ${remSpace[6]};
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin: 0 auto;
+	}
+	${darkModeCss`
+            color: ${neutral[60]};
+    `}
 `;
 
 const anchor = css`
 	${textSans.small({ lineHeight: 'regular' })};
 	color: ${neutral[7]};
 	text-decoration: underline;
+	${darkModeCss`
+            color: ${neutral[60]};
+    `}
 `;
 
 interface FooterCcpaProps {
 	isCcpa: boolean;
 }
 
-const renderContent = (ccpaStatus: boolean): JSX.Element => {
-	if (!ccpaStatus) {
+const renderContent = (ccpaStatus: boolean): JSX.Element | null => {
+	if (ccpaStatus) {
 		return (
-			<a
-				css={anchor}
-				href="https://www.theguardian.com/help/privacy-policy"
-			>
-				Privacy Settings
-			</a>
+			<>
+				<a
+					css={anchor}
+					href="https://www.theguardian.com/help/privacy-policy"
+				>
+					California Residents - Do Not Sell
+				</a>
+				&nbsp;&#183;&nbsp;
+			</>
 		);
 	} else {
-		return (
-			<a
-				css={anchor}
-				href="https://www.theguardian.com/help/privacy-policy"
-			>
-				California Residents - Do Not Sell
-			</a>
-		);
+		return null;
 	}
 };
 
@@ -53,8 +61,7 @@ const FooterCcpa: FC<FooterCcpaProps> = ({ isCcpa }) => {
 			&#169; {currentYear} Guardian News and Media Limited or its
 			affiliated companies. All rights reserved.
 			<br />
-			{renderContent(isCcpa)}
-			&nbsp;&#183;&nbsp;
+			{renderContent(true)}
 			<a
 				css={anchor}
 				href="https://www.theguardian.com/help/privacy-policy"

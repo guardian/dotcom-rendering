@@ -15,11 +15,10 @@ import {
 import BodyImage from '@guardian/image-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/image-rendering/src/components/figCaption';
 import { palette, remSpace } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgArrowRightStraight } from '@guardian/src-icons';
 import { Design } from '@guardian/types/Format';
 import type { Format } from '@guardian/types/Format';
 import {
@@ -49,11 +48,12 @@ import HorizontalRule from 'components/horizontalRule';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
+import RichLink from 'components/richLink';
 import Video from 'components/video';
 import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
-import { basePx, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
 
 // ----- Renderer ----- //
@@ -329,90 +329,6 @@ const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
 	Array.from(doc.childNodes).map(standfirstTextElement(format));
 
-const richLinkWidth = '8.75rem';
-
-const richLinkStyles = (format: Format): SerializedStyles => {
-	const backgroundColor =
-		format.design === Design.Comment ? neutral[86] : neutral[97];
-	const formatStyles =
-		format.design === Design.Live
-			? `width: calc(100% - ${remSpace[4]});`
-			: `
-            width: ${richLinkWidth};
-            ${from.wide} {
-                margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(
-					3,
-			  )});
-            }
-        `;
-
-	return css`
-		background: ${backgroundColor};
-		padding: ${basePx(1)};
-		border-top: solid 1px ${neutral[60]};
-
-		button {
-			background: none;
-			border: none;
-			${textSans.medium()};
-			padding: 0;
-			margin: 0;
-			display: inline-flex;
-		}
-		svg {
-			width: 1.0625rem;
-			border-radius: 100%;
-			border: solid 1px ${neutral[7]};
-			padding: 4px;
-			display: inline-block;
-			margin-right: ${remSpace[2]};
-		}
-		a {
-			display: inline-block;
-			text-decoration: none;
-			color: ${neutral[7]};
-
-			h1 {
-				margin: ${basePx(0, 0, 2, 0)};
-				${headline.xxxsmall({ fontWeight: 'bold' })}
-				hyphens: auto;
-			}
-		}
-
-		float: left;
-		clear: left;
-		margin: ${basePx(1, 2, 1, 0)};
-
-		${formatStyles}
-
-		${darkModeCss`
-            background-color: ${neutral[20]};
-            svg {
-                border-color: ${neutral[60]};
-                fill: ${neutral[60]};
-            }
-
-            a, h1, button {
-                color: ${neutral[60]};
-            }
-        `}
-	`;
-};
-
-const RichLink = (props: {
-	url: string;
-	linkText: string;
-	format: Format;
-}): ReactElement =>
-	styledH(
-		'aside',
-		{ css: richLinkStyles(props.format) },
-		styledH('a', { href: props.url }, [
-			h('h1', null, props.linkText),
-			h('button', null, [h(SvgArrowRightStraight), 'Read more']),
-		]),
-	);
-
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
 	const styles = css`
 		margin: ${remSpace[4]} 0;
@@ -490,11 +406,12 @@ const captionElement = (format: Format) => (
 							  `
 							: undefined,
 					format,
+					key,
 				},
 				children,
 			);
 		case '#text':
-			return h('span', null, text);
+			return h('span', { key }, text);
 		default:
 			return textElement(format)(node, key);
 	}
@@ -519,9 +436,10 @@ const render = (format: Format, excludeStyles = false) => (
 			return h(BodyImage, {
 				caption: map<DocumentFragment, ReactNode>((cap) => [
 					renderCaption(cap, format),
-					h(Credit, { credit, format }),
+					h(Credit, { credit, format, key }),
 				])(caption),
 				format,
+				key,
 				supportsDarkMode: true,
 				lightbox: some({
 					className: 'js-launch-slideshow',
