@@ -6,6 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
+import { selectBestImgFromWidth } from '@root/src/web/lib/selectBestImgFromWidth';
 import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
@@ -22,21 +23,6 @@ type Props = {
     isMainMedia?: boolean;
     starRating?: number;
     title?: string;
-};
-
-const selectScrSetItemForWidth = (
-    desiredWidth: number,
-    inlineSrcSets: SrcSetItem[],
-): SrcSetItem => {
-    const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
-
-    return sorted.reduce((best, current) => {
-        if (current.width < best.width && current.width >= desiredWidth) {
-            return current;
-        }
-
-        return best;
-    });
 };
 
 const getSrcSetsForWeighting = (
@@ -75,14 +61,14 @@ const makeSources = (
                 makePictureSource(
                     true,
                     width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
+                    selectBestImgFromWidth(width, inlineSrcSets) as SrcSetItem,
                 ),
             );
             sources.push(
                 makePictureSource(
                     false,
                     width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
+                    selectBestImgFromWidth(width, inlineSrcSets) as SrcSetItem,
                 ),
             );
         });
@@ -93,7 +79,7 @@ const makeSources = (
 const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
 
-    return selectScrSetItemForWidth(300, inlineSrcSets).src;
+    return selectBestImgFromWidth(300, inlineSrcSets).src;
 };
 
 const starsWrapper = css`

@@ -5,6 +5,7 @@ import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 
+import { selectBestImgFromWidth } from '@root/src/web/lib/selectBestImgFromWidth';
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
@@ -92,18 +93,9 @@ export const YoutubeBlockComponent = ({
             : 0;
 
         if (wrapperWidth && posterImage) {
-            const bestFitPosterImage = posterImage.reduce(
-                (
-                    acc: PosterImageType,
-                    cur: PosterImageType,
-                ): PosterImageType => {
-                    if (wrapperWidth < cur.width && cur.width < acc.width)
-                        return cur;
-                    return acc;
-                },
-                posterImage[0],
+            setSelectedPosterImage(
+                selectBestImgFromWidth(wrapperWidth, posterImage),
             );
-            setSelectedPosterImage(bestFitPosterImage);
         }
     }, [wrapperRef, posterImage, setSelectedPosterImage]);
 

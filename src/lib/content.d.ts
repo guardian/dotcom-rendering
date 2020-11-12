@@ -403,11 +403,6 @@ interface ImageSource {
     srcSet: SrcSetItem[];
 }
 
-interface SrcSetItem {
-    src: string;
-    width: number;
-}
-
 interface Image {
     index: number;
     fields: {

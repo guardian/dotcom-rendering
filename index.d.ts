@@ -372,6 +372,8 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 type PosterImageType = { url: string; width: number };
 
+type SrcSetItem = { src: string; width: number };
+
 interface CardType {
     linkTo: string;
     pillar: Pillar;
