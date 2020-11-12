@@ -37,7 +37,7 @@ describe('Commercial E2E tests', function () {
         });
 
         it(`It should check slots for a long article in Frontend`, function () {
-            Cypress.config('baseUrl', null);
+            Cypress.config('baseUrl', '');
             runLongReadTestFor(`${longReadURL}?dcr=false`);
         });
     });
