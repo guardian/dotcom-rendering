@@ -97,10 +97,10 @@ export const News = () => (
                                     {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
-                                        pillar: 'news',
-                                        designType: 'Article',
+                                        pillar: 'opinion',
+                                        designType: 'GuardianView',
                                         headlineText: headlines[3],
-                                        kickerText: kickers[2],
+                                        kickerText: 'Editorial',
                                         imageUrl: images[6],
                                         imagePosition: 'top',
                                         commentCount: 82224,
