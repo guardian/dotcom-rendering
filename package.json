@@ -45,7 +45,7 @@
     "@guardian/node-riffraff-artifact": "^0.1.9",
     "@guardian/src-brand": "^2.6.0",
     "@guardian/src-button": "^2.5.0",
-    "@guardian/src-ed-lines": "^2.5.0",
+    "@guardian/src-ed-lines": "^2.6.0",
     "@guardian/src-foundations": "^2.5.0",
     "@guardian/src-icons": "^2.5.0",
     "@guardian/src-radio": "^2.5.0",
