@@ -351,7 +351,7 @@ function richLinks(): void {
 							const placeholder = richLink.querySelector(
 								'.js-image',
 							);
-							if (placeholder && image) {
+							if (placeholder && typeof image === 'string') {
 								placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
 							}
 						}
