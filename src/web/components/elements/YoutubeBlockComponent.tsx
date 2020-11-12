@@ -79,14 +79,18 @@ export const YoutubeBlockComponent = ({
     origin,
 }: Props) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-
     const [selectedPosterImage, setSelectedPosterImage] = useState<
         PosterImageType
     >();
+
+    // We need to find the best candidate posterImage from array
+    // we therefore need to find the smallest candidate that is
+    // larger than the width of the wrapper
     useEffect(() => {
         const wrapperWidth = wrapperRef.current
             ? wrapperRef.current.clientWidth
             : 0;
+
         if (wrapperWidth && posterImage) {
             const bestFitPosterImage = posterImage.reduce(
                 (
