@@ -1861,9 +1861,23 @@
                 },
                 "posterSrc": {
                     "type": "string"
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "overrideImage": {
+                    "type": "string"
+                },
+                "youtubeIndex": {
+                    "type": "number"
                 }
             },
-            "required": ["_type", "assetId", "mediaTitle"]
+            "required": [
+                "_type",
+                "assetId",
+                "expired",
+                "mediaTitle"
+            ]
         },
         "Block": {
             "type": "object",
