@@ -329,15 +329,14 @@ function richLinks(): void {
 			if (articleId) {
 				const options = {
 					headers: {
-						Accept: 'text/html',
+						Accept: 'application/json',
 					},
 				};
-				void fetch(`${articleId}?richlink`, options).then(
-					(response) => {
-						const pillar = response.headers
-							.get('pillar')
-							?.toLowerCase();
-						const image = response.headers.get('image');
+				void fetch(`${articleId}?richlink`, options)
+					.then((resp) => resp.json())
+					.then((response) => {
+						const pillar = response?.pillar?.toLowerCase();
+						const image = response?.image;
 
 						if (pillar) {
 							richLink.classList.add(`js-${pillar}`);
@@ -347,8 +346,7 @@ function richLinks(): void {
 						if (placeholder && image) {
 							placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
 						}
-					},
-				);
+					});
 			}
 		});
 }
