@@ -32,7 +32,7 @@ export const GuardianView: CAPIType = {
                 { name: 'ct', value: 'article' },
                 { name: 'bl', value: ['commentisfree'] },
                 { name: 'p', value: 'ng' },
-                { name: 'sh', value: 'https://gu.com/p/d8bv8' },
+                { name: 'sh', value: 'https://theguardian.com/p/d8bv8' },
                 {
                     name: 'url',
                     value:
@@ -61,7 +61,7 @@ export const GuardianView: CAPIType = {
                 { name: 'bl', value: ['commentisfree'] },
                 { name: 'p', value: 'ng' },
                 { name: 'edition', value: 'us' },
-                { name: 'sh', value: 'https://gu.com/p/d8bv8' },
+                { name: 'sh', value: 'https://theguardian.com/p/d8bv8' },
                 {
                     name: 'url',
                     value:
@@ -89,7 +89,7 @@ export const GuardianView: CAPIType = {
                 { name: 'ct', value: 'article' },
                 { name: 'bl', value: ['commentisfree'] },
                 { name: 'p', value: 'ng' },
-                { name: 'sh', value: 'https://gu.com/p/d8bv8' },
+                { name: 'sh', value: 'https://theguardian.com/p/d8bv8' },
                 {
                     name: 'url',
                     value:
@@ -119,7 +119,7 @@ export const GuardianView: CAPIType = {
                 { name: 'ct', value: 'article' },
                 { name: 'bl', value: ['commentisfree'] },
                 { name: 'p', value: 'ng' },
-                { name: 'sh', value: 'https://gu.com/p/d8bv8' },
+                { name: 'sh', value: 'https://theguardian.com/p/d8bv8' },
                 {
                     name: 'url',
                     value:

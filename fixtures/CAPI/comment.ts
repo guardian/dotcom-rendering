@@ -28,7 +28,7 @@ export const comment: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8vmh',
+                    value: 'https://theguardian.com/p/d8vmh',
                 },
                 {
                     name: 'url',
@@ -78,7 +78,7 @@ export const comment: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8vmh',
+                    value: 'https://theguardian.com/p/d8vmh',
                 },
                 {
                     name: 'url',
@@ -132,7 +132,7 @@ export const comment: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8vmh',
+                    value: 'https://theguardian.com/p/d8vmh',
                 },
                 {
                     name: 'url',
@@ -186,7 +186,7 @@ export const comment: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8vmh',
+                    value: 'https://theguardian.com/p/d8vmh',
                 },
                 {
                     name: 'url',

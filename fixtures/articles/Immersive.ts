@@ -47,7 +47,7 @@ export const Immersive: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8epv',
+                    value: 'https://theguardian.com/p/d8epv',
                 },
                 {
                     name: 'p',
@@ -96,7 +96,7 @@ export const Immersive: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8epv',
+                    value: 'https://theguardian.com/p/d8epv',
                 },
                 {
                     name: 'p',
@@ -149,7 +149,7 @@ export const Immersive: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8epv',
+                    value: 'https://theguardian.com/p/d8epv',
                 },
                 {
                     name: 'p',
@@ -206,7 +206,7 @@ export const Immersive: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d8epv',
+                    value: 'https://theguardian.com/p/d8epv',
                 },
                 {
                     name: 'p',

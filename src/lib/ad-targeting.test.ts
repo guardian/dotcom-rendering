@@ -20,7 +20,7 @@ describe('buildAdTargeting', () => {
             p: 'ng',
             pa: 'f',
             s: 'money',
-            sh: 'https://gu.com/p/64ak8',
+            sh: 'https://theguardian.com/p/64ak8',
             su: ['0'],
             tn: ['news'],
             url:

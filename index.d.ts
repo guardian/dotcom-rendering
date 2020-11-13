@@ -293,39 +293,7 @@ interface CAPIType {
 type CAPIBrowserType = {
     designType: DesignType;
     pillar: Pillar;
-    config: {
-        frontendAssetsFullURL: string;
-        isDev: boolean;
-        ajaxUrl: string;
-        shortUrlId: string;
-        pageId: string;
-        isPaidContent: boolean;
-        showRelatedContent: boolean;
-        keywordIds: string;
-        ampIframeUrl: string;
-        ampPrebid: boolean;
-        permutive: boolean;
-        enableSentryReporting: boolean;
-        enableDiscussionSwitch: boolean;
-        slotBodyEnd: boolean;
-        isSensitive: boolean;
-        videoDuration: number;
-        edition: string;
-        section: string;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        sharedAdTargeting: { [key: string]: any };
-        adUnit: string;
-        idApiUrl: string;
-        discussionApiUrl: string;
-        discussionD2Uid: string;
-        discussionApiClientHeader: string;
-        dcrSentryDsn: string;
-        remoteBanner: boolean;
-        ausMoment2020Header: boolean;
-        switches: CAPIType['config']['switches'];
-        host?: string;
-        idUrl?: string;
-    };
+    config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
     editionLongForm: string;
@@ -361,6 +329,8 @@ type CAPIBrowserType = {
     timelineAtoms: TimelineBlockElement[];
     chartAtoms: ChartAtomBlockElement[];
     audioAtoms: AudioAtomBlockElement[];
+    youtubeBlockElement: YoutubeBlockElement[];
+    youtubeMainMediaBlockElement: YoutubeBlockElement[];
 };
 
 interface TagType {
@@ -598,6 +568,40 @@ interface ConfigType extends CommercialConfigType {
     brazeApiKey?: string;
 }
 
+interface ConfigTypeBrowser {
+    frontendAssetsFullURL: string;
+    isDev: boolean;
+    ajaxUrl: string;
+    shortUrlId: string;
+    pageId: string;
+    isPaidContent: boolean;
+    showRelatedContent: boolean;
+    keywordIds: string;
+    ampIframeUrl: string;
+    ampPrebid: boolean;
+    permutive: boolean;
+    enableSentryReporting: boolean;
+    enableDiscussionSwitch: boolean;
+    slotBodyEnd: boolean;
+    isSensitive: boolean;
+    videoDuration: number;
+    edition: string;
+    section: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    sharedAdTargeting: { [key: string]: any };
+    adUnit: string;
+    idApiUrl: string;
+    discussionApiUrl: string;
+    discussionD2Uid: string;
+    discussionApiClientHeader: string;
+    dcrSentryDsn: string;
+    remoteBanner: boolean;
+    ausMoment2020Header: boolean;
+    switches: CAPIType['config']['switches'];
+    host?: string;
+    idUrl?: string;
+}
+
 interface GADataType {
     pillar: Pillar;
     webTitle: string;
@@ -668,6 +672,8 @@ type IslandType =
     | 'timeline-atom'
     | 'sign-in-gate'
     | 'audio-atom'
+    | 'youtube-block'
+    | 'youtube-block-main-media'
     | 'chart-atom';
 
 interface TrailType {

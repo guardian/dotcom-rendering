@@ -7,6 +7,7 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
+import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -31,6 +32,8 @@ import { Hydrate } from '@frontend/web/components/Hydrate';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
+import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -44,13 +47,20 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+import { Display } from '@root/src/lib/display';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
-import { cmp } from '@guardian/consent-management-platform';
+import {
+    cmp,
+    onConsentChange,
+    getConsentFor,
+} from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import {
     submitComponentEvent,
     OphanComponentEvent,
 } from '../browser/ophan/ophan';
+import { trackPerformance } from '../browser/ga/ga';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -111,13 +121,6 @@ const hasCommentsHashInUrl = () => {
     return hash && hash === '#comments';
 };
 
-const decidePillar = (CAPI: CAPIBrowserType): Pillar => {
-    // We override the pillar to be opinion on Comment news pieces
-    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
-        return 'opinion';
-    return CAPI.pillar;
-};
-
 const componentEventHandler = (
     componentType: any,
     id: any,
@@ -163,6 +166,8 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [hashCommentId, setHashCommentId] = useState<number | undefined>(
         commentIdFromUrl(),
     );
+
+    const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
@@ -330,7 +335,24 @@ export const App = ({ CAPI, NAV }: Props) => {
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
 
+            // keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+            // mark: CONSENT_TIMING
+            let recordedConsentTime = false;
+            onConsentChange(() => {
+                if (!recordedConsentTime) {
+                    recordedConsentTime = true;
+                    cmp.willShowPrivacyMessage().then((willShow) => {
+                        trackPerformance(
+                            'consent',
+                            'acquired',
+                            willShow ? 'new' : 'existing',
+                        );
+                    });
+                }
+            });
+
             if (
+                CAPI.config.switches.auConsent ||
                 window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
             ) {
                 cmp.init({
@@ -344,9 +366,42 @@ export const App = ({ CAPI, NAV }: Props) => {
                 });
             }
         }
-    }, [countryCode, CAPI.config.switches.consentManagement]);
+    }, [
+        countryCode,
+        CAPI.config.switches.consentManagement,
+        CAPI.config.switches.auConsent,
+    ]);
+
+    // *****************
+    // *     ACast     *
+    // *****************
+    useEffect(() => {
+        onConsentChange((state: any) => {
+            // Should we use ad enabled audio? If so, then set the shouldUseAcast
+            // state to true, triggering a rerender of AudioAtom using a new track url
+            // (one with adverts)
+            const consentGiven = getConsentFor('acast', state);
+            const aCastisEnabled = CAPI.config.switches.acast;
+            const readerCanBeShownAds = !CAPI.isAdFreeUser;
+            const contentIsNotSensitive = !CAPI.config.isSensitive;
+            if (
+                aCastisEnabled &&
+                consentGiven &&
+                readerCanBeShownAds && // Eg. Not a subscriber
+                contentIsNotSensitive
+            ) {
+                setShouldUseAcast(true);
+            }
+        });
+    }, [
+        CAPI.config.switches.acast,
+        CAPI.isAdFreeUser,
+        CAPI.config.isSensitive,
+    ]);
 
     const pillar = decidePillar(CAPI);
+    const display: Display = decideDisplay(CAPI);
+    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     const handlePermalink = (commentId: number) => {
         window.location.hash = `#comment-${commentId}`;
@@ -387,6 +442,50 @@ export const App = ({ CAPI, NAV }: Props) => {
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
                 />
             </Hydrate>
+            {CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
+                <Hydrate
+                    key={index}
+                    root="youtube-block-main-media"
+                    index={youtubeBlock.youtubeIndex}
+                >
+                    <YoutubeBlockComponent
+                        display={display}
+                        designType={CAPI.designType}
+                        element={youtubeBlock}
+                        pillar={pillar}
+                        hideCaption={false}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        adTargeting={adTargeting}
+                        isMainMedia={false}
+                        overlayImage={youtubeBlock.overrideImage}
+                        duration={youtubeBlock.duration}
+                        origin={CAPI.config.host}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
+                <Hydrate
+                    key={index}
+                    root="youtube-block"
+                    index={youtubeBlock.youtubeIndex}
+                >
+                    <YoutubeBlockComponent
+                        display={display}
+                        designType={CAPI.designType}
+                        element={youtubeBlock}
+                        pillar={pillar}
+                        hideCaption={false}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        adTargeting={adTargeting}
+                        isMainMedia={false}
+                        overlayImage={youtubeBlock.overrideImage}
+                        duration={youtubeBlock.duration}
+                        origin={CAPI.config.host}
+                    />
+                </Hydrate>
+            ))}
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
                     <>
@@ -435,6 +534,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         kicker={audioAtom.kicker}
                         title={audioAtom.title}
                         pillar={toTypesPillar(pillar)}
+                        shouldUseAcast={shouldUseAcast}
                     />
                 </Hydrate>
             ))}

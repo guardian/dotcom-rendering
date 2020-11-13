@@ -47,7 +47,7 @@ export const showcaseReviewCAPI: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d4zdy',
+                    value: 'https://theguardian.com/p/d4zdy',
                 },
                 {
                     name: 'p',
@@ -98,7 +98,7 @@ export const showcaseReviewCAPI: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d4zdy',
+                    value: 'https://theguardian.com/p/d4zdy',
                 },
                 {
                     name: 'p',
@@ -153,7 +153,7 @@ export const showcaseReviewCAPI: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d4zdy',
+                    value: 'https://theguardian.com/p/d4zdy',
                 },
                 {
                     name: 'p',
@@ -212,7 +212,7 @@ export const showcaseReviewCAPI: CAPIType = {
                 },
                 {
                     name: 'sh',
-                    value: 'https://gu.com/p/d4zdy',
+                    value: 'https://theguardian.com/p/d4zdy',
                 },
                 {
                     name: 'p',
