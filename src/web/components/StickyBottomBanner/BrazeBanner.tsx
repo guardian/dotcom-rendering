@@ -92,7 +92,7 @@ const getMessageFromBraze = async (
         minimumIntervalBetweenTriggerActionsInSeconds: 0,
     });
 
-    return new Promise((resolve) => {
+    const canShowPromise: Promise<CanShowResult> = new Promise((resolve) => {
 
         appboy.subscribeToInAppMessage((message: any) => {
             const { extras } = message;
@@ -116,12 +116,6 @@ const getMessageFromBraze = async (
             };
 
             if (extras) {
-                const appboyTimeTaken = appboyTiming.end()
-                record({
-                    component: 'braze-appboy-timing',
-                    value: appboyTimeTaken,
-                });
-
                 const meta = {
                     dataFromBraze: extras,
                     logImpressionWithBraze,
@@ -137,6 +131,20 @@ const getMessageFromBraze = async (
         appboy.changeUser(brazeUuid);
         appboy.openSession();
     });
+
+    canShowPromise.then(() => {
+        const appboyTimeTaken = appboyTiming.end();
+
+        record({
+            component: 'braze-appboy-timing',
+            value: appboyTimeTaken,
+        });
+    }).catch(() => {
+        // eslint-disable-next-line no-console
+        console.log("Appboy Timing failed.");
+    });
+
+    return canShowPromise
 };
 
 const getBrazeMetaFromQueryString = (): Meta | null => {
