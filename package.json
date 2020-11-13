@@ -78,7 +78,7 @@
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-airbnb-typescript": "^6.3.0",
-        "eslint-config-prettier": "^6.11.0",
+        "eslint-config-prettier": "^6.15.0",
         "eslint-import-resolver-babel-module": "^5.1.2",
         "eslint-plugin-cypress": "^2.11.2",
         "eslint-plugin-import": "^2.18.2",
