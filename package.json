@@ -52,6 +52,7 @@
         "@guardian/src-svgs": "^2.4.0",
         "@guardian/src-text-area": "^2.4.0",
         "@guardian/src-text-input": "^2.4.0",
+        "@hkdobrev/run-if-changed": "^0.3.1",
         "@sentry/browser": "^5.21.4",
         "@types/ajv": "^1.0.0",
         "@types/lodash.debounce": "^4.0.6",
@@ -261,5 +262,9 @@
     "optionalDependencies": {
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
+    },
+    "run-if-changed": {
+        "src/lib/content.d.ts": "make gen-schema",
+        "src/lib/index.d.ts": "make gen-schema"
     }
 }
