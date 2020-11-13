@@ -189,6 +189,11 @@ interface MapBlockElement {
     caption?: string;
 }
 
+interface MediaAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+    id: string;
+}
+
 interface MultiImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
     images: ImageBlockElement[];
@@ -356,6 +361,7 @@ type CAPIElement =
     | InteractiveAtomBlockElement
     | InteractiveBlockElement
     | MapBlockElement
+    | MediaAtomBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement
     | PullquoteBlockElement
