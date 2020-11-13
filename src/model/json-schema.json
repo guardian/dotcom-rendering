@@ -84,6 +84,9 @@
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/MediaAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
@@ -1571,6 +1574,24 @@
                 "width"
             ]
         },
+        "MediaAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.MediaAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
         "MultiImageBlockElement": {
             "type": "object",
             "properties": {
@@ -2182,6 +2203,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/MediaAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
