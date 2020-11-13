@@ -79,7 +79,7 @@ const makeSources = (
 const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
 
-    return selectBestImgFromWidth(300, inlineSrcSets).src;
+    return (selectBestImgFromWidth(300, inlineSrcSets) as SrcSetItem).src;
 };
 
 const starsWrapper = css`

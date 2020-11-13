@@ -94,7 +94,10 @@ export const YoutubeBlockComponent = ({
 
         if (wrapperWidth && posterImage) {
             setSelectedPosterImage(
-                selectBestImgFromWidth(wrapperWidth, posterImage),
+                selectBestImgFromWidth(
+                    wrapperWidth,
+                    posterImage,
+                ) as PosterImageType,
             );
         }
     }, [wrapperRef, posterImage, setSelectedPosterImage]);
