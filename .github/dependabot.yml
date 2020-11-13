@@ -7,18 +7,9 @@
 
 version: 2
 updates:
-  # @guardian NPM packages
+  # NPM packages
   - package-ecosystem: "npm" 
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10
-    allow: "@guardian/*"
-    lables:
-      - "Guardian Dependency"
-  # General NPM Dependencies
-  - package-ecosystem: "npm" 
-    directory: "/" 
-    schedule:
-      interval: "weekly"
     open-pull-requests-limit: 10
