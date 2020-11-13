@@ -34,7 +34,7 @@ export const CardFooter = ({
     mediaMeta,
     commentCount,
 }: Props) => {
-    if (designType === 'Comment') {
+    if (designType === 'Comment' || designType === 'GuardianView') {
         return (
             <footer className={spaceBetween}>
                 {age}

@@ -66,18 +66,22 @@ function renderElement(
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
-                <YoutubeBlockComponent
-                    display={display}
-                    designType={designType}
-                    key={i}
-                    element={element}
-                    pillar={pillar}
-                    hideCaption={hideCaption}
-                    // eslint-disable-next-line jsx-a11y/aria-role
-                    role="inline"
-                    adTargeting={adTargeting}
-                    isMainMedia={true}
-                />
+                <div key={i} id={`youtube-block-main-media-${i}`}>
+                    <YoutubeBlockComponent
+                        display={display}
+                        designType={designType}
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                        hideCaption={hideCaption}
+                        // eslint-disable-next-line jsx-a11y/aria-role
+                        role="inline"
+                        adTargeting={adTargeting}
+                        isMainMedia={true}
+                        overlayImage={element.overrideImage}
+                        duration={element.duration}
+                    />
+                </div>
             );
         default:
             // eslint-disable-next-line no-console

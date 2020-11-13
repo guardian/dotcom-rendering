@@ -8,7 +8,6 @@ import { SvgAlertRound } from '@guardian/src-icons';
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import { asFormat } from '@root/src/lib/format';
 
 type Props = {
     display: Display;
@@ -24,6 +23,7 @@ type Props = {
     width?: number;
     title?: string;
     duration?: number; // in seconds
+    origin?: string;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -74,6 +74,7 @@ export const YoutubeBlockComponent = ({
     width = 460,
     title = 'YouTube video player',
     duration,
+    origin,
 }: Props) => {
     const shouldLimitWidth =
         !isMainMedia &&
@@ -87,7 +88,12 @@ export const YoutubeBlockComponent = ({
                     margin-bottom: 16px;
                 `}
             >
-                <div className={expiredOverlayStyles(element.overrideImage)}>
+                <div
+                    className={
+                        element.overrideImage &&
+                        expiredOverlayStyles(element.overrideImage)
+                    }
+                >
                     <div className={expiredTextWrapperStyles}>
                         <div className={expiredSVGWrapperStyles}>
                             <SvgAlertRound />
@@ -122,7 +128,6 @@ export const YoutubeBlockComponent = ({
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
-                format={asFormat(pillar, display, designType)}
                 videoMeta={element}
                 overlayImage={overlayImage}
                 adTargeting={adTargeting}
@@ -130,6 +135,7 @@ export const YoutubeBlockComponent = ({
                 width={width}
                 title={title}
                 duration={duration}
+                origin={origin}
             />
             {!hideCaption && (
                 <Caption

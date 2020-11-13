@@ -549,7 +549,7 @@ export const data = {
                         },
                         {
                             name: 'sh',
-                            value: 'https://gu.com/p/64ak8',
+                            value: 'https://theguardian.com/p/64ak8',
                         },
                         {
                             name: 'su',
@@ -592,7 +592,7 @@ export const data = {
                         },
                         {
                             name: 'sh',
-                            value: 'https://gu.com/p/64ak8',
+                            value: 'https://theguardian.com/p/64ak8',
                         },
                         {
                             name: 'su',
@@ -639,7 +639,7 @@ export const data = {
                         },
                         {
                             name: 'sh',
-                            value: 'https://gu.com/p/64ak8',
+                            value: 'https://theguardian.com/p/64ak8',
                         },
                         {
                             name: 'su',
@@ -690,7 +690,7 @@ export const data = {
                         },
                         {
                             name: 'sh',
-                            value: 'https://gu.com/p/64ak8',
+                            value: 'https://theguardian.com/p/64ak8',
                         },
                         {
                             name: 'su',
@@ -779,7 +779,7 @@ export const data = {
                             },
                             {
                                 name: 'sh',
-                                value: 'https://gu.com/p/64ak8',
+                                value: 'https://theguardian.com/p/64ak8',
                             },
                             {
                                 name: 'su',
@@ -825,7 +825,7 @@ export const data = {
                             },
                             {
                                 name: 'sh',
-                                value: 'https://gu.com/p/64ak8',
+                                value: 'https://theguardian.com/p/64ak8',
                             },
                             {
                                 name: 'su',
@@ -875,7 +875,7 @@ export const data = {
                             },
                             {
                                 name: 'sh',
-                                value: 'https://gu.com/p/64ak8',
+                                value: 'https://theguardian.com/p/64ak8',
                             },
                             {
                                 name: 'su',
@@ -929,7 +929,7 @@ export const data = {
                             },
                             {
                                 name: 'sh',
-                                value: 'https://gu.com/p/64ak8',
+                                value: 'https://theguardian.com/p/64ak8',
                             },
                             {
                                 name: 'su',

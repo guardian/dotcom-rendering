@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { Display } from '@root/src/lib/display';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -9,19 +11,6 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 type Props = {
     CAPI: CAPIType;
     NAV: NavType;
-};
-
-const decideDisplay = (CAPI: CAPIType): Display => {
-    if (CAPI.isImmersive) return Display.Immersive;
-    if (CAPI.pageType.hasShowcaseMainElement) return Display.Showcase;
-    return Display.Standard;
-};
-
-const decidePillar = (CAPI: CAPIType): Pillar => {
-    // We override the pillar to be opinion on Comment news pieces
-    if (CAPI.designType === 'Comment' && CAPI.pillar === 'news')
-        return 'opinion';
-    return CAPI.pillar;
 };
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {

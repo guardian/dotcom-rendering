@@ -23,7 +23,7 @@ const trails: TrailType[] = [
         webPublicationDate: '2020-09-15T13:46:52.000Z',
         headline:
             'UK coronavirus: testing shortage will take weeks to resolve, says Matt Hancock',
-        shortUrl: 'https://gu.com/p/ezyq3',
+        shortUrl: 'https://theguardian.com/p/ezyq3',
     },
     {
         url:
@@ -39,7 +39,7 @@ const trails: TrailType[] = [
         designType: 'Article',
         webPublicationDate: '2020-09-15T11:44:46.000Z',
         headline: 'Ex-Tory MP jailed for two years for sexual assaults',
-        shortUrl: 'https://gu.com/p/ezmac',
+        shortUrl: 'https://theguardian.com/p/ezmac',
         kickerText: 'Charlie Elphicke',
     },
     {
@@ -56,7 +56,7 @@ const trails: TrailType[] = [
         designType: 'Article',
         webPublicationDate: '2020-09-15T13:24:45.000Z',
         headline: 'No 10 rejects any concessions for rebel Tories on bill',
-        shortUrl: 'https://gu.com/p/ezn2d',
+        shortUrl: 'https://theguardian.com/p/ezn2d',
         kickerText: 'Brexit',
     },
     {
@@ -74,7 +74,7 @@ const trails: TrailType[] = [
         webPublicationDate: '2020-09-15T13:15:36.000Z',
         headline:
             'World fails to meet a single target to stop destruction of nature – UN report',
-        shortUrl: 'https://gu.com/p/ezgye',
+        shortUrl: 'https://theguardian.com/p/ezgye',
         kickerText: 'Environment',
     },
     {
@@ -91,7 +91,7 @@ const trails: TrailType[] = [
         designType: 'Article',
         webPublicationDate: '2020-09-15T10:41:04.000Z',
         headline: 'Poisoned Russian opposition leader posts hospital photo',
-        shortUrl: 'https://gu.com/p/ezmtk',
+        shortUrl: 'https://theguardian.com/p/ezmtk',
         kickerText: "'Hi, this is Navalny'",
     },
     {
@@ -109,7 +109,7 @@ const trails: TrailType[] = [
         webPublicationDate: '2020-09-15T11:00:32.000Z',
         headline:
             'Gary Lineker takes 25% pay cut and agrees to tweet more carefully',
-        shortUrl: 'https://gu.com/p/ezmcp',
+        shortUrl: 'https://theguardian.com/p/ezmcp',
         kickerText: 'BBC',
     },
     {
@@ -126,7 +126,7 @@ const trails: TrailType[] = [
         designType: 'Article',
         webPublicationDate: '2020-09-15T09:30:22.000Z',
         headline: 'Former ambassador warns of election violence',
-        shortUrl: 'https://gu.com/p/ezk38',
+        shortUrl: 'https://theguardian.com/p/ezk38',
         kickerText: '‘The US feels very volatile’',
     },
     {
@@ -144,7 +144,7 @@ const trails: TrailType[] = [
         webPublicationDate: '2020-09-15T13:04:57.000Z',
         headline:
             "Trump threatens to retaliate to any attack with '1,000 times greater' force",
-        shortUrl: 'https://gu.com/p/ezmpz',
+        shortUrl: 'https://theguardian.com/p/ezmpz',
         kickerText: 'Iran',
     },
     {
@@ -162,7 +162,7 @@ const trails: TrailType[] = [
         webPublicationDate: '2020-09-15T13:28:24.000Z',
         headline:
             'Government vows to empty Lesbos of all refugees by Easter after fire',
-        shortUrl: 'https://gu.com/p/ezm92',
+        shortUrl: 'https://theguardian.com/p/ezm92',
         kickerText: 'Greece',
     },
     {
@@ -179,7 +179,7 @@ const trails: TrailType[] = [
         designType: 'Article',
         webPublicationDate: '2020-09-15T12:21:07.000Z',
         headline: 'Most diverse shortlist ever as Hilary Mantel misses out',
-        shortUrl: 'https://gu.com/p/ezmt9',
+        shortUrl: 'https://theguardian.com/p/ezmt9',
         kickerText: 'Booker prize 2020',
     },
 ];

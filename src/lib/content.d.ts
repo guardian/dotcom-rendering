@@ -189,6 +189,11 @@ interface MapBlockElement {
     caption?: string;
 }
 
+interface MediaAtomBlockElement {
+    _type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+    id: string;
+}
+
 interface MultiImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
     images: ImageBlockElement[];
@@ -328,7 +333,8 @@ interface YoutubeBlockElement {
     duration?: number;
     posterSrc?: string;
     expired: boolean;
-    overrideImage: string;
+    overrideImage?: string;
+    youtubeIndex?: number;
 }
 
 type CAPIElement =
@@ -355,6 +361,7 @@ type CAPIElement =
     | InteractiveAtomBlockElement
     | InteractiveBlockElement
     | MapBlockElement
+    | MediaAtomBlockElement
     | MultiImageBlockElement
     | ProfileAtomBlockElement
     | PullquoteBlockElement
