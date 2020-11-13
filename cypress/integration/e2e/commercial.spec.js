@@ -36,9 +36,12 @@ describe('Commercial E2E tests', function () {
             runLongReadTestFor(`Article?url=${longReadURL}`);
         });
 
-        it(`It should check slots for a long article in Frontend`, function () {
-            Cypress.config('baseUrl', '');
-            runLongReadTestFor(`${longReadURL}?dcr=false`);
-        });
+        // Uncomment to check Locally.
+        // It seems overriding the baseURL works fine locally but hangs on CI.
+
+        // it(`It should check slots for a long article in Frontend`, function () {
+        //     Cypress.config('baseUrl', '');
+        //     runLongReadTestFor(`${longReadURL}?dcr=false`);
+        // });
     });
 });
