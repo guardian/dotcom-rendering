@@ -142,7 +142,9 @@ clear: # private
 	@clear
 
 gen-schema:
+	$(call log, "Generating new schema")
 	@node scripts/json-schema/gen-schema.js
+	@git add src/model/json-schema.json
 
 perf-test:
 	@node scripts/perf/perf-test.js
