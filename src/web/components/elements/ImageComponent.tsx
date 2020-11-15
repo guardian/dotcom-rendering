@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
-import { Picture, PictureSource } from '@root/src/web/components/Picture';
+import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -22,78 +22,6 @@ type Props = {
     isMainMedia?: boolean;
     starRating?: number;
     title?: string;
-};
-
-const selectScrSetItemForWidth = (
-    desiredWidth: number,
-    inlineSrcSets: SrcSetItem[],
-): SrcSetItem => {
-    const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
-
-    return sorted.reduce((best, current) => {
-        if (current.width < best.width && current.width >= desiredWidth) {
-            return current;
-        }
-
-        return best;
-    });
-};
-
-const getSrcSetsForWeighting = (
-    imageSources: ImageSource[],
-    forWeighting: RoleType,
-): SrcSetItem[] =>
-    imageSources.filter(
-        ({ weighting }) =>
-            // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
-            weighting.toLowerCase() === forWeighting.toLowerCase(),
-    )[0].srcSet;
-
-const makePictureSource = (
-    hidpi: boolean,
-    minWidth: number,
-    srcSet: SrcSetItem,
-): PictureSource => {
-    return {
-        hidpi,
-        minWidth,
-        width: srcSet.width,
-        srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
-    };
-};
-
-const makeSources = (
-    imageSources: ImageSource[],
-    role: RoleType,
-): PictureSource[] => {
-    const inlineSrcSets = getSrcSetsForWeighting(imageSources, role);
-    const sources: PictureSource[] = [];
-    inlineSrcSets
-        .map((item) => item.width)
-        .forEach((width) => {
-            sources.push(
-                makePictureSource(
-                    true,
-                    width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
-                ),
-            );
-            sources.push(
-                makePictureSource(
-                    false,
-                    width,
-                    selectScrSetItemForWidth(width, inlineSrcSets),
-                ),
-            );
-        });
-
-    return sources;
-};
-
-const getFallback: (imageSources: ImageSource[]) => string = (imageSources) => {
-    const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
-
-    return selectScrSetItemForWidth(300, inlineSrcSets).src;
 };
 
 const starsWrapper = css`
@@ -291,8 +219,6 @@ export const ImageComponent = ({
     starRating,
     title,
 }: Props) => {
-    const { imageSources } = element;
-    const sources = makeSources(imageSources, role);
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -333,9 +259,9 @@ export const ImageComponent = ({
                 `}
             >
                 <Picture
-                    sources={sources}
+                    role={role}
+                    imageSources={element.imageSources}
                     alt={element.data.alt || ''}
-                    src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
@@ -362,9 +288,9 @@ export const ImageComponent = ({
                 `}
             >
                 <Picture
-                    sources={sources}
+                    role={role}
+                    imageSources={element.imageSources}
                     alt={element.data.alt || ''}
-                    src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
@@ -391,9 +317,9 @@ export const ImageComponent = ({
                 `}
             >
                 <Picture
-                    sources={sources}
+                    role={role}
+                    imageSources={element.imageSources}
                     alt={element.data.alt || ''}
-                    src={getFallback(element.imageSources)}
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
@@ -419,7 +345,8 @@ export const ImageComponent = ({
                                     }
                                 `}
                             >
-                                <CaptionToggle />
+                                {/* CaptionToggle contains the input with id #the-checkbox */}
+                                <CaptionToggle />{' '}
                                 <div id="the-caption">
                                     <Caption
                                         display={display}
