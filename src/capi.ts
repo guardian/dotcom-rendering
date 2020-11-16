@@ -146,10 +146,10 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
 
 const requiresInlineStyles = (content: Content): boolean => {
 	return !!(
-		content?.fields?.commentable ||
-		content?.atoms?.quizzes ||
-		content?.atoms?.audios ||
-		content?.atoms?.charts
+		content.fields?.commentable ??
+		content.atoms?.quizzes ??
+		content.atoms?.audios ??
+		content.atoms?.charts
 	);
 };
 
