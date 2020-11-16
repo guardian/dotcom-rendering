@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
-import { Picture } from '@root/src/web/components/Picture';
+import { Img } from 'src/web/components/Img';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -258,7 +258,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Picture
+                <Img
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}
@@ -287,7 +287,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Picture
+                <Img
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}
@@ -316,7 +316,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Picture
+                <Img
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}

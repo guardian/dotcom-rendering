@@ -31,13 +31,6 @@ const getFallbackSrc = (srcSets: SrcSetItem[]): string => {
     return getClosestSetForWidth(300, srcSets).src;
 };
 
-// const getSrcSetsForRole = (
-//     role: RoleType,
-//     imageSources: ImageSource[],
-// ): SrcSetItem[] | undefined => {
-//     return imageSources.find((source) => source.weighting === role)?.srcSet;
-// };
-
 const getSrcSetsForRole = (
     role: RoleType,
     imageSources: ImageSource[],
@@ -84,7 +77,7 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
     }
 };
 
-export const Picture = ({
+export const Img = ({
     imageSources,
     role,
     alt,
