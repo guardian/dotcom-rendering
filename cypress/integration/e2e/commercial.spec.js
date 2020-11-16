@@ -1,6 +1,7 @@
 import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { disableCMP } from '../../lib/disableCMP';
+import { skipOn } from '@cypress/skip-test';
 
 describe('Commercial E2E tests', function () {
     before(getPolyfill);
@@ -36,12 +37,13 @@ describe('Commercial E2E tests', function () {
             runLongReadTestFor(`Article?url=${longReadURL}`);
         });
 
-        // Uncomment to check Locally.
-        // It seems overriding the baseURL works fine locally but hangs on CI.
-
-        // it(`It should check slots for a long article in Frontend`, function () {
-        //     Cypress.config('baseUrl', '');
-        //     runLongReadTestFor(`${longReadURL}?dcr=false`);
-        // });
+        // Skipping only on CI because, overriding the baseURL works fine locally but hangs on CI.
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        skipOn(Cypress.env('TEAMCITY') === 'true', () => {
+            it(`It should check slots for a long article in Frontend`, function () {
+                Cypress.config('baseUrl', '');
+                runLongReadTestFor(`${longReadURL}?dcr=false`);
+            });
+        });
     });
 });
