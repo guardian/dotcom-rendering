@@ -1585,10 +1585,41 @@
                 },
                 "id": {
                     "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VideoAssets"
+                    }
+                },
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
+                "assets",
                 "id"
             ]
         },

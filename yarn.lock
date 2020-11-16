@@ -2196,10 +2196,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.0.9.tgz#5e2ae5e5701314de4f3def000fe2cf8355eed086"
-  integrity sha512-viuUAFnS7d8/QQFlt7mSQJKHySg/87IXmJArJWF43k6qfDmRGGjwPiJdiGKXEHwR8KgyTMSDzk1pSJ1NfzATiQ==
+"@guardian/atoms-rendering@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.4.1.tgz#357be3f0b21d80b5c6d5b879cdb150421a08b1e2"
+  integrity sha512-PMdJ8QmkYMIt8Vypr7QyZC5q8WQCT+Pazbs8vb9OZ7oOnNyMydyNGvGgxD8j0wCNFohtM/pCl6fm7W41p2EDOA==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"

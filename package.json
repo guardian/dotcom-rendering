@@ -33,11 +33,11 @@
     },
     "dependencies": {
         "@braze/web-sdk-core": "^3.0.0",
-        "@emotion/core": "^10.0.35",
         "@cypress/skip-test": "^2.5.0",
+        "@emotion/core": "^10.0.35",
         "@guardian/ab-core": "^2.0.0",
         "@guardian/ab-react": "^2.0.1",
-        "@guardian/atoms-rendering": "^2.0.9",
+        "@guardian/atoms-rendering": "^2.4.1",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/braze-components": "^0.0.14",
         "@guardian/consent-management-platform": "^6.6.0",
