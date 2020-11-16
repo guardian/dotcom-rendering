@@ -62,7 +62,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
 const innerStyles = (designType: DesignType) => {
     const baseStyles = css`
         ${headline.large({ fontWeight: 'bold' })}
-        font-size: 121px;
+        font-size: 118px;
         line-height: 99px;
         vertical-align: text-top;
         pointer-events: none;
