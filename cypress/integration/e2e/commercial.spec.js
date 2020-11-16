@@ -41,6 +41,7 @@ describe('Commercial E2E tests', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         skipOn(Cypress.env('CI') === 'true', () => {
             it(`It should check slots for a long article in Frontend`, function () {
+                cy.log(process.env);
                 Cypress.config('baseUrl', '');
                 runLongReadTestFor(`${longReadURL}?dcr=false`);
             });
