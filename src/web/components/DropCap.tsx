@@ -63,7 +63,7 @@ const innerStyles = (designType: DesignType) => {
     const baseStyles = css`
         ${headline.large({ fontWeight: 'bold' })}
         font-size: 121px;
-        line-height: 0.82;
+        line-height: 99px;
         vertical-align: text-top;
         pointer-events: none;
         margin-right: ${space[1]}px;
