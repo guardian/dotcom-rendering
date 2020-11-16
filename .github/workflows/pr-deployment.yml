@@ -1,16 +1,16 @@
 name: PR deployment
 on:
   pull_request:
-    types: [ opened, synchronize ]
+    types: [labeled]
+
 jobs:
     server:
+        # We only want to run the app if the PR Deployment label has been added
+        if: ${{ github.event.label.id == 2500798832 }}
+
         name: server
         runs-on: ubuntu-latest
         steps:
-            - name: Kill any other PR deployments on this branch
-              uses: rokroskar/workflow-run-cleanup-action@master
-              env:
-                GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
             - name: Checkout code
               uses: actions/checkout@v1
             - name: Use Node.js 10.15.3
