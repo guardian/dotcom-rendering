@@ -34,8 +34,6 @@ describe('Commercial E2E tests', function () {
 
     describe('Ad slot Parity between DCR and Frontend for a long read', function () {
         it(`It should check slots for a long article in DCR`, function () {
-            console.log(Cypress.env('TEAMCITY'));
-            cy.log(Cypress.env('TEAMCITY'));
             runLongReadTestFor(`Article?url=${longReadURL}`);
         });
 
