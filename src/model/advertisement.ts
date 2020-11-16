@@ -19,68 +19,48 @@ const adSizeNameToValues = (name: string): [number, number] => {
         // standard ad sizes
         case 'billboard':
             return [970, 250];
-            break;
         case 'leaderboard':
             return [728, 90];
-            break;
         case 'mpu':
             return [300, 250];
-            break;
         case 'halfPage':
             return [300, 600];
-            break;
         case 'portrait':
             return [300, 1050];
-            break;
         case 'skyscraper':
             return [160, 600];
-            break;
         case 'mobilesticky':
             return [320, 50];
-            break;
 
         // dfp proprietary ad sizes
         case 'fluid':
             return [0, 0];
-            break;
         case 'outOfPage':
             return [1, 1];
-            break;
         case 'googleCard':
             return [300, 274];
-            break;
 
         // guardian proprietary ad sizes
         case 'video':
             return [620, 1];
-            break;
         case 'outstreamDesktop':
             return [620, 350];
-            break;
         case 'outstreamGoogleDesktop':
             return [550, 310];
-            break;
         case 'outstreamMobile':
             return [300, 197];
-            break;
         case 'merchandisingHighAdFeature':
             return [88, 89];
-            break;
         case 'merchandisingHigh':
             return [88, 87];
-            break;
         case 'merchandising':
             return [88, 88];
-            break;
         case 'inlineMerchandising':
             return [88, 85];
-            break;
         case 'fabric':
             return [88, 71];
-            break;
         case 'empty':
             return [2, 2];
-            break;
 
         // default
         default:
