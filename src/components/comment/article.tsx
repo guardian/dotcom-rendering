@@ -34,7 +34,7 @@ import {
 // ----- Styles ----- //
 
 const Styles = css`
-	background: ${opinion[800]};
+	background: ${neutral[97]};
 `;
 
 const DarkStyles = darkModeCss`
