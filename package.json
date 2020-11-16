@@ -151,7 +151,7 @@
         "@types/lodash.get": "^4.4.4",
         "@types/node": "^10.12.0",
         "@types/raven-js": "^3.10.0",
-        "@types/react": "^16.9.38",
+        "@types/react": "^16.9.56",
         "@types/react-dom": "^16.0.7",
         "@types/react-test-renderer": "^16.0.3",
         "@types/webpack": "^4.4.11",
