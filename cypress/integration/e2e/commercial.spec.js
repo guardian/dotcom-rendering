@@ -34,13 +34,14 @@ describe('Commercial E2E tests', function () {
 
     describe('Ad slot Parity between DCR and Frontend for a long read', function () {
         it(`It should check slots for a long article in DCR`, function () {
-            cy.log(process.env);
+            console.log(Cypress.env('TEAMCITY'));
+            cy.log(Cypress.env('TEAMCITY'));
             runLongReadTestFor(`Article?url=${longReadURL}`);
         });
 
         // Skipping only on CI because, overriding the baseURL works fine locally but hangs on CI.
         // eslint-disable-next-line mocha/no-setup-in-describe
-        skipOn(Cypress.env('CI') === 'true', () => {
+        skipOn(Cypress.env('TEAMCITY') === 'true', () => {
             it(`It should check slots for a long article in Frontend`, function () {
                 Cypress.config('baseUrl', '');
                 runLongReadTestFor(`${longReadURL}?dcr=false`);
