@@ -148,10 +148,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
                         <MoustacheSection name="ticker">
                             <Ticker
                                 percentage={moustacheVariable('percentage')}
-                                currentAmountFigure={moustacheVariable('currentAmountFigure')}
-                                currentAmountCaption={moustacheVariable('currentAmountCaption')}
-                                goalAmountFigure={moustacheVariable('goalAmountFigure')}
-                                goalAmountCaption={moustacheVariable('goalAmountCaption')}
+                                topLeft={moustacheVariable('topLeft')}
+                                bottomLeft={moustacheVariable('bottomLeft')}
+                                topRight={moustacheVariable('topRight')}
+                                bottomRight={moustacheVariable('bottomRight')}
                             />
                         </MoustacheSection>
 
