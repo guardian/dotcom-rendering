@@ -7202,15 +7202,19 @@ csstype@^2.5.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
   integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
 
+curlyquotes@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.5.5.tgz#f46dfa04bf477fbbda77bbd1572d5412f71f13b4"
+  integrity sha512-r1JwsUV8BJyaHP2WCfkAof8ut07bC8k1RGU/1idDqlTpUzz5e4EiOn8AsocpsYYbp0J2EWGb67aDNwdbOd9gjg==
 csstype@^3.0.2:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.5.tgz#7fdec6a28a67ae18647c51668a9ff95bb2fa7bb8"
   integrity sha512-uVDi8LpBUKQj6sdxNaTetL6FpeCqTjOvAQuQUa/qAqq8oOd4ivkbhgnqayl0dnPal8Tb/yB1tF+gOvCBiicaiQ==
 
-curlyquotes@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.4.3.tgz#e962d94e2afc14df11b150aade7c55b14ec03538"
-  integrity sha512-4t0j5hA0Z4GQdSNWZk9lZ17Glxngcd2yV6pgeZsa3T5mK3YhrRUdpPjF8BUtU8hri+Dv4rw5JX16QlwCP+mwOQ==
+curlyquotes@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.5.5.tgz#f46dfa04bf477fbbda77bbd1572d5412f71f13b4"
+  integrity sha512-r1JwsUV8BJyaHP2WCfkAof8ut07bC8k1RGU/1idDqlTpUzz5e4EiOn8AsocpsYYbp0J2EWGb67aDNwdbOd9gjg==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
