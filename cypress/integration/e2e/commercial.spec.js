@@ -34,6 +34,7 @@ describe('Commercial E2E tests', function () {
 
     describe('Ad slot Parity between DCR and Frontend for a long read', function () {
         it(`It should check slots for a long article in DCR`, function () {
+            cy.log(process.env);
             runLongReadTestFor(`Article?url=${longReadURL}`);
         });
 
@@ -41,7 +42,6 @@ describe('Commercial E2E tests', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         skipOn(Cypress.env('CI') === 'true', () => {
             it(`It should check slots for a long article in Frontend`, function () {
-                cy.log(process.env);
                 Cypress.config('baseUrl', '');
                 runLongReadTestFor(`${longReadURL}?dcr=false`);
             });
