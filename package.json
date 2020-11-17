@@ -109,7 +109,7 @@
         "prettier-eslint": "^11.0.0",
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
-        "sanitize-html": "^1.27.0",
+        "sanitize-html": "^2.1.2",
         "web-vitals": "^0.2.4"
     },
     "devDependencies": {
