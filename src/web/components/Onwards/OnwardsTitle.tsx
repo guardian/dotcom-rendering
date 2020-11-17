@@ -18,8 +18,8 @@ const linkStyles = css`
 const headerStyles = css`
     ${headline.xsmall({ fontWeight: 'bold' })};
     color: ${text.primary};
-    padding-bottom: 14px;
-    padding-top: 6px;
+    padding-bottom: ${space[2]}px;
+    padding-top: ${space[1]}px;
     margin-left: 0;
 
     ${from.tablet} {
