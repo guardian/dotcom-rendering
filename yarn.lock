@@ -814,6 +814,14 @@
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-syntax-nullish-coalescing-operator" "^7.8.0"
 
+"@babel/plugin-proposal-nullish-coalescing-operator@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.12.1.tgz#3ed4fff31c015e7f3f1467f190dbe545cd7b046c"
+  integrity sha512-nZY0ESiaQDI1y96+jk6VxMOaL4LPo/QDHBqL+SF3/vl6dHkTwHlOI8L4ZwuRBHgakRBw5zsVylel7QPbbGuYgg==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.4"
+    "@babel/plugin-syntax-nullish-coalescing-operator" "^7.8.0"
+
 "@babel/plugin-proposal-numeric-separator@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-numeric-separator/-/plugin-proposal-numeric-separator-7.10.4.tgz#ce1590ff0a65ad12970a609d78855e9a4c1aef06"
@@ -2217,10 +2225,10 @@
     "@guardian/src-icons" "2.4.0"
     emotion-theming "^10.0.19"
 
-"@guardian/consent-management-platform@^6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.6.0.tgz#e6328fdfba40bb423f8a63084b1096423041a564"
-  integrity sha512-QIEd65+sPN56VMekx5JinZZIFHq0ahfG1HGISfG9HRG6+31r1VNv8d6VXySszJXhY1ksCh4Rtn0BW3MmSq5NkQ==
+"@guardian/consent-management-platform@^6.7.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.7.2.tgz#4a6e2c7757bb014dc2adf4853db5e668f2798530"
+  integrity sha512-tAl+oohzjkRFqLkd5NcZKAp6v5hH0cKdwzX2LwLhQVgwVmtyPVdfr9UZZaIFK4xcHOOqXLQ+Jcy3oBAgOfs47w==
 
 "@guardian/discussion-rendering@^3.1.2":
   version "3.1.2"
