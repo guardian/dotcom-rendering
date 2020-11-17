@@ -12,6 +12,7 @@ type OnwardsResponse = {
     trails: [];
     heading: string;
     displayname: string;
+    description: string;
 };
 
 export const OnwardsData = ({
@@ -26,6 +27,7 @@ export const OnwardsData = ({
             <Container
                 heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
                 trails={limit ? data.trails.slice(0, limit) : data.trails}
+                description={data.description}
                 ophanComponentName={ophanComponentName}
             />
         );
