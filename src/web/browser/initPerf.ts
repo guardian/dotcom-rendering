@@ -23,8 +23,13 @@ export const initPerf = (name: string) => {
         return timeTakenInt;
     };
 
+    const clear = () => {
+        perf.clearMarks(startKey)
+    }
+
     return {
         start,
         end,
+        clear,
     };
 };

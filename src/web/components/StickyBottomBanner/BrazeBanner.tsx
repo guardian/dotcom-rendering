@@ -141,6 +141,7 @@ const getMessageFromBraze = async (
         });
     }).catch(() => {
         // eslint-disable-next-line no-console
+        appboyTiming.clear();
         console.log("Appboy Timing failed.");
     });
 
@@ -232,6 +233,7 @@ export const canShow = async (
 
         return result;
     } catch (e) {
+        bannerTiming.clear();
         return { result: false };
     }
 };
