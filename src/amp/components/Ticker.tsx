@@ -55,28 +55,28 @@ const amountCaptionStyle = css`
 
 export const Ticker: React.FC<{
     percentage: string,
-    currentAmountFigure: string,
-    currentAmountCaption: string,
-    goalAmountFigure: string,
-    goalAmountCaption: string,
+    topLeft: string,
+    bottomLeft: string,
+    topRight: string,
+    bottomRight: string,
 }> = ({
     percentage,
-    currentAmountFigure,
-    currentAmountCaption,
-    goalAmountFigure,
-    goalAmountCaption,
+    topLeft,
+    bottomLeft,
+    topRight,
+    bottomRight,
 }) => {
     return (
         <div>
             <div className={tickerWrapperStyle}>
                 <div className={tickerInfoStyle}>
                     <div className={leftStyle}>
-                        <p className={currentAmountStyle}>{currentAmountFigure}</p>
-                        <p className={amountCaptionStyle}>{currentAmountCaption}</p>
+                        <p className={currentAmountStyle}>{topLeft}</p>
+                        <p className={amountCaptionStyle}>{bottomLeft}</p>
                     </div>
                     <div className={rightStyle}>
-                        <p className={goalAmountStyle}>{goalAmountFigure}</p>
-                        <p className={amountCaptionStyle}>{goalAmountCaption}</p>
+                        <p className={goalAmountStyle}>{topRight}</p>
+                        <p className={amountCaptionStyle}>{bottomRight}</p>
                     </div>
                 </div>
                 <div className={tickerBackgroundStyle}>
