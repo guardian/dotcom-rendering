@@ -34,7 +34,7 @@ jobs:
                   APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}
                   CAPI_KEY: ${{ secrets.CAPI_KEY }}
             - name: Take screenshot of apps-rendering
-              uses: 'lannonbr/puppeteer-screenshot-action@1.3.0'
+              uses: 'lannonbr/puppeteer-screenshot-action@1.3.1'
               with:
                   url: http://localhost:8080/
             - name: Upload screenshot
