@@ -145,6 +145,9 @@ export const clientConfig: Configuration = {
 						options: {
 							presets: [
 								'@babel/preset-react',
+									{
+									  "runtime": "automatic"
+									},
 								'@emotion/babel-preset-css-prop',
 								[
 									'@babel/preset-env',
