@@ -34,6 +34,10 @@ const headerStyles = css`
 const descriptionStyles = css`
     ${headline.xxxsmall({ fontWeight: 'medium' })};
     color: ${text.supporting};
+    p {
+        /* Handle paragraphs in the description */
+        margin-bottom: ${space[2]}px;
+    }
 
     ${between.tablet.and.leftCol} {
         margin-left: 10px;
