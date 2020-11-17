@@ -210,7 +210,7 @@
         "tslint-react": "^4.0.0",
         "tslint-react-a11y": "^1.0.0",
         "typescript": "^3.9.7",
-        "typescript-json-schema": "^0.42.0",
+        "typescript-json-schema": "^0.43.0",
         "webpack": "^4.43.0",
         "webpack-assets-manifest": "^3.1.1",
         "webpack-bundle-analyzer": "^4.1.0",
