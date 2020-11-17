@@ -3,7 +3,8 @@ import { css } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { between, from, until } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 const linkStyles = css`
     text-decoration: none;
@@ -33,8 +34,13 @@ const headerStyles = css`
 const descriptionStyles = css`
     ${headline.xxxsmall({ fontWeight: 'medium' })};
     color: ${text.supporting};
-    p {
-        margin-bottom: 8px;
+
+    ${between.tablet.and.leftCol} {
+        margin-left: 10px;
+    }
+
+    ${until.leftCol} {
+        margin-bottom: ${space[3]}px;
     }
 `;
 
