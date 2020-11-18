@@ -55,7 +55,8 @@ const windowGuardian = {
         showMeTheBanner: () => {},
         showNextVariant: () => {},
         showPreviousVariant: () => {},
-    }
+    },
+    gaPath: "/assets/ga.js",
 };
 
 // Stub global Guardian object

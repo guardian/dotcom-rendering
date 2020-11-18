@@ -137,4 +137,5 @@ describe('E2E Page rendering', function () {
             });
         });
     });
+    
 });

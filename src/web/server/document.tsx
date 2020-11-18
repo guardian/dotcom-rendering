@@ -104,8 +104,7 @@ export const document = ({ data }: Props) => {
      */
     const lowPriorityScriptTags = generateScriptTags(
         [
-            { src: 'https://www.google-analytics.com/analytics.js' },
-            { src: 'ga.js', module: true },
+            { src: 'ophan.js', module: true },
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
             { src: 'embedIframe.js', module: true },
@@ -113,6 +112,17 @@ export const document = ({ data }: Props) => {
         ],
         'async',
     );
+
+    const gaPath = {
+        modern: getDist({
+            path: 'ga.js',
+            legacy: false,
+        }),
+        legacy: getDist({
+            path: 'ga.js',
+            legacy: true,
+        }),
+    };
 
     /**
      * We escape windowGuardian here to prevent errors when the data
@@ -145,6 +155,7 @@ export const document = ({ data }: Props) => {
         title,
         description: CAPI.trailText,
         windowGuardian,
+        gaPath,
         ampLink,
         openGraphData,
         twitterData,
