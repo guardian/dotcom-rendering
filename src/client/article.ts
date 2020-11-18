@@ -262,19 +262,21 @@ function callouts(): void {
 	});
 }
 
-function hasSeenCards(): void {
-	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
-		(card) => card.getAttribute('data-article-id') ?? '',
-	);
+// TODO: uncomment when iOS implements filterSeenArticleIds
 
-	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
-		seenArticles.forEach((id) => {
-			document
-				.querySelector(`.js-card[data-article-id='${id}']`)
-				?.classList.add('fade');
-		});
-	});
-}
+// function hasSeenCards(): void {
+// 	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
+// 		(card) => card.getAttribute('data-article-id') ?? '',
+// 	);
+
+// 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
+// 		seenArticles.forEach((id) => {
+// 			document
+// 				.querySelector(`.js-card[data-article-id='${id}']`)
+// 				?.classList.add('fade');
+// 		});
+// 	});
+// }
 
 function initAudioAtoms(): void {
 	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
@@ -373,7 +375,8 @@ slideshow();
 formatDates();
 insertEpic();
 callouts();
-hasSeenCards();
+// TODO: uncomment when iOS implements filterSeenArticleIds
+// hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();
