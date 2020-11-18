@@ -140,8 +140,8 @@ const getMessageFromBraze = async (
             value: appboyTimeTaken,
         });
     }).catch(() => {
-        // eslint-disable-next-line no-console
         appboyTiming.clear();
+        // eslint-disable-next-line no-console
         console.log("Appboy Timing failed.");
     });
 
