@@ -39,6 +39,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
+import { getDist } from '@root/src/lib/assets';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
@@ -398,6 +399,38 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.isAdFreeUser,
         CAPI.config.isSensitive,
     ]);
+
+    // ************************
+    // *   Google Analytics   *
+    // ************************
+    useEffect(() => {
+        // TODO: handle when consent removed
+        onConsentChange((state: any) => {
+            const consentGiven = getConsentFor('google-analytics', state);
+            if (consentGiven) {
+                const gaScript = document.createElement('script');
+                gaScript.id = 'ga-script';
+                gaScript.type = 'text/javascript';
+                gaScript.src = 'https://www.google-analytics.com/analytics.js';
+                document.head.appendChild(gaScript);
+
+                const gaCustomScript = document.createElement('script');
+                gaCustomScript.id = 'ga-custom-script';
+                gaCustomScript.type = 'text/javascript';
+                gaCustomScript.src = window.guardian.gaPath;
+                document.head.appendChild(gaCustomScript);
+
+                console.log(`gaConsent state: ${consentGiven}`);
+            } else {
+                const gaScriptElement = document.getElementById('ga-script');
+                gaScriptElement?.parentNode?.removeChild(gaScriptElement);
+                const gaCustomScriptElement = document.getElementById('ga-custom-script');
+                gaCustomScriptElement?.parentNode?.removeChild(gaCustomScriptElement);
+
+                console.log(`gaConsent state: ${consentGiven}`);
+            }
+        });
+    }, []);
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
