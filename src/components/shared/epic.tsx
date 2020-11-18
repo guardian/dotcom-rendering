@@ -14,7 +14,8 @@ import { body, headline } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
 import { ThemeProvider } from 'emotion-theming';
 import { acquisitionsClient } from 'native/nativeApi';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //

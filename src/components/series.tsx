@@ -11,7 +11,6 @@ import { Design, Display } from '@guardian/types/Format';
 import { map, withDefault } from '@guardian/types/option';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';

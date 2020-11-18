@@ -7,7 +7,6 @@ import { Design } from '@guardian/types/Format';
 import type { Format } from '@guardian/types/Format';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';

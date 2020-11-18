@@ -12,7 +12,6 @@ import Headline from 'components/editions/headline';
 import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
 

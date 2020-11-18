@@ -11,7 +11,6 @@ import { fromNullable, map, withDefault } from '@guardian/types/option';
 import type { Option } from '@guardian/types/option';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';

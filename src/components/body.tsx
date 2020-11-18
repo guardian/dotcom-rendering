@@ -14,7 +14,6 @@ import Interactive from 'components/interactive/article';
 import Media from 'components/media/article';
 import Standard from 'components/standard/article';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 

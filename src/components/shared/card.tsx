@@ -26,7 +26,6 @@ import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';

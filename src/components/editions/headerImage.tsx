@@ -6,7 +6,6 @@ import Img from 'components/img';
 import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Component ----- //

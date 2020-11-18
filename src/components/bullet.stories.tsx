@@ -3,7 +3,6 @@
 import { Design, Display, Pillar } from '@guardian/types/Format';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Bullet from './bullet';
 

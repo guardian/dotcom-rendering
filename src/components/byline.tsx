@@ -9,7 +9,6 @@ import type { Format } from '@guardian/types/Format';
 import { map, withDefault } from '@guardian/types/option';
 import type { Option } from '@guardian/types/option';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';

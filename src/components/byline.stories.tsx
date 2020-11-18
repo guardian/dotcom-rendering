@@ -7,7 +7,6 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { pipe2 } from 'lib';
 import type { FC } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './byline';
 

@@ -68,9 +68,11 @@ const serverConfig = (
 			? []
 			: [
 					nodeExternals({
-						allowlist: [/@guardian/],
+						allowlist: [/@guardian/, 'React'],
 					}),
+					
 			  ],
+			
 		node: {
 			__dirname: false,
 		},
@@ -92,7 +94,11 @@ const serverConfig = (
 							loader: 'babel-loader',
 							options: {
 								presets: [
-									'@babel/preset-react',
+									['@babel/preset-react',
+									{
+										"runtime": "automatic"
+									  }
+									],
 									'@emotion/babel-preset-css-prop',
 								],
 							},
@@ -144,8 +150,12 @@ export const clientConfig: Configuration = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								'@babel/preset-react',
+								['@babel/preset-react',
+								{
+									"runtime": "automatic"
+								  }],
 								'@emotion/babel-preset-css-prop',
+								
 								[
 									'@babel/preset-env',
 									{

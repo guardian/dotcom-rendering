@@ -8,7 +8,6 @@ import { Design } from '@guardian/types/Format';
 import type { Option } from '@guardian/types/option';
 import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //

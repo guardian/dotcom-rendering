@@ -3,7 +3,6 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types/Format';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 

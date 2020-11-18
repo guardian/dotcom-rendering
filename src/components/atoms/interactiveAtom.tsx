@@ -7,7 +7,7 @@ import type { Option } from '@guardian/types/option';
 import { map, withDefault } from '@guardian/types/option';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
-import React, { createElement as h } from 'react';
+import { createElement as h } from 'react';
 import { pageFonts } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';

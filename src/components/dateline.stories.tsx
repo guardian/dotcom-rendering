@@ -4,7 +4,6 @@ import { Pillar } from '@guardian/types/Format';
 import { some } from '@guardian/types/option';
 import { date, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Dateline from './dateline';
 

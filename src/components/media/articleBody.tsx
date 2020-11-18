@@ -4,7 +4,6 @@ import { remSpace } from '@guardian/src-foundations';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import type { Format, Theme } from '@guardian/types/Format';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import { adStyles, darkModeCss } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';

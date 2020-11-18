@@ -7,7 +7,6 @@ import { neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types/Format';
 import { Design } from '@guardian/types/Format';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 

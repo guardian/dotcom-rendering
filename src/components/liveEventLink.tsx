@@ -4,7 +4,6 @@ import { SvgGuardianLiveLogo } from '@guardian/src-brand';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { ReactElement } from 'react';
-import React from 'react';
 import { basePx, darkModeCss } from 'styles';
 
 const richLinkWidth = '8.75rem';

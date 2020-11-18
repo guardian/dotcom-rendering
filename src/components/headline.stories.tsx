@@ -9,7 +9,6 @@ import {
 	feature,
 	review,
 } from 'fixtures/item';
-import React from 'react';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Headline from './headline';

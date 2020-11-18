@@ -9,7 +9,6 @@ import type { Option } from '@guardian/types/option';
 import { MainMediaKind } from 'headerMedia';
 import type { MainMedia } from 'headerMedia';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCaption } from 'renderer';
 

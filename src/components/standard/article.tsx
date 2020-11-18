@@ -24,7 +24,6 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

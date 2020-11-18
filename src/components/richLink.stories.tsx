@@ -3,7 +3,6 @@ import { from } from '@guardian/src-foundations/mq';
 import { Design, Display, Pillar } from '@guardian/types/Format';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
 import { basePx } from 'styles';
 import { selectPillar } from '../storybookHelpers';
 import RichLink, { richLinkWidth } from './richLink';

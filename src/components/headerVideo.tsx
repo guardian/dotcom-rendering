@@ -6,7 +6,6 @@ import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types/Format';
 import { Design } from '@guardian/types/Format';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';

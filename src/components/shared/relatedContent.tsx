@@ -8,7 +8,6 @@ import { map, withDefault } from '@guardian/types/option';
 import Card from 'components/shared/card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import BylineCard from './bylineCard';

@@ -1,6 +1,5 @@
 import type { Format } from '@guardian/types/Format';
 import { withKnobs } from '@storybook/addon-knobs';
-import React from 'react';
 import Tags from './tags';
 
 export default { title: 'Shared', decorators: [withKnobs] };

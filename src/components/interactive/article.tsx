@@ -1,6 +1,5 @@
 import FooterCcpa from 'components/shared/footer';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 
 // ----- Component ----- //
 
