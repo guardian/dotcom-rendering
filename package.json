@@ -55,7 +55,7 @@
     "@types/jsdom": "^16.2.5",
     "@types/uuid": "^8.3.0",
     "@types/webpack-node-externals": "^2.5.0",
-    "aws-sdk": "^2.789.0",
+    "aws-sdk": "^2.794.0",
     "babel-jest": "^26.6.2",
     "compression": "^1.7.4",
     "core-js": "^3.7.0",
