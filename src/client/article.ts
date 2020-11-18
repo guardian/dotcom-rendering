@@ -352,7 +352,10 @@ function richLinks(): void {
 								'.js-image',
 							);
 							if (placeholder && typeof image === 'string') {
-								placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
+								const img = document.createElement('img');
+								img.setAttribute('alt', 'Related article');
+								img.setAttribute('src', image);
+								placeholder.appendChild(img);
 							}
 						}
 					})
