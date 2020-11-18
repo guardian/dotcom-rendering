@@ -39,7 +39,6 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
-import { getDist } from '@root/src/lib/assets';
 import { getUser } from '@root/src/web/lib/getUser';
 import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
