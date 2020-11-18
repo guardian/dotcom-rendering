@@ -36,7 +36,7 @@ const descriptionStyles = css`
     color: ${text.supporting};
     p {
         /* Handle paragraphs in the description */
-        margin-bottom: ${space[2]}px;
+        margin-bottom: ${space[3]}px;
     }
 
     ${between.tablet.and.leftCol} {
@@ -44,7 +44,7 @@ const descriptionStyles = css`
     }
 
     ${until.leftCol} {
-        margin-bottom: ${space[3]}px;
+        margin-bottom: ${space[4]}px;
     }
 `;
 
