@@ -196,7 +196,7 @@
         "regenerator-runtime": "^0.12.1",
         "rimraf": "^2.6.2",
         "simple-progress-webpack-plugin": "^1.1.2",
-        "start-server-and-test": "^1.10.5",
+        "start-server-and-test": "^1.11.5",
         "stylelint": "^10.1.0",
         "stylelint-config-standard": "^18.3.0",
         "stylelint-config-styled-components": "^0.1.1",
