@@ -88,7 +88,12 @@ export const YoutubeBlockComponent = ({
                     margin-bottom: 16px;
                 `}
             >
-                <div className={expiredOverlayStyles(element.overrideImage)}>
+                <div
+                    className={
+                        element.overrideImage &&
+                        expiredOverlayStyles(element.overrideImage)
+                    }
+                >
                     <div className={expiredTextWrapperStyles}>
                         <div className={expiredSVGWrapperStyles}>
                             <SvgAlertRound />
