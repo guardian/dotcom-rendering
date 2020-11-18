@@ -767,11 +767,9 @@ declare namespace JSX {
     interface IntrinsicElements {
         'amp-sidebar': any;
         'amp-accordion': any;
-        'amp-animation': any;
         'amp-img': any;
         'amp-twitter': any;
         'amp-list': any;
-        'amp-script': any;
         'amp-vimeo': any;
         'amp-facebook': any;
         'amp-video': any;
