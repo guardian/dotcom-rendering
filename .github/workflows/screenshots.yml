@@ -52,7 +52,7 @@ jobs:
                   CAPI_KEY: ${{ secrets.CAPI_KEY }}
 
             - name: Take screenshot of apps-rendering
-              uses: 'lannonbr/puppeteer-screenshot-action@1.3.0'
+              uses: 'lannonbr/puppeteer-screenshot-action@1.3.1'
               with:
                   url: 'http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash'
             - name: Upload screenshot
@@ -86,17 +86,23 @@ jobs:
         needs: standard_screenshot
         strategy:
             matrix:
-                url:
-                    [
-                        'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics?Immersive',
-                        'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference?Labs',
-                        'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020?Feature',
-                        'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos?Gallery',
-                        'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain?Opinion',
-                        'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation?Review',
-                        'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically?ImmersiveLab',
-                        'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction?Analysis',
-                    ]
+                article:
+                    - format: Immersive
+                      url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
+                    - format: Labs
+                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
+                    - format: Feature
+                      url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
+                    - format: Gallery
+                      url: 'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos'
+                    - format: Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
+                    - format: Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
+                    - format: ImmersiveLab
+                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
+                    - format: Analysis
+                      url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
 
         steps:
             - uses: actions/checkout@v2
@@ -121,18 +127,13 @@ jobs:
                   CAPI_KEY: ${{ secrets.CAPI_KEY }}
 
             - name: Take screenshot of apps-rendering
-              uses: 'lannonbr/puppeteer-screenshot-action@1.3.0'
+              uses: 'lannonbr/puppeteer-screenshot-action@1.3.1'
               with:
-                  url: ${{ matrix.url }}
-            - name: Set type
-              id: type
-              run: |
-                  ARTICLE_TYPE="$(echo "${{ matrix.url }}" | sed 's/.*\(\?[a-zA-Z]*\)$/\1/' | sed 's/^?//')"
-                  echo "::set-output name=article_type::$ARTICLE_TYPE"
+                  url: ${{ matrix.article.url }}
             - name: Upload screenshot
               id: upload
               run: |
-                  aws s3 cp screenshots/screenshot*.png s3://gu-mobile-pr-images/${{ github.sha }}/${{ steps.type.outputs.article_type }}/screenshot.png --acl public-read
+                  aws s3 cp screenshots/screenshot*.png s3://gu-mobile-pr-images/${{ github.sha }}/${{ matrix.article.format }}/screenshot.png --acl public-read
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.CI_IMAGE_UPLOADER_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.CI_IMAGE_UPLOADER_SECRET_ACCESS_KEY }}
@@ -143,34 +144,35 @@ jobs:
         strategy:
             max-parallel: 1
             matrix:
-                url:
-                    [
-                        'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics?Immersive',
-                        'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference?Labs',
-                        'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020?Feature',
-                        'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos?Gallery',
-                        'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain?Opinion',
-                        'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation?Review',
-                        'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically?ImmersiveLab',
-                        'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction?Analysis',
-                    ]
+                article:
+                    - format: Immersive
+                      url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
+                    - format: Labs
+                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
+                    - format: Feature
+                      url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
+                    - format: Gallery
+                      url: 'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos'
+                    - format: Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
+                    - format: Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
+                    - format: ImmersiveLab
+                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
+                    - format: Analysis
+                      url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
 
         steps:
             - uses: actions/checkout@v2
               with:
                   fetch-depth: 0
-            - name: Set type
-              id: type
-              run: |
-                  ARTICLE_TYPE="$(echo "${{ matrix.url }}" | sed 's/.*\(\?[a-zA-Z]*\)$/\1/' | sed 's/^?//')"
-                  echo "::set-output name=article_type::$ARTICLE_TYPE"
             - name: Prepare image urls
               id: image-urls
               if: ${{ github.ref != 'main' }}
               run: |
                   MAIN_COMMIT_SHA=$(git show-ref main --hash)
-                  echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/${{ steps.type.outputs.article_type }}/screenshot.png"
-                  echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/${{ steps.type.outputs.article_type }}/screenshot.png"
+                  echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/${{ matrix.article.format }}/screenshot.png"
+                  echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/${{ matrix.article.format }}/screenshot.png"
             - uses: peter-evans/find-comment@v1
               if: ${{ github.event_name == 'pull_request' }}
               id: find
@@ -184,7 +186,7 @@ jobs:
                   comment-id: ${{ steps.find.outputs.comment-id }}
                   body: |
                       <!-- github-actions-screenshots -->
-                      ### ${{ steps.type.outputs.article_type }}
+                      ### ${{ matrix.article.format }}
                       | Before | After |
                       | --- | --- |
                       | <img src="${{ steps.image-urls.outputs.before }}" width="350px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="350px" /> |
