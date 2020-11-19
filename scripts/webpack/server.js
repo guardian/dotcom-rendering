@@ -35,7 +35,10 @@ module.exports = () => ({
         rules: [
             {
                 test: /(\.tsx|\.js|\.ts)$/,
-                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(@guardian\/types)|(dynamic-import-polyfill))\/.*/,
+                exclude: {
+                    and: [/node_modules/],
+                    not: [/@guardian/, /dynamic-import-polyfill/],
+                },
                 use: [
                     {
                         loader: 'babel-loader',
