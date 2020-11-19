@@ -32,6 +32,19 @@ const clientConfigCcpa = {
     },
 };
 
+const clientConfigAus = {
+    propertyId: 14327,
+    privacyManagerId: '5f859e174ed5055e72ce26a6',
+    isCCPA: true,
+    siteHref: 'http://amp.au.theguardian.com',
+    getDnsMsgMms: true,
+    alwaysDisplayDns: false,
+    showNoticeUntilAction: true,
+    targetingParams: {
+        framework: 'aus',
+    },
+}
+
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
     // https://cdn.ampproject.org/experiments.html
@@ -42,11 +55,15 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 <JsonScript
                     o={{
                         ISOCountryGroups: {
+                            // Ad regions
                             eea: ['preset-eea', 'unknown'],
                             us: ['us', 'ca'],
                             au: ['au', 'nz'],
-                            tcfv2: ['preset-eea', 'ca', 'au', 'nz', 'unknown'],
+
+                            // frameworks
+                            tcfv2: ['preset-eea', 'ca', 'nz', 'unknown'],
                             ccpa: ['us'],
+                            aus: ['au'],
                         },
                     }}
                 />
@@ -61,7 +78,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
                         checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
-                        promptUISrc: `https://${sourcepointDomain}/amp/index.html`,
+                        promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
                         clientConfig,
                         geoOverride: {
                             tcfv2: {
@@ -70,6 +87,10 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             ccpa: {
                                 checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
                                 clientConfig: clientConfigCcpa,
+                            },
+                            aus: {
+                                checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+                                clientConfig: clientConfigAus,
                             },
                         },
                     }}
