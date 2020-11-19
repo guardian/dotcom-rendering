@@ -50,7 +50,7 @@ jobs:
             - name: run
               run: |
                   npm run watch &
-                  sleep 30s
+                  sleep 45s
               env:
                   APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}
                   CAPI_KEY: ${{ secrets.CAPI_KEY }}
@@ -111,8 +111,20 @@ jobs:
                   issue-number: ${{ github.event.pull_request.number }}
                   body-includes: <!-- github-actions-screenshots -->
 
-            - name: Create or replace comment for first screenshot
-              if: ${{  github.event_name == 'pull_request' && matrix.article.format == 'Standard' }}
+            - name: Create comment is necessary
+              if: ${{ github.event_name == 'pull_request' && steps.find.outputs.comment-id == '' && matrix.article.format == 'Standard' }}
+              uses: peter-evans/create-or-update-comment@v1
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  body: |
+                      <!-- github-actions-screenshots -->
+                      ### ${{ matrix.article.format }}
+                      | Before | After |
+                      | --- | --- |
+                      | <img src="${{ steps.image-urls.outputs.before }}" width="350px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="350px" /> |
+
+            - name: Update comment is necessary
+              if: ${{ github.event_name == 'pull_request' && steps.find.outputs.comment-id != '' && matrix.article.format == 'Standard' }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                   comment-id: ${{ steps.find.outputs.comment-id }}
@@ -125,7 +137,7 @@ jobs:
                   edit-mode: replace
 
             - name: Append other article screenshots
-              if: ${{  github.event_name == 'pull_request' && matrix.article.format != 'Standard' }}
+              if: ${{ github.event_name == 'pull_request' && matrix.article.format != 'Standard' }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                   comment-id: ${{ steps.find.outputs.comment-id }}
