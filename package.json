@@ -77,7 +77,7 @@
         "emotion-server": "^10.0.5",
         "emotion-theming": "^10.0.27",
         "eslint-config-airbnb": "^18.0.1",
-        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-airbnb-base": "^14.2.1",
         "eslint-config-airbnb-typescript": "^6.3.0",
         "eslint-config-prettier": "^6.15.0",
         "eslint-import-resolver-babel-module": "^5.1.2",
