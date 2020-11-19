@@ -16,6 +16,7 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import FooterCcpa from 'components/shared/footer';
 import { formatDate, formatLocal, isValidDate } from 'date';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	discussionClient,
@@ -333,19 +334,21 @@ function callouts(): void {
 	});
 }
 
-function hasSeenCards(): void {
-	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
-		(card) => card.getAttribute('data-article-id') ?? '',
-	);
+// TODO: uncomment when iOS implements filterSeenArticleIds
 
-	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
-		seenArticles.forEach((id) => {
-			document
-				.querySelector(`.js-card[data-article-id='${id}']`)
-				?.classList.add('fade');
-		});
-	});
-}
+// function hasSeenCards(): void {
+// 	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
+// 		(card) => card.getAttribute('data-article-id') ?? '',
+// 	);
+
+// 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
+// 		seenArticles.forEach((id) => {
+// 			document
+// 				.querySelector(`.js-card[data-article-id='${id}']`)
+// 				?.classList.add('fade');
+// 		});
+// 	});
+// }
 
 function initAudioAtoms(): void {
 	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
@@ -399,21 +402,38 @@ function richLinks(): void {
 		.forEach((richLink) => {
 			const articleId = richLink.getAttribute('data-article-id');
 			if (articleId) {
-				void fetch(`${articleId}?richlink`).then((response) => {
-					const pillar = response.headers
-						.get('pillar')
-						?.toLowerCase();
-					const image = response.headers.get('image');
+				const options = {
+					headers: {
+						Accept: 'application/json',
+					},
+				};
+				void fetch(`${articleId}?richlink`, options)
+					.then(handleErrors)
+					.then((resp) => resp.json())
+					.then((response: unknown) => {
+						if (isObject(response)) {
+							const pillar =
+								typeof response.pillar === 'string'
+									? response.pillar.toLowerCase()
+									: null;
+							const image = response.image;
 
-					if (pillar) {
-						richLink.classList.add(`js-${pillar}`);
-					}
+							if (pillar) {
+								richLink.classList.add(`js-${pillar}`);
+							}
 
-					const placeholder = richLink.querySelector('.js-image');
-					if (placeholder && image) {
-						placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
-					}
-				});
+							const placeholder = richLink.querySelector(
+								'.js-image',
+							);
+							if (placeholder && typeof image === 'string') {
+								const img = document.createElement('img');
+								img.setAttribute('alt', 'Related article');
+								img.setAttribute('src', image);
+								placeholder.appendChild(img);
+							}
+						}
+					})
+					.catch((error) => console.error(error));
 			}
 		});
 }
@@ -427,9 +447,10 @@ slideshow();
 formatDates();
 insertEpic();
 callouts();
-hasSeenCards();
 renderComments();
 isCCPA();
+// TODO: uncomment when iOS implements filterSeenArticleIds
+// hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();

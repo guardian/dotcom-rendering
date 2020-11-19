@@ -56,6 +56,12 @@ const maybeRender = <A>(
 ): ReactElement | null =>
 	pipe2(oa, map(f), withDefault<ReactElement | null>(null));
 
+function handleErrors(response: Response): Response | never {
+	if (!response.ok) {
+		throw Error(response.statusText);
+	}
+	return response;
+}
 // ----- Exports ----- //
 
 export {
@@ -70,4 +76,5 @@ export {
 	errorToString,
 	isObject,
 	maybeRender,
+	handleErrors,
 };

@@ -143,7 +143,7 @@ const RichLink = (props: {
 	const webUrl = 'https://www.theguardian.com';
 
 	const articleId = url.includes(webUrl)
-		? { 'data-article-id': url.replace(webUrl, '') }
+		? { 'data-article-id': url.replace(webUrl, '/rendered-items') }
 		: {};
 
 	const attributes = {
