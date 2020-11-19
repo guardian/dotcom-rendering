@@ -26,7 +26,6 @@ import {
     ChartAtom,
     AudioAtom,
 } from '@guardian/atoms-rendering';
-import { loadScript } from '@guardian/libs';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -35,6 +34,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { loadScript } from '@root/src/web/lib/loadScript';
 import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
