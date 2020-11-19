@@ -36,6 +36,7 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    VideoAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -416,11 +417,20 @@ export const ArticleRenderer: React.FC<{
                             />
                         </div>
                     );
+                case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
+                    return (
+                        <VideoAtom
+                            assets={element.assets}
+                            poster={
+                                element.posterImage &&
+                                element.posterImage[0].url
+                            }
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }
