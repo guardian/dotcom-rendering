@@ -97,6 +97,7 @@ export const SecondTierItem = ({
     } = trail;
 
     const avatarToShow = avatarUrl || image;
+    const pilarToUse = designType === 'Comment' ? 'opinion' : pillar;
 
     return (
         <div className={itemStyles(showRightBorder)}>
@@ -112,7 +113,7 @@ export const SecondTierItem = ({
                             <LinkHeadline
                                 designType={designType}
                                 headlineText={headlineText}
-                                pillar={pillar}
+                                pillar={pilarToUse}
                                 size="small"
                                 byline={showByline ? byline : undefined}
                             />
@@ -120,7 +121,7 @@ export const SecondTierItem = ({
                             <LinkHeadline
                                 designType={designType}
                                 headlineText={headlineText}
-                                pillar={pillar}
+                                pillar={pilarToUse}
                                 size="small"
                                 byline={showByline ? byline : undefined}
                             />
@@ -138,7 +139,7 @@ export const SecondTierItem = ({
                                     <Avatar
                                         imageSrc={avatarToShow}
                                         imageAlt=""
-                                        pillar={pillar}
+                                        pillar={pilarToUse}
                                     />
                                 </div>
                             </div>
