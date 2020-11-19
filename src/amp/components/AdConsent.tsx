@@ -33,9 +33,10 @@ const clientConfigCcpa = {
 };
 
 const clientConfigAus = {
-    privacyManagerId: '',
+    propertyId: 14327,
+    privacyManagerId: '5f859e174ed5055e72ce26a6',
     isCCPA: true,
-    siteHref: 'https://au.theguardian.com',
+    siteHref: 'http://amp.au.theguardian.com',
     getDnsMsgMms: true,
     alwaysDisplayDns: false,
     showNoticeUntilAction: true,
