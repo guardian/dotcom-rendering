@@ -192,6 +192,13 @@ interface MapBlockElement {
 interface MediaAtomBlockElement {
     _type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
     id: string;
+    assets: VideoAssets[];
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
+    title?: string;
+    duration?: number;
 }
 
 interface MultiImageBlockElement {
