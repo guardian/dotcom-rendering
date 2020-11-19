@@ -26,6 +26,7 @@ import {
     ChartAtom,
     AudioAtom,
 } from '@guardian/atoms-rendering';
+import { loadScript } from '@guardian/libs';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -403,28 +404,11 @@ export const App = ({ CAPI, NAV }: Props) => {
     // *   Google Analytics   *
     // ************************
     useEffect(() => {
-        // TODO: handle when consent removed
         onConsentChange((state: any) => {
             const consentGiven = getConsentFor('google-analytics', state);
             if (consentGiven) {
-                const gaScript = document.createElement('script');
-                gaScript.id = 'ga-script';
-                gaScript.type = 'text/javascript';
-                gaScript.src = 'https://www.google-analytics.com/analytics.js';
-                document.head.appendChild(gaScript);
-
-                const gaCustomScript = document.createElement('script');
-                gaCustomScript.id = 'ga-custom-script';
-                gaCustomScript.type = 'text/javascript';
-                gaCustomScript.src = window.guardian.gaPath;
-                document.head.appendChild(gaCustomScript);
-
-                console.log(`gaConsent state: ${consentGiven}`);
-            } else {
-                const gaScriptElement = document.getElementById('ga-script');
-                gaScriptElement?.parentNode?.removeChild(gaScriptElement);
-                const gaCustomScriptElement = document.getElementById('ga-custom-script');
-                gaCustomScriptElement?.parentNode?.removeChild(gaCustomScriptElement);
+                loadScript('https://www.google-analytics.com/analytics.js');
+                loadScript(window.guardian.gaPath);
 
                 console.log(`gaConsent state: ${consentGiven}`);
             }

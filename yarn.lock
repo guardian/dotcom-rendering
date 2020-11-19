@@ -2233,6 +2233,11 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
+"@guardian/libs@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.4.2.tgz#76f525cf37b37ad58d17288c85008e4ab176a929"
+  integrity sha512-ZACBS1NmAjss8Q60c3SWHZ7alsS2tvjI5rQipEidW3fvWI8kdWWXck6FSM4F42vNzLdRFjAGmzEA36rG/NsZSg==
+
 "@guardian/shimport@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@guardian/shimport/-/shimport-1.0.2.tgz#96c71153553a90f5a7b2a45dfc78196eb14e76f1"

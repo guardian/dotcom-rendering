@@ -144,11 +144,13 @@ export const htmlTemplate = ({
 
                 <script type="module">
                     window.guardian.mustardCut = true;
+                    window.guardian.gaPath = "${gaPath.modern}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
+                    window.guardian.gaPath = "${gaPath.legacy}";
                 </script>
 
                 <script>
@@ -199,14 +201,6 @@ export const htmlTemplate = ({
                         window.guardian.config.ophan.browserId = getCookieValue("bwid");
 
                     })(window, document);
-                </script>
-
-                <script>
-                    if (window.guardian.mustardCut === false) {
-                        window.guardian.gaPath = "${gaPath.legacy}"
-                    } else {
-                        window.guardian.gaPath = "${gaPath.modern}"
-                    }
                 </script>
 
                 <noscript>
