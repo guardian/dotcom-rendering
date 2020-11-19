@@ -125,7 +125,7 @@ jobs:
                   edit-mode: replace
 
             - name: Append other article screenshots
-              if: ${{  github.event_name == 'pull_request' && && matrix.article.format != 'Standard' }}
+              if: ${{  github.event_name == 'pull_request' && matrix.article.format != 'Standard' }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                   comment-id: ${{ steps.find.outputs.comment-id }}
