@@ -45,8 +45,8 @@ describe('Consent tests', function () {
         // which we have no control, there's no obvious, better way to do this.
         cy.on('fail', (err, runnable) => {
             // We can end up here for three possible reasons:
-            // 1. No ever request occured. This is out success path as we were not expecting one
-            // 2. If the request DID happen then we throw the error Unexpected call to Google
+            // 1. No request ever occured. This is our success path as we were not expecting one
+            // 2. If the request DID happen then we throw the error 'Unexpected call to Google'
             // 3. There was another failure in the test
             //
             // We use the assertion below to genuinely fail the test in the event it wasn't point 1
