@@ -86,6 +86,7 @@ export const document = ({ data }: Props) => {
     const priorityScriptTags = generateScriptTags(
         [
             { src: polyfillIO },
+            { src: 'ophan.js', module: true },
             CAPI.config && { src: CAPI.config.commercialBundleUrl },
             { src: 'sentry.js', module: true },
             { src: 'dynamicImport.js', module: true },
@@ -105,7 +106,6 @@ export const document = ({ data }: Props) => {
         [
             { src: 'https://www.google-analytics.com/analytics.js' },
             { src: 'ga.js', module: true },
-            { src: 'ophan.js', module: true },
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
             { src: 'embedIframe.js', module: true },
