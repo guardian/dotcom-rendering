@@ -351,26 +351,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             });
 
-            if (
-                CAPI.config.switches.auConsent ||
-                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
-            ) {
-                cmp.init({
-                    country: countryCode,
-                    pubData,
-                });
-            } else {
-                cmp.init({
-                    isInUsa: countryCode === 'US',
-                    pubData,
-                });
-            }
+            cmp.init({
+                country: countryCode,
+                pubData,
+            });
         }
-    }, [
-        countryCode,
-        CAPI.config.switches.consentManagement,
-        CAPI.config.switches.auConsent,
-    ]);
+    }, [countryCode, CAPI.config.switches.consentManagement]);
 
     // *****************
     // *     ACast     *
