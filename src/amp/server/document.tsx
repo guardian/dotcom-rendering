@@ -54,7 +54,7 @@ export const document = ({
     <link rel="canonical" href="${metadata.canonicalURL}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
-    <meta name="amp-script-src" content="">
+
 
     ${linkedData.reduce(
         (prev, ld) => `${prev}
