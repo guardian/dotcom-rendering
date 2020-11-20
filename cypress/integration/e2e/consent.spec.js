@@ -85,10 +85,10 @@ describe('Consent tests', function () {
         // Open the Privacy setting dialogue
         cmpIframe().contains("It's your choice");
         cmpIframe().find("[title='Manage my cookies']").click();
-        // Reject tracking cookies
+        // Accept tracking cookies
         privacySettingsIframe().contains('Privacy settings');
         privacySettingsIframe().find("[title='Accept all']").click();
-        // Make a second page load now that we have the CMP cookies set to reject tracking
+        // Make a second page load now that we have the CMP cookies set to accept tracking
         cy.visit(`Article?url=${secondPage}`, fetchPolyfill);
         // Wait for a call to Google Analytics to be made - we expect this to happen
         cy.wait('@theCallToGoogle', { timeout: 3000 });
