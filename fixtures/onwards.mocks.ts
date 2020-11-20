@@ -116,54 +116,63 @@ export const storyPackageTrails: OnwardsType = {
     heading: 'More on this story',
     trails,
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const oneTrail: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 1),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const twoTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 2),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const threeTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 3),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const fourTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 4),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const fiveTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 5),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const sixTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 6),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const sevenTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 7),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const eightTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const linkAndDescription: OnwardsType = {
@@ -173,6 +182,7 @@ export const linkAndDescription: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };
 
 export const withLongDescription: OnwardsType = {
@@ -181,4 +191,5 @@ export const withLongDescription: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
     ophanComponentName: 'more-on-this-story',
+    pillar: 'news',
 };

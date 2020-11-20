@@ -8,9 +8,10 @@ type Props = {
     ajaxUrl: string;
     hasStoryPackage: boolean;
     tags: TagType[];
+    pillar: Pillar;
 };
 
-export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
+export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags, pillar }: Props) => {
     // In this context, Blog tags are treated the same as Series tags
     const seriesTag = tags.find(
         (tag) => tag.type === 'Series' || tag.type === 'Blog',
@@ -39,6 +40,7 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
             limit={4}
             ophanComponentName={ophanComponentName}
             Container={OnwardsLayout}
+            pillar={pillar}
         />
     );
 };

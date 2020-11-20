@@ -189,6 +189,7 @@ export const Headlines = () => (
         heading="Headlines"
         trails={trails}
         ophanComponentName="curated-content"
+        pillar='news'
     />
 );
 

@@ -14,7 +14,7 @@ describe('E2E Page rendering', function () {
             it(`It should load the designType under the pillar (${article.url})`, function () {
                 const { url: articleUrl, designType, pillar } = article;
                 const url = setUrlFragment(articleUrl, {
-                    'ab-CuratedContainerTest': 'control',
+                    'ab-CuratedContainerTest2': 'control',
                 });
                 cy.log(`designType: ${designType}, pillar: ${pillar}`);
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
