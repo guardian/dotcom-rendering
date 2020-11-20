@@ -18,7 +18,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
-export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp';   // timestamp of when we were last told not to show a RR banner
+export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -133,8 +133,8 @@ export const getArticleCountConsent = (): Promise<boolean> => {
         return Promise.resolve(false);
     }
     return new Promise((resolve) => {
-        onConsentChange(({ ccpa, tcfv2 }) => {
-            if (ccpa) {
+        onConsentChange(({ ccpa, tcfv2, aus }) => {
+            if (ccpa || aus) {
                 resolve(true);
             } else if (tcfv2) {
                 const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
@@ -151,11 +151,11 @@ export const getArticleCountConsent = (): Promise<boolean> => {
     });
 };
 
-const twentyMins = 20*60000;
+const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {
     const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
     if (item && !Number.isNaN(parseInt(item, 10))) {
-        const withinCachePeriod = (parseInt(item, 10) + twentyMins) > Date.now();
+        const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
         if (!withinCachePeriod) {
             // Expired
             window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
