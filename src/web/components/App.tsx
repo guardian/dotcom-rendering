@@ -18,6 +18,14 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import {
+    QandaAtom,
+    GuideAtom,
+    ProfileAtom,
+    TimelineAtom,
+    ChartAtom,
+    AudioAtom,
+} from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -98,36 +106,6 @@ const GetMatchStats = React.lazy(() => {
         return { default: module.GetMatchStats };
     });
 });
-
-// Break Atoms Rendering into it's own chunk
-const atomTypes: AtomTypes[] = [
-    'AudioAtom',
-    'ChartAtom',
-    'GuideAtom',
-    'ProfileAtom',
-    'QandaAtom',
-    'TimelineAtom',
-];
-
-const [
-    AudioAtom,
-    ChartAtom,
-    GuideAtom,
-    ProfileAtom,
-    QandaAtom,
-    TimelineAtom,
-] = atomTypes.map((atomType) =>
-    React.lazy(() => {
-        const { start, end } = initPerf(atomType);
-        start();
-        return import(
-            /* webpackChunkName: "AtomsRendering" */ '@guardian/atoms-rendering'
-        ).then((module) => {
-            end();
-            return { default: module[atomType] };
-        });
-    }),
-);
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -532,110 +510,100 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.chartAtoms.map((chart) => (
                 <Hydrate root="chart-atom" index={chart.chartIndex}>
-                    <Suspense fallback={<></>}>
-                        <ChartAtom id={chart.id} html={chart.html} />
-                    </Suspense>
+                    <ChartAtom id={chart.id} html={chart.html} />
                 </Hydrate>
             ))}
             {CAPI.audioAtoms.map((audioAtom) => (
                 <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
-                    <Suspense fallback={<></>}>
-                        <AudioAtom
-                            id={audioAtom.id}
-                            trackUrl={audioAtom.trackUrl}
-                            kicker={audioAtom.kicker}
-                            title={audioAtom.title}
-                            pillar={toTypesPillar(pillar)}
-                            shouldUseAcast={shouldUseAcast}
-                        />
-                    </Suspense>
+                    <AudioAtom
+                        id={audioAtom.id}
+                        trackUrl={audioAtom.trackUrl}
+                        kicker={audioAtom.kicker}
+                        title={audioAtom.title}
+                        pillar={toTypesPillar(pillar)}
+                        shouldUseAcast={shouldUseAcast}
+                    />
                 </Hydrate>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
                 <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
-                    <Suspense fallback={<></>}>
-                        <QandaAtom
-                            id={qandaAtom.id}
-                            title={qandaAtom.title}
-                            html={qandaAtom.html}
-                            image={qandaAtom.img}
-                            credit={qandaAtom.credit}
-                            pillar={pillar}
-                            likeHandler={componentEventHandler(
-                                'QANDA_ATOM',
-                                qandaAtom.id,
-                                'LIKE',
-                            )}
-                            dislikeHandler={componentEventHandler(
-                                'QANDA_ATOM',
-                                qandaAtom.id,
-                                'DISLIKE',
-                            )}
-                            expandCallback={componentEventHandler(
-                                'QANDA_ATOM',
-                                qandaAtom.id,
-                                'EXPAND',
-                            )}
-                        />
-                    </Suspense>
+                    <QandaAtom
+                        id={qandaAtom.id}
+                        title={qandaAtom.title}
+                        html={qandaAtom.html}
+                        image={qandaAtom.img}
+                        credit={qandaAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'QANDA_ATOM',
+                            qandaAtom.id,
+                            'EXPAND',
+                        )}
+                    />
                 </Hydrate>
             ))}
             {CAPI.guideAtoms.map((guideAtom) => (
                 <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
-                    <Suspense fallback={<></>}>
-                        <GuideAtom
-                            id={guideAtom.id}
-                            title={guideAtom.title}
-                            html={guideAtom.html}
-                            image={guideAtom.img}
-                            credit={guideAtom.credit}
-                            pillar={pillar}
-                            likeHandler={componentEventHandler(
-                                'GUIDE_ATOM',
-                                guideAtom.id,
-                                'LIKE',
-                            )}
-                            dislikeHandler={componentEventHandler(
-                                'GUIDE_ATOM',
-                                guideAtom.id,
-                                'DISLIKE',
-                            )}
-                            expandCallback={componentEventHandler(
-                                'GUIDE_ATOM',
-                                guideAtom.id,
-                                'EXPAND',
-                            )}
-                        />
-                    </Suspense>
+                    <GuideAtom
+                        id={guideAtom.id}
+                        title={guideAtom.title}
+                        html={guideAtom.html}
+                        image={guideAtom.img}
+                        credit={guideAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'GUIDE_ATOM',
+                            guideAtom.id,
+                            'EXPAND',
+                        )}
+                    />
                 </Hydrate>
             ))}
             {CAPI.profileAtoms.map((profileAtom) => (
                 <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
-                    <Suspense fallback={<></>}>
-                        <ProfileAtom
-                            id={profileAtom.id}
-                            title={profileAtom.title}
-                            html={profileAtom.html}
-                            image={profileAtom.img}
-                            credit={profileAtom.credit}
-                            pillar={pillar}
-                            likeHandler={componentEventHandler(
-                                'PROFILE_ATOM',
-                                profileAtom.id,
-                                'LIKE',
-                            )}
-                            dislikeHandler={componentEventHandler(
-                                'PROFILE_ATOM',
-                                profileAtom.id,
-                                'DISLIKE',
-                            )}
-                            expandCallback={componentEventHandler(
-                                'PROFILE_ATOM',
-                                profileAtom.id,
-                                'EXPAND',
-                            )}
-                        />
-                    </Suspense>
+                    <ProfileAtom
+                        id={profileAtom.id}
+                        title={profileAtom.title}
+                        html={profileAtom.html}
+                        image={profileAtom.img}
+                        credit={profileAtom.credit}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'PROFILE_ATOM',
+                            profileAtom.id,
+                            'EXPAND',
+                        )}
+                    />
                 </Hydrate>
             ))}
             {CAPI.timelineAtoms.map((timelineAtom) => (
@@ -643,30 +611,28 @@ export const App = ({ CAPI, NAV }: Props) => {
                     root="timeline-atom"
                     index={timelineAtom.timelineIndex}
                 >
-                    <Suspense fallback={<></>}>
-                        <TimelineAtom
-                            id={timelineAtom.id}
-                            title={timelineAtom.title}
-                            events={timelineAtom.events}
-                            description={timelineAtom.description}
-                            pillar={pillar}
-                            likeHandler={componentEventHandler(
-                                'TIMELINE_ATOM',
-                                timelineAtom.id,
-                                'LIKE',
-                            )}
-                            dislikeHandler={componentEventHandler(
-                                'TIMELINE_ATOM',
-                                timelineAtom.id,
-                                'DISLIKE',
-                            )}
-                            expandCallback={componentEventHandler(
-                                'TIMELINE_ATOM',
-                                timelineAtom.id,
-                                'EXPAND',
-                            )}
-                        />
-                    </Suspense>
+                    <TimelineAtom
+                        id={timelineAtom.id}
+                        title={timelineAtom.title}
+                        events={timelineAtom.events}
+                        description={timelineAtom.description}
+                        pillar={pillar}
+                        likeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'LIKE',
+                        )}
+                        dislikeHandler={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'DISLIKE',
+                        )}
+                        expandCallback={componentEventHandler(
+                            'TIMELINE_ATOM',
+                            timelineAtom.id,
+                            'EXPAND',
+                        )}
+                    />
                 </Hydrate>
             ))}
             <Portal root="share-comment-counts">
