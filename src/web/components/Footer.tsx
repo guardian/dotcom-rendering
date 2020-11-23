@@ -75,6 +75,7 @@ const footerLink = css`
     text-decoration: none;
     padding-bottom: 12px;
     display: block;
+    line-height: 19px;
 
     :hover {
         text-decoration: underline;
