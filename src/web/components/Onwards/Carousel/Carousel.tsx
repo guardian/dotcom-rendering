@@ -156,18 +156,33 @@ const headlineStyle = (designType: DesignType, pillar: Pillar) => css`
 const dotsStyle = css`
     margin-bottom: ${space[2]}px;
 
-    ${from.phablet} {
-        display: none;
+    ${from.tablet} {
+        margin-left: 10px;
     }
 `;
 
-const dotStyle = (isActive: boolean) => css`
+const dotStyle = (index: number) => css`
     display: inline-block;
     height: ${space[3]}px;
     width: ${space[3]}px;
-    background-color: ${isActive ? palette.news[400] : palette.neutral[93]};
+    background-color: ${palette.neutral[93]};
     border-radius: 50%;
     margin-right: ${space[1]}px;
+
+    /* This is a bit of a hack for the test, while we think of better UX here.
+    It's very fragile to things like carousel item count.*/
+    ${from.phablet} {
+        display: ${index >= 7 ? 'none' : 'auto'};
+    }
+
+    ${from.desktop} {
+        display: ${index >= 6 ? 'none' : 'auto'};
+    }
+`;
+
+const dotActiveStyle = (index: number) => css`
+    ${dotStyle(index)};
+    background-color: ${palette.news[400]};
 `;
 
 const buttonStyle = css`
@@ -385,7 +400,11 @@ export const Carousel: React.FC<OnwardsType> = ({
 
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
-                        <span className={dotStyle(i === index)} />
+                        <span
+                            className={
+                                i === index ? dotActiveStyle(i) : dotStyle(i)
+                            }
+                        />
                     ))}
                 </div>
 
