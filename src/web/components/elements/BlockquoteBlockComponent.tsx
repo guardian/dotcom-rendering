@@ -29,7 +29,6 @@ const baseBlockquoteStyles = css`
     margin-bottom: 16px;
     ${body.medium()};
     font-style: italic;
-    color: ${neutral[46]};
 `;
 
 const simpleBlockquoteStyles = css`
@@ -38,6 +37,11 @@ const simpleBlockquoteStyles = css`
     margin-right: 0;
     margin-bottom: 16px;
     margin-left: 33px;
+`;
+
+const quotedBlockquoteStyles = css`
+    ${baseBlockquoteStyles}
+    color: ${neutral[46]};
 `;
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
@@ -73,7 +77,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
                 <RewrappedComponent
                     isUnwrapped={isUnwrapped}
                     html={unwrappedHtml}
-                    elCss={baseBlockquoteStyles}
+                    elCss={quotedBlockquoteStyles}
                     tagName={unwrappedElement}
                 />
             </BlockquoteRow>
