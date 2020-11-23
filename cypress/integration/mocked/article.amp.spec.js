@@ -12,7 +12,7 @@ describe('For AMP', function () {
         AMPArticles.map((article) => {
             const { url, designType, pillar } = article;
             cy.log(`designType: ${designType}, pillar: ${pillar}`);
-            cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
+            cy.visit(`/AMPArticle?url=${url}`, fetchPolyfill);
         });
     });
 });

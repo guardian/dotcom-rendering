@@ -1,9 +1,14 @@
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
 describe('Sign In Gate Tests', function () {
+    beforeEach(function () {
+        setLocalBaseUrl();
+    });
+
     const setArticleCount = (n) => {
         // set article count for today to be n
         localStorage.setItem(
@@ -30,7 +35,7 @@ describe('Sign In Gate Tests', function () {
     const visitArticle = (
         url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
     ) => {
-        cy.visit(`Article?url=${url}`);
+        cy.visit(`/Article?url=${url}`);
     };
 
     // as the sign in gate is lazy loaded, we need to scroll to the rough position where it
