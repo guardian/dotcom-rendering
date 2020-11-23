@@ -171,6 +171,7 @@ const dotStyle = (index: number, totalStories: number) => css`
     width: ${space[3]}px;
     background-color: ${palette.neutral[93]};
     border-radius: 50%;
+    border: 0 none;
     margin-right: ${space[1]}px;
 
     /* This is a bit of a hack for the test, while we think of better UX here.
