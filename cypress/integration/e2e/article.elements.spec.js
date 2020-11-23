@@ -1,6 +1,8 @@
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+
 describe('Elements', function () {
     beforeEach(function () {
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     describe('AMP', function () {

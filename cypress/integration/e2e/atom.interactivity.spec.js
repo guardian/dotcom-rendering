@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const qandaUrl =
     'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';
@@ -17,7 +18,7 @@ const chartUrl =
 const atomExpandableTests = (type, url) => {
     describe(type, function () {
         beforeEach(function () {
-            Cypress.config('baseUrl', 'http://localhost:3030/');
+            setLocalBaseUrl();
         });
 
         it('should render', function () {
@@ -72,7 +73,7 @@ const atomExpandableTests = (type, url) => {
 const atomGenericTests = (type, url) => {
     describe(type, function () {
         beforeEach(function () {
-            Cypress.config('baseUrl', 'http://localhost:3030/');
+            setLocalBaseUrl();
         });
 
         it('should render', function () {

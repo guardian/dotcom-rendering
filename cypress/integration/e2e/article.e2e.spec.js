@@ -3,13 +3,14 @@ import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('E2E Page rendering', function () {
     before(getPolyfill);
 
     beforeEach(function () {
         setupApiRoutes();
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     describe('for WEB', function () {

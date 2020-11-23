@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('Banner Picker Integration', function () {
     const cmpIframe = () => {
@@ -11,7 +12,7 @@ describe('Banner Picker Integration', function () {
     };
 
     beforeEach(function () {
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     describe('When consent cookies are not set', function () {

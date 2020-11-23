@@ -4,6 +4,7 @@ import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
@@ -12,7 +13,7 @@ const articleUrl =
 describe('Interactivity', function () {
     beforeEach(function () {
         disableCMP();
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     describe('Verify elements have been hydrated', function () {

@@ -2,13 +2,14 @@ import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { disableCMP } from '../../lib/disableCMP';
 import { skipOn } from '@cypress/skip-test';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('Commercial E2E tests', function () {
     before(getPolyfill);
 
     beforeEach(function () {
         disableCMP();
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     const longReadURL =

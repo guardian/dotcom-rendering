@@ -1,11 +1,12 @@
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
 describe('Sign In Gate Tests', function () {
     beforeEach(function () {
-        Cypress.config('baseUrl', 'http://localhost:3030/');
+        setLocalBaseUrl();
     });
 
     const setArticleCount = (n) => {
