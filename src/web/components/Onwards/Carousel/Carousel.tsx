@@ -74,7 +74,11 @@ const carouselStyle = css`
 
     overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
     ${from.tablet} {
-        overflow: hidden;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        scrollbar-width: none;
     }
 
     ${from.tablet} {
