@@ -21,7 +21,7 @@ describe('E2E Page rendering', function () {
                     'ab-CuratedContainerTest': 'control',
                 });
                 cy.log(`designType: ${designType}, pillar: ${pillar}`);
-                cy.visit(`Article?url=${url}`, fetchPolyfill);
+                cy.visit(`/Article?url=${url}`, fetchPolyfill);
                 const roughLoadPositionOfMostView = 1400;
                 cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
                 cy.contains('Lifestyle');
@@ -131,7 +131,7 @@ describe('E2E Page rendering', function () {
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 
-                cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
+                cy.visit(`/AMPArticle?url=${url}`, fetchPolyfill);
                 cy.contains('Opinion');
             });
         });
