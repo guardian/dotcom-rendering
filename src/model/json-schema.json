@@ -132,6 +132,9 @@
                         "$ref": "#/definitions/VideoVimeoBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/QuizAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/VideoYoutubeBlockElement"
                     },
                     {
@@ -2159,6 +2162,70 @@
                 "mediaTitle"
             ]
         },
+        "QuizAtomBlockElement" :{
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "text",
+                                        "isCorrect"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "text",
+                            "answers"
+                        ]
+                    }
+                }
+
+            },
+            "required": [
+                "_type",
+                "id",
+                "questions"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -2285,6 +2352,9 @@
                             },
                             {
                                 "$ref": "#/definitions/VideoVimeoBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QuizAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/VideoYoutubeBlockElement"
