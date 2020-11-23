@@ -37,13 +37,18 @@ export const document = ({
         ),
     );
 
+    const conditionalAmpComponent = (name: string, src: string): string =>
+        html.includes(name)
+            ? `<script custom-element="${name}" src="${src}"></script>`
+            : ''
+
     const favicon =
         process.env.NODE_ENV === 'production'
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
     return `<!doctype html>
-<html ⚡ lang="en">
+    <html ⚡ lang="en">
     <head>
     <meta charset="utf-8">
 
@@ -58,7 +63,7 @@ export const document = ({
 
     ${linkedData.reduce(
         (prev, ld) => `${prev}
-<script type="application/ld+json">${JSON.stringify(ld)}</script>`,
+        <script type="application/ld+json">${JSON.stringify(ld)}</script>`,
         '',
     )}
 
@@ -66,7 +71,7 @@ export const document = ({
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     <!-- AMP elements that are always required -->
-    <script async custom-element="amp-animation" src="https://cdn.ampproject.org/v0/amp-animation-0.1.js"></script>
+    ${conditionalAmpComponent('amp-animation', 'https://cdn.ampproject.org/v0/amp-animation-0.1.js')}
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
