@@ -84,6 +84,7 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             html={element.html}
                             pillar={pillar}
+                            quoted={element.quoted}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.CaptionBlockElement':

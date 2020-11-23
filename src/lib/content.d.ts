@@ -28,6 +28,7 @@ interface AudioBlockElement {
 interface BlockquoteBlockElement {
     _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
     html: string;
+    quoted?: boolean;
 }
 
 interface CaptionBlockElement {
