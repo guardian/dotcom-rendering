@@ -73,7 +73,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
     if (quoted) {
         return (
             <BlockquoteRow>
-                <QuoteIcon colour={pillarPalette[pillar].main} size="large" />
+                <QuoteIcon colour={pillarPalette[pillar].main} size="medium" />
                 <RewrappedComponent
                     isUnwrapped={isUnwrapped}
                     html={unwrappedHtml}
