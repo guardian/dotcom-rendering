@@ -330,6 +330,19 @@ export const Carousel: React.FC<OnwardsType> = ({
         setIndex(getIndex());
     };
 
+    const goToIndex = (newIndex: number) => {
+        const { current } = carouselRef;
+        if (current === null) return;
+
+        const offsets = getItems()
+            .filter(notPresentation)
+            .map((el) => el.offsetLeft);
+
+        current.scrollTo({ left: offsets[newIndex] });
+
+        getSetIndex();
+    };
+
     const prev = () => {
         const { current } = carouselRef;
         if (current === null) return;
@@ -412,7 +425,9 @@ export const Carousel: React.FC<OnwardsType> = ({
 
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
-                        <span
+                        <button
+                            onClick={() => goToIndex(i)}
+                            aria-label={`Go to item ${i}`}
                             className={
                                 i === index
                                     ? dotActiveStyle(i, trails.length)
