@@ -8,6 +8,7 @@ describe('Commercial E2E tests', function () {
 
     beforeEach(function () {
         disableCMP();
+        Cypress.config('baseUrl', 'http://localhost:3030/');
     });
 
     const longReadURL =

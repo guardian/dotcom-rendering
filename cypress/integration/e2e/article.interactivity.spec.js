@@ -12,6 +12,7 @@ const articleUrl =
 describe('Interactivity', function () {
     beforeEach(function () {
         disableCMP();
+        Cypress.config('baseUrl', 'http://localhost:3030/');
     });
 
     describe('Verify elements have been hydrated', function () {

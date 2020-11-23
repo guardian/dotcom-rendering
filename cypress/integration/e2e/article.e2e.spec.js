@@ -6,7 +6,11 @@ import { setUrlFragment } from '../../lib/setUrlFragment.js';
 
 describe('E2E Page rendering', function () {
     before(getPolyfill);
-    beforeEach(setupApiRoutes);
+
+    beforeEach(function () {
+        setupApiRoutes();
+        Cypress.config('baseUrl', 'http://localhost:3030/');
+    });
 
     describe('for WEB', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe

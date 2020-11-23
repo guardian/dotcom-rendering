@@ -10,6 +10,10 @@ describe('Banner Picker Integration', function () {
             .then(cy.wrap);
     };
 
+    beforeEach(function () {
+        Cypress.config('baseUrl', 'http://localhost:3030/');
+    });
+
     describe('When consent cookies are not set', function () {
         it('shows the CMP', function () {
             cy.clearCookie('consentUUID');

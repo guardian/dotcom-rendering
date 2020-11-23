@@ -4,6 +4,10 @@ import { disableCMP } from '../../lib/disableCMP';
 /* eslint-disable func-names */
 
 describe('Sign In Gate Tests', function () {
+    beforeEach(function () {
+        Cypress.config('baseUrl', 'http://localhost:3030/');
+    });
+
     const setArticleCount = (n) => {
         // set article count for today to be n
         localStorage.setItem(

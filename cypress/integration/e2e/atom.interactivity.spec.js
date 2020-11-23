@@ -16,6 +16,10 @@ const chartUrl =
     'https://www.theguardian.com/technology/2020/aug/19/apple-becomes-wall-streets-first-2tn-company';
 const atomExpandableTests = (type, url) => {
     describe(type, function () {
+        beforeEach(function () {
+            Cypress.config('baseUrl', 'http://localhost:3030/');
+        });
+
         it('should render', function () {
             cy.visit(`/Article?url=${url}`);
             cy.get(`[data-snippet-type=${type}]`).should('be.visible');
@@ -67,6 +71,10 @@ const atomExpandableTests = (type, url) => {
 
 const atomGenericTests = (type, url) => {
     describe(type, function () {
+        beforeEach(function () {
+            Cypress.config('baseUrl', 'http://localhost:3030/');
+        });
+
         it('should render', function () {
             cy.visit(`/Article?url=${url}`);
             cy.get(`[data-snippet-type=${type}]`).should('be.visible');

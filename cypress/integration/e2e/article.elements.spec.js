@@ -1,4 +1,8 @@
 describe('Elements', function () {
+    beforeEach(function () {
+        Cypress.config('baseUrl', 'http://localhost:3030/');
+    });
+
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
         // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
