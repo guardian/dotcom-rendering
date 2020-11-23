@@ -174,6 +174,12 @@ const dotStyle = (index: number, totalStories: number) => css`
     border: 0 none;
     margin-right: ${space[1]}px;
 
+    &:hover,
+    &:focus {
+        background-color: ${palette.neutral[86]};
+        outline: none;
+    }
+
     /* This is a bit of a hack for the test, while we think of better UX here.
     It's very fragile to things like carousel item count.*/
     ${from.phablet} {
@@ -188,6 +194,11 @@ const dotStyle = (index: number, totalStories: number) => css`
 const dotActiveStyle = (index: number, totalStories: number) => css`
     ${dotStyle(index, totalStories)};
     background-color: ${palette.news[400]};
+
+    &:hover,
+    &:focus {
+        background-color: ${palette.news[300]};
+    }
 `;
 
 const buttonStyle = css`
