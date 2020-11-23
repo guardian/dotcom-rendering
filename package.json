@@ -20,7 +20,7 @@
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
         "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
-        "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config scripts/webpack/frontend"
+        "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/frontend.js"
     },
     "bundlesize": [
         {
