@@ -198,7 +198,7 @@
         "simple-progress-webpack-plugin": "^1.1.2",
         "start-server-and-test": "^1.11.5",
         "stylelint": "^10.1.0",
-        "stylelint-config-standard": "^18.3.0",
+        "stylelint-config-standard": "^20.0.0",
         "stylelint-config-styled-components": "^0.1.1",
         "stylelint-processor-styled-components": "^1.8.0",
         "svg-loader": "^0.0.2",
