@@ -191,6 +191,14 @@ const buttonStyle = css`
     cursor: pointer;
     margin: 0;
     padding: 0;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        svg {
+            fill: ${palette.neutral[7]};
+        }
+    }
 `;
 
 const verticalLine = css`
