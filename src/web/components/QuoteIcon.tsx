@@ -22,8 +22,8 @@ const sizeStyles = (size: SmallHeadlineSize) => {
     const mediumSvg = css`
         margin-right: 4px;
         svg {
-            height: 20px;
-            width: 11px;
+            height: 21px;
+            width: 10px;
         }
     `;
     const largeSvg = css`
