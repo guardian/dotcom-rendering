@@ -99,7 +99,7 @@
         "lodash.debounce": "^4.0.6",
         "lodash.escape": "^4.0.1",
         "lodash.get": "^4.4.2",
-        "log4js": "4.2.0",
+        "log4js": "6.3.0",
         "minify-css-string": "^1.0.0",
         "ophan-tracker-js": "^1.3.23",
         "pm2": "^4.5.0",
