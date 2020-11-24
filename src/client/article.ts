@@ -448,7 +448,6 @@ formatDates();
 insertEpic();
 callouts();
 renderComments();
-isCCPA();
 // TODO: uncomment when iOS implements filterSeenArticleIds
 // hasSeenCards();
 initAudioAtoms();
