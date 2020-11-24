@@ -196,17 +196,13 @@ const buildUrl = (
     )}`;
 };
 
-export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = ((env) => {
-        switch (env) {
-            case 'test':
-                return `${__dirname}/EpicTestData.json`
-            case 'production':
-                return 'https://contributions.guardianapis.com/amp/epic';
-            default:
-                return 'https://contributions.code.dev-guardianapis.com/amp/epic'
-        }
-    })(process.env.NODE_ENV)
+export const Epic: React.FC<{ webURL: string, epicUrl?: string }> = ({ webURL, epicUrl }) => {
+    const isProd = process.env.NODE_ENV === 'production';
+    if (!epicUrl) {
+        epicUrl = isProd
+            ? 'https://contributions.guardianapis.com/amp/epic'
+            : 'https://contributions.code.dev-guardianapis.com/amp/epic'
+    }
 
     const tickerProgressAnimation =
         {
