@@ -33,6 +33,9 @@
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/QuizAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CodeBlockElement"
                     },
                     {
@@ -132,13 +135,13 @@
                         "$ref": "#/definitions/VideoVimeoBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/QuizAtomBlockElement"
-                    },
-                    {
                         "$ref": "#/definitions/VideoYoutubeBlockElement"
                     },
                     {
                         "$ref": "#/definitions/YoutubeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/QuizBlockElement"
                     }
                 ]
             }
@@ -953,6 +956,91 @@
                 "_type",
                 "html",
                 "id",
+                "url"
+            ]
+        },
+        "QuizAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                    ]
+                },
+                "chartIndex": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "isCorrect",
+                                        "text"
+                                    ]
+                                }
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "answers",
+                            "id",
+                            "text"
+                        ]
+                    }
+                },
+                "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "id",
+                "questions",
                 "url"
             ]
         },
@@ -2162,7 +2250,7 @@
                 "mediaTitle"
             ]
         },
-        "QuizAtomBlockElement" :{
+        "QuizBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -2185,9 +2273,6 @@
                             "text": {
                                 "type": "string"
                             },
-                            "value": {
-                                "type": "string"
-                            },
                             "answers": {
                                 "type": "array",
                                 "items": {
@@ -2199,26 +2284,34 @@
                                         "text": {
                                             "type": "string"
                                         },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
                                         "isCorrect": {
                                             "type": "boolean"
                                         }
                                     },
                                     "required": [
                                         "id",
-                                        "text",
-                                        "isCorrect"
+                                        "isCorrect",
+                                        "text"
                                     ]
                                 }
+                            },
+                            "imageUrl": {
+                                "type": "string"
                             }
                         },
                         "required": [
+                            "answers",
                             "id",
-                            "text",
-                            "answers"
+                            "text"
                         ]
                     }
+                },
+                "quizIndex": {
+                    "type": "number"
                 }
-
             },
             "required": [
                 "_type",
@@ -2253,6 +2346,9 @@
                             },
                             {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QuizAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"
@@ -2354,13 +2450,13 @@
                                 "$ref": "#/definitions/VideoVimeoBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/QuizAtomBlockElement"
-                            },
-                            {
                                 "$ref": "#/definitions/VideoYoutubeBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/YoutubeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QuizBlockElement"
                             }
                         ]
                     }
