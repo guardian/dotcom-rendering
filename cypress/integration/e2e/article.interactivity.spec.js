@@ -69,7 +69,6 @@ describe('Interactivity', function () {
     describe('Navigating the Pillar menu', function () {
         it('should expand and close the desktop pillar menu when More is clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
             cy.get('[data-cy=expanded-menu]').within(() => {
                 cy.contains('Columnists').should('be.visible');
@@ -92,10 +91,8 @@ describe('Interactivity', function () {
             it('should expand the mobile pillar menu when the VeggieBurger is clicked', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
-                cy.contains('Crosswords').should('not.be.visible');
                 cy.get('[data-cy=veggie-burger]').click();
                 cy.contains('Crosswords');
-                cy.contains('Columnists').should('not.be.visible');
                 cy.get('[data-cy=column-collapse-Opinion]').click();
                 cy.contains('Columnists').should('be.visible');
                 // check focus is on veggie burger menu button on close
