@@ -717,6 +717,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
                             edition={CAPI.editionId}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
@@ -734,6 +735,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             ajaxUrl={CAPI.config.ajaxUrl}
                             hasStoryPackage={CAPI.hasStoryPackage}
                             tags={CAPI.tags}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
