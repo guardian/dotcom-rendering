@@ -166,12 +166,14 @@ const dotsStyle = css`
 `;
 
 const dotStyle = (index: number, totalStories: number) => css`
+    cursor: pointer;
     display: inline-block;
     height: ${space[3]}px;
     width: ${space[3]}px;
     background-color: ${palette.neutral[93]};
-    border-radius: 50%;
+    border-radius: 100%;
     border: 0 none;
+    padding: 0;
     margin-right: ${space[1]}px;
 
     &:hover,
@@ -426,10 +428,18 @@ export const Carousel: React.FC<OnwardsType> = ({
                     <Title title={heading} />
 
                     <div className={navIconStyle} data-link-name="nav-arrow">
-                        <button onClick={prev} className={buttonStyle}>
+                        <button
+                            onClick={prev}
+                            aria-label="Move carousel backwards"
+                            className={buttonStyle}
+                        >
                             <SvgChevronLeftSingle />
                         </button>
-                        <button onClick={next} className={buttonStyle}>
+                        <button
+                            onClick={next}
+                            aria-label="Move carousel forwards"
+                            className={buttonStyle}
+                        >
                             <SvgChevronRightSingle />
                         </button>
                     </div>
@@ -437,9 +447,12 @@ export const Carousel: React.FC<OnwardsType> = ({
 
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
-                        <button
+                        <span
                             onClick={() => goToIndex(i)}
-                            aria-label={`Go to item ${i}`}
+                            // This button is not particularly useful for keyboard users as the stories
+                            // are tabb-able themselves so we hide them with aria and make them
+                            // not available to keyboard
+                            aria-hidden="true"
                             className={
                                 i === index
                                     ? dotActiveStyle(i, trails.length)
