@@ -91,7 +91,7 @@ stylelint: clean-dist install
 	@stylelint "src/**/*.ts{,x}"
 
 test: clean-dist install
-	export NODE_ENV = test
+	export NODE_ENV=test
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand
 	$(call log, "everything seems 👌")
