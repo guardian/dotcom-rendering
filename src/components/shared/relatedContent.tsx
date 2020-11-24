@@ -1,29 +1,20 @@
 import { css } from '@emotion/core';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Option } from '@guardian/types/option';
 import { map, withDefault } from '@guardian/types/option';
+import BylineCard from 'components/shared/bylineCard';
 import Card from 'components/shared/card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe2 } from 'lib';
 import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import BylineCard from './bylineCard';
 
 interface Props {
 	content: Option<ResizedRelatedContent>;
 }
-
-const styles = css`
-	padding: ${remSpace[6]} 0;
-	${from.wide} {
-		width: 1300px;
-		margin: 0 auto;
-	}
-`;
 
 const headingStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })}
@@ -54,7 +45,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
 		content,
 		map(({ title, relatedItems, resizedImages }) => {
 			return (
-				<section css={styles}>
+				<section>
 					<h2 css={headingStyles}>{title}</h2>
 					<ul css={listStyles}>
 						{relatedItems.map((relatedItem, key) => {

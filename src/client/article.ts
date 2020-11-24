@@ -1,8 +1,11 @@
 // ----- Imports ----- //
 
+import 'regenerator-runtime/runtime.js';
 import { AudioAtom, QuizAtom } from '@guardian/atoms-rendering';
 import type { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
+import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
+import { App } from '@guardian/discussion-rendering/build/App';
 import {
 	ads,
 	reportNativeElementPositionChanges,
@@ -16,6 +19,7 @@ import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
+	discussionClient,
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
@@ -135,6 +139,74 @@ function insertEpic(): void {
 				}
 			})
 			.catch((error) => console.error(error));
+	}
+}
+
+declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+function isPillarString(pillar: string): boolean {
+	return ['news', 'opinion', 'sport', 'culture', 'lifestyle'].includes(
+		pillar.toLowerCase(),
+	);
+}
+function renderComments(): void {
+	const commentContainer = document.getElementById('comments');
+	const pillarString = commentContainer?.getAttribute('data-pillar');
+	const shortUrl = commentContainer?.getAttribute('data-short-id');
+	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
+
+	if (pillarString && isPillarString(pillarString) && shortUrl) {
+		const pillar = pillarString as Pillar;
+		const user = {
+			userId: 'abc123',
+			displayName: 'Jane Smith',
+			webUrl: '',
+			apiUrl: '',
+			secureAvatarUrl: '',
+			avatar: '',
+			badge: [],
+		};
+
+		const additionalHeaders = {};
+
+		const props = {
+			shortUrl,
+			baseUrl: 'https://discussion.theguardian.com/discussion-api',
+			pillar,
+			user,
+			isClosedForComments,
+			additionalHeaders,
+			expanded: false,
+			apiKey: 'ios',
+			onPermalinkClick: (commentId: number): void => {
+				console.log(commentId);
+			},
+			onRecommend: (commentId: number): Promise<boolean> => {
+				return discussionClient.recommend(commentId);
+			},
+			onComment: (
+				shortUrl: string,
+				body: string,
+			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
+				return discussionClient
+					.comment(shortUrl, body)
+					.then((response) => ({ ...response, status: 'ok' }));
+			},
+			onReply: (
+				shortUrl: string,
+				body: string,
+				parentCommentId: number,
+			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
+				return discussionClient
+					.reply(shortUrl, body, parentCommentId)
+					.then((response) => ({ ...response, status: 'ok' }));
+			},
+			onPreview: (body: string): Promise<string> => {
+				return discussionClient.preview(body);
+			},
+		};
+
+		ReactDOM.render(h(App, props), commentContainer);
 	}
 }
 
@@ -375,6 +447,7 @@ slideshow();
 formatDates();
 insertEpic();
 callouts();
+renderComments();
 // TODO: uncomment when iOS implements filterSeenArticleIds
 // hasSeenCards();
 initAudioAtoms();

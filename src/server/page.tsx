@@ -67,6 +67,17 @@ const styles = (format: Format): string => {
 	return `
         ${pageFonts}
 
+    body {
+        background: ${
+			format.design === Design.Media ? background.inverse : 'white'
+		};
+        margin: 0;
+        font-family: 'Guardian Text Egyptian Web';
+        overflow-x: hidden;
+        line-height: 1.5;
+    }
+
+    @media (prefers-color-scheme: dark) {
         body {
             background: ${bg};
             margin: 0;
@@ -150,7 +161,7 @@ function render(
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
-	const inlineStyles = requiresInlineStyles();
+	const inlineStyles = requiresInlineStyles(request.content);
 	const head = renderHead(
 		item,
 		request,

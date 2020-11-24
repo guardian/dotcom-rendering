@@ -81,7 +81,7 @@ function themeToPillar(theme: Theme): string {
 		case Pillar.Sport:
 			return 'sport';
 		case Pillar.Culture:
-			return 'arts';
+			return 'culture';
 		case Pillar.Lifestyle:
 			return 'lifestyle';
 		case Pillar.News:

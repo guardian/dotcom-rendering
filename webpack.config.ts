@@ -39,6 +39,7 @@ function resolve(loggerName: string): Resolve {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
 			logger: path.resolve(__dirname, `src/logger/${loggerName}`),
+			react: path.resolve('./node_modules/react'),
 		},
 	};
 }

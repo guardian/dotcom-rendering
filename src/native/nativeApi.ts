@@ -1,5 +1,6 @@
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Commercial from '@guardian/bridget/Commercial';
+import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Metrics from '@guardian/bridget/Metrics';
@@ -36,6 +37,9 @@ const videoClient: Video.Client<void> = createAppClient<Video.Client<void>>(
 const metricsClient: Metrics.Client<void> = createAppClient<
 	Metrics.Client<void>
 >(Metrics.Client, 'buffered', 'compact');
+const discussionClient: Discussion.Client<void> = createAppClient<
+	Discussion.Client<void>
+>(Discussion.Client, 'buffered', 'compact');
 
 export {
 	environmentClient,
@@ -46,4 +50,5 @@ export {
 	galleryClient,
 	videoClient,
 	metricsClient,
+	discussionClient,
 };

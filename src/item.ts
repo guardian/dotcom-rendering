@@ -51,6 +51,7 @@ interface Fields extends Format {
 	tags: Tag[];
 	shouldHideReaderRevenue: boolean;
 	branding: Option<Branding>;
+	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
 }
@@ -186,6 +187,7 @@ const itemFields = (
 		shouldHideReaderRevenue:
 			content.fields?.shouldHideReaderRevenue ?? false,
 		branding: fromNullable(branding),
+		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
 		relatedContent: pipe2(
 			relatedContent,
@@ -209,6 +211,7 @@ const itemFieldsWithBody = (
 	const atoms = content.atoms;
 	const campaigns = request.campaigns;
 	const elements = [...body].shift()?.elements;
+
 	return {
 		...itemFields(context, request),
 		body: elements

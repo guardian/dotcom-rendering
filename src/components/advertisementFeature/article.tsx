@@ -21,7 +21,7 @@ import {
 	articleWidthStyles,
 	darkModeCss,
 	lineStyles,
-	relatedContentStyles,
+	onwardStyles,
 } from 'styles';
 import Logo from './logo';
 
@@ -81,7 +81,7 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
 					{children}
 				</Body>
 			</article>
-			<section css={relatedContentStyles}>
+			<section css={onwardStyles}>
 				<RelatedContent content={item.relatedContent} />
 			</section>
 			<div id="articleFooter">

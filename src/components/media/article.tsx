@@ -15,7 +15,7 @@ import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
 import React from 'react';
 import type { FC, ReactNode } from 'react';
-import { articleWidthStyles, relatedContentStyles } from 'styles';
+import { articleWidthStyles, onwardStyles } from 'styles';
 
 // ----- Styles ----- //
 
@@ -69,7 +69,7 @@ const Media: FC<Props> = ({ item, children }) => (
 				<Tags tags={item.tags} />
 			</section>
 		</article>
-		<section css={relatedContentStyles}>
+		<section css={onwardStyles}>
 			<RelatedContent content={item.relatedContent} />
 		</section>
 		<div id="articleFooter">
