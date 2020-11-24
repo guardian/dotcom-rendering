@@ -112,7 +112,6 @@ export const document = ({ data }: Props) => {
         'async',
     );
 
-    // TODO: add support for old browsers (legacy: false)
     const gaPath = {
         modern: getDist({
             path: 'ga.js',
@@ -121,7 +120,7 @@ export const document = ({ data }: Props) => {
         legacy: getDist({
             path: 'ga.js',
             legacy: true,
-        })
+        }),
     };
 
     /**
