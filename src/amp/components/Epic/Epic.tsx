@@ -197,9 +197,16 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = process.env.NODE_ENV === 'production'
-        ? 'https://contributions.guardianapis.com/amp/epic'
-        : 'https://contributions.code.dev-guardianapis.com/amp/epic';
+    const epicUrl = ((env) => {
+        switch (env) {
+            case 'test':
+                return `${__dirname}/EpicTestData.json`
+            case 'production':
+                return 'https://contributions.guardianapis.com/amp/epic';
+            default:
+                return 'https://contributions.code.dev-guardianapis.com/amp/epic'
+        }
+    })(process.env.NODE_ENV)
 
     const tickerProgressAnimation =
         {
