@@ -13,7 +13,7 @@ describe('Elements', function () {
             // and retry until the body element is not empty
             return (
                 cy
-                    .get(iframeSelector)
+                    .get(iframeSelector, {timeout: 30000})
                     .its('0.contentDocument.body')
                     .should('not.be.empty')
                     // wraps "body" DOM element to allow
