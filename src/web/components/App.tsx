@@ -25,6 +25,7 @@ import {
     TimelineAtom,
     ChartAtom,
     AudioAtom,
+    QuizAtom
 } from '@guardian/atoms-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -483,6 +484,16 @@ export const App = ({ CAPI, NAV }: Props) => {
                         overlayImage={youtubeBlock.overrideImage}
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
+                    />
+                </Hydrate>
+            ))}
+            {CAPI.quizAtoms.map((quizAtoms, index) => (
+                <Hydrate
+                key={index}
+                root="quiz-atom"
+                index={quizAtoms.quizIndex}
+                >
+                    <QuizAtom id={quizAtoms.id} questions={quizAtoms.questions}
                     />
                 </Hydrate>
             ))}

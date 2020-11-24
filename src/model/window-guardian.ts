@@ -215,6 +215,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             'model.dotcomrendering.pageElements.AudioAtomBlockElement',
             'audioIndex',
         ),
+        quizAtoms: blockElementWithIndex(
+            CAPI.blocks,
+            'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+            'quizIndex',
+        ),
         youtubeBlockElement: blockElementWithIndex(
             CAPI.blocks,
             'model.dotcomrendering.pageElements.YoutubeBlockElement',

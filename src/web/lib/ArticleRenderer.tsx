@@ -37,6 +37,7 @@ import {
     ProfileAtom,
     TimelineAtom,
     VideoAtom,
+    QuizAtom
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -133,6 +134,12 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
                     return <ChartAtom id={element.id} html={element.html} />;
+                case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
+                    return (
+                        <div id={`quiz-atoms-${i}`}>
+                            <QuizAtom id={element.id} questions={element.questions} />;
+                        </div>
+                    )
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
                         <DocumentBlockComponent

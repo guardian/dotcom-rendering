@@ -331,6 +331,7 @@ type CAPIBrowserType = {
     audioAtoms: AudioAtomBlockElement[];
     youtubeBlockElement: YoutubeBlockElement[];
     youtubeMainMediaBlockElement: YoutubeBlockElement[];
+    quizAtoms: QuizBlockElement[];
 };
 
 interface TagType {
@@ -405,6 +406,20 @@ type HeadlineLink = {
     visitedColour?: string; // a custom colour for the :visited state
     preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
 };
+
+type AnswerType = {
+    id: string;
+    text: string;
+    revealText?: string;
+    isCorrect: boolean;
+};
+
+type QuestionType = {
+    id: string;
+    text: string;
+    answers: AnswerType[];
+    imageUrl?: string;
+}
 
 interface LinkHeadlineType {
     designType: DesignType;
@@ -666,6 +681,7 @@ type IslandType =
     | 'match-stats'
     | 'callout'
     | 'comments'
+    | 'quiz-atom'
     | 'qanda-atom'
     | 'guide-atom'
     | 'profile-atom'

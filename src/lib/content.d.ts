@@ -64,6 +64,12 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     id: string;
     html: string;
 }
+interface QuizAtomBlockElement extends InteractiveAtomBlockElementBase {
+    _type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
+    chartIndex?: number;
+    id: string;
+    questions: QuestionType[];
+}
 
 interface CodeBlockElement {
     _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
@@ -345,6 +351,13 @@ interface YoutubeBlockElement {
     youtubeIndex?: number;
 }
 
+interface QuizBlockElement {
+    _type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
+    id: string;
+    questions: QuestionType[];
+    quizIndex?: number;
+}
+
 type CAPIElement =
     | AudioAtomBlockElement
     | AudioBlockElement
@@ -352,6 +365,7 @@ type CAPIElement =
     | CaptionBlockElement
     | CalloutBlockElement
     | ChartAtomBlockElement
+    | QuizAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
     | ContentAtomBlockElement
@@ -382,6 +396,7 @@ type CAPIElement =
     | TextBlockElement
     | TimelineBlockElement
     | TweetBlockElement
+    | QuizBlockElement
     | VideoBlockElement
     | VideoFacebookBlockElement
     | VideoVimeoBlockElement
