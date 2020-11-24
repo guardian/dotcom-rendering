@@ -76,7 +76,7 @@ describe('Sign In Gate Tests', function () {
 
             visitArticleAndScrollToGateForLazyLoad();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the user is signed in', function () {
@@ -97,7 +97,7 @@ describe('Sign In Gate Tests', function () {
                 return false;
             });
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the user has already dismissed the gate', function () {
@@ -113,7 +113,7 @@ describe('Sign In Gate Tests', function () {
 
             visitArticleAndScrollToGateForLazyLoad();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the article is not a valid section (membership)', function () {
@@ -122,7 +122,7 @@ describe('Sign In Gate Tests', function () {
                     'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
             });
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate on a device with an ios9 user agent string', function () {
@@ -140,7 +140,7 @@ describe('Sign In Gate Tests', function () {
             );
             scrollToGateForLazyLoading();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should remove gate when the dismiss button is clicked', function () {
@@ -150,7 +150,7 @@ describe('Sign In Gate Tests', function () {
 
             cy.get('[data-cy=sign-in-gate-main_dismiss]').click();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('register button should contain profile.theguardian.com href', function () {

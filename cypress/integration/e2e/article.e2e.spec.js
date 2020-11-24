@@ -97,7 +97,7 @@ describe('E2E Page rendering', function () {
             cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
 
             cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-                'not.be.visible',
+                'not.exist',
             );
         });
 
