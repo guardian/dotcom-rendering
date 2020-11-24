@@ -4,6 +4,7 @@ import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
@@ -12,6 +13,7 @@ const articleUrl =
 describe('Interactivity', function () {
     beforeEach(function () {
         disableCMP();
+        setLocalBaseUrl();
     });
 
     describe('Verify elements have been hydrated', function () {
@@ -34,7 +36,7 @@ describe('Interactivity', function () {
                 // This count of rich links is dependent on the article that we're testing not changing
                 // If this assertion fails then it could be because a link was added or removed in
                 // which case this check should be updated
-                .should('be', 2);
+                .should('eq', 2);
         });
         describe('When most viewed is mocked', function () {
             before(getPolyfill);

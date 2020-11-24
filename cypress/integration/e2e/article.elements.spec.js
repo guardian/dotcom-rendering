@@ -1,4 +1,10 @@
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+
 describe('Elements', function () {
+    beforeEach(function () {
+        setLocalBaseUrl();
+    });
+
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
         // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
