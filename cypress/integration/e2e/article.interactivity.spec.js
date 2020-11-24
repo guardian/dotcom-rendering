@@ -2,7 +2,6 @@
 /* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
-import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
@@ -40,9 +39,9 @@ describe('Interactivity', function () {
         });
         describe('When most viewed is mocked', function () {
             before(getPolyfill);
-            beforeEach(mockApi, setupApiRoutes);
+            beforeEach(mockApi);
             // it('should change the list of most viewed items when a tab is clicked', function () {
-            //     cy.visit(`/Article?url=${articleUrl}`, fetchPolyfill);
+            //     cy.visit(`/Article?url=${articleUrl}`);
             //     cy.contains('Lifestyle');
             //     cy.get('[data-component="most-popular"]').scrollIntoView({
             //         duration: 300,

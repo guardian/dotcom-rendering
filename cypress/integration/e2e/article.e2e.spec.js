@@ -1,7 +1,5 @@
 import { getPolyfill } from '../../lib/polyfill';
-import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
-import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
@@ -9,7 +7,6 @@ describe('E2E Page rendering', function () {
     before(getPolyfill);
 
     beforeEach(function () {
-        setupApiRoutes();
         setLocalBaseUrl();
     });
 
@@ -22,37 +19,36 @@ describe('E2E Page rendering', function () {
                     'ab-CuratedContainerTest': 'control',
                 });
                 cy.log(`designType: ${designType}, pillar: ${pillar}`);
-                cy.visit(`/Article?url=${url}`, fetchPolyfill);
+                cy.visit(`/Article?url=${url}`);
                 const roughLoadPositionOfMostView = 1400;
                 cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
                 cy.contains('Lifestyle');
 
                 if (!article.hideMostViewed) {
-                    cy.wait('@getMostReadGeo', { timeout: 8000 }).then(
-                        (xhr) => {
-                            expect(xhr.response.body).to.have.property(
-                                'heading',
-                            );
-                            expect(xhr.status).to.be.equal(200);
+                    cy.intercept('GET', '**/most-read-geo**', (req) => {
+                        expect(req.response.body).to.have.property(
+                            'heading',
+                        );
+                        expect(req.status).to.be.equal(200);
 
-                            cy.contains('Most viewed');
-                        },
-                    );
+                        cy.contains('Most viewed');
+                    });
                 }
 
                 cy.scrollTo('bottom', { duration: 500 });
-                cy.wait('@getShareCount').then((xhr) => {
-                    expect(xhr.status).to.be.equal(200);
-                    expect(xhr.response.body).to.have.property('path');
-                    expect(xhr.response.body).to.have.property('refreshStatus');
-                    expect(xhr.response.body)
+
+                cy.intercept('POST', '/sharecount/**', (req) => {
+                    expect(req.status).to.be.equal(200);
+                    expect(req.response.body).to.have.property('path');
+                    expect(req.response.body).to.have.property('refreshStatus');
+                    expect(req.response.body)
                         .to.have.property('share_count')
                         .that.is.a('number');
-                });
+                })
 
                 if (article.hasRichLinks) {
-                    cy.wait('@getRichLinks').then((xhr) => {
-                        expect(xhr.status).to.be.equal(200);
+                    cy.intercept('GET', '/embed/card/**', (req) => {
+                        expect(req.status).to.be.equal(200);
                         cy.contains('Read more');
                     });
                 }
@@ -62,10 +58,9 @@ describe('E2E Page rendering', function () {
                 // lazy loading Most Popular
                 cy.scrollTo('bottom', { duration: 500 });
 
-                cy.wait('@getMostRead', { timeout: 8000 }).then((xhr) => {
-                    expect(xhr.response.body).to.have.property('tabs');
-                    expect(xhr.status).to.be.equal(200);
-
+                cy.intercept('GET', '/most-read/**', (req) => {
+                    expect(req.response.body).to.have.property('tabs');
+                    expect(req.status).to.be.equal(200);
                     cy.contains('Most commented');
                 });
             });
@@ -132,7 +127,7 @@ describe('E2E Page rendering', function () {
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 
-                cy.visit(`/AMPArticle?url=${url}`, fetchPolyfill);
+                cy.visit(`/AMPArticle?url=${url}`);
                 cy.contains('Opinion');
             });
         });
