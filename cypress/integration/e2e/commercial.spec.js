@@ -22,7 +22,9 @@ describe('Commercial E2E tests', function () {
         cy.scrollTo('bottom', { duration: 500 });
 
         // We are excluding survey slot as it only appears via cypress tests and only on frontend.
-        cy.get('.js-ad-slot:not([data-name="survey"]').should('have.length', 15);
+        // Also, we are waiting *up to* 30 seconds here to give the ads time to load. In most
+        // cases this check will pass much faster
+        cy.get('.js-ad-slot:not([data-name="survey"]', {timeout: 30000}).should('have.length', 15);
 
         Array(10).fill().forEach((item, i)=>{
             cy.get(`[data-name="inline${(i+1)}"]`).should('have.length', 1);
