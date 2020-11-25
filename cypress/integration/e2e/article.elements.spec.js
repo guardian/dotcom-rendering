@@ -13,7 +13,7 @@ describe('Elements', function () {
             // and retry until the body element is not empty
             return (
                 cy
-                    .get(iframeSelector)
+                    .get(iframeSelector, {timeout: 30000})
                     .its('0.contentDocument.body')
                     .should('not.be.empty')
                     // wraps "body" DOM element to allow
@@ -66,13 +66,14 @@ describe('Elements', function () {
                 return cy.get('*').each(($el) => {
                     if (
                         !$el.is('script') && // Remove script elements from check...
+                        $el.is(':visible') &&
                         $el.outerWidth() > docWidth
                     ) {
                         // This is brittle but if we're in here then we're trouble anyway
                         // hopefully it shows some context for where the problem comes from
                         // but you probably are going to want to be running Cypress locally
                         cy.log(
-                            `Element is wider than document: ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]}`,
+                            `At ${$el.outerWidth()}, ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]} is wider than ${docWidth}`,
                         );
                         hasElementTooWide = true;
                     }
