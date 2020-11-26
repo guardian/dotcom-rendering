@@ -131,7 +131,7 @@
         "@guardian/types": "^0.4.5",
         "@storybook/addon-actions": "^6.0.28",
         "@storybook/addon-links": "^5.2.5",
-        "@storybook/addon-storysource": "^5.2.8",
+        "@storybook/addon-storysource": "^6.1.6",
         "@storybook/addon-viewport": "^5.2.5",
         "@storybook/addons": "^5.2.5",
         "@storybook/react": "^5.3.19",
