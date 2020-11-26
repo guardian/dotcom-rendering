@@ -16,6 +16,8 @@ const roleCss = {
     `,
 
     supporting: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
         ${from.tablet} {
             position: relative;
             float: left;
