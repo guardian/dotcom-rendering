@@ -342,6 +342,7 @@ interface YoutubeBlockElement {
     posterSrc?: string;
     expired: boolean;
     overrideImage?: string;
+    altText?: string;
     youtubeIndex?: number;
 }
 
