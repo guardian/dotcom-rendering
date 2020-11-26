@@ -3,6 +3,11 @@ import { css } from 'emotion';
 import { from, until } from '@guardian/src-foundations/mq';
 
 const roleCss = {
+    inline: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
+    `,
+
     supporting: css`
         ${from.tablet} {
             position: relative;
@@ -95,7 +100,7 @@ const roleCss = {
 export const decidePosition = (role: RoleType) => {
     switch (role) {
         case 'inline':
-            return css``;
+            return roleCss.inline;
         case 'supporting':
             return roleCss.supporting;
         case 'immersive':
@@ -107,6 +112,6 @@ export const decidePosition = (role: RoleType) => {
         case 'halfWidth':
             return roleCss.halfWidth;
         default:
-            return css``;
+            return roleCss.inline;
     }
 };
