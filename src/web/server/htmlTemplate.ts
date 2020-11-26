@@ -1,4 +1,5 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
+import autoFoft from /* preval */ '@root/src/lib/auto-foft';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { getStatic, CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
@@ -203,8 +204,32 @@ export const htmlTemplate = ({
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
                 </noscript>
                 ${[...priorityScriptTags].join('\n')}
-                <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
-
+                <style class="webfont" data-auto-foft-fonts>${getFontsCss()}</style>
+                <script>
+                window.autoFoft = {
+                    defaultRules: [
+                        // mark: PswXqO - keep these in sync with preloads
+                        ({ family, weight, style }) =>
+                            (
+                                family === 'GuardianTextEgyptian' ||
+                                family === 'Guardian Text Egyptian Web' ||
+                                family === 'GuardianTextSans' ||
+                                family === 'Guardian Text Sans Web'
+                            ) &&
+                            weight === '400' &&
+                            style === 'normal',
+                        ({ family, weight, style }) =>
+                            (
+                                family === 'GH Guardian Headline' ||
+                                family === 'Guardian Egyptian Web'
+                            ) &&
+                            (weight === '500' || weight === '700') &&
+                            style === 'normal',
+                    ],
+                }
+                ${autoFoft}
+                </script>
+                <style>${resetCSS}${css}</style>
             </head>
 
             <body>
