@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 import { Display } from '@root/src/lib/display';
-import { decidePosition } from '@root/src/lib/decidePosition';
+import { Figure } from '@root/src/web/components/Figure';
 
 type Props = {
     display: Display;
@@ -23,7 +23,7 @@ export const ImageBlockComponent = ({
 }: Props) => {
     const { role } = element;
     return (
-        <div className={decidePosition(role)}>
+        <Figure role={role}>
             <ImageComponent
                 display={display}
                 designType={designType}
@@ -33,6 +33,6 @@ export const ImageBlockComponent = ({
                 role={role}
                 title={title}
             />
-        </div>
+        </Figure>
     );
 };
