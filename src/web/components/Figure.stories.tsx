@@ -15,7 +15,7 @@ import { breakpoints } from '@guardian/src-foundations/mq';
 import { Figure } from './Figure';
 
 const textHtml =
-    '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat.</p>';
+    '<p>US and British intelligence agencies have successfully cracked much of the online encryption relied upon by hundreds of millions of people to protect the privacy of their personal data, online transactions and emails, according to top-secret documents revealed by former contractor Edward Snowden.</p>';
 
 const SomeText = () => (
     <TextBlockComponent
@@ -88,9 +88,14 @@ export const SupportingStory = () => {
                 </LeftColumn>
                 <ArticleContainer>
                     <SomeText />
+                    <SomeText />
                     <Figure role="supporting">
                         <Grey heightInPixels={500} />
                     </Figure>
+                    <SomeText />
+                    <SomeText />
+                    <SomeText />
+                    <SomeText />
                     <SomeText />
                 </ArticleContainer>
                 <RightColumn>
@@ -134,11 +139,10 @@ export const ThumbnailStory = () => {
                 </LeftColumn>
                 <ArticleContainer>
                     <SomeText />
-                    <SomeText />
-                    <SomeText />
                     <Figure role="thumbnail">
                         <Grey heightInPixels={200} />
                     </Figure>
+                    <SomeText />
                     <SomeText />
                 </ArticleContainer>
                 <RightColumn>
