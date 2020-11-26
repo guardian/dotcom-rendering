@@ -231,21 +231,3 @@ export const videoTracking = ({ trackingEvent, elementId }: { trackingEvent: str
         }
     )
 }
-export const videoTracking = ({ trackingEvent, elementId }: { trackingEvent: string, elementId: string }) => {
-    const { ga } = window;
-
-    if (!ga) {
-        return;
-    }
-
-    ga(
-        send,
-        'event',
-        {
-            eventCategory: 'media',
-            eventAction: 'video content',
-            eventLabel: `${trackingEvent}:${elementId}`,
-            dimension19: elementId,
-        }
-    )
-}
