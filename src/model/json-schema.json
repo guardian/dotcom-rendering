@@ -2148,6 +2148,9 @@
                 "overrideImage": {
                     "type": "string"
                 },
+                "altText": {
+                    "type": "string"
+                },
                 "youtubeIndex": {
                     "type": "number"
                 }
