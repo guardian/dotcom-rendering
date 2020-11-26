@@ -10,6 +10,8 @@ const roleCss = {
             width: 300px;
             margin-right: 20px;
             line-height: 0;
+            margin-top: 6px;
+            margin-bottom: 12px;
         }
         ${from.leftCol} {
             margin-left: -160px;
@@ -21,6 +23,8 @@ const roleCss = {
     `,
 
     immersive: css`
+        margin-top: 12px;
+        margin-bottom: 12px;
         ${until.tablet} {
             margin-left: -20px;
             margin-right: -20px;
@@ -49,6 +53,8 @@ const roleCss = {
 
     showcase: css`
         position: relative;
+        margin-top: 12px;
+        margin-bottom: 12px;
         ${from.leftCol} {
             margin-left: -160px;
         }
@@ -62,6 +68,8 @@ const roleCss = {
         clear: left;
         width: 120px;
         margin-right: 20px;
+        margin-bottom: 0;
+        margin-top: 6px;
         ${from.tablet} {
             width: 140px;
         }
@@ -79,6 +87,8 @@ const roleCss = {
         float: left;
         clear: left;
         margin-right: 16px;
+        margin-top: 12px;
+        margin-bottom: 12px;
     `,
 };
 
