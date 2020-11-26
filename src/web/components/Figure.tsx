@@ -24,6 +24,7 @@ const roleCss = {
             width: 300px;
             margin-right: 20px;
             line-height: 0;
+            margin-top: 6px;
         }
         ${from.leftCol} {
             margin-left: -160px;
