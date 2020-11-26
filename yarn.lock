@@ -2172,10 +2172,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.4.1.tgz#357be3f0b21d80b5c6d5b879cdb150421a08b1e2"
-  integrity sha512-PMdJ8QmkYMIt8Vypr7QyZC5q8WQCT+Pazbs8vb9OZ7oOnNyMydyNGvGgxD8j0wCNFohtM/pCl6fm7W41p2EDOA==
+"@guardian/atoms-rendering@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-3.0.1.tgz#09f1701153780262e54f0f0d67602306ec4cc949"
+  integrity sha512-b/GrRP+DvYtptQOjV3T3D8PlU611xAaZPpjGWsow0C6XQ89FD2G8UKClmdqjjPNDZhKsOI/YbLQ7/FtorcN1fw==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -14802,17 +14802,17 @@ postcss@^8.0.2:
     nanoid "^3.1.16"
     source-map "^0.6.1"
 
-preact-render-to-string@^5.1.10:
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.10.tgz#cce03d73b166c550148af9dedc9e06fdf6820f8a"
-  integrity sha512-40svy7NDe5Qe0ymdsIC11f0hZb05MeTSUqqIaWJ5DEFCh/sF86KcpRW0kN/ymGYDVVUCfv9qFrVuLCXR7aQxgQ==
+preact-render-to-string@^5.1.12:
+  version "5.1.12"
+  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.12.tgz#3d258a177ef8947f768dd0f2c56629e7fda2dc39"
+  integrity sha512-nXVCOpvepSk9AfPwqS08rf9NDOCs8eeYYlG+7tE85iP5jVyjz+aYb1BYaP5SPdfVWVrzI9L5NzxozUvKaD96tA==
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.3.1.tgz#70a2cc5484ca727c992216dfc528907d240e0a05"
-  integrity sha512-CaKtEY235GtuypRRvaMxM3PNy44OzQj8BO7plXbPwF+iJzNnUufgHtqRA6NbjeWnfy+cN1dP1MFTAGxJmCiPqQ==
+preact@^10.5.7:
+  version "10.5.7"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.7.tgz#f1d84725539e18f7ccbea937cf3db5895661dbd3"
+  integrity sha512-4oEpz75t/0UNcwmcsjk+BIcDdk68oao+7kxcpc1hQPNs2Oo3ZL9xFz8UBf350mxk/VEdD41L5b4l2dE3Ug3RYg==
 
 prebuild-install@^5.3.0:
   version "5.3.0"

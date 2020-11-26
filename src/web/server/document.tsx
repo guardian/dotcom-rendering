@@ -1,6 +1,6 @@
 import React from 'react';
 import { extractCritical } from 'emotion-server';
-import { renderToString } from 'react-dom/server';
+import renderToString from 'preact-render-to-string';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
