@@ -10,6 +10,8 @@ import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { Display } from '@root/src/lib/display';
 
+import { breakpoints } from '@guardian/src-foundations/mq';
+
 import { Figure } from './Figure';
 
 const textHtml =
@@ -38,6 +40,20 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 export default {
     component: Figure,
     title: 'Components/Figure',
+    parameters: {
+        // Set the viewports in Chromatic at a component level.
+        chromatic: {
+            viewports: [
+                breakpoints.mobile,
+                breakpoints.mobileMedium,
+                breakpoints.phablet,
+                breakpoints.tablet,
+                breakpoints.desktop,
+                breakpoints.leftCol,
+                breakpoints.wide,
+            ],
+        },
+    },
 };
 
 export const InlineStory = () => {
