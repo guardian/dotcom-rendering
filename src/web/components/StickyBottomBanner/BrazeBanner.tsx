@@ -150,10 +150,24 @@ const getMessageFromBraze = async (
     return canShowPromise;
 };
 
+const FORCE_BRAZE_ALLOWLIST = [
+    'preview.gutools.co.uk',
+    'preview.code.dev-gutools.co.uk',
+    'localhost',
+    'm.thegulocal.com',
+];
+
 const getBrazeMetaFromQueryString = (): Meta | null => {
     if (URLSearchParams) {
-        const params = new URLSearchParams(window.location.search);
         const qsArg = 'force-braze-message';
+
+        if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
+            // eslint-disable-next-line no-console
+            console.log(`${qsArg} is not supported on this domain`);
+            return null;
+        }
+
+        const params = new URLSearchParams(window.location.search);
         const value = params.get(qsArg);
         if (value) {
             try {
