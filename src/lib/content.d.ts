@@ -351,13 +351,6 @@ interface YoutubeBlockElement {
     youtubeIndex?: number;
 }
 
-interface QuizBlockElement {
-    _type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
-    id: string;
-    questions: QuestionType[];
-    quizIndex?: number;
-}
-
 type CAPIElement =
     | AudioAtomBlockElement
     | AudioBlockElement
@@ -396,7 +389,6 @@ type CAPIElement =
     | TextBlockElement
     | TimelineBlockElement
     | TweetBlockElement
-    | QuizBlockElement
     | VideoBlockElement
     | VideoFacebookBlockElement
     | VideoVimeoBlockElement
