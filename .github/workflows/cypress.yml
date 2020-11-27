@@ -9,7 +9,7 @@ jobs:
             - name: Cypress run
               uses: cypress-io/github-action@v2
               with:
-                  start: make dev
+                  start: node scripts/frontend/dev-server
                   wait-on: 'http://localhost:3030'
                   quiet: true
                   browser: chrome
