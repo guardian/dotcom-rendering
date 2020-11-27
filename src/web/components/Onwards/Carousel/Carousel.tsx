@@ -3,7 +3,7 @@ import {
     SvgChevronLeftSingle,
     SvgChevronRightSingle,
 } from '@guardian/src-icons';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
@@ -165,7 +165,7 @@ const dotsStyle = css`
     }
 `;
 
-const dotStyle = (index: number, totalStories: number) => css`
+const dotStyle = css`
     cursor: pointer;
     display: inline-block;
     height: ${space[3]}px;
@@ -181,25 +181,26 @@ const dotStyle = (index: number, totalStories: number) => css`
         background-color: ${palette.neutral[86]};
         outline: none;
     }
+`;
 
+const dotActiveStyle = css`
+    background-color: ${palette.news[400]};
+
+    &:hover,
+    &:focus {
+        background-color: ${palette.news[300]};
+    }
+`;
+
+const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
     /* This is a bit of a hack for the test, while we think of better UX here.
-    It's very fragile to things like carousel item count.*/
+    The dots can't line up on Desktop because we don't show 1 story per swipe*/
     ${from.phablet} {
         display: ${index >= totalStories - 1 ? 'none' : 'auto'};
     }
 
     ${from.desktop} {
         display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-    }
-`;
-
-const dotActiveStyle = (index: number, totalStories: number) => css`
-    ${dotStyle(index, totalStories)};
-    background-color: ${palette.news[400]};
-
-    &:hover,
-    &:focus {
-        background-color: ${palette.news[300]};
     }
 `;
 
@@ -453,11 +454,11 @@ export const Carousel: React.FC<OnwardsType> = ({
                             // are tabb-able themselves so we hide them with aria and make them
                             // not available to keyboard
                             aria-hidden="true"
-                            className={
-                                i === index
-                                    ? dotActiveStyle(i, trails.length)
-                                    : dotStyle(i, trails.length)
-                            }
+                            className={cx(
+                                dotStyle,
+                                i === index && dotActiveStyle,
+                                adjustNumberOfDotsStyle(i, trails.length),
+                            )}
                         />
                     ))}
                 </div>
