@@ -220,7 +220,8 @@ export const htmlTemplate = ({
                             case 'Guardian Text Egyptian Web':
                             case 'GuardianTextSans':
                             case 'Guardian Text Sans Web':
-                                return font.weight === 'normal' || font.weight === '400';
+                                return (font.weight === 'normal' || font.weight === '400') && 
+                                    font.style === 'normal';
                             case 'GH Guardian Headline':
                             case 'Guardian Egyptian Web':
                                 return (font.weight === '500' || font.weight === '700') &&
