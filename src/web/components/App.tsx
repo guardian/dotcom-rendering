@@ -409,6 +409,8 @@ export const App = ({ CAPI, NAV }: Props) => {
             if (consentGiven) {
                 loadScript('https://www.google-analytics.com/analytics.js');
                 loadScript(window.guardian.gaPath);
+            } else {
+                (window as any).ga = null;
             }
         });
     }, []);
