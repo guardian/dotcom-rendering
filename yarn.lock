@@ -5125,9 +5125,9 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-auto-foft@guardian/auto-foft#1232160:
+auto-foft@guardian/auto-foft#0a6510c:
   version "0.1.0"
-  resolved "https://codeload.github.com/guardian/auto-foft/tar.gz/1232160e70f01d7872333022a9dbabd22828e0a7"
+  resolved "https://codeload.github.com/guardian/auto-foft/tar.gz/0a6510cfb7c62e2e4660dcd510352f8cf264eb0a"
 
 autoprefixer@^9.5.1:
   version "9.6.1"
