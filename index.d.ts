@@ -412,13 +412,22 @@ type AnswerType = {
     text: string;
     revealText?: string;
     isCorrect: boolean;
+    buckets: string[];
 };
+
+type QuizAtomResultBucketType = {
+    id: string;
+    title: string;
+    description: string;
+    // assets TODO:
+}
 
 type QuestionType = {
     id: string;
     text: string;
     answers: AnswerType[];
     imageUrl?: string;
+    resultBuckets: QuizAtomResultBucketType[]
 }
 
 interface LinkHeadlineType {
