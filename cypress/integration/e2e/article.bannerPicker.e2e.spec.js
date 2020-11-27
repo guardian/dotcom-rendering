@@ -5,7 +5,7 @@ import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 describe('Banner Picker Integration', function () {
     const cmpIframe = () => {
         return cy
-            .get('iframe[id*="sp_message_iframe"]')
+            .get('iframe[id*="sp_message_iframe"]', { timeout: 30000 })
             .its('0.contentDocument.body')
             .should('not.be.empty')
             .then(cy.wrap);
