@@ -13,8 +13,8 @@ describe('E2E Page rendering', function () {
     describe('for WEB', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         articles.map((article, index) => {
-            it(`It should load the designType under the pillar (${article.url})`, function () {
-                const { url: articleUrl, designType, pillar } = article;
+          const { url: articleUrl, designType, pillar } = article;
+            it(`It should load ${designType} articles under the pillar ${pillar} (${articleUrl})`, function () {
                 const url = setUrlFragment(articleUrl, {
                     'ab-CuratedContainerTest2': 'control',
                 });
