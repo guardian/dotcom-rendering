@@ -26,30 +26,33 @@ describe('E2E Page rendering', function () {
 
                 if (!article.hideMostViewed) {
                     cy.intercept('GET', '**/most-read-geo**', (req) => {
-                        expect(req.body).to.have.property(
-                            'heading',
-                        );
-                        expect(req.status).to.be.equal(200);
-
-                        cy.contains('Most viewed');
+                        req.reply((res) => {
+                            expect(res.body).to.have.property('heading');
+                            expect(req.statusCode).to.be.equal(200);
+                            cy.contains('Most viewed');
+                        })
                     });
                 }
 
                 cy.scrollTo('bottom', { duration: 500 });
 
                 cy.intercept('POST', '/sharecount/**', (req) => {
-                    expect(req.status).to.be.equal(200);
-                    expect(req.body).to.have.property('path');
-                    expect(req.body).to.have.property('refreshStatus');
-                    expect(req.body)
-                        .to.have.property('share_count')
-                        .that.is.a('number');
+                    req.reply((res) => {
+                        expect(res.statusCode).to.be.equal(200);
+                        expect(res.body).to.have.property('path');
+                        expect(res.body).to.have.property('refreshStatus');
+                        expect(res.body)
+                            .to.have.property('share_count')
+                            .that.is.a('number');
+                    })
                 })
 
                 if (article.hasRichLinks) {
                     cy.intercept('GET', '/embed/card/**', (req) => {
-                        expect(req.status).to.be.equal(200);
-                        cy.contains('Read more');
+                        req.reply((res) => {
+                            expect(res.statusCode).to.be.equal(200);
+                            cy.contains('Read more');
+                        })
                     });
                 }
 
@@ -59,9 +62,11 @@ describe('E2E Page rendering', function () {
                 cy.scrollTo('bottom', { duration: 500 });
 
                 cy.intercept('GET', '/most-read/**', (req) => {
-                    expect(req.body).to.have.property('tabs');
-                    expect(req.status).to.be.equal(200);
-                    cy.contains('Most commented');
+                    req.reply((res) => {
+                        expect(res.body).to.have.property('tabs');
+                        expect(res.statusCode).to.be.equal(200);
+                        cy.contains('Most commented');
+                    })
                 });
             });
         });
