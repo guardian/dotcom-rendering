@@ -29,6 +29,8 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
+import { Figure } from '@root/src/web/components/Figure';
+
 import {
     AudioAtom,
     ChartAtom,
@@ -145,20 +147,24 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     if (!element.safe) {
                         return (
-                            <UnsafeEmbedBlockComponent
-                                key={i}
-                                html={element.html}
-                                alt={element.alt || ''}
-                                index={i}
-                            />
+                            <Figure role={element.role}>
+                                <UnsafeEmbedBlockComponent
+                                    key={i}
+                                    html={element.html}
+                                    alt={element.alt || ''}
+                                    index={i}
+                                />
+                            </Figure>
                         );
                     }
                     return (
-                        <EmbedBlockComponent
-                            key={i}
-                            html={element.html}
-                            alt={element.alt}
-                        />
+                        <Figure role={element.role}>
+                            <EmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                                alt={element.alt}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (

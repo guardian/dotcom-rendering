@@ -2326,6 +2326,7 @@ export const AdvertisementFeature: CAPIType = {
                     safe: false,
                     alt:
                         'Do you have a pressing question about electric cars? Submit it below for your chance to have your question answered by an EV expert...',
+                    role: 'supporting',
                     _type:
                         'model.dotcomrendering.pageElements.EmbedBlockElement',
                     html:
