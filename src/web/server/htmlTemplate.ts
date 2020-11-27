@@ -207,25 +207,21 @@ export const htmlTemplate = ({
                 <style class="webfont" data-auto-foft-fonts>${getFontsCss()}</style>
                 <script>
                 window.autoFoft = {
-                    defaultRules: [
-                        // mark: PswXqO - keep these in sync with preloads
-                        ({ family, weight, style }) =>
-                            (
-                                family === 'GuardianTextEgyptian' ||
-                                family === 'Guardian Text Egyptian Web' ||
-                                family === 'GuardianTextSans' ||
-                                family === 'Guardian Text Sans Web'
-                            ) &&
-                            weight === '400' &&
-                            style === 'normal',
-                        ({ family, weight, style }) =>
-                            (
-                                family === 'GH Guardian Headline' ||
-                                family === 'Guardian Egyptian Web'
-                            ) &&
-                            (weight === '500' || weight === '700') &&
-                            style === 'normal',
-                    ],
+                    isCritical: ({ family, style, weight }) => {
+                        switch (family) {
+                            case 'GuardianTextEgyptian':
+                            case 'Guardian Text Egyptian Web':
+                            case 'GuardianTextSans':
+                            case 'Guardian Text Sans Web':
+                                return weight === 'normal' || weight === '400';
+                            case 'GH Guardian Headline':
+                            case 'Guardian Egyptian Web':
+                                return (weight === '500' || weight === '700') &&
+                                    style === 'normal';
+                            default:
+                                return false;
+                        }
+                    }
                 }
                 ${autoFoft}
                 </script>
