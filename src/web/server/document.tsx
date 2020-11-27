@@ -56,7 +56,7 @@ export const document = ({ data }: Props) => {
     );
 
     /**
-     * Preload the following woff2 font files
+     * Preload the critical woff2 font files
      * mark: PswXqO - keep these in sync with autoFoft rules
      */
     const fontFiles = [
