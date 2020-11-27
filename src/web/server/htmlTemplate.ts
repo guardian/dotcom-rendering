@@ -207,6 +207,12 @@ export const htmlTemplate = ({
                 <style data-auto-foft-fonts>${getFontsCss()}</style>
                 <script>
                 // mark: PswXqO - keep these in sync with preloads
+                // Using https://github.com/guardian/auto-foft
+                // and fonts from https://github.com/guardian/fonts
+                // We load the regular weight, non-italic versions of body
+                // fonts, and the bold and medium weights of headlines.
+                // The weightings are described in 
+ 				// https://theguardian.design/2a1e5182b/p/930d69-typography
                 window.autoFoft = {
                     isCritical: function (font) {
                         switch (font.family) {
