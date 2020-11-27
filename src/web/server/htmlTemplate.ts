@@ -210,13 +210,17 @@ export const htmlTemplate = ({
                 window.autoFoft = {
                     isCritical: function (font) {
                         switch (font.family) {
+                            case 'GuardianTextEgyptian':
+                            case 'Guardian Text Egyptian Web':
+                            case 'GuardianTextSans':
+                            case 'Guardian Text Sans Web':
+                                return font.weight === 'normal' || font.weight === '400';
                             case 'GH Guardian Headline':
                             case 'Guardian Egyptian Web':
                                 return (font.weight === '500' || font.weight === '700') &&
                                     font.style === 'normal';
                             default:
-                                return (font.weight === 'normal' || font.weight === '400') &&
-                                    font.style === 'normal';
+                                return false;
                         }
                     }
                 }
