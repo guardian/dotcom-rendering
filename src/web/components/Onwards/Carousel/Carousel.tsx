@@ -10,6 +10,7 @@ import { palette, space } from '@guardian/src-foundations';
 import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
+import { pillarPalette } from '@root/src/lib/pillars';
 import { CardAge } from '../../Card/components/CardAge';
 import { Kicker } from '../../Kicker';
 import { headlineBackgroundColour, headlineColour } from './cardColours';
@@ -247,13 +248,20 @@ const headerStyles = css`
     padding-top: 0;
 `;
 
-const titleStyle = css`
-    color: ${palette.news[400]};
+const titleStyle = (pillar: Pillar) => css`
+    color: ${pillarPalette[pillar].main};
 `;
 
-export const Title = ({ title }: { title: string; url?: string }) => (
+export const Title = ({
+    title,
+    pillar,
+}: {
+    title: string;
+    url?: string;
+    pillar: Pillar;
+}) => (
     <h2 className={headerStyles}>
-        From <span className={titleStyle}>{title}</span>
+        More from <span className={titleStyle(pillar)}>{title}</span>
     </h2>
 );
 
@@ -313,6 +321,7 @@ export const Carousel: React.FC<OnwardsType> = ({
     heading,
     trails,
     ophanComponentName,
+    pillar,
 }: OnwardsType) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
@@ -426,7 +435,7 @@ export const Carousel: React.FC<OnwardsType> = ({
                 data-link={formatAttrString(heading)}
             >
                 <div className={navRowStyles}>
-                    <Title title={heading} />
+                    <Title title={heading} pillar={pillar} />
 
                     <div className={navIconStyle} data-link-name="nav-arrow">
                         <button
