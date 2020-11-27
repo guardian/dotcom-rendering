@@ -18343,7 +18343,14 @@ tslint-eslint-rules@^5.4.0:
     tslib "1.9.0"
     tsutils "^3.0.0"
 
-tslint-microsoft-contrib@^5.0.3, tslint-microsoft-contrib@~5.2.1:
+tslint-microsoft-contrib@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-6.2.0.tgz#8aa0f40584d066d05e6a5e7988da5163b85f2ad4"
+  integrity sha512-6tfi/2tHqV/3CL77pULBcK+foty11Rr0idRDxKnteTaKm6gWF9qmaCNU17HVssOuwlYNyOmd9Jsmjd+1t3a3qw==
+  dependencies:
+    tsutils "^2.27.2 <2.29.0"
+
+tslint-microsoft-contrib@~5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-5.2.1.tgz#a6286839f800e2591d041ea2800c77487844ad81"
   integrity sha512-PDYjvpo0gN9IfMULwKk0KpVOPMhU6cNoT9VwCOLeDl/QS8v8W2yspRpFFuUS7/c5EIH/n8ApMi8TxJAz1tfFUA==
@@ -18359,12 +18366,12 @@ tslint-plugin-prettier@^2.3.0:
     lines-and-columns "^1.1.6"
     tslib "^1.7.1"
 
-tslint-react-a11y@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/tslint-react-a11y/-/tslint-react-a11y-1.0.0.tgz#001a71747a25b8ccd3df240131d66aef02411fe8"
-  integrity sha512-F6BeD5OWkossIOcgdIbm6C/V+Y+EodpgSHy64QF2kpiem72SI4yZ8Z3G7dZQSle0nyKqWGYnAqXsnRpoqCpWGA==
+tslint-react-a11y@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tslint-react-a11y/-/tslint-react-a11y-1.1.0.tgz#7cd5bd5b5cf0e4305d4992e868967a34b8aa46e5"
+  integrity sha512-Ak0qwV2eg93ai8/UChxJR4hc4AQPl1XBtBmQwiSrbDYkFjI95BpGy9hEM5DTwWhEW8huNIUwxfST10dRWUwhOg==
   dependencies:
-    tslint-microsoft-contrib "^5.0.3"
+    tslint-microsoft-contrib "^6.2.0"
 
 tslint-react@^4.0.0:
   version "4.0.0"
