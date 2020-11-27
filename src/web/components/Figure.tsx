@@ -1,22 +1,31 @@
+import React from 'react';
 import { css } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
+
+type Props = {
+    role?: RoleType;
+    children: JSXElements;
+    id?: string;
+};
 
 const roleCss = {
     inline: css`
-        margin-top: 12px;
-        margin-bottom: 12px;
+        margin-top: ${space[3]}px;
+        margin-bottom: ${space[3]}px;
     `,
 
     supporting: css`
+        margin-top: ${space[3]}px;
+        margin-bottom: ${space[3]}px;
         ${from.tablet} {
             position: relative;
             float: left;
             width: 300px;
             margin-right: 20px;
             line-height: 0;
-            margin-top: 6px;
-            margin-bottom: 12px;
+            margin-top: ${space[2]}px;
         }
         ${from.leftCol} {
             margin-left: -160px;
@@ -28,8 +37,8 @@ const roleCss = {
     `,
 
     immersive: css`
-        margin-top: 12px;
-        margin-bottom: 12px;
+        margin-top: ${space[3]}px;
+        margin-bottom: ${space[3]}px;
         ${until.tablet} {
             margin-left: -20px;
             margin-right: -20px;
@@ -57,9 +66,9 @@ const roleCss = {
     `,
 
     showcase: css`
+        margin-top: ${space[3]}px;
+        margin-bottom: ${space[3]}px;
         position: relative;
-        margin-top: 12px;
-        margin-bottom: 12px;
         ${from.leftCol} {
             margin-left: -160px;
         }
@@ -69,12 +78,12 @@ const roleCss = {
     `,
 
     thumbnail: css`
+        margin-top: ${space[2]}px;
+        margin-bottom: ${space[2]}px;
         float: left;
         clear: left;
         width: 120px;
         margin-right: 20px;
-        margin-bottom: 0;
-        margin-top: 6px;
         ${from.tablet} {
             width: 140px;
         }
@@ -88,16 +97,16 @@ const roleCss = {
     `,
 
     halfWidth: css`
+        margin-top: ${space[3]}px;
+        margin-bottom: ${space[3]}px;
         width: 50%;
         float: left;
         clear: left;
         margin-right: 16px;
-        margin-top: 12px;
-        margin-bottom: 12px;
     `,
 };
 
-export const decidePosition = (role: RoleType) => {
+const decidePosition = (role: RoleType) => {
     switch (role) {
         case 'inline':
             return roleCss.inline;
@@ -114,4 +123,16 @@ export const decidePosition = (role: RoleType) => {
         default:
             return roleCss.inline;
     }
+};
+
+export const Figure = ({
+    role = 'inline',
+    children,
+    id,
+}: Props): JSX.Element => {
+    return (
+        <figure id={id} className={decidePosition(role)}>
+            {children}
+        </figure>
+    );
 };
