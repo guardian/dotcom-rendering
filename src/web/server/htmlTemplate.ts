@@ -208,17 +208,17 @@ export const htmlTemplate = ({
                 <script>
                 // mark: PswXqO - keep these in sync with preloads
                 window.autoFoft = {
-                    isCritical: ({ family, style, weight }) => {
-                        switch (family) {
+                    isCritical: function (font) {
+                        switch (font.family) {
                             case 'GuardianTextEgyptian':
                             case 'Guardian Text Egyptian Web':
                             case 'GuardianTextSans':
                             case 'Guardian Text Sans Web':
-                                return weight === 'normal' || weight === '400';
+                                return font.weight === 'normal' || font.weight === '400';
                             case 'GH Guardian Headline':
                             case 'Guardian Egyptian Web':
-                                return (weight === '500' || weight === '700') &&
-                                    style === 'normal';
+                                return (font.weight === '500' || font.weight === '700') &&
+                                    font.style === 'normal';
                             default:
                                 return false;
                         }
