@@ -26,7 +26,7 @@ describe('E2E Page rendering', function () {
 
                 if (!article.hideMostViewed) {
                     cy.intercept('GET', '**/most-read-geo**', (req) => {
-                        expect(req.response.body).to.have.property(
+                        expect(req.body).to.have.property(
                             'heading',
                         );
                         expect(req.status).to.be.equal(200);
@@ -39,9 +39,9 @@ describe('E2E Page rendering', function () {
 
                 cy.intercept('POST', '/sharecount/**', (req) => {
                     expect(req.status).to.be.equal(200);
-                    expect(req.response.body).to.have.property('path');
-                    expect(req.response.body).to.have.property('refreshStatus');
-                    expect(req.response.body)
+                    expect(req.body).to.have.property('path');
+                    expect(req.body).to.have.property('refreshStatus');
+                    expect(req.body)
                         .to.have.property('share_count')
                         .that.is.a('number');
                 })
@@ -59,7 +59,7 @@ describe('E2E Page rendering', function () {
                 cy.scrollTo('bottom', { duration: 500 });
 
                 cy.intercept('GET', '/most-read/**', (req) => {
-                    expect(req.response.body).to.have.property('tabs');
+                    expect(req.body).to.have.property('tabs');
                     expect(req.status).to.be.equal(200);
                     cy.contains('Most commented');
                 });
