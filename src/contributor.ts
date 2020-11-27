@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { Role } from '@guardian/image-rendering/src/image';
+import { Role } from '@guardian/image-rendering';
 import type { Option } from '@guardian/types/option';
 import { fromNullable, map, none } from '@guardian/types/option';
 import { articleContributors } from 'capi';

@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css, jsx as styledH } from '@emotion/core';
-import { Role } from '@guardian/image-rendering/src/image';
+import { Role } from '@guardian/image-rendering';
 import { neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types/Format';
 import { Design } from '@guardian/types/Format';

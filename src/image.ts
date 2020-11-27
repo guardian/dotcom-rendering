@@ -3,8 +3,8 @@
 import { createHash } from 'crypto';
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import type { Image as ImageData } from '@guardian/image-rendering/src/image';
-import { Role } from '@guardian/image-rendering/src/image';
+import type { Image as ImageData } from '@guardian/image-rendering';
+import { Role } from '@guardian/image-rendering';
 import type { Format } from '@guardian/types/Format';
 import { andThen, fromNullable, map, none, some } from '@guardian/types/option';
 import type { Option } from '@guardian/types/option';

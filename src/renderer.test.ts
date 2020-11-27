@@ -10,7 +10,7 @@ import { Pillar } from '@guardian/types/Format';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { Role } from '@guardian/image-rendering/src/image';
+import { Role } from '@guardian/image-rendering';
 import { none, some } from '@guardian/types/option';
 import { Design, Display, Format } from '@guardian/types/Format';
 import { renderToStaticMarkup } from 'react-dom/server';
