@@ -10,6 +10,7 @@ import {
 import { palette } from '@guardian/src-foundations';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import { Ticker } from "@root/src/amp/components/Ticker";
+import {AmpExperimentComponent} from "@root/src/amp/components/AmpExperiment";
 
 const epic = css`
     border-top: 0.0625rem solid ${palette.brandAlt[400]};
@@ -128,12 +129,23 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = process.env.NODE_ENV === 'production'
-        ? 'https://contributions.guardianapis.com/amp/epic'
-        : 'https://contributions.code.dev-guardianapis.com/amp/epic';
+    const epicUrl = 'http://localhost:4567/amp/epic';
+    // const epicUrl = process.env.NODE_ENV === 'production'
+    //     ? 'https://contributions.guardianapis.com/amp/epic'
+    //     : 'https://contributions.code.dev-guardianapis.com/amp/epic';
+
+    const experiments = {
+        'epic-experiment': {
+            variants: {
+               'control' : 50.0,
+               'variant': 50.0,
+            },
+        },
+    }
 
     return (
         <div>
+            <AmpExperimentComponent data={experiments} />
             <amp-list
                 layout='fixed-height'
                 // This means that if the user refreshes at the end of the article while the epic is in view then the epic
@@ -144,7 +156,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
                 credentials='include'
             >
                 <MoustacheTemplate>
-                    <div className={epic}>
+                    <div className={epic} id={moustacheVariable('variantName')}>
                         <MoustacheSection name="ticker">
                             <Ticker
                                 percentage={moustacheVariable('percentage')}

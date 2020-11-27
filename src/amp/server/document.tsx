@@ -66,6 +66,8 @@ export const document = ({
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     <!-- AMP elements that are always required -->
+    <script async custom-element="amp-experiment" src="https://cdn.ampproject.org/v0/amp-experiment-0.1.js"></script>
+    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
@@ -83,7 +85,19 @@ export const document = ({
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}
 
-    <style amp-custom>${getFontsCss()}${resetCSS}${css}</style>
+    <style amp-custom>
+        ${getFontsCss()}
+        ${resetCSS}
+        ${css}
+
+        body[amp-x-epic-experiment='control'] div#variant  {
+            display: none;
+        }
+        body[amp-x-epic-experiment='variant'] div#control  {
+            display: none;
+        }
+    </style>
+
     </head>
     <body>
     ${html}
