@@ -489,9 +489,9 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.quizAtoms.map((quizAtoms, index) => (
                 <Hydrate
-                key={index}
-                root="quiz-atom"
-                index={quizAtoms.quizIndex}
+                    key={index}
+                    root="quiz-atom"
+                    index={quizAtoms.quizIndex}
                 >
                     <QuizAtom id={quizAtoms.id} questions={quizAtoms.questions}
                     />
