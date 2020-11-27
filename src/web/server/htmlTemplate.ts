@@ -204,8 +204,9 @@ export const htmlTemplate = ({
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
                 </noscript>
                 ${[...priorityScriptTags].join('\n')}
-                <style class="webfont" data-auto-foft-fonts>${getFontsCss()}</style>
+                <style data-auto-foft-fonts>${getFontsCss()}</style>
                 <script>
+                // mark: PswXqO - keep these in sync with preloads
                 window.autoFoft = {
                     isCritical: ({ family, style, weight }) => {
                         switch (family) {
