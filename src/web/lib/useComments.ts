@@ -46,6 +46,7 @@ const withComments = (
             url: section.url,
             trails: updateTrailsWithCounts(section.trails, counts),
             ophanComponentName: section.ophanComponentName,
+            pillar: 'opinion',
         };
     });
 };

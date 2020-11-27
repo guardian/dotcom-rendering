@@ -497,6 +497,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
+    pillar: Pillar;
 };
 
 type OphanComponentName =

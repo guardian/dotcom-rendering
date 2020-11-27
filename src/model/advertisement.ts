@@ -86,7 +86,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'right',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                mobile: ['1,1|2,2|300,250|300,274|fluid'],
+                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
                 // mark: 01303e88-ef1f-462d-9b6e-242419435cec
             },
             showLabel: true,

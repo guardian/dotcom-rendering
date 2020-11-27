@@ -599,6 +599,7 @@ export const CommentLayout = ({
                 padded={false}
                 backgroundColour={brandBackground.primary}
                 borderColour={brandBorder.primary}
+                showSideBorders={false}
             >
                 <Footer
                     pageFooter={CAPI.pageFooter}
