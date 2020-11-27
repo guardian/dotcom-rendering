@@ -448,6 +448,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "quoted": {
+                    "type": "boolean"
                 }
             },
             "required": [

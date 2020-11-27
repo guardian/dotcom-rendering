@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const qandaUrl =
     'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';
@@ -16,6 +17,10 @@ const chartUrl =
     'https://www.theguardian.com/technology/2020/aug/19/apple-becomes-wall-streets-first-2tn-company';
 const atomExpandableTests = (type, url) => {
     describe(type, function () {
+        beforeEach(function () {
+            setLocalBaseUrl();
+        });
+
         it('should render', function () {
             cy.visit(`/Article?url=${url}`);
             cy.get(`[data-snippet-type=${type}]`).should('be.visible');
@@ -67,6 +72,10 @@ const atomExpandableTests = (type, url) => {
 
 const atomGenericTests = (type, url) => {
     describe(type, function () {
+        beforeEach(function () {
+            setLocalBaseUrl();
+        });
+
         it('should render', function () {
             cy.visit(`/Article?url=${url}`);
             cy.get(`[data-snippet-type=${type}]`).should('be.visible');

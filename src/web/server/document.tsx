@@ -86,6 +86,7 @@ export const document = ({ data }: Props) => {
     const priorityScriptTags = generateScriptTags(
         [
             { src: polyfillIO },
+            { src: 'ophan.js', module: true },
             CAPI.config && { src: CAPI.config.commercialBundleUrl },
             { src: 'sentry.js', module: true },
             { src: 'dynamicImport.js', module: true },

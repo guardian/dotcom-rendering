@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('Banner Picker Integration', function () {
     const cmpIframe = () => {
@@ -9,6 +10,10 @@ describe('Banner Picker Integration', function () {
             .should('not.be.empty')
             .then(cy.wrap);
     };
+
+    beforeEach(function () {
+        setLocalBaseUrl();
+    });
 
     describe('When consent cookies are not set', function () {
         it('shows the CMP', function () {

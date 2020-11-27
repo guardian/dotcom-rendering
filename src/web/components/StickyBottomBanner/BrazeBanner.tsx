@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
-import { onConsentChange } from '@guardian/consent-management-platform';
+import {
+    getConsentFor,
+    onConsentChange,
+} from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
+import {
+    submitComponentEvent,
+    record,
+} from '@root/src/web/browser/ophan/ophan';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
-
-export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 type Meta = {
     dataFromBraze: {
@@ -31,13 +35,13 @@ const containerStyles = emotion.css`
 `;
 
 export const hasRequiredConsents = (): Promise<boolean> =>
-    new Promise((resolve) => {
-        onConsentChange(({ tcfv2, ccpa }) => {
-            const consentGivenUnderCcpa = ccpa && !ccpa.doNotSell;
-            const consentGivenUnderTcfv2 =
-                tcfv2 && tcfv2.vendorConsents[brazeVendorId];
-
-            resolve(Boolean(consentGivenUnderCcpa || consentGivenUnderTcfv2));
+    new Promise((resolve, reject) => {
+        onConsentChange((state) => {
+            try {
+                resolve(getConsentFor('braze', state));
+            } catch (e) {
+                reject(e);
+            }
         });
     });
 
@@ -61,13 +65,10 @@ export const canShowPreChecks = ({
             !pageConfig.isPaidContent,
     );
 
-
-
 const getMessageFromBraze = async (
     apiKey: string,
     brazeUuid: string,
 ): Promise<CanShowResult> => {
-
     const sdkLoadTiming = initPerf('braze-sdk-load');
     sdkLoadTiming.start();
 
@@ -93,7 +94,6 @@ const getMessageFromBraze = async (
     });
 
     const canShowPromise: Promise<CanShowResult> = new Promise((resolve) => {
-
         appboy.subscribeToInAppMessage((message: any) => {
             const { extras } = message;
 
@@ -132,20 +132,22 @@ const getMessageFromBraze = async (
         appboy.openSession();
     });
 
-    canShowPromise.then(() => {
-        const appboyTimeTaken = appboyTiming.end();
+    canShowPromise
+        .then(() => {
+            const appboyTimeTaken = appboyTiming.end();
 
-        record({
-            component: 'braze-appboy-timing',
-            value: appboyTimeTaken,
+            record({
+                component: 'braze-appboy-timing',
+                value: appboyTimeTaken,
+            });
+        })
+        .catch(() => {
+            appboyTiming.clear();
+            // eslint-disable-next-line no-console
+            console.log('Appboy Timing failed.');
         });
-    }).catch(() => {
-        appboyTiming.clear();
-        // eslint-disable-next-line no-console
-        console.log("Appboy Timing failed.");
-    });
 
-    return canShowPromise
+    return canShowPromise;
 };
 
 const getBrazeMetaFromQueryString = (): Meta | null => {
@@ -223,7 +225,7 @@ export const canShow = async (
     }
 
     try {
-        const result = await getMessageFromBraze(apiKey as string, brazeUuid)
+        const result = await getMessageFromBraze(apiKey as string, brazeUuid);
 
         const timeTaken = bannerTiming.end();
         record({
