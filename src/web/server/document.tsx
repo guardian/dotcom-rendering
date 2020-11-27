@@ -60,10 +60,10 @@ export const document = ({ data }: Props) => {
      * mark: PswXqO - keep these in sync with autoFoft rules
      */
     const fontFiles = [
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
         'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
         'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
     ];
 
     const polyfillIO =
