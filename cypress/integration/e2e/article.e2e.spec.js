@@ -13,7 +13,7 @@ describe('E2E Page rendering', function () {
     describe('for WEB', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         articles.map((article, index) => {
-          const { url: articleUrl, designType, pillar } = article;
+            const { url: articleUrl, designType, pillar } = article;
             it(`It should load ${designType} articles under the pillar ${pillar} (${articleUrl})`, function () {
                 const url = setUrlFragment(articleUrl, {
                     'ab-CuratedContainerTest2': 'control',
@@ -30,7 +30,7 @@ describe('E2E Page rendering', function () {
                             expect(res.body).to.have.property('heading');
                             expect(res.statusCode).to.be.equal(200);
                             cy.contains('Most viewed');
-                        })
+                        });
                     });
                 }
 
@@ -44,15 +44,15 @@ describe('E2E Page rendering', function () {
                         expect(res.body)
                             .to.have.property('share_count')
                             .that.is.a('number');
-                    })
-                })
+                    });
+                });
 
                 if (article.hasRichLinks) {
                     cy.intercept('GET', '/embed/card/**', (req) => {
                         req.reply((res) => {
                             expect(res.statusCode).to.be.equal(200);
                             cy.contains('Read more');
-                        })
+                        });
                     });
                 }
 
@@ -66,7 +66,7 @@ describe('E2E Page rendering', function () {
                         expect(res.body).to.have.property('tabs');
                         expect(res.statusCode).to.be.equal(200);
                         cy.contains('Most commented');
-                    })
+                    });
                 });
             });
         });
