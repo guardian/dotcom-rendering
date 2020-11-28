@@ -30,7 +30,7 @@ describe('Elements', function () {
 
             getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
                 timeout: 30000,
-            }).contains('Data from PHE');
+            }).contains('from PHE');
         });
 
         it('should render the counted interactive embed', function () {
