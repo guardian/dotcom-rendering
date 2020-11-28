@@ -13,7 +13,7 @@ describe('Elements', function () {
             // and retry until the body element is not empty
             return (
                 cy
-                    .get(iframeSelector, {timeout: 30000})
+                    .get(iframeSelector, { timeout: 30000 })
                     .its('0.contentDocument.body')
                     .should('not.be.empty')
                     // wraps "body" DOM element to allow
@@ -73,7 +73,11 @@ describe('Elements', function () {
                         // hopefully it shows some context for where the problem comes from
                         // but you probably are going to want to be running Cypress locally
                         cy.log(
-                            `At ${$el.outerWidth()}, ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]} is wider than ${docWidth}`,
+                            `At ${$el.outerWidth()}, ${
+                                $el[0].classList[0]
+                            } in parent ${
+                                $el[0].parentElement.classList[0]
+                            } is wider than ${docWidth}`,
                         );
                         hasElementTooWide = true;
                     }
