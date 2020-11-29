@@ -15,9 +15,9 @@ const linkStyles = css`
     }
 `;
 
-const headerStyles = css`
+const headerStyles = (fontColour?: string) => css`
     ${headline.xsmall({ fontWeight: 'bold' })};
-    color: ${text.primary};
+    color: ${fontColour || text.primary};
     padding-bottom: ${space[2]}px;
     padding-top: ${space[1]}px;
     margin-left: 0;
@@ -31,9 +31,9 @@ const headerStyles = css`
     }
 `;
 
-const descriptionStyles = css`
+const descriptionStyles = (fontColour?: string) => css`
     ${headline.xxxsmall({ fontWeight: 'medium' })};
-    color: ${text.supporting};
+    color: ${fontColour || text.supporting};
     p {
         /* Handle paragraphs in the description */
         margin-bottom: ${space[3]}px;
@@ -48,26 +48,28 @@ const descriptionStyles = css`
     }
 `;
 
-export const OnwardsTitle = ({
+export const SectionTitle = ({
     title,
+    fontColour,
     description,
     url,
 }: {
-    title: string;
+    title?: string;
+    fontColour?: string;
     description?: string;
     url?: string;
 }) => (
     <>
         {url ? (
             <a className={linkStyles} href={url}>
-                <h2 className={headerStyles}>{title}</h2>
+                <h2 className={headerStyles(fontColour)}>{title}</h2>
             </a>
         ) : (
-            <h2 className={headerStyles}>{title}</h2>
+            <h2 className={headerStyles(fontColour)}>{title}</h2>
         )}
         {description && (
             <p
-                className={descriptionStyles}
+                className={descriptionStyles(fontColour)}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         )}
