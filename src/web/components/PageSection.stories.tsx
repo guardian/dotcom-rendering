@@ -107,6 +107,22 @@ export const PartialStory = () => {
 };
 PartialStory.story = { name: 'with a partial border divider' };
 
+export const SidesStory = () => {
+    return (
+        <PageSection
+            title="NoSides"
+            showTopBorder={false}
+            sideBorders={true}
+            centralBorder="full"
+            padSides={false}
+            padContent={false}
+        >
+            <Grey />
+        </PageSection>
+    );
+};
+SidesStory.story = { name: 'with a partial border divider' };
+
 export const MultipleStory = () => {
     return (
         <>

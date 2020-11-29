@@ -19,7 +19,8 @@ type Props = {
     sideBorders?: boolean;
     centralBorder?: 'partial' | 'full';
     showTopBorder?: boolean;
-    padded?: boolean;
+    padSides?: boolean;
+    padContent?: boolean;
     backgroundColour?: string;
     borderColour?: string;
     children?: React.ReactNode;
@@ -62,7 +63,8 @@ export const PageSection = ({
     sideBorders = false,
     centralBorder,
     showTopBorder = false,
-    padded = true,
+    padSides = true,
+    padContent = true,
     borderColour,
     backgroundColour,
     children,
@@ -71,7 +73,7 @@ export const PageSection = ({
         sectionId={sectionId}
         showSideBorders={sideBorders}
         showTopBorder={showTopBorder}
-        padded={padded}
+        padded={padSides}
         borderColour={borderColour}
         backgroundColour={backgroundColour}
     >
@@ -88,7 +90,7 @@ export const PageSection = ({
                     url={url}
                 />
             </LeftColumn>
-            <Container padded={padded}>
+            <Container padded={padContent}>
                 <Hide when="above" breakpoint="leftCol">
                     <SectionTitle
                         title={title}
