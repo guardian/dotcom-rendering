@@ -40,6 +40,9 @@ const Container = ({
         width: 100%;
         margin-top: ${space[2]}px;
         margin-bottom: ${space[12]}px;
+        ${from.wide} {
+            margin-right: 68px;
+        }
     `;
 
     const padding = css`
