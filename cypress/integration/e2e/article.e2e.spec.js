@@ -30,8 +30,8 @@ describe('E2E Page rendering', function () {
                             expect(res.body).to.have.property('heading');
                             expect(res.statusCode).to.be.equal(200);
                         });
-                        cy.contains('Most viewed');
                     });
+                    cy.contains('Most viewed');
                 }
 
                 cy.scrollTo('bottom', { duration: 500 });
@@ -52,8 +52,8 @@ describe('E2E Page rendering', function () {
                         req.reply((res) => {
                             expect(res.statusCode).to.be.equal(200);
                         });
-                        cy.contains('Read more');
                     });
+                    cy.contains('Read more');
                 }
 
                 // We scroll again here because not all the content at the bottom of the page loads
@@ -66,8 +66,8 @@ describe('E2E Page rendering', function () {
                         expect(res.body).to.have.property('tabs');
                         expect(res.statusCode).to.be.equal(200);
                     });
-                    cy.contains('Most commented');
                 });
+                cy.contains('Most commented');
             });
         });
     });
