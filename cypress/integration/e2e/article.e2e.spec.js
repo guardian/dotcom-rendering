@@ -29,8 +29,8 @@ describe('E2E Page rendering', function () {
                         req.reply((res) => {
                             expect(res.body).to.have.property('heading');
                             expect(res.statusCode).to.be.equal(200);
-                            cy.contains('Most viewed');
                         });
+                        cy.contains('Most viewed');
                     });
                 }
 
@@ -51,8 +51,8 @@ describe('E2E Page rendering', function () {
                     cy.intercept('GET', '/embed/card/**', (req) => {
                         req.reply((res) => {
                             expect(res.statusCode).to.be.equal(200);
-                            cy.contains('Read more');
                         });
+                        cy.contains('Read more');
                     });
                 }
 
@@ -65,8 +65,8 @@ describe('E2E Page rendering', function () {
                     req.reply((res) => {
                         expect(res.body).to.have.property('tabs');
                         expect(res.statusCode).to.be.equal(200);
-                        cy.contains('Most commented');
                     });
+                    cy.contains('Most commented');
                 });
             });
         });
