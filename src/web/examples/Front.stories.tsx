@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { PageSection } from '@frontend/web/components/PageSection';
+import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
 import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
@@ -79,7 +79,7 @@ export const Front = () => (
         >
             <GuardianLines count={4} pillar="news" />
         </Section>
-        <PageSection
+        <ContainerLayout
             showTopBorder={false}
             title="Headlines"
             sideBorders={true}
@@ -120,8 +120,8 @@ export const Front = () => (
                     />
                 </LI>
             </UL>
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             showTopBorder={false}
             title="Coronavirus"
             sideBorders={true}
@@ -225,13 +225,13 @@ export const Front = () => (
                     </UL>
                 </LI>
             </UL>
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             showTopBorder={false}
             title="Tip Us Off"
             backgroundColour={brandAltBackground.primary}
         />
-        <PageSection
+        <ContainerLayout
             showTopBorder={false}
             title="UK"
             sideBorders={true}
@@ -346,8 +346,8 @@ export const Front = () => (
                     />
                 </LI>
             </UL>
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             showTopBorder={true}
             title="In Depth"
             sideBorders={true}
@@ -430,8 +430,8 @@ export const Front = () => (
                     />
                 </LI>
             </UL>
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             showTopBorder={false}
             title="Spotlight"
             sideBorders={true}
@@ -455,7 +455,7 @@ export const Front = () => (
                     imageSize="jumbo"
                 />
             </LI>
-        </PageSection>
+        </ContainerLayout>
         <Section
             backgroundColour={background.primary}
             padded={false}

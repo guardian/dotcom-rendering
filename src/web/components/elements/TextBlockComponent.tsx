@@ -25,8 +25,16 @@ const isLetter = (letter: string) => {
     return letter.toLowerCase() !== letter.toUpperCase();
 };
 
-const isLongEnough = (html: string) => {
-    return html.length > 199;
+const isLongEnough = (html: any) => {
+    // Only show a dropcap if the block of text is 200 characters or
+    // longer. But we first need to strip any markup from our html string so
+    // that we accurately measure the length that the reader will see. Eg. remove
+    // link tag html.
+    // https://stackoverflow.com/questions/822452/strip-html-from-text-javascript is
+    // a good discussion on how this can be done. Of the two approaches, regex and
+    // DOM, both have unikely failure scenarios but the impact for failure with DOM
+    // manipulation carries a potential security risk so we're using a regex.
+    return html.replace(/(<([^>]+)>)/gi, '').length > 199;
 };
 
 const decideDropCapLetter = (html: string) => {

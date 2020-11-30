@@ -2830,7 +2830,7 @@ export const Analysis: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comworld/2020/feb/10/irish-general-election-everything-you-need-to-know',
+                'https://amp.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

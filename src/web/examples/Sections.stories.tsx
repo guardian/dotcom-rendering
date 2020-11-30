@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { PageSection } from '@frontend/web/components/PageSection';
+import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
 import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
@@ -86,12 +86,12 @@ export const Sections = () => (
         >
             <GuardianLines count={4} pillar="news" />
         </Section>
-        <PageSection
+        <ContainerLayout
             showTopBorder={false}
             title="Page Title"
             sideBorders={true}
         />
-        <PageSection
+        <ContainerLayout
             title="Section Title"
             description="Description"
             centralBorder="full"
@@ -99,8 +99,8 @@ export const Sections = () => (
             showTopBorder={true}
         >
             <Grey />
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             title="World"
             description="Decription"
             centralBorder="full"
@@ -108,8 +108,8 @@ export const Sections = () => (
             showTopBorder={true}
         >
             <Grey />
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             title="Video"
             fontColour="white"
             backgroundColour={brandAltBackground.ctaPrimary}
@@ -117,15 +117,15 @@ export const Sections = () => (
             showTopBorder={false}
         >
             <Grey />
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             centralBorder="full"
             title="Title"
             description="Decription"
             sideBorders={true}
         >
             <Grey />
-        </PageSection>
+        </ContainerLayout>
         <Section
             backgroundColour={background.primary}
             padded={false}

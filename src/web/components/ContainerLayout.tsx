@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { Section } from '@root/src/web/components/Section';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
-import { SectionTitle } from '@root/src/web/components/SectionTitle';
+import { ContainerTitle } from '@root/src/web/components/ContainerTitle';
 import { Hide } from '@root/src/web/components/Hide';
 import { Flex } from '@root/src/web/components/Flex';
 
@@ -39,7 +39,11 @@ const Container = ({
         flex-direction: column;
         width: 100%;
         margin-top: ${space[2]}px;
-        margin-bottom: ${space[12]}px;
+        /*
+           Keep spacing at the bottom of the container consistent at 36px, regardless of
+           breakpoint, based on chat with Harry Fisher
+        */
+        margin-bottom: ${space[9]}px;
         ${from.wide} {
             margin-right: 68px;
         }
@@ -57,7 +61,7 @@ const Container = ({
     );
 };
 
-export const PageSection = ({
+export const ContainerLayout = ({
     title,
     fontColour,
     description,
@@ -86,7 +90,7 @@ export const PageSection = ({
                 borderColour={borderColour}
                 showPartialRightBorder={centralBorder === 'partial'}
             >
-                <SectionTitle
+                <ContainerTitle
                     title={title}
                     fontColour={fontColour}
                     description={description}
@@ -95,7 +99,7 @@ export const PageSection = ({
             </LeftColumn>
             <Container padded={padContent}>
                 <Hide when="above" breakpoint="leftCol">
-                    <SectionTitle
+                    <ContainerTitle
                         title={title}
                         fontColour={fontColour}
                         description={description}

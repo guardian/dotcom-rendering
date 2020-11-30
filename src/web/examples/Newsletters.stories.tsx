@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { PageSection } from '@frontend/web/components/PageSection';
+import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
 import { Footer } from '@frontend/web/components/Footer';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -79,7 +79,7 @@ export const Newsletters = () => (
                 Guardian newsletters: sign up
             </h1>
         </Section>
-        <PageSection
+        <ContainerLayout
             title="News Roundups"
             sideBorders={true}
             showTopBorder={true}
@@ -108,8 +108,8 @@ export const Newsletters = () => (
                     </LI>
                 </UL>
             </UL>
-        </PageSection>
-        <PageSection
+        </ContainerLayout>
+        <ContainerLayout
             title="News by topic"
             sideBorders={true}
             showTopBorder={true}
@@ -144,7 +144,7 @@ export const Newsletters = () => (
                     </LI>
                 </UL>
             </UL>
-        </PageSection>
+        </ContainerLayout>
         <Section
             padded={false}
             backgroundColour={brandBackground.primary}

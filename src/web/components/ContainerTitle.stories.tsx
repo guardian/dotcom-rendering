@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { SectionTitle } from './SectionTitle';
+import { ContainerTitle } from './ContainerTitle';
 
 export default {
-    component: SectionTitle,
-    title: 'Components/SectionTitle',
+    component: ContainerTitle,
+    title: 'Components/ContainerTitle',
     parameters: {
         viewport: {
             // This has the effect of turning off the viewports addon by default
@@ -14,18 +14,20 @@ export default {
 };
 
 export const DefaultStory = () => {
-    return <SectionTitle title="Title text" />;
+    return <ContainerTitle title="Title text" />;
 };
 DefaultStory.story = { name: 'with defaults' };
 
 export const DescriptionStory = () => {
-    return <SectionTitle title="Title text" description="About this content" />;
+    return (
+        <ContainerTitle title="Title text" description="About this content" />
+    );
 };
 DescriptionStory.story = { name: 'with description' };
 
 export const ColouredStory = () => {
     return (
-        <SectionTitle
+        <ContainerTitle
             title="Title text"
             description="About this content"
             fontColour="green"
@@ -36,7 +38,7 @@ ColouredStory.story = { name: 'with colour' };
 
 export const LinkStory = () => {
     return (
-        <SectionTitle
+        <ContainerTitle
             title="Title text"
             description="About this content"
             url="https://www.theguardian.com"

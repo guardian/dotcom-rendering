@@ -7,7 +7,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
-import { SectionTitle } from '../SectionTitle';
+import { ContainerTitle } from '../ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
 import { ExactlyFive } from './ExactlyFive';
@@ -43,7 +43,7 @@ export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
                         showRightBorder={false}
                         showPartialRightBorder={true}
                     >
-                        <SectionTitle
+                        <ContainerTitle
                             title={section.heading}
                             description={section.description}
                             url={section.url}
@@ -54,7 +54,7 @@ export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
                         dataLinkName={formatAttrString(section.heading)}
                     >
                         <Hide when="above" breakpoint="leftCol">
-                            <SectionTitle
+                            <ContainerTitle
                                 title={section.heading}
                                 description={section.description}
                                 url={section.url}
