@@ -39,10 +39,13 @@ const Container = ({
         flex-direction: column;
         width: 100%;
         margin-top: ${space[2]}px;
-        margin-bottom: ${space[6]}px;
+        /*
+           Keep spacing at the bottom of the container consistent at 36px, regardless of
+           breakpoint, based on chat with Harry Fisher
+        */
+        margin-bottom: ${space[9]}px;
         ${from.wide} {
             margin-right: 68px;
-            margin-bottom: ${space[9]}px;
         }
     `;
 
