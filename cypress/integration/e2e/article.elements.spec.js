@@ -13,7 +13,7 @@ describe('Elements', function () {
             // and retry until the body element is not empty
             return (
                 cy
-                    .get(iframeSelector, {timeout: 30000})
+                    .get(iframeSelector, { timeout: 30000 })
                     .its('0.contentDocument.body')
                     .should('not.be.empty')
                     // wraps "body" DOM element to allow
@@ -28,9 +28,9 @@ describe('Elements', function () {
                 'AMPArticle?url=https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
             );
 
-            getAmpIframeBody(
-                'amp-iframe[data-cy="atom-embed-url"] > iframe',
-            ).contains('Data from PHE');
+            getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
+                timeout: 30000,
+            }).contains('from PHE');
         });
 
         it('should render the counted interactive embed', function () {
@@ -73,7 +73,11 @@ describe('Elements', function () {
                         // hopefully it shows some context for where the problem comes from
                         // but you probably are going to want to be running Cypress locally
                         cy.log(
-                            `At ${$el.outerWidth()}, ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]} is wider than ${docWidth}`,
+                            `At ${$el.outerWidth()}, ${
+                                $el[0].classList[0]
+                            } in parent ${
+                                $el[0].parentElement.classList[0]
+                            } is wider than ${docWidth}`,
                         );
                         hasElementTooWide = true;
                     }
