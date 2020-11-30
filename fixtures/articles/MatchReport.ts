@@ -2628,7 +2628,7 @@ export const MatchReport: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comsport/2020/feb/09/france-italy-six-nations-match-report',
+                'https://amp.theguardian.com/sport/2020/feb/09/france-italy-six-nations-match-report',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

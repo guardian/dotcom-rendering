@@ -2188,7 +2188,7 @@ export const standardReviewCAPI: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comstage/2020/jan/28/flights-review-project-arts-centre-dublin',
+                'https://amp.theguardian.com/stage/2020/jan/28/flights-review-project-arts-centre-dublin',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

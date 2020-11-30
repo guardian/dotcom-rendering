@@ -6209,7 +6209,7 @@ export const Interview: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comglobal/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+                'https://amp.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

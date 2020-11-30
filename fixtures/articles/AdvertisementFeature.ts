@@ -2392,7 +2392,7 @@ export const AdvertisementFeature: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comthe-power-of-firsts/2019/nov/11/fad-or-fixture-are-electric-cars-the-future-of-motoring',
+                'https://amp.theguardian.com/the-power-of-firsts/2019/nov/11/fad-or-fixture-are-electric-cars-the-future-of-motoring',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',
