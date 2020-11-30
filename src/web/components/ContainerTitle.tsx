@@ -48,7 +48,7 @@ const descriptionStyles = (fontColour?: string) => css`
     }
 `;
 
-export const SectionTitle = ({
+export const ContainerTitle = ({
     title,
     fontColour,
     description,

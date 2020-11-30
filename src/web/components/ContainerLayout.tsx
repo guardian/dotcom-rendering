@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { Section } from '@root/src/web/components/Section';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
-import { SectionTitle } from '@root/src/web/components/SectionTitle';
+import { ContainerTitle } from '@root/src/web/components/ContainerTitle';
 import { Hide } from '@root/src/web/components/Hide';
 import { Flex } from '@root/src/web/components/Flex';
 
@@ -86,7 +86,7 @@ export const ContainerLayout = ({
                 borderColour={borderColour}
                 showPartialRightBorder={centralBorder === 'partial'}
             >
-                <SectionTitle
+                <ContainerTitle
                     title={title}
                     fontColour={fontColour}
                     description={description}
@@ -95,7 +95,7 @@ export const ContainerLayout = ({
             </LeftColumn>
             <Container padded={padContent}>
                 <Hide when="above" breakpoint="leftCol">
-                    <SectionTitle
+                    <ContainerTitle
                         title={title}
                         fontColour={fontColour}
                         description={description}
