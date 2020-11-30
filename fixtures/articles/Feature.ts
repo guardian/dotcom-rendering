@@ -3214,7 +3214,7 @@ export const Feature: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comfilm/2020/feb/10/quotes-of-the-oscars-2020',
+                'https://amp.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

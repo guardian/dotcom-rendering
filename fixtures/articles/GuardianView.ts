@@ -2826,7 +2826,7 @@ export const GuardianView: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comcommentisfree/2020/feb/06/the-guardian-view-on-trumps-acquittal-over-to-the-voters',
+                'https://amp.theguardian.com/commentisfree/2020/feb/06/the-guardian-view-on-trumps-acquittal-over-to-the-voters',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

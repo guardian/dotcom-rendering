@@ -2609,7 +2609,7 @@ export const richLink: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.commusic/2018/aug/31/eminem-kamikaze-album-review',
+                'https://amp.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',
