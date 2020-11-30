@@ -121,7 +121,7 @@ export const SidesStory = () => {
         </PageSection>
     );
 };
-SidesStory.story = { name: 'with a partial border divider' };
+SidesStory.story = { name: 'with a full border divider' };
 
 export const MultipleStory = () => {
     return (
