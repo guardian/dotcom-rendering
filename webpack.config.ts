@@ -94,13 +94,15 @@ const serverConfig = (
 							loader: 'babel-loader',
 							options: {
 								presets: [
-									['@babel/preset-react',
-									{
-										"runtime": "automatic"
-									  }
+									[
+										'@babel/preset-react',
+										{
+											"runtime": "automatic",
+											"importSource": "@emotion/core"
+										}
 									],
-									'@emotion/babel-preset-css-prop',
 								],
+								plugins: [ '@emotion' ],
 							},
 						},
 						{
@@ -150,12 +152,14 @@ export const clientConfig: Configuration = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								['@babel/preset-react',
-								{
-									"runtime": "automatic"
-								  }],
-								'@emotion/babel-preset-css-prop',
-								
+								[
+									'@babel/preset-react',
+									{
+										"runtime": "automatic",
+										"importSource": "@emotion/core"
+									}
+								],
+
 								[
 									'@babel/preset-env',
 									{
@@ -171,6 +175,7 @@ export const clientConfig: Configuration = {
 									},
 								],
 							],
+							plugins: [ '@emotion' ],
 						},
 					},
 					{
