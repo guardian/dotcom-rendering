@@ -1100,6 +1100,9 @@
                 "safe": {
                     "type": "boolean"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "alt": {
                     "type": "string"
                 },
@@ -1115,6 +1118,17 @@
                 "html",
                 "isMandatory"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "ExplainerAtomBlockElement": {
             "type": "object",
@@ -1430,17 +1444,6 @@
                 "src",
                 "width"
             ]
-        },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
         },
         "InstagramBlockElement": {
             "type": "object",
