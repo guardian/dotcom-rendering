@@ -262,8 +262,8 @@
         ]
     },
     "optionalDependencies": {
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
     },
     "run-if-changed": {
         "src/lib/content.d.ts": "make gen-schema",
