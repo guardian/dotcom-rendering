@@ -2461,7 +2461,7 @@ export const Review: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comtv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+                'https://amp.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

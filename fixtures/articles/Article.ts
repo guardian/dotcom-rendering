@@ -3635,7 +3635,7 @@ export const Article: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comenvironment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+                'https://amp.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

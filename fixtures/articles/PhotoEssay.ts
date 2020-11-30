@@ -9155,7 +9155,7 @@ export const PhotoEssay: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comenvironment/2020/jan/29/i-witnessed-a-shark-attack-its-not-what-you-imagine-photo-essay',
+                'https://amp.theguardian.com/environment/2020/jan/29/i-witnessed-a-shark-attack-its-not-what-you-imagine-photo-essay',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',
