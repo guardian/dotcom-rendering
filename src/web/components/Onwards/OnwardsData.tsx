@@ -6,6 +6,7 @@ type Props = {
     limit: number; // Limit the number of items shown (the api often returns more)
     ophanComponentName: OphanComponentName;
     Container: React.FC<OnwardsType>;
+    pillar: Pillar;
 };
 
 type OnwardsResponse = {
@@ -20,6 +21,7 @@ export const OnwardsData = ({
     limit,
     ophanComponentName,
     Container,
+    pillar,
 }: Props) => {
     const { data } = useApi<OnwardsResponse>(url);
     if (data && data.trails) {
@@ -29,6 +31,7 @@ export const OnwardsData = ({
                 trails={limit ? data.trails.slice(0, limit) : data.trails}
                 description={data.description}
                 ophanComponentName={ophanComponentName}
+                pillar={pillar}
             />
         );
     }

@@ -352,26 +352,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             });
 
-            if (
-                CAPI.config.switches.auConsent ||
-                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
-            ) {
-                cmp.init({
-                    country: countryCode,
-                    pubData,
-                });
-            } else {
-                cmp.init({
-                    isInUsa: countryCode === 'US',
-                    pubData,
-                });
-            }
+            cmp.init({
+                country: countryCode,
+                pubData,
+            });
         }
-    }, [
-        countryCode,
-        CAPI.config.switches.consentManagement,
-        CAPI.config.switches.auConsent,
-    ]);
+    }, [countryCode, CAPI.config.switches.consentManagement]);
 
     // *****************
     // *     ACast     *
@@ -718,6 +704,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
                             edition={CAPI.editionId}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
@@ -735,6 +722,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             ajaxUrl={CAPI.config.ajaxUrl}
                             hasStoryPackage={CAPI.hasStoryPackage}
                             tags={CAPI.tags}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>

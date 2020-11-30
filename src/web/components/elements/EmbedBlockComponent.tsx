@@ -21,7 +21,6 @@ const embedContainer = css`
         /* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
         width: 100% !important;
     }
-    margin-bottom: 16px;
 `;
 
 export const EmbedBlockComponent = ({ html, alt }: Props) => {

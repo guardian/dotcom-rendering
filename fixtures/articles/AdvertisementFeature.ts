@@ -2326,6 +2326,7 @@ export const AdvertisementFeature: CAPIType = {
                     safe: false,
                     alt:
                         'Do you have a pressing question about electric cars? Submit it below for your chance to have your question answered by an EV expert...',
+                    role: 'supporting',
                     _type:
                         'model.dotcomrendering.pageElements.EmbedBlockElement',
                     html:
@@ -2392,7 +2393,7 @@ export const AdvertisementFeature: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comthe-power-of-firsts/2019/nov/11/fad-or-fixture-are-electric-cars-the-future-of-motoring',
+                'https://amp.theguardian.com/the-power-of-firsts/2019/nov/11/fad-or-fixture-are-electric-cars-the-future-of-motoring',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

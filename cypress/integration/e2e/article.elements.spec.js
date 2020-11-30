@@ -1,4 +1,10 @@
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+
 describe('Elements', function () {
+    beforeEach(function () {
+        setLocalBaseUrl();
+    });
+
     describe('AMP', function () {
         // Based on examples from this blog post about working with iframes in Cypress
         // https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
@@ -7,7 +13,7 @@ describe('Elements', function () {
             // and retry until the body element is not empty
             return (
                 cy
-                    .get(iframeSelector)
+                    .get(iframeSelector, { timeout: 30000 })
                     .its('0.contentDocument.body')
                     .should('not.be.empty')
                     // wraps "body" DOM element to allow
@@ -22,9 +28,9 @@ describe('Elements', function () {
                 'AMPArticle?url=https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
             );
 
-            getAmpIframeBody(
-                'amp-iframe[data-cy="atom-embed-url"] > iframe',
-            ).contains('Data from PHE');
+            getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
+                timeout: 30000,
+            }).contains('from PHE');
         });
 
         it('should render the counted interactive embed', function () {
@@ -60,13 +66,18 @@ describe('Elements', function () {
                 return cy.get('*').each(($el) => {
                     if (
                         !$el.is('script') && // Remove script elements from check...
+                        $el.is(':visible') &&
                         $el.outerWidth() > docWidth
                     ) {
                         // This is brittle but if we're in here then we're trouble anyway
                         // hopefully it shows some context for where the problem comes from
                         // but you probably are going to want to be running Cypress locally
                         cy.log(
-                            `Element is wider than document: ${$el[0].classList[0]} in parent ${$el[0].parentElement.classList[0]}`,
+                            `At ${$el.outerWidth()}, ${
+                                $el[0].classList[0]
+                            } in parent ${
+                                $el[0].parentElement.classList[0]
+                            } is wider than ${docWidth}`,
                         );
                         hasElementTooWide = true;
                     }

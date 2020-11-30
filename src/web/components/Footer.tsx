@@ -75,6 +75,7 @@ const footerLink = css`
     text-decoration: none;
     padding-bottom: 12px;
     display: block;
+    line-height: 19px;
 
     :hover {
         text-decoration: underline;
@@ -145,7 +146,10 @@ const readerRevenueLinks = css`
 
 const copyright = css`
     ${textSans.xsmall()};
-    padding: 12px;
+    padding-left: 20px;
+    padding-right: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 
     ${until.tablet} {
         margin-top: 11px;

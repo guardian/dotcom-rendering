@@ -4595,7 +4595,7 @@ export const Immersive: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comlifeandstyle/2020/feb/10/christopher-eccleston-felt-was-going-to-die-depression-anorexia-books',
+                'https://amp.theguardian.com/lifeandstyle/2020/feb/10/christopher-eccleston-felt-was-going-to-die-depression-anorexia-books',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

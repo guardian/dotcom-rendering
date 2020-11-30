@@ -11,8 +11,19 @@ type Props = {
 };
 
 export const HighlightBlockComponent: React.FC<Props> = ({ html }: Props) => {
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
-        fixes: [{ prefix: '<p>', suffix: '</p>' }],
+    const {
+        willUnwrap: isUnwrapped,
+        unwrappedHtml,
+        unwrappedElement,
+    } = unwrapHtml({
+        fixes: [
+            { prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
+            {
+                prefix: '<blockquote>',
+                suffix: '</blockquote>',
+                unwrappedElement: 'blockquote',
+            },
+        ],
         html,
     });
 
@@ -27,8 +38,9 @@ export const HighlightBlockComponent: React.FC<Props> = ({ html }: Props) => {
                 padding-bottom: 16px;
                 padding-left: 12px;
                 padding-right: 12px;
+                margin-bottom: 16px;
             `}
-            tagName="p"
+            tagName={unwrappedElement}
         />
     );
 };
