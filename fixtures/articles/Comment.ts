@@ -2958,7 +2958,7 @@ export const Comment: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comcommentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+                'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',
