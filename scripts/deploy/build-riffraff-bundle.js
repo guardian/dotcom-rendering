@@ -37,7 +37,7 @@ const copyStatic = () => {
     log(' - copying static');
     return cpy(
         ['**/*'],
-        path.resolve(target, `${siteName}-static`, 'src/static', siteName),
+        path.resolve(target, `${siteName}-static`, 'static', siteName),
         {
             cwd: path.resolve(root, 'src/static'),
             parents: true,
