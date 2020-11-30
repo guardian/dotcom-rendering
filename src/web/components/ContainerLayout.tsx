@@ -39,9 +39,10 @@ const Container = ({
         flex-direction: column;
         width: 100%;
         margin-top: ${space[2]}px;
-        margin-bottom: ${space[12]}px;
+        margin-bottom: ${space[9]}px;
         ${from.wide} {
             margin-right: 68px;
+            margin-bottom: ${space[12]}px;
         }
     `;
 
