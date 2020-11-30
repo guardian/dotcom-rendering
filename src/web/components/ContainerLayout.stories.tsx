@@ -8,11 +8,11 @@ import {
     brandBorder,
 } from '@guardian/src-foundations/palette';
 
-import { PageSection } from './PageSection';
+import { ContainerLayout } from './ContainerLayout';
 
 export default {
-    component: PageSection,
-    title: 'Components/PageSection',
+    component: ContainerLayout,
+    title: 'Components/ContainerLayout',
     parameters: {
         viewport: {
             // This has the effect of turning off the viewports addon by default
@@ -39,45 +39,45 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 );
 
 export const PageTitleStory = () => {
-    return <PageSection title="No Children" />;
+    return <ContainerLayout title="No Children" />;
 };
 PageTitleStory.story = { name: 'with no children' };
 
 export const ContainerStory = () => {
     return (
-        <PageSection title="Default Container">
+        <ContainerLayout title="Default Container">
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 ContainerStory.story = { name: 'default container' };
 
 export const NoTitleStory = () => {
     return (
-        <PageSection>
+        <ContainerLayout>
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 NoTitleStory.story = { name: 'with no title' };
 
 export const BordersStory = () => {
     return (
-        <PageSection
+        <ContainerLayout
             title="Borders"
             showTopBorder={true}
             sideBorders={true}
             centralBorder="full"
         >
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 BordersStory.story = { name: 'with all borders' };
 
 export const BackgroundStory = () => {
     return (
-        <PageSection
+        <ContainerLayout
             title="Background Colour"
             description="About this content"
             fontColour={brandBackground.ctaPrimary}
@@ -88,28 +88,28 @@ export const BackgroundStory = () => {
             borderColour={brandBorder.primary}
         >
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 BackgroundStory.story = { name: 'with a blue background' };
 
 export const PartialStory = () => {
     return (
-        <PageSection
+        <ContainerLayout
             title="Borders"
             showTopBorder={false}
             sideBorders={true}
             centralBorder="partial"
         >
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 PartialStory.story = { name: 'with a partial border divider' };
 
 export const SidesStory = () => {
     return (
-        <PageSection
+        <ContainerLayout
             title="NoSides"
             showTopBorder={false}
             sideBorders={true}
@@ -118,7 +118,7 @@ export const SidesStory = () => {
             padContent={false}
         >
             <Grey />
-        </PageSection>
+        </ContainerLayout>
     );
 };
 SidesStory.story = { name: 'with a full border divider' };
@@ -126,26 +126,26 @@ SidesStory.story = { name: 'with a full border divider' };
 export const MultipleStory = () => {
     return (
         <>
-            <PageSection
+            <ContainerLayout
                 title="Page Title"
                 showTopBorder={false}
                 sideBorders={true}
             />
-            <PageSection
+            <ContainerLayout
                 title="Headlines"
                 showTopBorder={true}
                 sideBorders={true}
                 centralBorder="partial"
             >
                 <Grey />
-            </PageSection>
-            <PageSection
+            </ContainerLayout>
+            <ContainerLayout
                 title="Useful links"
                 showTopBorder={true}
                 sideBorders={true}
                 centralBorder="partial"
             />
-            <PageSection
+            <ContainerLayout
                 title="Around the World - I'm a link"
                 url="https://www.theguardian.com/world"
                 showTopBorder={true}
@@ -153,23 +153,23 @@ export const MultipleStory = () => {
                 centralBorder="partial"
             >
                 <Grey />
-            </PageSection>
-            <PageSection
+            </ContainerLayout>
+            <ContainerLayout
                 showTopBorder={false}
                 sideBorders={false}
                 backgroundColour={brandAltBackground.primary}
             >
                 <h2>Insert call to action here</h2>
-            </PageSection>
-            <PageSection
+            </ContainerLayout>
+            <ContainerLayout
                 title="Videos"
                 fontColour="white"
                 showTopBorder={false}
                 backgroundColour="black"
             >
                 <Grey />
-            </PageSection>
-            <PageSection
+            </ContainerLayout>
+            <ContainerLayout
                 title="Coronavirus"
                 description="A collection of stories about Coronavirus"
                 showTopBorder={true}
@@ -177,7 +177,7 @@ export const MultipleStory = () => {
                 centralBorder="partial"
             >
                 <Grey />
-            </PageSection>
+            </ContainerLayout>
         </>
     );
 };

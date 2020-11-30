@@ -57,7 +57,7 @@ const Container = ({
     );
 };
 
-export const PageSection = ({
+export const ContainerLayout = ({
     title,
     fontColour,
     description,
