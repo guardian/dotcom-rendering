@@ -3,7 +3,7 @@ import { ABTest } from '@guardian/ab-core';
 export const signInGateMainVariant: ABTest = {
     id: 'SignInGateMainVariant',
     start: '2020-05-20',
-    expiry: '2020-12-01',
+    expiry: '2021-12-01',
     author: 'Mahesh Makani',
     description:
         'Show sign in gate to 100% of users on 3rd article view of simple article templates, and show a further 5 times after the first dismissal, with higher priority over banners and epic. Main/Variant Audience.',
@@ -20,7 +20,7 @@ export const signInGateMainVariant: ABTest = {
     variants: [
         {
             id: 'main-variant-3',
-            test: (): void => { },
+            test: (): void => {},
         },
     ],
 };
