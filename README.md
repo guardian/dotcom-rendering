@@ -6,35 +6,23 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+- [Dotcom Rendering](#dotcom-rendering)
+  - [Quick start](#quick-start)
+    - [Install Node.js](#install-nodejs)
+    - [Running instructions](#running-instructions)
+    - [Detailed Setup](#detailed-setup)
+    - [Technologies](#technologies)
+    - [Architecture Diagram](#architecture-diagram)
+    - [Concepts](#concepts)
+    - [Feedback](#feedback)
+  - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+  - [Code Quality](#code-quality)
+  - [IDE setup](#ide-setup)
+    - [Extensions](#extensions)
+    - [Auto fix on save](#auto-fix-on-save)
+  - [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Where can I see Dotcom Rendering in Production?
-
-Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
-
-```
-https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers?dcr
-```
-
-You can force DCR on or off explicitly with
-[`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
-
-One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(modern)` in the footer after the copyright notice.
 
 ## Quick start
 
@@ -92,12 +80,22 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 -   Dynamic imports
 -   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
-
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
+## Where can I see Dotcom Rendering in Production?
 
+Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
+
+```
+https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers?dcr
+```
+
+You can force DCR on or off explicitly with
+[`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
+
+One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(modern)` in the footer after the copyright notice.
 ## Code Quality
 
 You can ensure your code passes code quality tests by running:
