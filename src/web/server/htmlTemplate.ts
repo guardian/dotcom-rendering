@@ -68,6 +68,10 @@ export const htmlTemplate = ({
 
     const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
+    // This tag enables pages to be featured in Google Discover as large previews
+    // See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1
+    const googleDiscoverMetaTag = '<meta name="robots" content="max-image-preview:large">';
+
     // Duplicated prefetch and preconnect tags from DCP:
     // Documented here: https://github.com/guardian/frontend/pull/12935
     // Preconnect should be used for the most crucial third party domains
@@ -134,6 +138,8 @@ export const htmlTemplate = ({
                 ${twitterSecAndPrivacyMetaTags}
 
                 ${twitterMetaTags}
+
+                ${googleDiscoverMetaTag}
 
                 <script>
                     window.guardian = ${windowGuardian};
