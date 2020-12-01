@@ -268,7 +268,7 @@ const fontList: FontDisplay[] = [
 ];
 
 const assetsUrl = (path: string): string =>
-    `//assets.guim.co.uk/static/frontend/${path}`;
+    `https://assets.guim.co.uk/static/frontend/${path}`;
 
 const template: (_: FontDisplay) => string = ({
     family,
