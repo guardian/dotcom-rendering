@@ -84,7 +84,7 @@
     "@babel/preset-react": "^7.12.1",
     "@guardian/eslint-config-typescript": "^0.4.1",
     "@guardian/prettier": "^0.4.1",
-    "@storybook/addon-knobs": "^6.1.7",
+    "@storybook/addon-knobs": "^6.1.9",
     "@storybook/react": "^6.0.28",
     "@storybook/storybook-deployer": "^2.8.7",
     "@types/clean-css": "^4.2.2",
