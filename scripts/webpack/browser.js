@@ -72,7 +72,7 @@ module.exports = ({ isLegacyJS }) => ({
     module: {
         rules: [
             {
-                test: /\.[jt]sx?|mjs$/,
+                test: /\.[jt]sx?|module.js$/,
                 exclude: {
                     and: [/node_modules/],
                     not: [
