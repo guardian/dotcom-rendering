@@ -42,7 +42,7 @@
     "@guardian/src-link": "^1.5.0",
     "@guardian/bridget": "^1.6.0",
     "@guardian/atoms-rendering": "2.0.7",
-    "@guardian/content-api-models": "^15.9.2",
+    "@guardian/content-api-models": "^15.9.6",
     "@guardian/content-atom-model": "^3.2.4",
     "@guardian/image-rendering": "github:guardian/image-rendering#semver:^3.0.4",
     "@guardian/node-riffraff-artifact": "^0.1.9",
