@@ -180,7 +180,7 @@
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
         "fetch-mock": "^9.10.7",
         "friendly-errors-webpack-plugin": "^1.7.0",
-        "husky": "^4.2.2",
+        "husky": "^4.3.0",
         "jest": "^24.8.0",
         "jest-dom": "^2.1.0",
         "jest-environment-jsdom-sixteen": "^1.0.3",
