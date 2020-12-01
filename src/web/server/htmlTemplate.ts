@@ -96,7 +96,6 @@ export const htmlTemplate = ({
         `https://phar.gu-web.net`,
         `https://static.theguardian.com`,
         `https://support.theguardian.com`,
-        `https://www.google-analytics.com`,
     ];
 
     const preconnectTags = staticPreconnectUrls.map(
