@@ -448,6 +448,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "quoted": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1097,6 +1100,9 @@
                 "safe": {
                     "type": "boolean"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "alt": {
                     "type": "string"
                 },
@@ -1112,6 +1118,17 @@
                 "html",
                 "isMandatory"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "ExplainerAtomBlockElement": {
             "type": "object",
@@ -1428,17 +1445,6 @@
                 "width"
             ]
         },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
-        },
         "InstagramBlockElement": {
             "type": "object",
             "properties": {
@@ -1585,10 +1591,41 @@
                 },
                 "id": {
                     "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VideoAssets"
+                    }
+                },
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
+                "assets",
                 "id"
             ]
         },

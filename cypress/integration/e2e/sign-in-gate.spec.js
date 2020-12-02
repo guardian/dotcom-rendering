@@ -1,9 +1,14 @@
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
 describe('Sign In Gate Tests', function () {
+    beforeEach(function () {
+        setLocalBaseUrl();
+    });
+
     const setArticleCount = (n) => {
         // set article count for today to be n
         localStorage.setItem(
@@ -30,7 +35,7 @@ describe('Sign In Gate Tests', function () {
     const visitArticle = (
         url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
     ) => {
-        cy.visit(`Article?url=${url}`);
+        cy.visit(`/Article?url=${url}`);
     };
 
     // as the sign in gate is lazy loaded, we need to scroll to the rough position where it
@@ -71,7 +76,7 @@ describe('Sign In Gate Tests', function () {
 
             visitArticleAndScrollToGateForLazyLoad();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the user is signed in', function () {
@@ -92,7 +97,7 @@ describe('Sign In Gate Tests', function () {
                 return false;
             });
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the user has already dismissed the gate', function () {
@@ -108,7 +113,7 @@ describe('Sign In Gate Tests', function () {
 
             visitArticleAndScrollToGateForLazyLoad();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate if the article is not a valid section (membership)', function () {
@@ -117,7 +122,7 @@ describe('Sign In Gate Tests', function () {
                     'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
             });
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should not load the sign in gate on a device with an ios9 user agent string', function () {
@@ -135,7 +140,7 @@ describe('Sign In Gate Tests', function () {
             );
             scrollToGateForLazyLoading();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('should remove gate when the dismiss button is clicked', function () {
@@ -145,7 +150,7 @@ describe('Sign In Gate Tests', function () {
 
             cy.get('[data-cy=sign-in-gate-main_dismiss]').click();
 
-            cy.get('[data-cy=sign-in-gate-main]').should('not.be.visible');
+            cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
         });
 
         it('register button should contain profile.theguardian.com href', function () {

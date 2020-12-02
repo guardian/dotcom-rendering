@@ -38,7 +38,9 @@ export const recordBaselineCloudWatchMetrics = () => {
             usedHeapMemory.record(process.memoryUsage().heapUsed);
             totalPhysicalMemory.record(os.totalmem());
             freePhysicalMemory.record(os.freemem());
-            freeDiskSpace.record(diskinfo.free);
+            if (diskinfo) {
+                freeDiskSpace.record(diskinfo.free);
+            }
         }
     });
 };

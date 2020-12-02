@@ -2,8 +2,8 @@
 /* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
-import { setupApiRoutes } from '../../lib/apiRoutes.js';
 import { disableCMP } from '../../lib/disableCMP';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
@@ -12,6 +12,7 @@ const articleUrl =
 describe('Interactivity', function () {
     beforeEach(function () {
         disableCMP();
+        setLocalBaseUrl();
     });
 
     describe('Verify elements have been hydrated', function () {
@@ -34,13 +35,13 @@ describe('Interactivity', function () {
                 // This count of rich links is dependent on the article that we're testing not changing
                 // If this assertion fails then it could be because a link was added or removed in
                 // which case this check should be updated
-                .should('be', 2);
+                .should('eq', 2);
         });
         describe('When most viewed is mocked', function () {
             before(getPolyfill);
-            beforeEach(mockApi, setupApiRoutes);
+            beforeEach(mockApi);
             // it('should change the list of most viewed items when a tab is clicked', function () {
-            //     cy.visit(`/Article?url=${articleUrl}`, fetchPolyfill);
+            //     cy.visit(`/Article?url=${articleUrl}`);
             //     cy.contains('Lifestyle');
             //     cy.get('[data-component="most-popular"]').scrollIntoView({
             //         duration: 300,
@@ -67,7 +68,6 @@ describe('Interactivity', function () {
     describe('Navigating the Pillar menu', function () {
         it('should expand and close the desktop pillar menu when More is clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Crosswords').should('not.be.visible');
             cy.get('[data-cy=nav-show-more-button]').click();
             cy.get('[data-cy=expanded-menu]').within(() => {
                 cy.contains('Columnists').should('be.visible');
@@ -90,10 +90,8 @@ describe('Interactivity', function () {
             it('should expand the mobile pillar menu when the VeggieBurger is clicked', function () {
                 cy.viewport('iphone-x');
                 cy.visit(`/Article?url=${articleUrl}`);
-                cy.contains('Crosswords').should('not.be.visible');
                 cy.get('[data-cy=veggie-burger]').click();
                 cy.contains('Crosswords');
-                cy.contains('Columnists').should('not.be.visible');
                 cy.get('[data-cy=column-collapse-Opinion]').click();
                 cy.contains('Columnists').should('be.visible');
                 // check focus is on veggie burger menu button on close

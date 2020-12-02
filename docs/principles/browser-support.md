@@ -2,6 +2,8 @@
 
 We believe that our journalism should be accessible to everyone.
 
+**Note**: This documentation is out of date and requires and update, please badger the team to do that if you're reading this. GT - 23/06/2020
+
 ## Supported browsers
 
 Most browsers will receive some sort of experience. A small minority don’t meet our security requirements

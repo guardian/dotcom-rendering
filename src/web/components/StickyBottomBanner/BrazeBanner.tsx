@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
-import { onConsentChange } from '@guardian/consent-management-platform';
+import {
+    getConsentFor,
+    onConsentChange,
+} from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import { submitComponentEvent, record } from '@root/src/web/browser/ophan/ophan';
+import {
+    submitComponentEvent,
+    record,
+} from '@root/src/web/browser/ophan/ophan';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { CanShowResult } from './bannerPicker';
-
-export const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 type Meta = {
     dataFromBraze: {
@@ -31,13 +35,13 @@ const containerStyles = emotion.css`
 `;
 
 export const hasRequiredConsents = (): Promise<boolean> =>
-    new Promise((resolve) => {
-        onConsentChange(({ tcfv2, ccpa }) => {
-            const consentGivenUnderCcpa = ccpa && !ccpa.doNotSell;
-            const consentGivenUnderTcfv2 =
-                tcfv2 && tcfv2.vendorConsents[brazeVendorId];
-
-            resolve(Boolean(consentGivenUnderCcpa || consentGivenUnderTcfv2));
+    new Promise((resolve, reject) => {
+        onConsentChange((state) => {
+            try {
+                resolve(getConsentFor('braze', state));
+            } catch (e) {
+                reject(e);
+            }
         });
     });
 
@@ -65,9 +69,21 @@ const getMessageFromBraze = async (
     apiKey: string,
     brazeUuid: string,
 ): Promise<CanShowResult> => {
+    const sdkLoadTiming = initPerf('braze-sdk-load');
+    sdkLoadTiming.start();
+
     const { default: appboy } = await import(
         /* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
     );
+
+    const sdkLoadTimeTaken = sdkLoadTiming.end();
+    record({
+        component: 'braze-sdk-load-timing',
+        value: sdkLoadTimeTaken,
+    });
+
+    const appboyTiming = initPerf('braze-appboy');
+    appboyTiming.start();
 
     appboy.initialize(apiKey, {
         enableLogging: false,
@@ -77,7 +93,7 @@ const getMessageFromBraze = async (
         minimumIntervalBetweenTriggerActionsInSeconds: 0,
     });
 
-    return new Promise((resolve) => {
+    const canShowPromise: Promise<CanShowResult> = new Promise((resolve) => {
         appboy.subscribeToInAppMessage((message: any) => {
             const { extras } = message;
 
@@ -105,6 +121,7 @@ const getMessageFromBraze = async (
                     logImpressionWithBraze,
                     logButtonClickWithBraze,
                 };
+
                 resolve({ result: true, meta });
             } else {
                 resolve({ result: false });
@@ -114,12 +131,43 @@ const getMessageFromBraze = async (
         appboy.changeUser(brazeUuid);
         appboy.openSession();
     });
+
+    canShowPromise
+        .then(() => {
+            const appboyTimeTaken = appboyTiming.end();
+
+            record({
+                component: 'braze-appboy-timing',
+                value: appboyTimeTaken,
+            });
+        })
+        .catch(() => {
+            appboyTiming.clear();
+            // eslint-disable-next-line no-console
+            console.log('Appboy Timing failed.');
+        });
+
+    return canShowPromise;
 };
+
+const FORCE_BRAZE_ALLOWLIST = [
+    'preview.gutools.co.uk',
+    'preview.code.dev-gutools.co.uk',
+    'localhost',
+    'm.thegulocal.com',
+];
 
 const getBrazeMetaFromQueryString = (): Meta | null => {
     if (URLSearchParams) {
-        const params = new URLSearchParams(window.location.search);
         const qsArg = 'force-braze-message';
+
+        if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
+            // eslint-disable-next-line no-console
+            console.log(`${qsArg} is not supported on this domain`);
+            return null;
+        }
+
+        const params = new URLSearchParams(window.location.search);
         const value = params.get(qsArg);
         if (value) {
             try {
@@ -156,8 +204,8 @@ export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
     isDigitalSubscriber: undefined | boolean,
 ): Promise<CanShowResult> => {
-    const timing = initPerf('braze-banner');
-    timing.start();
+    const bannerTiming = initPerf('braze-banner');
+    bannerTiming.start();
 
     const forcedBrazeMeta = getBrazeMetaFromQueryString();
     if (forcedBrazeMeta) {
@@ -191,9 +239,9 @@ export const canShow = async (
     }
 
     try {
-        const result = await getMessageFromBraze(apiKey as string, brazeUuid)
+        const result = await getMessageFromBraze(apiKey as string, brazeUuid);
 
-        const timeTaken = timing.end();
+        const timeTaken = bannerTiming.end();
         record({
             component: 'braze-banner-timing',
             value: timeTaken,
@@ -201,6 +249,7 @@ export const canShow = async (
 
         return result;
     } catch (e) {
+        bannerTiming.clear();
         return { result: false };
     }
 };

@@ -34,6 +34,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { loadScript } from '@root/src/web/lib/loadScript';
 import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -351,26 +352,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             });
 
-            if (
-                CAPI.config.switches.auConsent ||
-                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
-            ) {
-                cmp.init({
-                    country: countryCode,
-                    pubData,
-                });
-            } else {
-                cmp.init({
-                    isInUsa: countryCode === 'US',
-                    pubData,
-                });
-            }
+            cmp.init({
+                country: countryCode,
+                pubData,
+            });
         }
-    }, [
-        countryCode,
-        CAPI.config.switches.consentManagement,
-        CAPI.config.switches.auConsent,
-    ]);
+    }, [countryCode, CAPI.config.switches.consentManagement]);
 
     // *****************
     // *     ACast     *
@@ -398,6 +385,21 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.isAdFreeUser,
         CAPI.config.isSensitive,
     ]);
+
+    // ************************
+    // *   Google Analytics   *
+    // ************************
+    useEffect(() => {
+        onConsentChange((state: any) => {
+            const consentGiven = getConsentFor('google-analytics', state);
+            if (consentGiven) {
+                loadScript('https://www.google-analytics.com/analytics.js');
+                loadScript(window.guardian.gaPath);
+            } else {
+                (window as any).ga = null;
+            }
+        });
+    }, []);
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
@@ -717,6 +719,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
                             edition={CAPI.editionId}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
@@ -734,6 +737,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             ajaxUrl={CAPI.config.ajaxUrl}
                             hasStoryPackage={CAPI.hasStoryPackage}
                             tags={CAPI.tags}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>

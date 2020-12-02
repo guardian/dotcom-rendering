@@ -1,14 +1,14 @@
-import {
-    brazeVendorId,
-    hasRequiredConsents,
-    canShowPreChecks,
-} from './BrazeBanner';
+import { hasRequiredConsents, canShowPreChecks } from './BrazeBanner';
+
+const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 let mockOnConsentChangeResult: any;
 jest.mock('@guardian/consent-management-platform', () => ({
     onConsentChange: (callback: any) => {
         callback(mockOnConsentChangeResult);
     },
+    getConsentFor: jest.requireActual('@guardian/consent-management-platform')
+        .getConsentFor,
 }));
 
 afterEach(() => {
@@ -25,7 +25,6 @@ describe('hasRequiredConsents', () => {
                     },
                 },
             };
-
             await expect(hasRequiredConsents()).resolves.toBe(true);
         });
     });
@@ -61,6 +60,30 @@ describe('hasRequiredConsents', () => {
             mockOnConsentChangeResult = {
                 ccpa: {
                     doNotSell: true,
+                },
+            };
+
+            await expect(hasRequiredConsents()).resolves.toBe(false);
+        });
+    });
+
+    describe('when the user is covered by aus and consent is given', () => {
+        it('returns a promise which resolves with true', async () => {
+            mockOnConsentChangeResult = {
+                aus: {
+                    personalisedAdvertising: true,
+                },
+            };
+
+            await expect(hasRequiredConsents()).resolves.toBe(true);
+        });
+    });
+
+    describe('when the user is covered by aus and consent is not given', () => {
+        it('returns a promise which resolves with false', async () => {
+            mockOnConsentChangeResult = {
+                aus: {
+                    personalisedAdvertising: false,
                 },
             };
 

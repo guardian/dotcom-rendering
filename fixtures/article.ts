@@ -988,7 +988,7 @@ export const data = {
                     '@type': 'NewsArticle',
                     '@context': 'https://schema.org',
                     '@id':
-                        'https://amp.theguardian.commoney/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                        'https://amp.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
                     publisher: {
                         '@type': 'Organization',
                         '@context': 'https://schema.org',

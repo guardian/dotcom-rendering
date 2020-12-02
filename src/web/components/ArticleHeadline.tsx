@@ -242,7 +242,6 @@ export const ArticleHeadline = ({
                         </h1>
                     );
             }
-            break;
         }
         case Display.Showcase:
         case Display.Standard:
@@ -338,7 +337,6 @@ export const ArticleHeadline = ({
                         </h1>
                     );
             }
-            break;
         }
     }
 };

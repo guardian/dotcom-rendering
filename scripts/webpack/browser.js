@@ -104,7 +104,15 @@ module.exports = ({ isLegacyJS }) => ({
                                               modules: false,
                                           },
                                       ]
-                                    : '@babel/preset-modules',
+                                    : [
+                                          '@babel/preset-env',
+                                          {
+                                              bugfixes: true,
+                                              targets: {
+                                                  esmodules: true,
+                                              },
+                                          },
+                                      ],
                             ],
                         },
                     },

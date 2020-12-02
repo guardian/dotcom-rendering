@@ -5,11 +5,13 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
+import { DefaultRichLink } from '@root/src/web/components/RichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -27,6 +29,8 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
+import { Figure } from '@root/src/web/components/Figure';
+
 import {
     AudioAtom,
     ChartAtom,
@@ -36,12 +40,11 @@ import {
     GuideAtom,
     ProfileAtom,
     TimelineAtom,
+    VideoAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { toTypesPillar } from '@root/src/lib/format';
-import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -83,6 +86,7 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             html={element.html}
                             pillar={pillar}
+                            quoted={element.quoted}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.CaptionBlockElement':
@@ -143,20 +147,24 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     if (!element.safe) {
                         return (
-                            <UnsafeEmbedBlockComponent
-                                key={i}
-                                html={element.html}
-                                alt={element.alt || ''}
-                                index={i}
-                            />
+                            <Figure role={element.role}>
+                                <UnsafeEmbedBlockComponent
+                                    key={i}
+                                    html={element.html}
+                                    alt={element.alt || ''}
+                                    index={i}
+                                />
+                            </Figure>
                         );
                     }
                     return (
-                        <EmbedBlockComponent
-                            key={i}
-                            html={element.html}
-                            alt={element.alt}
-                        />
+                        <Figure role={element.role}>
+                            <EmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                                alt={element.alt}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (
@@ -416,11 +424,20 @@ export const ArticleRenderer: React.FC<{
                             />
                         </div>
                     );
+                case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
+                    return (
+                        <VideoAtom
+                            assets={element.assets}
+                            poster={
+                                element.posterImage &&
+                                element.posterImage[0].url
+                            }
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-                case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
                     return null;
             }

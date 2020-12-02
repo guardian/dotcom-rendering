@@ -40,6 +40,15 @@ const summeryStyles = css`
         display: none;
     }
     outline: none;
+
+    /* We don't want the summary to open when we click anything but the button, so we pointer-event: none the summary */
+    /* 176da211-05aa-4280-859b-1e3157b3f19e */
+    pointer-events: none;
+
+    a {
+        /* but we do want to allow click on links */
+        pointer-events: all;
+    }
 `;
 
 const summeryContentWrapper = css`
@@ -84,6 +93,10 @@ const buttonWrapperStyles = css`
     position: absolute;
     cursor: pointer;
     margin-top: -5px;
+
+    /* We need to ensure our pointer-events are turned back on on the button */
+    /* 176da211-05aa-4280-859b-1e3157b3f19e */
+    pointer-events: all;
 `;
 
 // Normally forms are in Modals, but here they are embeded into the page
@@ -259,14 +272,7 @@ export const CalloutBlockComponent = ({
                     aria-hidden={true}
                     open={isExpanded}
                 >
-                    <summary
-                        className={summeryStyles}
-                        role="none"
-                        onClick={(event) => {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }}
-                    >
+                    <summary className={summeryStyles}>
                         <div className={summeryContentWrapper}>
                             <div className={speechBubbleWrapperStyles}>
                                 <div className={speechBubbleStyles(pillar)}>
@@ -294,20 +300,7 @@ export const CalloutBlockComponent = ({
                 aria-hidden={true}
                 open={isExpanded}
             >
-                <summary
-                    className={summeryStyles}
-                    role="none"
-                    onClick={(event) => {
-                        // We want to prevent the default `details` behavior from appearing
-                        // expanding the details should only be done via the button
-                        // however we still want links to be clickable
-                        const target = event.target as HTMLElement;
-                        if (target.tagName !== 'A') {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                    }}
-                >
+                <summary className={summeryStyles}>
                     <div className={summeryContentWrapper}>
                         <div className={speechBubbleWrapperStyles}>
                             <div className={speechBubbleStyles(pillar)}>
