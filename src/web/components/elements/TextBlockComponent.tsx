@@ -11,6 +11,7 @@ import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedC
 
 import { DropCap } from '@frontend/web/components/DropCap';
 import { Display } from '@root/src/lib/display';
+import { Attributes } from 'sanitize-html';
 
 type Props = {
     html: string;
@@ -19,6 +20,7 @@ type Props = {
     display: Display;
     isFirstParagraph: boolean;
     forceDropCap?: boolean;
+    isPreview: boolean;
 };
 
 const isLetter = (letter: string) => {
@@ -91,22 +93,29 @@ const shouldShowDropCap = ({
     }
 };
 
-const sanitiserOptions = {
+const sanitiserOptions = (isPreview: boolean) => ({
     // Defaults: https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
     allowedTags: false, // Leave tags from CAPI alone
     allowedAttributes: false, // Leave attributes from CAPI alone
     transformTags: {
-        a: (tagName: string, attribs: {}) => ({
-            tagName, // Just return anchors as is
-            attribs: {
-                ...attribs, // Merge into the existing attributes
-                ...{
-                    'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+        a: (tagName: string, attribs: Attributes) => {
+            const isExternalLink = !attribs?.href.match(/\.gutools\.co\.uk|theguardian\.com/)
+            return {
+                tagName, // Just return anchors as is
+                attribs: {
+                    ...attribs, // Merge into the existing attributes
+                    ...{
+                        'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+                        ...(isPreview && isExternalLink && { // In preview only, open external links in a new tab
+                            'target': '_blank',
+                            'rel': 'noopener noreferrer',
+                        })
+                    },
                 },
-            },
-        }),
+            }
+        },
     },
-};
+});
 
 export const TextBlockComponent: React.FC<Props> = ({
     html,
@@ -115,6 +124,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     display,
     forceDropCap,
     isFirstParagraph,
+    isPreview,
 }: Props) => {
     const {
         willUnwrap: isUnwrapped,
@@ -212,7 +222,7 @@ export const TextBlockComponent: React.FC<Props> = ({
                 />
                 <RewrappedComponent
                     isUnwrapped={isUnwrapped}
-                    html={sanitise(remainingLetters, sanitiserOptions)}
+                    html={sanitise(remainingLetters, sanitiserOptions(isPreview))}
                     elCss={paraStyles}
                     tagName="span"
                 />
@@ -223,7 +233,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     return (
         <RewrappedComponent
             isUnwrapped={isUnwrapped}
-            html={sanitise(unwrappedHtml, sanitiserOptions)}
+            html={sanitise(unwrappedHtml, sanitiserOptions(isPreview))}
             elCss={paraStyles}
             tagName={unwrappedElement || 'p'}
         />

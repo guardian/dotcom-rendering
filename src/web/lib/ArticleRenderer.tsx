@@ -58,7 +58,8 @@ export const ArticleRenderer: React.FC<{
     designType: DesignType;
     adTargeting?: AdTargeting;
     host?: string;
-}> = ({ display, elements, pillar, designType, adTargeting, host }) => {
+    isPreview: boolean;
+}> = ({ display, elements, pillar, designType, adTargeting, host, isPreview }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -343,6 +344,7 @@ export const ArticleRenderer: React.FC<{
                                 display={display}
                                 designType={designType}
                                 forceDropCap={element.dropCap}
+                                isPreview={isPreview}
                             />
                         </>
                     );

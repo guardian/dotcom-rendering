@@ -522,6 +522,7 @@ export const StandardLayout = ({
                                     designType={designType}
                                     adTargeting={adTargeting}
                                     host={host}
+                                    isPreview={CAPI.pageType.isPreview}
                                 />
                                 {showMatchStats && <div id="match-stats" />}
 

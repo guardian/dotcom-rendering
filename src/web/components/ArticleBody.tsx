@@ -15,6 +15,7 @@ type Props = {
     designType: DesignType;
     adTargeting: AdTargeting;
     host?: string;
+    isPreview: boolean;
 };
 
 const pillarColours = pillarMap(
@@ -68,6 +69,7 @@ export const ArticleBody = ({
     designType,
     adTargeting,
     host,
+    isPreview,
 }: Props) => {
     return (
         <div className={cx(bodyStyle(display), linkColour[pillar])}>
@@ -78,6 +80,7 @@ export const ArticleBody = ({
                 designType={designType}
                 adTargeting={adTargeting}
                 host={host}
+                isPreview={isPreview}
             />
         </div>
     );

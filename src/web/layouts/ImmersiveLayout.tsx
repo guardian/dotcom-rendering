@@ -412,6 +412,7 @@ export const ImmersiveLayout = ({
                                     designType={designType}
                                     adTargeting={adTargeting}
                                     host={host}
+                                    isPreview={CAPI.pageType.isPreview}
                                 />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines count={4} pillar={pillar} />
