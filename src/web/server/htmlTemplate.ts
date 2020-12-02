@@ -1,6 +1,6 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { getStatic, CDN } from '@root/src/lib/assets';
+import { CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
 
@@ -40,9 +40,7 @@ export const htmlTemplate = ({
 
     const fontPreloadTags = fontFiles.map(
         (fontFile) =>
-            `<link rel="preload" href="${getStatic(
-                fontFile,
-            )}" as="font" crossorigin>`,
+            `<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
     );
 
     const generateMetaTags = (
