@@ -185,7 +185,7 @@ const dotStyle = css`
 `;
 
 const dotActiveStyle = (pillar: Pillar) => css`
-    background-color: ${pillarPalette[pillar].dark};
+    background-color: ${pillarPalette[pillar][400]};
 
     &:hover,
     &:focus {
