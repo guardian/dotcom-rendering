@@ -2151,6 +2151,24 @@
                 "overrideImage": {
                     "type": "string"
                 },
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
+                },
                 "altText": {
                     "type": "string"
                 },
