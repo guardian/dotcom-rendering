@@ -12,7 +12,7 @@ describe('Consent tests', function () {
 
     const cmpIframe = () => {
         return cy
-            .get('iframe[id*="sp_message_iframe"]')
+            .get('iframe[id*="sp_message_iframe"]', { timeout: 30000 })
             .its('0.contentDocument.body')
             .should('not.be.empty')
             .then(cy.wrap);
@@ -31,7 +31,7 @@ describe('Consent tests', function () {
         // after the pageLoadEvent has fired
         // eslint-disable-next-line cypress/no-unnecessary-waiting
         cy.wait(300);
-    }
+    };
 
     beforeEach(function () {
         // Reset CMP cookies before each test
@@ -64,7 +64,9 @@ describe('Consent tests', function () {
         cmpIframe().find("[title='Manage my cookies']").click();
         // Reject tracking cookies
         privacySettingsIframe().contains('Privacy settings');
-        privacySettingsIframe().find("[title='Reject all']", {timeout: 30000}).click();
+        privacySettingsIframe()
+            .find("[title='Reject all']", { timeout: 30000 })
+            .click();
         // Make a second page load now that we have the CMP cookies set to reject tracking and check
         // to see if the ga property was set by Google on the window object
         cy.visit(`Article?url=${secondPage}`);
@@ -82,12 +84,13 @@ describe('Consent tests', function () {
         cmpIframe().find("[title='Manage my cookies']").click();
         // Reject tracking cookies
         privacySettingsIframe().contains('Privacy settings');
-        privacySettingsIframe().find("[title='Accept all']", {timeout: 30000}).click();
+        privacySettingsIframe()
+            .find("[title='Accept all']", { timeout: 30000 })
+            .click();
         // Make a second page load now that we have the CMP cookies set to reject tracking and check
         // to see if the ga property was set by Google on the window object
         cy.visit(`Article?url=${secondPage}`);
         waitForAnalyticsToInit();
         cy.window().its('ga').should('exist');
     });
-
 });
