@@ -24,6 +24,7 @@ const SomeText = () => (
         designType="Article"
         display={Display.Standard}
         isFirstParagraph={false}
+        isPreview={false}
     />
 );
 

@@ -36,6 +36,7 @@ export const defaultStory = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -52,6 +53,7 @@ export const DropCap = () => {
                 designType="Article"
                 display={Display.Immersive}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -68,6 +70,7 @@ export const QuotedDropCap = () => {
                 designType="Comment"
                 display={Display.Standard}
                 isFirstParagraph={true}
+                isPreview={false}
             />
         </div>
     );
@@ -84,6 +87,7 @@ export const ShortText = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -100,6 +104,7 @@ export const NoTags = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -116,6 +121,7 @@ export const FeatureDropCap = () => {
                 designType="Feature"
                 display={Display.Standard}
                 isFirstParagraph={true}
+                isPreview={false}
             />
         </div>
     );
@@ -132,6 +138,7 @@ export const AList = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -148,6 +155,7 @@ export const BadMarkup = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
@@ -166,6 +174,7 @@ export const SubSupscript = () => {
                 designType="Article"
                 display={Display.Standard}
                 isFirstParagraph={false}
+                isPreview={false}
             />
         </div>
     );
