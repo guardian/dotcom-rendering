@@ -3784,10 +3784,10 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/gapi.analytics@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@types/gapi.analytics/-/gapi.analytics-0.0.2.tgz#ac4bebaa7e0837a835996077678a97de1b7b3e59"
-  integrity sha512-x3u4/5xWCzshzczYEIT8VZgsPrieJg8VIzGllnZO8aR4brsSyZyob5TSSFWkI/6Xji5c90sqk7D+hmXtCx+xUA==
+"@types/gapi.analytics@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@types/gapi.analytics/-/gapi.analytics-0.0.3.tgz#286b8e7e0a7d9674caedd461678ae4fd5de4d31a"
+  integrity sha512-jIwe5qunizIIruaNBW4TVy3oybE+CbGdQsRapAHNtdCPtE7d+T6KjNLW4YWZ8DBrjKuQDGiTaeyCXKVd8thtmw==
   dependencies:
     "@types/gapi" "*"
 
