@@ -13,6 +13,7 @@ export const htmlTemplate = ({
     css,
     html,
     windowGuardian,
+    gaPath,
     fontFiles = [],
     ampLink,
     openGraphData,
@@ -28,6 +29,7 @@ export const htmlTemplate = ({
     html: string;
     fontFiles?: string[];
     windowGuardian: string;
+    gaPath: { modern: string, legacy: string };
     ampLink?: string;
     openGraphData: { [key: string]: string };
     twitterData: { [key: string]: string };
@@ -144,11 +146,13 @@ export const htmlTemplate = ({
 
                 <script type="module">
                     window.guardian.mustardCut = true;
+                    window.guardian.gaPath = "${gaPath.modern}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
+                    window.guardian.gaPath = "${gaPath.legacy}";
                 </script>
 
                 <script>
