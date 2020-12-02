@@ -343,6 +343,10 @@ interface YoutubeBlockElement {
     posterSrc?: string;
     expired: boolean;
     overrideImage?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     altText?: string;
     youtubeIndex?: number;
 }

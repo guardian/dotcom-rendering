@@ -19,6 +19,10 @@ type Props = {
     role: RoleType;
     hideCaption?: boolean;
     overlayImage?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
     height?: number;
@@ -69,6 +73,7 @@ export const YoutubeBlockComponent = ({
     pillar,
     hideCaption,
     overlayImage,
+    posterImage,
     role,
     adTargeting,
     isMainMedia,
@@ -78,7 +83,6 @@ export const YoutubeBlockComponent = ({
     duration,
     origin,
 }: Props) => {
-    console.log('bebebebebeb');
     const shouldLimitWidth =
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -150,6 +154,7 @@ export const YoutubeBlockComponent = ({
             <YoutubeAtom
                 videoMeta={element}
                 overlayImage={overlayImage ? {src: overlayImage, alt: element.altText || element.mediaTitle }: undefined}
+                posterImage={posterImage ? { srcSet: posterImage, alt: element.altText || element.mediaTitle } : undefined}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
