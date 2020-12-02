@@ -99,7 +99,7 @@ const sanitiserOptions = (isPreview: boolean) => ({
     allowedAttributes: false, // Leave attributes from CAPI alone
     transformTags: {
         a: (tagName: string, attribs: Attributes) => {
-            const isExternalLink = !attribs?.href.match(/\.gutools\.co\.uk|theguardian\.com/)
+            const isExternalLink = attribs.href && !/\.gutools\.co\.uk|theguardian\.com/.exec(attribs.href)
             return {
                 tagName, // Just return anchors as is
                 attribs: {
