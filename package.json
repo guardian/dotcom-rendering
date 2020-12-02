@@ -50,7 +50,7 @@
         "@guardian/src-icons": "^2.4.0",
         "@guardian/src-link": "^2.4.0",
         "@guardian/src-radio": "^2.4.0",
-        "@guardian/src-svgs": "^2.6.0",
+        "@guardian/src-svgs": "^2.7.1",
         "@guardian/src-text-area": "^2.4.0",
         "@guardian/src-text-input": "^2.4.0",
         "@hkdobrev/run-if-changed": "^0.3.1",

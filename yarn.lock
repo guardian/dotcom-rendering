@@ -2213,10 +2213,10 @@
     "@guardian/src-label" "^2.4.0"
     "@guardian/src-user-feedback" "^2.4.0"
 
-"@guardian/src-svgs@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.6.0.tgz#8924fede89fa93e607758903e08319dd71673bb2"
-  integrity sha512-Rkfvh6WLqzmyaRM6zwH2Jb5HqMx8lcCo9eO6k0J/9nA+dNXAVe1J2hpQVu8510BJTpEDnHc1xaKkPo+e9hCDTg==
+"@guardian/src-svgs@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.7.1.tgz#5a9ff0bdcaf0693e749ad9bebab6067d9735a124"
+  integrity sha512-2D119cFHGktQxJ0tvccJ7sXxpN28IfoO+rUIOLmjSc7MdbZzk+8eFlrOtoFHDB0LjsEcVDXjlVNy7pjWBGuDIA==
 
 "@guardian/src-text-area@^2.4.0":
   version "2.4.0"
