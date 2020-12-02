@@ -265,6 +265,7 @@ export const ImageComponent = ({
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
+                    isMainMedia={isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -294,6 +295,7 @@ export const ImageComponent = ({
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
+                    isMainMedia={isMainMedia}
                 />
                 {starRating && <PositionStarRating rating={starRating} />}
                 {title && (
@@ -323,6 +325,7 @@ export const ImageComponent = ({
                     width={imageWidth}
                     height={imageHeight}
                     isLazy={!isMainMedia}
+                    isMainMedia={isMainMedia}
                 />
                 {isMainMedia && (
                     // Below tablet, main media images show an info toggle at the bottom right of
