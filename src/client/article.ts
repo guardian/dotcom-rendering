@@ -336,7 +336,8 @@ function callouts(): void {
 
 function hasSeenCards(): void {
 	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
-		(card) => card.getAttribute('data-article-id')?.replace(/^\//, '') ?? '',
+		(card) =>
+			card.getAttribute('data-article-id')?.replace(/^\//, '') ?? '',
 	);
 
 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
