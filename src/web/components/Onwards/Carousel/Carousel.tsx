@@ -184,12 +184,11 @@ const dotStyle = css`
     }
 `;
 
-const dotActiveStyle = css`
-    background-color: ${palette.news[400]};
-
+const dotActiveStyle = (index: number, pillar: Pillar) => css`
+    background-color: ${pillarPalette[pillar].main};
     &:hover,
     &:focus {
-        background-color: ${palette.news[300]};
+        background-color: ${pillarPalette[pillar][300]};
     }
 `;
 
@@ -465,7 +464,7 @@ export const Carousel: React.FC<OnwardsType> = ({
                             aria-hidden="true"
                             className={cx(
                                 dotStyle,
-                                i === index && dotActiveStyle,
+                                i === index && dotActiveStyle(index, pillar),
                                 adjustNumberOfDotsStyle(i, trails.length),
                             )}
                         />
