@@ -334,21 +334,19 @@ function callouts(): void {
 	});
 }
 
-// TODO: uncomment when iOS implements filterSeenArticleIds
+function hasSeenCards(): void {
+	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
+		(card) => card.getAttribute('data-article-id')?.replace(/^\//, '') ?? '',
+	);
 
-// function hasSeenCards(): void {
-// 	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
-// 		(card) => card.getAttribute('data-article-id') ?? '',
-// 	);
-
-// 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
-// 		seenArticles.forEach((id) => {
-// 			document
-// 				.querySelector(`.js-card[data-article-id='${id}']`)
-// 				?.classList.add('fade');
-// 		});
-// 	});
-// }
+	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
+		seenArticles.forEach((id) => {
+			document
+				.querySelector(`.js-card[data-article-id='/${id}']`)
+				?.classList.add('fade');
+		});
+	});
+}
 
 function initAudioAtoms(): void {
 	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
@@ -448,8 +446,7 @@ formatDates();
 insertEpic();
 callouts();
 renderComments();
-// TODO: uncomment when iOS implements filterSeenArticleIds
-// hasSeenCards();
+hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();
