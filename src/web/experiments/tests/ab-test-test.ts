@@ -3,7 +3,7 @@ import { ABTest } from '@guardian/ab-core';
 export const abTestTest: ABTest = {
     id: 'AbTestTest',
     start: '2020-05-20',
-    expiry: '2020-12-01',
+    expiry: '2023-12-01',
     author: 'gtrufitt',
     description: 'This Test',
     audience: 0.0001, // 0.01%
