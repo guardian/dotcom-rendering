@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { breakpoints } from '@guardian/src-foundations/mq';
+
 type Props = {
     imageSources: ImageSource[];
     role: RoleType;
@@ -47,16 +49,6 @@ const buildSourcesString = (srcSets: SrcSetItem[]): string => {
 };
 
 const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
-    const breakpoints = {
-        mobileMedium: 375,
-        mobileLandscape: 480,
-        phablet: 660,
-        tablet: 740,
-        desktop: 980,
-        leftCol: 1140,
-        wide: 1300,
-    };
-
     switch (role) {
         case 'inline':
             return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
