@@ -38,6 +38,7 @@ describe('Consent tests', function () {
     });
 
     it('should make calls to Google Analytics after the reader consents', function () {
+        cy.clearCookies();
         cy.visit(`Article?url=${firstPage}`);
         waitForAnalyticsToInit();
         // Open the Privacy setting dialogue
@@ -53,6 +54,7 @@ describe('Consent tests', function () {
     });
 
     it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
+        cy.clearCookies();
         cy.visit(`Article?url=${firstPage}`);
         waitForAnalyticsToInit();
         cy.window().its('ga').should('not.exist');
@@ -71,6 +73,7 @@ describe('Consent tests', function () {
     });
 
     it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
+        cy.clearCookies();
         cy.visit(`Article?url=${firstPage}`);
         waitForAnalyticsToInit();
         cy.window().its('ga').should('not.exist');
