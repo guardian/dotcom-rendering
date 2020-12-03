@@ -57,7 +57,7 @@ describe('Sign In Gate Tests', function () {
 
     describe('SignInGateMain', function () {
         beforeEach(function () {
-            // disableCMP();
+            disableCMP();
             // sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
             setMvtCookie('500');
 

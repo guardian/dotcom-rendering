@@ -11,7 +11,7 @@ const articleUrl =
 
 describe('Interactivity', function () {
     beforeEach(function () {
-        // disableCMP();
+        disableCMP();
         setLocalBaseUrl();
     });
 

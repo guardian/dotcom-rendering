@@ -5,7 +5,7 @@ import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('Commercial E2E tests', function () {
     beforeEach(function () {
-        // disableCMP();
+        disableCMP();
         setLocalBaseUrl();
     });
 
