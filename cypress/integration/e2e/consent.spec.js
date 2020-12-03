@@ -1,4 +1,3 @@
-import { getPolyfill } from '../../lib/polyfill';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const firstPage =
@@ -8,8 +7,6 @@ const secondPage =
     'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
 
 describe('Consent tests', function () {
-    before(getPolyfill);
-
     const cmpIframe = () => {
         return cy
             .get('iframe[id*="sp_message_iframe"]', { timeout: 30000 })
@@ -42,6 +39,7 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
+                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
@@ -62,6 +60,7 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
+                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
@@ -85,6 +84,7 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
+                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
