@@ -25,11 +25,8 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-<<<<<<< HEAD
-=======
 import { pipe2 } from 'lib';
 import React from 'react';
->>>>>>> main
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
