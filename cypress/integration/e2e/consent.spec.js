@@ -39,7 +39,11 @@ describe('Consent tests', function () {
 
     it('should make calls to Google Analytics after the reader consents', function () {
         cy.clearCookies();
-        cy.visit(`Article?url=${firstPage}`);
+        cy.visit(`Article?url=${firstPage}`, {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.clear();
+            },
+        });
         waitForAnalyticsToInit();
         // Open the Privacy setting dialogue
         cmpIframe().contains("It's your choice");
@@ -55,7 +59,11 @@ describe('Consent tests', function () {
 
     it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
         cy.clearCookies();
-        cy.visit(`Article?url=${firstPage}`);
+        cy.visit(`Article?url=${firstPage}`, {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.clear();
+            },
+        });
         waitForAnalyticsToInit();
         cy.window().its('ga').should('not.exist');
         // Open the Privacy setting dialogue
@@ -74,7 +82,11 @@ describe('Consent tests', function () {
 
     it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
         cy.clearCookies();
-        cy.visit(`Article?url=${firstPage}`);
+        cy.visit(`Article?url=${firstPage}`, {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.clear();
+            },
+        });
         waitForAnalyticsToInit();
         cy.window().its('ga').should('not.exist');
         // Open the Privacy setting dialogue
