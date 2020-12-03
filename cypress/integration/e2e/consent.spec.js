@@ -39,7 +39,6 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
-                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
@@ -60,7 +59,6 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
-                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
@@ -84,7 +82,6 @@ describe('Consent tests', function () {
         cy.visit(`Article?url=${firstPage}`, {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
-                win.clearCookies();
             },
         });
         waitForAnalyticsToInit();
