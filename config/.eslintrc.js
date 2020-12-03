@@ -87,6 +87,8 @@ module.exports = {
 		// This check seems to be flaky, and complains about things that TS is happy about
 		'react/prop-types': 'off',
 		'import/no-unresolved': 'off',
+		'react/jsx-uses-react': 'off',
+		'react/react-in-jsx-scope': 'off',
 		indent: 'off',
 		'import/no-default-export': 'off',
 	},
