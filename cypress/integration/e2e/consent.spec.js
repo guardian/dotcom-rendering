@@ -72,6 +72,12 @@ describe('Consent tests', function () {
     it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
         cy.visit(`Article?url=${firstPage}`);
         waitForAnalyticsToInit();
+        cy.getCookie('ccpaApplies').then((value) => {
+            cy.log('ccpaApplies', value);
+        });
+        cy.getCookie('gdprApplies').then((value) => {
+            cy.log('gdprApplies', value);
+        });
         cy.window().its('ga').should('not.exist');
         // Open the Privacy setting dialogue
         cmpIframe().contains("It's your choice");
