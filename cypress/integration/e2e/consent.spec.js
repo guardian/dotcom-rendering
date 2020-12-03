@@ -39,6 +39,9 @@ describe('Consent tests', function () {
     // eslint-disable-next-line mocha/no-setup-in-describe
     skipOn(Cypress.env('TEAMCITY') === 'true', () => {
         it('should make calls to Google Analytics after the reader consents', function () {
+            cy.setCookie('gu-cmp-disabled', 'false', {
+                log: true,
+            });
             cy.visit(`Article?url=${firstPage}`);
             waitForAnalyticsToInit();
             // Open the Privacy setting dialogue
@@ -54,6 +57,9 @@ describe('Consent tests', function () {
         });
 
         it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
+            cy.setCookie('gu-cmp-disabled', 'false', {
+                log: true,
+            });
             cy.visit(`Article?url=${firstPage}`);
             waitForAnalyticsToInit();
             cy.window().its('ga').should('not.exist');
@@ -72,6 +78,9 @@ describe('Consent tests', function () {
         });
 
         it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
+            cy.setCookie('gu-cmp-disabled', 'false', {
+                log: true,
+            });
             cy.visit(`Article?url=${firstPage}`);
             waitForAnalyticsToInit();
             cy.window().its('ga').should('not.exist');
