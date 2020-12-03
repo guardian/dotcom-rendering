@@ -12,5 +12,5 @@ jobs:
                   start: node scripts/frontend/dev-server
                   wait-on: 'http://localhost:3030'
                   wait-on-timeout: 180
-                  quiet: false
+                  quiet: true
                   browser: chrome
