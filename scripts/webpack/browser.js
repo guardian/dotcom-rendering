@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
+const LoadablePlugin = require('@loadable/webpack-plugin');
+const { loadableStatsFilename } = require('../frontend/config');
 
 const friendlyErrorsWebpackPlugin = () =>
     new FriendlyErrorsWebpackPlugin({
@@ -65,6 +67,10 @@ module.exports = ({ isLegacyJS }) => ({
             assets: isLegacyJS ? legacyManifestData : manifestData,
             // Need to explicitly define output file names to avoid overwrites
             output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+        }),
+        new LoadablePlugin({
+            writeToDisk: true,
+            filename: `${loadableStatsFilename}.json`,
         }),
         DEV && new webpack.HotModuleReplacementPlugin(),
         DEV && new webpack.NamedModulesPlugin(),

@@ -1,4 +1,4 @@
-const { siteName } = require('../frontend/config');
+const { siteName, loadableStatsFilename } = require('../frontend/config');
 
 module.exports = () => ({
     entry: {
@@ -30,8 +30,12 @@ module.exports = () => ({
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
+        (context, request, callback) => {
+            return request.endsWith(`${loadableStatsFilename}.json`)
+                ? callback(null, `commonjs ${request}`)
+                : callback();
+        },
     ],
-
     module: {
         rules: [
             {
