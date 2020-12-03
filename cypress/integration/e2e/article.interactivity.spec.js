@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
-import { disableCMP } from '../../lib/disableCMP';
+// import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
@@ -11,7 +11,7 @@ const articleUrl =
 
 describe('Interactivity', function () {
     beforeEach(function () {
-        disableCMP();
+        // disableCMP();
         setLocalBaseUrl();
     });
 

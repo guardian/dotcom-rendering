@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { disableCMP } from '../../lib/disableCMP.js';
+// import { disableCMP } from '../../lib/disableCMP.js';
 
 const qandaUrl =
     'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';
@@ -19,7 +19,7 @@ const chartUrl =
 const atomExpandableTests = (type, url) => {
     describe(type, function () {
         beforeEach(function () {
-            disableCMP();
+            // disableCMP();
             setLocalBaseUrl();
         });
 
