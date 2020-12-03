@@ -152,15 +152,17 @@ async function serveRichLinkDetails(
 	const docParser = JSDOM.fragment.bind(null);
 	const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
 
-	if (
+	const image =
 		item.mainMedia.kind === OptionKind.Some &&
 		item.mainMedia.value.kind === MainMediaKind.Image
-	) {
-		res.set('image', item.mainMedia.value.image.src);
-	}
+			? {
+					image: item.mainMedia.value.image.src,
+			  }
+			: {};
 
-	res.set('pillar', renderingRequest.content.pillarName);
-	res.status(200).end();
+	const response = { pillar: renderingRequest.content.pillarName, ...image };
+
+	res.status(200).json(response);
 }
 
 async function serveArticlePost(
@@ -255,6 +257,7 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
+app.get('/rendered-items/*', bodyParser.raw(), serveArticleGet);
 app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);

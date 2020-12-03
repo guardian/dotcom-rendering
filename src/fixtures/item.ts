@@ -30,6 +30,7 @@ const fields = {
 	tags: [],
 	shouldHideReaderRevenue: false,
 	branding: none,
+	internalShortId: none,
 	commentCount: none,
 	relatedContent: none,
 };

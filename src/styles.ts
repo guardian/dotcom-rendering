@@ -95,16 +95,20 @@ export const lineStyles = css`
 	}
 `;
 
-export const relatedContentStyles: SerializedStyles = css`
+export const onwardStyles: SerializedStyles = css`
 	background: ${neutral[97]};
-	${sidePadding}
-	${from.phablet} {
-		margin: 0 auto;
-	}
+	margin: ${remSpace[2]};
 
 	${darkModeCss`
         background: ${background.inverse};
     `};
+
+	padding: ${remSpace[6]} 0;
+	${from.wide} {
+		width: 1300px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 `;
 
 const adHeight = '258px';

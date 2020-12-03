@@ -9,8 +9,29 @@ on:
             - main
 
 jobs:
-    screenshots:
+    article_screenshots:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                article:
+                    - format: Standard
+                      url: http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash
+                    - format: Immersive
+                      url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
+                    - format: Labs
+                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
+                    - format: Feature
+                      url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
+                    - format: Gallery
+                      url: 'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos'
+                    - format: Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
+                    - format: Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
+                    - format: ImmersiveLab
+                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
+                    - format: Analysis
+                      url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
 
         steps:
             - uses: actions/checkout@v2
@@ -28,52 +49,102 @@ jobs:
               run: npm ci
             - name: run
               run: |
-                  npm run watch & 
-                  sleep 60s
+                  npm run watch &
+                  sleep 45s
               env:
                   APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}
                   CAPI_KEY: ${{ secrets.CAPI_KEY }}
+
             - name: Take screenshot of apps-rendering
-              uses: 'lannonbr/puppeteer-screenshot-action@1.3.0'
+              uses: 'lannonbr/puppeteer-screenshot-action@1.3.1'
               with:
-                  url: http://localhost:8080/
+                  url: ${{ matrix.article.url }}
             - name: Upload screenshot
-              run: aws s3 cp screenshots/screenshot*.png s3://gu-mobile-pr-images/${{ github.sha }}/screenshot.png --acl public-read
+              id: upload
+              run: |
+                  aws s3 cp screenshots/screenshot*.png s3://gu-mobile-pr-images/${{ github.sha }}/${{ matrix.article.format }}/screenshot.png --acl public-read
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.CI_IMAGE_UPLOADER_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.CI_IMAGE_UPLOADER_SECRET_ACCESS_KEY }}
+
+    comment:
+        runs-on: ubuntu-latest
+        needs: article_screenshots
+        strategy:
+            max-parallel: 1
+            matrix:
+                article:
+                    - format: Standard
+                      url: http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash
+                    - format: Immersive
+                      url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
+                    - format: Labs
+                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
+                    - format: Feature
+                      url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
+                    - format: Gallery
+                      url: 'http://localhost:8080/news/gallery/2020/nov/12/morning-fog-and-a-dog-in-deep-water-thursdays-best-photos'
+                    - format: Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
+                    - format: Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
+                    - format: ImmersiveLab
+                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
+                    - format: Analysis
+                      url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
+
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
             - name: Prepare image urls
               id: image-urls
               if: ${{ github.ref != 'main' }}
               run: |
                   MAIN_COMMIT_SHA=$(git show-ref main --hash)
-                  echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/screenshot.png"
-                  echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/screenshot.png"
-            - name: Search for previous screenshot comment
+                  echo "::set-output name=before::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/$MAIN_COMMIT_SHA/${{ matrix.article.format }}/screenshot.png"
+                  echo "::set-output name=after::https://gu-mobile-pr-images.s3-eu-west-1.amazonaws.com/${{ github.sha }}/${{ matrix.article.format }}/screenshot.png"
+            - uses: peter-evans/find-comment@v1
               if: ${{ github.event_name == 'pull_request' }}
-              uses: peter-evans/find-comment@v1
-              id: fc
+              id: find
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   body-includes: <!-- github-actions-screenshots -->
-            - name: Create comment if necessary
-              if: ${{ github.event_name == 'pull_request' && steps.fc.outputs.comment-id == '' }}
+
+            - name: Create comment is necessary
+              if: ${{ github.event_name == 'pull_request' && steps.find.outputs.comment-id == '' && matrix.article.format == 'Standard' }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   body: |
                       <!-- github-actions-screenshots -->
+                      ### ${{ matrix.article.format }}
                       | Before | After |
                       | --- | --- |
-                      | <img src="${{ steps.image-urls.outputs.before }}" width="300px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="300px" /> |
-            - name: Update comment if necessary
-              if: ${{ github.event_name == 'pull_request' && steps.fc.outputs.comment-id != '' }}
+                      | <img src="${{ steps.image-urls.outputs.before }}" width="350px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="350px" /> |
+
+            - name: Update comment is necessary
+              if: ${{ github.event_name == 'pull_request' && steps.find.outputs.comment-id != '' && matrix.article.format == 'Standard' }}
               uses: peter-evans/create-or-update-comment@v1
               with:
-                  comment-id: ${{ steps.fc.outputs.comment-id }}
+                  comment-id: ${{ steps.find.outputs.comment-id }}
                   body: |
                       <!-- github-actions-screenshots -->
+                      ### ${{ matrix.article.format }}
                       | Before | After |
                       | --- | --- |
-                      | <img src="${{ steps.image-urls.outputs.before }}" width="300px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="300px" /> |
+                      | <img src="${{ steps.image-urls.outputs.before }}" width="350px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="350px" /> |
                   edit-mode: replace
+
+            - name: Append other article screenshots
+              if: ${{ github.event_name == 'pull_request' && matrix.article.format != 'Standard' }}
+              uses: peter-evans/create-or-update-comment@v1
+              with:
+                  comment-id: ${{ steps.find.outputs.comment-id }}
+                  body: |
+                      <!-- github-actions-screenshots -->
+                      ### ${{ matrix.article.format }}
+                      | Before | After |
+                      | --- | --- |
+                      | <img src="${{ steps.image-urls.outputs.before }}" width="350px" /> | <img src="${{ steps.image-urls.outputs.after }}" width="350px" /> |
+                  edit-mode: append

@@ -27,7 +27,7 @@ import {
 	basePx,
 	darkModeCss,
 	lineStyles,
-	relatedContentStyles,
+	onwardStyles,
 } from 'styles';
 
 // ----- Styles ----- //
@@ -108,7 +108,7 @@ const Comment: FC<Props> = ({ item, children }) => (
 				<Tags tags={item.tags} format={item} />
 			</section>
 		</article>
-		<section css={relatedContentStyles}>
+		<section css={onwardStyles}>
 			<RelatedContent content={item.relatedContent} />
 		</section>
 		<div id="articleFooter">

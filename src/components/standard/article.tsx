@@ -7,6 +7,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { Display } from '@guardian/types/Format';
+import { map, withDefault } from '@guardian/types/option';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Metadata from 'components/metadata';
@@ -24,14 +25,19 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
+<<<<<<< HEAD
+=======
+import { pipe2 } from 'lib';
+import React from 'react';
+>>>>>>> main
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
 	lineStyles,
-	relatedContentStyles,
+	onwardStyles,
 } from 'styles';
-import { getThemeStyles } from 'themeStyles';
+import { getThemeStyles, themeToPillar } from 'themeStyles';
 
 // ----- Styles ----- //
 
@@ -95,6 +101,22 @@ const Standard: FC<Props> = ({ item, children }) => {
 		</div>
 	);
 
+	const commentContainer = item.commentable
+		? pipe2(
+				item.internalShortId,
+				map((id) => (
+					<section
+						css={onwardStyles}
+						id="comments"
+						data-closed={false}
+						data-pillar={themeToPillar(item.theme)}
+						data-short-id={id}
+					></section>
+				)),
+				withDefault(<></>),
+		  )
+		: null;
+
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
@@ -125,9 +147,10 @@ const Standard: FC<Props> = ({ item, children }) => {
 					<Tags tags={item.tags} format={item} />
 				</section>
 			</article>
-			<section css={relatedContentStyles}>
+			<section css={onwardStyles}>
 				<RelatedContent content={item.relatedContent} />
 			</section>
+			{commentContainer}
 			<div id="articleFooter">
 				<FooterCcpa isCcpa={false} />
 			</div>

@@ -1,8 +1,11 @@
 // ----- Imports ----- //
 
+import 'regenerator-runtime/runtime.js';
 import { AudioAtom, QuizAtom } from '@guardian/atoms-rendering';
 import type { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
+import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
+import { App } from '@guardian/discussion-rendering/build/App';
 import {
 	ads,
 	reportNativeElementPositionChanges,
@@ -13,8 +16,10 @@ import setup from 'client/setup';
 import Epic from 'components/shared/epic';
 import FooterCcpa from 'components/shared/footer';
 import { formatDate, formatLocal, isValidDate } from 'date';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
+	discussionClient,
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
@@ -134,6 +139,74 @@ function insertEpic(): void {
 				}
 			})
 			.catch((error) => console.error(error));
+	}
+}
+
+declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+function isPillarString(pillar: string): boolean {
+	return ['news', 'opinion', 'sport', 'culture', 'lifestyle'].includes(
+		pillar.toLowerCase(),
+	);
+}
+function renderComments(): void {
+	const commentContainer = document.getElementById('comments');
+	const pillarString = commentContainer?.getAttribute('data-pillar');
+	const shortUrl = commentContainer?.getAttribute('data-short-id');
+	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
+
+	if (pillarString && isPillarString(pillarString) && shortUrl) {
+		const pillar = pillarString as Pillar;
+		const user = {
+			userId: 'abc123',
+			displayName: 'Jane Smith',
+			webUrl: '',
+			apiUrl: '',
+			secureAvatarUrl: '',
+			avatar: '',
+			badge: [],
+		};
+
+		const additionalHeaders = {};
+
+		const props = {
+			shortUrl,
+			baseUrl: 'https://discussion.theguardian.com/discussion-api',
+			pillar,
+			user,
+			isClosedForComments,
+			additionalHeaders,
+			expanded: false,
+			apiKey: 'ios',
+			onPermalinkClick: (commentId: number): void => {
+				console.log(commentId);
+			},
+			onRecommend: (commentId: number): Promise<boolean> => {
+				return discussionClient.recommend(commentId);
+			},
+			onComment: (
+				shortUrl: string,
+				body: string,
+			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
+				return discussionClient
+					.comment(shortUrl, body)
+					.then((response) => ({ ...response, status: 'ok' }));
+			},
+			onReply: (
+				shortUrl: string,
+				body: string,
+				parentCommentId: number,
+			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
+				return discussionClient
+					.reply(shortUrl, body, parentCommentId)
+					.then((response) => ({ ...response, status: 'ok' }));
+			},
+			onPreview: (body: string): Promise<string> => {
+				return discussionClient.preview(body);
+			},
+		};
+
+		ReactDOM.render(h(App, props), commentContainer);
 	}
 }
 
@@ -261,19 +334,21 @@ function callouts(): void {
 	});
 }
 
-function hasSeenCards(): void {
-	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
-		(card) => card.getAttribute('data-article-id') ?? '',
-	);
+// TODO: uncomment when iOS implements filterSeenArticleIds
 
-	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
-		seenArticles.forEach((id) => {
-			document
-				.querySelector(`.js-card[data-article-id='${id}']`)
-				?.classList.add('fade');
-		});
-	});
-}
+// function hasSeenCards(): void {
+// 	const articleIds = Array.from(document.querySelectorAll('.js-card')).map(
+// 		(card) => card.getAttribute('data-article-id') ?? '',
+// 	);
+
+// 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
+// 		seenArticles.forEach((id) => {
+// 			document
+// 				.querySelector(`.js-card[data-article-id='${id}']`)
+// 				?.classList.add('fade');
+// 		});
+// 	});
+// }
 
 function initAudioAtoms(): void {
 	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
@@ -327,21 +402,38 @@ function richLinks(): void {
 		.forEach((richLink) => {
 			const articleId = richLink.getAttribute('data-article-id');
 			if (articleId) {
-				void fetch(`${articleId}?richlink`).then((response) => {
-					const pillar = response.headers
-						.get('pillar')
-						?.toLowerCase();
-					const image = response.headers.get('image');
+				const options = {
+					headers: {
+						Accept: 'application/json',
+					},
+				};
+				void fetch(`${articleId}?richlink`, options)
+					.then(handleErrors)
+					.then((resp) => resp.json())
+					.then((response: unknown) => {
+						if (isObject(response)) {
+							const pillar =
+								typeof response.pillar === 'string'
+									? response.pillar.toLowerCase()
+									: null;
+							const image = response.image;
 
-					if (pillar) {
-						richLink.classList.add(`js-${pillar}`);
-					}
+							if (pillar) {
+								richLink.classList.add(`js-${pillar}`);
+							}
 
-					const placeholder = richLink.querySelector('.js-image');
-					if (placeholder && image) {
-						placeholder.innerHTML = `<img src="${image}" alt="related article"/>`;
-					}
-				});
+							const placeholder = richLink.querySelector(
+								'.js-image',
+							);
+							if (placeholder && typeof image === 'string') {
+								const img = document.createElement('img');
+								img.setAttribute('alt', 'Related article');
+								img.setAttribute('src', image);
+								placeholder.appendChild(img);
+							}
+						}
+					})
+					.catch((error) => console.error(error));
 			}
 		});
 }
@@ -355,7 +447,9 @@ slideshow();
 formatDates();
 insertEpic();
 callouts();
-hasSeenCards();
+renderComments();
+// TODO: uncomment when iOS implements filterSeenArticleIds
+// hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
 footerInit();
