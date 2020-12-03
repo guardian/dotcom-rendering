@@ -1,4 +1,4 @@
-// import { disableCMP } from '../../lib/disableCMP';
+import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 /* eslint-disable no-undef */
