@@ -187,18 +187,18 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                 {edition === 'UK' ? (
                     <a
                         className={linkStyles}
-                        href={urls.contribute}
+                        href={urls.subscribe}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                     >
-                        Contribute <ArrowRightIcon />
+                        Subscribe <ArrowRightIcon />
                     </a>
                 ) : (
                     <a
                         className={linkStyles}
-                        href={urls.support}
+                        href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}support-cta`}
                     >
-                        Support us <ArrowRightIcon />
+                        Contribute <ArrowRightIcon />
                     </a>
                 )}
             </div>
