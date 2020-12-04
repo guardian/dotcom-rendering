@@ -259,6 +259,7 @@ export const ImmersiveLayout = ({
                                     : undefined
                             }
                             hideCaption={true}
+                            host={host}
                         />
                     </div>
                 )}
