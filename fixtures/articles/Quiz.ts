@@ -2897,7 +2897,7 @@ export const Quiz: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comlifeandstyle/2020/jan/18/the-quiz-thomas-eaton',
+                'https://amp.theguardian.com/lifeandstyle/2020/jan/18/the-quiz-thomas-eaton',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

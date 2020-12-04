@@ -2363,7 +2363,7 @@ export const comment: CAPIType = {
             '@type': 'NewsArticle',
             '@context': 'https://schema.org',
             '@id':
-                'https://amp.theguardian.comcommentisfree/2020/feb/04/press-boris-johnson-democracy-government',
+                'https://amp.theguardian.com/commentisfree/2020/feb/04/press-boris-johnson-democracy-government',
             publisher: {
                 '@type': 'Organization',
                 '@context': 'https://schema.org',

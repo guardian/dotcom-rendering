@@ -13,8 +13,8 @@ describe('E2E Page rendering', function () {
     describe('for WEB', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         articles.map((article, index) => {
-            it(`It should load the designType under the pillar (${article.url})`, function () {
-                const { url: articleUrl, designType, pillar } = article;
+            const { url: articleUrl, designType, pillar } = article;
+            it(`It should load ${designType} articles under the pillar ${pillar} (${articleUrl})`, function () {
                 const url = setUrlFragment(articleUrl, {
                     'ab-CuratedContainerTest2': 'control',
                 });
@@ -26,31 +26,34 @@ describe('E2E Page rendering', function () {
 
                 if (!article.hideMostViewed) {
                     cy.intercept('GET', '**/most-read-geo**', (req) => {
-                        expect(req.response.body).to.have.property(
-                            'heading',
-                        );
-                        expect(req.status).to.be.equal(200);
-
-                        cy.contains('Most viewed');
+                        req.reply((res) => {
+                            expect(res.body).to.have.property('heading');
+                            expect(res.statusCode).to.be.equal(200);
+                        });
                     });
+                    cy.contains('Most viewed');
                 }
 
                 cy.scrollTo('bottom', { duration: 500 });
 
                 cy.intercept('POST', '/sharecount/**', (req) => {
-                    expect(req.status).to.be.equal(200);
-                    expect(req.response.body).to.have.property('path');
-                    expect(req.response.body).to.have.property('refreshStatus');
-                    expect(req.response.body)
-                        .to.have.property('share_count')
-                        .that.is.a('number');
-                })
+                    req.reply((res) => {
+                        expect(res.statusCode).to.be.equal(200);
+                        expect(res.body).to.have.property('path');
+                        expect(res.body).to.have.property('refreshStatus');
+                        expect(res.body)
+                            .to.have.property('share_count')
+                            .that.is.a('number');
+                    });
+                });
 
                 if (article.hasRichLinks) {
                     cy.intercept('GET', '/embed/card/**', (req) => {
-                        expect(req.status).to.be.equal(200);
-                        cy.contains('Read more');
+                        req.reply((res) => {
+                            expect(res.statusCode).to.be.equal(200);
+                        });
                     });
+                    cy.contains('Read more');
                 }
 
                 // We scroll again here because not all the content at the bottom of the page loads
@@ -59,10 +62,12 @@ describe('E2E Page rendering', function () {
                 cy.scrollTo('bottom', { duration: 500 });
 
                 cy.intercept('GET', '/most-read/**', (req) => {
-                    expect(req.response.body).to.have.property('tabs');
-                    expect(req.status).to.be.equal(200);
-                    cy.contains('Most commented');
+                    req.reply((res) => {
+                        expect(res.body).to.have.property('tabs');
+                        expect(res.statusCode).to.be.equal(200);
+                    });
                 });
+                cy.contains('Most commented');
             });
         });
     });
@@ -132,4 +137,5 @@ describe('E2E Page rendering', function () {
             });
         });
     });
+    
 });

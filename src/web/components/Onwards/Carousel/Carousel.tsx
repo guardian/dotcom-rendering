@@ -3,7 +3,7 @@ import {
     SvgChevronLeftSingle,
     SvgChevronRightSingle,
 } from '@guardian/src-icons';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
@@ -75,7 +75,11 @@ const carouselStyle = css`
 
     overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
     ${from.tablet} {
-        overflow: hidden;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        scrollbar-width: none;
     }
 
     ${from.tablet} {
@@ -162,28 +166,43 @@ const dotsStyle = css`
     }
 `;
 
-const dotStyle = (index: number) => css`
+const dotStyle = css`
+    cursor: pointer;
     display: inline-block;
     height: ${space[3]}px;
     width: ${space[3]}px;
     background-color: ${palette.neutral[93]};
-    border-radius: 50%;
+    border-radius: 100%;
+    border: 0 none;
+    padding: 0;
     margin-right: ${space[1]}px;
 
-    /* This is a bit of a hack for the test, while we think of better UX here.
-    It's very fragile to things like carousel item count.*/
-    ${from.phablet} {
-        display: ${index >= 7 ? 'none' : 'auto'};
-    }
-
-    ${from.desktop} {
-        display: ${index >= 6 ? 'none' : 'auto'};
+    &:hover,
+    &:focus {
+        background-color: ${palette.neutral[86]};
+        outline: none;
     }
 `;
 
-const dotActiveStyle = (index: number, pillar: Pillar) => css`
-    ${dotStyle(index)};
-    background-color: ${pillarPalette[pillar].main};
+const dotActiveStyle = (pillar: Pillar) => css`
+    background-color: ${pillarPalette[pillar][400]};
+
+    &:hover,
+    &:focus {
+        background-color: ${pillarPalette[pillar].main};
+    }
+`;
+
+const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
+    /* This is a bit of a hack for the test, while we think of better UX here.
+    The dots can't line up on Desktop because we don't show 1 story per swipe*/
+    ${from.phablet} {
+        display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+    }
+
+    ${from.desktop} {
+        display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+    }
 `;
 
 const buttonStyle = css`
@@ -192,6 +211,14 @@ const buttonStyle = css`
     cursor: pointer;
     margin: 0;
     padding: 0;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        svg {
+            fill: ${palette.neutral[7]};
+        }
+    }
 `;
 
 const verticalLine = css`
@@ -225,7 +252,14 @@ const titleStyle = (pillar: Pillar) => css`
     color: ${pillarPalette[pillar].main};
 `;
 
-export const Title = ({ title, pillar }: { title: string; url?: string; pillar: Pillar }) => (
+export const Title = ({
+    title,
+    pillar,
+}: {
+    title: string;
+    url?: string;
+    pillar: Pillar;
+}) => (
     <h2 className={headerStyles}>
         More from <span className={titleStyle(pillar)}>{title}</span>
     </h2>
@@ -320,6 +354,19 @@ export const Carousel: React.FC<OnwardsType> = ({
         setIndex(getIndex());
     };
 
+    const goToIndex = (newIndex: number) => {
+        const { current } = carouselRef;
+        if (current === null) return;
+
+        const offsets = getItems()
+            .filter(notPresentation)
+            .map((el) => el.offsetLeft);
+
+        current.scrollTo({ left: offsets[newIndex] });
+
+        getSetIndex();
+    };
+
     const prev = () => {
         const { current } = carouselRef;
         if (current === null) return;
@@ -388,14 +435,21 @@ export const Carousel: React.FC<OnwardsType> = ({
                 data-link={formatAttrString(heading)}
             >
                 <div className={navRowStyles}>
-
                     <Title title={heading} pillar={pillar} />
 
                     <div className={navIconStyle} data-link-name="nav-arrow">
-                        <button onClick={prev} className={buttonStyle}>
+                        <button
+                            onClick={prev}
+                            aria-label="Move carousel backwards"
+                            className={buttonStyle}
+                        >
                             <SvgChevronLeftSingle />
                         </button>
-                        <button onClick={next} className={buttonStyle}>
+                        <button
+                            onClick={next}
+                            aria-label="Move carousel forwards"
+                            className={buttonStyle}
+                        >
                             <SvgChevronRightSingle />
                         </button>
                     </div>
@@ -404,9 +458,16 @@ export const Carousel: React.FC<OnwardsType> = ({
                 <div className={dotsStyle}>
                     {trails.map((value, i) => (
                         <span
-                            className={
-                                i === index ? dotActiveStyle(i, pillar) : dotStyle(i)
-                            }
+                            onClick={() => goToIndex(i)}
+                            // This button is not particularly useful for keyboard users as the stories
+                            // are tabb-able themselves so we hide them with aria and make them
+                            // not available to keyboard
+                            aria-hidden="true"
+                            className={cx(
+                                dotStyle,
+                                i === index && dotActiveStyle(pillar),
+                                adjustNumberOfDotsStyle(i, trails.length),
+                            )}
                         />
                     ))}
                 </div>

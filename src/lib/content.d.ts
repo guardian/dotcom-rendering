@@ -105,6 +105,7 @@ interface DocumentBlockElement {
 interface EmbedBlockElement {
     _type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
     safe?: boolean;
+    role?: RoleType;
     alt?: string;
     html: string;
     isMandatory: boolean;
