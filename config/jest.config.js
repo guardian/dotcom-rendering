@@ -10,9 +10,15 @@ module.exports = {
                         "@babel/preset-env",
                         { targets: { node: "12" }, modules: "cjs" },
                     ],
-                    "@babel/preset-react",
-                    "@emotion/babel-preset-css-prop",
+                    [
+                        "@babel/preset-react",
+                        {
+                            "runtime": "automatic",
+                            "importSource": "@emotion/core"
+                        }
+                    ],
                 ],
+                plugins: [ '@emotion' ],
             },
             tsConfig: "config/tsconfig.test.json",
         },
