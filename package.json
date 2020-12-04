@@ -111,7 +111,8 @@
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
         "sanitize-html": "^2.1.2",
-        "web-vitals": "^0.2.4"
+        "web-vitals": "^0.2.4",
+        "youtube-player": "^5.5.2"
     },
     "devDependencies": {
         "@babel/core": "^7.11.6",
