@@ -60,17 +60,17 @@ export const document = ({ data }: Props) => {
      * TODO: Identify critical fonts to preload
      */
     const fontFiles = [
-        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-        'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-        'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+        // 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+        // 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+        // 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+        // 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+        'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
     ];
 
     const polyfillIO =
@@ -104,8 +104,7 @@ export const document = ({ data }: Props) => {
      */
     const lowPriorityScriptTags = generateScriptTags(
         [
-            { src: 'https://www.google-analytics.com/analytics.js' },
-            { src: 'ga.js', module: true },
+            { src: 'ophan.js', module: true },
             { src: 'lotame.js', module: true },
             { src: 'atomIframe.js', module: true },
             { src: 'embedIframe.js', module: true },
@@ -113,6 +112,17 @@ export const document = ({ data }: Props) => {
         ],
         'async',
     );
+
+    const gaPath = {
+        modern: getDist({
+            path: 'ga.js',
+            legacy: false,
+        }),
+        legacy: getDist({
+            path: 'ga.js',
+            legacy: true,
+        }),
+    };
 
     /**
      * We escape windowGuardian here to prevent errors when the data
@@ -145,6 +155,7 @@ export const document = ({ data }: Props) => {
         title,
         description: CAPI.trailText,
         windowGuardian,
+        gaPath,
         ampLink,
         openGraphData,
         twitterData,
