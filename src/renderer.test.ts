@@ -6,13 +6,13 @@ import {
 	transformHref,
 } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from '@guardian/types/Format';
+import { Pillar } from '@guardian/types';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { Role } from '@guardian/image-rendering';
-import { none, some } from '@guardian/types/option';
-import { Design, Display, Format } from '@guardian/types/Format';
+import { none, some } from '@guardian/types';
+import { Design, Display, Format } from '@guardian/types';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';

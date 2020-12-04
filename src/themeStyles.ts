@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import * as palette from '@guardian/src-foundations/palette';
-import type { Theme } from '@guardian/types/Format';
-import { Pillar, Special } from '@guardian/types/Format';
+import type { Theme } from '@guardian/types';
+import { Pillar, Special } from '@guardian/types';
 
 // ----- Types ----- //
 

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import type { ReactElement } from 'react';
 
 // ----- Functions ----- //

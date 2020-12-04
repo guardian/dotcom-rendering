@@ -3,10 +3,8 @@
 import { CacheProvider } from '@emotion/core';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
-import { Design, Display } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, none, some } from '@guardian/types/option';
+import { Design, Display, map, none, some } from '@guardian/types';
+import type { Format, Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/atoms/interactiveAtom';

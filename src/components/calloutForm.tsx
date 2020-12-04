@@ -8,7 +8,7 @@ import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgMinus, SvgPlus } from '@guardian/src-icons';
 import { TextArea } from '@guardian/src-text-area';
 import { TextInput } from '@guardian/src-text-input';
-import type { Format } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import React from 'react';

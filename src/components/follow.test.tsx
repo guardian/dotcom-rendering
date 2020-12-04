@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types/Format';
-import { none } from '@guardian/types/option';
+import { Design, Display, none, Pillar } from '@guardian/types';
 import type { Contributor } from 'contributor';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';

@@ -8,10 +8,8 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types/Format';
-import { Design } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, none, some, withDefault } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import { Design, map, none, some, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 
 const BASE_PADDING = 8;

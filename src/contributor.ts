@@ -2,8 +2,8 @@
 
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { Role } from '@guardian/image-rendering';
-import type { Option } from '@guardian/types/option';
-import { fromNullable, map, none } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
 import { Dpr, src, srcsetWithWidths } from 'image';

@@ -6,10 +6,15 @@ import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import type { Option } from '@guardian/types/option';
-import { fromNullable, map, withDefault } from '@guardian/types/option';
-import type { Result } from '@guardian/types/result';
-import { err, ok, map as rmap } from '@guardian/types/result';
+import type { Option, Result } from '@guardian/types';
+import {
+	err,
+	fromNullable,
+	map,
+	ok,
+	resultMap,
+	withDefault,
+} from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import type { Image as ImageData } from 'image';
@@ -314,7 +319,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 
 			return pipe(
 				tweetContent(id, context.docParser(h)),
-				rmap((content) => ({ kind: ElementKind.Tweet, content })),
+				resultMap((content) => ({ kind: ElementKind.Tweet, content })),
 			);
 		}
 

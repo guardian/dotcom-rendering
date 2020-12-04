@@ -1,7 +1,7 @@
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import type { Option } from '@guardian/types/option';
-import { none, some } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { none, some } from '@guardian/types';
 
 interface Video {
 	posterUrl: string;

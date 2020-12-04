@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { map, withDefault } from '@guardian/types/option';
+import { map, withDefault } from '@guardian/types';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Series from 'components/series';

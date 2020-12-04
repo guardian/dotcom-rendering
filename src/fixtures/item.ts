@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types/Format';
-import { none, some } from '@guardian/types/option';
+import { Design, Display, none, Pillar, some } from '@guardian/types';
 import type { Item, Review } from 'item';
 
 // ----- Fixture ----- //

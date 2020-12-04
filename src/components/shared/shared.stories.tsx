@@ -1,4 +1,4 @@
-import type { Format } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 import Tags from './tags';

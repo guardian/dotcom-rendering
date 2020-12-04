@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Design } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import React from 'react';
