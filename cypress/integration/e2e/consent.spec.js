@@ -1,3 +1,4 @@
+/* eslint-disable mocha/no-setup-in-describe */
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { skipOn } from '@cypress/skip-test';
 
@@ -37,7 +38,6 @@ describe('Consent tests', function () {
 
     // Skipping only on CI because, these tests work fine locally but can fail on CI is the server
     // being used is in the US
-    // eslint-disable-next-line mocha/no-setup-in-describe
     skipOn(
         Cypress.env('TEAMCITY') === 'true' ||
             Cypress.env('GITHUB_ACTIONS') === 'true',
