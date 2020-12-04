@@ -69,11 +69,10 @@ const serverConfig = (
 			? []
 			: [
 					nodeExternals({
-						allowlist: [/@guardian/, 'React'],
+						allowlist: [/@guardian/],
 					}),
-					
 			  ],
-			
+
 		node: {
 			__dirname: false,
 		},
@@ -98,12 +97,12 @@ const serverConfig = (
 									[
 										'@babel/preset-react',
 										{
-											"runtime": "automatic",
-											"importSource": "@emotion/core"
-										}
+											runtime: 'automatic',
+											importSource: '@emotion/core',
+										},
 									],
 								],
-								plugins: [ '@emotion' ],
+								plugins: ['@emotion'],
 							},
 						},
 						{
@@ -156,9 +155,9 @@ export const clientConfig: Configuration = {
 								[
 									'@babel/preset-react',
 									{
-										"runtime": "automatic",
-										"importSource": "@emotion/core"
-									}
+										runtime: 'automatic',
+										importSource: '@emotion/core',
+									},
 								],
 
 								[
@@ -176,7 +175,7 @@ export const clientConfig: Configuration = {
 									},
 								],
 							],
-							plugins: [ '@emotion' ],
+							plugins: ['@emotion'],
 						},
 					},
 					{
