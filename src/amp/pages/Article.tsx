@@ -14,6 +14,7 @@ import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { getPillar } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
+import {AmpExperimentComponent, AmpExperiments} from "@root/src/amp/components/AmpExperiment";
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -36,15 +37,17 @@ const Body: React.SFC<{
 };
 
 export const Article: React.FC<{
+    experimentsData: AmpExperiments;
     nav: NavType;
     articleData: ArticleModel;
     config: ConfigType;
     analytics: AnalyticsModel;
-}> = ({ nav, articleData, config, analytics }) => (
+}> = ({ nav, articleData, config, analytics, experimentsData }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
         <AnalyticsIframe url={config.ampIframeUrl} />
         <AdConsent />
+        <AmpExperimentComponent experimentsData={experimentsData} />
 
         {/* /TODO change to gray bgcolor */}
         <div key="main" className={backgroundColour}>

@@ -90,11 +90,14 @@ export const document = ({
         ${resetCSS}
         ${css}
 
-        body[amp-x-epic-experiment='control'] div#variant  {
+        div[data-is-epic-wrapper='true'] {
             display: none;
         }
-        body[amp-x-epic-experiment='variant'] div#control  {
-            display: none;
+        body[amp-x-epic-experiment='control'] div#control  {
+            display: block;
+        }
+        body[amp-x-epic-experiment='variant'] div#variant  {
+            display: block;
         }
     </style>
 
