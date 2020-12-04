@@ -1,5 +1,6 @@
 import { getPolyfill } from '../../lib/polyfill';
 import { articles, AMPArticles } from '../../lib/articles.js';
+import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
@@ -7,6 +8,7 @@ describe('E2E Page rendering', function () {
     before(getPolyfill);
 
     beforeEach(function () {
+        disableCMP();
         setLocalBaseUrl();
     });
 
@@ -137,5 +139,4 @@ describe('E2E Page rendering', function () {
             });
         });
     });
-    
 });
