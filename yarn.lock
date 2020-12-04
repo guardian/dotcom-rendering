@@ -2087,10 +2087,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-2.4.1.tgz#357be3f0b21d80b5c6d5b879cdb150421a08b1e2"
-  integrity sha512-PMdJ8QmkYMIt8Vypr7QyZC5q8WQCT+Pazbs8vb9OZ7oOnNyMydyNGvGgxD8j0wCNFohtM/pCl6fm7W41p2EDOA==
+"@guardian/atoms-rendering@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-4.0.1.tgz#729a41ede19bec12f0e89f1c6ac4db66f25f5702"
+  integrity sha512-haoAoyV/oWxMc3ByvmClPCbOm7UZIjjAsJIuLYx79A3ng4nbSR1okGSLBdC4uOWaMQpal6pZrTQ0jMUohcmPiA==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -4209,6 +4209,11 @@
   integrity sha512-9T1auFmbPZoxHz0enUFlUuKRy3it01R+hlggyVUMtnCTQRunsQYifnSGb8hET4Xo8yiC0o0r1paW3ud5+rbURg==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/youtube@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.41.tgz#61b5526c0638ea9eb715cf47590763bcf907788d"
+  integrity sha512-k6IzSO62JaC4YImW6dEYzWA84+Gb4T0KPswy2FlWAWKcitstju8qZ3sN2GKhKskcslOiXmVveem/x/gCa3zMRg==
 
 "@typescript-eslint/eslint-plugin-tslint@^4.1.1":
   version "4.1.1"

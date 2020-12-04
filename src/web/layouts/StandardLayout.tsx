@@ -477,6 +477,7 @@ export const StandardLayout = ({
                                 elements={CAPI.mainMediaElements}
                                 pillar={pillar}
                                 adTargeting={adTargeting}
+                                host={host}
                             />
                         </div>
                     </GridItem>

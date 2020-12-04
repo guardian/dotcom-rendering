@@ -1,13 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { videoTracking as gaRecord } from '@root/src/web/browser/ga/ga';
+import { record as ophanRecord } from '@root/src/web/browser/ophan/ophan';
 import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
+import { YoutubeAtom } from '@guardian/atoms-rendering';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
-import { YoutubeAtom } from '@guardian/atoms-rendering';
 
 type Props = {
     display: Display;
@@ -17,6 +19,10 @@ type Props = {
     role: RoleType;
     hideCaption?: boolean;
     overlayImage?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
     height?: number;
@@ -67,6 +73,7 @@ export const YoutubeBlockComponent = ({
     pillar,
     hideCaption,
     overlayImage,
+    posterImage,
     role,
     adTargeting,
     isMainMedia,
@@ -125,17 +132,47 @@ export const YoutubeBlockComponent = ({
         );
     }
 
+    const ophanTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        ophanRecord({
+            video: {
+                id: `gu-video-youtube-${element.id}`,
+                eventType: `video:content:${trackingEvent}`,
+            },
+        });
+    };
+    const gaTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        gaRecord({
+            trackingEvent,
+            elementId: element.id,
+        });
+    };
+
+    const normalisedOverlayImage = overlayImage
+        ? { src: overlayImage, alt: element.altText || element.mediaTitle }
+        : undefined;
+    const normalisedPosterImage = posterImage
+        ? { srcSet: posterImage, alt: element.altText || element.mediaTitle }
+        : undefined;
+
+    // in order to prevent false positives on localhost
+    const environmentOrigin =
+        process.env.NODE_ENV === 'production' ? origin : undefined;
+
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
                 videoMeta={element}
-                overlayImage={overlayImage}
+                overlayImage={normalisedOverlayImage}
+                posterImage={normalisedPosterImage}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
                 title={title}
                 duration={duration}
-                origin={origin}
+                origin={environmentOrigin}
+                eventEmitters={[ophanTracking, gaTracking]}
             />
             {!hideCaption && (
                 <Caption

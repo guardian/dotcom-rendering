@@ -464,6 +464,7 @@ export const CommentLayout = ({
                                         ? CAPI.starRating
                                         : undefined
                                 }
+                                host={host}
                             />
                         </div>
                     </GridItem>

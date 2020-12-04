@@ -258,6 +258,7 @@ export const ImmersiveLayout = ({
                                     ? CAPI.starRating
                                     : undefined
                             }
+                            host={host}
                             hideCaption={true}
                         />
                     </div>
