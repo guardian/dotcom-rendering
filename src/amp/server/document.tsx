@@ -18,12 +18,14 @@ interface Metadata {
 }
 
 export const document = ({
+    experimentsCss,
     linkedData,
     title,
     body,
     scripts,
     metadata,
 }: {
+    experimentsCss: () => string;
     linkedData: object[];
     title: string;
     body: React.ReactElement<any>;
@@ -89,16 +91,7 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
-
-        div[data-is-epic-wrapper='true'] {
-            display: none;
-        }
-        body[amp-x-epic-experiment='control'] div#control  {
-            display: block;
-        }
-        body[amp-x-epic-experiment='variant'] div#variant  {
-            display: block;
-        }
+        ${experimentsCss()}
     </style>
 
     </head>

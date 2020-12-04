@@ -50,11 +50,36 @@ export const render = async ({ body }: express.Request, res: express.Response) =
             canonicalURL: CAPI.webURL,
         };
 
+        const experimentsDataUrl = 'http://localhost:3131/amp/experiments-data.json'
+
         const experimentsData: AmpExperiments =
-            await fetch('http://localhost:3131/amp/experiments-data.json')
+            await fetch(experimentsDataUrl)
                 .then(rawResponse => rawResponse.json())
 
+        const experimentsCss = (): string => {
+            const defaultVisibility = `
+                div[data-is-epic-wrapper='true'] {
+                    display: none;
+                }
+            `
+
+            const variants = Object.entries(experimentsData['epic-experiment'].variants)
+                .map((variant) => {
+                    const variantName = variant[0];
+                    return `
+                        body[amp-x-epic-experiment='${variantName}'] div#${variantName}  {
+                            display: block;
+                        }
+                    `
+                })
+
+            variants.unshift(defaultVisibility)
+
+            return variants.join('\n')
+        }
+
         const resp = document({
+            experimentsCss,
             linkedData,
             scripts,
             metadata,
