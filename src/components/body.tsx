@@ -2,9 +2,8 @@
 
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { Design, Display } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
-import { partition } from '@guardian/types/result';
+import { Design, Display, partition } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
-import { Design, Display, Pillar } from '@guardian/types/Format';
+import { Design, Display, Pillar } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { basePx } from 'styles';

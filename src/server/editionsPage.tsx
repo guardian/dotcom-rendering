@@ -2,8 +2,8 @@
 
 import { CacheProvider } from '@emotion/core';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import type { Option } from '@guardian/types/option';
-import { none } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { none } from '@guardian/types';
 import Article from 'components/editions/article';
 import type { EmotionCritical } from 'create-emotion-server';
 import { cache } from 'emotion';

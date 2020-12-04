@@ -1,4 +1,4 @@
-import { map, withDefault } from '@guardian/types/option';
+import { map, withDefault } from '@guardian/types';
 import HeaderImage from 'components/headerImage';
 import HeaderVideo from 'components/headerVideo';
 import type { Image as ImageData } from 'image';

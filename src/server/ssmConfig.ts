@@ -1,5 +1,5 @@
-import type { Option } from '@guardian/types/option';
-import { map, none, some, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { map, none, some, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import { App, Stack, Stage } from './appIdentity';
 import { ssm } from './aws';

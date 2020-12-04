@@ -1,4 +1,4 @@
-import { some } from '@guardian/types/option';
+import { some } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { matchers } from 'jest-emotion';
 import renderer from 'react-test-renderer';

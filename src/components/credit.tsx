@@ -3,13 +3,11 @@
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types/Format';
-import { Design } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import { Design, map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
-import React from 'react';
+import { Fragment } from 'react';
 
 // ----- Component ----- //
 
@@ -31,7 +29,7 @@ const Credit: FC<Props> = ({ format, credit }) =>
 				case Design.Media:
 					return <p css={styles}>{cred}</p>;
 				default:
-					return <> {cred}</>;
+					return <Fragment> {cred}</Fragment>;
 			}
 		}),
 		withDefault<ReactElement | null>(null),

@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 

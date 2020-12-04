@@ -10,8 +10,8 @@ import {
 	opinion,
 	sport,
 } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types/Format';
-import { Design, Display, Pillar } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 // ----- Types ----- //
 

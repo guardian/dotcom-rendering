@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Display, Pillar } from '@guardian/types/Format';
+import { Display, Pillar } from '@guardian/types';
 import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import {
 	advertisementFeature,

@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import type { Format } from '@guardian/types/Format';
-import { map, withDefault } from '@guardian/types/option';
+import type { Format } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';

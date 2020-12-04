@@ -5,11 +5,16 @@ import type { Image as CardImage } from '@guardian/apps-rendering-api-models/ima
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { Image as ImageData } from '@guardian/image-rendering';
 import { Role } from '@guardian/image-rendering';
-import type { Format } from '@guardian/types/Format';
-import { andThen, fromNullable, map, none, some } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
-import { fromUnsafe, ResultKind } from '@guardian/types/result';
-import type { Result } from '@guardian/types/result';
+import type { Format, Option, Result } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	fromUnsafe,
+	map,
+	none,
+	ResultKind,
+	some,
+} from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { ReactNode } from 'react';
 import type { Context } from 'types/parserContext';

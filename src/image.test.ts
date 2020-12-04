@@ -6,7 +6,7 @@ import { Dpr, parseImage, Image, srcset } from 'image';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { none, withDefault } from '@guardian/types/option';
+import { none, withDefault } from '@guardian/types';
 import { pipe3 } from 'lib';
 import { Role } from '@guardian/image-rendering';
 

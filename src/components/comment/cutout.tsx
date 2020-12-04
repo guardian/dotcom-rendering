@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import type { Format } from '@guardian/types/Format';
-import { map, withDefault } from '@guardian/types/option';
+import type { Format } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
