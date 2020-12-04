@@ -446,7 +446,7 @@ export const ArticleRenderer: React.FC<{
 
     return (
         <div
-            className={`article-body-commercial-selector ${commercialPosition}`}
+            className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
         >
             {/* Insert the placeholder for the sign in gate on the 2nd article element */}
             {withSignInGateSlot(output)}

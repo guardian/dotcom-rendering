@@ -34,6 +34,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { loadScript } from '@root/src/web/lib/loadScript';
 import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -384,6 +385,21 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.isAdFreeUser,
         CAPI.config.isSensitive,
     ]);
+
+    // ************************
+    // *   Google Analytics   *
+    // ************************
+    useEffect(() => {
+        onConsentChange((state: any) => {
+            const consentGiven = getConsentFor('google-analytics', state);
+            if (consentGiven) {
+                loadScript('https://www.google-analytics.com/analytics.js');
+                loadScript(window.guardian.gaPath);
+            } else {
+                (window as any).ga = null;
+            }
+        });
+    }, []);
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
