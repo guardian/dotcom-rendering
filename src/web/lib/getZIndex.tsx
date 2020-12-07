@@ -34,9 +34,16 @@ const indices = [
     'headerLinks',
     'TheGuardian',
 
+    // Article headline (should be above main media)
+    'articleHeadline',
+    'immersiveBlackBox',
+
     // Body
     'bodyArea',
     'rightColumnArea',
+
+    // Main media
+    'mainMedia',
 ];
 
 //

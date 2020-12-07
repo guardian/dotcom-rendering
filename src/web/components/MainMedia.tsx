@@ -1,11 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { until } from '@guardian/src-foundations/mq';
+import { until, from } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { Display } from '@root/src/lib/display';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
     min-height: 1px;
@@ -17,7 +18,7 @@ const mainMedia = css`
 
     ${until.tablet} {
         margin: 0;
-        order: -1;
+        order: 2;
     }
 
     img {
@@ -37,6 +38,26 @@ const noGutters = css`
         margin-left: -10px;
         margin-right: -10px;
     }
+`;
+
+const immersiveWrapper = css`
+    /*
+        Immersive main media is wrapped in a flex div with height 100vw and then
+        we use this grow here to ensure the content fills the available height
+    */
+    flex-grow: 1;
+    /**
+       100vw is normally enough but don't let the content shrink vertically too
+       much just in case
+     */
+    min-height: 25rem;
+    ${from.desktop} {
+        min-height: 31.25rem;
+    }
+    ${from.wide} {
+        min-height: 50rem;
+    }
+    ${getZIndex('mainMedia')}
 `;
 
 function renderElement(
@@ -109,7 +130,12 @@ export const MainMedia: React.FC<{
     adTargeting,
     starRating,
 }) => (
-    <div className={cx(mainMedia, display !== Display.Immersive && noGutters)}>
+    <div
+        className={cx(
+            mainMedia,
+            display === Display.Immersive ? immersiveWrapper : noGutters,
+        )}
+    >
         {elements.map((element, i) =>
             renderElement(
                 display,

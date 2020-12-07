@@ -30,10 +30,12 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-import { ImmersiveHeadline } from '@root/src/web/components/ImmersiveHeadline';
+import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Hide } from '@root/src/web/components/Hide';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
 import {
@@ -43,7 +45,6 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Display } from '@root/src/lib/display';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { Hide } from '../components/Hide';
 
 const ImmersiveGrid = ({
     children,
@@ -214,6 +215,57 @@ export const ImmersiveLayout = ({
     const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
     const captionText = decideCaption(mainMedia);
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+    const HEADLINE_OFFSET = mainMedia ? 120 : 0;
+
+    const LeftColCaption = () => (
+        <div
+            className={css`
+                margin-top: ${HEADLINE_OFFSET}px;
+                position: absolute;
+            `}
+        >
+            <Caption
+                display={display}
+                designType={designType}
+                captionText={captionText}
+                pillar={pillar}
+                shouldLimitWidth={true}
+            />
+        </div>
+    );
+
+    const BlackBox = ({ children }: { children: React.ReactNode }) => (
+        <div
+            className={css`
+                /*
+                    This pseudo css shows a black box to the right of the headline
+                    so that the black background of the inverted text stretches
+                    all the way right. But only from mobileLandscape because below
+                    that we want to show a gap. To work properly it needs to wrap
+                    the healine so it inherits the correct height based on the length
+                    of the headline text
+                */
+                ${from.mobileLandscape} {
+                    position: relative;
+                    :after {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        width: 50%;
+                        right: 0;
+                        background-color: ${neutral[0]};
+                        ${getZIndex('immersiveBlackBox')}
+                        top: 0;
+                        bottom: 0;
+                    }
+                }
+            `}
+        >
+            {children}
+        </div>
+    );
+
     return (
         <>
             <div
@@ -223,68 +275,99 @@ export const ImmersiveLayout = ({
                     min-height: ${mainMedia && '100vh'};
                 `}
             >
-                <Section
-                    showSideBorders={false}
-                    showTopBorder={false}
-                    padded={false}
-                    backgroundColour={brandBackground.primary}
+                <header
+                    className={css`
+                        ${getZIndex('headerWrapper')}
+                        order: 0;
+                    `}
                 >
-                    <Nav
-                        pillar={getCurrentPillar(CAPI)}
-                        nav={NAV}
-                        display={display}
-                        subscribeUrl={
-                            CAPI.nav.readerRevenueLinks.header.subscribe
-                        }
-                        edition={CAPI.editionId}
-                    />
-                </Section>
-                {mainMedia && (
-                    <div
-                        className={css`
-                            flex: 1;
-                            min-height: 31.25rem;
-                            position: relative;
-                        `}
+                    <Section
+                        showSideBorders={false}
+                        showTopBorder={false}
+                        padded={false}
+                        backgroundColour={brandBackground.primary}
                     >
-                        <MainMedia
+                        <Nav
+                            pillar={getCurrentPillar(CAPI)}
+                            nav={NAV}
                             display={display}
-                            designType={designType}
-                            elements={CAPI.mainMediaElements}
-                            pillar={pillar}
-                            adTargeting={adTargeting}
-                            starRating={
-                                CAPI.designType === 'Review' && CAPI.starRating
-                                    ? CAPI.starRating
-                                    : undefined
+                            subscribeUrl={
+                                CAPI.nav.readerRevenueLinks.header.subscribe
                             }
-                            hideCaption={true}
+                            edition={CAPI.editionId}
                         />
-                    </div>
-                )}
-            </div>
+                    </Section>
+                </header>
 
-            {mainMedia && (
-                <ImmersiveHeadline
+                <MainMedia
                     display={display}
                     designType={designType}
-                    tags={CAPI.tags}
-                    author={CAPI.author}
-                    headline={CAPI.headline}
-                    sectionLabel={CAPI.sectionLabel}
-                    sectionUrl={CAPI.sectionUrl}
-                    guardianBaseURL={CAPI.guardianBaseURL}
-                    pillar={CAPI.pillar}
-                    captionText={captionText}
-                    badge={CAPI.badge}
+                    elements={CAPI.mainMediaElements}
+                    pillar={pillar}
+                    adTargeting={adTargeting}
+                    starRating={
+                        CAPI.designType === 'Review' && CAPI.starRating
+                            ? CAPI.starRating
+                            : undefined
+                    }
+                    hideCaption={true}
                 />
-            )}
-
+            </div>
+            <div
+                className={css`
+                    margin-top: -${HEADLINE_OFFSET}px;
+                    /* 
+                        This z-index is what ensures the headline title text shows above main media. For
+                        the actual headline we set the z-index deeper in ArticleHeadline itself so that
+                        the text appears above the pseudo BlackBox element
+                    */
+                    position: relative;
+                    ${getZIndex('articleHeadline')}
+                    ${from.tablet} {
+                        margin-left: 20px;
+                    }
+                    ${from.leftCol} {
+                        margin-left: 40px;
+                    }
+                `}
+            >
+                <ContainerLayout
+                    verticalMargins={false}
+                    padContent={false}
+                    padSides={false}
+                    leftContent={<LeftColCaption />}
+                >
+                    <ArticleTitle
+                        display={display}
+                        designType={designType}
+                        tags={CAPI.tags}
+                        sectionLabel={CAPI.sectionLabel}
+                        sectionUrl={CAPI.sectionUrl}
+                        guardianBaseURL={CAPI.guardianBaseURL}
+                        pillar={pillar}
+                        badge={CAPI.badge}
+                    />
+                </ContainerLayout>
+                <BlackBox>
+                    <ContainerLayout
+                        verticalMargins={false}
+                        padContent={false}
+                        padSides={false}
+                    >
+                        <ArticleHeadline
+                            display={display}
+                            headlineString={CAPI.headline}
+                            designType={designType}
+                            pillar={pillar}
+                            tags={CAPI.tags}
+                            byline={CAPI.author.byline}
+                        />
+                    </ContainerLayout>
+                </BlackBox>
+            </div>
             <Section showTopBorder={false} showSideBorders={false}>
                 <ImmersiveGrid>
-                    {/* Above leftCol, the Caption is controled by ImmersiveHeadline because the
-                    headline stretches all the way right it can't be inside a Section so that
-                    top area of the page is rendered outside the grid */}
+                    {/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
                     <GridItem area="caption">
                         <Hide when="above" breakpoint="leftCol">
                             <Caption
