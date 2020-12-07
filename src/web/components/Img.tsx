@@ -48,6 +48,17 @@ const buildSourcesString = (srcSets: SrcSetItem[]): string => {
     return srcSets.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 };
 
+/**
+ *       mobile: 320
+ *       mobileMedium: 375
+ *       mobileLandscape: 480
+ *       phablet: 660
+ *       tablet: 740
+ *       desktop: 980
+ *       leftCol: 1140
+ *       wide: 1300
+ */
+
 const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
     switch (role) {
         case 'inline':
@@ -57,8 +68,25 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
         case 'thumbnail':
             return '140px';
         case 'immersive':
+            // Immersive MainMedia elements fill the height of the viewport, meaning
+            // on mobile devices even though the viewport width is small, we'll need
+            // a larger image to maintain quality. Deciding which width image to ask
+            // for is difficult because aspect ratios and orientations between
+            // different devices varies so the values given below are best estimates
+            // based on the most popular configurations
+
+            // Immersive body images stretch the full viewport width below wide,
+            // but do not stretch beyond 1300px after that.
             return isMainMedia
-                ? '100vw'
+                ? `
+                    (min-width: ${breakpoints.leftCol}px) 1600px,
+                    (min-width: ${breakpoints.desktop}px) 1900px,
+                    (min-width: ${breakpoints.tablet}px) 1900px,
+                    (min-width: ${breakpoints.phablet}px) 1600px,
+                    (min-width: ${breakpoints.mobileLandscape}px) 1300px,
+                    (min-width: ${breakpoints.mobileMedium}px) 900px,
+                    1300px
+                `
                 : `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
         case 'supporting':
             return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
