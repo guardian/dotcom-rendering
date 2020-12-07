@@ -24,6 +24,7 @@ type Props = {
     verticalMargins?: boolean;
     backgroundColour?: string;
     borderColour?: string;
+    leftContent?: JSXElements;
     children?: React.ReactNode;
 };
 
@@ -90,6 +91,7 @@ export const ContainerLayout = ({
     borderColour,
     backgroundColour,
     children,
+    leftContent,
 }: Props) => (
     <Section
         sectionId={sectionId}
@@ -105,12 +107,15 @@ export const ContainerLayout = ({
                 borderColour={borderColour}
                 showPartialRightBorder={centralBorder === 'partial'}
             >
-                <ContainerTitle
-                    title={title}
-                    fontColour={fontColour}
-                    description={description}
-                    url={url}
-                />
+                <>
+                    <ContainerTitle
+                        title={title}
+                        fontColour={fontColour}
+                        description={description}
+                        url={url}
+                    />
+                    {leftContent}
+                </>
             </LeftColumn>
             <Container padded={padContent} verticalMargins={verticalMargins}>
                 <Hide when="above" breakpoint="leftCol">
