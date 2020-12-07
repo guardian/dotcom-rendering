@@ -26,7 +26,12 @@ import { logger } from 'logger';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
-import { capiDecoder, errorDecoder, mapiDecoder } from 'server/decoders';
+import {
+	capiDecoder,
+	errorDecoder,
+	mapiDecoder,
+	capiSearchDecoder,
+} from 'server/decoders';
 import { render as renderEditions } from 'server/editionsPage';
 import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
@@ -185,6 +190,27 @@ async function serveArticlePost(
 	}
 }
 
+async function serveEditionArticlePost(
+	req: Request,
+	res: ExpressResponse,
+	next: NextFunction,
+): Promise<void> {
+	try {
+		// req.body: should contain a direct response from capi
+		// fetched by the edition backend
+		const searchResponse = await capiSearchDecoder(req.body);
+		// this end point serve single article so take the first item only
+		const content = searchResponse.results[0];
+		const mockedRenderingRequest: RenderingRequest = {
+			content,
+		};
+		void serveArticle(mockedRenderingRequest, res, false);
+	} catch (e) {
+		console.error(e);
+		res.status(400).send('bad request');
+	}
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -261,6 +287,8 @@ app.get('/rendered-items/*', bodyParser.raw(), serveArticleGet);
 app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
+
+app.post('/render-edition-article', bodyParser.raw(), serveEditionArticlePost);
 
 app.listen(port, () => {
 	if (process.env.NODE_ENV === 'production') {

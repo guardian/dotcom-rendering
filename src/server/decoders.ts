@@ -3,6 +3,7 @@
 import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
 import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
+import { SearchResponseSerde } from '@guardian/content-api-models/v1/searchResponse';
 import { TBufferedTransport, TCompactProtocol } from 'thrift';
 import type { TProtocol, TTransport } from 'thrift';
 
@@ -36,10 +37,11 @@ const decodeContent = <A>(decoder: ThriftDecoder<A>) => async (
 	}
 };
 
+const capiSearchDecoder = decodeContent(SearchResponseSerde);
 const capiDecoder = decodeContent(ItemResponseSerde);
 const errorDecoder = decodeContent(ErrorResponseSerde);
 const mapiDecoder = decodeContent(RenderingRequestSerde);
 
 // ----- Exports ----- //
 
-export { capiDecoder, errorDecoder, mapiDecoder };
+export { capiDecoder, capiSearchDecoder, errorDecoder, mapiDecoder };
