@@ -71,10 +71,14 @@ const invertedStyle = (pillar: Pillar) => css`
     color: ${neutral[100]};
     background-color: ${pillarPalette[pillar].main};
 
-    padding-left: ${space[5]}px;
-    ${from.phablet} {
+    padding-left: ${space[3]}px;
+    ${from.mobileLandscape} {
+        padding-left: ${space[5]}px;
+    }
+    ${from.tablet} {
         padding-left: ${space[3]}px;
     }
+
     padding-right: ${space[3]}px;
     padding-top: ${space[1]}px;
     padding-bottom: ${space[1]}px;

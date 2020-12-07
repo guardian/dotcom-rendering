@@ -45,8 +45,17 @@ const marginTop = css`
     margin-top: 6px;
 `;
 
-const marginBottom = css`
+const immersiveMargins = css`
     margin-bottom: 5px;
+    /*
+        Make sure we vertically align the title font with the body font
+    */
+    ${from.tablet} {
+        margin-left: 10px;
+    }
+    ${from.leftCol} {
+        margin-left: 19px;
+    }
 `;
 
 export const ArticleTitle = ({
@@ -68,7 +77,7 @@ export const ArticleTitle = ({
         <div
             className={cx(
                 badge && marginTop,
-                display === Display.Immersive && marginBottom,
+                display === Display.Immersive && immersiveMargins,
             )}
         >
             <SeriesSectionLink
