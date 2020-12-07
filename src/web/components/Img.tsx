@@ -78,15 +78,7 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
             // Immersive body images stretch the full viewport width below wide,
             // but do not stretch beyond 1300px after that.
             return isMainMedia
-                ? `
-                    (min-width: ${breakpoints.leftCol}px) 1600px,
-                    (min-width: ${breakpoints.desktop}px) 1900px,
-                    (min-width: ${breakpoints.tablet}px) 1900px,
-                    (min-width: ${breakpoints.phablet}px) 1600px,
-                    (min-width: ${breakpoints.mobileLandscape}px) 1300px,
-                    (min-width: ${breakpoints.mobileMedium}px) 900px,
-                    1300px
-                `
+                ? `(orientation: portrait) 167vh, 100vw`
                 : `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
         case 'supporting':
             return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
