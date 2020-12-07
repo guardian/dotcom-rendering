@@ -58,20 +58,23 @@ export const ContainerTitle = ({
     fontColour?: string;
     description?: string;
     url?: string;
-}) => (
-    <>
-        {url ? (
-            <a className={linkStyles} href={url}>
+}) => {
+    if (!title) return null;
+    return (
+        <>
+            {url ? (
+                <a className={linkStyles} href={url}>
+                    <h2 className={headerStyles(fontColour)}>{title}</h2>
+                </a>
+            ) : (
                 <h2 className={headerStyles(fontColour)}>{title}</h2>
-            </a>
-        ) : (
-            <h2 className={headerStyles(fontColour)}>{title}</h2>
-        )}
-        {description && (
-            <p
-                className={descriptionStyles(fontColour)}
-                dangerouslySetInnerHTML={{ __html: description }}
-            />
-        )}
-    </>
-);
+            )}
+            {description && (
+                <p
+                    className={descriptionStyles(fontColour)}
+                    dangerouslySetInnerHTML={{ __html: description }}
+                />
+            )}
+        </>
+    );
+};
