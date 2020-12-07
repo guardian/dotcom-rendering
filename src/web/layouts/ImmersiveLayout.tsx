@@ -273,7 +273,18 @@ export const ImmersiveLayout = ({
                 className={css`
                     display: flex;
                     flex-direction: column;
-                    min-height: ${mainMedia && '100vh'};
+                    height: ${mainMedia && '100vh'};
+                    /**
+                        100vw is normally enough but don't let the content shrink vertically too
+                        much just in case
+                    */
+                    min-height: 25rem;
+                    ${from.desktop} {
+                        min-height: 31.25rem;
+                    }
+                    ${from.wide} {
+                        min-height: 50rem;
+                    }
                 `}
             >
                 <header

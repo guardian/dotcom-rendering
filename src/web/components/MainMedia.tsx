@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { until, from } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
@@ -46,17 +46,6 @@ const immersiveWrapper = css`
         we use this grow here to ensure the content fills the available height
     */
     flex-grow: 1;
-    /**
-       100vw is normally enough but don't let the content shrink vertically too
-       much just in case
-     */
-    min-height: 25rem;
-    ${from.desktop} {
-        min-height: 31.25rem;
-    }
-    ${from.wide} {
-        min-height: 50rem;
-    }
     ${getZIndex('mainMedia')}
 `;
 
