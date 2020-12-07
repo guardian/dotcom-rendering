@@ -223,6 +223,7 @@ export const ImmersiveLayout = ({
             className={css`
                 margin-top: ${HEADLINE_OFFSET}px;
                 position: absolute;
+                margin-left: 20px;
             `}
         >
             <Caption
@@ -323,12 +324,6 @@ export const ImmersiveLayout = ({
                     */
                     position: relative;
                     ${getZIndex('articleHeadline')}
-                    ${from.tablet} {
-                        margin-left: 20px;
-                    }
-                    ${from.leftCol} {
-                        margin-left: 40px;
-                    }
                 `}
             >
                 <ContainerLayout

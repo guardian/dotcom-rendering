@@ -153,11 +153,15 @@ const maxWidth = css`
 
 const invertedWrapper = css`
     /*
-        Because we use box-shadow (to get clean and even background styles
-        even when lines wrap) we need a margin on this wrapper div to
-        shift everything back to the right
+        Make sure we vertically align the headline font with the body font
     */
     margin-left: 6px;
+    ${from.tablet} {
+        margin-left: 16px;
+    }
+    ${from.leftCol} {
+        margin-left: 25px;
+    }
     /* 
         We need this grow to ensure the headline fills the main content column
     */
