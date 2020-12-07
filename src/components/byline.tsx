@@ -7,7 +7,6 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Design, map, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';

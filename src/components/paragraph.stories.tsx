@@ -2,7 +2,6 @@
 
 import { Design, Display, Pillar } from '@guardian/types';
 import type { FC } from 'react';
-import React from 'react';
 import Paragraph from './paragraph';
 
 // ----- Stories ----- //

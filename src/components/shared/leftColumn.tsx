@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { FC } from 'react';
-import React from 'react';
 import { wideColumnWidth, wideContentWidth } from 'styles';
 
 // ----- Styles ----- //

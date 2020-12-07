@@ -6,7 +6,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //

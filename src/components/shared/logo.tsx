@@ -9,7 +9,6 @@ import Anchor from 'components/anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';

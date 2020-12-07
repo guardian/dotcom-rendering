@@ -8,7 +8,6 @@ import BylineCard from 'components/shared/bylineCard';
 import Card from 'components/shared/card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

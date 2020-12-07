@@ -16,7 +16,6 @@ import HeaderMedia from 'headerMedia';
 import type { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,

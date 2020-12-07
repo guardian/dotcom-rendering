@@ -5,7 +5,6 @@ import { remSpace } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 

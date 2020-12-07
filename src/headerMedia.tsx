@@ -6,7 +6,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe2 } from 'lib';
 import type { FC } from 'react';
-import React from 'react';
 import type { Video as VideoData } from 'video';
 
 export const enum MainMediaKind {

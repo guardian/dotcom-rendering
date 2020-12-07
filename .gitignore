@@ -11,6 +11,7 @@ node_modules
 .idea
 .vscode/*
 !.vscode/extensions.json
+.metals/
 
 # System files
 .DS_Store

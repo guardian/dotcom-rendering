@@ -9,7 +9,6 @@ import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //

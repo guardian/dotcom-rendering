@@ -13,7 +13,6 @@ import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
 

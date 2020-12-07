@@ -9,7 +9,6 @@ import { Design, Display } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import Img from 'components/img';
 import type { Image } from 'image';
-import React from 'react';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 

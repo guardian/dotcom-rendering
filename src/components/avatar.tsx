@@ -9,7 +9,6 @@ import Img from 'components/img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { getThemeStyles } from 'themeStyles';
 

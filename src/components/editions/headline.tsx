@@ -4,7 +4,6 @@ import { css } from '@emotion/core';
 import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Component ----- //

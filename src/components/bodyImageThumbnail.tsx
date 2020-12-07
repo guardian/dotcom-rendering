@@ -6,7 +6,6 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import Img from 'components/img';
 import type { BodyImageProps as Props } from 'image';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Setup ----- //

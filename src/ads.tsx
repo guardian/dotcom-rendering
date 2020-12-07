@@ -2,7 +2,7 @@ import { Button, buttonBrandAlt } from '@guardian/src-button';
 import Paragraph from 'components/paragraph';
 import { ThemeProvider } from 'emotion-theming';
 import type { ReactElement, ReactNode } from 'react';
-import React, { createElement as h, isValidElement } from 'react';
+import { createElement as h, isValidElement } from 'react';
 
 function getAdIndices(): number[] {
 	const adEveryNParagraphs = 6;

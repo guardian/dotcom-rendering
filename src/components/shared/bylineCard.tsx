@@ -15,7 +15,6 @@ import {
 } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';

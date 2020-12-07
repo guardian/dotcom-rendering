@@ -11,7 +11,6 @@ import { TextInput } from '@guardian/src-text-input';
 import type { Format } from '@guardian/types';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { plainTextElement } from 'renderer';
 import { darkModeCss } from 'styles';

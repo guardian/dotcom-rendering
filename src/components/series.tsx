@@ -10,7 +10,6 @@ import type { Format } from '@guardian/types';
 import { Design, Display, map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';

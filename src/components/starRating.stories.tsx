@@ -3,7 +3,6 @@
 import { radios, withKnobs } from '@storybook/addon-knobs';
 import { article, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
-import React from 'react';
 import StarRating from './starRating';
 
 // ----- Setup ----- //

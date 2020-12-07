@@ -9,7 +9,6 @@ import { Design, Display, map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';

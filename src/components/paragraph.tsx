@@ -6,7 +6,6 @@ import { remSpace } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design } from '@guardian/types';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //

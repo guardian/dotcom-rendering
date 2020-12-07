@@ -82,6 +82,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@emotion/babel-plugin": "^11.0.0",
     "@guardian/eslint-config-typescript": "^0.4.1",
     "@guardian/prettier": "^0.4.1",
     "@storybook/addon-knobs": "^6.1.9",

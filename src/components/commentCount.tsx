@@ -8,7 +8,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';

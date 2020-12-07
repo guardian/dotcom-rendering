@@ -12,7 +12,6 @@ import type { Item } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { assetHashes } from 'server/csp';
 import { pageFonts } from 'styles';

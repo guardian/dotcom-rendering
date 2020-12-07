@@ -7,7 +7,6 @@ import { parse } from 'client/parser';
 import { article, comment, feature, review } from 'fixtures/item';
 import { pipe2 } from 'lib';
 import type { ReactElement } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Standfirst from './standfirst';
 

@@ -18,7 +18,7 @@ import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
-import React, { createElement as h } from 'react';
+import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';

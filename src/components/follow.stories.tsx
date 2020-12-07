@@ -3,7 +3,6 @@
 import { Design, Display, none, Pillar } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Follow from './follow';
 

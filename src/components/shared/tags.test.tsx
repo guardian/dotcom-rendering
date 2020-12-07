@@ -2,7 +2,6 @@ import type { Format } from '@guardian/types';
 import { Design, Display, Pillar } from '@guardian/types';
 import Tags from 'components/shared/tags';
 import { matchers } from 'jest-emotion';
-import React from 'react';
 import renderer from 'react-test-renderer';
 
 expect.extend(matchers);

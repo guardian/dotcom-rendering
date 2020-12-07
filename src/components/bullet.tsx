@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';

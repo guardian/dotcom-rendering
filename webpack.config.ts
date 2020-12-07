@@ -72,6 +72,7 @@ const serverConfig = (
 						allowlist: [/@guardian/],
 					}),
 			  ],
+
 		node: {
 			__dirname: false,
 		},
@@ -93,9 +94,15 @@ const serverConfig = (
 							loader: 'babel-loader',
 							options: {
 								presets: [
-									'@babel/preset-react',
-									'@emotion/babel-preset-css-prop',
+									[
+										'@babel/preset-react',
+										{
+											runtime: 'automatic',
+											importSource: '@emotion/core',
+										},
+									],
 								],
+								plugins: ['@emotion'],
 							},
 						},
 						{
@@ -145,8 +152,14 @@ export const clientConfig: Configuration = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								'@babel/preset-react',
-								'@emotion/babel-preset-css-prop',
+								[
+									'@babel/preset-react',
+									{
+										runtime: 'automatic',
+										importSource: '@emotion/core',
+									},
+								],
+
 								[
 									'@babel/preset-env',
 									{
@@ -162,6 +175,7 @@ export const clientConfig: Configuration = {
 									},
 								],
 							],
+							plugins: ['@emotion'],
 						},
 					},
 					{

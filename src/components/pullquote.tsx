@@ -7,7 +7,6 @@ import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 

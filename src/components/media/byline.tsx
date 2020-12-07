@@ -11,7 +11,6 @@ import Dateline from 'components/dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import { renderText } from '../../renderer';
 
