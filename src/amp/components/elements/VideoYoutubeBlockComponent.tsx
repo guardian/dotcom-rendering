@@ -19,6 +19,7 @@ export const VideoYoutubeBlockComponent: React.FC<{
                 layout="responsive"
                 width={element.width}
                 height={element.height}
+                credentials="omit"
             />
         </Caption>
     );
