@@ -221,7 +221,8 @@
         "webpack-hot-server-middleware": "^0.6.1",
         "webpack-merge": "^4.1.2",
         "webpack-node-externals": "^1.7.2",
-        "webpack-sources": "^1.1.0"
+        "webpack-sources": "^1.1.0",
+        "web-vitals": "^0.2.4"
     },
     "jest": {
         "preset": "ts-jest/presets/js-with-babel",

@@ -1,5 +1,4 @@
 {
-    "editor.formatOnSave": true,
     "eslint.autoFixOnSave": true,
     "eslint.validate": [{
             "language": "typescript",
@@ -16,5 +15,6 @@
     },
     "files.watcherExclude": {
         "**/target": true
-    }
+    },
+    "editor.formatOnSave": true
 }
