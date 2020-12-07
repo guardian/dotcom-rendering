@@ -153,6 +153,15 @@ const maxWidth = css`
 
 const invertedWrapper = css`
     /*
+        Because we use box-shadow (to get clean and even background styles
+        even when lines wrap) we need a margin on this wrapper div to
+        shift everything back to the right
+    */
+    margin-left: 6px;
+`;
+
+const immersiveWrapper = css`
+    /*
         Make sure we vertically align the headline font with the body font
     */
     margin-left: 6px;
@@ -247,7 +256,7 @@ export const ArticleHeadline = ({
                     return (
                         // Immersive headlines with main media present, are large and inverted with
                         // a black background
-                        <h1 className={cx(invertedWrapper, blackBackground)}>
+                        <h1 className={cx(immersiveWrapper, blackBackground)}>
                             <span
                                 className={cx(
                                     jumboFont,
