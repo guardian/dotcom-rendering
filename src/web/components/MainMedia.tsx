@@ -5,6 +5,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { Display } from '@root/src/lib/display';
 
 const mainMedia = css`
@@ -82,6 +83,10 @@ function renderElement(
                         duration={element.duration}
                     />
                 </div>
+            );
+        case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+            return (
+                <EmbedBlockComponent html={element.html} alt={element.alt} />
             );
         default:
             // eslint-disable-next-line no-console
