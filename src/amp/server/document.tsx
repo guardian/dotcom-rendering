@@ -18,14 +18,12 @@ interface Metadata {
 }
 
 export const document = ({
-    experimentsCss,
     linkedData,
     title,
     body,
     scripts,
     metadata,
 }: {
-    experimentsCss: () => string;
     linkedData: object[];
     title: string;
     body: React.ReactElement<any>;
@@ -91,7 +89,6 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
-        ${experimentsCss()}
     </style>
 
     </head>

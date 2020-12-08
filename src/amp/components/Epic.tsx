@@ -128,7 +128,7 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = 'http://localhost:3131/amp/epic';
+    const epicUrl = 'http://localhost:3131/amp/epic?testData=VARIANTS';
 
     return (
         <div>
@@ -140,6 +140,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
                 height='1px'
                 src={epicUrl}
                 credentials='include'
+                id="epic-container"
             >
                 <MoustacheTemplate>
                     <div className={epic} data-is-epic-wrapper='true' id={moustacheVariable('variantName')}>

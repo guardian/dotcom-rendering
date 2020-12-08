@@ -40,6 +40,25 @@ export const Analytics: React.FC<{
         `<amp-pixel data-block-on-consent src="${beacon}"></amp-pixel>`,
         `<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
         `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
+        `<amp-analytics>
+            <script type="application/json" id="contributions-ophan">
+                {
+                    "requests": {
+                        "viewSend": {
+                            "origin": "https://mjacobson.eu.ngrok.io",
+                            "baseUrl": "/testing?testData=VARIANTS"
+                        }
+                    },
+                    "triggers": {
+                        "track epic view": {
+                            "on": "visible",
+                            "request": "viewSend",
+                            "selector": "#epic-container"
+                        }
+                    }
+                }
+            </script>
+        </amp-analytics>`,
         `<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
