@@ -70,13 +70,10 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
         case 'immersive':
             // Immersive MainMedia elements fill the height of the viewport, meaning
             // on mobile devices even though the viewport width is small, we'll need
-            // a larger image to maintain quality. Deciding which width image to ask
-            // for is difficult because aspect ratios and orientations between
-            // different devices varies so the values given below are best estimates
-            // based on the most popular configurations
-            //
-            // The value of 167vh relates to a 5:3 image which is equal to 167 (viewport height)  : 100 (viewport width).
-            //
+            // a larger image to maintain quality. To solve this problem we're using
+            // the viewport height (vh) to calculate width. The value of 167vh
+            // relates to an assumed image ratio of 5:3 which is equal to
+            // 167 (viewport height)  : 100 (viewport width).
 
             // Immersive body images stretch the full viewport width below wide,
             // but do not stretch beyond 1300px after that.
