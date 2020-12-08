@@ -172,6 +172,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const hasCommentsHash = hasCommentsHashInUrl();
 
+    const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+
     // *******************************
     // ** Setup AB Test Tracking *****
     // *******************************
@@ -332,7 +334,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         if (CAPI.config.switches.consentManagement && countryCode) {
             const pubData = {
                 browserId: getCookie('bwid') || undefined,
-                pageViewId: window.guardian?.config?.ophan?.pageViewId,
+                pageViewId,
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
 
@@ -433,6 +435,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
+                    pageViewId={pageViewId}
                 />
             </Portal>
             <Hydrate root="links-root">
@@ -784,6 +787,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="footer : "
                         inHeader={false}
+                        pageViewId={pageViewId}
                     />
                 </Lazy>
             </Portal>

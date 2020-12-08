@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '@root/src/web/lib/contributions';
+import { ABProvider } from '@guardian/ab-react';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const shouldHideSupportMessaging: any = shouldHideSupportMessaging_;
@@ -8,6 +9,20 @@ const shouldHideSupportMessaging: any = shouldHideSupportMessaging_;
 jest.mock('@root/src/web/lib/contributions', () => ({
     shouldHideSupportMessaging: jest.fn(() => true),
 }));
+
+const AbProvider: React.FC = ({ children }) => {
+    return (
+        <ABProvider
+            mvtMaxValue={1000000}
+            mvtId={1234}
+            pageIsSensitive={false}
+            abTestSwitches={{}}
+            arrayOfTestObjects={[]}
+        >
+            {children}
+        </ABProvider>
+    );
+};
 
 describe('ReaderRevenueLinks', () => {
     const urls = {
@@ -21,12 +36,15 @@ describe('ReaderRevenueLinks', () => {
         shouldHideSupportMessaging.mockReturnValue(true);
 
         const { container } = render(
-            <ReaderRevenueLinks
-                urls={urls}
-                edition={edition}
-                dataLinkNamePrefix="nav2 : "
-                inHeader={true}
-            />,
+            <AbProvider>
+                <ReaderRevenueLinks
+                    urls={urls}
+                    edition={edition}
+                    dataLinkNamePrefix="nav2 : "
+                    inHeader={true}
+                    pageViewId="1234"
+                />
+            </AbProvider>,
         );
 
         // expect nothing to be rendered
@@ -37,12 +55,15 @@ describe('ReaderRevenueLinks', () => {
         shouldHideSupportMessaging.mockReturnValue(false);
 
         const { container } = render(
-            <ReaderRevenueLinks
-                urls={urls}
-                edition={edition}
-                dataLinkNamePrefix="nav2 : "
-                inHeader={true}
-            />,
+            <AbProvider>
+                <ReaderRevenueLinks
+                    urls={urls}
+                    edition={edition}
+                    dataLinkNamePrefix="nav2 : "
+                    inHeader={true}
+                    pageViewId="1234"
+                />,
+            </AbProvider>,
         );
 
         // expect links to be rendered
