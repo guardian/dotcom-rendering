@@ -48,6 +48,17 @@ const buildSourcesString = (srcSets: SrcSetItem[]): string => {
     return srcSets.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 };
 
+/**
+ *       mobile: 320
+ *       mobileMedium: 375
+ *       mobileLandscape: 480
+ *       phablet: 660
+ *       tablet: 740
+ *       desktop: 980
+ *       leftCol: 1140
+ *       wide: 1300
+ */
+
 const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
     switch (role) {
         case 'inline':
@@ -57,8 +68,17 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
         case 'thumbnail':
             return '140px';
         case 'immersive':
+            // Immersive MainMedia elements fill the height of the viewport, meaning
+            // on mobile devices even though the viewport width is small, we'll need
+            // a larger image to maintain quality. To solve this problem we're using
+            // the viewport height (vh) to calculate width. The value of 167vh
+            // relates to an assumed image ratio of 5:3 which is equal to
+            // 167 (viewport height)  : 100 (viewport width).
+
+            // Immersive body images stretch the full viewport width below wide,
+            // but do not stretch beyond 1300px after that.
             return isMainMedia
-                ? '100vw'
+                ? `(orientation: portrait) 167vh, 100vw`
                 : `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
         case 'supporting':
             return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
