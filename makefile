@@ -68,6 +68,10 @@ cypress: clear clean-dist install
 	$(call log, "starting frontend DEV server for Cypress")
 	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'cypress run --spec "cypress/integration/**/*"'
 
+ampValidation: clean-dist install
+	$(call log, "starting frontend DEV server for AMP Validation")
+	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'node scripts/test/amp-validation.js'
+
 # quality #########################################
 
 tsc: clean-dist install

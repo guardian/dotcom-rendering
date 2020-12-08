@@ -1,0 +1,24 @@
+name: AMP Validation
+on: push
+
+jobs:
+    amp_validation:
+        name: AMP Validation
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+
+            - name: Use Node.js 10.15.3
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '10.15.3'
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
+
+            - name: Install
+              run: yarn
+
+            - name: Validate AMP
+              run: make ampValidation
