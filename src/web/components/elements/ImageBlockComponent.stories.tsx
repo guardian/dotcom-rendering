@@ -15,7 +15,7 @@ export default {
     component: ImageBlockComponent,
     title: 'Components/ImageBlockComponent',
     parameters: {
-        chromatic: { diffThreshold: 0.2 },
+        chromatic: { diffThreshold: 0.4 },
     },
 };
 
