@@ -49,7 +49,12 @@ const collapsedStyles = css`
 `;
 
 const fontStyle = css`
-    ${textSans.medium()};
+    ${textSans.small()};
+    font-size: 14px;
+    ${from.tablet} {
+        ${textSans.medium()};
+        font-size: 16px;
+    }
     font-weight: 500;
     color: ${neutral[7]};
     padding: 0 5px;
