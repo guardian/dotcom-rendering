@@ -1,56 +1,63 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
+
+const jsonData = {
+    'page_view_id': '',
+    'fid': 0,
+    'cls': 0,
+    'lcp': 0,
+    'fcp': 0,
+    'ttfb': 0,
+}
+
 export const coreVitals = (): void =>
 {
     type coreVitalsArgs = {
         name: string;
         value: number;
     };
-let fcp = 0;
-let cls = 0;
-let lcp = 0;
-let fid = 0;
-let ttfb = 0;
+
 
 const getValue = ({ name, value }: coreVitalsArgs): void => {
     console.log(name);
     switch(name){
         case('FCP'):
             console.log(`FCP: ${  value}`);
-            fcp = value;
+            jsonData.fcp = value;
             break;
         case('CLS'):
-            cls = value;
+            console.log(`CLS: ${value}`)
+            jsonData.cls = value;
             break;
         case('LCP'):
-            lcp = value;
+            console.log(`LCP: ${value}`)
+            jsonData.lcp = value;
             break;
         case('FID'):
-            fid = value;
+            console.log(`FID: ${value}`)
+            jsonData.fid = value;
             break;
         case('TTFB'):
-            ttfb = value;
+            console.log(`TTFB: ${value}`)
+            jsonData.ttfb = value;
             break;
     }
+    console.log(jsonData);
 }
+
 
     document.addEventListener("DOMContentLoaded", function() {
 
-        getCLS(getValue);
+        if(window.guardian && window.guardian.ophan)
+        {
+            jsonData.page_view_id = window.guardian.ophan.pageViewId;
+        }
         getFID(getValue);
         getLCP(getValue);
         getFCP(getValue);
         getTTFB(getValue);
+        getCLS(getValue);
 
-        const jsonToSend = {
-            'page_view_id': '',
-            'cls' : cls,
-            'fid' : fid,
-            'lcp' : lcp,
-            'fcp' : fcp,
-            'ttfb' : ttfb,
-        }
-        console.log(jsonToSend);
     });
 
 };
