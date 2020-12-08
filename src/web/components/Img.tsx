@@ -74,6 +74,9 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
             // for is difficult because aspect ratios and orientations between
             // different devices varies so the values given below are best estimates
             // based on the most popular configurations
+            //
+            // The value of 167vh relates to a 5:3 image which is equal to 167 (viewport height)  : 100 (viewport width).
+            //
 
             // Immersive body images stretch the full viewport width below wide,
             // but do not stretch beyond 1300px after that.
