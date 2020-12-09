@@ -75,7 +75,7 @@
         "dompurify": "^2.0.11",
         "dynamic-import-polyfill": "^0.1.1",
         "emotion": "^10.0.27",
-        "emotion-server": "^10.0.5",
+        "emotion-server": "^11.0.0",
         "emotion-theming": "^10.0.27",
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-airbnb-base": "^14.2.1",
