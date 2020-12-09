@@ -53,7 +53,7 @@
     "@guardian/src-radio": "^2.5.0",
     "@guardian/src-svgs": "^1.5.0",
     "@guardian/src-text-area": "^2.5.0",
-    "@guardian/src-text-input": "^2.6.0",
+    "@guardian/src-text-input": "^2.7.1",
     "@guardian/types": "github:guardian/types#semver:^1.0.0",
     "@types/jsdom": "^16.2.5",
     "@types/uuid": "^8.3.0",
