@@ -13,6 +13,8 @@ type Props = {
     isLazy?: boolean;
 };
 
+type ResolutionType = 'hdpi' | 'mdpi';
+
 const getClosestSetForWidth = (
     desiredWidth: number,
     inlineSrcSets: SrcSetItem[],
@@ -33,15 +35,20 @@ const getFallbackSrc = (srcSets: SrcSetItem[]): string => {
     return getClosestSetForWidth(300, srcSets).src;
 };
 
-const getSrcSetsForRole = (
+const getSrcSets = (
     role: RoleType,
+    resolution: ResolutionType,
     imageSources: ImageSource[],
 ): SrcSetItem[] => {
-    return imageSources.filter(
+    const srcSetsForRole = imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
             weighting.toLowerCase() === role.toLowerCase(),
     )[0].srcSet;
+    if (resolution === 'hdpi') {
+        return srcSetsForRole.filter((set) => set.src.includes('dpr=2'));
+    }
+    return srcSetsForRole.filter((set) => !set.src.includes('dpr=2'));
 };
 
 const buildSourcesString = (srcSets: SrcSetItem[]): string => {
@@ -59,7 +66,7 @@ const buildSourcesString = (srcSets: SrcSetItem[]): string => {
  *       wide: 1300
  */
 
-const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
+const getSizes = (role: RoleType, isMainMedia: boolean): string => {
     switch (role) {
         case 'inline':
             return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
@@ -98,27 +105,34 @@ export const Img = ({
     isMainMedia = false,
     isLazy = true,
 }: Props) => {
-    const srcSetForRole = getSrcSetsForRole(role, imageSources);
-    const src = getFallbackSrc(srcSetForRole);
-    const sources = buildSourcesString(srcSetForRole);
-    const sizes = buildSizesString(role, isMainMedia);
+    const hdpiSources = getSrcSets(role, 'hdpi', imageSources);
+    const mdpiSources = getSrcSets(role, 'mdpi', imageSources);
+    const sizes = getSizes(role, isMainMedia);
+    const fallbackSrc = getFallbackSrc(mdpiSources);
 
     return (
-        <img
-            itemProp="contentUrl"
-            alt={alt}
-            src={src}
-            srcSet={sources}
-            sizes={sizes}
-            height={height}
-            width={width}
-            loading={isLazy && !Img.disableLazyLoading ? 'lazy' : undefined}
-            // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
-            // why did we add the css `vertical-align: middle;` to the img tag
-            className={css`
-                vertical-align: middle;
-            `}
-        />
+        <picture itemProp="contentUrl">
+            {/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+            <source
+                srcSet={buildSourcesString(hdpiSources)}
+                sizes={sizes}
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+            />
+            {/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
+            <source srcSet={buildSourcesString(mdpiSources)} sizes={sizes} />
+            <img
+                alt={alt}
+                src={fallbackSrc}
+                height={height}
+                width={width}
+                loading={isLazy && !Img.disableLazyLoading ? 'lazy' : undefined}
+                // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
+                // why did we add the css `vertical-align: middle;` to the img tag
+                className={css`
+                    vertical-align: middle;
+                `}
+            />
+        </picture>
     );
 };
 
