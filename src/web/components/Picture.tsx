@@ -29,30 +29,52 @@ const getClosestSetForWidth = (
     });
 };
 
-const getFallbackSrc = (srcSets: SrcSetItem[]): string => {
-    // The assumption here is readers on devices that do not support srcset are likely to be on poor
-    // network connections so we're going to fallback to a small image
-    return getClosestSetForWidth(300, srcSets).src;
-};
-
-const getSrcSets = (
-    role: RoleType,
-    resolution: ResolutionType,
-    imageSources: ImageSource[],
-): SrcSetItem[] => {
-    const srcSetsForRole = imageSources.filter(
+const getSourcesForRole = (imageSources: ImageSource[], role: RoleType) =>
+    imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
             weighting.toLowerCase() === role.toLowerCase(),
     )[0].srcSet;
-    if (resolution === 'hdpi') {
-        return srcSetsForRole.filter((set) => set.src.includes('dpr=2'));
-    }
-    return srcSetsForRole.filter((set) => !set.src.includes('dpr=2'));
+
+const getSourcesForResolution = (
+    sets: SrcSetItem[],
+    resolution: ResolutionType,
+) =>
+    resolution === 'hdpi'
+        ? sets.filter((set) => set.src.includes('dpr=2'))
+        : sets.filter((set) => !set.src.includes('dpr=2'));
+
+const getFallback = (
+    role: RoleType,
+    resolution: ResolutionType,
+    imageSources: ImageSource[],
+): string => {
+    const sourcesForRole: SrcSetItem[] = getSourcesForRole(imageSources, role);
+    const sourcesForResolution: SrcSetItem[] = getSourcesForResolution(
+        sourcesForRole,
+        resolution,
+    );
+    // The assumption here is readers on devices that do not support srcset are likely to be on poor
+    // network connections so we're going to fallback to a small image
+    return getClosestSetForWidth(300, sourcesForResolution).src;
 };
 
-const buildSourcesString = (srcSets: SrcSetItem[]): string => {
-    return srcSets.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
+const getSources = (
+    role: RoleType,
+    resolution: ResolutionType,
+    imageSources: ImageSource[],
+): string => {
+    // Get the sources for this role
+    const sourcesForRole: SrcSetItem[] = getSourcesForRole(imageSources, role);
+    // Filter by resolution
+    const sourcesForResolution: SrcSetItem[] = getSourcesForResolution(
+        sourcesForRole,
+        resolution,
+    );
+
+    return sourcesForResolution
+        .map((srcSet) => `${srcSet.src} ${srcSet.width}w`)
+        .join(',');
 };
 
 /**
@@ -105,21 +127,21 @@ export const Picture = ({
     isMainMedia = false,
     isLazy = true,
 }: Props) => {
-    const hdpiSources = getSrcSets(role, 'hdpi', imageSources);
-    const mdpiSources = getSrcSets(role, 'mdpi', imageSources);
+    const hdpiSources = getSources(role, 'hdpi', imageSources);
+    const mdpiSources = getSources(role, 'mdpi', imageSources);
+    const fallbackSrc = getFallback(role, 'hdpi', imageSources);
     const sizes = getSizes(role, isMainMedia);
-    const fallbackSrc = getFallbackSrc(mdpiSources);
 
     return (
         <picture itemProp="contentUrl">
             {/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
             <source
-                srcSet={buildSourcesString(hdpiSources)}
+                srcSet={hdpiSources}
                 sizes={sizes}
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
             />
             {/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
-            <source srcSet={buildSourcesString(mdpiSources)} sizes={sizes} />
+            <source srcSet={mdpiSources} sizes={sizes} />
             <img
                 alt={alt}
                 src={fallbackSrc}
