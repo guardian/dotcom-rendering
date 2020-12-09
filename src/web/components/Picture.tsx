@@ -96,7 +96,7 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
     }
 };
 
-export const Img = ({
+export const Picture = ({
     imageSources,
     role,
     alt,
@@ -125,7 +125,9 @@ export const Img = ({
                 src={fallbackSrc}
                 height={height}
                 width={width}
-                loading={isLazy && !Img.disableLazyLoading ? 'lazy' : undefined}
+                loading={
+                    isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
+                }
                 // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
                 // why did we add the css `vertical-align: middle;` to the img tag
                 className={css`
@@ -138,4 +140,4 @@ export const Img = ({
 
 // We use disableLazyLoading to decide if we want to turn off lazy loading of images site wide. We use this
 // to prevent false negatives on Chromatic snapshots (see /.storybook/config)
-Img.disableLazyLoading = false;
+Picture.disableLazyLoading = false;
