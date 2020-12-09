@@ -32,14 +32,14 @@ describe('ReaderRevenueLinks', () => {
     };
     const edition: Edition = 'UK';
 
-    it('should not render if shouldHideSupportMessaging() returns true', async () => {
+    it('should not render if shouldHideSupportMessaging() returns true and edition is US', async () => {
         shouldHideSupportMessaging.mockReturnValue(true);
 
         const { container } = render(
             <AbProvider>
                 <ReaderRevenueLinks
                     urls={urls}
-                    edition={edition}
+                    edition="US"
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
                     pageViewId="1234"
