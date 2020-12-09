@@ -191,6 +191,23 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     };
 
     if (shouldHideSupportMessaging()) {
+        if (edition !== 'US') {
+            return (
+                <div className={cx(inHeader && paddingStyles)}>
+                    <div
+                        className={cx({
+                            [hiddenUntilTablet]: inHeader,
+                        })}
+                    >
+                        <div className={messageStyles}> Thank you for your support </div>
+                        <div className={subMessageStyles}>
+                            <div> You've powered our journalism </div>
+                            <div> through a historic year </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         return null;
     }
     return (
