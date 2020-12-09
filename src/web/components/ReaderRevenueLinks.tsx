@@ -191,7 +191,8 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     };
 
     if (shouldHideSupportMessaging()) {
-        if (edition !== 'US') {
+        // Use the same switch as the A/B test to decide whether to display thankyou message
+        if (variantName !== 'notintest') {
             return (
                 <div className={cx(inHeader && paddingStyles)}>
                     <div
