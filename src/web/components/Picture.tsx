@@ -48,12 +48,13 @@ const getFallback = (
     role: RoleType,
     resolution: ResolutionType,
     imageSources: ImageSource[],
-): string => {
+): string | undefined => {
     const sourcesForRole: SrcSetItem[] = getSourcesForRole(imageSources, role);
     const sourcesForResolution: SrcSetItem[] = getSourcesForResolution(
         sourcesForRole,
         resolution,
     );
+    if (sourcesForResolution.length === 0) return undefined;
     // The assumption here is readers on devices that do not support srcset are likely to be on poor
     // network connections so we're going to fallback to a small image
     return getClosestSetForWidth(300, sourcesForResolution).src;
