@@ -201,7 +201,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     >
                         <div className={messageStyles}> Thank you for your support </div>
                         <div className={subMessageStyles}>
-                            <div> You've powered our journalism </div>
+                            <div> You’ve powered our journalism </div>
                             <div> through a historic year </div>
                         </div>
                     </div>
