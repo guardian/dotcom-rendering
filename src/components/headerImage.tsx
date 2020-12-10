@@ -2,12 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
+import type { Sizes } from '@guardian/image-rendering';
+import { Img } from '@guardian/image-rendering';
 import { remSpace } from '@guardian/src-foundations';
-import { breakpoints, from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
-import { Design, Display } from '@guardian/types';
+import { Design, Display, some } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
-import Img from 'components/img';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
@@ -99,12 +100,18 @@ const getImgStyles = (format: Format, image: Image): SerializedStyles => {
 	}
 };
 
-const getSizes = ({ display }: Format, image: Image): string => {
+const getSizes = ({ display }: Format, image: Image): Sizes => {
 	switch (display) {
 		case Display.Immersive:
-			return `${(100 * image.width) / image.height}vh`;
+			return {
+				mediaQueries: [],
+				default: `${(100 * image.width) / image.height}vh `,
+			};
 		default:
-			return `(min-width: ${breakpoints.wide}px) 620px, 100vw`;
+			return {
+				mediaQueries: [{ breakpoint: 'wide', size: '620px' }],
+				default: '100vw',
+			};
 	}
 };
 
@@ -119,8 +126,14 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
 		<Img
 			image={image}
 			sizes={getSizes(format, image)}
-			className={getImgStyles(format, image)}
+			className={some(getImgStyles(format, image))}
 			format={format}
+			supportsDarkMode
+			lightbox={some({
+				className: 'js-launch-slideshow',
+				caption: image.nativeCaption,
+				credit: image.credit,
+			})}
 		/>
 		<Caption format={format} image={image} />
 	</figure>
