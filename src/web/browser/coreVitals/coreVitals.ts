@@ -44,7 +44,6 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
     console.log(jsonData);
 }
 
-
     document.addEventListener("DOMContentLoaded", function() {
 
         if(window.guardian && window.guardian.ophan)
@@ -55,11 +54,12 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
         getLCP(getValue);
         getFCP(getValue);
         getTTFB(getValue);
-        getCLS(getValue);
-    });
 
-    window.addEventListener('unload', function(event) {
-        getCLS(console.log);
+        // At the moment a final CLS score is only reported on a 'visiblitychange' event (which is far from ideal)
+        // https://github.com/WICG/layout-instability#computing-dcls-with-the-api
+        // We need to find a more reliable way to record CLS without switching tabs.
+        // I looked at using the 'unload' event but it only returns the cls delta for that event, which is incorrect.
+        getCLS(getValue);
     });
 
 };
