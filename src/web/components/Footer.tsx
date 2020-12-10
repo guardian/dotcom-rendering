@@ -52,6 +52,8 @@ const pillarWrap = css`
 const emailSignup = css`
     padding-top: 12px;
     min-height: 150px;
+    overflow: hidden;
+    border: 0;
 
     ${from.desktop} {
         margin: 0 ${emailSignupSideMargins}px;
@@ -233,13 +235,11 @@ export const Footer: React.FC<{
             <iframe
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
-                scrolling="no"
                 id="footer__email-form"
                 className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
                 data-node-uid="2"
                 height="100"
-                frameBorder="0"
             />
 
             <FooterLinks pageFooter={pageFooter} />
