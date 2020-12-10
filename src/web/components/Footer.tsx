@@ -234,12 +234,11 @@ export const Footer: React.FC<{
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
                 scrolling="no"
-                seamless={true}
                 id="footer__email-form"
                 className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
                 data-node-uid="2"
-                height="100px"
+                height="100"
                 frameBorder="0"
             />
 
