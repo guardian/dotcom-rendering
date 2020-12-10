@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -6,23 +5,15 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 type Props = {
     root: IslandType;
     children: React.ReactNode;
-    dependencies?: unknown[];
     richLinkIndex?: number;
 };
 
-const isReady = (dependencies: unknown[]): boolean => {
-    return dependencies.every((dep) => dep !== undefined);
-};
-
-export const Portal = ({
-    root,
-    children,
-    dependencies = [],
-    richLinkIndex,
-}: Props) => {
-    const [alreadyCreated, setAlreadyCreated] = useState(false);
-    if (alreadyCreated) return null;
-    if (!isReady(dependencies)) return null;
+// See the preact portal code for details on how this feature works
+// In particular, we can see that portals can safely be recreated and
+// that will not cause the child component being passed in to be mounted
+// again. Instead it is simply rerendered
+// https://github.com/preactjs/preact/blob/df748d106fb78fbd46d14563b4712f921ccf0300/compat/src/portals.js
+export const Portal = ({ root, children, richLinkIndex }: Props) => {
     const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
     const { start, end } = initPerf(`${rootId}-portal`);
     const element = document.getElementById(rootId);
@@ -38,6 +29,5 @@ export const Portal = ({
     if (placeholderElement) placeholderElement.remove();
     const result = ReactDOM.createPortal(children, element);
     end();
-    setAlreadyCreated(true);
     return result;
 };
