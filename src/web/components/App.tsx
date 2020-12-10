@@ -67,7 +67,7 @@ import { trackPerformance } from '../browser/ga/ga';
 // ****** Dynamic imports ********
 // *******************************
 const MostViewedRightWrapper = React.lazy(() => {
-    const { start, end } = initPerf('MostViewedRightWrapper');
+    const { start, end } = initPerf('most-viewed-import');
     start();
     return import(
         /* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
@@ -77,7 +77,7 @@ const MostViewedRightWrapper = React.lazy(() => {
     });
 });
 const OnwardsUpper = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsUpper');
+    const { start, end } = initPerf('onwards-upper-load');
     start();
     return import(
         /* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
@@ -87,7 +87,7 @@ const OnwardsUpper = React.lazy(() => {
     });
 });
 const OnwardsLower = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsLower');
+    const { start, end } = initPerf('onwards-lower-load');
     start();
     return import(
         /* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
@@ -97,7 +97,7 @@ const OnwardsLower = React.lazy(() => {
     });
 });
 const GetMatchStats = React.lazy(() => {
-    const { start, end } = initPerf('GetMatchStats');
+    const { start, end } = initPerf('match-stats-load');
     start();
     return import(
         /* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
