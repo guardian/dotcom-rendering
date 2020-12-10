@@ -19,7 +19,6 @@ export const coreVitals = (): void =>
 
 
 const getValue = ({ name, value }: coreVitalsArgs): void => {
-    console.log(name);
     switch(name){
         case('FCP'):
             console.log(`FCP: ${  value}`);
@@ -57,7 +56,10 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
         getFCP(getValue);
         getTTFB(getValue);
         getCLS(getValue);
+    });
 
+    window.addEventListener('unload', function(event) {
+        getCLS(console.log);
     });
 
 };
