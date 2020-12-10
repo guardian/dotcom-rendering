@@ -1,14 +1,28 @@
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 type Props = {
     root: IslandType;
-    index?: number;
+    dependencies?: unknown[];
     children: JSX.Element;
+    index?: number;
 };
 
-export const Hydrate = ({ root, index, children }: Props) => {
+const isReady = (dependencies: unknown[]): boolean => {
+    return dependencies.every((dep) => dep !== undefined);
+};
+
+export const Hydrate = ({
+    root,
+    index,
+    dependencies = [],
+    children,
+}: Props) => {
+    const [alreadyHydrated, setAlreadyHydrated] = useState(false);
+    if (alreadyHydrated) return null;
+    if (!isReady(dependencies)) return null;
     const rootId = index === 0 || index ? `${root}-${index}` : root;
     const { start, end } = initPerf(`${rootId}-hydrate`);
     const element = document.getElementById(rootId);
@@ -17,5 +31,6 @@ export const Hydrate = ({ root, index, children }: Props) => {
     ReactDOM.hydrate(children, element, () => {
         end();
     });
+    setAlreadyHydrated(true);
     return null;
 };
