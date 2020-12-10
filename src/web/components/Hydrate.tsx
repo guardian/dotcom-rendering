@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom';
 
+import { initPerf } from '@root/src/web/browser/initPerf';
+
 type Props = {
     root: IslandType;
     index?: number;
@@ -7,18 +9,13 @@ type Props = {
 };
 
 export const Hydrate = ({ root, index, children }: Props) => {
-    const rootWithIndex = index === 0 || index ? `${root}-${index}` : root;
-    const element = document.getElementById(rootWithIndex);
+    const rootId = index === 0 || index ? `${root}-${index}` : root;
+    const { start, end } = initPerf(`${rootId}-hydrate`);
+    const element = document.getElementById(rootId);
     if (!element) return null;
-    window.performance?.mark(`${rootWithIndex}-hydrate-start`);
+    start();
     ReactDOM.hydrate(children, element, () => {
-        console.log('Hydrated', root);
-        window.performance?.mark(`${rootWithIndex}-hydrate-end`);
-        window.performance?.measure(
-            `${rootWithIndex}-hydrate`,
-            `${rootWithIndex}-hydrate-start`,
-            `${rootWithIndex}-hydrate-end`,
-        );
+        end();
     });
     return null;
 };
