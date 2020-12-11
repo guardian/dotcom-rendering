@@ -292,6 +292,7 @@ const ageWarningMargins = css`
     }
 `;
 
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -352,6 +353,7 @@ export const StandardLayout = ({
                 </Stuck>
                 <SendToBack>
                     <Section
+                        data-print-layout='hide'
                         showTopBorder={false}
                         showSideBorders={false}
                         padded={false}
@@ -361,6 +363,7 @@ export const StandardLayout = ({
                     </Section>
 
                     <Section
+                        data-print-layout='hide'
                         showSideBorders={true}
                         borderColour={brandLine.primary}
                         showTopBorder={false}
@@ -368,6 +371,7 @@ export const StandardLayout = ({
                         backgroundColour={brandBackground.primary}
                     >
                         <Nav
+                            data-print-layout='hide'
                             pillar={getCurrentPillar(CAPI)}
                             nav={NAV}
                             display={display}
@@ -380,11 +384,13 @@ export const StandardLayout = ({
 
                     {NAV.subNavSections && (
                         <Section
+                            data-print-layout='hide'
                             backgroundColour={background.primary}
                             padded={false}
                             sectionId="sub-nav-root"
                         >
                             <SubNav
+                                data-print-layout='hide'
                                 subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={pillar}
@@ -397,12 +403,12 @@ export const StandardLayout = ({
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines count={4} pillar={pillar} />
+                        <GuardianLines data-print-layout='hide' count={4} pillar={pillar} />
                     </Section>
                 </SendToBack>
             </div>
 
-            <Section showTopBorder={false}>
+            <Section data-print-layout='hide' showTopBorder={false}>
                 <StandardGrid designType={designType} CAPI={CAPI}>
                     <GridItem area="title">
                         <ArticleTitle
@@ -480,7 +486,7 @@ export const StandardLayout = ({
                             />
                         </div>
                     </GridItem>
-                    <GridItem area="lines">
+                    <GridItem data-print-layout='hide' area="lines">
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
@@ -526,7 +532,7 @@ export const StandardLayout = ({
                                 {showMatchStats && <div id="match-stats" />}
 
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines count={4} pillar={pillar} />
+                                <GuardianLines data-print-layout='hide' count={4} pillar={pillar} />
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -559,6 +565,7 @@ export const StandardLayout = ({
             </Section>
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
@@ -570,13 +577,13 @@ export const StandardLayout = ({
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <div id="onwards-upper-whensignedout" />
+                    <div data-print-layout='hide' id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedout" />
+                        <Section data-print-layout='hide' sectionId="onwards-lower-whensignedout" />
                     )}
 
                     {showComments && (
-                        <Section sectionId="comments">
+                        <Section sectionId="comments" data-print-layout='hide'>
                             <CommentsLayout
                                 pillar={pillar}
                                 baseUrl={CAPI.config.discussionApiUrl}
@@ -597,34 +604,37 @@ export const StandardLayout = ({
                     {/* Onwards (when signed IN) */}
                     <div id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedin" />
+                        <Section data-print-layout='hide' sectionId="onwards-lower-whensignedin" />
                     )}
 
-                    <Section sectionId="most-viewed-footer" />
+                    <Section data-print-layout='hide' sectionId="most-viewed-footer" />
                 </>
             )}
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot data-print-layout='hide' asps={namedAdSlotParameters('merchandising')} />
             </Section>
 
             {NAV.subNavSections && (
-                <Section padded={false} sectionId="sub-nav-root">
+                <Section data-print-layout='hide' padded={false} sectionId="sub-nav-root">
                     <SubNav
+                        qdata-print-layout='hide'
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
                         pillar={pillar}
                     />
-                    <GuardianLines count={4} pillar={pillar} />
+                    <GuardianLines data-print-layout='hide' count={4} pillar={pillar} />
                 </Section>
             )}
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 backgroundColour={brandBackground.primary}
                 borderColour={brandBorder.primary}
@@ -637,8 +647,8 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <BannerWrapper />
-            <MobileStickyContainer />
+            <BannerWrapper data-print-layout='hide' />
+            <MobileStickyContainer data-print-layout='hide' />
         </>
     );
 };

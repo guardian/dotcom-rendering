@@ -135,6 +135,7 @@ const leftColBorder = pillarMap(
     `,
 );
 
+
 const trimLeadingSlash = (url: string): string =>
     url.substr(0, 1) === '/' ? url.slice(1) : url;
 
@@ -163,6 +164,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 
     return (
         <div
+            data-print-layout='hide'
             className={cx(
                 { [wrapperCollapsed]: collapseWrapper },
                 spaceBetween,
@@ -170,6 +172,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
             data-cy="sub-nav"
         >
             <ul
+                data-print-layout='hide'
                 ref={ulRef}
                 className={cx({
                     [collapsedStyles]: !expandSubNav,

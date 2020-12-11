@@ -84,6 +84,12 @@ const neutralBackground = css`
     }
 `;
 
+const noPrint = css`
+    @media print{
+        display: none !important;
+    }
+`;
+
 const richLinkPillarColour: (pillar: Pillar) => colour = (pillar) => {
     if (pillar) {
         return pillarPalette[pillar].main;
@@ -281,7 +287,7 @@ export const RichLink = ({
         <div
             data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
             data-component="rich-link"
-            className={pillarBackground(pillar)}
+            className={cx(pillarBackground(pillar), noPrint)}
             data-name={(isPlaceholder && 'placeholder') || ''}
         >
             <div className={cx(richLinkContainer, neutralBackground)}>

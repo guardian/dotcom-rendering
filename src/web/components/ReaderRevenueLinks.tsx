@@ -170,6 +170,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     Contribute <ArrowRightIcon />
                 </a>
                 <a
+                    data-print-layout='hide'
                     className={linkStyles}
                     href={urls.subscribe}
                     data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
@@ -186,6 +187,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             >
                 {edition === 'UK' ? (
                     <a
+                        data-print-layout='hide'
                         className={linkStyles}
                         href={urls.subscribe}
                         data-link-name={`${dataLinkNamePrefix}contribute-cta`}
@@ -194,6 +196,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     </a>
                 ) : (
                     <a
+                        data-print-layout='hide'
                         className={linkStyles}
                         href={urls.contribute}
                         data-link-name={`${dataLinkNamePrefix}support-cta`}

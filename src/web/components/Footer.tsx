@@ -179,6 +179,7 @@ const bttPosition = css`
     right: 20px;
 `;
 
+
 const FooterLinks: React.FC<{
     pageFooter: FooterType;
 }> = ({ pageFooter }) => {
@@ -219,7 +220,7 @@ export const Footer: React.FC<{
     pillar: Pillar;
     pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
-    <footer className={footer} data-link-name="footer" data-component="footer">
+    <footer data-print-layout="hide" className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
                 display={Display.Standard}

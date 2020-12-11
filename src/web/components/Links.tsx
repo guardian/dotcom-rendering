@@ -160,7 +160,10 @@ export const Links = ({ userId }: Props) => {
         },
     ];
     return (
-        <div className={linksStyles}>
+        <div
+            data-print-layout="hide"
+            className={linksStyles}
+        >
             <div className={seperatorStyles} />
             <a
                 href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
@@ -172,7 +175,10 @@ export const Links = ({ userId }: Props) => {
             <div className={seperatorHideStyles} />
 
             {userId ? (
-                <div className={linkStyles}>
+                <div
+                    data-print-layout="hide"
+                    className={linkStyles}
+                >
                     <ProfileIcon />
                     <Dropdown
                         label="My account"
@@ -183,6 +189,7 @@ export const Links = ({ userId }: Props) => {
                 </div>
             ) : (
                 <a
+                    data-print-layout="hide"
                     className={linkStyles}
                     href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams('guardian_signin_header')}`}
                     data-link-name="nav2 : topbar : signin"
@@ -192,6 +199,7 @@ export const Links = ({ userId }: Props) => {
             )}
 
             <Search
+                data-print-layout="hide"
                 className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
                 href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
                 dataLinkName="nav2 : search"

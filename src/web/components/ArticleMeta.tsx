@@ -305,7 +305,7 @@ export const ArticleMeta = ({
                         </div>
                     </>
                 </RowBelowLeftCol>
-                <div className={metaFlex}>
+                <div className={metaFlex} data-print-layout="hide">
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={sharingUrls}

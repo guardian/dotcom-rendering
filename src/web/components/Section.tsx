@@ -59,6 +59,7 @@ type Props = {
     shouldCenter?: boolean;
 };
 
+
 export const Section = ({
     sectionId,
     showSideBorders = true,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -20,6 +20,9 @@ export const labelStyles = css`
         color: ${text.supporting};
         text-align: left;
         box-sizing: border-box;
+        @media print{
+        display: none !important;
+        }
     }
 
     .ad-slot__close-button {
@@ -30,6 +33,9 @@ export const labelStyles = css`
         position: fixed;
         bottom: 0;
         width: 100%;
+        @media print{
+        display: none !important;
+        }
     }
 `;
 const mobileStickyAdStyles = css`
@@ -43,6 +49,9 @@ const mobileStickyAdStyles = css`
     ${from.phablet} {
         display: none;
     }
+    @media print{
+        display: none !important;
+        }
     .ad-slot__close-button {
         display: none;
         position: absolute;
@@ -62,9 +71,15 @@ const mobileStickyAdStyles = css`
         stroke-linecap: round;
         stroke-width: 0;
         text-align: center;
+        @media print{
+        display: none !important;
+        }
     }
     .ad-slot--mobile-sticky .ad-slot__label .ad-slot__close-button {
         display: block;
+        @media print{
+        display: none !important;
+        }
     }
     .ad-slot__close-button__x {
         stroke: ${neutral[7]};
@@ -72,6 +87,9 @@ const mobileStickyAdStyles = css`
         stroke-linecap: round;
         stroke-width: 2;
         text-align: center;
+        @media print{
+        display: none !important;
+        }
     }
     .ad-slot__label {
         font-size: 0.75rem;
@@ -85,8 +103,13 @@ const mobileStickyAdStyles = css`
         text-align: left;
         box-sizing: border-box;
         ${textSans.xsmall()};
+        @media print{
+        display: none !important;
+        }
     }
 `;
+
+
 
 interface AdSlotInputSizeMappings {
     [key: string]: string[];
@@ -150,12 +173,13 @@ export const AdSlotCore: React.FC<{
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
+            data-print-layout='hide'
             id={`dfp-ad--${optId || name}`}
-            className={`${makeClassNames(
+            className={`${cx(makeClassNames(
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${localStyles} ${labelStyles} ${adSlotStyles}`}
+            ))} ${localStyles} ${labelStyles} ${adSlotStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -175,5 +199,5 @@ export const AdSlot: React.FC<{
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {
-    return <div className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
+    return <div data-print-layout='hide' className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
 };
