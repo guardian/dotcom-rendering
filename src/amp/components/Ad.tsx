@@ -148,7 +148,6 @@ const ampAdElem = (
             width={300}
             height={250}
             data-multi-size="300x250,300x170"
-            // data-multi-size-validation="false"
             data-npa-on-unknown-consent={true}
             data-loading-strategy="prefer-viewability-over-views"
             layout="responsive"
