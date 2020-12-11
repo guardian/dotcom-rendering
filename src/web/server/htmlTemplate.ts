@@ -1,7 +1,8 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { CDN } from '@root/src/lib/assets';
+import { CDN, getDist } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
+
 import he from 'he';
 
 export const htmlTemplate = ({
@@ -105,6 +106,26 @@ export const htmlTemplate = ({
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
 
+	// HERE BE DRAGONS.
+	// Use sparingly, relying more on the browser's choice.
+	// https://jasonformat.com/modern-script-loading/#option1loaddynamically:~:text=What's%20the%20trade%2Doff%3F%20preloading.
+	// https://web.dev/preload-critical-assets/
+	// Preloaded assets must be critical and
+	// must be used within 3 seconds of browser load.
+	// We should only preload the very most important
+	// scripts and components (header, main media)
+	// Note that we only preload for modern browsers scripts
+	// as browser support doesn't exist for non type=module
+	// https://caniuse.com/?search=preload
+	const preloadScripts: string[] = ['EditionDropdown'];
+	const preloadTags = preloadScripts.map(
+		(filename) =>
+			`<link rel="modulepreload" as="script" crossorigin href="${getDist({
+				path: `${filename}.js`,
+				legacy: false,
+			})}">`,
+	);
+
 	return `<!doctype html>
         <html lang="en">
             <head>
@@ -118,6 +139,7 @@ export const htmlTemplate = ({
 
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
+                ${preloadTags.join('\n')}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
