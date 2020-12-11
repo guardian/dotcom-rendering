@@ -13,7 +13,7 @@ type Props = {
     asyncCountryCode?: Promise<string>;
     CAPI: CAPIBrowserType;
     asyncBrazeUuid?: Promise<null | string>;
-    isDigitalSubscriber?: boolean;
+    shouldHideSupportMessaging?: boolean;
 };
 
 type FulfilledProps = {
@@ -21,7 +21,7 @@ type FulfilledProps = {
     asyncCountryCode: Promise<string>;
     CAPI: CAPIBrowserType;
     asyncBrazeUuid: Promise<null | string>;
-    isDigitalSubscriber: boolean;
+    shouldHideSupportMessaging: boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -79,10 +79,11 @@ const buildReaderRevenueBannerConfig = (
 
 const buildBrazeBanner = (
     asyncBrazeUuid: Promise<null | string>,
-    isDigitalSubscriber: undefined | boolean,
+    shouldHideSupportMessaging: undefined | boolean,
 ): Banner => ({
     id: 'braze-banner',
-    canShow: () => canShowBrazeBanner(asyncBrazeUuid, isDigitalSubscriber),
+    canShow: () =>
+        canShowBrazeBanner(asyncBrazeUuid, shouldHideSupportMessaging),
     show: (meta: any) => () => <BrazeBanner meta={meta} />,
     timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
@@ -92,7 +93,7 @@ const StickyBottomBannerWithFullfilledDependencies = ({
     asyncCountryCode,
     CAPI,
     asyncBrazeUuid,
-    isDigitalSubscriber,
+    shouldHideSupportMessaging,
 }: FulfilledProps) => {
     const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 
@@ -105,7 +106,7 @@ const StickyBottomBannerWithFullfilledDependencies = ({
         );
         const brazeBanner = buildBrazeBanner(
             asyncBrazeUuid,
-            isDigitalSubscriber,
+            shouldHideSupportMessaging,
         );
         const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
 
@@ -130,13 +131,13 @@ export const StickyBottomBanner = ({
     asyncCountryCode,
     CAPI,
     asyncBrazeUuid,
-    isDigitalSubscriber,
+    shouldHideSupportMessaging,
 }: Props) => {
     if (
         isSignedIn === undefined ||
         asyncCountryCode === undefined ||
         asyncBrazeUuid === undefined ||
-        isDigitalSubscriber === undefined
+        shouldHideSupportMessaging === undefined
     ) {
         return null;
     }
@@ -146,7 +147,7 @@ export const StickyBottomBanner = ({
             isSignedIn={isSignedIn}
             asyncCountryCode={asyncCountryCode}
             asyncBrazeUuid={asyncBrazeUuid}
-            isDigitalSubscriber={isDigitalSubscriber}
+            shouldHideSupportMessaging={shouldHideSupportMessaging}
             CAPI={CAPI}
         />
     );
