@@ -161,15 +161,15 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
     if (URLSearchParams) {
         const qsArg = 'force-braze-message';
 
-        if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
-            // eslint-disable-next-line no-console
-            console.log(`${qsArg} is not supported on this domain`);
-            return null;
-        }
-
         const params = new URLSearchParams(window.location.search);
         const value = params.get(qsArg);
         if (value) {
+            if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
+                // eslint-disable-next-line no-console
+                console.log(`${qsArg} is not supported on this domain`);
+                return null;
+            }
+
             try {
                 const dataFromBraze = JSON.parse(value);
 
