@@ -46,6 +46,8 @@ const marginTop = css`
 `;
 
 const immersiveMargins = css`
+    max-width: 400px;
+    margin-bottom: 4px;
     /*
         Make sure we vertically align the title font with the body font
     */
@@ -53,7 +55,6 @@ const immersiveMargins = css`
         margin-left: 16px;
     }
     ${from.leftCol} {
-        margin-bottom: 5px;
         margin-left: 25px;
     }
 `;
