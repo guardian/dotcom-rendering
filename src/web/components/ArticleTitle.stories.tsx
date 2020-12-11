@@ -142,7 +142,8 @@ export const ImmersiveSeriesTag = () => {
                 tags={[
                     {
                         id: '',
-                        title: 'Series title',
+                        title:
+                            'Series title with the addition of some more text to see how this wraps',
                         type: 'Series',
                     },
                 ]}
