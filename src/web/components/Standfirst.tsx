@@ -126,12 +126,16 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 };
 
 export const Standfirst = ({ display, designType, standfirst }: Props) => {
+    const standfirstHTMLWithDataLinkName = standfirst
+        .split('<a ')
+        .join('<a data-link-name="in standfirst link" ');
+
     return (
         <div
             className={cx(nestedStyles, standfirstStyles(designType, display))}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
-                __html: standfirst,
+                __html: standfirstHTMLWithDataLinkName,
             }}
         />
     );
