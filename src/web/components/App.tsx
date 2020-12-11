@@ -82,13 +82,6 @@ const YoutubeBlockComponent = loadable(
 	},
 );
 
-const RichLinkComponent = loadable(
-	() => import('@frontend/web/components/elements/RichLinkComponent'),
-	{
-		resolveComponent: (module) => module.RichLinkComponent,
-	},
-);
-
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -449,20 +442,31 @@ export const App = ({ CAPI, NAV }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
-			{CAPI.richLinks.map((link, index) => (
-				<Portal
-					key={index}
-					root="rich-link"
-					richLinkIndex={link.richLinkIndex}
-				>
-					<RichLinkComponent
-						element={link}
-						pillar={pillar}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
+			{CAPI.richLinks.map((link, index) => {
+				const RichLinkComponent = loadable(
+					() =>
+						import(
+							'@frontend/web/components/elements/RichLinkComponent'
+						),
+					{
+						resolveComponent: (module) => module.RichLinkComponent,
+					},
+				);
+				return (
+					<Portal
+						key={index}
+						root="rich-link"
+						richLinkIndex={link.richLinkIndex}
+					>
+						<RichLinkComponent
+							element={link}
+							pillar={pillar}
+							ajaxEndpoint={CAPI.config.ajaxUrl}
+							richLinkIndex={index}
+						/>
+					</Portal>
+				);
+			})}
 			{CAPI.callouts.map((callout) => (
 				<HydrateOnce root="callout" index={callout.calloutIndex}>
 					<CalloutBlockComponent callout={callout} pillar={pillar} />
