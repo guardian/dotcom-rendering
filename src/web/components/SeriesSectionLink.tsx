@@ -71,12 +71,18 @@ const invertedStyle = (pillar: Pillar) => css`
     color: ${neutral[100]};
     background-color: ${pillarPalette[pillar].main};
 
+    /* Handle text wrapping onto a new line */
+    white-space: pre-wrap;
+    box-shadow: -6px 0 0 ${pillarPalette[pillar].main};
+    box-decoration-break: clone;
+    line-height: 26px;
+
     padding-left: ${space[3]}px;
     ${from.mobileLandscape} {
         padding-left: ${space[5]}px;
     }
     ${from.tablet} {
-        padding-left: ${space[3]}px;
+        padding-left: ${space[1]}px;
     }
 
     padding-right: ${space[3]}px;
