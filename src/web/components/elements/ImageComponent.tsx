@@ -248,7 +248,7 @@ export const ImageComponent = ({
                     /* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
                     always be used if display === 'immersive' */
-                    height: 100%;
+                    height: 100vh;
                     width: 100%;
 
                     img {
