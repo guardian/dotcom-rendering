@@ -25,11 +25,17 @@ const articleAdStyles = css`
         min-height: 274px;
         text-align: center;
         position: relative;
+        @media print{
+            display: none !important;
+        }
     }
     .ad-slot--mostpop {
         ${from.desktop} {
             margin: 0;
             width: auto;
+            @media print{
+            display: none !important;
+        }
         }
     }
     .ad-slot--inline {
@@ -39,6 +45,9 @@ const articleAdStyles = css`
             float: right;
             margin-top: 4px;
             margin-left: 20px;
+            @media print{
+            display: none !important;
+        }
         }
         ${from.desktop} {
             width: auto;
@@ -46,6 +55,9 @@ const articleAdStyles = css`
             margin: 0;
             margin-top: 4px;
             margin-left: 20px;
+            @media print{
+            display: none !important;
+        }
         }
     }
     .ad-slot--offset-right {
@@ -53,10 +65,19 @@ const articleAdStyles = css`
             float: right;
             width: auto;
             margin-right: -318px;
+            @media print{
+            display: none !important;
+        }
         }
 
         ${from.wide} {
             margin-right: -398px;
+            @media print{
+            display: none !important;
+        }
+        }
+        @media print{
+            display: none !important;
         }
     }
     .ad-slot--outstream {
@@ -67,7 +88,13 @@ const articleAdStyles = css`
             .ad-slot__label {
                 margin-left: 35px;
                 margin-right: 35px;
+                @media print{
+            display: none !important;
+        }
             }
+        }
+        @media print{
+            display: none !important;
         }
     }
     ${labelStyles};

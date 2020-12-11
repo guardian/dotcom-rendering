@@ -150,6 +150,7 @@ export const AdSlotCore: React.FC<{
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
+            data-print-layout='hide'
             id={`dfp-ad--${optId || name}`}
             className={`${makeClassNames(
                 name,
@@ -171,9 +172,9 @@ export const AdSlot: React.FC<{
     localStyles?: string;
 }> = ({ asps, localStyles }) => {
     // eslint-disable-next-line react/jsx-props-no-spreading
-    return <AdSlotCore {...asps} localStyles={localStyles} />;
+    return <AdSlotCore data-print-layout='hide' {...asps} localStyles={localStyles} />;
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {
-    return <div className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
+    return <div data-print-layout='hide' className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
 };

@@ -35,7 +35,7 @@ export const HeaderAdSlot: React.FC<{
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
 }> = ({ isAdFreeUser, shouldHideAds }) => (
-    <div className={headerWrapper}>
+    <div data-print-layout='hide' className={headerWrapper}>
         <Hide when="below" breakpoint="tablet">
             <div
                 className={cx({
@@ -44,6 +44,7 @@ export const HeaderAdSlot: React.FC<{
                 })}
             >
                 <AdSlot
+                    data-print-layout='hide'
                     asps={namedAdSlotParameters('top-above-nav')}
                     localStyles={adSlotAboveNav}
                 />

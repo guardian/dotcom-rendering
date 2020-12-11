@@ -34,20 +34,20 @@ const bannerWrapper = css`
     ${getZIndexImportant('banner')}
     max-height: 80vh;
     overflow: auto;
-    
+
     width: 100% !important;
     background: none !important;
     top: auto !important;
 `;
 
 export const Stuck = ({ children }: Props) => (
-    <div className={stickyAdWrapper}>{children}</div>
+    <div data-print-layout='hide' className={stickyAdWrapper}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (
-    <div className={headerWrapper}>{children}</div>
+    <div data-print-layout='hide' className={headerWrapper}>{children}</div>
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-    <div id="bottom-banner" className={bannerWrapper}>{children}</div>
+    <div data-print-layout='hide' id="bottom-banner" className={bannerWrapper}>{children}</div>
 );

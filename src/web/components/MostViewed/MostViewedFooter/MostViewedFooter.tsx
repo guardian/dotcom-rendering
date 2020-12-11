@@ -113,7 +113,7 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
 
 
     return (
-        <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+        <div data-print-layout='hide' className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
             <div
                 className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
                 data-link-name="most-popular"

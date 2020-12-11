@@ -303,7 +303,7 @@ export const ArticleMeta = ({
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
     return (
-        <div className={metaContainer({ display, designType })}>
+        <div data-print-layout='hide' className={metaContainer({ display, designType })}>
             <div className={cx(meta)}>
                 {branding && <Branding branding={branding} pillar={pillar} />}
                 <RowBelowLeftCol>
@@ -333,7 +333,7 @@ export const ArticleMeta = ({
                         </div>
                     </>
                 </RowBelowLeftCol>
-                <div className={metaFlex}>
+                <div data-print-layout='hide' className={metaFlex}>
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={sharingUrls}
