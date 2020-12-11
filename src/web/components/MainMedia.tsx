@@ -48,6 +48,8 @@ const immersiveWrapper = css`
     */
     flex-grow: 1;
     ${getZIndex('mainMedia')}
+    /* Prevent the immersive image 100vh from spilling into main content */
+    overflow: hidden;
 `;
 
 function renderElement(
