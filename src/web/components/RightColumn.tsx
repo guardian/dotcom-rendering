@@ -26,16 +26,19 @@ const hideBelowDesktop = css`
     }
 `;
 
-const padding = css`
+const paddingStyles = css`
     padding-top: 6px;
 `;
 
 type Props = {
     children: JSXElements;
+    padding?: boolean;
 };
 
-export const RightColumn = ({ children }: Props) => {
+export const RightColumn = ({ children, padding = true }: Props) => {
     return (
-        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
+        <section className={cx(hideBelowDesktop, padding && paddingStyles)}>
+            {children}
+        </section>
     );
 };
