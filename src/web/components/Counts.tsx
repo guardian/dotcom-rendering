@@ -17,6 +17,7 @@ const containerStyles = css`
         border-left: 1px solid ${border.secondary};
         margin-left: 4px;
         padding-left: 4px;
+        height: 40px;
     }
 `;
 
