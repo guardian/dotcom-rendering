@@ -9,6 +9,7 @@ import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { App as Comments } from '@guardian/discussion-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
+import { Lazy } from '@frontend/web/components/Lazy';
 import { Flex } from '@frontend/web/components/Flex';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
@@ -161,27 +162,55 @@ export const Discussion = ({
                                 />
                             </div>
                         </Hide>
-                        <Comments
-                            user={user}
-                            baseUrl={discussionApiUrl}
-                            pillar={pillar}
-                            initialPage={commentPage}
-                            pageSizeOverride={commentPageSize}
-                            isClosedForComments={
-                                isClosedForComments || !enableDiscussionSwitch
-                            }
-                            orderByOverride={commentOrderBy}
-                            shortUrl={shortUrlId}
-                            additionalHeaders={{
-                                'D2-X-UID': discussionD2Uid,
-                                'GU-Client': discussionApiClientHeader,
-                            }}
-                            expanded={isExpanded}
-                            commentToScrollTo={hashCommentId}
-                            onPermalinkClick={handlePermalink}
-                            apiKey="dotcom-rendering"
-                            onHeightChange={() => {}}
-                        />
+                        {isExpanded ? (
+                            <Comments
+                                user={user}
+                                baseUrl={discussionApiUrl}
+                                pillar={pillar}
+                                initialPage={commentPage}
+                                pageSizeOverride={commentPageSize}
+                                isClosedForComments={
+                                    isClosedForComments ||
+                                    !enableDiscussionSwitch
+                                }
+                                orderByOverride={commentOrderBy}
+                                shortUrl={shortUrlId}
+                                additionalHeaders={{
+                                    'D2-X-UID': discussionD2Uid,
+                                    'GU-Client': discussionApiClientHeader,
+                                }}
+                                expanded={isExpanded}
+                                commentToScrollTo={hashCommentId}
+                                onPermalinkClick={handlePermalink}
+                                apiKey="dotcom-rendering"
+                                onHeightChange={() => {}}
+                            />
+                        ) : (
+                            <Lazy margin={300}>
+                                <Comments
+                                    user={user}
+                                    baseUrl={discussionApiUrl}
+                                    pillar={pillar}
+                                    initialPage={commentPage}
+                                    pageSizeOverride={commentPageSize}
+                                    isClosedForComments={
+                                        isClosedForComments ||
+                                        !enableDiscussionSwitch
+                                    }
+                                    orderByOverride={commentOrderBy}
+                                    shortUrl={shortUrlId}
+                                    additionalHeaders={{
+                                        'D2-X-UID': discussionD2Uid,
+                                        'GU-Client': discussionApiClientHeader,
+                                    }}
+                                    expanded={isExpanded}
+                                    commentToScrollTo={hashCommentId}
+                                    onPermalinkClick={handlePermalink}
+                                    apiKey="dotcom-rendering"
+                                    onHeightChange={() => {}}
+                                />
+                            </Lazy>
+                        )}
                     </div>
                     <>
                         {!hideAd && (
