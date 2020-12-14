@@ -168,6 +168,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 
     return (
         <div
+            data-print-layout='hide'
             className={cx(
                 { [wrapperCollapsed]: collapseWrapper },
                 spaceBetween,
@@ -175,6 +176,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
             data-cy="sub-nav"
         >
             <ul
+                data-print-layout='hide'
                 ref={ulRef}
                 className={cx({
                     [collapsedStyles]: !expandSubNav,
@@ -212,6 +214,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
             </ul>
             {showMore && (
                 <button
+                    data-print-layout='hide'
                     onClick={() => setIsExpanded(!isExpanded)}
                     className={showMoreStyle}
                 >

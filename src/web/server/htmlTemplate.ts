@@ -211,6 +211,7 @@ export const htmlTemplate = ({
                 ${[...priorityScriptTags].join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
+                <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>
 
             <body>

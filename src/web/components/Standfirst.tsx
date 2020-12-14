@@ -128,6 +128,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 export const Standfirst = ({ display, designType, standfirst }: Props) => {
     return (
         <div
+            data-print-layout='hide'
             className={cx(nestedStyles, standfirstStyles(designType, display))}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{

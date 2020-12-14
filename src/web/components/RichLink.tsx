@@ -279,12 +279,13 @@ export const RichLink = ({
 
     return (
         <div
+            data-print-layout='hide'
             data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
             data-component="rich-link"
             className={pillarBackground(pillar)}
             data-name={(isPlaceholder && 'placeholder') || ''}
         >
-            <div className={cx(richLinkContainer, neutralBackground)}>
+            <div data-print-layout='hide' className={cx(richLinkContainer, neutralBackground)}>
                 <a className={richLinkLink} href={url}>
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (

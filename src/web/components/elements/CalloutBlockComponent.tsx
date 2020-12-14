@@ -266,7 +266,10 @@ export const CalloutBlockComponent = ({
 
     if (submissionSuccess) {
         return (
-            <figure className={wrapperStyles}>
+            <figure
+                data-print-layout='hide'
+                className={wrapperStyles}
+            >
                 <details
                     className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
@@ -292,7 +295,10 @@ export const CalloutBlockComponent = ({
     }
 
     return (
-        <figure className={wrapperStyles}>
+        <figure
+            data-print-layout='hide'
+            className={wrapperStyles}
+        >
             <details
                 className={cx(calloutDetailsStyles, {
                     [backgroundColorStyle]: isExpanded,
