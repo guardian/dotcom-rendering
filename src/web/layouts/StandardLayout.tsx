@@ -589,6 +589,7 @@ export const StandardLayout = ({
                                 enableDiscussionSwitch={false}
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
                             />
                         </Section>
                     )}

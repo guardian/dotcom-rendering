@@ -363,7 +363,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
             <Portal root="share-count-root">
-                <ShareCount 
+                <ShareCount
                     ajaxUrl={CAPI.config.ajaxUrl}
                     pageId={CAPI.pageId}
                 />
@@ -665,6 +665,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
                     isAdFreeUser={CAPI.isAdFreeUser}
                     shouldHideAds={CAPI.shouldHideAds}
+                    beingHydrated={true}
                 />
             </Hydrate>
             <Portal root="most-viewed-footer">

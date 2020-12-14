@@ -576,6 +576,7 @@ export const ImmersiveLayout = ({
                                 enableDiscussionSwitch={false}
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
                             />
                         </Section>
                     )}

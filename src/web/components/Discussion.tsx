@@ -28,6 +28,7 @@ type Props = {
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
     user?: UserProfile;
+    beingHydrated?: boolean;
 };
 
 const commentIdFromUrl = () => {
@@ -50,6 +51,7 @@ export const Discussion = ({
     enableDiscussionSwitch,
     isAdFreeUser,
     shouldHideAds,
+    beingHydrated,
 }: Props) => {
     const [commentCount, setCommentCount] = useState<number>();
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
@@ -121,7 +123,7 @@ export const Discussion = ({
 
     return (
         <>
-            {commentCount !== undefined && (
+            {commentCount !== undefined && beingHydrated && (
                 <Portal root="comment-count-root">
                     <CommentCount
                         isCommentable={isCommentable}
@@ -165,7 +167,8 @@ export const Discussion = ({
                                 />
                             </div>
                         </Hide>
-                        {isExpanded ? (
+
+                        {beingHydrated && isExpanded && (
                             <Comments
                                 user={user}
                                 baseUrl={discussionApiUrl}
@@ -188,7 +191,9 @@ export const Discussion = ({
                                 apiKey="dotcom-rendering"
                                 onHeightChange={() => {}}
                             />
-                        ) : (
+                        )}
+
+                        {beingHydrated && !isExpanded && (
                             <Lazy margin={300}>
                                 <Comments
                                     user={user}
