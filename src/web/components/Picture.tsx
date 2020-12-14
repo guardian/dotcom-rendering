@@ -13,6 +13,8 @@ type Props = {
     isLazy?: boolean;
 };
 
+type ResolutionType = 'hdpi' | 'mdpi';
+
 const getClosestSetForWidth = (
     desiredWidth: number,
     inlineSrcSets: SrcSetItem[],
@@ -27,25 +29,52 @@ const getClosestSetForWidth = (
     });
 };
 
-const getFallbackSrc = (srcSets: SrcSetItem[]): string => {
-    // The assumption here is readers on devices that do not support srcset are likely to be on poor
-    // network connections so we're going to fallback to a small image
-    return getClosestSetForWidth(300, srcSets).src;
-};
-
-const getSrcSetsForRole = (
-    role: RoleType,
+const getSourcesForRoleAndResolution = (
     imageSources: ImageSource[],
-): SrcSetItem[] => {
-    return imageSources.filter(
+    role: RoleType,
+    resolution: ResolutionType,
+) => {
+    const setsForRole = imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
             weighting.toLowerCase() === role.toLowerCase(),
     )[0].srcSet;
+
+    return resolution === 'hdpi'
+        ? setsForRole.filter((set) => set.src.includes('dpr=2'))
+        : setsForRole.filter((set) => !set.src.includes('dpr=2'));
 };
 
-const buildSourcesString = (srcSets: SrcSetItem[]): string => {
-    return srcSets.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
+const getFallback = (
+    role: RoleType,
+    resolution: ResolutionType,
+    imageSources: ImageSource[],
+): string | undefined => {
+    // Get the sources for this role and resolution
+    const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
+        imageSources,
+        role,
+        resolution,
+    );
+    if (sources.length === 0) return undefined;
+    // The assumption here is readers on devices that do not support srcset are likely to be on poor
+    // network connections so we're going to fallback to a small image
+    return getClosestSetForWidth(300, sources).src;
+};
+
+const getSources = (
+    role: RoleType,
+    resolution: ResolutionType,
+    imageSources: ImageSource[],
+): string => {
+    // Get the sources for this role and resolution
+    const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
+        imageSources,
+        role,
+        resolution,
+    );
+
+    return sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 };
 
 /**
@@ -59,7 +88,7 @@ const buildSourcesString = (srcSets: SrcSetItem[]): string => {
  *       wide: 1300
  */
 
-const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
+const getSizes = (role: RoleType, isMainMedia: boolean): string => {
     switch (role) {
         case 'inline':
             return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
@@ -89,7 +118,7 @@ const buildSizesString = (role: RoleType, isMainMedia: boolean): string => {
     }
 };
 
-export const Img = ({
+export const Picture = ({
     imageSources,
     role,
     alt,
@@ -98,30 +127,39 @@ export const Img = ({
     isMainMedia = false,
     isLazy = true,
 }: Props) => {
-    const srcSetForRole = getSrcSetsForRole(role, imageSources);
-    const src = getFallbackSrc(srcSetForRole);
-    const sources = buildSourcesString(srcSetForRole);
-    const sizes = buildSizesString(role, isMainMedia);
+    const hdpiSources = getSources(role, 'hdpi', imageSources);
+    const mdpiSources = getSources(role, 'mdpi', imageSources);
+    const fallbackSrc = getFallback(role, 'hdpi', imageSources);
+    const sizes = getSizes(role, isMainMedia);
 
     return (
-        <img
-            itemProp="contentUrl"
-            alt={alt}
-            src={src}
-            srcSet={sources}
-            sizes={sizes}
-            height={height}
-            width={width}
-            loading={isLazy && !Img.disableLazyLoading ? 'lazy' : undefined}
-            // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
-            // why did we add the css `vertical-align: middle;` to the img tag
-            className={css`
-                vertical-align: middle;
-            `}
-        />
+        <picture itemProp="contentUrl">
+            {/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+            <source
+                srcSet={hdpiSources}
+                sizes={sizes}
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+            />
+            {/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
+            <source srcSet={mdpiSources} sizes={sizes} />
+            <img
+                alt={alt}
+                src={fallbackSrc}
+                height={height}
+                width={width}
+                loading={
+                    isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
+                }
+                // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
+                // why did we add the css `vertical-align: middle;` to the img tag
+                className={css`
+                    vertical-align: middle;
+                `}
+            />
+        </picture>
     );
 };
 
 // We use disableLazyLoading to decide if we want to turn off lazy loading of images site wide. We use this
 // to prevent false negatives on Chromatic snapshots (see /.storybook/config)
-Img.disableLazyLoading = false;
+Picture.disableLazyLoading = false;
