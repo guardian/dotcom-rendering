@@ -40,7 +40,7 @@ export const Discussion = ({
     isAdFreeUser,
     shouldHideAds,
 }: Props) => {
-    const [commentCount, setCommentCount] = useState<number>(0);
+    const [commentCount, setCommentCount] = useState<number>();
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
     );
@@ -106,21 +106,23 @@ export const Discussion = ({
 
     return (
         <>
-            <Portal root="comment-count-root">
-                <CommentCount
-                    isCommentable={isCommentable}
-                    commentCount={commentCount}
-                    pillar={pillar}
-                    setIsExpanded={setIsExpanded}
-                />
-            </Portal>
+            {(commentCount || commentCount === 0) && (
+                <Portal root="comment-count-root">
+                    <CommentCount
+                        isCommentable={isCommentable}
+                        commentCount={commentCount}
+                        pillar={pillar}
+                        setIsExpanded={setIsExpanded}
+                    />
+                </Portal>
+            )}
 
             <CommentsLayout
                 user={user}
                 pillar={pillar}
                 baseUrl={discussionApiUrl}
                 shortUrl={shortUrlId}
-                commentCount={commentCount}
+                commentCount={commentCount || 0}
                 commentPage={commentPage}
                 commentPageSize={commentPageSize}
                 commentOrderBy={commentOrderBy}
