@@ -336,7 +336,8 @@ export const StandardLayout = ({
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
     return (
         <>
-            <div>
+            <div data-print-layout='hide'>
+
                 <Stuck>
                     <Section
                         showTopBorder={false}
@@ -402,7 +403,7 @@ export const StandardLayout = ({
                 </SendToBack>
             </div>
 
-            <Section showTopBorder={false}>
+            <Section data-print-layout='hide' showTopBorder={false}>
                 <StandardGrid designType={designType} CAPI={CAPI}>
                     <GridItem area="title">
                         <ArticleTitle
@@ -526,7 +527,7 @@ export const StandardLayout = ({
                                 {showMatchStats && <div id="match-stats" />}
 
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines count={4} pillar={pillar} />
+                                <GuardianLines data-print-layout='hide' count={4} pillar={pillar} />
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -559,24 +560,25 @@ export const StandardLayout = ({
             </Section>
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot data-print-layout='hide' asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <div id="onwards-upper-whensignedout" />
+                    <div data-print-layout='hide' id="onwards-upper-whensignedout" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedout" />
+                        <Section data-print-layout='hide' sectionId="onwards-lower-whensignedout" />
                     )}
 
                     {showComments && (
-                        <Section sectionId="comments">
+                        <Section data-print-layout='hide' sectionId="comments">
                             <CommentsLayout
                                 pillar={pillar}
                                 baseUrl={CAPI.config.discussionApiUrl}
@@ -595,16 +597,17 @@ export const StandardLayout = ({
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <div id="onwards-upper-whensignedin" />
+                    <div data-print-layout='hide' id="onwards-upper-whensignedin" />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedin" />
+                        <Section data-print-layout='hide' sectionId="onwards-lower-whensignedin" />
                     )}
 
-                    <Section sectionId="most-viewed-footer" />
+                    <Section data-print-layout='hide' sectionId="most-viewed-footer" />
                 </>
             )}
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
@@ -614,7 +617,7 @@ export const StandardLayout = ({
             </Section>
 
             {NAV.subNavSections && (
-                <Section padded={false} sectionId="sub-nav-root">
+                <Section data-print-layout='hide' padded={false} sectionId="sub-nav-root">
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
@@ -625,6 +628,7 @@ export const StandardLayout = ({
             )}
 
             <Section
+                data-print-layout='hide'
                 padded={false}
                 backgroundColour={brandBackground.primary}
                 borderColour={brandBorder.primary}
@@ -637,8 +641,8 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <BannerWrapper />
-            <MobileStickyContainer />
+            <BannerWrapper data-print-layout='hide' />
+            <MobileStickyContainer data-print-layout='hide' />
         </>
     );
 };
