@@ -11,12 +11,10 @@ const svgBackground = encodeURIComponent(
 );
 
 const sizes = [
-    // We should investigate 336x280 - @mxdvl 2020-12-11
     { width: 336, height: 280 },
     { width: 300, height: 250 },
     { width: 300, height: 170 },
     { width: 250, height: 250 },
-    { width: 200, height: 200 },
 ];
 
 const adStyle = css`
