@@ -8,6 +8,7 @@ import { from } from '@guardian/src-foundations/mq';
 const positionRelative = css`
     position: relative;
 `;
+
 export const labelStyles = css`
     .ad-slot__label,
     .ad-slot__scroll {
@@ -32,6 +33,7 @@ export const labelStyles = css`
         width: 100%;
     }
 `;
+
 const mobileStickyAdStyles = css`
     position: fixed;
     bottom: 0;
