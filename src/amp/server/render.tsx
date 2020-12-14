@@ -10,7 +10,7 @@ import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import {AmpExperiments} from "@root/src/amp/components/AmpExperiment";
+import {AmpExperiments, ampExperimentsDataUrl} from "@root/src/amp/components/AmpExperiment";
 
 export const render = async ({ body }: express.Request, res: express.Response) => {
     try {
@@ -50,10 +50,8 @@ export const render = async ({ body }: express.Request, res: express.Response) =
             canonicalURL: CAPI.webURL,
         };
 
-        const experimentsDataUrl = 'http://localhost:3131/amp/ab-tests.json'
-
         const experimentsData: AmpExperiments =
-            await fetch(experimentsDataUrl)
+            await fetch(ampExperimentsDataUrl)
                 .then(rawResponse => rawResponse.json())
 
         const resp = document({

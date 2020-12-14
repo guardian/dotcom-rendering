@@ -12,6 +12,8 @@ export type AmpExperiments = {
     [key: string]: AmpExperiment
 }
 
+export const ampExperimentsDataUrl = 'http://localhost:3131/amp/experiments_data'
+
 export const AmpExperimentComponent: React.FC<{experimentsData?: AmpExperiments}> = ({experimentsData}) => {
     return (
         <amp-experiment>

@@ -44,17 +44,18 @@ export const Analytics: React.FC<{
             <script type="application/json" id="contributions-ophan">
                 {
                     "requests": {
-                        "viewSend": {
-                            "origin": "https://mjacobson.eu.ngrok.io",
-                            "baseUrl": "/testing?testData=VARIANTS"
-                        }
+                        "epicViewSend": "http://localhost:3131/amp/epic_view?testData=VARIANTS"
                     },
                     "triggers": {
                         "track epic view": {
                             "on": "visible",
-                            "request": "viewSend",
+                            "request": "epicViewSend",
                             "selector": "#epic-container"
                         }
+                    },
+                    "transport": {
+                        "xhrpost": false,
+                        "beacon": false
                     }
                 }
             </script>
