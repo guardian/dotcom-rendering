@@ -22,7 +22,8 @@ const containerStyles = css`
 
 export const Counts = ({ children }: Props) => (
     <div className={containerStyles}>
-        {/* The containerStyles css is expecting children to be two aside root elements */}
+        {/* The containerStyles css is expecting children to be two divs with the
+            'meta-number' class */}
         {children}
     </div>
 );
