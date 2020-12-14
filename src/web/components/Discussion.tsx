@@ -63,7 +63,8 @@ export const Discussion = ({
     const [hashCommentId, setHashCommentId] = useState<number | undefined>(
         commentIdFromUrl(),
     );
-    const hasCommentsHash = window?.location?.hash === '#comments';
+    const hasCommentsHash =
+        window && window.location && window.location.hash === '#comments';
 
     const handlePermalink = (commentId: number) => {
         window.location.hash = `#comment-${commentId}`;
