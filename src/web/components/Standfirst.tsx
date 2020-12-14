@@ -1,10 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import { Display } from '@root/src/lib/display';
+import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {
     display: Display;
@@ -125,14 +127,24 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
     }
 };
 
-export const Standfirst = ({ display, designType, standfirst }: Props) => {
-    return (
-        <div
-            className={cx(nestedStyles, standfirstStyles(designType, display))}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-                __html: standfirst,
-            }}
-        />
-    );
-};
+export const Standfirst = ({ display, designType, standfirst }: Props) => (
+    <div
+        className={cx(nestedStyles, standfirstStyles(designType, display))}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+            __html: sanitise(standfirst, {
+                allowedTags: false, // Leave tags from CAPI alone
+                allowedAttributes: false, // Leave attributes from CAPI alone
+                transformTags: {
+                    a: (tagName: string, attribs: { [key: string]: any }) => ({
+                        tagName, // Just return anchors as is
+                        attribs: {
+                            ...attribs, // Merge into the existing attributes
+                            'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
+                        },
+                    }),
+                },
+            }),
+        }}
+    />
+);
