@@ -813,9 +813,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return h(RichLink, { url, linkText, key, format });
 		}
 
-		case ElementKind.LiveEvent: {
+		case ElementKind.LiveEvent:
 			return h(LiveEventLink, { ...element, key });
-		}
 
 		case ElementKind.Interactive:
 			return h(Interactive, {
@@ -852,9 +851,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.Instagram:
 			return instagramRenderer(element);
 
-		case ElementKind.ExplainerAtom: {
+		case ElementKind.ExplainerAtom:
 			return h(ExplainerAtom, { ...element });
-		}
 
 		case ElementKind.GuideAtom:
 			return guideAtomRenderer(format, element);
@@ -868,9 +866,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.TimelineAtom:
 			return timelineAtomRenderer(format, element);
 
-		case ElementKind.ChartAtom: {
+		case ElementKind.ChartAtom:
 			return h(ChartAtom, { ...element });
-		}
 
 		case ElementKind.InteractiveAtom:
 			return interactiveAtomRenderer(format, element);
