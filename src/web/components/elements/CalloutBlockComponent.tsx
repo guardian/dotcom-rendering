@@ -151,7 +151,6 @@ export const CalloutBlockComponent = ({
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            credentials: 'include',
         })
             .then((resp) => {
                 if (resp.status === 201) {
