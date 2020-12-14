@@ -1,5 +1,6 @@
 import {
 	renderAll,
+	renderEditionsAll,
 	renderAllWithoutStyles,
 	renderStandfirstText,
 	renderText,
@@ -191,6 +192,9 @@ const audioAtom = (): BodyElement => ({
 
 const render = (element: BodyElement): ReactNode[] =>
 	renderAll(mockFormat, [element]);
+
+const renderEditions = (element: BodyElement): ReactNode[] =>
+	renderEditionsAll(mockFormat, [element]);
 
 const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
 	renderAllWithoutStyles(mockFormat, [element]);
@@ -420,6 +424,203 @@ describe('Renders different types of elements', () => {
 
 	test('ElementKind.AudioAtom', () => {
 		const nodes = render(audioAtom());
+		const audio = nodes.flat()[0];
+		const html = getHtml(audio);
+		expect(html).toContain(
+			'<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+		);
+	});
+
+	function testHandlers(node: ReactNode): void {
+		if (isValidElement(node)) {
+			const container = document.createElement('div');
+			document.body.appendChild(container);
+			act(() => {
+				renderDom(node, container);
+			});
+
+			const likeButton = container.querySelector('[data-testid="like"]');
+			const dislikeButton = container.querySelector(
+				'[data-testid="dislike"]',
+			);
+			const feedback = container.querySelector(
+				'[data-testid="feedback"]',
+			);
+			expect(feedback?.getAttribute('hidden')).toBe('');
+
+			act(() => {
+				dislikeButton!.dispatchEvent(
+					new MouseEvent('click', { bubbles: true }),
+				);
+			});
+			act(() => {
+				likeButton!.dispatchEvent(
+					new MouseEvent('click', { bubbles: true }),
+				);
+			});
+
+			expect(feedback?.getAttribute('hidden')).toBeNull();
+			unmountComponentAtNode(container);
+			container.remove();
+		}
+	}
+});
+
+describe('Renders different types of Editions elements', () => {
+	test('ElementKind.Image', () => {
+		const nodes = renderEditions(imageElement());
+		const bodyImage = nodes.flat()[0];
+		expect(getHtml(bodyImage)).toContain('img');
+		expect(getHtml(bodyImage)).toContain('figcaption');
+		expect(getHtml(bodyImage)).toContain('caption="caption"');
+		expect(getHtml(bodyImage)).toContain('credit="credit"');
+	});
+
+	test('ElementKind.Image with thumbnail role', () => {
+		const nodes = renderEditions(imageElementWithRole());
+		const bodyImage = nodes.flat()[0];
+		expect(getHtml(bodyImage)).toContain('img');
+	});
+
+	test('ElementKind.Pullquote', () => {
+		const nodes = renderEditions(pullquoteElement());
+		const pullquote = nodes.flat()[0];
+		expect(getHtml(pullquote)).toContain('quote');
+		expect(getHtml(pullquote)).not.toContain('attribution');
+	});
+
+	test('ElementKind.Pullquote with attribution', () => {
+		const nodes = renderEditions(pullquoteWithAttributionElement());
+		const pullquote = nodes.flat()[0];
+		expect(getHtml(pullquote)).toContain('attribution');
+		expect(getHtml(pullquote)).toContain('quote');
+	});
+
+	test('ElementKind.RichLink', () => {
+		const nodes = renderEditions(richLinkElement());
+		const richLink = nodes.flat()[0];
+		expect(getHtml(richLink)).toContain(
+			'<h1>this links to a related article</h1>',
+		);
+		expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
+	});
+
+	test('ElementKind.Interactive', () => {
+		const nodes = renderEditions(interactiveElement());
+		const interactive = nodes.flat()[0];
+		expect(getHtml(interactive)).toContain(
+			'<iframe src="https://theguardian.com" height="500" title=""></iframe>',
+		);
+	});
+
+	test('ElementKind.Tweet', () => {
+		const nodes = renderEditions(tweetElement());
+		const tweet = nodes.flat()[0];
+		expect(getHtml(tweet)).toContain('twitter-tweet');
+	});
+
+	test('ElementKind.Instagram', () => {
+		const nodes = renderEditions(instagramElement());
+		const instagram = nodes.flat()[0];
+		expect(getHtml(instagram)).toBe(
+			'<div><blockquote>Instagram</blockquote></div>',
+		);
+	});
+
+	test('ElementKind.Embed', () => {
+		const nodes = renderEditions(embedElement());
+		const embed = nodes.flat()[0];
+		expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
+	});
+
+	test('ElementKind.Audio', () => {
+		const nodes = renderEditions(audioElement());
+		const audio = nodes.flat()[0];
+		expect(getHtml(audio)).toContain(
+			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
+		);
+	});
+
+	test('ElementKind.Video', () => {
+		const nodes = renderEditions(videoElement());
+		const video = nodes.flat()[0];
+		expect(getHtml(video)).toContain(
+			'src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"',
+		);
+	});
+
+	test('ElementKind.LiveEvent', () => {
+		const nodes = renderEditions(liveEventElement());
+		const liveEvent = nodes.flat()[0];
+		expect(getHtml(liveEvent)).toContain(
+			'<h1>this links to a live event</h1>',
+		);
+	});
+
+	test('ElementKind.InteractiveAtom', () => {
+		const nodes = renderEditions(atomElement());
+		const atom = nodes.flat()[0];
+		expect(getHtml(atom)).toContain('main { background: yellow; }');
+		expect(getHtml(atom)).toContain('console.log(&#x27;init&#x27;)');
+		expect(getHtml(atom)).toContain('Some content');
+	});
+
+	test('ElementKind.ExplainerAtom', () => {
+		const nodes = renderEditions(explainerElement());
+		const explainer = nodes.flat()[0];
+		expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
+	});
+
+	test('ElementKind.GuideAtom', () => {
+		const nodes = renderEditions(guideElement());
+		const guide = nodes.flat()[0];
+		expect(getHtml(guide)).toContain('<main>Guide content</main>');
+		testHandlers(guide);
+	});
+
+	test('ElementKind.QandaAtom', () => {
+		const nodes = renderEditions(qandaElement());
+		const qanda = nodes.flat()[0];
+		expect(getHtml(qanda)).toContain('<main>QandA content</main>');
+		testHandlers(qanda);
+	});
+
+	test('ElementKind.ProfileAtom', () => {
+		const nodes = renderEditions(profileElement());
+		const profile = nodes.flat()[0];
+		expect(getHtml(profile)).toContain('<main>Profile content</main>');
+		testHandlers(profile);
+	});
+
+	test('ElementKind.TimelineAtom', () => {
+		const nodes = renderEditions(timelineElement());
+		const timeline = nodes.flat()[0];
+		expect(getHtml(timeline)).toContain(
+			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
+		);
+		testHandlers(timeline);
+	});
+
+	test('ElementKind.ChartAtom', () => {
+		const nodes = renderEditions(chartElement());
+		const chart = nodes.flat()[0];
+		expect(getHtml(chart)).toContain(
+			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
+		);
+	});
+
+	test('ElementKind.QuizAtom', () => {
+		const nodes = renderEditions(quizAtom());
+		const quiz = nodes.flat()[0];
+		const html = getHtml(quiz);
+		expect(html).toContain('<div class="js-quiz">');
+		expect(html).toContain(
+			'<script class="js-quiz-params" type="application/json">',
+		);
+	});
+
+	test('ElementKind.AudioAtom', () => {
+		const nodes = renderEditions(audioAtom());
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
