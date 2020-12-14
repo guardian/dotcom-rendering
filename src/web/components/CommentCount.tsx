@@ -5,12 +5,13 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
+import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
     pillar: Pillar;
-    short: string;
-    long: string;
+    isCommentable: boolean;
+    commentCount: number;
     setIsExpanded: Function;
 };
 
@@ -21,6 +22,7 @@ const containerStyles = (pillar: Pillar) => css`
     ${textSans.medium()};
     font-weight: bold;
     color: ${pillarPalette[pillar].main};
+    padding-top: 5px;
 `;
 
 const iconContainerStyles = css`
@@ -65,12 +67,15 @@ const linkStyles = css`
     }
 `;
 
-export const CommentCount = ({ short, long, pillar, setIsExpanded }: Props) => {
+export const CommentCount = ({ isCommentable, commentCount, pillar, setIsExpanded }: Props) => {
+    if(!isCommentable) return null;
+
+    const { short, long } = formatCount(
+        commentCount,
+    );
+
     return (
-        <div
-            className={containerStyles(pillar)}
-            data-cy="comment-counts"
-        >
+        <div className={containerStyles(pillar)} data-cy="comment-counts">
             <a
                 href="#comments"
                 className={linkStyles}

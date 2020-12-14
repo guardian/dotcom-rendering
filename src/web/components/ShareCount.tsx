@@ -7,9 +7,19 @@ import { between } from '@guardian/src-foundations/mq';
 
 import ShareIcon from '@frontend/static/icons/share.svg';
 
+import { useApi } from '@root/src/web/lib/api';
+import { formatCount } from '@root/src/web/lib/formatCount';
+import { joinUrl } from '@root/src/web/lib/joinUrl';
+
 type Props = {
-    short: string;
-    long: string;
+    ajaxUrl: string;
+    pageId: string;
+};
+
+type ShareCountType = {
+    path: string;
+    share_count: number;
+    refreshStatus: boolean;
 };
 
 const containerStyles = css`
@@ -48,7 +58,26 @@ const shortStyles = css`
     }
 `;
 
-export const ShareCount = ({ short, long }: Props) => {
+export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
+    const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
+    const { data: shareData, error: shareError } = useApi<ShareCountType>(
+        shareUrl,
+    );
+    if (shareError) {
+        window.guardian.modules.sentry.reportError(
+            shareError,
+            'share-count',
+        );
+    }
+
+    const shareCount = shareData && shareData.share_count;
+    if(!shareCount || shareCount === 0) return null;
+
+    const { short, long } = formatCount(
+        shareCount || 0,
+    );
+
+
     return (
         <div
             className={containerStyles}
