@@ -140,7 +140,7 @@ export const Standfirst = ({ display, designType, standfirst }: Props) => (
                         tagName, // Just return anchors as is
                         attribs: {
                             ...attribs, // Merge into the existing attributes
-                            'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+                            'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
                         },
                     }),
                 },
