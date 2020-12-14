@@ -60,6 +60,7 @@ import HorizontalRule from 'components/horizontalRule';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
+import EditionsPullquote from 'components/editions/pullquote';
 import RichLink from 'components/richLink';
 import Video from 'components/video';
 import { isElement, pipe, pipe2 } from 'lib';
@@ -805,7 +806,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;
-			return h(Pullquote, { quote, attribution, format, key });
+			return h(EditionsPullquote, { quote, attribution, format, key });
 		}
 
 		case ElementKind.RichLink: {
