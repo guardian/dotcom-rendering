@@ -55,7 +55,7 @@ export const Header = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
-                pageViewId="1234"
+                // pageViewId="1234"
             />
         </Container>
     );
@@ -76,7 +76,7 @@ export const HeaderMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
-                pageViewId="1234"
+                // pageViewId="1234"
             />
         </Container>
     );
@@ -97,7 +97,7 @@ export const Footer = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
-                pageViewId="1234"
+                // pageViewId="1234"
             />
         </Container>
     );
@@ -118,7 +118,7 @@ export const FooterMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
-                pageViewId="1234"
+                // pageViewId="1234"
             />
         </Container>
     );
