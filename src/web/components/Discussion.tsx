@@ -31,6 +31,7 @@ type Props = {
 };
 
 const commentIdFromUrl = () => {
+    if (typeof window === 'undefined') return;
     const { hash } = window.location;
     if (!hash) return;
     if (!hash.includes('comment')) return;
@@ -64,9 +65,12 @@ export const Discussion = ({
         commentIdFromUrl(),
     );
     const hasCommentsHash =
-        window && window.location && window.location.hash === '#comments';
+        typeof window !== 'undefined' &&
+        window.location &&
+        window.location.hash === '#comments';
 
     const handlePermalink = (commentId: number) => {
+        if (typeof window === 'undefined') return false;
         window.location.hash = `#comment-${commentId}`;
         const comment = window.document.getElementById(`comment-${commentId}`);
         if (comment) {
