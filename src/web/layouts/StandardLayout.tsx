@@ -566,7 +566,7 @@ export const StandardLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot data-print-layout='hide' asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             {!isPaidContent && (
