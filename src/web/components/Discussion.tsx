@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { css } from 'emotion';
 
+import { space } from '@guardian/src-foundations';
 import { CommentCount } from '@frontend/web/components/CommentCount';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { RightColumn } from '@frontend/web/components/RightColumn';
+import { AdSlot } from '@root/src/web/components/AdSlot';
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { App as Comments } from '@guardian/discussion-rendering';
 
 import { Portal } from '@frontend/web/components/Portal';
+import { Flex } from '@frontend/web/components/Flex';
+import { SignedInAs } from '@frontend/web/components/SignedInAs';
+import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
+import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 
@@ -104,6 +113,8 @@ export const Discussion = ({
         }
     }, [hasCommentsHash]);
 
+    const hideAd = isAdFreeUser || shouldHideAds;
+
     return (
         <>
             {(commentCount || commentCount === 0) && (
@@ -117,24 +128,84 @@ export const Discussion = ({
                 </Portal>
             )}
 
-            <CommentsLayout
-                user={user}
-                pillar={pillar}
-                baseUrl={discussionApiUrl}
-                shortUrl={shortUrlId}
-                commentCount={commentCount || 0}
-                commentPage={commentPage}
-                commentPageSize={commentPageSize}
-                commentOrderBy={commentOrderBy}
-                isClosedForComments={isClosedForComments}
-                discussionD2Uid={discussionD2Uid}
-                discussionApiClientHeader={discussionApiClientHeader}
-                enableDiscussionSwitch={enableDiscussionSwitch}
-                expanded={isExpanded}
-                commentToScrollTo={hashCommentId}
-                onPermalinkClick={handlePermalink}
-                hideAds={isAdFreeUser || shouldHideAds}
-            />
+            <ContainerLayout
+                padSides={false}
+                // If we're not hiding an advert stretch to the right
+                stretchRight={!hideAd}
+                leftContent={
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <SignedInAs
+                        pillar={pillar}
+                        enableDiscussionSwitch={enableDiscussionSwitch}
+                        user={user}
+                        commentCount={commentCount || 0}
+                        isClosedForComments={isClosedForComments}
+                    />
+                }
+            >
+                <Flex>
+                    <div>
+                        <Hide when="above" breakpoint="leftCol">
+                            <div
+                                className={css`
+                                    padding-bottom: ${space[2]}px;
+                                `}
+                            >
+                                <SignedInAs
+                                    pillar={pillar}
+                                    enableDiscussionSwitch={
+                                        enableDiscussionSwitch
+                                    }
+                                    user={user}
+                                    commentCount={commentCount || 0}
+                                />
+                            </div>
+                        </Hide>
+                        <Comments
+                            user={user}
+                            baseUrl={discussionApiUrl}
+                            pillar={pillar}
+                            initialPage={commentPage}
+                            pageSizeOverride={commentPageSize}
+                            isClosedForComments={
+                                isClosedForComments || !enableDiscussionSwitch
+                            }
+                            orderByOverride={commentOrderBy}
+                            shortUrl={shortUrlId}
+                            additionalHeaders={{
+                                'D2-X-UID': discussionD2Uid,
+                                'GU-Client': discussionApiClientHeader,
+                            }}
+                            expanded={isExpanded}
+                            commentToScrollTo={hashCommentId}
+                            onPermalinkClick={handlePermalink}
+                            apiKey="dotcom-rendering"
+                            onHeightChange={() => {}}
+                        />
+                    </div>
+                    <>
+                        {!hideAd && (
+                            <RightColumn padding={false}>
+                                <div
+                                    className={css`
+                                        position: static;
+                                        height: 100%;
+                                        padding-left: 20px;
+                                    `}
+                                >
+                                    <AdSlot
+                                        asps={namedAdSlotParameters('comments')}
+                                        localStyles={css`
+                                            position: sticky;
+                                            top: 0;
+                                        `}
+                                    />
+                                </div>
+                            </RightColumn>
+                        )}
+                    </>
+                </Flex>
+            </ContainerLayout>
         </>
     );
 };
