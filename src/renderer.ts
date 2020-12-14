@@ -32,19 +32,19 @@ import {
 import type { Format, Option, Result } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import type {
+	AudioAtom as AudioAtomElement,
 	BodyElement,
-	Image,
-	Text,
 	Embed,
-	Instagram,
 	GuideAtom as GuideAtomElement,
+	Image,
+	Instagram,
 	InteractiveAtom as InteractiveAtomElement,
 	MediaAtom as MediaAtomElement,
-	QandaAtom as QandaAtomElement,
 	ProfileAtom as ProfileAtomElement,
-	TimelineAtom as TimelineAtomElement,
-	AudioAtom as AudioAtomElement,
+	QandaAtom as QandaAtomElement,
 	QuizAtom as QuizAtomElement,
+	Text,
+	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/anchor';
 import InteractiveAtom, {
@@ -889,8 +889,10 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
 	elements.map(render(format));
 
-const renderEditionsAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
-	elements.map(renderEditions(format));
+const renderEditionsAll = (
+	format: Format,
+	elements: BodyElement[],
+): ReactNode[] => elements.map(renderEditions(format));
 
 const renderAllWithoutStyles = (
 	format: Format,
