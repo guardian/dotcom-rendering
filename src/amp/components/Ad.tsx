@@ -12,7 +12,7 @@ const svgBackground = encodeURIComponent(
 
 const sizes = [
     // We should investigate 336x280 - @mxdvl 2020-12-11
-    // { width: 336, height: 280 },
+    { width: 336, height: 280 },
     { width: 300, height: 250 },
     { width: 300, height: 170 },
     { width: 250, height: 250 },
@@ -26,8 +26,8 @@ const adStyle = css`
     background-repeat: no-repeat;
     background-position: center;
     border-top: 1px solid ${palette.neutral[86]};
-    height: ${sizes[0].height + 22}px;
-    width: ${sizes[0].width}px;
+    width: min-content;
+    height: min-content;
     clear: both;
     text-align: center;
     margin: 0 auto 12px;
@@ -48,6 +48,8 @@ const adStyle = css`
 
 const adClass = css`
     display: none;
+    margin: 0 auto;
+    background: ${palette.neutral[93]};
 `;
 
 const usAdRegionClass = css`
@@ -161,7 +163,7 @@ const ampAdElem = (
                 .join(',')}
             data-npa-on-unknown-consent={true}
             data-loading-strategy="prefer-viewability-over-views"
-            layout="responsive"
+            layout="fixed"
             type="doubleclick"
             json={stringify(adJson(commercialProperties[edition].adTargeting))}
             data-slot={ampData(section, contentType)}
