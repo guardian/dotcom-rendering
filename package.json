@@ -49,7 +49,7 @@
     "@guardian/src-ed-lines": "^2.6.0",
     "@guardian/src-foundations": "^2.5.0",
     "@guardian/src-icons": "^2.7.1",
-    "@guardian/src-link": "^1.5.0",
+    "@guardian/src-link": "^2.7.1",
     "@guardian/src-radio": "^2.5.0",
     "@guardian/src-svgs": "^1.5.0",
     "@guardian/src-text-area": "^2.5.0",
@@ -79,7 +79,7 @@
     "typescript": "^4.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@emotion/babel-plugin": "^11.0.0",
@@ -105,7 +105,7 @@
     "@typescript-eslint/parser": "^4.9.0",
     "babel-loader": "^8.2.2",
     "clean-css": "^4.2.3",
-    "eslint": "^7.13.0",
+    "eslint": "^7.15.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.22.1",
