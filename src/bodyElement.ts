@@ -49,6 +49,11 @@ const enum ElementKind {
 	QuizAtom,
 }
 
+type Text = {
+	kind: ElementKind.Text;
+	doc: DocumentFragment;
+};
+
 type Image = ImageData & {
 	kind: ElementKind.Image;
 };
@@ -65,6 +70,17 @@ type Video = {
 	src: string;
 	height: string;
 	width: string;
+};
+
+type Embed = {
+	kind: ElementKind.Embed;
+	html: string;
+	alt: Option<string>;
+};
+
+type Instagram = {
+	kind: ElementKind.Instagram;
+	html: string;
 };
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
@@ -143,10 +159,7 @@ interface QuizAtom {
 }
 
 type BodyElement =
-	| {
-			kind: ElementKind.Text;
-			doc: DocumentFragment;
-	  }
+	| Text
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
@@ -167,16 +180,9 @@ type BodyElement =
 			kind: ElementKind.Tweet;
 			content: NodeList;
 	  }
-	| {
-			kind: ElementKind.Instagram;
-			html: string;
-	  }
+	| Instagram
 	| Audio
-	| {
-			kind: ElementKind.Embed;
-			html: string;
-			alt: Option<string>;
-	  }
+	| Embed
 	| {
 			kind: ElementKind.Callout;
 			id: string;
@@ -445,4 +451,23 @@ const parseElements = (
 
 // ----- Exports ----- //
 
-export { ElementKind, BodyElement, Audio, Video, Body, parseElements };
+export {
+	ElementKind,
+	BodyElement,
+	Audio,
+	Video,
+	Body,
+	Image,
+	Text,
+	Embed,
+	Instagram,
+	GuideAtom,
+	InteractiveAtom,
+	MediaAtom,
+	QandaAtom,
+	ProfileAtom,
+	TimelineAtom,
+	AudioAtom,
+	QuizAtom,
+	parseElements,
+};
