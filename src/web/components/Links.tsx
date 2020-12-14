@@ -160,7 +160,7 @@ export const Links = ({ userId }: Props) => {
         },
     ];
     return (
-        <div className={linksStyles}>
+        <div data-print-layout='hide' className={linksStyles}>
             <div className={seperatorStyles} />
             <a
                 href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
