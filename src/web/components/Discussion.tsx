@@ -84,9 +84,7 @@ export const Discussion = ({
     useEffect(() => {
         const callFetch = async () => {
             const response = await getDiscussion(discussionApiUrl, shortUrlId);
-            setCommentCount(
-                (response && response.discussion.commentCount) || 0,
-            );
+            setCommentCount(response && response.discussion.commentCount);
             setIsClosedForComments(
                 response && response.discussion.isClosedForComments,
             );
@@ -123,7 +121,7 @@ export const Discussion = ({
 
     return (
         <>
-            {(commentCount || commentCount === 0) && (
+            {commentCount !== undefined && (
                 <Portal root="comment-count-root">
                     <CommentCount
                         isCommentable={isCommentable}
