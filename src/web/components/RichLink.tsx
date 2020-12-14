@@ -285,7 +285,7 @@ export const RichLink = ({
             className={pillarBackground(pillar)}
             data-name={(isPlaceholder && 'placeholder') || ''}
         >
-            <div data-print-layout='hide' className={cx(richLinkContainer, neutralBackground)}>
+            <div className={cx(richLinkContainer, neutralBackground)}>
                 <a className={richLinkLink} href={url}>
                     <div className={richLinkTopBorder(pillar)} />
                     {showImage && (

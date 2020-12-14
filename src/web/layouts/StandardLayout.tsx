@@ -340,14 +340,12 @@ export const StandardLayout = ({
 
                 <Stuck>
                     <Section
-                        data-print-layout='hide'
                         showTopBorder={false}
                         showSideBorders={false}
                         padded={false}
                         shouldCenter={false}
                     >
                         <HeaderAdSlot
-                            data-print-layout='hide'
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
                         />
@@ -355,7 +353,6 @@ export const StandardLayout = ({
                 </Stuck>
                 <SendToBack>
                     <Section
-                        data-print-layout='hide'
                         showTopBorder={false}
                         showSideBorders={false}
                         padded={false}
@@ -365,7 +362,6 @@ export const StandardLayout = ({
                     </Section>
 
                     <Section
-                        data-print-layout='hide'
                         showSideBorders={true}
                         borderColour={brandLine.primary}
                         showTopBorder={false}
@@ -373,7 +369,6 @@ export const StandardLayout = ({
                         backgroundColour={brandBackground.primary}
                     >
                         <Nav
-                            data-print-layout='hide'
                             pillar={getCurrentPillar(CAPI)}
                             nav={NAV}
                             display={display}
@@ -386,13 +381,11 @@ export const StandardLayout = ({
 
                     {NAV.subNavSections && (
                         <Section
-                            data-print-layout='hide'
                             backgroundColour={background.primary}
                             padded={false}
                             sectionId="sub-nav-root"
                         >
                             <SubNav
-                                data-print-layout='hide'
                                 subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={pillar}
@@ -401,12 +394,11 @@ export const StandardLayout = ({
                     )}
 
                     <Section
-                        data-print-layout='hide'
                         backgroundColour={background.primary}
                         padded={false}
                         showTopBorder={false}
                     >
-                        <GuardianLines data-print-layout='hide' count={4} pillar={pillar} />
+                        <GuardianLines count={4} pillar={pillar} />
                     </Section>
                 </SendToBack>
             </div>
