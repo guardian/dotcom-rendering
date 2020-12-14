@@ -67,7 +67,6 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
-import { Bool } from 'aws-sdk/clients/clouddirectory';
 
 // ----- Renderer ----- //
 
