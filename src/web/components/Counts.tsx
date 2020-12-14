@@ -5,14 +5,14 @@ import { border } from '@guardian/src-foundations/palette';
 
 type Props = {
     children: React.ReactNode;
-}
+};
 const containerStyles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    aside:not(:empty) + aside:not(:empty) {
+    .meta-number:not(:empty) + .meta-number:not(:empty) {
         /* This css to show a vertical divider  will only be applied to the second
-           non empty aside element. (We only want the border to show when both share
+           non empty meta-number element. (We only want the border to show when both share
            and comment counts are displayed) */
         border-left: 1px solid ${border.secondary};
         margin-left: 4px;
@@ -20,9 +20,9 @@ const containerStyles = css`
     }
 `;
 
-export const Counts = ({children}: Props) => (
+export const Counts = ({ children }: Props) => (
     <div className={containerStyles}>
         {/* The containerStyles css is expecting children to be two aside root elements */}
         {children}
     </div>
-)
+);

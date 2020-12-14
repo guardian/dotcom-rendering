@@ -344,8 +344,15 @@ export const ArticleMeta = ({
                     </div>
                     <div className={metaNumbers}>
                         <Counts>
-                            <aside id="share-count-root" />
-                            <aside id="comment-count-root" />
+                            {/* The meta-number classname is needed by Counts.tsx */}
+                            <div
+                                className="meta-number"
+                                id="share-count-root"
+                            />
+                            <div
+                                className="meta-number"
+                                id="comment-count-root"
+                            />
                         </Counts>
                     </div>
                 </div>
