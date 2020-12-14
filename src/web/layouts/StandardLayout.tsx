@@ -481,7 +481,7 @@ export const StandardLayout = ({
                             />
                         </div>
                     </GridItem>
-                    <GridItem data-print-layout='hide' area="lines">
+                    <GridItem area="lines">
                         <div className={maxWidth}>
                             <div className={stretchLines}>
                                 <GuardianLines
@@ -495,7 +495,7 @@ export const StandardLayout = ({
                             </div>
                         </div>
                     </GridItem>
-                    <GridItem data-print-layout='hide' area="meta">
+                    <GridItem area="meta">
                         <div className={maxWidth}>
                             <ArticleMeta
                                 branding={branding}
@@ -613,7 +613,7 @@ export const StandardLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot data-print-layout='hide' asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
             </Section>
 
             {NAV.subNavSections && (
