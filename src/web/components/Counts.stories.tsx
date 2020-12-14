@@ -44,20 +44,20 @@ export const Both = () => {
     return (
         <Container>
             <Counts>
-                <aside>
+                <div className="meta-number">
                     <ShareCount
                         ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                         pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                     />
-                </aside>
-                <aside>
+                </div>
+                <div className="meta-number">
                     <CommentCount
                         isCommentable={true}
                         commentCount={239}
                         pillar="news"
                         setIsExpanded={() => {}}
                     />
-                </aside>
+                </div>
             </Counts>
         </Container>
     );
@@ -80,20 +80,20 @@ export const ShareOnly = () => {
     return (
         <Container>
             <Counts>
-                <aside>
+                <div className="meta-number">
                     <ShareCount
                         ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                         pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                     />
-                </aside>
-                <aside>
+                </div>
+                <div className="meta-number">
                     <CommentCount
                         isCommentable={false}
                         commentCount={239}
                         pillar="news"
                         setIsExpanded={() => {}}
                     />
-                </aside>
+                </div>
             </Counts>
         </Container>
     );
@@ -121,20 +121,20 @@ export const CommentOnly = () => {
     return (
         <Container>
             <Counts>
-                <aside>
+                <div className="meta-number">
                     <ShareCount
                         ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                         pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                     />
-                </aside>
-                <aside>
+                </div>
+                <div className="meta-number">
                     <CommentCount
                         isCommentable={true}
                         commentCount={239}
                         pillar="news"
                         setIsExpanded={() => {}}
                     />
-                </aside>
+                </div>
             </Counts>
         </Container>
     );
@@ -162,20 +162,20 @@ export const ZeroComments = () => {
     return (
         <Container>
             <Counts>
-                <aside>
+                <div className="meta-number">
                     <ShareCount
                         ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                         pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                     />
-                </aside>
-                <aside>
+                </div>
+                <div className="meta-number">
                     <CommentCount
                         isCommentable={true}
                         commentCount={0}
                         pillar="news"
                         setIsExpanded={() => {}}
                     />
-                </aside>
+                </div>
             </Counts>
         </Container>
     );
@@ -203,20 +203,20 @@ export const BigNumbers = () => {
     return (
         <Container>
             <Counts>
-                <aside>
+                <div className="meta-number">
                     <ShareCount
                         ajaxUrl="https://api.nextgen.guardianapps.co.uk"
                         pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                     />
-                </aside>
-                <aside>
+                </div>
+                <div className="meta-number">
                     <CommentCount
                         isCommentable={true}
                         commentCount={4320}
                         pillar="news"
                         setIsExpanded={() => {}}
                     />
-                </aside>
+                </div>
             </Counts>
         </Container>
     );
