@@ -792,8 +792,105 @@ const render = (format: Format, excludeStyles = false) => (
 	}
 };
 
+const renderEditions = (format: Format, excludeStyles = false) => (
+	element: BodyElement,
+	key: number,
+): ReactNode => {
+	switch (element.kind) {
+		case ElementKind.Text:
+			return textRenderer(format, excludeStyles, element);
+
+		case ElementKind.Image:
+			return imageRenderer(format, element, key);
+
+		case ElementKind.Pullquote: {
+			const { quote, attribution } = element;
+			return h(Pullquote, { quote, attribution, format, key });
+		}
+
+		case ElementKind.RichLink: {
+			const { url, linkText } = element;
+			return h(RichLink, { url, linkText, key, format });
+		}
+
+		case ElementKind.LiveEvent: {
+			return h(LiveEventLink, { ...element, key });
+		}
+
+		case ElementKind.Interactive:
+			return h(Interactive, {
+				url: element.url,
+				key,
+				title: element.alt,
+			});
+
+		case ElementKind.Tweet:
+			return h(Tweet, { content: element.content, format, key });
+
+		case ElementKind.Audio:
+			return h(Audio, {
+				src: element.src,
+				width: element.width,
+				height: element.height,
+			});
+
+		case ElementKind.Video:
+			return h(Video, {
+				src: element.src,
+				width: element.width,
+				height: element.height,
+			});
+
+		case ElementKind.Callout: {
+			const { campaign, description } = element;
+			return h(CalloutForm, { campaign, format, description });
+		}
+
+		case ElementKind.Embed:
+			return embedRenderer(element);
+
+		case ElementKind.Instagram:
+			return instagramRenderer(element);
+
+		case ElementKind.ExplainerAtom: {
+			return h(ExplainerAtom, { ...element });
+		}
+
+		case ElementKind.GuideAtom:
+			return guideAtomRenderer(format, element);
+
+		case ElementKind.QandaAtom:
+			return qandaAtomRenderer(format, element);
+
+		case ElementKind.ProfileAtom:
+			return profileAtomRenderer(format, element);
+
+		case ElementKind.TimelineAtom:
+			return timelineAtomRenderer(format, element);
+
+		case ElementKind.ChartAtom: {
+			return h(ChartAtom, { ...element });
+		}
+
+		case ElementKind.InteractiveAtom:
+			return interactiveAtomRenderer(format, element);
+
+		case ElementKind.MediaAtom:
+			return mediaAtomRenderer(format, element);
+
+		case ElementKind.AudioAtom:
+			return audioAtomRenderer(format, element);
+
+		case ElementKind.QuizAtom:
+			return quizAtomRenderer(format, element);
+	}
+};
+
 const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
 	elements.map(render(format));
+
+const renderEditionsAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
+	elements.map(renderEditions(format));
 
 const renderAllWithoutStyles = (
 	format: Format,
@@ -804,6 +901,7 @@ const renderAllWithoutStyles = (
 
 export {
 	renderAll,
+	renderEditionsAll,
 	renderAllWithoutStyles,
 	text as renderText,
 	textElement as renderTextElement,

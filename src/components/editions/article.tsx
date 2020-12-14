@@ -12,7 +12,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC } from 'react';
-import { renderAll } from 'renderer';
+import { renderEditionsAll } from 'renderer';
 
 // ----- Component ----- //
 
@@ -46,7 +46,7 @@ const Article: FC<Props> = ({ item }) => {
 					<Byline item={item} />
 				</header>
 				<section css={bodyStyles}>
-					{renderAll(item, partition(item.body).oks)}
+					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
 		</main>
