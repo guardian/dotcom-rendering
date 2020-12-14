@@ -29,35 +29,37 @@ const getClosestSetForWidth = (
     });
 };
 
-const getSourcesForRole = (imageSources: ImageSource[], role: RoleType) =>
-    imageSources.filter(
+const getSourcesForRoleAndResolution = (
+    imageSources: ImageSource[],
+    role: RoleType,
+    resolution: ResolutionType,
+) => {
+    const setsForRole = imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
             weighting.toLowerCase() === role.toLowerCase(),
     )[0].srcSet;
 
-const getSourcesForResolution = (
-    sets: SrcSetItem[],
-    resolution: ResolutionType,
-) =>
-    resolution === 'hdpi'
-        ? sets.filter((set) => set.src.includes('dpr=2'))
-        : sets.filter((set) => !set.src.includes('dpr=2'));
+    return resolution === 'hdpi'
+        ? setsForRole.filter((set) => set.src.includes('dpr=2'))
+        : setsForRole.filter((set) => !set.src.includes('dpr=2'));
+};
 
 const getFallback = (
     role: RoleType,
     resolution: ResolutionType,
     imageSources: ImageSource[],
 ): string | undefined => {
-    const sourcesForRole: SrcSetItem[] = getSourcesForRole(imageSources, role);
-    const sourcesForResolution: SrcSetItem[] = getSourcesForResolution(
-        sourcesForRole,
+    // Get the sources for this role and resolution
+    const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
+        imageSources,
+        role,
         resolution,
     );
-    if (sourcesForResolution.length === 0) return undefined;
+    if (sources.length === 0) return undefined;
     // The assumption here is readers on devices that do not support srcset are likely to be on poor
     // network connections so we're going to fallback to a small image
-    return getClosestSetForWidth(300, sourcesForResolution).src;
+    return getClosestSetForWidth(300, sources).src;
 };
 
 const getSources = (
@@ -65,17 +67,14 @@ const getSources = (
     resolution: ResolutionType,
     imageSources: ImageSource[],
 ): string => {
-    // Get the sources for this role
-    const sourcesForRole: SrcSetItem[] = getSourcesForRole(imageSources, role);
-    // Filter by resolution
-    const sourcesForResolution: SrcSetItem[] = getSourcesForResolution(
-        sourcesForRole,
+    // Get the sources for this role and resolution
+    const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
+        imageSources,
+        role,
         resolution,
     );
 
-    return sourcesForResolution
-        .map((srcSet) => `${srcSet.src} ${srcSet.width}w`)
-        .join(',');
+    return sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 };
 
 /**
