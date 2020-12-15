@@ -5,7 +5,7 @@ import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
-const adSlotStyles = css`
+const positionRelative = css`
     position: relative;
 `;
 
@@ -157,7 +157,7 @@ const AdSlotCore: React.FC<{
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${localStyles} ${labelStyles} ${adSlotStyles}`}
+            )} ${positionRelative} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
