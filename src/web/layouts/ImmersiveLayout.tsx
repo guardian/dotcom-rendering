@@ -527,6 +527,7 @@ export const ImmersiveLayout = ({
                         <div
                             className={css`
                                 padding-top: 6px;
+                                height: 100%;
                             `}
                         >
                             <RightColumn>
