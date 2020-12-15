@@ -92,11 +92,16 @@ export const htmlTemplate = ({
         `https://api.nextgen.guardianapps.co.uk`,
         `https://hits-secure.theguardian.com`,
         `https://interactive.guim.co.uk`,
-        `https://ipv6.guim.co.uk`,
+        // `https://ipv6.guim.co.uk`, // [1]
         `https://phar.gu-web.net`,
         `https://static.theguardian.com`,
         `https://support.theguardian.com`,
     ];
+    /*
+        [1]
+        15th December 2020
+        Removed as a possible cause for iOS device crashes. This came together with https://github.com/guardian/frontend/pull/23373
+    */
 
     const preconnectTags = staticPreconnectUrls.map(
         (src) => `<link rel="preconnect" href="${src}">`,
