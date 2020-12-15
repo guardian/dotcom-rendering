@@ -11,7 +11,6 @@ const svgBackground = encodeURIComponent(
 );
 
 const sizes = [
-    { width: 336, height: 280 },
     { width: 300, height: 250 },
     { width: 300, height: 170 },
     { width: 250, height: 250 },
