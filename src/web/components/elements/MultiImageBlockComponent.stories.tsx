@@ -38,6 +38,7 @@ export const SingleImageWithCaption = () => {
 };
 SingleImageWithCaption.story = {
     name: 'single image with caption',
+    chromatic: { disable: true },
 };
 
 export const SideBySide = () => {
@@ -51,6 +52,7 @@ export const SideBySide = () => {
 };
 SideBySide.story = {
     name: 'side by side',
+    chromatic: { disable: true },
 };
 
 export const SideBySideWithCaption = () => {
