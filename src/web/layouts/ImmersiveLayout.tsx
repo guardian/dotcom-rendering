@@ -528,6 +528,16 @@ export const ImmersiveLayout = ({
                             className={css`
                                 padding-top: 6px;
                                 height: 100%;
+                                ${from.desktop} {
+                                    /* above 980 */
+                                    margin-left: 20px;
+                                    margin-right: -20px;
+                                }
+                                ${from.leftCol} {
+                                    /* above 1140 */
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
                             `}
                         >
                             <RightColumn>
