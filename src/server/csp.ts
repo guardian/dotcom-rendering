@@ -138,4 +138,4 @@ function csp(
 
 // ----- Exports ----- //
 
-export { csp, assetHashes };
+export { csp, assetHashes, buildCsp };

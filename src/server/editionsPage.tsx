@@ -13,8 +13,10 @@ import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
 import { renderToString } from 'react-dom/server';
-import { assetHashes } from 'server/csp';
+import { buildCsp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
+import type { ThirdPartyEmbeds } from 'capi';
 
 // ----- Types ----- //
 
@@ -29,13 +31,6 @@ const docParser = JSDOM.fragment.bind(null);
 
 // ----- Functions ----- //
 
-const csp = (styles: string[]): string =>
-	`
-	default-src 'self';
-	style-src ${assetHashes(styles)};
-	img-src 'self' https://i.guim.co.uk;
-	`.trim();
-
 const styles = `
     ${pageFonts}
 
@@ -46,22 +41,30 @@ const styles = `
 
 const renderHead = (
 	request: RenderingRequest,
-	emotionCritical: EmotionCritical,
-): string =>
-	renderToString(
-		<>
-			<meta charSet="utf-8" />
-			<title>{request.content.webTitle}</title>
-			<meta name="viewport" content="initial-scale=1" />
-			<meta
-				httpEquiv="Content-Security-Policy"
-				content={csp([styles, emotionCritical.css])}
-			/>
-			<style data-emotion-css={emotionCritical.ids.join(' ')}>
-				{emotionCritical.css}
-			</style>
-		</>,
+	thirdPartyEmbeds: ThirdPartyEmbeds,
+	itemStyles: string,
+	emotionIds: string[],
+	inlineStyles: boolean,
+): string => {
+	const generalStyles = styles;
+	const cspString = buildCsp(
+		{
+			scripts: [],
+			styles: [generalStyles, itemStyles],
+		},
+		thirdPartyEmbeds,
+		inlineStyles,
 	);
+
+	return `
+		<meta charSet="utf-8" />
+		<title>${request.content.webTitle}</title>
+		<meta name="viewport" content="initial-scale=1" />
+		<meta httpEquiv="Content-Security-Policy" content="${cspString}" />
+        <style>${generalStyles}</style>
+        <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
+    `;
+}
 
 const renderBody = (item: Item): EmotionCritical =>
 	compose(
@@ -89,9 +92,10 @@ const buildHtml = (head: string, body: string): string => `
 function render(imageSalt: string, request: RenderingRequest): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
+	const head = renderHead(request, getThirdPartyEmbeds(request.content), body.css, body.ids, requiresInlineStyles(request.content))
 
 	return {
-		html: buildHtml(renderHead(request, body), body.html),
+		html: buildHtml(head, body.html),
 		clientScript: none,
 	};
 }
