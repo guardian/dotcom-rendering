@@ -282,7 +282,6 @@ export const CalloutBlockComponent = ({
                     className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
                     open={isExpanded}
-                    // tabIndex={-1}
                 >
                     <summary className={summeryStyles}>
                         <div className={summeryContentWrapper}>
