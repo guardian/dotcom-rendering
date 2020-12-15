@@ -28,7 +28,6 @@ const hideBelowDesktop = css`
 
 type Props = {
     children: JSXElements;
-    padding?: boolean;
 };
 
 export const RightColumn = ({ children }: Props) => {
