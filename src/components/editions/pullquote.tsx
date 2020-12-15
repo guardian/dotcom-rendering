@@ -31,6 +31,7 @@ const styles = (format: Format): SerializedStyles => {
 		margin-right: ${basePx(2)};
 		margin-bottom: calc(${basePx(2)} + 22px);
 		width: ${pullquoteWidth};
+		box-sizing: border-box;
 		${from.wide} {
 			margin-right: calc(
 				-${pullquoteWidth} - ${basePx(2)} - ${basePx(3)}
