@@ -1,7 +1,5 @@
 import ReactDOM from 'react-dom';
 
-import { initPerf } from '@root/src/web/browser/initPerf';
-
 type Props = {
     root: IslandType;
     children: React.ReactNode;
@@ -15,10 +13,8 @@ type Props = {
 // https://github.com/preactjs/preact/blob/df748d106fb78fbd46d14563b4712f921ccf0300/compat/src/portals.js
 export const Portal = ({ root, children, richLinkIndex }: Props) => {
     const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
-    const { start, end } = initPerf(`${rootId}-portal`);
     const element = document.getElementById(rootId);
     if (!element) return null;
-    start();
     // First remove any placeholder. Why? Because we sometimes server side render Placeholders in
     // the root divs where the Portal is being inserted so the page is rendered with the placeholder
     // showing (to reduce jank). But ReactDOM.createPortal won't replace content so we need to
@@ -28,6 +24,5 @@ export const Portal = ({ root, children, richLinkIndex }: Props) => {
     );
     if (placeholderElement) placeholderElement.remove();
     const result = ReactDOM.createPortal(children, element);
-    end();
     return result;
 };
