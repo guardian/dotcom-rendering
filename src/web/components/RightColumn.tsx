@@ -15,14 +15,6 @@ const hideBelowDesktop = css`
         flex-basis: 300px;
         flex-grow: 0;
         flex-shrink: 0;
-        margin-left: 20px;
-        margin-right: -20px;
-    }
-
-    ${from.leftCol} {
-        /* above 1140 */
-        margin-left: 0px;
-        margin-right: 0px;
     }
 `;
 
