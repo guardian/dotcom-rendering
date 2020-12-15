@@ -110,6 +110,24 @@ export const BackgroundStory = () => {
 };
 BackgroundStory.story = { name: 'with a blue background' };
 
+export const StretchRightStory = () => {
+    return (
+        <ContainerLayout
+            title="Stretched Right"
+            description="About this content"
+            showTopBorder={true}
+            sideBorders={true}
+            centralBorder="full"
+            stretchRight={true}
+        >
+            <Grey />
+        </ContainerLayout>
+    );
+};
+StretchRightStory.story = {
+    name: 'with content stretched to the right (no margin)',
+};
+
 export const PartialStory = () => {
     return (
         <ContainerLayout

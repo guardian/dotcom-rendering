@@ -26,16 +26,19 @@ type Props = {
     borderColour?: string;
     leftContent?: JSXElements;
     children?: React.ReactNode;
+    stretchRight?: boolean;
 };
 
 const Container = ({
     children,
     padded,
     verticalMargins,
+    stretchRight,
 }: {
     children: React.ReactNode;
     padded: boolean;
     verticalMargins: boolean;
+    stretchRight: boolean;
 }) => {
     const containerStyles = css`
         display: flex;
@@ -51,6 +54,9 @@ const Container = ({
            breakpoint, based on chat with Harry Fisher
         */
         margin-bottom: ${space[9]}px;
+    `;
+
+    const rightMargin = css`
         ${from.wide} {
             margin-right: 68px;
         }
@@ -69,6 +75,7 @@ const Container = ({
                 containerStyles,
                 padded && padding,
                 verticalMargins && margins,
+                !stretchRight && rightMargin,
             )}
         >
             {children}
@@ -92,6 +99,7 @@ export const ContainerLayout = ({
     backgroundColour,
     children,
     leftContent,
+    stretchRight = false,
 }: Props) => (
     <Section
         sectionId={sectionId}
@@ -117,7 +125,11 @@ export const ContainerLayout = ({
                     {leftContent}
                 </>
             </LeftColumn>
-            <Container padded={padContent} verticalMargins={verticalMargins}>
+            <Container
+                padded={padContent}
+                verticalMargins={verticalMargins}
+                stretchRight={stretchRight}
+            >
                 <Hide when="above" breakpoint="leftCol">
                     <ContainerTitle
                         title={title}
