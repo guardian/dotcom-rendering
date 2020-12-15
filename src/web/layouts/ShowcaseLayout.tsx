@@ -472,10 +472,21 @@ export const ShowcaseLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <AdSlot asps={namedAdSlotParameters('right')} />
-                            {!isPaidContent ? <MostViewedRightIsland /> : <></>}
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                            `}
+                        >
+                            <RightColumn>
+                                <AdSlot asps={namedAdSlotParameters('right')} />
+                                {!isPaidContent ? (
+                                    <MostViewedRightIsland />
+                                ) : (
+                                    <></>
+                                )}
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </ShowcaseGrid>
             </Section>
