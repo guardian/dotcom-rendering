@@ -45,6 +45,15 @@ const summeryStyles = css`
     /* 176da211-05aa-4280-859b-1e3157b3f19e */
     pointer-events: none;
 
+    /*
+        why hide visibility?
+        because we want to prevent the user for tabbing to the summery HTML element
+        without using tabIndex={-1} which would disable focus on all child DOM elements
+
+        NOTE: requires "visibility: visible;" on child elements to display and enable focus
+    */
+    visibility: hidden;
+
     a {
         /* but we do want to allow click on links */
         pointer-events: all;
@@ -52,6 +61,7 @@ const summeryStyles = css`
 `;
 
 const summeryContentWrapper = css`
+    visibility: visible;
     min-height: 70px;
     display: flex;
     flex-direction: row;
@@ -93,6 +103,8 @@ const buttonWrapperStyles = css`
     position: absolute;
     cursor: pointer;
     margin-top: -5px;
+
+    visibility: visible;
 
     /* We need to ensure our pointer-events are turned back on on the button */
     /* 176da211-05aa-4280-859b-1e3157b3f19e */
@@ -341,6 +353,7 @@ export const CalloutBlockComponent = ({
                                 icon={<PlusIcon />}
                                 onClick={() => setIsExpanded(true)}
                                 custom-guardian="callout-form-open-button"
+                                tabIndex={0}
                             >
                                 Tell us
                             </Button>
@@ -362,8 +375,6 @@ export const CalloutBlockComponent = ({
                             icon={<MinusIcon />}
                             onClick={() => setIsExpanded(false)}
                             custom-guardian="callout-form-close-button"
-                            // TODO: use ref once forwardRef is implemented @guardian/src-button
-                            // ref={lastElement}
                         >
                             Hide
                         </Button>
