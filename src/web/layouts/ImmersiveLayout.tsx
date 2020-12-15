@@ -524,23 +524,30 @@ export const ImmersiveLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <>
-                                {mainMedia && (
-                                    <div
-                                        className={css`
-                                            margin-top: ${space[4]}px;
-                                        `}
-                                    >
-                                        <AdSlot
-                                            asps={namedAdSlotParameters(
-                                                'right',
-                                            )}
-                                        />
-                                    </div>
-                                )}
-                            </>
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                            `}
+                        >
+                            <RightColumn>
+                                <>
+                                    {mainMedia && (
+                                        <div
+                                            className={css`
+                                                margin-top: ${space[4]}px;
+                                            `}
+                                        >
+                                            <AdSlot
+                                                asps={namedAdSlotParameters(
+                                                    'right',
+                                                )}
+                                            />
+                                        </div>
+                                    )}
+                                </>
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </ImmersiveGrid>
             </Section>

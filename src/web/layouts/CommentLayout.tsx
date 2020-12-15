@@ -518,13 +518,24 @@ export const CommentLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <StickyAd
-                                name="right"
-                                height={MOSTVIEWED_STICKY_HEIGHT}
-                            />
-                            {!isPaidContent ? <MostViewedRightIsland /> : <></>}
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                            `}
+                        >
+                            <RightColumn>
+                                <StickyAd
+                                    name="right"
+                                    height={MOSTVIEWED_STICKY_HEIGHT}
+                                />
+                                {!isPaidContent ? (
+                                    <MostViewedRightIsland />
+                                ) : (
+                                    <></>
+                                )}
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </StandardGrid>
             </Section>
