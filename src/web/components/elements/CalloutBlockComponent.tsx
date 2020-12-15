@@ -20,6 +20,11 @@ const calloutDetailsStyles = css`
     border-bottom: 1px ${neutral[86]} solid;
     position: relative;
     padding-bottom: 10px;
+
+    /* IE does not support summary HTML elements, so we need to hide children ourself */
+    :not([open]) > *:not(summary) {
+        display: none;
+    }
 `;
 
 const backgroundColorStyle = css`
