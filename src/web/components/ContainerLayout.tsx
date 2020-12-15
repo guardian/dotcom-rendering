@@ -64,11 +64,8 @@ const Container = ({
 
     const padding = css`
         padding: 0 10px;
-
-        ${from.mobileLandscape} {
-            padding: 0 20px;
-        }
     `;
+
     return (
         <div
             className={cx(
