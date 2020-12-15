@@ -28,7 +28,20 @@ type Props = {
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
     user?: UserProfile;
+    // **************************************************************************
+    // beingHydrated?
+    // We use this prop to solve a problem we have with Storybook. If you remove
+    // it then the page will render fine on production but our layout stories
+    // will render two copies of Discussion, side by side. The reason for this
+    // is because we technically server side render these layout stories on the
+    // client, inside the story file itself.
+    //
+    // Yes, it's true, having props purely to solve test implementation problems
+    // is not great. If you feel strongly about this and want to remove this
+    // prop I'm okay with that. If you were able to solve this another way
+    // then thank you!
     beingHydrated?: boolean;
+    // **************************************************************************
 };
 
 const commentIdFromUrl = () => {
