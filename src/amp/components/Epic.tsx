@@ -128,11 +128,9 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    // const epicUrl = process.env.NODE_ENV === 'production'
-    //     ? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
-    //     : 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
-
-    const epicUrl = 'http://localhost:3131/amp/epic?testData=VARIANTS';
+    const epicUrl = process.env.NODE_ENV === 'production'
+        ? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
+        : 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
 
     return (
         <div>
