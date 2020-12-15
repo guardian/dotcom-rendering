@@ -7,6 +7,7 @@ import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { App as Comments } from '@guardian/discussion-rendering';
+import { from } from '@guardian/src-foundations/mq';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Lazy } from '@frontend/web/components/Lazy';
@@ -149,6 +150,7 @@ export const Discussion = ({
 
             <ContainerLayout
                 padSides={false}
+                padContent={false}
                 // If we're not hiding an advert stretch to the right
                 stretchRight={!hideAd}
                 leftContent={
@@ -163,7 +165,13 @@ export const Discussion = ({
                 }
             >
                 <Flex>
-                    <div>
+                    <div
+                        className={css`
+                            ${from.leftCol} {
+                                padding-left: 10px;
+                            }
+                        `}
+                    >
                         <Hide when="above" breakpoint="leftCol">
                             <div
                                 className={css`
