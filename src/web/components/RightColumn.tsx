@@ -35,9 +35,9 @@ type Props = {
     padding?: boolean;
 };
 
-export const RightColumn = ({ children, padding = true }: Props) => {
+export const RightColumn = ({ children }: Props) => {
     return (
-        <section className={cx(hideBelowDesktop, padding && paddingStyles)}>
+        <section className={cx(hideBelowDesktop, paddingStyles)}>
             {children}
         </section>
     );

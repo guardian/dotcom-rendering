@@ -222,7 +222,7 @@ export const Discussion = ({
                     </div>
                     <>
                         {!hideAd && (
-                            <RightColumn padding={false}>
+                            <RightColumn>
                                 <div
                                     className={css`
                                         position: static;
