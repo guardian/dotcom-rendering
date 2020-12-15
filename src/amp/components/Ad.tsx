@@ -46,8 +46,6 @@ const adStyle = css`
 
 const adClass = css`
     display: none;
-    margin: 0 auto;
-    background: ${palette.neutral[93]};
 `;
 
 const usAdRegionClass = css`
