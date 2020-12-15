@@ -1,37 +1,64 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
+import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons/quote';
 import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { darkModeCss } from 'styles';
-import { basePx } from 'styles';
+import { basePx, darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
-import { from } from '@guardian/src-foundations/mq';
 
 export const pullquoteWidth = '10.875rem';
 
 const styles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
-    return css`
+	return css`
+		position: relative;
 		color: ${kicker};
 		${darkModeCss`color: ${inverted};`}
-        border: 1px solid ${kicker};
+		border: 1px solid ${kicker};
 		border-top: 12px solid ${kicker};
-        ${darkModeCss`border: 1px solid ${inverted};`}
+		${darkModeCss`border: 1px solid ${inverted};`}
 		${darkModeCss`border-top: 12px solid ${inverted};`}
         border-bottom: none;
-        ${darkModeCss`border-bottom: none;`}
-        float: left;
+		${darkModeCss`border-bottom: none;`}
+		float: left;
 		clear: left;
-        padding: ${basePx(1)};
-        padding-bottom: ${basePx(3)};
-		margin: ${basePx(0, 2, 1, 0)};
+		padding: ${basePx(1)};
+		padding-bottom: ${basePx(3)};
+		margin-right: ${basePx(2)};
+		margin-bottom: calc(${basePx(2)} + 22px);
 		width: ${pullquoteWidth};
 		${from.wide} {
-			margin-left: calc(-${pullquoteWidth} - ${basePx(2)} - ${basePx(3)});
+			margin-right: calc(
+				-${pullquoteWidth} - ${basePx(2)} - ${basePx(3)}
+			);
+			float: right;
+			clear: right;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: -1px;
+			width: 22px;
+			height: 22px;
+			border: 1px solid ${kicker};
+			border-top: none;
+			border-radius: 0 0 100px 0;
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 22px;
+			width: calc(100% - 22px);
+			height: 1px;
+			background-color: ${kicker};
 		}
 	`;
 };
@@ -41,7 +68,7 @@ const quoteStyles = (format: Format): SerializedStyles => {
 
 	return css`
 		margin: 0;
-        ${headline.xxsmall({ fontWeight: "regular" })}
+		${headline.xxsmall({ fontWeight: 'regular' })}
 		svg {
 			margin-bottom: -0.6rem;
 			height: 2.3rem;
@@ -55,7 +82,7 @@ const quoteStyles = (format: Format): SerializedStyles => {
 
 const citeStyles = css`
 	font-style: normal;
-    ${headline.xxsmall({ fontWeight: "bold" })}
+	${headline.xxsmall({ fontWeight: 'bold' })}
 `;
 
 type Props = {
