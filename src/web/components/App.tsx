@@ -24,8 +24,9 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
-    AudioAtom,
 } from '@guardian/atoms-rendering';
+
+import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -35,7 +36,6 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { loadScript } from '@root/src/web/lib/loadScript';
-import { toTypesPillar } from '@root/src/lib/format';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
@@ -139,8 +139,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     // banners need countryCode but we don't want to block all banners from
     // executing their canShow logic until countryCode is available):
     const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
-
-    const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 
     const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
@@ -286,33 +284,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         }
     }, [countryCode, CAPI.config.switches.consentManagement]);
 
-    // *****************
-    // *     ACast     *
-    // *****************
-    useEffect(() => {
-        onConsentChange((state: any) => {
-            // Should we use ad enabled audio? If so, then set the shouldUseAcast
-            // state to true, triggering a rerender of AudioAtom using a new track url
-            // (one with adverts)
-            const consentGiven = getConsentFor('acast', state);
-            const aCastisEnabled = CAPI.config.switches.acast;
-            const readerCanBeShownAds = !CAPI.isAdFreeUser;
-            const contentIsNotSensitive = !CAPI.config.isSensitive;
-            if (
-                aCastisEnabled &&
-                consentGiven &&
-                readerCanBeShownAds && // Eg. Not a subscriber
-                contentIsNotSensitive
-            ) {
-                setShouldUseAcast(true);
-            }
-        });
-    }, [
-        CAPI.config.switches.acast,
-        CAPI.isAdFreeUser,
-        CAPI.config.isSensitive,
-    ]);
-
     // ************************
     // *   Google Analytics   *
     // ************************
@@ -454,13 +425,13 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.audioAtoms.map((audioAtom) => (
                 <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
-                    <AudioAtom
+                    <AudioAtomWrapper
                         id={audioAtom.id}
                         trackUrl={audioAtom.trackUrl}
                         kicker={audioAtom.kicker}
                         title={audioAtom.title}
-                        pillar={toTypesPillar(pillar)}
-                        shouldUseAcast={shouldUseAcast}
+                        pillar={pillar}
+                        CAPI={CAPI}
                     />
                 </Hydrate>
             ))}
