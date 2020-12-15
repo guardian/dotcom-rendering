@@ -14,7 +14,7 @@ We can use preload as is, but as per Jason's post: "This may have performance dr
 
 However, I wondered whether, as we're now looking at preloading priority scripts, we should be reviewing the module/nomodule approach as described in Jason's post for Dynamic loading. He elaborates on the idea in the [Next.JS discussion](https://github.com/vercel/next.js/discussions/7563#discussioncomment-22180) and released in [Next.js 9.1](https://nextjs.org/blog/next-9-1#module--nomodule). It sounds pretty positive - eliminate the double download issue, while still benefiting from the preload link.
 
-The question then becomes, what is the browser support for preload link - we lose script tags for the pre-parser, so preload becomes very important. Unfortunately preload is disabled by default [in Firefox](https://caniuse.com/?search=preload), roughly 2.5% of our audience.
+The question then becomes, what is the browser support for preload link - we lose script tags for the pre-parser, so preload becomes very important. Unfortunately preload is disabled by default [in Firefox](https://caniuse.com/?search=preload), roughly 2.5% of our audience, though it does [seem to be on the verge of being turned on by default](https://bugzilla.mozilla.org/show_bug.cgi?id=1626997) so we may be able to visit this soon-ish.
 
 It turns out though, that Next.js went with a [script tag route](https://github.com/janicklas-ralph/next.js/blob/canary/packages/next/pages/_document.tsx#L558), not a dynamically loaded script route. Looking in the BBC's source, they do the same.
 
