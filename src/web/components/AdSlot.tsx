@@ -118,7 +118,7 @@ export const makeClassNames = (
     return baseClassNames.concat(adTypeClassNames, optClassNames).join(' ');
 };
 
-export const AdSlotCore: React.FC<{
+const AdSlotCore: React.FC<{
     name: AdSlotType;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
