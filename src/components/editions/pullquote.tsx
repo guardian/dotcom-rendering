@@ -11,6 +11,7 @@ import { basePx, darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 export const pullquoteWidth = '10.875rem';
+const pullquoteTailSize = '23px';
 
 const styles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
@@ -19,7 +20,7 @@ const styles = (format: Format): SerializedStyles => {
 		position: relative;
 		box-sizing: border-box;
 		padding: ${basePx(0, 1, 3, 1)};
-		margin: ${basePx(0.75)} ${basePx(2)} calc(${basePx(2)} + 22px) 0;
+		margin: ${basePx(0.75)} ${basePx(2)} calc(${basePx(2)} + ${pullquoteTailSize}) 0;
 
 		color: ${kicker};
 		border: 1px solid ${kicker};
@@ -45,8 +46,8 @@ const styles = (format: Format): SerializedStyles => {
 			position: absolute;
 			top: 100%;
 			left: -1px;
-			width: 23px;
-			height: 23px;
+			width: ${pullquoteTailSize};
+			height: ${pullquoteTailSize};
 			border: 1px solid ${kicker};
 			border-top: none;
 			border-radius: 0 0 100% 0;
@@ -58,8 +59,8 @@ const styles = (format: Format): SerializedStyles => {
 			content: '';
 			position: absolute;
 			top: 100%;
-			left: 24px;
-			width: calc(100% - 23px);
+			left: calc(${pullquoteTailSize} + 1px);
+			width: calc(100% - ${pullquoteTailSize});
 			height: 1px;
 			border-top: 1px solid ${kicker};
 			${darkModeCss`border-top: 1px solid ${inverted};`}
