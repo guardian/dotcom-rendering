@@ -18,10 +18,8 @@ const styles = (format: Format): SerializedStyles => {
 		width: ${pullquoteWidth};
 		position: relative;
 		box-sizing: border-box;
-		padding: ${basePx(0, 1, 1, 1)};
-		padding-bottom: ${basePx(3)};
-		margin-right: ${basePx(2)};
-		margin-bottom: calc(${basePx(2)} + 22px);
+		padding: ${basePx(0, 1, 3, 1)};
+		margin: ${basePx(0.75)} ${basePx(2)} calc(${basePx(2)} + 22px) 0;
 
 		color: ${kicker};
 		border: 1px solid ${kicker};
