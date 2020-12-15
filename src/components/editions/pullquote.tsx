@@ -77,9 +77,8 @@ const quoteStyles = (format: Format): SerializedStyles => {
 		${headline.xxsmall({ fontWeight: 'regular' })}
 		svg {
 			margin-bottom: -0.6rem;
-			height: 2.3rem;
+			height: 2rem;
 			margin-left: -0.3rem;
-			line-height: 1.2;
 			fill: ${kicker};
 			${darkModeCss`fill: ${inverted};`}
 		}
