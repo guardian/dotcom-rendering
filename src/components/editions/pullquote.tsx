@@ -26,7 +26,7 @@ const styles = (format: Format): SerializedStyles => {
 		${darkModeCss`border-bottom: none;`}
 		float: left;
 		clear: left;
-		padding: ${basePx(1)};
+		padding: ${basePx(0, 1, 1, 1)};
 		padding-bottom: ${basePx(3)};
 		margin-right: ${basePx(2)};
 		margin-bottom: calc(${basePx(2)} + 22px);
