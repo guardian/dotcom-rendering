@@ -20,7 +20,8 @@ const styles = (format: Format): SerializedStyles => {
 		position: relative;
 		box-sizing: border-box;
 		padding: ${basePx(0, 1, 3, 1)};
-		margin: ${basePx(0.75)} ${basePx(2)} calc(${basePx(2)} + ${pullquoteTailSize}) 0;
+		margin: ${basePx(0.75)} ${basePx(2)}
+			calc(${basePx(2)} + ${pullquoteTailSize}) 0;
 
 		color: ${kicker};
 		border: 1px solid ${kicker};
