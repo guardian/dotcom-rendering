@@ -2,7 +2,8 @@ name: lint 🔎
 on: [push]
 
 jobs:
-    run:
+    lint:
+        name: Lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2

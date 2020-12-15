@@ -151,7 +151,6 @@ export const CalloutBlockComponent = ({
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            credentials: 'include',
         })
             .then((resp) => {
                 if (resp.status === 201) {
@@ -266,7 +265,10 @@ export const CalloutBlockComponent = ({
 
     if (submissionSuccess) {
         return (
-            <figure className={wrapperStyles}>
+            <figure
+                data-print-layout='hide'
+                className={wrapperStyles}
+            >
                 <details
                     className={cx(calloutDetailsStyles, backgroundColorStyle)}
                     aria-hidden={true}
@@ -292,7 +294,10 @@ export const CalloutBlockComponent = ({
     }
 
     return (
-        <figure className={wrapperStyles}>
+        <figure
+            data-print-layout='hide'
+            className={wrapperStyles}
+        >
             <details
                 className={cx(calloutDetailsStyles, {
                     [backgroundColorStyle]: isExpanded,

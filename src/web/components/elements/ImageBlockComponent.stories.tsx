@@ -14,6 +14,9 @@ import { image } from './ImageBlockComponent.mocks';
 export default {
     component: ImageBlockComponent,
     title: 'Components/ImageBlockComponent',
+    parameters: {
+        chromatic: { diffThreshold: 0.4 },
+    },
 };
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
