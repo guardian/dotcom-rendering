@@ -51,7 +51,7 @@ const styles = (format: Format): SerializedStyles => {
 			height: 23px;
 			border: 1px solid ${kicker};
 			border-top: none;
-			border-radius: 0 0 100px 0;
+			border-radius: 0 0 100% 0;
 			${darkModeCss`border: 1px solid ${inverted};`}
 			${darkModeCss`border-top: none;`}
 		}
