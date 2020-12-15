@@ -15,29 +15,31 @@ export const pullquoteWidth = '10.875rem';
 const styles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 	return css`
+		width: ${pullquoteWidth};
 		position: relative;
-		color: ${kicker};
-		${darkModeCss`color: ${inverted};`}
-		border: 1px solid ${kicker};
-		border-top: 12px solid ${kicker};
-		${darkModeCss`border: 1px solid ${inverted};`}
-		${darkModeCss`border-top: 12px solid ${inverted};`}
-        border-bottom: none;
-		${darkModeCss`border-bottom: none;`}
-		float: left;
-		clear: left;
+		box-sizing: border-box;
 		padding: ${basePx(0, 1, 1, 1)};
 		padding-bottom: ${basePx(3)};
 		margin-right: ${basePx(2)};
 		margin-bottom: calc(${basePx(2)} + 22px);
-		width: ${pullquoteWidth};
-		box-sizing: border-box;
+
+		color: ${kicker};
+		border: 1px solid ${kicker};
+		border-top: 12px solid ${kicker};
+		border-bottom: none;
+		${darkModeCss`color: ${inverted};`}
+		${darkModeCss`border: 1px solid ${inverted};`}
+		${darkModeCss`border-top: 12px solid ${inverted};`}
+		${darkModeCss`border-bottom: none`}
+
+		float: left;
+		clear: left;
 		${from.wide} {
+			float: right;
+			clear: right;
 			margin-right: calc(
 				-${pullquoteWidth} - ${basePx(2)} - ${basePx(3)}
 			);
-			float: right;
-			clear: right;
 		}
 
 		&:before {
@@ -45,21 +47,24 @@ const styles = (format: Format): SerializedStyles => {
 			position: absolute;
 			top: 100%;
 			left: -1px;
-			width: 22px;
-			height: 22px;
+			width: 23px;
+			height: 23px;
 			border: 1px solid ${kicker};
 			border-top: none;
 			border-radius: 0 0 100px 0;
+			${darkModeCss`border: 1px solid ${inverted};`}
+			${darkModeCss`border-top: none;`}
 		}
 
 		&:after {
 			content: '';
 			position: absolute;
 			top: 100%;
-			left: 22px;
-			width: calc(100% - 22px);
+			left: 24px;
+			width: calc(100% - 23px);
 			height: 1px;
-			background-color: ${kicker};
+			border-top: 1px solid ${kicker};
+			${darkModeCss`border-top: 1px solid ${inverted};`}
 		}
 	`;
 };
