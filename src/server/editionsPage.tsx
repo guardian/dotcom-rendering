@@ -60,7 +60,7 @@ const renderHead = (
 		<meta charSet="utf-8" />
 		<title>${request.content.webTitle}</title>
 		<meta name="viewport" content="initial-scale=1" />
-		<meta httpEquiv="Content-Security-Policy" content="${cspString}" />
+		<meta http-equiv="Content-Security-Policy" content="${cspString}" />
         <style>${generalStyles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
     `;
