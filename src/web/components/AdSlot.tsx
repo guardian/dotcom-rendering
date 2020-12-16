@@ -167,7 +167,7 @@ const AdSlotCore: React.FC<{
     optId?: string;
     optClassNames?: string[];
     localStyles?: string;
-    isSticky?: boolean;
+    positionStyles: string;
 }> = ({
     name,
     adTypes,
@@ -179,7 +179,7 @@ const AdSlotCore: React.FC<{
     optId,
     optClassNames,
     localStyles,
-    isSticky,
+    positionStyles,
 }) => {
     // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
@@ -187,15 +187,6 @@ const AdSlotCore: React.FC<{
     //     ...(refresh && { 'data-refresh': true }),
     //     ...(outOfPage && { 'data-out-of-page': true }),
     // });
-
-    const postionStyles = isSticky
-        ? css`
-              position: sticky;
-              top: 0;
-          `
-        : css`
-              position: relative;
-          `;
 
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
@@ -205,7 +196,7 @@ const AdSlotCore: React.FC<{
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${postionStyles} ${localStyles} ${labelStyles}`}
+            )} ${positionStyles} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -244,7 +235,10 @@ export const AdSlot: React.FC<Props> = ({
                         outOfPage={false}
                         optId={undefined}
                         optClassNames={['js-sticky-mpu']}
-                        isSticky={true}
+                        positionStyles={css`
+                            position: sticky;
+                            top: 0;
+                        `}
                     />
                 </div>
             );
@@ -276,7 +270,10 @@ export const AdSlot: React.FC<Props> = ({
                         outOfPage={false}
                         optId={undefined}
                         optClassNames={['js-sticky-mpu']}
-                        isSticky={true}
+                        positionStyles={css`
+                            position: sticky;
+                            top: 0;
+                        `}
                     />
                 </div>
             );
@@ -303,6 +300,9 @@ export const AdSlot: React.FC<Props> = ({
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
+                    positionStyles={css`
+                        position: relative;
+                    `}
                 />
             );
         }
@@ -332,6 +332,9 @@ export const AdSlot: React.FC<Props> = ({
                     optId={undefined}
                     optClassNames={['js-sticky-mpu']}
                     localStyles={localStyles}
+                    positionStyles={css`
+                        position: relative;
+                    `}
                 />
             );
         }
@@ -352,6 +355,9 @@ export const AdSlot: React.FC<Props> = ({
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
+                    positionStyles={css`
+                        position: relative;
+                    `}
                 />
             );
         }
@@ -372,6 +378,9 @@ export const AdSlot: React.FC<Props> = ({
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
+                    positionStyles={css`
+                        position: relative;
+                    `}
                 />
             );
         }
