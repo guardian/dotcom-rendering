@@ -5,8 +5,10 @@ import { css, cx } from 'emotion';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
+    display: Display;
     position: AdSlotType;
 };
 
@@ -125,41 +127,71 @@ const mobileStickyAdStyles = css`
     }
 `;
 
-export const AdSlot: React.FC<Props> = ({ position }) => {
+export const AdSlot: React.FC<Props> = ({ position, display }) => {
     switch (position) {
-        case 'right': {
-            const MOSTVIEWED_STICKY_HEIGHT = 1059;
-            return (
-                <div
-                    className={css`
-                        position: static;
-                        height: ${MOSTVIEWED_STICKY_HEIGHT}px;
-                    `}
-                >
-                    <div
-                        id="dfp-ad--right"
-                        className={cx(
-                            'js-ad-slot',
-                            'ad-slot',
-                            'ad-slot--right',
-                            'ad-slot--mpu-banner-ad',
-                            'ad-slot--rendered',
-                            'js-sticky-mpu',
-                            css`
-                                position: sticky;
-                                top: 0;
-                            `,
-                            labelStyles,
-                        )}
-                        data-link-name="ad slot right"
-                        data-name="right"
-                        // mark: 01303e88-ef1f-462d-9b6e-242419435cec
-                        data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
-                        aria-hidden="true"
-                    />
-                </div>
-            );
-        }
+        case 'right':
+            switch (display) {
+                case Display.Immersive:
+                case Display.Showcase: {
+                    return (
+                        <div
+                            id="dfp-ad--right"
+                            className={cx(
+                                'js-ad-slot',
+                                'ad-slot',
+                                'ad-slot--right',
+                                'ad-slot--mpu-banner-ad',
+                                'ad-slot--rendered',
+                                'js-sticky-mpu',
+                                css`
+                                    position: sticky;
+                                    top: 0;
+                                `,
+                                labelStyles,
+                            )}
+                            data-link-name="ad slot right"
+                            data-name="right"
+                            // mark: 01303e88-ef1f-462d-9b6e-242419435cec
+                            data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                            aria-hidden="true"
+                        />
+                    );
+                }
+                case Display.Standard: {
+                    const MOSTVIEWED_STICKY_HEIGHT = 1059;
+                    return (
+                        <div
+                            className={css`
+                                position: static;
+                                height: ${MOSTVIEWED_STICKY_HEIGHT}px;
+                            `}
+                        >
+                            <div
+                                id="dfp-ad--right"
+                                className={cx(
+                                    'js-ad-slot',
+                                    'ad-slot',
+                                    'ad-slot--right',
+                                    'ad-slot--mpu-banner-ad',
+                                    'ad-slot--rendered',
+                                    'js-sticky-mpu',
+                                    css`
+                                        position: sticky;
+                                        top: 0;
+                                    `,
+                                    labelStyles,
+                                )}
+                                data-link-name="ad slot right"
+                                data-name="right"
+                                // mark: 01303e88-ef1f-462d-9b6e-242419435cec
+                                data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                                aria-hidden="true"
+                            />
+                        </div>
+                    );
+                }
+            }
+            break;
         case 'comments': {
             return (
                 <div

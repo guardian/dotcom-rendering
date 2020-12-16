@@ -8,6 +8,7 @@ import {
 } from '@root/fixtures/mostViewed';
 import { Section } from '@frontend/web/components/Section';
 import { ABProvider } from '@guardian/ab-react';
+import { Display } from 'src/lib/display';
 import { MostViewedFooter } from './MostViewedFooter';
 
 export default {
@@ -45,6 +46,7 @@ export const withTwoTabs = () => {
                     pillar="news"
                     sectionName="politics"
                     ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                    display={Display.Standard}
                 />
             </Section>
         </AbProvider>
@@ -64,6 +66,7 @@ export const withOneTabs = () => {
                 <MostViewedFooter
                     pillar="news"
                     ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                    display={Display.Standard}
                 />
             </Section>
         </AbProvider>
@@ -83,6 +86,7 @@ export const withNoMostSharedImage = () => {
                 <MostViewedFooter
                     pillar="news"
                     ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                    display={Display.Standard}
                 />
             </Section>
         </AbProvider>

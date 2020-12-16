@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
+import { Display } from '@root/src/lib/display';
 
 const headerWrapper = css`
     position: static;
@@ -23,7 +24,8 @@ const headerAdWrapperHidden = css`
 export const HeaderAdSlot: React.FC<{
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
-}> = ({ isAdFreeUser, shouldHideAds }) => (
+    display: Display;
+}> = ({ isAdFreeUser, shouldHideAds, display }) => (
     <div className={headerWrapper}>
         <Hide when="below" breakpoint="tablet">
             <div
@@ -32,7 +34,7 @@ export const HeaderAdSlot: React.FC<{
                     [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
                 })}
             >
-                <AdSlot position="top-above-nav" />
+                <AdSlot position="top-above-nav" display={display} />
             </div>
         </Hide>
     </div>

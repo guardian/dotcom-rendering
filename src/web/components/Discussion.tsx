@@ -16,6 +16,7 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     discussionApiUrl: string;
@@ -42,6 +43,7 @@ type Props = {
     // then thank you!
     beingHydrated?: boolean;
     // **************************************************************************
+    display: Display;
 };
 
 const commentIdFromUrl = () => {
@@ -65,6 +67,7 @@ export const Discussion = ({
     isAdFreeUser,
     shouldHideAds,
     beingHydrated,
+    display,
 }: Props) => {
     const [commentCount, setCommentCount] = useState<number>();
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
@@ -250,7 +253,10 @@ export const Discussion = ({
                                         padding-left: 20px;
                                     `}
                                 >
-                                    <AdSlot position="comments" />
+                                    <AdSlot
+                                        position="comments"
+                                        display={display}
+                                    />
                                 </div>
                             </RightColumn>
                         )}

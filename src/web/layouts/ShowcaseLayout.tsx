@@ -281,6 +281,7 @@ export const ShowcaseLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -488,7 +489,7 @@ export const ShowcaseLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot position="right" />
+                                <AdSlot position="right" display={display} />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (
@@ -506,7 +507,7 @@ export const ShowcaseLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising-high" />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -532,6 +533,7 @@ export const ShowcaseLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -552,7 +554,7 @@ export const ShowcaseLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising" />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

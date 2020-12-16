@@ -343,6 +343,7 @@ export const StandardLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -564,7 +565,7 @@ export const StandardLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot position="right" />
+                                <AdSlot position="right" display={display} />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (
@@ -586,6 +587,7 @@ export const StandardLayout = ({
                 <AdSlot
                     data-print-layout="hide"
                     position="merchandising-high"
+                    display={display}
                 />
             </Section>
 
@@ -618,6 +620,7 @@ export const StandardLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -648,7 +651,7 @@ export const StandardLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising" />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

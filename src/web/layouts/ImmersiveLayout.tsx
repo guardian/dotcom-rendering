@@ -547,7 +547,10 @@ export const ImmersiveLayout = ({
                                                 margin-top: ${space[4]}px;
                                             `}
                                         >
-                                            <AdSlot position="right" />
+                                            <AdSlot
+                                                position="right"
+                                                display={display}
+                                            />
                                         </div>
                                     )}
                                 </>
@@ -563,7 +566,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising-high" />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -589,6 +592,7 @@ export const ImmersiveLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -609,7 +613,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising" />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

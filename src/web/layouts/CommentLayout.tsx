@@ -304,6 +304,7 @@ export const CommentLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -531,7 +532,7 @@ export const CommentLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot position="right" />
+                                <AdSlot position="right" display={display} />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (
@@ -549,7 +550,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising-high" />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -575,6 +576,7 @@ export const CommentLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -595,7 +597,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot position="merchandising" />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

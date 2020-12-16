@@ -666,6 +666,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isAdFreeUser={CAPI.isAdFreeUser}
                     shouldHideAds={CAPI.shouldHideAds}
                     beingHydrated={true}
+                    display={display}
                 />
             </Hydrate>
             <Portal root="most-viewed-footer">
@@ -673,6 +674,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     pillar={pillar}
                     sectionName={CAPI.sectionName}
                     ajaxUrl={CAPI.config.ajaxUrl}
+                    display={display}
                 />
             </Portal>
             <Portal root="reader-revenue-links-footer">
