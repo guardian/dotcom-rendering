@@ -14,7 +14,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -36,7 +35,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -568,9 +567,10 @@ export const StandardLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <StickyAd
-                                    name="right"
-                                    height={MOSTVIEWED_STICKY_HEIGHT}
+                                <AdSlot
+                                    asps={namedAdSlotParameters('right')}
+                                    isSticky={true}
+                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
@@ -612,19 +612,19 @@ export const StandardLayout = ({
 
                     {showComments && (
                         <Section data-print-layout="hide" sectionId="comments">
-                            <CommentsLayout
+                            <Discussion
+                                discussionApiUrl={CAPI.config.discussionApiUrl}
+                                shortUrlId={CAPI.config.shortUrlId}
+                                isCommentable={CAPI.isCommentable}
                                 pillar={pillar}
-                                baseUrl={CAPI.config.discussionApiUrl}
-                                shortUrl={CAPI.config.shortUrlId}
-                                commentCount={0}
-                                isClosedForComments={true}
                                 discussionD2Uid={CAPI.config.discussionD2Uid}
                                 discussionApiClientHeader={
                                     CAPI.config.discussionApiClientHeader
                                 }
                                 enableDiscussionSwitch={false}
-                                expanded={false}
-                                onPermalinkClick={() => {}}
+                                isAdFreeUser={CAPI.isAdFreeUser}
+                                shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
                             />
                         </Section>
                     )}

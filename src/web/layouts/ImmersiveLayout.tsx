@@ -31,7 +31,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -581,19 +581,19 @@ export const ImmersiveLayout = ({
 
                     {showComments && (
                         <Section sectionId="comments">
-                            <CommentsLayout
+                            <Discussion
+                                discussionApiUrl={CAPI.config.discussionApiUrl}
+                                shortUrlId={CAPI.config.shortUrlId}
+                                isCommentable={CAPI.isCommentable}
                                 pillar={pillar}
-                                baseUrl={CAPI.config.discussionApiUrl}
-                                shortUrl={CAPI.config.shortUrlId}
-                                commentCount={0}
-                                isClosedForComments={true}
                                 discussionD2Uid={CAPI.config.discussionD2Uid}
                                 discussionApiClientHeader={
                                     CAPI.config.discussionApiClientHeader
                                 }
                                 enableDiscussionSwitch={false}
-                                expanded={false}
-                                onPermalinkClick={() => {}}
+                                isAdFreeUser={CAPI.isAdFreeUser}
+                                shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
                             />
                         </Section>
                     )}

@@ -4,6 +4,7 @@ import { border } from '@guardian/src-foundations/palette';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
+import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
@@ -342,7 +343,17 @@ export const ArticleMeta = ({
                         />
                     </div>
                     <div className={metaNumbers}>
-                        <div id="share-comment-counts" />
+                        <Counts>
+                            {/* The meta-number classname is needed by Counts.tsx */}
+                            <div
+                                className="meta-number"
+                                id="share-count-root"
+                            />
+                            <div
+                                className="meta-number"
+                                id="comment-count-root"
+                            />
+                        </Counts>
                     </div>
                 </div>
             </div>
