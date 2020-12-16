@@ -6,6 +6,13 @@ import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+type Props = {
+    asps: AdSlotParameters;
+    localStyles?: string;
+    isSticky?: boolean;
+    heightToStick?: string;
+};
+
 export const labelStyles = css`
     .ad-slot__label,
     .ad-slot__scroll {
@@ -176,12 +183,12 @@ const AdSlotCore: React.FC<{
     );
 };
 
-export const AdSlot: React.FC<{
-    asps: AdSlotParameters;
-    localStyles?: string;
-    isSticky?: boolean;
-    heightToStick?: string;
-}> = ({ asps, localStyles, isSticky, heightToStick }) => {
+export const AdSlot: React.FC<Props> = ({
+    asps,
+    localStyles,
+    isSticky,
+    heightToStick,
+}) => {
     if (isSticky) {
         return (
             <div
