@@ -185,7 +185,6 @@ const AdSlotCore: React.FC<{
             )} ${positionStyles} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
-            // {...getOptionalProps()}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...sizeMappings}
             aria-hidden="true"
