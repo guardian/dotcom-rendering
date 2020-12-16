@@ -5,12 +5,14 @@ import { space } from '@guardian/src-foundations';
 import { App as Comments } from '@guardian/discussion-rendering';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { RightColumn } from '@frontend/web/components/RightColumn';
-import { StickyAd } from '@root/src/web/components/StickyAd';
+import { AdSlot } from '@root/src/web/components/AdSlot';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { from } from '@guardian/src-foundations/mq';
+
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
 
 type Props = {
     user?: UserProfile;
@@ -200,7 +202,11 @@ export const CommentsLayout = ({
                 )}
             </div>
             <RightColumn>
-                <StickyAd name="comments" height={heightToStick} />
+                <AdSlot
+                    asps={namedAdSlotParameters('comments')}
+                    isSticky={true}
+                    heightToStick={heightToStick}
+                />
             </RightColumn>
         </Flex>
     );
