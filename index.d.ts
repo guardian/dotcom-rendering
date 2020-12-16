@@ -165,13 +165,13 @@ interface AuthorType {
 interface Block {
     id: string;
     elements: CAPIElement[];
-    createdOn?: number;
-    createdOnDisplay?: string;
-    lastUpdated?: number;
-    lastUpdatedDisplay?: string;
+    blockCreatedOn?: number;
+    blockCreatedOnDisplay?: string;
+    blockLastUpdated?: number;
+    blockLastUpdatedDisplay?: string;
     title?: string;
-    firstPublished?: number;
-    firstPublishedDisplay?: string;
+    blockFirstPublished?: number;
+    blockFirstPublishedDisplay?: string;
     primaryDateLine: string;
     secondaryDateLine: string;
 }

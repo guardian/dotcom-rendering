@@ -2298,25 +2298,25 @@
                         ]
                     }
                 },
-                "createdOn": {
+                "blockCreatedOn": {
                     "type": "number"
                 },
-                "createdOnDisplay": {
+                "blockCreatedOnDisplay": {
                     "type": "string"
                 },
-                "lastUpdated": {
+                "blockLastUpdated": {
                     "type": "number"
                 },
-                "lastUpdatedDisplay": {
+                "blockLastUpdatedDisplay": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "firstPublished": {
+                "blockFirstPublished": {
                     "type": "number"
                 },
-                "firstPublishedDisplay": {
+                "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
                 "primaryDateLine": {
