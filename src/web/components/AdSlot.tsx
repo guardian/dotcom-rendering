@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -125,52 +125,6 @@ const mobileStickyAdStyles = css`
     }
 `;
 
-interface AdSlotInputSizeMappings {
-    [key: string]: string;
-}
-
-export const makeClassNames = (
-    name: AdSlotType,
-    adTypes: string[],
-    optClassNames: string[],
-): string => {
-    const baseClassNames = ['js-ad-slot', 'ad-slot', `ad-slot--${name}`];
-    const adTypeClassNames = adTypes.map((adType) => `ad-slot--${adType}`);
-    return baseClassNames.concat(adTypeClassNames, optClassNames).join(' ');
-};
-
-const AdSlotCore: React.FC<{
-    name: AdSlotType;
-    adTypes: string[];
-    sizeMapping: AdSlotInputSizeMappings;
-    optClassNames?: string[];
-    localStyles?: string;
-    positionStyles: string;
-}> = ({
-    name,
-    adTypes,
-    sizeMapping,
-    optClassNames,
-    localStyles,
-    positionStyles,
-}) => {
-    return (
-        <div
-            id={`dfp-ad--${name}`}
-            className={`${makeClassNames(
-                name,
-                adTypes,
-                optClassNames || [],
-            )} ${positionStyles} ${localStyles} ${labelStyles}`}
-            data-link-name={`ad slot ${name}`}
-            data-name={name}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...sizeMapping}
-            aria-hidden="true"
-        />
-    );
-};
-
 export const AdSlot: React.FC<Props> = ({ position }) => {
     switch (position) {
         case 'right': {
@@ -182,18 +136,26 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                         height: ${MOSTVIEWED_STICKY_HEIGHT}px;
                     `}
                 >
-                    <AdSlotCore
-                        name="right"
-                        adTypes={['mpu-banner-ad', 'rendered']}
-                        sizeMapping={{
-                            'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
-                            // mark: 01303e88-ef1f-462d-9b6e-242419435cec
-                        }}
-                        optClassNames={['js-sticky-mpu']}
-                        positionStyles={css`
-                            position: sticky;
-                            top: 0;
-                        `}
+                    <div
+                        id="dfp-ad--right"
+                        className={cx(
+                            'js-ad-slot',
+                            'ad-slot',
+                            'ad-slot--right',
+                            'ad-slot--mpu-banner-ad',
+                            'ad-slot--rendered',
+                            'js-sticky-mpu',
+                            css`
+                                position: sticky;
+                                top: 0;
+                            `,
+                            labelStyles,
+                        )}
+                        data-link-name="ad slot right"
+                        data-name="right"
+                        // mark: 01303e88-ef1f-462d-9b6e-242419435cec
+                        data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                        aria-hidden="true"
                     />
                 </div>
             );
@@ -203,22 +165,30 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                 <div
                     className={css`
                         position: static;
-                        height: '100%';
+                        height: 100%;
                     `}
                 >
-                    <AdSlotCore
-                        name="comments"
-                        adTypes={['mpu-banner-ad', 'rendered']}
-                        sizeMapping={{
-                            'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`,
-                            'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`,
-                            'data-phablet': `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
-                        }}
-                        optClassNames={['js-sticky-mpu']}
-                        positionStyles={css`
-                            position: sticky;
-                            top: 0;
-                        `}
+                    <div
+                        id="dfp-ad--comments"
+                        className={cx(
+                            'js-ad-slot',
+                            'ad-slot',
+                            'ad-slot--comments',
+                            'ad-slot--mpu-banner-ad',
+                            'ad-slot--rendered',
+                            'js-sticky-mpu',
+                            css`
+                                position: sticky;
+                                top: 0;
+                            `,
+                            labelStyles,
+                        )}
+                        data-link-name="ad slot comments"
+                        data-name="comments"
+                        data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`}
+                        data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`}
+                        data-phablet={`${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`}
+                        aria-hidden="true"
                     />
                 </div>
             );
@@ -234,74 +204,98 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                 width: 728px;
             `;
             return (
-                <AdSlotCore
-                    name="top-above-nav"
-                    adTypes={['mpu-banner-ad', 'rendered']}
-                    sizeMapping={{
-                        // The sizes here come from two places in the frontend code
-                        // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-                        'data-tablet': `${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`,
-                        'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
-                        // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-                    }}
-                    optClassNames={[]}
-                    localStyles={adSlotAboveNav}
-                    positionStyles={css`
-                        position: relative;
-                    `}
+                <div
+                    id="dfp-ad--top-above-nav"
+                    className={cx(
+                        'js-ad-slot',
+                        'ad-slot',
+                        'ad-slot--top-above-nav',
+                        'ad-slot--mpu-banner-ad',
+                        'ad-slot--rendered',
+                        css`
+                            position: relative;
+                        `,
+                        labelStyles,
+                        adSlotAboveNav,
+                    )}
+                    data-link-name="ad slot top-above-nav"
+                    data-name="top-above-nav"
+                    // The sizes here come from two places in the frontend code
+                    // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                    data-tablet={`${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`}
+                    data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`}
+                    // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                    aria-hidden="true"
                 />
             );
         }
         case 'mostpop': {
             return (
-                <AdSlotCore
-                    name="mostpop"
-                    adTypes={['mpu-banner-ad', 'rendered']}
-                    sizeMapping={{
-                        // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`,
-
-                        'data-tablet': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`,
-                        'data-phablet': `${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`,
-                        'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
-                    }}
-                    optClassNames={['js-sticky-mpu']}
-                    positionStyles={css`
-                        position: relative;
-                    `}
+                <div
+                    id="dfp-ad--mostpop"
+                    className={cx(
+                        'js-ad-slot',
+                        'ad-slot',
+                        'ad-slot--mostpop',
+                        'ad-slot--mpu-banner-ad',
+                        'ad-slot--rendered',
+                        css`
+                            position: relative;
+                        `,
+                        labelStyles,
+                    )}
+                    data-link-name="ad slot mostpop"
+                    data-name="mostpop"
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`}
+                    data-tablet={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`}
+                    data-phablet={`${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`}
+                    data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                    aria-hidden="true"
                 />
             );
         }
         case 'merchandising-high': {
             return (
-                <AdSlotCore
-                    name="merchandising-high"
-                    adTypes={[]}
-                    sizeMapping={{
-                        // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
-                    }}
-                    optClassNames={[]}
-                    positionStyles={css`
-                        position: relative;
-                    `}
+                <div
+                    id="dfp-ad--merchandising-high"
+                    className={cx(
+                        'js-ad-slot',
+                        'ad-slot',
+                        'ad-slot--merchandising-high',
+                        css`
+                            position: relative;
+                        `,
+                        labelStyles,
+                    )}
+                    data-link-name="ad slot merchandising-high"
+                    data-name="merchandising-high"
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`}
+                    aria-hidden="true"
                 />
             );
         }
         case 'merchandising': {
+            // js-ad-slot ad-slot ad-slot--merchandising
             return (
-                <AdSlotCore
-                    name="merchandising"
-                    adTypes={[]}
-                    sizeMapping={{
-                        // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
-                    }}
-                    optClassNames={[]}
-                    positionStyles={css`
-                        position: relative;
-                    `}
+                <div
+                    id="dfp-ad--merchandising"
+                    className={cx(
+                        'js-ad-slot',
+                        'ad-slot',
+                        'ad-slot--merchandising',
+                        css`
+                            position: relative;
+                        `,
+                        labelStyles,
+                    )}
+                    data-link-name="ad slot merchandising"
+                    data-name="merchandising"
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`}
+                    aria-hidden="true"
                 />
             );
         }
