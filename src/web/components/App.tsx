@@ -431,7 +431,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         kicker={audioAtom.kicker}
                         title={audioAtom.title}
                         pillar={pillar}
-                        CAPI={CAPI}
+                        contentIsNotSensitive={!CAPI.config.isSensitive}
+                        aCastisEnabled={CAPI.config.switches.acast}
+                        readerCanBeShownAds={!CAPI.isAdFreeUser}
                     />
                 </Hydrate>
             ))}

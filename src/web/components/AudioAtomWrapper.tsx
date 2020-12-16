@@ -12,7 +12,9 @@ type Props = {
     kicker: string;
     title?: string | undefined;
     pillar: Pillar;
-    CAPI: CAPIBrowserType;
+    contentIsNotSensitive: boolean;
+    aCastisEnabled: boolean;
+    readerCanBeShownAds: boolean;
 };
 
 export const AudioAtomWrapper = ({
@@ -21,7 +23,9 @@ export const AudioAtomWrapper = ({
     kicker,
     title,
     pillar,
-    CAPI,
+    contentIsNotSensitive,
+    aCastisEnabled,
+    readerCanBeShownAds,
 }: Props) => {
     // *****************
     // *     ACast     *
@@ -33,9 +37,6 @@ export const AudioAtomWrapper = ({
             // state to true, triggering a rerender of AudioAtom using a new track url
             // (one with adverts)
             const consentGiven = getConsentFor('acast', state);
-            const aCastisEnabled = CAPI.config.switches.acast;
-            const readerCanBeShownAds = !CAPI.isAdFreeUser;
-            const contentIsNotSensitive = !CAPI.config.isSensitive;
             if (
                 aCastisEnabled &&
                 consentGiven &&
@@ -45,11 +46,7 @@ export const AudioAtomWrapper = ({
                 setShouldUseAcast(true);
             }
         });
-    }, [
-        CAPI.config.isSensitive,
-        CAPI.config.switches.acast,
-        CAPI.isAdFreeUser,
-    ]);
+    }, [contentIsNotSensitive, aCastisEnabled, readerCanBeShownAds]);
 
     return (
         <AudioAtom
