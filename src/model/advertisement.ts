@@ -6,71 +6,65 @@
     ... in the frontend code
  */
 
-const adSizeNameToValues = (name: string): [number, number] => {
+const adSizeNameToValues = (name: string): string => {
     // These values mirror frontend file with mark: 1b109a4a-791c-4214-acd2-2720d7d9f96f
     switch (name) {
         // standard ad sizes
         case 'billboard':
-            return [970, 250];
+            return '970, 250';
         case 'leaderboard':
-            return [728, 90];
+            return '728, 90';
         case 'mpu':
-            return [300, 250];
+            return '300, 250';
         case 'halfPage':
-            return [300, 600];
+            return '300, 600';
         case 'portrait':
-            return [300, 1050];
+            return '300, 1050';
         case 'skyscraper':
-            return [160, 600];
+            return '160, 600';
         case 'mobilesticky':
-            return [320, 50];
+            return '320, 50';
 
         // dfp proprietary ad sizes
         case 'fluid':
-            return [0, 0];
+            return 'fluid';
         case 'outOfPage':
-            return [1, 1];
+            return '1, 1';
         case 'googleCard':
-            return [300, 274];
+            return '300, 274';
 
         // guardian proprietary ad sizes
         case 'video':
-            return [620, 1];
+            return '620, 1';
         case 'outstreamDesktop':
-            return [620, 350];
+            return '620, 350';
         case 'outstreamGoogleDesktop':
-            return [550, 310];
+            return '550, 310';
         case 'outstreamMobile':
-            return [300, 197];
+            return '300, 197';
         case 'merchandisingHighAdFeature':
-            return [88, 89];
+            return '88, 89';
         case 'merchandisingHigh':
-            return [88, 87];
+            return '88, 87';
         case 'merchandising':
-            return [88, 88];
+            return '88, 88';
         case 'inlineMerchandising':
-            return [88, 85];
+            return '88, 85';
         case 'fabric':
-            return [88, 71];
+            return '88, 71';
         case 'empty':
-            return [2, 2];
+            return '2, 2';
 
         // default
         default:
-            return [1, 1];
+            return '1, 1';
     }
 };
 
 const adSizeNamesToString = (names: string[]): string => {
     return names
         .map((name) => {
-            const values = adSizeNameToValues(name);
-            const width = values[0];
-            const height = values[1];
-            if (width === 0 && height === 0) {
-                return 'fluid';
-            }
-            return `${width},${height}`;
+            return adSizeNameToValues(name);
         })
         .join('|');
 };
