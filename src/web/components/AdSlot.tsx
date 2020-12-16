@@ -9,7 +9,6 @@ import { from } from '@guardian/src-foundations/mq';
 type Props = {
     position: AdSlotType;
     localStyles?: string;
-    isSticky?: boolean;
     heightToStick?: string;
 };
 
@@ -349,24 +348,48 @@ const AdSlotCore: React.FC<{
 export const AdSlot: React.FC<Props> = ({
     position,
     localStyles,
-    isSticky,
     heightToStick,
 }) => {
     const asps = namedAdSlotParameters(position);
 
-    if (isSticky) {
-        return (
-            <div
-                className={css`
-                    position: static;
-                    height: ${heightToStick || '100%'};
-                `}
-            >
-                <AdSlotCore {...asps} isSticky={true} />
-            </div>
-        );
+    switch (position) {
+        case 'right': {
+            return (
+                <div
+                    className={css`
+                        position: static;
+                        height: ${heightToStick || '100%'};
+                    `}
+                >
+                    <AdSlotCore {...asps} isSticky={true} />
+                </div>
+            );
+        }
+        case 'comments': {
+            return (
+                <div
+                    className={css`
+                        position: static;
+                        height: ${heightToStick || '100%'};
+                    `}
+                >
+                    <AdSlotCore {...asps} isSticky={true} />
+                </div>
+            );
+        }
+        case 'top-above-nav': {
+            return <AdSlotCore {...asps} localStyles={localStyles} />;
+        }
+        case 'mostpop': {
+            return <AdSlotCore {...asps} localStyles={localStyles} />;
+        }
+        case 'merchandising-high': {
+            return <AdSlotCore {...asps} localStyles={localStyles} />;
+        }
+        case 'merchandising': {
+            return <AdSlotCore {...asps} localStyles={localStyles} />;
+        }
     }
-    return <AdSlotCore {...asps} localStyles={localStyles} />;
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {

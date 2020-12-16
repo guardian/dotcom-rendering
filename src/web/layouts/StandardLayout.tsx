@@ -568,7 +568,6 @@ export const StandardLayout = ({
                             <RightColumn>
                                 <AdSlot
                                     position="right"
-                                    isSticky={true}
                                     heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
                                 {!isPaidContent ? (

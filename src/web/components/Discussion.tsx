@@ -250,10 +250,7 @@ export const Discussion = ({
                                         padding-left: 20px;
                                     `}
                                 >
-                                    <AdSlot
-                                        position="comments"
-                                        isSticky={true}
-                                    />
+                                    <AdSlot position="comments" />
                                 </div>
                             </RightColumn>
                         )}
