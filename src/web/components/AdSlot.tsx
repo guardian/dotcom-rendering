@@ -159,7 +159,6 @@ const AdSlotCore: React.FC<{
     name: AdSlotType;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
-    optId?: string;
     optClassNames?: string[];
     localStyles?: string;
     positionStyles: string;
@@ -167,7 +166,6 @@ const AdSlotCore: React.FC<{
     name,
     adTypes,
     sizeMapping,
-    optId,
     optClassNames,
     localStyles,
     positionStyles,
@@ -175,7 +173,7 @@ const AdSlotCore: React.FC<{
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
-            id={`dfp-ad--${optId || name}`}
+            id={`dfp-ad--${name}`}
             className={`${makeClassNames(
                 name,
                 adTypes,
@@ -210,7 +208,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                             ],
                             // mark: 01303e88-ef1f-462d-9b6e-242419435cec
                         }}
-                        optId={undefined}
                         optClassNames={['js-sticky-mpu']}
                         positionStyles={css`
                             position: sticky;
@@ -242,7 +239,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                                 `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
                             ],
                         }}
-                        optId={undefined}
                         optClassNames={['js-sticky-mpu']}
                         positionStyles={css`
                             position: sticky;
@@ -277,7 +273,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                             `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
                         ], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     }}
-                    optId={undefined}
                     optClassNames={[]}
                     localStyles={adSlotAboveNav}
                     positionStyles={css`
@@ -306,7 +301,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                             `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
                         ],
                     }}
-                    optId={undefined}
                     optClassNames={['js-sticky-mpu']}
                     positionStyles={css`
                         position: relative;
@@ -325,7 +319,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                             `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
                         ],
                     }}
-                    optId={undefined}
                     optClassNames={[]}
                     positionStyles={css`
                         position: relative;
@@ -344,7 +337,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                             `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
                         ],
                     }}
-                    optId={undefined}
                     optClassNames={[]}
                     positionStyles={css`
                         position: relative;
