@@ -253,10 +253,7 @@ export const Discussion = ({
                                 >
                                     <AdSlot
                                         asps={namedAdSlotParameters('comments')}
-                                        localStyles={css`
-                                            position: sticky;
-                                            top: 0;
-                                        `}
+                                        isSticky={true}
                                     />
                                 </div>
                             </RightColumn>

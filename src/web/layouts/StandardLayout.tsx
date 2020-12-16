@@ -14,7 +14,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -568,9 +567,10 @@ export const StandardLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <StickyAd
-                                    name="right"
-                                    height={MOSTVIEWED_STICKY_HEIGHT}
+                                <AdSlot
+                                    asps={namedAdSlotParameters('right')}
+                                    isSticky={true}
+                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />

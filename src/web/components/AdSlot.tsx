@@ -1,13 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { css } from 'emotion';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-
-const positionRelative = css`
-    position: relative;
-`;
 
 export const labelStyles = css`
     .ad-slot__label,
@@ -130,6 +127,7 @@ const AdSlotCore: React.FC<{
     optId?: string;
     optClassNames?: string[];
     localStyles?: string;
+    isSticky?: boolean;
 }> = ({
     name,
     adTypes,
@@ -141,6 +139,7 @@ const AdSlotCore: React.FC<{
     optId,
     optClassNames,
     localStyles,
+    isSticky,
 }) => {
     // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
@@ -148,6 +147,15 @@ const AdSlotCore: React.FC<{
     //     ...(refresh && { 'data-refresh': true }),
     //     ...(outOfPage && { 'data-out-of-page': true }),
     // });
+
+    const postionStyles = isSticky
+        ? css`
+              position: sticky;
+              top: 0;
+          `
+        : css`
+              position: relative;
+          `;
 
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
@@ -157,7 +165,7 @@ const AdSlotCore: React.FC<{
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${positionRelative} ${localStyles} ${labelStyles}`}
+            )} ${postionStyles} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -171,8 +179,21 @@ const AdSlotCore: React.FC<{
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
     localStyles?: string;
-}> = ({ asps, localStyles }) => {
-    // eslint-disable-next-line react/jsx-props-no-spreading
+    isSticky?: boolean;
+    heightToStick?: string;
+}> = ({ asps, localStyles, isSticky, heightToStick }) => {
+    if (isSticky) {
+        return (
+            <div
+                className={css`
+                    position: static;
+                    height: ${heightToStick || '100%'};
+                `}
+            >
+                <AdSlotCore {...asps} isSticky={true} />
+            </div>
+        );
+    }
     return <AdSlotCore {...asps} localStyles={localStyles} />;
 };
 
