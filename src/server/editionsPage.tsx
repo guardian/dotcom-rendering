@@ -4,7 +4,7 @@ import { CacheProvider } from '@emotion/core';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option } from '@guardian/types';
 import { none } from '@guardian/types';
-import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
+import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import Article from 'components/editions/article';
 import type { EmotionCritical } from 'create-emotion-server';
@@ -15,7 +15,7 @@ import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
 import { renderToString } from 'react-dom/server';
-import { buildCsp } from 'server/csp';
+import { cspEditions } from 'server/csp';
 import { pageFonts } from 'styles';
 
 // ----- Types ----- //
@@ -44,16 +44,11 @@ const renderHead = (
 	thirdPartyEmbeds: ThirdPartyEmbeds,
 	itemStyles: string,
 	emotionIds: string[],
-	inlineStyles: boolean,
 ): string => {
-	const generalStyles = styles;
-	const cspString = buildCsp(
-		{
-			scripts: [],
-			styles: [generalStyles, itemStyles],
-		},
+
+	const cspString = cspEditions(
+		{ scripts: [], styles: [styles, itemStyles] },
 		thirdPartyEmbeds,
-		inlineStyles,
 	);
 
 	return `
@@ -61,7 +56,7 @@ const renderHead = (
 		<title>${request.content.webTitle}</title>
 		<meta name="viewport" content="initial-scale=1" />
 		<meta http-equiv="Content-Security-Policy" content="${cspString}" />
-        <style>${generalStyles}</style>
+        <style>${styles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
     `;
 };
@@ -97,7 +92,6 @@ function render(imageSalt: string, request: RenderingRequest): Page {
 		getThirdPartyEmbeds(request.content),
 		body.css,
 		body.ids,
-		requiresInlineStyles(request.content),
 	);
 
 	return {
