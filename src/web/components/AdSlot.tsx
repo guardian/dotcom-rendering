@@ -161,9 +161,6 @@ const AdSlotCore: React.FC<{
     name: AdSlotType;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
     optId?: string;
     optClassNames?: string[];
     localStyles?: string;
@@ -172,22 +169,11 @@ const AdSlotCore: React.FC<{
     name,
     adTypes,
     sizeMapping,
-    // TODO: Do we need to respect these three properties?
-    // showLabel = true,
-    // refresh = true,
-    // outOfPage = false,
     optId,
     optClassNames,
     localStyles,
     positionStyles,
 }) => {
-    // Will export `getOptionalProps` as a function if/when needed - Pascal.
-    // const getOptionalProps = (): object => ({
-    //     ...(showLabel && { 'data-label': true }),
-    //     ...(refresh && { 'data-refresh': true }),
-    //     ...(outOfPage && { 'data-out-of-page': true }),
-    // });
-
     const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
@@ -230,9 +216,6 @@ export const AdSlot: React.FC<Props> = ({
                             ],
                             // mark: 01303e88-ef1f-462d-9b6e-242419435cec
                         }}
-                        showLabel={true}
-                        refresh={false}
-                        outOfPage={false}
                         optId={undefined}
                         optClassNames={['js-sticky-mpu']}
                         positionStyles={css`
@@ -265,9 +248,6 @@ export const AdSlot: React.FC<Props> = ({
                                 `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
                             ],
                         }}
-                        showLabel={true}
-                        refresh={false}
-                        outOfPage={false}
                         optId={undefined}
                         optClassNames={['js-sticky-mpu']}
                         positionStyles={css`
@@ -294,9 +274,6 @@ export const AdSlot: React.FC<Props> = ({
                             `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
                         ], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     }}
-                    showLabel={true}
-                    refresh={false}
-                    outOfPage={false}
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
@@ -326,9 +303,6 @@ export const AdSlot: React.FC<Props> = ({
                             `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
                         ],
                     }}
-                    showLabel={true}
-                    refresh={false}
-                    outOfPage={false}
                     optId={undefined}
                     optClassNames={['js-sticky-mpu']}
                     localStyles={localStyles}
@@ -349,9 +323,6 @@ export const AdSlot: React.FC<Props> = ({
                             `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
                         ],
                     }}
-                    showLabel={false}
-                    refresh={false}
-                    outOfPage={false}
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
@@ -372,9 +343,6 @@ export const AdSlot: React.FC<Props> = ({
                             `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
                         ],
                     }}
-                    showLabel={false}
-                    refresh={false}
-                    outOfPage={false}
                     optId={undefined}
                     optClassNames={[]}
                     localStyles={localStyles}
