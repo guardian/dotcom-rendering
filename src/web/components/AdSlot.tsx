@@ -278,7 +278,6 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
             );
         }
         case 'merchandising': {
-            // js-ad-slot ad-slot ad-slot--merchandising
             return (
                 <div
                     id="dfp-ad--merchandising"
