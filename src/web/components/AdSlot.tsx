@@ -126,24 +126,8 @@ const mobileStickyAdStyles = css`
 `;
 
 interface AdSlotInputSizeMappings {
-    [key: string]: string[];
-}
-
-interface AdSlotInternalSizeMappings {
     [key: string]: string;
 }
-
-export const makeInternalSizeMappings = (
-    inputSizeMapping: AdSlotInputSizeMappings,
-): AdSlotInternalSizeMappings => {
-    return Object.keys(inputSizeMapping).reduce(
-        (m: { [key: string]: string }, key) => {
-            m[`data-${key}`] = inputSizeMapping[key].join('|');
-            return m;
-        },
-        {},
-    );
-};
 
 export const makeClassNames = (
     name: AdSlotType,
@@ -170,7 +154,6 @@ const AdSlotCore: React.FC<{
     localStyles,
     positionStyles,
 }) => {
-    const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
             id={`dfp-ad--${name}`}
@@ -182,7 +165,7 @@ const AdSlotCore: React.FC<{
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...sizeMappings}
+            {...sizeMapping}
             aria-hidden="true"
         />
     );
@@ -203,9 +186,7 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                         name="right"
                         adTypes={['mpu-banner-ad', 'rendered']}
                         sizeMapping={{
-                            mobile: [
-                                `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
-                            ],
+                            'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
                             // mark: 01303e88-ef1f-462d-9b6e-242419435cec
                         }}
                         optClassNames={['js-sticky-mpu']}
@@ -229,15 +210,9 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                         name="comments"
                         adTypes={['mpu-banner-ad', 'rendered']}
                         sizeMapping={{
-                            mobile: [
-                                `${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`,
-                            ],
-                            desktop: [
-                                `${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`,
-                            ],
-                            phablet: [
-                                `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
-                            ],
+                            'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`,
+                            'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`,
+                            'data-phablet': `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
                         }}
                         optClassNames={['js-sticky-mpu']}
                         positionStyles={css`
@@ -266,12 +241,9 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                         // The sizes here come from two places in the frontend code
                         // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                         // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-                        tablet: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`,
-                        ],
-                        desktop: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
-                        ], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                        'data-tablet': `${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`,
+                        'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
+                        // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     }}
                     optClassNames={[]}
                     localStyles={adSlotAboveNav}
@@ -288,18 +260,11 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                     adTypes={['mpu-banner-ad', 'rendered']}
                     sizeMapping={{
                         // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        mobile: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`,
-                        ],
-                        tablet: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`,
-                        ],
-                        phablet: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`,
-                        ],
-                        desktop: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
-                        ],
+                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`,
+
+                        'data-tablet': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`,
+                        'data-phablet': `${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`,
+                        'data-desktop': `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
                     }}
                     optClassNames={['js-sticky-mpu']}
                     positionStyles={css`
@@ -315,9 +280,7 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                     adTypes={[]}
                     sizeMapping={{
                         // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        mobile: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
-                        ],
+                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
                     }}
                     optClassNames={[]}
                     positionStyles={css`
@@ -333,9 +296,7 @@ export const AdSlot: React.FC<Props> = ({ position }) => {
                     adTypes={[]}
                     sizeMapping={{
                         // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                        mobile: [
-                            `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
-                        ],
+                        'data-mobile': `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
                     }}
                     optClassNames={[]}
                     positionStyles={css`

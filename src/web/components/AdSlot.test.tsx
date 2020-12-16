@@ -1,15 +1,6 @@
-import { makeInternalSizeMappings, makeClassNames } from './AdSlot';
+import { makeClassNames } from './AdSlot';
 
 describe('AdSlot', () => {
-    it('It should compute the internal size mappings correctly', () => {
-        const inputSizeMappings = {
-            mobile: ['1,1|2,2|300,250|300,274|300,600|fluid|300,1050'],
-        };
-        expect(
-            makeInternalSizeMappings(inputSizeMappings).mobile ===
-                '1,1|2,2|300,250|300,274|300,600|fluid|300,1050',
-        );
-    });
     it('It should compute class names correctly', () => {
         const name = 'right';
         const adTypes = ['mpu-banner-ad', 'rendered'];
