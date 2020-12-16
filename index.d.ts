@@ -721,19 +721,6 @@ type AdSlotType =
     | 'merchandising'
     | 'comments';
 
-interface AdSlotParameters {
-    name: AdSlotType;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
-
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
