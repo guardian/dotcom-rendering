@@ -6,68 +6,31 @@
     ... in the frontend code
  */
 
-const adSizeNameToValues = (name: string): string => {
-    // These values mirror frontend file with mark: 1b109a4a-791c-4214-acd2-2720d7d9f96f
-    switch (name) {
-        // standard ad sizes
-        case 'billboard':
-            return '970, 250';
-        case 'leaderboard':
-            return '728, 90';
-        case 'mpu':
-            return '300, 250';
-        case 'halfPage':
-            return '300, 600';
-        case 'portrait':
-            return '300, 1050';
-        case 'skyscraper':
-            return '160, 600';
-        case 'mobilesticky':
-            return '320, 50';
-
-        // dfp proprietary ad sizes
-        case 'fluid':
-            return 'fluid';
-        case 'outOfPage':
-            return '1, 1';
-        case 'googleCard':
-            return '300, 274';
-
-        // guardian proprietary ad sizes
-        case 'video':
-            return '620, 1';
-        case 'outstreamDesktop':
-            return '620, 350';
-        case 'outstreamGoogleDesktop':
-            return '550, 310';
-        case 'outstreamMobile':
-            return '300, 197';
-        case 'merchandisingHighAdFeature':
-            return '88, 89';
-        case 'merchandisingHigh':
-            return '88, 87';
-        case 'merchandising':
-            return '88, 88';
-        case 'inlineMerchandising':
-            return '88, 85';
-        case 'fabric':
-            return '88, 71';
-        case 'empty':
-            return '2, 2';
-
-        // default
-        default:
-            return '1, 1';
-    }
-};
-
-const adSizeNamesToString = (names: string[]): string => {
-    return names
-        .map((name) => {
-            return adSizeNameToValues(name);
-        })
-        .join('|');
-};
+enum Size {
+    // standard ad sizes
+    billboard = '970,250',
+    leaderboard = '728,90',
+    mpu = '300,250',
+    halfPage = '300,600',
+    portrait = '300,1050',
+    skyscraper = '160,600',
+    mobilesticky = '320,50',
+    // dfp proprietary ad sizes
+    fluid = 'fluid',
+    outOfPage = '1,1',
+    googleCard = '300,274',
+    // guardian proprietary ad sizes
+    video = '620,1',
+    outstreamDesktop = '620,350',
+    outstreamGoogleDesktop = '550,310',
+    outstreamMobile = '300,197',
+    merchandisingHighAdFeature = '88,89',
+    merchandisingHigh = '88,87',
+    merchandising = '88,88',
+    inlineMerchandising = '88,85',
+    fabric = '88,71',
+    empty = '2,2',
+}
 
 export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
     // The current parameters have been taken from looking at an example of right MPU on an article.
@@ -79,7 +42,9 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                 name: 'right',
                 adTypes: ['mpu-banner-ad', 'rendered'],
                 sizeMapping: {
-                    mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
+                    mobile: [
+                        `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
+                    ],
                     // mark: 01303e88-ef1f-462d-9b6e-242419435cec
                 },
                 showLabel: true,
@@ -94,11 +59,15 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                 name: 'comments',
                 adTypes: ['mpu-banner-ad', 'rendered'],
                 sizeMapping: {
-                    mobile: ['1,1|2,2|300,600|fluid'],
-                    desktop: [
-                        '1,1|2,2|620,1|620,350|550,310|fluid|300,600|160,600',
+                    mobile: [
+                        `${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`,
                     ],
-                    phablet: ['1,1|2,2|620,350|550,310|fluid'],
+                    desktop: [
+                        `${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`,
+                    ],
+                    phablet: [
+                        `${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`,
+                    ],
                 },
                 showLabel: true,
                 refresh: false,
@@ -116,18 +85,10 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                     // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                     // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     tablet: [
-                        [
-                            adSizeNamesToString([
-                                'outOfPage',
-                                'empty',
-                                'fabric',
-                                'fluid',
-                                'leaderboard',
-                            ]),
-                        ].join('|'),
+                        `${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`,
                     ],
                     desktop: [
-                        '1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid',
+                        `${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`,
                     ], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                 },
                 showLabel: true,
@@ -144,48 +105,16 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                 sizeMapping: {
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                     mobile: [
-                        adSizeNamesToString([
-                            'outOfPage',
-                            'empty',
-                            'mpu',
-                            'googleCard',
-                            'fluid',
-                        ]),
+                        `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`,
                     ],
                     tablet: [
-                        [
-                            adSizeNamesToString([
-                                'outOfPage',
-                                'empty',
-                                'mpu',
-                                'googleCard',
-                                'halfPage',
-                                'leaderboard',
-                                'fluid',
-                            ]),
-                        ].join('|'),
+                        `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`,
                     ],
                     phablet: [
-                        adSizeNamesToString([
-                            'outOfPage',
-                            'empty',
-                            'outstreamMobile',
-                            'mpu',
-                            'googleCard',
-                            'outstreamDesktop',
-                            'outstreamGoogleDesktop',
-                            'fluid',
-                        ]),
+                        `${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`,
                     ],
                     desktop: [
-                        adSizeNamesToString([
-                            'outOfPage',
-                            'empty',
-                            'mpu',
-                            'googleCard',
-                            'halfPage',
-                            'fluid',
-                        ]),
+                        `${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`,
                     ],
                 },
                 showLabel: true,
@@ -202,12 +131,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                 sizeMapping: {
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                     mobile: [
-                        adSizeNamesToString([
-                            'outOfPage',
-                            'empty',
-                            'merchandisingHigh',
-                            'fluid',
-                        ]),
+                        `${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`,
                     ],
                 },
                 showLabel: false,
@@ -224,12 +148,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
                 sizeMapping: {
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                     mobile: [
-                        adSizeNamesToString([
-                            'outOfPage',
-                            'empty',
-                            'merchandising',
-                            'fluid',
-                        ]),
+                        `${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`,
                     ],
                 },
                 showLabel: false,
