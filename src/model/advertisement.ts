@@ -76,161 +76,174 @@ const adSizeNamesToString = (names: string[]): string => {
 };
 
 export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
-    const mapping: { [key: string]: AdSlotParameters } = {
-        // The current parameters have been taken from looking at an example of right MPU on an article.
-        // regular article: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu ad-slot--rendered
-        // dotcom rendering: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad ad-slot--rendered js-sticky-mpu
-        right: {
-            name: 'right',
-            adTypes: ['mpu-banner-ad', 'rendered'],
-            sizeMapping: {
-                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
-                // mark: 01303e88-ef1f-462d-9b6e-242419435cec
-            },
-            showLabel: true,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: ['js-sticky-mpu'],
-        },
-        comments: {
-            name: 'comments',
-            adTypes: ['mpu-banner-ad', 'rendered'],
-            sizeMapping: {
-                mobile: ['1,1|2,2|300,600|fluid'],
-                desktop: [
-                    '1,1|2,2|620,1|620,350|550,310|fluid|300,600|160,600',
-                ],
-                phablet: ['1,1|2,2|620,350|550,310|fluid'],
-            },
-            showLabel: true,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: ['js-sticky-mpu'],
-        },
-        'top-above-nav': {
-            name: 'top-above-nav',
-            adTypes: ['mpu-banner-ad', 'rendered'],
-            sizeMapping: {
-                // The sizes here come from two places in the frontend code
-                // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-                tablet: [
-                    [
+    // The current parameters have been taken from looking at an example of right MPU on an article.
+    // regular article: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu ad-slot--rendered
+    // dotcom rendering: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad ad-slot--rendered js-sticky-mpu
+    switch (name) {
+        case 'right': {
+            return {
+                name: 'right',
+                adTypes: ['mpu-banner-ad', 'rendered'],
+                sizeMapping: {
+                    mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
+                    // mark: 01303e88-ef1f-462d-9b6e-242419435cec
+                },
+                showLabel: true,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: ['js-sticky-mpu'],
+            };
+        }
+        case 'comments': {
+            return {
+                name: 'comments',
+                adTypes: ['mpu-banner-ad', 'rendered'],
+                sizeMapping: {
+                    mobile: ['1,1|2,2|300,600|fluid'],
+                    desktop: [
+                        '1,1|2,2|620,1|620,350|550,310|fluid|300,600|160,600',
+                    ],
+                    phablet: ['1,1|2,2|620,350|550,310|fluid'],
+                },
+                showLabel: true,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: ['js-sticky-mpu'],
+            };
+        }
+        case 'top-above-nav': {
+            return {
+                name: 'top-above-nav',
+                adTypes: ['mpu-banner-ad', 'rendered'],
+                sizeMapping: {
+                    // The sizes here come from two places in the frontend code
+                    // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                    tablet: [
+                        [
+                            adSizeNamesToString([
+                                'outOfPage',
+                                'empty',
+                                'fabric',
+                                'fluid',
+                                'leaderboard',
+                            ]),
+                        ].join('|'),
+                    ],
+                    desktop: [
+                        '1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid',
+                    ], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                },
+                showLabel: true,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: [],
+            };
+        }
+        case 'mostpop': {
+            return {
+                name: 'mostpop',
+                adTypes: ['mpu-banner-ad', 'rendered'],
+                sizeMapping: {
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    mobile: [
                         adSizeNamesToString([
                             'outOfPage',
                             'empty',
-                            'fabric',
+                            'mpu',
+                            'googleCard',
                             'fluid',
-                            'leaderboard',
                         ]),
-                    ].join('|'),
-                ],
-                desktop: ['1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid'], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-            },
-            showLabel: true,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: [],
-        },
-        mostpop: {
-            name: 'mostpop',
-            adTypes: ['mpu-banner-ad', 'rendered'],
-            sizeMapping: {
-                // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                mobile: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'mpu',
-                        'googleCard',
-                        'fluid',
-                    ]),
-                ],
-                tablet: [
-                    [
+                    ],
+                    tablet: [
+                        [
+                            adSizeNamesToString([
+                                'outOfPage',
+                                'empty',
+                                'mpu',
+                                'googleCard',
+                                'halfPage',
+                                'leaderboard',
+                                'fluid',
+                            ]),
+                        ].join('|'),
+                    ],
+                    phablet: [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'outstreamMobile',
+                            'mpu',
+                            'googleCard',
+                            'outstreamDesktop',
+                            'outstreamGoogleDesktop',
+                            'fluid',
+                        ]),
+                    ],
+                    desktop: [
                         adSizeNamesToString([
                             'outOfPage',
                             'empty',
                             'mpu',
                             'googleCard',
                             'halfPage',
-                            'leaderboard',
                             'fluid',
                         ]),
-                    ].join('|'),
-                ],
-                phablet: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'outstreamMobile',
-                        'mpu',
-                        'googleCard',
-                        'outstreamDesktop',
-                        'outstreamGoogleDesktop',
-                        'fluid',
-                    ]),
-                ],
-                desktop: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'mpu',
-                        'googleCard',
-                        'halfPage',
-                        'fluid',
-                    ]),
-                ],
-            },
-            showLabel: true,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: ['js-sticky-mpu'],
-        },
-        'merchandising-high': {
-            name: 'merchandising-high',
-            adTypes: [],
-            sizeMapping: {
-                // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                mobile: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'merchandisingHigh',
-                        'fluid',
-                    ]),
-                ],
-            },
-            showLabel: false,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: [],
-        },
-        merchandising: {
-            name: 'merchandising',
-            adTypes: [],
-            sizeMapping: {
-                // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                mobile: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'merchandising',
-                        'fluid',
-                    ]),
-                ],
-            },
-            showLabel: false,
-            refresh: false,
-            outOfPage: false,
-            optId: undefined,
-            optClassNames: [],
-        },
-    };
-    return mapping[name];
+                    ],
+                },
+                showLabel: true,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: ['js-sticky-mpu'],
+            };
+        }
+        case 'merchandising-high': {
+            return {
+                name: 'merchandising-high',
+                adTypes: [],
+                sizeMapping: {
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    mobile: [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'merchandisingHigh',
+                            'fluid',
+                        ]),
+                    ],
+                },
+                showLabel: false,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: [],
+            };
+        }
+        case 'merchandising': {
+            return {
+                name: 'merchandising',
+                adTypes: [],
+                sizeMapping: {
+                    // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                    mobile: [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'merchandising',
+                            'fluid',
+                        ]),
+                    ],
+                },
+                showLabel: false,
+                refresh: false,
+                outOfPage: false,
+                optId: undefined,
+                optClassNames: [],
+            };
+        }
+    }
 };
