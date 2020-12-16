@@ -145,12 +145,13 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
 };
 
 const requiresInlineStyles = (content: Content): boolean => {
-	return !!(
-		content.fields?.commentable ??
-		content.atoms?.quizzes ??
-		content.atoms?.audios ??
-		content.atoms?.charts
-	);
+	// return !!(
+	//	   content.fields?.commentable ??
+	//	   content.atoms?.quizzes ??
+	//	   content.atoms?.audios ??
+	//	   content.atoms?.charts
+	// );
+	return false;
 };
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
