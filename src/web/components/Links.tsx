@@ -164,7 +164,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
     return (
         <div data-print-layout='hide' className={linksStyles}>
 
-            {giftingURL !== '' ? (
+            {giftingURL !== '' && (
                 <>
                     <div className={seperatorStyles} />
                     <a
@@ -176,7 +176,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
                     Gifting
                     </a>
                 </>
-            ): null}
+            )}
 
             <div className={seperatorStyles} />
             <a
