@@ -6,13 +6,6 @@
     ... in the frontend code
  */
 
-const adSizesToString = (width: number, height: number): string => {
-    if (width === 0 && height === 0) {
-        return 'fluid';
-    }
-    return `${width},${height}`;
-};
-
 const adSizeNameToValues = (name: string): [number, number] => {
     // These values mirror frontend file with mark: 1b109a4a-791c-4214-acd2-2720d7d9f96f
     switch (name) {
@@ -72,7 +65,12 @@ const adSizeNamesToString = (names: string[]): string => {
     return names
         .map((name) => {
             const values = adSizeNameToValues(name);
-            return adSizesToString(values[0], values[1]);
+            const width = values[0];
+            const height = values[1];
+            if (width === 0 && height === 0) {
+                return 'fluid';
+            }
+            return `${width},${height}`;
         })
         .join('|');
 };
