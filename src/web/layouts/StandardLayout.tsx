@@ -570,7 +570,7 @@ export const StandardLayout = ({
                                 <AdSlot
                                     asps={namedAdSlotParameters('right')}
                                     isSticky={true}
-                                    heightToStick={MOSTVIEWED_STICKY_HEIGHT}
+                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />

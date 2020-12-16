@@ -180,14 +180,14 @@ export const AdSlot: React.FC<{
     asps: AdSlotParameters;
     localStyles?: string;
     isSticky?: boolean;
-    heightToStick?: number;
+    heightToStick?: string;
 }> = ({ asps, localStyles, isSticky, heightToStick }) => {
     if (isSticky) {
         return (
             <div
                 className={css`
                     position: static;
-                    height: ${heightToStick}px;
+                    height: ${heightToStick || '100%'};
                 `}
             >
                 <AdSlotCore {...asps} isSticky={true} />

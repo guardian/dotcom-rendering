@@ -205,7 +205,7 @@ export const CommentsLayout = ({
                 <AdSlot
                     asps={namedAdSlotParameters('comments')}
                     isSticky={true}
-                    heightToStick={heightToStick}
+                    heightToStick={`${heightToStick}px`}
                 />
             </RightColumn>
         </Flex>
