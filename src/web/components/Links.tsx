@@ -10,10 +10,12 @@ import { from } from '@guardian/src-foundations/mq';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
+import GiftingIcon from '@frontend/static/icons/gifting.svg';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {
+    giftingURL: string;
     userId?: string;
 };
 
@@ -121,7 +123,7 @@ const linksStyles = css`
     ${getZIndex('headerLinks')}
 `;
 
-export const Links = ({ userId }: Props) => {
+export const Links = ({ userId, giftingURL }: Props) => {
     const identityLinks: DropdownLinkType[] = [
         {
             url: `https://manage.theguardian.com/`,
@@ -160,7 +162,22 @@ export const Links = ({ userId }: Props) => {
         },
     ];
     return (
-        <div data-print-layout="hide" className={linksStyles}>
+        <div data-print-layout='hide' className={linksStyles}>
+
+            {giftingURL !== '' && (
+                <>
+                    <div className={seperatorStyles} />
+                    <a
+                        href={giftingURL}
+                        className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+                        data-link-name="nav2 : gifting-cta"
+                    >
+                        <GiftingIcon />
+                    Gifting
+                    </a>
+                </>
+            )}
+
             <div className={seperatorStyles} />
             <a
                 href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
