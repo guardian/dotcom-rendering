@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
 
@@ -43,10 +42,7 @@ export const HeaderAdSlot: React.FC<{
                     [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
                 })}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('top-above-nav')}
-                    localStyles={adSlotAboveNav}
-                />
+                <AdSlot position="top-above-nav" localStyles={adSlotAboveNav} />
             </div>
         </Hide>
     </div>

@@ -12,7 +12,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -568,7 +567,7 @@ export const StandardLayout = ({
                         >
                             <RightColumn>
                                 <AdSlot
-                                    asps={namedAdSlotParameters('right')}
+                                    position="right"
                                     isSticky={true}
                                     heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
@@ -592,7 +591,7 @@ export const StandardLayout = ({
             >
                 <AdSlot
                     data-print-layout="hide"
-                    asps={namedAdSlotParameters('merchandising-high')}
+                    position="merchandising-high"
                 />
             </Section>
 
@@ -655,7 +654,7 @@ export const StandardLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" />
             </Section>
 
             {NAV.subNavSections && (

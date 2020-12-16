@@ -6,7 +6,6 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 import { Lazy } from '@root/src/web/components/Lazy';
 
@@ -111,9 +110,11 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
     const variantFromRunnable =
         (runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 
-
     return (
-        <div data-print-layout='hide' className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+        <div
+            data-print-layout="hide"
+            className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}
+        >
             <div
                 className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
                 data-link-name="most-popular"
@@ -139,7 +140,7 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
                             margin: 6px 0 0 10px;
                         `}
                     >
-                        <AdSlot asps={namedAdSlotParameters('mostpop')} />
+                        <AdSlot position="mostpop" />
                     </div>
                 </section>
             </div>

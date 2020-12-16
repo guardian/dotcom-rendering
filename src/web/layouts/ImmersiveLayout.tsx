@@ -9,7 +9,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -548,11 +547,7 @@ export const ImmersiveLayout = ({
                                                 margin-top: ${space[4]}px;
                                             `}
                                         >
-                                            <AdSlot
-                                                asps={namedAdSlotParameters(
-                                                    'right',
-                                                )}
-                                            />
+                                            <AdSlot position="right" />
                                         </div>
                                     )}
                                 </>
@@ -568,7 +563,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" />
             </Section>
 
             {!isPaidContent && (
@@ -614,7 +609,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" />
             </Section>
 
             {NAV.subNavSections && (

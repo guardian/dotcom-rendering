@@ -6,8 +6,10 @@ import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
+
 type Props = {
-    asps: AdSlotParameters;
+    position: AdSlotType;
     localStyles?: string;
     isSticky?: boolean;
     heightToStick?: string;
@@ -184,11 +186,13 @@ const AdSlotCore: React.FC<{
 };
 
 export const AdSlot: React.FC<Props> = ({
-    asps,
+    position,
     localStyles,
     isSticky,
     heightToStick,
 }) => {
+    const asps = namedAdSlotParameters(position);
+
     if (isSticky) {
         return (
             <div

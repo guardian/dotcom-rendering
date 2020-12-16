@@ -11,7 +11,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -535,7 +534,7 @@ export const CommentLayout = ({
                         >
                             <RightColumn>
                                 <AdSlot
-                                    asps={namedAdSlotParameters('right')}
+                                    position="right"
                                     isSticky={true}
                                     heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
                                 />
@@ -556,7 +555,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" />
             </Section>
 
             {!isPaidContent && (
@@ -602,7 +601,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" />
             </Section>
 
             {NAV.subNavSections && (
