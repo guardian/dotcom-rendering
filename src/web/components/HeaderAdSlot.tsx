@@ -20,16 +20,6 @@ const headerAdWrapperHidden = css`
     display: none;
 `;
 
-const adSlotAboveNav = css`
-    margin: 0 auto;
-    height: 151px;
-    padding-bottom: 18px;
-    padding-top: 18px;
-    text-align: left;
-    display: table;
-    width: 728px;
-`;
-
 export const HeaderAdSlot: React.FC<{
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
@@ -42,7 +32,7 @@ export const HeaderAdSlot: React.FC<{
                     [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
                 })}
             >
-                <AdSlot position="top-above-nav" localStyles={adSlotAboveNav} />
+                <AdSlot position="top-above-nav" />
             </div>
         </Hide>
     </div>

@@ -8,7 +8,6 @@ import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     position: AdSlotType;
-    localStyles?: string;
     heightToStick?: string;
 };
 
@@ -192,11 +191,7 @@ const AdSlotCore: React.FC<{
     );
 };
 
-export const AdSlot: React.FC<Props> = ({
-    position,
-    localStyles,
-    heightToStick,
-}) => {
+export const AdSlot: React.FC<Props> = ({ position, heightToStick }) => {
     switch (position) {
         case 'right': {
             return (
@@ -258,6 +253,15 @@ export const AdSlot: React.FC<Props> = ({
             );
         }
         case 'top-above-nav': {
+            const adSlotAboveNav = css`
+                margin: 0 auto;
+                height: 151px;
+                padding-bottom: 18px;
+                padding-top: 18px;
+                text-align: left;
+                display: table;
+                width: 728px;
+            `;
             return (
                 <AdSlotCore
                     name="top-above-nav"
@@ -275,7 +279,7 @@ export const AdSlot: React.FC<Props> = ({
                     }}
                     optId={undefined}
                     optClassNames={[]}
-                    localStyles={localStyles}
+                    localStyles={adSlotAboveNav}
                     positionStyles={css`
                         position: relative;
                     `}
@@ -304,7 +308,6 @@ export const AdSlot: React.FC<Props> = ({
                     }}
                     optId={undefined}
                     optClassNames={['js-sticky-mpu']}
-                    localStyles={localStyles}
                     positionStyles={css`
                         position: relative;
                     `}
@@ -324,7 +327,6 @@ export const AdSlot: React.FC<Props> = ({
                     }}
                     optId={undefined}
                     optClassNames={[]}
-                    localStyles={localStyles}
                     positionStyles={css`
                         position: relative;
                     `}
@@ -344,7 +346,6 @@ export const AdSlot: React.FC<Props> = ({
                     }}
                     optId={undefined}
                     optClassNames={[]}
-                    localStyles={localStyles}
                     positionStyles={css`
                         position: relative;
                     `}
