@@ -52,8 +52,6 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
 
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
-
 const gridTemplateWide = css`
     grid-template-areas:
         'title  border  headline     right-column'
@@ -566,10 +564,7 @@ export const StandardLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot
-                                    position="right"
-                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
-                                />
+                                <AdSlot position="right" />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (

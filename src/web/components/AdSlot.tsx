@@ -8,7 +8,6 @@ import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     position: AdSlotType;
-    heightToStick?: string;
 };
 
 /*
@@ -191,14 +190,15 @@ const AdSlotCore: React.FC<{
     );
 };
 
-export const AdSlot: React.FC<Props> = ({ position, heightToStick }) => {
+export const AdSlot: React.FC<Props> = ({ position }) => {
     switch (position) {
         case 'right': {
+            const MOSTVIEWED_STICKY_HEIGHT = 1059;
             return (
                 <div
                     className={css`
                         position: static;
-                        height: ${heightToStick || '100%'};
+                        height: ${MOSTVIEWED_STICKY_HEIGHT}px;
                     `}
                 >
                     <AdSlotCore
@@ -225,7 +225,7 @@ export const AdSlot: React.FC<Props> = ({ position, heightToStick }) => {
                 <div
                     className={css`
                         position: static;
-                        height: ${heightToStick || '100%'};
+                        height: '100%';
                     `}
                 >
                     <AdSlotCore
