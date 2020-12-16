@@ -45,7 +45,6 @@ const renderHead = (
 	itemStyles: string,
 	emotionIds: string[],
 ): string => {
-
 	const cspString = cspEditions(
 		{ scripts: [], styles: [styles, itemStyles] },
 		thirdPartyEmbeds,
