@@ -126,7 +126,10 @@ const componentEventHandler = (
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
+    const [
+        shouldHideSupportMessaging,
+        setShouldHideSupportMessaging,
+    ] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
     const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
         Promise<string | null>
@@ -158,7 +161,9 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
+        setShouldHideSupportMessaging(
+            getCookie('gu_hide_support_messaging') === 'true',
+        );
     }, []);
 
     useEffect(() => {
@@ -665,7 +670,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
                     asyncBrazeUuid={asyncBrazeUuid}
-                    isDigitalSubscriber={isDigitalSubscriber}
+                    shouldHideSupportMessaging={shouldHideSupportMessaging}
                 />
             </Portal>
         </React.StrictMode>
