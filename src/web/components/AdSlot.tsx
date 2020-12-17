@@ -152,7 +152,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                             data-link-name="ad slot right"
                             data-name="right"
                             // mark: 01303e88-ef1f-462d-9b6e-242419435cec
-                            data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                            data-mobile={[
+                                `${Size.outOfPage}`,
+                                `${Size.empty}`,
+                                `${Size.mpu}`,
+                                `${Size.googleCard}`,
+                                `${Size.halfPage}`,
+                                'fluid',
+                            ].join('|')}
                             aria-hidden="true"
                         />
                     );
@@ -184,7 +191,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                                 data-link-name="ad slot right"
                                 data-name="right"
                                 // mark: 01303e88-ef1f-462d-9b6e-242419435cec
-                                data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                                data-mobile={[
+                                    `${Size.outOfPage}`,
+                                    `${Size.empty}`,
+                                    `${Size.mpu}`,
+                                    `${Size.googleCard}`,
+                                    `${Size.halfPage}`,
+                                    'fluid',
+                                ].join('|')}
                                 aria-hidden="true"
                             />
                         </div>
@@ -217,9 +231,29 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         )}
                         data-link-name="ad slot comments"
                         data-name="comments"
-                        data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.halfPage}|fluid`}
-                        data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.video}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid|${Size.halfPage}|${Size.skyscraper}`}
-                        data-phablet={`${Size.outOfPage}|${Size.empty}|${Size.outstreamDesktop}|${Size.outstreamGoogleDesktop}|fluid`}
+                        data-mobile={[
+                            `${Size.outOfPage}`,
+                            `${Size.empty}`,
+                            `${Size.halfPage}`,
+                            'fluid',
+                        ].join('|')}
+                        data-desktop={[
+                            `${Size.outOfPage}`,
+                            `${Size.empty}`,
+                            `${Size.video}`,
+                            `${Size.outstreamDesktop}`,
+                            `${Size.outstreamGoogleDesktop}`,
+                            'fluid',
+                            `${Size.halfPage}`,
+                            `${Size.skyscraper}`,
+                        ].join('|')}
+                        data-phablet={[
+                            `${Size.outOfPage}`,
+                            `${Size.empty}`,
+                            `${Size.outstreamDesktop}`,
+                            `${Size.outstreamGoogleDesktop}`,
+                            'fluid',
+                        ].join('|')}
                         aria-hidden="true"
                     />
                 </div>
@@ -255,8 +289,21 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                     // The sizes here come from two places in the frontend code
                     // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
                     // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-                    data-tablet={`${Size.outOfPage}|${Size.empty}|${Size.fabric}|fluid|${Size.leaderboard}`}
-                    data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.leaderboard}|940,230|900,250|${Size.billboard}|${Size.fabric}|fluid`}
+                    data-tablet={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.fabric}`,
+                        'fluid',
+                        `${Size.leaderboard}`,
+                    ].join('|')}
+                    data-desktop={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.leaderboard}|940,230|900,250`,
+                        `${Size.billboard}`,
+                        `${Size.fabric}`,
+                        'fluid',
+                    ].join('|')}
                     // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     aria-hidden="true"
                 />
@@ -280,10 +327,40 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                     data-link-name="ad slot mostpop"
                     data-name="mostpop"
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|fluid`}
-                    data-tablet={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.leaderboard}|fluid`}
-                    data-phablet={`${Size.outOfPage}|${Size.empty}|${Size.outstreamMobile}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|${Size.outstreamGoogleDesktop}|fluid`}
-                    data-desktop={`${Size.outOfPage}|${Size.empty}|${Size.mpu}|${Size.googleCard}|${Size.halfPage}|fluid`}
+                    data-mobile={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.mpu}`,
+                        `${Size.googleCard}`,
+                        'fluid',
+                    ].join('|')}
+                    data-tablet={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.mpu}`,
+                        `${Size.googleCard}`,
+                        `${Size.halfPage}`,
+                        `${Size.leaderboard}`,
+                        'fluid',
+                    ].join('|')}
+                    data-phablet={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.outstreamMobile}`,
+                        `${Size.mpu}`,
+                        `${Size.googleCard}`,
+                        `${Size.halfPage}`,
+                        `${Size.outstreamGoogleDesktop}`,
+                        'fluid',
+                    ].join('|')}
+                    data-desktop={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.mpu}`,
+                        `${Size.googleCard}`,
+                        `${Size.halfPage}`,
+                        'fluid',
+                    ].join('|')}
                     aria-hidden="true"
                 />
             );
@@ -304,7 +381,12 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                     data-link-name="ad slot merchandising-high"
                     data-name="merchandising-high"
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.merchandisingHigh}|fluid`}
+                    data-mobile={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.merchandisingHigh}`,
+                        'fluid',
+                    ].join('|')}
                     aria-hidden="true"
                 />
             );
@@ -325,7 +407,12 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                     data-link-name="ad slot merchandising"
                     data-name="merchandising"
                     // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-                    data-mobile={`${Size.outOfPage}|${Size.empty}|${Size.merchandising}|fluid`}
+                    data-mobile={[
+                        `${Size.outOfPage}`,
+                        `${Size.empty}`,
+                        `${Size.merchandising}`,
+                        'fluid',
+                    ].join('|')}
                     aria-hidden="true"
                 />
             );
