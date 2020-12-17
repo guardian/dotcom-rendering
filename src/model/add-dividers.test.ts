@@ -1,15 +1,15 @@
-import { addDropCaps } from './add-dropcaps';
+import { addDividers } from './add-dividers';
 import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
 describe('Drop Caps', () => {
     it('creates an identical but new object when no changes are needed', () => {
-        expect(addDropCaps(example)).not.toBe(example); // We created a new object
-        expect(addDropCaps(example)).toEqual(example); // The new object is what we expect
+        expect(addDividers(example)).not.toBe(example); // We created a new object
+        expect(addDividers(example)).toEqual(example); // The new object is what we expect
     });
 
-    it('sets the drop cap flag correctly', () => {
+    it('sets the divider flag correctly', () => {
         const input = {
             ...example,
             blocks: [
@@ -60,10 +60,10 @@ describe('Drop Caps', () => {
             ],
         };
 
-        expect(addDropCaps(input)).toEqual(expectedOutput);
+        expect(addDividers(input)).toEqual(expectedOutput);
     });
 
-    it('handles multiple drop cap flags', () => {
+    it('handles multiple divider flags', () => {
         const input = {
             ...example,
             blocks: [
@@ -134,10 +134,10 @@ describe('Drop Caps', () => {
             ],
         };
 
-        expect(addDropCaps(input)).toEqual(expectedOutput);
+        expect(addDividers(input)).toEqual(expectedOutput);
     });
 
-    it('handles drop cap flags being put before elements that are not text', () => {
+    it('handles divider flags being put before elements that are not text', () => {
         const input = {
             ...example,
             blocks: [
@@ -172,6 +172,10 @@ describe('Drop Caps', () => {
                     elements: [
                         {
                             _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            _type:
                                 'model.dotcomrendering.pageElements.InstagramBlockElement',
                             html: '',
                             url: '',
@@ -187,10 +191,10 @@ describe('Drop Caps', () => {
             ],
         };
 
-        expect(addDropCaps(input)).toEqual(expectedOutput);
+        expect(addDividers(input)).toEqual(expectedOutput);
     });
 
-    it('handles multiple drop cap flags in sequence', () => {
+    it('handles multiple divider flags in sequence', () => {
         const input = {
             ...example,
             blocks: [
@@ -247,6 +251,14 @@ describe('Drop Caps', () => {
                         },
                         {
                             _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            _type:
+                                'model.dotcomrendering.pageElements.DividerBlockElement',
+                        },
+                        {
+                            _type:
                                 'model.dotcomrendering.pageElements.TextBlockElement',
                             dropCap: true,
                             html: '<p>I should become a drop cap.</p>',
@@ -261,6 +273,6 @@ describe('Drop Caps', () => {
             ],
         };
 
-        expect(addDropCaps(input)).toEqual(expectedOutput);
+        expect(addDividers(input)).toEqual(expectedOutput);
     });
 });
