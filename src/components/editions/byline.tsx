@@ -74,7 +74,7 @@ const Byline: FC<Props> = ({ item }) => {
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={styles}>
 			<address>{renderText(format, byline, KickerColor)}</address>
-			<ShareIcon platform="ios" color={KickerColor} />
+			<ShareIcon color={KickerColor} />
 		</div>
 	));
 };

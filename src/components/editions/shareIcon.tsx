@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 type Platform = 'ios' | 'android';
 
 type Props = {
-	platform: Platform;
 	color: string;
 };
 
