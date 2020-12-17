@@ -299,7 +299,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                     data-desktop={[
                         `${Size.outOfPage}`,
                         `${Size.empty}`,
-                        `${Size.leaderboard}|940,230|900,250`,
+                        `${Size.leaderboard}`,
+                        `940,230`,
+                        `900,250`,
                         `${Size.billboard}`,
                         `${Size.fabric}`,
                         `${Size.fluid}`,
