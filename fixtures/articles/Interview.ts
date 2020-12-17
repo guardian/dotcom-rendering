@@ -3627,43 +3627,53 @@ export const Interview: CAPIType = {
         readerRevenueLinks: {
             header: {
                 contribute:
-                    'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
                 subscribe:
-                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
                 support:
-                    'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support"%7D',
+                gifting:
+                    'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
             },
             footer: {
                 contribute:
-                    'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_contribute"%7D',
                 subscribe:
-                    'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_subscribe"%7D',
                 support:
-                    'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
+                gifting:
+                    'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_gifting"%7D',
             },
             sideMenu: {
                 contribute:
-                    'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_contribute"%7D',
                 subscribe:
-                    'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_subscribe"%7D',
                 support:
-                    'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support"%7D',
+                gifting:
+                    'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_gifting"%7D',
             },
             ampHeader: {
                 contribute:
-                    'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
                 subscribe:
-                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
                 support:
-                    'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"amp_header_support"%7D',
+                gifting:
+                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
             },
             ampFooter: {
                 contribute:
-                    'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_contribute"%7D',
                 subscribe:
-                    'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_subscribe"%7D',
                 support:
-                    'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                    'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
+                gifting:
+                    'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_gifting"%7D',
             },
         },
     },
