@@ -1,9 +1,11 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
-import { Format } from '@guardian/types';
-import { getFormat, Item } from 'item';
+import type { Format } from '@guardian/types';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { basePx } from 'styles';
@@ -40,7 +42,6 @@ interface Props {
 
 const toReact = (format: Format, kickerColor: string) => (
 	node: Node,
-	index: number,
 ): ReactNode => {
 	switch (node.nodeName) {
 		case 'A':
@@ -53,8 +54,12 @@ const toReact = (format: Format, kickerColor: string) => (
 			return Array.from(node.childNodes).map(
 				toReact(format, kickerColor),
 			);
-		case '#text':
-			return <span css={bylineSecondaryStyles}>{node.textContent}</span>;
+		case 'DIV':
+			return (
+				<span css={bylineSecondaryStyles}>
+					{node.textContent ?? ''}
+				</span>
+			);
 	}
 };
 
@@ -63,8 +68,8 @@ const renderText = (
 	byline: DocumentFragment,
 	kickerColor: string,
 ): ReactNode =>
-	Array.from(byline.childNodes).map((node, i) =>
-		toReact(format, kickerColor)(node, i),
+	Array.from(byline.childNodes).map((node) =>
+		toReact(format, kickerColor)(node),
 	);
 
 const Byline: FC<Props> = ({ item }) => {
