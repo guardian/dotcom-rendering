@@ -158,7 +158,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                                 `${Size.mpu}`,
                                 `${Size.googleCard}`,
                                 `${Size.halfPage}`,
-                                'fluid',
+                                `${Size.fluid}`,
                             ].join('|')}
                             aria-hidden="true"
                         />
@@ -197,7 +197,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                                     `${Size.mpu}`,
                                     `${Size.googleCard}`,
                                     `${Size.halfPage}`,
-                                    'fluid',
+                                    `${Size.fluid}`,
                                 ].join('|')}
                                 aria-hidden="true"
                             />
@@ -235,7 +235,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
                             `${Size.halfPage}`,
-                            'fluid',
+                            `${Size.fluid}`,
                         ].join('|')}
                         data-desktop={[
                             `${Size.outOfPage}`,
@@ -243,7 +243,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                             `${Size.video}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
-                            'fluid',
+                            `${Size.fluid}`,
                             `${Size.halfPage}`,
                             `${Size.skyscraper}`,
                         ].join('|')}
@@ -252,7 +252,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                             `${Size.empty}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
-                            'fluid',
+                            `${Size.fluid}`,
                         ].join('|')}
                         aria-hidden="true"
                     />
@@ -293,7 +293,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.outOfPage}`,
                         `${Size.empty}`,
                         `${Size.fabric}`,
-                        'fluid',
+                        `${Size.fluid}`,
                         `${Size.leaderboard}`,
                     ].join('|')}
                     data-desktop={[
@@ -302,7 +302,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.leaderboard}|940,230|900,250`,
                         `${Size.billboard}`,
                         `${Size.fabric}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                     aria-hidden="true"
@@ -332,7 +332,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.empty}`,
                         `${Size.mpu}`,
                         `${Size.googleCard}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     data-tablet={[
                         `${Size.outOfPage}`,
@@ -341,7 +341,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.googleCard}`,
                         `${Size.halfPage}`,
                         `${Size.leaderboard}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     data-phablet={[
                         `${Size.outOfPage}`,
@@ -351,7 +351,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.googleCard}`,
                         `${Size.halfPage}`,
                         `${Size.outstreamGoogleDesktop}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     data-desktop={[
                         `${Size.outOfPage}`,
@@ -359,7 +359,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.mpu}`,
                         `${Size.googleCard}`,
                         `${Size.halfPage}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     aria-hidden="true"
                 />
@@ -385,7 +385,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.outOfPage}`,
                         `${Size.empty}`,
                         `${Size.merchandisingHigh}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     aria-hidden="true"
                 />
@@ -411,7 +411,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         `${Size.outOfPage}`,
                         `${Size.empty}`,
                         `${Size.merchandising}`,
-                        'fluid',
+                        `${Size.fluid}`,
                     ].join('|')}
                     aria-hidden="true"
                 />
