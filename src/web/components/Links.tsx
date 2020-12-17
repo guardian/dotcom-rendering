@@ -173,7 +173,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
                         data-link-name="nav2 : gifting-cta"
                     >
                         <GiftingIcon />
-                    Gifting
+                    Subscriptions
                     </a>
                 </>
             )}
