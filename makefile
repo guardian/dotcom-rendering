@@ -111,7 +111,7 @@ validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
 validate-prepush:
-	@run-p tsc lint-staged "test -- --verbose  --runInBand --onlyChanged"
+	@run-p tsc prettier:check lint-staged "test -- --verbose  --runInBand --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
