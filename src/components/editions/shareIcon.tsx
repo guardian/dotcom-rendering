@@ -1,5 +1,11 @@
 import React, { FC } from 'react';
 
+declare global {
+	interface Window {
+		platform: string;
+	}
+}
+
 type Platform = 'ios' | 'android';
 
 type Props = {
@@ -7,17 +13,19 @@ type Props = {
 	color: string;
 };
 
-const IOSShareIcon = ({color}: {color: string}) => (
-	<svg viewBox="0 0 30 30" fill='none' xmlns="http://www.w3.org/2000/svg">
+const IOSShareIcon = ({ color }: { color: string }) => (
+	<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<circle cx="15" cy="15" r="14.5" stroke={color} />
-		<path fill={color}
-		d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z" />
+		<path
+			fill={color}
+			d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+		/>
 	</svg>
 );
 
-const AndroidShareIcon = ({color}: {color: string}) => (
-	<svg viewBox="0 0 30 30" fill='none' xmlns="http://www.w3.org/2000/svg">
-		<circle cx="15" cy="15" r="14.5" stroke={color}  />
+const AndroidShareIcon = ({ color }: { color: string }) => (
+	<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="15" cy="15" r="14.5" stroke={color} />
 		<path
 			fill={color}
 			fill-rule="evenodd"
@@ -27,7 +35,11 @@ const AndroidShareIcon = ({color}: {color: string}) => (
 	</svg>
 );
 
-export const ShareIcon: FC<Props> = ({ platform, color }) => {
-	if (platform === 'ios') return <IOSShareIcon color={color} />;
-	return <AndroidShareIcon  color={color} />;
+const detectOS = (): Platform => {
+	const isAndroid = window.platform.toLowerCase().indexOf("android")!=-1;
+	return isAndroid ? 'android' : 'ios'; 
+}
+
+export const ShareIcon: FC<Props> = ({ color }) => {
+	return detectOS() === 'ios' ? <IOSShareIcon color={color} /> : <AndroidShareIcon color={color} />
 };
