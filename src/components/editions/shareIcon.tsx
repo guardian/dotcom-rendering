@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
 
-declare global {
-	interface Window {
-		platform: string;
-	}
-}
-
 type Platform = 'ios' | 'android';
 
 type Props = {
@@ -36,10 +30,16 @@ const AndroidShareIcon = ({ color }: { color: string }) => (
 );
 
 const detectOS = (): Platform => {
-	const isAndroid = window.platform.toLowerCase().indexOf("android")!=-1;
-	return isAndroid ? 'android' : 'ios'; 
-}
+	// const isAndroid = window.platform.toLowerCase().indexOf('android') != -1;
+	// return isAndroid ? 'android' : 'ios';
+	// TODO: check runtime platform detection
+	return 'ios';
+};
 
 export const ShareIcon: FC<Props> = ({ color }) => {
-	return detectOS() === 'ios' ? <IOSShareIcon color={color} /> : <AndroidShareIcon color={color} />
+	return detectOS() === 'ios' ? (
+		<IOSShareIcon color={color} />
+	) : (
+		<AndroidShareIcon color={color} />
+	);
 };
