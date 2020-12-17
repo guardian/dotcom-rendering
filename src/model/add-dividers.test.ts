@@ -3,7 +3,7 @@ import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
-describe('Drop Caps', () => {
+describe('Dividers and Drop Caps', () => {
     it('creates an identical but new object when no changes are needed', () => {
         expect(addDividers(example)).not.toBe(example); // We created a new object
         expect(addDividers(example)).toEqual(example); // The new object is what we expect
