@@ -340,7 +340,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Hydrate root="links-root">
-                <Links giftingURL={isDigitalSubscriber || isRecurringContributor ? CAPI.nav.readerRevenueLinks.header.subscribe : ''} userId={user ? user.userId : undefined} />
+                <Links giftingURL={isDigitalSubscriber || isRecurringContributor ? CAPI.nav.readerRevenueLinks.header.subscribeGifting : ''} userId={user ? user.userId : undefined} />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown
