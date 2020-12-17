@@ -54,7 +54,7 @@ const messageStyles = css`
     }
 
     ${from.leftCol} {
-        ${headline.medium({ fontWeight: 'bold' })}
+        ${headline.small({ fontWeight: 'bold' })}
     }
 `;
 
