@@ -40,37 +40,28 @@ interface Props {
 	item: Item;
 }
 
-const toReact = (format: Format, kickerColor: string) => (
-	node: Node,
-): ReactNode => {
-	switch (node.nodeName) {
-		case 'A':
-			return (
-				<span css={bylinePrimaryStyles(kickerColor)}>
-					{node.textContent ?? ''}
-				</span>
-			);
-		case 'SPAN':
-			return Array.from(node.childNodes).map(
-				toReact(format, kickerColor),
-			);
-		case 'DIV':
-			return (
-				<span css={bylineSecondaryStyles}>
-					{node.textContent ?? ''}
-				</span>
-			);
-	}
-};
-
 const renderText = (
 	format: Format,
 	byline: DocumentFragment,
 	kickerColor: string,
 ): ReactNode =>
-	Array.from(byline.childNodes).map((node) =>
-		toReact(format, kickerColor)(node),
-	);
+	Array.from(byline.childNodes).map((node) => {
+		switch (node.nodeName) {
+			case 'A':
+				return (
+					<span css={bylinePrimaryStyles(kickerColor)}>
+						{node.textContent ?? ''}
+					</span>
+				);
+			case 'SPAN':
+			case '#text':
+				return (
+					<span css={bylineSecondaryStyles}>
+						{node.textContent ?? ''}
+					</span>
+				);
+		}
+	});
 
 const Byline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
