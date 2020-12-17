@@ -49,9 +49,9 @@ export const getCountryCodeFromLocalStorage = (): string | null => {
     try {
         const item = localStorage.getItem(COUNTRY_CODE_KEY);
         const localCountryCode = item ? JSON.parse(item) : null;
-        return localCountryCode.value || null
+        return localCountryCode.value || null;
     } catch (error) {
-        return null
+        return null;
     }
 };
 
@@ -73,7 +73,7 @@ export const getCountryCode = async () => {
                 if (!response.ok) {
                     throw Error(
                         response.statusText ||
-                        `getCountryCode | An api call returned HTTP status ${response.status}`,
+                            `getCountryCode | An api call returned HTTP status ${response.status}`,
                     );
                 }
                 return response;

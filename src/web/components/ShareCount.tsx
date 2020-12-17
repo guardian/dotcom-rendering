@@ -64,19 +64,13 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
         shareUrl,
     );
     if (shareError) {
-        window.guardian.modules.sentry.reportError(
-            shareError,
-            'share-count',
-        );
+        window.guardian.modules.sentry.reportError(shareError, 'share-count');
     }
 
     const shareCount = shareData && shareData.share_count;
-    if(!shareCount || shareCount === 0) return null;
+    if (!shareCount || shareCount === 0) return null;
 
-    const { short, long } = formatCount(
-        shareCount || 0,
-    );
-
+    const { short, long } = formatCount(shareCount || 0);
 
     return (
         <div

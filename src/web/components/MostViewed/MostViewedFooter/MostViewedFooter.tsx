@@ -111,9 +111,11 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
     const variantFromRunnable =
         (runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 
-
     return (
-        <div data-print-layout='hide' className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+        <div
+            data-print-layout="hide"
+            className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}
+        >
             <div
                 className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
                 data-link-name="most-popular"

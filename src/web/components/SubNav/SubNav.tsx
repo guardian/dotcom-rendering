@@ -168,7 +168,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 
     return (
         <div
-            data-print-layout='hide'
+            data-print-layout="hide"
             className={cx(
                 { [wrapperCollapsed]: collapseWrapper },
                 spaceBetween,

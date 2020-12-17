@@ -26,10 +26,7 @@ describe('ShareCount', () => {
         });
 
         const { container } = render(
-            <ShareCount
-                ajaxUrl={ajaxUrl}
-                pageId={pageId}
-            />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
         );
 
         expect(container.firstChild).toBeNull();
@@ -39,10 +36,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ error: { message: 'Bad' } });
 
         const { container } = render(
-            <ShareCount
-                ajaxUrl={ajaxUrl}
-                pageId={pageId}
-            />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
         );
 
         expect(container.firstChild).toBeNull();
@@ -52,10 +46,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ data: { share_count: 25001 } });
 
         const { getByTestId } = render(
-            <ShareCount
-                ajaxUrl={ajaxUrl}
-                pageId={pageId}
-            />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
         );
 
         expect(getByTestId('long-share-count').innerHTML).toBe('25,001');

@@ -25,7 +25,7 @@ const articleAdStyles = css`
         min-height: 274px;
         text-align: center;
         position: relative;
-        @media print{
+        @media print {
             display: none !important;
         }
     }

@@ -42,7 +42,7 @@ export const Standfirst: React.SFC<{
 }> = ({ text, pillar }) => {
     return (
         <div
-            data-print-layout='hide'
+            data-print-layout="hide"
             className={composeLabsCSS(
                 pillar,
                 cx(standfirstCss(pillar)),
