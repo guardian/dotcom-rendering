@@ -70,7 +70,10 @@ const Byline: FC<Props> = ({ item }) => {
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={styles}>
 			<address>{renderText(format, byline, KickerColor)}</address>
-			<ShareIcon color={KickerColor} />
+			<span className="js-share-button" role="button">
+				<ShareIcon color={KickerColor} />
+			</span>
+
 		</div>
 	));
 };

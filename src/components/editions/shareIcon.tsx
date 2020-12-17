@@ -1,8 +1,6 @@
-import type { FC, ReactElement } from 'react';
-import React from 'react';
-
-type Platform = 'ios' | 'android';
-
+import type { FC, ReactElement,} from 'react';
+import React , { useEffect, useState } from 'react';
+import type {PlatformMessageEvent} from '../../client/editionEvents'
 type Props = {
 	color: string;
 };
@@ -29,15 +27,21 @@ const AndroidShareIcon = ({ color }: { color: string }): ReactElement => (
 	</svg>
 );
 
-const detectOS = (): Platform => {
-	// const isAndroid = window.platform.toLowerCase().indexOf('android') != -1;
-	// return isAndroid ? 'android' : 'ios';
-	// TODO: check runtime platform detection
-	return 'ios';
-};
-
 export const ShareIcon: FC<Props> = ({ color }) => {
-	return detectOS() === 'ios' ? (
+	const [platform, setPlatform] = useState('ios');
+	const updatePlatform = (event: PlatformMessageEvent) => {
+		if (event.data.type == "platform") {
+			setPlatform(event.data.value)
+		}
+	}
+	useEffect(() => {
+		window.addEventListener('message', updatePlatform)
+
+		return () => {
+			window.removeEventListener('message', updatePlatform)
+		}
+	},[])
+	return platform === 'ios' ? (
 		<IOSShareIcon color={color} />
 	) : (
 		<AndroidShareIcon color={color} />
