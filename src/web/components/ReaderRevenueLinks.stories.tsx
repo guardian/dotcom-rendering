@@ -41,9 +41,7 @@ const Container = ({ children }: { children: JSXElements }) => (
             background-color: ${brandBackground.primary};
         `}
     >
-        <AbProvider>
-            {children}
-        </AbProvider>
+        <AbProvider>{children}</AbProvider>
     </div>
 );
 

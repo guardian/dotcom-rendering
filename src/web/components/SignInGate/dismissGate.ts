@@ -2,12 +2,18 @@
 const localStorageKey = `gu.prefs.sign-in-gate`;
 
 // We use this key for storing the date the gate was dismissed against
-const localStorageDismissedDateKey = (variant: string, name: string): string => {
+const localStorageDismissedDateKey = (
+    variant: string,
+    name: string,
+): string => {
     return `${name}-${variant}`;
 };
 
 // We use this key for storing the gate dismissed count against
-const localStorageDismissedCountKey = (variant: string, name: string): string => {
+const localStorageDismissedCountKey = (
+    variant: string,
+    name: string,
+): string => {
     return `gate-dismissed-count-${name}-${variant}`;
 };
 
@@ -20,14 +26,13 @@ const getSigninGatePrefsSafely = () => {
             return prefs.value;
         }
         return {};
-
     } catch (e) {
         return {};
     }
 };
 
 const setSigninGatePrefs = (prefs: any) => {
-    localStorage.setItem(localStorageKey, JSON.stringify({ value: prefs } ));
+    localStorage.setItem(localStorageKey, JSON.stringify({ value: prefs }));
 };
 
 // set in user preferences that the user has dismissed the gate, set the value to the current ISO date string
@@ -44,7 +49,9 @@ const setSigninGatePrefs = (prefs: any) => {
 export const setUserDismissedGate = (variant: string, name: string): void => {
     try {
         const prefs = getSigninGatePrefsSafely();
-        prefs[localStorageDismissedDateKey(variant, name)] = new Date().toISOString();
+        prefs[
+            localStorageDismissedDateKey(variant, name)
+        ] = new Date().toISOString();
         setSigninGatePrefs(prefs);
     } catch (error) {
         // Alas, sometimes localstorage isn't available
@@ -54,13 +61,12 @@ export const setUserDismissedGate = (variant: string, name: string): void => {
 export const unsetUserDismissedGate = (variant: string, name: string): void => {
     try {
         const prefs = getSigninGatePrefsSafely();
-        delete prefs[localStorageDismissedDateKey(variant, name)]
+        delete prefs[localStorageDismissedDateKey(variant, name)];
         setSigninGatePrefs(prefs);
     } catch (error) {
         // Alas, sometimes localstorage isn't available
     }
 };
-
 
 // Check if the user has dismissed the gate by checking the user preferences,
 // name is optional, but can be used to differentiate between multiple sign in gate tests
@@ -86,14 +92,16 @@ export const hasUserDismissedGate = (
                 return false;
             }
 
-            const dismissalTZ = Date.parse(prefs[localStorageDismissedDateKey(variant, name)]);
+            const dismissalTZ = Date.parse(
+                prefs[localStorageDismissedDateKey(variant, name)],
+            );
             const hours = (Date.now() - dismissalTZ) / 36e5; //  36e5 is the scientific notation for 60*60*1000, which converts the milliseconds difference into hours.
 
             if (hours >= window) {
-                unsetUserDismissedGate(variant, name)
-                return false
+                unsetUserDismissedGate(variant, name);
+                return false;
             }
-            return true
+            return true;
         }
 
         return !!prefs[localStorageDismissedDateKey(variant, name)];
@@ -101,16 +109,13 @@ export const hasUserDismissedGate = (
         // Alas, sometimes localstorage isn't available. Please have a sign in gate as an apology
         return false;
     }
-
 };
 
-const retrieveDismissedCount = (
-    variant: string,
-    name: string
-): number => {
+const retrieveDismissedCount = (variant: string, name: string): number => {
     try {
         const prefs = getSigninGatePrefsSafely();
-        const dismissed: any = prefs[localStorageDismissedCountKey(variant, name)];
+        const dismissed: any =
+            prefs[localStorageDismissedCountKey(variant, name)];
 
         if (Number.isFinite(dismissed)) {
             return dismissed;
@@ -125,7 +130,7 @@ const retrieveDismissedCount = (
 export const hasUserDismissedGateMoreThanCount = (
     variant: string,
     name: string,
-    count: number
+    count: number,
 ): boolean => {
     return retrieveDismissedCount(variant, name) > count;
 };
@@ -137,7 +142,8 @@ export const incrementUserDismissedGateCount = (
 ): void => {
     try {
         const prefs = getSigninGatePrefsSafely();
-        prefs[localStorageDismissedCountKey(variant, name)] = retrieveDismissedCount(variant, name) + 1;
+        prefs[localStorageDismissedCountKey(variant, name)] =
+            retrieveDismissedCount(variant, name) + 1;
         setSigninGatePrefs(prefs);
     } catch (error) {
         // localstorage isn't available so show the gate

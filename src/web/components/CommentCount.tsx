@@ -67,12 +67,15 @@ const linkStyles = css`
     }
 `;
 
-export const CommentCount = ({ isCommentable, commentCount, pillar, setIsExpanded }: Props) => {
-    if(!isCommentable) return null;
+export const CommentCount = ({
+    isCommentable,
+    commentCount,
+    pillar,
+    setIsExpanded,
+}: Props) => {
+    if (!isCommentable) return null;
 
-    const { short, long } = formatCount(
-        commentCount,
-    );
+    const { short, long } = formatCount(commentCount);
 
     return (
         <div className={containerStyles(pillar)} data-cy="comment-counts">

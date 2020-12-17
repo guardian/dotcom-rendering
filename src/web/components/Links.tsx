@@ -11,7 +11,7 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
-import { createAuthenticationEventParams } from "@root/src/lib/identity-component-event";
+import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {
     userId?: string;
@@ -160,7 +160,7 @@ export const Links = ({ userId }: Props) => {
         },
     ];
     return (
-        <div data-print-layout='hide' className={linksStyles}>
+        <div data-print-layout="hide" className={linksStyles}>
             <div className={seperatorStyles} />
             <a
                 href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
@@ -184,7 +184,9 @@ export const Links = ({ userId }: Props) => {
             ) : (
                 <a
                     className={linkStyles}
-                    href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams('guardian_signin_header')}`}
+                    href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+                        'guardian_signin_header',
+                    )}`}
                     data-link-name="nav2 : topbar : signin"
                 >
                     <ProfileIcon /> Sign in

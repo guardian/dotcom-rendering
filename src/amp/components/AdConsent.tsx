@@ -43,7 +43,7 @@ const clientConfigAus = {
     targetingParams: {
         framework: 'aus',
     },
-}
+};
 
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:

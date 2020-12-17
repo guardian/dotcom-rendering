@@ -62,7 +62,8 @@ describe('ReaderRevenueLinks', () => {
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
                     pageViewId="1234"
-                />,
+                />
+                ,
             </AbProvider>,
         );
 

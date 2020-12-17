@@ -279,7 +279,7 @@ export const RichLink = ({
 
     return (
         <div
-            data-print-layout='hide'
+            data-print-layout="hide"
             data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
             data-component="rich-link"
             className={pillarBackground(pillar)}
