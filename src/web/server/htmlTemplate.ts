@@ -29,7 +29,7 @@ export const htmlTemplate = ({
     html: string;
     fontFiles?: string[];
     windowGuardian: string;
-    gaPath: { modern: string, legacy: string };
+    gaPath: { modern: string; legacy: string };
     ampLink?: string;
     openGraphData: { [key: string]: string };
     twitterData: { [key: string]: string };
@@ -203,6 +203,78 @@ export const htmlTemplate = ({
                         window.guardian.config.ophan.browserId = getCookieValue("bwid");
 
                     })(window, document);
+                </script>
+
+                
+                <script
+                    src='https://js.sentry-cdn.com/1937ab71c8804b2b8438178dfdd6468f.min.js'
+                    crossorigin="anonymous"
+                >
+                </script>
+                <script>
+                    window.guardian.modules.sentry.reportError = function(error, feature) {
+                        Sentry.withScope(function() {
+                            if (feature) {
+                                Sentry.setTag('feature', feature);
+                            }
+                            Sentry.captureException(error);
+                        });
+                    }
+
+                    Sentry.onLoad(function() {
+                        window.guardian.modules.isAdBlockInUse().then(function(adBlockInUse){
+                            var SAMPLE_RATE = 0.01; // 1%
+
+                            // Only send errors matching these regexes
+                            var whitelistUrls = [
+                                /webpack-internal/,
+                                /localhost/,
+                                /assets\.guim\.co\.uk/,
+                                /ophan\.co\.uk/,
+                            ];
+    
+                            // Ignore these errors
+                            var ignoreErrors = [
+                                // https://docs.sentry.io/platforms/javascript/#decluttering-sentry
+                                "Can't execute code from a freed script",
+                                /InvalidStateError/gi,
+                                /Fetch error:/gi,
+                                'Network request failed',
+                                'NetworkError',
+                                'Failed to fetch',
+                                'This video is no longer available.',
+                                'UnknownError',
+                                'TypeError: Failed to fetch',
+                                'TypeError: NetworkError when attempting to fetch resource',
+                            ];
+    
+                            var CAPIBrowser = window.guardian.app.data.CAPI;
+                            var editionLongForm = CAPIBrowser.editionLongForm;
+                            var contentType = CAPIBrowser.contentType;
+                            var isDev = CAPIBrowser.config.isDev;
+                            var enableSentryReporting = CAPIBrowser.config.enableSentryReporting;
+                        
+                            Sentry.init({
+                                ignoreErrors,
+                                whitelistUrls,
+                                environment: window.guardian.config.stage || 'DEV',
+                                sampleRate: SAMPLE_RATE,
+                                beforeSend(event) {
+                                    // Skip sending events in certain situations
+                                    const dontSend = isDev || !enableSentryReporting;
+                                    if (dontSend) {
+                                        return null;
+                                    }
+                                    return event;
+                                },
+                            });
+                        
+                            Sentry.configureScope(function(scope) {
+                                scope.setTag('edition', editionLongForm);
+                                scope.setTag('contentType', contentType);
+                            });
+                        })
+                    });
                 </script>
 
                 <noscript>
