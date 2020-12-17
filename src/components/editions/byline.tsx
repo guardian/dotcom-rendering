@@ -23,14 +23,14 @@ const styles = css`
 	}
 `;
 
-const bylineBold = (kickerColor: string): SerializedStyles => {
+const bylinePrimaryStyles = (kickerColor: string): SerializedStyles => {
 	return css`
 		${body.medium({ fontStyle: 'normal', fontWeight: 'bold' })}
 		color: ${kickerColor};
 	`;
 };
 
-const bylineItalic = css`
+const bylineSecondaryStyles = css`
 	${body.medium({ fontStyle: 'italic' })}
 `;
 
@@ -45,7 +45,7 @@ const toReact = (format: Format, kickerColor: string) => (
 	switch (node.nodeName) {
 		case 'A':
 			return (
-				<span css={bylineBold(kickerColor)}>
+				<span css={bylinePrimaryStyles(kickerColor)}>
 					{node.textContent ?? ''}
 				</span>
 			);
@@ -54,7 +54,7 @@ const toReact = (format: Format, kickerColor: string) => (
 				toReact(format, kickerColor),
 			);
 		case '#text':
-			return <span css={bylineItalic}>{node.textContent}</span>;
+			return <span css={bylineSecondaryStyles}>{node.textContent}</span>;
 	}
 };
 
@@ -69,12 +69,12 @@ const renderText = (
 
 const Byline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	const { kicker } = getThemeStyles(format.theme);
+	const { kicker: KickerColor } = getThemeStyles(format.theme);
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={styles}>
-			<address>{renderText(format, byline, kicker)}</address>
-			<ShareIcon platform="ios" color={kicker} />
+			<address>{renderText(format, byline, KickerColor)}</address>
+			<ShareIcon platform="ios" color={KickerColor} />
 		</div>
 	));
 };
