@@ -54,18 +54,12 @@ const amountCaptionStyle = css`
 `;
 
 export const Ticker: React.FC<{
-    percentage: string,
-    topLeft: string,
-    bottomLeft: string,
-    topRight: string,
-    bottomRight: string,
-}> = ({
-    percentage,
-    topLeft,
-    bottomLeft,
-    topRight,
-    bottomRight,
-}) => {
+    percentage: string;
+    topLeft: string;
+    bottomLeft: string;
+    topRight: string;
+    bottomRight: string;
+}> = ({ percentage, topLeft, bottomLeft, topRight, bottomRight }) => {
     return (
         <div>
             <div className={tickerWrapperStyle}>
@@ -80,9 +74,12 @@ export const Ticker: React.FC<{
                     </div>
                 </div>
                 <div className={tickerBackgroundStyle}>
-                    <div className={tickerProgressStyle} style={{width: `${percentage}%`}} />
+                    <div
+                        className={tickerProgressStyle}
+                        style={{ width: `${percentage}%` }}
+                    />
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -14,5 +14,5 @@ export const setAlreadyVisited = (count: number): void => {
 
 export const incrementAlreadyVisited = () => {
     const alreadyVisited = getAlreadyVisitedCount();
-    setAlreadyVisited(alreadyVisited + 1)
+    setAlreadyVisited(alreadyVisited + 1);
 };

@@ -62,7 +62,7 @@ export const SubMeta = ({
     const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(pageId, webTitle);
     return (
-        <div className={bottomPadding}>
+        <div data-print-layout="hide" className={bottomPadding}>
             {badge && (
                 <div className={badgeWrapper}>
                     <Badge

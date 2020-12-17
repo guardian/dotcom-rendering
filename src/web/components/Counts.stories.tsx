@@ -5,6 +5,8 @@ import fetchMock from 'fetch-mock';
 import { sharecount } from '@root/fixtures/article';
 
 import { Counts } from './Counts';
+import { ShareCount } from './ShareCount';
+import { CommentCount } from './CommentCount';
 
 export default {
     component: Counts,
@@ -41,13 +43,22 @@ export const Both = () => {
 
     return (
         <Container>
-            <Counts
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                commentCount={239}
-                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-                pillar="news"
-                setIsExpanded={() => {}}
-            />
+            <Counts>
+                <div className="meta-number">
+                    <ShareCount
+                        ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                        pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                    />
+                </div>
+                <div className="meta-number">
+                    <CommentCount
+                        isCommentable={true}
+                        commentCount={239}
+                        pillar="news"
+                        setIsExpanded={() => {}}
+                    />
+                </div>
+            </Counts>
         </Container>
     );
 };
@@ -68,12 +79,22 @@ export const ShareOnly = () => {
 
     return (
         <Container>
-            <Counts
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-                pillar="news"
-                setIsExpanded={() => {}}
-            />
+            <Counts>
+                <div className="meta-number">
+                    <ShareCount
+                        ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                        pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                    />
+                </div>
+                <div className="meta-number">
+                    <CommentCount
+                        isCommentable={false}
+                        commentCount={239}
+                        pillar="news"
+                        setIsExpanded={() => {}}
+                    />
+                </div>
+            </Counts>
         </Container>
     );
 };
@@ -99,13 +120,22 @@ export const CommentOnly = () => {
 
     return (
         <Container>
-            <Counts
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                commentCount={239}
-                pageId="/lifeandstyle/abc"
-                pillar="news"
-                setIsExpanded={() => {}}
-            />
+            <Counts>
+                <div className="meta-number">
+                    <ShareCount
+                        ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                        pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                    />
+                </div>
+                <div className="meta-number">
+                    <CommentCount
+                        isCommentable={true}
+                        commentCount={239}
+                        pillar="news"
+                        setIsExpanded={() => {}}
+                    />
+                </div>
+            </Counts>
         </Container>
     );
 };
@@ -131,13 +161,22 @@ export const ZeroComments = () => {
 
     return (
         <Container>
-            <Counts
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                commentCount={0}
-                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-                pillar="news"
-                setIsExpanded={() => {}}
-            />
+            <Counts>
+                <div className="meta-number">
+                    <ShareCount
+                        ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                        pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                    />
+                </div>
+                <div className="meta-number">
+                    <CommentCount
+                        isCommentable={true}
+                        commentCount={0}
+                        pillar="news"
+                        setIsExpanded={() => {}}
+                    />
+                </div>
+            </Counts>
         </Container>
     );
 };
@@ -163,13 +202,22 @@ export const BigNumbers = () => {
 
     return (
         <Container>
-            <Counts
-                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                commentCount={4320}
-                pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-                pillar="news"
-                setIsExpanded={() => {}}
-            />
+            <Counts>
+                <div className="meta-number">
+                    <ShareCount
+                        ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+                        pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+                    />
+                </div>
+                <div className="meta-number">
+                    <CommentCount
+                        isCommentable={true}
+                        commentCount={4320}
+                        pillar="news"
+                        setIsExpanded={() => {}}
+                    />
+                </div>
+            </Counts>
         </Container>
     );
 };

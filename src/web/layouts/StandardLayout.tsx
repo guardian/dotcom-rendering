@@ -12,9 +12,7 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -36,7 +34,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -53,8 +51,6 @@ import {
     BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
-
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const gridTemplateWide = css`
     grid-template-areas:
@@ -336,7 +332,7 @@ export const StandardLayout = ({
     const { branding } = CAPI.commercialProperties[CAPI.editionId];
     return (
         <>
-            <div>
+            <div data-print-layout="hide">
                 <Stuck>
                     <Section
                         showTopBorder={false}
@@ -347,6 +343,7 @@ export const StandardLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -402,7 +399,7 @@ export const StandardLayout = ({
                 </SendToBack>
             </div>
 
-            <Section showTopBorder={false}>
+            <Section data-print-layout="hide" showTopBorder={false}>
                 <StandardGrid designType={designType} CAPI={CAPI}>
                     <GridItem area="title">
                         <ArticleTitle
@@ -526,7 +523,11 @@ export const StandardLayout = ({
                                 {showMatchStats && <div id="match-stats" />}
 
                                 {showBodyEndSlot && <div id="slot-body-end" />}
-                                <GuardianLines count={4} pillar={pillar} />
+                                <GuardianLines
+                                    data-print-layout="hide"
+                                    count={4}
+                                    pillar={pillar}
+                                />
                                 <SubMeta
                                     pillar={pillar}
                                     subMetaKeywordLinks={
@@ -547,74 +548,118 @@ export const StandardLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <StickyAd
-                                name="right"
-                                height={MOSTVIEWED_STICKY_HEIGHT}
-                            />
-                            {!isPaidContent ? <MostViewedRightIsland /> : <></>}
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                                ${from.desktop} {
+                                    /* above 980 */
+                                    margin-left: 20px;
+                                    margin-right: -20px;
+                                }
+                                ${from.leftCol} {
+                                    /* above 1140 */
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
+                            `}
+                        >
+                            <RightColumn>
+                                <AdSlot position="right" display={display} />
+                                {!isPaidContent ? (
+                                    <MostViewedRightIsland />
+                                ) : (
+                                    <></>
+                                )}
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </StandardGrid>
             </Section>
 
             <Section
+                data-print-layout="hide"
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot
+                    data-print-layout="hide"
+                    position="merchandising-high"
+                    display={display}
+                />
             </Section>
 
             {!isPaidContent && (
                 <>
                     {/* Onwards (when signed OUT) */}
-                    <div id="onwards-upper-whensignedout" />
+                    <div
+                        data-print-layout="hide"
+                        id="onwards-upper-whensignedout"
+                    />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedout" />
+                        <Section
+                            data-print-layout="hide"
+                            sectionId="onwards-lower-whensignedout"
+                        />
                     )}
 
                     {showComments && (
-                        <Section sectionId="comments">
-                            <CommentsLayout
+                        <Section data-print-layout="hide" sectionId="comments">
+                            <Discussion
+                                discussionApiUrl={CAPI.config.discussionApiUrl}
+                                shortUrlId={CAPI.config.shortUrlId}
+                                isCommentable={CAPI.isCommentable}
                                 pillar={pillar}
-                                baseUrl={CAPI.config.discussionApiUrl}
-                                shortUrl={CAPI.config.shortUrlId}
-                                commentCount={0}
-                                isClosedForComments={true}
                                 discussionD2Uid={CAPI.config.discussionD2Uid}
                                 discussionApiClientHeader={
                                     CAPI.config.discussionApiClientHeader
                                 }
                                 enableDiscussionSwitch={false}
-                                expanded={false}
-                                onPermalinkClick={() => {}}
+                                isAdFreeUser={CAPI.isAdFreeUser}
+                                shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
 
                     {/* Onwards (when signed IN) */}
-                    <div id="onwards-upper-whensignedin" />
+                    <div
+                        data-print-layout="hide"
+                        id="onwards-upper-whensignedin"
+                    />
                     {showOnwardsLower && (
-                        <Section sectionId="onwards-lower-whensignedin" />
+                        <Section
+                            data-print-layout="hide"
+                            sectionId="onwards-lower-whensignedin"
+                        />
                     )}
 
-                    <Section sectionId="most-viewed-footer" />
+                    <Section
+                        data-print-layout="hide"
+                        sectionId="most-viewed-footer"
+                    />
                 </>
             )}
 
             <Section
+                data-print-layout="hide"
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (
-                <Section padded={false} sectionId="sub-nav-root">
+                <Section
+                    data-print-layout="hide"
+                    padded={false}
+                    sectionId="sub-nav-root"
+                >
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
@@ -625,6 +670,7 @@ export const StandardLayout = ({
             )}
 
             <Section
+                data-print-layout="hide"
                 padded={false}
                 backgroundColour={brandBackground.primary}
                 borderColour={brandBorder.primary}
@@ -637,8 +683,8 @@ export const StandardLayout = ({
                 />
             </Section>
 
-            <BannerWrapper />
-            <MobileStickyContainer />
+            <BannerWrapper data-print-layout="hide" />
+            <MobileStickyContainer data-print-layout="hide" />
         </>
     );
 };

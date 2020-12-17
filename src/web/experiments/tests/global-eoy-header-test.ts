@@ -3,7 +3,7 @@ import { ABTest } from '@guardian/ab-core';
 export const GlobalEoyHeaderTestName = 'GlobalEoyHeaderTest';
 export type GlobalEoyHeaderTestVariant = 'control' | 'variant' | 'notintest';
 
-const month = new Date().getMonth() + 1;    // js date month begins at 0
+const month = new Date().getMonth() + 1; // js date month begins at 0
 
 export const globalEoyHeaderTest: ABTest = {
     id: GlobalEoyHeaderTestName,

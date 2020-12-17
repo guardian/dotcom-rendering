@@ -15,19 +15,7 @@ const hideBelowDesktop = css`
         flex-basis: 300px;
         flex-grow: 0;
         flex-shrink: 0;
-        margin-left: 20px;
-        margin-right: -20px;
     }
-
-    ${from.leftCol} {
-        /* above 1140 */
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-`;
-
-const padding = css`
-    padding-top: 6px;
 `;
 
 type Props = {
@@ -35,7 +23,5 @@ type Props = {
 };
 
 export const RightColumn = ({ children }: Props) => {
-    return (
-        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
-    );
+    return <section className={cx(hideBelowDesktop)}>{children}</section>;
 };

@@ -65,17 +65,17 @@ describe('SignInGate - displayRule methods', () => {
         });
     });
 
-    describe('isCountry(\'countryCode\')', () => {
+    describe("isCountry('countryCode')", () => {
         beforeEach(() => {
             localStorage.clear();
         });
         test('geolocation is US', () => {
-            setCountryCodeSynchronous('US')
+            setCountryCodeSynchronous('US');
             expect(isCountry('US')).toBe(true);
         });
 
         test('geolocation is not US', () => {
-            setCountryCodeSynchronous('GB')
+            setCountryCodeSynchronous('GB');
             expect(isCountry('US')).toBe(false);
         });
         test('geolocation is false if not set', () => {

@@ -136,35 +136,50 @@ const lifestyleContainer = (edition: Edition): string => {
     }
 };
 
-const getContainerDataUrl = (pillar:Pillar, edition: Edition, ajaxUrl: string)=>{
-    switch(pillar){
-        case 'sport': return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${sportContainer(edition)}.json`,]);
-        case 'news': return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${headlinesContainer(edition)}.json`,]);
-        case 'culture': return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${cultureContainer(edition)}.json`,]);
-        case 'lifestyle': return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${lifestyleContainer(edition)}.json`,]);
-        case 'opinion': return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${opinionContainer(edition)}.json`,]);
-        default: return joinUrl([
-            ajaxUrl,
-            'container/data',
-            `${headlinesContainer(edition)}.json`,]);
+const getContainerDataUrl = (
+    pillar: Pillar,
+    edition: Edition,
+    ajaxUrl: string,
+) => {
+    switch (pillar) {
+        case 'sport':
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${sportContainer(edition)}.json`,
+            ]);
+        case 'news':
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${headlinesContainer(edition)}.json`,
+            ]);
+        case 'culture':
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${cultureContainer(edition)}.json`,
+            ]);
+        case 'lifestyle':
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${lifestyleContainer(edition)}.json`,
+            ]);
+        case 'opinion':
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${opinionContainer(edition)}.json`,
+            ]);
+        default:
+            return joinUrl([
+                ajaxUrl,
+                'container/data',
+                `${headlinesContainer(edition)}.json`,
+            ]);
     }
 };
-
 
 type Props = {
     ajaxUrl: string;
@@ -178,7 +193,7 @@ type Props = {
     contentType: string;
     tags: TagType[];
     edition: Edition;
-    pillar:Pillar;
+    pillar: Pillar;
 };
 
 export const OnwardsUpper = ({
@@ -193,7 +208,7 @@ export const OnwardsUpper = ({
     contentType,
     tags,
     edition,
-    pillar
+    pillar,
 }: Props) => {
     const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
