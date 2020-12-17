@@ -282,7 +282,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 pubData,
             });
         }
-    }, [countryCode, CAPI.config.switches.consentManagement]);
+    }, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
 
     // ************************
     // *   Google Analytics   *
