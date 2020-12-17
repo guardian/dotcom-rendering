@@ -2,7 +2,6 @@
 
 import { css, SerializedStyles } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
-import { Format } from '@guardian/types';
 import { getFormat, Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
