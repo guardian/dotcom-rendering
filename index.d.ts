@@ -119,7 +119,7 @@ interface ReaderRevenueCategories {
     contribute: string;
     subscribe: string;
     support: string;
-    subscribeGifting: string;
+    gifting: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
