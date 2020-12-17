@@ -5,7 +5,6 @@ import { space } from '@guardian/src-foundations';
 import { CommentCount } from '@frontend/web/components/CommentCount';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { App as Comments } from '@guardian/discussion-rendering';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -17,6 +16,7 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
+import { Display } from '@root/src/lib/display';
 
 type Props = {
     discussionApiUrl: string;
@@ -43,6 +43,7 @@ type Props = {
     // then thank you!
     beingHydrated?: boolean;
     // **************************************************************************
+    display: Display;
 };
 
 const commentIdFromUrl = () => {
@@ -66,6 +67,7 @@ export const Discussion = ({
     isAdFreeUser,
     shouldHideAds,
     beingHydrated,
+    display,
 }: Props) => {
     const [commentCount, setCommentCount] = useState<number>();
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
@@ -252,8 +254,8 @@ export const Discussion = ({
                                     `}
                                 >
                                     <AdSlot
-                                        asps={namedAdSlotParameters('comments')}
-                                        isSticky={true}
+                                        position="comments"
+                                        display={display}
                                     />
                                 </div>
                             </RightColumn>

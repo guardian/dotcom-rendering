@@ -11,7 +11,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -45,8 +44,6 @@ import {
     BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
-
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const gridWide = css`
     grid-template-areas:
@@ -307,6 +304,7 @@ export const CommentLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -534,11 +532,7 @@ export const CommentLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot
-                                    asps={namedAdSlotParameters('right')}
-                                    isSticky={true}
-                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
-                                />
+                                <AdSlot position="right" display={display} />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (
@@ -556,7 +550,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -582,6 +576,7 @@ export const CommentLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -602,7 +597,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

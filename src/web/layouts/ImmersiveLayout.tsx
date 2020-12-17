@@ -9,7 +9,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -549,9 +548,8 @@ export const ImmersiveLayout = ({
                                             `}
                                         >
                                             <AdSlot
-                                                asps={namedAdSlotParameters(
-                                                    'right',
-                                                )}
+                                                position="right"
+                                                display={display}
                                             />
                                         </div>
                                     )}
@@ -568,7 +566,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -594,6 +592,7 @@ export const ImmersiveLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -614,7 +613,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

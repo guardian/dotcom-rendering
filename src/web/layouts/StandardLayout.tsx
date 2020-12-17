@@ -12,7 +12,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -52,8 +51,6 @@ import {
     BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
-
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const gridTemplateWide = css`
     grid-template-areas:
@@ -346,6 +343,7 @@ export const StandardLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -567,11 +565,7 @@ export const StandardLayout = ({
                             `}
                         >
                             <RightColumn>
-                                <AdSlot
-                                    asps={namedAdSlotParameters('right')}
-                                    isSticky={true}
-                                    heightToStick={`${MOSTVIEWED_STICKY_HEIGHT}px`}
-                                />
+                                <AdSlot position="right" display={display} />
                                 {!isPaidContent ? (
                                     <MostViewedRightIsland />
                                 ) : (
@@ -592,7 +586,8 @@ export const StandardLayout = ({
             >
                 <AdSlot
                     data-print-layout="hide"
-                    asps={namedAdSlotParameters('merchandising-high')}
+                    position="merchandising-high"
+                    display={display}
                 />
             </Section>
 
@@ -625,6 +620,7 @@ export const StandardLayout = ({
                                 isAdFreeUser={CAPI.isAdFreeUser}
                                 shouldHideAds={CAPI.shouldHideAds}
                                 beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -655,7 +651,7 @@ export const StandardLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (
