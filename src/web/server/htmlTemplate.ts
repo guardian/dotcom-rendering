@@ -212,6 +212,52 @@ export const htmlTemplate = ({
                 >
                 </script>
                 <script>
+                    (function (window, document) {
+                        function detectAdBlocker() {
+                            if (typeof window.getComputedStyle !== 'function') {
+                                // Old browsers not supporting getComputedStyle most likely won't have adBlockers
+                                return Promise.resolve(false);
+                            }
+                        
+                            return new Promise((resolve) => {
+                                const ad = document.createElement('div');
+
+                                ad.style.position = 'absolute';
+                                ad.style.left = '0';
+                                ad.style.top = '0';
+                                ad.style.height = '10px';
+                                ad.style.zIndex = '-1';
+                                ad.innerHTML = '&nbsp;';
+                                ad.setAttribute('class', 'ad_unit');
+                        
+                                // avoid a forced layout
+                                window.requestAnimationFrame(() => {
+                                    document.body.appendChild(ad);
+                        
+                                    // avoid a forced layout
+                                    window.requestAnimationFrame(() => {
+                                        const adStyles = window.getComputedStyle(ad);
+                                        const displayProp =
+                                            adStyles && adStyles.getPropertyValue('display');
+                                        const mozBindingProp =
+                                            adStyles && adStyles.getPropertyValue('-moz-binding');
+                        
+                                        var adBlockInUse =
+                                            displayProp === 'none' ||
+                                            !!(mozBindingProp && mozBindingProp.includes('about:'));
+                        
+                                        resolve(adBlockInUse);
+                                    });
+                                });
+                            });
+                        };
+
+                        detectAdBlocker().then(function(adBlockInUse){
+                            window.guardian.adBlockInUse = adBlockInUse;
+                        });
+                    })(window, document);
+                </script>
+                <script>
                     window.guardian.modules.sentry.reportError = function(error, feature) {
                         Sentry.withScope(function() {
                             if (feature) {
@@ -252,7 +298,7 @@ export const htmlTemplate = ({
                         var contentType = CAPIBrowser.contentType;
                         var isDev = CAPIBrowser.config.isDev;
                         var enableSentryReporting = CAPIBrowser.config.enableSentryReporting;
-                    
+
                         Sentry.init({
                             ignoreErrors,
                             whitelistUrls,
@@ -260,7 +306,8 @@ export const htmlTemplate = ({
                             sampleRate: SAMPLE_RATE,
                             beforeSend(event) {
                                 // Skip sending events in certain situations
-                                const dontSend = isDev || !enableSentryReporting;
+                                var adBlockInUse = window.guardian.adBlockInUse;
+                                const dontSend = adBlockInUse || isDev || !enableSentryReporting;
                                 if (dontSend) {
                                     return null;
                                 }
