@@ -81,6 +81,7 @@ tsc: clean-dist install
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
 	@yarn lint --fix
+	@yarn prettier:fix
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")

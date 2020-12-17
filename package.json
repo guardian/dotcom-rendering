@@ -8,6 +8,8 @@
         "lint": "eslint . --ext .ts,.tsx && yarn lint-cypress",
         "lint-cypress": "eslint ./cypress",
         "lint-staged": "lint-staged",
+        "prettier:check": "prettier . --check",
+        "prettier:fix": "prettier . --write",
         "lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
         "tsc": "tsc",
         "test": "jest",
