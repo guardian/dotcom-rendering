@@ -1,3 +1,6 @@
+# See: https://github.com/prettier/prettier/issues/6280#issuecomment-510293569
+# This config works alongside `prettier . --check`
+
 # Exclude everything by default
 /**/*
 
