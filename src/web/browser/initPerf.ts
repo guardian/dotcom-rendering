@@ -29,7 +29,10 @@ export const initPerf = (
 
         const measureEntries = perf.getEntriesByName(name, 'measure');
         const timeTakenFloat =
-            (measureEntries && measureEntries[0]?.duration) || 0;
+            (measureEntries &&
+                measureEntries[0] &&
+                measureEntries[0].duration) ||
+            0;
         const timeTakenInt = Math.round(timeTakenFloat);
 
         return timeTakenInt;
