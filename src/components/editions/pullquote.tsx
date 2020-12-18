@@ -7,30 +7,25 @@ import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { basePx, darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 export const pullquoteWidth = '10.875rem';
-const pullquoteTailSize = '23px';
+const pullquoteTailSize = '1.5rem';
 
 const styles = (format: Format): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
+	const { kicker } = getThemeStyles(format.theme);
 	return css`
 		width: ${pullquoteWidth};
 		position: relative;
 		box-sizing: border-box;
-		padding: ${basePx(0, 1, 3, 1)};
-		margin: ${basePx(0.75)} ${basePx(2)}
-			calc(${basePx(2)} + ${pullquoteTailSize}) 0;
+		padding: 0 0.5rem 1.5rem 0.5rem;
+		margin: 0.375rem 1rem
+			calc(1rem + ${pullquoteTailSize}) 0;
 
 		color: ${kicker};
 		border: 1px solid ${kicker};
-		border-top: 12px solid ${kicker};
+		border-top: 0.75rem solid ${kicker};
 		border-bottom: none;
-		${darkModeCss`color: ${inverted};`}
-		${darkModeCss`border: 1px solid ${inverted};`}
-		${darkModeCss`border-top: 12px solid ${inverted};`}
-		${darkModeCss`border-bottom: none`}
 
 		float: left;
 		clear: left;
@@ -38,7 +33,7 @@ const styles = (format: Format): SerializedStyles => {
 			float: right;
 			clear: right;
 			margin-right: calc(
-				-${pullquoteWidth} - ${basePx(2)} - ${basePx(3)}
+				-${pullquoteWidth} - 2.5rem
 			);
 		}
 
@@ -52,8 +47,6 @@ const styles = (format: Format): SerializedStyles => {
 			border: 1px solid ${kicker};
 			border-top: none;
 			border-radius: 0 0 100% 0;
-			${darkModeCss`border: 1px solid ${inverted};`}
-			${darkModeCss`border-top: none;`}
 		}
 
 		&:after {
@@ -64,13 +57,12 @@ const styles = (format: Format): SerializedStyles => {
 			width: calc(100% - ${pullquoteTailSize});
 			height: 1px;
 			border-top: 1px solid ${kicker};
-			${darkModeCss`border-top: 1px solid ${inverted};`}
 		}
 	`;
 };
 
 const quoteStyles = (format: Format): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
+	const { kicker } = getThemeStyles(format.theme);
 
 	return css`
 		margin: 0;
@@ -80,7 +72,6 @@ const quoteStyles = (format: Format): SerializedStyles => {
 			height: 2rem;
 			margin-left: -0.3rem;
 			fill: ${kicker};
-			${darkModeCss`fill: ${inverted};`}
 		}
 	`;
 };
