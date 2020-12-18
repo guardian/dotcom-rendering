@@ -43,7 +43,7 @@ const paddingStyles = css`
     }
 `;
 
-const messageStyles = css`
+const messageStyles = (isThankYouMessage: boolean) => css`
     color: ${brandAlt[400]};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
@@ -54,7 +54,9 @@ const messageStyles = css`
     }
 
     ${from.leftCol} {
-        ${headline.medium({ fontWeight: 'bold' })}
+        ${isThankYouMessage
+            ? headline.small({ fontWeight: 'bold' })
+            : headline.medium({ fontWeight: 'bold' })}
     }
 `;
 
@@ -198,7 +200,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                             [hiddenUntilTablet]: inHeader,
                         })}
                     >
-                        <div className={messageStyles}>
+                        <div className={messageStyles(true)}>
                             {' '}
                             Thank you for your support{' '}
                         </div>
@@ -219,7 +221,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     [hiddenUntilTablet]: inHeader,
                 })}
             >
-                <div className={messageStyles}>{getHeading()}</div>
+                <div className={messageStyles(false)}>{getHeading()}</div>
                 <div className={subMessageStyles}>
                     <div> {subheading} </div>
                 </div>
