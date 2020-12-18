@@ -11,7 +11,7 @@ const threeImages = fourImages.slice(0, 3);
 export default {
     component: MultiImageBlockComponent,
     title: 'Components/MultiImageBlockComponent',
-    chromatic: { diffThreshold: 0.4 },
+    chromatic: { diffThreshold: 0.7 },
 };
 
 export const SingleImage = () => {
