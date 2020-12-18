@@ -73,7 +73,6 @@ const Byline: FC<Props> = ({ item }) => {
 			<span className="js-share-button" role="button">
 				<ShareIcon color={KickerColor} />
 			</span>
-
 		</div>
 	));
 };
