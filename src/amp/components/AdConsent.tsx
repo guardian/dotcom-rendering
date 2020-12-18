@@ -3,6 +3,14 @@ import { JsonScript } from './JsonScript';
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
+// This reads the bwid cookie
+const browserId = `bwid=CLIENT_ID(bwid)`;
+
+// Matches ampViewId from https://ophan.theguardian.com/amp.json
+const pageViewId = `pageViewId=CLIENT_ID(_ga)-PAGE_VIEW_ID`;
+
+const pubData = `?${browserId}&${pageViewId}`;
+
 const clientConfig = {
     accountId: 1257,
     mmsDomain: `https://${sourcepointDomain}`,
@@ -77,7 +85,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?pvid=RANDOM-CLIENT_ID(bwid)-PAGE_VIEW_ID`,
+                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp${pubData}`,
                         promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
                         clientConfig,
                         geoOverride: {
