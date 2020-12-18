@@ -1,6 +1,7 @@
-import type { FC, ReactElement,} from 'react';
-import React , { useEffect, useState } from 'react';
-import type {PlatformMessageEvent} from '../../client/editionEvents'
+import type { FC, ReactElement } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { PlatformMessageEvent } from '../../client/editionEvents';
+
 type Props = {
 	color: string;
 };
@@ -29,18 +30,17 @@ const AndroidShareIcon = ({ color }: { color: string }): ReactElement => (
 
 export const ShareIcon: FC<Props> = ({ color }) => {
 	const [platform, setPlatform] = useState('ios');
-	const updatePlatform = (event: PlatformMessageEvent) => {
-		if (event.data.type == "platform") {
-			setPlatform(event.data.value)
-		}
-	}
-	useEffect(() => {
-		window.addEventListener('message', updatePlatform)
 
-		return () => {
-			window.removeEventListener('message', updatePlatform)
-		}
-	},[])
+	const updatePlatform = (event: MessageEvent<PlatformMessageEvent>): void =>
+		setPlatform(event.data.value);
+
+	useEffect(() => {
+		window.addEventListener('message', updatePlatform);
+
+		return (): void => {
+			window.removeEventListener('message', updatePlatform);
+		};
+	}, []);
 	return platform === 'ios' ? (
 		<IOSShareIcon color={color} />
 	) : (
