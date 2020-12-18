@@ -125,20 +125,11 @@ const linksStyles = css`
 `;
 
 export const Links = ({ userId, giftingURL }: Props) => {
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
-    const [
-        isRecurringContributor,
-        setIsRecurringContributor,
-    ] = useState<boolean>();
+    const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
 
+    // show gifting if support messaging isn't shown
     useEffect(() => {
-        setIsRecurringContributor(
-            getCookie('gu_recurring_contributor') === 'true',
-        );
-    }, []);
-
-    useEffect(() => {
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
+        setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
     }, []);
 
     const identityLinks: DropdownLinkType[] = [
@@ -180,23 +171,22 @@ export const Links = ({ userId, giftingURL }: Props) => {
     ];
     return (
         <div data-print-layout="hide" className={linksStyles}>
-            {(isDigitalSubscriber || isRecurringContributor) &&
-                giftingURL !== '' && (
-                    <>
-                        <div className={seperatorStyles} />
-                        <a
-                            href={giftingURL}
-                            className={cx(
-                                linkTablet({ showAtTablet: false }),
-                                linkStyles,
-                            )}
-                            data-link-name="nav2 : gifting-cta"
-                        >
-                            <GiftingIcon />
-                            Gift options
-                        </a>
-                    </>
-                )}
+            {showGiftingLink && giftingURL !== '' && (
+                <>
+                    <div className={seperatorStyles} />
+                    <a
+                        href={giftingURL}
+                        className={cx(
+                            linkTablet({ showAtTablet: false }),
+                            linkStyles,
+                        )}
+                        data-link-name="nav2 : gifting-cta"
+                    >
+                        <GiftingIcon />
+                        Gift options
+                    </a>
+                </>
+            )}
 
             <div className={seperatorStyles} />
             <a
