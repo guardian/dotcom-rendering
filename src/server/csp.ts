@@ -134,19 +134,13 @@ function cspEditions(
 			: ''
 	};
     script-src 'self' ${
-		thirdPartyEmbed.instagram ? 'http://www.instagram.com/embed.js' : ''
-	} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://www.scribd.com ${
-		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
-	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
-		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
-	} ${
+    frame-src https://www.theguardian.com ${
 		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
-	} https://player.vimeo.com/ ${
+	} ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
