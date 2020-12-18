@@ -126,10 +126,15 @@ const linksStyles = css`
 
 export const Links = ({ userId, giftingURL }: Props) => {
     const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
-    const [isRecurringContributor, setIsRecurringContributor] = useState<boolean>();
+    const [
+        isRecurringContributor,
+        setIsRecurringContributor,
+    ] = useState<boolean>();
 
     useEffect(() => {
-        setIsRecurringContributor(getCookie('gu_recurring_contributor') === 'true');
+        setIsRecurringContributor(
+            getCookie('gu_recurring_contributor') === 'true',
+        );
     }, []);
 
     useEffect(() => {
@@ -174,21 +179,24 @@ export const Links = ({ userId, giftingURL }: Props) => {
         },
     ];
     return (
-        <div data-print-layout='hide' className={linksStyles}>
-
-            {(isDigitalSubscriber || isRecurringContributor) && giftingURL !== '' && (
-                <>
-                    <div className={seperatorStyles} />
-                    <a
-                        href={giftingURL}
-                        className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
-                        data-link-name="nav2 : gifting-cta"
-                    >
-                        <GiftingIcon />
-                    Gift options
-                    </a>
-                </>
-            )}
+        <div data-print-layout="hide" className={linksStyles}>
+            {(isDigitalSubscriber || isRecurringContributor) &&
+                giftingURL !== '' && (
+                    <>
+                        <div className={seperatorStyles} />
+                        <a
+                            href={giftingURL}
+                            className={cx(
+                                linkTablet({ showAtTablet: false }),
+                                linkStyles,
+                            )}
+                            data-link-name="nav2 : gifting-cta"
+                        >
+                            <GiftingIcon />
+                            Gift options
+                        </a>
+                    </>
+                )}
 
             <div className={seperatorStyles} />
             <a
