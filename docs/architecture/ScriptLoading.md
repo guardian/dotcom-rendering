@@ -83,10 +83,6 @@ That in mind, what is our critical path:
 
 I hope that preloading these items in order, gives us the biggest bang for our buck on preloading, without congesting the pipeline.
 
-## Prefetch
-
-From [Addy Osmani's post](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)
-
 ## Recommendation
 
 My recommendation then is this:
