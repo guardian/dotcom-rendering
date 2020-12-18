@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { Role } from '@guardian/image-rendering';
+import { Dpr, Role, src, srcsetWithWidths } from '@guardian/image-rendering';
 import type { Option } from '@guardian/types';
 import { fromNullable, map, none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
-import { Dpr, src, srcsetWithWidths } from 'image';
 import { pipe2 } from 'lib';
 
 // ------ Types ----- //
