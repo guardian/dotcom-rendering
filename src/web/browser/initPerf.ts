@@ -7,13 +7,14 @@ export const initPerf = (
     const startKey = `${name}-start`;
     const endKey = `${name}-end`;
 
-    if (!perf)
+    if (!perf) {
         // Return noops if window.performance does not exist
         return {
             start: () => {},
             end: () => 0,
             clear: () => {},
         };
+    }
 
     const start = () => {
         perf.mark(startKey);
@@ -27,7 +28,8 @@ export const initPerf = (
         console.log(JSON.stringify(perf.getEntriesByName(name)));
 
         const measureEntries = perf.getEntriesByName(name, 'measure');
-        const timeTakenFloat = measureEntries[0].duration;
+        const timeTakenFloat =
+            (measureEntries && measureEntries[0]?.duration) || 0;
         const timeTakenInt = Math.round(timeTakenFloat);
 
         return timeTakenInt;
