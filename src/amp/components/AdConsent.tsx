@@ -77,7 +77,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
+                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?pvid=RANDOM-CLIENT_ID(bwid)-PAGE_VIEW_ID`,
                         promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
                         clientConfig,
                         geoOverride: {
