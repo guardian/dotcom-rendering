@@ -8,13 +8,10 @@ declare module 'ReactNativeWebView' {
 	}
 }
 
-document
-	.querySelector('.js-share-button')
-	?.addEventListener('click', () => {
-		console.log('it works!')
-		window.ReactNativeWebView.postMessage(
-			JSON.stringify({
-				type: 'share',
-			}),
-		);
-	});
+document.querySelector('.js-share-button')?.addEventListener('click', () => {
+	window.ReactNativeWebView.postMessage(
+		JSON.stringify({
+			type: 'share',
+		}),
+	);
+});
