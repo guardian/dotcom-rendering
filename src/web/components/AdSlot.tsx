@@ -143,10 +143,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                                 'ad-slot--mpu-banner-ad',
                                 'ad-slot--rendered',
                                 'js-sticky-mpu',
-                                css`
-                                    position: sticky;
-                                    top: 0;
-                                `,
                                 labelStyles,
                             )}
                             data-link-name="ad slot right"
