@@ -121,6 +121,33 @@ const buildCsp = (
     media-src 'self' https://audio.guim.co.uk/
 `.trim();
 
+function cspEditions(
+	{ styles }: Assets,
+	thirdPartyEmbed: ThirdPartyEmbeds,
+): string {
+	return `
+	default-src 'self';
+	style-src 'self' ${assetHashes(styles)};
+	img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
+		thirdPartyEmbed.twitter
+			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
+			: ''
+	};
+    script-src 'self' ${
+		thirdPartyEmbed.twitter
+			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
+			: ''
+	};
+    frame-src https://www.theguardian.com ${
+		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
+	} ${
+		thirdPartyEmbed.twitter
+			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
+			: ''
+	};
+	`;
+}
+
 function csp(
 	item: Item,
 	additionalAssets: Assets,
@@ -138,4 +165,4 @@ function csp(
 
 // ----- Exports ----- //
 
-export { csp, assetHashes };
+export { assetHashes, csp, cspEditions };
