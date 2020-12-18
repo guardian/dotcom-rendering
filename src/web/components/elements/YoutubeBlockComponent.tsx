@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { videoTracking as gaRecord } from '@root/src/web/browser/ga/ga';
+import { record as ophanRecord } from '@root/src/web/browser/ophan/ophan';
 import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
@@ -125,17 +127,42 @@ export const YoutubeBlockComponent = ({
         );
     }
 
+    const ophanTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        ophanRecord({
+            video: {
+                id: `gu-video-youtube-${element.id}`,
+                eventType: `video:content:${trackingEvent}`,
+            },
+        });
+    };
+    const gaTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        gaRecord({
+            trackingEvent,
+            elementId: element.id,
+        });
+    };
+
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
                 videoMeta={element}
-                overlayImage={overlayImage}
+                overlayImage={
+                    overlayImage
+                        ? {
+                              src: overlayImage,
+                              alt: element.altText || element.mediaTitle,
+                          }
+                        : undefined
+                }
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
                 title={title}
                 duration={duration}
                 origin={origin}
+                eventEmitters={[ophanTracking, gaTracking]}
             />
             {!hideCaption && (
                 <Caption
