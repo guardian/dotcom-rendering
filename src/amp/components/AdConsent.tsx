@@ -6,7 +6,7 @@ const sourcepointDomain = 'sourcepoint.theguardian.com';
 const pubData = {
     // Matches ampViewId from https://ophan.theguardian.com/amp.json
     pageViewId: 'PAGE_VIEW_ID_64',
-    browserId: 'CLIENT_ID(bwid)',
+    browserId: 'CLIENT_ID',
 };
 
 const queryParams = new URLSearchParams(pubData).toString();
