@@ -1,6 +1,4 @@
-export type PlatformMessageEvent = MessageEvent & {
-	data: {
-		type: 'platform';
-		value: string;
-	};
+export type PlatformMessageEvent = {
+	type: 'platform';
+	value: string;
 };
