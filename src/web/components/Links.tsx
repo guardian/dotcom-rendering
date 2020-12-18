@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, cx } from 'emotion';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
@@ -7,6 +7,7 @@ import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
@@ -124,6 +125,17 @@ const linksStyles = css`
 `;
 
 export const Links = ({ userId, giftingURL }: Props) => {
+    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
+    const [isRecurringContributor, setIsRecurringContributor] = useState<boolean>();
+
+    useEffect(() => {
+        setIsRecurringContributor(getCookie('gu_recurring_contributor') === 'true');
+    }, []);
+
+    useEffect(() => {
+        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
+    }, []);
+
     const identityLinks: DropdownLinkType[] = [
         {
             url: `https://manage.theguardian.com/`,
@@ -164,7 +176,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
     return (
         <div data-print-layout='hide' className={linksStyles}>
 
-            {giftingURL !== '' && (
+            {(isDigitalSubscriber || isRecurringContributor) && giftingURL !== '' && (
                 <>
                     <div className={seperatorStyles} />
                     <a

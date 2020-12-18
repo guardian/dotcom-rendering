@@ -130,8 +130,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         shouldHideSupportMessaging,
         setShouldHideSupportMessaging,
     ] = useState<boolean>();
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
-    const [isRecurringContributor, setIsRecurringContributor] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
     const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
         Promise<string | null>
@@ -166,14 +164,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         setShouldHideSupportMessaging(
             getCookie('gu_hide_support_messaging') === 'true',
         );
-    }, []);
-
-    useEffect(() => {
-        setIsRecurringContributor(getCookie('gu_recurring_contributor') === 'true');
-    }, []);
-
-    useEffect(() => {
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
     }, []);
 
     useEffect(() => {
@@ -340,7 +330,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Hydrate root="links-root">
-                <Links giftingURL={isDigitalSubscriber || isRecurringContributor ? CAPI.nav.readerRevenueLinks.header.gifting : ''} userId={user ? user.userId : undefined} />
+                <Links giftingURL={CAPI.nav.readerRevenueLinks.header.gifting} userId={user ? user.userId : undefined} />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown
