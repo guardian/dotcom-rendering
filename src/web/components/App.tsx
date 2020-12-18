@@ -261,6 +261,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
             const pubData = {
+                platform: 'next-gen',
                 browserId: getCookie('bwid') || undefined,
                 pageViewId,
             };
