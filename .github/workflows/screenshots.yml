@@ -32,6 +32,12 @@ jobs:
                       url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
                     - format: Analysis
                       url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
+                    - format: Editions / Standard
+                      url: 'http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash?editions'
+                    - format: Editions / Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain?editions'
+                    - format: Editions / Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation?editions'
 
         steps:
             - uses: actions/checkout@v2
@@ -92,6 +98,12 @@ jobs:
                       url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
                     - format: Analysis
                       url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
+                    - format: Editions / Standard
+                      url: 'http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash?editions'
+                    - format: Editions / Opinion
+                      url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain?editions'
+                    - format: Editions / Review
+                      url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation?editions'
 
         steps:
             - uses: actions/checkout@v2
