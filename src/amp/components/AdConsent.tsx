@@ -7,9 +7,9 @@ const sourcepointDomain = 'sourcepoint.theguardian.com';
 const browserId = `bwid=CLIENT_ID(bwid)`;
 
 // Matches ampViewId from https://ophan.theguardian.com/amp.json
-const pageViewId = `pageViewId=CLIENT_ID(_ga)-PAGE_VIEW_ID`;
+const pageViewId = `pageViewId=PAGE_VIEW_ID_64`;
 
-const pubData = `?${browserId}&${pageViewId}`;
+const pubData = [browserId, pageViewId].join('&');
 
 const clientConfig = {
     accountId: 1257,
@@ -85,7 +85,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp${pubData}`,
+                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?${pubData}`,
                         promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
                         clientConfig,
                         geoOverride: {
