@@ -19,8 +19,7 @@ const styles = (format: Format): SerializedStyles => {
 		position: relative;
 		box-sizing: border-box;
 		padding: 0 0.5rem 1.5rem 0.5rem;
-		margin: 0.375rem 1rem
-			calc(1rem + ${pullquoteTailSize}) 0;
+		margin: 0.375rem 1rem calc(1rem + ${pullquoteTailSize}) 0;
 
 		color: ${kicker};
 		border: 1px solid ${kicker};
@@ -32,9 +31,7 @@ const styles = (format: Format): SerializedStyles => {
 		${from.wide} {
 			float: right;
 			clear: right;
-			margin-right: calc(
-				-${pullquoteWidth} - 2.5rem
-			);
+			margin-right: calc(-${pullquoteWidth} - 2.5rem);
 		}
 
 		&:before {
