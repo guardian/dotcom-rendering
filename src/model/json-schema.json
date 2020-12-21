@@ -962,14 +962,32 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "code": {
+                    "type": "string"
+                },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
                 }
             },
             "required": [
                 "_type",
+                "code",
                 "isMandatory"
             ]
+        },
+        "Language": {
+            "enum": [
+                "css",
+                "elm",
+                "javascript",
+                "markup",
+                "scala",
+                "typescript"
+            ],
+            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
