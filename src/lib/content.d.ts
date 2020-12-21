@@ -67,7 +67,9 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 
 interface CodeBlockElement {
     _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
+    code: string;
     isMandatory: boolean;
+    language?: Language;
 }
 
 interface CommentBlockElement {
@@ -450,6 +452,15 @@ interface TimelineEvent {
 interface Switches {
     [key: string]: boolean;
 }
+
+// Used for CodeBlockElement
+type Language =
+    | 'typescript'
+    | 'javascript'
+    | 'css'
+    | 'markup'
+    | 'scala'
+    | 'elm';
 
 // -------------------------------------
 // Callout Campaign
