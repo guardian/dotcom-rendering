@@ -39,7 +39,7 @@
         "@emotion/core": "^10.0.35",
         "@guardian/ab-core": "^2.0.0",
         "@guardian/ab-react": "^2.0.1",
-        "@guardian/atoms-rendering": "^2.4.1",
+        "@guardian/atoms-rendering": "^4.1.0",
         "@guardian/automat-client": "^0.2.16",
         "@guardian/braze-components": "^0.0.16",
         "@guardian/consent-management-platform": "^6.7.4",
@@ -113,7 +113,8 @@
         "pretty-bytes": "^4.0.2",
         "reset-css": "^5.0.1",
         "sanitize-html": "^2.1.2",
-        "web-vitals": "^0.2.4"
+        "web-vitals": "^0.2.4",
+        "youtube-player": "^5.5.2"
     },
     "devDependencies": {
         "@babel/core": "^7.11.6",
@@ -161,6 +162,7 @@
         "@types/react-test-renderer": "^17.0.0",
         "@types/webpack": "^4.41.25",
         "@types/webpack-env": "^1.15.2",
+        "@types/youtube": "^0.0.41",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "amphtml-validator": "^1.0.33",
