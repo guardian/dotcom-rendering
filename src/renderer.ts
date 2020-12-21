@@ -56,6 +56,7 @@ import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
+import EditionsPullquote from 'components/editions/pullquote';
 import HorizontalRule from 'components/horizontalRule';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
@@ -805,7 +806,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;
-			return h(Pullquote, { quote, attribution, format, key });
+			return h(EditionsPullquote, { quote, attribution, format, key });
 		}
 
 		case ElementKind.RichLink: {
