@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
+
 import {
     canShow as canShowRRBanner,
     ReaderRevenueBanner,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
+import { getCookie } from '@root/src/web/browser/cookie';
+import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
+
 import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
@@ -12,8 +16,7 @@ type Props = {
     isSignedIn?: boolean;
     asyncCountryCode?: Promise<string>;
     CAPI: CAPIBrowserType;
-    asyncBrazeUuid?: Promise<null | string>;
-    shouldHideSupportMessaging?: boolean;
+    idApiUrl: string;
 };
 
 type FulfilledProps = {
@@ -130,9 +133,36 @@ export const StickyBottomBanner = ({
     isSignedIn,
     asyncCountryCode,
     CAPI,
-    asyncBrazeUuid,
-    shouldHideSupportMessaging,
+    idApiUrl,
 }: Props) => {
+    const [
+        shouldHideSupportMessaging,
+        setShouldHideSupportMessaging,
+    ] = useState<boolean>();
+    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
+        Promise<string | null>
+    >();
+
+    useEffect(() => {
+        setShouldHideSupportMessaging(
+            getCookie('gu_hide_support_messaging') === 'true',
+        );
+    }, []);
+
+    useEffect(() => {
+        // Don't do anything until isSignedIn is defined as we only want to set
+        // asyncBrazeUuid once
+        if (isSignedIn === undefined) {
+            return;
+        }
+
+        if (isSignedIn) {
+            setAsyncBrazeUuid(getBrazeUuid(idApiUrl));
+        } else {
+            setAsyncBrazeUuid(Promise.resolve(null));
+        }
+    }, [isSignedIn, idApiUrl]);
+
     if (
         isSignedIn === undefined ||
         asyncCountryCode === undefined ||
