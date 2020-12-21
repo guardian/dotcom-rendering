@@ -14,7 +14,7 @@ const isReady = (dependencies: unknown[]): boolean => {
     return dependencies.every((dep) => dep !== undefined);
 };
 
-export const Hydrate = ({ root, children, index, waitFor = [] }: Props) => {
+export const HydrateOnce = ({ root, children, index, waitFor = [] }: Props) => {
     const [alreadyHydrated, setAlreadyHydrated] = useState(false);
     if (alreadyHydrated) return null;
     if (!isReady(waitFor)) return null;
