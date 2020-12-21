@@ -40,7 +40,6 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
-import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -126,14 +125,7 @@ const componentEventHandler = (
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
-    const [
-        shouldHideSupportMessaging,
-        setShouldHideSupportMessaging,
-    ] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
-    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
-        Promise<string | null>
-    >();
     const [countryCode, setCountryCode] = useState<string>();
     // This is an async version of the countryCode state value defined above.
     // This can be used where you've got logic which depends on countryCode but
@@ -161,12 +153,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        setShouldHideSupportMessaging(
-            getCookie('gu_hide_support_messaging') === 'true',
-        );
-    }, []);
-
-    useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
@@ -174,20 +160,6 @@ export const App = ({ CAPI, NAV }: Props) => {
             callGetUser();
         }
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
-
-    useEffect(() => {
-        // Don't do anything until isSignedIn is defined as we only want to set
-        // asyncBrazeUuid once
-        if (isSignedIn === undefined) {
-            return;
-        }
-
-        if (isSignedIn) {
-            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
-        } else {
-            setAsyncBrazeUuid(Promise.resolve(null));
-        }
-    }, [isSignedIn, CAPI.config.idApiUrl]);
 
     useEffect(() => {
         const callFetch = () => {
@@ -675,8 +647,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isSignedIn={isSignedIn}
                     asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
-                    asyncBrazeUuid={asyncBrazeUuid}
-                    shouldHideSupportMessaging={shouldHideSupportMessaging}
+                    idApiUrl={CAPI.config.idApiUrl}
                 />
             </Portal>
         </React.StrictMode>
