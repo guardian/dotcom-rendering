@@ -156,7 +156,7 @@ export const htmlTemplate = ({
 
                 <script>
                     // Noop monkey patch perf.mark and perf.measure if not supported
-                    if(window.performance.mark === undefined) {
+                    if(window.performance !== undefined && window.performance.mark === undefined) {
                         window.performance.mark = function(){};
                         window.performance.measure = function(){};
                     }
