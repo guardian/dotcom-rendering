@@ -15,7 +15,8 @@ const isReady = (dependencies: unknown[]): boolean => {
 };
 
 /**
- * Finds the element with the same id as `root` and hydrates it using `children`
+ * Finds the element with the same id as `root` and calls `ReactDOM.hydrate(children, element)`. Only
+ * executes once and only after all variables in `waitFor` are defined.
  * @param {String} root - The id of the element to hydrate
  * @param children - The react elements passed to ReactDOM.hydrate()
  * @param {number} index - Used when there are multiple elements the same (eg. RichLinks)
