@@ -16,7 +16,7 @@ export const DefaultStory = () => {
     return (
         <ContainerLayout>
             <Figure role="inline">
-                <ClickToView width={620} height={400}>
+                <ClickToView width={620} height={400} onAccept={() => {}}>
                     <img src="http://placekitten.com/g/620/400" alt="" />
                 </ClickToView>
             </Figure>
@@ -29,7 +29,7 @@ export const SmallStory = () => {
     return (
         <ContainerLayout>
             <Figure role="thumbnail">
-                <ClickToView width={200} height={300}>
+                <ClickToView width={200} height={300} onAccept={() => {}}>
                     <img src="http://placekitten.com/g/200/300" alt="" />
                 </ClickToView>
             </Figure>

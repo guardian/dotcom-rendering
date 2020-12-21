@@ -15,6 +15,7 @@ type Props = {
     children: React.ReactNode;
     width: number;
     height: number;
+    onAccept: Function;
 };
 
 const Container = ({
@@ -96,8 +97,13 @@ const Body = ({
     </div>
 );
 
-export const ClickToView = ({ children, width, height }: Props) => {
+export const ClickToView = ({ children, width, height, onAccept }: Props) => {
     const [showOverlay, setShowOverlay] = useState<boolean>(true);
+
+    const handleClick = () => {
+        setShowOverlay(false);
+        onAccept();
+    };
 
     if (showOverlay) {
         return (
@@ -124,7 +130,7 @@ export const ClickToView = ({ children, width, height }: Props) => {
                             size={width > 300 ? 'small' : 'xsmall'}
                             icon={<SvgCheckmark />}
                             iconSide="left"
-                            onClick={() => setShowOverlay(false)}
+                            onClick={() => handleClick()}
                         >
                             Click to view
                         </Button>
