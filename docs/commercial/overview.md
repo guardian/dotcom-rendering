@@ -39,10 +39,6 @@ The components responsible for the rendering of the above are
 
 -   `AdSlot.tsx`, for static and dynamic ads.
 
-The file `advertisements.ts` is where we locate utility functions supporting the ad rendering. Important functions are
-
--   `namedAdSlotParameters`, which provides static ads with hard coded parameters. (Note that this is the case now, but we are soon going to try and take those parameters from the corresponding pieces of code in frontend).
-
 ## The Guardian advertizing eco-system
 
 To introduce some terms, we use:

@@ -6,7 +6,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { createAuthenticationEventParams } from "@root/src/lib/identity-component-event";
+import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {
     commentCount: number;
@@ -154,14 +154,18 @@ export const SignedInAs = ({
             {!user && (
                 <span className={headlineStyles}>
                     <a
-                        href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams('signin_to_comment')}`}
+                        href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
+                            'signin_to_comment',
+                        )}`}
                         className={linkStyles(pillar)}
                     >
                         Sign in
                     </a>{' '}
                     or{' '}
                     <a
-                        href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams('register_to_comment')}`}
+                        href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
+                            'register_to_comment',
+                        )}`}
                         className={linkStyles(pillar)}
                     >
                         create your Guardian account

@@ -9,7 +9,7 @@ import {
 } from '@root/src/amp/components/moustache';
 import { palette } from '@guardian/src-foundations';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import { Ticker } from "@root/src/amp/components/Ticker";
+import { Ticker } from '@root/src/amp/components/Ticker';
 
 const epic = css`
     border-top: 0.0625rem solid ${palette.brandAlt[400]};
@@ -128,20 +128,21 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = process.env.NODE_ENV === 'production'
-        ? 'https://contributions.guardianapis.com/amp/epic'
-        : 'https://contributions.code.dev-guardianapis.com/amp/epic';
+    const epicUrl =
+        process.env.NODE_ENV === 'production'
+            ? 'https://contributions.guardianapis.com/amp/epic'
+            : 'https://contributions.code.dev-guardianapis.com/amp/epic';
 
     return (
         <div>
             <amp-list
-                layout='fixed-height'
+                layout="fixed-height"
                 // This means that if the user refreshes at the end of the article while the epic is in view then the epic
                 // will not display. This is such an edge case that we can live with it, and in general it will fill the
                 // space.
-                height='1px'
+                height="1px"
                 src={epicUrl}
-                credentials='include'
+                credentials="include"
             >
                 <MoustacheTemplate>
                     <div className={epic}>

@@ -962,14 +962,32 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "code": {
+                    "type": "string"
+                },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
                 }
             },
             "required": [
                 "_type",
+                "code",
                 "isMandatory"
             ]
+        },
+        "Language": {
+            "enum": [
+                "css",
+                "elm",
+                "javascript",
+                "markup",
+                "scala",
+                "typescript"
+            ],
+            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -2151,6 +2169,9 @@
                 "overrideImage": {
                     "type": "string"
                 },
+                "altText": {
+                    "type": "string"
+                },
                 "youtubeIndex": {
                     "type": "number"
                 }
@@ -2298,25 +2319,25 @@
                         ]
                     }
                 },
-                "createdOn": {
+                "blockCreatedOn": {
                     "type": "number"
                 },
-                "createdOnDisplay": {
+                "blockCreatedOnDisplay": {
                     "type": "string"
                 },
-                "lastUpdated": {
+                "blockLastUpdated": {
                     "type": "number"
                 },
-                "lastUpdatedDisplay": {
+                "blockLastUpdatedDisplay": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "firstPublished": {
+                "blockFirstPublished": {
                     "type": "number"
                 },
-                "firstPublishedDisplay": {
+                "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
                 "primaryDateLine": {

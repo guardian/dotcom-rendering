@@ -120,7 +120,11 @@ export const canShow = async ({
         return Promise.resolve({ result: false });
     }
 
-    if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt && withinLocalNoBannerCachePeriod()) {
+    if (
+        engagementBannerLastClosedAt &&
+        subscriptionBannerLastClosedAt &&
+        withinLocalNoBannerCachePeriod()
+    ) {
         return Promise.resolve({ result: false });
     }
 
@@ -153,7 +157,10 @@ export const canShow = async ({
         .then((response) => response.json())
         .then((json) => {
             if (!json.data) {
-                if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
+                if (
+                    engagementBannerLastClosedAt &&
+                    subscriptionBannerLastClosedAt
+                ) {
                     setLocalNoBannerCachePeriod();
                 }
                 return { result: false };

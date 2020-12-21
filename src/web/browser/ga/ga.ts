@@ -201,7 +201,7 @@ export const trackPerformance = (
         return;
     }
 
-    if (window.performance?.now) {
+    if (window.performance && window.performance.now) {
         ga(
             send,
             'timing',

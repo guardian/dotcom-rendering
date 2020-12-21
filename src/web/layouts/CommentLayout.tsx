@@ -11,8 +11,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
-import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -34,7 +32,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -46,8 +44,6 @@ import {
     BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@root/src/lib/display';
-
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 const gridWide = css`
     grid-template-areas:
@@ -308,6 +304,7 @@ export const CommentLayout = ({
                         <HeaderAdSlot
                             isAdFreeUser={CAPI.isAdFreeUser}
                             shouldHideAds={CAPI.shouldHideAds}
+                            display={display}
                         />
                     </Section>
                 </Stuck>
@@ -518,13 +515,31 @@ export const CommentLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <StickyAd
-                                name="right"
-                                height={MOSTVIEWED_STICKY_HEIGHT}
-                            />
-                            {!isPaidContent ? <MostViewedRightIsland /> : <></>}
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                                ${from.desktop} {
+                                    /* above 980 */
+                                    margin-left: 20px;
+                                    margin-right: -20px;
+                                }
+                                ${from.leftCol} {
+                                    /* above 1140 */
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
+                            `}
+                        >
+                            <RightColumn>
+                                <AdSlot position="right" display={display} />
+                                {!isPaidContent ? (
+                                    <MostViewedRightIsland />
+                                ) : (
+                                    <></>
+                                )}
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </StandardGrid>
             </Section>
@@ -535,7 +550,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -548,19 +563,20 @@ export const CommentLayout = ({
 
                     {showComments && (
                         <Section sectionId="comments">
-                            <CommentsLayout
+                            <Discussion
+                                discussionApiUrl={CAPI.config.discussionApiUrl}
+                                shortUrlId={CAPI.config.shortUrlId}
+                                isCommentable={CAPI.isCommentable}
                                 pillar={pillar}
-                                baseUrl={CAPI.config.discussionApiUrl}
-                                shortUrl={CAPI.config.shortUrlId}
-                                commentCount={0}
-                                isClosedForComments={true}
                                 discussionD2Uid={CAPI.config.discussionD2Uid}
                                 discussionApiClientHeader={
                                     CAPI.config.discussionApiClientHeader
                                 }
                                 enableDiscussionSwitch={false}
-                                expanded={false}
-                                onPermalinkClick={() => {}}
+                                isAdFreeUser={CAPI.isAdFreeUser}
+                                shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -581,7 +597,7 @@ export const CommentLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

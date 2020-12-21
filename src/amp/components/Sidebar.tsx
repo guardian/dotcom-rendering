@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { createAuthenticationEventParams } from "@root/src/lib/identity-component-event";
+import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 const sidebarStyles = css`
     width: 80vh;
@@ -159,7 +159,9 @@ const template = `
 {{ /readerRevenueLinks }}
 
 <li>
-    <a href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams('amp_sidebar_signin')}"
+    <a href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+        'amp_sidebar_signin',
+    )}"
         data-link-name="amp : nav : sign in">
         Sign in / Register
     </a>

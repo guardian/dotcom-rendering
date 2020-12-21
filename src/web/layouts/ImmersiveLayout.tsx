@@ -9,7 +9,6 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -31,7 +30,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -524,23 +523,39 @@ export const ImmersiveLayout = ({
                         </ArticleContainer>
                     </GridItem>
                     <GridItem area="right-column">
-                        <RightColumn>
-                            <>
-                                {mainMedia && (
-                                    <div
-                                        className={css`
-                                            margin-top: ${space[4]}px;
-                                        `}
-                                    >
-                                        <AdSlot
-                                            asps={namedAdSlotParameters(
-                                                'right',
-                                            )}
-                                        />
-                                    </div>
-                                )}
-                            </>
-                        </RightColumn>
+                        <div
+                            className={css`
+                                padding-top: 6px;
+                                height: 100%;
+                                ${from.desktop} {
+                                    /* above 980 */
+                                    margin-left: 20px;
+                                    margin-right: -20px;
+                                }
+                                ${from.leftCol} {
+                                    /* above 1140 */
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
+                            `}
+                        >
+                            <RightColumn>
+                                <>
+                                    {mainMedia && (
+                                        <div
+                                            className={css`
+                                                margin-top: ${space[4]}px;
+                                            `}
+                                        >
+                                            <AdSlot
+                                                position="right"
+                                                display={display}
+                                            />
+                                        </div>
+                                    )}
+                                </>
+                            </RightColumn>
+                        </div>
                     </GridItem>
                 </ImmersiveGrid>
             </Section>
@@ -551,7 +566,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
+                <AdSlot position="merchandising-high" display={display} />
             </Section>
 
             {!isPaidContent && (
@@ -564,19 +579,20 @@ export const ImmersiveLayout = ({
 
                     {showComments && (
                         <Section sectionId="comments">
-                            <CommentsLayout
+                            <Discussion
+                                discussionApiUrl={CAPI.config.discussionApiUrl}
+                                shortUrlId={CAPI.config.shortUrlId}
+                                isCommentable={CAPI.isCommentable}
                                 pillar={pillar}
-                                baseUrl={CAPI.config.discussionApiUrl}
-                                shortUrl={CAPI.config.shortUrlId}
-                                commentCount={0}
-                                isClosedForComments={true}
                                 discussionD2Uid={CAPI.config.discussionD2Uid}
                                 discussionApiClientHeader={
                                     CAPI.config.discussionApiClientHeader
                                 }
                                 enableDiscussionSwitch={false}
-                                expanded={false}
-                                onPermalinkClick={() => {}}
+                                isAdFreeUser={CAPI.isAdFreeUser}
+                                shouldHideAds={CAPI.shouldHideAds}
+                                beingHydrated={false}
+                                display={display}
                             />
                         </Section>
                     )}
@@ -597,7 +613,7 @@ export const ImmersiveLayout = ({
                 showSideBorders={false}
                 backgroundColour={neutral[93]}
             >
-                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+                <AdSlot position="merchandising" display={display} />
             </Section>
 
             {NAV.subNavSections && (

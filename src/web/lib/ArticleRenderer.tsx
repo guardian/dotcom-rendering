@@ -5,6 +5,7 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
+import { CodeBlockComponent } from '@root/src/web/components/elements/CodeBlockComponent';
 import { DefaultRichLink } from '@root/src/web/components/RichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
@@ -434,8 +435,14 @@ export const ArticleRenderer: React.FC<{
                             }
                         />
                     );
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
+                    return (
+                        <CodeBlockComponent
+                            code={element.code}
+                            language={element.language}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':

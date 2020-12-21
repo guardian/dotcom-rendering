@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
-import { Img } from '@root/src/web/components/Img';
+import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -248,7 +248,7 @@ export const ImageComponent = ({
                     /* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
                     always be used if display === 'immersive' */
-                    height: 100%;
+                    height: 100vh;
                     width: 100%;
 
                     img {
@@ -256,7 +256,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Img
+                <Picture
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}
@@ -286,7 +286,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Img
+                <Picture
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}
@@ -316,7 +316,7 @@ export const ImageComponent = ({
                     }
                 `}
             >
-                <Img
+                <Picture
                     role={role}
                     imageSources={element.imageSources}
                     alt={element.data.alt || ''}

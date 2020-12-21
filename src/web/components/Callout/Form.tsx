@@ -171,9 +171,11 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
                 </Button>
                 <div
                     className={css`
-                        a, a:hover  {
+                        a,
+                        a:hover {
                             border: 0;
                         }
+                        text-align: right;
                     `}
                 >
                     <Link

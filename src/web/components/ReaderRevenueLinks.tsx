@@ -12,12 +12,12 @@ import { from, until } from '@guardian/src-foundations/mq';
 
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { useAB } from '@guardian/ab-react';
-import {addTrackingCodesToUrl} from "@root/src/web/lib/acquisitions";
+import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
     GlobalEoyHeaderTestName,
-    GlobalEoyHeaderTestVariant
-} from "@root/src/web/experiments/tests/global-eoy-header-test";
-import {sendOphanComponentEvent} from "@root/src/web/browser/ophan/ophan";
+    GlobalEoyHeaderTestVariant,
+} from '@root/src/web/experiments/tests/global-eoy-header-test';
+import { sendOphanComponentEvent } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
     edition: Edition;
@@ -43,7 +43,7 @@ const paddingStyles = css`
     }
 `;
 
-const messageStyles = css`
+const messageStyles = (isThankYouMessage: boolean) => css`
     color: ${brandAlt[400]};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
@@ -54,7 +54,9 @@ const messageStyles = css`
     }
 
     ${from.leftCol} {
-        ${headline.medium({ fontWeight: 'bold' })}
+        ${isThankYouMessage
+            ? headline.small({ fontWeight: 'bold' })
+            : headline.medium({ fontWeight: 'bold' })}
     }
 `;
 
@@ -120,7 +122,7 @@ const subMessageStyles = css`
     margin: 5px 0;
 `;
 
-const month = new Date().getMonth() + 1;    // js date month begins at 0
+const month = new Date().getMonth() + 1; // js date month begins at 0
 
 export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
@@ -133,20 +135,14 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 
     const getTestVariant = (): GlobalEoyHeaderTestVariant => {
         if (inHeader && edition !== 'US') {
-            if (ABTestAPI.isUserInVariant(
-                GlobalEoyHeaderTestName,
-                'control',
-            )) {
+            if (ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'control')) {
                 return 'control';
             }
-            if (ABTestAPI.isUserInVariant(
-                GlobalEoyHeaderTestName,
-                'variant',
-            )) {
+            if (ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'variant')) {
                 return 'variant';
             }
         }
-        return 'notintest'
+        return 'notintest';
     };
 
     const variantName: GlobalEoyHeaderTestVariant = getTestVariant();
@@ -163,13 +159,17 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     }, [variantName]);
 
     const getHeading = (): string | JSX.Element => {
-        if (variantName === 'variant') return month === 12 ? `Support us this December` : 'Support us for 2021';
+        if (variantName === 'variant')
+            return month === 12
+                ? `Support us this December`
+                : 'Support us for 2021';
         return <span>Support The&nbsp;Guardian</span>;
     };
 
-    const subheading = variantName === 'variant' ?
-        'Power vital, open, independent journalism' :
-        'Available for everyone, funded by readers';
+    const subheading =
+        variantName === 'variant'
+            ? 'Power vital, open, independent journalism'
+            : 'Available for everyone, funded by readers';
 
     const getUrl = (rrType: 'contribute' | 'subscribe'): string => {
         if (variantName !== 'notintest') {
@@ -200,14 +200,17 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                             [hiddenUntilTablet]: inHeader,
                         })}
                     >
-                        <div className={messageStyles}> Thank you for your support </div>
+                        <div className={messageStyles(true)}>
+                            {' '}
+                            Thank you for your support{' '}
+                        </div>
                         <div className={subMessageStyles}>
                             <div> You’ve powered our journalism </div>
                             <div> through a historic year </div>
                         </div>
                     </div>
                 </div>
-            )
+            );
         }
         return null;
     }
@@ -218,7 +221,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     [hiddenUntilTablet]: inHeader,
                 })}
             >
-                <div className={messageStyles}>{getHeading()}</div>
+                <div className={messageStyles(false)}>{getHeading()}</div>
                 <div className={subMessageStyles}>
                     <div> {subheading} </div>
                 </div>

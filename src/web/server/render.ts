@@ -3,7 +3,7 @@ import { extract as extractNAV } from '@root/src/model/extract-nav';
 
 import { document } from '@root/src/web/server/document';
 import { validateAsCAPIType } from '@root/src/model/validate';
-import { addDropCaps } from '@root/src/model/add-dropcaps';
+import { addDividers } from '@root/src/model/add-dividers';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
@@ -17,8 +17,8 @@ class CAPIEnhancer {
         this.capi = capi;
     }
 
-    addDropCaps() {
-        this.capi = addDropCaps(this.capi);
+    addDividers() {
+        this.capi = addDividers(this.capi);
         return this;
     }
 
@@ -47,7 +47,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = new CAPIEnhancer(body)
             .validateAsCAPIType()
-            .addDropCaps()
+            .addDividers()
             .enhanceBlockquotes()
             .enhancePhotoEssay().capi;
 
