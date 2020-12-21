@@ -29,7 +29,7 @@ import {
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
-import { HydrateOnce } from 'src/web/components/HydrateOnce';
+import { HydrateOnce } from '@root/src/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
