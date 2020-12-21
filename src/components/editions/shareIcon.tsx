@@ -31,8 +31,11 @@ const AndroidShareIcon = ({ color }: { color: string }): ReactElement => (
 export const ShareIcon: FC<Props> = ({ color }) => {
 	const [platform, setPlatform] = useState('ios');
 
-	const updatePlatform = (event: MessageEvent<PlatformMessageEvent>): void =>
-		setPlatform(event.data.value);
+	const updatePlatform = (event: MessageEvent<PlatformMessageEvent>): void => {
+		if (event.type == "platform") {
+			setPlatform(event.data.value);
+		}
+	}
 
 	useEffect(() => {
 		window.addEventListener('message', updatePlatform);
