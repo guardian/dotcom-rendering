@@ -1,10 +1,10 @@
-import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { Item } from 'item';
-import { Option } from '@guardian/types';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
+import type { Option } from '@guardian/types';
 import { none, some } from '@guardian/types';
+import type { Item } from 'item';
 
-const tagTitleIsAlreadyInHeadline = (tag: Tag, headline: string) =>
+const tagTitleIsAlreadyInHeadline = (tag: Tag, headline: string): boolean =>
 	headline.toLowerCase().includes(tag.webTitle.toLowerCase());
 
 /*
@@ -23,7 +23,7 @@ const kickerPicker = (article: Item): Option<string> => {
 
 	if (seriesTag) return some(seriesTag.webTitle);
 
-	if (toneTag && toneTag.id) {
+	if (toneTag?.id) {
 		if (
 			toneTag.id === 'tone/letters' ||
 			toneTag.id === 'tone/analysis' ||
@@ -42,8 +42,8 @@ const kickerPicker = (article: Item): Option<string> => {
 		if (toneTag.id === 'tone/comment') return some(byline);
 	}
 
-	const topTag: Tag | undefined = article.tags[0];
-	const secondTag: Tag | undefined = article.tags[1];
+	const topTag = article.tags[0] as Tag | undefined;
+	const secondTag = article.tags[1] as Tag | undefined;
 
 	if (!topTag) return none;
 
