@@ -14,7 +14,7 @@ const svgBackground = encodeURIComponent(
 const sizes = [
     { width: 300, height: 250 }, // MPU
     { width: 300, height: 170 }, // Teads 16:9
-    { width: 250, height: 250 }, // Square
+    { width: 300, height: 300 }, // Square
 ];
 
 const adStyle = css`
@@ -149,6 +149,7 @@ const ampAdElem = (
     commercialProperties: CommercialProperties,
 ) => {
     const { width, height } = sizes[0]; // Set initial size to MPU
+    const { width: overrideWidth, height: overrideHeight } = sizes[2]; // Set initial size to MPU
     const multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
     return (
         <amp-ad
@@ -156,7 +157,10 @@ const ampAdElem = (
             data-block-on-consent=""
             width={width}
             height={height}
+            data-override-width={overrideWidth}
+            data-override-height={overrideHeight}
             data-multi-size={multiSizes}
+            data-multi-size-validation={false}
             data-npa-on-unknown-consent={true}
             data-loading-strategy="prefer-viewability-over-views"
             layout="fixed"
