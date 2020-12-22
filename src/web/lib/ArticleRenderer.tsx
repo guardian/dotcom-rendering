@@ -140,7 +140,7 @@ export const ArticleRenderer: React.FC<{
                     return <ChartAtom id={element.id} html={element.html} />;
                 case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
                     return (
-                        <div id={`quiz-atoms-${i}`}>
+                        <div id={`quiz-atom-${i}`}>
                             {element.quizType === 'personality' ? (
                                 <PersonalityQuizAtom
                                     id={element.id}
