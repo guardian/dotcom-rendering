@@ -30,7 +30,7 @@ import {
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
-import { Hydrate } from '@frontend/web/components/Hydrate';
+import { HydrateOnce } from '@root/src/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
@@ -65,7 +65,7 @@ import { trackPerformance } from '../browser/ga/ga';
 // ****** Dynamic imports ********
 // *******************************
 const MostViewedRightWrapper = React.lazy(() => {
-    const { start, end } = initPerf('MostViewedRightWrapper');
+    const { start, end } = initPerf('most-viewed-import');
     start();
     return import(
         /* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
@@ -75,7 +75,7 @@ const MostViewedRightWrapper = React.lazy(() => {
     });
 });
 const OnwardsUpper = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsUpper');
+    const { start, end } = initPerf('onwards-upper-load');
     start();
     return import(
         /* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
@@ -85,7 +85,7 @@ const OnwardsUpper = React.lazy(() => {
     });
 });
 const OnwardsLower = React.lazy(() => {
-    const { start, end } = initPerf('OnwardsLower');
+    const { start, end } = initPerf('onwards-lower-load');
     start();
     return import(
         /* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
@@ -95,7 +95,7 @@ const OnwardsLower = React.lazy(() => {
     });
 });
 const GetMatchStats = React.lazy(() => {
-    const { start, end } = initPerf('GetMatchStats');
+    const { start, end } = initPerf('match-stats-load');
     start();
     return import(
         /* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
@@ -283,9 +283,9 @@ export const App = ({ CAPI, NAV }: Props) => {
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     return (
-        // Do you need to Hydrate or do you want a Portal?
+        // Do you need to HydrateOnce or do you want a Portal?
         //
-        // Hydrate: If your component is server rendered and you're hydrating it with
+        // HydrateOnce: If your component is server rendered and you're hydrating it with
         // more data or making it interactive on the client and you do not need to access
         // global application state.
         //
@@ -303,18 +303,18 @@ export const App = ({ CAPI, NAV }: Props) => {
                     pageViewId={pageViewId}
                 />
             </Portal>
-            <Hydrate root="links-root">
+            <HydrateOnce root="links-root">
                 <Links
                     giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
                     userId={user ? user.userId : undefined}
                 />
-            </Hydrate>
-            <Hydrate root="edition-root">
+            </HydrateOnce>
+            <HydrateOnce root="edition-root">
                 <EditionDropdown
                     edition={CAPI.editionId}
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
                 />
-            </Hydrate>
+            </HydrateOnce>
             <Portal root="share-count-root">
                 <ShareCount
                     ajaxUrl={CAPI.config.ajaxUrl}
@@ -322,7 +322,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             {CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
-                <Hydrate
+                <HydrateOnce
                     key={index}
                     root="youtube-block-main-media"
                     index={youtubeBlock.youtubeIndex}
@@ -341,10 +341,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
-                <Hydrate
+                <HydrateOnce
                     key={index}
                     root="youtube-block"
                     index={youtubeBlock.youtubeIndex}
@@ -363,7 +363,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.quizAtoms.map((quizAtoms, index) => (
                 <Hydrate
@@ -380,7 +380,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Hydrate>
             ))}
             {NAV.subNavSections && (
-                <Hydrate root="sub-nav-root">
+                <HydrateOnce root="sub-nav-root">
                     <>
                         <SubNav
                             subNavSections={NAV.subNavSections}
@@ -388,7 +388,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             pillar={pillar}
                         />
                     </>
-                </Hydrate>
+                </HydrateOnce>
             )}
             {CAPI.matchUrl && (
                 <Portal root="match-nav">
@@ -410,17 +410,17 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Portal>
             ))}
             {CAPI.callouts.map((callout) => (
-                <Hydrate root="callout" index={callout.calloutIndex}>
+                <HydrateOnce root="callout" index={callout.calloutIndex}>
                     <CalloutBlockComponent callout={callout} pillar={pillar} />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.chartAtoms.map((chart) => (
-                <Hydrate root="chart-atom" index={chart.chartIndex}>
+                <HydrateOnce root="chart-atom" index={chart.chartIndex}>
                     <ChartAtom id={chart.id} html={chart.html} />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.audioAtoms.map((audioAtom) => (
-                <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
+                <HydrateOnce root="audio-atom" index={audioAtom.audioIndex}>
                     <AudioAtomWrapper
                         id={audioAtom.id}
                         trackUrl={audioAtom.trackUrl}
@@ -431,10 +431,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                         aCastisEnabled={CAPI.config.switches.acast}
                         readerCanBeShownAds={!CAPI.isAdFreeUser}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.qandaAtoms.map((qandaAtom) => (
-                <Hydrate root="qanda-atom" index={qandaAtom.qandaIndex}>
+                <HydrateOnce root="qanda-atom" index={qandaAtom.qandaIndex}>
                     <QandaAtom
                         id={qandaAtom.id}
                         title={qandaAtom.title}
@@ -458,10 +458,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                             'EXPAND',
                         )}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.guideAtoms.map((guideAtom) => (
-                <Hydrate root="guide-atom" index={guideAtom.guideIndex}>
+                <HydrateOnce root="guide-atom" index={guideAtom.guideIndex}>
                     <GuideAtom
                         id={guideAtom.id}
                         title={guideAtom.title}
@@ -485,10 +485,13 @@ export const App = ({ CAPI, NAV }: Props) => {
                             'EXPAND',
                         )}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.profileAtoms.map((profileAtom) => (
-                <Hydrate root="profile-atom" index={profileAtom.profileIndex}>
+                <HydrateOnce
+                    root="profile-atom"
+                    index={profileAtom.profileIndex}
+                >
                     <ProfileAtom
                         id={profileAtom.id}
                         title={profileAtom.title}
@@ -512,10 +515,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                             'EXPAND',
                         )}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {CAPI.timelineAtoms.map((timelineAtom) => (
-                <Hydrate
+                <HydrateOnce
                     root="timeline-atom"
                     index={timelineAtom.timelineIndex}
                 >
@@ -541,7 +544,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             'EXPAND',
                         )}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>
@@ -620,7 +623,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="sign-in-gate">
                 <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
             </Portal>
-            <Hydrate root="comments">
+            <HydrateOnce root="comments">
                 <Discussion
                     discussionApiUrl={CAPI.config.discussionApiUrl}
                     shortUrlId={CAPI.config.shortUrlId}
@@ -637,7 +640,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     beingHydrated={true}
                     display={display}
                 />
-            </Hydrate>
+            </HydrateOnce>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
                     pillar={pillar}
