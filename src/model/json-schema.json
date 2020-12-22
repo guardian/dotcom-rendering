@@ -972,9 +972,6 @@
                     ],
                     "type": "string"
                 },
-                "quizIndex": {
-                    "type": "number"
-                },
                 "id": {
                     "type": "string"
                 },
@@ -1050,7 +1047,6 @@
                         "required": [
                             "answers",
                             "id",
-                            "resultBuckets",
                             "text"
                         ]
                     }
@@ -1076,21 +1072,6 @@
                             "title"
                         ]
                     }
-                },
-                "url": {
-                    "type": "string"
-                },
-                "placeholderUrl": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
                 }
             },
             "required": [
@@ -1098,8 +1079,7 @@
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets",
-                "url"
+                "resultBuckets"
             ]
         },
         "CodeBlockElement": {
