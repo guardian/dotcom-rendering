@@ -9,7 +9,7 @@ import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
 import { Interview } from '@root/fixtures/articles/Interview';
-import { Quiz } from '@root/fixtures/articles/Quiz';
+import { KnowledgeQuiz } from '@root/fixtures/articles/KnowledgeQuiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
@@ -129,7 +129,7 @@ InterviewStory.story = {
 };
 
 export const QuizStory = () => {
-    const ServerCAPI = convertToStandard(Quiz);
+    const ServerCAPI = convertToStandard(KnowledgeQuiz);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 QuizStory.story = {

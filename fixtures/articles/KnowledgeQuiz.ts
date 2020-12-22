@@ -1,6 +1,6 @@
 import { switches } from '../switches';
 
-export const Quiz: CAPIType = {
+export const KnowledgeQuiz: CAPIType = {
     contributionsServiceUrl: 'https://contributions.guardianapis.com',
     shouldHideReaderRevenue: false,
     slotMachineFlags: '',
