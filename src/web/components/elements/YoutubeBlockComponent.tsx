@@ -4,10 +4,12 @@ import { css } from 'emotion';
 import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
+import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { trackVideosGA } from '@root/src/web/browser/ga/ga';
+import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@root/src/lib/display';
-import { YoutubeAtom } from '@guardian/atoms-rendering';
 
 type Props = {
     display: Display;
@@ -125,6 +127,23 @@ export const YoutubeBlockComponent = ({
         );
     }
 
+    const ophanTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        record({
+            video: {
+                id: `gu-video-youtube-${element.id}`,
+                eventType: `video:content:${trackingEvent}`,
+            },
+        });
+    };
+    const gaTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        trackVideosGA({
+            trackingEvent,
+            elementId: element.id,
+        });
+    };
+
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
@@ -143,7 +162,7 @@ export const YoutubeBlockComponent = ({
                 title={title}
                 duration={duration}
                 origin={origin}
-                eventEmitters={[]}
+                eventEmitters={[ophanTracking, gaTracking]}
             />
             {!hideCaption && (
                 <Caption
