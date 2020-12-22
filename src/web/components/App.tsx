@@ -24,11 +24,8 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
-<<<<<<< HEAD
-    AudioAtom,
-    QuizAtom
-=======
->>>>>>> e2759972ddefa9f8d0922e87aafc6785a05db36b
+    PersonalityQuizAtom,
+    KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
@@ -375,8 +372,18 @@ export const App = ({ CAPI, NAV }: Props) => {
                     root="quiz-atom"
                     index={quizAtoms.quizIndex}
                 >
-                    <QuizAtom id={quizAtoms.id} questions={quizAtoms.questions}
-                    />
+                    {quizAtoms.quizType === 'personality' ? (
+                        <PersonalityQuizAtom
+                            id={quizAtoms.id}
+                            questions={quizAtoms.questions}
+                            resultBuckets={quizAtoms.resultBuckets}
+                        />
+                    ) : (
+                        <KnowledgeQuizAtom
+                            id={quizAtoms.id}
+                            questions={quizAtoms.questions}
+                        />
+                    )}
                 </Hydrate>
             ))}
             {NAV.subNavSections && (
