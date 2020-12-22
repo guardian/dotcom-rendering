@@ -66,9 +66,11 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 }
 interface QuizAtomBlockElement extends InteractiveAtomBlockElementBase {
     _type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
-    chartIndex?: number;
+    quizType: 'personality' | 'knowledge';
+    quizIndex?: number;
     id: string;
     questions: QuestionType[];
+    resultBuckets: ResultBucketsType[];
 }
 
 interface CodeBlockElement {

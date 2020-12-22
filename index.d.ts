@@ -332,7 +332,7 @@ type CAPIBrowserType = {
     audioAtoms: AudioAtomBlockElement[];
     youtubeBlockElement: YoutubeBlockElement[];
     youtubeMainMediaBlockElement: YoutubeBlockElement[];
-    quizAtoms: QuizBlockElement[];
+    quizAtoms: QuizAtomBlockElement[];
 };
 
 interface TagType {
@@ -413,7 +413,7 @@ type AnswerType = {
     text: string;
     revealText?: string;
     isCorrect: boolean;
-    buckets: string[];
+    answerBuckets: string[];
 };
 
 type QuizAtomResultBucketType = {
@@ -429,6 +429,12 @@ type QuestionType = {
     answers: AnswerType[];
     imageUrl?: string;
     resultBuckets: QuizAtomResultBucketType[]
+}
+
+type ResultBucketsType = {
+    id: string;
+    title: string;
+    description: string;
 }
 
 interface LinkHeadlineType {
