@@ -7,6 +7,7 @@ import { titlepiece } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import { kickerPicker } from './kickerPicker';
 
 // ----- Component ----- //
 
@@ -22,8 +23,8 @@ interface Props {
 }
 
 const Series: FC<Props> = ({ item }) =>
-	maybeRender(item.series, (series) => (
-		<nav css={styles}>{series.webTitle}</nav>
+	maybeRender(kickerPicker(item), (kicker) => (
+		<nav css={styles}>{kicker}</nav>
 	));
 
 // ----- Exports ----- //
