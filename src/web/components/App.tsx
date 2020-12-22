@@ -366,7 +366,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </HydrateOnce>
             ))}
             {CAPI.quizAtoms.map((quizAtoms, index) => (
-                <Hydrate
+                <HydrateOnce
                     key={index}
                     root="quiz-atom"
                     index={quizAtoms.quizIndex}
@@ -377,7 +377,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         resultBuckets={quizAtoms.resultBuckets}
                         quizType={quizAtoms.quizType}
                     />
-                </Hydrate>
+                </HydrateOnce>
             ))}
             {NAV.subNavSections && (
                 <HydrateOnce root="sub-nav-root">
