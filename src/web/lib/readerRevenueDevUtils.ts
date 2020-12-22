@@ -1,11 +1,20 @@
-import {setCountryCode, getCountryCode} from "@root/src/web/lib/getCountryCode";
+import {
+    setCountryCode,
+    getCountryCode,
+} from '@root/src/web/lib/getCountryCode';
 import {
     HIDE_SUPPORT_MESSAGING_COOKIE,
-    RECURRING_CONTRIBUTOR_COOKIE, SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
-    SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE
-} from "@root/src/web/lib/contributions";
-import {addCookie, getCookie, removeCookie} from "@root/src/web/browser/cookie";
-import {setAlreadyVisited} from "@root/src/web/lib/alreadyVisited";
+    RECURRING_CONTRIBUTOR_COOKIE,
+    SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+    SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
+    SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
+} from '@root/src/web/lib/contributions';
+import {
+    addCookie,
+    getCookie,
+    removeCookie,
+} from '@root/src/web/browser/cookie';
+import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 
 const readerRevenueCookies = [
     HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -15,8 +24,10 @@ const readerRevenueCookies = [
     SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 ];
 
-const clearEpicViewLog = (): void => localStorage.removeItem('gu.contributions.views');
-const clearBannerLastClosedAt = (): void => localStorage.removeItem('engagementBannerLastClosedAt');
+const clearEpicViewLog = (): void =>
+    localStorage.removeItem('gu.contributions.views');
+const clearBannerLastClosedAt = (): void =>
+    localStorage.removeItem('engagementBannerLastClosedAt');
 
 const fakeOneOffContributor = (): void =>
     addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, Date.now().toString());
@@ -46,18 +57,20 @@ const decrementMvtCookie = (): void => {
     }
 };
 
-
-const clearCommonReaderRevenueStateAndReload = (asExistingSupporter: boolean, shouldHideReaderRevenue: boolean): void => {
+const clearCommonReaderRevenueStateAndReload = (
+    asExistingSupporter: boolean,
+    shouldHideReaderRevenue: boolean,
+): void => {
     if (shouldHideReaderRevenue) {
         /* eslint-disable no-alert */
         alert(
-            'This page has "Prevent membership/contribution appeals" ticked in Composer. Please try a different page'
+            'This page has "Prevent membership/contribution appeals" ticked in Composer. Please try a different page',
         );
         /* eslint-enable no-alert */
         return;
     }
 
-    readerRevenueCookies.forEach(cookie => removeCookie(cookie));
+    readerRevenueCookies.forEach((cookie) => removeCookie(cookie));
     clearEpicViewLog();
 
     if (asExistingSupporter) {
@@ -67,43 +80,76 @@ const clearCommonReaderRevenueStateAndReload = (asExistingSupporter: boolean, sh
     window.location.reload();
 };
 
-const showMeTheEpic = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
-    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+const showMeTheEpic = (
+    asExistingSupporter: boolean = false,
+    shouldHideReaderRevenue: boolean,
+): void => {
+    clearCommonReaderRevenueStateAndReload(
+        asExistingSupporter,
+        shouldHideReaderRevenue,
+    );
 };
 
-const showMeTheBanner = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+const showMeTheBanner = (
+    asExistingSupporter: boolean = false,
+    shouldHideReaderRevenue: boolean,
+): void => {
     clearBannerLastClosedAt();
     setAlreadyVisited(2);
-    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+    clearCommonReaderRevenueStateAndReload(
+        asExistingSupporter,
+        shouldHideReaderRevenue,
+    );
 };
 
-const showNextVariant = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+const showNextVariant = (
+    asExistingSupporter: boolean = false,
+    shouldHideReaderRevenue: boolean,
+): void => {
     incrementMvtCookie();
-    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+    clearCommonReaderRevenueStateAndReload(
+        asExistingSupporter,
+        shouldHideReaderRevenue,
+    );
 };
 
-const showPreviousVariant = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
+const showPreviousVariant = (
+    asExistingSupporter: boolean = false,
+    shouldHideReaderRevenue: boolean,
+): void => {
     decrementMvtCookie();
-    clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+    clearCommonReaderRevenueStateAndReload(
+        asExistingSupporter,
+        shouldHideReaderRevenue,
+    );
 };
 
-const changeGeolocation = (asExistingSupporter: boolean = false, shouldHideReaderRevenue: boolean): void => {
-    getCountryCode().then(current => {
+const changeGeolocation = (
+    asExistingSupporter: boolean = false,
+    shouldHideReaderRevenue: boolean,
+): void => {
+    getCountryCode().then((current) => {
         /* eslint-disable no-alert */
         const geo = window.prompt(
-            `Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`
+            `Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`,
         );
         if (geo === 'UK') {
             alert(`'UK' is not a valid geolocation - please use 'GB' instead!`);
         } else if (geo) {
             setCountryCode(geo);
-            clearCommonReaderRevenueStateAndReload(asExistingSupporter, shouldHideReaderRevenue);
+            clearCommonReaderRevenueStateAndReload(
+                asExistingSupporter,
+                shouldHideReaderRevenue,
+            );
         }
         /* eslint-enable no-alert */
-    })
+    });
 };
 
-type ReaderRevenueDevUtil = (asExistingSupporter: boolean, shouldHideReaderRevenue: boolean) => void;
+type ReaderRevenueDevUtil = (
+    asExistingSupporter: boolean,
+    shouldHideReaderRevenue: boolean,
+) => void;
 export interface ReaderRevenueDevUtils {
     changeGeolocation: ReaderRevenueDevUtil;
     showMeTheEpic: ReaderRevenueDevUtil;

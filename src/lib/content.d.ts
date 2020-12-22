@@ -73,7 +73,9 @@ interface QuizAtomBlockElement extends InteractiveAtomBlockElementBase {
 
 interface CodeBlockElement {
     _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
+    code: string;
     isMandatory: boolean;
+    language?: Language;
 }
 
 interface CommentBlockElement {
@@ -111,6 +113,7 @@ interface DocumentBlockElement {
 interface EmbedBlockElement {
     _type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
     safe?: boolean;
+    role?: RoleType;
     alt?: string;
     html: string;
     isMandatory: boolean;
@@ -348,6 +351,7 @@ interface YoutubeBlockElement {
     posterSrc?: string;
     expired: boolean;
     overrideImage?: string;
+    altText?: string;
     youtubeIndex?: number;
 }
 
@@ -455,6 +459,15 @@ interface TimelineEvent {
 interface Switches {
     [key: string]: boolean;
 }
+
+// Used for CodeBlockElement
+type Language =
+    | 'typescript'
+    | 'javascript'
+    | 'css'
+    | 'markup'
+    | 'scala'
+    | 'elm';
 
 // -------------------------------------
 // Callout Campaign

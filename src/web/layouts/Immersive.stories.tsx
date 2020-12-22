@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { breakpoints } from '@guardian/src-foundations/mq';
+
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
 import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
@@ -58,7 +60,21 @@ export const ArticleStory = () => {
     const ServerCAPI = convertToImmersive(Article);
     return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-ArticleStory.story = { name: 'Article' };
+ArticleStory.story = {
+    name: 'Article',
+    // Set the viewports in Chromatic to capture this story at each breakpoint
+    chromatic: {
+        viewports: [
+            breakpoints.mobile,
+            breakpoints.mobileMedium,
+            breakpoints.phablet,
+            breakpoints.tablet,
+            breakpoints.desktop,
+            breakpoints.leftCol,
+            breakpoints.wide,
+        ],
+    },
+};
 
 export const ReviewStory = () => {
     const ServerCAPI = convertToImmersive(Review);

@@ -7,8 +7,9 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
+import { neutral, space } from '@guardian/src-foundations';
 import { Display } from '@root/src/lib/display';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
     headlineString: string;
@@ -123,15 +124,18 @@ const invertedStyles = css`
 const immersiveStyles = css`
     min-height: 112px;
     padding-bottom: ${space[9]}px;
-    padding-left: ${space[3]}px;
-    ${from.phablet} {
+    padding-left: ${space[1]}px;
+    ${from.mobileLandscape} {
+        padding-left: ${space[3]}px;
+    }
+    ${from.tablet} {
         padding-left: ${space[1]}px;
     }
     margin-right: ${space[5]}px;
 `;
 
 const blackBackground = css`
-    background-color: black;
+    background-color: ${neutral[0]};
 `;
 
 const invertedText = css`
@@ -154,6 +158,31 @@ const invertedWrapper = css`
         shift everything back to the right
     */
     margin-left: 6px;
+`;
+
+const immersiveWrapper = css`
+    /*
+        Make sure we vertically align the headline font with the body font
+    */
+    margin-left: 6px;
+    ${from.tablet} {
+        margin-left: 16px;
+    }
+    ${from.leftCol} {
+        margin-left: 25px;
+    }
+    /* 
+        We need this grow to ensure the headline fills the main content column
+    */
+    flex-grow: 1;
+    /* 
+        This z-index is what ensures the headline text shows above the pseudo black
+        box that extends the black background to the right
+    */
+    ${getZIndex('articleHeadline')}
+    ${until.mobileLandscape} {
+        margin-right: 40px;
+    }
 `;
 
 // Due to MainMedia using position: relative, this seems to effect the rendering order
@@ -227,7 +256,7 @@ export const ArticleHeadline = ({
                     return (
                         // Immersive headlines with main media present, are large and inverted with
                         // a black background
-                        <h1 className={cx(invertedWrapper, blackBackground)}>
+                        <h1 className={cx(immersiveWrapper, blackBackground)}>
                             <span
                                 className={cx(
                                     jumboFont,

@@ -52,6 +52,8 @@ const pillarWrap = css`
 const emailSignup = css`
     padding-top: 12px;
     min-height: 150px;
+    overflow: hidden;
+    border: 0;
 
     ${from.desktop} {
         margin: 0 ${emailSignupSideMargins}px;
@@ -75,6 +77,7 @@ const footerLink = css`
     text-decoration: none;
     padding-bottom: 12px;
     display: block;
+    line-height: 19px;
 
     :hover {
         text-decoration: underline;
@@ -145,7 +148,10 @@ const readerRevenueLinks = css`
 
 const copyright = css`
     ${textSans.xsmall()};
-    padding: 12px;
+    padding-left: 20px;
+    padding-right: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 
     ${until.tablet} {
         margin-top: 11px;
@@ -215,7 +221,12 @@ export const Footer: React.FC<{
     pillar: Pillar;
     pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
-    <footer className={footer} data-link-name="footer" data-component="footer">
+    <footer
+        data-print-layout="hide"
+        className={footer}
+        data-link-name="footer"
+        data-component="footer"
+    >
         <div className={pillarWrap}>
             <Pillars
                 display={Display.Standard}
@@ -229,14 +240,11 @@ export const Footer: React.FC<{
             <iframe
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
-                scrolling="no"
-                seamless={true}
                 id="footer__email-form"
                 className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
                 data-node-uid="2"
-                height="100px"
-                frameBorder="0"
+                height="100"
             />
 
             <FooterLinks pageFooter={pageFooter} />

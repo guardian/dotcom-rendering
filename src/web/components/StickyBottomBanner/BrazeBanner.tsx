@@ -48,22 +48,26 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 type PreCheckArgs = {
     brazeSwitch: boolean;
     apiKey?: string;
-    isDigitalSubscriber?: boolean;
+    shouldHideSupportMessaging?: boolean;
     pageConfig: { [key: string]: any };
 };
 
 export const canShowPreChecks = ({
     brazeSwitch,
     apiKey,
-    isDigitalSubscriber,
+    shouldHideSupportMessaging,
     pageConfig,
-}: PreCheckArgs) =>
-    Boolean(
-        brazeSwitch &&
-            apiKey &&
-            isDigitalSubscriber &&
-            !pageConfig.isPaidContent,
+}: PreCheckArgs) => {
+    // Currently all active web canvases in Braze target existing supporters,
+    // subscribers or otherwise those with a Guardian product. We can use the
+    // value of `shouldHideSupportMessaging` to identify these users, limiting
+    // the number of requests we need to initialise Braze on the page:
+    const userIsGuSupporter = shouldHideSupportMessaging;
+
+    return Boolean(
+        brazeSwitch && apiKey && userIsGuSupporter && !pageConfig.isPaidContent,
     );
+};
 
 const getMessageFromBraze = async (
     apiKey: string,
@@ -94,7 +98,9 @@ const getMessageFromBraze = async (
     });
 
     const canShowPromise: Promise<CanShowResult> = new Promise((resolve) => {
-        appboy.subscribeToInAppMessage((message: any) => {
+        let subscriptionId: string | undefined;
+
+        const callback = (message: any) => {
             const { extras } = message;
 
             const logButtonClickWithBraze = (internalButtonId: number) => {
@@ -126,7 +132,16 @@ const getMessageFromBraze = async (
             } else {
                 resolve({ result: false });
             }
-        });
+
+            // Unsubscribe
+            if (subscriptionId) {
+                appboy.removeSubscription(subscriptionId);
+            }
+        };
+
+        // Keep hold of the subscription ID so that we can unsubscribe in the
+        // callback, ensuring that the callback is only invoked once per page
+        subscriptionId = appboy.subscribeToInAppMessage(callback);
 
         appboy.changeUser(brazeUuid);
         appboy.openSession();
@@ -150,12 +165,26 @@ const getMessageFromBraze = async (
     return canShowPromise;
 };
 
+const FORCE_BRAZE_ALLOWLIST = [
+    'preview.gutools.co.uk',
+    'preview.code.dev-gutools.co.uk',
+    'localhost',
+    'm.thegulocal.com',
+];
+
 const getBrazeMetaFromQueryString = (): Meta | null => {
     if (URLSearchParams) {
-        const params = new URLSearchParams(window.location.search);
         const qsArg = 'force-braze-message';
+
+        const params = new URLSearchParams(window.location.search);
         const value = params.get(qsArg);
         if (value) {
+            if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
+                // eslint-disable-next-line no-console
+                console.log(`${qsArg} is not supported on this domain`);
+                return null;
+            }
+
             try {
                 const dataFromBraze = JSON.parse(value);
 
@@ -178,7 +207,7 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
 // We can show a Braze banner if:
 // - The Braze switch is on
 // - We have a Braze API key
-// - The user is a digital subscriber
+// - The user should have support messaging hidden, implying they are a contributor or subscriber
 // - We're not on a Glabs paid content page
 // - We've got a Braze UUID from the API, given a user's ID Creds
 // - The user has given Consent via CCPA or TCFV2
@@ -188,7 +217,7 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
 // - The force-braze-message query string arg is passed
 export const canShow = async (
     asyncBrazeUuid: Promise<null | string>,
-    isDigitalSubscriber: undefined | boolean,
+    shouldHideSupportMessaging: undefined | boolean,
 ): Promise<CanShowResult> => {
     const bannerTiming = initPerf('braze-banner');
     bannerTiming.start();
@@ -208,7 +237,7 @@ export const canShow = async (
         !canShowPreChecks({
             brazeSwitch,
             apiKey,
-            isDigitalSubscriber,
+            shouldHideSupportMessaging,
             pageConfig: window.guardian.config.page,
         })
     ) {

@@ -1,14 +1,14 @@
 name: PR deployment
 on:
-  pull_request:
-    types: [labeled]
+    pull_request:
+        types: [labeled]
 
 jobs:
-    server:
+    pr_deployment:
         # We only want to run the app if the PR Deployment label has been added
         if: ${{ github.event.label.id == 2500798832 }}
 
-        name: server
+        name: Start server
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code

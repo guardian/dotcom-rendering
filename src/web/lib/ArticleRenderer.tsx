@@ -5,11 +5,14 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
+import { CodeBlockComponent } from '@root/src/web/components/elements/CodeBlockComponent';
+import { DefaultRichLink } from '@root/src/web/components/RichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
@@ -27,6 +30,8 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 
+import { Figure } from '@root/src/web/components/Figure';
+
 import {
     AudioAtom,
     ChartAtom,
@@ -41,9 +46,7 @@ import {
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { toTypesPillar } from '@root/src/lib/format';
-import { DefaultRichLink } from '../components/RichLink';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -152,20 +155,24 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     if (!element.safe) {
                         return (
-                            <UnsafeEmbedBlockComponent
-                                key={i}
-                                html={element.html}
-                                alt={element.alt || ''}
-                                index={i}
-                            />
+                            <Figure role={element.role}>
+                                <UnsafeEmbedBlockComponent
+                                    key={i}
+                                    html={element.html}
+                                    alt={element.alt || ''}
+                                    index={i}
+                                />
+                            </Figure>
                         );
                     }
                     return (
-                        <EmbedBlockComponent
-                            key={i}
-                            html={element.html}
-                            alt={element.alt}
-                        />
+                        <Figure role={element.role}>
+                            <EmbedBlockComponent
+                                key={i}
+                                html={element.html}
+                                alt={element.alt}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (
@@ -435,8 +442,14 @@ export const ArticleRenderer: React.FC<{
                             }
                         />
                     );
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
+                    return (
+                        <CodeBlockComponent
+                            code={element.code}
+                            language={element.language}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':
@@ -447,7 +460,7 @@ export const ArticleRenderer: React.FC<{
 
     return (
         <div
-            className={`article-body-commercial-selector ${commercialPosition}`}
+            className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
         >
             {/* Insert the placeholder for the sign in gate on the 2nd article element */}
             {withSignInGateSlot(output)}

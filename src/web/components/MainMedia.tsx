@@ -5,7 +5,9 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { Display } from '@root/src/lib/display';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
     min-height: 1px;
@@ -17,7 +19,7 @@ const mainMedia = css`
 
     ${until.tablet} {
         margin: 0;
-        order: -1;
+        order: 2;
     }
 
     img {
@@ -37,6 +39,17 @@ const noGutters = css`
         margin-left: -10px;
         margin-right: -10px;
     }
+`;
+
+const immersiveWrapper = css`
+    /*
+        Immersive main media is wrapped in a flex div with height 100vw and then
+        we use this grow here to ensure the content fills the available height
+    */
+    flex-grow: 1;
+    ${getZIndex('mainMedia')}
+    /* Prevent the immersive image 100vh from spilling into main content */
+    overflow: hidden;
 `;
 
 function renderElement(
@@ -83,6 +96,10 @@ function renderElement(
                     />
                 </div>
             );
+        case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+            return (
+                <EmbedBlockComponent html={element.html} alt={element.alt} />
+            );
         default:
             // eslint-disable-next-line no-console
             console.warn(
@@ -109,7 +126,12 @@ export const MainMedia: React.FC<{
     adTargeting,
     starRating,
 }) => (
-    <div className={cx(mainMedia, display !== Display.Immersive && noGutters)}>
+    <div
+        className={cx(
+            mainMedia,
+            display === Display.Immersive ? immersiveWrapper : noGutters,
+        )}
+    >
         {elements.map((element, i) =>
             renderElement(
                 display,

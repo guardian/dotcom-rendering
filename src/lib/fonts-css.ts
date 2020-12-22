@@ -1,5 +1,4 @@
 import minifyCssString from 'minify-css-string';
-import { getStatic } from './assets';
 
 type FontFamily =
     | 'GH Guardian Headline'
@@ -268,6 +267,9 @@ const fontList: FontDisplay[] = [
     },
 ];
 
+const assetsUrl = (path: string): string =>
+    `https://assets.guim.co.uk/static/frontend/${path}`;
+
 const template: (_: FontDisplay) => string = ({
     family,
     woff2,
@@ -278,9 +280,9 @@ const template: (_: FontDisplay) => string = ({
 }) => `
     @font-face {
         font-family: "${family}";
-        src: url(${getStatic(woff2)}) format("woff2"),
-                url(${getStatic(woff)}) format("woff"),
-                url(${getStatic(ttf)}) format("truetype");
+        src: url(${assetsUrl(woff2)}) format("woff2"),
+                url(${assetsUrl(woff)}) format("woff"),
+                url(${assetsUrl(ttf)}) format("truetype");
         font-weight: ${weight};
         font-style: ${style};
         font-display: swap;

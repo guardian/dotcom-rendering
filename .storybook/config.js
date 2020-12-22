@@ -5,23 +5,26 @@ import { configure, addParameters } from '@storybook/react';
 
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
+import { getFontsCss } from '@root/src/lib/fonts-css';
 
 import { defaults } from './default-css';
 
 import 'reset-css';
 
 import { Lazy } from '@root/src/web/components/Lazy';
+import { Picture } from '@root/src/web/components/Picture';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
+Picture.disableLazyLoading = isChromatic();
 
 // Add base css for the site
-// let css = `${getFontsCss()}${defaults}`;
+let css = `${getFontsCss()}${defaults}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
-style.appendChild(document.createTextNode(defaults));
+style.appendChild(document.createTextNode(css));
 
 const guardianViewports = {
     mobileMedium: {

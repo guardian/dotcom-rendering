@@ -1,6 +1,6 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { getStatic, CDN } from '@root/src/lib/assets';
+import { CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
 
@@ -13,6 +13,7 @@ export const htmlTemplate = ({
     css,
     html,
     windowGuardian,
+    gaPath,
     fontFiles = [],
     ampLink,
     openGraphData,
@@ -28,6 +29,7 @@ export const htmlTemplate = ({
     html: string;
     fontFiles?: string[];
     windowGuardian: string;
+    gaPath: { modern: string; legacy: string };
     ampLink?: string;
     openGraphData: { [key: string]: string };
     twitterData: { [key: string]: string };
@@ -40,9 +42,7 @@ export const htmlTemplate = ({
 
     const fontPreloadTags = fontFiles.map(
         (fontFile) =>
-            `<link rel="preload" href="${getStatic(
-                fontFile,
-            )}" as="font" crossorigin>`,
+            `<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
     );
 
     const generateMetaTags = (
@@ -92,7 +92,6 @@ export const htmlTemplate = ({
         `https://api.nextgen.guardianapps.co.uk`,
         `https://hits-secure.theguardian.com`,
         `https://interactive.guim.co.uk`,
-        `https://ipv6.guim.co.uk`,
         `https://phar.gu-web.net`,
         `https://static.theguardian.com`,
         `https://support.theguardian.com`,
@@ -135,6 +134,10 @@ export const htmlTemplate = ({
 
                 ${twitterMetaTags}
 
+                <!--  This tag enables pages to be featured in Google Discover as large previews
+                    See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
+                <meta name="robots" content="max-image-preview:large">
+
                 <script>
                     window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
@@ -142,11 +145,21 @@ export const htmlTemplate = ({
 
                 <script type="module">
                     window.guardian.mustardCut = true;
+                    window.guardian.gaPath = "${gaPath.modern}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
+                    window.guardian.gaPath = "${gaPath.legacy}";
+                </script>
+
+                <script>
+                    // Noop monkey patch perf.mark and perf.measure if not supported
+                    if(window.performance !== undefined && window.performance.mark === undefined) {
+                        window.performance.mark = function(){};
+                        window.performance.measure = function(){};
+                    }
                 </script>
 
                 <script>
@@ -200,11 +213,14 @@ export const htmlTemplate = ({
                 </script>
 
                 <noscript>
-                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
+                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
+                        keywords,
+                    ).replace(/%20/g, '+')}" />
                 </noscript>
                 ${[...priorityScriptTags].join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
+                <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>
 
             <body>

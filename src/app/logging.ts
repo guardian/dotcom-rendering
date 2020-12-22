@@ -55,10 +55,9 @@ const enableLog4j = {
     pm2: true,
 };
 
-if (process.env.DISABLE_LOGGING_AND_METRICS === "true") {
+if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
     configure(disableLog4js);
-}
-else {
+} else {
     configure(enableLog4j);
 }
 

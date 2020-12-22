@@ -3,8 +3,8 @@ import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
+import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
@@ -13,7 +13,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -24,9 +24,14 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
+<<<<<<< HEAD
     AudioAtom,
     QuizAtom
+=======
+>>>>>>> e2759972ddefa9f8d0922e87aafc6785a05db36b
 } from '@guardian/atoms-rendering';
+
+import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -35,14 +40,11 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { toTypesPillar } from '@root/src/lib/format';
+import { loadScript } from '@root/src/web/lib/loadScript';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
-import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getUser } from '@root/src/web/lib/getUser';
-import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
-import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -109,19 +111,6 @@ const GetMatchStats = React.lazy(() => {
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
-const commentIdFromUrl = () => {
-    const { hash } = window.location;
-    if (!hash) return;
-    if (!hash.includes('comment')) return;
-    if (!hash.split('-')[1]) return;
-    return parseInt(hash.split('-')[1], 10);
-};
-
-const hasCommentsHashInUrl = () => {
-    const { hash } = window.location;
-    return hash && hash === '#comments';
-};
-
 const componentEventHandler = (
     componentType: any,
     id: any,
@@ -141,11 +130,7 @@ const componentEventHandler = (
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
-    const [isDigitalSubscriber, setIsDigitalSubscriber] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
-    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
-        Promise<string | null>
-    >();
     const [countryCode, setCountryCode] = useState<string>();
     // This is an async version of the countryCode state value defined above.
     // This can be used where you've got logic which depends on countryCode but
@@ -154,23 +139,8 @@ export const App = ({ CAPI, NAV }: Props) => {
     // banners need countryCode but we don't want to block all banners from
     // executing their canShow logic until countryCode is available):
     const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
-    const [commentCount, setCommentCount] = useState<number>(0);
-    const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
-        true,
-    );
-    const [commentPage, setCommentPage] = useState<number>();
-    const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
-    const [commentOrderBy, setCommentOrderBy] = useState<
-        'newest' | 'oldest' | 'recommendations'
-    >();
-    const [isExpanded, setIsExpanded] = useState<boolean>(false);
-    const [hashCommentId, setHashCommentId] = useState<number | undefined>(
-        commentIdFromUrl(),
-    );
 
-    const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
-
-    const hasCommentsHash = hasCommentsHashInUrl();
+    const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
     // *******************************
     // ** Setup AB Test Tracking *****
@@ -188,10 +158,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        setIsDigitalSubscriber(getCookie('gu_digital_subscriber') === 'true');
-    }, []);
-
-    useEffect(() => {
         const callGetUser = async () => {
             setUser(await getUser(CAPI.config.discussionApiUrl));
         };
@@ -201,20 +167,6 @@ export const App = ({ CAPI, NAV }: Props) => {
     }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
-        // Don't do anything until isSignedIn is defined as we only want to set
-        // asyncBrazeUuid once
-        if (isSignedIn === undefined) {
-            return;
-        }
-
-        if (isSignedIn) {
-            setAsyncBrazeUuid(getBrazeUuid(CAPI.config.idApiUrl));
-        } else {
-            setAsyncBrazeUuid(Promise.resolve(null));
-        }
-    }, [isSignedIn, CAPI.config.idApiUrl]);
-
-    useEffect(() => {
         const callFetch = () => {
             const countryCodePromise = getCountryCode();
             setAsyncCountryCode(countryCodePromise);
@@ -222,29 +174,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         };
         callFetch();
     }, []);
-
-    useEffect(() => {
-        const callFetch = async () => {
-            const response = await getDiscussion(
-                CAPI.config.discussionApiUrl,
-                CAPI.config.shortUrlId,
-            );
-            setCommentCount(
-                (response && response.discussion.commentCount) || 0,
-            );
-            setIsClosedForComments(
-                response && response.discussion.isClosedForComments,
-            );
-        };
-
-        if (CAPI.isCommentable) {
-            callFetch();
-        }
-    }, [
-        CAPI.config.discussionApiUrl,
-        CAPI.config.shortUrlId,
-        CAPI.isCommentable,
-    ]);
 
     useEffect(() => {
         incrementAlreadyVisited();
@@ -263,28 +192,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         };
         incrementArticleCountsIfConsented();
     }, []);
-
-    // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
-    // If so, make a call to get the context of this comment so we know what page it is
-    // on.
-    useEffect(() => {
-        if (hashCommentId) {
-            getCommentContext(CAPI.config.discussionApiUrl, hashCommentId).then(
-                (context) => {
-                    setCommentPage(context.page);
-                    setCommentPageSize(context.pageSize);
-                    setCommentOrderBy(context.orderBy);
-                    setIsExpanded(true);
-                },
-            );
-        }
-    }, [CAPI.config.discussionApiUrl, hashCommentId]);
-
-    useEffect(() => {
-        if (hasCommentsHash) {
-            setIsExpanded(true);
-        }
-    }, [hasCommentsHash]);
 
     // Ensure the focus state of any buttons/inputs in any of the Source
     // components are only applied when navigating via keyboard.
@@ -331,8 +238,9 @@ export const App = ({ CAPI, NAV }: Props) => {
         // handled in here.
         if (CAPI.config.switches.consentManagement && countryCode) {
             const pubData = {
+                platform: 'next-gen',
                 browserId: getCookie('bwid') || undefined,
-                pageViewId: window.guardian?.config?.ophan?.pageViewId,
+                pageViewId,
             };
             injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
 
@@ -352,68 +260,32 @@ export const App = ({ CAPI, NAV }: Props) => {
                 }
             });
 
-            if (
-                CAPI.config.switches.auConsent ||
-                window?.guardian?.config?.tests?.useAusCmpVariant === 'variant'
-            ) {
-                cmp.init({
-                    country: countryCode,
-                    pubData,
-                });
-            } else {
-                cmp.init({
-                    isInUsa: countryCode === 'US',
-                    pubData,
-                });
-            }
+            cmp.init({
+                country: countryCode,
+                pubData,
+            });
         }
-    }, [
-        countryCode,
-        CAPI.config.switches.consentManagement,
-        CAPI.config.switches.auConsent,
-    ]);
+    }, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
 
-    // *****************
-    // *     ACast     *
-    // *****************
+    // ************************
+    // *   Google Analytics   *
+    // ************************
     useEffect(() => {
         onConsentChange((state: any) => {
-            // Should we use ad enabled audio? If so, then set the shouldUseAcast
-            // state to true, triggering a rerender of AudioAtom using a new track url
-            // (one with adverts)
-            const consentGiven = getConsentFor('acast', state);
-            const aCastisEnabled = CAPI.config.switches.acast;
-            const readerCanBeShownAds = !CAPI.isAdFreeUser;
-            const contentIsNotSensitive = !CAPI.config.isSensitive;
-            if (
-                aCastisEnabled &&
-                consentGiven &&
-                readerCanBeShownAds && // Eg. Not a subscriber
-                contentIsNotSensitive
-            ) {
-                setShouldUseAcast(true);
+            const consentGiven = getConsentFor('google-analytics', state);
+            if (consentGiven) {
+                loadScript('https://www.google-analytics.com/analytics.js');
+                loadScript(window.guardian.gaPath);
+            } else {
+                (window as any).ga = null;
             }
         });
-    }, [
-        CAPI.config.switches.acast,
-        CAPI.isAdFreeUser,
-        CAPI.config.isSensitive,
-    ]);
+    }, []);
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    const handlePermalink = (commentId: number) => {
-        window.location.hash = `#comment-${commentId}`;
-        const comment = window.document.getElementById(`comment-${commentId}`);
-        if (comment) {
-            // The comment was already on the page so just scroll to it.
-            comment.scrollIntoView();
-        }
-        setHashCommentId(commentId);
-        return false;
-    };
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -432,10 +304,14 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="nav2 : "
                     inHeader={true}
+                    pageViewId={pageViewId}
                 />
             </Portal>
             <Hydrate root="links-root">
-                <Links userId={user ? user.userId : undefined} />
+                <Links
+                    giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
+                    userId={user ? user.userId : undefined}
+                />
             </Hydrate>
             <Hydrate root="edition-root">
                 <EditionDropdown
@@ -443,6 +319,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
                 />
             </Hydrate>
+            <Portal root="share-count-root">
+                <ShareCount
+                    ajaxUrl={CAPI.config.ajaxUrl}
+                    pageId={CAPI.pageId}
+                />
+            </Portal>
             {CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
                 <Hydrate
                     key={index}
@@ -539,13 +421,15 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
             {CAPI.audioAtoms.map((audioAtom) => (
                 <Hydrate root="audio-atom" index={audioAtom.audioIndex}>
-                    <AudioAtom
+                    <AudioAtomWrapper
                         id={audioAtom.id}
                         trackUrl={audioAtom.trackUrl}
                         kicker={audioAtom.kicker}
                         title={audioAtom.title}
-                        pillar={toTypesPillar(pillar)}
-                        shouldUseAcast={shouldUseAcast}
+                        pillar={pillar}
+                        contentIsNotSensitive={!CAPI.config.isSensitive}
+                        aCastisEnabled={CAPI.config.switches.acast}
+                        readerCanBeShownAds={!CAPI.isAdFreeUser}
                     />
                 </Hydrate>
             ))}
@@ -659,24 +543,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Hydrate>
             ))}
-            <Portal root="share-comment-counts">
-                {CAPI.isCommentable ? (
-                    <Counts
-                        ajaxUrl={CAPI.config.ajaxUrl}
-                        pageId={CAPI.config.pageId}
-                        commentCount={commentCount}
-                        pillar={pillar}
-                        setIsExpanded={setIsExpanded}
-                    />
-                ) : (
-                    <Counts
-                        ajaxUrl={CAPI.config.ajaxUrl}
-                        pageId={CAPI.config.pageId}
-                        pillar={pillar}
-                        setIsExpanded={setIsExpanded}
-                    />
-                )}
-            </Portal>
             <Portal root="most-viewed-right">
                 <Lazy margin={100}>
                     <Suspense fallback={<></>}>
@@ -728,6 +594,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             contentType={CAPI.contentType}
                             tags={CAPI.tags}
                             edition={CAPI.editionId}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
@@ -745,6 +612,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                             ajaxUrl={CAPI.config.ajaxUrl}
                             hasStoryPackage={CAPI.hasStoryPackage}
                             tags={CAPI.tags}
+                            pillar={pillar}
                         />
                     </Suspense>
                 </Lazy>
@@ -752,29 +620,22 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="sign-in-gate">
                 <SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
             </Portal>
-
-            {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
-                these cases we will be scrolling to comments and want them loaded */}
             <Hydrate root="comments">
-                <CommentsLayout
-                    user={user}
+                <Discussion
+                    discussionApiUrl={CAPI.config.discussionApiUrl}
+                    shortUrlId={CAPI.config.shortUrlId}
+                    isCommentable={CAPI.isCommentable}
                     pillar={pillar}
-                    baseUrl={CAPI.config.discussionApiUrl}
-                    shortUrl={CAPI.config.shortUrlId}
-                    commentCount={commentCount}
-                    commentPage={commentPage}
-                    commentPageSize={commentPageSize}
-                    commentOrderBy={commentOrderBy}
-                    isClosedForComments={isClosedForComments}
+                    user={user}
                     discussionD2Uid={CAPI.config.discussionD2Uid}
                     discussionApiClientHeader={
                         CAPI.config.discussionApiClientHeader
                     }
                     enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-                    expanded={isExpanded}
-                    commentToScrollTo={hashCommentId}
-                    onPermalinkClick={handlePermalink}
-                    hideAds={CAPI.isAdFreeUser || CAPI.shouldHideAds}
+                    isAdFreeUser={CAPI.isAdFreeUser}
+                    shouldHideAds={CAPI.shouldHideAds}
+                    beingHydrated={true}
+                    display={display}
                 />
             </Hydrate>
             <Portal root="most-viewed-footer">
@@ -782,6 +643,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     pillar={pillar}
                     sectionName={CAPI.sectionName}
                     ajaxUrl={CAPI.config.ajaxUrl}
+                    display={display}
                 />
             </Portal>
             <Portal root="reader-revenue-links-footer">
@@ -791,6 +653,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="footer : "
                         inHeader={false}
+                        pageViewId={pageViewId}
                     />
                 </Lazy>
             </Portal>
@@ -799,8 +662,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isSignedIn={isSignedIn}
                     asyncCountryCode={asyncCountryCode}
                     CAPI={CAPI}
-                    asyncBrazeUuid={asyncBrazeUuid}
-                    isDigitalSubscriber={isDigitalSubscriber}
+                    idApiUrl={CAPI.config.idApiUrl}
                 />
             </Portal>
         </React.StrictMode>

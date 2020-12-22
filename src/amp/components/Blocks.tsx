@@ -63,25 +63,25 @@ export const Blocks: React.SFC<{
         return (
             <div
                 id={block.id}
-                data-sort-time={block.firstPublished}
+                data-sort-time={block.blockFirstPublished}
                 key={block.id}
                 className={blockStyle(pillar)}
             >
-                {block.firstPublishedDisplay && (
+                {block.blockFirstPublishedDisplay && (
                     <a
                         className={firstPublishedStyle}
                         href={blockLink(url, block.id)}
                     >
-                        {block.firstPublishedDisplay}
+                        {block.blockFirstPublishedDisplay}
                     </a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
                 {Elements(block.elements, pillar, false)}
                 {/* Some elements float (e.g. rich links) */}
                 <div className={clearBoth} />{' '}
-                {block.lastUpdatedDisplay && (
+                {block.blockLastUpdatedDisplay && (
                     <div className={lastUpdatedStyle}>
-                        Updated at {block.lastUpdatedDisplay}
+                        Updated at {block.blockLastUpdatedDisplay}
                     </div>
                 )}
             </div>

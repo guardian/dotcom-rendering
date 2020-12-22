@@ -2,7 +2,7 @@ name: Run Lighthouse CI
 on: [push]
 jobs:
     lhci:
-        name: run
+        name: Lighthouse
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code

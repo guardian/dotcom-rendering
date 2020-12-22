@@ -26,6 +26,7 @@ export const TwitterBlockComponent: React.FC<{
             height={element.hasMedia ? 2 : 1}
             layout="responsive"
             data-tweetid={element.id}
+            data-dnt="true"
         >
             {fallbackHTML && (
                 <div placeholder="" className={TextStyle(pillar)}>
