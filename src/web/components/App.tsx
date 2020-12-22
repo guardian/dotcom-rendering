@@ -8,6 +8,7 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { QuizBlockComponent } from '@root/src/web/components/elements/QuizBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -24,8 +25,6 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
-    PersonalityQuizAtom,
-    KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
@@ -372,18 +371,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                     root="quiz-atom"
                     index={quizAtoms.quizIndex}
                 >
-                    {quizAtoms.quizType === 'personality' ? (
-                        <PersonalityQuizAtom
-                            id={quizAtoms.id}
-                            questions={quizAtoms.questions}
-                            resultBuckets={quizAtoms.resultBuckets}
-                        />
-                    ) : (
-                        <KnowledgeQuizAtom
-                            id={quizAtoms.id}
-                            questions={quizAtoms.questions}
-                        />
-                    )}
+                    <QuizBlockComponent
+                        id={quizAtoms.id}
+                        questions={quizAtoms.questions}
+                        resultBuckets={quizAtoms.resultBuckets}
+                        quizType={quizAtoms.quizType}
+                    />
                 </Hydrate>
             ))}
             {NAV.subNavSections && (
