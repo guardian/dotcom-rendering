@@ -1,9 +1,11 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { titlepiece } from '@guardian/src-foundations/typography';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
