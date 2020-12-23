@@ -364,7 +364,6 @@ type CAPIElement =
     | CaptionBlockElement
     | CalloutBlockElement
     | ChartAtomBlockElement
-    | QuizAtomBlockElement
     | CodeBlockElement
     | CommentBlockElement
     | ContentAtomBlockElement
@@ -387,6 +386,7 @@ type CAPIElement =
     | ProfileAtomBlockElement
     | PullquoteBlockElement
     | QABlockElement
+    | QuizAtomBlockElement
     | RichLinkBlockElement
     | SoundcloudBlockElement
     | SpotifyBlockElement
