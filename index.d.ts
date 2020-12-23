@@ -408,35 +408,6 @@ type HeadlineLink = {
     preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
 };
 
-type AnswerType = {
-    id: string;
-    text: string;
-    revealText?: string;
-    isCorrect: boolean;
-    answerBuckets: string[];
-};
-
-type QuizAtomResultBucketType = {
-    id: string;
-    title: string;
-    description: string;
-    // assets TODO:
-}
-
-type QuestionType = {
-    id: string;
-    text: string;
-    answers: AnswerType[];
-    imageUrl?: string;
-    resultBuckets?: QuizAtomResultBucketType[]
-}
-
-type ResultBucketsType = {
-    id: string;
-    title: string;
-    description: string;
-}
-
 interface LinkHeadlineType {
     designType: DesignType;
     headlineText: string; // The text shown

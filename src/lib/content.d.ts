@@ -528,3 +528,32 @@ interface CampaignFieldSelect extends CampaignField {
         value: string;
     }[];
 }
+
+type AnswerType = {
+    id: string;
+    text: string;
+    revealText?: string;
+    isCorrect: boolean;
+    answerBuckets: string[];
+};
+
+type QuizAtomResultBucketType = {
+    id: string;
+    title: string;
+    description: string;
+    // assets TODO:
+};
+
+type QuestionType = {
+    id: string;
+    text: string;
+    answers: AnswerType[];
+    imageUrl?: string;
+    resultBuckets?: QuizAtomResultBucketType[];
+};
+
+type ResultBucketsType = {
+    id: string;
+    title: string;
+    description: string;
+};
