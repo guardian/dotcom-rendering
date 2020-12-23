@@ -11,7 +11,7 @@ const init = async (): Promise<void> => {
     // Sentry 99% of the time. So instead we just do some basic math here
     // and use that to prevent the Sentry script from ever loading.
     const randomNumber = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-    if (randomNumber === 1) return; // 99% of the time we do nothing here
+    if (randomNumber !== 1) return; // 99% of the time we do nothing here
     // 1% of the time we continue
     try {
         // Downloading and initiliasing Sentry is asynchronous so we need a way
