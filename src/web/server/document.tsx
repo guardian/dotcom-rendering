@@ -88,7 +88,7 @@ export const document = ({ data }: Props) => {
             { src: polyfillIO },
             { src: 'ophan.js', module: true },
             CAPI.config && { src: CAPI.config.commercialBundleUrl },
-            { src: 'sentry.js', module: true },
+            { src: 'sentryLoader.js', module: true },
             { src: 'dynamicImport.js', module: true },
             { src: 'react.js', module: true },
         ].filter(Boolean),
