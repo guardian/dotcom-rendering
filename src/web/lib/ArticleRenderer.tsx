@@ -29,7 +29,6 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { QuizBlockComponent } from '@root/src/web/components/elements/QuizBlockComponent';
 
 import { Figure } from '@root/src/web/components/Figure';
 
@@ -43,6 +42,8 @@ import {
     ProfileAtom,
     TimelineAtom,
     VideoAtom,
+    PersonalityQuizAtom,
+    KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@root/src/lib/display';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -140,12 +141,21 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
                     return (
                         <div id={`quiz-atom-${i}`}>
-                            <QuizBlockComponent
-                                id={element.id}
-                                questions={element.questions}
-                                resultBuckets={element.resultBuckets}
-                                quizType={element.quizType}
-                            />
+                            <Figure>
+                                {element.quizType === 'personality' &&
+                                element.resultBuckets ? (
+                                    <PersonalityQuizAtom
+                                        id={element.id}
+                                        questions={element.questions}
+                                        resultBuckets={element.resultBuckets}
+                                    />
+                                ) : (
+                                    <KnowledgeQuizAtom
+                                        id={element.id}
+                                        questions={element.questions}
+                                    />
+                                )}
+                            </Figure>
                         </div>
                     );
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':

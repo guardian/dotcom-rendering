@@ -8,7 +8,6 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { QuizBlockComponent } from '@root/src/web/components/elements/QuizBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -25,6 +24,8 @@ import {
     ProfileAtom,
     TimelineAtom,
     ChartAtom,
+    PersonalityQuizAtom,
+    KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
@@ -33,6 +34,7 @@ import { Portal } from '@frontend/web/components/Portal';
 import { HydrateOnce } from '@root/src/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
+import { Figure } from '@root/src/web/components/Figure';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -371,12 +373,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                     root="quiz-atom"
                     index={quizAtoms.quizIndex}
                 >
-                    <QuizBlockComponent
-                        id={quizAtoms.id}
-                        questions={quizAtoms.questions}
-                        resultBuckets={quizAtoms.resultBuckets}
-                        quizType={quizAtoms.quizType}
-                    />
+                    <Figure>
+                        {quizAtoms.quizType === 'personality' &&
+                        quizAtoms.resultBuckets ? (
+                            <PersonalityQuizAtom
+                                id={quizAtoms.id}
+                                questions={quizAtoms.questions}
+                                resultBuckets={quizAtoms.resultBuckets}
+                            />
+                        ) : (
+                            <KnowledgeQuizAtom
+                                id={quizAtoms.id}
+                                questions={quizAtoms.questions}
+                            />
+                        )}
+                    </Figure>
                 </HydrateOnce>
             ))}
             {NAV.subNavSections && (
