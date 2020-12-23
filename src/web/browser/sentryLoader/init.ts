@@ -10,9 +10,9 @@ const init = async (): Promise<void> => {
     // happen but if we used sampleRate to do this we'd be needlessly downloading
     // Sentry 99% of the time. So instead we just do some basic math here
     // and use that to prevent the Sentry script from ever loading.
-    const randomNumber = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-    if (randomNumber !== 1) return; // 99% of the time we do nothing here
-    // 1% of the time we continue
+    const randomCentile = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
+    if (randomCentile <= 99) return; // 99% of the time we do nothing here
+    // The other 1% of the time (randomCentile === 100) we continue
     try {
         // Downloading and initiliasing Sentry is asynchronous so we need a way
         // to ensure injection only happens once and to capture any other errors that
