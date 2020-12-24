@@ -105,13 +105,7 @@ export const StickyBottomBanner = ({
         );
     }, []);
 
-    useEffect(() => {
-        // Don't do anything until isSignedIn is defined as we only want to set
-        // asyncBrazeUuid once
-        if (isSignedIn === undefined) {
-            return;
-        }
-
+    useOnce(() => {
         if (isSignedIn) {
             setAsyncBrazeUuid(getBrazeUuid(idApiUrl));
         } else {
