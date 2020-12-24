@@ -1,5 +1,4 @@
 import React from 'react';
-import fetch from 'node-fetch';
 import express from 'express';
 import { document } from '@root/src/amp/server/document';
 import { Article } from '@root/src/amp/pages/Article';
@@ -10,7 +9,7 @@ import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import {AmpExperiments, ampExperimentsDataUrl} from "@root/src/amp/components/AmpExperiment";
+import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
 
 export const render = async ({ body }: express.Request, res: express.Response) => {
     try {
@@ -50,10 +49,6 @@ export const render = async ({ body }: express.Request, res: express.Response) =
             canonicalURL: CAPI.webURL,
         };
 
-        const experimentsData: AmpExperiments =
-            await fetch(ampExperimentsDataUrl)
-                .then(rawResponse => rawResponse.json())
-
         const resp = document({
             linkedData,
             scripts,
@@ -61,7 +56,7 @@ export const render = async ({ body }: express.Request, res: express.Response) =
             title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
             body: (
                 <Article
-                    experimentsData={experimentsData}
+                    experimentsData={getAmpExperimentCache()}
                     articleData={CAPI}
                     nav={extractNAV(CAPI.nav)}
                     analytics={analytics}
