@@ -12,7 +12,7 @@ export type AmpExperiments = {
     [key: string]: AmpExperiment
 }
 
-export const ampExperimentsDataUrl = process.env.NODE_ENV === 'production'
+export const ampExperimentsDataUrl = process.env.GU_ENV === 'PROD'
     ? 'https://contributions.guardianapis.com/amp/experiments_data'
     : 'https://contributions.code.dev-guardianapis.com/amp/experiments_data';
 
