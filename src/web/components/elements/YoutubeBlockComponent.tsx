@@ -5,7 +5,7 @@ import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import { trackVideosGA } from '@root/src/web/browser/ga/ga';
+import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
@@ -138,7 +138,7 @@ export const YoutubeBlockComponent = ({
     };
     const gaTracking = (trackingEvent: string) => {
         if (!element.id) return;
-        trackVideosGA({
+        trackVideoInteraction({
             trackingEvent,
             elementId: element.id,
         });

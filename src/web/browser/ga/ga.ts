@@ -213,7 +213,7 @@ export const trackPerformance = (
     }
 };
 
-export const trackVideosGA = ({
+export const trackVideoInteraction = ({
     trackingEvent,
     elementId,
 }: {
