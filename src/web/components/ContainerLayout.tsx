@@ -21,29 +21,42 @@ type Props = {
     showTopBorder?: boolean;
     padSides?: boolean;
     padContent?: boolean;
+    verticalMargins?: boolean;
     backgroundColour?: string;
     borderColour?: string;
+    leftContent?: JSXElements;
     children?: React.ReactNode;
+    stretchRight?: boolean;
 };
 
 const Container = ({
     children,
     padded,
+    verticalMargins,
+    stretchRight,
 }: {
     children: React.ReactNode;
     padded: boolean;
+    verticalMargins: boolean;
+    stretchRight: boolean;
 }) => {
     const containerStyles = css`
         display: flex;
         flex-grow: 1;
         flex-direction: column;
         width: 100%;
+    `;
+
+    const margins = css`
         margin-top: ${space[2]}px;
         /*
            Keep spacing at the bottom of the container consistent at 36px, regardless of
            breakpoint, based on chat with Harry Fisher
         */
         margin-bottom: ${space[9]}px;
+    `;
+
+    const rightMargin = css`
         ${from.wide} {
             margin-right: 68px;
         }
@@ -51,13 +64,19 @@ const Container = ({
 
     const padding = css`
         padding: 0 10px;
-
-        ${from.mobileLandscape} {
-            padding: 0 20px;
-        }
     `;
+
     return (
-        <div className={cx(containerStyles, padded && padding)}>{children}</div>
+        <div
+            className={cx(
+                containerStyles,
+                padded && padding,
+                verticalMargins && margins,
+                !stretchRight && rightMargin,
+            )}
+        >
+            {children}
+        </div>
     );
 };
 
@@ -72,9 +91,12 @@ export const ContainerLayout = ({
     showTopBorder = false,
     padSides = true,
     padContent = true,
+    verticalMargins = true,
     borderColour,
     backgroundColour,
     children,
+    leftContent,
+    stretchRight = false,
 }: Props) => (
     <Section
         sectionId={sectionId}
@@ -90,14 +112,21 @@ export const ContainerLayout = ({
                 borderColour={borderColour}
                 showPartialRightBorder={centralBorder === 'partial'}
             >
-                <ContainerTitle
-                    title={title}
-                    fontColour={fontColour}
-                    description={description}
-                    url={url}
-                />
+                <>
+                    <ContainerTitle
+                        title={title}
+                        fontColour={fontColour}
+                        description={description}
+                        url={url}
+                    />
+                    {leftContent}
+                </>
             </LeftColumn>
-            <Container padded={padContent}>
+            <Container
+                padded={padContent}
+                verticalMargins={verticalMargins}
+                stretchRight={stretchRight}
+            >
                 <Hide when="above" breakpoint="leftCol">
                     <ContainerTitle
                         title={title}

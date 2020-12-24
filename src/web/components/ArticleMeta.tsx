@@ -4,6 +4,7 @@ import { border } from '@guardian/src-foundations/palette';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
+import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
@@ -26,13 +27,24 @@ type Props = {
 
 const meta = css`
     ${between.tablet.and.leftCol} {
-        order: 1;
+        order: 3;
     }
 
-    ${until.phablet} {
+    ${until.mobileLandscape} {
         padding-left: 10px;
         padding-right: 10px;
     }
+
+    ${from.mobileLandscape} {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    ${from.phablet} {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
     padding-top: 2px;
 `;
 
@@ -54,6 +66,13 @@ const metaExtras = css`
         padding-left: 20px;
         padding-right: 20px;
     }
+
+    ${until.mobileLandscape} {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 `;
 
 const metaNumbers = css`
@@ -67,6 +86,13 @@ const metaNumbers = css`
     }
 
     ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    ${until.mobileLandscape} {
         margin-left: -10px;
         margin-right: -10px;
         padding-left: 10px;
@@ -95,6 +121,9 @@ const metaContainer = ({
                         ${until.mobileLandscape} {
                             margin-left: -10px;
                             margin-right: -10px;
+                        }
+                        ${from.leftCol} {
+                            margin-left: 20px;
                         }
                         ${from.wide} {
                             margin-left: 40px;
@@ -133,12 +162,12 @@ const metaContainer = ({
 };
 
 const getBylineImageUrl = (tags: TagType[]) => {
-    const contributorTag = tags.find(tag => tag.type === 'Contributor');
+    const contributorTag = tags.find((tag) => tag.type === 'Contributor');
     return contributorTag && contributorTag.bylineImageUrl;
 };
 
 const getAuthorName = (tags: TagType[]) => {
-    const contributorTag = tags.find(tag => tag.type === 'Contributor');
+    const contributorTag = tags.find((tag) => tag.type === 'Contributor');
     return contributorTag && contributorTag.title;
 };
 
@@ -270,7 +299,7 @@ export const ArticleMeta = ({
     const authorName = getAuthorName(tags);
 
     const onlyOneContributor: boolean =
-        tags.filter(tag => tag.type === 'Contributor').length === 1;
+        tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
     const showAvatar =
         onlyOneContributor && shouldShowAvatar(designType, display);
@@ -305,7 +334,7 @@ export const ArticleMeta = ({
                         </div>
                     </>
                 </RowBelowLeftCol>
-                <div className={metaFlex}>
+                <div data-print-layout="hide" className={metaFlex}>
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={sharingUrls}
@@ -314,7 +343,17 @@ export const ArticleMeta = ({
                         />
                     </div>
                     <div className={metaNumbers}>
-                        <div id="share-comment-counts" />
+                        <Counts>
+                            {/* The meta-number classname is needed by Counts.tsx */}
+                            <div
+                                className="meta-number"
+                                id="share-count-root"
+                            />
+                            <div
+                                className="meta-number"
+                                id="comment-count-root"
+                            />
+                        </Counts>
                     </div>
                 </div>
             </div>

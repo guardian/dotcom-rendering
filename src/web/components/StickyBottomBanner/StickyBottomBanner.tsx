@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
+
 import {
     canShow as canShowRRBanner,
     ReaderRevenueBanner,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
+import { getCookie } from '@root/src/web/browser/cookie';
+import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
+
 import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
@@ -12,8 +16,7 @@ type Props = {
     isSignedIn?: boolean;
     asyncCountryCode?: Promise<string>;
     CAPI: CAPIBrowserType;
-    asyncBrazeUuid?: Promise<null | string>;
-    isDigitalSubscriber?: boolean;
+    idApiUrl: string;
 };
 
 type FulfilledProps = {
@@ -21,7 +24,7 @@ type FulfilledProps = {
     asyncCountryCode: Promise<string>;
     CAPI: CAPIBrowserType;
     asyncBrazeUuid: Promise<null | string>;
-    isDigitalSubscriber: boolean;
+    shouldHideSupportMessaging: boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -79,10 +82,11 @@ const buildReaderRevenueBannerConfig = (
 
 const buildBrazeBanner = (
     asyncBrazeUuid: Promise<null | string>,
-    isDigitalSubscriber: undefined | boolean,
+    shouldHideSupportMessaging: undefined | boolean,
 ): Banner => ({
     id: 'braze-banner',
-    canShow: () => canShowBrazeBanner(asyncBrazeUuid, isDigitalSubscriber),
+    canShow: () =>
+        canShowBrazeBanner(asyncBrazeUuid, shouldHideSupportMessaging),
     show: (meta: any) => () => <BrazeBanner meta={meta} />,
     timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
@@ -92,7 +96,7 @@ const StickyBottomBannerWithFullfilledDependencies = ({
     asyncCountryCode,
     CAPI,
     asyncBrazeUuid,
-    isDigitalSubscriber,
+    shouldHideSupportMessaging,
 }: FulfilledProps) => {
     const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 
@@ -105,7 +109,7 @@ const StickyBottomBannerWithFullfilledDependencies = ({
         );
         const brazeBanner = buildBrazeBanner(
             asyncBrazeUuid,
-            isDigitalSubscriber,
+            shouldHideSupportMessaging,
         );
         const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
 
@@ -129,14 +133,41 @@ export const StickyBottomBanner = ({
     isSignedIn,
     asyncCountryCode,
     CAPI,
-    asyncBrazeUuid,
-    isDigitalSubscriber,
+    idApiUrl,
 }: Props) => {
+    const [
+        shouldHideSupportMessaging,
+        setShouldHideSupportMessaging,
+    ] = useState<boolean>();
+    const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
+        Promise<string | null>
+    >();
+
+    useEffect(() => {
+        setShouldHideSupportMessaging(
+            getCookie('gu_hide_support_messaging') === 'true',
+        );
+    }, []);
+
+    useEffect(() => {
+        // Don't do anything until isSignedIn is defined as we only want to set
+        // asyncBrazeUuid once
+        if (isSignedIn === undefined) {
+            return;
+        }
+
+        if (isSignedIn) {
+            setAsyncBrazeUuid(getBrazeUuid(idApiUrl));
+        } else {
+            setAsyncBrazeUuid(Promise.resolve(null));
+        }
+    }, [isSignedIn, idApiUrl]);
+
     if (
         isSignedIn === undefined ||
         asyncCountryCode === undefined ||
         asyncBrazeUuid === undefined ||
-        isDigitalSubscriber === undefined
+        shouldHideSupportMessaging === undefined
     ) {
         return null;
     }
@@ -146,7 +177,7 @@ export const StickyBottomBanner = ({
             isSignedIn={isSignedIn}
             asyncCountryCode={asyncCountryCode}
             asyncBrazeUuid={asyncBrazeUuid}
-            isDigitalSubscriber={isDigitalSubscriber}
+            shouldHideSupportMessaging={shouldHideSupportMessaging}
             CAPI={CAPI}
         />
     );

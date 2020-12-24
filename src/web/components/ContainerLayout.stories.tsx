@@ -75,6 +75,23 @@ export const BordersStory = () => {
 };
 BordersStory.story = { name: 'with all borders' };
 
+export const LeftContentStory = () => {
+    return (
+        <ContainerLayout
+            title="Borders"
+            showTopBorder={true}
+            sideBorders={true}
+            centralBorder="full"
+            leftContent={<Grey heightInPixels={200} />}
+        >
+            <Grey />
+        </ContainerLayout>
+    );
+};
+LeftContentStory.story = {
+    name: 'with an element passed into the left column',
+};
+
 export const BackgroundStory = () => {
     return (
         <ContainerLayout
@@ -92,6 +109,24 @@ export const BackgroundStory = () => {
     );
 };
 BackgroundStory.story = { name: 'with a blue background' };
+
+export const StretchRightStory = () => {
+    return (
+        <ContainerLayout
+            title="Stretched Right"
+            description="About this content"
+            showTopBorder={true}
+            sideBorders={true}
+            centralBorder="full"
+            stretchRight={true}
+        >
+            <Grey />
+        </ContainerLayout>
+    );
+};
+StretchRightStory.story = {
+    name: 'with content stretched to the right (no margin)',
+};
 
 export const PartialStory = () => {
     return (
@@ -122,6 +157,41 @@ export const SidesStory = () => {
     );
 };
 SidesStory.story = { name: 'with a full border divider' };
+
+export const MarginsStory = () => {
+    return (
+        <>
+            <ContainerLayout
+                title="No Vertical Margins"
+                sideBorders={true}
+                showTopBorder={true}
+                centralBorder="full"
+                verticalMargins={false}
+            >
+                <Grey />
+            </ContainerLayout>
+            <ContainerLayout
+                title="No Vertical Margins"
+                sideBorders={true}
+                showTopBorder={true}
+                centralBorder="full"
+                verticalMargins={false}
+            >
+                <Grey />
+            </ContainerLayout>
+            <ContainerLayout
+                title="No Vertical Margins"
+                sideBorders={true}
+                showTopBorder={true}
+                centralBorder="full"
+                verticalMargins={false}
+            >
+                <Grey />
+            </ContainerLayout>
+        </>
+    );
+};
+MarginsStory.story = { name: 'with no vertical margins' };
 
 export const MultipleStory = () => {
     return (

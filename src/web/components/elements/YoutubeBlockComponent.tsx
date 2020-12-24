@@ -129,13 +129,21 @@ export const YoutubeBlockComponent = ({
         <div data-chromatic="ignore">
             <YoutubeAtom
                 videoMeta={element}
-                overlayImage={overlayImage}
+                overlayImage={
+                    overlayImage
+                        ? {
+                              src: overlayImage,
+                              alt: element.altText || element.mediaTitle,
+                          }
+                        : undefined
+                }
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
                 title={title}
                 duration={duration}
                 origin={origin}
+                eventEmitters={[]}
             />
             {!hideCaption && (
                 <Caption

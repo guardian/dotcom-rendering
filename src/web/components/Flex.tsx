@@ -4,7 +4,7 @@ import { css } from 'emotion';
 type Props = {
     children: JSXElements;
     direction?: 'row' | 'column';
-    justify?: 'space-between'; // Extend as required
+    justify?: 'space-between' | 'flex-start'; // Extend as required
 };
 
 export const Flex = ({

@@ -45,7 +45,6 @@ export const SyndicationButton: React.FC<{
         text-overflow: ellipsis;
 
         padding: 0 0.5rem;
-        margin-right: 8;
     `;
     return (
         <div className={submetaSyndication}>

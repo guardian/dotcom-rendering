@@ -119,6 +119,7 @@ interface ReaderRevenueCategories {
     contribute: string;
     subscribe: string;
     support: string;
+    gifting: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
@@ -165,13 +166,13 @@ interface AuthorType {
 interface Block {
     id: string;
     elements: CAPIElement[];
-    createdOn?: number;
-    createdOnDisplay?: string;
-    lastUpdated?: number;
-    lastUpdatedDisplay?: string;
+    blockCreatedOn?: number;
+    blockCreatedOnDisplay?: string;
+    blockLastUpdated?: number;
+    blockLastUpdatedDisplay?: string;
     title?: string;
-    firstPublished?: number;
-    firstPublishedDisplay?: string;
+    blockFirstPublished?: number;
+    blockFirstPublishedDisplay?: string;
     primaryDateLine: string;
     secondaryDateLine: string;
 }
@@ -652,7 +653,8 @@ type IslandType =
     | 'sub-nav-root'
     | 'edition-root'
     | 'most-viewed-right'
-    | 'share-comment-counts'
+    | 'share-count-root'
+    | 'comment-count-root'
     | 'most-viewed-footer'
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
@@ -719,19 +721,6 @@ type AdSlotType =
     | 'merchandising-high'
     | 'merchandising'
     | 'comments';
-
-interface AdSlotParameters {
-    name: AdSlotType;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
 
 // ------------------------------
 // 3rd party type declarations //

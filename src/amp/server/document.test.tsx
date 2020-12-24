@@ -60,11 +60,12 @@ test('produces valid AMP doc', async () => {
         <Article
             experimentsData={{}}
             nav={nav}
-            articleData={CAPI}
+            articleData={{ ...CAPI, shouldHideReaderRevenue: false }}
             config={config}
             analytics={analytics}
         />
     );
+
     const result = v.validateString(
         document({
             body,

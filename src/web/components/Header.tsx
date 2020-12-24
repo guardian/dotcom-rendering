@@ -30,7 +30,7 @@ export const Header = ({ edition }: Props) => (
         <Logo />
         <div id="reader-revenue-links-header" />
         <div id="links-root">
-            <Links />
+            <Links giftingURL="" />
         </div>
     </header>
 );

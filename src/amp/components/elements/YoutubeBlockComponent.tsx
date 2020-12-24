@@ -39,6 +39,7 @@ export const YoutubeBlockComponent: React.FC<{
         width: '16',
         height: '9',
         'data-param-modestbranding': true, // Remove YouTube logo
+        credentials: 'omit',
     };
 
     if (adTargeting) {
