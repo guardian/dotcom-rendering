@@ -236,7 +236,6 @@ export const ArticleHeadline = ({
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     if (noMainMedia) {
                         return (
@@ -358,7 +357,6 @@ export const ArticleHeadline = ({
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     return (
                         <h1 className={standardFont}>

@@ -144,7 +144,6 @@ const metaContainer = ({
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return css`
                         ${until.phablet} {
@@ -195,7 +194,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return false;
             }
@@ -227,7 +225,6 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     return true;
             }

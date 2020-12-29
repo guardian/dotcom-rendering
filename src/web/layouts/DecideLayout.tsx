@@ -46,7 +46,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <ImmersiveLayout
                             CAPI={CAPI}
@@ -86,7 +85,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <ShowcaseLayout
                             CAPI={CAPI}
@@ -127,7 +125,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <StandardLayout
                             CAPI={CAPI}

@@ -60,7 +60,6 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                 case 'Feature':
                 case 'Recipe':
                 case 'Review':
-                case 'Immersive':
                 case 'Media':
                 case 'SpecialReport':
                 case 'MatchReport':
@@ -102,7 +101,6 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
                         })};
                         margin-bottom: ${space[3]}px;
                     `;
-                case 'Immersive':
                 case 'Media':
                 case 'PhotoEssay':
                 case 'SpecialReport':

@@ -18,7 +18,6 @@ declare const enum Display {
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
-    | 'Immersive'
     | 'Media'
     | 'Review'
     | 'Analysis'
