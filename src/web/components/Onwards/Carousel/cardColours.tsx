@@ -23,7 +23,6 @@ export const headlineBackgroundColour = (
         case 'Article':
         case 'Review':
         case 'PhotoEssay':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
@@ -55,7 +54,6 @@ export const headlineColour = (designType: DesignType, pillar: Pillar) => {
         case 'PhotoEssay':
         case 'Article':
         case 'Review':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':

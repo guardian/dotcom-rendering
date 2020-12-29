@@ -49,7 +49,6 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Analysis':
         case 'Article':
         case 'Review':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':

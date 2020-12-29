@@ -80,7 +80,6 @@ const shouldShowDropCap = ({
         case 'Article':
         case 'Media':
         case 'Live':
-        case 'SpecialReport':
         case 'MatchReport':
         case 'GuardianView':
         case 'GuardianLabs':

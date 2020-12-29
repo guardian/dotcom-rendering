@@ -137,7 +137,6 @@ const metaContainer = ({
                 case 'Media':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianView':
                 case 'GuardianLabs':
@@ -187,7 +186,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianView':
                 case 'GuardianLabs':
@@ -219,7 +217,6 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
                 case 'Interview':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':

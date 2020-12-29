@@ -231,7 +231,6 @@ export const ArticleHeadline = ({
                 case 'Media':
                 case 'PhotoEssay':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
@@ -352,7 +351,6 @@ export const ArticleHeadline = ({
                 case 'Media':
                 case 'PhotoEssay':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':

@@ -52,7 +52,6 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'PhotoEssay':
         case 'Review':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
