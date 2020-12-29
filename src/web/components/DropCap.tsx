@@ -50,7 +50,6 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return css`
                 ${baseStyles};
@@ -90,7 +89,6 @@ const innerStyles = (designType: DesignType) => {
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return css`
                 ${baseStyles};

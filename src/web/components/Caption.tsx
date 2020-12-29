@@ -191,7 +191,6 @@ export const Caption = ({
         case 'Comment':
         case 'Analysis':
         case 'Review':
-        case 'Immersive':
         case 'Interview':
             return (
                 <figcaption

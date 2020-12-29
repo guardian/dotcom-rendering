@@ -32,7 +32,6 @@ export const headlineBackgroundColour = (
         case 'Feature':
         case 'Analysis':
         case 'Interview':
-        case 'Immersive':
         default:
             return css`
                 background-color: ${neutral[97]};
@@ -64,7 +63,6 @@ export const headlineColour = (designType: DesignType, pillar: Pillar) => {
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
     }
 };

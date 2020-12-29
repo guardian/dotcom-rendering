@@ -108,7 +108,6 @@ export const HeadlineByline = ({
                         </div>
                     );
                 case 'Interview':
-                case 'Immersive':
                 case 'Analysis':
                 case 'Feature':
                 case 'Article':
@@ -164,7 +163,6 @@ export const HeadlineByline = ({
                         </div>
                     );
 
-                case 'Immersive':
                 case 'Analysis':
                 case 'Feature':
                 case 'Article':

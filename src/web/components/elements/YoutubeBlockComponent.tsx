@@ -4,10 +4,12 @@ import { css } from 'emotion';
 import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
+import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
+import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@guardian/types/Format';
-import { YoutubeAtom } from '@guardian/atoms-rendering';
 
 type Props = {
     display: Display;
@@ -17,6 +19,10 @@ type Props = {
     role: RoleType;
     hideCaption?: boolean;
     overlayImage?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
     height?: number;
@@ -67,6 +73,7 @@ export const YoutubeBlockComponent = ({
     pillar,
     hideCaption,
     overlayImage,
+    posterImage,
     role,
     adTargeting,
     isMainMedia,
@@ -125,25 +132,62 @@ export const YoutubeBlockComponent = ({
         );
     }
 
+    const ophanTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        record({
+            video: {
+                id: `gu-video-youtube-${element.id}`,
+                eventType: `video:content:${trackingEvent}`,
+            },
+        });
+    };
+    const gaTracking = (trackingEvent: string) => {
+        if (!element.id) return;
+        trackVideoInteraction({
+            trackingEvent,
+            elementId: element.id,
+        });
+    };
+
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
                 videoMeta={element}
                 overlayImage={
                     overlayImage
-                        ? {
-                              src: overlayImage,
-                              alt: element.altText || element.mediaTitle,
-                          }
+                        ? [
+                              {
+                                  srcSet: [
+                                      {
+                                          src: overlayImage,
+                                          width: 500, // we do not have width for overlayImage so set a random number
+                                      },
+                                  ],
+                              },
+                          ]
                         : undefined
                 }
+                posterImage={
+                    posterImage
+                        ? [
+                              {
+                                  srcSet: posterImage.map((img) => ({
+                                      src: img.url,
+                                      width: img.width,
+                                  })),
+                              },
+                          ]
+                        : undefined
+                }
+                role={role}
+                alt={element.altText || element.mediaTitle}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
                 title={title}
                 duration={duration}
                 origin={origin}
-                eventEmitters={[]}
+                eventEmitters={[ophanTracking, gaTracking]}
             />
             {!hideCaption && (
                 <Caption

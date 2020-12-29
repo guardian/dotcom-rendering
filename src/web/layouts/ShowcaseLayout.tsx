@@ -193,7 +193,6 @@ const PositionHeadline = ({
                     <div className={maxWidth}>{children}</div>
                 </div>
             );
-        case 'Immersive':
         case 'Article':
         case 'Media':
         case 'PhotoEssay':

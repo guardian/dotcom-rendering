@@ -54,7 +54,7 @@ export const Immersive = () => {
         <Section>
             <Standfirst
                 display={Display.Immersive}
-                designType="Immersive"
+                designType="Article"
                 standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
         </Section>

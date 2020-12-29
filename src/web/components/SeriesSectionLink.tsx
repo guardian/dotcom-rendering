@@ -203,7 +203,6 @@ export const SeriesSectionLink = ({
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default: {
                     if (hasSeriesTag) {
                         if (!tag) return null; // Just to keep ts happy
@@ -247,7 +246,6 @@ export const SeriesSectionLink = ({
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default: {
                     if (tag) {
                         // We have a tag, we're not immersive, show both series and section titles

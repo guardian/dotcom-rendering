@@ -463,10 +463,10 @@ export const ImmersiveLayout = ({
                                     <GuardianLines
                                         pillar={pillar}
                                         effect={decideLineEffect(
-                                            'Immersive',
+                                            'Article',
                                             pillar,
                                         )}
-                                        count={decideLineCount('Immersive')}
+                                        count={decideLineCount('Article')}
                                     />
                                 </div>
                             </div>

@@ -35,6 +35,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -279,6 +280,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
     const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
+    const designType: DesignType = decideDesignType(CAPI);
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     return (
@@ -328,7 +330,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 >
                     <YoutubeBlockComponent
                         display={display}
-                        designType={CAPI.designType}
+                        designType={designType}
                         element={youtubeBlock}
                         pillar={pillar}
                         hideCaption={false}
@@ -337,6 +339,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         adTargeting={adTargeting}
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
+                        posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />
@@ -350,7 +353,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 >
                     <YoutubeBlockComponent
                         display={display}
-                        designType={CAPI.designType}
+                        designType={designType}
                         element={youtubeBlock}
                         pillar={pillar}
                         hideCaption={false}
@@ -359,6 +362,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         adTargeting={adTargeting}
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
+                        posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />

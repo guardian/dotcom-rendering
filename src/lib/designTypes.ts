@@ -1,6 +1,5 @@
 export const designTypes: DesignType[] = [
     'Article',
-    'Immersive',
     'Media',
     'Review',
     'Analysis',

@@ -339,7 +339,10 @@ interface YoutubeBlockElement {
     id?: string;
     channelId?: string;
     duration?: number;
-    posterSrc?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     expired: boolean;
     overrideImage?: string;
     altText?: string;

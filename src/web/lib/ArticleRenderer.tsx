@@ -406,6 +406,7 @@ export const ArticleRenderer: React.FC<{
                                 adTargeting={adTargeting}
                                 isMainMedia={false}
                                 overlayImage={element.overrideImage}
+                                posterImage={element.posterImage}
                                 duration={element.duration}
                                 origin={host}
                             />

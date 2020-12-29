@@ -246,7 +246,26 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -519,7 +538,6 @@
                 "Feature",
                 "GuardianLabs",
                 "GuardianView",
-                "Immersive",
                 "Interview",
                 "Live",
                 "MatchReport",
@@ -2160,8 +2178,23 @@
                 "duration": {
                     "type": "number"
                 },
-                "posterSrc": {
-                    "type": "string"
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
                 },
                 "expired": {
                     "type": "boolean"

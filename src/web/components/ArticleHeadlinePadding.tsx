@@ -34,7 +34,6 @@ const determinPadding = (designType: DesignType) => {
 
         case 'Review':
         case 'Interview':
-        case 'Immersive':
             return null;
     }
 };

@@ -30,7 +30,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return false;
             }
