@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';

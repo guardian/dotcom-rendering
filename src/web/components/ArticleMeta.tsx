@@ -8,7 +8,7 @@ import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 

@@ -46,7 +46,7 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import {

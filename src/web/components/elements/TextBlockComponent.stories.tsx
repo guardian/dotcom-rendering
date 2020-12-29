@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 const html =
     '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';

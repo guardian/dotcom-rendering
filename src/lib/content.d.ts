@@ -33,10 +33,7 @@ interface BlockquoteBlockElement {
 
 interface CaptionBlockElement {
     _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
-    display: Display;
-    designType: DesignType;
     captionText?: string;
-    pillar: Pillar;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;

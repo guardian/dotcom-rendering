@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (

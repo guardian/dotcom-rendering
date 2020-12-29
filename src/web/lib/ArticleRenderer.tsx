@@ -43,7 +43,7 @@ import {
     TimelineAtom,
     VideoAtom,
 } from '@guardian/atoms-rendering';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { toTypesPillar } from '@root/src/lib/format';
 

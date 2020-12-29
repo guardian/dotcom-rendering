@@ -2,8 +2,8 @@ import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { Display } from '@guardian/types/Format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
-import { Display } from '@root/src/lib/display';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';

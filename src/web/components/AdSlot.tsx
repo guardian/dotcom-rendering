@@ -5,7 +5,7 @@ import { css, cx } from 'emotion';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 type Props = {
     display: Display;
@@ -200,8 +200,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         </div>
                     );
                 }
+                default:
+                    return null;
             }
-            break;
         case 'comments': {
             return (
                 <div
@@ -415,6 +416,8 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                 />
             );
         }
+        default:
+            return null;
     }
 };
 
