@@ -1,6 +1,4 @@
-import {
-    Pillar as TypesPillar,
-} from '@guardian/types/Format';
+import { Pillar as TypesPillar } from '@guardian/types/Format';
 
 export const toTypesPillar = (p: Pillar): TypesPillar => {
     switch (p) {
