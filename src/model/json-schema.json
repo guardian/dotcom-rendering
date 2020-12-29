@@ -486,17 +486,8 @@
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
                 },
-                "display": {
-                    "$ref": "#/definitions/Display"
-                },
-                "designType": {
-                    "$ref": "#/definitions/DesignType"
-                },
                 "captionText": {
                     "type": "string"
-                },
-                "pillar": {
-                    "$ref": "#/definitions/Pillar"
                 },
                 "padCaption": {
                     "type": "boolean"
@@ -515,51 +506,8 @@
                 }
             },
             "required": [
-                "_type",
-                "designType",
-                "display",
-                "pillar"
+                "_type"
             ]
-        },
-        "Display": {
-            "type": "number",
-            "enum": [
-                0,
-                1,
-                2
-            ]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CalloutBlockElement": {
             "type": "object",
@@ -2464,6 +2412,17 @@
                 "title",
                 "type"
             ]
+        },
+        "Pillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",
