@@ -6,7 +6,6 @@ export const designTypes: DesignType[] = [
     'Comment',
     'Feature',
     'Live',
-    'SpecialReport',
     'Recipe',
     'MatchReport',
     'Interview',

@@ -171,7 +171,7 @@ export const SpecialReport = () => {
         <Section>
             <Standfirst
                 display={Display.Standard}
-                designType="SpecialReport"
+                designType="Article"
                 standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
         </Section>

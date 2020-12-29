@@ -197,7 +197,6 @@ export const SeriesSectionLink = ({
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
@@ -240,7 +239,6 @@ export const SeriesSectionLink = ({
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':

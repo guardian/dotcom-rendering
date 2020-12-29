@@ -180,7 +180,6 @@ export const Caption = ({
         case 'Article':
         case 'Media':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':

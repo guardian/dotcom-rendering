@@ -186,43 +186,67 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = process.env.NODE_ENV === 'production'
-        ? 'https://contributions.guardianapis.com/amp/epic'
-        : 'https://contributions.code.dev-guardianapis.com/amp/epic';
+    const epicUrl =
+        process.env.NODE_ENV === 'production'
+            ? 'https://contributions.guardianapis.com/amp/epic'
+            : 'https://contributions.code.dev-guardianapis.com/amp/epic';
 
     return (
         <amp-list
-            layout='fixed-height'
+            layout="fixed-height"
             // This means that if the user refreshes at the end of the article while the epic is in view then the epic
             // will not display. This is such an edge case that we can live with it, and in general it will fill the
             // space.
-            height='1px'
+            height="1px"
             src={epicUrl}
-            credentials='include'
+            credentials="include"
         >
             <MoustacheTemplate>
                 <div className={epicStyle}>
-
-                    <MoustacheSection name='ticker'>
+                    <MoustacheSection name="ticker">
                         <div className={tickerWrapperStyle}>
                             <div className={tickerInfoStyle}>
                                 <div className={leftStyle}>
-                                    <p className={topLeftStyle}>{moustacheVariable('topLeft')}</p>
-                                    <p className={labelStyle}>{moustacheVariable('bottomLeft')}</p>
+                                    <p className={topLeftStyle}>
+                                        {moustacheVariable('topLeft')}
+                                    </p>
+                                    <p className={labelStyle}>
+                                        {moustacheVariable('bottomLeft')}
+                                    </p>
                                 </div>
                                 <div className={rightStyle}>
-                                    <p className={topRightStyle}>{moustacheVariable('topRight')}</p>
-                                    <p className={labelStyle}>{moustacheVariable('bottomRight')}</p>
+                                    <p className={topRightStyle}>
+                                        {moustacheVariable('topRight')}
+                                    </p>
+                                    <p className={labelStyle}>
+                                        {moustacheVariable('bottomRight')}
+                                    </p>
                                 </div>
                             </div>
 
                             <div>
                                 <div className={tickerBackgroundStyle}>
-                                    <MoustacheSection name='goalExceededMarkerPercentage'>
-                                        <div id='goal-exceeded-marker' className={goalExceededMarkerStyle} style={{left: `${moustacheVariable('goalExceededMarkerPercentage')}%`}} />
+                                    <MoustacheSection name="goalExceededMarkerPercentage">
+                                        <div
+                                            id="goal-exceeded-marker"
+                                            className={goalExceededMarkerStyle}
+                                            style={{
+                                                left: `${moustacheVariable(
+                                                    'goalExceededMarkerPercentage',
+                                                )}%`,
+                                            }}
+                                        />
                                     </MoustacheSection>
 
-                                    <div id='ticker-progress' className={tickerProgressStyle} style={{ width: `${moustacheVariable('percentage')}%` }} />
+                                    <div
+                                        id="ticker-progress"
+                                        className={tickerProgressStyle}
+                                        style={{
+                                            width: `${moustacheVariable(
+                                                'percentage',
+                                            )}%`,
+                                        }}
+                                    />
                                 </div>
                             </div>
                         </div>

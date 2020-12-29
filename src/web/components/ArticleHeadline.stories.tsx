@@ -516,9 +516,9 @@ export const SpecialReport = () => (
             </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
-                    headlineString="This is the headline you see when design type is SpecialReport"
+                    headlineString="This is the headline you see when pillar is SpecialReport"
                     display={Display.Standard}
-                    designType="SpecialReport"
+                    designType="Article"
                     pillar="news"
                     tags={[]}
                 />
