@@ -2,6 +2,7 @@ import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { Display } from '@root/src/lib/display';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -16,7 +17,7 @@ type Props = {
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
     const pillar: Pillar = decidePillar(CAPI);
-    const { designType } = CAPI;
+    const designType: DesignType = decideDesignType(CAPI);
 
     switch (display) {
         case Display.Immersive: {

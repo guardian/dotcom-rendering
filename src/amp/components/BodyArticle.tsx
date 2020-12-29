@@ -64,10 +64,10 @@ const adStyle = css`
 
 export const Body: React.FC<{
     pillar: Pillar;
+    designType: DesignType;
     data: ArticleModel;
     config: ConfigType;
-}> = ({ pillar, data, config }) => {
-    const { designType } = data;
+}> = ({ pillar, designType, data, config }) => {
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const adTargeting = buildAdTargeting(config);
     const elementsWithoutAds = Elements(

@@ -246,7 +246,26 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
