@@ -339,6 +339,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         adTargeting={adTargeting}
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
+                        posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />
@@ -361,6 +362,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         adTargeting={adTargeting}
                         isMainMedia={false}
                         overlayImage={youtubeBlock.overrideImage}
+                        posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
                         origin={CAPI.config.host}
                     />
