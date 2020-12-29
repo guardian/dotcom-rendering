@@ -162,7 +162,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
         if (variantName === 'variant')
             return month === 12
                 ? `Support us this December`
-                : 'Support us for 2021';
+                : 'Support us in 2021';
         return <span>Support The&nbsp;Guardian</span>;
     };
 
