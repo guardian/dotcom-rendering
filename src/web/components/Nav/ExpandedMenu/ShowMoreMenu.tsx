@@ -6,7 +6,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
 
 const screenReadable = css`

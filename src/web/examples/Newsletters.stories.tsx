@@ -9,7 +9,7 @@ import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 import {
     brandBorder,

@@ -16,7 +16,7 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 type Props = {
     discussionApiUrl: string;

@@ -8,7 +8,7 @@ import {
 } from '@root/fixtures/mostViewed';
 import { Section } from '@frontend/web/components/Section';
 import { ABProvider } from '@guardian/ab-react';
-import { Display } from 'src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { MostViewedFooter } from './MostViewedFooter';
 
 export default {

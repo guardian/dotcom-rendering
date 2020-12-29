@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 const wrapperStyles = css`
     margin-left: 6px;

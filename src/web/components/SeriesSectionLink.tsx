@@ -7,7 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 type Props = {
     display: Display;

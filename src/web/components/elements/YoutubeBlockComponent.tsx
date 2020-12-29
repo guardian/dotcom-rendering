@@ -6,7 +6,7 @@ import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 
 type Props = {

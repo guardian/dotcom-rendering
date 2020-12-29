@@ -46,7 +46,7 @@ import {
     SendToBack,
     BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 const ShowcaseGrid = ({
     children,

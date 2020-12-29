@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';

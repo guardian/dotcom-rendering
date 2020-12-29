@@ -5,7 +5,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`

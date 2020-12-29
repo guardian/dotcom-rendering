@@ -5,7 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {

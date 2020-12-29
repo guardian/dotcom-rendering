@@ -11,7 +11,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 

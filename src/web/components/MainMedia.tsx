@@ -6,7 +6,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
