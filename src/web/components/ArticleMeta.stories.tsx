@@ -181,7 +181,7 @@ export const ImmersiveStory = () => {
         <Container>
             <ArticleMeta
                 display={Display.Immersive}
-                designType="Immersive"
+                designType="Article"
                 pillar="news"
                 pageId=""
                 webTitle=""

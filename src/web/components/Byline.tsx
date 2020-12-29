@@ -59,7 +59,6 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return css`
                 color: ${pillarPalette[pillar].main};

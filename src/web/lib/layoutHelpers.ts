@@ -24,7 +24,6 @@ export const decideLineEffect = (
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return 'straight';
     }

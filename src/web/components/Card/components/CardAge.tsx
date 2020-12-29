@@ -57,7 +57,6 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
             return css`
                 color: ${neutral[60]};

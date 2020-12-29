@@ -90,7 +90,6 @@ const headlineStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
     }
 };

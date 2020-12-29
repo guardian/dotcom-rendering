@@ -80,7 +80,6 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Feature':
         case 'Analysis':
         case 'Interview':
-        case 'Immersive':
         default:
             return css`
                 ${baseLinkStyles}

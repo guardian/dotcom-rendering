@@ -61,7 +61,7 @@ export const immersiveStory = () => {
     return (
         <HeadlineByline
             display={Display.Immersive}
-            designType="Immersive"
+            designType="Article"
             pillar="lifestyle"
             byline="Jane Smith"
             tags={[
@@ -106,7 +106,7 @@ export const MultipleStory = () => {
     return (
         <HeadlineByline
             display={Display.Immersive}
-            designType="Immersive"
+            designType="Article"
             pillar="lifestyle"
             byline="Jane Smith, John Doe and Nae Bevan"
             tags={[

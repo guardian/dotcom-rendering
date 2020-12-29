@@ -18,7 +18,6 @@ declare const enum Display {
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
-    | 'Immersive'
     | 'Media'
     | 'Review'
     | 'Analysis'
@@ -261,7 +260,9 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive";
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -292,7 +293,9 @@ interface CAPIType {
 }
 
 type CAPIBrowserType = {
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive";
     pillar: Pillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];

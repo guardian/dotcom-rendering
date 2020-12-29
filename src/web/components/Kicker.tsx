@@ -50,7 +50,6 @@ const decideColour = (
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
             return pillarPalette[pillar].main;
     }
