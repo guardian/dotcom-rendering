@@ -412,6 +412,9 @@
                 },
                 "audioIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -422,6 +425,17 @@
                 "kicker",
                 "trackUrl"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "AudioBlockElement": {
             "type": "object",
@@ -603,6 +617,9 @@
                 },
                 "calloutIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -933,6 +950,9 @@
                 "html": {
                     "type": "string"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -997,6 +1017,9 @@
                 },
                 "dateTime": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1038,6 +1061,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1079,6 +1105,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1119,17 +1148,6 @@
                 "isMandatory"
             ]
         },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
-        },
         "ExplainerAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1147,6 +1165,9 @@
                 },
                 "body": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1218,6 +1239,9 @@
                 },
                 "guideIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1252,6 +1276,9 @@
                 },
                 "source": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1462,6 +1489,9 @@
                 },
                 "hasCaption": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1491,6 +1521,9 @@
                 },
                 "css": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 },
                 "url": {
                     "type": "string"
@@ -1568,6 +1601,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1646,6 +1682,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1682,6 +1721,9 @@
                 },
                 "profileIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1744,6 +1786,9 @@
                 },
                 "qandaIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1806,6 +1851,9 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1839,6 +1887,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1877,6 +1928,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1932,6 +1986,9 @@
                 },
                 "timelineIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1982,6 +2039,9 @@
                 },
                 "hasMedia": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2000,6 +2060,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2029,6 +2092,9 @@
                 },
                 "embedUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2067,6 +2133,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2108,6 +2177,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2153,6 +2225,9 @@
                 },
                 "youtubeIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [

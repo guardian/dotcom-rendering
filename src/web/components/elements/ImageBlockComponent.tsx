@@ -2,7 +2,6 @@ import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 import { Display } from '@root/src/lib/display';
-import { Figure } from '@root/src/web/components/Figure';
 
 type Props = {
     display: Display;
@@ -23,16 +22,14 @@ export const ImageBlockComponent = ({
 }: Props) => {
     const { role } = element;
     return (
-        <Figure role={role}>
-            <ImageComponent
-                display={display}
-                designType={designType}
-                element={element}
-                pillar={pillar}
-                hideCaption={hideCaption}
-                role={role}
-                title={title}
-            />
-        </Figure>
+        <ImageComponent
+            display={display}
+            designType={designType}
+            element={element}
+            pillar={pillar}
+            hideCaption={hideCaption}
+            role={role}
+            title={title}
+        />
     );
 };

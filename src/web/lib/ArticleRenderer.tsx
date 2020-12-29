@@ -70,7 +70,7 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                     return (
-                        <div id={`audio-atom-${i}`}>
+                        <Figure id={`audio-atom-${i}`} role={element.role}>
                             <AudioAtom
                                 id={element.id}
                                 trackUrl={element.trackUrl}
@@ -78,7 +78,7 @@ export const ArticleRenderer: React.FC<{
                                 title={element.title}
                                 pillar={toTypesPillar(pillar)}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
                     return (
@@ -106,43 +106,53 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                     return (
-                        <CommentBlockComponent
-                            body={element.body}
-                            avatarURL={element.avatarURL}
-                            profileURL={element.profileURL}
-                            profileName={element.profileName}
-                            dateTime={element.dateTime}
-                            permalink={element.permalink}
-                        />
+                        <Figure role={element.role}>
+                            <CommentBlockComponent
+                                body={element.body}
+                                avatarURL={element.avatarURL}
+                                profileURL={element.profileURL}
+                                profileName={element.profileName}
+                                dateTime={element.dateTime}
+                                permalink={element.permalink}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                     return (
-                        <DisclaimerBlockComponent
-                            html={element.html}
-                            pillar={pillar}
-                        />
+                        <Figure role={element.role}>
+                            <DisclaimerBlockComponent
+                                html={element.html}
+                                pillar={pillar}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.DividerBlockElement':
                     return <DividerBlockComponent />;
                 case 'model.dotcomrendering.pageElements.CalloutBlockElement':
                     return (
-                        <div id={`callout-${i}`}>
+                        <Figure id={`callout-${i}`} role={element.role}>
                             <CalloutBlockComponent
                                 callout={element}
                                 pillar={pillar}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-                    return <ChartAtom id={element.id} html={element.html} />;
+                    return (
+                        <Figure role={element.role}>
+                            <ChartAtom id={element.id} html={element.html} />
+                        </Figure>
+                    );
                 case 'model.dotcomrendering.pageElements.DocumentBlockElement':
                     return (
-                        <DocumentBlockComponent
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            title={element.title}
-                        />
+                        <Figure role={element.role}>
+                            <DocumentBlockComponent
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                title={element.title}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                     if (!element.safe) {
@@ -168,16 +178,18 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
                     return (
-                        <ExplainerAtom
-                            key={i}
-                            id={element.id}
-                            title={element.title}
-                            html={element.body}
-                        />
+                        <Figure role={element.role}>
+                            <ExplainerAtom
+                                key={i}
+                                id={element.id}
+                                title={element.title}
+                                html={element.body}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
                     return (
-                        <div id={`guide-atom-${i}`}>
+                        <Figure id={`guide-atom-${i}`} role={element.role}>
                             <GuideAtom
                                 id={element.id}
                                 title={element.title}
@@ -189,18 +201,20 @@ export const ArticleRenderer: React.FC<{
                                 dislikeHandler={() => {}}
                                 expandCallback={() => {}}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                     return (
-                        <GuVideoBlockComponent
-                            html={element.html}
-                            pillar={pillar}
-                            designType={designType}
-                            display={display}
-                            credit={element.source}
-                            caption={element.caption}
-                        />
+                        <Figure role={element.role}>
+                            <GuVideoBlockComponent
+                                html={element.html}
+                                pillar={pillar}
+                                designType={designType}
+                                display={display}
+                                credit={element.source}
+                                caption={element.caption}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.HighlightBlockElement':
                     return (
@@ -208,55 +222,68 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
-                        <ImageBlockComponent
-                            display={display}
-                            designType={designType}
-                            key={i}
-                            element={element}
-                            pillar={pillar}
-                            title={element.title}
-                        />
+                        <Figure role={element.role}>
+                            <ImageBlockComponent
+                                display={display}
+                                designType={designType}
+                                key={i}
+                                element={element}
+                                pillar={pillar}
+                                title={element.title}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return (
-                        <InstagramBlockComponent key={i} element={element} />
+                        <Figure role={element.role}>
+                            <InstagramBlockComponent
+                                key={i}
+                                element={element}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
                     return (
-                        <InteractiveAtom
-                            id={element.id}
-                            html={element.html}
-                            js={element.js}
-                            css={element.css}
-                        />
+                        <Figure role={element.role}>
+                            <InteractiveAtom
+                                id={element.id}
+                                html={element.html}
+                                js={element.js}
+                                css={element.css}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.MapBlockElement':
                     return (
-                        <MapEmbedBlockComponent
-                            pillar={pillar}
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            caption={element.caption}
-                            credit={element.source}
-                            title={element.title}
-                            display={display}
-                            designType={designType}
-                        />
+                        <Figure role={element.role}>
+                            <MapEmbedBlockComponent
+                                pillar={pillar}
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                caption={element.caption}
+                                credit={element.source}
+                                title={element.title}
+                                display={display}
+                                designType={designType}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
                     return (
-                        <MultiImageBlockComponent
-                            designType={designType}
-                            key={i}
-                            images={element.images}
-                            caption={element.caption}
-                            pillar={pillar}
-                        />
+                        <Figure role={element.role}>
+                            <MultiImageBlockComponent
+                                designType={designType}
+                                key={i}
+                                images={element.images}
+                                caption={element.caption}
+                                pillar={pillar}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
                     return (
-                        <div id={`profile-atom-${i}`}>
+                        <Figure id={`profile-atom-${i}`} role={element.role}>
                             <ProfileAtom
                                 id={element.id}
                                 title={element.title}
@@ -268,7 +295,7 @@ export const ArticleRenderer: React.FC<{
                                 dislikeHandler={() => {}}
                                 expandCallback={() => {}}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                     return (
@@ -283,7 +310,7 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.QABlockElement':
                     return (
-                        <div id={`qanda-atom-${i}`}>
+                        <Figure id={`qanda-atom-${i}`} role={element.role}>
                             <QandaAtom
                                 id={element.id}
                                 title={element.title}
@@ -295,7 +322,7 @@ export const ArticleRenderer: React.FC<{
                                 dislikeHandler={() => {}}
                                 expandCallback={() => {}}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return (
@@ -310,28 +337,36 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                     return (
-                        <SoundcloudBlockComponent key={i} element={element} />
+                        <Figure key={i} role={element.role}>
+                            <SoundcloudBlockComponent element={element} />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
                     return (
-                        <SpotifyBlockComponent
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            title={element.title}
-                            pillar={pillar}
-                            caption={element.caption}
-                            designType={designType}
-                            display={display}
-                            credit="Spotify"
-                        />
+                        <Figure role={element.role}>
+                            <SpotifyBlockComponent
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                title={element.title}
+                                pillar={pillar}
+                                caption={element.caption}
+                                designType={designType}
+                                display={display}
+                                credit="Spotify"
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />
                     );
                 case 'model.dotcomrendering.pageElements.TableBlockElement':
-                    return <TableBlockComponent element={element} />;
+                    return (
+                        <Figure role={element.role}>
+                            <TableBlockComponent element={element} />
+                        </Figure>
+                    );
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return (
                         <>
@@ -347,52 +382,66 @@ export const ArticleRenderer: React.FC<{
                         </>
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                    return <TweetBlockComponent key={i} element={element} />;
+                    return (
+                        <Figure key={i} role={element.role}>
+                            <TweetBlockComponent element={element} />
+                        </Figure>
+                    );
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                     return (
-                        <VideoFacebookBlockComponent
-                            pillar={pillar}
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            caption={element.caption}
-                            display={display}
-                            designType={designType}
-                            credit={element.caption}
-                            title={element.caption}
-                        />
+                        <Figure role={element.role}>
+                            <VideoFacebookBlockComponent
+                                pillar={pillar}
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                caption={element.caption}
+                                display={display}
+                                designType={designType}
+                                credit={element.caption}
+                                title={element.caption}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                     return (
-                        <VimeoBlockComponent
-                            pillar={pillar}
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            caption={element.caption}
-                            credit={element.credit}
-                            title={element.title}
-                            display={display}
-                            designType={designType}
-                        />
+                        <Figure role={element.role}>
+                            <VimeoBlockComponent
+                                pillar={pillar}
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                caption={element.caption}
+                                credit={element.credit}
+                                title={element.title}
+                                display={display}
+                                designType={designType}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
                     return (
-                        <YoutubeEmbedBlockComponent
-                            pillar={pillar}
-                            embedUrl={element.embedUrl}
-                            height={element.height}
-                            width={element.width}
-                            caption={element.caption}
-                            credit={element.credit}
-                            title={element.title}
-                            display={display}
-                            designType={designType}
-                        />
+                        <Figure role={element.role}>
+                            <YoutubeEmbedBlockComponent
+                                pillar={pillar}
+                                embedUrl={element.embedUrl}
+                                height={element.height}
+                                width={element.width}
+                                caption={element.caption}
+                                credit={element.credit}
+                                title={element.title}
+                                display={display}
+                                designType={designType}
+                            />
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <div key={i} id={`youtube-block-${i}`}>
+                        <Figure
+                            key={i}
+                            role={element.role}
+                            id={`youtube-block-${i}`}
+                        >
                             <YoutubeBlockComponent
                                 display={display}
                                 designType={designType}
@@ -408,11 +457,11 @@ export const ArticleRenderer: React.FC<{
                                 duration={element.duration}
                                 origin={host}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.TimelineBlockElement':
                     return (
-                        <div id={`timeline-atom-${i}`}>
+                        <Figure role={element.role} id={`timeline-atom-${i}`}>
                             <TimelineAtom
                                 id={element.id}
                                 title={element.title}
@@ -422,7 +471,7 @@ export const ArticleRenderer: React.FC<{
                                 dislikeHandler={() => {}}
                                 expandCallback={() => {}}
                             />
-                        </div>
+                        </Figure>
                     );
                 case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
                     return (
