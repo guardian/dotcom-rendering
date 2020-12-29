@@ -19,6 +19,10 @@ type Props = {
     role: RoleType;
     hideCaption?: boolean;
     overlayImage?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     adTargeting?: AdTargeting;
     isMainMedia?: boolean;
     height?: number;
@@ -69,6 +73,7 @@ export const YoutubeBlockComponent = ({
     pillar,
     hideCaption,
     overlayImage,
+    posterImage,
     role,
     adTargeting,
     isMainMedia,
@@ -150,12 +155,32 @@ export const YoutubeBlockComponent = ({
                 videoMeta={element}
                 overlayImage={
                     overlayImage
-                        ? {
-                              src: overlayImage,
-                              alt: element.altText || element.mediaTitle,
-                          }
+                        ? [
+                              {
+                                  srcSet: [
+                                      {
+                                          src: overlayImage,
+                                          width: 500, // we do not have width for overlayImage so set a random number
+                                      },
+                                  ],
+                              },
+                          ]
                         : undefined
                 }
+                posterImage={
+                    posterImage
+                        ? [
+                              {
+                                  srcSet: posterImage.map((img) => ({
+                                      src: img.url,
+                                      width: img.width,
+                                  })),
+                              },
+                          ]
+                        : undefined
+                }
+                role={role}
+                alt={element.altText || element.mediaTitle}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
