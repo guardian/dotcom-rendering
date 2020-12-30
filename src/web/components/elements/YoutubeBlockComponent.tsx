@@ -12,13 +12,18 @@ import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@guardian/types/Format';
 
 type Props = {
+    id: string;
+    mediaTitle?: string;
+    altText?: string;
     display: Display;
     designType: DesignType;
-    element: YoutubeBlockElement;
+    assetId: string;
+    channelId: string;
+    expired: boolean;
     pillar: Pillar;
     role: RoleType;
     hideCaption?: boolean;
-    overlayImage?: string;
+    overrideImage?: string;
     posterImage?: {
         url: string;
         width: number;
@@ -27,7 +32,6 @@ type Props = {
     isMainMedia?: boolean;
     height?: number;
     width?: number;
-    title?: string;
     duration?: number; // in seconds
     origin?: string;
 };
@@ -67,19 +71,22 @@ const expiredSVGWrapperStyles = css`
 `;
 
 export const YoutubeBlockComponent = ({
+    id,
+    assetId,
+    mediaTitle,
+    altText,
     display,
     designType,
-    element,
     pillar,
     hideCaption,
-    overlayImage,
+    overrideImage,
     posterImage,
+    expired,
     role,
     adTargeting,
     isMainMedia,
     height = 259,
     width = 460,
-    title = 'YouTube video player',
     duration,
     origin,
 }: Props) => {
@@ -87,7 +94,7 @@ export const YoutubeBlockComponent = ({
         !isMainMedia &&
         (role === 'showcase' || role === 'supporting' || role === 'immersive');
 
-    if (element.expired) {
+    if (expired) {
         return (
             <figure
                 className={css`
@@ -97,8 +104,7 @@ export const YoutubeBlockComponent = ({
             >
                 <div
                     className={
-                        element.overrideImage &&
-                        expiredOverlayStyles(element.overrideImage)
+                        overrideImage && expiredOverlayStyles(overrideImage)
                     }
                 >
                     <div className={expiredTextWrapperStyles}>
@@ -122,7 +128,7 @@ export const YoutubeBlockComponent = ({
                     <Caption
                         display={display}
                         designType={designType}
-                        captionText={element.mediaTitle || ''}
+                        captionText={mediaTitle || ''}
                         pillar={pillar}
                         displayCredit={false}
                         shouldLimitWidth={shouldLimitWidth}
@@ -133,33 +139,33 @@ export const YoutubeBlockComponent = ({
     }
 
     const ophanTracking = (trackingEvent: string) => {
-        if (!element.id) return;
+        if (!id) return;
         record({
             video: {
-                id: `gu-video-youtube-${element.id}`,
+                id: `gu-video-youtube-${id}`,
                 eventType: `video:content:${trackingEvent}`,
             },
         });
     };
     const gaTracking = (trackingEvent: string) => {
-        if (!element.id) return;
+        if (!id) return;
         trackVideoInteraction({
             trackingEvent,
-            elementId: element.id,
+            elementId: id,
         });
     };
 
     return (
         <div data-chromatic="ignore">
             <YoutubeAtom
-                videoMeta={element}
-                overlayImage={
-                    overlayImage
+                assetId={assetId}
+                overrideImage={
+                    overrideImage
                         ? [
                               {
                                   srcSet: [
                                       {
-                                          src: overlayImage,
+                                          src: overrideImage,
                                           width: 500, // we do not have width for overlayImage so set a random number
                                       },
                                   ],
@@ -180,11 +186,11 @@ export const YoutubeBlockComponent = ({
                         : undefined
                 }
                 role={role}
-                alt={element.altText || element.mediaTitle}
+                alt={altText || mediaTitle || ''}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
-                title={title}
+                title={mediaTitle}
                 duration={duration}
                 origin={origin}
                 eventEmitters={[ophanTracking, gaTracking]}
@@ -193,7 +199,7 @@ export const YoutubeBlockComponent = ({
                 <Caption
                     display={display}
                     designType={designType}
-                    captionText={element.mediaTitle || ''}
+                    captionText={mediaTitle || ''}
                     pillar={pillar}
                     displayCredit={false}
                     shouldLimitWidth={shouldLimitWidth}

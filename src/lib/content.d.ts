@@ -336,8 +336,8 @@ interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
     assetId: string;
     mediaTitle: string;
-    id?: string;
-    channelId?: string;
+    id: string;
+    channelId: string;
     duration?: number;
     posterImage?: {
         url: string;

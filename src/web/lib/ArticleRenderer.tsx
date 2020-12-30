@@ -398,16 +398,21 @@ export const ArticleRenderer: React.FC<{
                                 display={display}
                                 designType={designType}
                                 key={i}
-                                element={element}
                                 pillar={pillar}
                                 hideCaption={false}
                                 // eslint-disable-next-line jsx-a11y/aria-role
                                 role="inline"
                                 adTargeting={adTargeting}
                                 isMainMedia={false}
-                                overlayImage={element.overrideImage}
+                                id={element.id}
+                                assetId={element.assetId}
+                                channelId={element.channelId}
+                                expired={element.expired}
+                                overrideImage={element.overrideImage}
                                 posterImage={element.posterImage}
                                 duration={element.duration}
+                                mediaTitle={element.mediaTitle}
+                                altText={element.altText}
                                 origin={host}
                             />
                         </div>

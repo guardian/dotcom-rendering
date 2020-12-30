@@ -331,16 +331,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <YoutubeBlockComponent
                         display={display}
                         designType={designType}
-                        element={youtubeBlock}
                         pillar={pillar}
                         hideCaption={false}
                         // eslint-disable-next-line jsx-a11y/aria-role
                         role="inline"
                         adTargeting={adTargeting}
                         isMainMedia={false}
-                        overlayImage={youtubeBlock.overrideImage}
+                        id={youtubeBlock.id}
+                        assetId={youtubeBlock.assetId}
+                        channelId={youtubeBlock.channelId}
+                        expired={youtubeBlock.expired}
+                        overrideImage={youtubeBlock.overrideImage}
                         posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
+                        mediaTitle={youtubeBlock.mediaTitle}
+                        altText={youtubeBlock.altText}
                         origin={CAPI.config.host}
                     />
                 </Hydrate>
@@ -354,16 +359,21 @@ export const App = ({ CAPI, NAV }: Props) => {
                     <YoutubeBlockComponent
                         display={display}
                         designType={designType}
-                        element={youtubeBlock}
                         pillar={pillar}
                         hideCaption={false}
                         // eslint-disable-next-line jsx-a11y/aria-role
                         role="inline"
                         adTargeting={adTargeting}
                         isMainMedia={false}
-                        overlayImage={youtubeBlock.overrideImage}
+                        id={youtubeBlock.id}
+                        assetId={youtubeBlock.assetId}
+                        channelId={youtubeBlock.channelId}
+                        expired={youtubeBlock.expired}
+                        overrideImage={youtubeBlock.overrideImage}
                         posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
+                        mediaTitle={youtubeBlock.mediaTitle}
+                        altText={youtubeBlock.altText}
                         origin={CAPI.config.host}
                     />
                 </Hydrate>
