@@ -411,6 +411,8 @@ export const ArticleRenderer: React.FC<{
                                 overrideImage={element.overrideImage}
                                 posterImage={element.posterImage}
                                 duration={element.duration}
+                                mediaTitle={element.mediaTitle}
+                                altText={element.altText}
                                 origin={host}
                             />
                         </div>

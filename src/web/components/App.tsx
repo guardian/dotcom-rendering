@@ -344,6 +344,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                         overrideImage={youtubeBlock.overrideImage}
                         posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
+                        mediaTitle={youtubeBlock.mediaTitle}
+                        altText={youtubeBlock.altText}
                         origin={CAPI.config.host}
                     />
                 </Hydrate>
@@ -370,6 +372,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                         overrideImage={youtubeBlock.overrideImage}
                         posterImage={youtubeBlock.posterImage}
                         duration={youtubeBlock.duration}
+                        mediaTitle={youtubeBlock.mediaTitle}
+                        altText={youtubeBlock.altText}
                         origin={CAPI.config.host}
                     />
                 </Hydrate>

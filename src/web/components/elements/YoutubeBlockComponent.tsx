@@ -32,7 +32,6 @@ type Props = {
     isMainMedia?: boolean;
     height?: number;
     width?: number;
-    title?: string;
     duration?: number; // in seconds
     origin?: string;
 };
@@ -88,7 +87,6 @@ export const YoutubeBlockComponent = ({
     isMainMedia,
     height = 259,
     width = 460,
-    title,
     duration,
     origin,
 }: Props) => {
@@ -188,11 +186,11 @@ export const YoutubeBlockComponent = ({
                         : undefined
                 }
                 role={role}
-                alt={altText || mediaTitle || title || ''}
+                alt={altText || mediaTitle || ''}
                 adTargeting={adTargeting}
                 height={height}
                 width={width}
-                title={title}
+                title={mediaTitle}
                 duration={duration}
                 origin={origin}
                 eventEmitters={[ophanTracking, gaTracking]}
