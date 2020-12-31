@@ -61,6 +61,7 @@ function renderElement(
     hideCaption?: boolean,
     adTargeting?: AdTargeting,
     starRating?: number,
+    host?: string,
 ) {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -97,6 +98,7 @@ function renderElement(
                         overrideImage={element.overrideImage}
                         posterImage={element.posterImage}
                         duration={element.duration}
+                        origin={host}
                     />
                 </div>
             );
@@ -121,6 +123,7 @@ export const MainMedia: React.FC<{
     hideCaption?: boolean;
     adTargeting?: AdTargeting;
     starRating?: number;
+    host?: string;
 }> = ({
     display,
     designType,
@@ -129,6 +132,7 @@ export const MainMedia: React.FC<{
     hideCaption,
     adTargeting,
     starRating,
+    host,
 }) => (
     <div
         className={cx(
@@ -146,6 +150,7 @@ export const MainMedia: React.FC<{
                 hideCaption,
                 adTargeting,
                 starRating,
+                host,
             ),
         )}
     </div>
