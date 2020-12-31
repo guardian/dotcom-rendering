@@ -194,7 +194,8 @@ export const YoutubeBlockComponent = ({
                 duration={duration}
                 origin={
                     typeof window !== 'undefined' &&
-                    window.location.hostname !== 'localhost'
+                    window.location.hostname !== 'localhost' &&
+                    window.location.hostname !== 'm.code.dev-theguardian.com'
                         ? origin
                         : ''
                 }
