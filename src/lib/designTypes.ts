@@ -1,13 +1,11 @@
 export const designTypes: DesignType[] = [
     'Article',
-    'Immersive',
     'Media',
     'Review',
     'Analysis',
     'Comment',
     'Feature',
     'Live',
-    'SpecialReport',
     'Recipe',
     'MatchReport',
     'Interview',

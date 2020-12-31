@@ -44,13 +44,11 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'Media':
         case 'Review':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return css`
                 ${baseStyles};
@@ -84,13 +82,11 @@ const innerStyles = (designType: DesignType) => {
         case 'PhotoEssay':
         case 'Review':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return css`
                 ${baseStyles};

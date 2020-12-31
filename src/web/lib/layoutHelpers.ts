@@ -19,12 +19,10 @@ export const decideLineEffect = (
         case 'PhotoEssay':
         case 'Analysis':
         case 'Article':
-        case 'SpecialReport':
         case 'MatchReport':
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Immersive':
         default:
             return 'straight';
     }

@@ -2,7 +2,8 @@ import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -16,7 +17,7 @@ type Props = {
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
     const pillar: Pillar = decidePillar(CAPI);
-    const { designType } = CAPI;
+    const designType: DesignType = decideDesignType(CAPI);
 
     switch (display) {
         case Display.Immersive: {
@@ -40,13 +41,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <ImmersiveLayout
                             CAPI={CAPI}
@@ -80,13 +79,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <ShowcaseLayout
                             CAPI={CAPI}
@@ -121,13 +118,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                     return (
                         <StandardLayout
                             CAPI={CAPI}

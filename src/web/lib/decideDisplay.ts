@@ -1,4 +1,4 @@
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 export const decideDisplay = (CAPI: CAPIType | CAPIBrowserType): Display => {
     if (CAPI.isImmersive) return Display.Immersive;

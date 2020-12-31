@@ -8,7 +8,7 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -231,12 +231,10 @@ export const ArticleHeadline = ({
                 case 'Media':
                 case 'PhotoEssay':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     if (noMainMedia) {
                         return (
@@ -353,12 +351,10 @@ export const ArticleHeadline = ({
                 case 'Media':
                 case 'PhotoEssay':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     return (
                         <h1 className={standardFont}>

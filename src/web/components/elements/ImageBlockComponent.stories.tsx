@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -14,6 +14,9 @@ import { image } from './ImageBlockComponent.mocks';
 export default {
     component: ImageBlockComponent,
     title: 'Components/ImageBlockComponent',
+    parameters: {
+        chromatic: { diffThreshold: 0.4 },
+    },
 };
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
@@ -393,6 +396,6 @@ HalfWidthWide.story = {
     name: 'with role halfWidth',
     parameters: {
         viewport: { defaultViewport: 'wide' },
-        chromatic: { viewports: [1300] },
+        chromatic: { disable: true },
     },
 };

@@ -15,10 +15,10 @@ const measure = (name: string, task: () => Promise<void>): void => {
         // break the Cypress tests on CI
         // See: https://github.com/cypress-io/cypress/issues/2651#issuecomment-432698837
         .then(() => {
-            end()
+            end();
         })
-        .catch(()=> {
-            end()
+        .catch(() => {
+            end();
         });
 };
 

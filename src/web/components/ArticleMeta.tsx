@@ -4,10 +4,11 @@ import { border } from '@guardian/src-foundations/palette';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
+import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
@@ -136,14 +137,12 @@ const metaContainer = ({
                 case 'Media':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianView':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return css`
                         ${until.phablet} {
@@ -187,14 +186,12 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianView':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return false;
             }
@@ -220,13 +217,11 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
                 case 'Interview':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default:
                     return true;
             }
@@ -333,7 +328,7 @@ export const ArticleMeta = ({
                         </div>
                     </>
                 </RowBelowLeftCol>
-                <div className={metaFlex}>
+                <div data-print-layout="hide" className={metaFlex}>
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={sharingUrls}
@@ -342,7 +337,17 @@ export const ArticleMeta = ({
                         />
                     </div>
                     <div className={metaNumbers}>
-                        <div id="share-comment-counts" />
+                        <Counts>
+                            {/* The meta-number classname is needed by Counts.tsx */}
+                            <div
+                                className="meta-number"
+                                id="share-count-root"
+                            />
+                            <div
+                                className="meta-number"
+                                id="comment-count-root"
+                            />
+                        </Counts>
                     </div>
                 </div>
             </div>

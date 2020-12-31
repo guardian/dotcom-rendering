@@ -3,6 +3,15 @@ import { JsonScript } from './JsonScript';
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
+const pubData = {
+    // Matches ampViewId from https://ophan.theguardian.com/amp.json
+    pageViewId: 'PAGE_VIEW_ID_64',
+    browserId: 'CLIENT_ID',
+    platform: 'amp',
+};
+
+const queryParams = new URLSearchParams(pubData).toString();
+
 const clientConfig = {
     accountId: 1257,
     mmsDomain: `https://${sourcepointDomain}`,
@@ -43,7 +52,7 @@ const clientConfigAus = {
     targetingParams: {
         framework: 'aus',
     },
-}
+};
 
 export const AdConsent: React.FC<{}> = ({}) => {
     // To debug geolocation in dev, make sure you're on the experimental channel of AMP:
@@ -77,7 +86,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     o={{
                         consentRequired: 'remote',
                         consentInstanceId: 'sourcepoint',
-                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
+                        checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?${queryParams}`,
                         promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
                         clientConfig,
                         geoOverride: {

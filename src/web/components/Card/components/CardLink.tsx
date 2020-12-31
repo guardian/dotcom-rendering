@@ -43,11 +43,11 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
                 ${baseLinkStyles}
                 background-color: ${opinion[800]};
                 :hover {
-                     /* TODO: This colour is hard coded here because it does not yet
+                    /* TODO: This colour is hard coded here because it does not yet
                            exist in src-foundation. Once it's been added, please
                            remove this. @siadcock is aware. */
                     /* stylelint-disable-next-line color-no-hex */
-                    background-color: #FDF0E8;
+                    background-color: #fdf0e8;
                 }
             `;
         case 'Media':
@@ -71,7 +71,6 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Article':
         case 'Review':
         case 'PhotoEssay':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
@@ -80,16 +79,15 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Feature':
         case 'Analysis':
         case 'Interview':
-        case 'Immersive':
         default:
             return css`
-                    ${baseLinkStyles}
-                    background-color: ${neutral[97]};
+                ${baseLinkStyles}
+                background-color: ${neutral[97]};
 
-                    :hover {
-                        background-color: ${neutral[93]};
-                    }
-                `;
+                :hover {
+                    background-color: ${neutral[93]};
+                }
+            `;
     }
 };
 

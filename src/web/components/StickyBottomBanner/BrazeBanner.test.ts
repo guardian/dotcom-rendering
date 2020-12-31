@@ -98,7 +98,7 @@ describe('canShowPreChecks', () => {
             const result = canShowPreChecks({
                 brazeSwitch: false,
                 apiKey: 'abcde',
-                isDigitalSubscriber: true,
+                shouldHideSupportMessaging: true,
                 pageConfig: { isPaidContent: false },
             });
 
@@ -111,7 +111,7 @@ describe('canShowPreChecks', () => {
             const result = canShowPreChecks({
                 brazeSwitch: true,
                 apiKey: '',
-                isDigitalSubscriber: true,
+                shouldHideSupportMessaging: true,
                 pageConfig: { isPaidContent: false },
             });
 
@@ -119,12 +119,12 @@ describe('canShowPreChecks', () => {
         });
     });
 
-    describe('when not a digital subscriber', () => {
+    describe('when not a supporter', () => {
         it('returns false', () => {
             const result = canShowPreChecks({
                 brazeSwitch: true,
                 apiKey: 'abcde',
-                isDigitalSubscriber: false,
+                shouldHideSupportMessaging: false,
                 pageConfig: { isPaidContent: false },
             });
 
@@ -137,7 +137,7 @@ describe('canShowPreChecks', () => {
             const result = canShowPreChecks({
                 brazeSwitch: true,
                 apiKey: 'abcde',
-                isDigitalSubscriber: true,
+                shouldHideSupportMessaging: true,
                 pageConfig: { isPaidContent: true },
             });
 
@@ -150,7 +150,7 @@ describe('canShowPreChecks', () => {
             const result = canShowPreChecks({
                 brazeSwitch: true,
                 apiKey: 'abcde',
-                isDigitalSubscriber: true,
+                shouldHideSupportMessaging: true,
                 pageConfig: { isPaidContent: false },
             });
 

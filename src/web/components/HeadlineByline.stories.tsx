@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { HeadlineByline } from './HeadlineByline';
 
 export default {
@@ -61,7 +61,7 @@ export const immersiveStory = () => {
     return (
         <HeadlineByline
             display={Display.Immersive}
-            designType="Immersive"
+            designType="Article"
             pillar="lifestyle"
             byline="Jane Smith"
             tags={[
@@ -106,7 +106,7 @@ export const MultipleStory = () => {
     return (
         <HeadlineByline
             display={Display.Immersive}
-            designType="Immersive"
+            designType="Article"
             pillar="lifestyle"
             byline="Jane Smith, John Doe and Nae Bevan"
             tags={[

@@ -5,7 +5,7 @@ import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';

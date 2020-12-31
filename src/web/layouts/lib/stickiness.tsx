@@ -34,7 +34,7 @@ const bannerWrapper = css`
     ${getZIndexImportant('banner')}
     max-height: 80vh;
     overflow: auto;
-    
+
     width: 100% !important;
     background: none !important;
     top: auto !important;
@@ -49,5 +49,7 @@ export const SendToBack = ({ children }: Props) => (
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-    <div id="bottom-banner" className={bannerWrapper}>{children}</div>
+    <div id="bottom-banner" className={bannerWrapper}>
+        {children}
+    </div>
 );

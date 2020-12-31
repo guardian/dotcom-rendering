@@ -5,6 +5,7 @@ import { BlockquoteBlockComponent } from '@root/src/web/components/elements/Bloc
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
+import { CodeBlockComponent } from '@root/src/web/components/elements/CodeBlockComponent';
 import { DefaultRichLink } from '@root/src/web/components/RichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
@@ -42,7 +43,7 @@ import {
     TimelineAtom,
     VideoAtom,
 } from '@guardian/atoms-rendering';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { toTypesPillar } from '@root/src/lib/format';
 
@@ -446,15 +447,21 @@ export const ArticleRenderer: React.FC<{
                                 display={display}
                                 designType={designType}
                                 key={i}
-                                element={element}
                                 pillar={pillar}
                                 hideCaption={false}
                                 // eslint-disable-next-line jsx-a11y/aria-role
                                 role="inline"
                                 adTargeting={adTargeting}
                                 isMainMedia={false}
-                                overlayImage={element.overrideImage}
+                                id={element.id}
+                                assetId={element.assetId}
+                                channelId={element.channelId}
+                                expired={element.expired}
+                                overrideImage={element.overrideImage}
+                                posterImage={element.posterImage}
                                 duration={element.duration}
+                                mediaTitle={element.mediaTitle}
+                                altText={element.altText}
                                 origin={host}
                             />
                         </Figure>
@@ -483,8 +490,14 @@ export const ArticleRenderer: React.FC<{
                             }
                         />
                     );
-                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.CodeBlockElement':
+                    return (
+                        <CodeBlockComponent
+                            code={element.code}
+                            language={element.language}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.AudioBlockElement':
                 case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
                 case 'model.dotcomrendering.pageElements.VideoBlockElement':

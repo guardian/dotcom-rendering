@@ -9,23 +9,15 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
-declare const enum Display {
-    Standard,
-    Immersive,
-    Showcase,
-}
-
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
-    | 'Immersive'
     | 'Media'
     | 'Review'
     | 'Analysis'
     | 'Comment'
     | 'Feature'
     | 'Live'
-    | 'SpecialReport'
     | 'Recipe'
     | 'MatchReport'
     | 'Interview'
@@ -119,6 +111,7 @@ interface ReaderRevenueCategories {
     contribute: string;
     subscribe: string;
     support: string;
+    gifting: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
@@ -165,13 +158,13 @@ interface AuthorType {
 interface Block {
     id: string;
     elements: CAPIElement[];
-    createdOn?: number;
-    createdOnDisplay?: string;
-    lastUpdated?: number;
-    lastUpdatedDisplay?: string;
+    blockCreatedOn?: number;
+    blockCreatedOnDisplay?: string;
+    blockLastUpdated?: number;
+    blockLastUpdatedDisplay?: string;
     title?: string;
-    firstPublished?: number;
-    firstPublishedDisplay?: string;
+    blockFirstPublished?: number;
+    blockFirstPublishedDisplay?: string;
     primaryDateLine: string;
     secondaryDateLine: string;
 }
@@ -260,7 +253,9 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive" | "SpecialReport";
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -291,7 +286,9 @@ interface CAPIType {
 }
 
 type CAPIBrowserType = {
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive" | "SpecialReport";
     pillar: Pillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];
@@ -652,7 +649,8 @@ type IslandType =
     | 'sub-nav-root'
     | 'edition-root'
     | 'most-viewed-right'
-    | 'share-comment-counts'
+    | 'share-count-root'
+    | 'comment-count-root'
     | 'most-viewed-footer'
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
@@ -719,19 +717,6 @@ type AdSlotType =
     | 'merchandising-high'
     | 'merchandising'
     | 'comments';
-
-interface AdSlotParameters {
-    name: AdSlotType;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
 
 // ------------------------------
 // 3rd party type declarations //

@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 const wrapperStyles = css`
     margin-left: 6px;
@@ -108,7 +108,6 @@ export const HeadlineByline = ({
                         </div>
                     );
                 case 'Interview':
-                case 'Immersive':
                 case 'Analysis':
                 case 'Feature':
                 case 'Article':
@@ -116,7 +115,6 @@ export const HeadlineByline = ({
                 case 'PhotoEssay':
                 case 'Review':
                 case 'Live':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
@@ -164,7 +162,6 @@ export const HeadlineByline = ({
                         </div>
                     );
 
-                case 'Immersive':
                 case 'Analysis':
                 case 'Feature':
                 case 'Article':
@@ -172,7 +169,6 @@ export const HeadlineByline = ({
                 case 'PhotoEssay':
                 case 'Review':
                 case 'Live':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':

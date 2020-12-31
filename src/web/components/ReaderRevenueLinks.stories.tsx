@@ -2,12 +2,27 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
+import { ABProvider } from '@guardian/ab-react';
 
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 export default {
     component: ReaderRevenueLinks,
     title: 'Components/ReaderRevenueLinks',
+};
+
+const AbProvider: React.FC = ({ children }) => {
+    return (
+        <ABProvider
+            mvtMaxValue={1000000}
+            mvtId={1234}
+            pageIsSensitive={false}
+            abTestSwitches={{}}
+            arrayOfTestObjects={[]}
+        >
+            {children}
+        </ABProvider>
+    );
 };
 
 const revenueUrls = {
@@ -26,7 +41,7 @@ const Container = ({ children }: { children: JSXElements }) => (
             background-color: ${brandBackground.primary};
         `}
     >
-        {children}
+        <AbProvider>{children}</AbProvider>
     </div>
 );
 
@@ -38,6 +53,7 @@ export const Header = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
+                pageViewId="1234"
             />
         </Container>
     );
@@ -58,6 +74,7 @@ export const HeaderMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={true}
+                pageViewId="1234"
             />
         </Container>
     );
@@ -78,6 +95,7 @@ export const Footer = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
+                pageViewId="1234"
             />
         </Container>
     );
@@ -98,6 +116,7 @@ export const FooterMobile = () => {
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
                 inHeader={false}
+                pageViewId="1234"
             />
         </Container>
     );

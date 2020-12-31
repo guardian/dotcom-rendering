@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
@@ -142,7 +142,8 @@ export const ImmersiveSeriesTag = () => {
                 tags={[
                     {
                         id: '',
-                        title: 'Series title',
+                        title:
+                            'Series title with the addition of some more text to see how this wraps',
                         type: 'Series',
                     },
                 ]}

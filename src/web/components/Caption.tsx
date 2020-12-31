@@ -7,7 +7,7 @@ import { space } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 type Props = {
     display: Display;
@@ -180,7 +180,6 @@ export const Caption = ({
         case 'Article':
         case 'Media':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
@@ -191,7 +190,6 @@ export const Caption = ({
         case 'Comment':
         case 'Analysis':
         case 'Review':
-        case 'Immersive':
         case 'Interview':
             return (
                 <figcaption

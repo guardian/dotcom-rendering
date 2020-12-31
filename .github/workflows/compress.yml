@@ -3,7 +3,8 @@ name: Compressed Size
 on: [pull_request]
 
 jobs:
-    build:
+    compressed_size:
+        name: Compressed Size
         runs-on: ubuntu-latest
 
         steps:

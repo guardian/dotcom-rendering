@@ -20,7 +20,6 @@ const determinPadding = (designType: DesignType) => {
         case 'Media':
         case 'PhotoEssay':
         case 'Live':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
@@ -34,7 +33,6 @@ const determinPadding = (designType: DesignType) => {
 
         case 'Review':
         case 'Interview':
-        case 'Immersive':
             return null;
     }
 };

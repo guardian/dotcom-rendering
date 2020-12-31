@@ -2,7 +2,8 @@ name: jest 🤔
 on: [push]
 
 jobs:
-    run:
+    jest:
+        name: Jest
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -516,9 +516,9 @@ export const SpecialReport = () => (
             </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
-                    headlineString="This is the headline you see when design type is SpecialReport"
+                    headlineString="This is the headline you see when pillar is SpecialReport"
                     display={Display.Standard}
-                    designType="SpecialReport"
+                    designType="Article"
                     pillar="news"
                     tags={[]}
                 />

@@ -68,6 +68,10 @@ cypress: clear clean-dist install
 	$(call log, "starting frontend DEV server for Cypress")
 	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'cypress run --spec "cypress/integration/**/*"'
 
+ampValidation: clean-dist install
+	$(call log, "starting frontend DEV server for AMP Validation")
+	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'node scripts/test/amp-validation.js'
+
 # quality #########################################
 
 tsc: clean-dist install
@@ -77,6 +81,7 @@ tsc: clean-dist install
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
 	@yarn lint --fix
+	@yarn prettier:fix
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
@@ -106,7 +111,7 @@ validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
 validate-prepush:
-	@run-p tsc lint-staged "test -- --verbose  --runInBand --onlyChanged"
+	@run-p tsc prettier:check lint-staged "test -- --verbose  --runInBand --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")

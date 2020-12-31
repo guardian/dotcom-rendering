@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
+import { space } from '@guardian/src-foundations';
 
 import { stringifyFileBase64 } from '../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
@@ -13,9 +14,9 @@ const fileUploadInputStyles = css`
 `;
 
 const errorMessagesStyles = css`
-    padding-bottom: 10px;
+    padding-top: ${space[2]}px;
     color: ${text.error};
-    ${textSans.medium({ fontWeight: 'bold' })};
+    ${textSans.small({ fontWeight: 'bold' })};
 `;
 
 type Props = {
@@ -28,8 +29,8 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
     const [error, setError] = useState('');
     const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
+            setError('');
             try {
-                setError('');
                 const stringifiedFile = await stringifyFileBase64(
                     event.target.files[0],
                 );
@@ -38,7 +39,9 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
                     [formField.id]: stringifiedFile,
                 });
             } catch (e) {
-                setError(e);
+                setError(
+                    'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+                );
             }
         }
     };

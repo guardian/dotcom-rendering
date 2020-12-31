@@ -42,7 +42,6 @@ const decideColour = (
         case 'Analysis':
         case 'Article':
         case 'Review':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
@@ -50,7 +49,6 @@ const decideColour = (
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
             return pillarPalette[pillar].main;
     }

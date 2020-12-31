@@ -34,10 +34,7 @@ interface BlockquoteBlockElement {
 
 interface CaptionBlockElement {
     _type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
-    display: Display;
-    designType: DesignType;
     captionText?: string;
-    pillar: Pillar;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
@@ -70,7 +67,9 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 
 interface CodeBlockElement {
     _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
+    code: string;
     isMandatory: boolean;
+    language?: Language;
 }
 
 interface CommentBlockElement {
@@ -361,12 +360,16 @@ interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
     assetId: string;
     mediaTitle: string;
-    id?: string;
-    channelId?: string;
+    id: string;
+    channelId: string;
     duration?: number;
-    posterSrc?: string;
+    posterImage?: {
+        url: string;
+        width: number;
+    }[];
     expired: boolean;
     overrideImage?: string;
+    altText?: string;
     youtubeIndex?: number;
     role?: RoleType;
 }
@@ -474,6 +477,15 @@ interface TimelineEvent {
 interface Switches {
     [key: string]: boolean;
 }
+
+// Used for CodeBlockElement
+type Language =
+    | 'typescript'
+    | 'javascript'
+    | 'css'
+    | 'markup'
+    | 'scala'
+    | 'elm';
 
 // -------------------------------------
 // Callout Campaign

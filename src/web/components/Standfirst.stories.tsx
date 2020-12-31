@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';
@@ -54,7 +54,7 @@ export const Immersive = () => {
         <Section>
             <Standfirst
                 display={Display.Immersive}
-                designType="Immersive"
+                designType="Article"
                 standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
         </Section>
@@ -171,7 +171,7 @@ export const SpecialReport = () => {
         <Section>
             <Standfirst
                 display={Display.Standard}
-                designType="SpecialReport"
+                designType="Article"
                 standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
             />
         </Section>

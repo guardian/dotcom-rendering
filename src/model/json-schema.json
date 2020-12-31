@@ -246,7 +246,26 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -481,17 +500,8 @@
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
                 },
-                "display": {
-                    "$ref": "#/definitions/Display"
-                },
-                "designType": {
-                    "$ref": "#/definitions/DesignType"
-                },
                 "captionText": {
                     "type": "string"
-                },
-                "pillar": {
-                    "$ref": "#/definitions/Pillar"
                 },
                 "padCaption": {
                     "type": "boolean"
@@ -510,52 +520,8 @@
                 }
             },
             "required": [
-                "_type",
-                "designType",
-                "display",
-                "pillar"
+                "_type"
             ]
-        },
-        "Display": {
-            "type": "number",
-            "enum": [
-                0,
-                1,
-                2
-            ]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CalloutBlockElement": {
             "type": "object",
@@ -982,14 +948,32 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "code": {
+                    "type": "string"
+                },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
                 }
             },
             "required": [
                 "_type",
+                "code",
                 "isMandatory"
             ]
+        },
+        "Language": {
+            "enum": [
+                "css",
+                "elm",
+                "javascript",
+                "markup",
+                "scala",
+                "typescript"
+            ],
+            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -2214,13 +2198,31 @@
                 "duration": {
                     "type": "number"
                 },
-                "posterSrc": {
-                    "type": "string"
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
                 },
                 "expired": {
                     "type": "boolean"
                 },
                 "overrideImage": {
+                    "type": "string"
+                },
+                "altText": {
                     "type": "string"
                 },
                 "youtubeIndex": {
@@ -2233,7 +2235,9 @@
             "required": [
                 "_type",
                 "assetId",
+                "channelId",
                 "expired",
+                "id",
                 "mediaTitle"
             ]
         },
@@ -2373,25 +2377,25 @@
                         ]
                     }
                 },
-                "createdOn": {
+                "blockCreatedOn": {
                     "type": "number"
                 },
-                "createdOnDisplay": {
+                "blockCreatedOnDisplay": {
                     "type": "string"
                 },
-                "lastUpdated": {
+                "blockLastUpdated": {
                     "type": "number"
                 },
-                "lastUpdatedDisplay": {
+                "blockLastUpdatedDisplay": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "firstPublished": {
+                "blockFirstPublished": {
                     "type": "number"
                 },
-                "firstPublishedDisplay": {
+                "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
                 "primaryDateLine": {
@@ -2485,6 +2489,17 @@
                 "title",
                 "type"
             ]
+        },
+        "Pillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",

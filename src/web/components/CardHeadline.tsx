@@ -82,7 +82,6 @@ const headlineStyles = (designType: DesignType, pillar: Pillar) => {
         case 'PhotoEssay':
         case 'Article':
         case 'Review':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
@@ -90,7 +89,6 @@ const headlineStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
     }
 };

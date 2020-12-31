@@ -23,7 +23,6 @@ export const headlineBackgroundColour = (
         case 'Article':
         case 'Review':
         case 'PhotoEssay':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianLabs':
@@ -32,7 +31,6 @@ export const headlineBackgroundColour = (
         case 'Feature':
         case 'Analysis':
         case 'Interview':
-        case 'Immersive':
         default:
             return css`
                 background-color: ${neutral[97]};
@@ -56,7 +54,6 @@ export const headlineColour = (designType: DesignType, pillar: Pillar) => {
         case 'PhotoEssay':
         case 'Article':
         case 'Review':
-        case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
@@ -64,7 +61,6 @@ export const headlineColour = (designType: DesignType, pillar: Pillar) => {
         case 'Quiz':
         case 'AdvertisementFeature':
         case 'Comment':
-        case 'Immersive':
         default:
     }
 };

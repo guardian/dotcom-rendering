@@ -12,7 +12,7 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 import {
     brandBorder,

@@ -29,5 +29,5 @@ export interface ArticleModel {
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
     starRating?: number;
-    designType: DesignType;
+    designType: DesignType | 'Immersive' | 'SpecialReport';
 }

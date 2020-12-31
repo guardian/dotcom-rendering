@@ -7,7 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types/Format';
 
 type Props = {
     display: Display;
@@ -71,17 +71,25 @@ const invertedStyle = (pillar: Pillar) => css`
     color: ${neutral[100]};
     background-color: ${pillarPalette[pillar].main};
 
+    /* Handle text wrapping onto a new line */
+    white-space: pre-wrap;
+    box-shadow: -6px 0 0 ${pillarPalette[pillar].main};
+    box-decoration-break: clone;
+    line-height: 28px;
+    ${from.leftCol} {
+        line-height: 28px;
+    }
+
+    padding-right: ${space[3]}px;
+    padding-top: ${space[1]}px;
+    padding-bottom: ${space[3]}px;
     padding-left: ${space[3]}px;
     ${from.mobileLandscape} {
         padding-left: ${space[5]}px;
     }
     ${from.tablet} {
-        padding-left: ${space[3]}px;
+        padding-left: ${space[1]}px;
     }
-
-    padding-right: ${space[3]}px;
-    padding-top: ${space[1]}px;
-    padding-bottom: ${space[1]}px;
 `;
 
 const whiteFont = css`
@@ -189,13 +197,11 @@ export const SeriesSectionLink = ({
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default: {
                     if (hasSeriesTag) {
                         if (!tag) return null; // Just to keep ts happy
@@ -233,13 +239,11 @@ export const SeriesSectionLink = ({
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'Recipe':
                 case 'MatchReport':
                 case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
-                case 'Immersive':
                 default: {
                     if (tag) {
                         // We have a tag, we're not immersive, show both series and section titles

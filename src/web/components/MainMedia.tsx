@@ -5,7 +5,8 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { Display } from '@root/src/lib/display';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { Display } from '@guardian/types/Format';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
@@ -47,6 +48,8 @@ const immersiveWrapper = css`
     */
     flex-grow: 1;
     ${getZIndex('mainMedia')}
+    /* Prevent the immersive image 100vh from spilling into main content */
+    overflow: hidden;
 `;
 
 function renderElement(
@@ -81,17 +84,25 @@ function renderElement(
                         display={display}
                         designType={designType}
                         key={i}
-                        element={element}
                         pillar={pillar}
                         hideCaption={hideCaption}
                         // eslint-disable-next-line jsx-a11y/aria-role
                         role="inline"
                         adTargeting={adTargeting}
                         isMainMedia={true}
-                        overlayImage={element.overrideImage}
+                        id={element.id}
+                        assetId={element.assetId}
+                        channelId={element.channelId}
+                        expired={element.expired}
+                        overrideImage={element.overrideImage}
+                        posterImage={element.posterImage}
                         duration={element.duration}
                     />
                 </div>
+            );
+        case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+            return (
+                <EmbedBlockComponent html={element.html} alt={element.alt} />
             );
         default:
             // eslint-disable-next-line no-console

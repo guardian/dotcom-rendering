@@ -201,7 +201,7 @@ export const trackPerformance = (
         return;
     }
 
-    if (window.performance?.now) {
+    if (window.performance && window.performance.now) {
         ga(
             send,
             'timing',
@@ -211,4 +211,25 @@ export const trackPerformance = (
             timingLabel,
         );
     }
+};
+
+export const trackVideoInteraction = ({
+    trackingEvent,
+    elementId,
+}: {
+    trackingEvent: string;
+    elementId: string;
+}) => {
+    const { ga } = window;
+
+    if (!ga) {
+        return;
+    }
+
+    ga(send, 'event', {
+        eventCategory: 'media',
+        eventAction: 'video content',
+        eventLabel: `${trackingEvent}:${elementId}`,
+        dimension19: elementId,
+    });
 };
