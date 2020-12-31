@@ -40,7 +40,6 @@ describe('Video', function () {
             cy.visit(`/Article?url=${mainMediaVideo}`);
             cy.get(`#youtube-block-main-media-0`).should('be.visible');
 
-
             cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('be.visible');
             cy.get(`#youtube-overlay-S0CE1n-R3OY`).click();
             cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('not.be.visible');
