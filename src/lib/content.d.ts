@@ -19,6 +19,7 @@ interface AudioAtomBlockElement {
     duration: number;
     coverUrl: string;
     audioIndex?: number;
+    role?: RoleType;
 }
 
 interface AudioBlockElement {
@@ -53,6 +54,7 @@ interface CalloutBlockElement {
     tagName: string;
     formFields: CampaignFieldType[];
     calloutIndex?: number;
+    role?: RoleType;
 }
 
 interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
@@ -60,6 +62,7 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
     chartIndex?: number;
     id: string;
     html: string;
+    role?: RoleType;
 }
 
 interface CodeBlockElement {
@@ -77,6 +80,7 @@ interface CommentBlockElement {
     profileName: string;
     permalink: string;
     dateTime: string;
+    role?: RoleType;
 }
 
 interface ContentAtomBlockElement {
@@ -87,6 +91,7 @@ interface ContentAtomBlockElement {
 interface DisclaimerBlockElement {
     _type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
     html: string;
+    role?: RoleType;
 }
 
 interface DividerBlockElement {
@@ -99,6 +104,7 @@ interface DocumentBlockElement {
     height: number;
     width: number;
     title?: string;
+    role?: RoleType;
 }
 
 interface EmbedBlockElement {
@@ -115,6 +121,7 @@ interface ExplainerAtomBlockElement {
     id: string;
     title: string;
     body: string;
+    role?: RoleType;
 }
 
 interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
@@ -130,6 +137,7 @@ interface GuideAtomBlockElement {
     html: string;
     credit: string;
     guideIndex?: number;
+    role?: RoleType;
 }
 
 interface GuVideoBlockElement {
@@ -138,6 +146,7 @@ interface GuVideoBlockElement {
     caption: string;
     html: string;
     source: string;
+    role?: RoleType;
 }
 
 interface HighlightBlockElement {
@@ -165,6 +174,7 @@ interface InstagramBlockElement {
     html: string;
     url: string;
     hasCaption: boolean;
+    role?: RoleType;
 }
 
 interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
@@ -173,6 +183,7 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
     js: string;
     html?: string;
     css?: string;
+    role?: RoleType;
 }
 
 interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
@@ -188,6 +199,7 @@ interface MapBlockElement {
     height: number;
     width: number;
     caption?: string;
+    role?: RoleType;
 }
 
 interface MediaAtomBlockElement {
@@ -206,6 +218,7 @@ interface MultiImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
     images: ImageBlockElement[];
     caption?: string;
+    role?: RoleType;
 }
 
 interface ProfileAtomBlockElement {
@@ -217,6 +230,7 @@ interface ProfileAtomBlockElement {
     html: string;
     credit: string;
     profileIndex?: number;
+    role?: RoleType;
 }
 
 interface PullquoteBlockElement {
@@ -234,6 +248,7 @@ interface QABlockElement {
     html: string;
     credit: string;
     qandaIndex?: number;
+    role?: RoleType;
 }
 
 interface RichLinkBlockElement {
@@ -251,6 +266,7 @@ interface SoundcloudBlockElement {
     id: string;
     isTrack: boolean;
     isMandatory: boolean;
+    role?: RoleType;
 }
 
 interface SpotifyBlockElement {
@@ -260,6 +276,7 @@ interface SpotifyBlockElement {
     height?: number;
     width?: number;
     caption?: string;
+    role?: RoleType;
 }
 
 interface SubheadingBlockElement {
@@ -271,6 +288,7 @@ interface TableBlockElement {
     _type: 'model.dotcomrendering.pageElements.TableBlockElement';
     isMandatory: boolean;
     html: string;
+    role?: RoleType;
 }
 
 interface TextBlockElement {
@@ -286,6 +304,7 @@ interface TimelineBlockElement {
     description?: string;
     events: TimelineEvent[];
     timelineIndex?: number;
+    role?: RoleType;
 }
 
 interface TweetBlockElement {
@@ -294,10 +313,12 @@ interface TweetBlockElement {
     url: string;
     id: string;
     hasMedia: boolean;
+    role?: RoleType;
 }
 
 interface VideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
+    role?: RoleType;
 }
 
 interface VideoFacebookBlockElement {
@@ -307,6 +328,7 @@ interface VideoFacebookBlockElement {
     width: number;
     caption?: string;
     embedUrl?: string;
+    role?: RoleType;
 }
 
 interface VideoVimeoBlockElement {
@@ -318,6 +340,7 @@ interface VideoVimeoBlockElement {
     caption?: string;
     credit?: string;
     title?: string;
+    role?: RoleType;
 }
 
 interface VideoYoutubeBlockElement {
@@ -330,6 +353,7 @@ interface VideoYoutubeBlockElement {
     caption?: string;
     credit?: string;
     title?: string;
+    role?: RoleType;
 }
 
 interface YoutubeBlockElement {
@@ -347,6 +371,7 @@ interface YoutubeBlockElement {
     overrideImage?: string;
     altText?: string;
     youtubeIndex?: number;
+    role?: RoleType;
 }
 
 type CAPIElement =

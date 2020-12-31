@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
 import { css } from 'emotion';
 
@@ -6,6 +7,7 @@ import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
 import { RightColumn } from '../RightColumn';
+import { Figure } from '../Figure';
 
 import { ImageBlockComponent } from './ImageBlockComponent';
 
@@ -54,12 +56,14 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
 export const StandardArticle = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'inline' }}
-                pillar="news"
-            />
+            <Figure role="inline">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'inline' }}
+                    pillar="news"
+                />
+            </Figure>
         </Container>
     );
 };
@@ -70,12 +74,14 @@ StandardArticle.story = {
 export const Immersive = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'immersive' }}
-                pillar="news"
-            />
+            <Figure role="immersive">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'immersive' }}
+                    pillar="news"
+                />
+            </Figure>
         </Container>
     );
 };
@@ -86,12 +92,14 @@ Immersive.story = {
 export const Showcase = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'showcase' }}
-                pillar="news"
-            />
+            <Figure role="showcase">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'showcase' }}
+                    pillar="news"
+                />
+            </Figure>
         </Container>
     );
 };
@@ -102,12 +110,14 @@ Showcase.story = {
 export const Thumbnail = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'thumbnail' }}
-                pillar="news"
-            />
+            <Figure role="thumbnail">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'thumbnail' }}
+                    pillar="news"
+                />
+            </Figure>
         </Container>
     );
 };
@@ -118,12 +128,14 @@ Thumbnail.story = {
 export const Supporting = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'supporting' }}
-                pillar="news"
-            />
+            <Figure role="supporting">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'supporting' }}
+                    pillar="news"
+                />
+            </Figure>
         </Container>
     );
 };
@@ -134,13 +146,15 @@ Supporting.story = {
 export const HideCaption = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'inline' }}
-                pillar="news"
-                hideCaption={true}
-            />
+            <Figure role="inline">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'inline' }}
+                    pillar="news"
+                    hideCaption={true}
+                />
+            </Figure>
         </Container>
     );
 };
@@ -151,14 +165,16 @@ HideCaption.story = {
 export const InlineTitle = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'inline' }}
-                pillar="news"
-                title="This is the title text"
-                hideCaption={true}
-            />
+            <Figure role="inline">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'inline' }}
+                    pillar="news"
+                    title="This is the title text"
+                    hideCaption={true}
+                />
+            </Figure>
         </Container>
     );
 };
@@ -173,14 +189,16 @@ InlineTitle.story = {
 export const InlineTitleMobile = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'inline' }}
-                pillar="news"
-                title="This is the title text"
-                hideCaption={true}
-            />
+            <Figure role="inline">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'inline' }}
+                    pillar="news"
+                    title="This is the title text"
+                    hideCaption={true}
+                />
+            </Figure>
         </Container>
     );
 };
@@ -195,14 +213,16 @@ InlineTitleMobile.story = {
 export const ImmersiveTitle = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'immersive' }}
-                pillar="news"
-                title="This is the title text"
-                hideCaption={true}
-            />
+            <Figure role="immersive">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'immersive' }}
+                    pillar="news"
+                    title="This is the title text"
+                    hideCaption={true}
+                />
+            </Figure>
         </Container>
     );
 };
@@ -213,14 +233,16 @@ ImmersiveTitle.story = {
 export const ShowcaseTitle = () => {
     return (
         <Container>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'showcase' }}
-                pillar="news"
-                title="This is the title text"
-                hideCaption={true}
-            />
+            <Figure role="showcase">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'showcase' }}
+                    pillar="news"
+                    title="This is the title text"
+                    hideCaption={true}
+                />
+            </Figure>
         </Container>
     );
 };
@@ -255,12 +277,14 @@ export const HalfWidth = () => {
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum.
             </p>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'halfWidth' }}
-                pillar="news"
-            />
+            <Figure role="halfWidth">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'halfWidth' }}
+                    pillar="news"
+                />
+            </Figure>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -311,12 +335,14 @@ export const HalfWidthMobile = () => {
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum.
             </p>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'halfWidth' }}
-                pillar="news"
-            />
+            <Figure role="halfWidth">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'halfWidth' }}
+                    pillar="news"
+                />
+            </Figure>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -367,12 +393,14 @@ export const HalfWidthWide = () => {
                 sint occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim id est laborum.
             </p>
-            <ImageBlockComponent
-                display={Display.Standard}
-                designType="Article"
-                element={{ ...image, role: 'halfWidth' }}
-                pillar="news"
-            />
+            <Figure role="halfWidth">
+                <ImageBlockComponent
+                    display={Display.Standard}
+                    designType="Article"
+                    element={{ ...image, role: 'halfWidth' }}
+                    pillar="news"
+                />
+            </Figure>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
