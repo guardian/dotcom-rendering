@@ -231,22 +231,27 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         data-mobile={[
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
-                            `${Size.halfPage}`,
+                            `${Size.outstreamMobile}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.fluid}`,
                         ].join('|')}
                         data-desktop={[
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.video}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
                             `${Size.fluid}`,
-                            `${Size.halfPage}`,
-                            `${Size.skyscraper}`,
                         ].join('|')}
                         data-phablet={[
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
+                            `${Size.outstreamMobile}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
                             `${Size.fluid}`,
