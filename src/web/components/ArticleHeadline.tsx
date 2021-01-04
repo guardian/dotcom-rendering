@@ -15,7 +15,7 @@ type Props = {
     headlineString: string;
     display: Display;
     designType: DesignType; // Decides headline appearance
-    pillar: Pillar; // Decides headline colour when relevant
+    pillar: CAPIPillar; // Decides headline colour when relevant
     byline?: string;
     tags: TagType[];
     isShowcase?: boolean; // Used for Interviews to change headline position

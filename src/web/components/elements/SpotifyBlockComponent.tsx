@@ -8,7 +8,7 @@ export const SpotifyBlockComponent: React.FC<{
     height?: number;
     width?: number;
     title?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     caption?: string;
     display: Display;
     designType: DesignType;

@@ -48,7 +48,7 @@ const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     display: Display;
     designType: DesignType;
     element: ImageBlockElement;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     hideCaption?: boolean;
 };
  */

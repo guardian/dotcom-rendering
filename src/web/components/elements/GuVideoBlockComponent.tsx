@@ -7,7 +7,7 @@ import { Display } from '@guardian/types/Format';
 
 export const GuVideoBlockComponent: React.FC<{
     html: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
     display: Display;
     credit: string;

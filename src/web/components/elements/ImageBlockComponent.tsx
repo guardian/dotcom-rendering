@@ -7,7 +7,7 @@ type Props = {
     display: Display;
     designType: DesignType;
     element: ImageBlockElement;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     hideCaption?: boolean;
     title?: string;
 };

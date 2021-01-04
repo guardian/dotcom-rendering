@@ -12,7 +12,7 @@ import { SecondTierItem } from './SecondTierItem';
 
 type Props = {
     sectionName?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     ajaxUrl: string;
 };
 

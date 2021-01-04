@@ -1,6 +1,6 @@
 import { Pillar as TypesPillar } from '@guardian/types/Format';
 
-export const toTypesPillar = (p: Pillar): TypesPillar => {
+export const toTypesPillar = (p: CAPIPillar): TypesPillar => {
     switch (p) {
         case 'news':
             return TypesPillar.News;

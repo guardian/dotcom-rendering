@@ -22,7 +22,7 @@ const slashStyles = css`
 
 const decideColour = (
     designType: DesignType,
-    pillar: Pillar,
+    pillar: CAPIPillar,
     inCard?: boolean,
 ) => {
     switch (designType) {

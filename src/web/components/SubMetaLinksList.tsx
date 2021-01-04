@@ -68,7 +68,7 @@ const hideSlash = css`
 export const SubMetaLinksList: React.FC<{
     links: SimpleLinkType[];
     isSectionLinkList: boolean;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ links, isSectionLinkList, pillar }) => (
     <ul
         className={cx(subMetaLinksList, [

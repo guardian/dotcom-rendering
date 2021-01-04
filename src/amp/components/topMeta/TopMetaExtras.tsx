@@ -32,7 +32,7 @@ const metaExtras = css`
     margin-bottom: 6px;
 `;
 
-const borders = (pillar: Pillar) => css`
+const borders = (pillar: CAPIPillar) => css`
     border-top: 1px solid ${neutralBorder(pillar)};
     border-bottom: 1px solid ${neutralBorder(pillar)};
     display: flex;
@@ -70,7 +70,7 @@ const WebPublicationDate: React.FC<{
 
 const AgeWarning: React.FC<{
     warning?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ warning, pillar }) => {
     if (!warning) {
         return null;
@@ -105,7 +105,7 @@ const TwitterHandle: React.FC<{
 
 export const TopMetaExtras: React.FC<{
     sharingUrls: SharingURLs;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     webPublicationDate: string;
     ageWarning?: string;
     twitterHandle?: string;

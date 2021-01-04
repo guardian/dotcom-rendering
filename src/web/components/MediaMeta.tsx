@@ -10,11 +10,11 @@ import Video from '@frontend/static/icons/video.svg';
 
 type Props = {
     mediaType: MediaType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     mediaDuration?: number;
 };
 
-const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
+const iconWrapperStyles = (mediaType: MediaType, pillar: CAPIPillar) => css`
     width: 24px;
     height: 23px;
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
@@ -35,7 +35,7 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
     }
 `;
 
-const durationStyles = (pillar: Pillar) => css`
+const durationStyles = (pillar: CAPIPillar) => css`
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
     color: ${pillar === 'news'
         ? pillarPalette[pillar].bright
@@ -89,7 +89,7 @@ const MediaIcon = ({
     pillar,
 }: {
     mediaType: MediaType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }) => (
     <span className={iconWrapperStyles(mediaType, pillar)}>
         <Icon mediaType={mediaType} />
@@ -101,7 +101,7 @@ const MediaDuration = ({
     pillar,
 }: {
     mediaDuration: number;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }) => (
     <p className={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>
 );

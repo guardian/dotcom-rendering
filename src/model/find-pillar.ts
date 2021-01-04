@@ -3,7 +3,7 @@ import { pillarNames } from '@root/src/lib/pillars';
 export const findPillar: (
     name: string,
     tags?: TagType[],
-) => Pillar | undefined = (name, tags?) => {
+) => CAPIPillar | undefined = (name, tags?) => {
     // Flag paid content for Labs pillar (for styling purposes)
     const isPaidContent = (tag: any) =>
         tag.type === 'Tone' && tag.id === 'tone/advertisement-features';

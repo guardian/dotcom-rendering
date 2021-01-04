@@ -16,7 +16,7 @@ type Props = {
     sectionLabel: string;
     sectionUrl: string;
     guardianBaseURL: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     badge?: BadgeType;
     isSpecial?: boolean;
 };
@@ -62,7 +62,7 @@ const primaryStyle = css`
     padding-right: ${space[2]}px;
 `;
 
-const invertedStyle = (pillar: Pillar) => css`
+const invertedStyle = (pillar: CAPIPillar) => css`
     font-weight: 700;
     ${headline.xxxsmall({ fontWeight: 'bold' })};
     ${from.leftCol} {

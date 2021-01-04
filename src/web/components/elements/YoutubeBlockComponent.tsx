@@ -20,7 +20,7 @@ type Props = {
     assetId: string;
     channelId: string;
     expired: boolean;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     role: RoleType;
     hideCaption?: boolean;
     overrideImage?: string;

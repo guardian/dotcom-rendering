@@ -8,7 +8,7 @@ import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { WithAds } from '@root/src/amp/components/WithAds';
 
-const blockStyle = (pillar: Pillar) => css`
+const blockStyle = (pillar: CAPIPillar) => css`
     padding: 6px 10px 12px;
     background-color: ${palette.neutral[100]};
     border-top: 1px solid ${pillarPalette[pillar].dark};
@@ -39,7 +39,7 @@ const clearBoth = css`
 // that out and have an Ad element type we match against
 export const Blocks: React.SFC<{
     blocks: Block[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     edition: Edition;
     section?: string;
     contentType: string;

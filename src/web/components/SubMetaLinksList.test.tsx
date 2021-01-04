@@ -13,7 +13,7 @@ describe('SubMetaLinksList', () => {
             title: 'Test 2',
         },
     ];
-    const pillar: Pillar = 'news';
+    const pillar: CAPIPillar = 'news';
 
     it('It should render correct amount of links', () => {
         const { container, getByText } = render(
