@@ -47,7 +47,7 @@ const Body: React.SFC<{
 };
 
 export const Article: React.FC<{
-  experimentsData?: AmpExperiments;
+	experimentsData?: AmpExperiments;
 	nav: NavType;
 	articleData: ArticleModel;
 	config: ConfigType;
@@ -64,10 +64,9 @@ export const Article: React.FC<{
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
-			{
-                experimentsData &&
-                <AmpExperimentComponent experimentsData={experimentsData} />
-            }
+			{experimentsData && (
+				<AmpExperimentComponent experimentsData={experimentsData} />
+			)}
 
 			{/* /TODO change to gray bgcolor */}
 			<div key="main" className={backgroundColour}>

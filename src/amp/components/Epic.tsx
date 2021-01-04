@@ -186,97 +186,124 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-    const epicUrl = process.env.GU_STAGE === 'PROD'
-        ? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
-        : 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
+	const epicUrl =
+		process.env.GU_STAGE === 'PROD'
+			? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
+			: 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
 
-    return (
-	<div>
-		<amp-list
-			layout='fixed-height'
-                // This means that if the user refreshes at the end of the article while the epic is in view then the epic
-                // will not display. This is such an edge case that we can live with it, and in general it will fill the
-                // space.
-			height='1px'
-			src={epicUrl}
-			credentials='include'
-			id="epic-container"
-			single-item="true"
-			items="."
-		>
-			<MoustacheTemplate>
-				<div className={epicStyle}>
-					<MoustacheSection name='ticker'>
-						<div className={tickerWrapperStyle}>
-							<div className={tickerInfoStyle}>
-								<div className={leftStyle}>
-									<p className={topLeftStyle}>{moustacheVariable('topLeft')}</p>
-									<p className={labelStyle}>{moustacheVariable('bottomLeft')}</p>
+	return (
+		<div>
+			<amp-list
+				layout="fixed-height"
+				// This means that if the user refreshes at the end of the article while the epic is in view then the epic
+				// will not display. This is such an edge case that we can live with it, and in general it will fill the
+				// space.
+				height="1px"
+				src={epicUrl}
+				credentials="include"
+				id="epic-container"
+				single-item="true"
+				items="."
+			>
+				<MoustacheTemplate>
+					<div className={epicStyle}>
+						<MoustacheSection name="ticker">
+							<div className={tickerWrapperStyle}>
+								<div className={tickerInfoStyle}>
+									<div className={leftStyle}>
+										<p className={topLeftStyle}>
+											{moustacheVariable('topLeft')}
+										</p>
+										<p className={labelStyle}>
+											{moustacheVariable('bottomLeft')}
+										</p>
+									</div>
+									<div className={rightStyle}>
+										<p className={topRightStyle}>
+											{moustacheVariable('topRight')}
+										</p>
+										<p className={labelStyle}>
+											{moustacheVariable('bottomRight')}
+										</p>
+									</div>
 								</div>
-								<div className={rightStyle}>
-									<p className={topRightStyle}>{moustacheVariable('topRight')}</p>
-									<p className={labelStyle}>{moustacheVariable('bottomRight')}</p>
+
+								<div>
+									<div className={tickerBackgroundStyle}>
+										<MoustacheSection name="goalExceededMarkerPercentage">
+											<div
+												id="goal-exceeded-marker"
+												className={
+													goalExceededMarkerStyle
+												}
+												style={{
+													left: `${moustacheVariable(
+														'goalExceededMarkerPercentage',
+													)}%`,
+												}}
+											/>
+										</MoustacheSection>
+
+										<div
+											id="ticker-progress"
+											className={tickerProgressStyle}
+											style={{
+												width: `${moustacheVariable(
+													'percentage',
+												)}%`,
+											}}
+										/>
+									</div>
 								</div>
 							</div>
-
-							<div>
-								<div className={tickerBackgroundStyle}>
-									<MoustacheSection name='goalExceededMarkerPercentage'>
-										<div id='goal-exceeded-marker' className={goalExceededMarkerStyle} style={{left: `${moustacheVariable('goalExceededMarkerPercentage')}%`}} />
-									</MoustacheSection>
-
-									<div id='ticker-progress' className={tickerProgressStyle} style={{ width: `${moustacheVariable('percentage')}%` }} />
-								</div>
-							</div>
-						</div>
-					</MoustacheSection>
-					<h2 className={epicHeaderStyle}>
-						<MoustacheVariable name="heading" />
-					</h2>
-					<MoustacheSection name="paragraphs">
-						<p className={epicParagraphStyle}>
-							<MoustacheVariable name="." />
-						</p>
-					</MoustacheSection>
-					<span className={highlightedTextStyle}>
-						<MoustacheVariable name="highlightedText" />
-					</span>
-					<br />
-					<MoustacheSection name="cta">
-						<a
-							href={buildUrl(
-								moustacheVariable('url'),
-								webURL,
-								moustacheVariable('campaignCode'),
-								moustacheVariable('componentId'),
-							)}
-							className={supportButtonStyle}
-						>
-							<MoustacheVariable name="text" />
-							<svg
-								className={arrowStyle}
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 20 17.89"
-								preserveAspectRatio="xMinYMid"
-								aria-hidden="true"
-								focusable="false"
+						</MoustacheSection>
+						<h2 className={epicHeaderStyle}>
+							<MoustacheVariable name="heading" />
+						</h2>
+						<MoustacheSection name="paragraphs">
+							<p className={epicParagraphStyle}>
+								<MoustacheVariable name="." />
+							</p>
+						</MoustacheSection>
+						<span className={highlightedTextStyle}>
+							<MoustacheVariable name="highlightedText" />
+						</span>
+						<br />
+						<MoustacheSection name="cta">
+							<a
+								href={buildUrl(
+									moustacheVariable('url'),
+									webURL,
+									moustacheVariable('campaignCode'),
+									moustacheVariable('componentId'),
+								)}
+								className={supportButtonStyle}
 							>
-								<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-							</svg>
-						</a>
-						<div className={acceptedPaymentMethodsWrapperStyle}>
-							<amp-img
-								layout="fixed"
-								height="25px"
-								width="176px"
-								src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-								alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-							/>
-						</div>
-					</MoustacheSection>
-				</div>
-			</MoustacheTemplate>
-		</amp-list>
-	</div>
+								<MoustacheVariable name="text" />
+								<svg
+									className={arrowStyle}
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 17.89"
+									preserveAspectRatio="xMinYMid"
+									aria-hidden="true"
+									focusable="false"
+								>
+									<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+								</svg>
+							</a>
+							<div className={acceptedPaymentMethodsWrapperStyle}>
+								<amp-img
+									layout="fixed"
+									height="25px"
+									width="176px"
+									src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+									alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+								/>
+							</div>
+						</MoustacheSection>
+					</div>
+				</MoustacheTemplate>
+			</amp-list>
+		</div>
 	);
 };
