@@ -1,9 +1,9 @@
 import { stripHTML } from './strip-html';
 
 describe('stripHTML', () => {
-    it('removes all HTML tags', () => {
-        const test = '<p>foo <span>bar</span></p>';
+	it('removes all HTML tags', () => {
+		const test = '<p>foo <span>bar</span></p>';
 
-        expect(stripHTML(test)).toBe('foo bar');
-    });
+		expect(stripHTML(test)).toBe('foo bar');
+	});
 });

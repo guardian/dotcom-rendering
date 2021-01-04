@@ -13,108 +13,108 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
 const headerStyle = (pillar: CAPIPillar) => css`
-    ${headline.small()};
-    font-weight: 500;
-    padding: 3px 10px 24px;
-    color: ${palette.neutral[100]};
-    background-color: ${pillarPalette[pillar].main};
+	${headline.small()};
+	font-weight: 500;
+	padding: 3px 10px 24px;
+	color: ${palette.neutral[100]};
+	background-color: ${pillarPalette[pillar].main};
 `;
 
 const bylineStyle = (pillar: CAPIPillar) => css`
-    ${headline.xxxsmall()};
-    color: ${pillarPalette[pillar].main};
-    padding-top: 3px;
-    padding-bottom: 8px;
-    font-style: italic;
+	${headline.xxxsmall()};
+	color: ${pillarPalette[pillar].main};
+	padding-top: 3px;
+	padding-bottom: 8px;
+	font-style: italic;
 
-    a {
-        font-weight: 700;
-        color: ${pillarPalette[pillar].main};
-        text-decoration: none;
-        font-style: normal;
-    }
+	a {
+		font-weight: 700;
+		color: ${pillarPalette[pillar].main};
+		text-decoration: none;
+		font-style: normal;
+	}
 `;
 
 const standfirstStyle = (pillar: CAPIPillar) => css`
-    ${headline.xxxsmall()};
-    color: ${palette.neutral[100]};
-    background-color: ${pillarPalette[pillar].dark};
-    font-weight: bold;
-    padding: 3px 10px 12px;
+	${headline.xxxsmall()};
+	color: ${palette.neutral[100]};
+	background-color: ${pillarPalette[pillar].dark};
+	font-weight: bold;
+	padding: 3px 10px 12px;
 
-    a {
-        color: ${palette.neutral[100]};
-    }
+	a {
+		color: ${palette.neutral[100]};
+	}
 
-    p {
-        margin-bottom: 8px;
-    }
-    strong {
-        font-weight: 700;
-    }
+	p {
+		margin-bottom: 8px;
+	}
+	strong {
+		font-weight: 700;
+	}
 
-    ${ListStyle(neutralBorder(pillar))};
+	${ListStyle(neutralBorder(pillar))};
 `;
 
 const fullWidth = css`
-    margin: 0 -10px;
+	margin: 0 -10px;
 `;
 
 const Headline: React.FC<{
-    headlineText: string;
-    standfirst: string;
-    pillar: CAPIPillar;
-    starRating?: number;
+	headlineText: string;
+	standfirst: string;
+	pillar: CAPIPillar;
+	starRating?: number;
 }> = ({ headlineText, pillar, standfirst }) => {
-    return (
-        <div className={fullWidth}>
-            <h1 className={headerStyle(pillar)}>{curly(headlineText)}</h1>
-            <div
-                className={standfirstStyle(pillar)}
-                dangerouslySetInnerHTML={{
-                    __html: standfirst,
-                }}
-            />
-        </div>
-    );
+	return (
+		<div className={fullWidth}>
+			<h1 className={headerStyle(pillar)}>{curly(headlineText)}</h1>
+			<div
+				className={standfirstStyle(pillar)}
+				dangerouslySetInnerHTML={{
+					__html: standfirst,
+				}}
+			/>
+		</div>
+	);
 };
 
 export const TopMetaLiveblog: React.FC<{
-    articleData: ArticleModel;
-    pillar: CAPIPillar;
+	articleData: ArticleModel;
+	pillar: CAPIPillar;
 }> = ({ articleData, pillar }) => (
-    <header>
-        <Headline
-            headlineText={articleData.headline}
-            standfirst={articleData.standfirst}
-            pillar={pillar}
-            starRating={articleData.starRating}
-        />
+	<header>
+		<Headline
+			headlineText={articleData.headline}
+			standfirst={articleData.standfirst}
+			pillar={pillar}
+			starRating={articleData.starRating}
+		/>
 
-        {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} pillar={pillar} />
-        ))}
+		{articleData.mainMediaElements.map((element, i) => (
+			<MainMedia key={i} element={element} pillar={pillar} />
+		))}
 
-        <Byline
-            byline={articleData.author.byline}
-            tags={articleData.tags}
-            pillar={pillar}
-            guardianBaseURL={articleData.guardianBaseURL}
-            className={bylineStyle(pillar)}
-        />
+		<Byline
+			byline={articleData.author.byline}
+			tags={articleData.tags}
+			pillar={pillar}
+			guardianBaseURL={articleData.guardianBaseURL}
+			className={bylineStyle(pillar)}
+		/>
 
-        <TopMetaExtras
-            sharingUrls={getSharingUrls(
-                articleData.pageId,
-                articleData.webTitle,
-            )}
-            pillar={pillar}
-            ageWarning={getAgeWarning(
-                articleData.tags,
-                articleData.webPublicationDate,
-            )}
-            webPublicationDate={articleData.webPublicationDateDisplay}
-            twitterHandle={articleData.author.twitterHandle}
-        />
-    </header>
+		<TopMetaExtras
+			sharingUrls={getSharingUrls(
+				articleData.pageId,
+				articleData.webTitle,
+			)}
+			pillar={pillar}
+			ageWarning={getAgeWarning(
+				articleData.tags,
+				articleData.webPublicationDate,
+			)}
+			webPublicationDate={articleData.webPublicationDateDisplay}
+			twitterHandle={articleData.author.twitterHandle}
+		/>
+	</header>
 );
