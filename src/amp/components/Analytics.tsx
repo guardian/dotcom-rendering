@@ -2,45 +2,45 @@ import React from 'react';
 import { PermutivePayload } from '@root/src/amp/lib/permutive';
 
 export interface AnalyticsModel {
-    gaTracker: string;
-    title: string;
-    fbPixelaccount: string;
-    comscoreID: string;
-    section?: string;
-    contentType: string;
-    id: string;
-    beacon: string;
-    neilsenAPIID: string;
-    domain: string;
-    permutive: {
-        namespace: string;
-        apiKey: string;
-        payload: PermutivePayload;
-    };
+	gaTracker: string;
+	title: string;
+	fbPixelaccount: string;
+	comscoreID: string;
+	section?: string;
+	contentType: string;
+	id: string;
+	beacon: string;
+	neilsenAPIID: string;
+	domain: string;
+	permutive: {
+		namespace: string;
+		apiKey: string;
+		payload: PermutivePayload;
+	};
 }
 
 export const Analytics: React.FC<{
-    analytics: AnalyticsModel;
+	analytics: AnalyticsModel;
 }> = ({
-    analytics: {
-        gaTracker,
-        fbPixelaccount,
-        comscoreID,
-        title,
-        section,
-        contentType,
-        id,
-        beacon,
-        neilsenAPIID,
-        domain,
-        permutive,
-    },
+	analytics: {
+		gaTracker,
+		fbPixelaccount,
+		comscoreID,
+		title,
+		section,
+		contentType,
+		id,
+		beacon,
+		neilsenAPIID,
+		domain,
+		permutive,
+	},
 }) => {
-    const scripts: string[] = [
-        `<amp-pixel data-block-on-consent src="${beacon}"></amp-pixel>`,
-        `<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
-        `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-        `<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
+	const scripts: string[] = [
+		`<amp-pixel data-block-on-consent src="${beacon}"></amp-pixel>`,
+		`<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
+		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
                  "requests": {
@@ -68,7 +68,7 @@ export const Analytics: React.FC<{
                }
                </script>
             </amp-analytics>`,
-        `<amp-analytics data-block-on-consent id="comscore" type="comscore">
+		`<amp-analytics data-block-on-consent id="comscore" type="comscore">
             <script type="application/json">
                 {
                     "vars": {"c2": "${comscoreID}"},
@@ -76,7 +76,7 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-        `<amp-analytics type="nielsen">
+		`<amp-analytics type="nielsen">
              <script type="application/json">
                 {
                     "vars": {
@@ -89,7 +89,7 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-        `<amp-analytics data-block-on-consent type="permutive">
+		`<amp-analytics data-block-on-consent type="permutive">
             <script type="application/json">
                 {
                     "vars": {
@@ -100,12 +100,12 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-    ];
+	];
 
-    // Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP
-    if (section && section === 'business') {
-        scripts.push(
-            `<amp-analytics data-block-on-consent type="snowplow_v2">
+	// Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP
+	if (section && section === 'business') {
+		scripts.push(
+			`<amp-analytics data-block-on-consent type="snowplow_v2">
                 <script type="application/json">
                     {
                         "cookies": {
@@ -144,8 +144,8 @@ export const Analytics: React.FC<{
                     }
                 </script>
             </amp-analytics>`,
-        );
-    }
+		);
+	}
 
-    return <div dangerouslySetInnerHTML={{ __html: scripts.join('\n') }} />;
+	return <div dangerouslySetInnerHTML={{ __html: scripts.join('\n') }} />;
 };

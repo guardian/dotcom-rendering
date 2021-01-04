@@ -1,11 +1,11 @@
 import React from 'react';
 
 const getShortcode: (url: string) => string = (url) => {
-    const match = /.*\/(.*)\//.exec(url);
-    if (match == null) {
-        throw new Error('No shortcode could be found for instagram embed.');
-    }
-    return match[1];
+	const match = /.*\/(.*)\//.exec(url);
+	if (match == null) {
+		throw new Error('No shortcode could be found for instagram embed.');
+	}
+	return match[1];
 };
 /*
 About width and height.
@@ -23,16 +23,16 @@ So the aspect ratio is either going to be 1.5:1 or 2:1. With hope it reduces jan
 
 */
 export const InstagramBlockComponent: React.FC<{
-    element: InstagramBlockElement;
+	element: InstagramBlockElement;
 }> = ({ element }) => {
-    const shortcode = getShortcode(element.url);
-    return (
-        <amp-instagram
-            width="1"
-            height={element.hasCaption ? '2' : '1.5'}
-            data-shortcode={shortcode}
-            data-captioned={element.hasCaption} // Not convinced this has an effect.
-            layout="responsive"
-        />
-    );
+	const shortcode = getShortcode(element.url);
+	return (
+		<amp-instagram
+			width="1"
+			height={element.hasCaption ? '2' : '1.5'}
+			data-shortcode={shortcode}
+			data-captioned={element.hasCaption} // Not convinced this has an effect.
+			layout="responsive"
+		/>
+	);
 };

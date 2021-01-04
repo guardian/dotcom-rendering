@@ -8,41 +8,41 @@ import { getFontsCss } from '@root/src/lib/fonts-css';
 import he from 'he';
 
 interface RenderToStringResult {
-    html: string;
-    css: string;
+	html: string;
+	css: string;
 }
 
 interface Metadata {
-    description: string;
-    canonicalURL: string;
+	description: string;
+	canonicalURL: string;
 }
 
 export const document = ({
-    linkedData,
-    title,
-    body,
-    scripts,
-    metadata,
+	linkedData,
+	title,
+	body,
+	scripts,
+	metadata,
 }: {
-    linkedData: object[];
-    title: string;
-    body: React.ReactElement<any>;
-    scripts: string[];
-    metadata: Metadata;
+	linkedData: object[];
+	title: string;
+	body: React.ReactElement<any>;
+	scripts: string[];
+	metadata: Metadata;
 }) => {
-    const { html, css }: RenderToStringResult = extractCritical(
-        // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
-        renderToStaticMarkup(
-            <CacheProvider value={cache}>{body}</CacheProvider>,
-        ),
-    );
+	const { html, css }: RenderToStringResult = extractCritical(
+		// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
+		renderToStaticMarkup(
+			<CacheProvider value={cache}>{body}</CacheProvider>,
+		),
+	);
 
-    const favicon =
-        process.env.NODE_ENV === 'production'
-            ? 'favicon-32x32.ico'
-            : 'favicon-32x32-dev-yellow.ico';
+	const favicon =
+		process.env.NODE_ENV === 'production'
+			? 'favicon-32x32.ico'
+			: 'favicon-32x32-dev-yellow.ico';
 
-    return `<!doctype html>
+	return `<!doctype html>
 <html ⚡ lang="en">
     <head>
     <meta charset="utf-8">
@@ -57,10 +57,10 @@ export const document = ({
 
 
     ${linkedData.reduce(
-        (prev, ld) => `${prev}
+		(prev, ld) => `${prev}
 <script type="application/ld+json">${JSON.stringify(ld)}</script>`,
-        '',
-    )}
+		'',
+	)}
 
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

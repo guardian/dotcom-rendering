@@ -9,86 +9,86 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
 type Props = {
-    html: string;
-    pillar: Pillar;
-    quoted?: boolean;
+	html: string;
+	pillar: CAPIPillar;
+	quoted?: boolean;
 };
 
 const BlockquoteRow = ({ children }: { children: React.ReactNode }) => (
-    <blockquote
-        className={css`
-            display: flex;
-            flex-direction: row;
-        `}
-    >
-        {children}
-    </blockquote>
+	<blockquote
+		className={css`
+			display: flex;
+			flex-direction: row;
+		`}
+	>
+		{children}
+	</blockquote>
 );
 
 const baseBlockquoteStyles = css`
-    margin-bottom: 16px;
-    ${body.medium()};
-    font-style: italic;
+	margin-bottom: 16px;
+	${body.medium()};
+	font-style: italic;
 `;
 
 const simpleBlockquoteStyles = css`
-    ${baseBlockquoteStyles}
-    margin-top: 16px;
-    margin-right: 0;
-    margin-bottom: 16px;
-    margin-left: 33px;
+	${baseBlockquoteStyles}
+	margin-top: 16px;
+	margin-right: 0;
+	margin-bottom: 16px;
+	margin-left: 33px;
 `;
 
 const quotedBlockquoteStyles = css`
-    ${baseBlockquoteStyles}
-    color: ${neutral[46]};
+	${baseBlockquoteStyles}
+	color: ${neutral[46]};
 `;
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
-    html,
-    pillar,
-    quoted,
+	html,
+	pillar,
+	quoted,
 }: Props) => {
-    const {
-        willUnwrap: isUnwrapped,
-        unwrappedHtml,
-        unwrappedElement,
-    } = unwrapHtml({
-        fixes: [
-            { prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
-            {
-                prefix: '<blockquote>',
-                suffix: '</blockquote>',
-                unwrappedElement: 'blockquote',
-            },
-            {
-                prefix: '<blockquote class="quoted">',
-                suffix: '</blockquote>',
-                unwrappedElement: 'div',
-            },
-        ],
-        html,
-    });
+	const {
+		willUnwrap: isUnwrapped,
+		unwrappedHtml,
+		unwrappedElement,
+	} = unwrapHtml({
+		fixes: [
+			{ prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
+			{
+				prefix: '<blockquote>',
+				suffix: '</blockquote>',
+				unwrappedElement: 'blockquote',
+			},
+			{
+				prefix: '<blockquote class="quoted">',
+				suffix: '</blockquote>',
+				unwrappedElement: 'div',
+			},
+		],
+		html,
+	});
 
-    if (quoted) {
-        return (
-            <BlockquoteRow>
-                <QuoteIcon colour={pillarPalette[pillar].main} size="medium" />
-                <RewrappedComponent
-                    isUnwrapped={isUnwrapped}
-                    html={unwrappedHtml}
-                    elCss={quotedBlockquoteStyles}
-                    tagName={unwrappedElement}
-                />
-            </BlockquoteRow>
-        );
-    }
-    return (
-        <RewrappedComponent
-            isUnwrapped={isUnwrapped}
-            html={unwrappedHtml}
-            elCss={simpleBlockquoteStyles}
-            tagName={unwrappedElement}
-        />
-    );
+	if (quoted) {
+		return (
+			<BlockquoteRow>
+				<QuoteIcon colour={pillarPalette[pillar].main} size="medium" />
+				<RewrappedComponent
+					isUnwrapped={isUnwrapped}
+					html={unwrappedHtml}
+					elCss={quotedBlockquoteStyles}
+					tagName={unwrappedElement}
+				/>
+			</BlockquoteRow>
+		);
+	}
+	return (
+		<RewrappedComponent
+			isUnwrapped={isUnwrapped}
+			html={unwrappedHtml}
+			elCss={simpleBlockquoteStyles}
+			tagName={unwrappedElement}
+		/>
+	);
 };

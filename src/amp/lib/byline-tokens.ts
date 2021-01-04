@@ -1,9 +1,9 @@
 export const bylineTokens = (
-    byline: string,
-    contributorTags: TagType[],
+	byline: string,
+	contributorTags: TagType[],
 ): string[] => {
-    const titles = contributorTags.map((c) => c.title);
-    const regex = new RegExp(`(${titles.join('|')})`);
+	const titles = contributorTags.map((c) => c.title);
+	const regex = new RegExp(`(${titles.join('|')})`);
 
-    return byline.split(regex);
+	return byline.split(regex);
 };

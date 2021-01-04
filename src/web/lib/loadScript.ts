@@ -12,7 +12,9 @@ export const loadScript = (
 
 		// dont inject 2 scripts with the same src
 		if (
-			Array.from(document.scripts).some(({ src: scriptSrc }) => script.src === scriptSrc)
+			Array.from(document.scripts).some(
+				({ src: scriptSrc }) => script.src === scriptSrc,
+			)
 		) {
 			return resolve();
 		}
