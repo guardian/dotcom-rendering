@@ -21,11 +21,6 @@ let ampExperimentCache: AmpExperiments = {};
 export const getAmpExperimentCache = (): AmpExperiments => ampExperimentCache;
 
 const fetchExperimentsData = (): Promise<void> => {
-	// eslint-disable-next-line no-console
-	console.log(
-		`------------------ called fetchExperimentsData at ${Date.now()} -----------------`,
-	);
-
 	return fetch(ampExperimentsDataUrl)
 		.then((rawResponse) => rawResponse.json())
 		.then((json) => {
