@@ -80,7 +80,11 @@ function renderElement(
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
-                <div key={i} id={`youtube-block-main-media-${i}`}>
+                <div
+                    key={i}
+                    id={`youtube-block-main-media-${i}`}
+                    data-cy="main-media-youtube-atom"
+                >
                     <YoutubeBlockComponent
                         display={display}
                         designType={designType}

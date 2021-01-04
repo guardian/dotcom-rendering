@@ -393,7 +393,11 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
-                        <div key={i} id={`youtube-block-${i}`}>
+                        <div
+                            key={i}
+                            id={`youtube-block-${i}`}
+                            data-cy="embed-youtube-atom"
+                        >
                             <YoutubeBlockComponent
                                 display={display}
                                 designType={designType}
