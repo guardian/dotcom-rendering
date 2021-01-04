@@ -1,4 +1,4 @@
-const pillar: Pillar = 'lifestyle';
+const pillar: CAPIPillar = 'lifestyle';
 const edition: Edition = 'UK';
 export const ga = {
     pillar,

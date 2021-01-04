@@ -12,71 +12,71 @@ import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
-    try {
-        // TODO remove when migrated to v2
-        const CAPI = validateV2(body);
-        const { linkedData } = CAPI;
-        const { config } = CAPI;
-        const blockElements = CAPI.blocks.map((block) => block.elements);
+	try {
+		// TODO remove when migrated to v2
+		const CAPI = validateV2(body);
+		const { linkedData } = CAPI;
+		const { config } = CAPI;
+		const blockElements = CAPI.blocks.map((block) => block.elements);
 
-        // This is simply to flatten the elements
-        const elements = ([] as CAPIElement[]).concat(...blockElements);
+		// This is simply to flatten the elements
+		const elements = ([] as CAPIElement[]).concat(...blockElements);
 
-        const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
+		const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
-        const sectionName = CAPI.sectionName || '';
+		const sectionName = CAPI.sectionName || '';
 
-        const analytics: AnalyticsModel = {
-            gaTracker: 'UA-78705427-1',
-            title: CAPI.headline,
-            fbPixelaccount: '279880532344561',
-            comscoreID: '6035250',
-            section: sectionName,
-            contentType: CAPI.contentType,
-            id: CAPI.pageId,
-            beacon: `${CAPI.beaconURL}/count/pv.gif`,
-            neilsenAPIID: findBySubsection(sectionName).apiID,
-            domain: 'amp.theguardian.com',
-            permutive: {
-                namespace: 'guardian',
-                apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
-                payload: generatePermutivePayload(config),
-            },
-        };
+		const analytics: AnalyticsModel = {
+			gaTracker: 'UA-78705427-1',
+			title: CAPI.headline,
+			fbPixelaccount: '279880532344561',
+			comscoreID: '6035250',
+			section: sectionName,
+			contentType: CAPI.contentType,
+			id: CAPI.pageId,
+			beacon: `${CAPI.beaconURL}/count/pv.gif`,
+			neilsenAPIID: findBySubsection(sectionName).apiID,
+			domain: 'amp.theguardian.com',
+			permutive: {
+				namespace: 'guardian',
+				apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
+				payload: generatePermutivePayload(config),
+			},
+		};
 
-        const metadata = {
-            description: CAPI.trailText,
-            canonicalURL: CAPI.webURL,
-        };
+		const metadata = {
+			description: CAPI.trailText,
+			canonicalURL: CAPI.webURL,
+		};
 
-        const resp = document({
-            linkedData,
-            scripts,
-            metadata,
-            title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
-            body: (
-                <Article
-                    experimentsData={getAmpExperimentCache()}
-                    articleData={CAPI}
-                    nav={extractNAV(CAPI.nav)}
-                    analytics={analytics}
-                    config={config}
-                />
-            ),
-        });
+		const resp = document({
+			linkedData,
+			scripts,
+			metadata,
+			title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
+			body: (
+				<Article
+          experimentsData={getAmpExperimentCache()}
+					articleData={CAPI}
+					nav={extractNAV(CAPI.nav)}
+					analytics={analytics}
+					config={config}
+				/>
+			),
+		});
 
-        res.status(200).send(resp);
-    } catch (e) {
-        // a validation error
-        if (e instanceof TypeError) {
-            res.status(400).send(`<pre>${e.message}</pre>`);
-        } else {
-            res.status(500).send(`<pre>${e.message}</pre>`);
-        }
-    }
+		res.status(200).send(resp);
+	} catch (e) {
+		// a validation error
+		if (e instanceof TypeError) {
+			res.status(400).send(`<pre>${e.message}</pre>`);
+		} else {
+			res.status(500).send(`<pre>${e.message}</pre>`);
+		}
+	}
 };
 
 export const renderPerfTest = (req: express.Request, res: express.Response) => {
-    req.body = JSON.parse(bodyJSON);
-    render(req, res);
+	req.body = JSON.parse(bodyJSON);
+	render(req, res);
 };

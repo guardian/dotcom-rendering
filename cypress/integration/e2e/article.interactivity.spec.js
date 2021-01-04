@@ -65,7 +65,7 @@ describe('Interactivity', function () {
         });
     });
 
-    describe('Navigating the Pillar menu', function () {
+    describe('Navigating the pillar menu', function () {
         it('should expand and close the desktop pillar menu when More is clicked', function () {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=nav-show-more-button]').click();

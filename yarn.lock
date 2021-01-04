@@ -2087,10 +2087,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-4.1.0.tgz#77bd6c900a0cbc4c4165c9a6ce72e9ce71f3157b"
-  integrity sha512-nuQ+opMvPf/ZXjyicbgnzNX9muF0RIt16mvDOMH4LPmt5NalNuLX7WSwR+12VH0K4y+YbvWJJekH2cm5/cNXRg==
+"@guardian/atoms-rendering@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-6.0.0.tgz#e0066f37ccfb84131737cead54fb10fb624a4053"
+  integrity sha512-OTMmarddZQlIKamjtAd8qPO407bIoNWyyHxc/7rLbkR/LjK+vmzeGZrKhrzYE1nqsrMMNnIzi2mvKN1opjXfQQ==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
@@ -2123,6 +2123,11 @@
     react-app-rewired "^2.1.6"
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
+
+"@guardian/prettier@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-0.4.2.tgz#2d08a8a50aad3911a88c9b53f92a37748694d551"
+  integrity sha512-f8MCY/s3rLNonqxITsqnqrPRt0r6hEyW6rGKqDexTt88fEQnA3BMtAlN2hqjuNfrOa9EQexEknZugRVdIpbijQ==
 
 "@guardian/shimport@^1.0.2":
   version "1.0.2"
