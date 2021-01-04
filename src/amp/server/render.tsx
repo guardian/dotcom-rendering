@@ -11,7 +11,7 @@ import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
 
-export const render = async ({ body }: express.Request, res: express.Response) => {
+export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         // TODO remove when migrated to v2
         const CAPI = validateV2(body);
