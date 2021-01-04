@@ -12,7 +12,6 @@ import { Lazy } from '@root/src/web/components/Lazy';
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
 import { Display } from '@guardian/types/Format';
-import { decidePillar } from 'src/web/lib/decidePillar';
 
 const MostViewedFooterData = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedFooterData');
@@ -107,8 +106,6 @@ export const MostViewedFooter = ({
 	display,
 	design,
 }: Props) => {
-	const decidedPillar = decidePillar({ pillar, design });
-
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
@@ -142,8 +139,9 @@ export const MostViewedFooter = ({
 						<Suspense fallback={<></>}>
 							<MostViewedFooterData
 								sectionName={sectionName}
-								pillar={decidedPillar}
+								pillar={pillar}
 								ajaxUrl={ajaxUrl}
+								design={design}
 							/>
 						</Suspense>
 					</Lazy>
