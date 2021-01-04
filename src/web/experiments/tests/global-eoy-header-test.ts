@@ -1,7 +1,11 @@
 import { ABTest } from '@guardian/ab-core';
 
 export const GlobalEoyHeaderTestName = 'GlobalEoyHeaderTest';
-export type GlobalEoyHeaderTestVariant = 'control' | 'variant' | 'notintest';
+export type GlobalEoyHeaderTestVariant =
+	| 'control'
+	| 'variant'
+	| 'variant2'
+	| 'notintest';
 
 const month = new Date().getMonth() + 1; // js date month begins at 0
 
@@ -24,7 +28,11 @@ export const globalEoyHeaderTest: ABTest = {
 			test: (): void => {},
 		},
 		{
-			id: 'variant',
+			id: 'variant', // different heading + subheading
+			test: (): void => {},
+		},
+		{
+			id: 'variant2', // different heading only
 			test: (): void => {},
 		},
 	],
