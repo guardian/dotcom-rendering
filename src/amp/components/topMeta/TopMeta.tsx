@@ -13,14 +13,20 @@ export const TopMeta: React.SFC<{
 }> = ({ data, designType, pillar, adTargeting }) => {
     // Note, liveblogs have a separate top meta - see TopMetaLiveblog
     const defaultTopMeta: DesignTypesObj = designTypeDefault(
-        <TopMetaNews articleData={data} adTargeting={adTargeting} />,
+        <TopMetaNews
+            articleData={data}
+            adTargeting={adTargeting}
+            pillar={pillar}
+        />,
     );
 
     // Extend defaultTopMeta with custom topMeta for some designTypes
     const designTypeTopMeta: DesignTypesObj = {
         ...defaultTopMeta,
         Comment: <TopMetaOpinion articleData={data} pillar={pillar} />,
-        AdvertisementFeature: <TopMetaPaidContent articleData={data} />,
+        AdvertisementFeature: (
+            <TopMetaPaidContent articleData={data} pillar={pillar} />
+        ),
     };
 
     return designTypeTopMeta[designType];

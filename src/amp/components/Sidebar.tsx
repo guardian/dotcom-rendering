@@ -97,7 +97,7 @@ const membershipLinks = css`
     }
 `;
 
-const pillar = css`
+const pillarStyles = css`
     position: relative;
 
     :not(:last-child):after {
@@ -119,7 +119,7 @@ const editionLink = css`
 const template = `
 <ul class=${menuGroup}>
 {{ #topLevelSections }}
-    <li class=${pillar}>
+    <li class=${pillarStyles}>
         <amp-accordion>
             <section>
                 <h2 class=${pillarLink}

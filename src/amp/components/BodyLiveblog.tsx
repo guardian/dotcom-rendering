@@ -80,7 +80,7 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={bodyStyle}>
-            <TopMetaLiveblog articleData={data} />
+            <TopMetaLiveblog articleData={data} pillar={pillar} />
             <KeyEvents events={data.keyEvents} url={url} />
 
             {!isFirstPage && (

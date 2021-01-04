@@ -60,7 +60,8 @@ const Headline: React.FC<{
 export const TopMetaNews: React.FC<{
     articleData: ArticleModel;
     adTargeting?: AdTargeting;
-}> = ({ articleData, adTargeting }) => {
+    pillar: Pillar;
+}> = ({ articleData, adTargeting, pillar }) => {
     const { branding } = articleData.commercialProperties[
         articleData.editionId
     ];
@@ -71,7 +72,7 @@ export const TopMetaNews: React.FC<{
                 <MainMedia
                     key={i}
                     element={element}
-                    pillar={articleData.pillar}
+                    pillar={pillar}
                     adTargeting={adTargeting}
                 />
             ))}
@@ -80,7 +81,7 @@ export const TopMetaNews: React.FC<{
                 <SeriesLink
                     baseURL={articleData.guardianBaseURL}
                     tags={articleData.tags}
-                    pillar={articleData.pillar}
+                    pillar={pillar}
                     fallbackToSection={true}
                     sectionLabel={articleData.sectionLabel}
                     sectionUrl={articleData.sectionUrl}
@@ -92,21 +93,16 @@ export const TopMetaNews: React.FC<{
                 starRating={articleData.starRating}
             />
 
-            <Standfirst
-                text={articleData.standfirst}
-                pillar={articleData.pillar}
-            />
+            <Standfirst text={articleData.standfirst} pillar={pillar} />
 
-            {branding && (
-                <Branding branding={branding} pillar={articleData.pillar} />
-            )}
+            {branding && <Branding branding={branding} pillar={pillar} />}
 
             <Byline
                 byline={articleData.author.byline}
                 tags={articleData.tags}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 guardianBaseURL={articleData.guardianBaseURL}
-                className={bylineStyle(articleData.pillar)}
+                className={bylineStyle(pillar)}
             />
 
             <TopMetaExtras
@@ -114,7 +110,7 @@ export const TopMetaNews: React.FC<{
                     articleData.pageId,
                     articleData.webTitle,
                 )}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 ageWarning={getAgeWarning(
                     articleData.tags,
                     articleData.webPublicationDate,

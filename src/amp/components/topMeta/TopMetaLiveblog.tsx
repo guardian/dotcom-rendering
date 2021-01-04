@@ -81,25 +81,26 @@ const Headline: React.FC<{
 
 export const TopMetaLiveblog: React.FC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => (
+    pillar: Pillar;
+}> = ({ articleData, pillar }) => (
     <header>
         <Headline
             headlineText={articleData.headline}
             standfirst={articleData.standfirst}
-            pillar={articleData.pillar}
+            pillar={pillar}
             starRating={articleData.starRating}
         />
 
         {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} pillar={articleData.pillar} />
+            <MainMedia key={i} element={element} pillar={pillar} />
         ))}
 
         <Byline
             byline={articleData.author.byline}
             tags={articleData.tags}
-            pillar={articleData.pillar}
+            pillar={pillar}
             guardianBaseURL={articleData.guardianBaseURL}
-            className={bylineStyle(articleData.pillar)}
+            className={bylineStyle(pillar)}
         />
 
         <TopMetaExtras
@@ -107,7 +108,7 @@ export const TopMetaLiveblog: React.FC<{
                 articleData.pageId,
                 articleData.webTitle,
             )}
-            pillar={articleData.pillar}
+            pillar={pillar}
             ageWarning={getAgeWarning(
                 articleData.tags,
                 articleData.webPublicationDate,
