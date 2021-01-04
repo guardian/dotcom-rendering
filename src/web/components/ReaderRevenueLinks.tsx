@@ -141,6 +141,11 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 			if (ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'variant')) {
 				return 'variant';
 			}
+			if (
+				ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'variant2')
+			) {
+				return 'variant2';
+			}
 		}
 		return 'notintest';
 	};
@@ -159,7 +164,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	}, [variantName]);
 
 	const getHeading = (): string | JSX.Element => {
-		if (variantName === 'variant')
+		if (variantName === 'variant' || variantName === 'variant2')
 			return month === 12
 				? `Support us this December`
 				: 'Support us in 2021';
