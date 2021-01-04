@@ -562,7 +562,10 @@ export const CommentLayout = ({
 					)}
 
 					{showComments && (
-						<Section sectionId="comments">
+						<Section
+							sectionId="comments"
+							backgroundColour={opinion[800]}
+						>
 							<Discussion
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
@@ -587,7 +590,10 @@ export const CommentLayout = ({
 						<Section sectionId="onwards-lower-whensignedin" />
 					)}
 
-					<Section sectionId="most-viewed-footer" />
+					<Section
+						sectionId="most-viewed-footer"
+						backgroundColour={opinion[800]}
+					/>
 				</>
 			)}
 
@@ -601,7 +607,11 @@ export const CommentLayout = ({
 			</Section>
 
 			{NAV.subNavSections && (
-				<Section padded={false} sectionId="sub-nav-root">
+				<Section
+					padded={false}
+					sectionId="sub-nav-root"
+					backgroundColour={opinion[800]}
+				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
