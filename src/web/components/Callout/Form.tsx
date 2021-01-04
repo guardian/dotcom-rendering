@@ -13,181 +13,181 @@ import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
 
 const formStyles = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 10px;
-    padding-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-left: 10px;
+	padding-right: 10px;
 `;
 
 const footerPaddingStyles = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 15px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 15px;
 `;
 
 const errorMessagesStyles = css`
-    padding-bottom: 10px;
-    color: ${text.error};
-    ${textSans.medium({ fontWeight: 'bold' })};
+	padding-bottom: 10px;
+	color: ${text.error};
+	${textSans.medium({ fontWeight: 'bold' })};
 `;
 
 const formFieldWrapperStyles = css`
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 `;
 
 type formData = { [key in string]: any };
 
 type FormFieldProp = {
-    formField: CampaignFieldType;
-    formData: formData;
-    setFormData: React.Dispatch<React.SetStateAction<formData>>;
+	formField: CampaignFieldType;
+	formData: formData;
+	setFormData: React.Dispatch<React.SetStateAction<formData>>;
 };
 
 const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
-    switch (formField.type) {
-        case 'textarea':
-            return (
-                <>
-                    <TextArea
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
-                    <hr />
-                </>
-            );
-        case 'file':
-            return (
-                <>
-                    <FileUpload
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
-                    <hr />
-                </>
-            );
-        case 'select':
-            return (
-                <>
-                    <Select
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
-                    <hr />
-                </>
-            );
-        case 'checkbox':
-        case 'radio':
-            return (
-                <>
-                    <MultiSelect
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                        multiple={formField.type === 'checkbox'}
-                    />
-                    <hr />
-                </>
-            );
-        default: {
-            return (
-                <>
-                    <TextInput
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
-                    <hr />
-                </>
-            );
-        }
-    }
+	switch (formField.type) {
+		case 'textarea':
+			return (
+				<>
+					<TextArea
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+					<hr />
+				</>
+			);
+		case 'file':
+			return (
+				<>
+					<FileUpload
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+					<hr />
+				</>
+			);
+		case 'select':
+			return (
+				<>
+					<Select
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+					<hr />
+				</>
+			);
+		case 'checkbox':
+		case 'radio':
+			return (
+				<>
+					<MultiSelect
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+						multiple={formField.type === 'checkbox'}
+					/>
+					<hr />
+				</>
+			);
+		default: {
+			return (
+				<>
+					<TextInput
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+					<hr />
+				</>
+			);
+		}
+	}
 };
 
 type FormProps = {
-    onSubmit: (formData: formData) => void;
-    formFields: CampaignFieldType[];
-    error?: string;
+	onSubmit: (formData: formData) => void;
+	formFields: CampaignFieldType[];
+	error?: string;
 };
 
 export const Form = ({ onSubmit, formFields, error }: FormProps) => {
-    const [twitterHandle, setTwitterHandle] = useState('');
-    const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [twitterHandle, setTwitterHandle] = useState('');
+	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
-    return (
-        <form
-            action="/formstack-campaign/submit"
-            method="post"
-            className={formStyles}
-            onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit(formData);
-            }}
-        >
-            {formFields.map((formField, index) => (
-                <div
-                    className={formFieldWrapperStyles}
-                    // we use custom-guardian to find 1st field for accessibility
-                    // ideally we should useRef but need to wait for Source to
-                    // support React references
-                    custom-guardian="callout-form-field"
-                    key={index}
-                >
-                    <FormField
-                        formField={formField}
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
-                </div>
-            ))}
+	return (
+		<form
+			action="/formstack-campaign/submit"
+			method="post"
+			className={formStyles}
+			onSubmit={(e) => {
+				e.preventDefault();
+				onSubmit(formData);
+			}}
+		>
+			{formFields.map((formField, index) => (
+				<div
+					className={formFieldWrapperStyles}
+					// we use custom-guardian to find 1st field for accessibility
+					// ideally we should useRef but need to wait for Source to
+					// support React references
+					custom-guardian="callout-form-field"
+					key={index}
+				>
+					<FormField
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+				</div>
+			))}
 
-            {/* this element is a H O N £ Y - P 0 T */}
-            <div
-                className={css`
-                    position: absolute;
-                    left: -62.5rem;
-                `}
-                aria-hidden="true"
-            >
-                <input
-                    name="twitter-handle"
-                    type="text"
-                    id="twitter-handle"
-                    tabIndex={-1}
-                    placeholder="@mytwitterhandle"
-                    value={twitterHandle}
-                    onChange={(e) => setTwitterHandle(e.target.value)}
-                />
-            </div>
-            {error && <div className={errorMessagesStyles}>{error}</div>}
-            <div className={footerPaddingStyles}>
-                <Button priority="secondary" size="xsmall" type="submit">
-                    Share with the Guardian
-                </Button>
-                <div
-                    className={css`
-                        a,
-                        a:hover {
-                            border: 0;
-                        }
-                        text-align: right;
-                    `}
-                >
-                    <Link
-                        subdued={true}
-                        priority="secondary"
-                        target="_blank"
-                        href="https://www.theguardian.com/help/terms-of-service"
-                    >
-                        Terms and conditions
-                    </Link>
-                </div>
-            </div>
-        </form>
-    );
+			{/* this element is a H O N £ Y - P 0 T */}
+			<div
+				className={css`
+					position: absolute;
+					left: -62.5rem;
+				`}
+				aria-hidden="true"
+			>
+				<input
+					name="twitter-handle"
+					type="text"
+					id="twitter-handle"
+					tabIndex={-1}
+					placeholder="@mytwitterhandle"
+					value={twitterHandle}
+					onChange={(e) => setTwitterHandle(e.target.value)}
+				/>
+			</div>
+			{error && <div className={errorMessagesStyles}>{error}</div>}
+			<div className={footerPaddingStyles}>
+				<Button priority="secondary" size="xsmall" type="submit">
+					Share with the Guardian
+				</Button>
+				<div
+					className={css`
+						a,
+						a:hover {
+							border: 0;
+						}
+						text-align: right;
+					`}
+				>
+					<Link
+						subdued={true}
+						priority="secondary"
+						target="_blank"
+						href="https://www.theguardian.com/help/terms-of-service"
+					>
+						Terms and conditions
+					</Link>
+				</div>
+			</div>
+		</form>
+	);
 };

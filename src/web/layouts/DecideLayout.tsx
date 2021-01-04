@@ -10,130 +10,130 @@ import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 
 type Props = {
-    CAPI: CAPIType;
-    NAV: NavType;
+	CAPI: CAPIType;
+	NAV: NavType;
 };
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
-    const display: Display = decideDisplay(CAPI);
-    const pillar: CAPIPillar = decidePillar(CAPI);
-    const designType: DesignType = decideDesignType(CAPI);
+	const display: Display = decideDisplay(CAPI);
+	const pillar: CAPIPillar = decidePillar(CAPI);
+	const designType: DesignType = decideDesignType(CAPI);
 
-    switch (display) {
-        case Display.Immersive: {
-            switch (designType) {
-                case 'Comment':
-                case 'GuardianView':
-                    return (
-                        <ImmersiveLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Immersive}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-                case 'Feature':
-                case 'Review':
-                case 'Interview':
-                case 'Live':
-                case 'Media':
-                case 'PhotoEssay':
-                case 'Analysis':
-                case 'Article':
-                case 'Recipe':
-                case 'MatchReport':
-                case 'GuardianLabs':
-                case 'Quiz':
-                case 'AdvertisementFeature':
-                    return (
-                        <ImmersiveLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Immersive}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-            }
-            break;
-        }
-        case Display.Showcase: {
-            switch (designType) {
-                case 'Comment':
-                case 'GuardianView':
-                    return (
-                        <CommentLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Showcase}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-                case 'Feature':
-                case 'Review':
-                case 'Interview':
-                case 'Live':
-                case 'Media':
-                case 'PhotoEssay':
-                case 'Analysis':
-                case 'Article':
-                case 'Recipe':
-                case 'MatchReport':
-                case 'GuardianLabs':
-                case 'Quiz':
-                case 'AdvertisementFeature':
-                    return (
-                        <ShowcaseLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Showcase}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-            }
-            break;
-        }
-        case Display.Standard:
-        default: {
-            switch (designType) {
-                case 'Comment':
-                case 'GuardianView':
-                    return (
-                        <CommentLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Standard}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-                case 'Feature':
-                case 'Review':
-                case 'Interview':
-                case 'Live':
-                case 'Media':
-                case 'PhotoEssay':
-                case 'Analysis':
-                case 'Article':
-                case 'Recipe':
-                case 'MatchReport':
-                case 'GuardianLabs':
-                case 'Quiz':
-                case 'AdvertisementFeature':
-                    return (
-                        <StandardLayout
-                            CAPI={CAPI}
-                            NAV={NAV}
-                            display={Display.Standard}
-                            designType={designType}
-                            pillar={pillar}
-                        />
-                    );
-            }
-            break;
-        }
-    }
+	switch (display) {
+		case Display.Immersive: {
+			switch (designType) {
+				case 'Comment':
+				case 'GuardianView':
+					return (
+						<ImmersiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Immersive}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+				case 'Feature':
+				case 'Review':
+				case 'Interview':
+				case 'Live':
+				case 'Media':
+				case 'PhotoEssay':
+				case 'Analysis':
+				case 'Article':
+				case 'Recipe':
+				case 'MatchReport':
+				case 'GuardianLabs':
+				case 'Quiz':
+				case 'AdvertisementFeature':
+					return (
+						<ImmersiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Immersive}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+			}
+			break;
+		}
+		case Display.Showcase: {
+			switch (designType) {
+				case 'Comment':
+				case 'GuardianView':
+					return (
+						<CommentLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Showcase}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+				case 'Feature':
+				case 'Review':
+				case 'Interview':
+				case 'Live':
+				case 'Media':
+				case 'PhotoEssay':
+				case 'Analysis':
+				case 'Article':
+				case 'Recipe':
+				case 'MatchReport':
+				case 'GuardianLabs':
+				case 'Quiz':
+				case 'AdvertisementFeature':
+					return (
+						<ShowcaseLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Showcase}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+			}
+			break;
+		}
+		case Display.Standard:
+		default: {
+			switch (designType) {
+				case 'Comment':
+				case 'GuardianView':
+					return (
+						<CommentLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Standard}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+				case 'Feature':
+				case 'Review':
+				case 'Interview':
+				case 'Live':
+				case 'Media':
+				case 'PhotoEssay':
+				case 'Analysis':
+				case 'Article':
+				case 'Recipe':
+				case 'MatchReport':
+				case 'GuardianLabs':
+				case 'Quiz':
+				case 'AdvertisementFeature':
+					return (
+						<StandardLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							display={Display.Standard}
+							designType={designType}
+							pillar={pillar}
+						/>
+					);
+			}
+			break;
+		}
+	}
 };
