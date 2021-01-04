@@ -8,7 +8,6 @@ import {
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import { Ticker } from "@root/src/amp/components/Ticker";
 import { brandAlt, neutral, opinion } from '@guardian/src-foundations/palette';
 
 const epicStyle = css`
@@ -192,31 +191,45 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
         : 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
 
     return (
-        <div>
-            <amp-list
-                layout='fixed-height'
+	<div>
+		<amp-list
+			layout='fixed-height'
                 // This means that if the user refreshes at the end of the article while the epic is in view then the epic
                 // will not display. This is such an edge case that we can live with it, and in general it will fill the
                 // space.
-                height='1px'
-                src={epicUrl}
-                credentials='include'
-                id="epic-container"
-                single-item="true"
-                items="."
-            >
-              <MoustacheTemplate>
-                <div className={epic}>
-                        <MoustacheSection name="ticker">
-                            <Ticker
-                                percentage={moustacheVariable('percentage')}
-                                topLeft={moustacheVariable('topLeft')}
-                                bottomLeft={moustacheVariable('bottomLeft')}
-                                topRight={moustacheVariable('topRight')}
-                                bottomRight={moustacheVariable('bottomRight')}
-                            />
-                        </MoustacheSection>
+			height='1px'
+			src={epicUrl}
+			credentials='include'
+			id="epic-container"
+			single-item="true"
+			items="."
+		>
+			<MoustacheTemplate>
+				<div className={epicStyle}>
+					<MoustacheSection name='ticker'>
+						<div className={tickerWrapperStyle}>
+							<div className={tickerInfoStyle}>
+								<div className={leftStyle}>
+									<p className={topLeftStyle}>{moustacheVariable('topLeft')}</p>
+									<p className={labelStyle}>{moustacheVariable('bottomLeft')}</p>
+								</div>
+								<div className={rightStyle}>
+									<p className={topRightStyle}>{moustacheVariable('topRight')}</p>
+									<p className={labelStyle}>{moustacheVariable('bottomRight')}</p>
+								</div>
+							</div>
 
+							<div>
+								<div className={tickerBackgroundStyle}>
+									<MoustacheSection name='goalExceededMarkerPercentage'>
+										<div id='goal-exceeded-marker' className={goalExceededMarkerStyle} style={{left: `${moustacheVariable('goalExceededMarkerPercentage')}%`}} />
+									</MoustacheSection>
+
+									<div id='ticker-progress' className={tickerProgressStyle} style={{ width: `${moustacheVariable('percentage')}%` }} />
+								</div>
+							</div>
+						</div>
+					</MoustacheSection>
 					<h2 className={epicHeaderStyle}>
 						<MoustacheVariable name="heading" />
 					</h2>
@@ -264,5 +277,6 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 				</div>
 			</MoustacheTemplate>
 		</amp-list>
+	</div>
 	);
 };

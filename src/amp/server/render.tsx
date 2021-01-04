@@ -56,7 +56,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
 			body: (
 				<Article
-          experimentsData={getAmpExperimentCache()}
+					experimentsData={getAmpExperimentCache()}
 					articleData={CAPI}
 					nav={extractNAV(CAPI.nav)}
 					analytics={analytics}
