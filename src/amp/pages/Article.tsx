@@ -51,7 +51,10 @@ export const Article: React.FC<{
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics }) => {
 	const designType = decideDesignType(articleData);
-	const pillar = decidePillar(articleData);
+	const pillar = decidePillar({
+		pillar: articleData.pillar,
+		design: designType,
+	});
 
 	return (
 		<>
