@@ -11,10 +11,10 @@ import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
-import { getPillar } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decidePillar } from '@root/src/web/lib/decidePillar';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -51,6 +51,7 @@ export const Article: React.FC<{
     analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics }) => {
     const designType = decideDesignType(articleData);
+    const pillar = decidePillar(articleData);
 
     return (
         <>
@@ -67,7 +68,7 @@ export const Article: React.FC<{
                     />
                     <Body
                         data={articleData}
-                        pillar={getPillar(articleData.pillar, designType)}
+                        pillar={pillar}
                         designType={designType}
                         config={config}
                     />

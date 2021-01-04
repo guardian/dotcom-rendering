@@ -82,7 +82,8 @@ const Headline: React.FC<{
 
 export const TopMetaPaidContent: React.FC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => {
+    pillar: CAPIPillar;
+}> = ({ articleData, pillar }) => {
     const { branding } = articleData.commercialProperties[
         articleData.editionId
     ];
@@ -92,26 +93,19 @@ export const TopMetaPaidContent: React.FC<{
             <PaidForBand />
 
             {articleData.mainMediaElements.map((element, i) => (
-                <MainMedia
-                    key={i}
-                    element={element}
-                    pillar={articleData.pillar}
-                />
+                <MainMedia key={i} element={element} pillar={pillar} />
             ))}
 
             <Headline headlineText={articleData.headline} />
 
             {!!branding && <PaidForByLogo branding={branding} />}
 
-            <Standfirst
-                text={articleData.standfirst}
-                pillar={articleData.pillar}
-            />
+            <Standfirst text={articleData.standfirst} pillar={pillar} />
 
             <Byline
                 byline={articleData.author.byline}
                 tags={articleData.tags}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 guardianBaseURL={articleData.guardianBaseURL}
                 className={bylineStyle}
             />
@@ -121,7 +115,7 @@ export const TopMetaPaidContent: React.FC<{
                     articleData.pageId,
                     articleData.webTitle,
                 )}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 ageWarning={getAgeWarning(
                     articleData.tags,
                     articleData.webPublicationDate,

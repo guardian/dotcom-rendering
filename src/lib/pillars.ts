@@ -97,17 +97,6 @@ Further notes on this function:
       a key for each pillar and values of type T.
  */
 
-export const getPillar = (
-    pillar: CAPIPillar,
-    designType: DesignType,
-): CAPIPillar => {
-    if (designType === 'Comment' && pillar === 'news') {
-        return 'opinion';
-    }
-
-    return pillar;
-};
-
 export const neutralBorder = (pillar: CAPIPillar): colour => {
     switch (pillar) {
         case 'labs':
