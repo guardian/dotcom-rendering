@@ -282,9 +282,13 @@ export const App = ({ CAPI, NAV }: Props) => {
         });
     }, []);
 
-    const pillar = decidePillar(CAPI);
     const display: Display = decideDisplay(CAPI);
     const designType: DesignType = decideDesignType(CAPI);
+    const pillar = decidePillar({
+        pillar: CAPI.pillar,
+        design: designType,
+    });
+
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     return (

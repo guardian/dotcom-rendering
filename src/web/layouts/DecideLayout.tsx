@@ -16,8 +16,11 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
-    const pillar: CAPIPillar = decidePillar(CAPI);
     const designType: DesignType = decideDesignType(CAPI);
+    const pillar: CAPIPillar = decidePillar({
+        pillar: CAPI.pillar,
+        design: designType,
+    });
 
     switch (display) {
         case Display.Immersive: {
