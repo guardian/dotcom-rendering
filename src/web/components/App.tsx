@@ -605,6 +605,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
 							pillar={pillar}
+							designType={designType}
 						/>
 					</Suspense>
 				</Lazy>
@@ -623,6 +624,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
 							pillar={pillar}
+							designType={designType}
 						/>
 					</Suspense>
 				</Lazy>

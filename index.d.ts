@@ -696,6 +696,10 @@ interface TrailType {
     linkText?: string;
 }
 
+interface CAPITrailType extends TrailType {
+    pillar: CAPIPillar;
+}
+
 interface TrailTabType {
     heading: string;
     trails: TrailType[];
