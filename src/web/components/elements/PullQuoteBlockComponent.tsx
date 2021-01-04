@@ -119,7 +119,7 @@ function decideFont(role: string) {
 
 export const PullQuoteBlockComponent: React.FC<{
     html: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
     role: string;
     attribution?: string;

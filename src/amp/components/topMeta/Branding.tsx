@@ -3,7 +3,7 @@ import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent'
 import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 
-const brandingStyle = (pillar: Pillar) => css`
+const brandingStyle = (pillar: CAPIPillar) => css`
     padding: 10px 0;
     ${LinkStyle(pillar)}
 
@@ -24,7 +24,7 @@ const brandingLogoStyle = css`
 
 export const Branding: React.FC<{
     branding: Branding;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ branding, pillar }) => {
     const { logo, sponsorName } = branding;
 

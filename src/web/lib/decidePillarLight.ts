@@ -1,6 +1,6 @@
 import { pillarPalette } from '@frontend/lib/pillars';
 
-export const decidePillarLight = (pillar: Pillar) => {
+export const decidePillarLight = (pillar: CAPIPillar) => {
     // TODO: This function is a tempoary workaround while we wait for source foundation to be updated with
     // these colours
     switch (pillar) {

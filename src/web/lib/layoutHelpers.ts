@@ -1,6 +1,6 @@
 export const decideLineEffect = (
     designType: DesignType,
-    pillar: Pillar,
+    pillar: CAPIPillar,
 ): LineEffectType => {
     if (pillar === 'sport') {
         return 'dotted';
@@ -35,7 +35,7 @@ export const decideLineCount = (designType?: DesignType): 8 | 4 => {
     return 4;
 };
 
-export const getCurrentPillar = (CAPI: CAPIType): Pillar => {
+export const getCurrentPillar = (CAPI: CAPIType): CAPIPillar => {
     return (
         (CAPI.nav.currentPillar &&
             CAPI.nav.currentPillar.title.toLowerCase()) ||

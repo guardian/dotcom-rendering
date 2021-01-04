@@ -42,7 +42,7 @@ interface Props {
     contentType: ContentType;
     url: string;
     starRating?: number;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     tags: TagType[];
     sponsorName: string;
     contributorImage?: string;
@@ -84,26 +84,26 @@ const neutralBackground = css`
     }
 `;
 
-const richLinkPillarColour: (pillar: Pillar) => colour = (pillar) => {
+const richLinkPillarColour: (pillar: CAPIPillar) => colour = (pillar) => {
     if (pillar) {
         return pillarPalette[pillar].main;
     }
     return pillarPalette.news[400];
 };
 
-const pillarBackground: (pillar: Pillar) => colour = (pillar) => {
+const pillarBackground: (pillar: CAPIPillar) => colour = (pillar) => {
     return css`
         background-color: ${richLinkPillarColour(pillar)};
     `;
 };
 
-const textColour: (pillar: Pillar) => colour = (pillar) => {
+const textColour: (pillar: CAPIPillar) => colour = (pillar) => {
     return css`
         color: ${richLinkPillarColour(pillar)};
     `;
 };
 
-const richLinkTopBorder: (pillar: Pillar) => colour = (pillar) => {
+const richLinkTopBorder: (pillar: CAPIPillar) => colour = (pillar) => {
     return css`
         border-top: 1px;
         border-top-style: solid;
@@ -139,7 +139,7 @@ const richLinkTitle = css`
     }
 `;
 
-const richLinkReadMore: (pillar: Pillar) => colour = (pillar) => {
+const richLinkReadMore: (pillar: CAPIPillar) => colour = (pillar) => {
     return css`
         fill: ${richLinkPillarColour(pillar)};
         color: ${richLinkPillarColour(pillar)};

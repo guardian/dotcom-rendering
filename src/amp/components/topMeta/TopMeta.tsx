@@ -8,7 +8,7 @@ import { designTypeDefault } from '@root/src/lib/designTypes';
 export const TopMeta: React.SFC<{
     data: ArticleModel;
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     adTargeting?: AdTargeting;
 }> = ({ data, designType, pillar, adTargeting }) => {
     // Note, liveblogs have a separate top meta - see TopMetaLiveblog

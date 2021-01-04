@@ -6,7 +6,7 @@ type Props = {
     limit: number; // Limit the number of items shown (the api often returns more)
     ophanComponentName: OphanComponentName;
     Container: React.FC<OnwardsType>;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 };
 
 type OnwardsResponse = {

@@ -9,7 +9,7 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
-const ageStyles = (designType: DesignType, pillar: Pillar) => css`
+const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
     ${textSans.xsmall()};
     color: ${designType === 'Live' ? decidePillarLight(pillar) : neutral[60]};
 
@@ -35,7 +35,7 @@ const ageStyles = (designType: DesignType, pillar: Pillar) => css`
     }
 `;
 
-const colourStyles = (designType: DesignType, pillar: Pillar) => {
+const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
     switch (designType) {
         case 'Live':
             return css`
@@ -65,7 +65,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
 
 type Props = {
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     webPublicationDate: string;
     showClock?: boolean;
 };

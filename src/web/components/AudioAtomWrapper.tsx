@@ -11,7 +11,7 @@ type Props = {
     trackUrl: string;
     kicker: string;
     title?: string | undefined;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     contentIsNotSensitive: boolean;
     aCastisEnabled: boolean;
     readerCanBeShownAds: boolean;

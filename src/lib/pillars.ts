@@ -45,7 +45,7 @@ interface PillarColours {
     800: colour;
 }
 
-export const pillarNames: Pillar[] = [
+export const pillarNames: CAPIPillar[] = [
     'news',
     'opinion',
     'sport',
@@ -67,7 +67,7 @@ export const augmentedLabs: PillarColours = {
     800: '#65a897', // dark teal
 };
 
-export const pillarPalette: Record<Pillar, PillarColours> = {
+export const pillarPalette: Record<CAPIPillar, PillarColours> = {
     news,
     opinion,
     sport,
@@ -80,9 +80,9 @@ export const pillarPalette: Record<Pillar, PillarColours> = {
 This takes a function, f, and applies it to all pillars.
 It returns an object with each pillar as the keys and f('pillar') as the value
 */
-export const pillarMap: <T>(f: (name: Pillar) => T) => { [K in Pillar]: T } = (
-    f,
-) => ({
+export const pillarMap: <T>(
+    f: (name: CAPIPillar) => T,
+) => { [K in CAPIPillar]: T } = (f) => ({
     news: f('news'),
     opinion: f('opinion'),
     sport: f('sport'),
@@ -94,10 +94,10 @@ export const pillarMap: <T>(f: (name: Pillar) => T) => { [K in Pillar]: T } = (
 Further notes on this function:
     - It maps by hand because it's easy to lose track of types when you use Object.assign()
     - Where the function parameter f returns type T, pillarMap will return an object with
-      a key for each Pillar and values of type T.
+      a key for each pillar and values of type T.
  */
 
-export const neutralBorder = (pillar: Pillar): colour => {
+export const neutralBorder = (pillar: CAPIPillar): colour => {
     switch (pillar) {
         case 'labs':
             return border.primary; // 'dark' theme

@@ -12,7 +12,7 @@ import { ListStyle } from '@root/src/amp/components/elements/TextBlockComponent'
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
-const headerStyle = (pillar: Pillar) => css`
+const headerStyle = (pillar: CAPIPillar) => css`
     ${headline.small()};
     font-weight: 500;
     padding: 3px 10px 24px;
@@ -20,7 +20,7 @@ const headerStyle = (pillar: Pillar) => css`
     background-color: ${pillarPalette[pillar].main};
 `;
 
-const bylineStyle = (pillar: Pillar) => css`
+const bylineStyle = (pillar: CAPIPillar) => css`
     ${headline.xxxsmall()};
     color: ${pillarPalette[pillar].main};
     padding-top: 3px;
@@ -35,7 +35,7 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
-const standfirstStyle = (pillar: Pillar) => css`
+const standfirstStyle = (pillar: CAPIPillar) => css`
     ${headline.xxxsmall()};
     color: ${palette.neutral[100]};
     background-color: ${pillarPalette[pillar].dark};
@@ -63,7 +63,7 @@ const fullWidth = css`
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     starRating?: number;
 }> = ({ headlineText, pillar, standfirst }) => {
     return (
@@ -81,7 +81,7 @@ const Headline: React.FC<{
 
 export const TopMetaLiveblog: React.FC<{
     articleData: ArticleModel;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ articleData, pillar }) => (
     <header>
         <Headline

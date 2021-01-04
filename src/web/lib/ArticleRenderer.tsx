@@ -55,7 +55,7 @@ const commercialPosition = css`
 export const ArticleRenderer: React.FC<{
     display: Display;
     elements: CAPIElement[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
     adTargeting?: AdTargeting;
     host?: string;

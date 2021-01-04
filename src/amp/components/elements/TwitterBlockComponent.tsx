@@ -16,7 +16,7 @@ const makeFallback = (html: string): string | null => {
 
 export const TwitterBlockComponent: React.FC<{
     element: TweetBlockElement;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ element, pillar }) => {
     const fallbackHTML = makeFallback(element.html);
 

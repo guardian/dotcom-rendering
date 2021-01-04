@@ -72,7 +72,7 @@ const summeryContentWrapper = css`
     flex-direction: row;
 `;
 
-const speechBubbleStyles = (pillar: Pillar) => css`
+const speechBubbleStyles = (pillar: CAPIPillar) => css`
     ${textSans.medium({ fontWeight: 'bold' })}
     color: ${neutral[100]};
     background-color: ${palette[pillar][400]};
@@ -128,7 +128,7 @@ export const CalloutBlockComponent = ({
     pillar,
 }: {
     callout: CalloutBlockElement;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }) => {
     let expandFormButtonRef: HTMLButtonElement | null = null;
     let firstFieldElementRef: HTMLElement | null = null;

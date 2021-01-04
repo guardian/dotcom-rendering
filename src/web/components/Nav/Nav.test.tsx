@@ -4,7 +4,7 @@ import { Display } from '@guardian/types/Format';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
-// type Pillar = "news" | "opinion" | "sport" | "culture" | "lifestyle" | "labs"
+// type CAPIPillar = "news" | "opinion" | "sport" | "culture" | "lifestyle" | "labs"
 
 describe('Nav', () => {
     it('should display pillar titles', () => {

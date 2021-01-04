@@ -19,7 +19,7 @@ import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
-    pillar: Pillar;
+    pillar: CAPIPillar;
     nav: NavType;
     display: Display;
     subscribeUrl: string;
