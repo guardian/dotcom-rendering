@@ -656,6 +656,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}
+					design={designType}
 				/>
 			</Portal>
 			<Portal root="reader-revenue-links-footer">
