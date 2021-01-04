@@ -232,11 +232,16 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
                             `${Size.halfPage}`,
+                            `${Size.outstreamMobile}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.fluid}`,
                         ].join('|')}
                         data-desktop={[
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.video}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
@@ -247,6 +252,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
                         data-phablet={[
                             `${Size.outOfPage}`,
                             `${Size.empty}`,
+                            `${Size.outstreamMobile}`,
+                            `${Size.mpu}`,
+                            `${Size.googleCard}`,
                             `${Size.outstreamDesktop}`,
                             `${Size.outstreamGoogleDesktop}`,
                             `${Size.fluid}`,
