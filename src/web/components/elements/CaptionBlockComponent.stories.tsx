@@ -19,7 +19,7 @@ export default {
         display: Display;
         designType: DesignType;
         captionText?: string;
-        pillar: Pillar;
+        pillar: CAPIPillar;
         padCaption?: boolean;
         credit?: string;
         displayCredit?: boolean;

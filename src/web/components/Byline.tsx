@@ -8,7 +8,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 type Props = {
     text: string;
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     size: SmallHeadlineSize;
 };
 
@@ -41,7 +41,7 @@ const bylineStyles = (size: SmallHeadlineSize) => {
     }
 };
 
-const colourStyles = (designType: DesignType, pillar: Pillar) => {
+const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
     switch (designType) {
         case 'Comment':
         case 'Analysis':

@@ -18,7 +18,7 @@ const headingStyles = css`
 `;
 
 interface Props {
-    pillar: Pillar;
+    pillar: CAPIPillar;
     limitItems?: number;
 }
 

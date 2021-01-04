@@ -87,7 +87,7 @@ export const SharingIcons: React.FC<{
         };
     };
     displayIcons: SharePlatform[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     className?: string;
 }> = ({ sharingUrls, displayIcons, pillar, className }) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {

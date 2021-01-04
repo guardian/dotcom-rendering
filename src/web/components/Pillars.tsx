@@ -227,7 +227,7 @@ export const Pillars: React.FC<{
     display: Display;
     isTopNav?: boolean;
     pillars: PillarType[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     showLastPillarDivider?: boolean;
     dataLinkName: string;
 }> = ({

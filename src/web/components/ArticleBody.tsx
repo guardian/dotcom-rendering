@@ -9,7 +9,7 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { Display } from '@guardian/types/Format';
 
 type Props = {
-    pillar: Pillar;
+    pillar: CAPIPillar;
     display: Display;
     blocks: Block[];
     designType: DesignType;

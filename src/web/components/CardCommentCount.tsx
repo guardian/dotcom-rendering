@@ -11,7 +11,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     short: string;
     long: string;
 };
@@ -49,7 +49,7 @@ const shortStyles = css`
     }
 `;
 
-const mediaStyles = (pillar: Pillar) => css`
+const mediaStyles = (pillar: CAPIPillar) => css`
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
     color: ${pillar === 'news'
         ? pillarPalette[pillar].bright
@@ -62,7 +62,7 @@ const mediaStyles = (pillar: Pillar) => css`
     }
 `;
 
-const colourStyles = (designType: DesignType, pillar: Pillar) => {
+const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
     switch (designType) {
         case 'Live':
             return css`

@@ -3,7 +3,7 @@ import { body } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { css } from 'emotion';
 
-const style = (pillar: Pillar) => css`
+const style = (pillar: CAPIPillar) => css`
     ${body.small()};
 
     a {
@@ -19,7 +19,7 @@ const style = (pillar: Pillar) => css`
 
 export const DisclaimerBlockComponent: React.FC<{
     html: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ html, pillar }) => (
     <footer
         className={style(pillar)}

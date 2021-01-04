@@ -9,7 +9,7 @@ import {
     LinkStyle,
 } from '@root/src/amp/components/elements/TextBlockComponent';
 
-const standfirstCss = (pillar: Pillar) => css`
+const standfirstCss = (pillar: CAPIPillar) => css`
     ${headline.xxxsmall()};
     font-weight: 100;
     color: ${palette.neutral[7]};
@@ -38,7 +38,7 @@ const labsStyle = css`
 
 export const Standfirst: React.SFC<{
     text: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ text, pillar }) => {
     return (
         <div

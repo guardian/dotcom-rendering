@@ -4,7 +4,7 @@ import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoYoutubeBlockComponent: React.FC<{
     element: VideoYoutubeBlockElement;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ element, pillar }) => {
     const youtubeId = getIdFromUrl(
         element.originalUrl || element.url,
