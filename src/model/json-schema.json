@@ -187,7 +187,7 @@
             }
         },
         "pillar": {
-            "$ref": "#/definitions/Pillar"
+            "$ref": "#/definitions/CAPIPillar"
         },
         "isImmersive": {
             "type": "boolean"
@@ -2490,7 +2490,7 @@
                 "type"
             ]
         },
-        "Pillar": {
+        "CAPIPillar": {
             "enum": [
                 "culture",
                 "labs",

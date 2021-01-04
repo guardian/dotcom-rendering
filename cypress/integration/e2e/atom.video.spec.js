@@ -13,85 +13,60 @@ describe('Video', function () {
         });
         it('should render', function() {
             cy.visit(`/Article?url=${mainMediaVideo}`);
-            cy.get(`#youtube-block-main-media-0`).should('be.visible');
-        })
-
-        it('should hide overlay on click', function() {
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('be.visible');
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).click();
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('not.be.visible');
+            cy.get(`[data-cy="main-media-youtube-atom"]`).should('be.visible');
         })
 
         it('should dispatch play to server', function () {
-            const listOfOphanVideoValues = []
-
+            cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+            cy.get(`[daya-cy="youtube-overlay"]`).click();
             cy.intercept({
-                url: /^http:\/\/ophan\.theguardian\.com\/img\/2/,
+                url: 'http://ophan.theguardian.com/img/2',
                 query: {
-                    viewId: /^\.*/,
-                    video: /^\.*/,
+                    video: /(.*)eventType\":\"video:content:play(.*)/,
                 }
-            }, (req) => {
+            }, function (req) {
                 const url = new URL(req.url)
                 const videoValue = url.searchParams.get('video')
-                if (videoValue) listOfOphanVideoValues.push(JSON.parse(videoValue))
-            })
+                expect(JSON.parse(videoValue)).to.deep.equal(mainMediaPlayEvent);
+            }).as('ophanCall')
 
-            cy.visit(`/Article?url=${mainMediaVideo}`);
-            cy.get(`#youtube-block-main-media-0`).should('be.visible');
+            cy.wait('@ophanCall')
+        })
 
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('be.visible');
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).click();
-            cy.get(`#youtube-overlay-S0CE1n-R3OY`).should('not.be.visible');
-
-            // eslint-disable-next-line cypress/no-unnecessary-waiting
-            cy.wait(2000).then(function(){
-                expect(listOfOphanVideoValues).to.deep.include(mainMediaPlayEvent);
-            })
+        it('should no longer display overlay', function() {
+            cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 
         })
     })
 
     describe('Embed youtube video', function () {
+        beforeEach(function () {
+            disableCMP();
+        });
         it('should render', function() {
             cy.visit(`/Article?url=${embedMediaVideo}`);
-            cy.get(`#youtube-block-41`).scrollIntoView();
-            cy.get(`#youtube-block-41`).should('be.visible');
-        })
-
-        it('should hide overlay on click', function() {
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).should('be.visible');
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).click();
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).should('not.be.visible');
+            cy.get(`[data-cy="embed-youtube-atom"]`).should('be.visible');
         })
 
         it('should dispatch play to server', function () {
-            const listOfOphanVideoValues = []
+            cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+            cy.get(`[daya-cy="youtube-overlay"]`).click();
             cy.intercept({
-                url: /^http:\/\/ophan\.theguardian\.com\/img\/2/,
+                url: 'http://ophan.theguardian.com/img/2',
                 query: {
-                    viewId: /^\.*/,
-                    video: /^\.*/,
+                    video: /(.*)eventType\":\"video:content:play(.*)/,
                 }
-            }, (req) => {
+            }, function (req) {
                 const url = new URL(req.url)
                 const videoValue = url.searchParams.get('video')
-                if (videoValue) listOfOphanVideoValues.push(JSON.parse(videoValue))
-            })
+                expect(JSON.parse(videoValue)).to.deep.equal(embedPlayEvent);
+            }).as('ophanCall')
 
-            cy.visit(`/Article?url=${embedMediaVideo}`);
-            cy.get(`#youtube-block-41`).scrollIntoView();
-            cy.get(`#youtube-block-41`).should('be.visible');
+            cy.wait('@ophanCall')
+        })
 
-
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).should('be.visible');
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).click();
-            cy.get(`#youtube-overlay-N9Cgy-ke5-s`).should('not.be.visible');
-
-            // eslint-disable-next-line cypress/no-unnecessary-waiting
-            cy.wait(2000).then(function(){
-                expect(listOfOphanVideoValues).to.deep.include(embedPlayEvent);
-            })
+        it('should no longer display overlay', function() {
+            cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 
         })
     })
