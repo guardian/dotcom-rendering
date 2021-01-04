@@ -87,7 +87,7 @@ export const SharingIcons: React.FC<{
         };
     };
     displayIcons: SharePlatform[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     className?: string;
 }> = ({ sharingUrls, displayIcons, pillar, className }) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {
@@ -137,7 +137,12 @@ export const SharingIcons: React.FC<{
                         })}
                         key={`${id}Share`}
                     >
-                        <a href={url} role="button" aria-label={userMessage}>
+                        <a
+                            href={url}
+                            role="button"
+                            aria-label={userMessage}
+                            target="_blank"
+                        >
                             <span
                                 className={cx(
                                     shareIcon(pillarPalette[pillar].main),

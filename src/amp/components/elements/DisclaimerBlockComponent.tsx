@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { textSans } from '@guardian/src-foundations/typography';
 
-const style = (pillar: Pillar) => css`
+const style = (pillar: CAPIPillar) => css`
     ${textSans.small()};
 
     a {
@@ -13,7 +13,7 @@ const style = (pillar: Pillar) => css`
 
 export const DisclaimerBlockComponent: React.FC<{
     html: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ html, pillar }) => (
     <span
         className={style(pillar)}

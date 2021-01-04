@@ -8,7 +8,7 @@ import { palette } from '@guardian/src-foundations';
 import { body, textSans, headline } from '@guardian/src-foundations/typography';
 import { TextStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 
-const wrapper = (pillar: Pillar) => css`
+const wrapper = (pillar: CAPIPillar) => css`
     background: ${palette.neutral[93]};
     position: relative;
     padding: 0 5px 6px;
@@ -69,7 +69,7 @@ const creditStyle = css`
     margin: 12px 0;
 `;
 
-const pillarColour = (pillar: Pillar) => css`
+const pillarColour = (pillar: CAPIPillar) => css`
     color: ${pillarPalette[pillar].main};
 `;
 
@@ -118,7 +118,7 @@ export const Expandable: React.FC<{
     img?: string;
     html: string;
     credit?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ id, type, title, img, html, credit, pillar }) => (
     <aside className={wrapper(pillar)}>
         <div className={headers}>

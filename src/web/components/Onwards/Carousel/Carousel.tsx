@@ -117,7 +117,10 @@ const cardImageStyle = css`
     width: 258px;
 `;
 
-const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
+const headlineWrapperStyle = (
+    designType: DesignType,
+    pillar: CAPIPillar,
+) => css`
     width: 90%;
     min-height: 107px;
 
@@ -141,7 +144,7 @@ const headlineWrapperStyle = (designType: DesignType, pillar: Pillar) => css`
     color: white;
 `;
  */
-const headlineStyle = (designType: DesignType, pillar: Pillar) => css`
+const headlineStyle = (designType: DesignType, pillar: CAPIPillar) => css`
     ${headline.xxxsmall()};
     ${from.desktop} {
         ${headline.xxsmall()};
@@ -184,7 +187,7 @@ const dotStyle = css`
     }
 `;
 
-const dotActiveStyle = (pillar: Pillar) => css`
+const dotActiveStyle = (pillar: CAPIPillar) => css`
     background-color: ${pillarPalette[pillar][400]};
 
     &:hover,
@@ -248,7 +251,7 @@ const headerStyles = css`
     padding-top: 0;
 `;
 
-const titleStyle = (pillar: Pillar) => css`
+const titleStyle = (pillar: CAPIPillar) => css`
     color: ${pillarPalette[pillar].main};
 `;
 
@@ -258,7 +261,7 @@ export const Title = ({
 }: {
     title: string;
     url?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }) => (
     <h2 className={headerStyles}>
         More from <span className={titleStyle(pillar)}>{title}</span>

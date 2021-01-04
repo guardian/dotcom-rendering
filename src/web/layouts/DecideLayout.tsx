@@ -16,7 +16,7 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
     const display: Display = decideDisplay(CAPI);
-    const pillar: Pillar = decidePillar(CAPI);
+    const pillar: CAPIPillar = decidePillar(CAPI);
     const designType: DesignType = decideDesignType(CAPI);
 
     switch (display) {

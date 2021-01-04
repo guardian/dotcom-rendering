@@ -20,7 +20,7 @@ const headerStyle = css`
     color: ${palette.neutral[7]};
 `;
 
-const bylineStyle = (pillar: Pillar) => css`
+const bylineStyle = (pillar: CAPIPillar) => css`
     ${headline.small()};
     color: ${pillarPalette[pillar].main};
     font-style: italic;
@@ -63,7 +63,7 @@ const bottomPadding = css`
 
 const BylineMeta: React.SFC<{
     articleData: ArticleModel;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ articleData, pillar }) => {
     const contributorTag = articleData.tags.find(
         (t) => t.type === 'Contributor',
@@ -102,7 +102,7 @@ const BylineMeta: React.SFC<{
 
 export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ articleData, pillar }) => {
     const { branding } = articleData.commercialProperties[
         articleData.editionId

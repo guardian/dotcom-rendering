@@ -22,7 +22,7 @@ type Props = {
     discussionApiUrl: string;
     shortUrlId: string;
     isCommentable: boolean;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     enableDiscussionSwitch: boolean;

@@ -11,7 +11,7 @@ export const MapEmbedBlockComponent: React.FC<{
     width: number;
     title?: string;
     caption?: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     display: Display;
     designType: DesignType;
     credit?: string;

@@ -7,11 +7,11 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     letter: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
 };
 
-const outerStyles = (pillar: Pillar, designType: DesignType) => {
+const outerStyles = (pillar: CAPIPillar, designType: DesignType) => {
     const baseStyles = css`
         ${headline.large({
             fontWeight: 'light',

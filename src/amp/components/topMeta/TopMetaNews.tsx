@@ -22,7 +22,7 @@ const headerStyle = css`
     padding-top: 3px;
     color: ${palette.neutral[7]};
 `;
-const bylineStyle = (pillar: Pillar) => css`
+const bylineStyle = (pillar: CAPIPillar) => css`
     ${headline.xxxsmall()};
     color: ${pillarPalette[pillar].main};
     padding-bottom: 8px;

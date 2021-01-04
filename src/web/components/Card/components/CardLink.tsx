@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const linkStyles = (designType: DesignType, pillar: Pillar) => {
+const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
     const baseLinkStyles = css`
         display: flex;
         /* a tag specific styles */
@@ -95,7 +95,7 @@ type Props = {
     children: JSXElements;
     linkTo: string;
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 };
 
 export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (

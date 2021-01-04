@@ -17,7 +17,7 @@ type Props = {
     designType: DesignType;
     element: ImageBlockElement;
     role: RoleType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     hideCaption?: boolean;
     isMainMedia?: boolean;
     starRating?: number;
@@ -101,7 +101,7 @@ const moreTitlePadding = css`
     }
 `;
 
-const titleWrapper = (pillar: Pillar) => css`
+const titleWrapper = (pillar: CAPIPillar) => css`
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -137,7 +137,7 @@ const titleWrapper = (pillar: Pillar) => css`
 const ImageTitle: React.FC<{
     title: string;
     role: RoleType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }> = ({ title, role, pillar }) => {
     switch (role) {
         case 'inline':

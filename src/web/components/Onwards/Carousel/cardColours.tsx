@@ -4,7 +4,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 export const headlineBackgroundColour = (
     designType: DesignType,
-    pillar: Pillar,
+    pillar: CAPIPillar,
 ) => {
     switch (designType) {
         case 'GuardianView':
@@ -42,7 +42,7 @@ const colourStyles = (colour: string) => css`
     color: ${colour};
 `;
 
-export const headlineColour = (designType: DesignType, pillar: Pillar) => {
+export const headlineColour = (designType: DesignType, pillar: CAPIPillar) => {
     switch (designType) {
         case 'Feature':
         case 'Interview':

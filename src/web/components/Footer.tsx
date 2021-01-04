@@ -218,7 +218,7 @@ const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
     pillars: PillarType[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
     <footer

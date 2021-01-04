@@ -16,7 +16,7 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
 
-const bulletStyle = (pillar: Pillar) => css`
+const bulletStyle = (pillar: CAPIPillar) => css`
     .bullet {
         color: transparent;
         font-size: 1px;
@@ -34,7 +34,7 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
-const body = (pillar: Pillar, designType: DesignType) => {
+const body = (pillar: CAPIPillar, designType: DesignType) => {
     const defaultStyles: DesignTypesObj = designTypeDefault(
         palette.neutral[100],
     );
@@ -63,7 +63,7 @@ const adStyle = css`
 `;
 
 export const Body: React.FC<{
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
     data: ArticleModel;
     config: ConfigType;

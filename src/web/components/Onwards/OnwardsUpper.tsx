@@ -137,7 +137,7 @@ const lifestyleContainer = (edition: Edition): string => {
 };
 
 const getContainerDataUrl = (
-    pillar: Pillar,
+    pillar: CAPIPillar,
     edition: Edition,
     ajaxUrl: string,
 ) => {
@@ -193,7 +193,7 @@ type Props = {
     contentType: string;
     tags: TagType[];
     edition: Edition;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 };
 
 export const OnwardsUpper = ({
