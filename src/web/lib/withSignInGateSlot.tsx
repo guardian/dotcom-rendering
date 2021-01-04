@@ -6,15 +6,15 @@ import React from 'react';
 const SignInGateSlot = <p id="sign-in-gate" />;
 
 export const withSignInGateSlot = (
-    articleElements: (JSX.Element | null | undefined)[],
+	articleElements: (JSX.Element | null | undefined)[],
 ): (JSX.Element | null | undefined)[] => {
-    return articleElements.map((element, i) => {
-        return (
-            <>
-                {element}
-                {/* Add the placeholder div after the second article element */}
-                {i === 1 && SignInGateSlot}
-            </>
-        );
-    });
+	return articleElements.map((element, i) => {
+		return (
+			<>
+				{element}
+				{/* Add the placeholder div after the second article element */}
+				{i === 1 && SignInGateSlot}
+			</>
+		);
+	});
 };

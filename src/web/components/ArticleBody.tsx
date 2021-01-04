@@ -9,76 +9,76 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { Display } from '@guardian/types/Format';
 
 type Props = {
-    pillar: CAPIPillar;
-    display: Display;
-    blocks: Block[];
-    designType: DesignType;
-    adTargeting: AdTargeting;
-    host?: string;
+	pillar: CAPIPillar;
+	display: Display;
+	blocks: Block[];
+	designType: DesignType;
+	adTargeting: AdTargeting;
+	host?: string;
 };
 
 const pillarColours = pillarMap(
-    (pillar) =>
-        css`
-            color: ${pillar === 'opinion' || pillar === 'culture'
-                ? pillarPalette[pillar].dark
-                : pillarPalette[pillar].main};
-        `,
+	(pillar) =>
+		css`
+			color: ${pillar === 'opinion' || pillar === 'culture'
+				? pillarPalette[pillar].dark
+				: pillarPalette[pillar].main};
+		`,
 );
 
 const bodyStyle = (display: Display) => css`
-    ${between.tablet.and.desktop} {
-        padding-right: 80px;
-    }
+	${between.tablet.and.desktop} {
+		padding-right: 80px;
+	}
 
-    h2 {
-        ${display === Display.Immersive
-            ? headline.medium({ fontWeight: 'light' })
-            : headline.xxsmall({ fontWeight: 'bold' })};
-    }
+	h2 {
+		${display === Display.Immersive
+			? headline.medium({ fontWeight: 'light' })
+			: headline.xxsmall({ fontWeight: 'bold' })};
+	}
 
-    strong {
-        font-weight: bold;
-    }
+	strong {
+		font-weight: bold;
+	}
 
-    img {
-        width: 100%;
-        height: auto;
-    }
+	img {
+		width: 100%;
+		height: auto;
+	}
 `;
 
 const linkColour = pillarMap(
-    (pillar) => css`
-        a {
-            text-decoration: none;
-            border-bottom: 1px solid ${border.secondary};
-            ${pillarColours[pillar]};
+	(pillar) => css`
+		a {
+			text-decoration: none;
+			border-bottom: 1px solid ${border.secondary};
+			${pillarColours[pillar]};
 
-            :hover {
-                border-bottom: 1px solid ${pillarPalette[pillar].main};
-            }
-        }
-    `,
+			:hover {
+				border-bottom: 1px solid ${pillarPalette[pillar].main};
+			}
+		}
+	`,
 );
 
 export const ArticleBody = ({
-    pillar,
-    display,
-    blocks,
-    designType,
-    adTargeting,
-    host,
+	pillar,
+	display,
+	blocks,
+	designType,
+	adTargeting,
+	host,
 }: Props) => {
-    return (
-        <div className={cx(bodyStyle(display), linkColour[pillar])}>
-            <ArticleRenderer
-                display={display}
-                elements={blocks[0] ? blocks[0].elements : []}
-                pillar={pillar}
-                designType={designType}
-                adTargeting={adTargeting}
-                host={host}
-            />
-        </div>
-    );
+	return (
+		<div className={cx(bodyStyle(display), linkColour[pillar])}>
+			<ArticleRenderer
+				display={display}
+				elements={blocks[0] ? blocks[0].elements : []}
+				pillar={pillar}
+				designType={designType}
+				adTargeting={adTargeting}
+				host={host}
+			/>
+		</div>
+	);
 };

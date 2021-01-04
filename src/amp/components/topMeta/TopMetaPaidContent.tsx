@@ -15,114 +15,114 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
 const headerStyle = css`
-    ${textSans.xlarge()};
-    font-weight: 400;
-    padding-top: 3px;
-    padding-bottom: 27px;
-    color: ${palette.neutral[7]};
+	${textSans.xlarge()};
+	font-weight: 400;
+	padding-top: 3px;
+	padding-bottom: 27px;
+	color: ${palette.neutral[7]};
 `;
 
 const bylineStyle = css`
-    ${body.medium()};
-    color: ${palette.neutral[7]};
-    padding-bottom: 8px;
-    font-style: italic;
+	${body.medium()};
+	color: ${palette.neutral[7]};
+	padding-bottom: 8px;
+	font-style: italic;
 
-    a {
-        font-weight: 700;
-        color: ${palette.neutral[7]};
-        text-decoration: none;
-        font-style: normal;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
+	a {
+		font-weight: 700;
+		color: ${palette.neutral[7]};
+		text-decoration: none;
+		font-style: normal;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
 `;
 
 const paidForLogoLabelStyle = css`
-    ${textSans.small()};
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: ${text.supporting};
+	${textSans.small()};
+	font-weight: 700;
+	margin-bottom: 6px;
+	color: ${text.supporting};
 `;
 const paidForLogoStyle = css`
-    padding-top: 4px;
-    margin-top: 3px;
-    margin-bottom: 12px;
+	padding-top: 4px;
+	margin-top: 3px;
+	margin-bottom: 12px;
 `;
 
 const PaidForByLogo: React.FC<{
-    branding: Branding;
+	branding: Branding;
 }> = ({ branding }) => {
-    const { logo, sponsorName } = branding;
+	const { logo, sponsorName } = branding;
 
-    return (
-        <div className={paidForLogoStyle}>
-            <div className={paidForLogoLabelStyle}>Paid for by</div>
-            <a
-                href={logo.link}
-                data-sponsor={sponsorName.toLowerCase()}
-                rel="nofollow"
-                aria-label={`Visit the ${sponsorName} website`}
-            >
-                <amp-img
-                    src={logo.src}
-                    width="140px"
-                    height="90px"
-                    alt={sponsorName}
-                />
-            </a>
-        </div>
-    );
+	return (
+		<div className={paidForLogoStyle}>
+			<div className={paidForLogoLabelStyle}>Paid for by</div>
+			<a
+				href={logo.link}
+				data-sponsor={sponsorName.toLowerCase()}
+				rel="nofollow"
+				aria-label={`Visit the ${sponsorName} website`}
+			>
+				<amp-img
+					src={logo.src}
+					width="140px"
+					height="90px"
+					alt={sponsorName}
+				/>
+			</a>
+		</div>
+	);
 };
 
 const Headline: React.FC<{
-    headlineText: string;
+	headlineText: string;
 }> = ({ headlineText }) => <h1 className={headerStyle}>{headlineText}</h1>;
 
 export const TopMetaPaidContent: React.FC<{
-    articleData: ArticleModel;
-    pillar: CAPIPillar;
+	articleData: ArticleModel;
+	pillar: CAPIPillar;
 }> = ({ articleData, pillar }) => {
-    const { branding } = articleData.commercialProperties[
-        articleData.editionId
-    ];
+	const { branding } = articleData.commercialProperties[
+		articleData.editionId
+	];
 
-    return (
-        <header>
-            <PaidForBand />
+	return (
+		<header>
+			<PaidForBand />
 
-            {articleData.mainMediaElements.map((element, i) => (
-                <MainMedia key={i} element={element} pillar={pillar} />
-            ))}
+			{articleData.mainMediaElements.map((element, i) => (
+				<MainMedia key={i} element={element} pillar={pillar} />
+			))}
 
-            <Headline headlineText={articleData.headline} />
+			<Headline headlineText={articleData.headline} />
 
-            {!!branding && <PaidForByLogo branding={branding} />}
+			{!!branding && <PaidForByLogo branding={branding} />}
 
-            <Standfirst text={articleData.standfirst} pillar={pillar} />
+			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-            <Byline
-                byline={articleData.author.byline}
-                tags={articleData.tags}
-                pillar={pillar}
-                guardianBaseURL={articleData.guardianBaseURL}
-                className={bylineStyle}
-            />
+			<Byline
+				byline={articleData.author.byline}
+				tags={articleData.tags}
+				pillar={pillar}
+				guardianBaseURL={articleData.guardianBaseURL}
+				className={bylineStyle}
+			/>
 
-            <TopMetaExtras
-                sharingUrls={getSharingUrls(
-                    articleData.pageId,
-                    articleData.webTitle,
-                )}
-                pillar={pillar}
-                ageWarning={getAgeWarning(
-                    articleData.tags,
-                    articleData.webPublicationDate,
-                )}
-                webPublicationDate={articleData.webPublicationDateDisplay}
-                twitterHandle={articleData.author.twitterHandle}
-            />
-        </header>
-    );
+			<TopMetaExtras
+				sharingUrls={getSharingUrls(
+					articleData.pageId,
+					articleData.webTitle,
+				)}
+				pillar={pillar}
+				ageWarning={getAgeWarning(
+					articleData.tags,
+					articleData.webPublicationDate,
+				)}
+				webPublicationDate={articleData.webPublicationDateDisplay}
+				twitterHandle={articleData.author.twitterHandle}
+			/>
+		</header>
+	);
 };

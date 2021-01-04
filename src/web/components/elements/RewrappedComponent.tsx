@@ -11,36 +11,36 @@ import { unescapeData } from '@root/src/lib/escapeData';
 // paras to be top-level.
 
 export const RewrappedComponent = ({
-    isUnwrapped,
-    html,
-    elCss = '',
-    tagName,
+	isUnwrapped,
+	html,
+	elCss = '',
+	tagName,
 }: {
-    isUnwrapped: boolean;
-    html: string;
-    elCss?: string;
-    tagName: string;
+	isUnwrapped: boolean;
+	html: string;
+	elCss?: string;
+	tagName: string;
 }): JSX.Element => {
-    const element = isUnwrapped ? tagName : 'span';
+	const element = isUnwrapped ? tagName : 'span';
 
-    // If we implement a span, we want to apply the CSS to the inner element
-    // to ensure we still style correctly
-    const innerElCss = css`
-        ${tagName} {
-            ${elCss}
-        }
-    `;
+	// If we implement a span, we want to apply the CSS to the inner element
+	// to ensure we still style correctly
+	const innerElCss = css`
+		${tagName} {
+			${elCss}
+		}
+	`;
 
-    const style = isUnwrapped ? elCss : innerElCss;
+	const style = isUnwrapped ? elCss : innerElCss;
 
-    // Create a react element from the tagName passed in OR
-    // default to <span> if we've not been able to unwrap based on prefix & suffix
-    const ElementComponent = React.createElement(`${element}`, {
-        className: style,
-        dangerouslySetInnerHTML: {
-            __html: unescapeData(html),
-        },
-    });
+	// Create a react element from the tagName passed in OR
+	// default to <span> if we've not been able to unwrap based on prefix & suffix
+	const ElementComponent = React.createElement(`${element}`, {
+		className: style,
+		dangerouslySetInnerHTML: {
+			__html: unescapeData(html),
+		},
+	});
 
-    return ElementComponent;
+	return ElementComponent;
 };

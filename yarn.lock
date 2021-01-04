@@ -2124,6 +2124,11 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
+"@guardian/prettier@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-0.4.2.tgz#2d08a8a50aad3911a88c9b53f92a37748694d551"
+  integrity sha512-f8MCY/s3rLNonqxITsqnqrPRt0r6hEyW6rGKqDexTt88fEQnA3BMtAlN2hqjuNfrOa9EQexEknZugRVdIpbijQ==
+
 "@guardian/shimport@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@guardian/shimport/-/shimport-1.0.2.tgz#96c71153553a90f5a7b2a45dfc78196eb14e76f1"

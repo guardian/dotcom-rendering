@@ -12,100 +12,100 @@ import { Columns } from './Columns';
 import { navInputCheckboxId } from '../config';
 
 const mainMenuStyles = css`
-    background-color: ${brandBackground.primary};
-    box-sizing: border-box;
-    ${textSans.large()};
-    left: 0;
-    margin-right: 29px;
-    padding-bottom: 24px;
-    top: 0;
-    z-index: 1070;
-    overflow: hidden;
+	background-color: ${brandBackground.primary};
+	box-sizing: border-box;
+	${textSans.large()};
+	left: 0;
+	margin-right: 29px;
+	padding-bottom: 24px;
+	top: 0;
+	z-index: 1070;
+	overflow: hidden;
 
-    /*
+	/*
         IMPORTANT NOTE:
         we need to specify the adjacent path to the a (current) tag
         to apply styles to the nested tabs due to the fact we use ~
         to support NoJS
     */
-    /* stylelint-disable-next-line selector-type-no-unknown */
-    ${`#${navInputCheckboxId}`}:checked ~ div & {
-        ${from.desktop} {
-            display: block;
-            overflow: visible;
-        }
-    }
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		${from.desktop} {
+			display: block;
+			overflow: visible;
+		}
+	}
 
-    ${from.desktop} {
-        display: none;
-        position: absolute;
-        padding-bottom: 0;
-        padding-top: 0;
-        top: 100%;
-        left: 0;
-        right: 0;
-        width: 100%;
-        @supports (width: 100vw) {
-            left: 50%;
-            right: 50%;
-            width: 100vw;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-    }
+	${from.desktop} {
+		display: none;
+		position: absolute;
+		padding-bottom: 0;
+		padding-top: 0;
+		top: 100%;
+		left: 0;
+		right: 0;
+		width: 100%;
+		@supports (width: 100vw) {
+			left: 50%;
+			right: 50%;
+			width: 100vw;
+			margin-left: -50vw;
+			margin-right: -50vw;
+		}
+	}
 
-    /* refer to comment above */
-    /* stylelint-disable */
-    ${`#${navInputCheckboxId}`}:checked ~ div & {
-        ${until.desktop} {
-            transform: translateX(
-                0%
-            ); /* when translateX is set to 0% it reapears on the screen */
-        }
-    }
+	/* refer to comment above */
+	/* stylelint-disable */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		${until.desktop} {
+			transform: translateX(
+				0%
+			); /* when translateX is set to 0% it reapears on the screen */
+		}
+	}
 
-    ${until.desktop} {
-        transform: translateX(
-            -110%
-        ); /* the negative translateX makes the nav hide to the side */
-        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
-        bottom: 0;
-        height: 100%;
-        overflow: auto;
-        padding-top: 6px;
-        position: fixed;
-        right: 0;
-        will-change: transform;
-    }
+	${until.desktop} {
+		transform: translateX(
+			-110%
+		); /* the negative translateX makes the nav hide to the side */
+		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+		bottom: 0;
+		height: 100%;
+		overflow: auto;
+		padding-top: 6px;
+		position: fixed;
+		right: 0;
+		will-change: transform;
+	}
 
-    ${from.mobileMedium} {
-        margin-right: 29px;
-    }
-    ${from.mobileLandscape} {
-        margin-right: 70px;
-    }
-    ${from.tablet} {
-        margin-right: 100px;
-    }
+	${from.mobileMedium} {
+		margin-right: 29px;
+	}
+	${from.mobileLandscape} {
+		margin-right: 70px;
+	}
+	${from.tablet} {
+		margin-right: 100px;
+	}
 `;
 
 export const ExpandedMenu: React.FC<{
-    display: Display;
-    nav: NavType;
+	display: Display;
+	nav: NavType;
 }> = ({ display, nav }) => {
-    return (
-        <div id="expanded-menu">
-            <ShowMoreMenu display={display} />
-            <VeggieBurgerMenu display={display} />
-            <div
-                id="expanded-menu"
-                className={mainMenuStyles}
-                data-testid="expanded-menu"
-                data-cy="expanded-menu"
-            >
-                <Columns nav={nav} />
-            </div>
-        </div>
-    );
+	return (
+		<div id="expanded-menu">
+			<ShowMoreMenu display={display} />
+			<VeggieBurgerMenu display={display} />
+			<div
+				id="expanded-menu"
+				className={mainMenuStyles}
+				data-testid="expanded-menu"
+				data-cy="expanded-menu"
+			>
+				<Columns nav={nav} />
+			</div>
+		</div>
+	);
 };

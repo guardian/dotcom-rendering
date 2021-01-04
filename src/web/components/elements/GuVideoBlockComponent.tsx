@@ -6,34 +6,34 @@ import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@guardian/types/Format';
 
 export const GuVideoBlockComponent: React.FC<{
-    html: string;
-    pillar: CAPIPillar;
-    designType: DesignType;
-    display: Display;
-    credit: string;
-    caption?: string;
+	html: string;
+	pillar: CAPIPillar;
+	designType: DesignType;
+	display: Display;
+	credit: string;
+	caption?: string;
 }> = ({ html, pillar, designType, display, credit, caption }) => {
-    const embedContainer = css`
-        width: 100%;
-        margin-bottom: ${caption ? `0px` : `6px`};
-        video {
-            width: 100%;
-        }
-    `;
+	const embedContainer = css`
+		width: 100%;
+		margin-bottom: ${caption ? `0px` : `6px`};
+		video {
+			width: 100%;
+		}
+	`;
 
-    return (
-        <div className={embedContainer}>
-            <div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
+	return (
+		<div className={embedContainer}>
+			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 
-            {caption && (
-                <Caption
-                    captionText={caption}
-                    designType={designType}
-                    pillar={pillar}
-                    credit={credit}
-                    display={display}
-                />
-            )}
-        </div>
-    );
+			{caption && (
+				<Caption
+					captionText={caption}
+					designType={designType}
+					pillar={pillar}
+					credit={credit}
+					display={display}
+				/>
+			)}
+		</div>
+	);
 };
