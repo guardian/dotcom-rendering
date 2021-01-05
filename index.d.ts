@@ -3,34 +3,25 @@
 // ------------------------- //
 
 // Pillars are used for styling
-// RealPillars have Pillar palette colours
+// RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
-type Pillar = RealPillars | FakePillars;
-
-declare const enum Display {
-    Standard,
-    Immersive,
-    Showcase,
-}
+type CAPIPillar = RealPillars | FakePillars;
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
-    | 'Immersive'
     | 'Media'
     | 'Review'
     | 'Analysis'
     | 'Comment'
     | 'Feature'
     | 'Live'
-    | 'SpecialReport'
     | 'Recipe'
     | 'MatchReport'
     | 'Interview'
     | 'GuardianView'
-    | 'GuardianLabs'
     | 'Quiz'
     | 'AdvertisementFeature'
     | 'PhotoEssay';
@@ -103,12 +94,12 @@ interface LinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
     mobileOnly?: boolean;
-    pillar?: Pillar;
+    pillar?: CAPIPillar;
     more?: boolean;
 }
 
 interface PillarType extends LinkType {
-    pillar: Pillar;
+    pillar: CAPIPillar;
 }
 
 interface MoreType extends LinkType {
@@ -247,7 +238,7 @@ interface CAPIType {
     pageId: string;
     version: number; // TODO: check who uses?
     tags: TagType[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     isImmersive: boolean;
     sectionLabel: string;
     sectionUrl: string;
@@ -261,7 +252,9 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -292,8 +285,10 @@ interface CAPIType {
 }
 
 type CAPIBrowserType = {
-    designType: DesignType;
-    pillar: Pillar;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
+    pillar: CAPIPillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -352,7 +347,7 @@ interface BadgeType {
 interface KickerType {
     text: string;
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     showPulsingDot?: boolean;
     showSlash?: boolean;
     inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
@@ -373,7 +368,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     designType: DesignType;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
@@ -410,7 +405,7 @@ type HeadlineLink = {
 interface LinkHeadlineType {
     designType: DesignType;
     headlineText: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kickerText?: string;
     showPulsingDot?: boolean;
@@ -424,7 +419,7 @@ interface LinkHeadlineType {
 interface CardHeadlineType {
     headlineText: string; // The text shown
     designType: DesignType; // Used to decide when to add type specific styles
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
@@ -498,7 +493,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
-    pillar: Pillar;
+    pillar: CAPIPillar;
 };
 
 type OphanComponentName =
@@ -605,7 +600,7 @@ interface ConfigTypeBrowser {
 }
 
 interface GADataType {
-    pillar: Pillar;
+    pillar: CAPIPillar;
     webTitle: string;
     section: string;
     contentType: string;
@@ -681,7 +676,7 @@ type IslandType =
 
 interface TrailType {
     designType: DesignType;
-    pillar: Pillar;
+    pillar: CAPIPillar;
     url: string;
     headline: string;
     isLiveBlog: boolean;
@@ -698,6 +693,10 @@ interface TrailType {
     commentCount?: number;
     starRating?: number;
     linkText?: string;
+}
+
+interface CAPITrailType extends TrailType {
+    pillar: CAPIPillar;
 }
 
 interface TrailTabType {
