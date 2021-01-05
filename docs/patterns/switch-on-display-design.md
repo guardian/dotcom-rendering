@@ -23,14 +23,11 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'PhotoEssay':
                 case 'Analysis':
                 case 'Article':
-                case 'SpecialReport':
                 case 'MatchReport':
                 case 'GuardianView':
-                case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':
-                case 'Immersive':
                 default:
                     return false;
             }

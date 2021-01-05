@@ -190,7 +190,7 @@
             }
         },
         "pillar": {
-            "$ref": "#/definitions/Pillar"
+            "$ref": "#/definitions/CAPIPillar"
         },
         "isImmersive": {
             "type": "boolean"
@@ -249,7 +249,26 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -415,6 +434,9 @@
                 },
                 "audioIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -425,6 +447,17 @@
                 "kicker",
                 "trackUrl"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "AudioBlockElement": {
             "type": "object",
@@ -470,17 +503,8 @@
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
                 },
-                "display": {
-                    "$ref": "#/definitions/Display"
-                },
-                "designType": {
-                    "$ref": "#/definitions/DesignType"
-                },
                 "captionText": {
                     "type": "string"
-                },
-                "pillar": {
-                    "$ref": "#/definitions/Pillar"
                 },
                 "padCaption": {
                     "type": "boolean"
@@ -499,52 +523,8 @@
                 }
             },
             "required": [
-                "_type",
-                "designType",
-                "display",
-                "pillar"
+                "_type"
             ]
-        },
-        "Display": {
-            "type": "number",
-            "enum": [
-                0,
-                1,
-                2
-            ]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CalloutBlockElement": {
             "type": "object",
@@ -606,6 +586,9 @@
                 },
                 "calloutIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -936,6 +919,9 @@
                 "html": {
                     "type": "string"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -971,6 +957,9 @@
                         "personality"
                     ],
                     "type": "string"
+                },
+                "quizIndex": {
+                    "type": "number"
                 },
                 "id": {
                     "type": "string"
@@ -1072,6 +1061,21 @@
                             "title"
                         ]
                     }
+                },
+                "url": {
+                    "type": "string"
+                },
+                "placeholderUrl": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1079,7 +1083,8 @@
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets"
+                "resultBuckets",
+                "url"
             ]
         },
         "CodeBlockElement": {
@@ -1144,6 +1149,9 @@
                 },
                 "dateTime": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1185,6 +1193,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1226,6 +1237,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1266,17 +1280,6 @@
                 "isMandatory"
             ]
         },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
-        },
         "ExplainerAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1294,6 +1297,9 @@
                 },
                 "body": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1365,6 +1371,9 @@
                 },
                 "guideIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1399,6 +1408,9 @@
                 },
                 "source": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1609,6 +1621,9 @@
                 },
                 "hasCaption": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1638,6 +1653,9 @@
                 },
                 "css": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 },
                 "url": {
                     "type": "string"
@@ -1715,6 +1733,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1793,6 +1814,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1829,6 +1853,9 @@
                 },
                 "profileIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1891,6 +1918,9 @@
                 },
                 "qandaIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1953,6 +1983,9 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1986,6 +2019,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2024,6 +2060,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2079,6 +2118,9 @@
                 },
                 "timelineIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2129,6 +2171,9 @@
                 },
                 "hasMedia": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2147,6 +2192,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2176,6 +2224,9 @@
                 },
                 "embedUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2214,6 +2265,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2255,6 +2309,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2289,8 +2346,23 @@
                 "duration": {
                     "type": "number"
                 },
-                "posterSrc": {
-                    "type": "string"
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
                 },
                 "expired": {
                     "type": "boolean"
@@ -2303,12 +2375,17 @@
                 },
                 "youtubeIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
                 "assetId",
+                "channelId",
                 "expired",
+                "id",
                 "mediaTitle"
             ]
         },
@@ -2563,6 +2640,17 @@
                 "title",
                 "type"
             ]
+        },
+        "CAPIPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",

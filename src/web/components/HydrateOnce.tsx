@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 type Props = {
-    root: IslandType;
-    children: JSX.Element;
-    index?: number;
-    waitFor?: unknown[];
+	root: IslandType;
+	children: JSX.Element;
+	index?: number;
+	waitFor?: unknown[];
 };
 
 const isReady = (dependencies: unknown[]): boolean => {
-    return dependencies.every((dep) => dep !== undefined);
+	return dependencies.every((dep) => dep !== undefined);
 };
 
 /**
@@ -23,17 +23,17 @@ const isReady = (dependencies: unknown[]): boolean => {
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
 export const HydrateOnce = ({ root, children, index, waitFor = [] }: Props) => {
-    const [alreadyHydrated, setAlreadyHydrated] = useState(false);
-    if (alreadyHydrated) return null;
-    if (!isReady(waitFor)) return null;
-    const rootId = index === 0 || index ? `${root}-${index}` : root;
-    const { start, end } = initPerf(`${rootId}-hydrate`);
-    const element = document.getElementById(rootId);
-    if (!element) return null;
-    start();
-    ReactDOM.hydrate(children, element, () => {
-        end();
-    });
-    setAlreadyHydrated(true);
-    return null;
+	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
+	if (alreadyHydrated) return null;
+	if (!isReady(waitFor)) return null;
+	const rootId = index === 0 || index ? `${root}-${index}` : root;
+	const { start, end } = initPerf(`${rootId}-hydrate`);
+	const element = document.getElementById(rootId);
+	if (!element) return null;
+	start();
+	ReactDOM.hydrate(children, element, () => {
+		end();
+	});
+	setAlreadyHydrated(true);
+	return null;
 };

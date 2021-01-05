@@ -9,49 +9,49 @@ import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
 import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 
 type Props = {
-    CAPI: CAPIBrowserType;
-    NAV: NavType;
+	CAPI: CAPIBrowserType;
+	NAV: NavType;
 };
 
 export const HydrateApp = ({ CAPI, NAV }: Props) => {
-    const mvtId = Number(
-        (CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
-            getCookie('GU_mvt_id'),
-    );
-    if (!mvtId) {
-        // 0 is default and falsy here
-        // eslint-disable-next-line no-console
-        console.log('There is no MVT ID set, see HydrateApp.tsx');
-    }
+	const mvtId = Number(
+		(CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
+			getCookie('GU_mvt_id'),
+	);
+	if (!mvtId) {
+		// 0 is default and falsy here
+		// eslint-disable-next-line no-console
+		console.log('There is no MVT ID set, see HydrateApp.tsx');
+	}
 
-    const ophanRecordFunc =
-        window &&
-        window.guardian &&
-        window.guardian.ophan &&
-        window.guardian.ophan.record;
+	const ophanRecordFunc =
+		window &&
+		window.guardian &&
+		window.guardian.ophan &&
+		window.guardian.ophan.record;
 
-    const windowHash = window && window.location && window.location.hash;
+	const windowHash = window && window.location && window.location.hash;
 
-    // Get the forced switches to use for when running within cypress
-    // Is empty object if not in cypress
-    const cypressAbSwitches = getCypressSwitches();
+	// Get the forced switches to use for when running within cypress
+	// Is empty object if not in cypress
+	const cypressAbSwitches = getCypressSwitches();
 
-    ReactDOM.render(
-        <ABProvider
-            arrayOfTestObjects={tests}
-            abTestSwitches={{
-                ...CAPI.config.switches,
-                ...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
-            }}
-            pageIsSensitive={CAPI.config.isSensitive}
-            mvtMaxValue={1000000}
-            mvtId={mvtId}
-            ophanRecord={ophanRecordFunc}
-            forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
-        >
-            <App CAPI={CAPI} NAV={NAV} />
-        </ABProvider>,
+	ReactDOM.render(
+		<ABProvider
+			arrayOfTestObjects={tests}
+			abTestSwitches={{
+				...CAPI.config.switches,
+				...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
+			}}
+			pageIsSensitive={CAPI.config.isSensitive}
+			mvtMaxValue={1000000}
+			mvtId={mvtId}
+			ophanRecord={ophanRecordFunc}
+			forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
+		>
+			<App CAPI={CAPI} NAV={NAV} />
+		</ABProvider>,
 
-        document.getElementById('react-root'),
-    );
+		document.getElementById('react-root'),
+	);
 };
