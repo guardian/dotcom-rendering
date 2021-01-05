@@ -53,7 +53,7 @@ const init = async (): Promise<void> => {
             // Now that we have the real reportError function available,
             // send any queued errors
             while (queue.length) {
-                const queuedError = queue.pop();
+                const queuedError = queue.shift();
                 if (queuedError) reportError(queuedError);
             }
         };
