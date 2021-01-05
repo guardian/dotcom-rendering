@@ -5,5 +5,6 @@ export const decideDesignType = (
 ): DesignType => {
 	if (CAPI.designType === 'Immersive') return 'Article';
 	if (CAPI.designType === 'SpecialReport') return 'Article';
+	if (CAPI.designType === 'GuardianLabs') return 'AdvertisementFeature';
 	return CAPI.designType;
 };

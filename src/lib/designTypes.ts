@@ -10,7 +10,6 @@ export const designTypes: DesignType[] = [
 	'MatchReport',
 	'Interview',
 	'GuardianView',
-	'GuardianLabs',
 	'Quiz',
 	'AdvertisementFeature',
 	'PhotoEssay',

@@ -20,7 +20,6 @@ export const decideLineEffect = (
 		case 'Analysis':
 		case 'Article':
 		case 'MatchReport':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		default:
