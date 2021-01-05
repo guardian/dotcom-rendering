@@ -1,7 +1,5 @@
 import * as Sentry from '@sentry/browser';
 
-const SAMPLE_RATE = 0.01; // 1%
-
 // Only send errors matching these regexes
 const whitelistUrls = [
 	/webpack-internal/,
@@ -23,37 +21,36 @@ const ignoreErrors = [
 	'UnknownError',
 	'TypeError: Failed to fetch',
 	'TypeError: NetworkError when attempting to fetch resource',
+	'The quota has been exceeded',
 ];
 
-export const initialiseSentry = (adBlockInUse: boolean) => {
-	const CAPIBrowser: CAPIBrowserType = window.guardian.app.data.CAPI;
-	const {
-		editionLongForm,
-		contentType,
-		config: { isDev, enableSentryReporting, dcrSentryDsn },
-	} = CAPIBrowser;
+const CAPIBrowser: CAPIBrowserType = window.guardian.app.data.CAPI;
+const {
+	editionLongForm,
+	contentType,
+	config: { isDev, enableSentryReporting, dcrSentryDsn },
+} = CAPIBrowser;
 
-	Sentry.init({
-		ignoreErrors,
-		whitelistUrls,
-		dsn: dcrSentryDsn,
-		environment: window.guardian.config.stage || 'DEV',
-		sampleRate: SAMPLE_RATE,
-		beforeSend(event) {
-			// Skip sending events in certain situations
-			const dontSend = adBlockInUse || isDev || !enableSentryReporting;
-			if (dontSend) {
-				return null;
-			}
-			return event;
-		},
-	});
+Sentry.init({
+	ignoreErrors,
+	whitelistUrls,
+	dsn: dcrSentryDsn,
+	environment: window.guardian.config.stage || 'DEV',
+	// sampleRate: // We use Math.random in init.ts to sample errors
+	beforeSend(event) {
+		// Skip sending events in certain situations
+		const dontSend = isDev || !enableSentryReporting;
+		if (dontSend) {
+			return null;
+		}
+		return event;
+	},
+});
 
-	Sentry.configureScope((scope) => {
-		scope.setTag('edition', editionLongForm);
-		scope.setTag('contentType', contentType);
-	});
-};
+Sentry.configureScope((scope) => {
+	scope.setTag('edition', editionLongForm);
+	scope.setTag('contentType', contentType);
+});
 
 export const reportError = (error: Error, feature?: string): void => {
 	Sentry.withScope(() => {
