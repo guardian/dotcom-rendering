@@ -85,7 +85,7 @@
     "@emotion/babel-plugin": "^11.0.0",
     "@guardian/eslint-config-typescript": "^0.4.1",
     "@guardian/prettier": "^0.4.1",
-    "@storybook/addon-knobs": "^6.1.9",
+    "@storybook/addon-knobs": "^6.1.11",
     "@storybook/react": "^6.1.9",
     "@storybook/storybook-deployer": "^2.8.7",
     "@types/clean-css": "^4.2.2",
