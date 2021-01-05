@@ -17,6 +17,6 @@ export const tests: ABTest[] = [
 	curatedContainerTest2,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-    globalEoyHeaderTest,
-    deeplyReadTest,
+	globalEoyHeaderTest,
+	deeplyReadTest,
 ];
