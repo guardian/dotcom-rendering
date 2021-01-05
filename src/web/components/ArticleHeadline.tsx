@@ -171,11 +171,11 @@ const immersiveWrapper = css`
 	${from.leftCol} {
 		margin-left: 25px;
 	}
-	/* 
+	/*
         We need this grow to ensure the headline fills the main content column
     */
 	flex-grow: 1;
-	/* 
+	/*
         This z-index is what ensures the headline text shows above the pseudo black
         box that extends the black background to the right
     */

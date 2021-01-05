@@ -159,6 +159,7 @@ const metaContainer = ({
 	}
 };
 
+
 const getBylineImageUrl = (tags: TagType[]) => {
 	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
 	return contributorTag && contributorTag.bylineImageUrl;
