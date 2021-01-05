@@ -117,11 +117,11 @@ export const StickyBottomBanner = ({
         const CMP = buildCmpBannerConfig();
         const readerRevenue = buildReaderRevenueBannerConfig(
             CAPI,
-            isSignedIn || false, // TODO: Remove this
-            asyncCountryCode || Promise.resolve('GB'), // TODO: Remove this
+            isSignedIn || false,
+            asyncCountryCode || Promise.resolve('GB'),
         );
         const brazeBanner = buildBrazeBanner(
-            asyncBrazeUuid || Promise.resolve(null), // TODO: Remove this
+            asyncBrazeUuid || Promise.resolve(null),
             shouldHideSupportMessaging,
         );
         const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
