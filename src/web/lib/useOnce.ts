@@ -7,13 +7,11 @@ import { useEffect, useState } from 'react';
  * */
 export const useOnce = (task: Function, waitFor: unknown[]) => {
     const [alreadyRun, setAlreadyRun] = useState(false);
-    const isReady = (dependencies: unknown[]) => {
-        return dependencies.every((dep) => dep !== undefined);
-    };
+    const isReady = waitFor.every((dep) => dep !== undefined);
     useEffect(() => {
-        if (!alreadyRun && isReady(waitFor)) {
+        if (!alreadyRun && isReady) {
             task();
             setAlreadyRun(true);
         }
-    }, [alreadyRun, waitFor, task]);
+    }, [alreadyRun, isReady, task]);
 };
