@@ -11,7 +11,7 @@ import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
 import { Interview } from '@root/fixtures/articles/Interview';
-import { KnowledgeQuiz } from '@root/fixtures/articles/KnowledgeQuiz';
+import { KnowledgeQuiz } from 'fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
