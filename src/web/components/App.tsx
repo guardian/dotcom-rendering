@@ -34,7 +34,6 @@ import { Portal } from '@frontend/web/components/Portal';
 import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
-import { Figure } from '@root/src/web/components/Figure';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -395,21 +394,19 @@ export const App = ({ CAPI, NAV }: Props) => {
 					root="quiz-atom"
 					index={quizAtoms.quizIndex}
 				>
-					<Figure>
-						{quizAtoms.quizType === 'personality' &&
-						quizAtoms.resultBuckets ? (
-							<PersonalityQuizAtom
-								id={quizAtoms.id}
-								questions={quizAtoms.questions}
-								resultBuckets={quizAtoms.resultBuckets}
-							/>
-						) : (
-							<KnowledgeQuizAtom
-								id={quizAtoms.id}
-								questions={quizAtoms.questions}
-							/>
-						)}
-					</Figure>
+					{quizAtoms.quizType === 'personality' &&
+					quizAtoms.resultBuckets ? (
+						<PersonalityQuizAtom
+							id={quizAtoms.id}
+							questions={quizAtoms.questions}
+							resultBuckets={quizAtoms.resultBuckets}
+						/>
+					) : (
+						<KnowledgeQuizAtom
+							id={quizAtoms.id}
+							questions={quizAtoms.questions}
+						/>
+					)}
 				</HydrateOnce>
 			))}
 			{NAV.subNavSections && (
