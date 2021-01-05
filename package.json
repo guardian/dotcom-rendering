@@ -52,7 +52,7 @@
     "@guardian/src-link": "^2.7.1",
     "@guardian/src-radio": "^2.5.0",
     "@guardian/src-svgs": "^2.8.1",
-    "@guardian/src-text-area": "^2.5.0",
+    "@guardian/src-text-area": "^2.8.1",
     "@guardian/src-text-input": "^2.7.1",
     "@guardian/types": "github:guardian/types#semver:^1.0.0",
     "@types/jsdom": "^16.2.5",
