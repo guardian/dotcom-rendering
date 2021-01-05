@@ -18,8 +18,6 @@ jobs:
                       url: http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash
                     - format: Immersive
                       url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
-                    - format: Labs
-                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
                     - format: Feature
                       url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
                     - format: Gallery
@@ -28,8 +26,6 @@ jobs:
                       url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
                     - format: Review
                       url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
-                    - format: ImmersiveLab
-                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
                     - format: Analysis
                       url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
 
@@ -78,8 +74,6 @@ jobs:
                       url: http://localhost:8080/uk-news/2020/nov/12/stonehenge-road-tunnel-given-go-ahead-despite-backlash
                     - format: Immersive
                       url: 'http://localhost:8080/news/2020/nov/12/western-travel-influencers-social-media-pakistan-politics'
-                    - format: Labs
-                      url: 'http://localhost:8080/full-of-beanz/2020/jan/30/healthy-eating-seven-small-changes-that-can-make-a-big-difference'
                     - format: Feature
                       url: 'http://localhost:8080/fashion/2020/nov/12/rainbow-bright-how-the-symbol-of-optimism-and-joy-spread-across-our-clothes-homes-and-lives-in-2020'
                     - format: Gallery
@@ -88,8 +82,6 @@ jobs:
                       url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain'
                     - format: Review
                       url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation'
-                    - format: ImmersiveLab
-                      url: 'http://localhost:8080/empowering-business/2020/oct/31/why-would-i-ever-go-back-to-shopping-new-how-vintage-has-become-the-future-of-buying-ethically'
                     - format: Analysis
                       url: 'http://localhost:8080/us-news/2020/nov/13/joe-biden-cabinet-selection-trump-obstruction'
 
