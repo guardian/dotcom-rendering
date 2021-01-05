@@ -3,6 +3,7 @@ import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
 import { curatedContainerTest2 } from '@frontend/web/experiments/tests/curated-container-test';
+import { deeplyReadTest } from '@root/src/web/experiments/tests/deeply-read-test';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
@@ -16,5 +17,6 @@ export const tests: ABTest[] = [
 	curatedContainerTest2,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	globalEoyHeaderTest,
+    globalEoyHeaderTest,
+    deeplyReadTest,
 ];
