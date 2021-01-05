@@ -199,7 +199,6 @@ export const SeriesSectionLink = ({
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default: {
@@ -241,7 +240,6 @@ export const SeriesSectionLink = ({
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default: {

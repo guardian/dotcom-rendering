@@ -117,7 +117,6 @@ export const HeadlineByline = ({
 				case 'Live':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:
@@ -171,7 +170,6 @@ export const HeadlineByline = ({
 				case 'Live':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:

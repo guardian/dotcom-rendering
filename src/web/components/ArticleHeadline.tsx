@@ -232,7 +232,6 @@ export const ArticleHeadline = ({
 				case 'PhotoEssay':
 				case 'Article':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:
@@ -352,7 +351,6 @@ export const ArticleHeadline = ({
 				case 'PhotoEssay':
 				case 'Article':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:

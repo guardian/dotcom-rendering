@@ -85,7 +85,6 @@ const headlineStyles = (designType: DesignType, pillar: CAPIPillar) => {
 		case 'Recipe':
 		case 'MatchReport':
 		case 'GuardianView':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		case 'Comment':

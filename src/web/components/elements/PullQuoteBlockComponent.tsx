@@ -215,7 +215,6 @@ export const PullQuoteBlockComponent: React.FC<{
 		case 'Media':
 		case 'MatchReport':
 		case 'AdvertisementFeature':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'Article':
 		case 'Live':
