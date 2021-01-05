@@ -22,7 +22,6 @@ type DesignType =
     | 'MatchReport'
     | 'Interview'
     | 'GuardianView'
-    | 'GuardianLabs'
     | 'Quiz'
     | 'AdvertisementFeature'
     | 'PhotoEssay';
@@ -255,7 +254,7 @@ interface CAPIType {
     config: ConfigType;
     // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
     // in decideDesignType but need to allow the type here before then
-    designType: DesignType | "Immersive" | "SpecialReport";
+    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -288,7 +287,7 @@ interface CAPIType {
 type CAPIBrowserType = {
     // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
     // in decideDesignType but need to allow the type here before then
-    designType: DesignType | "Immersive" | "SpecialReport";
+    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
     pillar: CAPIPillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];

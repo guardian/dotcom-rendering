@@ -363,26 +363,6 @@ export const Quiz = () => (
 );
 Quiz.story = { name: 'Quiz' };
 
-export const GuardianLabs = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is the headline you see when design type is GuardianLabs"
-					display={Display.Standard}
-					designType="GuardianLabs"
-					pillar="news"
-					tags={[]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-GuardianLabs.story = { name: 'GuardianLabs' };
-
 export const Recipe = () => (
 	<Section>
 		<Flex>

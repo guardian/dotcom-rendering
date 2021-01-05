@@ -30,6 +30,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 
@@ -62,6 +63,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 
@@ -91,6 +93,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 
@@ -124,6 +127,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 
@@ -155,6 +159,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 
@@ -169,6 +174,7 @@ describe('MostViewedFooterData', () => {
 				sectionName="Section Name"
 				pillar="news"
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				design="Article"
 			/>,
 		);
 

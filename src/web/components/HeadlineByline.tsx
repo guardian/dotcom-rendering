@@ -10,7 +10,7 @@ import { Display } from '@guardian/types/Format';
 
 const wrapperStyles = css`
 	margin-left: 6px;
-	margin-top: 5px;
+	margin-top: 4px;
 	/* Without z-index here the byline appears behind the main image for showcase views */
 	z-index: 1;
 `;
@@ -117,7 +117,6 @@ export const HeadlineByline = ({
 				case 'Live':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:
@@ -171,7 +170,6 @@ export const HeadlineByline = ({
 				case 'Live':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:

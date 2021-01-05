@@ -2097,10 +2097,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.16.tgz#e827afb4ee06b599ee1b14069763cd26d6c3b560"
-  integrity sha512-GA6OWg48iUS83O/316uynHm4xvYzEp8efwRjfqLTfr0gTtcgsiUb/eebh94RgFiDQM5cylpmEeDzsWXGkE7N+w==
+"@guardian/braze-components@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.17.tgz#178e4740ab722873b9d0e6dd9d836f1e153d5ada"
+  integrity sha512-xB+cAwaM/iSJwyC/rM1cjEkFX5Gx4JlFNS9HghFqHJb6u+k7B9oFdwQS6GhH7evZxbh2F3klTVpHT6lUD+vCUg==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
@@ -14684,10 +14684,10 @@ preact-render-to-string@^5.1.10:
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.3.1.tgz#70a2cc5484ca727c992216dfc528907d240e0a05"
-  integrity sha512-CaKtEY235GtuypRRvaMxM3PNy44OzQj8BO7plXbPwF+iJzNnUufgHtqRA6NbjeWnfy+cN1dP1MFTAGxJmCiPqQ==
+preact@^10.5.9:
+  version "10.5.9"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.9.tgz#8caba9288b4db1d593be2317467f8735e43cda0b"
+  integrity sha512-X4m+4VMVINl/JFQKALOCwa3p8vhMAhBvle0hJ/W44w/WWfNb2TA7RNicDV3K2dNVs57f61GviEnVLiwN+fxiIg==
 
 prebuild-install@^5.3.0:
   version "5.3.0"

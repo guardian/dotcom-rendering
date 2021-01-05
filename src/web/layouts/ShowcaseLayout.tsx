@@ -201,7 +201,6 @@ const PositionHeadline = ({
 		case 'Recipe':
 		case 'MatchReport':
 		case 'GuardianView':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		case 'Feature':

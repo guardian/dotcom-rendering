@@ -96,6 +96,7 @@ interface Props {
 	pillar: CAPIPillar;
 	ajaxUrl: string;
 	display: Display;
+	design: DesignType;
 }
 
 export const MostViewedFooter = ({
@@ -103,6 +104,7 @@ export const MostViewedFooter = ({
 	pillar,
 	ajaxUrl,
 	display,
+	design,
 }: Props) => {
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
@@ -139,6 +141,7 @@ export const MostViewedFooter = ({
 								sectionName={sectionName}
 								pillar={pillar}
 								ajaxUrl={ajaxUrl}
+								design={design}
 							/>
 						</Suspense>
 					</Lazy>
