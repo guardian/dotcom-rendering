@@ -73,7 +73,6 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 		case 'PhotoEssay':
 		case 'Recipe':
 		case 'MatchReport':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		case 'Feature':

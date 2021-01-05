@@ -25,7 +25,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
                 case 'Article':
                 case 'MatchReport':
                 case 'GuardianView':
-                case 'GuardianLabs':
                 case 'Quiz':
                 case 'AdvertisementFeature':
                 case 'Comment':

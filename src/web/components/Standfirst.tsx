@@ -63,7 +63,6 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 				case 'Media':
 				case 'MatchReport':
 				case 'AdvertisementFeature':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'Article':
 				case 'Live':
@@ -104,7 +103,6 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 				case 'PhotoEssay':
 				case 'MatchReport':
 				case 'AdvertisementFeature':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'Article':
 				case 'Live':
