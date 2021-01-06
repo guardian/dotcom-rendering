@@ -138,7 +138,7 @@ export const MostViewedFooter = ({
 			>
 				<section className={asideWidth}>
 					{inDeeplyReadTestVariant ? (
-						<h2 className={headingStyles}>Accross The Guardian</h2>
+						<h2 className={headingStyles}>Across The Guardian</h2>
 					) : (
 						<h2 className={headingStyles}>Most popular</h2>
 					)}
