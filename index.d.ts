@@ -565,6 +565,7 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
     brazeApiKey?: string;
 }
 
@@ -600,6 +601,7 @@ interface ConfigTypeBrowser {
     switches: CAPIType['config']['switches'];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
 }
 
 interface GADataType {
