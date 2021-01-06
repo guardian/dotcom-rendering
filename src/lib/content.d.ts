@@ -554,6 +554,10 @@ interface CampaignFieldSelect extends CampaignField {
 	}[];
 }
 
+// -------------------------------------
+// Quiz
+// -------------------------------------
+
 type AnswerType = {
 	id: string;
 	text: string;
