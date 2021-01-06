@@ -120,6 +120,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 							id={`tabs-popular-${i}-tab`}
 							data-cy={`tab-heading-${i}`}
 							key={`tabs-popular-${i}-tab`}
+							data-link-name={tab.heading}
 						>
 							<button
 								className={tabButton}
