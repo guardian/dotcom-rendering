@@ -8,7 +8,7 @@ import CleanCSS from 'clean-css';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Compiler, Configuration, Resolve } from 'webpack';
 import webpack from 'webpack';
-import ManifestPlugin from 'webpack-manifest-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import nodeExternals from 'webpack-node-externals';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 
@@ -135,7 +135,7 @@ export const clientConfig: Configuration = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].js',
 	},
-	plugins: [new ManifestPlugin({ writeToFileEmit: true })],
+	plugins: [new WebpackManifestPlugin({ writeToFileEmit: true })],
 	resolve: resolve('clientDev'),
 	devServer: {
 		publicPath: '/assets/',
@@ -200,7 +200,7 @@ const clientConfigProduction = {
 	mode: 'production',
 	devtool: false,
 	plugins: [
-		new ManifestPlugin(),
+		new WebpackManifestPlugin(),
 		new HtmlWebpackPlugin({
 			meta: {
 				'Content-Security-Policy': {
