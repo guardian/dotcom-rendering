@@ -77,7 +77,7 @@ const Byline: FC<Props> = ({ item }) => {
 		<div css={styles(kickerColor)}>
 			<address>{renderText(byline, kickerColor)}</address>
 			<span className="js-share-button" role="button">
-				<ShareIcon platform={Platform.ios} />
+				<ShareIcon />
 			</span>
 		</div>
 	));

@@ -1,4 +1,4 @@
-import { Platform, PlatformMessageEvent } from './editionEvents';
+// import { Platform, PlatformMessageEvent } from './editionEvents';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { ShareIcon } from 'components/editions/shareIcon';
@@ -9,52 +9,49 @@ declare global {
 		ReactNativeWebView?: {
 			postMessage: (data: string) => void;
 		};
+
+		sendPing?: (detail: any) => void;
 	}
 }
 
+const prettyLog = (message: string, data: any) => {
+	const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
+	console.log(
+		`${message}
+${JSON.stringify(parsedData, null, 2)}`,
+	);
+};
+
 if (process.env.NODE_ENV === 'development') {
-	const prettyLog = (data: string) =>
-		console.log(
-			'🕸 => 📲 Sending postMessage to React Native\n',
-			JSON.stringify(JSON.parse(data), undefined, 2),
-		);
+	const logMessage = '🕸 => 📲 Sending postMessage to React Native';
 	if (window.ReactNativeWebView !== undefined) {
 		window.ReactNativeWebView.postMessage = (data: string) => {
-			prettyLog(data);
+			prettyLog(logMessage, data);
 			window.ReactNativeWebView?.postMessage(data);
 		};
 	} else {
 		window.ReactNativeWebView = {
-			postMessage: (data: string) => prettyLog(data),
+			postMessage: (data: string) => prettyLog(logMessage, data),
 		};
 	}
 }
 
-const updatePlatform = (
-	event: MessageEventInit<PlatformMessageEvent>,
-): void => {
-	if (event.data?.type === 'platform' && event.data?.value in Platform) {
-		const shareButtonContainer = document.querySelector('.js-share-button');
-		ReactDOM.render(
-			h(ShareIcon, { platform: event.data.value }),
-			shareButtonContainer,
-		);
-	} else {
-		const shareButtonContainer = document.querySelector('.js-share-button');
-		ReactDOM.render(
-			h(ShareIcon, { platform: Platform.android }),
-			shareButtonContainer,
-		);
+window.sendPing = (detail: any) => {
+	if (process.env.NODE_ENV === 'development') {
+		prettyLog('📱 => 🕸 Receiving ping from React Native', detail);
 	}
+
+	let customEvent = new CustomEvent('editionsPing', { detail });
+	document.dispatchEvent(customEvent);
 };
+
+ReactDOM.render(h(ShareIcon), document.querySelector('.js-share-button'));
 
 window.ReactNativeWebView?.postMessage(
 	JSON.stringify({
 		type: 'platform',
 	}),
 );
-
-document.addEventListener('message', updatePlatform);
 
 document.querySelector('.js-share-button')?.addEventListener('click', () => {
 	window.ReactNativeWebView?.postMessage(
@@ -63,6 +60,3 @@ document.querySelector('.js-share-button')?.addEventListener('click', () => {
 		}),
 	);
 });
-
-// TODO:
-// Check if it's better to render the share icon component inside a useEffect instead of here
