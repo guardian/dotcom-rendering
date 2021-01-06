@@ -66,7 +66,7 @@ export const MostViewedFooterData = ({
 		'DeeplyReadTest',
 		'variant',
 	);
-	// const url = buildSectionUrl(ajaxUrl, pillar, sectionName);
+
 	const url = inDeeplyReadTestVariant
 		? buildDeeplyReadUrl(ajaxUrl, pillar)
 		: buildSectionUrl(ajaxUrl, pillar, sectionName);
