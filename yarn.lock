@@ -2235,10 +2235,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^0.4.5":
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.4.5.tgz#e603f23908f436309fc9caa9149468f2c8db4202"
-  integrity sha512-OJGK5x5UTQlmdauPAXJW00ZJVkeqgsdaixwkvBnM0D7BQWSAao/NM3nxLiX8OYaksXl4mkYhO4+XmJlVy29Y6Q==
+"@guardian/types@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.5.2.tgz#edde87dde496554cbcd32cb1bffe2baada591926"
+  integrity sha512-fQ5+cyQQGhQ4qHuzMvaGLsHNxwz82dlb3nYKEahrhg5K3Hyf4jno0pPTxUVMM80uNL9xE8g7843LpkKp6YpE/w==
   dependencies:
     typescript "^3.8.3"
 
