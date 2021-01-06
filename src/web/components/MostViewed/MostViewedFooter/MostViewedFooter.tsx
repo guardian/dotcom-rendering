@@ -140,7 +140,7 @@ export const MostViewedFooter = ({
 					{inDeeplyReadTestVariant ? (
 						<h2 className={headingStyles}>Accross The Guardian</h2>
 					) : (
-						<h2 className={headingStyles}>Most Popular</h2>
+						<h2 className={headingStyles}>Most popular</h2>
 					)}
 				</section>
 				<section className={stackBelow('desktop')}>
