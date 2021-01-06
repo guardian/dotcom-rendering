@@ -93,37 +93,9 @@ describe('hasRequiredConsents', () => {
 });
 
 describe('canShowPreChecks', () => {
-	describe('when the switch is off', () => {
-		it('returns false', () => {
-			const result = canShowPreChecks({
-				brazeSwitch: false,
-				apiKey: 'abcde',
-				shouldHideSupportMessaging: true,
-				pageConfig: { isPaidContent: false },
-			});
-
-			expect(result).toBe(false);
-		});
-	});
-
-	describe('when the api key is empty', () => {
-		it('returns false', () => {
-			const result = canShowPreChecks({
-				brazeSwitch: true,
-				apiKey: '',
-				shouldHideSupportMessaging: true,
-				pageConfig: { isPaidContent: false },
-			});
-
-			expect(result).toBe(false);
-		});
-	});
-
 	describe('when not a supporter', () => {
 		it('returns false', () => {
 			const result = canShowPreChecks({
-				brazeSwitch: true,
-				apiKey: 'abcde',
 				shouldHideSupportMessaging: false,
 				pageConfig: { isPaidContent: false },
 			});
@@ -135,8 +107,6 @@ describe('canShowPreChecks', () => {
 	describe('when viewing paid content', () => {
 		it('returns false', () => {
 			const result = canShowPreChecks({
-				brazeSwitch: true,
-				apiKey: 'abcde',
 				shouldHideSupportMessaging: true,
 				pageConfig: { isPaidContent: true },
 			});
@@ -148,8 +118,6 @@ describe('canShowPreChecks', () => {
 	describe('when all checks pass', () => {
 		it('returns true', () => {
 			const result = canShowPreChecks({
-				brazeSwitch: true,
-				apiKey: 'abcde',
 				shouldHideSupportMessaging: true,
 				pageConfig: { isPaidContent: false },
 			});

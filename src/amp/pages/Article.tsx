@@ -53,7 +53,7 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const designType = decideDesignType(articleData);
+	const designType = decideDesignType(articleData.designType);
 	const pillar = decidePillar({
 		pillar: articleData.pillar,
 		design: designType,

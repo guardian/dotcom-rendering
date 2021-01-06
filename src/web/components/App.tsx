@@ -42,6 +42,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
+import { toTypesPillar } from '@root/src/lib/format';
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -283,7 +284,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const designType: DesignType = decideDesignType(CAPI);
+	const designType: DesignType = decideDesignType(CAPI.designType);
 	const pillar = decidePillar({
 		pillar: CAPI.pillar,
 		design: designType,
@@ -448,7 +449,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={qandaAtom.html}
 						image={qandaAtom.img}
 						credit={qandaAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'QANDA_ATOM',
 							qandaAtom.id,
@@ -475,7 +476,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={guideAtom.html}
 						image={guideAtom.img}
 						credit={guideAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'GUIDE_ATOM',
 							guideAtom.id,
@@ -505,7 +506,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={profileAtom.html}
 						image={profileAtom.img}
 						credit={profileAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'PROFILE_ATOM',
 							profileAtom.id,
@@ -534,7 +535,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						title={timelineAtom.title}
 						events={timelineAtom.events}
 						description={timelineAtom.description}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'TIMELINE_ATOM',
 							timelineAtom.id,
