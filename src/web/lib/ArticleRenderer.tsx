@@ -149,19 +149,24 @@ export const ArticleRenderer: React.FC<{
 				case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 					return (
 						<Figure id={`quiz-atom-${i}`}>
-							{element.quizType === 'personality' &&
-							element.resultBuckets ? (
-								<PersonalityQuizAtom
-									id={element.id}
-									questions={element.questions}
-									resultBuckets={element.resultBuckets}
-								/>
-							) : (
-								<KnowledgeQuizAtom
-									id={element.id}
-									questions={element.questions}
-								/>
-							)}
+							<>
+								{element.quizType === 'personality' &&
+									element.resultBuckets && (
+										<PersonalityQuizAtom
+											id={element.id}
+											questions={element.questions}
+											resultBuckets={
+												element.resultBuckets
+											}
+										/>
+									)}
+								{element.quizType === 'knowledge' && (
+									<KnowledgeQuizAtom
+										id={element.id}
+										questions={element.questions}
+									/>
+								)}
+							</>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
