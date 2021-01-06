@@ -18,13 +18,14 @@ export const QuizBlockComponent = ({
 	quizType,
 }: Props) => (
 	<>
-		{quizType === 'personality' && resultBuckets ? (
+		{quizType === 'personality' && resultBuckets && (
 			<PersonalityQuizAtom
 				id={id}
 				questions={questions}
 				resultBuckets={resultBuckets}
 			/>
-		) : (
+		)}
+		{quizType === 'knowledge' && (
 			<KnowledgeQuizAtom id={id} questions={questions} />
 		)}
 	</>
