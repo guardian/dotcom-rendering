@@ -124,7 +124,7 @@
     "ts-node": "^9.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
+    "webpack-dev-server": "^3.11.1",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-node-externals": "^2.5.2",
     "winston": "^3.3.3",
