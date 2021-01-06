@@ -5,6 +5,7 @@ import {
 	responseWithOneTab,
 } from '@root/fixtures/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
+import { ABProvider } from '@guardian/ab-react';
 import { MostViewedFooterData } from './MostViewedFooterData';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,6 +14,20 @@ const useApi: any = useApi_;
 jest.mock('../../../lib/api', () => ({
 	useApi: jest.fn(),
 }));
+
+const AbProvider: React.FC = ({ children }) => {
+	return (
+		<ABProvider
+			mvtMaxValue={1000000}
+			mvtId={1234}
+			pageIsSensitive={false}
+			abTestSwitches={{}}
+			arrayOfTestObjects={[]}
+		>
+			{children}
+		</ABProvider>
+	);
+};
 
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
@@ -26,12 +41,14 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { getByText, getAllByText, getByTestId } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		// Calls api once only
@@ -59,12 +76,14 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { getByTestId, getByText } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		const firstHeading = responseWithTwoTabs.tabs[0].heading;
@@ -89,12 +108,14 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithOneTab });
 
 		const { queryByText } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		expect(
@@ -123,12 +144,14 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { getByText } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		expect(getByText('Live')).toBeInTheDocument();
@@ -155,12 +178,14 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { queryByText } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		expect(queryByText('Live')).not.toBeInTheDocument();
@@ -170,12 +195,14 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { asFragment } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				pillar="news"
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				design="Article"
-			/>,
+			<AbProvider>
+				<MostViewedFooterData
+					sectionName="Section Name"
+					pillar="news"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					design="Article"
+				/>
+			</AbProvider>,
 		);
 
 		// Renders tab data link name
