@@ -566,7 +566,6 @@ type QuizAtomResultBucketType = {
 	id: string;
 	title: string;
 	description: string;
-	// assets TODO:
 };
 
 type QuestionType = {

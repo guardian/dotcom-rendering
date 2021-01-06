@@ -1083,7 +1083,8 @@
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets"
+                "resultBuckets",
+                "url"
             ]
         },
         "CodeBlockElement": {
