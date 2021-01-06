@@ -2,10 +2,6 @@ import type { FC, ReactElement } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Platform } from '../../client/editionEvents';
 
-type Props = {
-	platform: Platform;
-};
-
 const IOSShareIcon = (): ReactElement => (
 	<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<circle cx="15" cy="15" r="14.5" />
@@ -24,7 +20,30 @@ const AndroidShareIcon = (): ReactElement => (
 	</svg>
 );
 
-export const ShareIcon: FC<Props> = () => {
-	const [platform, setPlatform] = useState(Platform.ios);
+export const ShareIcon: FC = () => {
+	const platform = usePlatform('ios');
+
 	return platform === 'ios' ? <IOSShareIcon /> : <AndroidShareIcon />;
+};
+
+const usePlatform = (defaultPlatform: string) => {
+	const [platform, setPlatform] = useState(defaultPlatform);
+
+	const handlePlatform = (event: any) => {
+		if (
+			event.detail?.type === 'platform' &&
+			event.detail?.value in Platform
+		) {
+			setPlatform(event.detail?.value);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('editionsPing', handlePlatform);
+
+		return () =>
+			document.removeEventListener('editionsPing', handlePlatform);
+	}, []);
+
+	return platform;
 };
