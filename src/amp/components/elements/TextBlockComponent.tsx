@@ -75,9 +75,10 @@ const textStyleLabs = css`
 export const TextBlockComponent: React.FC<{
 	html: string;
 	pillar: CAPIPillar;
-}> = ({ html, pillar }) => (
+	designType: DesignType;
+}> = ({ html, pillar, designType }) => (
 	<span
-		className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
+		className={composeLabsCSS(designType, TextStyle(pillar), textStyleLabs)}
 		dangerouslySetInnerHTML={{
 			__html: sanitise(html),
 		}}

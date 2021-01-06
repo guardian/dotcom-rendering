@@ -180,7 +180,7 @@ export const Gallery = () => {
 						headlineText="Rich link headline"
 						contentType="gallery"
 						url=""
-						pillar="labs"
+						pillar="news"
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}

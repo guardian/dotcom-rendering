@@ -61,7 +61,8 @@ export const TopMetaNews: React.FC<{
 	articleData: ArticleModel;
 	adTargeting?: AdTargeting;
 	pillar: CAPIPillar;
-}> = ({ articleData, adTargeting, pillar }) => {
+	designType: DesignType;
+}> = ({ articleData, adTargeting, pillar, designType }) => {
 	const { branding } = articleData.commercialProperties[
 		articleData.editionId
 	];
@@ -93,7 +94,11 @@ export const TopMetaNews: React.FC<{
 				starRating={articleData.starRating}
 			/>
 
-			<Standfirst text={articleData.standfirst} pillar={pillar} />
+			<Standfirst
+				text={articleData.standfirst}
+				pillar={pillar}
+				designType={designType}
+			/>
 
 			{branding && <Branding branding={branding} pillar={pillar} />}
 

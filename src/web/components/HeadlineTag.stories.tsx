@@ -27,7 +27,7 @@ export const wrappedTagNameStory = () => {
 		>
 			<HeadlineTag
 				tagText="Very long tag name with enough text to wrap to a second line"
-				pillar="labs"
+				pillar="news"
 			/>
 		</div>
 	);

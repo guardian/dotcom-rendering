@@ -42,11 +42,12 @@ const subHeadingStyleLabs = css`
 export const SubheadingBlockComponent: React.FC<{
 	html: string;
 	pillar: CAPIPillar;
+	designType: DesignType;
 	isImmersive: boolean;
-}> = ({ html, pillar, isImmersive }) => (
+}> = ({ html, pillar, designType, isImmersive }) => (
 	<span
 		className={composeLabsCSS(
-			pillar,
+			designType,
 			cx(style(pillar), { [immersiveBodyStyle]: isImmersive }),
 			subHeadingStyleLabs,
 		)}

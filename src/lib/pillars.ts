@@ -51,7 +51,6 @@ export const pillarNames: CAPIPillar[] = [
 	'sport',
 	'culture',
 	'lifestyle',
-	'labs',
 ];
 
 export const augmentedLabs: PillarColours = {

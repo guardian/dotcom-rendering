@@ -70,7 +70,7 @@ Banned.story = { name: 'when banned' };
 export const NoDisplayName = () => {
 	return (
 		<SignedInAs
-			pillar="labs"
+			pillar="news"
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			user={{

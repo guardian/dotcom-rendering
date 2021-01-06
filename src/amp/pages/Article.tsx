@@ -31,7 +31,14 @@ const Body: React.SFC<{
 		data.tags.find((tag) => tag.id === 'tone/minutebyminute') !== undefined;
 
 	if (isLiveBlog) {
-		return <BodyLiveblog pillar={pillar} data={data} config={config} />;
+		return (
+			<BodyLiveblog
+				pillar={pillar}
+				designType={designType}
+				data={data}
+				config={config}
+			/>
+		);
 	}
 
 	return (

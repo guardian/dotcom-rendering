@@ -70,9 +70,10 @@ const updateButtonStyle = css`
 // updates, but only on initial page load.
 export const Body: React.FC<{
 	pillar: CAPIPillar;
+	designType: DesignType;
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ pillar, data, config }) => {
+}> = ({ pillar, designType, data, config }) => {
 	const url = `${data.guardianBaseURL}/${data.pageId}`;
 	const isFirstPage = data.pagination
 		? data.pagination.currentPage === 1
@@ -100,6 +101,7 @@ export const Body: React.FC<{
 				<div items="">
 					<Blocks
 						pillar={pillar}
+						designType={designType}
 						blocks={data.blocks}
 						// stuff for ads
 						edition={data.editionId}

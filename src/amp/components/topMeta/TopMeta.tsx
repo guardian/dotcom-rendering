@@ -17,15 +17,26 @@ export const TopMeta: React.SFC<{
 			articleData={data}
 			adTargeting={adTargeting}
 			pillar={pillar}
+			designType={designType}
 		/>,
 	);
 
 	// Extend defaultTopMeta with custom topMeta for some designTypes
 	const designTypeTopMeta: DesignTypesObj = {
 		...defaultTopMeta,
-		Comment: <TopMetaOpinion articleData={data} pillar={pillar} />,
+		Comment: (
+			<TopMetaOpinion
+				articleData={data}
+				pillar={pillar}
+				designType={designType}
+			/>
+		),
 		AdvertisementFeature: (
-			<TopMetaPaidContent articleData={data} pillar={pillar} />
+			<TopMetaPaidContent
+				articleData={data}
+				pillar={pillar}
+				designType={designType}
+			/>
 		),
 	};
 

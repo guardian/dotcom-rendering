@@ -73,6 +73,7 @@ export const Body: React.FC<{
 	const elementsWithoutAds = Elements(
 		capiElements,
 		pillar,
+		designType,
 		data.isImmersive,
 		adTargeting,
 	);

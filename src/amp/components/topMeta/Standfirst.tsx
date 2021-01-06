@@ -39,12 +39,13 @@ const labsStyle = css`
 export const Standfirst: React.SFC<{
 	text: string;
 	pillar: CAPIPillar;
-}> = ({ text, pillar }) => {
+	designType: DesignType;
+}> = ({ text, pillar, designType }) => {
 	return (
 		<div
 			data-print-layout="hide"
 			className={composeLabsCSS(
-				pillar,
+				designType,
 				cx(standfirstCss(pillar)),
 				labsStyle,
 			)}

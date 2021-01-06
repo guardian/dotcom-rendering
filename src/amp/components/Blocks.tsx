@@ -40,6 +40,7 @@ const clearBoth = css`
 export const Blocks: React.SFC<{
 	blocks: Block[];
 	pillar: CAPIPillar;
+	designType: DesignType;
 	edition: Edition;
 	section?: string;
 	contentType: string;
@@ -50,6 +51,7 @@ export const Blocks: React.SFC<{
 }> = ({
 	blocks,
 	pillar,
+	designType,
 	edition,
 	section,
 	contentType,
@@ -76,7 +78,7 @@ export const Blocks: React.SFC<{
 					</a>
 				)}
 				{block.title && <h2>{block.title}</h2>}
-				{Elements(block.elements, pillar, false)}
+				{Elements(block.elements, pillar, designType, false)}
 				{/* Some elements float (e.g. rich links) */}
 				<div className={clearBoth} />{' '}
 				{block.blockLastUpdatedDisplay && (

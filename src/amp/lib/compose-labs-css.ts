@@ -1,7 +1,8 @@
 import { cx } from 'emotion';
 
 export const composeLabsCSS = (
-	pillar: CAPIPillar,
+	designType: DesignType,
 	baseCSS: string,
 	labsCSS: string,
-): string => (pillar === 'labs' ? cx(baseCSS, labsCSS) : baseCSS);
+): string =>
+	designType === 'AdvertisementFeature' ? cx(baseCSS, labsCSS) : baseCSS;

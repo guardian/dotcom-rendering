@@ -83,7 +83,8 @@ const Headline: React.FC<{
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
 	pillar: CAPIPillar;
-}> = ({ articleData, pillar }) => {
+	designType: DesignType;
+}> = ({ articleData, pillar, designType }) => {
 	const { branding } = articleData.commercialProperties[
 		articleData.editionId
 	];
@@ -100,7 +101,11 @@ export const TopMetaPaidContent: React.FC<{
 
 			{!!branding && <PaidForByLogo branding={branding} />}
 
-			<Standfirst text={articleData.standfirst} pillar={pillar} />
+			<Standfirst
+				text={articleData.standfirst}
+				pillar={pillar}
+				designType={designType}
+			/>
 
 			<Byline
 				byline={articleData.author.byline}

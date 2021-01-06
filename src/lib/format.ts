@@ -1,19 +1,19 @@
-import { Pillar as TypesPillar } from '@guardian/types/Format';
+import { Pillar } from '@guardian/types/Format';
 
-export const toTypesPillar = (p: CAPIPillar): TypesPillar => {
+export const toTypesPillar = (p: CAPIPillar): Pillar => {
 	switch (p) {
 		case 'news':
-			return TypesPillar.News;
+			return Pillar.News;
 		case 'opinion':
-			return TypesPillar.Opinion;
+			return Pillar.Opinion;
 		case 'sport':
-			return TypesPillar.Sport;
+			return Pillar.Sport;
 		case 'culture':
-			return TypesPillar.Culture;
+			return Pillar.Culture;
 		case 'lifestyle':
-			return TypesPillar.Lifestyle;
-		case 'labs': // unsupported
+			return Pillar.Lifestyle;
+		case 'labs':
 		default:
-			return TypesPillar.News;
+			return Pillar.News;
 	}
 };

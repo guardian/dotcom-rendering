@@ -28,6 +28,7 @@ import { clean } from '@root/src/model/clean';
 export const Elements = (
 	elements: CAPIElement[],
 	pillar: CAPIPillar,
+	designType: DesignType,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {
@@ -44,6 +45,7 @@ export const Elements = (
 						key={i}
 						html={element.html}
 						pillar={pillar}
+						designType={designType}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -160,6 +162,7 @@ export const Elements = (
 						key={i}
 						html={element.html}
 						pillar={pillar}
+						designType={designType}
 						isImmersive={isImmersive}
 					/>
 				);
@@ -169,6 +172,7 @@ export const Elements = (
 						key={i}
 						html={element.html}
 						pillar={pillar}
+						designType={designType}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.TimelineBlockElement':

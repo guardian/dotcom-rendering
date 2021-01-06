@@ -103,7 +103,8 @@ const BylineMeta: React.SFC<{
 export const TopMetaOpinion: React.FC<{
 	articleData: ArticleModel;
 	pillar: CAPIPillar;
-}> = ({ articleData, pillar }) => {
+	designType: DesignType;
+}> = ({ articleData, pillar, designType }) => {
 	const { branding } = articleData.commercialProperties[
 		articleData.editionId
 	];
@@ -127,7 +128,11 @@ export const TopMetaOpinion: React.FC<{
 
 			<BylineMeta articleData={articleData} pillar={pillar} />
 
-			<Standfirst text={articleData.standfirst} pillar={pillar} />
+			<Standfirst
+				text={articleData.standfirst}
+				pillar={pillar}
+				designType={designType}
+			/>
 
 			<TopMetaExtras
 				sharingUrls={getSharingUrls(
