@@ -1,6 +1,9 @@
-type Platform = 'ios' | 'android';
+export enum Platform {
+	ios = 'ios',
+	android = 'android',
+}
 
-export type PlatformMessageEvent = {
+export type PlatformMessageEvent = Event & {
 	type: 'platform';
 	value: Platform;
 };
