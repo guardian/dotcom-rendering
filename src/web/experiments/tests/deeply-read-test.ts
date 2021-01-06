@@ -7,7 +7,7 @@ export const deeplyReadTest: ABTest = {
 	author: 'nitro-marky',
 	description:
 		'Tests an onward hypothesis by replacing the second tab in the Most Popular container with deeply read items.',
-	audience: 0.1,
+	audience: 0.01,
 	audienceOffset: 0,
 	successMeasure: 'Increased CTR on article pages',
 	audienceCriteria: 'Everyone',
