@@ -1,6 +1,9 @@
+import {
+	isPlatformMessageEvent,
+	pingEditionsNative,
+} from 'client/editionsCommunication';
 import type { FC, ReactElement } from 'react';
 import React, { useState, useEffect } from 'react';
-import { Platform } from '../../client/editionEvents';
 
 const IOSShareIcon = (): ReactElement => (
 	<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,19 +25,20 @@ const AndroidShareIcon = (): ReactElement => (
 
 export const ShareIcon: FC = () => {
 	const platform = usePlatform('ios');
-
-	return platform === 'ios' ? <IOSShareIcon /> : <AndroidShareIcon />;
+	return (
+		<div onClick={() => pingEditionsNative({ kind: 'share' })}>
+			{platform === 'ios' ? <IOSShareIcon /> : <AndroidShareIcon />}
+		</div>
+	);
 };
 
 const usePlatform = (defaultPlatform: string) => {
 	const [platform, setPlatform] = useState(defaultPlatform);
 
-	const handlePlatform = (event: any) => {
-		if (
-			event.detail?.type === 'platform' &&
-			event.detail?.value in Platform
-		) {
-			setPlatform(event.detail?.value);
+	const handlePlatform = (event: CustomEventInit<any>) => {
+		if (isPlatformMessageEvent(event)) {
+			console.log('isPlatformEvent true');
+			setPlatform(event.detail.value);
 		}
 	};
 
