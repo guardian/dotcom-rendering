@@ -31,11 +31,12 @@ export enum Platform {
 }
 
 export const isPlatformMessageEvent = (
-	customEvent: CustomEventInit,
+	customEvent: CustomEventInit<Message>,
 ): customEvent is CustomEvent<PlatformMessage> => {
 	if (
+		typeof customEvent === 'object' &&
 		customEvent.detail?.kind === 'platform' &&
-		customEvent.detail?.value in Platform
+		customEvent.detail.value in Platform
 	) {
 		return true;
 	}
@@ -43,7 +44,8 @@ export const isPlatformMessageEvent = (
 };
 
 const prettyLog = (logMessage: string, data: string | Message): void => {
-	const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
+	const parsedData: unknown =
+		typeof data === 'string' ? JSON.parse(data) : data;
 	console.log(
 		`%c${logMessage}
 ${JSON.stringify(parsedData, null, 2)}`,
