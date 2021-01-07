@@ -1,5 +1,3 @@
-import { Platform } from './editionEvents';
-
 // https://github.com/react-native-webview/react-native-webview/blob/master/src/WebViewTypes.ts#L963
 declare global {
 	interface Window {
@@ -26,6 +24,11 @@ type PlatformQueryMessage = {
 };
 
 type Message = ShareMessage | PlatformMessage | PlatformQueryMessage;
+
+export enum Platform {
+	IOS = 'IOS',
+	Android = 'Android',
+}
 
 export const isPlatformMessageEvent = (
 	customEvent: CustomEventInit<any>,

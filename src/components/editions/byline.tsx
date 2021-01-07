@@ -3,7 +3,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
-import { Platform } from 'client/editionEvents';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';

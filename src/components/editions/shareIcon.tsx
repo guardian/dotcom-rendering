@@ -1,6 +1,7 @@
 import {
 	isPlatformMessageEvent,
 	pingEditionsNative,
+	Platform,
 } from 'client/editionsCommunication';
 import type { FC, ReactElement } from 'react';
 import React, { useState, useEffect } from 'react';
@@ -43,13 +44,17 @@ const AndroidShareIcon = (): ReactElement => (
 );
 
 export const ShareIcon: FC = () => {
-	const platform = usePlatform('ios');
+	const platform = usePlatform(Platform.IOS);
 	useEffect(() => {
 		pingEditionsNative({ kind: 'platform-query' });
 	}, []);
 	return (
 		<div onClick={() => pingEditionsNative({ kind: 'share' })}>
-			{platform === 'ios' ? <IOSShareIcon /> : <AndroidShareIcon />}
+			{platform === Platform.IOS ? (
+				<IOSShareIcon />
+			) : (
+				<AndroidShareIcon />
+			)}
 		</div>
 	);
 };
