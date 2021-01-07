@@ -31,18 +31,18 @@ export enum Platform {
 }
 
 export const isPlatformMessageEvent = (
-	customEvent: CustomEventInit<any>,
+	customEvent: CustomEventInit,
 ): customEvent is CustomEvent<PlatformMessage> => {
 	if (
-		customEvent.detail.kind === 'platform' &&
-		customEvent.detail.value in Platform
+		customEvent.detail?.kind === 'platform' &&
+		customEvent.detail?.value in Platform
 	) {
 		return true;
 	}
 	return false;
 };
 
-const prettyLog = (logMessage: string, data: any) => {
+const prettyLog = (logMessage: string, data: string | Message): void => {
 	const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
 	console.log(
 		`%c${logMessage}
@@ -51,7 +51,7 @@ ${JSON.stringify(parsedData, null, 2)}`,
 	);
 };
 
-export const pingEditionsNative = (message: Message) => {
+export const pingEditionsNative = (message: Message): void => {
 	const serializedMessage = JSON.stringify(message);
 
 	if (process.env.NODE_ENV === 'development') {
@@ -64,7 +64,7 @@ export const pingEditionsNative = (message: Message) => {
 	window.ReactNativeWebView?.postMessage(serializedMessage);
 };
 
-const pingEditionsRendering = (message: Message) => {
+const pingEditionsRendering = (message: Message): void => {
 	if (process.env.NODE_ENV === 'development') {
 		prettyLog(
 			'📱 => 🎨  Pinging Editions Rendering from Editions native with message: ',
@@ -72,7 +72,7 @@ const pingEditionsRendering = (message: Message) => {
 		);
 	}
 
-	let customEvent = new CustomEvent('editionsPing', { detail: message });
+	const customEvent = new CustomEvent('editionsPing', { detail: message });
 	document.dispatchEvent(customEvent);
 };
 
@@ -86,7 +86,7 @@ export const pingEditionsRenderingJsString = (message: Message): string => {
     `;
 };
 
-export const initPingEditionsRendering = () => {
+export const initPingEditionsRendering = (): void => {
 	window.pingEditionsRendering = pingEditionsRendering;
 	window.pingEditionsRenderingJsString = pingEditionsRenderingJsString;
 };
