@@ -4,12 +4,12 @@ import {
 	Platform,
 } from 'client/editionsCommunication';
 import type { FC, ReactElement } from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const usePlatform = (defaultPlatform: string) => {
 	const [platform, setPlatform] = useState(defaultPlatform);
 
-	const handlePlatform = (event: CustomEventInit<any>) => {
+	const handlePlatform = (event: CustomEventInit) => {
 		if (isPlatformMessageEvent(event)) {
 			setPlatform(event.detail.value);
 		}
