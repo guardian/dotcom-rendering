@@ -14,7 +14,7 @@ import { Dateline } from './Dateline';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	pageId: string;
 	webTitle: string;
@@ -102,16 +102,16 @@ const metaNumbers = css`
 
 const metaContainer = ({
 	display,
-	designType,
+	design,
 }: {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 }) => {
 	switch (display) {
 		case Display.Immersive:
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
+			switch (design) {
 				case 'PhotoEssay':
 					return css`
 						${until.phablet} {
@@ -168,13 +168,13 @@ const getAuthorName = (tags: TagType[]) => {
 	return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (designType: DesignType, display: Display) => {
+const shouldShowAvatar = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
+			switch (design) {
 				case 'Feature':
 				case 'Review':
 				case 'Recipe':
@@ -197,13 +197,13 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
 	}
 };
 
-const shouldShowContributor = (designType: DesignType, display: Display) => {
+const shouldShowContributor = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 					return false;
@@ -276,7 +276,7 @@ const RowBelowLeftCol = ({
 export const ArticleMeta = ({
 	branding,
 	display,
-	designType,
+	design,
 	pillar,
 	pageId,
 	webTitle,
@@ -292,10 +292,9 @@ export const ArticleMeta = ({
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar =
-		onlyOneContributor && shouldShowAvatar(designType, display);
+	const showAvatar = onlyOneContributor && shouldShowAvatar(design, display);
 	return (
-		<div className={metaContainer({ display, designType })}>
+		<div className={metaContainer({ display, design })}>
 			<div className={cx(meta)}>
 				{branding && <Branding branding={branding} pillar={pillar} />}
 				<RowBelowLeftCol>
@@ -310,9 +309,9 @@ export const ArticleMeta = ({
 							</AvatarContainer>
 						)}
 						<div>
-							{shouldShowContributor(designType, display) && (
+							{shouldShowContributor(design, display) && (
 								<Contributor
-									designType={designType}
+									design={design}
 									author={author}
 									tags={tags}
 									pillar={pillar}

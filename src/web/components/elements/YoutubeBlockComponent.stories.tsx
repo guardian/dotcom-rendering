@@ -46,7 +46,7 @@ export const Default = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -78,7 +78,7 @@ export const Vertical = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -112,7 +112,7 @@ export const Expired = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -147,7 +147,7 @@ export const WithOverlayImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -183,7 +183,7 @@ export const WithPosterImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -245,7 +245,7 @@ export const WithPosterAndOverlayImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"

@@ -14,7 +14,7 @@ import { Display } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	element: ImageBlockElement;
 	role: RoleType;
 	pillar: CAPIPillar;
@@ -210,7 +210,7 @@ const CaptionToggle = () => (
 
 export const ImageComponent = ({
 	display,
-	designType,
+	design,
 	element,
 	pillar,
 	hideCaption,
@@ -222,8 +222,7 @@ export const ImageComponent = ({
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
-	const isNotOpinion =
-		designType !== 'Comment' && designType !== 'GuardianView';
+	const isNotOpinion = design !== 'Comment' && design !== 'GuardianView';
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
@@ -351,7 +350,7 @@ export const ImageComponent = ({
 								<div id="the-caption">
 									<Caption
 										display={display}
-										designType={designType}
+										design={design}
 										captionText={element.data.caption || ''}
 										pillar={pillar}
 										credit={element.data.credit}
@@ -373,7 +372,7 @@ export const ImageComponent = ({
 				<Hide when="below" breakpoint="tablet">
 					<Caption
 						display={display}
-						designType={designType}
+						design={design}
 						captionText={element.data.caption || ''}
 						pillar={pillar}
 						credit={element.data.credit}
@@ -384,7 +383,7 @@ export const ImageComponent = ({
 			) : (
 				<Caption
 					display={display}
-					designType={designType}
+					design={design}
 					captionText={element.data.caption || ''}
 					pillar={pillar}
 					credit={element.data.credit}

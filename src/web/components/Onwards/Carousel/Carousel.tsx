@@ -117,10 +117,7 @@ const cardImageStyle = css`
 	width: 258px;
 `;
 
-const headlineWrapperStyle = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-) => css`
+const headlineWrapperStyle = (design: Design, pillar: CAPIPillar) => css`
 	width: 90%;
 	min-height: 107px;
 
@@ -135,7 +132,7 @@ const headlineWrapperStyle = (
 	flex-direction: column;
 	justify-content: space-between;
 
-	${headlineBackgroundColour(designType, pillar)}
+	${headlineBackgroundColour(design, pillar)}
 `;
 
 /* const headlineWrapperFirstStyle = css`
@@ -144,13 +141,13 @@ const headlineWrapperStyle = (
     color: white;
 `;
  */
-const headlineStyle = (designType: DesignType, pillar: CAPIPillar) => css`
+const headlineStyle = (design: Design, pillar: CAPIPillar) => css`
 	${headline.xxxsmall()};
 	${from.desktop} {
 		${headline.xxsmall()};
 	}
 
-	${headlineColour(designType, pillar)};
+	${headlineColour(design, pillar)};
 
 	display: block;
 	padding: ${space[1]}px;
@@ -280,7 +277,7 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
-	const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
+	const kickerText = trail.design === 'Live' ? 'Live' : trail.kickerText;
 
 	return (
 		<a
@@ -294,14 +291,12 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
 				alt=""
 				role="presentation"
 			/>
-			<div
-				className={headlineWrapperStyle(trail.designType, trail.pillar)}
-			>
-				<h4 className={headlineStyle(trail.designType, trail.pillar)}>
+			<div className={headlineWrapperStyle(trail.design, trail.pillar)}>
+				<h4 className={headlineStyle(trail.design, trail.pillar)}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							designType={trail.designType}
+							design={trail.design}
 							pillar={trail.pillar}
 							showPulsingDot={trail.isLiveBlog}
 							inCard={true}
@@ -313,7 +308,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
 					webPublicationDate={trail.webPublicationDate}
 					showClock={true}
 					pillar={trail.pillar}
-					designType={trail.designType}
+					design={trail.design}
 				/>
 			</div>
 		</a>

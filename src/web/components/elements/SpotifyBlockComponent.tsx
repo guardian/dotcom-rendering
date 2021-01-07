@@ -11,7 +11,7 @@ export const SpotifyBlockComponent: React.FC<{
 	pillar: CAPIPillar;
 	caption?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	credit?: string;
 }> = ({
 	embedUrl,
@@ -21,7 +21,7 @@ export const SpotifyBlockComponent: React.FC<{
 	pillar,
 	caption,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	const embedContainer = css`
@@ -45,7 +45,7 @@ export const SpotifyBlockComponent: React.FC<{
 					{caption && (
 						<Caption
 							captionText={caption}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							display={display}
 							credit={credit}

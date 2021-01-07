@@ -52,7 +52,7 @@ export const ArticleStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -92,7 +92,7 @@ export const BrandingStory = () => {
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
 				display={Display.Standard}
-				designType="Article"
+				design="Article"
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -115,7 +115,7 @@ export const FeatureStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Feature"
+				design="Feature"
 				pillar="culture"
 				pageId=""
 				webTitle=""
@@ -137,7 +137,7 @@ export const CommentStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Comment"
+				design="Comment"
 				pillar="opinion"
 				pageId=""
 				webTitle=""
@@ -159,7 +159,7 @@ export const InterviewStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Interview"
+				design="Interview"
 				pillar="lifestyle"
 				pageId=""
 				webTitle=""
@@ -181,7 +181,7 @@ export const ImmersiveStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Immersive}
-				designType="Article"
+				design="Article"
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -203,7 +203,7 @@ export const TwoContributorsStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Feature"
+				design="Feature"
 				pillar="sport"
 				pageId=""
 				webTitle=""

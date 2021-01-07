@@ -9,9 +9,9 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
-const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
+const ageStyles = (design: Design, pillar: CAPIPillar) => css`
 	${textSans.xsmall()};
-	color: ${designType === 'Live' ? decidePillarLight(pillar) : neutral[60]};
+	color: ${design === 'Live' ? decidePillarLight(pillar) : neutral[60]};
 
 	/* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -19,9 +19,7 @@ const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
 	padding-right: 5px;
 
 	svg {
-		fill: ${designType === 'Live'
-			? decidePillarLight(pillar)
-			: neutral[46]};
+		fill: ${design === 'Live' ? decidePillarLight(pillar) : neutral[46]};
 		margin-bottom: -1px;
 		height: 11px;
 		width: 11px;
@@ -30,13 +28,13 @@ const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
 
 	> time {
 		${textSans.xsmall({
-			fontWeight: designType === `Media` ? `bold` : `regular`,
+			fontWeight: design === `Media` ? `bold` : `regular`,
 		})};
 	}
 `;
 
-const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
+const colourStyles = (design: Design, pillar: CAPIPillar) => {
+	switch (design) {
 		case 'Live':
 			return css`
 				/* stylelint-disable-next-line color-no-hex */
@@ -63,14 +61,14 @@ const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
 };
 
 type Props = {
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	webPublicationDate: string;
 	showClock?: boolean;
 };
 
 export const CardAge = ({
-	designType,
+	design,
 	pillar,
 	webPublicationDate,
 	showClock,
@@ -89,8 +87,8 @@ export const CardAge = ({
 	return (
 		<span
 			className={cx(
-				ageStyles(designType, pillar),
-				colourStyles(designType, pillar),
+				ageStyles(design, pillar),
+				colourStyles(design, pillar),
 			)}
 		>
 			{showClock && <ClockIcon />}

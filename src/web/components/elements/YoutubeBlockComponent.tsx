@@ -16,7 +16,7 @@ type Props = {
 	mediaTitle?: string;
 	altText?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	assetId: string;
 	channelId: string;
 	expired: boolean;
@@ -76,7 +76,7 @@ export const YoutubeBlockComponent = ({
 	mediaTitle,
 	altText,
 	display,
-	designType,
+	design,
 	pillar,
 	hideCaption,
 	overrideImage,
@@ -127,7 +127,7 @@ export const YoutubeBlockComponent = ({
 				{!hideCaption && (
 					<Caption
 						display={display}
-						designType={designType}
+						design={design}
 						captionText={mediaTitle || ''}
 						pillar={pillar}
 						displayCredit={false}
@@ -198,7 +198,7 @@ export const YoutubeBlockComponent = ({
 			{!hideCaption && (
 				<Caption
 					display={display}
-					designType={designType}
+					design={design}
 					captionText={mediaTitle || ''}
 					pillar={pillar}
 					displayCredit={false}

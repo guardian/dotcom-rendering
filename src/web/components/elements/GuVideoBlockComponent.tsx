@@ -8,11 +8,11 @@ import { Display } from '@guardian/types/Format';
 export const GuVideoBlockComponent: React.FC<{
 	html: string;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	display: Display;
 	credit: string;
 	caption?: string;
-}> = ({ html, pillar, designType, display, credit, caption }) => {
+}> = ({ html, pillar, design, display, credit, caption }) => {
 	const embedContainer = css`
 		width: 100%;
 		margin-bottom: ${caption ? `0px` : `6px`};
@@ -28,7 +28,7 @@ export const GuVideoBlockComponent: React.FC<{
 			{caption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					credit={credit}
 					display={display}

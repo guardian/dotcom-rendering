@@ -10,7 +10,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { Display } from '@guardian/types/Format';
 
 type Props = {
-	designType: DesignType;
+	design: Design;
 	images: ImageBlockElement[];
 	caption?: string;
 	pillar: CAPIPillar;
@@ -107,7 +107,7 @@ const GridOfFour = ({
 );
 
 export const MultiImageBlockComponent = ({
-	designType,
+	design,
 	caption,
 	images,
 	pillar,
@@ -129,7 +129,7 @@ export const MultiImageBlockComponent = ({
 				>
 					<ImageComponent
 						display={Display.Standard}
-						designType={designType}
+						design={design}
 						element={images[0]}
 						pillar={pillar}
 						hideCaption={true}
@@ -138,7 +138,7 @@ export const MultiImageBlockComponent = ({
 					{caption && (
 						<Caption
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							captionText={caption}
 							pillar={pillar}
 							shouldLimitWidth={false}
@@ -163,7 +163,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -173,7 +173,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -184,7 +184,7 @@ export const MultiImageBlockComponent = ({
 					{caption && (
 						<Caption
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							captionText={caption}
 							pillar={pillar}
 							shouldLimitWidth={false}
@@ -209,7 +209,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -219,7 +219,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -229,7 +229,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="third">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[2]}
 								pillar={pillar}
 								hideCaption={true}
@@ -240,7 +240,7 @@ export const MultiImageBlockComponent = ({
 					{caption && (
 						<Caption
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							captionText={caption}
 							pillar={pillar}
 							shouldLimitWidth={false}
@@ -264,7 +264,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -274,7 +274,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -284,7 +284,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="third">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[2]}
 								pillar={pillar}
 								hideCaption={true}
@@ -294,7 +294,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="forth">
 							<ImageComponent
 								display={Display.Standard}
-								designType="Article"
+								design="Article"
 								element={images[3]}
 								pillar={pillar}
 								hideCaption={true}
@@ -305,7 +305,7 @@ export const MultiImageBlockComponent = ({
 					{caption && (
 						<Caption
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							captionText={caption}
 							pillar={pillar}
 							shouldLimitWidth={false}

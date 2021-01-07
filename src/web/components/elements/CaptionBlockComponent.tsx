@@ -5,7 +5,7 @@ import { Display } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	captionText?: string;
 	pillar: CAPIPillar;
 	padCaption?: boolean;
@@ -17,7 +17,7 @@ type Props = {
 
 export const CaptionBlockComponent = ({
 	display,
-	designType,
+	design,
 	captionText,
 	pillar,
 	padCaption = false,
@@ -28,7 +28,7 @@ export const CaptionBlockComponent = ({
 }: Props) => (
 	<Caption
 		display={display}
-		designType={designType}
+		design={design}
 		captionText={captionText}
 		pillar={pillar}
 		padCaption={padCaption}

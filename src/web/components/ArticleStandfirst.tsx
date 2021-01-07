@@ -24,22 +24,18 @@ const standfirstLinks = pillarMap(
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	standfirst: string; // Can be html
 };
 
 export const ArticleStandfirst = ({
 	display,
-	designType,
+	design,
 	pillar,
 	standfirst,
 }: Props) => (
 	<div className={cx(standfirstStyles, standfirstLinks[pillar])}>
-		<Standfirst
-			display={display}
-			designType={designType}
-			standfirst={standfirst}
-		/>
+		<Standfirst display={display} design={design} standfirst={standfirst} />
 	</div>
 );

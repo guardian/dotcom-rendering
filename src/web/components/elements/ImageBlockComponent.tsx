@@ -5,7 +5,7 @@ import { Display } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	element: ImageBlockElement;
 	pillar: CAPIPillar;
 	hideCaption?: boolean;
@@ -14,7 +14,7 @@ type Props = {
 
 export const ImageBlockComponent = ({
 	display,
-	designType,
+	design,
 	element,
 	pillar,
 	hideCaption,
@@ -24,7 +24,7 @@ export const ImageBlockComponent = ({
 	return (
 		<ImageComponent
 			display={display}
-			designType={designType}
+			design={design}
 			element={element}
 			pillar={pillar}
 			hideCaption={hideCaption}

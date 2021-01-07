@@ -15,7 +15,7 @@ import { Display } from '@guardian/types/Format';
 type Props = {
 	html: string;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	display: Display;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
@@ -52,12 +52,12 @@ const decideDropCapLetter = (html: string) => {
 };
 
 const shouldShowDropCap = ({
-	designType,
+	design,
 	display,
 	isFirstParagraph,
 	forceDropCap,
 }: {
-	designType: DesignType;
+	design: Design;
 	display: Display;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
@@ -69,7 +69,7 @@ const shouldShowDropCap = ({
 	// If immersive, we show drop caps for the first para
 	if (display === Display.Immersive) return true;
 	// The first para has a drop cap for these design types
-	switch (designType) {
+	switch (design) {
 		case 'Feature':
 		case 'Comment':
 		case 'Review':
@@ -109,7 +109,7 @@ const sanitiserOptions = {
 export const TextBlockComponent: React.FC<Props> = ({
 	html,
 	pillar,
-	designType,
+	design,
 	display,
 	forceDropCap,
 	isFirstParagraph,
@@ -193,7 +193,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 
 	if (
 		shouldShowDropCap({
-			designType,
+			design,
 			display,
 			isFirstParagraph,
 			forceDropCap,
@@ -203,11 +203,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 	) {
 		return (
 			<p className={paraStyles}>
-				<DropCap
-					letter={firstLetter}
-					pillar={pillar}
-					designType={designType}
-				/>
+				<DropCap letter={firstLetter} pillar={pillar} design={design} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}

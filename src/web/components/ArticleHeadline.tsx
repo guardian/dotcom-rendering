@@ -14,7 +14,7 @@ import { getZIndex } from '@frontend/web/lib/getZIndex';
 type Props = {
 	headlineString: string;
 	display: Display;
-	designType: DesignType; // Decides headline appearance
+	design: Design; // Decides headline appearance
 	pillar: CAPIPillar; // Decides headline colour when relevant
 	byline?: string;
 	tags: TagType[];
@@ -195,7 +195,7 @@ const zIndex = css`
 export const ArticleHeadline = ({
 	headlineString,
 	display,
-	designType,
+	design,
 	pillar,
 	tags,
 	byline,
@@ -203,7 +203,7 @@ export const ArticleHeadline = ({
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 					return (
@@ -214,7 +214,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}
@@ -272,7 +272,7 @@ export const ArticleHeadline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (designType) {
+			switch (design) {
 				case 'Review':
 				case 'Recipe':
 				case 'Feature':
@@ -296,7 +296,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}
@@ -338,7 +338,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}

@@ -61,7 +61,7 @@ export const defaultStory = () => {
 				{...brexitCAPI}
 				display={Display.Standard}
 				pillar="sport"
-				designType="Article"
+				design="Article"
 			/>
 		</Container>
 	);
@@ -76,7 +76,7 @@ export const beyondTheBlade = () => {
 				{...beyondTheBladeCAPI}
 				display={Display.Standard}
 				pillar="news"
-				designType="Article"
+				design="Article"
 			/>
 		</Container>
 	);
@@ -96,7 +96,7 @@ export const immersiveComment = () => {
 				{...brexitCAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				designType="Comment"
+				design="Comment"
 			/>
 		</div>
 	);
@@ -116,7 +116,7 @@ export const immersiveCommentTag = () => {
 				{...CAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				designType="Comment"
+				design="Comment"
 				tags={[
 					{
 						id: '',
@@ -138,7 +138,7 @@ export const ImmersiveSeriesTag = () => {
 				{...CAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				designType="Review"
+				design="Review"
 				tags={[
 					{
 						id: '',
@@ -161,7 +161,7 @@ export const ArticleBlogTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				designType="Article"
+				design="Article"
 				tags={[
 					{
 						id: '',
@@ -183,7 +183,7 @@ export const ArticleOpinionTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				designType="Article"
+				design="Article"
 				tags={[
 					{
 						id: '',
@@ -205,7 +205,7 @@ export const ArticleSeriesTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				designType="Article"
+				design="Article"
 				tags={[
 					{
 						id: '',
@@ -227,7 +227,7 @@ export const ArticleNoTags = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="culture"
-				designType="Article"
+				design="Article"
 			/>
 		</Container>
 	);

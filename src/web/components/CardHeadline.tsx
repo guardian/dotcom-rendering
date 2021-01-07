@@ -70,8 +70,8 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-const headlineStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
+const headlineStyles = (design: Design, pillar: CAPIPillar) => {
+	switch (design) {
 		case 'Feature':
 		case 'Interview':
 			return colourStyles(pillarPalette[pillar].dark);
@@ -94,7 +94,7 @@ const headlineStyles = (designType: DesignType, pillar: CAPIPillar) => {
 
 export const CardHeadline = ({
 	headlineText,
-	designType,
+	design,
 	pillar,
 	showQuotes,
 	kickerText,
@@ -108,13 +108,13 @@ export const CardHeadline = ({
 		<h4
 			className={cx(
 				fontStyles(size),
-				designType === 'Analysis' && underlinedStyles(size),
+				design === 'Analysis' && underlinedStyles(size),
 			)}
 		>
 			{kickerText && (
 				<Kicker
 					text={kickerText}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					showPulsingDot={showPulsingDot}
 					showSlash={showSlash}
@@ -125,17 +125,12 @@ export const CardHeadline = ({
 				<QuoteIcon colour={pillarPalette[pillar].main} size={size} />
 			)}
 
-			<span className={headlineStyles(designType, pillar)}>
+			<span className={headlineStyles(design, pillar)}>
 				{headlineText}
 			</span>
 		</h4>
 		{byline && showByline && (
-			<Byline
-				text={byline}
-				designType={designType}
-				pillar={pillar}
-				size={size}
-			/>
+			<Byline text={byline} design={design} pillar={pillar} size={size} />
 		)}
 	</>
 );

@@ -33,7 +33,7 @@ export const defaultStory = () => {
 			<TextBlockComponent
 				html={html}
 				pillar="news"
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -49,7 +49,7 @@ export const DropCap = () => {
 				html={html}
 				pillar="culture"
 				forceDropCap={true}
-				designType="Article"
+				design="Article"
 				display={Display.Immersive}
 				isFirstParagraph={false}
 			/>
@@ -65,7 +65,7 @@ export const QuotedDropCap = () => {
 				html={quotedHtml}
 				pillar="opinion"
 				forceDropCap={false}
-				designType="Comment"
+				design="Comment"
 				display={Display.Standard}
 				isFirstParagraph={true}
 			/>
@@ -81,7 +81,7 @@ export const ShortText = () => {
 				html={shortHtml}
 				pillar="news"
 				forceDropCap={true}
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -97,7 +97,7 @@ export const NoTags = () => {
 				html={differentWrapperTags}
 				pillar="news"
 				forceDropCap={true}
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -113,14 +113,14 @@ export const FeatureDropCap = () => {
 				html={html}
 				pillar="culture"
 				forceDropCap={false}
-				designType="Feature"
+				design="Feature"
 				display={Display.Standard}
 				isFirstParagraph={true}
 			/>
 		</div>
 	);
 };
-FeatureDropCap.story = { name: 'with designType of Feature' };
+FeatureDropCap.story = { name: 'with design of Feature' };
 
 export const AList = () => {
 	return (
@@ -129,7 +129,7 @@ export const AList = () => {
 				html={aListHtml}
 				pillar="news"
 				forceDropCap={true}
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -145,7 +145,7 @@ export const BadMarkup = () => {
 				html={badMarkup}
 				pillar="news"
 				forceDropCap={false}
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -163,7 +163,7 @@ export const SubSupscript = () => {
 				}
 				pillar="news"
 				forceDropCap={false}
-				designType="Article"
+				design="Article"
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>

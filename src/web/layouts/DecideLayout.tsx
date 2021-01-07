@@ -16,15 +16,15 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const designType: DesignType = decideDesignType(CAPI.designType);
+	const design: Design = decideDesignType(CAPI.designType);
 	const pillar: CAPIPillar = decidePillar({
 		pillar: CAPI.pillar,
-		design: designType,
+		design,
 	});
 
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 					return (
@@ -32,7 +32,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Immersive}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);
@@ -53,7 +53,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Immersive}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);
@@ -61,7 +61,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 			break;
 		}
 		case Display.Showcase: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 					return (
@@ -69,7 +69,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Showcase}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);
@@ -90,7 +90,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Showcase}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);
@@ -99,7 +99,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 		}
 		case Display.Standard:
 		default: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 					return (
@@ -107,7 +107,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);
@@ -128,7 +128,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 						/>
 					);

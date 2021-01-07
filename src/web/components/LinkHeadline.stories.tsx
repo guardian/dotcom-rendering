@@ -12,7 +12,7 @@ export default {
 export const xsmallStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a large headline link looks"
 			pillar="news"
 			size="large"
@@ -24,7 +24,7 @@ xsmallStory.story = { name: 'Size | large' };
 export const liveStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a headline with a live kicker looks"
 			pillar="news"
 			kickerText="Live"
@@ -36,7 +36,7 @@ liveStory.story = { name: 'With Live kicker' };
 export const noSlash = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a headline with no kicker slash looks"
 			pillar="news"
 			kickerText="Live"
@@ -49,7 +49,7 @@ noSlash.story = { name: 'With Live kicker but no slash' };
 export const pulsingDot = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a headline with a pulsing dot looks"
 			pillar="news"
 			kickerText="Live"
@@ -62,7 +62,7 @@ pulsingDot.story = { name: 'With pulsing dot' };
 export const cultureVariant = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a headline with the culture pillar looks"
 			pillar="culture"
 			kickerText="Art and stuff"
@@ -74,7 +74,7 @@ cultureVariant.story = { name: 'With a culture kicker' };
 export const opinionxxxsmall = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Comment"
+			design="Comment"
 			headlineText="This is how small links to opinion articles look"
 			pillar="opinion"
 			showQuotes={true}
@@ -88,7 +88,7 @@ opinionxxxsmall.story = { name: 'Quotes | small' };
 export const OpinionKicker = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Comment"
+			design="Comment"
 			headlineText="This is how an opinion headline with a kicker looks"
 			pillar="opinion"
 			showQuotes={true}
@@ -102,7 +102,7 @@ OpinionKicker.story = { name: 'With an opinion kicker' };
 export const InUnderlinedState = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is the underlined state when showUnderline is true"
 			pillar="news"
 			showUnderline={true}
@@ -121,7 +121,7 @@ InUnderlinedState.story = { name: 'With showUnderline true' };
 export const linkStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			designType="Article"
+			design="Article"
 			headlineText="This is how a headline looks as a link"
 			pillar="sport"
 			kickerText="I am not a link"

@@ -3,10 +3,10 @@ import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 export const headlineBackgroundColour = (
-	designType: DesignType,
+	design: Design,
 	pillar: CAPIPillar,
 ) => {
-	switch (designType) {
+	switch (design) {
 		case 'GuardianView':
 		case 'Comment':
 			return css`
@@ -41,8 +41,8 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-export const headlineColour = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
+export const headlineColour = (design: Design, pillar: CAPIPillar) => {
+	switch (design) {
 		case 'Feature':
 		case 'Interview':
 			return colourStyles(pillarPalette[pillar].dark);

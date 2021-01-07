@@ -96,7 +96,7 @@ interface Props {
 	pillar: CAPIPillar;
 	ajaxUrl: string;
 	display: Display;
-	design: DesignType;
+	design: Design;
 }
 
 export const MostViewedFooter = ({

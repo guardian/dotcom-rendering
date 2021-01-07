@@ -48,11 +48,11 @@ const bylineStyle = (pillar: CAPIPillar) => css`
 `;
 
 export const Contributor: React.FC<{
-	designType: DesignType;
+	design: Design;
 	author: AuthorType;
 	tags: TagType[];
 	pillar: CAPIPillar;
-}> = ({ designType, author, tags, pillar }) => {
+}> = ({ design, author, tags, pillar }) => {
 	if (!author.byline) {
 		return null;
 	}
@@ -66,7 +66,7 @@ export const Contributor: React.FC<{
 			data-component="meta-byline"
 			data-link-name="byline"
 		>
-			{designType !== 'Interview' && (
+			{design !== 'Interview' && (
 				<div className={bylineStyle(pillar)}>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>

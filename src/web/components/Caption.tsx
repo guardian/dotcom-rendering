@@ -11,7 +11,7 @@ import { Display } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	captionText?: string;
 	pillar: CAPIPillar;
 	padCaption?: boolean;
@@ -125,7 +125,7 @@ const captionLink = (pillar: CAPIPillar) => css`
 
 export const Caption = ({
 	display,
-	designType,
+	design,
 	captionText,
 	pillar,
 	padCaption = false,
@@ -139,7 +139,7 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
-	switch (designType) {
+	switch (design) {
 		case 'PhotoEssay':
 			return (
 				<figcaption

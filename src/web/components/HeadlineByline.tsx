@@ -84,7 +84,7 @@ const authorBylineWithImage = css`
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	byline: string;
 	tags: TagType[];
@@ -92,14 +92,14 @@ type Props = {
 
 export const HeadlineByline = ({
 	display,
-	designType,
+	design,
 	pillar,
 	byline,
 	tags,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
+			switch (design) {
 				case 'GuardianView':
 				case 'Comment':
 					return (
@@ -137,7 +137,7 @@ export const HeadlineByline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (designType) {
+			switch (design) {
 				case 'Interview':
 					return (
 						<div className={wrapperStyles}>

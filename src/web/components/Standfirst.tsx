@@ -10,7 +10,7 @@ import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	standfirst: string;
 };
 
@@ -44,10 +44,10 @@ const nestedStyles = css`
 	}
 `;
 
-const standfirstStyles = (designType: DesignType, display: Display) => {
+const standfirstStyles = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
-			switch (designType) {
+			switch (design) {
 				case 'PhotoEssay':
 					return css`
 						${headline.xxxsmall({})};
@@ -87,7 +87,7 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 				case 'Feature':
@@ -121,10 +121,10 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 	}
 };
 
-export const Standfirst = ({ display, designType, standfirst }: Props) => (
+export const Standfirst = ({ display, design, standfirst }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles, standfirstStyles(designType, display))}
+		className={cx(nestedStyles, standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

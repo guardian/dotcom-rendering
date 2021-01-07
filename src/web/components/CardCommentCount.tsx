@@ -10,7 +10,7 @@ import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	short: string;
 	long: string;
@@ -62,8 +62,8 @@ const mediaStyles = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
+const colourStyles = (design: Design, pillar: CAPIPillar) => {
+	switch (design) {
 		case 'Live':
 			return css`
 				color: ${decidePillarLight(pillar)};
@@ -94,19 +94,14 @@ const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
 	}
 };
 
-export const CardCommentCount = ({
-	designType,
-	pillar,
-	short,
-	long,
-}: Props) => {
+export const CardCommentCount = ({ design, pillar, short, long }: Props) => {
 	return (
 		<div
 			className={cx(
 				containerStyles,
-				designType === 'Media'
+				design === 'Media'
 					? mediaStyles(pillar)
-					: colourStyles(designType, pillar),
+					: colourStyles(design, pillar),
 			)}
 			aria-label={`${short} Comments`}
 		>

@@ -11,7 +11,7 @@ import { Display } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
@@ -112,7 +112,7 @@ const secondaryStyle = css`
 
 export const SeriesSectionLink = ({
 	display,
-	designType,
+	design,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -133,7 +133,7 @@ export const SeriesSectionLink = ({
 
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView': {
 					if (tag) {
@@ -227,7 +227,7 @@ export const SeriesSectionLink = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (designType) {
+			switch (design) {
 				case 'Comment':
 				case 'GuardianView':
 				case 'Feature':
@@ -252,7 +252,7 @@ export const SeriesSectionLink = ({
 									href={`${guardianBaseURL}/${tag.id}`}
 									className={cx(
 										sectionLabelLink,
-										designType === 'MatchReport'
+										design === 'MatchReport'
 											? blackText
 											: pillarColours[pillar],
 										primaryStyle,
@@ -269,7 +269,7 @@ export const SeriesSectionLink = ({
 										href={`${guardianBaseURL}/${sectionUrl}`}
 										className={cx(
 											sectionLabelLink,
-											designType === 'MatchReport'
+											design === 'MatchReport'
 												? blackText
 												: pillarColours[pillar],
 											secondaryStyle,
@@ -289,7 +289,7 @@ export const SeriesSectionLink = ({
 							href={`${guardianBaseURL}/${sectionUrl}`}
 							className={cx(
 								sectionLabelLink,
-								designType === 'MatchReport'
+								design === 'MatchReport'
 									? blackText
 									: pillarColours[pillar],
 								primaryStyle,

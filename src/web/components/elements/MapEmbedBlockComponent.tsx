@@ -13,7 +13,7 @@ export const MapEmbedBlockComponent: React.FC<{
 	caption?: string;
 	pillar: CAPIPillar;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	credit?: string;
 }> = ({
 	embedUrl,
@@ -23,7 +23,7 @@ export const MapEmbedBlockComponent: React.FC<{
 	caption,
 	pillar,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
@@ -57,7 +57,7 @@ export const MapEmbedBlockComponent: React.FC<{
 			{hasCaption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					display={display}
 					credit={credit}

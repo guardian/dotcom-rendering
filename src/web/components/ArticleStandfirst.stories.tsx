@@ -23,7 +23,7 @@ export const defaultStory = () => {
 				<ArticleContainer>
 					<ArticleStandfirst
 						display={Display.Standard}
-						designType="Article"
+						design="Article"
 						standfirst="This the default standfirst text. Aut explicabo officia delectus omnis repellendus voluptas"
 						pillar="news"
 					/>

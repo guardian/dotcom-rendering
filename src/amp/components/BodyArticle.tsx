@@ -34,7 +34,7 @@ const bulletStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const body = (pillar: CAPIPillar, designType: DesignType) => {
+const body = (pillar: CAPIPillar, design: Design) => {
 	const defaultStyles: DesignTypesObj = designTypeDefault(
 		palette.neutral[100],
 	);
@@ -47,7 +47,7 @@ const body = (pillar: CAPIPillar, designType: DesignType) => {
 	};
 
 	return css`
-		background-color: ${designTypeStyle[designType]};
+		background-color: ${designTypeStyle[design]};
 		${bulletStyle(pillar)}
 	`;
 };
@@ -64,10 +64,10 @@ const adStyle = css`
 
 export const Body: React.FC<{
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ pillar, designType, data, config }) => {
+}> = ({ pillar, design, data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting = buildAdTargeting(config);
 	const elementsWithoutAds = Elements(
@@ -105,9 +105,9 @@ export const Body: React.FC<{
 	);
 
 	return (
-		<InnerContainer className={body(pillar, designType)}>
+		<InnerContainer className={body(pillar, design)}>
 			<TopMeta
-				designType={designType}
+				design={design}
 				pillar={pillar}
 				data={data}
 				adTargeting={adTargeting}

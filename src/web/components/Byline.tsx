@@ -7,7 +7,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	text: string;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 	size: SmallHeadlineSize;
 };
@@ -41,8 +41,8 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
+const colourStyles = (design: Design, pillar: CAPIPillar) => {
+	switch (design) {
 		case 'Comment':
 		case 'Analysis':
 		case 'Feature':
@@ -64,8 +64,8 @@ const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
 	}
 };
 
-export const Byline = ({ text, designType, pillar, size }: Props) => (
-	<span className={cx(bylineStyles(size), colourStyles(designType, pillar))}>
+export const Byline = ({ text, design, pillar, size }: Props) => (
+	<span className={cx(bylineStyles(size), colourStyles(design, pillar))}>
 		{text}
 	</span>
 );

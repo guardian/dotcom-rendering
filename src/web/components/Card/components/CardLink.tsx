@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
+const linkStyles = (design: Design, pillar: CAPIPillar) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -36,7 +36,7 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 		}
 	`;
 
-	switch (designType) {
+	switch (design) {
 		case 'GuardianView':
 		case 'Comment':
 			return css`
@@ -93,14 +93,14 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 type Props = {
 	children: JSXElements;
 	linkTo: string;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 };
 
-export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (
+export const CardLink = ({ children, linkTo, design, pillar }: Props) => (
 	<a
 		href={linkTo}
-		className={linkStyles(designType, pillar)}
+		className={linkStyles(design, pillar)}
 		data-link-name="article"
 	>
 		{children}

@@ -22,7 +22,7 @@ export const CommentCountStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				designType="Article"
+				design="Article"
 				pillar="news"
 				short="11k"
 				long="10,899"
@@ -36,7 +36,7 @@ export const MediaStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				designType="Media"
+				design="Media"
 				pillar="culture"
 				short="11k"
 				long="10,899"

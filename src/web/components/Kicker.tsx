@@ -20,12 +20,8 @@ const slashStyles = css`
 	}
 `;
 
-const decideColour = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-	inCard?: boolean,
-) => {
-	switch (designType) {
+const decideColour = (design: Design, pillar: CAPIPillar, inCard?: boolean) => {
+	switch (design) {
 		case 'Live':
 			// TODO: We need this colour in source foundation
 			return inCard
@@ -55,13 +51,13 @@ const decideColour = (
 
 export const Kicker = ({
 	text,
-	designType,
+	design,
 	pillar,
 	showPulsingDot,
 	showSlash = true,
 	inCard,
 }: KickerType) => {
-	const kickerColour = decideColour(designType, pillar, inCard);
+	const kickerColour = decideColour(design, pillar, inCard);
 	return (
 		<span className={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}

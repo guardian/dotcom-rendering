@@ -36,7 +36,7 @@ export const News = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[0],
 								headlineSize: 'large',
 								kickerText: kickers[4],
@@ -58,7 +58,7 @@ export const News = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[1],
 								headlineSize: 'large',
 								kickerText: kickers[0],
@@ -76,7 +76,7 @@ export const News = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'culture',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[2],
 								kickerText: kickers[1],
 								imageUrl: images[3],
@@ -98,7 +98,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'opinion',
-										designType: 'GuardianView',
+										design: 'GuardianView',
 										headlineText: headlines[3],
 										kickerText: 'Editorial',
 										imageUrl: images[6],
@@ -113,7 +113,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[4],
 										headlineSize: 'small',
 									}}
@@ -125,7 +125,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[5],
 										headlineSize: 'small',
 										kickerText: kickers[3],
@@ -147,7 +147,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[6],
 										headlineSize: 'small',
 										kickerText: kickers[3],
@@ -161,7 +161,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[7],
 										headlineSize: 'small',
 										kickerText: kickers[1],
@@ -174,7 +174,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[8],
 										headlineSize: 'small',
 										kickerText: kickers[0],
@@ -187,7 +187,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[9],
 										headlineSize: 'small',
 										kickerText: kickers[2],
@@ -200,7 +200,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'lifestyle',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[10],
 										headlineSize: 'small',
 										kickerText: kickers[0],
@@ -213,7 +213,7 @@ export const News = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'news',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[11],
 										headlineSize: 'small',
 										kickerText: kickers[3],
@@ -246,7 +246,7 @@ export const InDepth = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[6],
 										headlineSize: 'medium',
 										kickerText: kickers[4],
@@ -262,7 +262,7 @@ export const InDepth = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[6],
 										headlineSize: 'small',
 										kickerText: kickers[3],
@@ -279,7 +279,7 @@ export const InDepth = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[6],
 										headlineSize: 'small',
 										kickerText: kickers[2],
@@ -295,7 +295,7 @@ export const InDepth = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[2],
 										headlineSize: 'small',
 										kickerText: kickers[1],
@@ -311,7 +311,7 @@ export const InDepth = () => (
 										linkTo:
 											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 										pillar: 'sport',
-										designType: 'Article',
+										design: 'Article',
 										headlineText: headlines[7],
 										headlineSize: 'small',
 										kickerText: kickers[0],
@@ -334,7 +334,7 @@ export const InDepth = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Comment',
+								design: 'Comment',
 								headlineText: headlines[7],
 								headlineSize: 'large',
 								kickerText: kickers[0],
@@ -366,7 +366,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'sport',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[7],
 								headlineSize: 'medium',
 								kickerText: kickers[3],
@@ -386,7 +386,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'sport',
-								designType: 'Live',
+								design: 'Live',
 								headlineText: headlines[8],
 								headlineSize: 'medium',
 								kickerText: kickers[0],
@@ -407,7 +407,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'sport',
-								designType: 'Comment',
+								design: 'Comment',
 								headlineText: headlines[8],
 								headlineSize: 'medium',
 								kickerText: kickers[1],
@@ -425,7 +425,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[9],
 								headlineSize: 'small',
 								kickerText: kickers[0],
@@ -443,7 +443,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'sport',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[10],
 								headlineSize: 'small',
 								kickerText: kickers[2],
@@ -461,7 +461,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'culture',
-								designType: 'Interview',
+								design: 'Interview',
 								headlineText: headlines[1],
 								headlineSize: 'small',
 								kickerText: kickers[1],
@@ -479,7 +479,7 @@ export const Related = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'lifestyle',
-								designType: 'Feature',
+								design: 'Feature',
 								headlineText: headlines[3],
 								headlineSize: 'small',
 								kickerText: kickers[0],
@@ -506,7 +506,7 @@ export const Spotlight = () => (
 						linkTo:
 							'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 						pillar: 'sport',
-						designType: 'Feature',
+						design: 'Feature',
 						headlineText: headlines[11],
 						headlineSize: 'large',
 						kickerText: kickers[1],
@@ -536,7 +536,7 @@ export const Quad = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'opinion',
-								designType: 'Comment',
+								design: 'Comment',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								showQuotes: true,
@@ -562,7 +562,7 @@ export const Quad = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'opinion',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								webPublicationDate: '2019-11-11T09:45:30.000Z',
@@ -583,7 +583,7 @@ export const Quad = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Article',
+								design: 'Article',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								kickerText: kickers[0],
@@ -604,7 +604,7 @@ export const Quad = () => (
 							{...{
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
-								designType: 'Article',
+								design: 'Article',
 								pillar: 'news',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
@@ -641,7 +641,7 @@ export const Media = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'culture',
-								designType: 'Media',
+								design: 'Media',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								webPublicationDate: '2019-11-11T09:45:30.000Z',
@@ -663,7 +663,7 @@ export const Media = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'news',
-								designType: 'Media',
+								design: 'Media',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								kickerText: kickers[0],
@@ -686,7 +686,7 @@ export const Media = () => (
 								linkTo:
 									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
 								pillar: 'sport',
-								designType: 'Media',
+								design: 'Media',
 								headlineText: headlines[11],
 								headlineSize: 'medium',
 								kickerText: kickers[1],

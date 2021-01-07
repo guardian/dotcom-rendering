@@ -284,10 +284,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const designType: DesignType = decideDesignType(CAPI.designType);
+	const design: Design = decideDesignType(CAPI.designType);
 	const pillar = decidePillar({
 		pillar: CAPI.pillar,
-		design: designType,
+		design,
 	});
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -339,7 +339,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				>
 					<YoutubeBlockComponent
 						display={display}
-						designType={designType}
+						design={design}
 						pillar={pillar}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
@@ -367,7 +367,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				>
 					<YoutubeBlockComponent
 						display={display}
-						designType={designType}
+						design={design}
 						pillar={pillar}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
@@ -606,7 +606,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
 							pillar={pillar}
-							designType={designType}
+							design={design}
 						/>
 					</Suspense>
 				</Lazy>
@@ -625,7 +625,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
 							pillar={pillar}
-							designType={designType}
+							design={design}
 						/>
 					</Suspense>
 				</Lazy>
@@ -657,7 +657,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}
-					design={designType}
+					design={design}
 				/>
 			</Portal>
 			<Portal root="reader-revenue-links-footer">

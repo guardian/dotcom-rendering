@@ -54,7 +54,7 @@ const immersiveWrapper = css`
 
 function renderElement(
 	display: Display,
-	designType: DesignType,
+	design: Design,
 	element: CAPIElement,
 	pillar: CAPIPillar,
 	i: number,
@@ -67,7 +67,7 @@ function renderElement(
 			return (
 				<ImageComponent
 					display={display}
-					designType={designType}
+					design={design}
 					key={i}
 					element={element}
 					pillar={pillar}
@@ -82,7 +82,7 @@ function renderElement(
 				<div key={i} id={`youtube-block-main-media-${i}`}>
 					<YoutubeBlockComponent
 						display={display}
-						designType={designType}
+						design={design}
 						key={i}
 						pillar={pillar}
 						hideCaption={hideCaption}
@@ -115,7 +115,7 @@ function renderElement(
 
 export const MainMedia: React.FC<{
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	elements: CAPIElement[];
 	pillar: CAPIPillar;
 	hideCaption?: boolean;
@@ -123,7 +123,7 @@ export const MainMedia: React.FC<{
 	starRating?: number;
 }> = ({
 	display,
-	designType,
+	design,
 	elements,
 	pillar,
 	hideCaption,
@@ -139,7 +139,7 @@ export const MainMedia: React.FC<{
 		{elements.map((element, i) =>
 			renderElement(
 				display,
-				designType,
+				design,
 				element,
 				pillar,
 				i,

@@ -17,7 +17,7 @@ export default {
 export const SingleImage = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={oneImage}
 		/>
@@ -30,7 +30,7 @@ SingleImage.story = {
 export const SingleImageWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={oneImage}
 			caption="This is the caption for a single image"
@@ -44,7 +44,7 @@ SingleImageWithCaption.story = {
 export const SideBySide = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={twoImages}
 		/>
@@ -57,7 +57,7 @@ SideBySide.story = {
 export const SideBySideWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={twoImages}
 			caption="This is the caption for side by side"
@@ -71,7 +71,7 @@ SideBySideWithCaption.story = {
 export const OneAboveTwo = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={threeImages}
 		/>
@@ -84,7 +84,7 @@ OneAboveTwo.story = {
 export const OneAboveTwoWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={threeImages}
 			caption="This is the caption for one above two"
@@ -98,7 +98,7 @@ OneAboveTwoWithCaption.story = {
 export const GridOfFour = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={fourImages}
 		/>
@@ -111,7 +111,7 @@ GridOfFour.story = {
 export const GridOfFourWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			designType="Article"
+			design="Article"
 			pillar="news"
 			images={fourImages}
 			caption="This is the caption for grid of four"

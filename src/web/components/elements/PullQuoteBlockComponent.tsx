@@ -99,8 +99,8 @@ const fullyInline = css`
 	display: block;
 `;
 
-function decidePosition(role: string, designType: DesignType) {
-	if (designType === 'PhotoEssay') {
+function decidePosition(role: string, design: Design) {
+	if (design === 'PhotoEssay') {
 		return role === 'supporting' ? fullyLeft : fullyInline;
 	}
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
@@ -120,17 +120,17 @@ function decideFont(role: string) {
 export const PullQuoteBlockComponent: React.FC<{
 	html: string;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	role: string;
 	attribution?: string;
-}> = ({ html, pillar, designType, attribution, role }) => {
-	switch (designType) {
+}> = ({ html, pillar, design, attribution, role }) => {
+	switch (design) {
 		case 'GuardianView':
 		case 'Comment':
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'light' })};
 							line-height: 25px;
@@ -174,7 +174,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						decideFont(role),
 						css`
 							color: ${pillarPalette[pillar].main};
@@ -224,7 +224,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'bold' })};
 							line-height: 25px;

@@ -29,7 +29,7 @@ export const Article = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Article" letter="T" pillar="news" />
+				<DropCap design="Article" letter="T" pillar="news" />
 				here once was a dropcap. Lorem ipsum dolor sit amet, consectetur
 				adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 				dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -52,7 +52,7 @@ export const OpinionArticle = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Article" letter="L" pillar="opinion" />
+				<DropCap design="Article" letter="L" pillar="opinion" />
 				ong, long ago, there lived a dropcap. Lorem ipsum dolor sit
 				amet, consectetur adipiscing elit, sed do eiusmod tempor
 				incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -75,7 +75,7 @@ export const Feature = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Feature" letter="O" pillar="culture" />
+				<DropCap design="Feature" letter="O" pillar="culture" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -98,7 +98,7 @@ export const PhotoEssay = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="PhotoEssay" letter="O" pillar="sport" />
+				<DropCap design="PhotoEssay" letter="O" pillar="sport" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -121,7 +121,7 @@ export const Interview = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Interview" letter="O" pillar="lifestyle" />
+				<DropCap design="Interview" letter="O" pillar="lifestyle" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -144,7 +144,7 @@ export const Comment = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Comment" letter="O" pillar="opinion" />
+				<DropCap design="Comment" letter="O" pillar="opinion" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -167,7 +167,7 @@ export const CommentSport = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Comment" letter="O" pillar="sport" />
+				<DropCap design="Comment" letter="O" pillar="sport" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -190,7 +190,7 @@ export const CommentCulture = () => {
 					${body.medium()};
 				`}
 			>
-				<DropCap designType="Comment" letter="O" pillar="culture" />
+				<DropCap design="Comment" letter="O" pillar="culture" />
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis

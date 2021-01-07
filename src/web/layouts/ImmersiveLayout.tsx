@@ -165,7 +165,7 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 }
 
@@ -187,7 +187,7 @@ export const ImmersiveLayout = ({
 	CAPI,
 	NAV,
 	display,
-	designType,
+	design,
 	pillar,
 }: Props) => {
 	const {
@@ -227,7 +227,7 @@ export const ImmersiveLayout = ({
 		>
 			<Caption
 				display={display}
-				designType={designType}
+				design={design}
 				captionText={captionText}
 				pillar={pillar}
 				shouldLimitWidth={true}
@@ -312,7 +312,7 @@ export const ImmersiveLayout = ({
 
 				<MainMedia
 					display={display}
-					designType={designType}
+					design={design}
 					elements={CAPI.mainMediaElements}
 					pillar={pillar}
 					adTargeting={adTargeting}
@@ -344,7 +344,7 @@ export const ImmersiveLayout = ({
 				>
 					<ArticleTitle
 						display={display}
-						designType={designType}
+						design={design}
 						tags={CAPI.tags}
 						sectionLabel={CAPI.sectionLabel}
 						sectionUrl={CAPI.sectionUrl}
@@ -362,7 +362,7 @@ export const ImmersiveLayout = ({
 						<ArticleHeadline
 							display={display}
 							headlineString={CAPI.headline}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							tags={CAPI.tags}
 							byline={CAPI.author.byline}
@@ -377,7 +377,7 @@ export const ImmersiveLayout = ({
 						<Hide when="above" breakpoint="leftCol">
 							<Caption
 								display={display}
-								designType={designType}
+								design={design}
 								captionText={captionText}
 								pillar={pillar}
 								shouldLimitWidth={false}
@@ -385,7 +385,7 @@ export const ImmersiveLayout = ({
 						</Hide>
 					</GridItem>
 					<GridItem area="border">
-						{designType === 'PhotoEssay' ? <></> : <Border />}
+						{design === 'PhotoEssay' ? <></> : <Border />}
 					</GridItem>
 					<GridItem area="title">
 						<>
@@ -402,7 +402,7 @@ export const ImmersiveLayout = ({
 								>
 									<ArticleTitle
 										display={display}
-										designType={designType}
+										design={design}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
@@ -418,13 +418,11 @@ export const ImmersiveLayout = ({
 						<>
 							{!mainMedia && (
 								<div className={maxWidth}>
-									<ArticleHeadlinePadding
-										designType={designType}
-									>
+									<ArticleHeadlinePadding design={design}>
 										<ArticleHeadline
 											display={display}
 											headlineString={CAPI.headline}
-											designType={designType}
+											design={design}
 											pillar={pillar}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
@@ -438,7 +436,7 @@ export const ImmersiveLayout = ({
 					<GridItem area="standfirst">
 						<ArticleStandfirst
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							standfirst={CAPI.standfirst}
 						/>
@@ -446,7 +444,7 @@ export const ImmersiveLayout = ({
 					<GridItem area="byline">
 						<HeadlineByline
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							tags={CAPI.tags}
 							byline={
@@ -455,7 +453,7 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{designType === 'PhotoEssay' ? (
+						{design === 'PhotoEssay' ? (
 							<></>
 						) : (
 							<div className={maxWidth}>
@@ -477,7 +475,7 @@ export const ImmersiveLayout = ({
 							<ArticleMeta
 								branding={branding}
 								display={display}
-								designType={designType}
+								design={design}
 								pillar={pillar}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
@@ -497,7 +495,7 @@ export const ImmersiveLayout = ({
 									display={display}
 									pillar={pillar}
 									blocks={CAPI.blocks}
-									designType={designType}
+									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>

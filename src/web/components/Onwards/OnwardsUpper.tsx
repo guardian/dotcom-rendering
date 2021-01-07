@@ -194,7 +194,7 @@ type Props = {
 	tags: TagType[];
 	edition: Edition;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 };
 
 export const OnwardsUpper = ({
@@ -210,7 +210,7 @@ export const OnwardsUpper = ({
 	tags,
 	edition,
 	pillar,
-	designType,
+	design,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -305,7 +305,6 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={Carousel}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}
@@ -317,7 +316,6 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={OnwardsLayout}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}
@@ -329,7 +327,6 @@ export const OnwardsUpper = ({
 						ophanComponentName={ophanComponentName}
 						Container={OnwardsLayout}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}

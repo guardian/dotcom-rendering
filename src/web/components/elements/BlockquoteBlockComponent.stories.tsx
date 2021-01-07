@@ -21,7 +21,7 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		pillar="news"
-		designType="Article"
+		design="Article"
 		display={Display.Standard}
 		isFirstParagraph={false}
 	/>

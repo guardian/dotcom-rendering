@@ -249,7 +249,7 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	pillar: CAPIPillar;
 }
 
@@ -257,7 +257,7 @@ export const CommentLayout = ({
 	CAPI,
 	NAV,
 	display,
-	designType,
+	design,
 	pillar,
 }: Props) => {
 	const {
@@ -365,7 +365,7 @@ export const CommentLayout = ({
 					<GridItem area="title">
 						<ArticleTitle
 							display={display}
-							designType={designType}
+							design={design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
@@ -399,7 +399,7 @@ export const CommentLayout = ({
 									<ArticleHeadline
 										display={display}
 										headlineString={CAPI.headline}
-										designType={designType}
+										design={design}
 										pillar={pillar}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
@@ -436,7 +436,7 @@ export const CommentLayout = ({
 					<GridItem area="standfirst">
 						<ArticleStandfirst
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							standfirst={CAPI.standfirst}
 						/>
@@ -452,12 +452,12 @@ export const CommentLayout = ({
 						>
 							<MainMedia
 								display={display}
-								designType={designType}
+								design={design}
 								elements={CAPI.mainMediaElements}
 								pillar={pillar}
 								adTargeting={adTargeting}
 								starRating={
-									designType === 'Review' && CAPI.starRating
+									design === 'Review' && CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}
@@ -469,7 +469,7 @@ export const CommentLayout = ({
 							<ArticleMeta
 								branding={branding}
 								display={display}
-								designType={designType}
+								design={design}
 								pillar={pillar}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
@@ -489,7 +489,7 @@ export const CommentLayout = ({
 									pillar={pillar}
 									blocks={CAPI.blocks}
 									display={display}
-									designType={designType}
+									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>

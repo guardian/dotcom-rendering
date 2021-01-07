@@ -1,4 +1,7 @@
-const trails: TrailType[] = [
+import { decideDesignType } from "@root/src/web/lib/decideDesignType";
+import { decidePillar } from "@root/src/web/lib/decidePillar";
+
+const CAPITrails: CAPITrailType[] = [
     {
         url:
             'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',
@@ -111,6 +114,22 @@ const trails: TrailType[] = [
         designType: 'Article',
     },
 ];
+
+const trails: TrailType[] = CAPITrails.map(thisTrail => {
+    const design = decideDesignType(thisTrail.designType);
+    const pillar = decidePillar({pillar:thisTrail.pillar, design});
+    return {
+        url: thisTrail.url,
+        headline:thisTrail.headline,
+        showByline: thisTrail.showByline,
+        byline: thisTrail.byline,
+        image:thisTrail.image,
+        isLiveBlog: thisTrail.isLiveBlog,
+        webPublicationDate:thisTrail.webPublicationDate,
+        pillar,
+        design,
+    }
+})
 
 export const storyPackageTrails: OnwardsType = {
     heading: 'More on this story',

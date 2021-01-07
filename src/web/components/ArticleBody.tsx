@@ -12,7 +12,7 @@ type Props = {
 	pillar: CAPIPillar;
 	display: Display;
 	blocks: Block[];
-	designType: DesignType;
+	design: Design;
 	adTargeting: AdTargeting;
 	host?: string;
 };
@@ -65,7 +65,7 @@ export const ArticleBody = ({
 	pillar,
 	display,
 	blocks,
-	designType,
+	design,
 	adTargeting,
 	host,
 }: Props) => {
@@ -75,7 +75,7 @@ export const ArticleBody = ({
 				display={display}
 				elements={blocks[0] ? blocks[0].elements : []}
 				pillar={pillar}
-				designType={designType}
+				design={design}
 				adTargeting={adTargeting}
 				host={host}
 			/>

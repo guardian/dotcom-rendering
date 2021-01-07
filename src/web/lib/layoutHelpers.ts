@@ -1,12 +1,12 @@
 export const decideLineEffect = (
-	designType: DesignType,
+	design: Design,
 	pillar: CAPIPillar,
 ): LineEffectType => {
 	if (pillar === 'sport') {
 		return 'dotted';
 	}
 
-	switch (designType) {
+	switch (design) {
 		case 'Feature':
 		case 'Recipe':
 			return 'squiggly';
@@ -27,8 +27,8 @@ export const decideLineEffect = (
 	}
 };
 
-export const decideLineCount = (designType?: DesignType): 8 | 4 => {
-	if (designType === 'Comment') {
+export const decideLineCount = (design?: Design): 8 | 4 => {
+	if (design === 'Comment') {
 		return 8;
 	}
 	return 4;
