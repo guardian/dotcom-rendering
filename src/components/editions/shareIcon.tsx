@@ -6,10 +6,10 @@ import {
 import type { FC, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
 
-const usePlatform = (defaultPlatform: string) => {
+const usePlatform = (defaultPlatform: Platform): Platform => {
 	const [platform, setPlatform] = useState(defaultPlatform);
 
-	const handlePlatform = (event: CustomEventInit) => {
+	const handlePlatform = (event: CustomEventInit): void => {
 		if (isPlatformMessageEvent(event)) {
 			setPlatform(event.detail.value);
 		}
@@ -18,7 +18,7 @@ const usePlatform = (defaultPlatform: string) => {
 	useEffect(() => {
 		document.addEventListener('editionsPing', handlePlatform);
 
-		return () =>
+		return (): void =>
 			document.removeEventListener('editionsPing', handlePlatform);
 	}, []);
 
@@ -49,12 +49,15 @@ export const ShareIcon: FC = () => {
 		pingEditionsNative({ kind: 'platform-query' });
 	}, []);
 	return (
-		<div onClick={() => pingEditionsNative({ kind: 'share' })}>
+		<button
+			style={{ background: 'none', border: 'none' }}
+			onClick={(): void => pingEditionsNative({ kind: 'share' })}
+		>
 			{platform === Platform.IOS ? (
 				<IOSShareIcon />
 			) : (
 				<AndroidShareIcon />
 			)}
-		</div>
+		</button>
 	);
 };
