@@ -29,7 +29,7 @@ const styles = css`
 `;
 
 const colour = (format: Format): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
+	const { link, inverted } = getThemeStyles(format.theme);
 	switch (format.design) {
 		case Design.AdvertisementFeature:
 			return css`
@@ -47,7 +47,7 @@ const colour = (format: Format): SerializedStyles => {
 			`;
 		default:
 			return css`
-				color: ${kicker};
+				color: ${link};
 				border-bottom: 0.0625rem solid ${neutral[86]};
 			`;
 	}
