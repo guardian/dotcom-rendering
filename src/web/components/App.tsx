@@ -42,7 +42,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
-import { toTypesPillar } from '@root/src/lib/format';
+
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
