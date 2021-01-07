@@ -45,6 +45,7 @@ describe('Video', function () {
         });
         it('should render', function() {
             cy.visit(`/Article?url=${embedMediaVideo}`);
+            cy.get(`[data-cy="embed-youtube-atom"]`).scrollIntoView()
             cy.get(`[data-cy="embed-youtube-atom"]`).should('be.visible');
         })
 
