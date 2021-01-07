@@ -32,7 +32,7 @@ describe('Elements', function () {
 
             getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
                 timeout: 30000,
-            }).contains('from PHE');
+            }).contains('Daily cases');
         });
 
         it('should render the counted interactive embed', function () {
