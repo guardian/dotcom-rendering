@@ -9,7 +9,6 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type CAPIPillar = RealPillars | FakePillars;
 
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
     | 'Media'
@@ -25,6 +24,10 @@ type DesignType =
     | 'Quiz'
     | 'AdvertisementFeature'
     | 'PhotoEssay';
+
+// CAPIDesign is what CAPI might give us but we only want to use a subset of these (DesignType)
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type CAPIDesign = DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -254,7 +257,7 @@ interface CAPIType {
     config: ConfigType;
     // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
     // in decideDesignType but need to allow the type here before then
-    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
+    designType: CAPIDesign;
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -287,7 +290,7 @@ interface CAPIType {
 type CAPIBrowserType = {
     // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
     // in decideDesignType but need to allow the type here before then
-    designType: DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
+    designType: CAPIDesign;
     pillar: CAPIPillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];
@@ -563,6 +566,7 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
     brazeApiKey?: string;
 }
 
@@ -598,6 +602,7 @@ interface ConfigTypeBrowser {
     switches: CAPIType['config']['switches'];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
 }
 
 interface GADataType {
@@ -756,6 +761,7 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {
+        'amp-experiment': any;
         'amp-sidebar': any;
         'amp-accordion': any;
         'amp-img': any;

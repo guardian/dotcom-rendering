@@ -222,7 +222,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -316,7 +316,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -343,7 +343,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -497,7 +497,7 @@ export const ArticleRenderer: React.FC<{
 							<TimelineAtom
 								id={element.id}
 								title={element.title}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								events={element.events}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}

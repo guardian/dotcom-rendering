@@ -16,6 +16,7 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
+import { toTypesPillar } from '@root/src/lib/format';
 import { Display } from '@guardian/types/Format';
 
 type Props = {
@@ -195,7 +196,7 @@ export const Discussion = ({
 							<Comments
 								user={user}
 								baseUrl={discussionApiUrl}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								initialPage={commentPage}
 								pageSizeOverride={commentPageSize}
 								isClosedForComments={
@@ -212,7 +213,6 @@ export const Discussion = ({
 								commentToScrollTo={hashCommentId}
 								onPermalinkClick={handlePermalink}
 								apiKey="dotcom-rendering"
-								onHeightChange={() => {}}
 							/>
 						)}
 
@@ -221,7 +221,7 @@ export const Discussion = ({
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}
-									pillar={pillar}
+									pillar={toTypesPillar(pillar)}
 									initialPage={commentPage}
 									pageSizeOverride={commentPageSize}
 									isClosedForComments={
@@ -238,7 +238,6 @@ export const Discussion = ({
 									commentToScrollTo={hashCommentId}
 									onPermalinkClick={handlePermalink}
 									apiKey="dotcom-rendering"
-									onHeightChange={() => {}}
 								/>
 							</Lazy>
 						)}

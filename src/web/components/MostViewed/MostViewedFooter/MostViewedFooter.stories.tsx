@@ -47,6 +47,7 @@ export const withTwoTabs = () => {
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
+					design="Article"
 				/>
 			</Section>
 		</AbProvider>
@@ -67,6 +68,7 @@ export const withOneTabs = () => {
 					pillar="news"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
+					design="Article"
 				/>
 			</Section>
 		</AbProvider>
@@ -87,6 +89,7 @@ export const withNoMostSharedImage = () => {
 					pillar="news"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
+					design="Article"
 				/>
 			</Section>
 		</AbProvider>

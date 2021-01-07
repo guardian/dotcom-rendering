@@ -289,7 +289,11 @@ export const ShowcaseLayout = ({
 						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
-						<Header edition={CAPI.editionId} />
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
 					</Section>
 
 					<Section
