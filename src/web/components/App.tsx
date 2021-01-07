@@ -127,7 +127,6 @@ const componentEventHandler = (
 };
 
 export const App = ({ CAPI, NAV }: Props) => {
-	console.log('fdsuyhfdsuyhfsduyhfsd');
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
