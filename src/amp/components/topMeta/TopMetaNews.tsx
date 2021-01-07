@@ -16,112 +16,108 @@ import { Branding } from '@root/src/amp/components/topMeta/Branding';
 import { StarRating } from '@root/src/amp/components/StarRating';
 
 const headerStyle = css`
-    ${headline.small()};
-    font-weight: 500;
-    padding-bottom: 24px;
-    padding-top: 3px;
-    color: ${palette.neutral[7]};
+	${headline.small()};
+	font-weight: 500;
+	padding-bottom: 24px;
+	padding-top: 3px;
+	color: ${palette.neutral[7]};
 `;
 const bylineStyle = (pillar: CAPIPillar) => css`
-    ${headline.xxxsmall()};
-    color: ${pillarPalette[pillar].main};
-    padding-bottom: 8px;
-    font-style: italic;
+	${headline.xxxsmall()};
+	color: ${pillarPalette[pillar].main};
+	padding-bottom: 8px;
+	font-style: italic;
 
-    a {
-        font-weight: 700;
-        color: ${pillarPalette[pillar].main};
-        text-decoration: none;
-        font-style: normal;
-    }
+	a {
+		font-weight: 700;
+		color: ${pillarPalette[pillar].main};
+		text-decoration: none;
+		font-style: normal;
+	}
 `;
 
 const starRatingWrapper = css`
-    margin: 0 0 6px -10px;
+	margin: 0 0 6px -10px;
 `;
 
 const Headline: React.FC<{
-    headlineText: string;
-    starRating?: number;
+	headlineText: string;
+	starRating?: number;
 }> = ({ headlineText, starRating }) => {
-    return (
-        <div>
-            <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
+	return (
+		<div>
+			<h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
 
-            {starRating !== undefined && (
-                <div className={starRatingWrapper}>
-                    <StarRating rating={starRating} size="large" />
-                </div>
-            )}
-        </div>
-    );
+			{starRating !== undefined && (
+				<div className={starRatingWrapper}>
+					<StarRating rating={starRating} size="large" />
+				</div>
+			)}
+		</div>
+	);
 };
 
 export const TopMetaNews: React.FC<{
-    articleData: ArticleModel;
-    adTargeting?: AdTargeting;
-}> = ({ articleData, adTargeting }) => {
-    const { branding } = articleData.commercialProperties[
-        articleData.editionId
-    ];
+	articleData: ArticleModel;
+	adTargeting?: AdTargeting;
+	pillar: CAPIPillar;
+}> = ({ articleData, adTargeting, pillar }) => {
+	const { branding } = articleData.commercialProperties[
+		articleData.editionId
+	];
 
-    return (
-        <header>
-            {articleData.mainMediaElements.map((element, i) => (
-                <MainMedia
-                    key={i}
-                    element={element}
-                    pillar={articleData.pillar}
-                    adTargeting={adTargeting}
-                />
-            ))}
+	return (
+		<header>
+			{articleData.mainMediaElements.map((element, i) => (
+				<MainMedia
+					key={i}
+					element={element}
+					pillar={pillar}
+					adTargeting={adTargeting}
+				/>
+			))}
 
-            {!articleData.isImmersive && (
-                <SeriesLink
-                    baseURL={articleData.guardianBaseURL}
-                    tags={articleData.tags}
-                    pillar={articleData.pillar}
-                    fallbackToSection={true}
-                    sectionLabel={articleData.sectionLabel}
-                    sectionUrl={articleData.sectionUrl}
-                />
-            )}
+			{!articleData.isImmersive && (
+				<SeriesLink
+					baseURL={articleData.guardianBaseURL}
+					tags={articleData.tags}
+					pillar={pillar}
+					fallbackToSection={true}
+					sectionLabel={articleData.sectionLabel}
+					sectionUrl={articleData.sectionUrl}
+				/>
+			)}
 
-            <Headline
-                headlineText={articleData.headline}
-                starRating={articleData.starRating}
-            />
+			<Headline
+				headlineText={articleData.headline}
+				starRating={articleData.starRating}
+			/>
 
-            <Standfirst
-                text={articleData.standfirst}
-                pillar={articleData.pillar}
-            />
+			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-            {branding && (
-                <Branding branding={branding} pillar={articleData.pillar} />
-            )}
+			{branding && <Branding branding={branding} pillar={pillar} />}
 
-            <Byline
-                byline={articleData.author.byline}
-                tags={articleData.tags}
-                pillar={articleData.pillar}
-                guardianBaseURL={articleData.guardianBaseURL}
-                className={bylineStyle(articleData.pillar)}
-            />
+			<Byline
+				byline={articleData.author.byline}
+				tags={articleData.tags}
+				pillar={pillar}
+				guardianBaseURL={articleData.guardianBaseURL}
+				className={bylineStyle(pillar)}
+			/>
 
-            <TopMetaExtras
-                sharingUrls={getSharingUrls(
-                    articleData.pageId,
-                    articleData.webTitle,
-                )}
-                pillar={articleData.pillar}
-                ageWarning={getAgeWarning(
-                    articleData.tags,
-                    articleData.webPublicationDate,
-                )}
-                webPublicationDate={articleData.webPublicationDateDisplay}
-                twitterHandle={articleData.author.twitterHandle}
-            />
-        </header>
-    );
+			<TopMetaExtras
+				sharingUrls={getSharingUrls(
+					articleData.pageId,
+					articleData.webTitle,
+				)}
+				pillar={pillar}
+				ageWarning={getAgeWarning(
+					articleData.tags,
+					articleData.webPublicationDate,
+				)}
+				webPublicationDate={articleData.webPublicationDateDisplay}
+				twitterHandle={articleData.author.twitterHandle}
+			/>
+		</header>
+	);
 };

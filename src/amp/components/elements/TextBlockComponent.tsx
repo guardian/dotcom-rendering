@@ -11,75 +11,75 @@ import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 // components.
 
 export const ListStyle = (iconColour: string) => css`
-    li {
-        margin-bottom: 6px;
-        padding-left: 20px;
-        p {
-            display: inline;
-        }
-    }
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+		p {
+			display: inline;
+		}
+	}
 
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${iconColour};
-        margin-left: -20px;
-    }
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${iconColour};
+		margin-left: -20px;
+	}
 `;
 
 export const LinkStyle = (pillar: CAPIPillar) => css`
-    a {
-        color: ${pillarPalette[pillar].dark};
-        text-decoration: none;
-        border-bottom: 1px solid ${neutralBorder(pillar)};
-        :hover {
-            border-bottom: 1px solid ${pillarPalette[pillar].dark};
-        }
-    }
+	a {
+		color: ${pillarPalette[pillar].dark};
+		text-decoration: none;
+		border-bottom: 1px solid ${neutralBorder(pillar)};
+		:hover {
+			border-bottom: 1px solid ${pillarPalette[pillar].dark};
+		}
+	}
 `;
 
 export const TextStyle = (pillar: CAPIPillar) => css`
-    strong {
-        font-weight: 700;
-    }
-    p {
-        padding: 0 0 12px;
-        ${body.medium()};
-        font-weight: 300;
-        word-wrap: break-word;
-        color: ${palette.neutral[7]};
-    }
+	strong {
+		font-weight: 700;
+	}
+	p {
+		padding: 0 0 12px;
+		${body.medium()};
+		font-weight: 300;
+		word-wrap: break-word;
+		color: ${palette.neutral[7]};
+	}
 
-    blockquote {
-        margin-left: 20px;
-        font-style: italic;
-    }
+	blockquote {
+		margin-left: 20px;
+		font-style: italic;
+	}
 
-    ${body.medium()};
+	${body.medium()};
 
-    ${LinkStyle(pillar)};
-    ${ListStyle(neutralBorder(pillar))};
+	${LinkStyle(pillar)};
+	${ListStyle(neutralBorder(pillar))};
 `;
 
 // Labs paid content only
 const textStyleLabs = css`
-    p {
-        ${textSans.large()}
-    }
+	p {
+		${textSans.large()}
+	}
 `;
 
 export const TextBlockComponent: React.FC<{
-    html: string;
-    pillar: CAPIPillar;
+	html: string;
+	pillar: CAPIPillar;
 }> = ({ html, pillar }) => (
-    <span
-        className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
-        dangerouslySetInnerHTML={{
-            __html: sanitise(html),
-        }}
-    />
+	<span
+		className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
+		dangerouslySetInnerHTML={{
+			__html: sanitise(html),
+		}}
+	/>
 );

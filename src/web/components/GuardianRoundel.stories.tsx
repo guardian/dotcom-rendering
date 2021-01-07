@@ -3,11 +3,11 @@ import React from 'react';
 import { GuardianRoundel } from './GuardianRoundel';
 
 export default {
-    component: GuardianRoundel,
-    title: 'Components/GuardianRoundel',
+	component: GuardianRoundel,
+	title: 'Components/GuardianRoundel',
 };
 
 export const defaultStory = () => {
-    return <GuardianRoundel />;
+	return <GuardianRoundel />;
 };
 defaultStory.story = { name: 'default' };

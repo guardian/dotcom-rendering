@@ -2087,20 +2087,20 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-6.0.0.tgz#e0066f37ccfb84131737cead54fb10fb624a4053"
-  integrity sha512-OTMmarddZQlIKamjtAd8qPO407bIoNWyyHxc/7rLbkR/LjK+vmzeGZrKhrzYE1nqsrMMNnIzi2mvKN1opjXfQQ==
+"@guardian/atoms-rendering@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-7.1.0.tgz#a7307c6bb93036f7de1f85a7ef03785443289151"
+  integrity sha512-bGbKE+QiZi08Xtivr3kuCe+NsOG0/7YKiSlM6ogvYedjLMtUIZbE6Dm+oi/7ybCJrip1sxbBUKjEvqmHIdi1ow==
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.16.tgz#e827afb4ee06b599ee1b14069763cd26d6c3b560"
-  integrity sha512-GA6OWg48iUS83O/316uynHm4xvYzEp8efwRjfqLTfr0gTtcgsiUb/eebh94RgFiDQM5cylpmEeDzsWXGkE7N+w==
+"@guardian/braze-components@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.17.tgz#178e4740ab722873b9d0e6dd9d836f1e153d5ada"
+  integrity sha512-xB+cAwaM/iSJwyC/rM1cjEkFX5Gx4JlFNS9HghFqHJb6u+k7B9oFdwQS6GhH7evZxbh2F3klTVpHT6lUD+vCUg==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
@@ -2113,16 +2113,21 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.7.4.tgz#ae75775c40f8234a2e2774c126a688e9a98f5df4"
   integrity sha512-f/XieB0dOyGYZDhP/UmyrHiyuehETt2L1GKqacsySFdcD/++fKe7LLcXbza4NE54MHyS0wbvd+Qh4avjG4IPLg==
 
-"@guardian/discussion-rendering@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-3.3.0.tgz#5f9c5d9ed5a275b7bba2b60b6ec865819ea7241e"
-  integrity sha512-xajsYRlMAHqjEWtVfyXbWd3KNHqDqrVlez3GBiZgrU1ag3L4TzoQW3WliAo35oZLjn1j6Pt4/G4n57x3DqAidQ==
+"@guardian/discussion-rendering@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-4.4.0.tgz#577acb55edd2680134894d60e6d669de10c791ea"
+  integrity sha512-n9DJHXz+WjT4A5l/SWhdPnzTihOf6imNTgU0Y6vwsFD1F4MiE02pjWR9TiaygQBbiZxYpR+d/fYd/9KFCmwgpA==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
     react-app-rewired "^2.1.6"
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
+
+"@guardian/prettier@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-0.4.2.tgz#2d08a8a50aad3911a88c9b53f92a37748694d551"
+  integrity sha512-f8MCY/s3rLNonqxITsqnqrPRt0r6hEyW6rGKqDexTt88fEQnA3BMtAlN2hqjuNfrOa9EQexEknZugRVdIpbijQ==
 
 "@guardian/shimport@^1.0.2":
   version "1.0.2"
@@ -2230,10 +2235,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^0.4.5":
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.4.5.tgz#e603f23908f436309fc9caa9149468f2c8db4202"
-  integrity sha512-OJGK5x5UTQlmdauPAXJW00ZJVkeqgsdaixwkvBnM0D7BQWSAao/NM3nxLiX8OYaksXl4mkYhO4+XmJlVy29Y6Q==
+"@guardian/types@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.5.2.tgz#edde87dde496554cbcd32cb1bffe2baada591926"
+  integrity sha512-fQ5+cyQQGhQ4qHuzMvaGLsHNxwz82dlb3nYKEahrhg5K3Hyf4jno0pPTxUVMM80uNL9xE8g7843LpkKp6YpE/w==
   dependencies:
     typescript "^3.8.3"
 
@@ -14679,10 +14684,10 @@ preact-render-to-string@^5.1.10:
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.3.1.tgz#70a2cc5484ca727c992216dfc528907d240e0a05"
-  integrity sha512-CaKtEY235GtuypRRvaMxM3PNy44OzQj8BO7plXbPwF+iJzNnUufgHtqRA6NbjeWnfy+cN1dP1MFTAGxJmCiPqQ==
+preact@^10.5.9:
+  version "10.5.9"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.9.tgz#8caba9288b4db1d593be2317467f8735e43cda0b"
+  integrity sha512-X4m+4VMVINl/JFQKALOCwa3p8vhMAhBvle0hJ/W44w/WWfNb2TA7RNicDV3K2dNVs57f61GviEnVLiwN+fxiIg==
 
 prebuild-install@^5.3.0:
   version "5.3.0"
