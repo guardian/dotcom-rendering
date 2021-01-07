@@ -34,7 +34,6 @@ export const isPlatformMessageEvent = (
 	customEvent: CustomEventInit<Message>,
 ): customEvent is CustomEvent<PlatformMessage> => {
 	if (
-		typeof customEvent === 'object' &&
 		customEvent.detail?.kind === 'platform' &&
 		customEvent.detail.value in Platform
 	) {
