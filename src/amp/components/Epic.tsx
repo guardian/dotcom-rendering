@@ -195,8 +195,8 @@ const buildUrl = (
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const epicUrl =
 		process.env.GU_STAGE === 'PROD'
-			? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
-			: 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
+			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
+			: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
 
 	return (
 		<div>
