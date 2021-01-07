@@ -119,6 +119,11 @@ export const MostViewedFooter = ({
 	const variantFromRunnable =
 		(runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 
+	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
+		'DeeplyReadTest',
+		'variant',
+	);
+
 	return (
 		<div
 			data-print-layout="hide"
@@ -132,7 +137,11 @@ export const MostViewedFooter = ({
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
 				<section className={asideWidth}>
-					<h2 className={headingStyles}>Most popular</h2>
+					{inDeeplyReadTestVariant ? (
+						<h2 className={headingStyles}>Across The Guardian</h2>
+					) : (
+						<h2 className={headingStyles}>Most popular</h2>
+					)}
 				</section>
 				<section className={stackBelow('desktop')}>
 					<Lazy margin={300}>

@@ -15,9 +15,11 @@ const headerStyles = css`
 
 type Props = {
 	edition: Edition;
+	idUrl?: string;
+	mmaUrl?: string;
 };
 
-export const Header = ({ edition }: Props) => (
+export const Header = ({ edition, idUrl, mmaUrl }: Props) => (
 	<header className={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
@@ -30,7 +32,7 @@ export const Header = ({ edition }: Props) => (
 		<Logo />
 		<div id="reader-revenue-links-header" />
 		<div id="links-root">
-			<Links giftingURL="" />
+			<Links giftingURL="" idUrl={idUrl} mmaUrl={mmaUrl} />
 		</div>
 	</header>
 );
