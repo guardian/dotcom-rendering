@@ -92,9 +92,9 @@ const Search = ({
 	href,
 	dataLinkName,
 }: {
-    className?: string;
-    children: JSXElements;
-    href: string;
+	className?: string;
+	children: JSXElements;
+	href: string;
 	dataLinkName: string;
 }) => (
 	<a href={href} className={className} data-link-name={dataLinkName}>
@@ -134,18 +134,18 @@ export const Links = ({
 	mmaUrl: mmaUrlFromConfig,
 }: Props) => {
 	const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
-    const [userIsDefined, setUserIsDefined] = useState<boolean>();
+	const [userIsDefined, setUserIsDefined] = useState<boolean>();
 
 	// show gifting if support messaging isn't shown
 	useEffect(() => {
 		setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
-    }, []);
+	}, []);
 
-    // we intentionally re-render here because we know the DOM structure could be different
-    // from the server rendered version. This forces a full validation
-    useOnce(() => {
-        setUserIsDefined(!!userId)
-    }, [userId]);
+	// we intentionally re-render here because we know the DOM structure could be different
+	// from the server rendered version. This forces a full validation
+	useOnce(() => {
+		setUserIsDefined(!!userId);
+	}, [userId]);
 
 	// Fall back on prod URLs just in case these aren't set for any reason
 	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
