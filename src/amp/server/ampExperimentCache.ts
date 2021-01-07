@@ -13,7 +13,7 @@ export type AmpExperiments = {
 };
 
 export const ampExperimentsDataUrl =
-	process.env.NODE_ENV === 'production'
+	process.env.GU_STAGE === 'PROD'
 		? 'https://contributions.guardianapis.com/amp/experiments_data'
 		: 'https://contributions.code.dev-guardianapis.com/amp/experiments_data';
 
