@@ -18,7 +18,7 @@ const styles = (kickerColor: string): SerializedStyles => {
 		display: flex;
 		justify-content: space-between;
 		svg {
-			flex: 0 0 30px;
+			flex: 0 0 ${basePx(3.75)};
 			padding: ${basePx(0.5)};
 			padding-top: ${basePx(0.75)};
 			width: ${basePx(3.75)};
