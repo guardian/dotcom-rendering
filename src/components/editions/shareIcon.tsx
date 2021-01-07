@@ -5,6 +5,25 @@ import {
 import type { FC, ReactElement } from 'react';
 import React, { useState, useEffect } from 'react';
 
+const usePlatform = (defaultPlatform: string) => {
+	const [platform, setPlatform] = useState(defaultPlatform);
+
+	const handlePlatform = (event: CustomEventInit<any>) => {
+		if (isPlatformMessageEvent(event)) {
+			setPlatform(event.detail.value);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('editionsPing', handlePlatform);
+
+		return () =>
+			document.removeEventListener('editionsPing', handlePlatform);
+	}, []);
+
+	return platform;
+};
+
 const IOSShareIcon = (): ReactElement => (
 	<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<circle cx="15" cy="15" r="14.5" />
@@ -25,29 +44,12 @@ const AndroidShareIcon = (): ReactElement => (
 
 export const ShareIcon: FC = () => {
 	const platform = usePlatform('ios');
+	useEffect(() => {
+		pingEditionsNative({ kind: 'platform-query' });
+	}, []);
 	return (
 		<div onClick={() => pingEditionsNative({ kind: 'share' })}>
 			{platform === 'ios' ? <IOSShareIcon /> : <AndroidShareIcon />}
 		</div>
 	);
-};
-
-const usePlatform = (defaultPlatform: string) => {
-	const [platform, setPlatform] = useState(defaultPlatform);
-
-	const handlePlatform = (event: CustomEventInit<any>) => {
-		if (isPlatformMessageEvent(event)) {
-			console.log('isPlatformEvent true');
-			setPlatform(event.detail.value);
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener('editionsPing', handlePlatform);
-
-		return () =>
-			document.removeEventListener('editionsPing', handlePlatform);
-	}, []);
-
-	return platform;
 };

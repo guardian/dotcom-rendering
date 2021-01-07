@@ -7,7 +7,8 @@ declare global {
 			postMessage: (data: string) => void;
 		};
 
-		pingEditionsRendering?: (detail: any) => void;
+		pingEditionsRendering?: (message: Message) => void;
+		pingEditionsRenderingJsString?: (message: Message) => string;
 	}
 }
 
@@ -60,26 +61,29 @@ export const pingEditionsNative = (message: Message) => {
 	window.ReactNativeWebView?.postMessage(serializedMessage);
 };
 
-export const initPingEditionsRendering = () => {
-	window.pingEditionsRendering = (message: Message) => {
-		if (process.env.NODE_ENV === 'development') {
-			prettyLog(
-				'📱 => 🎨  Pinging Editions Rendering from Editions native with message: ',
-				message,
-			);
-		}
+const pingEditionsRendering = (message: Message) => {
+	if (process.env.NODE_ENV === 'development') {
+		prettyLog(
+			'📱 => 🎨  Pinging Editions Rendering from Editions native with message: ',
+			message,
+		);
+	}
 
-		let customEvent = new CustomEvent('editionsPing', { detail: message });
-		document.dispatchEvent(customEvent);
-	};
+	let customEvent = new CustomEvent('editionsPing', { detail: message });
+	document.dispatchEvent(customEvent);
 };
 
-export const pingEditionsRenderingJsString = (message: Message) => {
+export const pingEditionsRenderingJsString = (message: Message): string => {
 	return `
         try {
-            window.sendEditionsPing(${JSON.stringify(message)})
+            window.pingEditionsRendering(${JSON.stringify(message)})
         } catch {
             console.error("Editions -> Editions Rendering not initiated")
         }
     `;
+};
+
+export const initPingEditionsRendering = () => {
+	window.pingEditionsRendering = pingEditionsRendering;
+	window.pingEditionsRenderingJsString = pingEditionsRenderingJsString;
 };
