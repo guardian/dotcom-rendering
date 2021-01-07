@@ -1,3 +1,4 @@
+import { css } from '@emotion/core';
 import {
 	isPlatformMessageEvent,
 	pingEditionsNative,
@@ -43,6 +44,11 @@ const AndroidShareIcon = (): ReactElement => (
 	</svg>
 );
 
+const buttonStyles = css`
+	background: none;
+	border: none;
+`;
+
 export const ShareIcon: FC = () => {
 	const platform = usePlatform(Platform.IOS);
 	useEffect(() => {
@@ -50,6 +56,7 @@ export const ShareIcon: FC = () => {
 	}, []);
 	return (
 		<button
+			css={buttonStyles}
 			style={{ background: 'none', border: 'none' }}
 			onClick={(): void => pingEditionsNative({ kind: 'share' })}
 		>
