@@ -18,6 +18,7 @@ describe('helper functions return correct styles', () => {
 			inverted: '#FF5943',
 			liveblogBackground: '#AB0613',
 			liveblogDarkBackground: '#8B0000',
+            link: '#AB0613'
 		};
 		expect(pillarStyles).toEqual(expectedNewsPillarStyles);
 	});
