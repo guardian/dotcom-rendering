@@ -317,6 +317,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 				<Links
 					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
 					userId={user ? user.userId : undefined}
+					idUrl={CAPI.config.idUrl}
+					mmaUrl={CAPI.config.mmaUrl}
 				/>
 			</HydrateOnce>
 			<HydrateOnce root="edition-root">
