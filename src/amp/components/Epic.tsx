@@ -167,17 +167,24 @@ const goalExceededMarkerStyle = css`
 	z-index: 2;
 `;
 
+interface ABTestData {
+	name: string;
+	variant: string;
+}
+
 const buildUrl = (
 	contributionsUrl: string,
 	articleUrl: string,
 	campaignCode: string,
 	componentId: string,
+	abTestData: ABTestData,
 ): string => {
 	const acquisitionData = {
 		source: 'GOOGLE_AMP',
 		componentType: 'ACQUISITIONS_EPIC',
 		componentId,
 		campaignCode,
+		abTestData,
 		referrerUrl: articleUrl,
 	};
 	return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(
@@ -276,6 +283,12 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									webURL,
 									moustacheVariable('campaignCode'),
 									moustacheVariable('componentId'),
+									{
+										name: moustacheVariable('testName'),
+										variant: moustacheVariable(
+											'variantName',
+										),
+									},
 								)}
 								className={supportButtonStyle}
 							>
