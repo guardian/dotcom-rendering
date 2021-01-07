@@ -60,7 +60,6 @@ export const ShareIcon: FC = () => {
 	return (
 		<button
 			css={buttonStyles}
-			style={{ background: 'none', border: 'none' }}
 			onClick={(): void => pingEditionsNative({ kind: 'share' })}
 		>
 			{platform === Platform.IOS ? (
