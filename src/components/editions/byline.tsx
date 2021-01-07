@@ -20,8 +20,9 @@ const styles = (kickerColor: string): SerializedStyles => {
 		svg {
 			flex: 0 0 30px;
 			padding: ${basePx(0.5)};
-			width: 30px;
-			height: 30px;
+			padding-top: ${basePx(0.75)};
+			width: ${basePx(3.75)};
+			height: ${basePx(3.75)};
 
 			circle {
 				stroke: ${kickerColor};
