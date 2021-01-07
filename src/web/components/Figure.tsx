@@ -8,6 +8,7 @@ type Props = {
 	role?: RoleType;
 	children: JSXElements;
 	id?: string;
+	dataCy?: string;
 };
 
 const roleCss = {
@@ -129,9 +130,10 @@ export const Figure = ({
 	role = 'inline',
 	children,
 	id,
+	dataCy,
 }: Props): JSX.Element => {
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure id={id} className={decidePosition(role)} data-cy={dataCy || ''}>
 			{children}
 		</figure>
 	);

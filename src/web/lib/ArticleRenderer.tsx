@@ -442,7 +442,7 @@ export const ArticleRenderer: React.FC<{
 							key={i}
 							role={element.role}
 							id={`youtube-block-${i}`}
-							data-cy="embed-youtube-atom"
+							dataCy="embed-youtube-atom"
 						>
 							<YoutubeBlockComponent
 								display={display}
