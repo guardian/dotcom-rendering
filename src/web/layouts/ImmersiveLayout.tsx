@@ -327,7 +327,7 @@ export const ImmersiveLayout = ({
 			<div
 				className={css`
 					margin-top: -${HEADLINE_OFFSET}px;
-					/* 
+					/*
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
                         the text appears above the pseudo BlackBox element
