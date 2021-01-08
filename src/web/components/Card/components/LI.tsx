@@ -49,7 +49,7 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 };
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	percentage?: CardPercentageType; // Used to give a particular LI more or less weight / space
 	stretch?: boolean; // When true, the card stretches based on content
 	showDivider?: boolean; // If this LI wraps a card in a row this should be true

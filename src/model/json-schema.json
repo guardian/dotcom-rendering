@@ -246,26 +246,7 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -2641,6 +2622,9 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
                 "brazeApiKey": {
                     "type": "string"
                 },
@@ -2704,6 +2688,28 @@
                 "switches",
                 "videoDuration"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

@@ -93,7 +93,7 @@ const Search = ({
 	dataLinkName,
 }: {
 	className?: string;
-	children: JSXElements;
+	children: React.ReactNode;
 	href: string;
 	dataLinkName: string;
 }) => (

@@ -35,6 +35,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { toTypesPillar } from '@root/src/lib/format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -42,7 +43,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
-import { toTypesPillar } from '@root/src/lib/format';
+
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -357,7 +358,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
 				</HydrateOnce>
 			))}
@@ -385,7 +385,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
 				</HydrateOnce>
 			))}

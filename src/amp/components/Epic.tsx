@@ -167,7 +167,7 @@ const goalExceededMarkerStyle = css`
 	z-index: 2;
 `;
 
-interface ABTestData {
+interface ABTest {
 	name: string;
 	variant: string;
 }
@@ -177,14 +177,14 @@ const buildUrl = (
 	articleUrl: string,
 	campaignCode: string,
 	componentId: string,
-	abTestData: ABTestData,
+	abTest: ABTest,
 ): string => {
 	const acquisitionData = {
 		source: 'GOOGLE_AMP',
 		componentType: 'ACQUISITIONS_EPIC',
 		componentId,
 		campaignCode,
-		abTestData,
+		abTest,
 		referrerUrl: articleUrl,
 	};
 	return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(
@@ -195,8 +195,8 @@ const buildUrl = (
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const epicUrl =
 		process.env.GU_STAGE === 'PROD'
-			? 'https://contributions.guardianapis.com/amp/epic?testData=VARIANTS'
-			: 'https://contributions.code.dev-guardianapis.com/amp/epic?testData=VARIANTS';
+			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
+			: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
 
 	return (
 		<div>

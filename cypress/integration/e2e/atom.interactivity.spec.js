@@ -16,6 +16,7 @@ const timelineUrl =
     'https://www.theguardian.com/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling';
 const chartUrl =
     'https://www.theguardian.com/technology/2020/aug/19/apple-becomes-wall-streets-first-2tn-company';
+
 const atomExpandableTests = (type, url) => {
     describe(type, function () {
         beforeEach(function () {

@@ -45,11 +45,7 @@ import {
 import { Display } from '@guardian/types/Format';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
-const ImmersiveGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -327,7 +323,7 @@ export const ImmersiveLayout = ({
 			<div
 				className={css`
 					margin-top: -${HEADLINE_OFFSET}px;
-					/* 
+					/*
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
                         the text appears above the pseudo BlackBox element

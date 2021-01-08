@@ -23,7 +23,7 @@ const coverageStyles = (percentage?: string) => {
 };
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	percentage?: CardPercentageType;
 };
 

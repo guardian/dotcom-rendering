@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	area: string;
 };
 

@@ -8,6 +8,8 @@ import { YoutubeAtom } from '@guardian/atoms-rendering';
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
+import { toTypesPillar } from '@root/src/lib/format';
+
 import { Caption } from '@root/src/web/components/Caption';
 import { Display } from '@guardian/types/Format';
 
@@ -194,6 +196,7 @@ export const YoutubeBlockComponent = ({
 				duration={duration}
 				origin={origin}
 				eventEmitters={[ophanTracking, gaTracking]}
+				pillar={toTypesPillar(pillar)}
 			/>
 			{!hideCaption && (
 				<Caption
