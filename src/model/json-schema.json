@@ -919,8 +919,7 @@
             "required": [
                 "_type",
                 "html",
-                "id",
-                "url"
+                "id"
             ]
         },
         "QuizAtomBlockElement": {
@@ -990,34 +989,11 @@
                             },
                             "imageUrl": {
                                 "type": "string"
-                            },
-                            "resultBuckets": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "description": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "description",
-                                        "id",
-                                        "title"
-                                    ]
-                                }
                             }
                         },
                         "required": [
                             "answers",
                             "id",
-                            "resultBuckets",
                             "text"
                         ]
                     }
@@ -1065,8 +1041,7 @@
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets",
-                "url"
+                "resultBuckets"
             ]
         },
         "CodeBlockElement": {
@@ -1320,8 +1295,7 @@
                 }
             },
             "required": [
-                "_type",
-                "url"
+                "_type"
             ]
         },
         "GuideAtomBlockElement": {
@@ -1649,8 +1623,7 @@
             "required": [
                 "_type",
                 "id",
-                "js",
-                "url"
+                "js"
             ]
         },
         "InteractiveBlockElement": {
@@ -1682,8 +1655,7 @@
                 }
             },
             "required": [
-                "_type",
-                "url"
+                "_type"
             ]
         },
         "MapBlockElement": {
