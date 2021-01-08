@@ -5,7 +5,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 
 type Props = {
 	root: IslandType;
-	children: React.ReactNode;
+	children: JSX.Element;
 	index?: number;
 	waitFor?: unknown[];
 };
