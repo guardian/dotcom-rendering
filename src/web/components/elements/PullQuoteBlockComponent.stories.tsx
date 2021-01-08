@@ -15,7 +15,7 @@ export default {
 	title: 'Components/PullQuoteBlockComponent',
 };
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<Section showTopBorder={false}>
 		<Flex>
 			<LeftColumn>

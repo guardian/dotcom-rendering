@@ -48,11 +48,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display, Design } from '@guardian/types/Format';
 
-const ShowcaseGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -178,7 +174,7 @@ const PositionHeadline = ({
 	children,
 }: {
 	design: Design;
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 }) => {
 	switch (design) {
 		case Design.Interview:
@@ -289,7 +285,11 @@ export const ShowcaseLayout = ({
 						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
-						<Header edition={CAPI.editionId} />
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
 					</Section>
 
 					<Section

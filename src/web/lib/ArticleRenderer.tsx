@@ -59,7 +59,7 @@ export const ArticleRenderer: React.FC<{
 	design: Design;
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ display, elements, pillar, design, adTargeting, host }) => {
+}> = ({ display, elements, pillar, design, adTargeting }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -462,7 +462,6 @@ export const ArticleRenderer: React.FC<{
 								duration={element.duration}
 								mediaTitle={element.mediaTitle}
 								altText={element.altText}
-								origin={host}
 							/>
 						</Figure>
 					);

@@ -69,7 +69,7 @@ const StandardGrid = ({
 	children,
 	display,
 }: {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	display: Display;
 }) => (
 	<div
@@ -315,7 +315,11 @@ export const CommentLayout = ({
 						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
-						<Header edition={CAPI.editionId} />
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
 					</Section>
 
 					<Section

@@ -5,7 +5,7 @@ import { brandBackground } from '@guardian/src-foundations/palette';
 
 import { Dropdown } from '@frontend/web/components/Dropdown';
 
-const Header = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Header = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			height: 300px;
@@ -17,7 +17,7 @@ const Header = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
 	</div>
 );
 
-const Nav = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Nav = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			height: 20px;

@@ -13,7 +13,7 @@ export default {
 	title: 'Components/Counts',
 };
 
-const Container = ({ children }: { children: JSXElements }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			margin: 40px;

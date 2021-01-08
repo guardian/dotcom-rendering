@@ -568,6 +568,7 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
     brazeApiKey?: string;
 }
 
@@ -603,6 +604,7 @@ interface ConfigTypeBrowser {
     switches: CAPIType['config']['switches'];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
 }
 
 interface GADataType {
@@ -646,8 +648,6 @@ interface DCRBrowserDocumentData {
 interface Props {
     data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
-
-type JSXElements = JSX.Element | JSX.Element[];
 
 type IslandType =
     | 'reader-revenue-links-header'
@@ -763,6 +763,7 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {
+        'amp-experiment': any;
         'amp-sidebar': any;
         'amp-accordion': any;
         'amp-img': any;

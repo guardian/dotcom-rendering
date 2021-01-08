@@ -16,7 +16,7 @@ type Section = {
 	color: string;
 };
 
-const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			display: flex;

@@ -226,11 +226,7 @@ const shouldShowContributor = (design: Design, display: Display) => {
 	}
 };
 
-const AvatarContainer = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 140px;
@@ -254,11 +250,7 @@ const AvatarContainer = ({
 	</div>
 );
 
-const RowBelowLeftCol = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			display: flex;

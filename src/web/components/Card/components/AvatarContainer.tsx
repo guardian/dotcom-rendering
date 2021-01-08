@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { from, until } from '@guardian/src-foundations/mq';
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 };
 
 const containerStyles = css`
