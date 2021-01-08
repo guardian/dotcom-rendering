@@ -20,7 +20,7 @@ export const RewrappedComponent = ({
 	html: string;
 	elCss?: string;
 	tagName: string;
-}): JSX.Element => {
+}) => {
 	const element = isUnwrapped ? tagName : 'span';
 
 	// If we implement a span, we want to apply the CSS to the inner element

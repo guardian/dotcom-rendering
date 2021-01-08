@@ -125,11 +125,7 @@ const decidePosition = (role: RoleType) => {
 	}
 };
 
-export const Figure = ({
-	role = 'inline',
-	children,
-	id,
-}: Props): JSX.Element => {
+export const Figure = ({ role = 'inline', children, id }: Props) => {
 	return (
 		<figure id={id} className={decidePosition(role)}>
 			{children}

@@ -63,7 +63,7 @@ const labelStyle = css`
 	}
 `;
 
-const mainImage = (element: ImageBlockElement): JSX.Element | null => {
+const mainImage = (element: ImageBlockElement) => {
 	const containerWidth = 600;
 	const image: SrcSetItem = bestFitImage(
 		element.imageSources,
@@ -128,7 +128,7 @@ const asComponent = (
 	element: CAPIElement,
 	pillar: CAPIPillar,
 	adTargeting?: any,
-): JSX.Element | null => {
+) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
 			return mainImage(element);
