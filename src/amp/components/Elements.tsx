@@ -47,7 +47,9 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent url={element.url || ''} />
+				);
 			case 'model.dotcomrendering.pageElements.CommentBlockElement':
 				return <CommentBlockComponent key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -63,7 +65,9 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				return <EmbedBlockComponent key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent url={element.url || ''} />
+				);
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 				return (
 					<Expandable
@@ -97,13 +101,15 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 				return (
 					<InteractiveAtomBlockComponent
-						url={element.url}
+						url={element.url || ''}
 						html={element.html}
 						placeholderUrl={element.placeholderUrl}
 					/>
 				); // element.placeholderUrl
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent url={element.url || ''} />
+				);
 			case 'model.dotcomrendering.pageElements.MapBlockElement':
 				return (
 					<MapBlockComponent

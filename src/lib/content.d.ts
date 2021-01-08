@@ -2,7 +2,7 @@
 // Elements
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
-	url: string;
+	url?: string;
 	placeholderUrl?: string;
 	id?: string;
 	html?: string;
