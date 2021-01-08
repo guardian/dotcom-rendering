@@ -2622,6 +2622,9 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
                 "brazeApiKey": {
                     "type": "string"
                 },

@@ -45,8 +45,8 @@ describe('Video', function () {
         });
         it('should render', function() {
             cy.visit(`/Article?url=${embedMediaVideo}`);
-            cy.get(`[data-cy="embed-youtube-atom"]`).scrollIntoView()
-            cy.get(`[data-cy="embed-youtube-atom"]`).should('be.visible');
+            cy.get(`#youtube-block-41`).scrollIntoView()
+            cy.get(`#youtube-block-41`).should('be.visible');
         })
 
         it('should dispatch play to server', function () {

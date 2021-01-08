@@ -130,10 +130,9 @@ export const Figure = ({
 	role = 'inline',
 	children,
 	id,
-	dataCy,
 }: Props): JSX.Element => {
 	return (
-		<figure id={id} className={decidePosition(role)} data-cy={dataCy || ''}>
+		<figure id={id} className={decidePosition(role)}>
 			{children}
 		</figure>
 	);
