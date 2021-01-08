@@ -45,11 +45,7 @@ import {
 import { Display } from '@guardian/types/Format';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
-const ImmersiveGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */

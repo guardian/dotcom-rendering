@@ -7,7 +7,7 @@ const SignInGateSlot = <p id="sign-in-gate" />;
 
 export const withSignInGateSlot = (
 	articleElements: (JSX.Element | null | undefined)[],
-): (JSX.Element | null | undefined)[] => {
+) => {
 	return articleElements.map((element, i) => {
 		return (
 			<>

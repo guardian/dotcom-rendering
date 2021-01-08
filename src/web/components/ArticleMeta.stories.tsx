@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { Display } from '@guardian/types/Format';
 import { ArticleMeta } from './ArticleMeta';
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 220px;

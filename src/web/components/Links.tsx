@@ -94,7 +94,7 @@ const Search = ({
 	href: string;
 	className?: string;
 	dataLinkName: string;
-	children: JSXElements;
+	children: React.ReactNode;
 }) => (
 	<a href={href} className={className} data-link-name={dataLinkName}>
 		{children}

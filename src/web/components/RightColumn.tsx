@@ -19,7 +19,7 @@ const hideBelowDesktop = css`
 `;
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 };
 
 export const RightColumn = ({ children }: Props) => {
