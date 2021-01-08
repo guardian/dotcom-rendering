@@ -194,9 +194,14 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				origin={origin}
 				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={toTypesPillar(pillar)}
+				origin={
+					typeof window !== 'undefined' &&
+					window.location.hostname !== 'localhost'
+						? origin
+						: ''
+				}
 			/>
 			{!hideCaption && (
 				<Caption
