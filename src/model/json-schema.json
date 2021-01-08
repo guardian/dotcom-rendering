@@ -916,8 +916,7 @@
             "required": [
                 "_type",
                 "html",
-                "id",
-                "url"
+                "id"
             ]
         },
         "CodeBlockElement": {
@@ -1171,8 +1170,7 @@
                 }
             },
             "required": [
-                "_type",
-                "url"
+                "_type"
             ]
         },
         "GuideAtomBlockElement": {
@@ -1500,8 +1498,7 @@
             "required": [
                 "_type",
                 "id",
-                "js",
-                "url"
+                "js"
             ]
         },
         "InteractiveBlockElement": {
@@ -1533,8 +1530,7 @@
                 }
             },
             "required": [
-                "_type",
-                "url"
+                "_type"
             ]
         },
         "MapBlockElement": {
