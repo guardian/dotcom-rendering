@@ -577,7 +577,6 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
-	resultBuckets: QuizAtomResultBucketType[];
 };
 
 type ResultBucketsType = {
