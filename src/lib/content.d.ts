@@ -2,7 +2,7 @@
 // Elements
 // -------------------------------------
 interface InteractiveAtomBlockElementBase {
-	url?: string;
+	url: string;
 	placeholderUrl?: string;
 	id?: string;
 	html?: string;
@@ -64,7 +64,8 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 	html: string;
 	role?: RoleType;
 }
-interface QuizAtomBlockElement extends InteractiveAtomBlockElementBase {
+
+interface QuizAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
 	quizType: 'personality' | 'knowledge';
 	quizIndex?: number;

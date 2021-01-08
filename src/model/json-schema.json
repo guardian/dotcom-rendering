@@ -919,7 +919,8 @@
             "required": [
                 "_type",
                 "html",
-                "id"
+                "id",
+                "url"
             ]
         },
         "QuizAtomBlockElement": {
@@ -1019,21 +1020,6 @@
                             "title"
                         ]
                     }
-                },
-                "url": {
-                    "type": "string"
-                },
-                "placeholderUrl": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
                 }
             },
             "required": [
@@ -1295,7 +1281,8 @@
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "url"
             ]
         },
         "GuideAtomBlockElement": {
@@ -1623,7 +1610,8 @@
             "required": [
                 "_type",
                 "id",
-                "js"
+                "js",
+                "url"
             ]
         },
         "InteractiveBlockElement": {
@@ -1655,7 +1643,8 @@
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "url"
             ]
         },
         "MapBlockElement": {
