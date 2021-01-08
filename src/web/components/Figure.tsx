@@ -8,7 +8,6 @@ type Props = {
 	role?: RoleType;
 	children: JSXElements;
 	id?: string;
-	dataCy?: string;
 };
 
 const roleCss = {
