@@ -249,26 +249,7 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -1036,6 +1017,7 @@
                         "required": [
                             "answers",
                             "id",
+                            "resultBuckets",
                             "text"
                         ]
                     }
@@ -1083,7 +1065,8 @@
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets"
+                "resultBuckets",
+                "url"
             ]
         },
         "CodeBlockElement": {
@@ -2791,6 +2774,9 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
                 "brazeApiKey": {
                     "type": "string"
                 },
@@ -2854,6 +2840,28 @@
                 "switches",
                 "videoDuration"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

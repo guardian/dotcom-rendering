@@ -150,15 +150,14 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure id={`quiz-atom-${i}`}>
 							<>
-								{element.quizType === 'personality' &&
-									element.resultBuckets && (
-										<PersonalityQuizAtom
-											id={element.id}
-											questions={element.questions}
-											resultBuckets={
+								{element.quizType === 'personality' && (
+								<PersonalityQuizAtom
+									id={element.id}
+									questions={element.questions}
+									resultBuckets={
 												element.resultBuckets
 											}
-										/>
+								/>
 									)}
 								{element.quizType === 'knowledge' && (
 									<KnowledgeQuizAtom
