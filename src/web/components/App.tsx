@@ -399,14 +399,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={quizAtoms.quizIndex}
 				>
 					<>
-						{quizAtoms.quizType === 'personality' &&
-						(
-						<PersonalityQuizAtom
-							id={quizAtoms.id}
-							questions={quizAtoms.questions}
-							resultBuckets={quizAtoms.resultBuckets}
-						/>
-							)}
+						{quizAtoms.quizType === 'personality' && (
+							<PersonalityQuizAtom
+								id={quizAtoms.id}
+								questions={quizAtoms.questions}
+								resultBuckets={quizAtoms.resultBuckets}
+							/>
+						)}
 						{quizAtoms.quizType === 'knowledge' && (
 							<KnowledgeQuizAtom
 								id={quizAtoms.id}
