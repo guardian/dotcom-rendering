@@ -136,4 +136,14 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 			break;
 		}
 	}
+
+	return (
+		<StandardLayout
+			CAPI={CAPI}
+			NAV={NAV}
+			display={Display.Standard}
+			design={design}
+			pillar={pillar}
+		/>
+	);
 };
