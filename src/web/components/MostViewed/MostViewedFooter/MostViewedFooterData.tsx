@@ -51,7 +51,7 @@ function buildSectionUrl(
 }
 
 function buildDeeplyReadUrl(ajaxUrl: string) {
-	return joinUrl([ajaxUrl, 'most-read-deeply-read', `.json`]);
+	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
 }
 
 export const MostViewedFooterData = ({
