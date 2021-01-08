@@ -358,7 +358,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
 				</HydrateOnce>
 			))}
@@ -386,7 +385,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
 				</HydrateOnce>
 			))}
