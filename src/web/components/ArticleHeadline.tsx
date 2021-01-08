@@ -8,7 +8,7 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -204,8 +204,8 @@ export const ArticleHeadline = ({
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<>
 							<h1 className={cx(lightFont, invertedText)}>
@@ -222,18 +222,18 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
-				case 'Review':
-				case 'Recipe':
-				case 'Feature':
-				case 'Analysis':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Article':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Feature:
+				case Design.Analysis:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
 				default:
 					if (noMainMedia) {
 						return (
@@ -273,9 +273,9 @@ export const ArticleHeadline = ({
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case 'Review':
-				case 'Recipe':
-				case 'Feature':
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Feature:
 					return (
 						<h1
 							className={cx(
@@ -286,8 +286,8 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<>
 							<h1 className={lightFont}>
@@ -304,13 +304,13 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
-				case 'Analysis':
+				case Design.Analysis:
 					return (
 						<h1 className={cx(standardFont, underlinedStyles)}>
 							{curly(headlineString)}
 						</h1>
 					);
-				case 'Interview':
+				case Design.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
@@ -346,13 +346,13 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Article':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
 				default:
 					return (
 						<h1 className={standardFont}>

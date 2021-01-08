@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -119,7 +120,7 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	const pillarToUse =
-		design === 'Comment' && pillar === 'news' ? 'opinion' : pillar;
+		design === Design.Comment && pillar === 'news' ? 'opinion' : pillar;
 
 	return (
 		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>
@@ -152,15 +153,16 @@ export const Card = ({
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											design === 'Live'
+											design === Design.Live
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											design === 'Live' || showPulsingDot
+											design === Design.Live ||
+											showPulsingDot
 										}
 										showSlash={
-											design === 'Live' || showSlash
+											design === Design.Live || showSlash
 										}
 										byline={byline}
 										showByline={showByline}
@@ -212,7 +214,7 @@ export const Card = ({
 										) : undefined
 									}
 									mediaMeta={
-										design === 'Media' && mediaType ? (
+										design === Design.Media && mediaType ? (
 											<MediaMeta
 												pillar={pillarToUse}
 												mediaType={mediaType}

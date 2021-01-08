@@ -5,7 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {
@@ -48,26 +48,26 @@ const standfirstStyles = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
 			switch (design) {
-				case 'PhotoEssay':
+				case Design.PhotoEssay:
 					return css`
 						${headline.xxxsmall({})};
 						margin-top: ${space[2]}px;
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 					`;
-				case 'Comment':
-				case 'GuardianView':
-				case 'Feature':
-				case 'Recipe':
-				case 'Review':
-				case 'Media':
-				case 'MatchReport':
-				case 'AdvertisementFeature':
-				case 'Quiz':
-				case 'Article':
-				case 'Live':
-				case 'Analysis':
-				case 'Interview':
+				case Design.Comment:
+				case Design.GuardianView:
+				case Design.Feature:
+				case Design.Recipe:
+				case Design.Review:
+				case Design.Media:
+				case Design.MatchReport:
+				case Design.AdvertisementFeature:
+				case Design.Quiz:
+				case Design.Article:
+				case Design.Live:
+				case Design.Analysis:
+				case Design.Interview:
 				default:
 					return css`
 						${headline.xsmall({
@@ -88,26 +88,26 @@ const standfirstStyles = (design: Design, display: Display) => {
 		case Display.Showcase:
 		case Display.Standard: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
-				case 'Feature':
-				case 'Recipe':
-				case 'Review':
+				case Design.Comment:
+				case Design.GuardianView:
+				case Design.Feature:
+				case Design.Recipe:
+				case Design.Review:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
 						})};
 						margin-bottom: ${space[3]}px;
 					`;
-				case 'Media':
-				case 'PhotoEssay':
-				case 'MatchReport':
-				case 'AdvertisementFeature':
-				case 'Quiz':
-				case 'Article':
-				case 'Live':
-				case 'Analysis':
-				case 'Interview':
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.MatchReport:
+				case Design.AdvertisementFeature:
+				case Design.Quiz:
+				case Design.Article:
+				case Design.Live:
+				case Design.Analysis:
+				case Design.Interview:
 				default:
 					return css`
 						${headline.xxxsmall({

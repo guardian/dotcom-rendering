@@ -10,7 +10,7 @@ import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
@@ -222,7 +222,8 @@ export const ImageComponent = ({
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
-	const isNotOpinion = design !== 'Comment' && design !== 'GuardianView';
+	const isNotOpinion =
+		design !== Design.Comment && design !== Design.GuardianView;
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true

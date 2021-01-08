@@ -50,7 +50,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -224,7 +224,9 @@ const StandardGrid = ({
 	design: Design;
 	CAPI: CAPIType;
 }) => (
-	<div className={layoutGrid(design === 'MatchReport' && !!CAPI.matchUrl)}>
+	<div
+		className={layoutGrid(design === Design.MatchReport && !!CAPI.matchUrl)}
+	>
 		{children}
 	</div>
 );
@@ -321,7 +323,7 @@ export const StandardLayout = ({
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showMatchStats = design === 'MatchReport' && CAPI.matchUrl;
+	const showMatchStats = design === Design.MatchReport && CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -416,7 +418,7 @@ export const StandardLayout = ({
 					</GridItem>
 					<GridItem area="preFurniture">
 						<div className={maxWidth}>
-							{design === 'MatchReport' && CAPI.matchUrl && (
+							{design === Design.MatchReport && CAPI.matchUrl && (
 								<Placeholder rootId="match-nav" height={230} />
 							)}
 						</div>

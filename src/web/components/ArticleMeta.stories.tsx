@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
@@ -52,7 +52,7 @@ export const ArticleStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -92,7 +92,7 @@ export const BrandingStory = () => {
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -115,7 +115,7 @@ export const FeatureStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				design="Feature"
+				design={Design.Feature}
 				pillar="culture"
 				pageId=""
 				webTitle=""
@@ -137,7 +137,7 @@ export const CommentStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				design="Comment"
+				design={Design.Comment}
 				pillar="opinion"
 				pageId=""
 				webTitle=""
@@ -159,7 +159,7 @@ export const InterviewStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				design="Interview"
+				design={Design.Interview}
 				pillar="lifestyle"
 				pageId=""
 				webTitle=""
@@ -181,7 +181,7 @@ export const ImmersiveStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Immersive}
-				design="Article"
+				design={Design.Article}
 				pillar="news"
 				pageId=""
 				webTitle=""
@@ -203,7 +203,7 @@ export const TwoContributorsStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				design="Feature"
+				design={Design.Feature}
 				pillar="sport"
 				pageId=""
 				webTitle=""

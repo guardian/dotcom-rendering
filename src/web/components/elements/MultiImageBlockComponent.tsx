@@ -7,7 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { Caption } from '@frontend/web/components/Caption';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	design: Design;
@@ -163,7 +163,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -173,7 +173,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -209,7 +209,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -219,7 +219,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -229,7 +229,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="third">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[2]}
 								pillar={pillar}
 								hideCaption={true}
@@ -264,7 +264,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="first">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[0]}
 								pillar={pillar}
 								hideCaption={true}
@@ -274,7 +274,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="second">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[1]}
 								pillar={pillar}
 								hideCaption={true}
@@ -284,7 +284,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="third">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[2]}
 								pillar={pillar}
 								hideCaption={true}
@@ -294,7 +294,7 @@ export const MultiImageBlockComponent = ({
 						<GridItem area="forth">
 							<ImageComponent
 								display={Display.Standard}
-								design="Article"
+								design={Design.Article}
 								element={images[3]}
 								pillar={pillar}
 								hideCaption={true}

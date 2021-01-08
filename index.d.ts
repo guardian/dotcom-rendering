@@ -9,7 +9,9 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type CAPIPillar = RealPillars | FakePillars;
 
-type Design =
+// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type CAPIDesign =
     | 'Article'
     | 'Media'
     | 'Review'
@@ -23,13 +25,12 @@ type Design =
     | 'GuardianView'
     | 'Quiz'
     | 'AdvertisementFeature'
-    | 'PhotoEssay';
+    | 'PhotoEssay'
+    | 'Immersive'
+    | 'SpecialReport'
+    | 'GuardianLabs'
 
-// type Design = import('@guardian/types/Format').Design;
-
-// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
-type CAPIDesign = Design | "Immersive" | "SpecialReport" | "GuardianLabs";
+type Design = import('@guardian/types/Format').Design;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -379,7 +380,7 @@ interface CardType {
     headlineSize?: SmallHeadlineSize;
     showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
     byline?: string;
-    isLiveBlog?: boolean; // When design === 'Live', this denotes if the liveblog is active or not
+    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
     showByline?: boolean;
     webPublicationDate?: string;
     imageUrl?: string;

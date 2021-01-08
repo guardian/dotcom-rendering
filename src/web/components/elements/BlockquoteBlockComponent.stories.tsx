@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
@@ -21,7 +21,7 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		pillar="news"
-		design="Article"
+		design={Design.Article}
 		display={Display.Standard}
 		isFirstParagraph={false}
 	/>

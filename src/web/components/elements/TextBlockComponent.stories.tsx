@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -33,7 +33,7 @@ export const defaultStory = () => {
 			<TextBlockComponent
 				html={html}
 				pillar="news"
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -49,7 +49,7 @@ export const DropCap = () => {
 				html={html}
 				pillar="culture"
 				forceDropCap={true}
-				design="Article"
+				design={Design.Article}
 				display={Display.Immersive}
 				isFirstParagraph={false}
 			/>
@@ -65,7 +65,7 @@ export const QuotedDropCap = () => {
 				html={quotedHtml}
 				pillar="opinion"
 				forceDropCap={false}
-				design="Comment"
+				design={Design.Comment}
 				display={Display.Standard}
 				isFirstParagraph={true}
 			/>
@@ -81,7 +81,7 @@ export const ShortText = () => {
 				html={shortHtml}
 				pillar="news"
 				forceDropCap={true}
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -97,7 +97,7 @@ export const NoTags = () => {
 				html={differentWrapperTags}
 				pillar="news"
 				forceDropCap={true}
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -113,7 +113,7 @@ export const FeatureDropCap = () => {
 				html={html}
 				pillar="culture"
 				forceDropCap={false}
-				design="Feature"
+				design={Design.Feature}
 				display={Display.Standard}
 				isFirstParagraph={true}
 			/>
@@ -129,7 +129,7 @@ export const AList = () => {
 				html={aListHtml}
 				pillar="news"
 				forceDropCap={true}
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -145,7 +145,7 @@ export const BadMarkup = () => {
 				html={badMarkup}
 				pillar="news"
 				forceDropCap={false}
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>
@@ -163,7 +163,7 @@ export const SubSupscript = () => {
 				}
 				pillar="news"
 				forceDropCap={false}
-				design="Article"
+				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
 			/>

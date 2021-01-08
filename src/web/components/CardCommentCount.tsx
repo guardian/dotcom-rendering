@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -64,26 +65,26 @@ const mediaStyles = (pillar: CAPIPillar) => css`
 
 const colourStyles = (design: Design, pillar: CAPIPillar) => {
 	switch (design) {
-		case 'Live':
+		case Design.Live:
 			return css`
 				color: ${decidePillarLight(pillar)};
 				svg {
 					fill: ${decidePillarLight(pillar)};
 				}
 			`;
-		case 'Feature':
-		case 'Interview':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Analysis':
-		case 'Article':
-		case 'Review':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Comment':
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Analysis:
+		case Design.Article:
+		case Design.Review:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Comment:
 		default:
 			return css`
 				color: ${neutral[60]};
@@ -99,7 +100,7 @@ export const CardCommentCount = ({ design, pillar, short, long }: Props) => {
 		<div
 			className={cx(
 				containerStyles,
-				design === 'Media'
+				design === Design.Media
 					? mediaStyles(pillar)
 					: colourStyles(design, pillar),
 			)}

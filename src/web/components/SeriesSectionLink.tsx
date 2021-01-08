@@ -7,7 +7,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
@@ -134,8 +134,8 @@ export const SeriesSectionLink = ({
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView': {
+				case Design.Comment:
+				case Design.GuardianView: {
 					if (tag) {
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
@@ -189,18 +189,18 @@ export const SeriesSectionLink = ({
 						</div>
 					);
 				}
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
 				default: {
 					if (hasSeriesTag) {
 						if (!tag) return null; // Just to keep ts happy
@@ -228,20 +228,20 @@ export const SeriesSectionLink = ({
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Comment:
+				case Design.GuardianView:
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
 				default: {
 					if (tag) {
 						// We have a tag, we're not immersive, show both series and section titles
@@ -252,7 +252,7 @@ export const SeriesSectionLink = ({
 									href={`${guardianBaseURL}/${tag.id}`}
 									className={cx(
 										sectionLabelLink,
-										design === 'MatchReport'
+										design === Design.MatchReport
 											? blackText
 											: pillarColours[pillar],
 										primaryStyle,
@@ -269,7 +269,7 @@ export const SeriesSectionLink = ({
 										href={`${guardianBaseURL}/${sectionUrl}`}
 										className={cx(
 											sectionLabelLink,
-											design === 'MatchReport'
+											design === Design.MatchReport
 												? blackText
 												: pillarColours[pillar],
 											secondaryStyle,
@@ -289,7 +289,7 @@ export const SeriesSectionLink = ({
 							href={`${guardianBaseURL}/${sectionUrl}`}
 							className={cx(
 								sectionLabelLink,
-								design === 'MatchReport'
+								design === Design.MatchReport
 									? blackText
 									: pillarColours[pillar],
 								primaryStyle,

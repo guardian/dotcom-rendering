@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Design } from '@guardian/types/Format';
+
 import { Card } from '@frontend/web/components/Card/Card';
 
 type Props = {
@@ -17,7 +19,7 @@ export const Spotlight = ({ content }: Props) => (
 			headlineSize: 'large',
 			byline: content[0].byline,
 			showByline: content[0].showByline,
-			showQuotes: content[0].design === 'Comment',
+			showQuotes: content[0].design === Design.Comment,
 			webPublicationDate: content[0].webPublicationDate,
 			kickerText: content[0].kickerText,
 			showPulsingDot: content[0].isLiveBlog,

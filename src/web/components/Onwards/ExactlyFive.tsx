@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Design } from '@guardian/types/Format';
+
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
@@ -22,7 +24,7 @@ export const ExactlyFive = ({ content }: Props) => (
 						headlineSize: 'medium',
 						byline: content[0].byline,
 						showByline: content[0].showByline,
-						showQuotes: content[0].design === 'Comment',
+						showQuotes: content[0].design === Design.Comment,
 						webPublicationDate: content[0].webPublicationDate,
 						kickerText: content[0].kickerText,
 						showPulsingDot: content[0].isLiveBlog,
@@ -51,7 +53,7 @@ export const ExactlyFive = ({ content }: Props) => (
 						headlineSize: 'medium',
 						byline: content[1].byline,
 						showByline: content[1].showByline,
-						showQuotes: content[1].design === 'Comment',
+						showQuotes: content[1].design === Design.Comment,
 						webPublicationDate: content[1].webPublicationDate,
 						kickerText: content[1].kickerText,
 						showPulsingDot: content[1].isLiveBlog,
@@ -82,7 +84,8 @@ export const ExactlyFive = ({ content }: Props) => (
 								headlineSize: 'medium',
 								byline: content[2].byline,
 								showByline: content[2].showByline,
-								showQuotes: content[2].design === 'Comment',
+								showQuotes:
+									content[2].design === Design.Comment,
 								webPublicationDate:
 									content[2].webPublicationDate,
 								kickerText: content[2].kickerText,
@@ -106,7 +109,8 @@ export const ExactlyFive = ({ content }: Props) => (
 								headlineSize: 'medium',
 								byline: content[3].byline,
 								showByline: content[3].showByline,
-								showQuotes: content[3].design === 'Comment',
+								showQuotes:
+									content[3].design === Design.Comment,
 								webPublicationDate:
 									content[3].webPublicationDate,
 								kickerText: content[3].kickerText,
@@ -130,7 +134,8 @@ export const ExactlyFive = ({ content }: Props) => (
 								headlineSize: 'medium',
 								byline: content[4].byline,
 								showByline: content[4].showByline,
-								showQuotes: content[4].design === 'Comment',
+								showQuotes:
+									content[4].design === Design.Comment,
 								webPublicationDate:
 									content[4].webPublicationDate,
 								kickerText: content[4].kickerText,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
@@ -72,22 +73,22 @@ const colourStyles = (colour: string) => css`
 
 const headlineStyles = (design: Design, pillar: CAPIPillar) => {
 	switch (design) {
-		case 'Feature':
-		case 'Interview':
+		case Design.Feature:
+		case Design.Interview:
 			return colourStyles(pillarPalette[pillar].dark);
-		case 'Media':
-		case 'Live':
+		case Design.Media:
+		case Design.Live:
 			return colourStyles(neutral[97]);
-		case 'Analysis':
-		case 'PhotoEssay':
-		case 'Article':
-		case 'Review':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Comment':
+		case Design.Analysis:
+		case Design.PhotoEssay:
+		case Design.Article:
+		case Design.Review:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Comment:
 		default:
 	}
 };
@@ -108,7 +109,7 @@ export const CardHeadline = ({
 		<h4
 			className={cx(
 				fontStyles(size),
-				design === 'Analysis' && underlinedStyles(size),
+				design === Design.Analysis && underlinedStyles(size),
 			)}
 		>
 			{kickerText && (

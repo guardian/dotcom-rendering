@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -33,7 +33,7 @@ export const smallAspectRatio = () => {
 				credit=""
 				title=""
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 			/>
 			<p>abc</p>
 		</Container>
@@ -54,7 +54,7 @@ export const largeAspectRatio = () => {
 				credit=""
 				title=""
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 			/>
 			<p>abc</p>
 		</Container>
@@ -75,7 +75,7 @@ export const verticalAspectRatio = () => {
 				credit=""
 				title=""
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 			/>
 			<p>abc</p>
 		</Container>

@@ -13,21 +13,21 @@ const shouldShowAvatar = (design: Design, display: Display) => {
         case 'showcase':
         case 'standard': {
             switch (design) {
-                case 'Feature':
-                case 'Review':
-                case 'Recipe':
-                case 'Interview':
+                case Design.Feature:
+                case Design.Review:
+                case Design.Recipe:
+                case Design.Interview:
                     return true;
-                case 'Live':
-                case 'Media':
-                case 'PhotoEssay':
-                case 'Analysis':
-                case 'Article':
-                case 'MatchReport':
-                case 'GuardianView':
-                case 'Quiz':
-                case 'AdvertisementFeature':
-                case 'Comment':
+                case Design.Live:
+                case Design.Media:
+                case Design.PhotoEssay:
+                case Design.Analysis:
+                case Design.Article:
+                case Design.MatchReport:
+                case Design.GuardianView:
+                case Design.Quiz:
+                case Design.AdvertisementFeature:
+                case Design.Comment:
                 default:
                     return false;
             }

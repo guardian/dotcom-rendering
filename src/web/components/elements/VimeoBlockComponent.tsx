@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const responsiveAspectRatio = (height: number, width: number) => css`
 	/* https://css-tricks.com/aspect-ratio-boxes/ */

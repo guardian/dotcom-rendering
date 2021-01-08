@@ -46,7 +46,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const ShowcaseGrid = ({
 	children,
@@ -181,7 +181,7 @@ const PositionHeadline = ({
 	children: JSX.Element | JSX.Element[];
 }) => {
 	switch (design) {
-		case 'Interview':
+		case Design.Interview:
 			return (
 				<div
 					className={css`
@@ -193,19 +193,19 @@ const PositionHeadline = ({
 					<div className={maxWidth}>{children}</div>
 				</div>
 			);
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Comment':
-		case 'Analysis':
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Analysis:
 		default:
 			return <div className={maxWidth}>{children}</div>;
 	}
@@ -389,7 +389,7 @@ export const ShowcaseLayout = ({
 								pillar={pillar}
 								adTargeting={adTargeting}
 								starRating={
-									design === 'Review' && CAPI.starRating
+									design === Design.Review && CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}

@@ -9,7 +9,7 @@ import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	id: string;

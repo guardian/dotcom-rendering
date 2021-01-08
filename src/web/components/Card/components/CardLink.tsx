@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { Design } from '@guardian/types/Format';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
@@ -37,8 +39,8 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 	`;
 
 	switch (design) {
-		case 'GuardianView':
-		case 'Comment':
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseLinkStyles}
 				background-color: ${opinion[800]};
@@ -50,7 +52,7 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case 'Media':
+		case Design.Media:
 			return css`
 				${baseLinkStyles}
 				background-color: ${neutral[20]};
@@ -59,7 +61,7 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 					filter: brightness(90%);
 				}
 			`;
-		case 'Live':
+		case Design.Live:
 			return css`
 				${baseLinkStyles}
 				background-color: ${pillarPalette[pillar].dark};
@@ -68,16 +70,16 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 					filter: brightness(90%);
 				}
 			`;
-		case 'Article':
-		case 'Review':
-		case 'PhotoEssay':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Analysis':
-		case 'Interview':
+		case Design.Article:
+		case Design.Review:
+		case Design.PhotoEssay:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Feature:
+		case Design.Analysis:
+		case Design.Interview:
 		default:
 			return css`
 				${baseLinkStyles}

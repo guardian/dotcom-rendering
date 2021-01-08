@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';
@@ -15,7 +15,7 @@ export const Article = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -28,7 +28,7 @@ export const Comment = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Comment"
+				design={Design.Comment}
 				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -41,7 +41,7 @@ export const Feature = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Feature"
+				design={Design.Feature}
 				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -54,7 +54,7 @@ export const Immersive = () => {
 		<Section>
 			<Standfirst
 				display={Display.Immersive}
-				design="Article"
+				design={Design.Article}
 				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -67,7 +67,7 @@ export const Review = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Review"
+				design={Design.Review}
 				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -80,7 +80,7 @@ export const Live = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Live"
+				design={Design.Live}
 				standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -93,7 +93,7 @@ export const Interview = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Interview"
+				design={Design.Interview}
 				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -106,7 +106,7 @@ export const Analysis = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Analysis"
+				design={Design.Analysis}
 				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -119,7 +119,7 @@ export const Media = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Media"
+				design={Design.Media}
 				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -132,7 +132,7 @@ export const Recipe = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Recipe"
+				design={Design.Recipe}
 				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -145,7 +145,7 @@ export const MatchReport = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="MatchReport"
+				design={Design.MatchReport}
 				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -158,7 +158,7 @@ export const Quiz = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Quiz"
+				design={Design.Quiz}
 				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -171,7 +171,7 @@ export const SpecialReport = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -184,7 +184,7 @@ export const GuardianView = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="GuardianView"
+				design={Design.GuardianView}
 				standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -197,7 +197,7 @@ export const AdvertisementFeature = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="AdvertisementFeature"
+				design={Design.AdvertisementFeature}
 				standfirst="This is how AdvertisementFeature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -210,7 +210,7 @@ export const PhotoEssay = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>

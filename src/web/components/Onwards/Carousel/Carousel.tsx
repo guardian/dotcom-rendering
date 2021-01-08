@@ -1,16 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { css, cx } from 'emotion';
+import libDebounce from 'lodash/debounce';
+
+import { Design } from '@guardian/types/Format';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
-import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import libDebounce from 'lodash/debounce';
+
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
+
 import { CardAge } from '../../Card/components/CardAge';
 import { Kicker } from '../../Kicker';
 import { headlineBackgroundColour, headlineColour } from './cardColours';
@@ -277,7 +281,7 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
-	const kickerText = trail.design === 'Live' ? 'Live' : trail.kickerText;
+	const kickerText = trail.design === Design.Live ? 'Live' : trail.kickerText;
 
 	return (
 		<a

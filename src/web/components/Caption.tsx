@@ -7,7 +7,7 @@ import { space } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	display: Display;
@@ -140,7 +140,7 @@ export const Caption = ({
 	if (noCaption && (noCredit || hideCredit)) return null;
 
 	switch (design) {
-		case 'PhotoEssay':
+		case Design.PhotoEssay:
 			return (
 				<figcaption
 					className={cx(
@@ -177,19 +177,20 @@ export const Caption = ({
 					{credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
-		case 'Article':
-		case 'Media':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Comment':
-		case 'Analysis':
-		case 'Review':
-		case 'Interview':
+		case Design.Article:
+		case Design.Media:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Analysis:
+		case Design.Review:
+		case Design.Interview:
+		default:
 			return (
 				<figcaption
 					className={cx(

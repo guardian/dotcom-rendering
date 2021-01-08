@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { pillarPalette } from '@frontend/lib/pillars';
@@ -43,20 +44,20 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 
 const colourStyles = (design: Design, pillar: CAPIPillar) => {
 	switch (design) {
-		case 'Comment':
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+		case Design.Comment:
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
 		default:
 			return css`
 				color: ${pillarPalette[pillar].main};

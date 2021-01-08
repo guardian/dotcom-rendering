@@ -43,7 +43,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const gridWide = css`
 	grid-template-areas:
@@ -457,7 +457,7 @@ export const CommentLayout = ({
 								pillar={pillar}
 								adTargeting={adTargeting}
 								starRating={
-									design === 'Review' && CAPI.starRating
+									design === Design.Review && CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}

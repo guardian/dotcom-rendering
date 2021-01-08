@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { Design } from '@guardian/types/Format';
+
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaNews } from '@root/src/amp/components/topMeta/TopMetaNews';
 import { TopMetaOpinion } from '@root/src/amp/components/topMeta/TopMetaOpinion';
@@ -23,8 +26,8 @@ export const TopMeta: React.SFC<{
 	// Extend defaultTopMeta with custom topMeta for some designTypes
 	const designTypeTopMeta: DesignTypesObj = {
 		...defaultTopMeta,
-		Comment: <TopMetaOpinion articleData={data} pillar={pillar} />,
-		AdvertisementFeature: (
+		[Design.Comment]: <TopMetaOpinion articleData={data} pillar={pillar} />,
+		[Design.AdvertisementFeature]: (
 			<TopMetaPaidContent articleData={data} pillar={pillar} />
 		),
 	};

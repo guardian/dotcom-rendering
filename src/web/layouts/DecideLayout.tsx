@@ -2,7 +2,7 @@ import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -25,8 +25,8 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
@@ -36,18 +36,19 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
+				default:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
@@ -58,12 +59,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						/>
 					);
 			}
-			break;
 		}
 		case Display.Showcase: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -73,18 +73,19 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
+				default:
 					return (
 						<ShowcaseLayout
 							CAPI={CAPI}
@@ -95,13 +96,12 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						/>
 					);
 			}
-			break;
 		}
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -111,18 +111,19 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
+				default:
 					return (
 						<StandardLayout
 							CAPI={CAPI}
@@ -133,17 +134,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						/>
 					);
 			}
-			break;
 		}
 	}
-
-	return (
-		<StandardLayout
-			CAPI={CAPI}
-			NAV={NAV}
-			display={Display.Standard}
-			design={design}
-			pillar={pillar}
-		/>
-	);
 };

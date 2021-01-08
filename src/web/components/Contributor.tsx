@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -66,7 +67,7 @@ export const Contributor: React.FC<{
 			data-component="meta-byline"
 			data-link-name="byline"
 		>
-			{design !== 'Interview' && (
+			{design !== Design.Interview && (
 				<div className={bylineStyle(pillar)}>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
+
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
@@ -42,8 +44,8 @@ const body = (pillar: CAPIPillar, design: Design) => {
 	// Extend defaultStyles with custom styles for some designTypes
 	const designTypeStyle: DesignTypesObj = {
 		...defaultStyles,
-		Comment: palette.opinion[800],
-		AdvertisementFeature: palette.neutral[86],
+		[Design.Comment]: palette.opinion[800],
+		[Design.AdvertisementFeature]: palette.neutral[86],
 	};
 
 	return css`

@@ -11,7 +11,7 @@ import { Lazy } from '@root/src/web/components/Lazy';
 
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 const MostViewedFooterData = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedFooterData');

@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types/Format';
+
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -38,7 +40,7 @@ export const Article = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="Article"
+				design={Design.Article}
 				pillar="news"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -55,7 +57,7 @@ export const Comment = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="Comment"
+				design={Design.Comment}
 				pillar="opinion"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -72,7 +74,7 @@ export const CommentAttr = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="Comment"
+				design={Design.Comment}
 				pillar="opinion"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -90,7 +92,7 @@ export const PhotoEssay = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				pillar="lifestyle"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -107,7 +109,7 @@ export const PhotoEssayAttr = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				pillar="lifestyle"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -125,7 +127,7 @@ export const PhotoEssayInline = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				pillar="culture"
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role

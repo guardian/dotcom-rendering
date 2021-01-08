@@ -10,7 +10,7 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 
 type Props = {
 	html: string;
@@ -70,21 +70,21 @@ const shouldShowDropCap = ({
 	if (display === Display.Immersive) return true;
 	// The first para has a drop cap for these design types
 	switch (design) {
-		case 'Feature':
-		case 'Comment':
-		case 'Review':
-		case 'Interview':
-		case 'PhotoEssay':
-		case 'Recipe':
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Review:
+		case Design.Interview:
+		case Design.PhotoEssay:
+		case Design.Recipe:
 			return true;
-		case 'Article':
-		case 'Media':
-		case 'Live':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Analysis':
+		case Design.Article:
+		case Design.Media:
+		case Design.Live:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
+		case Design.Analysis:
 			return false;
 	}
 };

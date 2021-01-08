@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
@@ -61,7 +61,7 @@ export const defaultStory = () => {
 				{...brexitCAPI}
 				display={Display.Standard}
 				pillar="sport"
-				design="Article"
+				design={Design.Article}
 			/>
 		</Container>
 	);
@@ -76,7 +76,7 @@ export const beyondTheBlade = () => {
 				{...beyondTheBladeCAPI}
 				display={Display.Standard}
 				pillar="news"
-				design="Article"
+				design={Design.Article}
 			/>
 		</Container>
 	);
@@ -96,7 +96,7 @@ export const immersiveComment = () => {
 				{...brexitCAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				design="Comment"
+				design={Design.Comment}
 			/>
 		</div>
 	);
@@ -116,7 +116,7 @@ export const immersiveCommentTag = () => {
 				{...CAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				design="Comment"
+				design={Design.Comment}
 				tags={[
 					{
 						id: '',
@@ -138,7 +138,7 @@ export const ImmersiveSeriesTag = () => {
 				{...CAPI}
 				display={Display.Immersive}
 				pillar="sport"
-				design="Review"
+				design={Design.Review}
 				tags={[
 					{
 						id: '',
@@ -161,7 +161,7 @@ export const ArticleBlogTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				design="Article"
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -183,7 +183,7 @@ export const ArticleOpinionTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				design="Article"
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -205,7 +205,7 @@ export const ArticleSeriesTag = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="sport"
-				design="Article"
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -227,7 +227,7 @@ export const ArticleNoTags = () => {
 				{...CAPI}
 				display={Display.Standard}
 				pillar="culture"
-				design="Article"
+				design={Design.Article}
 			/>
 		</Container>
 	);

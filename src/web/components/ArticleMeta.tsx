@@ -8,7 +8,7 @@ import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
@@ -112,7 +112,7 @@ const metaContainer = ({
 		case Display.Showcase:
 		case Display.Standard: {
 			switch (design) {
-				case 'PhotoEssay':
+				case Design.PhotoEssay:
 					return css`
 						${until.phablet} {
 							margin-left: -20px;
@@ -129,19 +129,19 @@ const metaContainer = ({
 							margin-left: 40px;
 						}
 					`;
-				case 'Feature':
-				case 'Review':
-				case 'Recipe':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'Analysis':
-				case 'Article':
-				case 'MatchReport':
-				case 'GuardianView':
-				case 'Quiz':
-				case 'AdvertisementFeature':
-				case 'Comment':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.GuardianView:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
+				case Design.Comment:
 				default:
 					return css`
 						${until.phablet} {
@@ -175,21 +175,21 @@ const shouldShowAvatar = (design: Design, display: Display) => {
 		case Display.Showcase:
 		case Display.Standard: {
 			switch (design) {
-				case 'Feature':
-				case 'Review':
-				case 'Recipe':
-				case 'Interview':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Interview:
 					return true;
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'MatchReport':
-				case 'GuardianView':
-				case 'Quiz':
-				case 'AdvertisementFeature':
-				case 'Comment':
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.GuardianView:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
+				case Design.Comment:
 				default:
 					return false;
 			}
@@ -204,21 +204,21 @@ const shouldShowContributor = (design: Design, display: Display) => {
 		case Display.Showcase:
 		case Display.Standard: {
 			switch (design) {
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return false;
-				case 'Feature':
-				case 'Review':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Interview':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Interview:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.AdvertisementFeature:
 				default:
 					return true;
 			}

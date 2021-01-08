@@ -1,8 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { Design } from '@guardian/types/Format';
 import { headline } from '@guardian/src-foundations/typography';
 import { opinion } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
@@ -28,26 +31,26 @@ const outerStyles = (pillar: CAPIPillar, design: Design) => {
         tones used on the site(that's my understanding anyway!)
     */
 	switch (design) {
-		case 'GuardianView':
-		case 'Comment':
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseStyles};
 				color: ${pillar === 'opinion'
 					? opinion[400]
 					: pillarPalette[pillar].dark};
 			`;
-		case 'PhotoEssay':
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+		case Design.PhotoEssay:
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
 		default:
 			return css`
 				${baseStyles};
@@ -67,24 +70,24 @@ const innerStyles = (design: Design) => {
 	`;
 
 	switch (design) {
-		case 'GuardianView':
-		case 'Comment':
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseStyles};
 				font-weight: 200;
 			`;
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.AdvertisementFeature:
 		default:
 			return css`
 				${baseStyles};

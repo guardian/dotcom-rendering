@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { MultiImageBlockComponent } from './MultiImageBlockComponent';
+import { Design } from '@guardian/types/Format';
 
+import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 
 const oneImage = fourImages.slice(0, 1);
@@ -17,7 +18,7 @@ export default {
 export const SingleImage = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={oneImage}
 		/>
@@ -30,7 +31,7 @@ SingleImage.story = {
 export const SingleImageWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={oneImage}
 			caption="This is the caption for a single image"
@@ -44,7 +45,7 @@ SingleImageWithCaption.story = {
 export const SideBySide = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={twoImages}
 		/>
@@ -57,7 +58,7 @@ SideBySide.story = {
 export const SideBySideWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={twoImages}
 			caption="This is the caption for side by side"
@@ -71,7 +72,7 @@ SideBySideWithCaption.story = {
 export const OneAboveTwo = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={threeImages}
 		/>
@@ -84,7 +85,7 @@ OneAboveTwo.story = {
 export const OneAboveTwoWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={threeImages}
 			caption="This is the caption for one above two"
@@ -98,7 +99,7 @@ OneAboveTwoWithCaption.story = {
 export const GridOfFour = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={fourImages}
 		/>
@@ -111,7 +112,7 @@ GridOfFour.story = {
 export const GridOfFourWithCaption = () => {
 	return (
 		<MultiImageBlockComponent
-			design="Article"
+			design={Design.Article}
 			pillar="news"
 			images={fourImages}
 			caption="This is the caption for grid of four"

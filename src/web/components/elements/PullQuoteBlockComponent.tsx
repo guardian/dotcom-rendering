@@ -1,10 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { Design } from '@guardian/types/Format';
+import { headline } from '@guardian/src-foundations/typography';
+import { neutral, text } from '@guardian/src-foundations/palette';
+import { from, until } from '@guardian/src-foundations/mq';
+
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const partiallyLeft = css`
@@ -100,7 +103,7 @@ const fullyInline = css`
 `;
 
 function decidePosition(role: string, design: Design) {
-	if (design === 'PhotoEssay') {
+	if (design === Design.PhotoEssay) {
 		return role === 'supporting' ? fullyLeft : fullyInline;
 	}
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
@@ -125,8 +128,8 @@ export const PullQuoteBlockComponent: React.FC<{
 	attribution?: string;
 }> = ({ html, pillar, design, attribution, role }) => {
 	switch (design) {
-		case 'GuardianView':
-		case 'Comment':
+		case Design.GuardianView:
+		case Design.Comment:
 			return (
 				<aside
 					className={cx(
@@ -170,7 +173,7 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case 'PhotoEssay':
+		case Design.PhotoEssay:
 			return (
 				<aside
 					className={cx(
@@ -209,17 +212,17 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case 'Feature':
-		case 'Recipe':
-		case 'Review':
-		case 'Media':
-		case 'MatchReport':
-		case 'AdvertisementFeature':
-		case 'Quiz':
-		case 'Article':
-		case 'Live':
-		case 'Analysis':
-		case 'Interview':
+		case Design.Feature:
+		case Design.Recipe:
+		case Design.Review:
+		case Design.Media:
+		case Design.MatchReport:
+		case Design.AdvertisementFeature:
+		case Design.Quiz:
+		case Design.Article:
+		case Design.Live:
+		case Design.Analysis:
+		case Design.Interview:
 		default:
 			return (
 				<aside

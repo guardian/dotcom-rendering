@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -55,7 +55,7 @@ export const StandardArticle = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Standard}
-				design="Article"
+				design={Design.Article}
 				captionText="Caption text"
 				pillar="news"
 			/>
@@ -71,7 +71,7 @@ export const PhotoEssay = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Immersive}
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				captionText="Caption text"
 				pillar="lifestyle"
 				padCaption={false}
@@ -92,7 +92,7 @@ export const PhotoEssayHTML = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Immersive}
-				design="PhotoEssay"
+				design={Design.PhotoEssay}
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
 				pillar="sport"
 				padCaption={false}
@@ -113,7 +113,7 @@ export const Padded = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Standard}
-				design="Analysis"
+				design={Design.Analysis}
 				captionText="Caption text"
 				pillar="culture"
 				padCaption={true}
@@ -134,7 +134,7 @@ export const WidthLimited = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Standard}
-				design="Review"
+				design={Design.Review}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				pillar="culture"
 				padCaption={false}
@@ -155,7 +155,7 @@ export const Credited = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Standard}
-				design="MatchReport"
+				design={Design.MatchReport}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				pillar="culture"
 				padCaption={false}
@@ -176,7 +176,7 @@ export const Overlayed = () => {
 		<Container>
 			<CaptionBlockComponent
 				display={Display.Showcase}
-				design="Comment"
+				design={Design.Comment}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				pillar="sport"
 				padCaption={false}

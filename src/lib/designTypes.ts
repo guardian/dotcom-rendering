@@ -1,18 +1,20 @@
+import { Design } from '@guardian/types/Format';
+
 export const designTypes: Design[] = [
-	'Article',
-	'Media',
-	'Review',
-	'Analysis',
-	'Comment',
-	'Feature',
-	'Live',
-	'Recipe',
-	'MatchReport',
-	'Interview',
-	'GuardianView',
-	'Quiz',
-	'AdvertisementFeature',
-	'PhotoEssay',
+	Design.Article,
+	Design.Media,
+	Design.Review,
+	Design.Analysis,
+	Design.Comment,
+	Design.Feature,
+	Design.Live,
+	Design.Recipe,
+	Design.MatchReport,
+	Design.Interview,
+	Design.GuardianView,
+	Design.Quiz,
+	Design.AdvertisementFeature,
+	Design.PhotoEssay,
 ];
 
 // Return an object of all designTypes that uses the defaultVal

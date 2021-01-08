@@ -42,7 +42,7 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types/Format';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
 const ImmersiveGrid = ({
@@ -317,7 +317,7 @@ export const ImmersiveLayout = ({
 					pillar={pillar}
 					adTargeting={adTargeting}
 					starRating={
-						CAPI.designType === 'Review' && CAPI.starRating
+						design === Design.Review && CAPI.starRating
 							? CAPI.starRating
 							: undefined
 					}
@@ -385,7 +385,7 @@ export const ImmersiveLayout = ({
 						</Hide>
 					</GridItem>
 					<GridItem area="border">
-						{design === 'PhotoEssay' ? <></> : <Border />}
+						{design === Design.PhotoEssay ? <></> : <Border />}
 					</GridItem>
 					<GridItem area="title">
 						<>
@@ -453,7 +453,7 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{design === 'PhotoEssay' ? (
+						{design === Design.PhotoEssay ? (
 							<></>
 						) : (
 							<div className={maxWidth}>
@@ -461,10 +461,10 @@ export const ImmersiveLayout = ({
 									<GuardianLines
 										pillar={pillar}
 										effect={decideLineEffect(
-											'Article',
+											Design.Article,
 											pillar,
 										)}
-										count={decideLineCount('Article')}
+										count={decideLineCount(Design.Article)}
 									/>
 								</div>
 							</div>
