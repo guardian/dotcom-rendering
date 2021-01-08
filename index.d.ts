@@ -646,8 +646,6 @@ interface Props {
     data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
-type JSXElements = JSX.Element | JSX.Element[];
-
 type IslandType =
     | 'reader-revenue-links-header'
     | 'sub-nav-root'

@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 
 type Props = {
-	children: JSX.Element;
+	children: React.ReactNode;
 	margin: number;
 };
 

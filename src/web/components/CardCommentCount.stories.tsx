@@ -8,7 +8,7 @@ export default {
 	title: 'Components/CardCommentCount',
 };
 
-const Container = ({ children }: { children: JSXElements }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			margin: 40px;

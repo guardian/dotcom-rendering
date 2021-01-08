@@ -30,11 +30,7 @@ const ieFallback = css`
 	}
 `;
 
-const SideBySideGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const SideBySideGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			${ieFallback}
@@ -54,11 +50,7 @@ const SideBySideGrid = ({
 	</div>
 );
 
-const OneAboveTwoGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const OneAboveTwoGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			${ieFallback}
@@ -80,11 +72,7 @@ const OneAboveTwoGrid = ({
 	</div>
 );
 
-const GridOfFour = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			${ieFallback}

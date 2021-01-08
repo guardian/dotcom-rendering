@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 type Props = {
 	role?: RoleType;
-	children: JSXElements;
+	children: React.ReactNode;
 	id?: string;
 };
 

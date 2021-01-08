@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { Lineup } from './Lineup';
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 340px;

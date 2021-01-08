@@ -8,7 +8,7 @@ export default {
 	title: 'Components/Distribution',
 };
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 300px;

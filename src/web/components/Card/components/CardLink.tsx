@@ -91,7 +91,7 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 };
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	linkTo: string;
 	designType: DesignType;
 	pillar: CAPIPillar;
