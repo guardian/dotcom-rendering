@@ -139,7 +139,6 @@ export const htmlTemplate = ({
 
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
-                ${preloadTags.join('\n')}
 
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
@@ -240,6 +239,7 @@ export const htmlTemplate = ({
 					).replace(/%20/g, '+')}" />
                 </noscript>
                 ${[...priorityScriptTags].join('\n')}
+                ${preloadTags.join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
