@@ -3583,10 +3583,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@testing-library/dom@^7.14.2", "@testing-library/dom@^7.27.1":
-  version "7.27.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.27.1.tgz#b760182513357e4448a8461f9565d733a88d71d0"
-  integrity sha512-AF56RoeUU8bO4DOvLyMI44H3O1LVKZQi2D/m5fNDr+iR4drfOFikTr26hT6IY7YG+l8g69FXsHERa+uThaYYQg==
+"@testing-library/dom@^7.27.1", "@testing-library/dom@^7.28.1":
+  version "7.29.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.2.tgz#6cba65d961d8b36d621a98caa8537444075fb42e"
+  integrity sha512-CBMELfyY1jKdtLcSRmEnZWRzRkCRVSNPTzhzrn8wY8OnzUo7Pe/W+HgLzt4TDnWIPYeusHBodf9wUjJF48kPmA==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.12.5"
@@ -3597,13 +3597,13 @@
     lz-string "^1.4.4"
     pretty-format "^26.6.2"
 
-"@testing-library/react@^10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-10.3.0.tgz#d615385b8d86ef4d76142a423755d471b3673295"
-  integrity sha512-Rhn5uJK6lYHWzlGVbK6uAvheAW8AUoFYxTLGdDxgsJDaK/PYy5drWfW/6YpMMOKMw+u6jHHl4MNHlt5qLHnm0Q==
+"@testing-library/react@^11.2.3":
+  version "11.2.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.2.3.tgz#9971ede1c8465a231d7982eeca3c39fc362d5443"
+  integrity sha512-BirBUGPkTW28ULuCwIbYo0y2+0aavHczBT6N9r3LrsswEW3pg25l1wgoE7I8QBIy1upXWkwKpYdWY7NYYP0Bxw==
   dependencies:
-    "@babel/runtime" "^7.10.2"
-    "@testing-library/dom" "^7.14.2"
+    "@babel/runtime" "^7.12.5"
+    "@testing-library/dom" "^7.28.1"
 
 "@testing-library/user-event@^12.6.0":
   version "12.6.0"
