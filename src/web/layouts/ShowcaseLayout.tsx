@@ -393,6 +393,7 @@ export const ShowcaseLayout = ({
 										? CAPI.starRating
 										: undefined
 								}
+								host={host}
 							/>
 						</div>
 					</GridItem>

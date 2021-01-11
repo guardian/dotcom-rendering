@@ -194,9 +194,9 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				origin={origin}
 				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={toTypesPillar(pillar)}
+				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (
 				<Caption
