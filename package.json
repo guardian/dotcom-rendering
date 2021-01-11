@@ -154,7 +154,7 @@
         "@types/google.analytics": "^0.0.40",
         "@types/he": "^1.1.1",
         "@types/html-minifier": "^4.0.0",
-        "@types/jest": "^26.0.15",
+        "@types/jest": "^26.0.20",
         "@types/jsdom": "^11.0.6",
         "@types/lodash.clonedeep": "^4.5.4",
         "@types/lodash.get": "^4.4.4",
