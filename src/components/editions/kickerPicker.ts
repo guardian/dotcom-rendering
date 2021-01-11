@@ -28,31 +28,38 @@ const kickerPicker = (article: Item): Option<string> => {
 			toneTag.id === 'tone/letters' ||
 			toneTag.id === 'tone/analysis' ||
 			toneTag.id === 'tone/obituaries'
-		)
+		) {
 			return some(toneTag.webTitle);
+		}
 
 		if (
 			toneTag.id === 'tone/reviews' ||
 			toneTag.id === 'tone/editorials' ||
 			toneTag.id === 'tone/matchreports' ||
 			toneTag.id === 'tone/explainers'
-		)
+		) {
 			return some(toneTag.webTitle.slice(0, -1));
+		}
 
-		if (toneTag.id === 'tone/comment') return some(byline);
+		if (toneTag.id === 'tone/comment') {
+			return some(byline);
+		}
 	}
 
 	const topTag = article.tags[0] as Tag | undefined;
 	const secondTag = article.tags[1] as Tag | undefined;
 
-	if (!topTag) return none;
+	if (!topTag) {
+		return none;
+	}
 
 	if (
 		!tagTitleIsAlreadyInHeadline(topTag, article.headline) ||
 		!secondTag ||
 		tagTitleIsAlreadyInHeadline(secondTag, article.headline)
-	)
+	) {
 		return some(topTag.webTitle);
+	}
 
 	return some(secondTag.webTitle);
 };
