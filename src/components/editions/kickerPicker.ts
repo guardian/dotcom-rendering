@@ -21,7 +21,9 @@ const kickerPicker = (article: Item): Option<string> => {
 	const seriesTag = article.tags.find((tag) => tag.type === TagType.SERIES);
 	const toneTag = article.tags.find((tag) => tag.type === TagType.TONE);
 
-	if (seriesTag) return some(seriesTag.webTitle);
+	if (seriesTag) {
+		return some(seriesTag.webTitle);
+	}
 
 	if (toneTag?.id) {
 		if (
