@@ -1,16 +1,8 @@
-import { basePx, baseMultiply, darkModeCss } from './styles';
+import { darkModeCss } from './styles';
 import { getThemeStyles } from 'themeStyles';
 import { Pillar } from '@guardian/types';
 
 describe('helper functions return correct styles', () => {
-	test('Calculates base pixels', () => {
-		expect(basePx(1)).toBe('8px');
-	});
-
-	test('Calculates base multiplication', () => {
-		expect(baseMultiply(4)).toBe(32);
-	});
-
 	test('Returns correct pillar styles for pillar', () => {
 		const pillarStyles = getThemeStyles(Pillar.News);
 		const expectedNewsPillarStyles = {
@@ -18,6 +10,7 @@ describe('helper functions return correct styles', () => {
 			inverted: '#FF5943',
 			liveblogBackground: '#AB0613',
 			liveblogDarkBackground: '#8B0000',
+			link: '#AB0613',
 		};
 		expect(pillarStyles).toEqual(expectedNewsPillarStyles);
 	});

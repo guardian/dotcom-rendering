@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
+import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import {
 	background,
@@ -24,7 +25,6 @@ import type { Comment as CommentItem } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
-	basePx,
 	darkModeCss,
 	lineStyles,
 	onwardStyles,
@@ -52,10 +52,10 @@ const BorderStyles = css`
 
 const topBorder = css`
 	border-top: solid 1px ${neutral[86]};
-	margin-top: ${basePx(1)};
+	margin-top: ${remSpace[2]};
 
 	${from.wide} {
-		margin-top: ${basePx(1)};
+		margin-top: ${remSpace[2]};
 	}
 
 	${darkModeCss`

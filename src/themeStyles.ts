@@ -11,6 +11,7 @@ interface ThemeStyles {
 	inverted: string;
 	liveblogBackground: string;
 	liveblogDarkBackground: string;
+	link: string;
 }
 
 type ThemeColours = {
@@ -23,36 +24,42 @@ export const themeColours: ThemeColours = {
 		inverted: palette.news[500],
 		liveblogBackground: palette.news[300],
 		liveblogDarkBackground: palette.news[200],
+		link: palette.news[300],
 	},
 	[Pillar.Opinion]: {
 		kicker: palette.opinion[400],
 		inverted: palette.opinion[500],
 		liveblogBackground: palette.opinion[300],
 		liveblogDarkBackground: palette.opinion[200],
+		link: palette.opinion[300],
 	},
 	[Pillar.Sport]: {
 		kicker: palette.sport[400],
 		inverted: palette.sport[500],
 		liveblogBackground: palette.sport[300],
 		liveblogDarkBackground: palette.sport[200],
+		link: palette.sport[300],
 	},
 	[Pillar.Culture]: {
 		kicker: palette.culture[400],
 		inverted: palette.culture[500],
 		liveblogBackground: palette.culture[300],
 		liveblogDarkBackground: palette.culture[200],
+		link: palette.culture[300],
 	},
 	[Pillar.Lifestyle]: {
 		kicker: palette.lifestyle[400],
 		inverted: palette.lifestyle[500],
 		liveblogBackground: palette.lifestyle[300],
 		liveblogDarkBackground: palette.lifestyle[200],
+		link: palette.lifestyle[300],
 	},
 	[Special.SpecialReport]: {
 		kicker: palette.specialReport[400],
 		inverted: palette.specialReport[500],
 		liveblogBackground: palette.specialReport[300],
 		liveblogDarkBackground: palette.specialReport[200],
+		link: palette.specialReport[300],
 	},
 };
 
