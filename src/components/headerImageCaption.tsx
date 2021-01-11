@@ -8,7 +8,7 @@ import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { basePx, darkModeCss, wideContentWidth } from 'styles';
+import { darkModeCss, wideContentWidth } from 'styles';
 
 const captionId = 'header-image-caption';
 
@@ -17,11 +17,11 @@ const HeaderImageCaptionStyles = css`
 		text-align: center;
 		background-color: ${brandAlt[400]};
 		color: ${neutral[7]};
-		width: ${basePx(4)};
-		height: ${basePx(4)};
+		width: ${remSpace[9]};
+		height: ${remSpace[9]};
 		position: absolute;
-		bottom: ${basePx(1)};
-		right: ${basePx(1)};
+		bottom: ${remSpace[2]};
+		right: ${remSpace[2]};
 		border-radius: 100%;
 		outline: none;
 
@@ -41,7 +41,7 @@ const HeaderImageCaptionStyles = css`
 		background-color: rgba(0, 0, 0, 0.8);
 		padding: ${remSpace[2]};
 		overflow: hidden;
-		padding-right: ${basePx(6)};
+		padding-right: ${remSpace[12]};
 		z-index: 1;
 		color: ${neutral[100]};
 		${textSans.small()};

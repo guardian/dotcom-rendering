@@ -9,7 +9,7 @@ import { Design, Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
-import { basePx, darkModeCss, darkModeStyles } from 'styles';
+import { darkModeCss, darkModeStyles } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 export const richLinkWidth = '8.75rem';
@@ -54,7 +54,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 	return css`
 		background: ${backgroundColor};
-		padding: ${basePx(1)};
+		padding: ${remSpace[2]};
 		border-top: solid 1px ${neutral[60]};
 		transition: all 0.2s ease;
 
@@ -79,8 +79,8 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		.js-image img {
-			width: calc(100% + ${basePx(2)});
-			margin: -${basePx(1)} 0 0 -${basePx(1)};
+			width: calc(100% + ${remSpace[4]});
+			margin: -${remSpace[2]} 0 0 -${remSpace[2]};
 		}
 
 		button {
@@ -109,7 +109,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			color: ${neutral[7]};
 
 			h1 {
-				margin: ${basePx(0, 0, 2, 0)};
+				margin: 0 0 ${remSpace[4]} 0;
 				${headline.xxxsmall({ fontWeight: 'bold' })}
 				hyphens: auto;
 			}
@@ -117,11 +117,13 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 		float: left;
 		clear: left;
-		margin: ${basePx(1, 2, 1, 0)};
+		margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
 
 		width: ${richLinkWidth};
 		${from.wide} {
-			margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
+			margin-left: calc(
+				-${richLinkWidth} - ${remSpace[4]} - ${remSpace[6]}
+			);
 		}
 
 		${darkModeCss`
