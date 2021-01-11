@@ -18,7 +18,13 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: 12
-            - run: npm ci
+            - uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: node-
+            - name: install
+              run: npm ci
             - uses: chromaui/action@v1
               with:
                   appCode: ${{ secrets.CHROMATIC_APP_CODE }}
