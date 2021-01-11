@@ -73,7 +73,7 @@ export const MostViewedFooterData = ({
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | TrailTabType[]
 	>(url);
-
+	console.log(url);
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
 		return null;
