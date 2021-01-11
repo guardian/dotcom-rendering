@@ -95,5 +95,4 @@ export const pingEditionsRenderingJsString = (message: Message): string => {
 
 export const initPingEditionsRendering = (): void => {
 	window.pingEditionsRendering = pingEditionsRendering;
-	window.pingEditionsRenderingJsString = pingEditionsRenderingJsString;
 };
