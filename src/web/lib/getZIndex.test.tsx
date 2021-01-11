@@ -1,9 +1,9 @@
 import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
-    it('gets the correct zindex for group and sibling', () => {
+	it('gets the correct zindex for group and sibling', () => {
 		expect(getZIndex('headerWrapper')).toBe('z-index: 9;');
-        expect(getZIndex('stickyAdWrapper')).toBe('z-index: 8;');
+		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 8;');
 		expect(getZIndex('headerLinks')).toBe('z-index: 7;');
 		expect(getZIndex('TheGuardian')).toBe('z-index: 6;');
 		expect(getZIndex('articleHeadline')).toBe('z-index: 5;');
