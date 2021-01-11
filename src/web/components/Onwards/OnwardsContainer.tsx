@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	dataComponentName: string;
 	dataLinkName: string;
 };

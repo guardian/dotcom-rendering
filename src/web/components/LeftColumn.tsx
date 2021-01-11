@@ -47,7 +47,7 @@ const rightBorder = (colour: string) => css`
 `;
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	showRightBorder?: boolean;
 	showPartialRightBorder?: boolean;
 	borderColour?: string;

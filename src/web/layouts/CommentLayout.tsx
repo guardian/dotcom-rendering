@@ -69,7 +69,7 @@ const StandardGrid = ({
 	children,
 	display,
 }: {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	display: Display;
 }) => (
 	<div

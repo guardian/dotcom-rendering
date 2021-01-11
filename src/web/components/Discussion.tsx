@@ -173,6 +173,7 @@ export const Discussion = ({
 							${from.leftCol} {
 								padding-left: 10px;
 							}
+							max-width: 100%;
 						`}
 					>
 						<Hide when="above" breakpoint="leftCol">

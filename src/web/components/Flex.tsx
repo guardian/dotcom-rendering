@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	direction?: 'row' | 'column';
 	justify?: 'space-between' | 'flex-start'; // Extend as required
 };

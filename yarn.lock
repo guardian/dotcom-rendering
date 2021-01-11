@@ -2113,10 +2113,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.7.4.tgz#ae75775c40f8234a2e2774c126a688e9a98f5df4"
   integrity sha512-f/XieB0dOyGYZDhP/UmyrHiyuehETt2L1GKqacsySFdcD/++fKe7LLcXbza4NE54MHyS0wbvd+Qh4avjG4IPLg==
 
-"@guardian/discussion-rendering@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-4.4.0.tgz#577acb55edd2680134894d60e6d669de10c791ea"
-  integrity sha512-n9DJHXz+WjT4A5l/SWhdPnzTihOf6imNTgU0Y6vwsFD1F4MiE02pjWR9TiaygQBbiZxYpR+d/fYd/9KFCmwgpA==
+"@guardian/discussion-rendering@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-4.5.0.tgz#eb489b1d1551e73c2bf1c5b0b54bfa39b10789d8"
+  integrity sha512-I1qbvb5JHkq/18k73P57zECLHBe5yI5L7VsX/Yqb7CT2ZFt2mG7rGjy04zjbd+5hLqcpeRQNs0KFMveoazM8uQ==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -3870,10 +3870,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.15":
-  version "26.0.15"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.15.tgz#12e02c0372ad0548e07b9f4e19132b834cb1effe"
-  integrity sha512-s2VMReFXRg9XXxV+CW9e5Nz8fH2K1aEhwgjUqPPbQd7g95T0laAcvLv032EhFHIa5GHsZ8W7iJEQVaJq6k3Gog==
+"@types/jest@^26.0.20":
+  version "26.0.20"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.20.tgz#cd2f2702ecf69e86b586e1f5223a60e454056307"
+  integrity sha512-9zi2Y+5USJRxd0FsahERhBwlcvFh6D2GLQnY2FH2BzK8J9s9omvNHIbvABwIluXa0fD8XVKMLTO0aOEuUfACAA==
   dependencies:
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"

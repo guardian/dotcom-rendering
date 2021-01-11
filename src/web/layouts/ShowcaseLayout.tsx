@@ -48,11 +48,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@guardian/types/Format';
 
-const ShowcaseGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -178,7 +174,7 @@ const PositionHeadline = ({
 	children,
 }: {
 	designType: DesignType;
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 }) => {
 	switch (designType) {
 		case 'Interview':

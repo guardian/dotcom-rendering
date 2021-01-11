@@ -220,7 +220,7 @@ const StandardGrid = ({
 	designType,
 	CAPI,
 }: {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	designType: DesignType;
 	CAPI: CAPIType;
 }) => (
