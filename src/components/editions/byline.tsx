@@ -7,7 +7,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { basePx } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
 
@@ -18,11 +17,11 @@ const styles = (kickerColor: string): SerializedStyles => {
 		display: flex;
 		justify-content: space-between;
 		svg {
-			flex: 0 0 ${basePx(3.75)};
-			padding: ${basePx(0.5)};
-			padding-top: ${basePx(0.75)};
-			width: ${basePx(3.75)};
-			height: ${basePx(3.75)};
+			flex: 0 0 1.875rem;
+			padding: 0.25rem;
+			padding-top: 0.375rem;
+			width: 1.875rem;
+			height: 1.875rem;
 
 			circle {
 				stroke: ${kickerColor};

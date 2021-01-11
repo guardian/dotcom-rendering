@@ -7,7 +7,6 @@ import {
 } from 'client/editionsCommunication';
 import type { FC, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
-import { basePx } from 'styles';
 
 const usePlatform = (defaultPlatform: Platform): Platform => {
 	const [platform, setPlatform] = useState(defaultPlatform);
@@ -50,7 +49,7 @@ const buttonStyles = css`
 	background: none;
 	border: none;
 	padding: 0;
-	height: ${basePx(5)};
+	height: 2.5rem;
 `;
 
 export const ShareIcon: FC = () => {
