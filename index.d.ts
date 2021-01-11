@@ -703,7 +703,6 @@ type IslandType =
     | 'youtube-block'
     | 'youtube-block-main-media'
     | 'chart-atom';
-
 interface BaseTrailType {
     url: string;
     headline: string;

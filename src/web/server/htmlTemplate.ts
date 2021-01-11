@@ -117,8 +117,8 @@ export const htmlTemplate = ({
 	// Note that we only preload for modern browsers scripts
 	// as browser support doesn't exist for non type=module
 	// https://caniuse.com/?search=preload
-	const preloadScripts: string[] = ['EditionDropdown'];
-	const preloadTags = preloadScripts.map(
+	const preloadComponents: PreloadedComponents[] = ['EditionDropdown'];
+	const preloadComponentLinkTags = preloadComponents.map(
 		(filename) =>
 			`<link rel="modulepreload" as="script" crossorigin href="${getDist({
 				path: `${filename}.js`,
@@ -239,7 +239,7 @@ export const htmlTemplate = ({
 					).replace(/%20/g, '+')}" />
                 </noscript>
                 ${[...priorityScriptTags].join('\n')}
-                ${preloadTags.join('\n')}
+                ${preloadComponentLinkTags.join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
