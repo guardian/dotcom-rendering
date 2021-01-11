@@ -1,6 +1,7 @@
 import { css } from '@emotion/core';
 import {
 	isPlatformMessageEvent,
+	MessageKind,
 	pingEditionsNative,
 	Platform,
 } from 'client/editionsCommunication';
@@ -55,12 +56,14 @@ const buttonStyles = css`
 export const ShareIcon: FC = () => {
 	const platform = usePlatform(Platform.IOS);
 	useEffect(() => {
-		pingEditionsNative({ kind: 'platform-query' });
+		pingEditionsNative({ kind: MessageKind.PlatformQuery });
 	}, []);
 	return (
 		<button
 			css={buttonStyles}
-			onClick={(): void => pingEditionsNative({ kind: 'share' })}
+			onClick={(): void =>
+				pingEditionsNative({ kind: MessageKind.Share })
+			}
 		>
 			{platform === Platform.IOS ? (
 				<IOSShareIcon />

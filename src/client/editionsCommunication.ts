@@ -10,17 +10,23 @@ declare global {
 	}
 }
 
+export const enum MessageKind {
+	Share = 'Share',
+	Platform = 'Platform',
+	PlatformQuery = 'PlatformQuery',
+}
+
 type ShareMessage = {
-	kind: 'share';
+	kind: MessageKind.Share;
 };
 
 export type PlatformMessage = {
-	kind: 'platform';
+	kind: MessageKind.Platform;
 	value: Platform;
 };
 
 type PlatformQueryMessage = {
-	kind: 'platform-query';
+	kind: MessageKind.PlatformQuery;
 };
 
 type Message = ShareMessage | PlatformMessage | PlatformQueryMessage;
@@ -34,7 +40,7 @@ export const isPlatformMessageEvent = (
 	customEvent: CustomEventInit<Message>,
 ): customEvent is CustomEvent<PlatformMessage> => {
 	if (
-		customEvent.detail?.kind === 'platform' &&
+		customEvent.detail?.kind === MessageKind.Platform &&
 		customEvent.detail.value in Platform
 	) {
 		return true;
