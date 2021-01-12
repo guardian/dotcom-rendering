@@ -18,7 +18,7 @@ describe('Discussion', function () {
     it('should scroll the page to the comments section and expand it when the comment count link is clicked', function () {
         cy.visit(`/Article?url=${articleUrl}`);
         cy.get('[data-cy=comment-counts]').click();
-        cy.contains('Displaying comments');
+        cy.contains('Displaying threads');
     });
 
     it('should show a count of the comments', function () {
@@ -31,7 +31,7 @@ describe('Discussion', function () {
     //     const roughLoadPositionOfComments = 4000;
     //     cy.scrollTo(0, roughLoadPositionOfComments, { duration: 500 });
     //     cy.contains('View more comments').click();
-    //     cy.contains('Displaying comments');
+    //     cy.contains('Displaying threads');
     // });
 
     it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {

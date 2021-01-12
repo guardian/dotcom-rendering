@@ -9,11 +9,11 @@ export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
 // Support Frontend cookies (dropped when contribution is made)
 export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
-    'gu.contributions.recurring.contrib-timestamp.Monthly';
+	'gu.contributions.recurring.contrib-timestamp.Monthly';
 export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
-    'gu.contributions.recurring.contrib-timestamp.Annual';
+	'gu.contributions.recurring.contrib-timestamp.Annual';
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
-    'gu.contributions.contrib-timestamp';
+	'gu.contributions.contrib-timestamp';
 
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
@@ -26,10 +26,10 @@ export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
 const shouldShowSupportMessaging = (): boolean => {
-    const hideSupportMessaging =
-        getCookie(HIDE_SUPPORT_MESSAGING_COOKIE) === 'true';
+	const hideSupportMessaging =
+		getCookie(HIDE_SUPPORT_MESSAGING_COOKIE) === 'true';
 
-    return !hideSupportMessaging;
+	return !hideSupportMessaging;
 };
 
 // Determine if user is a recurring contributor by checking if they are signed in
@@ -38,22 +38,22 @@ const shouldShowSupportMessaging = (): boolean => {
 // as the former might not reflect the latest contributor status, since it's set upon signing in.
 // Frontend Support cookies are set when a contribution is made.
 export const isRecurringContributor = (isSignedIn: boolean): boolean => {
-    // Attributes cookie - we want this to have a specific value
-    const isRecurringContributorFromAttrs =
-        getCookie(RECURRING_CONTRIBUTOR_COOKIE) === 'true';
+	// Attributes cookie - we want this to have a specific value
+	const isRecurringContributorFromAttrs =
+		getCookie(RECURRING_CONTRIBUTOR_COOKIE) === 'true';
 
-    // Support cookies - we only care whether these exist
-    const hasMonthlyContributionCookie =
-        getCookie(SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE) !== null;
-    const hasAnnualContributionCookie =
-        getCookie(SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE) !== null;
+	// Support cookies - we only care whether these exist
+	const hasMonthlyContributionCookie =
+		getCookie(SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE) !== null;
+	const hasAnnualContributionCookie =
+		getCookie(SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE) !== null;
 
-    return (
-        isSignedIn &&
-        (isRecurringContributorFromAttrs ||
-            hasMonthlyContributionCookie ||
-            hasAnnualContributionCookie)
-    );
+	return (
+		isSignedIn &&
+		(isRecurringContributorFromAttrs ||
+			hasMonthlyContributionCookie ||
+			hasAnnualContributionCookie)
+	);
 };
 
 // looks at attribute and support cookies
@@ -62,108 +62,108 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 // Get the date of the latest one-off contribution by looking at the two relevant cookies
 // and returning a Unix epoch string of the latest date found.
 export const getLastOneOffContributionDate = (): number | undefined => {
-    // Attributes cookie - expects YYYY-MM-DD
-    const contributionDateFromAttributes = getCookie(
-        ONE_OFF_CONTRIBUTION_DATE_COOKIE,
-    );
+	// Attributes cookie - expects YYYY-MM-DD
+	const contributionDateFromAttributes = getCookie(
+		ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+	);
 
-    // Support cookies - expects Unix epoch
-    const contributionDateFromSupport = getCookie(
-        SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-    );
+	// Support cookies - expects Unix epoch
+	const contributionDateFromSupport = getCookie(
+		SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+	);
 
-    if (!contributionDateFromAttributes && !contributionDateFromSupport) {
-        return undefined;
-    }
+	if (!contributionDateFromAttributes && !contributionDateFromSupport) {
+		return undefined;
+	}
 
-    // Parse dates into common format so they can be compared
-    const parsedDateFromAttributes = contributionDateFromAttributes
-        ? Date.parse(contributionDateFromAttributes)
-        : 0;
-    const parsedDateFromSupport = contributionDateFromSupport
-        ? parseInt(contributionDateFromSupport, 10)
-        : 0;
+	// Parse dates into common format so they can be compared
+	const parsedDateFromAttributes = contributionDateFromAttributes
+		? Date.parse(contributionDateFromAttributes)
+		: 0;
+	const parsedDateFromSupport = contributionDateFromSupport
+		? parseInt(contributionDateFromSupport, 10)
+		: 0;
 
-    // Return most recent date
-    // Condition only passed if 'parsedDateFromAttributes' is NOT NaN
-    if (parsedDateFromAttributes > parsedDateFromSupport) {
-        return parsedDateFromAttributes;
-    }
+	// Return most recent date
+	// Condition only passed if 'parsedDateFromAttributes' is NOT NaN
+	if (parsedDateFromAttributes > parsedDateFromSupport) {
+		return parsedDateFromAttributes;
+	}
 
-    return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
+	return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
 };
 
 const dateDiffDays = (from: number, to: number): number => {
-    const oneDayMs = 1000 * 60 * 60 * 24;
-    const diffMs = to - from;
-    return Math.floor(diffMs / oneDayMs);
+	const oneDayMs = 1000 * 60 * 60 * 24;
+	const diffMs = to - from;
+	return Math.floor(diffMs / oneDayMs);
 };
 
 const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = () => {
-    const lastContributionDate = getLastOneOffContributionDate();
-    if (lastContributionDate) {
-        const now = Date.now();
-        return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
-    }
+	const lastContributionDate = getLastOneOffContributionDate();
+	if (lastContributionDate) {
+		const now = Date.now();
+		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
+	}
 
-    return false;
+	return false;
 };
 
 export const shouldHideSupportMessaging = (
-    isSignedIn: boolean = false,
+	isSignedIn: boolean = false,
 ): boolean =>
-    !shouldShowSupportMessaging() ||
-    isRecurringContributor(isSignedIn) ||
-    isRecentOneOffContributor();
+	!shouldShowSupportMessaging() ||
+	isRecurringContributor(isSignedIn) ||
+	isRecentOneOffContributor();
 
 const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 
 export const hasOptedOutOfArticleCount = (): boolean =>
-    getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
+	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
-    window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
-    window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
+	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
+	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
 export const getArticleCountConsent = (): Promise<boolean> => {
-    if (hasOptedOutOfArticleCount()) {
-        return Promise.resolve(false);
-    }
-    return new Promise((resolve) => {
-        onConsentChange(({ ccpa, tcfv2, aus }) => {
-            if (ccpa || aus) {
-                resolve(true);
-            } else if (tcfv2) {
-                const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
-                    (consent) => tcfv2.consents[consent],
-                );
+	if (hasOptedOutOfArticleCount()) {
+		return Promise.resolve(false);
+	}
+	return new Promise((resolve) => {
+		onConsentChange(({ ccpa, tcfv2, aus }) => {
+			if (ccpa || aus) {
+				resolve(true);
+			} else if (tcfv2) {
+				const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+					(consent) => tcfv2.consents[consent],
+				);
 
-                if (!hasRequiredConsents) {
-                    removeArticleCountsFromLocalStorage();
-                }
+				if (!hasRequiredConsents) {
+					removeArticleCountsFromLocalStorage();
+				}
 
-                resolve(hasRequiredConsents);
-            }
-        });
-    });
+				resolve(hasRequiredConsents);
+			}
+		});
+	});
 };
 
 const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {
-    const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
-    if (item && !Number.isNaN(parseInt(item, 10))) {
-        const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
-        if (!withinCachePeriod) {
-            // Expired
-            window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
-        }
-        return withinCachePeriod;
-    }
-    return false;
+	const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
+	if (item && !Number.isNaN(parseInt(item, 10))) {
+		const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
+		if (!withinCachePeriod) {
+			// Expired
+			window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
+		}
+		return withinCachePeriod;
+	}
+	return false;
 };
 
 export const setLocalNoBannerCachePeriod = (): void =>
-    window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);

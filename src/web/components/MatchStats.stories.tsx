@@ -11,30 +11,30 @@ import { MatchStats } from './MatchStats';
 import { RightColumn } from './RightColumn';
 
 export default {
-    component: MatchStats,
-    title: 'Components/MatchStats',
+	component: MatchStats,
+	title: 'Components/MatchStats',
 };
 
 export const Default = () => {
-    return <MatchStats home={game.homeTeam} away={game.awayTeam} />;
+	return <MatchStats home={game.homeTeam} away={game.awayTeam} />;
 };
 Default.story = { name: 'default' };
 
 export const InContext = () => {
-    return (
-        <Section>
-            <Flex>
-                <LeftColumn>
-                    <></>
-                </LeftColumn>
-                <ArticleContainer>
-                    <MatchStats home={game.homeTeam} away={game.awayTeam} />
-                </ArticleContainer>
-                <RightColumn>
-                    <></>
-                </RightColumn>
-            </Flex>
-        </Section>
-    );
+	return (
+		<Section>
+			<Flex>
+				<LeftColumn>
+					<></>
+				</LeftColumn>
+				<ArticleContainer>
+					<MatchStats home={game.homeTeam} away={game.awayTeam} />
+				</ArticleContainer>
+				<RightColumn>
+					<></>
+				</RightColumn>
+			</Flex>
+		</Section>
+	);
 };
 InContext.story = { name: 'when placed in article context' };

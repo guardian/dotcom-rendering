@@ -1,23 +1,23 @@
 import { Participations } from '@guardian/ab-core';
 
 export const getForcedParticipationsFromUrl = (
-    windowHash: string,
+	windowHash: string,
 ): Participations | {} => {
-    if (windowHash.startsWith('#ab')) {
-        const tokens = windowHash.replace('#ab-', '').split(',');
-        return tokens.reduce((obj, token) => {
-            const [testId, variantId] = token.split('=');
+	if (windowHash.startsWith('#ab')) {
+		const tokens = windowHash.replace('#ab-', '').split(',');
+		return tokens.reduce((obj, token) => {
+			const [testId, variantId] = token.split('=');
 
-            if (testId && variantId) {
-                return {
-                    ...obj,
-                    [testId]: { variant: variantId },
-                };
-            }
+			if (testId && variantId) {
+				return {
+					...obj,
+					[testId]: { variant: variantId },
+				};
+			}
 
-            return obj;
-        }, {} as Participations);
-    }
+			return obj;
+		}, {} as Participations);
+	}
 
-    return {};
+	return {};
 };
