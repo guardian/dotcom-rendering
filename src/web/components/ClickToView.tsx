@@ -29,7 +29,6 @@ const Container = ({
 }) => (
     <div
         className={css`
-            background: ${background.primary};
             width: ${width}px;
             height: ${height}px;
         `}
@@ -38,17 +37,26 @@ const Container = ({
     </div>
 );
 
-const Content = ({ children }: { children: React.ReactNode }) => (
+const Outer = ({ children }: { children: React.ReactNode }) => (
+    <div
+        className={css`
+            background: ${background.primary};
+            border: 1px solid ${border.primary};
+            height: 100%;
+        `}
+    >
+        {children}
+    </div>
+);
+
+const Inner = ({ children }: { children: React.ReactNode }) => (
     <div
         className={css`
             display: flex;
             flex-direction: column;
-            height: calc(100% - 16px);
             justify-content: space-between;
+            height: calc(100% - 16px);
             padding: ${space[3]}px;
-            border: 1px solid ${border.primary};
-            margin-top: ${space[3]}px;
-            margin-bottom: ${space[3]}px;
         `}
     >
         {children}
@@ -109,37 +117,44 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
     if (showOverlay) {
         return (
             <Container width={width} height={height}>
-                <Content>
-                    <Top>
-                        <Headline width={width}>
-                            The colourful beak is very large
-                        </Headline>
-                        <Body width={width}>
-                            Quaerat quaerat ex nihil autem consequatur. Velit
-                            rerum at ad dignissimos aut excepturi ratione
-                            excepturi. Quaerat ipsam natus totam et aut
-                            distinctio eaque voluptatem.
-                            <Link href="https://theguardian.com">
-                                {' '}
-                                Quaerat ipsam
-                            </Link>
-                        </Body>
-                    </Top>
-                    <Bottom>
-                        <Button
-                            priority="primary"
-                            size={width > 300 ? 'small' : 'xsmall'}
-                            icon={<SvgCheckmark />}
-                            iconSide="left"
-                            onClick={() => handleClick()}
-                        >
-                            Click to view
-                        </Button>
-                    </Bottom>
-                </Content>
-                <Lines />
+                <Outer>
+                    <Inner>
+                        <Top>
+                            <Headline width={width}>
+                                The colourful beak is very large
+                            </Headline>
+                            <Body width={width}>
+                                Quaerat quaerat ex nihil autem consequatur.
+                                Velit rerum at ad dignissimos aut excepturi
+                                ratione excepturi. Quaerat ipsam natus totam et
+                                aut distinctio eaque voluptatem.
+                                <Link href="https://theguardian.com">
+                                    {' '}
+                                    Quaerat ipsam
+                                </Link>
+                            </Body>
+                        </Top>
+                        <Bottom>
+                            <Button
+                                priority="primary"
+                                size={width > 300 ? 'small' : 'xsmall'}
+                                icon={<SvgCheckmark />}
+                                iconSide="left"
+                                onClick={() => handleClick()}
+                            >
+                                Click to view
+                            </Button>
+                        </Bottom>
+                    </Inner>
+                    <Lines />
+                </Outer>
             </Container>
         );
     }
-    return <>{children}</>;
+
+    return (
+        <Container width={width} height={height}>
+            {children}
+        </Container>
+    );
 };
