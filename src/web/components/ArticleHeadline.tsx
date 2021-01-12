@@ -243,7 +243,6 @@ export const ArticleHeadline = ({
                                 className={cx(
                                     jumboFont,
                                     maxWidth,
-                                    immersiveStyles,
                                     displayBlock,
                                 )}
                             >

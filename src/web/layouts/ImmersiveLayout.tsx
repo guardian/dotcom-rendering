@@ -277,12 +277,12 @@ export const ImmersiveLayout = ({
                         100vw is normally enough but don't let the content shrink vertically too
                         much just in case
                     */
-                    min-height: 25rem;
+                    min-height: ${mainMedia && '25rem'};
                     ${from.desktop} {
-                        min-height: 31.25rem;
+                        min-height: ${mainMedia && '31.25rem'};
                     }
                     ${from.wide} {
-                        min-height: 50rem;
+                        min-height: ${mainMedia && '50rem'};
                     }
                 `}
             >
@@ -324,52 +324,56 @@ export const ImmersiveLayout = ({
                     hideCaption={true}
                 />
             </div>
-            <div
-                className={css`
-                    margin-top: -${HEADLINE_OFFSET}px;
-                    /* 
+            {mainMedia && (
+                <>
+                    <div
+                        className={css`
+                            margin-top: -${HEADLINE_OFFSET}px;
+                            /* 
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
                         the text appears above the pseudo BlackBox element
                     */
-                    position: relative;
-                    ${getZIndex('articleHeadline')}
-                `}
-            >
-                <ContainerLayout
-                    verticalMargins={false}
-                    padContent={false}
-                    padSides={false}
-                    leftContent={<LeftColCaption />}
-                >
-                    <ArticleTitle
-                        display={display}
-                        designType={designType}
-                        tags={CAPI.tags}
-                        sectionLabel={CAPI.sectionLabel}
-                        sectionUrl={CAPI.sectionUrl}
-                        guardianBaseURL={CAPI.guardianBaseURL}
-                        pillar={pillar}
-                        badge={CAPI.badge}
-                    />
-                </ContainerLayout>
-                <BlackBox>
-                    <ContainerLayout
-                        verticalMargins={false}
-                        padContent={false}
-                        padSides={false}
+                            position: relative;
+                            ${getZIndex('articleHeadline')}
+                        `}
                     >
-                        <ArticleHeadline
-                            display={display}
-                            headlineString={CAPI.headline}
-                            designType={designType}
-                            pillar={pillar}
-                            tags={CAPI.tags}
-                            byline={CAPI.author.byline}
-                        />
-                    </ContainerLayout>
-                </BlackBox>
-            </div>
+                        <ContainerLayout
+                            verticalMargins={false}
+                            padContent={false}
+                            padSides={false}
+                            leftContent={<LeftColCaption />}
+                        >
+                            <ArticleTitle
+                                display={display}
+                                designType={designType}
+                                tags={CAPI.tags}
+                                sectionLabel={CAPI.sectionLabel}
+                                sectionUrl={CAPI.sectionUrl}
+                                guardianBaseURL={CAPI.guardianBaseURL}
+                                pillar={pillar}
+                                badge={CAPI.badge}
+                            />
+                        </ContainerLayout>
+                        <BlackBox>
+                            <ContainerLayout
+                                verticalMargins={false}
+                                padContent={false}
+                                padSides={false}
+                            >
+                                <ArticleHeadline
+                                    display={display}
+                                    headlineString={CAPI.headline}
+                                    designType={designType}
+                                    pillar={pillar}
+                                    tags={CAPI.tags}
+                                    byline={CAPI.author.byline}
+                                />
+                            </ContainerLayout>
+                        </BlackBox>
+                    </div>
+                </>
+            )}
             <Section showTopBorder={false} showSideBorders={false}>
                 <ImmersiveGrid>
                     {/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
@@ -392,8 +396,9 @@ export const ImmersiveLayout = ({
                             {!mainMedia && (
                                 <div
                                     className={css`
-                                        margin-top: -3px;
-                                        margin-left: -10px;
+                                        margin-top: -8px;
+                                        margin-left: -4px;
+                                        margin-bottom: 12px;
 
                                         ${until.tablet} {
                                             margin-left: -20px;
@@ -409,6 +414,7 @@ export const ImmersiveLayout = ({
                                         guardianBaseURL={CAPI.guardianBaseURL}
                                         pillar={pillar}
                                         badge={CAPI.badge}
+                                        noMainMedia={true}
                                     />
                                 </div>
                             )}
