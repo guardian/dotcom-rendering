@@ -333,6 +333,7 @@ type CAPIBrowserType = {
     audioAtoms: AudioAtomBlockElement[];
     youtubeBlockElement: YoutubeBlockElement[];
     youtubeMainMediaBlockElement: YoutubeBlockElement[];
+    quizAtoms: QuizAtomBlockElement[];
 };
 
 interface TagType {
@@ -670,6 +671,7 @@ type IslandType =
     | 'match-stats'
     | 'callout'
     | 'comments'
+    | 'quiz-atom'
     | 'qanda-atom'
     | 'guide-atom'
     | 'profile-atom'

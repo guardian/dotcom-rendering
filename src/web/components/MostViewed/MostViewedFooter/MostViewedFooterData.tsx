@@ -50,8 +50,8 @@ function buildSectionUrl(
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
-function buildDeeplyReadUrl(ajaxUrl: string, pillar: CAPIPillar) {
-	return joinUrl([ajaxUrl, 'most-read-deeply-read', `${pillar}.json?dcr`]);
+function buildDeeplyReadUrl(ajaxUrl: string) {
+	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
 }
 
 export const MostViewedFooterData = ({
@@ -68,7 +68,7 @@ export const MostViewedFooterData = ({
 	);
 
 	const url = inDeeplyReadTestVariant
-		? buildDeeplyReadUrl(ajaxUrl, pillar)
+		? buildDeeplyReadUrl(ajaxUrl)
 		: buildSectionUrl(ajaxUrl, pillar, sectionName);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | TrailTabType[]

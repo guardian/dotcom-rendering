@@ -45,9 +45,6 @@ export default {
 			// This has the effect of turning off the viewports addon by default
 			defaultViewport: 'doesNotExist',
 		},
-		chromatic: {
-			disable: true,
-		},
 	},
 };
 

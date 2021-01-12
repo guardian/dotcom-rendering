@@ -42,6 +42,8 @@ import {
 	ProfileAtom,
 	TimelineAtom,
 	VideoAtom,
+	PersonalityQuizAtom,
+	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { Display, Design } from '@guardian/types';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -59,7 +61,7 @@ export const ArticleRenderer: React.FC<{
 	design: Design;
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ display, elements, pillar, design, adTargeting }) => {
+}> = ({ display, elements, pillar, design, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -142,6 +144,26 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<ChartAtom id={element.id} html={element.html} />
+						</Figure>
+					);
+				case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
+					return (
+						<Figure id={`quiz-atom-${i}`}>
+							<>
+								{element.quizType === 'personality' && (
+									<PersonalityQuizAtom
+										id={element.id}
+										questions={element.questions}
+										resultBuckets={element.resultBuckets}
+									/>
+								)}
+								{element.quizType === 'knowledge' && (
+									<KnowledgeQuizAtom
+										id={element.id}
+										questions={element.questions}
+									/>
+								)}
+							</>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
@@ -462,6 +484,7 @@ export const ArticleRenderer: React.FC<{
 								duration={element.duration}
 								mediaTitle={element.mediaTitle}
 								altText={element.altText}
+								origin={host}
 							/>
 						</Figure>
 					);
