@@ -14,7 +14,7 @@ const standardPadding = css`
 	}
 `;
 
-const determinPadding = (designType: DesignType) => {
+const determinePadding = (designType: DesignType) => {
 	switch (designType) {
 		case 'Article':
 		case 'Media':
@@ -40,7 +40,7 @@ export const ArticleHeadlinePadding: React.FC<{
 	children: React.ReactNode;
 	designType: DesignType;
 }> = ({ children, designType }) => {
-	const paddingClassName = determinPadding(designType);
+	const paddingClassName = determinePadding(designType);
 	return (
 		<div className={cx(paddingTop, paddingClassName || '')}>{children}</div>
 	);
