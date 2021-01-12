@@ -18,7 +18,6 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -421,19 +420,15 @@ export const ImmersiveLayout = ({
 						<>
 							{!mainMedia && (
 								<div className={maxWidth}>
-									<ArticleHeadlinePadding
+									<ArticleHeadline
+										display={display}
+										headlineString={CAPI.headline}
 										designType={designType}
-									>
-										<ArticleHeadline
-											display={display}
-											headlineString={CAPI.headline}
-											designType={designType}
-											pillar={pillar}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-											noMainMedia={true}
-										/>
-									</ArticleHeadlinePadding>
+										pillar={pillar}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										noMainMedia={true}
+									/>
 								</div>
 							)}
 						</>
