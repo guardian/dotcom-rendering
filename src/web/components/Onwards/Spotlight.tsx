@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 import { Section } from '@frontend/web/components/Section';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';

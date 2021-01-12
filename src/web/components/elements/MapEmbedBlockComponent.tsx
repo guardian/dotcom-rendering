@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const MapEmbedBlockComponent: React.FC<{
 	embedUrl?: string;

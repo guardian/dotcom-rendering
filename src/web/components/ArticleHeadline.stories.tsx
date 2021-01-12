@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';

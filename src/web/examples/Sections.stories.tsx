@@ -9,7 +9,7 @@ import { Footer } from '@frontend/web/components/Footer';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 
 import {
 	brandBorder,

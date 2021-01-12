@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, within } from '@testing-library/react';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 

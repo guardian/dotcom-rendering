@@ -1,7 +1,7 @@
 import React from 'react';
 // import { css } from 'emotion';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	display: Display;

@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	pillar: CAPIPillar;

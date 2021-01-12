@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';

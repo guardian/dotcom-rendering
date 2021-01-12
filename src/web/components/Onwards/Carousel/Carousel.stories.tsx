@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import { Carousel } from './Carousel';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const GuVideoBlockComponent: React.FC<{
 	html: string;

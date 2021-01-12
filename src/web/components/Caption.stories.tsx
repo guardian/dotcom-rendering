@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export default {
 	component: Caption,

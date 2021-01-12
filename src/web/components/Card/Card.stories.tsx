@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';

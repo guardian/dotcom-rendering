@@ -1,4 +1,4 @@
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 export const decideDesignType = (designType: CAPIDesign): Design => {
 	switch (designType) {

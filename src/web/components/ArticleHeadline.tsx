@@ -8,7 +8,7 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {

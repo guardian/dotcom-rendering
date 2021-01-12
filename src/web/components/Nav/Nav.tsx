@@ -14,7 +14,7 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 

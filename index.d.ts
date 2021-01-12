@@ -30,7 +30,7 @@ type CAPIDesign =
     | 'SpecialReport'
     | 'GuardianLabs'
 
-type Design = import('@guardian/types/Format').Design;
+type Design = import('@guardian/types').Design;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}

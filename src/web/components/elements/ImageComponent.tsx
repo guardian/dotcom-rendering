@@ -10,7 +10,7 @@ import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	display: Display;

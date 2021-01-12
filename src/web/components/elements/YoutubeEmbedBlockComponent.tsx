@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-import { Display, Design } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
 	pillar: CAPIPillar;

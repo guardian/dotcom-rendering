@@ -1,4 +1,4 @@
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import { findCount, buildUrl } from './useComments';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import {
 	responseWithTwoTabs,

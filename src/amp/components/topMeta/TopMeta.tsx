@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaNews } from '@root/src/amp/components/topMeta/TopMetaNews';

@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import libDebounce from 'lodash/debounce';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,

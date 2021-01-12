@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types/Format';
+import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { opinion } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';

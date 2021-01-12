@@ -55,7 +55,7 @@
         "@guardian/src-svgs": "^2.7.1",
         "@guardian/src-text-area": "^2.7.1",
         "@guardian/src-text-input": "^2.7.1",
-        "@guardian/types": "^0.5.2",
+        "@guardian/types": "^1.1.0",
         "@hkdobrev/run-if-changed": "^0.3.1",
         "@sentry/browser": "^5.27.2",
         "@types/ajv": "^1.0.0",
