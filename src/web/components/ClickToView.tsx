@@ -32,8 +32,6 @@ const Container = ({
             background: ${background.primary};
             width: ${width}px;
             height: ${height}px;
-            border: 1px solid ${border.primary};
-            margin: ${space[3]}px;
         `}
     >
         {children}
@@ -48,6 +46,9 @@ const Content = ({ children }: { children: React.ReactNode }) => (
             height: calc(100% - 16px);
             justify-content: space-between;
             padding: ${space[3]}px;
+            border: 1px solid ${border.primary};
+            margin-top: ${space[3]}px;
+            margin-bottom: ${space[3]}px;
         `}
     >
         {children}
