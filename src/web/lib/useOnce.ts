@@ -6,14 +6,12 @@ import { useEffect, useState } from 'react';
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
 export const useOnce = (task: Function, waitFor: unknown[]) => {
-    const [alreadyRun, setAlreadyRun] = useState(false);
-    const isReady = (dependencies: unknown[]) => {
-        return dependencies.every((dep) => dep !== undefined);
-    };
-    useEffect(() => {
-        if (!alreadyRun && isReady(waitFor)) {
-            task();
-            setAlreadyRun(true);
-        }
-    }, [alreadyRun, waitFor, task]);
+	const [alreadyRun, setAlreadyRun] = useState(false);
+	const isReady = waitFor.every((dep) => dep !== undefined);
+	useEffect(() => {
+		if (!alreadyRun && isReady) {
+			task();
+			setAlreadyRun(true);
+		}
+	}, [alreadyRun, isReady, task]);
 };

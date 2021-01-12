@@ -5,12 +5,12 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { CodeBlockComponent } from './CodeBlockComponent';
 
 export default {
-    component: CodeBlockComponent,
-    title: 'Components/CodeBlockComponent',
+	component: CodeBlockComponent,
+	title: 'Components/CodeBlockComponent',
 };
 
 export const JavascriptStory = () => {
-    const javascript = `
+	const javascript = `
 import React from 'react';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
@@ -33,18 +33,18 @@ JavascriptStory.story = {
     name: 'with javascript',
 };
     `;
-    return (
-        <ContainerLayout>
-            <CodeBlockComponent code={javascript} language="javascript" />
-        </ContainerLayout>
-    );
+	return (
+		<ContainerLayout>
+			<CodeBlockComponent code={javascript} language="javascript" />
+		</ContainerLayout>
+	);
 };
 JavascriptStory.story = {
-    name: 'with javascript',
+	name: 'with javascript',
 };
 
 export const ScalaStory = () => {
-    const scala = `
+	const scala = `
 import akka.http.scaladsl.model.HttpRequest
 import ch.qos.logback.classic.{Logger => LogbackLogger}
 import net.logstash.logback.marker.Markers
@@ -67,18 +67,18 @@ object Logging {
     rootLogger.info(setMarkers(akkaRequest), message)
 }
     `;
-    return (
-        <ContainerLayout>
-            <CodeBlockComponent code={scala} language="scala" />
-        </ContainerLayout>
-    );
+	return (
+		<ContainerLayout>
+			<CodeBlockComponent code={scala} language="scala" />
+		</ContainerLayout>
+	);
 };
 ScalaStory.story = {
-    name: 'with scala',
+	name: 'with scala',
 };
 
 export const TypescriptStory = () => {
-    const typescript = `
+	const typescript = `
 // CodeBlockElement props
 type Props = {
     code: string;
@@ -94,12 +94,12 @@ type Language =
     | 'scala'
     | 'elm';
 `;
-    return (
-        <ContainerLayout>
-            <CodeBlockComponent code={typescript} language="typescript" />
-        </ContainerLayout>
-    );
+	return (
+		<ContainerLayout>
+			<CodeBlockComponent code={typescript} language="typescript" />
+		</ContainerLayout>
+	);
 };
 TypescriptStory.story = {
-    name: 'with typescript',
+	name: 'with typescript',
 };

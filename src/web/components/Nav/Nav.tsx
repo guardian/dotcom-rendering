@@ -19,59 +19,59 @@ import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
-    pillar: Pillar;
-    nav: NavType;
-    display: Display;
-    subscribeUrl: string;
-    edition: Edition;
+	pillar: CAPIPillar;
+	nav: NavType;
+	display: Display;
+	subscribeUrl: string;
+	edition: Edition;
 };
 
 const clearFixStyle = css`
-    ${clearFix};
+	${clearFix};
 `;
 
 const rowStyles = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 `;
 
 const minHeight = css`
-    min-height: 48px;
+	min-height: 48px;
 `;
 
 const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
-    <div
-        className={css`
-            margin-top: 3px;
-            z-index: 2;
+	<div
+		className={css`
+			margin-top: 3px;
+			z-index: 2;
 
-            ${until.desktop} {
-                margin-right: 51px;
-            }
+			${until.desktop} {
+				margin-right: 51px;
+			}
 
-            margin-right: 24px;
-        `}
-    >
-        {children}
-    </div>
+			margin-right: 24px;
+		`}
+	>
+		{children}
+	</div>
 );
 
 const PositionButton = ({ children }: { children: React.ReactNode }) => (
-    <div
-        className={css`
-            margin-top: ${space[1]}px;
-            margin-left: ${space[2]}px;
-        `}
-    >
-        {children}
-    </div>
+	<div
+		className={css`
+			margin-top: ${space[1]}px;
+			margin-left: ${space[2]}px;
+		`}
+	>
+		{children}
+	</div>
 );
 
 export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
-    return (
-        <div className={rowStyles}>
-            {/*
+	return (
+		<div className={rowStyles}>
+			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
                 We therefore use JS to make the Nav elements more accessibile. We add a
@@ -83,9 +83,9 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                 This is not a perfect solution as not all screen readers support JS
                 https://webaim.org/projects/screenreadersurvey8/#javascript
             */}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `document.addEventListener('DOMContentLoaded', function(){
+			<script
+				dangerouslySetInnerHTML={{
+					__html: `document.addEventListener('DOMContentLoaded', function(){
                         // Used to toggle data-link-name on label buttons
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var showMoreButton = document.getElementById('${showMoreButtonId}')
@@ -155,71 +155,71 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
                           }
                         });
                       })`,
-                }}
-            />
-            <nav
-                className={cx(
-                    clearFixStyle,
-                    rowStyles,
-                    display === Display.Immersive && minHeight,
-                )}
-                role="navigation"
-                aria-label="Guardian sections"
-                data-component="nav2"
-            >
-                {display === Display.Immersive && (
-                    <Hide when="above" breakpoint="tablet">
-                        <ThemeProvider theme={buttonReaderRevenueBrand}>
-                            <PositionButton>
-                                <Button
-                                    priority="primary"
-                                    size="small"
-                                    iconSide="right"
-                                    icon={<SvgArrowRightStraight />}
-                                    data-link-name="nav2 : support-cta"
-                                    data-edition={edition}
-                                    onClick={() => {
-                                        window.location.href = subscribeUrl;
-                                        return false;
-                                    }}
-                                >
-                                    Subscribe
-                                </Button>
-                            </PositionButton>
-                        </ThemeProvider>
-                    </Hide>
-                )}
-                {/*
+				}}
+			/>
+			<nav
+				className={cx(
+					clearFixStyle,
+					rowStyles,
+					display === Display.Immersive && minHeight,
+				)}
+				role="navigation"
+				aria-label="Guardian sections"
+				data-component="nav2"
+			>
+				{display === Display.Immersive && (
+					<Hide when="above" breakpoint="tablet">
+						<ThemeProvider theme={buttonReaderRevenueBrand}>
+							<PositionButton>
+								<Button
+									priority="primary"
+									size="small"
+									iconSide="right"
+									icon={<SvgArrowRightStraight />}
+									data-link-name="nav2 : support-cta"
+									data-edition={edition}
+									onClick={() => {
+										window.location.href = subscribeUrl;
+										return false;
+									}}
+								>
+									Subscribe
+								</Button>
+							</PositionButton>
+						</ThemeProvider>
+					</Hide>
+				)}
+				{/*
                 IMPORTANT NOTE:
                 It is important to have the input as the 1st sibling for NoJS to work
                 as we use ~ to apply certain styles on checkbox checked and ~ can only
                 apply to styles with elements that are preceded
             */}
-                <input
-                    type="checkbox"
-                    className={css`
-                        ${visuallyHidden};
-                    `}
-                    id={navInputCheckboxId}
-                    name="more"
-                    tabIndex={-1}
-                    key="OpenExpandedMenuCheckbox"
-                    aria-hidden="true"
-                />
-                <Pillars
-                    display={display}
-                    pillars={nav.pillars}
-                    pillar={pillar}
-                    dataLinkName="nav2"
-                    isTopNav={true}
-                />
-                <ExpandedMenu nav={nav} display={display} />
-            </nav>
-            {display === Display.Immersive && (
-                <PositionRoundel>
-                    <GuardianRoundel />
-                </PositionRoundel>
-            )}
-        </div>
-    );
+				<input
+					type="checkbox"
+					className={css`
+						${visuallyHidden};
+					`}
+					id={navInputCheckboxId}
+					name="more"
+					tabIndex={-1}
+					key="OpenExpandedMenuCheckbox"
+					aria-hidden="true"
+				/>
+				<Pillars
+					display={display}
+					pillars={nav.pillars}
+					pillar={pillar}
+					dataLinkName="nav2"
+					isTopNav={true}
+				/>
+				<ExpandedMenu nav={nav} display={display} />
+			</nav>
+			{display === Display.Immersive && (
+				<PositionRoundel>
+					<GuardianRoundel />
+				</PositionRoundel>
+			)}
+		</div>
+	);
 };
