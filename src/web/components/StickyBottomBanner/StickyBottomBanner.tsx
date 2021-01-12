@@ -8,6 +8,7 @@ import {
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
+import { useOnce } from '@root/src/web/lib/useOnce';
 
 import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
@@ -17,14 +18,6 @@ type Props = {
 	asyncCountryCode?: Promise<string>;
 	CAPI: CAPIBrowserType;
 	idApiUrl: string;
-};
-
-type FulfilledProps = {
-	isSignedIn: boolean;
-	asyncCountryCode: Promise<string>;
-	CAPI: CAPIBrowserType;
-	asyncBrazeUuid: Promise<null | string>;
-	shouldHideSupportMessaging: boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -91,50 +84,13 @@ const buildBrazeBanner = (
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
-const StickyBottomBannerWithFullfilledDependencies = ({
-	isSignedIn,
-	asyncCountryCode,
-	CAPI,
-	asyncBrazeUuid,
-	shouldHideSupportMessaging,
-}: FulfilledProps) => {
-	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
-
-	useEffect(() => {
-		const CMP = buildCmpBannerConfig();
-		const readerRevenue = buildReaderRevenueBannerConfig(
-			CAPI,
-			isSignedIn,
-			asyncCountryCode,
-		);
-		const brazeBanner = buildBrazeBanner(
-			asyncBrazeUuid,
-			shouldHideSupportMessaging,
-		);
-		const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
-
-		pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
-			setSelectedBanner(PickedBanner),
-		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []); // Empty dependency array because we only want this to run once
-
-	if (SelectedBanner) {
-		return <SelectedBanner />;
-	}
-
-	return null;
-};
-
-// This outer component exists because we don't want to run the banner picker
-// until all of our dependencies are defined. Then when they are all defined we
-// only want to run the banner picker once.
 export const StickyBottomBanner = ({
 	isSignedIn,
 	asyncCountryCode,
 	CAPI,
 	idApiUrl,
 }: Props) => {
+	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const [
 		shouldHideSupportMessaging,
 		setShouldHideSupportMessaging,
@@ -149,13 +105,7 @@ export const StickyBottomBanner = ({
 		);
 	}, []);
 
-	useEffect(() => {
-		// Don't do anything until isSignedIn is defined as we only want to set
-		// asyncBrazeUuid once
-		if (isSignedIn === undefined) {
-			return;
-		}
-
+	useOnce(() => {
 		if (isSignedIn) {
 			setAsyncBrazeUuid(getBrazeUuid(idApiUrl));
 		} else {
@@ -163,22 +113,33 @@ export const StickyBottomBanner = ({
 		}
 	}, [isSignedIn, idApiUrl]);
 
-	if (
-		isSignedIn === undefined ||
-		asyncCountryCode === undefined ||
-		asyncBrazeUuid === undefined ||
-		shouldHideSupportMessaging === undefined
-	) {
-		return null;
+	useOnce(() => {
+		const CMP = buildCmpBannerConfig();
+		const readerRevenue = buildReaderRevenueBannerConfig(
+			CAPI,
+			isSignedIn as boolean,
+			asyncCountryCode as Promise<string>,
+		);
+		const brazeBanner = buildBrazeBanner(
+			asyncBrazeUuid as Promise<string>,
+			shouldHideSupportMessaging,
+		);
+		const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
+
+		pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
+			setSelectedBanner(PickedBanner),
+		);
+	}, [
+		isSignedIn,
+		asyncCountryCode,
+		asyncBrazeUuid,
+		shouldHideSupportMessaging,
+		CAPI,
+	]);
+
+	if (SelectedBanner) {
+		return <SelectedBanner />;
 	}
 
-	return (
-		<StickyBottomBannerWithFullfilledDependencies
-			isSignedIn={isSignedIn}
-			asyncCountryCode={asyncCountryCode}
-			asyncBrazeUuid={asyncBrazeUuid}
-			shouldHideSupportMessaging={shouldHideSupportMessaging}
-			CAPI={CAPI}
-		/>
-	);
+	return null;
 };
