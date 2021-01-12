@@ -13,7 +13,7 @@ import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import { articleWidthStyles } from 'styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 

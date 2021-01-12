@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
@@ -68,20 +69,21 @@ const svgStyle = css`
 	svg {
 		width: 24px;
 		height: 24px;
-		margin: 4px;
+		margin: 6px;
 	}
 `;
 
 interface Props {
 	caption: Option<string>;
 	credit: Option<string>;
+	styles?: SerializedStyles;
 }
 
-const HeaderImageCaption: FC<Props> = ({ caption, credit }: Props) =>
+const HeaderImageCaption: FC<Props> = ({ caption, credit, styles }: Props) =>
 	pipe2(
 		caption,
 		map((cap) => (
-			<figcaption css={HeaderImageCaptionStyles}>
+			<figcaption css={[HeaderImageCaptionStyles, styles]}>
 				<details>
 					<summary>
 						<span css={svgStyle}>
