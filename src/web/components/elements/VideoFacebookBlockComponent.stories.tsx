@@ -9,7 +9,7 @@ export default {
 	title: 'Components/VideoFacebookComponent',
 };
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			max-width: 620px;

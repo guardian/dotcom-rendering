@@ -10,7 +10,7 @@ export default {
 	title: 'Components/DropCap',
 };
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 620px;

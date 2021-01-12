@@ -33,6 +33,9 @@
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/QuizAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CodeBlockElement"
                     },
                     {
@@ -246,26 +249,7 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -937,6 +921,113 @@
                 "html",
                 "id",
                 "url"
+            ]
+        },
+        "QuizAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                    ]
+                },
+                "quizType": {
+                    "enum": [
+                        "knowledge",
+                        "personality"
+                    ],
+                    "type": "string"
+                },
+                "quizIndex": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        },
+                                        "answerBuckets": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "answerBuckets",
+                                        "id",
+                                        "isCorrect",
+                                        "text"
+                                    ]
+                                }
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "answers",
+                            "id",
+                            "text"
+                        ]
+                    }
+                },
+                "resultBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "id",
+                            "title"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "id",
+                "questions",
+                "quizType",
+                "resultBuckets"
             ]
         },
         "CodeBlockElement": {
@@ -2270,6 +2361,9 @@
                                 "$ref": "#/definitions/ChartAtomBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/QuizAtomBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/CodeBlockElement"
                             },
                             {
@@ -2641,6 +2735,9 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
                 "brazeApiKey": {
                     "type": "string"
                 },
@@ -2704,6 +2801,28 @@
                 "switches",
                 "videoDuration"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

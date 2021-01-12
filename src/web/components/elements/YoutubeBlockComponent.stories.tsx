@@ -14,7 +14,7 @@ export default {
 	title: 'Components/YoutubeBlockComponent',
 };
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<Section showTopBorder={false}>
 		<Flex>
 			<LeftColumn>

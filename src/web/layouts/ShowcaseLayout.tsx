@@ -48,11 +48,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Display } from '@guardian/types/Format';
 
-const ShowcaseGrid = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -178,7 +174,7 @@ const PositionHeadline = ({
 	children,
 }: {
 	designType: DesignType;
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 }) => {
 	switch (designType) {
 		case 'Interview':
@@ -201,7 +197,6 @@ const PositionHeadline = ({
 		case 'Recipe':
 		case 'MatchReport':
 		case 'GuardianView':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		case 'Feature':
@@ -290,7 +285,11 @@ export const ShowcaseLayout = ({
 						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
-						<Header edition={CAPI.editionId} />
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
 					</Section>
 
 					<Section
@@ -394,6 +393,7 @@ export const ShowcaseLayout = ({
 										? CAPI.starRating
 										: undefined
 								}
+								host={host}
 							/>
 						</div>
 					</GridItem>

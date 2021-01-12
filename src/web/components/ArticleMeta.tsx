@@ -139,7 +139,6 @@ const metaContainer = ({
 				case 'Article':
 				case 'MatchReport':
 				case 'GuardianView':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				case 'Comment':
@@ -188,7 +187,6 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
 				case 'Article':
 				case 'MatchReport':
 				case 'GuardianView':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				case 'Comment':
@@ -219,7 +217,6 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 				default:
@@ -229,11 +226,7 @@ const shouldShowContributor = (designType: DesignType, display: Display) => {
 	}
 };
 
-const AvatarContainer = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			width: 140px;
@@ -257,11 +250,7 @@ const AvatarContainer = ({
 	</div>
 );
 
-const RowBelowLeftCol = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			display: flex;

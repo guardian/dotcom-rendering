@@ -14,10 +14,13 @@ import ProfileIcon from '@frontend/static/icons/profile.svg';
 import GiftingIcon from '@frontend/static/icons/gifting.svg';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
+import { useOnce } from '@frontend/web/lib/useOnce';
 
 type Props = {
 	giftingURL: string;
 	userId?: string;
+	idUrl?: string;
+	mmaUrl?: string;
 };
 
 const linkStyles = css`
@@ -89,10 +92,10 @@ const Search = ({
 	href,
 	dataLinkName,
 }: {
-	href: string;
 	className?: string;
+	children: React.ReactNode;
+	href: string;
 	dataLinkName: string;
-	children: JSXElements;
 }) => (
 	<a href={href} className={className} data-link-name={dataLinkName}>
 		{children}
@@ -124,47 +127,63 @@ const linksStyles = css`
 	${getZIndex('headerLinks')}
 `;
 
-export const Links = ({ userId, giftingURL }: Props) => {
+export const Links = ({
+	userId,
+	giftingURL,
+	idUrl: idUrlFromConfig,
+	mmaUrl: mmaUrlFromConfig,
+}: Props) => {
 	const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
+	const [userIsDefined, setUserIsDefined] = useState<boolean>();
 
 	// show gifting if support messaging isn't shown
 	useEffect(() => {
 		setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
 	}, []);
 
+	// we intentionally re-render here because we know the DOM structure could be different
+	// from the server rendered version. This forces a full validation
+	useOnce(() => {
+		setUserIsDefined(!!userId);
+	}, [userId]);
+
+	// Fall back on prod URLs just in case these aren't set for any reason
+	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
+	const mmaUrl = mmaUrlFromConfig || 'https://manage.theguardian.com';
+
 	const identityLinks: DropdownLinkType[] = [
 		{
-			url: `https://manage.theguardian.com/`,
+			url: `${mmaUrl}/`,
 			title: 'Account overview',
 			dataLinkName: 'nav2 : topbar : account overview',
 		},
 		{
-			url: `https://manage.theguardian.com/public-settings`,
+			url: `${mmaUrl}/public-settings`,
 			title: 'Profile',
 			dataLinkName: 'nav2 : topbar : edit profile',
 		},
 		{
-			url: `https://manage.theguardian.com/email-prefs`,
+			url: `${mmaUrl}/email-prefs`,
 			title: 'Emails & marketing',
 			dataLinkName: 'nav2 : topbar : email prefs',
 		},
 		{
-			url: `https://manage.theguardian.com/account-settings`,
+			url: `${mmaUrl}/account-settings`,
 			title: 'Settings',
 			dataLinkName: 'nav2 : topbar : settings',
 		},
 		{
-			url: `https://manage.theguardian.com/help`,
+			url: `${mmaUrl}/help`,
 			title: 'Help',
 			dataLinkName: 'nav2 : topbar : help',
 		},
 		{
-			url: `https://profile.theguardian.com/user/id/${userId}`,
+			url: `${idUrl}/user/id/${userId}`,
 			title: 'Comments & replies',
 			dataLinkName: 'nav2 : topbar : comment activity',
 		},
 		{
-			url: `https://profile.theguardian.com/signout`,
+			url: `${idUrl}/signout`,
 			title: 'Sign out',
 			dataLinkName: 'nav2 : topbar : sign out',
 		},
@@ -198,7 +217,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
 			</a>
 			<div className={seperatorHideStyles} />
 
-			{userId ? (
+			{userIsDefined ? (
 				<div className={linkStyles}>
 					<ProfileIcon />
 					<Dropdown
@@ -211,7 +230,7 @@ export const Links = ({ userId, giftingURL }: Props) => {
 			) : (
 				<a
 					className={linkStyles}
-					href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+					href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 						'guardian_signin_header',
 					)}`}
 					data-link-name="nav2 : topbar : signin"

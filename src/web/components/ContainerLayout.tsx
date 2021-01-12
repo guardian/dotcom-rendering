@@ -24,7 +24,7 @@ type Props = {
 	verticalMargins?: boolean;
 	backgroundColour?: string;
 	borderColour?: string;
-	leftContent?: JSXElements;
+	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
 	stretchRight?: boolean;
 };

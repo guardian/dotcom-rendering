@@ -46,7 +46,6 @@ const outerStyles = (pillar: CAPIPillar, designType: DesignType) => {
 		case 'Live':
 		case 'Recipe':
 		case 'MatchReport':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		default:
@@ -84,7 +83,6 @@ const innerStyles = (designType: DesignType) => {
 		case 'Live':
 		case 'Recipe':
 		case 'MatchReport':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		default:

@@ -24,6 +24,8 @@ import {
 	ProfileAtom,
 	TimelineAtom,
 	ChartAtom,
+	PersonalityQuizAtom,
+	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
@@ -35,6 +37,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { toTypesPillar } from '@root/src/lib/format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -42,6 +45,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
+
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -282,9 +286,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 		});
 	}, []);
 
-	const pillar = decidePillar(CAPI);
 	const display: Display = decideDisplay(CAPI);
-	const designType: DesignType = decideDesignType(CAPI);
+	const designType: DesignType = decideDesignType(CAPI.designType);
+	const pillar = decidePillar({
+		pillar: CAPI.pillar,
+		design: designType,
+	});
+
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
 	return (
@@ -312,6 +320,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 				<Links
 					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
 					userId={user ? user.userId : undefined}
+					idUrl={CAPI.config.idUrl}
+					mmaUrl={CAPI.config.mmaUrl}
 				/>
 			</HydrateOnce>
 			<HydrateOnce root="edition-root">
@@ -350,7 +360,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
 				</HydrateOnce>
 			))}
@@ -378,8 +387,30 @@ export const App = ({ CAPI, NAV }: Props) => {
 						duration={youtubeBlock.duration}
 						mediaTitle={youtubeBlock.mediaTitle}
 						altText={youtubeBlock.altText}
-						origin={CAPI.config.host}
 					/>
+				</HydrateOnce>
+			))}
+			{CAPI.quizAtoms.map((quizAtoms, index) => (
+				<HydrateOnce
+					key={index}
+					root="quiz-atom"
+					index={quizAtoms.quizIndex}
+				>
+					<>
+						{quizAtoms.quizType === 'personality' && (
+							<PersonalityQuizAtom
+								id={quizAtoms.id}
+								questions={quizAtoms.questions}
+								resultBuckets={quizAtoms.resultBuckets}
+							/>
+						)}
+						{quizAtoms.quizType === 'knowledge' && (
+							<KnowledgeQuizAtom
+								id={quizAtoms.id}
+								questions={quizAtoms.questions}
+							/>
+						)}
+					</>
 				</HydrateOnce>
 			))}
 			{NAV.subNavSections && (
@@ -444,7 +475,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={qandaAtom.html}
 						image={qandaAtom.img}
 						credit={qandaAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'QANDA_ATOM',
 							qandaAtom.id,
@@ -471,7 +502,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={guideAtom.html}
 						image={guideAtom.img}
 						credit={guideAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'GUIDE_ATOM',
 							guideAtom.id,
@@ -501,7 +532,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={profileAtom.html}
 						image={profileAtom.img}
 						credit={profileAtom.credit}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'PROFILE_ATOM',
 							profileAtom.id,
@@ -530,7 +561,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						title={timelineAtom.title}
 						events={timelineAtom.events}
 						description={timelineAtom.description}
-						pillar={pillar}
+						pillar={toTypesPillar(pillar)}
 						likeHandler={componentEventHandler(
 							'TIMELINE_ATOM',
 							timelineAtom.id,
@@ -601,6 +632,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
 							pillar={pillar}
+							designType={designType}
 						/>
 					</Suspense>
 				</Lazy>
@@ -619,6 +651,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
 							pillar={pillar}
+							designType={designType}
 						/>
 					</Suspense>
 				</Lazy>
@@ -650,6 +683,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}
+					design={designType}
 				/>
 			</Portal>
 			<Portal root="reader-revenue-links-footer">

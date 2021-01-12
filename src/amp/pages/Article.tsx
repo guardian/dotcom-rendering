@@ -13,6 +13,8 @@ import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
+import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
+import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 
@@ -45,19 +47,26 @@ const Body: React.SFC<{
 };
 
 export const Article: React.FC<{
+	experimentsData?: AmpExperiments;
 	nav: NavType;
 	articleData: ArticleModel;
 	config: ConfigType;
 	analytics: AnalyticsModel;
-}> = ({ nav, articleData, config, analytics }) => {
-	const designType = decideDesignType(articleData);
-	const pillar = decidePillar(articleData);
+}> = ({ nav, articleData, config, analytics, experimentsData }) => {
+	const designType = decideDesignType(articleData.designType);
+	const pillar = decidePillar({
+		pillar: articleData.pillar,
+		design: designType,
+	});
 
 	return (
 		<>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
+			{experimentsData && (
+				<AmpExperimentComponent experimentsData={experimentsData} />
+			)}
 
 			{/* /TODO change to gray bgcolor */}
 			<div key="main" className={backgroundColour}>

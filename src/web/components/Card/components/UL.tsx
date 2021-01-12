@@ -20,7 +20,7 @@ const marginBottomStyles = css`
 `;
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	direction?: 'row' | 'column'; // Passed to flex-direction
 	showDivider?: boolean; // If this UL is a column and not the left most column
 	bottomMargin?: boolean; // If this UL is a row, add spacing below

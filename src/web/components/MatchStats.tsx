@@ -21,7 +21,7 @@ type Props = {
 
 const BACKGROUND_COLOUR = '#d9edf6';
 
-const StatsGrid = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const StatsGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */

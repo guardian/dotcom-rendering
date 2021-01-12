@@ -31,7 +31,7 @@ const revenueUrls = {
 	contribute: '',
 };
 
-const Container = ({ children }: { children: JSXElements }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			margin: 40px;

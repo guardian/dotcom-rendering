@@ -6,7 +6,8 @@ import { from, Breakpoint } from '@guardian/src-foundations/mq';
 
 import { useApi } from '@root/src/web/lib/api';
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-
+import { useAB } from '@guardian/ab-react';
+import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
 
@@ -14,6 +15,7 @@ type Props = {
 	sectionName?: string;
 	pillar: CAPIPillar;
 	ajaxUrl: string;
+	design: DesignType;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -34,7 +36,11 @@ const secondTierStyles = css`
 	}
 `;
 
-function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
+function buildSectionUrl(
+	ajaxUrl: string,
+	pillar: CAPIPillar,
+	sectionName?: string,
+) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
@@ -44,12 +50,26 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
+function buildDeeplyReadUrl(ajaxUrl: string) {
+	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
+}
+
 export const MostViewedFooterData = ({
 	sectionName,
 	pillar,
 	ajaxUrl,
+	design,
 }: Props) => {
-	const url = buildSectionUrl(ajaxUrl, sectionName);
+	const ABTestAPI = useAB();
+
+	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
+		'DeeplyReadTest',
+		'variant',
+	);
+
+	const url = inDeeplyReadTestVariant
+		? buildDeeplyReadUrl(ajaxUrl)
+		: buildSectionUrl(ajaxUrl, pillar, sectionName);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | TrailTabType[]
 	>(url);
@@ -69,7 +89,7 @@ export const MostViewedFooterData = ({
 				<MostViewedFooterGrid
 					data={'tabs' in data ? data.tabs : data}
 					sectionName={sectionName}
-					pillar={pillar}
+					pillar={decidePillar({ pillar, design })}
 				/>
 				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
 					{'mostCommented' in data && (

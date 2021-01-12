@@ -73,7 +73,6 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 		case 'PhotoEssay':
 		case 'Recipe':
 		case 'MatchReport':
-		case 'GuardianLabs':
 		case 'Quiz':
 		case 'AdvertisementFeature':
 		case 'Feature':
@@ -92,7 +91,7 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 };
 
 type Props = {
-	children: JSXElements;
+	children: React.ReactNode;
 	linkTo: string;
 	designType: DesignType;
 	pillar: CAPIPillar;

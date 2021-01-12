@@ -16,8 +16,11 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const pillar: CAPIPillar = decidePillar(CAPI);
-	const designType: DesignType = decideDesignType(CAPI);
+	const designType: DesignType = decideDesignType(CAPI.designType);
+	const pillar: CAPIPillar = decidePillar({
+		pillar: CAPI.pillar,
+		design: designType,
+	});
 
 	switch (display) {
 		case Display.Immersive: {
@@ -43,7 +46,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 					return (
@@ -81,7 +83,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 					return (
@@ -120,7 +121,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case 'Article':
 				case 'Recipe':
 				case 'MatchReport':
-				case 'GuardianLabs':
 				case 'Quiz':
 				case 'AdvertisementFeature':
 					return (
