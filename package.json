@@ -42,7 +42,7 @@
     "@guardian/content-api-models": "^15.9.6",
     "@guardian/content-atom-model": "^3.2.4",
     "@guardian/discussion-rendering": "^3.2.1",
-    "@guardian/image-rendering": "github:guardian/image-rendering#semver:^4.1.0",
+    "@guardian/image-rendering": "github:guardian/image-rendering#semver:^5.0.2",
     "@guardian/node-riffraff-artifact": "^0.1.9",
     "@guardian/src-brand": "^2.6.0",
     "@guardian/src-button": "^2.5.0",
