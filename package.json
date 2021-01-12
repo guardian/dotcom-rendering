@@ -155,7 +155,7 @@
         "@types/he": "^1.1.1",
         "@types/html-minifier": "^4.0.0",
         "@types/jest": "^26.0.20",
-        "@types/jsdom": "^11.0.6",
+        "@types/jsdom": "^16.2.5",
         "@types/lodash.clonedeep": "^4.5.4",
         "@types/lodash.get": "^4.4.4",
         "@types/node": "^10.12.0",
