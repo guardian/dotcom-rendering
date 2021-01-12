@@ -4,6 +4,7 @@ import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { useAB } from '@guardian/ab-react';
 
 import { pillarPalette } from '@frontend/lib/pillars';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
@@ -32,6 +33,16 @@ const listTab = css`
 	line-height: 1.1;
 	background-color: transparent;
 	text-transform: capitalize;
+	padding: 0 0 0;
+	margin-bottom: 16px;
+	width: 240px;
+	height: 28px;
+`;
+
+const listTabVariant = css`
+	font-weight: 700;
+	line-height: 1.1;
+	background-color: transparent;
 	padding: 0 0 0;
 	margin-bottom: 16px;
 	width: 240px;
@@ -101,19 +112,28 @@ type Props = {
 
 export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-
+	const ABTestAPI = useAB();
+	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
+		'DeeplyReadTest',
+		'variant',
+	);
 	return (
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
 				<ul className={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => (
 						<li
-							className={cx(listTab, {
-								[selectedListTab(pillar)]:
-									i === selectedTabIndex,
-								[unselectedListTab]: i !== selectedTabIndex,
-								[firstTab]: i === 0,
-							})}
+							className={cx(
+								inDeeplyReadTestVariant
+									? listTabVariant
+									: listTab,
+								{
+									[selectedListTab(pillar)]:
+										i === selectedTabIndex,
+									[unselectedListTab]: i !== selectedTabIndex,
+									[firstTab]: i === 0,
+								},
+							)}
 							role="tab"
 							aria-selected={i === selectedTabIndex}
 							aria-controls={`tabs-popular-${i}`}
@@ -133,10 +153,15 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 								>
 									Most viewed{' '}
 								</span>
+
 								<span
-									className={css`
-										text-transform: capitalize;
-									`}
+									className={
+										!inDeeplyReadTestVariant
+											? css`
+													text-transform: capitalize;
+											  `
+											: ''
+									}
 									// "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
 									dangerouslySetInnerHTML={{
 										__html: tab.heading,
