@@ -220,7 +220,7 @@ const StandardGrid = ({
 	designType,
 	CAPI,
 }: {
-	children: JSX.Element | JSX.Element[];
+	children: React.ReactNode;
 	designType: DesignType;
 	CAPI: CAPIType;
 }) => (
@@ -354,7 +354,11 @@ export const StandardLayout = ({
 						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
-						<Header edition={CAPI.editionId} />
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
 					</Section>
 
 					<Section
@@ -474,6 +478,7 @@ export const StandardLayout = ({
 								elements={CAPI.mainMediaElements}
 								pillar={pillar}
 								adTargeting={adTargeting}
+								host={host}
 							/>
 						</div>
 					</GridItem>

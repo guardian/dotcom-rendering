@@ -1,6 +1,6 @@
 import { ABTest } from '@guardian/ab-core';
 
-export const GlobalEoyHeaderTestName = 'GlobalEoyHeaderTest';
+export const GlobalEoyHeaderTestName = 'GlobalEoyHeaderTestR2';
 export type GlobalEoyHeaderTestVariant =
 	| 'control'
 	| 'variant'

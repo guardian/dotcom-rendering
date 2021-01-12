@@ -61,6 +61,7 @@ function renderElement(
 	hideCaption?: boolean,
 	adTargeting?: AdTargeting,
 	starRating?: number,
+	host?: string,
 ) {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -79,7 +80,11 @@ function renderElement(
 			);
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<div key={i} id={`youtube-block-main-media-${i}`}>
+				<div
+					key={i}
+					id={`youtube-block-main-media-${i}`}
+					data-cy="main-media-youtube-atom"
+				>
 					<YoutubeBlockComponent
 						display={display}
 						designType={designType}
@@ -97,6 +102,7 @@ function renderElement(
 						overrideImage={element.overrideImage}
 						posterImage={element.posterImage}
 						duration={element.duration}
+						origin={host}
 					/>
 				</div>
 			);
@@ -121,6 +127,7 @@ export const MainMedia: React.FC<{
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
 	starRating?: number;
+	host?: string;
 }> = ({
 	display,
 	designType,
@@ -129,6 +136,7 @@ export const MainMedia: React.FC<{
 	hideCaption,
 	adTargeting,
 	starRating,
+	host,
 }) => (
 	<div
 		className={cx(
@@ -146,6 +154,7 @@ export const MainMedia: React.FC<{
 				hideCaption,
 				adTargeting,
 				starRating,
+				host,
 			),
 		)}
 	</div>

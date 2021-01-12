@@ -65,6 +65,15 @@ interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
 	role?: RoleType;
 }
 
+interface QuizAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
+	quizType: 'personality' | 'knowledge';
+	quizIndex?: number;
+	id: string;
+	questions: QuestionType[];
+	resultBuckets: ResultBucketsType[];
+}
+
 interface CodeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
 	code: string;
@@ -403,6 +412,7 @@ type CAPIElement =
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
+	| QuizAtomBlockElement
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement
@@ -544,3 +554,34 @@ interface CampaignFieldSelect extends CampaignField {
 		value: string;
 	}[];
 }
+
+// -------------------------------------
+// Quiz
+// -------------------------------------
+
+type AnswerType = {
+	id: string;
+	text: string;
+	revealText?: string;
+	isCorrect: boolean;
+	answerBuckets: string[];
+};
+
+type QuizAtomResultBucketType = {
+	id: string;
+	title: string;
+	description: string;
+};
+
+type QuestionType = {
+	id: string;
+	text: string;
+	answers: AnswerType[];
+	imageUrl?: string;
+};
+
+type ResultBucketsType = {
+	id: string;
+	title: string;
+	description: string;
+};

@@ -42,6 +42,8 @@ import {
 	ProfileAtom,
 	TimelineAtom,
 	VideoAtom,
+	PersonalityQuizAtom,
+	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { Display } from '@guardian/types/Format';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -59,7 +61,7 @@ export const ArticleRenderer: React.FC<{
 	designType: DesignType;
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ display, elements, pillar, designType, adTargeting, host }) => {
+}> = ({ display, elements, pillar, designType, adTargeting }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -144,6 +146,26 @@ export const ArticleRenderer: React.FC<{
 							<ChartAtom id={element.id} html={element.html} />
 						</Figure>
 					);
+				case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
+					return (
+						<Figure id={`quiz-atom-${i}`}>
+							<>
+								{element.quizType === 'personality' && (
+									<PersonalityQuizAtom
+										id={element.id}
+										questions={element.questions}
+										resultBuckets={element.resultBuckets}
+									/>
+								)}
+								{element.quizType === 'knowledge' && (
+									<KnowledgeQuizAtom
+										id={element.id}
+										questions={element.questions}
+									/>
+								)}
+							</>
+						</Figure>
+					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 					return (
 						<Figure role={element.role}>
@@ -197,7 +219,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -291,7 +313,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -318,7 +340,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -462,7 +484,6 @@ export const ArticleRenderer: React.FC<{
 								duration={element.duration}
 								mediaTitle={element.mediaTitle}
 								altText={element.altText}
-								origin={host}
 							/>
 						</Figure>
 					);
@@ -472,7 +493,7 @@ export const ArticleRenderer: React.FC<{
 							<TimelineAtom
 								id={element.id}
 								title={element.title}
-								pillar={pillar}
+								pillar={toTypesPillar(pillar)}
 								events={element.events}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
