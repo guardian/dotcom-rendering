@@ -73,6 +73,7 @@ export const MostViewedFooterData = ({
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | TrailTabType[]
 	>(url);
+	// eslint-disable-next-line no-console
 	console.log(url);
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
