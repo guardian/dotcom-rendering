@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import {
 	neutral,
@@ -156,6 +156,21 @@ const stretchLines = css`
 	}
 `;
 
+const hasMainMediaStyles = css`
+	height: 100vh;
+	/**
+    100vw is normally enough but don't let the content shrink vertically too
+    much just in case
+    */
+	min-height: 25rem;
+	${from.desktop} {
+		min-height: 31.25rem;
+	}
+	${from.wide} {
+		min-height: 50rem;
+	}
+`;
+
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -264,22 +279,13 @@ export const ImmersiveLayout = ({
 	return (
 		<>
 			<div
-				className={css`
-					display: flex;
-					flex-direction: column;
-					height: ${mainMedia && '100vh'};
-					/**
-                        100vw is normally enough but don't let the content shrink vertically too
-                        much just in case
-                    */
-					min-height: ${mainMedia && '25rem'};
-					${from.desktop} {
-						min-height: ${mainMedia && '31.25rem'};
-					}
-					${from.wide} {
-						min-height: ${mainMedia && '50rem'};
-					}
-				`}
+				className={cx(
+					mainMedia && hasMainMediaStyles,
+					css`
+						display: flex;
+						flex-direction: column;
+					`,
+				)}
 			>
 				<header
 					className={css`
