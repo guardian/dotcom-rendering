@@ -133,6 +133,9 @@ const immersiveStyles = css`
 	}
 	margin-right: ${space[5]}px;
 `;
+const reducedBottomPadding = css`
+	padding-bottom: ${space[4]}px;
+`;
 
 const blackBackground = css`
 	background-color: ${neutral[0]};
@@ -244,6 +247,7 @@ export const ArticleHeadline = ({
 									maxWidth,
 									immersiveStyles,
 									displayBlock,
+									reducedBottomPadding,
 								)}
 							>
 								{curly(headlineString)}
