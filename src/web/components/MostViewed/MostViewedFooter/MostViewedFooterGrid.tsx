@@ -99,9 +99,30 @@ type Props = {
 	pillar: CAPIPillar;
 };
 
+// To avoid having to handle multiple ways of reducing the capitalisation styling
+const TabHeading = ({ heading }: { heading: string }) => {
+	switch (heading.toLowerCase()) {
+		case 'deeply read':
+			return <span>Deeply read</span>;
+		case 'most popular':
+			return <span>Most popular</span>;
+		default:
+			return (
+				<span
+					className={css`
+						text-transform: capitalize;
+					`}
+					// "Across The Guardian" has a non-breaking space entity between "The" and "Guardian - Eg. "Across The&nbsp;Guardian"
+					dangerouslySetInnerHTML={{
+						__html: heading,
+					}}
+				/>
+			);
+	}
+};
+
 export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-
 	return (
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
@@ -133,15 +154,8 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 								>
 									Most viewed{' '}
 								</span>
-								<span
-									className={css`
-										text-transform: capitalize;
-									`}
-									// "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
-									dangerouslySetInnerHTML={{
-										__html: tab.heading,
-									}}
-								/>
+
+								<TabHeading heading={tab.heading} />
 							</button>
 						</li>
 					))}
