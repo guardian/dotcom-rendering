@@ -9,7 +9,6 @@ type Props = {
 	hasStoryPackage: boolean;
 	tags: TagType[];
 	pillar: CAPIPillar;
-	design: Design;
 };
 
 export const OnwardsLower = ({
@@ -17,7 +16,6 @@ export const OnwardsLower = ({
 	hasStoryPackage,
 	tags,
 	pillar,
-	design,
 }: Props) => {
 	// In this context, Blog tags are treated the same as Series tags
 	const seriesTag = tags.find(

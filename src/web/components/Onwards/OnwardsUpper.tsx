@@ -194,7 +194,6 @@ type Props = {
 	tags: TagType[];
 	edition: Edition;
 	pillar: CAPIPillar;
-	design: Design;
 };
 
 export const OnwardsUpper = ({
@@ -210,7 +209,6 @@ export const OnwardsUpper = ({
 	tags,
 	edition,
 	pillar,
-	design,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
