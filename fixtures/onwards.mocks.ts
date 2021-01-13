@@ -126,6 +126,8 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 		image: thisTrail.image,
 		isLiveBlog: thisTrail.isLiveBlog,
 		webPublicationDate: thisTrail.webPublicationDate,
+		mediaType: thisTrail.mediaType,
+		mediaDuration: thisTrail.mediaDuration,
 		pillar,
 		design,
 	};
