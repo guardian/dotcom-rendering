@@ -2,7 +2,7 @@ import { useApi } from '@root/src/web/lib/api';
 import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
-import { decideDesignType } from 'src/web/lib/decideDesignType';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 
 type Props = {
 	url: string;
