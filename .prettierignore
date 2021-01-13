@@ -14,5 +14,4 @@ node_modules/
 !/src/**/*.ts
 !/src/**/*.tsx
 !/src/**/*.js
-# The below causes a bunch of prettier warnings, but we might also want to be formatting these.
-# !/fixtures/**/*.ts
+!/fixtures/**/*.ts
