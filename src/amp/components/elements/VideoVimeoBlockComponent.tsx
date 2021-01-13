@@ -15,6 +15,7 @@ export const VideoVimeoBlockComponent: React.FC<{
 				layout="responsive"
 				width={element.width}
 				height={element.height}
+				do-not-track="do-not-track"
 			/>
 		</Caption>
 	);

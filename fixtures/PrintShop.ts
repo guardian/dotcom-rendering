@@ -1,15 +1,14 @@
-import { switches } from '../switches';
+import { switches } from './switches';
 
-export const richLink: CAPIType = {
+export const PrintShop: CAPIType = {
 	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
 	isAdFreeUser: false,
-	main:
-		'<figure class="element element-image" data-media-id="db2348b8bc322340bdf9a842ea8e562321164050"> <img src="https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/1000.jpg" alt="Rap god ... Eminem performing at the MTV EMAs last year." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Rap god ... Eminem performing at the MTV EMAs last year.</span> <span class="element-image__credit">Photograph: Dave J Hogan/Getty Images for MTV</span> </figcaption> </figure>',
+	main: '',
 	subMetaSectionLinks: [
 		{
-			url: '/music/eminem',
-			title: 'Eminem',
+			url: '/artanddesign/series/guardian-print-shop',
+			title: 'Guardian Print Shop',
 		},
 	],
 	commercialProperties: {
@@ -20,16 +19,32 @@ export const richLink: CAPIType = {
 					value: 'uk',
 				},
 				{
-					name: 'co',
-					value: ['alexispetridis'],
+					name: 'se',
+					value: ['guardian-print-shop'],
 				},
 				{
-					name: 'sh',
-					value: 'https://theguardian.com/p/99h48',
+					name: 'url',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
 				},
 				{
 					name: 'ct',
@@ -40,32 +55,40 @@ export const richLink: CAPIType = {
 					value: 'ng',
 				},
 				{
-					name: 'url',
-					value: '/music/2018/aug/31/eminem-kamikaze-album-review',
-				},
-				{
-					name: 'k',
-					value: ['eminem', 'rap', 'hip-hop', 'music', 'culture'],
-				},
-				{
-					name: 'tn',
-					value: ['albumreview', 'reviews'],
+					name: 'sh',
+					value: 'https://gu.com/p/fmxze',
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['alexispetridis'],
+					name: 'se',
+					value: ['guardian-print-shop'],
 				},
 				{
-					name: 'sh',
-					value: 'https://theguardian.com/p/99h48',
+					name: 'url',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
 				},
 				{
 					name: 'ct',
@@ -80,32 +103,40 @@ export const richLink: CAPIType = {
 					value: 'us',
 				},
 				{
-					name: 'url',
-					value: '/music/2018/aug/31/eminem-kamikaze-album-review',
-				},
-				{
-					name: 'k',
-					value: ['eminem', 'rap', 'hip-hop', 'music', 'culture'],
-				},
-				{
-					name: 'tn',
-					value: ['albumreview', 'reviews'],
+					name: 'sh',
+					value: 'https://gu.com/p/fmxze',
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['alexispetridis'],
+					name: 'se',
+					value: ['guardian-print-shop'],
 				},
 				{
-					name: 'sh',
-					value: 'https://theguardian.com/p/99h48',
+					name: 'url',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
 				},
 				{
 					name: 'ct',
@@ -116,16 +147,8 @@ export const richLink: CAPIType = {
 					value: 'ng',
 				},
 				{
-					name: 'url',
-					value: '/music/2018/aug/31/eminem-kamikaze-album-review',
-				},
-				{
-					name: 'k',
-					value: ['eminem', 'rap', 'hip-hop', 'music', 'culture'],
-				},
-				{
-					name: 'tn',
-					value: ['albumreview', 'reviews'],
+					name: 'sh',
+					value: 'https://gu.com/p/fmxze',
 				},
 				{
 					name: 'edition',
@@ -136,12 +159,17 @@ export const richLink: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['alexispetridis'],
+					name: 'se',
+					value: ['guardian-print-shop'],
 				},
 				{
-					name: 'sh',
-					value: 'https://theguardian.com/p/99h48',
+					name: 'url',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
 				},
 				{
 					name: 'edition',
@@ -152,6 +180,17 @@ export const richLink: CAPIType = {
 					value: ['0'],
 				},
 				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
+				},
+				{
 					name: 'ct',
 					value: 'article',
 				},
@@ -160,16 +199,8 @@ export const richLink: CAPIType = {
 					value: 'ng',
 				},
 				{
-					name: 'url',
-					value: '/music/2018/aug/31/eminem-kamikaze-album-review',
-				},
-				{
-					name: 'k',
-					value: ['eminem', 'rap', 'hip-hop', 'music', 'culture'],
-				},
-				{
-					name: 'tn',
-					value: ['albumreview', 'reviews'],
+					name: 'sh',
+					value: 'https://gu.com/p/fmxze',
 				},
 			],
 		},
@@ -288,6 +319,13 @@ export const richLink: CAPIType = {
 					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
+				{
+					text: 'Newsletters',
+					url:
+						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
+					extraClasses: '',
+				},
 			],
 			[
 				{
@@ -316,12 +354,6 @@ export const richLink: CAPIType = {
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
-				{
-					text: 'Discount Codes',
-					url: 'https://discountcode.theguardian.com/',
-					dataLinkName: 'uk: footer : discount code',
-					extraClasses: 'js-discount-code-link',
-				},
 			],
 		],
 	},
@@ -330,21 +362,21 @@ export const richLink: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTMucG5n&s=0da92712d13da4cf9b9f446c78ec083e',
+			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=4a590bacf9b5ea3e4a18ffb74f152cad',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://music/2018/aug/31/eminem-kamikaze-album-review?contenttype=Article&source=twitter',
+			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+			'guardian://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 		'twitter:app:url:iphone':
-			'gnmguardian://music/2018/aug/31/eminem-kamikaze-album-review?contenttype=Article&source=twitter',
+			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
 	},
 	beaconURL: '//phar.gu-web.net',
-	sectionName: 'music',
+	sectionName: 'artanddesign',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	pageType: {
@@ -357,30 +389,20 @@ export const richLink: CAPIType = {
 		isSensitive: false,
 	},
 	hasStoryPackage: false,
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	publication: 'theguardian.com',
 	trailText:
-		'The hooks are middling and the moans at his critics get tedious – but a flurry of brutal potshots at witless SoundCloud rappers prove Eminem can still hit exhilarating heights',
+		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
 	subMetaKeywordLinks: [
 		{
-			url: '/music/rap',
-			title: 'Rap',
-		},
-		{
-			url: '/music/hip-hop',
-			title: 'Hip-hop',
-		},
-		{
-			url: '/tone/albumreview',
-			title: 'album reviews',
+			url: '/artanddesign/photography',
+			title: 'Photography',
 		},
 	],
-	starRating: 3,
-	headline:
-		'Eminem: Kamikaze review – middle-aged gripes aired with blazing skill',
 	contentType: 'Article',
-	guardianBaseURL: 'https://www.theguardian.com',
+	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	nav: {
-		currentUrl: '/music',
+		currentUrl: '/artanddesign',
 		pillars: [
 			{
 				title: 'News',
@@ -565,14 +587,6 @@ export const richLink: CAPIType = {
 								classList: [],
 							},
 							{
-								title: 'Cities',
-								url: '/cities',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
 								title: 'Global development',
 								url: '/global-development',
 								longTitle: '',
@@ -679,7 +693,23 @@ export const richLink: CAPIType = {
 								children: [],
 								classList: [],
 							},
+							{
+								title: 'Retail',
+								url: '/business/retail',
+								longTitle: '',
+								iconName: '',
+								children: [],
+								classList: [],
+							},
 						],
+						classList: [],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+						iconName: '',
+						children: [],
 						classList: [],
 					},
 					{
@@ -856,14 +886,6 @@ export const richLink: CAPIType = {
 					{
 						title: 'Global development',
 						url: '/global-development',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cities',
-						url: '/cities',
 						longTitle: '',
 						iconName: '',
 						children: [],
@@ -1449,6 +1471,14 @@ export const richLink: CAPIType = {
 						children: [],
 						classList: [],
 					},
+					{
+						title: 'Observer Food Monthly',
+						url: '/theobserver/foodmonthly',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
 				],
 				classList: [],
 			},
@@ -1578,6 +1608,15 @@ export const richLink: CAPIType = {
 				classList: [],
 			},
 			{
+				title: 'Hire with Guardian Jobs',
+				url:
+					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				longTitle: '',
+				iconName: '',
+				children: [],
+				classList: [],
+			},
+			{
 				title: 'Holidays',
 				url:
 					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
@@ -1628,17 +1667,17 @@ export const richLink: CAPIType = {
 				classList: [],
 			},
 			{
-				title: 'Discount Codes',
-				url: 'https://discountcode.theguardian.com',
+				title: 'Guardian Puzzles app',
+				url: 'https://puzzles.theguardian.com/download',
 				longTitle: '',
 				iconName: '',
 				children: [],
-				classList: ['js-discount-code-link'],
+				classList: [],
 			},
 		],
 		currentNavLink: {
-			title: 'Music',
-			url: '/music',
+			title: 'Art & design',
+			url: '/artanddesign',
 			longTitle: '',
 			iconName: '',
 			children: [],
@@ -1861,406 +1900,72 @@ export const richLink: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support"%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_contribute"%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_subscribe"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_gifting"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_contribute"%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_subscribe"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support"%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_gifting"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"amp_header_support"%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_contribute"%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_subscribe"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_gifting"%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
 			},
 		},
 	},
-	mainMediaElements: [
-		{
-			role: 'inline',
-			data: {
-				copyright: '2017 Getty Images',
-				alt: 'Rap god ... Eminem performing at the MTV EMAs last year.',
-				caption:
-					'Rap god ... Eminem performing at the MTV EMAs last year.',
-				credit: 'Photograph: Dave J Hogan/Getty Images for MTV',
-			},
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9692341d702c2fadad48ba71f5779283',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=adaa73232ffc2bb229d6d1ff85db56a7',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1c85ec6caee30b8868492ba8eaab1ec2',
-							width: 890,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=85&auto=format&fit=max&s=8522e35d0cfea221dacfdf0751f64187',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=85&auto=format&fit=max&s=57aedef16ed295819f9f57bf31fdf2ea',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=85&auto=format&fit=max&s=3169c757b6ef4420e56d107bbfffc4e0',
-							width: 445,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=140&quality=85&auto=format&fit=max&s=b04a99ac8368e13b3e0b3f47cbfda3e1',
-							width: 140,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=7eeed2f3223bd17e1fb694518754a3ac',
-							width: 280,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=120&quality=85&auto=format&fit=max&s=8c9aca86b840102b15cf7c2f251c7709',
-							width: 120,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=69bcf5c642f2771823f0dadfe05bc0bc',
-							width: 240,
-						},
-					],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=380&quality=85&auto=format&fit=max&s=524e37c50312ba81b7341ca378ee00d8',
-							width: 380,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=70472531758905e9702631506c5a3ce0',
-							width: 760,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=300&quality=85&auto=format&fit=max&s=9238845d238ecb6e199485b25239a3f8',
-							width: 300,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=f59702d71add10893daaceaf564c7fd8',
-							width: 600,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=85&auto=format&fit=max&s=8522e35d0cfea221dacfdf0751f64187',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9692341d702c2fadad48ba71f5779283',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=85&auto=format&fit=max&s=57aedef16ed295819f9f57bf31fdf2ea',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=adaa73232ffc2bb229d6d1ff85db56a7',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=85&auto=format&fit=max&s=3169c757b6ef4420e56d107bbfffc4e0',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1c85ec6caee30b8868492ba8eaab1ec2',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=860&quality=85&auto=format&fit=max&s=5569f67304151f3067c77598fcae2ca8',
-							width: 860,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=8407f994aabf7fd82af078aa5eda45c1',
-							width: 1720,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=780&quality=85&auto=format&fit=max&s=0fb38ad54f283c00837ee46e5ce5483c',
-							width: 780,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=b18f5d92507b1111bec70a1d3cdb7e68',
-							width: 1560,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=85&auto=format&fit=max&s=8522e35d0cfea221dacfdf0751f64187',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9692341d702c2fadad48ba71f5779283',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=85&auto=format&fit=max&s=57aedef16ed295819f9f57bf31fdf2ea',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=adaa73232ffc2bb229d6d1ff85db56a7',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=85&auto=format&fit=max&s=3169c757b6ef4420e56d107bbfffc4e0',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1c85ec6caee30b8868492ba8eaab1ec2',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=85&auto=format&fit=max&s=8522e35d0cfea221dacfdf0751f64187',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9692341d702c2fadad48ba71f5779283',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=85&auto=format&fit=max&s=57aedef16ed295819f9f57bf31fdf2ea',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=adaa73232ffc2bb229d6d1ff85db56a7',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=85&auto=format&fit=max&s=3169c757b6ef4420e56d107bbfffc4e0',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1c85ec6caee30b8868492ba8eaab1ec2',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=85&auto=format&fit=max&s=8522e35d0cfea221dacfdf0751f64187',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9692341d702c2fadad48ba71f5779283',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=85&auto=format&fit=max&s=57aedef16ed295819f9f57bf31fdf2ea',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=adaa73232ffc2bb229d6d1ff85db56a7',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=85&auto=format&fit=max&s=3169c757b6ef4420e56d107bbfffc4e0',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1c85ec6caee30b8868492ba8eaab1ec2',
-							width: 890,
-						},
-					],
-				},
-			],
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '2511',
-							width: '4184',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/4184.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '2511',
-							width: '4184',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg',
-					},
-				],
-			},
-			displayCredit: true,
-		},
-	],
-	webPublicationDate: '2018-08-31T14:02:23.000Z',
+	guardianBaseURL: 'https://www.theguardian.com',
+	mainMediaElements: [],
+	webPublicationDate: '2020-12-17T09:07:18.000Z',
+	author: {
+		byline: 'Guardian sport',
+	},
+	designType: 'Immersive',
 	blocks: [
 		{
-			id: '5b8931d1e4b04106c28a2ea0',
+			id: '5dc05a8c8f0809525b6f5f10',
 			elements: [
 				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Eminem’s 10th album arrived on streaming services, without any pre-emptory buildup, accompanied by a nonchalant tweet from the 45-year-old rapper: “I tried not 2 overthink this 1 … enjoy.” It’s a theme reiterated within the opening seconds of the album: “I’m just gonna write down my first thoughts,” he mutters, “and see where it takes me.”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Not for the first time in his career, it’s easy to feel that Marshall Mathers III is being slightly disingenuous. Kamikaze is fairly obviously the product of a great deal of thinking indeed, largely of the stewing and fulminating variety. Clearly a not man at ease with the sanity-salving concept of Not Reading The Comments, virtually the entirety of its 45-minute running time is consumed with complaining about the cool reception afforded to his last album – 2017’s weak and audibly confused <a href="https://www.theguardian.com/music/2017/dec/15/eminem-revival-review">Revival</a> – and bemoaning the current state of hip-hop. </p>',
-				},
-				{
-					role: 'supporting',
+					role: 'immersive',
 					data: {
-						alt: 'The cover art for Kamikaze.',
-						caption: 'The cover art for Kamikaze.',
-						credit: 'Photograph: Aftermath/Shady/Interscope',
+						alt: 'Bobby Moore in 1973',
+						credit: 'Photograph: Gerry Cranham/Offside',
 					},
 					imageSources: [
 						{
@@ -2268,33 +1973,33 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e7b61fdd2aca5e37d4091723f7410a67',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc969702e5d57f6f41f8c48ae10aa0ea',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c5bdbd0c501d3aff4758f831c2ea4a76',
-									width: 890,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=85&auto=format&fit=max&s=013cf6a39d58387da74a0f4cdecdfa1d',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=85&auto=format&fit=max&s=ce4895cfed0127af3b17b5065807442d',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
+									width: 1240,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=85&auto=format&fit=max&s=5fd90f94815d752ed81bc7cba753c4e7',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
+									width: 1210,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
 									width: 445,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
+									width: 890,
 								},
 							],
 						},
@@ -2303,22 +2008,22 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=140&quality=85&auto=format&fit=max&s=7597023a78da074c4aee75f60206d23a',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=140&quality=85&auto=format&fit=max&s=155465e01f55d173c0a61ac1f93199a8',
 									width: 140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=401a50c02a524adf67bc740e3d1fe1e3',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9cb3dd42dc185082ab4d4bbc070ddc06',
 									width: 280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=120&quality=85&auto=format&fit=max&s=8ca1d0fc7ac9d2cbb943e22099f2c433',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=120&quality=85&auto=format&fit=max&s=4959a6c49a3f6cbbb1e3353ab5980679',
 									width: 120,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=583a2b2df3bb429525a0afbee63228a7',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=48de77b0763df2b7e0bfd3d926102717',
 									width: 240,
 								},
 							],
@@ -2328,53 +2033,53 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e7b61fdd2aca5e37d4091723f7410a67',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc969702e5d57f6f41f8c48ae10aa0ea',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c5bdbd0c501d3aff4758f831c2ea4a76',
-									width: 890,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=84ca950eb2ac67e07530ab5af52457cd',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=85&auto=format&fit=max&s=013cf6a39d58387da74a0f4cdecdfa1d',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=85&auto=format&fit=max&s=ce4895cfed0127af3b17b5065807442d',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=a3f19a75d492bda708a5d0492568414d',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=85&auto=format&fit=max&s=5fd90f94815d752ed81bc7cba753c4e7',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=380&quality=85&auto=format&fit=max&s=b9b9fd2ff89b022a9b8b73c56165e66d',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=380&quality=85&auto=format&fit=max&s=19c4c799a125576e3e6d37ba561e10a9',
 									width: 380,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=300&quality=85&auto=format&fit=max&s=781e48bea05ede48949290e76251bce3',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=4e621767a8ec32ed6a70648c4566b333',
+									width: 760,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=300&quality=85&auto=format&fit=max&s=7ad1b96ce128d029b6c86e785eb955bd',
 									width: 300,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=6f19cd91993e14c0a3873fa25a2e8f49',
+									width: 600,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
+									width: 620,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
+									width: 1240,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
+									width: 605,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
+									width: 1210,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
+									width: 445,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
+									width: 890,
 								},
 							],
 						},
@@ -2383,53 +2088,73 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=860&quality=85&auto=format&fit=max&s=d0e0b0e885b678ccabde50f2fe8c2947',
-									width: 860,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=85&auto=format&fit=max&s=82a3e9ebc6d72eee76a60817eeea3a6b',
+									width: 1020,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=a2d3317d612748ff33b11b277c676b92',
-									width: 1720,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d6dfb0a278aece2eef08d0cf73e7a09d',
+									width: 2040,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=780&quality=85&auto=format&fit=max&s=284d948e66fa07d2e7cc106347a9e2ad',
-									width: 780,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=85&auto=format&fit=max&s=2ba0b2e2b6ca94bab622216e78f3d65e',
+									width: 940,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=9ce2bbc31862a5a8c4b88472aa1729ed',
-									width: 1560,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=01b35ec4082b385e533b1d45b1e58279',
+									width: 1880,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=85&auto=format&fit=max&s=013cf6a39d58387da74a0f4cdecdfa1d',
-									width: 620,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
+									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e7b61fdd2aca5e37d4091723f7410a67',
-									width: 1240,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
+									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=85&auto=format&fit=max&s=ce4895cfed0127af3b17b5065807442d',
-									width: 605,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
+									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc969702e5d57f6f41f8c48ae10aa0ea',
-									width: 1210,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
+									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=85&auto=format&fit=max&s=5fd90f94815d752ed81bc7cba753c4e7',
-									width: 445,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=85&auto=format&fit=max&s=123df7010bb21fa1c962339ebce5a94f',
+									width: 660,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c5bdbd0c501d3aff4758f831c2ea4a76',
-									width: 890,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20798c142854fd13114526e1b0402887',
+									width: 1320,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=85&auto=format&fit=max&s=2301f0a29faaa49376d15f796d22aef7',
+									width: 645,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b8363e95989341572c4ef963f865b1ed',
+									width: 1290,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=85&auto=format&fit=max&s=eff47ab66424efca5e4f9060cde815bd',
+									width: 465,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37d11078a8141f9781d64de9d24e3f27',
+									width: 930,
 								},
 							],
 						},
@@ -2438,32 +2163,32 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=85&auto=format&fit=max&s=013cf6a39d58387da74a0f4cdecdfa1d',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e7b61fdd2aca5e37d4091723f7410a67',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=85&auto=format&fit=max&s=ce4895cfed0127af3b17b5065807442d',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc969702e5d57f6f41f8c48ae10aa0ea',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=85&auto=format&fit=max&s=5fd90f94815d752ed81bc7cba753c4e7',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c5bdbd0c501d3aff4758f831c2ea4a76',
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
 									width: 890,
 								},
 							],
@@ -2473,33 +2198,73 @@ export const richLink: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=85&auto=format&fit=max&s=013cf6a39d58387da74a0f4cdecdfa1d',
-									width: 620,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1300&quality=85&auto=format&fit=max&s=f22943517ecb09ef5d593158ca8e6887',
+									width: 1300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e7b61fdd2aca5e37d4091723f7410a67',
-									width: 1240,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ffa5acc4dacac28ad95b0b5a1b3ad65',
+									width: 2600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=85&auto=format&fit=max&s=ce4895cfed0127af3b17b5065807442d',
-									width: 605,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1140&quality=85&auto=format&fit=max&s=3cb1674364d60ff9c0d45502c996c291',
+									width: 1140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc969702e5d57f6f41f8c48ae10aa0ea',
-									width: 1210,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8fe41c8c639def397f828de97f05ee16',
+									width: 2280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=85&auto=format&fit=max&s=5fd90f94815d752ed81bc7cba753c4e7',
-									width: 445,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1125&quality=85&auto=format&fit=max&s=c6e34975d70c4eea48031b0ed8b15035',
+									width: 1125,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c5bdbd0c501d3aff4758f831c2ea4a76',
-									width: 890,
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e5001cbaa7a79cdf4f89597ff5ee4dfb',
+									width: 2250,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=965&quality=85&auto=format&fit=max&s=811aa368d7105f88bb1cc42e4ab44e6c',
+									width: 965,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a832030abf575f937a313a7fffea68b5',
+									width: 1930,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=725&quality=85&auto=format&fit=max&s=5d61b5b1ef5b7bd9b5ca2d96fd31dc12',
+									width: 725,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=84dab42384002f7346998d2b57482950',
+									width: 1450,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=85&auto=format&fit=max&s=2301f0a29faaa49376d15f796d22aef7',
+									width: 645,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b8363e95989341572c4ef963f865b1ed',
+									width: 1290,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=85&auto=format&fit=max&s=eff47ab66424efca5e4f9060cde815bd',
+									width: 465,
+								},
+								{
+									src:
+										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37d11078a8141f9781d64de9d24e3f27',
+									width: 930,
 								},
 							],
 						},
@@ -2511,133 +2276,133 @@ export const richLink: CAPIType = {
 							{
 								index: 0,
 								fields: {
-									height: '800',
-									width: '800',
+									height: '2755',
+									width: '3855',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/800.jpg',
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/3855.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '800',
-									width: '800',
+									height: '2755',
+									width: '3855',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/master/800.jpg',
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '500',
+									height: '1429',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '715',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '357',
 									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/500.jpg',
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/500.jpg',
 							},
 							{
-								index: 3,
+								index: 5,
 								fields: {
-									height: '140',
+									height: '100',
 									width: '140',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e9b6de266608a63d095c878e5dba7ef29a949b70/200_0_800_800/140.jpg',
+									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
+					displayCredit: false,
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>His latterday nemesis Donald Trump <a href="https://www.theguardian.com/music/2018/aug/31/eminem-donald-trump-surprise-album-kamikaze">gets a look-in</a> on opener The Ringer, but by the time he gets around to denouncing the president, he appears to have run out of bile, having expended it on critics, social media commentators and other rappers. He can’t summon any terms of disapproval he hasn’t already lavished on Lil Pump and Charlamagne Tha God. “My beef is more media journalists,” he admits. Similarly, when he does what you might call the “Slim Shady thing” – making queasy jokes about Harvey Weinstein and last year’s mass shooting in Las Vegas on Greatest, claiming that beating his partner with a baseball bat “only makes our love stronger” on Normal – you get the feeling he’s going through the motions, giving his audience the unconscionable stuff they expect. </p>',
+						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 				},
 				{
-					prefix: 'Related: ',
 					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						'Eminem attacks Donald Trump on surprise album Kamikaze',
-					url:
-						'https://www.theguardian.com/music/2018/aug/31/eminem-donald-trump-surprise-album-kamikaze',
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
+				},
+				{
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><em>Words: Jonny Weeks</em></p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The weakest thing here might be Good Guy, a <a href="https://en.wikipedia.org/wiki/Thy_name_is">frailty-thy-name-is-woman</a> saga of infidelity, marked both by a dreary beat and the sense that Eminem’s heart really isn’t in it. He sounds like a man killing time until he can return to the topics that really get him going: negative reactions to his recent work and the vogue for <a href="https://www.theguardian.com/music/2017/jan/27/phonk-soundcloud-spaceghostpurrp-lil-uzi-vert">SoundCloud-disseminated mumble rap</a>. </p>',
+						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>On the one hand, the stuff about Revival’s reception gets a bit wearying and invites the obvious response: if its pop hooks and guest appearances from Pink and Ed Sheeran were as unfairly maligned as their author keeps claiming, why has he ditched them almost completely for its follow-up? Plus, there’s something odd about hearing Eminem, once the generation gap-cleaving voice of disaffected youth, sounding like a grumpy dad huffing from behind his newspaper in front of Top of the Pops, peevishly insisting that modern music is “mumbo jumbo” and deliberately getting the names of young artists wrong: “Earl the Hooded Sweater or whatever his name is”.</p>',
+						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>That said, if you’re going to listen to a middle-aged man complain that hip-hop isn’t as good as it used to be, that it might as well be Eminem. Whatever you make of his point about hip-hop’s decline, the central plank of his thesis – that the current generation of SoundCloud stars lack his astonishing technical skills and his wit, and there’s something a bit off about rappers penning their rhymes via ghostwriters – is pretty indisputable. </p>',
+						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Unlike its predecessor, the punchlines on Kamikaze largely land on target. The section where he describes mutilating his own genitals in detail, not out of Slim Shady-esque nihilism but because he’d rather do that than listen to Lil Yachty, is genuinely funny, and you anticipate many of the rappers attacked responding with anything as potent. Moreover, he spends chunks of Kamikaze demonstrating his point about technical skill in considerable style. He sounds more alive and exigent on The Ringer or Greatest than he has in years, mocking latterday triplet flows and lyrical content before letting fly with hyperspeed bars and intricate wordplay. His alternately baffled and livid verse on Lucky Me, gradually increasing in intensity and speed, is fantastic.</p>',
+						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Kamikaze is a variable, flawed album. The hooks are nothing special – in the case of Nice Guy, a lumbering bass-heavy grind bedecked with a racked vocal from Jessie Reyez, it’s actively painful. The beats are of noticeably spotty quality, ranging from the clean, cool electronics of Fall at one extreme, to the distinctly ho-hum Venom, a pallid contribution to the soundtrack of the forthcoming Marvel movie tacked awkwardly to the end of the album. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>When it’s on fire, however, it really crackles, blazing considerably brighter than any Eminem album for some time. Whether that’s enough to restore its author to the centre of the action is debatable: its predecessor shifted a mere 1.1m copies worldwide, a fraction of the sales he is used to. As he notes on Stepping Stone, a thoughtful examination of the collapse of his group D12, times have changed. “One minute you’re bodying shit / But then your audience splits,” he raps, “you can already sense the climate is starting to shift / To these kids you no longer exist.” </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But at its best, Kamikaze makes clear that Eminem is prepared to rage against the dying of the light – and the sound of him raging can still make for electrifying listening. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.AudioBlockElement',
+						'<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
 				},
 			],
-			blockCreatedOn: 1535717841000,
-			blockCreatedOnDisplay: '13:17 BST',
-			blockLastUpdatedDisplay: '14:28 BST',
-			blockFirstPublished: 1535717845000,
-			blockFirstPublishedDisplay: '13:17 BST',
-			primaryDateLine: 'Wed 19 Aug 2020 06.02 BST',
-			secondaryDateLine: 'Wed 19 Aug 2020 11.52 BST',
+
+			blockFirstPublishedDisplay: '20.44 GMT',
+			primaryDateLine: 'Thu 17 Dec 2020 09.07 GMT',
+			secondaryDateLine: 'Last modified on Thu 17 Dec 2020 14.04 GMT',
 		},
 	],
-	author: {
-		byline: 'Alexis Petridis',
-	},
-	designType: 'Review',
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+				'https://amp.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2664,93 +2429,103 @@ export const richLink: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTMucG5n&enable=upscale&s=19ff134b1c30d533c8248da55e4cd892',
-				'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=473370f8653451c67c287b7f09919608',
-				'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=e197c21017be45b8fdafbe3050cb29a9',
-				'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&quality=85&auto=format&fit=max&s=3b9ffe6eb83be3936ae89fd3ab522fb4',
+				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
+				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=1d283540d1bcabdc291f244a28e24e13',
+				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=46fe1ba5c74d24c6e88f67de36b4599b',
+				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&quality=85&auto=format&fit=max&s=f069e124dd33e0ac48fa5d2613f51374',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Alexis Petridis',
+					name: 'Guardian sport',
 					sameAs:
-						'https://www.theguardian.com/profile/alexispetridis',
+						'https://www.theguardian.com/profile/guardian-sport',
 				},
 			],
-			datePublished: '2018-08-31T14:02:23.000Z',
+			datePublished: '2020-12-17T09:07:18.000Z',
 			headline:
-				'Eminem: Kamikaze review – middle-aged gripes aired with blazing skill',
-			dateModified: '2018-08-31T17:18:04.000Z',
+				'Buy a classic sport photograph: the immortal Bobby Moore',
+			dateModified: '2020-12-17T14:04:58.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+					'android-app://com.guardian/https/www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Fri 31 Aug 2018 15.02 BST',
 	editionId: 'UK',
+	webPublicationDateDisplay: 'Thu 17 Dec 2020 09.07 GMT',
 	shouldHideAds: false,
 	standfirst:
-		'<p>The hooks are middling and the moans at his critics get tedious – but a flurry of brutal potshots at witless SoundCloud rappers prove Eminem can still hit exhilarating heights</p>',
-	webTitle:
-		'Eminem: Kamikaze review – middle-aged gripes aired with blazing skill',
+		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
-		'article:author': 'https://www.theguardian.com/profile/alexispetridis',
+			'http://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+		'article:author': 'https://www.theguardian.com/profile/guardian-sport',
 		'og:image:height': '720',
 		'og:description':
-			'The hooks are middling and the moans at his critics get tedious – but a flurry of brutal potshots at witless SoundCloud rappers prove Eminem can still hit exhilarating heights',
+			'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/db2348b8bc322340bdf9a842ea8e562321164050/0_0_4184_2511/master/4184.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTMucG5n&enable=upscale&s=19ff134b1c30d533c8248da55e4cd892',
+			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
 		'al:ios:url':
-			'gnmguardian://music/2018/aug/31/eminem-kamikaze-album-review?contenttype=Article&source=applinks',
+			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Music',
-		'article:published_time': '2018-08-31T14:02:23.000Z',
-		'og:title':
-			'Eminem: Kamikaze review – middle-aged gripes aired with blazing skill',
+		'article:section': 'Art and design',
+		'article:published_time': '2020-12-17T09:07:18.000Z',
+		'og:title': 'Buy a classic sport photograph: the immortal Bobby Moore',
 		'fb:app_id': '180444840287',
-		'article:tag': 'Eminem,Music,Rap,Hip-hop,Culture',
+		'article:tag':
+			'England,Football,Sport,Photography,Art and design,Culture',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2018-08-31T17:18:04.000Z',
+		'article:modified_time': '2020-12-17T14:04:58.000Z',
 	},
-	sectionUrl: 'music/eminem',
-	pageId: 'music/2018/aug/31/eminem-kamikaze-album-review',
+	webTitle: 'Buy a classic sport photograph: the immortal Bobby Moore',
+	sectionUrl: 'football/england',
+	pageId:
+		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	version: 3,
 	tags: [
 		{
-			id: 'music/eminem',
-			type: 'Keyword',
-			title: 'Eminem',
+			id: 'artanddesign/series/guardian-print-shop',
+			type: 'Series',
+			title: 'Guardian Print Shop',
 		},
 		{
-			id: 'music/music',
+			id: 'football/england',
 			type: 'Keyword',
-			title: 'Music',
+			title: 'England',
 		},
 		{
-			id: 'music/rap',
+			id: 'football/football',
 			type: 'Keyword',
-			title: 'Rap',
+			title: 'Football',
 		},
 		{
-			id: 'music/hip-hop',
+			id: 'sport/sport',
 			type: 'Keyword',
-			title: 'Hip-hop',
+			title: 'Sport',
+		},
+		{
+			id: 'artanddesign/photography',
+			type: 'Keyword',
+			title: 'Photography',
+		},
+		{
+			id: 'artanddesign/artanddesign',
+			type: 'Keyword',
+			title: 'Art and design',
 		},
 		{
 			id: 'culture/culture',
@@ -2763,35 +2538,23 @@ export const richLink: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/albumreview',
-			type: 'Tone',
-			title: 'Album reviews',
-		},
-		{
-			id: 'tone/reviews',
-			type: 'Tone',
-			title: 'Reviews',
-		},
-		{
-			id: 'profile/alexispetridis',
+			id: 'profile/guardian-sport',
 			type: 'Contributor',
-			title: 'Alexis Petridis',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/31/Alexis_Petridis,_L.png?width=300&quality=85&auto=format&fit=max&s=b5d21be0a55e44ecebb0dd783db1d6d7',
+			title: 'Guardian sport',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-culture',
+			id: 'tracking/commissioningdesk/uk-pictures-guardian-news',
 			type: 'Tracking',
-			title: 'UK Culture',
+			title: 'UK Pictures Guardian News',
 		},
 	],
 	pillar: 'culture',
-	isCommentable: true,
+	isCommentable: false,
 	webURL:
-		'https://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review',
+		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	keyEvents: [],
 	showBottomSocialButtons: true,
-	isImmersive: false,
+	isImmersive: true,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -2821,6 +2584,8 @@ export const richLink: CAPIType = {
 		edition: '',
 		section: '',
 		sharedAdTargeting: {},
+		keywordIds: '',
+		showRelatedContent: false,
 		pageId: '',
 		webPublicationDate: 1579185778186,
 		headline: '',
@@ -2829,14 +2594,11 @@ export const richLink: CAPIType = {
 		series: '',
 		contentType: '',
 		isPaidContent: false,
-		keywordIds: '',
-		showRelatedContent: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		discussionD2Uid: 'testD2Header',
 		discussionApiClientHeader: 'testClientHeader',
+		ampIframeUrl:
+			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		isPhotoEssay: false,
 	},
-	sectionLabel: 'Eminem',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	sectionLabel: 'England',
 };
