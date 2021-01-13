@@ -232,7 +232,7 @@
         "webpack-sources": "^1.1.0"
     },
     "jest": {
-        "preset": "ts-jest/presets/js-with-babel",
+        "preset": "ts-jest/presets/js-with-ts",
         "testEnvironment": "jest-environment-jsdom-sixteen",
         "moduleFileExtensions": [
             "ts",
