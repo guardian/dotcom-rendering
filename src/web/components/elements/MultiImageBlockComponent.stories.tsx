@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Design } from '@guardian/types';
+import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
@@ -17,11 +18,13 @@ export default {
 
 export const SingleImage = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={oneImage}
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={oneImage}
+			/>
+		</ContainerLayout>
 	);
 };
 SingleImage.story = {
@@ -30,12 +33,14 @@ SingleImage.story = {
 
 export const SingleImageWithCaption = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={oneImage}
-			caption="This is the caption for a single image"
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={oneImage}
+				caption="This is the caption for a single image"
+			/>
+		</ContainerLayout>
 	);
 };
 SingleImageWithCaption.story = {
@@ -44,11 +49,13 @@ SingleImageWithCaption.story = {
 
 export const SideBySide = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={twoImages}
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={twoImages}
+			/>
+		</ContainerLayout>
 	);
 };
 SideBySide.story = {
@@ -57,12 +64,14 @@ SideBySide.story = {
 
 export const SideBySideWithCaption = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={twoImages}
-			caption="This is the caption for side by side"
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={twoImages}
+				caption="This is the caption for side by side"
+			/>
+		</ContainerLayout>
 	);
 };
 SideBySideWithCaption.story = {
@@ -71,11 +80,13 @@ SideBySideWithCaption.story = {
 
 export const OneAboveTwo = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={threeImages}
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={threeImages}
+			/>
+		</ContainerLayout>
 	);
 };
 OneAboveTwo.story = {
@@ -84,12 +95,14 @@ OneAboveTwo.story = {
 
 export const OneAboveTwoWithCaption = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={threeImages}
-			caption="This is the caption for one above two"
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={threeImages}
+				caption="This is the caption for one above two"
+			/>
+		</ContainerLayout>
 	);
 };
 OneAboveTwoWithCaption.story = {
@@ -98,11 +111,13 @@ OneAboveTwoWithCaption.story = {
 
 export const GridOfFour = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={fourImages}
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={fourImages}
+			/>
+		</ContainerLayout>
 	);
 };
 GridOfFour.story = {
@@ -111,12 +126,14 @@ GridOfFour.story = {
 
 export const GridOfFourWithCaption = () => {
 	return (
-		<MultiImageBlockComponent
-			design={Design.Article}
-			pillar="news"
-			images={fourImages}
-			caption="This is the caption for grid of four"
-		/>
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar="news"
+				images={fourImages}
+				caption="This is the caption for grid of four"
+			/>
+		</ContainerLayout>
 	);
 };
 GridOfFourWithCaption.story = {

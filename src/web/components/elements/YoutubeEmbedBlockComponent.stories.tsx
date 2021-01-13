@@ -7,6 +7,11 @@ import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 export default {
 	component: YoutubeEmbedBlockComponent,
 	title: 'Components/YoutubeEmbedComponent',
+	parameters: {
+		chromatic: {
+			disabled: true,
+		},
+	},
 };
 
 const Container = ({ children }: { children: React.ReactNode }) => (
