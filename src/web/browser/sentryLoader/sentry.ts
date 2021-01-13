@@ -37,9 +37,7 @@ Sentry.init({
 	whitelistUrls,
 	dsn: dcrSentryDsn,
 	environment: window.guardian.config.stage || 'DEV',
-    integrations: [
-        new CaptureConsole({ levels: ['error'] })
-    ],
+	integrations: [new CaptureConsole({ levels: ['error'] })],
 	// sampleRate: // We use Math.random in init.ts to sample errors
 	beforeSend(event) {
 		// Skip sending events in certain situations
