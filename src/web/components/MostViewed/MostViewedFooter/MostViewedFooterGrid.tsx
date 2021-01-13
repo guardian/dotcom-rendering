@@ -43,14 +43,14 @@ const firstTab = css`
 	border-right: ${thinGreySolid};
 `;
 
-const selectedListTab = (pillar: CAPIPillar) => css`
+const selectedListTabStyles = (pillar: CAPIPillar) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
 	box-shadow: inset 0px 4px 0px 0px ${pillar && pillarPalette[pillar].dark};
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
 // Used for the deeply read test
-const selectedDeeplyListTab = css`
+const selectedDeeplyListTabStyles = css`
 	box-shadow: inset 0px 4px 0px 0px ${neutral[46]};
 	transition: box-shadow 0.3s ease-in-out;
 `;
@@ -143,8 +143,8 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 						<li
 							className={cx(listTab, {
 								[inDeeplyReadTestVariant
-									? selectedDeeplyListTab
-									: selectedListTab(pillar)]:
+									? selectedDeeplyListTabStyles
+									: selectedListTabStyles(pillar)]:
 									i === selectedTabIndex,
 								[unselectedListTab]: i !== selectedTabIndex,
 								[firstTab]: i === 0,
