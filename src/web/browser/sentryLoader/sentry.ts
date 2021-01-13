@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/browser';
+import { CaptureConsole } from '@sentry/integrations';
 
 // Only send errors matching these regexes
 const whitelistUrls = [
@@ -36,6 +37,9 @@ Sentry.init({
 	whitelistUrls,
 	dsn: dcrSentryDsn,
 	environment: window.guardian.config.stage || 'DEV',
+    integrations: [
+        new CaptureConsole({ levels: ['error'] })
+    ],
 	// sampleRate: // We use Math.random in init.ts to sample errors
 	beforeSend(event) {
 		// Skip sending events in certain situations
