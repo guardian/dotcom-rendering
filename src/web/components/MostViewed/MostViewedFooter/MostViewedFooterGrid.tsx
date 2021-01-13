@@ -99,6 +99,7 @@ type Props = {
 	pillar: CAPIPillar;
 };
 
+// To avoid having to handle multiple ways of reducing the capitalisation styling
 const TabHeading = ({ heading }: { heading: string }) => {
 	switch (heading.toLowerCase()) {
 		case 'deeply read':
