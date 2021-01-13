@@ -17,11 +17,11 @@ const HeaderImageCaptionStyles = css`
 		text-align: center;
 		background-color: ${brandAlt[400]};
 		color: ${neutral[7]};
-		width: ${remSpace[9]};
-		height: ${remSpace[9]};
+		width: 34px;
+		height: 34px;
 		position: absolute;
-		bottom: ${remSpace[2]};
-		right: ${remSpace[2]};
+		bottom: 8px;
+		right: 8px;
 		border-radius: 100%;
 		outline: none;
 
@@ -66,9 +66,9 @@ const svgStyle = css`
 	line-height: 32px;
 	font-size: 0;
 	svg {
-		width: 24px;
-		height: 24px;
-		margin: 4px;
+		width: 75%;
+		height: 75%;
+		margin: 12.5%;
 	}
 `;
 
