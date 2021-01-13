@@ -27,8 +27,8 @@ const indices = [
 	'banner',
 
 	// Header
-	'stickyAdWrapper',
 	'headerWrapper',
+	'stickyAdWrapper',
 
 	// Header links (should be above The Guardian svg)
 	'headerLinks',

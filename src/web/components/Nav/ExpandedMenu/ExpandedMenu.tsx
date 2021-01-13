@@ -86,7 +86,7 @@ const mainMenuStyles = css`
 		margin-right: 70px;
 	}
 	${from.tablet} {
-		margin-right: 100px;
+		margin-right: 53px;
 	}
 `;
 
