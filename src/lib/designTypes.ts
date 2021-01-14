@@ -1,6 +1,6 @@
 import { Design } from '@guardian/types';
 
-export const designTypes: Design[] = [
+const designTypes: Design[] = [
 	Design.Article,
 	Design.Media,
 	Design.Review,
