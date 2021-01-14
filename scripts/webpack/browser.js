@@ -120,7 +120,8 @@ module.exports = ({ isLegacyJS }) => ({
                         loader: 'ts-loader',
                         options: {
                             configFile: 'tsconfig.build.json',
-                            transpileOnly: true,
+                            // https://github.com/TypeStrong/ts-loader/issues/331#issuecomment-647171138
+                            transpileOnly: false,
                         },
                     },
                 ],
