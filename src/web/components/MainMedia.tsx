@@ -55,7 +55,6 @@ const immersiveWrapper = css`
 `;
 
 const youtubeWrapperStyles = css`
-	margin-top: 12px;
 	margin-bottom: 12px;
 `;
 
