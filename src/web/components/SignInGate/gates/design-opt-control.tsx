@@ -46,18 +46,18 @@ export const signInGateComponent: SignInGateComponent = {
         abTest,
         isComment,
     }) => (
-        <Lazy margin={300}>
-            <Suspense fallback={<></>}>
-                <SignInGateMain
-                    ophanComponentId={ophanComponentId}
-                    dismissGate={dismissGate}
-                    guUrl={guUrl}
-                    signInUrl={signInUrl}
-                    abTest={abTest}
-                    isComment={isComment}
-                />
-            </Suspense>
-        </Lazy>
+	<Lazy margin={300}>
+		<Suspense fallback={<></>}>
+			<SignInGateMain
+				ophanComponentId={ophanComponentId}
+				dismissGate={dismissGate}
+				guUrl={guUrl}
+				signInUrl={signInUrl}
+				abTest={abTest}
+				isComment={isComment}
+			/>
+		</Suspense>
+	</Lazy>
     ),
     canShow,
 };

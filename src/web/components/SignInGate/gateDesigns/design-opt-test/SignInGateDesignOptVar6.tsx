@@ -160,108 +160,108 @@ export const SignInGateDesignOptVar6 = ({
     isComment,
 }: SignInGateProps) => {
     return (
-        <div className={signinGate} data-cy="sign-in-gate-design-opt-variant-6">
-            <style>{hideElementsCss}</style>
-            <div className={firstParagraphOverlay(!!isComment)} />
-            <h1 className={headingStyles}>
+	<div className={signinGate} data-cy="sign-in-gate-design-opt-variant-6">
+		<style>{hideElementsCss}</style>
+		<div className={firstParagraphOverlay(!!isComment)} />
+		<h1 className={headingStyles}>
                 Register for free and continue reading
-            </h1>
+		</h1>
 
-            <div className={actionButtons}>
-                <LinkButton
-                    data-cy="sign-in-gate-design-opt-variant-6_register"
-                    className={registerButton}
-                    priority="primary"
-                    size="small"
-                    href={signInUrl}
-                    onClick={() => {
+		<div className={actionButtons}>
+			<LinkButton
+				data-cy="sign-in-gate-design-opt-variant-6_register"
+				className={registerButton}
+				priority="primary"
+				size="small"
+				href={signInUrl}
+				onClick={() => {
                         trackLink(ophanComponentId, 'register-link', abTest);
                     }}
-                >
+			>
                     Register for free
-                </LinkButton>
+			</LinkButton>
 
-                <LinkButton
-                    data-cy="sign-in-gate-design-opt-variant-6_dismiss"
-                    className={laterButton}
-                    priority="subdued"
-                    size="small"
-                    onClick={() => {
+			<LinkButton
+				data-cy="sign-in-gate-design-opt-variant-6_dismiss"
+				className={laterButton}
+				priority="subdued"
+				size="small"
+				onClick={() => {
                         dismissGate();
                         trackLink(ophanComponentId, 'not-now', abTest);
                     }}
-                >
+			>
                     I’ll do it later
-                </LinkButton>
-            </div>
+			</LinkButton>
+		</div>
 
-            <p className={bodyBold}>
+		<p className={bodyBold}>
                 It’s important to say this is not a step towards a paywall
-            </p>
-            <p className={bodyText}>
+		</p>
+		<p className={bodyText}>
                 Registering is a free and simple way to help us sustain our
                 independent Guardian journalism.
-            </p>
-            <p className={bodyText}>
+		</p>
+		<p className={bodyText}>
                 When you register with us we are able to improve our news
                 experience for you and for others. You will always be able to
                 control your own&nbsp;
-                <button
-                    data-cy="sign-in-gate-design-opt-variant-6_privacy"
-                    className={privacyLink}
-                    onClick={() => {
+			<button
+				data-cy="sign-in-gate-design-opt-variant-6_privacy"
+				className={privacyLink}
+				onClick={() => {
                         cmp.showPrivacyManager();
                         trackLink(ophanComponentId, 'privacy', abTest);
                     }}
-                >
+			>
                     privacy settings
-                </button>
+			</button>
                 . Thank you
-            </p>
+		</p>
 
-            <p className={cx([bodyBold, signInHeader])}>
+		<p className={cx([bodyBold, signInHeader])}>
                 Have a subscription? Made a contribution? Already registered?
-            </p>
+		</p>
 
-            <Link
-                data-cy="sign-in-gate-design-opt-variant-6_signin"
-                className={signInLink}
-                href={signInUrl}
-                onClick={() => {
+		<Link
+			data-cy="sign-in-gate-design-opt-variant-6_signin"
+			className={signInLink}
+			href={signInUrl}
+			onClick={() => {
                     trackLink(ophanComponentId, 'sign-in-link', abTest);
                 }}
-            >
+		>
                 Sign In
-            </Link>
+		</Link>
 
-            <div className={faq}>
-                <Link
-                    href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
-                    onClick={() => {
+		<div className={faq}>
+			<Link
+				href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
+				onClick={() => {
                         trackLink(ophanComponentId, 'how-link', abTest);
                     }}
-                >
+			>
                     Why register & how does it help?
-                </Link>
+			</Link>
 
-                <Link
-                    href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
-                    onClick={() => {
+			<Link
+				href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
+				onClick={() => {
                         trackLink(ophanComponentId, 'why-link', abTest);
                     }}
-                >
+			>
                     How will my information & data be used?
-                </Link>
+			</Link>
 
-                <Link
-                    href={`${guUrl}/help/identity-faq`}
-                    onClick={() => {
+			<Link
+				href={`${guUrl}/help/identity-faq`}
+				onClick={() => {
                         trackLink(ophanComponentId, 'help-link', abTest);
                     }}
-                >
+			>
                     Get help with registering or signing in
-                </Link>
-            </div>
-        </div>
+			</Link>
+		</div>
+	</div>
     );
 };
