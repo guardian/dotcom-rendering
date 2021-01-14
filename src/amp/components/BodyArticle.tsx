@@ -8,7 +8,6 @@ import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { designTypeDefault } from '@root/src/lib/designTypes';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -36,20 +35,20 @@ const bulletStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
+const decideBackground = (design: Design): string => {
+	switch (design) {
+		case Design.Comment:
+			return palette.opinion[800];
+		case Design.AdvertisementFeature:
+			return palette.neutral[86];
+		default:
+			return palette.neutral[100];
+	}
+};
+
 const body = (pillar: CAPIPillar, design: Design) => {
-	const defaultStyles: DesignTypesObj = designTypeDefault(
-		palette.neutral[100],
-	);
-
-	// Extend defaultStyles with custom styles for some designTypes
-	const designTypeStyle: DesignTypesObj = {
-		...defaultStyles,
-		[Design.Comment]: palette.opinion[800],
-		[Design.AdvertisementFeature]: palette.neutral[86],
-	};
-
 	return css`
-		background-color: ${designTypeStyle[design]};
+		background-color: ${decideBackground(design)};
 		${bulletStyle(pillar)}
 	`;
 };
