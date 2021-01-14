@@ -14,19 +14,19 @@ import Number10 from './10.svg';
 // This file contains an array of elements, but only exposes one.
 
 export const BigNumber = ({ index }: { index: number }) => {
-    const numbers = [
-        <Number0 />,
-        <Number1 />,
-        <Number2 />,
-        <Number3 />,
-        <Number4 />,
-        <Number5 />,
-        <Number6 />,
-        <Number7 />,
-        <Number8 />,
-        <Number9 />,
-        <Number10 />,
-    ];
+	const numbers = [
+		<Number0 />,
+		<Number1 />,
+		<Number2 />,
+		<Number3 />,
+		<Number4 />,
+		<Number5 />,
+		<Number6 />,
+		<Number7 />,
+		<Number8 />,
+		<Number9 />,
+		<Number10 />,
+	];
 
-    return numbers[index];
+	return numbers[index];
 };

@@ -39,7 +39,7 @@ const scriptPath = (package) =>
 
 module.exports = ({ isLegacyJS }) => ({
     entry: {
-        sentry: scriptPath('sentry'),
+        sentryLoader: scriptPath('sentryLoader'),
         ga: scriptPath('ga'),
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),
@@ -104,7 +104,15 @@ module.exports = ({ isLegacyJS }) => ({
                                               modules: false,
                                           },
                                       ]
-                                    : '@babel/preset-modules',
+                                    : [
+                                          '@babel/preset-env',
+                                          {
+                                              bugfixes: true,
+                                              targets: {
+                                                  esmodules: true,
+                                              },
+                                          },
+                                      ],
                             ],
                         },
                     },

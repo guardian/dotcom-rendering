@@ -8,5 +8,7 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
-// eslint-disable-next-line @typescript-eslint/tslint/config
-module.exports = (on, config) => {};
+module.exports = (on, config) => {
+    config.env = { ...config.env, ...process.env };
+    return config;
+};

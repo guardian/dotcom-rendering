@@ -33,6 +33,9 @@
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/QuizAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CodeBlockElement"
                     },
                     {
@@ -82,6 +85,9 @@
                     },
                     {
                         "$ref": "#/definitions/MapBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/MediaAtomBlockElement"
                     },
                     {
                         "$ref": "#/definitions/MultiImageBlockElement"
@@ -184,7 +190,7 @@
             }
         },
         "pillar": {
-            "$ref": "#/definitions/Pillar"
+            "$ref": "#/definitions/CAPIPillar"
         },
         "isImmersive": {
             "type": "boolean"
@@ -243,7 +249,7 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -395,6 +401,9 @@
                 "kicker": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "trackUrl": {
                     "type": "string"
                 },
@@ -403,6 +412,12 @@
                 },
                 "coverUrl": {
                     "type": "string"
+                },
+                "audioIndex": {
+                    "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -414,6 +429,17 @@
                 "trackUrl"
             ]
         },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
+        },
         "AudioBlockElement": {
             "type": "object",
             "properties": {
@@ -424,7 +450,9 @@
                     ]
                 }
             },
-            "required": ["_type"]
+            "required": [
+                "_type"
+            ]
         },
         "BlockquoteBlockElement": {
             "type": "object",
@@ -437,9 +465,15 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "quoted": {
+                    "type": "boolean"
                 }
             },
-            "required": ["_type", "html"]
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "CaptionBlockElement": {
             "type": "object",
@@ -450,17 +484,8 @@
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
                 },
-                "display": {
-                    "$ref": "#/definitions/Display"
-                },
-                "designType": {
-                    "$ref": "#/definitions/DesignType"
-                },
                 "captionText": {
                     "type": "string"
-                },
-                "pillar": {
-                    "$ref": "#/definitions/Pillar"
                 },
                 "padCaption": {
                     "type": "boolean"
@@ -478,44 +503,9 @@
                     "type": "boolean"
                 }
             },
-            "required": ["_type", "designType", "display", "pillar"]
-        },
-        "Display": {
-            "type": "number",
-            "enum": [0, 1, 2]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
+            "required": [
+                "_type"
+            ]
         },
         "CalloutBlockElement": {
             "type": "object",
@@ -577,6 +567,9 @@
                 },
                 "calloutIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -597,7 +590,9 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["text"]
+                    "enum": [
+                        "text"
+                    ]
                 },
                 "id": {
                     "type": "string"
@@ -621,14 +616,23 @@
                     "type": "string"
                 }
             },
-            "required": ["hideLabel", "id", "label", "name", "required", "type"]
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
         },
         "CampaignFieldTextArea": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["textarea"]
+                    "enum": [
+                        "textarea"
+                    ]
                 },
                 "id": {
                     "type": "string"
@@ -652,14 +656,23 @@
                     "type": "string"
                 }
             },
-            "required": ["hideLabel", "id", "label", "name", "required", "type"]
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
         },
         "CampaignFieldFile": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["file"]
+                    "enum": [
+                        "file"
+                    ]
                 },
                 "id": {
                     "type": "string"
@@ -683,14 +696,23 @@
                     "type": "string"
                 }
             },
-            "required": ["hideLabel", "id", "label", "name", "required", "type"]
+            "required": [
+                "hideLabel",
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
         },
         "CampaignFieldRadio": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["radio"]
+                    "enum": [
+                        "radio"
+                    ]
                 },
                 "options": {
                     "type": "array",
@@ -704,7 +726,10 @@
                                 "type": "string"
                             }
                         },
-                        "required": ["label", "value"]
+                        "required": [
+                            "label",
+                            "value"
+                        ]
                     }
                 },
                 "id": {
@@ -744,7 +769,9 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["checkbox"]
+                    "enum": [
+                        "checkbox"
+                    ]
                 },
                 "options": {
                     "type": "array",
@@ -758,7 +785,10 @@
                                 "type": "string"
                             }
                         },
-                        "required": ["label", "value"]
+                        "required": [
+                            "label",
+                            "value"
+                        ]
                     }
                 },
                 "id": {
@@ -798,7 +828,9 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["select"]
+                    "enum": [
+                        "select"
+                    ]
                 },
                 "options": {
                     "type": "array",
@@ -812,7 +844,10 @@
                                 "type": "string"
                             }
                         },
-                        "required": ["label", "value"]
+                        "required": [
+                            "label",
+                            "value"
+                        ]
                     }
                 },
                 "id": {
@@ -865,6 +900,9 @@
                 "html": {
                     "type": "string"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -878,7 +916,119 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html", "id", "url"]
+            "required": [
+                "_type",
+                "html",
+                "id",
+                "url"
+            ]
+        },
+        "QuizAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                    ]
+                },
+                "quizType": {
+                    "enum": [
+                        "knowledge",
+                        "personality"
+                    ],
+                    "type": "string"
+                },
+                "quizIndex": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        },
+                                        "answerBuckets": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "answerBuckets",
+                                        "id",
+                                        "isCorrect",
+                                        "text"
+                                    ]
+                                }
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "answers",
+                            "id",
+                            "text"
+                        ]
+                    }
+                },
+                "resultBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "id",
+                            "title"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "id",
+                "questions",
+                "quizType",
+                "resultBuckets"
+            ]
         },
         "CodeBlockElement": {
             "type": "object",
@@ -889,11 +1039,32 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "code": {
+                    "type": "string"
+                },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
                 }
             },
-            "required": ["_type", "isMandatory"]
+            "required": [
+                "_type",
+                "code",
+                "isMandatory"
+            ]
+        },
+        "Language": {
+            "enum": [
+                "css",
+                "elm",
+                "javascript",
+                "markup",
+                "scala",
+                "typescript"
+            ],
+            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -921,6 +1092,9 @@
                 },
                 "dateTime": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -946,7 +1120,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "atomId"]
+            "required": [
+                "_type",
+                "atomId"
+            ]
         },
         "DisclaimerBlockElement": {
             "type": "object",
@@ -959,9 +1136,15 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "html"]
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "DividerBlockElement": {
             "type": "object",
@@ -973,7 +1156,9 @@
                     ]
                 }
             },
-            "required": ["_type"]
+            "required": [
+                "_type"
+            ]
         },
         "DocumentBlockElement": {
             "type": "object",
@@ -995,9 +1180,17 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "embedUrl", "height", "width"]
+            "required": [
+                "_type",
+                "embedUrl",
+                "height",
+                "width"
+            ]
         },
         "EmbedBlockElement": {
             "type": "object",
@@ -1011,6 +1204,9 @@
                 "safe": {
                     "type": "boolean"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "alt": {
                     "type": "string"
                 },
@@ -1021,7 +1217,11 @@
                     "type": "boolean"
                 }
             },
-            "required": ["_type", "html", "isMandatory"]
+            "required": [
+                "_type",
+                "html",
+                "isMandatory"
+            ]
         },
         "ExplainerAtomBlockElement": {
             "type": "object",
@@ -1040,9 +1240,17 @@
                 },
                 "body": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "body", "id", "title"]
+            "required": [
+                "_type",
+                "body",
+                "id",
+                "title"
+            ]
         },
         "GenericAtomBlockElement": {
             "type": "object",
@@ -1072,7 +1280,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "url"]
+            "required": [
+                "_type",
+                "url"
+            ]
         },
         "GuideAtomBlockElement": {
             "type": "object",
@@ -1103,9 +1314,19 @@
                 },
                 "guideIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "credit", "html", "id", "label", "title"]
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
         },
         "GuVideoBlockElement": {
             "type": "object",
@@ -1130,9 +1351,18 @@
                 },
                 "source": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "assets", "caption", "html", "source"]
+            "required": [
+                "_type",
+                "assets",
+                "caption",
+                "html",
+                "source"
+            ]
         },
         "VideoAssets": {
             "type": "object",
@@ -1144,7 +1374,10 @@
                     "type": "string"
                 }
             },
-            "required": ["mimeType", "url"]
+            "required": [
+                "mimeType",
+                "url"
+            ]
         },
         "HighlightBlockElement": {
             "type": "object",
@@ -1159,7 +1392,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html"]
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "ImageBlockElement": {
             "type": "object",
@@ -1180,7 +1416,9 @@
                             }
                         }
                     },
-                    "required": ["allImages"]
+                    "required": [
+                        "allImages"
+                    ]
                 },
                 "data": {
                     "type": "object",
@@ -1215,7 +1453,13 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "data", "imageSources", "media", "role"]
+            "required": [
+                "_type",
+                "data",
+                "imageSources",
+                "media",
+                "role"
+            ]
         },
         "Image": {
             "type": "object",
@@ -1236,7 +1480,10 @@
                             "type": "string"
                         }
                     },
-                    "required": ["height", "width"]
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 },
                 "mediaType": {
                     "type": "string"
@@ -1248,7 +1495,13 @@
                     "type": "string"
                 }
             },
-            "required": ["fields", "index", "mediaType", "mimeType", "url"]
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
+                "mimeType",
+                "url"
+            ]
         },
         "ImageSource": {
             "type": "object",
@@ -1263,7 +1516,10 @@
                     }
                 }
             },
-            "required": ["srcSet", "weighting"]
+            "required": [
+                "srcSet",
+                "weighting"
+            ]
         },
         "Weighting": {
             "enum": [
@@ -1286,18 +1542,10 @@
                     "type": "number"
                 }
             },
-            "required": ["src", "width"]
-        },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
+            "required": [
+                "src",
+                "width"
+            ]
         },
         "InstagramBlockElement": {
             "type": "object",
@@ -1316,9 +1564,17 @@
                 },
                 "hasCaption": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "hasCaption", "html", "url"]
+            "required": [
+                "_type",
+                "hasCaption",
+                "html",
+                "url"
+            ]
         },
         "InteractiveAtomBlockElement": {
             "type": "object",
@@ -1341,6 +1597,9 @@
                 "css": {
                     "type": "string"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -1348,7 +1607,12 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "id", "js", "url"]
+            "required": [
+                "_type",
+                "id",
+                "js",
+                "url"
+            ]
         },
         "InteractiveBlockElement": {
             "type": "object",
@@ -1378,7 +1642,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "url"]
+            "required": [
+                "_type",
+                "url"
+            ]
         },
         "MapBlockElement": {
             "type": "object",
@@ -1409,6 +1676,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1419,6 +1689,55 @@
                 "source",
                 "title",
                 "width"
+            ]
+        },
+        "MediaAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.MediaAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VideoAssets"
+                    }
+                },
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "_type",
+                "assets",
+                "id"
             ]
         },
         "MultiImageBlockElement": {
@@ -1438,9 +1757,15 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "images"]
+            "required": [
+                "_type",
+                "images"
+            ]
         },
         "ProfileAtomBlockElement": {
             "type": "object",
@@ -1471,9 +1796,19 @@
                 },
                 "profileIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "credit", "html", "id", "label", "title"]
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
         },
         "PullquoteBlockElement": {
             "type": "object",
@@ -1494,7 +1829,11 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html", "role"]
+            "required": [
+                "_type",
+                "html",
+                "role"
+            ]
         },
         "QABlockElement": {
             "type": "object",
@@ -1522,9 +1861,18 @@
                 },
                 "qandaIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "credit", "html", "id", "title"]
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "title"
+            ]
         },
         "RichLinkBlockElement": {
             "type": "object",
@@ -1551,7 +1899,12 @@
                     "type": "number"
                 }
             },
-            "required": ["_type", "prefix", "text", "url"]
+            "required": [
+                "_type",
+                "prefix",
+                "text",
+                "url"
+            ]
         },
         "SoundcloudBlockElement": {
             "type": "object",
@@ -1573,9 +1926,18 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "html", "id", "isMandatory", "isTrack"]
+            "required": [
+                "_type",
+                "html",
+                "id",
+                "isMandatory",
+                "isTrack"
+            ]
         },
         "SpotifyBlockElement": {
             "type": "object",
@@ -1600,9 +1962,14 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type"]
+            "required": [
+                "_type"
+            ]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -1617,7 +1984,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html"]
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "TableBlockElement": {
             "type": "object",
@@ -1633,9 +2003,16 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "html", "isMandatory"]
+            "required": [
+                "_type",
+                "html",
+                "isMandatory"
+            ]
         },
         "TextBlockElement": {
             "type": "object",
@@ -1653,7 +2030,10 @@
                     "type": "string"
                 }
             },
-            "required": ["_type", "html"]
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "TimelineBlockElement": {
             "type": "object",
@@ -1681,9 +2061,17 @@
                 },
                 "timelineIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "events", "id", "title"]
+            "required": [
+                "_type",
+                "events",
+                "id",
+                "title"
+            ]
         },
         "TimelineEvent": {
             "type": "object",
@@ -1701,7 +2089,10 @@
                     "type": "string"
                 }
             },
-            "required": ["date", "title"]
+            "required": [
+                "date",
+                "title"
+            ]
         },
         "TweetBlockElement": {
             "type": "object",
@@ -1723,9 +2114,18 @@
                 },
                 "hasMedia": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "hasMedia", "html", "id", "url"]
+            "required": [
+                "_type",
+                "hasMedia",
+                "html",
+                "id",
+                "url"
+            ]
         },
         "VideoBlockElement": {
             "type": "object",
@@ -1735,9 +2135,14 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type"]
+            "required": [
+                "_type"
+            ]
         },
         "VideoFacebookBlockElement": {
             "type": "object",
@@ -1762,9 +2167,17 @@
                 },
                 "embedUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "height", "url", "width"]
+            "required": [
+                "_type",
+                "height",
+                "url",
+                "width"
+            ]
         },
         "VideoVimeoBlockElement": {
             "type": "object",
@@ -1795,9 +2208,17 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "height", "url", "width"]
+            "required": [
+                "_type",
+                "height",
+                "url",
+                "width"
+            ]
         },
         "VideoYoutubeBlockElement": {
             "type": "object",
@@ -1831,9 +2252,18 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "height", "originalUrl", "url", "width"]
+            "required": [
+                "_type",
+                "height",
+                "originalUrl",
+                "url",
+                "width"
+            ]
         },
         "YoutubeBlockElement": {
             "type": "object",
@@ -1859,11 +2289,48 @@
                 "duration": {
                     "type": "number"
                 },
-                "posterSrc": {
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "overrideImage": {
                     "type": "string"
+                },
+                "altText": {
+                    "type": "string"
+                },
+                "youtubeIndex": {
+                    "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
-            "required": ["_type", "assetId", "mediaTitle"]
+            "required": [
+                "_type",
+                "assetId",
+                "channelId",
+                "expired",
+                "id",
+                "mediaTitle"
+            ]
         },
         "Block": {
             "type": "object",
@@ -1892,6 +2359,9 @@
                             },
                             {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QuizAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"
@@ -1943,6 +2413,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/MediaAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
@@ -1998,25 +2471,25 @@
                         ]
                     }
                 },
-                "createdOn": {
+                "blockCreatedOn": {
                     "type": "number"
                 },
-                "createdOnDisplay": {
+                "blockCreatedOnDisplay": {
                     "type": "string"
                 },
-                "lastUpdated": {
+                "blockLastUpdated": {
                     "type": "number"
                 },
-                "lastUpdatedDisplay": {
+                "blockLastUpdatedDisplay": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "firstPublished": {
+                "blockFirstPublished": {
                     "type": "number"
                 },
-                "firstPublishedDisplay": {
+                "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
                 "primaryDateLine": {
@@ -2055,7 +2528,10 @@
                     "type": "string"
                 }
             },
-            "required": ["currentPage", "totalPages"]
+            "required": [
+                "currentPage",
+                "totalPages"
+            ]
         },
         "AuthorType": {
             "type": "object",
@@ -2072,7 +2548,12 @@
             }
         },
         "Edition": {
-            "enum": ["AU", "INT", "UK", "US"],
+            "enum": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ],
             "type": "string"
         },
         "TagType": {
@@ -2097,7 +2578,22 @@
                     "type": "string"
                 }
             },
-            "required": ["id", "title", "type"]
+            "required": [
+                "id",
+                "title",
+                "type"
+            ]
+        },
+        "CAPIPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",
@@ -2109,7 +2605,10 @@
                     "type": "string"
                 }
             },
-            "required": ["title", "url"]
+            "required": [
+                "title",
+                "url"
+            ]
         },
         "ConfigType": {
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
@@ -2236,6 +2735,12 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -2273,7 +2778,6 @@
                 "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
-                "idApiUrl",
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
@@ -2281,6 +2785,7 @@
                 "frontendAssetsFullURL",
                 "googletagUrl",
                 "hbImpl",
+                "idApiUrl",
                 "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",
@@ -2296,6 +2801,28 @@
                 "switches",
                 "videoDuration"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",
@@ -2313,7 +2840,12 @@
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
-            "required": ["AU", "INT", "UK", "US"]
+            "required": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ]
         },
         "EditionCommercialProperties": {
             "type": "object",
@@ -2328,7 +2860,9 @@
                     "$ref": "#/definitions/Branding"
                 }
             },
-            "required": ["adTargeting"]
+            "required": [
+                "adTargeting"
+            ]
         },
         "AdTargetParam": {
             "type": "object",
@@ -2350,7 +2884,10 @@
                     ]
                 }
             },
-            "required": ["name", "value"]
+            "required": [
+                "name",
+                "value"
+            ]
         },
         "Branding": {
             "type": "object",
@@ -2362,7 +2899,9 @@
                             "type": "string"
                         }
                     },
-                    "required": ["name"]
+                    "required": [
+                        "name"
+                    ]
                 },
                 "sponsorName": {
                     "type": "string"
@@ -2389,10 +2928,18 @@
                                     "type": "number"
                                 }
                             },
-                            "required": ["height", "width"]
+                            "required": [
+                                "height",
+                                "width"
+                            ]
                         }
                     },
-                    "required": ["dimensions", "label", "link", "src"]
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
                 },
                 "aboutThisLink": {
                     "type": "string"
@@ -2413,7 +2960,10 @@
                                     "type": "number"
                                 }
                             },
-                            "required": ["height", "width"]
+                            "required": [
+                                "height",
+                                "width"
+                            ]
                         },
                         "link": {
                             "type": "string"
@@ -2422,10 +2972,19 @@
                             "type": "string"
                         }
                     },
-                    "required": ["dimensions", "label", "link", "src"]
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
                 }
             },
-            "required": ["aboutThisLink", "logo", "sponsorName"]
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
+            ]
         },
         "BadgeType": {
             "type": "object",
@@ -2437,7 +2996,10 @@
                     "type": "string"
                 }
             },
-            "required": ["imageUrl", "seriesTag"]
+            "required": [
+                "imageUrl",
+                "seriesTag"
+            ]
         },
         "FooterType": {
             "type": "object",
@@ -2452,7 +3014,9 @@
                     }
                 }
             },
-            "required": ["footerLinks"]
+            "required": [
+                "footerLinks"
+            ]
         },
         "FooterLink": {
             "type": "object",
@@ -2470,7 +3034,11 @@
                     "type": "string"
                 }
             },
-            "required": ["dataLinkName", "text", "url"]
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

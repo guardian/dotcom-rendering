@@ -11,88 +11,88 @@ import { mockTab1 } from '@root/fixtures/mostViewed';
 import { MostViewedRight } from './MostViewedRight';
 
 export default {
-    component: MostViewedRight,
-    title: 'Components/MostViewedRight',
-    parameters: {
-        chromatic: { diffThreshold: 0.2 },
-    },
+	component: MostViewedRight,
+	title: 'Components/MostViewedRight',
+	parameters: {
+		chromatic: { diffThreshold: 0.2 },
+	},
 };
 
 export const defaultStory = () => {
-    fetchMock.restore().getOnce('*', {
-        status: 200,
-        body: mockTab1,
-    });
+	fetchMock.restore().getOnce('*', {
+		status: 200,
+		body: mockTab1,
+	});
 
-    return (
-        <Section>
-            <Flex>
-                <LeftColumn
-                    showPartialRightBorder={true}
-                    showRightBorder={false}
-                >
-                    <></>
-                </LeftColumn>
-                <ArticleContainer>
-                    <></>
-                </ArticleContainer>
-                <RightColumn>
-                    <Section
-                        showSideBorders={false}
-                        showTopBorder={false}
-                        padded={false}
-                    >
-                        <MostViewedRight pillar="news" />
-                    </Section>
-                </RightColumn>
-            </Flex>
-        </Section>
-    );
+	return (
+		<Section>
+			<Flex>
+				<LeftColumn
+					showPartialRightBorder={true}
+					showRightBorder={false}
+				>
+					<></>
+				</LeftColumn>
+				<ArticleContainer>
+					<></>
+				</ArticleContainer>
+				<RightColumn>
+					<Section
+						showSideBorders={false}
+						showTopBorder={false}
+						padded={false}
+					>
+						<MostViewedRight pillar="news" />
+					</Section>
+				</RightColumn>
+			</Flex>
+		</Section>
+	);
 };
 defaultStory.story = { name: 'default' };
 
 export const limitItemsStory = () => {
-    fetchMock.restore().getOnce('*', {
-        status: 200,
-        body: mockTab1,
-    });
+	fetchMock.restore().getOnce('*', {
+		status: 200,
+		body: mockTab1,
+	});
 
-    return (
-        <Section>
-            <Flex>
-                <LeftColumn>
-                    <></>
-                </LeftColumn>
-                <ArticleContainer>
-                    <></>
-                </ArticleContainer>
-                <RightColumn>
-                    <Section
-                        showSideBorders={false}
-                        showTopBorder={false}
-                        padded={false}
-                    >
-                        <MostViewedRight pillar="news" limitItems={3} />
-                    </Section>
-                </RightColumn>
-            </Flex>
-        </Section>
-    );
+	return (
+		<Section>
+			<Flex>
+				<LeftColumn>
+					<></>
+				</LeftColumn>
+				<ArticleContainer>
+					<></>
+				</ArticleContainer>
+				<RightColumn>
+					<Section
+						showSideBorders={false}
+						showTopBorder={false}
+						padded={false}
+					>
+						<MostViewedRight pillar="news" limitItems={3} />
+					</Section>
+				</RightColumn>
+			</Flex>
+		</Section>
+	);
 };
 limitItemsStory.story = { name: 'with a limit of 3 items' };
 
 export const outsideContextStory = () => {
-    fetchMock.restore().getOnce('*', {
-        status: 200,
-        body: mockTab1,
-    });
+	fetchMock.restore().getOnce('*', {
+		status: 200,
+		body: mockTab1,
+	});
 
-    return (
-        <Section>
-            <MostViewedRight pillar="news" />
-        </Section>
-    );
+	return (
+		<Section>
+			<MostViewedRight pillar="news" />
+		</Section>
+	);
 };
 outsideContextStory.story = {
-    name: 'inside responsive wrapper',
+	name: 'inside responsive wrapper',
 };

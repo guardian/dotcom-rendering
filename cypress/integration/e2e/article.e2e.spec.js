@@ -1,55 +1,61 @@
 import { getPolyfill } from '../../lib/polyfill';
-import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
-import { setupApiRoutes } from '../../lib/apiRoutes.js';
+import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('E2E Page rendering', function () {
     before(getPolyfill);
-    beforeEach(setupApiRoutes);
+
+    beforeEach(function () {
+        disableCMP();
+        setLocalBaseUrl();
+    });
 
     describe('for WEB', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         articles.map((article, index) => {
-            it(`It should load the designType under the pillar (${article.url})`, function () {
-                const { url: articleUrl, designType, pillar } = article;
+            const { url: articleUrl, designType, pillar } = article;
+            it(`It should load ${designType} articles under the pillar ${pillar} (${articleUrl})`, function () {
                 const url = setUrlFragment(articleUrl, {
-                    'ab-CuratedContainerTest': 'control',
+                    'ab-CuratedContainerTest2': 'control',
                 });
                 cy.log(`designType: ${designType}, pillar: ${pillar}`);
-                cy.visit(`Article?url=${url}`, fetchPolyfill);
+                cy.visit(`/Article?url=${url}`);
                 const roughLoadPositionOfMostView = 1400;
                 cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
                 cy.contains('Lifestyle');
 
                 if (!article.hideMostViewed) {
-                    cy.wait('@getMostReadGeo', { timeout: 8000 }).then(
-                        (xhr) => {
-                            expect(xhr.response.body).to.have.property(
-                                'heading',
-                            );
-                            expect(xhr.status).to.be.equal(200);
-
-                            cy.contains('Most viewed');
-                        },
-                    );
+                    cy.intercept('GET', '**/most-read-geo**', (req) => {
+                        req.reply((res) => {
+                            expect(res.body).to.have.property('heading');
+                            expect(res.statusCode).to.be.equal(200);
+                        });
+                    });
+                    cy.contains('Most viewed');
                 }
 
                 cy.scrollTo('bottom', { duration: 500 });
-                cy.wait('@getShareCount').then((xhr) => {
-                    expect(xhr.status).to.be.equal(200);
-                    expect(xhr.response.body).to.have.property('path');
-                    expect(xhr.response.body).to.have.property('refreshStatus');
-                    expect(xhr.response.body)
-                        .to.have.property('share_count')
-                        .that.is.a('number');
+
+                cy.intercept('POST', '/sharecount/**', (req) => {
+                    req.reply((res) => {
+                        expect(res.statusCode).to.be.equal(200);
+                        expect(res.body).to.have.property('path');
+                        expect(res.body).to.have.property('refreshStatus');
+                        expect(res.body)
+                            .to.have.property('share_count')
+                            .that.is.a('number');
+                    });
                 });
 
                 if (article.hasRichLinks) {
-                    cy.wait('@getRichLinks').then((xhr) => {
-                        expect(xhr.status).to.be.equal(200);
-                        cy.contains('Read more');
+                    cy.intercept('GET', '/embed/card/**', (req) => {
+                        req.reply((res) => {
+                            expect(res.statusCode).to.be.equal(200);
+                        });
                     });
+                    cy.contains('Read more');
                 }
 
                 // We scroll again here because not all the content at the bottom of the page loads
@@ -57,12 +63,13 @@ describe('E2E Page rendering', function () {
                 // lazy loading Most Popular
                 cy.scrollTo('bottom', { duration: 500 });
 
-                cy.wait('@getMostRead', { timeout: 8000 }).then((xhr) => {
-                    expect(xhr.response.body).to.have.property('tabs');
-                    expect(xhr.status).to.be.equal(200);
-
-                    cy.contains('Most commented');
+                cy.intercept('GET', '/most-read/**', (req) => {
+                    req.reply((res) => {
+                        expect(res.body).to.have.property('tabs');
+                        expect(res.statusCode).to.be.equal(200);
+                    });
                 });
+                cy.contains('Most commented');
             });
         });
     });
@@ -92,7 +99,7 @@ describe('E2E Page rendering', function () {
             cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
 
             cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-                'not.be.visible',
+                'not.exist',
             );
         });
 
@@ -127,7 +134,7 @@ describe('E2E Page rendering', function () {
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 
-                cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
+                cy.visit(`/AMPArticle?url=${url}`);
                 cy.contains('Opinion');
             });
         });

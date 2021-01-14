@@ -10,24 +10,24 @@ import { SignInGateDesignOptVar5 } from './gateDesigns/design-opt-test/SignInGat
 import { SignInGateDesignOptVar6 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar6';
 
 export default {
-    component: SignInGateSelector,
-    title: 'Components/SignInGate',
-    parameters: {
-        chromatic: { diffThreshold: 0.2 },
-    },
+	component: SignInGateSelector,
+	title: 'Components/SignInGate',
+	parameters: {
+		chromatic: { diffThreshold: 0.2 },
+	},
 };
 
 export const mainStandalone = () => {
-    return (
-        <Section>
-            <SignInGateMain
-                guUrl="https://theguardian.com"
-                signInUrl="https://profile.theguardian.com/"
-                dismissGate={() => {}}
-                ophanComponentId="test"
-            />
-        </Section>
-    );
+	return (
+		<Section>
+			<SignInGateMain
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
 };
 mainStandalone.story = { name: 'main_standalone' };
 

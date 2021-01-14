@@ -11,6 +11,7 @@ module.exports = {
         ],
         '@babel/plugin-proposal-class-properties',
         '@babel/plugin-proposal-optional-chaining',
+        '@babel/plugin-proposal-nullish-coalescing-operator',
         [
             'module-resolver',
             {
@@ -23,6 +24,10 @@ module.exports = {
         ],
         'babel-plugin-px-to-rem',
         '@babel/plugin-transform-runtime',
+        ["prismjs", {
+            // This list should match those defined in typescript type Language
+            "languages": ["typescript", "javascript", "css", "markup", "scala", "elm"]
+        }]
     ],
 
     env: {
