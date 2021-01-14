@@ -54,6 +54,11 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
+const youtubeWrapperStyles = css`
+	margin-top: 12px;
+	margin-bottom: 12px;
+`;
+
 function renderElement(
 	display: Display,
 	designType: DesignType,
@@ -86,6 +91,7 @@ function renderElement(
 					key={i}
 					id={`youtube-block-main-media-${i}`}
 					data-cy="main-media-youtube-atom"
+					className={youtubeWrapperStyles}
 				>
 					<YoutubeBlockComponent
 						display={display}
@@ -110,7 +116,7 @@ function renderElement(
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
-				<figure>
+				<figure className={youtubeWrapperStyles}>
 					<YoutubeEmbedBlockComponent
 						pillar={pillar}
 						embedUrl={element.embedUrl}
