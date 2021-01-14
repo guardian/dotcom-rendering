@@ -12,11 +12,11 @@ import {
 import { globalEoyHeaderTest } from '@root/src/web/experiments/tests/global-eoy-header-test';
 
 export const tests: ABTest[] = [
-    abTestTest,
-    signInGateMainVariant,
-    signInGateMainControl,
-    signInGateDesignOpt,
-    curatedContainerTest2,
+	abTestTest,
+	signInGateMainVariant,
+	signInGateMainControl,
+	signInGateDesignOpt,
+	curatedContainerTest2,
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,

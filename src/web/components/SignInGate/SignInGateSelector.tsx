@@ -71,27 +71,27 @@ type GateTestMap = { [name: string]: SignInGateComponent };
    and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
 */
 const tests: ReadonlyArray<ABTest> = [
-    signInGateMainVariant,
-    signInGateMainControl,
-    signInGateDesignOpt,
+	signInGateMainVariant,
+	signInGateMainControl,
+	signInGateDesignOpt,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-    'main-control-3': gateMainControl,
-    'main-variant-3': gateMainVariant,
-    'design-opt-control': gateDesignOptControl,
-    'design-opt-variant-1': gateDesignOptVar1,
-    'design-opt-variant-2': gateDesignOptVar2,
-    'design-opt-variant-3': gateDesignOptVar3,
-    'design-opt-variant-4': gateDesignOptVar4,
-    'design-opt-variant-5': gateDesignOptVar5,
-    'design-opt-variant-6': gateDesignOptVar6,
+	'main-control-3': gateMainControl,
+	'main-variant-3': gateMainVariant,
+	'design-opt-control': gateDesignOptControl,
+	'design-opt-variant-1': gateDesignOptVar1,
+	'design-opt-variant-2': gateDesignOptVar2,
+	'design-opt-variant-3': gateDesignOptVar3,
+	'design-opt-variant-4': gateDesignOptVar4,
+	'design-opt-variant-5': gateDesignOptVar5,
+	'design-opt-variant-6': gateDesignOptVar6,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
-    SignInGateMainVariant: 'main_variant_3',
-    SignInGateMainControl: 'main_control_3',
-    SignInGateDesignOpt: 'design_opt_test',
+	SignInGateMainVariant: 'main_variant_3',
+	SignInGateMainControl: 'main_control_3',
+	SignInGateDesignOpt: 'design_opt_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
