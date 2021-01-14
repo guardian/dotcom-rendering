@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
+import { remSpace } from '@guardian/src-foundations';
 import { news } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
@@ -12,6 +13,7 @@ import type { FC } from 'react';
 const styles = css`
 	${body.medium({ fontStyle: 'normal', fontWeight: 'bold' })}
 	color: ${news[400]};
+	margin-bottom: ${remSpace[4]};
 `;
 
 interface Props {
