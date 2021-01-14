@@ -2,11 +2,13 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
+import { Display } from '@guardian/types/Format';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { Display } from '@guardian/types/Format';
+
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
@@ -105,6 +107,20 @@ function renderElement(
 						origin={host}
 					/>
 				</div>
+			);
+		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+			return (
+				<YoutubeEmbedBlockComponent
+					pillar={pillar}
+					embedUrl={element.embedUrl}
+					height={element.height}
+					width={element.width}
+					caption={element.caption}
+					credit={element.credit}
+					title={element.title}
+					display={display}
+					designType={designType}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			return (
