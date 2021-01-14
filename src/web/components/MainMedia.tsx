@@ -8,7 +8,6 @@ import { ImageComponent } from '@root/src/web/components/elements/ImageComponent
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { Figure } from '@root/src/web/components/Figure';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
@@ -83,7 +82,7 @@ function renderElement(
 			);
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<div
+				<figure
 					key={i}
 					id={`youtube-block-main-media-${i}`}
 					data-cy="main-media-youtube-atom"
@@ -107,11 +106,11 @@ function renderElement(
 						duration={element.duration}
 						origin={host}
 					/>
-				</div>
+				</figure>
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
-				<Figure role={element.role}>
+				<figure>
 					<YoutubeEmbedBlockComponent
 						pillar={pillar}
 						embedUrl={element.embedUrl}
@@ -123,7 +122,7 @@ function renderElement(
 						display={display}
 						designType={designType}
 					/>
-				</Figure>
+				</figure>
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			return (
