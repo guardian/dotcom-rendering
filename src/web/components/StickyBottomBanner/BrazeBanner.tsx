@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
-import {
-	getConsentFor,
-	onConsentChange,
-} from '@guardian/consent-management-platform';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import {
@@ -18,6 +14,7 @@ import {
 	setHasCurrentBrazeUser,
 	clearHasCurrentBrazeUser,
 } from '@root/src/web/lib/hasCurrentBrazeUser';
+import { checkBrazeDependencies } from '@root/src/web/lib/braze/checkBrazeDependencies';
 import { CanShowResult } from './bannerPicker';
 
 type Meta = {
@@ -38,35 +35,6 @@ const containerStyles = emotion.css`
     width: 100%;
     ${getZIndex('banner')}
 `;
-
-export const hasRequiredConsents = (): Promise<boolean> =>
-	new Promise((resolve, reject) => {
-		onConsentChange((state) => {
-			try {
-				resolve(getConsentFor('braze', state));
-			} catch (e) {
-				reject(e);
-			}
-		});
-	});
-
-type PreCheckArgs = {
-	shouldHideSupportMessaging?: boolean;
-	pageConfig: { [key: string]: any };
-};
-
-export const canShowPreChecks = ({
-	shouldHideSupportMessaging,
-	pageConfig,
-}: PreCheckArgs) => {
-	// Currently all active web canvases in Braze target existing supporters,
-	// subscribers or otherwise those with a Guardian product. We can use the
-	// value of `shouldHideSupportMessaging` to identify these users, limiting
-	// the number of requests we need to initialise Braze on the page:
-	const userIsGuSupporter = shouldHideSupportMessaging;
-
-	return Boolean(userIsGuSupporter && !pageConfig.isPaidContent);
-};
 
 const SDK_OPTIONS = {
 	enableLogging: false,
@@ -207,10 +175,10 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
 };
 
 const maybeWipeUserData = async (
-	apiKey: string,
-	brazeUuid: null | string,
+	apiKey?: string,
+	brazeUuid?: null | string,
 ): Promise<void> => {
-	if (!brazeUuid && hasCurrentBrazeUser()) {
+	if (apiKey && !brazeUuid && hasCurrentBrazeUser()) {
 		const { default: appboy } = await import(
 			/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
 		);
@@ -238,8 +206,8 @@ const maybeWipeUserData = async (
 // OR
 // - The force-braze-message query string arg is passed
 export const canShow = async (
-	asyncBrazeUuid: Promise<null | string>,
-	shouldHideSupportMessaging: undefined | boolean,
+	isSignedIn: boolean,
+	idApiUrl: string,
 ): Promise<CanShowResult> => {
 	const bannerTiming = initPerf('braze-banner');
 	bannerTiming.start();
@@ -252,35 +220,35 @@ export const canShow = async (
 		};
 	}
 
-	const { brazeSwitch } = window.guardian.config.switches;
-	const apiKey = window.guardian.config.page.brazeApiKey;
-	const isBrazeConfigured = brazeSwitch && apiKey;
-	if (!isBrazeConfigured) {
+	const dependenciesResult = await checkBrazeDependencies(
+		isSignedIn,
+		idApiUrl,
+	);
+
+	if (!dependenciesResult.isSuccessful) {
+		const { failure, data } = dependenciesResult;
+		if (SDK_OPTIONS.enableLogging) {
+			// eslint-disable-next-line no-console
+			console.log(
+				`Not attempting to show Braze messages. Dependency ${failure.field} failed with ${failure.data}.`,
+			);
+		}
+
+		await maybeWipeUserData(
+			data.apiKey as string | undefined,
+			data.brazeUuid as string | null | undefined,
+		);
+
 		return { result: false };
 	}
 
-	const [brazeUuid, hasGivenConsent] = await Promise.all([
-		asyncBrazeUuid,
-		hasRequiredConsents(),
-	]);
-
-	await maybeWipeUserData(apiKey as string, brazeUuid);
-
-	if (!(brazeUuid && hasGivenConsent)) {
-		return { result: false };
-	}
-
-	if (
-		!canShowPreChecks({
-			shouldHideSupportMessaging,
-			pageConfig: window.guardian.config.page,
-		})
-	) {
-		return { result: false };
-	}
+	const { data } = dependenciesResult;
 
 	try {
-		const result = await getMessageFromBraze(apiKey as string, brazeUuid);
+		const result = await getMessageFromBraze(
+			data.apiKey as string,
+			data.brazeUuid as string,
+		);
 
 		const timeTaken = bannerTiming.end();
 		record({
