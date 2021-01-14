@@ -54,10 +54,6 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
-const youtubeWrapperStyles = css`
-	margin-bottom: 12px;
-`;
-
 function renderElement(
 	display: Display,
 	designType: DesignType,
@@ -86,11 +82,10 @@ function renderElement(
 			);
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<figure
+				<div
 					key={i}
 					id={`youtube-block-main-media-${i}`}
 					data-cy="main-media-youtube-atom"
-					className={youtubeWrapperStyles}
 				>
 					<YoutubeBlockComponent
 						display={display}
@@ -111,23 +106,21 @@ function renderElement(
 						duration={element.duration}
 						origin={host}
 					/>
-				</figure>
+				</div>
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
-				<figure className={youtubeWrapperStyles}>
-					<YoutubeEmbedBlockComponent
-						pillar={pillar}
-						embedUrl={element.embedUrl}
-						height={element.height}
-						width={element.width}
-						caption={element.caption}
-						credit={element.credit}
-						title={element.title}
-						display={display}
-						designType={designType}
-					/>
-				</figure>
+				<YoutubeEmbedBlockComponent
+					pillar={pillar}
+					embedUrl={element.embedUrl}
+					height={element.height}
+					width={element.width}
+					caption={element.caption}
+					credit={element.credit}
+					title={element.title}
+					display={display}
+					designType={designType}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			return (
