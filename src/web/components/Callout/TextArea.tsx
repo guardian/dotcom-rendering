@@ -21,7 +21,7 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
 			className={textAreaStyles}
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
-			onChange={(e: any) =>
+			onChange={(e) =>
 				setFormData({
 					...formData,
 					[formField.id]: e.target.value,
