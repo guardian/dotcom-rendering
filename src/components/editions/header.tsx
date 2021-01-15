@@ -17,16 +17,24 @@ import type { SerializedStyles } from '@emotion/core';
 
 interface Props {
 	item: Item;
-	headerStyles?: SerializedStyles;
+	className?: SerializedStyles;
 }
 
-const reviewHeaderStyles = css`
+const headerStyles = css`
 	padding: 0 ${remSpace[3]} ${remSpace[4]};
+
+	${from.wide} {
+		padding: 0 ${remSpace[24]} ${remSpace[4]};
+	}
+
+`
+
+const reviewHeaderStyles = css`
 	background-color: ${culture[800]};
 	color: ${culture[300]};
 `;
 
-const headerStyles = css`r
+const showcaseHeaderStyles = css`
 	margin: 0;
 
 	${from.wide} {
@@ -38,8 +46,8 @@ const headerStyles = css`r
 	}
 `;
 
-const StandardHeader: FC<Props> = ({ item, headerStyles }) => (
-	<header css={headerStyles}>
+const StandardHeader: FC<Props> = ({ item, className }) => (
+	<header css={[headerStyles, className]}>
 		<HeaderImage item={item} />
 		<Series item={item} />
 		<Headline item={item} />
@@ -50,21 +58,20 @@ const StandardHeader: FC<Props> = ({ item, headerStyles }) => (
 );
 
 const ShowcaseHeader: FC<Props> = ({ item }) => (
-	<>
+	<header css={showcaseHeaderStyles}>
 		<Series item={item} />
 		<Headline item={item} />
 		<HeaderImage item={item} />
 		<Standfirst item={item} />
 		<Lines />
 		<Byline item={item} />
-	</>
+	</header>
 );
 
 const renderArticleHeader = (item: Item): ReactElement<Props> => {
-	console.log(Design.Showcase)
 	switch (item.display | item.design) {
 		case Design.Review:
-			return <StandardHeader item={item} headerStyles={reviewHeaderStyles} />;
+			return <StandardHeader item={item} className={reviewHeaderStyles} />;
 		case Display.Showcase:
 			return <ShowcaseHeader item={item} />;
 		default:
@@ -73,7 +80,7 @@ const renderArticleHeader = (item: Item): ReactElement<Props> => {
 };
 
 const Header: FC<Props> = ({ item }: Props) => {
-	return <header css={headerStyles}>{renderArticleHeader(item)}</header>;
+	return <>{renderArticleHeader(item)}</>;
 };
 
 // ----- Exports ----- //
