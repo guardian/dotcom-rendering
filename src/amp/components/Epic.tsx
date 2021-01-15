@@ -81,7 +81,6 @@ const genericButtonStyle = css`
 	border-radius: 1.3125rem;
 	box-sizing: border-box;
 	cursor: pointer;
-	margin: 2rem 0.625rem 0.25rem 0;
 	vertical-align: base;
 	line-height: 1.5;
 	transition: background-color 0.3s;
@@ -89,6 +88,7 @@ const genericButtonStyle = css`
 `;
 const transparentButtonStyle = css`
 	${genericButtonStyle}
+	margin: 2rem 0.625rem 0.25rem 0;
 	background-color: transparent;
 	color: ${neutral[7]};
 	border: 1px solid ${neutral[7]};
@@ -98,6 +98,7 @@ const transparentButtonStyle = css`
 `;
 const yellowButtonStyle = css`
 	${genericButtonStyle}
+	margin: 2rem 0.625rem 0.25rem 0;
 	background-color: ${brandAlt[400]};
 	color: ${neutral[7]};
 	border: 1px solid ${brandAlt[400]};
@@ -110,18 +111,40 @@ const blueButtonStyle = css`
 	background-color: ${brand[400]};
 	color: ${neutral[100]};
 	border: 1px solid ${brand[400]};
+	margin-bottom: 6px;
 	&:hover {
 		background-color: #234b8a;
 	}
 `;
-const arrowStyle = css`
+const genericArrowStyle = css`
 	margin-left: 0.5rem;
 	position: relative;
 	width: 1.3125rem;
 	height: auto;
 	display: inline;
-	color: ${neutral[7]};
 	vertical-align: sub;
+`;
+const lightArrowStyle = css`
+	${genericArrowStyle}
+	fill: ${neutral[100]};
+`;
+const darkArrowStyle = css`
+	${genericArrowStyle}
+	fill: ${neutral[7]};
+`;
+const quadLineStyle = css`
+	background-image: repeating-linear-gradient(
+		to bottom,
+		${neutral[86]},
+		${neutral[86]} 1px,
+		transparent 1px,
+		transparent 4px
+	);
+	background-repeat: repeat-x;
+	background-position: top;
+	background-size: 1px 13px;
+	padding-top: 18px;
+	margin-top: 12px;
 `;
 const acceptedPaymentMethodsWrapperStyle = css`
 	margin-top: 0.5rem;
@@ -190,11 +213,60 @@ const goalExceededMarkerStyle = css`
 const buttonsStyle = css`
 	display: flex;
 `;
+const closeButtonStyle = css`
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+`;
+const reminderFormTopStyle = css`
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+`;
+const inputLabelStyle = css`
+	color: ${neutral[7]};
+	${textSans.medium({ fontWeight: 'bold' })};
+	margin-bottom: 4px;
+`;
+const textInputStyle = css`
+	width: 100%;
+	border-radius: 0;
+	border: 2px solid ${neutral[60]};
+	padding: 0 8px;
+	line-height: 1.35;
+	box-sizing: border-box;
+	height: 44px;
+	${textSans.medium()};
+	color: ${neutral[7]};
+	margin-bottom: 10px;
+`;
+const reminderTermsStyle = css`
+	${textSans.small({ fontStyle: 'italic' })};
+	line-height: 1.5;
+
+	a {
+		text-decoration: underline;
+		color: ${neutral[7]};
+	}
+`;
 
 interface ABTest {
 	name: string;
 	variant: string;
 }
+
+const closeButton = (
+	<div className={closeButtonStyle}>
+		<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M15.325 17.025l7.225 6.625 1.075-1.075-6.6-7.25 6.6-7.25L22.55 7l-7.225 6.625-7.25-6.6L7 8.1l6.625 7.225L7 22.55l1.075 1.075 7.25-6.6z"
+			/>
+		</svg>
+	</div>
+);
 
 const buildUrl = (
 	contributionsUrl: string,
@@ -217,6 +289,8 @@ const buildUrl = (
 };
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
+	const reminderMonth = 'February';
+	const reminderYear = '2021';
 	const epicUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
@@ -300,57 +374,105 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
-						<div className={buttonsStyle}>
-							<div>
-								<MoustacheSection name="cta">
-									<a
-										href={buildUrl(
-											moustacheVariable('url'),
-											webURL,
-											moustacheVariable('campaignCode'),
-											moustacheVariable('componentId'),
-											{
-												name: moustacheVariable(
-													'testName',
+						<div className="buttonsWrapper hidden">
+							<div className={buttonsStyle}>
+								<div>
+									<MoustacheSection name="cta">
+										<a
+											href={buildUrl(
+												moustacheVariable('url'),
+												webURL,
+												moustacheVariable(
+													'campaignCode',
 												),
-												variant: moustacheVariable(
-													'variantName',
+												moustacheVariable(
+													'componentId',
 												),
-											},
-										)}
-										className={yellowButtonStyle}
-									>
-										<MoustacheVariable name="text" />
-										<svg
-											className={arrowStyle}
-											xmlns="http://www.w3.org/2000/svg"
-											viewBox="0 0 20 17.89"
-											preserveAspectRatio="xMinYMid"
-											aria-hidden="true"
-											focusable="false"
+												{
+													name: moustacheVariable(
+														'testName',
+													),
+													variant: moustacheVariable(
+														'variantName',
+													),
+												},
+											)}
+											className={yellowButtonStyle}
 										>
-											<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-										</svg>
-									</a>
-									<div
-										className={
-											acceptedPaymentMethodsWrapperStyle
-										}
-									>
-										<amp-img
-											layout="fixed"
-											height="25px"
-											width="176px"
-											src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-											alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-										/>
-									</div>
-								</MoustacheSection>
-							</div>
-							<div>
-								<div className={blueButtonStyle}>
-									Remind me in February
+											<MoustacheVariable name="text" />
+											<svg
+												className={darkArrowStyle}
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 17.89"
+												preserveAspectRatio="xMinYMid"
+												aria-hidden="true"
+												focusable="false"
+											>
+												<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+											</svg>
+										</a>
+										<div
+											className={
+												acceptedPaymentMethodsWrapperStyle
+											}
+										>
+											<amp-img
+												layout="fixed"
+												height="25px"
+												width="176px"
+												src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+												alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+											/>
+										</div>
+									</MoustacheSection>
 								</div>
+								<div>
+									<div className={transparentButtonStyle}>
+										Remind me in {reminderMonth}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="reminderFormWrapper">
+							<div className={quadLineStyle} />
+							<div className={reminderFormTopStyle}>
+								<h2 className={epicHeaderStyle}>
+									Remind me in {reminderMonth} {reminderYear}
+								</h2>
+								{closeButton}
+							</div>
+							<div className={inputLabelStyle}>Email address</div>
+							<input
+								className={textInputStyle}
+								id="reminderEmailAddress"
+								type="text"
+							/>
+							<div className={blueButtonStyle}>
+								Set a reminder
+								<svg
+									className={lightArrowStyle}
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 17.89"
+									preserveAspectRatio="xMinYMid"
+									aria-hidden="true"
+									focusable="false"
+								>
+									<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+								</svg>
+							</div>
+							<div className={reminderTermsStyle}>
+								We will send you a maximum of two emails in
+								{reminderMonth} {reminderYear}. To find out what
+								personal data we collect and how we use it, view
+								our{' '}
+								<a
+									target="_blank"
+									href="https://www.theguardian.com/help/privacy-policy"
+								>
+									Privacy Policy
+								</a>
+								.
 							</div>
 						</div>
 					</div>
