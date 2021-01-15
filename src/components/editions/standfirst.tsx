@@ -1,20 +1,20 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
-import { remSpace, text } from '@guardian/src-foundations';
+import { border, remSpace, text } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
-import { wideContentWidth } from 'styles';
+import { editionsArticleWidth } from './styles';
 
 // ----- Component ----- //
 
 const styles = css`
 	${body.medium({ lineHeight: 'tight' })}
-	margin-bottom: ${remSpace[6]};
+	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
 
 	${from.wide} {
@@ -22,12 +22,14 @@ const styles = css`
 	}
 
 	${from.phablet} {
-		width: ${wideContentWidth}px;
+		border-right: 1px solid ${border.secondary};
+		width: ${editionsArticleWidth}rem;
 	}
 
 	p,
 	ul {
-		margin: ${remSpace[2]} 0;
+		padding: ${remSpace[2]} ${remSpace[1]} 0 0;
+		margin: 0;
 	}
 
 	address {
