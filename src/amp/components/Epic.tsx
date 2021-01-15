@@ -9,6 +9,7 @@ import {
 } from '@root/src/amp/components/moustache';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import { brand, brandAlt, neutral } from '@guardian/src-foundations/palette';
+import { JsonScript } from '@root/src/amp/components/JsonScript';
 
 const epicStyle = css`
 	border-top: 0.0625rem solid ${brandAlt[400]};
@@ -212,6 +213,7 @@ const goalExceededMarkerStyle = css`
 `;
 const buttonsStyle = css`
 	display: flex;
+	padding-bottom: 150px;
 `;
 const closeButtonStyle = css`
 	width: 30px;
@@ -256,18 +258,6 @@ interface ABTest {
 	variant: string;
 }
 
-const closeButton = (
-	<div className={closeButtonStyle}>
-		<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-			<path
-				fillRule="evenodd"
-				clipRule="evenodd"
-				d="M15.325 17.025l7.225 6.625 1.075-1.075-6.6-7.25 6.6-7.25L22.55 7l-7.225 6.625-7.25-6.6L7 8.1l6.625 7.225L7 22.55l1.075 1.075 7.25-6.6z"
-			/>
-		</svg>
-	</div>
-);
-
 const buildUrl = (
 	contributionsUrl: string,
 	articleUrl: string,
@@ -291,6 +281,10 @@ const buildUrl = (
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderMonth = 'February';
 	const reminderYear = '2021';
+	const epicStateJson = {
+		hideButtons: false,
+		hideReminderForm: true,
+	};
 	const epicUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
@@ -298,6 +292,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 	return (
 		<div>
+			<amp-state id="epicState">
+				<JsonScript o={epicStateJson} />
+			</amp-state>
+
 			<amp-list
 				layout="fixed-height"
 				// This means that if the user refreshes at the end of the article while the epic is in view then the epic
@@ -374,7 +372,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
-						<div className="buttonsWrapper hidden">
+						<div
+							className="buttonsWrapper"
+							data-amp-bind-hidden="epicState.hideButtons"
+						>
 							<div className={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
@@ -427,20 +428,40 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									</MoustacheSection>
 								</div>
 								<div>
-									<div className={transparentButtonStyle}>
+									<div
+										className={transparentButtonStyle}
+										on="tap:AMP.setState({epicState:{hideReminderForm: false, hideButtons: true}})"
+									>
 										Remind me in {reminderMonth}
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div className="reminderFormWrapper">
+						<div
+							className="reminderFormWrapper"
+							data-amp-bind-hidden="epicState.hideReminderForm"
+						>
 							<div className={quadLineStyle} />
 							<div className={reminderFormTopStyle}>
 								<h2 className={epicHeaderStyle}>
 									Remind me in {reminderMonth} {reminderYear}
 								</h2>
-								{closeButton}
+								<div
+									className={closeButtonStyle}
+									on="tap:AMP.setState({epicState:{hideReminderForm: true, hideButtons: false}})"
+								>
+									<svg
+										viewBox="0 0 30 30"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											clipRule="evenodd"
+											d="M15.325 17.025l7.225 6.625 1.075-1.075-6.6-7.25 6.6-7.25L22.55 7l-7.225 6.625-7.25-6.6L7 8.1l6.625 7.225L7 22.55l1.075 1.075 7.25-6.6z"
+										/>
+									</svg>
+								</div>
 							</div>
 							<div className={inputLabelStyle}>Email address</div>
 							<input

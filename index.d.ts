@@ -760,8 +760,7 @@ declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {
         'amp-experiment': any;
-        'amp-script': any;
-        'amp-bind': any;
+        'amp-state': any;
         'amp-sidebar': any;
         'amp-accordion': any;
         'amp-img': any;
