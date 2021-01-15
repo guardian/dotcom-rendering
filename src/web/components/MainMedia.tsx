@@ -122,18 +122,18 @@ function renderElement(
 					display={display}
 					designType={designType}
 				/>
-            );
-        case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-            return (
-	<GuVideoBlockComponent
-		html={element.html}
-		pillar={pillar}
-		designType={designType}
-		display={display}
-		credit={element.source}
-		caption={element.caption}
-	/>
-            );
+			);
+		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+			return (
+				<GuVideoBlockComponent
+					html={element.html}
+					pillar={pillar}
+					designType={designType}
+					display={display}
+					credit={element.source}
+					caption={element.caption}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			return (
 				<EmbedBlockComponent html={element.html} alt={element.alt} />
