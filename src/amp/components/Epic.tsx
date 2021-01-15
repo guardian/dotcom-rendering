@@ -8,7 +8,7 @@ import {
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import { brandAlt, neutral, opinion } from '@guardian/src-foundations/palette';
+import { brand, brandAlt, neutral } from '@guardian/src-foundations/palette';
 
 const epicStyle = css`
 	border-top: 0.0625rem solid ${brandAlt[400]};
@@ -34,7 +34,6 @@ const epicParagraphStyle = css`
 	display: block;
 	margin-block-start: 0.5rem;
 	margin-block-end: 0.5rem;
-
 	${body.medium()};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
@@ -64,33 +63,55 @@ const highlightedTextStyle = css`
 	line-height: 1.5;
 	display: inline;
 `;
-const supportButtonStyle = css`
-	background-color: ${brandAlt[400]};
-	color: ${neutral[7]};
-	display: inline-block;
+const genericButtonStyle = css`
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
 	${textSans.medium()};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
 	-webkit-font-smoothing: antialiased;
-	align-items: center;
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 1.1rem;
-	height: 2.625rem;
-	min-height: 2.625rem;
-	padding: 0 1.3125rem;
-	border: 0;
+	height: 44px;
+	min-height: 44px;
+	padding: 0 20px 2px;
 	border-radius: 1.3125rem;
 	box-sizing: border-box;
 	cursor: pointer;
 	margin: 2rem 0.625rem 0.25rem 0;
 	vertical-align: base;
-	line-height: 2.625rem;
+	line-height: 1.5;
 	transition: background-color 0.3s;
 	text-align: centre;
+`;
+const transparentButtonStyle = css`
+	${genericButtonStyle}
+	background-color: transparent;
+	color: ${neutral[7]};
+	border: 1px solid ${neutral[7]};
 	&:hover {
-		background-color: ${opinion[600]};
+		background-color: ${neutral[86]};
+	}
+`;
+const yellowButtonStyle = css`
+	${genericButtonStyle}
+	background-color: ${brandAlt[400]};
+	color: ${neutral[7]};
+	border: 1px solid ${brandAlt[400]};
+	&:hover {
+		background-color: ${brandAlt[300]};
+	}
+`;
+const blueButtonStyle = css`
+	${genericButtonStyle}
+	background-color: ${brand[400]};
+	color: ${neutral[100]};
+	border: 1px solid ${brand[400]};
+	&:hover {
+		background-color: #234b8a;
 	}
 `;
 const arrowStyle = css`
@@ -165,6 +186,9 @@ const goalExceededMarkerStyle = css`
 	position: absolute;
 	top: 0;
 	z-index: 2;
+`;
+const buttonsStyle = css`
+	display: flex;
 `;
 
 interface ABTest {
@@ -276,44 +300,59 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
-						<MoustacheSection name="cta">
-							<a
-								href={buildUrl(
-									moustacheVariable('url'),
-									webURL,
-									moustacheVariable('campaignCode'),
-									moustacheVariable('componentId'),
-									{
-										name: moustacheVariable('testName'),
-										variant: moustacheVariable(
-											'variantName',
-										),
-									},
-								)}
-								className={supportButtonStyle}
-							>
-								<MoustacheVariable name="text" />
-								<svg
-									className={arrowStyle}
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 17.89"
-									preserveAspectRatio="xMinYMid"
-									aria-hidden="true"
-									focusable="false"
-								>
-									<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-								</svg>
-							</a>
-							<div className={acceptedPaymentMethodsWrapperStyle}>
-								<amp-img
-									layout="fixed"
-									height="25px"
-									width="176px"
-									src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-									alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-								/>
+						<div className={buttonsStyle}>
+							<div>
+								<MoustacheSection name="cta">
+									<a
+										href={buildUrl(
+											moustacheVariable('url'),
+											webURL,
+											moustacheVariable('campaignCode'),
+											moustacheVariable('componentId'),
+											{
+												name: moustacheVariable(
+													'testName',
+												),
+												variant: moustacheVariable(
+													'variantName',
+												),
+											},
+										)}
+										className={yellowButtonStyle}
+									>
+										<MoustacheVariable name="text" />
+										<svg
+											className={arrowStyle}
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 17.89"
+											preserveAspectRatio="xMinYMid"
+											aria-hidden="true"
+											focusable="false"
+										>
+											<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+										</svg>
+									</a>
+									<div
+										className={
+											acceptedPaymentMethodsWrapperStyle
+										}
+									>
+										<amp-img
+											layout="fixed"
+											height="25px"
+											width="176px"
+											src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+											alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+										/>
+									</div>
+								</MoustacheSection>
 							</div>
-						</MoustacheSection>
+							<div>
+								<div className={blueButtonStyle}>
+									Remind me in February
+								</div>
+							</div>
+						</div>
 					</div>
 				</MoustacheTemplate>
 			</amp-list>
