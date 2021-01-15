@@ -15,6 +15,7 @@ const commonConfigs = ({ platform }) => ({
     output: {
         path: dist,
     },
+    stats: 'errors-only',
     devtool:
         process.env.NODE_ENV === 'production'
             ? 'sourcemap'
