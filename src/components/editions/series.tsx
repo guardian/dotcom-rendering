@@ -2,7 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
+import { border, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { titlepiece } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -10,6 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { kickerPicker } from './kickerPicker';
+import { editionsArticleWidth } from './styles';
 
 // ----- Component ----- //
 
@@ -22,6 +24,16 @@ const styles = (item: Item): SerializedStyles => {
 		color: ${kicker};
 		font-size: 1.0625rem;
 		padding: ${remSpace[1]} 0 ${remSpace[2]};
+		border-top: 1px solid ${border.secondary};
+
+		${from.wide} {
+			margin: 0 auto;
+		}
+
+		${from.phablet} {
+			border-right: 1px solid ${border.secondary};
+			width: ${editionsArticleWidth}rem;
+		}
 	`;
 };
 

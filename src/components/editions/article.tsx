@@ -8,14 +8,24 @@ import { Design, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import { wideContentWidth } from 'styles';
 import Header from './header';
+import { editionsArticleWidth } from './styles';
 
 // ----- Component ----- //
 
 interface Props {
 	item: Item;
 }
+
+const articleStyles = css`
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.phablet} {
+		padding-left: 0;
+		padding-right: 0;
+	}
+`;
 
 const bodyStyles = css`
 	border-top: 1px solid ${border.secondary};
@@ -27,7 +37,7 @@ const bodyStyles = css`
 
 	${from.phablet} {
 		margin-left: ${remSpace[24]};
-		width: ${wideContentWidth}px;
+		width: ${editionsArticleWidth}rem;
 	}
 `;
 
@@ -38,7 +48,7 @@ const Article: FC<Props> = ({ item }) => {
 
 	return (
 		<main>
-			<article>
+			<article css={articleStyles}>
 				<Header item={item} />
 				<section css={[bodyStyles]}>
 					{renderEditionsAll(item, partition(item.body).oks)}
