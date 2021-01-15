@@ -4,7 +4,7 @@
 export const loadScript = (
 	src: string,
 	props?: Omit<Partial<HTMLScriptElement>, 'src' | 'onload' | 'onerror'>,
-): Promise<Event | undefined> =>
+): Promise<Event | void> =>
 	new Promise((resolve, reject) => {
 		// creating this before the check below allows us to compare the resolved `src` values
 		const script = document.createElement('script');
