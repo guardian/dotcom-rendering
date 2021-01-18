@@ -19,6 +19,7 @@ const styles = css`
 
 	${articleWidthStyles}
 
+	box-sizing: border-box;
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
 	}

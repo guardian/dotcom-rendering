@@ -15,6 +15,7 @@ const styles = css`
 	}
 
 	${articleWidthStyles}
+	box-sizing: border-box;
 `;
 
 const EditionsLines: FC = () => (
