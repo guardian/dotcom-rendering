@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
-import { Design, partition } from '@guardian/types';
+import { Format, Design, partition, Display } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
@@ -28,12 +28,25 @@ const bodyStyles = css`
 	}
 
 	${from.phablet} {
+		width: ${editionsArticleWidth}rem;
+	}
+
+	${from.desktop} {
+		margin-left: ${remSpace[24]};
+	}
+`;
+const showcaseBodyStyles = css`
+	${from.phablet} {
 		padding-left: 0;
 		padding-right: 0;
 		margin-left: ${remSpace[24]};
-		width: ${editionsArticleWidth}rem;
 	}
+
 `;
+
+const getStyles = (format: Format) => {
+	if (format.display === Display.Showcase) return showcaseBodyStyles;
+};
 
 const Article: FC<Props> = ({ item }) => {
 	if (item.design === Design.Live) {
@@ -44,7 +57,7 @@ const Article: FC<Props> = ({ item }) => {
 		<main>
 			<article>
 				<Header item={item} />
-				<section css={[bodyStyles]}>
+				<section css={[bodyStyles, getStyles(item)]}>
 					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
