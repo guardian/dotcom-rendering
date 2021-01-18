@@ -39,7 +39,6 @@ import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { toTypesPillar } from '@root/src/lib/format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -293,9 +292,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 		pillar: CAPI.pillar,
 		design: designType,
 	});
-	const format: Format = { display, designType, pillar };
-
-	const palette = decidePalette(format);
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
