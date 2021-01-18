@@ -2,8 +2,8 @@
 
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import Img from 'components/img';
 import StarRating from 'components/editions/starRating';
+import Img from 'components/img';
 import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';

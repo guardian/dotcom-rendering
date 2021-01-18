@@ -46,9 +46,9 @@ interface Props {
 	item: Item;
 }
 
-const Headline: FC<Props> = ({ item }) => {	
-	return( <h1 css={getStyles(item)}>{item.headline}</h1>
-)};
+const Headline: FC<Props> = ({ item }) => {
+	return <h1 css={getStyles(item)}>{item.headline}</h1>;
+};
 
 // ----- Exports ----- //
 

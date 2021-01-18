@@ -25,7 +25,7 @@ interface HeaderProps {
 }
 
 const headerStyles = css`
-	 padding: 0 ${remSpace[3]} ${remSpace[4]};
+	padding: 0 ${remSpace[3]} ${remSpace[4]};
 
 	${from.desktop} {
 		padding: 0 ${remSpace[24]} ${remSpace[4]};
@@ -75,15 +75,12 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<Props> => {
-	if (Display.Showcase === item.display) return <ShowcaseHeader item={item} />;
+	if (Display.Showcase === item.display)
+		return <ShowcaseHeader item={item} />;
 	switch (item.display | item.design) {
 		case Design.Review:
 			return (
-				<StandardHeader
-					item={item}
-					className={reviewHeaderStyles}
-				
-				/>
+				<StandardHeader item={item} className={reviewHeaderStyles} />
 			);
 		default:
 			return <StandardHeader item={item} />;
