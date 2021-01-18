@@ -14,7 +14,6 @@ import { editionsArticleWidth } from './styles';
 
 const styles = css`
 	${body.medium({ lineHeight: 'tight' })}
-	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
 
 	${from.wide} {
