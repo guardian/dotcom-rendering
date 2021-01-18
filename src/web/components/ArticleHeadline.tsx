@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { pillarPalette } from '@root/src/lib/pillars';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
@@ -88,10 +87,6 @@ const underlinedStyles = css`
 	background-position: top left;
 	background-clip: content-box;
 	background-origin: content-box;
-`;
-
-const colourStyles = (colour?: string) => css`
-	color: ${colour && colour};
 `;
 
 const displayBlock = css`
