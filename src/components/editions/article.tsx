@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
-import { Format, Design, partition, Display } from '@guardian/types';
+import type { Format } from '@guardian/types';
+import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
@@ -41,11 +43,14 @@ const showcaseBodyStyles = css`
 		padding-right: 0;
 		margin-left: ${remSpace[24]};
 	}
-
 `;
 
-const getStyles = (format: Format) => {
-	if (format.display === Display.Showcase) return showcaseBodyStyles;
+const getStyles = (format: Format): SerializedStyles | SerializedStyles[] => {
+	if (format.display === Display.Showcase) {
+		return [bodyStyles, showcaseBodyStyles];
+	}
+
+	return bodyStyles;
 };
 
 const Article: FC<Props> = ({ item }) => {
@@ -57,7 +62,7 @@ const Article: FC<Props> = ({ item }) => {
 		<main>
 			<article>
 				<Header item={item} />
-				<section css={[bodyStyles, getStyles(item)]}>
+				<section css={getStyles(item)}>
 					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
