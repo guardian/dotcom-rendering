@@ -1,8 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';

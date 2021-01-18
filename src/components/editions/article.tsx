@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
 import { Design, partition } from '@guardian/types';
 import type { Item } from 'item';
