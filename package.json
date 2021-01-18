@@ -64,7 +64,7 @@
         "@types/lodash.escape": "^4.0.6",
         "@types/node-fetch": "^2.5.7",
         "@types/sanitize-html": "^1.18.3",
-        "@typescript-eslint/eslint-plugin-tslint": "^4.1.1",
+        "@typescript-eslint/eslint-plugin-tslint": "^4.13.0",
         "ajv": "^6.12.6",
         "aws-sdk": "^2.804.0",
         "babel-plugin-prismjs": "^2.0.1",
