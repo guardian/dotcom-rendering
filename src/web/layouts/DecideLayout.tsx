@@ -4,6 +4,7 @@ import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { Display } from '@guardian/types/Format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -21,6 +22,10 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 		pillar: CAPI.pillar,
 		design: designType,
 	});
+
+	const format: Format = { display, designType, pillar };
+
+	const palette = decidePalette(format);
 
 	switch (display) {
 		case Display.Immersive: {
@@ -130,6 +135,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Standard}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 			}

@@ -21,6 +21,7 @@ type Props = {
 	isShowcase?: boolean; // Used for Interviews to change headline position
 	noMainMedia?: boolean; // Used for Immersives where the headline styles
 	// change when there is no main media
+	palette: Palette;
 };
 
 const curly = (x: any) => x;
@@ -112,7 +113,6 @@ const shiftSlightly = css`
 
 const invertedStyles = css`
 	position: relative;
-	color: white;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
@@ -142,7 +142,6 @@ const blackBackground = css`
 `;
 
 const invertedText = css`
-	color: white;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
@@ -203,6 +202,7 @@ export const ArticleHeadline = ({
 	tags,
 	byline,
 	noMainMedia,
+	palette,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
@@ -211,7 +211,15 @@ export const ArticleHeadline = ({
 				case 'GuardianView':
 					return (
 						<>
-							<h1 className={cx(lightFont, invertedText)}>
+							<h1
+								className={cx(
+									lightFont,
+									invertedText,
+									css`
+										color: ${palette.headline.colour};
+									`,
+								)}
+							>
 								{curly(headlineString)}
 							</h1>
 							{byline && (
@@ -248,6 +256,9 @@ export const ArticleHeadline = ({
 									immersiveStyles,
 									displayBlock,
 									reducedBottomPadding,
+									css`
+										color: ${palette.headline.colour};
+									`,
 								)}
 							>
 								{curly(headlineString)}
@@ -257,7 +268,15 @@ export const ArticleHeadline = ({
 					return (
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
-						<h1 className={cx(immersiveWrapper, blackBackground)}>
+						<h1
+							className={cx(
+								immersiveWrapper,
+								blackBackground,
+								css`
+									color: ${palette.headline.colour};
+								`,
+							)}
+						>
 							<span
 								className={cx(
 									jumboFont,
@@ -284,7 +303,9 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								boldFont,
-								colourStyles(pillarPalette[pillar].dark),
+								css`
+									color: ${palette.headline.colour};
+								`,
 							)}
 						>
 							{curly(headlineString)}
@@ -294,7 +315,14 @@ export const ArticleHeadline = ({
 				case 'GuardianView':
 					return (
 						<>
-							<h1 className={lightFont}>
+							<h1
+								className={cx(
+									lightFont,
+									css`
+										color: ${palette.headline.colour};
+									`,
+								)}
+							>
 								{curly(headlineString)}
 							</h1>
 							{byline && (
@@ -310,7 +338,15 @@ export const ArticleHeadline = ({
 					);
 				case 'Analysis':
 					return (
-						<h1 className={cx(standardFont, underlinedStyles)}>
+						<h1
+							className={cx(
+								standardFont,
+								underlinedStyles,
+								css`
+									color: ${palette.headline.colour};
+								`,
+							)}
+						>
 							{curly(headlineString)}
 						</h1>
 					);
@@ -327,6 +363,9 @@ export const ArticleHeadline = ({
 									invertedFont,
 									invertedWrapper,
 									zIndex,
+									css`
+										color: ${palette.headline.colour};
+									`,
 								)}
 							>
 								<span
@@ -359,7 +398,14 @@ export const ArticleHeadline = ({
 				case 'AdvertisementFeature':
 				default:
 					return (
-						<h1 className={standardFont}>
+						<h1
+							className={cx(
+								standardFont,
+								css`
+									color: ${palette.headline.colour};
+								`,
+							)}
+						>
 							{curly(headlineString)}
 						</h1>
 					);

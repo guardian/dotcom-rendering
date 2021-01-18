@@ -294,6 +294,7 @@ interface Props {
 	display: Display;
 	designType: DesignType;
 	pillar: CAPIPillar;
+	palette: Palette;
 }
 
 export const StandardLayout = ({
@@ -302,6 +303,7 @@ export const StandardLayout = ({
 	display,
 	designType,
 	pillar,
+	palette,
 }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -442,6 +444,7 @@ export const StandardLayout = ({
 									pillar={pillar}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
+									palette={palette}
 								/>
 								{age && (
 									<AgeWarning

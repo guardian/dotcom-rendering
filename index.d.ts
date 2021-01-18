@@ -2,6 +2,8 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
+import { Display, Pillar } from "@guardian/types/Format";
+
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -34,6 +36,10 @@ type CAPIDesign = DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
 // and can be used to add TypeSafety when needing to override a style in a designType
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DesignTypesObj = { [key in DesignType]: any };
+
+type Format = {display: Display, designType: DesignType, pillar: Pillar};
+
+type Palette = {[key: string]: any};
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
