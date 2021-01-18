@@ -213,7 +213,6 @@ const goalExceededMarkerStyle = css`
 `;
 const buttonsStyle = css`
 	display: flex;
-	padding-bottom: 150px;
 `;
 const closeButtonStyle = css`
 	width: 30px;
@@ -430,7 +429,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<div>
 									<div
 										className={transparentButtonStyle}
-										on="tap:AMP.setState({epicState:{hideReminderForm: false, hideButtons: true}})"
+										on="tap:AMP.setState({epicState:{hideReminderForm: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
 									>
 										Remind me in {reminderMonth}
 									</div>
