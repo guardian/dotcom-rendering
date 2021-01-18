@@ -1,19 +1,15 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
-import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
 import { Design, partition } from '@guardian/types';
-import Byline from 'components/editions/byline';
-import HeaderImage from 'components/editions/headerImage';
-import Headline from 'components/editions/headline';
-import Series from 'components/editions/series';
-import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import { articleWidthStyles } from './styles';
+import Header from './header';
+import { articleWidthStyles, sidePadding } from './styles';
 
 // ----- Component ----- //
 
@@ -21,13 +17,19 @@ interface Props {
 	item: Item;
 }
 
-const headerStyles = css`
-	margin: 0 ${remSpace[3]} ${remSpace[4]};
+const articleStyles = css`
+	${sidePadding}
 `;
 
 const bodyStyles = css`
 	border-top: 1px solid ${border.secondary};
-	padding: 0 ${remSpace[4]};
+	padding-top: ${remSpace[4]};
+
+	${articleWidthStyles}
+
+	${from.phablet} {
+		margin-left: ${remSpace[24]};
+	}
 `;
 
 const Article: FC<Props> = ({ item }) => {
@@ -37,16 +39,9 @@ const Article: FC<Props> = ({ item }) => {
 
 	return (
 		<main>
-			<article>
-				<header css={headerStyles}>
-					<HeaderImage item={item} />
-					<Series item={item} />
-					<Headline item={item} />
-					<Standfirst item={item} />
-					<Lines />
-					<Byline item={item} />
-				</header>
-				<section css={[articleWidthStyles, bodyStyles]}>
+			<article css={articleStyles}>
+				<Header item={item} />
+				<section css={[bodyStyles]}>
 					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
