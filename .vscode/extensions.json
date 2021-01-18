@@ -3,10 +3,10 @@
         "esbenp.prettier-vscode",
         "wix.vscode-import-cost",
         "orta.vscode-jest",
-        "shinnn.stylelint",
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",
         "stkb.rewrap",
-        "jpoissonnier.vscode-styled-components"
+        "jpoissonnier.vscode-styled-components",
+        "stylelint.vscode-stylelint"
     ]
 }
