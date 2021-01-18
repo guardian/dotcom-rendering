@@ -34,6 +34,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
+import FootballScores, { MatchStatusKind } from 'components/footballScores';
 
 // ----- Styles ----- //
 
@@ -116,6 +117,26 @@ const Standard: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
+				<FootballScores
+					league="Premier League"
+					stadium="Etihad Stadium"
+					homeTeam={{
+						name: "Man City",
+						score: 4,
+						scorers: [
+							"Stones 26'",
+							"Gundogan 56'",
+							"Stones 68'",
+							"Sterling 88'",
+						]
+					}}
+					awayTeam={{
+						name: "Crystal Palace",
+						score: 0,
+						scorers: []
+					}}
+					status={{ kind: MatchStatusKind.FT }}
+				/>
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />
