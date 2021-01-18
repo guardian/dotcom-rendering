@@ -75,6 +75,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<Props> => {
+	if (Display.Showcase === item.display) return <ShowcaseHeader item={item} />;
 	switch (item.display | item.design) {
 		case Design.Review:
 			return (
@@ -84,8 +85,6 @@ const renderArticleHeader = (item: Item): ReactElement<Props> => {
 				
 				/>
 			);
-		case Display.Showcase:
-			return <ShowcaseHeader item={item} />;
 		default:
 			return <StandardHeader item={item} />;
 	}
