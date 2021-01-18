@@ -17,7 +17,6 @@ export const sidePadding = css`
 `;
 
 export const articleWidthStyles: SerializedStyles = css`
-	${sidePadding}
 	${from.tablet} {
 		margin: 0 auto;
 	}

@@ -4,7 +4,6 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
-import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { none, some } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
@@ -18,7 +17,7 @@ import { tabletContentWidth, wideContentWidth } from './styles';
 // ----- Component ----- //
 
 const styles = css`
-	margin: 0 0 ${remSpace[2]} 0;
+	margin: 0;
 	position: relative;
 
 	${from.tablet} {

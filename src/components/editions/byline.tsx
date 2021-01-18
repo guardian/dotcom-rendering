@@ -8,7 +8,7 @@ import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -16,15 +16,14 @@ const styles = css`
 	${body.medium({ fontStyle: 'normal', fontWeight: 'bold' })}
 	color: ${news[400]};
 	padding-bottom: ${remSpace[4]};
-	margin: 0 ${remSpace[1]} 0 0;
 
-	${from.wide} {
-		margin: 0 auto;
-	}
+	padding-right: ${remSpace[1]};
+	box-sizing: border-box;
+
+	${articleWidthStyles}
 
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
-		width: ${editionsArticleWidth}rem;
 	}
 `;
 

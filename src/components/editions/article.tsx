@@ -26,10 +26,6 @@ const bodyStyles = css`
 	padding-top: ${remSpace[4]};
 
 	${articleWidthStyles}
-
-	${from.phablet} {
-		margin-left: ${remSpace[24]};
-	}
 `;
 
 const Article: FC<Props> = ({ item }) => {

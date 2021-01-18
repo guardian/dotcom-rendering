@@ -7,7 +7,7 @@ import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import type { FC } from 'react';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -17,13 +17,10 @@ const styles = css`
 	margin: 0;
 	padding-bottom: ${remSpace[4]};
 
-	${from.wide} {
-		margin: 0 auto;
-	}
+	${articleWidthStyles}
 
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
-		width: ${editionsArticleWidth}rem;
 	}
 `;
 

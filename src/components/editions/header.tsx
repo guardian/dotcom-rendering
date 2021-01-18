@@ -12,6 +12,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC, ReactElement } from 'react';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -22,13 +23,7 @@ interface Props {
 const headerStyles = css`
 	margin: 0;
 
-	${from.wide} {
-		margin: 0 auto;
-	}
-
-	${from.phablet} {
-		margin-left: ${remSpace[24]};
-	}
+	${articleWidthStyles}
 `;
 
 const StandardHeader: FC<Props> = ({ item }) => (

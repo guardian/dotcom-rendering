@@ -11,7 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { kickerPicker } from './kickerPicker';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -26,13 +26,10 @@ const styles = (item: Item): SerializedStyles => {
 		padding: ${remSpace[1]} 0 ${remSpace[2]};
 		border-top: 1px solid ${border.secondary};
 
-		${from.wide} {
-			margin: 0 auto;
-		}
+		${articleWidthStyles}
 
 		${from.phablet} {
 			border-right: 1px solid ${border.secondary};
-			width: ${editionsArticleWidth}rem;
 		}
 	`;
 };

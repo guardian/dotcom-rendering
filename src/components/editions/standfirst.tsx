@@ -8,7 +8,7 @@ import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -17,13 +17,10 @@ const styles = css`
 	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
 
-	${from.wide} {
-		margin: 0 auto;
-	}
+	${articleWidthStyles}
 
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
-		width: ${editionsArticleWidth}rem;
 	}
 
 	p,
