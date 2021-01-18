@@ -17,17 +17,9 @@ interface Props {
 	item: Item;
 }
 
-const articleStyles = css`
+const bodyStyles = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
-
-	${from.phablet} {
-		padding-left: 0;
-		padding-right: 0;
-	}
-`;
-
-const bodyStyles = css`
 	border-top: 1px solid ${border.secondary};
 	padding-top: ${remSpace[4]};
 
@@ -36,6 +28,8 @@ const bodyStyles = css`
 	}
 
 	${from.phablet} {
+		padding-left: 0;
+		padding-right: 0;
 		margin-left: ${remSpace[24]};
 		width: ${editionsArticleWidth}rem;
 	}
