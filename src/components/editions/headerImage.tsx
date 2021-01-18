@@ -3,6 +3,7 @@
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import Img from 'components/img';
+import StarRating from 'components/editions/starRating';
 import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
@@ -12,6 +13,7 @@ import type { FC } from 'react';
 
 const styles = css`
 	margin: 0;
+	position: relative;
 `;
 
 const imgStyles = css`
@@ -34,6 +36,7 @@ const HeaderImage: FC<Props> = ({ item }) =>
 						format={item}
 						className={imgStyles}
 					/>
+					<StarRating item={item} />
 				</figure>
 			);
 		}
