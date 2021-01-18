@@ -16,19 +16,20 @@ const styles = css`
 	${body.medium({ lineHeight: 'tight' })}
 	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
+	padding-right: ${remSpace[1]};
+	box-sizing: border-box;
 
 	${from.wide} {
 		margin: 0 auto;
 	}
 
 	${from.phablet} {
-		border-right: 1px solid ${border.secondary};
 		width: ${editionsArticleWidth}rem;
+		border-right: 1px solid ${border.secondary};
 	}
 
 	p,
 	ul {
-		padding: ${remSpace[2]} ${remSpace[1]} 0 0;
 		margin: 0;
 	}
 
@@ -41,9 +42,13 @@ interface Props {
 	item: Item;
 }
 
+const noLinks = true;
+
 const Standfirst: FC<Props> = ({ item }) =>
 	maybeRender(item.standfirst, (standfirst) => (
-		<div css={styles}>{renderStandfirstText(standfirst, item)}</div>
+		<div css={styles}>
+			{renderStandfirstText(standfirst, item, noLinks)}
+		</div>
 	));
 
 // ----- Exports ----- //

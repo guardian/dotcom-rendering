@@ -336,11 +336,36 @@ const standfirstTextElement = (format: Format) => (
 	}
 };
 
+const noLinksStandfirstTextElement = (format: Format) => (
+	node: Node,
+	key: number,
+): ReactNode => {
+	const children = Array.from(node.childNodes).map(
+		standfirstTextElement(format),
+	);
+	switch (node.nodeName) {
+		case 'P':
+			return h('p', { key }, children);
+		case 'STRONG':
+			return h('strong', { key }, children);
+		default:
+			return null;
+	}
+};
+
 const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 	Array.from(doc.childNodes).map(textElement(format));
 
-const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(standfirstTextElement(format));
+const standfirstText = (
+	doc: DocumentFragment,
+	format: Format,
+	noLinks?: boolean,
+): ReactNode[] =>
+	Array.from(doc.childNodes).map(
+		noLinks
+			? noLinksStandfirstTextElement(format)
+			: standfirstTextElement(format),
+	);
 
 const Interactive = (props: { url: string; title?: string }): ReactElement => {
 	const styles = css`

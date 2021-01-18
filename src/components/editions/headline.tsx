@@ -16,6 +16,8 @@ const styles = css`
 	${headline.small({ fontWeight: 'medium' })}
 	margin: 0;
 	padding-bottom: ${remSpace[4]};
+	padding-right: ${remSpace[1]};
+	box-sizing: border-box;
 
 	${from.wide} {
 		margin: 0 auto;

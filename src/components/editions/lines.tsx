@@ -10,6 +10,8 @@ import { editionsArticleWidth } from './styles';
 // ----- Component ----- //
 
 const styles = css`
+	box-sizing: border-box;
+
 	${from.phablet} {
 		width: ${editionsArticleWidth}rem;
 		border-right: 1px solid ${border.secondary};
