@@ -2099,10 +2099,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.18.tgz#12635eb319e1f0106ac3636e4c3bd7a96e4db894"
-  integrity sha512-dsRB6aLn9X3tUc0YRCd99EEulbWFvto5J2NlG9b+VpX4z2QiOsMY+kLg5wn+T6PJxLMn8GsCY6tNeWiJcXbxag==
+"@guardian/braze-components@^0.0.19-0":
+  version "0.0.19-0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.19-0.tgz#637cdc91221b4e86fb8e1e2784051cc12450d15f"
+  integrity sha512-SgH+RcqsCYrkOg1LsdHFrSFEwaw+NLVsp3ZysPa7dsIATQy0RS/7l7RLsdueI4D/k7+qoUtGUg5xr86nTmeBrA==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
@@ -2115,10 +2115,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.7.4.tgz#ae75775c40f8234a2e2774c126a688e9a98f5df4"
   integrity sha512-f/XieB0dOyGYZDhP/UmyrHiyuehETt2L1GKqacsySFdcD/++fKe7LLcXbza4NE54MHyS0wbvd+Qh4avjG4IPLg==
 
-"@guardian/discussion-rendering@^4.6.1":
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-4.6.1.tgz#833a37613dc533a65fddba49229aa2f8149a1f68"
-  integrity sha512-0SK6TKfFwWDTf1Mky6DmnsgT31PRfXBWpIJFvXDt524neVotphkjsOs5FA7Ub3jq+ICuD566mEHYCVSWBcWoMg==
+"@guardian/discussion-rendering@^5.0.0-0":
+  version "5.0.0-0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-5.0.0-0.tgz#d5861acab970d4f10a673d91177888f9889f3dd9"
+  integrity sha512-TbpoS28+6MfYh2WTHc/26osQiPlDoFvI7lmxt9I/ZicN5ipumVwY2zUweSWjfXbmzz3gTNMRragQ38HNBrvvqQ==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -2237,10 +2237,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-1.1.0.tgz#5fa64d2156b4927d22a4b32c3503e493cd4aec53"
-  integrity sha512-NpYEHHfHyg/QpaAVdWHWVLlWmnowyZwa5/0Kkqk4xN+dMzLjrWL3CQfrBxVFILZgtz1IcMirMUHQb2zOjF3HBg==
+"@guardian/types@^2.0.0-0":
+  version "2.0.0-0"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-2.0.0-0.tgz#2c3e5141e06ae9ed476dd37bd673279d1ec341c5"
+  integrity sha512-bw91GnLkhztDslBT0lEcJ1/DZBTi8BkUjLGubeTYIXxwijuDF5T6Nc/s9PZu5ukydH5kPYYNpTFGjAuk0p0o8A==
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"
