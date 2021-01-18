@@ -120,7 +120,7 @@ function renderElement(
 					credit={element.credit}
 					title={element.title}
 					display={display}
-					designType={designType}
+					design={design}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
@@ -128,7 +128,7 @@ function renderElement(
 				<GuVideoBlockComponent
 					html={element.html}
 					pillar={pillar}
-					designType={designType}
+					design={design}
 					display={display}
 					credit={element.source}
 					caption={element.caption}
