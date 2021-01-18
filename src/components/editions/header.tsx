@@ -38,6 +38,7 @@ const reviewHeaderStyles = css`
 `;
 
 const showcaseHeaderStyles = css`
+	padding: 0 ${remSpace[2]};
 	margin: 0;
 
 	${from.wide} {
@@ -45,6 +46,8 @@ const showcaseHeaderStyles = css`
 	}
 
 	${from.phablet} {
+		padding-left: 0;
+		padding-right: 0;
 		margin-left: ${remSpace[24]};
 	}
 `;
