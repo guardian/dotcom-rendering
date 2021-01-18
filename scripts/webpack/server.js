@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { siteName, loadableStatsFilename } = require('../frontend/config');
 
 module.exports = () => ({
@@ -17,6 +18,7 @@ module.exports = () => ({
         runtimeChunk: false,
     },
     externals: [
+        '@loadable/component',
         require('webpack-node-externals')({
             whitelist: [/^@guardian/],
         }),

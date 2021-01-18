@@ -4,8 +4,9 @@ const webpack = require('webpack');
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReportBundleSize = require('./plugins/report-bundle-size');
-const { dist } = require('../frontend/config');
+const { dist, loadableStatsFilename } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -35,8 +36,12 @@ const commonConfigs = ({ platform }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        new FilterWarningsPlugin({ 
-            exclude: /export .* was not found in/ 
+        new FilterWarningsPlugin({
+            exclude: /export .* was not found in/
+        }),
+        new LoadablePlugin({
+            writeToDisk: true,
+            filename: `${loadableStatsFilename}-${platform}.json`,
         }),
         PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&
