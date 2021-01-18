@@ -15,6 +15,8 @@ type Props = {
 	NAV: NavType;
 };
 
+type Format = { display: Display; designType: DesignType; pillar: CAPIPillar };
+
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
 	const designType: DesignType = decideDesignType(CAPI.designType);
@@ -39,6 +41,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Immersive}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 				case 'Feature':
@@ -60,6 +63,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Immersive}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 			}
@@ -76,6 +80,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Showcase}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 				case 'Feature':
@@ -97,6 +102,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Showcase}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 			}
@@ -114,6 +120,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							display={Display.Standard}
 							designType={designType}
 							pillar={pillar}
+							palette={palette}
 						/>
 					);
 				case 'Feature':

@@ -251,6 +251,7 @@ interface Props {
 	display: Display;
 	designType: DesignType;
 	pillar: CAPIPillar;
+	palette: Palette;
 }
 
 export const CommentLayout = ({
@@ -259,6 +260,7 @@ export const CommentLayout = ({
 	display,
 	designType,
 	pillar,
+	palette,
 }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -405,6 +407,7 @@ export const CommentLayout = ({
 										headlineString={CAPI.headline}
 										designType={designType}
 										pillar={pillar}
+										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

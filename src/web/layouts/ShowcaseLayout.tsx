@@ -228,6 +228,7 @@ interface Props {
 	display: Display;
 	designType: DesignType;
 	pillar: CAPIPillar;
+	palette: Palette;
 }
 
 export const ShowcaseLayout = ({
@@ -236,6 +237,7 @@ export const ShowcaseLayout = ({
 	display,
 	designType,
 	pillar,
+	palette,
 }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -368,6 +370,7 @@ export const ShowcaseLayout = ({
 									headlineString={CAPI.headline}
 									designType={designType}
 									pillar={pillar}
+									palette={palette}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>

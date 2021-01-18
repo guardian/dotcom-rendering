@@ -177,6 +177,7 @@ interface Props {
 	display: Display;
 	designType: DesignType;
 	pillar: CAPIPillar;
+	palette: Palette;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -199,6 +200,7 @@ export const ImmersiveLayout = ({
 	display,
 	designType,
 	pillar,
+	palette,
 }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -368,6 +370,7 @@ export const ImmersiveLayout = ({
 									headlineString={CAPI.headline}
 									designType={designType}
 									pillar={pillar}
+									palette={palette}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>
@@ -431,6 +434,7 @@ export const ImmersiveLayout = ({
 										headlineString={CAPI.headline}
 										designType={designType}
 										pillar={pillar}
+										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 										noMainMedia={true}
