@@ -2,6 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Display } from '@guardian/types/Format';
+
+import { decidePalette } from '../lib/decidePalette';
+
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -28,6 +31,11 @@ export const ArticleStory = () => (
 					display={Display.Standard}
 					designType="Article"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Article',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -48,6 +56,11 @@ export const oldHeadline = () => (
 					display={Display.Standard}
 					designType="Article"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Article',
+						pillar: 'news',
+					})}
 					tags={[
 						// Age warnings only show for old articles when the tone/news tag is present
 						{
@@ -75,6 +88,11 @@ export const Feature = () => (
 					display={Display.Standard}
 					designType="Feature"
 					pillar="lifestyle"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Feature',
+						pillar: 'lifestyle',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -100,6 +118,11 @@ export const ShowcaseInterview = () => (
 						display={Display.Showcase}
 						designType="Interview"
 						pillar="culture"
+						palette={decidePalette({
+							display: Display.Showcase,
+							designType: 'Interview',
+							pillar: 'culture',
+						})}
 						tags={[]}
 						isShowcase={true}
 						byline="Byline text"
@@ -135,6 +158,11 @@ export const ShowcaseInterviewNobyline = () => (
 						display={Display.Showcase}
 						designType="Interview"
 						pillar="culture"
+						palette={decidePalette({
+							display: Display.Showcase,
+							designType: 'Interview',
+							pillar: 'culture',
+						})}
 						tags={[]}
 						isShowcase={true}
 						byline=""
@@ -167,6 +195,11 @@ export const Interview = () => (
 					display={Display.Standard}
 					designType="Interview"
 					pillar="culture"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Interview',
+						pillar: 'culture',
+					})}
 					tags={[]}
 					byline="Byline text"
 				/>
@@ -200,6 +233,11 @@ export const InterviewNoByline = () => (
 					display={Display.Standard}
 					designType="Interview"
 					pillar="culture"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Interview',
+						pillar: 'culture',
+					})}
 					tags={[]}
 					byline=""
 				/>
@@ -235,6 +273,11 @@ export const Comment = () => (
 					display={Display.Standard}
 					designType="Comment"
 					pillar="opinion"
+					palette={decidePalette({
+						display: Display.Showcase,
+						designType: 'Comment',
+						pillar: 'opinion',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -255,6 +298,11 @@ export const Analysis = () => (
 					display={Display.Standard}
 					designType="Analysis"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Analysis',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -275,6 +323,11 @@ export const Media = () => (
 					display={Display.Standard}
 					designType="Media"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Media',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -295,6 +348,11 @@ export const Review = () => (
 					display={Display.Standard}
 					designType="Review"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Review',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -315,6 +373,11 @@ export const AdvertisementFeature = () => (
 					display={Display.Standard}
 					designType="AdvertisementFeature"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'AdvertisementFeature',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -335,6 +398,11 @@ export const PhotoEssay = () => (
 					display={Display.Standard}
 					designType="PhotoEssay"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'PhotoEssay',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -355,6 +423,11 @@ export const Quiz = () => (
 					display={Display.Standard}
 					designType="Quiz"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Quiz',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -375,6 +448,11 @@ export const Recipe = () => (
 					display={Display.Standard}
 					designType="Recipe"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Recipe',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -395,6 +473,11 @@ export const Immersive = () => (
 					display={Display.Immersive}
 					designType="Article"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Immersive,
+						designType: 'Article',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -415,6 +498,11 @@ export const ImmersiveNoMainMedia = () => (
 					display={Display.Immersive}
 					designType="Article"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Immersive,
+						designType: 'Article',
+						pillar: 'news',
+					})}
 					tags={[]}
 					noMainMedia={true}
 				/>
@@ -440,6 +528,11 @@ export const ImmersiveComment = () => (
 					display={Display.Immersive}
 					designType="Comment"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Immersive,
+						designType: 'Comment',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -460,6 +553,11 @@ export const GuardianView = () => (
 					display={Display.Standard}
 					designType="GuardianView"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'GuardianView',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -480,6 +578,11 @@ export const MatchReport = () => (
 					display={Display.Standard}
 					designType="MatchReport"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'MatchReport',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -500,6 +603,11 @@ export const SpecialReport = () => (
 					display={Display.Standard}
 					designType="Article"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Article',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -520,6 +628,11 @@ export const Live = () => (
 					display={Display.Standard}
 					designType="Live"
 					pillar="news"
+					palette={decidePalette({
+						display: Display.Standard,
+						designType: 'Live',
+						pillar: 'news',
+					})}
 					tags={[]}
 				/>
 			</ArticleContainer>
