@@ -20,7 +20,7 @@ module.exports = {
                 ],
                 plugins: [ '@emotion' ],
             },
-            tsConfig: "config/tsconfig.test.json",
+            tsconfig: "config/tsconfig.test.json",
         },
     },
     coverageThreshold: {

@@ -1,7 +1,9 @@
 // ----- Imports ----- //
-
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
+import { remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
+import { border } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -9,6 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
+import { editionsArticleWidth } from './styles';
 
 // ----- Component ----- //
 
@@ -31,6 +34,18 @@ const styles = (kickerColor: string): SerializedStyles => {
 				fill: ${kickerColor};
 			}
 		}
+
+		padding-bottom: ${remSpace[4]};
+		margin: 0 ${remSpace[1]} 0 0;
+
+		${from.wide} {
+			margin: 0 auto;
+		}
+
+		${from.phablet} {
+			border-right: 1px solid ${border.secondary};
+			width: ${editionsArticleWidth}rem;
+		}
 	`;
 };
 
@@ -44,6 +59,8 @@ const bylinePrimaryStyles = (kickerColor: string): SerializedStyles => {
 const bylineSecondaryStyles = css`
 	${body.medium({ fontStyle: 'italic' })}
 `;
+
+// ----- Component ----- //
 
 interface Props {
 	item: Item;
