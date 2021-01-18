@@ -4,7 +4,6 @@ import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { culture, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
@@ -26,7 +25,7 @@ interface HeaderProps {
 }
 
 const headerStyles = css`
-	padding: 0 ${remSpace[3]} ${remSpace[4]};
+	 padding: 0 ${remSpace[3]} ${remSpace[4]};
 
 	${from.desktop} {
 		padding: 0 ${remSpace[24]} ${remSpace[4]};
