@@ -21,18 +21,33 @@ const enum TeamLocation {
 }
 
 const enum MatchStatusKind {
-    FT,
-    HT,
     KickOff,
+    FirstHalf,
+    HalfTime,
+    SecondHalf,
+    FullTime,
+    ExtraTime,
+    Penalties,
+    Suspended,
 }
 
 type MatchStatus = {
-    kind: MatchStatusKind.FT;
-} | {
-    kind: MatchStatusKind.HT;
-} | {
     kind: MatchStatusKind.KickOff;
     time: string;
+} | {
+    kind: MatchStatusKind.FirstHalf;
+} | {
+    kind: MatchStatusKind.HalfTime;
+} | {
+    kind: MatchStatusKind.SecondHalf;
+} | {
+    kind: MatchStatusKind.FullTime;
+} | {
+    kind: MatchStatusKind.ExtraTime;
+} | {
+    kind: MatchStatusKind.Penalties;
+} | {
+    kind: MatchStatusKind.Suspended;
 };
 
 // ----- Subcomponents ----- //
@@ -93,6 +108,7 @@ const scoreNumberStyles = css`
 `;
 
 const scoreInlineStyles = css`
+    position: absolute;
     top: 7%;
     left: 29%;
 `;
@@ -123,6 +139,45 @@ const TeamScore: FC<TeamProps> = ({ team, location }) =>
         </ul>
     </section>
 
+interface MatchStatusIconProps {
+    status: MatchStatus;
+}
+
+const matchStatusIconStyles = (status: MatchStatusKind) => css`
+    ${textSans.small({ fontWeight: 'bold' })}
+    border: 1px dotted ${neutral[0]};
+    border-radius: 100%;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.75rem;
+    box-sizing: border-box;
+
+    ${status === MatchStatusKind.KickOff ? 'font-weight: normal;' : ''}
+`;
+
+const MatchStatusIcon: FC<MatchStatusIconProps> = ({ status }) => {
+    switch (status.kind) {
+        case MatchStatusKind.KickOff:
+            return <span css={matchStatusIconStyles(status.kind)}>{status.time}</span>;
+        case MatchStatusKind.FirstHalf:
+            return <span css={matchStatusIconStyles(status.kind)}>1st</span>;
+        case MatchStatusKind.HalfTime:
+            return <span css={matchStatusIconStyles(status.kind)}>HT</span>;
+        case MatchStatusKind.SecondHalf:
+            return <span css={matchStatusIconStyles(status.kind)}>2nd</span>;
+        case MatchStatusKind.FullTime:
+            return <span css={matchStatusIconStyles(status.kind)}>FT</span>;
+        case MatchStatusKind.ExtraTime:
+            return <span css={matchStatusIconStyles(status.kind)}>ET</span>;
+        case MatchStatusKind.Penalties:
+            return <span css={matchStatusIconStyles(status.kind)}>PT</span>;
+        case MatchStatusKind.Suspended:
+        default:
+            return <span css={matchStatusIconStyles(status.kind)}>S</span>;
+    }
+}
+
 // ----- Component ----- //
 
 interface Props {
@@ -150,10 +205,12 @@ const matchInfoStyles = css`
 const matchStatusStyles = css`
     grid-column: 1;
     grid-row: 1;
+    text-align: center;
+    margin-right: ${remSpace[2]};
 
     ${from.phablet} {
         grid-column: 2;
-        text-align: center;
+        margin-right: 0;
     }
 `;
 
@@ -173,11 +230,13 @@ const stadiumStyles = css`
     ${textSans.medium({ fontStyle: 'normal' })}
 `;
 
-const FootballScores: FC<Props> = ({ league, stadium, homeTeam, awayTeam }) =>
+const FootballScores: FC<Props> = ({ league, stadium, homeTeam, awayTeam, status }) =>
     <section css={styles}>
-        <h2>Scores</h2>
+        <h2 css={css`text-indent: -10000px; position: absolute; margin: 0;`}>Scores</h2>
         <div css={matchInfoStyles}>
-            <div css={matchStatusStyles}>FT</div>
+            <div css={matchStatusStyles}>
+                <MatchStatusIcon status={status} />
+            </div>
             <div css={otherMatchStyles}>
                 <nav css={leagueStyles}>{league}</nav>
                 <address css={stadiumStyles}>{stadium}</address>

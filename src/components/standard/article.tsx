@@ -135,7 +135,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 						score: 0,
 						scorers: []
 					}}
-					status={{ kind: MatchStatusKind.FT }}
+					status={{ kind: MatchStatusKind.FullTime }}
 				/>
 				<header>
 					<HeaderMedia item={item} />

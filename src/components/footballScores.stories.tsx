@@ -2,7 +2,23 @@
 
 import type { FC } from 'react';
 import FootballScores, { MatchStatusKind } from 'components/footballScores';
-import { text, number, withKnobs } from '@storybook/addon-knobs';
+import { text, number, withKnobs, select } from '@storybook/addon-knobs';
+
+// ----- Helpers ----- //
+
+const matchStatusOptions = {
+    KickOff: MatchStatusKind.KickOff,
+    FirstHalf: MatchStatusKind.FirstHalf,
+    HalfTime: MatchStatusKind.HalfTime,
+    SecondHalf: MatchStatusKind.SecondHalf,
+    FullTime: MatchStatusKind.FullTime,
+    ExtraTime: MatchStatusKind.ExtraTime,
+    Penalties: MatchStatusKind.Penalties,
+    Suspended: MatchStatusKind.Suspended,
+};
+
+const selectMatchStatus = () =>
+	select("Match Status", matchStatusOptions, MatchStatusKind.KickOff);
 
 // ----- Stories ----- //
 
@@ -25,7 +41,7 @@ const Default: FC = () =>
             score: number("Away Team Score", 0),
             scorers: []
         }}
-        status={{ kind: MatchStatusKind.FT }}
+        status={{ kind: selectMatchStatus(), time: "20:00" }}
     />
 
 // ----- Exports ----- //
