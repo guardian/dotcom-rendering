@@ -16,14 +16,10 @@ interface Props {
 	item: Item;
 }
 
-const articleStyles = css`
-	${sidePadding}
-`;
-
 const bodyStyles = css`
 	border-top: 1px solid ${border.secondary};
 	padding-top: ${remSpace[4]};
-
+	${sidePadding}
 	${articleWidthStyles}
 `;
 
@@ -36,7 +32,7 @@ const Article: FC<Props> = ({ item }) => {
 		<main>
 			<article>
 				<Header item={item} />
-				<section css={[bodyStyles, articleStyles]}>
+				<section css={bodyStyles}>
 					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
