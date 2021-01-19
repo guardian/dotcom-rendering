@@ -8,7 +8,12 @@ import {
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
 import { headline, body, textSans } from '@guardian/src-foundations/typography';
-import { brand, brandAlt, neutral } from '@guardian/src-foundations/palette';
+import {
+	brand,
+	brandAlt,
+	neutral,
+	error,
+} from '@guardian/src-foundations/palette';
 import { JsonScript } from '@root/src/amp/components/JsonScript';
 
 const epicStyle = css`
@@ -125,10 +130,10 @@ const genericArrowStyle = css`
 	display: inline;
 	vertical-align: sub;
 `;
-const lightArrowStyle = css`
-	${genericArrowStyle}
-	fill: ${neutral[100]};
-`;
+// const lightArrowStyle = css`
+// 	${genericArrowStyle}
+// 	fill: ${neutral[100]};
+// `;
 const darkArrowStyle = css`
 	${genericArrowStyle}
 	fill: ${neutral[7]};
@@ -230,6 +235,16 @@ const inputLabelStyle = css`
 	${textSans.medium({ fontWeight: 'bold' })};
 	margin-bottom: 4px;
 `;
+const invalidInputLabel = css`
+	${textSans.medium()};
+	color: ${error[400]};
+	display: flex;
+`;
+const invalidInputSvg = css`
+	width: 30px;
+	height: 30px;
+	fill: ${error[400]};
+`;
 const textInputStyle = css`
 	width: 100%;
 	border-radius: 0;
@@ -277,9 +292,19 @@ const buildUrl = (
 	)}`;
 };
 
+const getReminderDate = (date: Date = new Date()): Date => {
+	const monthsAhead = date.getDate() < 20 ? 1 : 2;
+	date.setMonth(date.getMonth() + monthsAhead);
+
+	return date;
+};
+
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-	const reminderMonth = 'February';
-	const reminderYear = '2021';
+	const reminderDate = getReminderDate();
+	const reminderMonth = reminderDate.toLocaleString('default', {
+		month: 'long',
+	});
+	const reminderYear = reminderDate.getFullYear();
 	const epicStateJson = {
 		hideButtons: false,
 		hideReminderForm: true,
@@ -462,25 +487,63 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									</svg>
 								</div>
 							</div>
-							<div className={inputLabelStyle}>Email address</div>
-							<input
-								className={textInputStyle}
-								id="reminderEmailAddress"
-								type="text"
-							/>
-							<div className={blueButtonStyle}>
-								Set a reminder
-								<svg
-									className={lightArrowStyle}
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 17.89"
-									preserveAspectRatio="xMinYMid"
-									aria-hidden="true"
-									focusable="false"
+							<form
+								method="post"
+								action-xhr="https://mjacobson.eu.ngrok.io/good"
+								target="_blank"
+								custom-validation-reporting="show-first-on-submit"
+							>
+								<div className={inputLabelStyle}>
+									Email address
+								</div>
+								<div
+									visible-when-invalid="typeMismatch"
+									className={invalidInputLabel}
+									validation-for="reminderEmailAddress"
 								>
-									<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-								</svg>
-							</div>
+									<svg
+										className={invalidInputSvg}
+										viewBox="0 0 30 30"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											clipRule="evenodd"
+											d="M14.41 5L4 22.057l.668.943h20.664l.668-.943L15.59 5h-1.18zm-.063 12.178h1.306l.621-6.917-.856-.728h-.835l-.857.728.62 6.917zM15 18.452c.7 0 1.274.573 1.274 1.274 0 .7-.573 1.274-1.274 1.274-.7 0-1.274-.573-1.274-1.274 0-.7.573-1.274 1.274-1.274z"
+										/>
+									</svg>
+									Please enter a valid email address
+								</div>
+								<div
+									visible-when-invalid="valueMissing"
+									className={invalidInputLabel}
+									validation-for="reminderEmailAddress"
+								>
+									<svg
+										viewBox="0 0 30 30"
+										xmlns="http://www.w3.org/2000/svg"
+										className={invalidInputSvg}
+									>
+										<path
+											fillRule="evenodd"
+											clipRule="evenodd"
+											d="M14.41 5L4 22.057l.668.943h20.664l.668-.943L15.59 5h-1.18zm-.063 12.178h1.306l.621-6.917-.856-.728h-.835l-.857.728.62 6.917zM15 18.452c.7 0 1.274.573 1.274 1.274 0 .7-.573 1.274-1.274 1.274-.7 0-1.274-.573-1.274-1.274 0-.7.573-1.274 1.274-1.274z"
+										/>
+									</svg>
+									Please enter your email address
+								</div>
+								<input
+									className={textInputStyle}
+									id="reminderEmailAddress"
+									type="email"
+									required={true}
+								/>
+								<input
+									className={blueButtonStyle}
+									type="submit"
+									value="Set a reminder"
+								/>
+							</form>
 							<div className={reminderTermsStyle}>
 								We will send you a maximum of two emails in
 								{reminderMonth} {reminderYear}. To find out what

@@ -82,6 +82,7 @@ export const document = ({
     <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
 
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}
@@ -90,15 +91,9 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
+        #reminderEmailAddress.invalid {
 
-        /*div.epicWrapper.hideButtons .buttonsWrapper {*/
-        /*    display: none !important;*/
-        /*}*/
-
-        /*div.epicWrapper.hideReminderForm .reminderFormWrapper {*/
-        /*    display: none !important;*/
-        /*}*/
-
+        }
     </style>
 
     </head>
