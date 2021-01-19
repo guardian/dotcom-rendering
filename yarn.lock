@@ -2087,10 +2087,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^9.1.0-0":
-  version "9.1.0-0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-9.1.0-0.tgz#9955bb571f4c7b218c2a813e90edf388d4164aed"
-  integrity sha512-4KmYSY9PrS6w8ZpL3TfPu909z0J7shexnfZek58HWJkbyR8ACOclCsVYWTEMTRwc6hHYMCeJkSND0nkqhnGFbA==
+"@guardian/atoms-rendering@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-9.1.0.tgz#5bbccfac53bbd201ec600209fa5f4694ebd0103e"
+  integrity sha512-Qy8mYEzHSqweMvtKgtB3hjhzkbCEeRDFd32d2SBXygs33UT5STP4kvVAfd5oo3Axd7RKKQQFF+IYUv2O+/vB1g==
   dependencies:
     youtube-player "^5.5.2"
 
@@ -2099,10 +2099,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.19-0":
-  version "0.0.19-0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.19-0.tgz#637cdc91221b4e86fb8e1e2784051cc12450d15f"
-  integrity sha512-SgH+RcqsCYrkOg1LsdHFrSFEwaw+NLVsp3ZysPa7dsIATQy0RS/7l7RLsdueI4D/k7+qoUtGUg5xr86nTmeBrA==
+"@guardian/braze-components@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.19.tgz#edca8e113c09e556c492c425a12b04724e13912b"
+  integrity sha512-fDWFc7YSeS2CEcH7ZiZO6RKwclFvB5uy+aAvKER4rFGqRwaK2eBcF8i7SMHDbWNjfafpdrTu9Rdug7nxnj1kbg==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
@@ -2115,10 +2115,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.1.tgz#087a95665e53e23ad5a25c07238590c1c74ba453"
   integrity sha512-GJpjZ2fv+tg5CODhoaBVqFoh6oABqpQb4HR1Dju7ogz8zcsvBUEnATGkH0U47sq0tuzo95h1XnWXcjwb/Z2OpQ==
 
-"@guardian/discussion-rendering@^5.0.0-0":
-  version "5.0.0-0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-5.0.0-0.tgz#d5861acab970d4f10a673d91177888f9889f3dd9"
-  integrity sha512-TbpoS28+6MfYh2WTHc/26osQiPlDoFvI7lmxt9I/ZicN5ipumVwY2zUweSWjfXbmzz3gTNMRragQ38HNBrvvqQ==
+"@guardian/discussion-rendering@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-5.0.0.tgz#ad1906e92d94c9ee8530a395f56b708e2620c45c"
+  integrity sha512-wCU2fjp4B8yfy/jbxcBcubdGWfzY2L0I6h/0LL3NBPnSzVj/LUcp3I1wgX1aJSigvxNF40NfoCdnhcRpBcThMw==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -2237,10 +2237,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^2.0.0-0":
-  version "2.0.0-0"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-2.0.0-0.tgz#2c3e5141e06ae9ed476dd37bd673279d1ec341c5"
-  integrity sha512-bw91GnLkhztDslBT0lEcJ1/DZBTi8BkUjLGubeTYIXxwijuDF5T6Nc/s9PZu5ukydH5kPYYNpTFGjAuk0p0o8A==
+"@guardian/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-2.0.0.tgz#9567ee7638bae058799cb97b48a4078b48033d1c"
+  integrity sha512-0jR2FgTQVG9gO2a1IZwxFWi6UKxteBWPob5+zErbOrznN0u4Mf+9KgigMaNMWpZvkEdDhPAQl7ot5f6wW0wU5A==
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"
