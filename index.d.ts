@@ -703,7 +703,32 @@ type IslandType =
     | 'youtube-block'
     | 'youtube-block-main-media'
     | 'chart-atom';
+
+// All Components that are loaded with loadable
+// should be added here, this is the chunk name as
+// defined in manifest.json
+interface ComponentNameChunkMap {
+    chunkName: string;
+    componentName?: string;
+    alwaysAdd: boolean;
+}
+interface EditionDropdownLoadable extends ComponentNameChunkMap{
+    chunkName: 'EditionDropdown';
+    alwaysAdd: true;
+}
+interface YoutubeBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-YoutubeBlockComponent';
+    CAPIElementType: YoutubeBlockElement['_type'];
+}
+
+interface RichLinkBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-RichLinkComponent';
+    CAPIElementType: RichLinkBlockElement['_type'];
+}
+type LoadableComponents = EditionDropdownLoadable | YoutubeBlockLoadable | RichLinkBlockLoadable;
+
 interface BaseTrailType {
+
     url: string;
     headline: string;
     isLiveBlog: boolean;
