@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const { siteName, loadableStatsFilename } = require('../frontend/config');
+const { siteName } = require('../frontend/config');
 
 module.exports = () => ({
     entry: {
@@ -33,7 +33,7 @@ module.exports = () => ({
                 : callback();
         },
         (context, request, callback) => {
-            return request.endsWith(`${loadableStatsFilename}.json`)
+            return request.endsWith('loadable-manifest-browser.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },

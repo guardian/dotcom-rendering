@@ -6,7 +6,6 @@ const target = resolve(root, 'target');
 const statik = resolve(root, 'src', 'static');
 
 const siteName = 'frontend';
-const loadableStatsFilename = 'loadable-manifest';
 // Override the default port using the PORT environment variable, for local
 // development and integration testing.
 // Don't override this if you intend to deploy the resulting build to PROD!
@@ -17,7 +16,6 @@ module.exports = {
     root,
     target,
     siteName,
-    loadableStatsFilename,
     statik,
     port,
 };

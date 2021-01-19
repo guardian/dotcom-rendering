@@ -1,4 +1,3 @@
-import nodePath from 'path';
 import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
@@ -6,7 +5,7 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { escapeData } from '@root/src/lib/escapeData';
-import { getDist } from '@root/src/lib/assets';
+import { getDist, loadableManifestJson } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
@@ -57,7 +56,7 @@ export const document = ({ data }: Props) => {
 	);
 
 	const loadableExtractor = new ChunkExtractor({
-		statsFile: nodePath.resolve('./dist/loadable-manifest-browser.json'),
+		stats: loadableManifestJson,
 		entrypoints: ['react'],
 	});
 
@@ -113,7 +112,6 @@ export const document = ({ data }: Props) => {
 				module: true,
 			})),
 	);
-
 	// Loadable generates configuration script elements as the first two items
 	// of the script element array. We need to generate the react component version
 	// and then build an array of them, rendering them to string and grabbing
