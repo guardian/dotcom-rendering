@@ -32,11 +32,11 @@ const styles = css`
 
 const reviewStyles = css`
 	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	
+
 	${from.mobileMedium} {
 		${headline.small({ lineHeight: 'tight', fontWeight: 'bold' })}
 	}
-	
+
 	${from.tablet} {
 		${headline.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
 	}
