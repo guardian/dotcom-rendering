@@ -10,6 +10,8 @@ import { articleWidthStyles } from './styles';
 // ----- Component ----- //
 
 const styles = css`
+	box-sizing: border-box;
+
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
 	}

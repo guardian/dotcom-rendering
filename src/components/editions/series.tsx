@@ -24,8 +24,9 @@ const styles = (item: Item): SerializedStyles => {
 		${titlepiece.small()}
 		color: ${kicker};
 		font-size: 1.0625rem;
-		padding: ${remSpace[1]} 0 ${remSpace[2]};
+		padding: ${remSpace[1]} ${remSpace[1]} ${remSpace[2]} 0;
 		border-top: 1px solid ${border.secondary};
+		box-sizing: border-box;
 
 		${articleWidthStyles}
 

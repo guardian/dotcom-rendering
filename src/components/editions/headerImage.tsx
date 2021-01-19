@@ -6,6 +6,7 @@ import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
 import { none, some } from '@guardian/types';
+import StarRating from 'components/editions/starRating';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
@@ -95,6 +96,7 @@ const HeaderImage: FC<Props> = ({ item }) =>
 						credit={credit}
 						styles={captionStyles}
 					/>
+					<StarRating item={item} />
 				</figure>
 			);
 		}

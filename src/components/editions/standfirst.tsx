@@ -13,13 +13,14 @@ import { articleWidthStyles } from './styles';
 // ----- Component ----- //
 
 const styles = css`
-	${body.medium({ lineHeight: 'tight' })}
+	box-sizing: border-box;
 	padding-bottom: ${remSpace[6]};
+	${body.medium({ lineHeight: 'tight' })}
 	color: ${text.primary};
+	padding-right: ${remSpace[1]};
 
 	${articleWidthStyles}
 
-	box-sizing: border-box;
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
 	}
@@ -39,9 +40,13 @@ interface Props {
 	item: Item;
 }
 
+const noLinks = true;
+
 const Standfirst: FC<Props> = ({ item }) =>
 	maybeRender(item.standfirst, (standfirst) => (
-		<div css={styles}>{renderStandfirstText(standfirst, item)}</div>
+		<div css={styles}>
+			{renderStandfirstText(standfirst, item, noLinks)}
+		</div>
 	));
 
 // ----- Exports ----- //

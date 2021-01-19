@@ -34,9 +34,9 @@ const Article: FC<Props> = ({ item }) => {
 
 	return (
 		<main>
-			<article css={articleStyles}>
+			<article>
 				<Header item={item} />
-				<section css={[bodyStyles]}>
+				<section css={[bodyStyles, articleStyles]}>
 					{renderEditionsAll(item, partition(item.body).oks)}
 				</section>
 			</article>
