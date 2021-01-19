@@ -11,7 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -36,17 +36,14 @@ const styles = (kickerColor: string): SerializedStyles => {
 		}
 
 		padding-bottom: ${remSpace[4]};
-		margin: 0 ${remSpace[1]} 0 0;
 		padding-right: ${remSpace[1]};
+		margin: 0;
 		box-sizing: border-box;
 
-		${from.wide} {
-			margin: 0 auto;
-		}
+		${articleWidthStyles}
 
 		${from.phablet} {
 			border-right: 1px solid ${border.secondary};
-			width: ${editionsArticleWidth}rem;
 		}
 	`;
 };

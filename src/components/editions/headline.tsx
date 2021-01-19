@@ -10,11 +10,12 @@ import type { Format } from '@guardian/types';
 import { Design } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
 const styles = css`
+	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	${headline.small({ fontWeight: 'medium' })}
 	margin: 0;
@@ -22,13 +23,10 @@ const styles = css`
 	padding-right: ${remSpace[1]};
 	box-sizing: border-box;
 
-	${from.wide} {
-		margin: 0 auto;
-	}
+	${articleWidthStyles}
 
 	${from.phablet} {
 		border-right: 1px solid ${border.secondary};
-		width: ${editionsArticleWidth}rem;
 	}
 `;
 

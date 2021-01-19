@@ -11,7 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { kickerPicker } from './kickerPicker';
-import { editionsArticleWidth } from './styles';
+import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -20,6 +20,7 @@ const styles = (item: Item): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 
 	return css`
+		box-sizing: border-box;
 		${titlepiece.small()}
 		color: ${kicker};
 		font-size: 1.0625rem;
@@ -27,13 +28,10 @@ const styles = (item: Item): SerializedStyles => {
 		border-top: 1px solid ${border.secondary};
 		box-sizing: border-box;
 
-		${from.wide} {
-			margin: 0 auto;
-		}
+		${articleWidthStyles}
 
 		${from.phablet} {
 			border-right: 1px solid ${border.secondary};
-			width: ${editionsArticleWidth}rem;
 		}
 	`;
 };
