@@ -37,6 +37,8 @@ const styles = (kickerColor: string): SerializedStyles => {
 
 		padding-bottom: ${remSpace[4]};
 		margin: 0 ${remSpace[1]} 0 0;
+		padding-right: ${remSpace[1]};
+		box-sizing: border-box;
 
 		${from.wide} {
 			margin: 0 auto;
