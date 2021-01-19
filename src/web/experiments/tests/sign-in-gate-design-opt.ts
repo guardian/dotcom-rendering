@@ -7,8 +7,8 @@ export const signInGateDesignOpt: ABTest = {
 	author: 'vlbee',
 	description:
 		'Compare 6 different gate design changes, on 3rd page view, on simple article templates, with higher priority over banners and epi',
-	audience: 0.1971,
-	audienceOffset: 0.7029,
+	audience: 0.2,
+	audienceOffset: 0.7,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss or reshown after 5 dismisses, not on help, info sections etc. exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
