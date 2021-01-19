@@ -1,4 +1,4 @@
-import { createNanoEvents, Emitter } from 'nanoevents';
+// import { createNanoEvents, Emitter } from 'nanoevents';
 
 type Callback = (message: Message) => void;
 
@@ -14,29 +14,44 @@ interface Message {
 }
 
 class BrazeMessages {
-	emitter: Emitter;
+	// emitter: Emitter;
 	appboy: Appboy;
 
 	constructor(appboy: Appboy) {
 		this.appboy = appboy;
-		this.emitter = createNanoEvents();
-
-		const callback = (message: Message) => {
-			const { extras } = message;
-
-			if (extras && extras.slotName) {
-				this.emitter.emit(extras.slotName, message);
-			}
-		};
-
-		appboy.subscribeToInAppMessage(callback);
 	}
 
-	getMessagesFor(slotName: string): Promise<Message> {
+	getMessagesForBanner(): Promise<Message> {
 		return new Promise((resolve) => {
-			this.emitter.on(slotName, (data) => resolve(data));
+			const callback = (message: Message) => {
+				const { extras } = message;
+
+				if (extras && extras.slotName && extras.slotName === 'Banner') {
+					resolve(message);
+				}
+			};
+
+			this.appboy.subscribeToInAppMessage(callback);
+		});
+	}
+
+	getMessagesForEndOfArticle(): Promise<Message> {
+		return new Promise((resolve) => {
+			const callback = (message: Message) => {
+				const { extras } = message;
+
+				if (
+					extras &&
+					extras.slotName &&
+					extras.slotName === 'EndOfArticle'
+				) {
+					resolve(message);
+				}
+			};
+
+			this.appboy.subscribeToInAppMessage(callback);
 		});
 	}
 }
 
-export { BrazeMessages };
+export { BrazeMessages, Message, Callback };

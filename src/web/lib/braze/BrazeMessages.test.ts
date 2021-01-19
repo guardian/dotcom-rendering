@@ -2,24 +2,22 @@ import { BrazeMessages } from './BrazeMessages';
 import { FakeAppBoy } from './FakeAppBoy';
 
 describe('BrazeMessages', () => {
-	describe('getMessagesFor', () => {
+	describe('getMessagesForBanner & getMessagesForEndOfArticle', () => {
 		it('returns a promise which resolves with message data for the correct slot', async () => {
 			const appboy = new FakeAppBoy();
 			const brazeMessages = new BrazeMessages(appboy);
 
-			const bannerPromise = brazeMessages.getMessagesFor('banner');
-			const endOfArticlePromise = brazeMessages.getMessagesFor(
-				'endOfArticle',
-			);
+			const bannerPromise = brazeMessages.getMessagesForBanner();
+			const endOfArticlePromise = brazeMessages.getMessagesForEndOfArticle();
 
 			const bannerMessage = {
-				extras: { slotName: 'banner', title: 'Example' },
+				extras: { slotName: 'Banner', title: 'Example' },
 			};
 			appboy.emit(bannerMessage);
 
 			const endOfArticleMessage = {
 				extras: {
-					slotName: 'endOfArticle',
+					slotName: 'EndOfArticle',
 					title: 'Example',
 				},
 			};
@@ -37,11 +35,11 @@ describe('BrazeMessages', () => {
 			const appboy = new FakeAppBoy();
 			const brazeMessages = new BrazeMessages(appboy);
 
-			const bannerPromise = brazeMessages.getMessagesFor('banner');
-			const anotherBannerPromise = brazeMessages.getMessagesFor('banner');
+			const bannerPromise = brazeMessages.getMessagesForBanner();
+			const anotherBannerPromise = brazeMessages.getMessagesForBanner();
 
 			const message = {
-				extras: { slotName: 'banner', title: 'Example' },
+				extras: { slotName: 'Banner', title: 'Example' },
 			};
 			appboy.emit(message);
 

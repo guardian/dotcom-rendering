@@ -15,9 +15,9 @@ import {
 	clearHasCurrentBrazeUser,
 } from '@root/src/web/lib/hasCurrentBrazeUser';
 import { checkBrazeDependencies } from '@root/src/web/lib/braze/checkBrazeDependencies';
-import { CanShowResult } from './bannerPicker';
 import { BrazeMessages } from '@root/src/web/lib/braze/BrazeMessages';
 import { getInitialisedAppboy } from '@root/src/web/lib/braze/initialiseAppboy';
+import { CanShowResult } from './bannerPicker';
 
 type Meta = {
 	dataFromBraze: {
@@ -37,14 +37,6 @@ const containerStyles = emotion.css`
     width: 100%;
     ${getZIndex('banner')}
 `;
-
-const SDK_OPTIONS = {
-	enableLogging: false,
-	noCookies: true,
-	baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
-	sessionTimeoutInSeconds: 1,
-	minimumIntervalBetweenTriggerActionsInSeconds: 0,
-};
 
 const getMessageFromBraze = async (
 	apiKey: string,
@@ -67,7 +59,7 @@ const getMessageFromBraze = async (
 	const brazeMessages = new BrazeMessages(appboy);
 	// let subscriptionId: string | undefined;
 
-	const messages = brazeMessages.getMessagesFor('banner');
+	const messages = brazeMessages.getMessagesForBanner();
 
 	appboy.changeUser(brazeUuid);
 	appboy.openSession();
@@ -161,9 +153,7 @@ const maybeWipeUserData = async (
 	brazeUuid?: null | string,
 ): Promise<void> => {
 	if (apiKey && !brazeUuid && hasCurrentBrazeUser()) {
-		const { default: appboy } = await import(
-			/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-		);
+		const appboy = await getInitialisedAppboy(apiKey);
 
 		appboy.initialize(apiKey, SDK_OPTIONS);
 

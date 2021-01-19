@@ -1,5 +1,5 @@
 import { createNanoEvents, Emitter } from 'nanoevents';
-import { Message, Callback } from './BrazeMessageBroker';
+import { Message, Callback } from './BrazeMessages';
 
 class FakeAppBoy {
 	emitter: Emitter;
