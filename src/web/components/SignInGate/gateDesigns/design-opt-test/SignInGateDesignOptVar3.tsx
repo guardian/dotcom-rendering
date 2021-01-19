@@ -32,7 +32,7 @@ const signinGate = css`
 const headingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};
 	border-top: 2px black solid;
-	padding-bottom: 42px;
+	padding-bottom: ${space[12]}px;
 
 	${from.phablet} {
 		padding-right: 160px;
@@ -186,7 +186,7 @@ export const SignInGateDesignOptVar3 = ({
 				>
 					privacy settings
 				</button>
-				. Thank you
+				. Thank you.
 			</p>
 			<div className={actionButtons}>
 				<LinkButton

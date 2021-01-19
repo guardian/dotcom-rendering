@@ -216,7 +216,7 @@ export const SignInGateDesignOptVar6 = ({
 				>
 					privacy settings
 				</button>
-				. Thank you
+				. Thank you.
 			</p>
 
 			<p className={cx([bodyBold, signInHeader])}>

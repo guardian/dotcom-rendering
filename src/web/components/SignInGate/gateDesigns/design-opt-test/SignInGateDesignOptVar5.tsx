@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { css, cx } from 'emotion';
 
 import {
@@ -12,10 +12,50 @@ import { space, palette, opinion } from '@guardian/src-foundations';
 // import { space, palette, opinion, remSpace } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
-import { Lines } from '@guardian/src-ed-lines';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
+import { SerializedStyles } from '@emotion/core';
 import { SignInGateProps } from '../types';
+
+interface LinesProps {
+	cssOverrides?: SerializedStyles;
+}
+
+export const Lines: FunctionComponent<LinesProps> = (props) => {
+	const { cssOverrides } = props;
+	const n = 3;
+	const thickness = 1;
+	const distance = 6;
+	const height = (n - 1) * distance + thickness;
+	const color = palette.brand[400];
+
+	const linesCss = css`
+		background-image: repeating-linear-gradient(
+			to bottom,
+			${color},
+			${color} ${thickness}px,
+			transparent ${thickness}px,
+			transparent ${distance}px
+		);
+		background-repeat: 'repeat';
+		background-position: 'top';
+		height: ${height}px;
+		border: 0;
+		margin: 0;
+		opacity: 0.2;
+		width: calc(100% + 20px);
+		padding-left: 20px !important;
+		margin-left: -20px !important;
+		${from.leftCol} {
+			width: calc(100% + 10px);
+			padding-left: 10px !important;
+			margin-left: -10px !important;
+		}
+		${cssOverrides}
+	`;
+
+	return <hr className={linesCss} />;
+};
 
 const signinGate = css`
 	/* stylelint-disable-next-line color-no-hex */
@@ -40,7 +80,7 @@ const signinGate = css`
 const headingStyles = css`
 	${titlepiece.small({})};
 	border-top: 2px ${palette.brandText.ctaPrimary} solid;
-	padding-bottom: 42px;
+	padding-bottom: ${space[9]}px;
 	color: ${palette.brandText.ctaPrimary};
 
 	${from.phablet} {
@@ -65,11 +105,6 @@ const leftMarginFill = css`
 		padding-left: 10px !important;
 		margin-left: -10px !important;
 	}
-`;
-
-const lineColor = css`
-	color: ${palette.brand[400]};
-	opacity: 0.2;
 `;
 
 const lineTop = css`
@@ -199,9 +234,7 @@ export const SignInGateDesignOptVar5 = ({
 			{/* TODO leftMargin fill not working - see Source documentation:
             https://www.theguardian.design/2a1e5182b/p/2619e3-overriding-styles
             cssOverrides don't work either */}
-			<div className={cx([lineColor, leftMarginFill])}>
-				<Lines count={4} effect="straight" />
-			</div>
+			<Lines />
 			<p className={bodyBold}>
 				It’s important to say this is not a step towards a paywall
 			</p>
@@ -223,7 +256,7 @@ export const SignInGateDesignOptVar5 = ({
 				>
 					privacy settings
 				</button>
-				. Thank you
+				. Thank you.
 			</p>
 			<div className={actionButtons}>
 				<LinkButton
