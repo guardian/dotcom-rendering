@@ -75,13 +75,6 @@ const EditionDropdown = loadable(
 	},
 );
 
-const YoutubeBlockComponent = loadable(
-	() => import('@root/src/web/components/elements/YoutubeBlockComponent'),
-	{
-		resolveComponent: (module) => module.YoutubeBlockComponent,
-	},
-);
-
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -349,60 +342,88 @@ export const App = ({ CAPI, NAV }: Props) => {
 					pageId={CAPI.pageId}
 				/>
 			</Portal>
-			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
-				<HydrateOnce
-					key={index}
-					root="youtube-block-main-media"
-					index={youtubeBlock.youtubeIndex}
-				>
-					<YoutubeBlockComponent
-						display={display}
-						design={design}
-						pillar={pillar}
-						hideCaption={false}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={false}
-						id={youtubeBlock.id}
-						assetId={youtubeBlock.assetId}
-						channelId={youtubeBlock.channelId}
-						expired={youtubeBlock.expired}
-						overrideImage={youtubeBlock.overrideImage}
-						posterImage={youtubeBlock.posterImage}
-						duration={youtubeBlock.duration}
-						mediaTitle={youtubeBlock.mediaTitle}
-						altText={youtubeBlock.altText}
-					/>
-				</HydrateOnce>
-			))}
-			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
-				<HydrateOnce
-					key={index}
-					root="youtube-block"
-					index={youtubeBlock.youtubeIndex}
-				>
-					<YoutubeBlockComponent
-						display={display}
-						design={design}
-						pillar={pillar}
-						hideCaption={false}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={false}
-						id={youtubeBlock.id}
-						assetId={youtubeBlock.assetId}
-						channelId={youtubeBlock.channelId}
-						expired={youtubeBlock.expired}
-						overrideImage={youtubeBlock.overrideImage}
-						posterImage={youtubeBlock.posterImage}
-						duration={youtubeBlock.duration}
-						mediaTitle={youtubeBlock.mediaTitle}
-						altText={youtubeBlock.altText}
-					/>
-				</HydrateOnce>
-			))}
+			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => {
+				// const YoutubeBlockComponentLoadable = loadableDynamicImport(
+				// 	'@frontend/web/components/elements/YoutubeBlockComponent',
+				// 	'YoutubeBlockComponent',
+				// ) as typeof YoutubeBlockComponent;
+				const YoutubeBlockComponent = loadable(
+					() =>
+						import(
+							'@frontend/web/components/elements/YoutubeBlockComponent'
+						),
+					{
+						resolveComponent: (module) =>
+							module.YoutubeBlockComponent,
+					},
+				);
+				return (
+					<HydrateOnce
+						key={index}
+						root="youtube-block-main-media"
+						index={youtubeBlock.youtubeIndex}
+					>
+						<YoutubeBlockComponent
+							display={display}
+							design={design}
+							pillar={pillar}
+							hideCaption={false}
+							// eslint-disable-next-line jsx-a11y/aria-role
+							role="inline"
+							adTargeting={adTargeting}
+							isMainMedia={false}
+							id={youtubeBlock.id}
+							assetId={youtubeBlock.assetId}
+							channelId={youtubeBlock.channelId}
+							expired={youtubeBlock.expired}
+							overrideImage={youtubeBlock.overrideImage}
+							posterImage={youtubeBlock.posterImage}
+							duration={youtubeBlock.duration}
+							mediaTitle={youtubeBlock.mediaTitle}
+							altText={youtubeBlock.altText}
+						/>
+					</HydrateOnce>
+				);
+			})}
+			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => {
+				const YoutubeBlockComponent = loadable(
+					() =>
+						import(
+							'@frontend/web/components/elements/YoutubeBlockComponent'
+						),
+					{
+						resolveComponent: (module) =>
+							module.YoutubeBlockComponent,
+					},
+				);
+				return (
+					<HydrateOnce
+						key={index}
+						root="youtube-block"
+						index={youtubeBlock.youtubeIndex}
+					>
+						<YoutubeBlockComponent
+							display={display}
+							design={design}
+							pillar={pillar}
+							hideCaption={false}
+							// eslint-disable-next-line jsx-a11y/aria-role
+							role="inline"
+							adTargeting={adTargeting}
+							isMainMedia={false}
+							id={youtubeBlock.id}
+							assetId={youtubeBlock.assetId}
+							channelId={youtubeBlock.channelId}
+							expired={youtubeBlock.expired}
+							overrideImage={youtubeBlock.overrideImage}
+							posterImage={youtubeBlock.posterImage}
+							duration={youtubeBlock.duration}
+							mediaTitle={youtubeBlock.mediaTitle}
+							altText={youtubeBlock.altText}
+						/>
+					</HydrateOnce>
+				);
+			})}
 			{CAPI.quizAtoms.map((quizAtoms, index) => (
 				<HydrateOnce
 					key={index}

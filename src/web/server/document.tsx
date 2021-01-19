@@ -1,3 +1,4 @@
+import nodePath from 'path';
 import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
@@ -8,6 +9,7 @@ import { escapeData } from '@root/src/lib/escapeData';
 import { getDist } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
+import { ChunkExtractor } from '@loadable/server';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
@@ -19,18 +21,17 @@ interface RenderToStringResult {
 
 const generateScriptTags = (
 	scripts: Array<{ src: string; module?: boolean }>,
-	scriptAttrs: string = '',
 ) =>
 	scripts.reduce((scriptTags, script) => {
 		if (script.module) {
 			scriptTags.push(
-				`<script ${scriptAttrs} type="module" src="${getDist({
+				`<script type="module" src="${getDist({
 					path: script.src,
 					legacy: false,
 				})}"></script>`,
 			);
 			scriptTags.push(
-				`<script ${scriptAttrs} nomodule src="${getDist({
+				`<script defer nomodule src="${getDist({
 					path: script.src,
 					legacy: true,
 				})}"></script>`,
@@ -54,6 +55,74 @@ export const document = ({ data }: Props) => {
 			</CacheProvider>,
 		),
 	);
+
+	const loadableExtractor = new ChunkExtractor({
+		statsFile: nodePath.resolve('./dist/loadable-manifest-browser.json'),
+		entrypoints: ['react'],
+	});
+
+	// The lodable-components docs want us to use extractor.collectChunks() but
+	// we don't have the traditional same <App /> rendered on server and client.
+	// Our data structure is vastly different (CAPIType vs CAPIBrowserType) and
+	// our architecture expects src/web/App to be client-side only, therefore
+	// it is difficult for us to use collectChunks to automatically extract the
+	// component splits that we want.
+	// However, this does actually suit our architecture as we can use the CAPI
+	// component reference.
+	const allChunks: LoadableComponents[] = [
+		{ chunkName: 'EditionDropdown', alwaysAdd: true },
+		{
+			chunkName: 'elements-YoutubeBlockComponent',
+			CAPIElementType:
+				'model.dotcomrendering.pageElements.YoutubeBlockElement',
+			alwaysAdd: false,
+		},
+		{
+			chunkName: 'elements-RichLinkComponent',
+			CAPIElementType:
+				'model.dotcomrendering.pageElements.RichLinkBlockElement',
+			alwaysAdd: false,
+		},
+	];
+	// We want to only insert script tags for the elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const CAPIElements: CAPIElement[] = CAPI.blocks[0]
+		? CAPI.blocks[0].elements
+		: [];
+	const chunksForPage: LoadableComponents[] = allChunks.filter((chunk) =>
+		CAPIElements.some(
+			(block) => chunk.alwaysAdd || block._type === chunk.CAPIElementType,
+		),
+	);
+	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
+	chunksForPage.forEach((chunk) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// @ts-ignore
+		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
+	});
+	// Pass the array of extracted (read: built with addChunk) scripts to
+	// generatedScriptTags so that we can build a script tag array of
+	// modern and legacy scripts.
+	const loadableScripts = generateScriptTags(
+		loadableExtractor
+			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// @ts-ignore
+			.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+			.map((script: { chunk: string }) => ({
+				src: `${script.chunk}.js`,
+				module: true,
+			})),
+	);
+
+	// Loadable generates configuration script elements as the first two items
+	// of the script element array. We need to generate the react component version
+	// and then build an array of them, rendering them to string and grabbing
+	// the first two items. The alternative getScriptTags just returns a string
+	// of scripts tags already concatenated, so is not useful in this scenario.
+	const loadableConfigScripts = loadableExtractor
+		.getScriptElements()
+		.map((script) => renderToString(script))
+		.slice(0, 2);
 
 	/**
 	 * Preload the following woff2 font files
@@ -92,7 +161,6 @@ export const document = ({ data }: Props) => {
 			{ src: 'dynamicImport.js', module: true },
 			{ src: 'react.js', module: true },
 		].filter(Boolean),
-		'defer',
 	);
 
 	/**
@@ -102,16 +170,13 @@ export const document = ({ data }: Props) => {
 	 * *before* the high priority scripts, although this is very
 	 * unlikely.
 	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			{ src: 'ophan.js', module: true },
-			{ src: 'lotame.js', module: true },
-			{ src: 'atomIframe.js', module: true },
-			{ src: 'embedIframe.js', module: true },
-			{ src: 'newsletterEmbedIframe.js', module: true },
-		],
-		'async',
-	);
+	const lowPriorityScriptTags = generateScriptTags([
+		{ src: 'ophan.js', module: true },
+		{ src: 'lotame.js', module: true },
+		{ src: 'atomIframe.js', module: true },
+		{ src: 'embedIframe.js', module: true },
+		{ src: 'newsletterEmbedIframe.js', module: true },
+	]);
 
 	const gaPath = {
 		modern: getDist({
@@ -144,11 +209,10 @@ export const document = ({ data }: Props) => {
 
 	return htmlTemplate({
 		linkedData,
-
+		loadableScripts,
+		loadableConfigScripts,
 		priorityScriptTags,
-
 		lowPriorityScriptTags,
-
 		css,
 		html,
 		fontFiles,

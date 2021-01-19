@@ -1,6 +1,6 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { CDN, getDist } from '@root/src/lib/assets';
+import { CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
 
 import he from 'he';
@@ -9,6 +9,8 @@ export const htmlTemplate = ({
 	title = 'The Guardian',
 	description,
 	linkedData,
+	loadableScripts,
+	loadableConfigScripts,
 	priorityScriptTags,
 	lowPriorityScriptTags,
 	css,
@@ -24,6 +26,8 @@ export const htmlTemplate = ({
 	title?: string;
 	description: string;
 	linkedData: object;
+	loadableScripts: string[];
+	loadableConfigScripts: string[];
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
@@ -104,26 +108,6 @@ export const htmlTemplate = ({
 
 	const prefetchTags = staticPrefetchUrls.map(
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
-	);
-
-	// HERE BE DRAGONS.
-	// Use sparingly, relying more on the browser's choice.
-	// https://jasonformat.com/modern-script-loading/#option1loaddynamically:~:text=What's%20the%20trade%2Doff%3F%20preloading.
-	// https://web.dev/preload-critical-assets/
-	// Preloaded assets must be critical and
-	// must be used within 3 seconds of browser load.
-	// We should only preload the very most important
-	// scripts and components (header, main media)
-	// Note that we only preload for modern browsers scripts
-	// as browser support doesn't exist for non type=module
-	// https://caniuse.com/?search=preload
-	const preloadComponents: PreloadedComponents[] = ['EditionDropdown'];
-	const preloadComponentLinkTags = preloadComponents.map(
-		(filename) =>
-			`<link rel="modulepreload" as="script" crossorigin href="${getDist({
-				path: `${filename}.js`,
-				legacy: false,
-			})}">`,
 	);
 
 	return `<!doctype html>
@@ -238,8 +222,9 @@ export const htmlTemplate = ({
 						keywords,
 					).replace(/%20/g, '+')}" />
                 </noscript>
-                ${[...priorityScriptTags].join('\n')}
-                ${preloadComponentLinkTags.join('\n')}
+                ${priorityScriptTags.join('\n')}
+                ${loadableConfigScripts.join('\n')}
+                ${loadableScripts.join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
