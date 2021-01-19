@@ -21,7 +21,7 @@ const epicStyle = css`
 	background-color: ${neutral[97]};
 	clear: left;
 	margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 1rem;
 	padding: 0.25rem 0.3125rem 1rem;
 `;
 const epicHeaderStyle = css`
@@ -70,6 +70,7 @@ const highlightedTextStyle = css`
 	display: inline;
 `;
 const genericButtonStyle = css`
+	outline: none;
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -245,7 +246,8 @@ const invalidInputSvg = css`
 	height: 30px;
 	fill: ${error[400]};
 `;
-const textInputStyle = css`
+const emailInputStyle = css`
+	outline: none;
 	width: 100%;
 	border-radius: 0;
 	border: 2px solid ${neutral[60]};
@@ -473,7 +475,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</h2>
 								<div
 									className={closeButtonStyle}
-									on="tap:AMP.setState({epicState:{hideReminderForm: true, hideButtons: false}})"
+									on="tap:AMP.setState({epicState:{hideReminderForm: true, hideButtons: false}}),reminderForm.clear"
 								>
 									<svg
 										viewBox="0 0 30 30"
@@ -488,8 +490,9 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 							</div>
 							<form
+								id="reminderForm"
 								method="post"
-								action-xhr="https://mjacobson.eu.ngrok.io/good"
+								action=""
 								target="_blank"
 								custom-validation-reporting="show-first-on-submit"
 							>
@@ -533,7 +536,17 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									Please enter your email address
 								</div>
 								<input
-									className={textInputStyle}
+									type="hidden"
+									name="isPreContribution"
+									value="true"
+								/>
+								<input
+									type="hidden"
+									name="reminderDate"
+									value=""
+								/>
+								<input
+									className={emailInputStyle}
 									id="reminderEmailAddress"
 									type="email"
 									required={true}
@@ -545,7 +558,8 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								/>
 							</form>
 							<div className={reminderTermsStyle}>
-								We will send you a maximum of two emails in
+								We will send you a maximum of two emails
+								in&nbsp;
 								{reminderMonth} {reminderYear}. To find out what
 								personal data we collect and how we use it, view
 								our{' '}

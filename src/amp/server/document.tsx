@@ -7,6 +7,8 @@ import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import he from 'he';
 
+import { error } from '@guardian/src-foundations/palette';
+
 interface RenderToStringResult {
 	html: string;
 	css: string;
@@ -91,8 +93,8 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
-        #reminderEmailAddress.invalid {
-
+        #reminderForm.user-invalid #reminderEmailAddress {
+            border: 4px solid ${error[400]};
         }
     </style>
 
