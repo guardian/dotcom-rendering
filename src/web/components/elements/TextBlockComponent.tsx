@@ -137,6 +137,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 	const paraStyles = css`
 		margin-bottom: 16px;
 		${body.medium()};
+        line-break: anywhere;
 
 		ul {
 			margin-bottom: 12px;
