@@ -3,19 +3,27 @@ import { css, cx } from 'emotion';
 
 import {
 	headline,
-	textSans,
 	body,
 	titlepiece,
 } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { space, palette, opinion } from '@guardian/src-foundations';
-// import { space, palette, opinion, remSpace } from '@guardian/src-foundations';
+import { space, palette } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SerializedStyles } from '@emotion/core';
 import { SignInGateProps } from '../types';
+import {
+	actionButtons,
+	bodyText,
+	firstParagraphOverlay,
+	hideElementsCss,
+	laterButton,
+	privacyLink,
+	registerButton,
+	signInGateContainer,
+} from '../shared';
 
 interface LinesProps {
 	cssOverrides?: SerializedStyles;
@@ -57,24 +65,9 @@ export const Lines: FunctionComponent<LinesProps> = (props) => {
 	return <hr className={linesCss} />;
 };
 
-const signinGate = css`
+const signInGateBackground = css`
 	/* stylelint-disable-next-line color-no-hex */
 	background-color: #eaf1fd;
-
-	${from.desktop} {
-		min-height: 600px;
-	}
-
-	/* This needs to be here because link styles are applied globally to the article body :/ */
-	a {
-		text-decoration: underline;
-		border-bottom: none;
-		color: ${palette.text.primary};
-
-		:hover {
-			border-bottom: none;
-		}
-	}
 `;
 
 const headingStyles = css`
@@ -111,37 +104,8 @@ const lineTop = css`
 	border-top: 1px solid rgba(5, 41, 98, 0.2);
 `;
 
-const bodyText = css`
-	${textSans.medium({ lineHeight: 'regular' })}
-	padding-bottom: ${space[6]}px;
-
-	${from.phablet} {
-		padding-right: 160px;
-	}
-`;
-
 const signInHeader = css`
 	padding-bottom: ${space[2]}px;
-`;
-
-const actionButtons = css`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	margin-bottom: 42px;
-
-	> a {
-		margin-right: ${space[9]}px !important;
-		text-decoration: none !important;
-	}
-`;
-
-const registerButton = css`
-	color: ${palette.text.ctaPrimary} !important;
-`;
-
-const laterButton = css`
-	color: ${palette.brand[400]} !important;
 `;
 
 const signInLinkSection = css`
@@ -164,53 +128,6 @@ const faq = css`
 	}
 `;
 
-const privacyLink = css`
-	text-decoration: underline;
-	border: 0;
-	background: transparent;
-	font-size: inherit;
-	padding: 0;
-	cursor: pointer;
-`;
-
-const firstParagraphOverlay = (isComment: boolean) => css`
-	margin-top: -250px;
-	width: 100%;
-	height: 250px;
-	position: absolute;
-
-	/* "transparent" only works here because == rgba(0,0,0,0) */
-	background-image: linear-gradient(
-		0deg,
-		${isComment ? opinion[800] : palette.background.primary},
-		70%,
-		rgba(255, 255, 255, 0)
-	);
-`;
-
-// This css does 3 things
-// 1. first hide all article conent using display: none; (.article-body-commercial-selector > *)
-// 2. make the sign in gate ((#sign-in-gate), and the first 2 paragraphs of the article visible (.article-body-commercial-selector p:nth-of-type(-n+3))
-// 3. hide any siblings after the sign in gate incase because of the css in 2
-//    a paragraph is still visible (#sign-in-gate ~ *)
-const hideElementsCss = `
-    .article-body-commercial-selector > * {
-        display: none;
-    }
-
-    #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
-        display: block;
-    }
-
-    #sign-in-gate ~ * {
-        display: none;
-    }
-
-    #slot-body-end {
-        display: none;
-    }
-`;
-
 // Slight colour highlight
 export const SignInGateDesignOptVar5 = ({
 	signInUrl,
@@ -223,7 +140,11 @@ export const SignInGateDesignOptVar5 = ({
 }: SignInGateProps) => {
 	return (
 		<div
-			className={cx([signinGate, leftMarginFill])}
+			className={cx([
+				signInGateContainer,
+				signInGateBackground,
+				leftMarginFill,
+			])}
 			data-cy="sign-in-gate-design-opt-variant-5"
 		>
 			<style>{hideElementsCss}</style>
