@@ -20,6 +20,7 @@ const styles = (item: Item): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 
 	return css`
+		box-sizing: border-box;
 		${titlepiece.small()}
 		color: ${kicker};
 		font-size: 1.0625rem;

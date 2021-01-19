@@ -12,6 +12,7 @@ import { articleWidthStyles } from './styles';
 // ----- Component ----- //
 
 const styles = css`
+	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	${headline.small({ fontWeight: 'medium' })}
 	margin: 0;
