@@ -35,12 +35,11 @@ const bulletStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const decideBackground = (design: Design): string => {
+const decideBackground = (design: Design, pillar: CAPIPillar): string => {
+	if (pillar === 'labs') return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
 			return palette.opinion[800];
-		case Design.AdvertisementFeature:
-			return palette.neutral[86];
 		default:
 			return palette.neutral[100];
 	}
@@ -48,7 +47,7 @@ const decideBackground = (design: Design): string => {
 
 const body = (pillar: CAPIPillar, design: Design) => {
 	return css`
-		background-color: ${decideBackground(design)};
+		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}
 	`;
 };

@@ -192,19 +192,6 @@ export const GuardianView = () => {
 };
 GuardianView.story = { name: 'GuardianView' };
 
-export const AdvertisementFeature = () => {
-	return (
-		<Section>
-			<Standfirst
-				display={Display.Standard}
-				design={Design.AdvertisementFeature}
-				standfirst="This is how AdvertisementFeature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
-			/>
-		</Section>
-	);
-};
-AdvertisementFeature.story = { name: 'AdvertisementFeature' };
-
 export const PhotoEssay = () => {
 	return (
 		<Section>

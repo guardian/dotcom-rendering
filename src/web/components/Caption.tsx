@@ -184,7 +184,6 @@ export const Caption = ({
 		case Design.MatchReport:
 		case Design.GuardianView:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Feature:
 		case Design.Comment:
 		case Design.Analysis:

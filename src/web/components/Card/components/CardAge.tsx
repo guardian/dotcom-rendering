@@ -54,7 +54,6 @@ const colourStyles = (design: Design, pillar: CAPIPillar) => {
 		case Design.MatchReport:
 		case Design.GuardianView:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Comment:
 		default:
 			return css`

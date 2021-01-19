@@ -23,7 +23,6 @@ export const decideLineEffect = (
 		case Design.Article:
 		case Design.MatchReport:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		default:
 			return 'straight';
 	}

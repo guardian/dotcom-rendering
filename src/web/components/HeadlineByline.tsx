@@ -118,7 +118,6 @@ export const HeadlineByline = ({
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					if (byline) {
 						return (
@@ -171,7 +170,6 @@ export const HeadlineByline = ({
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return null;
 			}

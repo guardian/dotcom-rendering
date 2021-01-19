@@ -27,7 +27,6 @@ export const headlineBackgroundColour = (
 		case Design.Recipe:
 		case Design.MatchReport:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Feature:
 		case Design.Analysis:
 		case Design.Interview:
@@ -58,7 +57,6 @@ export const headlineColour = (design: Design, pillar: CAPIPillar) => {
 		case Design.MatchReport:
 		case Design.GuardianView:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Comment:
 		default:
 	}

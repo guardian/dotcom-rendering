@@ -13,7 +13,6 @@ const designTypes: Design[] = [
 	Design.Interview,
 	Design.GuardianView,
 	Design.Quiz,
-	Design.AdvertisementFeature,
 	Design.PhotoEssay,
 ];
 

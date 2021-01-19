@@ -50,7 +50,6 @@ const outerStyles = (pillar: CAPIPillar, design: Design) => {
 		case Design.Recipe:
 		case Design.MatchReport:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		default:
 			return css`
 				${baseStyles};
@@ -87,7 +86,6 @@ const innerStyles = (design: Design) => {
 		case Design.Recipe:
 		case Design.MatchReport:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		default:
 			return css`
 				${baseStyles};

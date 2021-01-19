@@ -2804,7 +2804,6 @@
         },
         "CAPIDesign": {
             "enum": [
-                "AdvertisementFeature",
                 "Analysis",
                 "Article",
                 "Comment",

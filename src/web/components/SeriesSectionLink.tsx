@@ -200,7 +200,6 @@ export const SeriesSectionLink = ({
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default: {
 					if (hasSeriesTag) {
 						if (!tag) return null; // Just to keep ts happy
@@ -241,7 +240,6 @@ export const SeriesSectionLink = ({
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default: {
 					if (tag) {
 						// We have a tag, we're not immersive, show both series and section titles

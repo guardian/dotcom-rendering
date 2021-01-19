@@ -62,7 +62,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 				case Design.Review:
 				case Design.Media:
 				case Design.MatchReport:
-				case Design.AdvertisementFeature:
 				case Design.Quiz:
 				case Design.Article:
 				case Design.Live:
@@ -102,7 +101,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 				case Design.Media:
 				case Design.PhotoEssay:
 				case Design.MatchReport:
-				case Design.AdvertisementFeature:
 				case Design.Quiz:
 				case Design.Article:
 				case Design.Live:

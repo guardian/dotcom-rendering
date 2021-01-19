@@ -47,7 +47,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return (
 						<ImmersiveLayout
@@ -84,7 +83,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return (
 						<ShowcaseLayout
@@ -122,7 +120,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return (
 						<StandardLayout

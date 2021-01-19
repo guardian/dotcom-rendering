@@ -217,7 +217,6 @@ export const PullQuoteBlockComponent: React.FC<{
 		case Design.Review:
 		case Design.Media:
 		case Design.MatchReport:
-		case Design.AdvertisementFeature:
 		case Design.Quiz:
 		case Design.Article:
 		case Design.Live:

@@ -43,7 +43,6 @@ const decideColour = (design: Design, pillar: CAPIPillar, inCard?: boolean) => {
 		case Design.MatchReport:
 		case Design.GuardianView:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Comment:
 		default:
 			return pillarPalette[pillar].main;

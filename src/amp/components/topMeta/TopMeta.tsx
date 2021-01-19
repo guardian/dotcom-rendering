@@ -13,11 +13,11 @@ export const TopMeta: React.FunctionComponent<{
 	pillar: CAPIPillar;
 	adTargeting?: AdTargeting;
 }> = ({ data, design, pillar, adTargeting }) => {
+	if (pillar === 'labs')
+		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 	switch (design) {
 		case Design.Comment:
 			return <TopMetaOpinion articleData={data} pillar={pillar} />;
-		case Design.AdvertisementFeature:
-			return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 		default:
 			return (
 				<TopMetaNews

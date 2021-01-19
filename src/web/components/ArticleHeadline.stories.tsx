@@ -303,26 +303,6 @@ export const Review = () => (
 );
 Review.story = { name: 'Review' };
 
-export const AdvertisementFeature = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is the headline you see when design type is AdvertisementFeature"
-					display={Display.Standard}
-					design={Design.AdvertisementFeature}
-					pillar="news"
-					tags={[]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-AdvertisementFeature.story = { name: 'AdvertisementFeature' };
-
 export const PhotoEssay = () => (
 	<Section>
 		<Flex>

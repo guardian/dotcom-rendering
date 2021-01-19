@@ -236,7 +236,6 @@ export const ArticleHeadline = ({
 				case Design.Article:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					if (noMainMedia) {
 						return (
@@ -356,7 +355,6 @@ export const ArticleHeadline = ({
 				case Design.Article:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return (
 						<h1 className={standardFont}>

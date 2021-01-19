@@ -140,7 +140,6 @@ const metaContainer = ({
 				case Design.MatchReport:
 				case Design.GuardianView:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				case Design.Comment:
 				default:
 					return css`
@@ -188,7 +187,6 @@ const shouldShowAvatar = (design: Design, display: Display) => {
 				case Design.MatchReport:
 				case Design.GuardianView:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				case Design.Comment:
 				default:
 					return false;
@@ -218,7 +216,6 @@ const shouldShowContributor = (design: Design, display: Display) => {
 				case Design.Recipe:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.AdvertisementFeature:
 				default:
 					return true;
 			}

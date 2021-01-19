@@ -76,7 +76,6 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 		case Design.Recipe:
 		case Design.MatchReport:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		case Design.Feature:
 		case Design.Analysis:
 		case Design.Interview:

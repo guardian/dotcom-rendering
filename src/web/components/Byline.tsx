@@ -57,7 +57,6 @@ const colourStyles = (design: Design, pillar: CAPIPillar) => {
 		case Design.MatchReport:
 		case Design.GuardianView:
 		case Design.Quiz:
-		case Design.AdvertisementFeature:
 		default:
 			return css`
 				color: ${pillarPalette[pillar].main};

@@ -26,11 +26,11 @@ export const decideDesignType = (designType: CAPIDesign): Design => {
 			return Design.GuardianView;
 		case 'Quiz':
 			return Design.Quiz;
-		case 'AdvertisementFeature':
-			return Design.AdvertisementFeature;
-		// case 'PhotoEssay';: return Design.PhotoEssay;
+		case 'PhotoEssay':
+			return Design.PhotoEssay;
 		case 'GuardianLabs':
-			return Design.AdvertisementFeature;
+			return Design.Article;
+		case 'AdvertisementFeature':
 		case 'Immersive':
 		case 'SpecialReport':
 		default:
