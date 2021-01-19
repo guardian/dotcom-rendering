@@ -75,15 +75,12 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<Props> => {
-	if (Display.Showcase === item.display)
+	if (item.display === Display.Showcase) {
 		return <ShowcaseHeader item={item} />;
-	switch (item.display | item.design) {
-		case Design.Review:
-			return (
-				<StandardHeader item={item} className={reviewHeaderStyles} />
-			);
-		default:
-			return <StandardHeader item={item} />;
+	} else if (item.design === Design.Review) {
+		return <StandardHeader item={item} className={reviewHeaderStyles} />;
+	} else {
+		return <StandardHeader item={item} />;
 	}
 };
 
