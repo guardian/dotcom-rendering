@@ -2,8 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
-import { culture, remSpace } from '@guardian/src-foundations';
-import { Design, Display } from '@guardian/types';
+import { Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
 import Headline from 'components/editions/headline';
@@ -12,7 +11,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC, ReactElement } from 'react';
-import { articleWidthStyles, sidePadding } from './styles';
+import { sidePadding } from './styles';
 
 // ----- Component ----- //
 
@@ -29,20 +28,8 @@ const headerStyles = css`
 	${sidePadding}
 `;
 
-const reviewHeaderStyles = css`
-	background-color: ${culture[800]};
-	color: ${culture[300]};
-`;
-
-const showcaseHeaderStyles = css`
-	padding: 0 ${remSpace[2]};
-	margin: 0;
-
-	${articleWidthStyles}
-`;
-
-const StandardHeader: FC<HeaderProps> = ({ item, className }) => (
-	<header css={[headerStyles, className]}>
+const StandardHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={headerStyles}>
 		<HeaderImage item={item} />
 		<Series item={item} />
 		<Headline item={item} />
@@ -53,7 +40,7 @@ const StandardHeader: FC<HeaderProps> = ({ item, className }) => (
 );
 
 const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
-	<header css={showcaseHeaderStyles}>
+	<header css={headerStyles}>
 		<Series item={item} />
 		<Headline item={item} />
 		<HeaderImage item={item} />
@@ -66,8 +53,6 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 const renderArticleHeader = (item: Item): ReactElement<Props> => {
 	if (item.display === Display.Showcase) {
 		return <ShowcaseHeader item={item} />;
-	} else if (item.design === Design.Review) {
-		return <StandardHeader item={item} className={reviewHeaderStyles} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}

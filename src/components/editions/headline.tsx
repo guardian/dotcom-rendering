@@ -7,27 +7,22 @@ import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
+import { headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: Format): SerializedStyles => css`
+	${headlineTextColour(format)}
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
-	${headline.small({ fontWeight: 'medium' })}
-	margin: 0;
 	padding-bottom: ${remSpace[4]};
-	padding-right: ${remSpace[1]};
-	box-sizing: border-box;
+	margin: 0;
 
 	${articleWidthStyles}
-
-	${from.phablet} {
-		border-right: 1px solid ${border.secondary};
-	}
 `;
 
 const reviewStyles = css`
@@ -42,9 +37,24 @@ const reviewStyles = css`
 	}
 `;
 
-const getStyles = ({ design }: Format): SerializedStyles => {
-	if (design === Design.Review) return css(styles, reviewStyles);
-	return styles;
+const showcaseStyles = css`
+	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+
+	${from.mobileMedium} {
+		${headline.small({ lineHeight: 'tight', fontWeight: 'bold' })}
+	}
+
+	${from.tablet} {
+		${headline.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
+	}
+`;
+
+const getStyles = (format: Format): SerializedStyles => {
+	if (format.design === Design.Review)
+		return css(styles(format), reviewStyles);
+	if (format.display === Display.Showcase)
+		return css(styles(format), showcaseStyles);
+	return styles(format);
 };
 
 interface Props {

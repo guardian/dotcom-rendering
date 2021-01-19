@@ -6,6 +6,9 @@ import { from } from '@guardian/src-foundations/mq';
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;
 
+export const tabletArticleMargin = 24;
+export const wideArticleMargin = 144;
+
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
@@ -18,14 +21,20 @@ export const sidePadding = css`
 
 export const articleWidthStyles: SerializedStyles = css`
 	${from.tablet} {
-		margin: 0 auto;
-	}
-
-	${from.tablet} {
 		width: ${tabletContentWidth}px;
 	}
 
 	${from.wide} {
 		width: ${wideContentWidth}px;
+	}
+`;
+
+export const articleMarginStyles: SerializedStyles = css`
+	${from.tablet} {
+		margin-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
 	}
 `;

@@ -2,8 +2,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -21,7 +19,6 @@ const styles = (kickerColor: string): SerializedStyles => {
 		justify-content: space-between;
 		svg {
 			flex: 0 0 1.875rem;
-			padding: 0.25rem;
 			padding-top: 0.375rem;
 			width: 1.875rem;
 			height: 1.875rem;
@@ -36,15 +33,9 @@ const styles = (kickerColor: string): SerializedStyles => {
 		}
 
 		padding-bottom: ${remSpace[4]};
-		padding-right: ${remSpace[1]};
 		margin: 0;
-		box-sizing: border-box;
 
 		${articleWidthStyles}
-
-		${from.phablet} {
-			border-right: 1px solid ${border.secondary};
-		}
 	`;
 };
 
