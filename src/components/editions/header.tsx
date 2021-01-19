@@ -3,7 +3,6 @@
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { culture, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
