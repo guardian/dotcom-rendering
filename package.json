@@ -268,7 +268,8 @@
             "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
             "^@root(.*)$": "<rootDir>$1",
             "^@frontend(.*)$": "<rootDir>/src$1",
-            "^@guardian/src-foundations/(.*)(?<!cjs)$": "@guardian/src-foundations/$1/cjs"
+            "^@guardian/src-foundations/(.*)(?<!cjs)$": "@guardian/src-foundations/$1/cjs",
+            "^./loadable-manifest-browser.json": "<rootDir>/dist/loadable-manifest-browser.json"
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "transformIgnorePatterns": [

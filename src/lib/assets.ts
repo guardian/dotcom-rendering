@@ -12,8 +12,10 @@ try {
 	assetHash = require('./manifest.json');
 	// eslint-disable-next-line import/no-unresolved
 	assetHashLegacy = require('./manifest.legacy.json');
+	console.log('Getting loadable manifest');
 	// eslint-disable-next-line import/no-unresolved
 	loadableManifest = require('./loadable-manifest-browser.json');
+	console.log(loadableManifest);
 } catch (e) {
 	// do nothing
 }
