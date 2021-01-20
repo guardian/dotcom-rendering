@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/core';
 import { remSpace, text } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
@@ -13,6 +14,12 @@ import { articleWidthStyles } from './styles';
 
 const styles = css`
 	${body.medium({ lineHeight: 'tight' })}
+	font-size: 1.125rem;
+
+	${from.mobileMedium} {
+		font-size: 1.25rem;
+	}
+
 	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
 
