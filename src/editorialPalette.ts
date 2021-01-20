@@ -42,6 +42,10 @@ const textHeadlinePrimary = (format: Format): Colour => {
 		return neutral[100];
 	}
 
+	if (format.design === Design.Review) {
+		return culture[300];
+	}
+
 	if (format.design === Design.Feature) {
 		switch (format.theme) {
 			case Pillar.Opinion:

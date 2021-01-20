@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
-import { border, remSpace, text } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { remSpace, text } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
@@ -13,21 +12,15 @@ import { articleWidthStyles } from './styles';
 // ----- Component ----- //
 
 const styles = css`
-	box-sizing: border-box;
-	padding-bottom: ${remSpace[6]};
 	${body.medium({ lineHeight: 'tight' })}
+	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
-	padding-right: ${remSpace[1]};
 
 	${articleWidthStyles}
 
-	${from.phablet} {
-		border-right: 1px solid ${border.secondary};
-	}
-
 	p,
 	ul {
-		padding: ${remSpace[2]} ${remSpace[1]} 0 0;
+		padding-top: ${remSpace[2]};
 		margin: 0;
 	}
 

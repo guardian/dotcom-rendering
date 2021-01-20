@@ -3,7 +3,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { border, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { titlepiece } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -24,15 +23,11 @@ const styles = (item: Item): SerializedStyles => {
 		${titlepiece.small()}
 		color: ${kicker};
 		font-size: 1.0625rem;
-		padding: ${remSpace[1]} ${remSpace[1]} ${remSpace[2]} 0;
+		padding: ${remSpace[1]} 0 ${remSpace[2]};
 		border-top: 1px solid ${border.secondary};
 		box-sizing: border-box;
 
 		${articleWidthStyles}
-
-		${from.phablet} {
-			border-right: 1px solid ${border.secondary};
-		}
 	`;
 };
 
