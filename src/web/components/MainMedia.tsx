@@ -5,8 +5,11 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
+import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
+
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
@@ -54,7 +57,7 @@ const immersiveWrapper = css`
 
 function renderElement(
 	display: Display,
-	designType: DesignType,
+	design: Design,
 	element: CAPIElement,
 	pillar: CAPIPillar,
 	i: number,
@@ -68,7 +71,7 @@ function renderElement(
 			return (
 				<ImageComponent
 					display={display}
-					designType={designType}
+					design={design}
 					key={i}
 					element={element}
 					pillar={pillar}
@@ -87,7 +90,7 @@ function renderElement(
 				>
 					<YoutubeBlockComponent
 						display={display}
-						designType={designType}
+						design={design}
 						key={i}
 						pillar={pillar}
 						hideCaption={hideCaption}
@@ -106,6 +109,31 @@ function renderElement(
 					/>
 				</div>
 			);
+		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+			return (
+				<YoutubeEmbedBlockComponent
+					pillar={pillar}
+					embedUrl={element.embedUrl}
+					height={element.height}
+					width={element.width}
+					caption={element.caption}
+					credit={element.credit}
+					title={element.title}
+					display={display}
+					design={design}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+			return (
+				<GuVideoBlockComponent
+					html={element.html}
+					pillar={pillar}
+					design={design}
+					display={display}
+					credit={element.source}
+					caption={element.caption}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			return (
 				<EmbedBlockComponent html={element.html} alt={element.alt} />
@@ -121,7 +149,7 @@ function renderElement(
 
 export const MainMedia: React.FC<{
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	elements: CAPIElement[];
 	pillar: CAPIPillar;
 	hideCaption?: boolean;
@@ -130,7 +158,7 @@ export const MainMedia: React.FC<{
 	host?: string;
 }> = ({
 	display,
-	designType,
+	design,
 	elements,
 	pillar,
 	hideCaption,
@@ -147,7 +175,7 @@ export const MainMedia: React.FC<{
 		{elements.map((element, i) =>
 			renderElement(
 				display,
-				designType,
+				design,
 				element,
 				pillar,
 				i,

@@ -85,7 +85,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 					<div className={headlineWrapperStyles}>
 						{trail.isLiveBlog ? (
 							<LinkHeadline
-								designType={trail.designType}
+								design={trail.design}
 								headlineText={trail.headline}
 								pillar={trail.pillar}
 								size="small"
@@ -99,7 +99,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						) : (
 							<LinkHeadline
-								designType={trail.designType}
+								design={trail.design}
 								headlineText={trail.headline}
 								pillar={trail.pillar}
 								size="small"

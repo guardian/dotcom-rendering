@@ -5,7 +5,7 @@ import { css, cx } from 'emotion';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 
 type Props = {
 	display: Display;

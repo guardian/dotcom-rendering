@@ -17,7 +17,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { toTypesPillar } from '@root/src/lib/format';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 
 type Props = {
 	discussionApiUrl: string;

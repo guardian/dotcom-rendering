@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -88,7 +89,7 @@ export const SecondTierItem = ({
 		isLiveBlog,
 		avatarUrl,
 		image,
-		designType,
+		design,
 		byline,
 		showByline,
 		pillar,
@@ -97,7 +98,7 @@ export const SecondTierItem = ({
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pilarToUse = designType === 'Comment' ? 'opinion' : pillar;
+	const pilarToUse = design === Design.Comment ? 'opinion' : pillar;
 
 	return (
 		<div className={itemStyles(showRightBorder)}>
@@ -111,7 +112,7 @@ export const SecondTierItem = ({
 						<div className={titleStyles}>{title}</div>
 						{isLiveBlog ? (
 							<LinkHeadline
-								designType={designType}
+								design={design}
 								headlineText={headlineText}
 								pillar={pilarToUse}
 								size="small"
@@ -119,7 +120,7 @@ export const SecondTierItem = ({
 							/>
 						) : (
 							<LinkHeadline
-								designType={designType}
+								design={design}
 								headlineText={headlineText}
 								pillar={pilarToUse}
 								size="small"

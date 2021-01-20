@@ -11,14 +11,14 @@ import { record } from '@root/src/web/browser/ophan/ophan';
 import { toTypesPillar } from '@root/src/lib/format';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	id: string;
 	mediaTitle?: string;
 	altText?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	assetId: string;
 	channelId: string;
 	expired: boolean;
@@ -78,7 +78,7 @@ export const YoutubeBlockComponent = ({
 	mediaTitle,
 	altText,
 	display,
-	designType,
+	design,
 	pillar,
 	hideCaption,
 	overrideImage,
@@ -129,7 +129,7 @@ export const YoutubeBlockComponent = ({
 				{!hideCaption && (
 					<Caption
 						display={display}
-						designType={designType}
+						design={design}
 						captionText={mediaTitle || ''}
 						pillar={pillar}
 						displayCredit={false}
@@ -201,7 +201,7 @@ export const YoutubeBlockComponent = ({
 			{!hideCaption && (
 				<Caption
 					display={display}
-					designType={designType}
+					design={design}
 					captionText={mediaTitle || ''}
 					pillar={pillar}
 					displayCredit={false}

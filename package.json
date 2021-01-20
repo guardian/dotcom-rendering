@@ -39,11 +39,11 @@
         "@emotion/core": "^10.0.35",
         "@guardian/ab-core": "^2.0.0",
         "@guardian/ab-react": "^2.0.1",
-        "@guardian/atoms-rendering": "^8.0.0",
+        "@guardian/atoms-rendering": "^9.1.0",
         "@guardian/automat-client": "^0.2.16",
-        "@guardian/braze-components": "^0.0.17",
-        "@guardian/consent-management-platform": "^6.7.4",
-        "@guardian/discussion-rendering": "^4.5.0",
+        "@guardian/braze-components": "^0.0.19",
+        "@guardian/consent-management-platform": "^6.11.2",
+        "@guardian/discussion-rendering": "^5.0.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^2.7.1",
         "@guardian/src-checkbox": "^2.7.1",
@@ -55,15 +55,16 @@
         "@guardian/src-svgs": "^2.7.1",
         "@guardian/src-text-area": "^2.7.1",
         "@guardian/src-text-input": "^2.7.1",
-        "@guardian/types": "^0.5.2",
+        "@guardian/types": "^2.0.0",
         "@hkdobrev/run-if-changed": "^0.3.1",
-        "@sentry/browser": "^5.27.2",
+        "@sentry/browser": "^5.30.0",
+        "@sentry/integrations": "^5.30.0",
         "@types/ajv": "^1.0.0",
         "@types/lodash.debounce": "^4.0.6",
         "@types/lodash.escape": "^4.0.6",
-        "@types/node-fetch": "^2.5.7",
+        "@types/node-fetch": "^2.5.8",
         "@types/sanitize-html": "^1.18.3",
-        "@typescript-eslint/eslint-plugin-tslint": "^4.1.1",
+        "@typescript-eslint/eslint-plugin-tslint": "^4.13.0",
         "ajv": "^6.12.6",
         "aws-sdk": "^2.804.0",
         "babel-plugin-prismjs": "^2.0.1",
@@ -188,7 +189,7 @@
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
         "fetch-mock": "^9.10.7",
         "friendly-errors-webpack-plugin": "^1.7.0",
-        "husky": "^4.3.0",
+        "husky": "^4.3.8",
         "jest": "^24.8.0",
         "jest-dom": "^2.1.0",
         "jest-environment-jsdom-sixteen": "^1.0.3",
@@ -211,7 +212,7 @@
         "stylelint-processor-styled-components": "^1.10.0",
         "svg-loader": "^0.0.2",
         "ts-jest": "^24.3.0",
-        "ts-loader": "^8.0.12",
+        "ts-loader": "^8.0.14",
         "tslint": "^5.20.1",
         "tslint-config-airbnb": "^5.11.2",
         "tslint-config-prettier": "^1.18.0",
@@ -225,6 +226,7 @@
         "webpack-bundle-analyzer": "^4.1.0",
         "webpack-cli": "^3.1.1",
         "webpack-dev-middleware": "^3.7.2",
+        "webpack-filter-warnings-plugin": "^1.2.1",
         "webpack-hot-middleware": "^2.22.0",
         "webpack-hot-server-middleware": "^0.6.1",
         "webpack-merge": "^4.1.2",
@@ -232,7 +234,7 @@
         "webpack-sources": "^1.1.0"
     },
     "jest": {
-        "preset": "ts-jest/presets/js-with-babel",
+        "preset": "ts-jest/presets/js-with-ts",
         "testEnvironment": "jest-environment-jsdom-sixteen",
         "moduleFileExtensions": [
             "ts",
@@ -245,7 +247,7 @@
         "globals": {
             "ts-jest": {
                 "diagnostics": false,
-                "tsConfigFile": "tsconfig.json"
+                "tsConfigFile": "tsconfig.test.json"
             }
         },
         "testMatch": [

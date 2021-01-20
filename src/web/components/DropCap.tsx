@@ -1,17 +1,20 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { opinion } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	letter: string;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 };
 
-const outerStyles = (pillar: CAPIPillar, designType: DesignType) => {
+const outerStyles = (pillar: CAPIPillar, design: Design) => {
 	const baseStyles = css`
 		${headline.large({
 			fontWeight: 'light',
@@ -27,27 +30,26 @@ const outerStyles = (pillar: CAPIPillar, designType: DesignType) => {
         opinion.dark is much darker so it is forced to keep with similar colour
         tones used on the site(that's my understanding anyway!)
     */
-	switch (designType) {
-		case 'GuardianView':
-		case 'Comment':
+	switch (design) {
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseStyles};
 				color: ${pillar === 'opinion'
 					? opinion[400]
 					: pillarPalette[pillar].dark};
 			`;
-		case 'PhotoEssay':
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+		case Design.PhotoEssay:
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
@@ -56,7 +58,7 @@ const outerStyles = (pillar: CAPIPillar, designType: DesignType) => {
 	}
 };
 
-const innerStyles = (designType: DesignType) => {
+const innerStyles = (design: Design) => {
 	const baseStyles = css`
 		${headline.large({ fontWeight: 'bold' })}
 		font-size: 118px;
@@ -66,25 +68,24 @@ const innerStyles = (designType: DesignType) => {
 		margin-right: ${space[1]}px;
 	`;
 
-	switch (designType) {
-		case 'GuardianView':
-		case 'Comment':
+	switch (design) {
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseStyles};
 				font-weight: 200;
 			`;
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
@@ -93,8 +94,8 @@ const innerStyles = (designType: DesignType) => {
 	}
 };
 
-export const DropCap = ({ letter, pillar, designType }: Props) => (
-	<span className={outerStyles(pillar, designType)}>
-		<span className={innerStyles(designType)}>{letter}</span>
+export const DropCap = ({ letter, pillar, design }: Props) => (
+	<span className={outerStyles(pillar, design)}>
+		<span className={innerStyles(design)}>{letter}</span>
 	</span>
 );

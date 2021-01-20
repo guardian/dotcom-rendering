@@ -1,11 +1,11 @@
 import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	element: ImageBlockElement;
 	pillar: CAPIPillar;
 	hideCaption?: boolean;
@@ -14,7 +14,7 @@ type Props = {
 
 export const ImageBlockComponent = ({
 	display,
-	designType,
+	design,
 	element,
 	pillar,
 	hideCaption,
@@ -24,7 +24,7 @@ export const ImageBlockComponent = ({
 	return (
 		<ImageComponent
 			display={display}
-			designType={designType}
+			design={design}
 			element={element}
 			pillar={pillar}
 			hideCaption={hideCaption}

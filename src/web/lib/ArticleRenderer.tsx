@@ -45,7 +45,7 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { toTypesPillar } from '@root/src/lib/format';
 
@@ -58,10 +58,10 @@ export const ArticleRenderer: React.FC<{
 	display: Display;
 	elements: CAPIElement[];
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ display, elements, pillar, designType, adTargeting, host }) => {
+}> = ({ display, elements, pillar, design, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -97,7 +97,7 @@ export const ArticleRenderer: React.FC<{
 						<CaptionBlockComponent
 							key={i}
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							captionText={element.captionText}
 							padCaption={element.padCaption}
@@ -232,7 +232,7 @@ export const ArticleRenderer: React.FC<{
 							<GuVideoBlockComponent
 								html={element.html}
 								pillar={pillar}
-								designType={designType}
+								design={design}
 								display={display}
 								credit={element.source}
 								caption={element.caption}
@@ -248,7 +248,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<ImageBlockComponent
 								display={display}
-								designType={designType}
+								design={design}
 								key={i}
 								element={element}
 								pillar={pillar}
@@ -288,7 +288,7 @@ export const ArticleRenderer: React.FC<{
 								credit={element.source}
 								title={element.title}
 								display={display}
-								designType={designType}
+								design={design}
 							/>
 						</Figure>
 					);
@@ -296,7 +296,7 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MultiImageBlockComponent
-								designType={designType}
+								design={design}
 								key={i}
 								images={element.images}
 								caption={element.caption}
@@ -326,7 +326,7 @@ export const ArticleRenderer: React.FC<{
 							key={i}
 							html={element.html}
 							pillar={pillar}
-							designType={designType}
+							design={design}
 							attribution={element.attribution}
 							role={element.role}
 						/>
@@ -374,7 +374,7 @@ export const ArticleRenderer: React.FC<{
 								title={element.title}
 								pillar={pillar}
 								caption={element.caption}
-								designType={designType}
+								design={design}
 								display={display}
 								credit="Spotify"
 							/>
@@ -399,7 +399,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								pillar={pillar}
 								display={display}
-								designType={designType}
+								design={design}
 								forceDropCap={element.dropCap}
 							/>
 						</>
@@ -420,7 +420,7 @@ export const ArticleRenderer: React.FC<{
 								width={element.width}
 								caption={element.caption}
 								display={display}
-								designType={designType}
+								design={design}
 								credit={element.caption}
 								title={element.caption}
 							/>
@@ -438,7 +438,7 @@ export const ArticleRenderer: React.FC<{
 								credit={element.credit}
 								title={element.title}
 								display={display}
-								designType={designType}
+								design={design}
 							/>
 						</Figure>
 					);
@@ -454,7 +454,7 @@ export const ArticleRenderer: React.FC<{
 								credit={element.credit}
 								title={element.title}
 								display={display}
-								designType={designType}
+								design={design}
 							/>
 						</Figure>
 					);
@@ -467,7 +467,7 @@ export const ArticleRenderer: React.FC<{
 						>
 							<YoutubeBlockComponent
 								display={display}
-								designType={designType}
+								design={design}
 								key={i}
 								pillar={pillar}
 								hideCaption={false}

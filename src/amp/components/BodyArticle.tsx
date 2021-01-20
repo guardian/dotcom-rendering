@@ -1,12 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types';
+
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { designTypeDefault } from '@root/src/lib/designTypes';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -34,20 +35,19 @@ const bulletStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const body = (pillar: CAPIPillar, designType: DesignType) => {
-	const defaultStyles: DesignTypesObj = designTypeDefault(
-		palette.neutral[100],
-	);
+const decideBackground = (design: Design, pillar: CAPIPillar): string => {
+	if (pillar === 'labs') return palette.neutral[86];
+	switch (design) {
+		case Design.Comment:
+			return palette.opinion[800];
+		default:
+			return palette.neutral[100];
+	}
+};
 
-	// Extend defaultStyles with custom styles for some designTypes
-	const designTypeStyle: DesignTypesObj = {
-		...defaultStyles,
-		Comment: palette.opinion[800],
-		AdvertisementFeature: palette.neutral[86],
-	};
-
+const body = (pillar: CAPIPillar, design: Design) => {
 	return css`
-		background-color: ${designTypeStyle[designType]};
+		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}
 	`;
 };
@@ -64,10 +64,10 @@ const adStyle = css`
 
 export const Body: React.FC<{
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ pillar, designType, data, config }) => {
+}> = ({ pillar, design, data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting = buildAdTargeting(config);
 	const elementsWithoutAds = Elements(
@@ -105,9 +105,9 @@ export const Body: React.FC<{
 	);
 
 	return (
-		<InnerContainer className={body(pillar, designType)}>
+		<InnerContainer className={body(pillar, design)}>
 			<TopMeta
-				designType={designType}
+				design={design}
 				pillar={pillar}
 				data={data}
 				adTargeting={adTargeting}

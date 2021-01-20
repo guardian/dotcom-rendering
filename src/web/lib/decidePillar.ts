@@ -1,11 +1,13 @@
+import { Design } from '@guardian/types';
+
 export const decidePillar = ({
 	pillar,
 	design,
 }: {
 	pillar: CAPIPillar;
-	design: DesignType;
+	design: Design;
 }): CAPIPillar => {
 	// We override the pillar to be opinion on Comment news pieces
-	if (design === 'Comment' && pillar === 'news') return 'opinion';
+	if (design === Design.Comment && pillar === 'news') return 'opinion';
 	return pillar;
 };

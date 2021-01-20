@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const responsiveAspectRatio = (height: number, width: number) => css`
 	/* https://css-tricks.com/aspect-ratio-boxes/ */
@@ -24,7 +24,7 @@ export const VimeoBlockComponent: React.FC<{
 	credit?: string;
 	title?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 }> = ({
 	embedUrl,
 	caption,
@@ -33,7 +33,7 @@ export const VimeoBlockComponent: React.FC<{
 	width,
 	height,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
@@ -65,7 +65,7 @@ export const VimeoBlockComponent: React.FC<{
 			{caption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					display={display}
 					credit={credit}
