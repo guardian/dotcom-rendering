@@ -2087,20 +2087,22 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-8.0.0.tgz#387336a8ec7cb7dcd404876f5cd4081658f4962e"
-  integrity sha512-MdppqWF9djQu4U1LeYktP7T1FV+1Ijt+IQEDL1moq8WXbUAEaujQJBs4jj2/J2uHlghcBg2YRaVBZH2OePRfvA==
+"@guardian/atoms-rendering@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-9.1.0.tgz#5bbccfac53bbd201ec600209fa5f4694ebd0103e"
+  integrity sha512-Qy8mYEzHSqweMvtKgtB3hjhzkbCEeRDFd32d2SBXygs33UT5STP4kvVAfd5oo3Axd7RKKQQFF+IYUv2O+/vB1g==
+  dependencies:
+    youtube-player "^5.5.2"
 
 "@guardian/automat-client@^0.2.16":
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.17.tgz#178e4740ab722873b9d0e6dd9d836f1e153d5ada"
-  integrity sha512-xB+cAwaM/iSJwyC/rM1cjEkFX5Gx4JlFNS9HghFqHJb6u+k7B9oFdwQS6GhH7evZxbh2F3klTVpHT6lUD+vCUg==
+"@guardian/braze-components@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.19.tgz#edca8e113c09e556c492c425a12b04724e13912b"
+  integrity sha512-fDWFc7YSeS2CEcH7ZiZO6RKwclFvB5uy+aAvKER4rFGqRwaK2eBcF8i7SMHDbWNjfafpdrTu9Rdug7nxnj1kbg==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
@@ -2113,10 +2115,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.1.tgz#087a95665e53e23ad5a25c07238590c1c74ba453"
   integrity sha512-GJpjZ2fv+tg5CODhoaBVqFoh6oABqpQb4HR1Dju7ogz8zcsvBUEnATGkH0U47sq0tuzo95h1XnWXcjwb/Z2OpQ==
 
-"@guardian/discussion-rendering@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-4.5.0.tgz#eb489b1d1551e73c2bf1c5b0b54bfa39b10789d8"
-  integrity sha512-I1qbvb5JHkq/18k73P57zECLHBe5yI5L7VsX/Yqb7CT2ZFt2mG7rGjy04zjbd+5hLqcpeRQNs0KFMveoazM8uQ==
+"@guardian/discussion-rendering@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-5.0.0.tgz#ad1906e92d94c9ee8530a395f56b708e2620c45c"
+  integrity sha512-wCU2fjp4B8yfy/jbxcBcubdGWfzY2L0I6h/0LL3NBPnSzVj/LUcp3I1wgX1aJSigvxNF40NfoCdnhcRpBcThMw==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -2235,12 +2237,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-0.5.2.tgz#edde87dde496554cbcd32cb1bffe2baada591926"
-  integrity sha512-fQ5+cyQQGhQ4qHuzMvaGLsHNxwz82dlb3nYKEahrhg5K3Hyf4jno0pPTxUVMM80uNL9xE8g7843LpkKp6YpE/w==
-  dependencies:
-    typescript "^3.8.3"
+"@guardian/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-2.0.0.tgz#9567ee7638bae058799cb97b48a4078b48033d1c"
+  integrity sha512-0jR2FgTQVG9gO2a1IZwxFWi6UKxteBWPob5+zErbOrznN0u4Mf+9KgigMaNMWpZvkEdDhPAQl7ot5f6wW0wU5A==
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"
@@ -18184,7 +18184,7 @@ typescript-json-schema@^0.43.0:
     typescript "~4.0.2"
     yargs "^15.4.1"
 
-typescript@^3.8.3, typescript@^3.9.3, typescript@^3.9.7:
+typescript@^3.9.3, typescript@^3.9.7:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
@@ -18825,6 +18825,11 @@ webpack-dev-middleware@^3.7.0, webpack-dev-middleware@^3.7.2:
     mkdirp "^0.5.1"
     range-parser "^1.2.1"
     webpack-log "^2.0.0"
+
+webpack-filter-warnings-plugin@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/webpack-filter-warnings-plugin/-/webpack-filter-warnings-plugin-1.2.1.tgz#dc61521cf4f9b4a336fbc89108a75ae1da951cdb"
+  integrity sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==
 
 webpack-hot-middleware@^2.22.0, webpack-hot-middleware@^2.25.0:
   version "2.25.0"

@@ -1,16 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { css, cx } from 'emotion';
+import libDebounce from 'lodash/debounce';
+
+import { Design } from '@guardian/types';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
-import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import libDebounce from 'lodash/debounce';
+
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
+
 import { CardAge } from '../../Card/components/CardAge';
 import { Kicker } from '../../Kicker';
 import { headlineBackgroundColour, headlineColour } from './cardColours';
@@ -117,10 +121,7 @@ const cardImageStyle = css`
 	width: 258px;
 `;
 
-const headlineWrapperStyle = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-) => css`
+const headlineWrapperStyle = (design: Design, pillar: CAPIPillar) => css`
 	width: 90%;
 	min-height: 107px;
 
@@ -135,7 +136,7 @@ const headlineWrapperStyle = (
 	flex-direction: column;
 	justify-content: space-between;
 
-	${headlineBackgroundColour(designType, pillar)}
+	${headlineBackgroundColour(design, pillar)}
 `;
 
 /* const headlineWrapperFirstStyle = css`
@@ -144,13 +145,13 @@ const headlineWrapperStyle = (
     color: white;
 `;
  */
-const headlineStyle = (designType: DesignType, pillar: CAPIPillar) => css`
+const headlineStyle = (design: Design, pillar: CAPIPillar) => css`
 	${headline.xxxsmall()};
 	${from.desktop} {
 		${headline.xxsmall()};
 	}
 
-	${headlineColour(designType, pillar)};
+	${headlineColour(design, pillar)};
 
 	display: block;
 	padding: ${space[1]}px;
@@ -280,7 +281,7 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
-	const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
+	const kickerText = trail.design === Design.Live ? 'Live' : trail.kickerText;
 
 	return (
 		<a
@@ -294,14 +295,12 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
 				alt=""
 				role="presentation"
 			/>
-			<div
-				className={headlineWrapperStyle(trail.designType, trail.pillar)}
-			>
-				<h4 className={headlineStyle(trail.designType, trail.pillar)}>
+			<div className={headlineWrapperStyle(trail.design, trail.pillar)}>
+				<h4 className={headlineStyle(trail.design, trail.pillar)}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							designType={trail.designType}
+							design={trail.design}
 							pillar={trail.pillar}
 							showPulsingDot={trail.isLiveBlog}
 							inCard={true}
@@ -313,7 +312,7 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
 					webPublicationDate={trail.webPublicationDate}
 					showClock={true}
 					pillar={trail.pillar}
-					designType={trail.designType}
+					design={trail.design}
 				/>
 			</div>
 		</a>

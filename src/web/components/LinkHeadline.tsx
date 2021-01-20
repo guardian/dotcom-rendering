@@ -52,7 +52,7 @@ const visitedStyles = (visitedColour: string) => css`
 `;
 
 export const LinkHeadline = ({
-	designType,
+	design,
 	headlineText,
 	pillar,
 	showUnderline = false,
@@ -68,7 +68,7 @@ export const LinkHeadline = ({
 		{kickerText && (
 			<Kicker
 				text={kickerText}
-				designType={designType}
+				design={design}
 				pillar={pillar}
 				showPulsingDot={showPulsingDot}
 				showSlash={showSlash}
@@ -98,7 +98,7 @@ export const LinkHeadline = ({
 				{byline && (
 					<Byline
 						text={byline}
-						designType={designType}
+						design={design}
 						pillar={pillar}
 						size={size}
 					/>
@@ -111,7 +111,7 @@ export const LinkHeadline = ({
 				{byline && (
 					<Byline
 						text={byline}
-						designType={designType}
+						design={design}
 						pillar={pillar}
 						size={size}
 					/>

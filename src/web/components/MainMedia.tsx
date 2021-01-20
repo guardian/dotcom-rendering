@@ -2,13 +2,13 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types/Format';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { Display, Design } from '@guardian/types';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
@@ -57,7 +57,7 @@ const immersiveWrapper = css`
 
 function renderElement(
 	display: Display,
-	designType: DesignType,
+	design: Design,
 	element: CAPIElement,
 	pillar: CAPIPillar,
 	i: number,
@@ -71,7 +71,7 @@ function renderElement(
 			return (
 				<ImageComponent
 					display={display}
-					designType={designType}
+					design={design}
 					key={i}
 					element={element}
 					pillar={pillar}
@@ -90,7 +90,7 @@ function renderElement(
 				>
 					<YoutubeBlockComponent
 						display={display}
-						designType={designType}
+						design={design}
 						key={i}
 						pillar={pillar}
 						hideCaption={hideCaption}
@@ -120,7 +120,7 @@ function renderElement(
 					credit={element.credit}
 					title={element.title}
 					display={display}
-					designType={designType}
+					design={design}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
@@ -128,7 +128,7 @@ function renderElement(
 				<GuVideoBlockComponent
 					html={element.html}
 					pillar={pillar}
-					designType={designType}
+					design={design}
 					display={display}
 					credit={element.source}
 					caption={element.caption}
@@ -149,7 +149,7 @@ function renderElement(
 
 export const MainMedia: React.FC<{
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	elements: CAPIElement[];
 	pillar: CAPIPillar;
 	hideCaption?: boolean;
@@ -158,7 +158,7 @@ export const MainMedia: React.FC<{
 	host?: string;
 }> = ({
 	display,
-	designType,
+	design,
 	elements,
 	pillar,
 	hideCaption,
@@ -175,7 +175,7 @@ export const MainMedia: React.FC<{
 		{elements.map((element, i) =>
 			renderElement(
 				display,
-				designType,
+				design,
 				element,
 				pillar,
 				i,

@@ -6,7 +6,7 @@ import {
 
 import { Section } from '@frontend/web/components/Section';
 
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 import { nav } from './Nav.mock';
 import { Nav } from './Nav';
 

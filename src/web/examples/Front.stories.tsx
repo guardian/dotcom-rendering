@@ -12,7 +12,7 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -88,7 +88,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="news"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[0]}
 						headlineSize="large"
 						kickerText={kickers[4]}
@@ -107,7 +107,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="news"
-						designType="Article"
+						design={Design.Article}
 						headlineText="Munroe Bergdorf to advise Labour on LGBT issues"
 						headlineSize="medium"
 						kickerText={kickers[0]}
@@ -133,7 +133,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="culture"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[2]}
 						kickerText={kickers[1]}
 						imageUrl={images[3]}
@@ -152,7 +152,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="opinion"
-								designType="GuardianView"
+								design={Design.GuardianView}
 								headlineText={headlines[3]}
 								kickerText="Editorial"
 								imageUrl={images[6]}
@@ -164,7 +164,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="news"
-								designType="Article"
+								design={Design.Article}
 								headlineText={headlines[4]}
 								headlineSize="small"
 							/>
@@ -182,7 +182,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="sport"
-								designType="Article"
+								design={Design.Article}
 								headlineText={headlines[6]}
 								headlineSize="small"
 								kickerText={kickers[3]}
@@ -193,7 +193,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="news"
-								designType="Article"
+								design={Design.Article}
 								headlineText={headlines[7]}
 								headlineSize="small"
 								kickerText={kickers[1]}
@@ -203,7 +203,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="news"
-								designType="Article"
+								design={Design.Article}
 								headlineText={headlines[8]}
 								headlineSize="small"
 								kickerText={kickers[0]}
@@ -213,7 +213,7 @@ export const Front = () => (
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								pillar="news"
-								designType="Article"
+								design={Design.Article}
 								headlineText={headlines[9]}
 								headlineSize="small"
 								kickerText={kickers[2]}
@@ -240,7 +240,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="news"
-						designType="Live"
+						design={Design.Live}
 						headlineText={headlines[7]}
 						headlineSize="medium"
 						kickerText={kickers[3]}
@@ -257,7 +257,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="sport"
-						designType="Live"
+						design={Design.Live}
 						headlineText={headlines[8]}
 						headlineSize="medium"
 						kickerText={kickers[0]}
@@ -275,7 +275,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="sport"
-						designType="Comment"
+						design={Design.Comment}
 						headlineText={headlines[8]}
 						headlineSize="medium"
 						kickerText={kickers[1]}
@@ -290,7 +290,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="news"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[9]}
 						headlineSize="small"
 						kickerText={kickers[0]}
@@ -305,7 +305,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="sport"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[10]}
 						headlineSize="small"
 						kickerText={kickers[2]}
@@ -320,7 +320,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="culture"
-						designType="Interview"
+						design={Design.Interview}
 						headlineText={headlines[1]}
 						headlineSize="small"
 						kickerText={kickers[1]}
@@ -335,7 +335,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="lifestyle"
-						designType="Feature"
+						design={Design.Feature}
 						headlineText={headlines[3]}
 						headlineSize="small"
 						kickerText={kickers[0]}
@@ -356,7 +356,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="opinion"
-						designType="Comment"
+						design={Design.Comment}
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						showQuotes={true}
@@ -379,7 +379,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="opinion"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						webPublicationDate={'2019-11-11T09={45={30.000Z'}
@@ -397,7 +397,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						pillar="news"
-						designType="Article"
+						design={Design.Article}
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						kickerText={kickers[0]}
@@ -415,7 +415,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						designType="Article"
+						design={Design.Article}
 						pillar="news"
 						headlineText={headlines[11]}
 						headlineSize="medium"
@@ -442,7 +442,7 @@ export const Front = () => (
 				<Card
 					linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 					pillar="sport"
-					designType="Media"
+					design={Design.Media}
 					headlineText={headlines[11]}
 					headlineSize="large"
 					kickerText={kickers[1]}

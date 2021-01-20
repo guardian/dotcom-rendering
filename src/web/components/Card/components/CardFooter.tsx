@@ -1,10 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 
 type Props = {
-	designType: DesignType;
+	design: Design;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -28,13 +29,8 @@ const linesWrapperStyles = css`
 	margin-top: 5px;
 `;
 
-export const CardFooter = ({
-	designType,
-	age,
-	mediaMeta,
-	commentCount,
-}: Props) => {
-	if (designType === 'Comment' || designType === 'GuardianView') {
+export const CardFooter = ({ design, age, mediaMeta, commentCount }: Props) => {
+	if (design === Design.Comment || design === Design.GuardianView) {
 		return (
 			<footer className={spaceBetween}>
 				{age}
@@ -46,7 +42,7 @@ export const CardFooter = ({
 		);
 	}
 
-	if (designType === 'Media') {
+	if (design === Design.Media) {
 		return (
 			<footer className={spaceBetween}>
 				{mediaMeta}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { PulsingDot } from '@root/src/web/components/PulsingDot';
+import { Design } from '@guardian/types';
 
+import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { pillarPalette } from '@frontend/lib/pillars';
 
@@ -20,34 +21,29 @@ const slashStyles = css`
 	}
 `;
 
-const decideColour = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-	inCard?: boolean,
-) => {
-	switch (designType) {
-		case 'Live':
+const decideColour = (design: Design, pillar: CAPIPillar, inCard?: boolean) => {
+	switch (design) {
+		case Design.Live:
 			// TODO: We need this colour in source foundation
 			return inCard
 				? decidePillarLight(pillar)
 				: pillarPalette[pillar].main;
-		case 'Media':
+		case Design.Media:
 			// On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
 			return inCard && pillar === 'news'
 				? pillarPalette[pillar].bright
 				: pillarPalette[pillar].main;
-		case 'Feature':
-		case 'PhotoEssay':
-		case 'Interview':
-		case 'Analysis':
-		case 'Article':
-		case 'Review':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Comment':
+		case Design.Feature:
+		case Design.PhotoEssay:
+		case Design.Interview:
+		case Design.Analysis:
+		case Design.Article:
+		case Design.Review:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.Comment:
 		default:
 			return pillarPalette[pillar].main;
 	}
@@ -55,13 +51,13 @@ const decideColour = (
 
 export const Kicker = ({
 	text,
-	designType,
+	design,
 	pillar,
 	showPulsingDot,
 	showSlash = true,
 	inCard,
 }: KickerType) => {
-	const kickerColour = decideColour(designType, pillar, inCard);
+	const kickerColour = decideColour(design, pillar, inCard);
 	return (
 		<span className={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}

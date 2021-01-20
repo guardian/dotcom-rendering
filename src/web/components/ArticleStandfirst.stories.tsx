@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { Section } from './Section';
 
 import { ArticleStandfirst } from './ArticleStandfirst';
@@ -23,7 +23,7 @@ export const defaultStory = () => {
 				<ArticleContainer>
 					<ArticleStandfirst
 						display={Display.Standard}
-						designType="Article"
+						design={Design.Article}
 						standfirst="This the default standfirst text. Aut explicabo officia delectus omnis repellendus voluptas"
 						pillar="news"
 					/>

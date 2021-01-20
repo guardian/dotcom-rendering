@@ -1,10 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { Design } from '@guardian/types';
+import { headline } from '@guardian/src-foundations/typography';
+import { neutral, text } from '@guardian/src-foundations/palette';
+import { from, until } from '@guardian/src-foundations/mq';
+
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const partiallyLeft = css`
@@ -99,8 +102,8 @@ const fullyInline = css`
 	display: block;
 `;
 
-function decidePosition(role: string, designType: DesignType) {
-	if (designType === 'PhotoEssay') {
+function decidePosition(role: string, design: Design) {
+	if (design === Design.PhotoEssay) {
 		return role === 'supporting' ? fullyLeft : fullyInline;
 	}
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
@@ -120,17 +123,17 @@ function decideFont(role: string) {
 export const PullQuoteBlockComponent: React.FC<{
 	html: string;
 	pillar: CAPIPillar;
-	designType: DesignType;
+	design: Design;
 	role: string;
 	attribution?: string;
-}> = ({ html, pillar, designType, attribution, role }) => {
-	switch (designType) {
-		case 'GuardianView':
-		case 'Comment':
+}> = ({ html, pillar, design, attribution, role }) => {
+	switch (design) {
+		case Design.GuardianView:
+		case Design.Comment:
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'light' })};
 							line-height: 25px;
@@ -170,11 +173,11 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case 'PhotoEssay':
+		case Design.PhotoEssay:
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						decideFont(role),
 						css`
 							color: ${pillarPalette[pillar].main};
@@ -209,22 +212,21 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case 'Feature':
-		case 'Recipe':
-		case 'Review':
-		case 'Media':
-		case 'MatchReport':
-		case 'AdvertisementFeature':
-		case 'Quiz':
-		case 'Article':
-		case 'Live':
-		case 'Analysis':
-		case 'Interview':
+		case Design.Feature:
+		case Design.Recipe:
+		case Design.Review:
+		case Design.Media:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.Article:
+		case Design.Live:
+		case Design.Analysis:
+		case Design.Interview:
 		default:
 			return (
 				<aside
 					className={cx(
-						decidePosition(role, designType),
+						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'bold' })};
 							line-height: 25px;

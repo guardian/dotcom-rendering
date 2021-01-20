@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
 	pillar: CAPIPillar;
@@ -14,7 +14,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 	credit?: string;
 	title?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 }> = ({
 	embedUrl,
 	caption,
@@ -23,7 +23,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 	width,
 	height,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
@@ -55,7 +55,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 			{caption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					display={display}
 					credit={credit}

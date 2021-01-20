@@ -15,7 +15,7 @@ type Props = {
 	sectionName?: string;
 	pillar: CAPIPillar;
 	ajaxUrl: string;
-	design: DesignType;
+	design: Design;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
