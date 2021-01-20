@@ -2,9 +2,9 @@ import { ABTest } from '@guardian/ab-core';
 
 export const signInGateDesignOpt: ABTest = {
 	id: 'SignInGateDesignOpt',
-	start: '2020-10-09', // todo
-	expiry: '2020-12-01', // todo
-	author: 'vlbee',
+	start: '2021-01-20',
+	expiry: '2021-12-01',
+	author: 'vlbee, coldlink',
 	description:
 		'Compare 6 different gate design changes, on 3rd page view, on simple article templates, with higher priority over banners and epi',
 	audience: 0.2,

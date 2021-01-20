@@ -21,7 +21,6 @@ import { signInGateDesignOpt } from '@root/src/web/experiments/tests/sign-in-gat
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-import { signInGateComponent as gateDesignOptControl } from '@root/src/web/components/SignInGate/gates/design-opt-control';
 import { signInGateComponent as gateDesignOptVar1 } from '@root/src/web/components/SignInGate/gates/design-opt-var-1';
 import { signInGateComponent as gateDesignOptVar2 } from '@root/src/web/components/SignInGate/gates/design-opt-var-2';
 import { signInGateComponent as gateDesignOptVar3 } from '@root/src/web/components/SignInGate/gates/design-opt-var-3';
@@ -79,7 +78,7 @@ const tests: ReadonlyArray<ABTest> = [
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-3': gateMainControl,
 	'main-variant-3': gateMainVariant,
-	'design-opt-control': gateDesignOptControl,
+	'design-opt-control': gateMainVariant,
 	'design-opt-variant-1': gateDesignOptVar1,
 	'design-opt-variant-2': gateDesignOptVar2,
 	'design-opt-variant-3': gateDesignOptVar3,
