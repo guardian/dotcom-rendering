@@ -26,9 +26,8 @@ const styles = (format: Format): SerializedStyles => css`
 `;
 
 const reviewStyles = css`
-	 color: ${culture[300]};
+	color: ${culture[300]};
 `;
-
 
 const heavyStyles = css`
 	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
