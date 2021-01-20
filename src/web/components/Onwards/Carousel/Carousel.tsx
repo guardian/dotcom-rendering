@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
@@ -7,7 +7,7 @@ import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import libDebounce from 'lodash/debounce';
+// import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -320,14 +320,113 @@ const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
 	);
 };
 
+/* -- Logrocket Carousel stuff --*/
+
+// defines the time for the animation between slides in milliseconds
+const transitionTime = 400;
+interface CarouselState {
+	offset: number;
+	desired: number;
+	active: number;
+}
+
+const initialCarouselState: CarouselState = {
+	offset: 0,
+	desired: 0,
+	active: 0,
+};
+
+interface CarouselNextAction {
+	type: 'next';
+	length: number;
+}
+
+interface CarouselPrevAction {
+	type: 'prev';
+	length: number;
+}
+
+interface CarouselJumpAction {
+	type: 'jump';
+	desired: number;
+}
+
+interface CarouselDoneAction {
+	type: 'done';
+}
+
+interface CarouselScrollAction {
+	type: 'scroll';
+	offset: number;
+}
+
+type CarouselAction =
+	| CarouselJumpAction
+	| CarouselNextAction
+	| CarouselPrevAction
+	| CarouselScrollAction
+	| CarouselDoneAction;
+
+const previous = (current: number) => {
+	return Math.max(current - 1, 0);
+};
+
+const next = (current: number, length: number) => {
+	return Math.min(current + 1, length - 1);
+};
+
+const carouselReducer = (
+	state: CarouselState,
+	action: CarouselAction,
+): CarouselState => {
+	switch (action.type) {
+		case 'jump':
+			return {
+				...state,
+				desired: action.desired,
+			};
+		case 'next':
+			return {
+				...state,
+				desired: next(state.active, action.length),
+			};
+		case 'prev':
+			return {
+				...state,
+				desired: previous(state.active),
+			};
+		case 'done':
+			return {
+				...state,
+				offset: NaN,
+				active: state.desired,
+			};
+		case 'scroll':
+			return {
+				...state,
+				offset: action.offset,
+			};
+		default:
+			return state;
+	}
+};
+
+/*-----------------------------*/
+
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
 	ophanComponentName,
 	pillar,
 }: OnwardsType) => {
+	const cards = trails.map((trail, i) => (
+		<Card trail={trail} isFirst={i === 0} />
+	));
 	const carouselRef = useRef<HTMLDivElement>(null);
-	const [index, setIndex] = useState(0);
+
+	const length = trails.length - 2;
+
+	const [state, dispatch] = useReducer(carouselReducer, initialCarouselState);
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -339,25 +438,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 		return Array.from(current.children) as HTMLElement[];
 	};
 
-	const getIndex = (): number => {
-		const { current } = carouselRef;
-		if (current === null) return 0;
-
-		const offsets = getItems()
-			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
-
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
-		const active = offsets.findIndex((el) => el >= scrolled);
-
-		return Math.max(0, active);
-	};
-
-	const getSetIndex = () => {
-		setIndex(getIndex());
-	};
-
-	const goToIndex = (newIndex: number) => {
+	const goToIndex = useCallback((newIndex: number) => {
 		const { current } = carouselRef;
 		if (current === null) return;
 
@@ -366,63 +447,13 @@ export const Carousel: React.FC<OnwardsType> = ({
 			.map((el) => el.offsetLeft);
 
 		current.scrollTo({ left: offsets[newIndex] });
-
-		getSetIndex();
-	};
-
-	const prev = () => {
-		const { current } = carouselRef;
-		if (current === null) return;
-
-		const offsets = getItems()
-			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
-
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
-
-		const nextOffset = offsets
-			.reverse()
-			.find((offset) => offset < scrolled);
-
-		if (nextOffset) {
-			current.scrollTo({ left: nextOffset });
-		} else {
-			current.scrollTo({ left: 0 });
-		}
-
-		getSetIndex();
-	};
-
-	const next = () => {
-		const { current } = carouselRef;
-		if (current === null) return;
-
-		const offsets = getItems()
-			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
-
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
-		const nextOffset = offsets.find((offset) => offset > scrolled);
-
-		if (nextOffset) {
-			current.scrollTo({ left: nextOffset });
-		}
-
-		getSetIndex();
-	};
+	}, []);
 
 	useEffect(() => {
-		if (carouselRef.current) {
-			carouselRef.current.addEventListener(
-				'scroll',
-				libDebounce(getSetIndex, 100),
-			);
-		}
-	});
-
-	const cards = trails.map((trail, i) => (
-		<Card trail={trail} isFirst={i === 0} />
-	));
+		goToIndex(state.desired);
+		const id = setTimeout(() => dispatch({ type: 'done' }), transitionTime);
+		return () => clearTimeout(id);
+	}, [state.desired, goToIndex]);
 
 	return (
 		<div
@@ -442,14 +473,14 @@ export const Carousel: React.FC<OnwardsType> = ({
 
 					<div className={navIconStyle} data-link-name="nav-arrow">
 						<button
-							onClick={prev}
+							onClick={() => dispatch({ type: 'prev', length })}
 							aria-label="Move carousel backwards"
 							className={buttonStyle}
 						>
 							<SvgChevronLeftSingle />
 						</button>
 						<button
-							onClick={next}
+							onClick={() => dispatch({ type: 'next', length })}
 							aria-label="Move carousel forwards"
 							className={buttonStyle}
 						>
@@ -461,14 +492,16 @@ export const Carousel: React.FC<OnwardsType> = ({
 				<div className={dotsStyle}>
 					{trails.map((value, i) => (
 						<span
-							onClick={() => goToIndex(i)}
+							onClick={() =>
+								dispatch({ type: 'jump', desired: i })
+							}
 							// This button is not particularly useful for keyboard users as the stories
 							// are tabb-able themselves so we hide them with aria and make them
 							// not available to keyboard
 							aria-hidden="true"
 							className={cx(
 								dotStyle,
-								i === index && dotActiveStyle(pillar),
+								i === state.desired && dotActiveStyle(pillar),
 								adjustNumberOfDotsStyle(i, trails.length),
 							)}
 						/>
