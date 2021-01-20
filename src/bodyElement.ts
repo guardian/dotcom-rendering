@@ -169,7 +169,7 @@ type BodyElement =
 	| {
 			kind: ElementKind.Interactive;
 			url: string;
-			alt?: string;
+			alt: Option<string>;
 	  }
 	| {
 			kind: ElementKind.RichLink;
@@ -299,7 +299,11 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				return err('No iframeUrl field on interactiveTypeData');
 			}
 
-			return ok({ kind: ElementKind.Interactive, url: iframeUrl, alt });
+			return ok({
+				kind: ElementKind.Interactive,
+				url: iframeUrl,
+				alt: fromNullable(alt),
+			});
 		}
 
 		case ElementType.RICH_LINK: {

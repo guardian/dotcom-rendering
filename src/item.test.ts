@@ -8,7 +8,7 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
-import { Design, Display, resultMap, toOption, withDefault } from '@guardian/types';
+import { Design, Display, none, resultMap, toOption, withDefault } from '@guardian/types';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
@@ -179,7 +179,7 @@ const getFirstBody = (item: Review | Standard) =>
 	pipe2(
 		item.body[0],
 		toOption,
-		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' }),
+		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '', alt: none }),
 	);
 
 describe('fromCapi returns correct Item', () => {

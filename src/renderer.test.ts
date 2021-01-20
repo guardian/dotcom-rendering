@@ -71,6 +71,7 @@ const richLinkElement = (): BodyElement => ({
 const interactiveElement = (): BodyElement => ({
 	kind: ElementKind.Interactive,
 	url: 'https://theguardian.com',
+	alt: none,
 });
 
 const tweetElement = (): BodyElement => ({

@@ -58,6 +58,7 @@ import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import EditionsPullquote from 'components/editions/pullquote';
 import HorizontalRule from 'components/horizontalRule';
+import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
@@ -366,25 +367,6 @@ const standfirstText = (
 			? noLinksStandfirstTextElement(format)
 			: standfirstTextElement(format),
 	);
-
-const Interactive = (props: { url: string; title?: string }): ReactElement => {
-	const styles = css`
-		margin: ${remSpace[4]} 0;
-		${darkModeCss`
-            padding: ${remSpace[4]};
-            background: ${neutral[100]}
-        `}
-	`;
-	return styledH(
-		'figure',
-		{ css: styles, className: 'interactive' },
-		h(
-			'iframe',
-			{ src: props.url, height: 500, title: props.title ?? '' },
-			null,
-		),
-	);
-};
 
 const Tweet = (props: {
 	content: NodeList;
