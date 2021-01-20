@@ -152,9 +152,6 @@ export const SignInGateDesignOptVar5 = ({
 			<h1 className={cx([headingStyles, leftMarginFill])}>
 				Register for free and continue reading
 			</h1>
-			{/* TODO leftMargin fill not working - see Source documentation:
-            https://www.theguardian.design/2a1e5182b/p/2619e3-overriding-styles
-            cssOverrides don't work either */}
 			<Lines />
 			<p className={bodyBold}>
 				It’s important to say this is not a step towards a paywall

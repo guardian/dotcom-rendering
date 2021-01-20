@@ -22,6 +22,7 @@ import {
 	registerButton,
 	signInGateContainer,
 	signInHeader,
+	signInLink,
 } from '../shared';
 
 const bodyBlueHighlight = css`
@@ -32,10 +33,6 @@ const bodyBlueHighlight = css`
 	${from.phablet} {
 		padding-right: 130px;
 	}
-`;
-
-const signInLink = css`
-	color: ${palette.brand[400]} !important;
 `;
 
 // Blue highlight on key line of the text
