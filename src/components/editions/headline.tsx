@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { border, culture } from '@guardian/src-foundations/palette';
+import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -15,6 +15,10 @@ import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
+interface Props {
+	item: Item;
+}
+
 const styles = (format: Format): SerializedStyles => css`
 	${headlineTextColour(format)}
 	box-sizing: border-box;
@@ -23,10 +27,6 @@ const styles = (format: Format): SerializedStyles => css`
 	margin: 0;
 
 	${articleWidthStyles}
-`;
-
-const reviewStyles = css`
-	color: ${culture[300]};
 `;
 
 const heavyStyles = css`
@@ -43,15 +43,11 @@ const heavyStyles = css`
 
 const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Review)
-		return css(styles(format), heavyStyles, reviewStyles);
+		return css(styles(format), heavyStyles);
 	if (format.display === Display.Showcase)
 		return css(styles(format), heavyStyles);
 	return styles(format);
 };
-
-interface Props {
-	item: Item;
-}
 
 const Headline: FC<Props> = ({ item }) => {
 	return <h1 css={getStyles(item)}>{item.headline}</h1>;

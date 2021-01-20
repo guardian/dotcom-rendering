@@ -2,6 +2,10 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
+import { culture, neutral } from '@guardian/src-foundations/palette';
+import type { Format } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
+import type { Colour } from 'editorialPalette';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;
@@ -38,3 +42,16 @@ export const articleMarginStyles: SerializedStyles = css`
 		margin-left: ${wideArticleMargin}px;
 	}
 `;
+
+export const headerBackgroundColour = (format: Format): Colour => {
+	if (format.design === Design.Review) {
+		switch (format.theme) {
+			case Pillar.Culture:
+				return culture[800];
+			default:
+				return neutral[100];
+		}
+	}
+
+	return neutral[100];
+};

@@ -4,14 +4,19 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { background, border, culture } from '@guardian/src-foundations/palette';
+import { background, border } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
 import Header from './header';
-import { articleMarginStyles, articleWidthStyles, sidePadding } from './styles';
+import {
+	articleMarginStyles,
+	articleWidthStyles,
+	headerBackgroundColour,
+	sidePadding,
+} from './styles';
 
 // ----- Component ----- //
 
@@ -58,15 +63,9 @@ const bodyWrapperStyles = css`
 	${articleWidthStyles}
 `;
 
-const headerBackgroundStyles = (item: Format): SerializedStyles | null => {
-	if (item.design === Design.Review) {
-		return css`
-			background-color: ${culture[800]};
-		`;
-	}
-
-	return null;
-};
+const headerBackgroundStyles = (item: Format): SerializedStyles => css`
+	background-color: ${headerBackgroundColour(item)};
+`;
 
 const Article: FC<Props> = ({ item }) => {
 	if (item.design === Design.Live) {
