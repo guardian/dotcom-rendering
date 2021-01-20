@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
+import { border, culture } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -26,18 +26,10 @@ const styles = (format: Format): SerializedStyles => css`
 `;
 
 const reviewStyles = css`
-	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-
-	${from.mobileMedium} {
-		${headline.small({ lineHeight: 'tight', fontWeight: 'bold' })}
-	}
-
-	${from.tablet} {
-		${headline.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
-	}
+	color: ${culture[300]};
 `;
 
-const showcaseStyles = css`
+const heavyStyles = css`
 	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 
 	${from.mobileMedium} {
@@ -51,9 +43,9 @@ const showcaseStyles = css`
 
 const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Review)
-		return css(styles(format), reviewStyles);
+		return css(styles(format), heavyStyles, reviewStyles);
 	if (format.display === Display.Showcase)
-		return css(styles(format), showcaseStyles);
+		return css(styles(format), heavyStyles);
 	return styles(format);
 };
 
