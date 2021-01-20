@@ -19,7 +19,7 @@ const styles = css`
 	${from.mobileMedium} {
 		font-size: 1.25rem;
 	}
-	
+
 	padding-bottom: ${remSpace[6]};
 	color: ${text.primary};
 
