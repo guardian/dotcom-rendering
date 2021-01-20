@@ -10,6 +10,7 @@ import {
 	isValidContentType,
 	isValidSection,
 	isIOS9,
+	isValidTag,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
@@ -39,6 +40,7 @@ const canShow = (
 	isNPageOrHigherPageView(3) &&
 	isValidContentType(CAPI) &&
 	isValidSection(CAPI) &&
+	isValidTag(CAPI) &&
 	!isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
