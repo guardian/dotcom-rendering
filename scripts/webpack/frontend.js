@@ -41,7 +41,7 @@ const commonConfigs = ({ platform }) => ({
         }),
         new LoadablePlugin({
             writeToDisk: true,
-            filename: `${loadableStatsFilename}-${platform}.json`,
+            filename: `loadable-manifest-${platform}.json`,
         }),
         PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&
