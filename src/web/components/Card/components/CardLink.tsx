@@ -5,7 +5,7 @@ import { Design } from '@guardian/types';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const linkStyles = (design: Design, pillar: CAPIPillar) => {
+const linkStyles = (design: Design, pillar: Theme) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -95,7 +95,7 @@ type Props = {
 	children: React.ReactNode;
 	linkTo: string;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 export const CardLink = ({ children, linkTo, design, pillar }: Props) => (

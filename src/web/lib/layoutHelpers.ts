@@ -1,10 +1,10 @@
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 
 export const decideLineEffect = (
 	design: Design,
-	pillar: CAPIPillar,
+	pillar: Theme,
 ): LineEffectType => {
-	if (pillar === 'sport') {
+	if (pillar === Pillar.Sport) {
 		return 'dotted';
 	}
 
@@ -35,7 +35,7 @@ export const decideLineCount = (design?: Design): 8 | 4 => {
 	return 4;
 };
 
-export const getCurrentPillar = (CAPI: CAPIType): CAPIPillar => {
+export const getCurrentPillar = (CAPI: CAPIType): Pillar => {
 	return (
 		(CAPI.nav.currentPillar &&
 			CAPI.nav.currentPillar.title.toLowerCase()) ||

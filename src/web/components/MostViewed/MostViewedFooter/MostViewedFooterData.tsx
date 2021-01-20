@@ -13,7 +13,7 @@ import { SecondTierItem } from './SecondTierItem';
 
 type Props = {
 	sectionName?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	ajaxUrl: string;
 	design: Design;
 };
@@ -36,11 +36,7 @@ const secondTierStyles = css`
 	}
 `;
 
-function buildSectionUrl(
-	ajaxUrl: string,
-	pillar: CAPIPillar,
-	sectionName?: string,
-) {
+function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
@@ -52,6 +48,25 @@ function buildSectionUrl(
 
 function buildDeeplyReadUrl(ajaxUrl: string) {
 	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
+}
+
+function transformTrail(trail: CAPITrailType, design: Design): TrailType {
+	// Converts the CAPI string pillar into an enum
+	return {
+		...trail,
+		pillar: decidePillar({ pillar: trail.pillar, design }),
+		design,
+	};
+}
+
+function transformTabs(
+	tabs: CAPITrailTabType[],
+	design: Design,
+): TrailTabType[] {
+	return tabs.map((tab) => ({
+		...tab,
+		trails: tab.trails.map((trail) => transformTrail(trail, design)),
+	}));
 }
 
 export const MostViewedFooterData = ({
@@ -69,9 +84,9 @@ export const MostViewedFooterData = ({
 
 	const url = inDeeplyReadTestVariant
 		? buildDeeplyReadUrl(ajaxUrl)
-		: buildSectionUrl(ajaxUrl, pillar, sectionName);
+		: buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
-		MostViewedFooterPayloadType | TrailTabType[]
+		MostViewedFooterPayloadType | CAPITrailTabType[]
 	>(url);
 
 	if (error) {
@@ -80,6 +95,7 @@ export const MostViewedFooterData = ({
 	}
 
 	if (data) {
+		const tabs = 'tabs' in data ? data.tabs : data;
 		return (
 			<div
 				className={css`
@@ -87,14 +103,14 @@ export const MostViewedFooterData = ({
 				`}
 			>
 				<MostViewedFooterGrid
-					data={'tabs' in data ? data.tabs : data}
+					data={transformTabs(tabs, design)}
 					sectionName={sectionName}
-					pillar={decidePillar({ pillar, design })}
+					pillar={pillar}
 				/>
 				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
 					{'mostCommented' in data && (
 						<SecondTierItem
-							trail={data.mostCommented}
+							trail={transformTrail(data.mostCommented, design)}
 							title="Most commented"
 							dataLinkName="comment | group-0 | card-@1" // To match Frontend
 							showRightBorder={true}
@@ -102,7 +118,7 @@ export const MostViewedFooterData = ({
 					)}
 					{'mostShared' in data && (
 						<SecondTierItem
-							trail={data.mostShared}
+							trail={transformTrail(data.mostShared, design)}
 							dataLinkName="news | group-0 | card-@1" // To match Frontend
 							title="Most shared"
 						/>

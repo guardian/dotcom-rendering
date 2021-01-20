@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
+import { Pillar } from '@guardian/types';
+
 import { sharecount } from '@root/fixtures/article';
 
 import { Counts } from './Counts';
@@ -54,7 +56,7 @@ export const Both = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						pillar="news"
+						pillar={Pillar.News}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -90,7 +92,7 @@ export const ShareOnly = () => {
 					<CommentCount
 						isCommentable={false}
 						commentCount={239}
-						pillar="news"
+						pillar={Pillar.News}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -131,7 +133,7 @@ export const CommentOnly = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						pillar="news"
+						pillar={Pillar.News}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -172,7 +174,7 @@ export const ZeroComments = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={0}
-						pillar="news"
+						pillar={Pillar.News}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -213,7 +215,7 @@ export const BigNumbers = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={4320}
-						pillar="news"
+						pillar={Pillar.News}
 						setIsExpanded={() => {}}
 					/>
 				</div>

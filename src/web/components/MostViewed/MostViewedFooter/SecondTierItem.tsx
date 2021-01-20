@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -98,7 +98,7 @@ export const SecondTierItem = ({
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pilarToUse = design === Design.Comment ? 'opinion' : pillar;
+	const pilarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
 
 	return (
 		<div className={itemStyles(showRightBorder)}>

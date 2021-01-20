@@ -6,10 +6,10 @@ import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 
 type Props = {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	display: Display;
 	blocks: Block[];
 	design: Design;
@@ -20,7 +20,7 @@ type Props = {
 const pillarColours = pillarMap(
 	(pillar) =>
 		css`
-			color: ${pillar === 'opinion' || pillar === 'culture'
+			color: ${pillar === Pillar.Opinion || pillar === Pillar.Culture
 				? pillarPalette[pillar].dark
 				: pillarPalette[pillar].main};
 		`,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 
 export default {
 	component: Caption,
@@ -13,7 +13,7 @@ export default {
     display: Display;
     design: Design;
     captionText?: string;
-    pillar: CAPIPillar;
+    pillar: Theme;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
@@ -27,7 +27,7 @@ export const Article = () => (
 			display={Display.Standard}
 			design={Design.Article}
 			captionText="This is how an Article caption looks"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -39,7 +39,7 @@ export const Analysis = () => (
 			display={Display.Standard}
 			design={Design.Analysis}
 			captionText="This is how an Analysis caption looks"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -51,7 +51,7 @@ export const PhotoEssay = () => (
 			display={Display.Immersive}
 			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -63,7 +63,7 @@ export const PhotoEssayLimitedWidth = () => (
 			display={Display.Immersive}
 			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
-			pillar="news"
+			pillar={Pillar.News}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -76,7 +76,7 @@ export const Credit = () => (
 			display={Display.Standard}
 			design={Design.Feature}
 			captionText="This is how a Feature caption looks with credit showing"
-			pillar="news"
+			pillar={Pillar.News}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
@@ -90,7 +90,7 @@ export const WidthLimited = () => (
 			display={Display.Standard}
 			design={Design.Article}
 			captionText="This is how a caption looks with width limited"
-			pillar="news"
+			pillar={Pillar.News}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -103,7 +103,7 @@ export const Padded = () => (
 			display={Display.Standard}
 			design={Design.Article}
 			captionText="This is how a caption looks when padded"
-			pillar="news"
+			pillar={Pillar.News}
 			padCaption={true}
 		/>
 	</Section>

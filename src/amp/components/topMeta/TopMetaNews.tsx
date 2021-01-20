@@ -22,7 +22,7 @@ const headerStyle = css`
 	padding-top: 3px;
 	color: ${palette.neutral[7]};
 `;
-const bylineStyle = (pillar: CAPIPillar) => css`
+const bylineStyle = (pillar: Theme) => css`
 	${headline.xxxsmall()};
 	color: ${pillarPalette[pillar].main};
 	padding-bottom: 8px;
@@ -60,7 +60,7 @@ const Headline: React.FC<{
 export const TopMetaNews: React.FC<{
 	articleData: ArticleModel;
 	adTargeting?: AdTargeting;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ articleData, adTargeting, pillar }) => {
 	const { branding } = articleData.commercialProperties[
 		articleData.editionId

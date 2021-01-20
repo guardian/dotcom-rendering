@@ -10,7 +10,7 @@ import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
 type Props = {
 	html: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	quoted?: boolean;
 };
 

@@ -93,7 +93,7 @@ const mostPopularAdStyle = css`
 
 interface Props {
 	sectionName?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	ajaxUrl: string;
 	display: Display;
 	design: Design;

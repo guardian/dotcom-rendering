@@ -13,7 +13,7 @@ type Props = {
 	design: Design;
 	images: ImageBlockElement[];
 	caption?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 const ieFallback = css`

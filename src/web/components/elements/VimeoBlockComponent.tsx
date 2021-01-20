@@ -16,7 +16,7 @@ const responsiveAspectRatio = (height: number, width: number) => css`
 	}
 `;
 export const VimeoBlockComponent: React.FC<{
-	pillar: CAPIPillar;
+	pillar: Theme;
 	embedUrl?: string;
 	height: number;
 	width: number;

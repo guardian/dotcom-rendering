@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -53,7 +53,7 @@ export const ArticleStory = () => {
 			<ArticleMeta
 				display={Display.Standard}
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -93,7 +93,7 @@ export const BrandingStory = () => {
 				}}
 				display={Display.Standard}
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -116,7 +116,7 @@ export const FeatureStory = () => {
 			<ArticleMeta
 				display={Display.Standard}
 				design={Design.Feature}
-				pillar="culture"
+				pillar={Pillar.Culture}
 				pageId=""
 				webTitle=""
 				author={{
@@ -138,7 +138,7 @@ export const CommentStory = () => {
 			<ArticleMeta
 				display={Display.Standard}
 				design={Design.Comment}
-				pillar="opinion"
+				pillar={Pillar.Opinion}
 				pageId=""
 				webTitle=""
 				author={{
@@ -160,7 +160,7 @@ export const InterviewStory = () => {
 			<ArticleMeta
 				display={Display.Standard}
 				design={Design.Interview}
-				pillar="lifestyle"
+				pillar={Pillar.Lifestyle}
 				pageId=""
 				webTitle=""
 				author={{
@@ -182,7 +182,7 @@ export const ImmersiveStory = () => {
 			<ArticleMeta
 				display={Display.Immersive}
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -204,7 +204,7 @@ export const TwoContributorsStory = () => {
 			<ArticleMeta
 				display={Display.Standard}
 				design={Design.Feature}
-				pillar="sport"
+				pillar={Pillar.Sport}
 				pageId=""
 				webTitle=""
 				author={{

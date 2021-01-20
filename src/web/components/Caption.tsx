@@ -13,7 +13,7 @@ type Props = {
 	display: Display;
 	design: Design;
 	captionText?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -105,12 +105,12 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (pillar: CAPIPillar) => css`
+const iconStyle = (pillar: Theme) => css`
 	fill: ${pillarPalette[pillar].main};
 	padding-right: 3px;
 `;
 
-const captionLink = (pillar: CAPIPillar) => css`
+const captionLink = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].main};
 		text-decoration: none;

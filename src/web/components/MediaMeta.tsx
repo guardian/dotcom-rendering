@@ -7,18 +7,19 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import Audio from '@frontend/static/icons/audio.svg';
 import Photo from '@frontend/static/icons/photo.svg';
 import Video from '@frontend/static/icons/video.svg';
+import { Pillar } from '@guardian/types';
 
 type Props = {
 	mediaType: MediaType;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	mediaDuration?: number;
 };
 
-const iconWrapperStyles = (mediaType: MediaType, pillar: CAPIPillar) => css`
+const iconWrapperStyles = (mediaType: MediaType, pillar: Theme) => css`
 	width: 24px;
 	height: 23px;
 	/* Below we force the colour to be bright if the pillar is news (because it looks better) */
-	background-color: ${pillar === 'news'
+	background-color: ${pillar === Pillar.News
 		? pillarPalette[pillar].bright
 		: pillarPalette[pillar].main};
 	border-radius: 50%;
@@ -35,9 +36,9 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: CAPIPillar) => css`
 	}
 `;
 
-const durationStyles = (pillar: CAPIPillar) => css`
+const durationStyles = (pillar: Theme) => css`
 	/* Below we force the colour to be bright if the pillar is news (because it looks better) */
-	color: ${pillar === 'news'
+	color: ${pillar === Pillar.News
 		? pillarPalette[pillar].bright
 		: pillarPalette[pillar].main};
 	${textSans.xsmall({ fontWeight: `bold` })}
@@ -89,7 +90,7 @@ const MediaIcon = ({
 	pillar,
 }: {
 	mediaType: MediaType;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }) => (
 	<span className={iconWrapperStyles(mediaType, pillar)}>
 		<Icon mediaType={mediaType} />
@@ -101,7 +102,7 @@ const MediaDuration = ({
 	pillar,
 }: {
 	mediaDuration: number;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }) => (
 	<p className={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>
 );

@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+
+import { Pillar } from '@guardian/types';
+
 import { useApi } from '@root/src/web/lib/api';
 
 type CommentType = {
@@ -46,7 +49,7 @@ const withComments = (
 			url: section.url,
 			trails: updateTrailsWithCounts(section.trails, counts),
 			ophanComponentName: section.ophanComponentName,
-			pillar: 'opinion',
+			pillar: Pillar.Opinion,
 		};
 	});
 };

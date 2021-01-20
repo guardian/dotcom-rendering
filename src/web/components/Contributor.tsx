@@ -31,7 +31,7 @@ const twitterHandle = css`
 	}
 `;
 
-const bylineStyle = (pillar: CAPIPillar) => css`
+const bylineStyle = (pillar: Theme) => css`
 	${headline.xxxsmall()};
 	color: ${pillarPalette[pillar].main};
 	padding-bottom: 8px;
@@ -52,7 +52,7 @@ export const Contributor: React.FC<{
 	design: Design;
 	author: AuthorType;
 	tags: TagType[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ design, author, tags, pillar }) => {
 	if (!author.byline) {
 		return null;

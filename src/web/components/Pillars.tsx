@@ -5,7 +5,7 @@ import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette } from '@root/src/lib/pillars';
 import { Display } from '@guardian/types';
 import { navInputCheckboxId } from './Nav/config';
 
@@ -190,20 +190,18 @@ const linkStyle = (display: Display) => css`
 		transform: translateY(4px);
 	}
 `;
-const pillarUnderline = pillarMap(
-	(pillar) => css`
-		:after {
-			border-top: 4px solid ${pillarPalette[pillar].bright};
-			left: 0;
-			right: 1px;
-			top: -4px;
-			content: '';
-			display: block;
-			position: absolute;
-			transition: transform 0.3s ease-in-out;
-		}
-	`,
-);
+const pillarUnderline = (pillar: Theme) => css`
+	:after {
+		border-top: 4px solid ${pillarPalette[pillar].bright};
+		left: 0;
+		right: 1px;
+		top: -4px;
+		content: '';
+		display: block;
+		position: absolute;
+		transition: transform 0.3s ease-in-out;
+	}
+`;
 
 const forceUnderline = css`
 	:after {
@@ -227,7 +225,7 @@ export const Pillars: React.FC<{
 	display: Display;
 	isTopNav?: boolean;
 	pillars: PillarType[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
 }> = ({
@@ -244,7 +242,7 @@ export const Pillars: React.FC<{
 				<a
 					className={cx(
 						linkStyle(display),
-						pillarUnderline[p.pillar],
+						pillarUnderline(p.pillar),
 						isTopNav && showMenuUnderlineStyles,
 						{
 							[pillarDivider]:

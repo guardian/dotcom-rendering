@@ -14,7 +14,7 @@ import { Display, Design } from '@guardian/types';
 
 type Props = {
 	html: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 	display: Display;
 	isFirstParagraph: boolean;

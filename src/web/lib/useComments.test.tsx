@@ -1,4 +1,4 @@
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 
 import { findCount, buildUrl } from './useComments';
 
@@ -65,7 +65,7 @@ describe('buildUrl', () => {
 	it('builds the url as expected', () => {
 		const sections: OnwardsType[] = [
 			{
-				pillar: 'opinion',
+				pillar: Pillar.Opinion,
 				heading: 'opinion',
 				trails: [
 					{
@@ -78,7 +78,7 @@ describe('buildUrl', () => {
 						image:
 							'https://i.guim.co.uk/img/media/8ffbd3dc5aedfd502ca5ddd5f91f82c767cd28ea/0_0_3442_2065/master/3442.jpg?width=300&quality=85&auto=format&fit=max&s=52292233df8e95c6308e01f4222e25b3',
 						isLiveBlog: false,
-						pillar: 'opinion',
+						pillar: Pillar.Opinion,
 						design: Design.Comment,
 						webPublicationDate: '2020-11-03T11:00:02.000Z',
 						headline:
@@ -95,7 +95,7 @@ describe('buildUrl', () => {
 						image:
 							'https://i.guim.co.uk/img/media/5dfdcb80828f014e04054ab626750cc112e92364/0_129_5065_3039/master/5065.jpg?width=300&quality=85&auto=format&fit=max&s=c108e8f88f55b627161b8f1827c93698',
 						isLiveBlog: false,
-						pillar: 'opinion',
+						pillar: Pillar.Opinion,
 						design: Design.Comment,
 						webPublicationDate: '2020-11-03T10:26:01.000Z',
 						headline:
@@ -114,7 +114,7 @@ describe('buildUrl', () => {
 	it('handles the legacy gu domain', () => {
 		const sections: OnwardsType[] = [
 			{
-				pillar: 'opinion',
+				pillar: Pillar.Opinion,
 				heading: 'opinion',
 				trails: [
 					{
@@ -128,7 +128,7 @@ describe('buildUrl', () => {
 						image:
 							'https://i.guim.co.uk/img/media/637243d90e93683dd13234ff543ab9b93da3d8d0/0_161_3926_2355/master/3926.jpg?width=300&quality=85&auto=format&fit=max&s=4f1ca464b3b4e7c498acd29d548ecae0',
 						isLiveBlog: false,
-						pillar: 'opinion',
+						pillar: Pillar.Opinion,
 						design: Design.Comment,
 						webPublicationDate: '2020-11-03T15:33:04.000Z',
 						headline:
@@ -145,7 +145,7 @@ describe('buildUrl', () => {
 						image:
 							'https://i.guim.co.uk/img/media/1f18d9b3ee4a6d38ff5a5544651f6cc382fdf480/0_203_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=ebc79b062b7f7f72582f8480a548eacb',
 						isLiveBlog: false,
-						pillar: 'opinion',
+						pillar: Pillar.Opinion,
 						design: Design.Comment,
 						webPublicationDate: '2020-11-03T13:50:06.000Z',
 						headline:

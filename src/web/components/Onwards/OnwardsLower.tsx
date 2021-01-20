@@ -8,7 +8,7 @@ type Props = {
 	ajaxUrl: string;
 	hasStoryPackage: boolean;
 	tags: TagType[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 export const OnwardsLower = ({

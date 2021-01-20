@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
@@ -17,7 +17,7 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
 
-const bulletStyle = (pillar: CAPIPillar) => css`
+const bulletStyle = (pillar: Theme) => css`
 	.bullet {
 		color: transparent;
 		font-size: 1px;
@@ -35,8 +35,8 @@ const bulletStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const decideBackground = (design: Design, pillar: CAPIPillar): string => {
-	if (pillar === 'labs') return palette.neutral[86];
+const decideBackground = (design: Design, pillar: Theme): string => {
+	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
 			return palette.opinion[800];
@@ -45,7 +45,7 @@ const decideBackground = (design: Design, pillar: CAPIPillar): string => {
 	}
 };
 
-const body = (pillar: CAPIPillar, design: Design) => {
+const body = (pillar: Pillar, design: Design) => {
 	return css`
 		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}
@@ -63,7 +63,7 @@ const adStyle = css`
 `;
 
 export const Body: React.FC<{
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 	data: ArticleModel;
 	config: ConfigType;

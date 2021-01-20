@@ -31,6 +31,8 @@ type CAPIDesign =
     | 'GuardianLabs'
 
 type Design = import('@guardian/types').Design;
+type Theme = import('@guardian/types').Theme;
+type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -96,7 +98,7 @@ interface Branding {
     };
 }
 
-interface LinkType extends SimpleLinkType {
+interface CAPILinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
     mobileOnly?: boolean;
@@ -104,8 +106,20 @@ interface LinkType extends SimpleLinkType {
     more?: boolean;
 }
 
-interface PillarType extends LinkType {
+interface LinkType extends SimpleLinkType {
+    longTitle: string;
+    children?: LinkType[];
+    mobileOnly?: boolean;
+    pillar?: Pillar;
+    more?: boolean;
+}
+
+interface CAPIPillarType extends CAPILinkType {
     pillar: CAPIPillar;
+}
+
+interface PillarType extends LinkType {
+    pillar: Pillar;
 }
 
 interface MoreType extends LinkType {
@@ -135,13 +149,20 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-interface NavType {
-    pillars: PillarType[];
+interface BaseNavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
     subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface NavType extends BaseNavType {
+    pillars: PillarType[];
+}
+
+interface CAPINavType extends BaseNavType {
+    pillars: CAPIPillarType[];
 }
 
 interface SubNavBrowserType {
@@ -354,7 +375,7 @@ interface BadgeType {
 interface KickerType {
     text: string;
     design: Design;
-    pillar: CAPIPillar;
+    pillar: Theme;
     showPulsingDot?: boolean;
     showSlash?: boolean;
     inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
@@ -375,7 +396,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: CAPIPillar;
+    pillar: Theme;
     design: Design;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
@@ -412,7 +433,7 @@ type HeadlineLink = {
 interface LinkHeadlineType {
     design: Design;
     headlineText: string; // The text shown
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kickerText?: string;
     showPulsingDot?: boolean;
@@ -426,7 +447,7 @@ interface LinkHeadlineType {
 interface CardHeadlineType {
     headlineText: string; // The text shown
     design: Design; // Used to decide when to add type specific styles
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
@@ -500,7 +521,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
-    pillar: CAPIPillar;
+    pillar: Theme;
 };
 
 type OphanComponentName =
@@ -702,7 +723,7 @@ interface BaseTrailType {
 }
 interface TrailType extends BaseTrailType {
     design: Design;
-    pillar: CAPIPillar;
+    pillar: Theme;
 }
 
 interface CAPITrailType extends BaseTrailType {
@@ -715,10 +736,15 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
+interface CAPITrailTabType {
+    heading: string;
+    trails: CAPITrailType[];
+}
+
 interface MostViewedFooterPayloadType {
-    tabs: TrailTabType[];
-    mostCommented: TrailType;
-    mostShared: TrailType;
+    tabs: CAPITrailTabType[];
+    mostCommented: CAPITrailType;
+    mostShared: CAPITrailType;
 }
 
 // ----------

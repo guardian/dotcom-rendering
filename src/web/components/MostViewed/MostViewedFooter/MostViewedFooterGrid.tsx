@@ -43,7 +43,7 @@ const firstTab = css`
 	border-right: ${thinGreySolid};
 `;
 
-const selectedListTabStyles = (pillar: CAPIPillar) => css`
+const selectedListTabStyles = (pillar: Theme) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
 	box-shadow: inset 0px 4px 0px 0px ${pillar && pillarPalette[pillar].dark};
 	transition: box-shadow 0.3s ease-in-out;
@@ -103,7 +103,7 @@ const gridContainer = css`
 type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling

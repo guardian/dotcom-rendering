@@ -26,7 +26,7 @@ interface RichLinkType {
 	contentType: ContentType;
 	url: string;
 	starRating?: number;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	tags: TagType[];
 	sponsorName: string;
 	contributorImage?: string;
@@ -42,7 +42,7 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent: React.FC<{
 	element: RichLinkBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	ajaxEndpoint: string;
 	richLinkIndex: number;
 }> = ({ element, ajaxEndpoint, richLinkIndex }) => {

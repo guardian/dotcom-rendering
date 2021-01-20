@@ -3,10 +3,7 @@ import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { Design } from '@guardian/types';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-export const headlineBackgroundColour = (
-	design: Design,
-	pillar: CAPIPillar,
-) => {
+export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.GuardianView:
 		case Design.Comment:
@@ -41,7 +38,7 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-export const headlineColour = (design: Design, pillar: CAPIPillar) => {
+export const headlineColour = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.Feature:
 		case Design.Interview:
