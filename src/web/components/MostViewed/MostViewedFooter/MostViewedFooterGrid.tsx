@@ -55,7 +55,7 @@ const selectedDeeplyListTabStyles = css`
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
-const unselectedListTab = css`
+const unselectedStyles = css`
 	&:hover {
 		box-shadow: inset 0px 4px 0px 0px ${neutral[86]};
 		transition: box-shadow 0.3s ease-in-out;
@@ -139,40 +139,46 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
 				<ul className={tabsContainer} role="tablist">
-					{data.map((tab: TrailTabType, i: number) => (
-						<li
-							className={cx(listTab, {
-								[inDeeplyReadTestVariant
-									? selectedDeeplyListTabStyles
-									: selectedListTabStyles(pillar)]:
-									i === selectedTabIndex,
-								[unselectedListTab]: i !== selectedTabIndex,
-								[firstTab]: i === 0,
-							})}
-							role="tab"
-							aria-selected={i === selectedTabIndex}
-							aria-controls={`tabs-popular-${i}`}
-							id={`tabs-popular-${i}-tab`}
-							data-cy={`tab-heading-${i}`}
-							key={`tabs-popular-${i}-tab`}
-							data-link-name={tab.heading}
-						>
-							<button
-								className={tabButton}
-								onClick={() => setSelectedTabIndex(i)}
+					{data.map((tab: TrailTabType, i: number) => {
+						const isSelected = i === selectedTabIndex;
+						const isFirst = i === 0;
+						const selectedStyles = inDeeplyReadTestVariant
+							? selectedDeeplyListTabStyles
+							: selectedListTabStyles(pillar);
+						return (
+							<li
+								className={cx(
+									listTab,
+									isSelected
+										? selectedStyles
+										: unselectedStyles,
+									isFirst && firstTab,
+								)}
+								role="tab"
+								aria-selected={isSelected}
+								aria-controls={`tabs-popular-${i}`}
+								id={`tabs-popular-${i}-tab`}
+								data-cy={`tab-heading-${i}`}
+								key={`tabs-popular-${i}-tab`}
+								data-link-name={tab.heading}
 							>
-								<span
-									className={css`
-										${visuallyHidden};
-									`}
+								<button
+									className={tabButton}
+									onClick={() => setSelectedTabIndex(i)}
 								>
-									Most viewed{' '}
-								</span>
+									<span
+										className={css`
+											${visuallyHidden};
+										`}
+									>
+										Most viewed{' '}
+									</span>
 
-								<TabHeading heading={tab.heading} />
-							</button>
-						</li>
-					))}
+									<TabHeading heading={tab.heading} />
+								</button>
+							</li>
+						);
+					})}
 				</ul>
 			)}
 			{data.map((tab: TrailTabType, i: number) => (
