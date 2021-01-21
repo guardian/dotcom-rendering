@@ -237,26 +237,27 @@ export const Pillars: React.FC<{
 	dataLinkName,
 }) => (
 	<ul data-testid="pillar-list" className={pillarsStyles(display)}>
-		{pillars.map((p, i) => (
-			<li key={p.title} className={pillarStyle}>
-				<a
-					className={cx(
-						linkStyle(display),
-						pillarUnderline(p.pillar),
-						isTopNav && showMenuUnderlineStyles,
-						{
-							[pillarDivider]:
-								showLastPillarDivider ||
-								isNotLastPillar(i, pillars.length),
-							[forceUnderline]: p.pillar === pillar,
-						},
-					)}
-					href={p.url}
-					data-link-name={`${dataLinkName} : primary : ${p.title}`}
-				>
-					{p.title}
-				</a>
-			</li>
-		))}
+		{pillars.map((p, i) => {
+			const isSelected = p.pillar === pillar;
+			const showDivider =
+				showLastPillarDivider || isNotLastPillar(i, pillars.length);
+			return (
+				<li key={p.title} className={pillarStyle}>
+					<a
+						className={cx(
+							linkStyle(display),
+							pillarUnderline(p.pillar),
+							isTopNav && showMenuUnderlineStyles,
+							isSelected && forceUnderline,
+							showDivider && pillarDivider,
+						)}
+						href={p.url}
+						data-link-name={`${dataLinkName} : primary : ${p.title}`}
+					>
+						{p.title}
+					</a>
+				</li>
+			);
+		})}
 	</ul>
 );
