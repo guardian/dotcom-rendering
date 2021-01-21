@@ -29,7 +29,7 @@ const styles = (format: Format): SerializedStyles => css`
 	${articleWidthStyles}
 `;
 
-const heavyStyles = css`
+const heavyFontStyles = css`
 	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 
 	${from.mobileMedium} {
@@ -41,12 +41,28 @@ const heavyStyles = css`
 	}
 `;
 
+const standardFontStyles = css`
+	${headline.xsmall({ lineHeight: 'tight' })}
+
+	${from.mobileMedium} {
+		${headline.small({ lineHeight: 'tight' })}
+	}
+
+	${from.tablet} {
+		${headline.medium({ lineHeight: 'tight' })}
+	}
+`;
+
 const getStyles = (format: Format): SerializedStyles => {
-	if (format.design === Design.Review)
-		return css(styles(format), heavyStyles);
-	if (format.display === Display.Showcase)
-		return css(styles(format), heavyStyles);
-	return styles(format);
+	if (
+		format.design === Design.Review ||
+		format.display === Display.Showcase ||
+		format.display === Display.Immersive ||
+		format.design === Design.PhotoEssay
+	)
+		return css(styles(format), heavyFontStyles);
+
+	return css(styles(format), standardFontStyles);
 };
 
 const Headline: FC<Props> = ({ item }) => {
