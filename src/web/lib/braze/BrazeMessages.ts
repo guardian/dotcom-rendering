@@ -21,12 +21,16 @@ class BrazeMessages {
 		this.appboy = appboy;
 	}
 
-	getMessagesForBanner(): Promise<Message> {
+	private getMessagesForSlot(targetSlotName: string): Promise<Message> {
 		return new Promise((resolve) => {
 			const callback = (message: Message) => {
 				const { extras } = message;
 
-				if (extras && extras.slotName && extras.slotName === 'Banner') {
+				if (
+					extras &&
+					extras.slotName &&
+					extras.slotName === targetSlotName
+				) {
 					resolve(message);
 				}
 			};
@@ -35,22 +39,12 @@ class BrazeMessages {
 		});
 	}
 
+	getMessagesForBanner(): Promise<Message> {
+		return this.getMessagesForSlot('Banner');
+	}
+
 	getMessagesForEndOfArticle(): Promise<Message> {
-		return new Promise((resolve) => {
-			const callback = (message: Message) => {
-				const { extras } = message;
-
-				if (
-					extras &&
-					extras.slotName &&
-					extras.slotName === 'EndOfArticle'
-				) {
-					resolve(message);
-				}
-			};
-
-			this.appboy.subscribeToInAppMessage(callback);
-		});
+		return this.getMessagesForSlot('EndOfArticle');
 	}
 }
 
