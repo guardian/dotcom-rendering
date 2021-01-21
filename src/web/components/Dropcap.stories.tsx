@@ -195,7 +195,7 @@ export const CommentSport = () => {
 				<DropCap
 					design={Design.Comment}
 					letter="O"
-					pillar={Pillar.News}
+					pillar={Pillar.Sport}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
 				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
