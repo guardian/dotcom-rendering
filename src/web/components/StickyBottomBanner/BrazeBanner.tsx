@@ -57,7 +57,6 @@ const getMessageFromBraze = async (
 	appboyTiming.start();
 
 	const brazeMessages = new BrazeMessages(appboy);
-	// let subscriptionId: string | undefined;
 
 	const messages = brazeMessages.getMessagesForBanner();
 
