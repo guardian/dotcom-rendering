@@ -4,7 +4,7 @@ import {
 	MessageKind,
 	pingEditionsNative,
 	Platform,
-} from 'client/editionsCommunication';
+} from '@guardian/renditions';
 import type { FC, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
 
