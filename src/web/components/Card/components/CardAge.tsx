@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -7,11 +7,10 @@ import { textSans } from '@guardian/src-foundations/typography';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
-import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
-const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
+const ageStyles = (designType: DesignType) => css`
 	${textSans.xsmall()};
-	color: ${designType === 'Live' ? decidePillarLight(pillar) : neutral[60]};
+	color: ${neutral[100]};
 
 	/* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -19,9 +18,7 @@ const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
 	padding-right: 5px;
 
 	svg {
-		fill: ${designType === 'Live'
-			? decidePillarLight(pillar)
-			: neutral[46]};
+		fill: ${neutral[100]};
 		margin-bottom: -1px;
 		height: 11px;
 		width: 11px;
@@ -35,33 +32,6 @@ const ageStyles = (designType: DesignType, pillar: CAPIPillar) => css`
 	}
 `;
 
-const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
-		case 'Live':
-			return css`
-				/* stylelint-disable-next-line color-no-hex */
-				color: ${decidePillarLight(pillar)};
-			`;
-		case 'Feature':
-		case 'Interview':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Analysis':
-		case 'Article':
-		case 'Review':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Comment':
-		default:
-			return css`
-				color: ${neutral[60]};
-			`;
-	}
-};
-
 type Props = {
 	designType: DesignType;
 	pillar: CAPIPillar;
@@ -71,7 +41,6 @@ type Props = {
 
 export const CardAge = ({
 	designType,
-	pillar,
 	webPublicationDate,
 	showClock,
 }: Props) => {
@@ -87,12 +56,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			className={cx(
-				ageStyles(designType, pillar),
-				colourStyles(designType, pillar),
-			)}
-		>
+		<span className={ageStyles(designType)}>
 			{showClock && <ClockIcon />}
 			<time dateTime={webPublicationDate}>{displayString}</time>
 		</span>

@@ -11,9 +11,7 @@ import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { CardAge } from '../../Card/components/CardAge';
-import { Kicker } from '../../Kicker';
-import { headlineBackgroundColour, headlineColour } from './cardColours';
+import { CarouselCard } from './CarouselCard';
 
 const navIconStyle = css`
 	display: inline-block;
@@ -85,75 +83,6 @@ const carouselStyle = css`
 	${from.tablet} {
 		margin-left: 10px;
 	}
-`;
-
-const cardWrapperStyle = css`
-	position: relative;
-	width: 258px;
-	flex-shrink: 0;
-	margin: 0 ${space[2]}px;
-
-	scroll-snap-align: start;
-
-	:hover {
-		filter: brightness(90%);
-	}
-
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	text-decoration: none;
-
-	color: inherit;
-`;
-
-const cardWrapperFirstStyle = css`
-	${cardWrapperStyle};
-	margin-left: 0;
-`;
-
-const cardImageStyle = css`
-	width: 258px;
-`;
-
-const headlineWrapperStyle = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-) => css`
-	width: 90%;
-	min-height: 107px;
-
-	margin-top: -21px;
-	${from.desktop} {
-		margin-top: -23px;
-	}
-
-	flex-grow: 1;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	${headlineBackgroundColour(designType, pillar)}
-`;
-
-/* const headlineWrapperFirstStyle = css`
-    ${headlineWrapperStyle};
-    background-color: ${palette.news.dark};
-    color: white;
-`;
- */
-const headlineStyle = (designType: DesignType, pillar: CAPIPillar) => css`
-	${headline.xxxsmall()};
-	${from.desktop} {
-		${headline.xxsmall()};
-	}
-
-	${headlineColour(designType, pillar)};
-
-	display: block;
-	padding: ${space[1]}px;
 `;
 
 /* const headlineFirstStyle = css`
@@ -274,52 +203,6 @@ const interleave = <A,>(arr: A[], separator: A): A[] => {
 	return separated;
 };
 
-type CardProps = {
-	trail: TrailType;
-	isFirst?: boolean;
-};
-
-const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
-	const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
-
-	return (
-		<a
-			href={trail.url}
-			className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
-			data-link-name="article"
-		>
-			<img
-				className={cardImageStyle}
-				src={trail.image}
-				alt=""
-				role="presentation"
-			/>
-			<div
-				className={headlineWrapperStyle(trail.designType, trail.pillar)}
-			>
-				<h4 className={headlineStyle(trail.designType, trail.pillar)}>
-					{kickerText && (
-						<Kicker
-							text={kickerText}
-							designType={trail.designType}
-							pillar={trail.pillar}
-							showPulsingDot={trail.isLiveBlog}
-							inCard={true}
-						/>
-					)}
-					{trail.headline}
-				</h4>
-				<CardAge
-					webPublicationDate={trail.webPublicationDate}
-					showClock={true}
-					pillar={trail.pillar}
-					designType={trail.designType}
-				/>
-			</div>
-		</a>
-	);
-};
-
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
@@ -421,7 +304,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	});
 
 	const cards = trails.map((trail, i) => (
-		<Card trail={trail} isFirst={i === 0} />
+		<CarouselCard trail={trail} isFirst={i === 0} />
 	));
 
 	return (
