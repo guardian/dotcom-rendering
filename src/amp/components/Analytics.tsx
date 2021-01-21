@@ -102,7 +102,13 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-        `<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json&dom=${domain}&tag=${ipsosSectionName}"></amp-analytics>`,
+        `<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
+            <script type="application/json">
+                {
+                    "enabled": "$EQUALS(\${ampGeo(ISOCountry)}, gb)"
+                }
+            </script>
+        </amp-analytics>`,
 	];
 
 	// Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP
