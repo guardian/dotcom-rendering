@@ -16,8 +16,8 @@ export interface AnalyticsModel {
 		namespace: string;
 		apiKey: string;
 		payload: PermutivePayload;
-    };
-    ipsosSectionName: string;
+	};
+	ipsosSectionName: string;
 }
 
 export const Analytics: React.FC<{
@@ -34,8 +34,8 @@ export const Analytics: React.FC<{
 		beacon,
 		neilsenAPIID,
 		domain,
-        permutive,
-        ipsosSectionName,
+		permutive,
+		ipsosSectionName,
 	},
 }) => {
 	const scripts: string[] = [
@@ -102,7 +102,7 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
-        `<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
+		`<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
             <script type="application/json">
                 {
                     "enabled": "$EQUALS(\${ampGeo(ISOCountry)}, gb)"

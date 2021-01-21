@@ -19,8 +19,8 @@ describe('AnalyticsComponent', () => {
 			payload: {
 				'properties.content.title': 'article title',
 			},
-        },
-        ipsosSectionName: 'section',
+		},
+		ipsosSectionName: 'section',
 	};
 
 	beforeEach(() => {
