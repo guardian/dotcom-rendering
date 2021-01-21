@@ -21,11 +21,11 @@ import 'cypress-plugin-tab';
 // require('./commands')
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-    // don't break our tests if sourcepoint code breaks
-    if (/wrapperMessagingWithoutDetection/.test(err.stack)) {
-        console.warn(err);
-        return false;
-    }
+	// don't break our tests if sourcepoint code breaks
+	if (/wrapperMessagingWithoutDetection/.test(err.stack)) {
+		console.warn(err);
+		return false;
+	}
 
-    return true;
+	return true;
 });
