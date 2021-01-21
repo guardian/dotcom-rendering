@@ -16,7 +16,8 @@ export interface AnalyticsModel {
 		namespace: string;
 		apiKey: string;
 		payload: PermutivePayload;
-	};
+    };
+    ipsosSectionName: string;
 }
 
 export const Analytics: React.FC<{
@@ -33,7 +34,8 @@ export const Analytics: React.FC<{
 		beacon,
 		neilsenAPIID,
 		domain,
-		permutive,
+        permutive,
+        ipsosSectionName,
 	},
 }) => {
 	const scripts: string[] = [
@@ -100,6 +102,7 @@ export const Analytics: React.FC<{
                 }
             </script>
         </amp-analytics>`,
+        `<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json&dom=${domain}&tag=${ipsosSectionName}"></amp-analytics>`,
 	];
 
 	// Trial implementation of MoDI tracker tag. For now only to appear on the business section on AMP

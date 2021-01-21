@@ -571,6 +571,7 @@ interface ConfigType extends CommercialConfigType {
     idUrl?: string;
     mmaUrl?: string;
     brazeApiKey?: string;
+    ipsosTag?: string;
 }
 
 interface ConfigTypeBrowser {
