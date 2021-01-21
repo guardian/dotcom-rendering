@@ -10,6 +10,9 @@ import type { Colour } from 'editorialPalette';
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;
 
+export const tabletImageWidth = 720;
+export const wideImageWidth = 750;
+
 export const tabletArticleMargin = 24;
 export const wideArticleMargin = 144;
 

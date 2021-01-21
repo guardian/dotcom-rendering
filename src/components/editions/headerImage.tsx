@@ -13,7 +13,7 @@ import type { Image } from 'image';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import { tabletContentWidth, wideContentWidth } from './styles';
+import { tabletImageWidth, wideImageWidth } from './styles';
 
 // ----- Component ----- //
 
@@ -22,13 +22,13 @@ const styles = css`
 	position: relative;
 
 	${from.tablet} {
-		width: ${tabletContentWidth}px;
+		width: ${tabletImageWidth}px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 
 	${from.wide} {
-		width: ${wideContentWidth}px;
+		width: ${wideImageWidth}px;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -36,11 +36,11 @@ const styles = css`
 
 const captionStyles = css`
 	${from.tablet} {
-		width: ${tabletContentWidth}px;
+		width: ${tabletImageWidth}px;
 	}
 
 	${from.wide} {
-		width: ${wideContentWidth}px;
+		width: ${wideImageWidth}px;
 	}
 `;
 
@@ -51,13 +51,13 @@ const getImageStyle = ({ width, height }: Image): SerializedStyles => {
 		height: calc(100vw * ${height / width});
 
 		${from.tablet} {
-			width: ${tabletContentWidth}px;
-			height: ${(tabletContentWidth * height) / width}px;
+			width: ${tabletImageWidth}px;
+			height: ${(tabletImageWidth * height) / width}px;
 		}
 
 		${from.wide} {
-			width: ${wideContentWidth}px;
-			height: ${(wideContentWidth * height) / width}px;
+			width: ${wideImageWidth}px;
+			height: ${(wideImageWidth * height) / width}px;
 		}
 	`;
 };
