@@ -157,7 +157,7 @@ export const document = ({ data }: Props) => {
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			{ src: 'sentryLoader.js', module: true },
 			{ src: 'dynamicImport.js', module: true },
-			{ src: 'react.js', module: true },
+			// { src: 'react.js', module: true }, // This is now generated through loadableComponents
 		].filter(Boolean),
 	);
 
