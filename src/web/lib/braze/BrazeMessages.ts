@@ -1,6 +1,6 @@
-type Callback = (message: OurMessage) => void;
+type Callback = (message: Message) => void;
 
-type Extras = Record<string, any>;
+type Extras = Record<string, string>;
 
 interface Appboy {
 	subscribeToInAppMessage: (callback: Callback) => string;
@@ -9,38 +9,6 @@ interface Appboy {
 interface Message {
 	extras?: Extras;
 	triggerId?: string; // This keeps Typescript happy, because Message could be an InAppMessage or a ControlMessage
-	duration?: any;
-	dismissType?: any;
-	animateIn?: any;
-	animateOut?: any;
-	closeMessage?: any;
-	removeAllSubscriptions?: any;
-	removeSubscription?: any;
-	subscribeToClickedEvent?: any;
-	subscribeToDismissedEvent?: any;
-}
-
-type OurMessage = OurInAppMessage | OurControlMessage;
-interface OurInAppMessage {
-	message?: string;
-	extras: Record<string, any>;
-	triggerId?: string;
-	duration: any;
-	dismissType: 'AUTO_DISMISS' | 'SWIPE';
-	animateIn: boolean;
-	animateOut: boolean;
-	htmlId?: string;
-	css?: string;
-	closeMessage(): void;
-	removeAllSubscriptions(): void;
-	removeSubscription(subscriptionGuid: string): void;
-	subscribeToClickedEvent(subscriber: () => void): string;
-	subscribeToDismissedEvent(subscriber: () => void): string;
-}
-
-interface OurControlMessage {
-	triggerId?: string;
-	extras?: Record<string, any>;
 }
 
 class BrazeMessages {
@@ -51,11 +19,9 @@ class BrazeMessages {
 		this.appboy = appboy;
 	}
 
-	private getMessagesForSlot(
-		targetSlotName: string,
-	): Promise<OurInAppMessage> {
+	private getMessagesForSlot(targetSlotName: string): Promise<Message> {
 		return new Promise((resolve) => {
-			const callback = (message: OurMessage) => {
+			const callback = (message: Message) => {
 				const { extras } = message;
 
 				if (
@@ -63,7 +29,7 @@ class BrazeMessages {
 					extras.slotName &&
 					extras.slotName === targetSlotName
 				) {
-					resolve(message as OurInAppMessage);
+					resolve(message);
 				}
 			};
 
@@ -71,13 +37,13 @@ class BrazeMessages {
 		});
 	}
 
-	getMessagesForBanner(): Promise<OurInAppMessage> {
+	getMessagesForBanner(): Promise<Message> {
 		return this.getMessagesForSlot('Banner');
 	}
 
-	getMessagesForEndOfArticle(): Promise<OurInAppMessage> {
+	getMessagesForEndOfArticle(): Promise<Message> {
 		return this.getMessagesForSlot('EndOfArticle');
 	}
 }
 
-export { BrazeMessages, Message, Callback, OurInAppMessage };
+export { BrazeMessages, Message, Callback };

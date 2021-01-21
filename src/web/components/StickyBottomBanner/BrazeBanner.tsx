@@ -76,7 +76,7 @@ const getMessageFromBraze = async (
 					undefined,
 					internalButtonId,
 				);
-				appboy.logInAppMessageButtonClick(thisButton, message);
+				appboy.logInAppMessageButtonClick(thisButton, message as any);
 			};
 
 			const logImpressionWithBraze = () => {
