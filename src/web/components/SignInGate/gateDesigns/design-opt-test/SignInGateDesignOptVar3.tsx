@@ -24,6 +24,7 @@ import {
 
 const firstParagraphOverlay = (isComment: boolean) => css`
 	${sharedFirstParagraphOverlay(isComment)}
+	margin-top: -100px;
 	height: 100px;
 `;
 
