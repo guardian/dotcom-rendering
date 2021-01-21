@@ -31,7 +31,7 @@ const epicHeaderStyle = css`
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
-	font-weight: 900;
+	font-weight: 700;
 	margin-bottom: 0.75rem;
 	-webkit-font-smoothing: antialiased;
 `;
@@ -131,10 +131,6 @@ const genericArrowStyle = css`
 	display: inline;
 	vertical-align: sub;
 `;
-// const lightArrowStyle = css`
-// 	${genericArrowStyle}
-// 	fill: ${neutral[100]};
-// `;
 const darkArrowStyle = css`
 	${genericArrowStyle}
 	fill: ${neutral[7]};
@@ -303,6 +299,7 @@ const getReminderDate = (date: Date = new Date()): Date => {
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderDate = getReminderDate();
+	const reminderDay = '19';
 	const reminderMonth = reminderDate.toLocaleString('default', {
 		month: 'long',
 	});
@@ -310,11 +307,14 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const epicStateJson = {
 		hideButtons: false,
 		hideReminderForm: true,
+		hideReminderCta: false,
 	};
-	const epicUrl =
+	const supportDotcomComponentsUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
 			: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
+	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
+	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
 	return (
 		<div>
@@ -453,7 +453,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										</div>
 									</MoustacheSection>
 								</div>
-								<div>
+								<div data-amp-bind-hidden="epicState.hideReminderCta">
 									<div
 										className={transparentButtonStyle}
 										on="tap:AMP.setState({epicState:{hideReminderForm: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
@@ -492,9 +492,11 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<form
 								id="reminderForm"
 								method="post"
-								action=""
+								action-xhr={setReminderUrl}
 								target="_blank"
-								custom-validation-reporting="show-first-on-submit"
+								custom-validation-reporting="interact-and-submit"
+								encType="application/x-www-form-urlencoded"
+								on="submit-success:AMP.setState({epicState:{hideReminderCta: true}})"
 							>
 								<div className={inputLabelStyle}>
 									Email address
@@ -543,11 +545,12 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<input
 									type="hidden"
 									name="reminderDate"
-									value=""
+									value={`${reminderDay} ${reminderMonth} ${reminderYear}`}
 								/>
 								<input
 									className={emailInputStyle}
 									id="reminderEmailAddress"
+									name="reminderEmailAddress"
 									type="email"
 									required={true}
 								/>
