@@ -1,16 +1,17 @@
-import React, { useCallback, useEffect, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
 import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
 // import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
+import { decidePillarLight } from '@frontend/web/lib/decidePillarLight';
 import { CardAge } from '../../Card/components/CardAge';
 import { Kicker } from '../../Kicker';
 import { headlineBackgroundColour, headlineColour } from './cardColours';
@@ -21,6 +22,9 @@ const navIconStyle = css`
 	svg {
 		height: 32px;
 		fill: ${palette.neutral[46]};
+	}
+	${until.tablet} {
+		display: none;
 	}
 `;
 
@@ -115,6 +119,17 @@ const cardWrapperFirstStyle = css`
 
 const cardImageStyle = css`
 	width: 258px;
+	z-index: -1;
+`;
+
+const activeCardStyle = (pillar: CAPIPillar, isLive: boolean) => css`
+	${from.tablet} {
+		border-bottom-style: solid;
+		border-bottom-color: ${isLive
+			? decidePillarLight(pillar)
+			: pillarPalette[pillar].main};
+		border-bottom-width: 6px;
+	}
 `;
 
 const headlineWrapperStyle = (
@@ -185,6 +200,10 @@ const dotStyle = css`
 		background-color: ${palette.neutral[86]};
 		outline: none;
 	}
+
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const dotActiveStyle = (pillar: CAPIPillar) => css`
@@ -196,17 +215,17 @@ const dotActiveStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
-	/* This is a bit of a hack for the test, while we think of better UX here.
-    The dots can't line up on Desktop because we don't show 1 story per swipe*/
-	${from.phablet} {
-		display: ${index >= totalStories - 1 ? 'none' : 'auto'};
-	}
+// const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
+// 	/* This is a bit of a hack for the test, while we think of better UX here.
+//     The dots can't line up on Desktop because we don't show 1 story per swipe*/
+// 	${from.phablet} {
+// 		display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+// 	}
 
-	${from.desktop} {
-		display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-	}
-`;
+// 	${from.desktop} {
+// 		display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+// 	}
+// `;
 
 const buttonStyle = css`
 	border: none;
@@ -277,15 +296,20 @@ const interleave = <A,>(arr: A[], separator: A): A[] => {
 type CardProps = {
 	trail: TrailType;
 	isFirst?: boolean;
+	isActive?: boolean;
 };
 
-const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
+const Card: React.FC<CardProps> = ({ trail, isFirst, isActive }: CardProps) => {
 	const kickerText = trail.designType === 'Live' ? 'Live' : trail.kickerText;
 
 	return (
 		<a
 			href={trail.url}
-			className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
+			className={cx(
+				isFirst ? cardWrapperFirstStyle : cardWrapperStyle,
+				isActive &&
+					activeCardStyle(trail.pillar, trail.designType === 'Live'),
+			)}
 			data-link-name="article"
 		>
 			<img
@@ -413,47 +437,52 @@ const carouselReducer = (
 
 /*-----------------------------*/
 
+const notPresentation = (el: HTMLElement): boolean =>
+	el.getAttribute('role') !== 'presentation';
+
+const getItems = (
+	carouselRef: React.RefObject<HTMLDivElement>,
+): HTMLElement[] => {
+	const { current } = carouselRef;
+	if (current === null) return [];
+
+	return Array.from(current.children) as HTMLElement[];
+};
+
+const goToIndex = (
+	carouselRef: React.RefObject<HTMLDivElement>,
+	newIndex: number,
+) => {
+	const { current } = carouselRef;
+	if (current === null) return;
+
+	const offsets = getItems(carouselRef)
+		.filter(notPresentation)
+		.map((el) => el.offsetLeft);
+
+	current.scrollTo({ left: offsets[newIndex] });
+};
+
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
 	ophanComponentName,
 	pillar,
 }: OnwardsType) => {
-	const cards = trails.map((trail, i) => (
-		<Card trail={trail} isFirst={i === 0} />
-	));
 	const carouselRef = useRef<HTMLDivElement>(null);
 
-	const length = trails.length - 2;
+	const { length } = trails;
 
 	const [state, dispatch] = useReducer(carouselReducer, initialCarouselState);
-
-	const notPresentation = (el: HTMLElement): boolean =>
-		el.getAttribute('role') !== 'presentation';
-
-	const getItems = (): HTMLElement[] => {
-		const { current } = carouselRef;
-		if (current === null) return [];
-
-		return Array.from(current.children) as HTMLElement[];
-	};
-
-	const goToIndex = useCallback((newIndex: number) => {
-		const { current } = carouselRef;
-		if (current === null) return;
-
-		const offsets = getItems()
-			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
-
-		current.scrollTo({ left: offsets[newIndex] });
-	}, []);
+	const cards = trails.map((trail, i) => (
+		<Card trail={trail} isFirst={i === 0} isActive={i === state.desired} />
+	));
 
 	useEffect(() => {
-		goToIndex(state.desired);
+		goToIndex(carouselRef, state.desired);
 		const id = setTimeout(() => dispatch({ type: 'done' }), transitionTime);
 		return () => clearTimeout(id);
-	}, [state.desired, goToIndex]);
+	}, [state.desired]);
 
 	return (
 		<div
@@ -502,7 +531,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							className={cx(
 								dotStyle,
 								i === state.desired && dotActiveStyle(pillar),
-								adjustNumberOfDotsStyle(i, trails.length),
+								// adjustNumberOfDotsStyle(i, trails.length),
 							)}
 						/>
 					))}
