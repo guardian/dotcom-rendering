@@ -85,6 +85,8 @@ describe('MostViewedList', () => {
 
 		const { getByText } = render(<MostViewedRight pillar={Pillar.News} />);
 
-		expect(getByText(response.data.trails[0].byline)).toBeInTheDocument();
+		expect(
+			getByText('Jennifer Rankin and Daniel Boffey'),
+		).toBeInTheDocument();
 	});
 });
