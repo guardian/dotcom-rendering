@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
+import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -58,7 +58,7 @@ const interviewStyles = css`
 `;
 
 const interviewFontStyles = css`
-${articleWidthStyles}
+	${articleWidthStyles}
 
 	${headline.xsmall({ lineHeight: 'regular' })}
 	font-weight: 400;
@@ -72,11 +72,11 @@ ${articleWidthStyles}
 		${headline.medium({ lineHeight: 'regular' })}
 		font-weight: 400;
 	}
-	background-color: #000000;
-	color: white;
+	background-color: ${neutral[0]};
+	color: ${neutral[100]};
 	white-space: pre-wrap;
 	padding-bottom: 0.3125rem;
-	box-shadow: -0.75rem 0 0 black, 0.75rem 0 0 black;
+	box-shadow: -0.75rem 0 0 ${neutral[0]}, 0.75rem 0 0 ${neutral[0]};
 	display: inline;
 `;
 
