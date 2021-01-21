@@ -5,7 +5,7 @@ export const decidePillar = ({
 	design,
 }: {
 	pillar: CAPIPillar;
-	design: Design;
+	design?: Design;
 }): Theme => {
 	// We override the pillar to be opinion on Comment news pieces
 	if (design === Design.Comment && pillar === 'news') return Pillar.Opinion;
