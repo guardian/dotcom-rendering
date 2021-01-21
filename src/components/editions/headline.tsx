@@ -95,11 +95,11 @@ const getStyles = (format: Format): SerializedStyles => {
 	return css(styles(format), standardFontStyles);
 };
 
-const getHeadlineText = (item: Item): string | JSX.Element => {
+const getHeadlineText = (item: Item): JSX.Element | string => {
 	if (item.design === Design.Interview) {
 		return <span css={interviewFontStyles}>{item.headline}</span>;
 	}
-	return <>{item.headline}</>;
+	return item.headline;
 };
 
 const Headline: FC<Props> = ({ item }) => {
