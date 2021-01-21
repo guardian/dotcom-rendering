@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
-import { Display, Design } from '@guardian/types';
+import { Design , Display} from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
 import Headline from 'components/editions/headline';
@@ -51,7 +51,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
-	<header css={headerStyles}>
+	<header>
 		<HeaderImage item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
