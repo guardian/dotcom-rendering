@@ -1,7 +1,7 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Pillar } from '@guardian/types';
 import { ABProvider } from '@guardian/ab-react';
 
 import {
@@ -49,7 +49,6 @@ export const withTwoTabs = () => {
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>
@@ -70,7 +69,6 @@ export const withOneTabs = () => {
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>
@@ -91,7 +89,6 @@ export const withNoMostSharedImage = () => {
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>

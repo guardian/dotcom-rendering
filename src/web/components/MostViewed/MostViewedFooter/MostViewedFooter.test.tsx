@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import { Design, Pillar } from '@guardian/types';
+import { Pillar } from '@guardian/types';
 
 import {
 	responseWithTwoTabs,
@@ -49,7 +49,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
@@ -84,7 +83,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
@@ -116,7 +114,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
@@ -152,7 +149,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
@@ -186,7 +182,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
@@ -203,7 +198,6 @@ describe('MostViewedFooterData', () => {
 					sectionName="Section Name"
 					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design={Design.Article}
 				/>
 			</AbProvider>,
 		);
