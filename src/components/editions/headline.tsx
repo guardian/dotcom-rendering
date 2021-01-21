@@ -61,7 +61,7 @@ const interviewFontStyles = css`
 	${articleWidthStyles}
 
 	${headline.xsmall({ lineHeight: 'regular' })}
-	font-weight: 400;
+		font-weight: 400;
 
 	${from.mobileMedium} {
 		${headline.small({ lineHeight: 'regular' })}
