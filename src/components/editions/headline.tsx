@@ -52,8 +52,38 @@ const standardFontStyles = css`
 		${headline.medium({ lineHeight: 'tight' })}
 	}
 `;
+const interviewStyles = css`
+	margin-left: 0.75rem;
+	border: 0;
+`;
+
+const interviewFontStyles = css`
+${articleWidthStyles}
+
+	${headline.xsmall({ lineHeight: 'regular' })}
+	font-weight: 400;
+
+	${from.mobileMedium} {
+		${headline.small({ lineHeight: 'regular' })}
+		font-weight: 400;
+	}
+
+	${from.tablet} {
+		${headline.medium({ lineHeight: 'regular' })}
+		font-weight: 400;
+	}
+	background-color: #000000;
+	color: white;
+	white-space: pre-wrap;
+	padding-bottom: 0.3125rem;
+	box-shadow: -0.75rem 0 0 black, 0.75rem 0 0 black;
+	display: inline;
+`;
 
 const getStyles = (format: Format): SerializedStyles => {
+	if (format.design === Design.Interview) {
+		return css(styles(format), interviewStyles);
+	}
 	if (
 		format.design === Design.Review ||
 		format.display === Display.Showcase ||
@@ -66,7 +96,11 @@ const getStyles = (format: Format): SerializedStyles => {
 };
 
 const Headline: FC<Props> = ({ item }) => {
-	return <h1 css={getStyles(item)}>{item.headline}</h1>;
+	return (
+		<h1 css={getStyles(item)}>
+			<span css={interviewFontStyles}>{item.headline}</span>
+		</h1>
+	);
 };
 
 // ----- Exports ----- //
