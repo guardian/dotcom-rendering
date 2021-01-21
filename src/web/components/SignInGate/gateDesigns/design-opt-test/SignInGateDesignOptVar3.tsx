@@ -1,28 +1,34 @@
 import React from 'react';
-import { cx } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '../types';
 import {
 	actionButtons,
 	bodyBold,
 	bodyText,
 	faq,
-	firstParagraphOverlay,
 	headingStyles,
-	hideElementsCss,
 	laterButton,
 	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
 	signInLink,
-} from './shared';
+	firstParagraphOverlay as sharedFirstParagraphOverlay,
+	hideElementsCss,
+} from '../shared';
 
-export const SignInGateMain = ({
+const firstParagraphOverlay = (isComment: boolean) => css`
+	${sharedFirstParagraphOverlay(isComment)}
+	height: 100px;
+`;
+
+// Less whitespace
+export const SignInGateDesignOptVar3 = ({
 	signInUrl,
 	guUrl,
 	dismissGate,
@@ -31,7 +37,10 @@ export const SignInGateMain = ({
 	isComment,
 }: SignInGateProps) => {
 	return (
-		<div className={signInGateContainer} data-cy="sign-in-gate-main">
+		<div
+			className={signInGateContainer}
+			data-cy="sign-in-gate-design-opt-variant-3"
+		>
 			<style>{hideElementsCss}</style>
 			<div className={firstParagraphOverlay(!!isComment)} />
 			<h1 className={headingStyles}>
@@ -49,7 +58,7 @@ export const SignInGateMain = ({
 				experience for you and for others. You will always be able to
 				control your own&nbsp;
 				<button
-					data-cy="sign-in-gate-main_privacy"
+					data-cy="sign-in-gate-design-opt-variant-3_privacy"
 					className={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
@@ -62,7 +71,7 @@ export const SignInGateMain = ({
 			</p>
 			<div className={actionButtons}>
 				<LinkButton
-					data-cy="sign-in-gate-main_register"
+					data-cy="sign-in-gate-design-opt-variant-3_register"
 					className={registerButton}
 					priority="primary"
 					size="small"
@@ -75,7 +84,7 @@ export const SignInGateMain = ({
 				</LinkButton>
 
 				<LinkButton
-					data-cy="sign-in-gate-main_dismiss"
+					data-cy="sign-in-gate-design-opt-variant-3_dismiss"
 					className={laterButton}
 					priority="subdued"
 					size="small"
@@ -93,7 +102,7 @@ export const SignInGateMain = ({
 			</p>
 
 			<Link
-				data-cy="sign-in-gate-main_signin"
+				data-cy="sign-in-gate-design-opt-variant-3_signin"
 				className={signInLink}
 				href={signInUrl}
 				onClick={() => {
