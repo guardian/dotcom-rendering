@@ -13,6 +13,7 @@ import {
 	brandAlt,
 	neutral,
 	error,
+	brandBackground,
 } from '@guardian/src-foundations/palette';
 import { JsonScript } from '@root/src/amp/components/JsonScript';
 
@@ -120,7 +121,7 @@ const blueButtonStyle = css`
 	border: 1px solid ${brand[400]};
 	margin-bottom: 6px;
 	&:hover {
-		background-color: #234b8a;
+		background-color: ${brandBackground.ctaSecondaryHover};
 	}
 `;
 const genericArrowStyle = css`
@@ -217,6 +218,10 @@ const buttonsStyle = css`
 	display: flex;
 `;
 const closeButtonStyle = css`
+	border: 0;
+	outline: 0;
+	padding: 0;
+	background: transparent;
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
@@ -327,10 +332,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		hideReminderForm: false,
 		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
 	};
-	const supportDotcomComponentsUrl = 'https://mjacobson.eu.ngrok.io';
-	// process.env.GU_STAGE === 'PROD'
-	// 	? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
-	// 	: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
+	const supportDotcomComponentsUrl =
+		process.env.GU_STAGE === 'PROD'
+			? 'https://contributions.guardianapis.com'
+			: 'https://contributions.code.dev-guardianapis.com';
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
@@ -472,12 +477,12 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									</MoustacheSection>
 								</div>
 								<div data-amp-bind-hidden="epicState.hideReminderCta">
-									<div
+									<button
 										className={transparentButtonStyle}
 										on="tap:AMP.setState({epicState:{hideReminderWrapper: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
 									>
 										Remind me in {reminderMonth}
-									</div>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -492,7 +497,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									className={epicHeaderStyle}
 									data-amp-bind-text="epicState.headerText"
 								/>
-								<div
+								<button
 									className={closeButtonStyle}
 									on="tap:AMP.setState({epicState:{hideReminderWrapper: true, hideButtons: false}}),reminderForm.clear"
 								>
@@ -506,7 +511,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 											d="M15.325 17.025l7.225 6.625 1.075-1.075-6.6-7.25 6.6-7.25L22.55 7l-7.225 6.625-7.25-6.6L7 8.1l6.625 7.225L7 22.55l1.075 1.075 7.25-6.6z"
 										/>
 									</svg>
-								</div>
+								</button>
 							</div>
 							<form
 								id="reminderForm"
@@ -580,7 +585,6 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									value="Set a reminder"
 								/>
 								<div
-									submit-error={true}
 									className={reminderErrorStyle}
 									data-amp-bind-hidden="epicState.hideFailureMessage"
 								>
