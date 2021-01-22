@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Pillar } from '@guardian/types';
+
 import { WitnessTextBlockComponent } from './WitnessTextBlockComponent';
 
 export default {
@@ -42,7 +44,7 @@ export const WitnessTextBlockComponentDefault = () => (
 			description={witnessTypeData.description}
 			authorUsername={witnessTypeData.authorUsername}
 			dateCreated={witnessTypeData.dateCreated}
-			pillar="sport"
+			pillar={Pillar.Sport}
 		/>
 	</div>
 );

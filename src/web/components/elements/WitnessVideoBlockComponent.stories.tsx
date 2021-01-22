@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Pillar } from '@guardian/types';
+
 import { WitnessVideoBlockComponent } from './WitnessVideoBlockComponent';
 
 export default {
@@ -55,7 +57,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 			height={witnessTypeData.height}
 			youtubeUrl={witnessTypeData.youtubeUrl}
 			dateCreated={witnessTypeData.dateCreated}
-			pillar="sport"
+			pillar={Pillar.Sport}
 		/>
 	</div>
 );
