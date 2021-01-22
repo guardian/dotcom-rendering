@@ -11,6 +11,7 @@ import { SpotifyBlockComponent } from '../components/elements/SpotifyBlockCompon
 import { VimeoBlockComponent } from '../components/elements/VimeoBlockComponent';
 import { DocumentBlockComponent } from '../components/elements/DocumentBlockComponent';
 import { SoundcloudBlockComponent } from '../components/elements/SoundcloudBlockComponent';
+import { TweetBlockComponent } from '../components/elements/TweetBlockComponent';
 import { Figure } from '../components/Figure';
 import { Display, Design } from '@guardian/types';
 
@@ -118,13 +119,13 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-            <UnsafeEmbedBlockComponent
-                key="1"
-                html={EmbeddedElements.scribdEmbedEmbed.html}
-                alt={EmbeddedElements.scribdEmbedEmbed.alt}
-                index={1}
-            />
-        </Figure>,
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.scribdEmbedEmbed.html}
+				alt={EmbeddedElements.scribdEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
 		<p>
 			Example of a tiktok embed from a 'embed' element type, the embed
 			source article is{' '}
@@ -133,33 +134,37 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-            <UnsafeEmbedBlockComponent
-                key="1"
-                html={EmbeddedElements.tiktokEmbedEmbed.html}
-                alt={EmbeddedElements.tiktokEmbedEmbed.alt}
-                index={1}
-            />
-        </Figure>,
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.tiktokEmbedEmbed.html}
+				alt={EmbeddedElements.tiktokEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
 		<p>
-			Example of a soundcloud embed from an 'audio' element type, the embed
-			source article is{' '}
+			Example of a soundcloud embed from an 'audio' element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
 				here
 			</a>
 		</p>,
 		<Figure role="inline">
-            <SoundcloudBlockComponent element={EmbeddedElements.soundcloudAudioEmbed} />
-        </Figure>,
+			<SoundcloudBlockComponent
+				element={EmbeddedElements.soundcloudAudioEmbed}
+			/>
+		</Figure>,
 		<p>
-			Example of a soundcloud embed from an 'embed' element type, the embed
-			source article is{' '}
+			Example of a soundcloud embed from an 'embed' element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
 				here
 			</a>
 		</p>,
 		<Figure role="inline">
-            <SoundcloudBlockComponent element={EmbeddedElements.soundcloudEmbedEmbed} />
-        </Figure>,
+			<SoundcloudBlockComponent
+				element={EmbeddedElements.soundcloudEmbedEmbed}
+			/>
+		</Figure>,
 		<p>
 			Example of a youtube embed from an 'embed' element type, the embed
 			source article is{' '}
@@ -168,12 +173,12 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-            <EmbedBlockComponent
-                key={1}
-                html={EmbeddedElements.youtubeEmbedEmbed.html}
-                alt={EmbeddedElements.youtubeEmbedEmbed.alt}
-            />
-        </Figure>,
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.youtubeEmbedEmbed.html}
+				alt={EmbeddedElements.youtubeEmbedEmbed.alt}
+			/>
+		</Figure>,
 		<p>
 			Example of a spotify embed from an 'audio' element type, the embed
 			source article is{' '}
@@ -182,32 +187,115 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-        <SpotifyBlockComponent
-            embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
-            height={EmbeddedElements.spotifyAudioEmbed.height}
-            width={EmbeddedElements.spotifyAudioEmbed.width}
-            title={EmbeddedElements.spotifyAudioEmbed.title}
-            pillar={pillar}
-            caption={EmbeddedElements.spotifyAudioEmbed.caption}
-            design={design}
-            display={display}
-            credit="Spotify"
-        />
-        </Figure>,
-        <p>
-            Example of a spotify embed from an 'embed' element type, the embed
-            source article is{' '}
-            <a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
-                here
-            </a>
-        </p>,
+			<SpotifyBlockComponent
+				embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
+				height={EmbeddedElements.spotifyAudioEmbed.height}
+				width={EmbeddedElements.spotifyAudioEmbed.width}
+				title={EmbeddedElements.spotifyAudioEmbed.title}
+				pillar={pillar}
+				caption={EmbeddedElements.spotifyAudioEmbed.caption}
+				design={design}
+				display={display}
+				credit="Spotify"
+			/>
+		</Figure>,
+		<p>
+			Example of a spotify embed from an 'embed' element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
+				here
+			</a>
+		</p>,
 		<Figure role="inline">
-        <EmbedBlockComponent
-            key={1}
-            html={EmbeddedElements.spotifyEmbedEmbed.html}
-            alt={EmbeddedElements.spotifyEmbedEmbed.alt}
-        />
-        </Figure>,
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.spotifyEmbedEmbed.html}
+				alt={EmbeddedElements.spotifyEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a bandcamp embed from an 'embed' element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.bandcampEmbedEmbed.html}
+				alt={EmbeddedElements.bandcampEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a The Conversation embed from an 'embed' element type,
+			the embed source article is{' '}
+			<a href="https://www.theguardian.com/australia-news/2020/mar/03/the-first-economic-modelling-of-coronavirus-scenarios-is-grim-for-the-world">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.theconversationEmbedEmbed.html}
+				alt={EmbeddedElements.theconversationEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+
+		<p>
+			Example of a twitter embed from an 'tweet' element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<TweetBlockComponent element={EmbeddedElements.twitterTweetEmbed} />
+		</Figure>,
+		<p>
+			Example of a twitter embed from an 'embed' element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.twitterEmbedEmbed.html}
+				alt={EmbeddedElements.twitterEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a Our World In Data embed from an 'embed' element type,
+			the embed source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.ourworldindataEmbedEmbed.html}
+				alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a BBC embed from an 'embed' element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.bbcEmbedEmbed.html}
+				alt={EmbeddedElements.bbcEmbedEmbed.alt}
+			/>
+		</Figure>,
 	];
 }
 
@@ -232,23 +320,17 @@ export const DefaultStory = () => {
 				`}
 			>
 				{body('news', Design.Article, Display.Standard)}
-				{/*
-                        TODO
-                        embed.spotify.com
-                        bandcamp.com
-                        counter.theconversation.com
-                        platform.twitter.com
-                        ourworldindata.org
-                        bbc.co.uk
-                    */}
 			</div>
 		</ContainerLayout>
 	);
 };
 DefaultStory.story = { name: 'default' };
 
-
-const SoundcloudBlockElementType:  'model.dotcomrendering.pageElements.SoundcloudBlockElement' = "model.dotcomrendering.pageElements.SoundcloudBlockElement";
+const SoundcloudBlockElementType: 'model.dotcomrendering.pageElements.SoundcloudBlockElement' =
+	'model.dotcomrendering.pageElements.SoundcloudBlockElement';
+const TweetBlockElementType: 'model.dotcomrendering.pageElements.TweetBlockElement' =
+	'model.dotcomrendering.pageElements.TweetBlockElement';
+const Inline: RoleType = 'inline';
 
 const EmbeddedElements = {
 	instagramEmbed: {
@@ -301,7 +383,7 @@ const EmbeddedElements = {
 		credit: undefined,
 		title: undefined,
 	},
-    scribdDocumentEmbed: {
+	scribdDocumentEmbed: {
 		embedUrl: 'https://www.scribd.com/embeds/469886680/content',
 		isThirdPartyTracking: true,
 		width: 613,
@@ -310,61 +392,124 @@ const EmbeddedElements = {
 		isMandatory: false,
 		height: 460,
 	},
-    scribdEmbedEmbed: {
-        "isThirdPartyTracking": true,
-        "safe": false,
-        "alt": "Letter",
-        "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-        "html": "<p  style=\" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;\"> <a title=\"View Climate Change Letter UN on Scribd\" href=\"https://www.scribd.com/document/482633239/Climate-Change-Letter-UN#from_embed\"  style=\"text-decoration: underline;\" >Climate Change Letter UN</a> by <a title=\"View The Guardian's profile on Scribd\" href=\"https://www.scribd.com/user/17081734/The-Guardian#from_embed\"  style=\"text-decoration: underline;\" >The Guardian</a> on Scribd</p><iframe class=\"scribd_iframe_embed\" title=\"Climate Change Letter UN\" src=\"https://www.scribd.com/embeds/482633239/content?start_page=1&view_mode=scroll&access_key=key-u8wwc0Osw6NCcbfolTy0\" data-auto-height=\"false\" data-aspect-ratio=\"0.7080062794348508\" scrolling=\"no\" id=\"doc_24425\" width=\"100%\" height=\"600\" frameborder=\"0\"></iframe>",
-        "isMandatory": false
+	scribdEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: false,
+		alt: 'Letter',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;"> <a title="View Climate Change Letter UN on Scribd" href="https://www.scribd.com/document/482633239/Climate-Change-Letter-UN#from_embed"  style="text-decoration: underline;" >Climate Change Letter UN</a> by <a title="View The Guardian\'s profile on Scribd" href="https://www.scribd.com/user/17081734/The-Guardian#from_embed"  style="text-decoration: underline;" >The Guardian</a> on Scribd</p><iframe class="scribd_iframe_embed" title="Climate Change Letter UN" src="https://www.scribd.com/embeds/482633239/content?start_page=1&view_mode=scroll&access_key=key-u8wwc0Osw6NCcbfolTy0" data-auto-height="false" data-aspect-ratio="0.7080062794348508" scrolling="no" id="doc_24425" width="100%" height="600" frameborder="0"></iframe>',
+		isMandatory: false,
 	},
-    tiktokEmbedEmbed: {
-        "isThirdPartyTracking": true,
-        "safe": false,
-        "alt": "Everything is cake on TikTok",
-        "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-        "html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@danbanbam/video/6849106362224413958\" data-video-id=\"6849106362224413958\" style=\"max-width: 605px;min-width: 325px;\" > <section> <a target=\"_blank\" title=\"@danbanbam\" href=\"https://www.tiktok.com/@danbanbam\">@danbanbam</a> <p>Cake: The Movie. Coming this Fall. <a title=\"cake\" target=\"_blank\" href=\"https://www.tiktok.com/tag/cake\">##cake</a> <a title=\"serve\" target=\"_blank\" href=\"https://www.tiktok.com/tag/serve\">##serve</a> <a title=\"vibezone\" target=\"_blank\" href=\"https://www.tiktok.com/tag/vibezone\">##VibeZone</a> <a title=\"movie\" target=\"_blank\" href=\"https://www.tiktok.com/tag/movie\">##movie</a></p> <a target=\"_blank\" title=\"♬ original sound - Daniel Spencer\" href=\"https://www.tiktok.com/music/original-sound-6849097596150303493\">♬ original sound - Daniel Spencer</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>",
-        "isMandatory": false
+	tiktokEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: false,
+		alt: 'Everything is cake on TikTok',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@danbanbam/video/6849106362224413958" data-video-id="6849106362224413958" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@danbanbam" href="https://www.tiktok.com/@danbanbam">@danbanbam</a> <p>Cake: The Movie. Coming this Fall. <a title="cake" target="_blank" href="https://www.tiktok.com/tag/cake">##cake</a> <a title="serve" target="_blank" href="https://www.tiktok.com/tag/serve">##serve</a> <a title="vibezone" target="_blank" href="https://www.tiktok.com/tag/vibezone">##VibeZone</a> <a title="movie" target="_blank" href="https://www.tiktok.com/tag/movie">##movie</a></p> <a target="_blank" title="♬ original sound - Daniel Spencer" href="https://www.tiktok.com/music/original-sound-6849097596150303493">♬ original sound - Daniel Spencer</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
+		isMandatory: false,
 	},
-    soundcloudAudioEmbed: {
-        "isTrack": true,
-        "isThirdPartyTracking": true,
-        "_type": SoundcloudBlockElementType,
-        "html": "\n            <iframe\n                height=\"460\"\n                width=\"460\"\n                src=\"https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F875169979&show_artwork=true\"\n                frameborder=\"0\"\n                allowfullscreen\n            ></iframe>\n        ",
-        "id": "875169979",
-        "isMandatory": true
+	soundcloudAudioEmbed: {
+		isTrack: true,
+		isThirdPartyTracking: true,
+		_type: SoundcloudBlockElementType,
+		html:
+			'\n            <iframe\n                height="460"\n                width="460"\n                src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F875169979&show_artwork=true"\n                frameborder="0"\n                allowfullscreen\n            ></iframe>\n        ',
+		id: '875169979',
+		isMandatory: true,
 	},
-    soundcloudEmbedEmbed: {
-        "isTrack": true,
-        "isThirdPartyTracking": true,
-        "_type": SoundcloudBlockElementType,
-        "html": "<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/881588431&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true\"></iframe><div style=\"font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;\"><a href=\"https://soundcloud.com/planetmurecords\" title=\"Planet Mu Records\" target=\"_blank\" style=\"color: #cccccc; text-decoration: none;\">Planet Mu Records</a> · <a href=\"https://soundcloud.com/planetmurecords/john-frusciante-amethblowl-timesig\" title=\"John Frusciante - Amethblowl (TIMESIG011)\" target=\"_blank\" style=\"color: #cccccc; text-decoration: none;\">John Frusciante - Amethblowl (TIMESIG011)</a></div>",
-        "id": "881588431",
-        "isMandatory": false
+	soundcloudEmbedEmbed: {
+		isTrack: true,
+		isThirdPartyTracking: true,
+		_type: SoundcloudBlockElementType,
+		html:
+			'<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/881588431&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/planetmurecords" title="Planet Mu Records" target="_blank" style="color: #cccccc; text-decoration: none;">Planet Mu Records</a> · <a href="https://soundcloud.com/planetmurecords/john-frusciante-amethblowl-timesig" title="John Frusciante - Amethblowl (TIMESIG011)" target="_blank" style="color: #cccccc; text-decoration: none;">John Frusciante - Amethblowl (TIMESIG011)</a></div>',
+		id: '881588431',
+		isMandatory: false,
 	},
-    youtubeEmbedEmbed: {
-        "isThirdPartyTracking": false,
-        "safe": true,
-        "alt": "Watch the video for Sleaford Mods’ Second",
-        "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-        "html": "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube-nocookie.com/embed/IT09DGuXwYQ\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
-        "isMandatory": false
-    },
-    spotifyAudioEmbed:{
-        "embedUrl": "https://embed.spotify.com/?uri=spotify:user:matthew.holmes.guardian:playlist:6UQ1JOduKGyS46SThaxy0B",
-        "isThirdPartyTracking": true,
-        "width": 300,
-        "_type": "model.dotcomrendering.pageElements.SpotifyBlockElement",
-        "caption": "Listen to the list on Spotify.",
-        "title": "Fuel RR playlist: 'love is...', a playlist by matthew.holmes.guardian on Spotify",
-        "height": 380
-    },
-    spotifyEmbedEmbed:{
-        "isThirdPartyTracking": true,
-        "safe": true,
-        "alt": "Joy Division Ranked Spotify Playlist",
-        "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-        "html": "<iframe src=\"https://embed.spotify.com/?uri=spotify%3Auser%3Aguardianmusic%3Aplaylist%3A1XUwszj7DC0uRY5L7Anj6I\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>",
-        "isMandatory": true
-    },
+	youtubeEmbedEmbed: {
+		isThirdPartyTracking: false,
+		safe: true,
+		alt: 'Watch the video for Sleaford Mods’ Second',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/IT09DGuXwYQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+		isMandatory: false,
+	},
+	spotifyAudioEmbed: {
+		embedUrl:
+			'https://embed.spotify.com/?uri=spotify:user:matthew.holmes.guardian:playlist:6UQ1JOduKGyS46SThaxy0B',
+		isThirdPartyTracking: true,
+		width: 300,
+		_type: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
+		caption: 'Listen to the list on Spotify.',
+		title:
+			"Fuel RR playlist: 'love is...', a playlist by matthew.holmes.guardian on Spotify",
+		height: 380,
+	},
+	spotifyEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: true,
+		alt: 'Joy Division Ranked Spotify Playlist',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aguardianmusic%3Aplaylist%3A1XUwszj7DC0uRY5L7Anj6I" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>',
+		isMandatory: true,
+	},
+	bandcampEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: true,
+		alt: 'Isaac by Jonny and the Baptists',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=1077257657/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/track=2222104579/transparent=true/" seamless><a href="https://jonnyandthebaptists.bandcamp.com/album/love-you-hate-bastards">Love You &amp; Hate Bastards by Jonny &amp; The Baptists</a></iframe>',
+		isMandatory: true,
+	},
+	theconversationEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: false,
+		alt: 'Script',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<script type="text/javascript" src="https://theconversation.com/javascripts/lib/content_tracker_hook.js" id="theconversation_tracker_hook" data-counter="https://counter.theconversation.com/content/132759/count?distributor=republish-lightbox-advanced" async="async"></script>',
+		isMandatory: false,
+	},
+	twitterTweetEmbed: {
+		role: Inline,
+		isThirdPartyTracking: false,
+		_type: TweetBlockElementType,
+		html:
+			'<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A staff member at MSNBC has died of coronavirus. It’s hitting them pretty hard as you can see from <a href="https://twitter.com/maddow?ref_src=twsrc%5Etfw">@maddow</a>’s sign-off today <a href="https://t.co/nbqRRaammr">pic.twitter.com/nbqRRaammr</a></p>&mdash; Matt Bevan 🎙 (@MatthewBevan) <a href="https://twitter.com/MatthewBevan/status/1241244758653071360?ref_src=twsrc%5Etfw">March 21, 2020</a></blockquote>\n',
+		hasMedia: false,
+		id: '1241244758653071360',
+		url: 'https://twitter.com/MatthewBevan/status/1241244758653071360',
+	},
+	twitterEmbedEmbed: {
+		isThirdPartyTracking: false,
+		safe: false,
+		alt: 'Video: social distancing',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Confused about the difference between self-isolation and social distancing - and who should do it? 🤷🏻‍♀️ Watch this as <a href="https://twitter.com/robosborneitv?ref_src=twsrc%5Etfw">@robosborneitv</a> explains, with the help of his mum, and <a href="https://twitter.com/ckkhaira?ref_src=twsrc%5Etfw">@ckkhaira</a> <a href="https://t.co/SNzpDRFxsz">https://t.co/SNzpDRFxsz</a> <a href="https://twitter.com/hashtag/coronavirus?src=hash&amp;ref_src=twsrc%5Etfw">#coronavirus</a> <a href="https://twitter.com/hashtag/covid19?src=hash&amp;ref_src=twsrc%5Etfw">#covid19</a> <a href="https://t.co/wC6ezmAqRC">pic.twitter.com/wC6ezmAqRC</a></p>&mdash; ITV Wales News (@ITVWales) <a href="https://twitter.com/ITVWales/status/1241068501076410376?ref_src=twsrc%5Etfw">March 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+		isMandatory: false,
+	},
+	ourworldindataEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: true,
+		alt: 'Our World in Data',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<iframe src="https://ourworldindata.org/grapher/daily-covid-deaths-3-day-average" style="width: 100%; height: 600px; border: 0px none;"></iframe>',
+		isMandatory: false,
+	},
+	bbcEmbedEmbed: {
+		isThirdPartyTracking: true,
+		safe: true,
+		alt: 'Watch a trailer for Enslaved',
+		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		html:
+			'<iframe width="fullwidth" height="500" frameborder="0" src="https://www.bbc.co.uk/programmes/p08tfnfb/player"></iframe>',
+		isMandatory: false,
+	},
 };
