@@ -243,12 +243,12 @@ const inputLabelStyle = css`
 	${textSans.medium({ fontWeight: 'bold' })};
 	margin-bottom: 4px;
 `;
-const invalidInputLabel = css`
+const invalidInputLabelStyle = css`
 	${textSans.medium()};
 	color: ${error[400]};
 	display: flex;
 `;
-const invalidInputSvg = css`
+const invalidInputSvgStyle = css`
 	width: 30px;
 	height: 30px;
 	fill: ${error[400]};
@@ -317,9 +317,10 @@ const buildUrl = (
 
 const getReminderDate = (date: Date = new Date()): Date => {
 	const monthsAhead = date.getDate() < 20 ? 1 : 2;
-	date.setMonth(date.getMonth() + monthsAhead);
+	const reminderDate = new Date();
+	reminderDate.setMonth(date.getMonth() + monthsAhead);
 
-	return date;
+	return reminderDate;
 };
 
 const arrowSvg = (className: string) => (
@@ -534,11 +535,11 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 								<div
 									visible-when-invalid="typeMismatch"
-									className={invalidInputLabel}
+									className={invalidInputLabelStyle}
 									validation-for="reminderEmailAddress"
 								>
 									<svg
-										className={invalidInputSvg}
+										className={invalidInputSvgStyle}
 										viewBox="0 0 30 30"
 										xmlns="http://www.w3.org/2000/svg"
 									>
@@ -552,13 +553,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 								<div
 									visible-when-invalid="valueMissing"
-									className={invalidInputLabel}
+									className={invalidInputLabelStyle}
 									validation-for="reminderEmailAddress"
 								>
 									<svg
 										viewBox="0 0 30 30"
 										xmlns="http://www.w3.org/2000/svg"
-										className={invalidInputSvg}
+										className={invalidInputSvgStyle}
 									>
 										<path
 											fillRule="evenodd"
