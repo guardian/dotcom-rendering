@@ -4,7 +4,6 @@ const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
-
 const friendlyErrorsWebpackPlugin = () =>
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
