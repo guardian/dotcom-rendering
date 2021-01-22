@@ -49,17 +49,18 @@ export const WitnessImageBlockComponent = ({
 				itemProp="contentURL"
 			/>
 			<figcaption className={captionStyles}>
-				<h3 className={titleStyles(pillar)} itemProp="name">
-					{title}
-				</h3>
+				<h3
+					className={titleStyles(pillar)}
+					itemProp="name"
+					dangerouslySetInnerHTML={{ __html: title }}
+				/>
 				<div itemProp="description">
 					<p
 						className={css`
 							${body.medium()}
 						`}
-					>
-						{caption}
-					</p>
+						dangerouslySetInnerHTML={{ __html: caption }}
+					/>
 				</div>
 			</figcaption>
 		</>

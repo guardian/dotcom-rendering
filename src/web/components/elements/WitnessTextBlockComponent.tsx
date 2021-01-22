@@ -34,17 +34,18 @@ export const WitnessTextBlockComponent = ({
 		pillar={pillar}
 	>
 		<>
-			<h3 className={titleStyles(pillar)} itemProp="name">
-				{title}
-			</h3>
+			<h3
+				className={titleStyles(pillar)}
+				itemProp="name"
+				dangerouslySetInnerHTML={{ __html: title }}
+			/>
 			<div itemProp="text">
 				<p
 					className={css`
 						${body.medium()}
 					`}
-				>
-					{description}
-				</p>
+					dangerouslySetInnerHTML={{ __html: description }}
+				/>
 			</div>
 		</>
 	</WitnessWrapper>

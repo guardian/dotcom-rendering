@@ -57,17 +57,18 @@ export const WitnessVideoBlockComponent = ({
 					src={parsedURL}
 				/>
 				<figcaption className={captionStyles}>
-					<h3 className={titleStyles(pillar)} itemProp="name">
-						{title}
-					</h3>
+					<h3
+						className={titleStyles(pillar)}
+						itemProp="name"
+						dangerouslySetInnerHTML={{ __html: title }}
+					/>
 					<div itemProp="description">
 						<p
 							className={css`
 								${body.medium()}
 							`}
-						>
-							{description}
-						</p>
+							dangerouslySetInnerHTML={{ __html: description }}
+						/>
 					</div>
 				</figcaption>
 			</>
