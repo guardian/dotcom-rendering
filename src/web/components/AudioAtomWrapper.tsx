@@ -5,8 +5,6 @@ import {
 	getConsentFor,
 } from '@guardian/consent-management-platform';
 
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
-
 type Props = {
 	id: string;
 	trackUrl: string;
@@ -55,7 +53,7 @@ export const AudioAtomWrapper = ({
 			trackUrl={trackUrl}
 			kicker={kicker}
 			title={title}
-			pillar={themeToPillar(pillar)}
+			pillar={pillar}
 			shouldUseAcast={shouldUseAcast}
 		/>
 	);

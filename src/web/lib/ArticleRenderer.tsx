@@ -47,7 +47,6 @@ import {
 } from '@guardian/atoms-rendering';
 import { Display, Design } from '@guardian/types';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -79,7 +78,7 @@ export const ArticleRenderer: React.FC<{
 								trackUrl={element.trackUrl}
 								kicker={element.kicker}
 								title={element.title}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 							/>
 						</Figure>
 					);
@@ -219,7 +218,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -313,7 +312,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -340,7 +339,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -494,7 +493,7 @@ export const ArticleRenderer: React.FC<{
 							<TimelineAtom
 								id={element.id}
 								title={element.title}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								events={element.events}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}

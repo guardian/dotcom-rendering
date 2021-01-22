@@ -52,7 +52,6 @@ import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { Display, Design } from '@guardian/types';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 
 import {
 	cmp,
@@ -475,7 +474,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={qandaAtom.html}
 						image={qandaAtom.img}
 						credit={qandaAtom.credit}
-						pillar={themeToPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'QANDA_ATOM',
 							qandaAtom.id,
@@ -502,7 +501,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={guideAtom.html}
 						image={guideAtom.img}
 						credit={guideAtom.credit}
-						pillar={themeToPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'GUIDE_ATOM',
 							guideAtom.id,
@@ -532,7 +531,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={profileAtom.html}
 						image={profileAtom.img}
 						credit={profileAtom.credit}
-						pillar={themeToPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'PROFILE_ATOM',
 							profileAtom.id,
@@ -561,7 +560,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						title={timelineAtom.title}
 						events={timelineAtom.events}
 						description={timelineAtom.description}
-						pillar={themeToPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'TIMELINE_ATOM',
 							timelineAtom.id,

@@ -16,7 +16,6 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 import { Display } from '@guardian/types';
 
 type Props = {
@@ -197,7 +196,7 @@ export const Discussion = ({
 							<Comments
 								user={user}
 								baseUrl={discussionApiUrl}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								initialPage={commentPage}
 								pageSizeOverride={commentPageSize}
 								isClosedForComments={
@@ -222,7 +221,7 @@ export const Discussion = ({
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}
-									pillar={themeToPillar(pillar)}
+									pillar={pillar}
 									initialPage={commentPage}
 									pageSizeOverride={commentPageSize}
 									isClosedForComments={
