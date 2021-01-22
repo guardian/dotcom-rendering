@@ -42,7 +42,7 @@ export const WitnessTextBlockComponentDefault = () => (
 		<WitnessTextBlockComponent
 			title={witnessTypeData.title}
 			description={witnessTypeData.description}
-			authorUsername={witnessTypeData.authorUsername}
+			authorName={witnessTypeData.authorName}
 			dateCreated={witnessTypeData.dateCreated}
 			pillar={Pillar.Sport}
 		/>

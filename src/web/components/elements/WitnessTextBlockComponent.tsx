@@ -9,7 +9,7 @@ import { WitnessWrapper } from '@frontend/web/components/WitnessWrapper';
 
 type Props = {
 	title: string;
-	authorUsername: string;
+	authorName: string;
 	dateCreated: string;
 	description: string;
 	pillar: Theme;
@@ -23,13 +23,13 @@ const titleStyles = (pillar: Theme) => css`
 
 export const WitnessTextBlockComponent = ({
 	title,
-	authorUsername,
+	authorName,
 	dateCreated,
 	description,
 	pillar,
 }: Props) => (
 	<WitnessWrapper
-		authorName={authorUsername}
+		authorName={authorName}
 		dateCreated={dateCreated}
 		pillar={pillar}
 	>

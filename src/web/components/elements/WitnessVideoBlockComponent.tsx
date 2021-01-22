@@ -10,7 +10,7 @@ import { WitnessWrapper } from '@frontend/web/components/WitnessWrapper';
 type Props = {
 	title: string;
 	description: string;
-	authorUsername: string;
+	authorName: string;
 	width: number;
 	height: number;
 	youtubeUrl: string;
@@ -31,7 +31,7 @@ const titleStyles = (pillar: Theme) => css`
 export const WitnessVideoBlockComponent = ({
 	title,
 	description,
-	authorUsername,
+	authorName,
 	width,
 	height,
 	youtubeUrl,
@@ -42,7 +42,7 @@ export const WitnessVideoBlockComponent = ({
 	const parsedURL = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?wmode=opaque&feature=oembed`;
 	return (
 		<WitnessWrapper
-			authorName={authorUsername}
+			authorName={authorName}
 			dateCreated={dateCreated}
 			pillar={pillar}
 		>

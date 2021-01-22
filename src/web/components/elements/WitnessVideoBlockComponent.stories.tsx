@@ -52,7 +52,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 		<WitnessVideoBlockComponent
 			title={witnessTypeData.title}
 			description={witnessTypeData.description}
-			authorUsername={witnessTypeData.authorUsername}
+			authorName={witnessTypeData.authorName}
 			width={witnessTypeData.width}
 			height={witnessTypeData.height}
 			youtubeUrl={witnessTypeData.youtubeUrl}

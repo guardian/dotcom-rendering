@@ -552,8 +552,8 @@ export const ArticleRenderer: React.FC<{
 										description={
 											witnessTypeDataVideo.description
 										}
-										authorUsername={
-											witnessTypeDataVideo.authorUsername
+										authorName={
+											witnessTypeDataVideo.authorName
 										}
 										width={witnessTypeDataVideo.width}
 										height={witnessTypeDataVideo.height}
@@ -576,8 +576,8 @@ export const ArticleRenderer: React.FC<{
 										description={
 											witnessTypeDataText.description
 										}
-										authorUsername={
-											witnessTypeDataText.authorUsername
+										authorName={
+											witnessTypeDataText.authorName
 										}
 										dateCreated={
 											witnessTypeDataText.dateCreated
