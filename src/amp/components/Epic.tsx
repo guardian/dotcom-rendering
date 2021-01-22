@@ -289,6 +289,11 @@ const reminderErrorStyle = css`
 	font-weight: 600;
 	margin-bottom: 10px;
 `;
+const reminderWrapperStyle = css`
+	#reminderForm.user-invalid #email {
+		border: 4px solid ${error[400]};
+	}
+`;
 
 interface ABTest {
 	name: string;
@@ -342,6 +347,11 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		month: 'long',
 	});
 	const reminderYear = reminderDate.getFullYear();
+	const reminderDateString = `${reminderDate.getFullYear()}-${(
+		reminderDate.getMonth() + 1
+	)
+		.toString()
+		.padStart(2, '0')}-19 00:00:00`;
 	const epicStateJson = {
 		hideButtons: false,
 		hideReminderWrapper: true,
@@ -494,7 +504,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						</div>
 
 						<div
-							className="reminderWrapper"
+							className={reminderWrapperStyle}
 							data-amp-bind-hidden="epicState.hideReminderWrapper"
 						>
 							<div className={quadLineStyle} />
@@ -535,7 +545,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<div
 									visible-when-invalid="typeMismatch"
 									className={invalidInputLabelStyle}
-									validation-for="reminderEmailAddress"
+									validation-for="email"
 								>
 									<svg
 										className={invalidInputSvgStyle}
@@ -553,7 +563,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<div
 									visible-when-invalid="valueMissing"
 									className={invalidInputLabelStyle}
-									validation-for="reminderEmailAddress"
+									validation-for="email"
 								>
 									<svg
 										viewBox="0 0 30 30"
@@ -576,11 +586,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<input
 									type="hidden"
 									name="reminderDate"
-									value={`${reminderDate.getFullYear()}-${(
-										reminderDate.getMonth() + 1
-									)
-										.toString()
-										.padStart(2, '0')}-19 00:00:00`}
+									value={reminderDateString}
 								/>
 								<input
 									className={emailInputStyle}
