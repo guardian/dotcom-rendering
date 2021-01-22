@@ -7428,10 +7428,10 @@ date-now@^0.1.4:
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
-dateformat@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
-  integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+dateformat@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.4.2.tgz#893758f83397ab5d366f841f4fb5f1d6f17e4d1f"
+  integrity sha512-GdplOQjYDNWJ1DxVFgTn9x9gHqigo8a5GS8oceQurS8RtTIG2v/T2GLke1ry9Le+M5gatDWMDsanaiT646WzDQ==
 
 dayjs@~1.8.24, dayjs@~1.8.25:
   version "1.8.36"
