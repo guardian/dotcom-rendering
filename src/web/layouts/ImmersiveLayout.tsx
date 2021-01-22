@@ -176,7 +176,7 @@ interface Props {
 	NAV: NavType;
 	display: Display;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {

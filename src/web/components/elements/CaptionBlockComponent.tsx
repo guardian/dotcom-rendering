@@ -7,7 +7,7 @@ type Props = {
 	display: Display;
 	design: Design;
 	captionText?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;

@@ -9,7 +9,7 @@ const noCaptionStyle = css`
 
 export const MapBlockComponent: React.SFC<{
 	element: MapBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ element, pillar }) => {
 	const attributes = {
 		src: `${element.embedUrl}`,

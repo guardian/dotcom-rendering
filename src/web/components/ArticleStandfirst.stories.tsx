@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { Section } from './Section';
 
 import { ArticleStandfirst } from './ArticleStandfirst';
@@ -25,7 +25,7 @@ export const defaultStory = () => {
 						display={Display.Standard}
 						design={Design.Article}
 						standfirst="This the default standfirst text. Aut explicabo officia delectus omnis repellendus voluptas"
-						pillar="news"
+						pillar={Pillar.News}
 					/>
 				</ArticleContainer>
 			</Flex>

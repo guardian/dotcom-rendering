@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -48,7 +48,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
     display: Display;
     design: Design;
     element: ImageBlockElement;
-    pillar: CAPIPillar;
+    pillar: Theme;
     hideCaption?: boolean;
 };
  */
@@ -61,7 +61,7 @@ export const StandardArticle = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 		</Container>
@@ -79,7 +79,7 @@ export const Immersive = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'immersive' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 		</Container>
@@ -97,7 +97,7 @@ export const Showcase = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'showcase' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 		</Container>
@@ -115,7 +115,7 @@ export const Thumbnail = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'thumbnail' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 		</Container>
@@ -133,7 +133,7 @@ export const Supporting = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'supporting' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 		</Container>
@@ -151,7 +151,7 @@ export const HideCaption = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar="news"
+					pillar={Pillar.News}
 					hideCaption={true}
 				/>
 			</Figure>
@@ -170,7 +170,7 @@ export const InlineTitle = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar="news"
+					pillar={Pillar.News}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -194,7 +194,7 @@ export const InlineTitleMobile = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar="news"
+					pillar={Pillar.News}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -218,7 +218,7 @@ export const ImmersiveTitle = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'immersive' }}
-					pillar="news"
+					pillar={Pillar.News}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -238,7 +238,7 @@ export const ShowcaseTitle = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'showcase' }}
-					pillar="news"
+					pillar={Pillar.News}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -282,7 +282,7 @@ export const HalfWidth = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 			<p>
@@ -340,7 +340,7 @@ export const HalfWidthMobile = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 			<p>
@@ -398,7 +398,7 @@ export const HalfWidthWide = () => {
 					display={Display.Standard}
 					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</Figure>
 			<p>

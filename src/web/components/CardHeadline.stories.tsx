@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 import { Section } from '@frontend/web/components/Section';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -15,7 +15,7 @@ export const Article = () => (
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
 			design={Design.Article}
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -26,7 +26,7 @@ export const Analysis = () => (
 		<CardHeadline
 			headlineText="This is how an Analysis card headline looks"
 			design={Design.Analysis}
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -37,7 +37,7 @@ export const Feature = () => (
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
 			design={Design.Feature}
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -48,7 +48,7 @@ export const xsmallStory = () => (
 		<CardHeadline
 			headlineText="This is how a large card headline looks"
 			design={Design.Article}
-			pillar="news"
+			pillar={Pillar.News}
 			size="large"
 		/>
 	</Section>
@@ -60,7 +60,7 @@ export const liveStory = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
 			design={Design.Article}
-			pillar="news"
+			pillar={Pillar.News}
 			kickerText="Live"
 		/>
 	</Section>
@@ -72,7 +72,7 @@ export const noSlash = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker slash looks"
 			design={Design.Article}
-			pillar="news"
+			pillar={Pillar.News}
 			kickerText="Live"
 			showSlash={false}
 		/>
@@ -85,7 +85,7 @@ export const pulsingDot = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
 			design={Design.Article}
-			pillar="news"
+			pillar={Pillar.News}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -98,7 +98,7 @@ export const cultureVariant = () => (
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
 			design={Design.Feature}
-			pillar="culture"
+			pillar={Pillar.Culture}
 			kickerText="Art and stuff"
 		/>
 	</Section>
@@ -110,7 +110,7 @@ export const AnalysisXSmall = () => (
 		<CardHeadline
 			headlineText="Xsmall card headline for an Analysis article"
 			design={Design.Analysis}
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 			size="large"
 		/>
 	</Section>
@@ -122,7 +122,7 @@ export const opinionxxxsmall = () => (
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
 			design={Design.Comment}
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			showQuotes={true}
 			size="small"
 		/>
@@ -135,7 +135,7 @@ export const OpinionKicker = () => (
 		<CardHeadline
 			headlineText="This is how an opinion card headline with a kicker and quotes looks"
 			design={Design.Article}
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			showQuotes={true}
 			kickerText="George Monbiot"
 			showSlash={true}
@@ -149,7 +149,7 @@ export const Busy = () => (
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 			design={Design.Feature}
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
 			showSlash={true}

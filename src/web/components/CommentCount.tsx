@@ -9,13 +9,13 @@ import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	isCommentable: boolean;
 	commentCount: number;
 	setIsExpanded: Function;
 };
 
-const containerStyles = (pillar: CAPIPillar) => css`
+const containerStyles = (pillar: Theme) => css`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: column;
@@ -36,7 +36,7 @@ const iconContainerStyles = css`
 	}
 `;
 
-const iconStyles = (pillar: CAPIPillar) => css`
+const iconStyles = (pillar: Theme) => css`
 	fill: ${pillarPalette[pillar].main};
 `;
 

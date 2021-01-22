@@ -6,7 +6,7 @@ import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRati
 import { Display, Design } from '@guardian/types';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
-	pillar: CAPIPillar;
+	pillar: Theme;
 	embedUrl?: string;
 	height: number;
 	width: number;

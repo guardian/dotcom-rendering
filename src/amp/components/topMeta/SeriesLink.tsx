@@ -3,7 +3,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 
-const seriesStyle = (pillar: CAPIPillar) => css`
+const seriesStyle = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].main};
 	${headline.xxxsmall()};
 	font-weight: 900;
@@ -19,7 +19,7 @@ export const SeriesLink: React.SFC<{
 	fallbackToSection: boolean;
 	sectionLabel?: string; // required for fallback only
 	sectionUrl?: string; // required for fallback only
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({
 	baseURL,
 	tags,

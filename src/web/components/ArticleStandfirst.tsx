@@ -25,7 +25,7 @@ const standfirstLinks = pillarMap(
 type Props = {
 	display: Display;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	standfirst: string; // Can be html
 };
 

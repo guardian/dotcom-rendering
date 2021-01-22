@@ -59,7 +59,7 @@ function renderElement(
 	display: Display,
 	design: Design,
 	element: CAPIElement,
-	pillar: CAPIPillar,
+	pillar: Pillar,
 	i: number,
 	hideCaption?: boolean,
 	adTargeting?: AdTargeting,
@@ -151,7 +151,7 @@ export const MainMedia: React.FC<{
 	display: Display;
 	design: Design;
 	elements: CAPIElement[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
 	starRating?: number;

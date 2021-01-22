@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Pillar } from '@guardian/types';
+
 import { SignedInAs } from './SignedInAs';
 
 const aUser = {
@@ -25,7 +27,7 @@ export default {
 export const SignedIn = () => {
 	return (
 		<SignedInAs
-			pillar="news"
+			pillar={Pillar.News}
 			enableDiscussionSwitch={true}
 			commentCount={3}
 			user={aUser}
@@ -37,7 +39,7 @@ SignedIn.story = { name: 'signed in' };
 export const Image = () => {
 	return (
 		<SignedInAs
-			pillar="culture"
+			pillar={Pillar.Culture}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			user={{
@@ -52,7 +54,7 @@ Image.story = { name: 'with image' };
 export const Banned = () => {
 	return (
 		<SignedInAs
-			pillar="culture"
+			pillar={Pillar.Culture}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			user={{
@@ -70,7 +72,7 @@ Banned.story = { name: 'when banned' };
 export const NoDisplayName = () => {
 	return (
 		<SignedInAs
-			pillar="labs"
+			pillar={Pillar.News}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			user={{
@@ -85,7 +87,7 @@ NoDisplayName.story = { name: 'before a display name has been set' };
 export const NotSignedIn = () => {
 	return (
 		<SignedInAs
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 		/>
@@ -96,7 +98,7 @@ NotSignedIn.story = { name: 'not signed in' };
 export const Culture = () => {
 	return (
 		<SignedInAs
-			pillar="culture"
+			pillar={Pillar.Culture}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 		/>
@@ -107,7 +109,7 @@ Culture.story = { name: 'with culture pillar' };
 export const Opinion = () => {
 	return (
 		<SignedInAs
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 		/>
@@ -118,7 +120,7 @@ Opinion.story = { name: 'with opinion pillar' };
 export const news = () => {
 	return (
 		<SignedInAs
-			pillar="news"
+			pillar={Pillar.News}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 		/>
@@ -129,7 +131,7 @@ news.story = { name: 'with news pillar' };
 export const Sport = () => {
 	return (
 		<SignedInAs
-			pillar="sport"
+			pillar={Pillar.Sport}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 		/>
@@ -140,7 +142,7 @@ Sport.story = { name: 'with sport pillar' };
 export const DiscussionClosed = () => {
 	return (
 		<SignedInAs
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			isClosedForComments={true}
@@ -153,7 +155,7 @@ DiscussionClosed.story = { name: 'discussion closed, user signed in' };
 export const DiscussionClosedSignedOut = () => {
 	return (
 		<SignedInAs
-			pillar="sport"
+			pillar={Pillar.Sport}
 			enableDiscussionSwitch={true}
 			commentCount={32}
 			isClosedForComments={true}
@@ -167,7 +169,7 @@ DiscussionClosedSignedOut.story = {
 export const DiscussionDisabled = () => {
 	return (
 		<SignedInAs
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			enableDiscussionSwitch={false}
 			commentCount={32}
 			isClosedForComments={false}
@@ -182,7 +184,7 @@ DiscussionDisabled.story = {
 export const DiscussionDisabledSignedOut = () => {
 	return (
 		<SignedInAs
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 			enableDiscussionSwitch={false}
 			commentCount={32}
 			isClosedForComments={false}

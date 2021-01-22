@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { Pillar } from '@guardian/types';
+
 import { Avatar } from './Avatar';
 
 export default {
@@ -18,7 +21,7 @@ export const defaultStory = () => (
 		<Avatar
 			imageSrc={imageSrc173}
 			imageAlt="The alt of the image"
-			pillar="opinion"
+			pillar={Pillar.Opinion}
 		/>
 	</div>
 );
@@ -29,7 +32,7 @@ export const largeStory = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 		/>
 	</div>
 );
@@ -40,7 +43,7 @@ export const largeStoryNews = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</div>
 );
@@ -51,7 +54,7 @@ export const largeStoryCulture = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar="culture"
+			pillar={Pillar.Culture}
 		/>
 	</div>
 );
@@ -62,7 +65,7 @@ export const smallStory = () => (
 		<Avatar
 			imageSrc={imageSrc300Sport}
 			imageAlt="The alt of the image"
-			pillar="sport"
+			pillar={Pillar.Sport}
 		/>
 	</div>
 );

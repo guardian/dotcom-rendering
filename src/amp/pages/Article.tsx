@@ -24,7 +24,7 @@ const backgroundColour = css`
 
 const Body: React.SFC<{
 	data: ArticleModel;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 	config: ConfigType;
 }> = ({ data, design, config, pillar }) => {

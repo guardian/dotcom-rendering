@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
@@ -21,7 +21,7 @@ export const SingleImage = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={oneImage}
 			/>
 		</ContainerLayout>
@@ -36,7 +36,7 @@ export const SingleImageWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={oneImage}
 				caption="This is the caption for a single image"
 			/>
@@ -52,7 +52,7 @@ export const SideBySide = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={twoImages}
 			/>
 		</ContainerLayout>
@@ -67,7 +67,7 @@ export const SideBySideWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={twoImages}
 				caption="This is the caption for side by side"
 			/>
@@ -83,7 +83,7 @@ export const OneAboveTwo = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={threeImages}
 			/>
 		</ContainerLayout>
@@ -98,7 +98,7 @@ export const OneAboveTwoWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={threeImages}
 				caption="This is the caption for one above two"
 			/>
@@ -114,7 +114,7 @@ export const GridOfFour = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={fourImages}
 			/>
 		</ContainerLayout>
@@ -129,7 +129,7 @@ export const GridOfFourWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				images={fourImages}
 				caption="This is the caption for grid of four"
 			/>

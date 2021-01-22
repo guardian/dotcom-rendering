@@ -15,7 +15,7 @@ import { Dateline } from './Dateline';
 type Props = {
 	display: Display;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;

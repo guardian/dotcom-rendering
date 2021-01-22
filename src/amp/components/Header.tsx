@@ -65,7 +65,7 @@ const pillarListItemStyle = css`
 	}
 `;
 
-const pillarLinkStyle = (pillar: CAPIPillar) => css`
+const pillarLinkStyle = (pillar: Theme) => css`
 	text-decoration: none;
 	cursor: pointer;
 	display: block;

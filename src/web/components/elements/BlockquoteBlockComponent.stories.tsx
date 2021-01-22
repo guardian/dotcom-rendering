@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
@@ -20,7 +20,7 @@ export default {
 const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
-		pillar="news"
+		pillar={Pillar.News}
 		design={Design.Article}
 		display={Display.Standard}
 		isFirstParagraph={false}
@@ -36,7 +36,10 @@ export const defaultStory = () => {
 	return (
 		<div className={containerStyles}>
 			<SomeText />
-			<BlockquoteBlockComponent html={blockquoteHtml} pillar="news" />
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				pillar={Pillar.News}
+			/>
 			<SomeText />
 		</div>
 	);
@@ -47,7 +50,10 @@ export const ShortStory = () => {
 	return (
 		<div className={containerStyles}>
 			<SomeText />
-			<BlockquoteBlockComponent html={shortQuoteHtml} pillar="sport" />
+			<BlockquoteBlockComponent
+				html={shortQuoteHtml}
+				pillar={Pillar.Sport}
+			/>
 			<SomeText />
 		</div>
 	);
@@ -60,7 +66,7 @@ export const QuotedStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
-				pillar="culture"
+				pillar={Pillar.Culture}
 				quoted={true}
 			/>
 			<SomeText />
@@ -75,7 +81,7 @@ export const ShortQuotedStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
-				pillar="lifestyle"
+				pillar={Pillar.Lifestyle}
 				quoted={true}
 			/>
 			<SomeText />

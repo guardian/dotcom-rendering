@@ -250,7 +250,7 @@ interface Props {
 	NAV: NavType;
 	display: Display;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }
 
 export const CommentLayout = ({
