@@ -13,14 +13,14 @@ type Props = {
 	authorName: string;
 	dateCreated: string;
 	alt: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 const captionStyles = css`
 	margin-top: ${space[3]}px;
 `;
 
-const titleStyles = (pillar: CAPIPillar) => css`
+const titleStyles = (pillar: Theme) => css`
 	margin-bottom: ${space[2]}px;
 	color: ${pillarPalette[pillar].main};
 	${headline.xxxsmall()}

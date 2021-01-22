@@ -8,7 +8,7 @@ import { pillarPalette } from '@root/src/lib/pillars';
 type Props = {
 	authorName: string;
 	dateCreated: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	children: React.ReactNode;
 };
 
@@ -32,7 +32,7 @@ const witnessIconWrapperStyles = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const witnessIconStyles = (pillar: CAPIPillar) => css`
+const witnessIconStyles = (pillar: Theme) => css`
 	padding-left: ${space[1]}px;
 
 	color: ${pillarPalette[pillar].main};
@@ -54,7 +54,7 @@ const witnessDetailsSpacingStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const authorNameStyles = (pillar: CAPIPillar) => css`
+const authorNameStyles = (pillar: Theme) => css`
 	padding-left: 5px;
 	color: ${pillarPalette[pillar].main};
 	${body.small({ fontWeight: 'bold' })}

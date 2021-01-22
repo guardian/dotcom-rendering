@@ -12,10 +12,10 @@ type Props = {
 	authorUsername: string;
 	dateCreated: string;
 	description: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
-const titleStyles = (pillar: CAPIPillar) => css`
+const titleStyles = (pillar: Theme) => css`
 	margin-bottom: ${space[2]}px;
 	color: ${pillarPalette[pillar].main};
 	${headline.xxxsmall()}
