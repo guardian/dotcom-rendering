@@ -394,7 +394,7 @@ interface WitnessTypeDataBase {
 	apiUrl: string;
 	authorName: string;
 	witnessEmbedType: string;
-	html: string;
+	html?: string;
 	authorWitnessProfileUrl: string;
 }
 
@@ -409,7 +409,6 @@ interface WitnessTypeDataImage extends WitnessTypeDataBase {
 
 interface WitnessTypeDataVideo extends WitnessTypeDataBase {
 	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataVideo';
-	authorGuardianProfileUrl: string;
 	type: 'video';
 	description: string;
 	youtubeHtml: string;
@@ -420,6 +419,22 @@ interface WitnessTypeDataVideo extends WitnessTypeDataBase {
 	youtubeAuthorName: string;
 	height: number;
 	youtubeTitle: string;
+}
+
+interface WitnessTypeDataText extends WitnessTypeDataBase {
+	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataText';
+	type: 'text';
+	description: string;
+	authorUsername: string;
+	originalUrl: string;
+	source: string;
+	title: string;
+	url: string;
+	dateCreated: string;
+	apiUrl: string;
+	authorName: string;
+	witnessEmbedType: string;
+	authorWitnessProfileUrl: string;
 }
 
 interface WitnessTypeBlockElement {
@@ -435,7 +450,10 @@ interface WitnessTypeBlockElement {
 
 	isThirdPartyTracking: boolean;
 
-	witnessTypeData: WitnessTypeDataImage | WitnessTypeDataVideo;
+	witnessTypeData:
+		| WitnessTypeDataImage
+		| WitnessTypeDataVideo
+		| WitnessTypeDataText;
 }
 
 type CAPIElement =

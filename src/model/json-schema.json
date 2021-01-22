@@ -139,6 +139,9 @@
                     },
                     {
                         "$ref": "#/definitions/YoutubeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/WitnessTypeBlockElement"
                     }
                 ]
             }
@@ -2332,6 +2335,339 @@
                 "mediaTitle"
             ]
         },
+        "WitnessTypeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessBlockElement"
+                    ]
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "Image"
+                                ]
+                            },
+                            "mimeType": {
+                                "type": "string",
+                                "enum": [
+                                    "image/jpeg"
+                                ]
+                            },
+                            "file": {
+                                "type": "string"
+                            },
+                            "typeData": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "file",
+                            "mimeType",
+                            "type",
+                            "typeData"
+                        ]
+                    }
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "witnessTypeData": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataImage"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataVideo"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataText"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "_type",
+                "assets",
+                "isThirdPartyTracking",
+                "witnessTypeData"
+            ]
+        },
+        "WitnessTypeDataImage": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataImage"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "image"
+                    ]
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "alt",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "caption",
+                "dateCreated",
+                "mediaId",
+                "originalUrl",
+                "photographer",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
+            ]
+        },
+        "WitnessTypeDataVideo": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataVideo"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "video"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "youtubeHtml": {
+                    "type": "string"
+                },
+                "youtubeDescription": {
+                    "type": "string"
+                },
+                "youtubeUrl": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "youtubeSource": {
+                    "type": "string"
+                },
+                "youtubeAuthorName": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "youtubeTitle": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "height",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "width",
+                "witnessEmbedType",
+                "youtubeAuthorName",
+                "youtubeDescription",
+                "youtubeHtml",
+                "youtubeSource",
+                "youtubeTitle",
+                "youtubeUrl"
+            ]
+        },
+        "WitnessTypeDataText": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataText"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "text"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -2467,6 +2803,9 @@
                             },
                             {
                                 "$ref": "#/definitions/YoutubeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/WitnessTypeBlockElement"
                             }
                         ]
                     }
