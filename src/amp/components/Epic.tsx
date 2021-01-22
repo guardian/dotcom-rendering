@@ -583,8 +583,8 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								/>
 								<input
 									className={emailInputStyle}
-									id="reminderEmailAddress"
-									name="reminderEmailAddress"
+									id="email"
+									name="email"
 									type="email"
 									required={true}
 								/>
