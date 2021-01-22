@@ -5,15 +5,15 @@ import { css } from '@emotion/core';
 import { remSpace, text } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
+import type { Format } from '@guardian/types';
+import { Design } from '@guardian/types';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
-import { articleWidthStyles } from './styles';
-import { Design, Format } from '@guardian/types';
-import { sidePadding } from './styles';
+import { articleWidthStyles, sidePadding } from './styles';
 
 // ----- Component ----- //
 
