@@ -338,7 +338,6 @@ const arrowSvg = (className: string) => (
 
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderDate = getReminderDate();
-	const reminderDay = '19';
 	const reminderMonth = reminderDate.toLocaleString('default', {
 		month: 'long',
 	});
@@ -352,10 +351,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		hideReminderForm: false,
 		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
 	};
-	const supportDotcomComponentsUrl =
-		process.env.GU_STAGE === 'PROD'
-			? 'https://contributions.guardianapis.com'
-			: 'https://contributions.code.dev-guardianapis.com';
+	const supportDotcomComponentsUrl = 'https://mjacobson.eu.ngrok.io';
+	// process.env.GU_STAGE === 'PROD'
+	// 	? 'https://contributions.guardianapis.com'
+	// 	: 'https://contributions.code.dev-guardianapis.com';
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
@@ -577,7 +576,10 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<input
 									type="hidden"
 									name="reminderDate"
-									value={`${reminderDay} ${reminderMonth} ${reminderYear}`}
+									value={`${reminderDate.getFullYear()}-${reminderDate
+										.getMonth()
+										.toString()
+										.padStart(2, '0')}-19 00:00:00`}
 								/>
 								<input
 									className={emailInputStyle}
