@@ -304,6 +304,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			...item,
 			theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
 		};
+	} else if (isInterview(tags)) {
+		return {
+			design: Design.Interview,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isFeature(tags)) {
 		return {
 			design: Design.Feature,
@@ -314,11 +319,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isInterview(tags)) {
-		return {
-			design: Design.Interview,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isGuardianView(tags)) {
