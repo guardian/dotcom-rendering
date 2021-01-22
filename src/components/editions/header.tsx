@@ -55,7 +55,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
-	<header css={headerStyles}>
+	<header>
 		<HeaderImage item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
