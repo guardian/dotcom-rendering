@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
-import type { SerializedStyles } from '@emotion/core';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
@@ -15,13 +14,8 @@ import { sidePadding } from './styles';
 
 // ----- Component ----- //
 
-interface Props {
-	item: Item;
-}
-
 interface HeaderProps {
 	item: Item;
-	className?: SerializedStyles;
 }
 
 const headerStyles = css`
@@ -35,7 +29,7 @@ const StandardHeader: FC<HeaderProps> = ({ item }) => (
 		<Headline item={item} />
 		<Standfirst item={item} />
 		<Lines />
-		<Byline item={item} />
+		<Byline item={item} shareIcon />
 	</header>
 );
 
@@ -46,12 +40,22 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 		<HeaderImage item={item} />
 		<Standfirst item={item} />
 		<Lines />
-		<Byline item={item} />
+		<Byline item={item} shareIcon />
+	</header>
+);
+
+const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={headerStyles}>
+		<HeaderImage item={item} />
+		<Headline item={item} />
+		<Byline item={item} large />
+		<Lines />
+		<Standfirst item={item} shareIcon />
 	</header>
 );
 
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
-	<header>
+	<header css={headerStyles}>
 		<HeaderImage item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
@@ -60,17 +64,19 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const renderArticleHeader = (item: Item): ReactElement<Props> => {
+const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	if (item.design === Design.Interview) {
 		return <InterviewHeader item={item} />;
 	} else if (item.display === Display.Showcase) {
 		return <ShowcaseHeader item={item} />;
+	} else if (item.design === Design.Analysis) {
+		return <AnalysisHeader item={item} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}
 };
 
-const Container: FC<Props> = ({ item }: Props) => {
+const Container: FC<HeaderProps> = ({ item }) => {
 	return <>{renderArticleHeader(item)}</>;
 };
 

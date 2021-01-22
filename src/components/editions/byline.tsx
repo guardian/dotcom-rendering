@@ -2,7 +2,12 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/typography';
+import { from } from '@guardian/src-foundations/mq';
+import { body, headline } from '@guardian/src-foundations/typography';
+import type {
+	FontStyle,
+	FontWeight,
+} from '@guardian/src-foundations/typography/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -39,52 +44,94 @@ const styles = (kickerColor: string): SerializedStyles => {
 	`;
 };
 
-const bylinePrimaryStyles = (kickerColor: string): SerializedStyles => {
+const largeTextStyles = (
+	fontStyle: FontStyle,
+	fontWeight: FontWeight,
+): SerializedStyles => css`
+	${headline.xsmall({ fontStyle, fontWeight })};
+
+	${from.tablet} {
+		${headline.small({ fontStyle, fontWeight })};
+	}
+
+	${from.wide} {
+		${headline.medium({ fontStyle, fontWeight })};
+	}
+`;
+
+const standardTextStyles = (
+	fontStyle: FontStyle,
+	fontWeight: FontWeight,
+): SerializedStyles => css`
+	${body.medium({ fontStyle, fontWeight })}
+`;
+
+const bylinePrimaryStyles = (
+	kickerColor: string,
+	large?: boolean,
+): SerializedStyles => {
+	if (large) {
+		return css`
+			color: ${kickerColor};
+			${largeTextStyles('normal', 'bold')}
+		`;
+	}
+
 	return css`
-		${body.medium({ fontStyle: 'normal', fontWeight: 'bold' })}
 		color: ${kickerColor};
+		${standardTextStyles('normal', 'bold')}
 	`;
 };
 
-const bylineSecondaryStyles = css`
-	${body.medium({ fontStyle: 'italic' })}
+const bylineSecondaryStyles = (large?: boolean): SerializedStyles => css`
+	${large
+		? largeTextStyles('italic', 'light')
+		: standardTextStyles('italic', 'light')}
 `;
 
 // ----- Component ----- //
 
 interface Props {
 	item: Item;
+	shareIcon?: boolean;
+	large?: boolean;
 }
 
-const renderText = (byline: DocumentFragment, kickerColor: string): ReactNode =>
+const renderText = (
+	byline: DocumentFragment,
+	kickerColor: string,
+	large?: boolean,
+): ReactNode =>
 	Array.from(byline.childNodes).map((node) => {
 		switch (node.nodeName) {
 			case 'A':
 				return (
-					<span css={bylinePrimaryStyles(kickerColor)}>
+					<span css={bylinePrimaryStyles(kickerColor, large)}>
 						{node.textContent ?? ''}
 					</span>
 				);
 			case 'SPAN':
 			case '#text':
 				return (
-					<span css={bylineSecondaryStyles}>
+					<span css={bylineSecondaryStyles(large)}>
 						{node.textContent ?? ''}
 					</span>
 				);
 		}
 	});
 
-const Byline: FC<Props> = ({ item }) => {
+const Byline: FC<Props> = ({ item, shareIcon, large }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={styles(kickerColor)}>
-			<address>{renderText(byline, kickerColor)}</address>
-			<span className="js-share-button" role="button">
-				<ShareIcon />
-			</span>
+			<address>{renderText(byline, kickerColor, large)}</address>
+			{shareIcon && (
+				<span className="js-share-button" role="button">
+					<ShareIcon />
+				</span>
+			)}
 		</div>
 	));
 };
