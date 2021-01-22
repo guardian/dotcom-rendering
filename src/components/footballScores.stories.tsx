@@ -30,10 +30,10 @@ const Default: FC = () =>
             name: text("Home Team Name", "Man City"),
             score: number("Home Team Score", 4),
             scorers: [
-                "Stones 26'",
-                "Gundogan 56'",
-                "Stones 68'",
-                "Sterling 88'",
+                { name: "Stones", time: 26 },
+                { name: "Gundogan", time: 56 },
+                { name: "Stones", time: 68 },
+                { name: "Sterling", time: 88 },
             ]
         }}
         awayTeam={{

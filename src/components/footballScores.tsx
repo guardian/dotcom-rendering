@@ -5,50 +5,9 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { MatchStatusKind, TeamLocation } from 'football';
+import type { Team, MatchStatus } from 'football';
 import React, { FC } from 'react';
-
-// ----- Types ----- //
-
-interface Team {
-    name: string;
-    score: number;
-    scorers: string[];
-}
-
-const enum TeamLocation {
-    Home,
-    Away,
-}
-
-const enum MatchStatusKind {
-    KickOff,
-    FirstHalf,
-    HalfTime,
-    SecondHalf,
-    FullTime,
-    ExtraTime,
-    Penalties,
-    Suspended,
-}
-
-type MatchStatus = {
-    kind: MatchStatusKind.KickOff;
-    time: string;
-} | {
-    kind: MatchStatusKind.FirstHalf;
-} | {
-    kind: MatchStatusKind.HalfTime;
-} | {
-    kind: MatchStatusKind.SecondHalf;
-} | {
-    kind: MatchStatusKind.FullTime;
-} | {
-    kind: MatchStatusKind.ExtraTime;
-} | {
-    kind: MatchStatusKind.Penalties;
-} | {
-    kind: MatchStatusKind.Suspended;
-};
 
 // ----- Subcomponents ----- //
 
@@ -135,7 +94,7 @@ const TeamScore: FC<TeamProps> = ({ team, location }) =>
             </div>
         </div>
         <ul css={scorerStyles(location)}>
-            {team.scorers.map(scorer => <li>{scorer}</li>)}
+            {team.scorers.map(scorer => <li>{scorer.name} {scorer.time}'</li>)}
         </ul>
     </section>
 

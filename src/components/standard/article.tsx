@@ -26,7 +26,7 @@ import type {
 } from 'item';
 import { pipe2 } from 'lib';
 import React from 'react';
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, ReactElement } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -34,7 +34,8 @@ import {
 	onwardStyles,
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
-import FootballScores, { MatchStatusKind } from 'components/footballScores';
+import { dateToString } from 'date';
+import { teamsFromTags } from 'football';
 
 // ----- Styles ----- //
 
@@ -113,30 +114,25 @@ const Standard: FC<Props> = ({ item, children }) => {
 				withDefault(<></>),
 		  )
 		: null;
+	
+	const footballPlaceholder =
+		pipe2(
+			teamsFromTags(item.tags),
+			map(teams =>
+				<div
+					id="js-football-scores"
+					data-team-a={teams[0]}
+					data-team-b={teams[1]}
+					data-date={dateToString(item.publishDate)}
+				/>,
+			),
+			withDefault<ReactElement | null>(null),
+		);
 
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
-				<FootballScores
-					league="Premier League"
-					stadium="Etihad Stadium"
-					homeTeam={{
-						name: "Man City",
-						score: 4,
-						scorers: [
-							"Stones 26'",
-							"Gundogan 56'",
-							"Stones 68'",
-							"Sterling 88'",
-						]
-					}}
-					awayTeam={{
-						name: "Crystal Palace",
-						score: 0,
-						scorers: []
-					}}
-					status={{ kind: MatchStatusKind.FullTime }}
-				/>
+				{footballPlaceholder}
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />
