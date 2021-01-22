@@ -68,19 +68,15 @@ export const document = ({ data }: Props) => {
 	// component splits that we want.
 	// However, this does actually suit our architecture as we can use the CAPI
 	// component reference.
-	const allChunks: LoadableComponents[] = [
-		{ chunkName: 'EditionDropdown', alwaysAdd: true },
+	const allChunks: LoadableComponents = [
+		{ chunkName: 'EditionDropdown', addWhen: 'always' },
 		{
 			chunkName: 'elements-YoutubeBlockComponent',
-			CAPIElementType:
-				'model.dotcomrendering.pageElements.YoutubeBlockElement',
-			alwaysAdd: false,
+			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
 			chunkName: 'elements-RichLinkComponent',
-			CAPIElementType:
-				'model.dotcomrendering.pageElements.RichLinkBlockElement',
-			alwaysAdd: false,
+			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -89,9 +85,18 @@ export const document = ({ data }: Props) => {
 		? CAPI.blocks[0].elements
 		: [];
 	const { mainMediaElements } = CAPI;
-	const chunksForPage: LoadableComponents[] = allChunks.filter((chunk) =>
+	// Filter the chunks defined above by whether
+	// the 'addWhen' value is 'always' or matches
+	// any elements in the body or main media element
+	// arrays for the page request.
+	const chunksForPage: (
+		| EditionDropdownLoadable
+		| YoutubeBlockLoadable
+		| RichLinkBlockLoadable
+	)[] = allChunks.filter((chunk) =>
 		[...CAPIElements, ...mainMediaElements].some(
-			(block) => chunk.alwaysAdd || block._type === chunk.CAPIElementType,
+			(block) =>
+				chunk.addWhen === 'always' || block._type === chunk.addWhen,
 		),
 	);
 	// Once we have the chunks for the page, we can add them directly to the loadableExtractor

@@ -707,25 +707,26 @@ type IslandType =
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
 // defined in manifest.json
+type BlockElementType = string;
 interface ComponentNameChunkMap {
     chunkName: string;
-    componentName?: string;
-    alwaysAdd: boolean;
+    addWhen: BlockElementType | 'always';
 }
 interface EditionDropdownLoadable extends ComponentNameChunkMap{
     chunkName: 'EditionDropdown';
-    alwaysAdd: true;
+    addWhen: 'always';
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-YoutubeBlockComponent';
-    CAPIElementType: YoutubeBlockElement['_type'];
+    addWhen: YoutubeBlockElement['_type'];
 }
 
 interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-RichLinkComponent';
-    CAPIElementType: RichLinkBlockElement['_type'];
+    addWhen: RichLinkBlockElement['_type'];
 }
-type LoadableComponents = EditionDropdownLoadable | YoutubeBlockLoadable | RichLinkBlockLoadable;
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+type LoadableComponentsPartial = Partial<LoadableComponents>;
 
 interface BaseTrailType {
 
