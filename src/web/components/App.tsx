@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import loadable from '@loadable/component';
-
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
-
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
