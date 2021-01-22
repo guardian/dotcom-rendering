@@ -59,7 +59,7 @@ const interviewStyles = css`
 
 const interviewFontStyles = css`
 	${headline.xsmall({ lineHeight: 'regular' })}
-		font-weight: 400;
+	font-weight: 400;
 
 	${from.mobileMedium} {
 		${headline.small({ lineHeight: 'regular' })}
@@ -74,7 +74,8 @@ const interviewFontStyles = css`
 	color: ${neutral[100]};
 	white-space: pre-wrap;
 	padding-bottom: ${remSpace[1]};
-	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]}, ${remSpace[3]} 0 0 ${neutral[0]};
+	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]},
+		${remSpace[3]} 0 0 ${neutral[0]};
 	display: inline;
 `;
 
