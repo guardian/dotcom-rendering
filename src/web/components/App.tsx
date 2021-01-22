@@ -299,6 +299,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+	const YoutubeBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.youtubeBlockElement.length > 0 ||
+				CAPI.youtubeMainMediaBlockElement.length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/YoutubeBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.YoutubeBlockComponent,
+		},
+	);
+
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
 		//
@@ -341,16 +358,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 				/>
 			</Portal>
 			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => {
-				const YoutubeBlockComponent = loadable(
-					() =>
-						import(
-							'@frontend/web/components/elements/YoutubeBlockComponent'
-						),
-					{
-						resolveComponent: (module) =>
-							module.YoutubeBlockComponent,
-					},
-				);
 				return (
 					<HydrateOnce
 						key={index}
@@ -380,16 +387,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 				);
 			})}
 			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => {
-				const YoutubeBlockComponent = loadable(
-					() =>
-						import(
-							'@frontend/web/components/elements/YoutubeBlockComponent'
-						),
-					{
-						resolveComponent: (module) =>
-							module.YoutubeBlockComponent,
-					},
-				);
 				return (
 					<HydrateOnce
 						key={index}
