@@ -343,10 +343,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 				/>
 			</Portal>
 			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => {
-				// const YoutubeBlockComponentLoadable = loadableDynamicImport(
-				// 	'@frontend/web/components/elements/YoutubeBlockComponent',
-				// 	'YoutubeBlockComponent',
-				// ) as typeof YoutubeBlockComponent;
 				const YoutubeBlockComponent = loadable(
 					() =>
 						import(
