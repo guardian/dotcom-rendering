@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const { siteName } = require('../frontend/config');
 
 module.exports = () => ({
