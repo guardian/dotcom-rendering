@@ -6,11 +6,17 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
+import type {
+	FontWeight,
+	LineHeight,
+} from '@guardian/src-foundations/typography/types';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import { headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import type { FC } from 'react';
+import { getThemeStyles } from 'themeStyles';
 import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
@@ -29,29 +35,27 @@ const styles = (format: Format): SerializedStyles => css`
 	${articleWidthStyles}
 `;
 
-const heavyFontStyles = css`
-	${headline.xsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+const underline = (kickerColor: string): SerializedStyles => css`
+	text-decoration: underline;
+	text-decoration-thickness: from-font;
+	text-decoration-color: ${kickerColor};
+`;
+
+const fontStyles = (
+	lineHeight: LineHeight,
+	fontWeight: FontWeight,
+): SerializedStyles => css`
+	${headline.xsmall({ lineHeight, fontWeight })}
 
 	${from.mobileMedium} {
-		${headline.small({ lineHeight: 'tight', fontWeight: 'bold' })}
+		${headline.small({ lineHeight, fontWeight })}
 	}
 
 	${from.tablet} {
-		${headline.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
+		${headline.medium({ lineHeight, fontWeight })}
 	}
 `;
 
-const standardFontStyles = css`
-	${headline.xsmall({ lineHeight: 'tight' })}
-
-	${from.mobileMedium} {
-		${headline.small({ lineHeight: 'tight' })}
-	}
-
-	${from.tablet} {
-		${headline.medium({ lineHeight: 'tight' })}
-	}
-`;
 const interviewStyles = css`
 	margin-left: ${remSpace[3]};
 	border: 0;
@@ -70,6 +74,7 @@ const interviewFontStyles = css`
 		${headline.medium({ lineHeight: 'regular' })}
 		font-weight: 400;
 	}
+
 	background-color: ${neutral[0]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
@@ -79,19 +84,27 @@ const interviewFontStyles = css`
 	display: inline;
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
+const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(format), interviewStyles);
 	}
+
 	if (
 		format.design === Design.Review ||
 		format.display === Display.Showcase ||
 		format.display === Display.Immersive ||
 		format.design === Design.PhotoEssay
 	)
-		return css(styles(format), heavyFontStyles);
+		return css(styles(format), fontStyles('tight', 'bold'));
 
-	return css(styles(format), standardFontStyles);
+	if (format.design === Design.Analysis)
+		return css(
+			styles(format),
+			fontStyles('tight', 'light'),
+			underline(kickerColor),
+		);
+
+	return css(styles(format), fontStyles('tight', 'medium'));
 };
 
 const getHeadlineText = (item: Item): JSX.Element | string => {
@@ -102,7 +115,12 @@ const getHeadlineText = (item: Item): JSX.Element | string => {
 };
 
 const Headline: FC<Props> = ({ item }) => {
-	return <h1 css={getStyles(item)}>{getHeadlineText(item)}</h1>;
+	const format = getFormat(item);
+	const { kicker: kickerColor } = getThemeStyles(format.theme);
+
+	return (
+		<h1 css={getStyles(format, kickerColor)}>{getHeadlineText(item)}</h1>
+	);
 };
 
 // ----- Exports ----- //
