@@ -15,7 +15,6 @@ type Props = {
 	guardianBaseURL: string;
 	pillar: Theme;
 	badge?: BadgeType;
-	noMainMedia?: boolean;
 };
 
 const sectionStyles = css`
@@ -69,7 +68,6 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	pillar,
 	badge,
-	noMainMedia,
 }: Props) => (
 	<div className={cx(sectionStyles, badge && badgeContainer)}>
 		{badge && display !== Display.Immersive && (
@@ -80,9 +78,7 @@ export const ArticleTitle = ({
 		<div
 			className={cx(
 				badge && marginTop,
-				display === Display.Immersive &&
-					!noMainMedia &&
-					immersiveMargins,
+				!Design.PrintShop && immersiveMargins,
 			)}
 		>
 			<SeriesSectionLink

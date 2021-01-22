@@ -118,7 +118,7 @@ const CAPITrails: CAPITrailType[] = [
 ];
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
-	const design = decideDesignType(thisTrail.designType);
+	const design = decideDesignType(thisTrail.designType, []);
 	const pillar = decidePillar({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,

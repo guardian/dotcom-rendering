@@ -52,7 +52,7 @@ function buildDeeplyReadUrl(ajaxUrl: string) {
 }
 
 function transformTrail(trail: CAPITrailType): TrailType {
-	const design = decideDesignType(trail.designType);
+	const design = decideDesignType(trail.designType, []);
 	// Converts the CAPI string pillar into an enum
 	return {
 		...trail,

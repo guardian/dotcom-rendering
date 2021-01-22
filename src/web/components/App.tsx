@@ -287,7 +287,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType);
+	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
 	const pillar = decidePillar({
 		pillar: CAPI.pillar,
 		design,

@@ -2237,10 +2237,10 @@
     "@guardian/src-helpers" "^2.7.1"
     "@guardian/src-icons" "^2.7.1"
 
-"@guardian/types@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-2.0.0.tgz#9567ee7638bae058799cb97b48a4078b48033d1c"
-  integrity sha512-0jR2FgTQVG9gO2a1IZwxFWi6UKxteBWPob5+zErbOrznN0u4Mf+9KgigMaNMWpZvkEdDhPAQl7ot5f6wW0wU5A==
+"@guardian/types@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-3.0.0.tgz#bb2cc21f2436fca98143fb18bc58346e43ee9336"
+  integrity sha512-hTrk7EEsqSI/q7fyz2PuKMwKXuXRcwY7Ws+h72bvvimmpayfTwFQgEJfsjABxTSxdTw6bGA8T3F5GV4DJs9zog==
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"

@@ -19,8 +19,6 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	isShowcase?: boolean; // Used for Interviews to change headline position
-	noMainMedia?: boolean; // Used for Immersives where the headline styles
-	// change when there is no main media
 };
 
 const curly = (x: any) => x;
@@ -202,7 +200,6 @@ export const ArticleHeadline = ({
 	pillar,
 	tags,
 	byline,
-	noMainMedia,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
@@ -236,23 +233,22 @@ export const ArticleHeadline = ({
 				case Design.Article:
 				case Design.MatchReport:
 				case Design.Quiz:
+				case Design.PrintShop:
+					return (
+						// Immersive headlines have two versions, with main media, and (this one) without
+						<h1
+							className={cx(
+								jumboFont,
+								maxWidth,
+								immersiveStyles,
+								displayBlock,
+								reducedBottomPadding,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
 				default:
-					if (noMainMedia) {
-						return (
-							// Immersive headlines have two versions, with main media, and (this one) without
-							<h1
-								className={cx(
-									jumboFont,
-									maxWidth,
-									immersiveStyles,
-									displayBlock,
-									reducedBottomPadding,
-								)}
-							>
-								{curly(headlineString)}
-							</h1>
-						);
-					}
 					return (
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background

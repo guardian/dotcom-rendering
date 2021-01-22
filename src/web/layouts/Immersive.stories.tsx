@@ -14,6 +14,7 @@ import { Quiz } from '@root/fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
+import { PrintShop } from '@root/fixtures/articles/PrintShop';
 
 import { NAV } from '@root/fixtures/NAV';
 
@@ -172,3 +173,9 @@ export const MatchReportStory = () => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
+
+export const PrintShopStory = () => {
+	const ServerCAPI = convertToImmersive(PrintShop);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+PrintShopStory.story = { name: 'PrintShop' };
