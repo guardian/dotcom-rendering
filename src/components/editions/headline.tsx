@@ -58,8 +58,6 @@ const interviewStyles = css`
 `;
 
 const interviewFontStyles = css`
-	${articleWidthStyles}
-
 	${headline.xsmall({ lineHeight: 'regular' })}
 		font-weight: 400;
 
