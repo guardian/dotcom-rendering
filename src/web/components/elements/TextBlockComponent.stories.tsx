@@ -1,8 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Display, Design, Pillar } from '@guardian/types';
+
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display, Design } from '@guardian/types';
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -32,7 +33,7 @@ export const defaultStory = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={html}
-				pillar="news"
+				pillar={Pillar.News}
 				design={Design.Article}
 				display={Display.Standard}
 				isFirstParagraph={false}
@@ -47,7 +48,7 @@ export const DropCap = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={html}
-				pillar="culture"
+				pillar={Pillar.Culture}
 				forceDropCap={true}
 				design={Design.Article}
 				display={Display.Immersive}
@@ -63,7 +64,7 @@ export const QuotedDropCap = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={quotedHtml}
-				pillar="opinion"
+				pillar={Pillar.Opinion}
 				forceDropCap={false}
 				design={Design.Comment}
 				display={Display.Standard}
@@ -79,7 +80,7 @@ export const ShortText = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={shortHtml}
-				pillar="news"
+				pillar={Pillar.News}
 				forceDropCap={true}
 				design={Design.Article}
 				display={Display.Standard}
@@ -95,7 +96,7 @@ export const NoTags = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={differentWrapperTags}
-				pillar="news"
+				pillar={Pillar.News}
 				forceDropCap={true}
 				design={Design.Article}
 				display={Display.Standard}
@@ -111,7 +112,7 @@ export const FeatureDropCap = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={html}
-				pillar="culture"
+				pillar={Pillar.Culture}
 				forceDropCap={false}
 				design={Design.Feature}
 				display={Display.Standard}
@@ -127,7 +128,7 @@ export const AList = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={aListHtml}
-				pillar="news"
+				pillar={Pillar.News}
 				forceDropCap={true}
 				design={Design.Article}
 				display={Display.Standard}
@@ -143,7 +144,7 @@ export const BadMarkup = () => {
 		<div className={containerStyles}>
 			<TextBlockComponent
 				html={badMarkup}
-				pillar="news"
+				pillar={Pillar.News}
 				forceDropCap={false}
 				design={Design.Article}
 				display={Display.Standard}
@@ -161,7 +162,7 @@ export const SubSupscript = () => {
 				html={
 					'<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>'
 				}
-				pillar="news"
+				pillar={Pillar.News}
 				forceDropCap={false}
 				design={Design.Article}
 				display={Display.Standard}

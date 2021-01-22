@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Pillar, Special } from '@guardian/types';
+
 import { Section } from '@frontend/web/components/Section';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
@@ -35,7 +37,7 @@ export const Article = () => {
 						headlineText="Rich link headline"
 						contentType="article"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -60,7 +62,7 @@ export const Network = () => {
 						headlineText="Rich link headline"
 						contentType="network"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -91,7 +93,7 @@ export const SectionStory = () => {
 						headlineText="Rich link headline"
 						contentType="section"
 						url=""
-						pillar="sport"
+						pillar={Pillar.Sport}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -119,7 +121,7 @@ export const ImageContent = () => {
 						headlineText="Rich link headline"
 						contentType="imageContent"
 						url=""
-						pillar="news"
+						pillar={Pillar.News}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -150,7 +152,7 @@ export const Interactive = () => {
 						headlineText="Rich link headline"
 						contentType="interactive"
 						url=""
-						pillar="lifestyle"
+						pillar={Pillar.Lifestyle}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -180,7 +182,7 @@ export const Gallery = () => {
 						headlineText="Rich link headline"
 						contentType="gallery"
 						url=""
-						pillar="labs"
+						pillar={Special.Labs}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -211,7 +213,7 @@ export const Video = () => {
 						headlineText="Rich link headline"
 						contentType="video"
 						url=""
-						pillar="news"
+						pillar={Pillar.News}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -243,7 +245,7 @@ export const Audio = () => {
 						headlineText="Rich link headline"
 						contentType="audio"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -268,7 +270,7 @@ export const LiveBlog = () => {
 						headlineText="Rich link headline"
 						contentType="liveBlog"
 						url=""
-						pillar="sport"
+						pillar={Pillar.Sport}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -299,7 +301,7 @@ export const Tag = () => {
 						headlineText="Rich link headline"
 						contentType="tag"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -324,7 +326,7 @@ export const Index = () => {
 						headlineText="Rich link headline"
 						contentType="index"
 						url=""
-						pillar="opinion"
+						pillar={Pillar.Opinion}
 						tags={[
 							{
 								id: '',
@@ -356,7 +358,7 @@ export const Crossword = () => {
 						headlineText="Rich link headline"
 						contentType="crossword"
 						url=""
-						pillar="opinion"
+						pillar={Pillar.Opinion}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -381,7 +383,7 @@ export const Survey = () => {
 						headlineText="Rich link headline"
 						contentType="survey"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -406,7 +408,7 @@ export const Signup = () => {
 						headlineText="Rich link headline"
 						contentType="signup"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -432,7 +434,7 @@ export const Userid = () => {
 						headlineText="Rich link headline"
 						contentType="userid"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -457,7 +459,7 @@ export const PaidFor = () => {
 						headlineText="Rich link headline"
 						contentType="userid"
 						url=""
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[
 							{
 								id: 'tone/advertisement-features',

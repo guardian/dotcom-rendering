@@ -13,7 +13,7 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	badge?: BadgeType;
 	noMainMedia?: boolean;
 };

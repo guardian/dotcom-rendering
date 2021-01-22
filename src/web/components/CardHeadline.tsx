@@ -71,7 +71,7 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-const headlineStyles = (design: Design, pillar: CAPIPillar) => {
+const headlineStyles = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.Feature:
 		case Design.Interview:

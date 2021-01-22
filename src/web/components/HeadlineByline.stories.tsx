@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Display, Design } from '@guardian/types';
+
+import { Display, Design, Pillar } from '@guardian/types';
+
 import { HeadlineByline } from './HeadlineByline';
 
 export default {
@@ -13,7 +15,7 @@ export const interviewStory = () => {
 		<HeadlineByline
 			display={Display.Standard}
 			design={Design.Interview}
-			pillar="culture"
+			pillar={Pillar.Culture}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -26,7 +28,7 @@ export const commentStory = () => {
 		<HeadlineByline
 			display={Display.Standard}
 			design={Design.Comment}
-			pillar="sport"
+			pillar={Pillar.Sport}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -40,7 +42,7 @@ export const commentWithBylineImageStory = () => {
 		<HeadlineByline
 			display={Display.Standard}
 			design={Design.Comment}
-			pillar="sport"
+			pillar={Pillar.Sport}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -62,7 +64,7 @@ export const immersiveStory = () => {
 		<HeadlineByline
 			display={Display.Immersive}
 			design={Design.Article}
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -87,7 +89,7 @@ export const ImmersiveComment = () => {
 			<HeadlineByline
 				display={Display.Immersive}
 				design={Design.Comment}
-				pillar="lifestyle"
+				pillar={Pillar.Lifestyle}
 				byline="Jane Smith"
 				tags={[
 					{
@@ -107,7 +109,7 @@ export const MultipleStory = () => {
 		<HeadlineByline
 			display={Display.Immersive}
 			design={Design.Article}
-			pillar="lifestyle"
+			pillar={Pillar.Lifestyle}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
 				{
@@ -136,7 +138,7 @@ export const noBylineStory = () => {
 		<HeadlineByline
 			display={Display.Standard}
 			design={Design.Interview}
-			pillar="culture"
+			pillar={Pillar.Culture}
 			byline=""
 			tags={[]}
 		/>

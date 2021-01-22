@@ -1,14 +1,16 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
+import { Display, Pillar } from '@guardian/types';
+import { ABProvider } from '@guardian/ab-react';
+
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
 } from '@root/fixtures/mostViewed';
 import { Section } from '@frontend/web/components/Section';
-import { ABProvider } from '@guardian/ab-react';
-import { Display, Design } from '@guardian/types';
+
 import { MostViewedFooter } from './MostViewedFooter';
 
 export default {
@@ -43,11 +45,10 @@ export const withTwoTabs = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar="news"
+					pillar={Pillar.News}
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>
@@ -65,10 +66,9 @@ export const withOneTabs = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>
@@ -86,10 +86,9 @@ export const withNoMostSharedImage = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
-					design={Design.Article}
 				/>
 			</Section>
 		</AbProvider>

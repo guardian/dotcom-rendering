@@ -11,7 +11,7 @@ import { LI } from '@frontend/web/components/Card/components/LI';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display } from '@guardian/types';
+import { Display, Pillar } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -83,7 +83,7 @@ export const Writers = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar="news"
+				pillar={Pillar.News}
 				nav={NAV}
 				display={Display.Standard}
 				subscribeUrl=""
@@ -96,7 +96,7 @@ export const Writers = () => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -251,7 +251,7 @@ export const Writers = () => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<Section
 			padded={false}
@@ -261,7 +261,7 @@ export const Writers = () => (
 		>
 			<Footer
 				pageFooter={pageFooter}
-				pillar="news"
+				pillar={Pillar.News}
 				pillars={NAV.pillars}
 			/>
 		</Section>

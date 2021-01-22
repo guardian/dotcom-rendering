@@ -5,7 +5,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
-const style = (pillar: CAPIPillar) => css`
+const style = (pillar: Theme) => css`
 	h2 {
 		margin-top: 24px;
 		margin-bottom: 10px;
@@ -41,7 +41,7 @@ const subHeadingStyleLabs = css`
 
 export const SubheadingBlockComponent: React.FC<{
 	html: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
 	<span

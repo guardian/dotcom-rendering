@@ -47,7 +47,7 @@ import {
 } from '@guardian/atoms-rendering';
 import { Display, Design } from '@guardian/types';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { toTypesPillar } from '@root/src/lib/format';
+import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -57,7 +57,7 @@ const commercialPosition = css`
 export const ArticleRenderer: React.FC<{
 	display: Display;
 	elements: CAPIElement[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 	adTargeting?: AdTargeting;
 	host?: string;
@@ -79,7 +79,7 @@ export const ArticleRenderer: React.FC<{
 								trackUrl={element.trackUrl}
 								kicker={element.kicker}
 								title={element.title}
-								pillar={toTypesPillar(pillar)}
+								pillar={themeToPillar(pillar)}
 							/>
 						</Figure>
 					);
@@ -219,7 +219,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={toTypesPillar(pillar)}
+								pillar={themeToPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -313,7 +313,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={toTypesPillar(pillar)}
+								pillar={themeToPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -340,7 +340,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={toTypesPillar(pillar)}
+								pillar={themeToPillar(pillar)}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -494,7 +494,7 @@ export const ArticleRenderer: React.FC<{
 							<TimelineAtom
 								id={element.id}
 								title={element.title}
-								pillar={toTypesPillar(pillar)}
+								pillar={themeToPillar(pillar)}
 								events={element.events}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}

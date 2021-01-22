@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -120,7 +120,9 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	const pillarToUse =
-		design === Design.Comment && pillar === 'news' ? 'opinion' : pillar;
+		design === Design.Comment && pillar === Pillar.News
+			? Pillar.Opinion
+			: pillar;
 
 	return (
 		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>

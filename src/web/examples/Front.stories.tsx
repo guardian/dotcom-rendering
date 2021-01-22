@@ -12,7 +12,7 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -61,7 +61,7 @@ export const Front = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar="news"
+				pillar={Pillar.News}
 				nav={NAV}
 				display={Display.Standard}
 				subscribeUrl=""
@@ -74,7 +74,7 @@ export const Front = () => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -87,7 +87,7 @@ export const Front = () => (
 				<LI percentage="75%" showDivider={false} padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="news"
+						pillar={Pillar.News}
 						design={Design.Article}
 						headlineText={headlines[0]}
 						headlineSize="large"
@@ -106,7 +106,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="news"
+						pillar={Pillar.News}
 						design={Design.Article}
 						headlineText="Munroe Bergdorf to advise Labour on LGBT issues"
 						headlineSize="medium"
@@ -132,7 +132,7 @@ export const Front = () => (
 				<LI percentage="50%" padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="culture"
+						pillar={Pillar.Culture}
 						design={Design.Article}
 						headlineText={headlines[2]}
 						kickerText={kickers[1]}
@@ -151,7 +151,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="opinion"
+								pillar={Pillar.Opinion}
 								design={Design.GuardianView}
 								headlineText={headlines[3]}
 								kickerText="Editorial"
@@ -163,7 +163,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="news"
+								pillar={Pillar.News}
 								design={Design.Article}
 								headlineText={headlines[4]}
 								headlineSize="small"
@@ -181,7 +181,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="sport"
+								pillar={Pillar.Sport}
 								design={Design.Article}
 								headlineText={headlines[6]}
 								headlineSize="small"
@@ -192,7 +192,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="news"
+								pillar={Pillar.News}
 								design={Design.Article}
 								headlineText={headlines[7]}
 								headlineSize="small"
@@ -202,7 +202,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="news"
+								pillar={Pillar.News}
 								design={Design.Article}
 								headlineText={headlines[8]}
 								headlineSize="small"
@@ -212,7 +212,7 @@ export const Front = () => (
 						<LI bottomMargin={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-								pillar="news"
+								pillar={Pillar.News}
 								design={Design.Article}
 								headlineText={headlines[9]}
 								headlineSize="small"
@@ -239,7 +239,7 @@ export const Front = () => (
 				<LI padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="news"
+						pillar={Pillar.News}
 						design={Design.Live}
 						headlineText={headlines[7]}
 						headlineSize="medium"
@@ -256,7 +256,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="sport"
+						pillar={Pillar.Sport}
 						design={Design.Live}
 						headlineText={headlines[8]}
 						headlineSize="medium"
@@ -274,7 +274,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="sport"
+						pillar={Pillar.Sport}
 						design={Design.Comment}
 						headlineText={headlines[8]}
 						headlineSize="medium"
@@ -289,7 +289,7 @@ export const Front = () => (
 				<LI padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="news"
+						pillar={Pillar.News}
 						design={Design.Article}
 						headlineText={headlines[9]}
 						headlineSize="small"
@@ -304,7 +304,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="sport"
+						pillar={Pillar.Sport}
 						design={Design.Article}
 						headlineText={headlines[10]}
 						headlineSize="small"
@@ -319,7 +319,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="culture"
+						pillar={Pillar.Culture}
 						design={Design.Interview}
 						headlineText={headlines[1]}
 						headlineSize="small"
@@ -334,7 +334,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="lifestyle"
+						pillar={Pillar.Lifestyle}
 						design={Design.Feature}
 						headlineText={headlines[3]}
 						headlineSize="small"
@@ -355,7 +355,7 @@ export const Front = () => (
 				<LI padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="opinion"
+						pillar={Pillar.Opinion}
 						design={Design.Comment}
 						headlineText={headlines[11]}
 						headlineSize="medium"
@@ -378,7 +378,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="opinion"
+						pillar={Pillar.Opinion}
 						design={Design.Article}
 						headlineText={headlines[11]}
 						headlineSize="medium"
@@ -396,7 +396,7 @@ export const Front = () => (
 				>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-						pillar="news"
+						pillar={Pillar.News}
 						design={Design.Article}
 						headlineText={headlines[11]}
 						headlineSize="medium"
@@ -416,7 +416,7 @@ export const Front = () => (
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						design={Design.Article}
-						pillar="news"
+						pillar={Pillar.News}
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						kickerText={kickers[2]}
@@ -441,7 +441,7 @@ export const Front = () => (
 			<LI padSides={true}>
 				<Card
 					linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-					pillar="sport"
+					pillar={Pillar.Sport}
 					design={Design.Media}
 					headlineText={headlines[11]}
 					headlineSize="large"
@@ -458,7 +458,7 @@ export const Front = () => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<Section
 			padded={false}
@@ -468,7 +468,7 @@ export const Front = () => (
 		>
 			<Footer
 				pageFooter={pageFooter}
-				pillar="news"
+				pillar={Pillar.News}
 				pillars={NAV.pillars}
 			/>
 		</Section>

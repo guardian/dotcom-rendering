@@ -36,7 +36,7 @@ const yellowBoxStyles = css`
 	}
 `;
 
-const opinionStyles = (pillar: CAPIPillar) => css`
+const opinionStyles = (pillar: Theme) => css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
@@ -64,7 +64,7 @@ const immersiveStyles = css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (pillar: CAPIPillar) => css`
+const immersiveLinkStyles = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].main};
 		border-bottom: 1px solid ${pillarPalette[pillar].main};
@@ -85,7 +85,7 @@ const authorBylineWithImage = css`
 type Props = {
 	display: Display;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	byline: string;
 	tags: TagType[];
 };

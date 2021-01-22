@@ -9,7 +9,7 @@ const headlineTagWrapper = css`
 	margin-top: 6px;
 `;
 
-const headlineTagStyles = (pillar: CAPIPillar) => css`
+const headlineTagStyles = (pillar: Theme) => css`
 	background-color: ${pillarPalette[pillar].dark};
 	color: ${brandText.primary};
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
@@ -21,7 +21,7 @@ const headlineTagStyles = (pillar: CAPIPillar) => css`
 
 type Props = {
 	tagText: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 export const HeadlineTag = ({ tagText, pillar }: Props) => (

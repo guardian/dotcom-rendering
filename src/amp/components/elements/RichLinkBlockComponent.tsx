@@ -17,7 +17,7 @@ const richLinkContainer = css`
 	margin-right: 20px;
 `;
 
-const pillarColour = (pillar: CAPIPillar) => css`
+const pillarColour = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].dark};
 `;
 
@@ -41,7 +41,7 @@ const richLink = css`
 
 export const RichLinkBlockComponent: React.FC<{
 	element: RichLinkBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ element, pillar }) => (
 	<aside className={richLinkContainer}>
 		<a className={cx(richLink, pillarColour(pillar))} href={element.url}>

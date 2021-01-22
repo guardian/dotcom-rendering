@@ -1,3 +1,5 @@
+import { Special, Pillar, Theme } from '@guardian/types';
+
 import {
 	news as _news,
 	opinion as _opinion,
@@ -45,13 +47,13 @@ interface PillarColours {
 	800: colour;
 }
 
-export const pillarNames: CAPIPillar[] = [
-	'news',
-	'opinion',
-	'sport',
-	'culture',
-	'lifestyle',
-	'labs',
+export const pillarNames: Theme[] = [
+	Pillar.News,
+	Pillar.Opinion,
+	Pillar.Sport,
+	Pillar.Culture,
+	Pillar.Lifestyle,
+	Special.Labs,
 ];
 
 export const augmentedLabs: PillarColours = {
@@ -67,28 +69,30 @@ export const augmentedLabs: PillarColours = {
 	800: '#65a897', // dark teal
 };
 
-export const pillarPalette: Record<CAPIPillar, PillarColours> = {
-	news,
-	opinion,
-	sport,
-	culture,
-	lifestyle,
-	labs: augmentedLabs,
+export const pillarPalette: Record<Theme, PillarColours> = {
+	[Pillar.News]: news,
+	[Pillar.Opinion]: opinion,
+	[Pillar.Sport]: sport,
+	[Pillar.Culture]: culture,
+	[Pillar.Lifestyle]: lifestyle,
+	[Special.Labs]: augmentedLabs,
+	[Special.SpecialReport]: news,
 };
 
 /*
 This takes a function, f, and applies it to all pillars.
 It returns an object with each pillar as the keys and f('pillar') as the value
 */
-export const pillarMap: <T>(
-	f: (name: CAPIPillar) => T,
-) => { [K in CAPIPillar]: T } = (f) => ({
-	news: f('news'),
-	opinion: f('opinion'),
-	sport: f('sport'),
-	culture: f('culture'),
-	lifestyle: f('lifestyle'),
-	labs: f('labs'),
+export const pillarMap: <T>(f: (name: Theme) => T) => { [K in Theme]: T } = (
+	f,
+) => ({
+	[Pillar.News]: f(Pillar.News),
+	[Pillar.Opinion]: f(Pillar.Opinion),
+	[Pillar.Sport]: f(Pillar.Sport),
+	[Pillar.Culture]: f(Pillar.Culture),
+	[Pillar.Lifestyle]: f(Pillar.Lifestyle),
+	[Special.Labs]: f(Special.Labs),
+	[Special.SpecialReport]: f(Special.SpecialReport),
 });
 /*
 Further notes on this function:
@@ -97,9 +101,9 @@ Further notes on this function:
       a key for each pillar and values of type T.
  */
 
-export const neutralBorder = (pillar: CAPIPillar): colour => {
+export const neutralBorder = (pillar: Theme): colour => {
 	switch (pillar) {
-		case 'labs':
+		case Special.Labs:
 			return border.primary; // 'dark' theme
 		default:
 			return border.secondary;
