@@ -47,6 +47,10 @@ export const articleMarginStyles: SerializedStyles = css`
 `;
 
 export const headerBackgroundColour = (format: Format): Colour => {
+	if (format.design === Design.Analysis) {
+		return neutral[97];
+	}
+
 	if (format.design === Design.Review) {
 		switch (format.theme) {
 			case Pillar.Culture:
