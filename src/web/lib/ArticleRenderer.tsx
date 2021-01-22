@@ -29,6 +29,9 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { WitnessVideoBlockComponent } from '@root/src/web/components/elements/WitnessVideoBlockComponent';
+import { WitnessImageBlockComponent } from '@root/src/web/components/elements/WitnessImageBlockComponent';
+import { WitnessTextBlockComponent } from '@root/src/web/components/elements/WitnessTextBlockComponent';
 
 import { Figure } from '@root/src/web/components/Figure';
 
@@ -519,6 +522,75 @@ export const ArticleRenderer: React.FC<{
 							language={element.language}
 						/>
 					);
+				case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
+					const witnessType = element.witnessTypeData._type;
+					switch (witnessType) {
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
+							const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
+							return (
+								<figure itemType="http://schema.org/ImageObject">
+									<WitnessImageBlockComponent
+										caption={witnessTypeDataImage.caption}
+										title={witnessTypeDataImage.title}
+										authorName={
+											witnessTypeDataImage.authorName
+										}
+										dateCreated={
+											witnessTypeDataImage.dateCreated
+										}
+										alt={witnessTypeDataImage.alt}
+										pillar={pillar}
+									/>
+								</figure>
+							);
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
+							const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
+							return (
+								<figure itemType="http://schema.org/VideoObject">
+									<WitnessVideoBlockComponent
+										title={witnessTypeDataVideo.title}
+										description={
+											witnessTypeDataVideo.description
+										}
+										authorUsername={
+											witnessTypeDataVideo.authorUsername
+										}
+										width={witnessTypeDataVideo.width}
+										height={witnessTypeDataVideo.height}
+										youtubeUrl={
+											witnessTypeDataVideo.youtubeUrl
+										}
+										dateCreated={
+											witnessTypeDataVideo.dateCreated
+										}
+										pillar={pillar}
+									/>
+								</figure>
+							);
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
+							const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
+							return (
+								<figure itemType="http://schema.org/WebPageElement">
+									<WitnessTextBlockComponent
+										title={witnessTypeDataText.title}
+										description={
+											witnessTypeDataText.description
+										}
+										authorUsername={
+											witnessTypeDataText.authorUsername
+										}
+										dateCreated={
+											witnessTypeDataText.dateCreated
+										}
+										pillar={pillar}
+									/>
+								</figure>
+							);
+						default:
+							return null;
+					}
+				}
+
 				case 'model.dotcomrendering.pageElements.AudioBlockElement':
 				case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
