@@ -8,6 +8,8 @@ import type {
 	FontStyle,
 	FontWeight,
 } from '@guardian/src-foundations/typography/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -15,7 +17,6 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
 import { articleWidthStyles, sidePadding } from './styles';
-import { Design, Format } from '@guardian/types';
 
 // ----- Component ----- //
 
