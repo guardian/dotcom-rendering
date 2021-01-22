@@ -53,7 +53,7 @@ const standardFontStyles = css`
 	}
 `;
 const interviewStyles = css`
-	margin-left: 0.75rem;
+	margin-left: ${remSpace[3]};
 	border: 0;
 `;
 
@@ -75,8 +75,8 @@ const interviewFontStyles = css`
 	background-color: ${neutral[0]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
-	padding-bottom: 0.3125rem;
-	box-shadow: -0.75rem 0 0 ${neutral[0]}, 0.75rem 0 0 ${neutral[0]};
+	padding-bottom: ${remSpace[1]};
+	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]}, ${remSpace[3]} 0 0 ${neutral[0]};
 	display: inline;
 `;
 
