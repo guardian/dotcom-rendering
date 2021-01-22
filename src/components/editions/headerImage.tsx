@@ -11,8 +11,10 @@ import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import { getThemeStyles } from 'themeStyles';
 import { tabletImageWidth, wideImageWidth } from './styles';
 
 // ----- Component ----- //
@@ -74,8 +76,14 @@ const sizes: Sizes = {
 	default: '100vw',
 };
 
-const HeaderImage: FC<Props> = ({ item }) =>
-	maybeRender(item.mainMedia, (media) => {
+const HeaderImage: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	const {
+		cameraIcon: iconColor,
+		cameraIconBackground: iconBackgroundColor,
+	} = getThemeStyles(format.theme);
+
+	return maybeRender(item.mainMedia, (media) => {
 		if (media.kind === MainMediaKind.Image) {
 			const {
 				image,
@@ -95,6 +103,8 @@ const HeaderImage: FC<Props> = ({ item }) =>
 						caption={nativeCaption}
 						credit={credit}
 						styles={captionStyles}
+						iconColor={iconColor}
+						iconBackgroundColor={iconBackgroundColor}
 					/>
 					<StarRating item={item} />
 				</figure>
@@ -103,6 +113,7 @@ const HeaderImage: FC<Props> = ({ item }) =>
 
 		return null;
 	});
+};
 
 // ----- Exports ----- //
 

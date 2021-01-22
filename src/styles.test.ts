@@ -6,6 +6,8 @@ describe('helper functions return correct styles', () => {
 	test('Returns correct pillar styles for pillar', () => {
 		const pillarStyles = getThemeStyles(Pillar.News);
 		const expectedNewsPillarStyles = {
+			cameraIcon: "#FFF4F2",
+			cameraIconBackground: "#C70000",
 			kicker: '#C70000',
 			inverted: '#FF5943',
 			liveblogBackground: '#AB0613',
