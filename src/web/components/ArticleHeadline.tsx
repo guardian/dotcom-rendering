@@ -204,6 +204,21 @@ export const ArticleHeadline = ({
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
+				case Design.PrintShop:
+					return (
+						// Immersive headlines have two versions, with main media, and (this one) without
+						<h1
+							className={cx(
+								jumboFont,
+								maxWidth,
+								immersiveStyles,
+								displayBlock,
+								reducedBottomPadding,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
@@ -233,21 +248,6 @@ export const ArticleHeadline = ({
 				case Design.Article:
 				case Design.MatchReport:
 				case Design.Quiz:
-				case Design.PrintShop:
-					return (
-						// Immersive headlines have two versions, with main media, and (this one) without
-						<h1
-							className={cx(
-								jumboFont,
-								maxWidth,
-								immersiveStyles,
-								displayBlock,
-								reducedBottomPadding,
-							)}
-						>
-							{curly(headlineString)}
-						</h1>
-					);
 				default:
 					return (
 						// Immersive headlines with main media present, are large and inverted with
