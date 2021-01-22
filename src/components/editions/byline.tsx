@@ -37,7 +37,7 @@ const styles = (kickerColor: string): SerializedStyles => {
 			}
 		}
 
-		padding-bottom: ${remSpace[4]};
+		padding-bottom: ${remSpace[6]};
 		margin: 0;
 
 		${articleWidthStyles}
