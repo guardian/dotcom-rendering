@@ -39,7 +39,7 @@ export const WitnessVideoBlockComponent = ({
 	pillar,
 }: Props) => {
 	const youtubeVideoId = youtubeUrl.split('?v=')[1];
-	const parsedURL = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?wmode=opaque&feature=oembed`;
+	const parsedURL = `https://www.youtube.com/embed/${youtubeVideoId}?wmode=opaque&feature=oembed`;
 	return (
 		<WitnessWrapper
 			authorName={authorName}
