@@ -9,7 +9,7 @@ export default {
 	title: 'Components/YoutubeEmbedComponent',
 	parameters: {
 		chromatic: {
-			disabled: true,
+			disable: true,
 		},
 	},
 };
