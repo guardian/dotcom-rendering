@@ -8,14 +8,14 @@ import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -102,17 +102,17 @@ const metaNumbers = css`
 
 const metaContainer = ({
 	display,
-	designType,
+	design,
 }: {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 }) => {
 	switch (display) {
 		case Display.Immersive:
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
-				case 'PhotoEssay':
+			switch (design) {
+				case Design.PhotoEssay:
 					return css`
 						${until.phablet} {
 							margin-left: -20px;
@@ -129,19 +129,18 @@ const metaContainer = ({
 							margin-left: 40px;
 						}
 					`;
-				case 'Feature':
-				case 'Review':
-				case 'Recipe':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'Analysis':
-				case 'Article':
-				case 'MatchReport':
-				case 'GuardianView':
-				case 'Quiz':
-				case 'AdvertisementFeature':
-				case 'Comment':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.GuardianView:
+				case Design.Quiz:
+				case Design.Comment:
 				default:
 					return css`
 						${until.phablet} {
@@ -168,28 +167,27 @@ const getAuthorName = (tags: TagType[]) => {
 	return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (designType: DesignType, display: Display) => {
+const shouldShowAvatar = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
-				case 'Feature':
-				case 'Review':
-				case 'Recipe':
-				case 'Interview':
+			switch (design) {
+				case Design.Feature:
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Interview:
 					return true;
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'MatchReport':
-				case 'GuardianView':
-				case 'Quiz':
-				case 'AdvertisementFeature':
-				case 'Comment':
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.GuardianView:
+				case Design.Quiz:
+				case Design.Comment:
 				default:
 					return false;
 			}
@@ -197,28 +195,27 @@ const shouldShowAvatar = (designType: DesignType, display: Display) => {
 	}
 };
 
-const shouldShowContributor = (designType: DesignType, display: Display) => {
+const shouldShowContributor = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
+			switch (design) {
+				case Design.Comment:
+				case Design.GuardianView:
 					return false;
-				case 'Feature':
-				case 'Review':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Interview':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Interview:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
 				default:
 					return true;
 			}
@@ -268,7 +265,7 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 export const ArticleMeta = ({
 	branding,
 	display,
-	designType,
+	design,
 	pillar,
 	pageId,
 	webTitle,
@@ -284,10 +281,9 @@ export const ArticleMeta = ({
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar =
-		onlyOneContributor && shouldShowAvatar(designType, display);
+	const showAvatar = onlyOneContributor && shouldShowAvatar(design, display);
 	return (
-		<div className={metaContainer({ display, designType })}>
+		<div className={metaContainer({ display, design })}>
 			<div className={cx(meta)}>
 				{branding && <Branding branding={branding} pillar={pillar} />}
 				<RowBelowLeftCol>
@@ -302,9 +298,9 @@ export const ArticleMeta = ({
 							</AvatarContainer>
 						)}
 						<div>
-							{shouldShowContributor(designType, display) && (
+							{shouldShowContributor(design, display) && (
 								<Contributor
-									designType={designType}
+									design={design}
 									author={author}
 									tags={tags}
 									pillar={pillar}

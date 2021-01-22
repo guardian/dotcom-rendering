@@ -1,5 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+
+import { Pillar } from '@guardian/types';
+
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
@@ -44,9 +47,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);
@@ -79,9 +81,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);
@@ -111,9 +112,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);
@@ -136,7 +136,7 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: true,
-							pillar: 'news',
+							pillar: Pillar.News,
 						},
 					],
 				},
@@ -147,9 +147,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);
@@ -170,7 +169,7 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: false,
-							pillar: 'news',
+							pillar: Pillar.News,
 						},
 					],
 				},
@@ -181,9 +180,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);
@@ -198,9 +196,8 @@ describe('MostViewedFooterData', () => {
 			<AbProvider>
 				<MostViewedFooterData
 					sectionName="Section Name"
-					pillar="news"
+					pillar={Pillar.News}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					design="Article"
 				/>
 			</AbProvider>,
 		);

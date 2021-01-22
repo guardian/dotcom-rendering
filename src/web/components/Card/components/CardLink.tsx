@@ -1,9 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { Design } from '@guardian/types';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
+const linkStyles = (design: Design, pillar: Theme) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -36,9 +38,9 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 		}
 	`;
 
-	switch (designType) {
-		case 'GuardianView':
-		case 'Comment':
+	switch (design) {
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				${baseLinkStyles}
 				background-color: ${opinion[800]};
@@ -50,7 +52,7 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case 'Media':
+		case Design.Media:
 			return css`
 				${baseLinkStyles}
 				background-color: ${neutral[20]};
@@ -59,7 +61,7 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 					filter: brightness(90%);
 				}
 			`;
-		case 'Live':
+		case Design.Live:
 			return css`
 				${baseLinkStyles}
 				background-color: ${pillarPalette[pillar].dark};
@@ -68,16 +70,15 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 					filter: brightness(90%);
 				}
 			`;
-		case 'Article':
-		case 'Review':
-		case 'PhotoEssay':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Analysis':
-		case 'Interview':
+		case Design.Article:
+		case Design.Review:
+		case Design.PhotoEssay:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.Feature:
+		case Design.Analysis:
+		case Design.Interview:
 		default:
 			return css`
 				${baseLinkStyles}
@@ -93,14 +94,14 @@ const linkStyles = (designType: DesignType, pillar: CAPIPillar) => {
 type Props = {
 	children: React.ReactNode;
 	linkTo: string;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 };
 
-export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (
+export const CardLink = ({ children, linkTo, design, pillar }: Props) => (
 	<a
 		href={linkTo}
-		className={linkStyles(designType, pillar)}
+		className={linkStyles(design, pillar)}
 		data-link-name="article"
 	>
 		{children}

@@ -11,7 +11,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
@@ -218,7 +218,7 @@ const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
 	pillars: PillarType[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 	pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
 	<footer

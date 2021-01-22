@@ -1,35 +1,32 @@
 import { css } from 'emotion';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
+import { Design } from '@guardian/types';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-export const headlineBackgroundColour = (
-	designType: DesignType,
-	pillar: CAPIPillar,
-) => {
-	switch (designType) {
-		case 'GuardianView':
-		case 'Comment':
+export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
+	switch (design) {
+		case Design.GuardianView:
+		case Design.Comment:
 			return css`
 				background-color: ${opinion[800]};
 			`;
-		case 'Media':
+		case Design.Media:
 			return css`
 				background-color: ${neutral[20]};
 			`;
-		case 'Live':
+		case Design.Live:
 			return css`
 				background-color: ${pillarPalette[pillar].dark};
 			`;
-		case 'Article':
-		case 'Review':
-		case 'PhotoEssay':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Analysis':
-		case 'Interview':
+		case Design.Article:
+		case Design.Review:
+		case Design.PhotoEssay:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.Quiz:
+		case Design.Feature:
+		case Design.Analysis:
+		case Design.Interview:
 		default:
 			return css`
 				background-color: ${neutral[97]};
@@ -41,24 +38,23 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-export const headlineColour = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
-		case 'Feature':
-		case 'Interview':
+export const headlineColour = (design: Design, pillar: Theme) => {
+	switch (design) {
+		case Design.Feature:
+		case Design.Interview:
 			return colourStyles(pillarPalette[pillar].dark);
-		case 'Media':
-		case 'Live':
+		case Design.Media:
+		case Design.Live:
 			return colourStyles(neutral[97]);
-		case 'Analysis':
-		case 'PhotoEssay':
-		case 'Article':
-		case 'Review':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Comment':
+		case Design.Analysis:
+		case Design.PhotoEssay:
+		case Design.Article:
+		case Design.Review:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.Comment:
 		default:
 	}
 };

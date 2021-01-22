@@ -8,6 +8,9 @@ import { Button } from '@guardian/src-button';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
+
+import { pillarPalette } from '@root/src/lib/pillars';
+
 import { Form } from '../Callout/Form';
 
 const wrapperStyles = css`
@@ -72,10 +75,10 @@ const summeryContentWrapper = css`
 	flex-direction: row;
 `;
 
-const speechBubbleStyles = (pillar: CAPIPillar) => css`
+const speechBubbleStyles = (pillar: Theme) => css`
 	${textSans.medium({ fontWeight: 'bold' })}
 	color: ${neutral[100]};
-	background-color: ${palette[pillar][400]};
+	background-color: ${pillarPalette[pillar][400]};
 	min-width: 88px;
 	padding-bottom: 6px;
 	padding-left: 10px;
@@ -86,7 +89,7 @@ const speechBubbleStyles = (pillar: CAPIPillar) => css`
 		height: 22px;
 		border-bottom-right-radius: 18px;
 		position: absolute;
-		background-color: ${palette[pillar][400]};
+		background-color: ${pillarPalette[pillar][400]};
 	}
 `;
 
@@ -128,7 +131,7 @@ export const CalloutBlockComponent = ({
 	pillar,
 }: {
 	callout: CalloutBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }) => {
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;

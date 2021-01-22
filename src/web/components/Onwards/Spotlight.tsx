@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Design } from '@guardian/types';
+
 import { Card } from '@frontend/web/components/Card/Card';
 
 type Props = {
@@ -12,12 +14,12 @@ export const Spotlight = ({ content }: Props) => (
 		{...{
 			linkTo: content[0].url,
 			pillar: content[0].pillar,
-			designType: content[0].designType,
+			design: content[0].design,
 			headlineText: content[0].headline,
 			headlineSize: 'large',
 			byline: content[0].byline,
 			showByline: content[0].showByline,
-			showQuotes: content[0].designType === 'Comment',
+			showQuotes: content[0].design === Design.Comment,
 			webPublicationDate: content[0].webPublicationDate,
 			kickerText: content[0].kickerText,
 			showPulsingDot: content[0].isLiveBlog,

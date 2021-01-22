@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const MapEmbedBlockComponent: React.FC<{
 	embedUrl?: string;
@@ -11,9 +11,9 @@ export const MapEmbedBlockComponent: React.FC<{
 	width: number;
 	title?: string;
 	caption?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	credit?: string;
 }> = ({
 	embedUrl,
@@ -23,7 +23,7 @@ export const MapEmbedBlockComponent: React.FC<{
 	caption,
 	pillar,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
@@ -57,7 +57,7 @@ export const MapEmbedBlockComponent: React.FC<{
 			{hasCaption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					display={display}
 					credit={credit}

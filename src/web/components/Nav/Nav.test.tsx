@@ -1,16 +1,14 @@
 import React from 'react';
 import { render, within } from '@testing-library/react';
-import { Display } from '@guardian/types/Format';
+import { Display, Pillar } from '@guardian/types';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
-
-// type CAPIPillar = "news" | "opinion" | "sport" | "culture" | "lifestyle" | "labs"
 
 describe('Nav', () => {
 	it('should display pillar titles', () => {
 		const { getByTestId } = render(
 			<Nav
-				pillar="news"
+				pillar={Pillar.News}
 				nav={nav}
 				display={Display.Standard}
 				subscribeUrl=""
@@ -28,7 +26,7 @@ describe('Nav', () => {
 	it('should render the correct number of pillar items', () => {
 		const { getByTestId } = render(
 			<Nav
-				pillar="news"
+				pillar={Pillar.News}
 				nav={nav}
 				display={Display.Standard}
 				subscribeUrl=""

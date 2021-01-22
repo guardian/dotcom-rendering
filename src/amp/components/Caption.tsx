@@ -23,7 +23,7 @@ const captionPadding = css`
 
 export const Caption: React.FC<{
 	captionText?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;

@@ -15,3 +15,4 @@ node_modules/
 !/src/**/*.tsx
 !/src/**/*.js
 !/fixtures/**/*.ts
+!/cypress/**/*.js

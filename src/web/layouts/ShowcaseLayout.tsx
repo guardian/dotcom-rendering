@@ -46,7 +46,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -170,14 +170,14 @@ const mainMediaWrapper = css`
 `;
 
 const PositionHeadline = ({
-	designType,
+	design,
 	children,
 }: {
-	designType: DesignType;
+	design: Design;
 	children: React.ReactNode;
 }) => {
-	switch (designType) {
-		case 'Interview':
+	switch (design) {
+		case Design.Interview:
 			return (
 				<div
 					className={css`
@@ -189,19 +189,18 @@ const PositionHeadline = ({
 					<div className={maxWidth}>{children}</div>
 				</div>
 			);
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Comment':
-		case 'Analysis':
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Analysis:
 		default:
 			return <div className={maxWidth}>{children}</div>;
 	}
@@ -226,15 +225,15 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	display: Display;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 }
 
 export const ShowcaseLayout = ({
 	CAPI,
 	NAV,
 	display,
-	designType,
+	design,
 	pillar,
 }: Props) => {
 	const {
@@ -339,7 +338,7 @@ export const ShowcaseLayout = ({
 					<GridItem area="title">
 						<ArticleTitle
 							display={display}
-							designType={designType}
+							design={design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
@@ -352,7 +351,7 @@ export const ShowcaseLayout = ({
 						<Border />
 					</GridItem>
 					<GridItem area="headline">
-						<PositionHeadline designType={designType}>
+						<PositionHeadline design={design}>
 							<div
 								className={css`
 									padding-bottom: 24px;
@@ -366,7 +365,7 @@ export const ShowcaseLayout = ({
 								<ArticleHeadline
 									display={display}
 									headlineString={CAPI.headline}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
@@ -384,12 +383,12 @@ export const ShowcaseLayout = ({
 						<div className={mainMediaWrapper}>
 							<MainMedia
 								display={display}
-								designType={designType}
+								design={design}
 								elements={CAPI.mainMediaElements}
 								pillar={pillar}
 								adTargeting={adTargeting}
 								starRating={
-									designType === 'Review' && CAPI.starRating
+									design === Design.Review && CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}
@@ -400,7 +399,7 @@ export const ShowcaseLayout = ({
 					<GridItem area="standfirst">
 						<ArticleStandfirst
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							standfirst={CAPI.standfirst}
 						/>
@@ -409,12 +408,9 @@ export const ShowcaseLayout = ({
 						<div className={maxWidth}>
 							<div className={stretchLines}>
 								<GuardianLines
-									count={decideLineCount(designType)}
+									count={decideLineCount(design)}
 									pillar={pillar}
-									effect={decideLineEffect(
-										designType,
-										pillar,
-									)}
+									effect={decideLineEffect(design, pillar)}
 								/>
 							</div>
 						</div>
@@ -424,7 +420,7 @@ export const ShowcaseLayout = ({
 							<ArticleMeta
 								branding={branding}
 								display={display}
-								designType={designType}
+								design={design}
 								pillar={pillar}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
@@ -444,7 +440,7 @@ export const ShowcaseLayout = ({
 									pillar={pillar}
 									blocks={CAPI.blocks}
 									display={display}
-									designType={designType}
+									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>

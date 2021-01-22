@@ -10,14 +10,14 @@ import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { Hide } from '@root/src/web/components/Hide';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	element: ImageBlockElement;
 	role: RoleType;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
 	starRating?: number;
@@ -101,7 +101,7 @@ const moreTitlePadding = css`
 	}
 `;
 
-const titleWrapper = (pillar: CAPIPillar) => css`
+const titleWrapper = (pillar: Theme) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -137,7 +137,7 @@ const titleWrapper = (pillar: CAPIPillar) => css`
 const ImageTitle: React.FC<{
 	title: string;
 	role: RoleType;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ title, role, pillar }) => {
 	switch (role) {
 		case 'inline':
@@ -210,7 +210,7 @@ const CaptionToggle = () => (
 
 export const ImageComponent = ({
 	display,
-	designType,
+	design,
 	element,
 	pillar,
 	hideCaption,
@@ -223,7 +223,7 @@ export const ImageComponent = ({
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
-		designType !== 'Comment' && designType !== 'GuardianView';
+		design !== Design.Comment && design !== Design.GuardianView;
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
@@ -351,7 +351,7 @@ export const ImageComponent = ({
 								<div id="the-caption">
 									<Caption
 										display={display}
-										designType={designType}
+										design={design}
 										captionText={element.data.caption || ''}
 										pillar={pillar}
 										credit={element.data.credit}
@@ -373,7 +373,7 @@ export const ImageComponent = ({
 				<Hide when="below" breakpoint="tablet">
 					<Caption
 						display={display}
-						designType={designType}
+						design={design}
 						captionText={element.data.caption || ''}
 						pillar={pillar}
 						credit={element.data.credit}
@@ -384,7 +384,7 @@ export const ImageComponent = ({
 			) : (
 				<Caption
 					display={display}
-					designType={designType}
+					design={design}
 					captionText={element.data.caption || ''}
 					pillar={pillar}
 					credit={element.data.credit}

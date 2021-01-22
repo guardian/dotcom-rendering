@@ -50,7 +50,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -217,15 +217,15 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 
 const StandardGrid = ({
 	children,
-	designType,
+	design,
 	CAPI,
 }: {
 	children: React.ReactNode;
-	designType: DesignType;
+	design: Design;
 	CAPI: CAPIType;
 }) => (
 	<div
-		className={layoutGrid(designType === 'MatchReport' && !!CAPI.matchUrl)}
+		className={layoutGrid(design === Design.MatchReport && !!CAPI.matchUrl)}
 	>
 		{children}
 	</div>
@@ -292,15 +292,15 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	display: Display;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 }
 
 export const StandardLayout = ({
 	CAPI,
 	NAV,
 	display,
-	designType,
+	design,
 	pillar,
 }: Props) => {
 	const {
@@ -323,7 +323,7 @@ export const StandardLayout = ({
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showMatchStats = designType === 'MatchReport' && CAPI.matchUrl;
+	const showMatchStats = design === Design.MatchReport && CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -404,11 +404,11 @@ export const StandardLayout = ({
 			</div>
 
 			<Section data-print-layout="hide" showTopBorder={false}>
-				<StandardGrid designType={designType} CAPI={CAPI}>
+				<StandardGrid design={design} CAPI={CAPI}>
 					<GridItem area="title">
 						<ArticleTitle
 							display={display}
-							designType={designType}
+							design={design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
@@ -422,14 +422,14 @@ export const StandardLayout = ({
 					</GridItem>
 					<GridItem area="preFurniture">
 						<div className={maxWidth}>
-							{designType === 'MatchReport' && CAPI.matchUrl && (
+							{design === Design.MatchReport && CAPI.matchUrl && (
 								<Placeholder rootId="match-nav" height={230} />
 							)}
 						</div>
 					</GridItem>
 					<GridItem area="headline">
 						<div className={maxWidth}>
-							<ArticleHeadlinePadding designType={designType}>
+							<ArticleHeadlinePadding design={design}>
 								{age && (
 									<div className={ageWarningMargins}>
 										<AgeWarning age={age} />
@@ -438,7 +438,7 @@ export const StandardLayout = ({
 								<ArticleHeadline
 									display={display}
 									headlineString={CAPI.headline}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
@@ -465,7 +465,7 @@ export const StandardLayout = ({
 					<GridItem area="standfirst">
 						<ArticleStandfirst
 							display={display}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							standfirst={CAPI.standfirst}
 						/>
@@ -474,7 +474,7 @@ export const StandardLayout = ({
 						<div className={maxWidth}>
 							<MainMedia
 								display={display}
-								designType={designType}
+								design={design}
 								elements={CAPI.mainMediaElements}
 								pillar={pillar}
 								adTargeting={adTargeting}
@@ -486,12 +486,9 @@ export const StandardLayout = ({
 						<div className={maxWidth}>
 							<div className={stretchLines}>
 								<GuardianLines
-									count={decideLineCount(designType)}
+									count={decideLineCount(design)}
 									pillar={pillar}
-									effect={decideLineEffect(
-										designType,
-										pillar,
-									)}
+									effect={decideLineEffect(design, pillar)}
 								/>
 							</div>
 						</div>
@@ -501,7 +498,7 @@ export const StandardLayout = ({
 							<ArticleMeta
 								branding={branding}
 								display={display}
-								designType={designType}
+								design={design}
 								pillar={pillar}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
@@ -521,7 +518,7 @@ export const StandardLayout = ({
 									pillar={pillar}
 									blocks={CAPI.blocks}
 									display={display}
-									designType={designType}
+									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>

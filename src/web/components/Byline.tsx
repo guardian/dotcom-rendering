@@ -1,14 +1,15 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	text: string;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 	size: SmallHeadlineSize;
 };
 
@@ -41,22 +42,21 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
-	switch (designType) {
-		case 'Comment':
-		case 'Analysis':
-		case 'Feature':
-		case 'Interview':
-		case 'Article':
-		case 'Media':
-		case 'PhotoEssay':
-		case 'Review':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
+const colourStyles = (design: Design, pillar: Theme) => {
+	switch (design) {
+		case Design.Comment:
+		case Design.Analysis:
+		case Design.Feature:
+		case Design.Interview:
+		case Design.Article:
+		case Design.Media:
+		case Design.PhotoEssay:
+		case Design.Review:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
 		default:
 			return css`
 				color: ${pillarPalette[pillar].main};
@@ -64,8 +64,8 @@ const colourStyles = (designType: DesignType, pillar: CAPIPillar) => {
 	}
 };
 
-export const Byline = ({ text, designType, pillar, size }: Props) => (
-	<span className={cx(bylineStyles(size), colourStyles(designType, pillar))}>
+export const Byline = ({ text, design, pillar, size }: Props) => (
+	<span className={cx(bylineStyles(size), colourStyles(design, pillar))}>
 		{text}
 	</span>
 );

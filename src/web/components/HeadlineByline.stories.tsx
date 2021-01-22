@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Display } from '@guardian/types/Format';
+
+import { Display, Design, Pillar } from '@guardian/types';
+
 import { HeadlineByline } from './HeadlineByline';
 
 export default {
@@ -12,8 +14,8 @@ export const interviewStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Standard}
-			designType="Interview"
-			pillar="culture"
+			design={Design.Interview}
+			pillar={Pillar.Culture}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -25,8 +27,8 @@ export const commentStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Standard}
-			designType="Comment"
-			pillar="sport"
+			design={Design.Comment}
+			pillar={Pillar.Sport}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -39,8 +41,8 @@ export const commentWithBylineImageStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Standard}
-			designType="Comment"
-			pillar="sport"
+			design={Design.Comment}
+			pillar={Pillar.Sport}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -61,8 +63,8 @@ export const immersiveStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Immersive}
-			designType="Article"
-			pillar="lifestyle"
+			design={Design.Article}
+			pillar={Pillar.Lifestyle}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -86,8 +88,8 @@ export const ImmersiveComment = () => {
 		>
 			<HeadlineByline
 				display={Display.Immersive}
-				designType="Comment"
-				pillar="lifestyle"
+				design={Design.Comment}
+				pillar={Pillar.Lifestyle}
 				byline="Jane Smith"
 				tags={[
 					{
@@ -106,8 +108,8 @@ export const MultipleStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Immersive}
-			designType="Article"
-			pillar="lifestyle"
+			design={Design.Article}
+			pillar={Pillar.Lifestyle}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
 				{
@@ -135,8 +137,8 @@ export const noBylineStory = () => {
 	return (
 		<HeadlineByline
 			display={Display.Standard}
-			designType="Interview"
-			pillar="culture"
+			design={Design.Interview}
+			pillar={Pillar.Culture}
 			byline=""
 			tags={[]}
 		/>

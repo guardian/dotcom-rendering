@@ -17,6 +17,7 @@ const roleCss = {
 	`,
 
 	supporting: css`
+		clear: left;
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 		${from.tablet} {

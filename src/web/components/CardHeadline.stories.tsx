@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Design, Pillar } from '@guardian/types';
 import { Section } from '@frontend/web/components/Section';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -13,8 +14,8 @@ export const Article = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
-			designType="Article"
-			pillar="news"
+			design={Design.Article}
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -24,8 +25,8 @@ export const Analysis = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an Analysis card headline looks"
-			designType="Analysis"
-			pillar="news"
+			design={Design.Analysis}
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -35,8 +36,8 @@ export const Feature = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
-			designType="Feature"
-			pillar="news"
+			design={Design.Feature}
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -46,8 +47,8 @@ export const xsmallStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a large card headline looks"
-			designType="Article"
-			pillar="news"
+			design={Design.Article}
+			pillar={Pillar.News}
 			size="large"
 		/>
 	</Section>
@@ -58,8 +59,8 @@ export const liveStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
-			designType="Article"
-			pillar="news"
+			design={Design.Article}
+			pillar={Pillar.News}
 			kickerText="Live"
 		/>
 	</Section>
@@ -70,8 +71,8 @@ export const noSlash = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker slash looks"
-			designType="Article"
-			pillar="news"
+			design={Design.Article}
+			pillar={Pillar.News}
 			kickerText="Live"
 			showSlash={false}
 		/>
@@ -83,8 +84,8 @@ export const pulsingDot = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
-			designType="Article"
-			pillar="news"
+			design={Design.Article}
+			pillar={Pillar.News}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -96,8 +97,8 @@ export const cultureVariant = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
-			designType="Feature"
-			pillar="culture"
+			design={Design.Feature}
+			pillar={Pillar.Culture}
 			kickerText="Art and stuff"
 		/>
 	</Section>
@@ -108,8 +109,8 @@ export const AnalysisXSmall = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="Xsmall card headline for an Analysis article"
-			designType="Analysis"
-			pillar="lifestyle"
+			design={Design.Analysis}
+			pillar={Pillar.Lifestyle}
 			size="large"
 		/>
 	</Section>
@@ -120,8 +121,8 @@ export const opinionxxxsmall = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
-			designType="Comment"
-			pillar="opinion"
+			design={Design.Comment}
+			pillar={Pillar.Opinion}
 			showQuotes={true}
 			size="small"
 		/>
@@ -133,8 +134,8 @@ export const OpinionKicker = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an opinion card headline with a kicker and quotes looks"
-			designType="Article"
-			pillar="opinion"
+			design={Design.Article}
+			pillar={Pillar.Opinion}
 			showQuotes={true}
 			kickerText="George Monbiot"
 			showSlash={true}
@@ -147,8 +148,8 @@ export const Busy = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-			designType="Feature"
-			pillar="lifestyle"
+			design={Design.Feature}
+			pillar={Pillar.Lifestyle}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
 			showSlash={true}

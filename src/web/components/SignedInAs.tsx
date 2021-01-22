@@ -10,7 +10,7 @@ import { createAuthenticationEventParams } from '@root/src/lib/identity-componen
 
 type Props = {
 	commentCount: number;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
 	isClosedForComments?: boolean;
@@ -61,7 +61,7 @@ const usernameStyles = css`
 	color: ${text.primary};
 `;
 
-const linkStyles = (pillar: CAPIPillar) => css`
+const linkStyles = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].dark};
 	text-decoration: none;
 	border-bottom: 1px solid ${border.secondary};

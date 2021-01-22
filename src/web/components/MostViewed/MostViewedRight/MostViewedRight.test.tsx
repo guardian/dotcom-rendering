@@ -1,7 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+
+import { Pillar } from '@guardian/types';
+
 import { mockTab1 } from '@root/fixtures/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
+
 import { MostViewedRight } from './MostViewedRight';
 
 const response = { data: mockTab1 };
@@ -19,7 +23,7 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { asFragment, getAllByText } = render(
-			<MostViewedRight pillar="news" />,
+			<MostViewedRight pillar={Pillar.News} />,
 		);
 
 		// Calls api once only
@@ -60,7 +64,7 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { getAllByText } = render(
-			<MostViewedRight pillar="news" limitItems={3} />,
+			<MostViewedRight pillar={Pillar.News} limitItems={3} />,
 		);
 
 		// Calls api once only
@@ -79,8 +83,10 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(<MostViewedRight pillar="news" />);
+		const { getByText } = render(<MostViewedRight pillar={Pillar.News} />);
 
-		expect(getByText(response.data.trails[0].byline)).toBeInTheDocument();
+		expect(
+			getByText('Jennifer Rankin and Daniel Boffey'),
+		).toBeInTheDocument();
 	});
 });

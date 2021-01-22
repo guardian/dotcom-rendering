@@ -7,13 +7,13 @@ import { space } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	captionText?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -105,12 +105,12 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (pillar: CAPIPillar) => css`
+const iconStyle = (pillar: Theme) => css`
 	fill: ${pillarPalette[pillar].main};
 	padding-right: 3px;
 `;
 
-const captionLink = (pillar: CAPIPillar) => css`
+const captionLink = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].main};
 		text-decoration: none;
@@ -125,7 +125,7 @@ const captionLink = (pillar: CAPIPillar) => css`
 
 export const Caption = ({
 	display,
-	designType,
+	design,
 	captionText,
 	pillar,
 	padCaption = false,
@@ -139,8 +139,8 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
-	switch (designType) {
-		case 'PhotoEssay':
+	switch (design) {
+		case Design.PhotoEssay:
 			return (
 				<figcaption
 					className={cx(
@@ -177,19 +177,19 @@ export const Caption = ({
 					{credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
-		case 'Article':
-		case 'Media':
-		case 'Live':
-		case 'Recipe':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Feature':
-		case 'Comment':
-		case 'Analysis':
-		case 'Review':
-		case 'Interview':
+		case Design.Article:
+		case Design.Media:
+		case Design.Live:
+		case Design.Recipe:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Analysis:
+		case Design.Review:
+		case Design.Interview:
+		default:
 			return (
 				<figcaption
 					className={cx(

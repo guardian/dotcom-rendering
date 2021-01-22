@@ -82,7 +82,7 @@ const Headline: React.FC<{
 
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ articleData, pillar }) => {
 	const { branding } = articleData.commercialProperties[
 		articleData.editionId

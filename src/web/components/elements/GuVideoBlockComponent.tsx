@@ -3,16 +3,16 @@ import React from 'react';
 import { css } from 'emotion';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const GuVideoBlockComponent: React.FC<{
 	html: string;
-	pillar: CAPIPillar;
-	designType: DesignType;
+	pillar: Theme;
+	design: Design;
 	display: Display;
 	credit: string;
 	caption?: string;
-}> = ({ html, pillar, designType, display, credit, caption }) => {
+}> = ({ html, pillar, design, display, credit, caption }) => {
 	const embedContainer = css`
 		width: 100%;
 		margin-bottom: ${caption ? `0px` : `6px`};
@@ -28,7 +28,7 @@ export const GuVideoBlockComponent: React.FC<{
 			{caption && (
 				<Caption
 					captionText={caption}
-					designType={designType}
+					design={design}
 					pillar={pillar}
 					credit={credit}
 					display={display}

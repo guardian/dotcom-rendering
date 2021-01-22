@@ -1,10 +1,12 @@
+import { Pillar } from '@guardian/types';
+
 export const NAV: NavType = {
 	pillars: [
 		{
 			title: 'News',
 			longTitle: 'Headlines',
 			url: '/',
-			pillar: 'news',
+			pillar: Pillar.News,
 			children: [
 				{
 					title: 'Coronavirus',
@@ -392,7 +394,7 @@ export const NAV: NavType = {
 			title: 'Opinion',
 			longTitle: 'Opinion home',
 			url: '/commentisfree',
-			pillar: 'opinion',
+			pillar: Pillar.Opinion,
 			children: [
 				{
 					title: 'The Guardian view',
@@ -436,7 +438,7 @@ export const NAV: NavType = {
 			title: 'Sport',
 			longTitle: 'Sport home',
 			url: '/sport',
-			pillar: 'sport',
+			pillar: Pillar.Sport,
 			children: [
 				{
 					title: 'Football',
@@ -544,7 +546,7 @@ export const NAV: NavType = {
 			title: 'Culture',
 			longTitle: 'Culture home',
 			url: '/culture',
-			pillar: 'culture',
+			pillar: Pillar.Culture,
 			children: [
 				{
 					title: 'Books',
@@ -609,7 +611,7 @@ export const NAV: NavType = {
 			title: 'Lifestyle',
 			longTitle: 'Lifestyle home',
 			url: '/lifeandstyle',
-			pillar: 'lifestyle',
+			pillar: Pillar.Lifestyle,
 			children: [
 				{
 					title: 'Fashion',

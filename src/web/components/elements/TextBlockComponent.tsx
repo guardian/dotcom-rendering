@@ -10,12 +10,12 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 type Props = {
 	html: string;
-	pillar: CAPIPillar;
-	designType: DesignType;
+	pillar: Theme;
+	design: Design;
 	display: Display;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
@@ -52,12 +52,12 @@ const decideDropCapLetter = (html: string) => {
 };
 
 const shouldShowDropCap = ({
-	designType,
+	design,
 	display,
 	isFirstParagraph,
 	forceDropCap,
 }: {
-	designType: DesignType;
+	design: Design;
 	display: Display;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
@@ -69,22 +69,21 @@ const shouldShowDropCap = ({
 	// If immersive, we show drop caps for the first para
 	if (display === Display.Immersive) return true;
 	// The first para has a drop cap for these design types
-	switch (designType) {
-		case 'Feature':
-		case 'Comment':
-		case 'Review':
-		case 'Interview':
-		case 'PhotoEssay':
-		case 'Recipe':
+	switch (design) {
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Review:
+		case Design.Interview:
+		case Design.PhotoEssay:
+		case Design.Recipe:
 			return true;
-		case 'Article':
-		case 'Media':
-		case 'Live':
-		case 'MatchReport':
-		case 'GuardianView':
-		case 'Quiz':
-		case 'AdvertisementFeature':
-		case 'Analysis':
+		case Design.Article:
+		case Design.Media:
+		case Design.Live:
+		case Design.MatchReport:
+		case Design.GuardianView:
+		case Design.Quiz:
+		case Design.Analysis:
 			return false;
 	}
 };
@@ -109,7 +108,7 @@ const sanitiserOptions = {
 export const TextBlockComponent: React.FC<Props> = ({
 	html,
 	pillar,
-	designType,
+	design,
 	display,
 	forceDropCap,
 	isFirstParagraph,
@@ -193,7 +192,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 
 	if (
 		shouldShowDropCap({
-			designType,
+			design,
 			display,
 			isFirstParagraph,
 			forceDropCap,
@@ -203,11 +202,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 	) {
 		return (
 			<p className={paraStyles}>
-				<DropCap
-					letter={firstLetter}
-					pillar={pillar}
-					designType={designType}
-				/>
+				<DropCap letter={firstLetter} pillar={pillar} design={design} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}

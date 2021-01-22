@@ -5,12 +5,12 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	standfirst: string;
 };
 
@@ -44,30 +44,29 @@ const nestedStyles = css`
 	}
 `;
 
-const standfirstStyles = (designType: DesignType, display: Display) => {
+const standfirstStyles = (design: Design, display: Display) => {
 	switch (display) {
 		case Display.Immersive:
-			switch (designType) {
-				case 'PhotoEssay':
+			switch (design) {
+				case Design.PhotoEssay:
 					return css`
 						${headline.xxxsmall({})};
 						margin-top: ${space[2]}px;
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 					`;
-				case 'Comment':
-				case 'GuardianView':
-				case 'Feature':
-				case 'Recipe':
-				case 'Review':
-				case 'Media':
-				case 'MatchReport':
-				case 'AdvertisementFeature':
-				case 'Quiz':
-				case 'Article':
-				case 'Live':
-				case 'Analysis':
-				case 'Interview':
+				case Design.Comment:
+				case Design.GuardianView:
+				case Design.Feature:
+				case Design.Recipe:
+				case Design.Review:
+				case Design.Media:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.Article:
+				case Design.Live:
+				case Design.Analysis:
+				case Design.Interview:
 				default:
 					return css`
 						${headline.xsmall({
@@ -87,27 +86,26 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
-				case 'Feature':
-				case 'Recipe':
-				case 'Review':
+			switch (design) {
+				case Design.Comment:
+				case Design.GuardianView:
+				case Design.Feature:
+				case Design.Recipe:
+				case Design.Review:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
 						})};
 						margin-bottom: ${space[3]}px;
 					`;
-				case 'Media':
-				case 'PhotoEssay':
-				case 'MatchReport':
-				case 'AdvertisementFeature':
-				case 'Quiz':
-				case 'Article':
-				case 'Live':
-				case 'Analysis':
-				case 'Interview':
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.MatchReport:
+				case Design.Quiz:
+				case Design.Article:
+				case Design.Live:
+				case Design.Analysis:
+				case Design.Interview:
 				default:
 					return css`
 						${headline.xxxsmall({
@@ -121,10 +119,10 @@ const standfirstStyles = (designType: DesignType, display: Display) => {
 	}
 };
 
-export const Standfirst = ({ display, designType, standfirst }: Props) => (
+export const Standfirst = ({ display, design, standfirst }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles, standfirstStyles(designType, display))}
+		className={cx(nestedStyles, standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -36,7 +36,7 @@ const yellowBoxStyles = css`
 	}
 `;
 
-const opinionStyles = (pillar: CAPIPillar) => css`
+const opinionStyles = (pillar: Theme) => css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
@@ -64,7 +64,7 @@ const immersiveStyles = css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (pillar: CAPIPillar) => css`
+const immersiveLinkStyles = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].main};
 		border-bottom: 1px solid ${pillarPalette[pillar].main};
@@ -84,41 +84,40 @@ const authorBylineWithImage = css`
 
 type Props = {
 	display: Display;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 	byline: string;
 	tags: TagType[];
 };
 
 export const HeadlineByline = ({
 	display,
-	designType,
+	design,
 	pillar,
 	byline,
 	tags,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
-				case 'GuardianView':
-				case 'Comment':
+			switch (design) {
+				case Design.GuardianView:
+				case Design.Comment:
 					return (
 						<div className={cx(opinionStyles(pillar), whiteText)}>
 							<BylineLink byline={byline} tags={tags} />
 						</div>
 					);
-				case 'Interview':
-				case 'Analysis':
-				case 'Feature':
-				case 'Article':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Review':
-				case 'Live':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Interview:
+				case Design.Analysis:
+				case Design.Feature:
+				case Design.Article:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Review:
+				case Design.Live:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
 				default:
 					if (byline) {
 						return (
@@ -137,8 +136,8 @@ export const HeadlineByline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (designType) {
-				case 'Interview':
+			switch (design) {
+				case Design.Interview:
 					return (
 						<div className={wrapperStyles}>
 							<div className={yellowBoxStyles}>
@@ -146,8 +145,8 @@ export const HeadlineByline = ({
 							</div>
 						</div>
 					);
-				case 'GuardianView':
-				case 'Comment':
+				case Design.GuardianView:
+				case Design.Comment:
 					return (
 						<div
 							className={`${opinionStyles(pillar)} ${
@@ -161,17 +160,16 @@ export const HeadlineByline = ({
 						</div>
 					);
 
-				case 'Analysis':
-				case 'Feature':
-				case 'Article':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Review':
-				case 'Live':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Analysis:
+				case Design.Feature:
+				case Design.Article:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Review:
+				case Design.Live:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
 				default:
 					return null;
 			}

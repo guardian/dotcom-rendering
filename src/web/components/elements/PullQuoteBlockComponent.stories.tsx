@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design, Pillar } from '@guardian/types';
+
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -38,8 +40,8 @@ export const Article = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="Article"
-				pillar="news"
+				design={Design.Article}
+				pillar={Pillar.News}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -48,15 +50,15 @@ export const Article = () => {
 	);
 };
 Article.story = {
-	name: 'with designType Article - inline',
+	name: 'with design Article - inline',
 };
 
 export const Comment = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="Comment"
-				pillar="opinion"
+				design={Design.Comment}
+				pillar={Pillar.Opinion}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -65,15 +67,15 @@ export const Comment = () => {
 	);
 };
 Comment.story = {
-	name: 'with designType Comment - supporting',
+	name: 'with design Comment - supporting',
 };
 
 export const CommentAttr = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="Comment"
-				pillar="opinion"
+				design={Design.Comment}
+				pillar={Pillar.Opinion}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -83,15 +85,15 @@ export const CommentAttr = () => {
 	);
 };
 CommentAttr.story = {
-	name: 'with designType Comment with attribution - inline',
+	name: 'with design Comment with attribution - inline',
 };
 
 export const PhotoEssay = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="PhotoEssay"
-				pillar="lifestyle"
+				design={Design.PhotoEssay}
+				pillar={Pillar.Lifestyle}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -100,15 +102,15 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.story = {
-	name: 'with designType PhotoEssay - supporting',
+	name: 'with design PhotoEssay - supporting',
 };
 
 export const PhotoEssayAttr = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="PhotoEssay"
-				pillar="lifestyle"
+				design={Design.PhotoEssay}
+				pillar={Pillar.Lifestyle}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -118,15 +120,15 @@ export const PhotoEssayAttr = () => {
 	);
 };
 PhotoEssayAttr.story = {
-	name: 'with designType PhotoEssay and attribution - supporting',
+	name: 'with design PhotoEssay and attribution - supporting',
 };
 
 export const PhotoEssayInline = () => {
 	return (
 		<Container>
 			<PullQuoteBlockComponent
-				designType="PhotoEssay"
-				pillar="culture"
+				design={Design.PhotoEssay}
+				pillar={Pillar.Culture}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -135,5 +137,5 @@ export const PhotoEssayInline = () => {
 	);
 };
 PhotoEssayInline.story = {
-	name: 'with designType PhotoEssay - inline',
+	name: 'with design PhotoEssay - inline',
 };

@@ -4,7 +4,7 @@ import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { border } from '@guardian/src-foundations/palette';
 
 import { Standfirst } from '@frontend/web/components/Standfirst';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 const standfirstStyles = css`
 	max-width: 540px;
@@ -24,22 +24,18 @@ const standfirstLinks = pillarMap(
 
 type Props = {
 	display: Display;
-	designType: DesignType;
-	pillar: CAPIPillar;
+	design: Design;
+	pillar: Theme;
 	standfirst: string; // Can be html
 };
 
 export const ArticleStandfirst = ({
 	display,
-	designType,
+	design,
 	pillar,
 	standfirst,
 }: Props) => (
 	<div className={cx(standfirstStyles, standfirstLinks[pillar])}>
-		<Standfirst
-			display={display}
-			designType={designType}
-			standfirst={standfirst}
-		/>
+		<Standfirst display={display} design={design} standfirst={standfirst} />
 	</div>
 );

@@ -1,17 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 
 export const SpotifyBlockComponent: React.FC<{
 	embedUrl?: string;
 	height?: number;
 	width?: number;
 	title?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	caption?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	credit?: string;
 }> = ({
 	embedUrl,
@@ -21,7 +21,7 @@ export const SpotifyBlockComponent: React.FC<{
 	pillar,
 	caption,
 	display,
-	designType,
+	design,
 	credit,
 }) => {
 	const embedContainer = css`
@@ -45,7 +45,7 @@ export const SpotifyBlockComponent: React.FC<{
 					{caption && (
 						<Caption
 							captionText={caption}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							display={display}
 							credit={credit}

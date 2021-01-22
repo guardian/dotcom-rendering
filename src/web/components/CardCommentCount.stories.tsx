@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design, Pillar } from '@guardian/types';
+
 import { CardCommentCount } from './CardCommentCount';
 
 export default {
@@ -22,8 +24,8 @@ export const CommentCountStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				designType="Article"
-				pillar="news"
+				design={Design.Article}
+				pillar={Pillar.News}
 				short="11k"
 				long="10,899"
 			/>
@@ -36,8 +38,8 @@ export const MediaStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				designType="Media"
-				pillar="culture"
+				design={Design.Media}
+				pillar={Pillar.Culture}
 				short="11k"
 				long="10,899"
 			/>

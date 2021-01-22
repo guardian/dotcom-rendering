@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design, Pillar } from '@guardian/types';
 import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent';
 
 export default {
@@ -26,14 +26,14 @@ export const largeAspectRatio = () => {
 			<p>abc</p>
 			<VideoFacebookBlockComponent
 				embedUrl="https://www.facebook.com/video/embed?video_id=10155703704626323\"
-				pillar="news"
+				pillar={Pillar.News}
 				height={281}
 				width={500}
 				caption="blah"
 				credit=""
 				title=""
 				display={Display.Standard}
-				designType="Article"
+				design={Design.Article}
 			/>
 			<p>abc</p>
 		</Container>
@@ -47,14 +47,14 @@ export const verticalAspectRatio = () => {
 			<p>abc</p>
 			<VideoFacebookBlockComponent
 				embedUrl="https://www.facebook.com/video/embed?video_id=10155591097456323\"
-				pillar="news"
+				pillar={Pillar.News}
 				height={889}
 				width={500}
 				caption="blah"
 				credit=""
 				title=""
 				display={Display.Standard}
-				designType="Article"
+				design={Design.Article}
 			/>
 			<p>abc</p>
 		</Container>

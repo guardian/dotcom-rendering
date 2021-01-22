@@ -8,7 +8,7 @@ import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
 type Props = {
 	subNavSections: SubNavType;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	currentNavLink: string;
 };
 

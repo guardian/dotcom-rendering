@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 
 const headerWrapper = css`
 	position: static;

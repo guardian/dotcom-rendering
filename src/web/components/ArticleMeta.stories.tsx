@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design, Pillar } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -52,8 +52,8 @@ export const ArticleStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Article"
-				pillar="news"
+				design={Design.Article}
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -92,8 +92,8 @@ export const BrandingStory = () => {
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
 				display={Display.Standard}
-				designType="Article"
-				pillar="news"
+				design={Design.Article}
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -115,8 +115,8 @@ export const FeatureStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Feature"
-				pillar="culture"
+				design={Design.Feature}
+				pillar={Pillar.Culture}
 				pageId=""
 				webTitle=""
 				author={{
@@ -137,8 +137,8 @@ export const CommentStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Comment"
-				pillar="opinion"
+				design={Design.Comment}
+				pillar={Pillar.Opinion}
 				pageId=""
 				webTitle=""
 				author={{
@@ -159,8 +159,8 @@ export const InterviewStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Interview"
-				pillar="lifestyle"
+				design={Design.Interview}
+				pillar={Pillar.Lifestyle}
 				pageId=""
 				webTitle=""
 				author={{
@@ -181,8 +181,8 @@ export const ImmersiveStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Immersive}
-				designType="Article"
-				pillar="news"
+				design={Design.Article}
+				pillar={Pillar.News}
 				pageId=""
 				webTitle=""
 				author={{
@@ -203,8 +203,8 @@ export const TwoContributorsStory = () => {
 		<Container>
 			<ArticleMeta
 				display={Display.Standard}
-				designType="Feature"
-				pillar="sport"
+				design={Design.Feature}
+				pillar={Pillar.Sport}
 				pageId=""
 				webTitle=""
 				author={{

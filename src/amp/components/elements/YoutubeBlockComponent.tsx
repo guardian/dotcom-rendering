@@ -27,7 +27,7 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
 
 export const YoutubeBlockComponent: React.FC<{
 	element: YoutubeBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	adTargeting?: AdTargeting;
 }> = ({ element, pillar, adTargeting }) => {
 	// https://www.ampproject.org/docs/reference/components/amp-youtube

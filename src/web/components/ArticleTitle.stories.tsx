@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Design, Pillar } from '@guardian/types';
 import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -60,8 +60,8 @@ export const defaultStory = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
 				display={Display.Standard}
-				pillar="sport"
-				designType="Article"
+				pillar={Pillar.Sport}
+				design={Design.Article}
 			/>
 		</Container>
 	);
@@ -75,8 +75,8 @@ export const beyondTheBlade = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...beyondTheBladeCAPI}
 				display={Display.Standard}
-				pillar="news"
-				designType="Article"
+				pillar={Pillar.News}
+				design={Design.Article}
 			/>
 		</Container>
 	);
@@ -95,8 +95,8 @@ export const immersiveComment = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
 				display={Display.Immersive}
-				pillar="sport"
-				designType="Comment"
+				pillar={Pillar.Sport}
+				design={Design.Comment}
 			/>
 		</div>
 	);
@@ -115,8 +115,8 @@ export const immersiveCommentTag = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Immersive}
-				pillar="sport"
-				designType="Comment"
+				pillar={Pillar.Sport}
+				design={Design.Comment}
 				tags={[
 					{
 						id: '',
@@ -137,8 +137,8 @@ export const ImmersiveSeriesTag = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Immersive}
-				pillar="sport"
-				designType="Review"
+				pillar={Pillar.Sport}
+				design={Design.Review}
 				tags={[
 					{
 						id: '',
@@ -160,8 +160,8 @@ export const ArticleBlogTag = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Standard}
-				pillar="sport"
-				designType="Article"
+				pillar={Pillar.Sport}
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -182,8 +182,8 @@ export const ArticleOpinionTag = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Standard}
-				pillar="sport"
-				designType="Article"
+				pillar={Pillar.Sport}
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -204,8 +204,8 @@ export const ArticleSeriesTag = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Standard}
-				pillar="sport"
-				designType="Article"
+				pillar={Pillar.Sport}
+				design={Design.Article}
 				tags={[
 					{
 						id: '',
@@ -226,8 +226,8 @@ export const ArticleNoTags = () => {
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
 				display={Display.Standard}
-				pillar="culture"
-				designType="Article"
+				pillar={Pillar.Culture}
+				design={Design.Article}
 			/>
 		</Container>
 	);
