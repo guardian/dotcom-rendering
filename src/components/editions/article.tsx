@@ -39,8 +39,6 @@ const headerStyles = css`
 `;
 
 const bodyStyles = css`
-	padding-top: ${remSpace[4]};
-
 	figcaption {
 		background: ${background.primary};
 		padding-bottom: ${remSpace[2]};

@@ -2,11 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import { remSpace, text } from '@guardian/src-foundations';
+import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { body } from '@guardian/src-foundations/typography';
+import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -19,15 +19,9 @@ import { articleWidthStyles, sidePadding } from './styles';
 
 const styles = (kickerColor: string): SerializedStyles => css`
 	${body.medium({ lineHeight: 'tight' })}
-	font-size: 1.125rem;
 	display: flex;
 	justify-content: space-between;
-
-	${from.mobileMedium} {
-		font-size: 1.25rem;
-	}
-
-	padding-bottom: ${remSpace[6]};
+	padding-bottom: ${remSpace[4]};
 	color: ${text.primary};
 
 	${articleWidthStyles}
@@ -62,6 +56,11 @@ const interviewStyles = css`
 	${sidePadding}
 `;
 
+const showcaseStyles = css`
+	${headline.xxsmall({ lineHeight: 'tight' })}
+	color: ${neutral[20]}
+`;
+
 interface Props {
 	item: Item;
 	shareIcon?: boolean;
@@ -73,6 +72,9 @@ const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
+	}
+	if (format.display === Display.Showcase) {
+		return css(styles(kickerColor), showcaseStyles);
 	}
 	return styles(kickerColor);
 };

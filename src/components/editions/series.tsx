@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { border, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { titlepiece } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -28,6 +29,10 @@ const styles = (item: Item): SerializedStyles => {
 		box-sizing: border-box;
 
 		${articleWidthStyles}
+
+		${from.tablet} {
+			padding-bottom: ${remSpace[3]};
+		}
 	`;
 };
 
