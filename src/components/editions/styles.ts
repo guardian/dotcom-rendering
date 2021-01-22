@@ -2,14 +2,7 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import {
-	culture,
-	lifestyle,
-	neutral,
-	news,
-	opinion,
-	sport,
-} from '@guardian/src-foundations/palette';
+import { culture, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, Pillar } from '@guardian/types';
 import type { Colour } from 'editorialPalette';
@@ -68,38 +61,4 @@ export const headerBackgroundColour = (format: Format): Colour => {
 	}
 
 	return neutral[100];
-};
-
-export const iconBackgroundColour = (format: Format): Colour => {
-	switch (format.theme) {
-		case Pillar.Opinion:
-			return opinion[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.News:
-			return news[400];
-		default:
-			return neutral[100];
-	}
-};
-
-export const iconForegroundColour = (format: Format): Colour => {
-	switch (format.theme) {
-		case Pillar.Opinion:
-			return opinion[800];
-		case Pillar.Sport:
-			return sport[800];
-		case Pillar.Culture:
-			return culture[800];
-		case Pillar.Lifestyle:
-			return lifestyle[800];
-		case Pillar.News:
-			return news[800];
-		default:
-			return neutral[100];
-	}
 };

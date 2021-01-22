@@ -13,11 +13,14 @@ import { darkModeCss, wideContentWidth } from 'styles';
 
 const captionId = 'header-image-caption';
 
-const HeaderImageCaptionStyles = css`
+const HeaderImageCaptionStyles = (
+	iconBackgroundColor?: string,
+): SerializedStyles => css`
 	summary {
 		text-align: center;
-		background-color: ${brandAlt[400]};
-		color: ${neutral[7]};
+		background-color: ${iconBackgroundColor
+			? iconBackgroundColor
+			: brandAlt[400]};
 		width: 34px;
 		height: 34px;
 		position: absolute;
@@ -63,7 +66,7 @@ const HeaderImageCaptionStyles = css`
 	}
 `;
 
-const svgStyle = css`
+const svgStyle = (iconColor?: string): SerializedStyles => css`
 	line-height: 32px;
 	font-size: 0;
 	svg {
@@ -71,22 +74,35 @@ const svgStyle = css`
 		height: 75%;
 		margin: 12.5%;
 	}
+	path {
+		fill: ${iconColor ? iconColor : neutral[7]};
+	}
 `;
 
 interface Props {
 	caption: Option<string>;
 	credit: Option<string>;
 	styles?: SerializedStyles;
+	iconColor?: string;
+	iconBackgroundColor?: string;
 }
 
-const HeaderImageCaption: FC<Props> = ({ caption, credit, styles }: Props) =>
+const HeaderImageCaption: FC<Props> = ({
+	caption,
+	credit,
+	styles,
+	iconColor,
+	iconBackgroundColor,
+}: Props) =>
 	pipe2(
 		caption,
 		map((cap) => (
-			<figcaption css={[HeaderImageCaptionStyles, styles]}>
+			<figcaption
+				css={[HeaderImageCaptionStyles(iconBackgroundColor), styles]}
+			>
 				<details>
 					<summary>
-						<span css={svgStyle}>
+						<span css={svgStyle(iconColor)}>
 							<SvgCamera />
 							Click to see figure caption
 						</span>

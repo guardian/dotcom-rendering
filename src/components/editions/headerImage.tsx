@@ -7,12 +7,14 @@ import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
 import { none, some } from '@guardian/types';
 import StarRating from 'components/editions/starRating';
+import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import HeaderImageCaption, { captionId } from './headerImageCaption';
+import { getThemeStyles } from 'themeStyles';
 import { tabletImageWidth, wideImageWidth } from './styles';
 
 // ----- Component ----- //
@@ -74,8 +76,14 @@ const sizes: Sizes = {
 	default: '100vw',
 };
 
-const HeaderImage: FC<Props> = ({ item }) =>
-	maybeRender(item.mainMedia, (media) => {
+const HeaderImage: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	const {
+		cameraIcon: iconColor,
+		cameraIconBackground: iconBackgroundColor,
+	} = getThemeStyles(format.theme);
+
+	return maybeRender(item.mainMedia, (media) => {
 		if (media.kind === MainMediaKind.Image) {
 			const {
 				image,
@@ -95,7 +103,8 @@ const HeaderImage: FC<Props> = ({ item }) =>
 						caption={nativeCaption}
 						credit={credit}
 						styles={captionStyles}
-						format={item}
+						iconColor={iconColor}
+						iconBackgroundColor={iconBackgroundColor}
 					/>
 					<StarRating item={item} />
 				</figure>
@@ -104,6 +113,7 @@ const HeaderImage: FC<Props> = ({ item }) =>
 
 		return null;
 	});
+};
 
 // ----- Exports ----- //
 
