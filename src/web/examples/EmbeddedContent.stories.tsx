@@ -4,6 +4,7 @@ import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
+import { Display, Design } from '@guardian/types';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { EmbedBlockComponent } from '../components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '../components/elements/UnsafeEmbedBlockComponent';
@@ -13,318 +14,10 @@ import { DocumentBlockComponent } from '../components/elements/DocumentBlockComp
 import { SoundcloudBlockComponent } from '../components/elements/SoundcloudBlockComponent';
 import { TweetBlockComponent } from '../components/elements/TweetBlockComponent';
 import { Figure } from '../components/Figure';
-import { Display, Design } from '@guardian/types';
 
 export default {
 	title: 'Examples/EmbeddedContent',
 };
-
-function body(pillar: CAPIPillar, design: Design, display: Display) {
-	return [
-		<p>
-			Example of an instagram embed, the source article is{' '}
-			<a href="https://www.theguardian.com/culture/2019/apr/27/idris-elba-marries-sabrina-dhowre-in-morocco">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.instagramEmbed.html}
-				alt={EmbeddedElements.instagramEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-		<p>
-			Example of a formstack embed, the source article is{' '}
-			<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.formStackEmbed.html}
-				alt={EmbeddedElements.formStackEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-		<p>
-			Example of a facebook post embed, the source article is{' '}
-			<a href="https://www.theguardian.com/uk-news/2019/aug/16/police-officers-death-sparks-sweeping-inquiry">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.facebookEmbed.html}
-				alt={EmbeddedElements.facebookEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a vimeo embed from 'embed' element type, the source
-			article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.vimeoEmbedEmbed.html}
-				alt={EmbeddedElements.vimeoEmbedEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a vimeo embed from 'video' element type, the embed source
-			article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<VimeoBlockComponent
-				pillar={pillar}
-				embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
-				height={EmbeddedElements.vimeoVideoEmbed.height}
-				width={EmbeddedElements.vimeoVideoEmbed.width}
-				caption={EmbeddedElements.vimeoVideoEmbed.caption}
-				credit={EmbeddedElements.vimeoVideoEmbed.credit}
-				title={EmbeddedElements.vimeoVideoEmbed.title}
-				display={display}
-				design={design}
-			/>
-		</Figure>,
-		<p>
-			Example of a scribd embed from a 'document' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<DocumentBlockComponent
-				embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
-				height={EmbeddedElements.scribdDocumentEmbed.height}
-				width={EmbeddedElements.scribdDocumentEmbed.width}
-				title={EmbeddedElements.scribdDocumentEmbed.title}
-			/>
-		</Figure>,
-		<p>
-			Example of a scribd embed from a 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.scribdEmbedEmbed.html}
-				alt={EmbeddedElements.scribdEmbedEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-		<p>
-			Example of a tiktok embed from a 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.tiktokEmbedEmbed.html}
-				alt={EmbeddedElements.tiktokEmbedEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-		<p>
-			Example of a soundcloud embed from an 'audio' element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<SoundcloudBlockComponent
-				element={EmbeddedElements.soundcloudAudioEmbed}
-			/>
-		</Figure>,
-		<p>
-			Example of a soundcloud embed from an 'embed' element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<SoundcloudBlockComponent
-				element={EmbeddedElements.soundcloudEmbedEmbed}
-			/>
-		</Figure>,
-		<p>
-			Example of a youtube embed from an 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.youtubeEmbedEmbed.html}
-				alt={EmbeddedElements.youtubeEmbedEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a spotify embed from an 'audio' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<SpotifyBlockComponent
-				embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
-				height={EmbeddedElements.spotifyAudioEmbed.height}
-				width={EmbeddedElements.spotifyAudioEmbed.width}
-				title={EmbeddedElements.spotifyAudioEmbed.title}
-				pillar={pillar}
-				caption={EmbeddedElements.spotifyAudioEmbed.caption}
-				design={design}
-				display={display}
-				credit="Spotify"
-			/>
-		</Figure>,
-		<p>
-			Example of a spotify embed from an 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.spotifyEmbedEmbed.html}
-				alt={EmbeddedElements.spotifyEmbedEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a bandcamp embed from an 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.bandcampEmbedEmbed.html}
-				alt={EmbeddedElements.bandcampEmbedEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a The Conversation embed from an 'embed' element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/australia-news/2020/mar/03/the-first-economic-modelling-of-coronavirus-scenarios-is-grim-for-the-world">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.theconversationEmbedEmbed.html}
-				alt={EmbeddedElements.theconversationEmbedEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-
-		<p>
-			Example of a twitter embed from an 'tweet' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<TweetBlockComponent element={EmbeddedElements.twitterTweetEmbed} />
-		</Figure>,
-		<p>
-			Example of a twitter embed from an 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.twitterEmbedEmbed.html}
-				alt={EmbeddedElements.twitterEmbedEmbed.alt}
-				index={1}
-			/>
-		</Figure>,
-		<p>
-			Example of a Our World In Data embed from an 'embed' element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.ourworldindataEmbedEmbed.html}
-				alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
-			/>
-		</Figure>,
-		<p>
-			Example of a BBC embed from an 'embed' element type, the embed
-			source article is{' '}
-			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.bbcEmbedEmbed.html}
-				alt={EmbeddedElements.bbcEmbedEmbed.alt}
-			/>
-		</Figure>,
-	];
-}
-
-export const DefaultStory = () => {
-	return (
-		<ContainerLayout
-			sideBorders={true}
-			title="Embedded Content"
-			centralBorder="full"
-		>
-			<div
-				className={css`
-					max-width: 620px;
-					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
-				`}
-			>
-				{body('news', Design.Article, Display.Standard)}
-			</div>
-		</ContainerLayout>
-	);
-};
-DefaultStory.story = { name: 'default' };
 
 const SoundcloudBlockElementType: 'model.dotcomrendering.pageElements.SoundcloudBlockElement' =
 	'model.dotcomrendering.pageElements.SoundcloudBlockElement';
@@ -513,3 +206,310 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 };
+
+function body(pillar: CAPIPillar, design: Design, display: Display) {
+	return [
+		<p>
+			Example of an instagram embed, the source article is{' '}
+			<a href="https://www.theguardian.com/culture/2019/apr/27/idris-elba-marries-sabrina-dhowre-in-morocco">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.instagramEmbed.html}
+				alt={EmbeddedElements.instagramEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a formstack embed, the source article is{' '}
+			<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.formStackEmbed.html}
+				alt={EmbeddedElements.formStackEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a facebook post embed, the source article is{' '}
+			<a href="https://www.theguardian.com/uk-news/2019/aug/16/police-officers-death-sparks-sweeping-inquiry">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.facebookEmbed.html}
+				alt={EmbeddedElements.facebookEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a vimeo embed from &apos;embed&apos; element type, the source
+			article is{' '}
+			<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.vimeoEmbedEmbed.html}
+				alt={EmbeddedElements.vimeoEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a vimeo embed from &apos;video&apos; element type, the embed source
+			article is{' '}
+			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<VimeoBlockComponent
+				pillar={pillar}
+				embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
+				height={EmbeddedElements.vimeoVideoEmbed.height}
+				width={EmbeddedElements.vimeoVideoEmbed.width}
+				caption={EmbeddedElements.vimeoVideoEmbed.caption}
+				credit={EmbeddedElements.vimeoVideoEmbed.credit}
+				title={EmbeddedElements.vimeoVideoEmbed.title}
+				display={display}
+				design={design}
+			/>
+		</Figure>,
+		<p>
+			Example of a scribd embed from a &apos;document&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<DocumentBlockComponent
+				embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
+				height={EmbeddedElements.scribdDocumentEmbed.height}
+				width={EmbeddedElements.scribdDocumentEmbed.width}
+				title={EmbeddedElements.scribdDocumentEmbed.title}
+			/>
+		</Figure>,
+		<p>
+			Example of a scribd embed from a &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.scribdEmbedEmbed.html}
+				alt={EmbeddedElements.scribdEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a tiktok embed from a &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.tiktokEmbedEmbed.html}
+				alt={EmbeddedElements.tiktokEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a soundcloud embed from an &apos;audio&apos; element type, the
+			embed source article is{' '}
+			<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<SoundcloudBlockComponent
+				element={EmbeddedElements.soundcloudAudioEmbed}
+			/>
+		</Figure>,
+		<p>
+			Example of a soundcloud embed from an &apos;embed&apos; element type, the
+			embed source article is{' '}
+			<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<SoundcloudBlockComponent
+				element={EmbeddedElements.soundcloudEmbedEmbed}
+			/>
+		</Figure>,
+		<p>
+			Example of a youtube embed from an &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.youtubeEmbedEmbed.html}
+				alt={EmbeddedElements.youtubeEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a spotify embed from an &apos;audio&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<SpotifyBlockComponent
+				embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
+				height={EmbeddedElements.spotifyAudioEmbed.height}
+				width={EmbeddedElements.spotifyAudioEmbed.width}
+				title={EmbeddedElements.spotifyAudioEmbed.title}
+				pillar={pillar}
+				caption={EmbeddedElements.spotifyAudioEmbed.caption}
+				design={design}
+				display={display}
+				credit="Spotify"
+			/>
+		</Figure>,
+		<p>
+			Example of a spotify embed from an &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.spotifyEmbedEmbed.html}
+				alt={EmbeddedElements.spotifyEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a bandcamp embed from an &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.bandcampEmbedEmbed.html}
+				alt={EmbeddedElements.bandcampEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a The Conversation embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
+			<a href="https://www.theguardian.com/australia-news/2020/mar/03/the-first-economic-modelling-of-coronavirus-scenarios-is-grim-for-the-world">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.theconversationEmbedEmbed.html}
+				alt={EmbeddedElements.theconversationEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+
+		<p>
+			Example of a twitter embed from an &apos;tweet&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<TweetBlockComponent element={EmbeddedElements.twitterTweetEmbed} />
+		</Figure>,
+		<p>
+			Example of a twitter embed from an &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<UnsafeEmbedBlockComponent
+				key="1"
+				html={EmbeddedElements.twitterEmbedEmbed.html}
+				alt={EmbeddedElements.twitterEmbedEmbed.alt}
+				index={1}
+			/>
+		</Figure>,
+		<p>
+			Example of a Our World In Data embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
+			<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.ourworldindataEmbedEmbed.html}
+				alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
+			/>
+		</Figure>,
+		<p>
+			Example of a BBC embed from an &apos;embed&apos; element type, the embed
+			source article is{' '}
+			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
+				here
+			</a>
+		</p>,
+		<Figure role="inline">
+			<EmbedBlockComponent
+				key={1}
+				html={EmbeddedElements.bbcEmbedEmbed.html}
+				alt={EmbeddedElements.bbcEmbedEmbed.alt}
+			/>
+		</Figure>,
+	];
+}
+
+export const DefaultStory = () => {
+	return (
+		<ContainerLayout
+			sideBorders={true}
+			title="Embedded Content"
+			centralBorder="full"
+		>
+			<div
+				className={css`
+					max-width: 620px;
+					clear: left;
+
+					p {
+						${textSans.medium()};
+						font-weight: 300;
+						margin-top: 0;
+						margin-bottom: 8px;
+					}
+				`}
+			>
+				{body('news', Design.Article, Display.Standard)}
+			</div>
+		</ContainerLayout>
+	);
+};
+DefaultStory.story = { name: 'default' };
