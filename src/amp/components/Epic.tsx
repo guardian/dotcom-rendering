@@ -136,6 +136,10 @@ const darkArrowStyle = css`
 	${genericArrowStyle}
 	fill: ${neutral[7]};
 `;
+const lightArrowStyle = css`
+	${genericArrowStyle}
+	fill: ${neutral[100]};
+`;
 const quadLineStyle = css`
 	background-image: repeating-linear-gradient(
 		to bottom,
@@ -318,6 +322,19 @@ const getReminderDate = (date: Date = new Date()): Date => {
 	return date;
 };
 
+const arrowSvg = (className: string) => (
+	<svg
+		className={className}
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 20 17.89"
+		preserveAspectRatio="xMinYMid"
+		aria-hidden="true"
+		focusable="false"
+	>
+		<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+	</svg>
+);
+
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderDate = getReminderDate();
 	const reminderDay = '19';
@@ -452,16 +469,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 											className={yellowButtonStyle}
 										>
 											<MoustacheVariable name="text" />
-											<svg
-												className={darkArrowStyle}
-												xmlns="http://www.w3.org/2000/svg"
-												viewBox="0 0 20 17.89"
-												preserveAspectRatio="xMinYMid"
-												aria-hidden="true"
-												focusable="false"
-											>
-												<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-											</svg>
+											{arrowSvg(darkArrowStyle)}
 										</a>
 									</MoustacheSection>
 								</div>
@@ -577,11 +585,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									type="email"
 									required={true}
 								/>
-								<input
+								<button
 									className={blueButtonStyle}
-									type="submit"
-									value="Set a reminder"
-								/>
+									on="tap:reminderForm.submit"
+								>
+									Set a reminder
+									{arrowSvg(lightArrowStyle)}
+								</button>
 								<div
 									className={reminderErrorStyle}
 									data-amp-bind-hidden="epicState.hideFailureMessage"
