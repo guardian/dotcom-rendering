@@ -6,13 +6,14 @@ import { remSpace, text } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
 import type { Item } from 'item';
-import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
 import { articleWidthStyles } from './styles';
+import { Design, Format } from '@guardian/types';
+import { sidePadding } from './styles';
 
 // ----- Component ----- //
 
@@ -57,6 +58,10 @@ const styles = (kickerColor: string): SerializedStyles => css`
 	}
 `;
 
+const interviewStyles = css`
+	${sidePadding}
+`;
+
 interface Props {
 	item: Item;
 	shareIcon?: boolean;
@@ -64,12 +69,17 @@ interface Props {
 
 const noLinks = true;
 
-const Standfirst: FC<Props> = ({ item, shareIcon }) => {
-	const format = getFormat(item);
+const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	if (format.design === Design.Interview) {
+		return css(styles(kickerColor), interviewStyles);
+	}
+	return styles(kickerColor);
+};
 
+const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 	return maybeRender(item.standfirst, (standfirst) => (
-		<div css={styles(kickerColor)}>
+		<div css={getStyles(item)}>
 			{renderStandfirstText(standfirst, item, noLinks)}
 			{shareIcon && (
 				<span className="js-share-button" role="button">
