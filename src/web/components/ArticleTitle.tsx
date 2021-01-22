@@ -68,29 +68,34 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	pillar,
 	badge,
-}: Props) => (
-	<div className={cx(sectionStyles, badge && badgeContainer)}>
-		{badge && display !== Display.Immersive && (
-			<div className={titleBadgeWrapper}>
-				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
-			</div>
-		)}
-		<div
-			className={cx(
-				badge && marginTop,
-				!Design.PrintShop && immersiveMargins,
+}: Props) => {
+	return (
+		<div className={cx(sectionStyles, badge && badgeContainer)}>
+			{badge && display !== Display.Immersive && (
+				<div className={titleBadgeWrapper}>
+					<Badge
+						imageUrl={badge.imageUrl}
+						seriesTag={badge.seriesTag}
+					/>
+				</div>
 			)}
-		>
-			<SeriesSectionLink
-				display={display}
-				design={design}
-				tags={tags}
-				sectionLabel={sectionLabel}
-				sectionUrl={sectionUrl}
-				guardianBaseURL={guardianBaseURL}
-				pillar={pillar}
-				badge={badge}
-			/>
+			<div
+				className={cx(
+					badge && marginTop,
+					design !== Design.PrintShop && immersiveMargins,
+				)}
+			>
+				<SeriesSectionLink
+					display={display}
+					design={design}
+					tags={tags}
+					sectionLabel={sectionLabel}
+					sectionUrl={sectionUrl}
+					guardianBaseURL={guardianBaseURL}
+					pillar={pillar}
+					badge={badge}
+				/>
+			</div>
 		</div>
-	</div>
-);
+	);
+};
