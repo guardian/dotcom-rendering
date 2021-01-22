@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
+import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -52,8 +52,37 @@ const standardFontStyles = css`
 		${headline.medium({ lineHeight: 'tight' })}
 	}
 `;
+const interviewStyles = css`
+	margin-left: ${remSpace[3]};
+	border: 0;
+`;
+
+const interviewFontStyles = css`
+	${headline.xsmall({ lineHeight: 'regular' })}
+	font-weight: 400;
+
+	${from.mobileMedium} {
+		${headline.small({ lineHeight: 'regular' })}
+		font-weight: 400;
+	}
+
+	${from.tablet} {
+		${headline.medium({ lineHeight: 'regular' })}
+		font-weight: 400;
+	}
+	background-color: ${neutral[0]};
+	color: ${neutral[100]};
+	white-space: pre-wrap;
+	padding-bottom: ${remSpace[1]};
+	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]},
+		${remSpace[3]} 0 0 ${neutral[0]};
+	display: inline;
+`;
 
 const getStyles = (format: Format): SerializedStyles => {
+	if (format.design === Design.Interview) {
+		return css(styles(format), interviewStyles);
+	}
 	if (
 		format.design === Design.Review ||
 		format.display === Display.Showcase ||
@@ -65,8 +94,15 @@ const getStyles = (format: Format): SerializedStyles => {
 	return css(styles(format), standardFontStyles);
 };
 
+const getHeadlineText = (item: Item): JSX.Element | string => {
+	if (item.design === Design.Interview) {
+		return <span css={interviewFontStyles}>{item.headline}</span>;
+	}
+	return item.headline;
+};
+
 const Headline: FC<Props> = ({ item }) => {
-	return <h1 css={getStyles(item)}>{item.headline}</h1>;
+	return <h1 css={getStyles(item)}>{getHeadlineText(item)}</h1>;
 };
 
 // ----- Exports ----- //
