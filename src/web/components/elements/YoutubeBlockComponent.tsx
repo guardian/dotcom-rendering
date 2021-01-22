@@ -9,7 +9,6 @@ import { Display, Design } from '@guardian/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 
 import { Caption } from '@root/src/web/components/Caption';
 
@@ -195,7 +194,7 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={themeToPillar(pillar)}
+				pillar={pillar}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (

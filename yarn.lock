@@ -2087,10 +2087,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-9.1.0.tgz#5bbccfac53bbd201ec600209fa5f4694ebd0103e"
-  integrity sha512-Qy8mYEzHSqweMvtKgtB3hjhzkbCEeRDFd32d2SBXygs33UT5STP4kvVAfd5oo3Axd7RKKQQFF+IYUv2O+/vB1g==
+"@guardian/atoms-rendering@^10.0.1":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-10.0.1.tgz#3b10cb1610ddf9597ebedd948071969348924788"
+  integrity sha512-KwWzxLvzyk6VD42caKyJh3yek8xmGL9tUA0Dyn6O/YKcZT+WuSTWtJh/Oz5vopv4JlFtpMTAm561F06kL7t91Q==
   dependencies:
     youtube-player "^5.5.2"
 
@@ -2115,10 +2115,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.2.tgz#668d0f911aff5c3bc42cb54c606b07640d18f0b8"
   integrity sha512-tX+lZZFgn9PP8RUj14MnsYa7ikBAyTWfQJPNls4o2Q5c+o0uRVYHnlgifvspj0k1m05rFEmYjnmj7rxwpnH2Xw==
 
-"@guardian/discussion-rendering@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-5.0.0.tgz#ad1906e92d94c9ee8530a395f56b708e2620c45c"
-  integrity sha512-wCU2fjp4B8yfy/jbxcBcubdGWfzY2L0I6h/0LL3NBPnSzVj/LUcp3I1wgX1aJSigvxNF40NfoCdnhcRpBcThMw==
+"@guardian/discussion-rendering@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-6.0.0.tgz#63c2e378ab9dc2da41ccdda7789287851c87a7f9"
+  integrity sha512-h6edx8X35BNqE9FJQpUI4OiOJQ85Zd6sG/DzI8uklj9Z8zGZCRmLEhQcrfwC41VhNIeYIsE0O8/vZxkfxox0/Q==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
