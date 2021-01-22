@@ -264,6 +264,14 @@ const reminderTermsStyle = css`
 		color: ${neutral[7]};
 	}
 `;
+const successMessageStyle = css`
+	${body.medium()};
+
+	a {
+		text-decoration: underline;
+		color: ${neutral[7]};
+	}
+`;
 
 interface ABTest {
 	name: string;
@@ -306,13 +314,16 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderYear = reminderDate.getFullYear();
 	const epicStateJson = {
 		hideButtons: false,
-		hideReminderForm: true,
+		hideReminderWrapper: true,
+		hideSuccessMessage: true,
 		hideReminderCta: false,
+		hideReminderForm: false,
+		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
 	};
-	const supportDotcomComponentsUrl =
-		process.env.GU_STAGE === 'PROD'
-			? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
-			: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
+	const supportDotcomComponentsUrl = 'https://mjacobson.eu.ngrok.io';
+	// process.env.GU_STAGE === 'PROD'
+	// 	? 'https://contributions.guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS'
+	// 	: 'https://contributions.code.dev-guardianapis.com/amp/epic?ampVariantAssignments=VARIANTS';
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
@@ -456,7 +467,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<div data-amp-bind-hidden="epicState.hideReminderCta">
 									<div
 										className={transparentButtonStyle}
-										on="tap:AMP.setState({epicState:{hideReminderForm: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
+										on="tap:AMP.setState({epicState:{hideReminderWrapper: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
 									>
 										Remind me in {reminderMonth}
 									</div>
@@ -465,17 +476,18 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						</div>
 
 						<div
-							className="reminderFormWrapper"
-							data-amp-bind-hidden="epicState.hideReminderForm"
+							className="reminderWrapper"
+							data-amp-bind-hidden="epicState.hideReminderWrapper"
 						>
 							<div className={quadLineStyle} />
 							<div className={reminderFormTopStyle}>
-								<h2 className={epicHeaderStyle}>
-									Remind me in {reminderMonth} {reminderYear}
-								</h2>
+								<div
+									className={epicHeaderStyle}
+									data-amp-bind-text="epicState.headerText"
+								/>
 								<div
 									className={closeButtonStyle}
-									on="tap:AMP.setState({epicState:{hideReminderForm: true, hideButtons: false}}),reminderForm.clear"
+									on="tap:AMP.setState({epicState:{hideReminderWrapper: true, hideButtons: false}}),reminderForm.clear"
 								>
 									<svg
 										viewBox="0 0 30 30"
@@ -491,12 +503,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							</div>
 							<form
 								id="reminderForm"
+								data-amp-bind-hidden="epicState.hideReminderForm"
 								method="post"
 								action-xhr={setReminderUrl}
 								target="_blank"
 								custom-validation-reporting="interact-and-submit"
 								encType="application/x-www-form-urlencoded"
-								on="submit-success:AMP.setState({epicState:{hideReminderCta: true}})"
+								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}})"
 							>
 								<div className={inputLabelStyle}>
 									Email address
@@ -559,18 +572,33 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									type="submit"
 									value="Set a reminder"
 								/>
+								<div className={reminderTermsStyle}>
+									We will send you a maximum of two emails in{' '}
+									{reminderMonth} {reminderYear}. To find out
+									what personal data we collect and how we use
+									it, view our{' '}
+									<a
+										target="_blank"
+										href="https://www.theguardian.com/help/privacy-policy"
+									>
+										Privacy Policy
+									</a>
+									.
+								</div>
 							</form>
-							<div className={reminderTermsStyle}>
-								We will send you a maximum of two emails
-								in&nbsp;
-								{reminderMonth} {reminderYear}. To find out what
-								personal data we collect and how we use it, view
-								our{' '}
+							<div
+								className={successMessageStyle}
+								data-amp-bind-hidden="epicState.hideSuccessMessage"
+							>
+								We will be in touch to remind you to contribute.
+								Look out for a message in your inbox in{' '}
+								{reminderMonth} {reminderYear}. If you have any
+								questions about contributing, please{' '}
 								<a
 									target="_blank"
-									href="https://www.theguardian.com/help/privacy-policy"
+									href="mailto:contribution.support@theguardian.com"
 								>
-									Privacy Policy
+									contact us
 								</a>
 								.
 							</div>
