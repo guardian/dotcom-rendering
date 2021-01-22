@@ -138,7 +138,6 @@
         "@babel/preset-typescript": "^7.12.7",
         "@babel/runtime": "^7.11.2",
         "@guardian/prettier": "^0.4.2",
-        "@guardian/types": "^0.4.5",
         "@loadable/babel-plugin": "^5.13.2",
         "@loadable/webpack-plugin": "^5.14.0",
         "@storybook/addon-actions": "^6.1.9",
