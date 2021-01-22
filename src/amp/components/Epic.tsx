@@ -96,7 +96,7 @@ const genericButtonStyle = css`
 `;
 const transparentButtonStyle = css`
 	${genericButtonStyle}
-	margin: 2rem 0.625rem 0.25rem 0;
+	margin: 4px;
 	background-color: transparent;
 	color: ${neutral[7]};
 	border: 1px solid ${neutral[7]};
@@ -106,7 +106,7 @@ const transparentButtonStyle = css`
 `;
 const yellowButtonStyle = css`
 	${genericButtonStyle}
-	margin: 2rem 0.625rem 0.25rem 0;
+	margin: 4px;
 	background-color: ${brandAlt[400]};
 	color: ${neutral[7]};
 	border: 1px solid ${brandAlt[400]};
@@ -216,6 +216,8 @@ const goalExceededMarkerStyle = css`
 `;
 const buttonsStyle = css`
 	display: flex;
+	margin-top: 2rem;
+	flex-wrap: wrap;
 `;
 const closeButtonStyle = css`
 	border: 0;
@@ -461,19 +463,6 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 												<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
 											</svg>
 										</a>
-										<div
-											className={
-												acceptedPaymentMethodsWrapperStyle
-											}
-										>
-											<amp-img
-												layout="fixed"
-												height="25px"
-												width="176px"
-												src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
-												alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
-											/>
-										</div>
 									</MoustacheSection>
 								</div>
 								<div data-amp-bind-hidden="epicState.hideReminderCta">
@@ -484,6 +473,15 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										Remind me in {reminderMonth}
 									</button>
 								</div>
+							</div>
+							<div className={acceptedPaymentMethodsWrapperStyle}>
+								<amp-img
+									layout="fixed"
+									height="25px"
+									width="176px"
+									src="https://assets.guim.co.uk/images/acquisitions/2db3a266287f452355b68d4240df8087/payment-methods.png"
+									alt="Accepted payment methods: Visa, Mastercard, American Express and PayPal"
+								/>
 							</div>
 						</div>
 
