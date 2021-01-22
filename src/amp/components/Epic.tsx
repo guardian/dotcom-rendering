@@ -272,6 +272,12 @@ const successMessageStyle = css`
 		color: ${neutral[7]};
 	}
 `;
+const reminderErrorStyle = css`
+	${textSans.small({ fontStyle: 'italic' })};
+	color: ${error[400]};
+	font-weight: 600;
+	margin-bottom: 10px;
+`;
 
 interface ABTest {
 	name: string;
@@ -316,6 +322,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		hideButtons: false,
 		hideReminderWrapper: true,
 		hideSuccessMessage: true,
+		hideFailureMessage: true,
 		hideReminderCta: false,
 		hideReminderForm: false,
 		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
@@ -509,7 +516,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								target="_blank"
 								custom-validation-reporting="interact-and-submit"
 								encType="application/x-www-form-urlencoded"
-								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}})"
+								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}});submit-error:AMP.setState({epicState:{hideFailureMessage:false}})"
 							>
 								<div className={inputLabelStyle}>
 									Email address
@@ -572,6 +579,14 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									type="submit"
 									value="Set a reminder"
 								/>
+								<div
+									submit-error={true}
+									className={reminderErrorStyle}
+									data-amp-bind-hidden="epicState.hideFailureMessage"
+								>
+									Sorry we couldn&apos;t set a reminder for
+									you this time. Please try again later.
+								</div>
 								<div className={reminderTermsStyle}>
 									We will send you a maximum of two emails in{' '}
 									{reminderMonth} {reminderYear}. To find out
