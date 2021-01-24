@@ -19,8 +19,10 @@ import { Picture } from '@root/src/web/components/Picture';
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
-// Fix the date to prevent false negatives with age warnings
-MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+if (isChromatic()) {
+    // Fix the date to prevent false negatives
+    MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+}
 
 // Add base css for the site
 let css = `${getFontsCss()}${defaults}`;
