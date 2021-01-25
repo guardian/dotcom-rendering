@@ -726,7 +726,6 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     addWhen: RichLinkBlockElement['_type'];
 }
 type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
-type LoadableComponentsPartial = Partial<LoadableComponents>;
 
 interface BaseTrailType {
 
