@@ -205,13 +205,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
 		kickerText,
 	} = trail;
 	return (
-		<LI
-			bottomMargin={true}
-			stretch={true}
-			percentage="100%"
-			showDivider={true}
-			padSides={true}
-		>
+		<LI stretch={true} percentage="100%" showDivider={true} padSides={true}>
 			<Card
 				linkTo={linkTo}
 				pillar={pillar}
