@@ -60,6 +60,11 @@ const showcaseStyles = css`
 	color: ${neutral[20]}
 `;
 
+const analysisStyles = css`
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+	color: ${neutral[46]}
+`;
+
 interface Props {
 	item: Item;
 	shareIcon?: boolean;
@@ -71,6 +76,9 @@ const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
+	}
+	if (format.design === Design.Analysis) {
+		return css(styles(kickerColor), analysisStyles);
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
