@@ -8,13 +8,15 @@ import type {
 	FontStyle,
 	FontWeight,
 } from '@guardian/src-foundations/typography/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
-import { articleWidthStyles } from './styles';
+import { articleWidthStyles, sidePadding } from './styles';
 
 // ----- Component ----- //
 
@@ -120,12 +122,21 @@ const renderText = (
 		}
 	});
 
+const interviewStyles = css`
+	${sidePadding}
+`;
+const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+	if (format.design === Design.Interview) {
+		return css(styles(kickerColor), interviewStyles);
+	}
+	return styles(kickerColor);
+};
 const Byline: FC<Props> = ({ item, shareIcon, large }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={styles(kickerColor)}>
+		<div css={getStyles(item, kickerColor)}>
 			<address>{renderText(byline, kickerColor, large)}</address>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
