@@ -5,7 +5,6 @@ import { css } from 'emotion';
 import { border, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
-import { Link } from '@guardian/src-link';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
@@ -15,6 +14,9 @@ type Props = {
 	children: React.ReactNode;
 	width: number;
 	height: number;
+	overlayHeadline: string;
+	overlayBody: React.ReactNode;
+	overlayButtonText: string;
 	onAccept: Function;
 };
 
@@ -106,7 +108,15 @@ const Body = ({
 	</div>
 );
 
-export const ClickToView = ({ children, width, height, onAccept }: Props) => {
+export const ClickToView = ({
+	children,
+	width,
+	height,
+	overlayHeadline,
+	overlayBody,
+	overlayButtonText,
+	onAccept,
+}: Props) => {
 	const [showOverlay, setShowOverlay] = useState<boolean>(true);
 
 	const handleClick = () => {
@@ -120,19 +130,8 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 				<Outer>
 					<Inner>
 						<Top>
-							<Headline width={width}>
-								The colourful beak is very large
-							</Headline>
-							<Body width={width}>
-								Quaerat quaerat ex nihil autem consequatur.
-								Velit rerum at ad dignissimos aut excepturi
-								ratione excepturi. Quaerat ipsam natus totam et
-								aut distinctio eaque voluptatem.
-								<Link href="https://theguardian.com">
-									{' '}
-									Quaerat ipsam
-								</Link>
-							</Body>
+							<Headline width={width}>{overlayHeadline}</Headline>
+							<Body width={width}>{overlayBody}</Body>
 						</Top>
 						<Bottom>
 							<Button
@@ -142,7 +141,7 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 								iconSide="left"
 								onClick={() => handleClick()}
 							>
-								Click to view
+								{overlayButtonText}
 							</Button>
 						</Bottom>
 					</Inner>

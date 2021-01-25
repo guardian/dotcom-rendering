@@ -1,18 +1,26 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
 import { css } from 'emotion';
-
 import { textSans } from '@guardian/src-foundations/typography';
-
+import { Link } from '@guardian/src-link';
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-
 import { ClickToView } from './ClickToView';
 
 export default {
 	component: ClickToView,
 	title: 'Components/ClickToView',
 };
+
+const overlayHeadline = 'The colourful beak is very large';
+const overlayBody = (
+	<div>
+		Quaerat quaerat ex nihil autem consequatur. Velit rerum at ad
+		dignissimos aut excepturi ratione excepturi. Quaerat ipsam natus totam
+		et aut distinctio eaque voluptatem.
+		<Link href="https://theguardian.com">Quaerat ipsam</Link>
+	</div>
+);
 
 export const DefaultStory = () => {
 	return (
@@ -43,7 +51,14 @@ export const DefaultStory = () => {
 					post-ironic mixtape
 				</p>
 				<Figure role="inline">
-					<ClickToView width={620} height={400} onAccept={() => {}}>
+					<ClickToView
+						width={620}
+						height={400}
+						overlayHeadline={overlayHeadline}
+						overlayBody={overlayBody}
+						overlayButtonText="Click to view"
+						onAccept={() => {}}
+					>
 						<img src="http://placekitten.com/g/620/400" alt="" />
 					</ClickToView>
 				</Figure>
@@ -87,7 +102,14 @@ export const SmallStory = () => {
 					post-ironic mixtape
 				</p>
 				<Figure role="supporting">
-					<ClickToView width={380} height={300} onAccept={() => {}}>
+					<ClickToView
+						width={380}
+						height={300}
+						overlayHeadline={overlayHeadline}
+						overlayBody={overlayBody}
+						overlayButtonText="Click to view"
+						onAccept={() => {}}
+					>
 						<img src="http://placekitten.com/g/380/300" alt="" />
 					</ClickToView>
 				</Figure>

@@ -5,18 +5,19 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Display, Design } from '@guardian/types';
-import { ContainerLayout } from '../components/ContainerLayout';
-import { EmbedBlockComponent } from '../components/elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '../components/elements/UnsafeEmbedBlockComponent';
-import { SpotifyBlockComponent } from '../components/elements/SpotifyBlockComponent';
-import { VimeoBlockComponent } from '../components/elements/VimeoBlockComponent';
-import { DocumentBlockComponent } from '../components/elements/DocumentBlockComponent';
-import { SoundcloudBlockComponent } from '../components/elements/SoundcloudBlockComponent';
-import { TweetBlockComponent } from '../components/elements/TweetBlockComponent';
-import { Figure } from '../components/Figure';
+import { ContainerLayout } from './ContainerLayout';
+import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
+import { SpotifyBlockComponent } from './elements/SpotifyBlockComponent';
+import { VimeoBlockComponent } from './elements/VimeoBlockComponent';
+import { DocumentBlockComponent } from './elements/DocumentBlockComponent';
+import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
+import { TweetBlockComponent } from './elements/TweetBlockComponent';
+import { Figure } from './Figure';
+import { ThirdPartyEmbeddedContent } from './ThirdPartyEmbeddedContent';
 
 export default {
-	title: 'Examples/EmbeddedContent',
+	title: 'Components/ThirdPartyEmbeddedContent',
 };
 
 const SoundcloudBlockElementType: 'model.dotcomrendering.pageElements.SoundcloudBlockElement' =
@@ -27,6 +28,10 @@ const Inline: RoleType = 'inline';
 
 const EmbeddedElements = {
 	instagramEmbed: {
+		source: 'Instagram',
+		sourceDomain: 'instagram.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: false,
 		alt: 'Idris Elba wedding',
@@ -36,6 +41,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	formStackEmbed: {
+		source: 'Formstack',
+		sourceDomain: 'formstack.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: false,
 		alt: 'Book clinic form',
@@ -45,6 +54,10 @@ const EmbeddedElements = {
 		isMandatory: true,
 	},
 	facebookEmbed: {
+		source: 'Facebook',
+		sourceDomain: 'facebook.com',
+		height: 221,
+		width: 500,
 		isThirdPartyTracking: true,
 		safe: true,
 		alt: 'Facebook post',
@@ -54,6 +67,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	vimeoEmbedEmbed: {
+		source: 'Vimeo',
+		sourceDomain: 'vimeo.com',
+		height: 360,
+		width: 640,
 		isThirdPartyTracking: false,
 		safe: true,
 		alt: 'the documentary Injustice',
@@ -63,6 +80,8 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	vimeoVideoEmbed: {
+		source: 'Vimeo',
+		sourceDomain: 'vimeo.com',
 		embedUrl:
 			'https://player.vimeo.com/video/21693673?app_id=122963&dnt=true',
 		role: 'inline',
@@ -77,6 +96,8 @@ const EmbeddedElements = {
 		title: undefined,
 	},
 	scribdDocumentEmbed: {
+		source: 'Scribd',
+		sourceDomain: 'scribd.com',
 		embedUrl: 'https://www.scribd.com/embeds/469886680/content',
 		isThirdPartyTracking: true,
 		width: 613,
@@ -86,6 +107,10 @@ const EmbeddedElements = {
 		height: 460,
 	},
 	scribdEmbedEmbed: {
+		source: 'Scribd',
+		sourceDomain: 'scribd.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: false,
 		alt: 'Letter',
@@ -95,6 +120,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	tiktokEmbedEmbed: {
+		source: 'TikTok',
+		sourceDomain: 'tiktok.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: false,
 		alt: 'Everything is cake on TikTok',
@@ -104,6 +133,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	soundcloudAudioEmbed: {
+		source: 'Soundcloud',
+		sourceDomain: 'soundcloud.com',
+		height: 460,
+		width: 460,
 		isTrack: true,
 		isThirdPartyTracking: true,
 		_type: SoundcloudBlockElementType,
@@ -113,6 +146,10 @@ const EmbeddedElements = {
 		isMandatory: true,
 	},
 	soundcloudEmbedEmbed: {
+		source: 'Soundcloud',
+		sourceDomain: 'soundcloud.com',
+		height: 300,
+		width: undefined,
 		isTrack: true,
 		isThirdPartyTracking: true,
 		_type: SoundcloudBlockElementType,
@@ -122,6 +159,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	youtubeEmbedEmbed: {
+		source: 'Youtube',
+		sourceDomain: 'youtube.com',
+		height: 315,
+		width: undefined,
 		isThirdPartyTracking: false,
 		safe: true,
 		alt: 'Watch the video for Sleaford Mods’ Second',
@@ -131,6 +172,8 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	spotifyAudioEmbed: {
+		source: 'Spotify',
+		sourceDomain: 'spotify.com',
 		embedUrl:
 			'https://embed.spotify.com/?uri=spotify:user:matthew.holmes.guardian:playlist:6UQ1JOduKGyS46SThaxy0B',
 		isThirdPartyTracking: true,
@@ -142,6 +185,10 @@ const EmbeddedElements = {
 		height: 380,
 	},
 	spotifyEmbedEmbed: {
+		source: 'Spotify',
+		sourceDomain: 'spotify.com',
+		height: 380,
+		width: 300,
 		isThirdPartyTracking: true,
 		safe: true,
 		alt: 'Joy Division Ranked Spotify Playlist',
@@ -151,6 +198,10 @@ const EmbeddedElements = {
 		isMandatory: true,
 	},
 	bandcampEmbedEmbed: {
+		source: 'Bandcamp',
+		sourceDomain: 'bandcamp.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: true,
 		alt: 'Isaac by Jonny and the Baptists',
@@ -160,6 +211,10 @@ const EmbeddedElements = {
 		isMandatory: true,
 	},
 	theconversationEmbedEmbed: {
+		source: undefined,
+		sourceDomain: 'theconversation.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: false,
 		alt: 'Script',
@@ -169,6 +224,8 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	twitterTweetEmbed: {
+		source: 'Twitter',
+		sourceDomain: 'twitter.com',
 		role: Inline,
 		isThirdPartyTracking: false,
 		_type: TweetBlockElementType,
@@ -177,8 +234,14 @@ const EmbeddedElements = {
 		hasMedia: false,
 		id: '1241244758653071360',
 		url: 'https://twitter.com/MatthewBevan/status/1241244758653071360',
+		height: undefined,
+		width: undefined,
 	},
 	twitterEmbedEmbed: {
+		source: 'Twitter',
+		sourceDomain: 'twitter.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: false,
 		safe: false,
 		alt: 'Video: social distancing',
@@ -188,6 +251,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	ourworldindataEmbedEmbed: {
+		source: undefined,
+		sourceDomain: 'ourworldindata.com',
+		height: undefined,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: true,
 		alt: 'Our World in Data',
@@ -197,6 +264,10 @@ const EmbeddedElements = {
 		isMandatory: false,
 	},
 	bbcEmbedEmbed: {
+		source: 'BBC',
+		sourceDomain: 'bbc.co.uk',
+		height: 500,
+		width: undefined,
 		isThirdPartyTracking: true,
 		safe: true,
 		alt: 'Watch a trailer for Enslaved',
@@ -207,7 +278,12 @@ const EmbeddedElements = {
 	},
 };
 
-function body(pillar: CAPIPillar, design: Design, display: Display) {
+function body(
+	pillar: CAPIPillar,
+	design: Design,
+	display: Display,
+	displayOverlay: boolean,
+) {
 	return [
 		<p>
 			Example of an instagram embed, the source article is{' '}
@@ -216,12 +292,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.instagramEmbed.html}
-				alt={EmbeddedElements.instagramEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.instagramEmbed.source}
+				sourceDomain={EmbeddedElements.instagramEmbed.sourceDomain}
+				height={EmbeddedElements.instagramEmbed.height}
+				width={EmbeddedElements.instagramEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.instagramEmbed.html}
+					alt={EmbeddedElements.instagramEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a formstack embed, the source article is{' '}
@@ -230,12 +314,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.formStackEmbed.html}
-				alt={EmbeddedElements.formStackEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.formStackEmbed.source}
+				sourceDomain={EmbeddedElements.formStackEmbed.sourceDomain}
+				height={EmbeddedElements.formStackEmbed.height}
+				width={EmbeddedElements.formStackEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.formStackEmbed.html}
+					alt={EmbeddedElements.formStackEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a facebook post embed, the source article is{' '}
@@ -244,11 +336,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.facebookEmbed.html}
-				alt={EmbeddedElements.facebookEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.facebookEmbed.source}
+				sourceDomain={EmbeddedElements.facebookEmbed.sourceDomain}
+				height={EmbeddedElements.facebookEmbed.height}
+				width={EmbeddedElements.facebookEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.facebookEmbed.html}
+					alt={EmbeddedElements.facebookEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a vimeo embed from &apos;embed&apos; element type, the
@@ -258,11 +358,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.vimeoEmbedEmbed.html}
-				alt={EmbeddedElements.vimeoEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.vimeoEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.vimeoEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.vimeoEmbedEmbed.height}
+				width={EmbeddedElements.vimeoEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.vimeoEmbedEmbed.html}
+					alt={EmbeddedElements.vimeoEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a vimeo embed from &apos;video&apos; element type, the
@@ -272,17 +380,25 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<VimeoBlockComponent
-				pillar={pillar}
-				embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.vimeoVideoEmbed.source}
+				sourceDomain={EmbeddedElements.vimeoVideoEmbed.sourceDomain}
 				height={EmbeddedElements.vimeoVideoEmbed.height}
 				width={EmbeddedElements.vimeoVideoEmbed.width}
-				caption={EmbeddedElements.vimeoVideoEmbed.caption}
-				credit={EmbeddedElements.vimeoVideoEmbed.credit}
-				title={EmbeddedElements.vimeoVideoEmbed.title}
-				display={display}
-				design={design}
-			/>
+			>
+				<VimeoBlockComponent
+					pillar={pillar}
+					embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
+					height={EmbeddedElements.vimeoVideoEmbed.height}
+					width={EmbeddedElements.vimeoVideoEmbed.width}
+					caption={EmbeddedElements.vimeoVideoEmbed.caption}
+					credit={EmbeddedElements.vimeoVideoEmbed.credit}
+					title={EmbeddedElements.vimeoVideoEmbed.title}
+					display={display}
+					design={design}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a scribd embed from a &apos;document&apos; element type,
@@ -292,12 +408,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<DocumentBlockComponent
-				embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.scribdDocumentEmbed.source}
+				sourceDomain={EmbeddedElements.scribdDocumentEmbed.sourceDomain}
 				height={EmbeddedElements.scribdDocumentEmbed.height}
 				width={EmbeddedElements.scribdDocumentEmbed.width}
-				title={EmbeddedElements.scribdDocumentEmbed.title}
-			/>
+			>
+				<DocumentBlockComponent
+					embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
+					height={EmbeddedElements.scribdDocumentEmbed.height}
+					width={EmbeddedElements.scribdDocumentEmbed.width}
+					title={EmbeddedElements.scribdDocumentEmbed.title}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a scribd embed from a &apos;embed&apos; element type, the
@@ -307,12 +431,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.scribdEmbedEmbed.html}
-				alt={EmbeddedElements.scribdEmbedEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.scribdEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.scribdEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.scribdEmbedEmbed.height}
+				width={EmbeddedElements.scribdEmbedEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.scribdEmbedEmbed.html}
+					alt={EmbeddedElements.scribdEmbedEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a tiktok embed from a &apos;embed&apos; element type, the
@@ -322,12 +454,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.tiktokEmbedEmbed.html}
-				alt={EmbeddedElements.tiktokEmbedEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.tiktokEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.tiktokEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.tiktokEmbedEmbed.height}
+				width={EmbeddedElements.tiktokEmbedEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.tiktokEmbedEmbed.html}
+					alt={EmbeddedElements.tiktokEmbedEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a soundcloud embed from an &apos;audio&apos; element
@@ -337,9 +477,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<SoundcloudBlockComponent
-				element={EmbeddedElements.soundcloudAudioEmbed}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.soundcloudAudioEmbed.source}
+				sourceDomain={
+					EmbeddedElements.soundcloudAudioEmbed.sourceDomain
+				}
+				height={EmbeddedElements.soundcloudAudioEmbed.height}
+				width={EmbeddedElements.soundcloudAudioEmbed.width}
+			>
+				<SoundcloudBlockComponent
+					element={EmbeddedElements.soundcloudAudioEmbed}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a soundcloud embed from an &apos;embed&apos; element
@@ -349,9 +499,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<SoundcloudBlockComponent
-				element={EmbeddedElements.soundcloudEmbedEmbed}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.soundcloudEmbedEmbed.source}
+				sourceDomain={
+					EmbeddedElements.soundcloudEmbedEmbed.sourceDomain
+				}
+				height={EmbeddedElements.soundcloudEmbedEmbed.height}
+				width={EmbeddedElements.soundcloudEmbedEmbed.width}
+			>
+				<SoundcloudBlockComponent
+					element={EmbeddedElements.soundcloudEmbedEmbed}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a youtube embed from an &apos;embed&apos; element type,
@@ -361,11 +521,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.youtubeEmbedEmbed.html}
-				alt={EmbeddedElements.youtubeEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.youtubeEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.youtubeEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.youtubeEmbedEmbed.height}
+				width={EmbeddedElements.youtubeEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.youtubeEmbedEmbed.html}
+					alt={EmbeddedElements.youtubeEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a spotify embed from an &apos;audio&apos; element type,
@@ -375,17 +543,25 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<SpotifyBlockComponent
-				embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.spotifyAudioEmbed.source}
+				sourceDomain={EmbeddedElements.spotifyAudioEmbed.sourceDomain}
 				height={EmbeddedElements.spotifyAudioEmbed.height}
 				width={EmbeddedElements.spotifyAudioEmbed.width}
-				title={EmbeddedElements.spotifyAudioEmbed.title}
-				pillar={pillar}
-				caption={EmbeddedElements.spotifyAudioEmbed.caption}
-				design={design}
-				display={display}
-				credit="Spotify"
-			/>
+			>
+				<SpotifyBlockComponent
+					embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
+					height={EmbeddedElements.spotifyAudioEmbed.height}
+					width={EmbeddedElements.spotifyAudioEmbed.width}
+					title={EmbeddedElements.spotifyAudioEmbed.title}
+					pillar={pillar}
+					caption={EmbeddedElements.spotifyAudioEmbed.caption}
+					design={design}
+					display={display}
+					credit="Spotify"
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a spotify embed from an &apos;embed&apos; element type,
@@ -395,11 +571,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.spotifyEmbedEmbed.html}
-				alt={EmbeddedElements.spotifyEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.spotifyEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.spotifyEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.spotifyEmbedEmbed.height}
+				width={EmbeddedElements.spotifyEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.spotifyEmbedEmbed.html}
+					alt={EmbeddedElements.spotifyEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a bandcamp embed from an &apos;embed&apos; element type,
@@ -409,11 +593,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.bandcampEmbedEmbed.html}
-				alt={EmbeddedElements.bandcampEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.bandcampEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.bandcampEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.bandcampEmbedEmbed.height}
+				width={EmbeddedElements.bandcampEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.bandcampEmbedEmbed.html}
+					alt={EmbeddedElements.bandcampEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a The Conversation embed from an &apos;embed&apos;
@@ -423,12 +615,22 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.theconversationEmbedEmbed.html}
-				alt={EmbeddedElements.theconversationEmbedEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.theconversationEmbedEmbed.source}
+				sourceDomain={
+					EmbeddedElements.theconversationEmbedEmbed.sourceDomain
+				}
+				height={EmbeddedElements.theconversationEmbedEmbed.height}
+				width={EmbeddedElements.theconversationEmbedEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.theconversationEmbedEmbed.html}
+					alt={EmbeddedElements.theconversationEmbedEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 
 		<p>
@@ -439,7 +641,17 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<TweetBlockComponent element={EmbeddedElements.twitterTweetEmbed} />
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.twitterTweetEmbed.source}
+				sourceDomain={EmbeddedElements.twitterTweetEmbed.sourceDomain}
+				height={EmbeddedElements.twitterTweetEmbed.height}
+				width={EmbeddedElements.twitterTweetEmbed.width}
+			>
+				<TweetBlockComponent
+					element={EmbeddedElements.twitterTweetEmbed}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a twitter embed from an &apos;embed&apos; element type,
@@ -449,12 +661,20 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<UnsafeEmbedBlockComponent
-				key="1"
-				html={EmbeddedElements.twitterEmbedEmbed.html}
-				alt={EmbeddedElements.twitterEmbedEmbed.alt}
-				index={1}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.twitterEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.twitterEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.twitterEmbedEmbed.height}
+				width={EmbeddedElements.twitterEmbedEmbed.width}
+			>
+				<UnsafeEmbedBlockComponent
+					key="1"
+					html={EmbeddedElements.twitterEmbedEmbed.html}
+					alt={EmbeddedElements.twitterEmbedEmbed.alt}
+					index={1}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a Our World In Data embed from an &apos;embed&apos;
@@ -464,11 +684,21 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.ourworldindataEmbedEmbed.html}
-				alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.ourworldindataEmbedEmbed.source}
+				sourceDomain={
+					EmbeddedElements.ourworldindataEmbedEmbed.sourceDomain
+				}
+				height={EmbeddedElements.ourworldindataEmbedEmbed.height}
+				width={EmbeddedElements.ourworldindataEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.ourworldindataEmbedEmbed.html}
+					alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 		<p>
 			Example of a BBC embed from an &apos;embed&apos; element type, the
@@ -478,11 +708,19 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			</a>
 		</p>,
 		<Figure role="inline">
-			<EmbedBlockComponent
-				key={1}
-				html={EmbeddedElements.bbcEmbedEmbed.html}
-				alt={EmbeddedElements.bbcEmbedEmbed.alt}
-			/>
+			<ThirdPartyEmbeddedContent
+				isTracking={displayOverlay}
+				source={EmbeddedElements.bbcEmbedEmbed.source}
+				sourceDomain={EmbeddedElements.bbcEmbedEmbed.sourceDomain}
+				height={EmbeddedElements.bbcEmbedEmbed.height}
+				width={EmbeddedElements.bbcEmbedEmbed.width}
+			>
+				<EmbedBlockComponent
+					key={1}
+					html={EmbeddedElements.bbcEmbedEmbed.html}
+					alt={EmbeddedElements.bbcEmbedEmbed.alt}
+				/>
+			</ThirdPartyEmbeddedContent>
 		</Figure>,
 	];
 }
@@ -507,7 +745,7 @@ export const DefaultStory = () => {
 					}
 				`}
 			>
-				{body('news', Design.Article, Display.Standard)}
+				{body('news', Design.Article, Display.Standard, true)}
 			</div>
 		</ContainerLayout>
 	);

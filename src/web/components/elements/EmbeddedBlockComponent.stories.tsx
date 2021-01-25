@@ -4,7 +4,6 @@ import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { Display, Design } from '@guardian/types';
 import { ContainerLayout } from '../ContainerLayout';
 import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { Figure } from '../Figure';
@@ -79,7 +78,7 @@ const EmbeddedElements = {
 	},
 };
 
-function body(pillar: CAPIPillar, design: Design, display: Display) {
+function body() {
 	return [
 		<p>
 			Example of a facebook post embed, the source article is{' '}
@@ -201,7 +200,7 @@ export const DefaultStory = () => {
 					}
 				`}
 			>
-				{body('news', Design.Article, Display.Standard)}
+				{body()}
 			</div>
 		</ContainerLayout>
 	);
