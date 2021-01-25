@@ -420,7 +420,7 @@ interface CardType {
     commentCount?: number;
     starRating?: number;
     alwaysVertical?: boolean;
-    minWidthInPixels?: number; 
+    minWidthInPixels?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

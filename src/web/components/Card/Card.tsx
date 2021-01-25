@@ -136,7 +136,10 @@ export const Card = ({
 				>
 					<>
 						{imageUrl && (
-							<ImageWrapper percentage={imageCoverage}>
+							<ImageWrapper
+								percentage={imageCoverage}
+								alwaysVertical={alwaysVertical}
+							>
 								<img
 									src={imageUrl}
 									alt=""

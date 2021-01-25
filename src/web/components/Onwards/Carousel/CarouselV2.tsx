@@ -11,8 +11,8 @@ import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { Card } from '../../Card/Card';
-import { LI } from '../../Card/components/LI';
+import { Card } from '@frontend/web/components/Card/Card';
+import { LI } from '@frontend/web/components/Card/components/LI';
 
 const navIconStyle = css`
 	display: inline-block;
