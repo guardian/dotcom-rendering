@@ -54,6 +54,7 @@ test('produces valid AMP doc', async () => {
 				'properties.content.title': 'article title',
 			},
 		},
+		ipsosSectionName: 'section',
 	};
 
 	const body = (
