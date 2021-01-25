@@ -316,6 +316,20 @@ export const App = ({ CAPI, NAV }: Props) => {
 		},
 	);
 
+	const RichLinkComponent = loadable(
+		() => {
+			if (CAPI.richLinks.length > 0) {
+				return import(
+					'@frontend/web/components/elements/RichLinkComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.RichLinkComponent,
+		},
+	);
+
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
 		//
@@ -455,15 +469,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</Portal>
 			)}
 			{CAPI.richLinks.map((link, index) => {
-				const RichLinkComponent = loadable(
-					() =>
-						import(
-							'@frontend/web/components/elements/RichLinkComponent'
-						),
-					{
-						resolveComponent: (module) => module.RichLinkComponent,
-					},
-				);
 				return (
 					<Portal
 						key={index}
