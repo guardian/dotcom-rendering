@@ -9,10 +9,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v1
 
-            - name: Use Node.js 10.15.3
+            - name: Use Node.js 14.15
               uses: actions/setup-node@v1
               with:
-                  node-version: '10.15.3'
+                  node-version: '14.15'
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
