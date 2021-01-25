@@ -89,11 +89,7 @@ export const document = ({ data }: Props) => {
 	// the 'addWhen' value is 'always' or matches
 	// any elements in the body or main media element
 	// arrays for the page request.
-	const chunksForPage: (
-		| EditionDropdownLoadable
-		| YoutubeBlockLoadable
-		| RichLinkBlockLoadable
-	)[] = allChunks.filter((chunk) =>
+	const chunksForPage = allChunks.filter((chunk) =>
 		[...CAPIElements, ...mainMediaElements].some(
 			(block) =>
 				chunk.addWhen === 'always' || block._type === chunk.addWhen,
