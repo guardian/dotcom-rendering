@@ -1,27 +1,32 @@
-import { Display } from '@guardian/types/Format';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { Display, Design, Format } from '@guardian/types';
+import { neutral, text } from '@guardian/src-foundations';
 
-type Format = { display: Display; designType: DesignType; pillar: CAPIPillar };
+import { pillarPalette } from '@root/src/lib/pillars';
 
 const getHeadlineColour = (format: Format): string => {
 	switch (format.display) {
 		case Display.Immersive:
-			return 'white';
+			switch (format.design) {
+				case Design.PrintShop:
+					return text.primary;
+				default:
+					return neutral[100];
+			}
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (format.designType) {
-				case 'Review':
-				case 'Recipe':
-				case 'Feature':
-					return pillarPalette[format.pillar].dark;
-				case 'Interview':
-					return 'white';
+			switch (format.design) {
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Feature:
+					return pillarPalette[format.theme].dark;
+				case Design.Interview:
+					return neutral[100];
 				default:
-					return 'black';
+					return text.primary;
 			}
 		}
 		default:
-			return 'black';
+			return text.primary;
 	}
 };
 

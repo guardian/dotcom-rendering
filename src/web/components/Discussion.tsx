@@ -16,14 +16,13 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { toTypesPillar } from '@root/src/lib/format';
-import { Display } from '@guardian/types/Format';
+import { Display } from '@guardian/types';
 
 type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
@@ -197,7 +196,7 @@ export const Discussion = ({
 							<Comments
 								user={user}
 								baseUrl={discussionApiUrl}
-								pillar={toTypesPillar(pillar)}
+								pillar={pillar}
 								initialPage={commentPage}
 								pageSizeOverride={commentPageSize}
 								isClosedForComments={
@@ -222,7 +221,7 @@ export const Discussion = ({
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}
-									pillar={toTypesPillar(pillar)}
+									pillar={pillar}
 									initialPage={commentPage}
 									pageSizeOverride={commentPageSize}
 									isClosedForComments={

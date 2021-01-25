@@ -2,7 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
+import { Pillar } from '@guardian/types';
 import { calloutCampaign } from '@root/fixtures/calloutCampaign';
+
 import { CalloutBlockComponent } from './CalloutBlockComponent';
 
 export default {
@@ -27,7 +29,10 @@ export const Default = () => {
 				padding: 15px;
 			`}
 		>
-			<CalloutBlockComponent callout={calloutCampaign} pillar="news" />
+			<CalloutBlockComponent
+				callout={calloutCampaign}
+				pillar={Pillar.News}
+			/>
 		</div>
 	);
 };

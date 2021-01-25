@@ -9,7 +9,9 @@ type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type CAPIPillar = RealPillars | FakePillars;
 
-type DesignType =
+// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type CAPIDesign =
     | 'Article'
     | 'Media'
     | 'Review'
@@ -23,17 +25,20 @@ type DesignType =
     | 'GuardianView'
     | 'Quiz'
     | 'AdvertisementFeature'
-    | 'PhotoEssay';
+    | 'PhotoEssay'
+    | 'Immersive'
+    | 'SpecialReport'
+    | 'GuardianLabs'
 
-// CAPIDesign is what CAPI might give us but we only want to use a subset of these (DesignType)
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
-type CAPIDesign = DesignType | "Immersive" | "SpecialReport" | "GuardianLabs";
+type Design = import('@guardian/types').Design;
+type Theme = import('@guardian/types').Theme;
+type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DesignTypesObj = { [key in DesignType]: any };
+type DesignTypesObj = { [key in Design]: any };
 
 type Palette = {[key: string]: any};
 
@@ -95,7 +100,7 @@ interface Branding {
     };
 }
 
-interface LinkType extends SimpleLinkType {
+interface CAPILinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
     mobileOnly?: boolean;
@@ -103,8 +108,20 @@ interface LinkType extends SimpleLinkType {
     more?: boolean;
 }
 
-interface PillarType extends LinkType {
+interface LinkType extends SimpleLinkType {
+    longTitle: string;
+    children?: LinkType[];
+    mobileOnly?: boolean;
+    pillar?: Pillar;
+    more?: boolean;
+}
+
+interface CAPIPillarType extends CAPILinkType {
     pillar: CAPIPillar;
+}
+
+interface PillarType extends LinkType {
+    pillar: Pillar;
 }
 
 interface MoreType extends LinkType {
@@ -134,13 +151,20 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-interface NavType {
-    pillars: PillarType[];
+interface BaseNavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
     subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface NavType extends BaseNavType {
+    pillars: PillarType[];
+}
+
+interface CAPINavType extends BaseNavType {
+    pillars: CAPIPillarType[];
 }
 
 interface SubNavBrowserType {
@@ -352,8 +376,8 @@ interface BadgeType {
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 interface KickerType {
     text: string;
-    designType: DesignType;
-    pillar: CAPIPillar;
+    design: Design;
+    pillar: Theme;
     showPulsingDot?: boolean;
     showSlash?: boolean;
     inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
@@ -374,13 +398,13 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: CAPIPillar;
-    designType: DesignType;
+    pillar: Theme;
+    design: Design;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
-    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
     byline?: string;
-    isLiveBlog?: boolean; // When designType === 'Live', this denotes if the liveblog is active or not
+    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
     showByline?: boolean;
     webPublicationDate?: string;
     imageUrl?: string;
@@ -409,9 +433,9 @@ type HeadlineLink = {
 };
 
 interface LinkHeadlineType {
-    designType: DesignType;
+    design: Design;
     headlineText: string; // The text shown
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kickerText?: string;
     showPulsingDot?: boolean;
@@ -424,12 +448,12 @@ interface LinkHeadlineType {
 
 interface CardHeadlineType {
     headlineText: string; // The text shown
-    designType: DesignType; // Used to decide when to add type specific styles
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    design: Design; // Used to decide when to add type specific styles
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
-    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
     showByline?: boolean;
@@ -499,7 +523,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
-    pillar: CAPIPillar;
+    pillar: Theme;
 };
 
 type OphanComponentName =
@@ -570,6 +594,7 @@ interface ConfigType extends CommercialConfigType {
     idUrl?: string;
     mmaUrl?: string;
     brazeApiKey?: string;
+    ipsosTag?: string;
 }
 
 interface ConfigTypeBrowser {
@@ -681,9 +706,7 @@ type IslandType =
     | 'youtube-block-main-media'
     | 'chart-atom';
 
-interface TrailType {
-    designType: DesignType;
-    pillar: CAPIPillar;
+interface BaseTrailType {
     url: string;
     headline: string;
     isLiveBlog: boolean;
@@ -701,8 +724,13 @@ interface TrailType {
     starRating?: number;
     linkText?: string;
 }
+interface TrailType extends BaseTrailType {
+    design: Design;
+    pillar: Theme;
+}
 
-interface CAPITrailType extends TrailType {
+interface CAPITrailType extends BaseTrailType {
+    designType: CAPIDesign;
     pillar: CAPIPillar;
 }
 
@@ -711,10 +739,15 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
+interface CAPITrailTabType {
+    heading: string;
+    trails: CAPITrailType[];
+}
+
 interface MostViewedFooterPayloadType {
-    tabs: TrailTabType[];
-    mostCommented: TrailType;
-    mostShared: TrailType;
+    tabs: CAPITrailTabType[];
+    mostCommented: CAPITrailType;
+    mostShared: CAPITrailType;
 }
 
 // ----------

@@ -31,7 +31,7 @@ export const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-export const LinkStyle = (pillar: CAPIPillar) => css`
+export const LinkStyle = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].dark};
 		text-decoration: none;
@@ -42,7 +42,7 @@ export const LinkStyle = (pillar: CAPIPillar) => css`
 	}
 `;
 
-export const TextStyle = (pillar: CAPIPillar) => css`
+export const TextStyle = (pillar: Theme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -74,7 +74,7 @@ const textStyleLabs = css`
 
 export const TextBlockComponent: React.FC<{
 	html: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
 		className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}

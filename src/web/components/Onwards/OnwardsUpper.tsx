@@ -1,8 +1,12 @@
 import React from 'react';
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+
+import { Pillar } from '@guardian/types';
 import { useAB } from '@guardian/ab-react';
+
+import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';
+
 import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel/Carousel';
 import { OnwardsLayout } from './OnwardsLayout';
@@ -137,36 +141,36 @@ const lifestyleContainer = (edition: Edition): string => {
 };
 
 const getContainerDataUrl = (
-	pillar: CAPIPillar,
+	pillar: Theme,
 	edition: Edition,
 	ajaxUrl: string,
 ) => {
 	switch (pillar) {
-		case 'sport':
+		case Pillar.Sport:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${sportContainer(edition)}.json`,
 			]);
-		case 'news':
+		case Pillar.News:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${headlinesContainer(edition)}.json`,
 			]);
-		case 'culture':
+		case Pillar.Culture:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${cultureContainer(edition)}.json`,
 			]);
-		case 'lifestyle':
+		case Pillar.Lifestyle:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${lifestyleContainer(edition)}.json`,
 			]);
-		case 'opinion':
+		case Pillar.Opinion:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
@@ -193,8 +197,7 @@ type Props = {
 	contentType: string;
 	tags: TagType[];
 	edition: Edition;
-	pillar: CAPIPillar;
-	designType: DesignType;
+	pillar: Theme;
 };
 
 export const OnwardsUpper = ({
@@ -210,7 +213,6 @@ export const OnwardsUpper = ({
 	tags,
 	edition,
 	pillar,
-	designType,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -305,7 +307,6 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={Carousel}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}
@@ -317,7 +318,6 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={OnwardsLayout}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}
@@ -329,7 +329,6 @@ export const OnwardsUpper = ({
 						ophanComponentName={ophanComponentName}
 						Container={OnwardsLayout}
 						pillar={pillar}
-						designType={designType}
 					/>
 				</Section>
 			)}

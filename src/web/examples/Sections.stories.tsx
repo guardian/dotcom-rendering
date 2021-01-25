@@ -9,7 +9,7 @@ import { Footer } from '@frontend/web/components/Footer';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display } from '@guardian/types/Format';
+import { Display, Pillar } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -68,7 +68,7 @@ export const Sections = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar="news"
+				pillar={Pillar.News}
 				nav={NAV}
 				display={Display.Standard}
 				subscribeUrl=""
@@ -81,7 +81,7 @@ export const Sections = () => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -128,7 +128,7 @@ export const Sections = () => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines count={4} pillar="news" />
+			<GuardianLines count={4} pillar={Pillar.News} />
 		</Section>
 		<Section
 			padded={false}
@@ -138,7 +138,7 @@ export const Sections = () => (
 		>
 			<Footer
 				pageFooter={pageFooter}
-				pillar="news"
+				pillar={Pillar.News}
 				pillars={NAV.pillars}
 			/>
 		</Section>

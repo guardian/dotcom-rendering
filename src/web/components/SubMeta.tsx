@@ -38,7 +38,7 @@ const bottomPadding = css`
 `;
 
 type Props = {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;

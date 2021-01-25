@@ -7,19 +7,17 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
 	headlineString: string;
 	display: Display;
-	designType: DesignType; // Decides headline appearance
-	pillar: CAPIPillar; // Decides headline colour when relevant
+	design: Design; // Decides headline appearance
+	pillar: Theme; // Decides headline colour when relevant
 	byline?: string;
 	tags: TagType[];
 	isShowcase?: boolean; // Used for Interviews to change headline position
-	noMainMedia?: boolean; // Used for Immersives where the headline styles
-	// change when there is no main media
 	palette: Palette;
 };
 
@@ -192,18 +190,32 @@ const zIndex = css`
 export const ArticleHeadline = ({
 	headlineString,
 	display,
-	designType,
+	design,
 	pillar,
 	tags,
 	byline,
-	noMainMedia,
 	palette,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
+			switch (design) {
+				case Design.PrintShop:
+					return (
+						// Immersive headlines have two versions, with main media, and (this one) without
+						<h1
+							className={cx(
+								jumboFont,
+								maxWidth,
+								immersiveStyles,
+								displayBlock,
+								reducedBottomPadding,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<>
 							<h1
@@ -220,7 +232,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}
@@ -228,38 +240,18 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
-				case 'Review':
-				case 'Recipe':
-				case 'Feature':
-				case 'Analysis':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Article':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Feature:
+				case Design.Analysis:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.Quiz:
 				default:
-					if (noMainMedia) {
-						return (
-							// Immersive headlines have two versions, with main media, and (this one) without
-							<h1
-								className={cx(
-									jumboFont,
-									maxWidth,
-									immersiveStyles,
-									displayBlock,
-									reducedBottomPadding,
-									css`
-										color: ${palette.headline.colour};
-									`,
-								)}
-							>
-								{curly(headlineString)}
-							</h1>
-						);
-					}
 					return (
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
@@ -290,10 +282,10 @@ export const ArticleHeadline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (designType) {
-				case 'Review':
-				case 'Recipe':
-				case 'Feature':
+			switch (design) {
+				case Design.Review:
+				case Design.Recipe:
+				case Design.Feature:
 					return (
 						<h1
 							className={cx(
@@ -306,8 +298,8 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case 'Comment':
-				case 'GuardianView':
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<>
 							<h1
@@ -323,7 +315,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}
@@ -331,7 +323,7 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
-				case 'Analysis':
+				case Design.Analysis:
 					return (
 						<h1
 							className={cx(
@@ -345,7 +337,7 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case 'Interview':
+				case Design.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
@@ -376,7 +368,7 @@ export const ArticleHeadline = ({
 							{byline && (
 								<HeadlineByline
 									display={display}
-									designType={designType}
+									design={design}
 									pillar={pillar}
 									byline={byline}
 									tags={tags}
@@ -384,13 +376,12 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Article':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Article:
+				case Design.MatchReport:
+				case Design.Quiz:
 				default:
 					return (
 						<h1

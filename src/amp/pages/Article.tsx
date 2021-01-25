@@ -24,10 +24,10 @@ const backgroundColour = css`
 
 const Body: React.SFC<{
 	data: ArticleModel;
-	pillar: CAPIPillar;
-	designType: DesignType;
+	pillar: Theme;
+	design: Design;
 	config: ConfigType;
-}> = ({ data, designType, config, pillar }) => {
+}> = ({ data, design, config, pillar }) => {
 	// TODO check if there is a better way to determine if liveblog
 	const isLiveBlog =
 		data.tags.find((tag) => tag.id === 'tone/minutebyminute') !== undefined;
@@ -39,7 +39,7 @@ const Body: React.SFC<{
 	return (
 		<BodyArticle
 			pillar={pillar}
-			designType={designType}
+			design={design}
 			data={data}
 			config={config}
 		/>
@@ -53,10 +53,10 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const designType = decideDesignType(articleData.designType);
+	const design = decideDesignType(articleData.designType, articleData.tags);
 	const pillar = decidePillar({
 		pillar: articleData.pillar,
-		design: designType,
+		design,
 	});
 
 	return (
@@ -78,7 +78,7 @@ export const Article: React.FC<{
 					<Body
 						data={articleData}
 						pillar={pillar}
-						designType={designType}
+						design={design}
 						config={config}
 					/>
 					<Onward

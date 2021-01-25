@@ -189,7 +189,7 @@ export const MatchStats = ({ home, away }: Props) => (
 			</GridItem>
 			<GridItem area="possession">
 				<RightBorder>
-					<H4>Posession</H4>
+					<H4>Possession</H4>
 					<Center>
 						<Donut
 							sections={[

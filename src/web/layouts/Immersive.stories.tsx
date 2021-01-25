@@ -4,7 +4,6 @@ import { breakpoints } from '@guardian/src-foundations/mq';
 
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
-import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
 import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
 import { Review } from '@root/fixtures/articles/Review';
 import { Analysis } from '@root/fixtures/articles/Analysis';
@@ -15,6 +14,7 @@ import { Quiz } from '@root/fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
+import { PrintShop } from '@root/fixtures/articles/PrintShop';
 
 import { NAV } from '@root/fixtures/NAV';
 
@@ -93,18 +93,6 @@ export const CommentStory = () => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
-
-export const AdvertisementFeatureStory = () => {
-	const ServerCAPI = convertToImmersive(AdvertisementFeature);
-	return <HydratedLayout ServerCAPI={ServerCAPI} />;
-};
-AdvertisementFeatureStory.story = {
-	name: 'AdvertisementFeature',
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [980] },
-	},
-};
 
 export const PhotoEssayStory = () => {
 	const ServerCAPI = convertToImmersive(PhotoEssay);
@@ -185,3 +173,9 @@ export const MatchReportStory = () => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
+
+export const PrintShopStory = () => {
+	const ServerCAPI = convertToImmersive(PrintShop);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+PrintShopStory.story = { name: 'PrintShop' };

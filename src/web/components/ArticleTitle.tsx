@@ -3,19 +3,18 @@ import { css, cx } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
-import { Display } from '@guardian/types/Format';
+import { Display, Design } from '@guardian/types';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	badge?: BadgeType;
-	noMainMedia?: boolean;
 };
 
 const sectionStyles = css`
@@ -62,14 +61,13 @@ const immersiveMargins = css`
 
 export const ArticleTitle = ({
 	display,
-	designType,
+	design,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
 	pillar,
 	badge,
-	noMainMedia,
 }: Props) => (
 	<div className={cx(sectionStyles, badge && badgeContainer)}>
 		{badge && display !== Display.Immersive && (
@@ -81,13 +79,13 @@ export const ArticleTitle = ({
 			className={cx(
 				badge && marginTop,
 				display === Display.Immersive &&
-					!noMainMedia &&
+					design !== Design.PrintShop &&
 					immersiveMargins,
 			)}
 		>
 			<SeriesSectionLink
 				display={display}
-				designType={designType}
+				design={design}
 				tags={tags}
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}

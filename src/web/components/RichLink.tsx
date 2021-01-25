@@ -8,6 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
+import { Pillar } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
@@ -42,7 +43,7 @@ interface Props {
 	contentType: ContentType;
 	url: string;
 	starRating?: number;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	tags: TagType[];
 	sponsorName: string;
 	contributorImage?: string;
@@ -84,26 +85,26 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (pillar: CAPIPillar) => colour = (pillar) => {
+const richLinkPillarColour: (pillar: Theme) => colour = (pillar) => {
 	if (pillar) {
 		return pillarPalette[pillar].main;
 	}
-	return pillarPalette.news[400];
+	return pillarPalette[Pillar.News][400];
 };
 
-const pillarBackground: (pillar: CAPIPillar) => colour = (pillar) => {
+const pillarBackground: (pillar: Theme) => colour = (pillar) => {
 	return css`
 		background-color: ${richLinkPillarColour(pillar)};
 	`;
 };
 
-const textColour: (pillar: CAPIPillar) => colour = (pillar) => {
+const textColour: (pillar: Theme) => colour = (pillar) => {
 	return css`
 		color: ${richLinkPillarColour(pillar)};
 	`;
 };
 
-const richLinkTopBorder: (pillar: CAPIPillar) => colour = (pillar) => {
+const richLinkTopBorder: (pillar: Theme) => colour = (pillar) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
@@ -139,7 +140,7 @@ const richLinkTitle = css`
 	}
 `;
 
-const richLinkReadMore: (pillar: CAPIPillar) => colour = (pillar) => {
+const richLinkReadMore: (pillar: Theme) => colour = (pillar) => {
 	return css`
 		fill: ${richLinkPillarColour(pillar)};
 		color: ${richLinkPillarColour(pillar)};
@@ -244,7 +245,7 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			headlineText={headlineText}
 			contentType="article"
 			url={url}
-			pillar="news"
+			pillar={Pillar.News}
 			tags={[]}
 			sponsorName=""
 			isPlaceholder={isPlaceholder}

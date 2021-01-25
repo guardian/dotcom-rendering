@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display } from '@guardian/types/Format';
+import { Display, Design, Pillar } from '@guardian/types';
 
 export default {
 	component: Caption,
@@ -11,9 +11,9 @@ export default {
 
 /**
     display: Display;
-    designType: DesignType;
+    design: Design;
     captionText?: string;
-    pillar: CAPIPillar;
+    pillar: Theme;
     padCaption?: boolean;
     credit?: string;
     displayCredit?: boolean;
@@ -25,9 +25,9 @@ export const Article = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Standard}
-			designType="Article"
+			design={Design.Article}
 			captionText="This is how an Article caption looks"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -37,9 +37,9 @@ export const Analysis = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Standard}
-			designType="Analysis"
+			design={Design.Analysis}
 			captionText="This is how an Analysis caption looks"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -49,9 +49,9 @@ export const PhotoEssay = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Immersive}
-			designType="PhotoEssay"
+			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
-			pillar="news"
+			pillar={Pillar.News}
 		/>
 	</Section>
 );
@@ -61,9 +61,9 @@ export const PhotoEssayLimitedWidth = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Immersive}
-			designType="PhotoEssay"
+			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
-			pillar="news"
+			pillar={Pillar.News}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -74,9 +74,9 @@ export const Credit = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Standard}
-			designType="Feature"
+			design={Design.Feature}
 			captionText="This is how a Feature caption looks with credit showing"
-			pillar="news"
+			pillar={Pillar.News}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
@@ -88,9 +88,9 @@ export const WidthLimited = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Standard}
-			designType="Article"
+			design={Design.Article}
 			captionText="This is how a caption looks with width limited"
-			pillar="news"
+			pillar={Pillar.News}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -101,9 +101,9 @@ export const Padded = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
 			display={Display.Standard}
-			designType="Article"
+			design={Design.Article}
 			captionText="This is how a caption looks when padded"
-			pillar="news"
+			pillar={Pillar.News}
 			padCaption={true}
 		/>
 	</Section>

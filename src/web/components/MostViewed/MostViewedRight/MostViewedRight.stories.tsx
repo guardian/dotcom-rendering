@@ -1,6 +1,8 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
+import { Pillar } from '@guardian/types';
+
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
@@ -42,7 +44,7 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight pillar="news" />
+						<MostViewedRight pillar={Pillar.News} />
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -72,7 +74,7 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight pillar="news" limitItems={3} />
+						<MostViewedRight pillar={Pillar.News} limitItems={3} />
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -89,7 +91,7 @@ export const outsideContextStory = () => {
 
 	return (
 		<Section>
-			<MostViewedRight pillar="news" />
+			<MostViewedRight pillar={Pillar.News} />
 		</Section>
 	);
 };

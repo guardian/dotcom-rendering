@@ -5,24 +5,23 @@ import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { Display, Design } from '@guardian/types';
+
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
-import { toTypesPillar } from '@root/src/lib/format';
-
 import { Caption } from '@root/src/web/components/Caption';
-import { Display } from '@guardian/types/Format';
 
 type Props = {
 	id: string;
 	mediaTitle?: string;
 	altText?: string;
 	display: Display;
-	designType: DesignType;
+	design: Design;
 	assetId: string;
 	channelId: string;
 	expired: boolean;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -78,7 +77,7 @@ export const YoutubeBlockComponent = ({
 	mediaTitle,
 	altText,
 	display,
-	designType,
+	design,
 	pillar,
 	hideCaption,
 	overrideImage,
@@ -129,7 +128,7 @@ export const YoutubeBlockComponent = ({
 				{!hideCaption && (
 					<Caption
 						display={display}
-						designType={designType}
+						design={design}
 						captionText={mediaTitle || ''}
 						pillar={pillar}
 						displayCredit={false}
@@ -195,13 +194,13 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={toTypesPillar(pillar)}
+				pillar={pillar}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (
 				<Caption
 					display={display}
-					designType={designType}
+					design={design}
 					captionText={mediaTitle || ''}
 					pillar={pillar}
 					displayCredit={false}

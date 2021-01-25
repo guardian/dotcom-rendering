@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
@@ -76,22 +77,22 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 			<div className={headlineHeader}>
 				{trail.isLiveBlog ? (
 					<LinkHeadline
-						designType={trail.designType}
+						design={trail.design}
 						headlineText={trail.headline}
 						pillar={trail.pillar}
 						size="small"
 						kickerText="Live"
 						showSlash={true}
 						showPulsingDot={true}
-						showQuotes={trail.designType === 'Comment'}
+						showQuotes={trail.design === Design.Comment}
 					/>
 				) : (
 					<LinkHeadline
-						designType={trail.designType}
+						design={trail.design}
 						headlineText={trail.headline}
 						pillar={trail.pillar}
 						size="small"
-						showQuotes={trail.designType === 'Comment'}
+						showQuotes={trail.design === Design.Comment}
 					/>
 				)}
 			</div>

@@ -4,7 +4,10 @@ import { css } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { useApi } from '@root/src/web/lib/api';
+import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
+
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
@@ -18,14 +21,24 @@ const headingStyles = css`
 `;
 
 interface Props {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	limitItems?: number;
+}
+
+function transformTrail(trail: CAPITrailType): TrailType {
+	const design = decideDesignType(trail.designType, []);
+	return {
+		...trail,
+		// Converts the CAPI string pillar into an enum
+		pillar: decidePillar({ pillar: trail.pillar, design }),
+		design,
+	};
 }
 
 export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
 	const endpointUrl: string =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
-	const { data, error } = useApi<any>(endpointUrl);
+	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-right');
@@ -42,10 +55,13 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
 					{(data.trails || [])
 						.slice(0, limitItems)
 						.map(
-							(trail: TrailType, mostViewedItemIndex: number) => (
+							(
+								trail: CAPITrailType,
+								mostViewedItemIndex: number,
+							) => (
 								<MostViewedRightItem
 									key={trail.url}
-									trail={trail}
+									trail={transformTrail(trail)}
 									mostViewedItemIndex={mostViewedItemIndex}
 								/>
 							),

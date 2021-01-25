@@ -16,10 +16,17 @@ import { getCookie } from '@frontend/web/browser/cookie';
 // Sign in Gate A/B Tests
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
+import { signInGateDesignOpt } from '@root/src/web/experiments/tests/sign-in-gate-design-opt';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
+import { signInGateComponent as gateDesignOptVar1 } from '@root/src/web/components/SignInGate/gates/design-opt-var-1';
+import { signInGateComponent as gateDesignOptVar2 } from '@root/src/web/components/SignInGate/gates/design-opt-var-2';
+import { signInGateComponent as gateDesignOptVar3 } from '@root/src/web/components/SignInGate/gates/design-opt-var-3';
+import { signInGateComponent as gateDesignOptVar4 } from '@root/src/web/components/SignInGate/gates/design-opt-var-4';
+import { signInGateComponent as gateDesignOptVar5 } from '@root/src/web/components/SignInGate/gates/design-opt-var-5';
+import { signInGateComponent as gateDesignOptVar6 } from '@root/src/web/components/SignInGate/gates/design-opt-var-6';
 
 import {
 	ComponentEventParams,
@@ -65,16 +72,25 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 const tests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateDesignOpt,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-3': gateMainControl,
 	'main-variant-3': gateMainVariant,
+	'design-opt-control': gateMainVariant,
+	'design-opt-variant-1': gateDesignOptVar1,
+	'design-opt-variant-2': gateDesignOptVar2,
+	'design-opt-variant-3': gateDesignOptVar3,
+	'design-opt-variant-4': gateDesignOptVar4,
+	'design-opt-variant-5': gateDesignOptVar5,
+	'design-opt-variant-6': gateDesignOptVar6,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_3',
 	SignInGateMainControl: 'main_control_3',
+	SignInGateDesignOpt: 'design_opt_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params

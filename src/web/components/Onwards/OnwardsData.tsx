@@ -2,14 +2,14 @@ import { useApi } from '@root/src/web/lib/api';
 import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 
 type Props = {
 	url: string;
 	limit: number; // Limit the number of items shown (the api often returns more)
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
-	pillar: CAPIPillar;
-	designType: DesignType;
+	pillar: Theme;
 };
 
 type OnwardsResponse = {
@@ -25,7 +25,6 @@ export const OnwardsData = ({
 	ophanComponentName,
 	Container,
 	pillar,
-	designType,
 }: Props) => {
 	const { data } = useApi<OnwardsResponse>(url);
 
@@ -33,10 +32,14 @@ export const OnwardsData = ({
 		trails: CAPITrailType[],
 		trailLimit: number,
 	): TrailType[] => {
-		return trails.slice(0, trailLimit).map((trail) => ({
-			...trail,
-			pillar: decidePillar({ pillar: trail.pillar, design: designType }),
-		}));
+		return trails.slice(0, trailLimit).map((trail) => {
+			const design = decideDesignType(trail.designType, []);
+			return {
+				...trail,
+				pillar: decidePillar({ pillar: trail.pillar, design }),
+				design,
+			};
+		});
 	};
 
 	if (data && data.trails) {

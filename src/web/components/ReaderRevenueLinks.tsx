@@ -31,7 +31,7 @@ type Props = {
 	pageViewId: string;
 };
 
-const paddingStyles = css`
+const headerStyles = css`
 	${until.mobileLandscape} {
 		padding-left: 10px;
 	}
@@ -40,6 +40,9 @@ const paddingStyles = css`
 	}
 	${from.mobileLandscape} {
 		padding-left: 20px;
+	}
+	${until.desktop} {
+		max-width: 310px;
 	}
 `;
 
@@ -199,19 +202,15 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 		// Use the same switch as the A/B test to decide whether to display thankyou message
 		if (variantName !== 'notintest') {
 			return (
-				<div className={cx(inHeader && paddingStyles)}>
+				<div className={cx(inHeader && headerStyles)}>
 					<div
 						className={cx({
 							[hiddenUntilTablet]: inHeader,
 						})}
 					>
-						<div className={messageStyles(true)}>
-							{' '}
-							Thank you for your support{' '}
-						</div>
+						<div className={messageStyles(true)}> Thank you </div>
 						<div className={subMessageStyles}>
-							<div> You’ve powered our journalism </div>
-							<div> through a historic year </div>
+							Your support powers our independent journalism
 						</div>
 					</div>
 				</div>
@@ -220,7 +219,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 		return null;
 	}
 	return (
-		<div className={cx(inHeader && paddingStyles)}>
+		<div className={cx(inHeader && headerStyles)}>
 			<div
 				className={cx({
 					[hiddenUntilTablet]: inHeader,

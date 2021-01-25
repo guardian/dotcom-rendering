@@ -7,7 +7,7 @@ import {
 	OphanComponentType,
 	OphanProduct,
 	TestMeta,
-} from '@guardian/types/ophan';
+} from '@guardian/types';
 
 export const record = (event: {}): void => {
 	if (

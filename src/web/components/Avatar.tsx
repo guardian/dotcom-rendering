@@ -1,5 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { Pillar } from '@guardian/types';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const contributorImage = css`
@@ -9,9 +12,9 @@ const contributorImage = css`
 	width: 100%;
 `;
 
-const pillarBackground = (pillar: CAPIPillar = 'opinion') =>
+const pillarBackground = (pillar: Theme = Pillar.Opinion) =>
 	css`
-		background-color: ${pillar === 'opinion'
+		background-color: ${pillar === Pillar.Opinion
 			? pillarPalette[pillar].main
 			: pillarPalette[pillar].bright};
 	`;
@@ -19,7 +22,7 @@ const pillarBackground = (pillar: CAPIPillar = 'opinion') =>
 export const Avatar: React.FC<{
 	imageSrc: string;
 	imageAlt: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ imageSrc, imageAlt, pillar }) => {
 	return (
 		<img

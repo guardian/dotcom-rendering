@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { Design, Pillar } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -83,7 +84,7 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 export const Card = ({
 	linkTo,
 	pillar,
-	designType,
+	design,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -119,10 +120,12 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	const pillarToUse =
-		designType === 'Comment' && pillar === 'news' ? 'opinion' : pillar;
+		design === Design.Comment && pillar === Pillar.News
+			? Pillar.Opinion
+			: pillar;
 
 	return (
-		<CardLink linkTo={linkTo} designType={designType} pillar={pillarToUse}>
+		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>
 			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
 				<CardLayout imagePosition={imagePosition}>
 					<>
@@ -147,21 +150,21 @@ export const Card = ({
 								<HeadlineWrapper>
 									<CardHeadline
 										headlineText={headlineText}
-										designType={designType}
+										design={design}
 										pillar={pillarToUse}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											designType === 'Live'
+											design === Design.Live
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											designType === 'Live' ||
+											design === Design.Live ||
 											showPulsingDot
 										}
 										showSlash={
-											designType === 'Live' || showSlash
+											design === Design.Live || showSlash
 										}
 										byline={byline}
 										showByline={showByline}
@@ -199,11 +202,11 @@ export const Card = ({
 									</Hide>
 								)}
 								<CardFooter
-									designType={designType}
+									design={design}
 									age={
 										webPublicationDate ? (
 											<CardAge
-												designType={designType}
+												design={design}
 												pillar={pillarToUse}
 												webPublicationDate={
 													webPublicationDate
@@ -213,7 +216,7 @@ export const Card = ({
 										) : undefined
 									}
 									mediaMeta={
-										designType === 'Media' && mediaType ? (
+										design === Design.Media && mediaType ? (
 											<MediaMeta
 												pillar={pillarToUse}
 												mediaType={mediaType}
@@ -226,7 +229,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												designType={designType}
+												design={design}
 												pillar={pillarToUse}
 												long={longCount}
 												short={shortCount}

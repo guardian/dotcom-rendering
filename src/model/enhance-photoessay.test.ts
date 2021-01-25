@@ -1,3 +1,5 @@
+import { Pillar } from '@guardian/types';
+
 import { enhancePhotoEssay } from './enhance-photoessay';
 import { bodyJSON } from './exampleBodyJSON';
 import { exampleImage as image } from '../../fixtures/exampleImage';
@@ -624,7 +626,7 @@ describe('Enhance Photo Essays', () => {
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							html: '<p>A Pullquote</p>',
-							pillar: 'news',
+							pillar: Pillar.News,
 							designType: 'PhotoEssay',
 							role: 'inline',
 						},
@@ -649,7 +651,7 @@ describe('Enhance Photo Essays', () => {
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							html: '<p>A Pullquote</p>',
-							pillar: 'news',
+							pillar: Pillar.News,
 							designType: 'PhotoEssay',
 							role: 'inline',
 						},

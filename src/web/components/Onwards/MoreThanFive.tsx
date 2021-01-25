@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Design } from '@guardian/types';
+
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
@@ -34,12 +36,12 @@ export const MoreThanFive = ({ content }: Props) => {
 						{...{
 							linkTo: content[0].url,
 							pillar: content[0].pillar,
-							designType: content[0].designType,
+							design: content[0].design,
 							headlineText: content[0].headline,
 							headlineSize: 'medium',
 							byline: content[0].byline,
 							showByline: content[0].showByline,
-							showQuotes: content[0].designType === 'Comment',
+							showQuotes: content[0].design === Design.Comment,
 							webPublicationDate: content[0].webPublicationDate,
 							kickerText: content[0].kickerText,
 							showPulsingDot: content[0].isLiveBlog,
@@ -63,12 +65,12 @@ export const MoreThanFive = ({ content }: Props) => {
 						{...{
 							linkTo: content[1].url,
 							pillar: content[1].pillar,
-							designType: content[1].designType,
+							design: content[1].design,
 							headlineText: content[1].headline,
 							headlineSize: 'medium',
 							byline: content[1].byline,
 							showByline: content[1].showByline,
-							showQuotes: content[1].designType === 'Comment',
+							showQuotes: content[1].design === Design.Comment,
 							webPublicationDate: content[1].webPublicationDate,
 							kickerText: content[1].kickerText,
 							showPulsingDot: content[1].isLiveBlog,
@@ -92,12 +94,12 @@ export const MoreThanFive = ({ content }: Props) => {
 						{...{
 							linkTo: content[2].url,
 							pillar: content[2].pillar,
-							designType: content[2].designType,
+							design: content[2].design,
 							headlineText: content[2].headline,
 							headlineSize: 'medium',
 							byline: content[2].byline,
 							showByline: content[2].showByline,
-							showQuotes: content[2].designType === 'Comment',
+							showQuotes: content[2].design === Design.Comment,
 							webPublicationDate: content[2].webPublicationDate,
 							kickerText: content[2].kickerText,
 							showPulsingDot: content[2].isLiveBlog,
@@ -121,12 +123,12 @@ export const MoreThanFive = ({ content }: Props) => {
 						{...{
 							linkTo: content[3].url,
 							pillar: content[3].pillar,
-							designType: content[3].designType,
+							design: content[3].design,
 							headlineText: content[3].headline,
 							headlineSize: 'medium',
 							byline: content[3].byline,
 							showByline: content[3].showByline,
-							showQuotes: content[3].designType === 'Comment',
+							showQuotes: content[3].design === Design.Comment,
 							webPublicationDate: content[3].webPublicationDate,
 							kickerText: content[3].kickerText,
 							showPulsingDot: content[3].isLiveBlog,
@@ -153,12 +155,12 @@ export const MoreThanFive = ({ content }: Props) => {
 							{...{
 								linkTo: trail.url,
 								pillar: trail.pillar,
-								designType: trail.designType,
+								design: trail.design,
 								headlineText: trail.headline,
 								headlineSize: 'small',
 								byline: trail.byline,
 								showByline: trail.showByline,
-								showQuotes: trail.designType === 'Comment',
+								showQuotes: trail.design === Design.Comment,
 								webPublicationDate: trail.webPublicationDate,
 								kickerText: trail.kickerText,
 								showPulsingDot: trail.isLiveBlog,

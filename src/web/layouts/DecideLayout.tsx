@@ -2,7 +2,7 @@ import React from 'react';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { Display } from '@guardian/types/Format';
+import { Display, Design, Format } from '@guardian/types';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { StandardLayout } from './StandardLayout';
@@ -15,138 +15,133 @@ type Props = {
 	NAV: NavType;
 };
 
-type Format = { display: Display; designType: DesignType; pillar: CAPIPillar };
-
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const designType: DesignType = decideDesignType(CAPI.designType);
-	const pillar: CAPIPillar = decidePillar({
+	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
+	const pillar: Pillar = decidePillar({
 		pillar: CAPI.pillar,
-		design: designType,
+		design,
 	});
 
-	const format: Format = { display, designType, pillar };
+	const format: Format = { display, design, theme: pillar };
 
 	const palette = decidePalette(format);
 
 	switch (display) {
 		case Display.Immersive: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
+			switch (design) {
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Immersive}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				default:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Immersive}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
 			}
-			break;
 		}
 		case Display.Showcase: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
+			switch (design) {
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Showcase}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				default:
 					return (
 						<ShowcaseLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Showcase}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
 			}
-			break;
 		}
 		case Display.Standard:
 		default: {
-			switch (designType) {
-				case 'Comment':
-				case 'GuardianView':
+			switch (design) {
+				case Design.Comment:
+				case Design.GuardianView:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
-				case 'Feature':
-				case 'Review':
-				case 'Interview':
-				case 'Live':
-				case 'Media':
-				case 'PhotoEssay':
-				case 'Analysis':
-				case 'Article':
-				case 'Recipe':
-				case 'MatchReport':
-				case 'Quiz':
-				case 'AdvertisementFeature':
+				case Design.Feature:
+				case Design.Review:
+				case Design.Interview:
+				case Design.Live:
+				case Design.Media:
+				case Design.PhotoEssay:
+				case Design.Analysis:
+				case Design.Article:
+				case Design.Recipe:
+				case Design.MatchReport:
+				case Design.Quiz:
+				default:
 					return (
 						<StandardLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							display={Display.Standard}
-							designType={designType}
+							design={design}
 							pillar={pillar}
 							palette={palette}
 						/>
 					);
 			}
-			break;
 		}
 	}
 };

@@ -1,9 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types/Format';
-
-import { decidePalette } from '../lib/decidePalette';
+import { Display, Design, Pillar } from '@guardian/types';
 
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -13,6 +11,7 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
+import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: ArticleHeadline,
@@ -29,13 +28,13 @@ export const ArticleStory = () => (
 				<ArticleHeadline
 					headlineString="This is how the default headline looks"
 					display={Display.Standard}
-					designType="Article"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Article',
-						pillar: 'news',
+						design: Design.Article,
+						theme: Pillar.News,
 					})}
+					design={Design.Article}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -54,13 +53,13 @@ export const oldHeadline = () => (
 				<ArticleHeadline
 					headlineString="This is an old headline"
 					display={Display.Standard}
-					designType="Article"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Article',
-						pillar: 'news',
+						design: Design.Article,
+						theme: Pillar.News,
 					})}
+					design={Design.Article}
+					pillar={Pillar.News}
 					tags={[
 						// Age warnings only show for old articles when the tone/news tag is present
 						{
@@ -86,13 +85,13 @@ export const Feature = () => (
 				<ArticleHeadline
 					headlineString="This is a Feature headline, it has colour applied based on pillar"
 					display={Display.Standard}
-					designType="Feature"
-					pillar="lifestyle"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Feature',
-						pillar: 'lifestyle',
+						design: Design.Feature,
+						theme: Pillar.Lifestyle,
 					})}
+					design={Design.Feature}
+					pillar={Pillar.Lifestyle}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -116,13 +115,13 @@ export const ShowcaseInterview = () => (
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						display={Display.Showcase}
-						designType="Interview"
-						pillar="culture"
 						palette={decidePalette({
 							display: Display.Showcase,
-							designType: 'Interview',
-							pillar: 'culture',
+							design: Design.Interview,
+							theme: Pillar.Culture,
 						})}
+						design={Design.Interview}
+						pillar={Pillar.Culture}
 						tags={[]}
 						isShowcase={true}
 						byline="Byline text"
@@ -130,10 +129,10 @@ export const ShowcaseInterview = () => (
 				</div>
 				<MainMedia
 					display={Display.Standard}
-					designType="Article"
+					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -156,13 +155,13 @@ export const ShowcaseInterviewNobyline = () => (
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						display={Display.Showcase}
-						designType="Interview"
-						pillar="culture"
 						palette={decidePalette({
 							display: Display.Showcase,
-							designType: 'Interview',
-							pillar: 'culture',
+							design: Design.Interview,
+							theme: Pillar.Culture,
 						})}
+						design={Design.Interview}
+						pillar={Pillar.Culture}
 						tags={[]}
 						isShowcase={true}
 						byline=""
@@ -170,10 +169,10 @@ export const ShowcaseInterviewNobyline = () => (
 				</div>
 				<MainMedia
 					display={Display.Standard}
-					designType="Article"
+					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -193,27 +192,27 @@ export const Interview = () => (
 				<ArticleHeadline
 					headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 					display={Display.Standard}
-					designType="Interview"
-					pillar="culture"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Interview',
-						pillar: 'culture',
+						design: Design.Interview,
+						theme: Pillar.Culture,
 					})}
+					design={Design.Interview}
+					pillar={Pillar.Culture}
 					tags={[]}
 					byline="Byline text"
 				/>
 				<Standfirst
 					display={Display.Standard}
-					designType="Interview"
+					design={Design.Interview}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
 					display={Display.Standard}
-					designType="Article"
+					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -231,27 +230,27 @@ export const InterviewNoByline = () => (
 				<ArticleHeadline
 					headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 					display={Display.Standard}
-					designType="Interview"
-					pillar="culture"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Interview',
-						pillar: 'culture',
+						design: Design.Interview,
+						theme: Pillar.Culture,
 					})}
+					design={Design.Interview}
+					pillar={Pillar.Culture}
 					tags={[]}
 					byline=""
 				/>
 				<Standfirst
 					display={Display.Standard}
-					designType="Interview"
+					design={Design.Interview}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
 					display={Display.Standard}
-					designType="Article"
+					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -271,13 +270,13 @@ export const Comment = () => (
 				<ArticleHeadline
 					headlineString="Yes, the billionaire club is one we really need to shut down"
 					display={Display.Standard}
-					designType="Comment"
-					pillar="opinion"
 					palette={decidePalette({
 						display: Display.Showcase,
-						designType: 'Comment',
-						pillar: 'opinion',
+						design: Design.Comment,
+						theme: Pillar.Opinion,
 					})}
+					design={Design.Comment}
+					pillar={Pillar.Opinion}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -296,13 +295,13 @@ export const Analysis = () => (
 				<ArticleHeadline
 					headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
 					display={Display.Standard}
-					designType="Analysis"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Analysis',
-						pillar: 'news',
+						design: Design.Analysis,
+						theme: Pillar.News,
 					})}
+					design={Design.Analysis}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -321,13 +320,13 @@ export const Media = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is Media"
 					display={Display.Standard}
-					designType="Media"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Media',
-						pillar: 'news',
+						design: Design.Media,
+						theme: Pillar.News,
 					})}
+					design={Design.Media}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -346,13 +345,13 @@ export const Review = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is Review"
 					display={Display.Standard}
-					designType="Review"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Review',
-						pillar: 'news',
+						design: Design.Review,
+						theme: Pillar.News,
 					})}
+					design={Design.Review}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -360,31 +359,6 @@ export const Review = () => (
 	</Section>
 );
 Review.story = { name: 'Review' };
-
-export const AdvertisementFeature = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is the headline you see when design type is AdvertisementFeature"
-					display={Display.Standard}
-					designType="AdvertisementFeature"
-					pillar="news"
-					palette={decidePalette({
-						display: Display.Standard,
-						designType: 'AdvertisementFeature',
-						pillar: 'news',
-					})}
-					tags={[]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-AdvertisementFeature.story = { name: 'AdvertisementFeature' };
 
 export const PhotoEssay = () => (
 	<Section>
@@ -396,13 +370,13 @@ export const PhotoEssay = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is PhotoEssay"
 					display={Display.Standard}
-					designType="PhotoEssay"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'PhotoEssay',
-						pillar: 'news',
+						design: Design.PhotoEssay,
+						theme: Pillar.News,
 					})}
+					design={Design.PhotoEssay}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -421,13 +395,13 @@ export const Quiz = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is Quiz"
 					display={Display.Standard}
-					designType="Quiz"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Quiz',
-						pillar: 'news',
+						design: Design.Quiz,
+						theme: Pillar.News,
 					})}
+					design={Design.Quiz}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -446,13 +420,13 @@ export const Recipe = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is Recipe"
 					display={Display.Standard}
-					designType="Recipe"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Recipe',
-						pillar: 'news',
+						design: Design.Recipe,
+						theme: Pillar.News,
 					})}
+					design={Design.Recipe}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -471,13 +445,13 @@ export const Immersive = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when display type is Immersive"
 					display={Display.Immersive}
-					designType="Article"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Immersive,
-						designType: 'Article',
-						pillar: 'news',
+						design: Design.Article,
+						theme: Pillar.News,
 					})}
+					design={Design.Article}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -494,23 +468,22 @@ export const ImmersiveNoMainMedia = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when display type is Immersive, but with no main media"
+					headlineString="This is the headline you see when design type is PrintShop, which has no main media"
 					display={Display.Immersive}
-					designType="Article"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Immersive,
-						designType: 'Article',
-						pillar: 'news',
+						design: Design.Article,
+						theme: Pillar.News,
 					})}
+					design={Design.PrintShop}
+					pillar={Pillar.News}
 					tags={[]}
-					noMainMedia={true}
 				/>
 			</ArticleContainer>
 		</Flex>
 	</Section>
 );
-ImmersiveNoMainMedia.story = { name: 'Immersive (with no main media)' };
+ImmersiveNoMainMedia.story = { name: 'Printshop (with no main media)' };
 
 export const ImmersiveComment = () => (
 	<Section
@@ -524,15 +497,15 @@ export const ImmersiveComment = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when display type is Immersive and designType Comment"
+					headlineString="This is the headline you see when display type is Immersive and design Comment"
 					display={Display.Immersive}
-					designType="Comment"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Immersive,
-						designType: 'Comment',
-						pillar: 'news',
+						design: Design.Comment,
+						theme: Pillar.News,
 					})}
+					design={Design.Comment}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -551,13 +524,13 @@ export const GuardianView = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is GuardianView"
 					display={Display.Standard}
-					designType="GuardianView"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'GuardianView',
-						pillar: 'news',
+						design: Design.GuardianView,
+						theme: Pillar.News,
 					})}
+					design={Design.GuardianView}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -576,13 +549,13 @@ export const MatchReport = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is MatchReport"
 					display={Display.Standard}
-					designType="MatchReport"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'MatchReport',
-						pillar: 'news',
+						design: Design.MatchReport,
+						theme: Pillar.News,
 					})}
+					design={Design.MatchReport}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -601,13 +574,13 @@ export const SpecialReport = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when pillar is SpecialReport"
 					display={Display.Standard}
-					designType="Article"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Article',
-						pillar: 'news',
+						design: Design.Article,
+						theme: Pillar.News,
 					})}
+					design={Design.Article}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -626,13 +599,13 @@ export const Live = () => (
 				<ArticleHeadline
 					headlineString="This is the headline you see when design type is Live"
 					display={Display.Standard}
-					designType="Live"
-					pillar="news"
 					palette={decidePalette({
 						display: Display.Standard,
-						designType: 'Live',
-						pillar: 'news',
+						design: Design.Live,
+						theme: Pillar.News,
 					})}
+					design={Design.Live}
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>

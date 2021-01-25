@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { AudioAtom } from '@guardian/atoms-rendering';
-import { toTypesPillar } from '@root/src/lib/format';
 import {
 	onConsentChange,
 	getConsentFor,
@@ -11,7 +10,7 @@ type Props = {
 	trackUrl: string;
 	kicker: string;
 	title?: string | undefined;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	contentIsNotSensitive: boolean;
 	aCastisEnabled: boolean;
 	readerCanBeShownAds: boolean;
@@ -54,7 +53,7 @@ export const AudioAtomWrapper = ({
 			trackUrl={trackUrl}
 			kicker={kicker}
 			title={title}
-			pillar={toTypesPillar(pillar)}
+			pillar={pillar}
 			shouldUseAcast={shouldUseAcast}
 		/>
 	);

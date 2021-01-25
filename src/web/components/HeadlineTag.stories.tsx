@@ -1,6 +1,8 @@
 import React from 'react';
-
 import { css } from 'emotion';
+
+import { Special, Pillar } from '@guardian/types';
+
 import { HeadlineTag } from './HeadlineTag';
 
 export default {
@@ -9,12 +11,14 @@ export default {
 };
 
 export const defaultStory = () => {
-	return <HeadlineTag tagText="Tag name" pillar="culture" />;
+	return <HeadlineTag tagText="Tag name" pillar={Pillar.Culture} />;
 };
 defaultStory.story = { name: 'default' };
 
 export const longTagNameStory = () => {
-	return <HeadlineTag tagText="Slightly longer tag name" pillar="news" />;
+	return (
+		<HeadlineTag tagText="Slightly longer tag name" pillar={Pillar.News} />
+	);
 };
 longTagNameStory.story = { name: 'With a longer tag name' };
 
@@ -27,7 +31,7 @@ export const wrappedTagNameStory = () => {
 		>
 			<HeadlineTag
 				tagText="Very long tag name with enough text to wrap to a second line"
-				pillar="labs"
+				pillar={Special.Labs}
 			/>
 		</div>
 	);

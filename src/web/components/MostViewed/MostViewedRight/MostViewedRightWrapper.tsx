@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	limitItems?: number;
 };
 
