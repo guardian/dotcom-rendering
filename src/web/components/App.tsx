@@ -299,6 +299,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
 			if (

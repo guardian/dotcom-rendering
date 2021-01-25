@@ -55,6 +55,7 @@ export const document = ({ data }: Props) => {
 		),
 	);
 
+	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({
 		stats: loadableManifestJson,
 		entrypoints: ['react'],
