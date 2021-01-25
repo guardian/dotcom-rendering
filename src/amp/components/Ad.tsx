@@ -13,7 +13,6 @@ const svgBackground = encodeURIComponent(
 // Largest size first
 const sizes = [
     { width: 300, height: 250 }, // MPU
-    { width: 300, height: 169 }, // Teads 16:9
     { width: 250, height: 250 }, // Square
 ];
 
