@@ -109,7 +109,25 @@ const HeaderImage: FC<Props> = ({ item }) => {
 					<StarRating item={item} />
 				</figure>
 			);
-		}
+		} else if (media.kind === MainMediaKind.Video) {
+            // pipe2(
+            //     articleMainVideo(content),
+            //     andThen((blockElement) =>
+            //         parseVideo(blockElement, content.atoms),
+            //     ),
+            //     map((video) => ({
+            //         kind: MainMediaKind.Video,
+            //         video,
+            //     })),
+            // );
+            return (
+                <iframe
+                frameBorder="0"
+                allowFullScreen
+                src={`https://www.youtube-nocookie.com/embed/${media.video.videoId}?showinfo=0&rel=0`}>
+            </iframe>)
+
+        }
 
 		return null;
 	});

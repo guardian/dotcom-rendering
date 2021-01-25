@@ -1,22 +1,20 @@
 // ----- Imports ----- //
 
-import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import type { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
-import type { Content } from '@guardian/content-api-models/v1/content';
-import { ContentType } from '@guardian/content-api-models/v1/contentType';
-import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { Option } from '@guardian/types';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
-import { fromString as dateFromString } from 'date';
-import type { MainMedia } from 'headerMedia';
-import { MainMediaKind } from 'headerMedia';
-import { parseImage } from 'image';
-import { isAdvertisementFeature } from 'item';
-import { pipe2 } from 'lib';
-import type { Context } from 'types/parserContext';
-import { parseVideo } from 'video';
+import {BlockElement} from '@guardian/content-api-models/v1/blockElement';
+import {CapiDateTime} from '@guardian/content-api-models/v1/capiDateTime';
+import {Content} from '@guardian/content-api-models/v1/content';
+import {ContentType} from '@guardian/content-api-models/v1/contentType';
+import {ElementType} from '@guardian/content-api-models/v1/elementType';
+import {Tag} from '@guardian/content-api-models/v1/tag';
+import {TagType} from '@guardian/content-api-models/v1/tagType';
+import {andThen, fromNullable, map, none, Option, some} from '@guardian/types';
+import {fromString as dateFromString} from 'date';
+import {MainMedia, MainMediaKind} from 'headerMedia';
+import {parseImage} from 'image';
+import {isAdvertisementFeature} from 'item';
+import {pipe2} from 'lib';
+import {Context} from 'types/parserContext';
+import {parseVideo} from 'video';
 
 // ----- Lookups ----- //
 
@@ -132,16 +130,25 @@ const checkForThirdPartyEmbed = (
 	}
 };
 
-const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
+const getThirdPartyEmbeds = (content: Content, mainMedia: Option<MainMedia>): ThirdPartyEmbeds => {
 	const body = content.blocks?.body;
 	if (!body) {
 		return noThirdPartyEmbeds;
 	}
-	return body.reduce(
-		(thirdPartyEmbeds, block) =>
-			block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
-		noThirdPartyEmbeds,
-	);
+
+	const thirdPartyEmbeds = body.reduce(
+        (thirdPartyEmbeds, block) =>
+            block.elements.reduce(checkForThirdPartyEmbed, thirdPartyEmbeds),
+        noThirdPartyEmbeds,
+    );
+
+	map(media => {
+	    if ((media as MainMedia).kind === MainMediaKind.Video) {
+        thirdPartyEmbeds.youtube = true
+    }})(mainMedia);
+
+	return thirdPartyEmbeds;
+
 };
 
 const requiresInlineStyles = (content: Content): boolean => {

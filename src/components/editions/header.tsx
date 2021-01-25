@@ -3,7 +3,7 @@
 import { css } from '@emotion/core';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
-import HeaderImage from 'components/editions/headerImage';
+import HeaderMedia from 'components/editions/headerMedia';
 import Headline from 'components/editions/headline';
 import Lines from 'components/editions/lines';
 import Series from 'components/editions/series';
@@ -24,7 +24,7 @@ const headerStyles = css`
 
 const StandardHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Series item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
@@ -37,7 +37,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<Series item={item} />
 		<Headline item={item} />
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Standfirst item={item} />
 		<Lines />
 		<Byline item={item} shareIcon />
