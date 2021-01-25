@@ -4,5 +4,6 @@
     "baseUrl": "http://localhost:3030/",
     "video": false,
     "chromeWebSecurity": false,
+    "blockHosts": "*ophan.theguardian.com",
     "retries": 2
 }

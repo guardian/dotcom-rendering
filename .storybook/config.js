@@ -1,6 +1,7 @@
 import isChromatic from 'chromatic/isChromatic';
 
 import fetchMock from 'fetch-mock';
+import MockDate from 'mockdate';
 import { configure, addParameters } from '@storybook/react';
 
 import { sharecount } from '@root/fixtures/article';
@@ -17,6 +18,11 @@ import { Picture } from '@root/src/web/components/Picture';
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
+
+if (isChromatic()) {
+    // Fix the date to prevent false negatives
+    MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+}
 
 // Add base css for the site
 let css = `${getFontsCss()}${defaults}`;

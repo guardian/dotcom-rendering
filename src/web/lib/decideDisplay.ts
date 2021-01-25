@@ -1,7 +1,7 @@
-import { Display } from '@root/src/lib/display';
+import { Display } from '@guardian/types';
 
 export const decideDisplay = (CAPI: CAPIType | CAPIBrowserType): Display => {
-    if (CAPI.isImmersive) return Display.Immersive;
-    if (CAPI.pageType.hasShowcaseMainElement) return Display.Showcase;
-    return Display.Standard;
+	if (CAPI.isImmersive) return Display.Immersive;
+	if (CAPI.pageType.hasShowcaseMainElement) return Display.Showcase;
+	return Display.Standard;
 };

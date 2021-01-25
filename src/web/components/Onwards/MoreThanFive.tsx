@@ -1,178 +1,180 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Design } from '@guardian/types';
+
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
 
 type Props = {
-    content: TrailType[];
+	content: TrailType[];
 };
 
 const decidePercentage = (length: number) => {
-    // The first row of four is spaced at 25%, this function decides for the second row
-    switch (length) {
-        case 6:
-            return '50%';
-        case 7:
-            return '33%';
-        case 8:
-            return '25%';
-        default:
-            return '25%';
-    }
+	// The first row of four is spaced at 25%, this function decides for the second row
+	switch (length) {
+		case 6:
+			return '50%';
+		case 7:
+			return '33%';
+		case 8:
+			return '25%';
+		default:
+			return '25%';
+	}
 };
 
 export const MoreThanFive = ({ content }: Props) => {
-    const secondRowPercentage = decidePercentage(content.length);
-    const secondRowTrails = content.slice(4, content.length);
-    return (
-        <>
-            <UL direction="row" bottomMargin={true}>
-                <LI padSides={true} percentage="25%">
-                    <Card
-                        {...{
-                            linkTo: content[0].url,
-                            pillar: content[0].pillar,
-                            designType: content[0].designType,
-                            headlineText: content[0].headline,
-                            headlineSize: 'medium',
-                            byline: content[0].byline,
-                            showByline: content[0].showByline,
-                            showQuotes: content[0].designType === 'Comment',
-                            webPublicationDate: content[0].webPublicationDate,
-                            kickerText: content[0].kickerText,
-                            showPulsingDot: content[0].isLiveBlog,
-                            showSlash: true,
-                            showClock: false,
-                            imageUrl: content[0].image,
-                            mediaType: content[0].mediaType,
-                            mediaDuration: content[0].mediaDuration,
-                            commentCount: content[0].commentCount,
-                            starRating: content[0].starRating,
-                        }}
-                    />
-                </LI>
-                <LI
-                    padSides={true}
-                    showDivider={true}
-                    showTopMarginWhenStacked={true}
-                    percentage="25%"
-                >
-                    <Card
-                        {...{
-                            linkTo: content[1].url,
-                            pillar: content[1].pillar,
-                            designType: content[1].designType,
-                            headlineText: content[1].headline,
-                            headlineSize: 'medium',
-                            byline: content[1].byline,
-                            showByline: content[1].showByline,
-                            showQuotes: content[1].designType === 'Comment',
-                            webPublicationDate: content[1].webPublicationDate,
-                            kickerText: content[1].kickerText,
-                            showPulsingDot: content[1].isLiveBlog,
-                            showSlash: true,
-                            showClock: false,
-                            imageUrl: content[1].image,
-                            mediaType: content[1].mediaType,
-                            mediaDuration: content[1].mediaDuration,
-                            commentCount: content[1].commentCount,
-                            starRating: content[1].starRating,
-                        }}
-                    />
-                </LI>
-                <LI
-                    padSides={true}
-                    showDivider={true}
-                    showTopMarginWhenStacked={true}
-                    percentage="25%"
-                >
-                    <Card
-                        {...{
-                            linkTo: content[2].url,
-                            pillar: content[2].pillar,
-                            designType: content[2].designType,
-                            headlineText: content[2].headline,
-                            headlineSize: 'medium',
-                            byline: content[2].byline,
-                            showByline: content[2].showByline,
-                            showQuotes: content[2].designType === 'Comment',
-                            webPublicationDate: content[2].webPublicationDate,
-                            kickerText: content[2].kickerText,
-                            showPulsingDot: content[2].isLiveBlog,
-                            showSlash: true,
-                            showClock: false,
-                            imageUrl: content[2].image,
-                            mediaType: content[2].mediaType,
-                            mediaDuration: content[2].mediaDuration,
-                            commentCount: content[2].commentCount,
-                            starRating: content[2].starRating,
-                        }}
-                    />
-                </LI>
-                <LI
-                    padSides={true}
-                    showDivider={true}
-                    showTopMarginWhenStacked={true}
-                    percentage="25%"
-                >
-                    <Card
-                        {...{
-                            linkTo: content[3].url,
-                            pillar: content[3].pillar,
-                            designType: content[3].designType,
-                            headlineText: content[3].headline,
-                            headlineSize: 'medium',
-                            byline: content[3].byline,
-                            showByline: content[3].showByline,
-                            showQuotes: content[3].designType === 'Comment',
-                            webPublicationDate: content[3].webPublicationDate,
-                            kickerText: content[3].kickerText,
-                            showPulsingDot: content[3].isLiveBlog,
-                            showSlash: true,
-                            showClock: false,
-                            imageUrl: content[3].image,
-                            mediaType: content[3].mediaType,
-                            mediaDuration: content[3].mediaDuration,
-                            commentCount: content[3].commentCount,
-                            starRating: content[3].starRating,
-                        }}
-                    />
-                </LI>
-            </UL>
-            <UL direction="row" bottomMargin={true}>
-                {secondRowTrails.map((trail, index) => (
-                    <LI
-                        padSides={true}
-                        showDivider={index > 0}
-                        showTopMarginWhenStacked={index > 0}
-                        percentage={secondRowPercentage}
-                    >
-                        <Card
-                            {...{
-                                linkTo: trail.url,
-                                pillar: trail.pillar,
-                                designType: trail.designType,
-                                headlineText: trail.headline,
-                                headlineSize: 'small',
-                                byline: trail.byline,
-                                showByline: trail.showByline,
-                                showQuotes: trail.designType === 'Comment',
-                                webPublicationDate: trail.webPublicationDate,
-                                kickerText: trail.kickerText,
-                                showPulsingDot: trail.isLiveBlog,
-                                showSlash: true,
-                                showClock: false,
-                                mediaType: trail.mediaType,
-                                mediaDuration: trail.mediaDuration,
-                                commentCount: trail.commentCount,
-                                starRating: trail.starRating,
-                            }}
-                        />
-                    </LI>
-                ))}
-            </UL>
-        </>
-    );
+	const secondRowPercentage = decidePercentage(content.length);
+	const secondRowTrails = content.slice(4, content.length);
+	return (
+		<>
+			<UL direction="row" bottomMargin={true}>
+				<LI padSides={true} percentage="25%">
+					<Card
+						{...{
+							linkTo: content[0].url,
+							pillar: content[0].pillar,
+							design: content[0].design,
+							headlineText: content[0].headline,
+							headlineSize: 'medium',
+							byline: content[0].byline,
+							showByline: content[0].showByline,
+							showQuotes: content[0].design === Design.Comment,
+							webPublicationDate: content[0].webPublicationDate,
+							kickerText: content[0].kickerText,
+							showPulsingDot: content[0].isLiveBlog,
+							showSlash: true,
+							showClock: false,
+							imageUrl: content[0].image,
+							mediaType: content[0].mediaType,
+							mediaDuration: content[0].mediaDuration,
+							commentCount: content[0].commentCount,
+							starRating: content[0].starRating,
+						}}
+					/>
+				</LI>
+				<LI
+					padSides={true}
+					showDivider={true}
+					showTopMarginWhenStacked={true}
+					percentage="25%"
+				>
+					<Card
+						{...{
+							linkTo: content[1].url,
+							pillar: content[1].pillar,
+							design: content[1].design,
+							headlineText: content[1].headline,
+							headlineSize: 'medium',
+							byline: content[1].byline,
+							showByline: content[1].showByline,
+							showQuotes: content[1].design === Design.Comment,
+							webPublicationDate: content[1].webPublicationDate,
+							kickerText: content[1].kickerText,
+							showPulsingDot: content[1].isLiveBlog,
+							showSlash: true,
+							showClock: false,
+							imageUrl: content[1].image,
+							mediaType: content[1].mediaType,
+							mediaDuration: content[1].mediaDuration,
+							commentCount: content[1].commentCount,
+							starRating: content[1].starRating,
+						}}
+					/>
+				</LI>
+				<LI
+					padSides={true}
+					showDivider={true}
+					showTopMarginWhenStacked={true}
+					percentage="25%"
+				>
+					<Card
+						{...{
+							linkTo: content[2].url,
+							pillar: content[2].pillar,
+							design: content[2].design,
+							headlineText: content[2].headline,
+							headlineSize: 'medium',
+							byline: content[2].byline,
+							showByline: content[2].showByline,
+							showQuotes: content[2].design === Design.Comment,
+							webPublicationDate: content[2].webPublicationDate,
+							kickerText: content[2].kickerText,
+							showPulsingDot: content[2].isLiveBlog,
+							showSlash: true,
+							showClock: false,
+							imageUrl: content[2].image,
+							mediaType: content[2].mediaType,
+							mediaDuration: content[2].mediaDuration,
+							commentCount: content[2].commentCount,
+							starRating: content[2].starRating,
+						}}
+					/>
+				</LI>
+				<LI
+					padSides={true}
+					showDivider={true}
+					showTopMarginWhenStacked={true}
+					percentage="25%"
+				>
+					<Card
+						{...{
+							linkTo: content[3].url,
+							pillar: content[3].pillar,
+							design: content[3].design,
+							headlineText: content[3].headline,
+							headlineSize: 'medium',
+							byline: content[3].byline,
+							showByline: content[3].showByline,
+							showQuotes: content[3].design === Design.Comment,
+							webPublicationDate: content[3].webPublicationDate,
+							kickerText: content[3].kickerText,
+							showPulsingDot: content[3].isLiveBlog,
+							showSlash: true,
+							showClock: false,
+							imageUrl: content[3].image,
+							mediaType: content[3].mediaType,
+							mediaDuration: content[3].mediaDuration,
+							commentCount: content[3].commentCount,
+							starRating: content[3].starRating,
+						}}
+					/>
+				</LI>
+			</UL>
+			<UL direction="row" bottomMargin={true}>
+				{secondRowTrails.map((trail, index) => (
+					<LI
+						padSides={true}
+						showDivider={index > 0}
+						showTopMarginWhenStacked={index > 0}
+						percentage={secondRowPercentage}
+					>
+						<Card
+							{...{
+								linkTo: trail.url,
+								pillar: trail.pillar,
+								design: trail.design,
+								headlineText: trail.headline,
+								headlineSize: 'small',
+								byline: trail.byline,
+								showByline: trail.showByline,
+								showQuotes: trail.design === Design.Comment,
+								webPublicationDate: trail.webPublicationDate,
+								kickerText: trail.kickerText,
+								showPulsingDot: trail.isLiveBlog,
+								showSlash: true,
+								showClock: false,
+								mediaType: trail.mediaType,
+								mediaDuration: trail.mediaDuration,
+								commentCount: trail.commentCount,
+								starRating: trail.starRating,
+							}}
+						/>
+					</LI>
+				))}
+			</UL>
+		</>
+	);
 };

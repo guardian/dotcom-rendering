@@ -1,13 +1,13 @@
 const setUrlFragment = (urlString, fragments) => {
-    const url = new URL(urlString);
+	const url = new URL(urlString);
 
-    const newFragments = Object.entries(fragments)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
+	const newFragments = Object.entries(fragments)
+		.map(([key, value]) => `${key}=${value}`)
+		.join('&');
 
-    url.hash = (url.hash ? `${url.hash}&` : '') + newFragments;
+	url.hash = (url.hash ? `${url.hash}&` : '') + newFragments;
 
-    return url;
+	return url;
 };
 
 export { setUrlFragment };

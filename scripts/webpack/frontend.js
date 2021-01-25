@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const ReportBundleSize = require('./plugins/report-bundle-size');
 const { dist } = require('../frontend/config');
 
@@ -33,6 +34,9 @@ const commonConfigs = ({ platform }) => ({
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
+        new FilterWarningsPlugin({ 
+            exclude: /export .* was not found in/ 
         }),
         PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&

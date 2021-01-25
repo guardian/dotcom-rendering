@@ -5,27 +5,27 @@ import { until } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
 
 type Props = {
-    children: string;
+	children: string;
 };
 
 export const StandfirstWrapper = ({ children }: Props) => (
-    <div
-        className={css`
-            display: flex;
-            flex-direction: column;
+	<div
+		className={css`
+			display: flex;
+			flex-direction: column;
 
-            ${body.small()};
-            font-size: 14px;
+			${body.small()};
+			font-size: 14px;
 
-            padding-left: 5px;
-            padding-right: 5px;
-            padding-bottom: 6px;
+			padding-left: 5px;
+			padding-right: 5px;
+			padding-bottom: 6px;
 
-            ${until.tablet} {
-                display: none;
-            }
-        `}
-    >
-        {children}
-    </div>
+			${until.tablet} {
+				display: none;
+			}
+		`}
+	>
+		{children}
+	</div>
 );

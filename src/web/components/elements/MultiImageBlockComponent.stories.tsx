@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { MultiImageBlockComponent } from './MultiImageBlockComponent';
+import { Design, Pillar } from '@guardian/types';
+import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 
+import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 
 const oneImage = fourImages.slice(0, 1);
@@ -9,115 +11,131 @@ const twoImages = fourImages.slice(0, 2);
 const threeImages = fourImages.slice(0, 3);
 
 export default {
-    component: MultiImageBlockComponent,
-    title: 'Components/MultiImageBlockComponent',
-    chromatic: { diffThreshold: 0.7 },
+	component: MultiImageBlockComponent,
+	title: 'Components/MultiImageBlockComponent',
+	chromatic: { diffThreshold: 0.7 },
 };
 
 export const SingleImage = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={oneImage}
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={oneImage}
+			/>
+		</ContainerLayout>
+	);
 };
 SingleImage.story = {
-    name: 'single image',
+	name: 'single image',
 };
 
 export const SingleImageWithCaption = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={oneImage}
-            caption="This is the caption for a single image"
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={oneImage}
+				caption="This is the caption for a single image"
+			/>
+		</ContainerLayout>
+	);
 };
 SingleImageWithCaption.story = {
-    name: 'single image with caption',
+	name: 'single image with caption',
 };
 
 export const SideBySide = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={twoImages}
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={twoImages}
+			/>
+		</ContainerLayout>
+	);
 };
 SideBySide.story = {
-    name: 'side by side',
+	name: 'side by side',
 };
 
 export const SideBySideWithCaption = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={twoImages}
-            caption="This is the caption for side by side"
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={twoImages}
+				caption="This is the caption for side by side"
+			/>
+		</ContainerLayout>
+	);
 };
 SideBySideWithCaption.story = {
-    name: 'side by side with caption',
+	name: 'side by side with caption',
 };
 
 export const OneAboveTwo = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={threeImages}
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={threeImages}
+			/>
+		</ContainerLayout>
+	);
 };
 OneAboveTwo.story = {
-    name: 'one above two',
+	name: 'one above two',
 };
 
 export const OneAboveTwoWithCaption = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={threeImages}
-            caption="This is the caption for one above two"
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={threeImages}
+				caption="This is the caption for one above two"
+			/>
+		</ContainerLayout>
+	);
 };
 OneAboveTwoWithCaption.story = {
-    name: 'one above two with caption',
+	name: 'one above two with caption',
 };
 
 export const GridOfFour = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={fourImages}
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={fourImages}
+			/>
+		</ContainerLayout>
+	);
 };
 GridOfFour.story = {
-    name: 'grid of four',
+	name: 'grid of four',
 };
 
 export const GridOfFourWithCaption = () => {
-    return (
-        <MultiImageBlockComponent
-            designType="Article"
-            pillar="news"
-            images={fourImages}
-            caption="This is the caption for grid of four"
-        />
-    );
+	return (
+		<ContainerLayout>
+			<MultiImageBlockComponent
+				design={Design.Article}
+				pillar={Pillar.News}
+				images={fourImages}
+				caption="This is the caption for grid of four"
+			/>
+		</ContainerLayout>
+	);
 };
 GridOfFourWithCaption.story = {
-    name: 'grid of four with caption',
+	name: 'grid of four with caption',
 };

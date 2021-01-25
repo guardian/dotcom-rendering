@@ -6,31 +6,18 @@ To prevent confusing, hard to maintain code, the switch pattern isused when bran
 Example usage of switch pattern
 
 ```
-const shouldShowAvatar = (designType: DesignType, display: Display) => {
+const shouldShowAvatar = (design: Design, display: Display) => {
     switch (display) {
         case 'immersive':
             return false;
         case 'showcase':
         case 'standard': {
-            switch (designType) {
-                case 'Feature':
-                case 'Review':
-                case 'Recipe':
-                case 'Interview':
+            switch (design) {
+                case Design.Feature:
+                case Design.Review:
+                case Design.Recipe:
+                case Design.Interview:
                     return true;
-                case 'Live':
-                case 'Media':
-                case 'PhotoEssay':
-                case 'Analysis':
-                case 'Article':
-                case 'SpecialReport':
-                case 'MatchReport':
-                case 'GuardianView':
-                case 'GuardianLabs':
-                case 'Quiz':
-                case 'AdvertisementFeature':
-                case 'Comment':
-                case 'Immersive':
                 default:
                     return false;
             }
