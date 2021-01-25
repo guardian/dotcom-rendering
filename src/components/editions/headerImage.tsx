@@ -5,7 +5,7 @@ import { css } from '@emotion/core';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
-import { none, some } from '@guardian/types';
+import { Design, none, some } from '@guardian/types';
 import StarRating from 'components/editions/starRating';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
@@ -15,6 +15,7 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
+import Series from './series';
 import { tabletImageWidth, wideImageWidth } from './styles';
 
 // ----- Component ----- //
@@ -99,6 +100,7 @@ const HeaderImage: FC<Props> = ({ item }) => {
 						supportsDarkMode
 						lightbox={none}
 					/>
+					{item.design === Design.Interview && <Series item={item} />}
 					<HeaderImageCaption
 						caption={nativeCaption}
 						credit={credit}
