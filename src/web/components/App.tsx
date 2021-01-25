@@ -371,64 +371,60 @@ export const App = ({ CAPI, NAV }: Props) => {
 					pageId={CAPI.pageId}
 				/>
 			</Portal>
-			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => {
-				return (
-					<HydrateOnce
-						key={index}
-						root="youtube-block-main-media"
-						index={youtubeBlock.youtubeIndex}
-					>
-						<YoutubeBlockComponent
-							display={display}
-							design={design}
-							pillar={pillar}
-							hideCaption={false}
-							// eslint-disable-next-line jsx-a11y/aria-role
-							role="inline"
-							adTargeting={adTargeting}
-							isMainMedia={false}
-							id={youtubeBlock.id}
-							assetId={youtubeBlock.assetId}
-							channelId={youtubeBlock.channelId}
-							expired={youtubeBlock.expired}
-							overrideImage={youtubeBlock.overrideImage}
-							posterImage={youtubeBlock.posterImage}
-							duration={youtubeBlock.duration}
-							mediaTitle={youtubeBlock.mediaTitle}
-							altText={youtubeBlock.altText}
-						/>
-					</HydrateOnce>
-				);
-			})}
-			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => {
-				return (
-					<HydrateOnce
-						key={index}
-						root="youtube-block"
-						index={youtubeBlock.youtubeIndex}
-					>
-						<YoutubeBlockComponent
-							display={display}
-							design={design}
-							pillar={pillar}
-							hideCaption={false}
-							// eslint-disable-next-line jsx-a11y/aria-role
-							role="inline"
-							adTargeting={adTargeting}
-							isMainMedia={false}
-							id={youtubeBlock.id}
-							assetId={youtubeBlock.assetId}
-							channelId={youtubeBlock.channelId}
-							expired={youtubeBlock.expired}
-							overrideImage={youtubeBlock.overrideImage}
-							posterImage={youtubeBlock.posterImage}
-							duration={youtubeBlock.duration}
-							mediaTitle={youtubeBlock.mediaTitle}
-							altText={youtubeBlock.altText}
-						/>
-					</HydrateOnce>
-				);
-			})}
+			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
+				<HydrateOnce
+					key={index}
+					root="youtube-block-main-media"
+					index={youtubeBlock.youtubeIndex}
+				>
+					<YoutubeBlockComponent
+						display={display}
+						design={design}
+						pillar={pillar}
+						hideCaption={false}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={false}
+						id={youtubeBlock.id}
+						assetId={youtubeBlock.assetId}
+						channelId={youtubeBlock.channelId}
+						expired={youtubeBlock.expired}
+						overrideImage={youtubeBlock.overrideImage}
+						posterImage={youtubeBlock.posterImage}
+						duration={youtubeBlock.duration}
+						mediaTitle={youtubeBlock.mediaTitle}
+						altText={youtubeBlock.altText}
+					/>
+				</HydrateOnce>
+			))}
+			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
+				<HydrateOnce
+					key={index}
+					root="youtube-block"
+					index={youtubeBlock.youtubeIndex}
+				>
+					<YoutubeBlockComponent
+						display={display}
+						design={design}
+						pillar={pillar}
+						hideCaption={false}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={false}
+						id={youtubeBlock.id}
+						assetId={youtubeBlock.assetId}
+						channelId={youtubeBlock.channelId}
+						expired={youtubeBlock.expired}
+						overrideImage={youtubeBlock.overrideImage}
+						posterImage={youtubeBlock.posterImage}
+						duration={youtubeBlock.duration}
+						mediaTitle={youtubeBlock.mediaTitle}
+						altText={youtubeBlock.altText}
+					/>
+				</HydrateOnce>
+			))}
 			{CAPI.quizAtoms.map((quizAtoms, index) => (
 				<HydrateOnce
 					key={index}
@@ -468,22 +464,20 @@ export const App = ({ CAPI, NAV }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
-			{CAPI.richLinks.map((link, index) => {
-				return (
-					<Portal
-						key={index}
-						root="rich-link"
-						richLinkIndex={link.richLinkIndex}
-					>
-						<RichLinkComponent
-							element={link}
-							pillar={pillar}
-							ajaxEndpoint={CAPI.config.ajaxUrl}
-							richLinkIndex={index}
-						/>
-					</Portal>
-				);
-			})}
+			{CAPI.richLinks.map((link, index) => (
+				<Portal
+					key={index}
+					root="rich-link"
+					richLinkIndex={link.richLinkIndex}
+				>
+					<RichLinkComponent
+						element={link}
+						pillar={pillar}
+						ajaxEndpoint={CAPI.config.ajaxUrl}
+						richLinkIndex={index}
+					/>
+				</Portal>
+			))}
 			{CAPI.callouts.map((callout) => (
 				<HydrateOnce root="callout" index={callout.calloutIndex}>
 					<CalloutBlockComponent callout={callout} pillar={pillar} />
