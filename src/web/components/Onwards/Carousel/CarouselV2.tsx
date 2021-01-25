@@ -329,7 +329,9 @@ export const CarouselV2: React.FC<OnwardsType> = ({
 		}
 	});
 
-	const cards = trails.map((trail, i) => <CarouselCard trail={trail} />);
+	const cards = trails.map((trail, i) => (
+		<CarouselCard key={trail.url + i} trail={trail} />
+	));
 
 	return (
 		<div
