@@ -251,8 +251,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a vimeo embed from &apos;embed&apos; element type, the source
-			article is{' '}
+			Example of a vimeo embed from &apos;embed&apos; element type, the
+			source article is{' '}
 			<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
 				here
 			</a>
@@ -265,8 +265,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a vimeo embed from &apos;video&apos; element type, the embed source
-			article is{' '}
+			Example of a vimeo embed from &apos;video&apos; element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
 				here
 			</a>
@@ -285,8 +285,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a scribd embed from a &apos;document&apos; element type, the embed
-			source article is{' '}
+			Example of a scribd embed from a &apos;document&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
 				here
 			</a>
@@ -300,8 +300,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a scribd embed from a &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a scribd embed from a &apos;embed&apos; element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
 				here
 			</a>
@@ -315,8 +315,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a tiktok embed from a &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a tiktok embed from a &apos;embed&apos; element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
 				here
 			</a>
@@ -330,8 +330,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a soundcloud embed from an &apos;audio&apos; element type, the
-			embed source article is{' '}
+			Example of a soundcloud embed from an &apos;audio&apos; element
+			type, the embed source article is{' '}
 			<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
 				here
 			</a>
@@ -342,8 +342,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a soundcloud embed from an &apos;embed&apos; element type, the
-			embed source article is{' '}
+			Example of a soundcloud embed from an &apos;embed&apos; element
+			type, the embed source article is{' '}
 			<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
 				here
 			</a>
@@ -354,8 +354,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a youtube embed from an &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a youtube embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
 				here
 			</a>
@@ -368,8 +368,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a spotify embed from an &apos;audio&apos; element type, the embed
-			source article is{' '}
+			Example of a spotify embed from an &apos;audio&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
 				here
 			</a>
@@ -388,8 +388,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a spotify embed from an &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a spotify embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
 				here
 			</a>
@@ -402,8 +402,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a bandcamp embed from an &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a bandcamp embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
 				here
 			</a>
@@ -416,8 +416,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a The Conversation embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
+			Example of a The Conversation embed from an &apos;embed&apos;
+			element type, the embed source article is{' '}
 			<a href="https://www.theguardian.com/australia-news/2020/mar/03/the-first-economic-modelling-of-coronavirus-scenarios-is-grim-for-the-world">
 				here
 			</a>
@@ -432,8 +432,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 		</Figure>,
 
 		<p>
-			Example of a twitter embed from an &apos;tweet&apos; element type, the embed
-			source article is{' '}
+			Example of a twitter embed from an &apos;tweet&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
 				here
 			</a>
@@ -442,8 +442,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			<TweetBlockComponent element={EmbeddedElements.twitterTweetEmbed} />
 		</Figure>,
 		<p>
-			Example of a twitter embed from an &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a twitter embed from an &apos;embed&apos; element type,
+			the embed source article is{' '}
 			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
 				here
 			</a>
@@ -457,8 +457,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a Our World In Data embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
+			Example of a Our World In Data embed from an &apos;embed&apos;
+			element type, the embed source article is{' '}
 			<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
 				here
 			</a>
@@ -471,8 +471,8 @@ function body(pillar: CAPIPillar, design: Design, display: Display) {
 			/>
 		</Figure>,
 		<p>
-			Example of a BBC embed from an &apos;embed&apos; element type, the embed
-			source article is{' '}
+			Example of a BBC embed from an &apos;embed&apos; element type, the
+			embed source article is{' '}
 			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
 				here
 			</a>
