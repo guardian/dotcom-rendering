@@ -1,23 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { css, cx } from 'emotion';
-import libDebounce from 'lodash/debounce';
-
-import { Design } from '@guardian/types';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
+import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-
+import libDebounce from 'lodash/debounce';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { pillarPalette } from '@root/src/lib/pillars';
 
-import { CardAge } from '../../Card/components/CardAge';
-import { Kicker } from '../../Kicker';
-import { headlineBackgroundColour, headlineColour } from './cardColours';
+import { CarouselCard } from './CarouselCard';
 
 const navIconStyle = css`
 	display: inline-block;
@@ -77,7 +72,7 @@ const carouselStyle = css`
 
 	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 
-	overflow-x: scroll; /* Scrollbar is less intrusive visually on non-desktop devices typically */
+	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
 	${from.tablet} {
 		&::-webkit-scrollbar {
 			display: none;
@@ -89,79 +84,9 @@ const carouselStyle = css`
 	${from.tablet} {
 		margin-left: 10px;
 	}
+	flex-direction: row;
 `;
 
-const cardWrapperStyle = css`
-	position: relative;
-	width: 258px;
-	flex-shrink: 0;
-	margin: 0 ${space[2]}px;
-
-	scroll-snap-align: start;
-
-	:hover {
-		filter: brightness(90%);
-	}
-
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	text-decoration: none;
-
-	color: inherit;
-`;
-
-const cardWrapperFirstStyle = css`
-	${cardWrapperStyle};
-	margin-left: 0;
-`;
-
-const cardImageStyle = css`
-	width: 258px;
-`;
-
-const headlineWrapperStyle = (design: Design, pillar: Theme) => css`
-	width: 90%;
-	min-height: 107px;
-
-	margin-top: -21px;
-	${from.desktop} {
-		margin-top: -23px;
-	}
-
-	flex-grow: 1;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	${headlineBackgroundColour(design, pillar)}
-`;
-
-/* const headlineWrapperFirstStyle = css`
-    ${headlineWrapperStyle};
-    background-color: ${palette.news.dark};
-    color: white;
-`;
- */
-const headlineStyle = (design: Design, pillar: Theme) => css`
-	${headline.xxxsmall()};
-	${from.desktop} {
-		${headline.xxsmall()};
-	}
-
-	${headlineColour(design, pillar)};
-
-	display: block;
-	padding: ${space[1]}px;
-`;
-
-/* const headlineFirstStyle = css`
-    ${headlineStyle};
-    color: ${palette.neutral[100]};
-`;
- */
 const dotsStyle = css`
 	margin-bottom: ${space[2]}px;
 
@@ -225,12 +150,6 @@ const buttonStyle = css`
 	}
 `;
 
-const verticalLine = css`
-	width: 1px;
-	background-color: ${palette.neutral[86]};
-	flex-shrink: 0;
-`;
-
 const navRowStyles = css`
 	display: flex;
 	justify-content: space-between;
@@ -269,63 +188,13 @@ export const Title = ({
 	</h2>
 );
 
-const interleave = <A,>(arr: A[], separator: A): A[] => {
-	const separated = arr.map((elem) => [elem, separator]).flat();
-	if (separated.length > 0) separated.pop(); // remove separator at end
-	return separated;
-};
-
-type CardProps = {
-	trail: TrailType;
-	isFirst?: boolean;
-};
-
-const Card: React.FC<CardProps> = ({ trail, isFirst }: CardProps) => {
-	const kickerText = trail.design === Design.Live ? 'Live' : trail.kickerText;
-
-	return (
-		<a
-			href={trail.url}
-			className={isFirst ? cardWrapperFirstStyle : cardWrapperStyle}
-			data-link-name="article"
-		>
-			<img
-				className={cardImageStyle}
-				src={trail.image}
-				alt=""
-				role="presentation"
-			/>
-			<div className={headlineWrapperStyle(trail.design, trail.pillar)}>
-				<h4 className={headlineStyle(trail.design, trail.pillar)}>
-					{kickerText && (
-						<Kicker
-							text={kickerText}
-							design={trail.design}
-							pillar={trail.pillar}
-							showPulsingDot={trail.isLiveBlog}
-							inCard={true}
-						/>
-					)}
-					{trail.headline}
-				</h4>
-				<CardAge
-					webPublicationDate={trail.webPublicationDate}
-					showClock={true}
-					pillar={trail.pillar}
-					design={trail.design}
-				/>
-			</div>
-		</a>
-	);
-};
-
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
 	ophanComponentName,
 	pillar,
 }: OnwardsType) => {
-	const carouselRef = useRef<HTMLDivElement>(null);
+	const carouselRef = useRef<HTMLUListElement>(null);
 	const [index, setIndex] = useState(0);
 
 	const notPresentation = (el: HTMLElement): boolean =>
@@ -420,7 +289,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	});
 
 	const cards = trails.map((trail, i) => (
-		<Card trail={trail} isFirst={i === 0} />
+		<CarouselCard key={trail.url + i} trail={trail} />
 	));
 
 	return (
@@ -474,12 +343,9 @@ export const Carousel: React.FC<OnwardsType> = ({
 					))}
 				</div>
 
-				<div className={carouselStyle} ref={carouselRef}>
-					{interleave(
-						cards,
-						<div role="presentation" className={verticalLine} />,
-					)}
-				</div>
+				<ul className={carouselStyle} ref={carouselRef}>
+					{cards}
+				</ul>
 			</div>
 		</div>
 	);
