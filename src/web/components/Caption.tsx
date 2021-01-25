@@ -177,18 +177,6 @@ export const Caption = ({
 					{credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
-		case Design.Article:
-		case Design.Media:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Analysis:
-		case Design.Review:
-		case Design.Interview:
 		default:
 			return (
 				<figcaption

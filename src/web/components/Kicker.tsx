@@ -33,17 +33,6 @@ const decideColour = (design: Design, pillar: Theme, inCard?: boolean) => {
 			return inCard && pillar === Pillar.News
 				? pillarPalette[pillar].bright
 				: pillarPalette[pillar].main;
-		case Design.Feature:
-		case Design.PhotoEssay:
-		case Design.Interview:
-		case Design.Analysis:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
 			return pillarPalette[pillar].main;
 	}
