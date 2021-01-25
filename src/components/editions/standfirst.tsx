@@ -60,7 +60,7 @@ const showcaseStyles = css`
 	color: ${neutral[20]}
 `;
 
-const analysisStyles = css`
+const greyTextStyles = css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 	color: ${neutral[46]}
 `;
@@ -77,8 +77,8 @@ const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (format.design === Design.Analysis) {
-		return css(styles(kickerColor), analysisStyles);
+	if (format.design === Design.Analysis || format.design === Design.Comment) {
+		return css(styles(kickerColor), greyTextStyles);
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
