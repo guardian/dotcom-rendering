@@ -171,11 +171,12 @@ async function serveArticlePost(
 	try {
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
+		const isEditions = req.query.editions === '';
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
 		} else {
-			void serveArticle(renderingRequest, res, false);
+			void serveArticle(renderingRequest, res, isEditions);
 		}
 	} catch (e) {
 		logger.error(`This error occurred`, e);
