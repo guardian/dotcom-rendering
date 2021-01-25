@@ -558,10 +558,8 @@ export const ArticleRenderer: React.FC<{
 										authorName={
 											witnessTypeDataVideo.authorName
 										}
-										width={witnessTypeDataVideo.width}
-										height={witnessTypeDataVideo.height}
-										youtubeUrl={
-											witnessTypeDataVideo.youtubeUrl
+										youtubeHtml={
+											witnessTypeDataVideo.youtubeHtml
 										}
 										dateCreated={
 											witnessTypeDataVideo.dateCreated

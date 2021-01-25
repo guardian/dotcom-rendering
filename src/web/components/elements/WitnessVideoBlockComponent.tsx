@@ -11,9 +11,7 @@ type Props = {
 	title: string;
 	description: string;
 	authorName: string;
-	width: number;
-	height: number;
-	youtubeUrl: string;
+	youtubeHtml: string;
 	dateCreated: string;
 	pillar: Theme;
 };
@@ -32,46 +30,39 @@ export const WitnessVideoBlockComponent = ({
 	title,
 	description,
 	authorName,
-	width,
-	height,
-	youtubeUrl,
+	youtubeHtml,
 	dateCreated,
 	pillar,
-}: Props) => {
-	const youtubeVideoId = youtubeUrl.split('?v=')[1];
-	const parsedURL = `https://www.youtube.com/embed/${youtubeVideoId}?wmode=opaque&feature=oembed`;
-	return (
-		<WitnessWrapper
-			authorName={authorName}
-			dateCreated={dateCreated}
-			pillar={pillar}
-		>
-			<>
-				<iframe
-					className={css`
+}: Props) => (
+	<WitnessWrapper
+		authorName={authorName}
+		dateCreated={dateCreated}
+		pillar={pillar}
+	>
+		<>
+			<div
+				className={css`
+					iframe {
 						width: 100%;
-					`}
-					title={title}
-					width={width}
-					height={height}
-					src={parsedURL}
+					}
+				`}
+				dangerouslySetInnerHTML={{ __html: youtubeHtml }}
+			/>
+			<figcaption className={captionStyles}>
+				<h3
+					className={titleStyles(pillar)}
+					itemProp="name"
+					dangerouslySetInnerHTML={{ __html: title }}
 				/>
-				<figcaption className={captionStyles}>
-					<h3
-						className={titleStyles(pillar)}
-						itemProp="name"
-						dangerouslySetInnerHTML={{ __html: title }}
+				<div itemProp="description">
+					<p
+						className={css`
+							${body.medium()}
+						`}
+						dangerouslySetInnerHTML={{ __html: description }}
 					/>
-					<div itemProp="description">
-						<p
-							className={css`
-								${body.medium()}
-							`}
-							dangerouslySetInnerHTML={{ __html: description }}
-						/>
-					</div>
-				</figcaption>
-			</>
-		</WitnessWrapper>
-	);
-};
+				</div>
+			</figcaption>
+		</>
+	</WitnessWrapper>
+);

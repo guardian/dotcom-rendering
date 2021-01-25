@@ -20,7 +20,8 @@ const witnessTypeData: WitnessTypeDataVideo = {
 	originalUrl:
 		'https://witness.theguardian.com/assignment/55db3248e4b0959e5f8de003/1683313',
 	source: 'Guardian Witness',
-	youtubeHtml: '',
+	youtubeHtml:
+		'<iframe width="440" height="330" src="https://www.youtube.com/embed/XRq83txBgxw?wmode=opaque&feature=oembed" frameborder="0" allowfullscreen></iframe>',
 	type: 'video',
 	title: 'Warhammer Quest Timelapse',
 	url:
@@ -53,9 +54,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 			title={witnessTypeData.title}
 			description={witnessTypeData.description}
 			authorName={witnessTypeData.authorName}
-			width={witnessTypeData.width}
-			height={witnessTypeData.height}
-			youtubeUrl={witnessTypeData.youtubeUrl}
+			youtubeHtml={witnessTypeData.youtubeHtml}
 			dateCreated={witnessTypeData.dateCreated}
 			pillar={Pillar.Sport}
 		/>
