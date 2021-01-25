@@ -530,6 +530,7 @@ export const ArticleRenderer: React.FC<{
 							return (
 								<figure itemType="http://schema.org/ImageObject">
 									<WitnessImageBlockComponent
+										assets={element.assets}
 										caption={witnessTypeDataImage.caption}
 										title={witnessTypeDataImage.title}
 										authorName={

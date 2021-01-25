@@ -2347,41 +2347,7 @@
                 "assets": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "Image"
-                                ]
-                            },
-                            "mimeType": {
-                                "type": "string",
-                                "enum": [
-                                    "image/jpeg"
-                                ]
-                            },
-                            "file": {
-                                "type": "string"
-                            },
-                            "typeData": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "name"
-                                ]
-                            }
-                        },
-                        "required": [
-                            "file",
-                            "mimeType",
-                            "type",
-                            "typeData"
-                        ]
+                        "$ref": "#/definitions/WitnessAssetType"
                     }
                 },
                 "isThirdPartyTracking": {
@@ -2406,6 +2372,43 @@
                 "assets",
                 "isThirdPartyTracking",
                 "witnessTypeData"
+            ]
+        },
+        "WitnessAssetType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Image"
+                    ]
+                },
+                "mimeType": {
+                    "type": "string",
+                    "enum": [
+                        "image/jpeg"
+                    ]
+                },
+                "file": {
+                    "type": "string"
+                },
+                "typeData": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "file",
+                "mimeType",
+                "type",
+                "typeData"
             ]
         },
         "WitnessTypeDataImage": {
