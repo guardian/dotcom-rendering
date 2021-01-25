@@ -17,22 +17,11 @@ const standardPadding = css`
 
 const determinePadding = (design: Design) => {
 	switch (design) {
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Analysis:
-			return standardPadding;
-
 		case Design.Review:
 		case Design.Interview:
 			return null;
+		default:
+			return standardPadding;
 	}
 };
 

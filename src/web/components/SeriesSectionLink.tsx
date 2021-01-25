@@ -189,17 +189,6 @@ export const SeriesSectionLink = ({
 						</div>
 					);
 				}
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default: {
 					if (hasSeriesTag) {
 						if (!tag) return null; // Just to keep ts happy
@@ -226,80 +215,63 @@ export const SeriesSectionLink = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (design) {
-				case Design.Comment:
-				case Design.GuardianView:
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
-				default: {
-					if (tag) {
-						// We have a tag, we're not immersive, show both series and section titles
-						return (
-							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div className={cx(!badge && rowBelowLeftCol)}>
-								<a
-									href={`${guardianBaseURL}/${tag.id}`}
-									className={cx(
-										sectionLabelLink,
-										design === Design.MatchReport
-											? blackText
-											: pillarColours[pillar],
-										primaryStyle,
-										isSpecial && yellowBackground,
-									)}
-									data-component="series"
-									data-link-name="article series"
-								>
-									<span>{tag.title}</span>
-								</a>
-
-								<Hide when="below" breakpoint="tablet">
-									<a
-										href={`${guardianBaseURL}/${sectionUrl}`}
-										className={cx(
-											sectionLabelLink,
-											design === Design.MatchReport
-												? blackText
-												: pillarColours[pillar],
-											secondaryStyle,
-										)}
-										data-component="section"
-										data-link-name="article section"
-									>
-										<span>{sectionLabel}</span>
-									</a>
-								</Hide>
-							</div>
-						);
-					}
-					// There's no tag so fallback to section title
-					return (
+			if (tag) {
+				// We have a tag, we're not immersive, show both series and section titles
+				return (
+					// Sometimes the tags/titles are shown inline, sometimes stacked
+					<div className={cx(!badge && rowBelowLeftCol)}>
 						<a
-							href={`${guardianBaseURL}/${sectionUrl}`}
+							href={`${guardianBaseURL}/${tag.id}`}
 							className={cx(
 								sectionLabelLink,
 								design === Design.MatchReport
 									? blackText
 									: pillarColours[pillar],
 								primaryStyle,
+								isSpecial && yellowBackground,
 							)}
-							data-component="section"
-							data-link-name="article section"
+							data-component="series"
+							data-link-name="article series"
 						>
-							<span>{sectionLabel}</span>
+							<span>{tag.title}</span>
 						</a>
-					);
-				}
+
+						<Hide when="below" breakpoint="tablet">
+							<a
+								href={`${guardianBaseURL}/${sectionUrl}`}
+								className={cx(
+									sectionLabelLink,
+									design === Design.MatchReport
+										? blackText
+										: pillarColours[pillar],
+									secondaryStyle,
+								)}
+								data-component="section"
+								data-link-name="article section"
+							>
+								<span>{sectionLabel}</span>
+							</a>
+						</Hide>
+					</div>
+				);
 			}
+			// There's no tag so fallback to section title
+			return (
+				<a
+					href={`${guardianBaseURL}/${sectionUrl}`}
+					className={cx(
+						sectionLabelLink,
+						design === Design.MatchReport
+							? blackText
+							: pillarColours[pillar],
+						primaryStyle,
+					)}
+					data-component="section"
+					data-link-name="article section"
+				>
+					<span>{sectionLabel}</span>
+				</a>
+			);
 		}
 	}
 };

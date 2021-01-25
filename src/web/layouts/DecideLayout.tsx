@@ -36,17 +36,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<ImmersiveLayout
@@ -72,17 +61,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<ShowcaseLayout
@@ -109,17 +87,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							pillar={pillar}
 						/>
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<StandardLayout

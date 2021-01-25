@@ -55,18 +55,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 					`;
-				case Design.Comment:
-				case Design.GuardianView:
-				case Design.Feature:
-				case Design.Recipe:
-				case Design.Review:
-				case Design.Media:
-				case Design.MatchReport:
-				case Design.Quiz:
-				case Design.Article:
-				case Design.Live:
-				case Design.Analysis:
-				case Design.Interview:
 				default:
 					return css`
 						${headline.xsmall({
@@ -98,14 +86,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 						})};
 						margin-bottom: ${space[3]}px;
 					`;
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.MatchReport:
-				case Design.Quiz:
-				case Design.Article:
-				case Design.Live:
-				case Design.Analysis:
-				case Design.Interview:
 				default:
 					return css`
 						${headline.xxxsmall({

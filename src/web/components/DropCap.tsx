@@ -39,17 +39,6 @@ const outerStyles = (pillar: Theme, design: Design) => {
 					? opinion[400]
 					: pillarPalette[pillar].dark};
 			`;
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
@@ -75,17 +64,6 @@ const innerStyles = (design: Design) => {
 				${baseStyles};
 				font-weight: 200;
 			`;
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
