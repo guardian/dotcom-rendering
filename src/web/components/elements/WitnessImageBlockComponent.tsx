@@ -8,6 +8,7 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import { WitnessWrapper } from '@frontend/web/components/WitnessWrapper';
 
 type Props = {
+	assets: WitnessAssetType[];
 	caption: string;
 	title: string;
 	authorName: string;
@@ -27,42 +28,51 @@ const titleStyles = (pillar: Theme) => css`
 `;
 
 export const WitnessImageBlockComponent = ({
+	assets,
 	caption,
 	title,
 	authorName,
 	dateCreated,
 	alt,
 	pillar,
-}: Props) => (
-	<WitnessWrapper
-		authorName={authorName}
-		dateCreated={dateCreated}
-		pillar={pillar}
-	>
-		<>
-			<img
-				className={css`
-					width: 100%;
-				`}
-				src="https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumoriginalaspectdouble.jpg"
-				alt={alt}
-				itemProp="contentURL"
-			/>
-			<figcaption className={captionStyles}>
-				<h3
-					className={titleStyles(pillar)}
-					itemProp="name"
-					dangerouslySetInnerHTML={{ __html: title }}
+}: Props) => {
+	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
+	// asset in the list
+	const bestImgSource =
+		assets.find(
+			(asset) => asset.typeData.name === 'mediumoriginalaspectdouble',
+		) || assets[0];
+	return (
+		<WitnessWrapper
+			authorName={authorName}
+			dateCreated={dateCreated}
+			pillar={pillar}
+		>
+			<>
+				<img
+					className={css`
+						width: 100%;
+					`}
+					src={bestImgSource && bestImgSource.file}
+					alt={alt}
+					itemProp="contentURL"
 				/>
-				<div itemProp="description">
-					<p
-						className={css`
-							${body.medium()}
-						`}
-						dangerouslySetInnerHTML={{ __html: caption }}
+				<figcaption className={captionStyles}>
+					<h3
+						className={titleStyles(pillar)}
+						itemProp="name"
+						dangerouslySetInnerHTML={{ __html: title }}
 					/>
-				</div>
-			</figcaption>
-		</>
-	</WitnessWrapper>
-);
+					<div itemProp="description">
+						<p
+							className={css`
+								${body.medium()}
+							`}
+							dangerouslySetInnerHTML={{ __html: caption }}
+						/>
+					</div>
+				</figcaption>
+			</>
+		</WitnessWrapper>
+	);
+};

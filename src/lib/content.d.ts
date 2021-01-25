@@ -437,16 +437,17 @@ interface WitnessTypeDataText extends WitnessTypeDataBase {
 	authorWitnessProfileUrl: string;
 }
 
+interface WitnessAssetType {
+	type: 'Image';
+	mimeType: 'image/jpeg';
+	file: string;
+	typeData: {
+		name: string;
+	};
+}
 interface WitnessTypeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
-	assets: {
-		type: 'Image';
-		mimeType: 'image/jpeg';
-		file: string;
-		typeData: {
-			name: string;
-		};
-	}[];
+	assets: WitnessAssetType[];
 
 	isThirdPartyTracking: boolean;
 
