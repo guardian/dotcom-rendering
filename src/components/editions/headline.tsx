@@ -39,6 +39,7 @@ const underline = (kickerColor: string): SerializedStyles => css`
 	text-decoration: underline;
 	text-decoration-thickness: from-font;
 	text-decoration-color: ${kickerColor};
+	padding-bottom: 0;
 `;
 
 const fontStyles = (
@@ -92,15 +93,14 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (
 		format.design === Design.Review ||
 		format.display === Display.Showcase ||
-		format.display === Display.Immersive ||
-		format.design === Design.PhotoEssay
+		format.display === Display.Immersive
 	)
 		return css(styles(format), fontStyles('tight', 'bold'));
 
 	if (format.design === Design.Analysis)
 		return css(
 			styles(format),
-			fontStyles('tight', 'light'),
+			fontStyles('regular', 'light'),
 			underline(kickerColor),
 		);
 

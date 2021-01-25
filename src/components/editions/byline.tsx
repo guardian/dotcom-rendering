@@ -7,9 +7,10 @@ import { body, headline } from '@guardian/src-foundations/typography';
 import type {
 	FontStyle,
 	FontWeight,
+	LineHeight,
 } from '@guardian/src-foundations/typography/types';
-import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -18,7 +19,15 @@ import { getThemeStyles } from 'themeStyles';
 import { ShareIcon } from './shareIcon';
 import { articleWidthStyles, sidePadding } from './styles';
 
-// ----- Component ----- //
+// ----- Styles ----- //
+
+const interviewStyles = css`
+	${sidePadding}
+`;
+
+const showcaseStyles = css`
+	padding-bottom: ${remSpace[6]};
+`;
 
 const styles = (kickerColor: string): SerializedStyles => {
 	return css`
@@ -39,8 +48,12 @@ const styles = (kickerColor: string): SerializedStyles => {
 			}
 		}
 
-		padding-bottom: ${remSpace[6]};
+		padding-bottom: ${remSpace[4]};
 		margin: 0;
+
+		${from.tablet} {
+			padding-bottom: ${remSpace[9]};
+		}
 
 		${articleWidthStyles}
 	`;
@@ -49,15 +62,16 @@ const styles = (kickerColor: string): SerializedStyles => {
 const largeTextStyles = (
 	fontStyle: FontStyle,
 	fontWeight: FontWeight,
+	lineHeight?: LineHeight,
 ): SerializedStyles => css`
-	${headline.xsmall({ fontStyle, fontWeight })};
+	${headline.xsmall({ fontStyle, fontWeight, lineHeight })};
 
 	${from.tablet} {
-		${headline.small({ fontStyle, fontWeight })};
+		${headline.small({ fontStyle, fontWeight, lineHeight })};
 	}
 
 	${from.wide} {
-		${headline.medium({ fontStyle, fontWeight })};
+		${headline.medium({ fontStyle, fontWeight, lineHeight })};
 	}
 `;
 
@@ -75,7 +89,7 @@ const bylinePrimaryStyles = (
 	if (large) {
 		return css`
 			color: ${kickerColor};
-			${largeTextStyles('normal', 'bold')}
+			${largeTextStyles('normal', 'bold', 'regular')}
 		`;
 	}
 
@@ -90,6 +104,18 @@ const bylineSecondaryStyles = (large?: boolean): SerializedStyles => css`
 		? largeTextStyles('italic', 'light')
 		: standardTextStyles('italic', 'light')}
 `;
+
+const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+	if (format.design === Design.Interview) {
+		return css(styles(kickerColor), interviewStyles);
+	}
+
+	if (format.display === Display.Showcase) {
+		return css(styles(kickerColor), showcaseStyles);
+	}
+
+	return styles(kickerColor);
+};
 
 // ----- Component ----- //
 
@@ -122,21 +148,12 @@ const renderText = (
 		}
 	});
 
-const interviewStyles = css`
-	${sidePadding}
-`;
-const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
-	if (format.design === Design.Interview) {
-		return css(styles(kickerColor), interviewStyles);
-	}
-	return styles(kickerColor);
-};
 const Byline: FC<Props> = ({ item, shareIcon, large }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getStyles(item, kickerColor)}>
+		<div css={getStyles(format, kickerColor)}>
 			<address>{renderText(byline, kickerColor, large)}</address>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
