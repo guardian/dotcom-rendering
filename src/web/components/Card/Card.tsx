@@ -104,6 +104,7 @@ export const Card = ({
 	showSlash,
 	commentCount,
 	starRating,
+	alwaysVertical,
 }: CardType) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -127,7 +128,10 @@ export const Card = ({
 	return (
 		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>
 			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
-				<CardLayout imagePosition={imagePosition}>
+				<CardLayout
+					imagePosition={imagePosition}
+					alwaysVertical={alwaysVertical}
+				>
 					<>
 						{imageUrl && (
 							<ImageWrapper percentage={imageCoverage}>

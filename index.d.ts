@@ -419,6 +419,7 @@ interface CardType {
     showSlash?: boolean;
     commentCount?: number;
     starRating?: number;
+    alwaysVertical?: boolean;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

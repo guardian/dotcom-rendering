@@ -221,6 +221,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
 				kickerText={kickerText || ''}
 				imageUrl={imageUrl || ''}
 				showClock={true}
+				alwaysVertical={true}
 			/>
 		</LI>
 	);

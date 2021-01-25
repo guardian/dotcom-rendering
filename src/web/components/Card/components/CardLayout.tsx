@@ -1,11 +1,12 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	children: React.ReactNode;
 	imagePosition?: ImagePositionType;
+	alwaysVertical?: boolean;
 };
 
 const decideDirection = (imagePosition?: ImagePositionType) => {
@@ -22,16 +23,40 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 	}
 };
 
-export const CardLayout = ({ children, imagePosition }: Props) => (
+const layoutStyles = css`
+	display: flex;
+	width: 100%;
+`;
+
+const decidePosition = (
+	imagePosition?: ImagePositionType,
+	alwaysVertical?: boolean,
+) => {
+	const direction = decideDirection(imagePosition);
+	if (alwaysVertical) {
+		return css`
+			flex-direction: ${direction};
+		`;
+	}
+	return css`
+		flex-direction: ${direction};
+		/* Force horizontal view for mobile cards */
+		${until.tablet} {
+			flex-direction: row;
+		}
+	`;
+};
+
+export const CardLayout = ({
+	children,
+	imagePosition,
+	alwaysVertical,
+}: Props) => (
 	<div
-		className={css`
-			display: flex;
-			flex-direction: ${decideDirection(imagePosition)};
-			${until.tablet} {
-				flex-direction: row;
-			}
-			width: 100%;
-		`}
+		className={cx(
+			layoutStyles,
+			decidePosition(imagePosition, alwaysVertical),
+		)}
 	>
 		{children}
 	</div>
