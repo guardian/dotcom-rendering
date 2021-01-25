@@ -526,9 +526,10 @@ export const ArticleRenderer: React.FC<{
 					const witnessType = element.witnessTypeData._type;
 					switch (witnessType) {
 						case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 							const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
 							return (
-								<figure itemType="http://schema.org/ImageObject">
+								<Figure>
 									<WitnessImageBlockComponent
 										assets={element.assets}
 										caption={witnessTypeDataImage.caption}
@@ -542,12 +543,13 @@ export const ArticleRenderer: React.FC<{
 										alt={witnessTypeDataImage.alt}
 										pillar={pillar}
 									/>
-								</figure>
+								</Figure>
 							);
 						case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 							const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
 							return (
-								<figure itemType="http://schema.org/VideoObject">
+								<Figure>
 									<WitnessVideoBlockComponent
 										title={witnessTypeDataVideo.title}
 										description={
@@ -566,12 +568,13 @@ export const ArticleRenderer: React.FC<{
 										}
 										pillar={pillar}
 									/>
-								</figure>
+								</Figure>
 							);
 						case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 							const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
 							return (
-								<figure itemType="http://schema.org/WebPageElement">
+								<Figure>
 									<WitnessTextBlockComponent
 										title={witnessTypeDataText.title}
 										description={
@@ -585,7 +588,7 @@ export const ArticleRenderer: React.FC<{
 										}
 										pillar={pillar}
 									/>
-								</figure>
+								</Figure>
 							);
 						default:
 							return null;
