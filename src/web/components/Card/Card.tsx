@@ -105,6 +105,7 @@ export const Card = ({
 	commentCount,
 	starRating,
 	alwaysVertical,
+	minWidthInPixels,
 }: CardType) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -131,6 +132,7 @@ export const Card = ({
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
+					minWidthInPixels={minWidthInPixels}
 				>
 					<>
 						{imageUrl && (

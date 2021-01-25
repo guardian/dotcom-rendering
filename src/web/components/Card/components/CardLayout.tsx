@@ -7,6 +7,7 @@ type Props = {
 	children: React.ReactNode;
 	imagePosition?: ImagePositionType;
 	alwaysVertical?: boolean;
+	minWidthInPixels?: number;
 };
 
 const decideDirection = (imagePosition?: ImagePositionType) => {
@@ -23,10 +24,16 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 	}
 };
 
-const layoutStyles = css`
-	display: flex;
-	width: 100%;
-`;
+const decideWidth = (minWidthInPixels?: number) => {
+	if (minWidthInPixels) {
+		return css`
+			${`min-width: ${minWidthInPixels}px`};
+		`;
+	}
+	return css`
+		width: 100%;
+	`;
+};
 
 const decidePosition = (
 	imagePosition?: ImagePositionType,
@@ -51,10 +58,14 @@ export const CardLayout = ({
 	children,
 	imagePosition,
 	alwaysVertical,
+	minWidthInPixels,
 }: Props) => (
 	<div
 		className={cx(
-			layoutStyles,
+			css`
+				display: flex;
+			`,
+			decideWidth(minWidthInPixels),
 			decidePosition(imagePosition, alwaysVertical),
 		)}
 	>

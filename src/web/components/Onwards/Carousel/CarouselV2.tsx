@@ -222,6 +222,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
 				imageUrl={imageUrl || ''}
 				showClock={true}
 				alwaysVertical={true}
+				minWidthInPixels={258}
 			/>
 		</LI>
 	);
