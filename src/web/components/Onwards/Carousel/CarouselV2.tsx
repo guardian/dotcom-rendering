@@ -331,10 +331,6 @@ export const CarouselV2: React.FC<OnwardsType> = ({
 
 	const cards = trails.map((trail, i) => <CarouselCard trail={trail} />);
 
-	const carouselContainerStyle = css`
-		width: ${258 * trails.length}px;
-	`;
-
 	return (
 		<div
 			className={wrapperStyle}
@@ -386,11 +382,9 @@ export const CarouselV2: React.FC<OnwardsType> = ({
 					))}
 				</div>
 
-				<div className={carouselContainerStyle}>
-					<ul className={carouselStyle} ref={carouselRef}>
-						{cards}
-					</ul>
-				</div>
+				<ul className={carouselStyle} ref={carouselRef}>
+					{cards}
+				</ul>
 			</div>
 		</div>
 	);
