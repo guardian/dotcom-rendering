@@ -26,7 +26,7 @@ interface Props {
 }
 
 function transformTrail(trail: CAPITrailType): TrailType {
-	const design = decideDesignType(trail.designType);
+	const design = decideDesignType(trail.designType, []);
 	return {
 		...trail,
 		// Converts the CAPI string pillar into an enum
