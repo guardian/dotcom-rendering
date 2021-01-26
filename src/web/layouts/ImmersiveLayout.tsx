@@ -8,7 +8,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design, Format } from '@guardian/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -175,6 +176,7 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: Format;
+	palette: Palette;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -191,7 +193,7 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({ CAPI, NAV, format }: Props) => {
+export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -358,6 +360,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props) => {
 								<ArticleHeadline
 									display={format.display}
 									headlineString={CAPI.headline}
+									palette={palette}
 									design={format.design}
 									pillar={format.theme}
 									tags={CAPI.tags}
@@ -424,6 +427,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props) => {
 									<ArticleHeadline
 										display={format.display}
 										headlineString={CAPI.headline}
+										palette={palette}
 										design={format.design}
 										pillar={format.theme}
 										tags={CAPI.tags}

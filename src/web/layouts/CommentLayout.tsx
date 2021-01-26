@@ -250,9 +250,10 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: Format;
+	palette: Palette;
 }
 
-export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
+export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -396,6 +397,7 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
 									<ArticleHeadline
 										display={format.display}
 										headlineString={CAPI.headline}
+										palette={palette}
 										design={format.design}
 										pillar={format.theme}
 										tags={CAPI.tags}

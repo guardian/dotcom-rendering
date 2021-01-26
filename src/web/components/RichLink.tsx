@@ -8,7 +8,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
-import { Design, Display, Format, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
