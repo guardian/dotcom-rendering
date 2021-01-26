@@ -125,11 +125,16 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 								Allow content provided by a third party?
 							</Headline>
 							<Body width={width}>
-								This article includes content hosted on
-								other.com. We ask for your permission before
-								anything is loaded, as the provider may be using
-								cookies and other technologies. To view this
-								content, click &apos;Allow&apos;.
+								<p>
+									This article includes content hosted on
+									other.com. We ask for your permission before
+									anything is loaded, as the provider may be
+									using cookies and other technologies.
+								</p>
+								<p>
+									To view this content, click
+									&apos;Allow&apos;.
+								</p>
 								<Link href="https://theguardian.com">
 									{' '}
 									Learn more
