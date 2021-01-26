@@ -19,8 +19,6 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	isShowcase?: boolean; // Used for Interviews to change headline position
-	noMainMedia?: boolean; // Used for Immersives where the headline styles
-	// change when there is no main media
 };
 
 const curly = (x: any) => x;
@@ -202,11 +200,25 @@ export const ArticleHeadline = ({
 	pillar,
 	tags,
 	byline,
-	noMainMedia,
 }: Props) => {
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
+				case Design.PrintShop:
+					return (
+						// Immersive headlines have two versions, with main media, and (this one) without
+						<h1
+							className={cx(
+								jumboFont,
+								maxWidth,
+								immersiveStyles,
+								displayBlock,
+								reducedBottomPadding,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
@@ -225,34 +237,7 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
-				case Design.Review:
-				case Design.Recipe:
-				case Design.Feature:
-				case Design.Analysis:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Article:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
-					if (noMainMedia) {
-						return (
-							// Immersive headlines have two versions, with main media, and (this one) without
-							<h1
-								className={cx(
-									jumboFont,
-									maxWidth,
-									immersiveStyles,
-									displayBlock,
-									reducedBottomPadding,
-								)}
-							>
-								{curly(headlineString)}
-							</h1>
-						);
-					}
 					return (
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
@@ -349,12 +334,6 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Article:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<h1 className={standardFont}>

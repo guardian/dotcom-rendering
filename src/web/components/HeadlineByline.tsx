@@ -107,17 +107,6 @@ export const HeadlineByline = ({
 							<BylineLink byline={byline} tags={tags} />
 						</div>
 					);
-				case Design.Interview:
-				case Design.Analysis:
-				case Design.Feature:
-				case Design.Article:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Review:
-				case Design.Live:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					if (byline) {
 						return (
@@ -159,17 +148,6 @@ export const HeadlineByline = ({
 							<BylineLink byline={byline} tags={tags} />
 						</div>
 					);
-
-				case Design.Analysis:
-				case Design.Feature:
-				case Design.Article:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Review:
-				case Design.Live:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return null;
 			}

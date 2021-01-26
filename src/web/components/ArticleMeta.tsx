@@ -121,18 +121,6 @@ const metaContainer = (format: Format) => {
 							margin-left: 40px;
 						}
 					`;
-				case Design.Feature:
-				case Design.Review:
-				case Design.Recipe:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.MatchReport:
-				case Design.GuardianView:
-				case Design.Quiz:
-				case Design.Comment:
 				default:
 					return css`
 						${until.phablet} {
@@ -171,15 +159,6 @@ const shouldShowAvatar = (format: Format) => {
 				case Design.Recipe:
 				case Design.Interview:
 					return true;
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.MatchReport:
-				case Design.GuardianView:
-				case Design.Quiz:
-				case Design.Comment:
 				default:
 					return false;
 			}
@@ -197,17 +176,6 @@ const shouldShowContributor = (format: Format) => {
 				case Design.Comment:
 				case Design.GuardianView:
 					return false;
-				case Design.Feature:
-				case Design.Review:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Interview:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return true;
 			}

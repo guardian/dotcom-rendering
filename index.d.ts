@@ -592,6 +592,7 @@ interface ConfigType extends CommercialConfigType {
     idUrl?: string;
     mmaUrl?: string;
     brazeApiKey?: string;
+    ipsosTag?: string;
 }
 
 interface ConfigTypeBrowser {
@@ -703,7 +704,33 @@ type IslandType =
     | 'youtube-block-main-media'
     | 'chart-atom';
 
+// All Components that are loaded with loadable
+// should be added here, this is the chunk name as
+// defined in manifest.json
+type BlockElementType = string;
+interface ComponentNameChunkMap {
+    chunkName: string;
+    addWhen: BlockElementType | 'always';
+}
+interface EditionDropdownLoadable extends ComponentNameChunkMap{
+    chunkName: 'EditionDropdown';
+    addWhen: 'always';
+}
+interface YoutubeBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-YoutubeBlockComponent';
+    addWhen: YoutubeBlockElement['_type'];
+}
+
+interface RichLinkBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-RichLinkComponent';
+    addWhen: RichLinkBlockElement['_type'];
+}
+
+// There are docs on loadable in ./docs/loadable-components.md
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+
 interface BaseTrailType {
+
     url: string;
     headline: string;
     isLiveBlog: boolean;

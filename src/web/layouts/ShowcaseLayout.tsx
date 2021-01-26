@@ -189,18 +189,6 @@ const PositionHeadline = ({
 					<div className={maxWidth}>{children}</div>
 				</div>
 			);
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Analysis:
 		default:
 			return <div className={maxWidth}>{children}</div>;
 	}

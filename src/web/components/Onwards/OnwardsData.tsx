@@ -33,7 +33,7 @@ export const OnwardsData = ({
 		trailLimit: number,
 	): TrailType[] => {
 		return trails.slice(0, trailLimit).map((trail) => {
-			const design = decideDesignType(trail.designType);
+			const design = decideDesignType(trail.designType, []);
 			return {
 				...trail,
 				pillar: decidePillar({ pillar: trail.pillar, design }),

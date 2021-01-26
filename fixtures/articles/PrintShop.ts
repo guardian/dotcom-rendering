@@ -1,6 +1,7 @@
-import { switches } from './switches';
+import { switches } from '../switches';
 
 export const PrintShop: CAPIType = {
+	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
 	isAdFreeUser: false,
@@ -319,13 +320,6 @@ export const PrintShop: CAPIType = {
 					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
-				{
-					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
 			],
 			[
 				{
@@ -353,6 +347,12 @@ export const PrintShop: CAPIType = {
 						'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
+				},
+				{
+					text: 'Discount Codes',
+					url: 'https://discountcode.theguardian.com/',
+					dataLinkName: 'uk: footer : discount code',
+					extraClasses: 'js-discount-code-link',
 				},
 			],
 		],
@@ -390,17 +390,16 @@ export const PrintShop: CAPIType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	publication: 'theguardian.com',
 	trailText:
 		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
+	publication: 'The Guardian',
 	subMetaKeywordLinks: [
 		{
-			url: '/artanddesign/photography',
-			title: 'Photography',
+			url: '/artanddesign/series/guardian-print-shop',
+			title: 'Guardian Print Shop',
 		},
 	],
 	contentType: 'Article',
-	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	nav: {
 		currentUrl: '/artanddesign',
 		pillars: [
@@ -587,6 +586,14 @@ export const PrintShop: CAPIType = {
 								classList: [],
 							},
 							{
+								title: 'Cities',
+								url: '/cities',
+								longTitle: '',
+								iconName: '',
+								children: [],
+								classList: [],
+							},
+							{
 								title: 'Global development',
 								url: '/global-development',
 								longTitle: '',
@@ -693,23 +700,7 @@ export const PrintShop: CAPIType = {
 								children: [],
 								classList: [],
 							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
 						],
-						classList: [],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-						iconName: '',
-						children: [],
 						classList: [],
 					},
 					{
@@ -886,6 +877,14 @@ export const PrintShop: CAPIType = {
 					{
 						title: 'Global development',
 						url: '/global-development',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
+					{
+						title: 'Cities',
+						url: '/cities',
 						longTitle: '',
 						iconName: '',
 						children: [],
@@ -1471,14 +1470,6 @@ export const PrintShop: CAPIType = {
 						children: [],
 						classList: [],
 					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
 				],
 				classList: [],
 			},
@@ -1608,15 +1599,6 @@ export const PrintShop: CAPIType = {
 				classList: [],
 			},
 			{
-				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
 				title: 'Holidays',
 				url:
 					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
@@ -1667,12 +1649,12 @@ export const PrintShop: CAPIType = {
 				classList: [],
 			},
 			{
-				title: 'Guardian Puzzles app',
-				url: 'https://puzzles.theguardian.com/download',
+				title: 'Discount Codes',
+				url: 'https://discountcode.theguardian.com',
 				longTitle: '',
 				iconName: '',
 				children: [],
-				classList: [],
+				classList: ['js-discount-code-link'],
 			},
 		],
 		currentNavLink: {
@@ -1900,53 +1882,53 @@ export const PrintShop: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support"%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_contribute"%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_subscribe"%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support_gifting"%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_contribute"%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_subscribe"%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support"%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"side_menu_support_gifting"%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_contribute"%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_subscribe"%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"amp_header_support"%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_HEADER","componentId":"header_support_gifting"%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_contribute"%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_subscribe"%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_gifting"%7D',
 			},
 		},
 	},
@@ -2441,7 +2423,7 @@ export const PrintShop: CAPIType = {
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Guardian sport',
+					name: 'Guardian Sport',
 					sameAs:
 						'https://www.theguardian.com/profile/guardian-sport',
 				},
@@ -2465,11 +2447,12 @@ export const PrintShop: CAPIType = {
 			},
 		},
 	],
-	editionId: 'UK',
 	webPublicationDateDisplay: 'Thu 17 Dec 2020 09.07 GMT',
+	editionId: 'UK',
 	shouldHideAds: false,
 	standfirst:
 		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
+	webTitle: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
@@ -2495,7 +2478,6 @@ export const PrintShop: CAPIType = {
 		'og:site_name': 'the Guardian',
 		'article:modified_time': '2020-12-17T14:04:58.000Z',
 	},
-	webTitle: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	sectionUrl: 'football/england',
 	pageId:
 		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
@@ -2558,7 +2540,7 @@ export const PrintShop: CAPIType = {
 		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	keyEvents: [],
 	showBottomSocialButtons: true,
-	isImmersive: true,
+	isImmersive: false,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -2592,7 +2574,7 @@ export const PrintShop: CAPIType = {
 		showRelatedContent: false,
 		pageId: '',
 		webPublicationDate: 1579185778186,
-		headline: '',
+		headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 		author: '',
 		keywords: '',
 		series: '',

@@ -212,16 +212,6 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case Design.Feature:
-		case Design.Recipe:
-		case Design.Review:
-		case Design.Media:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Article:
-		case Design.Live:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return (
 				<aside

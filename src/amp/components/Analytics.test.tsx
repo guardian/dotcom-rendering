@@ -20,6 +20,7 @@ describe('AnalyticsComponent', () => {
 				'properties.content.title': 'article title',
 			},
 		},
+		ipsosSectionName: 'section',
 	};
 
 	beforeEach(() => {

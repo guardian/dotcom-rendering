@@ -72,18 +72,6 @@ const colourStyles = (design: Design, pillar: Theme) => {
 					fill: ${decidePillarLight(pillar)};
 				}
 			`;
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
 			return css`
 				color: ${neutral[60]};

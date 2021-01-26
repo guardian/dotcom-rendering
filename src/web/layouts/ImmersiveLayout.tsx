@@ -412,7 +412,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props) => {
 										guardianBaseURL={CAPI.guardianBaseURL}
 										pillar={format.theme}
 										badge={CAPI.badge}
-										noMainMedia={true}
 									/>
 								</div>
 							)}
@@ -429,7 +428,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props) => {
 										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
-										noMainMedia={true}
 									/>
 								</div>
 							)}

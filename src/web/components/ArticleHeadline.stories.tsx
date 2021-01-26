@@ -391,18 +391,17 @@ export const ImmersiveNoMainMedia = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when display type is Immersive, but with no main media"
+					headlineString="This is the headline you see when design type is PrintShop, which has no main media"
 					display={Display.Immersive}
-					design={Design.Article}
+					design={Design.PrintShop}
 					pillar={Pillar.News}
 					tags={[]}
-					noMainMedia={true}
 				/>
 			</ArticleContainer>
 		</Flex>
 	</Section>
 );
-ImmersiveNoMainMedia.story = { name: 'Immersive (with no main media)' };
+ImmersiveNoMainMedia.story = { name: 'Printshop (with no main media)' };
 
 export const ImmersiveComment = () => (
 	<Section

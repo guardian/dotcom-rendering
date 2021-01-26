@@ -8,6 +8,8 @@ export const htmlTemplate = ({
 	title = 'The Guardian',
 	description,
 	linkedData,
+	loadableScripts,
+	loadableConfigScripts,
 	priorityScriptTags,
 	lowPriorityScriptTags,
 	css,
@@ -23,6 +25,8 @@ export const htmlTemplate = ({
 	title?: string;
 	description: string;
 	linkedData: object;
+	loadableScripts: string[];
+	loadableConfigScripts: string[];
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
@@ -217,7 +221,9 @@ export const htmlTemplate = ({
 						keywords,
 					).replace(/%20/g, '+')}" />
                 </noscript>
-                ${[...priorityScriptTags].join('\n')}
+                ${priorityScriptTags.join('\n')}
+                ${loadableConfigScripts.join('\n')}
+                ${loadableScripts.join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">

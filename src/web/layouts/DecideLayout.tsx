@@ -18,7 +18,7 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType);
+	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
 	const pillar: Pillar = decidePillar({
 		pillar: CAPI.pillar,
 		design,
@@ -42,17 +42,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 							format={format}
 						/>
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<ImmersiveLayout
@@ -70,17 +59,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 					return (
 						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<ShowcaseLayout CAPI={CAPI} NAV={NAV} format={format} />
@@ -95,17 +73,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 					return (
 						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default:
 					return (
 						<StandardLayout CAPI={CAPI} NAV={NAV} format={format} />

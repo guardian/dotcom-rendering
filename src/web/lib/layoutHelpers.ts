@@ -13,17 +13,6 @@ export const decideLineEffect = (
 		case Design.Feature:
 		case Design.Recipe:
 			return 'squiggly';
-		case Design.Comment:
-		case Design.GuardianView:
-		case Design.Review:
-		case Design.Interview:
-		case Design.Live:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Article:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return 'straight';
 	}
