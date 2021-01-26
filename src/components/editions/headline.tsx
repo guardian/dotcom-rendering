@@ -79,6 +79,7 @@ const interviewFontStyles = css`
 	background-color: ${neutral[0]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
+	padding-top: ${remSpace[1]};
 	padding-bottom: ${remSpace[1]};
 	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]},
 		${remSpace[3]} 0 0 ${neutral[0]};
