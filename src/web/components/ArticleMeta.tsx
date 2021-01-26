@@ -8,14 +8,12 @@ import { Counts } from '@root/src/web/components/Counts';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Format } from '@guardian/types';
 import { SharingIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
-	display: Display;
-	design: Design;
-	pillar: Theme;
+	format: Format;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -100,18 +98,12 @@ const metaNumbers = css`
 	}
 `;
 
-const metaContainer = ({
-	display,
-	design,
-}: {
-	display: Display;
-	design: Design;
-}) => {
-	switch (display) {
+const metaContainer = (format: Format) => {
+	switch (format.display) {
 		case Display.Immersive:
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (design) {
+			switch (format.design) {
 				case Design.PhotoEssay:
 					return css`
 						${until.phablet} {
@@ -167,13 +159,13 @@ const getAuthorName = (tags: TagType[]) => {
 	return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (design: Design, display: Display) => {
-	switch (display) {
+const shouldShowAvatar = (format: Format) => {
+	switch (format.display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Feature:
 				case Design.Review:
 				case Design.Recipe:
@@ -195,13 +187,13 @@ const shouldShowAvatar = (design: Design, display: Display) => {
 	}
 };
 
-const shouldShowContributor = (design: Design, display: Display) => {
-	switch (display) {
+const shouldShowContributor = (format: Format) => {
+	switch (format.display) {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
 		case Display.Standard: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Comment:
 				case Design.GuardianView:
 					return false;
@@ -264,9 +256,7 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 
 export const ArticleMeta = ({
 	branding,
-	display,
-	design,
-	pillar,
+	format,
 	pageId,
 	webTitle,
 	author,
@@ -281,11 +271,13 @@ export const ArticleMeta = ({
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar = onlyOneContributor && shouldShowAvatar(design, display);
+	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
 	return (
-		<div className={metaContainer({ display, design })}>
+		<div className={metaContainer(format)}>
 			<div className={cx(meta)}>
-				{branding && <Branding branding={branding} pillar={pillar} />}
+				{branding && (
+					<Branding branding={branding} pillar={format.theme} />
+				)}
 				<RowBelowLeftCol>
 					<>
 						{showAvatar && bylineImageUrl && (
@@ -293,17 +285,17 @@ export const ArticleMeta = ({
 								<Avatar
 									imageSrc={bylineImageUrl}
 									imageAlt={authorName || 'Author image'}
-									pillar={pillar}
+									format={format}
 								/>
 							</AvatarContainer>
 						)}
 						<div>
-							{shouldShowContributor(design, display) && (
+							{shouldShowContributor(format) && (
 								<Contributor
-									design={design}
+									design={format.design}
 									author={author}
 									tags={tags}
-									pillar={pillar}
+									pillar={format.theme}
 								/>
 							)}
 							<Dateline
@@ -317,7 +309,7 @@ export const ArticleMeta = ({
 					<div className={metaExtras}>
 						<SharingIcons
 							sharingUrls={sharingUrls}
-							pillar={pillar}
+							pillar={format.theme}
 							displayIcons={['facebook', 'twitter', 'email']}
 						/>
 					</div>

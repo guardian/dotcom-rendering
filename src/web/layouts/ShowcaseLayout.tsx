@@ -10,6 +10,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { Design, Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -46,7 +47,6 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display, Design } from '@guardian/types';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -224,18 +224,10 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	display: Display;
-	design: Design;
-	pillar: Theme;
+	format: Format;
 }
 
-export const ShowcaseLayout = ({
-	CAPI,
-	NAV,
-	display,
-	design,
-	pillar,
-}: Props) => {
+export const ShowcaseLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -273,7 +265,7 @@ export const ShowcaseLayout = ({
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
-							display={display}
+							display={format.display}
 						/>
 					</Section>
 				</Stuck>
@@ -301,7 +293,7 @@ export const ShowcaseLayout = ({
 						<Nav
 							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={display}
+							display={format.display}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -318,7 +310,7 @@ export const ShowcaseLayout = ({
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								pillar={pillar}
+								format={format}
 							/>
 						</Section>
 					)}
@@ -328,7 +320,7 @@ export const ShowcaseLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={pillar} />
+						<GuardianLines count={4} pillar={format.theme} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -337,13 +329,13 @@ export const ShowcaseLayout = ({
 				<ShowcaseGrid>
 					<GridItem area="title">
 						<ArticleTitle
-							display={display}
-							design={design}
+							display={format.display}
+							design={format.design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={pillar}
+							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>
@@ -351,7 +343,7 @@ export const ShowcaseLayout = ({
 						<Border />
 					</GridItem>
 					<GridItem area="headline">
-						<PositionHeadline design={design}>
+						<PositionHeadline design={format.design}>
 							<div
 								className={css`
 									padding-bottom: 24px;
@@ -363,10 +355,10 @@ export const ShowcaseLayout = ({
 									</div>
 								)}
 								<ArticleHeadline
-									display={display}
+									display={format.display}
 									headlineString={CAPI.headline}
-									design={design}
-									pillar={pillar}
+									design={format.design}
+									pillar={format.theme}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>
@@ -382,13 +374,14 @@ export const ShowcaseLayout = ({
 					<GridItem area="media">
 						<div className={mainMediaWrapper}>
 							<MainMedia
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								elements={CAPI.mainMediaElements}
-								pillar={pillar}
+								pillar={format.theme}
 								adTargeting={adTargeting}
 								starRating={
-									design === Design.Review && CAPI.starRating
+									format.design === Design.Review &&
+									CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}
@@ -398,9 +391,9 @@ export const ShowcaseLayout = ({
 					</GridItem>
 					<GridItem area="standfirst">
 						<ArticleStandfirst
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
@@ -408,9 +401,12 @@ export const ShowcaseLayout = ({
 						<div className={maxWidth}>
 							<div className={stretchLines}>
 								<GuardianLines
-									count={decideLineCount(design)}
-									pillar={pillar}
-									effect={decideLineEffect(design, pillar)}
+									count={decideLineCount(format.design)}
+									pillar={format.theme}
+									effect={decideLineEffect(
+										format.design,
+										format.theme,
+									)}
 								/>
 							</div>
 						</div>
@@ -419,9 +415,7 @@ export const ShowcaseLayout = ({
 						<div className={maxWidth}>
 							<ArticleMeta
 								branding={branding}
-								display={display}
-								design={design}
-								pillar={pillar}
+								format={format}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
@@ -437,17 +431,18 @@ export const ShowcaseLayout = ({
 						<ArticleContainer>
 							<main className={maxWidth}>
 								<ArticleBody
-									pillar={pillar}
+									format={format}
 									blocks={CAPI.blocks}
-									display={display}
-									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} pillar={pillar} />
+								<GuardianLines
+									count={4}
+									pillar={format.theme}
+								/>
 								<SubMeta
-									pillar={pillar}
+									pillar={format.theme}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
@@ -483,7 +478,10 @@ export const ShowcaseLayout = ({
 							`}
 						>
 							<RightColumn>
-								<AdSlot position="right" display={display} />
+								<AdSlot
+									position="right"
+									display={format.display}
+								/>
 								{!isPaidContent ? (
 									<MostViewedRightIsland />
 								) : (
@@ -501,7 +499,10 @@ export const ShowcaseLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising-high" display={display} />
+				<AdSlot
+					position="merchandising-high"
+					display={format.display}
+				/>
 			</Section>
 
 			{!isPaidContent && (
@@ -518,7 +519,7 @@ export const ShowcaseLayout = ({
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
-								pillar={pillar}
+								pillar={format.theme}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
@@ -527,7 +528,7 @@ export const ShowcaseLayout = ({
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
 								beingHydrated={false}
-								display={display}
+								display={format.display}
 							/>
 						</Section>
 					)}
@@ -548,7 +549,7 @@ export const ShowcaseLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising" display={display} />
+				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
 			{NAV.subNavSections && (
@@ -556,9 +557,9 @@ export const ShowcaseLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						pillar={pillar}
+						format={format}
 					/>
-					<GuardianLines count={4} pillar={pillar} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 
@@ -570,7 +571,7 @@ export const ShowcaseLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={pillar}
+					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
 			</Section>

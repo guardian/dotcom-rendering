@@ -46,11 +46,11 @@ import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { Display, Design, Format } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { Display, Design } from '@guardian/types';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import {
@@ -292,6 +292,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 		design,
 	});
 
+	const format: Format = {
+		display,
+		design,
+		theme: pillar,
+	};
+
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
 	return (
@@ -342,7 +348,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={youtubeBlock.youtubeIndex}
 				>
 					<YoutubeBlockComponent
-						display={display}
+						display={format.display}
 						design={design}
 						pillar={pillar}
 						hideCaption={false}
@@ -418,7 +424,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							pillar={pillar}
+							format={format}
 						/>
 					</>
 				</HydrateOnce>
