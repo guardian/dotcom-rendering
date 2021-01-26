@@ -5,13 +5,12 @@ import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { Display, Design } from '@guardian/types';
+
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
-import { toTypesPillar } from '@root/src/lib/format';
-
 import { Caption } from '@root/src/web/components/Caption';
-import { Display, Design } from '@guardian/types';
 
 type Props = {
 	id: string;
@@ -22,7 +21,7 @@ type Props = {
 	assetId: string;
 	channelId: string;
 	expired: boolean;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -195,7 +194,7 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={toTypesPillar(pillar)}
+				pillar={pillar}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (

@@ -3,10 +3,7 @@ import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { Design } from '@guardian/types';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-export const headlineBackgroundColour = (
-	design: Design,
-	pillar: CAPIPillar,
-) => {
+export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.GuardianView:
 		case Design.Comment:
@@ -21,15 +18,6 @@ export const headlineBackgroundColour = (
 			return css`
 				background-color: ${pillarPalette[pillar].dark};
 			`;
-		case Design.Article:
-		case Design.Review:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return css`
 				background-color: ${neutral[97]};
@@ -41,7 +29,7 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-export const headlineColour = (design: Design, pillar: CAPIPillar) => {
+export const headlineColour = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.Feature:
 		case Design.Interview:
@@ -49,15 +37,7 @@ export const headlineColour = (design: Design, pillar: CAPIPillar) => {
 		case Design.Media:
 		case Design.Live:
 			return colourStyles(neutral[97]);
-		case Design.Analysis:
-		case Design.PhotoEssay:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
+			return undefined;
 	}
 };

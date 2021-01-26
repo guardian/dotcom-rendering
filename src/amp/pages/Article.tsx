@@ -24,7 +24,7 @@ const backgroundColour = css`
 
 const Body: React.SFC<{
 	data: ArticleModel;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 	config: ConfigType;
 }> = ({ data, design, config, pillar }) => {
@@ -53,7 +53,7 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const design = decideDesignType(articleData.designType);
+	const design = decideDesignType(articleData.designType, articleData.tags);
 	const pillar = decidePillar({
 		pillar: articleData.pillar,
 		design,

@@ -27,7 +27,7 @@ import { clean } from '@root/src/model/clean';
 
 export const Elements = (
 	elements: CAPIElement[],
-	pillar: CAPIPillar,
+	pillar: Pillar,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ) => {

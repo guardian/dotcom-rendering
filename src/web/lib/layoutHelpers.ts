@@ -1,10 +1,11 @@
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
+import { decidePillar } from './decidePillar';
 
 export const decideLineEffect = (
 	design: Design,
-	pillar: CAPIPillar,
+	pillar: Theme,
 ): LineEffectType => {
-	if (pillar === 'sport') {
+	if (pillar === Pillar.Sport) {
 		return 'dotted';
 	}
 
@@ -12,17 +13,6 @@ export const decideLineEffect = (
 		case Design.Feature:
 		case Design.Recipe:
 			return 'squiggly';
-		case Design.Comment:
-		case Design.GuardianView:
-		case Design.Review:
-		case Design.Interview:
-		case Design.Live:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Article:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return 'straight';
 	}
@@ -35,10 +25,10 @@ export const decideLineCount = (design?: Design): 8 | 4 => {
 	return 4;
 };
 
-export const getCurrentPillar = (CAPI: CAPIType): CAPIPillar => {
-	return (
+export const getCurrentPillar = (CAPI: CAPIType): Theme => {
+	const currentPillar =
 		(CAPI.nav.currentPillar &&
 			CAPI.nav.currentPillar.title.toLowerCase()) ||
-		CAPI.pillar
-	);
+		CAPI.pillar;
+	return decidePillar({ pillar: currentPillar });
 };

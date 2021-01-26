@@ -4,7 +4,7 @@ import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoVimeoBlockComponent: React.FC<{
 	element: VideoVimeoBlockElement;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ element, pillar }) => {
 	const vimeoId = getIdFromUrl(element.url, '(\\d+)($|\\/)', true);
 

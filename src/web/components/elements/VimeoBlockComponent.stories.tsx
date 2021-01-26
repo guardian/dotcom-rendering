@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -26,7 +26,7 @@ export const smallAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
-				pillar="news"
+				pillar={Pillar.News}
 				height={250}
 				width={250}
 				caption="blah"
@@ -47,7 +47,7 @@ export const largeAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
-				pillar="news"
+				pillar={Pillar.News}
 				height={259}
 				width={460}
 				caption="blah"
@@ -68,7 +68,7 @@ export const verticalAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/265111898?app_id=122963"
-				pillar="news"
+				pillar={Pillar.News}
 				height={818}
 				width={460}
 				caption="blah"

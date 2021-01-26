@@ -6,13 +6,11 @@ import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Design } from '@guardian/types';
+import { Display, Pillar, Format } from '@guardian/types';
 
 type Props = {
-	pillar: CAPIPillar;
-	display: Display;
+	format: Format;
 	blocks: Block[];
-	design: Design;
 	adTargeting: AdTargeting;
 	host?: string;
 };
@@ -20,7 +18,7 @@ type Props = {
 const pillarColours = pillarMap(
 	(pillar) =>
 		css`
-			color: ${pillar === 'opinion' || pillar === 'culture'
+			color: ${pillar === Pillar.Opinion || pillar === Pillar.Culture
 				? pillarPalette[pillar].dark
 				: pillarPalette[pillar].main};
 		`,
@@ -61,21 +59,16 @@ const linkColour = pillarMap(
 	`,
 );
 
-export const ArticleBody = ({
-	pillar,
-	display,
-	blocks,
-	design,
-	adTargeting,
-	host,
-}: Props) => {
+export const ArticleBody = ({ format, blocks, adTargeting, host }: Props) => {
 	return (
-		<div className={cx(bodyStyle(display), linkColour[pillar])}>
+		<div
+			className={cx(bodyStyle(format.display), linkColour[format.theme])}
+		>
 			<ArticleRenderer
-				display={display}
+				display={format.display}
 				elements={blocks[0] ? blocks[0].elements : []}
-				pillar={pillar}
-				design={design}
+				pillar={format.theme}
+				design={format.design}
 				adTargeting={adTargeting}
 				host={host}
 			/>

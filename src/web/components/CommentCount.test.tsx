@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
+import { Pillar } from '@guardian/types';
+
 import { CommentCount } from './CommentCount';
 
 describe('CommentCount', () => {
@@ -9,7 +11,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={false}
 				commentCount={123}
-				pillar="news"
+				pillar={Pillar.News}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -22,7 +24,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={123}
-				pillar="news"
+				pillar={Pillar.News}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -36,7 +38,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={92878}
-				pillar="news"
+				pillar={Pillar.News}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -50,7 +52,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={0}
-				pillar="news"
+				pillar={Pillar.News}
 				setIsExpanded={() => {}}
 			/>,
 		);

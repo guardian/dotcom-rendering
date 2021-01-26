@@ -23,7 +23,7 @@ const shareIconsListItem = css`
 	min-width: 32px;
 `;
 
-const shareIcon = (pillar: CAPIPillar) => css`
+const shareIcon = (pillar: Theme) => css`
 	border: 1px solid ${neutralBorder(pillar)};
 	white-space: nowrap;
 	overflow: hidden;
@@ -72,7 +72,7 @@ export const ShareIcons: React.FC<{
 		};
 	};
 	displayIcons: SharePlatform[];
-	pillar: CAPIPillar;
+	pillar: Theme;
 	className?: string;
 }> = ({ sharingUrls, displayIcons, pillar, className }) => {
 	const icons: { [K in SharePlatform]?: React.ComponentType } = {

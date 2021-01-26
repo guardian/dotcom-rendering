@@ -33,6 +33,7 @@ const Container = ({
 		className={css`
 			width: ${width}px;
 			height: ${height}px;
+			background: ${background.secondary};
 		`}
 	>
 		{children}
@@ -42,7 +43,7 @@ const Container = ({
 const Outer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
-			background: ${background.primary};
+			background: ${background.secondary};
 			border: 1px solid ${border.primary};
 			height: 100%;
 		`}

@@ -1,13 +1,10 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-
-import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -37,7 +34,6 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { toTypesPillar } from '@root/src/lib/format';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -47,11 +43,11 @@ import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { Display, Design, Format } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { Display, Design } from '@guardian/types';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import {
@@ -69,6 +65,14 @@ import { trackPerformance } from '../browser/ga/ga';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
+
+const EditionDropdown = loadable(
+	() => import('@frontend/web/components/EditionDropdown'),
+	{
+		resolveComponent: (module) => module.EditionDropdown,
+	},
+);
+
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -287,13 +291,51 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType);
+	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
 	const pillar = decidePillar({
 		pillar: CAPI.pillar,
 		design,
 	});
 
+	const format: Format = {
+		display,
+		design,
+		theme: pillar,
+	};
+
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
+	// There are docs on loadable in ./docs/loadable-components.md
+	const YoutubeBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.youtubeBlockElement.length > 0 ||
+				CAPI.youtubeMainMediaBlockElement.length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/YoutubeBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.YoutubeBlockComponent,
+		},
+	);
+
+	const RichLinkComponent = loadable(
+		() => {
+			if (CAPI.richLinks.length > 0) {
+				return import(
+					'@frontend/web/components/elements/RichLinkComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.RichLinkComponent,
+		},
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -343,7 +385,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={youtubeBlock.youtubeIndex}
 				>
 					<YoutubeBlockComponent
-						display={display}
+						display={format.display}
 						design={design}
 						pillar={pillar}
 						hideCaption={false}
@@ -419,7 +461,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							pillar={pillar}
+							format={format}
 						/>
 					</>
 				</HydrateOnce>
@@ -475,7 +517,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={qandaAtom.html}
 						image={qandaAtom.img}
 						credit={qandaAtom.credit}
-						pillar={toTypesPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'QANDA_ATOM',
 							qandaAtom.id,
@@ -502,7 +544,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={guideAtom.html}
 						image={guideAtom.img}
 						credit={guideAtom.credit}
-						pillar={toTypesPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'GUIDE_ATOM',
 							guideAtom.id,
@@ -532,7 +574,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						html={profileAtom.html}
 						image={profileAtom.img}
 						credit={profileAtom.credit}
-						pillar={toTypesPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'PROFILE_ATOM',
 							profileAtom.id,
@@ -561,7 +603,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						title={timelineAtom.title}
 						events={timelineAtom.events}
 						description={timelineAtom.description}
-						pillar={toTypesPillar(pillar)}
+						pillar={pillar}
 						likeHandler={componentEventHandler(
 							'TIMELINE_ATOM',
 							timelineAtom.id,
@@ -681,7 +723,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}
-					design={design}
 				/>
 			</Portal>
 			<Portal root="reader-revenue-links-footer">

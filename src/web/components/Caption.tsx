@@ -13,7 +13,7 @@ type Props = {
 	display: Display;
 	design: Design;
 	captionText?: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -105,12 +105,12 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (pillar: CAPIPillar) => css`
+const iconStyle = (pillar: Theme) => css`
 	fill: ${pillarPalette[pillar].main};
 	padding-right: 3px;
 `;
 
-const captionLink = (pillar: CAPIPillar) => css`
+const captionLink = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette[pillar].main};
 		text-decoration: none;
@@ -177,18 +177,6 @@ export const Caption = ({
 					{credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
-		case Design.Article:
-		case Design.Media:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Analysis:
-		case Design.Review:
-		case Design.Interview:
 		default:
 			return (
 				<figcaption

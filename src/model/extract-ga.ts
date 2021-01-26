@@ -1,5 +1,5 @@
 // All GA fields should  fall back to default values -
-import { findPillar } from './find-pillar';
+import { findCAPIPillar } from './find-pillar';
 
 const filterTags = (
 	tags: CAPIType['tags'],
@@ -32,7 +32,7 @@ const formatStringForGa = (string: string): string =>
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: CAPIType): GADataType => ({
 	webTitle: data.webTitle,
-	pillar: findPillar(data.pillar) || 'news',
+	pillar: findCAPIPillar(data.pillar) || 'news',
 	section: data.sectionName || '',
 	contentType: formatStringForGa(data.contentType),
 	commissioningDesks: formatStringForGa(getCommissioningDesk(data.tags)),

@@ -9,7 +9,7 @@ type Props = {
 	limit: number; // Limit the number of items shown (the api often returns more)
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 type OnwardsResponse = {
@@ -33,7 +33,7 @@ export const OnwardsData = ({
 		trailLimit: number,
 	): TrailType[] => {
 		return trails.slice(0, trailLimit).map((trail) => {
-			const design = decideDesignType(trail.designType);
+			const design = decideDesignType(trail.designType, []);
 			return {
 				...trail,
 				pillar: decidePillar({ pillar: trail.pillar, design }),

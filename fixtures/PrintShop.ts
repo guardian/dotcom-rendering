@@ -2391,7 +2391,11 @@ export const PrintShop: CAPIType = {
 						'<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
 				},
 			],
-
+			blockCreatedOn: 1572887180000,
+			blockCreatedOnDisplay: '17.06 GMT',
+			blockLastUpdated: 1608201874000,
+			blockLastUpdatedDisplay: '10.44 GMT',
+			blockFirstPublished: 1607633048000,
 			blockFirstPublishedDisplay: '20.44 GMT',
 			primaryDateLine: 'Thu 17 Dec 2020 09.07 GMT',
 			secondaryDateLine: 'Last modified on Thu 17 Dec 2020 14.04 GMT',

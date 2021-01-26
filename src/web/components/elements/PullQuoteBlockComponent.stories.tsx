@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 
 import { Section } from '../Section';
 import { Flex } from '../Flex';
@@ -41,7 +41,7 @@ export const Article = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Article}
-				pillar="news"
+				pillar={Pillar.News}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -58,7 +58,7 @@ export const Comment = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Comment}
-				pillar="opinion"
+				pillar={Pillar.Opinion}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -75,7 +75,7 @@ export const CommentAttr = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Comment}
-				pillar="opinion"
+				pillar={Pillar.Opinion}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -93,7 +93,7 @@ export const PhotoEssay = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar="lifestyle"
+				pillar={Pillar.Lifestyle}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -110,7 +110,7 @@ export const PhotoEssayAttr = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar="lifestyle"
+				pillar={Pillar.Lifestyle}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -128,7 +128,7 @@ export const PhotoEssayInline = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar="culture"
+				pillar={Pillar.Culture}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"

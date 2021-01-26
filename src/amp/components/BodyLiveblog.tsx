@@ -69,7 +69,7 @@ const updateButtonStyle = css`
 // updates happening. This happens because we don't include new styles on block
 // updates, but only on initial page load.
 export const Body: React.FC<{
-	pillar: CAPIPillar;
+	pillar: Theme;
 	data: ArticleModel;
 	config: ConfigType;
 }> = ({ pillar, data, config }) => {

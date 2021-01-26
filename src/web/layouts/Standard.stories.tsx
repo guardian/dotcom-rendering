@@ -4,6 +4,7 @@ import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
 import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
 import { Review } from '@root/fixtures/articles/Review';
+import { PrintShop } from '@root/fixtures/articles/PrintShop';
 import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
@@ -64,6 +65,12 @@ export const ReviewStory = () => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
+
+export const PrintShopStory = () => {
+	const ServerCAPI = convertToStandard(PrintShop);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+PrintShopStory.story = { name: 'PrintShop' };
 
 export const CommentStory = () => {
 	const ServerCAPI = convertToStandard(Comment);

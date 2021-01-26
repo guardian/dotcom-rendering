@@ -6,7 +6,7 @@ import { remSpace } from '@guardian/src-foundations';
 
 import { neutralBorder } from '@root/src/lib/pillars';
 
-const linesCssOverwrite = (pillar: CAPIPillar) => css`
+const linesCssOverwrite = (pillar: Theme) => css`
 	div > * {
 		background-image: repeating-linear-gradient(
 			to bottom,
@@ -23,7 +23,7 @@ export const GuardianLines = ({
 	count,
 	effect,
 }: {
-	pillar: CAPIPillar;
+	pillar: Theme;
 	count: 4 | 8 | undefined;
 	effect?: 'straight' | 'squiggly' | 'dotted';
 }) => (

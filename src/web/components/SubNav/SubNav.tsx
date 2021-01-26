@@ -4,11 +4,13 @@ import { css, cx } from 'emotion';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+import { Format } from '@guardian/types';
+
 import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
 type Props = {
 	subNavSections: SubNavType;
-	pillar: CAPIPillar;
+	format: Format;
 	currentNavLink: string;
 };
 
@@ -143,7 +145,7 @@ const leftColBorder = pillarMap(
 const trimLeadingSlash = (url: string): string =>
 	url.substr(0, 1) === '/' ? url.slice(1) : url;
 
-export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
+export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
@@ -185,7 +187,10 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={cx(listItemStyles, leftColBorder[pillar])}
+						className={cx(
+							listItemStyles,
+							leftColBorder[format.theme],
+						)}
 					>
 						<a
 							className={parentLinkStyle}

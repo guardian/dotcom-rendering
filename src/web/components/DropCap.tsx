@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Pillar } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { opinion } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
@@ -10,11 +10,11 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	letter: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	design: Design;
 };
 
-const outerStyles = (pillar: CAPIPillar, design: Design) => {
+const outerStyles = (pillar: Theme, design: Design) => {
 	const baseStyles = css`
 		${headline.large({
 			fontWeight: 'light',
@@ -35,21 +35,10 @@ const outerStyles = (pillar: CAPIPillar, design: Design) => {
 		case Design.Comment:
 			return css`
 				${baseStyles};
-				color: ${pillar === 'opinion'
+				color: ${pillar === Pillar.Opinion
 					? opinion[400]
 					: pillarPalette[pillar].dark};
 			`;
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
@@ -75,17 +64,6 @@ const innerStyles = (design: Design) => {
 				${baseStyles};
 				font-weight: 200;
 			`;
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};

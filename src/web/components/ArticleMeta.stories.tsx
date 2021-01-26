@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -51,9 +51,11 @@ export const ArticleStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Article}
-				pillar="news"
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -91,9 +93,11 @@ export const BrandingStory = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
-				display={Display.Standard}
-				design={Design.Article}
-				pillar="news"
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -114,9 +118,11 @@ export const FeatureStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Feature}
-				pillar="culture"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -136,9 +142,11 @@ export const CommentStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Comment}
-				pillar="opinion"
+				format={{
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -158,9 +166,11 @@ export const InterviewStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Interview}
-				pillar="lifestyle"
+				format={{
+					display: Display.Standard,
+					design: Design.Interview,
+					theme: Pillar.Lifestyle,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -180,9 +190,11 @@ export const ImmersiveStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Immersive}
-				design={Design.Article}
-				pillar="news"
+				format={{
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				pageId=""
 				webTitle=""
 				author={{
@@ -202,9 +214,11 @@ export const TwoContributorsStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Feature}
-				pillar="sport"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				}}
 				pageId=""
 				webTitle=""
 				author={{

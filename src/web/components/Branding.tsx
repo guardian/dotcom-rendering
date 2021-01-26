@@ -27,7 +27,7 @@ const brandingLogoStyle = css`
 	}
 `;
 
-const brandingAboutLink = (pillar: CAPIPillar) => css`
+const brandingAboutLink = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].main};
 	${textSans.xsmall()}
 	display: block;
@@ -39,7 +39,7 @@ const brandingAboutLink = (pillar: CAPIPillar) => css`
 
 export const Branding: React.FC<{
 	branding: Branding;
-	pillar: CAPIPillar;
+	pillar: Theme;
 }> = ({ branding, pillar }) => {
 	if (!branding) return null;
 	return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -27,7 +27,7 @@ export const ArticleStory = () => (
 					headlineString="This is how the default headline looks"
 					display={Display.Standard}
 					design={Design.Article}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -47,7 +47,7 @@ export const oldHeadline = () => (
 					headlineString="This is an old headline"
 					display={Display.Standard}
 					design={Design.Article}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[
 						// Age warnings only show for old articles when the tone/news tag is present
 						{
@@ -74,7 +74,7 @@ export const Feature = () => (
 					headlineString="This is a Feature headline, it has colour applied based on pillar"
 					display={Display.Standard}
 					design={Design.Feature}
-					pillar="lifestyle"
+					pillar={Pillar.Lifestyle}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -99,7 +99,7 @@ export const ShowcaseInterview = () => (
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						display={Display.Showcase}
 						design={Design.Interview}
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						isShowcase={true}
 						byline="Byline text"
@@ -110,7 +110,7 @@ export const ShowcaseInterview = () => (
 					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -134,7 +134,7 @@ export const ShowcaseInterviewNobyline = () => (
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						display={Display.Showcase}
 						design={Design.Interview}
-						pillar="culture"
+						pillar={Pillar.Culture}
 						tags={[]}
 						isShowcase={true}
 						byline=""
@@ -145,7 +145,7 @@ export const ShowcaseInterviewNobyline = () => (
 					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -166,7 +166,7 @@ export const Interview = () => (
 					headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 					display={Display.Standard}
 					design={Design.Interview}
-					pillar="culture"
+					pillar={Pillar.Culture}
 					tags={[]}
 					byline="Byline text"
 				/>
@@ -180,7 +180,7 @@ export const Interview = () => (
 					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -199,7 +199,7 @@ export const InterviewNoByline = () => (
 					headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 					display={Display.Standard}
 					design={Design.Interview}
-					pillar="culture"
+					pillar={Pillar.Culture}
 					tags={[]}
 					byline=""
 				/>
@@ -213,7 +213,7 @@ export const InterviewNoByline = () => (
 					design={Design.Article}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar="news"
+					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -234,7 +234,7 @@ export const Comment = () => (
 					headlineString="Yes, the billionaire club is one we really need to shut down"
 					display={Display.Standard}
 					design={Design.Comment}
-					pillar="opinion"
+					pillar={Pillar.Opinion}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -254,7 +254,7 @@ export const Analysis = () => (
 					headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
 					display={Display.Standard}
 					design={Design.Analysis}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -274,7 +274,7 @@ export const Media = () => (
 					headlineString="This is the headline you see when design type is Media"
 					display={Display.Standard}
 					design={Design.Media}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -294,7 +294,7 @@ export const Review = () => (
 					headlineString="This is the headline you see when design type is Review"
 					display={Display.Standard}
 					design={Design.Review}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -314,7 +314,7 @@ export const PhotoEssay = () => (
 					headlineString="This is the headline you see when design type is PhotoEssay"
 					display={Display.Standard}
 					design={Design.PhotoEssay}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -334,7 +334,7 @@ export const Quiz = () => (
 					headlineString="This is the headline you see when design type is Quiz"
 					display={Display.Standard}
 					design={Design.Quiz}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -354,7 +354,7 @@ export const Recipe = () => (
 					headlineString="This is the headline you see when design type is Recipe"
 					display={Display.Standard}
 					design={Design.Recipe}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -374,7 +374,7 @@ export const Immersive = () => (
 					headlineString="This is the headline you see when display type is Immersive"
 					display={Display.Immersive}
 					design={Design.Article}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -391,18 +391,17 @@ export const ImmersiveNoMainMedia = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when display type is Immersive, but with no main media"
+					headlineString="This is the headline you see when design type is PrintShop, which has no main media"
 					display={Display.Immersive}
-					design={Design.Article}
-					pillar="news"
+					design={Design.PrintShop}
+					pillar={Pillar.News}
 					tags={[]}
-					noMainMedia={true}
 				/>
 			</ArticleContainer>
 		</Flex>
 	</Section>
 );
-ImmersiveNoMainMedia.story = { name: 'Immersive (with no main media)' };
+ImmersiveNoMainMedia.story = { name: 'Printshop (with no main media)' };
 
 export const ImmersiveComment = () => (
 	<Section
@@ -419,7 +418,7 @@ export const ImmersiveComment = () => (
 					headlineString="This is the headline you see when display type is Immersive and design Comment"
 					display={Display.Immersive}
 					design={Design.Comment}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -439,7 +438,7 @@ export const GuardianView = () => (
 					headlineString="This is the headline you see when design type is GuardianView"
 					display={Display.Standard}
 					design={Design.GuardianView}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -459,7 +458,7 @@ export const MatchReport = () => (
 					headlineString="This is the headline you see when design type is MatchReport"
 					display={Display.Standard}
 					design={Design.MatchReport}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -479,7 +478,7 @@ export const SpecialReport = () => (
 					headlineString="This is the headline you see when pillar is SpecialReport"
 					display={Display.Standard}
 					design={Design.Article}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>
@@ -499,7 +498,7 @@ export const Live = () => (
 					headlineString="This is the headline you see when design type is Live"
 					display={Display.Standard}
 					design={Design.Live}
-					pillar="news"
+					pillar={Pillar.News}
 					tags={[]}
 				/>
 			</ArticleContainer>

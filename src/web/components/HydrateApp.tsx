@@ -7,6 +7,7 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
 import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
+import { loadableReady } from '@loadable/component';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -36,22 +37,24 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();
 
-	ReactDOM.render(
-		<ABProvider
-			arrayOfTestObjects={tests}
-			abTestSwitches={{
-				...CAPI.config.switches,
-				...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
-			}}
-			pageIsSensitive={CAPI.config.isSensitive}
-			mvtMaxValue={1000000}
-			mvtId={mvtId}
-			ophanRecord={ophanRecordFunc}
-			forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
-		>
-			<App CAPI={CAPI} NAV={NAV} />
-		</ABProvider>,
+	loadableReady(() => {
+		ReactDOM.render(
+			<ABProvider
+				arrayOfTestObjects={tests}
+				abTestSwitches={{
+					...CAPI.config.switches,
+					...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
+				}}
+				pageIsSensitive={CAPI.config.isSensitive}
+				mvtMaxValue={1000000}
+				mvtId={mvtId}
+				ophanRecord={ophanRecordFunc}
+				forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
+			>
+				<App CAPI={CAPI} NAV={NAV} />
+			</ABProvider>,
 
-		document.getElementById('react-root'),
-	);
+			document.getElementById('react-root'),
+		);
+	});
 };

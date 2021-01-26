@@ -31,6 +31,9 @@ type CAPIDesign =
     | 'GuardianLabs'
 
 type Design = import('@guardian/types').Design;
+type Theme = import('@guardian/types').Theme;
+type Format = import('@guardian/types').Format;
+type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -96,7 +99,7 @@ interface Branding {
     };
 }
 
-interface LinkType extends SimpleLinkType {
+interface CAPILinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
     mobileOnly?: boolean;
@@ -104,8 +107,20 @@ interface LinkType extends SimpleLinkType {
     more?: boolean;
 }
 
-interface PillarType extends LinkType {
+interface LinkType extends SimpleLinkType {
+    longTitle: string;
+    children?: LinkType[];
+    mobileOnly?: boolean;
+    pillar?: Pillar;
+    more?: boolean;
+}
+
+interface CAPIPillarType extends CAPILinkType {
     pillar: CAPIPillar;
+}
+
+interface PillarType extends LinkType {
+    pillar: Pillar;
 }
 
 interface MoreType extends LinkType {
@@ -135,13 +150,20 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-interface NavType {
-    pillars: PillarType[];
+interface BaseNavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
     subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface NavType extends BaseNavType {
+    pillars: PillarType[];
+}
+
+interface CAPINavType extends BaseNavType {
+    pillars: CAPIPillarType[];
 }
 
 interface SubNavBrowserType {
@@ -354,7 +376,7 @@ interface BadgeType {
 interface KickerType {
     text: string;
     design: Design;
-    pillar: CAPIPillar;
+    pillar: Theme;
     showPulsingDot?: boolean;
     showSlash?: boolean;
     inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
@@ -375,8 +397,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: CAPIPillar;
-    design: Design;
+    format: Format;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
     showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
@@ -412,7 +433,7 @@ type HeadlineLink = {
 interface LinkHeadlineType {
     design: Design;
     headlineText: string; // The text shown
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kickerText?: string;
     showPulsingDot?: boolean;
@@ -426,7 +447,7 @@ interface LinkHeadlineType {
 interface CardHeadlineType {
     headlineText: string; // The text shown
     design: Design; // Used to decide when to add type specific styles
-    pillar: CAPIPillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
@@ -500,7 +521,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
-    pillar: CAPIPillar;
+    pillar: Theme;
 };
 
 type OphanComponentName =
@@ -571,6 +592,7 @@ interface ConfigType extends CommercialConfigType {
     idUrl?: string;
     mmaUrl?: string;
     brazeApiKey?: string;
+    ipsosTag?: string;
 }
 
 interface ConfigTypeBrowser {
@@ -682,7 +704,33 @@ type IslandType =
     | 'youtube-block-main-media'
     | 'chart-atom';
 
+// All Components that are loaded with loadable
+// should be added here, this is the chunk name as
+// defined in manifest.json
+type BlockElementType = string;
+interface ComponentNameChunkMap {
+    chunkName: string;
+    addWhen: BlockElementType | 'always';
+}
+interface EditionDropdownLoadable extends ComponentNameChunkMap{
+    chunkName: 'EditionDropdown';
+    addWhen: 'always';
+}
+interface YoutubeBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-YoutubeBlockComponent';
+    addWhen: YoutubeBlockElement['_type'];
+}
+
+interface RichLinkBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-RichLinkComponent';
+    addWhen: RichLinkBlockElement['_type'];
+}
+
+// There are docs on loadable in ./docs/loadable-components.md
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+
 interface BaseTrailType {
+
     url: string;
     headline: string;
     isLiveBlog: boolean;
@@ -702,7 +750,7 @@ interface BaseTrailType {
 }
 interface TrailType extends BaseTrailType {
     design: Design;
-    pillar: CAPIPillar;
+    pillar: Theme;
 }
 
 interface CAPITrailType extends BaseTrailType {
@@ -715,10 +763,15 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
+interface CAPITrailTabType {
+    heading: string;
+    trails: CAPITrailType[];
+}
+
 interface MostViewedFooterPayloadType {
-    tabs: TrailTabType[];
-    mostCommented: TrailType;
-    mostShared: TrailType;
+    tabs: CAPITrailTabType[];
+    mostCommented: CAPITrailType;
+    mostShared: CAPITrailType;
 }
 
 // ----------

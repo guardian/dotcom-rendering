@@ -1,5 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+
+import { Pillar } from '@guardian/types';
+
 import { SubMetaLinksList } from './SubMetaLinksList';
 
 describe('SubMetaLinksList', () => {
@@ -13,7 +16,7 @@ describe('SubMetaLinksList', () => {
 			title: 'Test 2',
 		},
 	];
-	const pillar: CAPIPillar = 'news';
+	const pillar: Pillar = Pillar.News;
 
 	it('It should render correct amount of links', () => {
 		const { container, getByText } = render(

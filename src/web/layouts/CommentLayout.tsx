@@ -9,6 +9,8 @@ import {
 	opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { Display, Design, Format } from '@guardian/types';
+
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -43,7 +45,6 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display, Design } from '@guardian/types';
 
 const gridWide = css`
 	grid-template-areas:
@@ -248,18 +249,10 @@ const mainMediaWrapper = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	display: Display;
-	design: Design;
-	pillar: CAPIPillar;
+	format: Format;
 }
 
-export const CommentLayout = ({
-	CAPI,
-	NAV,
-	display,
-	design,
-	pillar,
-}: Props) => {
+export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -304,7 +297,7 @@ export const CommentLayout = ({
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
-							display={display}
+							display={format.display}
 						/>
 					</Section>
 				</Stuck>
@@ -332,7 +325,7 @@ export const CommentLayout = ({
 						<Nav
 							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={display}
+							display={format.display}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -349,7 +342,7 @@ export const CommentLayout = ({
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								pillar={pillar}
+								format={format}
 							/>
 						</Section>
 					)}
@@ -359,22 +352,22 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={pillar} />
+						<GuardianLines count={4} pillar={format.theme} />
 					</Section>
 				</SendToBack>
 			</div>
 
 			<Section showTopBorder={false} backgroundColour={opinion[800]}>
-				<StandardGrid display={display}>
+				<StandardGrid display={format.display}>
 					<GridItem area="title">
 						<ArticleTitle
-							display={display}
-							design={design}
+							display={format.display}
+							design={format.design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={pillar}
+							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>
@@ -401,10 +394,10 @@ export const CommentLayout = ({
 										</div>
 									)}
 									<ArticleHeadline
-										display={display}
+										display={format.display}
 										headlineString={CAPI.headline}
-										design={design}
-										pillar={pillar}
+										design={format.design}
+										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>
@@ -427,41 +420,45 @@ export const CommentLayout = ({
 											/>
 										</div>
 									)}
-									<GuardianLines count={8} pillar={pillar} />
+									<GuardianLines
+										count={8}
+										pillar={format.theme}
+									/>
 								</div>
 							</div>
 						</div>
 					</GridItem>
 					<GridItem area="lines">
 						<div className={pushToBottom}>
-							<GuardianLines count={8} pillar={pillar} />
+							<GuardianLines count={8} pillar={format.theme} />
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
 						<ArticleStandfirst
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
 					<GridItem area="media">
 						<div
 							className={
-								display === Display.Showcase &&
+								format.display === Display.Showcase &&
 								CAPI.pageType.hasShowcaseMainElement
 									? mainMediaWrapper
 									: maxWidth
 							}
 						>
 							<MainMedia
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								elements={CAPI.mainMediaElements}
-								pillar={pillar}
+								pillar={format.theme}
 								adTargeting={adTargeting}
 								starRating={
-									design === Design.Review && CAPI.starRating
+									format.design === Design.Review &&
+									CAPI.starRating
 										? CAPI.starRating
 										: undefined
 								}
@@ -473,9 +470,7 @@ export const CommentLayout = ({
 						<div className={maxWidth}>
 							<ArticleMeta
 								branding={branding}
-								display={display}
-								design={design}
-								pillar={pillar}
+								format={format}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
@@ -491,17 +486,18 @@ export const CommentLayout = ({
 						<ArticleContainer>
 							<main className={maxWidth}>
 								<ArticleBody
-									pillar={pillar}
+									format={format}
 									blocks={CAPI.blocks}
-									display={display}
-									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} pillar={pillar} />
+								<GuardianLines
+									count={4}
+									pillar={format.theme}
+								/>
 								<SubMeta
-									pillar={pillar}
+									pillar={format.theme}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
@@ -537,7 +533,10 @@ export const CommentLayout = ({
 							`}
 						>
 							<RightColumn>
-								<AdSlot position="right" display={display} />
+								<AdSlot
+									position="right"
+									display={format.display}
+								/>
 								{!isPaidContent ? (
 									<MostViewedRightIsland />
 								) : (
@@ -555,7 +554,10 @@ export const CommentLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising-high" display={display} />
+				<AdSlot
+					position="merchandising-high"
+					display={format.display}
+				/>
 			</Section>
 
 			{!isPaidContent && (
@@ -572,7 +574,7 @@ export const CommentLayout = ({
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
-								pillar={pillar}
+								pillar={format.theme}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
@@ -581,7 +583,7 @@ export const CommentLayout = ({
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
 								beingHydrated={false}
-								display={display}
+								display={format.display}
 							/>
 						</Section>
 					)}
@@ -602,7 +604,7 @@ export const CommentLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising" display={display} />
+				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
 			{NAV.subNavSections && (
@@ -610,9 +612,9 @@ export const CommentLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						pillar={pillar}
+						format={format}
 					/>
-					<GuardianLines count={4} pillar={pillar} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 
@@ -624,7 +626,7 @@ export const CommentLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={pillar}
+					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
 			</Section>

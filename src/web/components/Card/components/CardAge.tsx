@@ -10,7 +10,7 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
-const ageStyles = (design: Design, pillar: CAPIPillar) => css`
+const ageStyles = (design: Design, pillar: Theme) => css`
 	${textSans.xsmall()};
 	color: ${design === Design.Live ? decidePillarLight(pillar) : neutral[60]};
 
@@ -36,25 +36,13 @@ const ageStyles = (design: Design, pillar: CAPIPillar) => css`
 	}
 `;
 
-const colourStyles = (design: Design, pillar: CAPIPillar) => {
+const colourStyles = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.Live:
 			return css`
 				/* stylelint-disable-next-line color-no-hex */
 				color: ${decidePillarLight(pillar)};
 			`;
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
 			return css`
 				color: ${neutral[60]};
@@ -64,7 +52,7 @@ const colourStyles = (design: Design, pillar: CAPIPillar) => {
 
 type Props = {
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	webPublicationDate: string;
 	showClock?: boolean;
 };

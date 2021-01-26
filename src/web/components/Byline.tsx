@@ -9,7 +9,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 type Props = {
 	text: string;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	size: SmallHeadlineSize;
 };
 
@@ -42,21 +42,8 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (design: Design, pillar: CAPIPillar) => {
+const colourStyles = (design: Design, pillar: Theme) => {
 	switch (design) {
-		case Design.Comment:
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
 		default:
 			return css`
 				color: ${pillarPalette[pillar].main};

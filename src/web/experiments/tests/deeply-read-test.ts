@@ -3,7 +3,7 @@ import { ABTest } from '@guardian/ab-core';
 export const deeplyReadTest: ABTest = {
 	id: 'DeeplyReadTest',
 	start: '2021-01-05',
-	expiry: '2021-01-25',
+	expiry: '2021-01-29',
 	author: 'nitro-marky',
 	description:
 		'Tests an onward hypothesis by replacing the second tab in the Most Popular container with deeply read items.',

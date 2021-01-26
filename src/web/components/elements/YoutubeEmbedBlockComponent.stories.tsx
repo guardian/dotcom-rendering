@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
 export default {
@@ -9,7 +9,7 @@ export default {
 	title: 'Components/YoutubeEmbedComponent',
 	parameters: {
 		chromatic: {
-			disabled: true,
+			disable: true,
 		},
 	},
 };
@@ -31,7 +31,7 @@ export const standardAspectRatio = () => {
 			<p>abc</p>
 			<YoutubeEmbedBlockComponent
 				embedUrl="https://www.youtube-nocookie.com/embed/79fzeNUqQbQ?wmode=opaque&feature=oembed"
-				pillar="news"
+				pillar={Pillar.News}
 				height={259}
 				width={460}
 				caption="blah"

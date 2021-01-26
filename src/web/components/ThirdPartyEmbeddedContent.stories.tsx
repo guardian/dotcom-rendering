@@ -4,7 +4,7 @@ import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Theme, Pillar } from '@guardian/types';
 import { ContainerLayout } from './ContainerLayout';
 import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
@@ -280,6 +280,7 @@ const EmbeddedElements = {
 
 function body(
 	pillar: CAPIPillar,
+	theme: Theme,
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
@@ -388,7 +389,7 @@ function body(
 				width={EmbeddedElements.vimeoVideoEmbed.width}
 			>
 				<VimeoBlockComponent
-					pillar={pillar}
+					pillar={theme}
 					embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
 					height={EmbeddedElements.vimeoVideoEmbed.height}
 					width={EmbeddedElements.vimeoVideoEmbed.width}
@@ -555,7 +556,7 @@ function body(
 					height={EmbeddedElements.spotifyAudioEmbed.height}
 					width={EmbeddedElements.spotifyAudioEmbed.width}
 					title={EmbeddedElements.spotifyAudioEmbed.title}
-					pillar={pillar}
+					pillar={theme}
 					caption={EmbeddedElements.spotifyAudioEmbed.caption}
 					design={design}
 					display={display}
@@ -745,7 +746,13 @@ export const DefaultStory = () => {
 					}
 				`}
 			>
-				{body('news', Design.Article, Display.Standard, true)}
+				{body(
+					'news',
+					Pillar.News,
+					Design.Article,
+					Display.Standard,
+					true,
+				)}
 			</div>
 		</ContainerLayout>
 	);

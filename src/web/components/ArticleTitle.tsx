@@ -13,9 +13,8 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: CAPIPillar;
+	pillar: Theme;
 	badge?: BadgeType;
-	noMainMedia?: boolean;
 };
 
 const sectionStyles = css`
@@ -69,7 +68,6 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	pillar,
 	badge,
-	noMainMedia,
 }: Props) => (
 	<div className={cx(sectionStyles, badge && badgeContainer)}>
 		{badge && display !== Display.Immersive && (
@@ -81,7 +79,7 @@ export const ArticleTitle = ({
 			className={cx(
 				badge && marginTop,
 				display === Display.Immersive &&
-					!noMainMedia &&
+					design !== Design.PrintShop &&
 					immersiveMargins,
 			)}
 		>

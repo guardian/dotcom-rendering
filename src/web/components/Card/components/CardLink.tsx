@@ -5,7 +5,7 @@ import { Design } from '@guardian/types';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const linkStyles = (design: Design, pillar: CAPIPillar) => {
+const linkStyles = (design: Design, pillar: Theme) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -70,15 +70,6 @@ const linkStyles = (design: Design, pillar: CAPIPillar) => {
 					filter: brightness(90%);
 				}
 			`;
-		case Design.Article:
-		case Design.Review:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return css`
 				${baseLinkStyles}
@@ -95,7 +86,7 @@ type Props = {
 	children: React.ReactNode;
 	linkTo: string;
 	design: Design;
-	pillar: CAPIPillar;
+	pillar: Theme;
 };
 
 export const CardLink = ({ children, linkTo, design, pillar }: Props) => (

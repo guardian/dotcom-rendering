@@ -42,6 +42,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 				apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
 				payload: generatePermutivePayload(config),
 			},
+			ipsosSectionName: config.ipsosTag || 'guardian',
 		};
 
 		const metadata = {
