@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from 'emotion';
 
 import { border, background } from '@guardian/src-foundations/palette';
@@ -122,8 +122,13 @@ export const ClickToView = ({
 
 	const handleClick = () => {
 		setShowOverlay(false);
-		onAccept();
 	};
+
+	useEffect(() => {
+		if (!showOverlay) {
+			onAccept();
+		}
+	});
 
 	if (showOverlay) {
 		return (

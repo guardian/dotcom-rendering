@@ -5,6 +5,7 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Display, Design, Theme, Pillar } from '@guardian/types';
+import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { ContainerLayout } from './ContainerLayout';
 import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
@@ -299,6 +300,7 @@ function body(
 				sourceDomain={EmbeddedElements.instagramEmbed.sourceDomain}
 				height={EmbeddedElements.instagramEmbed.height}
 				width={EmbeddedElements.instagramEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -321,6 +323,7 @@ function body(
 				sourceDomain={EmbeddedElements.formStackEmbed.sourceDomain}
 				height={EmbeddedElements.formStackEmbed.height}
 				width={EmbeddedElements.formStackEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -438,6 +441,7 @@ function body(
 				sourceDomain={EmbeddedElements.scribdEmbedEmbed.sourceDomain}
 				height={EmbeddedElements.scribdEmbedEmbed.height}
 				width={EmbeddedElements.scribdEmbedEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -461,6 +465,7 @@ function body(
 				sourceDomain={EmbeddedElements.tiktokEmbedEmbed.sourceDomain}
 				height={EmbeddedElements.tiktokEmbedEmbed.height}
 				width={EmbeddedElements.tiktokEmbedEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -624,6 +629,7 @@ function body(
 				}
 				height={EmbeddedElements.theconversationEmbedEmbed.height}
 				width={EmbeddedElements.theconversationEmbedEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -668,6 +674,7 @@ function body(
 				sourceDomain={EmbeddedElements.twitterEmbedEmbed.sourceDomain}
 				height={EmbeddedElements.twitterEmbedEmbed.height}
 				width={EmbeddedElements.twitterEmbedEmbed.width}
+				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"

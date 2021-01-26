@@ -9,6 +9,7 @@ type Props = {
 	isTracking: boolean;
 	source?: string;
 	sourceDomain: string;
+	onAccept?: Function;
 };
 
 export const ThirdPartyEmbeddedContent = ({
@@ -18,6 +19,7 @@ export const ThirdPartyEmbeddedContent = ({
 	isTracking,
 	source,
 	sourceDomain,
+	onAccept,
 }: Props) => {
 	let headline;
 	let body;
@@ -56,6 +58,7 @@ export const ThirdPartyEmbeddedContent = ({
 		}
 
 		const buttonText = 'Allow and continue';
+		const noOp = () => {};
 
 		return (
 			<ClickToView
@@ -64,7 +67,7 @@ export const ThirdPartyEmbeddedContent = ({
 				overlayHeadline={headline}
 				overlayBody={body}
 				overlayButtonText={buttonText}
-				onAccept={() => {}}
+				onAccept={onAccept || noOp}
 			>
 				{children}
 			</ClickToView>
