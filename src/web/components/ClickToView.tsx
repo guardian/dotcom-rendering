@@ -131,8 +131,8 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 									using cookies and other technologies.
 								</p>
 								<p>
-									To view this content, click
-									&apos;Allow&apos;.
+									To view this content, click &apos;Allow and
+									continue&apos;.
 								</p>
 							</Body>
 						</Top>
@@ -144,7 +144,7 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 								iconSide="left"
 								onClick={() => handleClick()}
 							>
-								Allow
+								Allow and continue
 							</Button>
 						</Bottom>
 					</Inner>
