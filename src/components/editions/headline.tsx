@@ -62,6 +62,11 @@ const interviewStyles = css`
 	border: 0;
 `;
 
+const commentStyles = css`
+	padding-bottom: 0;
+	padding-right: 6rem;
+`;
+
 const interviewFontStyles = css`
 	${headline.xsmall({ lineHeight: 'regular' })}
 	font-weight: 400;
@@ -103,6 +108,13 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 			styles(format),
 			fontStyles('regular', 'light'),
 			underline(kickerColor),
+		);
+
+	if (format.design === Design.Comment)
+		return css(
+			styles(format),
+			fontStyles('regular', 'light'),
+			commentStyles,
 		);
 
 	return css(styles(format), fontStyles('tight', 'medium'));
