@@ -42,7 +42,6 @@ describe('ReaderRevenueLinks', () => {
 					edition="US"
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId="1234"
 				/>
 			</AbProvider>,
 		);
@@ -61,7 +60,6 @@ describe('ReaderRevenueLinks', () => {
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId="1234"
 				/>
 				,
 			</AbProvider>,
