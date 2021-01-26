@@ -3,7 +3,7 @@ import { neutral, text } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
 
-const getHeadlineColour = (format: Format): string => {
+const textHeadline = (format: Format): string => {
 	switch (format.display) {
 		case Display.Immersive:
 			switch (format.design) {
@@ -32,8 +32,8 @@ const getHeadlineColour = (format: Format): string => {
 
 export const decidePalette = (format: Format) => {
 	return {
-		headline: {
-			colour: getHeadlineColour(format),
+		text: {
+			headline: textHeadline(format),
 		},
 	};
 };

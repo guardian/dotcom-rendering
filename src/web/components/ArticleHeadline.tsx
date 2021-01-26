@@ -223,7 +223,7 @@ export const ArticleHeadline = ({
 									lightFont,
 									invertedText,
 									css`
-										color: ${palette.headline.colour};
+										color: ${palette.text.headline};
 									`,
 								)}
 							>
@@ -260,7 +260,7 @@ export const ArticleHeadline = ({
 								immersiveWrapper,
 								blackBackground,
 								css`
-									color: ${palette.headline.colour};
+									color: ${palette.text.headline};
 								`,
 							)}
 						>
@@ -291,7 +291,7 @@ export const ArticleHeadline = ({
 							className={cx(
 								boldFont,
 								css`
-									color: ${palette.headline.colour};
+									color: ${palette.text.headline};
 								`,
 							)}
 						>
@@ -306,7 +306,7 @@ export const ArticleHeadline = ({
 								className={cx(
 									lightFont,
 									css`
-										color: ${palette.headline.colour};
+										color: ${palette.text.headline};
 									`,
 								)}
 							>
@@ -330,7 +330,7 @@ export const ArticleHeadline = ({
 								standardFont,
 								underlinedStyles,
 								css`
-									color: ${palette.headline.colour};
+									color: ${palette.text.headline};
 								`,
 							)}
 						>
@@ -351,7 +351,7 @@ export const ArticleHeadline = ({
 									invertedWrapper,
 									zIndex,
 									css`
-										color: ${palette.headline.colour};
+										color: ${palette.text.headline};
 									`,
 								)}
 							>
@@ -388,7 +388,7 @@ export const ArticleHeadline = ({
 							className={cx(
 								standardFont,
 								css`
-									color: ${palette.headline.colour};
+									color: ${palette.text.headline};
 								`,
 							)}
 						>
