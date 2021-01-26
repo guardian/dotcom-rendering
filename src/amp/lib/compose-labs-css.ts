@@ -1,7 +1,9 @@
 import { cx } from 'emotion';
 
+import { Special } from '@guardian/types';
+
 export const composeLabsCSS = (
-    pillar: Pillar,
-    baseCSS: string,
-    labsCSS: string,
-): string => (pillar === 'labs' ? cx(baseCSS, labsCSS) : baseCSS);
+	pillar: Theme,
+	baseCSS: string,
+	labsCSS: string,
+): string => (pillar === Special.Labs ? cx(baseCSS, labsCSS) : baseCSS);

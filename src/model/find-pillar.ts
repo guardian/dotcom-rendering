@@ -1,22 +1,58 @@
-import { pillarNames } from '@root/src/lib/pillars';
+import { Pillar, Special } from '@guardian/types';
 
 export const findPillar: (
-    name: string,
-    tags?: TagType[],
-) => Pillar | undefined = (name, tags?) => {
-    // Flag paid content for Labs pillar (for styling purposes)
-    const isPaidContent = (tag: any) =>
-        tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
+	name: string,
+	tags?: TagType[],
+) => Theme | undefined = (name, tags?) => {
+	// Flag paid content for Labs pillar (for styling purposes)
+	const isPaidContent = (tag: any) =>
+		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
 
-    if (tags && tags.some(isPaidContent)) {
-        return 'labs';
-    }
+	if (tags && tags.some(isPaidContent)) {
+		return Special.Labs;
+	}
 
-    const pillar: string = name.toLowerCase();
-    // The pillar name is "arts" in CAPI, but "culture" everywhere else,
-    // therefore we perform this substitution here.
-    if (pillar === 'arts') {
-        return 'culture';
-    }
-    return pillarNames.find((_) => _ === pillar);
+	const pillar: string = name.toLowerCase();
+
+	switch (pillar) {
+		// The pillar name is "arts" in CAPI, but "culture" everywhere else
+		case 'arts':
+		case 'culture':
+			return Pillar.Culture;
+		case 'opinion':
+			return Pillar.Opinion;
+		case 'news':
+			return Pillar.News;
+		case 'sport':
+			return Pillar.Sport;
+		case 'lifestyle':
+			return Pillar.Lifestyle;
+	}
+};
+
+export const findCAPIPillar: (
+	name: string,
+	tags?: TagType[],
+) => CAPIPillar | undefined = (name, tags?) => {
+	// Flag paid content for Labs pillar (for styling purposes)
+	const isPaidContent = (tag: any) =>
+		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
+
+	if (tags && tags.some(isPaidContent)) {
+		return 'labs';
+	}
+
+	const pillar: string = name.toLowerCase();
+
+	switch (pillar) {
+		// The pillar name is "arts" in CAPI, but "culture" everywhere else
+		case 'arts':
+		case 'culture':
+			return 'culture';
+		case 'opinion':
+		case 'news':
+		case 'sport':
+		case 'lifestyle':
+			return pillar;
+	}
 };

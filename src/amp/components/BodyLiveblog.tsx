@@ -16,52 +16,52 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 // article is
 
 const bodyStyle = css`
-    background-color: ${palette.neutral[97]};
+	background-color: ${palette.neutral[97]};
 
-    h2 {
-        ${headline.xxsmall()};
-        font-weight: 500;
-        margin-block-start: 0.83em;
-        margin-block-end: 0.83em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-    }
+	h2 {
+		${headline.xxsmall()};
+		font-weight: 500;
+		margin-block-start: 0.83em;
+		margin-block-end: 0.83em;
+		margin-inline-start: 0px;
+		margin-inline-end: 0px;
+	}
 `;
 
 // To override AMP styles we need to use nested and specific selectors here
 // unfortunately.
 const updateButtonStyle = css`
-    &.amp-active[update] {
-        position: fixed;
-        left: 0;
-        top: 12px;
-        display: flex;
-        justify-content: center;
-    }
+	&.amp-active[update] {
+		position: fixed;
+		left: 0;
+		top: 12px;
+		display: flex;
+		justify-content: center;
+	}
 
-    width: 100%;
+	width: 100%;
 
-    button {
-        border: none;
-        border-radius: 1000px;
-        height: 36px;
-        padding: 0 12px;
+	button {
+		border: none;
+		border-radius: 1000px;
+		height: 36px;
+		padding: 0 12px;
 
-        background-color: ${palette.news[400]};
-        color: ${palette.neutral[100]};
-        font-weight: bold;
-        ${textSans.xsmall()};
+		background-color: ${palette.news[400]};
+		color: ${palette.neutral[100]};
+		font-weight: bold;
+		${textSans.xsmall()};
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-    svg {
-        height: 20px;
-        width: 20px;
-        margin-right: 6px;
-    }
+	svg {
+		height: 20px;
+		width: 20px;
+		margin-right: 6px;
+	}
 `;
 
 // Note, it is possible for liveblog updates to lack styling if a style change
@@ -69,61 +69,61 @@ const updateButtonStyle = css`
 // updates happening. This happens because we don't include new styles on block
 // updates, but only on initial page load.
 export const Body: React.FC<{
-    pillar: Pillar;
-    data: ArticleModel;
-    config: ConfigType;
+	pillar: Theme;
+	data: ArticleModel;
+	config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const url = `${data.guardianBaseURL}/${data.pageId}`;
-    const isFirstPage = data.pagination
-        ? data.pagination.currentPage === 1
-        : false;
+	const url = `${data.guardianBaseURL}/${data.pageId}`;
+	const isFirstPage = data.pagination
+		? data.pagination.currentPage === 1
+		: false;
 
-    return (
-        <InnerContainer className={bodyStyle}>
-            <TopMetaLiveblog articleData={data} />
-            <KeyEvents events={data.keyEvents} url={url} />
+	return (
+		<InnerContainer className={bodyStyle}>
+			<TopMetaLiveblog articleData={data} pillar={pillar} />
+			<KeyEvents events={data.keyEvents} url={url} />
 
-            {!isFirstPage && (
-                <Pagination guardianURL={url} pagination={data.pagination} />
-            )}
+			{!isFirstPage && (
+				<Pagination guardianURL={url} pagination={data.pagination} />
+			)}
 
-            <amp-live-list
-                id="live-blog-entries-main"
-                data-max-items-per-page="20" // TODO confirm if this should be dynamic
-            >
-                <div update="" className={updateButtonStyle}>
-                    <button on="tap:live-blog-entries-main.update">
-                        <RefreshIcon />
-                        <span>You have updates</span>
-                    </button>
-                </div>
-                <div items="">
-                    <Blocks
-                        pillar={pillar}
-                        blocks={data.blocks}
-                        // stuff for ads
-                        edition={data.editionId}
-                        section={data.sectionName}
-                        contentType={data.contentType}
-                        switches={config.switches}
-                        commercialProperties={data.commercialProperties}
-                        url={url}
-                        shouldHideAds={data.shouldHideAds}
-                    />
-                </div>
-            </amp-live-list>
+			<amp-live-list
+				id="live-blog-entries-main"
+				data-max-items-per-page="20" // TODO confirm if this should be dynamic
+			>
+				<div update="" className={updateButtonStyle}>
+					<button on="tap:live-blog-entries-main.update">
+						<RefreshIcon />
+						<span>You have updates</span>
+					</button>
+				</div>
+				<div items="">
+					<Blocks
+						pillar={pillar}
+						blocks={data.blocks}
+						// stuff for ads
+						edition={data.editionId}
+						section={data.sectionName}
+						contentType={data.contentType}
+						switches={config.switches}
+						commercialProperties={data.commercialProperties}
+						url={url}
+						shouldHideAds={data.shouldHideAds}
+					/>
+				</div>
+			</amp-live-list>
 
-            <Pagination guardianURL={url} pagination={data.pagination} />
+			<Pagination guardianURL={url} pagination={data.pagination} />
 
-            <SubMeta
-                sections={data.subMetaSectionLinks}
-                keywords={data.subMetaKeywordLinks}
-                pillar={pillar}
-                sharingURLs={getSharingUrls(data.pageId, data.webTitle)}
-                pageID={data.pageId}
-                isCommentable={data.isCommentable}
-                guardianBaseURL={data.guardianBaseURL}
-            />
-        </InnerContainer>
-    );
+			<SubMeta
+				sections={data.subMetaSectionLinks}
+				keywords={data.subMetaKeywordLinks}
+				pillar={pillar}
+				sharingURLs={getSharingUrls(data.pageId, data.webTitle)}
+				pageID={data.pageId}
+				isCommentable={data.isCommentable}
+				guardianBaseURL={data.guardianBaseURL}
+			/>
+		</InnerContainer>
+	);
 };

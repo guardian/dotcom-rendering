@@ -5,149 +5,224 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { escapeData } from '@root/src/lib/escapeData';
-import { getDist } from '@root/src/lib/assets';
+import { getDist, loadableManifestJson } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
+import { ChunkExtractor } from '@loadable/server';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
 interface RenderToStringResult {
-    html: string;
-    css: string;
-    ids: string[];
+	html: string;
+	css: string;
+	ids: string[];
 }
 
 const generateScriptTags = (
-    scripts: Array<{ src: string; module?: boolean }>,
-    scriptAttrs: string = '',
+	scripts: Array<{ src: string; module?: boolean }>,
 ) =>
-    scripts.reduce((scriptTags, script) => {
-        if (script.module) {
-            scriptTags.push(
-                `<script ${scriptAttrs} type="module" src="${getDist({
-                    path: script.src,
-                    legacy: false,
-                })}"></script>`,
-            );
-            scriptTags.push(
-                `<script ${scriptAttrs} nomodule src="${getDist({
-                    path: script.src,
-                    legacy: true,
-                })}"></script>`,
-            );
-        } else {
-            scriptTags.push(`<script defer src="${script.src}"></script>`);
-        }
-        return scriptTags;
-    }, [] as string[]);
+	scripts.reduce((scriptTags, script) => {
+		if (script.module) {
+			scriptTags.push(
+				`<script type="module" src="${getDist({
+					path: script.src,
+					legacy: false,
+				})}"></script>`,
+			);
+			scriptTags.push(
+				`<script defer nomodule src="${getDist({
+					path: script.src,
+					legacy: true,
+				})}"></script>`,
+			);
+		} else {
+			scriptTags.push(`<script defer src="${script.src}"></script>`);
+		}
+		return scriptTags;
+	}, [] as string[]);
 
 export const document = ({ data }: Props) => {
-    const { CAPI, NAV, linkedData } = data;
-    const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-    const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
-        renderToString(
-            // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
-            <CacheProvider value={cache}>
-                <React.StrictMode>
-                    <DecideLayout CAPI={CAPI} NAV={NAV} />
-                </React.StrictMode>
-            </CacheProvider>,
-        ),
-    );
+	const { CAPI, NAV, linkedData } = data;
+	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
+		renderToString(
+			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
+			<CacheProvider value={cache}>
+				<React.StrictMode>
+					<DecideLayout CAPI={CAPI} NAV={NAV} />
+				</React.StrictMode>
+			</CacheProvider>,
+		),
+	);
 
-    /**
-     * Preload the following woff2 font files
-     * TODO: Identify critical fonts to preload
-     */
-    const fontFiles = [
-        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-        'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-        'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-    ];
+	// There are docs on loadable in ./docs/loadable-components.md
+	const loadableExtractor = new ChunkExtractor({
+		stats: loadableManifestJson,
+		entrypoints: ['react'],
+	});
 
-    const polyfillIO =
-        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+	// The lodable-components docs want us to use extractor.collectChunks() but
+	// we don't have the traditional same <App /> rendered on server and client.
+	// Our data structure is vastly different (CAPIType vs CAPIBrowserType) and
+	// our architecture expects src/web/App to be client-side only, therefore
+	// it is difficult for us to use collectChunks to automatically extract the
+	// component splits that we want.
+	// However, this does actually suit our architecture as we can use the CAPI
+	// component reference.
+	const allChunks: LoadableComponents = [
+		{ chunkName: 'EditionDropdown', addWhen: 'always' },
+		{
+			chunkName: 'elements-YoutubeBlockComponent',
+			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+		},
+		{
+			chunkName: 'elements-RichLinkComponent',
+			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+		},
+	];
+	// We want to only insert script tags for the elements or main media elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const CAPIElements: CAPIElement[] = CAPI.blocks[0]
+		? CAPI.blocks[0].elements
+		: [];
+	const { mainMediaElements } = CAPI;
+	// Filter the chunks defined above by whether
+	// the 'addWhen' value is 'always' or matches
+	// any elements in the body or main media element
+	// arrays for the page request.
+	const chunksForPage = allChunks.filter((chunk) =>
+		[...CAPIElements, ...mainMediaElements].some(
+			(block) =>
+				chunk.addWhen === 'always' || block._type === chunk.addWhen,
+		),
+	);
+	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
+	chunksForPage.forEach((chunk) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// @ts-ignore
+		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
+	});
+	// Pass the array of extracted (read: built with addChunk) scripts to
+	// generatedScriptTags so that we can build a script tag array of
+	// modern and legacy scripts.
+	const loadableScripts = generateScriptTags(
+		loadableExtractor
+			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// @ts-ignore
+			.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+			.map((script: { chunk: string }) => ({
+				src: `${script.chunk}.js`,
+				module: true,
+			})),
+	);
+	// Loadable generates configuration script elements as the first two items
+	// of the script element array. We need to generate the react component version
+	// and then build an array of them, rendering them to string and grabbing
+	// the first two items. The alternative getScriptTags just returns a string
+	// of scripts tags already concatenated, so is not useful in this scenario.
+	const loadableConfigScripts = loadableExtractor
+		.getScriptElements()
+		.map((script) => renderToString(script))
+		.slice(0, 2);
 
-    /**
-     * The highest priority scripts.
-     * These scripts have a considerable impact on site performance.
-     * Only scripts critical to application execution may go in here.
-     * Please talk to the dotcom platform team before adding more.
-     * Scripts will be executed in the order they appear in this array
-     */
-    const priorityScriptTags = generateScriptTags(
-        [
-            { src: polyfillIO },
-            { src: 'ophan.js', module: true },
-            CAPI.config && { src: CAPI.config.commercialBundleUrl },
-            { src: 'sentry.js', module: true },
-            { src: 'dynamicImport.js', module: true },
-            { src: 'react.js', module: true },
-        ].filter(Boolean),
-        'defer',
-    );
+	/**
+	 * Preload the following woff2 font files
+	 * TODO: Identify critical fonts to preload
+	 */
+	const fontFiles = [
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+	];
 
-    /**
-     * Low priority scripts. These scripts will be requested
-     * asynchronously after the main HTML has been parsed. Execution
-     * order is not guaranteed. It is even possible that these execute
-     * *before* the high priority scripts, although this is very
-     * unlikely.
-     */
-    const lowPriorityScriptTags = generateScriptTags(
-        [
-            { src: 'https://www.google-analytics.com/analytics.js' },
-            { src: 'ga.js', module: true },
-            { src: 'lotame.js', module: true },
-            { src: 'atomIframe.js', module: true },
-            { src: 'embedIframe.js', module: true },
-            { src: 'newsletterEmbedIframe.js', module: true },
-        ],
-        'async',
-    );
+	const polyfillIO =
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-    /**
-     * We escape windowGuardian here to prevent errors when the data
-     * is placed in a script tag on the page
-     */
-    const windowGuardian = escapeData(
-        JSON.stringify(makeWindowGuardian(data, cssIDs)),
-    );
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
+	const priorityScriptTags = generateScriptTags(
+		[
+			{ src: polyfillIO },
+			{ src: 'ophan.js', module: true },
+			CAPI.config && { src: CAPI.config.commercialBundleUrl },
+			{ src: 'sentryLoader.js', module: true },
+			{ src: 'dynamicImport.js', module: true },
+			// { src: 'react.js', module: true }, // This is now generated through loadableComponents
+		].filter(Boolean),
+	);
 
-    const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
+	/**
+	 * Low priority scripts. These scripts will be requested
+	 * asynchronously after the main HTML has been parsed. Execution
+	 * order is not guaranteed. It is even possible that these execute
+	 * *before* the high priority scripts, although this is very
+	 * unlikely.
+	 */
+	const lowPriorityScriptTags = generateScriptTags([
+		{ src: 'lotame.js', module: true },
+		{ src: 'atomIframe.js', module: true },
+		{ src: 'embedIframe.js', module: true },
+		{ src: 'newsletterEmbedIframe.js', module: true },
+	]);
 
-    const { openGraphData } = CAPI;
-    const { twitterData } = CAPI;
-    const keywords =
-        typeof CAPI.config.keywords === 'undefined' ||
-        CAPI.config.keywords === 'Network Front'
-            ? ''
-            : CAPI.config.keywords;
+	const gaPath = {
+		modern: getDist({
+			path: 'ga.js',
+			legacy: false,
+		}),
+		legacy: getDist({
+			path: 'ga.js',
+			legacy: true,
+		}),
+	};
 
-    return htmlTemplate({
-        linkedData,
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const windowGuardian = escapeData(
+		JSON.stringify(makeWindowGuardian(data, cssIDs)),
+	);
 
-        priorityScriptTags,
+	const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
-        lowPriorityScriptTags,
+	const { openGraphData } = CAPI;
+	const { twitterData } = CAPI;
+	const keywords =
+		typeof CAPI.config.keywords === 'undefined' ||
+		CAPI.config.keywords === 'Network Front'
+			? ''
+			: CAPI.config.keywords;
 
-        css,
-        html,
-        fontFiles,
-        title,
-        description: CAPI.trailText,
-        windowGuardian,
-        ampLink,
-        openGraphData,
-        twitterData,
-        keywords,
-    });
+	return htmlTemplate({
+		linkedData,
+		loadableScripts,
+		loadableConfigScripts,
+		priorityScriptTags,
+		lowPriorityScriptTags,
+		css,
+		html,
+		fontFiles,
+		title,
+		description: CAPI.trailText,
+		windowGuardian,
+		gaPath,
+		ampLink,
+		openGraphData,
+		twitterData,
+		keywords,
+	});
 };

@@ -1,74 +1,56 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { PulsingDot } from '@root/src/web/components/PulsingDot';
+import { Design, Pillar } from '@guardian/types';
 
+import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const kickerStyles = (colour: string) => css`
-    color: ${colour};
-    font-weight: 700;
-    margin-right: 4px;
+	color: ${colour};
+	font-weight: 700;
+	margin-right: 4px;
 `;
 
 const slashStyles = css`
-    &::after {
-        content: '/';
-        display: inline-block;
-        margin-left: 4px;
-    }
+	&::after {
+		content: '/';
+		display: inline-block;
+		margin-left: 4px;
+	}
 `;
 
-const decideColour = (
-    designType: DesignType,
-    pillar: Pillar,
-    inCard?: boolean,
-) => {
-    switch (designType) {
-        case 'Live':
-            // TODO: We need this colour in source foundation
-            return inCard
-                ? decidePillarLight(pillar)
-                : pillarPalette[pillar].main;
-        case 'Media':
-            // On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
-            return inCard && pillar === 'news'
-                ? pillarPalette[pillar].bright
-                : pillarPalette[pillar].main;
-        case 'Feature':
-        case 'PhotoEssay':
-        case 'Interview':
-        case 'Analysis':
-        case 'Article':
-        case 'Review':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianView':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Comment':
-        case 'Immersive':
-        default:
-            return pillarPalette[pillar].main;
-    }
+const decideColour = (design: Design, pillar: Theme, inCard?: boolean) => {
+	switch (design) {
+		case Design.Live:
+			// TODO: We need this colour in source foundation
+			return inCard
+				? decidePillarLight(pillar)
+				: pillarPalette[pillar].main;
+		case Design.Media:
+			// On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
+			return inCard && pillar === Pillar.News
+				? pillarPalette[pillar].bright
+				: pillarPalette[pillar].main;
+		default:
+			return pillarPalette[pillar].main;
+	}
 };
 
 export const Kicker = ({
-    text,
-    designType,
-    pillar,
-    showPulsingDot,
-    showSlash = true,
-    inCard,
+	text,
+	design,
+	pillar,
+	showPulsingDot,
+	showSlash = true,
+	inCard,
 }: KickerType) => {
-    const kickerColour = decideColour(designType, pillar, inCard);
-    return (
-        <span className={kickerStyles(kickerColour)}>
-            {showPulsingDot && <PulsingDot colour={kickerColour} />}
-            <span className={cx(showSlash && slashStyles)}>{text}</span>
-        </span>
-    );
+	const kickerColour = decideColour(design, pillar, inCard);
+	return (
+		<span className={kickerStyles(kickerColour)}>
+			{showPulsingDot && <PulsingDot colour={kickerColour} />}
+			<span className={cx(showSlash && slashStyles)}>{text}</span>
+		</span>
+	);
 };

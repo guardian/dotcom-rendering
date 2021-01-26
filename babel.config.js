@@ -24,6 +24,11 @@ module.exports = {
         ],
         'babel-plugin-px-to-rem',
         '@babel/plugin-transform-runtime',
+        '@loadable/babel-plugin',
+        ["prismjs", {
+            // This list should match those defined in typescript type Language
+            "languages": ["typescript", "javascript", "css", "markup", "scala", "elm"]
+        }]
     ],
 
     env: {

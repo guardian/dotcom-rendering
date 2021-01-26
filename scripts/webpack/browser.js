@@ -39,7 +39,7 @@ const scriptPath = (package) =>
 
 module.exports = ({ isLegacyJS }) => ({
     entry: {
-        sentry: scriptPath('sentry'),
+        sentryLoader: scriptPath('sentryLoader'),
         ga: scriptPath('ga'),
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),

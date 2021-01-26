@@ -1,112 +1,115 @@
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { getStatic, CDN } from '@root/src/lib/assets';
+import { CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
 
 export const htmlTemplate = ({
-    title = 'The Guardian',
-    description,
-    linkedData,
-    priorityScriptTags,
-    lowPriorityScriptTags,
-    css,
-    html,
-    windowGuardian,
-    fontFiles = [],
-    ampLink,
-    openGraphData,
-    twitterData,
-    keywords,
+	title = 'The Guardian',
+	description,
+	linkedData,
+	loadableScripts,
+	loadableConfigScripts,
+	priorityScriptTags,
+	lowPriorityScriptTags,
+	css,
+	html,
+	windowGuardian,
+	gaPath,
+	fontFiles = [],
+	ampLink,
+	openGraphData,
+	twitterData,
+	keywords,
 }: {
-    title?: string;
-    description: string;
-    linkedData: object;
-    priorityScriptTags: string[];
-    lowPriorityScriptTags: string[];
-    css: string;
-    html: string;
-    fontFiles?: string[];
-    windowGuardian: string;
-    ampLink?: string;
-    openGraphData: { [key: string]: string };
-    twitterData: { [key: string]: string };
-    keywords: string;
+	title?: string;
+	description: string;
+	linkedData: object;
+	loadableScripts: string[];
+	loadableConfigScripts: string[];
+	priorityScriptTags: string[];
+	lowPriorityScriptTags: string[];
+	css: string;
+	html: string;
+	fontFiles?: string[];
+	windowGuardian: string;
+	gaPath: { modern: string; legacy: string };
+	ampLink?: string;
+	openGraphData: { [key: string]: string };
+	twitterData: { [key: string]: string };
+	keywords: string;
 }) => {
-    const favicon =
-        process.env.NODE_ENV === 'production'
-            ? 'favicon-32x32.ico'
-            : 'favicon-32x32-dev-yellow.ico';
+	const favicon =
+		process.env.NODE_ENV === 'production'
+			? 'favicon-32x32.ico'
+			: 'favicon-32x32-dev-yellow.ico';
 
-    const fontPreloadTags = fontFiles.map(
-        (fontFile) =>
-            `<link rel="preload" href="${getStatic(
-                fontFile,
-            )}" as="font" crossorigin>`,
-    );
+	const fontPreloadTags = fontFiles.map(
+		(fontFile) =>
+			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
+	);
 
-    const generateMetaTags = (
-        dataObject: { [key: string]: string },
-        attributeName: 'name' | 'property',
-    ) => {
-        if (dataObject) {
-            return Object.entries(dataObject)
-                .map(
-                    ([id, value]) =>
-                        `<meta ${attributeName}="${id}" content="${value}"/>`,
-                )
-                .join('\n');
-        }
-        return '';
-    };
+	const generateMetaTags = (
+		dataObject: { [key: string]: string },
+		attributeName: 'name' | 'property',
+	) => {
+		if (dataObject) {
+			return Object.entries(dataObject)
+				.map(
+					([id, value]) =>
+						`<meta ${attributeName}="${id}" content="${value}"/>`,
+				)
+				.join('\n');
+		}
+		return '';
+	};
 
-    const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
+	const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
 
-    // Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
-    // See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
-    const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
+	// Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
+	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
+	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-    const twitterMetaTags = generateMetaTags(twitterData, 'name');
+	const twitterMetaTags = generateMetaTags(twitterData, 'name');
 
-    // Duplicated prefetch and preconnect tags from DCP:
-    // Documented here: https://github.com/guardian/frontend/pull/12935
-    // Preconnect should be used for the most crucial third party domains
-    // "use preconnect when you know for sure that you’re going to be accessing a resource"
-    // - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
-    // DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
-    // Preconnecting to too many URLs can reduce page performance
-    // DNS-prefetch can also be used as a fallback for IE11
-    // More information on preconnecting:
-    // https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
-    // More information on prefetching:
-    // https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
-    const staticPreconnectUrls = [
-        `${CDN}`,
-        `https://i.guim.co.uk`,
-        `https://j.ophan.co.uk`,
-        `https://ophan.theguardian.com`,
-    ];
+	// Duplicated prefetch and preconnect tags from DCP:
+	// Documented here: https://github.com/guardian/frontend/pull/12935
+	// Preconnect should be used for the most crucial third party domains
+	// "use preconnect when you know for sure that you’re going to be accessing a resource"
+	// - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
+	// DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
+	// Preconnecting to too many URLs can reduce page performance
+	// DNS-prefetch can also be used as a fallback for IE11
+	// More information on preconnecting:
+	// https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
+	// More information on prefetching:
+	// https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+	const staticPreconnectUrls = [
+		`${CDN}`,
+		`https://i.guim.co.uk`,
+		`https://j.ophan.co.uk`,
+		`https://ophan.theguardian.com`,
+	];
 
-    const staticPrefetchUrls = [
-        ...staticPreconnectUrls,
-        `https://api.nextgen.guardianapps.co.uk`,
-        `https://hits-secure.theguardian.com`,
-        `https://interactive.guim.co.uk`,
-        `https://ipv6.guim.co.uk`,
-        `https://phar.gu-web.net`,
-        `https://static.theguardian.com`,
-        `https://support.theguardian.com`,
-    ];
+	const staticPrefetchUrls = [
+		...staticPreconnectUrls,
+		`https://api.nextgen.guardianapps.co.uk`,
+		`https://hits-secure.theguardian.com`,
+		`https://interactive.guim.co.uk`,
+		`https://phar.gu-web.net`,
+		`https://static.theguardian.com`,
+		`https://support.theguardian.com`,
+	];
 
-    const preconnectTags = staticPreconnectUrls.map(
-        (src) => `<link rel="preconnect" href="${src}">`,
-    );
+	const preconnectTags = staticPreconnectUrls.map(
+		(src) => `<link rel="preconnect" href="${src}">`,
+	);
 
-    const prefetchTags = staticPrefetchUrls.map(
-        (src) => `<link rel="dns-prefetch" href="${src}">`,
-    );
+	const prefetchTags = staticPrefetchUrls.map(
+		(src) => `<link rel="dns-prefetch" href="${src}">`,
+	);
 
-    return `<!doctype html>
+	return `<!doctype html>
         <html lang="en">
             <head>
                 <title>${title}</title>
@@ -135,6 +138,10 @@ export const htmlTemplate = ({
 
                 ${twitterMetaTags}
 
+                <!--  This tag enables pages to be featured in Google Discover as large previews
+                    See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
+                <meta name="robots" content="max-image-preview:large">
+
                 <script>
                     window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
@@ -142,11 +149,21 @@ export const htmlTemplate = ({
 
                 <script type="module">
                     window.guardian.mustardCut = true;
+                    window.guardian.gaPath = "${gaPath.modern}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
+                    window.guardian.gaPath = "${gaPath.legacy}";
+                </script>
+
+                <script>
+                    // Noop monkey patch perf.mark and perf.measure if not supported
+                    if(window.performance !== undefined && window.performance.mark === undefined) {
+                        window.performance.mark = function(){};
+                        window.performance.measure = function(){};
+                    }
                 </script>
 
                 <script>
@@ -200,11 +217,16 @@ export const htmlTemplate = ({
                 </script>
 
                 <noscript>
-                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
+                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
+						keywords,
+					).replace(/%20/g, '+')}" />
                 </noscript>
-                ${[...priorityScriptTags].join('\n')}
+                ${priorityScriptTags.join('\n')}
+                ${loadableConfigScripts.join('\n')}
+                ${loadableScripts.join('\n')}
                 <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
 
+                <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>
 
             <body>

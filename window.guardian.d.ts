@@ -41,6 +41,7 @@ declare global {
                 emotionTheming: any;
             };
             readerRevenue: ReaderRevenueDevUtils;
+            gaPath:  string;
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;

@@ -1,35 +1,50 @@
-export const initPerf = (name: string) => {
-    type TimeTakenInMilliseconds = number;
+export const initPerf = (
+	name: string,
+): { start: () => void; end: () => number; clear: () => void } => {
+	type TimeTakenInMilliseconds = number;
 
-    const perf = window.performance;
-    const startKey = `${name}-start`;
-    const endKey = `${name}-end`;
+	const perf = window.performance;
+	const startKey = `${name}-start`;
+	const endKey = `${name}-end`;
 
-    const start = () => {
-        perf.mark(startKey);
-    };
+	if (!perf) {
+		// Return noops if window.performance does not exist
+		return {
+			start: () => {},
+			end: () => 0,
+			clear: () => {},
+		};
+	}
 
-    const end = (): TimeTakenInMilliseconds => {
-        perf.mark(endKey);
-        perf.measure(name, startKey, endKey);
+	const start = () => {
+		perf.mark(startKey);
+	};
 
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify(perf.getEntriesByName(name)));
+	const end = (): TimeTakenInMilliseconds => {
+		perf.mark(endKey);
+		perf.measure(name, startKey, endKey);
 
-        const measureEntries = perf.getEntriesByName(name, "measure");
-        const timeTakenFloat = measureEntries[0].duration;
-        const timeTakenInt = Math.round(timeTakenFloat);
+		// eslint-disable-next-line no-console
+		console.log(JSON.stringify(perf.getEntriesByName(name)));
 
-        return timeTakenInt;
-    };
+		const measureEntries = perf.getEntriesByName(name, 'measure');
+		const timeTakenFloat =
+			(measureEntries &&
+				measureEntries[0] &&
+				measureEntries[0].duration) ||
+			0;
+		const timeTakenInt = Math.round(timeTakenFloat);
 
-    const clear = () => {
-        perf.clearMarks(startKey)
-    }
+		return timeTakenInt;
+	};
 
-    return {
-        start,
-        end,
-        clear,
-    };
+	const clear = () => {
+		perf.clearMarks(startKey);
+	};
+
+	return {
+		start,
+		end,
+		clear,
+	};
 };

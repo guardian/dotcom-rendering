@@ -1,10 +1,12 @@
 import isChromatic from 'chromatic/isChromatic';
 
 import fetchMock from 'fetch-mock';
+import MockDate from 'mockdate';
 import { configure, addParameters } from '@storybook/react';
 
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
+import { getFontsCss } from '@root/src/lib/fonts-css';
 
 import { defaults } from './default-css';
 
@@ -17,13 +19,18 @@ import { Picture } from '@root/src/web/components/Picture';
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
+if (isChromatic()) {
+    // Fix the date to prevent false negatives
+    MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+}
+
 // Add base css for the site
-// let css = `${getFontsCss()}${defaults}`;
+let css = `${getFontsCss()}${defaults}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
-style.appendChild(document.createTextNode(defaults));
+style.appendChild(document.createTextNode(css));
 
 const guardianViewports = {
     mobileMedium: {

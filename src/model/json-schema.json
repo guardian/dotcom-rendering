@@ -33,6 +33,9 @@
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/QuizAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/CodeBlockElement"
                     },
                     {
@@ -187,7 +190,7 @@
             }
         },
         "pillar": {
-            "$ref": "#/definitions/Pillar"
+            "$ref": "#/definitions/CAPIPillar"
         },
         "isImmersive": {
             "type": "boolean"
@@ -246,7 +249,7 @@
             "$ref": "#/definitions/ConfigType"
         },
         "designType": {
-            "$ref": "#/definitions/DesignType"
+            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -412,6 +415,9 @@
                 },
                 "audioIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -422,6 +428,17 @@
                 "kicker",
                 "trackUrl"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "AudioBlockElement": {
             "type": "object",
@@ -467,17 +484,8 @@
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
                 },
-                "display": {
-                    "$ref": "#/definitions/Display"
-                },
-                "designType": {
-                    "$ref": "#/definitions/DesignType"
-                },
                 "captionText": {
                     "type": "string"
-                },
-                "pillar": {
-                    "$ref": "#/definitions/Pillar"
                 },
                 "padCaption": {
                     "type": "boolean"
@@ -496,52 +504,8 @@
                 }
             },
             "required": [
-                "_type",
-                "designType",
-                "display",
-                "pillar"
+                "_type"
             ]
-        },
-        "Display": {
-            "type": "number",
-            "enum": [
-                0,
-                1,
-                2
-            ]
-        },
-        "DesignType": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
-        },
-        "Pillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CalloutBlockElement": {
             "type": "object",
@@ -603,6 +567,9 @@
                 },
                 "calloutIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -933,6 +900,9 @@
                 "html": {
                     "type": "string"
                 },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -953,6 +923,113 @@
                 "url"
             ]
         },
+        "QuizAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                    ]
+                },
+                "quizType": {
+                    "enum": [
+                        "knowledge",
+                        "personality"
+                    ],
+                    "type": "string"
+                },
+                "quizIndex": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        },
+                                        "answerBuckets": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "answerBuckets",
+                                        "id",
+                                        "isCorrect",
+                                        "text"
+                                    ]
+                                }
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "answers",
+                            "id",
+                            "text"
+                        ]
+                    }
+                },
+                "resultBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "id",
+                            "title"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "id",
+                "questions",
+                "quizType",
+                "resultBuckets"
+            ]
+        },
         "CodeBlockElement": {
             "type": "object",
             "properties": {
@@ -962,14 +1039,32 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "code": {
+                    "type": "string"
+                },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
                 }
             },
             "required": [
                 "_type",
+                "code",
                 "isMandatory"
             ]
+        },
+        "Language": {
+            "enum": [
+                "css",
+                "elm",
+                "javascript",
+                "markup",
+                "scala",
+                "typescript"
+            ],
+            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -997,6 +1092,9 @@
                 },
                 "dateTime": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1038,6 +1136,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1079,6 +1180,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1119,17 +1223,6 @@
                 "isMandatory"
             ]
         },
-        "RoleType": {
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
-        },
         "ExplainerAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1147,6 +1240,9 @@
                 },
                 "body": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1218,6 +1314,9 @@
                 },
                 "guideIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1252,6 +1351,9 @@
                 },
                 "source": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1462,6 +1564,9 @@
                 },
                 "hasCaption": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1491,6 +1596,9 @@
                 },
                 "css": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 },
                 "url": {
                     "type": "string"
@@ -1568,6 +1676,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1646,6 +1757,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1682,6 +1796,9 @@
                 },
                 "profileIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1744,6 +1861,9 @@
                 },
                 "qandaIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1806,6 +1926,9 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1839,6 +1962,9 @@
                 },
                 "caption": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1877,6 +2003,9 @@
                 },
                 "html": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1932,6 +2061,9 @@
                 },
                 "timelineIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -1982,6 +2114,9 @@
                 },
                 "hasMedia": {
                     "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2000,6 +2135,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2029,6 +2167,9 @@
                 },
                 "embedUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2067,6 +2208,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2108,6 +2252,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2142,8 +2289,23 @@
                 "duration": {
                     "type": "number"
                 },
-                "posterSrc": {
-                    "type": "string"
+                "posterImage": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "width"
+                        ]
+                    }
                 },
                 "expired": {
                     "type": "boolean"
@@ -2151,14 +2313,22 @@
                 "overrideImage": {
                     "type": "string"
                 },
+                "altText": {
+                    "type": "string"
+                },
                 "youtubeIndex": {
                     "type": "number"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
                 "assetId",
+                "channelId",
                 "expired",
+                "id",
                 "mediaTitle"
             ]
         },
@@ -2189,6 +2359,9 @@
                             },
                             {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QuizAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/CodeBlockElement"
@@ -2298,25 +2471,25 @@
                         ]
                     }
                 },
-                "createdOn": {
+                "blockCreatedOn": {
                     "type": "number"
                 },
-                "createdOnDisplay": {
+                "blockCreatedOnDisplay": {
                     "type": "string"
                 },
-                "lastUpdated": {
+                "blockLastUpdated": {
                     "type": "number"
                 },
-                "lastUpdatedDisplay": {
+                "blockLastUpdatedDisplay": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "firstPublished": {
+                "blockFirstPublished": {
                     "type": "number"
                 },
-                "firstPublishedDisplay": {
+                "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
                 "primaryDateLine": {
@@ -2410,6 +2583,17 @@
                 "title",
                 "type"
             ]
+        },
+        "CAPIPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "SimpleLinkType": {
             "type": "object",
@@ -2551,7 +2735,13 @@
                 "idUrl": {
                     "type": "string"
                 },
+                "mmaUrl": {
+                    "type": "string"
+                },
                 "brazeApiKey": {
+                    "type": "string"
+                },
+                "ipsosTag": {
                     "type": "string"
                 },
                 "pageId": {
@@ -2614,6 +2804,28 @@
                 "switches",
                 "videoDuration"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "PhotoEssay",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

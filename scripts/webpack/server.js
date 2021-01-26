@@ -16,6 +16,7 @@ module.exports = () => ({
         runtimeChunk: false,
     },
     externals: [
+        '@loadable/component',
         require('webpack-node-externals')({
             allowlist: [/^@guardian/],
         }),
@@ -29,8 +30,12 @@ module.exports = () => ({
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
+        (context, request, callback) => {
+            return request.endsWith('loadable-manifest-browser.json')
+                ? callback(null, `commonjs ${request}`)
+                : callback();
+        },
     ],
-
     module: {
         rules: [
             {

@@ -22,21 +22,28 @@
  * As new items are added, all z-indexes are adjusted
  */
 const indices = [
-    // Modals will go here at the top
+	// Modals will go here at the top
 
-    'banner',
+	'banner',
 
-    // Header
-    'stickyAdWrapper',
-    'headerWrapper',
+	// Header
+	'stickyAdWrapper',
+	'headerWrapper',
 
-    // Header links (should be above The Guardian svg)
-    'headerLinks',
-    'TheGuardian',
+	// Header links (should be above The Guardian svg)
+	'headerLinks',
+	'TheGuardian',
 
-    // Body
-    'bodyArea',
-    'rightColumnArea',
+	// Article headline (should be above main media)
+	'articleHeadline',
+	'immersiveBlackBox',
+
+	// Body
+	'bodyArea',
+	'rightColumnArea',
+
+	// Main media
+	'mainMedia',
 ];
 
 //
@@ -44,19 +51,19 @@ const indices = [
 type ZIndex = typeof indices[number];
 
 function reverseArray(array: any[]) {
-    return array.map((item, index) => array[array.length - 1 - index]);
+	return array.map((item, index) => array[array.length - 1 - index]);
 }
 
 const decideIndex = (name: string): number | null => {
-    let decided;
-    reverseArray(indices).forEach((item, index) => {
-        if (item === name) decided = index + 1;
-    });
-    return decided || null;
+	let decided;
+	reverseArray(indices).forEach((item, index) => {
+		if (item === name) decided = index + 1;
+	});
+	return decided || null;
 };
 
 export const getZIndex = (zIndex: ZIndex): string =>
-    `z-index: ${decideIndex(zIndex)};`;
+	`z-index: ${decideIndex(zIndex)};`;
 
 export const getZIndexImportant = (zIndex: ZIndex): string =>
-    `z-index: ${decideIndex(zIndex)} !important;`;
+	`z-index: ${decideIndex(zIndex)} !important;`;

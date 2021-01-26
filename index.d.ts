@@ -3,43 +3,42 @@
 // ------------------------- //
 
 // Pillars are used for styling
-// RealPillars have Pillar palette colours
+// RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
-type Pillar = RealPillars | FakePillars;
+type CAPIPillar = RealPillars | FakePillars;
 
-declare const enum Display {
-    Standard,
-    Immersive,
-    Showcase,
-}
-
+// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
-type DesignType =
+type CAPIDesign =
     | 'Article'
-    | 'Immersive'
     | 'Media'
     | 'Review'
     | 'Analysis'
     | 'Comment'
     | 'Feature'
     | 'Live'
-    | 'SpecialReport'
     | 'Recipe'
     | 'MatchReport'
     | 'Interview'
     | 'GuardianView'
-    | 'GuardianLabs'
     | 'Quiz'
     | 'AdvertisementFeature'
-    | 'PhotoEssay';
+    | 'PhotoEssay'
+    | 'Immersive'
+    | 'SpecialReport'
+    | 'GuardianLabs'
+
+type Design = import('@guardian/types').Design;
+type Theme = import('@guardian/types').Theme;
+type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DesignTypesObj = { [key in DesignType]: any };
+type DesignTypesObj = { [key in Design]: any };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
@@ -99,12 +98,24 @@ interface Branding {
     };
 }
 
+interface CAPILinkType extends SimpleLinkType {
+    longTitle: string;
+    children?: LinkType[];
+    mobileOnly?: boolean;
+    pillar?: CAPIPillar;
+    more?: boolean;
+}
+
 interface LinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
     mobileOnly?: boolean;
     pillar?: Pillar;
     more?: boolean;
+}
+
+interface CAPIPillarType extends CAPILinkType {
+    pillar: CAPIPillar;
 }
 
 interface PillarType extends LinkType {
@@ -119,6 +130,7 @@ interface ReaderRevenueCategories {
     contribute: string;
     subscribe: string;
     support: string;
+    gifting: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
@@ -137,13 +149,20 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-interface NavType {
-    pillars: PillarType[];
+interface BaseNavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
     subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface NavType extends BaseNavType {
+    pillars: PillarType[];
+}
+
+interface CAPINavType extends BaseNavType {
+    pillars: CAPIPillarType[];
 }
 
 interface SubNavBrowserType {
@@ -165,13 +184,13 @@ interface AuthorType {
 interface Block {
     id: string;
     elements: CAPIElement[];
-    createdOn?: number;
-    createdOnDisplay?: string;
-    lastUpdated?: number;
-    lastUpdatedDisplay?: string;
+    blockCreatedOn?: number;
+    blockCreatedOnDisplay?: string;
+    blockLastUpdated?: number;
+    blockLastUpdatedDisplay?: string;
     title?: string;
-    firstPublished?: number;
-    firstPublishedDisplay?: string;
+    blockFirstPublished?: number;
+    blockFirstPublishedDisplay?: string;
     primaryDateLine: string;
     secondaryDateLine: string;
 }
@@ -246,7 +265,7 @@ interface CAPIType {
     pageId: string;
     version: number; // TODO: check who uses?
     tags: TagType[];
-    pillar: Pillar;
+    pillar: CAPIPillar;
     isImmersive: boolean;
     sectionLabel: string;
     sectionUrl: string;
@@ -260,7 +279,9 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
-    designType: DesignType;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: CAPIDesign;
     showBottomSocialButtons: boolean;
     shouldHideReaderRevenue: boolean;
 
@@ -291,8 +312,10 @@ interface CAPIType {
 }
 
 type CAPIBrowserType = {
-    designType: DesignType;
-    pillar: Pillar;
+    // The CAPI object sent from frontend can have designType Immersive. We force this to be Article
+    // in decideDesignType but need to allow the type here before then
+    designType: CAPIDesign;
+    pillar: CAPIPillar;
     config: ConfigTypeBrowser;
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -331,6 +354,7 @@ type CAPIBrowserType = {
     audioAtoms: AudioAtomBlockElement[];
     youtubeBlockElement: YoutubeBlockElement[];
     youtubeMainMediaBlockElement: YoutubeBlockElement[];
+    quizAtoms: QuizAtomBlockElement[];
 };
 
 interface TagType {
@@ -350,8 +374,8 @@ interface BadgeType {
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 interface KickerType {
     text: string;
-    designType: DesignType;
-    pillar: Pillar;
+    design: Design;
+    pillar: Theme;
     showPulsingDot?: boolean;
     showSlash?: boolean;
     inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
@@ -372,13 +396,13 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: Pillar;
-    designType: DesignType;
+    pillar: Theme;
+    design: Design;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
-    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
     byline?: string;
-    isLiveBlog?: boolean; // When designType === 'Live', this denotes if the liveblog is active or not
+    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
     showByline?: boolean;
     webPublicationDate?: string;
     imageUrl?: string;
@@ -407,9 +431,9 @@ type HeadlineLink = {
 };
 
 interface LinkHeadlineType {
-    designType: DesignType;
+    design: Design;
     headlineText: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kickerText?: string;
     showPulsingDot?: boolean;
@@ -422,12 +446,12 @@ interface LinkHeadlineType {
 
 interface CardHeadlineType {
     headlineText: string; // The text shown
-    designType: DesignType; // Used to decide when to add type specific styles
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    design: Design; // Used to decide when to add type specific styles
+    pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
-    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
     showByline?: boolean;
@@ -497,7 +521,7 @@ type OnwardsType = {
     description?: string;
     url?: string;
     ophanComponentName: OphanComponentName;
-    pillar: Pillar;
+    pillar: Theme;
 };
 
 type OphanComponentName =
@@ -566,7 +590,9 @@ interface ConfigType extends CommercialConfigType {
     references?: { [key: string]: string }[];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
     brazeApiKey?: string;
+    ipsosTag?: string;
 }
 
 interface ConfigTypeBrowser {
@@ -601,10 +627,11 @@ interface ConfigTypeBrowser {
     switches: CAPIType['config']['switches'];
     host?: string;
     idUrl?: string;
+    mmaUrl?: string;
 }
 
 interface GADataType {
-    pillar: Pillar;
+    pillar: CAPIPillar;
     webTitle: string;
     section: string;
     contentType: string;
@@ -645,14 +672,13 @@ interface Props {
     data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
-type JSXElements = JSX.Element | JSX.Element[];
-
 type IslandType =
     | 'reader-revenue-links-header'
     | 'sub-nav-root'
     | 'edition-root'
     | 'most-viewed-right'
-    | 'share-comment-counts'
+    | 'share-count-root'
+    | 'comment-count-root'
     | 'most-viewed-footer'
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
@@ -667,6 +693,7 @@ type IslandType =
     | 'match-stats'
     | 'callout'
     | 'comments'
+    | 'quiz-atom'
     | 'qanda-atom'
     | 'guide-atom'
     | 'profile-atom'
@@ -677,9 +704,33 @@ type IslandType =
     | 'youtube-block-main-media'
     | 'chart-atom';
 
-interface TrailType {
-    designType: DesignType;
-    pillar: Pillar;
+// All Components that are loaded with loadable
+// should be added here, this is the chunk name as
+// defined in manifest.json
+type BlockElementType = string;
+interface ComponentNameChunkMap {
+    chunkName: string;
+    addWhen: BlockElementType | 'always';
+}
+interface EditionDropdownLoadable extends ComponentNameChunkMap{
+    chunkName: 'EditionDropdown';
+    addWhen: 'always';
+}
+interface YoutubeBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-YoutubeBlockComponent';
+    addWhen: YoutubeBlockElement['_type'];
+}
+
+interface RichLinkBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-RichLinkComponent';
+    addWhen: RichLinkBlockElement['_type'];
+}
+
+// There are docs on loadable in ./docs/loadable-components.md
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+
+interface BaseTrailType {
+
     url: string;
     headline: string;
     isLiveBlog: boolean;
@@ -697,16 +748,30 @@ interface TrailType {
     starRating?: number;
     linkText?: string;
 }
+interface TrailType extends BaseTrailType {
+    design: Design;
+    pillar: Theme;
+}
+
+interface CAPITrailType extends BaseTrailType {
+    designType: CAPIDesign;
+    pillar: CAPIPillar;
+}
 
 interface TrailTabType {
     heading: string;
     trails: TrailType[];
 }
 
+interface CAPITrailTabType {
+    heading: string;
+    trails: CAPITrailType[];
+}
+
 interface MostViewedFooterPayloadType {
-    tabs: TrailTabType[];
-    mostCommented: TrailType;
-    mostShared: TrailType;
+    tabs: CAPITrailTabType[];
+    mostCommented: CAPITrailType;
+    mostShared: CAPITrailType;
 }
 
 // ----------
@@ -719,19 +784,6 @@ type AdSlotType =
     | 'merchandising-high'
     | 'merchandising'
     | 'comments';
-
-interface AdSlotParameters {
-    name: AdSlotType;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
 
 // ------------------------------
 // 3rd party type declarations //
@@ -766,6 +818,7 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {
+        'amp-experiment': any;
         'amp-sidebar': any;
         'amp-accordion': any;
         'amp-img': any;
