@@ -5,7 +5,6 @@ import { css } from 'emotion';
 import { border, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
-import { Link } from '@guardian/src-link';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
@@ -135,10 +134,6 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 									To view this content, click
 									&apos;Allow&apos;.
 								</p>
-								<Link href="https://theguardian.com">
-									{' '}
-									Learn more
-								</Link>
 							</Body>
 						</Top>
 						<Bottom>
