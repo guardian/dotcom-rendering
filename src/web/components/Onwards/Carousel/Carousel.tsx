@@ -1,18 +1,21 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { css, cx } from 'emotion';
+import libDebounce from 'lodash/debounce';
+
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
-import { css, cx } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import libDebounce from 'lodash/debounce';
+import { Display } from '@guardian/types';
+
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
+import { Card } from '@frontend/web/components/Card/Card';
+import { LI } from '@frontend/web/components/Card/components/LI';
 import { pillarPalette } from '@root/src/lib/pillars';
-
-import { CarouselCard } from './CarouselCard';
 
 const navIconStyle = css`
 	display: inline-block;
@@ -64,14 +67,14 @@ const containerStyles = css`
 
 const carouselStyle = css`
 	min-height: 227px;
+	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
+
 	display: flex;
+	flex-direction: row;
 	align-items: stretch;
 
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-
-	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
-
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
 	${from.tablet} {
 		&::-webkit-scrollbar {
@@ -81,10 +84,7 @@ const carouselStyle = css`
 		scrollbar-width: none;
 	}
 
-	${from.tablet} {
-		margin-left: 10px;
-	}
-	flex-direction: row;
+	margin-left: -5px; /* Align leftmost card correctly */
 `;
 
 const dotsStyle = css`
@@ -188,6 +188,46 @@ export const Title = ({
 	</h2>
 );
 
+type CarouselCardProps = {
+	isFirst: boolean;
+	pillar: Theme;
+	design: Design;
+	linkTo: string;
+	headlineText: string;
+	webPublicationDate: string;
+	kickerText?: string;
+	imageUrl?: string;
+};
+
+export const CarouselCard: React.FC<CarouselCardProps> = ({
+	pillar,
+	design,
+	linkTo,
+	imageUrl,
+	headlineText,
+	webPublicationDate,
+	kickerText,
+	isFirst,
+}: CarouselCardProps) => (
+	<LI stretch={true} percentage="100%" showDivider={!isFirst} padSides={true}>
+		<Card
+			linkTo={linkTo}
+			format={{
+				display: Display.Standard,
+				design,
+				theme: pillar,
+			}}
+			headlineText={headlineText}
+			webPublicationDate={webPublicationDate}
+			kickerText={kickerText || ''}
+			imageUrl={imageUrl || ''}
+			showClock={true}
+			alwaysVertical={true}
+			minWidthInPixels={258}
+		/>
+	</LI>
+);
+
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
@@ -288,10 +328,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 		}
 	});
 
-	const cards = trails.map((trail, i) => (
-		<CarouselCard key={trail.url + i} trail={trail} />
-	));
-
 	return (
 		<div
 			className={wrapperStyle}
@@ -344,7 +380,30 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</div>
 
 				<ul className={carouselStyle} ref={carouselRef}>
-					{cards}
+					{trails.map((trail, i) => {
+						const {
+							pillar: cardPillar,
+							design,
+							url: linkTo,
+							headline: headlineText,
+							webPublicationDate,
+							image: imageUrl,
+							kickerText,
+						} = trail;
+						return (
+							<CarouselCard
+								key={trail.url + i}
+								isFirst={i === 0}
+								pillar={cardPillar}
+								design={design}
+								linkTo={linkTo}
+								headlineText={headlineText}
+								webPublicationDate={webPublicationDate}
+								imageUrl={imageUrl}
+								kickerText={kickerText}
+							/>
+						);
+					})}
 				</ul>
 			</div>
 		</div>
