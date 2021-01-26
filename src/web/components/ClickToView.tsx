@@ -122,16 +122,17 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 					<Inner>
 						<Top>
 							<Headline width={width}>
-								The colourful beak is very large
+								Allow content provided by a third party?
 							</Headline>
 							<Body width={width}>
-								Quaerat quaerat ex nihil autem consequatur.
-								Velit rerum at ad dignissimos aut excepturi
-								ratione excepturi. Quaerat ipsam natus totam et
-								aut distinctio eaque voluptatem.
+								This article includes content hosted on
+								other.com. We ask for your permission before
+								anything is loaded, as the provider may be using
+								cookies and other technologies. To view this
+								content, click &apos;Allow&apos;.
 								<Link href="https://theguardian.com">
 									{' '}
-									Quaerat ipsam
+									Learn more
 								</Link>
 							</Body>
 						</Top>
@@ -143,7 +144,7 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 								iconSide="left"
 								onClick={() => handleClick()}
 							>
-								Click to view
+								Allow
 							</Button>
 						</Bottom>
 					</Inner>
