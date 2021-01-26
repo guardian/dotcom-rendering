@@ -4,6 +4,7 @@ interface AssetHash {
 
 let assetHash: AssetHash = {};
 let assetHashLegacy: AssetHash = {};
+let loadableManifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
@@ -11,6 +12,8 @@ try {
 	assetHash = require('./manifest.json');
 	// eslint-disable-next-line import/no-unresolved
 	assetHashLegacy = require('./manifest.legacy.json');
+	// eslint-disable-next-line import/no-unresolved
+	loadableManifest = require('./loadable-manifest-browser.json');
 } catch (e) {
 	// do nothing
 }
@@ -25,7 +28,7 @@ const stage =
 export const CDN = stage
 	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
 	: '/';
-
+export const loadableManifestJson = loadableManifest;
 export const getDist = ({
 	path,
 	legacy,

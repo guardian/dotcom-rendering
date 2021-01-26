@@ -1,13 +1,10 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-
-import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -68,6 +65,14 @@ import { trackPerformance } from '../browser/ga/ga';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
+
+const EditionDropdown = loadable(
+	() => import('@frontend/web/components/EditionDropdown'),
+	{
+		resolveComponent: (module) => module.EditionDropdown,
+	},
+);
+
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -293,6 +298,38 @@ export const App = ({ CAPI, NAV }: Props) => {
 	});
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
+	// There are docs on loadable in ./docs/loadable-components.md
+	const YoutubeBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.youtubeBlockElement.length > 0 ||
+				CAPI.youtubeMainMediaBlockElement.length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/YoutubeBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.YoutubeBlockComponent,
+		},
+	);
+
+	const RichLinkComponent = loadable(
+		() => {
+			if (CAPI.richLinks.length > 0) {
+				return import(
+					'@frontend/web/components/elements/RichLinkComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.RichLinkComponent,
+		},
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
