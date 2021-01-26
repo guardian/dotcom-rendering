@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';

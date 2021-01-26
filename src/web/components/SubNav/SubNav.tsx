@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Format } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 

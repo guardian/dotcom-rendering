@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Design, Display, Format, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { Avatar } from './Avatar';
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar, Format, Display } from '@guardian/types';
+import { Design, Pillar, Display } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';

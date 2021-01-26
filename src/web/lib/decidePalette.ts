@@ -1,4 +1,5 @@
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import { neutral, text } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';

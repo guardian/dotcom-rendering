@@ -10,7 +10,8 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Format } from '@guardian/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';

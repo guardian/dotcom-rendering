@@ -43,7 +43,8 @@ import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';

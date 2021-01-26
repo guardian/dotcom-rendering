@@ -1,4 +1,5 @@
-import { Special, Pillar, Theme } from '@guardian/types';
+import { Special, Pillar } from '@guardian/types';
+import type { Theme } from '@guardian/types';
 
 import {
 	news as _news,

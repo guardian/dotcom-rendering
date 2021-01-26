@@ -8,7 +8,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design, Format } from '@guardian/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
