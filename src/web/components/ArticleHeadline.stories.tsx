@@ -500,12 +500,12 @@ export const ImmersiveNoMainMedia = () => (
 					headlineString="This is the headline you see when design type is PrintShop, which has no main media"
 					palette={decidePalette({
 						display: Display.Immersive,
-						design: Design.Article,
+						design: Design.PrintShop,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Immersive,
-						design: Design.Article,
+						design: Design.PrintShop,
 						theme: Pillar.News,
 					}}
 					tags={[]}
