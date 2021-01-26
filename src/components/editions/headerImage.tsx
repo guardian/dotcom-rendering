@@ -97,7 +97,11 @@ const HeaderImage: FC<Props> = ({ item }) => {
 						format={item}
 						className={some(getImageStyle(image))}
 						supportsDarkMode
-						lightbox={none}
+						lightbox={some({
+							className: 'js-launch-slideshow js-main-image',
+							caption: none,
+							credit: none,
+						})}
 					/>
 					<HeaderImageCaption
 						caption={nativeCaption}
