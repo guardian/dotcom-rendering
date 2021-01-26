@@ -9,7 +9,7 @@ deployments:
       cloudFormationStackName: rendering
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering
+          Recipe: dotcom-rendering-node14-test
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:
