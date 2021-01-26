@@ -2741,6 +2741,9 @@
                 "brazeApiKey": {
                     "type": "string"
                 },
+                "ipsosTag": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },

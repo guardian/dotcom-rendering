@@ -83,8 +83,7 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 
 export const Card = ({
 	linkTo,
-	pillar,
-	design,
+	format,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -122,12 +121,12 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	const pillarToUse =
-		design === Design.Comment && pillar === Pillar.News
+		format.design === Design.Comment && format.theme === Pillar.News
 			? Pillar.Opinion
-			: pillar;
+			: format.theme;
 
 	return (
-		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>
+		<CardLink linkTo={linkTo} design={format.design} pillar={pillarToUse}>
 			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
 				<CardLayout
 					imagePosition={imagePosition}
@@ -159,21 +158,22 @@ export const Card = ({
 								<HeadlineWrapper>
 									<CardHeadline
 										headlineText={headlineText}
-										design={design}
+										design={format.design}
 										pillar={pillarToUse}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											design === Design.Live
+											format.design === Design.Live
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											design === Design.Live ||
+											format.design === Design.Live ||
 											showPulsingDot
 										}
 										showSlash={
-											design === Design.Live || showSlash
+											format.design === Design.Live ||
+											showSlash
 										}
 										byline={byline}
 										showByline={showByline}
@@ -186,7 +186,7 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													pillar={pillarToUse}
+													format={format}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -205,17 +205,17 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												pillar={pillarToUse}
+												format={format}
 											/>
 										</AvatarContainer>
 									</Hide>
 								)}
 								<CardFooter
-									design={design}
+									design={format.design}
 									age={
 										webPublicationDate ? (
 											<CardAge
-												design={design}
+												design={format.design}
 												pillar={pillarToUse}
 												webPublicationDate={
 													webPublicationDate
@@ -225,7 +225,8 @@ export const Card = ({
 										) : undefined
 									}
 									mediaMeta={
-										design === Design.Media && mediaType ? (
+										format.design === Design.Media &&
+										mediaType ? (
 											<MediaMeta
 												pillar={pillarToUse}
 												mediaType={mediaType}
@@ -238,7 +239,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												design={design}
+												design={format.design}
 												pillar={pillarToUse}
 												long={longCount}
 												short={shortCount}

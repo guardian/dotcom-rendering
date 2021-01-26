@@ -10,8 +10,9 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { Design, Format } from '@guardian/types';
 
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -50,7 +51,6 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display, Design } from '@guardian/types';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -291,18 +291,10 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	display: Display;
-	design: Design;
-	pillar: Theme;
+	format: Format;
 }
 
-export const StandardLayout = ({
-	CAPI,
-	NAV,
-	display,
-	design,
-	pillar,
-}: Props) => {
+export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -323,7 +315,8 @@ export const StandardLayout = ({
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showMatchStats = design === Design.MatchReport && CAPI.matchUrl;
+	const showMatchStats =
+		format.design === Design.MatchReport && CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -343,7 +336,7 @@ export const StandardLayout = ({
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
-							display={display}
+							display={format.display}
 						/>
 					</Section>
 				</Stuck>
@@ -371,7 +364,7 @@ export const StandardLayout = ({
 						<Nav
 							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={display}
+							display={format.display}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -388,7 +381,7 @@ export const StandardLayout = ({
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								pillar={pillar}
+								format={format}
 							/>
 						</Section>
 					)}
@@ -398,22 +391,22 @@ export const StandardLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={pillar} />
+						<GuardianLines count={4} pillar={format.theme} />
 					</Section>
 				</SendToBack>
 			</div>
 
 			<Section data-print-layout="hide" showTopBorder={false}>
-				<StandardGrid design={design} CAPI={CAPI}>
+				<StandardGrid design={format.design} CAPI={CAPI}>
 					<GridItem area="title">
 						<ArticleTitle
-							display={display}
-							design={design}
+							display={format.display}
+							design={format.design}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={pillar}
+							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>
@@ -422,24 +415,28 @@ export const StandardLayout = ({
 					</GridItem>
 					<GridItem area="preFurniture">
 						<div className={maxWidth}>
-							{design === Design.MatchReport && CAPI.matchUrl && (
-								<Placeholder rootId="match-nav" height={230} />
-							)}
+							{format.design === Design.MatchReport &&
+								CAPI.matchUrl && (
+									<Placeholder
+										rootId="match-nav"
+										height={230}
+									/>
+								)}
 						</div>
 					</GridItem>
 					<GridItem area="headline">
 						<div className={maxWidth}>
-							<ArticleHeadlinePadding design={design}>
+							<ArticleHeadlinePadding design={format.design}>
 								{age && (
 									<div className={ageWarningMargins}>
 										<AgeWarning age={age} />
 									</div>
 								)}
 								<ArticleHeadline
-									display={display}
+									display={format.display}
 									headlineString={CAPI.headline}
-									design={design}
-									pillar={pillar}
+									design={format.design}
+									pillar={format.theme}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>
@@ -464,19 +461,19 @@ export const StandardLayout = ({
 					</GridItem>
 					<GridItem area="standfirst">
 						<ArticleStandfirst
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
 					<GridItem area="media">
 						<div className={maxWidth}>
 							<MainMedia
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								elements={CAPI.mainMediaElements}
-								pillar={pillar}
+								pillar={format.theme}
 								adTargeting={adTargeting}
 								host={host}
 							/>
@@ -486,9 +483,12 @@ export const StandardLayout = ({
 						<div className={maxWidth}>
 							<div className={stretchLines}>
 								<GuardianLines
-									count={decideLineCount(design)}
-									pillar={pillar}
-									effect={decideLineEffect(design, pillar)}
+									count={decideLineCount(format.design)}
+									pillar={format.theme}
+									effect={decideLineEffect(
+										format.design,
+										format.theme,
+									)}
 								/>
 							</div>
 						</div>
@@ -497,9 +497,7 @@ export const StandardLayout = ({
 						<div className={maxWidth}>
 							<ArticleMeta
 								branding={branding}
-								display={display}
-								design={design}
-								pillar={pillar}
+								format={format}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
@@ -515,10 +513,8 @@ export const StandardLayout = ({
 						<ArticleContainer>
 							<main className={articleWidth}>
 								<ArticleBody
-									pillar={pillar}
+									format={format}
 									blocks={CAPI.blocks}
-									display={display}
-									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>
@@ -528,10 +524,10 @@ export const StandardLayout = ({
 								<GuardianLines
 									data-print-layout="hide"
 									count={4}
-									pillar={pillar}
+									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={pillar}
+									pillar={format.theme}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
@@ -567,7 +563,10 @@ export const StandardLayout = ({
 							`}
 						>
 							<RightColumn>
-								<AdSlot position="right" display={display} />
+								<AdSlot
+									position="right"
+									display={format.display}
+								/>
 								{!isPaidContent ? (
 									<MostViewedRightIsland />
 								) : (
@@ -589,7 +588,7 @@ export const StandardLayout = ({
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
-					display={display}
+					display={format.display}
 				/>
 			</Section>
 
@@ -613,7 +612,7 @@ export const StandardLayout = ({
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
-								pillar={pillar}
+								pillar={format.theme}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
@@ -622,7 +621,7 @@ export const StandardLayout = ({
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
 								beingHydrated={false}
-								display={display}
+								display={format.display}
 							/>
 						</Section>
 					)}
@@ -653,7 +652,7 @@ export const StandardLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising" display={display} />
+				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
 			{NAV.subNavSections && (
@@ -665,9 +664,9 @@ export const StandardLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						pillar={pillar}
+						format={format}
 					/>
-					<GuardianLines count={4} pillar={pillar} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 
@@ -680,7 +679,7 @@ export const StandardLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={pillar}
+					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
 			</Section>
