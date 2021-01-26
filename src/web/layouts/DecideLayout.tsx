@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Display, Design, Format } from '@guardian/types';
+
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { Display, Design } from '@guardian/types';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -22,6 +24,12 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 		design,
 	});
 
+	const format: Format = {
+		display,
+		design,
+		theme: pillar,
+	};
+
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
@@ -31,9 +39,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
-							display={Display.Immersive}
-							design={design}
-							pillar={pillar}
+							format={format}
 						/>
 					);
 				default:
@@ -41,9 +47,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
-							display={Display.Immersive}
-							design={design}
-							pillar={pillar}
+							format={format}
 						/>
 					);
 			}
@@ -53,23 +57,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
-						<CommentLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							display={Display.Showcase}
-							design={design}
-							pillar={pillar}
-						/>
+						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 				default:
 					return (
-						<ShowcaseLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							display={Display.Showcase}
-							design={design}
-							pillar={pillar}
-						/>
+						<ShowcaseLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 			}
 		}
@@ -79,23 +71,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
-						<CommentLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							display={Display.Standard}
-							design={design}
-							pillar={pillar}
-						/>
+						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 				default:
 					return (
-						<StandardLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							display={Display.Standard}
-							design={design}
-							pillar={pillar}
-						/>
+						<StandardLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 			}
 		}

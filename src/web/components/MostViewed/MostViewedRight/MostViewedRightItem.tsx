@@ -7,6 +7,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/lib/useHover';
+import { Display } from '@guardian/types';
 
 const listItemStyles = css`
 	list-style: none;
@@ -78,7 +79,11 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								pillar={trail.pillar}
+								format={{
+									display: Display.Standard,
+									design: trail.design,
+									theme: trail.pillar,
+								}}
 							/>
 						</div>
 					)}

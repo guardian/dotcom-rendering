@@ -32,6 +32,7 @@ type CAPIDesign =
 
 type Design = import('@guardian/types').Design;
 type Theme = import('@guardian/types').Theme;
+type Format = import('@guardian/types').Format;
 type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
@@ -396,8 +397,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
     linkTo: string;
-    pillar: Theme;
-    design: Design;
+    format: Format;
     headlineText: string;
     headlineSize?: SmallHeadlineSize;
     showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion

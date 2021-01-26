@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Pillar } from '@guardian/types';
+import { Design, Display, Format, Pillar } from '@guardian/types';
 
 import { Avatar } from './Avatar';
 
@@ -16,12 +16,21 @@ const imageSrc300 =
 const imageSrc300Sport =
 	'https://i.guim.co.uk/img/uploads/2018/05/25/Sid_Lowe,_L.png?width=300&quality=85&auto=format&fit=max&s=4e058df05bd09dd029abe3d23bddb27c';
 
+const format: Format = {
+	theme: Pillar.News,
+	design: Design.Article,
+	display: Display.Standard,
+};
+
 export const defaultStory = () => (
 	<div style={{ width: '136px', height: '136px' }}>
 		<Avatar
 			imageSrc={imageSrc173}
 			imageAlt="The alt of the image"
-			pillar={Pillar.Opinion}
+			format={{
+				...format,
+				theme: Pillar.Opinion,
+			}}
 		/>
 	</div>
 );
@@ -32,7 +41,10 @@ export const largeStory = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar={Pillar.Lifestyle}
+			format={{
+				...format,
+				theme: Pillar.Lifestyle,
+			}}
 		/>
 	</div>
 );
@@ -43,7 +55,7 @@ export const largeStoryNews = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar={Pillar.News}
+			format={format}
 		/>
 	</div>
 );
@@ -54,7 +66,10 @@ export const largeStoryCulture = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			pillar={Pillar.Culture}
+			format={{
+				...format,
+				theme: Pillar.Culture,
+			}}
 		/>
 	</div>
 );
@@ -65,7 +80,10 @@ export const smallStory = () => (
 		<Avatar
 			imageSrc={imageSrc300Sport}
 			imageAlt="The alt of the image"
-			pillar={Pillar.Sport}
+			format={{
+				...format,
+				theme: Pillar.Sport,
+			}}
 		/>
 	</div>
 );
