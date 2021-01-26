@@ -364,9 +364,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={brandBackground.primary}
 					>
 						<Nav
-							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={format.display}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -435,10 +437,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									</div>
 								)}
 								<ArticleHeadline
-									display={format.display}
+									format={format}
 									headlineString={CAPI.headline}
-									design={format.design}
-									pillar={format.theme}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 									palette={palette}

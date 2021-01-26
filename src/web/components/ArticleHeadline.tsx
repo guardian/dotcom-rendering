@@ -7,14 +7,12 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Format } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
 	headlineString: string;
-	display: Display;
-	design: Design; // Decides headline appearance
-	pillar: Theme; // Decides headline colour when relevant
+	format: Format;
 	byline?: string;
 	tags: TagType[];
 	isShowcase?: boolean; // Used for Interviews to change headline position
@@ -189,16 +187,14 @@ const zIndex = css`
 
 export const ArticleHeadline = ({
 	headlineString,
-	display,
-	design,
-	pillar,
+	format,
 	tags,
 	byline,
 	palette,
 }: Props) => {
-	switch (display) {
+	switch (format.display) {
 		case Display.Immersive: {
-			switch (design) {
+			switch (format.design) {
 				case Design.PrintShop:
 					return (
 						// Immersive headlines have two versions, with main media, and (this one) without
@@ -231,9 +227,9 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={display}
-									design={design}
-									pillar={pillar}
+									display={format.display}
+									design={format.design}
+									pillar={format.theme}
 									byline={byline}
 									tags={tags}
 								/>
@@ -271,7 +267,7 @@ export const ArticleHeadline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Review:
 				case Design.Recipe:
 				case Design.Feature:
@@ -303,9 +299,9 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={display}
-									design={design}
-									pillar={pillar}
+									display={format.display}
+									design={format.design}
+									pillar={format.theme}
 									byline={byline}
 									tags={tags}
 								/>
@@ -333,7 +329,10 @@ export const ArticleHeadline = ({
 						<div
 							className={cx(shiftSlightly, maxWidth, displayFlex)}
 						>
-							<HeadlineTag tagText="Interview" pillar={pillar} />
+							<HeadlineTag
+								tagText="Interview"
+								pillar={format.theme}
+							/>
 							<h1
 								className={cx(
 									invertedFont,
@@ -356,9 +355,9 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={display}
-									design={design}
-									pillar={pillar}
+									display={format.display}
+									design={format.design}
+									pillar={format.theme}
 									byline={byline}
 									tags={tags}
 								/>
