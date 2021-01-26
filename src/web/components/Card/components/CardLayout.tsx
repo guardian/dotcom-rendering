@@ -27,7 +27,7 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 const decideWidth = (minWidthInPixels?: number) => {
 	if (minWidthInPixels) {
 		return css`
-			${`min-width: ${minWidthInPixels}px`};
+			min-width: ${minWidthInPixels}px;
 		`;
 	}
 	return css`
