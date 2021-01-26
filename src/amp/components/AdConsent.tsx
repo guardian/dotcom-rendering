@@ -4,9 +4,11 @@ import { JsonScript } from './JsonScript';
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
 const pubData = {
+	authId: 'CLIENT_ID',
+	client_id: 'CLIENT_ID',
 	// Matches ampViewId from https://ophan.theguardian.com/amp.json
-	pageViewId: 'PAGE_VIEW_ID_64',
-	browserId: 'CLIENT_ID',
+	page_view_id: 'PAGE_VIEW_ID',
+	page_view_id_64: 'PAGE_VIEW_ID_64',
 	platform: 'amp',
 };
 
@@ -86,8 +88,8 @@ export const AdConsent: React.FC<{}> = ({}) => {
 					o={{
 						consentRequired: 'remote',
 						consentInstanceId: 'sourcepoint',
-						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?${queryParams}`,
-						promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
+						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
+						promptUISrc: `https://${sourcepointDomain}/amp/index.html?${queryParams}`,
 						clientConfig,
 						geoOverride: {
 							tcfv2: {
