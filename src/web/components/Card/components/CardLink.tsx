@@ -70,15 +70,6 @@ const linkStyles = (design: Design, pillar: Theme) => {
 					filter: brightness(90%);
 				}
 			`;
-		case Design.Article:
-		case Design.Review:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return css`
 				${baseLinkStyles}

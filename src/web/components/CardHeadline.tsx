@@ -79,16 +79,8 @@ const headlineStyles = (design: Design, pillar: Theme) => {
 		case Design.Media:
 		case Design.Live:
 			return colourStyles(neutral[97]);
-		case Design.Analysis:
-		case Design.PhotoEssay:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
+			return undefined;
 	}
 };
 

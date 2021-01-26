@@ -8,7 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
-import { Pillar } from '@guardian/types';
+import { Design, Display, Format, Pillar } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
@@ -43,7 +43,7 @@ interface Props {
 	contentType: ContentType;
 	url: string;
 	starRating?: number;
-	pillar: Theme;
+	format: Format;
 	tags: TagType[];
 	sponsorName: string;
 	contributorImage?: string;
@@ -85,30 +85,30 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (pillar: Theme) => colour = (pillar) => {
-	if (pillar) {
-		return pillarPalette[pillar].main;
+const richLinkPillarColour: (format: Format) => colour = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[Pillar.News][400];
 };
 
-const pillarBackground: (pillar: Theme) => colour = (pillar) => {
+const pillarBackground: (format: Format) => colour = (format) => {
 	return css`
-		background-color: ${richLinkPillarColour(pillar)};
+		background-color: ${richLinkPillarColour(format)};
 	`;
 };
 
-const textColour: (pillar: Theme) => colour = (pillar) => {
+const textColour: (format: Format) => colour = (format) => {
 	return css`
-		color: ${richLinkPillarColour(pillar)};
+		color: ${richLinkPillarColour(format)};
 	`;
 };
 
-const richLinkTopBorder: (pillar: Theme) => colour = (pillar) => {
+const richLinkTopBorder: (format: Format) => colour = (format) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
-		border-top-color: ${richLinkPillarColour(pillar)};
+		border-top-color: ${richLinkPillarColour(format)};
 	`;
 };
 
@@ -140,10 +140,10 @@ const richLinkTitle = css`
 	}
 `;
 
-const richLinkReadMore: (pillar: Theme) => colour = (pillar) => {
+const richLinkReadMore: (format: Format) => colour = (format) => {
 	return css`
-		fill: ${richLinkPillarColour(pillar)};
-		color: ${richLinkPillarColour(pillar)};
+		fill: ${richLinkPillarColour(format)};
+		color: ${richLinkPillarColour(format)};
 		padding-top: 2px;
 	`;
 };
@@ -245,7 +245,11 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			headlineText={headlineText}
 			contentType="article"
 			url={url}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			tags={[]}
 			sponsorName=""
 			isPlaceholder={isPlaceholder}
@@ -261,7 +265,7 @@ export const RichLink = ({
 	contentType,
 	url,
 	starRating,
-	pillar,
+	format,
 	tags,
 	sponsorName,
 	contributorImage,
@@ -283,12 +287,12 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			className={pillarBackground(pillar)}
+			className={pillarBackground(format)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
 			<div className={cx(richLinkContainer, neutralBackground)}>
 				<a className={richLinkLink} href={url}>
-					<div className={richLinkTopBorder(pillar)} />
+					<div className={richLinkTopBorder(format)} />
 					{showImage && (
 						<div>
 							<img
@@ -306,7 +310,8 @@ export const RichLink = ({
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
 												colour={
-													pillarPalette[pillar].main
+													pillarPalette[format.theme]
+														.main
 												}
 												size="small"
 											/>
@@ -314,7 +319,8 @@ export const RichLink = ({
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
 												colour={
-													pillarPalette[pillar].main
+													pillarPalette[format.theme]
+														.main
 												}
 												size="medium"
 											/>
@@ -324,7 +330,7 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div className={cx(byline, textColour(pillar))}>
+								<div className={cx(byline, textColour(format))}>
 									{mainContributor}
 								</div>
 							)}
@@ -347,11 +353,11 @@ export const RichLink = ({
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
-									pillar={pillar}
+									format={format}
 								/>
 							</div>
 						)}
-						<div className={richLinkReadMore(pillar)}>
+						<div className={richLinkReadMore(format)}>
 							<ArrowInCircle />
 							<div className={readMoreTextStyle}>
 								{readMoreText(contentType)}

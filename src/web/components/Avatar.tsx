@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Pillar } from '@guardian/types';
+import { Format, Pillar } from '@guardian/types';
 
 import { pillarPalette } from '@frontend/lib/pillars';
 
@@ -22,13 +22,13 @@ const pillarBackground = (pillar: Theme = Pillar.Opinion) =>
 export const Avatar: React.FC<{
 	imageSrc: string;
 	imageAlt: string;
-	pillar: Theme;
-}> = ({ imageSrc, imageAlt, pillar }) => {
+	format: Format;
+}> = ({ imageSrc, imageAlt, format }) => {
 	return (
 		<img
 			src={imageSrc}
 			alt={imageAlt}
-			className={cx(pillarBackground(pillar), contributorImage)}
+			className={cx(pillarBackground(format.theme), contributorImage)}
 		/>
 	);
 };

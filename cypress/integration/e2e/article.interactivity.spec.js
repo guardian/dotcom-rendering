@@ -16,11 +16,21 @@ describe('Interactivity', function () {
 	});
 
 	describe('Verify elements have been hydrated', function () {
-		it('should open the edition dropdown menu when clicked', function () {
+		it('should open the edition dropdown menu when clicked and hide when expected', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
 			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
+			// Open it
 			cy.get('[data-cy=dropdown-button]').click();
 			cy.get('[data-cy=dropdown-options]').should('be.visible');
+			// Pressing esc hides it
+			cy.get('body').type('{esc}', { force: true });
+			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
+			// Open it again
+			cy.get('[data-cy=dropdown-button]').click();
+			cy.get('[data-cy=dropdown-options]').should('be.visible');
+			// Clicking elsewhere in the document hides it
+			cy.get('h1').click();
+			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
 		});
 		it('should display the share count for an article', function () {
 			cy.visit(`/Article?url=${articleUrl}`);

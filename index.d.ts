@@ -32,6 +32,7 @@ type CAPIDesign =
 
 type Design = import('@guardian/types').Design;
 type Theme = import('@guardian/types').Theme;
+type Format = import('@guardian/types').Format;
 type Pillar = Theme;
 
 // This is an object that allows you Type defaults of the designTypes.
@@ -397,30 +398,29 @@ type MediaType = 'Video' | 'Audio' | 'Gallery';
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 interface CardType {
-	linkTo: string;
-	pillar: Theme;
-	design: Design;
-	headlineText: string;
-	headlineSize?: SmallHeadlineSize;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-	byline?: string;
-	isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
-	showByline?: boolean;
-	webPublicationDate?: string;
-	imageUrl?: string;
-	imagePosition?: ImagePositionType;
-	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-	standfirst?: string;
-	avatar?: AvatarType;
-	showClock?: boolean;
-	mediaType?: MediaType;
-	mediaDuration?: number;
-	// Kicker
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	commentCount?: number;
-	starRating?: number;
+    linkTo: string;
+    format: Format;
+    headlineText: string;
+    headlineSize?: SmallHeadlineSize;
+    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+    byline?: string;
+    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
+    showByline?: boolean;
+    webPublicationDate?: string;
+    imageUrl?: string;
+    imagePosition?: ImagePositionType;
+    imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+    standfirst?: string;
+    avatar?: AvatarType;
+    showClock?: boolean;
+    mediaType?: MediaType;
+    mediaDuration?: number;
+    // Kicker
+    kickerText?: string;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
+    commentCount?: number;
+    starRating?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -706,23 +706,48 @@ type IslandType =
 	| 'youtube-block-main-media'
 	| 'chart-atom';
 
+// All Components that are loaded with loadable
+// should be added here, this is the chunk name as
+// defined in manifest.json
+type BlockElementType = string;
+interface ComponentNameChunkMap {
+    chunkName: string;
+    addWhen: BlockElementType | 'always';
+}
+interface EditionDropdownLoadable extends ComponentNameChunkMap{
+    chunkName: 'EditionDropdown';
+    addWhen: 'always';
+}
+interface YoutubeBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-YoutubeBlockComponent';
+    addWhen: YoutubeBlockElement['_type'];
+}
+
+interface RichLinkBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-RichLinkComponent';
+    addWhen: RichLinkBlockElement['_type'];
+}
+
+// There are docs on loadable in ./docs/loadable-components.md
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+
 interface BaseTrailType {
-	url: string;
-	headline: string;
-	isLiveBlog: boolean;
-	webPublicationDate: string;
-	image?: string;
-	avatarUrl?: string;
-	mediaType?: MediaType;
-	mediaDuration?: number;
-	ageWarning?: string;
-	byline?: string;
-	showByline?: boolean;
-	kickerText?: string;
-	shortUrl?: string;
-	commentCount?: number;
-	starRating?: number;
-	linkText?: string;
+    url: string;
+    headline: string;
+    isLiveBlog: boolean;
+    webPublicationDate: string;
+    image?: string;
+    avatarUrl?: string;
+    mediaType?: MediaType;
+    mediaDuration?: number;
+    ageWarning?: string;
+    byline?: string;
+    showByline?: boolean;
+    kickerText?: string;
+    shortUrl?: string;
+    commentCount?: number;
+    starRating?: number;
+    linkText?: string;
 }
 interface TrailType extends BaseTrailType {
 	design: Design;

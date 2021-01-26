@@ -1,13 +1,10 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-
-import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -46,11 +43,11 @@ import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { Display, Design, Format } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { Display, Design } from '@guardian/types';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import {
@@ -68,6 +65,14 @@ import { trackPerformance } from '../browser/ga/ga';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
+
+const EditionDropdown = loadable(
+	() => import('@frontend/web/components/EditionDropdown'),
+	{
+		resolveComponent: (module) => module.EditionDropdown,
+	},
+);
+
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -292,7 +297,45 @@ export const App = ({ CAPI, NAV }: Props) => {
 		design,
 	});
 
+	const format: Format = {
+		display,
+		design,
+		theme: pillar,
+	};
+
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
+	// There are docs on loadable in ./docs/loadable-components.md
+	const YoutubeBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.youtubeBlockElement.length > 0 ||
+				CAPI.youtubeMainMediaBlockElement.length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/YoutubeBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.YoutubeBlockComponent,
+		},
+	);
+
+	const RichLinkComponent = loadable(
+		() => {
+			if (CAPI.richLinks.length > 0) {
+				return import(
+					'@frontend/web/components/elements/RichLinkComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.RichLinkComponent,
+		},
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -342,7 +385,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={youtubeBlock.youtubeIndex}
 				>
 					<YoutubeBlockComponent
-						display={display}
+						display={format.display}
 						design={design}
 						pillar={pillar}
 						hideCaption={false}
@@ -418,7 +461,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							pillar={pillar}
+							format={format}
 						/>
 					</>
 				</HydrateOnce>

@@ -18,15 +18,6 @@ const shouldShowAvatar = (design: Design, display: Display) => {
                 case Design.Recipe:
                 case Design.Interview:
                     return true;
-                case Design.Live:
-                case Design.Media:
-                case Design.PhotoEssay:
-                case Design.Analysis:
-                case Design.Article:
-                case Design.MatchReport:
-                case Design.GuardianView:
-                case Design.Quiz:
-                case Design.Comment:
                 default:
                     return false;
             }

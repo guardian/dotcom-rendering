@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -35,8 +35,11 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						{...{
 							linkTo: content[0].url,
-							pillar: content[0].pillar,
-							design: content[0].design,
+							format: {
+								display: Display.Standard,
+								design: content[0].design,
+								theme: content[0].pillar,
+							},
 							headlineText: content[0].headline,
 							headlineSize: 'medium',
 							byline: content[0].byline,
@@ -64,8 +67,11 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						{...{
 							linkTo: content[1].url,
-							pillar: content[1].pillar,
-							design: content[1].design,
+							format: {
+								display: Display.Standard,
+								design: content[1].design,
+								theme: content[1].pillar,
+							},
 							headlineText: content[1].headline,
 							headlineSize: 'medium',
 							byline: content[1].byline,
@@ -93,8 +99,11 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						{...{
 							linkTo: content[2].url,
-							pillar: content[2].pillar,
-							design: content[2].design,
+							format: {
+								display: Display.Standard,
+								design: content[2].design,
+								theme: content[2].pillar,
+							},
 							headlineText: content[2].headline,
 							headlineSize: 'medium',
 							byline: content[2].byline,
@@ -122,8 +131,11 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						{...{
 							linkTo: content[3].url,
-							pillar: content[3].pillar,
-							design: content[3].design,
+							format: {
+								display: Display.Standard,
+								design: content[3].design,
+								theme: content[3].pillar,
+							},
 							headlineText: content[3].headline,
 							headlineSize: 'medium',
 							byline: content[3].byline,
@@ -154,8 +166,11 @@ export const MoreThanFive = ({ content }: Props) => {
 						<Card
 							{...{
 								linkTo: trail.url,
-								pillar: trail.pillar,
-								design: trail.design,
+								format: {
+									display: Display.Standard,
+									design: trail.design,
+									theme: trail.pillar,
+								},
 								headlineText: trail.headline,
 								headlineSize: 'small',
 								byline: trail.byline,

@@ -8,6 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
+import { Design, Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -41,7 +42,6 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Display, Design } from '@guardian/types';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -174,10 +174,8 @@ const hasMainMediaStyles = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	display: Display;
+	format: Format;
 	palette: Palette;
-	design: Design;
-	pillar: Theme;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -194,14 +192,7 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({
-	CAPI,
-	NAV,
-	display,
-	design,
-	pillar,
-	palette,
-}: Props) => {
+export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -238,10 +229,10 @@ export const ImmersiveLayout = ({
 			`}
 		>
 			<Caption
-				display={display}
-				design={design}
+				display={format.display}
+				design={format.design}
 				captionText={captionText}
-				pillar={pillar}
+				pillar={format.theme}
 				shouldLimitWidth={true}
 			/>
 		</div>
@@ -304,7 +295,7 @@ export const ImmersiveLayout = ({
 						<Nav
 							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={display}
+							display={format.display}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -314,13 +305,13 @@ export const ImmersiveLayout = ({
 				</header>
 
 				<MainMedia
-					display={display}
-					design={design}
+					display={format.display}
+					design={format.design}
 					elements={CAPI.mainMediaElements}
-					pillar={pillar}
+					pillar={format.theme}
 					adTargeting={adTargeting}
 					starRating={
-						design === Design.Review && CAPI.starRating
+						format.design === Design.Review && CAPI.starRating
 							? CAPI.starRating
 							: undefined
 					}
@@ -349,13 +340,13 @@ export const ImmersiveLayout = ({
 							leftContent={<LeftColCaption />}
 						>
 							<ArticleTitle
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								tags={CAPI.tags}
 								sectionLabel={CAPI.sectionLabel}
 								sectionUrl={CAPI.sectionUrl}
 								guardianBaseURL={CAPI.guardianBaseURL}
-								pillar={pillar}
+								pillar={format.theme}
 								badge={CAPI.badge}
 							/>
 						</ContainerLayout>
@@ -366,11 +357,11 @@ export const ImmersiveLayout = ({
 								padSides={false}
 							>
 								<ArticleHeadline
-									display={display}
+									display={format.display}
 									headlineString={CAPI.headline}
-									design={design}
-									pillar={pillar}
 									palette={palette}
+									design={format.design}
+									pillar={format.theme}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>
@@ -385,16 +376,20 @@ export const ImmersiveLayout = ({
 					<GridItem area="caption">
 						<Hide when="above" breakpoint="leftCol">
 							<Caption
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								captionText={captionText}
-								pillar={pillar}
+								pillar={format.theme}
 								shouldLimitWidth={false}
 							/>
 						</Hide>
 					</GridItem>
 					<GridItem area="border">
-						{design === Design.PhotoEssay ? <></> : <Border />}
+						{format.design === Design.PhotoEssay ? (
+							<></>
+						) : (
+							<Border />
+						)}
 					</GridItem>
 					<GridItem area="title">
 						<>
@@ -411,13 +406,13 @@ export const ImmersiveLayout = ({
 									`}
 								>
 									<ArticleTitle
-										display={display}
-										design={design}
+										display={format.display}
+										design={format.design}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
 										guardianBaseURL={CAPI.guardianBaseURL}
-										pillar={pillar}
+										pillar={format.theme}
 										badge={CAPI.badge}
 									/>
 								</div>
@@ -429,11 +424,11 @@ export const ImmersiveLayout = ({
 							{!mainMedia && (
 								<div className={maxWidth}>
 									<ArticleHeadline
-										display={display}
+										display={format.display}
 										headlineString={CAPI.headline}
-										design={design}
-										pillar={pillar}
 										palette={palette}
+										design={format.design}
+										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>
@@ -443,17 +438,17 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="standfirst">
 						<ArticleStandfirst
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
 					<GridItem area="byline">
 						<HeadlineByline
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							tags={CAPI.tags}
 							byline={
 								CAPI.author.byline ? CAPI.author.byline : ''
@@ -461,16 +456,16 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{design === Design.PhotoEssay ? (
+						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
 							<div className={maxWidth}>
 								<div className={stretchLines}>
 									<GuardianLines
-										pillar={pillar}
+										pillar={format.theme}
 										effect={decideLineEffect(
 											Design.Article,
-											pillar,
+											format.theme,
 										)}
 										count={decideLineCount(Design.Article)}
 									/>
@@ -482,9 +477,7 @@ export const ImmersiveLayout = ({
 						<div className={maxWidth}>
 							<ArticleMeta
 								branding={branding}
-								display={display}
-								design={design}
-								pillar={pillar}
+								format={format}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
@@ -500,17 +493,18 @@ export const ImmersiveLayout = ({
 						<ArticleContainer>
 							<main className={maxWidth}>
 								<ArticleBody
-									display={display}
-									pillar={pillar}
+									format={format}
 									blocks={CAPI.blocks}
-									design={design}
 									adTargeting={adTargeting}
 									host={host}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} pillar={pillar} />
+								<GuardianLines
+									count={4}
+									pillar={format.theme}
+								/>
 								<SubMeta
-									pillar={pillar}
+									pillar={format.theme}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
@@ -555,7 +549,7 @@ export const ImmersiveLayout = ({
 										>
 											<AdSlot
 												position="right"
-												display={display}
+												display={format.display}
 											/>
 										</div>
 									)}
@@ -572,7 +566,10 @@ export const ImmersiveLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising-high" display={display} />
+				<AdSlot
+					position="merchandising-high"
+					display={format.display}
+				/>
 			</Section>
 
 			{!isPaidContent && (
@@ -589,7 +586,7 @@ export const ImmersiveLayout = ({
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
-								pillar={pillar}
+								pillar={format.theme}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
@@ -598,7 +595,7 @@ export const ImmersiveLayout = ({
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
 								beingHydrated={false}
-								display={display}
+								display={format.display}
 							/>
 						</Section>
 					)}
@@ -619,7 +616,7 @@ export const ImmersiveLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising" display={display} />
+				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
 			{NAV.subNavSections && (
@@ -627,9 +624,9 @@ export const ImmersiveLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						pillar={pillar}
+						format={format}
 					/>
-					<GuardianLines count={4} pillar={pillar} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 
@@ -641,7 +638,7 @@ export const ImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={pillar}
+					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
 			</Section>

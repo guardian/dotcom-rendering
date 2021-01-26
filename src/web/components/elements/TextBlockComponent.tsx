@@ -77,13 +77,7 @@ const shouldShowDropCap = ({
 		case Design.PhotoEssay:
 		case Design.Recipe:
 			return true;
-		case Design.Article:
-		case Design.Media:
-		case Design.Live:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Analysis:
+		default:
 			return false;
 	}
 };
