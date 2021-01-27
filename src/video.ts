@@ -7,6 +7,8 @@ interface Video {
 	posterUrl: string;
 	videoId: string;
 	duration?: number;
+	atomId?: string;
+	title?: string;
 }
 
 const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
@@ -22,6 +24,7 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 	}
 
 	const { posterUrl, duration, assets, activeVersion } = atom.data.media;
+	const title = atom.data.media.title;
 	const videoId = assets.find(
 		(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
 	)?.id;
@@ -34,6 +37,8 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 		posterUrl,
 		videoId,
 		duration: duration?.toNumber(),
+		atomId: id,
+		title,
 	});
 };
 

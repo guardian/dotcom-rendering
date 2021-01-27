@@ -47,18 +47,18 @@ const captionStyles = css`
 `;
 
 const videoWrapperStyles = css`
-    width: 100%;
-    position: relative;
-    padding-bottom: 56.25%;
+	width: 100%;
+	position: relative;
+	padding-bottom: 56.25%;
 `;
 
 const videoStyles = css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`;
 
 const getImageStyle = ({ width, height }: Image): SerializedStyles => {
 	return css`
@@ -123,18 +123,20 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					<StarRating item={item} />
 				</figure>
 			);
-		} else if (media.kind === MainMediaKind.Video) {
-            return (
-                <div css={videoWrapperStyles}>
-                    <iframe
-                        css={videoStyles}
-                        frameBorder="0"
-                        allowFullScreen
-                        src={`https://www.youtube-nocookie.com/embed/${media.video.videoId}?showinfo=0&rel=0`}>
-                    </iframe>
-                </div>)
-
-        }
+		} else if (media.video.atomId !== undefined) {
+			return (
+				<div css={videoWrapperStyles}>
+					<iframe
+						title={media.video.title ?? ''}
+						css={videoStyles}
+						frameBorder="0"
+						scrolling="no"
+						allowFullScreen
+						src={`https://embed.theguardian.com/embed/atom/media/${media.video.atomId}#noadsaf`}
+					></iframe>
+				</div>
+			);
+		}
 
 		return null;
 	});

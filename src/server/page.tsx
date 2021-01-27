@@ -157,7 +157,7 @@ function render(
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const clientScript = map(getAssetLocation)(scriptName(item));
-	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content, none);
+	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
 	const inlineStyles = requiresInlineStyles(request.content);
 	const head = renderHead(
