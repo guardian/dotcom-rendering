@@ -62,8 +62,8 @@ export const ThirdPartyEmbeddedContent = ({
 
 		return (
 			<ClickToView
-				width={width || 600}
-				height={height || 400}
+				width={width}
+				height={height}
 				overlayHeadline={headline}
 				overlayBody={body}
 				overlayButtonText={buttonText}

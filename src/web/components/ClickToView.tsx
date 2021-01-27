@@ -12,8 +12,8 @@ import { Lines } from '@guardian/src-ed-lines';
 
 type Props = {
 	children: React.ReactNode;
-	width: number;
-	height: number;
+	width?: number;
+	height?: number;
 	overlayHeadline: string;
 	overlayBody: React.ReactNode;
 	overlayButtonText: string;
@@ -26,19 +26,30 @@ const Container = ({
 	height,
 }: {
 	children: React.ReactNode;
-	width: number;
-	height: number;
-}) => (
-	<div
-		className={css`
-			width: ${width}px;
-			height: ${height}px;
-			background: ${background.secondary};
-		`}
-	>
-		{children}
-	</div>
-);
+	width?: number;
+	height?: number;
+}) => {
+	const widthStyle = width
+		? css`
+				width: ${width}px;
+		  `
+		: null;
+	const heightStyle = width
+		? css`
+				height: ${height}px;
+		  `
+		: null;
+	return (
+		<div
+			className={css`
+				${widthStyle};
+				${heightStyle};
+			`}
+		>
+			{children}
+		</div>
+	);
+};
 
 const Outer = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -79,11 +90,11 @@ const Headline = ({
 	width,
 }: {
 	children: React.ReactNode;
-	width: number;
+	width?: number;
 }) => (
 	<div
 		className={css`
-			${width > 300 ? headline.xsmall() : headline.xxsmall()}
+			${width && width > 300 ? headline.xsmall() : headline.xxsmall()}
 		`}
 	>
 		{children}
@@ -95,13 +106,13 @@ const Body = ({
 	width,
 }: {
 	children: React.ReactNode;
-	width: number;
+	width?: number;
 }) => (
 	<div
 		className={css`
-			${width > 300 ? textSans.small() : textSans.xsmall()}
+			${width && width > 300 ? textSans.small() : textSans.xsmall()}
 			a {
-				${width > 300 ? textSans.small() : textSans.xsmall()}
+				${width && width > 300 ? textSans.small() : textSans.xsmall()}
 			}
 		`}
 	>
@@ -142,7 +153,7 @@ export const ClickToView = ({
 						<Bottom>
 							<Button
 								priority="primary"
-								size={width > 300 ? 'small' : 'xsmall'}
+								size={width && width > 300 ? 'small' : 'xsmall'}
 								icon={<SvgCheckmark />}
 								iconSide="left"
 								onClick={() => handleClick()}
