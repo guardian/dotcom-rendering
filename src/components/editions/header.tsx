@@ -46,7 +46,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 
 const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Headline item={item} />
 		<Byline item={item} large />
 		<Lines />
@@ -56,7 +56,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
 		<Lines />
