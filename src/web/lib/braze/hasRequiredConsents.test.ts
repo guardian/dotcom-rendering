@@ -1,4 +1,4 @@
-import { hasRequiredConsents, canShowPreChecks } from './BrazeBanner';
+import { hasRequiredConsents } from './hasRequiredConsents';
 
 const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
@@ -88,41 +88,6 @@ describe('hasRequiredConsents', () => {
 			};
 
 			await expect(hasRequiredConsents()).resolves.toBe(false);
-		});
-	});
-});
-
-describe('canShowPreChecks', () => {
-	describe('when not a supporter', () => {
-		it('returns false', () => {
-			const result = canShowPreChecks({
-				shouldHideSupportMessaging: false,
-				pageConfig: { isPaidContent: false },
-			});
-
-			expect(result).toBe(false);
-		});
-	});
-
-	describe('when viewing paid content', () => {
-		it('returns false', () => {
-			const result = canShowPreChecks({
-				shouldHideSupportMessaging: true,
-				pageConfig: { isPaidContent: true },
-			});
-
-			expect(result).toBe(false);
-		});
-	});
-
-	describe('when all checks pass', () => {
-		it('returns true', () => {
-			const result = canShowPreChecks({
-				shouldHideSupportMessaging: true,
-				pageConfig: { isPaidContent: false },
-			});
-
-			expect(result).toBe(true);
 		});
 	});
 });

@@ -370,11 +370,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									padSides={false}
 								>
 									<ArticleHeadline
-										display={format.display}
+										format={format}
 										headlineString={CAPI.headline}
 										palette={palette}
-										design={format.design}
-										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>
@@ -442,11 +440,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							{!mainMedia && (
 								<div className={maxWidth}>
 									<ArticleHeadline
-										display={format.display}
+										format={format}
 										headlineString={CAPI.headline}
 										palette={palette}
-										design={format.design}
-										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

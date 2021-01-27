@@ -45,7 +45,6 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
-import { Display, Design } from '@guardian/types';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 
 // This is required for spacefinder to work!
@@ -54,13 +53,11 @@ const commercialPosition = css`
 `;
 
 export const ArticleRenderer: React.FC<{
-	display: Display;
+	format: Format;
 	elements: CAPIElement[];
-	pillar: Theme;
-	design: Design;
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ display, elements, pillar, design, adTargeting, host }) => {
+}> = ({ format, elements, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -78,7 +75,7 @@ export const ArticleRenderer: React.FC<{
 								trackUrl={element.trackUrl}
 								kicker={element.kicker}
 								title={element.title}
-								pillar={pillar}
+								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -87,7 +84,7 @@ export const ArticleRenderer: React.FC<{
 						<BlockquoteBlockComponent
 							key={i}
 							html={element.html}
-							pillar={pillar}
+							pillar={format.theme}
 							quoted={element.quoted}
 						/>
 					);
@@ -95,9 +92,9 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<CaptionBlockComponent
 							key={i}
-							display={display}
-							design={design}
-							pillar={pillar}
+							display={format.display}
+							design={format.design}
+							pillar={format.theme}
 							captionText={element.captionText}
 							padCaption={element.padCaption}
 							credit={element.credit}
@@ -124,7 +121,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<DisclaimerBlockComponent
 								html={element.html}
-								pillar={pillar}
+								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -135,7 +132,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure id={`callout-${i}`} role={element.role}>
 							<CalloutBlockComponent
 								callout={element}
-								pillar={pillar}
+								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -218,7 +215,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={format.theme}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -230,9 +227,9 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<GuVideoBlockComponent
 								html={element.html}
-								pillar={pillar}
-								design={design}
-								display={display}
+								pillar={format.theme}
+								design={format.design}
+								display={format.display}
 								credit={element.source}
 								caption={element.caption}
 							/>
@@ -246,11 +243,11 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<ImageBlockComponent
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								key={i}
 								element={element}
-								pillar={pillar}
+								pillar={format.theme}
 								title={element.title}
 							/>
 						</Figure>
@@ -279,15 +276,15 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MapEmbedBlockComponent
-								pillar={pillar}
+								pillar={format.theme}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.source}
 								title={element.title}
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 							/>
 						</Figure>
 					);
@@ -295,11 +292,11 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MultiImageBlockComponent
-								design={design}
+								design={format.design}
 								key={i}
 								images={element.images}
 								caption={element.caption}
-								pillar={pillar}
+								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -312,7 +309,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={format.theme}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -324,8 +321,8 @@ export const ArticleRenderer: React.FC<{
 						<PullQuoteBlockComponent
 							key={i}
 							html={element.html}
-							pillar={pillar}
-							design={design}
+							pillar={format.theme}
+							design={format.design}
 							attribution={element.attribution}
 							role={element.role}
 						/>
@@ -339,7 +336,7 @@ export const ArticleRenderer: React.FC<{
 								html={element.html}
 								image={element.img}
 								credit={element.credit}
-								pillar={pillar}
+								pillar={format.theme}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
 								expandCallback={() => {}}
@@ -371,10 +368,10 @@ export const ArticleRenderer: React.FC<{
 								height={element.height}
 								width={element.width}
 								title={element.title}
-								pillar={pillar}
+								pillar={format.theme}
 								caption={element.caption}
-								design={design}
-								display={display}
+								design={format.design}
+								display={format.display}
 								credit="Spotify"
 							/>
 						</Figure>
@@ -396,9 +393,7 @@ export const ArticleRenderer: React.FC<{
 								key={i}
 								isFirstParagraph={i === 0}
 								html={element.html}
-								pillar={pillar}
-								display={display}
-								design={design}
+								format={format}
 								forceDropCap={element.dropCap}
 							/>
 						</>
@@ -413,13 +408,13 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VideoFacebookBlockComponent
-								pillar={pillar}
+								pillar={format.theme}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								credit={element.caption}
 								title={element.caption}
 							/>
@@ -429,15 +424,15 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VimeoBlockComponent
-								pillar={pillar}
+								pillar={format.theme}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 							/>
 						</Figure>
 					);
@@ -445,15 +440,15 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<YoutubeEmbedBlockComponent
-								pillar={pillar}
+								pillar={format.theme}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 							/>
 						</Figure>
 					);
@@ -465,10 +460,10 @@ export const ArticleRenderer: React.FC<{
 							id={`youtube-block-${i}`}
 						>
 							<YoutubeBlockComponent
-								display={display}
-								design={design}
+								display={format.display}
+								design={format.design}
 								key={i}
-								pillar={pillar}
+								pillar={format.theme}
 								hideCaption={false}
 								// eslint-disable-next-line jsx-a11y/aria-role
 								role="inline"
@@ -493,7 +488,7 @@ export const ArticleRenderer: React.FC<{
 							<TimelineAtom
 								id={element.id}
 								title={element.title}
-								pillar={pillar}
+								pillar={format.theme}
 								events={element.events}
 								likeHandler={() => {}}
 								dislikeHandler={() => {}}
