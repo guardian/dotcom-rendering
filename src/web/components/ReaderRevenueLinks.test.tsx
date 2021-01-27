@@ -46,7 +46,7 @@ describe('ReaderRevenueLinks', () => {
 			</AbProvider>,
 		);
 
-        await wait(() => expect(getByText('Thank you')).toBeInTheDocument())
+		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
 	});
 
 	it('should render support message if shouldHideSupportMessaging() returns false', async () => {
@@ -64,6 +64,8 @@ describe('ReaderRevenueLinks', () => {
 			</AbProvider>,
 		);
 
-        await wait(() => expect(getByText('Support the Guardian')).toBeInTheDocument())
+		await wait(() =>
+			expect(getByText('Support the Guardian')).toBeInTheDocument(),
+		);
 	});
 });
