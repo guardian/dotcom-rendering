@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
 
 import {
@@ -6,8 +6,6 @@ import {
 	ReaderRevenueBanner,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
-import { getCookie } from '@root/src/web/browser/cookie';
-import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { useOnce } from '@root/src/web/lib/useOnce';
 
 import { pickBanner, BannerConfig, MaybeFC, Banner } from './bannerPicker';
@@ -73,13 +71,9 @@ const buildReaderRevenueBannerConfig = (
 	};
 };
 
-const buildBrazeBanner = (
-	asyncBrazeUuid: Promise<null | string>,
-	shouldHideSupportMessaging: undefined | boolean,
-): Banner => ({
+const buildBrazeBanner = (isSignedIn: boolean, idApiUrl: string): Banner => ({
 	id: 'braze-banner',
-	canShow: () =>
-		canShowBrazeBanner(asyncBrazeUuid, shouldHideSupportMessaging),
+	canShow: () => canShowBrazeBanner(isSignedIn, idApiUrl),
 	show: (meta: any) => () => <BrazeBanner meta={meta} />,
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
@@ -91,28 +85,6 @@ export const StickyBottomBanner = ({
 	idApiUrl,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
-	const [
-		shouldHideSupportMessaging,
-		setShouldHideSupportMessaging,
-	] = useState<boolean>();
-	const [asyncBrazeUuid, setAsyncBrazeUuid] = useState<
-		Promise<string | null>
-	>();
-
-	useEffect(() => {
-		setShouldHideSupportMessaging(
-			getCookie('gu_hide_support_messaging') === 'true',
-		);
-	}, []);
-
-	useOnce(() => {
-		if (isSignedIn) {
-			setAsyncBrazeUuid(getBrazeUuid(idApiUrl));
-		} else {
-			setAsyncBrazeUuid(Promise.resolve(null));
-		}
-	}, [isSignedIn, idApiUrl]);
-
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const readerRevenue = buildReaderRevenueBannerConfig(
@@ -120,22 +92,13 @@ export const StickyBottomBanner = ({
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
 		);
-		const brazeBanner = buildBrazeBanner(
-			asyncBrazeUuid as Promise<string>,
-			shouldHideSupportMessaging,
-		);
+		const brazeBanner = buildBrazeBanner(isSignedIn as boolean, idApiUrl);
 		const bannerConfig: BannerConfig = [CMP, readerRevenue, brazeBanner];
 
 		pickBanner(bannerConfig).then((PickedBanner: () => MaybeFC) =>
 			setSelectedBanner(PickedBanner),
 		);
-	}, [
-		isSignedIn,
-		asyncCountryCode,
-		asyncBrazeUuid,
-		shouldHideSupportMessaging,
-		CAPI,
-	]);
+	}, [isSignedIn, asyncCountryCode, CAPI]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;
