@@ -42,3 +42,20 @@ jobs:
                   quiet: true
                   browser: firefox
 									spec: cypress/integration/parallel-${{ matrix.group }}/*.js
+
+    cypress-edge:
+        name: Edge
+        runs-on: windows-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Cypress run
+              uses: cypress-io/github-action@v2
+              env:
+                NODE_ENV: development
+              with:
+                  start: node scripts/frontend/dev-server
+                  wait-on: 'http://localhost:3030'
+                  wait-on-timeout: 180
+                  quiet: true
+                  browser: edge
