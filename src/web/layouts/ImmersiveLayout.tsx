@@ -3,13 +3,12 @@ import { css, cx } from 'emotion';
 
 import {
 	neutral,
-	specialReport,
 	brandBackground,
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design, Special } from '@guardian/types';
+import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -140,11 +139,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
-
-const decideBackground = (format: Format) => {
-	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return 'transparent';
-};
 
 const maxWidth = css`
 	${from.desktop} {
@@ -280,7 +274,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		<>
 			<div
 				className={css`
-					background-color: ${decideBackground(format)};
+					background-color: ${palette.background.article};
 				`}
 			>
 				<div
@@ -386,7 +380,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<Section
 				showTopBorder={false}
 				showSideBorders={false}
-				backgroundColour={decideBackground(format)}
+				backgroundColour={palette.background.article}
 			>
 				<ImmersiveGrid>
 					{/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}

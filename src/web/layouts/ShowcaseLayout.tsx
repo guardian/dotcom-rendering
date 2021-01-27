@@ -3,14 +3,13 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	specialReport,
 	brandBackground,
 	brandLine,
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
-import { Design, Special } from '@guardian/types';
+import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -149,10 +148,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const decideBackground = (format: Format) => {
-	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return 'transparent';
-};
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
@@ -299,7 +294,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={decideBackground(format)}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -312,7 +307,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={decideBackground(format)}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -323,7 +318,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<Section
 				showTopBorder={false}
-				backgroundColour={decideBackground(format)}
+				backgroundColour={palette.background.article}
 			>
 				<ShowcaseGrid>
 					<GridItem area="title">

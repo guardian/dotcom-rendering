@@ -3,14 +3,12 @@ import { css, cx } from 'emotion';
 
 import {
 	neutral,
-	specialReport,
 	brandBorder,
 	brandBackground,
 	brandLine,
-	opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Special } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -165,11 +163,6 @@ const StandardGrid = ({
 		{children}
 	</div>
 );
-
-const decideBackground = (format: Format) => {
-	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return opinion[800];
-};
 
 const maxWidth = css`
 	${from.desktop} {
@@ -345,7 +338,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={decideBackground(format)}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -358,7 +351,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={decideBackground(format)}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -369,7 +362,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<Section
 				showTopBorder={false}
-				backgroundColour={decideBackground(format)}
+				backgroundColour={palette.background.article}
 			>
 				<StandardGrid display={format.display}>
 					<GridItem area="title">

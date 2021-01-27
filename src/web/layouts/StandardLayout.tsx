@@ -7,10 +7,9 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
-	specialReport,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
+import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -232,11 +231,6 @@ const StandardGrid = ({
 	</div>
 );
 
-const decideBackground = (format: Format) => {
-	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return 'transparent';
-};
-
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
@@ -383,7 +377,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={decideBackground(format)}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -396,7 +390,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={decideBackground(format)}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -408,7 +402,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<Section
 				data-print-layout="hide"
 				showTopBorder={false}
-				backgroundColour={decideBackground(format)}
+				backgroundColour={palette.background.article}
 			>
 				<StandardGrid design={format.design} CAPI={CAPI}>
 					<GridItem area="title">
