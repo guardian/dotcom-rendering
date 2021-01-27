@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	specialReport,
 	brandBackground,
 	brandLine,
@@ -152,7 +151,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 const decideBackground = (format: Format) => {
 	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return background.primary;
+	return 'transparent';
 };
 const maxWidth = css`
 	${from.desktop} {

@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	brandAltBackground,
 	brandBackground,
 	brandLine,
@@ -235,7 +234,7 @@ const StandardGrid = ({
 
 const decideBackground = (format: Format) => {
 	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return background.primary;
+	return 'transparent';
 };
 
 const maxWidth = css`

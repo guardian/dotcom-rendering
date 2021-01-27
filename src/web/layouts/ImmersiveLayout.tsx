@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 
 import {
 	neutral,
-	background,
 	specialReport,
 	brandBackground,
 	brandBorder,
@@ -144,7 +143,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 const decideBackground = (format: Format) => {
 	if (format.theme === Special.SpecialReport) return specialReport[800];
-	return background.primary;
+	return 'transparent';
 };
 
 const maxWidth = css`
