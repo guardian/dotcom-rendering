@@ -20,6 +20,11 @@ const sidePaddingStyles = css`
 	}
 `;
 
+const snapAlignStartStyles = css`
+	/* Snap start of card */
+	scroll-snap-align: start;
+`;
+
 const marginBottomStyles = css`
 	margin-bottom: 10px;
 `;
@@ -56,6 +61,7 @@ type Props = {
 	padSides?: boolean; // If this LI directly wraps a card this should be true
 	bottomMargin?: boolean; // True when wrapping a card in a column and not the last item
 	showTopMarginWhenStacked?: boolean;
+	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
 };
 
 export const LI = ({
@@ -66,6 +72,7 @@ export const LI = ({
 	padSides = false,
 	bottomMargin,
 	showTopMarginWhenStacked,
+	snapAlignStart = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -79,6 +86,7 @@ export const LI = ({
 				padSides && sidePaddingStyles,
 				bottomMargin && marginBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
+				snapAlignStart && snapAlignStartStyles,
 			)}
 		>
 			{children}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Format, Pillar } from '@guardian/types';
+import { Pillar } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { pillarPalette } from '@frontend/lib/pillars';
 

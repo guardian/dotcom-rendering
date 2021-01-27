@@ -10,7 +10,8 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Format } from '@guardian/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -292,9 +293,10 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: Format;
+	palette: Palette;
 }
 
-export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -362,9 +364,11 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 						backgroundColour={brandBackground.primary}
 					>
 						<Nav
-							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={format.display}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -433,12 +437,11 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 									</div>
 								)}
 								<ArticleHeadline
-									display={format.display}
+									format={format}
 									headlineString={CAPI.headline}
-									design={format.design}
-									pillar={format.theme}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
+									palette={palette}
 								/>
 								{age && (
 									<AgeWarning

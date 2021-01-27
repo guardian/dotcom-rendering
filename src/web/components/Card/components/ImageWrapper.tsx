@@ -5,10 +5,15 @@ import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	children: React.ReactNode;
+	alwaysVertical?: boolean;
 	percentage?: CardPercentageType;
 };
 
-export const ImageWrapper = ({ children, percentage }: Props) => {
+export const ImageWrapper = ({
+	children,
+	percentage,
+	alwaysVertical,
+}: Props) => {
 	return (
 		<div
 			className={css`
@@ -16,7 +21,7 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
 				position: relative;
 
 				flex-basis: ${percentage && percentage};
-				${until.tablet} {
+				${!alwaysVertical && until.tablet} {
 					/* Below tablet, we fix the size of the image and add a margin
                        around it. The corresponding content flex grows to fill the space */
 					margin-left: 6px;

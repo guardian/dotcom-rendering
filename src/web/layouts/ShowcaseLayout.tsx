@@ -10,7 +10,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
-import { Design, Format } from '@guardian/types';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -213,9 +214,10 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: Format;
+	palette: Palette;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV, format }: Props) => {
+export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -279,9 +281,11 @@ export const ShowcaseLayout = ({ CAPI, NAV, format }: Props) => {
 						backgroundColour={brandBackground.primary}
 					>
 						<Nav
-							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={format.display}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -343,10 +347,9 @@ export const ShowcaseLayout = ({ CAPI, NAV, format }: Props) => {
 									</div>
 								)}
 								<ArticleHeadline
-									display={format.display}
+									format={format}
 									headlineString={CAPI.headline}
-									design={format.design}
-									pillar={format.theme}
+									palette={palette}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 								/>

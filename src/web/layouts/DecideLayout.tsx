@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 
 import { StandardLayout } from './StandardLayout';
@@ -23,12 +25,12 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 		pillar: CAPI.pillar,
 		design,
 	});
-
 	const format: Format = {
 		display,
 		design,
 		theme: pillar,
 	};
+	const palette = decidePalette(format);
 
 	switch (display) {
 		case Display.Immersive: {
@@ -39,6 +41,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
+							palette={palette}
 							format={format}
 						/>
 					);
@@ -47,6 +50,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
+							palette={palette}
 							format={format}
 						/>
 					);
@@ -57,11 +61,21 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
-						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<CommentLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
 					);
 				default:
 					return (
-						<ShowcaseLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<ShowcaseLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
 					);
 			}
 		}
@@ -71,11 +85,21 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
-						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<CommentLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
 					);
 				default:
 					return (
-						<StandardLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<StandardLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
 					);
 			}
 		}

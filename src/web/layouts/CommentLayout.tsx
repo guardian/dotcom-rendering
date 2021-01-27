@@ -250,9 +250,10 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: Format;
+	palette: Palette;
 }
 
-export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
+export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -323,9 +324,11 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
 						backgroundColour={brandBackground.primary}
 					>
 						<Nav
-							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={format.display}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -394,10 +397,9 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props) => {
 										</div>
 									)}
 									<ArticleHeadline
-										display={format.display}
+										format={format}
 										headlineString={CAPI.headline}
-										design={format.design}
-										pillar={format.theme}
+										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

@@ -6,7 +6,8 @@ import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Pillar, Format } from '@guardian/types';
+import { Display, Pillar } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 type Props = {
 	format: Format;
@@ -65,10 +66,8 @@ export const ArticleBody = ({ format, blocks, adTargeting, host }: Props) => {
 			className={cx(bodyStyle(format.display), linkColour[format.theme])}
 		>
 			<ArticleRenderer
-				display={format.display}
+				format={format}
 				elements={blocks[0] ? blocks[0].elements : []}
-				pillar={format.theme}
-				design={format.design}
 				adTargeting={adTargeting}
 				host={host}
 			/>
