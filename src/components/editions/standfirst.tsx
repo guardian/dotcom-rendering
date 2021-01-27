@@ -38,6 +38,7 @@ const styles = (kickerColor: string): SerializedStyles => css`
 	svg {
 		flex: 0 0 1.875rem;
 		margin-top: 0.375rem;
+		padding-left: 0.5rem;
 		width: 1.875rem;
 		height: 1.875rem;
 

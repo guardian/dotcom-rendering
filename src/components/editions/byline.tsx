@@ -16,8 +16,9 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
+import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { articleWidthStyles, sidePadding } from './styles';
+import { sidePadding } from './styles';
 
 // ----- Styles ----- //
 
@@ -29,8 +30,19 @@ const showcaseStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
+const commentStyles = css`
+	padding-right: 6.5625rem;
+`;
+
+const avatarWrapperStyles = css`
+	position: absolute;
+	bottom: 0;
+	right: 0;
+`;
+
 const styles = (kickerColor: string): SerializedStyles => {
 	return css`
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		svg {
@@ -54,8 +66,6 @@ const styles = (kickerColor: string): SerializedStyles => {
 		${from.tablet} {
 			padding-bottom: ${remSpace[9]};
 		}
-
-		${articleWidthStyles}
 	`;
 };
 
@@ -110,6 +120,10 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 		return css(styles(kickerColor), interviewStyles);
 	}
 
+	if (format.design === Design.Comment) {
+		return css(styles(kickerColor), commentStyles);
+	}
+
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
 	}
@@ -123,6 +137,7 @@ interface Props {
 	item: Item;
 	shareIcon?: boolean;
 	large?: boolean;
+	avatar?: boolean;
 }
 
 const renderText = (
@@ -148,7 +163,7 @@ const renderText = (
 		}
 	});
 
-const Byline: FC<Props> = ({ item, shareIcon, large }) => {
+const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
@@ -159,6 +174,11 @@ const Byline: FC<Props> = ({ item, shareIcon, large }) => {
 				<span className="js-share-button" role="button">
 					<ShareIcon />
 				</span>
+			)}
+			{avatar && (
+				<div css={avatarWrapperStyles}>
+					<EditionsAvatar item={item} />
+				</div>
 			)}
 		</div>
 	));
