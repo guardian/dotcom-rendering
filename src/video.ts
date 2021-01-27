@@ -24,7 +24,7 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 	}
 
 	const { posterUrl, duration, assets, activeVersion } = atom.data.media;
-	const title = atom.data.media.title;
+	const title = atom.data.media.title
 	const videoId = assets.find(
 		(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
 	)?.id;
@@ -38,7 +38,7 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 		videoId,
 		duration: duration?.toNumber(),
 		atomId: id,
-		title,
+        title
 	});
 };
 

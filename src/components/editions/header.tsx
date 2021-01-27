@@ -56,7 +56,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 
 const CommentHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Headline item={item} />
 		<Byline item={item} large avatar />
 		<Lines />
