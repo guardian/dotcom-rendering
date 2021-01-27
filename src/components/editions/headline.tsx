@@ -10,6 +10,7 @@ import type {
 	FontWeight,
 	LineHeight,
 } from '@guardian/src-foundations/typography/types';
+import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import { headlineTextColour } from 'editorialStyles';
@@ -24,6 +25,27 @@ import { articleWidthStyles } from './styles';
 interface Props {
 	item: Item;
 }
+
+const quoteStyles = (format: Format): SerializedStyles => {
+	const { kicker } = getThemeStyles(format.theme);
+
+	return css`
+		margin: 0;
+		svg {
+			margin-bottom: -0.65rem;
+			width: 40px;
+			margin-left: -0.3rem;
+			fill: ${kicker};
+		}
+
+		${from.tablet} {
+			svg {
+				margin-bottom: -0.75rem;
+				width: 50px;
+			}
+		}
+	`;
+};
 
 const styles = (format: Format): SerializedStyles => css`
 	${headlineTextColour(format)}
@@ -121,8 +143,19 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 };
 
 const getHeadlineText = (item: Item): JSX.Element | string => {
+	const format = getFormat(item);
+
 	if (item.design === Design.Interview) {
 		return <span css={interviewFontStyles}>{item.headline}</span>;
+	}
+
+	if (item.design === Design.Comment) {
+		return (
+			<span css={quoteStyles(format)}>
+				<SvgQuote />
+				{item.headline}
+			</span>
+		);
 	}
 	return item.headline;
 };
