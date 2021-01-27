@@ -129,7 +129,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					<StarRating item={item} />
 				</figure>
 			);
-		} else if (media.video.atomId !== undefined) {
+		} else {
 			return (
 				<div css={videoWrapperStyles}>
 					<iframe
