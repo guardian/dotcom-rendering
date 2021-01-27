@@ -54,6 +54,16 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
+const CommentHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={headerStyles}>
+		<HeaderImage item={item} />
+		<Headline item={item} />
+		<Byline item={item} large avatar />
+		<Lines />
+		<Standfirst item={item} shareIcon />
+	</header>
+);
+
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderMedia item={item} />
@@ -71,6 +81,8 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		return <ShowcaseHeader item={item} />;
 	} else if (item.design === Design.Analysis) {
 		return <AnalysisHeader item={item} />;
+	} else if (item.design === Design.Comment) {
+		return <CommentHeader item={item} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}

@@ -55,7 +55,7 @@
     "@guardian/src-text-area": "^2.8.1",
     "@guardian/src-text-input": "^2.7.1",
     "@guardian/types": "github:guardian/types#semver:1.1.0",
-    "@guardian/renditions": "git+https://github.com/guardian/renditions.git#0.1.0",
+    "@guardian/renditions": "git+https://github.com/guardian/renditions.git#0.1.1",
     "@types/jsdom": "^16.2.5",
     "@types/uuid": "^8.3.0",
     "@types/webpack-node-externals": "^2.5.0",
