@@ -8,7 +8,7 @@ interface Video {
 	videoId: string;
 	duration?: number;
 	atomId?: string;
-	title?: string;
+	title: string;
 }
 
 const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
