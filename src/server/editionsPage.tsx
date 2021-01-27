@@ -99,7 +99,7 @@ function render(
 	const body = renderBody(item);
 	const head = renderHead(
 		request,
-		getThirdPartyEmbeds(request.content, item.mainMedia),
+		getThirdPartyEmbeds(request.content),
 		body.css,
 		body.ids,
 	);
