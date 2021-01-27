@@ -306,9 +306,11 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							backgroundColour={brandBackground.primary}
 						>
 							<Nav
-								pillar={getCurrentPillar(CAPI)}
+								format={{
+									...format,
+									theme: getCurrentPillar(CAPI),
+								}}
 								nav={NAV}
-								display={format.display}
 								subscribeUrl={
 									CAPI.nav.readerRevenueLinks.header.subscribe
 								}
