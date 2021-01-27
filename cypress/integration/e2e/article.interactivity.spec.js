@@ -5,7 +5,7 @@ import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
-const READER_REVENUE_TITLE_TEXT = 'Support The';
+const READER_REVENUE_TITLE_TEXT = 'Support the';
 const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
 
