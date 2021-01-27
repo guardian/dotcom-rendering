@@ -1,20 +1,20 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { ThirdPartyEmbeddedContent } from './ThirdPartyEmbeddedContent';
+import { ClickToView } from './ClickToView';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-describe('ThirdPartyEmbeddedContent', () => {
+describe('ClickToView', () => {
 	it('It should render the third party content if it is not tracking', () => {
 		const thirdPartyContent = <div data-testid="third-party-content" />;
 		const { getByTestId } = render(
-			<ThirdPartyEmbeddedContent
+			<ClickToView
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
 			>
 				{thirdPartyContent}
-			</ThirdPartyEmbeddedContent>,
+			</ClickToView>,
 		);
 
 		expect(getByTestId('third-party-content')).toBeInTheDocument();
@@ -22,13 +22,13 @@ describe('ThirdPartyEmbeddedContent', () => {
 
 	it('It should render a provider specific overlay if a source is present', () => {
 		const { getByText } = render(
-			<ThirdPartyEmbeddedContent
+			<ClickToView
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
 			>
 				<div id="third-party-content" />
-			</ThirdPartyEmbeddedContent>,
+			</ClickToView>,
 		);
 
 		expect(getByText('Allow A Third Party content?')).toBeInTheDocument();
@@ -40,12 +40,9 @@ describe('ThirdPartyEmbeddedContent', () => {
 	});
 	it('It should render a generic overlay if a source is not present', () => {
 		const { getByText } = render(
-			<ThirdPartyEmbeddedContent
-				isTracking={true}
-				sourceDomain="athirdparty.com"
-			>
+			<ClickToView isTracking={true} sourceDomain="athirdparty.com">
 				<div id="third-party-content" />
-			</ThirdPartyEmbeddedContent>,
+			</ClickToView>,
 		);
 
 		expect(

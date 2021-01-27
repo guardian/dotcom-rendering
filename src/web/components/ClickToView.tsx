@@ -14,10 +14,10 @@ type Props = {
 	children: React.ReactNode;
 	width?: number;
 	height?: number;
-	overlayHeadline: string;
-	overlayBody: React.ReactNode;
-	overlayButtonText: string;
-	onAccept: Function;
+	onAccept?: Function;
+	isTracking: boolean;
+	source?: string;
+	sourceDomain: string;
 };
 
 const Container = ({
@@ -124,10 +124,10 @@ export const ClickToView = ({
 	children,
 	width,
 	height,
-	overlayHeadline,
-	overlayBody,
-	overlayButtonText,
 	onAccept,
+	isTracking,
+	source,
+	sourceDomain,
 }: Props) => {
 	const [showOverlay, setShowOverlay] = useState<boolean>(true);
 
@@ -136,19 +136,55 @@ export const ClickToView = ({
 	};
 
 	useEffect(() => {
-		if (!showOverlay) {
+		if (!showOverlay && onAccept) {
 			onAccept();
 		}
 	});
 
-	if (showOverlay) {
+	let headlineText;
+	let body;
+
+	if (isTracking && showOverlay) {
+		if (source) {
+			headlineText = `Allow ${source} content?`;
+			body = (
+				<div>
+					<p>
+						This article includes content provided by {source}. We
+						ask for your permission berfore anyting is loaded, as
+						they may be using cookies and other technologies.
+					</p>
+					<p>
+						To view this content, click &apos;Allow and
+						continue&apos;
+					</p>
+				</div>
+			);
+		} else {
+			headlineText = 'Allow content provided by a thrid party?';
+			body = (
+				<div>
+					<p>
+						This article includes content hosted on {sourceDomain}.
+						We ask for your permission berfore anyting is loaded, as
+						the provider may be using cookies and other
+						technologies.
+					</p>
+					<p>
+						To view this content, click &apos;Allow and
+						continue&apos;
+					</p>
+				</div>
+			);
+		}
+
 		return (
 			<Container width={width} height={height}>
 				<Outer>
 					<Inner>
 						<Top>
-							<Headline width={width}>{overlayHeadline}</Headline>
-							<Body width={width}>{overlayBody}</Body>
+							<Headline width={width}>{headlineText}</Headline>
+							<Body width={width}>{body}</Body>
 						</Top>
 						<Bottom>
 							<Button
@@ -158,7 +194,7 @@ export const ClickToView = ({
 								iconSide="left"
 								onClick={() => handleClick()}
 							>
-								{overlayButtonText}
+								Allow and continue
 							</Button>
 						</Bottom>
 					</Inner>
