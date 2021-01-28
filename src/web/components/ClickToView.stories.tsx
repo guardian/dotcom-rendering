@@ -648,10 +648,10 @@ function unsafeEmbedBlockComponent(
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
-					key="1"
+					key="2"
 					html={EmbeddedElements.formStackEmbed.html}
 					alt={EmbeddedElements.formStackEmbed.alt}
-					index={1}
+					index={2}
 				/>
 			</ClickToView>
 		</Figure>,
@@ -671,10 +671,10 @@ function unsafeEmbedBlockComponent(
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
-					key="1"
+					key="3"
 					html={EmbeddedElements.scribdEmbedEmbed.html}
 					alt={EmbeddedElements.scribdEmbedEmbed.alt}
-					index={1}
+					index={3}
 				/>
 			</ClickToView>
 		</Figure>,
@@ -694,10 +694,10 @@ function unsafeEmbedBlockComponent(
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
-					key="1"
+					key="4"
 					html={EmbeddedElements.tiktokEmbedEmbed.html}
 					alt={EmbeddedElements.tiktokEmbedEmbed.alt}
-					index={1}
+					index={4}
 				/>
 			</ClickToView>
 		</Figure>,
@@ -719,10 +719,10 @@ function unsafeEmbedBlockComponent(
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
-					key="1"
+					key="5"
 					html={EmbeddedElements.theconversationEmbedEmbed.html}
 					alt={EmbeddedElements.theconversationEmbedEmbed.alt}
-					index={1}
+					index={5}
 				/>
 			</ClickToView>
 		</Figure>,
@@ -742,10 +742,10 @@ function unsafeEmbedBlockComponent(
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
-					key="1"
+					key="6"
 					html={EmbeddedElements.twitterEmbedEmbed.html}
 					alt={EmbeddedElements.twitterEmbedEmbed.alt}
-					index={1}
+					index={6}
 				/>
 			</ClickToView>
 		</Figure>,
