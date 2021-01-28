@@ -65,6 +65,15 @@ const headerBackgroundStyles = (item: Format): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(item)};
 `;
 
+
+const getSectionStyles = (item: Format) => {
+	if (item.design === Design.Interview) {
+		return [];
+	}
+	return [headerStyles, articleStyles];
+};
+
+
 const Article: FC<Props> = ({ item }) => {
 	if (item.design === Design.Live) {
 		return <p>Not implemented</p>;
@@ -74,7 +83,7 @@ const Article: FC<Props> = ({ item }) => {
 		<main>
 			<article>
 				<div css={headerBackgroundStyles(item)}>
-					<section css={[headerStyles, articleStyles]}>
+					<section css={getSectionStyles(item)}>
 						<Header item={item} />
 					</section>
 				</div>
