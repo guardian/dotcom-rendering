@@ -32,4 +32,13 @@ describe('joinUrl', () => {
 
 		expect(joinUrl(input)).toBe('');
 	});
+
+	it('It works on relative paths', () => {
+		expect(joinUrl(['/AudioAtomWrapper.js'])).toBe('AudioAtomWrapper.js');
+		expect(
+			joinUrl([
+				'/vendors~AudioAtomWrapper~elements-YoutubeBlockComponent.js',
+			]),
+		).toBe('vendors~AudioAtomWrapper~elements-YoutubeBlockComponent.js');
+	});
 });
