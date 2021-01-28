@@ -50,7 +50,7 @@ export const DefaultStory = () => {
 				</p>
 				<Figure role="inline">
 					<ClickToView
-						role="supporting"
+						role="inline"
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
@@ -100,7 +100,7 @@ export const SmallStory = () => {
 				</p>
 				<Figure role="supporting">
 					<ClickToView
-						role="inline"
+						role="supporting"
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"

@@ -19,6 +19,63 @@ type Props = {
 	sourceDomain: string;
 };
 
+const overlayWidth = (role: RoleType) => {
+	let width: string;
+
+	switch (role) {
+		default: {
+			width = '100%';
+		}
+	}
+
+	return width;
+};
+
+const roleTextSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return textSans.small();
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return textSans.xsmall();
+		}
+	}
+};
+
+const roleHeadlineSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return headline.xsmall();
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return headline.xxsmall();
+		}
+	}
+};
+
+const roleButtonSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return 'small';
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return 'xsmall';
+		}
+	}
+};
+
 const Container = ({
 	children,
 	width,
@@ -83,7 +140,7 @@ const Headline = ({
 }) => (
 	<div
 		className={css`
-			${role === 'inline' ? headline.xsmall() : headline.xxsmall()}
+			${roleHeadlineSize(role)}
 		`}
 	>
 		{children}
@@ -96,40 +153,20 @@ const Body = ({
 }: {
 	children: React.ReactNode;
 	role: RoleType;
-}) => (
-	<div
-		className={css`
-			${role === 'inline' ? textSans.small() : textSans.xsmall()}
-			a {
-				${role === 'inline' ? textSans.small() : textSans.xsmall()}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const overlayWidth = (role: RoleType) => {
-	let width: string;
-
-	switch (role) {
-		default: {
-			width = '100%';
-		}
-	}
-
-	return width;
-};
-
-const buttonSize = (role: RoleType) => {
-	switch (role) {
-		case 'inline': {
-			return 'small';
-		}
-		default: {
-			return 'xsmall';
-		}
-	}
+}) => {
+	const textSize = roleTextSize(role);
+	return (
+		<div
+			className={css`
+				${textSize}
+				a {
+					${textSize}
+				}
+			`}
+		>
+			{children}
+		</div>
+	);
 };
 
 export const ClickToView = ({
@@ -168,7 +205,7 @@ export const ClickToView = ({
 				<div>
 					<p>
 						This article includes content provided by {source}. We
-						ask for your permission berfore anyting is loaded, as
+						ask for your permission before anything is loaded, as
 						they may be using cookies and other technologies.
 					</p>
 					<p>
@@ -178,12 +215,12 @@ export const ClickToView = ({
 				</div>
 			);
 		} else {
-			headlineText = 'Allow content provided by a thrid party?';
+			headlineText = 'Allow content provided by a third party?';
 			body = (
 				<div>
 					<p>
 						This article includes content hosted on {sourceDomain}.
-						We ask for your permission berfore anyting is loaded, as
+						We ask for your permission before anything is loaded, as
 						the provider may be using cookies and other
 						technologies.
 					</p>
@@ -206,7 +243,7 @@ export const ClickToView = ({
 						<Bottom>
 							<Button
 								priority="primary"
-								size={buttonSize(role)}
+								size={roleButtonSize(role)}
 								icon={<SvgCheckmark />}
 								iconSide="left"
 								onClick={() => handleClick()}

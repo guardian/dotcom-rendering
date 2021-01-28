@@ -34,7 +34,7 @@ describe('ClickToView', () => {
 		expect(getByText('Allow A Third Party content?')).toBeInTheDocument();
 		expect(
 			getByText(
-				'This article includes content provided by A Third Party. We ask for your permission berfore anyting is loaded, as they may be using cookies and other technologies.',
+				'This article includes content provided by A Third Party. We ask for your permission before anything is loaded, as they may be using cookies and other technologies.',
 			),
 		).toBeInTheDocument();
 	});
@@ -46,11 +46,11 @@ describe('ClickToView', () => {
 		);
 
 		expect(
-			getByText('Allow content provided by a thrid party?'),
+			getByText('Allow content provided by a third party?'),
 		).toBeInTheDocument();
 		expect(
 			getByText(
-				'This article includes content hosted on athirdparty.com. We ask for your permission berfore anyting is loaded, as the provider may be using cookies and other technologies.',
+				'This article includes content hosted on athirdparty.com. We ask for your permission before anything is loaded, as the provider may be using cookies and other technologies.',
 			),
 		).toBeInTheDocument();
 	});
