@@ -44,10 +44,10 @@ const textSeriesTitle = (format: Format): string => {
 				case Design.MatchReport:
 					return BLACK;
 				default:
-					return WHITE;
+					return pillarPalette[format.theme].main;
 			}
 		default:
-			return pillarPalette[format.theme].main;
+			return BLACK;
 	}
 };
 
