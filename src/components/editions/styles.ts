@@ -79,3 +79,16 @@ export const headerBackgroundColour = (format: Format): Colour => {
 
 	return Palette.neutral[100];
 };
+
+export const interviewBackgroundColour = (format: Format): Colour => {
+	switch (format.theme) {
+		case Pillar.Sport:
+			return Palette.brandAlt[400];
+		case Pillar.Culture:
+			return Palette.culture[600];
+		case Pillar.Lifestyle:
+			return Palette.lifestyle[800];
+		default:
+			return Palette.neutral[100];
+	}
+};
