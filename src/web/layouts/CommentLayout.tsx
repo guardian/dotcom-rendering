@@ -367,13 +367,12 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<StandardGrid display={format.display}>
 					<GridItem area="title">
 						<ArticleTitle
-							display={format.display}
-							design={format.design}
+							format={format}
+							palette={palette}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>

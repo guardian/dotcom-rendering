@@ -7,13 +7,12 @@ import { Display, Design } from '@guardian/types';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
-	display: Display;
-	design: Design;
+	format: Format;
+	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: Theme;
 	badge?: BadgeType;
 };
 
@@ -60,17 +59,16 @@ const immersiveMargins = css`
 `;
 
 export const ArticleTitle = ({
-	display,
-	design,
+	format,
+	palette,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	pillar,
 	badge,
 }: Props) => (
 	<div className={cx(sectionStyles, badge && badgeContainer)}>
-		{badge && display !== Display.Immersive && (
+		{badge && format.display !== Display.Immersive && (
 			<div className={titleBadgeWrapper}>
 				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
 			</div>
@@ -78,19 +76,18 @@ export const ArticleTitle = ({
 		<div
 			className={cx(
 				badge && marginTop,
-				display === Display.Immersive &&
-					design !== Design.PrintShop &&
+				format.display === Display.Immersive &&
+					format.design !== Design.PrintShop &&
 					immersiveMargins,
 			)}
 		>
 			<SeriesSectionLink
-				display={display}
-				design={design}
+				format={format}
+				palette={palette}
 				tags={tags}
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
-				pillar={pillar}
 				badge={badge}
 			/>
 		</div>

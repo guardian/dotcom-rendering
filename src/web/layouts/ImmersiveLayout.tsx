@@ -348,13 +348,12 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								leftContent={<LeftColCaption />}
 							>
 								<ArticleTitle
-									display={format.display}
-									design={format.design}
+									format={format}
+									palette={palette}
 									tags={CAPI.tags}
 									sectionLabel={CAPI.sectionLabel}
 									sectionUrl={CAPI.sectionUrl}
 									guardianBaseURL={CAPI.guardianBaseURL}
-									pillar={format.theme}
 									badge={CAPI.badge}
 								/>
 							</ContainerLayout>
@@ -417,13 +416,12 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									`}
 								>
 									<ArticleTitle
-										display={format.display}
-										design={format.design}
+										format={format}
+										palette={palette}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
 										guardianBaseURL={CAPI.guardianBaseURL}
-										pillar={format.theme}
 										badge={CAPI.badge}
 									/>
 								</div>
