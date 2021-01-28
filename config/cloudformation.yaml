@@ -9,7 +9,8 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
-    InstanceType: "t3a.micro"
+    InstanceType:
+       Value: "t3a.micro"
   PROD:
     ScalingUp:
       Period: 300
@@ -17,7 +18,8 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
-    InstanceType: "t3a.micro"
+    InstanceType:
+      Value: "t3a.micro"
   Constants:
     RunbookCopy:
       Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
@@ -293,7 +295,7 @@ Resources:
       AssociatePublicIpAddress: true
       IamInstanceProfile: !Ref DistributionInstanceProfile
       ImageId: !Ref AMI
-      InstanceType: !FindInMap [!Ref Stage, InstanceType]
+      InstanceType: !FindInMap [!Ref Stage, InstanceType, Value]
       SecurityGroups:
         - !Ref InstanceSecurityGroup
         - Fn::ImportValue: !Sub SecurityGroups-${Stage}-MapiGuardianLondonSSH
