@@ -3,6 +3,7 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
+import { border } from '@guardian/src-foundations/palette';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type {
 	FontStyle,
@@ -18,11 +19,7 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import {
-	articleWidthStyles,
-	tabletArticleMargin,
-	wideArticleMargin,
-} from './styles';
+import { borderWidthStyles } from './styles';
 
 // ----- Styles ----- //
 
@@ -38,7 +35,8 @@ const interviewStyles = css`
 		margin-left: ${remSpace[24]};
 		left: ${remSpace[12]};
 	}
-	${articleWidthStyles}
+	${borderWidthStyles}
+	border-bottom: 1px solid ${border.secondary};
 `;
 
 const galleryStyles = css`
