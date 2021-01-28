@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	brandBackground,
 	brandLine,
 	brandBorder,
@@ -295,7 +294,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={background.primary}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -308,7 +307,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={background.primary}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -317,7 +316,10 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<Section showTopBorder={false}>
+			<Section
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+			>
 				<ShowcaseGrid>
 					<GridItem area="title">
 						<ArticleTitle

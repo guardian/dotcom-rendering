@@ -1,6 +1,11 @@
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
-import { neutral, text } from '@guardian/src-foundations';
+import {
+	neutral,
+	text,
+	specialReport,
+	opinion,
+} from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
 
@@ -53,6 +58,13 @@ const textSeriesTitle = (format: Format): string => {
 
 const textSectionTitle = textSeriesTitle;
 
+const backgroundArticle = (format: Format): string => {
+	// Order matters. We want comment special report pieces to have the opinion background
+	if (format.design === Design.Comment) return opinion[800];
+	if (format.theme === Special.SpecialReport) return specialReport[800];
+	return 'transparent';
+};
+
 const backgroundSeriesTitle = (format: Format): string => {
 	switch (format.display) {
 		case Display.Immersive:
@@ -74,6 +86,7 @@ export const decidePalette = (format: Format) => {
 			sectionTitle: textSectionTitle(format),
 		},
 		background: {
+			article: backgroundArticle(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 		},

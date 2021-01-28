@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	brandAltBackground,
 	brandBackground,
 	brandLine,
@@ -378,7 +377,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={background.primary}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -391,7 +390,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={background.primary}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -400,7 +399,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<Section data-print-layout="hide" showTopBorder={false}>
+			<Section
+				data-print-layout="hide"
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+			>
 				<StandardGrid design={format.design} CAPI={CAPI}>
 					<GridItem area="title">
 						<ArticleTitle

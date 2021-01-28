@@ -6,10 +6,10 @@ import {
 	brandBorder,
 	brandBackground,
 	brandLine,
-	opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
@@ -338,7 +338,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={opinion[800]}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -351,7 +351,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={opinion[800]}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -360,7 +360,10 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<Section showTopBorder={false} backgroundColour={opinion[800]}>
+			<Section
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+			>
 				<StandardGrid display={format.display}>
 					<GridItem area="title">
 						<ArticleTitle
