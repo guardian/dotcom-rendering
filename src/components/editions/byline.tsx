@@ -18,13 +18,25 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { articleMarginStyles, articleWidthStyles, sidePadding } from './styles';
+import {
+	wideArticleMargin,
+	articleWidthStyles,
+	tabletArticleMargin,
+} from './styles';
 
 // ----- Styles ----- //
 
 const interviewStyles = css`
-	${sidePadding}
-	${articleMarginStyles}
+	margin-left: ${remSpace[2]};
+	margin-right: ${remSpace[2]};
+
+	${from.tablet} {
+		margin-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
+	}
 	${articleWidthStyles}
 `;
 
