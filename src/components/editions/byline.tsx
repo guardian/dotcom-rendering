@@ -31,11 +31,12 @@ const interviewStyles = css`
 	margin-right: ${remSpace[2]};
 
 	${from.tablet} {
-		margin-left: ${tabletArticleMargin}px;
+		margin-left: ${remSpace[6]};
 	}
 
 	${from.wide} {
-		margin-left: ${wideArticleMargin}px;
+		margin-left: ${remSpace[24]};
+		left: ${remSpace[12]};
 	}
 	${articleWidthStyles}
 `;
