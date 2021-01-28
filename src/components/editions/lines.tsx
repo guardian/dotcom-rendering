@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-
+import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
 import { from } from '@guardian/src-foundations/mq';
@@ -27,8 +27,12 @@ const styles = css`
 	}
 `;
 
-const EditionsLines: FC = () => (
-	<div css={styles}>
+interface Props {
+	className?: SerializedStyles;
+}
+
+const EditionsLines: FC<Props> = ({ className }) => (
+	<div css={[styles, className]}>
 		<Lines />
 	</div>
 );

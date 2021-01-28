@@ -14,6 +14,7 @@ import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC, ReactElement } from 'react';
 import {
+	articleMarginStyles,
 	interviewBackgroundColour,
 	sidePadding,
 	tabletArticleMargin,
@@ -90,7 +91,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 			<Headline item={item} />
 			<Standfirst item={item} />
 		</div>
-		<Lines />
+		<Lines className={articleMarginStyles} />
 		<Byline item={item} />
 	</header>
 );
