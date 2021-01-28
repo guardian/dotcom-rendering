@@ -9,7 +9,7 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
-    InstanceType: t3a.micro
+    InstanceType: "t3a.micro"
   PROD:
     ScalingUp:
       Period: 300
@@ -17,7 +17,7 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
-    InstanceType: t3a.micro
+    InstanceType: "t3a.micro"
   Constants:
     RunbookCopy:
       Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
