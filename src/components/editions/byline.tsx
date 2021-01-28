@@ -19,9 +19,9 @@ import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
 import {
-	wideArticleMargin,
 	articleWidthStyles,
 	tabletArticleMargin,
+	wideArticleMargin,
 } from './styles';
 
 // ----- Styles ----- //
