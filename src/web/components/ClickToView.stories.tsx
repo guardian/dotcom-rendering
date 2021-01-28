@@ -3,7 +3,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Display, Design, Theme, Pillar } from '@guardian/types';
-import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
+import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { ClickToView } from './ClickToView';
@@ -339,19 +339,6 @@ const EmbeddedElements = {
 			'<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=1077257657/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/track=2222104579/transparent=true/" seamless><a href="https://jonnyandthebaptists.bandcamp.com/album/love-you-hate-bastards">Love You &amp; Hate Bastards by Jonny &amp; The Baptists</a></iframe>',
 		isMandatory: true,
 	},
-	theconversationEmbedEmbed: {
-		source: undefined,
-		sourceDomain: 'theconversation.com',
-		height: undefined,
-		width: undefined,
-		isThirdPartyTracking: true,
-		safe: false,
-		alt: 'Script',
-		_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-		html:
-			'<script type="text/javascript" src="https://theconversation.com/javascripts/lib/content_tracker_hook.js" id="theconversation_tracker_hook" data-counter="https://counter.theconversation.com/content/132759/count?distributor=republish-lightbox-advanced" async="async"></script>',
-		isMandatory: false,
-	},
 	twitterTweetEmbed: {
 		source: 'Twitter',
 		sourceDomain: 'twitter.com',
@@ -623,7 +610,9 @@ function unsafeEmbedBlockComponent(
 				source={EmbeddedElements.instagramEmbed.source}
 				sourceDomain={EmbeddedElements.instagramEmbed.sourceDomain}
 				role={role}
-				onAccept={() => embedIframe()}
+				onAccept={() =>
+					updateIframeHeight('iframe[name="unsafe-embed-1"]')
+				}
 			>
 				<UnsafeEmbedBlockComponent
 					key="1"
@@ -645,7 +634,9 @@ function unsafeEmbedBlockComponent(
 				source={EmbeddedElements.formStackEmbed.source}
 				sourceDomain={EmbeddedElements.formStackEmbed.sourceDomain}
 				role={role}
-				onAccept={() => embedIframe()}
+				onAccept={() =>
+					updateIframeHeight('iframe[name="unsafe-embed-2"]')
+				}
 			>
 				<UnsafeEmbedBlockComponent
 					key="2"
@@ -668,7 +659,9 @@ function unsafeEmbedBlockComponent(
 				source={EmbeddedElements.scribdEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.scribdEmbedEmbed.sourceDomain}
 				role={role}
-				onAccept={() => embedIframe()}
+				onAccept={() =>
+					updateIframeHeight('iframe[name="unsafe-embed-3"]')
+				}
 			>
 				<UnsafeEmbedBlockComponent
 					key="3"
@@ -691,38 +684,15 @@ function unsafeEmbedBlockComponent(
 				source={EmbeddedElements.tiktokEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.tiktokEmbedEmbed.sourceDomain}
 				role={role}
-				onAccept={() => embedIframe()}
+				onAccept={() =>
+					updateIframeHeight('iframe[name="unsafe-embed-4"]')
+				}
 			>
 				<UnsafeEmbedBlockComponent
 					key="4"
 					html={EmbeddedElements.tiktokEmbedEmbed.html}
 					alt={EmbeddedElements.tiktokEmbedEmbed.alt}
 					index={4}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a The Conversation embed from an &apos;embed&apos;
-			element type, the embed source article is{' '}
-			<a href="https://www.theguardian.com/australia-news/2020/mar/03/the-first-economic-modelling-of-coronavirus-scenarios-is-grim-for-the-world">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.theconversationEmbedEmbed.source}
-				sourceDomain={
-					EmbeddedElements.theconversationEmbedEmbed.sourceDomain
-				}
-				role={role}
-				onAccept={() => embedIframe()}
-			>
-				<UnsafeEmbedBlockComponent
-					key="5"
-					html={EmbeddedElements.theconversationEmbedEmbed.html}
-					alt={EmbeddedElements.theconversationEmbedEmbed.alt}
-					index={5}
 				/>
 			</ClickToView>
 		</Figure>,
@@ -739,13 +709,15 @@ function unsafeEmbedBlockComponent(
 				source={EmbeddedElements.twitterEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.twitterEmbedEmbed.sourceDomain}
 				role={role}
-				onAccept={() => embedIframe()}
+				onAccept={() =>
+					updateIframeHeight('iframe[name="unsafe-embed-5"]')
+				}
 			>
 				<UnsafeEmbedBlockComponent
-					key="6"
+					key="5"
 					html={EmbeddedElements.twitterEmbedEmbed.html}
 					alt={EmbeddedElements.twitterEmbedEmbed.alt}
-					index={6}
+					index={5}
 				/>
 			</ClickToView>
 		</Figure>,
