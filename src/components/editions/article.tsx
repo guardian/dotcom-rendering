@@ -65,14 +65,12 @@ const headerBackgroundStyles = (item: Format): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(item)};
 `;
 
-
-const getSectionStyles = (item: Format) => {
+const getSectionStyles = (item: Format): SerializedStyles[] => {
 	if (item.design === Design.Interview) {
 		return [];
 	}
 	return [headerStyles, articleStyles];
 };
-
 
 const Article: FC<Props> = ({ item }) => {
 	if (item.design === Design.Live) {
