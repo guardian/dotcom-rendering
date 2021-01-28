@@ -18,12 +18,13 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { sidePadding, articleWidthStyles } from './styles';
+import { sidePadding, articleWidthStyles, articleMarginStyles } from './styles';
 
 // ----- Styles ----- //
 
 const interviewStyles = css`
 	${sidePadding}
+	${articleMarginStyles}
 	${articleWidthStyles}
 `;
 
