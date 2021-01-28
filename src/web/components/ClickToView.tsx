@@ -8,8 +8,6 @@ import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
-import { Lines } from '@guardian/src-ed-lines';
-
 type Props = {
 	children: React.ReactNode;
 	role?: RoleType;
@@ -90,46 +88,18 @@ const Container = ({
 			className={css`
 				width: ${width};
 				height: ${height};
+				background: ${background.secondary};
+				border: 1px solid ${border.primary};
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding: ${space[3]}px;
 			`}
 		>
 			{children}
 		</div>
 	);
 };
-
-const Outer = ({ children }: { children: React.ReactNode }) => (
-	<div
-		className={css`
-			background: ${background.secondary};
-			border: 1px solid ${border.primary};
-			height: 100%;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Inner = ({ children }: { children: React.ReactNode }) => (
-	<div
-		className={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			height: calc(100% - 16px);
-			padding: ${space[3]}px;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Top = ({ children }: { children: React.ReactNode }) => (
-	<div>{children}</div>
-);
-
-const Bottom = ({ children }: { children: React.ReactNode }) => (
-	<div>{children}</div>
-);
 
 const Headline = ({
 	children,
@@ -165,6 +135,28 @@ const Body = ({
 			`}
 		>
 			{children}
+		</div>
+	);
+};
+
+const AcceptButton = ({
+	role,
+	handleClick,
+}: {
+	role: RoleType;
+	handleClick: Function;
+}) => {
+	return (
+		<div>
+			<Button
+				priority="primary"
+				size={roleButtonSize(role)}
+				icon={<SvgCheckmark />}
+				iconSide="left"
+				onClick={() => handleClick()}
+			>
+				Allow and continue
+			</Button>
 		</div>
 	);
 };
@@ -207,7 +199,7 @@ export const ClickToView = ({
 					</p>
 					<p>
 						To view this content, click &apos;Allow and
-						continue&apos;
+						continue&apos;.
 					</p>
 				</div>
 			);
@@ -223,7 +215,7 @@ export const ClickToView = ({
 					</p>
 					<p>
 						To view this content, click &apos;Allow and
-						continue&apos;
+						continue&apos;.
 					</p>
 				</div>
 			);
@@ -231,35 +223,15 @@ export const ClickToView = ({
 
 		return (
 			<Container width={width} height={height}>
-				<Outer>
-					<Inner>
-						<Top>
-							<Headline role={roleWithDefault}>
-								{headlineText}
-							</Headline>
-							<Body role={roleWithDefault}>{body}</Body>
-						</Top>
-						<Bottom>
-							<Button
-								priority="primary"
-								size={roleButtonSize(roleWithDefault)}
-								icon={<SvgCheckmark />}
-								iconSide="left"
-								onClick={() => handleClick()}
-							>
-								Allow and continue
-							</Button>
-						</Bottom>
-					</Inner>
-					<Lines />
-				</Outer>
+				<Headline role={roleWithDefault}>{headlineText}</Headline>
+				<Body role={roleWithDefault}>{body}</Body>
+				<AcceptButton
+					role={roleWithDefault}
+					handleClick={handleClick}
+				/>
 			</Container>
 		);
 	}
 
-	return (
-		<Container width={width} height={height}>
-			{children}
-		</Container>
-	);
+	return <div>{children}</div>;
 };
