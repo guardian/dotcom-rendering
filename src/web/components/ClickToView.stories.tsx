@@ -56,7 +56,12 @@ export const DefaultStory = () => {
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
 					>
-						<img src="http://placekitten.com/g/620/400" alt="" />
+						<img
+							src="http://placekitten.com/g/620/400"
+							width="620"
+							height="400"
+							alt=""
+						/>
 					</ClickToView>
 				</Figure>
 				<p>
@@ -106,7 +111,12 @@ export const SmallStory = () => {
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
 					>
-						<img src="http://placekitten.com/g/380/300" alt="" />
+						<img
+							src="http://placekitten.com/g/380/300"
+							width="380"
+							height="300"
+							alt=""
+						/>
 					</ClickToView>
 				</Figure>
 				<p>

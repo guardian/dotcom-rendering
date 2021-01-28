@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 
 import { border, background } from '@guardian/src-foundations/palette';
@@ -171,7 +171,7 @@ const Body = ({
 
 export const ClickToView = ({
 	children,
-	role: roleProp,
+	role,
 	onAccept,
 	isTracking,
 	source,
@@ -181,20 +181,17 @@ export const ClickToView = ({
 
 	const handleClick = () => {
 		setShowOverlay(false);
-	};
-
-	useEffect(() => {
-		if (!showOverlay && onAccept) {
-			onAccept();
+		if (onAccept) {
+			setTimeout(() => onAccept());
 		}
-	});
+	};
 
 	let headlineText;
 	let body;
 
-	const role: RoleType = roleProp || 'inline';
+	const roleWithDefault: RoleType = role || 'inline';
 
-	const width = overlayWidth(role);
+	const width = overlayWidth(roleWithDefault);
 
 	const height = undefined;
 
@@ -237,13 +234,15 @@ export const ClickToView = ({
 				<Outer>
 					<Inner>
 						<Top>
-							<Headline role={role}>{headlineText}</Headline>
-							<Body role={role}>{body}</Body>
+							<Headline role={roleWithDefault}>
+								{headlineText}
+							</Headline>
+							<Body role={roleWithDefault}>{body}</Body>
 						</Top>
 						<Bottom>
 							<Button
 								priority="primary"
-								size={roleButtonSize(role)}
+								size={roleButtonSize(roleWithDefault)}
 								icon={<SvgCheckmark />}
 								iconSide="left"
 								onClick={() => handleClick()}
