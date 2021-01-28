@@ -9,6 +9,7 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
+    InstanceType: t3a.micro
   PROD:
     ScalingUp:
       Period: 300
@@ -16,6 +17,7 @@ Mappings:
     ScalingDown:
       Period: 300
       Threshold: 15
+    InstanceType: t3a.micro
   Constants:
     RunbookCopy:
       Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
@@ -43,9 +45,6 @@ Parameters:
   AutoscalingNotifications:
     Description: The ARN of the SNS topic to send notifications to
     Type: String
-  InstanceType:
-    Type: String
-    Description: The instance type
   ASGMinSize:
     Type: Number
     Description: Minimum size of the autoscaling group
@@ -79,7 +78,6 @@ Metadata:
         Parameters:
           - AMI
           - AutoscalingNotifications
-          - InstanceType
           - ASGMinSize
           - ASGMaxSize
 
@@ -295,7 +293,7 @@ Resources:
       AssociatePublicIpAddress: true
       IamInstanceProfile: !Ref DistributionInstanceProfile
       ImageId: !Ref AMI
-      InstanceType: !Ref InstanceType
+      InstanceType: !FindInMap [InstanceType]
       SecurityGroups:
         - !Ref InstanceSecurityGroup
         - Fn::ImportValue: !Sub SecurityGroups-${Stage}-MapiGuardianLondonSSH
