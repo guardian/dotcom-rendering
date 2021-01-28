@@ -73,26 +73,33 @@ const getSectionStyles = (item: Format): SerializedStyles[] => {
 };
 
 const Article: FC<Props> = ({ item }) => {
-	if (item.design === Design.Live) {
-		return <p>Not implemented</p>;
+	if (
+		item.design === Design.Analysis ||
+		item.design === Design.Article ||
+		item.design === Design.Comment ||
+		item.design === Design.Review ||
+		item.design === Design.Interview ||
+		item.design === Design.Feature
+	) {
+		return (
+			<main>
+				<article>
+					<div css={headerBackgroundStyles(item)}>
+						<section css={getSectionStyles(item)}>
+							<Header item={item} />
+						</section>
+					</div>
+					<div css={[bodyWrapperStyles, articleStyles]}>
+						<section css={bodyStyles}>
+							{renderEditionsAll(item, partition(item.body).oks)}
+						</section>
+					</div>
+				</article>
+			</main>
+		);
 	}
 
-	return (
-		<main>
-			<article>
-				<div css={headerBackgroundStyles(item)}>
-					<section css={getSectionStyles(item)}>
-						<Header item={item} />
-					</section>
-				</div>
-				<div css={[bodyWrapperStyles, articleStyles]}>
-					<section css={bodyStyles}>
-						{renderEditionsAll(item, partition(item.body).oks)}
-					</section>
-				</div>
-			</article>
-		</main>
-	);
+	return <p>Not implemented</p>;
 };
 
 // ----- Exports ----- //
