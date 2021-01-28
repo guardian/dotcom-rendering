@@ -1,6 +1,9 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/core';
+import { from } from '@guardian/src-foundations/mq';
+import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderImage from 'components/editions/headerImage';
@@ -10,7 +13,12 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import type { FC, ReactElement } from 'react';
-import { sidePadding } from './styles';
+import {
+	interviewBackgroundColour,
+	sidePadding,
+	tabletArticleMargin,
+	wideArticleMargin,
+} from './styles';
 
 // ----- Component ----- //
 
@@ -20,6 +28,17 @@ interface HeaderProps {
 
 const headerStyles = css`
 	${sidePadding}
+`;
+
+const interviewHeaderStyles = (item: Format): SerializedStyles => css`
+	${from.tablet} {
+		padding-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		padding-left: ${wideArticleMargin}px;
+	}
+	background-color: ${interviewBackgroundColour(item)};
 `;
 
 const StandardHeader: FC<HeaderProps> = ({ item }) => (
@@ -67,8 +86,10 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderImage item={item} />
-		<Headline item={item} />
-		<Standfirst item={item} />
+		<div css={interviewHeaderStyles(item)}>
+			<Headline item={item} />
+			<Standfirst item={item} />
+		</div>
 		<Lines />
 		<Byline item={item} />
 	</header>
