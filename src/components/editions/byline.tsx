@@ -18,7 +18,7 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { sidePadding, articleWidthStyles, articleMarginStyles } from './styles';
+import { articleMarginStyles, articleWidthStyles, sidePadding } from './styles';
 
 // ----- Styles ----- //
 
