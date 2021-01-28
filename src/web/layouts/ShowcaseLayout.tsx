@@ -321,13 +321,12 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<ShowcaseGrid>
 					<GridItem area="title">
 						<ArticleTitle
-							display={format.display}
-							design={format.design}
+							format={format}
+							palette={palette}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>

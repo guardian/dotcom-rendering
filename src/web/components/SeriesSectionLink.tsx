@@ -1,24 +1,21 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 import { Display, Design } from '@guardian/types';
 
 type Props = {
-	display: Display;
-	design: Design;
+	format: Format;
+	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: Theme;
 	badge?: BadgeType;
-	isSpecial?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -40,18 +37,6 @@ const marginBottom = css`
 	margin-bottom: 5px;
 `;
 
-const yellowBackground = css`
-	background-color: ${brandAltBackground.primary};
-	padding-left: 2px;
-`;
-
-const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillarPalette[pillar].main};
-		`,
-);
-
 const primaryStyle = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
@@ -62,18 +47,15 @@ const primaryStyle = css`
 	padding-right: ${space[2]}px;
 `;
 
-const invertedStyle = (pillar: Theme) => css`
+const invertedStyle = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-	color: ${neutral[100]};
-	background-color: ${pillarPalette[pillar].main};
 
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
-	box-shadow: -6px 0 0 ${pillarPalette[pillar].main};
 	box-decoration-break: clone;
 	line-height: 28px;
 	${from.leftCol} {
@@ -92,17 +74,12 @@ const invertedStyle = (pillar: Theme) => css`
 	}
 `;
 
-const whiteFont = css`
+const fontStyles = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-	color: ${neutral[100]};
-`;
-
-const blackText = css`
-	color: ${neutral[0]};
 `;
 
 const secondaryStyle = css`
@@ -111,15 +88,13 @@ const secondaryStyle = css`
 `;
 
 export const SeriesSectionLink = ({
-	display,
-	design,
+	format,
+	palette,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	pillar,
 	badge,
-	isSpecial,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
 	const tag = tags.find(
@@ -131,9 +106,9 @@ export const SeriesSectionLink = ({
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
-	switch (display) {
+	switch (format.display) {
 		case Display.Immersive: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Comment:
 				case Design.GuardianView: {
 					if (tag) {
@@ -146,7 +121,12 @@ export const SeriesSectionLink = ({
 									className={cx(
 										sectionLabelLink,
 										primaryStyle,
-										whiteFont,
+										fontStyles,
+										css`
+											color: ${palette.text.seriesTitle};
+											background-color: ${palette
+												.background.seriesTitle};
+										`,
 									)}
 									data-component="series"
 									data-link-name="article series"
@@ -160,7 +140,13 @@ export const SeriesSectionLink = ({
 										className={cx(
 											sectionLabelLink,
 											secondaryStyle,
-											whiteFont,
+											fontStyles,
+											css`
+												color: ${palette.text
+													.sectionTitle};
+												background-color: ${palette
+													.background.sectionTitle};
+											`,
 										)}
 										data-component="section"
 										data-link-name="article section"
@@ -179,7 +165,12 @@ export const SeriesSectionLink = ({
 								className={cx(
 									sectionLabelLink,
 									primaryStyle,
-									whiteFont,
+									fontStyles,
+									css`
+										color: ${palette.text.sectionTitle};
+										background-color: ${palette.background
+											.sectionTitle};
+									`,
 								)}
 								data-component="section"
 								data-link-name="article section"
@@ -197,8 +188,14 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${tag.id}`}
 								className={cx(
 									sectionLabelLink,
-									pillarColours[pillar],
-									invertedStyle(pillar),
+									css`
+										color: ${palette.text.seriesTitle};
+										background-color: ${palette.background
+											.seriesTitle};
+										box-shadow: -6px 0 0
+											${palette.background.seriesTitle};
+									`,
+									invertedStyle,
 								)}
 								data-component="series"
 								data-link-name="article series"
@@ -224,11 +221,12 @@ export const SeriesSectionLink = ({
 							href={`${guardianBaseURL}/${tag.id}`}
 							className={cx(
 								sectionLabelLink,
-								design === Design.MatchReport
-									? blackText
-									: pillarColours[pillar],
+								css`
+									color: ${palette.text.seriesTitle};
+									background-color: ${palette.background
+										.seriesTitle};
+								`,
 								primaryStyle,
-								isSpecial && yellowBackground,
 							)}
 							data-component="series"
 							data-link-name="article series"
@@ -241,9 +239,11 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
-									design === Design.MatchReport
-										? blackText
-										: pillarColours[pillar],
+									css`
+										color: ${palette.text.sectionTitle};
+										background-color: ${palette.background
+											.sectionTitle};
+									`,
 									secondaryStyle,
 								)}
 								data-component="section"
@@ -261,9 +261,11 @@ export const SeriesSectionLink = ({
 					href={`${guardianBaseURL}/${sectionUrl}`}
 					className={cx(
 						sectionLabelLink,
-						design === Design.MatchReport
-							? blackText
-							: pillarColours[pillar],
+						css`
+							color: ${palette.text.sectionTitle};
+							background-color: ${palette.background
+								.sectionTitle};
+						`,
 						primaryStyle,
 					)}
 					data-component="section"
