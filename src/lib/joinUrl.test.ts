@@ -40,5 +40,6 @@ describe('joinUrl', () => {
 				'/vendors~AudioAtomWrapper~elements-YoutubeBlockComponent.js',
 			]),
 		).toBe('vendors~AudioAtomWrapper~elements-YoutubeBlockComponent.js');
+		expect(joinUrl(['OnwardsLower.js'])).toBe('OnwardsLower.js');
 	});
 });
