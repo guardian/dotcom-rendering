@@ -18,12 +18,26 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { sidePadding } from './styles';
+import {
+	articleWidthStyles,
+	tabletArticleMargin,
+	wideArticleMargin,
+} from './styles';
 
 // ----- Styles ----- //
 
 const interviewStyles = css`
-	${sidePadding}
+	margin-left: ${remSpace[2]};
+	margin-right: ${remSpace[2]};
+
+	${from.tablet} {
+		margin-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
+	}
+	${articleWidthStyles}
 `;
 
 const showcaseStyles = css`
