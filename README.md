@@ -80,6 +80,12 @@ ESLint is used to validate the code. It can be run like this:
 npm run lint
 ```
 
+It can automatically fix problems for you:
+
+```sh
+npm run lint:fix
+```
+
 ### Storybook
 A good way to see components and test them in isolation is to run storybook:
 
