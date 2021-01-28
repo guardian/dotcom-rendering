@@ -50,8 +50,7 @@ export const DefaultStory = () => {
 				</p>
 				<Figure role="inline">
 					<ClickToView
-						width={620}
-						height={400}
+						role="supporting"
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
@@ -101,8 +100,7 @@ export const SmallStory = () => {
 				</p>
 				<Figure role="supporting">
 					<ClickToView
-						width={380}
-						height={300}
+						role="inline"
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
@@ -405,6 +403,7 @@ function embdedBlockComponentBody(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -418,8 +417,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.facebookEmbed.source}
 				sourceDomain={EmbeddedElements.facebookEmbed.sourceDomain}
-				height={EmbeddedElements.facebookEmbed.height}
-				width={EmbeddedElements.facebookEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -440,8 +438,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.vimeoEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.vimeoEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.vimeoEmbedEmbed.height}
-				width={EmbeddedElements.vimeoEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -462,8 +459,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.youtubeEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.youtubeEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.youtubeEmbedEmbed.height}
-				width={EmbeddedElements.youtubeEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -484,8 +480,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.spotifyEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.spotifyEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.spotifyEmbedEmbed.height}
-				width={EmbeddedElements.spotifyEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -506,8 +501,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.bandcampEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.bandcampEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.bandcampEmbedEmbed.height}
-				width={EmbeddedElements.bandcampEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -530,8 +524,7 @@ function embdedBlockComponentBody(
 				sourceDomain={
 					EmbeddedElements.ourworldindataEmbedEmbed.sourceDomain
 				}
-				height={EmbeddedElements.ourworldindataEmbedEmbed.height}
-				width={EmbeddedElements.ourworldindataEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -552,8 +545,7 @@ function embdedBlockComponentBody(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.bbcEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.bbcEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.bbcEmbedEmbed.height}
-				width={EmbeddedElements.bbcEmbedEmbed.width}
+				role={role}
 			>
 				<EmbedBlockComponent
 					key={1}
@@ -591,7 +583,9 @@ export const EmbedBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -604,6 +598,7 @@ function unsafeEmbedBlockComponent(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -617,8 +612,7 @@ function unsafeEmbedBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.instagramEmbed.source}
 				sourceDomain={EmbeddedElements.instagramEmbed.sourceDomain}
-				height={EmbeddedElements.instagramEmbed.height}
-				width={EmbeddedElements.instagramEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -640,8 +634,7 @@ function unsafeEmbedBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.formStackEmbed.source}
 				sourceDomain={EmbeddedElements.formStackEmbed.sourceDomain}
-				height={EmbeddedElements.formStackEmbed.height}
-				width={EmbeddedElements.formStackEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -664,8 +657,7 @@ function unsafeEmbedBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.scribdEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.scribdEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.scribdEmbedEmbed.height}
-				width={EmbeddedElements.scribdEmbedEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -688,8 +680,7 @@ function unsafeEmbedBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.tiktokEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.tiktokEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.tiktokEmbedEmbed.height}
-				width={EmbeddedElements.tiktokEmbedEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -714,8 +705,7 @@ function unsafeEmbedBlockComponent(
 				sourceDomain={
 					EmbeddedElements.theconversationEmbedEmbed.sourceDomain
 				}
-				height={EmbeddedElements.theconversationEmbedEmbed.height}
-				width={EmbeddedElements.theconversationEmbedEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -738,8 +728,7 @@ function unsafeEmbedBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.twitterEmbedEmbed.source}
 				sourceDomain={EmbeddedElements.twitterEmbedEmbed.sourceDomain}
-				height={EmbeddedElements.twitterEmbedEmbed.height}
-				width={EmbeddedElements.twitterEmbedEmbed.width}
+				role={role}
 				onAccept={() => embedIframe()}
 			>
 				<UnsafeEmbedBlockComponent
@@ -779,7 +768,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -794,6 +785,7 @@ function vimeoBlockComponents(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -808,8 +800,7 @@ function vimeoBlockComponents(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.vimeoVideoEmbed.source}
 				sourceDomain={EmbeddedElements.vimeoVideoEmbed.sourceDomain}
-				height={EmbeddedElements.vimeoVideoEmbed.height}
-				width={EmbeddedElements.vimeoVideoEmbed.width}
+				role={role}
 			>
 				<VimeoBlockComponent
 					pillar={theme}
@@ -853,7 +844,9 @@ export const VimeoBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -866,6 +859,7 @@ function documentBlockComponent(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -880,8 +874,7 @@ function documentBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.scribdDocumentEmbed.source}
 				sourceDomain={EmbeddedElements.scribdDocumentEmbed.sourceDomain}
-				height={EmbeddedElements.scribdDocumentEmbed.height}
-				width={EmbeddedElements.scribdDocumentEmbed.width}
+				role={role}
 			>
 				<DocumentBlockComponent
 					embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
@@ -920,7 +913,9 @@ export const DocumentBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -935,6 +930,7 @@ function soundCloudBlockComponents(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -951,8 +947,7 @@ function soundCloudBlockComponents(
 				sourceDomain={
 					EmbeddedElements.soundcloudAudioEmbed.sourceDomain
 				}
-				height={EmbeddedElements.soundcloudAudioEmbed.height}
-				width={EmbeddedElements.soundcloudAudioEmbed.width}
+				role={role}
 			>
 				<SoundcloudBlockComponent
 					element={EmbeddedElements.soundcloudAudioEmbed}
@@ -973,8 +968,7 @@ function soundCloudBlockComponents(
 				sourceDomain={
 					EmbeddedElements.soundcloudEmbedEmbed.sourceDomain
 				}
-				height={EmbeddedElements.soundcloudEmbedEmbed.height}
-				width={EmbeddedElements.soundcloudEmbedEmbed.width}
+				role={role}
 			>
 				<SoundcloudBlockComponent
 					element={EmbeddedElements.soundcloudEmbedEmbed}
@@ -1010,7 +1004,9 @@ export const SoundCloudBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -1025,6 +1021,7 @@ function spotifyBlockComponent(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -1039,8 +1036,7 @@ function spotifyBlockComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.spotifyAudioEmbed.source}
 				sourceDomain={EmbeddedElements.spotifyAudioEmbed.sourceDomain}
-				height={EmbeddedElements.spotifyAudioEmbed.height}
-				width={EmbeddedElements.spotifyAudioEmbed.width}
+				role={role}
 			>
 				<SpotifyBlockComponent
 					embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
@@ -1084,7 +1080,9 @@ export const SpotifyBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -1098,6 +1096,7 @@ function tweetComponent(
 	design: Design,
 	display: Display,
 	displayOverlay: boolean,
+	role: RoleType,
 ) {
 	return [
 		<p>
@@ -1112,8 +1111,7 @@ function tweetComponent(
 				isTracking={displayOverlay}
 				source={EmbeddedElements.twitterTweetEmbed.source}
 				sourceDomain={EmbeddedElements.twitterTweetEmbed.sourceDomain}
-				height={EmbeddedElements.twitterTweetEmbed.height}
-				width={EmbeddedElements.twitterTweetEmbed.width}
+				role={role}
 			>
 				<TweetBlockComponent
 					element={EmbeddedElements.twitterTweetEmbed}
@@ -1149,7 +1147,9 @@ export const TweetBlockComponentStory = () => {
 					Design.Article,
 					Display.Standard,
 					true,
+					'inline',
 				)}
+				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);

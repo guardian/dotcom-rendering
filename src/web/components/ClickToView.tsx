@@ -12,8 +12,7 @@ import { Lines } from '@guardian/src-ed-lines';
 
 type Props = {
 	children: React.ReactNode;
-	width?: number;
-	height?: number;
+	role?: RoleType;
 	onAccept?: Function;
 	isTracking: boolean;
 	source?: string;
@@ -26,24 +25,14 @@ const Container = ({
 	height,
 }: {
 	children: React.ReactNode;
-	width?: number;
-	height?: number;
+	width: string;
+	height?: string;
 }) => {
-	const widthStyle = width
-		? css`
-				width: ${width}px;
-		  `
-		: null;
-	const heightStyle = width
-		? css`
-				height: ${height}px;
-		  `
-		: null;
 	return (
 		<div
 			className={css`
-				${widthStyle};
-				${heightStyle};
+				width: ${width};
+				height: ${height};
 			`}
 		>
 			{children}
@@ -87,14 +76,14 @@ const Bottom = ({ children }: { children: React.ReactNode }) => (
 
 const Headline = ({
 	children,
-	width,
+	role,
 }: {
 	children: React.ReactNode;
-	width?: number;
+	role: RoleType;
 }) => (
 	<div
 		className={css`
-			${width && width > 300 ? headline.xsmall() : headline.xxsmall()}
+			${role === 'inline' ? headline.xsmall() : headline.xxsmall()}
 		`}
 	>
 		{children}
@@ -103,16 +92,16 @@ const Headline = ({
 
 const Body = ({
 	children,
-	width,
+	role,
 }: {
 	children: React.ReactNode;
-	width?: number;
+	role: RoleType;
 }) => (
 	<div
 		className={css`
-			${width && width > 300 ? textSans.small() : textSans.xsmall()}
+			${role === 'inline' ? textSans.small() : textSans.xsmall()}
 			a {
-				${width && width > 300 ? textSans.small() : textSans.xsmall()}
+				${role === 'inline' ? textSans.small() : textSans.xsmall()}
 			}
 		`}
 	>
@@ -120,10 +109,32 @@ const Body = ({
 	</div>
 );
 
+const overlayWidth = (role: RoleType) => {
+	let width: string;
+
+	switch (role) {
+		default: {
+			width = '100%';
+		}
+	}
+
+	return width;
+};
+
+const buttonSize = (role: RoleType) => {
+	switch (role) {
+		case 'inline': {
+			return 'small';
+		}
+		default: {
+			return 'xsmall';
+		}
+	}
+};
+
 export const ClickToView = ({
 	children,
-	width,
-	height,
+	role: roleProp,
 	onAccept,
 	isTracking,
 	source,
@@ -143,6 +154,12 @@ export const ClickToView = ({
 
 	let headlineText;
 	let body;
+
+	const role: RoleType = roleProp || 'inline';
+
+	const width = overlayWidth(role);
+
+	const height = undefined;
 
 	if (isTracking && showOverlay) {
 		if (source) {
@@ -183,13 +200,13 @@ export const ClickToView = ({
 				<Outer>
 					<Inner>
 						<Top>
-							<Headline width={width}>{headlineText}</Headline>
-							<Body width={width}>{body}</Body>
+							<Headline role={role}>{headlineText}</Headline>
+							<Body role={role}>{body}</Body>
 						</Top>
 						<Bottom>
 							<Button
 								priority="primary"
-								size={width && width > 300 ? 'small' : 'xsmall'}
+								size={buttonSize(role)}
 								icon={<SvgCheckmark />}
 								iconSide="left"
 								onClick={() => handleClick()}
