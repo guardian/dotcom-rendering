@@ -83,7 +83,7 @@ export const headerBackgroundColour = (format: Format): Colour => {
 export const interviewBackgroundColour = (format: Format): Colour => {
 	switch (format.theme) {
 		case Pillar.Sport:
-			return Palette.brand[400];
+			return Palette.brandAlt[400];
 		case Pillar.Culture:
 			return Palette.culture[600];
 		case Pillar.Lifestyle:
