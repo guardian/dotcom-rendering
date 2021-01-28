@@ -92,7 +92,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 			<Standfirst item={item} />
 		</div>
 		<Lines className={articleMarginStyles} />
-		<Byline item={item} />
+		<Byline item={item} shareIcon />
 	</header>
 );
 
