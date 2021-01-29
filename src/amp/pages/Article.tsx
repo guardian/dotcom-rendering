@@ -15,7 +15,7 @@ import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
 import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const backgroundColour = css`
@@ -53,7 +53,7 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const design = decideDesignType(articleData.designType, articleData.tags);
+	const design = decideDesign(articleData.designType, articleData.tags);
 	const pillar = decideTheme({
 		pillar: articleData.pillar,
 		design,

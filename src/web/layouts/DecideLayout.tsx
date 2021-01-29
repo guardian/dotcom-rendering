@@ -6,7 +6,7 @@ import type { Format } from '@guardian/types';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -20,7 +20,7 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
+	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
 	const pillar: Pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,

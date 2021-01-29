@@ -8,7 +8,7 @@ import { useAB } from '@guardian/ab-react';
 import { useApi } from '@root/src/web/lib/api';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
@@ -52,7 +52,7 @@ function buildDeeplyReadUrl(ajaxUrl: string) {
 }
 
 function transformTrail(trail: CAPITrailType): TrailType {
-	const design = decideDesignType(trail.designType, []);
+	const design = decideDesign(trail.designType, []);
 	// Converts the CAPI string pillar into an enum
 	return {
 		...trail,

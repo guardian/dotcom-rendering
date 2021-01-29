@@ -2,7 +2,7 @@ import { useApi } from '@root/src/web/lib/api';
 import React from 'react';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 type Props = {
 	url: string;
@@ -33,7 +33,7 @@ export const OnwardsData = ({
 		trailLimit: number,
 	): TrailType[] => {
 		return trails.slice(0, trailLimit).map((trail) => {
-			const design = decideDesignType(trail.designType, []);
+			const design = decideDesign(trail.designType, []);
 			return {
 				...trail,
 				pillar: decideTheme({ pillar: trail.pillar, design }),

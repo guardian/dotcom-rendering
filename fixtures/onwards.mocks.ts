@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/types';
 
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const CAPITrails: CAPITrailType[] = [
@@ -118,7 +118,7 @@ const CAPITrails: CAPITrailType[] = [
 ];
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
-	const design = decideDesignType(thisTrail.designType, []);
+	const design = decideDesign(thisTrail.designType, []);
 	const pillar = decideTheme({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,
