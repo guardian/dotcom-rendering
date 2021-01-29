@@ -66,10 +66,8 @@ export const ArticleBody = ({ format, blocks, adTargeting, host }: Props) => {
 			className={cx(bodyStyle(format.display), linkColour[format.theme])}
 		>
 			<ArticleRenderer
-				display={format.display}
+				format={format}
 				elements={blocks[0] ? blocks[0].elements : []}
-				pillar={format.theme}
-				design={format.design}
 				adTargeting={adTargeting}
 				host={host}
 			/>

@@ -6,7 +6,7 @@ import {
 
 import { Section } from '@frontend/web/components/Section';
 
-import { Display, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 import { nav } from './Nav.mock';
 import { Nav } from './Nav';
 
@@ -25,8 +25,11 @@ export const StandardStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar={Pillar.News}
-				display={Display.Standard}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"
@@ -46,8 +49,11 @@ export const ImmersiveStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar={Pillar.News}
-				display={Display.Immersive}
+				format={{
+					theme: Pillar.News,
+					display: Display.Immersive,
+					design: Design.Article,
+				}}
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"

@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 
 type DiscussionResponse = {
 	status: string;

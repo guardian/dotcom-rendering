@@ -19,9 +19,8 @@ import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
-	pillar: Theme;
+	format: Format;
 	nav: NavType;
-	display: Display;
 	subscribeUrl: string;
 	edition: Edition;
 };
@@ -68,7 +67,7 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
+export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 	return (
 		<div className={rowStyles}>
 			{/*
@@ -161,13 +160,13 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
 				className={cx(
 					clearFixStyle,
 					rowStyles,
-					display === Display.Immersive && minHeight,
+					format.display === Display.Immersive && minHeight,
 				)}
 				role="navigation"
 				aria-label="Guardian sections"
 				data-component="nav2"
 			>
-				{display === Display.Immersive && (
+				{format.display === Display.Immersive && (
 					<Hide when="above" breakpoint="tablet">
 						<ThemeProvider theme={buttonReaderRevenueBrand}>
 							<PositionButton>
@@ -207,15 +206,15 @@ export const Nav = ({ display, pillar, nav, subscribeUrl, edition }: Props) => {
 					aria-hidden="true"
 				/>
 				<Pillars
-					display={display}
+					display={format.display}
 					pillars={nav.pillars}
-					pillar={pillar}
+					pillar={format.theme}
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} display={display} />
+				<ExpandedMenu nav={nav} display={format.display} />
 			</nav>
-			{display === Display.Immersive && (
+			{format.display === Display.Immersive && (
 				<PositionRoundel>
 					<GuardianRoundel />
 				</PositionRoundel>

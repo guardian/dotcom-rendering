@@ -11,7 +11,7 @@ import { LI } from '@frontend/web/components/Card/components/LI';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display, Pillar } from '@guardian/types';
+import { Display, Pillar, Design } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -83,9 +83,12 @@ export const Writers = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={NAV}
-				display={Display.Standard}
 				subscribeUrl=""
 				edition="UK"
 			/>

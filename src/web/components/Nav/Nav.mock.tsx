@@ -961,13 +961,6 @@ export const nav: NavType = {
 				mobileOnly: false,
 			},
 			{
-				title: 'Professional networks',
-				longTitle: 'Professional networks',
-				url: '/guardian-professional',
-				children: [],
-				mobileOnly: false,
-			},
-			{
 				title: 'Crosswords',
 				longTitle: 'Crosswords',
 				url: '/crosswords',

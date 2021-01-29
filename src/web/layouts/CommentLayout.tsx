@@ -6,10 +6,10 @@ import {
 	brandBorder,
 	brandBackground,
 	brandLine,
-	opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
@@ -324,9 +324,11 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={brandBackground.primary}
 					>
 						<Nav
-							pillar={getCurrentPillar(CAPI)}
 							nav={NAV}
-							display={format.display}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
 							subscribeUrl={
 								CAPI.nav.readerRevenueLinks.header.subscribe
 							}
@@ -336,7 +338,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={opinion[800]}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -349,7 +351,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={opinion[800]}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -358,17 +360,19 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<Section showTopBorder={false} backgroundColour={opinion[800]}>
+			<Section
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+			>
 				<StandardGrid display={format.display}>
 					<GridItem area="title">
 						<ArticleTitle
-							display={format.display}
-							design={format.design}
+							format={format}
+							palette={palette}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>
@@ -395,11 +399,9 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										</div>
 									)}
 									<ArticleHeadline
-										display={format.display}
+										format={format}
 										headlineString={CAPI.headline}
 										palette={palette}
-										design={format.design}
-										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

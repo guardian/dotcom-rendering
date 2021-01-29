@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -11,13 +11,6 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
-import { useAB } from '@guardian/ab-react';
-import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
-import {
-	GlobalEoyHeaderTestName,
-	GlobalEoyHeaderTestVariant,
-} from '@root/src/web/experiments/tests/global-eoy-header-test';
-import { sendOphanComponentEvent } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
 	edition: Edition;
@@ -28,7 +21,6 @@ type Props = {
 	};
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	pageViewId: string;
 };
 
 const headerStyles = css`
@@ -125,98 +117,27 @@ const subMessageStyles = css`
 	margin: 5px 0;
 `;
 
-const month = new Date().getMonth() + 1; // js date month begins at 0
-
 export const ReaderRevenueLinks: React.FC<Props> = ({
 	edition,
 	urls,
 	dataLinkNamePrefix,
 	inHeader,
-	pageViewId,
 }) => {
-	const ABTestAPI = useAB();
-
-	const getTestVariant = (): GlobalEoyHeaderTestVariant => {
-		if (inHeader && edition !== 'US') {
-			if (ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'control')) {
-				return 'control';
-			}
-			if (ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'variant')) {
-				return 'variant';
-			}
-			if (
-				ABTestAPI.isUserInVariant(GlobalEoyHeaderTestName, 'variant2')
-			) {
-				return 'variant2';
-			}
-		}
-		return 'notintest';
-	};
-
-	const variantName: GlobalEoyHeaderTestVariant = getTestVariant();
-
-	useEffect(() => {
-		if (variantName !== 'notintest') {
-			sendOphanComponentEvent('VIEW', {
-				abTestName: GlobalEoyHeaderTestName,
-				abTestVariant: variantName,
-				campaignCode: 'header_support',
-				componentType: 'ACQUISITIONS_HEADER',
-			});
-		}
-	}, [variantName]);
-
-	const getHeading = (): string | JSX.Element => {
-		if (variantName === 'variant' || variantName === 'variant2')
-			return month === 12
-				? `Support us this December`
-				: 'Support us in 2021';
-		return <span>Support The&nbsp;Guardian</span>;
-	};
-
-	const subheading =
-		variantName === 'variant'
-			? 'Power vital, open, independent journalism'
-			: 'Available for everyone, funded by readers';
-
-	const getUrl = (rrType: 'contribute' | 'subscribe'): string => {
-		if (variantName !== 'notintest') {
-			return addTrackingCodesToUrl({
-				base: `https://support.theguardian.com/${rrType}`,
-				componentType: 'ACQUISITIONS_HEADER',
-				componentId: 'header_support',
-				campaignCode: 'header_support',
-				abTest: {
-					name: GlobalEoyHeaderTestName,
-					variant: variantName,
-				},
-				pageViewId,
-				referrerUrl: window.location.origin + window.location.pathname,
-			});
-		}
-		// Use the normal url
-		return urls[rrType];
-	};
-
 	if (shouldHideSupportMessaging()) {
-		// Use the same switch as the A/B test to decide whether to display thankyou message
-		if (variantName !== 'notintest') {
-			return (
-				<div className={cx(inHeader && headerStyles)}>
-					<div
-						className={cx({
-							[hiddenUntilTablet]: inHeader,
-						})}
-					>
-						<div className={messageStyles(true)}> Thank you </div>
-						<div className={subMessageStyles}>
-							Your support powers our independent journalism
-						</div>
+		return (
+			<div className={cx(inHeader && headerStyles)}>
+				<div
+					className={cx({
+						[hiddenUntilTablet]: inHeader,
+					})}
+				>
+					<div className={messageStyles(true)}> Thank you </div>
+					<div className={subMessageStyles}>
+						Your support powers our independent journalism
 					</div>
 				</div>
-			);
-		}
-		return null;
+			</div>
+		);
 	}
 	return (
 		<div className={cx(inHeader && headerStyles)}>
@@ -225,20 +146,22 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 					[hiddenUntilTablet]: inHeader,
 				})}
 			>
-				<div className={messageStyles(false)}>{getHeading()}</div>
+				<div className={messageStyles(false)}>
+					<span>Support the&nbsp;Guardian</span>
+				</div>
 				<div className={subMessageStyles}>
-					<div> {subheading} </div>
+					<div>Available for everyone, funded by readers</div>
 				</div>
 				<a
 					className={linkStyles}
-					href={getUrl('contribute')}
+					href={urls.contribute}
 					data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 				>
 					Contribute <ArrowRightIcon />
 				</a>
 				<a
 					className={linkStyles}
-					href={getUrl('subscribe')}
+					href={urls.subscribe}
 					data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 				>
 					Subscribe <ArrowRightIcon />
@@ -254,7 +177,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 				{edition === 'UK' ? (
 					<a
 						className={linkStyles}
-						href={getUrl('subscribe')}
+						href={urls.subscribe}
 						data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 					>
 						Subscribe <ArrowRightIcon />
@@ -262,7 +185,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 				) : (
 					<a
 						className={linkStyles}
-						href={getUrl('contribute')}
+						href={urls.contribute}
 						data-link-name={`${dataLinkNamePrefix}support-cta`}
 					>
 						Contribute <ArrowRightIcon />

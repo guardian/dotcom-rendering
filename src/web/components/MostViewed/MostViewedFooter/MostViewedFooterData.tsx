@@ -6,7 +6,7 @@ import { from, Breakpoint } from '@guardian/src-foundations/mq';
 import { useAB } from '@guardian/ab-react';
 
 import { useApi } from '@root/src/web/lib/api';
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 import { decidePillar } from '@root/src/web/lib/decidePillar';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 

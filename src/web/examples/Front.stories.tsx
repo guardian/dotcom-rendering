@@ -61,9 +61,12 @@ export const Front = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={NAV}
-				display={Display.Standard}
 				subscribeUrl=""
 				edition="UK"
 			/>

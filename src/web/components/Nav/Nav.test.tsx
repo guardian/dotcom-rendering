@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, within } from '@testing-library/react';
-import { Display, Pillar } from '@guardian/types';
+import { Display, Pillar, Design } from '@guardian/types';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -8,9 +8,12 @@ describe('Nav', () => {
 	it('should display pillar titles', () => {
 		const { getByTestId } = render(
 			<Nav
-				pillar={Pillar.News}
 				nav={nav}
-				display={Display.Standard}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				subscribeUrl=""
 				edition="UK"
 			/>,
@@ -26,9 +29,12 @@ describe('Nav', () => {
 	it('should render the correct number of pillar items', () => {
 		const { getByTestId } = render(
 			<Nav
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={nav}
-				display={Display.Standard}
 				subscribeUrl=""
 				edition="UK"
 			/>,

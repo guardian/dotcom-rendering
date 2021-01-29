@@ -356,7 +356,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					edition={CAPI.editionId}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId={pageViewId}
 				/>
 			</Portal>
 			<HydrateOnce root="links-root" waitFor={[user]}>
@@ -733,7 +732,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						edition={CAPI.editionId}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
-						pageViewId={pageViewId}
 					/>
 				</Lazy>
 			</Portal>

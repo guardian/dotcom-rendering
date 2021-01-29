@@ -273,105 +273,114 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div
-				className={cx(
-					mainMedia && hasMainMediaStyles,
-					css`
-						display: flex;
-						flex-direction: column;
-					`,
-				)}
+				className={css`
+					background-color: ${palette.background.article};
+				`}
 			>
-				<header
-					className={css`
-						${getZIndex('headerWrapper')}
-						order: 0;
-					`}
+				<div
+					className={cx(
+						mainMedia && hasMainMediaStyles,
+						css`
+							display: flex;
+							flex-direction: column;
+						`,
+					)}
 				>
-					<Section
-						showSideBorders={false}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							pillar={getCurrentPillar(CAPI)}
-							nav={NAV}
-							display={format.display}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
-						/>
-					</Section>
-				</header>
-
-				<MainMedia
-					display={format.display}
-					design={format.design}
-					elements={CAPI.mainMediaElements}
-					pillar={format.theme}
-					adTargeting={adTargeting}
-					starRating={
-						format.design === Design.Review && CAPI.starRating
-							? CAPI.starRating
-							: undefined
-					}
-					host={host}
-					hideCaption={true}
-				/>
-			</div>
-			{mainMedia && (
-				<>
-					<div
+					<header
 						className={css`
-							margin-top: -${HEADLINE_OFFSET}px;
-							/*
+							${getZIndex('headerWrapper')}
+							order: 0;
+						`}
+					>
+						<Section
+							showSideBorders={false}
+							showTopBorder={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Nav
+								format={{
+									...format,
+									theme: getCurrentPillar(CAPI),
+								}}
+								nav={NAV}
+								subscribeUrl={
+									CAPI.nav.readerRevenueLinks.header.subscribe
+								}
+								edition={CAPI.editionId}
+							/>
+						</Section>
+					</header>
+
+					<MainMedia
+						display={format.display}
+						design={format.design}
+						elements={CAPI.mainMediaElements}
+						pillar={format.theme}
+						adTargeting={adTargeting}
+						starRating={
+							format.design === Design.Review && CAPI.starRating
+								? CAPI.starRating
+								: undefined
+						}
+						host={host}
+						hideCaption={true}
+					/>
+				</div>
+				{mainMedia && (
+					<>
+						<div
+							className={css`
+								margin-top: -${HEADLINE_OFFSET}px;
+								/*
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
                         the text appears above the pseudo BlackBox element
                     */
-							position: relative;
-							${getZIndex('articleHeadline')}
-						`}
-					>
-						<ContainerLayout
-							verticalMargins={false}
-							padContent={false}
-							padSides={false}
-							leftContent={<LeftColCaption />}
+								position: relative;
+								${getZIndex('articleHeadline')};
+							`}
 						>
-							<ArticleTitle
-								display={format.display}
-								design={format.design}
-								tags={CAPI.tags}
-								sectionLabel={CAPI.sectionLabel}
-								sectionUrl={CAPI.sectionUrl}
-								guardianBaseURL={CAPI.guardianBaseURL}
-								pillar={format.theme}
-								badge={CAPI.badge}
-							/>
-						</ContainerLayout>
-						<BlackBox>
 							<ContainerLayout
 								verticalMargins={false}
 								padContent={false}
 								padSides={false}
+								leftContent={<LeftColCaption />}
 							>
-								<ArticleHeadline
-									display={format.display}
-									headlineString={CAPI.headline}
+								<ArticleTitle
+									format={format}
 									palette={palette}
-									design={format.design}
-									pillar={format.theme}
 									tags={CAPI.tags}
-									byline={CAPI.author.byline}
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
 								/>
 							</ContainerLayout>
-						</BlackBox>
-					</div>
-				</>
-			)}
-			<Section showTopBorder={false} showSideBorders={false}>
+							<BlackBox>
+								<ContainerLayout
+									verticalMargins={false}
+									padContent={false}
+									padSides={false}
+								>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										palette={palette}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+									/>
+								</ContainerLayout>
+							</BlackBox>
+						</div>
+					</>
+				)}
+			</div>
+			<Section
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={palette.background.article}
+			>
 				<ImmersiveGrid>
 					{/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
 					<GridItem area="caption">
@@ -407,13 +416,12 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									`}
 								>
 									<ArticleTitle
-										display={format.display}
-										design={format.design}
+										format={format}
+										palette={palette}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
 										guardianBaseURL={CAPI.guardianBaseURL}
-										pillar={format.theme}
 										badge={CAPI.badge}
 									/>
 								</div>
@@ -425,11 +433,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							{!mainMedia && (
 								<div className={maxWidth}>
 									<ArticleHeadline
-										display={format.display}
+										format={format}
 										headlineString={CAPI.headline}
 										palette={palette}
-										design={format.design}
-										pillar={format.theme}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

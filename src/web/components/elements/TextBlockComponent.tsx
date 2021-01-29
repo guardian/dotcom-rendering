@@ -10,13 +10,11 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Format } from '@guardian/types';
 
 type Props = {
 	html: string;
-	pillar: Theme;
-	design: Design;
-	display: Display;
+	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 };
@@ -52,13 +50,11 @@ const decideDropCapLetter = (html: string) => {
 };
 
 const shouldShowDropCap = ({
-	design,
-	display,
+	format,
 	isFirstParagraph,
 	forceDropCap,
 }: {
-	design: Design;
-	display: Display;
+	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 }) => {
@@ -67,9 +63,9 @@ const shouldShowDropCap = ({
 	// Otherwise, we're only interested in marking the first para as a drop cap
 	if (!isFirstParagraph) return false;
 	// If immersive, we show drop caps for the first para
-	if (display === Display.Immersive) return true;
+	if (format.display === Display.Immersive) return true;
 	// The first para has a drop cap for these design types
-	switch (design) {
+	switch (format.design) {
 		case Design.Feature:
 		case Design.Comment:
 		case Design.Review:
@@ -101,9 +97,7 @@ const sanitiserOptions = {
 
 export const TextBlockComponent: React.FC<Props> = ({
 	html,
-	pillar,
-	design,
-	display,
+	format,
 	forceDropCap,
 	isFirstParagraph,
 }: Props) => {
@@ -186,8 +180,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 
 	if (
 		shouldShowDropCap({
-			design,
-			display,
+			format,
 			isFirstParagraph,
 			forceDropCap,
 		}) &&
@@ -196,7 +189,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 	) {
 		return (
 			<p className={paraStyles}>
-				<DropCap letter={firstLetter} pillar={pillar} design={design} />
+				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}

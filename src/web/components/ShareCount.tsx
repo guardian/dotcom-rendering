@@ -9,7 +9,7 @@ import ShareIcon from '@frontend/static/icons/share.svg';
 
 import { useApi } from '@root/src/web/lib/api';
 import { formatCount } from '@root/src/web/lib/formatCount';
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 
 type Props = {
 	ajaxUrl: string;

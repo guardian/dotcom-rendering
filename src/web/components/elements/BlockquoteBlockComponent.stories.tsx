@@ -20,9 +20,11 @@ export default {
 const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
-		pillar={Pillar.News}
-		design={Design.Article}
-		display={Display.Standard}
+		format={{
+			theme: Pillar.News,
+			design: Design.Article,
+			display: Display.Standard,
+		}}
 		isFirstParagraph={false}
 	/>
 );

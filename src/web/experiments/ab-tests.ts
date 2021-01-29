@@ -9,7 +9,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@root/src/web/experiments/tests/newsletter-merch-unit-test';
-import { globalEoyHeaderTest } from '@root/src/web/experiments/tests/global-eoy-header-test';
 
 export const tests: ABTest[] = [
 	abTestTest,
@@ -19,6 +18,5 @@ export const tests: ABTest[] = [
 	curatedContainerTest2,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	globalEoyHeaderTest,
 	deeplyReadTest,
 ];
