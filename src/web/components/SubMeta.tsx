@@ -8,7 +8,6 @@ import { SharingIcons } from '@frontend/web/components/ShareIcons';
 import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
 import { Badge } from '@frontend/web/components/Badge';
-import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { until } from '@guardian/src-foundations/mq';
 
 const subMetaLabel = css`
@@ -60,7 +59,6 @@ export const SubMeta = ({
 }: Props) => {
 	const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
 	const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
-	const sharingUrls = getSharingUrls(pageId, webTitle);
 	return (
 		<div data-print-layout="hide" className={bottomPadding}>
 			{badge && (
@@ -91,7 +89,8 @@ export const SubMeta = ({
 			{showBottomSocialButtons && (
 				<SharingIcons
 					className={subMetaSharingIcons}
-					sharingUrls={sharingUrls}
+					pageId={pageId}
+					webTitle={webTitle}
 					pillar={pillar}
 					displayIcons={[
 						'facebook',

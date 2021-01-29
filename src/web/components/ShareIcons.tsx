@@ -1,5 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { border } from '@guardian/src-foundations/palette';
+import { from } from '@guardian/src-foundations/mq';
+
+import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
+
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
 import EmailIcon from '@frontend/static/icons/email.svg';
@@ -7,9 +14,6 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { border } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(
 	(pillar) =>
@@ -80,16 +84,13 @@ interface ShareListItemType {
 }
 
 export const SharingIcons: React.FC<{
-	sharingUrls: {
-		[K in SharePlatform]?: {
-			url: string;
-			userMessage: string;
-		};
-	};
+	pageId: string;
+	webTitle: string;
 	displayIcons: SharePlatform[];
 	pillar: Theme;
 	className?: string;
-}> = ({ sharingUrls, displayIcons, pillar, className }) => {
+}> = ({ pageId, webTitle, displayIcons, pillar, className }) => {
+	const sharingUrls = getSharingUrls(pageId, webTitle);
 	const icons: { [K in SharePlatform]?: React.ComponentType } = {
 		facebook: FacebookIcon,
 		twitter: TwitterIconPadded,
