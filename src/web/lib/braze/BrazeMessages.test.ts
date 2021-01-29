@@ -2,13 +2,13 @@ import { BrazeMessages } from './BrazeMessages';
 import { FakeAppBoy } from './FakeAppBoy';
 
 describe('BrazeMessages', () => {
-	describe('getMessagesForBanner & getMessagesForEndOfArticle', () => {
+	describe('getMessageForBanner & getMessageForEndOfArticle', () => {
 		it('returns a promise which resolves with message data for the correct slot', async () => {
 			const appboy = new FakeAppBoy();
 			const brazeMessages = new BrazeMessages(appboy);
 
-			const bannerPromise = brazeMessages.getMessagesForBanner();
-			const endOfArticlePromise = brazeMessages.getMessagesForEndOfArticle();
+			const bannerPromise = brazeMessages.getMessageForBanner();
+			const endOfArticlePromise = brazeMessages.getMessageForEndOfArticle();
 
 			const bannerMessage = {
 				extras: { slotName: 'Banner', title: 'Example' },
@@ -35,8 +35,8 @@ describe('BrazeMessages', () => {
 			const appboy = new FakeAppBoy();
 			const brazeMessages = new BrazeMessages(appboy);
 
-			const bannerPromise = brazeMessages.getMessagesForBanner();
-			const anotherBannerPromise = brazeMessages.getMessagesForBanner();
+			const bannerPromise = brazeMessages.getMessageForBanner();
+			const anotherBannerPromise = brazeMessages.getMessageForBanner();
 
 			const message = {
 				extras: { slotName: 'Banner', title: 'Example' },

@@ -19,7 +19,7 @@ class BrazeMessages {
 		this.appboy = appboy;
 	}
 
-	private getMessagesForSlot(targetSlotName: string): Promise<Message> {
+	private getMessageForSlot(targetSlotName: string): Promise<Message> {
 		return new Promise((resolve) => {
 			const callback = (message: Message) => {
 				const { extras } = message;
@@ -37,12 +37,12 @@ class BrazeMessages {
 		});
 	}
 
-	getMessagesForBanner(): Promise<Message> {
-		return this.getMessagesForSlot('Banner');
+	getMessageForBanner(): Promise<Message> {
+		return this.getMessageForSlot('Banner');
 	}
 
-	getMessagesForEndOfArticle(): Promise<Message> {
-		return this.getMessagesForSlot('EndOfArticle');
+	getMessageForEndOfArticle(): Promise<Message> {
+		return this.getMessageForSlot('EndOfArticle');
 	}
 }
 

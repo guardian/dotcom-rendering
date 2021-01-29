@@ -61,7 +61,7 @@ const getMessageFromBraze = async (
 
 	const brazeMessages = new BrazeMessages(appboy);
 
-	const messages = brazeMessages.getMessagesForBanner();
+	const messages = brazeMessages.getMessageForBanner();
 
 	appboy.changeUser(brazeUuid);
 	appboy.openSession();
