@@ -16,8 +16,8 @@ export const wideImageWidth = 750;
 export const tabletArticleMargin = 24;
 export const wideArticleMargin = 144;
 
-const wideBorderWidth = wideContentWidth + 12;
-const tabletBorderWidth = tabletContentWidth + 12;
+const wideBorderWidth = wideContentWidth + 13;
+const tabletBorderWidth = tabletContentWidth + 13;
 
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
