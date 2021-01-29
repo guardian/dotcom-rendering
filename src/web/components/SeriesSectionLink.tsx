@@ -64,7 +64,7 @@ const invertedStyle = css`
 		line-height: 28px;
 	}
 
-	padding-right: ${space[3]}px;
+	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[3]}px;
