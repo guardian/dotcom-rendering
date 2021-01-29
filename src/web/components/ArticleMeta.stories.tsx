@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -153,6 +153,35 @@ export const FeatureStory = () => {
 	);
 };
 FeatureStory.story = { name: 'Feature' };
+
+export const SpecialReportStory = () => {
+	return (
+		<Container>
+			<ArticleMeta
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				})}
+				pageId=""
+				webTitle=""
+				author={{
+					byline: 'Lanre Bakare',
+					twitterHandle: 'lanre_bakare',
+				}}
+				tags={tagsWithBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+			/>
+		</Container>
+	);
+};
+SpecialReportStory.story = { name: 'SpecialReport' };
 
 export const CommentStory = () => {
 	return (
