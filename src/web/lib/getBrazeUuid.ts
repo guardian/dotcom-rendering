@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 import { callApi } from '@root/src/web/lib/api';
 
 export const getBrazeUuid = async (ajaxUrl: string): Promise<string> => {
