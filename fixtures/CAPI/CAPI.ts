@@ -3742,4 +3742,5 @@ export const CAPI: CAPIType = modifyDCRJsonResponse({
 		isNumberedList: false,
 	},
 	sectionLabel: 'Ticket prices',
+	isSpecialReport: false,
 });

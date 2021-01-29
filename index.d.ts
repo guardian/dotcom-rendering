@@ -312,6 +312,7 @@ interface CAPIType {
 	pageType: PageTypeType;
 
 	matchUrl?: string;
+	isSpecialReport: boolean;
 }
 
 type CAPIBrowserType = {
@@ -347,6 +348,7 @@ type CAPIBrowserType = {
 	contributionsServiceUrl: string;
 	isImmersive: boolean;
 	isPhotoEssay: boolean;
+	isSpecialReport: boolean;
 	matchUrl?: string;
 	callouts: CalloutBlockElement[];
 	qandaAtoms: QABlockElement[];
