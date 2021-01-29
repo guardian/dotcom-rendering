@@ -227,6 +227,7 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 export const ArticleMeta = ({
 	branding,
 	format,
+	palette,
 	pageId,
 	webTitle,
 	author,
@@ -262,10 +263,10 @@ export const ArticleMeta = ({
 						<div>
 							{shouldShowContributor(format) && (
 								<Contributor
-									design={format.design}
 									author={author}
 									tags={tags}
-									pillar={format.theme}
+									format={format}
+									palette={palette}
 								/>
 							)}
 							<Dateline

@@ -61,6 +61,29 @@ const textSeriesTitle = (format: Format): string => {
 
 const textSectionTitle = textSeriesTitle;
 
+const textByline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	switch (format.display) {
+		case Display.Immersive:
+			return WHITE;
+		case Display.Showcase:
+		case Display.Standard:
+			switch (format.design) {
+				case Design.Interview:
+					return BLACK;
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textTwitterHandle = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -98,6 +121,8 @@ export const decidePalette = (format: Format): Palette => {
 			headline: textHeadline(format),
 			seriesTitle: textSeriesTitle(format),
 			sectionTitle: textSectionTitle(format),
+			byline: textByline(format),
+			twitterHandle: textTwitterHandle(format),
 		},
 		background: {
 			article: backgroundArticle(format),
