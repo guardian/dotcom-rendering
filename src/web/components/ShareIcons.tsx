@@ -88,21 +88,6 @@ export const ShareIcons: React.FC<{
 				</li>
 			)}
 
-			{displayIcons.includes('pinterest') && (
-				<li className={liStyles} key="pinterest">
-					<a
-						href={`http://www.pinterest.com/pin/find/?url=https://www.theguardian.com/${pageId}`}
-						role="button"
-						aria-label="Share on Pinterest"
-						target="_blank"
-					>
-						<span className={iconStyles(pillar)}>
-							<PinterestIcon />
-						</span>
-					</a>
-				</li>
-			)}
-
 			{displayIcons.includes('twitter') && (
 				<li className={liStyles} key="twitter">
 					<a
@@ -119,23 +104,6 @@ export const ShareIcons: React.FC<{
 						</span>
 					</a>
 				</li>
-			)}
-
-			{displayIcons.includes('whatsApp') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles} key="whatsApp">
-						<a
-							href={`whatsapp://send?text="${webTitle}" https://www.theguardian.com/${pageId}&CMP=share_btn_wa`}
-							role="button"
-							aria-label="Share on WhatsApp"
-							target="_blank"
-						>
-							<span className={iconStyles(pillar)}>
-								<WhatsAppIcon />
-							</span>
-						</a>
-					</li>
-				</Hide>
 			)}
 
 			{displayIcons.includes('email') && (
@@ -166,6 +134,38 @@ export const ShareIcons: React.FC<{
 						</span>
 					</a>
 				</li>
+			)}
+
+			{displayIcons.includes('pinterest') && (
+				<li className={liStyles} key="pinterest">
+					<a
+						href={`http://www.pinterest.com/pin/find/?url=https://www.theguardian.com/${pageId}`}
+						role="button"
+						aria-label="Share on Pinterest"
+						target="_blank"
+					>
+						<span className={iconStyles(pillar)}>
+							<PinterestIcon />
+						</span>
+					</a>
+				</li>
+			)}
+
+			{displayIcons.includes('whatsApp') && (
+				<Hide when="above" breakpoint="phablet">
+					<li className={liStyles} key="whatsApp">
+						<a
+							href={`whatsapp://send?text="${webTitle}" https://www.theguardian.com/${pageId}&CMP=share_btn_wa`}
+							role="button"
+							aria-label="Share on WhatsApp"
+							target="_blank"
+						>
+							<span className={iconStyles(pillar)}>
+								<WhatsAppIcon />
+							</span>
+						</a>
+					</li>
+				</Hide>
 			)}
 
 			{displayIcons.includes('messenger') && (
