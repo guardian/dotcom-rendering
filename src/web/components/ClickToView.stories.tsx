@@ -20,7 +20,13 @@ export default {
 	title: 'Components/ClickToView',
 };
 
-export const DefaultStory = () => {
+const RoleStory = ({
+	children,
+	role,
+}: {
+	children: React.ReactNode;
+	role: RoleType;
+}) => {
 	return (
 		<ContainerLayout
 			sideBorders={true}
@@ -48,20 +54,15 @@ export const DefaultStory = () => {
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure role="inline">
+				<Figure role={role}>
 					<ClickToView
-						role="inline"
+						role={role}
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
 					>
-						<img
-							src="http://placekitten.com/g/620/400"
-							width="620"
-							height="400"
-							alt=""
-						/>
+						{children}
 					</ClickToView>
 				</Figure>
 				<p>
@@ -69,85 +70,104 @@ export const DefaultStory = () => {
 					venmo gochujang shaman +1 try-hard keffiyeh freegan godard
 					air plant humblebrag brooklyn meggings.
 				</p>
+				<p>
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
+					fixie hot chicken art party hell of thundercats skateboard
+					synth. Skateboard thundercats hoodie pitchfork neutra
+					pinterest kitsch literally polaroid irony mumblecore next
+					level. Truffaut street art edison bulb, banh mi cliche
+					post-ironic mixtape
+				</p>
+				<p>
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
+					fixie hot chicken art party hell of thundercats skateboard
+					synth. Skateboard thundercats hoodie pitchfork neutra
+					pinterest kitsch literally polaroid irony mumblecore next
+					level. Truffaut street art edison bulb, banh mi cliche
+					post-ironic mixtape
+				</p>
+				<p>
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
+					fixie hot chicken art party hell of thundercats skateboard
+					synth. Skateboard thundercats hoodie pitchfork neutra
+					pinterest kitsch literally polaroid irony mumblecore next
+					level. Truffaut street art edison bulb, banh mi cliche
+					post-ironic mixtape
+				</p>
 			</div>
 		</ContainerLayout>
 	);
 };
-DefaultStory.story = { name: 'default' };
 
-export const SmallStory = () => {
+export const InlineStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
-			title="Click To View"
-			centralBorder="full"
-		>
-			<div
-				className={css`
-					max-width: 620px;
-					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
-				`}
-			>
-				<p>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
-				</p>
-				<Figure role="supporting">
-					<ClickToView
-						role="supporting"
-						isTracking={true}
-						source="A Thirdparty Provider"
-						sourceDomain="thirdparty.com"
-						onAccept={() => {}}
-					>
-						<img
-							src="http://placekitten.com/g/380/300"
-							width="380"
-							height="300"
-							alt=""
-						/>
-					</ClickToView>
-				</Figure>
-				<p>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
-				</p>
-				<p>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
-				</p>
-				<p>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
-				</p>
-			</div>
-		</ContainerLayout>
+		<RoleStory role="inline">
+			<img
+				src="http://placekitten.com/g/620/400"
+				width="620"
+				height="400"
+				alt=""
+			/>
+		</RoleStory>
 	);
 };
-SmallStory.story = { name: 'small' };
+InlineStory.story = { name: "Click to view in 'inline' role" };
+
+export const SupportingStory = () => {
+	return (
+		<RoleStory role="supporting">
+			<img
+				src="http://placekitten.com/g/380/300"
+				width="380"
+				height="300"
+				alt=""
+			/>
+		</RoleStory>
+	);
+};
+SupportingStory.story = { name: "Click to view in 'supporting' role" };
+
+export const ShowcaseStory = () => {
+	return (
+		<RoleStory role="showcase">
+			<img
+				src="http://placekitten.com/g/860/560"
+				width="860"
+				height="560"
+				alt=""
+			/>
+		</RoleStory>
+	);
+};
+ShowcaseStory.story = { name: "Click to view in 'showcase' role" };
+
+export const HalfWidthStory = () => {
+	return (
+		<RoleStory role="halfWidth">
+			<img
+				src="http://placekitten.com/g/860/560"
+				width="310"
+				height="200"
+				alt=""
+			/>
+		</RoleStory>
+	);
+};
+HalfWidthStory.story = { name: "Click to view in 'halfWidth' role" };
+
+export const ThumbnailStory = () => {
+	return (
+		<RoleStory role="thumbnail">
+			<img
+				src="http://placekitten.com/g/140/105"
+				width="140"
+				height="105"
+				alt=""
+			/>
+		</RoleStory>
+	);
+};
+ThumbnailStory.story = { name: "Click to view in 'thumbnail' role" };
 
 const SoundcloudBlockElementType: 'model.dotcomrendering.pageElements.SoundcloudBlockElement' =
 	'model.dotcomrendering.pageElements.SoundcloudBlockElement';
@@ -587,7 +607,9 @@ export const EmbedBlockComponentStory = () => {
 		</ContainerLayout>
 	);
 };
-EmbedBlockComponentStory.story = { name: 'Wrapping EmbedBlockComponent' };
+EmbedBlockComponentStory.story = {
+	name: 'Click to view wrapping EmbedBlockComponent',
+};
 
 function unsafeEmbedBlockComponent(
 	pillar: CAPIPillar,
@@ -758,7 +780,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 	);
 };
 UnsafeEmbedBlockComponentStory.story = {
-	name: 'Wrapping UnsafeEmbedBlockComponent',
+	name: 'Click to view wrapping UnsafeEmbedBlockComponent',
 };
 
 function vimeoBlockComponents(
@@ -833,7 +855,9 @@ export const VimeoBlockComponentStory = () => {
 		</ContainerLayout>
 	);
 };
-VimeoBlockComponentStory.story = { name: 'Wrapping VimeoBlockComponent' };
+VimeoBlockComponentStory.story = {
+	name: 'Click to view wrapping VimeoBlockComponent',
+};
 
 function documentBlockComponent(
 	pillar: CAPIPillar,
@@ -903,7 +927,7 @@ export const DocumentBlockComponentStory = () => {
 	);
 };
 DocumentBlockComponentStory.story = {
-	name: 'Wrapping DocumentBlockComponentStory',
+	name: 'Click to view wrapping DocumentBlockComponentStory',
 };
 
 function soundCloudBlockComponents(
@@ -994,7 +1018,7 @@ export const SoundCloudBlockComponentStory = () => {
 	);
 };
 SoundCloudBlockComponentStory.story = {
-	name: 'Wrapping SoundCloudBlockComponent',
+	name: 'Click to view wrapping SoundCloudBlockComponent',
 };
 
 function spotifyBlockComponent(
@@ -1070,7 +1094,9 @@ export const SpotifyBlockComponentStory = () => {
 	);
 };
 
-SpotifyBlockComponentStory.story = { name: 'Wrapping SpotifyBlockComponent' };
+SpotifyBlockComponentStory.story = {
+	name: 'Click to view wrapping SpotifyBlockComponent',
+};
 
 function tweetComponent(
 	pillar: CAPIPillar,
@@ -1136,4 +1162,6 @@ export const TweetBlockComponentStory = () => {
 		</ContainerLayout>
 	);
 };
-TweetBlockComponentStory.story = { name: 'Wrapping TweetBlockComponent' };
+TweetBlockComponentStory.story = {
+	name: 'Click to view wrapping TweetBlockComponent',
+};

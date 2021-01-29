@@ -74,6 +74,21 @@ const roleButtonSize = (role: RoleType) => {
 	}
 };
 
+const roleButtonText = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase':
+		case 'halfWidth':
+		case 'supporting': {
+			return 'Allow and continue';
+		}
+		case 'thumbnail': {
+			return 'Allow';
+		}
+	}
+};
+
 const Container = ({
 	children,
 	width,
@@ -155,7 +170,7 @@ const AcceptButton = ({
 				iconSide="left"
 				onClick={() => handleClick()}
 			>
-				Allow and continue
+				{roleButtonText(role)}
 			</Button>
 		</div>
 	);
