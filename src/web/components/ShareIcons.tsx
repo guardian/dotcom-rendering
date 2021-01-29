@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -17,7 +17,7 @@ import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
 import { Hide } from './Hide';
 
-const shareIconList = css`
+const ulStyles = css`
 	float: left;
 	${from.wide} {
 		flex: auto;
@@ -70,10 +70,9 @@ export const ShareIcons: React.FC<{
 	webTitle: string;
 	displayIcons: SharePlatform[];
 	pillar: Theme;
-	className?: string;
-}> = ({ pageId, webTitle, displayIcons, pillar, className }) => {
+}> = ({ pageId, webTitle, displayIcons, pillar }) => {
 	return (
-		<ul className={cx(shareIconList, [className])}>
+		<ul className={ulStyles}>
 			{displayIcons.includes('facebook') && (
 				<li className={liStyles} key="facebook">
 					<a

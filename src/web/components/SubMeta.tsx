@@ -16,14 +16,6 @@ const subMetaLabel = css`
 	color: ${neutral[60]};
 `;
 
-const subMetaSharingIcons = css`
-	:after {
-		content: '';
-		display: block;
-		clear: left;
-	}
-`;
-
 const badgeWrapper = css`
 	float: right;
 	margin-top: 6px;
@@ -88,7 +80,6 @@ export const SubMeta = ({
 			)}
 			{showBottomSocialButtons && (
 				<ShareIcons
-					className={subMetaSharingIcons}
 					pageId={pageId}
 					webTitle={webTitle}
 					pillar={pillar}
