@@ -48,11 +48,14 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
+		byline: Colour;
+		twitterHandle: Colour;
 	},
 	background: {
 		article: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
+		avatar: Colour;
 	},
 };
 

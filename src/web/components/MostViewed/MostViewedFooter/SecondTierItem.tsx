@@ -11,6 +11,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { Flex } from '@root/src/web/components/Flex';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;
@@ -146,7 +147,7 @@ export const SecondTierItem = ({
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""
-										format={formatToUse}
+										palette={decidePalette(formatToUse)}
 									/>
 								</div>
 							</div>

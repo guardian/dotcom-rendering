@@ -18,6 +18,7 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
+import { decidePalette } from '../lib/decidePalette';
 
 type CardStyle =
 	| 'special-report'
@@ -354,7 +355,7 @@ export const RichLink = ({
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
-									format={format}
+									palette={decidePalette(format)}
 								/>
 							</div>
 						)}

@@ -15,6 +15,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
@@ -186,7 +187,9 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													format={format}
+													palette={decidePalette(
+														format,
+													)}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -205,7 +208,7 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												format={format}
+												palette={decidePalette(format)}
 											/>
 										</AvatarContainer>
 									</Hide>

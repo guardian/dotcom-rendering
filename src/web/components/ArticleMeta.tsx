@@ -256,7 +256,7 @@ export const ArticleMeta = ({
 								<Avatar
 									imageSrc={bylineImageUrl}
 									imageAlt={authorName || 'Author image'}
-									format={format}
+									palette={palette}
 								/>
 							</AvatarContainer>
 						)}

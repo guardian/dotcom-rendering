@@ -1,4 +1,4 @@
-import { Display, Design, Special } from '@guardian/types';
+import { Display, Design, Special, Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import {
 	neutral,
@@ -115,6 +115,17 @@ const backgroundSectionTitle = (format: Format): string => {
 	}
 };
 
+const backgroundAvatar = (format: Format): string => {
+	switch (format.theme) {
+		case Special.SpecialReport:
+			return specialReport[800];
+		case Pillar.Opinion:
+			return pillarPalette[Pillar.Opinion].main;
+		default:
+			return pillarPalette[format.theme].bright;
+	}
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -128,6 +139,7 @@ export const decidePalette = (format: Format): Palette => {
 			article: backgroundArticle(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
+			avatar: backgroundAvatar(format),
 		},
 	};
 };
