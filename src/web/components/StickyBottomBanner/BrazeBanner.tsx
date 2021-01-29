@@ -104,10 +104,10 @@ const getMessageFromBraze = async (
 			return outcome;
 		})
 		.catch(() => {
-			appboyTiming.clear();
-			// eslint-disable-next-line no-console
-			console.log('Appboy Timing failed.');
 			return { result: false };
+		})
+		.finally(() => {
+			appboyTiming.clear();
 		});
 };
 

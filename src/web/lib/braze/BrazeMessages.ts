@@ -12,7 +12,6 @@ interface Message {
 }
 
 class BrazeMessages {
-	// emitter: Emitter;
 	appboy: Appboy;
 
 	constructor(appboy: Appboy) {
