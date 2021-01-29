@@ -16,7 +16,10 @@ import {
 } from '@root/src/web/lib/hasCurrentBrazeUser';
 import { checkBrazeDependencies } from '@root/src/web/lib/braze/checkBrazeDependencies';
 import { BrazeMessages } from '@root/src/web/lib/braze/BrazeMessages';
-import { getInitialisedAppboy } from '@root/src/web/lib/braze/initialiseAppboy';
+import {
+	getInitialisedAppboy,
+	SDK_OPTIONS,
+} from '@root/src/web/lib/braze/initialiseAppboy';
 import { CanShowResult } from './bannerPicker';
 
 type Meta = {
@@ -153,8 +156,6 @@ const maybeWipeUserData = async (
 ): Promise<void> => {
 	if (apiKey && !brazeUuid && hasCurrentBrazeUser()) {
 		const appboy = await getInitialisedAppboy(apiKey);
-
-		appboy.initialize(apiKey, SDK_OPTIONS);
 
 		try {
 			appboy.wipeData();

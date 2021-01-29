@@ -16,4 +16,4 @@ const getInitialisedAppboy = async (apiKey: string): Promise<typeof appboy> => {
 	return appboy;
 };
 
-export { getInitialisedAppboy };
+export { getInitialisedAppboy, SDK_OPTIONS };
