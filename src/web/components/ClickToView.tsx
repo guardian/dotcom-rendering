@@ -79,7 +79,7 @@ const roleButtonText = (role: RoleType) => {
 
 export const ClickToView = ({
 	children,
-	role = "inline",
+	role = 'inline',
 	onAccept,
 	isTracking,
 	source,
