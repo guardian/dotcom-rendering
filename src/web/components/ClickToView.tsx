@@ -17,18 +17,6 @@ type Props = {
 	sourceDomain: string;
 };
 
-const overlayWidth = (role: RoleType) => {
-	let width: string;
-
-	switch (role) {
-		default: {
-			width = '100%';
-		}
-	}
-
-	return width;
-};
-
 const roleTextSize = (role: RoleType) => {
 	switch (role) {
 		case 'immersive':
@@ -89,20 +77,11 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
-const Container = ({
-	children,
-	width,
-	height,
-}: {
-	children: React.ReactNode;
-	width: string;
-	height?: string;
-}) => {
+const Container = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			className={css`
-				width: ${width};
-				height: ${height};
+				width: 100%;
 				background: ${background.secondary};
 				border: 1px solid ${border.primary};
 				display: flex;
@@ -198,10 +177,6 @@ export const ClickToView = ({
 
 	const roleWithDefault: RoleType = role || 'inline';
 
-	const width = overlayWidth(roleWithDefault);
-
-	const height = undefined;
-
 	if (isTracking && showOverlay) {
 		if (source) {
 			headlineText = `Allow ${source} content?`;
@@ -237,7 +212,7 @@ export const ClickToView = ({
 		}
 
 		return (
-			<Container width={width} height={height}>
+			<Container>
 				<Headline role={roleWithDefault}>{headlineText}</Headline>
 				<Body role={roleWithDefault}>{body}</Body>
 				<AcceptButton
