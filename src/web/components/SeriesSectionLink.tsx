@@ -26,9 +26,10 @@ const sectionLabelLink = css`
 `;
 
 const rowBelowLeftCol = css`
-	display: flex;
 	flex-direction: column;
+	display: inline-block;
 	${until.leftCol} {
+		display: flex;
 		flex-direction: row;
 	}
 `;
@@ -43,8 +44,9 @@ const primaryStyle = css`
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-
-	padding-right: ${space[2]}px;
+	${until.leftCol} {
+		margin-right: ${space[2]}px;
+	}
 `;
 
 const invertedStyle = css`
@@ -126,6 +128,12 @@ export const SeriesSectionLink = ({
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
 												.background.seriesTitle};
+											box-shadow: -6px 0 0 0
+													${palette.background
+														.seriesTitle},
+												6px 0 0 0
+													${palette.background
+														.seriesTitle};
 										`,
 									)}
 									data-component="series"
@@ -146,6 +154,12 @@ export const SeriesSectionLink = ({
 													.sectionTitle};
 												background-color: ${palette
 													.background.sectionTitle};
+												box-shadow: -6px 0 0 0
+														${palette.background
+															.seriesTitle},
+													6px 0 0 0
+														${palette.background
+															.seriesTitle};
 											`,
 										)}
 										data-component="section"
@@ -170,6 +184,12 @@ export const SeriesSectionLink = ({
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
 											.sectionTitle};
+										box-shadow: -6px 0 0 0
+												${palette.background
+													.seriesTitle},
+											6px 0 0 0
+												${palette.background
+													.seriesTitle};
 									`,
 								)}
 								data-component="section"
@@ -192,8 +212,12 @@ export const SeriesSectionLink = ({
 										color: ${palette.text.seriesTitle};
 										background-color: ${palette.background
 											.seriesTitle};
-										box-shadow: -6px 0 0
-											${palette.background.seriesTitle};
+										box-shadow: -6px 0 0 0
+												${palette.background
+													.seriesTitle},
+											6px 0 0 0
+												${palette.background
+													.seriesTitle};
 									`,
 									invertedStyle,
 								)}
@@ -227,6 +251,12 @@ export const SeriesSectionLink = ({
 										.seriesTitle};
 								`,
 								primaryStyle,
+								css`
+									box-shadow: -6px 0 0 0
+											${palette.background.seriesTitle},
+										6px 0 0 0
+											${palette.background.seriesTitle};
+								`,
 							)}
 							data-component="series"
 							data-link-name="article series"

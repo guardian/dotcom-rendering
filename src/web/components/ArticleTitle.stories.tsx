@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 
 import { decidePalette } from '../lib/decidePalette';
 
@@ -277,6 +277,35 @@ export const ArticleSeriesTag = () => {
 	);
 };
 ArticleSeriesTag.story = { name: 'Article with a Series tag' };
+
+export const SpecialReportTitle = () => {
+	return (
+		<Container>
+			<ArticleTitle
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...CAPI}
+				format={{
+					display: Display.Standard,
+					theme: Special.SpecialReport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Special.SpecialReport,
+					design: Design.Article,
+				})}
+				tags={[
+					{
+						id: '',
+						title: 'Special',
+						type: 'Series',
+					},
+				]}
+			/>
+		</Container>
+	);
+};
+SpecialReportTitle.story = { name: 'Special report' };
 
 export const ArticleNoTags = () => {
 	return (

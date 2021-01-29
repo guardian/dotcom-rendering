@@ -5,6 +5,7 @@ import {
 	text,
 	specialReport,
 	opinion,
+	brandAltBackground,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -13,6 +14,7 @@ const WHITE = neutral[100];
 const BLACK = text.primary;
 
 const textHeadline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
 			switch (format.design) {
@@ -40,6 +42,7 @@ const textHeadline = (format: Format): string => {
 };
 
 const textSeriesTitle = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
 			return WHITE;
@@ -66,6 +69,8 @@ const backgroundArticle = (format: Format): string => {
 };
 
 const backgroundSeriesTitle = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
 	switch (format.display) {
 		case Display.Immersive:
 			return pillarPalette[format.theme].main;
@@ -76,7 +81,16 @@ const backgroundSeriesTitle = (format: Format): string => {
 	}
 };
 
-const backgroundSectionTitle = backgroundSeriesTitle;
+const backgroundSectionTitle = (format: Format): string => {
+	switch (format.display) {
+		case Display.Immersive:
+			return pillarPalette[format.theme].main;
+		case Display.Showcase:
+		case Display.Standard:
+		default:
+			return 'transparent';
+	}
+};
 
 export const decidePalette = (format: Format) => {
 	return {
