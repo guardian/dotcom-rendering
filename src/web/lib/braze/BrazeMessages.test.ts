@@ -1,5 +1,22 @@
-import { BrazeMessages } from './BrazeMessages';
-import { FakeAppBoy } from './FakeAppBoy';
+import { createNanoEvents, Emitter } from 'nanoevents';
+import { BrazeMessages, Message, Callback } from './BrazeMessages';
+
+class FakeAppBoy {
+	emitter: Emitter;
+
+	constructor() {
+		this.emitter = createNanoEvents();
+	}
+
+	subscribeToInAppMessage(fn: Callback) {
+		this.emitter.on('inAppMessage', fn);
+		return 'FAKE_SUBSCRIPTION_ID';
+	}
+
+	emit(payload: Message) {
+		this.emitter.emit('inAppMessage', payload);
+	}
+}
 
 describe('BrazeMessages', () => {
 	describe('getMessageForBanner & getMessageForEndOfArticle', () => {
