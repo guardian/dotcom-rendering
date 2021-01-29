@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { Display, Design, Pillar } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
+import { decidePalette } from '../lib/decidePalette';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -56,6 +57,11 @@ export const ArticleStory = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -98,6 +104,11 @@ export const BrandingStory = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -123,6 +134,11 @@ export const FeatureStory = () => {
 					design: Design.Feature,
 					theme: Pillar.Culture,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -147,6 +163,11 @@ export const CommentStory = () => {
 					design: Design.Comment,
 					theme: Pillar.Opinion,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -171,6 +192,11 @@ export const InterviewStory = () => {
 					design: Design.Interview,
 					theme: Pillar.Lifestyle,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Interview,
+					theme: Pillar.Lifestyle,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -195,6 +221,11 @@ export const ImmersiveStory = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -219,6 +250,11 @@ export const TwoContributorsStory = () => {
 					design: Design.Feature,
 					theme: Pillar.Sport,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
