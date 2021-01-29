@@ -32,7 +32,7 @@ import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 import { loadScript } from '@root/src/web/lib/loadScript';
@@ -293,7 +293,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const display: Display = decideDisplay(CAPI);
 	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
-	const pillar = decidePillar({
+	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
 	});

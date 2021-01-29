@@ -7,7 +7,7 @@ import { useAB } from '@guardian/ab-react';
 
 import { useApi } from '@root/src/web/lib/api';
 import { joinUrl } from '@root/src/lib/joinUrl';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDesignType } from '@root/src/web/lib/decideDesignType';
 
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
@@ -56,7 +56,7 @@ function transformTrail(trail: CAPITrailType): TrailType {
 	// Converts the CAPI string pillar into an enum
 	return {
 		...trail,
-		pillar: decidePillar({ pillar: trail.pillar, design }),
+		pillar: decideTheme({ pillar: trail.pillar, design }),
 		design,
 	};
 }

@@ -1,6 +1,6 @@
 import { Design, Pillar, Special } from '@guardian/types';
 
-export const decidePillar = ({
+export const decideTheme = ({
 	pillar,
 	design,
 }: {
