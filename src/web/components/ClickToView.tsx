@@ -77,87 +77,9 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<div
-			className={css`
-				width: 100%;
-				background: ${background.secondary};
-				border: 1px solid ${border.primary};
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				padding: ${space[3]}px;
-			`}
-		>
-			{children}
-		</div>
-	);
-};
-
-const Headline = ({
-	children,
-	role,
-}: {
-	children: React.ReactNode;
-	role: RoleType;
-}) => (
-	<div
-		className={css`
-			${roleHeadlineSize(role)}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Body = ({
-	children,
-	role,
-}: {
-	children: React.ReactNode;
-	role: RoleType;
-}) => {
-	const textSize = roleTextSize(role);
-	return (
-		<div
-			className={css`
-				${textSize}
-				a {
-					${textSize}
-				}
-			`}
-		>
-			{children}
-		</div>
-	);
-};
-
-const AcceptButton = ({
-	role,
-	handleClick,
-}: {
-	role: RoleType;
-	handleClick: Function;
-}) => {
-	return (
-		<div>
-			<Button
-				priority="primary"
-				size={roleButtonSize(role)}
-				icon={<SvgCheckmark />}
-				iconSide="left"
-				onClick={() => handleClick()}
-			>
-				{roleButtonText(role)}
-			</Button>
-		</div>
-	);
-};
-
 export const ClickToView = ({
 	children,
-	role,
+	role = "inline",
 	onAccept,
 	isTracking,
 	source,
@@ -172,56 +94,79 @@ export const ClickToView = ({
 		}
 	};
 
-	let headlineText;
-	let body;
-
-	const roleWithDefault: RoleType = role || 'inline';
+	const textSize = roleTextSize(role);
 
 	if (isTracking && showOverlay) {
-		if (source) {
-			headlineText = `Allow ${source} content?`;
-			body = (
-				<div>
-					<p>
-						This article includes content provided by {source}. We
-						ask for your permission before anything is loaded, as
-						they may be using cookies and other technologies.
-					</p>
-					<p>
-						To view this content, click &apos;Allow and
-						continue&apos;.
-					</p>
-				</div>
-			);
-		} else {
-			headlineText = 'Allow content provided by a third party?';
-			body = (
-				<div>
-					<p>
-						This article includes content hosted on {sourceDomain}.
-						We ask for your permission before anything is loaded, as
-						the provider may be using cookies and other
-						technologies.
-					</p>
-					<p>
-						To view this content, click &apos;Allow and
-						continue&apos;.
-					</p>
-				</div>
-			);
-		}
-
 		return (
-			<Container>
-				<Headline role={roleWithDefault}>{headlineText}</Headline>
-				<Body role={roleWithDefault}>{body}</Body>
-				<AcceptButton
-					role={roleWithDefault}
-					handleClick={handleClick}
-				/>
-			</Container>
+			<div
+				className={css`
+					width: 100%;
+					background: ${background.secondary};
+					border: 1px solid ${border.primary};
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					padding: ${space[3]}px;
+				`}
+			>
+				<div
+					className={css`
+						${roleHeadlineSize(role)}
+					`}
+				>
+					{source
+						? `Allow ${source} content?`
+						: 'Allow content provided by a third party?'}
+				</div>
+				<div
+					className={css`
+						${textSize}
+						a {
+							${textSize}
+						}
+					`}
+				>
+					{source ? (
+						<>
+							<p>
+								This article includes content provided by{' '}
+								{source}. We ask for your permission before
+								anything is loaded, as they may be using cookies
+								and other technologies.
+							</p>
+							<p>
+								To view this content, click &apos;Allow and
+								continue&apos;.
+							</p>
+						</>
+					) : (
+						<>
+							<p>
+								This article includes content hosted on{' '}
+								{sourceDomain}. We ask for your permission
+								before anything is loaded, as the provider may
+								be using cookies and other technologies.
+							</p>
+							<p>
+								To view this content, click &apos;Allow and
+								continue&apos;.
+							</p>
+						</>
+					)}
+				</div>
+				<div>
+					<Button
+						priority="primary"
+						size={roleButtonSize(role)}
+						icon={<SvgCheckmark />}
+						iconSide="left"
+						onClick={() => handleClick()}
+					>
+						{roleButtonText(role)}
+					</Button>
+				</div>
+			</div>
 		);
 	}
-
-	return <div>{children}</div>;
+	return <>{children}</>;
 };
