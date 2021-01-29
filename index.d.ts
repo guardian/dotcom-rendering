@@ -41,7 +41,20 @@ type Pillar = Theme;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DesignTypesObj = { [key in Design]: any };
 
-type Palette = { [key: string]: any };
+type Colour = string;
+
+type Palette = {
+	text: {
+		headline: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+	},
+	background: {
+		article: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+	},
+};
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 

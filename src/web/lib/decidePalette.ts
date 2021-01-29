@@ -92,7 +92,7 @@ const backgroundSectionTitle = (format: Format): string => {
 	}
 };
 
-export const decidePalette = (format: Format) => {
+export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
 			headline: textHeadline(format),
