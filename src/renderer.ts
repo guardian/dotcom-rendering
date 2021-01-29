@@ -56,6 +56,7 @@ import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
+import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
@@ -809,7 +810,9 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return textRenderer(format, excludeStyles, element);
 
 		case ElementKind.Image:
-			return imageRenderer(format, element, key);
+			return format.design === Design.Media
+				? h(GalleryImage, { format, image: element })
+				: imageRenderer(format, element, key);
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;

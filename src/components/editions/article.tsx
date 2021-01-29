@@ -79,7 +79,8 @@ const Article: FC<Props> = ({ item }) => {
 		item.design === Design.Comment ||
 		item.design === Design.Review ||
 		item.design === Design.Interview ||
-		item.design === Design.Feature
+		item.design === Design.Feature ||
+		item.design === Design.Media
 	) {
 		return (
 			<main>
