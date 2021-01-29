@@ -24,11 +24,14 @@ import { borderWidthStyles } from './styles';
 // ----- Styles ----- //
 
 const interviewStyles = css`
-	margin-left: ${remSpace[2]};
-	margin-right: ${remSpace[2]};
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
 
 	${from.tablet} {
+		box-sizing: border-box;
 		margin-left: ${remSpace[6]};
+		padding-left: ${remSpace[3]};
+		padding-right: ${remSpace[3]};
 	}
 
 	${from.wide} {
@@ -37,6 +40,7 @@ const interviewStyles = css`
 	}
 	${borderWidthStyles}
 	border-bottom: 1px solid ${border.secondary};
+	border-right: 1px solid ${border.secondary};
 `;
 
 const galleryStyles = css`
