@@ -9,7 +9,7 @@ import { Counts } from '@root/src/web/components/Counts';
 import { Branding } from '@root/src/web/components/Branding';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
-import { SharingIcons } from './ShareIcons';
+import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
@@ -274,7 +274,7 @@ export const ArticleMeta = ({
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" className={metaFlex}>
 					<div className={metaExtras}>
-						<SharingIcons
+						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
 							pillar={format.theme}

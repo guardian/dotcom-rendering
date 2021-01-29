@@ -83,7 +83,7 @@ interface ShareListItemType {
 	mobileOnly: boolean;
 }
 
-export const SharingIcons: React.FC<{
+export const ShareIcons: React.FC<{
 	pageId: string;
 	webTitle: string;
 	displayIcons: SharePlatform[];

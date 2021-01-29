@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
 import { Badge } from '@frontend/web/components/Badge';
@@ -87,7 +87,7 @@ export const SubMeta = ({
 				/>
 			)}
 			{showBottomSocialButtons && (
-				<SharingIcons
+				<ShareIcons
 					className={subMetaSharingIcons}
 					pageId={pageId}
 					webTitle={webTitle}
