@@ -19,7 +19,7 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { borderWidthStyles } from './styles';
+import { borderWidthStyles, wideArticleMargin } from './styles';
 
 // ----- Styles ----- //
 
@@ -35,8 +35,7 @@ const interviewStyles = css`
 	}
 
 	${from.wide} {
-		margin-left: ${remSpace[24]};
-		left: ${remSpace[12]};
+		margin-left: ${wideArticleMargin}px;
 	}
 	${borderWidthStyles}
 	border-bottom: 1px solid ${border.secondary};
