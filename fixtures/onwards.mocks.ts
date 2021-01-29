@@ -217,7 +217,7 @@ export const withLongDescription: OnwardsType = {
 	pillar: Pillar.News,
 };
 
-export const withLongDescriptionAndLink: OnwardsType = {
+export const withLink: OnwardsType = {
 	description:
 		'<p>The long-running series in which readers answer other readers’ questions on subjects ranging from trivial flights of fancy to profound scientific and philosophical concepts</p><p><em>Please send new questions to </em><strong><a href="mailto://nq@theguardian.com">nq@theguardian.com</a></strong>.</p>',
 	heading: 'More on this story',
