@@ -266,9 +266,9 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<InteractiveAtom
 								id={element.id}
-								html={element.html}
-								js={element.js}
-								css={element.css}
+								elementHtml={element.html}
+								elementJs={element.js}
+								elementCss={element.css}
 							/>
 						</Figure>
 					);
