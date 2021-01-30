@@ -5,7 +5,7 @@ import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import type {
 	FontWeight,
 	LineHeight,
@@ -113,6 +113,13 @@ const interviewFontStyles = css`
 	display: inline;
 `;
 
+const galleryStyles = css`
+	${titlepiece.small()}
+	font-size: 2rem;
+	line-height: 1.2;
+	padding-bottom: ${remSpace[6]};
+`;
+
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(format), interviewStyles);
@@ -138,6 +145,10 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 			fontStyles('regular', 'light'),
 			commentStyles,
 		);
+
+	if (format.design === Design.Media) {
+		return css(styles(format), galleryStyles);
+	}
 
 	return css(styles(format), fontStyles('tight', 'medium'));
 };
