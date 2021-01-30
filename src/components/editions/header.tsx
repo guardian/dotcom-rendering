@@ -37,7 +37,7 @@ const headerStyles = css`
 	${sidePadding}
 `;
 
-const galleryHeaderStyles = css`
+const galleryInnerHeaderStyles = css`
 	${sidePadding}
 	${from.tablet} {
 		padding-left: ${tabletArticleMargin}px;
@@ -45,6 +45,13 @@ const galleryHeaderStyles = css`
 
 	${from.wide} {
 		padding-left: ${wideArticleMargin}px;
+	}
+`;
+
+const galleryHeaderStyles = css`
+	border-bottom: 1px solid ${neutral[100]};
+	${from.tablet} {
+		border: none;
 	}
 `;
 
@@ -60,8 +67,8 @@ const galleryLinesStyles = css`
 
 const galleryHeaderBorderStyles = css`
 	${from.tablet} {
-		border-right: 1px solid ${neutral[100]};
 		border-bottom: 1px solid ${neutral[100]};
+		border-right: 1px solid ${neutral[100]};
 		box-sizing: border-box;
 		width: ${tablet}px;
 		${from.wide} {
@@ -136,9 +143,9 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const GalleryHeader: FC<HeaderProps> = ({ item }) => (
-	<header>
+	<header css={galleryHeaderStyles}>
 		<HeaderImage item={item} />
-		<div css={galleryHeaderStyles}>
+		<div css={galleryInnerHeaderStyles}>
 			<Headline item={item} />
 			<div css={galleryHeaderBorderStyles}>
 				<Standfirst item={item} />

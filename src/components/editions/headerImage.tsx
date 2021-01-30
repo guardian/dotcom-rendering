@@ -56,6 +56,10 @@ const captionStyles = css`
 
 const fullWidthCaptionStyles = css`
 	width: 100%;
+
+	${from.tablet} {
+		width: 100%;
+	}
 `;
 
 const getStyles = (format: Format): SerializedStyles => {

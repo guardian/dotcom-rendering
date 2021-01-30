@@ -21,7 +21,7 @@ const sizes: Sizes = {
 };
 
 const styles = css`
-	margin: ${remSpace[4]} 0;
+	margin: 0 0 ${remSpace[4]};
 	width: ${width};
 `;
 

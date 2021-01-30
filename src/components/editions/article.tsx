@@ -16,7 +16,12 @@ import {
 	articleWidthStyles,
 	headerBackgroundColour,
 	sidePadding,
+	tabletContentWidth,
+	wideContentWidth,
 } from './styles';
+
+const wide = wideContentWidth + 12;
+const tablet = tabletContentWidth + 12;
 
 // ----- Component ----- //
 
@@ -66,8 +71,20 @@ const bodyWrapperStyles = css`
 `;
 
 const galleryWrapperStyles = css`
+	box-sizing: border-box;
+	padding-top: ${remSpace[3]};
 	padding-right: 0;
 	padding-left: 0;
+	border: none;
+	${from.tablet} {
+		width: ${tablet}px;
+		padding-right: ${remSpace[4]};
+		border-right: 1px solid ${neutral[100]};
+	}
+
+	${from.wide} {
+		width: ${wide}px;
+	}
 `;
 
 const headerBackgroundStyles = (item: Format): SerializedStyles => css`
