@@ -40,6 +40,10 @@ const interviewStyles = css`
 	${articleWidthStyles}
 `;
 
+const galleryStyles = css`
+	${articleWidthStyles}
+`;
+
 const showcaseStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
@@ -140,6 +144,10 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
+	}
+
+	if (format.design === Design.Media) {
+		return css(styles(kickerColor), galleryStyles);
 	}
 
 	return styles(kickerColor);

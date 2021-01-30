@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
+import { neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -18,8 +19,13 @@ import {
 	interviewBackgroundColour,
 	sidePadding,
 	tabletArticleMargin,
+	tabletContentWidth,
 	wideArticleMargin,
+	wideContentWidth,
 } from './styles';
+
+const wide = wideContentWidth + 12;
+const tablet = tabletContentWidth + 12;
 
 // ----- Component ----- //
 
@@ -29,6 +35,39 @@ interface HeaderProps {
 
 const headerStyles = css`
 	${sidePadding}
+`;
+
+const galleryHeaderStyles = css`
+	${sidePadding}
+	${from.tablet} {
+		padding-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		padding-left: ${wideArticleMargin}px;
+	}
+`;
+
+const galleryLinesStyles = css`
+	${from.tablet} {
+		margin-left: 0;
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
+
+const galleryHeaderBorderStyles = css`
+	${from.tablet} {
+		border-right: 1px solid ${neutral[100]};
+		border-bottom: 1px solid ${neutral[100]};
+		box-sizing: border-box;
+		width: ${tablet}px;
+		${from.wide} {
+			width: ${wide}px;
+		}
+	}
 `;
 
 const interviewHeaderStyles = (item: Format): SerializedStyles => css`
@@ -99,10 +138,14 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderImage item={item} />
-		<Headline item={item} />
-		<Standfirst item={item} />
-		<Lines />
-		<Byline item={item} shareIcon />
+		<div css={galleryHeaderStyles}>
+			<Headline item={item} />
+			<div css={galleryHeaderBorderStyles}>
+				<Standfirst item={item} />
+				<Lines className={galleryLinesStyles} />
+				<Byline item={item} shareIcon />
+			</div>
+		</div>
 	</header>
 );
 

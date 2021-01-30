@@ -118,6 +118,7 @@ const galleryStyles = css`
 	font-size: 2rem;
 	line-height: 1.2;
 	padding-bottom: ${remSpace[6]};
+	border: 0;
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {

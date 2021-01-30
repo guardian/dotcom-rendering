@@ -41,7 +41,7 @@ const styles = css`
 const fullWidthStyles = css`
 	margin: 0;
 	position: relative;
-	width: 100vw;
+	width: 100%;
 `;
 
 const captionStyles = css`
@@ -55,11 +55,7 @@ const captionStyles = css`
 `;
 
 const fullWidthCaptionStyles = css`
-	width: 100vw;
-
-	${from.wide} {
-		width: 100vw;
-	}
+	width: 100%;
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
