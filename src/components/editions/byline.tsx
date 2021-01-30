@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type {
@@ -181,9 +181,12 @@ const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
+	const bylineColor =
+		format.design === Design.Media ? neutral[100] : kickerColor;
+
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getStyles(format, kickerColor)}>
-			<address>{renderText(byline, kickerColor, large)}</address>
+		<div css={getStyles(format, bylineColor)}>
+			<address>{renderText(byline, bylineColor, large)}</address>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />
