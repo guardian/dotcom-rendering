@@ -63,11 +63,17 @@ const fullWidthCaptionStyles = css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-	return format.design === Design.Interview ? fullWidthStyles : styles;
+	switch (format.design) {
+		case Design.Interview:
+		case Design.Media:
+			return fullWidthStyles;
+		default:
+			return styles;
+	}
 };
 
 const getCaptionStyles = (format: Format): SerializedStyles => {
-	return format.design === Design.Interview
+	return format.design === Design.Interview || format.design === Design.Media
 		? fullWidthCaptionStyles
 		: captionStyles;
 };
@@ -76,7 +82,7 @@ const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
 ): SerializedStyles => {
-	if (format.design === Design.Interview) {
+	if (format.design === Design.Interview || format.design === Design.Media) {
 		return css`
 			display: block;
 			width: 100%;
@@ -118,7 +124,9 @@ const fullWidthSizes: Sizes = {
 };
 
 const getSizes = (format: Format): Sizes => {
-	return format.design === Design.Interview ? fullWidthSizes : sizes;
+	return format.design === Design.Interview || format.design === Design.Media
+		? fullWidthSizes
+		: sizes;
 };
 
 const HeaderImage: FC<Props> = ({ item }) => {

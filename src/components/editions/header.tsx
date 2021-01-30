@@ -96,6 +96,16 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
+const GalleryHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={headerStyles}>
+		<HeaderImage item={item} />
+		<Headline item={item} />
+		<Standfirst item={item} />
+		<Lines />
+		<Byline item={item} shareIcon />
+	</header>
+);
+
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	if (item.design === Design.Interview) {
 		return <InterviewHeader item={item} />;
@@ -105,6 +115,8 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		return <AnalysisHeader item={item} />;
 	} else if (item.design === Design.Comment) {
 		return <CommentHeader item={item} />;
+	} else if (item.design === Design.Media) {
+		return <GalleryHeader item={item} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}

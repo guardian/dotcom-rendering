@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { background, border } from '@guardian/src-foundations/palette';
+import { background, border, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, partition } from '@guardian/types';
 import type { Item } from 'item';
@@ -23,6 +23,10 @@ import {
 interface Props {
 	item: Item;
 }
+
+const articleWrapperStyles = (item: Format): SerializedStyles => css`
+	background-color: ${item.design === Design.Media ? neutral[0] : 'inherit'};
+`;
 
 const articleStyles = css`
 	${articleMarginStyles}
@@ -61,12 +65,17 @@ const bodyWrapperStyles = css`
 	${articleWidthStyles}
 `;
 
+const galleryWrapperStyles = css`
+	padding-right: 0;
+	padding-left: 0;
+`;
+
 const headerBackgroundStyles = (item: Format): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(item)};
 `;
 
 const getSectionStyles = (item: Format): SerializedStyles[] => {
-	if (item.design === Design.Interview) {
+	if (item.design === Design.Interview || item.design === Design.Media) {
 		return [];
 	}
 	return [headerStyles, articleStyles];
@@ -84,13 +93,21 @@ const Article: FC<Props> = ({ item }) => {
 	) {
 		return (
 			<main>
-				<article>
+				<article css={articleWrapperStyles(item)}>
 					<div css={headerBackgroundStyles(item)}>
 						<section css={getSectionStyles(item)}>
 							<Header item={item} />
 						</section>
 					</div>
-					<div css={[bodyWrapperStyles, articleStyles]}>
+					<div
+						css={[
+							bodyWrapperStyles,
+							articleStyles,
+							item.design === Design.Media
+								? galleryWrapperStyles
+								: null,
+						]}
+					>
 						<section css={bodyStyles}>
 							{renderEditionsAll(item, partition(item.body).oks)}
 						</section>
