@@ -97,7 +97,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const GalleryHeader: FC<HeaderProps> = ({ item }) => (
-	<header css={headerStyles}>
+	<header>
 		<HeaderImage item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />

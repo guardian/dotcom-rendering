@@ -61,6 +61,11 @@ const showcaseStyles = css`
 	color: ${neutral[20]}
 `;
 
+const galleryStyles = css`
+	${headline.xxsmall({ lineHeight: 'tight', fontWeight: 'regular' })}
+	color: ${neutral[100]};
+`;
+
 const greyTextStyles = css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 	color: ${neutral[46]}
@@ -83,6 +88,9 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
+	}
+	if (format.design === Design.Media) {
+		return css(styles(kickerColor), galleryStyles);
 	}
 	return styles(kickerColor);
 };
