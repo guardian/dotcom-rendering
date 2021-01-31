@@ -397,12 +397,12 @@ const captionElement = (format: Format) => (
 	switch (node.nodeName) {
 		case 'STRONG':
 			return format.design === Design.Media
-				? h('h2', { css: captionHeadingStyles, key }, children)
+				? styledH('h2', { css: captionHeadingStyles, key }, children)
 				: children;
 		case 'BR':
 			return null;
 		case 'EM':
-			return h(
+			return styledH(
 				'em',
 				{
 					css: css`
@@ -416,7 +416,7 @@ const captionElement = (format: Format) => (
 				children,
 			);
 		case 'A':
-			return h(
+			return styledH(
 				Anchor,
 				{
 					href: withDefault('')(getHref(node)),
