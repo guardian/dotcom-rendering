@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
 import { neutral, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
@@ -35,8 +36,14 @@ const sizes: Sizes = {
 };
 
 const styles = css`
-	margin: 0 0 ${remSpace[4]};
+	margin: 0 0 ${remSpace[6]};
 	width: ${width};
+	p {
+		${from.tablet} {
+			margin: 0;
+			padding: 0;
+		}
+	}
 `;
 
 const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
@@ -89,6 +96,8 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 	const styles = css`
 		${textSans.small({ fontWeight: 'bold' })}
 		color: ${neutral[100]};
+		margin: 0;
+		padding: ${remSpace[1]} 0 0;
 	`;
 	return (
 		<h2 css={styles}>
@@ -100,8 +109,10 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 
 const CaptionDescription: FC<{ description: string }> = ({ description }) => {
 	const styles = css`
-		${textSans.small()};
+		${textSans.small({ lineHeight: 'regular' })};
 		color: ${neutral[100]};
+		margin: 0;
+		padding: 0;
 	`;
 	return <p css={styles}>{description}</p>;
 };
