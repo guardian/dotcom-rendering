@@ -38,6 +38,7 @@ const sizes: Sizes = {
 const styles = css`
 	margin: 0 0 ${remSpace[6]};
 	width: ${width};
+	position: relative;
 	p {
 		${from.tablet} {
 			margin: 0;
@@ -75,17 +76,18 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 
 const triangleStyles = (color: string): SerializedStyles => css`
 	fill: ${color};
-	height: 0.8rem;
+	height: 0.6875rem;
+	width: 0.8125rem;
 	padding-right: ${remSpace[1]};
 `;
 
 const Triangle: FC<{ color: string }> = ({ color }) => (
 	<svg
+		viewBox="0 0 13 11"
 		css={triangleStyles(color)}
-		viewBox="0 0 10 9"
 		xmlns="http://www.w3.org/2000/svg"
 	>
-		<polygon points="0,9 5,0 10,9" />
+		<path d="M6.5 0L13 11H0L6.5 0Z" />
 	</svg>
 );
 
@@ -98,6 +100,13 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 		color: ${neutral[100]};
 		margin: 0;
 		padding: ${remSpace[1]} 0 0;
+
+		${from.tablet} {
+			padding: 0;
+			svg {
+				transform: translateX(-10%) translateY(-15%) rotateZ(-90deg);
+			}
+		}
 	`;
 	return (
 		<h2 css={styles}>
@@ -119,8 +128,17 @@ const CaptionDescription: FC<{ description: string }> = ({ description }) => {
 
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 	const { kicker } = getThemeStyles(format.theme);
+	const tabletWidth = '170px';
+	const styles = css`
+		${from.tablet} {
+			position: absolute;
+			top: -${remSpace[1]};
+			width: ${tabletWidth};
+			right: calc(-${tabletWidth} - 2rem);
+		}
+	`;
 	return (
-		<div>
+		<div css={styles} className="editions-gallery-caption">
 			{maybeRender(details.location, (location) => (
 				<CaptionLocation location={location} triangleColor={kicker} />
 			))}
@@ -133,7 +151,7 @@ const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 
 const GalleryImage: FC<Props> = ({ image, format }) => {
 	return (
-		<figure css={styles}>
+		<figure css={styles} className="editions-gallery-figure">
 			<Img
 				image={image}
 				sizes={sizes}
