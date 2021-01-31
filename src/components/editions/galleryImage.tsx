@@ -120,7 +120,7 @@ const CaptionDescription: FC<{ description: string }> = ({ description }) => {
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 	const { kicker } = getThemeStyles(format.theme);
 	return (
-		<div style={{ background: 'red' }}>
+		<div>
 			{maybeRender(details.location, (location) => (
 				<CaptionLocation location={location} triangleColor={kicker} />
 			))}
