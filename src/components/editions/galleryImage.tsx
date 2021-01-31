@@ -98,9 +98,13 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 	);
 };
 
-const CaptionDescription: FC<{ description: string }> = ({ description }) => (
-	<p>{description}</p>
-);
+const CaptionDescription: FC<{ description: string }> = ({ description }) => {
+	const styles = css`
+		${textSans.small()};
+		color: ${neutral[100]};
+	`;
+	return <p css={styles}>{description}</p>;
+};
 
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 	const { kicker } = getThemeStyles(format.theme);
@@ -125,7 +129,11 @@ const GalleryImage: FC<Props> = ({ image, format }) => {
 				className={none}
 				format={format}
 				supportsDarkMode={false}
-				lightbox={none}
+				lightbox={some({
+					className: 'js-launch-slideshow',
+					caption: none,
+					credit: none,
+				})}
 			/>
 			<GalleryImageCaption
 				details={getCaptionDetails(image.caption)}
