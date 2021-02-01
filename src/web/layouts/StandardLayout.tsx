@@ -51,6 +51,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { neutralBorder } from '@root/src/lib/pillars';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -288,6 +289,15 @@ const ageWarningMargins = css`
 	}
 `;
 
+const stickyNav = (pillar: Pillar) => css`
+	position: sticky;
+	top: 0;
+	z-index: 9000;
+	background-color: white;
+	box-shadow: 0 0 transparent, 0 0 transparent,
+		1px 3px 6px ${neutralBorder(pillar)};
+`;
+
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -324,6 +334,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+	const pillar = getCurrentPillar(CAPI);
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -354,7 +366,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
 					</Section>
+				</SendToBack>
+			</div>
 
+			<div>
+				<div className={stickyNav(pillar)}>
 					<Section
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -388,200 +404,204 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</Section>
 					)}
+				</div>
 
-					<Section
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} pillar={format.theme} />
-					</Section>
-				</SendToBack>
-			</div>
+				<Section
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<GuardianLines count={4} pillar={format.theme} />
+				</Section>
 
-			<Section
-				data-print-layout="hide"
-				showTopBorder={false}
-				backgroundColour={palette.background.article}
-			>
-				<StandardGrid design={format.design} CAPI={CAPI}>
-					<GridItem area="title">
-						<ArticleTitle
-							format={format}
-							palette={palette}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							badge={CAPI.badge}
-						/>
-					</GridItem>
-					<GridItem area="border">
-						<Border />
-					</GridItem>
-					<GridItem area="preFurniture">
-						<div className={maxWidth}>
-							{format.design === Design.MatchReport &&
-								CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-nav"
-										height={230}
-									/>
-								)}
-						</div>
-					</GridItem>
-					<GridItem area="headline">
-						<div className={maxWidth}>
-							<ArticleHeadlinePadding design={format.design}>
-								{age && (
-									<div className={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-									palette={palette}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
+				<Section
+					data-print-layout="hide"
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+				>
+					<StandardGrid design={format.design} CAPI={CAPI}>
+						<GridItem area="title">
+							<ArticleTitle
+								format={format}
+								palette={palette}
+								tags={CAPI.tags}
+								sectionLabel={CAPI.sectionLabel}
+								sectionUrl={CAPI.sectionUrl}
+								guardianBaseURL={CAPI.guardianBaseURL}
+								badge={CAPI.badge}
+							/>
+						</GridItem>
+						<GridItem area="border">
+							<Border />
+						</GridItem>
+						<GridItem area="preFurniture">
+							<div className={maxWidth}>
+								{format.design === Design.MatchReport &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-nav"
+											height={230}
+										/>
+									)}
 							</div>
-						) : (
-							<></>
-						)}
-					</GridItem>
-					<GridItem area="standfirst">
-						<ArticleStandfirst
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="media">
-						<div className={maxWidth}>
-							<MainMedia
+						</GridItem>
+						<GridItem area="headline">
+							<div className={maxWidth}>
+								<ArticleHeadlinePadding design={format.design}>
+									{age && (
+										<div className={ageWarningMargins}>
+											<AgeWarning age={age} />
+										</div>
+									)}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										palette={palette}
+									/>
+									{age && (
+										<AgeWarning
+											age={age}
+											isScreenReader={true}
+										/>
+									)}
+								</ArticleHeadlinePadding>
+							</div>
+							{CAPI.starRating || CAPI.starRating === 0 ? (
+								<div className={starWrapper}>
+									<StarRating
+										rating={CAPI.starRating}
+										size="large"
+									/>
+								</div>
+							) : (
+								<></>
+							)}
+						</GridItem>
+						<GridItem area="standfirst">
+							<ArticleStandfirst
 								display={format.display}
 								design={format.design}
-								elements={CAPI.mainMediaElements}
 								pillar={format.theme}
-								adTargeting={adTargeting}
-								host={host}
+								standfirst={CAPI.standfirst}
 							/>
-						</div>
-					</GridItem>
-					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(format.design)}
+						</GridItem>
+						<GridItem area="media">
+							<div className={maxWidth}>
+								<MainMedia
+									display={format.display}
+									design={format.design}
+									elements={CAPI.mainMediaElements}
 									pillar={format.theme}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
-							</div>
-						</div>
-					</GridItem>
-					<GridItem area="meta">
-						<div className={maxWidth}>
-							<ArticleMeta
-								branding={branding}
-								format={format}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-								author={CAPI.author}
-								tags={CAPI.tags}
-								primaryDateline={CAPI.blocks[0].primaryDateLine}
-								secondaryDateline={
-									CAPI.blocks[0].secondaryDateLine
-								}
-							/>
-						</div>
-					</GridItem>
-					<GridItem area="body">
-						<ArticleContainer>
-							<main className={articleWidth}>
-								<ArticleBody
-									format={format}
-									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
 								/>
-								{showMatchStats && <div id="match-stats" />}
-
-								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									data-print-layout="hide"
-									count={4}
-									pillar={format.theme}
-								/>
-								<SubMeta
-									pillar={format.theme}
-									subMetaKeywordLinks={
-										CAPI.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPI.subMetaSectionLinks
-									}
+							</div>
+						</GridItem>
+						<GridItem area="lines">
+							<div className={maxWidth}>
+								<div className={stretchLines}>
+									<GuardianLines
+										count={decideLineCount(format.design)}
+										pillar={format.theme}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							</div>
+						</GridItem>
+						<GridItem area="meta">
+							<div className={maxWidth}>
+								<ArticleMeta
+									branding={branding}
+									format={format}
 									pageId={CAPI.pageId}
-									webUrl={CAPI.webURL}
 									webTitle={CAPI.webTitle}
-									showBottomSocialButtons={
-										CAPI.showBottomSocialButtons
+									author={CAPI.author}
+									tags={CAPI.tags}
+									primaryDateline={
+										CAPI.blocks[0].primaryDateLine
 									}
-									badge={CAPI.badge}
+									secondaryDateline={
+										CAPI.blocks[0].secondaryDateLine
+									}
 								/>
-							</main>
-						</ArticleContainer>
-					</GridItem>
-					<GridItem area="right-column">
-						<div
-							className={css`
-								padding-top: 6px;
-								height: 100%;
-								${from.desktop} {
-									/* above 980 */
-									margin-left: 20px;
-									margin-right: -20px;
-								}
-								${from.leftCol} {
-									/* above 1140 */
-									margin-left: 0px;
-									margin-right: 0px;
-								}
-							`}
-						>
-							<RightColumn>
-								<AdSlot
-									position="right"
-									display={format.display}
-								/>
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
-							</RightColumn>
-						</div>
-					</GridItem>
-				</StandardGrid>
-			</Section>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer>
+								<main className={articleWidth}>
+									<ArticleBody
+										format={format}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+									/>
+									{showMatchStats && <div id="match-stats" />}
+
+									{showBodyEndSlot && (
+										<div id="slot-body-end" />
+									)}
+									<GuardianLines
+										data-print-layout="hide"
+										count={4}
+										pillar={format.theme}
+									/>
+									<SubMeta
+										pillar={format.theme}
+										subMetaKeywordLinks={
+											CAPI.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPI.subMetaSectionLinks
+										}
+										pageId={CAPI.pageId}
+										webUrl={CAPI.webURL}
+										webTitle={CAPI.webTitle}
+										showBottomSocialButtons={
+											CAPI.showBottomSocialButtons
+										}
+										badge={CAPI.badge}
+									/>
+								</main>
+							</ArticleContainer>
+						</GridItem>
+						<GridItem area="right-column">
+							<div
+								className={css`
+									padding-top: 6px;
+									height: 100%;
+									${from.desktop} {
+										/* above 980 */
+										margin-left: 20px;
+										margin-right: -20px;
+									}
+									${from.leftCol} {
+										/* above 1140 */
+										margin-left: 0px;
+										margin-right: 0px;
+									}
+								`}
+							>
+								<RightColumn>
+									<AdSlot
+										position="right"
+										display={format.display}
+									/>
+									{!isPaidContent ? (
+										<MostViewedRightIsland />
+									) : (
+										<></>
+									)}
+								</RightColumn>
+							</div>
+						</GridItem>
+					</StandardGrid>
+				</Section>
+			</div>
 
 			<Section
 				data-print-layout="hide"
