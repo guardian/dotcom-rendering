@@ -46,6 +46,21 @@ const interviewStyles = css`
 	border-right: 1px solid ${border.secondary};
 `;
 
+const immersiveStyles = css`
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.tablet} {
+		margin-left: ${remSpace[6]};
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
+	}
+
+	${articleWidthStyles}
+`;
+
 const galleryStyles = css`
 	${articleWidthStyles}
 `;
@@ -133,15 +148,24 @@ const bylinePrimaryStyles = (
 	`;
 };
 
-const bylineSecondaryStyles = (large?: boolean): SerializedStyles => css`
+const bylineSecondaryStyles = (
+	kickerColor: string,
+	large?: boolean,
+): SerializedStyles => css`
 	${large
 		? largeTextStyles('italic', 'light')
 		: standardTextStyles('italic', 'light')}
+
+	color: ${kickerColor === neutral[100] ? neutral[100] : neutral[7]}
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
+	}
+
+	if (format.display === Display.Immersive) {
+		return css(styles(kickerColor), immersiveStyles);
 	}
 
 	if (format.design === Design.Comment) {
@@ -184,7 +208,7 @@ const renderText = (
 			case 'SPAN':
 			case '#text':
 				return (
-					<span css={bylineSecondaryStyles(large)}>
+					<span css={bylineSecondaryStyles(kickerColor, large)}>
 						{node.textContent ?? ''}
 					</span>
 				);
@@ -195,8 +219,13 @@ const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
-	const bylineColor =
-		format.design === Design.Media ? neutral[100] : kickerColor;
+	const ignoreKickerColour = (format: Format): boolean => {
+		return (
+			format.design === Design.Media ||
+			format.display === Display.Immersive
+		);
+	};
+	const bylineColor = ignoreKickerColour(format) ? neutral[100] : kickerColor;
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={getStyles(format, bylineColor)}>

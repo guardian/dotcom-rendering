@@ -6,7 +6,7 @@ import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
-import { Design, none, some } from '@guardian/types';
+import { Design, Display, none, some } from '@guardian/types';
 import StarRating from 'components/editions/starRating';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
@@ -62,27 +62,31 @@ const fullWidthCaptionStyles = css`
 	}
 `;
 
+const isFullWidthImage = (format: Format): boolean =>
+	format.display === Display.Immersive ||
+	format.design === Design.Interview ||
+	format.design === Design.Media;
+
+const hasSeries = (format: Format): boolean =>
+	format.display === Display.Immersive || format.design === Design.Interview;
+
 const getStyles = (format: Format): SerializedStyles => {
-	switch (format.design) {
-		case Design.Interview:
-		case Design.Media:
-			return fullWidthStyles;
-		default:
-			return styles;
-	}
+	return isFullWidthImage(format) ? fullWidthStyles : styles;
 };
 
 const getCaptionStyles = (format: Format): SerializedStyles => {
-	return format.design === Design.Interview || format.design === Design.Media
-		? fullWidthCaptionStyles
-		: captionStyles;
+	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
+};
+
+const getImageSizes = (format: Format): Sizes => {
+	return isFullWidthImage(format) ? fullWidthSizes : sizes;
 };
 
 const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
 ): SerializedStyles => {
-	if (format.design === Design.Interview || format.design === Design.Media) {
+	if (isFullWidthImage(format)) {
 		return css`
 			display: block;
 			width: 100%;
@@ -123,12 +127,6 @@ const fullWidthSizes: Sizes = {
 	default: '100vw',
 };
 
-const getSizes = (format: Format): Sizes => {
-	return format.design === Design.Interview || format.design === Design.Media
-		? fullWidthSizes
-		: sizes;
-};
-
 const HeaderImage: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const {
@@ -146,7 +144,7 @@ const HeaderImage: FC<Props> = ({ item }) => {
 				<figure css={getStyles(format)} aria-labelledby={captionId}>
 					<Img
 						image={image}
-						sizes={getSizes(format)}
+						sizes={getImageSizes(format)}
 						format={item}
 						className={some(getImageStyle(image, format))}
 						supportsDarkMode
@@ -156,7 +154,7 @@ const HeaderImage: FC<Props> = ({ item }) => {
 							credit: none,
 						})}
 					/>
-					{item.design === Design.Interview && <Series item={item} />}
+					{hasSeries(format) && <Series item={item} />}
 					<HeaderImageCaption
 						caption={nativeCaption}
 						credit={credit}

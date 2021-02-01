@@ -6,7 +6,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
-import { Design, partition } from '@guardian/types';
+import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
@@ -87,12 +87,16 @@ const galleryWrapperStyles = css`
 	}
 `;
 
-const headerBackgroundStyles = (item: Format): SerializedStyles => css`
+const headerBackgroundStyles = (item: Item): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(item)};
 `;
 
 const getSectionStyles = (item: Format): SerializedStyles[] => {
-	if (item.design === Design.Interview || item.design === Design.Media) {
+	if (
+		item.design === Design.Interview ||
+		item.design === Design.Media ||
+		item.display === Display.Immersive
+	) {
 		return [];
 	}
 	return [headerStyles, articleStyles];

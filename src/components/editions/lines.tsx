@@ -2,7 +2,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
-import { from } from '@guardian/src-foundations/mq';
 import type { FC } from 'react';
 import { borderWidthStyles } from './styles';
 
@@ -10,10 +9,6 @@ import { borderWidthStyles } from './styles';
 
 const styles = css`
 	box-sizing: border-box;
-
-	${from.tablet} {
-		margin: 0 auto;
-	}
 
 	${borderWidthStyles}
 `;
