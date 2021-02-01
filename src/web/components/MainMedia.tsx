@@ -8,7 +8,7 @@ import { YoutubeBlockComponent } from '@root/src/web/components/elements/Youtube
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { Display, Design } from '@guardian/types';
+import { Display } from '@guardian/types';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
@@ -56,10 +56,8 @@ const immersiveWrapper = css`
 `;
 
 function renderElement(
-	display: Display,
-	design: Design,
 	element: CAPIElement,
-	pillar: Pillar,
+	format: Format,
 	i: number,
 	hideCaption?: boolean,
 	adTargeting?: AdTargeting,
@@ -70,11 +68,9 @@ function renderElement(
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
 			return (
 				<ImageComponent
-					display={display}
-					design={design}
 					key={i}
 					element={element}
-					pillar={pillar}
+					format={format}
 					hideCaption={hideCaption}
 					isMainMedia={true}
 					role={element.role}
@@ -89,10 +85,8 @@ function renderElement(
 					data-cy="main-media-youtube-atom"
 				>
 					<YoutubeBlockComponent
-						display={display}
-						design={design}
 						key={i}
-						pillar={pillar}
+						format={format}
 						hideCaption={hideCaption}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
@@ -112,24 +106,20 @@ function renderElement(
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
 				<YoutubeEmbedBlockComponent
-					pillar={pillar}
+					format={format}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}
 					caption={element.caption}
 					credit={element.credit}
 					title={element.title}
-					display={display}
-					design={design}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return (
 				<GuVideoBlockComponent
 					html={element.html}
-					pillar={pillar}
-					design={design}
-					display={display}
+					format={format}
 					credit={element.source}
 					caption={element.caption}
 				/>
@@ -148,36 +138,23 @@ function renderElement(
 }
 
 export const MainMedia: React.FC<{
-	display: Display;
-	design: Design;
+	format: Format;
 	elements: CAPIElement[];
-	pillar: Theme;
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
-}> = ({
-	display,
-	design,
-	elements,
-	pillar,
-	hideCaption,
-	adTargeting,
-	starRating,
-	host,
-}) => (
+}> = ({ elements, format, hideCaption, adTargeting, starRating, host }) => (
 	<div
 		className={cx(
 			mainMedia,
-			display === Display.Immersive ? immersiveWrapper : noGutters,
+			format.display === Display.Immersive ? immersiveWrapper : noGutters,
 		)}
 	>
 		{elements.map((element, i) =>
 			renderElement(
-				display,
-				design,
 				element,
-				pillar,
+				format,
 				i,
 				hideCaption,
 				adTargeting,

@@ -92,9 +92,7 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<CaptionBlockComponent
 							key={i}
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+							format={format}
 							captionText={element.captionText}
 							padCaption={element.padCaption}
 							credit={element.credit}
@@ -227,9 +225,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<GuVideoBlockComponent
 								html={element.html}
-								pillar={format.theme}
-								design={format.design}
-								display={format.display}
+								format={format}
 								credit={element.source}
 								caption={element.caption}
 							/>
@@ -243,11 +239,9 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<ImageBlockComponent
-								display={format.display}
-								design={format.design}
+								format={format}
 								key={i}
 								element={element}
-								pillar={format.theme}
 								title={element.title}
 							/>
 						</Figure>
@@ -276,15 +270,13 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MapEmbedBlockComponent
-								pillar={format.theme}
+								format={format}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.source}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -292,11 +284,10 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MultiImageBlockComponent
-								design={format.design}
+								format={format}
 								key={i}
 								images={element.images}
 								caption={element.caption}
-								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -368,10 +359,8 @@ export const ArticleRenderer: React.FC<{
 								height={element.height}
 								width={element.width}
 								title={element.title}
-								pillar={format.theme}
+								format={format}
 								caption={element.caption}
-								design={format.design}
-								display={format.display}
 								credit="Spotify"
 							/>
 						</Figure>
@@ -408,13 +397,11 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VideoFacebookBlockComponent
-								pillar={format.theme}
+								format={format}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
-								display={format.display}
-								design={format.design}
 								credit={element.caption}
 								title={element.caption}
 							/>
@@ -424,15 +411,13 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VimeoBlockComponent
-								pillar={format.theme}
+								format={format}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -440,15 +425,13 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<YoutubeEmbedBlockComponent
-								pillar={format.theme}
+								format={format}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -460,10 +443,8 @@ export const ArticleRenderer: React.FC<{
 							id={`youtube-block-${i}`}
 						>
 							<YoutubeBlockComponent
-								display={format.display}
-								design={format.design}
+								format={format}
 								key={i}
-								pillar={format.theme}
 								hideCaption={false}
 								// eslint-disable-next-line jsx-a11y/aria-role
 								role="inline"

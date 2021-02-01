@@ -58,10 +58,12 @@ export const StandardArticle = () => {
 		<Container>
 			<Figure role="inline">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 		</Container>
@@ -76,10 +78,12 @@ export const Immersive = () => {
 		<Container>
 			<Figure role="immersive">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'immersive' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 		</Container>
@@ -94,10 +98,12 @@ export const Showcase = () => {
 		<Container>
 			<Figure role="showcase">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'showcase' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 		</Container>
@@ -112,10 +118,12 @@ export const Thumbnail = () => {
 		<Container>
 			<Figure role="thumbnail">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'thumbnail' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 		</Container>
@@ -130,10 +138,12 @@ export const Supporting = () => {
 		<Container>
 			<Figure role="supporting">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'supporting' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 		</Container>
@@ -148,10 +158,12 @@ export const HideCaption = () => {
 		<Container>
 			<Figure role="inline">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					hideCaption={true}
 				/>
 			</Figure>
@@ -167,10 +179,12 @@ export const InlineTitle = () => {
 		<Container>
 			<Figure role="inline">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -191,10 +205,12 @@ export const InlineTitleMobile = () => {
 		<Container>
 			<Figure role="inline">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'inline' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -215,10 +231,12 @@ export const ImmersiveTitle = () => {
 		<Container>
 			<Figure role="immersive">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'immersive' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -235,10 +253,12 @@ export const ShowcaseTitle = () => {
 		<Container>
 			<Figure role="showcase">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'showcase' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -279,10 +299,12 @@ export const HalfWidth = () => {
 			</p>
 			<Figure role="halfWidth">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 			<p>
@@ -337,10 +359,12 @@ export const HalfWidthMobile = () => {
 			</p>
 			<Figure role="halfWidth">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 			<p>
@@ -395,10 +419,12 @@ export const HalfWidthWide = () => {
 			</p>
 			<Figure role="halfWidth">
 				<ImageBlockComponent
-					display={Display.Standard}
-					design={Design.Article}
 					element={{ ...image, role: 'halfWidth' }}
-					pillar={Pillar.News}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 				/>
 			</Figure>
 			<p>

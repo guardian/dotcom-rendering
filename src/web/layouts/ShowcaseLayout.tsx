@@ -366,10 +366,8 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="media">
 						<div className={mainMediaWrapper}>
 							<MainMedia
-								display={format.display}
-								design={format.design}
+								format={format}
 								elements={CAPI.mainMediaElements}
-								pillar={format.theme}
 								adTargeting={adTargeting}
 								starRating={
 									format.design === Design.Review &&

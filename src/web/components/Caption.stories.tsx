@@ -24,10 +24,12 @@ export default {
 export const Article = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Standard}
-			design={Design.Article}
 			captionText="This is how an Article caption looks"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 		/>
 	</Section>
 );
@@ -36,10 +38,12 @@ Article.story = { name: 'Article' };
 export const Analysis = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Standard}
-			design={Design.Analysis}
 			captionText="This is how an Analysis caption looks"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.News,
+			}}
 		/>
 	</Section>
 );
@@ -48,10 +52,12 @@ Analysis.story = { name: 'Analysis' };
 export const PhotoEssay = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Immersive}
-			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Immersive,
+				design: Design.PhotoEssay,
+				theme: Pillar.News,
+			}}
 		/>
 	</Section>
 );
@@ -60,10 +66,12 @@ PhotoEssay.story = { name: 'PhotoEssay' };
 export const PhotoEssayLimitedWidth = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Immersive}
-			design={Design.PhotoEssay}
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Immersive,
+				design: Design.PhotoEssay,
+				theme: Pillar.News,
+			}}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -73,10 +81,12 @@ PhotoEssayLimitedWidth.story = { name: 'PhotoEssay with width limited' };
 export const Credit = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Standard}
-			design={Design.Feature}
 			captionText="This is how a Feature caption looks with credit showing"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.News,
+			}}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
@@ -87,10 +97,12 @@ Credit.story = { name: 'with credit' };
 export const WidthLimited = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Standard}
-			design={Design.Article}
 			captionText="This is how a caption looks with width limited"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -100,10 +112,12 @@ WidthLimited.story = { name: 'with width limited' };
 export const Padded = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			display={Display.Standard}
-			design={Design.Article}
 			captionText="This is how a caption looks when padded"
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			padCaption={true}
 		/>
 	</Section>

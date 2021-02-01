@@ -3,29 +3,16 @@ import { css } from 'emotion';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-import { Display, Design } from '@guardian/types';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
-	pillar: Theme;
+	format: Format;
 	embedUrl?: string;
 	height: number;
 	width: number;
 	caption?: string;
 	credit?: string;
 	title?: string;
-	display: Display;
-	design: Design;
-}> = ({
-	embedUrl,
-	caption,
-	title,
-	pillar,
-	width,
-	height,
-	display,
-	design,
-	credit,
-}) => {
+}> = ({ embedUrl, caption, title, format, width, height, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -55,9 +42,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 			{caption && (
 				<Caption
 					captionText={caption}
-					design={design}
-					pillar={pillar}
-					display={display}
+					format={format}
 					credit={credit}
 				/>
 			)}

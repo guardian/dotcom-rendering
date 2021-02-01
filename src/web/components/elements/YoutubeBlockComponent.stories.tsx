@@ -46,14 +46,16 @@ export const Default = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				channelId="UCIRYBXDze5krPDzAEOxFGVA"
 				expired={false}
-				pillar={Pillar.News}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 			/>
@@ -78,14 +80,16 @@ export const Vertical = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				channelId="UCIRYBXDze5krPDzAEOxFGVA"
 				expired={false}
-				pillar={Pillar.News}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				height={259}
@@ -112,15 +116,17 @@ export const Expired = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				channelId="UCIRYBXDze5krPDzAEOxFGVA"
 				expired={true}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
-				pillar={Pillar.News}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				height={259}
@@ -147,8 +153,11 @@ export const WithOverlayImage = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -156,7 +165,6 @@ export const WithOverlayImage = () => {
 				expired={false}
 				duration={333}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
-				pillar={Pillar.News}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				height={259}
@@ -183,14 +191,16 @@ export const WithPosterImage = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				channelId="UCIRYBXDze5krPDzAEOxFGVA"
 				expired={false}
-				pillar={Pillar.News}
 				duration={333}
 				posterImage={[
 					{
@@ -245,15 +255,17 @@ export const WithPosterAndOverlayImage = () => {
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
 			<YoutubeBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				channelId="UCIRYBXDze5krPDzAEOxFGVA"
 				expired={false}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
-				pillar={Pillar.News}
 				duration={333}
 				posterImage={[
 					{

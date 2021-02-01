@@ -455,10 +455,8 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 						>
 							<MainMedia
-								display={format.display}
-								design={format.design}
+								format={format}
 								elements={CAPI.mainMediaElements}
-								pillar={format.theme}
 								adTargeting={adTargeting}
 								starRating={
 									format.design === Design.Review &&

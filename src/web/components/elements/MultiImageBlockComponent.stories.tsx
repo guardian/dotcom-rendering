@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
@@ -20,8 +20,11 @@ export const SingleImage = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={oneImage}
 			/>
 		</ContainerLayout>
@@ -35,8 +38,11 @@ export const SingleImageWithCaption = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={oneImage}
 				caption="This is the caption for a single image"
 			/>
@@ -51,8 +57,11 @@ export const SideBySide = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={twoImages}
 			/>
 		</ContainerLayout>
@@ -66,8 +75,11 @@ export const SideBySideWithCaption = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={twoImages}
 				caption="This is the caption for side by side"
 			/>
@@ -82,8 +94,11 @@ export const OneAboveTwo = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={threeImages}
 			/>
 		</ContainerLayout>
@@ -97,8 +112,11 @@ export const OneAboveTwoWithCaption = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={threeImages}
 				caption="This is the caption for one above two"
 			/>
@@ -113,8 +131,11 @@ export const GridOfFour = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={fourImages}
 			/>
 		</ContainerLayout>
@@ -128,8 +149,11 @@ export const GridOfFourWithCaption = () => {
 	return (
 		<ContainerLayout>
 			<MultiImageBlockComponent
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				images={fourImages}
 				caption="This is the caption for grid of four"
 			/>

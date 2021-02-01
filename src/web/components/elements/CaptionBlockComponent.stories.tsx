@@ -54,10 +54,12 @@ export const StandardArticle = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Standard}
-				design={Design.Article}
 				captionText="Caption text"
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 			/>
 		</Container>
 	);
@@ -70,10 +72,12 @@ export const PhotoEssay = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Immersive}
-				design={Design.PhotoEssay}
 				captionText="Caption text"
-				pillar={Pillar.Lifestyle}
+				format={{
+					display: Display.Immersive,
+					design: Design.PhotoEssay,
+					theme: Pillar.Lifestyle,
+				}}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -91,10 +95,12 @@ export const PhotoEssayHTML = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Immersive}
-				design={Design.PhotoEssay}
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
-				pillar={Pillar.Sport}
+				format={{
+					display: Display.Immersive,
+					design: Design.PhotoEssay,
+					theme: Pillar.Sport,
+				}}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -112,10 +118,12 @@ export const Padded = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Standard}
-				design={Design.Analysis}
 				captionText="Caption text"
-				pillar={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Analysis,
+					theme: Pillar.Culture,
+				}}
 				padCaption={true}
 				credit="Credit text"
 				displayCredit={false}
@@ -133,10 +141,12 @@ export const WidthLimited = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Standard}
-				design={Design.Review}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				pillar={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Review,
+					theme: Pillar.Culture,
+				}}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -154,10 +164,12 @@ export const Credited = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Standard}
-				design={Design.MatchReport}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				pillar={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.MatchReport,
+					theme: Pillar.Culture,
+				}}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={true}
@@ -175,10 +187,12 @@ export const Overlayed = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
-				display={Display.Showcase}
-				design={Design.Comment}
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				pillar={Pillar.Sport}
+				format={{
+					display: Display.Showcase,
+					design: Design.Comment,
+					theme: Pillar.Sport,
+				}}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}

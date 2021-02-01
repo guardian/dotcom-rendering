@@ -7,13 +7,11 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { Caption } from '@frontend/web/components/Caption';
 import { GridItem } from '@root/src/web/components/GridItem';
-import { Display, Design } from '@guardian/types';
 
 type Props = {
-	design: Design;
 	images: ImageBlockElement[];
+	format: Format;
 	caption?: string;
-	pillar: Theme;
 };
 
 const ieFallback = css`
@@ -95,10 +93,9 @@ const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const MultiImageBlockComponent = ({
-	design,
-	caption,
 	images,
-	pillar,
+	format,
+	caption,
 }: Props) => {
 	const imageCount = images.length;
 
@@ -116,19 +113,15 @@ export const MultiImageBlockComponent = ({
 					`}
 				>
 					<ImageComponent
-						display={Display.Standard}
-						design={design}
+						format={format}
 						element={images[0]}
-						pillar={pillar}
 						hideCaption={true}
 						role={images[0].role}
 					/>
 					{caption && (
 						<Caption
-							display={Display.Standard}
-							design={design}
+							format={format}
 							captionText={caption}
-							pillar={pillar}
 							shouldLimitWidth={false}
 						/>
 					)}
@@ -150,20 +143,16 @@ export const MultiImageBlockComponent = ({
 					<SideBySideGrid>
 						<GridItem area="first">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[0]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[0].role}
 							/>
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[1]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[1].role}
 							/>
@@ -171,10 +160,8 @@ export const MultiImageBlockComponent = ({
 					</SideBySideGrid>
 					{caption && (
 						<Caption
-							display={Display.Standard}
-							design={design}
 							captionText={caption}
-							pillar={pillar}
+							format={format}
 							shouldLimitWidth={false}
 						/>
 					)}
@@ -196,30 +183,24 @@ export const MultiImageBlockComponent = ({
 					<OneAboveTwoGrid>
 						<GridItem area="first">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[0]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[0].role}
 							/>
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[1]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[1].role}
 							/>
 						</GridItem>
 						<GridItem area="third">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[2]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[2].role}
 							/>
@@ -227,10 +208,8 @@ export const MultiImageBlockComponent = ({
 					</OneAboveTwoGrid>
 					{caption && (
 						<Caption
-							display={Display.Standard}
-							design={design}
 							captionText={caption}
-							pillar={pillar}
+							format={format}
 							shouldLimitWidth={false}
 						/>
 					)}
@@ -251,40 +230,32 @@ export const MultiImageBlockComponent = ({
 					<GridOfFour>
 						<GridItem area="first">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[0]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[0].role}
 							/>
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[1]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[1].role}
 							/>
 						</GridItem>
 						<GridItem area="third">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[2]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[2].role}
 							/>
 						</GridItem>
 						<GridItem area="forth">
 							<ImageComponent
-								display={Display.Standard}
-								design={Design.Article}
 								element={images[3]}
-								pillar={pillar}
+								format={format}
 								hideCaption={true}
 								role={images[3].role}
 							/>
@@ -292,10 +263,8 @@ export const MultiImageBlockComponent = ({
 					</GridOfFour>
 					{caption && (
 						<Caption
-							display={Display.Standard}
-							design={design}
 							captionText={caption}
-							pillar={pillar}
+							format={format}
 							shouldLimitWidth={false}
 						/>
 					)}

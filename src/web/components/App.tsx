@@ -387,9 +387,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={youtubeBlock.youtubeIndex}
 				>
 					<YoutubeBlockComponent
-						display={format.display}
-						design={design}
-						pillar={pillar}
+						format={format}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
@@ -414,9 +412,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={youtubeBlock.youtubeIndex}
 				>
 					<YoutubeBlockComponent
-						display={display}
-						design={design}
-						pillar={pillar}
+						format={format}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"

@@ -1,32 +1,24 @@
 import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
-import { Display, Design } from '@guardian/types';
-
 type Props = {
-	display: Display;
-	design: Design;
+	format: Format;
 	element: ImageBlockElement;
-	pillar: Theme;
 	hideCaption?: boolean;
 	title?: string;
 };
 
 export const ImageBlockComponent = ({
-	display,
-	design,
+	format,
 	element,
-	pillar,
 	hideCaption,
 	title,
 }: Props) => {
 	const { role } = element;
 	return (
 		<ImageComponent
-			display={display}
-			design={design}
 			element={element}
-			pillar={pillar}
+			format={format}
 			hideCaption={hideCaption}
 			role={role}
 			title={title}

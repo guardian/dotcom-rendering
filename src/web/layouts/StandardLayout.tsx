@@ -475,10 +475,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="media">
 						<div className={maxWidth}>
 							<MainMedia
-								display={format.display}
-								design={format.design}
+								format={format}
 								elements={CAPI.mainMediaElements}
-								pillar={format.theme}
 								adTargeting={adTargeting}
 								host={host}
 							/>

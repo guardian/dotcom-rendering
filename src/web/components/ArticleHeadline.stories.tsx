@@ -135,11 +135,13 @@ export const ShowcaseInterview = () => (
 					/>
 				</div>
 				<MainMedia
-					display={Display.Standard}
-					design={Design.Article}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -177,11 +179,13 @@ export const ShowcaseInterviewNobyline = () => (
 					/>
 				</div>
 				<MainMedia
-					display={Display.Standard}
-					design={Design.Article}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -219,11 +223,13 @@ export const Interview = () => (
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
-					display={Display.Standard}
-					design={Design.Article}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -259,11 +265,13 @@ export const InterviewNoByline = () => (
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
-					display={Display.Standard}
-					design={Design.Article}
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					}}
 					hideCaption={true}
 					elements={mainMediaElements}
-					pillar={Pillar.News}
 				/>
 			</ArticleContainer>
 		</Flex>

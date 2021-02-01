@@ -5,7 +5,6 @@ import { palette, space } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import { Display, Design } from '@guardian/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
@@ -16,12 +15,10 @@ type Props = {
 	id: string;
 	mediaTitle?: string;
 	altText?: string;
-	display: Display;
-	design: Design;
 	assetId: string;
 	channelId: string;
 	expired: boolean;
-	pillar: Theme;
+	format: Format;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -76,9 +73,7 @@ export const YoutubeBlockComponent = ({
 	assetId,
 	mediaTitle,
 	altText,
-	display,
-	design,
-	pillar,
+	format,
 	hideCaption,
 	overrideImage,
 	posterImage,
@@ -127,10 +122,8 @@ export const YoutubeBlockComponent = ({
 				</div>
 				{!hideCaption && (
 					<Caption
-						display={display}
-						design={design}
 						captionText={mediaTitle || ''}
-						pillar={pillar}
+						format={format}
 						displayCredit={false}
 						shouldLimitWidth={shouldLimitWidth}
 					/>
@@ -194,15 +187,13 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={pillar}
+				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (
 				<Caption
-					display={display}
-					design={design}
 					captionText={mediaTitle || ''}
-					pillar={pillar}
+					format={format}
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}
 				/>

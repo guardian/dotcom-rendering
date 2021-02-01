@@ -10,10 +10,8 @@ import TriangleIcon from '@frontend/static/icons/triangle.svg';
 import { Display, Design } from '@guardian/types';
 
 type Props = {
-	display: Display;
-	design: Design;
 	captionText?: string;
-	pillar: Theme;
+	format: Format;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -105,14 +103,14 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (pillar: Theme) => css`
-	fill: ${pillarPalette[pillar].main};
+const iconStyle = (format: Format) => css`
+	fill: ${pillarPalette[format.theme].main};
 	padding-right: 3px;
 `;
 
-const captionLink = (pillar: Theme) => css`
+const captionLink = (format: Format) => css`
 	a {
-		color: ${pillarPalette[pillar].main};
+		color: ${pillarPalette[format.theme].main};
 		text-decoration: none;
 	}
 	a:hover {
@@ -124,10 +122,8 @@ const captionLink = (pillar: Theme) => css`
 `;
 
 export const Caption = ({
-	display,
-	design,
 	captionText,
-	pillar,
+	format,
 	padCaption = false,
 	credit,
 	displayCredit = true,
@@ -139,14 +135,14 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
-	switch (design) {
+	switch (format.design) {
 		case Design.PhotoEssay:
 			return (
 				<figcaption
 					className={cx(
 						css`
 							${textSans.xsmall({ lineHeight: 'tight' })};
-							color: ${pillarPalette[pillar].dark};
+							color: ${pillarPalette[format.theme].dark};
 							width: 100%;
 							margin-top: ${space[3]}px;
 							li:not(:first-child) {
@@ -155,7 +151,7 @@ export const Caption = ({
 							li {
 								padding-top: ${space[2]}px;
 								border-top: 1px solid
-									${pillarPalette[pillar].dark};
+									${pillarPalette[format.theme].dark};
 							}
 						`,
 						bottomMargin,
@@ -166,7 +162,7 @@ export const Caption = ({
 				>
 					{captionText && (
 						<span
-							className={captionLink(pillar)}
+							className={captionLink(format)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
@@ -192,8 +188,8 @@ export const Caption = ({
 				>
 					<span
 						className={cx(
-							iconStyle(pillar),
-							display === Display.Immersive &&
+							iconStyle(format),
+							format.display === Display.Immersive &&
 								hideIconBelowLeftCol,
 						)}
 					>
@@ -201,7 +197,7 @@ export const Caption = ({
 					</span>
 					{captionText && (
 						<span
-							className={captionLink(pillar)}
+							className={captionLink(format)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
