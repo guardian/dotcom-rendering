@@ -24,6 +24,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const pillar: Pillar = decidePillar({
 		pillar: CAPI.pillar,
 		design,
+		isSpecialReport: CAPI.isSpecialReport,
 	});
 	const format: Format = {
 		display,

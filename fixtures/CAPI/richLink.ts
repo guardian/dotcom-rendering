@@ -2839,4 +2839,5 @@ export const richLink: CAPIType = {
 	},
 	sectionLabel: 'Eminem',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	isSpecialReport: false,
 };

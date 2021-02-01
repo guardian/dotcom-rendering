@@ -5478,4 +5478,5 @@ export const Recipe: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Food',
+	isSpecialReport: false,
 };

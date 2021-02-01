@@ -3036,4 +3036,5 @@ export const GuardianView: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Trump impeachment',
+	isSpecialReport: false,
 };
