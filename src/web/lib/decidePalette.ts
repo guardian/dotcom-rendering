@@ -126,6 +126,11 @@ const backgroundAvatar = (format: Format): string => {
 	}
 };
 
+const fillCommentCount = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -140,6 +145,9 @@ export const decidePalette = (format: Format): Palette => {
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
+		},
+		fill: {
+			commentCount: fillCommentCount(format),
 		},
 	};
 };

@@ -2,9 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
-import { Pillar } from '@guardian/types';
+import { Pillar, Design, Display } from '@guardian/types';
 
 import { sharecount } from '@root/fixtures/article';
+import { decidePalette } from '../lib/decidePalette';
 
 import { Counts } from './Counts';
 import { ShareCount } from './ShareCount';
@@ -56,7 +57,11 @@ export const Both = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						pillar={Pillar.News}
+						palette={decidePalette({
+							theme: Pillar.News,
+							design: Design.Article,
+							display: Display.Standard,
+						})}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -92,7 +97,11 @@ export const ShareOnly = () => {
 					<CommentCount
 						isCommentable={false}
 						commentCount={239}
-						pillar={Pillar.News}
+						palette={decidePalette({
+							theme: Pillar.News,
+							design: Design.Article,
+							display: Display.Standard,
+						})}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -133,7 +142,11 @@ export const CommentOnly = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						pillar={Pillar.News}
+						palette={decidePalette({
+							theme: Pillar.News,
+							design: Design.Article,
+							display: Display.Standard,
+						})}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -174,7 +187,11 @@ export const ZeroComments = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={0}
-						pillar={Pillar.News}
+						palette={decidePalette({
+							theme: Pillar.News,
+							design: Design.Article,
+							display: Display.Standard,
+						})}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -215,7 +232,11 @@ export const BigNumbers = () => {
 					<CommentCount
 						isCommentable={true}
 						commentCount={4320}
-						pillar={Pillar.News}
+						palette={decidePalette({
+							theme: Pillar.News,
+							design: Design.Article,
+							display: Display.Standard,
+						})}
 						setIsExpanded={() => {}}
 					/>
 				</div>

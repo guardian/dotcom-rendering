@@ -23,6 +23,7 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	pillar: Theme;
+	palette: Palette;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
@@ -60,6 +61,7 @@ export const Discussion = ({
 	shortUrlId,
 	isCommentable,
 	pillar,
+	palette,
 	user,
 	discussionD2Uid,
 	discussionApiClientHeader,
@@ -144,7 +146,7 @@ export const Discussion = ({
 					<CommentCount
 						isCommentable={isCommentable}
 						commentCount={commentCount}
-						pillar={pillar}
+						palette={palette}
 						setIsExpanded={setIsExpanded}
 					/>
 				</Portal>
