@@ -19,7 +19,11 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { borderWidthStyles, wideArticleMargin, articleWidthStyles } from './styles';
+import {
+	articleWidthStyles,
+	borderWidthStyles,
+	wideArticleMargin,
+} from './styles';
 
 // ----- Styles ----- //
 
