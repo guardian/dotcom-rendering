@@ -3888,4 +3888,5 @@ export const Article: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Climate change',
+	isSpecialReport: false,
 };

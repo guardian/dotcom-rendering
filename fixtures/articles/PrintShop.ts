@@ -2587,4 +2587,5 @@ export const PrintShop: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'England',
+	isSpecialReport: false,
 };
