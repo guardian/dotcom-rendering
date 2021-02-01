@@ -16,7 +16,6 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
-import Series from './series';
 import { tabletImageWidth, wideImageWidth } from './styles';
 
 // ----- Component ----- //
@@ -80,9 +79,6 @@ const isFullWidthImage = (format: Format): boolean =>
 	format.display === Display.Immersive ||
 	format.design === Design.Interview ||
 	format.design === Design.Media;
-
-const hasSeries = (format: Format): boolean =>
-	format.display === Display.Immersive || format.design === Design.Interview;
 
 const getStyles = (format: Format): SerializedStyles => {
 	return isFullWidthImage(format) ? fullWidthStyles : styles;
@@ -168,7 +164,6 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 							credit: none,
 						})}
 					/>
-					{hasSeries(format) && <Series item={item} />}
 					<HeaderImageCaption
 						caption={nativeCaption}
 						credit={credit}

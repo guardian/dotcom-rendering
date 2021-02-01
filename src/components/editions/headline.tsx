@@ -18,6 +18,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
+import Series from './series';
 import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
@@ -87,7 +88,7 @@ const interviewStyles = css`
 const immersiveStyles = css`
 	border: 0;
 	margin-left: ${remSpace[2]};
-	padding-top: ${remSpace[1]};
+	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[6]};
 
 	${from.tablet} {
@@ -117,7 +118,7 @@ const interviewFontStyles = css`
 	background-color: ${neutral[0]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
-	padding-top: ${remSpace[1]};
+	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[1]};
 	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]},
 		${remSpace[3]} 0 0 ${neutral[0]};
@@ -130,6 +131,17 @@ const galleryStyles = css`
 	line-height: 1.2;
 	padding-bottom: ${remSpace[6]};
 	border: 0;
+`;
+
+const headlineStyles = css`
+	position: relative;
+`;
+
+const seriesStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
@@ -195,12 +207,24 @@ const getHeadlineText = (item: Item): JSX.Element | string => {
 	return item.headline;
 };
 
+const hasSeries = (format: Format): boolean =>
+	format.display === Display.Immersive || format.design === Design.Interview;
+
 const Headline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	return (
-		<h1 css={getStyles(format, kickerColor)}>{getHeadlineText(item)}</h1>
+		<div css={headlineStyles}>
+			{hasSeries(format) && (
+				<div css={seriesStyles}>
+					<Series item={item} />
+				</div>
+			)}
+			<h1 css={getStyles(format, kickerColor)}>
+				{getHeadlineText(item)}
+			</h1>
+		</div>
 	);
 };
 
