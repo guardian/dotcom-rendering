@@ -20,17 +20,17 @@ module.exports = () => ({
         require('webpack-node-externals')({
             allowlist: [/^@guardian/],
         }),
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('manifest.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('manifest.legacy.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('loadable-manifest-browser.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
