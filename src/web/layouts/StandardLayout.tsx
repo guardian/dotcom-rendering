@@ -534,6 +534,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 								<SubMeta
 									pillar={format.theme}
+									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
