@@ -2864,4 +2864,5 @@ export const MatchReport: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Six Nations 2020',
+	isSpecialReport: false,
 };

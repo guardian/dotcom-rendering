@@ -296,6 +296,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
+		isSpecialReport: CAPI.isSpecialReport,
 	});
 
 	const format: Format = {

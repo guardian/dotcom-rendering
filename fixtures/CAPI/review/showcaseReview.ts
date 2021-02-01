@@ -2731,4 +2731,5 @@ export const showcaseReviewCAPI: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'TV comedy',
+	isSpecialReport: false,
 };

@@ -4,25 +4,16 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 
-import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
 import { Badge } from '@frontend/web/components/Badge';
-import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { until } from '@guardian/src-foundations/mq';
 
 const subMetaLabel = css`
 	${textSans.xsmall()};
 	display: block;
 	color: ${neutral[60]};
-`;
-
-const subMetaSharingIcons = css`
-	:after {
-		content: '';
-		display: block;
-		clear: left;
-	}
 `;
 
 const badgeWrapper = css`
@@ -60,7 +51,6 @@ export const SubMeta = ({
 }: Props) => {
 	const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
 	const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
-	const sharingUrls = getSharingUrls(pageId, webTitle);
 	return (
 		<div data-print-layout="hide" className={bottomPadding}>
 			{badge && (
@@ -89,9 +79,9 @@ export const SubMeta = ({
 				/>
 			)}
 			{showBottomSocialButtons && (
-				<SharingIcons
-					className={subMetaSharingIcons}
-					sharingUrls={sharingUrls}
+				<ShareIcons
+					pageId={pageId}
+					webTitle={webTitle}
 					pillar={pillar}
 					displayIcons={[
 						'facebook',

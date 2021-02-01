@@ -3027,4 +3027,5 @@ export const Analysis: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Ireland',
+	isSpecialReport: false,
 };

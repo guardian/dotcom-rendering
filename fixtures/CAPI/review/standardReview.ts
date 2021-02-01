@@ -2408,4 +2408,5 @@ export const standardReviewCAPI: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Theatre',
+	isSpecialReport: false,
 };

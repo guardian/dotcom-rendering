@@ -41,7 +41,23 @@ type Pillar = Theme;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DesignTypesObj = { [key in Design]: any };
 
-type Palette = { [key: string]: any };
+type Colour = string;
+
+type Palette = {
+	text: {
+		headline: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+		byline: Colour;
+		twitterHandle: Colour;
+	},
+	background: {
+		article: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+		avatar: Colour;
+	},
+};
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
@@ -312,6 +328,7 @@ interface CAPIType {
 	pageType: PageTypeType;
 
 	matchUrl?: string;
+	isSpecialReport: boolean;
 }
 
 type CAPIBrowserType = {
@@ -347,6 +364,7 @@ type CAPIBrowserType = {
 	contributionsServiceUrl: string;
 	isImmersive: boolean;
 	isPhotoEssay: boolean;
+	isSpecialReport: boolean;
 	matchUrl?: string;
 	callouts: CalloutBlockElement[];
 	qandaAtoms: QABlockElement[];

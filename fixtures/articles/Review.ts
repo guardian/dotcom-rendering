@@ -2731,4 +2731,5 @@ export const Review: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'TV comedy',
+	isSpecialReport: false,
 };
