@@ -59,7 +59,8 @@ type Palette = {
 	},
 	fill: {
 		commentCount: Colour;
-	}
+		shareIcon: Colour;
+	},
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

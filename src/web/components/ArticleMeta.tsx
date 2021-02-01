@@ -279,7 +279,7 @@ export const ArticleMeta = ({
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
-							pillar={format.theme}
+							palette={palette}
 							displayIcons={['facebook', 'twitter', 'email']}
 						/>
 					</div>

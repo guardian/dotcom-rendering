@@ -131,6 +131,11 @@ const fillCommentCount = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillShareIcon = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -148,6 +153,7 @@ export const decidePalette = (format: Format): Palette => {
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
+			shareIcon: fillShareIcon(format),
 		},
 	};
 };

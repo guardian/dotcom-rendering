@@ -3,9 +3,6 @@ import { css } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
-import type { Theme } from '@guardian/types';
-
-import { pillarPalette } from '@root/src/lib/pillars';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
@@ -31,7 +28,7 @@ const liStyles = css`
 	cursor: pointer;
 `;
 
-const iconStyles = (pillar: Theme) => css`
+const iconStyles = (palette: Palette) => css`
 	border: 1px solid ${border.secondary};
 	white-space: nowrap;
 	overflow: hidden;
@@ -45,7 +42,7 @@ const iconStyles = (pillar: Theme) => css`
 	vertical-align: middle;
 	position: relative;
 	box-sizing: content-box;
-	fill: ${pillarPalette[pillar].main};
+	fill: ${palette.fill.shareIcon};
 
 	svg {
 		height: 88%;
@@ -59,8 +56,8 @@ const iconStyles = (pillar: Theme) => css`
 	}
 
 	:hover {
-		background-color: ${pillarPalette[pillar].main};
-		border-color: ${pillarPalette[pillar].main};
+		background-color: ${palette.fill.shareIcon};
+		border-color: ${palette.fill.shareIcon};
 		fill: white;
 	}
 `;
@@ -69,8 +66,8 @@ export const ShareIcons: React.FC<{
 	pageId: string;
 	webTitle: string;
 	displayIcons: SharePlatform[];
-	pillar: Theme;
-}> = ({ pageId, webTitle, displayIcons, pillar }) => {
+	palette: Palette;
+}> = ({ pageId, webTitle, displayIcons, palette }) => {
 	return (
 		<ul className={ulStyles}>
 			{displayIcons.includes('facebook') && (
@@ -81,7 +78,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Facebook"
 						target="_blank"
 					>
-						<span className={iconStyles(pillar)}>
+						<span className={iconStyles(palette)}>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -99,7 +96,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Twitter"
 						target="_blank"
 					>
-						<span className={iconStyles(pillar)}>
+						<span className={iconStyles(palette)}>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -114,7 +111,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share via Email"
 						target="_blank"
 					>
-						<span className={iconStyles(pillar)}>
+						<span className={iconStyles(palette)}>
 							<EmailIcon />
 						</span>
 					</a>
@@ -129,7 +126,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on LinkedIn"
 						target="_blank"
 					>
-						<span className={iconStyles(pillar)}>
+						<span className={iconStyles(palette)}>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -144,7 +141,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Pinterest"
 						target="_blank"
 					>
-						<span className={iconStyles(pillar)}>
+						<span className={iconStyles(palette)}>
 							<PinterestIcon />
 						</span>
 					</a>
@@ -160,7 +157,7 @@ export const ShareIcons: React.FC<{
 							aria-label="Share on WhatsApp"
 							target="_blank"
 						>
-							<span className={iconStyles(pillar)}>
+							<span className={iconStyles(palette)}>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -177,7 +174,7 @@ export const ShareIcons: React.FC<{
 							aria-label="Share on Messanger>"
 							target="_blank"
 						>
-							<span className={iconStyles(pillar)}>
+							<span className={iconStyles(palette)}>
 								<MessengerIcon />
 							</span>
 						</a>

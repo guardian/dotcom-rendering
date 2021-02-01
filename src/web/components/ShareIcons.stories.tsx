@@ -1,5 +1,8 @@
-import { Pillar } from '@guardian/types';
 import React from 'react';
+
+import { Design, Display, Pillar } from '@guardian/types';
+
+import { decidePalette } from '../lib/decidePalette';
 
 import { ShareIcons } from './ShareIcons';
 
@@ -22,7 +25,11 @@ export const All = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			pillar={Pillar.News}
+			palette={decidePalette({
+				theme: Pillar.News,
+				design: Design.Article,
+				display: Display.Standard,
+			})}
 		/>
 	);
 };

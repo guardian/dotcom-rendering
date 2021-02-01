@@ -30,6 +30,7 @@ const bottomPadding = css`
 
 type Props = {
 	pillar: Theme;
+	palette: Palette;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;
@@ -41,6 +42,7 @@ type Props = {
 
 export const SubMeta = ({
 	pillar,
+	palette,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
 	pageId,
@@ -82,7 +84,7 @@ export const SubMeta = ({
 				<ShareIcons
 					pageId={pageId}
 					webTitle={webTitle}
-					pillar={pillar}
+					palette={palette}
 					displayIcons={[
 						'facebook',
 						'twitter',
