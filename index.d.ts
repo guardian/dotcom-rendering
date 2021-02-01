@@ -405,7 +405,7 @@ interface KickerType {
 	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
 }
 
-type ImagePositionType = 'left' | 'top' | 'right';
+type ImagePositionType = 'left' | 'top' | 'right' | 'full';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -431,6 +431,7 @@ interface CardType {
     imageUrl?: string;
     imagePosition?: ImagePositionType;
     imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+    isFullCardImage?: boolean // For use in Carousel until we decide a `Display.Immersive` convention
     standfirst?: string;
     avatar?: AvatarType;
     showClock?: boolean;
@@ -446,7 +447,7 @@ interface CardType {
     minWidthInPixels?: number;
 }
 
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'immersive';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 type HeadlineLink = {
@@ -479,7 +480,8 @@ interface CardHeadlineType {
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	byline?: string;
-	showByline?: boolean;
+    showByline?: boolean;
+    isFullCardImage?: boolean; // Used for arousel AB test
 }
 
 type UserBadge = {
@@ -546,7 +548,8 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-	pillar: Theme;
+    pillar: Theme;
+    isFullCardImage?: boolean
 };
 
 type OphanComponentName =

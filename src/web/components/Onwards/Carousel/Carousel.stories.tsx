@@ -2,11 +2,21 @@ import React from 'react';
 
 import { Design, Pillar } from '@guardian/types';
 
+import { breakpoints } from '@guardian/src-foundations/mq';
 import { Carousel } from './Carousel';
 
 export default {
 	component: Carousel,
 	title: 'Components/Carousel',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+			],
+		},
+	},
 };
 
 const trails: TrailType[] = [
@@ -205,3 +215,25 @@ export const Headlines = () => (
 );
 
 Headlines.story = 'Headlines carousel';
+
+export const Immersive = () => (
+	<>
+		<Carousel
+			heading="Headlines"
+			trails={trails}
+			ophanComponentName="curated-content"
+			pillar={Pillar.News}
+			isFullCardImage={true}
+		/>
+
+		<Carousel
+			heading="Sport"
+			trails={trails}
+			ophanComponentName="curated-content"
+			pillar={Pillar.Sport}
+			isFullCardImage={true}
+		/>
+	</>
+);
+
+Immersive.story = 'Immersive carousel';

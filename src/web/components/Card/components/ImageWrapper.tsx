@@ -1,42 +1,65 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
-import { until } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	children: React.ReactNode;
 	alwaysVertical?: boolean;
 	percentage?: CardPercentageType;
+	isFullCardImage?: boolean;
 };
+
+const cardHeight = css`
+	${from.tablet} {
+		height: 274px;
+		width: 459px;
+	}
+
+	${until.tablet} {
+		height: 203px;
+		width: 340px;
+	}
+
+	${until.phablet} {
+		height: 171px;
+		width: 286px;
+	}
+`;
 
 export const ImageWrapper = ({
 	children,
 	percentage,
 	alwaysVertical,
+	isFullCardImage,
 }: Props) => {
 	return (
 		<div
-			className={css`
-				/* position relative is required here to bound the image overlay */
-				position: relative;
-
-				flex-basis: ${percentage && percentage};
-				${!alwaysVertical && until.tablet} {
-					/* Below tablet, we fix the size of the image and add a margin
+			className={cx(
+				isFullCardImage && cardHeight,
+				css`
+					/* position relative is required here to bound the image overlay */
+					position: relative;
+					flex-basis: ${percentage && percentage};
+					${!alwaysVertical && until.tablet} {
+						/* Below tablet, we fix the size of the image and add a margin
                        around it. The corresponding content flex grows to fill the space */
-					margin-left: 6px;
-					width: 119px;
-					flex-shrink: 0;
-					margin-top: 6px;
-					margin-bottom: 6px;
-					flex-basis: unset;
-				}
+						margin-left: 6px;
+						width: 119px;
+						flex-shrink: 0;
+						margin-top: 6px;
+						margin-bottom: 6px;
+						flex-basis: unset;
+					}
 
-				img {
-					width: 100%;
-					display: block;
-				}
-			`}
+					img {
+						width: 100%;
+						height: 100%;
+						display: block;
+						object-fit: ${isFullCardImage && 'cover'};
+					}
+				`,
+			)}
 		>
 			<>
 				{children}
