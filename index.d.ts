@@ -57,6 +57,9 @@ type Palette = {
 		sectionTitle: Colour;
 		avatar: Colour;
 	},
+	fill: {
+		commentCount: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

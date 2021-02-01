@@ -20,8 +20,7 @@ const containerStyles = (palette: Palette) => css`
 	flex-direction: column;
 	${textSans.medium()};
 	font-weight: bold;
-	/* color: ${palette.fill.commentCount}; */
-	color: black;
+	color: ${palette.fill.commentCount};
 	padding-top: 5px;
 `;
 
@@ -37,8 +36,7 @@ const iconContainerStyles = css`
 `;
 
 const iconStyles = (palette: Palette) => css`
-	/* fill: ${palette.fill.commentCount}; */
-	fill: black;
+	fill: ${palette.fill.commentCount};
 `;
 
 const longStyles = css`
