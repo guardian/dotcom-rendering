@@ -299,7 +299,7 @@ interface CAPIType {
 	linkedData: object[];
 	config: ConfigType;
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesignType but need to allow the type here before then
+	// in decideDesign but need to allow the type here before then
 	designType: CAPIDesign;
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
@@ -333,7 +333,7 @@ interface CAPIType {
 
 type CAPIBrowserType = {
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesignType but need to allow the type here before then
+	// in decideDesign but need to allow the type here before then
 	designType: CAPIDesign;
 	pillar: CAPIPillar;
 	config: ConfigTypeBrowser;

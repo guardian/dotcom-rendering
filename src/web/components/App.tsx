@@ -32,9 +32,9 @@ import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -292,8 +292,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
-	const pillar = decidePillar({
+	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
+	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
 		isSpecialReport: CAPI.isSpecialReport,
