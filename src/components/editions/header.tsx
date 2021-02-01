@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
+import { neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -18,8 +19,13 @@ import {
 	interviewBackgroundColour,
 	sidePadding,
 	tabletArticleMargin,
+	tabletContentWidth,
 	wideArticleMargin,
+	wideContentWidth,
 } from './styles';
+
+const wide = wideContentWidth + 12;
+const tablet = tabletContentWidth + 12;
 
 // ----- Component ----- //
 
@@ -29,6 +35,46 @@ interface HeaderProps {
 
 const headerStyles = css`
 	${sidePadding}
+`;
+
+const galleryInnerHeaderStyles = css`
+	${sidePadding}
+	${from.tablet} {
+		padding-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		padding-left: ${wideArticleMargin}px;
+	}
+`;
+
+const galleryHeaderStyles = css`
+	border-bottom: 1px solid ${neutral[100]};
+	${from.tablet} {
+		border: none;
+	}
+`;
+
+const galleryLinesStyles = css`
+	${from.tablet} {
+		margin-left: 0;
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
+
+const galleryHeaderBorderStyles = css`
+	${from.tablet} {
+		border-bottom: 1px solid ${neutral[100]};
+		border-right: 1px solid ${neutral[100]};
+		box-sizing: border-box;
+		width: ${tablet}px;
+		${from.wide} {
+			width: ${wide}px;
+		}
+	}
 `;
 
 const interviewHeaderStyles = (item: Format): SerializedStyles => css`
@@ -96,6 +142,20 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
+const GalleryHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={galleryHeaderStyles}>
+		<HeaderImage item={item} />
+		<div css={galleryInnerHeaderStyles}>
+			<Headline item={item} />
+			<div css={galleryHeaderBorderStyles}>
+				<Standfirst item={item} />
+				<Lines className={galleryLinesStyles} />
+				<Byline item={item} shareIcon />
+			</div>
+		</div>
+	</header>
+);
+
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	if (item.design === Design.Interview) {
 		return <InterviewHeader item={item} />;
@@ -105,6 +165,8 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		return <AnalysisHeader item={item} />;
 	} else if (item.design === Design.Comment) {
 		return <CommentHeader item={item} />;
+	} else if (item.design === Design.Media) {
+		return <GalleryHeader item={item} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}

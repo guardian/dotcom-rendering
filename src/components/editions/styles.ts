@@ -51,6 +51,10 @@ export const headerBackgroundColour = (format: Format): Colour => {
 		return Palette.neutral[97];
 	}
 
+	if (format.design === Design.Media) {
+		return Palette.neutral[0];
+	}
+
 	if (format.design === Design.Comment) {
 		switch (format.theme) {
 			case Pillar.Culture:
