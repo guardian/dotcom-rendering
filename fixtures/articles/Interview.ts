@@ -6448,4 +6448,5 @@ export const Interview: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Models',
+	isSpecialReport: false,
 };

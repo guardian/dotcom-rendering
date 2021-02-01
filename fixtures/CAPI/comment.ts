@@ -2623,4 +2623,5 @@ export const comment: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Conservatives',
+	isSpecialReport: false,
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design, Pillar, Display } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -10,6 +11,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { Flex } from '@root/src/web/components/Flex';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;
@@ -98,7 +100,12 @@ export const SecondTierItem = ({
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pilarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
+	const pillarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
+	const formatToUse: Format = {
+		design,
+		display: Display.Standard,
+		theme: pillarToUse,
+	};
 
 	return (
 		<div className={itemStyles(showRightBorder)}>
@@ -114,7 +121,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								design={design}
 								headlineText={headlineText}
-								pillar={pilarToUse}
+								pillar={formatToUse.theme}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -122,7 +129,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								design={design}
 								headlineText={headlineText}
-								pillar={pilarToUse}
+								pillar={formatToUse.theme}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -140,7 +147,7 @@ export const SecondTierItem = ({
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""
-										pillar={pilarToUse}
+										palette={decidePalette(formatToUse)}
 									/>
 								</div>
 							</div>

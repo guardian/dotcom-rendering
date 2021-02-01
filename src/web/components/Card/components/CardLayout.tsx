@@ -1,11 +1,13 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	children: React.ReactNode;
 	imagePosition?: ImagePositionType;
+	alwaysVertical?: boolean;
+	minWidthInPixels?: number;
 };
 
 const decideDirection = (imagePosition?: ImagePositionType) => {
@@ -22,16 +24,50 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 	}
 };
 
-export const CardLayout = ({ children, imagePosition }: Props) => (
+const decideWidth = (minWidthInPixels?: number) => {
+	if (minWidthInPixels) {
+		return css`
+			min-width: ${minWidthInPixels}px;
+		`;
+	}
+	return css`
+		width: 100%;
+	`;
+};
+
+const decidePosition = (
+	imagePosition?: ImagePositionType,
+	alwaysVertical?: boolean,
+) => {
+	const direction = decideDirection(imagePosition);
+	if (alwaysVertical) {
+		return css`
+			flex-direction: ${direction};
+		`;
+	}
+	return css`
+		flex-direction: ${direction};
+		/* Force horizontal view for mobile cards */
+		${until.tablet} {
+			flex-direction: row;
+		}
+	`;
+};
+
+export const CardLayout = ({
+	children,
+	imagePosition,
+	alwaysVertical,
+	minWidthInPixels,
+}: Props) => (
 	<div
-		className={css`
-			display: flex;
-			flex-direction: ${decideDirection(imagePosition)};
-			${until.tablet} {
-				flex-direction: row;
-			}
-			width: 100%;
-		`}
+		className={cx(
+			css`
+				display: flex;
+			`,
+			decideWidth(minWidthInPixels),
+			decidePosition(imagePosition, alwaysVertical),
+		)}
 	>
 		{children}
 	</div>

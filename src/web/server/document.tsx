@@ -110,8 +110,18 @@ export const document = ({ data }: Props) => {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 			// @ts-ignore
 			.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
-			.map((script: { chunk: string }) => ({
-				src: `${script.chunk}.js`,
+			// Pre assets returns an array of objects structured as:
+			// {
+			//     filename: 'elements-RichLinkComponent.js',
+			//     scriptType: 'script',
+			//     chunk: 'elements-RichLinkComponent',
+			//     url: '/elements-RichLinkComponent.js',
+			//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
+			//     type: 'mainAsset',
+			//     linkType: 'preload'
+			// }
+			.map((script: { url: string }) => ({
+				src: `${script.url}`,
 				module: true,
 			})),
 	);

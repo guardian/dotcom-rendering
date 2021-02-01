@@ -5,7 +5,6 @@ import { css } from 'emotion';
 import { border, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
-import { Link } from '@guardian/src-link';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
@@ -31,6 +30,7 @@ const Container = ({
 		className={css`
 			width: ${width}px;
 			height: ${height}px;
+			background: ${background.secondary};
 		`}
 	>
 		{children}
@@ -40,7 +40,7 @@ const Container = ({
 const Outer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
-			background: ${background.primary};
+			background: ${background.secondary};
 			border: 1px solid ${border.primary};
 			height: 100%;
 		`}
@@ -121,17 +121,19 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 					<Inner>
 						<Top>
 							<Headline width={width}>
-								The colourful beak is very large
+								Allow content provided by a third party?
 							</Headline>
 							<Body width={width}>
-								Quaerat quaerat ex nihil autem consequatur.
-								Velit rerum at ad dignissimos aut excepturi
-								ratione excepturi. Quaerat ipsam natus totam et
-								aut distinctio eaque voluptatem.
-								<Link href="https://theguardian.com">
-									{' '}
-									Quaerat ipsam
-								</Link>
+								<p>
+									This article includes content hosted on
+									other.com. We ask for your permission before
+									anything is loaded, as the provider may be
+									using cookies and other technologies.
+								</p>
+								<p>
+									To view this content, click &apos;Allow and
+									continue&apos;.
+								</p>
 							</Body>
 						</Top>
 						<Bottom>
@@ -142,7 +144,7 @@ export const ClickToView = ({ children, width, height, onAccept }: Props) => {
 								iconSide="left"
 								onClick={() => handleClick()}
 							>
-								Click to view
+								Allow and continue
 							</Button>
 						</Bottom>
 					</Inner>

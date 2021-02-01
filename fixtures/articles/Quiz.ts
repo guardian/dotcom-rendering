@@ -3104,4 +3104,5 @@ export const Quiz: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Life and style',
+	isSpecialReport: false,
 };

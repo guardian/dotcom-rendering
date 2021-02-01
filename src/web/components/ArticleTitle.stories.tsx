@@ -1,7 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
+
+import { decidePalette } from '../lib/decidePalette';
+
 import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -59,9 +62,16 @@ export const defaultStory = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
-				display={Display.Standard}
-				pillar={Pillar.Sport}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				})}
 			/>
 		</Container>
 	);
@@ -74,9 +84,16 @@ export const beyondTheBlade = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...beyondTheBladeCAPI}
-				display={Display.Standard}
-				pillar={Pillar.News}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				})}
 			/>
 		</Container>
 	);
@@ -94,9 +111,16 @@ export const immersiveComment = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
-				display={Display.Immersive}
-				pillar={Pillar.Sport}
-				design={Design.Comment}
+				format={{
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Comment,
+				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Comment,
+				})}
 			/>
 		</div>
 	);
@@ -114,9 +138,16 @@ export const immersiveCommentTag = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Immersive}
-				pillar={Pillar.Sport}
-				design={Design.Comment}
+				format={{
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Comment,
+				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Comment,
+				})}
 				tags={[
 					{
 						id: '',
@@ -136,9 +167,16 @@ export const ImmersiveSeriesTag = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Immersive}
-				pillar={Pillar.Sport}
-				design={Design.Review}
+				format={{
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Review,
+				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					theme: Pillar.Sport,
+					design: Design.Review,
+				})}
 				tags={[
 					{
 						id: '',
@@ -159,9 +197,16 @@ export const ArticleBlogTag = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Standard}
-				pillar={Pillar.Sport}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				})}
 				tags={[
 					{
 						id: '',
@@ -181,9 +226,16 @@ export const ArticleOpinionTag = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Standard}
-				pillar={Pillar.Sport}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				})}
 				tags={[
 					{
 						id: '',
@@ -203,9 +255,16 @@ export const ArticleSeriesTag = () => {
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Standard}
-				pillar={Pillar.Sport}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.Sport,
+					design: Design.Article,
+				})}
 				tags={[
 					{
 						id: '',
@@ -219,15 +278,51 @@ export const ArticleSeriesTag = () => {
 };
 ArticleSeriesTag.story = { name: 'Article with a Series tag' };
 
+export const SpecialReportTitle = () => {
+	return (
+		<Container>
+			<ArticleTitle
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...CAPI}
+				format={{
+					display: Display.Standard,
+					theme: Special.SpecialReport,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Special.SpecialReport,
+					design: Design.Article,
+				})}
+				tags={[
+					{
+						id: '',
+						title: 'Special',
+						type: 'Series',
+					},
+				]}
+			/>
+		</Container>
+	);
+};
+SpecialReportTitle.story = { name: 'Special report' };
+
 export const ArticleNoTags = () => {
 	return (
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPI}
-				display={Display.Standard}
-				pillar={Pillar.Culture}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.Culture,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.Culture,
+					design: Design.Article,
+				})}
 			/>
 		</Container>
 	);

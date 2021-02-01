@@ -1,8 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
+import { decidePalette } from '../lib/decidePalette';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -51,9 +52,16 @@ export const ArticleStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -91,9 +99,16 @@ export const BrandingStory = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
-				display={Display.Standard}
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -114,9 +129,16 @@ export const FeatureStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Feature}
-				pillar={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -132,13 +154,49 @@ export const FeatureStory = () => {
 };
 FeatureStory.story = { name: 'Feature' };
 
+export const SpecialReportStory = () => {
+	return (
+		<Container>
+			<ArticleMeta
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				})}
+				pageId=""
+				webTitle=""
+				author={{
+					byline: 'Lanre Bakare',
+					twitterHandle: 'lanre_bakare',
+				}}
+				tags={tagsWithBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+			/>
+		</Container>
+	);
+};
+SpecialReportStory.story = { name: 'SpecialReport' };
+
 export const CommentStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Comment}
-				pillar={Pillar.Opinion}
+				format={{
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -158,9 +216,16 @@ export const InterviewStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Interview}
-				pillar={Pillar.Lifestyle}
+				format={{
+					display: Display.Standard,
+					design: Design.Interview,
+					theme: Pillar.Lifestyle,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Interview,
+					theme: Pillar.Lifestyle,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -180,9 +245,16 @@ export const ImmersiveStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Immersive}
-				design={Design.Article}
-				pillar={Pillar.News}
+				format={{
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -202,9 +274,16 @@ export const TwoContributorsStory = () => {
 	return (
 		<Container>
 			<ArticleMeta
-				display={Display.Standard}
-				design={Design.Feature}
-				pillar={Pillar.Sport}
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				})}
 				pageId=""
 				webTitle=""
 				author={{

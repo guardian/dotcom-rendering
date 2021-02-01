@@ -3,7 +3,7 @@ import React from 'react';
 import { Pillar } from '@guardian/types';
 import { useAB } from '@guardian/ab-react';
 
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';
 

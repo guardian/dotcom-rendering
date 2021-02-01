@@ -337,6 +337,9 @@
         },
         "matchUrl": {
             "type": "string"
+        },
+        "isSpecialReport": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -357,6 +360,7 @@
         "isAdFreeUser",
         "isCommentable",
         "isImmersive",
+        "isSpecialReport",
         "keyEvents",
         "linkedData",
         "main",
