@@ -94,7 +94,7 @@ export const ShareIcons: React.FC<{
 						href={`https://twitter.com/intent/tweet?text=${webTitle.replace(
 							/Leave.EU/gi,
 							'Leave. EU',
-						)}&url=https://www.theguardian.com/&CMP=share_btn_tw`}
+						)}&url=https://www.theguardian.com/${pageId}&CMP=share_btn_tw`}
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
