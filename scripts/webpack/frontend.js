@@ -5,7 +5,6 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const ReportBundleSize = require('./plugins/report-bundle-size');
 const { dist } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -43,7 +42,6 @@ const commonConfigs = ({ platform }) => ({
             writeToDisk: true,
             filename: `loadable-manifest-${platform}.json`,
         }),
-        PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&
             new BundleAnalyzerPlugin({
                 reportFilename: path.join(dist, `${platform}-bundles.html`),
