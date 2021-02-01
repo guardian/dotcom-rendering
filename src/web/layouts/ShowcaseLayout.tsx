@@ -408,6 +408,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<ArticleMeta
 								branding={branding}
 								format={format}
+								palette={palette}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}

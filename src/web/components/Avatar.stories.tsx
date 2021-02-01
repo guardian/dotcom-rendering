@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { Design, Display, Pillar, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { Avatar } from './Avatar';
+import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: Avatar,
@@ -28,10 +29,10 @@ export const defaultStory = () => (
 		<Avatar
 			imageSrc={imageSrc173}
 			imageAlt="The alt of the image"
-			format={{
+			palette={decidePalette({
 				...format,
 				theme: Pillar.Opinion,
-			}}
+			})}
 		/>
 	</div>
 );
@@ -42,10 +43,10 @@ export const largeStory = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			format={{
+			palette={decidePalette({
 				...format,
 				theme: Pillar.Lifestyle,
-			}}
+			})}
 		/>
 	</div>
 );
@@ -56,7 +57,7 @@ export const largeStoryNews = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			format={format}
+			palette={decidePalette(format)}
 		/>
 	</div>
 );
@@ -67,24 +68,38 @@ export const largeStoryCulture = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			format={{
+			palette={decidePalette({
 				...format,
 				theme: Pillar.Culture,
-			}}
+			})}
 		/>
 	</div>
 );
 largeStoryCulture.story = { name: 'Large, Culture (Byline image - Desktop)' };
+
+export const SpecialReport = () => (
+	<div style={{ width: '140px', height: '140px' }}>
+		<Avatar
+			imageSrc={imageSrc300}
+			imageAlt="The alt of the image"
+			palette={decidePalette({
+				...format,
+				theme: Special.SpecialReport,
+			})}
+		/>
+	</div>
+);
+SpecialReport.story = { name: 'Large SpecialReport' };
 
 export const smallStory = () => (
 	<div style={{ width: '60px', height: '60px' }}>
 		<Avatar
 			imageSrc={imageSrc300Sport}
 			imageAlt="The alt of the image"
-			format={{
+			palette={decidePalette({
 				...format,
 				theme: Pillar.Sport,
-			}}
+			})}
 		/>
 	</div>
 );

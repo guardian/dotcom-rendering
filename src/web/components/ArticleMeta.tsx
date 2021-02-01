@@ -14,6 +14,7 @@ import { Dateline } from './Dateline';
 
 type Props = {
 	format: Format;
+	palette: Palette;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -225,6 +226,7 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 export const ArticleMeta = ({
 	branding,
 	format,
+	palette,
 	pageId,
 	webTitle,
 	author,
@@ -252,17 +254,17 @@ export const ArticleMeta = ({
 								<Avatar
 									imageSrc={bylineImageUrl}
 									imageAlt={authorName || 'Author image'}
-									format={format}
+									palette={palette}
 								/>
 							</AvatarContainer>
 						)}
 						<div>
 							{shouldShowContributor(format) && (
 								<Contributor
-									design={format.design}
 									author={author}
 									tags={tags}
-									pillar={format.theme}
+									format={format}
+									palette={palette}
 								/>
 							)}
 							<Dateline
