@@ -6,11 +6,10 @@ import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
-import { SharingIcons } from './ShareIcons';
+import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
@@ -233,7 +232,6 @@ export const ArticleMeta = ({
 	primaryDateline,
 	secondaryDateline,
 }: Props) => {
-	const sharingUrls = getSharingUrls(pageId, webTitle);
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
@@ -276,8 +274,9 @@ export const ArticleMeta = ({
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" className={metaFlex}>
 					<div className={metaExtras}>
-						<SharingIcons
-							sharingUrls={sharingUrls}
+						<ShareIcons
+							pageId={pageId}
+							webTitle={webTitle}
 							pillar={format.theme}
 							displayIcons={['facebook', 'twitter', 'email']}
 						/>
