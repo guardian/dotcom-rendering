@@ -16,6 +16,9 @@ export const wideImageWidth = 750;
 export const tabletArticleMargin = 24;
 export const wideArticleMargin = 144;
 
+const wideBorderWidth = wideContentWidth + 13;
+const tabletBorderWidth = tabletContentWidth + 13;
+
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
@@ -23,6 +26,16 @@ export const sidePadding = css`
 	${from.tablet} {
 		padding-left: 0;
 		padding-right: 0;
+	}
+`;
+
+export const borderWidthStyles: SerializedStyles = css`
+	${from.tablet} {
+		width: ${tabletBorderWidth}px;
+	}
+
+	${from.wide} {
+		width: ${wideBorderWidth}px;
 	}
 `;
 

@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
-import { neutral } from '@guardian/src-foundations';
+import { border, neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -88,6 +88,11 @@ const interviewHeaderStyles = (item: Format): SerializedStyles => css`
 	background-color: ${interviewBackgroundColour(item)};
 `;
 
+const linesBorderStyles = css`
+	${articleMarginStyles}
+	border-right: 1px solid ${border.secondary};
+`;
+
 const StandardHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<HeaderImage item={item} />
@@ -137,7 +142,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 			<Headline item={item} />
 			<Standfirst item={item} />
 		</div>
-		<Lines className={articleMarginStyles} />
+		<Lines className={linesBorderStyles} />
 		<Byline item={item} shareIcon />
 	</header>
 );
