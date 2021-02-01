@@ -62,6 +62,7 @@ import {
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { trackPerformance } from '../browser/ga/ga';
+import { decidePalette } from '../lib/decidePalette';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -297,12 +298,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 		pillar: CAPI.pillar,
 		design,
 	});
-
 	const format: Format = {
 		display,
 		design,
 		theme: pillar,
 	};
+	const palette = decidePalette(format);
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
@@ -705,6 +706,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					shortUrlId={CAPI.config.shortUrlId}
 					isCommentable={CAPI.isCommentable}
 					pillar={pillar}
+					palette={palette}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={

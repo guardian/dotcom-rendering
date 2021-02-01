@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { pillarPalette } from '@root/src/lib/pillars';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
@@ -9,19 +8,20 @@ import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
-	pillar: Theme;
+	palette: Palette;
 	isCommentable: boolean;
 	commentCount: number;
 	setIsExpanded: Function;
 };
 
-const containerStyles = (pillar: Theme) => css`
+const containerStyles = (palette: Palette) => css`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: column;
 	${textSans.medium()};
 	font-weight: bold;
-	color: ${pillarPalette[pillar].main};
+	/* color: ${palette.fill.commentCount}; */
+	color: black;
 	padding-top: 5px;
 `;
 
@@ -36,8 +36,9 @@ const iconContainerStyles = css`
 	}
 `;
 
-const iconStyles = (pillar: Theme) => css`
-	fill: ${pillarPalette[pillar].main};
+const iconStyles = (palette: Palette) => css`
+	/* fill: ${palette.fill.commentCount}; */
+	fill: black;
 `;
 
 const longStyles = css`
@@ -70,7 +71,7 @@ const linkStyles = css`
 export const CommentCount = ({
 	isCommentable,
 	commentCount,
-	pillar,
+	palette,
 	setIsExpanded,
 }: Props) => {
 	if (!isCommentable) return null;
@@ -78,7 +79,7 @@ export const CommentCount = ({
 	const { short, long } = formatCount(commentCount);
 
 	return (
-		<div className={containerStyles(pillar)} data-cy="comment-counts">
+		<div className={containerStyles(palette)} data-cy="comment-counts">
 			<a
 				href="#comments"
 				className={linkStyles}
@@ -86,7 +87,7 @@ export const CommentCount = ({
 				onClick={() => setIsExpanded(true)}
 			>
 				<div className={iconContainerStyles}>
-					<CommentIcon className={iconStyles(pillar)} />
+					<CommentIcon className={iconStyles(palette)} />
 				</div>
 				<div
 					data-testid="long-comment-count"

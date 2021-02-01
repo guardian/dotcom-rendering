@@ -512,6 +512,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
 								pillar={format.theme}
+								palette={palette}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
