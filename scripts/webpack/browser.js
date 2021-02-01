@@ -52,6 +52,7 @@ module.exports = ({ isLegacyJS }) => ({
     output: {
         filename: generateName(isLegacyJS),
         chunkFilename: generateName(isLegacyJS),
+        publicPath: ""
     },
     // fix for known issue with webpack dynamic imports
     optimization: {
