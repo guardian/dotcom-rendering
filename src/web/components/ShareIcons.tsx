@@ -65,6 +65,13 @@ const iconStyles = (pillar: Theme) => css`
 	}
 `;
 
+const encodeUrl = (pageId: string): string => {
+	return encodeURIComponent(`https://www.theguardian.com/${pageId}`);
+};
+
+const encodeTitle = (webTitle: string): string => {
+	return encodeURIComponent(webTitle.replace(/Leave.EU/gi, 'Leave. EU'));
+};
 export const ShareIcons: React.FC<{
 	pageId: string;
 	webTitle: string;
@@ -76,7 +83,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('facebook') && (
 				<li className={liStyles} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=https://www.theguardian.com/${pageId}&CMP=share_btn_fb`}
+						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
+							pageId,
+						)}&CMP=share_btn_fb`}
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
@@ -91,10 +100,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('twitter') && (
 				<li className={liStyles} key="twitter">
 					<a
-						href={`https://twitter.com/intent/tweet?text=${webTitle.replace(
-							/Leave.EU/gi,
-							'Leave. EU',
-						)}&url=https://www.theguardian.com/${pageId}&CMP=share_btn_tw`}
+						href={`https://twitter.com/intent/tweet?text=${encodeTitle(
+							webTitle,
+						)}&url=${encodeUrl(pageId)}&CMP=share_btn_tw`}
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
@@ -109,7 +117,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('email') && (
 				<li className={liStyles} key="email">
 					<a
-						href={`mailto:?subject=${webTitle}&body=https://www.theguardian.com/${pageId}&CMP=share_btn_link`}
+						href={`mailto:?subject=${encodeTitle(
+							webTitle,
+						)}&body=${encodeUrl(pageId)}&CMP=share_btn_link`}
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
@@ -124,7 +134,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('linkedIn') && (
 				<li className={liStyles} key="linkedIn">
 					<a
-						href={`http://www.linkedin.com/shareArticle?title=${webTitle}&mini=true&url=https://www.theguardian.com/${pageId}`}
+						href={`http://www.linkedin.com/shareArticle?title=${encodeTitle(
+							webTitle,
+						)}&mini=true&url=${encodeUrl(pageId)}`}
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
@@ -139,7 +151,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('pinterest') && (
 				<li className={liStyles} key="pinterest">
 					<a
-						href={`http://www.pinterest.com/pin/find/?url=https://www.theguardian.com/${pageId}`}
+						href={`http://www.pinterest.com/pin/find/?url=${encodeUrl(
+							pageId,
+						)}`}
 						role="button"
 						aria-label="Share on Pinterest"
 						target="_blank"
@@ -155,7 +169,9 @@ export const ShareIcons: React.FC<{
 				<Hide when="above" breakpoint="phablet">
 					<li className={liStyles} key="whatsApp">
 						<a
-							href={`whatsapp://send?text="${webTitle}" https://www.theguardian.com/${pageId}&CMP=share_btn_wa`}
+							href={`whatsapp://send?text="${encodeTitle(
+								webTitle,
+							)}" ${encodeUrl(pageId)}&CMP=share_btn_wa`}
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
@@ -172,7 +188,9 @@ export const ShareIcons: React.FC<{
 				<Hide when="above" breakpoint="phablet">
 					<li className={liStyles} key="messenger">
 						<a
-							href={`fb-messenger://share?link=https://www.theguardian.com/${pageId}&app_id=180444840287&CMP=share_btn_me`}
+							href={`fb-messenger://share?link=${encodeUrl(
+								pageId,
+							)}&app_id=180444840287&CMP=share_btn_me`}
 							role="button"
 							aria-label="Share on Messanger>"
 							target="_blank"
