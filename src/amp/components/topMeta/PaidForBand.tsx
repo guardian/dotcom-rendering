@@ -6,7 +6,33 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { augmentedLabs } from '@root/src/lib/pillars';
+import { labs } from '@guardian/src-foundations/palette';
+
+type PillarColours = {
+	dark: string;
+	main: string;
+	bright: string;
+	pastel: string;
+	faded: string;
+	300: string;
+	400: string;
+	500: string;
+	600: string;
+	800: string;
+};
+
+const augmentedLabs: PillarColours = {
+	dark: labs[300],
+	main: labs[400],
+	bright: '#69d1ca', // bright teal
+	pastel: '', // TODO
+	faded: '#65a897', // dark teal
+	300: labs[300],
+	400: labs[400],
+	500: '#69d1ca', // bright teal
+	600: '', // TODO
+	800: '#65a897', // dark teal
+};
 
 const headerStyle = css`
 	display: flex;
