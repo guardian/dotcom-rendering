@@ -698,7 +698,7 @@ interface DCRBrowserDocumentData {
 	page: string;
 	site: string;
 	CAPI: CAPIBrowserType;
-	NAV: SubNavBrowserType;
+	NAV: NavType;
 	GA: GADataType;
 	linkedData: object;
 }
@@ -708,7 +708,8 @@ interface Props {
 }
 
 type IslandType =
-	| 'reader-revenue-links-header'
+    | 'reader-revenue-links-header'
+    | 'fixed-nav-root'
 	| 'sub-nav-root'
 	| 'edition-root'
 	| 'most-viewed-right'

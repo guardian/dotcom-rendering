@@ -62,6 +62,7 @@ import {
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { trackPerformance } from '../browser/ga/ga';
+import { FixedNav } from './FixedNav';
 import { decidePalette } from '../lib/decidePalette';
 
 // *******************************
@@ -455,6 +456,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
+
+			<HydrateOnce root="fixed-nav-root">
+				<FixedNav
+					CAPI={CAPI}
+					NAV={NAV}
+					format={format}
+					palette={decidePalette(format)}
+				/>
+			</HydrateOnce>
+
 			{NAV.subNavSections && (
 				<HydrateOnce root="sub-nav-root">
 					<>

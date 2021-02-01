@@ -280,10 +280,7 @@ export const makeWindowGuardian = (
 			cssIDs,
 			data: {
 				...dcrDocumentData,
-				NAV: {
-					subNavSections: dcrDocumentData.NAV.subNavSections,
-					currentNavLink: dcrDocumentData.NAV.currentNavLink,
-				},
+				NAV: dcrDocumentData.NAV,
 				CAPI: makeGuardianBrowserCAPI(dcrDocumentData.CAPI),
 			},
 		},

@@ -5,7 +5,6 @@ import {
 	neutral,
 	brandAltBackground,
 	brandBackground,
-	brandLine,
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -29,7 +28,6 @@ import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
-import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -44,13 +42,14 @@ import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
-	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import {
 	Stuck,
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { FixedNav } from '@root/src/web/components/FixedNav';
+import { makeGuardianBrowserCAPI } from 'src/model/window-guardian';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -355,39 +354,14 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 
-					<Section
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(CAPI),
-							}}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
+					<div id="fixed-nav-root">
+						<FixedNav
+							CAPI={makeGuardianBrowserCAPI(CAPI)}
+							NAV={NAV}
+							format={format}
+							palette={palette}
 						/>
-					</Section>
-
-					{NAV.subNavSections && (
-						<Section
-							backgroundColour={palette.background.article}
-							padded={false}
-							sectionId="sub-nav-root"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								palette={palette}
-							/>
-						</Section>
-					)}
+					</div>
 
 					<Section
 						backgroundColour={palette.background.article}
