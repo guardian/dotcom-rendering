@@ -117,9 +117,9 @@ export const ShareIcons: React.FC<{
 			{displayIcons.includes('email') && (
 				<li className={liStyles} key="email">
 					<a
-						href={`mailto:?subject=${webTitle}&body=${encodeUrl(
-							pageId,
-						)}&CMP=share_btn_link`}
+						href={`mailto:?subject=${encodeTitle(
+							webTitle,
+						)}&body=${encodeUrl(pageId)}&CMP=share_btn_link`}
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
