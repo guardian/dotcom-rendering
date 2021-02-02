@@ -9366,4 +9366,5 @@ export const PhotoEssay: CAPIType = {
 		isPhotoEssay: true,
 	},
 	sectionLabel: 'Fishing',
+	isSpecialReport: false,
 };

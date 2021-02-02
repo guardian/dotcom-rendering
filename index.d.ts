@@ -41,7 +41,27 @@ type Pillar = Theme;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DesignTypesObj = { [key in Design]: any };
 
-type Palette = { [key: string]: any };
+type Colour = string;
+
+type Palette = {
+	text: {
+		headline: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+		byline: Colour;
+		twitterHandle: Colour;
+	},
+	background: {
+		article: Colour;
+		seriesTitle: Colour;
+		sectionTitle: Colour;
+		avatar: Colour;
+	},
+	fill: {
+		commentCount: Colour;
+		shareIcon: Colour;
+	},
+};
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
@@ -283,7 +303,7 @@ interface CAPIType {
 	linkedData: object[];
 	config: ConfigType;
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesignType but need to allow the type here before then
+	// in decideDesign but need to allow the type here before then
 	designType: CAPIDesign;
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
@@ -312,11 +332,12 @@ interface CAPIType {
 	pageType: PageTypeType;
 
 	matchUrl?: string;
+	isSpecialReport: boolean;
 }
 
 type CAPIBrowserType = {
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesignType but need to allow the type here before then
+	// in decideDesign but need to allow the type here before then
 	designType: CAPIDesign;
 	pillar: CAPIPillar;
 	config: ConfigTypeBrowser;
@@ -347,6 +368,7 @@ type CAPIBrowserType = {
 	contributionsServiceUrl: string;
 	isImmersive: boolean;
 	isPhotoEssay: boolean;
+	isSpecialReport: boolean;
 	matchUrl?: string;
 	callouts: CalloutBlockElement[];
 	qandaAtoms: QABlockElement[];

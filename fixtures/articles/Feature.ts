@@ -3463,4 +3463,5 @@ export const Feature: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Oscars 2020',
+	isSpecialReport: false,
 };

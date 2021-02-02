@@ -2,51 +2,17 @@ import { Special, Pillar } from '@guardian/types';
 import type { Theme } from '@guardian/types';
 
 import {
-	news as _news,
-	opinion as _opinion,
-	sport as _sport,
-	culture as _culture,
-	lifestyle as _lifestyle,
+	news,
+	opinion,
+	sport,
+	culture,
+	lifestyle,
+	specialReport,
 	labs,
 	border,
 } from '@guardian/src-foundations/palette';
 
 type colour = string;
-
-const [news, opinion, sport, culture, lifestyle] = [
-	_news,
-	_opinion,
-	_sport,
-	_culture,
-	_lifestyle,
-].map((p) => ({
-	// maps legacy colour names to new names in Source
-	dark: p[300],
-	main: p[400],
-	bright: p[500],
-	pastel: p[600],
-	faded: p[800],
-
-	// continue to expose the new names too!
-	300: p[300],
-	400: p[400],
-	500: p[500],
-	600: p[600],
-	800: p[800],
-}));
-
-interface PillarColours {
-	dark: colour;
-	main: colour;
-	bright: colour;
-	pastel: colour;
-	faded: colour;
-	300: colour;
-	400: colour;
-	500: colour;
-	600: colour;
-	800: colour;
-}
 
 export const pillarNames: Theme[] = [
 	Pillar.News,
@@ -57,27 +23,131 @@ export const pillarNames: Theme[] = [
 	Special.Labs,
 ];
 
-export const augmentedLabs: PillarColours = {
-	dark: labs[300],
-	main: labs[400],
-	bright: '#69d1ca', // bright teal
-	pastel: '', // TODO
-	faded: '#65a897', // dark teal
-	300: labs[300],
-	400: labs[400],
-	500: '#69d1ca', // bright teal
-	600: '', // TODO
-	800: '#65a897', // dark teal
+type PillarPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	pastel: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	600: colour;
+	800: colour;
 };
 
-export const pillarPalette: Record<Theme, PillarColours> = {
-	[Pillar.News]: news,
-	[Pillar.Opinion]: opinion,
-	[Pillar.Sport]: sport,
-	[Pillar.Culture]: culture,
-	[Pillar.Lifestyle]: lifestyle,
-	[Special.Labs]: augmentedLabs,
-	[Special.SpecialReport]: news,
+type SpecialPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	800: colour;
+};
+
+type LabsPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	800: colour;
+};
+
+// pillarPalette exposes a convenience object for deciding colour
+//
+// Usage:
+// `pillarPalette[Pillar.Opinion][300]`
+// or
+// `pillarPalette[Pillar.Opinion].dark`
+export const pillarPalette: Record<
+	Theme,
+	PillarPalette | SpecialPalette | LabsPalette
+> = {
+	[Pillar.News]: {
+		dark: news[300],
+		main: news[400],
+		bright: news[500],
+		pastel: news[600],
+		faded: news[800],
+		300: news[300],
+		400: news[400],
+		500: news[500],
+		600: news[600],
+		800: news[800],
+	},
+	[Pillar.Opinion]: {
+		dark: opinion[300],
+		main: opinion[400],
+		bright: opinion[500],
+		pastel: opinion[600],
+		faded: opinion[800],
+		300: opinion[300],
+		400: opinion[400],
+		500: opinion[500],
+		600: opinion[600],
+		800: opinion[800],
+	},
+	[Pillar.Sport]: {
+		dark: sport[300],
+		main: sport[400],
+		bright: sport[500],
+		pastel: sport[600],
+		faded: sport[800],
+		300: sport[300],
+		400: sport[400],
+		500: sport[500],
+		600: sport[600],
+		800: sport[800],
+	},
+	[Pillar.Culture]: {
+		dark: culture[300],
+		main: culture[400],
+		bright: culture[500],
+		pastel: culture[600],
+		faded: culture[800],
+		300: culture[300],
+		400: culture[400],
+		500: culture[500],
+		600: culture[600],
+		800: culture[800],
+	},
+	[Pillar.Lifestyle]: {
+		dark: lifestyle[300],
+		main: lifestyle[400],
+		bright: lifestyle[500],
+		pastel: lifestyle[600],
+		faded: lifestyle[800],
+		300: lifestyle[300],
+		400: lifestyle[400],
+		500: lifestyle[500],
+		600: lifestyle[600],
+		800: lifestyle[800],
+	},
+	[Special.Labs]: {
+		dark: labs[300],
+		main: labs[400],
+		bright: '#69d1ca', // bright teal
+		faded: '#65a897', // dark teal
+		300: labs[300],
+		400: labs[400],
+		500: '#69d1ca', // bright teal
+		800: '#65a897', // dark teal
+	},
+	[Special.SpecialReport]: {
+		dark: specialReport[300],
+		main: specialReport[400],
+		bright: specialReport[500],
+		faded: specialReport[800],
+		300: specialReport[300],
+		400: specialReport[400],
+		500: specialReport[500],
+		800: specialReport[800],
+	},
 };
 
 /*

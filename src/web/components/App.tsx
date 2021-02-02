@@ -32,9 +32,9 @@ import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -62,6 +62,7 @@ import {
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { trackPerformance } from '../browser/ga/ga';
+import { decidePalette } from '../lib/decidePalette';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -292,17 +293,18 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
-	const pillar = decidePillar({
+	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
+	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
+		isSpecialReport: CAPI.isSpecialReport,
 	});
-
 	const format: Format = {
 		display,
 		design,
 		theme: pillar,
 	};
+	const palette = decidePalette(format);
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
@@ -356,7 +358,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					edition={CAPI.editionId}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId={pageViewId}
 				/>
 			</Portal>
 			<HydrateOnce root="links-root" waitFor={[user]}>
@@ -706,6 +707,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					shortUrlId={CAPI.config.shortUrlId}
 					isCommentable={CAPI.isCommentable}
 					pillar={pillar}
+					palette={palette}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={
@@ -733,7 +735,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						edition={CAPI.editionId}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
-						pageViewId={pageViewId}
 					/>
 				</Lazy>
 			</Portal>

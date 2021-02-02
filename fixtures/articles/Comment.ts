@@ -3214,4 +3214,5 @@ export const Comment: CAPIType = {
 		isPhotoEssay: false,
 	},
 	sectionLabel: 'Austerity',
+	isSpecialReport: false,
 };

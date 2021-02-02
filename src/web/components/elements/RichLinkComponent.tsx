@@ -3,7 +3,7 @@ import React from 'react';
 import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { Design, Display } from '@guardian/types';
 
 type CardStyle =
@@ -80,7 +80,7 @@ export const RichLinkComponent: React.FC<{
 			format={{
 				display: Display.Standard,
 				design: Design.Article,
-				theme: decidePillar({ pillar: data.pillar }),
+				theme: decideTheme({ pillar: data.pillar }),
 			}}
 			tags={data.tags}
 			sponsorName={data.sponsorName}

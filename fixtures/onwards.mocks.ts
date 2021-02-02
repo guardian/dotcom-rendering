@@ -1,7 +1,7 @@
 import { Pillar } from '@guardian/types';
 
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const CAPITrails: CAPITrailType[] = [
 	{
@@ -118,8 +118,8 @@ const CAPITrails: CAPITrailType[] = [
 ];
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
-	const design = decideDesignType(thisTrail.designType, []);
-	const pillar = decidePillar({ pillar: thisTrail.pillar, design });
+	const design = decideDesign(thisTrail.designType, []);
+	const pillar = decideTheme({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,
 		headline: thisTrail.headline,
@@ -211,6 +211,15 @@ export const linkAndDescription: OnwardsType = {
 export const withLongDescription: OnwardsType = {
 	description:
 		"<p>A blog by the Guardian's internal Digital team. We build the Guardian website, mobile apps, Editorial tools, revenue products, support our infrastructure and manage all things tech around the Guardian.</p><p>Our team contains Developers, UX, Quality, Product and Enterprise IT. This blog is where we share our experiences and approaches, including software  development tips, code examples, open source software and product  development stories </p>",
+	heading: 'More on this story',
+	trails: trails.slice(0, 8),
+	ophanComponentName: 'more-on-this-story',
+	pillar: Pillar.News,
+};
+
+export const withLink: OnwardsType = {
+	description:
+		'<p>The long-running series in which readers answer other readers’ questions on subjects ranging from trivial flights of fancy to profound scientific and philosophical concepts</p><p><em>Please send new questions to </em><strong><a href="mailto://nq@theguardian.com">nq@theguardian.com</a></strong>.</p>',
 	heading: 'More on this story',
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',

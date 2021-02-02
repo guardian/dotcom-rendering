@@ -1,5 +1,5 @@
 import { Design, Pillar } from '@guardian/types';
-import { decidePillar } from './decidePillar';
+import { decideTheme } from './decideTheme';
 
 export const decideLineEffect = (
 	design: Design,
@@ -30,5 +30,5 @@ export const getCurrentPillar = (CAPI: CAPIType): Theme => {
 		(CAPI.nav.currentPillar &&
 			CAPI.nav.currentPillar.title.toLowerCase()) ||
 		CAPI.pillar;
-	return decidePillar({ pillar: currentPillar });
+	return decideTheme({ pillar: currentPillar });
 };

@@ -2,18 +2,17 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Design } from '@guardian/types';
-import { neutral, text } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { pillarPalette } from '@root/src/lib/pillars';
 
 import { BylineLink } from '@frontend/web/components/BylineLink';
 
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
-const twitterHandle = css`
+const twitterHandleStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
 	font-weight: bold;
-	color: ${text.supporting};
+	color: ${palette.text.twitterHandle};
 
 	padding-right: 10px;
 	display: inline-block;
@@ -26,20 +25,20 @@ const twitterHandle = css`
 	}
 
 	a {
-		color: ${text.supporting};
+		color: ${palette.text.twitterHandle};
 		text-decoration: none;
 	}
 `;
 
-const bylineStyle = (pillar: Theme) => css`
+const bylineStyles = (palette: Palette) => css`
 	${headline.xxxsmall()};
-	color: ${pillarPalette[pillar].main};
+	color: ${palette.text.byline};
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${pillarPalette[pillar].main};
+		color: ${palette.text.byline};
 		text-decoration: none;
 		font-style: normal;
 		:hover {
@@ -49,11 +48,11 @@ const bylineStyle = (pillar: Theme) => css`
 `;
 
 export const Contributor: React.FC<{
-	design: Design;
 	author: AuthorType;
 	tags: TagType[];
-	pillar: Theme;
-}> = ({ design, author, tags, pillar }) => {
+	format: Format;
+	palette: Palette;
+}> = ({ author, tags, format, palette }) => {
 	if (!author.byline) {
 		return null;
 	}
@@ -67,13 +66,13 @@ export const Contributor: React.FC<{
 			data-component="meta-byline"
 			data-link-name="byline"
 		>
-			{design !== Design.Interview && (
-				<div className={bylineStyle(pillar)}>
+			{format.design !== Design.Interview && (
+				<div className={bylineStyles(palette)}>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div className={twitterHandle}>
+				<div className={twitterHandleStyles(palette)}>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}

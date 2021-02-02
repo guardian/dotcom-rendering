@@ -1,6 +1,6 @@
 import { Design } from '@guardian/types';
 
-export const decideDesignType = (
+export const decideDesign = (
 	designType: CAPIDesign,
 	tags: TagType[],
 ): Design => {

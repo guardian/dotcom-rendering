@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const webpack = require('webpack');
-const { smart: merge } = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const ReportBundleSize = require('./plugins/report-bundle-size');
 const { dist } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -19,8 +18,8 @@ const commonConfigs = ({ platform }) => ({
     stats: 'errors-only',
     devtool:
         process.env.NODE_ENV === 'production'
-            ? 'sourcemap'
-            : 'cheap-module-eval-source-map',
+            ? 'source-map'
+            : 'eval-cheap-module-source-map',
     resolve: {
         alias: {
             '@root': path.resolve(__dirname, '.'),
@@ -43,7 +42,6 @@ const commonConfigs = ({ platform }) => ({
             writeToDisk: true,
             filename: `loadable-manifest-${platform}.json`,
         }),
-        PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD &&
             new BundleAnalyzerPlugin({
                 reportFilename: path.join(dist, `${platform}-bundles.html`),

@@ -3,10 +3,10 @@ import React from 'react';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -20,10 +20,11 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props) => {
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesignType(CAPI.designType, CAPI.tags);
-	const pillar: Pillar = decidePillar({
+	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
+	const pillar: Pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
+		isSpecialReport: CAPI.isSpecialReport,
 	});
 	const format: Format = {
 		display,

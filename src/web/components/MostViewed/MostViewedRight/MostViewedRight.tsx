@@ -4,8 +4,8 @@ import { css } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { useApi } from '@root/src/web/lib/api';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -26,11 +26,11 @@ interface Props {
 }
 
 function transformTrail(trail: CAPITrailType): TrailType {
-	const design = decideDesignType(trail.designType, []);
+	const design = decideDesign(trail.designType, []);
 	return {
 		...trail,
 		// Converts the CAPI string pillar into an enum
-		pillar: decidePillar({ pillar: trail.pillar, design }),
+		pillar: decideTheme({ pillar: trail.pillar, design }),
 		design,
 	};
 }

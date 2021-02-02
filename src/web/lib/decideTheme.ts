@@ -1,12 +1,15 @@
 import { Design, Pillar, Special } from '@guardian/types';
 
-export const decidePillar = ({
+export const decideTheme = ({
 	pillar,
 	design,
+	isSpecialReport,
 }: {
 	pillar: CAPIPillar;
 	design?: Design;
+	isSpecialReport?: boolean;
 }): Theme => {
+	if (isSpecialReport) return Special.SpecialReport;
 	// We override the pillar to be opinion on Comment news pieces
 	if (design === Design.Comment && pillar === 'news') return Pillar.Opinion;
 	switch (pillar) {

@@ -38,7 +38,10 @@ const descriptionStyles = (fontColour?: string) => css`
 		/* Handle paragraphs in the description */
 		margin-bottom: ${space[3]}px;
 	}
-
+	a {
+		color: ${text.primary};
+		text-decoration: none;
+	}
 	${between.tablet.and.leftCol} {
 		margin-left: 10px;
 	}

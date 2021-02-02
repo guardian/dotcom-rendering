@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 import { CommentCount } from './CommentCount';
+import { decidePalette } from '../lib/decidePalette';
 
 describe('CommentCount', () => {
 	it('It should render null if comments are disabled', () => {
@@ -11,7 +12,11 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={false}
 				commentCount={123}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				})}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -24,7 +29,11 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={123}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				})}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -38,7 +47,11 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={92878}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				})}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -52,7 +65,11 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={0}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				})}
 				setIsExpanded={() => {}}
 			/>,
 		);

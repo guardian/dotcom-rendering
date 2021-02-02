@@ -6,15 +6,15 @@ import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Branding } from '@root/src/web/components/Branding';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
-import { SharingIcons } from './ShareIcons';
+import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
 type Props = {
 	format: Format;
+	palette: Palette;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -226,6 +226,7 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 export const ArticleMeta = ({
 	branding,
 	format,
+	palette,
 	pageId,
 	webTitle,
 	author,
@@ -233,7 +234,6 @@ export const ArticleMeta = ({
 	primaryDateline,
 	secondaryDateline,
 }: Props) => {
-	const sharingUrls = getSharingUrls(pageId, webTitle);
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
@@ -254,17 +254,17 @@ export const ArticleMeta = ({
 								<Avatar
 									imageSrc={bylineImageUrl}
 									imageAlt={authorName || 'Author image'}
-									format={format}
+									palette={palette}
 								/>
 							</AvatarContainer>
 						)}
 						<div>
 							{shouldShowContributor(format) && (
 								<Contributor
-									design={format.design}
 									author={author}
 									tags={tags}
-									pillar={format.theme}
+									format={format}
+									palette={palette}
 								/>
 							)}
 							<Dateline
@@ -276,9 +276,10 @@ export const ArticleMeta = ({
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" className={metaFlex}>
 					<div className={metaExtras}>
-						<SharingIcons
-							sharingUrls={sharingUrls}
-							pillar={format.theme}
+						<ShareIcons
+							pageId={pageId}
+							webTitle={webTitle}
+							palette={palette}
 							displayIcons={['facebook', 'twitter', 'email']}
 						/>
 					</div>

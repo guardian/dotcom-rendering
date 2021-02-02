@@ -32,7 +32,7 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 start: install
 	@make stop
@@ -136,7 +136,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@HIDE_BUNDLES=true NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config scripts/webpack/frontend
 
 check-env: # private
 	$(call log, "checking environment")

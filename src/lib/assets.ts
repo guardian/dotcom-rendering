@@ -1,3 +1,5 @@
+import { joinUrl } from './joinUrl';
+
 interface AssetHash {
 	[key: string]: string;
 }
@@ -37,5 +39,6 @@ export const getDist = ({
 	legacy: boolean;
 }): string => {
 	const selectedAssetHash = legacy ? assetHashLegacy : assetHash;
-	return `${CDN}assets/${selectedAssetHash[path] || path}`;
+	const formattedPath = joinUrl([path]);
+	return `${CDN}assets/${selectedAssetHash[formattedPath] || formattedPath}`;
 };

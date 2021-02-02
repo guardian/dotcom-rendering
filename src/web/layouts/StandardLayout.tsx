@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	brandAltBackground,
 	brandBackground,
 	brandLine,
@@ -378,7 +377,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 					{NAV.subNavSections && (
 						<Section
-							backgroundColour={background.primary}
+							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 						>
@@ -391,7 +390,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					)}
 
 					<Section
-						backgroundColour={background.primary}
+						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 					>
@@ -400,17 +399,20 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<Section data-print-layout="hide" showTopBorder={false}>
+			<Section
+				data-print-layout="hide"
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+			>
 				<StandardGrid design={format.design} CAPI={CAPI}>
 					<GridItem area="title">
 						<ArticleTitle
-							display={format.display}
-							design={format.design}
+							format={format}
+							palette={palette}
 							tags={CAPI.tags}
 							sectionLabel={CAPI.sectionLabel}
 							sectionUrl={CAPI.sectionUrl}
 							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={format.theme}
 							badge={CAPI.badge}
 						/>
 					</GridItem>
@@ -501,6 +503,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<ArticleMeta
 								branding={branding}
 								format={format}
+								palette={palette}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
@@ -531,6 +534,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 								<SubMeta
 									pillar={format.theme}
+									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
@@ -616,6 +620,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
 								pillar={format.theme}
+								palette={palette}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader

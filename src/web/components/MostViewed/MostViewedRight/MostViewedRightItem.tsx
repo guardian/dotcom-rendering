@@ -8,6 +8,7 @@ import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/lib/useHover';
 import { Display } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;
@@ -79,11 +80,11 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								format={{
+								palette={decidePalette({
 									display: Display.Standard,
 									design: trail.design,
 									theme: trail.pillar,
-								}}
+								})}
 							/>
 						</div>
 					)}
