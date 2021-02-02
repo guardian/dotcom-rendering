@@ -37,16 +37,6 @@ const interviewStyles = (kicker: string): SerializedStyles => css`
 	color: ${neutral[100]};
 	background-color: ${kicker};
 	padding: ${remSpace[2]} ${remSpace[3]};
-	${from.tablet} {
-		width: auto;
-		left: ${remSpace[6]};
-	}
-
-	${from.wide} {
-		width: auto;
-		margin-left: ${remSpace[12]};
-		left: ${remSpace[24]};
-	}
 `;
 
 interface Props {
