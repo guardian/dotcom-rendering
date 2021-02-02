@@ -36,7 +36,7 @@ export const News = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -61,7 +61,7 @@ export const News = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -82,7 +82,7 @@ export const News = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Culture,
@@ -107,7 +107,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Opinion,
@@ -125,7 +125,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -140,7 +140,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -165,7 +165,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -182,7 +182,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -198,7 +198,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -214,7 +214,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -230,7 +230,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Lifestyle,
@@ -246,7 +246,7 @@ export const News = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.News,
@@ -282,7 +282,7 @@ export const InDepth = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -301,7 +301,7 @@ export const InDepth = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -321,7 +321,7 @@ export const InDepth = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -340,7 +340,7 @@ export const InDepth = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -359,7 +359,7 @@ export const InDepth = () => (
 								<Card
 									{...{
 										linkTo:
-											'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+											'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 										format: {
 											display: Display.Standard,
 											theme: Pillar.Sport,
@@ -385,7 +385,7 @@ export const InDepth = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -420,7 +420,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Sport,
@@ -443,7 +443,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Sport,
@@ -467,7 +467,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Sport,
@@ -488,7 +488,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -509,7 +509,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Sport,
@@ -530,7 +530,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Culture,
@@ -551,7 +551,7 @@ export const Related = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Lifestyle,
@@ -581,7 +581,7 @@ export const Spotlight = () => (
 				<Card
 					{...{
 						linkTo:
-							'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+							'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 						format: {
 							display: Display.Standard,
 							theme: Pillar.Sport,
@@ -614,7 +614,7 @@ export const Quad = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Opinion,
@@ -643,7 +643,7 @@ export const Quad = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Opinion,
@@ -667,7 +667,7 @@ export const Quad = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -692,7 +692,7 @@ export const Quad = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -731,7 +731,7 @@ export const Media = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Culture,
@@ -756,7 +756,7 @@ export const Media = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.News,
@@ -782,7 +782,7 @@ export const Media = () => (
 						<Card
 							{...{
 								linkTo:
-									'/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+									'/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai',
 								format: {
 									display: Display.Standard,
 									theme: Pillar.Sport,
