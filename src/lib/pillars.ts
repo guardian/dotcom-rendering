@@ -23,6 +23,41 @@ export const pillarNames: Theme[] = [
 	Special.Labs,
 ];
 
+type PillarPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	pastel: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	600: colour;
+	800: colour;
+};
+
+type SpecialPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	800: colour;
+};
+
+type LabsPalette = {
+	dark: colour;
+	main: colour;
+	bright: colour;
+	faded: colour;
+	300: colour;
+	400: colour;
+	500: colour;
+	800: colour;
+};
+
 // pillarPalette exposes a convenience object for deciding colour
 //
 // Usage:
@@ -31,18 +66,7 @@ export const pillarNames: Theme[] = [
 // `pillarPalette[Pillar.Opinion].dark`
 export const pillarPalette: Record<
 	Theme,
-	{
-		dark: colour;
-		main: colour;
-		bright: colour;
-		pastel: colour;
-		faded: colour;
-		300: colour;
-		400: colour;
-		500: colour;
-		600: colour;
-		800: colour;
-	}
+	PillarPalette | SpecialPalette | LabsPalette
 > = {
 	[Pillar.News]: {
 		dark: news[300],
@@ -108,24 +132,20 @@ export const pillarPalette: Record<
 		dark: labs[300],
 		main: labs[400],
 		bright: '#69d1ca', // bright teal
-		pastel: '', // TODO
 		faded: '#65a897', // dark teal
 		300: labs[300],
 		400: labs[400],
 		500: '#69d1ca', // bright teal
-		600: '', // TODO
 		800: '#65a897', // dark teal
 	},
 	[Special.SpecialReport]: {
 		dark: specialReport[300],
 		main: specialReport[400],
 		bright: specialReport[500],
-		pastel: '', // TODO
 		faded: specialReport[800],
 		300: specialReport[300],
 		400: specialReport[400],
 		500: specialReport[500],
-		600: '', // TODO
 		800: specialReport[800],
 	},
 };
