@@ -58,8 +58,7 @@ const getStyles = (item: Item): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 	if (
 		item.design === Design.Interview ||
-		item.display === Display.Immersive ||
-		item.design === Design.Media
+		item.display === Display.Immersive
 	) {
 		return css(styles(kicker), interviewStyles(kicker));
 	}

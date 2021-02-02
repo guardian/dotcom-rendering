@@ -77,7 +77,7 @@ const galleryHeaderBorderStyles = css`
 	}
 `;
 
-const interviewHeaderStyles = (item: Item): SerializedStyles => {
+const interviewAndImmersiveStyles = (item: Item): SerializedStyles => {
 	const backgroundColour =
 		item.design === Design.Interview
 			? interviewBackgroundColour(item)
@@ -146,7 +146,7 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderImage item={item} />
-		<div css={interviewHeaderStyles(item)}>
+		<div css={interviewAndImmersiveStyles(item)}>
 			<Headline item={item} />
 			<Standfirst item={item} />
 		</div>
@@ -172,7 +172,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderImage item={item} />
-		<div css={interviewHeaderStyles(item)}>
+		<div css={interviewAndImmersiveStyles(item)}>
 			<Headline item={item} />
 			<Standfirst item={item} />
 			<Lines />

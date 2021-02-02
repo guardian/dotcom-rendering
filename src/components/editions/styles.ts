@@ -61,9 +61,7 @@ export const articleMarginStyles: SerializedStyles = css`
 	}
 `;
 
-export const headerBackgroundColour = (item: Item): Colour => {
-	const format = getFormat(item);
-
+export const headerBackgroundColour = (format: Format): Colour => {
 	if (format.design === Design.Feature) {
 		if (format.display === Display.Immersive) {
 			return Palette.neutral[7];

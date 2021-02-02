@@ -87,8 +87,8 @@ const galleryWrapperStyles = css`
 	}
 `;
 
-const headerBackgroundStyles = (item: Item): SerializedStyles => css`
-	background-color: ${headerBackgroundColour(item)};
+const headerBackgroundStyles = (format: Format): SerializedStyles => css`
+	background-color: ${headerBackgroundColour(format)};
 `;
 
 const getSectionStyles = (item: Format): SerializedStyles[] => {

@@ -219,12 +219,9 @@ const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
-	const ignoreKickerColour = (format: Format): boolean => {
-		return (
-			format.design === Design.Media ||
-			format.display === Display.Immersive
-		);
-	};
+	const ignoreKickerColour = (format: Format): boolean =>
+		format.design === Design.Media || format.display === Display.Immersive;
+
 	const bylineColor = ignoreKickerColour(format) ? neutral[100] : kickerColor;
 
 	return maybeRender(item.bylineHtml, (byline) => (
