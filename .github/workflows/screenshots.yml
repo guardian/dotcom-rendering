@@ -34,6 +34,17 @@ jobs:
                       url: 'http://localhost:8080/commentisfree/2020/nov/12/lee-cain-no-10-boris-johnson-chief-of-staff-britain?editions'
                     - format: 'EditionsReview'
                       url: 'http://localhost:8080/film/2020/nov/12/billie-review-singer-documentary-historical-voice-harassment-exploitation?editions'
+                    - format: 'EditionsInterview'
+                      url: 'http://localhost:8080/sport/2021/jan/24/ollie-lawrence-i-wanted-to-emulate-tuilagi-because-his-play-excited-me?editions'
+                    - format: 'EditionsAnalysis'
+                      url: 'http://localhost:8080/money/2021/jan/20/why-uk-house-prices-jumped-in-november-stamp-duty?editions'
+                    - format: 'EditionsShowcase'
+                      url: 'http://localhost:8080/tv-and-radio/2020/jul/12/michaela-coel-profile-i-may-destroy-you-trauma-into-cultural-triumph?editions'
+                    - format: 'EditionsImmersive'
+                      url: 'http://localhost:8080/society/2019/dec/17/decade-of-perpetual-crisis-2010s-disrupted-everything-but-resolved-nothing?editions'
+                    - format: 'EditionsGallery'
+                      url: 'http://localhost:8080/us-news/gallery/2021/jan/20/joe-biden-inauguration-46th-president-united-states-in-pictures?editions'
+
 
         steps:
             - uses: actions/checkout@v2

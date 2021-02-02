@@ -35,9 +35,12 @@ const docParser = JSDOM.fragment.bind(null);
 
 const styles = `
     ${pageFonts}
-
+	html {
+		height: 100%;
+	}
     body {
-        margin: 0;
+		margin: 0;
+		min-height: 100%;
     }
 `;
 

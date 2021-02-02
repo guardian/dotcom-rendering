@@ -4,9 +4,9 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { background, border } from '@guardian/src-foundations/palette';
+import { background, border, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
-import { Design, partition } from '@guardian/types';
+import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
@@ -16,13 +16,22 @@ import {
 	articleWidthStyles,
 	headerBackgroundColour,
 	sidePadding,
+	tabletContentWidth,
+	wideContentWidth,
 } from './styles';
+
+const wide = wideContentWidth + 12;
+const tablet = tabletContentWidth + 12;
 
 // ----- Component ----- //
 
 interface Props {
 	item: Item;
 }
+
+const articleWrapperStyles = (item: Format): SerializedStyles => css`
+	background-color: ${item.design === Design.Media ? neutral[0] : 'inherit'};
+`;
 
 const articleStyles = css`
 	${articleMarginStyles}
@@ -61,31 +70,75 @@ const bodyWrapperStyles = css`
 	${articleWidthStyles}
 `;
 
-const headerBackgroundStyles = (item: Format): SerializedStyles => css`
-	background-color: ${headerBackgroundColour(item)};
-`;
-
-const Article: FC<Props> = ({ item }) => {
-	if (item.design === Design.Live) {
-		return <p>Not implemented</p>;
+const galleryWrapperStyles = css`
+	box-sizing: border-box;
+	padding-top: ${remSpace[3]};
+	padding-right: 0;
+	padding-left: 0;
+	border: none;
+	${from.tablet} {
+		width: ${tablet}px;
+		padding-right: ${remSpace[4]};
+		border-right: 1px solid ${neutral[100]};
 	}
 
-	return (
-		<main>
-			<article>
-				<div css={headerBackgroundStyles(item)}>
-					<section css={[headerStyles, articleStyles]}>
-						<Header item={item} />
-					</section>
-				</div>
-				<div css={[bodyWrapperStyles, articleStyles]}>
-					<section css={bodyStyles}>
-						{renderEditionsAll(item, partition(item.body).oks)}
-					</section>
-				</div>
-			</article>
-		</main>
-	);
+	${from.wide} {
+		width: ${wide}px;
+	}
+`;
+
+const headerBackgroundStyles = (format: Format): SerializedStyles => css`
+	background-color: ${headerBackgroundColour(format)};
+`;
+
+const getSectionStyles = (item: Format): SerializedStyles[] => {
+	if (
+		item.design === Design.Interview ||
+		item.design === Design.Media ||
+		item.display === Display.Immersive
+	) {
+		return [];
+	}
+	return [headerStyles, articleStyles];
+};
+
+const Article: FC<Props> = ({ item }) => {
+	if (
+		item.design === Design.Analysis ||
+		item.design === Design.Article ||
+		item.design === Design.Comment ||
+		item.design === Design.Review ||
+		item.design === Design.Interview ||
+		item.design === Design.Feature ||
+		item.design === Design.Media
+	) {
+		return (
+			<main>
+				<article css={articleWrapperStyles(item)}>
+					<div css={headerBackgroundStyles(item)}>
+						<section css={getSectionStyles(item)}>
+							<Header item={item} />
+						</section>
+					</div>
+					<div
+						css={[
+							bodyWrapperStyles,
+							articleStyles,
+							item.design === Design.Media
+								? galleryWrapperStyles
+								: null,
+						]}
+					>
+						<section css={bodyStyles}>
+							{renderEditionsAll(item, partition(item.body).oks)}
+						</section>
+					</div>
+				</article>
+			</main>
+		);
+	}
+
+	return <p>Not implemented</p>;
 };
 
 // ----- Exports ----- //

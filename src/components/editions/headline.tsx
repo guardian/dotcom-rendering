@@ -5,11 +5,12 @@ import type { SerializedStyles } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import type {
 	FontWeight,
 	LineHeight,
 } from '@guardian/src-foundations/typography/types';
+import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import { headlineTextColour } from 'editorialStyles';
@@ -24,6 +25,27 @@ import { articleWidthStyles } from './styles';
 interface Props {
 	item: Item;
 }
+
+const quoteStyles = (format: Format): SerializedStyles => {
+	const { kicker } = getThemeStyles(format.theme);
+
+	return css`
+		margin: 0;
+		svg {
+			margin-bottom: -0.65rem;
+			width: 40px;
+			margin-left: -0.3rem;
+			fill: ${kicker};
+		}
+
+		${from.tablet} {
+			svg {
+				margin-bottom: -0.75rem;
+				width: 50px;
+			}
+		}
+	`;
+};
 
 const styles = (format: Format): SerializedStyles => css`
 	${headlineTextColour(format)}
@@ -62,6 +84,17 @@ const interviewStyles = css`
 	border: 0;
 `;
 
+const immersiveStyles = css`
+	border: 0;
+	margin-left: ${remSpace[2]};
+	padding-top: ${remSpace[1]};
+	padding-bottom: ${remSpace[6]};
+
+	${from.tablet} {
+		margin-left: 0;
+	}
+`;
+
 const commentStyles = css`
 	padding-bottom: 0;
 	padding-right: 6rem;
@@ -91,17 +124,37 @@ const interviewFontStyles = css`
 	display: inline;
 `;
 
+const galleryStyles = css`
+	${titlepiece.small()}
+	font-size: 2rem;
+	line-height: 1.2;
+	padding-bottom: ${remSpace[6]};
+	border: 0;
+`;
+
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
-		return css(styles(format), interviewStyles);
+		return css(
+			styles(format),
+			fontStyles('tight', 'bold'),
+			interviewStyles,
+		);
 	}
 
 	if (
 		format.design === Design.Review ||
-		format.display === Display.Showcase ||
-		format.display === Display.Immersive
-	)
+		format.display === Display.Showcase
+	) {
 		return css(styles(format), fontStyles('tight', 'bold'));
+	}
+
+	if (format.display === Display.Immersive) {
+		return css(
+			styles(format),
+			fontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
 
 	if (format.design === Design.Analysis)
 		return css(
@@ -117,12 +170,27 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 			commentStyles,
 		);
 
+	if (format.design === Design.Media) {
+		return css(styles(format), galleryStyles);
+	}
+
 	return css(styles(format), fontStyles('tight', 'medium'));
 };
 
 const getHeadlineText = (item: Item): JSX.Element | string => {
+	const format = getFormat(item);
+
 	if (item.design === Design.Interview) {
 		return <span css={interviewFontStyles}>{item.headline}</span>;
+	}
+
+	if (item.design === Design.Comment) {
+		return (
+			<span css={quoteStyles(format)}>
+				<SvgQuote />
+				{item.headline}
+			</span>
+		);
 	}
 	return item.headline;
 };

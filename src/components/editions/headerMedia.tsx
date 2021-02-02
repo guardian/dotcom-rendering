@@ -5,7 +5,8 @@ import { css } from '@emotion/core';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
-import { Design, none, some } from '@guardian/types';
+import type { Format } from '@guardian/types';
+import { Design, Display, none, some } from '@guardian/types';
 import StarRating from 'components/editions/starRating';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
@@ -37,6 +38,12 @@ const styles = css`
 	}
 `;
 
+const fullWidthStyles = css`
+	margin: 0;
+	position: relative;
+	width: 100%;
+`;
+
 const captionStyles = css`
 	${from.tablet} {
 		width: ${tabletImageWidth}px;
@@ -61,7 +68,45 @@ const videoStyles = css`
 	height: 100%;
 `;
 
-const getImageStyle = ({ width, height }: Image): SerializedStyles => {
+const fullWidthCaptionStyles = css`
+	width: 100%;
+
+	${from.tablet} {
+		width: 100%;
+	}
+`;
+
+const isFullWidthImage = (format: Format): boolean =>
+	format.display === Display.Immersive ||
+	format.design === Design.Interview ||
+	format.design === Design.Media;
+
+const hasSeries = (format: Format): boolean =>
+	format.display === Display.Immersive || format.design === Design.Interview;
+
+const getStyles = (format: Format): SerializedStyles => {
+	return isFullWidthImage(format) ? fullWidthStyles : styles;
+};
+
+const getCaptionStyles = (format: Format): SerializedStyles => {
+	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
+};
+
+const getImageSizes = (format: Format): Sizes => {
+	return isFullWidthImage(format) ? fullWidthSizes : sizes;
+};
+
+const getImageStyle = (
+	{ width, height }: Image,
+	format: Format,
+): SerializedStyles => {
+	if (isFullWidthImage(format)) {
+		return css`
+			display: block;
+			width: 100%;
+			height: calc(100vw * ${height / width});
+		`;
+	}
 	return css`
 		display: block;
 		width: 100%;
@@ -91,6 +136,11 @@ const sizes: Sizes = {
 	default: '100vw',
 };
 
+const fullWidthSizes: Sizes = {
+	mediaQueries: [],
+	default: '100vw',
+};
+
 const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const {
@@ -105,12 +155,12 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image: { nativeCaption, credit },
 			} = media;
 			return (
-				<figure css={styles} aria-labelledby={captionId}>
+				<figure css={getStyles(format)} aria-labelledby={captionId}>
 					<Img
 						image={image}
-						sizes={sizes}
+						sizes={getImageSizes(format)}
 						format={item}
-						className={some(getImageStyle(image))}
+						className={some(getImageStyle(image, format))}
 						supportsDarkMode
 						lightbox={some({
 							className: 'js-launch-slideshow js-main-image',
@@ -118,11 +168,11 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 							credit: none,
 						})}
 					/>
-					{item.design === Design.Interview && <Series item={item} />}
+					{hasSeries(format) && <Series item={item} />}
 					<HeaderImageCaption
 						caption={nativeCaption}
 						credit={credit}
-						styles={captionStyles}
+						styles={getCaptionStyles(format)}
 						iconColor={iconColor}
 						iconBackgroundColor={iconBackgroundColor}
 					/>
@@ -130,21 +180,22 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				</figure>
 			);
 		} else {
+			const {
+				video: { title, atomId },
+			} = media;
 			return (
 				<div css={videoWrapperStyles}>
 					<iframe
-						title={media.video.title ?? ''}
+						title={title}
 						css={videoStyles}
 						frameBorder="0"
 						scrolling="no"
 						allowFullScreen
-						src={`https://embed.theguardian.com/embed/atom/media/${media.video.atomId}#noadsaf`}
+						src={`https://embed.theguardian.com/embed/atom/media/${atomId}#noadsaf`}
 					></iframe>
 				</div>
 			);
 		}
-
-		return null;
 	});
 };
 

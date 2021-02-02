@@ -1,8 +1,9 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
+import { border } from '@guardian/src-foundations/palette';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type {
 	FontStyle,
@@ -18,12 +19,50 @@ import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from './avatar';
 import { ShareIcon } from './shareIcon';
-import { sidePadding } from './styles';
+import {
+	articleWidthStyles,
+	borderWidthStyles,
+	wideArticleMargin,
+} from './styles';
 
 // ----- Styles ----- //
 
 const interviewStyles = css`
-	${sidePadding}
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.tablet} {
+		box-sizing: border-box;
+		margin-left: ${remSpace[6]};
+		padding-left: ${remSpace[3]};
+		padding-right: ${remSpace[3]};
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
+	}
+	${borderWidthStyles}
+	border-bottom: 1px solid ${border.secondary};
+	border-right: 1px solid ${border.secondary};
+`;
+
+const immersiveStyles = css`
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.tablet} {
+		margin-left: ${remSpace[6]};
+	}
+
+	${from.wide} {
+		margin-left: ${wideArticleMargin}px;
+	}
+
+	${articleWidthStyles}
+`;
+
+const galleryStyles = css`
+	${articleWidthStyles}
 `;
 
 const showcaseStyles = css`
@@ -109,15 +148,24 @@ const bylinePrimaryStyles = (
 	`;
 };
 
-const bylineSecondaryStyles = (large?: boolean): SerializedStyles => css`
+const bylineSecondaryStyles = (
+	kickerColor: string,
+	large?: boolean,
+): SerializedStyles => css`
 	${large
 		? largeTextStyles('italic', 'light')
 		: standardTextStyles('italic', 'light')}
+
+	color: ${kickerColor === neutral[100] ? neutral[100] : neutral[7]}
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
+	}
+
+	if (format.display === Display.Immersive) {
+		return css(styles(kickerColor), immersiveStyles);
 	}
 
 	if (format.design === Design.Comment) {
@@ -126,6 +174,10 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
+	}
+
+	if (format.design === Design.Media) {
+		return css(styles(kickerColor), galleryStyles);
 	}
 
 	return styles(kickerColor);
@@ -156,7 +208,7 @@ const renderText = (
 			case 'SPAN':
 			case '#text':
 				return (
-					<span css={bylineSecondaryStyles(large)}>
+					<span css={bylineSecondaryStyles(kickerColor, large)}>
 						{node.textContent ?? ''}
 					</span>
 				);
@@ -167,9 +219,14 @@ const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
+	const ignoreKickerColour = (format: Format): boolean =>
+		format.design === Design.Media || format.display === Display.Immersive;
+
+	const bylineColor = ignoreKickerColour(format) ? neutral[100] : kickerColor;
+
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getStyles(format, kickerColor)}>
-			<address>{renderText(byline, kickerColor, large)}</address>
+		<div css={getStyles(format, bylineColor)}>
+			<address>{renderText(byline, bylineColor, large)}</address>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />
