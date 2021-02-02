@@ -82,7 +82,7 @@ PhotoEssay.story = { name: 'PhotoEssay' };
 export const SpecialReport = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<Caption
-			captionText="<ul><li>This is how a SpecialReport caption looks</li></ul>"
+			captionText="This is how a SpecialReport caption looks"
 			format={{
 				display: Display.Standard,
 				design: Design.Article,
