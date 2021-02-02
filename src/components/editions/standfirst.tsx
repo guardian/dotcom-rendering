@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -55,7 +56,6 @@ const styles = (kickerColor: string): SerializedStyles => css`
 const interviewStyles = css`
 	${sidePadding}
 `;
-
 const showcaseStyles = css`
 	${headline.xxsmall({ lineHeight: 'tight' })}
 	color: ${neutral[20]}
@@ -69,6 +69,19 @@ const galleryStyles = css`
 const greyTextStyles = css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 	color: ${neutral[46]}
+`;
+
+const immersiveStyles = `
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
+	color: ${neutral[100]};
+
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.tablet} {
+		padding-left: 0;
+		padding-right: 0;
+	}
 `;
 
 interface Props {
@@ -85,6 +98,9 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 	if (format.design === Design.Analysis || format.design === Design.Comment) {
 		return css(styles(kickerColor), greyTextStyles);
+	}
+	if (format.display === Display.Immersive) {
+		return css(styles(kickerColor), immersiveStyles);
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);

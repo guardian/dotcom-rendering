@@ -4,8 +4,10 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import * as Palette from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
-import { Design, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 import type { Colour } from 'editorialPalette';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;
@@ -60,6 +62,13 @@ export const articleMarginStyles: SerializedStyles = css`
 `;
 
 export const headerBackgroundColour = (format: Format): Colour => {
+	if (format.design === Design.Feature) {
+		if (format.display === Display.Immersive) {
+			return Palette.neutral[7];
+		}
+		return Palette.neutral[100];
+	}
+
 	if (format.design === Design.Analysis) {
 		return Palette.neutral[97];
 	}

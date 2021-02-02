@@ -2,17 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
-import { border, neutral, remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { titlepiece } from '@guardian/src-foundations/typography';
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import { kickerPicker } from './kickerPicker';
-import { articleWidthStyles } from './styles';
 
 // ----- Component ----- //
 
@@ -22,15 +21,14 @@ const styles = (kicker: string): SerializedStyles => css`
 	color: ${kicker};
 	font-size: 1.0625rem;
 	padding: ${remSpace[1]} 0 ${remSpace[2]};
-	border-top: 1px solid ${border.secondary};
 	box-sizing: border-box;
-
-	${articleWidthStyles}
+	width: fit-content;
 
 	${from.tablet} {
 		padding-bottom: ${remSpace[3]};
 	}
 `;
+
 const interviewStyles = (kicker: string): SerializedStyles => css`
 	position: absolute;
 	left: 0;
@@ -58,7 +56,10 @@ interface Props {
 const getStyles = (item: Item): SerializedStyles => {
 	const format = getFormat(item);
 	const { kicker } = getThemeStyles(format.theme);
-	if (item.design === Design.Interview) {
+	if (
+		item.design === Design.Interview ||
+		item.display === Display.Immersive
+	) {
 		return css(styles(kicker), interviewStyles(kicker));
 	}
 	return styles(kicker);

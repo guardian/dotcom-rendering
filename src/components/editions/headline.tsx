@@ -84,6 +84,17 @@ const interviewStyles = css`
 	border: 0;
 `;
 
+const immersiveStyles = css`
+	border: 0;
+	margin-left: ${remSpace[2]};
+	padding-top: ${remSpace[1]};
+	padding-bottom: ${remSpace[6]};
+
+	${from.tablet} {
+		margin-left: 0;
+	}
+`;
+
 const commentStyles = css`
 	padding-bottom: 0;
 	padding-right: 6rem;
@@ -123,15 +134,27 @@ const galleryStyles = css`
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 	if (format.design === Design.Interview) {
-		return css(styles(format), interviewStyles);
+		return css(
+			styles(format),
+			fontStyles('tight', 'bold'),
+			interviewStyles,
+		);
 	}
 
 	if (
 		format.design === Design.Review ||
-		format.display === Display.Showcase ||
-		format.display === Display.Immersive
-	)
+		format.display === Display.Showcase
+	) {
 		return css(styles(format), fontStyles('tight', 'bold'));
+	}
+
+	if (format.display === Display.Immersive) {
+		return css(
+			styles(format),
+			fontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
 
 	if (format.design === Design.Analysis)
 		return css(
