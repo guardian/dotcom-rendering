@@ -3,7 +3,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -74,14 +73,6 @@ const greyTextStyles = css`
 const immersiveStyles = `
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
 	color: ${neutral[100]};
-
-	padding-left: ${remSpace[2]};
-	padding-right: ${remSpace[2]};
-
-	${from.tablet} {
-		padding-left: 0;
-		padding-right: 0;
-	}
 `;
 
 interface Props {
@@ -93,14 +84,14 @@ const noLinks = true;
 
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	if (format.display === Display.Immersive) {
+		return css(styles(kickerColor), immersiveStyles);
+	}
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
 	if (format.design === Design.Analysis || format.design === Design.Comment) {
 		return css(styles(kickerColor), greyTextStyles);
-	}
-	if (format.display === Display.Immersive) {
-		return css(styles(kickerColor), immersiveStyles);
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);

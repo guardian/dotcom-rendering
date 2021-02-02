@@ -30,7 +30,7 @@ interface Props {
 }
 
 const articleWrapperStyles = (item: Format): SerializedStyles => css`
-	background-color: ${item.design === Design.Media ? neutral[0] : 'inherit'};
+	background-color: ${item.design === Design.Media ? neutral[7] : 'inherit'};
 `;
 
 const articleStyles = css`

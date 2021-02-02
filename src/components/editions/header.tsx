@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/core';
 import type { SerializedStyles } from '@emotion/core';
-import { border, neutral } from '@guardian/src-foundations';
+import { border, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
@@ -20,8 +20,10 @@ import {
 	sidePadding,
 	tabletArticleMargin,
 	tabletContentWidth,
+	tabletImmersiveWidth,
 	wideArticleMargin,
 	wideContentWidth,
+	wideImmersiveWidth,
 } from './styles';
 
 const wide = wideContentWidth + 12;
@@ -77,11 +79,8 @@ const galleryHeaderBorderStyles = css`
 	}
 `;
 
-const interviewAndImmersiveStyles = (item: Item): SerializedStyles => {
-	const backgroundColour =
-		item.design === Design.Interview
-			? interviewBackgroundColour(item)
-			: headerBackgroundColour(item);
+const interviewStyles = (item: Item): SerializedStyles => {
+	const backgroundColour = interviewBackgroundColour(item);
 
 	return css`
 		${from.tablet} {
@@ -95,6 +94,43 @@ const interviewAndImmersiveStyles = (item: Item): SerializedStyles => {
 		background-color: ${backgroundColour};
 	`;
 };
+
+const immersiveHeadlineStyles = (item: Item): SerializedStyles => {
+	const backgroundColour = headerBackgroundColour(item);
+
+	return css`
+		position: relative;
+		margin-top: -3.3125rem;
+		margin-right: 3.625rem;
+		z-index: 2;
+
+		${from.tablet} {
+			margin-top: -4.625rem;
+			padding-left: ${tabletArticleMargin}px;
+			width: ${tabletImmersiveWidth}px;
+		}
+
+		${from.wide} {
+			padding-left: ${wideArticleMargin}px;
+			width: ${wideImmersiveWidth}px;
+		}
+
+		background-color: ${backgroundColour};
+	`;
+};
+
+const immersiveStandfirstStyles = css`
+	padding-left: ${remSpace[2]};
+	padding-right: ${remSpace[2]};
+
+	${from.tablet} {
+		padding-left: ${tabletArticleMargin}px;
+	}
+
+	${from.wide} {
+		padding-left: ${wideArticleMargin}px;
+	}
+`;
 
 const linesBorderStyles = css`
 	${articleMarginStyles}
@@ -146,7 +182,7 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderMedia item={item} />
-		<div css={interviewAndImmersiveStyles(item)}>
+		<div css={interviewStyles(item)}>
 			<Headline item={item} />
 			<Standfirst item={item} />
 		</div>
@@ -172,8 +208,10 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderMedia item={item} />
-		<div css={interviewAndImmersiveStyles(item)}>
+		<div css={immersiveHeadlineStyles(item)}>
 			<Headline item={item} />
+		</div>
+		<div css={immersiveStandfirstStyles}>
 			<Standfirst item={item} />
 			<Lines />
 		</div>
@@ -182,10 +220,10 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
-	if (item.design === Design.Interview) {
-		return <InterviewHeader item={item} />;
-	} else if (item.display === Display.Immersive) {
+	if (item.display === Display.Immersive) {
 		return <ImmersiveHeader item={item} />;
+	} else if (item.design === Design.Interview) {
+		return <InterviewHeader item={item} />;
 	} else if (item.display === Display.Showcase) {
 		return <ShowcaseHeader item={item} />;
 	} else if (item.design === Design.Analysis) {
