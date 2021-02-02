@@ -10,6 +10,7 @@ import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 import { pillarPalette } from '@frontend/lib/pillars';
+import { space } from '@guardian/src-foundations';
 
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
@@ -84,6 +85,17 @@ const headlineStyles = (design: Design, pillar: Theme) => {
 	}
 };
 
+const fullCardImageTextStyles = css`
+	${headline.xxxsmall()};
+	color: ${neutral[100]};
+	background-color: rgba(0, 0, 0, 0.75);
+	box-shadow: -${space[1]}px 0 0 rgba(0, 0, 0, 0.75);
+	/* Box decoration is required to push the box shadow out on Firefox */
+	box-decoration-break: clone;
+	line-height: 1.25;
+	white-space: pre-wrap;
+`;
+
 export const CardHeadline = ({
 	headlineText,
 	design,
@@ -95,30 +107,40 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
+	isFullCardImage,
 }: CardHeadlineType) => (
 	<>
 		<h4
 			className={cx(
 				fontStyles(size),
 				design === Design.Analysis && underlinedStyles(size),
+				isFullCardImage &&
+					css`
+						line-height: 1; /* Reset line height in full image carousel */
+					`,
 			)}
 		>
-			{kickerText && (
-				<Kicker
-					text={kickerText}
-					design={design}
-					pillar={pillar}
-					showPulsingDot={showPulsingDot}
-					showSlash={showSlash}
-					inCard={true}
-				/>
-			)}
-			{showQuotes && (
-				<QuoteIcon colour={pillarPalette[pillar].main} size={size} />
-			)}
+			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+				{kickerText && (
+					<Kicker
+						text={kickerText}
+						design={design}
+						pillar={pillar}
+						showPulsingDot={showPulsingDot}
+						showSlash={showSlash}
+						inCard={true}
+					/>
+				)}
+				{showQuotes && (
+					<QuoteIcon
+						colour={pillarPalette[pillar].main}
+						size={size}
+					/>
+				)}
 
-			<span className={headlineStyles(design, pillar)}>
-				{headlineText}
+				<span className={headlineStyles(design, pillar)}>
+					{headlineText}
+				</span>
 			</span>
 		</h4>
 		{byline && showByline && (

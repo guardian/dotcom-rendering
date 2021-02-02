@@ -432,6 +432,7 @@ interface CardType {
     imageUrl?: string;
     imagePosition?: ImagePositionType;
     imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+    isFullCardImage?: boolean // For use in Carousel until we decide a `Display.Immersive` convention
     standfirst?: string;
     avatar?: AvatarType;
     showClock?: boolean;
@@ -480,7 +481,8 @@ interface CardHeadlineType {
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	byline?: string;
-	showByline?: boolean;
+    showByline?: boolean;
+    isFullCardImage?: boolean; // Used for carousel AB test
 }
 
 type UserBadge = {
@@ -547,7 +549,8 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-	pillar: Theme;
+    pillar: Theme;
+    isFullCardImage?: boolean
 };
 
 type OphanComponentName =

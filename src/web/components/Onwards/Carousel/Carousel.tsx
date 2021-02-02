@@ -65,8 +65,8 @@ const containerStyles = css`
 	}
 `;
 
-const carouselStyle = css`
-	min-height: 227px;
+const carouselStyle = (isFullCardImage?: boolean) => css`
+	min-height: ${!isFullCardImage && '227px'};
 	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 
 	display: flex;
@@ -192,11 +192,13 @@ type CarouselCardProps = {
 	isFirst: boolean;
 	pillar: Theme;
 	design: Design;
+	display?: Display;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
+	isFullCardImage?: boolean;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -208,8 +210,15 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	webPublicationDate,
 	kickerText,
 	isFirst,
+	isFullCardImage,
 }: CarouselCardProps) => (
-	<LI stretch={true} percentage="100%" showDivider={!isFirst} padSides={true}>
+	<LI
+		stretch={true}
+		percentage="100%"
+		showDivider={!isFirst}
+		padSides={true}
+		padSidesOnMobile={true}
+	>
 		<Card
 			linkTo={linkTo}
 			format={{
@@ -224,6 +233,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			showClock={true}
 			alwaysVertical={true}
 			minWidthInPixels={258}
+			isFullCardImage={isFullCardImage}
 		/>
 	</LI>
 );
@@ -233,6 +243,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	trails,
 	ophanComponentName,
 	pillar,
+	isFullCardImage,
 }: OnwardsType) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 	const [index, setIndex] = useState(0);
@@ -379,7 +390,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 					))}
 				</div>
 
-				<ul className={carouselStyle} ref={carouselRef}>
+				<ul
+					className={carouselStyle(isFullCardImage)}
+					ref={carouselRef}
+				>
 					{trails.map((trail, i) => {
 						const {
 							pillar: cardPillar,
@@ -401,6 +415,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								webPublicationDate={webPublicationDate}
 								imageUrl={imageUrl}
 								kickerText={kickerText}
+								isFullCardImage={isFullCardImage}
 							/>
 						);
 					})}

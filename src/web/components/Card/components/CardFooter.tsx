@@ -9,12 +9,21 @@ type Props = {
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
+	isFullCardImage?: boolean;
 };
 
 const spaceBetween = css`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+`;
+
+const fullCardImageLayout = css`
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+	margin-bottom: -2px;
+	margin-right: -1px;
 `;
 
 const flexEnd = css`
@@ -29,7 +38,13 @@ const linesWrapperStyles = css`
 	margin-top: 5px;
 `;
 
-export const CardFooter = ({ design, age, mediaMeta, commentCount }: Props) => {
+export const CardFooter = ({
+	design,
+	age,
+	mediaMeta,
+	commentCount,
+	isFullCardImage,
+}: Props) => {
 	if (design === Design.Comment || design === Design.GuardianView) {
 		return (
 			<footer className={spaceBetween}>
@@ -54,7 +69,9 @@ export const CardFooter = ({ design, age, mediaMeta, commentCount }: Props) => {
 
 	if (age) {
 		return (
-			<footer className={spaceBetween}>
+			<footer
+				className={isFullCardImage ? fullCardImageLayout : spaceBetween}
+			>
 				{age}
 				{commentCount}
 			</footer>

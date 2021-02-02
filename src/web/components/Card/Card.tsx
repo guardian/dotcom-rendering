@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { Design, Pillar } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
@@ -82,6 +82,12 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	</>
 );
 
+const fullCardImageAgeStyles = css`
+	min-width: 25%;
+	align-self: flex-end;
+	text-align: end;
+`;
+
 export const Card = ({
 	linkTo,
 	format,
@@ -94,6 +100,7 @@ export const Card = ({
 	imageUrl,
 	imagePosition,
 	imageSize,
+	isFullCardImage,
 	standfirst,
 	avatar,
 	showClock,
@@ -139,6 +146,7 @@ export const Card = ({
 							<ImageWrapper
 								percentage={imageCoverage}
 								alwaysVertical={alwaysVertical}
+								isFullCardImage={isFullCardImage}
 							>
 								<img
 									src={imageUrl}
@@ -154,9 +162,14 @@ export const Card = ({
 								</>
 							</ImageWrapper>
 						)}
-						<ContentWrapper percentage={contentCoverage}>
+						<ContentWrapper
+							percentage={contentCoverage}
+							isFullCardImage={isFullCardImage}
+						>
 							<Flex>
-								<HeadlineWrapper>
+								<HeadlineWrapper
+									isFullCardImage={isFullCardImage}
+								>
 									<CardHeadline
 										headlineText={headlineText}
 										design={format.design}
@@ -178,6 +191,7 @@ export const Card = ({
 										}
 										byline={byline}
 										showByline={showByline}
+										isFullCardImage={isFullCardImage}
 									/>
 								</HeadlineWrapper>
 								<>
@@ -196,7 +210,11 @@ export const Card = ({
 									)}
 								</>
 							</Flex>
-							<div>
+							<div
+								className={cx(
+									isFullCardImage && fullCardImageAgeStyles,
+								)}
+							>
 								{standfirst && (
 									<StandfirstWrapper>
 										{standfirst}
@@ -224,9 +242,13 @@ export const Card = ({
 													webPublicationDate
 												}
 												showClock={showClock}
+												isFullCardImage={
+													isFullCardImage
+												}
 											/>
 										) : undefined
 									}
+									isFullCardImage={isFullCardImage}
 									mediaMeta={
 										format.design === Design.Media &&
 										mediaType ? (
