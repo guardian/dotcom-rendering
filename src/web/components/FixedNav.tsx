@@ -26,9 +26,9 @@ const fixed = (pillar: Pillar) => css`
 		1px 3px 6px ${neutralBorder(pillar)};
 `;
 
-// FixedNav will stay fixed to the top of the screen as the user scrolls down
-// until disappearing after a certain threshold of scrolling. It will also show,
-// even if outside this range, if the user is scrolling up.
+// FixedNav reappears fixed to top of viewport if below initial buffer and user
+// is scrolling back. Idea is that scrolling back up may indicate intent to
+// reach nav.
 export const FixedNav: React.FC<Props> = ({
 	CAPI,
 	NAV,
@@ -43,15 +43,13 @@ export const FixedNav: React.FC<Props> = ({
 	useEffect(() => {
 		const handle = () => {
 			setState((oldState) => {
-				const rangeStart = 300; // TODO derive from nav value, but difficult as ads can shift layout.
-				const rangeEnd = 600;
+				const buffer = 300;
 				const newY = window.scrollY;
 				const goingBack = newY < oldState.scrollY;
-				const inStickyRange = newY > rangeStart && newY < rangeEnd;
-				const beforeRange = newY < rangeStart;
+				const beforeRange = newY < buffer;
 
 				return {
-					shouldFix: inStickyRange || (goingBack && !beforeRange),
+					shouldFix: goingBack && !beforeRange,
 					scrollY: newY,
 				};
 			});
@@ -62,7 +60,6 @@ export const FixedNav: React.FC<Props> = ({
 		});
 
 		return () => {
-			console.log('removing event listener...');
 			window.removeEventListener('scroll', handle);
 		};
 	}, []);
