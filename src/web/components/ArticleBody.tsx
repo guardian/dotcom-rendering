@@ -11,6 +11,7 @@ import type { Format } from '@guardian/types';
 
 type Props = {
 	format: Format;
+	palette: Palette;
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
@@ -60,13 +61,20 @@ const linkColour = pillarMap(
 	`,
 );
 
-export const ArticleBody = ({ format, blocks, adTargeting, host }: Props) => {
+export const ArticleBody = ({
+	format,
+	palette,
+	blocks,
+	adTargeting,
+	host,
+}: Props) => {
 	return (
 		<div
 			className={cx(bodyStyle(format.display), linkColour[format.theme])}
 		>
 			<ArticleRenderer
 				format={format}
+				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}

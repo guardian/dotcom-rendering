@@ -8,9 +8,10 @@ export const SpotifyBlockComponent: React.FC<{
 	width?: number;
 	title?: string;
 	format: Format;
+	palette: Palette;
 	caption?: string;
 	credit?: string;
-}> = ({ embedUrl, width, height, title, format, caption, credit }) => {
+}> = ({ embedUrl, width, height, title, format, palette, caption, credit }) => {
 	const embedContainer = css`
 		iframe {
 			width: 100%;
@@ -33,6 +34,7 @@ export const SpotifyBlockComponent: React.FC<{
 						<Caption
 							captionText={caption}
 							format={format}
+							palette={palette}
 							credit={credit}
 						/>
 					)}

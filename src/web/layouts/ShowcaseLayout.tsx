@@ -367,6 +367,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<div className={mainMediaWrapper}>
 							<MainMedia
 								format={format}
+								palette={palette}
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								starRating={
@@ -423,6 +424,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<main className={maxWidth}>
 								<ArticleBody
 									format={format}
+									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}

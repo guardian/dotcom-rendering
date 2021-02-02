@@ -11,6 +11,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 type Props = {
 	images: ImageBlockElement[];
 	format: Format;
+	palette: Palette;
 	caption?: string;
 };
 
@@ -95,6 +96,7 @@ const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 export const MultiImageBlockComponent = ({
 	images,
 	format,
+	palette,
 	caption,
 }: Props) => {
 	const imageCount = images.length;
@@ -113,6 +115,7 @@ export const MultiImageBlockComponent = ({
 					`}
 				>
 					<ImageComponent
+						palette={palette}
 						format={format}
 						element={images[0]}
 						hideCaption={true}
@@ -120,6 +123,7 @@ export const MultiImageBlockComponent = ({
 					/>
 					{caption && (
 						<Caption
+							palette={palette}
 							format={format}
 							captionText={caption}
 							shouldLimitWidth={false}
@@ -143,6 +147,7 @@ export const MultiImageBlockComponent = ({
 					<SideBySideGrid>
 						<GridItem area="first">
 							<ImageComponent
+								palette={palette}
 								element={images[0]}
 								format={format}
 								hideCaption={true}
@@ -151,6 +156,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
+								palette={palette}
 								element={images[1]}
 								format={format}
 								hideCaption={true}
@@ -160,6 +166,7 @@ export const MultiImageBlockComponent = ({
 					</SideBySideGrid>
 					{caption && (
 						<Caption
+							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}
@@ -183,6 +190,7 @@ export const MultiImageBlockComponent = ({
 					<OneAboveTwoGrid>
 						<GridItem area="first">
 							<ImageComponent
+								palette={palette}
 								element={images[0]}
 								format={format}
 								hideCaption={true}
@@ -191,6 +199,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
+								palette={palette}
 								element={images[1]}
 								format={format}
 								hideCaption={true}
@@ -199,6 +208,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="third">
 							<ImageComponent
+								palette={palette}
 								element={images[2]}
 								format={format}
 								hideCaption={true}
@@ -208,6 +218,7 @@ export const MultiImageBlockComponent = ({
 					</OneAboveTwoGrid>
 					{caption && (
 						<Caption
+							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}
@@ -230,6 +241,7 @@ export const MultiImageBlockComponent = ({
 					<GridOfFour>
 						<GridItem area="first">
 							<ImageComponent
+								palette={palette}
 								element={images[0]}
 								format={format}
 								hideCaption={true}
@@ -238,6 +250,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="second">
 							<ImageComponent
+								palette={palette}
 								element={images[1]}
 								format={format}
 								hideCaption={true}
@@ -246,6 +259,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="third">
 							<ImageComponent
+								palette={palette}
 								element={images[2]}
 								format={format}
 								hideCaption={true}
@@ -254,6 +268,7 @@ export const MultiImageBlockComponent = ({
 						</GridItem>
 						<GridItem area="forth">
 							<ImageComponent
+								palette={palette}
 								element={images[3]}
 								format={format}
 								hideCaption={true}
@@ -263,6 +278,7 @@ export const MultiImageBlockComponent = ({
 					</GridOfFour>
 					{caption && (
 						<Caption
+							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}

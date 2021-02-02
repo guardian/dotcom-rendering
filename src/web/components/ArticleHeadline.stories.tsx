@@ -140,6 +140,11 @@ export const ShowcaseInterview = () => (
 						design: Design.Article,
 						theme: Pillar.News,
 					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					hideCaption={true}
 					elements={mainMediaElements}
 				/>
@@ -184,6 +189,11 @@ export const ShowcaseInterviewNobyline = () => (
 						design: Design.Article,
 						theme: Pillar.News,
 					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					hideCaption={true}
 					elements={mainMediaElements}
 				/>
@@ -228,6 +238,11 @@ export const Interview = () => (
 						design: Design.Article,
 						theme: Pillar.News,
 					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					hideCaption={true}
 					elements={mainMediaElements}
 				/>
@@ -270,6 +285,11 @@ export const InterviewNoByline = () => (
 						design: Design.Article,
 						theme: Pillar.News,
 					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					hideCaption={true}
 					elements={mainMediaElements}
 				/>

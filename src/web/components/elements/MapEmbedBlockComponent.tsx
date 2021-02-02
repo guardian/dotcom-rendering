@@ -11,8 +11,9 @@ export const MapEmbedBlockComponent: React.FC<{
 	title?: string;
 	caption?: string;
 	format: Format;
+	palette: Palette;
 	credit?: string;
-}> = ({ embedUrl, title, width, height, caption, format, credit }) => {
+}> = ({ embedUrl, title, width, height, caption, format, palette, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -45,6 +46,7 @@ export const MapEmbedBlockComponent: React.FC<{
 				<Caption
 					captionText={caption}
 					format={format}
+					palette={palette}
 					credit={credit}
 				/>
 			)}

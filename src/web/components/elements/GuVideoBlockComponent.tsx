@@ -7,9 +7,10 @@ import { Caption } from '@root/src/web/components/Caption';
 export const GuVideoBlockComponent: React.FC<{
 	html: string;
 	format: Format;
+	palette: Palette;
 	credit: string;
 	caption?: string;
-}> = ({ html, format, credit, caption }) => {
+}> = ({ html, format, palette, credit, caption }) => {
 	const embedContainer = css`
 		width: 100%;
 		margin-bottom: ${caption ? `0px` : `6px`};
@@ -26,6 +27,7 @@ export const GuVideoBlockComponent: React.FC<{
 				<Caption
 					captionText={caption}
 					format={format}
+					palette={palette}
 					credit={credit}
 				/>
 			)}

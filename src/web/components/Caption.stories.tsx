@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
+import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: Caption,
@@ -30,6 +31,11 @@ export const Article = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
@@ -44,6 +50,11 @@ export const Analysis = () => (
 				design: Design.Analysis,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
@@ -58,10 +69,34 @@ export const PhotoEssay = () => (
 				design: Design.PhotoEssay,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Immersive,
+				design: Design.PhotoEssay,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
 PhotoEssay.story = { name: 'PhotoEssay' };
+
+export const SpecialReport = () => (
+	<Section showTopBorder={false} showSideBorders={false}>
+		<Caption
+			captionText="<ul><li>This is how a SpecialReport caption looks</li></ul>"
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Special.SpecialReport,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Special.SpecialReport,
+			})}
+		/>
+	</Section>
+);
+SpecialReport.story = { name: 'SpecialReport' };
 
 export const PhotoEssayLimitedWidth = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
@@ -72,6 +107,11 @@ export const PhotoEssayLimitedWidth = () => (
 				design: Design.PhotoEssay,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Immersive,
+				design: Design.PhotoEssay,
+				theme: Pillar.News,
+			})}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -87,6 +127,11 @@ export const Credit = () => (
 				design: Design.Feature,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.News,
+			})}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
@@ -103,6 +148,11 @@ export const WidthLimited = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -118,6 +168,11 @@ export const Padded = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			padCaption={true}
 		/>
 	</Section>

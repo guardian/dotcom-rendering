@@ -54,10 +54,11 @@ const commercialPosition = css`
 
 export const ArticleRenderer: React.FC<{
 	format: Format;
+	palette: Palette;
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, elements, adTargeting, host }) => {
+}> = ({ format, palette, elements, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -93,6 +94,7 @@ export const ArticleRenderer: React.FC<{
 						<CaptionBlockComponent
 							key={i}
 							format={format}
+							palette={palette}
 							captionText={element.captionText}
 							padCaption={element.padCaption}
 							credit={element.credit}
@@ -226,6 +228,7 @@ export const ArticleRenderer: React.FC<{
 							<GuVideoBlockComponent
 								html={element.html}
 								format={format}
+								palette={palette}
 								credit={element.source}
 								caption={element.caption}
 							/>
@@ -240,6 +243,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<ImageBlockComponent
 								format={format}
+								palette={palette}
 								key={i}
 								element={element}
 								title={element.title}
@@ -271,6 +275,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<MapEmbedBlockComponent
 								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
@@ -285,6 +290,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<MultiImageBlockComponent
 								format={format}
+								palette={palette}
 								key={i}
 								images={element.images}
 								caption={element.caption}
@@ -360,6 +366,7 @@ export const ArticleRenderer: React.FC<{
 								width={element.width}
 								title={element.title}
 								format={format}
+								palette={palette}
 								caption={element.caption}
 								credit="Spotify"
 							/>
@@ -398,6 +405,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<VideoFacebookBlockComponent
 								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
@@ -412,6 +420,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<VimeoBlockComponent
 								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
@@ -426,6 +435,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<YoutubeEmbedBlockComponent
 								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
@@ -444,6 +454,7 @@ export const ArticleRenderer: React.FC<{
 						>
 							<YoutubeBlockComponent
 								format={format}
+								palette={palette}
 								key={i}
 								hideCaption={false}
 								// eslint-disable-next-line jsx-a11y/aria-role

@@ -58,6 +58,7 @@ const immersiveWrapper = css`
 function renderElement(
 	element: CAPIElement,
 	format: Format,
+	palette: Palette,
 	i: number,
 	hideCaption?: boolean,
 	adTargeting?: AdTargeting,
@@ -71,6 +72,7 @@ function renderElement(
 					key={i}
 					element={element}
 					format={format}
+					palette={palette}
 					hideCaption={hideCaption}
 					isMainMedia={true}
 					role={element.role}
@@ -87,6 +89,7 @@ function renderElement(
 					<YoutubeBlockComponent
 						key={i}
 						format={format}
+						palette={palette}
 						hideCaption={hideCaption}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
@@ -107,6 +110,7 @@ function renderElement(
 			return (
 				<YoutubeEmbedBlockComponent
 					format={format}
+					palette={palette}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}
@@ -120,6 +124,7 @@ function renderElement(
 				<GuVideoBlockComponent
 					html={element.html}
 					format={format}
+					palette={palette}
 					credit={element.source}
 					caption={element.caption}
 				/>
@@ -139,12 +144,21 @@ function renderElement(
 
 export const MainMedia: React.FC<{
 	format: Format;
+	palette: Palette;
 	elements: CAPIElement[];
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
-}> = ({ elements, format, hideCaption, adTargeting, starRating, host }) => (
+}> = ({
+	elements,
+	format,
+	palette,
+	hideCaption,
+	adTargeting,
+	starRating,
+	host,
+}) => (
 	<div
 		className={cx(
 			mainMedia,
@@ -155,6 +169,7 @@ export const MainMedia: React.FC<{
 			renderElement(
 				element,
 				format,
+				palette,
 				i,
 				hideCaption,
 				adTargeting,

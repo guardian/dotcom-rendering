@@ -16,6 +16,7 @@ type Props = {
 	element: ImageBlockElement;
 	role: RoleType;
 	format: Format;
+	palette: Palette;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
 	starRating?: number;
@@ -209,6 +210,7 @@ const CaptionToggle = () => (
 export const ImageComponent = ({
 	element,
 	format,
+	palette,
 	hideCaption,
 	role,
 	isMainMedia,
@@ -357,6 +359,7 @@ export const ImageComponent = ({
 									<Caption
 										captionText={element.data.caption || ''}
 										format={format}
+										palette={palette}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
@@ -381,6 +384,7 @@ export const ImageComponent = ({
 					<Caption
 						captionText={element.data.caption || ''}
 						format={format}
+						palette={palette}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
 						shouldLimitWidth={shouldLimitWidth}
@@ -390,6 +394,7 @@ export const ImageComponent = ({
 				<Caption
 					captionText={element.data.caption || ''}
 					format={format}
+					palette={palette}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}

@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Display, Design, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
 export default {
@@ -36,6 +38,11 @@ export const standardAspectRatio = () => {
 					display: Display.Standard,
 					design: Design.Article,
 				}}
+				palette={decidePalette({
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				})}
 				height={259}
 				width={460}
 				caption="blah"

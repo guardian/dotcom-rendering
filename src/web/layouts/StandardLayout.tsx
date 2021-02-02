@@ -476,6 +476,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<div className={maxWidth}>
 							<MainMedia
 								format={format}
+								palette={palette}
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								host={host}
@@ -518,6 +519,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<main className={articleWidth}>
 								<ArticleBody
 									format={format}
+									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}

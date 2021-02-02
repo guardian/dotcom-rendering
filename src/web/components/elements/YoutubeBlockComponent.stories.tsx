@@ -3,6 +3,8 @@ import { css } from 'emotion';
 
 import { Display, Design, Pillar } from '@guardian/types';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -51,6 +53,11 @@ export const Default = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -85,6 +92,11 @@ export const Vertical = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -121,6 +133,11 @@ export const Expired = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -158,6 +175,11 @@ export const WithOverlayImage = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -196,6 +218,11 @@ export const WithPosterImage = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
@@ -260,6 +287,11 @@ export const WithPosterAndOverlayImage = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"

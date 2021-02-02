@@ -6,13 +6,14 @@ import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRati
 
 export const YoutubeEmbedBlockComponent: React.FC<{
 	format: Format;
+	palette: Palette;
 	embedUrl?: string;
 	height: number;
 	width: number;
 	caption?: string;
 	credit?: string;
 	title?: string;
-}> = ({ embedUrl, caption, title, format, width, height, credit }) => {
+}> = ({ embedUrl, caption, title, format, palette, width, height, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -43,6 +44,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 				<Caption
 					captionText={caption}
 					format={format}
+					palette={palette}
 					credit={credit}
 				/>
 			)}

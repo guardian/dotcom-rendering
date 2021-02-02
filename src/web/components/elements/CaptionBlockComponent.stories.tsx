@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Display, Design, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -60,6 +61,11 @@ export const StandardArticle = () => {
 					design: Design.Article,
 					theme: Pillar.News,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 		</Container>
 	);
@@ -78,6 +84,11 @@ export const PhotoEssay = () => {
 					design: Design.PhotoEssay,
 					theme: Pillar.Lifestyle,
 				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					design: Design.PhotoEssay,
+					theme: Pillar.Lifestyle,
+				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -101,6 +112,11 @@ export const PhotoEssayHTML = () => {
 					design: Design.PhotoEssay,
 					theme: Pillar.Sport,
 				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					design: Design.PhotoEssay,
+					theme: Pillar.Sport,
+				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -124,6 +140,11 @@ export const Padded = () => {
 					design: Design.Analysis,
 					theme: Pillar.Culture,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Analysis,
+					theme: Pillar.Culture,
+				})}
 				padCaption={true}
 				credit="Credit text"
 				displayCredit={false}
@@ -147,6 +168,11 @@ export const WidthLimited = () => {
 					design: Design.Review,
 					theme: Pillar.Culture,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Review,
+					theme: Pillar.Culture,
+				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -170,6 +196,11 @@ export const Credited = () => {
 					design: Design.MatchReport,
 					theme: Pillar.Culture,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.MatchReport,
+					theme: Pillar.Culture,
+				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={true}
@@ -193,6 +224,11 @@ export const Overlayed = () => {
 					design: Design.Comment,
 					theme: Pillar.Sport,
 				}}
+				palette={decidePalette({
+					display: Display.Showcase,
+					design: Design.Comment,
+					theme: Pillar.Sport,
+				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}

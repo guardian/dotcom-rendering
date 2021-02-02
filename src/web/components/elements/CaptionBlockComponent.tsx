@@ -5,6 +5,7 @@ import { Caption } from '@frontend/web/components/Caption';
 type Props = {
 	captionText?: string;
 	format: Format;
+	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -15,6 +16,7 @@ type Props = {
 export const CaptionBlockComponent = ({
 	captionText,
 	format,
+	palette,
 	padCaption = false,
 	credit,
 	displayCredit = true,
@@ -23,6 +25,7 @@ export const CaptionBlockComponent = ({
 }: Props) => (
 	<Caption
 		format={format}
+		palette={palette}
 		captionText={captionText}
 		padCaption={padCaption}
 		credit={credit}

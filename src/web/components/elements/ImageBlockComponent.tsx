@@ -3,6 +3,7 @@ import { ImageComponent } from '@root/src/web/components/elements/ImageComponent
 
 type Props = {
 	format: Format;
+	palette: Palette;
 	element: ImageBlockElement;
 	hideCaption?: boolean;
 	title?: string;
@@ -10,6 +11,7 @@ type Props = {
 
 export const ImageBlockComponent = ({
 	format,
+	palette,
 	element,
 	hideCaption,
 	title,
@@ -19,6 +21,7 @@ export const ImageBlockComponent = ({
 		<ImageComponent
 			element={element}
 			format={format}
+			palette={palette}
 			hideCaption={hideCaption}
 			role={role}
 			title={title}

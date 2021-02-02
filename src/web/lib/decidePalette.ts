@@ -84,6 +84,16 @@ const textTwitterHandle = (format: Format): string => {
 	return text.supporting;
 };
 
+const textCaption = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[200];
+	return pillarPalette[format.theme].dark;
+};
+
+const textCaptionLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -136,6 +146,11 @@ const fillShareIcon = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillCaptionTriangle = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -144,6 +159,8 @@ export const decidePalette = (format: Format): Palette => {
 			sectionTitle: textSectionTitle(format),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
+			caption: textCaption(format),
+			captionLink: textCaptionLink(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -154,6 +171,7 @@ export const decidePalette = (format: Format): Palette => {
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
+			captionTriangle: fillCaptionTriangle(format),
 		},
 	};
 };

@@ -388,6 +388,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				>
 					<YoutubeBlockComponent
 						format={format}
+						palette={palette}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
@@ -413,6 +414,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				>
 					<YoutubeBlockComponent
 						format={format}
+						palette={palette}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
