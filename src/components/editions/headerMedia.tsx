@@ -54,6 +54,20 @@ const captionStyles = css`
 	}
 `;
 
+const videoWrapperStyles = css`
+	width: 100%;
+	position: relative;
+	padding-bottom: 56.25%;
+`;
+
+const videoStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`;
+
 const fullWidthCaptionStyles = css`
 	width: 100%;
 
@@ -127,7 +141,7 @@ const fullWidthSizes: Sizes = {
 	default: '100vw',
 };
 
-const HeaderImage: FC<Props> = ({ item }) => {
+const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const {
 		cameraIcon: iconColor,
@@ -165,12 +179,26 @@ const HeaderImage: FC<Props> = ({ item }) => {
 					<StarRating item={item} />
 				</figure>
 			);
+		} else {
+			const {
+				video: { title, atomId },
+			} = media;
+			return (
+				<div css={videoWrapperStyles}>
+					<iframe
+						title={title}
+						css={videoStyles}
+						frameBorder="0"
+						scrolling="no"
+						allowFullScreen
+						src={`https://embed.theguardian.com/embed/atom/media/${atomId}#noadsaf`}
+					></iframe>
+				</div>
+			);
 		}
-
-		return null;
 	});
 };
 
 // ----- Exports ----- //
 
-export default HeaderImage;
+export default HeaderMedia;

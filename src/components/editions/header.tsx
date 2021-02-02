@@ -6,7 +6,7 @@ import { border, neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
-import HeaderImage from 'components/editions/headerImage';
+import HeaderMedia from 'components/editions/headerMedia';
 import Headline from 'components/editions/headline';
 import Lines from 'components/editions/lines';
 import Series from 'components/editions/series';
@@ -103,7 +103,7 @@ const linesBorderStyles = css`
 
 const StandardHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Series item={item} />
 		<Headline item={item} />
 		<Standfirst item={item} />
@@ -116,7 +116,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<Series item={item} />
 		<Headline item={item} />
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Standfirst item={item} />
 		<Lines />
 		<Byline item={item} shareIcon />
@@ -125,7 +125,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 
 const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Headline item={item} />
 		<Byline item={item} large />
 		<Lines />
@@ -135,7 +135,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 
 const CommentHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<Headline item={item} />
 		<Byline item={item} large avatar />
 		<Lines />
@@ -145,7 +145,7 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 
 const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<div css={interviewAndImmersiveStyles(item)}>
 			<Headline item={item} />
 			<Standfirst item={item} />
@@ -157,7 +157,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 
 const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={galleryHeaderStyles}>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<div css={galleryInnerHeaderStyles}>
 			<Headline item={item} />
 			<div css={galleryHeaderBorderStyles}>
@@ -171,7 +171,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 
 const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
-		<HeaderImage item={item} />
+		<HeaderMedia item={item} />
 		<div css={interviewAndImmersiveStyles(item)}>
 			<Headline item={item} />
 			<Standfirst item={item} />

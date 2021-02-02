@@ -7,6 +7,8 @@ interface Video {
 	posterUrl: string;
 	videoId: string;
 	duration?: number;
+	atomId: string;
+	title: string;
 }
 
 const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
@@ -14,19 +16,25 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 		return none;
 	}
 
-	const id = element.contentAtomTypeData?.atomId;
-	const atom = atoms.media?.find((media) => media.id === id);
+	const atomId = element.contentAtomTypeData?.atomId;
+	const atom = atoms.media?.find((media) => media.id === atomId);
 
 	if (atom?.data.kind !== 'media') {
 		return none;
 	}
 
-	const { posterUrl, duration, assets, activeVersion } = atom.data.media;
+	const {
+		posterUrl,
+		duration,
+		assets,
+		activeVersion,
+		title,
+	} = atom.data.media;
 	const videoId = assets.find(
 		(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
 	)?.id;
 
-	if (!posterUrl || !videoId) {
+	if (!posterUrl || !videoId || !atomId) {
 		return none;
 	}
 
@@ -34,6 +42,8 @@ const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
 		posterUrl,
 		videoId,
 		duration: duration?.toNumber(),
+		atomId,
+		title,
 	});
 };
 
