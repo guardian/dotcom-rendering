@@ -52,11 +52,10 @@ module.exports = ({ isLegacyJS }) => ({
     output: {
         filename: generateName(isLegacyJS),
         chunkFilename: generateName(isLegacyJS),
+        publicPath: ""
     },
     // fix for known issue with webpack dynamic imports
     optimization: {
-        namedModules: true,
-        namedChunks: true,
         splitChunks: { cacheGroups: { default: false } },
     },
     plugins: [
@@ -67,7 +66,6 @@ module.exports = ({ isLegacyJS }) => ({
             output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
         }),
         DEV && new webpack.HotModuleReplacementPlugin(),
-        DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin(),
         // https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
         // [...].filter(Boolean) why it is used
@@ -76,15 +74,17 @@ module.exports = ({ isLegacyJS }) => ({
         rules: [
             {
                 test: /\.[jt]sx?|mjs$/,
-                exclude: [
-                    {
-                        test: /node_modules/,
-                        exclude: [
-                            /@guardian\/(?!(automat-modules))/,
-                            /dynamic-import-polyfill/,
-                        ],
-                    },
-                ],
+                exclude: {
+                    and: [/node_modules/],
+                    not: [
+                        // Include all @guardian modules, except automat-modules
+                        /@guardian\/(?!(automat-modules))/,
+
+                        // Include the dynamic-import-polyfill
+                        /dynamic-import-polyfill/,
+                    ],
+                },
+
                 use: [
                     {
                         loader: 'babel-loader',
