@@ -2,29 +2,53 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import libDebounce from 'lodash/debounce';
 
-import {
-	SvgChevronLeftSingle,
-	SvgChevronRightSingle,
-} from '@guardian/src-icons';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
+import { pillarPalette } from '@root/src/lib/pillars';
 import { Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
+import { Hide } from '@frontend/web/components/Hide';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { Card } from '@frontend/web/components/Card/Card';
 import { LI } from '@frontend/web/components/Card/components/LI';
-import { pillarPalette } from '@root/src/lib/pillars';
 
-const navIconStyle = css`
-	display: inline-block;
+// Carousel icons - need replicating from source for centring
 
-	svg {
-		height: 32px;
-		fill: ${palette.neutral[46]};
-	}
-`;
+const SvgChevronLeftSingle = () => {
+	return (
+		<svg
+			viewBox="0 0 32 32"
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+		>
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M18.4 4L8 14.4V15.45L18.4 25.8499L19.375 24.8999L11.05 14.925L19.375 4.95L18.4 4Z"
+			/>
+		</svg>
+	);
+};
+
+const SvgChevronRightSingle = () => {
+	return (
+		<svg
+			viewBox="0 0 32 32"
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+		>
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M9.975 4L9 4.95L17.325 14.925L9 24.8999L9.975 25.8499L20.375 15.45V14.4L9.975 4Z"
+			/>
+		</svg>
+	);
+};
 
 const wrapperStyle = css`
 	display: flex;
@@ -36,6 +60,7 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	position: relative;
 
 	margin-top: 6px;
 	${from.leftCol} {
@@ -82,6 +107,7 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 		}
 
 		scrollbar-width: none;
+		padding-left: 5px; /* Fix problem with vertical divider causing shift above tablet */
 	}
 
 	margin-left: -5px; /* Align leftmost card correctly */
@@ -89,10 +115,6 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 
 const dotsStyle = css`
 	margin-bottom: ${space[2]}px;
-
-	${from.tablet} {
-		margin-left: 10px;
-	}
 `;
 
 const dotStyle = css`
@@ -135,8 +157,11 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
 `;
 
 const buttonStyle = css`
-	border: none;
-	background: none;
+	border: 0 none;
+	border-radius: 100%;
+	height: 34px;
+	width: 34px;
+	background-color: ${palette.neutral[0]};
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
@@ -144,17 +169,38 @@ const buttonStyle = css`
 	&:hover,
 	&:focus {
 		outline: none;
+		background-color: ${palette.brandAlt[400]};
 		svg {
 			fill: ${palette.neutral[7]};
 		}
 	}
+	position: relative;
+	z-index: 20;
+	svg {
+		fill: ${palette.neutral[100]};
+		height: 34px;
+	}
 `;
 
-const navRowStyles = css`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+const nextButtonStyle = css`
+	padding-left: 5px;
+`;
 
+const navIconContainerStyle = css`
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	align-items: center;
+	justify-content: space-between;
+
+	${until.desktop} {
+		display: none;
+	}
+`;
+
+const headerRowStyles = css`
 	${from.tablet} {
 		padding-right: 10px;
 	}
@@ -167,8 +213,10 @@ const navRowStyles = css`
 const headerStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${palette.text.primary};
-	padding-bottom: 6px;
-	padding-top: 0;
+	${headline.xsmall({ fontWeight: 'bold' })};
+	padding-bottom: ${space[2]}px;
+	padding-top: ${space[1]}px;
+	margin-left: 0;
 `;
 
 const titleStyle = (pillar: Theme) => css`
@@ -236,6 +284,42 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			isFullCardImage={isFullCardImage}
 		/>
 	</LI>
+);
+
+type HeaderAndNavProps = {
+	heading: string;
+	trails: TrailType[];
+	pillar: Theme;
+	index: number;
+	goToIndex: (newIndex: number) => void;
+};
+
+const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
+	heading,
+	trails,
+	pillar,
+	index,
+	goToIndex,
+}) => (
+	<>
+		<Title title={heading} pillar={pillar} />
+		<div className={dotsStyle}>
+			{trails.map((value, i) => (
+				<span
+					onClick={() => goToIndex(i)}
+					// This button is not particularly useful for keyboard users as the stories
+					// are tabb-able themselves so we hide them with aria and make them
+					// not available to keyboard
+					aria-hidden="true"
+					className={cx(
+						dotStyle,
+						i === index && dotActiveStyle(pillar),
+						adjustNumberOfDotsStyle(i, trails.length),
+					)}
+				/>
+			))}
+		</div>
+	</>
 );
 
 export const Carousel: React.FC<OnwardsType> = ({
@@ -345,49 +429,48 @@ export const Carousel: React.FC<OnwardsType> = ({
 			data-link-name={formatAttrString(heading)}
 		>
 			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
-				<div />
+				<HeaderAndNav
+					heading={heading}
+					trails={trails}
+					pillar={pillar}
+					index={index}
+					goToIndex={goToIndex}
+				/>
 			</LeftColumn>
 			<div
 				className={containerStyles}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>
-				<div className={navRowStyles}>
-					<Title title={heading} pillar={pillar} />
-
-					<div className={navIconStyle} data-link-name="nav-arrow">
-						<button
-							onClick={prev}
-							aria-label="Move carousel backwards"
-							className={buttonStyle}
-						>
-							<SvgChevronLeftSingle />
-						</button>
-						<button
-							onClick={next}
-							aria-label="Move carousel forwards"
-							className={buttonStyle}
-						>
-							<SvgChevronRightSingle />
-						</button>
-					</div>
-				</div>
-
-				<div className={dotsStyle}>
-					{trails.map((value, i) => (
-						<span
-							onClick={() => goToIndex(i)}
-							// This button is not particularly useful for keyboard users as the stories
-							// are tabb-able themselves so we hide them with aria and make them
-							// not available to keyboard
-							aria-hidden="true"
-							className={cx(
-								dotStyle,
-								i === index && dotActiveStyle(pillar),
-								adjustNumberOfDotsStyle(i, trails.length),
-							)}
+				<Hide when="above" breakpoint="leftCol">
+					<div className={headerRowStyles}>
+						<HeaderAndNav
+							heading={heading}
+							trails={trails}
+							pillar={pillar}
+							index={index}
+							goToIndex={goToIndex}
 						/>
-					))}
+					</div>
+				</Hide>
+				<div
+					className={navIconContainerStyle}
+					data-link-name="nav-arrow"
+				>
+					<button
+						onClick={prev}
+						aria-label="Move carousel backwards"
+						className={buttonStyle}
+					>
+						<SvgChevronLeftSingle />
+					</button>
+					<button
+						onClick={next}
+						aria-label="Move carousel forwards"
+						className={cx(buttonStyle, nextButtonStyle)}
+					>
+						<SvgChevronRightSingle />
+					</button>
 				</div>
 
 				<ul
