@@ -23,7 +23,7 @@ export const pillarNames: Theme[] = [
 	Special.Labs,
 ];
 
-// pillarPalette exposes a convinience object for deciding colour based on pillar
+// pillarPalette exposes a convenience object for deciding colour
 //
 // Usage:
 // `pillarPalette[Pillar.Opinion][300]`
