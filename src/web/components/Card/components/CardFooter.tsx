@@ -18,7 +18,7 @@ const spaceBetween = css`
 	align-items: center;
 `;
 
-const fullCardImageAge = css`
+const fullCardImageLayout = css`
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
@@ -70,7 +70,7 @@ export const CardFooter = ({
 	if (age) {
 		return (
 			<footer
-				className={isFullCardImage ? fullCardImageAge : spaceBetween}
+				className={isFullCardImage ? fullCardImageLayout : spaceBetween}
 			>
 				{age}
 				{commentCount}

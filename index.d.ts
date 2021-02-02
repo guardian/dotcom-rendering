@@ -481,7 +481,7 @@ interface CardHeadlineType {
 	size?: SmallHeadlineSize;
 	byline?: string;
     showByline?: boolean;
-    isFullCardImage?: boolean; // Used for arousel AB test
+    isFullCardImage?: boolean; // Used for carousel AB test
 }
 
 type UserBadge = {

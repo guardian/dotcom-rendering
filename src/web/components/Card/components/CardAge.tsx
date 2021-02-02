@@ -21,11 +21,14 @@ const ageStyles = (
 	const smallImageSvgColor =
 		design === Design.Live ? decidePillarLight(pillar) : neutral[46];
 
+	const svgColor = isFullCardImage ? neutral[100] : smallImageSvgColor;
+
+	const smallImageTextColor =
+		design === Design.Live ? decidePillarLight(pillar) : neutral[60];
+
 	return css`
 		${textSans.xsmall()};
-		color: ${design === Design.Live
-			? decidePillarLight(pillar)
-			: neutral[60]};
+		color: ${smallImageTextColor};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -36,7 +39,7 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${isFullCardImage ? neutral[100] : smallImageSvgColor};
+			fill: ${svgColor};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
