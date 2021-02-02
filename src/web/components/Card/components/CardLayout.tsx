@@ -18,8 +18,6 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 			return 'row';
 		case 'right':
 			return 'row-reverse';
-		case 'full':
-			return 'column';
 		// If there's no image (so no imagePosition) default to top down
 		default:
 			return 'column';

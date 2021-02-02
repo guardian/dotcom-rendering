@@ -33,14 +33,12 @@ type CoveragesType = {
 		medium: CardPercentageType;
 		large: CardPercentageType;
 		jumbo: CardPercentageType;
-		immersive: CardPercentageType;
 	};
 	content: {
 		small: CardPercentageType;
 		medium: CardPercentageType;
 		large: CardPercentageType;
 		jumbo: CardPercentageType;
-		immersive: CardPercentageType;
 	};
 };
 
@@ -53,14 +51,12 @@ const coverages: CoveragesType = {
 		medium: '50%',
 		large: '67%',
 		jumbo: '75%',
-		immersive: '100%',
 	},
 	content: {
 		small: '75%',
 		medium: '50%',
 		large: '33%',
 		jumbo: '25%',
-		immersive: '25%',
 	},
 };
 

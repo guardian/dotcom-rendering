@@ -405,7 +405,7 @@ interface KickerType {
 	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'full';
+type ImagePositionType = 'left' | 'top' | 'right';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -447,7 +447,7 @@ interface CardType {
     minWidthInPixels?: number;
 }
 
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'immersive';
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 type HeadlineLink = {
