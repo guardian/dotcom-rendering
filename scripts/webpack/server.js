@@ -13,25 +13,24 @@ module.exports = () => ({
     target: 'node',
     optimization: {
         minimize: false,
-        namedModules: true,
         runtimeChunk: false,
     },
     externals: [
         '@loadable/component',
         require('webpack-node-externals')({
-            whitelist: [/^@guardian/],
+            allowlist: [/^@guardian/],
         }),
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('manifest.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('manifest.legacy.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
-        (context, request, callback) => {
+        ({request}, callback) => {
             return request.endsWith('loadable-manifest-browser.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
@@ -41,7 +40,10 @@ module.exports = () => ({
         rules: [
             {
                 test: /(\.tsx|\.js|\.ts)$/,
-                exclude: /node_modules\/(?!(@guardian\/discussion-rendering)|(@guardian\/types)|(dynamic-import-polyfill))\/.*/,
+                exclude: {
+                    and: [/node_modules/],
+                    not: [/@guardian/, /dynamic-import-polyfill/],
+                },
                 use: [
                     {
                         loader: 'babel-loader',
