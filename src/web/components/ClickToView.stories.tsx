@@ -2,11 +2,13 @@
 import React from 'react';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
+
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-import { ClickToView } from './ClickToView';
 import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
 import { SpotifyBlockComponent } from './elements/SpotifyBlockComponent';
@@ -14,6 +16,8 @@ import { VimeoBlockComponent } from './elements/VimeoBlockComponent';
 import { DocumentBlockComponent } from './elements/DocumentBlockComponent';
 import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
 import { TweetBlockComponent } from './elements/TweetBlockComponent';
+
+import { ClickToView } from './ClickToView';
 
 export default {
 	component: ClickToView,
@@ -830,15 +834,22 @@ export const VimeoBlockComponentStory = () => {
 						role="inline"
 					>
 						<VimeoBlockComponent
-							pillar="news"
+							format={{
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							})}
 							embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
 							height={EmbeddedElements.vimeoVideoEmbed.height}
 							width={EmbeddedElements.vimeoVideoEmbed.width}
 							caption={EmbeddedElements.vimeoVideoEmbed.caption}
 							credit={EmbeddedElements.vimeoVideoEmbed.credit}
 							title={EmbeddedElements.vimeoVideoEmbed.title}
-							display={Display.Standard}
-							design={Design.Article}
 						/>
 					</ClickToView>
 				</Figure>
@@ -1024,10 +1035,17 @@ export const SpotifyBlockComponentStory = () => {
 							height={EmbeddedElements.spotifyAudioEmbed.height}
 							width={EmbeddedElements.spotifyAudioEmbed.width}
 							title={EmbeddedElements.spotifyAudioEmbed.title}
-							pillar={theme}
 							caption={EmbeddedElements.spotifyAudioEmbed.caption}
-							design={design}
-							display={display}
+							format={{
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							})}
 							credit="Spotify"
 						/>
 					</ClickToView>
