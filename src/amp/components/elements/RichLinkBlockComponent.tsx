@@ -30,7 +30,7 @@ const richLink = css`
 	:hover {
 		text-decoration: underline;
 	}
-	::before {
+	:before {
 		${textSans.xsmall()};
 		content: 'More on this topic';
 		display: block;

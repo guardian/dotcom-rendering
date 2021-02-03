@@ -41,6 +41,9 @@ const pillarsStyles = (display: Display) => css`
 		${from.leftCol} {
 			width: ${pillarWidth}px;
 		}
+		:before {
+			content: '\200B';
+		}
 	}
 
 	:after {

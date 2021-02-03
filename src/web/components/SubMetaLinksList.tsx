@@ -14,6 +14,10 @@ const pillarColours = pillarMap(
 
 const subMetaLinksList = css`
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	li::before {
+		content: '\200B'; /* Zero width space */
+	}
 `;
 
 const subMetaKeywordLinksList = css`

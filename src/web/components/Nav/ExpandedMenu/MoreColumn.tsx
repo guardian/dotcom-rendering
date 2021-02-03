@@ -22,6 +22,10 @@ const pillarColumnLinks = css`
 const columnStyle = css`
 	${textSans.medium()};
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	::before {
+		content: '\200B'; /* Zero width space */
+	}
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
@@ -94,6 +98,10 @@ const columnLinks = css`
 	display: flex;
 	flex-wrap: wrap;
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	::before {
+		content: '\200B'; /* Zero width space */
+	}
 	margin: 0;
 	padding: 0 0 12px;
 	position: relative;

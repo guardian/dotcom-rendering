@@ -13,7 +13,7 @@ const livePulse = keyframes`{
 
 const pulsingDot = (colour?: string) => css`
 	color: ${colour && colour};
-	::before {
+	:before {
 		border-radius: 62.5rem;
 		display: inline-block;
 		position: relative;
