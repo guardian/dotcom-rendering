@@ -163,7 +163,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 		} else {
 			setShowMore(false);
 		}
-	}, [ulRef]);
+	}, []);
 
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
@@ -176,6 +176,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				spaceBetween,
 			)}
 			data-cy="sub-nav"
+			data-component="sub-nav"
 		>
 			<ul
 				ref={ulRef}
