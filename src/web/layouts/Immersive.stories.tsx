@@ -16,12 +16,11 @@ import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
 import { PrintShop } from '@root/fixtures/articles/PrintShop';
 
-import { NAV } from '@root/fixtures/NAV';
-
 import { HydrateApp } from '@root/src/web/components/HydrateApp';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
+import { extractNAV } from '@root/src/model/extract-nav';
 import { DecideLayout } from './DecideLayout';
 
 mockRESTCalls();
@@ -48,11 +47,13 @@ const convertToImmersive = (CAPI: CAPIType) => {
 // the client. We need a separate component so that we can make use of useEffect to ensure
 // the hydrate step only runs once the dom has been rendered.
 const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
+	const NAV = extractNAV(ServerCAPI.nav);
+
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
 		HydrateApp({ CAPI, NAV });
 		embedIframe();
-	}, [ServerCAPI]);
+	}, [ServerCAPI, NAV]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
