@@ -55,6 +55,7 @@ type Palette = {
 		subMeta: Colour;
 		subMetaLabel: Colour;
 		subMetaLink: Colour;
+		syndicationButton: Colour;
 	},
 	background: {
 		article: Colour;
@@ -67,6 +68,9 @@ type Palette = {
 		shareIcon: Colour;
 		captionTriangle: Colour;
 	},
+	border: {
+		syndicationButton: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

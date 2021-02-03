@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { border, text } from '@guardian/src-foundations/palette';
+import { border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
 
@@ -92,10 +92,10 @@ type Props = {
 	badge?: BadgeType;
 };
 
-const syndicationButtonOverrides = css`
+const syndicationButtonOverrides = (palette: Palette) => css`
 	> a {
-		color: ${text.supporting};
-		border-color: ${border.secondary};
+		color: ${palette.text.syndicationButton};
+		border-color: ${palette.border.syndicationButton};
 		font-weight: normal;
 	}
 `;
@@ -184,7 +184,7 @@ export const SubMeta = ({
 							'messenger',
 						]}
 					/>
-					<div className={syndicationButtonOverrides}>
+					<div className={syndicationButtonOverrides(palette)}>
 						<LinkButton
 							priority="tertiary"
 							size="xsmall"

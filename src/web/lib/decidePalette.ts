@@ -6,6 +6,7 @@ import {
 	specialReport,
 	opinion,
 	brandAltBackground,
+	border,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -109,6 +110,11 @@ const textSubMetaLink = (format: Format): string => {
 	return text.supporting;
 };
 
+const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return text.supporting;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -166,6 +172,10 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderSyndicationButton = (): string => {
+	return border.secondary;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -179,6 +189,7 @@ export const decidePalette = (format: Format): Palette => {
 			subMeta: textSubMeta(format),
 			subMetaLabel: textSubMetaLabel(format),
 			subMetaLink: textSubMetaLink(format),
+			syndicationButton: textSyndicationButton(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -190,6 +201,9 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+		},
+		border: {
+			syndicationButton: borderSyndicationButton(),
 		},
 	};
 };
