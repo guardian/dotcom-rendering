@@ -461,7 +461,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							palette={palette}
 						/>
 					</>
 				</HydrateOnce>

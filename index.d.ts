@@ -64,6 +64,9 @@ type Palette = {
 		shareIcon: Colour;
 		captionTriangle: Colour;
 	},
+	border: {
+		subNav: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

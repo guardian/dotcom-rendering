@@ -151,6 +151,10 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderSubNav = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -172,6 +176,9 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+		},
+		border: {
+			subNav: borderSubNav(format),
 		},
 	};
 };
