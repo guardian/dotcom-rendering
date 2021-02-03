@@ -345,7 +345,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								palette={palette}
 							/>
 						</Section>
 					)}
@@ -502,7 +502,6 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={format.theme}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -619,7 +618,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>

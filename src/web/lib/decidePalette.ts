@@ -6,6 +6,7 @@ import {
 	specialReport,
 	opinion,
 	brandAltBackground,
+	border,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -14,7 +15,7 @@ const WHITE = neutral[100];
 const BLACK = text.primary;
 
 const textHeadline = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[300];
+	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.display) {
 		case Display.Immersive:
 			switch (format.design) {
@@ -85,13 +86,38 @@ const textTwitterHandle = (format: Format): string => {
 };
 
 const textCaption = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[200];
-	return pillarPalette[format.theme].dark;
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	switch (format.design) {
+		case Design.PhotoEssay:
+			return pillarPalette[format.theme].dark;
+		default:
+			return text.supporting;
+	}
 };
 
 const textCaptionLink = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return pillarPalette[format.theme].main;
+};
+
+const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
+const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
+const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return text.supporting;
 };
 
 const backgroundArticle = (format: Format): string => {
@@ -151,6 +177,14 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderSyndicationButton = (): string => {
+	return border.secondary;
+};
+
+const borderSubNav = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -161,6 +195,10 @@ export const decidePalette = (format: Format): Palette => {
 			twitterHandle: textTwitterHandle(format),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
+			subMeta: textSubMeta(format),
+			subMetaLabel: textSubMetaLabel(format),
+			subMetaLink: textSubMetaLink(format),
+			syndicationButton: textSyndicationButton(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -172,6 +210,10 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+		},
+		border: {
+			syndicationButton: borderSyndicationButton(),
+			subNav: borderSubNav(format),
 		},
 	};
 };

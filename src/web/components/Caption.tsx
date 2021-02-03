@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -20,12 +19,12 @@ type Props = {
 	isOverlayed?: boolean;
 };
 
-const captionStyle = css`
+const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	padding-top: 6px;
 	${textSans.xsmall()};
 	word-wrap: break-word;
-	color: ${text.supporting};
+	color: ${palette.text.caption};
 `;
 
 const bottomMargin = css`
@@ -178,7 +177,7 @@ export const Caption = ({
 			return (
 				<figcaption
 					className={cx(
-						captionStyle,
+						captionStyle(palette),
 						shouldLimitWidth && limitedWidth,
 						!isOverlayed && bottomMargin,
 						isOverlayed && overlayedStyles,
