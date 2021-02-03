@@ -6,6 +6,7 @@ import {
 	specialReport,
 	opinion,
 	brandAltBackground,
+	border,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -99,6 +100,26 @@ const textCaptionLink = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return pillarPalette[format.theme].main;
+};
+
+const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
+const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
+const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return text.supporting;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -156,6 +177,10 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderSyndicationButton = (): string => {
+	return border.secondary;
+};
+
 const borderSubNav = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
@@ -170,6 +195,10 @@ export const decidePalette = (format: Format): Palette => {
 			twitterHandle: textTwitterHandle(format),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
+			subMeta: textSubMeta(format),
+			subMetaLabel: textSubMetaLabel(format),
+			subMetaLink: textSubMetaLink(format),
+			syndicationButton: textSyndicationButton(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -183,6 +212,7 @@ export const decidePalette = (format: Format): Palette => {
 			captionTriangle: fillCaptionTriangle(format),
 		},
 		border: {
+			syndicationButton: borderSyndicationButton(),
 			subNav: borderSubNav(format),
 		},
 	};

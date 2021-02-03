@@ -52,6 +52,10 @@ type Palette = {
 		twitterHandle: Colour;
 		caption: Colour;
 		captionLink: Colour;
+		subMeta: Colour;
+		subMetaLabel: Colour;
+		subMetaLink: Colour;
+		syndicationButton: Colour;
 	},
 	background: {
 		article: Colour;
@@ -65,6 +69,7 @@ type Palette = {
 		captionTriangle: Colour;
 	},
 	border: {
+		syndicationButton: Colour;
 		subNav: Colour;
 	}
 };
