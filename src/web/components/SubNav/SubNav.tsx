@@ -112,7 +112,7 @@ const parentLinkStyle = css`
 	font-weight: 700;
 `;
 
-const listItemStyles = css`
+const listItemStyles = (palette: Palette) => css`
 	:after {
 		content: '';
 		display: inline-block;
@@ -123,17 +123,11 @@ const listItemStyles = css`
 		border-left: 10px solid ${neutral[7]};
 		margin-top: 12px;
 		margin-left: 2px;
+		border-left-color: ${palette.border.subNav};
 
 		${from.tablet} {
 			margin-top: 16px;
 		}
-	}
-`;
-
-// I'm not sure what the palette.neutral is for this should always receive a pillar by types.
-const leftColBorder = (palette: Palette) => css`
-	:after {
-		border-left-color: ${palette.border.subNav};
 	}
 `;
 
@@ -183,7 +177,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={cx(listItemStyles, leftColBorder(palette))}
+						className={listItemStyles(palette)}
 					>
 						<a
 							className={parentLinkStyle}
