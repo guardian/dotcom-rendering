@@ -1,5 +1,5 @@
 import express from 'express';
-import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV } from '@root/src/model/extract-nav';
 
 import { document } from '@root/src/web/server/document';
 import { validateAsCAPIType } from '@root/src/model/validate';

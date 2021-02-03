@@ -98,7 +98,7 @@ export const FixedNav: React.FC<Props> = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 				</Section>
 			)}
@@ -134,7 +134,7 @@ export const FixedNav: React.FC<Props> = ({
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								palette={palette}
 							/>
 						</Section>
 					)}

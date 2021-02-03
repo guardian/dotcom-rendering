@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import {
 	neutral,
 	brandBackground,
-	brandLine,
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -26,7 +25,6 @@ import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
-import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -40,7 +38,6 @@ import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
-	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import {
 	Stuck,
@@ -271,26 +268,6 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							edition={CAPI.editionId}
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
-
-					<Section
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(CAPI),
-							}}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
 						/>
 					</Section>
 
@@ -549,7 +526,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
