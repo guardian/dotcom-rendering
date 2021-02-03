@@ -3,10 +3,11 @@ import { css, cx } from 'emotion';
 
 import { neutral, border, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { LinkButton } from '@guardian/src-button';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
-import { until, from } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
 const pillarColours = pillarMap(
@@ -98,42 +99,12 @@ type Props = {
 	badge?: BadgeType;
 };
 
-const submetaSyndication = css`
-	display: none;
-
-	${from.desktop} {
-		${textSans.xsmall()};
-		display: inline-block;
-		float: right;
+const syndicationButtonOverrides = css`
+	> a {
+		color: ${text.supporting};
+		border-color: ${border.secondary};
+		font-weight: normal;
 	}
-	a {
-		text-decoration: none;
-	}
-`;
-
-const syndicationButton = css`
-	color: ${text.supporting};
-	background-color: transparent;
-	border-color: ${border.secondary};
-	border-radius: 62.5rem;
-	border-width: 0.0625rem;
-	border-style: solid;
-	box-sizing: border-box;
-	display: inline-block;
-
-	&:hover,
-	&:focus,
-	&:active {
-		border-color: ${neutral[46]};
-	}
-
-	line-height: 24px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-
-	padding: 0 0.5rem;
 `;
 
 export const SubMeta = ({
@@ -213,40 +184,41 @@ export const SubMeta = ({
 				</ul>
 			)}
 			{showBottomSocialButtons && (
-				<ShareIcons
-					pageId={pageId}
-					webTitle={webTitle}
-					palette={palette}
-					displayIcons={[
-						'facebook',
-						'twitter',
-						'email',
-						'linkedIn',
-						'pinterest',
-						'whatsApp',
-						'messenger',
-					]}
-				/>
-			)}
-			{showBottomSocialButtons && (
-				<div className={submetaSyndication}>
-					<ul>
-						<li>
-							<a
-								data-link-name="meta-syndication-article"
-								href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
-									webUrl,
-								)}&type=article&internalpagecode=${pageId}`}
-								target="_blank"
-								rel="noopener"
-								title="Reuse this content"
-							>
-								<span className={syndicationButton}>
-									Reuse this content
-								</span>
-							</a>
-						</li>
-					</ul>
+				<div
+					className={css`
+						display: flex;
+						justify-content: space-between;
+					`}
+				>
+					<ShareIcons
+						pageId={pageId}
+						webTitle={webTitle}
+						palette={palette}
+						displayIcons={[
+							'facebook',
+							'twitter',
+							'email',
+							'linkedIn',
+							'pinterest',
+							'whatsApp',
+							'messenger',
+						]}
+					/>
+					<div className={syndicationButtonOverrides}>
+						<LinkButton
+							priority="tertiary"
+							size="xsmall"
+							data-link-name="meta-syndication-article"
+							href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
+								webUrl,
+							)}&type=article&internalpagecode=${pageId}`}
+							target="_blank"
+							rel="noopener"
+							title="Reuse this content"
+						>
+							Reuse this content
+						</LinkButton>
+					</div>
 				</div>
 			)}
 		</div>
