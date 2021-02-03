@@ -52,6 +52,9 @@ type Palette = {
 		twitterHandle: Colour;
 		caption: Colour;
 		captionLink: Colour;
+		subMeta: Colour;
+		subMetaLabel: Colour;
+		subMetaLink: Colour;
 	},
 	background: {
 		article: Colour;

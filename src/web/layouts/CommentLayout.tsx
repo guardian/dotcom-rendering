@@ -502,7 +502,6 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={format.theme}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks

@@ -510,7 +510,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={format.theme}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks

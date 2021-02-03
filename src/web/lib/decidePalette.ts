@@ -94,6 +94,21 @@ const textCaptionLink = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return pillarPalette[format.theme].main;
+};
+
+const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
+const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return text.supporting;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -161,6 +176,9 @@ export const decidePalette = (format: Format): Palette => {
 			twitterHandle: textTwitterHandle(format),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
+			subMeta: textSubMeta(format),
+			subMetaLabel: textSubMetaLabel(format),
+			subMetaLink: textSubMetaLink(format),
 		},
 		background: {
 			article: backgroundArticle(format),

@@ -1,25 +1,18 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { neutral, border, text } from '@guardian/src-foundations/palette';
+import { border, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
 import { until } from '@guardian/src-foundations/mq';
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
-const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillarPalette[pillar].main};
-		`,
-);
-const subMetaLabel = css`
+const labelStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
 	display: block;
-	color: ${neutral[60]};
+	color: ${palette.text.subMetaLabel};
 `;
 
 const badgeWrapper = css`
@@ -34,17 +27,17 @@ const bottomPadding = css`
 	}
 `;
 
-const subMetaLinksList = css`
+const listStyleNone = css`
 	list-style: none;
 `;
 
-const subMetaKeywordLinksList = css`
+const keywordListStyles = css`
 	padding-bottom: 12px;
 	margin-bottom: 6px;
 	border-bottom: 1px solid ${border.secondary};
 `;
 
-const subMetaLinksListItem = css`
+const listItemStyles = (palette: Palette) => css`
 	margin-right: 5px;
 	display: inline-block;
 	a {
@@ -59,25 +52,26 @@ const subMetaLinksListItem = css`
 		pointer-events: none;
 		top: 0;
 		right: -3px;
-		color: ${neutral[86]};
+		color: ${palette.text.subMetaLink};
 	}
 	a:hover {
 		text-decoration: underline;
 	}
 `;
 
-const subMetaLink = css`
+const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
 	}
+	color: ${palette.text.subMeta};
 `;
 
-const subMetaSectionLink = css`
+const sectionStyles = css`
 	${headline.xxxsmall()};
 `;
 
-const subMetaKeywordLink = css`
+const keywordStyles = css`
 	${textSans.small()};
 `;
 
@@ -88,7 +82,6 @@ const hideSlash = css`
 `;
 
 type Props = {
-	pillar: Theme;
 	palette: Palette;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
@@ -108,7 +101,6 @@ const syndicationButtonOverrides = css`
 `;
 
 export const SubMeta = ({
-	pillar,
 	palette,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
@@ -118,8 +110,8 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	badge,
 }: Props) => {
-	const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
-	const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
+	const hasSectionLinks = subMetaSectionLinks.length > 0;
+	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
 	return (
 		<div data-print-layout="hide" className={bottomPadding}>
 			{badge && (
@@ -130,53 +122,41 @@ export const SubMeta = ({
 					/>
 				</div>
 			)}
-			{(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
-				<span className={subMetaLabel}>Topics</span>
+			{(hasSectionLinks || hasKeywordLinks) && (
+				<span className={labelStyles(palette)}>Topics</span>
 			)}
-			{hasSubMetaSectionLinks && (
-				<ul className={subMetaLinksList}>
+			{hasSectionLinks && (
+				<ul className={listStyleNone}>
 					{subMetaSectionLinks.map((link, i) => (
 						<li
 							className={cx(
-								subMetaLinksListItem,
-								subMetaSectionLink,
+								listItemStyles(palette),
+								sectionStyles,
 								i === subMetaSectionLinks.length - 1 &&
 									hideSlash,
 							)}
 							key={link.url}
 						>
-							<a
-								className={cx(
-									subMetaLink,
-									pillarColours[pillar],
-								)}
-								href={link.url}
-							>
+							<a className={linkStyles(palette)} href={link.url}>
 								{link.title}
 							</a>
 						</li>
 					))}
 				</ul>
 			)}
-			{hasSubMetaKeywordLinks && (
-				<ul className={cx(subMetaLinksList, subMetaKeywordLinksList)}>
+			{hasKeywordLinks && (
+				<ul className={cx(listStyleNone, keywordListStyles)}>
 					{subMetaKeywordLinks.map((link, i) => (
 						<li
 							className={cx(
-								subMetaLinksListItem,
-								subMetaKeywordLink,
+								listItemStyles(palette),
+								keywordStyles,
 								i === subMetaKeywordLinks.length - 1 &&
 									hideSlash,
 							)}
 							key={link.url}
 						>
-							<a
-								className={cx(
-									subMetaLink,
-									pillarColours[pillar],
-								)}
-								href={link.url}
-							>
+							<a className={linkStyles(palette)} href={link.url}>
 								{link.title}
 							</a>
 						</li>
