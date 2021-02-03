@@ -45,6 +45,10 @@ const brandExtensionList = css`
 	${textSans.medium()};
 	flex-wrap: wrap;
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	li::before {
+		content: '\200B'; /* Zero width space */
+	}
 	margin: 0;
 	padding: 0 0 12px;
 	display: flex;

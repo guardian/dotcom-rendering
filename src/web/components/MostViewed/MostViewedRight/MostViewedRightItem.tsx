@@ -11,6 +11,10 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	::before {
+		content: '\200B'; /* Zero width space */
+	}
 	padding-top: 4px;
 	margin-bottom: 12px;
 	border-top: 1px solid ${border.secondary};

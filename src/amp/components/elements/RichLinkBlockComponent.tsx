@@ -31,8 +31,13 @@ const richLink = css`
 	:hover {
 		text-decoration: underline;
 	}
+<<<<<<< HEAD
 	::before {
 		${textSans.xxsmall()};
+=======
+	:before {
+		${textSans.xsmall()};
+>>>>>>> Add zero width space before list-style: none list items to fix accessiblity issue in safari
 		content: 'More on this topic';
 		display: block;
 		color: ${text.supporting};

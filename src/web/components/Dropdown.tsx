@@ -33,6 +33,10 @@ interface Props {
 const ulStyles = css`
 	${getZIndex('dropdown')}
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	li::before {
+		content: '\200B'; /* Zero width space */
+	}
 	background-color: white;
 	padding: 6px 0;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
