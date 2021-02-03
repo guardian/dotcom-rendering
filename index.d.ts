@@ -70,6 +70,7 @@ type Palette = {
 	},
 	border: {
 		syndicationButton: Colour;
+		subNav: Colour;
 	}
 };
 

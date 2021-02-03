@@ -176,6 +176,10 @@ const borderSyndicationButton = (): string => {
 	return border.secondary;
 };
 
+const borderSubNav = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -204,6 +208,7 @@ export const decidePalette = (format: Format): Palette => {
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
+			subNav: borderSubNav(format),
 		},
 	};
 };
