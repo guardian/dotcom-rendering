@@ -86,7 +86,12 @@ const textTwitterHandle = (format: Format): string => {
 
 const textCaption = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
-	return pillarPalette[format.theme].dark;
+	switch (format.design) {
+		case Design.PhotoEssay:
+			return pillarPalette[format.theme].dark;
+		default:
+			return text.supporting;
+	}
 };
 
 const textCaptionLink = (format: Format): string => {
