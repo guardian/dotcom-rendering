@@ -1,12 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Pillar } from '@guardian/types';
+import { Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 type Props = {
@@ -16,15 +14,6 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 };
-
-const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillar === Pillar.Opinion || pillar === Pillar.Culture
-				? pillarPalette[pillar].dark
-				: pillarPalette[pillar].main};
-		`,
-);
 
 const bodyStyle = (display: Display) => css`
 	${between.tablet.and.desktop} {
@@ -47,19 +36,17 @@ const bodyStyle = (display: Display) => css`
 	}
 `;
 
-const linkColour = pillarMap(
-	(pillar) => css`
-		a {
-			text-decoration: none;
-			border-bottom: 1px solid ${border.secondary};
-			${pillarColours[pillar]};
+const linkColour = (palette: Palette) => css`
+	a {
+		text-decoration: none;
+		border-bottom: 1px solid ${palette.border.articleLink};
+		color: ${palette.text.articleLink};
 
-			:hover {
-				border-bottom: 1px solid ${pillarPalette[pillar].main};
-			}
+		:hover {
+			border-bottom: 1px solid ${palette.border.articleLinkHover};
 		}
-	`,
-);
+	}
+`;
 
 export const ArticleBody = ({
 	format,
@@ -69,9 +56,7 @@ export const ArticleBody = ({
 	host,
 }: Props) => {
 	return (
-		<div
-			className={cx(bodyStyle(format.display), linkColour[format.theme])}
-		>
+		<div className={cx(bodyStyle(format.display), linkColour(palette))}>
 			<ArticleRenderer
 				format={format}
 				palette={palette}
