@@ -41,6 +41,10 @@ const generateScriptTags = (
 		return scriptTags;
 	}, [] as string[]);
 
+interface Props {
+	data: DCRServerDocumentData;
+}
+
 export const document = ({ data }: Props) => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;

@@ -290,7 +290,9 @@
         "badge": {
             "$ref": "#/definitions/BadgeType"
         },
-        "nav": {},
+        "nav": {
+            "$ref": "#/definitions/CAPINavType"
+        },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
         },
@@ -3006,6 +3008,162 @@
             "required": [
                 "imageUrl",
                 "seriesTag"
+            ]
+        },
+        "CAPINavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "currentParent": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "currentPillar": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/CAPILinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CAPILinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "CAPILinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "mobileOnly": {
+                    "type": "boolean"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/CAPIPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "iconName",
+                "longTitle",
+                "title",
+                "url"
+            ]
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "gifting",
+                "subscribe",
+                "support"
             ]
         },
         "FooterType": {
