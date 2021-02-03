@@ -49,7 +49,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { FixedNav } from '@root/src/web/components/FixedNav';
-import { makeGuardianBrowserCAPI } from 'src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 
 const gridTemplateWide = css`
 	grid-template-areas:

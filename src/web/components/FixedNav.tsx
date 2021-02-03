@@ -8,6 +8,8 @@ import { brandBackground, brandLine } from '@guardian/src-foundations/palette';
 import { Pillar } from '@guardian/types';
 import { neutralBorder } from '@root/src/lib/pillars';
 import libDebounce from 'lodash.debounce';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 interface Props {
 	CAPI: CAPIBrowserType;
@@ -16,7 +18,7 @@ interface Props {
 	palette: Palette;
 }
 
-const fixed = (pillar: Pillar) => css`
+const fixed = (pillar: Theme) => css`
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -38,7 +40,10 @@ export const FixedNav: React.FC<Props> = ({
 	const initialState = { shouldFix: false, scrollY: 0 };
 	const [state, setState] = useState(initialState);
 
-	const pillar = Pillar.News; // TODO use 'getCurrentPillar' but expects full CAPI type :(
+	const pillar = decideTheme({
+		pillar: CAPI.pillar,
+		design: decideDesign(CAPI.designType, CAPI.tags),
+	});
 
 	useEffect(() => {
 		const handle = () => {
