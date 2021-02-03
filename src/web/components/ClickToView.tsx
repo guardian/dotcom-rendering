@@ -22,12 +22,12 @@ const roleTextSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return textSans.small();
+			return textSans.medium();
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return textSans.xsmall();
+			return textSans.small();
 		}
 	}
 };
@@ -107,11 +107,13 @@ export const ClickToView = ({
 					flex-direction: column;
 					justify-content: space-between;
 					padding: ${space[3]}px;
+					margin-bottom: 8px;
 				`}
 			>
 				<div
 					className={css`
 						${roleHeadlineSize(role)}
+						margin-bottom: 8px;
 					`}
 				>
 					{source
@@ -123,6 +125,9 @@ export const ClickToView = ({
 						${textSize}
 						a {
 							${textSize}
+						}
+						p {
+							margin-bottom: 8px;
 						}
 					`}
 				>

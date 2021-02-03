@@ -24,6 +24,13 @@ export default {
 	title: 'Components/ClickToView',
 };
 
+const paragraphStyle = css`
+	${textSans.medium()};
+	font-weight: 300;
+	margin-top: 0;
+	margin-bottom: 8px;
+`;
+
 const RoleStory = ({
 	children,
 	role,
@@ -41,16 +48,9 @@ const RoleStory = ({
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
 					fixie hot chicken art party hell of thundercats skateboard
 					synth. Skateboard thundercats hoodie pitchfork neutra
@@ -69,12 +69,12 @@ const RoleStory = ({
 						{children}
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Truffaut deep v before they sold out shoreditch. Enamel pin
 					venmo gochujang shaman +1 try-hard keffiyeh freegan godard
 					air plant humblebrag brooklyn meggings.
 				</p>
-				<p>
+				<p className={paragraphStyle}>
 					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
 					fixie hot chicken art party hell of thundercats skateboard
 					synth. Skateboard thundercats hoodie pitchfork neutra
@@ -82,7 +82,7 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<p>
+				<p className={paragraphStyle}>
 					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
 					fixie hot chicken art party hell of thundercats skateboard
 					synth. Skateboard thundercats hoodie pitchfork neutra
@@ -90,7 +90,7 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<p>
+				<p className={paragraphStyle}>
 					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
 					fixie hot chicken art party hell of thundercats skateboard
 					synth. Skateboard thundercats hoodie pitchfork neutra
@@ -429,16 +429,9 @@ export const EmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a facebook post embed, the source article is{' '}
 					<a href="https://www.theguardian.com/uk-news/2019/aug/16/police-officers-death-sparks-sweeping-inquiry">
 						here
@@ -460,7 +453,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a vimeo embed from &apos;embed&apos; element
 					type, the source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
@@ -483,7 +476,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a youtube embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
@@ -506,7 +499,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a spotify embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
@@ -529,7 +522,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a bandcamp embed from an &apos;embed&apos;
 					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
@@ -552,7 +545,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a Our World In Data embed from an
 					&apos;embed&apos; element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
@@ -580,7 +573,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a BBC embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
@@ -603,7 +596,7 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -623,16 +616,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of an instagram embed, the source article is{' '}
 					<a href="https://www.theguardian.com/culture/2019/apr/27/idris-elba-marries-sabrina-dhowre-in-morocco">
 						here
@@ -658,7 +644,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a formstack embed, the source article is{' '}
 					<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
 						here
@@ -684,7 +670,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a scribd embed from a &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
@@ -711,7 +697,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a tiktok embed from a &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
@@ -738,7 +724,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a twitter embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
@@ -765,7 +751,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -785,16 +771,9 @@ export const VimeoBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className="para">
 					Example of a vimeo embed from &apos;video&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
@@ -830,7 +809,7 @@ export const VimeoBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -850,16 +829,9 @@ export const DocumentBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a scribd embed from a &apos;document&apos;
 					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
@@ -885,7 +857,7 @@ export const DocumentBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>
+				<p className={paragraphStyle}>The end.</p>
 			</div>
 		</ContainerLayout>
 	);
@@ -905,16 +877,9 @@ export const SoundCloudBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a soundcloud embed from an &apos;audio&apos;
 					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
@@ -935,7 +900,7 @@ export const SoundCloudBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a soundcloud embed from an &apos;embed&apos;
 					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
@@ -956,7 +921,7 @@ export const SoundCloudBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -976,16 +941,9 @@ export const SpotifyBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a spotify embed from an &apos;audio&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
@@ -1023,7 +981,7 @@ export const SpotifyBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
@@ -1044,16 +1002,9 @@ export const TweetBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
-
-					p {
-						${textSans.medium()};
-						font-weight: 300;
-						margin-top: 0;
-						margin-bottom: 8px;
-					}
 				`}
 			>
-				<p>
+				<p className={paragraphStyle}>
 					Example of a twitter embed from an &apos;tweet&apos; element
 					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
@@ -1074,7 +1025,7 @@ export const TweetBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p>The end.</p>,
+				<p className={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
