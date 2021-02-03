@@ -94,7 +94,7 @@ export const ClickToView = ({
 		}
 	};
 
-    const textSize = roleTextSize(role);
+	const textSize = roleTextSize(role);
 
 	if (isTracking && showOverlay) {
 		return (
