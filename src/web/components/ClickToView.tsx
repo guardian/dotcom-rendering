@@ -14,7 +14,7 @@ type Props = {
 	onAccept?: Function;
 	isTracking: boolean;
 	source?: string;
-	sourceDomain: string;
+	sourceDomain?: string;
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -83,7 +83,7 @@ export const ClickToView = ({
 	onAccept,
 	isTracking,
 	source,
-	sourceDomain,
+	sourceDomain = 'unknown',
 }: Props) => {
 	const [showOverlay, setShowOverlay] = useState<boolean>(true);
 
@@ -94,7 +94,7 @@ export const ClickToView = ({
 		}
 	};
 
-	const textSize = roleTextSize(role);
+    const textSize = roleTextSize(role);
 
 	if (isTracking && showOverlay) {
 		return (

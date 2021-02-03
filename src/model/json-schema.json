@@ -1187,12 +1187,22 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "embedUrl",
                 "height",
+                "isThirdPartyTracking",
                 "width"
             ]
         },

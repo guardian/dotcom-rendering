@@ -29,6 +29,7 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { ClickToView } from '@root/src/web/components/ClickToView';
 
 import { Figure } from '@root/src/web/components/Figure';
 
@@ -162,17 +163,19 @@ export const ArticleRenderer: React.FC<{
 							</>
 						</Figure>
 					);
-				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
+				case 'model.dotcomrendering.pageElements.DocumentBlockElement':{
 					return (
-						<Figure role={element.role}>
-							<DocumentBlockComponent
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								title={element.title}
-							/>
-						</Figure>
-					);
+						<ClickToView role={element.role} isTracking={element.isThirdPartyTracking} source={element.source} sourceDomain={element.sourceDomain}>
+							<Figure role={element.role}>
+								<DocumentBlockComponent
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									title={element.title}
+								/>
+							</Figure>
+						</ClickToView>
+					);}
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 					if (!element.safe) {
 						return (
