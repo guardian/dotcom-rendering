@@ -444,7 +444,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -461,7 +460,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a vimeo embed from &apos;embed&apos; element
 					type, the source article is{' '}
@@ -469,7 +467,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -486,7 +483,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a youtube embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -494,7 +490,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -511,7 +506,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a spotify embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -519,7 +513,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -536,7 +529,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a bandcamp embed from an &apos;embed&apos;
 					element type, the embed source article is{' '}
@@ -544,7 +536,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -561,7 +552,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a Our World In Data embed from an
 					&apos;embed&apos; element type, the embed source article is{' '}
@@ -569,7 +559,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -591,7 +580,6 @@ export const EmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a BBC embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -599,7 +587,6 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -651,7 +638,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -672,14 +658,12 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a formstack embed, the source article is{' '}
 					<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -700,7 +684,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a scribd embed from a &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -708,7 +691,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -729,7 +711,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a tiktok embed from a &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -737,7 +718,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -758,7 +738,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a twitter embed from an &apos;embed&apos; element
 					type, the embed source article is{' '}
@@ -766,7 +745,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -823,7 +801,6 @@ export const VimeoBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -944,7 +921,6 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -959,7 +935,6 @@ export const SoundCloudBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				,
 				<p>
 					Example of a soundcloud embed from an &apos;embed&apos;
 					element type, the embed source article is{' '}
@@ -967,7 +942,6 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -1018,7 +992,6 @@ export const SpotifyBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
@@ -1087,7 +1060,6 @@ export const TweetBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				,
 				<Figure role="inline">
 					<ClickToView
 						isTracking={true}
