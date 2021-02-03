@@ -43,6 +43,7 @@ const linkColour = (palette: Palette) => css`
 		color: ${palette.text.articleLink};
 
 		:hover {
+			color: ${palette.text.articleLinkHover};
 			border-bottom: 1px solid ${palette.border.articleLinkHover};
 		}
 	}

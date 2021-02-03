@@ -121,6 +121,17 @@ const textSyndicationButton = (format: Format): string => {
 };
 
 const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	switch (format.theme) {
+		case Pillar.Opinion:
+		case Pillar.Culture:
+			return pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textArticleLinkHover = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -197,7 +208,7 @@ const borderSubNav = (format: Format): string => {
 };
 
 const borderArticleLink = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return border.secondary;
+	if (format.theme === Special.SpecialReport) return specialReport[400];
 	return border.secondary;
 };
 
@@ -221,6 +232,7 @@ export const decidePalette = (format: Format): Palette => {
 			subMetaLink: textSubMetaLink(format),
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
+			articleLinkHover: textArticleLinkHover(format),
 		},
 		background: {
 			article: backgroundArticle(format),

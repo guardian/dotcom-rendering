@@ -57,6 +57,7 @@ type Palette = {
 		subMetaLink: Colour;
 		syndicationButton: Colour;
 		articleLink: Colour;
+		articleLinkHover: Colour;
 	},
 	background: {
 		article: Colour;
