@@ -4,13 +4,10 @@ import { css, cx } from 'emotion';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-
-import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
 type Props = {
 	subNavSections: SubNavType;
-	format: Format;
+	palette: Palette;
 	currentNavLink: string;
 };
 
@@ -134,18 +131,16 @@ const listItemStyles = css`
 `;
 
 // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
-const leftColBorder = pillarMap(
-	(pillar) => css`
-		:after {
-			border-left-color: ${pillarPalette[pillar].main};
-		}
-	`,
-);
+const leftColBorder = (palette: Palette) => css`
+	:after {
+		border-left-color: ${palette.border.subNav};
+	}
+`;
 
 const trimLeadingSlash = (url: string): string =>
 	url.substr(0, 1) === '/' ? url.slice(1) : url;
 
-export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
+export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
@@ -188,10 +183,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={cx(
-							listItemStyles,
-							leftColBorder[format.theme],
-						)}
+						className={cx(listItemStyles, leftColBorder(palette))}
 					>
 						<a
 							className={parentLinkStyle}

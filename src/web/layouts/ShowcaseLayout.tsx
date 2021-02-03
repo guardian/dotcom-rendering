@@ -301,7 +301,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								palette={palette}
 							/>
 						</Section>
 					)}
@@ -552,7 +552,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
