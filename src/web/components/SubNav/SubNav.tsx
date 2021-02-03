@@ -163,7 +163,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 		} else {
 			setShowMore(false);
 		}
-	}, [ulRef, setShowMore]);
+	}, []);
 
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
@@ -176,6 +176,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				spaceBetween,
 			)}
 			data-cy="sub-nav"
+			data-component="sub-nav"
 		>
 			<ul
 				ref={ulRef}
@@ -220,6 +221,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				<button
 					onClick={() => setIsExpanded(!isExpanded)}
 					className={showMoreStyle}
+					data-link-name="nav2 : subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}
 				</button>
