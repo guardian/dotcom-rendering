@@ -230,10 +230,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			`}
 		>
 			<Caption
-				display={format.display}
-				design={format.design}
+				palette={palette}
 				captionText={captionText}
-				pillar={format.theme}
+				format={format}
 				shouldLimitWidth={true}
 			/>
 		</div>
@@ -313,10 +312,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</header>
 
 					<MainMedia
-						display={format.display}
-						design={format.design}
+						format={format}
+						palette={palette}
 						elements={CAPI.mainMediaElements}
-						pillar={format.theme}
 						adTargeting={adTargeting}
 						starRating={
 							format.design === Design.Review && CAPI.starRating
@@ -386,10 +384,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="caption">
 						<Hide when="above" breakpoint="leftCol">
 							<Caption
-								display={format.display}
-								design={format.design}
+								palette={palette}
 								captionText={captionText}
-								pillar={format.theme}
+								format={format}
 								shouldLimitWidth={false}
 							/>
 						</Hide>
@@ -502,6 +499,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<main className={maxWidth}>
 								<ArticleBody
 									format={format}
+									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}

@@ -50,6 +50,8 @@ type Palette = {
 		sectionTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
+		caption: Colour;
+		captionLink: Colour;
 	},
 	background: {
 		article: Colour;
@@ -60,6 +62,7 @@ type Palette = {
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
+		captionTriangle: Colour;
 	},
 };
 

@@ -13,11 +13,10 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Display, Design } from '@guardian/types';
 
 type Props = {
-	display: Display;
-	design: Design;
 	element: ImageBlockElement;
 	role: RoleType;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
 	starRating?: number;
@@ -209,10 +208,9 @@ const CaptionToggle = () => (
 );
 
 export const ImageComponent = ({
-	display,
-	design,
 	element,
-	pillar,
+	format,
+	palette,
 	hideCaption,
 	role,
 	isMainMedia,
@@ -223,7 +221,8 @@ export const ImageComponent = ({
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
-		design !== Design.Comment && design !== Design.GuardianView;
+		format.design !== Design.Comment &&
+		format.design !== Design.GuardianView;
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
@@ -241,7 +240,7 @@ export const ImageComponent = ({
 			element.media.allImages[0].fields.height) ||
 		'372';
 
-	if (isMainMedia && display === Display.Immersive && isNotOpinion) {
+	if (isMainMedia && format.display === Display.Immersive && isNotOpinion) {
 		return (
 			<div
 				className={css`
@@ -267,7 +266,11 @@ export const ImageComponent = ({
 				/>
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle title={title} role={role} pillar={pillar} />
+					<ImageTitle
+						title={title}
+						role={role}
+						pillar={format.theme}
+					/>
 				)}
 			</div>
 		);
@@ -297,7 +300,11 @@ export const ImageComponent = ({
 				/>
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle title={title} role={role} pillar={pillar} />
+					<ImageTitle
+						title={title}
+						role={role}
+						pillar={format.theme}
+					/>
 				)}
 			</div>
 		);
@@ -350,10 +357,9 @@ export const ImageComponent = ({
 								<CaptionToggle />{' '}
 								<div id="the-caption">
 									<Caption
-										display={display}
-										design={design}
 										captionText={element.data.caption || ''}
-										pillar={pillar}
+										format={format}
+										palette={palette}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
@@ -366,16 +372,19 @@ export const ImageComponent = ({
 				)}
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle title={title} role={role} pillar={pillar} />
+					<ImageTitle
+						title={title}
+						role={role}
+						pillar={format.theme}
+					/>
 				)}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
 					<Caption
-						display={display}
-						design={design}
 						captionText={element.data.caption || ''}
-						pillar={pillar}
+						format={format}
+						palette={palette}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
 						shouldLimitWidth={shouldLimitWidth}
@@ -383,10 +392,9 @@ export const ImageComponent = ({
 				</Hide>
 			) : (
 				<Caption
-					display={display}
-					design={design}
 					captionText={element.data.caption || ''}
-					pillar={pillar}
+					format={format}
+					palette={palette}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}

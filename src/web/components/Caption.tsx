@@ -1,19 +1,18 @@
 import React from 'react';
+import { css, cx } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { css, cx } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
-import TriangleIcon from '@frontend/static/icons/triangle.svg';
 import { Display, Design } from '@guardian/types';
 
+import TriangleIcon from '@frontend/static/icons/triangle.svg';
+
 type Props = {
-	display: Display;
-	design: Design;
 	captionText?: string;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -105,14 +104,14 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (pillar: Theme) => css`
-	fill: ${pillarPalette[pillar].main};
+const iconStyle = (palette: Palette) => css`
+	fill: ${palette.fill.captionTriangle};
 	padding-right: 3px;
 `;
 
-const captionLink = (pillar: Theme) => css`
+const captionLink = (palette: Palette) => css`
 	a {
-		color: ${pillarPalette[pillar].main};
+		color: ${palette.text.captionLink};
 		text-decoration: none;
 	}
 	a:hover {
@@ -124,10 +123,9 @@ const captionLink = (pillar: Theme) => css`
 `;
 
 export const Caption = ({
-	display,
-	design,
 	captionText,
-	pillar,
+	format,
+	palette,
 	padCaption = false,
 	credit,
 	displayCredit = true,
@@ -139,14 +137,14 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
-	switch (design) {
+	switch (format.design) {
 		case Design.PhotoEssay:
 			return (
 				<figcaption
 					className={cx(
 						css`
 							${textSans.xsmall({ lineHeight: 'tight' })};
-							color: ${pillarPalette[pillar].dark};
+							color: ${palette.text.caption};
 							width: 100%;
 							margin-top: ${space[3]}px;
 							li:not(:first-child) {
@@ -154,8 +152,7 @@ export const Caption = ({
 							}
 							li {
 								padding-top: ${space[2]}px;
-								border-top: 1px solid
-									${pillarPalette[pillar].dark};
+								border-top: 1px solid ${palette.text.caption};
 							}
 						`,
 						bottomMargin,
@@ -166,7 +163,7 @@ export const Caption = ({
 				>
 					{captionText && (
 						<span
-							className={captionLink(pillar)}
+							className={captionLink(palette)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
@@ -192,8 +189,8 @@ export const Caption = ({
 				>
 					<span
 						className={cx(
-							iconStyle(pillar),
-							display === Display.Immersive &&
+							iconStyle(palette),
+							format.display === Display.Immersive &&
 								hideIconBelowLeftCol,
 						)}
 					>
@@ -201,7 +198,7 @@ export const Caption = ({
 					</span>
 					{captionText && (
 						<span
-							className={captionLink(pillar)}
+							className={captionLink(palette)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',

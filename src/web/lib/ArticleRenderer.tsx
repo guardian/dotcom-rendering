@@ -54,10 +54,11 @@ const commercialPosition = css`
 
 export const ArticleRenderer: React.FC<{
 	format: Format;
+	palette: Palette;
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, elements, adTargeting, host }) => {
+}> = ({ format, palette, elements, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -92,9 +93,8 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<CaptionBlockComponent
 							key={i}
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+							format={format}
+							palette={palette}
 							captionText={element.captionText}
 							padCaption={element.padCaption}
 							credit={element.credit}
@@ -227,9 +227,8 @@ export const ArticleRenderer: React.FC<{
 						<Figure role={element.role}>
 							<GuVideoBlockComponent
 								html={element.html}
-								pillar={format.theme}
-								design={format.design}
-								display={format.display}
+								format={format}
+								palette={palette}
 								credit={element.source}
 								caption={element.caption}
 							/>
@@ -243,11 +242,10 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<ImageBlockComponent
-								display={format.display}
-								design={format.design}
+								format={format}
+								palette={palette}
 								key={i}
 								element={element}
-								pillar={format.theme}
 								title={element.title}
 							/>
 						</Figure>
@@ -276,15 +274,14 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MapEmbedBlockComponent
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.source}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -292,11 +289,11 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<MultiImageBlockComponent
-								design={format.design}
+								format={format}
+								palette={palette}
 								key={i}
 								images={element.images}
 								caption={element.caption}
-								pillar={format.theme}
 							/>
 						</Figure>
 					);
@@ -368,10 +365,9 @@ export const ArticleRenderer: React.FC<{
 								height={element.height}
 								width={element.width}
 								title={element.title}
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								caption={element.caption}
-								design={format.design}
-								display={format.display}
 								credit="Spotify"
 							/>
 						</Figure>
@@ -408,13 +404,12 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VideoFacebookBlockComponent
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
-								display={format.display}
-								design={format.design}
 								credit={element.caption}
 								title={element.caption}
 							/>
@@ -424,15 +419,14 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<VimeoBlockComponent
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -440,15 +434,14 @@ export const ArticleRenderer: React.FC<{
 					return (
 						<Figure role={element.role}>
 							<YoutubeEmbedBlockComponent
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								embedUrl={element.embedUrl}
 								height={element.height}
 								width={element.width}
 								caption={element.caption}
 								credit={element.credit}
 								title={element.title}
-								display={format.display}
-								design={format.design}
 							/>
 						</Figure>
 					);
@@ -460,10 +453,9 @@ export const ArticleRenderer: React.FC<{
 							id={`youtube-block-${i}`}
 						>
 							<YoutubeBlockComponent
-								display={format.display}
-								design={format.design}
+								format={format}
+								palette={palette}
 								key={i}
-								pillar={format.theme}
 								hideCaption={false}
 								// eslint-disable-next-line jsx-a11y/aria-role
 								role="inline"
