@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { space } from '@guardian/src-foundations';
 import { border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
@@ -21,9 +22,9 @@ const badgeWrapper = css`
 `;
 
 const bottomPadding = css`
-	padding-bottom: 72px;
+	padding-bottom: ${space[9]}px;
 	${until.desktop} {
-		padding-bottom: 58px;
+		padding-bottom: ${space[5]}px;
 	}
 `;
 
