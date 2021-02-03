@@ -88,7 +88,7 @@ const textCaption = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.design) {
 		case Design.PhotoEssay:
-			return pillarPalette[format.theme].main;
+			return pillarPalette[format.theme].dark;
 		default:
 			return text.supporting;
 	}
