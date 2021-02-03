@@ -3,7 +3,7 @@ import express from 'express';
 import { document } from '@root/src/amp/server/document';
 import { Article } from '@root/src/amp/pages/Article';
 import { extractScripts } from '@root/src/amp/lib/scripts';
-import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
