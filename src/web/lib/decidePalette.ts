@@ -120,6 +120,28 @@ const textSyndicationButton = (format: Format): string => {
 	return text.supporting;
 };
 
+const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	switch (format.theme) {
+		case Pillar.Opinion:
+		case Pillar.Culture:
+			return pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	switch (format.theme) {
+		case Pillar.Opinion:
+		case Pillar.Culture:
+			return pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -185,6 +207,16 @@ const borderSubNav = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderArticleLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	return border.secondary;
+};
+
+const borderArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[100];
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -199,6 +231,8 @@ export const decidePalette = (format: Format): Palette => {
 			subMetaLabel: textSubMetaLabel(format),
 			subMetaLink: textSubMetaLink(format),
 			syndicationButton: textSyndicationButton(format),
+			articleLink: textArticleLink(format),
+			articleLinkHover: textArticleLinkHover(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -214,6 +248,8 @@ export const decidePalette = (format: Format): Palette => {
 		border: {
 			syndicationButton: borderSyndicationButton(),
 			subNav: borderSubNav(format),
+			articleLink: borderArticleLink(format),
+			articleLinkHover: borderArticleLinkHover(format),
 		},
 	};
 };
