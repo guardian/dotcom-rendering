@@ -14,7 +14,7 @@ const WHITE = neutral[100];
 const BLACK = text.primary;
 
 const textHeadline = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[300];
+	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.display) {
 		case Display.Immersive:
 			switch (format.design) {
@@ -85,7 +85,7 @@ const textTwitterHandle = (format: Format): string => {
 };
 
 const textCaption = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[200];
+	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].dark;
 };
 
