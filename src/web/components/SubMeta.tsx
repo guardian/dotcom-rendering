@@ -1,15 +1,21 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, border } from '@guardian/src-foundations/palette';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
-import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
 import { Badge } from '@frontend/web/components/Badge';
 import { until } from '@guardian/src-foundations/mq';
+import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
+const pillarColours = pillarMap(
+	(pillar) =>
+		css`
+			color: ${pillarPalette[pillar].main};
+		`,
+);
 const subMetaLabel = css`
 	${textSans.xsmall()};
 	display: block;
@@ -25,6 +31,59 @@ const bottomPadding = css`
 	padding-bottom: 72px;
 	${until.desktop} {
 		padding-bottom: 58px;
+	}
+`;
+
+const subMetaLinksList = css`
+	list-style: none;
+`;
+
+const subMetaKeywordLinksList = css`
+	padding-bottom: 12px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid ${border.secondary};
+`;
+
+const subMetaLinksListItem = css`
+	margin-right: 5px;
+	display: inline-block;
+	a {
+		position: relative;
+		display: block;
+		padding-right: 5px;
+		text-decoration: none;
+	}
+	a::after {
+		content: '/';
+		position: absolute;
+		pointer-events: none;
+		top: 0;
+		right: -3px;
+		color: ${neutral[86]};
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+`;
+
+const subMetaLink = css`
+	text-decoration: none;
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
+const subMetaSectionLink = css`
+	${headline.xxxsmall()};
+`;
+
+const subMetaKeywordLink = css`
+	${textSans.small()};
+`;
+
+const hideSlash = css`
+	a::after {
+		content: '';
 	}
 `;
 
@@ -67,18 +126,54 @@ export const SubMeta = ({
 				<span className={subMetaLabel}>Topics</span>
 			)}
 			{hasSubMetaSectionLinks && (
-				<SubMetaLinksList
-					links={subMetaSectionLinks}
-					isSectionLinkList={true}
-					pillar={pillar}
-				/>
+				<ul className={subMetaLinksList}>
+					{subMetaSectionLinks.map((link, i) => (
+						<li
+							className={cx(
+								subMetaLinksListItem,
+								subMetaSectionLink,
+								i === subMetaSectionLinks.length - 1 &&
+									hideSlash,
+							)}
+							key={link.url}
+						>
+							<a
+								className={cx(
+									subMetaLink,
+									pillarColours[pillar],
+								)}
+								href={link.url}
+							>
+								{link.title}
+							</a>
+						</li>
+					))}
+				</ul>
 			)}
 			{hasSubMetaKeywordLinks && (
-				<SubMetaLinksList
-					links={subMetaKeywordLinks}
-					isSectionLinkList={false}
-					pillar={pillar}
-				/>
+				<ul className={cx(subMetaLinksList, subMetaKeywordLinksList)}>
+					{subMetaKeywordLinks.map((link, i) => (
+						<li
+							className={cx(
+								subMetaLinksListItem,
+								subMetaKeywordLink,
+								i === subMetaKeywordLinks.length - 1 &&
+									hideSlash,
+							)}
+							key={link.url}
+						>
+							<a
+								className={cx(
+									subMetaLink,
+									pillarColours[pillar],
+								)}
+								href={link.url}
+							>
+								{link.title}
+							</a>
+						</li>
+					))}
+				</ul>
 			)}
 			{showBottomSocialButtons && (
 				<ShareIcons
