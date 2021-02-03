@@ -4,11 +4,8 @@ import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
-import {
-	submitComponentEvent,
-	record,
-} from '@root/src/web/browser/ophan/ophan';
-import { initPerf } from '@root/src/web/browser/initPerf';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { createOphanTimer } from '@root/src/web/lib/timerOphan';
 import {
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
@@ -41,23 +38,17 @@ const containerStyles = emotion.css`
     ${getZIndex('banner')}
 `;
 
+const timer = createOphanTimer('brazeBanner');
+
 const getMessageFromBraze = async (
 	apiKey: string,
 	brazeUuid: string,
 ): Promise<CanShowResult> => {
-	const sdkLoadTiming = initPerf('braze-sdk-load');
-	sdkLoadTiming.start();
+	timer.pip('canShowComplete');
 
 	const appboy = await getInitialisedAppboy(apiKey);
 
-	const sdkLoadTimeTaken = sdkLoadTiming.end();
-	record({
-		component: 'braze-sdk-load-timing',
-		value: sdkLoadTimeTaken,
-	});
-
-	const appboyTiming = initPerf('braze-appboy');
-	appboyTiming.start();
+	timer.pip('sdkLoaded');
 
 	const brazeMessages = new BrazeMessages(appboy);
 
@@ -94,12 +85,7 @@ const getMessageFromBraze = async (
 			return { result: true, meta };
 		})
 		.then((outcome) => {
-			const appboyTimeTaken = appboyTiming.end();
-
-			record({
-				component: 'braze-appboy-timing',
-				value: appboyTimeTaken,
-			});
+			timer.pip('appboyMethodsComplete');
 
 			return outcome;
 		})
@@ -107,7 +93,7 @@ const getMessageFromBraze = async (
 			return { result: false };
 		})
 		.finally(() => {
-			appboyTiming.clear();
+			timer.clear();
 		});
 };
 
@@ -181,8 +167,7 @@ export const canShow = async (
 	isSignedIn: boolean,
 	idApiUrl: string,
 ): Promise<CanShowResult> => {
-	const bannerTiming = initPerf('braze-banner');
-	bannerTiming.start();
+	timer.start();
 
 	const forcedBrazeMeta = getBrazeMetaFromQueryString();
 	if (forcedBrazeMeta) {
@@ -222,15 +207,11 @@ export const canShow = async (
 			data.brazeUuid as string,
 		);
 
-		const timeTaken = bannerTiming.end();
-		record({
-			component: 'braze-banner-timing',
-			value: timeTaken,
-		});
+		timer.pip('bannerReady');
 
 		return result;
 	} catch (e) {
-		bannerTiming.clear();
+		timer.clear();
 		return { result: false };
 	}
 };
