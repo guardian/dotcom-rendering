@@ -2,11 +2,13 @@
 import React from 'react';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Display, Design, Theme, Pillar } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
+
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-import { ClickToView } from './ClickToView';
 import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
 import { SpotifyBlockComponent } from './elements/SpotifyBlockComponent';
@@ -14,6 +16,8 @@ import { VimeoBlockComponent } from './elements/VimeoBlockComponent';
 import { DocumentBlockComponent } from './elements/DocumentBlockComponent';
 import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
 import { TweetBlockComponent } from './elements/TweetBlockComponent';
+
+import { ClickToView } from './ClickToView';
 
 export default {
 	component: ClickToView,
@@ -414,166 +418,6 @@ const EmbeddedElements = {
 	},
 };
 
-function embdedBlockComponentBody(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a facebook post embed, the source article is{' '}
-			<a href="https://www.theguardian.com/uk-news/2019/aug/16/police-officers-death-sparks-sweeping-inquiry">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.facebookEmbed.source}
-				sourceDomain={EmbeddedElements.facebookEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.facebookEmbed.html}
-					alt={EmbeddedElements.facebookEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a vimeo embed from &apos;embed&apos; element type, the
-			source article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.vimeoEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.vimeoEmbedEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.vimeoEmbedEmbed.html}
-					alt={EmbeddedElements.vimeoEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a youtube embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.youtubeEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.youtubeEmbedEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.youtubeEmbedEmbed.html}
-					alt={EmbeddedElements.youtubeEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a spotify embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.spotifyEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.spotifyEmbedEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.spotifyEmbedEmbed.html}
-					alt={EmbeddedElements.spotifyEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a bandcamp embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.bandcampEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.bandcampEmbedEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.bandcampEmbedEmbed.html}
-					alt={EmbeddedElements.bandcampEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a Our World In Data embed from an &apos;embed&apos;
-			element type, the embed source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.ourworldindataEmbedEmbed.source}
-				sourceDomain={
-					EmbeddedElements.ourworldindataEmbedEmbed.sourceDomain
-				}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.ourworldindataEmbedEmbed.html}
-					alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a BBC embed from an &apos;embed&apos; element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.bbcEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.bbcEmbedEmbed.sourceDomain}
-				role={role}
-			>
-				<EmbedBlockComponent
-					key={1}
-					html={EmbeddedElements.bbcEmbedEmbed.html}
-					alt={EmbeddedElements.bbcEmbedEmbed.alt}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
-
 export const EmbedBlockComponentStory = () => {
 	return (
 		<ContainerLayout
@@ -594,14 +438,171 @@ export const EmbedBlockComponentStory = () => {
 					}
 				`}
 			>
-				{embdedBlockComponentBody(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of a facebook post embed, the source article is{' '}
+					<a href="https://www.theguardian.com/uk-news/2019/aug/16/police-officers-death-sparks-sweeping-inquiry">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.facebookEmbed.source}
+						sourceDomain={
+							EmbeddedElements.facebookEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.facebookEmbed.html}
+							alt={EmbeddedElements.facebookEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a vimeo embed from &apos;embed&apos; element
+					type, the source article is{' '}
+					<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.vimeoEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.vimeoEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.vimeoEmbedEmbed.html}
+							alt={EmbeddedElements.vimeoEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a youtube embed from an &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.youtubeEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.youtubeEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.youtubeEmbedEmbed.html}
+							alt={EmbeddedElements.youtubeEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a spotify embed from an &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.spotifyEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.spotifyEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.spotifyEmbedEmbed.html}
+							alt={EmbeddedElements.spotifyEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a bandcamp embed from an &apos;embed&apos;
+					element type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.bandcampEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.bandcampEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.bandcampEmbedEmbed.html}
+							alt={EmbeddedElements.bandcampEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a Our World In Data embed from an
+					&apos;embed&apos; element type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={
+							EmbeddedElements.ourworldindataEmbedEmbed.source
+						}
+						sourceDomain={
+							EmbeddedElements.ourworldindataEmbedEmbed
+								.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={
+								EmbeddedElements.ourworldindataEmbedEmbed.html
+							}
+							alt={EmbeddedElements.ourworldindataEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a BBC embed from an &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.bbcEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.bbcEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<EmbedBlockComponent
+							key={1}
+							html={EmbeddedElements.bbcEmbedEmbed.html}
+							alt={EmbeddedElements.bbcEmbedEmbed.alt}
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
@@ -610,141 +611,6 @@ export const EmbedBlockComponentStory = () => {
 EmbedBlockComponentStory.story = {
 	name: 'Click to view wrapping EmbedBlockComponent',
 };
-
-function unsafeEmbedBlockComponent(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of an instagram embed, the source article is{' '}
-			<a href="https://www.theguardian.com/culture/2019/apr/27/idris-elba-marries-sabrina-dhowre-in-morocco">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.instagramEmbed.source}
-				sourceDomain={EmbeddedElements.instagramEmbed.sourceDomain}
-				role={role}
-				onAccept={() =>
-					updateIframeHeight('iframe[name="unsafe-embed-1"]')
-				}
-			>
-				<UnsafeEmbedBlockComponent
-					key="1"
-					html={EmbeddedElements.instagramEmbed.html}
-					alt={EmbeddedElements.instagramEmbed.alt}
-					index={1}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a formstack embed, the source article is{' '}
-			<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.formStackEmbed.source}
-				sourceDomain={EmbeddedElements.formStackEmbed.sourceDomain}
-				role={role}
-				onAccept={() =>
-					updateIframeHeight('iframe[name="unsafe-embed-2"]')
-				}
-			>
-				<UnsafeEmbedBlockComponent
-					key="2"
-					html={EmbeddedElements.formStackEmbed.html}
-					alt={EmbeddedElements.formStackEmbed.alt}
-					index={2}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a scribd embed from a &apos;embed&apos; element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.scribdEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.scribdEmbedEmbed.sourceDomain}
-				role={role}
-				onAccept={() =>
-					updateIframeHeight('iframe[name="unsafe-embed-3"]')
-				}
-			>
-				<UnsafeEmbedBlockComponent
-					key="3"
-					html={EmbeddedElements.scribdEmbedEmbed.html}
-					alt={EmbeddedElements.scribdEmbedEmbed.alt}
-					index={3}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a tiktok embed from a &apos;embed&apos; element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.tiktokEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.tiktokEmbedEmbed.sourceDomain}
-				role={role}
-				onAccept={() =>
-					updateIframeHeight('iframe[name="unsafe-embed-4"]')
-				}
-			>
-				<UnsafeEmbedBlockComponent
-					key="4"
-					html={EmbeddedElements.tiktokEmbedEmbed.html}
-					alt={EmbeddedElements.tiktokEmbedEmbed.alt}
-					index={4}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a twitter embed from an &apos;embed&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.twitterEmbedEmbed.source}
-				sourceDomain={EmbeddedElements.twitterEmbedEmbed.sourceDomain}
-				role={role}
-				onAccept={() =>
-					updateIframeHeight('iframe[name="unsafe-embed-5"]')
-				}
-			>
-				<UnsafeEmbedBlockComponent
-					key="5"
-					html={EmbeddedElements.twitterEmbedEmbed.html}
-					alt={EmbeddedElements.twitterEmbedEmbed.alt}
-					index={5}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
@@ -766,14 +632,139 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					}
 				`}
 			>
-				{unsafeEmbedBlockComponent(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of an instagram embed, the source article is{' '}
+					<a href="https://www.theguardian.com/culture/2019/apr/27/idris-elba-marries-sabrina-dhowre-in-morocco">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.instagramEmbed.source}
+						sourceDomain={
+							EmbeddedElements.instagramEmbed.sourceDomain
+						}
+						role="inline"
+						onAccept={() =>
+							updateIframeHeight('iframe[name="unsafe-embed-1"]')
+						}
+					>
+						<UnsafeEmbedBlockComponent
+							key="1"
+							html={EmbeddedElements.instagramEmbed.html}
+							alt={EmbeddedElements.instagramEmbed.alt}
+							index={1}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a formstack embed, the source article is{' '}
+					<a href="https://www.theguardian.com/books/2019/nov/23/utopian-novels-for-dystopian-times">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.formStackEmbed.source}
+						sourceDomain={
+							EmbeddedElements.formStackEmbed.sourceDomain
+						}
+						role="inline"
+						onAccept={() =>
+							updateIframeHeight('iframe[name="unsafe-embed-2"]')
+						}
+					>
+						<UnsafeEmbedBlockComponent
+							key="2"
+							html={EmbeddedElements.formStackEmbed.html}
+							alt={EmbeddedElements.formStackEmbed.alt}
+							index={2}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a scribd embed from a &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.scribdEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.scribdEmbedEmbed.sourceDomain
+						}
+						role="inline"
+						onAccept={() =>
+							updateIframeHeight('iframe[name="unsafe-embed-3"]')
+						}
+					>
+						<UnsafeEmbedBlockComponent
+							key="3"
+							html={EmbeddedElements.scribdEmbedEmbed.html}
+							alt={EmbeddedElements.scribdEmbedEmbed.alt}
+							index={3}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a tiktok embed from a &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.tiktokEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.tiktokEmbedEmbed.sourceDomain
+						}
+						role="inline"
+						onAccept={() =>
+							updateIframeHeight('iframe[name="unsafe-embed-4"]')
+						}
+					>
+						<UnsafeEmbedBlockComponent
+							key="4"
+							html={EmbeddedElements.tiktokEmbedEmbed.html}
+							alt={EmbeddedElements.tiktokEmbedEmbed.alt}
+							index={4}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a twitter embed from an &apos;embed&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.twitterEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.twitterEmbedEmbed.sourceDomain
+						}
+						role="inline"
+						onAccept={() =>
+							updateIframeHeight('iframe[name="unsafe-embed-5"]')
+						}
+					>
+						<UnsafeEmbedBlockComponent
+							key="5"
+							html={EmbeddedElements.twitterEmbedEmbed.html}
+							alt={EmbeddedElements.twitterEmbedEmbed.alt}
+							index={5}
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
@@ -782,45 +773,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 UnsafeEmbedBlockComponentStory.story = {
 	name: 'Click to view wrapping UnsafeEmbedBlockComponent',
 };
-
-function vimeoBlockComponents(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a vimeo embed from &apos;video&apos; element type, the
-			embed source article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.vimeoVideoEmbed.source}
-				sourceDomain={EmbeddedElements.vimeoVideoEmbed.sourceDomain}
-				role={role}
-			>
-				<VimeoBlockComponent
-					pillar={theme}
-					embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
-					height={EmbeddedElements.vimeoVideoEmbed.height}
-					width={EmbeddedElements.vimeoVideoEmbed.width}
-					caption={EmbeddedElements.vimeoVideoEmbed.caption}
-					credit={EmbeddedElements.vimeoVideoEmbed.credit}
-					title={EmbeddedElements.vimeoVideoEmbed.title}
-					display={display}
-					design={design}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const VimeoBlockComponentStory = () => {
 	return (
@@ -842,14 +794,42 @@ export const VimeoBlockComponentStory = () => {
 					}
 				`}
 			>
-				{vimeoBlockComponents(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of a vimeo embed from &apos;video&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.vimeoVideoEmbed.source}
+						sourceDomain={
+							EmbeddedElements.vimeoVideoEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<VimeoBlockComponent
+							format={{
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							})}
+							embedUrl={EmbeddedElements.vimeoVideoEmbed.embedUrl}
+							height={EmbeddedElements.vimeoVideoEmbed.height}
+							width={EmbeddedElements.vimeoVideoEmbed.width}
+							caption={EmbeddedElements.vimeoVideoEmbed.caption}
+							credit={EmbeddedElements.vimeoVideoEmbed.credit}
+							title={EmbeddedElements.vimeoVideoEmbed.title}
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
@@ -858,40 +838,6 @@ export const VimeoBlockComponentStory = () => {
 VimeoBlockComponentStory.story = {
 	name: 'Click to view wrapping VimeoBlockComponent',
 };
-
-function documentBlockComponent(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a scribd embed from a &apos;document&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.scribdDocumentEmbed.source}
-				sourceDomain={EmbeddedElements.scribdDocumentEmbed.sourceDomain}
-				role={role}
-			>
-				<DocumentBlockComponent
-					embedUrl={EmbeddedElements.scribdDocumentEmbed.embedUrl}
-					height={EmbeddedElements.scribdDocumentEmbed.height}
-					width={EmbeddedElements.scribdDocumentEmbed.width}
-					title={EmbeddedElements.scribdDocumentEmbed.title}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const DocumentBlockComponentStory = () => {
 	return (
@@ -913,15 +859,33 @@ export const DocumentBlockComponentStory = () => {
 					}
 				`}
 			>
-				{documentBlockComponent(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
-				<p>The end.</p>,
+				<p>
+					Example of a scribd embed from a &apos;document&apos;
+					element type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.scribdDocumentEmbed.source}
+						sourceDomain={
+							EmbeddedElements.scribdDocumentEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<DocumentBlockComponent
+							embedUrl={
+								EmbeddedElements.scribdDocumentEmbed.embedUrl
+							}
+							height={EmbeddedElements.scribdDocumentEmbed.height}
+							width={EmbeddedElements.scribdDocumentEmbed.width}
+							title={EmbeddedElements.scribdDocumentEmbed.title}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>The end.</p>
 			</div>
 		</ContainerLayout>
 	);
@@ -929,60 +893,6 @@ export const DocumentBlockComponentStory = () => {
 DocumentBlockComponentStory.story = {
 	name: 'Click to view wrapping DocumentBlockComponentStory',
 };
-
-function soundCloudBlockComponents(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a soundcloud embed from an &apos;audio&apos; element
-			type, the embed source article is{' '}
-			<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.soundcloudAudioEmbed.source}
-				sourceDomain={
-					EmbeddedElements.soundcloudAudioEmbed.sourceDomain
-				}
-				role={role}
-			>
-				<SoundcloudBlockComponent
-					element={EmbeddedElements.soundcloudAudioEmbed}
-				/>
-			</ClickToView>
-		</Figure>,
-		<p>
-			Example of a soundcloud embed from an &apos;embed&apos; element
-			type, the embed source article is{' '}
-			<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.soundcloudEmbedEmbed.source}
-				sourceDomain={
-					EmbeddedElements.soundcloudEmbedEmbed.sourceDomain
-				}
-				role={role}
-			>
-				<SoundcloudBlockComponent
-					element={EmbeddedElements.soundcloudEmbedEmbed}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const SoundCloudBlockComponentStory = () => {
 	return (
@@ -1004,14 +914,48 @@ export const SoundCloudBlockComponentStory = () => {
 					}
 				`}
 			>
-				{soundCloudBlockComponents(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of a soundcloud embed from an &apos;audio&apos;
+					element type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.soundcloudAudioEmbed.source}
+						sourceDomain={
+							EmbeddedElements.soundcloudAudioEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<SoundcloudBlockComponent
+							element={EmbeddedElements.soundcloudAudioEmbed}
+						/>
+					</ClickToView>
+				</Figure>
+				<p>
+					Example of a soundcloud embed from an &apos;embed&apos;
+					element type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.soundcloudEmbedEmbed.source}
+						sourceDomain={
+							EmbeddedElements.soundcloudEmbedEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<SoundcloudBlockComponent
+							element={EmbeddedElements.soundcloudEmbedEmbed}
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
@@ -1020,45 +964,6 @@ export const SoundCloudBlockComponentStory = () => {
 SoundCloudBlockComponentStory.story = {
 	name: 'Click to view wrapping SoundCloudBlockComponent',
 };
-
-function spotifyBlockComponent(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a spotify embed from an &apos;audio&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.spotifyAudioEmbed.source}
-				sourceDomain={EmbeddedElements.spotifyAudioEmbed.sourceDomain}
-				role={role}
-			>
-				<SpotifyBlockComponent
-					embedUrl={EmbeddedElements.spotifyAudioEmbed.embedUrl}
-					height={EmbeddedElements.spotifyAudioEmbed.height}
-					width={EmbeddedElements.spotifyAudioEmbed.width}
-					title={EmbeddedElements.spotifyAudioEmbed.title}
-					pillar={theme}
-					caption={EmbeddedElements.spotifyAudioEmbed.caption}
-					design={design}
-					display={display}
-					credit="Spotify"
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const SpotifyBlockComponentStory = () => {
 	return (
@@ -1080,14 +985,44 @@ export const SpotifyBlockComponentStory = () => {
 					}
 				`}
 			>
-				{spotifyBlockComponent(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of a spotify embed from an &apos;audio&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.spotifyAudioEmbed.source}
+						sourceDomain={
+							EmbeddedElements.spotifyAudioEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<SpotifyBlockComponent
+							embedUrl={
+								EmbeddedElements.spotifyAudioEmbed.embedUrl
+							}
+							height={EmbeddedElements.spotifyAudioEmbed.height}
+							width={EmbeddedElements.spotifyAudioEmbed.width}
+							title={EmbeddedElements.spotifyAudioEmbed.title}
+							caption={EmbeddedElements.spotifyAudioEmbed.caption}
+							format={{
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								theme: Pillar.News,
+								display: Display.Standard,
+								design: Design.Article,
+							})}
+							credit="Spotify"
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
@@ -1097,37 +1032,6 @@ export const SpotifyBlockComponentStory = () => {
 SpotifyBlockComponentStory.story = {
 	name: 'Click to view wrapping SpotifyBlockComponent',
 };
-
-function tweetComponent(
-	pillar: CAPIPillar,
-	theme: Theme,
-	design: Design,
-	display: Display,
-	displayOverlay: boolean,
-	role: RoleType,
-) {
-	return [
-		<p>
-			Example of a twitter embed from an &apos;tweet&apos; element type,
-			the embed source article is{' '}
-			<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
-				here
-			</a>
-		</p>,
-		<Figure role="inline">
-			<ClickToView
-				isTracking={displayOverlay}
-				source={EmbeddedElements.twitterTweetEmbed.source}
-				sourceDomain={EmbeddedElements.twitterTweetEmbed.sourceDomain}
-				role={role}
-			>
-				<TweetBlockComponent
-					element={EmbeddedElements.twitterTweetEmbed}
-				/>
-			</ClickToView>
-		</Figure>,
-	];
-}
 
 export const TweetBlockComponentStory = () => {
 	return (
@@ -1149,14 +1053,27 @@ export const TweetBlockComponentStory = () => {
 					}
 				`}
 			>
-				{tweetComponent(
-					'news',
-					Pillar.News,
-					Design.Article,
-					Display.Standard,
-					true,
-					'inline',
-				)}
+				<p>
+					Example of a twitter embed from an &apos;tweet&apos; element
+					type, the embed source article is{' '}
+					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+						here
+					</a>
+				</p>
+				<Figure role="inline">
+					<ClickToView
+						isTracking={true}
+						source={EmbeddedElements.twitterTweetEmbed.source}
+						sourceDomain={
+							EmbeddedElements.twitterTweetEmbed.sourceDomain
+						}
+						role="inline"
+					>
+						<TweetBlockComponent
+							element={EmbeddedElements.twitterTweetEmbed}
+						/>
+					</ClickToView>
+				</Figure>
 				<p>The end.</p>,
 			</div>
 		</ContainerLayout>
