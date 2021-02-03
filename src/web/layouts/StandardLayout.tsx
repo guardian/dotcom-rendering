@@ -646,7 +646,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
+						format={format}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>

@@ -47,6 +47,8 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import { FixedNav } from '@root/src/web/components/FixedNav';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -292,19 +294,14 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 
-					{NAV.subNavSections && (
-						<Section
-							backgroundColour={palette.background.article}
-							padded={false}
-							sectionId="sub-nav-root"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								palette={palette}
-							/>
-						</Section>
-					)}
+					<div id="fixed-nav-root">
+						<FixedNav
+							CAPI={makeGuardianBrowserCAPI(CAPI)}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					</div>
 
 					<Section
 						backgroundColour={palette.background.article}
@@ -552,7 +549,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
+						format={format}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>

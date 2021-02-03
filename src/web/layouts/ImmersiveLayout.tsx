@@ -22,7 +22,6 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
@@ -44,6 +43,8 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import { FixedNav } from '@root/src/web/components/FixedNav';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -627,16 +628,14 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
-			{NAV.subNavSections && (
-				<Section padded={false} sectionId="sub-nav-root">
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-					/>
-					<GuardianLines count={4} pillar={format.theme} />
-				</Section>
-			)}
+			<div id="fixed-nav-root">
+				<FixedNav
+					CAPI={makeGuardianBrowserCAPI(CAPI)}
+					NAV={NAV}
+					format={format}
+					palette={palette}
+				/>
+			</div>
 
 			<Section
 				padded={false}
