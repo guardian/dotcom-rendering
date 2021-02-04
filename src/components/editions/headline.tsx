@@ -132,6 +132,7 @@ const galleryStyles = css`
 	line-height: 1.2;
 	padding-bottom: ${remSpace[6]};
 	border: 0;
+	${articleWidthStyles}
 `;
 
 const headlineStyles = css`
@@ -146,6 +147,7 @@ const seriesStyles = css`
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
 		return css(
 			styles(format),

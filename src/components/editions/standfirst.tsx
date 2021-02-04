@@ -84,6 +84,8 @@ const noLinks = true;
 
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
+
+	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
 		return css(styles(kickerColor), immersiveStyles);
 	}

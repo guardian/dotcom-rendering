@@ -220,6 +220,7 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
+	// Display.Immersive needs to come before Design.Interview
 	if (item.display === Display.Immersive) {
 		return <ImmersiveHeader item={item} />;
 	} else if (item.design === Design.Interview) {

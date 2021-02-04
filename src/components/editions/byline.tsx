@@ -165,6 +165,7 @@ const bylineSecondaryStyles = (
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
 		return css(styles(kickerColor), immersiveStyles);
 	}
