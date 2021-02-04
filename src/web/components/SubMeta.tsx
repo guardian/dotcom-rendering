@@ -32,7 +32,7 @@ const listStyleNone = css`
 	list-style: none;
 `;
 
-const keywordListStyles = css`
+const listWrapper = css`
 	padding-bottom: 12px;
 	margin-bottom: 6px;
 	border-bottom: 1px solid ${border.secondary};
@@ -124,45 +124,57 @@ export const SubMeta = ({
 				</div>
 			)}
 			{(hasSectionLinks || hasKeywordLinks) && (
-				<span className={labelStyles(palette)}>Topics</span>
-			)}
-			{hasSectionLinks && (
-				<ul className={listStyleNone}>
-					{subMetaSectionLinks.map((link, i) => (
-						<li
-							className={cx(
-								listItemStyles(palette),
-								sectionStyles,
-								i === subMetaSectionLinks.length - 1 &&
-									hideSlash,
-							)}
-							key={link.url}
-						>
-							<a className={linkStyles(palette)} href={link.url}>
-								{link.title}
-							</a>
-						</li>
-					))}
-				</ul>
-			)}
-			{hasKeywordLinks && (
-				<ul className={cx(listStyleNone, keywordListStyles)}>
-					{subMetaKeywordLinks.map((link, i) => (
-						<li
-							className={cx(
-								listItemStyles(palette),
-								keywordStyles,
-								i === subMetaKeywordLinks.length - 1 &&
-									hideSlash,
-							)}
-							key={link.url}
-						>
-							<a className={linkStyles(palette)} href={link.url}>
-								{link.title}
-							</a>
-						</li>
-					))}
-				</ul>
+				<>
+					<span className={labelStyles(palette)}>Topics</span>
+					<div className={listWrapper}>
+						{hasSectionLinks && (
+							<ul className={listStyleNone}>
+								{subMetaSectionLinks.map((link, i) => (
+									<li
+										className={cx(
+											listItemStyles(palette),
+											sectionStyles,
+											i ===
+												subMetaSectionLinks.length -
+													1 && hideSlash,
+										)}
+										key={link.url}
+									>
+										<a
+											className={linkStyles(palette)}
+											href={link.url}
+										>
+											{link.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+						{hasKeywordLinks && (
+							<ul className={listStyleNone}>
+								{subMetaKeywordLinks.map((link, i) => (
+									<li
+										className={cx(
+											listItemStyles(palette),
+											keywordStyles,
+											i ===
+												subMetaKeywordLinks.length -
+													1 && hideSlash,
+										)}
+										key={link.url}
+									>
+										<a
+											className={linkStyles(palette)}
+											href={link.url}
+										>
+											{link.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</>
 			)}
 			{showBottomSocialButtons && (
 				<div
