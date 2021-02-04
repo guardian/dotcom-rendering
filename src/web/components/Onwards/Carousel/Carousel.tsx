@@ -374,7 +374,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</div>
 
 				<div className={dotsStyle}>
-					{trails.map((value, i) => (
+					{trails.map((_, i) => (
 						<span
 							onClick={() => goToIndex(i)}
 							// This button is not particularly useful for keyboard users as the stories
