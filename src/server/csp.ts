@@ -127,18 +127,20 @@ function cspEditions(
 ): string {
 	return `
 	default-src 'self';
-	style-src 'self' ${assetHashes(styles)};
+	style-src 'self' https://interactive.guim.co.uk ${assetHashes(
+		styles,
+	)} ${styleSrc(styles, thirdPartyEmbed.twitter, true)};
 	img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
 	};
-    script-src 'self' ${
+    script-src 'self' https://interactive.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://embed.theguardian.com ${
+    frame-src https://www.theguardian.com https://embed.theguardian.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
 	} ${
 		thirdPartyEmbed.twitter
