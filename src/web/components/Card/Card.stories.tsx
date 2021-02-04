@@ -335,7 +335,7 @@ export const InDepth = () => (
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
 								display: Display.Standard,
-								theme: Pillar.News,
+								theme: Pillar.Opinion,
 								design: Design.Comment,
 							}}
 							headlineText={headlines[7]}
