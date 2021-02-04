@@ -136,24 +136,12 @@ interface Branding {
 	};
 }
 
-interface CAPILinkType extends SimpleLinkType {
-	longTitle: string;
-	children?: LinkType[];
-	mobileOnly?: boolean;
-	pillar?: CAPIPillar;
-	more?: boolean;
-}
-
 interface LinkType extends SimpleLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
 	pillar?: Pillar;
 	more?: boolean;
-}
-
-interface CAPIPillarType extends CAPILinkType {
-	pillar: CAPIPillar;
 }
 
 interface PillarType extends LinkType {
@@ -197,10 +185,6 @@ interface BaseNavType {
 
 interface NavType extends BaseNavType {
 	pillars: PillarType[];
-}
-
-interface CAPINavType extends BaseNavType {
-	pillars: CAPIPillarType[];
 }
 
 interface SubNavBrowserType {
@@ -279,6 +263,38 @@ type PageTypeType = {
 	isSensitive: boolean;
 };
 
+// Data types for the API request bodies from clients that require
+// transformation before internal use. If we use the data as-is, we avoid the
+// CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
+// misleading - the model is *not* the same as the Content API content models.
+
+interface CAPILinkType {
+    url: string;
+    title: string;
+    longTitle: string;
+    iconName: string;
+    children?: CAPILinkType[];
+    mobileOnly?: boolean;
+    pillar?: CAPIPillar;
+    more?: boolean;
+    classList?: string[];
+}
+
+interface CAPINavType {
+    currentUrl: string;
+    pillars: CAPILinkType[];
+    otherLinks: CAPILinkType[];
+    brandExtensions: CAPILinkType[];
+    currentNavLink?: CAPILinkType;
+    currentParent?: CAPILinkType;
+    currentPillar?: CAPILinkType;
+    subNavSections?: {
+        parent?: CAPILinkType;
+        links: CAPILinkType[];
+    };
+    readerRevenueLinks: ReaderRevenuePositions;
+}
+
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIType {
@@ -336,8 +352,7 @@ interface CAPIType {
 	trailText: string;
 	badge?: BadgeType;
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
+	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
 
 	pageFooter: FooterType;
 
@@ -349,6 +364,9 @@ interface CAPIType {
 	matchUrl?: string;
 	isSpecialReport: boolean;
 }
+
+// Browser data models. Note the CAPI prefix here means something different to
+// the models above.
 
 type CAPIBrowserType = {
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
@@ -710,10 +728,6 @@ interface DCRBrowserDocumentData {
 	NAV: SubNavBrowserType;
 	GA: GADataType;
 	linkedData: object;
-}
-
-interface Props {
-	data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
 type IslandType =
