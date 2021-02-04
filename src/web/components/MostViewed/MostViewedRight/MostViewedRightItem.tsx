@@ -79,20 +79,16 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								palette={decidePalette({
-									display: trail.display,
-									design: trail.design,
-									theme: trail.pillar,
-								})}
+								palette={decidePalette(trail.format)}
 							/>
 						</div>
 					)}
 					<div className={headlineWrapperStyles}>
 						{trail.isLiveBlog ? (
 							<LinkHeadline
-								design={trail.design}
+								design={trail.format.design}
 								headlineText={trail.headline}
-								pillar={trail.pillar}
+								pillar={trail.format.theme}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}
@@ -104,9 +100,9 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						) : (
 							<LinkHeadline
-								design={trail.design}
+								design={trail.format.design}
 								headlineText={trail.headline}
-								pillar={trail.pillar}
+								pillar={trail.format.theme}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}

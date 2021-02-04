@@ -17,16 +17,12 @@ export const ExactlyFive = ({ content }: Props) => (
 			<LI padSides={true} percentage="33%">
 				<Card
 					linkTo={content[0].url}
-					format={{
-						display: content[0].display,
-						design: content[0].design,
-						theme: content[0].pillar,
-					}}
+					format={content[0].format}
 					headlineText={content[0].headline}
 					headlineSize="medium"
 					byline={content[0].byline}
 					showByline={content[0].showByline}
-					showQuotes={content[0].design === Design.Comment}
+					showQuotes={content[0].format.design === Design.Comment}
 					webPublicationDate={content[0].webPublicationDate}
 					kickerText={content[0].kickerText}
 					showPulsingDot={content[0].isLiveBlog}
@@ -47,16 +43,12 @@ export const ExactlyFive = ({ content }: Props) => (
 			>
 				<Card
 					linkTo={content[1].url}
-					format={{
-						display: content[1].display,
-						design: content[1].design,
-						theme: content[1].pillar,
-					}}
+					format={content[1].format}
 					headlineText={content[1].headline}
 					headlineSize="medium"
 					byline={content[1].byline}
 					showByline={content[1].showByline}
-					showQuotes={content[1].design === Design.Comment}
+					showQuotes={content[1].format.design === Design.Comment}
 					webPublicationDate={content[1].webPublicationDate}
 					kickerText={content[1].kickerText}
 					showPulsingDot={content[1].isLiveBlog}
@@ -79,16 +71,14 @@ export const ExactlyFive = ({ content }: Props) => (
 					<LI bottomMargin={true} stretch={true}>
 						<Card
 							linkTo={content[2].url}
-							format={{
-								display: content[2].display,
-								design: content[2].design,
-								theme: content[2].pillar,
-							}}
+							format={content[2].format}
 							headlineText={content[2].headline}
 							headlineSize="medium"
 							byline={content[2].byline}
 							showByline={content[2].showByline}
-							showQuotes={content[2].design === Design.Comment}
+							showQuotes={
+								content[2].format.design === Design.Comment
+							}
 							webPublicationDate={content[2].webPublicationDate}
 							kickerText={content[2].kickerText}
 							showPulsingDot={content[2].isLiveBlog}
@@ -103,16 +93,14 @@ export const ExactlyFive = ({ content }: Props) => (
 					<LI bottomMargin={true} stretch={true}>
 						<Card
 							linkTo={content[3].url}
-							format={{
-								display: content[3].display,
-								design: content[3].design,
-								theme: content[3].pillar,
-							}}
+							format={content[3].format}
 							headlineText={content[3].headline}
 							headlineSize="medium"
 							byline={content[3].byline}
 							showByline={content[3].showByline}
-							showQuotes={content[3].design === Design.Comment}
+							showQuotes={
+								content[3].format.design === Design.Comment
+							}
 							webPublicationDate={content[3].webPublicationDate}
 							kickerText={content[3].kickerText}
 							showPulsingDot={content[3].isLiveBlog}
@@ -127,16 +115,14 @@ export const ExactlyFive = ({ content }: Props) => (
 					<LI bottomMargin={false} stretch={true}>
 						<Card
 							linkTo={content[4].url}
-							format={{
-								display: content[4].display,
-								design: content[4].design,
-								theme: content[4].pillar,
-							}}
+							format={content[4].format}
 							headlineText={content[4].headline}
 							headlineSize="medium"
 							byline={content[4].byline}
 							showByline={content[4].showByline}
-							showQuotes={content[4].design === Design.Comment}
+							showQuotes={
+								content[4].format.design === Design.Comment
+							}
 							webPublicationDate={content[4].webPublicationDate}
 							kickerText={content[4].kickerText}
 							showPulsingDot={content[4].isLiveBlog}

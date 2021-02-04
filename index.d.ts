@@ -807,9 +807,7 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-    display: Display;
-	design: Design;
-	pillar: Theme;
+    format: Format;
 }
 
 interface CAPITrailType extends BaseTrailType {

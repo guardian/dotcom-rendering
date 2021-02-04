@@ -9,7 +9,6 @@ import {
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
