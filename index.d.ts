@@ -259,18 +259,19 @@ type PageTypeType = {
 	isSensitive: boolean;
 };
 
-// Data types for the API request bodies from clients. The 'CAPI' prefix
-// convention doesn't really make sense anymore (it is not the CAPI model,
-// though closely related) but is not worth changing now.
+// Data types for the API request bodies from clients that require
+// transformation before internal use. If we use the data as-is, we avoid the
+// CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
+// misleading - the model is *not* the same as the Content API content models.
 
 interface CAPILinkType {
     url: string;
-	title: string;
+    title: string;
     longTitle: string;
     iconName: string;
-	children?: CAPILinkType[];
-	mobileOnly?: boolean;
-	pillar?: CAPIPillar;
+    children?: CAPILinkType[];
+    mobileOnly?: boolean;
+    pillar?: CAPIPillar;
     more?: boolean;
     classList?: string[];
 }
@@ -278,16 +279,16 @@ interface CAPILinkType {
 interface CAPINavType {
     currentUrl: string;
     pillars: CAPILinkType[];
-	otherLinks: CAPILinkType[];
-	brandExtensions: CAPILinkType[];
+    otherLinks: CAPILinkType[];
+    brandExtensions: CAPILinkType[];
     currentNavLink?: CAPILinkType;
     currentParent?: CAPILinkType;
     currentPillar?: CAPILinkType;
-	subNavSections?: {
+    subNavSections?: {
         parent?: CAPILinkType;
         links: CAPILinkType[];
     };
-	readerRevenueLinks: ReaderRevenuePositions;
+    readerRevenueLinks: ReaderRevenuePositions;
 }
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
