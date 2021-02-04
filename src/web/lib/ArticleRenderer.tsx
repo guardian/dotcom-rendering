@@ -165,21 +165,24 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement': {
 					return (
-						<ClickToView
+						<Figure
 							role={element.role}
-							isTracking={element.isThirdPartyTracking}
-							source={element.source}
-							sourceDomain={element.sourceDomain}
+							id={`document-block-element-${i}`}
 						>
-							<Figure role={element.role}>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+							>
 								<DocumentBlockComponent
 									embedUrl={element.embedUrl}
 									height={element.height}
 									width={element.width}
 									title={element.title}
 								/>
-							</Figure>
-						</ClickToView>
+							</ClickToView>
+						</Figure>
 					);
 				}
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':

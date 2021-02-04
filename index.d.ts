@@ -390,7 +390,8 @@ type CAPIBrowserType = {
 	audioAtoms: AudioAtomBlockElement[];
 	youtubeBlockElement: YoutubeBlockElement[];
 	youtubeMainMediaBlockElement: YoutubeBlockElement[];
-	quizAtoms: QuizAtomBlockElement[];
+    quizAtoms: QuizAtomBlockElement[];
+    documentBlockElements: DocumentBlockElement[];
 };
 
 interface TagType {
@@ -742,7 +743,8 @@ type IslandType =
 	| 'audio-atom'
 	| 'youtube-block'
 	| 'youtube-block-main-media'
-	| 'chart-atom';
+    | 'chart-atom'
+    | 'document-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as

@@ -1196,6 +1196,9 @@
                 },
                 "sourceDomain": {
                     "type": "string"
+                },
+                "documentIndex": {
+                    "type": "number"
                 }
             },
             "required": [

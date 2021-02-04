@@ -117,6 +117,7 @@ interface DocumentBlockElement {
 	isThirdPartyTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
+	documentIndex?: number;
 }
 
 interface EmbedBlockElement {

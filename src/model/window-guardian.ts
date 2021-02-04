@@ -245,6 +245,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			},
 			[] as YoutubeBlockElement[],
 		),
+		documentBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.DocumentBlockElement',
+			'documentIndex',
+		),
 	};
 };
 
