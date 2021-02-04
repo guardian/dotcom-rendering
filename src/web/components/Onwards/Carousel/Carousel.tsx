@@ -152,9 +152,6 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
 	}
 `;
 
-// Set grid widths for use at desktop and above
-const desktopGridWidth = 60;
-
 // Not used for buttons above carousel
 const buttonContainerStyle = css`
 	display: flex;
@@ -169,21 +166,17 @@ const buttonContainerStyle = css`
 	}
 `;
 const prevButtonContainerStyle = css`
-	${from.desktop} {
-		left: ${desktopGridWidth / 2}px;
-	}
-
 	${from.leftCol} {
-		left: ${2 * desktopGridWidth}px;
+		left: 120px;
 	}
 
 	${from.wide} {
-		left: ${3 * desktopGridWidth}px;
+		left: 200px;
 	}
 `;
 
 const nextButtonContainerStyle = css`
-	right: ${desktopGridWidth / 2}px;
+	right: 30px;
 `;
 
 const buttonStyle = css`
