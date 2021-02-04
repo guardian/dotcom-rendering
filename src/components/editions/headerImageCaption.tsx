@@ -23,8 +23,8 @@ const HeaderImageCaptionStyles = (
 		width: 34px;
 		height: 34px;
 		position: absolute;
-		bottom: 12px;
-		right: 12px;
+		bottom: ${remSpace[3]};
+		right: ${remSpace[3]};
 		border-radius: 100%;
 		outline: none;
 
