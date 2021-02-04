@@ -683,7 +683,7 @@ interface DCRBrowserDocumentData {
 	page: string;
 	site: string;
 	CAPI: CAPIBrowserType;
-	NAV: SubNavBrowserType;
+	NAV: NavType;
 	GA: GADataType;
 	linkedData: object;
 }
@@ -724,7 +724,8 @@ type IslandType =
 	| 'instagram-block-element'
 	| 'map-block-element'
 	| 'spotify-block-element'
-	| 'video-facebook-block-element';
+	| 'video-facebook-block-element'
+	| 'sticky-nav-root';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as

@@ -66,6 +66,7 @@ import { InstagramBlockComponent } from '@root/src/web/components/elements/Insta
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
+import { StickyNav } from '@root/src/web/components/StickyNav/StickyNav';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -472,6 +473,15 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
+			<HydrateOnce root="sticky-nav-root">
+				<StickyNav
+					CAPI={CAPI}
+					NAV={NAV}
+					format={format}
+					palette={palette}
+				/>
+			</HydrateOnce>
+
 			{NAV.subNavSections && (
 				<HydrateOnce root="sub-nav-root">
 					<>
