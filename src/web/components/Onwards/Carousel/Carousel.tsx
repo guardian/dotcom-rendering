@@ -102,7 +102,6 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 		}
 
 		scrollbar-width: none;
-		padding-left: 5px; /* Fix problem with vertical divider causing shift above tablet */
 	}
 
 	margin-left: -5px; /* Align leftmost card correctly */
