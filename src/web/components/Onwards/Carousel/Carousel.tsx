@@ -104,7 +104,9 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 		scrollbar-width: none;
 	}
 
-	margin-left: -5px; /* Align leftmost card correctly */
+	${until.tablet} {
+		margin-left: -5px; /* Align firstcard on mobile devices */
+	}
 `;
 
 const dotsStyle = css`
@@ -191,7 +193,7 @@ const buttonStyle = css`
 	width: 34px;
 	background-color: ${palette.neutral[0]};
 	cursor: pointer;
-	margin: 0;
+	margin-top: 10px;
 	padding: 0;
 
 	&:active {
@@ -305,7 +307,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			imageUrl={imageUrl || ''}
 			showClock={true}
 			alwaysVertical={true}
-			minWidthInPixels={220}
+			minWidthInPixels={200}
 			isFullCardImage={isFullCardImage}
 		/>
 	</LI>
@@ -494,7 +496,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							index={index}
 							goToIndex={goToIndex}
 						/>
-						<div>
+						<Hide when="below" breakpoint="desktop">
 							<button
 								onClick={prev}
 								aria-label="Move carousel backwards"
@@ -509,7 +511,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							>
 								<SvgChevronRightSingle />
 							</button>
-						</div>
+						</Hide>
 					</div>
 				</Hide>
 
