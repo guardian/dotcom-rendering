@@ -7,7 +7,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderMedia from 'components/editions/headerMedia';
-import Headline from 'components/editions/headline';
+import Headline from 'components/editions/headline/headline';
 import Lines from 'components/editions/lines';
 import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
