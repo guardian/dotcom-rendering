@@ -230,7 +230,12 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
-const isMedia = hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
+const isMedia = hasSomeTag([
+	'type/audio',
+	'type/video',
+	'type/gallery',
+	'type/picture',
+]);
 
 const isReview = hasSomeTag([
 	'tone/reviews',
@@ -255,6 +260,8 @@ const isGuardianView = hasTag('tone/editorials');
 const isQuiz = hasTag('tone/quizzes');
 
 const isAdvertisementFeature = hasTag('tone/advertisement-features');
+
+const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
 	request: RenderingRequest,
@@ -364,4 +371,5 @@ export {
 	isAudio,
 	isVideo,
 	isGallery,
+	isPicture,
 };
