@@ -59,15 +59,11 @@ const wrapperStyle = css`
 const containerStyles = css`
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
 	position: relative;
 
-	margin-top: 6px;
-	${from.leftCol} {
-		margin-top: 26px;
-	}
+	overflow: hidden; /* Needed for scrolling to work */
 
-	margin-bottom: 60px;
+	margin-top: 6px;
 
 	margin-left: 0px;
 	margin-right: 0px;
@@ -85,7 +81,6 @@ const containerStyles = css`
 	}
 
 	${from.wide} {
-		margin-right: 70px;
 		margin-top: 5px;
 	}
 `;
@@ -156,6 +151,20 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
 	}
 `;
 
+// Not used for buttons above carousel
+const buttonContainerStyle = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	z-index: 20;
+	height: 100%;
+
+	${until.leftCol} {
+		display: none;
+	}
+`;
+
 const buttonStyle = css`
 	border: 0 none;
 	border-radius: 100%;
@@ -174,33 +183,43 @@ const buttonStyle = css`
 			fill: ${palette.neutral[7]};
 		}
 	}
-	position: relative;
-	z-index: 20;
 	svg {
 		fill: ${palette.neutral[100]};
 		height: 34px;
 	}
-`;
 
-const nextButtonStyle = css`
-	padding-left: 5px;
-`;
-
-const navIconContainerStyle = css`
-	display: flex;
-	flex-direction: row;
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	align-items: center;
-	justify-content: space-between;
-
-	${until.desktop} {
-		display: none;
+	&::before {
+		background-color: rgba(0, 0, 0, 0.35);
 	}
 `;
 
+// Set grid widths for use at desktop and above
+const desktopGridWidth = 60;
+
+const prevButtonStyle = css`
+	${from.desktop} {
+		left: ${desktopGridWidth / 2}px;
+	}
+
+	${from.leftCol} {
+		left: ${2 * desktopGridWidth}px;
+	}
+
+	${from.wide} {
+		left: ${3 * desktopGridWidth}px;
+	}
+`;
+
+const nextButtonStyle = css`
+	right: ${desktopGridWidth / 2}px;
+	padding-left: 5px; /* Fix centering of SVG*/
+	margin-left: 10px;
+`;
+
 const headerRowStyles = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	${from.tablet} {
 		padding-right: 10px;
 	}
@@ -266,6 +285,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 		showDivider={!isFirst}
 		padSides={true}
 		padSidesOnMobile={true}
+		snapAlignStart={true}
 	>
 		<Card
 			linkTo={linkTo}
@@ -301,7 +321,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	index,
 	goToIndex,
 }) => (
-	<>
+	<div>
 		<Title title={heading} pillar={pillar} />
 		<div className={dotsStyle}>
 			{trails.map((value, i) => (
@@ -319,7 +339,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 				/>
 			))}
 		</div>
-	</>
+	</div>
 );
 
 export const Carousel: React.FC<OnwardsType> = ({
@@ -392,7 +412,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 		} else {
 			current.scrollTo({ left: 0 });
 		}
-
 		getSetIndex();
 	};
 
@@ -437,6 +456,25 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
+			<div className={cx(buttonContainerStyle, prevButtonStyle)}>
+				<button
+					onClick={prev}
+					aria-label="Move carousel backwards"
+					className={buttonStyle}
+				>
+					<SvgChevronLeftSingle />
+				</button>
+			</div>
+
+			<div className={cx(buttonContainerStyle, nextButtonStyle)}>
+				<button
+					onClick={next}
+					aria-label="Move carousel forwards"
+					className={buttonStyle}
+				>
+					<SvgChevronRightSingle />
+				</button>
+			</div>
 			<div
 				className={containerStyles}
 				data-component={ophanComponentName}
@@ -451,27 +489,24 @@ export const Carousel: React.FC<OnwardsType> = ({
 							index={index}
 							goToIndex={goToIndex}
 						/>
+						<div>
+							<button
+								onClick={prev}
+								aria-label="Move carousel backwards"
+								className={buttonStyle}
+							>
+								<SvgChevronLeftSingle />
+							</button>
+							<button
+								onClick={next}
+								aria-label="Move carousel forwards"
+								className={buttonStyle}
+							>
+								<SvgChevronRightSingle />
+							</button>
+						</div>
 					</div>
 				</Hide>
-				<div
-					className={navIconContainerStyle}
-					data-link-name="nav-arrow"
-				>
-					<button
-						onClick={prev}
-						aria-label="Move carousel backwards"
-						className={buttonStyle}
-					>
-						<SvgChevronLeftSingle />
-					</button>
-					<button
-						onClick={next}
-						aria-label="Move carousel forwards"
-						className={cx(buttonStyle, nextButtonStyle)}
-					>
-						<SvgChevronRightSingle />
-					</button>
-				</div>
 
 				<ul
 					className={carouselStyle(isFullCardImage)}

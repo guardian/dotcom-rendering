@@ -11,9 +11,13 @@ type Props = {
 };
 
 const cardHeight = css`
-	${from.tablet} {
+	${from.wide} {
 		height: 274px;
 		width: 459px;
+	}
+	${until.wide} {
+		height: 250px;
+		width: 419px;
 	}
 
 	${until.tablet} {
