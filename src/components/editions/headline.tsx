@@ -53,9 +53,8 @@ const styles = (format: Format): SerializedStyles => css`
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};
+	padding-right: ${remSpace[2]};
 	margin: 0;
-
-	${articleWidthStyles}
 `;
 
 const underline = (kickerColor: string): SerializedStyles => css`
@@ -83,16 +82,18 @@ const fontStyles = (
 const interviewStyles = css`
 	margin-left: ${remSpace[3]};
 	border: 0;
+
+	${articleWidthStyles}
 `;
 
 const immersiveStyles = css`
 	border: 0;
-	margin-left: ${remSpace[2]};
+	padding-left: ${remSpace[2]};
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[6]};
 
 	${from.tablet} {
-		margin-left: 0;
+		padding-left: 0;
 	}
 `;
 
@@ -115,13 +116,13 @@ const interviewFontStyles = css`
 		font-weight: 400;
 	}
 
-	background-color: ${neutral[0]};
+	background-color: ${neutral[7]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[1]};
-	box-shadow: -${remSpace[3]} 0 0 ${neutral[0]},
-		${remSpace[3]} 0 0 ${neutral[0]};
+	box-shadow: -${remSpace[3]} 0 0 ${neutral[7]},
+		${remSpace[3]} 0 0 ${neutral[7]};
 	display: inline;
 `;
 
@@ -131,6 +132,7 @@ const galleryStyles = css`
 	line-height: 1.2;
 	padding-bottom: ${remSpace[6]};
 	border: 0;
+	${articleWidthStyles}
 `;
 
 const headlineStyles = css`
@@ -145,6 +147,15 @@ const seriesStyles = css`
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+	// Display.Immersive needs to come before Design.Interview
+	if (format.display === Display.Immersive) {
+		return css(
+			styles(format),
+			fontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
+
 	if (format.design === Design.Interview) {
 		return css(
 			styles(format),
@@ -158,14 +169,6 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 		format.display === Display.Showcase
 	) {
 		return css(styles(format), fontStyles('tight', 'bold'));
-	}
-
-	if (format.display === Display.Immersive) {
-		return css(
-			styles(format),
-			fontStyles('tight', 'bold'),
-			immersiveStyles,
-		);
 	}
 
 	if (format.design === Design.Analysis)
