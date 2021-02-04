@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -91,6 +90,7 @@ export const SecondTierItem = ({
 		isLiveBlog,
 		avatarUrl,
 		image,
+		display,
 		design,
 		byline,
 		showByline,
@@ -102,7 +102,7 @@ export const SecondTierItem = ({
 	const avatarToShow = avatarUrl || image;
 	const format: Format = {
 		design,
-		display: Display.Standard,
+		display,
 		theme: pillar,
 	};
 

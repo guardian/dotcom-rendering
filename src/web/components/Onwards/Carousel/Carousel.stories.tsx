@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 import { Carousel } from './Carousel';
@@ -30,6 +30,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/9e3148e304f3d6d6eeafadaf4b707eb4b6f4f64c/0_196_3500_2099/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=4c6370b54991b05550d1fa7b78f69829',
 		isLiveBlog: true,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Live,
 		webPublicationDate: '2020-09-15T13:46:52.000Z',
@@ -47,6 +48,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/877e5e3f240c1958504827796249cd8a46caf0a1/0_116_1969_1181/master/1969.jpg?width=300&quality=85&auto=format&fit=max&s=444e206a147224a7e50e0eeb4780620c',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T11:44:46.000Z',
@@ -64,6 +66,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/f7c663fe69644c3ca5fd402fab40f3b5501064cc/0_99_4505_2703/master/4505.jpg?width=300&quality=85&auto=format&fit=max&s=fca4c60f52a8e1c686d48742d43e6887',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T13:24:45.000Z',
@@ -81,6 +84,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/b204a14ffd1911591e9aa0f2df6769798bbdd1c1/0_225_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=b7f695cc8b23cec50344273aa46503bf',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T13:15:36.000Z',
@@ -99,6 +103,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/f285ba35a26e663f9d5e2808558f644fa12765e1/0_136_960_576/master/960.jpg?width=300&quality=85&auto=format&fit=max&s=b33e6ce3806d5e7ddb26d4decbb824a5',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T10:41:04.000Z',
@@ -116,6 +121,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/3ec6d136faade765328e86db332665d19e011d1c/0_1268_3203_1922/master/3203.jpg?width=300&quality=85&auto=format&fit=max&s=b8ec99f56446dc12f76c6880d43b1202',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T11:00:32.000Z',
@@ -134,6 +140,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/cf291623610b4e9bd53adad56ea1752c5557ad21/0_26_5636_3382/master/5636.jpg?width=300&quality=85&auto=format&fit=max&s=444feb3e9cc898bda708438d05ea6941',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T09:30:22.000Z',
@@ -151,6 +158,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/c38b10a48e27c463ce16d058e02aafda4328e52f/0_20_2462_1478/master/2462.jpg?width=300&quality=85&auto=format&fit=max&s=63656ef63ad936d92d96316f13ce2715',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T13:04:57.000Z',
@@ -169,6 +177,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/8c0eff269da77ac303734e8717705d4b70f7d5e2/0_97_5472_3283/master/5472.jpg?width=300&quality=85&auto=format&fit=max&s=3b45f3f609dd7aee06eb1428a172bb8c',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.News,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T13:28:24.000Z',
@@ -187,6 +196,7 @@ const trails: TrailType[] = [
 		image:
 			'https://i.guim.co.uk/img/media/f022aacc31e1e95a07f382206c9b8e5620214e0a/0_0_2560_1536/master/2560.jpg?width=300&quality=85&auto=format&fit=max&s=b4a6348eb191bf5d366ed6282f2ada70',
 		isLiveBlog: false,
+		display: Display.Standard,
 		pillar: Pillar.Culture,
 		design: Design.Article,
 		webPublicationDate: '2020-09-15T12:21:07.000Z',

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design, Display } from '@guardian/types';
+import { Design } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
@@ -13,7 +13,7 @@ export const Spotlight = ({ content }: Props) => (
 	<Card
 		linkTo={content[0].url}
 		format={{
-			display: Display.Standard,
+			display: content[0].display,
 			design: content[0].design,
 			theme: content[0].pillar,
 		}}

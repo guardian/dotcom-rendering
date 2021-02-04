@@ -7,7 +7,6 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/lib/useHover';
-import { Display } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const listItemStyles = css`
@@ -81,7 +80,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								imageSrc={trail.image}
 								imageAlt=""
 								palette={decidePalette({
-									display: Display.Standard,
+									display: trail.display,
 									design: trail.design,
 									theme: trail.pillar,
 								})}

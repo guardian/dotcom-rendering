@@ -192,7 +192,7 @@ type CarouselCardProps = {
 	isFirst: boolean;
 	pillar: Theme;
 	design: Design;
-	display?: Display;
+	display: Display;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
@@ -201,8 +201,9 @@ type CarouselCardProps = {
 	isFullCardImage?: boolean;
 };
 
-export const CarouselCard: React.FC<CarouselCardProps> = ({
+const CarouselCard: React.FC<CarouselCardProps> = ({
 	pillar,
+	display,
 	design,
 	linkTo,
 	imageUrl,
@@ -222,7 +223,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 		<Card
 			linkTo={linkTo}
 			format={{
-				display: Display.Standard,
+				display,
 				design,
 				theme: pillar,
 			}}
@@ -398,6 +399,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							pillar: cardPillar,
 							design,
+							display,
 							url: linkTo,
 							headline: headlineText,
 							webPublicationDate,
@@ -409,6 +411,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								key={trail.url + i}
 								isFirst={i === 0}
 								pillar={cardPillar}
+								display={display}
 								design={design}
 								linkTo={linkTo}
 								headlineText={headlineText}

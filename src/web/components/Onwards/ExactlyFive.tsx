@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design, Display } from '@guardian/types';
+import { Design } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -18,7 +18,7 @@ export const ExactlyFive = ({ content }: Props) => (
 				<Card
 					linkTo={content[0].url}
 					format={{
-						display: Display.Standard,
+						display: content[0].display,
 						design: content[0].design,
 						theme: content[0].pillar,
 					}}
@@ -48,7 +48,7 @@ export const ExactlyFive = ({ content }: Props) => (
 				<Card
 					linkTo={content[1].url}
 					format={{
-						display: Display.Standard,
+						display: content[1].display,
 						design: content[1].design,
 						theme: content[1].pillar,
 					}}
@@ -80,7 +80,7 @@ export const ExactlyFive = ({ content }: Props) => (
 						<Card
 							linkTo={content[2].url}
 							format={{
-								display: Display.Standard,
+								display: content[2].display,
 								design: content[2].design,
 								theme: content[2].pillar,
 							}}
@@ -104,7 +104,7 @@ export const ExactlyFive = ({ content }: Props) => (
 						<Card
 							linkTo={content[3].url}
 							format={{
-								display: Display.Standard,
+								display: content[3].display,
 								design: content[3].design,
 								theme: content[3].pillar,
 							}}
@@ -128,7 +128,7 @@ export const ExactlyFive = ({ content }: Props) => (
 						<Card
 							linkTo={content[4].url}
 							format={{
-								display: Display.Standard,
+								display: content[4].display,
 								design: content[4].design,
 								theme: content[4].pillar,
 							}}

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design, Display } from '@guardian/types';
+import { Design } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -41,7 +41,7 @@ export const FourOrLess = ({ content }: Props) => {
 						<Card
 							linkTo={trail.url}
 							format={{
-								display: Display.Standard,
+								display: trail.display,
 								design: trail.design,
 								theme: trail.pillar,
 							}}

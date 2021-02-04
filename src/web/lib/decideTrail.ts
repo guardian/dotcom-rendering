@@ -1,3 +1,4 @@
+import { Display } from '@guardian/types';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 
@@ -6,6 +7,8 @@ export const decideTrail = (trail: CAPITrailType): TrailType => {
 	const design = decideDesign(trail.designType, []);
 	return {
 		...trail,
+		// We don't have enough data from CAPI to know what display should be
+		display: Display.Standard,
 		pillar: decideTheme({ pillar: trail.pillar, design }),
 		design,
 	};
