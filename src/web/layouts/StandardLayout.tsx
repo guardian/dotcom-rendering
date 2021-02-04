@@ -75,7 +75,6 @@ const gridTemplateWidePreFurnished = css`
 
 const gridTemplateLeftCol = css`
 	grid-template-areas:
-		'preFurniture  right-column'
 		'title         right-column'
 		'headline      right-column'
 		'standfirst    right-column'
@@ -88,6 +87,7 @@ const gridTemplateLeftCol = css`
 
 const gridTemplateLeftColPreFurnished = css`
 	grid-template-areas:
+		'preFurniture  right-column'
 		'title         right-column'
 		'headline      right-column'
 		'standfirst    right-column'
