@@ -56,7 +56,11 @@ const wrapperStyle = css`
 	overflow: hidden;
 `;
 
-const containerStyles = css`
+// For desktop and above, are we at the last card. Is one less than the dots style equivalent
+const isLastCardShowing = (index: number, totalStories: number) =>
+	index >= totalStories - 4;
+
+const containerStyles = (index: number, totalStories: number) => css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -78,10 +82,27 @@ const containerStyles = css`
 	${from.leftCol} {
 		margin-left: 0px;
 		margin-right: -10px;
+		margin-top: 5px;
+
+		&::after {
+			content: '';
+			display: ${!isLastCardShowing(index, totalStories)
+				? 'block'
+				: 'none'};
+			position: absolute;
+			background: rgba(255, 255, 255, 0.5);
+			height: 100%;
+			width: 68px; /* Worked out to manually fit the remainder of the last card showing */
+			pointer-events: none;
+			right: 0;
+			top: 0;
+		}
 	}
 
 	${from.wide} {
-		margin-top: 5px;
+		&::after {
+			width: 148px; /* Worked out to manually fit the remainder of the last card showing */
+		}
 	}
 `;
 
@@ -147,8 +168,12 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
 		display: ${index >= totalStories - 1 ? 'none' : 'auto'};
 	}
 
-	${from.desktop} {
+	${from.tablet} {
 		display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+	}
+
+	${from.desktop} {
+		display: ${index >= totalStories - 3 ? 'none' : 'auto'};
 	}
 `;
 
@@ -175,7 +200,10 @@ const prevButtonContainerStyle = css`
 	}
 `;
 
-const nextButtonContainerStyle = css`
+const nextButtonContainerStyle = (index: number, totalStories: number) => css`
+	${from.desktop} {
+		display: ${isLastCardShowing(index, totalStories) ? 'none' : 'auto'};
+	}
 	right: 30px;
 `;
 
@@ -184,10 +212,10 @@ const buttonStyle = css`
 	border-radius: 100%;
 	height: 34px;
 	width: 34px;
-	background-color: ${palette.neutral[0]};
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
+	background-color: ${palette.neutral[0]};
 
 	&:active {
 		outline: none;
@@ -205,15 +233,18 @@ const buttonStyle = css`
 		fill: ${palette.neutral[100]};
 		height: 34px;
 	}
-
-	&::before {
-		background-color: rgba(0, 0, 0, 0.35);
-	}
 `;
 
-const nextButtonStyle = css`
+const prevButtonStyle = (index: number) => css`
+	background-color: ${index !== 0 ? palette.neutral[0] : palette.neutral[60]};
+`;
+
+const nextButtonStyle = (index: number, totalStories: number) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
+	background-color: ${!isLastCardShowing(index, totalStories)
+		? palette.neutral[0]
+		: palette.neutral[60]};
 `;
 
 const headerRowStyles = css`
@@ -350,6 +381,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	isFullCardImage,
 }: OnwardsType) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
+
 	const [index, setIndex] = useState(0);
 
 	const notPresentation = (el: HTMLElement): boolean =>
@@ -460,23 +492,31 @@ export const Carousel: React.FC<OnwardsType> = ({
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					className={buttonStyle}
+					className={cx(buttonStyle, prevButtonStyle(index))}
 				>
 					<SvgChevronLeftSingle />
 				</button>
 			</div>
 
-			<div className={cx(buttonContainerStyle, nextButtonContainerStyle)}>
+			<div
+				className={cx(
+					buttonContainerStyle,
+					nextButtonContainerStyle(index, trails.length),
+				)}
+			>
 				<button
 					onClick={next}
 					aria-label="Move carousel forwards"
-					className={cx(buttonStyle, nextButtonStyle)}
+					className={cx(
+						buttonStyle,
+						nextButtonStyle(index, trails.length),
+					)}
 				>
 					<SvgChevronRightSingle />
 				</button>
 			</div>
 			<div
-				className={containerStyles}
+				className={containerStyles(index, trails.length)}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>
@@ -493,14 +533,20 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								className={buttonStyle}
+								className={cx(
+									buttonStyle,
+									prevButtonStyle(index),
+								)}
 							>
 								<SvgChevronLeftSingle />
 							</button>
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								className={cx(buttonStyle, nextButtonStyle)}
+								className={cx(
+									buttonStyle,
+									nextButtonStyle(index, trails.length),
+								)}
 							>
 								<SvgChevronRightSingle />
 							</button>
