@@ -48,6 +48,11 @@ const headerStyles = css`
 `;
 
 const bodyStyles = css`
+	iframe {
+		width: 100%;
+		border: none;
+	}
+
 	figcaption {
 		background: ${background.primary};
 		padding-bottom: ${remSpace[2]};
